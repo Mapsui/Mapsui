@@ -337,43 +337,18 @@ references:
   commentId: T:Mapsui.AnimatedNavigator
   fullName: Mapsui.AnimatedNavigator
   nameWithType: AnimatedNavigator
-- uid: Mapsui.AnimatedNavigator.#ctor(Mapsui.Map,Mapsui.IViewport)
-  name: AnimatedNavigator(Map, IViewport)
-  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator__ctor_Mapsui_Map_Mapsui_IViewport_
-  commentId: M:Mapsui.AnimatedNavigator.#ctor(Mapsui.Map,Mapsui.IViewport)
-  fullName: Mapsui.AnimatedNavigator.AnimatedNavigator(Mapsui.Map, Mapsui.IViewport)
-  nameWithType: AnimatedNavigator.AnimatedNavigator(Map, IViewport)
-- uid: Mapsui.AnimatedNavigator.#ctor*
-  name: AnimatedNavigator
-  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator__ctor_
-  commentId: Overload:Mapsui.AnimatedNavigator.#ctor
-  isSpec: "True"
-  fullName: Mapsui.AnimatedNavigator.AnimatedNavigator
-  nameWithType: AnimatedNavigator.AnimatedNavigator
-- uid: Mapsui.AnimatedNavigator.CenterOn(Mapsui.Geometries.Point)
-  name: CenterOn(Point)
-  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_CenterOn_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.AnimatedNavigator.CenterOn(Mapsui.Geometries.Point)
-  fullName: Mapsui.AnimatedNavigator.CenterOn(Mapsui.Geometries.Point)
-  nameWithType: AnimatedNavigator.CenterOn(Point)
-- uid: Mapsui.AnimatedNavigator.CenterOn(Mapsui.Geometries.Point,System.Int64)
-  name: CenterOn(Point, Int64)
-  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_CenterOn_Mapsui_Geometries_Point_System_Int64_
-  commentId: M:Mapsui.AnimatedNavigator.CenterOn(Mapsui.Geometries.Point,System.Int64)
-  fullName: Mapsui.AnimatedNavigator.CenterOn(Mapsui.Geometries.Point, System.Int64)
-  nameWithType: AnimatedNavigator.CenterOn(Point, Int64)
-- uid: Mapsui.AnimatedNavigator.CenterOn(System.Double,System.Double)
-  name: CenterOn(Double, Double)
-  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_CenterOn_System_Double_System_Double_
-  commentId: M:Mapsui.AnimatedNavigator.CenterOn(System.Double,System.Double)
-  fullName: Mapsui.AnimatedNavigator.CenterOn(System.Double, System.Double)
-  nameWithType: AnimatedNavigator.CenterOn(Double, Double)
-- uid: Mapsui.AnimatedNavigator.CenterOn(System.Double,System.Double,System.Int64)
-  name: CenterOn(Double, Double, Int64)
-  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_CenterOn_System_Double_System_Double_System_Int64_
-  commentId: M:Mapsui.AnimatedNavigator.CenterOn(System.Double,System.Double,System.Int64)
-  fullName: Mapsui.AnimatedNavigator.CenterOn(System.Double, System.Double, System.Int64)
-  nameWithType: AnimatedNavigator.CenterOn(Double, Double, Int64)
+- uid: Mapsui.AnimatedNavigator.CenterOn(Mapsui.Geometries.Point,System.Int64,Mapsui.Utilities.Easing)
+  name: CenterOn(Point, Int64, Easing)
+  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_CenterOn_Mapsui_Geometries_Point_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.AnimatedNavigator.CenterOn(Mapsui.Geometries.Point,System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.AnimatedNavigator.CenterOn(Mapsui.Geometries.Point, System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: AnimatedNavigator.CenterOn(Point, Int64, Easing)
+- uid: Mapsui.AnimatedNavigator.CenterOn(System.Double,System.Double,System.Int64,Mapsui.Utilities.Easing)
+  name: CenterOn(Double, Double, Int64, Easing)
+  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_CenterOn_System_Double_System_Double_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.AnimatedNavigator.CenterOn(System.Double,System.Double,System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.AnimatedNavigator.CenterOn(System.Double, System.Double, System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: AnimatedNavigator.CenterOn(Double, Double, Int64, Easing)
 - uid: Mapsui.AnimatedNavigator.CenterOn*
   name: CenterOn
   href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_CenterOn_
@@ -381,19 +356,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.AnimatedNavigator.CenterOn
   nameWithType: AnimatedNavigator.CenterOn
-- uid: Mapsui.AnimatedNavigator.FlyTo(Mapsui.Geometries.Point,System.Double,System.Int64)
-  name: FlyTo(Point, Double, Int64)
-  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_FlyTo_Mapsui_Geometries_Point_System_Double_System_Int64_
-  commentId: M:Mapsui.AnimatedNavigator.FlyTo(Mapsui.Geometries.Point,System.Double,System.Int64)
-  fullName: Mapsui.AnimatedNavigator.FlyTo(Mapsui.Geometries.Point, System.Double, System.Int64)
-  nameWithType: AnimatedNavigator.FlyTo(Point, Double, Int64)
-- uid: Mapsui.AnimatedNavigator.FlyTo*
-  name: FlyTo
-  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_FlyTo_
-  commentId: Overload:Mapsui.AnimatedNavigator.FlyTo
+- uid: Mapsui.AnimatedNavigator.FlingWith(System.Double,System.Double,System.Int64)
+  name: FlingWith(Double, Double, Int64)
+  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_FlingWith_System_Double_System_Double_System_Int64_
+  commentId: M:Mapsui.AnimatedNavigator.FlingWith(System.Double,System.Double,System.Int64)
+  fullName: Mapsui.AnimatedNavigator.FlingWith(System.Double, System.Double, System.Int64)
+  nameWithType: AnimatedNavigator.FlingWith(Double, Double, Int64)
+- uid: Mapsui.AnimatedNavigator.FlingWith*
+  name: FlingWith
+  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_FlingWith_
+  commentId: Overload:Mapsui.AnimatedNavigator.FlingWith
   isSpec: "True"
-  fullName: Mapsui.AnimatedNavigator.FlyTo
-  nameWithType: AnimatedNavigator.FlyTo
+  fullName: Mapsui.AnimatedNavigator.FlingWith
+  nameWithType: AnimatedNavigator.FlingWith
 - uid: Mapsui.AnimatedNavigator.Navigated
   name: Navigated
   href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_Navigated
@@ -407,30 +382,18 @@ references:
   isSpec: "True"
   fullName: Mapsui.AnimatedNavigator.Navigated
   nameWithType: AnimatedNavigator.Navigated
-- uid: Mapsui.AnimatedNavigator.NavigateTo(Mapsui.Geometries.BoundingBox,Mapsui.Utilities.ScaleMethod)
-  name: NavigateTo(BoundingBox, ScaleMethod)
-  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_NavigateTo_Mapsui_Geometries_BoundingBox_Mapsui_Utilities_ScaleMethod_
-  commentId: M:Mapsui.AnimatedNavigator.NavigateTo(Mapsui.Geometries.BoundingBox,Mapsui.Utilities.ScaleMethod)
-  fullName: Mapsui.AnimatedNavigator.NavigateTo(Mapsui.Geometries.BoundingBox, Mapsui.Utilities.ScaleMethod)
-  nameWithType: AnimatedNavigator.NavigateTo(BoundingBox, ScaleMethod)
-- uid: Mapsui.AnimatedNavigator.NavigateTo(Mapsui.Geometries.BoundingBox,Mapsui.Utilities.ScaleMethod,System.Int64)
-  name: NavigateTo(BoundingBox, ScaleMethod, Int64)
-  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_NavigateTo_Mapsui_Geometries_BoundingBox_Mapsui_Utilities_ScaleMethod_System_Int64_
-  commentId: M:Mapsui.AnimatedNavigator.NavigateTo(Mapsui.Geometries.BoundingBox,Mapsui.Utilities.ScaleMethod,System.Int64)
-  fullName: Mapsui.AnimatedNavigator.NavigateTo(Mapsui.Geometries.BoundingBox, Mapsui.Utilities.ScaleMethod, System.Int64)
-  nameWithType: AnimatedNavigator.NavigateTo(BoundingBox, ScaleMethod, Int64)
-- uid: Mapsui.AnimatedNavigator.NavigateTo(Mapsui.Geometries.Point,System.Double)
-  name: NavigateTo(Point, Double)
-  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_NavigateTo_Mapsui_Geometries_Point_System_Double_
-  commentId: M:Mapsui.AnimatedNavigator.NavigateTo(Mapsui.Geometries.Point,System.Double)
-  fullName: Mapsui.AnimatedNavigator.NavigateTo(Mapsui.Geometries.Point, System.Double)
-  nameWithType: AnimatedNavigator.NavigateTo(Point, Double)
-- uid: Mapsui.AnimatedNavigator.NavigateTo(Mapsui.Geometries.Point,System.Double,System.Int64)
-  name: NavigateTo(Point, Double, Int64)
-  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_NavigateTo_Mapsui_Geometries_Point_System_Double_System_Int64_
-  commentId: M:Mapsui.AnimatedNavigator.NavigateTo(Mapsui.Geometries.Point,System.Double,System.Int64)
-  fullName: Mapsui.AnimatedNavigator.NavigateTo(Mapsui.Geometries.Point, System.Double, System.Int64)
-  nameWithType: AnimatedNavigator.NavigateTo(Point, Double, Int64)
+- uid: Mapsui.AnimatedNavigator.NavigateTo(Mapsui.Geometries.BoundingBox,Mapsui.Utilities.ScaleMethod,System.Int64,Mapsui.Utilities.Easing)
+  name: NavigateTo(BoundingBox, ScaleMethod, Int64, Easing)
+  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_NavigateTo_Mapsui_Geometries_BoundingBox_Mapsui_Utilities_ScaleMethod_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.AnimatedNavigator.NavigateTo(Mapsui.Geometries.BoundingBox,Mapsui.Utilities.ScaleMethod,System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.AnimatedNavigator.NavigateTo(Mapsui.Geometries.BoundingBox, Mapsui.Utilities.ScaleMethod, System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: AnimatedNavigator.NavigateTo(BoundingBox, ScaleMethod, Int64, Easing)
+- uid: Mapsui.AnimatedNavigator.NavigateTo(Mapsui.Geometries.Point,System.Double,System.Int64,Mapsui.Utilities.Easing)
+  name: NavigateTo(Point, Double, Int64, Easing)
+  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_NavigateTo_Mapsui_Geometries_Point_System_Double_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.AnimatedNavigator.NavigateTo(Mapsui.Geometries.Point,System.Double,System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.AnimatedNavigator.NavigateTo(Mapsui.Geometries.Point, System.Double, System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: AnimatedNavigator.NavigateTo(Point, Double, Int64, Easing)
 - uid: Mapsui.AnimatedNavigator.NavigateTo*
   name: NavigateTo
   href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_NavigateTo_
@@ -438,18 +401,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.AnimatedNavigator.NavigateTo
   nameWithType: AnimatedNavigator.NavigateTo
-- uid: Mapsui.AnimatedNavigator.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)
-  name: NavigateToFullEnvelope(ScaleMethod)
-  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_NavigateToFullEnvelope_Mapsui_Utilities_ScaleMethod_
-  commentId: M:Mapsui.AnimatedNavigator.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)
-  fullName: Mapsui.AnimatedNavigator.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)
-  nameWithType: AnimatedNavigator.NavigateToFullEnvelope(ScaleMethod)
-- uid: Mapsui.AnimatedNavigator.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod,System.Int64)
-  name: NavigateToFullEnvelope(ScaleMethod, Int64)
-  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_NavigateToFullEnvelope_Mapsui_Utilities_ScaleMethod_System_Int64_
-  commentId: M:Mapsui.AnimatedNavigator.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod,System.Int64)
-  fullName: Mapsui.AnimatedNavigator.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod, System.Int64)
-  nameWithType: AnimatedNavigator.NavigateToFullEnvelope(ScaleMethod, Int64)
+- uid: Mapsui.AnimatedNavigator.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod,System.Int64,Mapsui.Utilities.Easing)
+  name: NavigateToFullEnvelope(ScaleMethod, Int64, Easing)
+  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_NavigateToFullEnvelope_Mapsui_Utilities_ScaleMethod_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.AnimatedNavigator.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod,System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.AnimatedNavigator.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod, System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: AnimatedNavigator.NavigateToFullEnvelope(ScaleMethod, Int64, Easing)
 - uid: Mapsui.AnimatedNavigator.NavigateToFullEnvelope*
   name: NavigateToFullEnvelope
   href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_NavigateToFullEnvelope_
@@ -457,18 +414,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.AnimatedNavigator.NavigateToFullEnvelope
   nameWithType: AnimatedNavigator.NavigateToFullEnvelope
-- uid: Mapsui.AnimatedNavigator.RotateTo(System.Double)
-  name: RotateTo(Double)
-  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_RotateTo_System_Double_
-  commentId: M:Mapsui.AnimatedNavigator.RotateTo(System.Double)
-  fullName: Mapsui.AnimatedNavigator.RotateTo(System.Double)
-  nameWithType: AnimatedNavigator.RotateTo(Double)
-- uid: Mapsui.AnimatedNavigator.RotateTo(System.Double,System.Int64)
-  name: RotateTo(Double, Int64)
-  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_RotateTo_System_Double_System_Int64_
-  commentId: M:Mapsui.AnimatedNavigator.RotateTo(System.Double,System.Int64)
-  fullName: Mapsui.AnimatedNavigator.RotateTo(System.Double, System.Int64)
-  nameWithType: AnimatedNavigator.RotateTo(Double, Int64)
+- uid: Mapsui.AnimatedNavigator.RotateTo(System.Double,System.Int64,Mapsui.Utilities.Easing)
+  name: RotateTo(Double, Int64, Easing)
+  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_RotateTo_System_Double_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.AnimatedNavigator.RotateTo(System.Double,System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.AnimatedNavigator.RotateTo(System.Double, System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: AnimatedNavigator.RotateTo(Double, Int64, Easing)
 - uid: Mapsui.AnimatedNavigator.RotateTo*
   name: RotateTo
   href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_RotateTo_
@@ -476,18 +427,31 @@ references:
   isSpec: "True"
   fullName: Mapsui.AnimatedNavigator.RotateTo
   nameWithType: AnimatedNavigator.RotateTo
-- uid: Mapsui.AnimatedNavigator.ZoomIn
-  name: ZoomIn()
-  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_ZoomIn
-  commentId: M:Mapsui.AnimatedNavigator.ZoomIn
-  fullName: Mapsui.AnimatedNavigator.ZoomIn()
-  nameWithType: AnimatedNavigator.ZoomIn()
-- uid: Mapsui.AnimatedNavigator.ZoomIn(Mapsui.Geometries.Point)
-  name: ZoomIn(Point)
-  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_ZoomIn_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.AnimatedNavigator.ZoomIn(Mapsui.Geometries.Point)
-  fullName: Mapsui.AnimatedNavigator.ZoomIn(Mapsui.Geometries.Point)
-  nameWithType: AnimatedNavigator.ZoomIn(Point)
+- uid: Mapsui.AnimatedNavigator.StopRunningAnimation
+  name: StopRunningAnimation()
+  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_StopRunningAnimation
+  commentId: M:Mapsui.AnimatedNavigator.StopRunningAnimation
+  fullName: Mapsui.AnimatedNavigator.StopRunningAnimation()
+  nameWithType: AnimatedNavigator.StopRunningAnimation()
+- uid: Mapsui.AnimatedNavigator.StopRunningAnimation*
+  name: StopRunningAnimation
+  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_StopRunningAnimation_
+  commentId: Overload:Mapsui.AnimatedNavigator.StopRunningAnimation
+  isSpec: "True"
+  fullName: Mapsui.AnimatedNavigator.StopRunningAnimation
+  nameWithType: AnimatedNavigator.StopRunningAnimation
+- uid: Mapsui.AnimatedNavigator.ZoomIn(Mapsui.Geometries.Point,System.Int64,Mapsui.Utilities.Easing)
+  name: ZoomIn(Point, Int64, Easing)
+  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_ZoomIn_Mapsui_Geometries_Point_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.AnimatedNavigator.ZoomIn(Mapsui.Geometries.Point,System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.AnimatedNavigator.ZoomIn(Mapsui.Geometries.Point, System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: AnimatedNavigator.ZoomIn(Point, Int64, Easing)
+- uid: Mapsui.AnimatedNavigator.ZoomIn(System.Int64,Mapsui.Utilities.Easing)
+  name: ZoomIn(Int64, Easing)
+  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_ZoomIn_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.AnimatedNavigator.ZoomIn(System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.AnimatedNavigator.ZoomIn(System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: AnimatedNavigator.ZoomIn(Int64, Easing)
 - uid: Mapsui.AnimatedNavigator.ZoomIn*
   name: ZoomIn
   href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_ZoomIn_
@@ -495,18 +459,18 @@ references:
   isSpec: "True"
   fullName: Mapsui.AnimatedNavigator.ZoomIn
   nameWithType: AnimatedNavigator.ZoomIn
-- uid: Mapsui.AnimatedNavigator.ZoomOut
-  name: ZoomOut()
-  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_ZoomOut
-  commentId: M:Mapsui.AnimatedNavigator.ZoomOut
-  fullName: Mapsui.AnimatedNavigator.ZoomOut()
-  nameWithType: AnimatedNavigator.ZoomOut()
-- uid: Mapsui.AnimatedNavigator.ZoomOut(Mapsui.Geometries.Point)
-  name: ZoomOut(Point)
-  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_ZoomOut_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.AnimatedNavigator.ZoomOut(Mapsui.Geometries.Point)
-  fullName: Mapsui.AnimatedNavigator.ZoomOut(Mapsui.Geometries.Point)
-  nameWithType: AnimatedNavigator.ZoomOut(Point)
+- uid: Mapsui.AnimatedNavigator.ZoomOut(Mapsui.Geometries.Point,System.Int64,Mapsui.Utilities.Easing)
+  name: ZoomOut(Point, Int64, Easing)
+  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_ZoomOut_Mapsui_Geometries_Point_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.AnimatedNavigator.ZoomOut(Mapsui.Geometries.Point,System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.AnimatedNavigator.ZoomOut(Mapsui.Geometries.Point, System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: AnimatedNavigator.ZoomOut(Point, Int64, Easing)
+- uid: Mapsui.AnimatedNavigator.ZoomOut(System.Int64,Mapsui.Utilities.Easing)
+  name: ZoomOut(Int64, Easing)
+  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_ZoomOut_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.AnimatedNavigator.ZoomOut(System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.AnimatedNavigator.ZoomOut(System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: AnimatedNavigator.ZoomOut(Int64, Easing)
 - uid: Mapsui.AnimatedNavigator.ZoomOut*
   name: ZoomOut
   href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_ZoomOut_
@@ -514,24 +478,18 @@ references:
   isSpec: "True"
   fullName: Mapsui.AnimatedNavigator.ZoomOut
   nameWithType: AnimatedNavigator.ZoomOut
-- uid: Mapsui.AnimatedNavigator.ZoomTo(System.Double)
-  name: ZoomTo(Double)
-  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_ZoomTo_System_Double_
-  commentId: M:Mapsui.AnimatedNavigator.ZoomTo(System.Double)
-  fullName: Mapsui.AnimatedNavigator.ZoomTo(System.Double)
-  nameWithType: AnimatedNavigator.ZoomTo(Double)
-- uid: Mapsui.AnimatedNavigator.ZoomTo(System.Double,Mapsui.Geometries.Point)
-  name: ZoomTo(Double, Point)
-  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_ZoomTo_System_Double_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.AnimatedNavigator.ZoomTo(System.Double,Mapsui.Geometries.Point)
-  fullName: Mapsui.AnimatedNavigator.ZoomTo(System.Double, Mapsui.Geometries.Point)
-  nameWithType: AnimatedNavigator.ZoomTo(Double, Point)
-- uid: Mapsui.AnimatedNavigator.ZoomTo(System.Double,System.Int64)
-  name: ZoomTo(Double, Int64)
-  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_ZoomTo_System_Double_System_Int64_
-  commentId: M:Mapsui.AnimatedNavigator.ZoomTo(System.Double,System.Int64)
-  fullName: Mapsui.AnimatedNavigator.ZoomTo(System.Double, System.Int64)
-  nameWithType: AnimatedNavigator.ZoomTo(Double, Int64)
+- uid: Mapsui.AnimatedNavigator.ZoomTo(System.Double,Mapsui.Geometries.Point,System.Int64,Mapsui.Utilities.Easing)
+  name: ZoomTo(Double, Point, Int64, Easing)
+  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_ZoomTo_System_Double_Mapsui_Geometries_Point_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.AnimatedNavigator.ZoomTo(System.Double,Mapsui.Geometries.Point,System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.AnimatedNavigator.ZoomTo(System.Double, Mapsui.Geometries.Point, System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: AnimatedNavigator.ZoomTo(Double, Point, Int64, Easing)
+- uid: Mapsui.AnimatedNavigator.ZoomTo(System.Double,System.Int64,Mapsui.Utilities.Easing)
+  name: ZoomTo(Double, Int64, Easing)
+  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_ZoomTo_System_Double_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.AnimatedNavigator.ZoomTo(System.Double,System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.AnimatedNavigator.ZoomTo(System.Double, System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: AnimatedNavigator.ZoomTo(Double, Int64, Easing)
 - uid: Mapsui.AnimatedNavigator.ZoomTo*
   name: ZoomTo
   href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_ZoomTo_
@@ -2605,58 +2563,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Fetcher.FetchStrategy.GetTilesWanted
   nameWithType: FetchStrategy.GetTilesWanted
-- uid: Mapsui.Fetcher.FetchTileCompletedEventArgs
-  name: FetchTileCompletedEventArgs
-  href: api/Mapsui.Fetcher.FetchTileCompletedEventArgs.html
-  commentId: T:Mapsui.Fetcher.FetchTileCompletedEventArgs
-  fullName: Mapsui.Fetcher.FetchTileCompletedEventArgs
-  nameWithType: FetchTileCompletedEventArgs
-- uid: Mapsui.Fetcher.FetchTileCompletedEventArgs.#ctor(System.Exception,System.Boolean,BruTile.TileInfo,System.Byte[])
-  name: FetchTileCompletedEventArgs(Exception, Boolean, TileInfo, Byte[])
-  href: api/Mapsui.Fetcher.FetchTileCompletedEventArgs.html#Mapsui_Fetcher_FetchTileCompletedEventArgs__ctor_System_Exception_System_Boolean_BruTile_TileInfo_System_Byte___
-  commentId: M:Mapsui.Fetcher.FetchTileCompletedEventArgs.#ctor(System.Exception,System.Boolean,BruTile.TileInfo,System.Byte[])
-  name.vb: FetchTileCompletedEventArgs(Exception, Boolean, TileInfo, Byte())
-  fullName: Mapsui.Fetcher.FetchTileCompletedEventArgs.FetchTileCompletedEventArgs(System.Exception, System.Boolean, BruTile.TileInfo, System.Byte[])
-  fullName.vb: Mapsui.Fetcher.FetchTileCompletedEventArgs.FetchTileCompletedEventArgs(System.Exception, System.Boolean, BruTile.TileInfo, System.Byte())
-  nameWithType: FetchTileCompletedEventArgs.FetchTileCompletedEventArgs(Exception, Boolean, TileInfo, Byte[])
-  nameWithType.vb: FetchTileCompletedEventArgs.FetchTileCompletedEventArgs(Exception, Boolean, TileInfo, Byte())
-- uid: Mapsui.Fetcher.FetchTileCompletedEventArgs.#ctor*
-  name: FetchTileCompletedEventArgs
-  href: api/Mapsui.Fetcher.FetchTileCompletedEventArgs.html#Mapsui_Fetcher_FetchTileCompletedEventArgs__ctor_
-  commentId: Overload:Mapsui.Fetcher.FetchTileCompletedEventArgs.#ctor
-  isSpec: "True"
-  fullName: Mapsui.Fetcher.FetchTileCompletedEventArgs.FetchTileCompletedEventArgs
-  nameWithType: FetchTileCompletedEventArgs.FetchTileCompletedEventArgs
-- uid: Mapsui.Fetcher.FetchTileCompletedEventArgs.Cancelled
-  name: Cancelled
-  href: api/Mapsui.Fetcher.FetchTileCompletedEventArgs.html#Mapsui_Fetcher_FetchTileCompletedEventArgs_Cancelled
-  commentId: F:Mapsui.Fetcher.FetchTileCompletedEventArgs.Cancelled
-  fullName: Mapsui.Fetcher.FetchTileCompletedEventArgs.Cancelled
-  nameWithType: FetchTileCompletedEventArgs.Cancelled
-- uid: Mapsui.Fetcher.FetchTileCompletedEventArgs.Error
-  name: Error
-  href: api/Mapsui.Fetcher.FetchTileCompletedEventArgs.html#Mapsui_Fetcher_FetchTileCompletedEventArgs_Error
-  commentId: F:Mapsui.Fetcher.FetchTileCompletedEventArgs.Error
-  fullName: Mapsui.Fetcher.FetchTileCompletedEventArgs.Error
-  nameWithType: FetchTileCompletedEventArgs.Error
-- uid: Mapsui.Fetcher.FetchTileCompletedEventArgs.Image
-  name: Image
-  href: api/Mapsui.Fetcher.FetchTileCompletedEventArgs.html#Mapsui_Fetcher_FetchTileCompletedEventArgs_Image
-  commentId: F:Mapsui.Fetcher.FetchTileCompletedEventArgs.Image
-  fullName: Mapsui.Fetcher.FetchTileCompletedEventArgs.Image
-  nameWithType: FetchTileCompletedEventArgs.Image
-- uid: Mapsui.Fetcher.FetchTileCompletedEventArgs.TileInfo
-  name: TileInfo
-  href: api/Mapsui.Fetcher.FetchTileCompletedEventArgs.html#Mapsui_Fetcher_FetchTileCompletedEventArgs_TileInfo
-  commentId: F:Mapsui.Fetcher.FetchTileCompletedEventArgs.TileInfo
-  fullName: Mapsui.Fetcher.FetchTileCompletedEventArgs.TileInfo
-  nameWithType: FetchTileCompletedEventArgs.TileInfo
-- uid: Mapsui.Fetcher.FetchTileCompletedEventHandler
-  name: FetchTileCompletedEventHandler
-  href: api/Mapsui.Fetcher.FetchTileCompletedEventHandler.html
-  commentId: T:Mapsui.Fetcher.FetchTileCompletedEventHandler
-  fullName: Mapsui.Fetcher.FetchTileCompletedEventHandler
-  nameWithType: FetchTileCompletedEventHandler
 - uid: Mapsui.Fetcher.IAsyncDataFetcher
   name: IAsyncDataFetcher
   href: api/Mapsui.Fetcher.IAsyncDataFetcher.html
@@ -6397,18 +6303,18 @@ references:
   commentId: T:Mapsui.INavigator
   fullName: Mapsui.INavigator
   nameWithType: INavigator
-- uid: Mapsui.INavigator.CenterOn(Mapsui.Geometries.Point)
-  name: CenterOn(Point)
-  href: api/Mapsui.INavigator.html#Mapsui_INavigator_CenterOn_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.INavigator.CenterOn(Mapsui.Geometries.Point)
-  fullName: Mapsui.INavigator.CenterOn(Mapsui.Geometries.Point)
-  nameWithType: INavigator.CenterOn(Point)
-- uid: Mapsui.INavigator.CenterOn(System.Double,System.Double)
-  name: CenterOn(Double, Double)
-  href: api/Mapsui.INavigator.html#Mapsui_INavigator_CenterOn_System_Double_System_Double_
-  commentId: M:Mapsui.INavigator.CenterOn(System.Double,System.Double)
-  fullName: Mapsui.INavigator.CenterOn(System.Double, System.Double)
-  nameWithType: INavigator.CenterOn(Double, Double)
+- uid: Mapsui.INavigator.CenterOn(Mapsui.Geometries.Point,System.Int64,Mapsui.Utilities.Easing)
+  name: CenterOn(Point, Int64, Easing)
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_CenterOn_Mapsui_Geometries_Point_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.INavigator.CenterOn(Mapsui.Geometries.Point,System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.INavigator.CenterOn(Mapsui.Geometries.Point, System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: INavigator.CenterOn(Point, Int64, Easing)
+- uid: Mapsui.INavigator.CenterOn(System.Double,System.Double,System.Int64,Mapsui.Utilities.Easing)
+  name: CenterOn(Double, Double, Int64, Easing)
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_CenterOn_System_Double_System_Double_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.INavigator.CenterOn(System.Double,System.Double,System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.INavigator.CenterOn(System.Double, System.Double, System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: INavigator.CenterOn(Double, Double, Int64, Easing)
 - uid: Mapsui.INavigator.CenterOn*
   name: CenterOn
   href: api/Mapsui.INavigator.html#Mapsui_INavigator_CenterOn_
@@ -6416,6 +6322,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.INavigator.CenterOn
   nameWithType: INavigator.CenterOn
+- uid: Mapsui.INavigator.FlingWith(System.Double,System.Double,System.Int64)
+  name: FlingWith(Double, Double, Int64)
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_FlingWith_System_Double_System_Double_System_Int64_
+  commentId: M:Mapsui.INavigator.FlingWith(System.Double,System.Double,System.Int64)
+  fullName: Mapsui.INavigator.FlingWith(System.Double, System.Double, System.Int64)
+  nameWithType: INavigator.FlingWith(Double, Double, Int64)
+- uid: Mapsui.INavigator.FlingWith*
+  name: FlingWith
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_FlingWith_
+  commentId: Overload:Mapsui.INavigator.FlingWith
+  isSpec: "True"
+  fullName: Mapsui.INavigator.FlingWith
+  nameWithType: INavigator.FlingWith
 - uid: Mapsui.INavigator.Navigated
   name: Navigated
   href: api/Mapsui.INavigator.html#Mapsui_INavigator_Navigated
@@ -6429,18 +6348,18 @@ references:
   isSpec: "True"
   fullName: Mapsui.INavigator.Navigated
   nameWithType: INavigator.Navigated
-- uid: Mapsui.INavigator.NavigateTo(Mapsui.Geometries.BoundingBox,Mapsui.Utilities.ScaleMethod)
-  name: NavigateTo(BoundingBox, ScaleMethod)
-  href: api/Mapsui.INavigator.html#Mapsui_INavigator_NavigateTo_Mapsui_Geometries_BoundingBox_Mapsui_Utilities_ScaleMethod_
-  commentId: M:Mapsui.INavigator.NavigateTo(Mapsui.Geometries.BoundingBox,Mapsui.Utilities.ScaleMethod)
-  fullName: Mapsui.INavigator.NavigateTo(Mapsui.Geometries.BoundingBox, Mapsui.Utilities.ScaleMethod)
-  nameWithType: INavigator.NavigateTo(BoundingBox, ScaleMethod)
-- uid: Mapsui.INavigator.NavigateTo(Mapsui.Geometries.Point,System.Double)
-  name: NavigateTo(Point, Double)
-  href: api/Mapsui.INavigator.html#Mapsui_INavigator_NavigateTo_Mapsui_Geometries_Point_System_Double_
-  commentId: M:Mapsui.INavigator.NavigateTo(Mapsui.Geometries.Point,System.Double)
-  fullName: Mapsui.INavigator.NavigateTo(Mapsui.Geometries.Point, System.Double)
-  nameWithType: INavigator.NavigateTo(Point, Double)
+- uid: Mapsui.INavigator.NavigateTo(Mapsui.Geometries.BoundingBox,Mapsui.Utilities.ScaleMethod,System.Int64,Mapsui.Utilities.Easing)
+  name: NavigateTo(BoundingBox, ScaleMethod, Int64, Easing)
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_NavigateTo_Mapsui_Geometries_BoundingBox_Mapsui_Utilities_ScaleMethod_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.INavigator.NavigateTo(Mapsui.Geometries.BoundingBox,Mapsui.Utilities.ScaleMethod,System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.INavigator.NavigateTo(Mapsui.Geometries.BoundingBox, Mapsui.Utilities.ScaleMethod, System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: INavigator.NavigateTo(BoundingBox, ScaleMethod, Int64, Easing)
+- uid: Mapsui.INavigator.NavigateTo(Mapsui.Geometries.Point,System.Double,System.Int64,Mapsui.Utilities.Easing)
+  name: NavigateTo(Point, Double, Int64, Easing)
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_NavigateTo_Mapsui_Geometries_Point_System_Double_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.INavigator.NavigateTo(Mapsui.Geometries.Point,System.Double,System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.INavigator.NavigateTo(Mapsui.Geometries.Point, System.Double, System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: INavigator.NavigateTo(Point, Double, Int64, Easing)
 - uid: Mapsui.INavigator.NavigateTo*
   name: NavigateTo
   href: api/Mapsui.INavigator.html#Mapsui_INavigator_NavigateTo_
@@ -6448,12 +6367,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.INavigator.NavigateTo
   nameWithType: INavigator.NavigateTo
-- uid: Mapsui.INavigator.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)
-  name: NavigateToFullEnvelope(ScaleMethod)
-  href: api/Mapsui.INavigator.html#Mapsui_INavigator_NavigateToFullEnvelope_Mapsui_Utilities_ScaleMethod_
-  commentId: M:Mapsui.INavigator.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)
-  fullName: Mapsui.INavigator.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)
-  nameWithType: INavigator.NavigateToFullEnvelope(ScaleMethod)
+- uid: Mapsui.INavigator.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod,System.Int64,Mapsui.Utilities.Easing)
+  name: NavigateToFullEnvelope(ScaleMethod, Int64, Easing)
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_NavigateToFullEnvelope_Mapsui_Utilities_ScaleMethod_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.INavigator.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod,System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.INavigator.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod, System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: INavigator.NavigateToFullEnvelope(ScaleMethod, Int64, Easing)
 - uid: Mapsui.INavigator.NavigateToFullEnvelope*
   name: NavigateToFullEnvelope
   href: api/Mapsui.INavigator.html#Mapsui_INavigator_NavigateToFullEnvelope_
@@ -6461,12 +6380,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.INavigator.NavigateToFullEnvelope
   nameWithType: INavigator.NavigateToFullEnvelope
-- uid: Mapsui.INavigator.RotateTo(System.Double)
-  name: RotateTo(Double)
-  href: api/Mapsui.INavigator.html#Mapsui_INavigator_RotateTo_System_Double_
-  commentId: M:Mapsui.INavigator.RotateTo(System.Double)
-  fullName: Mapsui.INavigator.RotateTo(System.Double)
-  nameWithType: INavigator.RotateTo(Double)
+- uid: Mapsui.INavigator.RotateTo(System.Double,System.Int64,Mapsui.Utilities.Easing)
+  name: RotateTo(Double, Int64, Easing)
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_RotateTo_System_Double_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.INavigator.RotateTo(System.Double,System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.INavigator.RotateTo(System.Double, System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: INavigator.RotateTo(Double, Int64, Easing)
 - uid: Mapsui.INavigator.RotateTo*
   name: RotateTo
   href: api/Mapsui.INavigator.html#Mapsui_INavigator_RotateTo_
@@ -6474,18 +6393,31 @@ references:
   isSpec: "True"
   fullName: Mapsui.INavigator.RotateTo
   nameWithType: INavigator.RotateTo
-- uid: Mapsui.INavigator.ZoomIn
-  name: ZoomIn()
-  href: api/Mapsui.INavigator.html#Mapsui_INavigator_ZoomIn
-  commentId: M:Mapsui.INavigator.ZoomIn
-  fullName: Mapsui.INavigator.ZoomIn()
-  nameWithType: INavigator.ZoomIn()
-- uid: Mapsui.INavigator.ZoomIn(Mapsui.Geometries.Point)
-  name: ZoomIn(Point)
-  href: api/Mapsui.INavigator.html#Mapsui_INavigator_ZoomIn_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.INavigator.ZoomIn(Mapsui.Geometries.Point)
-  fullName: Mapsui.INavigator.ZoomIn(Mapsui.Geometries.Point)
-  nameWithType: INavigator.ZoomIn(Point)
+- uid: Mapsui.INavigator.StopRunningAnimation
+  name: StopRunningAnimation()
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_StopRunningAnimation
+  commentId: M:Mapsui.INavigator.StopRunningAnimation
+  fullName: Mapsui.INavigator.StopRunningAnimation()
+  nameWithType: INavigator.StopRunningAnimation()
+- uid: Mapsui.INavigator.StopRunningAnimation*
+  name: StopRunningAnimation
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_StopRunningAnimation_
+  commentId: Overload:Mapsui.INavigator.StopRunningAnimation
+  isSpec: "True"
+  fullName: Mapsui.INavigator.StopRunningAnimation
+  nameWithType: INavigator.StopRunningAnimation
+- uid: Mapsui.INavigator.ZoomIn(Mapsui.Geometries.Point,System.Int64,Mapsui.Utilities.Easing)
+  name: ZoomIn(Point, Int64, Easing)
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_ZoomIn_Mapsui_Geometries_Point_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.INavigator.ZoomIn(Mapsui.Geometries.Point,System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.INavigator.ZoomIn(Mapsui.Geometries.Point, System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: INavigator.ZoomIn(Point, Int64, Easing)
+- uid: Mapsui.INavigator.ZoomIn(System.Int64,Mapsui.Utilities.Easing)
+  name: ZoomIn(Int64, Easing)
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_ZoomIn_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.INavigator.ZoomIn(System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.INavigator.ZoomIn(System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: INavigator.ZoomIn(Int64, Easing)
 - uid: Mapsui.INavigator.ZoomIn*
   name: ZoomIn
   href: api/Mapsui.INavigator.html#Mapsui_INavigator_ZoomIn_
@@ -6493,18 +6425,18 @@ references:
   isSpec: "True"
   fullName: Mapsui.INavigator.ZoomIn
   nameWithType: INavigator.ZoomIn
-- uid: Mapsui.INavigator.ZoomOut
-  name: ZoomOut()
-  href: api/Mapsui.INavigator.html#Mapsui_INavigator_ZoomOut
-  commentId: M:Mapsui.INavigator.ZoomOut
-  fullName: Mapsui.INavigator.ZoomOut()
-  nameWithType: INavigator.ZoomOut()
-- uid: Mapsui.INavigator.ZoomOut(Mapsui.Geometries.Point)
-  name: ZoomOut(Point)
-  href: api/Mapsui.INavigator.html#Mapsui_INavigator_ZoomOut_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.INavigator.ZoomOut(Mapsui.Geometries.Point)
-  fullName: Mapsui.INavigator.ZoomOut(Mapsui.Geometries.Point)
-  nameWithType: INavigator.ZoomOut(Point)
+- uid: Mapsui.INavigator.ZoomOut(Mapsui.Geometries.Point,System.Int64,Mapsui.Utilities.Easing)
+  name: ZoomOut(Point, Int64, Easing)
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_ZoomOut_Mapsui_Geometries_Point_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.INavigator.ZoomOut(Mapsui.Geometries.Point,System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.INavigator.ZoomOut(Mapsui.Geometries.Point, System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: INavigator.ZoomOut(Point, Int64, Easing)
+- uid: Mapsui.INavigator.ZoomOut(System.Int64,Mapsui.Utilities.Easing)
+  name: ZoomOut(Int64, Easing)
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_ZoomOut_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.INavigator.ZoomOut(System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.INavigator.ZoomOut(System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: INavigator.ZoomOut(Int64, Easing)
 - uid: Mapsui.INavigator.ZoomOut*
   name: ZoomOut
   href: api/Mapsui.INavigator.html#Mapsui_INavigator_ZoomOut_
@@ -6512,18 +6444,18 @@ references:
   isSpec: "True"
   fullName: Mapsui.INavigator.ZoomOut
   nameWithType: INavigator.ZoomOut
-- uid: Mapsui.INavigator.ZoomTo(System.Double)
-  name: ZoomTo(Double)
-  href: api/Mapsui.INavigator.html#Mapsui_INavigator_ZoomTo_System_Double_
-  commentId: M:Mapsui.INavigator.ZoomTo(System.Double)
-  fullName: Mapsui.INavigator.ZoomTo(System.Double)
-  nameWithType: INavigator.ZoomTo(Double)
-- uid: Mapsui.INavigator.ZoomTo(System.Double,Mapsui.Geometries.Point)
-  name: ZoomTo(Double, Point)
-  href: api/Mapsui.INavigator.html#Mapsui_INavigator_ZoomTo_System_Double_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.INavigator.ZoomTo(System.Double,Mapsui.Geometries.Point)
-  fullName: Mapsui.INavigator.ZoomTo(System.Double, Mapsui.Geometries.Point)
-  nameWithType: INavigator.ZoomTo(Double, Point)
+- uid: Mapsui.INavigator.ZoomTo(System.Double,Mapsui.Geometries.Point,System.Int64,Mapsui.Utilities.Easing)
+  name: ZoomTo(Double, Point, Int64, Easing)
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_ZoomTo_System_Double_Mapsui_Geometries_Point_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.INavigator.ZoomTo(System.Double,Mapsui.Geometries.Point,System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.INavigator.ZoomTo(System.Double, Mapsui.Geometries.Point, System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: INavigator.ZoomTo(Double, Point, Int64, Easing)
+- uid: Mapsui.INavigator.ZoomTo(System.Double,System.Int64,Mapsui.Utilities.Easing)
+  name: ZoomTo(Double, Int64, Easing)
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_ZoomTo_System_Double_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.INavigator.ZoomTo(System.Double,System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.INavigator.ZoomTo(System.Double, System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: INavigator.ZoomTo(Double, Int64, Easing)
 - uid: Mapsui.INavigator.ZoomTo*
   name: ZoomTo
   href: api/Mapsui.INavigator.html#Mapsui_INavigator_ZoomTo_
@@ -8323,24 +8255,15 @@ references:
   commentId: T:Mapsui.Layers.TileLayer
   fullName: Mapsui.Layers.TileLayer
   nameWithType: TileLayer
-- uid: Mapsui.Layers.TileLayer.#ctor(BruTile.ITileSource,System.Int32,System.Int32,System.Int32,Mapsui.Fetcher.IFetchStrategy,Mapsui.Rendering.IRenderGetStrategy,System.Int32,System.Int32,System.Func{BruTile.TileInfo,System.Object,Mapsui.Providers.Feature},System.Func{BruTile.TileInfo,System.Object})
-  name: TileLayer(ITileSource, Int32, Int32, Int32, IFetchStrategy, IRenderGetStrategy, Int32, Int32, Func<TileInfo, Object, Feature>, Func<TileInfo, Object>)
-  href: api/Mapsui.Layers.TileLayer.html#Mapsui_Layers_TileLayer__ctor_BruTile_ITileSource_System_Int32_System_Int32_System_Int32_Mapsui_Fetcher_IFetchStrategy_Mapsui_Rendering_IRenderGetStrategy_System_Int32_System_Int32_System_Func_BruTile_TileInfo_System_Object_Mapsui_Providers_Feature__System_Func_BruTile_TileInfo_System_Object__
-  commentId: M:Mapsui.Layers.TileLayer.#ctor(BruTile.ITileSource,System.Int32,System.Int32,System.Int32,Mapsui.Fetcher.IFetchStrategy,Mapsui.Rendering.IRenderGetStrategy,System.Int32,System.Int32,System.Func{BruTile.TileInfo,System.Object,Mapsui.Providers.Feature},System.Func{BruTile.TileInfo,System.Object})
-  name.vb: TileLayer(ITileSource, Int32, Int32, Int32, IFetchStrategy, IRenderGetStrategy, Int32, Int32, Func(Of TileInfo, Object, Feature), Func(Of TileInfo, Object))
-  fullName: Mapsui.Layers.TileLayer.TileLayer(BruTile.ITileSource, System.Int32, System.Int32, System.Int32, Mapsui.Fetcher.IFetchStrategy, Mapsui.Rendering.IRenderGetStrategy, System.Int32, System.Int32, System.Func<BruTile.TileInfo, System.Object, Mapsui.Providers.Feature>, System.Func<BruTile.TileInfo, System.Object>)
-  fullName.vb: Mapsui.Layers.TileLayer.TileLayer(BruTile.ITileSource, System.Int32, System.Int32, System.Int32, Mapsui.Fetcher.IFetchStrategy, Mapsui.Rendering.IRenderGetStrategy, System.Int32, System.Int32, System.Func(Of BruTile.TileInfo, System.Object, Mapsui.Providers.Feature), System.Func(Of BruTile.TileInfo, System.Object))
-  nameWithType: TileLayer.TileLayer(ITileSource, Int32, Int32, Int32, IFetchStrategy, IRenderGetStrategy, Int32, Int32, Func<TileInfo, Object, Feature>, Func<TileInfo, Object>)
-  nameWithType.vb: TileLayer.TileLayer(ITileSource, Int32, Int32, Int32, IFetchStrategy, IRenderGetStrategy, Int32, Int32, Func(Of TileInfo, Object, Feature), Func(Of TileInfo, Object))
-- uid: Mapsui.Layers.TileLayer.#ctor(System.Func{BruTile.ITileSource})
-  name: TileLayer(Func<ITileSource>)
-  href: api/Mapsui.Layers.TileLayer.html#Mapsui_Layers_TileLayer__ctor_System_Func_BruTile_ITileSource__
-  commentId: M:Mapsui.Layers.TileLayer.#ctor(System.Func{BruTile.ITileSource})
-  name.vb: TileLayer(Func(Of ITileSource))
-  fullName: Mapsui.Layers.TileLayer.TileLayer(System.Func<BruTile.ITileSource>)
-  fullName.vb: Mapsui.Layers.TileLayer.TileLayer(System.Func(Of BruTile.ITileSource))
-  nameWithType: TileLayer.TileLayer(Func<ITileSource>)
-  nameWithType.vb: TileLayer.TileLayer(Func(Of ITileSource))
+- uid: Mapsui.Layers.TileLayer.#ctor(BruTile.ITileSource,System.Int32,System.Int32,Mapsui.Fetcher.IFetchStrategy,Mapsui.Rendering.IRenderGetStrategy,System.Int32,System.Int32,System.Func{BruTile.TileInfo,Mapsui.Providers.Feature})
+  name: TileLayer(ITileSource, Int32, Int32, IFetchStrategy, IRenderGetStrategy, Int32, Int32, Func<TileInfo, Feature>)
+  href: api/Mapsui.Layers.TileLayer.html#Mapsui_Layers_TileLayer__ctor_BruTile_ITileSource_System_Int32_System_Int32_Mapsui_Fetcher_IFetchStrategy_Mapsui_Rendering_IRenderGetStrategy_System_Int32_System_Int32_System_Func_BruTile_TileInfo_Mapsui_Providers_Feature__
+  commentId: M:Mapsui.Layers.TileLayer.#ctor(BruTile.ITileSource,System.Int32,System.Int32,Mapsui.Fetcher.IFetchStrategy,Mapsui.Rendering.IRenderGetStrategy,System.Int32,System.Int32,System.Func{BruTile.TileInfo,Mapsui.Providers.Feature})
+  name.vb: TileLayer(ITileSource, Int32, Int32, IFetchStrategy, IRenderGetStrategy, Int32, Int32, Func(Of TileInfo, Feature))
+  fullName: Mapsui.Layers.TileLayer.TileLayer(BruTile.ITileSource, System.Int32, System.Int32, Mapsui.Fetcher.IFetchStrategy, Mapsui.Rendering.IRenderGetStrategy, System.Int32, System.Int32, System.Func<BruTile.TileInfo, Mapsui.Providers.Feature>)
+  fullName.vb: Mapsui.Layers.TileLayer.TileLayer(BruTile.ITileSource, System.Int32, System.Int32, Mapsui.Fetcher.IFetchStrategy, Mapsui.Rendering.IRenderGetStrategy, System.Int32, System.Int32, System.Func(Of BruTile.TileInfo, Mapsui.Providers.Feature))
+  nameWithType: TileLayer.TileLayer(ITileSource, Int32, Int32, IFetchStrategy, IRenderGetStrategy, Int32, Int32, Func<TileInfo, Feature>)
+  nameWithType.vb: TileLayer.TileLayer(ITileSource, Int32, Int32, IFetchStrategy, IRenderGetStrategy, Int32, Int32, Func(Of TileInfo, Feature))
 - uid: Mapsui.Layers.TileLayer.#ctor*
   name: TileLayer
   href: api/Mapsui.Layers.TileLayer.html#Mapsui_Layers_TileLayer__ctor_
@@ -8439,19 +8362,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.TileLayer.Resolutions
   nameWithType: TileLayer.Resolutions
-- uid: Mapsui.Layers.TileLayer.TileSource
-  name: TileSource
-  href: api/Mapsui.Layers.TileLayer.html#Mapsui_Layers_TileLayer_TileSource
-  commentId: P:Mapsui.Layers.TileLayer.TileSource
-  fullName: Mapsui.Layers.TileLayer.TileSource
-  nameWithType: TileLayer.TileSource
-- uid: Mapsui.Layers.TileLayer.TileSource*
-  name: TileSource
-  href: api/Mapsui.Layers.TileLayer.html#Mapsui_Layers_TileLayer_TileSource_
-  commentId: Overload:Mapsui.Layers.TileLayer.TileSource
-  isSpec: "True"
-  fullName: Mapsui.Layers.TileLayer.TileSource
-  nameWithType: TileLayer.TileSource
 - uid: Mapsui.Layers.TmsTileSourceBuilder
   name: TmsTileSourceBuilder
   href: api/Mapsui.Layers.TmsTileSourceBuilder.html
@@ -9317,18 +9227,18 @@ references:
   isSpec: "True"
   fullName: Mapsui.Navigator.Navigator
   nameWithType: Navigator.Navigator
-- uid: Mapsui.Navigator.CenterOn(Mapsui.Geometries.Point)
-  name: CenterOn(Point)
-  href: api/Mapsui.Navigator.html#Mapsui_Navigator_CenterOn_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.Navigator.CenterOn(Mapsui.Geometries.Point)
-  fullName: Mapsui.Navigator.CenterOn(Mapsui.Geometries.Point)
-  nameWithType: Navigator.CenterOn(Point)
-- uid: Mapsui.Navigator.CenterOn(System.Double,System.Double)
-  name: CenterOn(Double, Double)
-  href: api/Mapsui.Navigator.html#Mapsui_Navigator_CenterOn_System_Double_System_Double_
-  commentId: M:Mapsui.Navigator.CenterOn(System.Double,System.Double)
-  fullName: Mapsui.Navigator.CenterOn(System.Double, System.Double)
-  nameWithType: Navigator.CenterOn(Double, Double)
+- uid: Mapsui.Navigator.CenterOn(Mapsui.Geometries.Point,System.Int64,Mapsui.Utilities.Easing)
+  name: CenterOn(Point, Int64, Easing)
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_CenterOn_Mapsui_Geometries_Point_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.Navigator.CenterOn(Mapsui.Geometries.Point,System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.Navigator.CenterOn(Mapsui.Geometries.Point, System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: Navigator.CenterOn(Point, Int64, Easing)
+- uid: Mapsui.Navigator.CenterOn(System.Double,System.Double,System.Int64,Mapsui.Utilities.Easing)
+  name: CenterOn(Double, Double, Int64, Easing)
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_CenterOn_System_Double_System_Double_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.Navigator.CenterOn(System.Double,System.Double,System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.Navigator.CenterOn(System.Double, System.Double, System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: Navigator.CenterOn(Double, Double, Int64, Easing)
 - uid: Mapsui.Navigator.CenterOn*
   name: CenterOn
   href: api/Mapsui.Navigator.html#Mapsui_Navigator_CenterOn_
@@ -9336,6 +9246,45 @@ references:
   isSpec: "True"
   fullName: Mapsui.Navigator.CenterOn
   nameWithType: Navigator.CenterOn
+- uid: Mapsui.Navigator.DefaultDuration
+  name: DefaultDuration
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_DefaultDuration
+  commentId: P:Mapsui.Navigator.DefaultDuration
+  fullName: Mapsui.Navigator.DefaultDuration
+  nameWithType: Navigator.DefaultDuration
+- uid: Mapsui.Navigator.DefaultDuration*
+  name: DefaultDuration
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_DefaultDuration_
+  commentId: Overload:Mapsui.Navigator.DefaultDuration
+  isSpec: "True"
+  fullName: Mapsui.Navigator.DefaultDuration
+  nameWithType: Navigator.DefaultDuration
+- uid: Mapsui.Navigator.FlingWith(System.Double,System.Double,System.Int64)
+  name: FlingWith(Double, Double, Int64)
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_FlingWith_System_Double_System_Double_System_Int64_
+  commentId: M:Mapsui.Navigator.FlingWith(System.Double,System.Double,System.Int64)
+  fullName: Mapsui.Navigator.FlingWith(System.Double, System.Double, System.Int64)
+  nameWithType: Navigator.FlingWith(Double, Double, Int64)
+- uid: Mapsui.Navigator.FlingWith*
+  name: FlingWith
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_FlingWith_
+  commentId: Overload:Mapsui.Navigator.FlingWith
+  isSpec: "True"
+  fullName: Mapsui.Navigator.FlingWith
+  nameWithType: Navigator.FlingWith
+- uid: Mapsui.Navigator.FlyTo(Mapsui.Geometries.Point,System.Double,System.Int64)
+  name: FlyTo(Point, Double, Int64)
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_FlyTo_Mapsui_Geometries_Point_System_Double_System_Int64_
+  commentId: M:Mapsui.Navigator.FlyTo(Mapsui.Geometries.Point,System.Double,System.Int64)
+  fullName: Mapsui.Navigator.FlyTo(Mapsui.Geometries.Point, System.Double, System.Int64)
+  nameWithType: Navigator.FlyTo(Point, Double, Int64)
+- uid: Mapsui.Navigator.FlyTo*
+  name: FlyTo
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_FlyTo_
+  commentId: Overload:Mapsui.Navigator.FlyTo
+  isSpec: "True"
+  fullName: Mapsui.Navigator.FlyTo
+  nameWithType: Navigator.FlyTo
 - uid: Mapsui.Navigator.Navigated
   name: Navigated
   href: api/Mapsui.Navigator.html#Mapsui_Navigator_Navigated
@@ -9349,18 +9298,18 @@ references:
   isSpec: "True"
   fullName: Mapsui.Navigator.Navigated
   nameWithType: Navigator.Navigated
-- uid: Mapsui.Navigator.NavigateTo(Mapsui.Geometries.BoundingBox,Mapsui.Utilities.ScaleMethod)
-  name: NavigateTo(BoundingBox, ScaleMethod)
-  href: api/Mapsui.Navigator.html#Mapsui_Navigator_NavigateTo_Mapsui_Geometries_BoundingBox_Mapsui_Utilities_ScaleMethod_
-  commentId: M:Mapsui.Navigator.NavigateTo(Mapsui.Geometries.BoundingBox,Mapsui.Utilities.ScaleMethod)
-  fullName: Mapsui.Navigator.NavigateTo(Mapsui.Geometries.BoundingBox, Mapsui.Utilities.ScaleMethod)
-  nameWithType: Navigator.NavigateTo(BoundingBox, ScaleMethod)
-- uid: Mapsui.Navigator.NavigateTo(Mapsui.Geometries.Point,System.Double)
-  name: NavigateTo(Point, Double)
-  href: api/Mapsui.Navigator.html#Mapsui_Navigator_NavigateTo_Mapsui_Geometries_Point_System_Double_
-  commentId: M:Mapsui.Navigator.NavigateTo(Mapsui.Geometries.Point,System.Double)
-  fullName: Mapsui.Navigator.NavigateTo(Mapsui.Geometries.Point, System.Double)
-  nameWithType: Navigator.NavigateTo(Point, Double)
+- uid: Mapsui.Navigator.NavigateTo(Mapsui.Geometries.BoundingBox,Mapsui.Utilities.ScaleMethod,System.Int64,Mapsui.Utilities.Easing)
+  name: NavigateTo(BoundingBox, ScaleMethod, Int64, Easing)
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_NavigateTo_Mapsui_Geometries_BoundingBox_Mapsui_Utilities_ScaleMethod_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.Navigator.NavigateTo(Mapsui.Geometries.BoundingBox,Mapsui.Utilities.ScaleMethod,System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.Navigator.NavigateTo(Mapsui.Geometries.BoundingBox, Mapsui.Utilities.ScaleMethod, System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: Navigator.NavigateTo(BoundingBox, ScaleMethod, Int64, Easing)
+- uid: Mapsui.Navigator.NavigateTo(Mapsui.Geometries.Point,System.Double,System.Int64,Mapsui.Utilities.Easing)
+  name: NavigateTo(Point, Double, Int64, Easing)
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_NavigateTo_Mapsui_Geometries_Point_System_Double_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.Navigator.NavigateTo(Mapsui.Geometries.Point,System.Double,System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.Navigator.NavigateTo(Mapsui.Geometries.Point, System.Double, System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: Navigator.NavigateTo(Point, Double, Int64, Easing)
 - uid: Mapsui.Navigator.NavigateTo*
   name: NavigateTo
   href: api/Mapsui.Navigator.html#Mapsui_Navigator_NavigateTo_
@@ -9368,12 +9317,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Navigator.NavigateTo
   nameWithType: Navigator.NavigateTo
-- uid: Mapsui.Navigator.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)
-  name: NavigateToFullEnvelope(ScaleMethod)
-  href: api/Mapsui.Navigator.html#Mapsui_Navigator_NavigateToFullEnvelope_Mapsui_Utilities_ScaleMethod_
-  commentId: M:Mapsui.Navigator.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)
-  fullName: Mapsui.Navigator.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)
-  nameWithType: Navigator.NavigateToFullEnvelope(ScaleMethod)
+- uid: Mapsui.Navigator.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod,System.Int64,Mapsui.Utilities.Easing)
+  name: NavigateToFullEnvelope(ScaleMethod, Int64, Easing)
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_NavigateToFullEnvelope_Mapsui_Utilities_ScaleMethod_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.Navigator.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod,System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.Navigator.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod, System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: Navigator.NavigateToFullEnvelope(ScaleMethod, Int64, Easing)
 - uid: Mapsui.Navigator.NavigateToFullEnvelope*
   name: NavigateToFullEnvelope
   href: api/Mapsui.Navigator.html#Mapsui_Navigator_NavigateToFullEnvelope_
@@ -9381,12 +9330,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Navigator.NavigateToFullEnvelope
   nameWithType: Navigator.NavigateToFullEnvelope
-- uid: Mapsui.Navigator.RotateTo(System.Double)
-  name: RotateTo(Double)
-  href: api/Mapsui.Navigator.html#Mapsui_Navigator_RotateTo_System_Double_
-  commentId: M:Mapsui.Navigator.RotateTo(System.Double)
-  fullName: Mapsui.Navigator.RotateTo(System.Double)
-  nameWithType: Navigator.RotateTo(Double)
+- uid: Mapsui.Navigator.RotateTo(System.Double,System.Int64,Mapsui.Utilities.Easing)
+  name: RotateTo(Double, Int64, Easing)
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_RotateTo_System_Double_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.Navigator.RotateTo(System.Double,System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.Navigator.RotateTo(System.Double, System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: Navigator.RotateTo(Double, Int64, Easing)
 - uid: Mapsui.Navigator.RotateTo*
   name: RotateTo
   href: api/Mapsui.Navigator.html#Mapsui_Navigator_RotateTo_
@@ -9394,18 +9343,44 @@ references:
   isSpec: "True"
   fullName: Mapsui.Navigator.RotateTo
   nameWithType: Navigator.RotateTo
-- uid: Mapsui.Navigator.ZoomIn
-  name: ZoomIn()
-  href: api/Mapsui.Navigator.html#Mapsui_Navigator_ZoomIn
-  commentId: M:Mapsui.Navigator.ZoomIn
-  fullName: Mapsui.Navigator.ZoomIn()
-  nameWithType: Navigator.ZoomIn()
-- uid: Mapsui.Navigator.ZoomIn(Mapsui.Geometries.Point)
-  name: ZoomIn(Point)
-  href: api/Mapsui.Navigator.html#Mapsui_Navigator_ZoomIn_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.Navigator.ZoomIn(Mapsui.Geometries.Point)
-  fullName: Mapsui.Navigator.ZoomIn(Mapsui.Geometries.Point)
-  nameWithType: Navigator.ZoomIn(Point)
+- uid: Mapsui.Navigator.StopRunningAnimation
+  name: StopRunningAnimation()
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_StopRunningAnimation
+  commentId: M:Mapsui.Navigator.StopRunningAnimation
+  fullName: Mapsui.Navigator.StopRunningAnimation()
+  nameWithType: Navigator.StopRunningAnimation()
+- uid: Mapsui.Navigator.StopRunningAnimation*
+  name: StopRunningAnimation
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_StopRunningAnimation_
+  commentId: Overload:Mapsui.Navigator.StopRunningAnimation
+  isSpec: "True"
+  fullName: Mapsui.Navigator.StopRunningAnimation
+  nameWithType: Navigator.StopRunningAnimation
+- uid: Mapsui.Navigator.UpdateRunningAnimation
+  name: UpdateRunningAnimation()
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_UpdateRunningAnimation
+  commentId: M:Mapsui.Navigator.UpdateRunningAnimation
+  fullName: Mapsui.Navigator.UpdateRunningAnimation()
+  nameWithType: Navigator.UpdateRunningAnimation()
+- uid: Mapsui.Navigator.UpdateRunningAnimation*
+  name: UpdateRunningAnimation
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_UpdateRunningAnimation_
+  commentId: Overload:Mapsui.Navigator.UpdateRunningAnimation
+  isSpec: "True"
+  fullName: Mapsui.Navigator.UpdateRunningAnimation
+  nameWithType: Navigator.UpdateRunningAnimation
+- uid: Mapsui.Navigator.ZoomIn(Mapsui.Geometries.Point,System.Int64,Mapsui.Utilities.Easing)
+  name: ZoomIn(Point, Int64, Easing)
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_ZoomIn_Mapsui_Geometries_Point_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.Navigator.ZoomIn(Mapsui.Geometries.Point,System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.Navigator.ZoomIn(Mapsui.Geometries.Point, System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: Navigator.ZoomIn(Point, Int64, Easing)
+- uid: Mapsui.Navigator.ZoomIn(System.Int64,Mapsui.Utilities.Easing)
+  name: ZoomIn(Int64, Easing)
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_ZoomIn_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.Navigator.ZoomIn(System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.Navigator.ZoomIn(System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: Navigator.ZoomIn(Int64, Easing)
 - uid: Mapsui.Navigator.ZoomIn*
   name: ZoomIn
   href: api/Mapsui.Navigator.html#Mapsui_Navigator_ZoomIn_
@@ -9413,18 +9388,18 @@ references:
   isSpec: "True"
   fullName: Mapsui.Navigator.ZoomIn
   nameWithType: Navigator.ZoomIn
-- uid: Mapsui.Navigator.ZoomOut
-  name: ZoomOut()
-  href: api/Mapsui.Navigator.html#Mapsui_Navigator_ZoomOut
-  commentId: M:Mapsui.Navigator.ZoomOut
-  fullName: Mapsui.Navigator.ZoomOut()
-  nameWithType: Navigator.ZoomOut()
-- uid: Mapsui.Navigator.ZoomOut(Mapsui.Geometries.Point)
-  name: ZoomOut(Point)
-  href: api/Mapsui.Navigator.html#Mapsui_Navigator_ZoomOut_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.Navigator.ZoomOut(Mapsui.Geometries.Point)
-  fullName: Mapsui.Navigator.ZoomOut(Mapsui.Geometries.Point)
-  nameWithType: Navigator.ZoomOut(Point)
+- uid: Mapsui.Navigator.ZoomOut(Mapsui.Geometries.Point,System.Int64,Mapsui.Utilities.Easing)
+  name: ZoomOut(Point, Int64, Easing)
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_ZoomOut_Mapsui_Geometries_Point_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.Navigator.ZoomOut(Mapsui.Geometries.Point,System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.Navigator.ZoomOut(Mapsui.Geometries.Point, System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: Navigator.ZoomOut(Point, Int64, Easing)
+- uid: Mapsui.Navigator.ZoomOut(System.Int64,Mapsui.Utilities.Easing)
+  name: ZoomOut(Int64, Easing)
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_ZoomOut_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.Navigator.ZoomOut(System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.Navigator.ZoomOut(System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: Navigator.ZoomOut(Int64, Easing)
 - uid: Mapsui.Navigator.ZoomOut*
   name: ZoomOut
   href: api/Mapsui.Navigator.html#Mapsui_Navigator_ZoomOut_
@@ -9432,18 +9407,24 @@ references:
   isSpec: "True"
   fullName: Mapsui.Navigator.ZoomOut
   nameWithType: Navigator.ZoomOut
-- uid: Mapsui.Navigator.ZoomTo(System.Double)
-  name: ZoomTo(Double)
-  href: api/Mapsui.Navigator.html#Mapsui_Navigator_ZoomTo_System_Double_
-  commentId: M:Mapsui.Navigator.ZoomTo(System.Double)
-  fullName: Mapsui.Navigator.ZoomTo(System.Double)
-  nameWithType: Navigator.ZoomTo(Double)
-- uid: Mapsui.Navigator.ZoomTo(System.Double,Mapsui.Geometries.Point)
-  name: ZoomTo(Double, Point)
-  href: api/Mapsui.Navigator.html#Mapsui_Navigator_ZoomTo_System_Double_Mapsui_Geometries_Point_
-  commentId: M:Mapsui.Navigator.ZoomTo(System.Double,Mapsui.Geometries.Point)
-  fullName: Mapsui.Navigator.ZoomTo(System.Double, Mapsui.Geometries.Point)
-  nameWithType: Navigator.ZoomTo(Double, Point)
+- uid: Mapsui.Navigator.ZoomTo(Mapsui.Geometries.Point,System.Double,System.Int64,Mapsui.Utilities.Easing)
+  name: ZoomTo(Point, Double, Int64, Easing)
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_ZoomTo_Mapsui_Geometries_Point_System_Double_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.Navigator.ZoomTo(Mapsui.Geometries.Point,System.Double,System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.Navigator.ZoomTo(Mapsui.Geometries.Point, System.Double, System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: Navigator.ZoomTo(Point, Double, Int64, Easing)
+- uid: Mapsui.Navigator.ZoomTo(System.Double,Mapsui.Geometries.Point,System.Int64,Mapsui.Utilities.Easing)
+  name: ZoomTo(Double, Point, Int64, Easing)
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_ZoomTo_System_Double_Mapsui_Geometries_Point_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.Navigator.ZoomTo(System.Double,Mapsui.Geometries.Point,System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.Navigator.ZoomTo(System.Double, Mapsui.Geometries.Point, System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: Navigator.ZoomTo(Double, Point, Int64, Easing)
+- uid: Mapsui.Navigator.ZoomTo(System.Double,System.Int64,Mapsui.Utilities.Easing)
+  name: ZoomTo(Double, Int64, Easing)
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_ZoomTo_System_Double_System_Int64_Mapsui_Utilities_Easing_
+  commentId: M:Mapsui.Navigator.ZoomTo(System.Double,System.Int64,Mapsui.Utilities.Easing)
+  fullName: Mapsui.Navigator.ZoomTo(System.Double, System.Int64, Mapsui.Utilities.Easing)
+  nameWithType: Navigator.ZoomTo(Double, Int64, Easing)
 - uid: Mapsui.Navigator.ZoomTo*
   name: ZoomTo
   href: api/Mapsui.Navigator.html#Mapsui_Navigator_ZoomTo_
@@ -22524,6 +22505,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.Navigator
   nameWithType: MapControl.Navigator
+- uid: Mapsui.UI.Android.MapControl.OnFling(System.Object,Android.Views.GestureDetector.FlingEventArgs)
+  name: OnFling(Object, GestureDetector.FlingEventArgs)
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_OnFling_System_Object_Android_Views_GestureDetector_FlingEventArgs_
+  commentId: M:Mapsui.UI.Android.MapControl.OnFling(System.Object,Android.Views.GestureDetector.FlingEventArgs)
+  fullName: Mapsui.UI.Android.MapControl.OnFling(System.Object, Android.Views.GestureDetector.FlingEventArgs)
+  nameWithType: MapControl.OnFling(Object, GestureDetector.FlingEventArgs)
+- uid: Mapsui.UI.Android.MapControl.OnFling*
+  name: OnFling
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_OnFling_
+  commentId: Overload:Mapsui.UI.Android.MapControl.OnFling
+  isSpec: "True"
+  fullName: Mapsui.UI.Android.MapControl.OnFling
+  nameWithType: MapControl.OnFling
 - uid: Mapsui.UI.Android.MapControl.OnLayout(System.Boolean,System.Int32,System.Int32,System.Int32,System.Int32)
   name: OnLayout(Boolean, Int32, Int32, Int32, Int32)
   href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_OnLayout_System_Boolean_System_Int32_System_Int32_System_Int32_System_Int32_
@@ -27958,64 +27952,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Utils.FlingTracker.RemoveId
   nameWithType: FlingTracker.RemoveId
-- uid: Mapsui.UI.Utils.VelocityTracker
-  name: VelocityTracker
-  href: api/Mapsui.UI.Utils.VelocityTracker.html
-  commentId: T:Mapsui.UI.Utils.VelocityTracker
-  fullName: Mapsui.UI.Utils.VelocityTracker
-  nameWithType: VelocityTracker
-- uid: Mapsui.UI.Utils.VelocityTracker.#ctor
-  name: VelocityTracker()
-  href: api/Mapsui.UI.Utils.VelocityTracker.html#Mapsui_UI_Utils_VelocityTracker__ctor
-  commentId: M:Mapsui.UI.Utils.VelocityTracker.#ctor
-  fullName: Mapsui.UI.Utils.VelocityTracker.VelocityTracker()
-  nameWithType: VelocityTracker.VelocityTracker()
-- uid: Mapsui.UI.Utils.VelocityTracker.#ctor*
-  name: VelocityTracker
-  href: api/Mapsui.UI.Utils.VelocityTracker.html#Mapsui_UI_Utils_VelocityTracker__ctor_
-  commentId: Overload:Mapsui.UI.Utils.VelocityTracker.#ctor
-  isSpec: "True"
-  fullName: Mapsui.UI.Utils.VelocityTracker.VelocityTracker
-  nameWithType: VelocityTracker.VelocityTracker
-- uid: Mapsui.UI.Utils.VelocityTracker.AddEvent(System.Int64,Mapsui.Geometries.Point,System.Int64)
-  name: AddEvent(Int64, Point, Int64)
-  href: api/Mapsui.UI.Utils.VelocityTracker.html#Mapsui_UI_Utils_VelocityTracker_AddEvent_System_Int64_Mapsui_Geometries_Point_System_Int64_
-  commentId: M:Mapsui.UI.Utils.VelocityTracker.AddEvent(System.Int64,Mapsui.Geometries.Point,System.Int64)
-  fullName: Mapsui.UI.Utils.VelocityTracker.AddEvent(System.Int64, Mapsui.Geometries.Point, System.Int64)
-  nameWithType: VelocityTracker.AddEvent(Int64, Point, Int64)
-- uid: Mapsui.UI.Utils.VelocityTracker.AddEvent*
-  name: AddEvent
-  href: api/Mapsui.UI.Utils.VelocityTracker.html#Mapsui_UI_Utils_VelocityTracker_AddEvent_
-  commentId: Overload:Mapsui.UI.Utils.VelocityTracker.AddEvent
-  isSpec: "True"
-  fullName: Mapsui.UI.Utils.VelocityTracker.AddEvent
-  nameWithType: VelocityTracker.AddEvent
-- uid: Mapsui.UI.Utils.VelocityTracker.CalcVelocity(System.Int64,System.Int64)
-  name: CalcVelocity(Int64, Int64)
-  href: api/Mapsui.UI.Utils.VelocityTracker.html#Mapsui_UI_Utils_VelocityTracker_CalcVelocity_System_Int64_System_Int64_
-  commentId: M:Mapsui.UI.Utils.VelocityTracker.CalcVelocity(System.Int64,System.Int64)
-  fullName: Mapsui.UI.Utils.VelocityTracker.CalcVelocity(System.Int64, System.Int64)
-  nameWithType: VelocityTracker.CalcVelocity(Int64, Int64)
-- uid: Mapsui.UI.Utils.VelocityTracker.CalcVelocity*
-  name: CalcVelocity
-  href: api/Mapsui.UI.Utils.VelocityTracker.html#Mapsui_UI_Utils_VelocityTracker_CalcVelocity_
-  commentId: Overload:Mapsui.UI.Utils.VelocityTracker.CalcVelocity
-  isSpec: "True"
-  fullName: Mapsui.UI.Utils.VelocityTracker.CalcVelocity
-  nameWithType: VelocityTracker.CalcVelocity
-- uid: Mapsui.UI.Utils.VelocityTracker.Clear
-  name: Clear()
-  href: api/Mapsui.UI.Utils.VelocityTracker.html#Mapsui_UI_Utils_VelocityTracker_Clear
-  commentId: M:Mapsui.UI.Utils.VelocityTracker.Clear
-  fullName: Mapsui.UI.Utils.VelocityTracker.Clear()
-  nameWithType: VelocityTracker.Clear()
-- uid: Mapsui.UI.Utils.VelocityTracker.Clear*
-  name: Clear
-  href: api/Mapsui.UI.Utils.VelocityTracker.html#Mapsui_UI_Utils_VelocityTracker_Clear_
-  commentId: Overload:Mapsui.UI.Utils.VelocityTracker.Clear
-  isSpec: "True"
-  fullName: Mapsui.UI.Utils.VelocityTracker.Clear
-  nameWithType: VelocityTracker.Clear
 - uid: Mapsui.UI.ViewChangedEventArgs
   name: ViewChangedEventArgs
   href: api/Mapsui.UI.ViewChangedEventArgs.html
@@ -28349,6 +28285,12 @@ references:
   commentId: E:Mapsui.UI.Wpf.MapControl.FeatureInfo
   fullName: Mapsui.UI.Wpf.MapControl.FeatureInfo
   nameWithType: MapControl.FeatureInfo
+- uid: Mapsui.UI.Wpf.MapControl.Fling
+  name: Fling
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_Fling
+  commentId: E:Mapsui.UI.Wpf.MapControl.Fling
+  fullName: Mapsui.UI.Wpf.MapControl.Fling
+  nameWithType: MapControl.Fling
 - uid: Mapsui.UI.Wpf.MapControl.GetMapInfo(Mapsui.Geometries.Point,System.Int32)
   name: GetMapInfo(Point, Int32)
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_GetMapInfo_Mapsui_Geometries_Point_System_Int32_
@@ -28598,12 +28540,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.Unsubscribe
   nameWithType: MapControl.Unsubscribe
-- uid: Mapsui.UI.Wpf.MapControl.ViewChanged
-  name: ViewChanged
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ViewChanged
-  commentId: E:Mapsui.UI.Wpf.MapControl.ViewChanged
-  fullName: Mapsui.UI.Wpf.MapControl.ViewChanged
-  nameWithType: MapControl.ViewChanged
 - uid: Mapsui.UI.Wpf.MapControl.Viewport
   name: Viewport
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_Viewport
@@ -28636,32 +28572,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.WpfCanvas
   nameWithType: MapControl.WpfCanvas
-- uid: Mapsui.UI.Wpf.MapControl.ZoomIn
-  name: ZoomIn()
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ZoomIn
-  commentId: M:Mapsui.UI.Wpf.MapControl.ZoomIn
-  fullName: Mapsui.UI.Wpf.MapControl.ZoomIn()
-  nameWithType: MapControl.ZoomIn()
-- uid: Mapsui.UI.Wpf.MapControl.ZoomIn*
-  name: ZoomIn
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ZoomIn_
-  commentId: Overload:Mapsui.UI.Wpf.MapControl.ZoomIn
-  isSpec: "True"
-  fullName: Mapsui.UI.Wpf.MapControl.ZoomIn
-  nameWithType: MapControl.ZoomIn
-- uid: Mapsui.UI.Wpf.MapControl.ZoomOut
-  name: ZoomOut()
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ZoomOut
-  commentId: M:Mapsui.UI.Wpf.MapControl.ZoomOut
-  fullName: Mapsui.UI.Wpf.MapControl.ZoomOut()
-  nameWithType: MapControl.ZoomOut()
-- uid: Mapsui.UI.Wpf.MapControl.ZoomOut*
-  name: ZoomOut
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ZoomOut_
-  commentId: Overload:Mapsui.UI.Wpf.MapControl.ZoomOut
-  isSpec: "True"
-  fullName: Mapsui.UI.Wpf.MapControl.ZoomOut
-  nameWithType: MapControl.ZoomOut
 - uid: Mapsui.UI.Wpf.MapControl.ZoomToBox(Mapsui.Geometries.Point,Mapsui.Geometries.Point)
   name: ZoomToBox(Point, Point)
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ZoomToBox_Mapsui_Geometries_Point_Mapsui_Geometries_Point_
@@ -28869,6 +28779,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Utilities.Animation.Animation
   nameWithType: Animation.Animation
+- uid: Mapsui.Utilities.Animation.AnimationTimer
+  name: AnimationTimer
+  href: api/Mapsui.Utilities.Animation.html#Mapsui_Utilities_Animation_AnimationTimer
+  commentId: P:Mapsui.Utilities.Animation.AnimationTimer
+  fullName: Mapsui.Utilities.Animation.AnimationTimer
+  nameWithType: Animation.AnimationTimer
+- uid: Mapsui.Utilities.Animation.AnimationTimer*
+  name: AnimationTimer
+  href: api/Mapsui.Utilities.Animation.html#Mapsui_Utilities_Animation_AnimationTimer_
+  commentId: Overload:Mapsui.Utilities.Animation.AnimationTimer
+  isSpec: "True"
+  fullName: Mapsui.Utilities.Animation.AnimationTimer
+  nameWithType: Animation.AnimationTimer
 - uid: Mapsui.Utilities.Animation.Duration
   name: Duration
   href: api/Mapsui.Utilities.Animation.html#Mapsui_Utilities_Animation_Duration
@@ -28908,6 +28831,32 @@ references:
   isSpec: "True"
   fullName: Mapsui.Utilities.Animation.IsRunning
   nameWithType: Animation.IsRunning
+- uid: Mapsui.Utilities.Animation.Loop
+  name: Loop
+  href: api/Mapsui.Utilities.Animation.html#Mapsui_Utilities_Animation_Loop
+  commentId: P:Mapsui.Utilities.Animation.Loop
+  fullName: Mapsui.Utilities.Animation.Loop
+  nameWithType: Animation.Loop
+- uid: Mapsui.Utilities.Animation.Loop*
+  name: Loop
+  href: api/Mapsui.Utilities.Animation.html#Mapsui_Utilities_Animation_Loop_
+  commentId: Overload:Mapsui.Utilities.Animation.Loop
+  isSpec: "True"
+  fullName: Mapsui.Utilities.Animation.Loop
+  nameWithType: Animation.Loop
+- uid: Mapsui.Utilities.Animation.NeedsUpdate
+  name: NeedsUpdate
+  href: api/Mapsui.Utilities.Animation.html#Mapsui_Utilities_Animation_NeedsUpdate
+  commentId: P:Mapsui.Utilities.Animation.NeedsUpdate
+  fullName: Mapsui.Utilities.Animation.NeedsUpdate
+  nameWithType: Animation.NeedsUpdate
+- uid: Mapsui.Utilities.Animation.NeedsUpdate*
+  name: NeedsUpdate
+  href: api/Mapsui.Utilities.Animation.html#Mapsui_Utilities_Animation_NeedsUpdate_
+  commentId: Overload:Mapsui.Utilities.Animation.NeedsUpdate
+  isSpec: "True"
+  fullName: Mapsui.Utilities.Animation.NeedsUpdate
+  nameWithType: Animation.NeedsUpdate
 - uid: Mapsui.Utilities.Animation.Start
   name: Start()
   href: api/Mapsui.Utilities.Animation.html#Mapsui_Utilities_Animation_Start
@@ -28973,6 +28922,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Utilities.Animation.Ticked
   nameWithType: Animation.Ticked
+- uid: Mapsui.Utilities.Animation.UpdateAnimations
+  name: UpdateAnimations()
+  href: api/Mapsui.Utilities.Animation.html#Mapsui_Utilities_Animation_UpdateAnimations
+  commentId: M:Mapsui.Utilities.Animation.UpdateAnimations
+  fullName: Mapsui.Utilities.Animation.UpdateAnimations()
+  nameWithType: Animation.UpdateAnimations()
+- uid: Mapsui.Utilities.Animation.UpdateAnimations*
+  name: UpdateAnimations
+  href: api/Mapsui.Utilities.Animation.html#Mapsui_Utilities_Animation_UpdateAnimations_
+  commentId: Overload:Mapsui.Utilities.Animation.UpdateAnimations
+  isSpec: "True"
+  fullName: Mapsui.Utilities.Animation.UpdateAnimations
+  nameWithType: Animation.UpdateAnimations
 - uid: Mapsui.Utilities.AnimationEntry
   name: AnimationEntry
   href: api/Mapsui.Utilities.AnimationEntry.html
@@ -29118,6 +29080,77 @@ references:
   isSpec: "True"
   fullName: Mapsui.Utilities.AnimationEventArgs.Value
   nameWithType: AnimationEventArgs.Value
+- uid: Mapsui.Utilities.AnimationTimer
+  name: AnimationTimer
+  href: api/Mapsui.Utilities.AnimationTimer.html
+  commentId: T:Mapsui.Utilities.AnimationTimer
+  fullName: Mapsui.Utilities.AnimationTimer
+  nameWithType: AnimationTimer
+- uid: Mapsui.Utilities.AnimationTimer.#ctor(Mapsui.UI.IMapControl,System.Int32)
+  name: AnimationTimer(IMapControl, Int32)
+  href: api/Mapsui.Utilities.AnimationTimer.html#Mapsui_Utilities_AnimationTimer__ctor_Mapsui_UI_IMapControl_System_Int32_
+  commentId: M:Mapsui.Utilities.AnimationTimer.#ctor(Mapsui.UI.IMapControl,System.Int32)
+  fullName: Mapsui.Utilities.AnimationTimer.AnimationTimer(Mapsui.UI.IMapControl, System.Int32)
+  nameWithType: AnimationTimer.AnimationTimer(IMapControl, Int32)
+- uid: Mapsui.Utilities.AnimationTimer.#ctor*
+  name: AnimationTimer
+  href: api/Mapsui.Utilities.AnimationTimer.html#Mapsui_Utilities_AnimationTimer__ctor_
+  commentId: Overload:Mapsui.Utilities.AnimationTimer.#ctor
+  isSpec: "True"
+  fullName: Mapsui.Utilities.AnimationTimer.AnimationTimer
+  nameWithType: AnimationTimer.AnimationTimer
+- uid: Mapsui.Utilities.AnimationTimer.Duration
+  name: Duration
+  href: api/Mapsui.Utilities.AnimationTimer.html#Mapsui_Utilities_AnimationTimer_Duration
+  commentId: P:Mapsui.Utilities.AnimationTimer.Duration
+  fullName: Mapsui.Utilities.AnimationTimer.Duration
+  nameWithType: AnimationTimer.Duration
+- uid: Mapsui.Utilities.AnimationTimer.Duration*
+  name: Duration
+  href: api/Mapsui.Utilities.AnimationTimer.html#Mapsui_Utilities_AnimationTimer_Duration_
+  commentId: Overload:Mapsui.Utilities.AnimationTimer.Duration
+  isSpec: "True"
+  fullName: Mapsui.Utilities.AnimationTimer.Duration
+  nameWithType: AnimationTimer.Duration
+- uid: Mapsui.Utilities.AnimationTimer.IsRunning
+  name: IsRunning
+  href: api/Mapsui.Utilities.AnimationTimer.html#Mapsui_Utilities_AnimationTimer_IsRunning
+  commentId: P:Mapsui.Utilities.AnimationTimer.IsRunning
+  fullName: Mapsui.Utilities.AnimationTimer.IsRunning
+  nameWithType: AnimationTimer.IsRunning
+- uid: Mapsui.Utilities.AnimationTimer.IsRunning*
+  name: IsRunning
+  href: api/Mapsui.Utilities.AnimationTimer.html#Mapsui_Utilities_AnimationTimer_IsRunning_
+  commentId: Overload:Mapsui.Utilities.AnimationTimer.IsRunning
+  isSpec: "True"
+  fullName: Mapsui.Utilities.AnimationTimer.IsRunning
+  nameWithType: AnimationTimer.IsRunning
+- uid: Mapsui.Utilities.AnimationTimer.Start
+  name: Start()
+  href: api/Mapsui.Utilities.AnimationTimer.html#Mapsui_Utilities_AnimationTimer_Start
+  commentId: M:Mapsui.Utilities.AnimationTimer.Start
+  fullName: Mapsui.Utilities.AnimationTimer.Start()
+  nameWithType: AnimationTimer.Start()
+- uid: Mapsui.Utilities.AnimationTimer.Start*
+  name: Start
+  href: api/Mapsui.Utilities.AnimationTimer.html#Mapsui_Utilities_AnimationTimer_Start_
+  commentId: Overload:Mapsui.Utilities.AnimationTimer.Start
+  isSpec: "True"
+  fullName: Mapsui.Utilities.AnimationTimer.Start
+  nameWithType: AnimationTimer.Start
+- uid: Mapsui.Utilities.AnimationTimer.Stop
+  name: Stop()
+  href: api/Mapsui.Utilities.AnimationTimer.html#Mapsui_Utilities_AnimationTimer_Stop
+  commentId: M:Mapsui.Utilities.AnimationTimer.Stop
+  fullName: Mapsui.Utilities.AnimationTimer.Stop()
+  nameWithType: AnimationTimer.Stop()
+- uid: Mapsui.Utilities.AnimationTimer.Stop*
+  name: Stop
+  href: api/Mapsui.Utilities.AnimationTimer.html#Mapsui_Utilities_AnimationTimer_Stop_
+  commentId: Overload:Mapsui.Utilities.AnimationTimer.Stop
+  isSpec: "True"
+  fullName: Mapsui.Utilities.AnimationTimer.Stop
+  nameWithType: AnimationTimer.Stop
 - uid: Mapsui.Utilities.Constants
   name: Constants
   href: api/Mapsui.Utilities.Constants.html
@@ -29268,6 +29301,18 @@ references:
   fullName.vb: Mapsui.Utilities.Easing.Widening
   nameWithType: Easing.Implicit
   nameWithType.vb: Easing.Widening
+- uid: Mapsui.Utilities.Easing.QuarticIn
+  name: QuarticIn
+  href: api/Mapsui.Utilities.Easing.html#Mapsui_Utilities_Easing_QuarticIn
+  commentId: F:Mapsui.Utilities.Easing.QuarticIn
+  fullName: Mapsui.Utilities.Easing.QuarticIn
+  nameWithType: Easing.QuarticIn
+- uid: Mapsui.Utilities.Easing.QuarticOut
+  name: QuarticOut
+  href: api/Mapsui.Utilities.Easing.html#Mapsui_Utilities_Easing_QuarticOut
+  commentId: F:Mapsui.Utilities.Easing.QuarticOut
+  fullName: Mapsui.Utilities.Easing.QuarticOut
+  nameWithType: Easing.QuarticOut
 - uid: Mapsui.Utilities.Easing.SinIn
   name: SinIn
   href: api/Mapsui.Utilities.Easing.html#Mapsui_Utilities_Easing_SinIn
@@ -29317,6 +29362,64 @@ references:
   isSpec: "True"
   fullName: Mapsui.Utilities.EmbeddedResourceLoader.Load
   nameWithType: EmbeddedResourceLoader.Load
+- uid: Mapsui.Utilities.IAnimationTimer
+  name: IAnimationTimer
+  href: api/Mapsui.Utilities.IAnimationTimer.html
+  commentId: T:Mapsui.Utilities.IAnimationTimer
+  fullName: Mapsui.Utilities.IAnimationTimer
+  nameWithType: IAnimationTimer
+- uid: Mapsui.Utilities.IAnimationTimer.Duration
+  name: Duration
+  href: api/Mapsui.Utilities.IAnimationTimer.html#Mapsui_Utilities_IAnimationTimer_Duration
+  commentId: P:Mapsui.Utilities.IAnimationTimer.Duration
+  fullName: Mapsui.Utilities.IAnimationTimer.Duration
+  nameWithType: IAnimationTimer.Duration
+- uid: Mapsui.Utilities.IAnimationTimer.Duration*
+  name: Duration
+  href: api/Mapsui.Utilities.IAnimationTimer.html#Mapsui_Utilities_IAnimationTimer_Duration_
+  commentId: Overload:Mapsui.Utilities.IAnimationTimer.Duration
+  isSpec: "True"
+  fullName: Mapsui.Utilities.IAnimationTimer.Duration
+  nameWithType: IAnimationTimer.Duration
+- uid: Mapsui.Utilities.IAnimationTimer.IsRunning
+  name: IsRunning
+  href: api/Mapsui.Utilities.IAnimationTimer.html#Mapsui_Utilities_IAnimationTimer_IsRunning
+  commentId: P:Mapsui.Utilities.IAnimationTimer.IsRunning
+  fullName: Mapsui.Utilities.IAnimationTimer.IsRunning
+  nameWithType: IAnimationTimer.IsRunning
+- uid: Mapsui.Utilities.IAnimationTimer.IsRunning*
+  name: IsRunning
+  href: api/Mapsui.Utilities.IAnimationTimer.html#Mapsui_Utilities_IAnimationTimer_IsRunning_
+  commentId: Overload:Mapsui.Utilities.IAnimationTimer.IsRunning
+  isSpec: "True"
+  fullName: Mapsui.Utilities.IAnimationTimer.IsRunning
+  nameWithType: IAnimationTimer.IsRunning
+- uid: Mapsui.Utilities.IAnimationTimer.Start
+  name: Start()
+  href: api/Mapsui.Utilities.IAnimationTimer.html#Mapsui_Utilities_IAnimationTimer_Start
+  commentId: M:Mapsui.Utilities.IAnimationTimer.Start
+  fullName: Mapsui.Utilities.IAnimationTimer.Start()
+  nameWithType: IAnimationTimer.Start()
+- uid: Mapsui.Utilities.IAnimationTimer.Start*
+  name: Start
+  href: api/Mapsui.Utilities.IAnimationTimer.html#Mapsui_Utilities_IAnimationTimer_Start_
+  commentId: Overload:Mapsui.Utilities.IAnimationTimer.Start
+  isSpec: "True"
+  fullName: Mapsui.Utilities.IAnimationTimer.Start
+  nameWithType: IAnimationTimer.Start
+- uid: Mapsui.Utilities.IAnimationTimer.Stop
+  name: Stop()
+  href: api/Mapsui.Utilities.IAnimationTimer.html#Mapsui_Utilities_IAnimationTimer_Stop
+  commentId: M:Mapsui.Utilities.IAnimationTimer.Stop
+  fullName: Mapsui.Utilities.IAnimationTimer.Stop()
+  nameWithType: IAnimationTimer.Stop()
+- uid: Mapsui.Utilities.IAnimationTimer.Stop*
+  name: Stop
+  href: api/Mapsui.Utilities.IAnimationTimer.html#Mapsui_Utilities_IAnimationTimer_Stop_
+  commentId: Overload:Mapsui.Utilities.IAnimationTimer.Stop
+  isSpec: "True"
+  fullName: Mapsui.Utilities.IAnimationTimer.Stop
+  nameWithType: IAnimationTimer.Stop
 - uid: Mapsui.Utilities.OpenStreetMap
   name: OpenStreetMap
   href: api/Mapsui.Utilities.OpenStreetMap.html

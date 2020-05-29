@@ -128,19 +128,19 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_INavigator_CenterOn_Mapsui_Geometries_Point_.md&amp;value=---%0Auid%3A%20Mapsui.INavigator.CenterOn(Mapsui.Geometries.Point)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_INavigator_CenterOn_Mapsui_Geometries_Point_System_Int64_Mapsui_Utilities_Easing_.md&amp;value=---%0Auid%3A%20Mapsui.INavigator.CenterOn(Mapsui.Geometries.Point%2CSystem.Int64%2CMapsui.Utilities.Easing)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/INavigator.cs/#L38">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/INavigator.cs/#L57">View Source</a>
   </span>
   <a id="Mapsui_INavigator_CenterOn_" data-uid="Mapsui.INavigator.CenterOn*"></a>
-  <h4 id="Mapsui_INavigator_CenterOn_Mapsui_Geometries_Point_" data-uid="Mapsui.INavigator.CenterOn(Mapsui.Geometries.Point)">CenterOn(Point)</h4>
+  <h4 id="Mapsui_INavigator_CenterOn_Mapsui_Geometries_Point_System_Int64_Mapsui_Utilities_Easing_" data-uid="Mapsui.INavigator.CenterOn(Mapsui.Geometries.Point,System.Int64,Mapsui.Utilities.Easing)">CenterOn(Point, Int64, Easing)</h4>
   <div class="markdown level1 summary"><p>Change center of viewport</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void CenterOn(Point center)</code></pre>
+    <pre><code class="lang-csharp hljs">void CenterOn(Point center, long duration = 0L, Easing easing = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -158,23 +158,34 @@
         <td><p>New center point of viewport</p>
 </td>
       </tr>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td><p>Duration of animation in milliseconds</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Utilities.Easing.html">Easing</a></td>
+        <td><span class="parametername">easing</span></td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_INavigator_CenterOn_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.INavigator.CenterOn(System.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_INavigator_CenterOn_System_Double_System_Double_System_Int64_Mapsui_Utilities_Easing_.md&amp;value=---%0Auid%3A%20Mapsui.INavigator.CenterOn(System.Double%2CSystem.Double%2CSystem.Int64%2CMapsui.Utilities.Easing)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/INavigator.cs/#L45">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/INavigator.cs/#L65">View Source</a>
   </span>
   <a id="Mapsui_INavigator_CenterOn_" data-uid="Mapsui.INavigator.CenterOn*"></a>
-  <h4 id="Mapsui_INavigator_CenterOn_System_Double_System_Double_" data-uid="Mapsui.INavigator.CenterOn(System.Double,System.Double)">CenterOn(Double, Double)</h4>
+  <h4 id="Mapsui_INavigator_CenterOn_System_Double_System_Double_System_Int64_Mapsui_Utilities_Easing_" data-uid="Mapsui.INavigator.CenterOn(System.Double,System.Double,System.Int64,Mapsui.Utilities.Easing)">CenterOn(Double, Double, Int64, Easing)</h4>
   <div class="markdown level1 summary"><p>Change center of viewport to X/Y coordinates</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void CenterOn(double x, double y)</code></pre>
+    <pre><code class="lang-csharp hljs">void CenterOn(double x, double y, long duration = 0L, Easing easing = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -198,23 +209,80 @@
         <td><p>Y value of the new center</p>
 </td>
       </tr>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td><p>Duration of animation in milliseconds</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Utilities.Easing.html">Easing</a></td>
+        <td><span class="parametername">easing</span></td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_INavigator_NavigateTo_Mapsui_Geometries_BoundingBox_Mapsui_Utilities_ScaleMethod_.md&amp;value=---%0Auid%3A%20Mapsui.INavigator.NavigateTo(Mapsui.Geometries.BoundingBox%2CMapsui.Utilities.ScaleMethod)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_INavigator_FlingWith_System_Double_System_Double_System_Int64_.md&amp;value=---%0Auid%3A%20Mapsui.INavigator.FlingWith(System.Double%2CSystem.Double%2CSystem.Int64)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/INavigator.cs/#L19">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/INavigator.cs/#L104">View Source</a>
+  </span>
+  <a id="Mapsui_INavigator_FlingWith_" data-uid="Mapsui.INavigator.FlingWith*"></a>
+  <h4 id="Mapsui_INavigator_FlingWith_System_Double_System_Double_System_Int64_" data-uid="Mapsui.INavigator.FlingWith(System.Double,System.Double,System.Int64)">FlingWith(Double, Double, Int64)</h4>
+  <div class="markdown level1 summary"><p>Animate Fling of viewport</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void FlingWith(double velocityX, double velocityY, long maxDuration)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">velocityX</span></td>
+        <td><p>Screen VelocityX from SwipedEventArgs&gt;</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">velocityY</span></td>
+        <td><p>Screen VelocityX from SwipedEventArgs&gt;</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">maxDuration</span></td>
+        <td><p>Max duration of fling deceleration, changes based on total velocity&gt;</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_INavigator_NavigateTo_Mapsui_Geometries_BoundingBox_Mapsui_Utilities_ScaleMethod_System_Int64_Mapsui_Utilities_Easing_.md&amp;value=---%0Auid%3A%20Mapsui.INavigator.NavigateTo(Mapsui.Geometries.BoundingBox%2CMapsui.Utilities.ScaleMethod%2CSystem.Int64%2CMapsui.Utilities.Easing)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/INavigator.cs/#L20">View Source</a>
   </span>
   <a id="Mapsui_INavigator_NavigateTo_" data-uid="Mapsui.INavigator.NavigateTo*"></a>
-  <h4 id="Mapsui_INavigator_NavigateTo_Mapsui_Geometries_BoundingBox_Mapsui_Utilities_ScaleMethod_" data-uid="Mapsui.INavigator.NavigateTo(Mapsui.Geometries.BoundingBox,Mapsui.Utilities.ScaleMethod)">NavigateTo(BoundingBox, ScaleMethod)</h4>
+  <h4 id="Mapsui_INavigator_NavigateTo_Mapsui_Geometries_BoundingBox_Mapsui_Utilities_ScaleMethod_System_Int64_Mapsui_Utilities_Easing_" data-uid="Mapsui.INavigator.NavigateTo(Mapsui.Geometries.BoundingBox,Mapsui.Utilities.ScaleMethod,System.Int64,Mapsui.Utilities.Easing)">NavigateTo(BoundingBox, ScaleMethod, Int64, Easing)</h4>
   <div class="markdown level1 summary"><p>Navigate center of viewport to center of extent and change resolution</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void NavigateTo(BoundingBox extent, ScaleMethod scaleMethod = ScaleMethod.Fit)</code></pre>
+    <pre><code class="lang-csharp hljs">void NavigateTo(BoundingBox extent, ScaleMethod scaleMethod = ScaleMethod.Fit, long duration = 0L, Easing easing = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -238,23 +306,34 @@
         <td><p>Scale method to use to determin resolution</p>
 </td>
       </tr>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td><p>Duration of animation in milliseconds</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Utilities.Easing.html">Easing</a></td>
+        <td><span class="parametername">easing</span></td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_INavigator_NavigateTo_Mapsui_Geometries_Point_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.INavigator.NavigateTo(Mapsui.Geometries.Point%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_INavigator_NavigateTo_Mapsui_Geometries_Point_System_Double_System_Int64_Mapsui_Utilities_Easing_.md&amp;value=---%0Auid%3A%20Mapsui.INavigator.NavigateTo(Mapsui.Geometries.Point%2CSystem.Double%2CSystem.Int64%2CMapsui.Utilities.Easing)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/INavigator.cs/#L26">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/INavigator.cs/#L28">View Source</a>
   </span>
   <a id="Mapsui_INavigator_NavigateTo_" data-uid="Mapsui.INavigator.NavigateTo*"></a>
-  <h4 id="Mapsui_INavigator_NavigateTo_Mapsui_Geometries_Point_System_Double_" data-uid="Mapsui.INavigator.NavigateTo(Mapsui.Geometries.Point,System.Double)">NavigateTo(Point, Double)</h4>
+  <h4 id="Mapsui_INavigator_NavigateTo_Mapsui_Geometries_Point_System_Double_System_Int64_Mapsui_Utilities_Easing_" data-uid="Mapsui.INavigator.NavigateTo(Mapsui.Geometries.Point,System.Double,System.Int64,Mapsui.Utilities.Easing)">NavigateTo(Point, Double, Int64, Easing)</h4>
   <div class="markdown level1 summary"><p>Change both center and resolution of the viewport</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void NavigateTo(Point center, double resolution)</code></pre>
+    <pre><code class="lang-csharp hljs">void NavigateTo(Point center, double resolution, long duration = 0L, Easing easing = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -278,22 +357,34 @@
         <td><p>The new resolution</p>
 </td>
       </tr>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td><p>Duration of animation in milliseconds</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Utilities.Easing.html">Easing</a></td>
+        <td><span class="parametername">easing</span></td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_INavigator_NavigateToFullEnvelope_Mapsui_Utilities_ScaleMethod_.md&amp;value=---%0Auid%3A%20Mapsui.INavigator.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_INavigator_NavigateToFullEnvelope_Mapsui_Utilities_ScaleMethod_System_Int64_Mapsui_Utilities_Easing_.md&amp;value=---%0Auid%3A%20Mapsui.INavigator.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod%2CSystem.Int64%2CMapsui.Utilities.Easing)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/INavigator.cs/#L61">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/INavigator.cs/#L35">View Source</a>
   </span>
   <a id="Mapsui_INavigator_NavigateToFullEnvelope_" data-uid="Mapsui.INavigator.NavigateToFullEnvelope*"></a>
-  <h4 id="Mapsui_INavigator_NavigateToFullEnvelope_Mapsui_Utilities_ScaleMethod_" data-uid="Mapsui.INavigator.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod)">NavigateToFullEnvelope(ScaleMethod)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="Mapsui_INavigator_NavigateToFullEnvelope_Mapsui_Utilities_ScaleMethod_System_Int64_Mapsui_Utilities_Easing_" data-uid="Mapsui.INavigator.NavigateToFullEnvelope(Mapsui.Utilities.ScaleMethod,System.Int64,Mapsui.Utilities.Easing)">NavigateToFullEnvelope(ScaleMethod, Int64, Easing)</h4>
+  <div class="markdown level1 summary"><p>Navigate to a resolution, so such the map uses the fill method</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void NavigateToFullEnvelope(ScaleMethod scaleMethod = ScaleMethod.Fill)</code></pre>
+    <pre><code class="lang-csharp hljs">void NavigateToFullEnvelope(ScaleMethod scaleMethod = ScaleMethod.Fill, long duration = 0L, Easing easing = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -310,23 +401,34 @@
         <td><span class="parametername">scaleMethod</span></td>
         <td></td>
       </tr>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td><p>Duration of animation in millisecondsScale method to use to determine resolution</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Utilities.Easing.html">Easing</a></td>
+        <td><span class="parametername">easing</span></td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_INavigator_RotateTo_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.INavigator.RotateTo(System.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_INavigator_RotateTo_System_Double_System_Int64_Mapsui_Utilities_Easing_.md&amp;value=---%0Auid%3A%20Mapsui.INavigator.RotateTo(System.Double%2CSystem.Int64%2CMapsui.Utilities.Easing)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/INavigator.cs/#L51">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/INavigator.cs/#L72">View Source</a>
   </span>
   <a id="Mapsui_INavigator_RotateTo_" data-uid="Mapsui.INavigator.RotateTo*"></a>
-  <h4 id="Mapsui_INavigator_RotateTo_System_Double_" data-uid="Mapsui.INavigator.RotateTo(System.Double)">RotateTo(Double)</h4>
+  <h4 id="Mapsui_INavigator_RotateTo_System_Double_System_Int64_Mapsui_Utilities_Easing_" data-uid="Mapsui.INavigator.RotateTo(System.Double,System.Int64,Mapsui.Utilities.Easing)">RotateTo(Double, Int64, Easing)</h4>
   <div class="markdown level1 summary"><p>Change rotation of viewport</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void RotateTo(double rotation)</code></pre>
+    <pre><code class="lang-csharp hljs">void RotateTo(double rotation, long duration = 0L, Easing easing = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -344,117 +446,216 @@
         <td><p>New rotation in degrees of viewport&gt;</p>
 </td>
       </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_INavigator_ZoomIn.md&amp;value=---%0Auid%3A%20Mapsui.INavigator.ZoomIn%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/INavigator.cs/#L55">View Source</a>
-  </span>
-  <a id="Mapsui_INavigator_ZoomIn_" data-uid="Mapsui.INavigator.ZoomIn*"></a>
-  <h4 id="Mapsui_INavigator_ZoomIn" data-uid="Mapsui.INavigator.ZoomIn">ZoomIn()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void ZoomIn()</code></pre>
-  </div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_INavigator_ZoomIn_Mapsui_Geometries_Point_.md&amp;value=---%0Auid%3A%20Mapsui.INavigator.ZoomIn(Mapsui.Geometries.Point)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/INavigator.cs/#L57">View Source</a>
-  </span>
-  <a id="Mapsui_INavigator_ZoomIn_" data-uid="Mapsui.INavigator.ZoomIn*"></a>
-  <h4 id="Mapsui_INavigator_ZoomIn_Mapsui_Geometries_Point_" data-uid="Mapsui.INavigator.ZoomIn(Mapsui.Geometries.Point)">ZoomIn(Point)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void ZoomIn(Point centerOfZoom)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
       <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td><p>Duration of animation in milliseconds</p>
+</td>
       </tr>
-    </thead>
-    <tbody>
       <tr>
-        <td><a class="xref" href="Mapsui.Geometries.Point.html">Point</a></td>
-        <td><span class="parametername">centerOfZoom</span></td>
+        <td><a class="xref" href="Mapsui.Utilities.Easing.html">Easing</a></td>
+        <td><span class="parametername">easing</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_INavigator_ZoomOut.md&amp;value=---%0Auid%3A%20Mapsui.INavigator.ZoomOut%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_INavigator_StopRunningAnimation.md&amp;value=---%0Auid%3A%20Mapsui.INavigator.StopRunningAnimation%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/INavigator.cs/#L53">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/INavigator.cs/#L109">View Source</a>
   </span>
-  <a id="Mapsui_INavigator_ZoomOut_" data-uid="Mapsui.INavigator.ZoomOut*"></a>
-  <h4 id="Mapsui_INavigator_ZoomOut" data-uid="Mapsui.INavigator.ZoomOut">ZoomOut()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void ZoomOut()</code></pre>
-  </div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_INavigator_ZoomOut_Mapsui_Geometries_Point_.md&amp;value=---%0Auid%3A%20Mapsui.INavigator.ZoomOut(Mapsui.Geometries.Point)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/INavigator.cs/#L59">View Source</a>
-  </span>
-  <a id="Mapsui_INavigator_ZoomOut_" data-uid="Mapsui.INavigator.ZoomOut*"></a>
-  <h4 id="Mapsui_INavigator_ZoomOut_Mapsui_Geometries_Point_" data-uid="Mapsui.INavigator.ZoomOut(Mapsui.Geometries.Point)">ZoomOut(Point)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void ZoomOut(Point centerOfZoom)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Mapsui.Geometries.Point.html">Point</a></td>
-        <td><span class="parametername">centerOfZoom</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_INavigator_ZoomTo_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.INavigator.ZoomTo(System.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/INavigator.cs/#L32">View Source</a>
-  </span>
-  <a id="Mapsui_INavigator_ZoomTo_" data-uid="Mapsui.INavigator.ZoomTo*"></a>
-  <h4 id="Mapsui_INavigator_ZoomTo_System_Double_" data-uid="Mapsui.INavigator.ZoomTo(System.Double)">ZoomTo(Double)</h4>
-  <div class="markdown level1 summary"><p>Change resolution of viewport</p>
+  <a id="Mapsui_INavigator_StopRunningAnimation_" data-uid="Mapsui.INavigator.StopRunningAnimation*"></a>
+  <h4 id="Mapsui_INavigator_StopRunningAnimation" data-uid="Mapsui.INavigator.StopRunningAnimation">StopRunningAnimation()</h4>
+  <div class="markdown level1 summary"><p>Stop any current animation if it is running</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void ZoomTo(double resolution)</code></pre>
+    <pre><code class="lang-csharp hljs">void StopRunningAnimation()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_INavigator_ZoomIn_Mapsui_Geometries_Point_System_Int64_Mapsui_Utilities_Easing_.md&amp;value=---%0Auid%3A%20Mapsui.INavigator.ZoomIn(Mapsui.Geometries.Point%2CSystem.Int64%2CMapsui.Utilities.Easing)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/INavigator.cs/#L90">View Source</a>
+  </span>
+  <a id="Mapsui_INavigator_ZoomIn_" data-uid="Mapsui.INavigator.ZoomIn*"></a>
+  <h4 id="Mapsui_INavigator_ZoomIn_Mapsui_Geometries_Point_System_Int64_Mapsui_Utilities_Easing_" data-uid="Mapsui.INavigator.ZoomIn(Mapsui.Geometries.Point,System.Int64,Mapsui.Utilities.Easing)">ZoomIn(Point, Int64, Easing)</h4>
+  <div class="markdown level1 summary"><p>Zoom in about a given point</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void ZoomIn(Point centerOfZoom, long duration = 0L, Easing easing = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Geometries.Point.html">Point</a></td>
+        <td><span class="parametername">centerOfZoom</span></td>
+        <td><p>Center to use for zoom in</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Utilities.Easing.html">Easing</a></td>
+        <td><span class="parametername">easing</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_INavigator_ZoomIn_System_Int64_Mapsui_Utilities_Easing_.md&amp;value=---%0Auid%3A%20Mapsui.INavigator.ZoomIn(System.Int64%2CMapsui.Utilities.Easing)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/INavigator.cs/#L84">View Source</a>
+  </span>
+  <a id="Mapsui_INavigator_ZoomIn_" data-uid="Mapsui.INavigator.ZoomIn*"></a>
+  <h4 id="Mapsui_INavigator_ZoomIn_System_Int64_Mapsui_Utilities_Easing_" data-uid="Mapsui.INavigator.ZoomIn(System.Int64,Mapsui.Utilities.Easing)">ZoomIn(Int64, Easing)</h4>
+  <div class="markdown level1 summary"><p>Zoom in to the next resolution</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void ZoomIn(long duration = 0L, Easing easing = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td><p>Duration of animation in milliseconds</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Utilities.Easing.html">Easing</a></td>
+        <td><span class="parametername">easing</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_INavigator_ZoomOut_Mapsui_Geometries_Point_System_Int64_Mapsui_Utilities_Easing_.md&amp;value=---%0Auid%3A%20Mapsui.INavigator.ZoomOut(Mapsui.Geometries.Point%2CSystem.Int64%2CMapsui.Utilities.Easing)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/INavigator.cs/#L96">View Source</a>
+  </span>
+  <a id="Mapsui_INavigator_ZoomOut_" data-uid="Mapsui.INavigator.ZoomOut*"></a>
+  <h4 id="Mapsui_INavigator_ZoomOut_Mapsui_Geometries_Point_System_Int64_Mapsui_Utilities_Easing_" data-uid="Mapsui.INavigator.ZoomOut(Mapsui.Geometries.Point,System.Int64,Mapsui.Utilities.Easing)">ZoomOut(Point, Int64, Easing)</h4>
+  <div class="markdown level1 summary"><p>Zoom out about a given point</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void ZoomOut(Point centerOfZoom, long duration = 0L, Easing easing = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Geometries.Point.html">Point</a></td>
+        <td><span class="parametername">centerOfZoom</span></td>
+        <td><p>Center to use for zoom in</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Utilities.Easing.html">Easing</a></td>
+        <td><span class="parametername">easing</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_INavigator_ZoomOut_System_Int64_Mapsui_Utilities_Easing_.md&amp;value=---%0Auid%3A%20Mapsui.INavigator.ZoomOut(System.Int64%2CMapsui.Utilities.Easing)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/INavigator.cs/#L78">View Source</a>
+  </span>
+  <a id="Mapsui_INavigator_ZoomOut_" data-uid="Mapsui.INavigator.ZoomOut*"></a>
+  <h4 id="Mapsui_INavigator_ZoomOut_System_Int64_Mapsui_Utilities_Easing_" data-uid="Mapsui.INavigator.ZoomOut(System.Int64,Mapsui.Utilities.Easing)">ZoomOut(Int64, Easing)</h4>
+  <div class="markdown level1 summary"><p>Zoom out to the next resolution</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void ZoomOut(long duration = 0L, Easing easing = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td><p>Duration of animation in milliseconds</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Utilities.Easing.html">Easing</a></td>
+        <td><span class="parametername">easing</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_INavigator_ZoomTo_System_Double_Mapsui_Geometries_Point_System_Int64_Mapsui_Utilities_Easing_.md&amp;value=---%0Auid%3A%20Mapsui.INavigator.ZoomTo(System.Double%2CMapsui.Geometries.Point%2CSystem.Int64%2CMapsui.Utilities.Easing)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/INavigator.cs/#L50">View Source</a>
+  </span>
+  <a id="Mapsui_INavigator_ZoomTo_" data-uid="Mapsui.INavigator.ZoomTo*"></a>
+  <h4 id="Mapsui_INavigator_ZoomTo_System_Double_Mapsui_Geometries_Point_System_Int64_Mapsui_Utilities_Easing_" data-uid="Mapsui.INavigator.ZoomTo(System.Double,Mapsui.Geometries.Point,System.Int64,Mapsui.Utilities.Easing)">ZoomTo(Double, Point, Int64, Easing)</h4>
+  <div class="markdown level1 summary"><p>Change resolution of viewport about the centerOfZoom</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void ZoomTo(double resolution, Point centerOfZoom, long duration = 0L, Easing easing = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -472,22 +673,39 @@
         <td><p>New resolution to use</p>
 </td>
       </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Geometries.Point.html">Point</a></td>
+        <td><span class="parametername">centerOfZoom</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td><p>Duration of animation in milliseconds</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Utilities.Easing.html">Easing</a></td>
+        <td><span class="parametername">easing</span></td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_INavigator_ZoomTo_System_Double_Mapsui_Geometries_Point_.md&amp;value=---%0Auid%3A%20Mapsui.INavigator.ZoomTo(System.Double%2CMapsui.Geometries.Point)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_INavigator_ZoomTo_System_Double_System_Int64_Mapsui_Utilities_Easing_.md&amp;value=---%0Auid%3A%20Mapsui.INavigator.ZoomTo(System.Double%2CSystem.Int64%2CMapsui.Utilities.Easing)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/INavigator.cs/#L63">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/INavigator.cs/#L42">View Source</a>
   </span>
   <a id="Mapsui_INavigator_ZoomTo_" data-uid="Mapsui.INavigator.ZoomTo*"></a>
-  <h4 id="Mapsui_INavigator_ZoomTo_System_Double_Mapsui_Geometries_Point_" data-uid="Mapsui.INavigator.ZoomTo(System.Double,Mapsui.Geometries.Point)">ZoomTo(Double, Point)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="Mapsui_INavigator_ZoomTo_System_Double_System_Int64_Mapsui_Utilities_Easing_" data-uid="Mapsui.INavigator.ZoomTo(System.Double,System.Int64,Mapsui.Utilities.Easing)">ZoomTo(Double, Int64, Easing)</h4>
+  <div class="markdown level1 summary"><p>Change resolution of viewport</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void ZoomTo(double resolution, Point centerOfZoom)</code></pre>
+    <pre><code class="lang-csharp hljs">void ZoomTo(double resolution, long duration = 0L, Easing easing = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -502,11 +720,18 @@
       <tr>
         <td><span class="xref">System.Double</span></td>
         <td><span class="parametername">resolution</span></td>
-        <td></td>
+        <td><p>New resolution to use</p>
+</td>
       </tr>
       <tr>
-        <td><a class="xref" href="Mapsui.Geometries.Point.html">Point</a></td>
-        <td><span class="parametername">centerOfZoom</span></td>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">duration</span></td>
+        <td><p>Duration of animation in milliseconds</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Utilities.Easing.html">Easing</a></td>
+        <td><span class="parametername">easing</span></td>
         <td></td>
       </tr>
     </tbody>
