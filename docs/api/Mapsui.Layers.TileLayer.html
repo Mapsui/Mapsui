@@ -195,19 +195,19 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_TileLayer__ctor_BruTile_ITileSource_System_Int32_System_Int32_System_Int32_Mapsui_Fetcher_IFetchStrategy_Mapsui_Rendering_IRenderGetStrategy_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20Mapsui.Layers.TileLayer.%23ctor(BruTile.ITileSource%2CSystem.Int32%2CSystem.Int32%2CSystem.Int32%2CMapsui.Fetcher.IFetchStrategy%2CMapsui.Rendering.IRenderGetStrategy%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_TileLayer__ctor_BruTile_ITileSource_System_Int32_System_Int32_System_Int32_Mapsui_Fetcher_IFetchStrategy_Mapsui_Rendering_IRenderGetStrategy_System_Int32_System_Int32_System_Func_BruTile_TileInfo_System_Object_Mapsui_Providers_Feature__System_Func_BruTile_TileInfo_System_Object__.md&amp;value=---%0Auid%3A%20Mapsui.Layers.TileLayer.%23ctor(BruTile.ITileSource%2CSystem.Int32%2CSystem.Int32%2CSystem.Int32%2CMapsui.Fetcher.IFetchStrategy%2CMapsui.Rendering.IRenderGetStrategy%2CSystem.Int32%2CSystem.Int32%2CSystem.Func%7BBruTile.TileInfo%2CSystem.Object%2CMapsui.Providers.Feature%7D%2CSystem.Func%7BBruTile.TileInfo%2CSystem.Object%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/TileLayer.cs/#L81">View Source</a>
   </span>
   <a id="Mapsui_Layers_TileLayer__ctor_" data-uid="Mapsui.Layers.TileLayer.#ctor*"></a>
-  <h4 id="Mapsui_Layers_TileLayer__ctor_BruTile_ITileSource_System_Int32_System_Int32_System_Int32_Mapsui_Fetcher_IFetchStrategy_Mapsui_Rendering_IRenderGetStrategy_System_Int32_System_Int32_" data-uid="Mapsui.Layers.TileLayer.#ctor(BruTile.ITileSource,System.Int32,System.Int32,System.Int32,Mapsui.Fetcher.IFetchStrategy,Mapsui.Rendering.IRenderGetStrategy,System.Int32,System.Int32)">TileLayer(ITileSource, Int32, Int32, Int32, IFetchStrategy, IRenderGetStrategy, Int32, Int32)</h4>
+  <h4 id="Mapsui_Layers_TileLayer__ctor_BruTile_ITileSource_System_Int32_System_Int32_System_Int32_Mapsui_Fetcher_IFetchStrategy_Mapsui_Rendering_IRenderGetStrategy_System_Int32_System_Int32_System_Func_BruTile_TileInfo_System_Object_Mapsui_Providers_Feature__System_Func_BruTile_TileInfo_System_Object__" data-uid="Mapsui.Layers.TileLayer.#ctor(BruTile.ITileSource,System.Int32,System.Int32,System.Int32,Mapsui.Fetcher.IFetchStrategy,Mapsui.Rendering.IRenderGetStrategy,System.Int32,System.Int32,System.Func{BruTile.TileInfo,System.Object,Mapsui.Providers.Feature},System.Func{BruTile.TileInfo,System.Object})">TileLayer(ITileSource, Int32, Int32, Int32, IFetchStrategy, IRenderGetStrategy, Int32, Int32, Func&lt;TileInfo, Object, Feature&gt;, Func&lt;TileInfo, Object&gt;)</h4>
   <div class="markdown level1 summary"><p>Create tile layer for given tile source</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public TileLayer(ITileSource source = null, int minTiles = 200, int maxTiles = 300, int maxRetries = 2, IFetchStrategy fetchStrategy = null, IRenderGetStrategy renderGetStrategy = null, int minExtraTiles = -1, int maxExtraTiles = -1)</code></pre>
+    <pre><code class="lang-csharp hljs">public TileLayer(ITileSource source = null, int minTiles = 200, int maxTiles = 300, int maxRetries = 2, IFetchStrategy fetchStrategy = null, IRenderGetStrategy renderGetStrategy = null, int minExtraTiles = -1, int maxExtraTiles = -1, Func&lt;TileInfo, object, Feature&gt; fetchToFeature = null, Func&lt;TileInfo, object&gt; fetchGetTile = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -265,6 +265,16 @@
         <td><span class="parametername">maxExtraTiles</span></td>
         <td><p>Number of maximum extra tiles for memory cache</p>
 </td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;<span class="xref">BruTile.TileInfo</span>, <span class="xref">System.Object</span>, <a class="xref" href="Mapsui.Providers.Feature.html">Feature</a>&gt;</td>
+        <td><span class="parametername">fetchToFeature</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Func</span>&lt;<span class="xref">BruTile.TileInfo</span>, <span class="xref">System.Object</span>&gt;</td>
+        <td><span class="parametername">fetchGetTile</span></td>
+        <td></td>
       </tr>
     </tbody>
   </table>

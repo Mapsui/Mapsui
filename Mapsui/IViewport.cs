@@ -24,6 +24,7 @@ namespace Mapsui
         void SetCenter(double x, double y);
         void SetCenter(ReadOnlyPoint center);
         void SetResolution(double resolution);
+        void SetResolution(double resolution, ReadOnlyPoint centerOfZoom);
         void SetRotation(double rotation);
         void SetSize(double width, double height);
 

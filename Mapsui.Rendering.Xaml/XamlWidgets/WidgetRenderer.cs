@@ -23,6 +23,8 @@ namespace Mapsui.Rendering.Xaml.XamlWidgets
             canvas.Children.Add(widgetCanvas);
             foreach (var widget in widgets)
             {
+                if (!widget.Enabled) continue;
+
                 ((IXamlWidgetRenderer)renderers[widget.GetType()]).Draw(widgetCanvas, viewport, widget);
             }
         }

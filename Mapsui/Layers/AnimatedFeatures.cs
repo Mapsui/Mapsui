@@ -28,7 +28,7 @@ namespace Mapsui.Layers
         /// </summary>
         public double DistanceThreshold { get; set; }
 
-        public AnimatedFeatures(int millisecondsBetweenUpdates = 16)
+        public AnimatedFeatures(int millisecondsBetweenUpdates = 8)
         {
             AnimationDuration = 1000;
             IdField = "ID";

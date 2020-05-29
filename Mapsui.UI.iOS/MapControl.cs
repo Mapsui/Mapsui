@@ -9,6 +9,7 @@ using CoreGraphics;
 using Mapsui.Geometries;
 using Mapsui.Geometries.Utilities;
 using SkiaSharp.Views.iOS;
+using Mapsui.Utilities;
 
 namespace Mapsui.UI.iOS
 {
@@ -34,6 +35,8 @@ namespace Mapsui.UI.iOS
         {
             Map = new Map();
             BackgroundColor = UIColor.White;
+
+            Animation.AnimationTimer = new AnimationTimer(this);
 
             _canvas.TranslatesAutoresizingMaskIntoConstraints = false;
             _canvas.MultipleTouchEnabled = true;
@@ -93,6 +96,9 @@ namespace Mapsui.UI.iOS
 
             args.Surface.Canvas.Scale(PixelDensity, PixelDensity);
 
+            if (Animation.NeedsUpdate)
+                Animation.UpdateAnimations();
+
             Renderer.Render(args.Surface.Canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
         }
 
@@ -101,6 +107,9 @@ namespace Mapsui.UI.iOS
             base.TouchesBegan(touches, evt);
 
             _innerRotation = Viewport.Rotation;
+
+            // We have a new interaction with the screen, so stop all navigator animations
+            Navigator.StopRunningAnimation();
         }
 
         public override void TouchesMoved(NSSet touches, UIEvent evt)

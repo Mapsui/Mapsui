@@ -166,10 +166,10 @@
       <Version>6.2.10</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp">
-      <Version>1.68.2-preview.60</Version>
+      <Version>1.68.2.1</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Views">
-      <Version>1.68.2-preview.60</Version>
+      <Version>1.68.2.1</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

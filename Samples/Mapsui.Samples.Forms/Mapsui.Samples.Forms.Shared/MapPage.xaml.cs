@@ -44,6 +44,7 @@ namespace Mapsui.Samples.Forms
 
         protected override void OnAppearing()
         {
+            mapView.IsVisible = true;
             mapView.Refresh();
         }
 
