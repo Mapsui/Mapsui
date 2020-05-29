@@ -180,7 +180,7 @@ namespace Mapsui.UI.Wpf
             // If the animation has ended then start from the current resolution.
             // The alternative is that use the previous resolution target and add an extra
             // level to that.
-            if ((Environment.TickCount - _mouseWheelTickCount) > _mouseWheelAnimationDuration)
+            if (!DuringMouseWheelAnimation())
                 _toResolution = Viewport.Resolution;
 
             if (e.Delta > Constants.Epsilon)
@@ -198,6 +198,11 @@ namespace Mapsui.UI.Wpf
             _mouseWheelTickCount = Environment.TickCount;
 
             Navigator.ZoomTo(_toResolution, _currentMousePosition, _mouseWheelAnimationDuration, Easing.QuarticOut);
+        }
+
+        private bool DuringMouseWheelAnimation()
+        {
+            return (Environment.TickCount - _mouseWheelTickCount) < _mouseWheelAnimationDuration;
         }
 
         private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
@@ -368,6 +373,13 @@ namespace Mapsui.UI.Wpf
                 _viewport.Transform(_currentMousePosition, _previousMousePosition);
                 RefreshGraphics();
                 _previousMousePosition = _currentMousePosition;
+            }
+            else
+            {
+                if (DuringMouseWheelAnimation())
+                {
+                    Navigator.ZoomTo(_toResolution, _currentMousePosition, _mouseWheelAnimationDuration, Easing.QuarticOut);
+                }
             }
         }
 
