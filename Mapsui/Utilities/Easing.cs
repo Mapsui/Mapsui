@@ -38,8 +38,10 @@ namespace Mapsui.Utilities
 
         public static readonly Easing CubicIn = new Easing(x => x * x * x);
         public static readonly Easing CubicOut = new Easing(x => Math.Pow(x - 1.0f, 3.0f) + 1.0f);
-
         public static readonly Easing CubicInOut = new Easing(x => x < 0.5f ? Math.Pow(x * 2.0f, 3.0f) / 2.0f : (Math.Pow((x - 1) * 2.0f, 3.0f) + 2.0f) / 2.0f);
+
+        public static readonly Easing QuarticIn = new Easing(x => x * x * x * x * x);
+        public static readonly Easing QuarticOut = new Easing(x => 1 - (--x) * x * x * x);
 
         public static readonly Easing BounceOut;
         public static readonly Easing BounceIn;
