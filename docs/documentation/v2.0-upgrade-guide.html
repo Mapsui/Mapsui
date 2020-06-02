@@ -129,6 +129,28 @@ It it is still possible to implement hover yourself using a direct call to MapCo
 to do a search-replace to fix it.</p>
 <h4 id="removed-zoominzoomout-from-wpf-mapcontrol">Removed ZoomIn/ZoomOut from WPF MapControl</h4>
 <p>Use the ZoomIn/ZoomOut methode on the navigator.</p>
+<h4 id="some-other-changes">Some other changes</h4>
+<ul>
+<li>Do not derive ILayer from IAsyncDataFetcher.</li>
+<li>Add an Action<viewport> field to the Map to zoom to &#39;home&#39; viewport. </viewport></li>
+<li>Remove Viewport from Map.</li>
+<li>Remove Navigate methods from Map.</li>
+<li>Go to .NET Standard</li>
+<li>Rename Map.ViewChanged to Map.RefreshData</li>
+<li>Remove WPFs MapControl.ErrorMessage</li>
+<li>Rename PanMode.None and ZoomMode.None.</li>
+<li>Rename BoundingBox.GetCentroid to Centroid</li>
+<li>Rename IGeometry.GetBoundingBox to BoundingBox</li>
+<li>Move Info event from Map to MapControl</li>
+<li>Remove the InfoLayer list and add an InfoLayer boolean on ILayer</li>
+<li>Remove the HoverLayer method. It is not crossplatform and can affect performance. </li>
+<li>Invert label alignment bottom/top.</li>
+<li>Remove ZoomIn/ZoomOut from WPF MapControl and turn into Navigate method.</li>
+<li>Wrap Viewport in LimitingViewport which limits it to user settings, or access through Navigator.</li>
+<li>PanLock and ZoomLock working on all platforms. </li>
+<li>Rework ViewportLimiter </li>
+<li>Add Xamarin.Forms MapControl</li>
+</ul>
 </article>
           </div>
           
