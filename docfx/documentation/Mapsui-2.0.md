@@ -1,12 +1,7 @@
 # Mapsui 2.0
 
-At the moment we are working on Mapsui v2. The core libraries are .NET Standard instead of PCLs. Here are some of the changes that may go into v2.
+Mapsui 2.0 has been released May 2020. The core libraries of v2 are .NET Standard instead of PCLs. Here is a list of other changes.
 
-### Todo
-- Testing.
-- Some possible rework following from user feedback.
-
-### Done
 - Do not derive ILayer from IAsyncDataFetcher.
 - Add an Action<Viewport> field to the Map to zoom to 'home' viewport. 
 - Remove Viewport from Map.
@@ -27,7 +22,6 @@ At the moment we are working on Mapsui v2. The core libraries are .NET Standard 
 - Rework ViewportLimiter 
 - Add Xamarin.Forms MapControl
 
-### Not (Later)
+### Not yet
 - Use NTS for Geometries
-- Perhaps add animation in an AnimatedViewport which wraps the actual Viewport.
 - Replace ILayer.Style with an ILayer.Styles of type ICollection<IFeature> which is empty by default
