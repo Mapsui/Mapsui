@@ -9,11 +9,12 @@ namespace Mapsui
     {
         private readonly Map _map;
         private readonly IViewport _viewport;
-        private Animation _animation;
+        private ViewportAnimation _animation = new ViewportAnimation();
         private double _rotationDelta;
-        private Point _animationZoomCenter;
-
         private static long _defaultDuration = 0;
+        AnimationEntry animationRotation;
+        AnimationEntry animationCenter;
+        AnimationEntry animationResolution;
 
         /// <summary>
         /// Default value for duration, if nothing is given by the different functions
@@ -36,6 +37,54 @@ namespace Mapsui
         {
             _map = map;
             _viewport = viewport;
+
+            // Idea:
+            // Add animations up front for the 3 variables we want to animate
+            // 1. Center
+            // 2. Resolution
+            // 3. Rotation
+            // Animation of the viewport should only go through these variables.
+            // Problem: Two step animation like we use with fly over.
+
+            var animations = new List<AnimationEntry>();
+
+            animationCenter = new AnimationEntry(
+                start: null,
+                end: null,
+                animationStart: 0,
+                animationEnd: 1,
+                easing: Easing.SinInOut,
+                tick: CenterTick,
+                final: CenterFinal
+            );
+            animations.Add(animationCenter);
+
+            animationResolution = new AnimationEntry(
+                start: null,
+                end: null,
+                animationStart: 0,
+                animationEnd: 1,
+                easing: Easing.CubicInOut,
+                tick: ResolutionTick,
+                final: ResolutionFinal
+            );
+            animations.Add(animationResolution);
+
+            animationRotation = new AnimationEntry(
+                start: null,
+                end: null,
+                animationStart: 0,
+                animationEnd: 1,
+                easing: Easing.SinInOut,
+                tick: RotationTick,
+                final: RotationFinal
+            );
+
+            animations.Add(animationRotation);
+
+            _animation.Entries.AddRange(animations);
+
+            _animation.Ticked += (s, e) => Navigated?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -86,41 +135,28 @@ namespace Mapsui
             }
             else
             {
-                var animations = new List<AnimationEntry>();
-
                 if (!_viewport.Center.Equals(center))
                 {
-                    var entry = new AnimationEntry(
-                        start: _viewport.Center,
-                        end: (ReadOnlyPoint)center,
-                        animationStart: 0,
-                        animationEnd: 1,
-                        easing: easing ?? Easing.SinInOut,
-                        tick: CenterTick,
-                        final: CenterFinal
-                    );
-                    animations.Add(entry);
+                    animationCenter.Start = _viewport.Center;
+                    animationCenter.End = (ReadOnlyPoint)center;
+                    animationCenter.AnimationStart = 0;
+                    animationCenter.AnimationEnd = 1;
+                    animationCenter.Easing = easing ?? Easing.SinInOut;
+                    animationCenter.Enabled = true;
                 }
 
                 if (_viewport.Resolution != resolution)
                 {
-                    var entry = new AnimationEntry(
-                        start: _viewport.Resolution,
-                        end: resolution,
-                        animationStart: 0,
-                        animationEnd: 1,
-                        easing: easing ?? Easing.SinInOut,
-                        tick: ResolutionTick,
-                        final: ResolutionFinal
-                    );
-                    animations.Add(entry);
+                    animationResolution.Start = _viewport.Resolution;
+                    animationResolution.End = resolution;
+                    animationResolution.AnimationStart = 0;
+                    animationResolution.AnimationEnd = 1;
+                    animationResolution.Easing = easing ?? Easing.SinInOut;
+                    animationResolution.Enabled = true;
                 }
 
-                if (animations.Count == 0)
-                    return;
-
-                _animation = new Animation(duration);
-                _animation.Entries.AddRange(animations);
+                animationRotation.Enabled = false;
+                _animation.Duration = duration;
                 _animation.Start();
             }
         }
@@ -156,24 +192,17 @@ namespace Mapsui
             }
             else
             {
-                var animations = new List<AnimationEntry>();
-
                 if (_viewport.Resolution == resolution)
                     return;
 
-                var entry = new AnimationEntry(
-                    start: _viewport.Resolution,
-                    end: resolution,
-                    animationStart: 0,
-                    animationEnd: 1,
-                    easing: easing ?? Easing.SinInOut,
-                    tick: ResolutionTick,
-                    final: ResolutionFinal
-                );
-                animations.Add(entry);
+                animationResolution.Start = _viewport.Resolution;
+                animationResolution.End = resolution;
+                animationResolution.AnimationStart = 0;
+                animationResolution.AnimationEnd = 1;
+                animationResolution.Easing = easing ?? Easing.SinInOut;
+                animationResolution.Enabled = true;
 
-                _animation = new Animation(duration);
-                _animation.Entries.AddRange(animations);
+                _animation.Duration = duration;
                 _animation.Start();
             }
         }
@@ -186,6 +215,11 @@ namespace Mapsui
         /// <param name="duration">Duration for animation in milliseconds. If less then 0, then <see cref="DefaultDuration"/> is used.</param>
         public void ZoomTo(double resolution, Point centerOfZoom, long duration = -1, Easing easing = default)
         {
+            // Problem: The only way we can properly animate to resolution and centerOfZoom if we 
+            // animate them both independent. So, don;t use the 3 steps, but calculate the center in
+            // one step. For this we need some changes to ScreenToWorld. Move core logic to a utilities
+            // class so we can call it with the target resolution.
+
             // Stop any old animation if there is one
             StopRunningAnimation();
 
@@ -202,7 +236,7 @@ namespace Mapsui
                 // 2) Then zoom 
                 _viewport.SetResolution((double)resolution);
 
-                if (_animationZoomCenter != null)
+                if (centerOfZoom != null)
                 {
                     // 3) Then move the temporary center of the map back to the mouse position
                     _viewport.SetCenter(_viewport.ScreenToWorld(
@@ -214,26 +248,27 @@ namespace Mapsui
             }
             else
             {
-                _animationZoomCenter = centerOfZoom;
-
-                var animations = new List<AnimationEntry>();
+                if (!_viewport.Center.Equals(centerOfZoom))
+                {
+                    animationCenter.Start = _viewport.Center;
+                    animationCenter.End = (ReadOnlyPoint)centerOfZoom;
+                    animationCenter.AnimationStart = 0;
+                    animationCenter.AnimationEnd = 1;
+                    animationCenter.Easing = Easing.SinInOut;
+                    animationCenter.Enabled = true;
+                }
 
                 if (_viewport.Resolution == resolution)
                     return;
 
-                var entry = new AnimationEntry(
-                    start: _viewport.Resolution,
-                    end: resolution,
-                    animationStart: 0,
-                    animationEnd: 1,
-                    easing: easing ?? Easing.SinInOut,
-                    tick: ResolutionTick,
-                    final: ResolutionFinal
-                );
-                animations.Add(entry);
+                animationResolution.Start = _viewport.Resolution;
+                animationResolution.End = resolution;
+                animationResolution.AnimationStart = 0;
+                animationResolution.AnimationEnd = 1;
+                animationResolution.Easing = easing;
+                animationResolution.Enabled = true;
 
-                _animation = new Animation(duration);
-                _animation.Entries.AddRange(animations);
+                _animation.Duration = duration;
                 _animation.Start();
             }
         }
@@ -316,24 +351,17 @@ namespace Mapsui
             }
             else
             {
-                var animations = new List<AnimationEntry>();
-
                 if (_viewport.Center.Equals(center))
                     return;
 
-                var entry = new AnimationEntry(
-                    start: _viewport.Center,
-                    end: (ReadOnlyPoint)center,
-                    animationStart: 0,
-                    animationEnd: 1,
-                    easing: easing ?? Easing.SinOut,
-                    tick: CenterTick,
-                    final: CenterFinal
-                );
-                animations.Add(entry);
+                animationCenter.Start = _viewport.Center;
+                animationCenter.End = (ReadOnlyPoint)center;
+                animationCenter.AnimationStart = 0;
+                animationCenter.AnimationEnd = 1;
+                animationCenter.Easing = easing ?? Easing.SinOut;
+                animationCenter.Enabled = true;
 
-                _animation = new Animation(duration);
-                _animation.Entries.AddRange(animations);
+                _animation.Duration = duration;
                 _animation.Start();
             }
         }
@@ -362,47 +390,32 @@ namespace Mapsui
             }
             else
             {
-                var animations = new List<AnimationEntry>();
-                AnimationEntry entry;
-
                 if (!_viewport.Center.Equals(center))
                 {
-                    entry = new AnimationEntry(
-                        start: _viewport.Center,
-                        end: (ReadOnlyPoint)center,
-                        animationStart: 0,
-                        animationEnd: 1,
-                        easing: Easing.SinInOut,
-                        tick: CenterTick,
-                        final: CenterFinal
-                    );
-                    animations.Add(entry);
+                    animationCenter.Start = _viewport.Center;
+                    animationCenter.End = (ReadOnlyPoint)center;
+                    animationCenter.AnimationStart = 0;
+                    animationCenter.AnimationEnd = 1;
+                    animationCenter.Easing = Easing.SinInOut;
+                    animationCenter.Enabled = true;
                 }
 
-                entry = new AnimationEntry(
-                    start: _viewport.Resolution,
-                    end: maxResolution,
-                    animationStart: 0,
-                    animationEnd: 0.5,
-                    easing: Easing.SinIn,
-                    tick: ResolutionTick,
-                    final: ResolutionFinal
-                );
-                animations.Add(entry);
+                // todo: find solution for flying up to max
+                //animationResolution.Start = _viewport.Resolution;
+                //animationResolution.End = maxResolution;
+                //animationResolution.AnimationStart = 0;
+                //animationResolution.AnimationEnd = 0.5;
+                //animationResolution.Easing = Easing.SinIn;
+                //animationResolution.Enabled = true;
 
-                entry = new AnimationEntry(
-                    start: maxResolution,
-                    end: _viewport.Resolution,
-                    animationStart: 0.5,
-                    animationEnd: 1,
-                    easing: Easing.SinIn,
-                    tick: ResolutionTick,
-                    final: ResolutionFinal
-                );
-                animations.Add(entry);
+                animationResolution.Start = maxResolution;
+                animationResolution.End = _viewport.Resolution;
+                animationResolution.AnimationStart = 0.0;
+                animationResolution.AnimationEnd = 1;
+                animationResolution.Easing = Easing.SinIn;
+                animationResolution.Enabled = true;
 
-                _animation = new Animation(duration);
-                _animation.Entries.AddRange(animations);
+                _animation.Duration = duration;
                 _animation.Start();
             }
         }
@@ -427,24 +440,17 @@ namespace Mapsui
             }
             else
             {
-                var animations = new List<AnimationEntry>();
-                AnimationEntry entry;
-
                 if (_viewport.Rotation == rotation)
                     return;
 
-                entry = new AnimationEntry(
-                    start: _viewport.Rotation,
-                    end: rotation,
-                    animationStart: 0,
-                    animationEnd: 1,
-                    easing: easing ?? Easing.SinInOut,
-                    tick: RotationTick,
-                    final: RotationFinal
-                );
-                animations.Add(entry);
 
-                _rotationDelta = (double)entry.End - (double)entry.Start;
+                animationRotation.Start = _viewport.Rotation;
+                animationRotation.End = rotation;
+                animationRotation.AnimationStart = 0;
+                animationRotation.AnimationEnd = 1;
+                animationRotation.Easing = easing ?? Easing.SinInOut;
+
+                _rotationDelta = (double)animationRotation.End - (double)animationRotation.Start;
 
                 if (_rotationDelta < -180.0)
                     _rotationDelta += 360.0;
@@ -452,8 +458,8 @@ namespace Mapsui
                 if (_rotationDelta > 180.0)
                     _rotationDelta -= 360.0;
 
-                _animation = new Animation(duration);
-                _animation.Entries.AddRange(animations);
+
+                _animation.Duration = duration;
                 _animation.Start();
             }
         }
@@ -485,22 +491,19 @@ namespace Mapsui
             if (animateMillis > maxDuration)
                 animateMillis = maxDuration;
 
-            var animations = new List<AnimationEntry>();
-            AnimationEntry entry;
+            // todo: Calculate the final distance traveled given the initial velocity. 
+            // This was my first google hit on the topic: https://www.youtube.com/watch?v=8fAYAcr1zJU
+            // Perhaps the duration needs to be calculated.
+            var targetCenter = new ReadOnlyPoint(_viewport.Center.X + velocityX * 1000, _viewport.Center.Y - velocityY * 1000);
 
-            entry = new AnimationEntry(
-                start: (velocityX, velocityY),
-                end: (0d, 0d),
-                animationStart: 0,
-                animationEnd: 1,
-                easing: Easing.SinIn,
-                tick: FlingTick,
-                final: FlingFinal
-            );
-            animations.Add(entry);
+            animationCenter.Start = _viewport.Center;
+            animationCenter.End = targetCenter;
+            animationCenter.AnimationStart = 0;
+            animationCenter.AnimationEnd = 1;
+            animationCenter.Easing = Easing.QuarticOut;
+            animationCenter.Enabled = true;
 
-            _animation = new Animation((long)animateMillis);
-            _animation.Entries.AddRange(animations);
+            _animation.Duration = (long)animateMillis;
             _animation.Start();
         }
 
@@ -509,27 +512,17 @@ namespace Mapsui
         /// </summary>
         public void StopRunningAnimation()
         {
-            if (_animation != null)
-            {
-                _animation.Stop(false);
-                _animation = null;
-                _animationZoomCenter = null;
-            }
-        }
+            animationCenter.Enabled = false;
+            animationResolution.Enabled = false;
+            animationRotation.Enabled = false;
 
-        /// <summary>
-        /// Update the running animation if there is one
-        /// </summary>
-        public void UpdateRunningAnimation()
-        {
-            if (_animation != null && _animation.IsRunning)
-            {
-                _animation.Tick();
-            }
+            _animation.Stop(false);
         }
 
         private void CenterTick(AnimationEntry entry, double value)
         {
+            if (entry.Start == null) return; //!!!
+
             var x = ((ReadOnlyPoint)entry.Start).X + (((ReadOnlyPoint)entry.End).X - ((ReadOnlyPoint)entry.Start).X) * entry.Easing.Ease(value);
             var y = ((ReadOnlyPoint)entry.Start).Y + (((ReadOnlyPoint)entry.End).Y - ((ReadOnlyPoint)entry.Start).Y) * entry.Easing.Ease(value);
 
@@ -541,6 +534,8 @@ namespace Mapsui
 
         private void CenterFinal(AnimationEntry entry)
         {
+            if (entry.Start == null) return; //!!!
+
             _viewport.SetCenter((ReadOnlyPoint)entry.End);
 
             Navigated?.Invoke(this, EventArgs.Empty);
@@ -548,52 +543,24 @@ namespace Mapsui
 
         private void ResolutionTick(AnimationEntry entry, double value)
         {
-            if (_animationZoomCenter != null)
-            {
-                // 1) Temporarily center on the center of zoom
-                _viewport.SetCenter(_viewport.ScreenToWorld(_animationZoomCenter));
-            }
-
             var r = (double)entry.Start + ((double)entry.End - (double)entry.Start) * entry.Easing.Ease(value);
 
-            // 2) Then zoom 
-            _viewport.SetResolution(r);
-
-            if (_animationZoomCenter != null)
-            {
-                // 3) Then move the temporary center of the map back to the mouse position
-                _viewport.SetCenter(_viewport.ScreenToWorld(
-                    _viewport.Width - _animationZoomCenter.X,
-                    _viewport.Height - _animationZoomCenter.Y));
-            }
+            //!!!_viewport.SetResolution(r);
 
             Navigated?.Invoke(this, EventArgs.Empty);
         }
 
         private void ResolutionFinal(AnimationEntry entry)
         {
-            if (_animationZoomCenter != null)
-            {
-                // 1) Temporarily center on the center of zoom
-                _viewport.SetCenter(_viewport.ScreenToWorld(_animationZoomCenter));
-            }
-
-            // 2) Then zoom 
             _viewport.SetResolution((double)entry.End);
-
-            if (_animationZoomCenter != null)
-            {
-                // 3) Then move the temporary center of the map back to the mouse position
-                _viewport.SetCenter(_viewport.ScreenToWorld(
-                    _viewport.Width - _animationZoomCenter.X,
-                    _viewport.Height - _animationZoomCenter.Y));
-            }
 
             Navigated?.Invoke(this, EventArgs.Empty);
         }
 
         private void RotationTick(AnimationEntry entry, double value)
         {
+            if (entry.Start == null) return; //!!!
+
             var r = (double)entry.Start + _rotationDelta * entry.Easing.Ease(value);
 
             // Set new value
@@ -604,9 +571,16 @@ namespace Mapsui
 
         private void RotationFinal(AnimationEntry entry)
         {
+            if (entry.End == null) return;
+
             _viewport.SetRotation((double)entry.End);
 
             Navigated?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void UpdateAnimation()
+        {
+            _animation.Tick();
         }
 
         private void FlingTick(AnimationEntry entry, double value)
@@ -638,11 +612,6 @@ namespace Mapsui
             _viewport.SetCenter(newX, newY);
 
             Navigated?.Invoke(this, EventArgs.Empty);
-        }
-
-        private void FlingFinal(AnimationEntry entry)
-        {
-            // Nothing to do
         }
     }
 }

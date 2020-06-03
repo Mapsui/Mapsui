@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Mapsui.Utilities
 {
@@ -33,27 +31,32 @@ namespace Mapsui.Utilities
         /// <summary>
         /// When this animation starts in animation cycle. Value between 0 and 1.
         /// </summary>
-        public double AnimationStart { get; }
+        public bool Enabled { get; set; }
+
+        /// <summary>
+        /// When this animation starts in animation cycle. Value between 0 and 1.
+        /// </summary>
+        public double AnimationStart { get; set; }
 
         /// <summary>
         /// When this animation ends in animation cycle. Value between 0 and 1.
         /// </summary>
-        public double AnimationEnd { get; }
+        public double AnimationEnd { get; set; }
 
         /// <summary>
         /// Object holding the starting value
         /// </summary>
-        public object Start { get; }
+        public object Start { get; set; }
 
         /// <summary>
         /// Object holding the end value
         /// </summary>
-        public object End { get; }
+        public object End { get; set; }
 
         /// <summary>
         /// Easing to use for this animation
         /// </summary>
-        public Easing Easing { get; }
+        public Easing Easing { get; set; }
 
         /// <summary>
         /// Called when a value should changed

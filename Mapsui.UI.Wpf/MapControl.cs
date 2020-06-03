@@ -511,8 +511,7 @@ namespace Mapsui.UI.Wpf
 
             args.Surface.Canvas.Scale(PixelDensity, PixelDensity);
 
-            if (Animation.NeedsUpdate)
-                Animation.UpdateAnimations();
+            Navigator.UpdateAnimation();
 
             Renderer.Render(args.Surface.Canvas, new Viewport(Viewport), Map.Layers, Map.Widgets, Map.BackColor);
         }

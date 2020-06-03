@@ -254,8 +254,7 @@ namespace Mapsui.UI.Forms
             if (PixelDensity <= 0) return;
 
             // Update any running animation
-            if (Mapsui.Utilities.Animation.NeedsUpdate)
-                Mapsui.Utilities.Animation.UpdateAnimations();
+            Navigator.UpdateAnimation();
 
             skPaintSurfaceEventArgs.Surface.Canvas.Scale(PixelDensity, PixelDensity);
 
