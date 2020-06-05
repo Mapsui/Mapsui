@@ -5162,18 +5162,6 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "documentation/Mapsui.Forms.md",
-      "output": {
-        ".html": {
-          "relative_path": "documentation/Mapsui.Forms.html",
-          "hash": "H572a5yFH2M76J8YXUcR9g=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
       "source_relative_path": "documentation/NuGet-of-latest-build.md",
       "output": {
         ".html": {
@@ -5281,6 +5269,18 @@
       "version": ""
     },
     {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/getting-started-xamarin-forms.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/getting-started-xamarin-forms.html",
+          "hash": "nLpI2P2zmTMOUgrmnFxLxg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
       "type": "Resource",
       "source_relative_path": "documentation/images/brutile_fetcher.png",
       "output": {
@@ -5344,7 +5344,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/toc.html",
-          "hash": "AQpCr4C9aKBiGRqErbu9hw=="
+          "hash": "ZaO9h4wx5Md4WFasJ+u31Q=="
         }
       },
       "is_incremental": false,
