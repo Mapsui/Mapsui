@@ -18,15 +18,16 @@ is an issue with placing controls over the Map.
 3. Add the line `xmlns:mapsui="clr-namespace:Mapsui.UI.Forms;assembly=Mapsui.UI.Forms"`
 to the Xaml file
 4. Add the Mapsui.Forms view with
-````
+```xml
 <mapsui:MapView x:Name="mapView"
     VerticalOptions="FillAndExpand"
     HorizontalOptions="Fill"
     BackgroundColor="Gray" />
-````
+```
 to the Xaml <ContentPage> part file
 5. Add in the code behind the following
-````
+
+```csharp
 var map = new Map
 {
     CRS = "EPSG:3857",
@@ -45,5 +46,5 @@ map.Layers.Add(tileLayer);
 map.Widgets.Add(new Widgets.ScaleBar.ScaleBarWidget(map) { TextAlignment = Widgets.Alignment.Center, HorizontalAlignment = Widgets.HorizontalAlignment.Left, VerticalAlignment = Widgets.VerticalAlignment.Bottom });
 
 mapView.Map = map;
-````
+```
 6. Now you are ready to run a test
