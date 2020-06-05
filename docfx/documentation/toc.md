@@ -9,6 +9,7 @@
 ## [Frequently Asked Questions](faq.md)
 ## [v2.0 Upgrade Guide](v2.0-upgrade-guide.md)
 # How Things Work
+## [Mapsui.Forms](mapsui-forms.md)
 ## [Mapsui Components](mapsui-components.md)
 ## [Renderers](renderers.md)
 ## [Asynchronous Data Fetching](async-fetching.md)
