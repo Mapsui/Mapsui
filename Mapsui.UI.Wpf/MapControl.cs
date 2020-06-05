@@ -34,12 +34,10 @@ namespace Mapsui.UI.Wpf
         private bool _mouseDown;
         private Geometries.Point _previousMousePosition;
         private RenderMode _renderMode;
-        private double _toResolution = double.NaN;
-        private int _mouseWheelTickCount;
-        private const int _mouseWheelAnimationDuration = 1000;
         private bool _hasBeenManipulated;
         private double _innerRotation;
         private readonly FlingTracker _flingTracker = new FlingTracker();
+        private readonly MouseWheelAnimation _mouseWheelAnimation = new MouseWheelAnimation();
 
         /// <summary>
         /// Fling is called, when user release mouse button or lift finger while moving with a certain speed, higher than speed of swipe 
@@ -177,29 +175,11 @@ namespace Mapsui.UI.Wpf
 
             _currentMousePosition = e.GetPosition(this).ToMapsui();
 
-            // If the animation has ended then start from the current resolution.
-            // The alternative is that use the previous resolution target and add an extra
-            // level to that.
-            if (!DuringMouseWheelAnimation())
-                _toResolution = Viewport.Resolution;
-
-            if (e.Delta > Constants.Epsilon)
-            {
-                _toResolution = ZoomHelper.ZoomIn(_map.Resolutions, _toResolution);
-            }
-            else if (e.Delta < Constants.Epsilon)
-            {
-                _toResolution = ZoomHelper.ZoomOut(_map.Resolutions, _toResolution);
-            }
-
-            // TickCount is fast https://stackoverflow.com/a/4075602/85325
-            _mouseWheelTickCount = Environment.TickCount;
 
             // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
-            
-            _toResolution = Map.Limiter.LimitResolution(_toResolution, Viewport.Width, Viewport.Height, Map.Resolutions, Map.Envelope);
-            
-            Navigator.ZoomTo(_toResolution, _currentMousePosition, _mouseWheelAnimationDuration, Easing.QuarticOut);
+            var resolution = _mouseWheelAnimation.GetTargetResolution(e.Delta, _viewport, _map);
+            resolution = Map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, Map.Resolutions, Map.Envelope);
+            Navigator.ZoomTo(resolution, _currentMousePosition, _mouseWheelAnimation.Duration, Easing.QuarticOut);
         }
 
         private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
@@ -373,18 +353,13 @@ namespace Mapsui.UI.Wpf
             }
             else
             {
-                if (DuringMouseWheelAnimation())
+                if (_mouseWheelAnimation.DuringMouseWheelAnimation())
                 {
                     // Disabled because not performing:
                     // Navigator.ZoomTo(_toResolution, _currentMousePosition, _mouseWheelAnimationDuration, Easing.QuarticOut);
                 }
 
             }
-        }
-
-        private bool DuringMouseWheelAnimation()
-        {
-            return (Environment.TickCount - _mouseWheelTickCount) < _mouseWheelAnimationDuration;
         }
 
         public void ZoomToBox(Geometries.Point beginPoint, Geometries.Point endPoint)
