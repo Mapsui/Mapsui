@@ -1,19 +1,19 @@
 # Mapsui for Xamarin.Forms getting started
 
-### Step 1. 
+### Step 1
 
 Create a normal Xamarin.Forms project
 
-### Step 2. 
+### Step 2
 
 Add Mapsui.Forms from NuGet to the packages
 
-### Step 3. 
+### Step 3
 
 Add the line `xmlns:mapsui="clr-namespace:Mapsui.UI.Forms;assembly=Mapsui.UI.Forms"`
 to the Xaml file
 
-### Step 4. 
+### Step 4
 
 Add the Mapsui.Forms view with
 ```xml
@@ -24,7 +24,7 @@ Add the Mapsui.Forms view with
 ```
 to the Xaml <ContentPage> part file
     
-### Step 5. 
+### Step 5
 
 Add in the code behind the following
 
