@@ -1,7 +1,6 @@
 # Mapsui for Xamarin.Forms getting started
 
-Mapsui can be used on Xamarin.Forms with the [Mapsui.Forms]
-(https://www.nuget.org/packages/Mapsui.Forms/) nuget package.
+Mapsui can be used on Xamarin.Forms with the [Mapsui.Forms](https://www.nuget.org/packages/Mapsui.Forms/) nuget package.
 
 Mapsui.Forms is a 'native' Xamarin.Forms implementation, meaning it does
 not use Xamarin.Forms Renderers around platform specific components but implements 
