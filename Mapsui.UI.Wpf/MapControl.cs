@@ -37,7 +37,8 @@ namespace Mapsui.UI.Wpf
         private bool _hasBeenManipulated;
         private double _innerRotation;
         private readonly FlingTracker _flingTracker = new FlingTracker();
-        private readonly MouseWheelAnimation _mouseWheelAnimation = new MouseWheelAnimation();
+        
+        public MouseWheelAnimation MouseWheelAnimation { get; } = new MouseWheelAnimation();
 
         /// <summary>
         /// Fling is called, when user release mouse button or lift finger while moving with a certain speed, higher than speed of swipe 
@@ -177,9 +178,9 @@ namespace Mapsui.UI.Wpf
 
 
             // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
-            var resolution = _mouseWheelAnimation.GetTargetResolution(e.Delta, _viewport, _map);
+            var resolution = MouseWheelAnimation.GetTargetResolution(e.Delta, _viewport, _map);
             resolution = Map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, Map.Resolutions, Map.Envelope);
-            Navigator.ZoomTo(resolution, _currentMousePosition, _mouseWheelAnimation.Duration, Easing.QuarticOut);
+            Navigator.ZoomTo(resolution, _currentMousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
         }
 
         private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
@@ -353,7 +354,7 @@ namespace Mapsui.UI.Wpf
             }
             else
             {
-                if (_mouseWheelAnimation.DuringMouseWheelAnimation())
+                if (MouseWheelAnimation.DuringMouseWheelAnimation())
                 {
                     // Disabled because not performing:
                     // Navigator.ZoomTo(_toResolution, _currentMousePosition, _mouseWheelAnimationDuration, Easing.QuarticOut);

@@ -8,6 +8,7 @@ namespace Mapsui.UI.Wpf
         private int _tickCount;
         private double _toResolution;
         public int Duration { get; set; } = 1000;
+        public Easing Easing { get; set; } = Easing.QuarticOut;
 
         public double GetTargetResolution(int delta, IViewport viewport, IMap map)
         {
