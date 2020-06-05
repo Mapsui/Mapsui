@@ -5089,6 +5089,292 @@
       "version": ""
     },
     {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/async-fetching.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/async-fetching.html",
+          "hash": "kpHX8Y/FMYEbI5iZOssIJA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/contributors-guidelines.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/contributors-guidelines.html",
+          "hash": "3TVnmo8zNLAahtxiQkXIfw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/custom-style-renders.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/custom-style-renders.html",
+          "hash": "xwStraVNOS0vfr+SeAH+ig=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/development-constraints.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/development-constraints.html",
+          "hash": "+JJt6aSOJEpAX9FrxZHn8w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/documentation.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/documentation.html",
+          "hash": "piMsr394bOvL9Shj/nWYKA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/faq.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/faq.html",
+          "hash": "UVI4nNj1AeZVNDqlCR878w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/getting-started-android.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/getting-started-android.html",
+          "hash": "k5N5eBCsuWUcuWMyWpP0yQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/getting-started-wpf.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/getting-started-wpf.html",
+          "hash": "3wajhOMRJrvfe70pmM0f1w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/getting-started-xamarin-forms.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/getting-started-xamarin-forms.html",
+          "hash": "nLpI2P2zmTMOUgrmnFxLxg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/home.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/home.html",
+          "hash": "tjR5jmBV49a5sfQQhGwnVQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/how-to-work-with-mapsui.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/how-to-work-with-mapsui.html",
+          "hash": "Bv3jw7PNVUW4ZBlypya4NQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "documentation/images/brutile_fetcher.png",
+      "output": {
+        "resource": {
+          "relative_path": "documentation/images/brutile_fetcher.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "documentation/images/special.gif",
+      "output": {
+        "resource": {
+          "relative_path": "documentation/images/special.gif"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/mapsui-components.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/mapsui-components.html",
+          "hash": "YQiurz6fKEftCLjIJYW6IA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/nuget-of-latest-build.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/nuget-of-latest-build.html",
+          "hash": "QF8VdxyQiVskU7912t4IEw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/projections.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/projections.html",
+          "hash": "+z1yzMDgl4uj8pjcWwpERA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/renderers.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/renderers.html",
+          "hash": "j98vXIhg6dWqhiPE+gHgAw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/rendering-tests.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/rendering-tests.html",
+          "hash": "xEsoYpJ49OTNqCbaxCAawg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/roadmap.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/roadmap.html",
+          "hash": "QYdYYRwOmz044OfKIVWe/A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/samples.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/samples.html",
+          "hash": "/xVL4qjbYUl/NDvTkp4IAw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/skia-scale.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/skia-scale.html",
+          "hash": "zMJKv0LlBLMM9ogMNLy5wA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "documentation/toc.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/toc.html",
+          "hash": "RDKPvH4s6y3cSwUEXm2upQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/tutorials.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/tutorials.html",
+          "hash": "CiCT2kF8NVmXkbGW0on77A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/v2.0-upgrade-guide.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/v2.0-upgrade-guide.html",
+          "hash": "scba8BB0w9gXmAwI6LWlRA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
       "type": "Resource",
       "source_relative_path": "images/breath-companion.png",
       "output": {
@@ -5150,7 +5436,7 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "6+Mt9xrZzhy3FZY+OjyFQQ=="
+          "hash": "KSB4wb44i5Z9Wq4NneoHhQ=="
         }
       },
       "is_incremental": false,
@@ -5178,7 +5464,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 2,
+          "total_file_count": 23,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
