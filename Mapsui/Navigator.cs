@@ -548,24 +548,26 @@ namespace Mapsui
 
         private void ResolutionTick(AnimationEntry entry, double value)
         {
-            if (_animationZoomCenter != null)
-            {
-                // 1) Temporarily center on the center of zoom
-                _viewport.SetCenter(_viewport.ScreenToWorld(_animationZoomCenter));
-            }
+            //if (_animationZoomCenter != null)
+            //{
+            //    // 1) Temporarily center on the center of zoom
+            //    _viewport.SetCenter(_viewport.ScreenToWorld(_animationZoomCenter));
+            //}
 
+            var currentR = _viewport.Resolution;
             var r = (double)entry.Start + ((double)entry.End - (double)entry.Start) * entry.Easing.Ease(value);
+            var diffResolution = r / currentR;
 
             // 2) Then zoom 
             _viewport.SetResolution(r);
 
-            if (_animationZoomCenter != null)
-            {
-                // 3) Then move the temporary center of the map back to the mouse position
-                _viewport.SetCenter(_viewport.ScreenToWorld(
-                    _viewport.Width - _animationZoomCenter.X,
-                    _viewport.Height - _animationZoomCenter.Y));
-            }
+            //if (_animationZoomCenter != null)
+            //{
+            //    // 3) Then move the temporary center of the map back to the mouse position
+            //    _viewport.SetCenter(_viewport.ScreenToWorld(
+            //        _viewport.Width - _animationZoomCenter.X,
+            //        _viewport.Height - _animationZoomCenter.Y));
+            //}
 
             Navigated?.Invoke(this, EventArgs.Empty);
         }
