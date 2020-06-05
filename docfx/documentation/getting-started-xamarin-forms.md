@@ -12,11 +12,22 @@ is an issue with placing controls over the Map.
 
 ## Installation
 
-1. Create a normal Xamarin.Forms project
-2. Add Mapsui.Forms from NuGet to the packages
-3. Add the line `xmlns:mapsui="clr-namespace:Mapsui.UI.Forms;assembly=Mapsui.UI.Forms"`
+### Step 1. 
+
+Create a normal Xamarin.Forms project
+
+### Step 2. 
+
+Add Mapsui.Forms from NuGet to the packages
+
+### Step 3. 
+
+Add the line `xmlns:mapsui="clr-namespace:Mapsui.UI.Forms;assembly=Mapsui.UI.Forms"`
 to the Xaml file
-4. Add the Mapsui.Forms view with
+
+### Step 4. 
+
+Add the Mapsui.Forms view with
 ```xml
 <mapsui:MapView x:Name="mapView"
     VerticalOptions="FillAndExpand"
@@ -24,7 +35,10 @@ to the Xaml file
     BackgroundColor="Gray" />
 ```
 to the Xaml <ContentPage> part file
-5. Add in the code behind the following
+    
+### Step 5. 
+
+Add in the code behind the following
 
 ```csharp
 var map = new Map
@@ -46,4 +60,6 @@ map.Widgets.Add(new Widgets.ScaleBar.ScaleBarWidget(map) { TextAlignment = Widge
 
 mapView.Map = map;
 ```
-6. Now you are ready to run a test
+
+### Step 6.
+Now you are ready to run a test
