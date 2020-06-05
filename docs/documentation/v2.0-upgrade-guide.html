@@ -129,6 +129,18 @@ It it is still possible to implement hover yourself using a direct call to MapCo
 to do a search-replace to fix it.</p>
 <h4 id="removed-zoominzoomout-from-wpf-mapcontrol">Removed ZoomIn/ZoomOut from WPF MapControl</h4>
 <p>Use the ZoomIn/ZoomOut methode on the navigator.</p>
+<h4 id="some-other-changes">Some other changes</h4>
+<ul>
+<li>Move Info event from Map to MapControl</li>
+<li>Do not derive ILayer from IAsyncDataFetcher.</li>
+<li>Remove WPFs MapControl.ErrorMessage</li>
+<li>Rename PanMode.None and ZoomMode.None.</li>
+<li>Remove the InfoLayer list and add an InfoLayer boolean on ILayer</li>
+<li>Remove the HoverLayer method. It is not crossplatform and can affect performance. </li>
+<li>Wrap Viewport in LimitingViewport which limits it to user settings, or access through Navigator.</li>
+<li>PanLock and ZoomLock working on all platforms. </li>
+<li>Rework ViewportLimiter </li>
+</ul>
 </article>
           </div>
           

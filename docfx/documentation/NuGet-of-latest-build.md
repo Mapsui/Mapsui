@@ -36,4 +36,4 @@ In you sln folder add a .nuget folder and in it a NuGet.Config file with content
 This way you application knows where to find the package and when other developers clone your project it works for them too right away. This is the best option.
 
 ## Build your own nuget package
-It is also possible to build you own nuget package locally by running ```scripts\buildpack.bat 1.0.0-beta.1``` from the sln folder. You can set the file location as a Package Source in visual studio.
+It is also possible to build you own nuget package locally by running ```scripts\buildpack.bat 3.0.0-custom.1``` from the sln folder. You can set the file location as a Package Source in visual studio.

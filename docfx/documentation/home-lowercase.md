@@ -6,7 +6,7 @@ Mapsui is a .NET component to show a map in your app.
 - UWP
 - Xamarin.Android
 - Xamarin.iOS
-- Xamarin.Forms (in v2, now in beta)
+- Xamarin.Forms
 
 ## Supported data
 Mapsui uses the BruTile library to display tile layers such as:

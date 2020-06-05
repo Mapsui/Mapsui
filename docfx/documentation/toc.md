@@ -1,4 +1,5 @@
 # [Introduction](Home.md)
+## [Quickstart Xamarin.Forms](getting-started-xamarin-forms.md)
 ## [Quickstart WPF](getting-started-wpf.md)
 ## [Quickstart Android](getting-started-android.md)
 ## [Samples](samples.md)
@@ -6,7 +7,6 @@
 ## [How to work with Mapsui](How-to-work-with-Mapsui.md)
 ## [Roadmap](Roadmap.md)
 ## [Frequently Asked Questions](faq.md)
-## [Mapsui 2.0](Mapsui-2.0.md)
 ## [v2.0 Upgrade Guide](v2.0-upgrade-guide.md)
 # How Things Work
 ## [Mapsui Components](Mapsui-Components.md)
