@@ -1,5 +1,5 @@
 # [Introduction](Home.md)
-## [Quickstart Xamarin.Forms](mapsui.forms.md)
+## [Quickstart Xamarin.Forms](getting-started-xamarin-forms.md)
 ## [Quickstart WPF](getting-started-wpf.md)
 ## [Quickstart Android](getting-started-android.md)
 ## [Samples](samples.md)
