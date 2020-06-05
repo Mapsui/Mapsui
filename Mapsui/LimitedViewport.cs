@@ -97,10 +97,5 @@ namespace Mapsui
         {
             return _viewport.WorldToScreenUnrotated(worldPosition);
         }
-
-        public void SetResolution(double resolution, ReadOnlyPoint centerOfZoom)
-        {
-            _viewport.SetResolution(resolution, centerOfZoom);
-        }
     }
 }

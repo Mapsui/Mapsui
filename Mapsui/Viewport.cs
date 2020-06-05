@@ -331,19 +331,5 @@ namespace Mapsui
             _modified = true;
             ViewportChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        public void SetResolution(double resolution, ReadOnlyPoint centerOfZoom)
-        {
-            // 1) Temporarily center on the center of zoom
-            SetCenter(ScreenToWorld(centerOfZoom));
-
-            // 2) Then zoom 
-            SetResolution(resolution);
-
-            // 3) Then move the temporary center of the map back to the mouse position
-            SetCenter(ScreenToWorld(
-                Width - centerOfZoom.X,
-                Height - centerOfZoom.Y));
-        }
     }
 }

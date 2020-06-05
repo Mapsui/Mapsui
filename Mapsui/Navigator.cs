@@ -11,7 +11,6 @@ namespace Mapsui
         private readonly IViewport _viewport;
         private Animation _animation;
         private double _rotationDelta;
-        private Point _animationZoomCenter;
 
         private static long _defaultDuration = 0;
 
@@ -193,30 +192,25 @@ namespace Mapsui
 
             if (duration == 0)
             {
-                if (centerOfZoom != null)
-                {
-                    // 1) Temporarily center on the center of zoom
-                    _viewport.SetCenter(_viewport.ScreenToWorld(centerOfZoom));
-                }
-
-                // 2) Then zoom 
+                _viewport.SetCenter(TargetCenterOfMap(centerOfZoom, resolution));
                 _viewport.SetResolution((double)resolution);
-
-                if (_animationZoomCenter != null)
-                {
-                    // 3) Then move the temporary center of the map back to the mouse position
-                    _viewport.SetCenter(_viewport.ScreenToWorld(
-                        _viewport.Width - centerOfZoom.X,
-                        _viewport.Height - centerOfZoom.Y));
-                }
-
+                
                 Navigated?.Invoke(this, EventArgs.Empty);
             }
             else
             {
-                _animationZoomCenter = centerOfZoom;
-
                 var animations = new List<AnimationEntry>();
+
+                var centerEntry = new AnimationEntry(
+                    start: _viewport.Center,
+                    end: (ReadOnlyPoint)TargetCenterOfMap(centerOfZoom, resolution),
+                    animationStart: 0,
+                    animationEnd: 1,
+                    easing: Easing.QuarticOut,
+                    tick: this.CenterTick,
+                    final: this.CenterFinal
+                );
+                animations.Add(centerEntry);
 
                 if (_viewport.Resolution == resolution)
                     return;
@@ -226,7 +220,7 @@ namespace Mapsui
                     end: resolution,
                     animationStart: 0,
                     animationEnd: 1,
-                    easing: easing ?? Easing.SinInOut,
+                    easing: easing ?? Easing.QuarticOut,
                     tick: ResolutionTick,
                     final: ResolutionFinal
                 );
@@ -236,6 +230,17 @@ namespace Mapsui
                 _animation.Entries.AddRange(animations);
                 _animation.Start();
             }
+        }
+
+        private ReadOnlyPoint TargetCenterOfMap(Point centerOfZoom, double targetResolution)
+        {
+
+            centerOfZoom = _viewport.ScreenToWorld(centerOfZoom);
+            var ratio = targetResolution / _viewport.Resolution;
+
+            return new ReadOnlyPoint(
+                centerOfZoom.X - (centerOfZoom.X - _viewport.Center.X) * ratio,
+                centerOfZoom.Y - (centerOfZoom.Y - _viewport.Center.Y) * ratio);
         }
 
         /// <summary>
@@ -513,7 +518,6 @@ namespace Mapsui
             {
                 _animation.Stop(false);
                 _animation = null;
-                _animationZoomCenter = null;
             }
         }
 
@@ -533,7 +537,6 @@ namespace Mapsui
             var x = ((ReadOnlyPoint)entry.Start).X + (((ReadOnlyPoint)entry.End).X - ((ReadOnlyPoint)entry.Start).X) * entry.Easing.Ease(value);
             var y = ((ReadOnlyPoint)entry.Start).Y + (((ReadOnlyPoint)entry.End).Y - ((ReadOnlyPoint)entry.Start).Y) * entry.Easing.Ease(value);
 
-            // Set new values
             _viewport.SetCenter(x, y);
 
             Navigated?.Invoke(this, EventArgs.Empty);
@@ -548,46 +551,16 @@ namespace Mapsui
 
         private void ResolutionTick(AnimationEntry entry, double value)
         {
-            if (_animationZoomCenter != null)
-            {
-                // 1) Temporarily center on the center of zoom
-                _viewport.SetCenter(_viewport.ScreenToWorld(_animationZoomCenter));
-            }
-
             var r = (double)entry.Start + ((double)entry.End - (double)entry.Start) * entry.Easing.Ease(value);
 
-            // 2) Then zoom 
             _viewport.SetResolution(r);
-
-            if (_animationZoomCenter != null)
-            {
-                // 3) Then move the temporary center of the map back to the mouse position
-                _viewport.SetCenter(_viewport.ScreenToWorld(
-                    _viewport.Width - _animationZoomCenter.X,
-                    _viewport.Height - _animationZoomCenter.Y));
-            }
-
+            
             Navigated?.Invoke(this, EventArgs.Empty);
         }
 
         private void ResolutionFinal(AnimationEntry entry)
         {
-            if (_animationZoomCenter != null)
-            {
-                // 1) Temporarily center on the center of zoom
-                _viewport.SetCenter(_viewport.ScreenToWorld(_animationZoomCenter));
-            }
-
-            // 2) Then zoom 
             _viewport.SetResolution((double)entry.End);
-
-            if (_animationZoomCenter != null)
-            {
-                // 3) Then move the temporary center of the map back to the mouse position
-                _viewport.SetCenter(_viewport.ScreenToWorld(
-                    _viewport.Width - _animationZoomCenter.X,
-                    _viewport.Height - _animationZoomCenter.Y));
-            }
 
             Navigated?.Invoke(this, EventArgs.Empty);
         }
@@ -596,7 +569,6 @@ namespace Mapsui
         {
             var r = (double)entry.Start + _rotationDelta * entry.Easing.Ease(value);
 
-            // Set new value
             _viewport.SetRotation(r);
 
             Navigated?.Invoke(this, EventArgs.Empty);
