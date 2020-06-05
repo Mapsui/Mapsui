@@ -192,11 +192,13 @@ namespace Mapsui.UI.Wpf
                 _toResolution = ZoomHelper.ZoomOut(_map.Resolutions, _toResolution);
             }
 
-            _toResolution = Map.Limiter.LimitResolution(_toResolution, Viewport.Width, Viewport.Height, Map.Resolutions, Map.Envelope);
-
             // TickCount is fast https://stackoverflow.com/a/4075602/85325
             _mouseWheelTickCount = Environment.TickCount;
 
+            // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
+            
+            _toResolution = Map.Limiter.LimitResolution(_toResolution, Viewport.Width, Viewport.Height, Map.Resolutions, Map.Envelope);
+            
             Navigator.ZoomTo(_toResolution, _currentMousePosition, _mouseWheelAnimationDuration, Easing.QuarticOut);
         }
 
