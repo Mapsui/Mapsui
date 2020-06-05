@@ -127,17 +127,6 @@ namespace Mapsui
         /// <summary>
         /// Change resolution of viewport
         /// </summary>
-        /// <param name="center">screen center point to zoom at</param>
-        /// <param name="resolution">New resolution to use</param>
-        /// <param name="duration">Duration for animation in milliseconds. If less then 0, then <see cref="DefaultDuration"/> is used.</param>
-        public void ZoomTo(Point center, double resolution, long duration = -1, Easing easing = default)
-        {
-            ZoomTo(resolution, center, duration, easing);
-        }
-
-        /// <summary>
-        /// Change resolution of viewport
-        /// </summary>
         /// <param name="resolution">New resolution to use</param>
         /// <param name="duration">Duration for animation in milliseconds. If less then 0, then <see cref="DefaultDuration"/> is used.</param>
         public void ZoomTo(double resolution, long duration = -1, Easing easing = default)
@@ -234,7 +223,6 @@ namespace Mapsui
 
         private ReadOnlyPoint TargetCenterOfMap(Point centerOfZoom, double targetResolution)
         {
-
             centerOfZoom = _viewport.ScreenToWorld(centerOfZoom);
             var ratio = targetResolution / _viewport.Resolution;
 
