@@ -49,5 +49,5 @@ map.Widgets.Add(new Widgets.ScaleBar.ScaleBarWidget(map) { TextAlignment = Widge
 mapView.Map = map;
 ```
 
-### Step 6.
-Now you are ready to run a test
+### Step 6
+Run!
