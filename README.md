@@ -47,7 +47,7 @@ If you have a question please submit this as an issue [here on github](https://g
 - Close an issue if your question is answered.
 
 ## Contributing
-See the [guidelines](http://mapsui.com/documentation/Contributors-Guidelines.html)
+See the [guidelines](http://mapsui.com/documentation/contributors-guidelines.html)
 
 ## Thanks go to
 - ReSharper for providing free open source licenses for Mapsui
