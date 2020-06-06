@@ -54,6 +54,8 @@ namespace Mapsui.UI.Uwp
 
             Map = new Map();
 
+            // This will fail when multiple MapControls are used. Only the MapControl that is initialized last will 
+            // receive animation updates. Multiple MapControls in one app is not uncommon, think of minimaps for example.
             Animation.AnimationTimer = new AnimationTimer(this);
 
             Loaded += MapControlLoaded;
@@ -154,8 +156,10 @@ namespace Mapsui.UI.Uwp
         
         public void RefreshGraphics()
         {
-            if (Dispatcher.HasThreadAccess) _canvas?.Invalidate();
-            else RunOnUIThread(() => _canvas?.Invalidate());
+            // The commented out code crashes the app when MouseWheelAnimation.Duration > 0. Could be a bug in SKXamlCanvas
+            //if (Dispatcher.HasThreadAccess) _canvas?.Invalidate();
+            //else RunOnUIThread(() => _canvas?.Invalidate());
+            RunOnUIThread(() => _canvas?.Invalidate());
         }
 
         private void MapControlLoaded(object sender, RoutedEventArgs e)
