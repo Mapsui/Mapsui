@@ -1,7 +1,7 @@
 ﻿using Mapsui.Utilities;
 using System;
 
-namespace Mapsui.UI.Wpf
+namespace Mapsui.UI
 {
     public class MouseWheelAnimation
     {
@@ -15,7 +15,7 @@ namespace Mapsui.UI.Wpf
             // If the animation has ended then start from the current resolution.
             // The alternative is that use the previous resolution target and add an extra
             // level to that.
-            if (!DuringMouseWheelAnimation())
+            if (!IsAnimating())
                 _toResolution = viewport.Resolution;
 
             if (delta > Constants.Epsilon)
@@ -33,9 +33,9 @@ namespace Mapsui.UI.Wpf
             return _toResolution;
         }
 
-        public bool DuringMouseWheelAnimation()
+        public bool IsAnimating()
         {
-            return (Environment.TickCount - _tickCount) < Duration;
+            return Environment.TickCount - _tickCount < Duration;
         }
     }
 }

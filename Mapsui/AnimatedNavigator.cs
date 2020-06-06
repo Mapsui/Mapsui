@@ -1,8 +1,6 @@
 ﻿using Mapsui.Geometries;
 using Mapsui.Utilities;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Mapsui
 {

@@ -41,6 +41,8 @@ namespace Mapsui.UI.Uwp
         private readonly SKXamlCanvas _canvas = CreateRenderTarget();
         private double _innerRotation;
 
+        public MouseWheelAnimation MouseWheelAnimation { get; } = new MouseWheelAnimation { Duration = 0 };
+
         public MapControl()
         {
             Background = new SolidColorBrush(Colors.White); // DON'T REMOVE! Touch events do not work without a background
@@ -140,24 +142,20 @@ namespace Mapsui.UI.Uwp
 
             var currentPoint = e.GetCurrentPoint(this);
 
-            //Needed for both MouseMove and MouseWheel event for mousewheel event
-
             var mousePosition = new Geometries.Point(currentPoint.RawPosition.X, currentPoint.RawPosition.Y);
 
-            if (currentPoint.Properties.MouseWheelDelta > 0)
-                Navigator.ZoomIn(mousePosition);
-            else if (currentPoint.Properties.MouseWheelDelta < 0)
-                Navigator.ZoomOut(mousePosition);
-            
-            e.Handled = true;
+            var resolution = MouseWheelAnimation.GetTargetResolution(currentPoint.Properties.MouseWheelDelta, _viewport, _map);
+            // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
+            resolution = Map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, Map.Resolutions, Map.Envelope);
+            Navigator.ZoomTo(resolution, mousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
 
-            RefreshGraphics();
-            RefreshData();
+            e.Handled = true;
         }
         
         public void RefreshGraphics()
         {
-            RunOnUIThread(() => _canvas?.Invalidate());
+            if (Dispatcher.HasThreadAccess) _canvas?.Invalidate();
+            else RunOnUIThread(() => _canvas?.Invalidate());
         }
 
         private void MapControlLoaded(object sender, RoutedEventArgs e)

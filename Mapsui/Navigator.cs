@@ -170,10 +170,15 @@ namespace Mapsui
         /// Zoom to a given resolution with a given point as center
         /// </summary>
         /// <param name="resolution">Resolution to zoom</param>
-        /// <param name="centerOfZoom">Center to use for zoom</param>
+        /// <param name="centerOfZoom">Center of zoom. This is the one point in the map that stays on the same location while zooming in.
+        /// For instance, in mouse wheel zoom animation the position of the mouse pointer can be the center of zoom.</param>
         /// <param name="duration">Duration for animation in milliseconds. If less then 0, then <see cref="DefaultDuration"/> is used.</param>
         public void ZoomTo(double resolution, Point centerOfZoom, long duration = -1, Easing easing = default)
         {
+            // todo: Perhaps centerOfZoom should be passed in in world coordinates. 
+            // This means the caller has to do the conversion, but it is more consistent since the centerOfMap 
+            // arguments to the navigator are in World coordinates as well.
+
             // Stop any old animation if there is one
             StopRunningAnimation();
 
@@ -181,8 +186,8 @@ namespace Mapsui
 
             if (duration == 0)
             {
-                _viewport.SetCenter(TargetCenterOfMap(centerOfZoom, resolution));
-                _viewport.SetResolution((double)resolution);
+                _viewport.SetCenter(CalculateCenterOfMap(centerOfZoom, resolution));
+                _viewport.SetResolution(resolution);
                 
                 Navigated?.Invoke(this, EventArgs.Empty);
             }
@@ -192,7 +197,7 @@ namespace Mapsui
 
                 var centerEntry = new AnimationEntry(
                     start: _viewport.Center,
-                    end: (ReadOnlyPoint)TargetCenterOfMap(centerOfZoom, resolution),
+                    end: CalculateCenterOfMap(centerOfZoom, resolution),
                     animationStart: 0,
                     animationEnd: 1,
                     easing: Easing.QuarticOut,
@@ -221,10 +226,20 @@ namespace Mapsui
             }
         }
 
-        private ReadOnlyPoint TargetCenterOfMap(Point centerOfZoom, double targetResolution)
+        /// <summary>
+        /// Calculates the new CenterOfMap based on the CenterOfZoom and the new resolution.
+        /// The CenterOfzoom is not the same as the CenterOfmap. CenterOfZoom is the one place in
+        /// the map that stays on the same location when zooming. In Mapsui is can be equal to the 
+        /// CenterOfMap, for instance when using the +/- buttons. When using mouse wheel zoom the
+        /// CenterOfZoom is the location of the mouse. 
+        /// </summary>
+        /// <param name="centerOfZoom"></param>
+        /// <param name="newResolution"></param>
+        /// <returns></returns>
+        private ReadOnlyPoint CalculateCenterOfMap(Point centerOfZoom, double newResolution)
         {
             centerOfZoom = _viewport.ScreenToWorld(centerOfZoom);
-            var ratio = targetResolution / _viewport.Resolution;
+            var ratio = newResolution / _viewport.Resolution;
 
             return new ReadOnlyPoint(
                 centerOfZoom.X - (centerOfZoom.X - _viewport.Center.X) * ratio,
@@ -256,7 +271,8 @@ namespace Mapsui
         /// <summary>
         /// Zoom in to a given point
         /// </summary>
-        /// <param name="centerOfZoom">Center to use for zoom in</param>
+        /// <param name="centerOfZoom">Center of zoom. This is the one point in the map that stays on the same location while zooming in.
+        /// For instance, in mouse wheel zoom animation the position of the mouse pointer can be the center of zoom.</param>
         /// <param name="duration">Duration for animation in milliseconds. If less then 0, then <see cref="DefaultDuration"/> is used.</param>
         public void ZoomIn(Point centerOfZoom, long duration = -1, Easing easing = default)
         {
@@ -268,7 +284,8 @@ namespace Mapsui
         /// <summary>
         /// Zoom out to a given point
         /// </summary>
-        /// <param name="centerOfZoom">Center to use for zoom out</param>
+        /// <param name="centerOfZoom">Center of zoom. This is the one point in the map that stays on the same location while zooming in.
+        /// For instance, in mouse wheel zoom animation the position of the mouse pointer can be the center of zoom.</param>
         /// <param name="duration">Duration for animation in milliseconds. If less then 0, then <see cref="DefaultDuration"/> is used.</param>
         public void ZoomOut(Point centerOfZoom, long duration = -1, Easing easing = default)
         {
