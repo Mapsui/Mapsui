@@ -144,7 +144,7 @@ namespace Mapsui.UI.Uwp
 
             var mousePosition = new Geometries.Point(currentPoint.RawPosition.X, currentPoint.RawPosition.Y);
 
-            var resolution = MouseWheelAnimation.GetTargetResolution(currentPoint.Properties.MouseWheelDelta, _viewport, _map);
+            var resolution = MouseWheelAnimation.GetResolution(currentPoint.Properties.MouseWheelDelta, _viewport, _map);
             // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
             resolution = Map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, Map.Resolutions, Map.Envelope);
             Navigator.ZoomTo(resolution, mousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);

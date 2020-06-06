@@ -10,7 +10,7 @@ namespace Mapsui.UI
         public int Duration { get; set; } = 1000;
         public Easing Easing { get; set; } = Easing.QuarticOut;
 
-        public double GetTargetResolution(int delta, IViewport viewport, IMap map)
+        public double GetResolution(int delta, IViewport viewport, IMap map)
         {
             // If the animation has ended then start from the current resolution.
             // The alternative is that use the previous resolution target and add an extra
