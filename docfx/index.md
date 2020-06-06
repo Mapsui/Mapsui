@@ -14,7 +14,7 @@ We are delightly with our first gold sponsor Sebastian Kruze, who has also contr
 
 ### Breath Companion
 
-[![Breath Companion website](images/breath-companion.png)](https://software-notion.de/apps/breath-companion)
+[![Breath Companion website](images/squadra.jfif)](https://software-notion.de/apps/breath-companion)
 
 ### Squadra
 
