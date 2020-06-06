@@ -16,6 +16,10 @@ We are delightly with our first gold sponsor Sebastian Kruze, who has also contr
 
 [![Breath Companion website](images/breath-companion.png)](https://software-notion.de/apps/breath-companion)
 
+### Squadra
+
+[![Squadra](images/breath-companion.png)](https://bertt.github.io/squadra/)
+
 @mapsui-users Please send info on other apps using Mapsui to add them here
 
 ## Support
