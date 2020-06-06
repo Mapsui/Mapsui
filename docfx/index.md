@@ -18,7 +18,7 @@ We are delightly with our first gold sponsor Sebastian Kruze, who has also contr
 
 ### Squadra
 
-[![Squadra](images/squadra.jfif)](https://bertt.github.io/squadra/)
+[![Squadra](images/squadra.png)](https://bertt.github.io/squadra/)
 
 @mapsui-users Please send info on other apps using Mapsui to add them here
 
