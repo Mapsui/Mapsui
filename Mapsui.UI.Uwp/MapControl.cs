@@ -16,7 +16,6 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA f
 
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Windows.Devices.Sensors;
 using Windows.Foundation;
@@ -42,6 +41,8 @@ namespace Mapsui.UI.Uwp
         private readonly SKXamlCanvas _canvas = CreateRenderTarget();
         private double _innerRotation;
 
+        public MouseWheelAnimation MouseWheelAnimation { get; } = new MouseWheelAnimation { Duration = 0 };
+
         public MapControl()
         {
             Background = new SolidColorBrush(Colors.White); // DON'T REMOVE! Touch events do not work without a background
@@ -53,6 +54,8 @@ namespace Mapsui.UI.Uwp
 
             Map = new Map();
 
+            // This will fail when multiple MapControls are used. Only the MapControl that is initialized last will 
+            // receive animation updates. Multiple MapControls in one app is not uncommon, think of minimaps for example.
             Animation.AnimationTimer = new AnimationTimer(this);
 
             Loaded += MapControlLoaded;
@@ -141,23 +144,21 @@ namespace Mapsui.UI.Uwp
 
             var currentPoint = e.GetCurrentPoint(this);
 
-            //Needed for both MouseMove and MouseWheel event for mousewheel event
-
             var mousePosition = new Geometries.Point(currentPoint.RawPosition.X, currentPoint.RawPosition.Y);
 
-            if (currentPoint.Properties.MouseWheelDelta > 0)
-                Navigator.ZoomIn(mousePosition);
-            else if (currentPoint.Properties.MouseWheelDelta < 0)
-                Navigator.ZoomOut(mousePosition);
-            
-            e.Handled = true;
+            var resolution = MouseWheelAnimation.GetResolution(currentPoint.Properties.MouseWheelDelta, _viewport, _map);
+            // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
+            resolution = Map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, Map.Resolutions, Map.Envelope);
+            Navigator.ZoomTo(resolution, mousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
 
-            RefreshGraphics();
-            RefreshData();
+            e.Handled = true;
         }
         
         public void RefreshGraphics()
         {
+            // The commented out code crashes the app when MouseWheelAnimation.Duration > 0. Could be a bug in SKXamlCanvas
+            //if (Dispatcher.HasThreadAccess) _canvas?.Invalidate();
+            //else RunOnUIThread(() => _canvas?.Invalidate());
             RunOnUIThread(() => _canvas?.Invalidate());
         }
 
