@@ -1,1 +1,1 @@
-Look [here](http://mapsui.github.io/Mapsui/documentation/Contributors-Guidelines.html)
+Look [here](http://mapsui.github.io/Mapsui/documentation/contributors-guidelines.html)
