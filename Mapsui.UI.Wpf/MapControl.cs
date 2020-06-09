@@ -34,12 +34,11 @@ namespace Mapsui.UI.Wpf
         private bool _mouseDown;
         private Geometries.Point _previousMousePosition;
         private RenderMode _renderMode;
-        private double _toResolution = double.NaN;
-        private int _mouseWheelTickCount;
-        private const int _mouseWheelAnimationDuration = 1000;
         private bool _hasBeenManipulated;
         private double _innerRotation;
         private readonly FlingTracker _flingTracker = new FlingTracker();
+        
+        public MouseWheelAnimation MouseWheelAnimation { get; } = new MouseWheelAnimation();
 
         /// <summary>
         /// Fling is called, when user release mouse button or lift finger while moving with a certain speed, higher than speed of swipe 
@@ -153,7 +152,8 @@ namespace Mapsui.UI.Wpf
 
         public void RefreshGraphics()
         {
-            RunOnUIThread(InvalidateCanvas);
+            if (Dispatcher.CheckAccess()) InvalidateCanvas();
+            else RunOnUIThread(InvalidateCanvas);
         }
 
         internal void InvalidateCanvas()
@@ -177,27 +177,10 @@ namespace Mapsui.UI.Wpf
 
             _currentMousePosition = e.GetPosition(this).ToMapsui();
 
-            // If the animation has ended then start from the current resolution.
-            // The alternative is that use the previous resolution target and add an extra
-            // level to that.
-            if ((Environment.TickCount - _mouseWheelTickCount) > _mouseWheelAnimationDuration)
-                _toResolution = Viewport.Resolution;
-
-            if (e.Delta > Constants.Epsilon)
-            {
-                _toResolution = ZoomHelper.ZoomIn(_map.Resolutions, _toResolution);
-            }
-            else if (e.Delta < Constants.Epsilon)
-            {
-                _toResolution = ZoomHelper.ZoomOut(_map.Resolutions, _toResolution);
-            }
-
-            _toResolution = Map.Limiter.LimitResolution(_toResolution, Viewport.Width, Viewport.Height, Map.Resolutions, Map.Envelope);
-
-            // TickCount is fast https://stackoverflow.com/a/4075602/85325
-            _mouseWheelTickCount = Environment.TickCount;
-
-            Navigator.ZoomTo(_toResolution, _currentMousePosition, _mouseWheelAnimationDuration, Easing.QuarticOut);
+            var resolution = MouseWheelAnimation.GetResolution(e.Delta, _viewport, _map);
+            // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
+            resolution = Map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, Map.Resolutions, Map.Envelope);
+            Navigator.ZoomTo(resolution, _currentMousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
         }
 
         private void MapControlSizeChanged(object sender, SizeChangedEventArgs e)
@@ -368,6 +351,15 @@ namespace Mapsui.UI.Wpf
                 _viewport.Transform(_currentMousePosition, _previousMousePosition);
                 RefreshGraphics();
                 _previousMousePosition = _currentMousePosition;
+            }
+            else
+            {
+                if (MouseWheelAnimation.IsAnimating())
+                {
+                    // Disabled because not performing:
+                    // Navigator.ZoomTo(_toResolution, _currentMousePosition, _mouseWheelAnimationDuration, Easing.QuarticOut);
+                }
+
             }
         }
 

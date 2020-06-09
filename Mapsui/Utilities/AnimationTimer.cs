@@ -52,7 +52,7 @@ namespace Mapsui.Utilities
         /// <param name="e">Timer tick arguments</param>
         private void HandleTimerElapse(object sender, ElapsedEventArgs e)
         {
-            mapControl.RefreshGraphics();
+            mapControl?.RefreshGraphics();
         }
     }
 }

@@ -930,7 +930,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.IViewport.html",
-          "hash": "WOHMtgA1/WUn4m3stELtIA=="
+          "hash": "d8C47qrcDtZBUbD1LmW4GQ=="
         }
       },
       "is_incremental": false,
@@ -1158,7 +1158,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.LimitedViewport.html",
-          "hash": "5fSNxR+XUTbaI3hyMT0kTA=="
+          "hash": "f3LujS9CzgxVRSaTEOvyhQ=="
         }
       },
       "is_incremental": false,
@@ -1218,7 +1218,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Navigator.html",
-          "hash": "QmpDl8zk1h68ZuYUAZBLqA=="
+          "hash": "zOYYijfBVOQn+KGB9xfGLA=="
         }
       },
       "is_incremental": false,
@@ -4698,7 +4698,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Viewport.html",
-          "hash": "qMfGkzFc2dexPZQQFex0uQ=="
+          "hash": "8K6efZbO7qZhp2ABF50bgQ=="
         }
       },
       "is_incremental": false,
@@ -5431,12 +5431,23 @@
       "version": ""
     },
     {
+      "type": "Resource",
+      "source_relative_path": "images/squadra.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/squadra.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
       "type": "Conceptual",
       "source_relative_path": "index.md",
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "Jt4jhYYvABbpYIuCgm1D1g=="
+          "hash": "MVf+ReTh6Q/UW4awRQv8SQ=="
         }
       },
       "is_incremental": false,
@@ -5466,9 +5477,9 @@
         "full_build_reason_code": "NoAvailableBuildCache"
       },
       "processors": {
-        "TocDocumentProcessor": {
+        "ResourceDocumentProcessor": {
           "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
           "total_file_count": 0,
           "skipped_file_count": 0
@@ -5479,17 +5490,17 @@
           "total_file_count": 24,
           "skipped_file_count": 0
         },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
           "total_file_count": 421,
-          "skipped_file_count": 0
-        },
-        "ResourceDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build",
-          "total_file_count": 0,
           "skipped_file_count": 0
         }
       }
