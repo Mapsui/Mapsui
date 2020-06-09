@@ -26,8 +26,10 @@ namespace Mapsui.Samples.Common.Maps
 
         public static ILayer CreateLayer()
         {
+            var url = "http://geodata.nationaalgeoregister.nl/wmts/top10nl?VERSION=1.0.0&request=GetCapabilities";
+
             using (var httpClient = new HttpClient())
-            using (var response = httpClient.GetStreamAsync("http://geodata.nationaalgeoregister.nl/wmts/top10nl?VERSION=1.0.0&request=GetCapabilities").Result)
+            using (var response = httpClient.GetStreamAsync(url).Result)
             {
                 var tileSources = WmtsParser.Parse(response);
                 var nature2000TileSource = tileSources.First(t => t.Name == "natura2000");
