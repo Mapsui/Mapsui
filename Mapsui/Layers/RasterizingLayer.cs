@@ -169,7 +169,7 @@ namespace Mapsui.Layers
             if (_layer is IAsyncDataFetcher asyncLayer) asyncLayer.AbortFetch();
         }
 
-        public override void RefreshData(BoundingBox extent, double resolution, bool majorChange)
+        public override void RefreshData(BoundingBox extent, double resolution, ChangeType changeType)
         {
             var newViewport = CreateViewport(extent, resolution, _renderResolutionMultiplier, 1);
 
@@ -181,7 +181,7 @@ namespace Mapsui.Layers
             {
                 _extent = extent;
                 _resolution = resolution;
-                _layer.RefreshData(extent, resolution, majorChange);
+                _layer.RefreshData(extent, resolution, changeType);
                 RestartTimer();
             }
         }

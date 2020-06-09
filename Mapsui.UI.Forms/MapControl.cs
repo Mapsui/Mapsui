@@ -503,7 +503,7 @@ namespace Mapsui.UI.Forms
             if (touchPoints.Count == 0)
             {
                 _mode = TouchMode.None;
-                _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
+                _map.RefreshData(_viewport.Extent, _viewport.Resolution, ChangeType.Discrete);
             }
 
             return args.Handled;
@@ -547,7 +547,7 @@ namespace Mapsui.UI.Forms
             if (touchPoints.Count == 0)
             {
                 _mode = TouchMode.None;
-                _map.RefreshData(_viewport.Extent, _viewport.Resolution, true);
+                _map.RefreshData(_viewport.Extent, _viewport.Resolution, ChangeType.Discrete);
             }
 
             return args.Handled;

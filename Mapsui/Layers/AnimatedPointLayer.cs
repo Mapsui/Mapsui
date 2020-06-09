@@ -37,7 +37,7 @@ namespace Mapsui.Layers
         {
             return _animatedFeatures.GetFeatures();
         }
-        public override void RefreshData(BoundingBox extent, double resolution, bool majorChange)
+        public override void RefreshData(BoundingBox extent, double resolution, ChangeType changeType)
         {
             _extent = extent;
             _resolution = resolution;

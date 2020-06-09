@@ -121,11 +121,12 @@ namespace Mapsui.Layers
             // not implemented for ImageLayer
         }
 
-        public override void RefreshData(BoundingBox extent, double resolution, bool majorChange)
+        public override void RefreshData(BoundingBox extent, double resolution, ChangeType changeType)
         {
             if (!Enabled) return;
             if (DataSource == null) return;
-            if (!majorChange) return;
+            // Fetching an image, that often covers the whole map, is expensive. Only do it on Discrete changes.
+            if (changeType == ChangeType.Continuous) return;
 
             _newExtent = extent;
             _newResolution = resolution;
