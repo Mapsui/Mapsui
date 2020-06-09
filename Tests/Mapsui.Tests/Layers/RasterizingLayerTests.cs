@@ -33,7 +33,7 @@ namespace Mapsui.Tests.Layers
             };
 
             // act
-            layer.RefreshData(box, resolution, true);
+            layer.RefreshData(box, resolution, ChangeType.Discrete);
             waitHandle.WaitOne();
             Assert.AreEqual(layer.GetFeaturesInView(box, resolution).Count(), 1);
         }

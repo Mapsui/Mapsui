@@ -71,6 +71,6 @@ namespace Mapsui
         /// </summary>
         void ClearCache();
 
-        void RefreshData(BoundingBox extent, double resolution, bool majorChange);
+        void RefreshData(BoundingBox extent, double resolution, ChangeType changeType);
     }
 }

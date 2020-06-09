@@ -182,7 +182,7 @@ namespace Mapsui.UI.Objects
                     }, 0.0, 1.0);
 
                     // At the end, update viewport
-                    animation.Commit(mapView, animationMyLocationName, 100, 3000, finished: (s, v) => mapView.Map.RefreshData(mapView._mapControl.Viewport.Extent, mapView._mapControl.Viewport.Resolution, true));
+                    animation.Commit(mapView, animationMyLocationName, 100, 3000, finished: (s, v) => mapView.Map.RefreshData(mapView._mapControl.Viewport.Extent, mapView._mapControl.Viewport.Resolution, ChangeType.Discrete));
                 }
                 else
                 {

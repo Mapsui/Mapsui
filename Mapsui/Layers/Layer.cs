@@ -150,11 +150,11 @@ namespace Mapsui.Layers
         }
 
         /// <inheritdoc />
-        public override void RefreshData(BoundingBox extent, double resolution, bool majorChange)
+        public override void RefreshData(BoundingBox extent, double resolution, ChangeType changeType)
         {
             if (!Enabled) return;
             if (DataSource == null) return;
-            if (!majorChange) return;
+            if (changeType == ChangeType.Continuous) return;
 
             _delayer.ExecuteDelayed(() => DelayedFetch(extent.Copy(), resolution));
         }

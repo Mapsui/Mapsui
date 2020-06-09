@@ -322,7 +322,7 @@ namespace Mapsui.UI.Wpf
         /// </summary>
         public void RefreshData()
         {
-            _map?.RefreshData(Viewport.Extent, Viewport.Resolution, true);
+            _map?.RefreshData(Viewport.Extent, Viewport.Resolution, ChangeType.Discrete);
         }
 
         private void OnInfo(MapInfoEventArgs mapInfoEventArgs)

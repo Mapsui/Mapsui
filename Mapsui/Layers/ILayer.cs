@@ -140,12 +140,12 @@ namespace Mapsui.Layers
         /// </summary>
         /// <param name="extent">The new extent of the visible map</param>
         /// <param name="resolution">The new resolution of the visible map</param>
-        /// <param name="majorChange">
-        /// If true an implementation should always refresh it's data. If false (minorChange) the
+        /// <param name="changeType">
+        /// If Discrete an implementation should always refresh it's data. If Continuous the
         /// implementation could ignore it. Example: During dragging a map a WMS layer would not want
         /// to fetch data, only on the drag end.
         /// </param>
-        void RefreshData(BoundingBox extent, double resolution, bool majorChange);
+        void RefreshData(BoundingBox extent, double resolution, ChangeType changeType);
 
         /// <summary>
         /// To indicate the data withing the layer has changed. This triggers a DataChanged event.

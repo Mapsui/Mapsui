@@ -213,11 +213,11 @@ namespace Mapsui
             }
         }
 
-        public void RefreshData(BoundingBox extent, double resolution, bool majorChange)
+        public void RefreshData(BoundingBox extent, double resolution, ChangeType changeType)
         {
             foreach (var layer in _layers.ToList())
             {
-                layer.RefreshData(extent, resolution, majorChange);
+                layer.RefreshData(extent, resolution, changeType);
             }
         }
 
