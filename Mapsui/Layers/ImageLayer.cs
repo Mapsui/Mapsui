@@ -133,7 +133,7 @@ namespace Mapsui.Layers
 
             if (_isFetching)
             {
-                _needsUpdate = true;
+                _needsUpdate = true;    
                 return;
             }
 

@@ -5,7 +5,7 @@ namespace Mapsui.UI
 {
     public class MouseWheelAnimation
     {
-        private int _tickCount;
+        private int _tickCount = int.MinValue;
         private double _toResolution;
         public int Duration { get; set; } = 1000;
         public Easing Easing { get; set; } = Easing.QuarticOut;
@@ -35,7 +35,7 @@ namespace Mapsui.UI
 
         public bool IsAnimating()
         {
-            return Environment.TickCount - _tickCount < Duration;
+            return (Environment.TickCount - _tickCount) < Duration;
         }
     }
 }
