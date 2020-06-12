@@ -82,7 +82,7 @@
 <h2 id="some-background">Some background</h2>
 <p>To get smooth performance while panning and zooming data needs to be fetched on a background thread. Even if it is fetched on a background thread it will use resources which could be noticible in the responsiveness of the map. The asyncronous data fetching of Mapsui tries to take this into account to optimize the user experience.</p>
 <h2 id="changetype">ChangeType</h2>
-<p><em>ChangeType is introduced in V3, in V2 the majorType boolean has this purpose</em></p>
+<p><em>(ChangeType was introduced in V3, in V2 the majorType boolean has this purpose)</em></p>
 <p>When calling the RefreshData method on the layers we pass in a ChangeType parameter which could be:</p>
 <ul>
 <li>Continous - During dragging, pinching zoom, or animations.</li>
@@ -107,7 +107,7 @@
 <p>Those strategies should be tuned to support each other. For instance, in the current implementation the renderer uses higher level tiles when the optimal tiles are not available, and the fetcher pre‐fetches higher level tiles to assist the renderer. The way they play together is not specified in the interface so developers should take this into account.</p>
 <p><img src="images/brutile_fetcher.png" alt="mapsui async fetching architecture"></p>
 <h2 id="data-fetching-in-other-layers">Data fetching in other layers</h2>
-<p>Other layers like the Layer and ImageLayer have their own implementation. They use a delay mechanism in fetching new data.</p>
+<p>Other layers like the Layer and ImageLayer have their own implementation. They use a delay mechanism in fetching new data and ignore ChangeType.Continuous.</p>
 </article>
           </div>
           
