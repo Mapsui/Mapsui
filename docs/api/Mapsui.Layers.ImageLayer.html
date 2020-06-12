@@ -316,7 +316,7 @@ after the view has changed. Specified in milliseconds.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_ImageLayer_ClearCache.md&amp;value=---%0Auid%3A%20Mapsui.Layers.ImageLayer.ClearCache%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/ImageLayer.cs/#L200">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/ImageLayer.cs/#L201">View Source</a>
   </span>
   <a id="Mapsui_Layers_ImageLayer_ClearCache_" data-uid="Mapsui.Layers.ImageLayer.ClearCache*"></a>
   <h4 id="Mapsui_Layers_ImageLayer_ClearCache" data-uid="Mapsui.Layers.ImageLayer.ClearCache">ClearCache()</h4>
@@ -385,7 +385,7 @@ after the view has changed. Specified in milliseconds.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_ImageLayer_IsCrsSupported_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.Layers.ImageLayer.IsCrsSupported(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/ImageLayer.cs/#L208">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/ImageLayer.cs/#L209">View Source</a>
   </span>
   <a id="Mapsui_Layers_ImageLayer_IsCrsSupported_" data-uid="Mapsui.Layers.ImageLayer.IsCrsSupported*"></a>
   <h4 id="Mapsui_Layers_ImageLayer_IsCrsSupported_System_String_" data-uid="Mapsui.Layers.ImageLayer.IsCrsSupported(System.String)">IsCrsSupported(String)</h4>
@@ -468,18 +468,18 @@ after the view has changed. Specified in milliseconds.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_ImageLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_.md&amp;value=---%0Auid%3A%20Mapsui.Layers.ImageLayer.RefreshData(Mapsui.Geometries.BoundingBox%2CSystem.Double%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_ImageLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_Mapsui_ChangeType_.md&amp;value=---%0Auid%3A%20Mapsui.Layers.ImageLayer.RefreshData(Mapsui.Geometries.BoundingBox%2CSystem.Double%2CMapsui.ChangeType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/ImageLayer.cs/#L124">View Source</a>
   </span>
   <a id="Mapsui_Layers_ImageLayer_RefreshData_" data-uid="Mapsui.Layers.ImageLayer.RefreshData*"></a>
-  <h4 id="Mapsui_Layers_ImageLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_" data-uid="Mapsui.Layers.ImageLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)">RefreshData(BoundingBox, Double, Boolean)</h4>
+  <h4 id="Mapsui_Layers_ImageLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_Mapsui_ChangeType_" data-uid="Mapsui.Layers.ImageLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,Mapsui.ChangeType)">RefreshData(BoundingBox, Double, ChangeType)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void RefreshData(BoundingBox extent, double resolution, bool majorChange)</code></pre>
+    <pre><code class="lang-csharp hljs">public override void RefreshData(BoundingBox extent, double resolution, ChangeType changeType)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -502,14 +502,14 @@ after the view has changed. Specified in milliseconds.</p>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">majorChange</span></td>
+        <td><a class="xref" href="Mapsui.ChangeType.html">ChangeType</a></td>
+        <td><span class="parametername">changeType</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_">BaseLayer.RefreshData(BoundingBox, Double, Boolean)</a></div>
+  <div><a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_Mapsui_ChangeType_">BaseLayer.RefreshData(BoundingBox, Double, ChangeType)</a></div>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>

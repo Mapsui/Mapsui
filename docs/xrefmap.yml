@@ -497,6 +497,24 @@ references:
   isSpec: "True"
   fullName: Mapsui.AnimatedNavigator.ZoomTo
   nameWithType: AnimatedNavigator.ZoomTo
+- uid: Mapsui.ChangeType
+  name: ChangeType
+  href: api/Mapsui.ChangeType.html
+  commentId: T:Mapsui.ChangeType
+  fullName: Mapsui.ChangeType
+  nameWithType: ChangeType
+- uid: Mapsui.ChangeType.Continuous
+  name: Continuous
+  href: api/Mapsui.ChangeType.html#Mapsui_ChangeType_Continuous
+  commentId: F:Mapsui.ChangeType.Continuous
+  fullName: Mapsui.ChangeType.Continuous
+  nameWithType: ChangeType.Continuous
+- uid: Mapsui.ChangeType.Discrete
+  name: Discrete
+  href: api/Mapsui.ChangeType.html#Mapsui_ChangeType_Discrete
+  commentId: F:Mapsui.ChangeType.Discrete
+  fullName: Mapsui.ChangeType.Discrete
+  nameWithType: ChangeType.Discrete
 - uid: Mapsui.ConcurrentQueueExtensions
   name: ConcurrentQueueExtensions
   href: api/Mapsui.ConcurrentQueueExtensions.html
@@ -6245,12 +6263,12 @@ references:
   commentId: E:Mapsui.IMap.PropertyChanged
   fullName: Mapsui.IMap.PropertyChanged
   nameWithType: IMap.PropertyChanged
-- uid: Mapsui.IMap.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
-  name: RefreshData(BoundingBox, Double, Boolean)
-  href: api/Mapsui.IMap.html#Mapsui_IMap_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_
-  commentId: M:Mapsui.IMap.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
-  fullName: Mapsui.IMap.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, System.Boolean)
-  nameWithType: IMap.RefreshData(BoundingBox, Double, Boolean)
+- uid: Mapsui.IMap.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,Mapsui.ChangeType)
+  name: RefreshData(BoundingBox, Double, ChangeType)
+  href: api/Mapsui.IMap.html#Mapsui_IMap_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_Mapsui_ChangeType_
+  commentId: M:Mapsui.IMap.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,Mapsui.ChangeType)
+  fullName: Mapsui.IMap.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, Mapsui.ChangeType)
+  nameWithType: IMap.RefreshData(BoundingBox, Double, ChangeType)
 - uid: Mapsui.IMap.RefreshData*
   name: RefreshData
   href: api/Mapsui.IMap.html#Mapsui_IMap_RefreshData_
@@ -6896,12 +6914,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.AnimatedPointLayer.GetFeaturesInView
   nameWithType: AnimatedPointLayer.GetFeaturesInView
-- uid: Mapsui.Layers.AnimatedPointLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
-  name: RefreshData(BoundingBox, Double, Boolean)
-  href: api/Mapsui.Layers.AnimatedPointLayer.html#Mapsui_Layers_AnimatedPointLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_
-  commentId: M:Mapsui.Layers.AnimatedPointLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
-  fullName: Mapsui.Layers.AnimatedPointLayer.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, System.Boolean)
-  nameWithType: AnimatedPointLayer.RefreshData(BoundingBox, Double, Boolean)
+- uid: Mapsui.Layers.AnimatedPointLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,Mapsui.ChangeType)
+  name: RefreshData(BoundingBox, Double, ChangeType)
+  href: api/Mapsui.Layers.AnimatedPointLayer.html#Mapsui_Layers_AnimatedPointLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_Mapsui_ChangeType_
+  commentId: M:Mapsui.Layers.AnimatedPointLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,Mapsui.ChangeType)
+  fullName: Mapsui.Layers.AnimatedPointLayer.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, Mapsui.ChangeType)
+  nameWithType: AnimatedPointLayer.RefreshData(BoundingBox, Double, ChangeType)
 - uid: Mapsui.Layers.AnimatedPointLayer.RefreshData*
   name: RefreshData
   href: api/Mapsui.Layers.AnimatedPointLayer.html#Mapsui_Layers_AnimatedPointLayer_RefreshData_
@@ -7193,12 +7211,12 @@ references:
   commentId: E:Mapsui.Layers.BaseLayer.PropertyChanged
   fullName: Mapsui.Layers.BaseLayer.PropertyChanged
   nameWithType: BaseLayer.PropertyChanged
-- uid: Mapsui.Layers.BaseLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
-  name: RefreshData(BoundingBox, Double, Boolean)
-  href: api/Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_
-  commentId: M:Mapsui.Layers.BaseLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
-  fullName: Mapsui.Layers.BaseLayer.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, System.Boolean)
-  nameWithType: BaseLayer.RefreshData(BoundingBox, Double, Boolean)
+- uid: Mapsui.Layers.BaseLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,Mapsui.ChangeType)
+  name: RefreshData(BoundingBox, Double, ChangeType)
+  href: api/Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_Mapsui_ChangeType_
+  commentId: M:Mapsui.Layers.BaseLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,Mapsui.ChangeType)
+  fullName: Mapsui.Layers.BaseLayer.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, Mapsui.ChangeType)
+  nameWithType: BaseLayer.RefreshData(BoundingBox, Double, ChangeType)
 - uid: Mapsui.Layers.BaseLayer.RefreshData*
   name: RefreshData
   href: api/Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_RefreshData_
@@ -7531,12 +7549,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.ILayer.Opacity
   nameWithType: ILayer.Opacity
-- uid: Mapsui.Layers.ILayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
-  name: RefreshData(BoundingBox, Double, Boolean)
-  href: api/Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_
-  commentId: M:Mapsui.Layers.ILayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
-  fullName: Mapsui.Layers.ILayer.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, System.Boolean)
-  nameWithType: ILayer.RefreshData(BoundingBox, Double, Boolean)
+- uid: Mapsui.Layers.ILayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,Mapsui.ChangeType)
+  name: RefreshData(BoundingBox, Double, ChangeType)
+  href: api/Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_Mapsui_ChangeType_
+  commentId: M:Mapsui.Layers.ILayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,Mapsui.ChangeType)
+  fullName: Mapsui.Layers.ILayer.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, Mapsui.ChangeType)
+  nameWithType: ILayer.RefreshData(BoundingBox, Double, ChangeType)
 - uid: Mapsui.Layers.ILayer.RefreshData*
   name: RefreshData
   href: api/Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_RefreshData_
@@ -7706,12 +7724,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.ImageLayer.OnPropertyChanged
   nameWithType: ImageLayer.OnPropertyChanged
-- uid: Mapsui.Layers.ImageLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
-  name: RefreshData(BoundingBox, Double, Boolean)
-  href: api/Mapsui.Layers.ImageLayer.html#Mapsui_Layers_ImageLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_
-  commentId: M:Mapsui.Layers.ImageLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
-  fullName: Mapsui.Layers.ImageLayer.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, System.Boolean)
-  nameWithType: ImageLayer.RefreshData(BoundingBox, Double, Boolean)
+- uid: Mapsui.Layers.ImageLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,Mapsui.ChangeType)
+  name: RefreshData(BoundingBox, Double, ChangeType)
+  href: api/Mapsui.Layers.ImageLayer.html#Mapsui_Layers_ImageLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_Mapsui_ChangeType_
+  commentId: M:Mapsui.Layers.ImageLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,Mapsui.ChangeType)
+  fullName: Mapsui.Layers.ImageLayer.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, Mapsui.ChangeType)
+  nameWithType: ImageLayer.RefreshData(BoundingBox, Double, ChangeType)
 - uid: Mapsui.Layers.ImageLayer.RefreshData*
   name: RefreshData
   href: api/Mapsui.Layers.ImageLayer.html#Mapsui_Layers_ImageLayer_RefreshData_
@@ -7835,12 +7853,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.Layer.IsCrsSupported
   nameWithType: Layer.IsCrsSupported
-- uid: Mapsui.Layers.Layer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
-  name: RefreshData(BoundingBox, Double, Boolean)
-  href: api/Mapsui.Layers.Layer.html#Mapsui_Layers_Layer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_
-  commentId: M:Mapsui.Layers.Layer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
-  fullName: Mapsui.Layers.Layer.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, System.Boolean)
-  nameWithType: Layer.RefreshData(BoundingBox, Double, Boolean)
+- uid: Mapsui.Layers.Layer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,Mapsui.ChangeType)
+  name: RefreshData(BoundingBox, Double, ChangeType)
+  href: api/Mapsui.Layers.Layer.html#Mapsui_Layers_Layer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_Mapsui_ChangeType_
+  commentId: M:Mapsui.Layers.Layer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,Mapsui.ChangeType)
+  fullName: Mapsui.Layers.Layer.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, Mapsui.ChangeType)
+  nameWithType: Layer.RefreshData(BoundingBox, Double, ChangeType)
 - uid: Mapsui.Layers.Layer.RefreshData*
   name: RefreshData
   href: api/Mapsui.Layers.Layer.html#Mapsui_Layers_Layer_RefreshData_
@@ -8133,12 +8151,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.MemoryLayer.GetFeaturesInView
   nameWithType: MemoryLayer.GetFeaturesInView
-- uid: Mapsui.Layers.MemoryLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
-  name: RefreshData(BoundingBox, Double, Boolean)
-  href: api/Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_
-  commentId: M:Mapsui.Layers.MemoryLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
-  fullName: Mapsui.Layers.MemoryLayer.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, System.Boolean)
-  nameWithType: MemoryLayer.RefreshData(BoundingBox, Double, Boolean)
+- uid: Mapsui.Layers.MemoryLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,Mapsui.ChangeType)
+  name: RefreshData(BoundingBox, Double, ChangeType)
+  href: api/Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_Mapsui_ChangeType_
+  commentId: M:Mapsui.Layers.MemoryLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,Mapsui.ChangeType)
+  fullName: Mapsui.Layers.MemoryLayer.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, Mapsui.ChangeType)
+  nameWithType: MemoryLayer.RefreshData(BoundingBox, Double, ChangeType)
 - uid: Mapsui.Layers.MemoryLayer.RefreshData*
   name: RefreshData
   href: api/Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_RefreshData_
@@ -8230,12 +8248,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.RasterizingLayer.GetFeaturesInView
   nameWithType: RasterizingLayer.GetFeaturesInView
-- uid: Mapsui.Layers.RasterizingLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
-  name: RefreshData(BoundingBox, Double, Boolean)
-  href: api/Mapsui.Layers.RasterizingLayer.html#Mapsui_Layers_RasterizingLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_
-  commentId: M:Mapsui.Layers.RasterizingLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
-  fullName: Mapsui.Layers.RasterizingLayer.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, System.Boolean)
-  nameWithType: RasterizingLayer.RefreshData(BoundingBox, Double, Boolean)
+- uid: Mapsui.Layers.RasterizingLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,Mapsui.ChangeType)
+  name: RefreshData(BoundingBox, Double, ChangeType)
+  href: api/Mapsui.Layers.RasterizingLayer.html#Mapsui_Layers_RasterizingLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_Mapsui_ChangeType_
+  commentId: M:Mapsui.Layers.RasterizingLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,Mapsui.ChangeType)
+  fullName: Mapsui.Layers.RasterizingLayer.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, Mapsui.ChangeType)
+  nameWithType: RasterizingLayer.RefreshData(BoundingBox, Double, ChangeType)
 - uid: Mapsui.Layers.RasterizingLayer.RefreshData*
   name: RefreshData
   href: api/Mapsui.Layers.RasterizingLayer.html#Mapsui_Layers_RasterizingLayer_RefreshData_
@@ -8330,12 +8348,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.TileLayer.IsCrsSupported
   nameWithType: TileLayer.IsCrsSupported
-- uid: Mapsui.Layers.TileLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
-  name: RefreshData(BoundingBox, Double, Boolean)
-  href: api/Mapsui.Layers.TileLayer.html#Mapsui_Layers_TileLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_
-  commentId: M:Mapsui.Layers.TileLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
-  fullName: Mapsui.Layers.TileLayer.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, System.Boolean)
-  nameWithType: TileLayer.RefreshData(BoundingBox, Double, Boolean)
+- uid: Mapsui.Layers.TileLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,Mapsui.ChangeType)
+  name: RefreshData(BoundingBox, Double, ChangeType)
+  href: api/Mapsui.Layers.TileLayer.html#Mapsui_Layers_TileLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_Mapsui_ChangeType_
+  commentId: M:Mapsui.Layers.TileLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,Mapsui.ChangeType)
+  fullName: Mapsui.Layers.TileLayer.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, Mapsui.ChangeType)
+  nameWithType: TileLayer.RefreshData(BoundingBox, Double, ChangeType)
 - uid: Mapsui.Layers.TileLayer.RefreshData*
   name: RefreshData
   href: api/Mapsui.Layers.TileLayer.html#Mapsui_Layers_TileLayer_RefreshData_
@@ -8488,12 +8506,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.WritableLayer.GetFeaturesInView
   nameWithType: WritableLayer.GetFeaturesInView
-- uid: Mapsui.Layers.WritableLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
-  name: RefreshData(BoundingBox, Double, Boolean)
-  href: api/Mapsui.Layers.WritableLayer.html#Mapsui_Layers_WritableLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_
-  commentId: M:Mapsui.Layers.WritableLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
-  fullName: Mapsui.Layers.WritableLayer.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, System.Boolean)
-  nameWithType: WritableLayer.RefreshData(BoundingBox, Double, Boolean)
+- uid: Mapsui.Layers.WritableLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,Mapsui.ChangeType)
+  name: RefreshData(BoundingBox, Double, ChangeType)
+  href: api/Mapsui.Layers.WritableLayer.html#Mapsui_Layers_WritableLayer_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_Mapsui_ChangeType_
+  commentId: M:Mapsui.Layers.WritableLayer.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,Mapsui.ChangeType)
+  fullName: Mapsui.Layers.WritableLayer.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, Mapsui.ChangeType)
+  nameWithType: WritableLayer.RefreshData(BoundingBox, Double, ChangeType)
 - uid: Mapsui.Layers.WritableLayer.RefreshData*
   name: RefreshData
   href: api/Mapsui.Layers.WritableLayer.html#Mapsui_Layers_WritableLayer_RefreshData_
@@ -9112,12 +9130,12 @@ references:
   commentId: E:Mapsui.Map.PropertyChanged
   fullName: Mapsui.Map.PropertyChanged
   nameWithType: Map.PropertyChanged
-- uid: Mapsui.Map.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
-  name: RefreshData(BoundingBox, Double, Boolean)
-  href: api/Mapsui.Map.html#Mapsui_Map_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_
-  commentId: M:Mapsui.Map.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)
-  fullName: Mapsui.Map.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, System.Boolean)
-  nameWithType: Map.RefreshData(BoundingBox, Double, Boolean)
+- uid: Mapsui.Map.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,Mapsui.ChangeType)
+  name: RefreshData(BoundingBox, Double, ChangeType)
+  href: api/Mapsui.Map.html#Mapsui_Map_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_Mapsui_ChangeType_
+  commentId: M:Mapsui.Map.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,Mapsui.ChangeType)
+  fullName: Mapsui.Map.RefreshData(Mapsui.Geometries.BoundingBox, System.Double, Mapsui.ChangeType)
+  nameWithType: Map.RefreshData(BoundingBox, Double, ChangeType)
 - uid: Mapsui.Map.RefreshData*
   name: RefreshData
   href: api/Mapsui.Map.html#Mapsui_Map_RefreshData_
@@ -9395,12 +9413,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Navigator.ZoomOut
   nameWithType: Navigator.ZoomOut
-- uid: Mapsui.Navigator.ZoomTo(Mapsui.Geometries.Point,System.Double,System.Int64,Mapsui.Utilities.Easing)
-  name: ZoomTo(Point, Double, Int64, Easing)
-  href: api/Mapsui.Navigator.html#Mapsui_Navigator_ZoomTo_Mapsui_Geometries_Point_System_Double_System_Int64_Mapsui_Utilities_Easing_
-  commentId: M:Mapsui.Navigator.ZoomTo(Mapsui.Geometries.Point,System.Double,System.Int64,Mapsui.Utilities.Easing)
-  fullName: Mapsui.Navigator.ZoomTo(Mapsui.Geometries.Point, System.Double, System.Int64, Mapsui.Utilities.Easing)
-  nameWithType: Navigator.ZoomTo(Point, Double, Int64, Easing)
 - uid: Mapsui.Navigator.ZoomTo(System.Double,Mapsui.Geometries.Point,System.Int64,Mapsui.Utilities.Easing)
   name: ZoomTo(Double, Point, Int64, Easing)
   href: api/Mapsui.Navigator.html#Mapsui_Navigator_ZoomTo_System_Double_Mapsui_Geometries_Point_System_Int64_Mapsui_Utilities_Easing_
@@ -22577,12 +22589,12 @@ references:
   commentId: E:Mapsui.UI.Android.MapControl.PropertyChanged
   fullName: Mapsui.UI.Android.MapControl.PropertyChanged
   nameWithType: MapControl.PropertyChanged
-- uid: Mapsui.UI.Android.MapControl.Refresh
-  name: Refresh()
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Refresh
-  commentId: M:Mapsui.UI.Android.MapControl.Refresh
-  fullName: Mapsui.UI.Android.MapControl.Refresh()
-  nameWithType: MapControl.Refresh()
+- uid: Mapsui.UI.Android.MapControl.Refresh(Mapsui.ChangeType)
+  name: Refresh(ChangeType)
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Refresh_Mapsui_ChangeType_
+  commentId: M:Mapsui.UI.Android.MapControl.Refresh(Mapsui.ChangeType)
+  fullName: Mapsui.UI.Android.MapControl.Refresh(Mapsui.ChangeType)
+  nameWithType: MapControl.Refresh(ChangeType)
 - uid: Mapsui.UI.Android.MapControl.Refresh*
   name: Refresh
   href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Refresh_
@@ -22590,12 +22602,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.Refresh
   nameWithType: MapControl.Refresh
-- uid: Mapsui.UI.Android.MapControl.RefreshData
-  name: RefreshData()
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_RefreshData
-  commentId: M:Mapsui.UI.Android.MapControl.RefreshData
-  fullName: Mapsui.UI.Android.MapControl.RefreshData()
-  nameWithType: MapControl.RefreshData()
+- uid: Mapsui.UI.Android.MapControl.RefreshData(Mapsui.ChangeType)
+  name: RefreshData(ChangeType)
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_RefreshData_Mapsui_ChangeType_
+  commentId: M:Mapsui.UI.Android.MapControl.RefreshData(Mapsui.ChangeType)
+  fullName: Mapsui.UI.Android.MapControl.RefreshData(Mapsui.ChangeType)
+  nameWithType: MapControl.RefreshData(ChangeType)
 - uid: Mapsui.UI.Android.MapControl.RefreshData*
   name: RefreshData
   href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_RefreshData_
@@ -24345,12 +24357,12 @@ references:
   commentId: E:Mapsui.UI.Forms.MapControl.PropertyChanged
   fullName: Mapsui.UI.Forms.MapControl.PropertyChanged
   nameWithType: MapControl.PropertyChanged
-- uid: Mapsui.UI.Forms.MapControl.Refresh
-  name: Refresh()
-  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_Refresh
-  commentId: M:Mapsui.UI.Forms.MapControl.Refresh
-  fullName: Mapsui.UI.Forms.MapControl.Refresh()
-  nameWithType: MapControl.Refresh()
+- uid: Mapsui.UI.Forms.MapControl.Refresh(Mapsui.ChangeType)
+  name: Refresh(ChangeType)
+  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_Refresh_Mapsui_ChangeType_
+  commentId: M:Mapsui.UI.Forms.MapControl.Refresh(Mapsui.ChangeType)
+  fullName: Mapsui.UI.Forms.MapControl.Refresh(Mapsui.ChangeType)
+  nameWithType: MapControl.Refresh(ChangeType)
 - uid: Mapsui.UI.Forms.MapControl.Refresh*
   name: Refresh
   href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_Refresh_
@@ -24358,12 +24370,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapControl.Refresh
   nameWithType: MapControl.Refresh
-- uid: Mapsui.UI.Forms.MapControl.RefreshData
-  name: RefreshData()
-  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_RefreshData
-  commentId: M:Mapsui.UI.Forms.MapControl.RefreshData
-  fullName: Mapsui.UI.Forms.MapControl.RefreshData()
-  nameWithType: MapControl.RefreshData()
+- uid: Mapsui.UI.Forms.MapControl.RefreshData(Mapsui.ChangeType)
+  name: RefreshData(ChangeType)
+  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_RefreshData_Mapsui_ChangeType_
+  commentId: M:Mapsui.UI.Forms.MapControl.RefreshData(Mapsui.ChangeType)
+  fullName: Mapsui.UI.Forms.MapControl.RefreshData(Mapsui.ChangeType)
+  nameWithType: MapControl.RefreshData(ChangeType)
 - uid: Mapsui.UI.Forms.MapControl.RefreshData*
   name: RefreshData
   href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_RefreshData_
@@ -25112,12 +25124,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapView.PixelDensity
   nameWithType: MapView.PixelDensity
-- uid: Mapsui.UI.Forms.MapView.Refresh
-  name: Refresh()
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Refresh
-  commentId: M:Mapsui.UI.Forms.MapView.Refresh
-  fullName: Mapsui.UI.Forms.MapView.Refresh()
-  nameWithType: MapView.Refresh()
+- uid: Mapsui.UI.Forms.MapView.Refresh(Mapsui.ChangeType)
+  name: Refresh(ChangeType)
+  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Refresh_Mapsui_ChangeType_
+  commentId: M:Mapsui.UI.Forms.MapView.Refresh(Mapsui.ChangeType)
+  fullName: Mapsui.UI.Forms.MapView.Refresh(Mapsui.ChangeType)
+  nameWithType: MapView.Refresh(ChangeType)
 - uid: Mapsui.UI.Forms.MapView.Refresh*
   name: Refresh
   href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Refresh_
@@ -25125,12 +25137,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapView.Refresh
   nameWithType: MapView.Refresh
-- uid: Mapsui.UI.Forms.MapView.RefreshData
-  name: RefreshData()
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_RefreshData
-  commentId: M:Mapsui.UI.Forms.MapView.RefreshData
-  fullName: Mapsui.UI.Forms.MapView.RefreshData()
-  nameWithType: MapView.RefreshData()
+- uid: Mapsui.UI.Forms.MapView.RefreshData(Mapsui.ChangeType)
+  name: RefreshData(ChangeType)
+  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_RefreshData_Mapsui_ChangeType_
+  commentId: M:Mapsui.UI.Forms.MapView.RefreshData(Mapsui.ChangeType)
+  fullName: Mapsui.UI.Forms.MapView.RefreshData(Mapsui.ChangeType)
+  nameWithType: MapView.RefreshData(ChangeType)
 - uid: Mapsui.UI.Forms.MapView.RefreshData*
   name: RefreshData
   href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_RefreshData_
@@ -26437,12 +26449,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.IMapControl.PixelDensity
   nameWithType: IMapControl.PixelDensity
-- uid: Mapsui.UI.IMapControl.Refresh
-  name: Refresh()
-  href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_Refresh
-  commentId: M:Mapsui.UI.IMapControl.Refresh
-  fullName: Mapsui.UI.IMapControl.Refresh()
-  nameWithType: IMapControl.Refresh()
+- uid: Mapsui.UI.IMapControl.Refresh(Mapsui.ChangeType)
+  name: Refresh(ChangeType)
+  href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_Refresh_Mapsui_ChangeType_
+  commentId: M:Mapsui.UI.IMapControl.Refresh(Mapsui.ChangeType)
+  fullName: Mapsui.UI.IMapControl.Refresh(Mapsui.ChangeType)
+  nameWithType: IMapControl.Refresh(ChangeType)
 - uid: Mapsui.UI.IMapControl.Refresh*
   name: Refresh
   href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_Refresh_
@@ -26450,12 +26462,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.IMapControl.Refresh
   nameWithType: IMapControl.Refresh
-- uid: Mapsui.UI.IMapControl.RefreshData
-  name: RefreshData()
-  href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_RefreshData
-  commentId: M:Mapsui.UI.IMapControl.RefreshData
-  fullName: Mapsui.UI.IMapControl.RefreshData()
-  nameWithType: IMapControl.RefreshData()
+- uid: Mapsui.UI.IMapControl.RefreshData(Mapsui.ChangeType)
+  name: RefreshData(ChangeType)
+  href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_RefreshData_Mapsui_ChangeType_
+  commentId: M:Mapsui.UI.IMapControl.RefreshData(Mapsui.ChangeType)
+  fullName: Mapsui.UI.IMapControl.RefreshData(Mapsui.ChangeType)
+  nameWithType: IMapControl.RefreshData(ChangeType)
 - uid: Mapsui.UI.IMapControl.RefreshData*
   name: RefreshData
   href: api/Mapsui.UI.IMapControl.html#Mapsui_UI_IMapControl_RefreshData_
@@ -26781,12 +26793,12 @@ references:
   commentId: E:Mapsui.UI.iOS.MapControl.PropertyChanged
   fullName: Mapsui.UI.iOS.MapControl.PropertyChanged
   nameWithType: MapControl.PropertyChanged
-- uid: Mapsui.UI.iOS.MapControl.Refresh
-  name: Refresh()
-  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_Refresh
-  commentId: M:Mapsui.UI.iOS.MapControl.Refresh
-  fullName: Mapsui.UI.iOS.MapControl.Refresh()
-  nameWithType: MapControl.Refresh()
+- uid: Mapsui.UI.iOS.MapControl.Refresh(Mapsui.ChangeType)
+  name: Refresh(ChangeType)
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_Refresh_Mapsui_ChangeType_
+  commentId: M:Mapsui.UI.iOS.MapControl.Refresh(Mapsui.ChangeType)
+  fullName: Mapsui.UI.iOS.MapControl.Refresh(Mapsui.ChangeType)
+  nameWithType: MapControl.Refresh(ChangeType)
 - uid: Mapsui.UI.iOS.MapControl.Refresh*
   name: Refresh
   href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_Refresh_
@@ -26794,12 +26806,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.iOS.MapControl.Refresh
   nameWithType: MapControl.Refresh
-- uid: Mapsui.UI.iOS.MapControl.RefreshData
-  name: RefreshData()
-  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_RefreshData
-  commentId: M:Mapsui.UI.iOS.MapControl.RefreshData
-  fullName: Mapsui.UI.iOS.MapControl.RefreshData()
-  nameWithType: MapControl.RefreshData()
+- uid: Mapsui.UI.iOS.MapControl.RefreshData(Mapsui.ChangeType)
+  name: RefreshData(ChangeType)
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_RefreshData_Mapsui_ChangeType_
+  commentId: M:Mapsui.UI.iOS.MapControl.RefreshData(Mapsui.ChangeType)
+  fullName: Mapsui.UI.iOS.MapControl.RefreshData(Mapsui.ChangeType)
+  nameWithType: MapControl.RefreshData(ChangeType)
 - uid: Mapsui.UI.iOS.MapControl.RefreshData*
   name: RefreshData
   href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_RefreshData_
@@ -27242,6 +27254,64 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.MinMax.Min
   nameWithType: MinMax.Min
+- uid: Mapsui.UI.MouseWheelAnimation
+  name: MouseWheelAnimation
+  href: api/Mapsui.UI.MouseWheelAnimation.html
+  commentId: T:Mapsui.UI.MouseWheelAnimation
+  fullName: Mapsui.UI.MouseWheelAnimation
+  nameWithType: MouseWheelAnimation
+- uid: Mapsui.UI.MouseWheelAnimation.Duration
+  name: Duration
+  href: api/Mapsui.UI.MouseWheelAnimation.html#Mapsui_UI_MouseWheelAnimation_Duration
+  commentId: P:Mapsui.UI.MouseWheelAnimation.Duration
+  fullName: Mapsui.UI.MouseWheelAnimation.Duration
+  nameWithType: MouseWheelAnimation.Duration
+- uid: Mapsui.UI.MouseWheelAnimation.Duration*
+  name: Duration
+  href: api/Mapsui.UI.MouseWheelAnimation.html#Mapsui_UI_MouseWheelAnimation_Duration_
+  commentId: Overload:Mapsui.UI.MouseWheelAnimation.Duration
+  isSpec: "True"
+  fullName: Mapsui.UI.MouseWheelAnimation.Duration
+  nameWithType: MouseWheelAnimation.Duration
+- uid: Mapsui.UI.MouseWheelAnimation.Easing
+  name: Easing
+  href: api/Mapsui.UI.MouseWheelAnimation.html#Mapsui_UI_MouseWheelAnimation_Easing
+  commentId: P:Mapsui.UI.MouseWheelAnimation.Easing
+  fullName: Mapsui.UI.MouseWheelAnimation.Easing
+  nameWithType: MouseWheelAnimation.Easing
+- uid: Mapsui.UI.MouseWheelAnimation.Easing*
+  name: Easing
+  href: api/Mapsui.UI.MouseWheelAnimation.html#Mapsui_UI_MouseWheelAnimation_Easing_
+  commentId: Overload:Mapsui.UI.MouseWheelAnimation.Easing
+  isSpec: "True"
+  fullName: Mapsui.UI.MouseWheelAnimation.Easing
+  nameWithType: MouseWheelAnimation.Easing
+- uid: Mapsui.UI.MouseWheelAnimation.GetResolution(System.Int32,Mapsui.IViewport,Mapsui.IMap)
+  name: GetResolution(Int32, IViewport, IMap)
+  href: api/Mapsui.UI.MouseWheelAnimation.html#Mapsui_UI_MouseWheelAnimation_GetResolution_System_Int32_Mapsui_IViewport_Mapsui_IMap_
+  commentId: M:Mapsui.UI.MouseWheelAnimation.GetResolution(System.Int32,Mapsui.IViewport,Mapsui.IMap)
+  fullName: Mapsui.UI.MouseWheelAnimation.GetResolution(System.Int32, Mapsui.IViewport, Mapsui.IMap)
+  nameWithType: MouseWheelAnimation.GetResolution(Int32, IViewport, IMap)
+- uid: Mapsui.UI.MouseWheelAnimation.GetResolution*
+  name: GetResolution
+  href: api/Mapsui.UI.MouseWheelAnimation.html#Mapsui_UI_MouseWheelAnimation_GetResolution_
+  commentId: Overload:Mapsui.UI.MouseWheelAnimation.GetResolution
+  isSpec: "True"
+  fullName: Mapsui.UI.MouseWheelAnimation.GetResolution
+  nameWithType: MouseWheelAnimation.GetResolution
+- uid: Mapsui.UI.MouseWheelAnimation.IsAnimating
+  name: IsAnimating()
+  href: api/Mapsui.UI.MouseWheelAnimation.html#Mapsui_UI_MouseWheelAnimation_IsAnimating
+  commentId: M:Mapsui.UI.MouseWheelAnimation.IsAnimating
+  fullName: Mapsui.UI.MouseWheelAnimation.IsAnimating()
+  nameWithType: MouseWheelAnimation.IsAnimating()
+- uid: Mapsui.UI.MouseWheelAnimation.IsAnimating*
+  name: IsAnimating
+  href: api/Mapsui.UI.MouseWheelAnimation.html#Mapsui_UI_MouseWheelAnimation_IsAnimating_
+  commentId: Overload:Mapsui.UI.MouseWheelAnimation.IsAnimating
+  isSpec: "True"
+  fullName: Mapsui.UI.MouseWheelAnimation.IsAnimating
+  nameWithType: MouseWheelAnimation.IsAnimating
 - uid: Mapsui.UI.Objects
   name: Mapsui.UI.Objects
   href: api/Mapsui.UI.Objects.html
@@ -28327,6 +28397,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.Map
   nameWithType: MapControl.Map
+- uid: Mapsui.UI.Wpf.MapControl.MouseWheelAnimation
+  name: MouseWheelAnimation
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_MouseWheelAnimation
+  commentId: P:Mapsui.UI.Wpf.MapControl.MouseWheelAnimation
+  fullName: Mapsui.UI.Wpf.MapControl.MouseWheelAnimation
+  nameWithType: MapControl.MouseWheelAnimation
+- uid: Mapsui.UI.Wpf.MapControl.MouseWheelAnimation*
+  name: MouseWheelAnimation
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_MouseWheelAnimation_
+  commentId: Overload:Mapsui.UI.Wpf.MapControl.MouseWheelAnimation
+  isSpec: "True"
+  fullName: Mapsui.UI.Wpf.MapControl.MouseWheelAnimation
+  nameWithType: MapControl.MouseWheelAnimation
 - uid: Mapsui.UI.Wpf.MapControl.Navigator
   name: Navigator
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_Navigator
@@ -28398,12 +28481,12 @@ references:
   commentId: E:Mapsui.UI.Wpf.MapControl.PropertyChanged
   fullName: Mapsui.UI.Wpf.MapControl.PropertyChanged
   nameWithType: MapControl.PropertyChanged
-- uid: Mapsui.UI.Wpf.MapControl.Refresh
-  name: Refresh()
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_Refresh
-  commentId: M:Mapsui.UI.Wpf.MapControl.Refresh
-  fullName: Mapsui.UI.Wpf.MapControl.Refresh()
-  nameWithType: MapControl.Refresh()
+- uid: Mapsui.UI.Wpf.MapControl.Refresh(Mapsui.ChangeType)
+  name: Refresh(ChangeType)
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_Refresh_Mapsui_ChangeType_
+  commentId: M:Mapsui.UI.Wpf.MapControl.Refresh(Mapsui.ChangeType)
+  fullName: Mapsui.UI.Wpf.MapControl.Refresh(Mapsui.ChangeType)
+  nameWithType: MapControl.Refresh(ChangeType)
 - uid: Mapsui.UI.Wpf.MapControl.Refresh*
   name: Refresh
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_Refresh_
@@ -28411,12 +28494,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.Refresh
   nameWithType: MapControl.Refresh
-- uid: Mapsui.UI.Wpf.MapControl.RefreshData
-  name: RefreshData()
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_RefreshData
-  commentId: M:Mapsui.UI.Wpf.MapControl.RefreshData
-  fullName: Mapsui.UI.Wpf.MapControl.RefreshData()
-  nameWithType: MapControl.RefreshData()
+- uid: Mapsui.UI.Wpf.MapControl.RefreshData(Mapsui.ChangeType)
+  name: RefreshData(ChangeType)
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_RefreshData_Mapsui_ChangeType_
+  commentId: M:Mapsui.UI.Wpf.MapControl.RefreshData(Mapsui.ChangeType)
+  fullName: Mapsui.UI.Wpf.MapControl.RefreshData(Mapsui.ChangeType)
+  nameWithType: MapControl.RefreshData(ChangeType)
 - uid: Mapsui.UI.Wpf.MapControl.RefreshData*
   name: RefreshData
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_RefreshData_
