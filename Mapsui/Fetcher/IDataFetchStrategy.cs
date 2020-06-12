@@ -20,8 +20,12 @@ using BruTile;
 
 namespace Mapsui.Fetcher
 {
-    public interface IFetchStrategy
+    public interface IDataFetchStrategy
     {
-        IList<TileInfo> GetTilesWanted(ITileSchema schema, Extent extent, string levelId);
+        /// <summary>
+        /// Fetches the tiles from the data source to put them into the cache. A strategy could  pre-fetch
+        /// certain tiles to anticipate future use.
+        /// </summary>
+        IList<TileInfo> Get(ITileSchema schema, Extent extent, string levelId);
     }
 }

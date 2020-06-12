@@ -7,9 +7,9 @@ using Mapsui.Providers;
 
 namespace Mapsui.Rendering
 {
-    public class RenderGetStrategy : IRenderGetStrategy
+    public class RenderFetchStrategy : IRenderFetchStrategy
     {
-        public IList<IFeature> GetFeatures(BoundingBox extent, double resolution, ITileSchema schema, ITileCache<Feature> memoryCache)
+        public IList<IFeature> Get(BoundingBox extent, double resolution, ITileSchema schema, ITileCache<Feature> memoryCache)
         {
             var dictionary = new Dictionary<TileIndex, IFeature>();
             var levelId = BruTile.Utilities.GetNearestLevel(schema.Resolutions, resolution);

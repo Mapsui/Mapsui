@@ -18,7 +18,7 @@ namespace Mapsui.Fetcher
         private bool _busy;
         private bool _viewportIsModified;
         private readonly ITileCache<Feature> _tileCache;
-        private readonly IFetchStrategy _fetchStrategy;
+        private readonly IDataFetchStrategy _dataFetchStrategy;
         private readonly ConcurrentQueue<TileInfo> _tilesToFetch = new ConcurrentQueue<TileInfo>();
         private readonly ConcurrentHashSet<TileIndex> _tilesInProgress = new ConcurrentHashSet<TileIndex>();
         private readonly ITileSchema _tileSchema;
@@ -29,12 +29,12 @@ namespace Mapsui.Fetcher
             ITileCache<Feature> tileCache, 
             ITileSchema tileSchema, 
             Func<TileInfo, Feature> fetchTileAsFeature, 
-            IFetchStrategy fetchStrategy = null)
+            IDataFetchStrategy dataFetchStrategy = null)
         {
             _tileCache = tileCache;
             _tileSchema = tileSchema;
             _fetchTileAsFeature = fetchTileAsFeature;
-            _fetchStrategy = fetchStrategy ?? new MinimalFetchStrategy();
+            _dataFetchStrategy = dataFetchStrategy ?? new MinimalDataFetchStrategy();
             _fetchMachine = new FetchMachine(this);
         }
 
@@ -140,7 +140,7 @@ namespace Mapsui.Fetcher
         private void UpdateTilesToFetchForViewportChange()
         {
             var levelId = BruTile.Utilities.GetNearestLevel(_tileSchema.Resolutions, _resolution);
-            var tilesToCoverViewport = _fetchStrategy.GetTilesWanted(_tileSchema, _extent.ToExtent(), levelId);
+            var tilesToCoverViewport = _dataFetchStrategy.Get(_tileSchema, _extent.ToExtent(), levelId);
             NumberTilesNeeded = tilesToCoverViewport.Count;
             var tilesToFetch = tilesToCoverViewport.Where(t => _tileCache.Find(t.Index) == null && !_tilesInProgress.Contains(t.Index));
             _tilesToFetch.Clear();
