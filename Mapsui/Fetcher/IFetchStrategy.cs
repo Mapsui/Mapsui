@@ -20,7 +20,7 @@ using BruTile;
 
 namespace Mapsui.Fetcher
 {
-    public interface IFetchStrategy
+    public interface IDataFetchStrategy
     {
         IList<TileInfo> GetTilesWanted(ITileSchema schema, Extent extent, string levelId);
     }

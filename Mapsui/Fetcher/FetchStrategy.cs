@@ -22,11 +22,11 @@ using Mapsui.Geometries.Utilities;
 
 namespace Mapsui.Fetcher
 {
-    public class FetchStrategy : IFetchStrategy
+    public class DataFetchStrategy : IDataFetchStrategy
     {
         private readonly int _maxLevelsUp;
 
-        public FetchStrategy(int maxLevelsUp = int.MaxValue)
+        public DataFetchStrategy(int maxLevelsUp = int.MaxValue)
         {
             _maxLevelsUp = maxLevelsUp;
         }

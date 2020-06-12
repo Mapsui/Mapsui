@@ -6,7 +6,7 @@ using Mapsui.Providers;
 
 namespace Mapsui.Rendering
 {
-    public interface IRenderGetStrategy
+    public interface IRenderFetchStrategy
     {
         /// <summary>
         /// Given the current extent and resolution it determines which tiles should

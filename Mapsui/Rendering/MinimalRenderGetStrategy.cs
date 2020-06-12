@@ -6,7 +6,7 @@ using Mapsui.Providers;
 
 namespace Mapsui.Rendering
 {
-    public class MinimalRenderGetStrategy : IRenderGetStrategy
+    public class MinimalRenderFetchStrategy : IRenderFetchStrategy
     {
         public IList<IFeature> GetFeatures(BoundingBox extent, double resolution, ITileSchema schema, ITileCache<Feature> memoryCache)
         {
