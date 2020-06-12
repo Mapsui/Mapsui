@@ -5,9 +5,9 @@ using Mapsui.Geometries.Utilities;
 
 namespace Mapsui.Fetcher
 {
-    public class MinimalFetchStrategy : IFetchStrategy
+    public class MinimalDataFetchStrategy : IDataFetchStrategy
     {
-        public IList<TileInfo> GetTilesWanted(ITileSchema schema, Extent extent, string levelId)
+        public IList<TileInfo> Get(ITileSchema schema, Extent extent, string levelId)
         {
             return schema.GetTileInfos(extent, levelId).OrderBy(
                 t => Algorithms.Distance(extent.CenterX, extent.CenterY, t.Extent.CenterX, t.Extent.CenterY)).ToList();

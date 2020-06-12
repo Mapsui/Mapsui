@@ -38,7 +38,7 @@ namespace Mapsui.Layers
     public class TileLayer : BaseLayer, IAsyncDataFetcher
     {
         private ITileSource _tileSource;
-        private readonly IRenderGetStrategy _renderGetStrategy;
+        private readonly IRenderFetchStrategy _renderFetchStrategy;
         private readonly int _minExtraTiles;
         private readonly int _maxExtraTiles;
         private int _numberTilesNeeded;
@@ -52,24 +52,24 @@ namespace Mapsui.Layers
         /// <param name="minTiles">Minimum number of tiles to cache</param>
         /// <param name="maxTiles">Maximum number of tiles to cache</param>
         /// <param name="maxRetries">Unused</param>
-        /// <param name="fetchStrategy">Strategy to get list of tiles for given extent</param>
-        /// <param name="renderGetStrategy"></param>
+        /// <param name="dataFetchStrategy">Strategy to get list of tiles for given extent</param>
+        /// <param name="renderFetchStrategy"></param>
         /// <param name="minExtraTiles">Number of minimum extra tiles for memory cache</param>
         /// <param name="maxExtraTiles">Number of maximum extra tiles for memory cache</param>
         // ReSharper disable once UnusedParameter.Local // Is public and won't break this now
         public TileLayer(ITileSource source = null, int minTiles = 200, int maxTiles = 300,
-            IFetchStrategy fetchStrategy = null, IRenderGetStrategy renderGetStrategy = null,
+            IDataFetchStrategy dataFetchStrategy = null, IRenderFetchStrategy renderFetchStrategy = null,
             int minExtraTiles = -1, int maxExtraTiles = -1, Func<TileInfo, Feature> fetchTileAsFeature = null)
         {
             MemoryCache = new MemoryCache<Feature>(minTiles, maxTiles);
             Style = new VectorStyle { Outline = { Color = Color.FromArgb(0, 0, 0, 0) } }; // initialize with transparent outline
             _tileSource = source;
             _envelope = _tileSource?.Schema?.Extent.ToBoundingBox();
-            fetchStrategy = fetchStrategy ?? new FetchStrategy(3);
-            _renderGetStrategy = renderGetStrategy ?? new RenderGetStrategy();
+            dataFetchStrategy = dataFetchStrategy ?? new DataFetchStrategy(3);
+            _renderFetchStrategy = renderFetchStrategy ?? new RenderFetchStrategy();
             _minExtraTiles = minExtraTiles;
             _maxExtraTiles = maxExtraTiles;
-            _tileFetchDispatcher = new TileFetchDispatcher(MemoryCache, source.Schema, fetchTileAsFeature ?? ToFeature, fetchStrategy);
+            _tileFetchDispatcher = new TileFetchDispatcher(MemoryCache, source.Schema, fetchTileAsFeature ?? ToFeature, dataFetchStrategy);
             _tileFetchDispatcher.DataChanged += TileFetchDispatcherOnDataChanged;
             _tileFetchDispatcher.PropertyChanged += TileFetchDispatcherOnPropertyChanged;
         }
@@ -90,7 +90,7 @@ namespace Mapsui.Layers
         {
             if (_tileSource?.Schema == null) return Enumerable.Empty<IFeature>();
             UpdateMemoryCacheMinAndMax();
-            return _renderGetStrategy.GetFeatures(box, resolution, _tileSource?.Schema, MemoryCache);
+            return _renderFetchStrategy.Get(box, resolution, _tileSource?.Schema, MemoryCache);
         }
 
         /// <inheritdoc />

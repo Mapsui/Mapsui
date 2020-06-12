@@ -2,6 +2,7 @@
 using BruTile.Cache;
 using BruTile.Predefined;
 using Mapsui.Providers;
+using Mapsui.Rendering;
 using NUnit.Framework;
 using System.Globalization;
 using Mapsui.Geometries;
@@ -20,10 +21,10 @@ namespace Mapsui.Tests.Rendering
             const int levelId = 3;
             var resolution = schema.Resolutions[levelId.ToString(CultureInfo.InvariantCulture)];
             var memoryCache = PopulateMemoryCache(schema, new MemoryCache<Feature>(), levelId);
-            var renderFetchStrategy = new RenderFetchStrategy();
+            var renderGetStrategy = new RenderFetchStrategy();
 
             // act
-            var tiles = renderFetchStrategy.Get(box, resolution.UnitsPerPixel, schema, memoryCache);
+            var tiles = renderGetStrategy.Get(box, resolution.UnitsPerPixel, schema, memoryCache);
 
             // assert
             Assert.True(tiles.Count == 43);

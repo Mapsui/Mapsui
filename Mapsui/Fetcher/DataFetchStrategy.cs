@@ -22,16 +22,16 @@ using Mapsui.Geometries.Utilities;
 
 namespace Mapsui.Fetcher
 {
-    public class FetchStrategy : IFetchStrategy
+    public class DataFetchStrategy : IDataFetchStrategy
     {
         private readonly int _maxLevelsUp;
 
-        public FetchStrategy(int maxLevelsUp = int.MaxValue)
+        public DataFetchStrategy(int maxLevelsUp = int.MaxValue)
         {
             _maxLevelsUp = maxLevelsUp;
         }
 
-        public IList<TileInfo> GetTilesWanted(ITileSchema schema, Extent extent, string levelId)
+        public IList<TileInfo> Get(ITileSchema schema, Extent extent, string levelId)
         {
             var tileInfos = new List<TileInfo>();
             // Iterating through all levels from current to zero. If lower levels are
