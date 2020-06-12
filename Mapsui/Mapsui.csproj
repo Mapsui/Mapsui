@@ -13,9 +13,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Mapsui.Geometries\Mapsui.Geometries.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Navigation\" />
-  </ItemGroup>
 
   <PropertyGroup>
     <DebugType>full</DebugType>
