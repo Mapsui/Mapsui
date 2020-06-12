@@ -21,10 +21,10 @@ namespace Mapsui.Tests.Rendering
             const int levelId = 3;
             var resolution = schema.Resolutions[levelId.ToString(CultureInfo.InvariantCulture)];
             var memoryCache = PopulateMemoryCache(schema, new MemoryCache<Feature>(), levelId);
-            var renderGetStrategy = new RenderFetchStrategy();
+            var renderFetchStrategy = new RenderFetchStrategy();
 
             // act
-            var tiles = renderGetStrategy.Get(box, resolution.UnitsPerPixel, schema, memoryCache);
+            var tiles = renderFetchStrategy.Get(box, resolution.UnitsPerPixel, schema, memoryCache);
 
             // assert
             Assert.True(tiles.Count == 43);
