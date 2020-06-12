@@ -75,7 +75,7 @@ namespace Mapsui.UI.Uwp
 
             var orientationSensor = SimpleOrientationSensor.GetDefault();
             if (orientationSensor != null)
-                orientationSensor.OrientationChanged += (sender, args) => RunOnUIThread(Refresh);
+                orientationSensor.OrientationChanged += (sender, args) => RunOnUIThread(() => Refresh());
         }
 
 

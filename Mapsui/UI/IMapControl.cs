@@ -16,9 +16,9 @@ namespace Mapsui.UI
 
         void RefreshGraphics();
 
-        void RefreshData();
+        void RefreshData(ChangeType changeType = ChangeType.Discrete);
 
-        void Refresh();
+        void Refresh(ChangeType changeType = ChangeType.Discrete);
 
         double UnSnapRotationDegrees { get; set; }
 

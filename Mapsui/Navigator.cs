@@ -29,7 +29,7 @@ namespace Mapsui
             }
         }
 
-        public EventHandler Navigated { get; set; }
+        public EventHandler<ChangeType> Navigated { get; set; }
 
         public Navigator(Map map, IViewport viewport)
         {
@@ -81,7 +81,7 @@ namespace Mapsui
                 _viewport.SetCenter(center);
                 _viewport.SetResolution(resolution);
 
-                Navigated?.Invoke(this, EventArgs.Empty);
+                Navigated?.Invoke(this, ChangeType.Discrete);
             }
             else
             {
@@ -140,7 +140,7 @@ namespace Mapsui
             {
                 _viewport.SetResolution(resolution);
 
-                Navigated?.Invoke(this, EventArgs.Empty);
+                Navigated?.Invoke(this, ChangeType.Discrete);
             }
             else
             {
@@ -189,7 +189,7 @@ namespace Mapsui
                 _viewport.SetCenter(CalculateCenterOfMap(centerOfZoom, resolution));
                 _viewport.SetResolution(resolution);
                 
-                Navigated?.Invoke(this, EventArgs.Empty);
+                Navigated?.Invoke(this, ChangeType.Discrete);
             }
             else
             {
@@ -322,7 +322,7 @@ namespace Mapsui
             {
                 _viewport.SetCenter(center);
 
-                Navigated?.Invoke(this, EventArgs.Empty);
+                Navigated?.Invoke(this, ChangeType.Discrete);
             }
             else
             {
@@ -368,7 +368,7 @@ namespace Mapsui
             {
                 _viewport.SetCenter(center);
 
-                Navigated?.Invoke(this, EventArgs.Empty);
+                Navigated?.Invoke(this, ChangeType.Discrete);
             }
             else
             {
@@ -433,7 +433,7 @@ namespace Mapsui
             {
                 _viewport.SetRotation(rotation);
 
-                Navigated?.Invoke(this, EventArgs.Empty);
+                Navigated?.Invoke(this, ChangeType.Discrete);
             }
             else
             {
@@ -544,14 +544,14 @@ namespace Mapsui
 
             _viewport.SetCenter(x, y);
 
-            Navigated?.Invoke(this, EventArgs.Empty);
+            Navigated?.Invoke(this, ChangeType.Continuous);
         }
 
         private void CenterFinal(AnimationEntry entry)
         {
             _viewport.SetCenter((ReadOnlyPoint)entry.End);
 
-            Navigated?.Invoke(this, EventArgs.Empty);
+            Navigated?.Invoke(this, ChangeType.Discrete);
         }
 
         private void ResolutionTick(AnimationEntry entry, double value)
@@ -560,14 +560,14 @@ namespace Mapsui
 
             _viewport.SetResolution(r);
             
-            Navigated?.Invoke(this, EventArgs.Empty);
+            Navigated?.Invoke(this, ChangeType.Continuous);
         }
 
         private void ResolutionFinal(AnimationEntry entry)
         {
             _viewport.SetResolution((double)entry.End);
 
-            Navigated?.Invoke(this, EventArgs.Empty);
+            Navigated?.Invoke(this, ChangeType.Discrete);
         }
 
         private void RotationTick(AnimationEntry entry, double value)
@@ -576,14 +576,14 @@ namespace Mapsui
 
             _viewport.SetRotation(r);
 
-            Navigated?.Invoke(this, EventArgs.Empty);
+            Navigated?.Invoke(this, ChangeType.Continuous);
         }
 
         private void RotationFinal(AnimationEntry entry)
         {
             _viewport.SetRotation((double)entry.End);
 
-            Navigated?.Invoke(this, EventArgs.Empty);
+            Navigated?.Invoke(this, ChangeType.Discrete);
         }
 
         private void FlingTick(AnimationEntry entry, double value)
@@ -614,7 +614,7 @@ namespace Mapsui
 
             _viewport.SetCenter(newX, newY);
 
-            Navigated?.Invoke(this, EventArgs.Empty);
+            Navigated?.Invoke(this, ChangeType.Continuous);
         }
 
         private void FlingFinal(AnimationEntry entry)

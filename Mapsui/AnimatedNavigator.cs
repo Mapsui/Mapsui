@@ -7,7 +7,7 @@ namespace Mapsui
     [Obsolete("Please just use normal Navigator, it has animation capability built in now", true)]
     public class AnimatedNavigator : INavigator
     {
-        public EventHandler Navigated { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public EventHandler<ChangeType> Navigated { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public void FlingWith(double velocityX, double velocityY, long maxDuration)
         {

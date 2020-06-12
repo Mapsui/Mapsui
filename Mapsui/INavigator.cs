@@ -9,7 +9,7 @@ namespace Mapsui
         /// <summary>
         /// Called each time one of the navigation methods is called
         /// </summary>
-        EventHandler Navigated { get; set; }
+        EventHandler<ChangeType> Navigated { get; set; }
 
         /// <summary>
         /// Navigate center of viewport to center of extent and change resolution
