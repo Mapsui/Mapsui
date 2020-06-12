@@ -6,7 +6,7 @@ To get smooth performance while panning and zooming data needs to be fetched on 
 
 ## ChangeType 
 
-*ChangeType is introduced in V3, in V2 the majorType boolean has this purpose*
+*(ChangeType was introduced in V3, in V2 the majorType boolean has this purpose)*
 
 When calling the RefreshData method on the layers we pass in a ChangeType parameter which could be:
 - Continous - During dragging, pinching zoom, or animations.
@@ -34,4 +34,4 @@ Those strategies should be tuned to support each other. For instance, in the cur
 ![mapsui async fetching architecture](images/brutile_fetcher.png)
 
 ## Data fetching in other layers
-Other layers like the Layer and ImageLayer have their own implementation. They use a delay mechanism in fetching new data.
+Other layers like the Layer and ImageLayer have their own implementation. They use a delay mechanism in fetching new data and ignore ChangeType.Continuous.
