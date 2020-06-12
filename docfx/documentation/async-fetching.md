@@ -26,8 +26,8 @@ Both the fetcher and the renderer can use some smart tricks to optimize the expe
 - The renderer could search for alternative tiles (higher or lower levels) when the optimal tiles are not available. 
 
 The implementation of these strategies can be overridden by the user by implementing interfaces that can be passed into the TileLayer constructor.
-- The **IDataFetchStrategy** *(IFetchStrategy in V2)* determines which tiles are fetched to store in the cache. There is a DataFetchStrategy default implementation and a MinimalDataFetchStrategy which only fetches the tiles directly needed.
-- The **IRenderFetchStrategy** *(IRenderGetStrategy in V2)* determines which tiles are fetched for rendering. There is a RenderFetchStrategy default implementation and a MinimalRenderFetchStrategy which only fetches the tiles directly needed.
+- The **IDataFetchStrategy** *(IFetchStrategy in V2)* determines which tiles are fetched from the data source to be stored in the cache. There is a DataFetchStrategy default implementation and a MinimalDataFetchStrategy which only fetches the tiles directly needed.
+- The **IRenderFetchStrategy** *(IRenderGetStrategy in V2)* determines which tiles are fetched from the cache to use for rendering. There is a RenderFetchStrategy default implementation and a MinimalRenderFetchStrategy which only fetches the tiles directly needed.
 
 Those strategies should be tuned to support each other. For instance, in the current implementation the renderer uses higher level tiles when the optimal tiles are not available, and the fetcher pre‐fetches higher level tiles to assist the renderer. The way they play together is not specified in the interface so developers should take this into account.
 
