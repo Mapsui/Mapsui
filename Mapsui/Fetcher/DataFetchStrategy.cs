@@ -31,7 +31,7 @@ namespace Mapsui.Fetcher
             _maxLevelsUp = maxLevelsUp;
         }
 
-        public IList<TileInfo> GetTilesWanted(ITileSchema schema, Extent extent, string levelId)
+        public IList<TileInfo> Get(ITileSchema schema, Extent extent, string levelId)
         {
             var tileInfos = new List<TileInfo>();
             // Iterating through all levels from current to zero. If lower levels are

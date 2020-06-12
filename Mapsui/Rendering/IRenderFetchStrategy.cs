@@ -17,7 +17,7 @@ namespace Mapsui.Rendering
         /// <param name="schema">The tile schema of the tile source</param>
         /// <param name="memoryCache">The cached features from which to select</param>
         /// <returns></returns>
-        IList<IFeature> GetFeatures(BoundingBox extent, double resolution, ITileSchema schema,
+        IList<IFeature> Get(BoundingBox extent, double resolution, ITileSchema schema,
             ITileCache<Feature> memoryCache);
     }
 }

@@ -103,7 +103,7 @@
     <Compile Include="Projection\TransformTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\FeaturesTests.cs" />
-    <Compile Include="Rendering\RenderGetStrategyTests.cs" />
+    <Compile Include="Rendering\RenderFetchStrategyTests.cs" />
     <Compile Include="Styles\Color.cs" />
     <Compile Include="Styles\BitmapRegistryTests.cs" />
     <Compile Include="UI\FeatureInfoTests.cs" />

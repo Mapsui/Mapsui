@@ -90,7 +90,7 @@ namespace Mapsui.Layers
         {
             if (_tileSource?.Schema == null) return Enumerable.Empty<IFeature>();
             UpdateMemoryCacheMinAndMax();
-            return _renderFetchStrategy.GetFeatures(box, resolution, _tileSource?.Schema, MemoryCache);
+            return _renderFetchStrategy.Get(box, resolution, _tileSource?.Schema, MemoryCache);
         }
 
         /// <inheritdoc />

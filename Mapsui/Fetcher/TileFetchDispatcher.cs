@@ -140,7 +140,7 @@ namespace Mapsui.Fetcher
         private void UpdateTilesToFetchForViewportChange()
         {
             var levelId = BruTile.Utilities.GetNearestLevel(_tileSchema.Resolutions, _resolution);
-            var tilesToCoverViewport = _dataFetchStrategy.GetTilesWanted(_tileSchema, _extent.ToExtent(), levelId);
+            var tilesToCoverViewport = _dataFetchStrategy.Get(_tileSchema, _extent.ToExtent(), levelId);
             NumberTilesNeeded = tilesToCoverViewport.Count;
             var tilesToFetch = tilesToCoverViewport.Where(t => _tileCache.Find(t.Index) == null && !_tilesInProgress.Contains(t.Index));
             _tilesToFetch.Clear();

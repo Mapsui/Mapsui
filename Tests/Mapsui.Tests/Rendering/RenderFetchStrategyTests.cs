@@ -10,7 +10,7 @@ using Mapsui.Geometries;
 namespace Mapsui.Tests.Rendering
 {
     [TestFixture]
-    public class RenderGetStrategyTests
+    public class RenderFetchStrategyTests
     {
         [Test]
         public void GetFeaturesWithPartOfOptimalResolutionTilesMissing()
@@ -24,7 +24,7 @@ namespace Mapsui.Tests.Rendering
             var renderGetStrategy = new RenderFetchStrategy();
 
             // act
-            var tiles = renderGetStrategy.GetFeatures(box, resolution.UnitsPerPixel, schema, memoryCache);
+            var tiles = renderGetStrategy.Get(box, resolution.UnitsPerPixel, schema, memoryCache);
 
             // assert
             Assert.True(tiles.Count == 43);
