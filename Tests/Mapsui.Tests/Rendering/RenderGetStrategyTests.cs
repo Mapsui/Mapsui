@@ -2,7 +2,6 @@
 using BruTile.Cache;
 using BruTile.Predefined;
 using Mapsui.Providers;
-using Mapsui.Rendering;
 using NUnit.Framework;
 using System.Globalization;
 using Mapsui.Geometries;
