@@ -462,9 +462,9 @@ namespace Mapsui.UI.Forms
         #region IMapControl implementation
 
         /// <inheritdoc />
-        public void Refresh()
+        public void Refresh(ChangeType changeType = ChangeType.Discrete)
         {
-            _mapControl.Refresh();
+            _mapControl.Refresh(changeType);
         }
 
         /// <inheritdoc />
@@ -486,9 +486,9 @@ namespace Mapsui.UI.Forms
         }
 
         /// <inheritdoc />
-        public void RefreshData()
+        public void RefreshData(ChangeType changeType = ChangeType.Discrete)
         {
-            _mapControl.RefreshData();
+            _mapControl.RefreshData(changeType);
         }
 
         /// <inheritdoc />
