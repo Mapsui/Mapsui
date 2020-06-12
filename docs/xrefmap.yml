@@ -2549,38 +2549,38 @@ references:
   commentId: T:Mapsui.Fetcher.DataChangedEventHandler
   fullName: Mapsui.Fetcher.DataChangedEventHandler
   nameWithType: DataChangedEventHandler
-- uid: Mapsui.Fetcher.FetchStrategy
-  name: FetchStrategy
-  href: api/Mapsui.Fetcher.FetchStrategy.html
-  commentId: T:Mapsui.Fetcher.FetchStrategy
-  fullName: Mapsui.Fetcher.FetchStrategy
-  nameWithType: FetchStrategy
-- uid: Mapsui.Fetcher.FetchStrategy.#ctor(System.Int32)
-  name: FetchStrategy(Int32)
-  href: api/Mapsui.Fetcher.FetchStrategy.html#Mapsui_Fetcher_FetchStrategy__ctor_System_Int32_
-  commentId: M:Mapsui.Fetcher.FetchStrategy.#ctor(System.Int32)
-  fullName: Mapsui.Fetcher.FetchStrategy.FetchStrategy(System.Int32)
-  nameWithType: FetchStrategy.FetchStrategy(Int32)
-- uid: Mapsui.Fetcher.FetchStrategy.#ctor*
-  name: FetchStrategy
-  href: api/Mapsui.Fetcher.FetchStrategy.html#Mapsui_Fetcher_FetchStrategy__ctor_
-  commentId: Overload:Mapsui.Fetcher.FetchStrategy.#ctor
+- uid: Mapsui.Fetcher.DataFetchStrategy
+  name: DataFetchStrategy
+  href: api/Mapsui.Fetcher.DataFetchStrategy.html
+  commentId: T:Mapsui.Fetcher.DataFetchStrategy
+  fullName: Mapsui.Fetcher.DataFetchStrategy
+  nameWithType: DataFetchStrategy
+- uid: Mapsui.Fetcher.DataFetchStrategy.#ctor(System.Int32)
+  name: DataFetchStrategy(Int32)
+  href: api/Mapsui.Fetcher.DataFetchStrategy.html#Mapsui_Fetcher_DataFetchStrategy__ctor_System_Int32_
+  commentId: M:Mapsui.Fetcher.DataFetchStrategy.#ctor(System.Int32)
+  fullName: Mapsui.Fetcher.DataFetchStrategy.DataFetchStrategy(System.Int32)
+  nameWithType: DataFetchStrategy.DataFetchStrategy(Int32)
+- uid: Mapsui.Fetcher.DataFetchStrategy.#ctor*
+  name: DataFetchStrategy
+  href: api/Mapsui.Fetcher.DataFetchStrategy.html#Mapsui_Fetcher_DataFetchStrategy__ctor_
+  commentId: Overload:Mapsui.Fetcher.DataFetchStrategy.#ctor
   isSpec: "True"
-  fullName: Mapsui.Fetcher.FetchStrategy.FetchStrategy
-  nameWithType: FetchStrategy.FetchStrategy
-- uid: Mapsui.Fetcher.FetchStrategy.GetTilesWanted(BruTile.ITileSchema,BruTile.Extent,System.String)
-  name: GetTilesWanted(ITileSchema, Extent, String)
-  href: api/Mapsui.Fetcher.FetchStrategy.html#Mapsui_Fetcher_FetchStrategy_GetTilesWanted_BruTile_ITileSchema_BruTile_Extent_System_String_
-  commentId: M:Mapsui.Fetcher.FetchStrategy.GetTilesWanted(BruTile.ITileSchema,BruTile.Extent,System.String)
-  fullName: Mapsui.Fetcher.FetchStrategy.GetTilesWanted(BruTile.ITileSchema, BruTile.Extent, System.String)
-  nameWithType: FetchStrategy.GetTilesWanted(ITileSchema, Extent, String)
-- uid: Mapsui.Fetcher.FetchStrategy.GetTilesWanted*
-  name: GetTilesWanted
-  href: api/Mapsui.Fetcher.FetchStrategy.html#Mapsui_Fetcher_FetchStrategy_GetTilesWanted_
-  commentId: Overload:Mapsui.Fetcher.FetchStrategy.GetTilesWanted
+  fullName: Mapsui.Fetcher.DataFetchStrategy.DataFetchStrategy
+  nameWithType: DataFetchStrategy.DataFetchStrategy
+- uid: Mapsui.Fetcher.DataFetchStrategy.Get(BruTile.ITileSchema,BruTile.Extent,System.String)
+  name: Get(ITileSchema, Extent, String)
+  href: api/Mapsui.Fetcher.DataFetchStrategy.html#Mapsui_Fetcher_DataFetchStrategy_Get_BruTile_ITileSchema_BruTile_Extent_System_String_
+  commentId: M:Mapsui.Fetcher.DataFetchStrategy.Get(BruTile.ITileSchema,BruTile.Extent,System.String)
+  fullName: Mapsui.Fetcher.DataFetchStrategy.Get(BruTile.ITileSchema, BruTile.Extent, System.String)
+  nameWithType: DataFetchStrategy.Get(ITileSchema, Extent, String)
+- uid: Mapsui.Fetcher.DataFetchStrategy.Get*
+  name: Get
+  href: api/Mapsui.Fetcher.DataFetchStrategy.html#Mapsui_Fetcher_DataFetchStrategy_Get_
+  commentId: Overload:Mapsui.Fetcher.DataFetchStrategy.Get
   isSpec: "True"
-  fullName: Mapsui.Fetcher.FetchStrategy.GetTilesWanted
-  nameWithType: FetchStrategy.GetTilesWanted
+  fullName: Mapsui.Fetcher.DataFetchStrategy.Get
+  nameWithType: DataFetchStrategy.Get
 - uid: Mapsui.Fetcher.IAsyncDataFetcher
   name: IAsyncDataFetcher
   href: api/Mapsui.Fetcher.IAsyncDataFetcher.html
@@ -2613,44 +2613,44 @@ references:
   isSpec: "True"
   fullName: Mapsui.Fetcher.IAsyncDataFetcher.ClearCache
   nameWithType: IAsyncDataFetcher.ClearCache
-- uid: Mapsui.Fetcher.IFetchStrategy
-  name: IFetchStrategy
-  href: api/Mapsui.Fetcher.IFetchStrategy.html
-  commentId: T:Mapsui.Fetcher.IFetchStrategy
-  fullName: Mapsui.Fetcher.IFetchStrategy
-  nameWithType: IFetchStrategy
-- uid: Mapsui.Fetcher.IFetchStrategy.GetTilesWanted(BruTile.ITileSchema,BruTile.Extent,System.String)
-  name: GetTilesWanted(ITileSchema, Extent, String)
-  href: api/Mapsui.Fetcher.IFetchStrategy.html#Mapsui_Fetcher_IFetchStrategy_GetTilesWanted_BruTile_ITileSchema_BruTile_Extent_System_String_
-  commentId: M:Mapsui.Fetcher.IFetchStrategy.GetTilesWanted(BruTile.ITileSchema,BruTile.Extent,System.String)
-  fullName: Mapsui.Fetcher.IFetchStrategy.GetTilesWanted(BruTile.ITileSchema, BruTile.Extent, System.String)
-  nameWithType: IFetchStrategy.GetTilesWanted(ITileSchema, Extent, String)
-- uid: Mapsui.Fetcher.IFetchStrategy.GetTilesWanted*
-  name: GetTilesWanted
-  href: api/Mapsui.Fetcher.IFetchStrategy.html#Mapsui_Fetcher_IFetchStrategy_GetTilesWanted_
-  commentId: Overload:Mapsui.Fetcher.IFetchStrategy.GetTilesWanted
+- uid: Mapsui.Fetcher.IDataFetchStrategy
+  name: IDataFetchStrategy
+  href: api/Mapsui.Fetcher.IDataFetchStrategy.html
+  commentId: T:Mapsui.Fetcher.IDataFetchStrategy
+  fullName: Mapsui.Fetcher.IDataFetchStrategy
+  nameWithType: IDataFetchStrategy
+- uid: Mapsui.Fetcher.IDataFetchStrategy.Get(BruTile.ITileSchema,BruTile.Extent,System.String)
+  name: Get(ITileSchema, Extent, String)
+  href: api/Mapsui.Fetcher.IDataFetchStrategy.html#Mapsui_Fetcher_IDataFetchStrategy_Get_BruTile_ITileSchema_BruTile_Extent_System_String_
+  commentId: M:Mapsui.Fetcher.IDataFetchStrategy.Get(BruTile.ITileSchema,BruTile.Extent,System.String)
+  fullName: Mapsui.Fetcher.IDataFetchStrategy.Get(BruTile.ITileSchema, BruTile.Extent, System.String)
+  nameWithType: IDataFetchStrategy.Get(ITileSchema, Extent, String)
+- uid: Mapsui.Fetcher.IDataFetchStrategy.Get*
+  name: Get
+  href: api/Mapsui.Fetcher.IDataFetchStrategy.html#Mapsui_Fetcher_IDataFetchStrategy_Get_
+  commentId: Overload:Mapsui.Fetcher.IDataFetchStrategy.Get
   isSpec: "True"
-  fullName: Mapsui.Fetcher.IFetchStrategy.GetTilesWanted
-  nameWithType: IFetchStrategy.GetTilesWanted
-- uid: Mapsui.Fetcher.MinimalFetchStrategy
-  name: MinimalFetchStrategy
-  href: api/Mapsui.Fetcher.MinimalFetchStrategy.html
-  commentId: T:Mapsui.Fetcher.MinimalFetchStrategy
-  fullName: Mapsui.Fetcher.MinimalFetchStrategy
-  nameWithType: MinimalFetchStrategy
-- uid: Mapsui.Fetcher.MinimalFetchStrategy.GetTilesWanted(BruTile.ITileSchema,BruTile.Extent,System.String)
-  name: GetTilesWanted(ITileSchema, Extent, String)
-  href: api/Mapsui.Fetcher.MinimalFetchStrategy.html#Mapsui_Fetcher_MinimalFetchStrategy_GetTilesWanted_BruTile_ITileSchema_BruTile_Extent_System_String_
-  commentId: M:Mapsui.Fetcher.MinimalFetchStrategy.GetTilesWanted(BruTile.ITileSchema,BruTile.Extent,System.String)
-  fullName: Mapsui.Fetcher.MinimalFetchStrategy.GetTilesWanted(BruTile.ITileSchema, BruTile.Extent, System.String)
-  nameWithType: MinimalFetchStrategy.GetTilesWanted(ITileSchema, Extent, String)
-- uid: Mapsui.Fetcher.MinimalFetchStrategy.GetTilesWanted*
-  name: GetTilesWanted
-  href: api/Mapsui.Fetcher.MinimalFetchStrategy.html#Mapsui_Fetcher_MinimalFetchStrategy_GetTilesWanted_
-  commentId: Overload:Mapsui.Fetcher.MinimalFetchStrategy.GetTilesWanted
+  fullName: Mapsui.Fetcher.IDataFetchStrategy.Get
+  nameWithType: IDataFetchStrategy.Get
+- uid: Mapsui.Fetcher.MinimalDataFetchStrategy
+  name: MinimalDataFetchStrategy
+  href: api/Mapsui.Fetcher.MinimalDataFetchStrategy.html
+  commentId: T:Mapsui.Fetcher.MinimalDataFetchStrategy
+  fullName: Mapsui.Fetcher.MinimalDataFetchStrategy
+  nameWithType: MinimalDataFetchStrategy
+- uid: Mapsui.Fetcher.MinimalDataFetchStrategy.Get(BruTile.ITileSchema,BruTile.Extent,System.String)
+  name: Get(ITileSchema, Extent, String)
+  href: api/Mapsui.Fetcher.MinimalDataFetchStrategy.html#Mapsui_Fetcher_MinimalDataFetchStrategy_Get_BruTile_ITileSchema_BruTile_Extent_System_String_
+  commentId: M:Mapsui.Fetcher.MinimalDataFetchStrategy.Get(BruTile.ITileSchema,BruTile.Extent,System.String)
+  fullName: Mapsui.Fetcher.MinimalDataFetchStrategy.Get(BruTile.ITileSchema, BruTile.Extent, System.String)
+  nameWithType: MinimalDataFetchStrategy.Get(ITileSchema, Extent, String)
+- uid: Mapsui.Fetcher.MinimalDataFetchStrategy.Get*
+  name: Get
+  href: api/Mapsui.Fetcher.MinimalDataFetchStrategy.html#Mapsui_Fetcher_MinimalDataFetchStrategy_Get_
+  commentId: Overload:Mapsui.Fetcher.MinimalDataFetchStrategy.Get
   isSpec: "True"
-  fullName: Mapsui.Fetcher.MinimalFetchStrategy.GetTilesWanted
-  nameWithType: MinimalFetchStrategy.GetTilesWanted
+  fullName: Mapsui.Fetcher.MinimalDataFetchStrategy.Get
+  nameWithType: MinimalDataFetchStrategy.Get
 - uid: Mapsui.Geometries
   name: Mapsui.Geometries
   href: api/Mapsui.Geometries.html
@@ -8267,15 +8267,15 @@ references:
   commentId: T:Mapsui.Layers.TileLayer
   fullName: Mapsui.Layers.TileLayer
   nameWithType: TileLayer
-- uid: Mapsui.Layers.TileLayer.#ctor(BruTile.ITileSource,System.Int32,System.Int32,Mapsui.Fetcher.IFetchStrategy,Mapsui.Rendering.IRenderGetStrategy,System.Int32,System.Int32,System.Func{BruTile.TileInfo,Mapsui.Providers.Feature})
-  name: TileLayer(ITileSource, Int32, Int32, IFetchStrategy, IRenderGetStrategy, Int32, Int32, Func<TileInfo, Feature>)
-  href: api/Mapsui.Layers.TileLayer.html#Mapsui_Layers_TileLayer__ctor_BruTile_ITileSource_System_Int32_System_Int32_Mapsui_Fetcher_IFetchStrategy_Mapsui_Rendering_IRenderGetStrategy_System_Int32_System_Int32_System_Func_BruTile_TileInfo_Mapsui_Providers_Feature__
-  commentId: M:Mapsui.Layers.TileLayer.#ctor(BruTile.ITileSource,System.Int32,System.Int32,Mapsui.Fetcher.IFetchStrategy,Mapsui.Rendering.IRenderGetStrategy,System.Int32,System.Int32,System.Func{BruTile.TileInfo,Mapsui.Providers.Feature})
-  name.vb: TileLayer(ITileSource, Int32, Int32, IFetchStrategy, IRenderGetStrategy, Int32, Int32, Func(Of TileInfo, Feature))
-  fullName: Mapsui.Layers.TileLayer.TileLayer(BruTile.ITileSource, System.Int32, System.Int32, Mapsui.Fetcher.IFetchStrategy, Mapsui.Rendering.IRenderGetStrategy, System.Int32, System.Int32, System.Func<BruTile.TileInfo, Mapsui.Providers.Feature>)
-  fullName.vb: Mapsui.Layers.TileLayer.TileLayer(BruTile.ITileSource, System.Int32, System.Int32, Mapsui.Fetcher.IFetchStrategy, Mapsui.Rendering.IRenderGetStrategy, System.Int32, System.Int32, System.Func(Of BruTile.TileInfo, Mapsui.Providers.Feature))
-  nameWithType: TileLayer.TileLayer(ITileSource, Int32, Int32, IFetchStrategy, IRenderGetStrategy, Int32, Int32, Func<TileInfo, Feature>)
-  nameWithType.vb: TileLayer.TileLayer(ITileSource, Int32, Int32, IFetchStrategy, IRenderGetStrategy, Int32, Int32, Func(Of TileInfo, Feature))
+- uid: Mapsui.Layers.TileLayer.#ctor(BruTile.ITileSource,System.Int32,System.Int32,Mapsui.Fetcher.IDataFetchStrategy,Mapsui.Rendering.IRenderFetchStrategy,System.Int32,System.Int32,System.Func{BruTile.TileInfo,Mapsui.Providers.Feature})
+  name: TileLayer(ITileSource, Int32, Int32, IDataFetchStrategy, IRenderFetchStrategy, Int32, Int32, Func<TileInfo, Feature>)
+  href: api/Mapsui.Layers.TileLayer.html#Mapsui_Layers_TileLayer__ctor_BruTile_ITileSource_System_Int32_System_Int32_Mapsui_Fetcher_IDataFetchStrategy_Mapsui_Rendering_IRenderFetchStrategy_System_Int32_System_Int32_System_Func_BruTile_TileInfo_Mapsui_Providers_Feature__
+  commentId: M:Mapsui.Layers.TileLayer.#ctor(BruTile.ITileSource,System.Int32,System.Int32,Mapsui.Fetcher.IDataFetchStrategy,Mapsui.Rendering.IRenderFetchStrategy,System.Int32,System.Int32,System.Func{BruTile.TileInfo,Mapsui.Providers.Feature})
+  name.vb: TileLayer(ITileSource, Int32, Int32, IDataFetchStrategy, IRenderFetchStrategy, Int32, Int32, Func(Of TileInfo, Feature))
+  fullName: Mapsui.Layers.TileLayer.TileLayer(BruTile.ITileSource, System.Int32, System.Int32, Mapsui.Fetcher.IDataFetchStrategy, Mapsui.Rendering.IRenderFetchStrategy, System.Int32, System.Int32, System.Func<BruTile.TileInfo, Mapsui.Providers.Feature>)
+  fullName.vb: Mapsui.Layers.TileLayer.TileLayer(BruTile.ITileSource, System.Int32, System.Int32, Mapsui.Fetcher.IDataFetchStrategy, Mapsui.Rendering.IRenderFetchStrategy, System.Int32, System.Int32, System.Func(Of BruTile.TileInfo, Mapsui.Providers.Feature))
+  nameWithType: TileLayer.TileLayer(ITileSource, Int32, Int32, IDataFetchStrategy, IRenderFetchStrategy, Int32, Int32, Func<TileInfo, Feature>)
+  nameWithType.vb: TileLayer.TileLayer(ITileSource, Int32, Int32, IDataFetchStrategy, IRenderFetchStrategy, Int32, Int32, Func(Of TileInfo, Feature))
 - uid: Mapsui.Layers.TileLayer.#ctor*
   name: TileLayer
   href: api/Mapsui.Layers.TileLayer.html#Mapsui_Layers_TileLayer__ctor_
@@ -16720,28 +16720,28 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.IRenderer.WidgetRenders
   nameWithType: IRenderer.WidgetRenders
-- uid: Mapsui.Rendering.IRenderGetStrategy
-  name: IRenderGetStrategy
-  href: api/Mapsui.Rendering.IRenderGetStrategy.html
-  commentId: T:Mapsui.Rendering.IRenderGetStrategy
-  fullName: Mapsui.Rendering.IRenderGetStrategy
-  nameWithType: IRenderGetStrategy
-- uid: Mapsui.Rendering.IRenderGetStrategy.GetFeatures(Mapsui.Geometries.BoundingBox,System.Double,BruTile.ITileSchema,BruTile.Cache.ITileCache{Mapsui.Providers.Feature})
-  name: GetFeatures(BoundingBox, Double, ITileSchema, ITileCache<Feature>)
-  href: api/Mapsui.Rendering.IRenderGetStrategy.html#Mapsui_Rendering_IRenderGetStrategy_GetFeatures_Mapsui_Geometries_BoundingBox_System_Double_BruTile_ITileSchema_BruTile_Cache_ITileCache_Mapsui_Providers_Feature__
-  commentId: M:Mapsui.Rendering.IRenderGetStrategy.GetFeatures(Mapsui.Geometries.BoundingBox,System.Double,BruTile.ITileSchema,BruTile.Cache.ITileCache{Mapsui.Providers.Feature})
-  name.vb: GetFeatures(BoundingBox, Double, ITileSchema, ITileCache(Of Feature))
-  fullName: Mapsui.Rendering.IRenderGetStrategy.GetFeatures(Mapsui.Geometries.BoundingBox, System.Double, BruTile.ITileSchema, BruTile.Cache.ITileCache<Mapsui.Providers.Feature>)
-  fullName.vb: Mapsui.Rendering.IRenderGetStrategy.GetFeatures(Mapsui.Geometries.BoundingBox, System.Double, BruTile.ITileSchema, BruTile.Cache.ITileCache(Of Mapsui.Providers.Feature))
-  nameWithType: IRenderGetStrategy.GetFeatures(BoundingBox, Double, ITileSchema, ITileCache<Feature>)
-  nameWithType.vb: IRenderGetStrategy.GetFeatures(BoundingBox, Double, ITileSchema, ITileCache(Of Feature))
-- uid: Mapsui.Rendering.IRenderGetStrategy.GetFeatures*
-  name: GetFeatures
-  href: api/Mapsui.Rendering.IRenderGetStrategy.html#Mapsui_Rendering_IRenderGetStrategy_GetFeatures_
-  commentId: Overload:Mapsui.Rendering.IRenderGetStrategy.GetFeatures
+- uid: Mapsui.Rendering.IRenderFetchStrategy
+  name: IRenderFetchStrategy
+  href: api/Mapsui.Rendering.IRenderFetchStrategy.html
+  commentId: T:Mapsui.Rendering.IRenderFetchStrategy
+  fullName: Mapsui.Rendering.IRenderFetchStrategy
+  nameWithType: IRenderFetchStrategy
+- uid: Mapsui.Rendering.IRenderFetchStrategy.Get(Mapsui.Geometries.BoundingBox,System.Double,BruTile.ITileSchema,BruTile.Cache.ITileCache{Mapsui.Providers.Feature})
+  name: Get(BoundingBox, Double, ITileSchema, ITileCache<Feature>)
+  href: api/Mapsui.Rendering.IRenderFetchStrategy.html#Mapsui_Rendering_IRenderFetchStrategy_Get_Mapsui_Geometries_BoundingBox_System_Double_BruTile_ITileSchema_BruTile_Cache_ITileCache_Mapsui_Providers_Feature__
+  commentId: M:Mapsui.Rendering.IRenderFetchStrategy.Get(Mapsui.Geometries.BoundingBox,System.Double,BruTile.ITileSchema,BruTile.Cache.ITileCache{Mapsui.Providers.Feature})
+  name.vb: Get(BoundingBox, Double, ITileSchema, ITileCache(Of Feature))
+  fullName: Mapsui.Rendering.IRenderFetchStrategy.Get(Mapsui.Geometries.BoundingBox, System.Double, BruTile.ITileSchema, BruTile.Cache.ITileCache<Mapsui.Providers.Feature>)
+  fullName.vb: Mapsui.Rendering.IRenderFetchStrategy.Get(Mapsui.Geometries.BoundingBox, System.Double, BruTile.ITileSchema, BruTile.Cache.ITileCache(Of Mapsui.Providers.Feature))
+  nameWithType: IRenderFetchStrategy.Get(BoundingBox, Double, ITileSchema, ITileCache<Feature>)
+  nameWithType.vb: IRenderFetchStrategy.Get(BoundingBox, Double, ITileSchema, ITileCache(Of Feature))
+- uid: Mapsui.Rendering.IRenderFetchStrategy.Get*
+  name: Get
+  href: api/Mapsui.Rendering.IRenderFetchStrategy.html#Mapsui_Rendering_IRenderFetchStrategy_Get_
+  commentId: Overload:Mapsui.Rendering.IRenderFetchStrategy.Get
   isSpec: "True"
-  fullName: Mapsui.Rendering.IRenderGetStrategy.GetFeatures
-  nameWithType: IRenderGetStrategy.GetFeatures
+  fullName: Mapsui.Rendering.IRenderFetchStrategy.Get
+  nameWithType: IRenderFetchStrategy.Get
 - uid: Mapsui.Rendering.IRenderInfo
   name: IRenderInfo
   href: api/Mapsui.Rendering.IRenderInfo.html
@@ -16850,28 +16850,28 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.MapInfoRecord.Style
   nameWithType: MapInfoRecord.Style
-- uid: Mapsui.Rendering.MinimalRenderGetStrategy
-  name: MinimalRenderGetStrategy
-  href: api/Mapsui.Rendering.MinimalRenderGetStrategy.html
-  commentId: T:Mapsui.Rendering.MinimalRenderGetStrategy
-  fullName: Mapsui.Rendering.MinimalRenderGetStrategy
-  nameWithType: MinimalRenderGetStrategy
-- uid: Mapsui.Rendering.MinimalRenderGetStrategy.GetFeatures(Mapsui.Geometries.BoundingBox,System.Double,BruTile.ITileSchema,BruTile.Cache.ITileCache{Mapsui.Providers.Feature})
-  name: GetFeatures(BoundingBox, Double, ITileSchema, ITileCache<Feature>)
-  href: api/Mapsui.Rendering.MinimalRenderGetStrategy.html#Mapsui_Rendering_MinimalRenderGetStrategy_GetFeatures_Mapsui_Geometries_BoundingBox_System_Double_BruTile_ITileSchema_BruTile_Cache_ITileCache_Mapsui_Providers_Feature__
-  commentId: M:Mapsui.Rendering.MinimalRenderGetStrategy.GetFeatures(Mapsui.Geometries.BoundingBox,System.Double,BruTile.ITileSchema,BruTile.Cache.ITileCache{Mapsui.Providers.Feature})
-  name.vb: GetFeatures(BoundingBox, Double, ITileSchema, ITileCache(Of Feature))
-  fullName: Mapsui.Rendering.MinimalRenderGetStrategy.GetFeatures(Mapsui.Geometries.BoundingBox, System.Double, BruTile.ITileSchema, BruTile.Cache.ITileCache<Mapsui.Providers.Feature>)
-  fullName.vb: Mapsui.Rendering.MinimalRenderGetStrategy.GetFeatures(Mapsui.Geometries.BoundingBox, System.Double, BruTile.ITileSchema, BruTile.Cache.ITileCache(Of Mapsui.Providers.Feature))
-  nameWithType: MinimalRenderGetStrategy.GetFeatures(BoundingBox, Double, ITileSchema, ITileCache<Feature>)
-  nameWithType.vb: MinimalRenderGetStrategy.GetFeatures(BoundingBox, Double, ITileSchema, ITileCache(Of Feature))
-- uid: Mapsui.Rendering.MinimalRenderGetStrategy.GetFeatures*
-  name: GetFeatures
-  href: api/Mapsui.Rendering.MinimalRenderGetStrategy.html#Mapsui_Rendering_MinimalRenderGetStrategy_GetFeatures_
-  commentId: Overload:Mapsui.Rendering.MinimalRenderGetStrategy.GetFeatures
+- uid: Mapsui.Rendering.MinimalRenderFetchStrategy
+  name: MinimalRenderFetchStrategy
+  href: api/Mapsui.Rendering.MinimalRenderFetchStrategy.html
+  commentId: T:Mapsui.Rendering.MinimalRenderFetchStrategy
+  fullName: Mapsui.Rendering.MinimalRenderFetchStrategy
+  nameWithType: MinimalRenderFetchStrategy
+- uid: Mapsui.Rendering.MinimalRenderFetchStrategy.Get(Mapsui.Geometries.BoundingBox,System.Double,BruTile.ITileSchema,BruTile.Cache.ITileCache{Mapsui.Providers.Feature})
+  name: Get(BoundingBox, Double, ITileSchema, ITileCache<Feature>)
+  href: api/Mapsui.Rendering.MinimalRenderFetchStrategy.html#Mapsui_Rendering_MinimalRenderFetchStrategy_Get_Mapsui_Geometries_BoundingBox_System_Double_BruTile_ITileSchema_BruTile_Cache_ITileCache_Mapsui_Providers_Feature__
+  commentId: M:Mapsui.Rendering.MinimalRenderFetchStrategy.Get(Mapsui.Geometries.BoundingBox,System.Double,BruTile.ITileSchema,BruTile.Cache.ITileCache{Mapsui.Providers.Feature})
+  name.vb: Get(BoundingBox, Double, ITileSchema, ITileCache(Of Feature))
+  fullName: Mapsui.Rendering.MinimalRenderFetchStrategy.Get(Mapsui.Geometries.BoundingBox, System.Double, BruTile.ITileSchema, BruTile.Cache.ITileCache<Mapsui.Providers.Feature>)
+  fullName.vb: Mapsui.Rendering.MinimalRenderFetchStrategy.Get(Mapsui.Geometries.BoundingBox, System.Double, BruTile.ITileSchema, BruTile.Cache.ITileCache(Of Mapsui.Providers.Feature))
+  nameWithType: MinimalRenderFetchStrategy.Get(BoundingBox, Double, ITileSchema, ITileCache<Feature>)
+  nameWithType.vb: MinimalRenderFetchStrategy.Get(BoundingBox, Double, ITileSchema, ITileCache(Of Feature))
+- uid: Mapsui.Rendering.MinimalRenderFetchStrategy.Get*
+  name: Get
+  href: api/Mapsui.Rendering.MinimalRenderFetchStrategy.html#Mapsui_Rendering_MinimalRenderFetchStrategy_Get_
+  commentId: Overload:Mapsui.Rendering.MinimalRenderFetchStrategy.Get
   isSpec: "True"
-  fullName: Mapsui.Rendering.MinimalRenderGetStrategy.GetFeatures
-  nameWithType: MinimalRenderGetStrategy.GetFeatures
+  fullName: Mapsui.Rendering.MinimalRenderFetchStrategy.Get
+  nameWithType: MinimalRenderFetchStrategy.Get
 - uid: Mapsui.Rendering.RenderException
   name: RenderException
   href: api/Mapsui.Rendering.RenderException.html
@@ -16903,44 +16903,44 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.RenderException.RenderException
   nameWithType: RenderException.RenderException
-- uid: Mapsui.Rendering.RenderGetStrategy
-  name: RenderGetStrategy
-  href: api/Mapsui.Rendering.RenderGetStrategy.html
-  commentId: T:Mapsui.Rendering.RenderGetStrategy
-  fullName: Mapsui.Rendering.RenderGetStrategy
-  nameWithType: RenderGetStrategy
-- uid: Mapsui.Rendering.RenderGetStrategy.GetFeatures(Mapsui.Geometries.BoundingBox,System.Double,BruTile.ITileSchema,BruTile.Cache.ITileCache{Mapsui.Providers.Feature})
-  name: GetFeatures(BoundingBox, Double, ITileSchema, ITileCache<Feature>)
-  href: api/Mapsui.Rendering.RenderGetStrategy.html#Mapsui_Rendering_RenderGetStrategy_GetFeatures_Mapsui_Geometries_BoundingBox_System_Double_BruTile_ITileSchema_BruTile_Cache_ITileCache_Mapsui_Providers_Feature__
-  commentId: M:Mapsui.Rendering.RenderGetStrategy.GetFeatures(Mapsui.Geometries.BoundingBox,System.Double,BruTile.ITileSchema,BruTile.Cache.ITileCache{Mapsui.Providers.Feature})
-  name.vb: GetFeatures(BoundingBox, Double, ITileSchema, ITileCache(Of Feature))
-  fullName: Mapsui.Rendering.RenderGetStrategy.GetFeatures(Mapsui.Geometries.BoundingBox, System.Double, BruTile.ITileSchema, BruTile.Cache.ITileCache<Mapsui.Providers.Feature>)
-  fullName.vb: Mapsui.Rendering.RenderGetStrategy.GetFeatures(Mapsui.Geometries.BoundingBox, System.Double, BruTile.ITileSchema, BruTile.Cache.ITileCache(Of Mapsui.Providers.Feature))
-  nameWithType: RenderGetStrategy.GetFeatures(BoundingBox, Double, ITileSchema, ITileCache<Feature>)
-  nameWithType.vb: RenderGetStrategy.GetFeatures(BoundingBox, Double, ITileSchema, ITileCache(Of Feature))
-- uid: Mapsui.Rendering.RenderGetStrategy.GetFeatures*
-  name: GetFeatures
-  href: api/Mapsui.Rendering.RenderGetStrategy.html#Mapsui_Rendering_RenderGetStrategy_GetFeatures_
-  commentId: Overload:Mapsui.Rendering.RenderGetStrategy.GetFeatures
+- uid: Mapsui.Rendering.RenderFetchStrategy
+  name: RenderFetchStrategy
+  href: api/Mapsui.Rendering.RenderFetchStrategy.html
+  commentId: T:Mapsui.Rendering.RenderFetchStrategy
+  fullName: Mapsui.Rendering.RenderFetchStrategy
+  nameWithType: RenderFetchStrategy
+- uid: Mapsui.Rendering.RenderFetchStrategy.Get(Mapsui.Geometries.BoundingBox,System.Double,BruTile.ITileSchema,BruTile.Cache.ITileCache{Mapsui.Providers.Feature})
+  name: Get(BoundingBox, Double, ITileSchema, ITileCache<Feature>)
+  href: api/Mapsui.Rendering.RenderFetchStrategy.html#Mapsui_Rendering_RenderFetchStrategy_Get_Mapsui_Geometries_BoundingBox_System_Double_BruTile_ITileSchema_BruTile_Cache_ITileCache_Mapsui_Providers_Feature__
+  commentId: M:Mapsui.Rendering.RenderFetchStrategy.Get(Mapsui.Geometries.BoundingBox,System.Double,BruTile.ITileSchema,BruTile.Cache.ITileCache{Mapsui.Providers.Feature})
+  name.vb: Get(BoundingBox, Double, ITileSchema, ITileCache(Of Feature))
+  fullName: Mapsui.Rendering.RenderFetchStrategy.Get(Mapsui.Geometries.BoundingBox, System.Double, BruTile.ITileSchema, BruTile.Cache.ITileCache<Mapsui.Providers.Feature>)
+  fullName.vb: Mapsui.Rendering.RenderFetchStrategy.Get(Mapsui.Geometries.BoundingBox, System.Double, BruTile.ITileSchema, BruTile.Cache.ITileCache(Of Mapsui.Providers.Feature))
+  nameWithType: RenderFetchStrategy.Get(BoundingBox, Double, ITileSchema, ITileCache<Feature>)
+  nameWithType.vb: RenderFetchStrategy.Get(BoundingBox, Double, ITileSchema, ITileCache(Of Feature))
+- uid: Mapsui.Rendering.RenderFetchStrategy.Get*
+  name: Get
+  href: api/Mapsui.Rendering.RenderFetchStrategy.html#Mapsui_Rendering_RenderFetchStrategy_Get_
+  commentId: Overload:Mapsui.Rendering.RenderFetchStrategy.Get
   isSpec: "True"
-  fullName: Mapsui.Rendering.RenderGetStrategy.GetFeatures
-  nameWithType: RenderGetStrategy.GetFeatures
-- uid: Mapsui.Rendering.RenderGetStrategy.GetRecursive(System.Collections.Generic.IDictionary{BruTile.TileIndex,Mapsui.Providers.IFeature},BruTile.ITileSchema,BruTile.Cache.ITileCache{Mapsui.Providers.Feature},BruTile.Extent,System.String)
+  fullName: Mapsui.Rendering.RenderFetchStrategy.Get
+  nameWithType: RenderFetchStrategy.Get
+- uid: Mapsui.Rendering.RenderFetchStrategy.GetRecursive(System.Collections.Generic.IDictionary{BruTile.TileIndex,Mapsui.Providers.IFeature},BruTile.ITileSchema,BruTile.Cache.ITileCache{Mapsui.Providers.Feature},BruTile.Extent,System.String)
   name: GetRecursive(IDictionary<TileIndex, IFeature>, ITileSchema, ITileCache<Feature>, Extent, String)
-  href: api/Mapsui.Rendering.RenderGetStrategy.html#Mapsui_Rendering_RenderGetStrategy_GetRecursive_System_Collections_Generic_IDictionary_BruTile_TileIndex_Mapsui_Providers_IFeature__BruTile_ITileSchema_BruTile_Cache_ITileCache_Mapsui_Providers_Feature__BruTile_Extent_System_String_
-  commentId: M:Mapsui.Rendering.RenderGetStrategy.GetRecursive(System.Collections.Generic.IDictionary{BruTile.TileIndex,Mapsui.Providers.IFeature},BruTile.ITileSchema,BruTile.Cache.ITileCache{Mapsui.Providers.Feature},BruTile.Extent,System.String)
+  href: api/Mapsui.Rendering.RenderFetchStrategy.html#Mapsui_Rendering_RenderFetchStrategy_GetRecursive_System_Collections_Generic_IDictionary_BruTile_TileIndex_Mapsui_Providers_IFeature__BruTile_ITileSchema_BruTile_Cache_ITileCache_Mapsui_Providers_Feature__BruTile_Extent_System_String_
+  commentId: M:Mapsui.Rendering.RenderFetchStrategy.GetRecursive(System.Collections.Generic.IDictionary{BruTile.TileIndex,Mapsui.Providers.IFeature},BruTile.ITileSchema,BruTile.Cache.ITileCache{Mapsui.Providers.Feature},BruTile.Extent,System.String)
   name.vb: GetRecursive(IDictionary(Of TileIndex, IFeature), ITileSchema, ITileCache(Of Feature), Extent, String)
-  fullName: Mapsui.Rendering.RenderGetStrategy.GetRecursive(System.Collections.Generic.IDictionary<BruTile.TileIndex, Mapsui.Providers.IFeature>, BruTile.ITileSchema, BruTile.Cache.ITileCache<Mapsui.Providers.Feature>, BruTile.Extent, System.String)
-  fullName.vb: Mapsui.Rendering.RenderGetStrategy.GetRecursive(System.Collections.Generic.IDictionary(Of BruTile.TileIndex, Mapsui.Providers.IFeature), BruTile.ITileSchema, BruTile.Cache.ITileCache(Of Mapsui.Providers.Feature), BruTile.Extent, System.String)
-  nameWithType: RenderGetStrategy.GetRecursive(IDictionary<TileIndex, IFeature>, ITileSchema, ITileCache<Feature>, Extent, String)
-  nameWithType.vb: RenderGetStrategy.GetRecursive(IDictionary(Of TileIndex, IFeature), ITileSchema, ITileCache(Of Feature), Extent, String)
-- uid: Mapsui.Rendering.RenderGetStrategy.GetRecursive*
+  fullName: Mapsui.Rendering.RenderFetchStrategy.GetRecursive(System.Collections.Generic.IDictionary<BruTile.TileIndex, Mapsui.Providers.IFeature>, BruTile.ITileSchema, BruTile.Cache.ITileCache<Mapsui.Providers.Feature>, BruTile.Extent, System.String)
+  fullName.vb: Mapsui.Rendering.RenderFetchStrategy.GetRecursive(System.Collections.Generic.IDictionary(Of BruTile.TileIndex, Mapsui.Providers.IFeature), BruTile.ITileSchema, BruTile.Cache.ITileCache(Of Mapsui.Providers.Feature), BruTile.Extent, System.String)
+  nameWithType: RenderFetchStrategy.GetRecursive(IDictionary<TileIndex, IFeature>, ITileSchema, ITileCache<Feature>, Extent, String)
+  nameWithType.vb: RenderFetchStrategy.GetRecursive(IDictionary(Of TileIndex, IFeature), ITileSchema, ITileCache(Of Feature), Extent, String)
+- uid: Mapsui.Rendering.RenderFetchStrategy.GetRecursive*
   name: GetRecursive
-  href: api/Mapsui.Rendering.RenderGetStrategy.html#Mapsui_Rendering_RenderGetStrategy_GetRecursive_
-  commentId: Overload:Mapsui.Rendering.RenderGetStrategy.GetRecursive
+  href: api/Mapsui.Rendering.RenderFetchStrategy.html#Mapsui_Rendering_RenderFetchStrategy_GetRecursive_
+  commentId: Overload:Mapsui.Rendering.RenderFetchStrategy.GetRecursive
   isSpec: "True"
-  fullName: Mapsui.Rendering.RenderGetStrategy.GetRecursive
-  nameWithType: RenderGetStrategy.GetRecursive
+  fullName: Mapsui.Rendering.RenderFetchStrategy.GetRecursive
+  nameWithType: RenderFetchStrategy.GetRecursive
 - uid: Mapsui.Rendering.Skia
   name: Mapsui.Rendering.Skia
   href: api/Mapsui.Rendering.Skia.html
