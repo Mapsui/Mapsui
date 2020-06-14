@@ -1,8 +1,9 @@
 # **Mapsui** documentation.
 
-This is the documentation of the Mapsui open source map component. The github repository can be found [here](https://github.com/mapsui/mapsui). The documentation consists of two parts.
+This is the documentation of the Mapsui open source map component.
 - The general documentation found [here](http://mapsui.com/documentation/home.html).
 - The api documentation found [here](http://mapsui.com/api/index.html).
+- The github repository, which also contains the samples, can be found [here](https://github.com/mapsui/mapsui).
 
 ## Sponsors
 
