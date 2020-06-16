@@ -10,6 +10,7 @@ using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
 using Mapsui.Widgets;
 using System.Runtime.CompilerServices;
+using Mapsui.Utilities;
 
 #if __ANDROID__
 namespace Mapsui.UI.Android

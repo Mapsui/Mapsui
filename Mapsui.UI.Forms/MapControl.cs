@@ -89,8 +89,6 @@ namespace Mapsui.UI.Forms
             Map = new Map();
             BackgroundColor = Color.White;
 
-            Mapsui.Utilities.Animation.AnimationTimer = new AnimationTimer(this);
-
             EnableTouchEvents = true;
 
             PaintSurface += OnPaintSurface;
@@ -253,9 +251,7 @@ namespace Mapsui.UI.Forms
         {
             if (PixelDensity <= 0) return;
 
-            // Update any running animation
-            if (Mapsui.Utilities.Animation.NeedsUpdate)
-                Mapsui.Utilities.Animation.UpdateAnimations();
+            Navigator.UpdateAnimations();
 
             skPaintSurfaceEventArgs.Surface.Canvas.Scale(PixelDensity, PixelDensity);
 

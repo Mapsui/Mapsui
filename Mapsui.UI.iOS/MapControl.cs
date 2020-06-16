@@ -36,8 +36,6 @@ namespace Mapsui.UI.iOS
             Map = new Map();
             BackgroundColor = UIColor.White;
 
-            Animation.AnimationTimer = new AnimationTimer(this);
-
             _canvas.TranslatesAutoresizingMaskIntoConstraints = false;
             _canvas.MultipleTouchEnabled = true;
             _canvas.PaintSurface += OnPaintSurface;
@@ -96,9 +94,7 @@ namespace Mapsui.UI.iOS
 
             args.Surface.Canvas.Scale(PixelDensity, PixelDensity);
 
-            if (Animation.NeedsUpdate)
-                Animation.UpdateAnimations();
-
+            Navigator.UpdateAnimations();
             Renderer.Render(args.Surface.Canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
         }
 

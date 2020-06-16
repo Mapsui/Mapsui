@@ -76,8 +76,6 @@ namespace Mapsui.UI.Android
             Map = new Map();
             Touch += MapView_Touch;
 
-            Mapsui.Utilities.Animation.AnimationTimer = new AnimationTimer(this);
-
             var listener = new MapControlGestureListener();
 
             listener.Fling += OnFling;
@@ -93,9 +91,7 @@ namespace Mapsui.UI.Android
 
             e.Surface.Canvas.Scale(PixelDensity, PixelDensity);
 
-            if (Mapsui.Utilities.Animation.NeedsUpdate)
-                Mapsui.Utilities.Animation.UpdateAnimations();
-
+            Navigator.UpdateAnimations();
             Renderer.Render(e.Surface.Canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
         }
 
@@ -152,9 +148,7 @@ namespace Mapsui.UI.Android
         {
             args.Surface.Canvas.Scale(PixelDensity, PixelDensity);
 
-            if (Mapsui.Utilities.Animation.NeedsUpdate)
-                Mapsui.Utilities.Animation.UpdateAnimations();
-
+            Navigator.UpdateAnimations();
             Renderer.Render(args.Surface.Canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
         }
 
