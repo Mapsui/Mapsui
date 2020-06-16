@@ -9,7 +9,7 @@ namespace Mapsui
     {
         private readonly Map _map;
         private readonly IViewport _viewport;
-        private Animation _animation;
+        private Animation _animation = new Animation();
         private double _rotationDelta;
 
         private static long _defaultDuration = 0;
@@ -35,6 +35,13 @@ namespace Mapsui
         {
             _map = map;
             _viewport = viewport;
+            _animation.Ticked += AnimationTimerTicked;
+                 
+        }
+
+        private void AnimationTimerTicked(object sender, AnimationEventArgs e)
+        {
+            Navigated?.Invoke(this, e.ChangeType);
         }
 
         /// <summary>
@@ -118,9 +125,8 @@ namespace Mapsui
                 if (animations.Count == 0)
                     return;
 
-                _animation = new Animation(duration);
-                _animation.Entries.AddRange(animations);
-                _animation.Start();
+                
+                _animation.Start(animations, duration);
             }
         }
 
@@ -160,9 +166,7 @@ namespace Mapsui
                 );
                 animations.Add(entry);
 
-                _animation = new Animation(duration);
-                _animation.Entries.AddRange(animations);
-                _animation.Start();
+                _animation.Start(animations, duration);
             }
         }
 
@@ -201,8 +205,8 @@ namespace Mapsui
                     animationStart: 0,
                     animationEnd: 1,
                     easing: Easing.QuarticOut,
-                    tick: this.CenterTick,
-                    final: this.CenterFinal
+                    tick: CenterTick,
+                    final: CenterFinal
                 );
                 animations.Add(centerEntry);
 
@@ -220,9 +224,7 @@ namespace Mapsui
                 );
                 animations.Add(entry);
 
-                _animation = new Animation(duration);
-                _animation.Entries.AddRange(animations);
-                _animation.Start();
+                _animation.Start(animations, duration);
             }
         }
 
@@ -342,9 +344,7 @@ namespace Mapsui
                 );
                 animations.Add(entry);
 
-                _animation = new Animation(duration);
-                _animation.Entries.AddRange(animations);
-                _animation.Start();
+                _animation.Start(animations, duration);
             }
         }
 
@@ -411,9 +411,7 @@ namespace Mapsui
                 );
                 animations.Add(entry);
 
-                _animation = new Animation(duration);
-                _animation.Entries.AddRange(animations);
-                _animation.Start();
+                _animation.Start(animations, duration);
             }
         }
 
@@ -462,9 +460,7 @@ namespace Mapsui
                 if (_rotationDelta > 180.0)
                     _rotationDelta -= 360.0;
 
-                _animation = new Animation(duration);
-                _animation.Entries.AddRange(animations);
-                _animation.Start();
+                _animation.Start(animations, duration);
             }
         }
 
@@ -509,9 +505,7 @@ namespace Mapsui
             );
             animations.Add(entry);
 
-            _animation = new Animation((long)animateMillis);
-            _animation.Entries.AddRange(animations);
-            _animation.Start();
+            _animation.Start(animations, (long)animateMillis);
         }
 
         /// <summary>
@@ -519,22 +513,7 @@ namespace Mapsui
         /// </summary>
         public void StopRunningAnimation()
         {
-            if (_animation != null)
-            {
-                _animation.Stop(false);
-                _animation = null;
-            }
-        }
-
-        /// <summary>
-        /// Update the running animation if there is one
-        /// </summary>
-        public void UpdateRunningAnimation()
-        {
-            if (_animation != null && _animation.IsRunning)
-            {
-                _animation.Tick();
-            }
+             _animation.Stop(false);
         }
 
         private void CenterTick(AnimationEntry entry, double value)
@@ -620,6 +599,11 @@ namespace Mapsui
         private void FlingFinal(AnimationEntry entry)
         {
             // Nothing to do
+        }
+
+        public void UpdateAnimations()
+        {
+            _animation.UpdateAnimations();
         }
     }
 }

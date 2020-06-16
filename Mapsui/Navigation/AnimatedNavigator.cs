@@ -78,5 +78,10 @@ namespace Mapsui
         {
             throw new NotImplementedException();
         }
+
+        public void UpdateAnimations()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

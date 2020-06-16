@@ -35,7 +35,8 @@ namespace Mapsui.UI
 
         public bool IsAnimating()
         {
-            return (Environment.TickCount - _tickCount) < Duration;
+            var tickProgress = Environment.TickCount - _tickCount;
+            return (tickProgress >= 0) && (tickProgress < Duration);
         }
     }
 }
