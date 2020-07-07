@@ -92,7 +92,26 @@ to the Xaml file</p>
     VerticalOptions=&quot;FillAndExpand&quot;
     HorizontalOptions=&quot;Fill&quot;
     BackgroundColor=&quot;Gray&quot; /&gt;
-</code></pre><p>to the Xaml <contentpage> part file<p>
+</code></pre><p>to the Xaml <contentpage> part file.<p>
+<p>Nest the MapView element inside a container, this child element needs to be placed inside a parent Layout 
+for the view to be correctly setup and attached to the code behind, for instance,</p>
+<pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+&lt;ContentPage xmlns=&quot;http://xamarin.com/schemas/2014/forms&quot;
+             xmlns:x=&quot;http://schemas.microsoft.com/winfx/2009/xaml&quot;
+             xmlns:d=&quot;http://xamarin.com/schemas/2014/forms/design&quot;
+             xmlns:mc=&quot;http://schemas.openxmlformats.org/markup-compatibility/2006&quot; 
+             xmlns:mapsui=&quot;clr-namespace:Mapsui.UI.Forms;assembly=Mapsui.UI.Forms&quot;
+             mc:Ignorable=&quot;d&quot;&gt;
+
+    &lt;StackLayout&gt;
+        &lt;mapsui:MapView x:Name=&quot;mapView&quot;
+         VerticalOptions=&quot;FillAndExpand&quot;
+         HorizontalOptions=&quot;Fill&quot;
+         BackgroundColor=&quot;Gray&quot; /&gt;
+    &lt;/StackLayout&gt;
+
+&lt;/ContentPage&gt;
+</code></pre><p>the Xaml file should look similar to this after this step.</p>
 <h3 id="step-5">Step 5</h3>
 <p>Add in the code behind the following</p>
 <pre><code class="lang-csharp">var map = new Map

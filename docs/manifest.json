@@ -66,7 +66,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.AnimatedNavigator.html",
-          "hash": "bRg+vUfaGq+dLpk9CGFmCw=="
+          "hash": "B57IgYRi8vdQya1L7eZd4Q=="
         }
       },
       "is_incremental": false,
@@ -918,7 +918,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.INavigator.html",
-          "hash": "cKKVWhxOGOqlDd1vDsNN1Q=="
+          "hash": "SriTtfCRzvVo1ON5DgiMjg=="
         }
       },
       "is_incremental": false,
@@ -1230,7 +1230,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Navigator.html",
-          "hash": "RF5fgTbcLefBVpuKIynF2A=="
+          "hash": "4t02wenhzEQpRVxovVIpUg=="
         }
       },
       "is_incremental": false,
@@ -3702,7 +3702,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Android.MapControl.html",
-          "hash": "VLhICDsHfJG+joWagekbkg=="
+          "hash": "cGOi1lXAiXaliFoVAH8I/Q=="
         }
       },
       "is_incremental": false,
@@ -3726,7 +3726,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Android.Resource.Attribute.html",
-          "hash": "tqM+n4qJty482yUokR80kA=="
+          "hash": "WxRrfuZKDVybRSlWrs+01g=="
         }
       },
       "is_incremental": false,
@@ -3738,7 +3738,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Android.Resource.String.html",
-          "hash": "Q8VVn4T9bYRfOtkxu2HpIQ=="
+          "hash": "tKuaoSVIDeZMHbpKr6tpdg=="
         }
       },
       "is_incremental": false,
@@ -3750,7 +3750,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Android.Resource.Styleable.html",
-          "hash": "TmFrAByljO06v3hxy6gCwg=="
+          "hash": "xbLcuicqCeSgtPqzbXIgiA=="
         }
       },
       "is_incremental": false,
@@ -3762,7 +3762,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Android.Resource.html",
-          "hash": "92eK8AH1EEj5yN5i0Yp+NA=="
+          "hash": "63Dp+Pdg6wDmRqiYB2TgOg=="
         }
       },
       "is_incremental": false,
@@ -3942,7 +3942,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.MapControl.html",
-          "hash": "gfY8CXSW2Rtq7J5+7OUWCA=="
+          "hash": "X0RrseqH9zUp6hNdiXp1fw=="
         }
       },
       "is_incremental": false,
@@ -4386,7 +4386,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Wpf.MapControl.html",
-          "hash": "wDVfhvVrwhg9yz8vLrH6xA=="
+          "hash": "MXJsCBz9orwugH6uTH9nxg=="
         }
       },
       "is_incremental": false,
@@ -4494,7 +4494,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.iOS.MapControl.html",
-          "hash": "O5xQY3Ib1AOQfMB31e5zdA=="
+          "hash": "rjAMIMGyC3crQUqK1rfZ1Q=="
         }
       },
       "is_incremental": false,
@@ -4530,7 +4530,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Utilities.Animation.html",
-          "hash": "7O1VKgunt+h8oZ81vkCEwQ=="
+          "hash": "jpCUDdg9u+8c7yNSJLOGxw=="
         }
       },
       "is_incremental": false,
@@ -4554,7 +4554,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Utilities.AnimationEventArgs.html",
-          "hash": "w/H9Bg7cU1vaqsEopR7DmQ=="
+          "hash": "OWB4kSHvFATLsTfTnu2WDQ=="
         }
       },
       "is_incremental": false,
@@ -5214,7 +5214,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/getting-started-xamarin-forms.html",
-          "hash": "yCwGai42Jgyh1t1dlqifGg=="
+          "hash": "cWZ5ogWhCM17nPUyfKLgcQ=="
         }
       },
       "is_incremental": false,
@@ -5501,10 +5501,11 @@
         "full_build_reason_code": "NoAvailableBuildCache"
       },
       "processors": {
-        "ManagedReferenceDocumentProcessor": {
+        "TocDocumentProcessor": {
           "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
-          "total_file_count": 423,
+          "total_file_count": 0,
           "skipped_file_count": 0
         },
         "ConceptualDocumentProcessor": {
@@ -5513,16 +5514,15 @@
           "total_file_count": 24,
           "skipped_file_count": 0
         },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 423,
+          "skipped_file_count": 0
+        },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build",
-          "total_file_count": 0,
-          "skipped_file_count": 0
-        },
-        "TocDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
           "total_file_count": 0,
           "skipped_file_count": 0

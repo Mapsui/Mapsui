@@ -440,6 +440,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.AnimatedNavigator.StopRunningAnimation
   nameWithType: AnimatedNavigator.StopRunningAnimation
+- uid: Mapsui.AnimatedNavigator.UpdateAnimations
+  name: UpdateAnimations()
+  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_UpdateAnimations
+  commentId: M:Mapsui.AnimatedNavigator.UpdateAnimations
+  fullName: Mapsui.AnimatedNavigator.UpdateAnimations()
+  nameWithType: AnimatedNavigator.UpdateAnimations()
+- uid: Mapsui.AnimatedNavigator.UpdateAnimations*
+  name: UpdateAnimations
+  href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_UpdateAnimations_
+  commentId: Overload:Mapsui.AnimatedNavigator.UpdateAnimations
+  isSpec: "True"
+  fullName: Mapsui.AnimatedNavigator.UpdateAnimations
+  nameWithType: AnimatedNavigator.UpdateAnimations
 - uid: Mapsui.AnimatedNavigator.ZoomIn(Mapsui.Geometries.Point,System.Int64,Mapsui.Utilities.Easing)
   name: ZoomIn(Point, Int64, Easing)
   href: api/Mapsui.AnimatedNavigator.html#Mapsui_AnimatedNavigator_ZoomIn_Mapsui_Geometries_Point_System_Int64_Mapsui_Utilities_Easing_
@@ -6424,6 +6437,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.INavigator.StopRunningAnimation
   nameWithType: INavigator.StopRunningAnimation
+- uid: Mapsui.INavigator.UpdateAnimations
+  name: UpdateAnimations()
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_UpdateAnimations
+  commentId: M:Mapsui.INavigator.UpdateAnimations
+  fullName: Mapsui.INavigator.UpdateAnimations()
+  nameWithType: INavigator.UpdateAnimations()
+- uid: Mapsui.INavigator.UpdateAnimations*
+  name: UpdateAnimations
+  href: api/Mapsui.INavigator.html#Mapsui_INavigator_UpdateAnimations_
+  commentId: Overload:Mapsui.INavigator.UpdateAnimations
+  isSpec: "True"
+  fullName: Mapsui.INavigator.UpdateAnimations
+  nameWithType: INavigator.UpdateAnimations
 - uid: Mapsui.INavigator.ZoomIn(Mapsui.Geometries.Point,System.Int64,Mapsui.Utilities.Easing)
   name: ZoomIn(Point, Int64, Easing)
   href: api/Mapsui.INavigator.html#Mapsui_INavigator_ZoomIn_Mapsui_Geometries_Point_System_Int64_Mapsui_Utilities_Easing_
@@ -9362,19 +9388,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Navigator.StopRunningAnimation
   nameWithType: Navigator.StopRunningAnimation
-- uid: Mapsui.Navigator.UpdateRunningAnimation
-  name: UpdateRunningAnimation()
-  href: api/Mapsui.Navigator.html#Mapsui_Navigator_UpdateRunningAnimation
-  commentId: M:Mapsui.Navigator.UpdateRunningAnimation
-  fullName: Mapsui.Navigator.UpdateRunningAnimation()
-  nameWithType: Navigator.UpdateRunningAnimation()
-- uid: Mapsui.Navigator.UpdateRunningAnimation*
-  name: UpdateRunningAnimation
-  href: api/Mapsui.Navigator.html#Mapsui_Navigator_UpdateRunningAnimation_
-  commentId: Overload:Mapsui.Navigator.UpdateRunningAnimation
+- uid: Mapsui.Navigator.UpdateAnimations
+  name: UpdateAnimations()
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_UpdateAnimations
+  commentId: M:Mapsui.Navigator.UpdateAnimations
+  fullName: Mapsui.Navigator.UpdateAnimations()
+  nameWithType: Navigator.UpdateAnimations()
+- uid: Mapsui.Navigator.UpdateAnimations*
+  name: UpdateAnimations
+  href: api/Mapsui.Navigator.html#Mapsui_Navigator_UpdateAnimations_
+  commentId: Overload:Mapsui.Navigator.UpdateAnimations
   isSpec: "True"
-  fullName: Mapsui.Navigator.UpdateRunningAnimation
-  nameWithType: Navigator.UpdateRunningAnimation
+  fullName: Mapsui.Navigator.UpdateAnimations
+  nameWithType: Navigator.UpdateAnimations
 - uid: Mapsui.Navigator.ZoomIn(Mapsui.Geometries.Point,System.Int64,Mapsui.Utilities.Easing)
   name: ZoomIn(Point, Int64, Easing)
   href: api/Mapsui.Navigator.html#Mapsui_Navigator_ZoomIn_Mapsui_Geometries_Point_System_Int64_Mapsui_Utilities_Easing_
@@ -28837,12 +28863,12 @@ references:
   commentId: T:Mapsui.Utilities.Animation
   fullName: Mapsui.Utilities.Animation
   nameWithType: Animation
-- uid: Mapsui.Utilities.Animation.#ctor(System.Int64)
-  name: Animation(Int64)
-  href: api/Mapsui.Utilities.Animation.html#Mapsui_Utilities_Animation__ctor_System_Int64_
-  commentId: M:Mapsui.Utilities.Animation.#ctor(System.Int64)
-  fullName: Mapsui.Utilities.Animation.Animation(System.Int64)
-  nameWithType: Animation.Animation(Int64)
+- uid: Mapsui.Utilities.Animation.#ctor
+  name: Animation()
+  href: api/Mapsui.Utilities.Animation.html#Mapsui_Utilities_Animation__ctor
+  commentId: M:Mapsui.Utilities.Animation.#ctor
+  fullName: Mapsui.Utilities.Animation.Animation()
+  nameWithType: Animation.Animation()
 - uid: Mapsui.Utilities.Animation.#ctor*
   name: Animation
   href: api/Mapsui.Utilities.Animation.html#Mapsui_Utilities_Animation__ctor_
@@ -28850,45 +28876,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Utilities.Animation.Animation
   nameWithType: Animation.Animation
-- uid: Mapsui.Utilities.Animation.AnimationTimer
-  name: AnimationTimer
-  href: api/Mapsui.Utilities.Animation.html#Mapsui_Utilities_Animation_AnimationTimer
-  commentId: P:Mapsui.Utilities.Animation.AnimationTimer
-  fullName: Mapsui.Utilities.Animation.AnimationTimer
-  nameWithType: Animation.AnimationTimer
-- uid: Mapsui.Utilities.Animation.AnimationTimer*
-  name: AnimationTimer
-  href: api/Mapsui.Utilities.Animation.html#Mapsui_Utilities_Animation_AnimationTimer_
-  commentId: Overload:Mapsui.Utilities.Animation.AnimationTimer
-  isSpec: "True"
-  fullName: Mapsui.Utilities.Animation.AnimationTimer
-  nameWithType: Animation.AnimationTimer
-- uid: Mapsui.Utilities.Animation.Duration
-  name: Duration
-  href: api/Mapsui.Utilities.Animation.html#Mapsui_Utilities_Animation_Duration
-  commentId: P:Mapsui.Utilities.Animation.Duration
-  fullName: Mapsui.Utilities.Animation.Duration
-  nameWithType: Animation.Duration
-- uid: Mapsui.Utilities.Animation.Duration*
-  name: Duration
-  href: api/Mapsui.Utilities.Animation.html#Mapsui_Utilities_Animation_Duration_
-  commentId: Overload:Mapsui.Utilities.Animation.Duration
-  isSpec: "True"
-  fullName: Mapsui.Utilities.Animation.Duration
-  nameWithType: Animation.Duration
-- uid: Mapsui.Utilities.Animation.Entries
-  name: Entries
-  href: api/Mapsui.Utilities.Animation.html#Mapsui_Utilities_Animation_Entries
-  commentId: P:Mapsui.Utilities.Animation.Entries
-  fullName: Mapsui.Utilities.Animation.Entries
-  nameWithType: Animation.Entries
-- uid: Mapsui.Utilities.Animation.Entries*
-  name: Entries
-  href: api/Mapsui.Utilities.Animation.html#Mapsui_Utilities_Animation_Entries_
-  commentId: Overload:Mapsui.Utilities.Animation.Entries
-  isSpec: "True"
-  fullName: Mapsui.Utilities.Animation.Entries
-  nameWithType: Animation.Entries
 - uid: Mapsui.Utilities.Animation.IsRunning
   name: IsRunning
   href: api/Mapsui.Utilities.Animation.html#Mapsui_Utilities_Animation_IsRunning
@@ -28902,38 +28889,15 @@ references:
   isSpec: "True"
   fullName: Mapsui.Utilities.Animation.IsRunning
   nameWithType: Animation.IsRunning
-- uid: Mapsui.Utilities.Animation.Loop
-  name: Loop
-  href: api/Mapsui.Utilities.Animation.html#Mapsui_Utilities_Animation_Loop
-  commentId: P:Mapsui.Utilities.Animation.Loop
-  fullName: Mapsui.Utilities.Animation.Loop
-  nameWithType: Animation.Loop
-- uid: Mapsui.Utilities.Animation.Loop*
-  name: Loop
-  href: api/Mapsui.Utilities.Animation.html#Mapsui_Utilities_Animation_Loop_
-  commentId: Overload:Mapsui.Utilities.Animation.Loop
-  isSpec: "True"
-  fullName: Mapsui.Utilities.Animation.Loop
-  nameWithType: Animation.Loop
-- uid: Mapsui.Utilities.Animation.NeedsUpdate
-  name: NeedsUpdate
-  href: api/Mapsui.Utilities.Animation.html#Mapsui_Utilities_Animation_NeedsUpdate
-  commentId: P:Mapsui.Utilities.Animation.NeedsUpdate
-  fullName: Mapsui.Utilities.Animation.NeedsUpdate
-  nameWithType: Animation.NeedsUpdate
-- uid: Mapsui.Utilities.Animation.NeedsUpdate*
-  name: NeedsUpdate
-  href: api/Mapsui.Utilities.Animation.html#Mapsui_Utilities_Animation_NeedsUpdate_
-  commentId: Overload:Mapsui.Utilities.Animation.NeedsUpdate
-  isSpec: "True"
-  fullName: Mapsui.Utilities.Animation.NeedsUpdate
-  nameWithType: Animation.NeedsUpdate
-- uid: Mapsui.Utilities.Animation.Start
-  name: Start()
-  href: api/Mapsui.Utilities.Animation.html#Mapsui_Utilities_Animation_Start
-  commentId: M:Mapsui.Utilities.Animation.Start
-  fullName: Mapsui.Utilities.Animation.Start()
-  nameWithType: Animation.Start()
+- uid: Mapsui.Utilities.Animation.Start(System.Collections.Generic.List{Mapsui.Utilities.AnimationEntry},System.Int64)
+  name: Start(List<AnimationEntry>, Int64)
+  href: api/Mapsui.Utilities.Animation.html#Mapsui_Utilities_Animation_Start_System_Collections_Generic_List_Mapsui_Utilities_AnimationEntry__System_Int64_
+  commentId: M:Mapsui.Utilities.Animation.Start(System.Collections.Generic.List{Mapsui.Utilities.AnimationEntry},System.Int64)
+  name.vb: Start(List(Of AnimationEntry), Int64)
+  fullName: Mapsui.Utilities.Animation.Start(System.Collections.Generic.List<Mapsui.Utilities.AnimationEntry>, System.Int64)
+  fullName.vb: Mapsui.Utilities.Animation.Start(System.Collections.Generic.List(Of Mapsui.Utilities.AnimationEntry), System.Int64)
+  nameWithType: Animation.Start(List<AnimationEntry>, Int64)
+  nameWithType.vb: Animation.Start(List(Of AnimationEntry), Int64)
 - uid: Mapsui.Utilities.Animation.Start*
   name: Start
   href: api/Mapsui.Utilities.Animation.html#Mapsui_Utilities_Animation_Start_
@@ -29125,12 +29089,12 @@ references:
   commentId: T:Mapsui.Utilities.AnimationEventArgs
   fullName: Mapsui.Utilities.AnimationEventArgs
   nameWithType: AnimationEventArgs
-- uid: Mapsui.Utilities.AnimationEventArgs.#ctor(System.Double)
-  name: AnimationEventArgs(Double)
-  href: api/Mapsui.Utilities.AnimationEventArgs.html#Mapsui_Utilities_AnimationEventArgs__ctor_System_Double_
-  commentId: M:Mapsui.Utilities.AnimationEventArgs.#ctor(System.Double)
-  fullName: Mapsui.Utilities.AnimationEventArgs.AnimationEventArgs(System.Double)
-  nameWithType: AnimationEventArgs.AnimationEventArgs(Double)
+- uid: Mapsui.Utilities.AnimationEventArgs.#ctor(System.Double,Mapsui.ChangeType)
+  name: AnimationEventArgs(Double, ChangeType)
+  href: api/Mapsui.Utilities.AnimationEventArgs.html#Mapsui_Utilities_AnimationEventArgs__ctor_System_Double_Mapsui_ChangeType_
+  commentId: M:Mapsui.Utilities.AnimationEventArgs.#ctor(System.Double,Mapsui.ChangeType)
+  fullName: Mapsui.Utilities.AnimationEventArgs.AnimationEventArgs(System.Double, Mapsui.ChangeType)
+  nameWithType: AnimationEventArgs.AnimationEventArgs(Double, ChangeType)
 - uid: Mapsui.Utilities.AnimationEventArgs.#ctor*
   name: AnimationEventArgs
   href: api/Mapsui.Utilities.AnimationEventArgs.html#Mapsui_Utilities_AnimationEventArgs__ctor_
@@ -29138,6 +29102,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Utilities.AnimationEventArgs.AnimationEventArgs
   nameWithType: AnimationEventArgs.AnimationEventArgs
+- uid: Mapsui.Utilities.AnimationEventArgs.ChangeType
+  name: ChangeType
+  href: api/Mapsui.Utilities.AnimationEventArgs.html#Mapsui_Utilities_AnimationEventArgs_ChangeType
+  commentId: P:Mapsui.Utilities.AnimationEventArgs.ChangeType
+  fullName: Mapsui.Utilities.AnimationEventArgs.ChangeType
+  nameWithType: AnimationEventArgs.ChangeType
+- uid: Mapsui.Utilities.AnimationEventArgs.ChangeType*
+  name: ChangeType
+  href: api/Mapsui.Utilities.AnimationEventArgs.html#Mapsui_Utilities_AnimationEventArgs_ChangeType_
+  commentId: Overload:Mapsui.Utilities.AnimationEventArgs.ChangeType
+  isSpec: "True"
+  fullName: Mapsui.Utilities.AnimationEventArgs.ChangeType
+  nameWithType: AnimationEventArgs.ChangeType
 - uid: Mapsui.Utilities.AnimationEventArgs.Value
   name: Value
   href: api/Mapsui.Utilities.AnimationEventArgs.html#Mapsui_Utilities_AnimationEventArgs_Value
