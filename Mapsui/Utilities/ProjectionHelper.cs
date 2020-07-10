@@ -74,7 +74,7 @@ namespace Mapsui.Utilities
 
         private static bool IsTransformationNeeded(string fromCRS, string toCRS)
         {
-           return !fromCRS.Equals(toCRS);
+           return !fromCRS?.Equals(toCRS) == true;
         }
 
         private static bool IsTransformationSupported(ITransformation transformation, string fromCRS, string toCRS)

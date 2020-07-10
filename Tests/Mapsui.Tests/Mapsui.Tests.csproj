@@ -97,6 +97,7 @@
     <Compile Include="Fetcher\SometimesFailingTileProvider.cs" />
     <Compile Include="Fetcher\FailingTileProvider.cs" />
     <Compile Include="Fetcher\FetchMachineTests.cs" />
+    <Compile Include="Layers\ImageLayerTests.cs" />
     <Compile Include="Layers\LayerCollectionTests.cs" />
     <Compile Include="Layers\RasterizingLayerTests.cs" />
     <Compile Include="Layers\WritableLayerTests.cs" />
