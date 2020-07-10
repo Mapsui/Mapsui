@@ -34,6 +34,8 @@ namespace Mapsui.Tests.Layers
 
             // act
             layer.RefreshData(box, resolution, true);
+
+            // assert
             waitHandle.WaitOne();
             Assert.AreEqual(layer.GetFeaturesInView(box, resolution).Count(), 1);
         }

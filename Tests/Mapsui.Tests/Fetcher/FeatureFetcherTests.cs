@@ -31,9 +31,7 @@ namespace Mapsui.Tests.Fetcher
 
             // act
             layer.RefreshData(extent, 1, true);
-
-
-
+            
             // assert
             Task.Run(() => 
             {
