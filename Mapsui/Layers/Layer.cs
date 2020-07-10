@@ -25,7 +25,7 @@ using Mapsui.Providers;
 using Mapsui.Utilities;
 
 // todo: Use Transformer only to translate between provider and cache. Layer only interacts with cache.
-// todo: Put the datasource envelop in the cache (it should not just be the envelope of the cached data, but all data in datasource). 
+// todo: Put the dataSource envelop in the cache (it should not just be the envelope of the cached data, but all data in dataSource). 
 
 namespace Mapsui.Layers
 {
@@ -36,8 +36,7 @@ namespace Mapsui.Layers
         private readonly MemoryProvider _cache = new MemoryProvider();
         private readonly FeatureFetchDispatcher _fetchDispatcher;
         private readonly FetchMachine _fetchMachine;
-        private readonly Delayer _delayer = new Delayer();
-        private int _fetchingPostponedInMilliseconds = 500;
+        public Delayer Delayer { get; } = new Delayer();
 
         /// <summary>
         /// Create a new layer
@@ -62,17 +61,15 @@ namespace Mapsui.Layers
         /// </summary>
         public int FetchingPostponedInMilliseconds
         {
-            get 
-            { 
-                return _fetchingPostponedInMilliseconds; 
-            }
-            set 
+            get
             {
-                _fetchingPostponedInMilliseconds = value;
-                _delayer.MillisecondsToWait = value;
-            } 
+                return Delayer.MillisecondsToWait;
+            }
+            set
+            {
+                Delayer.MillisecondsToWait = value;
+            }
         }
-
         /// <summary>
         /// Data source for this layer
         /// </summary>
@@ -153,10 +150,12 @@ namespace Mapsui.Layers
         public override void RefreshData(BoundingBox extent, double resolution, bool majorChange)
         {
             if (!Enabled) return;
+            if (MinVisible > resolution) return;
+            if (MaxVisible < resolution) return;
             if (DataSource == null) return;
             if (!majorChange) return;
 
-            _delayer.ExecuteDelayed(() => DelayedFetch(extent.Copy(), resolution));
+            Delayer.ExecuteDelayed(() => DelayedFetch(extent.Copy(), resolution));
         }
 
         /// <inheritdoc />
