@@ -156,9 +156,16 @@ namespace Mapsui.Layers
 
             Task.Run(() =>
             {
-                Logger.Log(LogLevel.Debug, $"Start image fetch at {DateTime.Now.TimeOfDay}");
-                fetcher.FetchOnThread();
-                Logger.Log(LogLevel.Debug, $"Finished image fetch at {DateTime.Now.TimeOfDay}");
+                try
+                {
+                    Logger.Log(LogLevel.Debug, $"Start image fetch at {DateTime.Now.TimeOfDay}");
+                    fetcher.FetchOnThread();
+                    Logger.Log(LogLevel.Debug, $"Finished image fetch at {DateTime.Now.TimeOfDay}");
+                }
+                catch (Exception ex)
+                {
+                    OnDataChanged(new DataChangedEventArgs(ex, false, null));
+                }
             });
         }
 
