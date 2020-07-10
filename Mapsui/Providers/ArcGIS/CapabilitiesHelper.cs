@@ -187,8 +187,8 @@ namespace Mapsui.Providers.ArcGIS
 
             foreach (var lod in arcGisDynamicCapabilities.tileInfo.lods)
             {
-                var levelId = count.ToString();
-                schema.Resolutions[levelId] = new Resolution(levelId, lod.resolution,
+                var level = count;
+                schema.Resolutions[level] = new Resolution(level, lod.resolution,
                     arcGisDynamicCapabilities.tileInfo.cols,
                     arcGisDynamicCapabilities.tileInfo.rows);
                 count++;

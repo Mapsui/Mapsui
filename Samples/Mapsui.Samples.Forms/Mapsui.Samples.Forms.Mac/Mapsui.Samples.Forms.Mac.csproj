@@ -57,8 +57,11 @@
     <AOTMode>None</AOTMode>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BruTile, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\BruTile.2.1.2\lib\netstandard1.1\BruTile.dll</HintPath>
+    <Reference Include="BruTile, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\BruTile.3.0.0\lib\netstandard1.1\BruTile.dll</HintPath>
+    </Reference>
+    <Reference Include="BruTile.MbTiles, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\BruTile.MbTiles.3.0.0\lib\netstandard1.1\BruTile.MbTiles.dll</HintPath>
     </Reference>
     <Reference Include="ConcurrentCollections, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\ConcurrentHashSet.1.1.0\lib\netstandard2.0\ConcurrentCollections.dll</HintPath>
@@ -132,9 +135,6 @@
     </Reference>
     <Reference Include="SQLite-net">
       <HintPath>..\..\..\packages\sqlite-net-pcl.1.6.292\lib\netstandard1.1\SQLite-net.dll</HintPath>
-    </Reference>
-    <Reference Include="BruTile.MbTiles">
-      <HintPath>..\..\..\packages\BruTile.MbTiles.2.1.2\lib\netstandard1.1\BruTile.MbTiles.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

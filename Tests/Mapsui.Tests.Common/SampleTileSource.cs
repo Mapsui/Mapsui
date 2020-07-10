@@ -25,8 +25,8 @@ namespace Mapsui.Tests.Common
         {
             var schema = new GlobalSphericalMercator(YAxis.TMS);
             schema.Resolutions.Clear();
-            schema.Resolutions["0"] = new Resolution("0", 156543.033900000);
-            schema.Resolutions["1"] = new Resolution("1", 78271.516950000);
+            schema.Resolutions[0] = new Resolution(0, 156543.033900000);
+            schema.Resolutions[1] = new Resolution(1, 78271.516950000);
             return schema;
         }
     }

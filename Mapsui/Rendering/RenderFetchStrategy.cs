@@ -12,21 +12,21 @@ namespace Mapsui.Rendering
         public IList<IFeature> Get(BoundingBox extent, double resolution, ITileSchema schema, ITileCache<Feature> memoryCache)
         {
             var dictionary = new Dictionary<TileIndex, IFeature>();
-            var levelId = BruTile.Utilities.GetNearestLevel(schema.Resolutions, resolution);
-            GetRecursive(dictionary, schema, memoryCache, extent.ToExtent(), levelId);
+            var level = BruTile.Utilities.GetNearestLevel(schema.Resolutions, resolution);
+            GetRecursive(dictionary, schema, memoryCache, extent.ToExtent(), level);
             var sortedFeatures = dictionary.OrderByDescending(t => schema.Resolutions[t.Key.Level].UnitsPerPixel);
             return sortedFeatures.ToDictionary(pair => pair.Key, pair => pair.Value).Values.ToList();
         }
 
         public static void GetRecursive(IDictionary<TileIndex, IFeature> resultTiles, ITileSchema schema,
-            ITileCache<Feature> cache, Extent extent, string levelId)
+            ITileCache<Feature> cache, Extent extent, int level)
         {
             // to improve performance, convert the resolutions to a list so they can be walked up by
             // simply decrementing an index when the level index needs to change
             var resolutions = schema.Resolutions.OrderByDescending(pair => pair.Value.UnitsPerPixel).ToList();
             for (int i = 0; i < resolutions.Count; i++)
             {
-                if (levelId == resolutions[i].Key)
+                if (level == resolutions[i].Key)
                 {
                     GetRecursive(resultTiles, schema, cache, extent, resolutions, i);
                     break;
@@ -35,7 +35,7 @@ namespace Mapsui.Rendering
         }
 
         private static void GetRecursive(IDictionary<TileIndex, IFeature> resultTiles, ITileSchema schema,
-            ITileCache<Feature> cache, Extent extent, IList<KeyValuePair<string, Resolution>> resolutions, int resolutionIndex)
+            ITileCache<Feature> cache, Extent extent, IList<KeyValuePair<int, Resolution>> resolutions, int resolutionIndex)
         {
             if (resolutionIndex < 0 || resolutionIndex >= resolutions.Count)
                 return;

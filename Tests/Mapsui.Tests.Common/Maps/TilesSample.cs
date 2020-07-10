@@ -30,10 +30,10 @@ namespace Mapsui.Tests.Common.Maps
 
             var tileIndexes = new[]
             {
-                new TileIndex(0, 0, "1"),
-                new TileIndex(1, 0, "1"),
-                new TileIndex(0, 1, "1"),
-                new TileIndex(1, 1, "1")
+                new TileIndex(0, 0, 1),
+                new TileIndex(1, 0, 1),
+                new TileIndex(0, 1, 1),
+                new TileIndex(1, 1, 1)
             };
 
             var features = TileIndexToFeatures(tileIndexes, new SampleTileSource());

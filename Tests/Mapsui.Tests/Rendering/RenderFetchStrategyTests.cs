@@ -18,9 +18,9 @@ namespace Mapsui.Tests.Rendering
             // arrange
             var schema = new GlobalSphericalMercator();
             var box = schema.Extent.ToBoundingBox();
-            const int levelId = 3;
-            var resolution = schema.Resolutions[levelId.ToString(CultureInfo.InvariantCulture)];
-            var memoryCache = PopulateMemoryCache(schema, new MemoryCache<Feature>(), levelId);
+            const int level = 3;
+            var resolution = schema.Resolutions[level];
+            var memoryCache = PopulateMemoryCache(schema, new MemoryCache<Feature>(), level);
             var renderFetchStrategy = new RenderFetchStrategy();
 
             // act
@@ -34,7 +34,7 @@ namespace Mapsui.Tests.Rendering
         {
             for (var i = levelId; i >= 0; i--)
             {
-                var tiles = schema.GetTileInfos(schema.Extent, i.ToString(CultureInfo.InvariantCulture));
+                var tiles = schema.GetTileInfos(schema.Extent, i);
                 foreach (var tile in tiles)
                 {
                     if ((tile.Index.Col + tile.Index.Row) % 2 == 0) // Add only 50% of the tiles with the arbitrary rule.

@@ -38,7 +38,7 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="BruTile" Version="2.1.2" />
+    <PackageReference Include="BruTile" Version="3.0.0" />
   </ItemGroup>
 
 </Project>
