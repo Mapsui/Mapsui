@@ -19,7 +19,7 @@
         <dependency id="BruTile" version="[3.0.0,4.0.0)"/>
         <dependency id="Newtonsoft.json" version="[11.0.1,)"/>
       </group>
-      <group targetFramework="net461">
+      <group targetFramework="net48">
         <dependency id="BruTile" version="[3.0.0,4.0.0)"/>
         <dependency id="Newtonsoft.json" version="[11.0.1,)"/>
         <dependency id="SkiaSharp" version="[2.80.0,3.0.0)"/>
@@ -59,11 +59,11 @@
     <file src="..\Mapsui\bin\Release\netstandard2.0\Mapsui.dll" target="lib\netstandard2.0\Mapsui.dll" />
     <file src="..\Mapsui.Rendering.Skia\bin\Release\netstandard2.0\Mapsui.Rendering.Skia.dll" target="lib\netstandard2.0\Mapsui.Rendering.Skia.dll" />
     
-    <file src="..\Mapsui.UI.Wpf\bin\Release\net461\Mapsui.Geometries.dll" target="lib\net461\Mapsui.Geometries.dll" />
-    <file src="..\Mapsui.UI.Wpf\bin\Release\net461\Mapsui.dll" target="lib\net461\Mapsui.dll" />
-    <file src="..\Mapsui.UI.Wpf\bin\Release\net461\Mapsui.Rendering.Xaml.dll" target="lib\net461\Mapsui.Rendering.Xaml.dll" />
-    <file src="..\Mapsui.UI.Wpf\bin\Release\net461\Mapsui.Rendering.Skia.dll" target="lib\net461\Mapsui.Rendering.Skia.dll" />
-    <file src="..\Mapsui.UI.Wpf\bin\Release\net461\Mapsui.UI.Wpf.dll" target="lib\net461\Mapsui.UI.Wpf.dll" />
+    <file src="..\Mapsui.UI.Wpf\bin\Release\net48\Mapsui.Geometries.dll" target="lib\net48\Mapsui.Geometries.dll" />
+    <file src="..\Mapsui.UI.Wpf\bin\Release\net48\Mapsui.dll" target="lib\net48\Mapsui.dll" />
+    <file src="..\Mapsui.UI.Wpf\bin\Release\net48\Mapsui.Rendering.Xaml.dll" target="lib\net48\Mapsui.Rendering.Xaml.dll" />
+    <file src="..\Mapsui.UI.Wpf\bin\Release\net48\Mapsui.Rendering.Skia.dll" target="lib\net48\Mapsui.Rendering.Skia.dll" />
+    <file src="..\Mapsui.UI.Wpf\bin\Release\net48\Mapsui.UI.Wpf.dll" target="lib\net48\Mapsui.UI.Wpf.dll" />
 
     <file src="..\Mapsui.UI.Uwp\bin\Release\Mapsui.Geometries.dll" target="lib\uap\Mapsui.Geometries.dll" />
     <file src="..\Mapsui.UI.Uwp\bin\Release\Mapsui.dll" target="lib\uap\Mapsui.dll" />
