@@ -179,7 +179,11 @@ namespace Mapsui.Layers
             {
                 _extent = extent;
                 _resolution = resolution;
-                Delayer.ExecuteDelayed(() => _layer.RefreshData(extent.Copy(), resolution, majorChange));
+
+                if (_layer is IAsyncDataFetcher)
+                    Delayer.ExecuteDelayed(() => _layer.RefreshData(extent.Copy(), resolution, majorChange));
+                else
+                    Delayer.ExecuteDelayed(Rasterize);
             }
         }
 
