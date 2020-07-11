@@ -69,7 +69,8 @@ namespace Mapsui.Rendering.Xaml
                 FlowDirection.LeftToRight,
                 new Typeface(style.Font.FontFamily),
                 style.Font.Size,
-                new SolidColorBrush(style.ForeColor.ToXaml()));
+                new SolidColorBrush(style.ForeColor.ToXaml()),
+                1);
 
             width = formattedText.Width;
             height = formattedText.Height;
