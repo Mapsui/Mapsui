@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\..\..\packages\Xamarin.Forms.4.6.0.1073\build\Xamarin.Forms.props" Condition="Exists('..\..\..\packages\Xamarin.Forms.4.6.0.1073\build\Xamarin.Forms.props')" />
-  <Import Project="..\Mapsui.Samples.Forms.Shared\Mapsui.Samples.Forms.Shared.projitems" Label="Shared" Condition="Exists('..\Mapsui.Samples.Forms.Shared\Mapsui.Samples.Forms.Shared.projitems')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">iPhone</Platform>
@@ -181,6 +180,10 @@
     <ProjectReference Include="..\..\..\Mapsui\Mapsui.csproj">
       <Project>{D74C052A-C07E-4B37-A898-134218ACA5C9}</Project>
       <Name>Mapsui</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mapsui.Samples.Forms.Shared\Mapsui.Samples.Forms.Shared.csproj">
+      <Project>{c008562a-ed14-4ef0-bad6-b7967ef9a9f3}</Project>
+      <Name>Mapsui.Samples.Forms.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

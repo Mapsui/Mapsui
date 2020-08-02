@@ -180,7 +180,10 @@
       <Project>{508ae811-a03a-4138-8ccc-abde03c67010}</Project>
       <Name>Mapsui.Samples.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Mapsui.Samples.Forms.Shared\Mapsui.Samples.Forms.Shared.csproj">
+      <Project>{c008562a-ed14-4ef0-bad6-b7967ef9a9f3}</Project>
+      <Name>Mapsui.Samples.Forms.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
-  <Import Project="..\Mapsui.Samples.Forms.Shared\Mapsui.Samples.Forms.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
