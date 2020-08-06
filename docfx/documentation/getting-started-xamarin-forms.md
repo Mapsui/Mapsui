@@ -58,13 +58,7 @@ var map = new Map
     Transformation = new MinimalTransformation()
 };
 
-var attribution = new BruTile.Attribution("© OpenStreetMap contributors",
-    "http://www.openstreetmap.org/copyright");
-var tileSource = new HttpTileSource(new GlobalSphericalMercator(),
-    "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-    new[] { "a", "b", "c" }, name: "OpenStreetMap",
-    attribution: attribution);
-var tileLayer = new TileLayer(tileSource) { Name = "OpenStreetMap" };
+var tileLayer = OpenStreetMap.CreateTileLayer();
 
 map.Layers.Add(tileLayer);
 map.Widgets.Add(new Widgets.ScaleBar.ScaleBarWidget(map) { TextAlignment = Widgets.Alignment.Center, HorizontalAlignment = Widgets.HorizontalAlignment.Left, VerticalAlignment = Widgets.VerticalAlignment.Bottom });
