@@ -79,9 +79,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Resources\Images\Original\bitmap_atlas.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
