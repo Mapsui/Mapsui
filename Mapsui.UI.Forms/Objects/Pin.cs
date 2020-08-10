@@ -8,6 +8,7 @@ using Mapsui.Styles;
 using Mapsui.UI.Objects;
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
+using Svg.Skia;
 using Xamarin.Forms;
 
 namespace Mapsui.UI.Forms
@@ -444,16 +445,16 @@ namespace Mapsui.UI.Forms
                     case PinType.Pin:
                         // First we have to create a bitmap from Svg code
                         // Create a new SVG object
-                        var svg = new SkiaSharp.Extended.Svg.SKSvg();
+                        var svg = new SKSvg();
                         // Load the SVG document
                         stream = Utilities.EmbeddedResourceLoader.Load("Images.Pin.svg", typeof(Pin));
                         if (stream == null)
                             return;
                         svg.Load(stream);
-                        Width = svg.CanvasSize.Width * Scale;
-                        Height = svg.CanvasSize.Height * Scale;
+                        Width = svg.Picture.CullRect.Width * Scale;
+                        Height = svg.Picture.CullRect.Height * Scale;
                         // Create bitmap to hold canvas
-                        var info = new SKImageInfo((int)svg.CanvasSize.Width, (int)svg.CanvasSize.Height) { AlphaType = SKAlphaType.Premul };
+                        var info = new SKImageInfo((int)svg.Picture.CullRect.Width, (int)svg.Picture.CullRect.Height) { AlphaType = SKAlphaType.Premul };
                         var bitmap = new SKBitmap(info);
                         var canvas = new SKCanvas(bitmap);
                         // Now draw Svg image to bitmap

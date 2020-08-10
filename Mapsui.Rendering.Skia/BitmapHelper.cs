@@ -1,6 +1,7 @@
 using System.IO;
 using Mapsui.Styles;
 using SkiaSharp;
+using Svg.Skia;
 
 namespace Mapsui.Rendering.Skia
 {
@@ -21,7 +22,7 @@ namespace Mapsui.Rendering.Skia
 
                 if (System.Text.Encoding.UTF8.GetString(buffer, 0, 4).ToLower().Equals("<svg"))
                 {
-                    var svg = new SkiaSharp.Extended.Svg.SKSvg();
+                    var svg = new SKSvg();
                     svg.Load(stream);
 
                     return new BitmapInfo {Svg = svg};

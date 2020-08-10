@@ -1,11 +1,12 @@
 ﻿using Mapsui.Styles;
 using SkiaSharp;
+using Svg.Skia;
 
 namespace Mapsui.Rendering.Skia
 {
     public class SvgRenderer
     {
-        public static void Draw(SKCanvas canvas, SkiaSharp.Extended.Svg.SKSvg svg, float x, float y, float orientation = 0,
+        public static void Draw(SKCanvas canvas, SKSvg svg, float x, float y, float orientation = 0,
             float offsetX = 0, float offsetY = 0,
             LabelStyle.HorizontalAlignmentEnum horizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left,
             LabelStyle.VerticalAlignmentEnum verticalAlignment = LabelStyle.VerticalAlignmentEnum.Top,
@@ -21,8 +22,8 @@ namespace Mapsui.Rendering.Skia
             canvas.RotateDegrees(orientation, 0, 0); // todo: degrees or radians?
             canvas.Scale(scale, scale);
 
-            var halfWidth = svg.CanvasSize.Width / 2;
-            var halfHeight = svg.CanvasSize.Height / 2;
+            var halfWidth = svg.Picture.CullRect.Width / 2;
+            var halfHeight = svg.Picture.CullRect.Height / 2;
 
             // 0/0 are assumed at center of image, but Svg has 0/0 at left top position
             canvas.Translate(-halfWidth + offsetX, -halfHeight - offsetY);

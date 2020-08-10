@@ -1,5 +1,6 @@
 ﻿using Mapsui.Styles;
 using SkiaSharp;
+using Svg.Skia;
 
 namespace Mapsui.Rendering.Skia
 {
@@ -32,12 +33,12 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        public SkiaSharp.Extended.Svg.SKSvg Svg
+        public SKSvg Svg
         {
             get
             {
                 if (Type == BitmapType.Svg)
-                    return (SkiaSharp.Extended.Svg.SKSvg) _data;
+                    return (SKSvg) _data;
                 else
                     return null;
             }
@@ -75,7 +76,7 @@ namespace Mapsui.Rendering.Skia
                     case BitmapType.Bitmap:
                         return Bitmap.Width;
                     case BitmapType.Svg:
-                        return Svg.CanvasSize.Width;
+                        return Svg.Picture.CullRect.Width;
                     case BitmapType.Sprite:
                         return ((Sprite) _data).Width;
                     default:
@@ -93,7 +94,7 @@ namespace Mapsui.Rendering.Skia
                     case BitmapType.Bitmap:
                         return Bitmap.Height;
                     case BitmapType.Svg:
-                        return Svg.CanvasSize.Height;
+                        return Svg.Picture.CullRect.Height;
                     case BitmapType.Sprite:
                         return ((Sprite) _data).Height;
                     default:
