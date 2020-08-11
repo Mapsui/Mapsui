@@ -26,8 +26,7 @@ Mapsui is a C# map component for apps
 - Designed to be fast and responsive
 
 ## Quickstart
-Quickly get a sample running in [WPF](https://mapsui.com/documentation/getting-started-wpf.html) or 
-[Android](https://mapsui.com/documentation/getting-started-android.html).
+Quickly get a sample running in [WPF](https://mapsui.com/documentation/getting-started-wpf.html), [Android](https://mapsui.com/documentation/getting-started-android.html) or [Xamarin Forms](https://mapsui.com/documentation/getting-started-xamarin-forms.html).
 
 ## Documentation
 The documentation can be found at [mapsui.com](https://mapsui.com). Let us know what kind of information you are missing.
