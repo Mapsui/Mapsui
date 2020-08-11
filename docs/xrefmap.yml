@@ -2485,18 +2485,18 @@ references:
   commentId: M:Mapsui.Fetcher.DataChangedEventArgs.#ctor
   fullName: Mapsui.Fetcher.DataChangedEventArgs.DataChangedEventArgs()
   nameWithType: DataChangedEventArgs.DataChangedEventArgs()
-- uid: Mapsui.Fetcher.DataChangedEventArgs.#ctor(System.Exception,System.Boolean,BruTile.TileInfo)
-  name: DataChangedEventArgs(Exception, Boolean, TileInfo)
-  href: api/Mapsui.Fetcher.DataChangedEventArgs.html#Mapsui_Fetcher_DataChangedEventArgs__ctor_System_Exception_System_Boolean_BruTile_TileInfo_
-  commentId: M:Mapsui.Fetcher.DataChangedEventArgs.#ctor(System.Exception,System.Boolean,BruTile.TileInfo)
-  fullName: Mapsui.Fetcher.DataChangedEventArgs.DataChangedEventArgs(System.Exception, System.Boolean, BruTile.TileInfo)
-  nameWithType: DataChangedEventArgs.DataChangedEventArgs(Exception, Boolean, TileInfo)
-- uid: Mapsui.Fetcher.DataChangedEventArgs.#ctor(System.Exception,System.Boolean,BruTile.TileInfo,System.String)
-  name: DataChangedEventArgs(Exception, Boolean, TileInfo, String)
-  href: api/Mapsui.Fetcher.DataChangedEventArgs.html#Mapsui_Fetcher_DataChangedEventArgs__ctor_System_Exception_System_Boolean_BruTile_TileInfo_System_String_
-  commentId: M:Mapsui.Fetcher.DataChangedEventArgs.#ctor(System.Exception,System.Boolean,BruTile.TileInfo,System.String)
-  fullName: Mapsui.Fetcher.DataChangedEventArgs.DataChangedEventArgs(System.Exception, System.Boolean, BruTile.TileInfo, System.String)
-  nameWithType: DataChangedEventArgs.DataChangedEventArgs(Exception, Boolean, TileInfo, String)
+- uid: Mapsui.Fetcher.DataChangedEventArgs.#ctor(System.Exception,System.Boolean,System.Object)
+  name: DataChangedEventArgs(Exception, Boolean, Object)
+  href: api/Mapsui.Fetcher.DataChangedEventArgs.html#Mapsui_Fetcher_DataChangedEventArgs__ctor_System_Exception_System_Boolean_System_Object_
+  commentId: M:Mapsui.Fetcher.DataChangedEventArgs.#ctor(System.Exception,System.Boolean,System.Object)
+  fullName: Mapsui.Fetcher.DataChangedEventArgs.DataChangedEventArgs(System.Exception, System.Boolean, System.Object)
+  nameWithType: DataChangedEventArgs.DataChangedEventArgs(Exception, Boolean, Object)
+- uid: Mapsui.Fetcher.DataChangedEventArgs.#ctor(System.Exception,System.Boolean,System.Object,System.String)
+  name: DataChangedEventArgs(Exception, Boolean, Object, String)
+  href: api/Mapsui.Fetcher.DataChangedEventArgs.html#Mapsui_Fetcher_DataChangedEventArgs__ctor_System_Exception_System_Boolean_System_Object_System_String_
+  commentId: M:Mapsui.Fetcher.DataChangedEventArgs.#ctor(System.Exception,System.Boolean,System.Object,System.String)
+  fullName: Mapsui.Fetcher.DataChangedEventArgs.DataChangedEventArgs(System.Exception, System.Boolean, System.Object, System.String)
+  nameWithType: DataChangedEventArgs.DataChangedEventArgs(Exception, Boolean, Object, String)
 - uid: Mapsui.Fetcher.DataChangedEventArgs.#ctor*
   name: DataChangedEventArgs
   href: api/Mapsui.Fetcher.DataChangedEventArgs.html#Mapsui_Fetcher_DataChangedEventArgs__ctor_
@@ -2530,6 +2530,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Fetcher.DataChangedEventArgs.Error
   nameWithType: DataChangedEventArgs.Error
+- uid: Mapsui.Fetcher.DataChangedEventArgs.Info
+  name: Info
+  href: api/Mapsui.Fetcher.DataChangedEventArgs.html#Mapsui_Fetcher_DataChangedEventArgs_Info
+  commentId: P:Mapsui.Fetcher.DataChangedEventArgs.Info
+  fullName: Mapsui.Fetcher.DataChangedEventArgs.Info
+  nameWithType: DataChangedEventArgs.Info
+- uid: Mapsui.Fetcher.DataChangedEventArgs.Info*
+  name: Info
+  href: api/Mapsui.Fetcher.DataChangedEventArgs.html#Mapsui_Fetcher_DataChangedEventArgs_Info_
+  commentId: Overload:Mapsui.Fetcher.DataChangedEventArgs.Info
+  isSpec: "True"
+  fullName: Mapsui.Fetcher.DataChangedEventArgs.Info
+  nameWithType: DataChangedEventArgs.Info
 - uid: Mapsui.Fetcher.DataChangedEventArgs.LayerName
   name: LayerName
   href: api/Mapsui.Fetcher.DataChangedEventArgs.html#Mapsui_Fetcher_DataChangedEventArgs_LayerName
@@ -2543,19 +2556,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Fetcher.DataChangedEventArgs.LayerName
   nameWithType: DataChangedEventArgs.LayerName
-- uid: Mapsui.Fetcher.DataChangedEventArgs.TileInfo
-  name: TileInfo
-  href: api/Mapsui.Fetcher.DataChangedEventArgs.html#Mapsui_Fetcher_DataChangedEventArgs_TileInfo
-  commentId: P:Mapsui.Fetcher.DataChangedEventArgs.TileInfo
-  fullName: Mapsui.Fetcher.DataChangedEventArgs.TileInfo
-  nameWithType: DataChangedEventArgs.TileInfo
-- uid: Mapsui.Fetcher.DataChangedEventArgs.TileInfo*
-  name: TileInfo
-  href: api/Mapsui.Fetcher.DataChangedEventArgs.html#Mapsui_Fetcher_DataChangedEventArgs_TileInfo_
-  commentId: Overload:Mapsui.Fetcher.DataChangedEventArgs.TileInfo
-  isSpec: "True"
-  fullName: Mapsui.Fetcher.DataChangedEventArgs.TileInfo
-  nameWithType: DataChangedEventArgs.TileInfo
 - uid: Mapsui.Fetcher.DataChangedEventHandler
   name: DataChangedEventHandler
   href: api/Mapsui.Fetcher.DataChangedEventHandler.html
@@ -2581,12 +2581,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.Fetcher.DataFetchStrategy.DataFetchStrategy
   nameWithType: DataFetchStrategy.DataFetchStrategy
-- uid: Mapsui.Fetcher.DataFetchStrategy.Get(BruTile.ITileSchema,BruTile.Extent,System.String)
-  name: Get(ITileSchema, Extent, String)
-  href: api/Mapsui.Fetcher.DataFetchStrategy.html#Mapsui_Fetcher_DataFetchStrategy_Get_BruTile_ITileSchema_BruTile_Extent_System_String_
-  commentId: M:Mapsui.Fetcher.DataFetchStrategy.Get(BruTile.ITileSchema,BruTile.Extent,System.String)
-  fullName: Mapsui.Fetcher.DataFetchStrategy.Get(BruTile.ITileSchema, BruTile.Extent, System.String)
-  nameWithType: DataFetchStrategy.Get(ITileSchema, Extent, String)
+- uid: Mapsui.Fetcher.DataFetchStrategy.Get(BruTile.ITileSchema,BruTile.Extent,System.Int32)
+  name: Get(ITileSchema, Extent, Int32)
+  href: api/Mapsui.Fetcher.DataFetchStrategy.html#Mapsui_Fetcher_DataFetchStrategy_Get_BruTile_ITileSchema_BruTile_Extent_System_Int32_
+  commentId: M:Mapsui.Fetcher.DataFetchStrategy.Get(BruTile.ITileSchema,BruTile.Extent,System.Int32)
+  fullName: Mapsui.Fetcher.DataFetchStrategy.Get(BruTile.ITileSchema, BruTile.Extent, System.Int32)
+  nameWithType: DataFetchStrategy.Get(ITileSchema, Extent, Int32)
 - uid: Mapsui.Fetcher.DataFetchStrategy.Get*
   name: Get
   href: api/Mapsui.Fetcher.DataFetchStrategy.html#Mapsui_Fetcher_DataFetchStrategy_Get_
@@ -2594,6 +2594,64 @@ references:
   isSpec: "True"
   fullName: Mapsui.Fetcher.DataFetchStrategy.Get
   nameWithType: DataFetchStrategy.Get
+- uid: Mapsui.Fetcher.Delayer
+  name: Delayer
+  href: api/Mapsui.Fetcher.Delayer.html
+  commentId: T:Mapsui.Fetcher.Delayer
+  fullName: Mapsui.Fetcher.Delayer
+  nameWithType: Delayer
+- uid: Mapsui.Fetcher.Delayer.#ctor
+  name: Delayer()
+  href: api/Mapsui.Fetcher.Delayer.html#Mapsui_Fetcher_Delayer__ctor
+  commentId: M:Mapsui.Fetcher.Delayer.#ctor
+  fullName: Mapsui.Fetcher.Delayer.Delayer()
+  nameWithType: Delayer.Delayer()
+- uid: Mapsui.Fetcher.Delayer.#ctor*
+  name: Delayer
+  href: api/Mapsui.Fetcher.Delayer.html#Mapsui_Fetcher_Delayer__ctor_
+  commentId: Overload:Mapsui.Fetcher.Delayer.#ctor
+  isSpec: "True"
+  fullName: Mapsui.Fetcher.Delayer.Delayer
+  nameWithType: Delayer.Delayer
+- uid: Mapsui.Fetcher.Delayer.ExecuteDelayed(System.Action)
+  name: ExecuteDelayed(Action)
+  href: api/Mapsui.Fetcher.Delayer.html#Mapsui_Fetcher_Delayer_ExecuteDelayed_System_Action_
+  commentId: M:Mapsui.Fetcher.Delayer.ExecuteDelayed(System.Action)
+  fullName: Mapsui.Fetcher.Delayer.ExecuteDelayed(System.Action)
+  nameWithType: Delayer.ExecuteDelayed(Action)
+- uid: Mapsui.Fetcher.Delayer.ExecuteDelayed*
+  name: ExecuteDelayed
+  href: api/Mapsui.Fetcher.Delayer.html#Mapsui_Fetcher_Delayer_ExecuteDelayed_
+  commentId: Overload:Mapsui.Fetcher.Delayer.ExecuteDelayed
+  isSpec: "True"
+  fullName: Mapsui.Fetcher.Delayer.ExecuteDelayed
+  nameWithType: Delayer.ExecuteDelayed
+- uid: Mapsui.Fetcher.Delayer.MillisecondsToWait
+  name: MillisecondsToWait
+  href: api/Mapsui.Fetcher.Delayer.html#Mapsui_Fetcher_Delayer_MillisecondsToWait
+  commentId: P:Mapsui.Fetcher.Delayer.MillisecondsToWait
+  fullName: Mapsui.Fetcher.Delayer.MillisecondsToWait
+  nameWithType: Delayer.MillisecondsToWait
+- uid: Mapsui.Fetcher.Delayer.MillisecondsToWait*
+  name: MillisecondsToWait
+  href: api/Mapsui.Fetcher.Delayer.html#Mapsui_Fetcher_Delayer_MillisecondsToWait_
+  commentId: Overload:Mapsui.Fetcher.Delayer.MillisecondsToWait
+  isSpec: "True"
+  fullName: Mapsui.Fetcher.Delayer.MillisecondsToWait
+  nameWithType: Delayer.MillisecondsToWait
+- uid: Mapsui.Fetcher.Delayer.StartWithDelay
+  name: StartWithDelay
+  href: api/Mapsui.Fetcher.Delayer.html#Mapsui_Fetcher_Delayer_StartWithDelay
+  commentId: P:Mapsui.Fetcher.Delayer.StartWithDelay
+  fullName: Mapsui.Fetcher.Delayer.StartWithDelay
+  nameWithType: Delayer.StartWithDelay
+- uid: Mapsui.Fetcher.Delayer.StartWithDelay*
+  name: StartWithDelay
+  href: api/Mapsui.Fetcher.Delayer.html#Mapsui_Fetcher_Delayer_StartWithDelay_
+  commentId: Overload:Mapsui.Fetcher.Delayer.StartWithDelay
+  isSpec: "True"
+  fullName: Mapsui.Fetcher.Delayer.StartWithDelay
+  nameWithType: Delayer.StartWithDelay
 - uid: Mapsui.Fetcher.IAsyncDataFetcher
   name: IAsyncDataFetcher
   href: api/Mapsui.Fetcher.IAsyncDataFetcher.html
@@ -2632,12 +2690,12 @@ references:
   commentId: T:Mapsui.Fetcher.IDataFetchStrategy
   fullName: Mapsui.Fetcher.IDataFetchStrategy
   nameWithType: IDataFetchStrategy
-- uid: Mapsui.Fetcher.IDataFetchStrategy.Get(BruTile.ITileSchema,BruTile.Extent,System.String)
-  name: Get(ITileSchema, Extent, String)
-  href: api/Mapsui.Fetcher.IDataFetchStrategy.html#Mapsui_Fetcher_IDataFetchStrategy_Get_BruTile_ITileSchema_BruTile_Extent_System_String_
-  commentId: M:Mapsui.Fetcher.IDataFetchStrategy.Get(BruTile.ITileSchema,BruTile.Extent,System.String)
-  fullName: Mapsui.Fetcher.IDataFetchStrategy.Get(BruTile.ITileSchema, BruTile.Extent, System.String)
-  nameWithType: IDataFetchStrategy.Get(ITileSchema, Extent, String)
+- uid: Mapsui.Fetcher.IDataFetchStrategy.Get(BruTile.ITileSchema,BruTile.Extent,System.Int32)
+  name: Get(ITileSchema, Extent, Int32)
+  href: api/Mapsui.Fetcher.IDataFetchStrategy.html#Mapsui_Fetcher_IDataFetchStrategy_Get_BruTile_ITileSchema_BruTile_Extent_System_Int32_
+  commentId: M:Mapsui.Fetcher.IDataFetchStrategy.Get(BruTile.ITileSchema,BruTile.Extent,System.Int32)
+  fullName: Mapsui.Fetcher.IDataFetchStrategy.Get(BruTile.ITileSchema, BruTile.Extent, System.Int32)
+  nameWithType: IDataFetchStrategy.Get(ITileSchema, Extent, Int32)
 - uid: Mapsui.Fetcher.IDataFetchStrategy.Get*
   name: Get
   href: api/Mapsui.Fetcher.IDataFetchStrategy.html#Mapsui_Fetcher_IDataFetchStrategy_Get_
@@ -2651,12 +2709,12 @@ references:
   commentId: T:Mapsui.Fetcher.MinimalDataFetchStrategy
   fullName: Mapsui.Fetcher.MinimalDataFetchStrategy
   nameWithType: MinimalDataFetchStrategy
-- uid: Mapsui.Fetcher.MinimalDataFetchStrategy.Get(BruTile.ITileSchema,BruTile.Extent,System.String)
-  name: Get(ITileSchema, Extent, String)
-  href: api/Mapsui.Fetcher.MinimalDataFetchStrategy.html#Mapsui_Fetcher_MinimalDataFetchStrategy_Get_BruTile_ITileSchema_BruTile_Extent_System_String_
-  commentId: M:Mapsui.Fetcher.MinimalDataFetchStrategy.Get(BruTile.ITileSchema,BruTile.Extent,System.String)
-  fullName: Mapsui.Fetcher.MinimalDataFetchStrategy.Get(BruTile.ITileSchema, BruTile.Extent, System.String)
-  nameWithType: MinimalDataFetchStrategy.Get(ITileSchema, Extent, String)
+- uid: Mapsui.Fetcher.MinimalDataFetchStrategy.Get(BruTile.ITileSchema,BruTile.Extent,System.Int32)
+  name: Get(ITileSchema, Extent, Int32)
+  href: api/Mapsui.Fetcher.MinimalDataFetchStrategy.html#Mapsui_Fetcher_MinimalDataFetchStrategy_Get_BruTile_ITileSchema_BruTile_Extent_System_Int32_
+  commentId: M:Mapsui.Fetcher.MinimalDataFetchStrategy.Get(BruTile.ITileSchema,BruTile.Extent,System.Int32)
+  fullName: Mapsui.Fetcher.MinimalDataFetchStrategy.Get(BruTile.ITileSchema, BruTile.Extent, System.Int32)
+  nameWithType: MinimalDataFetchStrategy.Get(ITileSchema, Extent, Int32)
 - uid: Mapsui.Fetcher.MinimalDataFetchStrategy.Get*
   name: Get
   href: api/Mapsui.Fetcher.MinimalDataFetchStrategy.html#Mapsui_Fetcher_MinimalDataFetchStrategy_Get_
@@ -7827,6 +7885,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.Layer.DataSource
   nameWithType: Layer.DataSource
+- uid: Mapsui.Layers.Layer.Delayer
+  name: Delayer
+  href: api/Mapsui.Layers.Layer.html#Mapsui_Layers_Layer_Delayer
+  commentId: P:Mapsui.Layers.Layer.Delayer
+  fullName: Mapsui.Layers.Layer.Delayer
+  nameWithType: Layer.Delayer
+- uid: Mapsui.Layers.Layer.Delayer*
+  name: Delayer
+  href: api/Mapsui.Layers.Layer.html#Mapsui_Layers_Layer_Delayer_
+  commentId: Overload:Mapsui.Layers.Layer.Delayer
+  isSpec: "True"
+  fullName: Mapsui.Layers.Layer.Delayer
+  nameWithType: Layer.Delayer
 - uid: Mapsui.Layers.Layer.Envelope
   name: Envelope
   href: api/Mapsui.Layers.Layer.html#Mapsui_Layers_Layer_Envelope
@@ -8248,6 +8319,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.RasterizingLayer.ClearCache
   nameWithType: RasterizingLayer.ClearCache
+- uid: Mapsui.Layers.RasterizingLayer.Delayer
+  name: Delayer
+  href: api/Mapsui.Layers.RasterizingLayer.html#Mapsui_Layers_RasterizingLayer_Delayer
+  commentId: P:Mapsui.Layers.RasterizingLayer.Delayer
+  fullName: Mapsui.Layers.RasterizingLayer.Delayer
+  nameWithType: RasterizingLayer.Delayer
+- uid: Mapsui.Layers.RasterizingLayer.Delayer*
+  name: Delayer
+  href: api/Mapsui.Layers.RasterizingLayer.html#Mapsui_Layers_RasterizingLayer_Delayer_
+  commentId: Overload:Mapsui.Layers.RasterizingLayer.Delayer
+  isSpec: "True"
+  fullName: Mapsui.Layers.RasterizingLayer.Delayer
+  nameWithType: RasterizingLayer.Delayer
 - uid: Mapsui.Layers.RasterizingLayer.Envelope
   name: Envelope
   href: api/Mapsui.Layers.RasterizingLayer.html#Mapsui_Layers_RasterizingLayer_Envelope
@@ -16951,15 +17035,15 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.RenderFetchStrategy.Get
   nameWithType: RenderFetchStrategy.Get
-- uid: Mapsui.Rendering.RenderFetchStrategy.GetRecursive(System.Collections.Generic.IDictionary{BruTile.TileIndex,Mapsui.Providers.IFeature},BruTile.ITileSchema,BruTile.Cache.ITileCache{Mapsui.Providers.Feature},BruTile.Extent,System.String)
-  name: GetRecursive(IDictionary<TileIndex, IFeature>, ITileSchema, ITileCache<Feature>, Extent, String)
-  href: api/Mapsui.Rendering.RenderFetchStrategy.html#Mapsui_Rendering_RenderFetchStrategy_GetRecursive_System_Collections_Generic_IDictionary_BruTile_TileIndex_Mapsui_Providers_IFeature__BruTile_ITileSchema_BruTile_Cache_ITileCache_Mapsui_Providers_Feature__BruTile_Extent_System_String_
-  commentId: M:Mapsui.Rendering.RenderFetchStrategy.GetRecursive(System.Collections.Generic.IDictionary{BruTile.TileIndex,Mapsui.Providers.IFeature},BruTile.ITileSchema,BruTile.Cache.ITileCache{Mapsui.Providers.Feature},BruTile.Extent,System.String)
-  name.vb: GetRecursive(IDictionary(Of TileIndex, IFeature), ITileSchema, ITileCache(Of Feature), Extent, String)
-  fullName: Mapsui.Rendering.RenderFetchStrategy.GetRecursive(System.Collections.Generic.IDictionary<BruTile.TileIndex, Mapsui.Providers.IFeature>, BruTile.ITileSchema, BruTile.Cache.ITileCache<Mapsui.Providers.Feature>, BruTile.Extent, System.String)
-  fullName.vb: Mapsui.Rendering.RenderFetchStrategy.GetRecursive(System.Collections.Generic.IDictionary(Of BruTile.TileIndex, Mapsui.Providers.IFeature), BruTile.ITileSchema, BruTile.Cache.ITileCache(Of Mapsui.Providers.Feature), BruTile.Extent, System.String)
-  nameWithType: RenderFetchStrategy.GetRecursive(IDictionary<TileIndex, IFeature>, ITileSchema, ITileCache<Feature>, Extent, String)
-  nameWithType.vb: RenderFetchStrategy.GetRecursive(IDictionary(Of TileIndex, IFeature), ITileSchema, ITileCache(Of Feature), Extent, String)
+- uid: Mapsui.Rendering.RenderFetchStrategy.GetRecursive(System.Collections.Generic.IDictionary{BruTile.TileIndex,Mapsui.Providers.IFeature},BruTile.ITileSchema,BruTile.Cache.ITileCache{Mapsui.Providers.Feature},BruTile.Extent,System.Int32)
+  name: GetRecursive(IDictionary<TileIndex, IFeature>, ITileSchema, ITileCache<Feature>, Extent, Int32)
+  href: api/Mapsui.Rendering.RenderFetchStrategy.html#Mapsui_Rendering_RenderFetchStrategy_GetRecursive_System_Collections_Generic_IDictionary_BruTile_TileIndex_Mapsui_Providers_IFeature__BruTile_ITileSchema_BruTile_Cache_ITileCache_Mapsui_Providers_Feature__BruTile_Extent_System_Int32_
+  commentId: M:Mapsui.Rendering.RenderFetchStrategy.GetRecursive(System.Collections.Generic.IDictionary{BruTile.TileIndex,Mapsui.Providers.IFeature},BruTile.ITileSchema,BruTile.Cache.ITileCache{Mapsui.Providers.Feature},BruTile.Extent,System.Int32)
+  name.vb: GetRecursive(IDictionary(Of TileIndex, IFeature), ITileSchema, ITileCache(Of Feature), Extent, Int32)
+  fullName: Mapsui.Rendering.RenderFetchStrategy.GetRecursive(System.Collections.Generic.IDictionary<BruTile.TileIndex, Mapsui.Providers.IFeature>, BruTile.ITileSchema, BruTile.Cache.ITileCache<Mapsui.Providers.Feature>, BruTile.Extent, System.Int32)
+  fullName.vb: Mapsui.Rendering.RenderFetchStrategy.GetRecursive(System.Collections.Generic.IDictionary(Of BruTile.TileIndex, Mapsui.Providers.IFeature), BruTile.ITileSchema, BruTile.Cache.ITileCache(Of Mapsui.Providers.Feature), BruTile.Extent, System.Int32)
+  nameWithType: RenderFetchStrategy.GetRecursive(IDictionary<TileIndex, IFeature>, ITileSchema, ITileCache<Feature>, Extent, Int32)
+  nameWithType.vb: RenderFetchStrategy.GetRecursive(IDictionary(Of TileIndex, IFeature), ITileSchema, ITileCache(Of Feature), Extent, Int32)
 - uid: Mapsui.Rendering.RenderFetchStrategy.GetRecursive*
   name: GetRecursive
   href: api/Mapsui.Rendering.RenderFetchStrategy.html#Mapsui_Rendering_RenderFetchStrategy_GetRecursive_
@@ -18391,11 +18475,11 @@ references:
   commentId: T:Mapsui.Rendering.Xaml.BitmapImageExtensions
   fullName: Mapsui.Rendering.Xaml.BitmapImageExtensions
   nameWithType: BitmapImageExtensions
-- uid: Mapsui.Rendering.Xaml.BitmapImageExtensions.ToImageBrush(ImageSource)
+- uid: Mapsui.Rendering.Xaml.BitmapImageExtensions.ToImageBrush(System.Windows.Media.ImageSource)
   name: ToImageBrush(ImageSource)
-  href: api/Mapsui.Rendering.Xaml.BitmapImageExtensions.html#Mapsui_Rendering_Xaml_BitmapImageExtensions_ToImageBrush_ImageSource_
-  commentId: M:Mapsui.Rendering.Xaml.BitmapImageExtensions.ToImageBrush(ImageSource)
-  fullName: Mapsui.Rendering.Xaml.BitmapImageExtensions.ToImageBrush(ImageSource)
+  href: api/Mapsui.Rendering.Xaml.BitmapImageExtensions.html#Mapsui_Rendering_Xaml_BitmapImageExtensions_ToImageBrush_System_Windows_Media_ImageSource_
+  commentId: M:Mapsui.Rendering.Xaml.BitmapImageExtensions.ToImageBrush(System.Windows.Media.ImageSource)
+  fullName: Mapsui.Rendering.Xaml.BitmapImageExtensions.ToImageBrush(System.Windows.Media.ImageSource)
   nameWithType: BitmapImageExtensions.ToImageBrush(ImageSource)
 - uid: Mapsui.Rendering.Xaml.BitmapImageExtensions.ToImageBrush*
   name: ToImageBrush
@@ -18404,11 +18488,11 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Xaml.BitmapImageExtensions.ToImageBrush
   nameWithType: BitmapImageExtensions.ToImageBrush
-- uid: Mapsui.Rendering.Xaml.BitmapImageExtensions.ToTiledImageBrush(BitmapImage)
+- uid: Mapsui.Rendering.Xaml.BitmapImageExtensions.ToTiledImageBrush(System.Windows.Media.Imaging.BitmapImage)
   name: ToTiledImageBrush(BitmapImage)
-  href: api/Mapsui.Rendering.Xaml.BitmapImageExtensions.html#Mapsui_Rendering_Xaml_BitmapImageExtensions_ToTiledImageBrush_BitmapImage_
-  commentId: M:Mapsui.Rendering.Xaml.BitmapImageExtensions.ToTiledImageBrush(BitmapImage)
-  fullName: Mapsui.Rendering.Xaml.BitmapImageExtensions.ToTiledImageBrush(BitmapImage)
+  href: api/Mapsui.Rendering.Xaml.BitmapImageExtensions.html#Mapsui_Rendering_Xaml_BitmapImageExtensions_ToTiledImageBrush_System_Windows_Media_Imaging_BitmapImage_
+  commentId: M:Mapsui.Rendering.Xaml.BitmapImageExtensions.ToTiledImageBrush(System.Windows.Media.Imaging.BitmapImage)
+  fullName: Mapsui.Rendering.Xaml.BitmapImageExtensions.ToTiledImageBrush(System.Windows.Media.Imaging.BitmapImage)
   nameWithType: BitmapImageExtensions.ToTiledImageBrush(BitmapImage)
 - uid: Mapsui.Rendering.Xaml.BitmapImageExtensions.ToTiledImageBrush*
   name: ToTiledImageBrush
@@ -18429,11 +18513,11 @@ references:
   commentId: T:Mapsui.Rendering.Xaml.BitmapRendering.BitmapConverter
   fullName: Mapsui.Rendering.Xaml.BitmapRendering.BitmapConverter
   nameWithType: BitmapConverter
-- uid: Mapsui.Rendering.Xaml.BitmapRendering.BitmapConverter.ToBitmapStream(UIElement,System.Double,System.Double)
+- uid: Mapsui.Rendering.Xaml.BitmapRendering.BitmapConverter.ToBitmapStream(System.Windows.UIElement,System.Double,System.Double)
   name: ToBitmapStream(UIElement, Double, Double)
-  href: api/Mapsui.Rendering.Xaml.BitmapRendering.BitmapConverter.html#Mapsui_Rendering_Xaml_BitmapRendering_BitmapConverter_ToBitmapStream_UIElement_System_Double_System_Double_
-  commentId: M:Mapsui.Rendering.Xaml.BitmapRendering.BitmapConverter.ToBitmapStream(UIElement,System.Double,System.Double)
-  fullName: Mapsui.Rendering.Xaml.BitmapRendering.BitmapConverter.ToBitmapStream(UIElement, System.Double, System.Double)
+  href: api/Mapsui.Rendering.Xaml.BitmapRendering.BitmapConverter.html#Mapsui_Rendering_Xaml_BitmapRendering_BitmapConverter_ToBitmapStream_System_Windows_UIElement_System_Double_System_Double_
+  commentId: M:Mapsui.Rendering.Xaml.BitmapRendering.BitmapConverter.ToBitmapStream(System.Windows.UIElement,System.Double,System.Double)
+  fullName: Mapsui.Rendering.Xaml.BitmapRendering.BitmapConverter.ToBitmapStream(System.Windows.UIElement, System.Double, System.Double)
   nameWithType: BitmapConverter.ToBitmapStream(UIElement, Double, Double)
 - uid: Mapsui.Rendering.Xaml.BitmapRendering.BitmapConverter.ToBitmapStream*
   name: ToBitmapStream
@@ -18448,11 +18532,11 @@ references:
   commentId: T:Mapsui.Rendering.Xaml.GeometryRenderer
   fullName: Mapsui.Rendering.Xaml.GeometryRenderer
   nameWithType: GeometryRenderer
-- uid: Mapsui.Rendering.Xaml.GeometryRenderer.CounterScaleLineWidth(UIElement,System.Double)
+- uid: Mapsui.Rendering.Xaml.GeometryRenderer.CounterScaleLineWidth(System.Windows.UIElement,System.Double)
   name: CounterScaleLineWidth(UIElement, Double)
-  href: api/Mapsui.Rendering.Xaml.GeometryRenderer.html#Mapsui_Rendering_Xaml_GeometryRenderer_CounterScaleLineWidth_UIElement_System_Double_
-  commentId: M:Mapsui.Rendering.Xaml.GeometryRenderer.CounterScaleLineWidth(UIElement,System.Double)
-  fullName: Mapsui.Rendering.Xaml.GeometryRenderer.CounterScaleLineWidth(UIElement, System.Double)
+  href: api/Mapsui.Rendering.Xaml.GeometryRenderer.html#Mapsui_Rendering_Xaml_GeometryRenderer_CounterScaleLineWidth_System_Windows_UIElement_System_Double_
+  commentId: M:Mapsui.Rendering.Xaml.GeometryRenderer.CounterScaleLineWidth(System.Windows.UIElement,System.Double)
+  fullName: Mapsui.Rendering.Xaml.GeometryRenderer.CounterScaleLineWidth(System.Windows.UIElement, System.Double)
   nameWithType: GeometryRenderer.CounterScaleLineWidth(UIElement, Double)
 - uid: Mapsui.Rendering.Xaml.GeometryRenderer.CounterScaleLineWidth*
   name: CounterScaleLineWidth
@@ -18481,11 +18565,11 @@ references:
   fullName: Mapsui.Rendering.Xaml.GeometryRenderer.CreateTransformMatrix
   nameWithType: GeometryRenderer.CreateTransformMatrix
 - uid: Mapsui.Rendering.Xaml.GeometryRenderer.PositionGeometry(System.Windows.Shapes.Shape,Mapsui.IReadOnlyViewport)
-  name: PositionGeometry(Windows.Shapes.Shape, IReadOnlyViewport)
+  name: PositionGeometry(Shape, IReadOnlyViewport)
   href: api/Mapsui.Rendering.Xaml.GeometryRenderer.html#Mapsui_Rendering_Xaml_GeometryRenderer_PositionGeometry_System_Windows_Shapes_Shape_Mapsui_IReadOnlyViewport_
   commentId: M:Mapsui.Rendering.Xaml.GeometryRenderer.PositionGeometry(System.Windows.Shapes.Shape,Mapsui.IReadOnlyViewport)
   fullName: Mapsui.Rendering.Xaml.GeometryRenderer.PositionGeometry(System.Windows.Shapes.Shape, Mapsui.IReadOnlyViewport)
-  nameWithType: GeometryRenderer.PositionGeometry(Windows.Shapes.Shape, IReadOnlyViewport)
+  nameWithType: GeometryRenderer.PositionGeometry(Shape, IReadOnlyViewport)
 - uid: Mapsui.Rendering.Xaml.GeometryRenderer.PositionGeometry*
   name: PositionGeometry
   href: api/Mapsui.Rendering.Xaml.GeometryRenderer.html#Mapsui_Rendering_Xaml_GeometryRenderer_PositionGeometry_
@@ -18493,11 +18577,11 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Xaml.GeometryRenderer.PositionGeometry
   nameWithType: GeometryRenderer.PositionGeometry
-- uid: Mapsui.Rendering.Xaml.GeometryRenderer.PositionRaster(UIElement,Mapsui.Geometries.BoundingBox,Mapsui.IReadOnlyViewport)
+- uid: Mapsui.Rendering.Xaml.GeometryRenderer.PositionRaster(System.Windows.UIElement,Mapsui.Geometries.BoundingBox,Mapsui.IReadOnlyViewport)
   name: PositionRaster(UIElement, BoundingBox, IReadOnlyViewport)
-  href: api/Mapsui.Rendering.Xaml.GeometryRenderer.html#Mapsui_Rendering_Xaml_GeometryRenderer_PositionRaster_UIElement_Mapsui_Geometries_BoundingBox_Mapsui_IReadOnlyViewport_
-  commentId: M:Mapsui.Rendering.Xaml.GeometryRenderer.PositionRaster(UIElement,Mapsui.Geometries.BoundingBox,Mapsui.IReadOnlyViewport)
-  fullName: Mapsui.Rendering.Xaml.GeometryRenderer.PositionRaster(UIElement, Mapsui.Geometries.BoundingBox, Mapsui.IReadOnlyViewport)
+  href: api/Mapsui.Rendering.Xaml.GeometryRenderer.html#Mapsui_Rendering_Xaml_GeometryRenderer_PositionRaster_System_Windows_UIElement_Mapsui_Geometries_BoundingBox_Mapsui_IReadOnlyViewport_
+  commentId: M:Mapsui.Rendering.Xaml.GeometryRenderer.PositionRaster(System.Windows.UIElement,Mapsui.Geometries.BoundingBox,Mapsui.IReadOnlyViewport)
+  fullName: Mapsui.Rendering.Xaml.GeometryRenderer.PositionRaster(System.Windows.UIElement, Mapsui.Geometries.BoundingBox, Mapsui.IReadOnlyViewport)
   nameWithType: GeometryRenderer.PositionRaster(UIElement, BoundingBox, IReadOnlyViewport)
 - uid: Mapsui.Rendering.Xaml.GeometryRenderer.PositionRaster*
   name: PositionRaster
@@ -18532,11 +18616,11 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Xaml.GeometryRenderer.RenderRaster
   nameWithType: GeometryRenderer.RenderRaster
-- uid: Mapsui.Rendering.Xaml.GeometryRenderer.RoundToPixel(Rect)
+- uid: Mapsui.Rendering.Xaml.GeometryRenderer.RoundToPixel(System.Windows.Rect)
   name: RoundToPixel(Rect)
-  href: api/Mapsui.Rendering.Xaml.GeometryRenderer.html#Mapsui_Rendering_Xaml_GeometryRenderer_RoundToPixel_Rect_
-  commentId: M:Mapsui.Rendering.Xaml.GeometryRenderer.RoundToPixel(Rect)
-  fullName: Mapsui.Rendering.Xaml.GeometryRenderer.RoundToPixel(Rect)
+  href: api/Mapsui.Rendering.Xaml.GeometryRenderer.html#Mapsui_Rendering_Xaml_GeometryRenderer_RoundToPixel_System_Windows_Rect_
+  commentId: M:Mapsui.Rendering.Xaml.GeometryRenderer.RoundToPixel(System.Windows.Rect)
+  fullName: Mapsui.Rendering.Xaml.GeometryRenderer.RoundToPixel(System.Windows.Rect)
   nameWithType: GeometryRenderer.RoundToPixel(Rect)
 - uid: Mapsui.Rendering.Xaml.GeometryRenderer.RoundToPixel*
   name: RoundToPixel
@@ -18615,22 +18699,22 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Xaml.MapRenderer.MapRenderer
   nameWithType: MapRenderer.MapRenderer
-- uid: Mapsui.Rendering.Xaml.MapRenderer.GetMapInfo(Mapsui.Geometries.Point,Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Layers.ILayer},System.Int32)
+- uid: Mapsui.Rendering.Xaml.MapRenderer.GetMapInfo(Mapsui.Geometries.Point,Mapsui.IReadOnlyViewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Int32)
   name: GetMapInfo(Point, IReadOnlyViewport, IEnumerable<ILayer>, Int32)
-  href: api/Mapsui.Rendering.Xaml.MapRenderer.html#Mapsui_Rendering_Xaml_MapRenderer_GetMapInfo_Mapsui_Geometries_Point_Mapsui_IReadOnlyViewport_IEnumerable_Mapsui_Layers_ILayer__System_Int32_
-  commentId: M:Mapsui.Rendering.Xaml.MapRenderer.GetMapInfo(Mapsui.Geometries.Point,Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Layers.ILayer},System.Int32)
+  href: api/Mapsui.Rendering.Xaml.MapRenderer.html#Mapsui_Rendering_Xaml_MapRenderer_GetMapInfo_Mapsui_Geometries_Point_Mapsui_IReadOnlyViewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Int32_
+  commentId: M:Mapsui.Rendering.Xaml.MapRenderer.GetMapInfo(Mapsui.Geometries.Point,Mapsui.IReadOnlyViewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Int32)
   name.vb: GetMapInfo(Point, IReadOnlyViewport, IEnumerable(Of ILayer), Int32)
-  fullName: Mapsui.Rendering.Xaml.MapRenderer.GetMapInfo(Mapsui.Geometries.Point, Mapsui.IReadOnlyViewport, IEnumerable<Mapsui.Layers.ILayer>, System.Int32)
-  fullName.vb: Mapsui.Rendering.Xaml.MapRenderer.GetMapInfo(Mapsui.Geometries.Point, Mapsui.IReadOnlyViewport, IEnumerable(Of Mapsui.Layers.ILayer), System.Int32)
+  fullName: Mapsui.Rendering.Xaml.MapRenderer.GetMapInfo(Mapsui.Geometries.Point, Mapsui.IReadOnlyViewport, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>, System.Int32)
+  fullName.vb: Mapsui.Rendering.Xaml.MapRenderer.GetMapInfo(Mapsui.Geometries.Point, Mapsui.IReadOnlyViewport, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer), System.Int32)
   nameWithType: MapRenderer.GetMapInfo(Point, IReadOnlyViewport, IEnumerable<ILayer>, Int32)
   nameWithType.vb: MapRenderer.GetMapInfo(Point, IReadOnlyViewport, IEnumerable(Of ILayer), Int32)
-- uid: Mapsui.Rendering.Xaml.MapRenderer.GetMapInfo(System.Double,System.Double,Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Layers.ILayer},System.Int32)
+- uid: Mapsui.Rendering.Xaml.MapRenderer.GetMapInfo(System.Double,System.Double,Mapsui.IReadOnlyViewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Int32)
   name: GetMapInfo(Double, Double, IReadOnlyViewport, IEnumerable<ILayer>, Int32)
-  href: api/Mapsui.Rendering.Xaml.MapRenderer.html#Mapsui_Rendering_Xaml_MapRenderer_GetMapInfo_System_Double_System_Double_Mapsui_IReadOnlyViewport_IEnumerable_Mapsui_Layers_ILayer__System_Int32_
-  commentId: M:Mapsui.Rendering.Xaml.MapRenderer.GetMapInfo(System.Double,System.Double,Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Layers.ILayer},System.Int32)
+  href: api/Mapsui.Rendering.Xaml.MapRenderer.html#Mapsui_Rendering_Xaml_MapRenderer_GetMapInfo_System_Double_System_Double_Mapsui_IReadOnlyViewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Int32_
+  commentId: M:Mapsui.Rendering.Xaml.MapRenderer.GetMapInfo(System.Double,System.Double,Mapsui.IReadOnlyViewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Int32)
   name.vb: GetMapInfo(Double, Double, IReadOnlyViewport, IEnumerable(Of ILayer), Int32)
-  fullName: Mapsui.Rendering.Xaml.MapRenderer.GetMapInfo(System.Double, System.Double, Mapsui.IReadOnlyViewport, IEnumerable<Mapsui.Layers.ILayer>, System.Int32)
-  fullName.vb: Mapsui.Rendering.Xaml.MapRenderer.GetMapInfo(System.Double, System.Double, Mapsui.IReadOnlyViewport, IEnumerable(Of Mapsui.Layers.ILayer), System.Int32)
+  fullName: Mapsui.Rendering.Xaml.MapRenderer.GetMapInfo(System.Double, System.Double, Mapsui.IReadOnlyViewport, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>, System.Int32)
+  fullName.vb: Mapsui.Rendering.Xaml.MapRenderer.GetMapInfo(System.Double, System.Double, Mapsui.IReadOnlyViewport, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer), System.Int32)
   nameWithType: MapRenderer.GetMapInfo(Double, Double, IReadOnlyViewport, IEnumerable<ILayer>, Int32)
   nameWithType.vb: MapRenderer.GetMapInfo(Double, Double, IReadOnlyViewport, IEnumerable(Of ILayer), Int32)
 - uid: Mapsui.Rendering.Xaml.MapRenderer.GetMapInfo*
@@ -18640,13 +18724,13 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Xaml.MapRenderer.GetMapInfo
   nameWithType: MapRenderer.GetMapInfo
-- uid: Mapsui.Rendering.Xaml.MapRenderer.Render(System.Object,Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Layers.ILayer},IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
+- uid: Mapsui.Rendering.Xaml.MapRenderer.Render(System.Object,Mapsui.IReadOnlyViewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
   name: Render(Object, IReadOnlyViewport, IEnumerable<ILayer>, IEnumerable<IWidget>, Color)
-  href: api/Mapsui.Rendering.Xaml.MapRenderer.html#Mapsui_Rendering_Xaml_MapRenderer_Render_System_Object_Mapsui_IReadOnlyViewport_IEnumerable_Mapsui_Layers_ILayer__IEnumerable_Mapsui_Widgets_IWidget__Mapsui_Styles_Color_
-  commentId: M:Mapsui.Rendering.Xaml.MapRenderer.Render(System.Object,Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Layers.ILayer},IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
+  href: api/Mapsui.Rendering.Xaml.MapRenderer.html#Mapsui_Rendering_Xaml_MapRenderer_Render_System_Object_Mapsui_IReadOnlyViewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Collections_Generic_IEnumerable_Mapsui_Widgets_IWidget__Mapsui_Styles_Color_
+  commentId: M:Mapsui.Rendering.Xaml.MapRenderer.Render(System.Object,Mapsui.IReadOnlyViewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)
   name.vb: Render(Object, IReadOnlyViewport, IEnumerable(Of ILayer), IEnumerable(Of IWidget), Color)
-  fullName: Mapsui.Rendering.Xaml.MapRenderer.Render(System.Object, Mapsui.IReadOnlyViewport, IEnumerable<Mapsui.Layers.ILayer>, IEnumerable<Mapsui.Widgets.IWidget>, Mapsui.Styles.Color)
-  fullName.vb: Mapsui.Rendering.Xaml.MapRenderer.Render(System.Object, Mapsui.IReadOnlyViewport, IEnumerable(Of Mapsui.Layers.ILayer), IEnumerable(Of Mapsui.Widgets.IWidget), Mapsui.Styles.Color)
+  fullName: Mapsui.Rendering.Xaml.MapRenderer.Render(System.Object, Mapsui.IReadOnlyViewport, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>, System.Collections.Generic.IEnumerable<Mapsui.Widgets.IWidget>, Mapsui.Styles.Color)
+  fullName.vb: Mapsui.Rendering.Xaml.MapRenderer.Render(System.Object, Mapsui.IReadOnlyViewport, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer), System.Collections.Generic.IEnumerable(Of Mapsui.Widgets.IWidget), Mapsui.Styles.Color)
   nameWithType: MapRenderer.Render(Object, IReadOnlyViewport, IEnumerable<ILayer>, IEnumerable<IWidget>, Color)
   nameWithType.vb: MapRenderer.Render(Object, IReadOnlyViewport, IEnumerable(Of ILayer), IEnumerable(Of IWidget), Color)
 - uid: Mapsui.Rendering.Xaml.MapRenderer.Render*
@@ -18656,11 +18740,11 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Xaml.MapRenderer.Render
   nameWithType: MapRenderer.Render
-- uid: Mapsui.Rendering.Xaml.MapRenderer.RenderLayer(Canvas,Mapsui.IReadOnlyViewport,Mapsui.Layers.ILayer,Mapsui.Rendering.Xaml.SymbolCache,System.Boolean)
+- uid: Mapsui.Rendering.Xaml.MapRenderer.RenderLayer(System.Windows.Controls.Canvas,Mapsui.IReadOnlyViewport,Mapsui.Layers.ILayer,Mapsui.Rendering.Xaml.SymbolCache,System.Boolean)
   name: RenderLayer(Canvas, IReadOnlyViewport, ILayer, SymbolCache, Boolean)
-  href: api/Mapsui.Rendering.Xaml.MapRenderer.html#Mapsui_Rendering_Xaml_MapRenderer_RenderLayer_Canvas_Mapsui_IReadOnlyViewport_Mapsui_Layers_ILayer_Mapsui_Rendering_Xaml_SymbolCache_System_Boolean_
-  commentId: M:Mapsui.Rendering.Xaml.MapRenderer.RenderLayer(Canvas,Mapsui.IReadOnlyViewport,Mapsui.Layers.ILayer,Mapsui.Rendering.Xaml.SymbolCache,System.Boolean)
-  fullName: Mapsui.Rendering.Xaml.MapRenderer.RenderLayer(Canvas, Mapsui.IReadOnlyViewport, Mapsui.Layers.ILayer, Mapsui.Rendering.Xaml.SymbolCache, System.Boolean)
+  href: api/Mapsui.Rendering.Xaml.MapRenderer.html#Mapsui_Rendering_Xaml_MapRenderer_RenderLayer_System_Windows_Controls_Canvas_Mapsui_IReadOnlyViewport_Mapsui_Layers_ILayer_Mapsui_Rendering_Xaml_SymbolCache_System_Boolean_
+  commentId: M:Mapsui.Rendering.Xaml.MapRenderer.RenderLayer(System.Windows.Controls.Canvas,Mapsui.IReadOnlyViewport,Mapsui.Layers.ILayer,Mapsui.Rendering.Xaml.SymbolCache,System.Boolean)
+  fullName: Mapsui.Rendering.Xaml.MapRenderer.RenderLayer(System.Windows.Controls.Canvas, Mapsui.IReadOnlyViewport, Mapsui.Layers.ILayer, Mapsui.Rendering.Xaml.SymbolCache, System.Boolean)
   nameWithType: MapRenderer.RenderLayer(Canvas, IReadOnlyViewport, ILayer, SymbolCache, Boolean)
 - uid: Mapsui.Rendering.Xaml.MapRenderer.RenderLayer*
   name: RenderLayer
@@ -18669,13 +18753,13 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Xaml.MapRenderer.RenderLayer
   nameWithType: MapRenderer.RenderLayer
-- uid: Mapsui.Rendering.Xaml.MapRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color,System.Single)
+- uid: Mapsui.Rendering.Xaml.MapRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color,System.Single)
   name: RenderToBitmapStream(IReadOnlyViewport, IEnumerable<ILayer>, Color, Single)
-  href: api/Mapsui.Rendering.Xaml.MapRenderer.html#Mapsui_Rendering_Xaml_MapRenderer_RenderToBitmapStream_Mapsui_IReadOnlyViewport_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Styles_Color_System_Single_
-  commentId: M:Mapsui.Rendering.Xaml.MapRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color,System.Single)
+  href: api/Mapsui.Rendering.Xaml.MapRenderer.html#Mapsui_Rendering_Xaml_MapRenderer_RenderToBitmapStream_Mapsui_IReadOnlyViewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Styles_Color_System_Single_
+  commentId: M:Mapsui.Rendering.Xaml.MapRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color,System.Single)
   name.vb: RenderToBitmapStream(IReadOnlyViewport, IEnumerable(Of ILayer), Color, Single)
-  fullName: Mapsui.Rendering.Xaml.MapRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport, IEnumerable<Mapsui.Layers.ILayer>, Mapsui.Styles.Color, System.Single)
-  fullName.vb: Mapsui.Rendering.Xaml.MapRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport, IEnumerable(Of Mapsui.Layers.ILayer), Mapsui.Styles.Color, System.Single)
+  fullName: Mapsui.Rendering.Xaml.MapRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>, Mapsui.Styles.Color, System.Single)
+  fullName.vb: Mapsui.Rendering.Xaml.MapRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer), Mapsui.Styles.Color, System.Single)
   nameWithType: MapRenderer.RenderToBitmapStream(IReadOnlyViewport, IEnumerable<ILayer>, Color, Single)
   nameWithType.vb: MapRenderer.RenderToBitmapStream(IReadOnlyViewport, IEnumerable(Of ILayer), Color, Single)
 - uid: Mapsui.Rendering.Xaml.MapRenderer.RenderToBitmapStream*
@@ -18730,13 +18814,13 @@ references:
   commentId: T:Mapsui.Rendering.Xaml.MatrixHelper
   fullName: Mapsui.Rendering.Xaml.MatrixHelper
   nameWithType: MatrixHelper
-- uid: Mapsui.Rendering.Xaml.MatrixHelper.Append(Matrix@,Matrix)
+- uid: Mapsui.Rendering.Xaml.MatrixHelper.Append(System.Windows.Media.Matrix@,System.Windows.Media.Matrix)
   name: Append(ref Matrix, Matrix)
-  href: api/Mapsui.Rendering.Xaml.MatrixHelper.html#Mapsui_Rendering_Xaml_MatrixHelper_Append_Matrix__Matrix_
-  commentId: M:Mapsui.Rendering.Xaml.MatrixHelper.Append(Matrix@,Matrix)
+  href: api/Mapsui.Rendering.Xaml.MatrixHelper.html#Mapsui_Rendering_Xaml_MatrixHelper_Append_System_Windows_Media_Matrix__System_Windows_Media_Matrix_
+  commentId: M:Mapsui.Rendering.Xaml.MatrixHelper.Append(System.Windows.Media.Matrix@,System.Windows.Media.Matrix)
   name.vb: Append(ByRef Matrix, Matrix)
-  fullName: Mapsui.Rendering.Xaml.MatrixHelper.Append(ref Matrix, Matrix)
-  fullName.vb: Mapsui.Rendering.Xaml.MatrixHelper.Append(ByRef Matrix, Matrix)
+  fullName: Mapsui.Rendering.Xaml.MatrixHelper.Append(ref System.Windows.Media.Matrix, System.Windows.Media.Matrix)
+  fullName.vb: Mapsui.Rendering.Xaml.MatrixHelper.Append(ByRef System.Windows.Media.Matrix, System.Windows.Media.Matrix)
   nameWithType: MatrixHelper.Append(ref Matrix, Matrix)
   nameWithType.vb: MatrixHelper.Append(ByRef Matrix, Matrix)
 - uid: Mapsui.Rendering.Xaml.MatrixHelper.Append*
@@ -18759,13 +18843,13 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Xaml.MatrixHelper.CreateScaling
   nameWithType: MatrixHelper.CreateScaling
-- uid: Mapsui.Rendering.Xaml.MatrixHelper.InvertX(Matrix@,System.Double)
+- uid: Mapsui.Rendering.Xaml.MatrixHelper.InvertX(System.Windows.Media.Matrix@,System.Double)
   name: InvertX(ref Matrix, Double)
-  href: api/Mapsui.Rendering.Xaml.MatrixHelper.html#Mapsui_Rendering_Xaml_MatrixHelper_InvertX_Matrix__System_Double_
-  commentId: M:Mapsui.Rendering.Xaml.MatrixHelper.InvertX(Matrix@,System.Double)
+  href: api/Mapsui.Rendering.Xaml.MatrixHelper.html#Mapsui_Rendering_Xaml_MatrixHelper_InvertX_System_Windows_Media_Matrix__System_Double_
+  commentId: M:Mapsui.Rendering.Xaml.MatrixHelper.InvertX(System.Windows.Media.Matrix@,System.Double)
   name.vb: InvertX(ByRef Matrix, Double)
-  fullName: Mapsui.Rendering.Xaml.MatrixHelper.InvertX(ref Matrix, System.Double)
-  fullName.vb: Mapsui.Rendering.Xaml.MatrixHelper.InvertX(ByRef Matrix, System.Double)
+  fullName: Mapsui.Rendering.Xaml.MatrixHelper.InvertX(ref System.Windows.Media.Matrix, System.Double)
+  fullName.vb: Mapsui.Rendering.Xaml.MatrixHelper.InvertX(ByRef System.Windows.Media.Matrix, System.Double)
   nameWithType: MatrixHelper.InvertX(ref Matrix, Double)
   nameWithType.vb: MatrixHelper.InvertX(ByRef Matrix, Double)
 - uid: Mapsui.Rendering.Xaml.MatrixHelper.InvertX*
@@ -18775,13 +18859,13 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Xaml.MatrixHelper.InvertX
   nameWithType: MatrixHelper.InvertX
-- uid: Mapsui.Rendering.Xaml.MatrixHelper.InvertY(Matrix@,System.Double)
+- uid: Mapsui.Rendering.Xaml.MatrixHelper.InvertY(System.Windows.Media.Matrix@,System.Double)
   name: InvertY(ref Matrix, Double)
-  href: api/Mapsui.Rendering.Xaml.MatrixHelper.html#Mapsui_Rendering_Xaml_MatrixHelper_InvertY_Matrix__System_Double_
-  commentId: M:Mapsui.Rendering.Xaml.MatrixHelper.InvertY(Matrix@,System.Double)
+  href: api/Mapsui.Rendering.Xaml.MatrixHelper.html#Mapsui_Rendering_Xaml_MatrixHelper_InvertY_System_Windows_Media_Matrix__System_Double_
+  commentId: M:Mapsui.Rendering.Xaml.MatrixHelper.InvertY(System.Windows.Media.Matrix@,System.Double)
   name.vb: InvertY(ByRef Matrix, Double)
-  fullName: Mapsui.Rendering.Xaml.MatrixHelper.InvertY(ref Matrix, System.Double)
-  fullName.vb: Mapsui.Rendering.Xaml.MatrixHelper.InvertY(ByRef Matrix, System.Double)
+  fullName: Mapsui.Rendering.Xaml.MatrixHelper.InvertY(ref System.Windows.Media.Matrix, System.Double)
+  fullName.vb: Mapsui.Rendering.Xaml.MatrixHelper.InvertY(ByRef System.Windows.Media.Matrix, System.Double)
   nameWithType: MatrixHelper.InvertY(ref Matrix, Double)
   nameWithType.vb: MatrixHelper.InvertY(ByRef Matrix, Double)
 - uid: Mapsui.Rendering.Xaml.MatrixHelper.InvertY*
@@ -18791,13 +18875,13 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Xaml.MatrixHelper.InvertY
   nameWithType: MatrixHelper.InvertY
-- uid: Mapsui.Rendering.Xaml.MatrixHelper.Multiply(Matrix@,Matrix)
+- uid: Mapsui.Rendering.Xaml.MatrixHelper.Multiply(System.Windows.Media.Matrix@,System.Windows.Media.Matrix)
   name: Multiply(ref Matrix, Matrix)
-  href: api/Mapsui.Rendering.Xaml.MatrixHelper.html#Mapsui_Rendering_Xaml_MatrixHelper_Multiply_Matrix__Matrix_
-  commentId: M:Mapsui.Rendering.Xaml.MatrixHelper.Multiply(Matrix@,Matrix)
+  href: api/Mapsui.Rendering.Xaml.MatrixHelper.html#Mapsui_Rendering_Xaml_MatrixHelper_Multiply_System_Windows_Media_Matrix__System_Windows_Media_Matrix_
+  commentId: M:Mapsui.Rendering.Xaml.MatrixHelper.Multiply(System.Windows.Media.Matrix@,System.Windows.Media.Matrix)
   name.vb: Multiply(ByRef Matrix, Matrix)
-  fullName: Mapsui.Rendering.Xaml.MatrixHelper.Multiply(ref Matrix, Matrix)
-  fullName.vb: Mapsui.Rendering.Xaml.MatrixHelper.Multiply(ByRef Matrix, Matrix)
+  fullName: Mapsui.Rendering.Xaml.MatrixHelper.Multiply(ref System.Windows.Media.Matrix, System.Windows.Media.Matrix)
+  fullName.vb: Mapsui.Rendering.Xaml.MatrixHelper.Multiply(ByRef System.Windows.Media.Matrix, System.Windows.Media.Matrix)
   nameWithType: MatrixHelper.Multiply(ref Matrix, Matrix)
   nameWithType.vb: MatrixHelper.Multiply(ByRef Matrix, Matrix)
 - uid: Mapsui.Rendering.Xaml.MatrixHelper.Multiply*
@@ -18807,13 +18891,13 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Xaml.MatrixHelper.Multiply
   nameWithType: MatrixHelper.Multiply
-- uid: Mapsui.Rendering.Xaml.MatrixHelper.Rotate(Matrix@,System.Double)
+- uid: Mapsui.Rendering.Xaml.MatrixHelper.Rotate(System.Windows.Media.Matrix@,System.Double)
   name: Rotate(ref Matrix, Double)
-  href: api/Mapsui.Rendering.Xaml.MatrixHelper.html#Mapsui_Rendering_Xaml_MatrixHelper_Rotate_Matrix__System_Double_
-  commentId: M:Mapsui.Rendering.Xaml.MatrixHelper.Rotate(Matrix@,System.Double)
+  href: api/Mapsui.Rendering.Xaml.MatrixHelper.html#Mapsui_Rendering_Xaml_MatrixHelper_Rotate_System_Windows_Media_Matrix__System_Double_
+  commentId: M:Mapsui.Rendering.Xaml.MatrixHelper.Rotate(System.Windows.Media.Matrix@,System.Double)
   name.vb: Rotate(ByRef Matrix, Double)
-  fullName: Mapsui.Rendering.Xaml.MatrixHelper.Rotate(ref Matrix, System.Double)
-  fullName.vb: Mapsui.Rendering.Xaml.MatrixHelper.Rotate(ByRef Matrix, System.Double)
+  fullName: Mapsui.Rendering.Xaml.MatrixHelper.Rotate(ref System.Windows.Media.Matrix, System.Double)
+  fullName.vb: Mapsui.Rendering.Xaml.MatrixHelper.Rotate(ByRef System.Windows.Media.Matrix, System.Double)
   nameWithType: MatrixHelper.Rotate(ref Matrix, Double)
   nameWithType.vb: MatrixHelper.Rotate(ByRef Matrix, Double)
 - uid: Mapsui.Rendering.Xaml.MatrixHelper.Rotate*
@@ -18823,13 +18907,13 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Xaml.MatrixHelper.Rotate
   nameWithType: MatrixHelper.Rotate
-- uid: Mapsui.Rendering.Xaml.MatrixHelper.RotateAt(Matrix@,System.Double,System.Double,System.Double)
+- uid: Mapsui.Rendering.Xaml.MatrixHelper.RotateAt(System.Windows.Media.Matrix@,System.Double,System.Double,System.Double)
   name: RotateAt(ref Matrix, Double, Double, Double)
-  href: api/Mapsui.Rendering.Xaml.MatrixHelper.html#Mapsui_Rendering_Xaml_MatrixHelper_RotateAt_Matrix__System_Double_System_Double_System_Double_
-  commentId: M:Mapsui.Rendering.Xaml.MatrixHelper.RotateAt(Matrix@,System.Double,System.Double,System.Double)
+  href: api/Mapsui.Rendering.Xaml.MatrixHelper.html#Mapsui_Rendering_Xaml_MatrixHelper_RotateAt_System_Windows_Media_Matrix__System_Double_System_Double_System_Double_
+  commentId: M:Mapsui.Rendering.Xaml.MatrixHelper.RotateAt(System.Windows.Media.Matrix@,System.Double,System.Double,System.Double)
   name.vb: RotateAt(ByRef Matrix, Double, Double, Double)
-  fullName: Mapsui.Rendering.Xaml.MatrixHelper.RotateAt(ref Matrix, System.Double, System.Double, System.Double)
-  fullName.vb: Mapsui.Rendering.Xaml.MatrixHelper.RotateAt(ByRef Matrix, System.Double, System.Double, System.Double)
+  fullName: Mapsui.Rendering.Xaml.MatrixHelper.RotateAt(ref System.Windows.Media.Matrix, System.Double, System.Double, System.Double)
+  fullName.vb: Mapsui.Rendering.Xaml.MatrixHelper.RotateAt(ByRef System.Windows.Media.Matrix, System.Double, System.Double, System.Double)
   nameWithType: MatrixHelper.RotateAt(ref Matrix, Double, Double, Double)
   nameWithType.vb: MatrixHelper.RotateAt(ByRef Matrix, Double, Double, Double)
 - uid: Mapsui.Rendering.Xaml.MatrixHelper.RotateAt*
@@ -18839,13 +18923,13 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Xaml.MatrixHelper.RotateAt
   nameWithType: MatrixHelper.RotateAt
-- uid: Mapsui.Rendering.Xaml.MatrixHelper.ScaleAt(Matrix@,System.Double,System.Double,System.Double,System.Double)
+- uid: Mapsui.Rendering.Xaml.MatrixHelper.ScaleAt(System.Windows.Media.Matrix@,System.Double,System.Double,System.Double,System.Double)
   name: ScaleAt(ref Matrix, Double, Double, Double, Double)
-  href: api/Mapsui.Rendering.Xaml.MatrixHelper.html#Mapsui_Rendering_Xaml_MatrixHelper_ScaleAt_Matrix__System_Double_System_Double_System_Double_System_Double_
-  commentId: M:Mapsui.Rendering.Xaml.MatrixHelper.ScaleAt(Matrix@,System.Double,System.Double,System.Double,System.Double)
+  href: api/Mapsui.Rendering.Xaml.MatrixHelper.html#Mapsui_Rendering_Xaml_MatrixHelper_ScaleAt_System_Windows_Media_Matrix__System_Double_System_Double_System_Double_System_Double_
+  commentId: M:Mapsui.Rendering.Xaml.MatrixHelper.ScaleAt(System.Windows.Media.Matrix@,System.Double,System.Double,System.Double,System.Double)
   name.vb: ScaleAt(ByRef Matrix, Double, Double, Double, Double)
-  fullName: Mapsui.Rendering.Xaml.MatrixHelper.ScaleAt(ref Matrix, System.Double, System.Double, System.Double, System.Double)
-  fullName.vb: Mapsui.Rendering.Xaml.MatrixHelper.ScaleAt(ByRef Matrix, System.Double, System.Double, System.Double, System.Double)
+  fullName: Mapsui.Rendering.Xaml.MatrixHelper.ScaleAt(ref System.Windows.Media.Matrix, System.Double, System.Double, System.Double, System.Double)
+  fullName.vb: Mapsui.Rendering.Xaml.MatrixHelper.ScaleAt(ByRef System.Windows.Media.Matrix, System.Double, System.Double, System.Double, System.Double)
   nameWithType: MatrixHelper.ScaleAt(ref Matrix, Double, Double, Double, Double)
   nameWithType.vb: MatrixHelper.ScaleAt(ByRef Matrix, Double, Double, Double, Double)
 - uid: Mapsui.Rendering.Xaml.MatrixHelper.ScaleAt*
@@ -18855,13 +18939,13 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Xaml.MatrixHelper.ScaleAt
   nameWithType: MatrixHelper.ScaleAt
-- uid: Mapsui.Rendering.Xaml.MatrixHelper.Translate(Matrix@,System.Double,System.Double)
+- uid: Mapsui.Rendering.Xaml.MatrixHelper.Translate(System.Windows.Media.Matrix@,System.Double,System.Double)
   name: Translate(ref Matrix, Double, Double)
-  href: api/Mapsui.Rendering.Xaml.MatrixHelper.html#Mapsui_Rendering_Xaml_MatrixHelper_Translate_Matrix__System_Double_System_Double_
-  commentId: M:Mapsui.Rendering.Xaml.MatrixHelper.Translate(Matrix@,System.Double,System.Double)
+  href: api/Mapsui.Rendering.Xaml.MatrixHelper.html#Mapsui_Rendering_Xaml_MatrixHelper_Translate_System_Windows_Media_Matrix__System_Double_System_Double_
+  commentId: M:Mapsui.Rendering.Xaml.MatrixHelper.Translate(System.Windows.Media.Matrix@,System.Double,System.Double)
   name.vb: Translate(ByRef Matrix, Double, Double)
-  fullName: Mapsui.Rendering.Xaml.MatrixHelper.Translate(ref Matrix, System.Double, System.Double)
-  fullName.vb: Mapsui.Rendering.Xaml.MatrixHelper.Translate(ByRef Matrix, System.Double, System.Double)
+  fullName: Mapsui.Rendering.Xaml.MatrixHelper.Translate(ref System.Windows.Media.Matrix, System.Double, System.Double)
+  fullName.vb: Mapsui.Rendering.Xaml.MatrixHelper.Translate(ByRef System.Windows.Media.Matrix, System.Double, System.Double)
   nameWithType: MatrixHelper.Translate(ref Matrix, Double, Double)
   nameWithType.vb: MatrixHelper.Translate(ByRef Matrix, Double, Double)
 - uid: Mapsui.Rendering.Xaml.MatrixHelper.Translate*
@@ -18928,11 +19012,11 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Xaml.OutlinedTextBlock.OutlinedTextBlock
   nameWithType: OutlinedTextBlock.OutlinedTextBlock
-- uid: Mapsui.Rendering.Xaml.OutlinedTextBlock.ArrangeOverride(Size)
+- uid: Mapsui.Rendering.Xaml.OutlinedTextBlock.ArrangeOverride(System.Windows.Size)
   name: ArrangeOverride(Size)
-  href: api/Mapsui.Rendering.Xaml.OutlinedTextBlock.html#Mapsui_Rendering_Xaml_OutlinedTextBlock_ArrangeOverride_Size_
-  commentId: M:Mapsui.Rendering.Xaml.OutlinedTextBlock.ArrangeOverride(Size)
-  fullName: Mapsui.Rendering.Xaml.OutlinedTextBlock.ArrangeOverride(Size)
+  href: api/Mapsui.Rendering.Xaml.OutlinedTextBlock.html#Mapsui_Rendering_Xaml_OutlinedTextBlock_ArrangeOverride_System_Windows_Size_
+  commentId: M:Mapsui.Rendering.Xaml.OutlinedTextBlock.ArrangeOverride(System.Windows.Size)
+  fullName: Mapsui.Rendering.Xaml.OutlinedTextBlock.ArrangeOverride(System.Windows.Size)
   nameWithType: OutlinedTextBlock.ArrangeOverride(Size)
 - uid: Mapsui.Rendering.Xaml.OutlinedTextBlock.ArrangeOverride*
   name: ArrangeOverride
@@ -19055,11 +19139,11 @@ references:
   commentId: F:Mapsui.Rendering.Xaml.OutlinedTextBlock.FontWeightProperty
   fullName: Mapsui.Rendering.Xaml.OutlinedTextBlock.FontWeightProperty
   nameWithType: OutlinedTextBlock.FontWeightProperty
-- uid: Mapsui.Rendering.Xaml.OutlinedTextBlock.MeasureOverride(Size)
+- uid: Mapsui.Rendering.Xaml.OutlinedTextBlock.MeasureOverride(System.Windows.Size)
   name: MeasureOverride(Size)
-  href: api/Mapsui.Rendering.Xaml.OutlinedTextBlock.html#Mapsui_Rendering_Xaml_OutlinedTextBlock_MeasureOverride_Size_
-  commentId: M:Mapsui.Rendering.Xaml.OutlinedTextBlock.MeasureOverride(Size)
-  fullName: Mapsui.Rendering.Xaml.OutlinedTextBlock.MeasureOverride(Size)
+  href: api/Mapsui.Rendering.Xaml.OutlinedTextBlock.html#Mapsui_Rendering_Xaml_OutlinedTextBlock_MeasureOverride_System_Windows_Size_
+  commentId: M:Mapsui.Rendering.Xaml.OutlinedTextBlock.MeasureOverride(System.Windows.Size)
+  fullName: Mapsui.Rendering.Xaml.OutlinedTextBlock.MeasureOverride(System.Windows.Size)
   nameWithType: OutlinedTextBlock.MeasureOverride(Size)
 - uid: Mapsui.Rendering.Xaml.OutlinedTextBlock.MeasureOverride*
   name: MeasureOverride
@@ -19081,11 +19165,11 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Xaml.OutlinedTextBlock.MeasureText
   nameWithType: OutlinedTextBlock.MeasureText
-- uid: Mapsui.Rendering.Xaml.OutlinedTextBlock.OnRender(DrawingContext)
+- uid: Mapsui.Rendering.Xaml.OutlinedTextBlock.OnRender(System.Windows.Media.DrawingContext)
   name: OnRender(DrawingContext)
-  href: api/Mapsui.Rendering.Xaml.OutlinedTextBlock.html#Mapsui_Rendering_Xaml_OutlinedTextBlock_OnRender_DrawingContext_
-  commentId: M:Mapsui.Rendering.Xaml.OutlinedTextBlock.OnRender(DrawingContext)
-  fullName: Mapsui.Rendering.Xaml.OutlinedTextBlock.OnRender(DrawingContext)
+  href: api/Mapsui.Rendering.Xaml.OutlinedTextBlock.html#Mapsui_Rendering_Xaml_OutlinedTextBlock_OnRender_System_Windows_Media_DrawingContext_
+  commentId: M:Mapsui.Rendering.Xaml.OutlinedTextBlock.OnRender(System.Windows.Media.DrawingContext)
+  fullName: Mapsui.Rendering.Xaml.OutlinedTextBlock.OnRender(System.Windows.Media.DrawingContext)
   nameWithType: OutlinedTextBlock.OnRender(DrawingContext)
 - uid: Mapsui.Rendering.Xaml.OutlinedTextBlock.OnRender*
   name: OnRender
@@ -19233,11 +19317,11 @@ references:
   commentId: T:Mapsui.Rendering.Xaml.PointRenderer
   fullName: Mapsui.Rendering.Xaml.PointRenderer
   nameWithType: PointRenderer
-- uid: Mapsui.Rendering.Xaml.PointRenderer.PositionPoint(UIElement,Mapsui.Geometries.Point,Mapsui.Styles.IStyle,Mapsui.IReadOnlyViewport)
+- uid: Mapsui.Rendering.Xaml.PointRenderer.PositionPoint(System.Windows.UIElement,Mapsui.Geometries.Point,Mapsui.Styles.IStyle,Mapsui.IReadOnlyViewport)
   name: PositionPoint(UIElement, Point, IStyle, IReadOnlyViewport)
-  href: api/Mapsui.Rendering.Xaml.PointRenderer.html#Mapsui_Rendering_Xaml_PointRenderer_PositionPoint_UIElement_Mapsui_Geometries_Point_Mapsui_Styles_IStyle_Mapsui_IReadOnlyViewport_
-  commentId: M:Mapsui.Rendering.Xaml.PointRenderer.PositionPoint(UIElement,Mapsui.Geometries.Point,Mapsui.Styles.IStyle,Mapsui.IReadOnlyViewport)
-  fullName: Mapsui.Rendering.Xaml.PointRenderer.PositionPoint(UIElement, Mapsui.Geometries.Point, Mapsui.Styles.IStyle, Mapsui.IReadOnlyViewport)
+  href: api/Mapsui.Rendering.Xaml.PointRenderer.html#Mapsui_Rendering_Xaml_PointRenderer_PositionPoint_System_Windows_UIElement_Mapsui_Geometries_Point_Mapsui_Styles_IStyle_Mapsui_IReadOnlyViewport_
+  commentId: M:Mapsui.Rendering.Xaml.PointRenderer.PositionPoint(System.Windows.UIElement,Mapsui.Geometries.Point,Mapsui.Styles.IStyle,Mapsui.IReadOnlyViewport)
+  fullName: Mapsui.Rendering.Xaml.PointRenderer.PositionPoint(System.Windows.UIElement, Mapsui.Geometries.Point, Mapsui.Styles.IStyle, Mapsui.IReadOnlyViewport)
   nameWithType: PointRenderer.PositionPoint(UIElement, Point, IStyle, IReadOnlyViewport)
 - uid: Mapsui.Rendering.Xaml.PointRenderer.PositionPoint*
   name: PositionPoint
@@ -19297,11 +19381,11 @@ references:
   commentId: T:Mapsui.Rendering.Xaml.RectExtensions
   fullName: Mapsui.Rendering.Xaml.RectExtensions
   nameWithType: RectExtensions
-- uid: Mapsui.Rendering.Xaml.RectExtensions.ToMapsui(Rect)
+- uid: Mapsui.Rendering.Xaml.RectExtensions.ToMapsui(System.Windows.Rect)
   name: ToMapsui(Rect)
-  href: api/Mapsui.Rendering.Xaml.RectExtensions.html#Mapsui_Rendering_Xaml_RectExtensions_ToMapsui_Rect_
-  commentId: M:Mapsui.Rendering.Xaml.RectExtensions.ToMapsui(Rect)
-  fullName: Mapsui.Rendering.Xaml.RectExtensions.ToMapsui(Rect)
+  href: api/Mapsui.Rendering.Xaml.RectExtensions.html#Mapsui_Rendering_Xaml_RectExtensions_ToMapsui_System_Windows_Rect_
+  commentId: M:Mapsui.Rendering.Xaml.RectExtensions.ToMapsui(System.Windows.Rect)
+  fullName: Mapsui.Rendering.Xaml.RectExtensions.ToMapsui(System.Windows.Rect)
   nameWithType: RectExtensions.ToMapsui(Rect)
 - uid: Mapsui.Rendering.Xaml.RectExtensions.ToMapsui*
   name: ToMapsui
@@ -19316,11 +19400,11 @@ references:
   commentId: T:Mapsui.Rendering.Xaml.StreamExtensions
   fullName: Mapsui.Rendering.Xaml.StreamExtensions
   nameWithType: StreamExtensions
-- uid: Mapsui.Rendering.Xaml.StreamExtensions.ToBitmapImage(Stream)
+- uid: Mapsui.Rendering.Xaml.StreamExtensions.ToBitmapImage(System.IO.Stream)
   name: ToBitmapImage(Stream)
-  href: api/Mapsui.Rendering.Xaml.StreamExtensions.html#Mapsui_Rendering_Xaml_StreamExtensions_ToBitmapImage_Stream_
-  commentId: M:Mapsui.Rendering.Xaml.StreamExtensions.ToBitmapImage(Stream)
-  fullName: Mapsui.Rendering.Xaml.StreamExtensions.ToBitmapImage(Stream)
+  href: api/Mapsui.Rendering.Xaml.StreamExtensions.html#Mapsui_Rendering_Xaml_StreamExtensions_ToBitmapImage_System_IO_Stream_
+  commentId: M:Mapsui.Rendering.Xaml.StreamExtensions.ToBitmapImage(System.IO.Stream)
+  fullName: Mapsui.Rendering.Xaml.StreamExtensions.ToBitmapImage(System.IO.Stream)
   nameWithType: StreamExtensions.ToBitmapImage(Stream)
 - uid: Mapsui.Rendering.Xaml.StreamExtensions.ToBitmapImage*
   name: ToBitmapImage
@@ -19453,11 +19537,11 @@ references:
   commentId: T:Mapsui.Rendering.Xaml.XamlStyles.IXamlStyleRenderer
   fullName: Mapsui.Rendering.Xaml.XamlStyles.IXamlStyleRenderer
   nameWithType: IXamlStyleRenderer
-- uid: Mapsui.Rendering.Xaml.XamlStyles.IXamlStyleRenderer.Draw(Canvas,Mapsui.IReadOnlyViewport,Mapsui.Layers.ILayer,Mapsui.Providers.IFeature,Mapsui.Styles.IStyle,Mapsui.Rendering.ISymbolCache)
+- uid: Mapsui.Rendering.Xaml.XamlStyles.IXamlStyleRenderer.Draw(System.Windows.Controls.Canvas,Mapsui.IReadOnlyViewport,Mapsui.Layers.ILayer,Mapsui.Providers.IFeature,Mapsui.Styles.IStyle,Mapsui.Rendering.ISymbolCache)
   name: Draw(Canvas, IReadOnlyViewport, ILayer, IFeature, IStyle, ISymbolCache)
-  href: api/Mapsui.Rendering.Xaml.XamlStyles.IXamlStyleRenderer.html#Mapsui_Rendering_Xaml_XamlStyles_IXamlStyleRenderer_Draw_Canvas_Mapsui_IReadOnlyViewport_Mapsui_Layers_ILayer_Mapsui_Providers_IFeature_Mapsui_Styles_IStyle_Mapsui_Rendering_ISymbolCache_
-  commentId: M:Mapsui.Rendering.Xaml.XamlStyles.IXamlStyleRenderer.Draw(Canvas,Mapsui.IReadOnlyViewport,Mapsui.Layers.ILayer,Mapsui.Providers.IFeature,Mapsui.Styles.IStyle,Mapsui.Rendering.ISymbolCache)
-  fullName: Mapsui.Rendering.Xaml.XamlStyles.IXamlStyleRenderer.Draw(Canvas, Mapsui.IReadOnlyViewport, Mapsui.Layers.ILayer, Mapsui.Providers.IFeature, Mapsui.Styles.IStyle, Mapsui.Rendering.ISymbolCache)
+  href: api/Mapsui.Rendering.Xaml.XamlStyles.IXamlStyleRenderer.html#Mapsui_Rendering_Xaml_XamlStyles_IXamlStyleRenderer_Draw_System_Windows_Controls_Canvas_Mapsui_IReadOnlyViewport_Mapsui_Layers_ILayer_Mapsui_Providers_IFeature_Mapsui_Styles_IStyle_Mapsui_Rendering_ISymbolCache_
+  commentId: M:Mapsui.Rendering.Xaml.XamlStyles.IXamlStyleRenderer.Draw(System.Windows.Controls.Canvas,Mapsui.IReadOnlyViewport,Mapsui.Layers.ILayer,Mapsui.Providers.IFeature,Mapsui.Styles.IStyle,Mapsui.Rendering.ISymbolCache)
+  fullName: Mapsui.Rendering.Xaml.XamlStyles.IXamlStyleRenderer.Draw(System.Windows.Controls.Canvas, Mapsui.IReadOnlyViewport, Mapsui.Layers.ILayer, Mapsui.Providers.IFeature, Mapsui.Styles.IStyle, Mapsui.Rendering.ISymbolCache)
   nameWithType: IXamlStyleRenderer.Draw(Canvas, IReadOnlyViewport, ILayer, IFeature, IStyle, ISymbolCache)
 - uid: Mapsui.Rendering.Xaml.XamlStyles.IXamlStyleRenderer.Draw*
   name: Draw
@@ -19478,11 +19562,11 @@ references:
   commentId: T:Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer
   fullName: Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer
   nameWithType: HyperlinkWidgetRenderer
-- uid: Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer.Draw(Canvas,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget)
+- uid: Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer.Draw(System.Windows.Controls.Canvas,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget)
   name: Draw(Canvas, IReadOnlyViewport, IWidget)
-  href: api/Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer.html#Mapsui_Rendering_Xaml_XamlWidgets_HyperlinkWidgetRenderer_Draw_Canvas_Mapsui_IReadOnlyViewport_Mapsui_Widgets_IWidget_
-  commentId: M:Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer.Draw(Canvas,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget)
-  fullName: Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer.Draw(Canvas, Mapsui.IReadOnlyViewport, Mapsui.Widgets.IWidget)
+  href: api/Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer.html#Mapsui_Rendering_Xaml_XamlWidgets_HyperlinkWidgetRenderer_Draw_System_Windows_Controls_Canvas_Mapsui_IReadOnlyViewport_Mapsui_Widgets_IWidget_
+  commentId: M:Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer.Draw(System.Windows.Controls.Canvas,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget)
+  fullName: Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer.Draw(System.Windows.Controls.Canvas, Mapsui.IReadOnlyViewport, Mapsui.Widgets.IWidget)
   nameWithType: HyperlinkWidgetRenderer.Draw(Canvas, IReadOnlyViewport, IWidget)
 - uid: Mapsui.Rendering.Xaml.XamlWidgets.HyperlinkWidgetRenderer.Draw*
   name: Draw
@@ -19497,11 +19581,11 @@ references:
   commentId: T:Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer
   fullName: Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer
   nameWithType: ScaleBarWidgetRenderer
-- uid: Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer.Draw(Canvas,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget)
+- uid: Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer.Draw(System.Windows.Controls.Canvas,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget)
   name: Draw(Canvas, IReadOnlyViewport, IWidget)
-  href: api/Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer.html#Mapsui_Rendering_Xaml_XamlWidgets_ScaleBarWidgetRenderer_Draw_Canvas_Mapsui_IReadOnlyViewport_Mapsui_Widgets_IWidget_
-  commentId: M:Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer.Draw(Canvas,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget)
-  fullName: Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer.Draw(Canvas, Mapsui.IReadOnlyViewport, Mapsui.Widgets.IWidget)
+  href: api/Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer.html#Mapsui_Rendering_Xaml_XamlWidgets_ScaleBarWidgetRenderer_Draw_System_Windows_Controls_Canvas_Mapsui_IReadOnlyViewport_Mapsui_Widgets_IWidget_
+  commentId: M:Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer.Draw(System.Windows.Controls.Canvas,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget)
+  fullName: Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer.Draw(System.Windows.Controls.Canvas, Mapsui.IReadOnlyViewport, Mapsui.Widgets.IWidget)
   nameWithType: ScaleBarWidgetRenderer.Draw(Canvas, IReadOnlyViewport, IWidget)
 - uid: Mapsui.Rendering.Xaml.XamlWidgets.ScaleBarWidgetRenderer.Draw*
   name: Draw
@@ -19516,13 +19600,13 @@ references:
   commentId: T:Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer
   fullName: Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer
   nameWithType: WidgetRenderer
-- uid: Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.Render(System.Object,Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Widgets.IWidget},IDictionary{Type,Mapsui.Widgets.IWidgetRenderer})
+- uid: Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.Render(System.Object,Mapsui.IReadOnlyViewport,System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget},System.Collections.Generic.IDictionary{System.Type,Mapsui.Widgets.IWidgetRenderer})
   name: Render(Object, IReadOnlyViewport, IEnumerable<IWidget>, IDictionary<Type, IWidgetRenderer>)
-  href: api/Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.html#Mapsui_Rendering_Xaml_XamlWidgets_WidgetRenderer_Render_System_Object_Mapsui_IReadOnlyViewport_IEnumerable_Mapsui_Widgets_IWidget__IDictionary_Type_Mapsui_Widgets_IWidgetRenderer__
-  commentId: M:Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.Render(System.Object,Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Widgets.IWidget},IDictionary{Type,Mapsui.Widgets.IWidgetRenderer})
+  href: api/Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.html#Mapsui_Rendering_Xaml_XamlWidgets_WidgetRenderer_Render_System_Object_Mapsui_IReadOnlyViewport_System_Collections_Generic_IEnumerable_Mapsui_Widgets_IWidget__System_Collections_Generic_IDictionary_System_Type_Mapsui_Widgets_IWidgetRenderer__
+  commentId: M:Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.Render(System.Object,Mapsui.IReadOnlyViewport,System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget},System.Collections.Generic.IDictionary{System.Type,Mapsui.Widgets.IWidgetRenderer})
   name.vb: Render(Object, IReadOnlyViewport, IEnumerable(Of IWidget), IDictionary(Of Type, IWidgetRenderer))
-  fullName: Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.Render(System.Object, Mapsui.IReadOnlyViewport, IEnumerable<Mapsui.Widgets.IWidget>, IDictionary<Type, Mapsui.Widgets.IWidgetRenderer>)
-  fullName.vb: Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.Render(System.Object, Mapsui.IReadOnlyViewport, IEnumerable(Of Mapsui.Widgets.IWidget), IDictionary(Of Type, Mapsui.Widgets.IWidgetRenderer))
+  fullName: Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.Render(System.Object, Mapsui.IReadOnlyViewport, System.Collections.Generic.IEnumerable<Mapsui.Widgets.IWidget>, System.Collections.Generic.IDictionary<System.Type, Mapsui.Widgets.IWidgetRenderer>)
+  fullName.vb: Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.Render(System.Object, Mapsui.IReadOnlyViewport, System.Collections.Generic.IEnumerable(Of Mapsui.Widgets.IWidget), System.Collections.Generic.IDictionary(Of System.Type, Mapsui.Widgets.IWidgetRenderer))
   nameWithType: WidgetRenderer.Render(Object, IReadOnlyViewport, IEnumerable<IWidget>, IDictionary<Type, IWidgetRenderer>)
   nameWithType.vb: WidgetRenderer.Render(Object, IReadOnlyViewport, IEnumerable(Of IWidget), IDictionary(Of Type, IWidgetRenderer))
 - uid: Mapsui.Rendering.Xaml.XamlWidgets.WidgetRenderer.Render*
@@ -19538,11 +19622,11 @@ references:
   commentId: T:Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer
   fullName: Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer
   nameWithType: ZoomInOutWidgetRenderer
-- uid: Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer.Draw(Canvas,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget)
+- uid: Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer.Draw(System.Windows.Controls.Canvas,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget)
   name: Draw(Canvas, IReadOnlyViewport, IWidget)
-  href: api/Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer.html#Mapsui_Rendering_Xaml_XamlWidgets_ZoomInOutWidgetRenderer_Draw_Canvas_Mapsui_IReadOnlyViewport_Mapsui_Widgets_IWidget_
-  commentId: M:Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer.Draw(Canvas,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget)
-  fullName: Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer.Draw(Canvas, Mapsui.IReadOnlyViewport, Mapsui.Widgets.IWidget)
+  href: api/Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer.html#Mapsui_Rendering_Xaml_XamlWidgets_ZoomInOutWidgetRenderer_Draw_System_Windows_Controls_Canvas_Mapsui_IReadOnlyViewport_Mapsui_Widgets_IWidget_
+  commentId: M:Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer.Draw(System.Windows.Controls.Canvas,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget)
+  fullName: Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer.Draw(System.Windows.Controls.Canvas, Mapsui.IReadOnlyViewport, Mapsui.Widgets.IWidget)
   nameWithType: ZoomInOutWidgetRenderer.Draw(Canvas, IReadOnlyViewport, IWidget)
 - uid: Mapsui.Rendering.Xaml.XamlWidgets.ZoomInOutWidgetRenderer.Draw*
   name: Draw

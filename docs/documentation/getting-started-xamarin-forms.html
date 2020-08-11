@@ -120,13 +120,7 @@ for the view to be correctly setup and attached to the code behind, for instance
     Transformation = new MinimalTransformation()
 };
 
-var attribution = new BruTile.Attribution(&quot;© OpenStreetMap contributors&quot;,
-    &quot;http://www.openstreetmap.org/copyright&quot;);
-var tileSource = new HttpTileSource(new GlobalSphericalMercator(),
-    &quot;http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
-    new[] { &quot;a&quot;, &quot;b&quot;, &quot;c&quot; }, name: &quot;OpenStreetMap&quot;,
-    attribution: attribution);
-var tileLayer = new TileLayer(tileSource) { Name = &quot;OpenStreetMap&quot; };
+var tileLayer = OpenStreetMap.CreateTileLayer();
 
 map.Layers.Add(tileLayer);
 map.Widgets.Add(new Widgets.ScaleBar.ScaleBarWidget(map) { TextAlignment = Widgets.Alignment.Center, HorizontalAlignment = Widgets.HorizontalAlignment.Left, VerticalAlignment = Widgets.VerticalAlignment.Bottom });
