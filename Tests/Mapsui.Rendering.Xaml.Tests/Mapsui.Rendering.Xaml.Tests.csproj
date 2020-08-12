@@ -132,7 +132,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="SkiaSharp">
-      <Version>2.80.0</Version>
+      <Version>2.80.1</Version>
     </PackageReference>
     <PackageReference Include="System.Memory">
       <Version>4.5.4</Version>
