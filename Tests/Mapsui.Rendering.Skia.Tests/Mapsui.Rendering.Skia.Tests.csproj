@@ -130,6 +130,9 @@
     <Content Include="Resources\Images\Original\line.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\Original\points_with_svgsymbolstyle.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\Original\points_with_symbolstyle.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

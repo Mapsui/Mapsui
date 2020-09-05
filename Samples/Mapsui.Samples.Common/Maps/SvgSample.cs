@@ -75,9 +75,7 @@ namespace Mapsui.Samples.Common.Maps
             {
                 var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
                 var image = assembly.GetManifestResourceStream(imagePath);
-                var svg = new SKSvg();
-                svg.Load(image); 
-                id = BitmapRegistry.Instance.Register(svg);
+                id = BitmapRegistry.Instance.Register(image);
                 imageCache[imagePath] = id;
             }
 
