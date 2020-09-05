@@ -32,6 +32,16 @@ namespace Mapsui.Rendering.Skia
                 return new BitmapInfo {Bitmap = image};
             }
 
+            if (bitmapStream is SKSvg skSvg)
+            {
+                return new BitmapInfo {Svg = skSvg};
+            }
+
+            if (bitmapStream is SKImage skImage)
+            {
+                return new BitmapInfo {Bitmap = skImage};
+            }
+
             if (bitmapStream is Sprite sprite)
             {
                 return new BitmapInfo {Sprite = sprite};

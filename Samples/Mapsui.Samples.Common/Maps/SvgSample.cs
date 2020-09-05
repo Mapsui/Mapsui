@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Reflection;
 using Mapsui.Geometries;
 using Mapsui.Layers;
@@ -7,11 +8,13 @@ using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Utilities;
+using Svg.Skia;
 
 namespace Mapsui.Samples.Common.Maps
 {
     public class SvgSample : ISample
     {
+        private static readonly ConcurrentDictionary<string, int> imageCache = new ConcurrentDictionary<string, int>();
         public string Name => "Svg";
         public string Category => "Symbols";
 
@@ -68,9 +71,17 @@ namespace Mapsui.Samples.Common.Maps
 
         private static int GetBitmapIdForEmbeddedResource(string imagePath)
         {
-            var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
-            var image = assembly.GetManifestResourceStream(imagePath);
-            return BitmapRegistry.Instance.Register(image);
+            if (!imageCache.TryGetValue(imagePath, out var id))
+            {
+                var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
+                var image = assembly.GetManifestResourceStream(imagePath);
+                var svg = new SKSvg();
+                svg.Load(image); 
+                id = BitmapRegistry.Instance.Register(svg);
+                imageCache[imagePath] = id;
+            }
+
+            return id;
         }
     }
 }
