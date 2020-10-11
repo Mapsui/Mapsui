@@ -37,8 +37,8 @@ namespace Mapsui.Utilities
 
         public static long ReadOneSearch(this Stream haystack, string needle)
         {
-            var svg = Encoding.UTF8.GetBytes(needle);
-            return ReadOneSearch(haystack, needle);
+            var needleString = Encoding.UTF8.GetBytes(needle);
+            return ReadOneSearch(haystack, needleString);
         }
 
         /// <summary>
@@ -69,6 +69,9 @@ namespace Mapsui.Utilities
                     }
                     else
                     {
+                        // go back for searching one position later
+                        // for finding haystack[2,1,2,1,1], needle=[2,1,1]
+                        haystack.Position = haystack.Position - i + 1;
                         i = 0;
                     }
                 }
