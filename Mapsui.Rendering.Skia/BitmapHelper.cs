@@ -1,7 +1,9 @@
 using System.IO;
 using System.Text;
 using Mapsui.Styles;
+using Mapsui.Utilities;;
 using SkiaSharp;
+
 
 namespace Mapsui.Rendering.Skia
 {
@@ -14,7 +16,7 @@ namespace Mapsui.Rendering.Skia
             // SymbolImage. Which holds the type, data and other parameters.
             if (bitmapStream is Stream stream)
             {
-                if (IsSvg(stream))
+                if (stream.IsSvg())
                 {
                     var svg = new SkiaSharp.Extended.Svg.SKSvg();
                     svg.Load(stream);
@@ -33,70 +35,5 @@ namespace Mapsui.Rendering.Skia
 
             return null;
         }
-
-        /// <summary>
-        /// Detects if stream is svg stream
-        /// </summary>
-        /// <param name="stream">stream</param>
-        /// <returns>true if is svg stream</returns>
-        private static bool IsSvg(Stream stream)
-        {
-            byte[] buffer = new byte[5];
-
-            stream.Position = 0;
-            stream.Read(buffer, 0, 5);
-            stream.Position = 0;
-
-            if (Encoding.UTF8.GetString(buffer, 0, 4).ToLowerInvariant().Equals("<svg"))
-            {
-                return true;
-            }
-
-            if (Encoding.UTF8.GetString(buffer, 0, 5).ToLowerInvariant().Equals("<?xml"))
-            {
-                var svg = Encoding.UTF8.GetBytes("<svg");
-                if (ReadOneSearch(stream, svg) >= 0)
-                {
-                    stream.Position = 0;
-                    return true;
-                };
-
-                stream.Position = 0;
-            }
-
-            return false;
-        }
-
-        /// <summary>
-        /// https://stackoverflow.com/questions/1471975/best-way-to-find-position-in-the-stream-where-given-byte-sequence-starts
-        /// </summary>
-        /// <param name="haystack">stream to search</param>
-        /// <param name="needle">pattern to find</param>
-        /// <returns>position</returns>
-        private static long ReadOneSearch(Stream haystack, byte[] needle)
-        {
-            int b;
-            long i = 0;
-            while ((b = haystack.ReadByte()) != -1)
-            {
-                if (b == needle[i++])
-                {
-                    if (i == needle.Length)
-                    {
-                        return haystack.Position - needle.Length;
-                    }
-                }
-                else if (b == needle[0])
-                {
-                    i = 1;
-                }
-                else
-                {
-                    i = 0;
-                }
-            }
-
-            return -1;
-}
     }
 }
