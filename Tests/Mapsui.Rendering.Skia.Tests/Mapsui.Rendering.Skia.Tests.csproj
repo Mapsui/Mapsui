@@ -90,6 +90,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Mapsui.Rendering.Xaml.Tests\BitmapHelperTests.cs">
+      <Link>BitmapHelperTests.cs</Link>
+    </Compile>
     <Compile Include="..\Mapsui.Rendering.Xaml.Tests\File.cs">
       <Link>File.cs</Link>
     </Compile>
@@ -128,6 +131,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\Original\line.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Original\Pin.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Original\PinXml.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\Original\points_with_symbolstyle.png">
