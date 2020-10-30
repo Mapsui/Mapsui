@@ -1,4 +1,5 @@
-﻿using Mapsui.Styles;
+﻿using System;
+using Mapsui.Styles;
 using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia
@@ -27,7 +28,16 @@ namespace Mapsui.Rendering.Skia
             // 0/0 are assumed at center of image, but Svg has 0/0 at left top position
             canvas.Translate(-halfWidth + offsetX, -halfHeight - offsetY);
 
-            canvas.DrawPicture(svg.Picture, new SKPaint() { IsAntialias = true });
+            var alpha = Convert.ToByte(255 * opacity);
+            var transparency = SKColors.White.WithAlpha(alpha); 
+            using (var cf = SKColorFilter.CreateBlendMode(transparency, SKBlendMode.DstIn))
+            {
+                canvas.DrawPicture(svg.Picture, new SKPaint()
+                {
+                    IsAntialias = true,
+                    ColorFilter = cf,
+                });
+            }
 
             canvas.Restore();
         }
