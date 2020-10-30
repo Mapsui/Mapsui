@@ -27,8 +27,8 @@ namespace Mapsui.UI.Forms
         /// Initializes a new instance of the <see cref="T:Mapsui.UI.Forms.MapSpan"/> class.
         /// </summary>
         /// <param name="center">Center of the MapSpan</param>
-        /// <param name="latitudeDegrees">Extend of MapSpand in latitude direction in degrees</param>
-        /// <param name="longitudeDegrees">Extend of MapSpand in longitude direction in degrees</param>
+        /// <param name="latitudeDegrees">Extend of MapSpan in latitude direction in degrees</param>
+        /// <param name="longitudeDegrees">Extend of MapSpan in longitude direction in degrees</param>
         public MapSpan(Position center, double latitudeDegrees, double longitudeDegrees)
         {
             Center = center;
