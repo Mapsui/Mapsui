@@ -15,7 +15,9 @@ The project Mapsui.Samples.Wpf has a dropdown on the top left to select between 
 
 ## Renderer abstraction layer 
 
-There is the question how much of the renderer should be abstracted away. An abstraction layer add extra complexity. Since it looks more and more like skiasharp will be the only renderer for as far as we can see we could just add that dependency to all our code and work directly with SkiaSharp classes, that may simplify some things. However, in the past we had to switch many times to different renderers, so I am not so sure if this won't happen again. So let's not settle for one renderer just yet. For context, these are the renderers Mapsui had in the past:
+There is the question how much of the renderer should be abstracted away. An abstraction layer add extra complexity. Since it looks more and more like skiasharp will be the only renderer for as far as we can see we could just add that dependency to all our code and work directly with SkiaSharp classes, that may simplify some things. However, in the past we had to switch many times to different renderers, so I am not so sure if this won't happen again. So let's not settle for one renderer just yet. 
+
+For context, these are the renderers Mapsui had in the past:
 - System.Drawing
 - System.Drawing for PocketPC
 - Silverlight XAML
