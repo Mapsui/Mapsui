@@ -94,35 +94,11 @@
     <h5>Implements</h5>
     <div><a class="xref" href="Mapsui.Fetcher.IDataFetchStrategy.html">IDataFetchStrategy</a></div>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.Fetcher.html">Mapsui.Fetcher</a></h6>
   <h6><strong>Assembly</strong>: Mapsui.dll</h6>
   <h5 id="Mapsui_Fetcher_DataFetchStrategy_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class DataFetchStrategy : IDataFetchStrategy</code></pre>
+    <pre><code class="lang-csharp hljs">public class DataFetchStrategy : object, IDataFetchStrategy</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -139,7 +115,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public DataFetchStrategy(int maxLevelsUp = 2147483647)</code></pre>
+    <pre><code class="lang-csharp hljs">public DataFetchStrategy(int maxLevelsUp = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -162,13 +138,13 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Fetcher_DataFetchStrategy_Get_BruTile_ITileSchema_BruTile_Extent_System_Int32_.md&amp;value=---%0Auid%3A%20Mapsui.Fetcher.DataFetchStrategy.Get(BruTile.ITileSchema%2CBruTile.Extent%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Fetcher_DataFetchStrategy_Get_ITileSchema_Extent_System_Int32_.md&amp;value=---%0Auid%3A%20Mapsui.Fetcher.DataFetchStrategy.Get(ITileSchema%2CExtent%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Fetcher/DataFetchStrategy.cs/#L34">View Source</a>
   </span>
   <a id="Mapsui_Fetcher_DataFetchStrategy_Get_" data-uid="Mapsui.Fetcher.DataFetchStrategy.Get*"></a>
-  <h4 id="Mapsui_Fetcher_DataFetchStrategy_Get_BruTile_ITileSchema_BruTile_Extent_System_Int32_" data-uid="Mapsui.Fetcher.DataFetchStrategy.Get(BruTile.ITileSchema,BruTile.Extent,System.Int32)">Get(ITileSchema, Extent, Int32)</h4>
+  <h4 id="Mapsui_Fetcher_DataFetchStrategy_Get_ITileSchema_Extent_System_Int32_" data-uid="Mapsui.Fetcher.DataFetchStrategy.Get(ITileSchema,Extent,System.Int32)">Get(ITileSchema, Extent, Int32)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -186,12 +162,12 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">BruTile.ITileSchema</span></td>
+        <td><span class="xref">ITileSchema</span></td>
         <td><span class="parametername">schema</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">BruTile.Extent</span></td>
+        <td><span class="xref">Extent</span></td>
         <td><span class="parametername">extent</span></td>
         <td></td>
       </tr>
@@ -212,7 +188,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IList</span>&lt;<span class="xref">BruTile.TileInfo</span>&gt;</td>
+        <td><span class="xref">IList</span>&lt;<span class="xref">TileInfo</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
