@@ -12,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="SkiaSharp" Version="2.80.0" />
-    <PackageReference Include="SkiaSharp.Svg" Version="1.60.0" />
+    <PackageReference Include="SkiaSharp" Version="2.80.1" />
+    <PackageReference Include="Svg.Skia" Version="0.4.1" />
     <PackageReference Include="Topten.RichTextKit" Version="0.1.118" />
   </ItemGroup>
 

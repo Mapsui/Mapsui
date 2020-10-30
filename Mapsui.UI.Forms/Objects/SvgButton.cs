@@ -2,6 +2,7 @@
 using System.IO;
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
+using Svg.Skia;
 using Xamarin.Forms;
 
 namespace Mapsui.UI.Forms
@@ -50,7 +51,7 @@ namespace Mapsui.UI.Forms
             }
         }
 
-        public SvgButton(Stream stream) : this(new SkiaSharp.Extended.Svg.SKSvg().Load(stream))
+        public SvgButton(Stream stream) : this(new SKSvg().Load(stream))
         {
         }
 

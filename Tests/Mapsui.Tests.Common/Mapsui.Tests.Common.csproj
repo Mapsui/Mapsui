@@ -9,6 +9,7 @@
     <None Remove="Resources\Images\Ghostscript_Tiger.svg" />
     <None Remove="Resources\Images\iconthatneedsoffset.png" />
     <None Remove="Resources\Images\osm-liberty.png" />
+    <None Remove="Resources\Images\Pin.svg" />
     <None Remove="Resources\SampleTiles\0_0_0.png" />
     <None Remove="Resources\SampleTiles\1_0_0.png" />
     <None Remove="Resources\SampleTiles\1_0_1.png" />
@@ -22,6 +23,7 @@
     <EmbeddedResource Include="Resources\Images\Ghostscript_Tiger.svg" />
     <EmbeddedResource Include="Resources\Images\iconthatneedsoffset.png" />
     <EmbeddedResource Include="Resources\Images\osm-liberty.png" />
+    <EmbeddedResource Include="Resources\Images\Pin.svg" />
     <EmbeddedResource Include="Resources\SampleTiles\0_0_0.png" />
     <EmbeddedResource Include="Resources\SampleTiles\1_0_0.png" />
     <EmbeddedResource Include="Resources\SampleTiles\1_0_1.png" />
