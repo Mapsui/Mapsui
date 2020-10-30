@@ -42,6 +42,9 @@
     <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Mapsui.Rendering.Xaml.Tests\File.cs">
+      <Link>File.cs</Link>
+    </Compile>
     <Compile Include="Fetcher\CountingTileProvider.cs" />
     <Compile Include="Fetcher\FeatureFetcherTests.cs" />
     <Compile Include="Fetcher\NullTileProvider.cs" />
@@ -60,6 +63,7 @@
     <Compile Include="Styles\BitmapRegistryTests.cs" />
     <Compile Include="UI\FeatureInfoTests.cs" />
     <Compile Include="UI\ViewportLimiterTests.cs" />
+    <Compile Include="Utilities\StreamHelperTests.cs" />
     <Compile Include="Utilities\VersionTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +125,18 @@
     <PackageReference Include="System.Threading">
       <Version>4.3.0</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\Images\Original\Pin.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Original\PinXml.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Original\vector_symbol_unittype.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

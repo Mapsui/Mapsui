@@ -1,7 +1,10 @@
 using System.IO;
+using System.Text;
 using Mapsui.Styles;
+using Mapsui.Utilities;
 using SkiaSharp;
 using Svg.Skia;
+
 
 namespace Mapsui.Rendering.Skia
 {
@@ -14,13 +17,7 @@ namespace Mapsui.Rendering.Skia
             // SymbolImage. Which holds the type, data and other parameters.
             if (bitmapStream is Stream stream)
             {
-                byte[] buffer = new byte[4];
-
-                stream.Position = 0;
-                stream.Read(buffer, 0, 4);
-                stream.Position = 0;
-
-                if (System.Text.Encoding.UTF8.GetString(buffer, 0, 4).ToLower().Equals("<svg"))
+                if (stream.IsSvg())
                 {
                     var svg = new SKSvg();
                     svg.Load(stream);
@@ -38,6 +35,6 @@ namespace Mapsui.Rendering.Skia
             }
 
             return null;
-        }     
+        }
     }
 }
