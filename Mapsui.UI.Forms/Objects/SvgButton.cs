@@ -38,7 +38,7 @@ namespace Mapsui.UI.Forms
             }
         }
 
-        public double Rotation
+        new public double Rotation
         {
             get => _rotation;
             set
@@ -77,10 +77,10 @@ namespace Mapsui.UI.Forms
             float scale = (float)(canvasMin / svgMax);
 
             // Rotate picture
-            var matrix = SKMatrix.MakeRotationDegrees((float)_rotation, _picture.CullRect.Width / 2f, _picture.CullRect.Height / 2f);
+            var matrix = SKMatrix.CreateRotationDegrees((float)_rotation, _picture.CullRect.Width / 2f, _picture.CullRect.Height / 2f);
 
             // create a scale matrix
-            SKMatrix.PostConcat(ref matrix, SKMatrix.MakeScale(scale, scale));
+            matrix = matrix.PostConcat(SKMatrix.CreateScale(scale, scale));
 
             e.Surface.Canvas.DrawPicture(_picture, ref matrix, new SKPaint() { IsAntialias = true });
         }
