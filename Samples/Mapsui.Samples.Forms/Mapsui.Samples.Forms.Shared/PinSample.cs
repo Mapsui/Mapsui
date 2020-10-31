@@ -103,6 +103,7 @@ namespace Mapsui.Samples.Forms.Shared
                         Position = mapClickedArgs.Point,
                         Type = PinType.Svg,
                         Scale = 0.1f,
+                        RotateWithMap = true,
                         Svg = svgString
                     });
                     break;
