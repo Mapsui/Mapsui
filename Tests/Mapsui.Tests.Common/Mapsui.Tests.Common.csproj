@@ -37,9 +37,6 @@
     <ProjectReference Include="..\..\Samples\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="BruTile" Version="3.0.0" />
   </ItemGroup>
 
