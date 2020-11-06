@@ -124,7 +124,7 @@ namespace Mapsui.Samples.Common.Maps
                     var memStream = new MemoryStream();
                     using (var wstream = new SKManagedWStream(memStream))
                     {
-                        SKPixmap.Encode(wstream, bitmap, SKEncodedImageFormat.Png, 100);
+                        bitmap.Encode(wstream, SKEncodedImageFormat.Png, 100);
                     }
                     return memStream;
                 }
