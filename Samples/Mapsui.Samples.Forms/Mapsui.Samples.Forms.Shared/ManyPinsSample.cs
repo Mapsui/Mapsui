@@ -30,24 +30,6 @@ namespace Mapsui.Samples.Forms
             foreach (var str in assembly.GetManifestResourceNames())
                 System.Diagnostics.Debug.WriteLine(str);
 
-            string device;
-
-            switch (Device.RuntimePlatform)
-            {
-                case "Android":
-                    device = "Droid";
-                    break;
-                case "iOS":
-                    device = "iOS";
-                    break;
-                case "macOS":
-                    device = "Mac";
-                    break;
-                default:
-                    device = $"{Device.RuntimePlatform}";
-                    break;
-            }
-
             switch (e.NumOfTaps)
             {
                 case 1:
