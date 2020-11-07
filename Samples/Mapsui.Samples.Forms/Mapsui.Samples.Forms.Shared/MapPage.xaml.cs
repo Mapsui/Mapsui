@@ -7,6 +7,7 @@ using Plugin.Geolocator.Abstractions;
 using Mapsui.UI;
 using System.Threading.Tasks;
 using Mapsui.Rendering.Skia;
+using Mapsui.Samples.CustomWidget;
 
 namespace Mapsui.Samples.Forms
 {
@@ -34,6 +35,7 @@ namespace Mapsui.Samples.Forms
             mapView.MyLocationLayer.UpdateMyLocation(new UI.Forms.Position());
 
             mapView.Info += MapView_Info;
+            mapView.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
 
             Task.Run(() => StartGPS());
 

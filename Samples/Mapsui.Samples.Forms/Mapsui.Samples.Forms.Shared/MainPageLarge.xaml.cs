@@ -1,6 +1,7 @@
 ﻿using Mapsui.Rendering.Skia;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.ExtensionMethods;
+using Mapsui.Samples.CustomWidget;
 using Mapsui.UI.Forms;
 using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
@@ -46,6 +47,7 @@ namespace Mapsui.Samples.Forms
             mapView.IsNorthingButtonVisible = true;
 
             mapView.Info += MapView_Info;
+            mapView.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
 
             StartGPS();
         }
