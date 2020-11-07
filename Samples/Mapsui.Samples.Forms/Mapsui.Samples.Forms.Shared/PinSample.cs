@@ -92,7 +92,7 @@ namespace Mapsui.Samples.Forms.Shared
                     foreach (var r in assembly.GetManifestResourceNames())
                         System.Diagnostics.Debug.WriteLine(r);
 
-                    var resourceName = "Mapsui.Samples.Forms.Shared.Images.Ghostscript_Tiger.svg";
+                    var resourceName = "Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg";
                     var stream = assembly.GetManifestResourceStream(resourceName);
                     if (stream == null) throw new Exception($"Could not find EmbeddedResource {resourceName}");
                     var reader = new StreamReader(stream);
@@ -108,7 +108,7 @@ namespace Mapsui.Samples.Forms.Shared
                     });
                     break;
                 case 3:
-                    var icon = assembly.GetManifestResourceStream("Mapsui.Samples.Forms.Shared.Images.loc.png").ToBytes();
+                    var icon = assembly.GetManifestResourceStream("Mapsui.Samples.Common.Images.loc.png").ToBytes();
                     mapView.Pins.Add(new Pin(mapView)
                     {
                         Label = $"PinType.Icon {_markerNum++}",
