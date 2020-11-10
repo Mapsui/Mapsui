@@ -4,7 +4,7 @@ using System.IO;
 using Mapsui.Styles;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
-using Mapsui.Utilities;
+using Mapsui.Extensions;
 
 namespace Mapsui.Rendering.Xaml
 {

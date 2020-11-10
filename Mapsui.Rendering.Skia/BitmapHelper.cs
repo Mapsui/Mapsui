@@ -1,7 +1,7 @@
 using System.IO;
 using System.Text;
+using Mapsui.Extensions;
 using Mapsui.Styles;
-using Mapsui.Utilities;
 using SkiaSharp;
 using Svg.Skia;
 

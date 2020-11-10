@@ -1,4 +1,4 @@
-﻿using Mapsui.Utilities;
+﻿using Mapsui.Extensions;
 using NUnit.Framework;
 using Mapsui.Rendering.Xaml.Tests;
 
