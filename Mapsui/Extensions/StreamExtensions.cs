@@ -2,9 +2,9 @@
 using System.Text;
 
 
-namespace Mapsui.Utilities
+namespace Mapsui.Extensions
 {
-    public static class StreamHelper
+    public static class StreamExtensions
     {
         /// <summary>
         /// Detects if stream is svg stream

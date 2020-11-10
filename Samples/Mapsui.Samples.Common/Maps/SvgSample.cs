@@ -1,14 +1,15 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Reflection;
 using Mapsui.Geometries;
 using Mapsui.Layers;
+using Mapsui.Logging;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Utilities;
-using Svg.Skia;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -73,10 +74,18 @@ namespace Mapsui.Samples.Common.Maps
         {
             if (!imageCache.TryGetValue(imagePath, out var id))
             {
-                var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
-                var image = assembly.GetManifestResourceStream(imagePath);
-                id = BitmapRegistry.Instance.Register(image);
-                imageCache[imagePath] = id;
+                try
+                {
+                    var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
+                    var image = assembly.GetManifestResourceStream(imagePath);
+                    id = BitmapRegistry.Instance.Register(image);
+                    imageCache[imagePath] = id;
+                }
+                catch (Exception exception)
+                {
+                    Logger.Log(LogLevel.Error, $"Failed registering Image {imagePath}", exception);
+                    throw;
+                }
             }
 
             return id;

@@ -10,11 +10,10 @@ namespace Mapsui.Rendering.Skia
             var mapCenterY = (float)viewport.Height * 0.5f;
             var invertedResolution = 1f / (float)viewport.Resolution;
 
-            var matrix = SKMatrix.MakeIdentity();
-            SKMatrix.Concat(ref matrix, matrix, SKMatrix.MakeScale(invertedResolution, invertedResolution, mapCenterX, mapCenterY));
-            SKMatrix.Concat(ref matrix, matrix, SKMatrix.MakeScale(1, -1, 0, -mapCenterY)); // As a consequence images will be up side down :(
-            if (viewport.IsRotated) SKMatrix.Concat(ref matrix, matrix, SKMatrix.MakeRotationDegrees((float)-viewport.Rotation));
-            SKMatrix.Concat(ref matrix, matrix, SKMatrix.MakeTranslation((float)-viewport.Center.X, (float)-viewport.Center.Y));
+            var matrix = SKMatrix.CreateScale(invertedResolution, invertedResolution, mapCenterX, mapCenterY);
+            matrix = SKMatrix.Concat(matrix, SKMatrix.CreateScale(1, -1, 0, -mapCenterY)); // As a consequence images will be up side down :(
+            if (viewport.IsRotated) matrix = SKMatrix.Concat(matrix, SKMatrix.CreateRotationDegrees((float)-viewport.Rotation));
+            matrix = SKMatrix.Concat(matrix, SKMatrix.CreateTranslation((float)-viewport.Center.X, (float)-viewport.Center.Y));
             return matrix;
         }
     }
