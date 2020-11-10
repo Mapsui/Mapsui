@@ -157,19 +157,19 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BruTile">
-      <Version>2.1.2</Version>
+      <Version>3.0.0</Version>
     </PackageReference>
     <PackageReference Include="BruTile.MbTiles">
-      <Version>2.1.2</Version>
+      <Version>3.0.0</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.10</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp">
-      <Version>1.68.2.1</Version>
+      <Version>2.80.2</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Views">
-      <Version>1.68.2.1</Version>
+      <Version>2.80.2</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

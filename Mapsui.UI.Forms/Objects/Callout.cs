@@ -17,7 +17,6 @@ namespace Mapsui.UI.Forms
     public class Callout : BindableObject, IFeatureProvider
     {
         private Pin _pin;
-        private bool _updating = false;
 
         public event EventHandler<EventArgs> CalloutClosed;
         public event EventHandler<CalloutClickedEventArgs> CalloutClicked;

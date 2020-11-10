@@ -4,6 +4,7 @@ using System.IO;
 using Mapsui.Styles;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
+using Mapsui.Extensions;
 
 namespace Mapsui.Rendering.Xaml
 {
@@ -36,12 +37,8 @@ namespace Mapsui.Rendering.Xaml
             else
             {
                 var stream = (Stream) obj;
-                byte[] buffer = new byte[4];
-
-                stream.Position = 0;
-                stream.Read(buffer, 0, 4);
-
-                if (System.Text.Encoding.UTF8.GetString(buffer).ToLower().Equals("<svg"))
+                
+                if (stream.IsSvg())
                 {
                     stream.Position = 0;
                     var image = Svg2Xaml.SvgReader.Load(stream);

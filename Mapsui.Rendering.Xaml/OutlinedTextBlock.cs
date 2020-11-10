@@ -270,7 +270,8 @@ namespace Mapsui.Rendering.Xaml
               FlowDirection,
               new Typeface(FontFamily, FontStyle, FontWeight, FontStretch),
               FontSize,
-              Brushes.Black);
+              Brushes.Black,
+              1);
 
             UpdateFormattedText();
         }

@@ -73,7 +73,7 @@ namespace Mapsui.Rendering.Skia
                         paintFill.Color = fillColor.ToSkia(opacity);
                         var scale = 10.0f;
                         var fillPath = new SKPath();
-                        var matrix = SKMatrix.MakeScale(scale, scale);
+                        var matrix = SKMatrix.CreateScale(scale, scale);
 
                         switch (vectorStyle.Fill?.FillStyle)
                         {
@@ -128,7 +128,7 @@ namespace Mapsui.Rendering.Skia
                                 if (image != null)
                                     paintFill.Shader = image.ToShader(SKShaderTileMode.Repeat,
                                         SKShaderTileMode.Repeat,
-                                        SKMatrix.MakeRotation((float)(viewport.Rotation * System.Math.PI / 180.0f), image.Width >> 1, image.Height >> 1));
+                                        SKMatrix.CreateRotation((float)(viewport.Rotation * System.Math.PI / 180.0f), image.Width >> 1, image.Height >> 1));
                                 break;
                             default:
                                 paintFill.PathEffect = null;

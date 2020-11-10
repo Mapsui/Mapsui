@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Reflection;
 using Mapsui.Geometries;
 using Mapsui.Layers;
+using Mapsui.Logging;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
@@ -12,6 +15,7 @@ namespace Mapsui.Samples.Common.Maps
 {
     public class SvgSample : ISample
     {
+        private static readonly ConcurrentDictionary<string, int> imageCache = new ConcurrentDictionary<string, int>();
         public string Name => "Svg";
         public string Category => "Symbols";
 
@@ -68,9 +72,23 @@ namespace Mapsui.Samples.Common.Maps
 
         private static int GetBitmapIdForEmbeddedResource(string imagePath)
         {
-            var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
-            var image = assembly.GetManifestResourceStream(imagePath);
-            return BitmapRegistry.Instance.Register(image);
+            if (!imageCache.TryGetValue(imagePath, out var id))
+            {
+                try
+                {
+                    var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
+                    var image = assembly.GetManifestResourceStream(imagePath);
+                    id = BitmapRegistry.Instance.Register(image);
+                    imageCache[imagePath] = id;
+                }
+                catch (Exception exception)
+                {
+                    Logger.Log(LogLevel.Error, $"Failed registering Image {imagePath}", exception);
+                    throw;
+                }
+            }
+
+            return id;
         }
     }
 }

@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Net;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
@@ -112,10 +111,10 @@ namespace Mapsui.UI.Wpf
             }
         }
 
-        private void Navigated(object sender, EventArgs e)
+        private void Navigated(object sender, ChangeType changeType)
         {
             _map.Initialized = true;
-            Refresh();
+            Refresh(changeType);
         }
 
         /// <summary>
@@ -183,9 +182,9 @@ namespace Mapsui.UI.Wpf
         /// <summary>
         /// Refresh data of the map and than repaint it
         /// </summary>
-        public void Refresh()
+        public void Refresh(ChangeType changeType = ChangeType.Discrete)
         {
-            RefreshData();
+            RefreshData(changeType);
             RefreshGraphics();
         }
 
@@ -320,9 +319,9 @@ namespace Mapsui.UI.Wpf
         /// <summary>
         /// Refresh data of Map, but don't paint it
         /// </summary>
-        public void RefreshData()
+        public void RefreshData(ChangeType changeType = ChangeType.Discrete)
         {
-            _map?.RefreshData(Viewport.Extent, Viewport.Resolution, ChangeType.Discrete);
+            _map?.RefreshData(Viewport.Extent, Viewport.Resolution, changeType);
         }
 
         private void OnInfo(MapInfoEventArgs mapInfoEventArgs)

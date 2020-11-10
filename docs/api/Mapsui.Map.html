@@ -93,32 +93,7 @@
   </div>
   <div classs="implements">
     <h5>Implements</h5>
-    <div><span class="xref">System.ComponentModel.INotifyPropertyChanged</span></div>
     <div><a class="xref" href="Mapsui.IMap.html">IMap</a></div>
-  </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.html">Mapsui</a></h6>
   <h6><strong>Assembly</strong>: Mapsui.dll</h6>
@@ -268,7 +243,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Mapsui.INavigator.html">INavigator</a>&gt;</td>
+        <td><span class="xref">Action</span>&lt;<a class="xref" href="Mapsui.INavigator.html">INavigator</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -286,8 +261,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use your own hover event and call MapControl.GetMapInfo&quot;, true)]
-public IList&lt;ILayer&gt; HoverLayers { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public IList&lt;ILayer&gt; HoverLayers { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -299,7 +273,7 @@ public IList&lt;ILayer&gt; HoverLayers { get; }</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IList</span>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
+        <td><span class="xref">IList</span>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -317,8 +291,7 @@ public IList&lt;ILayer&gt; HoverLayers { get; }</code></pre>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use ILayer.IsMapInfoLayer instead&quot;, true)]
-public IList&lt;ILayer&gt; InfoLayers { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public IList&lt;ILayer&gt; InfoLayers { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -330,7 +303,7 @@ public IList&lt;ILayer&gt; InfoLayers { get; }</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IList</span>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
+        <td><span class="xref">IList</span>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -485,7 +458,7 @@ public IList&lt;ILayer&gt; InfoLayers { get; }</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IReadOnlyList</span>&lt;<span class="xref">System.Double</span>&gt;</td>
+        <td><span class="xref">IReadOnlyList</span>&lt;<span class="xref">System.Double</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -578,7 +551,7 @@ public IList&lt;ILayer&gt; InfoLayers { get; }</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Concurrent.ConcurrentQueue</span>&lt;<a class="xref" href="Mapsui.Widgets.IWidget.html">IWidget</a>&gt;</td>
+        <td><span class="xref">ConcurrentQueue</span>&lt;<a class="xref" href="Mapsui.Widgets.IWidget.html">IWidget</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -673,25 +646,25 @@ public IList&lt;ILayer&gt; InfoLayers { get; }</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Mapsui.Widgets.IWidget.html">IWidget</a>&gt;</td>
+        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Mapsui.Widgets.IWidget.html">IWidget</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Map_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_.md&amp;value=---%0Auid%3A%20Mapsui.Map.RefreshData(Mapsui.Geometries.BoundingBox%2CSystem.Double%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Map_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_Mapsui_ChangeType_.md&amp;value=---%0Auid%3A%20Mapsui.Map.RefreshData(Mapsui.Geometries.BoundingBox%2CSystem.Double%2CMapsui.ChangeType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Map.cs/#L216">View Source</a>
   </span>
   <a id="Mapsui_Map_RefreshData_" data-uid="Mapsui.Map.RefreshData*"></a>
-  <h4 id="Mapsui_Map_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_System_Boolean_" data-uid="Mapsui.Map.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,System.Boolean)">RefreshData(BoundingBox, Double, Boolean)</h4>
+  <h4 id="Mapsui_Map_RefreshData_Mapsui_Geometries_BoundingBox_System_Double_Mapsui_ChangeType_" data-uid="Mapsui.Map.RefreshData(Mapsui.Geometries.BoundingBox,System.Double,Mapsui.ChangeType)">RefreshData(BoundingBox, Double, ChangeType)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void RefreshData(BoundingBox extent, double resolution, bool majorChange)</code></pre>
+    <pre><code class="lang-csharp hljs">public void RefreshData(BoundingBox extent, double resolution, ChangeType changeType)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -714,8 +687,8 @@ public IList&lt;ILayer&gt; InfoLayers { get; }</code></pre>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">majorChange</span></td>
+        <td><a class="xref" href="Mapsui.ChangeType.html">ChangeType</a></td>
+        <td><span class="parametername">changeType</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -764,8 +737,7 @@ public IList&lt;ILayer&gt; InfoLayers { get; }</code></pre>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use your own hover event instead and call MapControl.GetMapInfo&quot;, true)]
-public event EventHandler&lt;MapInfoEventArgs&gt; Hover</code></pre>
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;MapInfoEventArgs&gt; Hover</code></pre>
   </div>
   <h5 class="eventType">Event Type</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -777,7 +749,7 @@ public event EventHandler&lt;MapInfoEventArgs&gt; Hover</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="Mapsui.UI.MapInfoEventArgs.html">MapInfoEventArgs</a>&gt;</td>
+        <td><span class="xref">EventHandler</span>&lt;<a class="xref" href="Mapsui.UI.MapInfoEventArgs.html">MapInfoEventArgs</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -794,8 +766,7 @@ public event EventHandler&lt;MapInfoEventArgs&gt; Hover</code></pre>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use MapControl.Info instead&quot;, true)]
-public event EventHandler&lt;MapInfoEventArgs&gt; Info</code></pre>
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;MapInfoEventArgs&gt; Info</code></pre>
   </div>
   <h5 class="eventType">Event Type</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -807,7 +778,7 @@ public event EventHandler&lt;MapInfoEventArgs&gt; Info</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="Mapsui.UI.MapInfoEventArgs.html">MapInfoEventArgs</a>&gt;</td>
+        <td><span class="xref">EventHandler</span>&lt;<a class="xref" href="Mapsui.UI.MapInfoEventArgs.html">MapInfoEventArgs</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -837,7 +808,7 @@ public event EventHandler&lt;MapInfoEventArgs&gt; Info</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.ComponentModel.PropertyChangedEventHandler</span></td>
+        <td><span class="xref">PropertyChangedEventHandler</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -854,8 +825,7 @@ public event EventHandler&lt;MapInfoEventArgs&gt; Info</code></pre>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Use PropertyChanged instead&quot;, true)]
-public event EventHandler RefreshGraphics</code></pre>
+    <pre><code class="lang-csharp hljs">public event EventHandler RefreshGraphics</code></pre>
   </div>
   <h5 class="eventType">Event Type</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -867,15 +837,12 @@ public event EventHandler RefreshGraphics</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.EventHandler</span></td>
+        <td><span class="xref">EventHandler</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <h3 id="implements">Implements</h3>
-  <div>
-      <span class="xref">System.ComponentModel.INotifyPropertyChanged</span>
-  </div>
   <div>
       <a class="xref" href="Mapsui.IMap.html">IMap</a>
   </div>

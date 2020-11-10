@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Mapsui.Rendering.Xaml.Tests
 {
-    public static class File
+    internal static class File
     {
         private static readonly string OriginalImagesFolder = Path.Combine(AssemblyDirectory, "Resources", "Images", "Original");
         private static readonly string GeneratedImagesFolder = Path.Combine(AssemblyDirectory, "Resources", "Images", "Generated");

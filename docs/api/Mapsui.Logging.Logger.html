@@ -90,35 +90,11 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">Logger</span></div>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.Logging.html">Mapsui.Logging</a></h6>
   <h6><strong>Assembly</strong>: Mapsui.dll</h6>
   <h5 id="Mapsui_Logging_Logger_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static class Logger</code></pre>
+    <pre><code class="lang-csharp hljs">public static class Logger : object</code></pre>
   </div>
   <h3 id="properties">Properties
   </h3>
@@ -147,7 +123,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Action</span>&lt;<a class="xref" href="Mapsui.Logging.LogLevel.html">LogLevel</a>, <span class="xref">System.String</span>, <span class="xref">System.Exception</span>&gt;</td>
+        <td><span class="xref">Action</span>&lt;<a class="xref" href="Mapsui.Logging.LogLevel.html">LogLevel</a>, <span class="xref">System.String</span>, <span class="xref">Exception</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -156,13 +132,13 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Logging_Logger_Log_Mapsui_Logging_LogLevel_System_String_System_Exception_.md&amp;value=---%0Auid%3A%20Mapsui.Logging.Logger.Log(Mapsui.Logging.LogLevel%2CSystem.String%2CSystem.Exception)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Logging_Logger_Log_Mapsui_Logging_LogLevel_System_String_Exception_.md&amp;value=---%0Auid%3A%20Mapsui.Logging.Logger.Log(Mapsui.Logging.LogLevel%2CSystem.String%2CException)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Logging/Logger.cs/#L22">View Source</a>
   </span>
   <a id="Mapsui_Logging_Logger_Log_" data-uid="Mapsui.Logging.Logger.Log*"></a>
-  <h4 id="Mapsui_Logging_Logger_Log_Mapsui_Logging_LogLevel_System_String_System_Exception_" data-uid="Mapsui.Logging.Logger.Log(Mapsui.Logging.LogLevel,System.String,System.Exception)">Log(LogLevel, String, Exception)</h4>
+  <h4 id="Mapsui_Logging_Logger_Log_Mapsui_Logging_LogLevel_System_String_Exception_" data-uid="Mapsui.Logging.Logger.Log(Mapsui.Logging.LogLevel,System.String,Exception)">Log(LogLevel, String, Exception)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -190,7 +166,7 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Exception</span></td>
+        <td><span class="xref">Exception</span></td>
         <td><span class="parametername">exception</span></td>
         <td></td>
       </tr>

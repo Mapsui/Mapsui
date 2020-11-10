@@ -6,16 +6,18 @@ namespace Mapsui.Fetcher
     /// <summary>
     /// Makes sure a method is always called 'MillisecondsToDelay' after the previous call.
     /// </summary>
-    class Delayer
+    public class Delayer
     {
         private readonly Timer _waitTimer;
         private Action _action;
-        private bool _waiting = false;
+        private bool _waiting;
 
         /// <summary>
         /// The delay between two calls.
         /// </summary>
         public int MillisecondsToWait { get; set; } = 500;
+
+        public bool StartWithDelay { get; set; } = false;
 
         public Delayer()
         {
@@ -41,7 +43,10 @@ namespace Mapsui.Fetcher
             else
             {
                 // If not waiting call the action immediately.
-                action();
+                if (!StartWithDelay)
+                    action();
+                else
+                    _action = action;
                 // Then wait for another interval to check if more actions come in.
                 StartWaiting();
             }

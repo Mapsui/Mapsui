@@ -10,6 +10,7 @@ using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.ExtensionMethods;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
+using Mapsui.Samples.CustomWidget;
 using Mapsui.UI;
 using Mapsui.UI.Android;
 
@@ -41,6 +42,7 @@ namespace Mapsui.Samples.Droid
             _mapControl.Map.RotationLock = true;
             _mapControl.UnSnapRotationDegrees = 30;
             _mapControl.ReSnapRotationDegrees = 5;
+            _mapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
 
             FindViewById<RelativeLayout>(Resource.Id.mainLayout).AddView(_popup = CreatePopup());
 

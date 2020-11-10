@@ -48,7 +48,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		appveyor-docs.yml = appveyor-docs.yml
 		appveyor.yml = appveyor.yml
-		licence.txt = licence.txt
+		LICENSE.md = LICENSE.md
 		Mapsui.Common.props = Mapsui.Common.props
 		Mapsui.ncrunchsolution = Mapsui.ncrunchsolution
 		Mapsui.sln.DotSettings = Mapsui.sln.DotSettings
@@ -136,8 +136,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.Forms.iOS", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.Forms.Mac", "Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Mac\Mapsui.Samples.Forms.Mac.csproj", "{975B6BBD-CD89-4A69-8F42-3C999D9F4D99}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mapsui.Samples.Forms.Shared", "Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\Mapsui.Samples.Forms.Shared.shproj", "{73FCB5F4-ABAF-4279-ACC2-4C9C8D9F5C40}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.Forms.UWP", "Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.UWP\Mapsui.Samples.Forms.UWP.csproj", "{28848162-20B7-46F1-8364-8B41B0393CD4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.CustomWidget", "Samples\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj", "{3EB5D6AA-8B52-4E93-9000-61EEE6D6B044}"
@@ -149,20 +147,15 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BruTileRepro.UWP", "..\BruTilePersistentStorageRepro\BruTileRepro\BruTileRepro.UWP\BruTileRepro.UWP.csproj", "{B6D19777-4843-427F-8348-4AA04A047BF2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BruTileRepro.iOS", "..\BruTilePersistentStorageRepro\BruTileRepro\BruTileRepro.iOS\BruTileRepro.iOS.csproj", "{31B59AD7-B80D-4D20-9FB0-8B8DC2EEB8F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.Forms.Shared", "Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\Mapsui.Samples.Forms.Shared.csproj", "{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{217bcf74-1da0-4fe5-a907-4a44f1b046ff}*SharedItemsImports = 5
 		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{239f2b0d-13cb-4bcf-83bf-f52d696a47b7}*SharedItemsImports = 13
-		Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\Mapsui.Samples.Forms.Shared.projitems*{28848162-20b7-46f1-8364-8b41b0393cd4}*SharedItemsImports = 4
 		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{29e628d1-8e8a-49c5-b0f9-555c0f68572a}*SharedItemsImports = 4
-		Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\Mapsui.Samples.Forms.Shared.projitems*{71353a7e-bfa9-4680-a345-ea19bf69f60e}*SharedItemsImports = 4
-		Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\Mapsui.Samples.Forms.Shared.projitems*{73fcb5f4-abaf-4279-acc2-4c9c8d9f5c40}*SharedItemsImports = 13
-		Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\Mapsui.Samples.Forms.Shared.projitems*{818de3fa-9f8a-4802-96d0-564497b59b21}*SharedItemsImports = 4
-		Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\Mapsui.Samples.Forms.Shared.projitems*{975b6bbd-cd89-4a69-8f42-3c999d9f4d99}*SharedItemsImports = 4
 		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{a9ed0aa7-b6f0-4946-8a08-7c531e5cfa9b}*SharedItemsImports = 4
 		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{ae693902-feda-4034-a7c5-9aa9872f7878}*SharedItemsImports = 5
-		Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\Mapsui.Samples.Forms.Shared.projitems*{de3b0cbf-cc20-4457-884b-2e5150b45a01}*SharedItemsImports = 4
 		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{e71f3053-056c-4381-9638-048ed73bdff6}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1824,6 +1817,54 @@ Global
 		{31B59AD7-B80D-4D20-9FB0-8B8DC2EEB8F5}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 		{31B59AD7-B80D-4D20-9FB0-8B8DC2EEB8F5}.Release|x64.ActiveCfg = Release|iPhone
 		{31B59AD7-B80D-4D20-9FB0-8B8DC2EEB8F5}.Release|x86.ActiveCfg = Release|iPhone
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Ad-Hoc|AnyCPU.ActiveCfg = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Ad-Hoc|AnyCPU.Build.0 = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Ad-Hoc|ARM.ActiveCfg = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Ad-Hoc|ARM.Build.0 = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Ad-Hoc|iPhone.ActiveCfg = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Ad-Hoc|iPhone.Build.0 = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Ad-Hoc|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Ad-Hoc|x64.ActiveCfg = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Ad-Hoc|x64.Build.0 = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Ad-Hoc|x86.ActiveCfg = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Ad-Hoc|x86.Build.0 = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.AppStore|AnyCPU.ActiveCfg = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.AppStore|AnyCPU.Build.0 = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.AppStore|ARM.ActiveCfg = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.AppStore|ARM.Build.0 = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.AppStore|iPhone.ActiveCfg = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.AppStore|iPhone.Build.0 = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.AppStore|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.AppStore|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.AppStore|x64.ActiveCfg = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.AppStore|x64.Build.0 = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.AppStore|x86.ActiveCfg = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.AppStore|x86.Build.0 = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Debug|AnyCPU.Build.0 = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Debug|ARM.Build.0 = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Debug|x64.Build.0 = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Debug|x86.Build.0 = Debug|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Release|AnyCPU.ActiveCfg = Release|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Release|AnyCPU.Build.0 = Release|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Release|ARM.ActiveCfg = Release|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Release|ARM.Build.0 = Release|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Release|iPhone.Build.0 = Release|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Release|x64.ActiveCfg = Release|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Release|x64.Build.0 = Release|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Release|x86.ActiveCfg = Release|Any CPU
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1850,10 +1891,10 @@ Global
 		{71353A7E-BFA9-4680-A345-EA19BF69F60E} = {1945A154-9CC6-492E-BC58-E65A19B479E1}
 		{DE3B0CBF-CC20-4457-884B-2E5150B45A01} = {1945A154-9CC6-492E-BC58-E65A19B479E1}
 		{975B6BBD-CD89-4A69-8F42-3C999D9F4D99} = {1945A154-9CC6-492E-BC58-E65A19B479E1}
-		{73FCB5F4-ABAF-4279-ACC2-4C9C8D9F5C40} = {1945A154-9CC6-492E-BC58-E65A19B479E1}
 		{28848162-20B7-46F1-8364-8B41B0393CD4} = {1945A154-9CC6-492E-BC58-E65A19B479E1}
 		{3EB5D6AA-8B52-4E93-9000-61EEE6D6B044} = {969DB691-49FB-4785-98F4-2112CC1BA7C4}
 		{818DE3FA-9F8A-4802-96D0-564497B59B21} = {1945A154-9CC6-492E-BC58-E65A19B479E1}
+		{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3} = {1945A154-9CC6-492E-BC58-E65A19B479E1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {22D684C3-0BD3-4D8A-AB23-748FB5527F6F}

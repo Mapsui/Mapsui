@@ -12,11 +12,11 @@ namespace Mapsui.Tests.Common
         
         public SampleTileProvider()
         {
-            AddTile(new TileIndex(0, 0, "0"));
-            AddTile(new TileIndex(0, 0, "1"));
-            AddTile(new TileIndex(0, 1, "1"));
-            AddTile(new TileIndex(1, 0, "1"));
-            AddTile(new TileIndex(1, 1, "1"));
+            AddTile(new TileIndex(0, 0, 0));
+            AddTile(new TileIndex(0, 0, 1));
+            AddTile(new TileIndex(0, 1, 1));
+            AddTile(new TileIndex(1, 0, 1));
+            AddTile(new TileIndex(1, 1, 1));
         }
 
         private void AddTile(TileIndex tileIndex)

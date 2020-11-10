@@ -54,10 +54,6 @@ namespace Mapsui.UI.Uwp
 
             Map = new Map();
 
-            // This will fail when multiple MapControls are used. Only the MapControl that is initialized last will 
-            // receive animation updates. Multiple MapControls in one app is not uncommon, think of minimaps for example.
-            Animation.AnimationTimer = new AnimationTimer(this);
-
             Loaded += MapControlLoaded;
 
             SizeChanged += MapControlSizeChanged;
@@ -75,7 +71,7 @@ namespace Mapsui.UI.Uwp
 
             var orientationSensor = SimpleOrientationSensor.GetDefault();
             if (orientationSensor != null)
-                orientationSensor.OrientationChanged += (sender, args) => RunOnUIThread(Refresh);
+                orientationSensor.OrientationChanged += (sender, args) => RunOnUIThread(() => Refresh());
         }
 
 
@@ -187,9 +183,7 @@ namespace Mapsui.UI.Uwp
 
             e.Surface.Canvas.Scale(PixelDensity, PixelDensity);
 
-            if (Animation.NeedsUpdate)
-                Animation.UpdateAnimations();
-
+            Navigator.UpdateAnimations();
             Renderer.Render(e.Surface.Canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
         }
 

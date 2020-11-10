@@ -93,6 +93,20 @@
 </ol>
 <h2 id="xaml-and-skia-side-by-side-in-mapsuisampleswpf">Xaml and Skia side by side in Mapsui.Samples.Wpf</h2>
 <p>The project Mapsui.Samples.Wpf has a dropdown on the top left to select between Skia and Wpf rendering. This is allows you to compare them.</p>
+<h2 id="renderer-abstraction-layer">Renderer abstraction layer</h2>
+<p>There is the question how much of the renderer should be abstracted away. An abstraction layer add extra complexity. Since it looks more and more like skiasharp will be the only renderer for as far as we can see we could just add that dependency to all our code and work directly with SkiaSharp classes, that may simplify some things. However, in the past we had to switch many times to different renderers, so I am not so sure if this won&#39;t happen again. So let&#39;s not settle for one renderer just yet. </p>
+<p>For context, these are the renderers Mapsui had in the past:</p>
+<ul>
+<li>System.Drawing</li>
+<li>System.Drawing for PocketPC</li>
+<li>Silverlight XAML</li>
+<li>WPF XAML</li>
+<li>UWP XAML (could later be merged with WPF XAML)</li>
+<li>iOS native rendering</li>
+<li>Android native rendering (this is actually internally using skia)</li>
+<li>OpenTK (this was not mature enough at that point)</li>
+<li>SkiaSharp</li>
+</ul>
 </article>
           </div>
           

@@ -58,6 +58,30 @@ namespace Mapsui.Rendering.Xaml.Tests
         }
 
         [Test]
+        public void RenderPointWithSvgSymbols()
+        {
+            // arrange
+            var map = SvgSymbolSample.CreateMap();
+            var viewport = new Viewport
+            {
+                Center = new Point(100, 100),
+                Width = 200,
+                Height = 200,
+                Resolution = 1
+            };
+            const string fileName = "points_with_svgsymbolstyle.png";
+
+            // act
+            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
+
+            // aside
+            File.WriteToGeneratedFolder(fileName, bitmap);
+
+            // assert
+            Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        }
+
+        [Test]
         public void RenderBitmapAtlas()
         {
             // arrange

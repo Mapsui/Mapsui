@@ -16,7 +16,6 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 using System;
-using BruTile;
 
 namespace Mapsui.Fetcher
 {
@@ -42,22 +41,22 @@ namespace Mapsui.Fetcher
         {
         }
 
-        public DataChangedEventArgs(Exception error, bool cancelled, TileInfo tileInfo)
-            : this(error, cancelled, tileInfo, string.Empty)
+        public DataChangedEventArgs(Exception error, bool cancelled, object info)
+            : this(error, cancelled, info, string.Empty)
         {
         }
 
-        public DataChangedEventArgs(Exception error, bool cancelled, TileInfo tileInfo, string layerName)
+        public DataChangedEventArgs(Exception error, bool cancelled, object info, string layerName)
         {
             Error = error;
             Cancelled = cancelled;
-            TileInfo = tileInfo;
+            Info = info;
             LayerName = layerName;
         }
 
         public Exception Error { get; }
         public bool Cancelled { get; }
-        public TileInfo TileInfo { get; } // todo: remove
+        public object Info { get; }
         public string LayerName { get; }
     }
 }
