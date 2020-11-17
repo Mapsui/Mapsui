@@ -138,9 +138,10 @@ namespace Mapsui.UI
                     }
                     else
                     {
-                        Logger.Log(LogLevel.Warning, $"Feature info not supported for lines with {localStyle.GetType()}");
+                        Logger.Log(LogLevel.Warning, localStyle != null
+                            ? $"Feature info not supported for lines with {localStyle.GetType()}"
+                            : $"Feature info with null style {feature.GetType()}");
                     }
-
                 }
             }
             else
