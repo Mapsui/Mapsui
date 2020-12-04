@@ -14,7 +14,6 @@
   <ItemGroup>
     <PackageReference Include="BruTile" Version="3.0.0" />
     <PackageReference Include="Svg2Xaml" Version="0.3.0.5" />
-    <PackageReference Include="System.Memory" Version="4.5.4" /> 
   </ItemGroup>
 
   <ItemGroup>
