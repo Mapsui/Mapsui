@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Mapsui Developers</Authors>
-    <PackageId>Mapsui.Geometries</PackageId>
+    <PackageId>Net45.Mapsui.Geometries</PackageId>
   </PropertyGroup>
 
 </Project>

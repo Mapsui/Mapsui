@@ -16,7 +16,7 @@
  
   <PropertyGroup>
     <DebugType>full</DebugType>
-    <PackageId>Mapsui</PackageId>
+    <PackageId>Net45.Mapsui</PackageId>
     <Description>Mapsui</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>

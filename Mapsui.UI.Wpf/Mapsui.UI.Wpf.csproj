@@ -41,7 +41,7 @@
 
   <PropertyGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageId>Mapsui.UI.Wpf</PackageId>
+    <PackageId>Net45.Mapsui.UI.Wpf</PackageId>
   </PropertyGroup>
 
 </Project>

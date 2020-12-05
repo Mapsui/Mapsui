@@ -26,7 +26,7 @@
 
   <PropertyGroup>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageId>Mapsui.Desktop</PackageId>
+    <PackageId>Net45.Mapsui.Desktop</PackageId>
   </PropertyGroup>
 
 </Project>

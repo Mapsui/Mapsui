@@ -31,7 +31,7 @@
 
   <PropertyGroup>
     <DebugType>full</DebugType>
-    <PackageId>Mapsui.Rendering.Xaml</PackageId>
+    <PackageId>Net45.Mapsui.Rendering.Xaml</PackageId>
     <Description>Mapsui</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>

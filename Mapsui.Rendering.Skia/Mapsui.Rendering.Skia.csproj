@@ -24,7 +24,7 @@
 
   <PropertyGroup>
     <DebugType>full</DebugType>
-    <PackageId>Mapsui.Rendering.Skia</PackageId>
+    <PackageId>Net45.Mapsui.Rendering.Skia</PackageId>
     <Description>Mapsui</Description>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
