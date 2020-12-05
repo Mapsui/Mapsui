@@ -264,6 +264,15 @@ namespace Mapsui.Rendering.Xaml
                 return;
             }
 
+#if NET45
+            _formattedText = new FormattedText(
+              Text ?? "",
+              CultureInfo.CurrentUICulture,
+              FlowDirection,
+              new Typeface(FontFamily, FontStyle, FontWeight, FontStretch),
+              FontSize,
+              Brushes.Black);
+#else
             _formattedText = new FormattedText(
               Text ?? "",
               CultureInfo.CurrentUICulture,
@@ -271,8 +280,8 @@ namespace Mapsui.Rendering.Xaml
               new Typeface(FontFamily, FontStyle, FontWeight, FontStretch),
               FontSize,
               Brushes.Black,
-              1);
-
+              1d);
+#endif
             UpdateFormattedText();
         }
 

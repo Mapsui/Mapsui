@@ -12,5 +12,14 @@
     <RepositoryUrl>https://github.com/Mapsui/Mapsui</RepositoryUrl>
     <Authors>Mapsui Developers</Authors>
     <Company>Mapsui Developers</Company>
+    <PackageIcon>icon.svg</PackageIcon>
   </PropertyGroup>
+
+
+  <ItemGroup>
+    <None Include="..\logo\editablefiles\icon.svg">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 </Project>

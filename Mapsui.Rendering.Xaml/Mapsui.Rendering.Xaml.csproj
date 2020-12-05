@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="../Mapsui.Common.props" />
   <PropertyGroup>
-    <TargetFramework>net48</TargetFramework>
+    <TargetFrameworks>net45;net462</TargetFrameworks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <LangVersion>latest</LangVersion>
@@ -28,11 +28,12 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System.Xaml" />
   </ItemGroup>
-  
+
   <PropertyGroup>
     <DebugType>full</DebugType>
-    <PackageId>Mapsui</PackageId>
+    <PackageId>Mapsui.Rendering.Xaml</PackageId>
     <Description>Mapsui</Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
 </Project>

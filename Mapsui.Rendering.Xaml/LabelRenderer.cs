@@ -8,7 +8,7 @@ namespace Mapsui.Rendering.Xaml
 {
     internal static class LabelRenderer
     {
-        public static UIElement RenderLabel(Geometries.Point position, LabelStyle labelStyle, IReadOnlyViewport viewport, 
+        public static UIElement RenderLabel(Geometries.Point position, LabelStyle labelStyle, IReadOnlyViewport viewport,
             string labelText)
         {
             var screenPosition = viewport.WorldToScreen(position);
@@ -62,6 +62,16 @@ namespace Mapsui.Rendering.Xaml
 
         private static void DetermineTextWidthAndHeightWpf(out double width, out double height, LabelStyle style, string text)
         {
+#if NET45
+            // in WPF the width and height is not calculated at this point. So we use FormattedText
+            var formattedText = new FormattedText(
+                text,
+                CultureInfo.InvariantCulture,
+                FlowDirection.LeftToRight,
+                new Typeface(style.Font.FontFamily),
+                style.Font.Size,
+                new SolidColorBrush(style.ForeColor.ToXaml()));
+#else
             // in WPF the width and height is not calculated at this point. So we use FormattedText
             var formattedText = new FormattedText(
                 text,
@@ -71,7 +81,7 @@ namespace Mapsui.Rendering.Xaml
                 style.Font.Size,
                 new SolidColorBrush(style.ForeColor.ToXaml()),
                 1);
-
+#endif
             width = formattedText.Width;
             height = formattedText.Height;
         }
