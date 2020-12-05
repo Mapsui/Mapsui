@@ -12,7 +12,7 @@
     <RepositoryUrl>https://github.com/Mapsui/Mapsui</RepositoryUrl>
     <Authors>Mapsui Developers</Authors>
     <Company>Mapsui Developers</Company>
-    <PackageIcon>icon.svg</PackageIcon>
+    <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
 
 
