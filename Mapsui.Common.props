@@ -17,7 +17,7 @@
 
 
   <ItemGroup>
-    <None Include="..\logo\editablefiles\icon.svg">
+    <None Include="..\logo\png\icon.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
