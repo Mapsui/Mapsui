@@ -1,15 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net48</TargetFramework>
+    <TargetFrameworks>net48;netcoreapp3.1</TargetFrameworks>
     <Version>2.0.0</Version>
     <Authors>Mapsui Contributers</Authors>
   </PropertyGroup>
-
-  <ItemGroup>
-    <!--<PackageReference Include="" Version=""/>-->
-
-    <Folder Include="Properties\" />
-  </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Images\icon.png">

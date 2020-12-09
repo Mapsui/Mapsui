@@ -11,7 +11,6 @@ using Mapsui.Samples.Wpf.Utilities;
 using Mapsui.UI;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Desktop;
-using SQLitePCL;
 
 namespace Mapsui.Samples.Wpf
 {
