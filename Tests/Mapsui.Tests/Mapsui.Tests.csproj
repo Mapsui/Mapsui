@@ -1,84 +1,23 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{512DB2DB-61A0-4723-A6AC-E9AE23243283}</ProjectGuid>
+    <TargetFramework>net48</TargetFramework>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Mapsui.Tests</RootNamespace>
-    <AssemblyName>Mapsui.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Numerics" />
-  </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Mapsui.Rendering.Xaml.Tests\File.cs">
       <Link>File.cs</Link>
     </Compile>
-    <Compile Include="Fetcher\CountingTileProvider.cs" />
-    <Compile Include="Fetcher\FeatureFetcherTests.cs" />
-    <Compile Include="Fetcher\NullTileProvider.cs" />
-    <Compile Include="Fetcher\SometimesFailingTileProvider.cs" />
-    <Compile Include="Fetcher\FailingTileProvider.cs" />
-    <Compile Include="Fetcher\FetchMachineTests.cs" />
-    <Compile Include="Layers\ImageLayerTests.cs" />
-    <Compile Include="Layers\LayerCollectionTests.cs" />
-    <Compile Include="Layers\RasterizingLayerTests.cs" />
-    <Compile Include="Layers\WritableLayerTests.cs" />
-    <Compile Include="Projection\TransformTests.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Providers\FeaturesTests.cs" />
-    <Compile Include="Rendering\RenderFetchStrategyTests.cs" />
-    <Compile Include="Styles\Color.cs" />
-    <Compile Include="Styles\BitmapRegistryTests.cs" />
-    <Compile Include="UI\FeatureInfoTests.cs" />
-    <Compile Include="UI\ViewportLimiterTests.cs" />
-    <Compile Include="Utilities\StreamHelperTests.cs" />
-    <Compile Include="Utilities\VersionTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Mapsui.Geometries\Mapsui.Geometries.csproj">
-      <Project>{EE55B62D-FFA2-4C24-A4AD-7A47ACE55CE5}</Project>
-      <Name>Mapsui.Geometries</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Mapsui.Rendering.Xaml\Mapsui.Rendering.Xaml.csproj">
-      <Project>{5dc32b05-0b6e-478f-a9fb-57762aa2f814}</Project>
-      <Name>Mapsui.Rendering.Xaml</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Mapsui\Mapsui.csproj">
-      <Project>{D74C052A-C07E-4B37-A898-134218ACA5C9}</Project>
-      <Name>Mapsui</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\..\Mapsui.Geometries\Mapsui.Geometries.csproj" />
+    <ProjectReference Include="..\..\Mapsui.Rendering.Xaml\Mapsui.Rendering.Xaml.csproj" />
+    <ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
@@ -126,7 +65,6 @@
       <Version>4.3.0</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="Resources\Images\Original\Pin.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -138,12 +76,4 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
