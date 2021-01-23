@@ -153,7 +153,7 @@
       <Version>4.5.0.6</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>4.6.0.1073</Version>
+      <Version>5.0.0.1905</Version>
     </PackageReference>
     <PackageReference Include="sqlite-net-pcl">
       <Version>1.6.292</Version>
@@ -168,11 +168,11 @@
       <Name>Mapsui.Geometries</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj">
-      <Project>{DEA6E9AE-2B6A-4E83-83B7-E9DF0E492301}</Project>
+      <Project>{AE632270-38CA-4203-93A5-8612629CD944}</Project>
       <Name>Mapsui.Rendering.Skia</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Mapsui.UI.Forms\Mapsui.UI.Forms.csproj">
-      <Project>{06E3EBF5-49A2-4C71-948A-1720831213D4}</Project>
+      <Project>{217BCF74-1DA0-4FE5-A907-4A44F1B046FF}</Project>
       <Name>Mapsui.UI.Forms</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Mapsui\Mapsui.csproj">
