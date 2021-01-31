@@ -8,6 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net;
+using System.Xml.XPath;
 using Mapsui.Providers.Wfs.Xml;
 using Mapsui.Utilities;
 
@@ -54,7 +55,7 @@ namespace Mapsui.Providers.Wfs
         private IXPathQueryManager _featureTypeInfoQueryManager;
         private string _nsPrefix;
         private bool _getFeatureGetRequest;
-        private string _label;
+        private List<string> _labels = new List<string>();
         private bool _multiGeometries = true;
         private IFilter _ogcFilter;
         private bool _quickGeometries;
@@ -129,10 +130,10 @@ namespace Mapsui.Providers.Wfs
         /// <summary>
         /// Gets or sets the property of the featuretype responsible for labels
         /// </summary>
-        public string Label
+        public List<string> Labels
         {
-            get { return _label; }
-            set { _label = value; }
+            get { return _labels; }
+            set { _labels = value; }
         }
 
         
@@ -274,15 +275,15 @@ namespace Mapsui.Providers.Wfs
 
             GeometryFactory geomFactory = null;
 
-            if (!string.IsNullOrEmpty(_label))
+            if (_labels != null && _labels.Count > 0)
             {
-                _featureTypeInfo.LableField = _label;
+                _featureTypeInfo.LabelFields = _labels;
                 _quickGeometries = false;
             }
 
             // Configuration for GetFeature request */
             var config = new WFSClientHttpConfigurator(_textResources);
-            config.ConfigureForWfsGetFeatureRequest(_httpClientUtil, _featureTypeInfo, _label, bbox, _ogcFilter,
+            config.ConfigureForWfsGetFeatureRequest(_httpClientUtil, _featureTypeInfo, _labels, bbox, _ogcFilter,
                                                     _getFeatureGetRequest);
 
             try
@@ -588,6 +589,24 @@ namespace Mapsui.Providers.Wfs
                     /* Just, if not set manually... */
                     if (geomType == null)
                         geomType = geomQuery.GetValueFromNode(geomQuery.Compile(_textResources.XPATH_TYPEATTRIBUTEQUERY));
+                    
+                    /* read all the elements */
+                    var iterator = geomQuery.GetIterator(geomQuery.Compile("//ancestor::xs:sequence/xs:element"));
+                    foreach (XPathNavigator node in iterator)
+                    {
+                        node.MoveToAttribute("type", string.Empty);
+                        var type = node.Value;
+
+                        if (type.StartsWith("gml:")) // we skip geometry element cause we already found it
+                            continue;
+
+                        node.MoveToParent();
+
+                        node.MoveToAttribute("name", string.Empty);
+                        var name = node.Value;
+
+                        _featureTypeInfo.Elements.Add(new WfsFeatureTypeInfo.ElementInfo(name, type));
+                    }
                 }
                 else
                 {
@@ -785,7 +804,7 @@ namespace Mapsui.Providers.Wfs
             /// The <see cref="HttpClientUtil"/> instance is returned for immediate usage. 
             /// </summary>
             internal void ConfigureForWfsGetFeatureRequest(HttpClientUtil httpClientUtil, 
-                WfsFeatureTypeInfo featureTypeInfo, string labelProperty, BoundingBox boundingBox,
+                WfsFeatureTypeInfo featureTypeInfo, List<string> labelProperties, BoundingBox boundingBox,
                 IFilter filter, bool get)
             {
                 httpClientUtil.Reset();
@@ -795,13 +814,13 @@ namespace Mapsui.Providers.Wfs
                 {
                     /* HTTP-GET */
                     httpClientUtil.Url += _wfsTextResources.GetFeatureGETRequest(
-                        featureTypeInfo, labelProperty, boundingBox, filter);
+                        featureTypeInfo, labelProperties, boundingBox, filter);
                 }
                 else
                 {
                     /* HTTP-POST */
                     httpClientUtil.PostData = _wfsTextResources.GetFeaturePOSTRequest(
-                        featureTypeInfo, labelProperty, boundingBox, filter);
+                        featureTypeInfo, labelProperties, boundingBox, filter);
                     httpClientUtil.AddHeader(HttpRequestHeader.ContentType.ToString(), "text/xml");
                 }
             }

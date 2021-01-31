@@ -55,7 +55,25 @@ namespace Mapsui.Providers.Wfs.Xml
         /// </summary>
         public abstract IXPathQueryManager Clone();
 
+        /// <summary>
+        /// This method invokes the corresponding method of the inherent <see cref="IXPathQueryManager"/> instance.
+        /// </summary>
+        /// <param name="xPath">A compiled XPath expression</param>
+        public virtual XPathNodeIterator GetIterator(XPathExpression xPath)
+        {
+            return XPathQueryManager.GetIterator(xPath);
+        }
 
+        /// <summary>
+        /// This method invokes the corresponding method of the inherent <see cref="IXPathQueryManager"/> instance.
+        /// </summary>
+        /// <param name="xPath">A compiled XPath expression</param>
+        /// <param name="queryParameters">Parameters for the compiled XPath expression</param>
+        public virtual XPathNodeIterator GetIterator(XPathExpression xPath, DictionaryEntry[] queryParameters)
+        {
+            return XPathQueryManager.GetIterator(xPath, queryParameters);
+        }
+        
         /// <summary>
         /// This method invokes the corresponding method of the inherent <see cref="IXPathQueryManager"/> instance.
         /// </summary>

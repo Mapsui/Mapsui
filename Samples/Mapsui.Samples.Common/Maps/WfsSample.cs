@@ -163,7 +163,7 @@ namespace Mapsui.Samples.Common.Maps
             // If a label property is set, the quick geometry option is automatically set to 'false'.
             const string labelField = "STATE_NAME";
             var provider = CreateStatesProvider(getCapabilitiesUri);
-            provider.Label = labelField;
+            provider.Labels.Add(labelField);
 
             return new Layer("labels")
             {

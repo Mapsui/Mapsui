@@ -49,10 +49,14 @@ namespace Mapsui.Providers.Wfs.Utilities
 
             try
             {
-                if (featureTypeInfo.LableField != null)
+                if (featureTypeInfo.LabelFields != null)
                 {
-                    LabelNode = new PathNode(FeatureTypeInfo.FeatureTypeNamespace, featureTypeInfo.LableField, 
-                                              (NameTable) XmlReader.NameTable);
+                    var pathNodes = new IPathNode[featureTypeInfo.LabelFields.Count];
+                    for (var i = 0; i < pathNodes.Length; i++)
+                    {
+                        pathNodes[i] = new PathNode(FeatureTypeInfo.FeatureTypeNamespace, featureTypeInfo.LabelFields[i], (NameTable) XmlReader.NameTable);
+                    }
+                    LabelNode = new AlternativePathNodesCollection(pathNodes);
                 }
             }
             catch (Exception ex)
@@ -120,14 +124,14 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// This method retrieves an XmlReader within a specified context.
         /// </summary>
         /// <param name="reader">An XmlReader instance that is the origin of a created sub-reader</param>
-        /// <param name="labelValue">A string array for recording a found label value. Pass 'null' to ignore searching for label values</param>
+        /// <param name="labels">A dictionary for recording label values. Pass 'null' to ignore searching for label values</param>
         /// <param name="pathNodes">A list of <see cref="IPathNode"/> instances defining the context of the retrieved reader</param>
         /// <returns>A sub-reader of the XmlReader given as argument</returns>
-        protected XmlReader GetSubReaderOf(XmlReader reader, string[] labelValue, params IPathNode[] pathNodes)
+        protected XmlReader GetSubReaderOf(XmlReader reader, Dictionary<string, string> labels, params IPathNode[] pathNodes)
         {
             _pathNodes.Clear();
             _pathNodes.AddRange(pathNodes);
-            return GetSubReaderOf(reader, labelValue, _pathNodes);
+            return GetSubReaderOf(reader, labels, _pathNodes);
         }
 
         /// <summary>
@@ -135,10 +139,10 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// Moreover it collects label values before or after a geometry could be found.
         /// </summary>
         /// <param name="reader">An XmlReader instance that is the origin of a created sub-reader</param>
-        /// <param name="labelValue">A string array for recording a found label value. Pass 'null' to ignore searching for label values</param>
+        /// <param name="labels">A dictionary for recording label values. Pass 'null' to ignore searching for label values</param>
         /// <param name="pathNodes">A list of <see cref="IPathNode"/> instances defining the context of the retrieved reader</param>
         /// <returns>A sub-reader of the XmlReader given as argument</returns>
-        protected XmlReader GetSubReaderOf(XmlReader reader, string[] labelValue, List<IPathNode> pathNodes)
+        protected XmlReader GetSubReaderOf(XmlReader reader, Dictionary<string, string> labels, List<IPathNode> pathNodes)
         {
             while (reader.Read())
             {
@@ -154,10 +158,19 @@ namespace Mapsui.Providers.Wfs.Utilities
                         return reader.ReadSubtree();
                     }
 
-                    if (labelValue != null)
+                    if (labels != null)
                         if (LabelNode != null)
                             if (LabelNode.Matches(reader))
-                                labelValue[0] = reader.ReadElementString();
+                            {
+                                var labelName = reader.Name;
+                                var labelValue = reader.ReadString();
+
+                                // remove the namespace
+                                if (labelName.Contains(":"))
+                                    labelName = labelName.Split(':')[1];
+
+                                labels.Add(labelName, labelValue);
+                            }
 
 
                     if (!ServiceExceptionNode.Matches(reader)) continue;
@@ -172,13 +185,23 @@ namespace Mapsui.Providers.Wfs.Utilities
         }
 
         /// <summary>
-        /// This method adds a label to the collection.
+        /// This method adds labels to the collection.
         /// </summary>
-        protected IFeature CreateFeature(Geometry geom, string labelField, string labelValue)
+        protected IFeature AddLabel(Dictionary<string, string> labelValues, IGeometry geom)
         {
             var feature = new Feature();
-            if (labelField != null) feature[labelField] = labelValue;
+            foreach (var keyPair in labelValues)
+            {
+                var labelName = keyPair.Key;
+                var labelValue = keyPair.Value;
+
+                feature[labelName] = labelValue;
+            }
+
             feature.Geometry = geom;
+
+            labelValues.Clear();
+            
             return feature;
         }
 
@@ -291,7 +314,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         internal override Collection<Geometry> CreateGeometries(Features features)
         {
             IPathNode pointNode = new PathNode(Gmlns, "Point", (NameTable) XmlReader.NameTable);
-            var labelValue = new string[1];
+            var labelValues = new Dictionary<string, string>();
             bool geomFound = false;
 
             try
@@ -299,12 +322,12 @@ namespace Mapsui.Providers.Wfs.Utilities
                 // Reading the entire feature's node makes it possible to collect label values that may appear before or after the geometry property
                 while ((FeatureReader = GetSubReaderOf(XmlReader, null, FeatureNode)) != null)
                 {
-                    while ((GeomReader = GetSubReaderOf(FeatureReader, labelValue, pointNode, CoordinatesNode)) != null)
+                    while ((GeomReader = GetSubReaderOf(FeatureReader, labelValues, pointNode, CoordinatesNode)) != null)
                     {
                         Geoms.Add(ParseCoordinates(GeomReader)[0]);
                         geomFound = true;
                     }
-                    if (geomFound) features.Add(CreateFeature(Geoms[Geoms.Count - 1], FeatureTypeInfo.LableField, labelValue[0]));
+                    if (geomFound) features.Add(AddLabel(labelValues, Geoms[Geoms.Count - 1]));
                     geomFound = false;
                 }
             }
@@ -357,7 +380,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         internal override Collection<Geometry> CreateGeometries(Features features)
         {
             IPathNode lineStringNode = new PathNode(Gmlns, "LineString", (NameTable) XmlReader.NameTable);
-            var labelValue = new string[1];
+            var labelValues = new Dictionary<string, string>();
             bool geomFound = false;
 
             try
@@ -366,13 +389,13 @@ namespace Mapsui.Providers.Wfs.Utilities
                 while ((FeatureReader = GetSubReaderOf(XmlReader, null, FeatureNode)) != null)
                 {
                     while (
-                        (GeomReader = GetSubReaderOf(FeatureReader, labelValue, lineStringNode, CoordinatesNode)) !=
+                        (GeomReader = GetSubReaderOf(FeatureReader, labelValues, lineStringNode, CoordinatesNode)) !=
                         null)
                     {
                         Geoms.Add(new LineString(ParseCoordinates(GeomReader)));
                         geomFound = true;
                     }
-                    if (geomFound) features.Add(CreateFeature(Geoms[Geoms.Count - 1], FeatureTypeInfo.LableField, labelValue[0]));
+                    if (geomFound) features.Add(AddLabel(labelValues, Geoms[Geoms.Count - 1]));
                     geomFound = false;
                 }
             }
@@ -432,7 +455,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             IPathNode interiorNode = new PathNode(Gmlns, "interior", (NameTable) XmlReader.NameTable);
             IPathNode innerBoundaryNodeAlt = new AlternativePathNodesCollection(innerBoundaryNode, interiorNode);
             IPathNode linearRingNode = new PathNode(Gmlns, "LinearRing", (NameTable) XmlReader.NameTable);
-            var labelValue = new string[1];
+            var labelValues = new Dictionary<string, string>();
             bool geomFound = false;
 
             try
@@ -440,7 +463,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                 // Reading the entire feature's node makes it possible to collect label values that may appear before or after the geometry property
                 while ((FeatureReader = GetSubReaderOf(XmlReader, null, FeatureNode)) != null)
                 {
-                    while ((GeomReader = GetSubReaderOf(FeatureReader, labelValue, polygonNode)) != null)
+                    while ((GeomReader = GetSubReaderOf(FeatureReader, labelValues, polygonNode)) != null)
                     {
                         var polygon = new Polygon();
 
@@ -461,7 +484,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                         Geoms.Add(polygon);
                         geomFound = true;
                     }
-                    if (geomFound) features.Add(CreateFeature(Geoms[Geoms.Count - 1], FeatureTypeInfo.LableField, labelValue[0]));
+                    if (geomFound) features.Add(AddLabel(labelValues, Geoms[Geoms.Count - 1]));
                     geomFound = false;
                 }
             }
@@ -513,7 +536,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         {
             IPathNode multiPointNode = new PathNode(Gmlns, "MultiPoint", (NameTable) XmlReader.NameTable);
             IPathNode pointMemberNode = new PathNode(Gmlns, "pointMember", (NameTable) XmlReader.NameTable);
-            var labelValue = new string[1];
+            var labelValues = new Dictionary<string, string>();
             bool geomFound = false;
 
             try
@@ -522,7 +545,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                 while ((FeatureReader = GetSubReaderOf(XmlReader, null, FeatureNode)) != null)
                 {
                     while (
-                        (GeomReader = GetSubReaderOf(FeatureReader, labelValue, multiPointNode, pointMemberNode)) !=
+                        (GeomReader = GetSubReaderOf(FeatureReader, labelValues, multiPointNode, pointMemberNode)) !=
                         null)
                     {
                         var multiPoint = new MultiPoint();
@@ -538,7 +561,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                         Geoms.Add(multiPoint);
                         geomFound = true;
                     }
-                    if (geomFound) features.Add(CreateFeature(Geoms[Geoms.Count - 1], FeatureTypeInfo.LableField, labelValue[0]));
+                    if (geomFound) features.Add(AddLabel(labelValues, Geoms[Geoms.Count - 1]));
                     geomFound = false;
                 }
             }
@@ -594,7 +617,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             IPathNode lineStringMemberNode = new PathNode(Gmlns, "lineStringMember", (NameTable) XmlReader.NameTable);
             IPathNode curveMemberNode = new PathNode(Gmlns, "curveMember", (NameTable) XmlReader.NameTable);
             IPathNode lineStringMemberNodeAlt = new AlternativePathNodesCollection(lineStringMemberNode, curveMemberNode);
-            var labelValue = new string[1];
+            var labelValues = new Dictionary<string, string>();
             bool geomFound = false;
 
             try
@@ -604,7 +627,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                 {
                     while (
                         (GeomReader =
-                         GetSubReaderOf(FeatureReader, labelValue, multiLineStringNodeAlt, lineStringMemberNodeAlt)) !=
+                         GetSubReaderOf(FeatureReader, labelValues, multiLineStringNodeAlt, lineStringMemberNodeAlt)) !=
                         null)
                     {
                         var multiLineString = new MultiLineString();
@@ -620,7 +643,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                         Geoms.Add(multiLineString);
                         geomFound = true;
                     }
-                    if (geomFound) features.Add(CreateFeature(Geoms[Geoms.Count - 1], FeatureTypeInfo.LableField, labelValue[0]));
+                    if (geomFound) features.Add(AddLabel(labelValues, Geoms[Geoms.Count - 1]));
                     geomFound = false;
                 }
             }
@@ -675,7 +698,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             IPathNode surfaceMemberNode = new PathNode(Gmlns, "surfaceMember", (NameTable) XmlReader.NameTable);
             IPathNode polygonMemberNodeAlt = new AlternativePathNodesCollection(polygonMemberNode, surfaceMemberNode);
             IPathNode linearRingNode = new PathNode(Gmlns, "LinearRing", (NameTable) XmlReader.NameTable);
-            var labelValue = new string[1];
+            var labelValues = new Dictionary<string, string>();
             bool geomFound = false;
 
             try
@@ -685,7 +708,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                 {
                     while (
                         (GeomReader =
-                         GetSubReaderOf(FeatureReader, labelValue, multiPolygonNodeAlt, polygonMemberNodeAlt)) != null)
+                         GetSubReaderOf(FeatureReader, labelValues, multiPolygonNodeAlt, polygonMemberNodeAlt)) != null)
                     {
                         var multiPolygon = new MultiPolygon();
                         GeometryFactory geomFactory = new PolygonFactory(GeomReader, FeatureTypeInfo);
@@ -700,7 +723,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                         Geoms.Add(multiPolygon);
                         geomFound = true;
                     }
-                    if (geomFound) features.Add(CreateFeature(Geoms[Geoms.Count - 1], FeatureTypeInfo.LableField, labelValue[0]));
+                    if (geomFound) features.Add(AddLabel(labelValues, Geoms[Geoms.Count - 1]));
                     geomFound = false;
                 }
             }

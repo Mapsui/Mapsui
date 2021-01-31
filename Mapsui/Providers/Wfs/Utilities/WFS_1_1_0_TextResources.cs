@@ -1,6 +1,7 @@
 // WFS provider by Peter Robineau (peter.robineau@gmx.at)
 // This file can be redistributed and/or modified under the terms of the GNU Lesser General Public License.
 
+using System.Collections.Generic;
 using Mapsui.Geometries;
 using System.IO;
 using System.Text;
@@ -41,10 +42,10 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// This method returns the query string for 'GetFeature'.
         /// </summary>
         /// <param name="featureTypeInfo">A <see cref="WfsFeatureTypeInfo"/> instance providing metadata of the featuretype to query</param>
-        /// <param name="labelProperty"></param>
+        /// <param name="labelProperties"></param>
         /// <param name="boundingBox">The bounding box of the query</param>
         /// <param name="filter">An instance implementing <see cref="IFilter"/></param>
-        public string GetFeatureGETRequest(WfsFeatureTypeInfo featureTypeInfo, string labelProperty, BoundingBox boundingBox, IFilter filter)
+        public string GetFeatureGETRequest(WfsFeatureTypeInfo featureTypeInfo, List<string> labelProperties, BoundingBox boundingBox, IFilter filter)
         {
             string qualification = string.IsNullOrEmpty(featureTypeInfo.Prefix)
                                        ? string.Empty
@@ -97,10 +98,10 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// This method returns the POST request for 'GetFeature'.
         /// </summary>
         /// <param name="featureTypeInfo">A <see cref="WfsFeatureTypeInfo"/> instance providing metadata of the featuretype to query</param>
-        /// <param name="labelProperty">A property necessary for label rendering</param>
+        /// <param name="labelProperties">A list of properties necessary for label rendering</param>
         /// <param name="boundingBox">The bounding box of the query</param>
         /// <param name="filter">An instance implementing <see cref="IFilter"/></param>
-        public byte[] GetFeaturePOSTRequest(WfsFeatureTypeInfo featureTypeInfo, string labelProperty,
+        public byte[] GetFeaturePOSTRequest(WfsFeatureTypeInfo featureTypeInfo, List<string> labelProperties,
                                             BoundingBox boundingBox, IFilter filter)
         {
             string qualification = string.IsNullOrEmpty(featureTypeInfo.Prefix)
@@ -123,8 +124,11 @@ namespace Mapsui.Providers.Wfs.Utilities
                     xWriter.WriteStartElement("Query", NSWFS);
                     xWriter.WriteAttributeString("typeName", qualification + featureTypeInfo.Name);
                     xWriter.WriteElementString("PropertyName", qualification + featureTypeInfo.Geometry.GeometryName);
-                    if (!string.IsNullOrEmpty(labelProperty))
-                        xWriter.WriteElementString("PropertyName", qualification + labelProperty);
+                    foreach (var labelProperty in labelProperties)
+                    {
+                        if (!string.IsNullOrEmpty(labelProperty))
+                            xWriter.WriteElementString("PropertyName", qualification + labelProperty);
+                    }
                     xWriter.WriteStartElement("Filter", NSOGC);
                     if (filter != null) xWriter.WriteStartElement("And");
                     xWriter.WriteStartElement("BBOX");

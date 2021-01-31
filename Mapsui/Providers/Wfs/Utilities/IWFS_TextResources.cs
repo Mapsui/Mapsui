@@ -1,6 +1,7 @@
 // WFS provider by Peter Robineau (peter.robineau@gmx.at)
 // This file can be redistributed and/or modified under the terms of the GNU Lesser General Public License.
 
+using System.Collections.Generic;
 using Mapsui.Geometries;
 // ReSharper disable InconsistentNaming // Not going to fix these unless there is work done on WFS
 
@@ -42,9 +43,9 @@ namespace Mapsui.Providers.Wfs.Utilities
         string XPATH_TYPEATTRIBUTEQUERY { get; }
         string DescribeFeatureTypeRequest(string featureTypeName);
         string GetCapabilitiesRequest();
-        string GetFeatureGETRequest(WfsFeatureTypeInfo featureTypeInfo, string labelProperty, 
+        string GetFeatureGETRequest(WfsFeatureTypeInfo featureTypeInfo, List<string> labelProperties, 
             BoundingBox boundingBox, IFilter filter);
-        byte[] GetFeaturePOSTRequest(WfsFeatureTypeInfo featureTypeInfo, string labelProperty, 
+        byte[] GetFeaturePOSTRequest(WfsFeatureTypeInfo featureTypeInfo, List<string> labelProperties, 
             BoundingBox boundingBox, IFilter filter);
     }
 }
