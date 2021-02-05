@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using Mapsui.Rendering.Skia;
+using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.UI;
 using Mapsui.UI.Forms;
@@ -23,7 +24,7 @@ namespace Mapsui.Samples.Forms.Shared
             var mapView = (MapView)sender;
             var mapClickedArgs = (MapClickedEventArgs)args;
 
-            var assembly = typeof(MainPageLarge).GetTypeInfo().Assembly;
+            var assembly = typeof(AllSamples).GetTypeInfo().Assembly;
             foreach (var str in assembly.GetManifestResourceNames())
                 System.Diagnostics.Debug.WriteLine(str);
 
@@ -50,6 +51,7 @@ namespace Mapsui.Samples.Forms.Shared
                     pin.Callout.Padding = new Thickness(_random.Next(0, 20), _random.Next(0, 20));
                     pin.Callout.BackgroundColor = Color.White;
                     pin.Callout.RotateWithMap = true;
+                    pin.Callout.IsClosableByClick = true;
                     pin.Callout.Color = pin.Color;
                     if (_random.Next(0, 3) < 2)
                     {
@@ -89,9 +91,6 @@ namespace Mapsui.Samples.Forms.Shared
                     pin.ShowCallout();
                     break;
                 case 2:
-                    foreach (var r in assembly.GetManifestResourceNames())
-                        System.Diagnostics.Debug.WriteLine(r);
-
                     var resourceName = "Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg";
                     var stream = assembly.GetManifestResourceStream(resourceName);
                     if (stream == null) throw new Exception($"Could not find EmbeddedResource {resourceName}");
