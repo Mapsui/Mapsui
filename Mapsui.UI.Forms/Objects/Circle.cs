@@ -73,7 +73,7 @@ namespace Mapsui.UI.Forms
                     UpdateFeature();
                     break;
                 case nameof(FillColor):
-                    ((VectorStyle)Feature.Styles.First()).Fill = new Brush(FillColor.ToMapsui());
+                    ((VectorStyle)Feature.Styles.First()).Fill = new Styles.Brush(FillColor.ToMapsui());
                     break;
             }
         }
@@ -96,7 +96,7 @@ namespace Mapsui.UI.Forms
                     Feature.Styles.Add(new VectorStyle
                     {
                         Line = new Pen { Width = StrokeWidth, Color = StrokeColor.ToMapsui() },
-                        Fill = new Brush { Color = FillColor.ToMapsui() }
+                        Fill = new Styles.Brush { Color = FillColor.ToMapsui() }
                     });
                 }
             }

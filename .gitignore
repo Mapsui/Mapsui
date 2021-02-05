@@ -55,3 +55,4 @@ project.lock.json
 *.appx
 
 Samples/Mapsui.Samples.Droid/Resources/Resource.Designer.cs
+Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Android/Resources/Resource.designer.cs
