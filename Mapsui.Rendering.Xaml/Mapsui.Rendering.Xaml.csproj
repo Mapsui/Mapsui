@@ -11,7 +11,12 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <LangVersion>latest</LangVersion>
+  <DebugType>pdbonly</DebugType>
+  <Optimize>true</Optimize>
+  <OutputPath>bin\Release\</OutputPath>
+  <DefineConstants>TRACE</DefineConstants>
+  <ErrorReport>prompt</ErrorReport>
+  <WarningLevel>4</WarningLevel>    
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mapsui.Geometries\Mapsui.Geometries.csproj" />
