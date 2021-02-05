@@ -11,6 +11,7 @@
   <ItemGroup>
     <PackageReference Include="BruTile.MbTiles" Version="3.0.0" />
     <PackageReference Include="SQLitePCLRaw.bundle_green" Version="1.1.14" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>

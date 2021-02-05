@@ -19,6 +19,9 @@ namespace Mapsui.Samples.Wpf
         public Window1()
         {
             InitializeComponent();
+
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
             MapControl.FeatureInfo += MapControlFeatureInfo;
             MapControl.MouseMove += MapControlOnMouseMove;
             MapControl.Map.RotationLock = false;
