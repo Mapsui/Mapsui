@@ -506,9 +506,9 @@ namespace Mapsui.Desktop.Wms
                 throw new Exception($"Unexpected WMS response code: {response.StatusCode}");
             }
 
-            if (response.Content.Headers.ContentType.ToString().ToLower() != _mimeType)
+            if (response.Content.Headers.ContentType.MediaType.ToLower() != _mimeType)
             { 
-                throw new Exception($"Unexpected WMS response content type. Expected - {_mimeType}, getted - {response.Content.Headers.ContentType}");
+                throw new Exception($"Unexpected WMS response content type. Expected - {_mimeType}, getted - {response.Content.Headers.ContentType.MediaType}");
             }
        
             return await response.Content.ReadAsStreamAsync();
