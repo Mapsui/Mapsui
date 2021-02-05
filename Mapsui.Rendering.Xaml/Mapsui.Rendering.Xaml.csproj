@@ -33,8 +33,7 @@
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <LangVersion>latest</LangVersion>
+    <WarningLevel>4</WarningLevel>    
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
