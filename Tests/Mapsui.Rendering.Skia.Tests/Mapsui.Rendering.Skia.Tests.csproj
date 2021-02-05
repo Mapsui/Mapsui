@@ -40,10 +40,22 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Mapsui.Geometries\Mapsui.Geometries.csproj" />
-    <ProjectReference Include="..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
-    <ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />
-    <ProjectReference Include="..\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj" />
+    <ProjectReference Include="..\..\Mapsui.Geometries\Mapsui.Geometries.csproj">
+      <Project>{ee55b62d-ffa2-4c24-a4ad-7a47ace55ce5}</Project>
+      <Name>Mapsui.Geometries</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj">
+      <Project>{AE632270-38CA-4203-93A5-8612629CD944}</Project>
+      <Name>Mapsui.Rendering.Skia</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Mapsui\Mapsui.csproj">
+      <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>
+      <Name>Mapsui</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj">
+      <Project>{81bb36d2-4d01-44e3-9024-e7cbd10da316}</Project>
+      <Name>Mapsui.Tests.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Images\Original\bitmap_atlas.png">
