@@ -370,7 +370,7 @@ namespace Mapsui.UI.Forms
         public bool IsClosableByClick
         {
             get { return (bool)GetValue(IsClosableByClickProperty); }
-            private set { SetValue(IsClosableByClickProperty, value); }
+            set { SetValue(IsClosableByClickProperty, value); }
         }
 
         /// <summary>

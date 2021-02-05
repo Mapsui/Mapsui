@@ -68,7 +68,7 @@ namespace Mapsui.UI.Forms
                     ((Mapsui.Geometries.Polygon)Feature.Geometry).InteriorRings = Holes.Select(h => new LinearRing(h.Select(p => p.ToMapsui()).ToList())).ToList();
                     break;
                 case nameof(FillColor):
-                    ((VectorStyle)Feature.Styles.First()).Fill = new Brush(FillColor.ToMapsui());
+                    ((VectorStyle)Feature.Styles.First()).Fill = new Styles.Brush(FillColor.ToMapsui());
                     break;
                 case nameof(StrokeColor):
                     ((VectorStyle)Feature.Styles.First()).Outline.Color = StrokeColor.ToMapsui();
@@ -107,7 +107,7 @@ namespace Mapsui.UI.Forms
                     Feature.Styles.Add(new VectorStyle
                     {
                         Line = new Pen { Width = StrokeWidth, Color = StrokeColor.ToMapsui() },
-                        Fill = new Brush { Color = FillColor.ToMapsui() }
+                        Fill = new Styles.Brush { Color = FillColor.ToMapsui() }
                     });
                 }
             }
