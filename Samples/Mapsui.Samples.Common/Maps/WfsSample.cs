@@ -7,9 +7,9 @@ using Mapsui.Providers.Wfs.Utilities;
 using Mapsui.Styles;
 using Mapsui.UI;
 
-namespace Mapsui.Samples.Common.Desktop
+namespace Mapsui.Samples.Common.Maps
 {
-    public class WfsSample // not working: ISample
+    public class WfsSample : ISample
     {
         public string Name => "6 WFS Sample";
         public string Category => "Desktop";
