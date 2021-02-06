@@ -13,6 +13,9 @@
     <ProjectReference Include="..\Mapsui.Geometries\Mapsui.Geometries.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Providers\Wfs\" />
+  </ItemGroup>
   <PropertyGroup>
     <DebugType>full</DebugType>
     <PackageId>NotMapsui</PackageId>
