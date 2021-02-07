@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Mapsui.Geometries;
 using System.IO;
 using System.Text;
+using System.Web;
 using System.Xml;
 // ReSharper disable InconsistentNaming
 
@@ -49,46 +50,49 @@ namespace Mapsui.Providers.Wfs.Utilities
             string qualification = string.IsNullOrEmpty(featureTypeInfo.Prefix)
                                        ? string.Empty
                                        : featureTypeInfo.Prefix + ":";
-            string filterString = string.Empty;
 
-            if (filter != null)
+            var paramBuilder = new StringBuilder();
+
+            paramBuilder.Append("?SERVICE=WFS&Version=1.0.0&REQUEST=GetFeature&TYPENAME=");
+            paramBuilder.Append(HttpUtility.UrlEncode(qualification + featureTypeInfo.Name));
+            paramBuilder.Append("&SRS =");
+            paramBuilder.Append(HttpUtility.UrlEncode(featureTypeInfo.SRID));
+
+            if (filter != null || boundingBox != null)
             {
-                filterString = filter.Encode();
-                filterString = filterString.Replace("<", "%3C");
-                filterString = filterString.Replace(">", "%3E");
-                filterString = filterString.Replace(" ", "");
-                filterString = filterString.Replace("*", "%2a");
-                filterString = filterString.Replace("#", "%23");
-                filterString = filterString.Replace("!", "%21");
+                paramBuilder.Append("&FILTER=");
+
+                var filterBuilder = new StringBuilder();
+                filterBuilder.Append("<Filter xmlns=\"" + NSOGC + "\" xmlns:gml=\"" + NSGML + "\"");
+                if (!string.IsNullOrEmpty(featureTypeInfo.Prefix))
+                {
+                    filterBuilder.Append(" xmlns:" + featureTypeInfo.Prefix + "=\"" +
+                                         featureTypeInfo.FeatureTypeNamespace + "\"");
+                    //added by PDD to get it to work for deegree default sample
+                }
+
+                filterBuilder.Append(">");
+                if (boundingBox != null)
+                {
+                    filterBuilder.Append("<BBOX><PropertyName>");
+                    filterBuilder.Append(qualification).Append(featureTypeInfo.Geometry.GeometryName);
+                    filterBuilder.Append("</PropertyName>");
+                    filterBuilder.Append("<gml:Box srsName=\"" + featureTypeInfo.SRID + "\">");
+                    filterBuilder.Append("<gml:coordinates>");
+                    filterBuilder.Append(XmlConvert.ToString(boundingBox.Left) + ",");
+                    filterBuilder.Append(XmlConvert.ToString(boundingBox.Bottom) + " ");
+                    filterBuilder.Append(XmlConvert.ToString(boundingBox.Right) + ",");
+                    filterBuilder.Append(XmlConvert.ToString(boundingBox.Top));
+                    filterBuilder.Append("</gml:coordinates></gml:Box></BBOX>");
+                }
+
+                if (filter != null) filterBuilder.Append(filter.Encode());
+                
+                filterBuilder.Append("</Filter>");
+                paramBuilder.Append(HttpUtility.UrlEncode(filterBuilder.ToString()));
             }
 
-            var filterBuilder = new StringBuilder();
-            filterBuilder.Append("&filter=%3CFilter%20xmlns=%22" + NSOGC + "%22%20xmlns:gml=%22" + NSGML + "%22");
-            if (!string.IsNullOrEmpty(featureTypeInfo.Prefix))
-            {
-                filterBuilder.Append("%20xmlns:" + featureTypeInfo.Prefix + "=%22" +
-                                     featureTypeInfo.FeatureTypeNamespace + "%22");
-                //added by PDD to get it to work for deegree default sample
-            }
-            filterBuilder.Append("%3E");
-            if (boundingBox != null)
-            {
-                filterBuilder.Append("%3CBBOX%3E%3CPropertyName%3E");
-                filterBuilder.Append(qualification).Append(featureTypeInfo.Geometry.GeometryName);
-                filterBuilder.Append("%3C/PropertyName%3E");
-                filterBuilder.Append("%3Cgml:Box%20srsName=%22" + featureTypeInfo.SRID + "%22%3E");
-                filterBuilder.Append("%3Cgml:coordinates%3E");
-                filterBuilder.Append(XmlConvert.ToString(boundingBox.Left) + ",");
-                filterBuilder.Append(XmlConvert.ToString(boundingBox.Bottom) + "%20");
-                filterBuilder.Append(XmlConvert.ToString(boundingBox.Right) + ",");
-                filterBuilder.Append(XmlConvert.ToString(boundingBox.Top));
-                filterBuilder.Append("%3C/gml:coordinates%3E%3C/gml:Box%3E%3C/BBOX%3E");
-            }
-            filterBuilder.Append(filterString);
-            filterBuilder.Append("%3C/Filter%3E");
-
-            return "?SERVICE=WFS&Version=1.0.0&REQUEST=GetFeature&TYPENAME=" + qualification + featureTypeInfo.Name +
-                   "&SRS =" + featureTypeInfo.SRID + filterBuilder;
+            return paramBuilder.ToString();
         }
 
         /// <summary>
