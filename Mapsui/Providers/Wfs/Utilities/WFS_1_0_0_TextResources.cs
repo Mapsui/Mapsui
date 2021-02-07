@@ -107,6 +107,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                     if (!string.IsNullOrEmpty(labelProperty))
                         xWriter.WriteElementString("PropertyName", qualification + labelProperty);
                     xWriter.WriteStartElement("Filter", NSOGC);
+                    if (filter != null) xWriter.WriteStartElement("And");
                     xWriter.WriteStartElement("BBOX");
                     xWriter.WriteElementString("PropertyName", featureTypeInfo.Geometry.GeometryName);
                     xWriter.WriteStartElement("gml", "Box", NSGML);
