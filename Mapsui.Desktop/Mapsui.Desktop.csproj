@@ -10,7 +10,4 @@
     <ProjectReference Include="..\Mapsui.Geometries\Mapsui.Geometries.csproj" />
     <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Reference Include="System.Web" />
-  </ItemGroup>
 </Project>
