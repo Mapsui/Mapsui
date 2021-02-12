@@ -21,8 +21,6 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
-using System.Web;
-using System.Web.Caching;
 using Mapsui.Desktop.Shapefile.Indexing;
 using Mapsui.Geometries;
 using Mapsui.Providers;
@@ -631,23 +629,7 @@ namespace Mapsui.Desktop.Shapefile
             //Only load the tree if we haven't already loaded it, or if we want to force a rebuild
             if (_tree == null || forceRebuild)
             {
-                // Is this a web application? If so lets store the index in the cache so we don't
-                // need to rebuild it for each request
-                if (HttpContext.Current != null)
-                {
-                    //Check if the tree exists in the cache
-                    if (HttpContext.Current.Cache[_filename] != null)
-                        _tree = (QuadTree)HttpContext.Current.Cache[_filename];
-                    else
-                    {
-                        _tree = !loadFromFile ? CreateSpatialIndex() : CreateSpatialIndexFromFile(_filename);
-                        //Store the tree in the web cache
-                        //TODO: Remove this when connection pooling is implemented
-                        HttpContext.Current.Cache.Insert(_filename, _tree, null, Cache.NoAbsoluteExpiration,
-                                                         TimeSpan.FromDays(1));
-                    }
-                }
-                else if (!loadFromFile)
+                if (!loadFromFile)
                     _tree = CreateSpatialIndex();
                 else
                     _tree = CreateSpatialIndexFromFile(_filename);
@@ -668,9 +650,6 @@ namespace Mapsui.Desktop.Shapefile
             }
             else
                 _tree = CreateSpatialIndex();
-            if (HttpContext.Current != null)
-                //TODO: Remove this when connection pooling is implemented:
-                HttpContext.Current.Cache.Insert(_filename, _tree, null, Cache.NoAbsoluteExpiration, TimeSpan.FromDays(1));
         }
 
         /// <summary>
