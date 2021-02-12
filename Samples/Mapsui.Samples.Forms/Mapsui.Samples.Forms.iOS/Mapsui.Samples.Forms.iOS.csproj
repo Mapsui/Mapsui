@@ -133,7 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BruTile">
-      <Version>3.0.0</Version>
+      <Version>3.1.2</Version>
     </PackageReference>
     <PackageReference Include="HarfBuzzSharp">
       <Version>2.6.1.7</Version>
@@ -163,7 +163,7 @@
       <Version>1.6.292</Version>
     </PackageReference>
     <PackageReference Include="BruTile.MbTiles">
-      <Version>3.0.0</Version>
+      <Version>3.1.2</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

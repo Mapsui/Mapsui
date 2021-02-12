@@ -4,7 +4,7 @@
     <TargetFramework>net48</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="BruTile" Version="3.0.0" />
+    <PackageReference Include="BruTile" Version="3.1.2" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mapsui.Geometries\Mapsui.Geometries.csproj" />
