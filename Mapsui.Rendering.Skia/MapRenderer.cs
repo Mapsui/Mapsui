@@ -187,6 +187,8 @@ namespace Mapsui.Rendering.Skia
             // todo: use margin to increase the pixel area
             // todo: We will need to select on style instead of layer
             
+
+
             layers = layers
                 .Select(l => (l is RasterizingLayer rl) ? rl.ChildLayer : l)
                 .Where(l => l.IsMapInfoLayer);
@@ -198,6 +200,8 @@ namespace Mapsui.Rendering.Skia
                 WorldPosition = viewport.ScreenToWorld(x, y),
                 Resolution = viewport.Resolution
             };
+
+            if (!viewport.Extent.Contains(viewport.ScreenToWorld(result.ScreenPosition))) return result;
 
             try
             {
