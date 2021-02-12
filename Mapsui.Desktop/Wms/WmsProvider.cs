@@ -408,12 +408,11 @@ namespace Mapsui.Desktop.Wms
             {
                 foreach (string layer in LayerList)
                 {
-                    Client.WmsServerLayer result;
-                    if (FindLayer(_wmsClient.Layer, layer, out result))
+                    if (FindLayer(_wmsClient.Layer, layer, out var result))
                     {
                         foreach (var style in result.Style)
                         {
-                            legendUrls.Add(System.Web.HttpUtility.HtmlDecode(style.LegendUrl.OnlineResource.OnlineResource));
+                            legendUrls.Add(WebUtility.HtmlDecode(style.LegendUrl.OnlineResource.OnlineResource));
                             break; // just add first style. TODO: think about how to select a style
                         }
                     }
