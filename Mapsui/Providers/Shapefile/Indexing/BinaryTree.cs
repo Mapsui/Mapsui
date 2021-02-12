@@ -19,7 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace Mapsui.Desktop.Shapefile.Indexing
+namespace Mapsui.Providers.Shapefile.Indexing
 {
     [Serializable]
     internal class Node<T, TU> where T : IComparable<T>

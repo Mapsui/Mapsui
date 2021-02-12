@@ -21,11 +21,10 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
-using Mapsui.Desktop.Shapefile.Indexing;
 using Mapsui.Geometries;
-using Mapsui.Providers;
+using Mapsui.Providers.Shapefile.Indexing;
 
-namespace Mapsui.Desktop.Shapefile
+namespace Mapsui.Providers.Shapefile
 {
     /// <summary>
     /// Shapefile geometry type.
@@ -38,14 +37,14 @@ namespace Mapsui.Desktop.Shapefile
         Null = 0,
         /// <summary>
         /// A point consists of a pair of double-precision coordinates.
-        /// Mapsui interpretes this as <see cref="Mapsui.Geometries.Point"/>
+        /// Mapsui interprets this as <see cref="Mapsui.Geometries.Point"/>
         /// </summary>
         Point = 1,
         /// <summary>
         /// PolyLine is an ordered set of vertices that consists of one or more parts. A part is a
         /// connected sequence of two or more points. Parts may or may not be connected to one
         ///	another. Parts may or may not intersect one another.
-        /// Mapsui interpretes this as either <see cref="Mapsui.Geometries.LineString"/> or <see cref="Mapsui.Geometries.MultiLineString"/>
+        /// Mapsui interprets this as either <see cref="Mapsui.Geometries.LineString"/> or <see cref="Mapsui.Geometries.MultiLineString"/>
         /// </summary>
         PolyLine = 3,
         /// <summary>
@@ -57,7 +56,7 @@ namespace Mapsui.Desktop.Shapefile
         /// holes in polygons are in a counterclockwise direction. Vertices for a single, ringed
         /// polygon are, therefore, always in clockwise order. The rings of a polygon are referred to
         /// as its parts.
-        /// Mapsui interpretes this as either <see cref="Mapsui.Geometries.Polygon"/> or <see cref="Mapsui.Geometries.MultiPolygon"/>
+        /// Mapsui interprets this as either <see cref="Mapsui.Geometries.Polygon"/> or <see cref="Mapsui.Geometries.MultiPolygon"/>
         /// </summary>
         Polygon = 5,
         /// <summary>

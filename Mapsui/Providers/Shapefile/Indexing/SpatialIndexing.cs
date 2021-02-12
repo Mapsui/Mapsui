@@ -21,7 +21,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using Mapsui.Geometries;
 
-namespace Mapsui.Desktop.Shapefile.Indexing
+namespace Mapsui.Providers.Shapefile.Indexing
 {
     /// <summary>
     /// Heuristics used for tree generation
