@@ -3,24 +3,14 @@
   <PropertyGroup>
     <TargetFramework>net48</TargetFramework>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-  </PropertyGroup>
-
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="BruTile" Version="3.1.2" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Mapsui.Geometries\Mapsui.Geometries.csproj" />
     <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="System.Web" />
   </ItemGroup>
-
 </Project>
