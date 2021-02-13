@@ -98,7 +98,7 @@ namespace Mapsui.Providers.Wfs
                 //https://docs.geoserver.org/stable/en/user/services/wfs/axis_order.html#wfs-basics-axis
                 return _axisOrder ?? (_wfsVersion == WFSVersionEnum.WFS_1_0_0
                     ? new[] {0, 1}
-                    : new AxisOrderRegistry()[CRS.ToString(NumberFormatInfo.InvariantInfo)]);
+                    : new AxisOrderRegistry()[CRS]);
             }
             set
             {

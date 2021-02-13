@@ -125,9 +125,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                 var coords = coordinateString.Split(' ');
                 var odds = coords.Where((s, idx) => idx%2 == 0);
                 var evens = coords.Where((s, idx) => idx%2 != 0);
-                coordinateValues = (from o in odds
-                    from e in evens
-                    select new [] {o, e}).ToArray();
+                coordinateValues = odds.Zip(evens, (odd, even) => new [] {odd, even}).ToArray();
             }
             int length = coordinateValues.Length;
 
