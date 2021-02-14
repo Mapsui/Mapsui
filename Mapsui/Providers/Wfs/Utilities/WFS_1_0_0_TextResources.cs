@@ -7,6 +7,8 @@ using System.IO;
 using System.Text;
 using System.Web;
 using System.Xml;
+using Mapsui.Utilities;
+
 // ReSharper disable InconsistentNaming
 
 namespace Mapsui.Providers.Wfs.Utilities
@@ -45,7 +47,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <param name="labelProperties">A list of properties necessary for label rendering</param>
         /// <param name="boundingBox">The bounding box of the query</param>
         /// <param name="filter">An instance implementing <see cref="IFilter"/></param>
-        public string GetFeatureGETRequest(WfsFeatureTypeInfo featureTypeInfo, List<string> labelProperties, BoundingBox boundingBox, IFilter filter)
+        public string GetFeatureGETRequest(WfsFeatureTypeInfo featureTypeInfo, List<string> labelProperties, 
+                                           BoundingBox boundingBox, IFilter filter)
         {
             string qualification = string.IsNullOrEmpty(featureTypeInfo.Prefix)
                                        ? string.Empty
@@ -55,8 +58,8 @@ namespace Mapsui.Providers.Wfs.Utilities
 
             paramBuilder.Append("?SERVICE=WFS&Version=1.0.0&REQUEST=GetFeature&TYPENAME=");
             paramBuilder.Append(HttpUtility.UrlEncode(qualification + featureTypeInfo.Name));
-            paramBuilder.Append("&SRS =");
-            paramBuilder.Append(HttpUtility.UrlEncode(featureTypeInfo.SRID));
+            paramBuilder.Append("&srsName=");
+            paramBuilder.Append(HttpUtility.UrlEncode(ProjectionHelper.EpsgPrefix + featureTypeInfo.SRID));
 
             if (filter != null || boundingBox != null)
             {
@@ -77,7 +80,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                     filterBuilder.Append("<BBOX><PropertyName>");
                     filterBuilder.Append(qualification).Append(featureTypeInfo.Geometry.GeometryName);
                     filterBuilder.Append("</PropertyName>");
-                    filterBuilder.Append("<gml:Box srsName=\"" + featureTypeInfo.SRID + "\">");
+                    filterBuilder.Append("<gml:Box srsName=\"" + ProjectionHelper.EpsgPrefix + featureTypeInfo.SRID + "\">");
                     filterBuilder.Append("<gml:coordinates>");
                     filterBuilder.Append(XmlConvert.ToString(boundingBox.Left) + ",");
                     filterBuilder.Append(XmlConvert.ToString(boundingBox.Bottom) + " ");
@@ -119,6 +122,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                     xWriter.WriteAttributeString("version", "1.0.0");
                     xWriter.WriteStartElement("Query", NSWFS);
                     xWriter.WriteAttributeString("typeName", qualification + featureTypeInfo.Name);
+                    xWriter.WriteAttributeString("srsName", ProjectionHelper.EpsgPrefix + featureTypeInfo.SRID);
                     xWriter.WriteElementString("PropertyName", qualification + featureTypeInfo.Geometry.GeometryName);
                     foreach (var labelProperty in labelProperties)
                     {

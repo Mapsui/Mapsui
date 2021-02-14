@@ -7,6 +7,8 @@ using System.IO;
 using System.Text;
 using System.Web;
 using System.Xml;
+using Mapsui.Utilities;
+
 // ReSharper disable InconsistentNaming
 
 namespace Mapsui.Providers.Wfs.Utilities
@@ -37,8 +39,6 @@ namespace Mapsui.Providers.Wfs.Utilities
                    "&NAMESPACE=xmlns(app=http://www.deegree.org/app)";
         }
 
-
-
         /// <summary>
         /// This method returns the query string for 'GetFeature'.
         /// </summary>
@@ -47,7 +47,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <param name="boundingBox">The bounding box of the query</param>
         /// <param name="filter">An instance implementing <see cref="IFilter"/></param>
         public string GetFeatureGETRequest(WfsFeatureTypeInfo featureTypeInfo, List<string> labelProperties,
-            BoundingBox boundingBox, IFilter filter)
+                                           BoundingBox boundingBox, IFilter filter)
         {
             string qualification = string.IsNullOrEmpty(featureTypeInfo.Prefix)
                 ? string.Empty
@@ -57,8 +57,8 @@ namespace Mapsui.Providers.Wfs.Utilities
 
             paramBuilder.Append("?SERVICE=WFS&Version=1.1.0&REQUEST=GetFeature&TYPENAME=");
             paramBuilder.Append(HttpUtility.UrlEncode(qualification + featureTypeInfo.Name));
-            paramBuilder.Append("&SRS =");
-            paramBuilder.Append(HttpUtility.UrlEncode(featureTypeInfo.SRID));
+            paramBuilder.Append("&srsName=");
+            paramBuilder.Append(HttpUtility.UrlEncode(ProjectionHelper.EpsgPrefix + featureTypeInfo.SRID));
             
             if (filter != null || boundingBox != null) {
                 paramBuilder.Append("&FILTER=");
@@ -78,13 +78,17 @@ namespace Mapsui.Providers.Wfs.Utilities
                     filterBuilder.Append("<BBOX><PropertyName>");
                     filterBuilder.Append(qualification).Append(featureTypeInfo.Geometry.GeometryName);
                     filterBuilder.Append("</PropertyName>");
-                    filterBuilder.Append("<gml:Box srsName=\"" + featureTypeInfo.SRID + "\">");
-                    filterBuilder.Append("<gml:coordinates>");
-                    filterBuilder.Append(XmlConvert.ToString(boundingBox.Left) + ",");
+                    
+                    filterBuilder.Append("<gml:Envelope srsName=\"http://www.opengis.net/gml/srs/epsg.xml#" + featureTypeInfo.SRID + "\">");
+                    filterBuilder.Append("<gml:lowerCorner>");
+                    filterBuilder.Append(XmlConvert.ToString(boundingBox.Left) + " ");
                     filterBuilder.Append(XmlConvert.ToString(boundingBox.Bottom) + " ");
-                    filterBuilder.Append(XmlConvert.ToString(boundingBox.Right) + ",");
+                    filterBuilder.Append("</gml:lowerCorner>");
+                    filterBuilder.Append("<gml:upperCorner>");
+                    filterBuilder.Append(XmlConvert.ToString(boundingBox.Right) + " ");
                     filterBuilder.Append(XmlConvert.ToString(boundingBox.Top));
-                    filterBuilder.Append("</gml:coordinates></gml:Box></BBOX>");
+                    filterBuilder.Append("</gml:upperCorner>");
+                    filterBuilder.Append("</gml:Envelope></BBOX>");
                 }
 
                 if (filter != null) filterBuilder.Append(filter.Encode());
@@ -131,6 +135,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                     //added by PDD to get it to work for deegree default sample
                     xWriter.WriteStartElement("Query", NSWFS);
                     xWriter.WriteAttributeString("typeName", qualification + featureTypeInfo.Name);
+                    xWriter.WriteAttributeString("srsName", ProjectionHelper.EpsgPrefix + featureTypeInfo.SRID);
                     xWriter.WriteElementString("PropertyName", qualification + featureTypeInfo.Geometry.GeometryName);
                     foreach (var labelProperty in labelProperties)
                     {
