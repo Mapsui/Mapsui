@@ -27,7 +27,7 @@
     </PackageReference>
     <PackageReference Include="SQLitePCLRaw.bundle_green" Version="1.1.14">
     </PackageReference>
-    <PackageReference Include="Svg.Skia" Version="0.4.1">
+    <PackageReference Include="Svg.Skia" Version="0.5.0">
     </PackageReference>
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
     <PackageReference Include="System.Memory" Version="4.5.4">
