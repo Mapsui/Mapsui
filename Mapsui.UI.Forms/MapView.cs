@@ -145,7 +145,12 @@ namespace Mapsui.UI.Forms
             _mapButtons.Children.Add(_mapSpacingButton2);
             _mapButtons.Children.Add(_mapNorthingButton);
 
-            AbsoluteLayout.SetLayoutBounds(_mapButtons, new Rectangle(0.95, 0.03, 40, 176));
+            if (Device.RuntimePlatform == Device.iOS)
+                // the buttons are placed a bit lower on iOS to avoid overlap with the transparent status bar
+                AbsoluteLayout.SetLayoutBounds(_mapButtons, new Rectangle(0.95, 0.07, 40, 176));
+            else
+                AbsoluteLayout.SetLayoutBounds(_mapButtons, new Rectangle(0.95, 0.03, 40, 176));
+
             AbsoluteLayout.SetLayoutFlags(_mapButtons, AbsoluteLayoutFlags.PositionProportional);
 
             Content = new AbsoluteLayout
