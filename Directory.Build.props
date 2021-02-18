@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <!--Specify Compiler for Mac Builds-->
-    <PackageReference Include="Microsoft.Net.Compilers" Version="3.8.0">
+    <PackageReference Include="Microsoft.Net.Compilers.Toolset" Version="3.8.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
