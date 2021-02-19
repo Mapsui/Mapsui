@@ -6,12 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!--<PackageReference Include="" Version=""/>-->
-
-    <Folder Include="Properties\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <EmbeddedResource Include="Images\icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
