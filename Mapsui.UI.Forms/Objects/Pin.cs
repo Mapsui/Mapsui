@@ -1,7 +1,6 @@
 ﻿using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 using Mapsui.Providers;
 using Mapsui.Rendering.Skia;
 using Mapsui.Styles;
@@ -25,7 +24,7 @@ namespace Mapsui.UI.Forms
         public static readonly BindableProperty LabelProperty = BindableProperty.Create(nameof(Label), typeof(string), typeof(Pin), default(string));
         public static readonly BindableProperty AddressProperty = BindableProperty.Create(nameof(Address), typeof(string), typeof(Pin), default(string));
         public static readonly BindableProperty IconProperty = BindableProperty.Create(nameof(Icon), typeof(byte[]), typeof(Pin), default(byte[]));
-        public static readonly BindableProperty SvgProperty = BindableProperty.Create(nameof(Svg), typeof(string), typeof(Pin), default(string));
+        public static readonly BindableProperty SvgProperty = BindableProperty.Create(nameof(Svg), typeof(byte[]), typeof(Pin), default(byte[]));
         public static readonly BindableProperty ScaleProperty = BindableProperty.Create(nameof(Scale), typeof(float), typeof(Pin), 1.0f);
         public static readonly BindableProperty RotationProperty = BindableProperty.Create(nameof(Rotation), typeof(float), typeof(Pin), 0f);
         public static readonly BindableProperty RotateWithMapProperty = BindableProperty.Create(nameof(RotateWithMap), typeof(bool), typeof(Pin), false);
@@ -148,9 +147,9 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// String holding the Svg image informations
         /// </summary>
-        public string Svg
+        public byte[] Svg
         {
-            get { return (string)GetValue(SvgProperty); }
+            get { return (byte[])GetValue(SvgProperty); }
             set { SetValue(SvgProperty, value); }
         }
 
@@ -450,8 +449,8 @@ namespace Mapsui.UI.Forms
                 {
                     case PinType.Svg:
                         // Load the SVG document
-                        if (!string.IsNullOrEmpty(Svg))
-                            stream = new MemoryStream(Encoding.UTF8.GetBytes(Svg));
+                        if (Svg != null)
+                            stream = new MemoryStream(Svg);
                         if (stream == null)
                             return;
                         _bitmapId = BitmapRegistry.Instance.Register(stream);

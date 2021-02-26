@@ -94,8 +94,6 @@ namespace Mapsui.Samples.Forms.Shared
                     var resourceName = "Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg";
                     var stream = assembly.GetManifestResourceStream(resourceName);
                     if (stream == null) throw new Exception($"Could not find EmbeddedResource {resourceName}");
-                    var reader = new StreamReader(stream);
-                    string svgString = reader.ReadToEnd();
                     mapView.Pins.Add(new Pin(mapView)
                     {
                         Label = $"PinType.Svg {_markerNum++}",
@@ -103,7 +101,7 @@ namespace Mapsui.Samples.Forms.Shared
                         Type = PinType.Svg,
                         Scale = 0.1f,
                         RotateWithMap = true,
-                        Svg = svgString
+                        Svg = stream.ToBytes()
                     });
                     break;
                 case 3:

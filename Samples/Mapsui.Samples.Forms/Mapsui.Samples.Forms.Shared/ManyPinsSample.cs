@@ -39,7 +39,7 @@ namespace Mapsui.Samples.Forms
                         Address = e.Point.ToString(),
                         Position = e.Point,
                         Type = PinType.Pin,
-                        Color = new Xamarin.Forms.Color(rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0),
+                        Color = new Color(rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0),
                         Transparency = 0.5f,
                         Scale = rnd.Next(50, 130) / 100f,
                     };
@@ -56,7 +56,7 @@ namespace Mapsui.Samples.Forms
                         pin.Callout.Type = CalloutType.Detail;
                         pin.Callout.TitleFontSize = rnd.Next(15, 30);
                         pin.Callout.SubtitleFontSize = pin.Callout.TitleFontSize - 5;
-                        pin.Callout.TitleFontColor = new Xamarin.Forms.Color(rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0);
+                        pin.Callout.TitleFontColor = new Color(rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0);
                         pin.Callout.SubtitleFontColor = pin.Color;
                     }
                     else
@@ -72,15 +72,13 @@ namespace Mapsui.Samples.Forms
                         System.Diagnostics.Debug.WriteLine(r);
 
                     var stream = assembly.GetManifestResourceStream("Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg");
-                    StreamReader reader = new StreamReader(stream);
-                    string svgString = reader.ReadToEnd();
                     mapView.Pins.Add(new Pin(mapView)
                     {
                         Label = $"PinType.Svg {markerNum++}",
                         Position = e.Point,
                         Type = PinType.Svg,
                         Scale = 0.1f,
-                        Svg = svgString
+                        Svg = stream.ToBytes()
                     });
                     break;
                 case 3:
@@ -135,7 +133,7 @@ namespace Mapsui.Samples.Forms
                 Address = position.ToString(),
                 Position = position,
                 Type = PinType.Pin,
-                Color = new Xamarin.Forms.Color(rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0),
+                Color = new Color(rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0),
                 Transparency = 0.5f,
                 Scale = rnd.Next(50, 130) / 100f,
             };
@@ -152,7 +150,7 @@ namespace Mapsui.Samples.Forms
                 pin.Callout.Type = CalloutType.Detail;
                 pin.Callout.TitleFontSize = rnd.Next(15, 30);
                 pin.Callout.SubtitleFontSize = pin.Callout.TitleFontSize - 5;
-                pin.Callout.TitleFontColor = new Xamarin.Forms.Color(rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0);
+                pin.Callout.TitleFontColor = new Color(rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0);
                 pin.Callout.SubtitleFontColor = pin.Color;
             }
             else
