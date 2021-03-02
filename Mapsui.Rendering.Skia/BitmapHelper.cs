@@ -15,6 +15,22 @@ namespace Mapsui.Rendering.Skia
             // todo: Our BitmapRegistry stores not only bitmaps. Perhaps we should store a class in it
             // which has all information. So we should have a SymbolImageRegistry in which we store a
             // SymbolImage. Which holds the type, data and other parameters.
+            if (bitmapStream is string str)
+            {
+                if (str.ToLower().Contains("<svg"))
+                {
+                    var svg = new SKSvg();
+                    svg.FromSvg(str);
+
+                    return new BitmapInfo { Svg = svg };
+                }
+            }
+
+            if (bitmapStream is SKPicture picture)
+            {
+                return new BitmapInfo { Picture = picture };
+            }
+
             if (bitmapStream is Stream stream)
             {
                 if (stream.IsSvg())

@@ -83,10 +83,10 @@ namespace Mapsui.Samples.Forms
                 );
                 animations.Add(entry3);
 
-                animation = new Animation(5000);
-                animation.Loop = true;
-                animation.Entries.AddRange(animations);
-                animation.Start();
+                //animation = new Animation(5000);
+                //animation.Loop = true;
+                //animation.Entries.AddRange(animations);
+                //animation.Start();
             }
 
             return true;
