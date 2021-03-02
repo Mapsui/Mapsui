@@ -21,13 +21,10 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
-using System.Web;
-using System.Web.Caching;
-using Mapsui.Desktop.Shapefile.Indexing;
 using Mapsui.Geometries;
-using Mapsui.Providers;
+using Mapsui.Providers.Shapefile.Indexing;
 
-namespace Mapsui.Desktop.Shapefile
+namespace Mapsui.Providers.Shapefile
 {
     /// <summary>
     /// Shapefile geometry type.
@@ -40,14 +37,14 @@ namespace Mapsui.Desktop.Shapefile
         Null = 0,
         /// <summary>
         /// A point consists of a pair of double-precision coordinates.
-        /// Mapsui interpretes this as <see cref="Mapsui.Geometries.Point"/>
+        /// Mapsui interprets this as <see cref="Mapsui.Geometries.Point"/>
         /// </summary>
         Point = 1,
         /// <summary>
         /// PolyLine is an ordered set of vertices that consists of one or more parts. A part is a
         /// connected sequence of two or more points. Parts may or may not be connected to one
         ///	another. Parts may or may not intersect one another.
-        /// Mapsui interpretes this as either <see cref="Mapsui.Geometries.LineString"/> or <see cref="Mapsui.Geometries.MultiLineString"/>
+        /// Mapsui interprets this as either <see cref="Mapsui.Geometries.LineString"/> or <see cref="Mapsui.Geometries.MultiLineString"/>
         /// </summary>
         PolyLine = 3,
         /// <summary>
@@ -59,7 +56,7 @@ namespace Mapsui.Desktop.Shapefile
         /// holes in polygons are in a counterclockwise direction. Vertices for a single, ringed
         /// polygon are, therefore, always in clockwise order. The rings of a polygon are referred to
         /// as its parts.
-        /// Mapsui interpretes this as either <see cref="Mapsui.Geometries.Polygon"/> or <see cref="Mapsui.Geometries.MultiPolygon"/>
+        /// Mapsui interprets this as either <see cref="Mapsui.Geometries.Polygon"/> or <see cref="Mapsui.Geometries.MultiPolygon"/>
         /// </summary>
         Polygon = 5,
         /// <summary>
@@ -631,23 +628,7 @@ namespace Mapsui.Desktop.Shapefile
             //Only load the tree if we haven't already loaded it, or if we want to force a rebuild
             if (_tree == null || forceRebuild)
             {
-                // Is this a web application? If so lets store the index in the cache so we don't
-                // need to rebuild it for each request
-                if (HttpContext.Current != null)
-                {
-                    //Check if the tree exists in the cache
-                    if (HttpContext.Current.Cache[_filename] != null)
-                        _tree = (QuadTree)HttpContext.Current.Cache[_filename];
-                    else
-                    {
-                        _tree = !loadFromFile ? CreateSpatialIndex() : CreateSpatialIndexFromFile(_filename);
-                        //Store the tree in the web cache
-                        //TODO: Remove this when connection pooling is implemented
-                        HttpContext.Current.Cache.Insert(_filename, _tree, null, Cache.NoAbsoluteExpiration,
-                                                         TimeSpan.FromDays(1));
-                    }
-                }
-                else if (!loadFromFile)
+                if (!loadFromFile)
                     _tree = CreateSpatialIndex();
                 else
                     _tree = CreateSpatialIndexFromFile(_filename);
@@ -668,9 +649,6 @@ namespace Mapsui.Desktop.Shapefile
             }
             else
                 _tree = CreateSpatialIndex();
-            if (HttpContext.Current != null)
-                //TODO: Remove this when connection pooling is implemented:
-                HttpContext.Current.Cache.Insert(_filename, _tree, null, Cache.NoAbsoluteExpiration, TimeSpan.FromDays(1));
         }
 
         /// <summary>

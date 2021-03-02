@@ -7,7 +7,6 @@
     <DefineConstants>TRACE;DEBUG;NET46;__WPF__</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BruTile" Version="3.0.0" />
+    <PackageReference Include="BruTile" Version="3.1.2" />
     <PackageReference Include="SkiaSharp" Version="2.80.2" />
     <PackageReference Include="SkiaSharp.Views" Version="2.80.2" />
   </ItemGroup>

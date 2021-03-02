@@ -6,12 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!--<PackageReference Include="" Version=""/>-->
-
-    <Folder Include="Properties\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <EmbeddedResource Include="Images\icon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -81,8 +75,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BruTile" Version="3.0.0" />
-    <PackageReference Include="BruTile.Desktop" Version="3.0.0" />
+    <PackageReference Include="BruTile" Version="3.1.2" />
+    <PackageReference Include="BruTile.Desktop" Version="3.1.2" />
   </ItemGroup>
 
   <ItemGroup>

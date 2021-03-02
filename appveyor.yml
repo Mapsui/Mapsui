@@ -14,7 +14,7 @@ assembly_info:
   assembly_file_version: '{version}'
   assembly_informational_version: '{version}'
 environment:
-  version-short: 2.0.0
+  version-short: 3.0.0
 nuget:
   disable_publish_on_pr: true
 before_build:

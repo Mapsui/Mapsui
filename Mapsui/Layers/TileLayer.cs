@@ -1,5 +1,3 @@
-// TODO: There are parts talking about SharpMap
-
 // Copyright 2008 - Paul den Dulk (Geodan)
 // 
 // This file is part of SharpMap.
@@ -24,6 +22,7 @@ using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Rendering;
 using Mapsui.Styles;
+using Mapsui.Widgets;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -37,42 +36,49 @@ namespace Mapsui.Layers
     /// </summary>
     public class TileLayer : BaseLayer, IAsyncDataFetcher
     {
-        private ITileSource _tileSource;
+        private readonly ITileSource _tileSource;
         private readonly IRenderFetchStrategy _renderFetchStrategy;
         private readonly int _minExtraTiles;
         private readonly int _maxExtraTiles;
         private int _numberTilesNeeded;
-        private TileFetchDispatcher _tileFetchDispatcher;
+        private readonly TileFetchDispatcher _tileFetchDispatcher;
         private readonly BoundingBox _envelope;
 
         /// <summary>
         /// Create tile layer for given tile source
         /// </summary>
-        /// <param name="source">Tile source to use for this layer</param>
+        /// <param name="tileSource">Tile source to use for this layer</param>
         /// <param name="minTiles">Minimum number of tiles to cache</param>
         /// <param name="maxTiles">Maximum number of tiles to cache</param>
-        /// <param name="maxRetries">Unused</param>
         /// <param name="dataFetchStrategy">Strategy to get list of tiles for given extent</param>
         /// <param name="renderFetchStrategy"></param>
         /// <param name="minExtraTiles">Number of minimum extra tiles for memory cache</param>
         /// <param name="maxExtraTiles">Number of maximum extra tiles for memory cache</param>
+        /// <param name="fetchTileAsFeature">Fetch tile as feature</param>
         // ReSharper disable once UnusedParameter.Local // Is public and won't break this now
-        public TileLayer(ITileSource source = null, int minTiles = 200, int maxTiles = 300,
+        public TileLayer(ITileSource tileSource, int minTiles = 200, int maxTiles = 300,
             IDataFetchStrategy dataFetchStrategy = null, IRenderFetchStrategy renderFetchStrategy = null,
             int minExtraTiles = -1, int maxExtraTiles = -1, Func<TileInfo, Feature> fetchTileAsFeature = null)
         {
+            _tileSource = tileSource ?? throw new ArgumentException("source can not null");
             MemoryCache = new MemoryCache<Feature>(minTiles, maxTiles);
             Style = new VectorStyle { Outline = { Color = Color.FromArgb(0, 0, 0, 0) } }; // initialize with transparent outline
-            _tileSource = source;
+            if (Attribution == null) Attribution = new Hyperlink();
+            Attribution.Text = _tileSource.Attribution?.Text;
+            Attribution.Url = _tileSource.Attribution?.Url;
             _envelope = _tileSource?.Schema?.Extent.ToBoundingBox();
-            dataFetchStrategy = dataFetchStrategy ?? new DataFetchStrategy(3);
+            dataFetchStrategy ??= new DataFetchStrategy(3);
             _renderFetchStrategy = renderFetchStrategy ?? new RenderFetchStrategy();
             _minExtraTiles = minExtraTiles;
             _maxExtraTiles = maxExtraTiles;
-            _tileFetchDispatcher = new TileFetchDispatcher(MemoryCache, source.Schema, fetchTileAsFeature ?? ToFeature, dataFetchStrategy);
+            _tileFetchDispatcher = new TileFetchDispatcher(MemoryCache, _tileSource.Schema, fetchTileAsFeature ?? ToFeature, dataFetchStrategy);
             _tileFetchDispatcher.DataChanged += TileFetchDispatcherOnDataChanged;
             _tileFetchDispatcher.PropertyChanged += TileFetchDispatcherOnPropertyChanged;
         }
+
+        /// <summary>
+        /// TileSource</summary>
+        public ITileSource TileSource => _tileSource;
 
         /// <summary>
         /// Memory cache for this layer

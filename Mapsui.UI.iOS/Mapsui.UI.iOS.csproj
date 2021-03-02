@@ -24,6 +24,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <MtouchLink>SdkOnly</MtouchLink>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -33,6 +34,7 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <LangVersion>latest</LangVersion>
+    <MtouchLink>SdkOnly</MtouchLink>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -54,7 +56,7 @@
       <Name>Mapsui.Geometries</Name>
     </ProjectReference>
     <ProjectReference Include="..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj">
-      <Project>{DEA6E9AE-2B6A-4E83-83B7-E9DF0E492301}</Project>
+      <Project>{AE632270-38CA-4203-93A5-8612629CD944}</Project>
       <Name>Mapsui.Rendering.Skia</Name>
     </ProjectReference>
     <ProjectReference Include="..\Mapsui\Mapsui.csproj">

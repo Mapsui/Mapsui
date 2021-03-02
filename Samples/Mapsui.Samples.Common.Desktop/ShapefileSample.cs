@@ -1,8 +1,8 @@
 ﻿using System.IO;
 using System.Reflection;
-using Mapsui.Desktop.Shapefile;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Providers.Shapefile;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.UI;

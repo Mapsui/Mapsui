@@ -23,10 +23,9 @@ using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Text;
-using Mapsui.Desktop.Shapefile.Indexing;
-using Mapsui.Providers;
+using Mapsui.Providers.Shapefile.Indexing;
 
-namespace Mapsui.Desktop.Shapefile
+namespace Mapsui.Providers.Shapefile
 {
     internal class DbaseReader : IDisposable
     {

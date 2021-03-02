@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using Mapsui.Desktop.Shapefile;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Providers.Shapefile;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
