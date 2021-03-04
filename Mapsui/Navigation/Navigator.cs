@@ -85,8 +85,8 @@ namespace Mapsui
 
             if (duration == 0)
             {
-                _viewport.SetCenter(center);
                 _viewport.SetResolution(resolution);
+                _viewport.SetCenter(center);
 
                 Navigated?.Invoke(this, ChangeType.Discrete);
             }
@@ -190,8 +190,8 @@ namespace Mapsui
 
             if (duration == 0)
             {
-                _viewport.SetCenter(CalculateCenterOfMap(centerOfZoom, resolution));
                 _viewport.SetResolution(resolution);
+                _viewport.SetCenter(CalculateCenterOfMap(centerOfZoom, resolution));
                 
                 Navigated?.Invoke(this, ChangeType.Discrete);
             }
