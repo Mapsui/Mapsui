@@ -144,7 +144,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.Forms.WPF", "Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.WPF\Mapsui.Samples.Forms.WPF.csproj", "{818DE3FA-9F8A-4802-96D0-564497B59B21}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.Forms.Shared", "Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\Mapsui.Samples.Forms.Shared.csproj", "{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}"
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.Forms.WPF", "Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.WPF\Mapsui.Samples.Forms.WPF.csproj", "{818DE3FA-9F8A-4802-96D0-564497B59B21}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
