@@ -601,9 +601,9 @@ namespace Mapsui
             // Nothing to do
         }
 
-        public void UpdateAnimations()
+        public bool UpdateAnimations()
         {
-            _animation.UpdateAnimations();
+            return _animation.UpdateAnimations();
         }
     }
 }
