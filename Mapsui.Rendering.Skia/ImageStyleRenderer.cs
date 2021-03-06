@@ -51,6 +51,13 @@ namespace Mapsui.Rendering.Skia
                         (float)offsetX, (float)offsetY,
                         opacity: opacity, scale: (float)symbolStyle.SymbolScale);
                     break;
+                case BitmapType.Picture:
+                    PictureRenderer.Draw(canvas, bitmap.Picture,
+                        (float)destination.X, (float)destination.Y,
+                        rotation,
+                        (float)offsetX, (float)offsetY,
+                        opacity: opacity, scale: (float)symbolStyle.SymbolScale);
+                    break;
             }
         }
     }

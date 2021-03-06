@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -15,8 +16,11 @@ namespace Mapsui.UI.Forms
 {
     public class Pin : BindableObject, IFeatureProvider
     {
+        // Cache for used bitmaps
+        private static Dictionary<string, int> _bitmapIds = new Dictionary<string, int>();
+
+        private string _bitmapIdKey = string.Empty; // Key for active _bitmapIds entry
         private int _bitmapId = -1;
-        private byte[] _bitmapData;
         private MapView _mapView;
 
         public static readonly BindableProperty TypeProperty = BindableProperty.Create(nameof(Type), typeof(PinType), typeof(Pin), default(PinType));
@@ -422,6 +426,8 @@ namespace Mapsui.UI.Forms
 
         private void CreateFeature()
         {
+            SKSvg svg;
+
             lock (_sync)
             {
                 if (Feature == null)
@@ -440,52 +446,57 @@ namespace Mapsui.UI.Forms
                 {
                     // There is already a registered bitmap, so delete it
                     BitmapRegistry.Instance.Unregister(_bitmapId);
+                    if (!string.IsNullOrEmpty(_bitmapIdKey))
+                        _bitmapIds.Remove(_bitmapIdKey);
                     // We don't have any bitmap up to now
                     _bitmapId = -1;
+                    _bitmapIdKey = string.Empty;
                 }
-
-                Stream stream = null;
 
                 switch (Type)
                 {
                     case PinType.Svg:
                         // Load the SVG document
-                        if (!string.IsNullOrEmpty(Svg))
-                            stream = new MemoryStream(Encoding.UTF8.GetBytes(Svg));
-                        if (stream == null)
+                        if (string.IsNullOrEmpty(Svg))
                             return;
-                        _bitmapId = BitmapRegistry.Instance.Register(stream);
+                        if (_bitmapIds.ContainsKey(Svg))
+                        {
+                            _bitmapId = _bitmapIds[Svg];
+                            _bitmapIdKey = Svg;
+                        }
+                        else
+                        {
+                            if (Svg.ToLower().Contains("<svg"))
+                            {
+                                // Create a SKPicture (recorded drawing) from SVG
+                                svg = new SKSvg();
+                                svg.FromSvg(Svg);
+                                // Save this SKPicture for later use
+                                _bitmapId = BitmapRegistry.Instance.Register(svg.Picture);
+                                _bitmapIdKey = Svg;
+                                _bitmapIds.Add(Svg, _bitmapId);
+                            }
+                        }
                         break;
                     case PinType.Pin:
-                        // First we have to create a bitmap from Svg code
-                        // Create a new SVG object
-                        var svg = new SKSvg();
-                        // Load the SVG document
-                        stream = Utilities.EmbeddedResourceLoader.Load("Images.Pin.svg", typeof(Pin));
-                        if (stream == null)
-                            return;
-                        svg.Load(stream);
-                        Width = svg.Picture.CullRect.Width * Scale;
-                        Height = svg.Picture.CullRect.Height * Scale;
-                        // Create bitmap to hold canvas
-                        var info = new SKImageInfo((int)svg.Picture.CullRect.Width, (int)svg.Picture.CullRect.Height) { AlphaType = SKAlphaType.Premul };
-                        var bitmap = new SKBitmap(info);
-                        var canvas = new SKCanvas(bitmap);
-                        // Now draw Svg image to bitmap
-                        using (var paint = new SKPaint() { IsAntialias = true })
+                        var skColor = Color.ToSKColor();
+                        var colorInHex = $"{skColor.Red.ToString("X2")}{skColor.Green.ToString("X2")}{skColor.Blue.ToString("X2")}";
+                        var text = $"<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"36\" height=\"56\"><path d=\"M18 .34C8.325.34.5 8.168.5 17.81c0 3.339.962 6.441 2.594 9.094H3l7.82 15.117L18 55.903l7.187-13.895L33 26.903h-.063c1.632-2.653 2.594-5.755 2.594-9.094C35.531 8.169 27.675.34 18 .34zm0 9.438a6.5 6.5 0 1 1 0 13 6.5 6.5 0 0 1 0-13z\" fill=\"#{colorInHex}\"/></svg>";
+                        if (_bitmapIds.ContainsKey(colorInHex))
                         {
-                            // Replace color while drawing
-                            paint.ColorFilter = SKColorFilter.CreateBlendMode(Color.ToSKColor(), SKBlendMode.SrcIn); // use the source color
-                            canvas.Clear();
-                            canvas.DrawPicture(svg.Picture, paint);
+                            _bitmapId = _bitmapIds[colorInHex];
+                            _bitmapIdKey = colorInHex;
                         }
-                        // Now convert canvas to bitmap
-                        using (var image = SKImage.FromBitmap(bitmap))
-                        using (var data = image.Encode(SKEncodedImageFormat.Png, 100))
+                        else
                         {
-                            _bitmapData = data.ToArray();
+                            svg = new SKSvg();
+                            svg.FromSvg(text);
+                            _bitmapId = BitmapRegistry.Instance.Register(svg.Picture);
+                            _bitmapIdKey = colorInHex;
+                            _bitmapIds.Add(colorInHex, _bitmapId);
+                            Width = svg.Picture.CullRect.Width * Scale;
+                            Height = svg.Picture.CullRect.Height * Scale;
                         }
-                        _bitmapId = BitmapRegistry.Instance.Register(new MemoryStream(_bitmapData));
                         break;
                     case PinType.Icon:
                         if (Icon != null)
