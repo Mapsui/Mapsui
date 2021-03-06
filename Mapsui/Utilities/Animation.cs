@@ -97,9 +97,10 @@ namespace Mapsui.Utilities
             }
         }
 
-        public void UpdateAnimations()
+        public bool UpdateAnimations()
         {
-            if (!IsRunning) return;
+            if (!IsRunning) 
+                return false;
 
             double ticks = _stopwatch.ElapsedTicks - _stopwatchStart;
             var value = ticks / _durationTicks;
@@ -107,7 +108,7 @@ namespace Mapsui.Utilities
             if (value >= 1.0)
             {
                 Stop(true);
-                return;
+                return true;
             }
 
             // Calc new values
@@ -116,6 +117,8 @@ namespace Mapsui.Utilities
                 if (value >= entry.AnimationStart && value <= entry.AnimationEnd)
                     entry.Tick(value);
             }
+
+            return true;
         }
 
         public void Start(List<AnimationEntry> entries, long duration)

@@ -1,3 +1,4 @@
+using Mapsui.Geometries.Utilities;
 using Mapsui.Rendering;
 using Mapsui.UI.Utils;
 using SkiaSharp;
@@ -5,11 +6,12 @@ using SkiaSharp.Views.Forms;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
-using Mapsui.Geometries.Utilities;
-using Xamarin.Forms;
+using System.Threading;
 using System.Threading.Tasks;
-using Mapsui.Utilities;
+using Xamarin.Forms;
 
 namespace Mapsui.UI.Forms
 {
@@ -60,6 +62,16 @@ namespace Mapsui.UI.Forms
         private int _numOfTaps = 0;
         private readonly FlingTracker _flingTracker = new FlingTracker();
         private Geometries.Point _previousCenter;
+        private bool _sizeChanged = false;
+
+        // Timer for rendering loop
+        System.Threading.Timer _timer;
+        // Values for drawing loop
+        readonly Stopwatch _stopWatch = new Stopwatch();
+        double _fpsAverage = 0.0;
+        const double _fpsWanted = 60.0;
+        int _fpsCount = 0;
+        object _lockObj = new object();
 
         /// <summary>
         /// Saver for angle before last pinch movement
@@ -77,6 +89,11 @@ namespace Mapsui.UI.Forms
         {
             Initialize();
         }
+
+        /// <summary>
+        /// Flag for redrawing view
+        /// </summary>
+        public bool NeedsRedraw { get; set; } = true;
 
         public float ScreenWidth => (float)Width;
 
@@ -129,13 +146,16 @@ namespace Mapsui.UI.Forms
             Map = new Map();
             BackgroundColor = Color.White;
 
+            // Create timer for redrawing
+            _timer = new System.Threading.Timer(OnTimerCallback, null, TimeSpan.FromMilliseconds(1000.0 / _fpsWanted), TimeSpan.FromMilliseconds(1000.0 / _fpsWanted));
+
             _initialized = true;
         }
 
         private void OnSizeChanged(object sender, EventArgs e)
         {
             _touches.Clear();
-            SetViewportSize();
+            _sizeChanged = true;
         }
 
         private async void OnTouch(object sender, SKTouchEventArgs e)
@@ -306,13 +326,32 @@ namespace Mapsui.UI.Forms
 
         void PaintSurface(SKCanvas canvas)
         {
-            if (PixelDensity <= 0) return;
+            if (_sizeChanged)
+            {
+                SetViewportSize();
+                _sizeChanged = false;
+            }
 
-            Navigator.UpdateAnimations();
+            bool lockTaken = false;
 
-            canvas.Scale(PixelDensity, PixelDensity);
+            try
+            {
+                Monitor.TryEnter(_lockObj, ref lockTaken);
 
-            _renderer.Render(canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
+                if (lockTaken)
+                {
+                    canvas.Scale(PixelDensity, PixelDensity);
+
+                    _renderer.Render(canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
+
+                    NeedsRedraw = false;
+                }
+            }
+            finally
+            {
+                if (lockTaken)
+                    Monitor.Exit(_lockObj);
+            }
         }
 
         private Geometries.Point GetScreenPosition(SKPoint point)
@@ -322,7 +361,7 @@ namespace Mapsui.UI.Forms
 
         public void RefreshGraphics()
         {
-            _invalidate();
+            NeedsRedraw = true;
         }
 
         /// <summary>
@@ -793,6 +832,43 @@ namespace Mapsui.UI.Forms
                 return (float)(_glView.CanvasSize.Width / Width);
             else
                 return (float)(_canvasView.CanvasSize.Width / Width);
+        }
+
+        // See http://codetips.nl/skiagameloop.html
+        void OnTimerCallback(object state)
+        {
+            // Get the elapsed time from the stopwatch because the 1/fps timer interval is not accurate and can be off by 2 ms
+            var dt = _stopWatch.Elapsed.TotalSeconds;
+
+            // Restart the time measurement for the next time this method is called
+            _stopWatch.Restart();
+
+            // Workload in background
+            var redraw = NeedsRedraw || Navigator.UpdateAnimations();
+
+            // Calculate current fps
+            var fps = dt > 0 ? 1.0 / dt : 0;
+
+            // When the fps is to low, reduce the load by skipping the frame
+            if (fps < _fpsWanted / 2)
+                return;
+
+            // Calculate an averaged fps
+            _fpsAverage += fps;
+            _fpsCount++;
+
+            if (_fpsCount == 20)
+            {
+                fps = _fpsAverage / _fpsCount;
+                Debug.WriteLine($"FPS {fps.ToString("N3", CultureInfo.InvariantCulture)}");
+
+                _fpsCount = 0;
+                _fpsAverage = 0.0;
+            }
+
+            // Called if needed
+            if (redraw)
+                _invalidate();
         }
     }
 }

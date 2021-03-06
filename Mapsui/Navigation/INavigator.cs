@@ -108,6 +108,6 @@ namespace Mapsui
         /// </summary>
         void StopRunningAnimation();
 
-        void UpdateAnimations();
+        bool UpdateAnimations();
     }
 }
