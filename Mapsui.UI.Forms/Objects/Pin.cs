@@ -450,11 +450,9 @@ namespace Mapsui.UI.Forms
                 {
                     case PinType.Svg:
                         // Load the SVG document
-                        if (!string.IsNullOrEmpty(Svg))
-                            stream = new MemoryStream(Encoding.UTF8.GetBytes(Svg));
-                        if (stream == null)
+                        if (string.IsNullOrEmpty(Svg))
                             return;
-                        _bitmapId = BitmapRegistry.Instance.Register(stream);
+                        _bitmapId = BitmapRegistry.Instance.Register(Svg);
                         break;
                     case PinType.Pin:
                         // First we have to create a bitmap from Svg code
