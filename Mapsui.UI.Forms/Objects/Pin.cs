@@ -444,8 +444,6 @@ namespace Mapsui.UI.Forms
                     _bitmapId = -1;
                 }
 
-                Stream stream = null;
-
                 switch (Type)
                 {
                     case PinType.Svg:
@@ -459,7 +457,7 @@ namespace Mapsui.UI.Forms
                         // Create a new SVG object
                         var svg = new SKSvg();
                         // Load the SVG document
-                        stream = Utilities.EmbeddedResourceLoader.Load("Images.Pin.svg", typeof(Pin));
+                        var stream = Utilities.EmbeddedResourceLoader.Load("Images.Pin.svg", typeof(Pin));
                         if (stream == null)
                             return;
                         svg.Load(stream);
