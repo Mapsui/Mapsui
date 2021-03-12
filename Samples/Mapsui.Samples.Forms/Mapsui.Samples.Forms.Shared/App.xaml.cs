@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Diagnostics;
+using Mapsui.Logging;
 
 using Xamarin.Forms;
 
@@ -12,6 +11,8 @@ namespace Mapsui.Samples.Forms
         public App()
         {
             InitializeComponent();
+
+            Logger.LogDelegate += LogMethod;
 
             if (Device.Idiom == TargetIdiom.Phone)
                 MainPage = new NavigationPage(new Mapsui.Samples.Forms.MainPage());
@@ -32,6 +33,11 @@ namespace Mapsui.Samples.Forms
         protected override void OnResume()
         {
             // Handle when your app resumes
+        }
+
+        private void LogMethod(LogLevel logLevel, string message, Exception exception)
+        {
+            Debug.WriteLine($"{logLevel}: {message}, {exception}");
         }
     }
 }
