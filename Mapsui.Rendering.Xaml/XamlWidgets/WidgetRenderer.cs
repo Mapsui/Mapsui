@@ -7,10 +7,9 @@ namespace Mapsui.Rendering.Xaml.XamlWidgets
 {
     public static class WidgetRenderer
     {
-        public static void Render(object target, IReadOnlyViewport viewport, 
+        public static void Render(Canvas canvas, IReadOnlyViewport viewport, 
             IEnumerable<IWidget> widgets, IDictionary<Type, IWidgetRenderer> renderers)
         {
-            var canvas = (Canvas)target;
             var widgetCanvas = new Canvas
             {
                 Width = canvas.ActualWidth,

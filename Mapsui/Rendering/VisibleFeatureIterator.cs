@@ -4,6 +4,7 @@ using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Mapsui.Rendering
@@ -11,15 +12,26 @@ namespace Mapsui.Rendering
     public static class VisibleFeatureIterator
     {
         public static void IterateLayers(IReadOnlyViewport viewport, IEnumerable<ILayer> layers,
-            Action<IReadOnlyViewport, ILayer, IStyle, IFeature, float> callback)
+            Action<IReadOnlyViewport, ILayer, IStyle, IFeature, float> callback,
+            List<RenderBenchmark> layerBenchmarks
+            )
         {
+            var sw = new Stopwatch();
+
+            int i = 0;
             foreach (var layer in layers)
             {
                 if (layer.Enabled == false) continue;
                 if (layer.MinVisible > viewport.Resolution) continue;
                 if (layer.MaxVisible < viewport.Resolution) continue;
 
+                sw.Reset();
+                sw.Start();
                 IterateLayer(viewport, layer, callback);
+                sw.Stop();
+                if (layerBenchmarks != null)
+                    layerBenchmarks[i].Time = sw.Elapsed.TotalMilliseconds;
+                ++i;
             }
         }
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Mapsui.Geometries;
@@ -35,6 +36,10 @@ namespace Mapsui.Rendering.Skia
         /// </summary>
         public IDictionary<Type, IStyleRenderer> StyleRenderers { get; } = new Dictionary<Type, IStyleRenderer>();
 
+
+
+        public List<List<RenderBenchmark>> Benchmarks { get; } = new();
+
         static MapRenderer()
         {
             DefaultRendererFactory.Create = () => new MapRenderer();
@@ -48,23 +53,46 @@ namespace Mapsui.Rendering.Skia
         }
 
         public void Render(object target, IReadOnlyViewport viewport, IEnumerable<ILayer> layers,
-            IEnumerable<IWidget> widgets, Color background = null)
+            IEnumerable<IWidget> widgets, Color background)
         {
             var attributions = layers.Where(l => l.Enabled).Select(l => l.Attribution).Where(w => w != null).ToList();
-
             var allWidgets = widgets.Concat(attributions);
 
-            RenderTypeSave((SKCanvas)target, viewport, layers, allWidgets, background);
-        }
+            if (!viewport.HasSize)
+                return;
 
-        private void RenderTypeSave(SKCanvas canvas, IReadOnlyViewport viewport, IEnumerable<ILayer> layers,
-            IEnumerable<IWidget> widgets, Color background = null)
-        {
-            if (!viewport.HasSize) return;
+            var currentBenchmarks = new List<RenderBenchmark>();
+            var benchmark = new RenderBenchmark {
+                Name = $"Global Render #{_currentIteration}",
+            };
+            int layerCount = 0;
+            foreach (var layer in layers)
+            {
+                currentBenchmarks.Add(new RenderBenchmark {
+                    Name = $"Render #{_currentIteration} LAYER['{layer.Name}']",
+                });
+                ++layerCount;
+            }
+            foreach (var widget in allWidgets)
+            {
+                currentBenchmarks.Add(new RenderBenchmark {
+                    Name = $"Render #{_currentIteration} WIDGET['{widget.GetType().Name}']",
+                });
+            }
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
 
-            if (background != null) canvas.Clear(background.ToSkia(1));
-            Render(canvas, viewport, layers);
-            Render(canvas, viewport, widgets, 1);
+            var canvas = target as SKCanvas;
+            if (background != null)
+                canvas.Clear(background.ToSkia(1));
+            RenderLayers(canvas, viewport, layers, currentBenchmarks.Take(layerCount).ToList());
+            RenderWidgets(canvas, viewport, allWidgets, 1.0f, currentBenchmarks.Skip(layerCount).ToList());
+
+            stopWatch.Stop();
+            benchmark.Time = stopWatch.Elapsed.TotalMilliseconds;
+
+            currentBenchmarks.Insert(0, benchmark);
+            Benchmarks.Add(currentBenchmarks);
         }
 
         public MemoryStream RenderToBitmapStream(IReadOnlyViewport viewport, IEnumerable<ILayer> layers, Color background = null, float pixelDensity = 1)
@@ -82,7 +110,7 @@ namespace Mapsui.Rendering.Skia
                     // Not sure if this is needed here:
                     if (background != null) surface.Canvas.Clear(background.ToSkia(1));
                     surface.Canvas.Scale(pixelDensity, pixelDensity);
-                    Render(surface.Canvas, viewport, layers);
+                    Render(surface.Canvas, viewport, layers, null, null);
                     using (var image = surface.Snapshot())
                     {
                         using (var data = image.Encode())
@@ -101,16 +129,17 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        private void Render(SKCanvas canvas, IReadOnlyViewport viewport, IEnumerable<ILayer> layers)
+        private void RenderLayers(SKCanvas canvas, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, List<RenderBenchmark> currentBenchmarks)
         {
             try
             {
                 layers = layers.ToList();
 
-                VisibleFeatureIterator.IterateLayers(viewport, layers, (v, l, s, f, o) => { RenderFeature(canvas, v, l, s, f, o); });
-
+                VisibleFeatureIterator.IterateLayers(viewport, layers,
+                    (v, l, s, f, o) => { RenderFeature(canvas, v, l, s, f, o); },
+                    currentBenchmarks
+                );
                 RemovedUnusedBitmapsFromCache();
-
                 _currentIteration++;
             }
             catch (Exception exception)
@@ -177,17 +206,15 @@ namespace Mapsui.Rendering.Skia
                 RasterRenderer.Draw(canvas, viewport, style, feature, layerOpacity * style.Opacity, _tileCache, _currentIteration);
         }
 
-        private void Render(object canvas, IReadOnlyViewport viewport, IEnumerable<IWidget> widgets, float layerOpacity)
+        private void RenderWidgets(SKCanvas canvas, IReadOnlyViewport viewport, IEnumerable<IWidget> widgets, float layerOpacity, List<RenderBenchmark> currentBenchmarks)
         {
-            WidgetRenderer.Render(canvas, viewport, widgets, WidgetRenders, layerOpacity);
+            WidgetRenderer.Render(canvas, viewport, widgets, WidgetRenders, layerOpacity, currentBenchmarks);
         }
 
         public MapInfo GetMapInfo(double x, double y, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, int margin = 0)
         {
             // todo: use margin to increase the pixel area
             // todo: We will need to select on style instead of layer
-            
-
 
             layers = layers
                 .Select(l => (l is RasterizingLayer rl) ? rl.ChildLayer : l)
@@ -234,7 +261,7 @@ namespace Mapsui.Rendering.Skia
                             // 4) Add feature and style to result
                             list.Add(new MapInfoRecord(feature, style, layer));
                         surface.Canvas.Restore();
-                    });
+                    }, null);
                 }
 
                 if (list.Count == 0)

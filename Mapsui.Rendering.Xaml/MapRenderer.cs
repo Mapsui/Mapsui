@@ -26,9 +26,12 @@ namespace Mapsui.Rendering.Xaml
 {
     public class MapRenderer : IRenderer
     {
+        private ulong _iterationCount;
         private readonly SymbolCache _symbolCache = new SymbolCache();
         public ISymbolCache SymbolCache => _symbolCache;
         public IDictionary<Type, IWidgetRenderer> WidgetRenders { get; } = new Dictionary<Type, IWidgetRenderer>();
+
+        public List<List<RenderBenchmark>> Benchmarks { get; set; } = new();
 
         /// <summary>
         /// Dictionary holding all special renderers for styles
@@ -52,24 +55,34 @@ namespace Mapsui.Rendering.Xaml
         {
             var allWidgets = layers.Select(l => l.Attribution).ToList().Where(w => w != null).Concat(widgets).ToList();
 
-            RenderTypeSave((Canvas) target, viewport, layers, allWidgets, background);
-        }
-        private void RenderTypeSave(Canvas canvas, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, 
-            IEnumerable<IWidget> widgets, Color background = null)
-        {
-            if (!viewport.HasSize) return;
 
-            Clear(canvas, background);
-            Render(canvas, viewport, layers);
-            Render(canvas, viewport, widgets);
+            if (!viewport.HasSize)
+                return;
+
+            var list = new List<RenderBenchmark>();
+            var bench = new RenderBenchmark {
+                Name = $"Render {_iterationCount}"
+            };
+            Benchmarks.Add(new List<RenderBenchmark> { bench });
+            var sw = new System.Diagnostics.Stopwatch();
+            sw.Start();
+
+            var canvas = target as Canvas;
+            if (background != null)
+                Clear(canvas, background);
+            RenderLayers(canvas, viewport, layers);
+            RenderWidgets(canvas, viewport, allWidgets);
+            sw.Stop();
+            bench.Time = sw.Elapsed.TotalMilliseconds;
+            ++_iterationCount;
         }
 
-        private void Render(Canvas target, IReadOnlyViewport viewport, IEnumerable<ILayer> layers)
+        private void RenderLayers(Canvas target, IReadOnlyViewport viewport, IEnumerable<ILayer> layers)
         {
             Render(target, viewport, layers,  _symbolCache, false);
         }
 
-        private void Render(object target, IReadOnlyViewport viewport, IEnumerable<IWidget> widgets)
+        private void RenderWidgets(Canvas target, IReadOnlyViewport viewport, IEnumerable<IWidget> widgets)
         {
             WidgetRenderer.Render(target, viewport, widgets, WidgetRenders);
         }

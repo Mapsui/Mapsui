@@ -1,0 +1,1 @@
+MONO_LOG_LEVEL=error

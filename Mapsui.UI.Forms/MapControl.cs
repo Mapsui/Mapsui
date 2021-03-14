@@ -247,17 +247,33 @@ namespace Mapsui.UI.Forms
             return _firstTouch == null ? false : Algorithms.Distance(releasedTouch.Location, _firstTouch) < touchSlop;
         }
 
-        void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs skPaintSurfaceEventArgs)
+        void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs e)
         {
-            if (PixelDensity <= 0) return;
-
+            if (PixelDensity <= 0)
+                return;
             Navigator.UpdateAnimations();
 
-            skPaintSurfaceEventArgs.Surface.Canvas.Scale(PixelDensity, PixelDensity);
+            e.Surface.Canvas.Scale(PixelDensity, PixelDensity);
 
-            var canvas = skPaintSurfaceEventArgs.Surface.Canvas;
 
-            _renderer.Render(canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
+            Renderer.Render(e.Surface.Canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
+
+            var items = Renderer.Benchmarks.Last();
+
+            Task.Run(() =>
+            {
+                var c = System.Globalization.CultureInfo.InvariantCulture;
+                try
+                {
+                    foreach (var item in items)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"{item.Name} {item.Time.ToString(c)}");
+                    }
+                }
+                catch (Exception)
+                {
+                }
+            });
         }
 
         private Geometries.Point GetScreenPosition(SKPoint point)
@@ -273,7 +289,6 @@ namespace Mapsui.UI.Forms
                 Logging.Logger.Log(Logging.LogLevel.Warning, "Refresh can not be called because GRContext is null");
                 return;
             }
-
             RunOnUIThread(InvalidateSurface);
         }
 

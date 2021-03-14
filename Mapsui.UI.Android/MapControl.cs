@@ -93,6 +93,23 @@ namespace Mapsui.UI.Android
 
             Navigator.UpdateAnimations();
             Renderer.Render(e.Surface.Canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
+
+
+            var items = Renderer.Benchmarks.Last();
+            Task.Run(() =>
+            {
+                try
+                {
+                    var c = System.Globalization.CultureInfo.InvariantCulture;
+                    foreach (var item in items)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"{item.Name} {item.Time.ToString(c)}");
+                    }
+                }
+                catch (Exception)
+                {
+                }
+            });
         }
 
         public SkiaRenderMode RenderMode

@@ -7,6 +7,12 @@ using Mapsui.Widgets;
 
 namespace Mapsui.Rendering
 {
+    public class RenderBenchmark
+    {
+        public string Name { get; set; }
+        public double Time { get; set; }
+    }
+
     public interface IRenderer : IRenderInfo
     {
         void Render(object target, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, IEnumerable<IWidget> widgets, Color background = null);
@@ -14,5 +20,7 @@ namespace Mapsui.Rendering
         ISymbolCache SymbolCache { get; }
         IDictionary<Type, IWidgetRenderer> WidgetRenders { get; }
         IDictionary<Type, IStyleRenderer> StyleRenderers { get; }
+
+        List<List<RenderBenchmark>> Benchmarks { get; }
     }
 }
