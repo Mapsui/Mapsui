@@ -443,10 +443,6 @@ namespace Mapsui.UI.Forms
                 if (_bitmapId != -1)
                 {
                     // There is already a registered bitmap, so delete it
-                    BitmapRegistry.Instance.Unregister(_bitmapId);
-                    if (!string.IsNullOrEmpty(_bitmapIdKey))
-                        _bitmapIds.Remove(_bitmapIdKey);
-                    // We don't have any bitmap up to now
                     _bitmapId = -1;
                     _bitmapIdKey = string.Empty;
                 }
