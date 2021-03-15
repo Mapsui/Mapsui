@@ -26,7 +26,7 @@
     <PackageReference Include="BruTile" Version="3.1.2">
     </PackageReference>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="Svg2Xaml" Version="0.3.0.5">
+    <PackageReference Include="Svg2Xaml" Version="0.3.0.7">
     </PackageReference>
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
     <PackageReference Include="System.Memory" Version="4.5.4">
