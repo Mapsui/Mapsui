@@ -25,6 +25,7 @@ namespace Mapsui.Samples.Forms
                 Radius = Distance.FromMeters(rnd.Next(100000, 1000000)),
                 Quality = rnd.Next(0, 60),
                 StrokeColor = new Color(rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0),
+                StrokeWidth = rnd.Next(1, 5),
                 FillColor = new Color(rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0)
             };
 
