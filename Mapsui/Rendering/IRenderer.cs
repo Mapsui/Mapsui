@@ -11,6 +11,12 @@ namespace Mapsui.Rendering
     {
         public string Name { get; set; }
         public double Time { get; set; }
+
+        public int FeatureCount { get; set; }
+        public int StyleCount { get; set; }
+
+        public Dictionary<string,int> StyleTypeCount;
+        public Dictionary<string,double> StyleTypeTime;
     }
 
     public interface IRenderer : IRenderInfo

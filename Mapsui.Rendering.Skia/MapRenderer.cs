@@ -91,6 +91,11 @@ namespace Mapsui.Rendering.Skia
             stopWatch.Stop();
             benchmark.Time = stopWatch.Elapsed.TotalMilliseconds;
 
+            foreach (var item in currentBenchmarks)
+            {
+                benchmark.FeatureCount += item.FeatureCount;
+                benchmark.StyleCount += item.StyleCount;
+            }
             currentBenchmarks.Insert(0, benchmark);
             Benchmarks.Add(currentBenchmarks);
         }

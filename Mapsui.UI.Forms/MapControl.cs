@@ -258,22 +258,29 @@ namespace Mapsui.UI.Forms
 
             Renderer.Render(e.Surface.Canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
 
-            var items = Renderer.Benchmarks.Last();
-
-            Task.Run(() =>
+            if (Renderer.Benchmarks.Count > 0)
             {
-                var c = System.Globalization.CultureInfo.InvariantCulture;
-                try
+                var items = Renderer.Benchmarks.Last();
+                Task.Run(() =>
                 {
-                    foreach (var item in items)
+                    var c = System.Globalization.CultureInfo.InvariantCulture;
+                    try
                     {
-                        System.Diagnostics.Debug.WriteLine($"{item.Name} {item.Time.ToString(c)}");
+                        foreach (var item in items)
+                        {
+                            double avg_time = item.Time / item.StyleCount;
+                            if (item.StyleCount == 0)
+                            {
+                                avg_time = 0;
+                            }
+                            System.Diagnostics.Debug.WriteLine($"{item.Name} {item.Time.ToString(c)} f={item.FeatureCount} s={item.StyleCount} avg_time_per_style={avg_time.ToString(c)}");
+                        }
                     }
-                }
-                catch (Exception)
-                {
-                }
-            });
+                    catch (Exception)
+                    {
+                    }
+                });
+            }
         }
 
         private Geometries.Point GetScreenPosition(SKPoint point)
