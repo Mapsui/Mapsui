@@ -11,7 +11,6 @@ using Mapsui.Samples.Wpf.Utilities;
 using Mapsui.UI;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Desktop;
-using SQLitePCL;
 
 namespace Mapsui.Samples.Wpf
 {
@@ -20,6 +19,9 @@ namespace Mapsui.Samples.Wpf
         public Window1()
         {
             InitializeComponent();
+
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
             MapControl.FeatureInfo += MapControlFeatureInfo;
             MapControl.MouseMove += MapControlOnMouseMove;
             MapControl.Map.RotationLock = false;
