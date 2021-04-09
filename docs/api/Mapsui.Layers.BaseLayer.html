@@ -100,13 +100,34 @@
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a></div>
-    <div><span class="xref">INotifyPropertyChanged</span></div>
+    <div><span class="xref">System.ComponentModel.INotifyPropertyChanged</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.Layers.html">Mapsui.Layers</a></h6>
   <h6><strong>Assembly</strong>: Mapsui.dll</h6>
   <h5 id="Mapsui_Layers_BaseLayer_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract class BaseLayer : object, ILayer, INotifyPropertyChanged</code></pre>
+    <pre><code class="lang-csharp hljs">public abstract class BaseLayer : ILayer, INotifyPropertyChanged</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -563,7 +584,7 @@ This can be used for radiobuttons.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IReadOnlyList</span>&lt;<span class="xref">System.Double</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.IReadOnlyList</span>&lt;<span class="xref">System.Double</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -757,7 +778,7 @@ This can be used for radiobuttons.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Mapsui.Providers.IFeature.html">IFeature</a>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Mapsui.Providers.IFeature.html">IFeature</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -806,7 +827,7 @@ This can be used for radiobuttons.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Mapsui.Styles.IStyle.html">IStyle</a>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Mapsui.Styles.IStyle.html">IStyle</a>&gt;</td>
         <td><p>Enumerable with styles belonging to layer</p>
 </td>
       </tr>
@@ -1004,6 +1025,8 @@ to fetch data, only on the drag end.</p>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.ToString()</span></div>
   <h3 id="events">Events
   </h3>
   <span class="small pull-right mobile-hide">
@@ -1061,7 +1084,7 @@ to fetch data, only on the drag end.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">PropertyChangedEventHandler</span></td>
+        <td><span class="xref">System.ComponentModel.PropertyChangedEventHandler</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -1071,7 +1094,7 @@ to fetch data, only on the drag end.</p>
       <a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>
   </div>
   <div>
-      <span class="xref">INotifyPropertyChanged</span>
+      <span class="xref">System.ComponentModel.INotifyPropertyChanged</span>
   </div>
 </article>
           </div>

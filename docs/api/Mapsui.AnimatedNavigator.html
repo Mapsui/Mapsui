@@ -94,11 +94,36 @@
     <h5>Implements</h5>
     <div><a class="xref" href="Mapsui.INavigator.html">INavigator</a></div>
   </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.html">Mapsui</a></h6>
   <h6><strong>Assembly</strong>: Mapsui.dll</h6>
   <h5 id="Mapsui_AnimatedNavigator_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class AnimatedNavigator : object, INavigator</code></pre>
+    <pre><code class="lang-csharp hljs">[Obsolete(&quot;Please just use normal Navigator, it has animation capability built in now&quot;, true)]
+public class AnimatedNavigator : INavigator</code></pre>
   </div>
   <h3 id="properties">Properties
   </h3>
@@ -127,7 +152,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">EventHandler</span>&lt;<a class="xref" href="Mapsui.ChangeType.html">ChangeType</a>&gt;</td>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="Mapsui.ChangeType.html">ChangeType</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -147,7 +172,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void CenterOn(Point center, long duration = null, Easing easing = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public void CenterOn(Point center, long duration = 0L, Easing easing = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -189,7 +214,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void CenterOn(double x, double y, long duration = null, Easing easing = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public void CenterOn(double x, double y, long duration = 0L, Easing easing = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -278,7 +303,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void NavigateTo(BoundingBox extent, ScaleMethod scaleMethod = ScaleMethod.Fit, long duration = null, Easing easing = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public void NavigateTo(BoundingBox extent, ScaleMethod scaleMethod = ScaleMethod.Fit, long duration = 0L, Easing easing = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -325,7 +350,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void NavigateTo(Point center, double resolution, long duration = null, Easing easing = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public void NavigateTo(Point center, double resolution, long duration = 0L, Easing easing = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -372,7 +397,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void NavigateToFullEnvelope(ScaleMethod scaleMethod = ScaleMethod.Fill, long duration = null, Easing easing = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public void NavigateToFullEnvelope(ScaleMethod scaleMethod = ScaleMethod.Fill, long duration = 0L, Easing easing = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -414,7 +439,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void RotateTo(double rotation, long duration = null, Easing easing = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public void RotateTo(double rotation, long duration = 0L, Easing easing = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -486,7 +511,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void ZoomIn(Point centerOfZoom, long duration = null, Easing easing = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public void ZoomIn(Point centerOfZoom, long duration = 0L, Easing easing = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -528,7 +553,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void ZoomIn(long duration = null, Easing easing = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public void ZoomIn(long duration = 0L, Easing easing = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -565,7 +590,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void ZoomOut(Point centerOfZoom, long duration = null, Easing easing = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public void ZoomOut(Point centerOfZoom, long duration = 0L, Easing easing = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -607,7 +632,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void ZoomOut(long duration = null, Easing easing = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public void ZoomOut(long duration = 0L, Easing easing = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -644,7 +669,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void ZoomTo(double resolution, Point centerOfZoom, long duration = null, Easing easing = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public void ZoomTo(double resolution, Point centerOfZoom, long duration = 0L, Easing easing = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -691,7 +716,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void ZoomTo(double resolution, long duration = null, Easing easing = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public void ZoomTo(double resolution, long duration = 0L, Easing easing = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">

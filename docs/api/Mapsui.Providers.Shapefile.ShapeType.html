@@ -78,19 +78,19 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Mapsui.Desktop.Shapefile.ShapeType">
+            <article class="content wrap" id="_content" data-uid="Mapsui.Providers.Shapefile.ShapeType">
   
   
-  <h1 id="Mapsui_Desktop_Shapefile_ShapeType" data-uid="Mapsui.Desktop.Shapefile.ShapeType" class="text-break">Enum ShapeType
+  <h1 id="Mapsui_Providers_Shapefile_ShapeType" data-uid="Mapsui.Providers.Shapefile.ShapeType" class="text-break">Enum ShapeType
   </h1>
   <div class="markdown level0 summary"><p>Shapefile geometry type.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.Desktop.Shapefile.html">Mapsui.Desktop.Shapefile</a></h6>
-  <h6><strong>Assembly</strong>: Mapsui.Desktop.dll</h6>
-  <h5 id="Mapsui_Desktop_Shapefile_ShapeType_syntax">Syntax</h5>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.Providers.Shapefile.html">Mapsui.Providers.Shapefile</a></h6>
+  <h6><strong>Assembly</strong>: Mapsui.dll</h6>
+  <h5 id="Mapsui_Providers_Shapefile_ShapeType_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public enum ShapeType : int</code></pre>
+    <pre><code class="lang-csharp hljs">public enum ShapeType</code></pre>
   </div>
   <h3 id="fields">Fields
   </h3>
@@ -103,7 +103,7 @@
     <thead>
     <tbody>
       <tr>
-        <td id="Mapsui_Desktop_Shapefile_ShapeType_MultiPatch">MultiPatch</td>
+        <td id="Mapsui_Providers_Shapefile_ShapeType_MultiPatch">MultiPatch</td>
         <td><p>A MultiPatch consists of a number of surface patches. Each surface patch describes a
 surface. The surface patches of a MultiPatch are referred to as its parts, and the type of
 part controls how the order of vertices of an MultiPatch part is interpreted.
@@ -111,48 +111,48 @@ Mapsui doesn&apos;t support this feature type.</p>
 </td>
       </tr>
       <tr>
-        <td id="Mapsui_Desktop_Shapefile_ShapeType_Multipoint">Multipoint</td>
+        <td id="Mapsui_Providers_Shapefile_ShapeType_Multipoint">Multipoint</td>
         <td><p>A MultiPoint represents a set of points.
 Mapsui interpretes this as <a class="xref" href="Mapsui.Geometries.MultiPoint.html">MultiPoint</a></p>
 </td>
       </tr>
       <tr>
-        <td id="Mapsui_Desktop_Shapefile_ShapeType_MultiPointM">MultiPointM</td>
-        <td><p>A MultiPointM represents a set of <a class="xref" href="Mapsui.Desktop.Shapefile.ShapeType.html#Mapsui_Desktop_Shapefile_ShapeType_PointM">PointM</a>s.
+        <td id="Mapsui_Providers_Shapefile_ShapeType_MultiPointM">MultiPointM</td>
+        <td><p>A MultiPointM represents a set of <a class="xref" href="Mapsui.Providers.Shapefile.ShapeType.html#Mapsui_Providers_Shapefile_ShapeType_PointM">PointM</a>s.
 Mapsui interpretes this as <a class="xref" href="Mapsui.Geometries.MultiPoint.html">MultiPoint</a></p>
 </td>
       </tr>
       <tr>
-        <td id="Mapsui_Desktop_Shapefile_ShapeType_MultiPointZ">MultiPointZ</td>
-        <td><p>A MultiPointZ represents a set of <a class="xref" href="Mapsui.Desktop.Shapefile.ShapeType.html#Mapsui_Desktop_Shapefile_ShapeType_PointZ">PointZ</a>s.
+        <td id="Mapsui_Providers_Shapefile_ShapeType_MultiPointZ">MultiPointZ</td>
+        <td><p>A MultiPointZ represents a set of <a class="xref" href="Mapsui.Providers.Shapefile.ShapeType.html#Mapsui_Providers_Shapefile_ShapeType_PointZ">PointZ</a>s.
 Mapsui interpretes this as <a class="xref" href="Mapsui.Geometries.MultiPoint.html">MultiPoint</a></p>
 </td>
       </tr>
       <tr>
-        <td id="Mapsui_Desktop_Shapefile_ShapeType_Null">Null</td>
+        <td id="Mapsui_Providers_Shapefile_ShapeType_Null">Null</td>
         <td><p>Null shape with no geometric data</p>
 </td>
       </tr>
       <tr>
-        <td id="Mapsui_Desktop_Shapefile_ShapeType_Point">Point</td>
+        <td id="Mapsui_Providers_Shapefile_ShapeType_Point">Point</td>
         <td><p>A point consists of a pair of double-precision coordinates.
-Mapsui interpretes this as <a class="xref" href="Mapsui.Geometries.Point.html">Point</a></p>
+Mapsui interprets this as <a class="xref" href="Mapsui.Geometries.Point.html">Point</a></p>
 </td>
       </tr>
       <tr>
-        <td id="Mapsui_Desktop_Shapefile_ShapeType_PointM">PointM</td>
+        <td id="Mapsui_Providers_Shapefile_ShapeType_PointM">PointM</td>
         <td><p>A PointM consists of a pair of double-precision coordinates in the order X, Y, plus a measure M.
 Mapsui interpretes this as <a class="xref" href="Mapsui.Geometries.Point.html">Point</a></p>
 </td>
       </tr>
       <tr>
-        <td id="Mapsui_Desktop_Shapefile_ShapeType_PointZ">PointZ</td>
+        <td id="Mapsui_Providers_Shapefile_ShapeType_PointZ">PointZ</td>
         <td><p>A PointZ consists of a triplet of double-precision coordinates plus a measure.
 Mapsui interpretes this as <a class="xref" href="Mapsui.Geometries.Point.html">Point</a></p>
 </td>
       </tr>
       <tr>
-        <td id="Mapsui_Desktop_Shapefile_ShapeType_Polygon">Polygon</td>
+        <td id="Mapsui_Providers_Shapefile_ShapeType_Polygon">Polygon</td>
         <td><p>A polygon consists of one or more rings. A ring is a connected sequence of four or more
 points that form a closed, non-self-intersecting loop. A polygon may contain multiple
 outer rings. The order of vertices or orientation for a ring indicates which side of the ring
@@ -161,17 +161,17 @@ the ring in vertex order is the neighborhood inside the polygon. Vertices of rin
 holes in polygons are in a counterclockwise direction. Vertices for a single, ringed
 polygon are, therefore, always in clockwise order. The rings of a polygon are referred to
 as its parts.
-Mapsui interpretes this as either <a class="xref" href="Mapsui.Geometries.Polygon.html">Polygon</a> or <a class="xref" href="Mapsui.Geometries.MultiPolygon.html">MultiPolygon</a></p>
+Mapsui interprets this as either <a class="xref" href="Mapsui.Geometries.Polygon.html">Polygon</a> or <a class="xref" href="Mapsui.Geometries.MultiPolygon.html">MultiPolygon</a></p>
 </td>
       </tr>
       <tr>
-        <td id="Mapsui_Desktop_Shapefile_ShapeType_PolygonM">PolygonM</td>
+        <td id="Mapsui_Providers_Shapefile_ShapeType_PolygonM">PolygonM</td>
         <td><p>A PolygonM consists of a number of rings. A ring is a closed, non-self-intersecting loop.
 Mapsui interpretes this as either <a class="xref" href="Mapsui.Geometries.Polygon.html">Polygon</a> or <a class="xref" href="Mapsui.Geometries.MultiPolygon.html">MultiPolygon</a></p>
 </td>
       </tr>
       <tr>
-        <td id="Mapsui_Desktop_Shapefile_ShapeType_PolygonZ">PolygonZ</td>
+        <td id="Mapsui_Providers_Shapefile_ShapeType_PolygonZ">PolygonZ</td>
         <td><p>A PolygonZ consists of a number of rings. A ring is a closed, non-self-intersecting loop.
 A PolygonZ may contain multiple outer rings. The rings of a PolygonZ are referred to as
 its parts.
@@ -179,15 +179,15 @@ Mapsui interpretes this as either <a class="xref" href="Mapsui.Geometries.Polygo
 </td>
       </tr>
       <tr>
-        <td id="Mapsui_Desktop_Shapefile_ShapeType_PolyLine">PolyLine</td>
+        <td id="Mapsui_Providers_Shapefile_ShapeType_PolyLine">PolyLine</td>
         <td><p>PolyLine is an ordered set of vertices that consists of one or more parts. A part is a
 connected sequence of two or more points. Parts may or may not be connected to one
 another. Parts may or may not intersect one another.
-Mapsui interpretes this as either <a class="xref" href="Mapsui.Geometries.LineString.html">LineString</a> or <a class="xref" href="Mapsui.Geometries.MultiLineString.html">MultiLineString</a></p>
+Mapsui interprets this as either <a class="xref" href="Mapsui.Geometries.LineString.html">LineString</a> or <a class="xref" href="Mapsui.Geometries.MultiLineString.html">MultiLineString</a></p>
 </td>
       </tr>
       <tr>
-        <td id="Mapsui_Desktop_Shapefile_ShapeType_PolyLineM">PolyLineM</td>
+        <td id="Mapsui_Providers_Shapefile_ShapeType_PolyLineM">PolyLineM</td>
         <td><p>A shapefile PolyLineM consists of one or more parts. A part is a connected sequence of
 two or more points. Parts may or may not be connected to one another. Parts may or may
 not intersect one another.
@@ -195,7 +195,7 @@ Mapsui interpretes this as <a class="xref" href="Mapsui.Geometries.LineString.ht
 </td>
       </tr>
       <tr>
-        <td id="Mapsui_Desktop_Shapefile_ShapeType_PolyLineZ">PolyLineZ</td>
+        <td id="Mapsui_Providers_Shapefile_ShapeType_PolyLineZ">PolyLineZ</td>
         <td><p>A PolyLineZ consists of one or more parts. A part is a connected sequence of two or
 more points. Parts may or may not be connected to one another. Parts may or may not
 intersect one another.
@@ -212,10 +212,10 @@ Mapsui interpretes this as <a class="xref" href="Mapsui.Geometries.LineString.ht
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Desktop_Shapefile_ShapeType.md&amp;value=---%0Auid%3A%20Mapsui.Desktop.Shapefile.ShapeType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Shapefile_ShapeType.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Shapefile.ShapeType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Shapefile/ShapeFile.cs/#L35" class="contribution-link">View Source</a>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Shapefile/ShapeFile.cs/#L32" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

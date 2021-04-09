@@ -406,15 +406,6 @@
       <span class="xref">Android.Views.ViewGroup.UpdateViewLayout(Android.Views.View, Android.Views.ViewGroup.LayoutParams)</span>
     </div>
     <div>
-      <span class="xref">Android.Views.ViewGroup.JniPeerMembers</span>
-    </div>
-    <div>
-      <span class="xref">Android.Views.ViewGroup.ThresholdClass</span>
-    </div>
-    <div>
-      <span class="xref">Android.Views.ViewGroup.ThresholdType</span>
-    </div>
-    <div>
       <span class="xref">Android.Views.ViewGroup.AlwaysDrawnWithCacheEnabled</span>
     </div>
     <div>
@@ -2845,7 +2836,8 @@
   </span>
   <a id="Mapsui_UI_Android_MapControl_GetMapInfo_" data-uid="Mapsui.UI.Android.MapControl.GetMapInfo*"></a>
   <h4 id="Mapsui_UI_Android_MapControl_GetMapInfo_Mapsui_Geometries_Point_System_Int32_" data-uid="Mapsui.UI.Android.MapControl.GetMapInfo(Mapsui.Geometries.Point,System.Int32)">GetMapInfo(Point, Int32)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Check, if a feature at a given screen position is hit</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -2864,12 +2856,14 @@
       <tr>
         <td><a class="xref" href="Mapsui.Geometries.Point.html">Point</a></td>
         <td><span class="parametername">screenPosition</span></td>
-        <td></td>
+        <td><p>Screen position to check for widgets and features</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">margin</span></td>
-        <td></td>
+        <td><p>An optional extra margin around the feature to enlarge the hit area.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2897,7 +2891,8 @@
   </span>
   <a id="Mapsui_UI_Android_MapControl_GetSnapshot_" data-uid="Mapsui.UI.Android.MapControl.GetSnapshot*"></a>
   <h4 id="Mapsui_UI_Android_MapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__" data-uid="Mapsui.UI.Android.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})">GetSnapshot(IEnumerable&lt;ILayer&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Create a snapshot form map as PNG image</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -2916,7 +2911,8 @@
       <tr>
         <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
         <td><span class="parametername">layers</span></td>
-        <td></td>
+        <td><p>Layers that should be included in snapshot</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -2931,7 +2927,8 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Byte</span>[]</td>
-        <td></td>
+        <td><p>Byte array with snapshot in png format. If there are any problems than returns null.</p>
+</td>
       </tr>
     </tbody>
   </table>

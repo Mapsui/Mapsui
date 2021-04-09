@@ -95,35 +95,11 @@
     <div><a class="xref" href="Mapsui.Rendering.IRenderer.html">IRenderer</a></div>
     <div><a class="xref" href="Mapsui.Rendering.IRenderInfo.html">IRenderInfo</a></div>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.Rendering.Xaml.html">Mapsui.Rendering.Xaml</a></h6>
   <h6><strong>Assembly</strong>: Mapsui.Rendering.Xaml.dll</h6>
   <h5 id="Mapsui_Rendering_Xaml_MapRenderer_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class MapRenderer : IRenderer, IRenderInfo</code></pre>
+    <pre><code class="lang-csharp hljs">public class MapRenderer : object, IRenderer, IRenderInfo</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -170,7 +146,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.Type</span>, <a class="xref" href="Mapsui.Styles.IStyleRenderer.html">IStyleRenderer</a>&gt;</td>
+        <td><span class="xref">IDictionary</span>&lt;<span class="xref">Type</span>, <a class="xref" href="Mapsui.Styles.IStyleRenderer.html">IStyleRenderer</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -230,7 +206,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.Type</span>, <a class="xref" href="Mapsui.Widgets.IWidgetRenderer.html">IWidgetRenderer</a>&gt;</td>
+        <td><span class="xref">IDictionary</span>&lt;<span class="xref">Type</span>, <a class="xref" href="Mapsui.Widgets.IWidgetRenderer.html">IWidgetRenderer</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -239,13 +215,13 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Rendering_Xaml_MapRenderer_GetMapInfo_Mapsui_Geometries_Point_Mapsui_IReadOnlyViewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Int32_.md&amp;value=---%0Auid%3A%20Mapsui.Rendering.Xaml.MapRenderer.GetMapInfo(Mapsui.Geometries.Point%2CMapsui.IReadOnlyViewport%2CSystem.Collections.Generic.IEnumerable%7BMapsui.Layers.ILayer%7D%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Rendering_Xaml_MapRenderer_GetMapInfo_Mapsui_Geometries_Point_Mapsui_IReadOnlyViewport_IEnumerable_Mapsui_Layers_ILayer__System_Int32_.md&amp;value=---%0Auid%3A%20Mapsui.Rendering.Xaml.MapRenderer.GetMapInfo(Mapsui.Geometries.Point%2CMapsui.IReadOnlyViewport%2CIEnumerable%7BMapsui.Layers.ILayer%7D%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Rendering.Xaml/MapRenderer.cs/#L291">View Source</a>
   </span>
   <a id="Mapsui_Rendering_Xaml_MapRenderer_GetMapInfo_" data-uid="Mapsui.Rendering.Xaml.MapRenderer.GetMapInfo*"></a>
-  <h4 id="Mapsui_Rendering_Xaml_MapRenderer_GetMapInfo_Mapsui_Geometries_Point_Mapsui_IReadOnlyViewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Int32_" data-uid="Mapsui.Rendering.Xaml.MapRenderer.GetMapInfo(Mapsui.Geometries.Point,Mapsui.IReadOnlyViewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Int32)">GetMapInfo(Point, IReadOnlyViewport, IEnumerable&lt;ILayer&gt;, Int32)</h4>
+  <h4 id="Mapsui_Rendering_Xaml_MapRenderer_GetMapInfo_Mapsui_Geometries_Point_Mapsui_IReadOnlyViewport_IEnumerable_Mapsui_Layers_ILayer__System_Int32_" data-uid="Mapsui.Rendering.Xaml.MapRenderer.GetMapInfo(Mapsui.Geometries.Point,Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Layers.ILayer},System.Int32)">GetMapInfo(Point, IReadOnlyViewport, IEnumerable&lt;ILayer&gt;, Int32)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -273,7 +249,7 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
+        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
         <td><span class="parametername">layers</span></td>
         <td></td>
       </tr>
@@ -301,13 +277,13 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Rendering_Xaml_MapRenderer_GetMapInfo_System_Double_System_Double_Mapsui_IReadOnlyViewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Int32_.md&amp;value=---%0Auid%3A%20Mapsui.Rendering.Xaml.MapRenderer.GetMapInfo(System.Double%2CSystem.Double%2CMapsui.IReadOnlyViewport%2CSystem.Collections.Generic.IEnumerable%7BMapsui.Layers.ILayer%7D%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Rendering_Xaml_MapRenderer_GetMapInfo_System_Double_System_Double_Mapsui_IReadOnlyViewport_IEnumerable_Mapsui_Layers_ILayer__System_Int32_.md&amp;value=---%0Auid%3A%20Mapsui.Rendering.Xaml.MapRenderer.GetMapInfo(System.Double%2CSystem.Double%2CMapsui.IReadOnlyViewport%2CIEnumerable%7BMapsui.Layers.ILayer%7D%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Rendering.Xaml/MapRenderer.cs/#L297">View Source</a>
   </span>
   <a id="Mapsui_Rendering_Xaml_MapRenderer_GetMapInfo_" data-uid="Mapsui.Rendering.Xaml.MapRenderer.GetMapInfo*"></a>
-  <h4 id="Mapsui_Rendering_Xaml_MapRenderer_GetMapInfo_System_Double_System_Double_Mapsui_IReadOnlyViewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Int32_" data-uid="Mapsui.Rendering.Xaml.MapRenderer.GetMapInfo(System.Double,System.Double,Mapsui.IReadOnlyViewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Int32)">GetMapInfo(Double, Double, IReadOnlyViewport, IEnumerable&lt;ILayer&gt;, Int32)</h4>
+  <h4 id="Mapsui_Rendering_Xaml_MapRenderer_GetMapInfo_System_Double_System_Double_Mapsui_IReadOnlyViewport_IEnumerable_Mapsui_Layers_ILayer__System_Int32_" data-uid="Mapsui.Rendering.Xaml.MapRenderer.GetMapInfo(System.Double,System.Double,Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Layers.ILayer},System.Int32)">GetMapInfo(Double, Double, IReadOnlyViewport, IEnumerable&lt;ILayer&gt;, Int32)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -340,7 +316,7 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
+        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
         <td><span class="parametername">layers</span></td>
         <td></td>
       </tr>
@@ -368,13 +344,13 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Rendering_Xaml_MapRenderer_Render_System_Object_Mapsui_IReadOnlyViewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Collections_Generic_IEnumerable_Mapsui_Widgets_IWidget__Mapsui_Styles_Color_.md&amp;value=---%0Auid%3A%20Mapsui.Rendering.Xaml.MapRenderer.Render(System.Object%2CMapsui.IReadOnlyViewport%2CSystem.Collections.Generic.IEnumerable%7BMapsui.Layers.ILayer%7D%2CSystem.Collections.Generic.IEnumerable%7BMapsui.Widgets.IWidget%7D%2CMapsui.Styles.Color)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Rendering_Xaml_MapRenderer_Render_System_Object_Mapsui_IReadOnlyViewport_IEnumerable_Mapsui_Layers_ILayer__IEnumerable_Mapsui_Widgets_IWidget__Mapsui_Styles_Color_.md&amp;value=---%0Auid%3A%20Mapsui.Rendering.Xaml.MapRenderer.Render(System.Object%2CMapsui.IReadOnlyViewport%2CIEnumerable%7BMapsui.Layers.ILayer%7D%2CIEnumerable%7BMapsui.Widgets.IWidget%7D%2CMapsui.Styles.Color)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Rendering.Xaml/MapRenderer.cs/#L50">View Source</a>
   </span>
   <a id="Mapsui_Rendering_Xaml_MapRenderer_Render_" data-uid="Mapsui.Rendering.Xaml.MapRenderer.Render*"></a>
-  <h4 id="Mapsui_Rendering_Xaml_MapRenderer_Render_System_Object_Mapsui_IReadOnlyViewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Collections_Generic_IEnumerable_Mapsui_Widgets_IWidget__Mapsui_Styles_Color_" data-uid="Mapsui.Rendering.Xaml.MapRenderer.Render(System.Object,Mapsui.IReadOnlyViewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Collections.Generic.IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)">Render(Object, IReadOnlyViewport, IEnumerable&lt;ILayer&gt;, IEnumerable&lt;IWidget&gt;, Color)</h4>
+  <h4 id="Mapsui_Rendering_Xaml_MapRenderer_Render_System_Object_Mapsui_IReadOnlyViewport_IEnumerable_Mapsui_Layers_ILayer__IEnumerable_Mapsui_Widgets_IWidget__Mapsui_Styles_Color_" data-uid="Mapsui.Rendering.Xaml.MapRenderer.Render(System.Object,Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Layers.ILayer},IEnumerable{Mapsui.Widgets.IWidget},Mapsui.Styles.Color)">Render(Object, IReadOnlyViewport, IEnumerable&lt;ILayer&gt;, IEnumerable&lt;IWidget&gt;, Color)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -402,12 +378,12 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
+        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
         <td><span class="parametername">layers</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Mapsui.Widgets.IWidget.html">IWidget</a>&gt;</td>
+        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Mapsui.Widgets.IWidget.html">IWidget</a>&gt;</td>
         <td><span class="parametername">widgets</span></td>
         <td></td>
       </tr>
@@ -420,13 +396,13 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Rendering_Xaml_MapRenderer_RenderLayer_System_Windows_Controls_Canvas_Mapsui_IReadOnlyViewport_Mapsui_Layers_ILayer_Mapsui_Rendering_Xaml_SymbolCache_System_Boolean_.md&amp;value=---%0Auid%3A%20Mapsui.Rendering.Xaml.MapRenderer.RenderLayer(System.Windows.Controls.Canvas%2CMapsui.IReadOnlyViewport%2CMapsui.Layers.ILayer%2CMapsui.Rendering.Xaml.SymbolCache%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Rendering_Xaml_MapRenderer_RenderLayer_Canvas_Mapsui_IReadOnlyViewport_Mapsui_Layers_ILayer_Mapsui_Rendering_Xaml_SymbolCache_System_Boolean_.md&amp;value=---%0Auid%3A%20Mapsui.Rendering.Xaml.MapRenderer.RenderLayer(Canvas%2CMapsui.IReadOnlyViewport%2CMapsui.Layers.ILayer%2CMapsui.Rendering.Xaml.SymbolCache%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Rendering.Xaml/MapRenderer.cs/#L142">View Source</a>
   </span>
   <a id="Mapsui_Rendering_Xaml_MapRenderer_RenderLayer_" data-uid="Mapsui.Rendering.Xaml.MapRenderer.RenderLayer*"></a>
-  <h4 id="Mapsui_Rendering_Xaml_MapRenderer_RenderLayer_System_Windows_Controls_Canvas_Mapsui_IReadOnlyViewport_Mapsui_Layers_ILayer_Mapsui_Rendering_Xaml_SymbolCache_System_Boolean_" data-uid="Mapsui.Rendering.Xaml.MapRenderer.RenderLayer(System.Windows.Controls.Canvas,Mapsui.IReadOnlyViewport,Mapsui.Layers.ILayer,Mapsui.Rendering.Xaml.SymbolCache,System.Boolean)">RenderLayer(Canvas, IReadOnlyViewport, ILayer, SymbolCache, Boolean)</h4>
+  <h4 id="Mapsui_Rendering_Xaml_MapRenderer_RenderLayer_Canvas_Mapsui_IReadOnlyViewport_Mapsui_Layers_ILayer_Mapsui_Rendering_Xaml_SymbolCache_System_Boolean_" data-uid="Mapsui.Rendering.Xaml.MapRenderer.RenderLayer(Canvas,Mapsui.IReadOnlyViewport,Mapsui.Layers.ILayer,Mapsui.Rendering.Xaml.SymbolCache,System.Boolean)">RenderLayer(Canvas, IReadOnlyViewport, ILayer, SymbolCache, Boolean)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -444,7 +420,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Windows.Controls.Canvas</span></td>
+        <td><span class="xref">Canvas</span></td>
         <td><span class="parametername">target</span></td>
         <td></td>
       </tr>
@@ -472,18 +448,18 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Rendering_Xaml_MapRenderer_RenderToBitmapStream_Mapsui_IReadOnlyViewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Styles_Color_System_Single_.md&amp;value=---%0Auid%3A%20Mapsui.Rendering.Xaml.MapRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport%2CSystem.Collections.Generic.IEnumerable%7BMapsui.Layers.ILayer%7D%2CMapsui.Styles.Color%2CSystem.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Rendering_Xaml_MapRenderer_RenderToBitmapStream_Mapsui_IReadOnlyViewport_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Styles_Color_System_Single_.md&amp;value=---%0Auid%3A%20Mapsui.Rendering.Xaml.MapRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport%2CIEnumerable%7BMapsui.Layers.ILayer%7D%2CMapsui.Styles.Color%2CSystem.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Rendering.Xaml/MapRenderer.cs/#L115">View Source</a>
   </span>
   <a id="Mapsui_Rendering_Xaml_MapRenderer_RenderToBitmapStream_" data-uid="Mapsui.Rendering.Xaml.MapRenderer.RenderToBitmapStream*"></a>
-  <h4 id="Mapsui_Rendering_Xaml_MapRenderer_RenderToBitmapStream_Mapsui_IReadOnlyViewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Styles_Color_System_Single_" data-uid="Mapsui.Rendering.Xaml.MapRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color,System.Single)">RenderToBitmapStream(IReadOnlyViewport, IEnumerable&lt;ILayer&gt;, Color, Single)</h4>
+  <h4 id="Mapsui_Rendering_Xaml_MapRenderer_RenderToBitmapStream_Mapsui_IReadOnlyViewport_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Styles_Color_System_Single_" data-uid="Mapsui.Rendering.Xaml.MapRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color,System.Single)">RenderToBitmapStream(IReadOnlyViewport, IEnumerable&lt;ILayer&gt;, Color, Single)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public MemoryStream RenderToBitmapStream(IReadOnlyViewport viewport, IEnumerable&lt;ILayer&gt; layers, Color background = null, float pixelDensity = 1F)</code></pre>
+    <pre><code class="lang-csharp hljs">public MemoryStream RenderToBitmapStream(IReadOnlyViewport viewport, IEnumerable&lt;ILayer&gt; layers, Color background = null, float pixelDensity = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -501,7 +477,7 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
+        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
         <td><span class="parametername">layers</span></td>
         <td></td>
       </tr>
@@ -527,7 +503,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.IO.MemoryStream</span></td>
+        <td><span class="xref">MemoryStream</span></td>
         <td></td>
       </tr>
     </tbody>

@@ -90,13 +90,77 @@ It is derived from XsltContext.</p>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><span class="xref">XPathQueryManager.CustomQueryContext</span></div>
+    <div class="level1"><span class="xref">System.Xml.XmlNamespaceManager</span></div>
+    <div class="level2"><span class="xref">System.Xml.Xsl.XsltContext</span></div>
+    <div class="level3"><span class="xref">XPathQueryManager.CustomQueryContext</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">System.Collections.IEnumerable</span></div>
+    <div><span class="xref">System.Xml.IXmlNamespaceResolver</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Xml.XmlNamespaceManager.AddNamespace(System.String, System.String)</span>
+    </div>
+    <div>
+      <span class="xref">System.Xml.XmlNamespaceManager.GetEnumerator()</span>
+    </div>
+    <div>
+      <span class="xref">System.Xml.XmlNamespaceManager.GetNamespacesInScope(System.Xml.XmlNamespaceScope)</span>
+    </div>
+    <div>
+      <span class="xref">System.Xml.XmlNamespaceManager.HasNamespace(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">System.Xml.XmlNamespaceManager.LookupNamespace(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">System.Xml.XmlNamespaceManager.LookupPrefix(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">System.Xml.XmlNamespaceManager.PopScope()</span>
+    </div>
+    <div>
+      <span class="xref">System.Xml.XmlNamespaceManager.PushScope()</span>
+    </div>
+    <div>
+      <span class="xref">System.Xml.XmlNamespaceManager.RemoveNamespace(System.String, System.String)</span>
+    </div>
+    <div>
+      <span class="xref">System.Xml.XmlNamespaceManager.DefaultNamespace</span>
+    </div>
+    <div>
+      <span class="xref">System.Xml.XmlNamespaceManager.NameTable</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.Providers.Wfs.Xml.html">Mapsui.Providers.Wfs.Xml</a></h6>
   <h6><strong>Assembly</strong>: Mapsui.Desktop.dll</h6>
   <h5 id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class CustomQueryContext : XsltContext</code></pre>
+    <pre><code class="lang-csharp hljs">public class CustomQueryContext : XsltContext, IEnumerable, IXmlNamespaceResolver</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -118,13 +182,13 @@ It is derived from XsltContext.</p>
   </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext__ctor_NameTable_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.%23ctor(NameTable)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext__ctor_System_Xml_NameTable_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.%23ctor(System.Xml.NameTable)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wfs/Xml/XPathQueryManager.cs/#L362">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext__ctor_" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.#ctor*"></a>
-  <h4 id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext__ctor_NameTable_" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.#ctor(NameTable)">CustomQueryContext(NameTable)</h4>
+  <h4 id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext__ctor_System_Xml_NameTable_" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.#ctor(System.Xml.NameTable)">CustomQueryContext(NameTable)</h4>
   <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.html">XPathQueryManager.CustomQueryContext</a> class.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -143,7 +207,7 @@ It is derived from XsltContext.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">NameTable</span></td>
+        <td><span class="xref">System.Xml.NameTable</span></td>
         <td><span class="parametername">table</span></td>
         <td><p>A NameTable instance</p>
 </td>
@@ -183,17 +247,19 @@ It is derived from XsltContext.</p>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Xml.Xsl.XsltContext.Whitespace</span></div>
   <h3 id="methods">Methods
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_AddNamespace_IDictionary_System_String_System_String__.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddNamespace(IDictionary%7BSystem.String%2CSystem.String%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_AddNamespace_System_Collections_Generic_IDictionary_System_String_System_String__.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddNamespace(System.Collections.Generic.IDictionary%7BSystem.String%2CSystem.String%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wfs/Xml/XPathQueryManager.cs/#L381">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_AddNamespace_" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddNamespace*"></a>
-  <h4 id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_AddNamespace_IDictionary_System_String_System_String__" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddNamespace(IDictionary{System.String,System.String})">AddNamespace(IDictionary&lt;String, String&gt;)</h4>
+  <h4 id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_AddNamespace_System_Collections_Generic_IDictionary_System_String_System_String__" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddNamespace(System.Collections.Generic.IDictionary{System.String,System.String})">AddNamespace(IDictionary&lt;String, String&gt;)</h4>
   <div class="markdown level1 summary"><p>This method adds a list of namespaces to use in the custom context.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -212,7 +278,7 @@ It is derived from XsltContext.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IDictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.IDictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">namespaces</span></td>
         <td><p>A list of namespaces</p>
 </td>
@@ -221,13 +287,13 @@ It is derived from XsltContext.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_AddParam_DictionaryEntry___.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddParam(DictionaryEntry%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_AddParam_System_Collections_DictionaryEntry___.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddParam(System.Collections.DictionaryEntry%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wfs/Xml/XPathQueryManager.cs/#L444">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_AddParam_" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddParam*"></a>
-  <h4 id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_AddParam_DictionaryEntry___" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddParam(DictionaryEntry[])">AddParam(DictionaryEntry[])</h4>
+  <h4 id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_AddParam_System_Collections_DictionaryEntry___" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.AddParam(System.Collections.DictionaryEntry[])">AddParam(DictionaryEntry[])</h4>
   <div class="markdown level1 summary"><p>This method adds a list of parameters to the custom context.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -246,7 +312,7 @@ It is derived from XsltContext.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DictionaryEntry</span>[]</td>
+        <td><span class="xref">System.Collections.DictionaryEntry</span>[]</td>
         <td><span class="parametername">parameters</span></td>
         <td><p>A list of parameters</p>
 </td>
@@ -346,6 +412,8 @@ It is derived from XsltContext.</p>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Xml.Xsl.XsltContext.CompareDocument(System.String, System.String)</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_GetParam_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.GetParam(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -397,13 +465,13 @@ It is derived from XsltContext.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_PreserveWhitespace_XPathNavigator_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.PreserveWhitespace(XPathNavigator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_PreserveWhitespace_System_Xml_XPath_XPathNavigator_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.PreserveWhitespace(System.Xml.XPath.XPathNavigator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wfs/Xml/XPathQueryManager.cs/#L398">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_PreserveWhitespace_" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.PreserveWhitespace*"></a>
-  <h4 id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_PreserveWhitespace_XPathNavigator_" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.PreserveWhitespace(XPathNavigator)">PreserveWhitespace(XPathNavigator)</h4>
+  <h4 id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_PreserveWhitespace_System_Xml_XPath_XPathNavigator_" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.PreserveWhitespace(System.Xml.XPath.XPathNavigator)">PreserveWhitespace(XPathNavigator)</h4>
   <div class="markdown level1 summary"><p>Method from XsltContext.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -422,7 +490,7 @@ It is derived from XsltContext.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XPathNavigator</span></td>
+        <td><span class="xref">System.Xml.XPath.XPathNavigator</span></td>
         <td><span class="parametername">node</span></td>
         <td></td>
       </tr>
@@ -443,6 +511,8 @@ It is derived from XsltContext.</p>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Xml.Xsl.XsltContext.PreserveWhitespace(System.Xml.XPath.XPathNavigator)</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_RemoveParam_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.RemoveParam(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -510,13 +580,13 @@ It is derived from XsltContext.</p>
   </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_ResolveFunction_System_String_System_String_XPathResultType___.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResolveFunction(System.String%2CSystem.String%2CXPathResultType%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_ResolveFunction_System_String_System_String_System_Xml_XPath_XPathResultType___.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResolveFunction(System.String%2CSystem.String%2CSystem.Xml.XPath.XPathResultType%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Desktop/Wfs/Xml/XPathQueryManager.cs/#L409">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_ResolveFunction_" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResolveFunction*"></a>
-  <h4 id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_ResolveFunction_System_String_System_String_XPathResultType___" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResolveFunction(System.String,System.String,XPathResultType[])">ResolveFunction(String, String, XPathResultType[])</h4>
+  <h4 id="Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_ResolveFunction_System_String_System_String_System_Xml_XPath_XPathResultType___" data-uid="Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResolveFunction(System.String,System.String,System.Xml.XPath.XPathResultType[])">ResolveFunction(String, String, XPathResultType[])</h4>
   <div class="markdown level1 summary"><p>This method resolves a function appearing in an XPath expression.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -547,7 +617,7 @@ It is derived from XsltContext.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">XPathResultType</span>[]</td>
+        <td><span class="xref">System.Xml.XPath.XPathResultType</span>[]</td>
         <td><span class="parametername">argTypes</span></td>
         <td><p>A list of argument types of the function</p>
 </td>
@@ -564,11 +634,13 @@ It is derived from XsltContext.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IXsltContextFunction</span></td>
+        <td><span class="xref">System.Xml.Xsl.IXsltContextFunction</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Xml.Xsl.XsltContext.ResolveFunction(System.String, System.String, System.Xml.XPath.XPathResultType[])</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wfs_Xml_XPathQueryManager_CustomQueryContext_ResolveVariable_System_String_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.ResolveVariable(System.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -619,11 +691,20 @@ It is derived from XsltContext.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IXsltContextVariable</span></td>
+        <td><span class="xref">System.Xml.Xsl.IXsltContextVariable</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Xml.Xsl.XsltContext.ResolveVariable(System.String, System.String)</span></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">System.Collections.IEnumerable</span>
+  </div>
+  <div>
+      <span class="xref">System.Xml.IXmlNamespaceResolver</span>
+  </div>
 </article>
           </div>
           
