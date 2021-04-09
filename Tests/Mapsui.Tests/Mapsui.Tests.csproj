@@ -23,7 +23,7 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="BruTile" Version="3.1.2">
+    <PackageReference Include="BruTile" Version="3.1.3">
     </PackageReference>
     <PackageReference Include="Microsoft.CodeCoverage" Version="16.5.0">
     </PackageReference>
