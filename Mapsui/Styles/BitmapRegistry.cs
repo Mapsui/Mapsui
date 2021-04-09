@@ -16,7 +16,7 @@ namespace Mapsui.Styles
         /// <summary>
         /// Singleton of BitmapRegistry class
         /// </summary>
-        public static BitmapRegistry Instance => _instance ?? (_instance = new BitmapRegistry());
+        public static BitmapRegistry Instance => _instance ??= new BitmapRegistry();
 
         /// <summary>
         /// Register a new bitmap
@@ -34,7 +34,7 @@ namespace Mapsui.Styles
         }
 
         /// <summary>
-        /// Unregister a existing bitmap
+        /// Unregister an existing bitmap
         /// </summary>
         /// <param name="id">Id of registered bitmap data</param>
         public void Unregister(int id)

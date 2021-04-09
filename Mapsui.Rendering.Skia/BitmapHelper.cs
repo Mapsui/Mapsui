@@ -1,5 +1,4 @@
 using System.IO;
-using System.Text;
 using Mapsui.Extensions;
 using Mapsui.Styles;
 using SkiaSharp;
