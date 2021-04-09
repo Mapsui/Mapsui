@@ -1,20 +1,24 @@
-﻿using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using Mapsui.Providers;
+﻿using Mapsui.Providers;
 using Mapsui.Rendering.Skia;
 using Mapsui.Styles;
 using Mapsui.UI.Objects;
 using SkiaSharp;
 using SkiaSharp.Views.Forms;
 using Svg.Skia;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
 namespace Mapsui.UI.Forms
 {
     public class Pin : BindableObject, IFeatureProvider
     {
+        // Cache for used bitmaps
+        private static Dictionary<string, int> _bitmapIds = new Dictionary<string, int>();
+
+        private string _bitmapIdKey = string.Empty; // Key for active _bitmapIds entry
         private int _bitmapId = -1;
         private byte[] _bitmapData;
         private MapView _mapView;
@@ -439,29 +443,42 @@ namespace Mapsui.UI.Forms
                 if (_bitmapId != -1)
                 {
                     // There is already a registered bitmap, so delete it
-                    BitmapRegistry.Instance.Unregister(_bitmapId);
-                    // We don't have any bitmap up to now
                     _bitmapId = -1;
+                    _bitmapIdKey = string.Empty;
                 }
-
-                Stream stream = null;
 
                 switch (Type)
                 {
                     case PinType.Svg:
                         // Load the SVG document
-                        if (!string.IsNullOrEmpty(Svg))
-                            stream = new MemoryStream(Encoding.UTF8.GetBytes(Svg));
-                        if (stream == null)
+                        if (string.IsNullOrEmpty(Svg))
                             return;
-                        _bitmapId = BitmapRegistry.Instance.Register(stream);
+                        // Check, if it is already in cache
+                        if (_bitmapIds.ContainsKey(Svg))
+                        {
+                            _bitmapId = _bitmapIds[Svg];
+                            _bitmapIdKey = Svg;
+                            break;
+                        }
+                        // Save this SVG for later use
+                        _bitmapId = BitmapRegistry.Instance.Register(Svg);
+                        _bitmapIdKey = Svg;
+                        _bitmapIds.Add(Svg, _bitmapId);
                         break;
                     case PinType.Pin:
+                        var colorInHex = Color.ToHex();
+                        // Check, if it is already in cache
+                        if (_bitmapIds.ContainsKey(colorInHex))
+                        {
+                            _bitmapId = _bitmapIds[colorInHex];
+                            _bitmapIdKey = colorInHex;
+                            break;
+                        }
                         // First we have to create a bitmap from Svg code
                         // Create a new SVG object
                         var svg = new SKSvg();
                         // Load the SVG document
-                        stream = Utilities.EmbeddedResourceLoader.Load("Images.Pin.svg", typeof(Pin));
+                        var stream = Utilities.EmbeddedResourceLoader.Load("Images.Pin.svg", typeof(Pin));
                         if (stream == null)
                             return;
                         svg.Load(stream);
@@ -486,6 +503,8 @@ namespace Mapsui.UI.Forms
                             _bitmapData = data.ToArray();
                         }
                         _bitmapId = BitmapRegistry.Instance.Register(new MemoryStream(_bitmapData));
+                        _bitmapIdKey = colorInHex;
+                        _bitmapIds.Add(colorInHex, _bitmapId);
                         break;
                     case PinType.Icon:
                         if (Icon != null)
