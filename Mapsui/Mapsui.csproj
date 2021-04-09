@@ -12,6 +12,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Mapsui.Geometries\Mapsui.Geometries.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
 
   <PropertyGroup>
     <DebugType>full</DebugType>
