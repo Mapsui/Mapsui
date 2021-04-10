@@ -194,7 +194,7 @@ namespace Mapsui.UI.Uwp
         {
             e.TranslationBehavior.DesiredDeceleration = 25 * 96.0 / (1000.0 * 1000.0);
         }
-        
+
         private void OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
             // We have a new interaction with the screen, so stop all navigator animations
