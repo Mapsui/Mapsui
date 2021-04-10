@@ -282,7 +282,7 @@
       <Version>28.0.0.3</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>5.0.0.1905</Version>
+      <Version>5.0.0.2012</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.AndroidX.MediaRouter">
       <Version>1.2.0.1</Version>

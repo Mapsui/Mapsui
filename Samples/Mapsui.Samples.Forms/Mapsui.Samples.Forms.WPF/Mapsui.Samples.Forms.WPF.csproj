@@ -44,9 +44,9 @@
     </PackageReference>
     <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6">
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.1905">
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012">
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms.Platform.WPF" Version="5.0.0.1905">
+    <PackageReference Include="Xamarin.Forms.Platform.WPF" Version="5.0.0.2012">
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
