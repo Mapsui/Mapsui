@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:bench="clr-namespace:Mapsui.Benchmark;assembly=Mapsui"
+             x:Class="Mapsui.Samples.Forms.BenchmarkDetailsPage">
+    <ContentPage.Content>
+        <ListView x:Name="benchmarksList" SelectionMode="None" HasUnevenRows="False" RowHeight="70">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell x:DataType="bench:RenderBenchmark" Height="70">
+                        <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,*" Padding="20,10">
+                            <Label Text="{Binding Name}" HorizontalOptions="Start" Grid.ColumnSpan="2"/>
+                            <Label Text="{Binding Time}" HorizontalOptions="End" Grid.Column="1"/>
+                            <Label Grid.Row="1" >
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Features: "/>
+                                        <Span Text="{Binding FeatureCount}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <Label Grid.Row="1" Grid.Column="1">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Styles: "/>
+                                        <Span Text="{Binding StyleCount}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>

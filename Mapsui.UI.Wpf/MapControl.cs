@@ -493,19 +493,6 @@ namespace Mapsui.UI.Wpf
 
             Navigator.UpdateAnimations();
             Renderer.Render(args.Surface.Canvas, new Viewport(Viewport), Map.Layers, Map.Widgets, Map.BackColor);
-
-            if (Renderer.Benchmarks.Count > 0)
-            {
-                var items = Renderer.Benchmarks.Last();
-                Task.Run(() =>
-                {
-                    var c = System.Globalization.CultureInfo.InvariantCulture;
-                    foreach (var item in items)
-                    {
-                        Debug.WriteLine($"{item.Name} {item.Time.ToString(c)}");
-                    }
-                });
-            }
         }
 
         private void PaintWpf()

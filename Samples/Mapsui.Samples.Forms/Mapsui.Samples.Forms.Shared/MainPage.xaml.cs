@@ -13,9 +13,28 @@ namespace Mapsui.Samples.Forms
         IEnumerable<ISample> allSamples;
         Func<object, EventArgs, bool> clicker;
 
+
+
+        private void Benchmarking_Clicked(object sender, EventArgs e)
+        {
+            NavigateToPage(new BenchmarkSettingsPage());
+        }
+
+        private void SetupToolbar()
+        {
+            var benchmarking = new ToolbarItem
+            {
+                Text = "Benchmarking",
+                Order = ToolbarItemOrder.Secondary
+            };
+            benchmarking.Clicked += Benchmarking_Clicked;
+            ToolbarItems.Add(benchmarking);
+        }
+
         public MainPage()
         {
             InitializeComponent();
+            SetupToolbar();
             Title = "Mapsui Samples";
             allSamples = AllSamples.GetSamples();
 
@@ -29,6 +48,7 @@ namespace Mapsui.Samples.Forms
             picker.SelectedIndexChanged += PickerSelectedIndexChanged;
             picker.SelectedItem = "All";
         }
+
 
         private void FillListWithSamples()
         {
@@ -59,12 +79,24 @@ namespace Mapsui.Samples.Forms
             var sample = allSamples.Where(x => x.Name == sampleName).FirstOrDefault<ISample>();
 
             clicker = null;
-            if (sample is IFormsSample)
-                clicker = ((IFormsSample)sample).OnClick;
+            if (sample is IFormsSample formsSample)
+                clicker = formsSample.OnClick;
 
-            ((NavigationPage)Application.Current.MainPage).PushAsync(new MapPage(sampleName, sample.Setup, clicker));
+            NavigateToPage(new MapPage(sampleName, sample.Setup, clicker));
 
             listView.SelectedItem = null;
+        }
+
+        public static async void NavigateToPage(Page page)
+        {
+            try
+            {
+                await ((NavigationPage)Application.Current.MainPage).PushAsync(page);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error when navigating to page={page} exception={e}");
+            }
         }
     }
 }

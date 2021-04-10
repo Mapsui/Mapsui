@@ -7,17 +7,6 @@ using Mapsui.Widgets;
 
 namespace Mapsui.Rendering
 {
-    public class RenderBenchmark
-    {
-        public string Name { get; set; }
-        public double Time { get; set; }
-
-        public int FeatureCount { get; set; }
-        public int StyleCount { get; set; }
-
-        public Dictionary<string,int> StyleTypeCount;
-        public Dictionary<string,double> StyleTypeTime;
-    }
 
     public interface IRenderer : IRenderInfo
     {
@@ -26,7 +15,5 @@ namespace Mapsui.Rendering
         ISymbolCache SymbolCache { get; }
         IDictionary<Type, IWidgetRenderer> WidgetRenders { get; }
         IDictionary<Type, IStyleRenderer> StyleRenderers { get; }
-
-        List<List<RenderBenchmark>> Benchmarks { get; }
     }
 }

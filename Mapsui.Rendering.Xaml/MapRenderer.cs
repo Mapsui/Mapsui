@@ -21,6 +21,8 @@ using Mapsui.Widgets.Zoom;
 using XamlMedia = System.Windows.Media;
 using Mapsui.UI;
 using Mapsui.Rendering.Xaml.XamlStyles;
+using Mapsui.Benchmark;
+using System.Diagnostics;
 
 namespace Mapsui.Rendering.Xaml
 {
@@ -30,8 +32,6 @@ namespace Mapsui.Rendering.Xaml
         private readonly SymbolCache _symbolCache = new SymbolCache();
         public ISymbolCache SymbolCache => _symbolCache;
         public IDictionary<Type, IWidgetRenderer> WidgetRenders { get; } = new Dictionary<Type, IWidgetRenderer>();
-
-        public List<List<RenderBenchmark>> Benchmarks { get; set; } = new();
 
         /// <summary>
         /// Dictionary holding all special renderers for styles
@@ -50,6 +50,70 @@ namespace Mapsui.Rendering.Xaml
             WidgetRenders[typeof(ZoomInOutWidget)] = new ZoomInOutWidgetRenderer();
         }
 
+        private Stopwatch _stopwatch;
+        private List<RenderBenchmark> _layersBenchmark;
+        private List<RenderBenchmark> _widgetsBenchmark;
+        private RenderBenchmark _globalBenchmark;
+
+        private void SetupBenchMark(IEnumerable<ILayer> layers, IEnumerable<IWidget> allWidgets)
+        {
+            if (!Benchmarking.Enabled)
+            {
+                _layersBenchmark = null;
+                _widgetsBenchmark = null;
+                _globalBenchmark = null;
+                _stopwatch?.Reset();
+                _stopwatch = null;
+                return;
+            }
+            _globalBenchmark = new RenderBenchmark
+            {
+                Name = $"Global Render #{_iterationCount}",
+            };
+            _layersBenchmark = new();
+            int i = 1;
+            foreach (var layer in layers)
+            {
+                _layersBenchmark.Add(new RenderBenchmark
+                {
+                    Name = $"#{_iterationCount} LAYER['{layer.Name}']({i})",
+                });
+                ++i;
+            }
+            _widgetsBenchmark = new();
+            i = 1;
+            foreach (var widget in allWidgets)
+            {
+                _widgetsBenchmark.Add(new RenderBenchmark
+                {
+                    Name = $"#{_iterationCount} WIDGET['{widget.GetType().Name}']({i})",
+                });
+                ++i;
+            }
+            _stopwatch = new Stopwatch();
+            _stopwatch.Start();
+        }
+
+        private void TeardownBenchMark()
+        {
+            if (!Benchmarking.Enabled)
+            {
+                return;
+            }
+            _stopwatch.Stop();
+            _globalBenchmark.Time = _stopwatch.Elapsed.TotalMilliseconds;
+
+            var allBenchmarks = _layersBenchmark.Concat(_widgetsBenchmark).ToList();
+            foreach (var item in allBenchmarks)
+            {
+                _globalBenchmark.FeatureCount += item.FeatureCount;
+                _globalBenchmark.StyleCount += item.StyleCount;
+            }
+            allBenchmarks.Insert(0, _globalBenchmark);
+            Benchmarking.AllBenchmarks.Add(allBenchmarks);
+        }
+
+
         public void Render(object target, IReadOnlyViewport viewport, IEnumerable<ILayer> layers,
             IEnumerable<IWidget> widgets, Color background = null)
         {
@@ -59,49 +123,60 @@ namespace Mapsui.Rendering.Xaml
             if (!viewport.HasSize)
                 return;
 
-            var list = new List<RenderBenchmark>();
-            var bench = new RenderBenchmark {
-                Name = $"Render {_iterationCount}"
-            };
-            Benchmarks.Add(new List<RenderBenchmark> { bench });
-            var sw = new System.Diagnostics.Stopwatch();
-            sw.Start();
+            SetupBenchMark(layers, allWidgets);
 
             var canvas = target as Canvas;
             if (background != null)
                 Clear(canvas, background);
             RenderLayers(canvas, viewport, layers);
             RenderWidgets(canvas, viewport, allWidgets);
-            sw.Stop();
-            bench.Time = sw.Elapsed.TotalMilliseconds;
+
+            TeardownBenchMark();
             ++_iterationCount;
         }
 
         private void RenderLayers(Canvas target, IReadOnlyViewport viewport, IEnumerable<ILayer> layers)
         {
-            Render(target, viewport, layers,  _symbolCache, false);
+            Render(target, viewport, layers,  _symbolCache, false, _layersBenchmark);
         }
 
         private void RenderWidgets(Canvas target, IReadOnlyViewport viewport, IEnumerable<IWidget> widgets)
         {
-            WidgetRenderer.Render(target, viewport, widgets, WidgetRenders);
+            WidgetRenderer.Render(target, viewport, widgets, WidgetRenders, _widgetsBenchmark);
         }
 
         private static void Render(Canvas canvas, IReadOnlyViewport viewport, IEnumerable<ILayer> layers,
-            SymbolCache symbolCache, bool rasterizing)
+            SymbolCache symbolCache, bool rasterizing, List<RenderBenchmark> benchmarks)
         {
+            // should it not be possible to use VisibleFeatureIterator here ???
+            var sw = new Stopwatch();
             canvas.BeginInit();
             canvas.Visibility = Visibility.Hidden;
 
             layers = layers.ToList();
 
+            int i = 0;
             foreach (var layer in layers)
             {
+                ++i;
                 if (!layer.Enabled) continue;
                 if (layer.MinVisible > viewport.Resolution) continue;
                 if (layer.MaxVisible < viewport.Resolution) continue;
 
-                RenderLayer(canvas, viewport, layer, symbolCache, rasterizing);
+                RenderBenchmark currentBenchmark = null;
+                if (benchmarks != null)
+                {
+                    sw.Reset();
+                    sw.Start();
+                    currentBenchmark = benchmarks[i - 1];
+                }
+                RenderLayer(canvas, viewport, layer, symbolCache, currentBenchmark, rasterizing);
+
+                if (currentBenchmark != null)
+                {
+                    sw.Stop();
+                    currentBenchmark.Time = sw.Elapsed.TotalMilliseconds;
+                }
             }
 
             canvas.Visibility = Visibility.Visible;
@@ -128,15 +203,15 @@ namespace Mapsui.Rendering.Xaml
         public MemoryStream RenderToBitmapStream(IReadOnlyViewport viewport, IEnumerable<ILayer> layers, Color background = null, float pixelDensity = 1)
         {
             MemoryStream bitmapStream = null;
-            RunMethodOnStaThread(() => bitmapStream = RenderToBitmapStreamStatic(viewport, layers, _symbolCache));
+            RunMethodOnStaThread(() => bitmapStream = RenderToBitmapStreamStatic(viewport, layers, _symbolCache, _layersBenchmark));
             return bitmapStream;
         }
         
-        private static MemoryStream RenderToBitmapStreamStatic(IReadOnlyViewport viewport, IEnumerable<ILayer> layers, SymbolCache symbolCache, float pixelDensity = 1)
+        private static MemoryStream RenderToBitmapStreamStatic(IReadOnlyViewport viewport, IEnumerable<ILayer> layers, SymbolCache symbolCache, List<RenderBenchmark> benchmarks, float pixelDensity = 1)
         {
             // todo: Use pixelDensity. This has no priority because even on desktop skia could be use instead.
             var canvas = new Canvas();
-            Render(canvas, viewport, layers, symbolCache, true);
+            Render(canvas, viewport, layers, symbolCache, true, benchmarks);
             var bitmapStream = BitmapRendering.BitmapConverter.ToBitmapStream(canvas, (int)viewport.Width, (int)viewport.Height);
             canvas.Children.Clear();
             canvas.Dispatcher.InvokeShutdown();
@@ -152,14 +227,14 @@ namespace Mapsui.Rendering.Xaml
             thread.Join();
         }
 
-        public static void RenderLayer(Canvas target, IReadOnlyViewport viewport, ILayer layer, SymbolCache symbolCache, bool rasterizing = false)
+        public static void RenderLayer(Canvas target, IReadOnlyViewport viewport, ILayer layer, SymbolCache symbolCache, RenderBenchmark benchmark, bool rasterizing = false)
         {
             if (layer.Enabled == false) return;
 
-            target.Children.Add(RenderLayerStatic(viewport, layer, symbolCache, rasterizing));
+            target.Children.Add(RenderLayerStatic(viewport, layer, symbolCache, benchmark, rasterizing));
         }
 
-        private static Canvas RenderLayerStatic(IReadOnlyViewport viewport, ILayer layer, SymbolCache symbolCache, bool rasterizing = false)
+        private static Canvas RenderLayerStatic(IReadOnlyViewport viewport, ILayer layer, SymbolCache symbolCache, RenderBenchmark benchmark, bool rasterizing = false)
         {
             // todo:
             // find solution for try catch. Sometimes this method will throw an exception
@@ -169,9 +244,10 @@ namespace Mapsui.Rendering.Xaml
                 Opacity = layer.Opacity,
                 IsHitTestVisible = false
             };
-
             try
             {
+                int featureCount = 0;
+                int stylesCount = 0;
                 var features = layer.GetFeaturesInView(viewport.Extent, viewport.Resolution).ToList();
                 var layerStyles = BaseLayer.GetLayerStyles(layer);
 
@@ -193,6 +269,8 @@ namespace Mapsui.Rendering.Xaml
                             style.MaxVisible < viewport.Resolution) continue;
 
                         RenderFeature(viewport, canvas, feature, style, symbolCache, rasterizing);
+                        ++stylesCount;
+                        ++featureCount;
                     }
                 }
 
@@ -200,10 +278,22 @@ namespace Mapsui.Rendering.Xaml
                 {
                     var styles = feature.Styles ?? Enumerable.Empty<IStyle>();
                     foreach (var style in styles)
+                    {
+                        // feature.Styles!= null check is always true here...
+                        // not check MinVisible / MaxVisible here ?
                         if (feature.Styles != null && style.Enabled)
+                        { 
                             RenderFeature(viewport, canvas, feature, style, symbolCache, rasterizing);
+                            ++stylesCount;
+                        }
+                    }
+                    ++featureCount;
                 }
-
+                if (benchmark != null)
+                {
+                    benchmark.StyleCount = stylesCount;
+                    benchmark.FeatureCount = featureCount;
+                }
                 return canvas;
             }
             catch (Exception ex)

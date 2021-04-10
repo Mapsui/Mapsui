@@ -10,13 +10,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.Common", "Sa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.Common.Desktop", "Samples\Mapsui.Samples.Common.Desktop\Mapsui.Samples.Common.Desktop.csproj", "{086F5A3A-7D9A-4125-8E67-0EBC72AAB246}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.Wpf", "Samples\Mapsui.Samples.Wpf\Mapsui.Samples.Wpf.csproj", "{B83B1717-4AFA-4DD8-AB3C-A713C7963271}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.Wpf", "Samples\Mapsui.Samples.Wpf\Mapsui.Samples.Wpf.csproj", "{B83B1717-4AFA-4DD8-AB3C-A713C7963271}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F7130D3D-4E62-4EB3-B74C-1E819E017048}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Tests", "Tests\Mapsui.Tests\Mapsui.Tests.csproj", "{512DB2DB-61A0-4723-A6AC-E9AE23243283}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Tests", "Tests\Mapsui.Tests\Mapsui.Tests.csproj", "{512DB2DB-61A0-4723-A6AC-E9AE23243283}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Rendering.Xaml.Tests", "Tests\Mapsui.Rendering.Xaml.Tests\Mapsui.Rendering.Xaml.Tests.csproj", "{3F5F1E88-DA00-40C3-9F19-8582B5D516D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Rendering.Xaml.Tests", "Tests\Mapsui.Rendering.Xaml.Tests\Mapsui.Rendering.Xaml.Tests.csproj", "{3F5F1E88-DA00-40C3-9F19-8582B5D516D7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Tests.Common", "Tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj", "{81BB36D2-4D01-44E3-9024-E7CBD10DA316}"
 EndProject
@@ -24,7 +24,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Desktop", "Mapsui.De
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.UI.Android", "Mapsui.UI.Android\Mapsui.UI.Android.csproj", "{A9ED0AA7-B6F0-4946-8A08-7C531E5CFA9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Rendering.Xaml", "Mapsui.Rendering.Xaml\Mapsui.Rendering.Xaml.csproj", "{5DC32B05-0B6E-478F-A9FB-57762AA2F814}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Rendering.Xaml", "Mapsui.Rendering.Xaml\Mapsui.Rendering.Xaml.csproj", "{5DC32B05-0B6E-478F-A9FB-57762AA2F814}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Geometries", "Mapsui.Geometries\Mapsui.Geometries.csproj", "{EE55B62D-FFA2-4C24-A4AD-7A47ACE55CE5}"
 EndProject
@@ -40,7 +40,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{B2DB
 		Scripts\updateversionnumber.proj = Scripts\updateversionnumber.proj
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Rendering.Skia.Tests", "Tests\Mapsui.Rendering.Skia.Tests\Mapsui.Rendering.Skia.Tests.csproj", "{53A4E033-F814-46CC-8105-DAC289524455}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Rendering.Skia.Tests", "Tests\Mapsui.Rendering.Skia.Tests\Mapsui.Rendering.Skia.Tests.csproj", "{53A4E033-F814-46CC-8105-DAC289524455}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{45FC7141-9D40-43F2-8EE2-2BF3B37F7557}"
 	ProjectSection(SolutionItems) = preProject
@@ -58,11 +58,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.iOS", "Samples\Mapsui.Samples.iOS\Mapsui.Samples.iOS.csproj", "{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Desktop.Tests", "Tests\Mapsui.Desktop.Tests\Mapsui.Desktop.Tests.csproj", "{FF1A03F0-8C0C-4FAB-A229-42AD625B5456}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Desktop.Tests", "Tests\Mapsui.Desktop.Tests\Mapsui.Desktop.Tests.csproj", "{FF1A03F0-8C0C-4FAB-A229-42AD625B5456}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.UI.Wpf", "Mapsui.UI.Wpf\Mapsui.UI.Wpf.csproj", "{AE693902-FEDA-4034-A7C5-9AA9872F7878}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Geometries.Tests", "Tests\Mapsui.Geometries.Tests\Mapsui.Geometries.Tests.csproj", "{46519792-2F00-4FB7-99EF-1465AC7B8994}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Geometries.Tests", "Tests\Mapsui.Geometries.Tests\Mapsui.Geometries.Tests.csproj", "{46519792-2F00-4FB7-99EF-1465AC7B8994}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuSpec", "NuSpec", "{D90027DD-A6D6-4C32-91DC-237B55141EB8}"
 	ProjectSection(SolutionItems) = preProject
@@ -72,7 +72,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuSpec", "NuSpec", "{D90027
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{CB6BE9F9-5ECF-471B-9D93-605E2BD6825D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VersionUpdater", "Tools\VersionUpdater\VersionUpdater.csproj", "{A6D5A694-454C-432B-BB24-AB784876E8E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VersionUpdater", "Tools\VersionUpdater\VersionUpdater.csproj", "{A6D5A694-454C-432B-BB24-AB784876E8E1}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mapsui.UI.Shared", "Mapsui.UI.Shared\Mapsui.UI.Shared.shproj", "{239F2B0D-13CB-4BCF-83BF-F52D696A47B7}"
 EndProject
@@ -80,7 +80,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.UI.Uwp", "Mapsui.UI.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.Uwp", "Samples\Mapsui.Samples.Uwp\Mapsui.Samples.Uwp.csproj", "{CA0C7AF3-03ED-42D0-A001-001E8EE095E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.Wpf.Editing", "Samples\Mapsui.Samples.Wpf.Editing\Mapsui.Samples.Wpf.Editing.csproj", "{16D71D4F-1D3F-483E-9C6C-A3A25B6A20A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.Wpf.Editing", "Samples\Mapsui.Samples.Wpf.Editing\Mapsui.Samples.Wpf.Editing.csproj", "{16D71D4F-1D3F-483E-9C6C-A3A25B6A20A9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Rendering.Skia", "Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj", "{AE632270-38CA-4203-93A5-8612629CD944}"
 EndProject
@@ -141,7 +141,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.Forms.UWP", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.CustomWidget", "Samples\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj", "{3EB5D6AA-8B52-4E93-9000-61EEE6D6B044}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.Forms.WPF", "Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.WPF\Mapsui.Samples.Forms.WPF.csproj", "{818DE3FA-9F8A-4802-96D0-564497B59B21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.Forms.WPF", "Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.WPF\Mapsui.Samples.Forms.WPF.csproj", "{818DE3FA-9F8A-4802-96D0-564497B59B21}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.Forms.Shared", "Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\Mapsui.Samples.Forms.Shared.csproj", "{C008562A-ED14-4EF0-BAD6-B7967EF9A9F3}"
 EndProject
@@ -1291,10 +1291,8 @@ Global
 		{3BC0AC7E-3B3B-4D3F-9CC0-B2BDECC460A6}.Debug|ARM.Deploy.0 = Debug|Any CPU
 		{3BC0AC7E-3B3B-4D3F-9CC0-B2BDECC460A6}.Debug|iPhone.ActiveCfg = Debug|Any CPU
 		{3BC0AC7E-3B3B-4D3F-9CC0-B2BDECC460A6}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{3BC0AC7E-3B3B-4D3F-9CC0-B2BDECC460A6}.Debug|iPhone.Deploy.0 = Debug|Any CPU
 		{3BC0AC7E-3B3B-4D3F-9CC0-B2BDECC460A6}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
 		{3BC0AC7E-3B3B-4D3F-9CC0-B2BDECC460A6}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{3BC0AC7E-3B3B-4D3F-9CC0-B2BDECC460A6}.Debug|iPhoneSimulator.Deploy.0 = Debug|Any CPU
 		{3BC0AC7E-3B3B-4D3F-9CC0-B2BDECC460A6}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{3BC0AC7E-3B3B-4D3F-9CC0-B2BDECC460A6}.Debug|x64.Build.0 = Debug|Any CPU
 		{3BC0AC7E-3B3B-4D3F-9CC0-B2BDECC460A6}.Debug|x64.Deploy.0 = Debug|Any CPU
@@ -1410,10 +1408,8 @@ Global
 		{71353A7E-BFA9-4680-A345-EA19BF69F60E}.Debug|ARM.Deploy.0 = Debug|Any CPU
 		{71353A7E-BFA9-4680-A345-EA19BF69F60E}.Debug|iPhone.ActiveCfg = Debug|Any CPU
 		{71353A7E-BFA9-4680-A345-EA19BF69F60E}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{71353A7E-BFA9-4680-A345-EA19BF69F60E}.Debug|iPhone.Deploy.0 = Debug|Any CPU
 		{71353A7E-BFA9-4680-A345-EA19BF69F60E}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
 		{71353A7E-BFA9-4680-A345-EA19BF69F60E}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{71353A7E-BFA9-4680-A345-EA19BF69F60E}.Debug|iPhoneSimulator.Deploy.0 = Debug|Any CPU
 		{71353A7E-BFA9-4680-A345-EA19BF69F60E}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{71353A7E-BFA9-4680-A345-EA19BF69F60E}.Debug|x64.Build.0 = Debug|Any CPU
 		{71353A7E-BFA9-4680-A345-EA19BF69F60E}.Debug|x64.Deploy.0 = Debug|Any CPU
@@ -1458,8 +1454,10 @@ Global
 		{DE3B0CBF-CC20-4457-884B-2E5150B45A01}.Debug|ARM.ActiveCfg = Debug|iPhone
 		{DE3B0CBF-CC20-4457-884B-2E5150B45A01}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{DE3B0CBF-CC20-4457-884B-2E5150B45A01}.Debug|iPhone.Build.0 = Debug|iPhone
+		{DE3B0CBF-CC20-4457-884B-2E5150B45A01}.Debug|iPhone.Deploy.0 = Debug|iPhone
 		{DE3B0CBF-CC20-4457-884B-2E5150B45A01}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
 		{DE3B0CBF-CC20-4457-884B-2E5150B45A01}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{DE3B0CBF-CC20-4457-884B-2E5150B45A01}.Debug|iPhoneSimulator.Deploy.0 = Debug|iPhoneSimulator
 		{DE3B0CBF-CC20-4457-884B-2E5150B45A01}.Debug|x64.ActiveCfg = Debug|iPhone
 		{DE3B0CBF-CC20-4457-884B-2E5150B45A01}.Debug|x86.ActiveCfg = Debug|iPhone
 		{DE3B0CBF-CC20-4457-884B-2E5150B45A01}.Release|AnyCPU.ActiveCfg = Release|iPhone
@@ -1490,22 +1488,22 @@ Global
 		{975B6BBD-CD89-4A69-8F42-3C999D9F4D99}.AppStore|x86.ActiveCfg = Release|Any CPU
 		{975B6BBD-CD89-4A69-8F42-3C999D9F4D99}.AppStore|x86.Build.0 = Release|Any CPU
 		{975B6BBD-CD89-4A69-8F42-3C999D9F4D99}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
+		{975B6BBD-CD89-4A69-8F42-3C999D9F4D99}.Debug|AnyCPU.Build.0 = Debug|Any CPU
 		{975B6BBD-CD89-4A69-8F42-3C999D9F4D99}.Debug|ARM.ActiveCfg = Debug|Any CPU
 		{975B6BBD-CD89-4A69-8F42-3C999D9F4D99}.Debug|iPhone.ActiveCfg = Debug|Any CPU
 		{975B6BBD-CD89-4A69-8F42-3C999D9F4D99}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
 		{975B6BBD-CD89-4A69-8F42-3C999D9F4D99}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{975B6BBD-CD89-4A69-8F42-3C999D9F4D99}.Debug|x64.Build.0 = Debug|Any CPU
 		{975B6BBD-CD89-4A69-8F42-3C999D9F4D99}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{975B6BBD-CD89-4A69-8F42-3C999D9F4D99}.Debug|x86.Build.0 = Debug|Any CPU
 		{975B6BBD-CD89-4A69-8F42-3C999D9F4D99}.Release|AnyCPU.ActiveCfg = Release|Any CPU
 		{975B6BBD-CD89-4A69-8F42-3C999D9F4D99}.Release|AnyCPU.Build.0 = Release|Any CPU
 		{975B6BBD-CD89-4A69-8F42-3C999D9F4D99}.Release|ARM.ActiveCfg = Release|Any CPU
 		{975B6BBD-CD89-4A69-8F42-3C999D9F4D99}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{975B6BBD-CD89-4A69-8F42-3C999D9F4D99}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{975B6BBD-CD89-4A69-8F42-3C999D9F4D99}.Release|x64.ActiveCfg = Release|Any CPU
-		{975B6BBD-CD89-4A69-8F42-3C999D9F4D99}.Release|x86.ActiveCfg = Release|Any CPU
-		{975B6BBD-CD89-4A69-8F42-3C999D9F4D99}.Debug|AnyCPU.Build.0 = Debug|Any CPU
-		{975B6BBD-CD89-4A69-8F42-3C999D9F4D99}.Debug|x64.Build.0 = Debug|Any CPU
 		{975B6BBD-CD89-4A69-8F42-3C999D9F4D99}.Release|x64.Build.0 = Release|Any CPU
-		{975B6BBD-CD89-4A69-8F42-3C999D9F4D99}.Debug|x86.Build.0 = Debug|Any CPU
+		{975B6BBD-CD89-4A69-8F42-3C999D9F4D99}.Release|x86.ActiveCfg = Release|Any CPU
 		{975B6BBD-CD89-4A69-8F42-3C999D9F4D99}.Release|x86.Build.0 = Release|Any CPU
 		{28848162-20B7-46F1-8364-8B41B0393CD4}.Ad-Hoc|AnyCPU.ActiveCfg = Release|x86
 		{28848162-20B7-46F1-8364-8B41B0393CD4}.Ad-Hoc|AnyCPU.Build.0 = Release|x86

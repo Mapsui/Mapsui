@@ -1,3 +1,4 @@
+using Mapsui.Benchmark;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
@@ -13,7 +14,7 @@ namespace Mapsui.Rendering
     {
         public static void IterateLayers(IReadOnlyViewport viewport, IEnumerable<ILayer> layers,
             Action<IReadOnlyViewport, ILayer, IStyle, IFeature, float> callback,
-            List<RenderBenchmark> layerBenchmarks
+            List<RenderBenchmark> benchmarks
             )
         {
             var sw = new Stopwatch();
@@ -21,30 +22,37 @@ namespace Mapsui.Rendering
             int i = 0;
             foreach (var layer in layers)
             {
+                ++i;
                 if (layer.Enabled == false) continue;
                 if (layer.MinVisible > viewport.Resolution) continue;
                 if (layer.MaxVisible < viewport.Resolution) continue;
 
-                sw.Reset();
-                sw.Start();
-                var bench = layerBenchmarks != null ? layerBenchmarks[i] : null;
+                RenderBenchmark currentBenchmark = null;
+                if (benchmarks != null)
+                {
+                    sw.Reset();
+                    sw.Start();
+                    currentBenchmark = benchmarks[i-1];
+                }
 
-                IterateLayer(viewport, layer, callback, bench);
-                sw.Stop();
-                if (bench != null)
-                    bench.Time = sw.Elapsed.TotalMilliseconds;
-                ++i;
+                IterateLayer(viewport, layer, callback, currentBenchmark);
+                if (currentBenchmark != null)
+                {
+                    sw.Stop();
+                    currentBenchmark.Time = sw.Elapsed.TotalMilliseconds;
+                }
             }
         }
 
         private static void IterateLayer(IReadOnlyViewport viewport, ILayer layer,
             Action<IReadOnlyViewport, ILayer, IStyle, IFeature, float> callback,
-            RenderBenchmark bench)
+            RenderBenchmark currentBenchmark)
         {
             var features = layer.GetFeaturesInView(viewport.Extent, viewport.Resolution).ToList();
 
             var layerStyles = ToArray(layer);
             int stylesCount = 0;
+            int featureCount = 0;
 
             foreach (var layerStyle in layerStyles)
             {
@@ -69,10 +77,10 @@ namespace Mapsui.Rendering
                         callback(viewport, layer, style, feature, (float)layer.Opacity);
                         ++stylesCount;
                     }
+                    ++featureCount;
                 }
             }
 
-            int featureCount = 0;
             foreach (var feature in features)
             {
                 var featureStyles = feature.Styles ?? Enumerable.Empty<IStyle>(); // null check
@@ -82,17 +90,14 @@ namespace Mapsui.Rendering
 
                     callback(viewport, layer, featureStyle, feature, (float)layer.Opacity);
                     ++stylesCount;
-
                 }
-
                 ++featureCount;
-
             }
 
-            if (bench !=null)
+            if (currentBenchmark !=null)
             {
-                bench.StyleCount = stylesCount;
-                bench.FeatureCount = featureCount;
+                currentBenchmark.StyleCount = stylesCount;
+                currentBenchmark.FeatureCount = featureCount;
             }
         }
 
