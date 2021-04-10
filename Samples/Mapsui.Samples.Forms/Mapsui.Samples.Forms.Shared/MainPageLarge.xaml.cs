@@ -1,13 +1,13 @@
-﻿using Mapsui.Rendering.Skia;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Mapsui.Rendering.Skia;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.ExtensionMethods;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.UI.Forms;
 using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -26,12 +26,13 @@ namespace Mapsui.Samples.Forms
             allSamples = AllSamples.GetSamples();
 
             var categories = allSamples.Select(s => s.Category).Distinct().OrderBy(c => c);
+            picker.Items.Add("All");
             foreach (var category in categories)
             {
-                picker.Items?.Add(category);
+                picker.Items.Add(category);
             }
             picker.SelectedIndexChanged += PickerSelectedIndexChanged;
-            picker.SelectedItem = "Forms";
+            picker.SelectedItem = "All";
 
             mapView.RotationLock = false;
             mapView.UnSnapRotationDegrees = 30;
@@ -81,7 +82,14 @@ namespace Mapsui.Samples.Forms
         private void FillListWithSamples()
         {
             var selectedCategory = picker.SelectedItem?.ToString() ?? "";
-            listView.ItemsSource = allSamples.Where(s => s.Category == selectedCategory).Select(x => x.Name);
+            if (selectedCategory == "All")
+            {
+                listView.ItemsSource = allSamples.Select(x => x.Name).ToList();
+            }
+            else
+            {
+                listView.ItemsSource = allSamples.Where(s => s.Category == selectedCategory).Select(x => x.Name).ToList();
+            }
         }
 
         private void PickerSelectedIndexChanged(object sender, EventArgs e)
@@ -106,6 +114,9 @@ namespace Mapsui.Samples.Forms
 
             if (sample != null)
             {
+                // mapview is reused and setup only replace the map
+                mapView.Pins.Clear();
+                mapView.Drawables.Clear();
                 sample.Setup(mapView);
             }
 
