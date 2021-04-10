@@ -1,11 +1,11 @@
-﻿using Mapsui.Rendering.Skia;
+﻿using System;
+using System.Threading.Tasks;
+using Mapsui.Rendering.Skia;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.UI;
 using Mapsui.UI.Forms;
 using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
-using System;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

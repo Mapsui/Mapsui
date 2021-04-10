@@ -252,11 +252,9 @@ namespace Mapsui.UI.Forms
             if (PixelDensity <= 0)
                 return;
             Navigator.UpdateAnimations();
-
-            e.Surface.Canvas.Scale(PixelDensity, PixelDensity);
-
-
-            Renderer.Render(e.Surface.Canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
+            var canvas = e.Surface.Canvas;
+            canvas.Scale(PixelDensity, PixelDensity);
+            Renderer.Render(canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
         }
 
         private Geometries.Point GetScreenPosition(SKPoint point)
