@@ -1,10 +1,7 @@
-﻿using Mapsui.Layers;
-using Mapsui.Samples.Common;
+﻿using Mapsui.Samples.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,31 +9,38 @@ namespace Mapsui.Samples.Forms
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage
-	{
+    {
         IEnumerable<ISample> allSamples;
         Func<object, EventArgs, bool> clicker;
 
         public MainPage()
-		{
+        {
             InitializeComponent();
-
+            Title = "Mapsui Samples";
             allSamples = AllSamples.GetSamples();
 
             var categories = allSamples.Select(s => s.Category).Distinct().OrderBy(c => c);
+            picker.Items.Add("All");
             foreach (var category in categories)
             {
-                picker.Items?.Add(category);
+                picker.Items.Add(category);
             }
-            picker.SelectedIndexChanged += PickerSelectedIndexChanged;
-            picker.SelectedItem = "Forms";
-
             listView.ItemsSource = allSamples.Select(k => k.Name).ToList();
+            picker.SelectedIndexChanged += PickerSelectedIndexChanged;
+            picker.SelectedItem = "All";
         }
 
         private void FillListWithSamples()
         {
             var selectedCategory = picker.SelectedItem?.ToString() ?? "";
-            listView.ItemsSource = allSamples.Where(s => s.Category == selectedCategory).Select(x => x.Name);
+            if (selectedCategory == "All")
+            {
+                listView.ItemsSource = allSamples.Select(x => x.Name);
+            }
+            else
+            {
+                listView.ItemsSource = allSamples.Where(s => s.Category == selectedCategory).Select(x => x.Name);
+            }
         }
 
         private void PickerSelectedIndexChanged(object sender, EventArgs e)
@@ -58,7 +62,7 @@ namespace Mapsui.Samples.Forms
             if (sample is IFormsSample)
                 clicker = ((IFormsSample)sample).OnClick;
 
-            ((NavigationPage)Application.Current.MainPage).PushAsync(new MapPage(sample.Setup, clicker));
+            ((NavigationPage)Application.Current.MainPage).PushAsync(new MapPage(sampleName, sample.Setup, clicker));
 
             listView.SelectedItem = null;
         }
