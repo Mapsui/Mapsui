@@ -117,6 +117,7 @@ namespace Mapsui.Samples.Forms
                 // mapview is reused and setup only replace the map
                 mapView.Pins.Clear();
                 mapView.Drawables.Clear();
+                mapView.HideCallouts();
                 sample.Setup(mapView);
             }
 

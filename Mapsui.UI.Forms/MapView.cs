@@ -528,7 +528,7 @@ namespace Mapsui.UI.Forms
             if (!_callouts.Contains(callout))
             {
                 if (UniqueCallout)
-                    HideCallouts();
+                    HideCallouts(false);
 
                 _callouts.Add(callout);
 
@@ -554,9 +554,11 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Hide all visible callouts
         /// </summary>
-        public void HideCallouts()
+        public void HideCallouts(bool refresh=true)
         {
             _callouts.Clear();
+            if (refresh)
+                Refresh();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
