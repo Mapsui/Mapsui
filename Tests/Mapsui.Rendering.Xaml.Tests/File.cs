@@ -2,7 +2,11 @@
 using System.IO;
 using System.Reflection;
 
+#if SKIA
+namespace Mapsui.Rendering.Skia.Tests
+#else
 namespace Mapsui.Rendering.Xaml.Tests
+#endif
 {
     internal static class File
     {

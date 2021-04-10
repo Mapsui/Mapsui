@@ -290,6 +290,7 @@
     <PackageReference Include="Xamarin.AndroidX.Palette">
       <Version>1.0.0.6</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.3.0.1" />
   </ItemGroup>
   <ItemGroup>
     <AndroidEnvironment Include="environment.txt" />

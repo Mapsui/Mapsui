@@ -117,6 +117,8 @@ namespace Mapsui.Rendering.Skia
         public void Render(object target, IReadOnlyViewport viewport, IEnumerable<ILayer> layers,
             IEnumerable<IWidget> widgets, Color background)
         {
+            if (layers == null) throw new ArgumentException("layers cannot be null");
+            widgets ??= Enumerable.Empty<IWidget>();
             var attributions = layers.Where(l => l.Enabled).Select(l => l.Attribution).Where(w => w != null).ToList();
             var allWidgets = widgets.Concat(attributions);
 
