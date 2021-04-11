@@ -18,11 +18,26 @@ namespace Mapsui.Samples.Forms
     {
         IEnumerable<ISample> allSamples;
         Func<object, EventArgs, bool> clicker;
+        private void Benchmarking_Clicked(object sender, EventArgs e)
+        {
+            MainPage.NavigateToPage(new BenchmarkSettingsPage());
+        }
+
+        private void SetupToolbar()
+        {
+            var benchmarking = new ToolbarItem
+            {
+                Text = "Benchmarking",
+                Order = ToolbarItemOrder.Secondary
+            };
+            benchmarking.Clicked += Benchmarking_Clicked;
+            ToolbarItems.Add(benchmarking);
+        }
 
         public MainPageLarge()
         {
             InitializeComponent();
-
+            SetupToolbar();
             allSamples = AllSamples.GetSamples();
 
             var categories = allSamples.Select(s => s.Category).Distinct().OrderBy(c => c);
@@ -114,6 +129,7 @@ namespace Mapsui.Samples.Forms
 
             if (sample != null)
             {
+                Title = sample.Name;
                 // mapview is reused and setup only replace the map
                 mapView.Pins.Clear();
                 mapView.Drawables.Clear();

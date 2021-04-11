@@ -17,7 +17,7 @@ namespace Mapsui.Samples.Forms
             if (Device.Idiom == TargetIdiom.Phone)
                 MainPage = new NavigationPage(new MainPage());
             else
-                MainPage = new MainPageLarge();
+                MainPage = new NavigationPage(new MainPageLarge());
         }
 
         protected override void OnStart()

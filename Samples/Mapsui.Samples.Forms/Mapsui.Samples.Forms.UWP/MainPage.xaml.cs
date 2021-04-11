@@ -20,7 +20,6 @@ namespace Mapsui.Samples.Forms.UWP
         public MainPage()
         {
             this.InitializeComponent();
-
             LoadApplication(new Mapsui.Samples.Forms.App());
         }
     }
