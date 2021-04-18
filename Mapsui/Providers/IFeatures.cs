@@ -6,7 +6,6 @@ namespace Mapsui.Providers
     {
         string PrimaryKey { get; }
         void Add(IFeature feature);
-        IFeature New();
         void Delete(object id);
         void Clear();
     }

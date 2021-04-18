@@ -60,7 +60,7 @@ namespace Mapsui.Providers
         public IFeature New()
         {
             // At this point it is possible to initialize an improved version of
-            // Feature with a specifed set of columns.
+            // Feature with a specified set of columns.
             return new Feature();
         }
 

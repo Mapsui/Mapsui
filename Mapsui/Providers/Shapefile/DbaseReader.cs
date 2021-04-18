@@ -19,6 +19,7 @@
 // Good stuff on DBase format: http://www.clicketyclick.dk/databases/xbase/format/
 
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.IO;
@@ -448,13 +449,13 @@ namespace Mapsui.Providers.Shapefile
         /// <param name="oid"></param>
         /// <param name="table"></param>
         /// <returns></returns>
-        internal IFeature GetFeature(uint oid, IFeatures table)
+        internal IGeometryFeature GetFeature(uint oid, IEnumerable<IGeometryFeature> table)
         {
             if (oid >= _numberOfRecords)
                 throw (new ArgumentException("Invalid DataRow requested at index " + oid.ToString(CultureInfo.InvariantCulture)));
             _fs.Seek(_headerLength + oid * _recordLength, 0);
 
-            var dr = table.New();
+            var dr = new Feature();
 
             if (_br.ReadChar() == '*') return null; // is record marked deleted?
                 

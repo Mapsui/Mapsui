@@ -1,12 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
-using BruTile.Extensions;
 using Mapsui.Geometries;
 using Mapsui.Logging;
 using Mapsui.Rendering;
@@ -94,15 +93,17 @@ namespace Mapsui.Providers.ArcGIS.Image
             set { _timeOut = value; }
         }
 
-        public System.Collections.Generic.IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
-            var features = new Features();
+            var features = new List<IGeometryFeature>();
             IRaster raster = null;
             var view = new Viewport { Resolution = resolution, Center = box.Centroid, Width = (box.Width / resolution), Height = (box.Height / resolution) };
             if (TryGetMap(view, ref raster))
             {
-                var feature = features.New();
-                feature.Geometry = raster;
+                var feature = new Feature
+                {
+                    Geometry = raster
+                };
                 features.Add(feature);
             }
             return features;

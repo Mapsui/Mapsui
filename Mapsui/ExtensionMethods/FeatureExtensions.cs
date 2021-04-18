@@ -7,14 +7,14 @@ namespace Mapsui.Providers
 {
     public static class FeatureExtensions
     {
-        public static IFeature Copy(this IFeature original)
+        public static IGeometryFeature Copy(this IGeometryFeature original)
         {
             return new Feature(original) {Geometry = original.Geometry.Copy()};
         }
 
-        public static IEnumerable<IFeature> Copy(this IEnumerable<IFeature> original)
+        public static IEnumerable<IGeometryFeature> Copy(this IEnumerable<IGeometryFeature> original)
         {
-            return original.Select(feature => feature.Copy()).ToList();
+            return original.Select(f => f.Copy()).ToList();
         }
     }
 }

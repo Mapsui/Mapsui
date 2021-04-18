@@ -17,6 +17,7 @@
 // along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Mapsui.Fetcher;
@@ -33,7 +34,7 @@ namespace Mapsui.Layers
     {
         private IProvider _dataSource;
         private readonly object _syncRoot = new object();
-        private readonly MemoryProvider _cache = new MemoryProvider();
+        private readonly ConcurrentStack<IGeometryFeature> _cache = new ConcurrentStack<IGeometryFeature>();
         private readonly FeatureFetchDispatcher _fetchDispatcher;
         private readonly FetchMachine _fetchMachine;
         public Delayer Delayer { get; } = new Delayer();
@@ -131,7 +132,7 @@ namespace Mapsui.Layers
         /// <inheritdoc />
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox extent, double resolution)
         {
-            return _cache.Features;
+            return _cache.ToArray();
         }
 
         /// <inheritdoc />

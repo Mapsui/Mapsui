@@ -72,8 +72,10 @@ namespace Mapsui.Providers
                 byte[] bitmap = _bitmaps.Find(info.Index);
                 if (bitmap == null) continue;
                 IRaster raster = new Raster(new MemoryStream(bitmap), new BoundingBox(info.Extent.MinX, info.Extent.MinY, info.Extent.MaxX, info.Extent.MaxY));
-                IFeature feature = features.New();
-                feature.Geometry = raster;
+                var feature = new Feature
+                {
+                    Geometry = raster
+                };
                 features.Add(feature);
             }
             return features;

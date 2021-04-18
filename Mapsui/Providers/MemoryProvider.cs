@@ -62,7 +62,7 @@ namespace Mapsui.Providers
         /// <summary>
         /// Gets or sets the geometries this datasource contains
         /// </summary>
-        public IReadOnlyList<IFeature> Features { get; private set; }
+        public IReadOnlyList<IGeometryFeature> Features { get; private set; }
 
         public double SymbolSize { get; set; } = 64;
 
@@ -76,7 +76,7 @@ namespace Mapsui.Providers
         public MemoryProvider()
         {
             CRS = "";
-            Features = new List<IFeature>();
+            Features = new List<IGeometryFeature>();
             _boundingBox = GetExtents(Features);
         }
 
@@ -94,11 +94,11 @@ namespace Mapsui.Providers
         /// <summary>
         /// Initializes a new instance of the <see cref="MemoryProvider"/>
         /// </summary>
-        /// <param name="feature">Feature to be in this datasource</param>
-        public MemoryProvider(IFeature feature)
+        /// <param name="feature">Feature to be in this dataSource</param>
+        public MemoryProvider(IGeometryFeature feature)
         {
             CRS = "";
-            Features = new List<IFeature> { feature };
+            Features = new List<IGeometryFeature> { feature };
             _boundingBox = GetExtents(Features);
         }
 
@@ -114,8 +114,8 @@ namespace Mapsui.Providers
         /// <summary>
         /// Initializes a new instance of the <see cref="MemoryProvider"/>
         /// </summary>
-        /// <param name="features">Features to be included in this datasource</param>
-        public MemoryProvider(IEnumerable<IFeature> features)
+        /// <param name="features">Features to be included in this dataSource</param>
+        public MemoryProvider(IEnumerable<IGeometryFeature> features)
         {
             CRS = "";
             Features = features.ToList();
@@ -125,12 +125,12 @@ namespace Mapsui.Providers
         /// <summary>
         /// Initializes a new instance of the <see cref="MemoryProvider"/>
         /// </summary>
-        /// <param name="geometry">Geometry to be in this datasource</param>
+        /// <param name="geometry">Geometry to be in this dataSource</param>
         public MemoryProvider(Geometry geometry)
         {
             CRS = "";
 
-            Features = new List<IFeature>
+            Features = new List<IGeometryFeature>
             {
                 new Feature
                 {
@@ -175,7 +175,7 @@ namespace Mapsui.Providers
             return _boundingBox;
         }
 
-        private static BoundingBox GetExtents(IReadOnlyList<IFeature> features)
+        private static BoundingBox GetExtents(IReadOnlyList<IGeometryFeature> features)
         {
             BoundingBox box = null;
             foreach (var feature in features)
@@ -190,10 +190,10 @@ namespace Mapsui.Providers
 
         public void Clear()
         {
-            Features = new List<IFeature>();
+            Features = new List<IGeometryFeature>();
         }
 
-        public void ReplaceFeatures(IEnumerable<IFeature> features)
+        public void ReplaceFeatures(IEnumerable<IGeometryFeature> features)
         {
             Features = features.ToList();
             _boundingBox = GetExtents(Features);

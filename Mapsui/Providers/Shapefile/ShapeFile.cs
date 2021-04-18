@@ -408,7 +408,7 @@ namespace Mapsui.Providers.Shapefile
         {
             if (FilterDelegate != null) //Apply filtering
             {
-                IFeature fdr = GetFeature(oid);
+                IGeometryFeature fdr = GetFeature(oid);
                 if (fdr != null)
                     return fdr.Geometry;
                 return null;
@@ -806,9 +806,9 @@ namespace Mapsui.Providers.Shapefile
         /// Gets a datarow from the datasource at the specified index belonging to the specified datatable
         /// </summary>
         /// <param name="rowId"></param>
-        /// <param name="feature">Datatable to feature should belong to.</param>
+        /// <param name="features">Datatable to feature should belong to.</param>
         /// <returns></returns>
-        public IFeature GetFeature(uint rowId, IFeatures feature = null)
+        public IGeometryFeature GetFeature(uint rowId, List<IGeometryFeature> features = null)
         {
             lock (_syncRoot)
             {
@@ -816,7 +816,7 @@ namespace Mapsui.Providers.Shapefile
 
                 try
                 {
-                    return GetFeaturePrivate(rowId, feature);
+                    return GetFeaturePrivate(rowId, features);
                 }
                 finally
                 {
@@ -826,11 +826,11 @@ namespace Mapsui.Providers.Shapefile
 
         }
 
-        private IFeature GetFeaturePrivate(uint rowId, IFeatures dt)
+        private IGeometryFeature GetFeaturePrivate(uint rowId, IEnumerable<IGeometryFeature> dt)
         {
             if (_dbaseFile != null)
             {
-                var dr = _dbaseFile.GetFeature(rowId, dt ?? new Features());
+                var dr = _dbaseFile.GetFeature(rowId, dt ?? new List<IGeometryFeature>());
                 dr.Geometry = ReadGeometry(rowId);
                 if (FilterDelegate == null || FilterDelegate(dr))
                     return dr;
@@ -849,7 +849,7 @@ namespace Mapsui.Providers.Shapefile
                 {
                     //Use the spatial index to get a list of features whose boundingbox intersects bbox
                     var objectlist = GetObjectIDsInView(box);
-                    var features = new Features();
+                    var features = new List<IGeometryFeature>();
 
                     foreach (var index in objectlist)
                     {

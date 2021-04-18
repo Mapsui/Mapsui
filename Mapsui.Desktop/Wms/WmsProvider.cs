@@ -481,12 +481,12 @@ namespace Mapsui.Desktop.Wms
 
         public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
-            var features = new Features();
+            var features = new List<IGeometryFeature>();
             IRaster raster = null;
             var view = new Viewport { Resolution = resolution, Center = box.Centroid, Width = (box.Width / resolution), Height = (box.Height / resolution) };
             if (TryGetMap(view, ref raster))
             {
-                var feature = features.New();
+                var feature = new Feature();
                 feature.Geometry = raster;
                 features.Add(feature);
             }
