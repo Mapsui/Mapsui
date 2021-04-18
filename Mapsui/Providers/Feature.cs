@@ -7,7 +7,7 @@ using Mapsui.Styles;
 
 namespace Mapsui.Providers
 {
-    public class Feature : IFeature, IDisposable
+    public class Feature : IGeometryFeature, IDisposable
     {
         private readonly Dictionary<string, object> _dictionary = new Dictionary<string, object>();
         private bool _disposed;
@@ -18,7 +18,7 @@ namespace Mapsui.Providers
             Styles = new Collection<IStyle>();
         }
 
-        public Feature(IFeature feature)
+        public Feature(IGeometryFeature feature)
         {
             Geometry = feature.Geometry;
             RenderedGeometry = feature.RenderedGeometry.ToDictionary(entry => entry.Key,

@@ -46,7 +46,7 @@ namespace Mapsui.Providers
             var margin = resolution * 50;
             var clusters = new List<Cluster>();
             // todo: repeat until there are no more merges
-            ClusterFeatures(clusters, features, margin, labelStyle, resolution);
+            ClusterFeatures(clusters, features.Cast<IGeometryFeature>(), margin, labelStyle, resolution);
 
             const int textHeight = 18;
 
@@ -147,7 +147,7 @@ namespace Mapsui.Providers
 
         private static void ClusterFeatures(
             ICollection<Cluster> clusters,
-            IEnumerable<IFeature> features,
+            IEnumerable<IGeometryFeature> features,
             double minDistance,
             IStyle layerStyle,
             double resolution)
@@ -180,7 +180,7 @@ namespace Mapsui.Providers
                 clusters.Add(new Cluster
                 {
                     Box = feature.Geometry.BoundingBox.Clone(),
-                    Features = new List<IFeature> {feature}
+                    Features = new List<IGeometryFeature> {feature}
                 });
             }
         }
@@ -188,7 +188,7 @@ namespace Mapsui.Providers
         private class Cluster
         {
             public BoundingBox Box { get; set; }
-            public IList<IFeature> Features { get; set; }
+            public IList<IGeometryFeature> Features { get; set; }
         }
     }
 }

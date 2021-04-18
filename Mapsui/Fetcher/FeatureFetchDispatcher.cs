@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -15,13 +16,13 @@ namespace Mapsui.Fetcher
         private double _resolution;
         private readonly object _lockRoot = new object();
         private bool _busy;
-        private readonly MemoryProvider _cache;
+        private readonly ConcurrentStack<IGeometryFeature> _cache;
         private readonly Transformer _transformer;
         private bool _modified;
 
         // todo: Check whether busy and modified state are set correctly in all stages
 
-        public FeatureFetchDispatcher(MemoryProvider cache, Transformer transformer)
+        public FeatureFetchDispatcher(ConcurrentStack<IGeometryFeature> cache, Transformer transformer)
         {
             _cache = cache;
             _transformer = transformer;
@@ -41,7 +42,7 @@ namespace Mapsui.Fetcher
         {
             try
             {
-                var features = DataSource.GetFeaturesInView(extent, resolution).ToList();
+                var features = DataSource.GetFeaturesInView(extent, resolution).Cast<IGeometryFeature>().ToList();
                 FetchCompleted(features, null);
             }
             catch (Exception exception)
@@ -50,13 +51,14 @@ namespace Mapsui.Fetcher
             }
         }
 
-        private void FetchCompleted(IEnumerable<IFeature> features, Exception exception)
+        private void FetchCompleted(IEnumerable<IGeometryFeature> features, Exception exception)
         {
             lock (_lockRoot)
             {
                 if (exception == null)
                 {
-                    _cache.ReplaceFeatures(_transformer.Transform(features));
+                    _cache.Clear();
+                    _cache.PushRange(features.ToArray());
                 }
                 
                 Busy = _modified;

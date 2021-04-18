@@ -101,7 +101,7 @@ namespace Mapsui.Layers
             List<AnimatedItem> previousItems, string idField)
         {
             var result = new List<AnimatedItem>();
-            foreach (var feature in features)
+            foreach (var feature in features.Cast<IGeometryFeature>())
             {
                 var animatedItem = new AnimatedItem
                 {
@@ -181,7 +181,7 @@ namespace Mapsui.Layers
 
         private class AnimatedItem
         {
-            public IFeature Feature { get; set; }
+            public IGeometryFeature Feature { get; set; }
             public Point PreviousPoint { get; set; }
             public Point CurrentPoint { get; set; }
         }

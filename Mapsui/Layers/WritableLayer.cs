@@ -11,7 +11,7 @@ namespace Mapsui.Layers
 {
     public  class WritableLayer : BaseLayer
     {
-        private readonly ConcurrentHashSet<IFeature> _cache = new ConcurrentHashSet<IFeature>();
+        private readonly ConcurrentHashSet<IGeometryFeature> _cache = new ConcurrentHashSet<IGeometryFeature>();
 
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
@@ -59,12 +59,12 @@ namespace Mapsui.Layers
             _cache.Clear();
         }
 
-        public void Add(IFeature feature)
+        public void Add(IGeometryFeature feature)
         {
             _cache.Add(feature);
         }
 
-        public void AddRange(IEnumerable<IFeature> features)
+        public void AddRange(IEnumerable<IGeometryFeature> features)
         {
             foreach (var feature in features)
             {
@@ -87,7 +87,7 @@ namespace Mapsui.Layers
         /// <param name="compare">Optional method to compare the feature with any of the other 
         /// features in the list. If omitted a reference compare is done.</param>
         /// <returns></returns>
-        public bool TryRemove(IFeature feature, Func<IFeature, IFeature, bool> compare = null)
+        public bool TryRemove(IGeometryFeature feature, Func<IGeometryFeature, IGeometryFeature, bool> compare = null)
         {
             if (compare == null) return _cache.TryRemove(feature);
 

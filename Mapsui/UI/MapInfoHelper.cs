@@ -50,7 +50,7 @@ namespace Mapsui.UI
                 var maxSymbolSize = 128; // This sucks. There should be a better way to determine max symbol size.
                 var box = new BoundingBox(worldPosition, worldPosition);
                 var grownBox = box.Grow(resolution * maxSymbolSize * 0.5);
-                var features = layer.GetFeaturesInView(grownBox, resolution);
+                var features = layer.GetFeaturesInView(grownBox, resolution).Cast<IGeometryFeature>();
 
                 var feature = features.LastOrDefault(f => 
                     IsTouchingTakingIntoAccountSymbolStyles(worldPosition, f, layer.Style, resolution, symbolCache, margin));
@@ -65,7 +65,7 @@ namespace Mapsui.UI
             return result;
         }
 
-        private static bool IsTouchingTakingIntoAccountSymbolStyles(Point point, IFeature feature, IStyle layerStyle, 
+        private static bool IsTouchingTakingIntoAccountSymbolStyles(Point point, IGeometryFeature feature, IStyle layerStyle, 
             double resolution, ISymbolCache symbolCache, int margin = 0)
         {
             var styles = new List<IStyle>();

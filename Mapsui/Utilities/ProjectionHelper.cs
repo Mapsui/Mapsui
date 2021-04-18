@@ -96,7 +96,7 @@ namespace Mapsui.Utilities
         {
             if (!NeedsTransform(transformation, fromCRS, toCRS)) return features;
 
-            var copiedFeatures = features.Copy().ToList();
+            var copiedFeatures = features.Cast<IGeometryFeature>().Copy().ToList();
             foreach (var feature in copiedFeatures)
             {
                 if (feature.Geometry is Raster) continue;

@@ -1,5 +1,6 @@
 using System.Linq;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
@@ -11,7 +12,7 @@ namespace Mapsui.Layers
 {
     public class RasterizingLayer : BaseLayer, IAsyncDataFetcher
     {
-        private readonly MemoryProvider _cache;
+        private readonly ConcurrentStack<IGeometryFeature> _cache;
         private readonly ILayer _layer;
         private readonly bool _onlyRerasterizeIfOutsideOverscan;
         private readonly double _overscan;
@@ -57,7 +58,7 @@ namespace Mapsui.Layers
             Name = layer.Name;
             _renderResolutionMultiplier = renderResolutionMultiplier;
             _rasterizer = rasterizer;
-            _cache = new MemoryProvider();
+            _cache = new ConcurrentStack<IGeometryFeature>();
             _overscan = overscanRatio;
             _onlyRerasterizeIfOutsideOverscan = onlyRerasterizeIfOutsideOverscan;
             _pixelDensity = pixelDensity;
@@ -107,11 +108,10 @@ namespace Mapsui.Layers
 
                     if (bitmapStream != null)
                     {
-                        _cache.ReplaceFeatures(new Features
-                        {
-                            new Feature {Geometry = new Raster(bitmapStream, viewport.Extent)}
-                        });
-
+                        _cache.Clear();
+                        var features = new IGeometryFeature[1];
+                        features[0] = new Feature {Geometry = new Raster(bitmapStream, viewport.Extent)};
+                        _cache.PushRange(features);
 #if DEBUG
                         Logger.Log(LogLevel.Debug, $"Memory after rasterizing layer {GC.GetTotalMemory(true):N0}");
 #endif
@@ -130,7 +130,7 @@ namespace Mapsui.Layers
 
         private void RemoveExistingFeatures()
         {
-            var features = _cache.Features.ToList();
+            var features = _cache.ToArray();
             _cache.Clear(); // clear before dispose to prevent possible null disposed exception on render
 
             // Disposing previous and storing current in the previous field to prevent dispose during rendering.
@@ -140,7 +140,7 @@ namespace Mapsui.Layers
 
         private static void DisposeRenderedGeometries(IEnumerable<IFeature> features)
         {
-            foreach (var feature in features)
+            foreach (var feature in features.Cast<Feature>())
             {
                 var raster = feature.Geometry as Raster;
                 raster?.Data?.Dispose();
@@ -153,9 +153,18 @@ namespace Mapsui.Layers
             }
         }
 
-        public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox extent, double resolution)
+        public static double SymbolSize { get; set; } = 64;
+
+        public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
-            return _cache.GetFeaturesInView(extent, resolution);
+            if (box == null) throw new ArgumentNullException(nameof(box));
+
+            var features = _cache.ToArray();
+
+            // Use a larger extent so that symbols partially outside of the extent are included
+            var grownBox = box.Grow(resolution * SymbolSize * 0.5);
+
+            return features.Where(f => f.Geometry != null && f.Geometry.BoundingBox.Intersects(grownBox)).ToList();
         }
 
         public void AbortFetch()
