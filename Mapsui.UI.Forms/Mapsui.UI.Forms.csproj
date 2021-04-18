@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType></DebugType>
+    <DebugType>portable</DebugType>
     <DefineConstants>TRACE;RELEASE;NETSTANDARD1_3;__FORMS__</DefineConstants>
   </PropertyGroup>
 
