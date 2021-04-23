@@ -61,7 +61,6 @@
     
     <file src="..\Mapsui.UI.Wpf\bin\Release\net48\Mapsui.Geometries.dll" target="lib\net48\Mapsui.Geometries.dll" />
     <file src="..\Mapsui.UI.Wpf\bin\Release\net48\Mapsui.dll" target="lib\net48\Mapsui.dll" />
-    <file src="..\Mapsui.UI.Wpf\bin\Release\net48\Mapsui.Rendering.Xaml.dll" target="lib\net48\Mapsui.Rendering.Xaml.dll" />
     <file src="..\Mapsui.UI.Wpf\bin\Release\net48\Mapsui.Rendering.Skia.dll" target="lib\net48\Mapsui.Rendering.Skia.dll" />
     <file src="..\Mapsui.UI.Wpf\bin\Release\net48\Mapsui.UI.Wpf.dll" target="lib\net48\Mapsui.UI.Wpf.dll" />
 
