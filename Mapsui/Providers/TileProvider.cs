@@ -28,7 +28,7 @@ using Mapsui.Logging;
 
 namespace Mapsui.Providers
 {
-    public class TileProvider : IProvider
+    public class TileProvider : IProvider<IFeature>
     {
         readonly ITileSource _source;
         readonly MemoryCache<byte[]> _bitmaps = new MemoryCache<byte[]>(100, 200);
@@ -66,7 +66,7 @@ namespace Mapsui.Providers
 
             WaitHandle.WaitAll(waitHandles.ToArray());
             
-            IFeatures features = new Features();
+            var features = new Features();
             foreach (TileInfo info in infos)
             {
                 byte[] bitmap = _bitmaps.Find(info.Index);

@@ -6,7 +6,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
 {
     public class AddInfo
     {
-        public IFeature Feature;
+        public IGeometryFeature Feature;
         public IList<Point> Vertices;
         public Point Vertex;
     }

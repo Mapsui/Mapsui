@@ -49,7 +49,7 @@ namespace Mapsui.Layers
             //The MemoryLayer always has it's data ready so can fire a DataChanged event immediately so that listeners can act on it.
             OnDataChanged(new DataChangedEventArgs());
         }
-        public IEnumerable<IFeature> GetFeatures()
+        public IEnumerable<IGeometryFeature> GetFeatures()
         {
             return _cache;
         }

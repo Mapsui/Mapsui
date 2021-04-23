@@ -22,7 +22,7 @@ using System.Linq;
 
 namespace Mapsui.Providers
 {
-    public class Features : IFeatures
+    public class Features : IEnumerable<IFeature>
     {
         private readonly List<IFeature> _features = new List<IFeature>();
         

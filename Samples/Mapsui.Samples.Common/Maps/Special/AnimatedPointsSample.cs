@@ -46,13 +46,13 @@ namespace Mapsui.Samples.Common.Maps
             _timer = new Timer(arg => UpdateData(), this, 0, 2000);
         }
 
-        private class DynamicMemoryProvider : MemoryProvider
+        private class DynamicMemoryProvider : MemoryProvider<IGeometryFeature>
         {
             private readonly Random _random = new Random(0);
 
-            public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+            public override IEnumerable<IGeometryFeature> GetFeaturesInView(BoundingBox box, double resolution)
             {
-                var features = new List<IFeature>();
+                var features = new List<IGeometryFeature>();
                 var geometries = RandomPointHelper.GenerateRandomPoints(box, 10, _random.Next()).ToList();
                 var count = 0;
                 var random = _random.Next(geometries.Count);

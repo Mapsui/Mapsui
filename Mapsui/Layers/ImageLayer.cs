@@ -43,7 +43,7 @@ namespace Mapsui.Layers
         private BoundingBox _newExtent;
         private List<FeatureSets> _sets = new List<FeatureSets>();
         private readonly Timer _startFetchTimer;
-        private IProvider _dataSource;
+        private IProvider<IFeature> _dataSource;
         private readonly int _numberOfFeaturesReturned;
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Mapsui.Layers
         /// </summary>
         public int FetchDelay { get; set; } = 1000;
 
-        public IProvider DataSource
+        public IProvider<IFeature> DataSource
         {
             get => _dataSource;
             set

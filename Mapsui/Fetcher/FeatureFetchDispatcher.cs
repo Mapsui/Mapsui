@@ -10,19 +10,19 @@ using Mapsui.Styles;
 
 namespace Mapsui.Fetcher
 {
-    class FeatureFetchDispatcher : IFetchDispatcher
+    class FeatureFetchDispatcher<T> : IFetchDispatcher where T : IFeature
     {
         private BoundingBox _extent;
         private double _resolution;
         private readonly object _lockRoot = new object();
         private bool _busy;
-        private readonly ConcurrentStack<IGeometryFeature> _cache;
+        private readonly ConcurrentStack<T> _cache;
         private readonly Transformer _transformer;
         private bool _modified;
 
         // todo: Check whether busy and modified state are set correctly in all stages
 
-        public FeatureFetchDispatcher(ConcurrentStack<IGeometryFeature> cache, Transformer transformer)
+        public FeatureFetchDispatcher(ConcurrentStack<T> cache, Transformer transformer)
         {
             _cache = cache;
             _transformer = transformer;
@@ -42,7 +42,7 @@ namespace Mapsui.Fetcher
         {
             try
             {
-                var features = DataSource.GetFeaturesInView(extent, resolution).Cast<IGeometryFeature>().ToList();
+                var features = DataSource.GetFeaturesInView(extent, resolution).ToList();
                 FetchCompleted(features, null);
             }
             catch (Exception exception)
@@ -51,7 +51,7 @@ namespace Mapsui.Fetcher
             }
         }
 
-        private void FetchCompleted(IEnumerable<IGeometryFeature> features, Exception exception)
+        private void FetchCompleted(IEnumerable<T> features, Exception exception)
         {
             lock (_lockRoot)
             {
@@ -84,7 +84,7 @@ namespace Mapsui.Fetcher
             }
         }
 
-        public IProvider DataSource { get; set; }
+        public IProvider<T> DataSource { get; set; }
 
         public bool Busy
         {

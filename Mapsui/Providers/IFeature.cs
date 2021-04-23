@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Mapsui.Geometries;
 using Mapsui.Styles;
 
 namespace Mapsui.Providers
@@ -9,5 +10,6 @@ namespace Mapsui.Providers
         ICollection<IStyle> Styles { get; }
         object this[string key] { get; set; }
         IEnumerable<string> Fields { get; }
+        BoundingBox BoundingBox { get; }
     }
 }

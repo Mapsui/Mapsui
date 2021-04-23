@@ -141,7 +141,7 @@ namespace Mapsui.Providers.Shapefile
     /// myLayer.DataSource = new Mapsui.Data.Providers.ShapeFile(@"C:\data\MyShapeData.shp");
     /// </code>
     /// </example>
-    public class ShapeFile : IProvider, IDisposable
+    public class ShapeFile : IProvider<IGeometryFeature>, IDisposable
     {
         /// <summary>
         /// Filter Delegate Method
@@ -889,8 +889,8 @@ namespace Mapsui.Providers.Shapefile
             throw (new ApplicationException("An attempt was made to read DBase data from a shapefile without a valid .DBF file"));
         }
 
-
-        public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        
+        public IEnumerable<IGeometryFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
             lock (_syncRoot)
             {

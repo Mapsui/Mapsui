@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
@@ -29,7 +30,7 @@ namespace Mapsui.Samples.Common.Maps
         private static MemoryLayer CreateRandomPointLayer()
         {
             var rnd = new Random(3462); // Fix the random seed so the features don't move after a refresh
-            var features = new Features();
+            var features = new List<IGeometryFeature>();
             for (var i = 0; i < 100; i++)
             {
                 var feature = new Feature
@@ -38,7 +39,7 @@ namespace Mapsui.Samples.Common.Maps
                 };
                 features.Add(feature);
             }
-            var provider = new MemoryProvider(features);
+            var provider = new MemoryProvider<IGeometryFeature>(features);
 
             return new MemoryLayer
             {

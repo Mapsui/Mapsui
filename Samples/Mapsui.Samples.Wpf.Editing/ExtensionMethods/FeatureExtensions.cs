@@ -6,7 +6,7 @@ namespace Mapsui.Samples.Wpf.Editing
 {
     static class FeatureExtensions
     {
-        public static string ToDisplayText(this IFeature feature)
+        public static string ToDisplayText(this IGeometryFeature feature)
         {
             if (feature == null) return "no feature";
             if (!feature.Fields.Any()) return "feature with no attributes";
