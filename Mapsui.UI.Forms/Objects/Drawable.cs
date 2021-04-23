@@ -90,12 +90,12 @@ namespace Mapsui.UI.Objects
         /// </summary>
         public object Tag { get; set; }
 
-        private Feature feature;
+        private IGeometryFeature feature;
 
         /// <summary>
         /// Mapsui Feature belonging to this drawable
         /// </summary>
-        public Feature Feature
+        public IGeometryFeature Feature
         {
             get
             {

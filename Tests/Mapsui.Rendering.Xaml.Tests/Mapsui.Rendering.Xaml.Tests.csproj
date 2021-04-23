@@ -15,7 +15,6 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.Geometries\Mapsui.Geometries.csproj" />
-    <ProjectReference Include="..\..\Mapsui.Rendering.Xaml\Mapsui.Rendering.Xaml.csproj" />
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />
     <ProjectReference Include="..\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj" />
     <ProjectReference Include="..\Mapsui.Tests\Mapsui.Tests.csproj" />

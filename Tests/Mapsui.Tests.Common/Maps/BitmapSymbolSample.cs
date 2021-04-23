@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Collections.Generic;
+using System.Reflection;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -28,18 +29,18 @@ namespace Mapsui.Tests.Common.Maps
             map.Layers.Add(new MemoryLayer
             {
                 Style = null,
-                DataSource = new MemoryProvider(CreateFeatures()),
+                DataSource = new MemoryProvider<IGeometryFeature>(CreateFeatures()),
                 Name = "Points with bitmaps"
             });
             return map;
         }
 
-        public static Features CreateFeatures()
+        public static IEnumerable<IGeometryFeature> CreateFeatures()
         {
             var circleIconId = LoadBitmap("Mapsui.Tests.Common.Resources.Images.circle.png");
             var checkeredIconId = LoadBitmap("Mapsui.Tests.Common.Resources.Images.checkered.png");
 
-            return new Features
+            return new List<IGeometryFeature>
             {
                 new Feature
                 {

@@ -8,12 +8,12 @@ namespace Mapsui.Layers
 {
     public class AnimatedPointLayer : BaseLayer
     {
-        private readonly IProvider _dataSource;
+        private readonly IProvider<IGeometryFeature> _dataSource;
         private BoundingBox _extent;
         private double _resolution;
         private readonly AnimatedFeatures _animatedFeatures = new AnimatedFeatures();
 
-        public AnimatedPointLayer(IProvider dataSource)
+        public AnimatedPointLayer(IProvider<IGeometryFeature> dataSource)
         {
             _dataSource = dataSource;
             _animatedFeatures.AnimatedPositionChanged += (sender, args) => OnDataChanged(new DataChangedEventArgs());

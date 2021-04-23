@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using BruTile;
@@ -7,7 +8,7 @@ using Mapsui.Providers;
 using NUnit.Framework;
 using BruTile.Predefined;
 using Mapsui.Rendering;
-using Mapsui.Rendering.Xaml;
+using Mapsui.Rendering.Skia;
 
 namespace Mapsui.Tests.Layers
 {
@@ -15,6 +16,7 @@ namespace Mapsui.Tests.Layers
     public class RasterizingLayerTests
     {
         [Test]
+        //!!![Ignore("This test is hanging")]
         public void TestTimer()
         {
             // arrange
@@ -43,7 +45,7 @@ namespace Mapsui.Tests.Layers
         private static MemoryLayer CreatePointLayer()
         {
             var random = new Random();
-            var features = new Features();
+            var features = new List<IGeometryFeature>();
             for (var i = 0; i < 100; i++)
             {
                 var feature = new Feature
@@ -52,7 +54,7 @@ namespace Mapsui.Tests.Layers
                 };
                 features.Add(feature);
             }
-            var provider = new MemoryProvider(features);
+            var provider = new MemoryProvider<IGeometryFeature>(features);
 
             return new MemoryLayer { DataSource = provider };
         }

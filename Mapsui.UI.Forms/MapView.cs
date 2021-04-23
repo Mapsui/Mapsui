@@ -11,6 +11,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Mapsui.Providers;
 using Svg.Skia;
 using Xamarin.Forms;
 
@@ -164,13 +165,13 @@ namespace Mapsui.UI.Forms
             _pins.CollectionChanged += HandlerPinsOnCollectionChanged;
             _drawable.CollectionChanged += HandlerDrawablesOnCollectionChanged;
 
-            _mapCalloutLayer.DataSource = new ObservableCollectionProvider<Callout>(_callouts);
+            _mapCalloutLayer.DataSource = new ObservableCollectionProvider<Callout, IGeometryFeature>(_callouts);
             _mapCalloutLayer.Style = null;  // We don't want a global style for this layer
 
-            _mapPinLayer.DataSource = new ObservableCollectionProvider<Pin>(_pins);
+            _mapPinLayer.DataSource = new ObservableCollectionProvider<Pin, IGeometryFeature>(_pins);
             _mapPinLayer.Style = null;  // We don't want a global style for this layer
 
-            _mapDrawableLayer.DataSource = new ObservableCollectionProvider<Drawable>(_drawable);
+            _mapDrawableLayer.DataSource = new ObservableCollectionProvider<Drawable, IGeometryFeature>(_drawable);
             _mapDrawableLayer.Style = null;  // We don't want a global style for this layer
         }
 
@@ -1007,18 +1008,19 @@ namespace Mapsui.UI.Forms
             if (layer.MinVisible > _mapControl.Viewport.Resolution) return drawables;
             if (layer.MaxVisible < _mapControl.Viewport.Resolution) return drawables;
 
-            var allFeatures = layer.GetFeaturesInView(layer.Envelope, _mapControl.Viewport.Resolution);
-            var mapInfo = _mapControl.GetMapInfo(point);
-
-            // Now check all features, if they are clicked and clickable
-            foreach (var feature in allFeatures)
+            if (layer.GetFeaturesInView(layer.Envelope, _mapControl.Viewport.Resolution) is
+                IEnumerable<IGeometryFeature> allFeatures)
             {
-                if (feature.Geometry.Contains(point))
+                // Now check all features, if they are clicked and clickable
+                foreach (var feature in allFeatures)
                 {
-                    var drawable = _drawable.Where(f => f.Feature == feature).First();
-                    // Take only the clickable object
-                    if (drawable.IsClickable)
-                        drawables.Add(drawable);
+                    if (feature.Geometry.Contains(point))
+                    {
+                        var drawable = _drawable.Where(f => f.Feature == feature).First();
+                        // Take only the clickable object
+                        if (drawable.IsClickable)
+                            drawables.Add(drawable);
+                    }
                 }
             }
 

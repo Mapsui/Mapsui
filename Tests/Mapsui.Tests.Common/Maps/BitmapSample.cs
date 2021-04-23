@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Collections.Generic;
+using System.Reflection;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -28,13 +29,13 @@ namespace Mapsui.Tests.Common.Maps
             map.Layers.Add(new MemoryLayer
             {
                 Style = null,
-                DataSource = new MemoryProvider(CreateFeatures()),
+                DataSource = new MemoryProvider<IGeometryFeature>(CreateFeatures()),
                 Name = "Points with bitmaps"
             });
             return map;
         }
 
-        public static Features CreateFeatures()
+        public static List<IGeometryFeature> CreateFeatures()
         {
             var atlas = LoadBitmap("Mapsui.Tests.Common.Resources.Images.osm-liberty.png");
             var spriteAmusementPark15 = new Sprite(atlas, 106, 0, 21, 21, 1);
@@ -43,7 +44,7 @@ namespace Mapsui.Tests.Common.Maps
             var spritePedestrianPolygon = new Sprite(atlas, 0, 0, 64, 64, 1);
             var svgTigerBitmapId = LoadBitmap("Mapsui.Tests.Common.Resources.Images.Ghostscript_Tiger.svg");
 
-            return new Features
+            return new List<IGeometryFeature>
             {
                 new Feature
                 {

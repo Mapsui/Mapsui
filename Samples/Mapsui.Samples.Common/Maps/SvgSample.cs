@@ -15,7 +15,7 @@ namespace Mapsui.Samples.Common.Maps
 {
     public class SvgSample : ISample
     {
-        private static readonly ConcurrentDictionary<string, int> imageCache = new ConcurrentDictionary<string, int>();
+        private static readonly ConcurrentDictionary<string, int> ImageCache = new ConcurrentDictionary<string, int>();
         public string Name => "Svg";
         public string Category => "Symbols";
 
@@ -45,14 +45,14 @@ namespace Mapsui.Samples.Common.Maps
             };
         }
 
-        public static MemoryProvider CreateMemoryProviderWithDiverseSymbols(BoundingBox envelope, int count = 100)
+        public static MemoryProvider<IGeometryFeature> CreateMemoryProviderWithDiverseSymbols(BoundingBox envelope, int count = 100)
         {
-            return new MemoryProvider(CreateSvgFeatures(RandomPointHelper.GenerateRandomPoints(envelope, count)));
+            return new MemoryProvider<IGeometryFeature>(CreateSvgFeatures(RandomPointHelper.GenerateRandomPoints(envelope, count)));
         }
 
-        private static Features CreateSvgFeatures(IEnumerable<IGeometry> randomPoints)
+        private static IEnumerable<IGeometryFeature> CreateSvgFeatures(IEnumerable<IGeometry> randomPoints)
         {
-            var features = new Features();
+            var features = new List<IGeometryFeature>();
             var counter = 0;
             foreach (var point in randomPoints)
             {
@@ -72,14 +72,14 @@ namespace Mapsui.Samples.Common.Maps
 
         private static int GetBitmapIdForEmbeddedResource(string imagePath)
         {
-            if (!imageCache.TryGetValue(imagePath, out var id))
+            if (!ImageCache.TryGetValue(imagePath, out var id))
             {
                 try
                 {
                     var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
                     var image = assembly.GetManifestResourceStream(imagePath);
                     id = BitmapRegistry.Instance.Register(image);
-                    imageCache[imagePath] = id;
+                    ImageCache[imagePath] = id;
                 }
                 catch (Exception exception)
                 {

@@ -18,10 +18,6 @@
                                 MinHeight="30" VerticalAlignment="Top" HorizontalAlignment="Left">
                 <DockPanel>
                     <StackPanel DockPanel.Dock="Top">
-                        <ComboBox Name="RenderMode" Margin="0,0, 0, 10">
-                            <ComboBoxItem IsSelected="True">Skia renderer</ComboBoxItem>
-                            <ComboBoxItem >Wpf renderer</ComboBoxItem>
-                        </ComboBox>
                         <ComboBox Name="CategoryComboBox" Margin="0,0, 0, 10">
                         </ComboBox>
                     </StackPanel>

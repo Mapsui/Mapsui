@@ -23,19 +23,19 @@ namespace Mapsui.Providers
     /// <summary>
     /// Interface for data providers
     /// </summary>
-    public interface IProvider
+    public interface IProvider <out T> where T : IFeature
     {
         /// <summary>
         /// The spatial reference ID (CRS)
         /// </summary>
         string CRS { get; set; } // todo: Remove the set
 
-        IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution);
+        IEnumerable<T> GetFeaturesInView(BoundingBox box, double resolution);
 
         /// <summary>
-        /// <see cref="Mapsui.Geometries.BoundingBox"/> of dataset
+        /// <see cref="Mapsui.Geometries.BoundingBox"/> of data set
         /// </summary>
-        /// <returns>boundingbox</returns>
+        /// <returns>BoundingBox</returns>
         BoundingBox GetExtents();
     }
 }

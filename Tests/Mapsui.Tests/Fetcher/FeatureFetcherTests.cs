@@ -17,7 +17,7 @@ namespace Mapsui.Tests.Fetcher
             // arrange
             var extent = new BoundingBox(0, 0, 10, 10);
             var layer = new Layer();
-            layer.DataSource = new MemoryProvider(GenerateRandomPoints(extent, 25));
+            layer.DataSource = new MemoryProvider<IGeometryFeature>(GenerateRandomPoints(extent, 25));
             layer.Delayer.MillisecondsToWait = 0;
 
             var notifications = new List<bool>();

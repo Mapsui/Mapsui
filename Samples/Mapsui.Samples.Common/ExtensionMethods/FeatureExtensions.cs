@@ -7,7 +7,7 @@ namespace Mapsui.Samples.Common.ExtensionMethods
 {
     public static class FeatureExtensions
     {
-        public static string ToDisplayText(this IEnumerable<KeyValuePair<string, IEnumerable<IFeature>>> featureInfos)
+        public static string ToDisplayText(this IEnumerable<KeyValuePair<string, IEnumerable<IGeometryFeature>>> featureInfos)
         {
             var result = new StringBuilder();
 
@@ -24,7 +24,7 @@ namespace Mapsui.Samples.Common.ExtensionMethods
             return result.ToString();
         }
 
-        public static string ToDisplayText(this IFeature feature)
+        public static string ToDisplayText(this IGeometryFeature feature)
         {
             var result = new StringBuilder();
             foreach (var field in feature.Fields)

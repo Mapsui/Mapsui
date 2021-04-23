@@ -15,7 +15,7 @@ namespace Mapsui.Samples.Common.Maps
 
             var layer = new MemoryLayer
             {
-                DataSource = new MemoryProvider(new[] {geodanAmsterdam, geodanDenBosch}),
+                DataSource = new MemoryProvider<IGeometryFeature>(new[] {geodanAmsterdam, geodanDenBosch}),
                 Style = new SymbolStyle
                 {
                     BitmapId = BitmapRegistry.Instance.Register(imageStream),

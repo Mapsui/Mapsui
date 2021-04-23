@@ -14,7 +14,7 @@ using Color = System.Drawing.Color;
 
 namespace Mapsui.Desktop.GeoTiff
 {
-    public class GeoTiffProvider : IProvider
+    public class GeoTiffProvider : IProvider<IFeature>
     {
         private struct TiffProperties
         {

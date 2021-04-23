@@ -47,6 +47,8 @@ namespace Mapsui.Providers
             get { return _dictionary.Keys; }
         }
 
+        public BoundingBox BoundingBox => Geometry.BoundingBox;
+
         public void Dispose()
         {
             Dispose(true);

@@ -40,12 +40,12 @@ namespace Mapsui.Samples.Common.Maps
             {
                 Name = "Points",
                 IsMapInfoLayer=true,
-                DataSource = new MemoryProvider(GetCitiesFromEmbeddedResource()),
+                DataSource = new MemoryProvider<IGeometryFeature>(GetCitiesFromEmbeddedResource()),
                 Style = CreateBitmapStyle()
             };
         }
 
-        private static IEnumerable<IFeature> GetCitiesFromEmbeddedResource()
+        private static IEnumerable<IGeometryFeature> GetCitiesFromEmbeddedResource()
         {
             var path = "Mapsui.Samples.Common.EmbeddedResources.congo.json";
             var assembly = typeof(PointsSample).GetTypeInfo().Assembly;

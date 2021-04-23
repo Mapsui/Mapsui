@@ -38,7 +38,7 @@ namespace Mapsui.Samples.Wpf.Editing.Samples
         {
             // The edit layer has two styles. That is why it needs to use a StyleCollection.
             // In a future version of Mapsui the ILayer will have a Styles collections just
-            // as the IFeature has right now.
+            // as the IGeometryFeature has right now.
             // The first style is the basic style of the features in edit mode.
             // The second style is the way to show a feature is selected.
             return new StyleCollection

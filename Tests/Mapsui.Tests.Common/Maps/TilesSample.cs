@@ -37,13 +37,13 @@ namespace Mapsui.Tests.Common.Maps
             };
 
             var features = TileIndexToFeatures(tileIndexes, new SampleTileSource());
-            map.Layers.Add(new MemoryLayer {DataSource = new MemoryProvider(features), Name = "Tiles"});
+            map.Layers.Add(new MemoryLayer {DataSource = new MemoryProvider<IGeometryFeature>(features), Name = "Tiles"});
             return map;
         }
 
-        private static List<IFeature> TileIndexToFeatures(TileIndex[] tileIndexes, ITileSource tileSource)
+        private static List<IGeometryFeature> TileIndexToFeatures(TileIndex[] tileIndexes, ITileSource tileSource)
         {
-            var features = new List<IFeature>();
+            var features = new List<IGeometryFeature>();
             foreach (var tileIndex in tileIndexes)
             {
                 var tileInfo = new TileInfo

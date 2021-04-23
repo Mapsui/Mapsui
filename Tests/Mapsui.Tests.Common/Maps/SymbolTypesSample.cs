@@ -28,7 +28,7 @@ namespace Mapsui.Tests.Common.Maps
 
             map.Layers.Add(new MemoryLayer
             {
-                DataSource = new MemoryProvider(CreateFeatures()),
+                DataSource = new MemoryProvider<IGeometryFeature>(CreateFeatures()),
                 Name = "Symbol Types",
                 Style = null
             });
@@ -36,9 +36,9 @@ namespace Mapsui.Tests.Common.Maps
             return map;
         }
 
-        private static Features CreateFeatures()
+        private static IEnumerable<IGeometryFeature> CreateFeatures()
         {
-            return new Features
+            return new List<IGeometryFeature>()
             {
                 new Feature
                 {

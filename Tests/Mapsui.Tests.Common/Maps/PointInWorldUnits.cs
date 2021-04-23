@@ -20,7 +20,7 @@ namespace Mapsui.Tests.Common.Maps
 
         public static Map CreateMap()
         {
-            var features = new Features
+            var features = new List<IGeometryFeature>
             {
                 CreateFeature(-20, 0, UnitType.Pixel),
                 CreateFeature(20, 0, UnitType.WorldUnit)
@@ -29,7 +29,7 @@ namespace Mapsui.Tests.Common.Maps
             var layer = new MemoryLayer
             {
                 Style = null,
-                DataSource = new MemoryProvider(features),
+                DataSource = new MemoryProvider<IGeometryFeature>(features),
                 Name = "Points in world units"
             };
 

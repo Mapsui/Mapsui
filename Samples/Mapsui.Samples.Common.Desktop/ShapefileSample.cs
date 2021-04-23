@@ -34,7 +34,7 @@ namespace Mapsui.Samples.Common.Desktop
             return map;
         }
 
-        private static ILayer CreateCountryLayer(IProvider countrySource)
+        private static ILayer CreateCountryLayer(IProvider<IGeometryFeature> countrySource)
         {
             return new Layer
             {
@@ -44,7 +44,7 @@ namespace Mapsui.Samples.Common.Desktop
             };
         }
 
-        private static ILayer CreateCityLayer(IProvider citySource)
+        private static ILayer CreateCityLayer(IProvider<IGeometryFeature> citySource)
         {
             return new Layer
             {
@@ -54,7 +54,7 @@ namespace Mapsui.Samples.Common.Desktop
             };
         }
 
-        private static ILayer CreateCountryLabelLayer(IProvider countryProvider)
+        private static ILayer CreateCountryLabelLayer(IProvider<IGeometryFeature> countryProvider)
         {
             return new Layer("Country labels")
             {
@@ -66,7 +66,7 @@ namespace Mapsui.Samples.Common.Desktop
             };
         }
 
-        private static ILayer CreateCityLabelLayer(IProvider citiesProvider)
+        private static ILayer CreateCityLabelLayer(IProvider<IGeometryFeature> citiesProvider)
         {
             return new Layer("City labels")
             {

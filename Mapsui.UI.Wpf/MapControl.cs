@@ -20,12 +20,6 @@ using XamlVector = System.Windows.Vector;
 
 namespace Mapsui.UI.Wpf
 {
-    public enum RenderMode
-    {
-        Skia,
-        Wpf
-    }
-
     public partial class MapControl : Grid, IMapControl
     {
         private readonly Rectangle _selectRectangle = CreateSelectRectangle();
@@ -33,7 +27,6 @@ namespace Mapsui.UI.Wpf
         private Geometries.Point _downMousePosition;
         private bool _mouseDown;
         private Geometries.Point _previousMousePosition;
-        private RenderMode _renderMode;
         private bool _hasBeenManipulated;
         private double _innerRotation;
         private readonly FlingTracker _flingTracker = new FlingTracker();
@@ -74,13 +67,10 @@ namespace Mapsui.UI.Wpf
 
             IsManipulationEnabled = true;
 
-            RenderMode = RenderMode.Skia;
-        }
-
-        protected override void OnRender(DrawingContext dc)
-        {
-            if (RenderMode == RenderMode.Wpf) PaintWpf();
-            base.OnRender(dc);
+            WpfCanvas.Visibility = Visibility.Collapsed;
+            SkiaCanvas.Visibility = Visibility.Visible;
+            Renderer = new MapRenderer();
+            RefreshGraphics();
         }
 
         private static Rectangle CreateSelectRectangle()
@@ -103,30 +93,6 @@ namespace Mapsui.UI.Wpf
         public Canvas WpfCanvas { get; } = CreateWpfRenderCanvas();
 
         private SKElement SkiaCanvas { get; } = CreateSkiaRenderElement();
-
-        public RenderMode RenderMode
-        {
-            get => _renderMode;
-            set
-            {
-                _renderMode = value;
-                if (_renderMode == RenderMode.Skia)
-                {
-                    WpfCanvas.Visibility = Visibility.Collapsed;
-                    SkiaCanvas.Visibility = Visibility.Visible;
-                    Renderer = new MapRenderer();
-                    RefreshGraphics();
-                }
-                else
-                {
-                    SkiaCanvas.Visibility = Visibility.Collapsed;
-                    WpfCanvas.Visibility = Visibility.Visible;
-                    Renderer = new Rendering.Xaml.MapRenderer();
-                    RefreshGraphics();
-                }
-                OnPropertyChanged();
-            }
-        }
 
         private static Canvas CreateWpfRenderCanvas()
         {
@@ -154,11 +120,8 @@ namespace Mapsui.UI.Wpf
             else RunOnUIThread(InvalidateCanvas);
         }
 
-        internal void InvalidateCanvas()
-        {
-            if (RenderMode == RenderMode.Wpf) InvalidateVisual(); // To trigger OnRender of this MapControl
-            else SkiaCanvas.InvalidateVisual();
-
+        internal void InvalidateCanvas() {
+            SkiaCanvas.InvalidateVisual();
         }
 
         private void MapControlLoaded(object sender, RoutedEventArgs e)

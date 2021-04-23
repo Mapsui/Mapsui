@@ -1,4 +1,5 @@
-﻿using Mapsui.Geometries;
+﻿using System.Collections.Generic;
+using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
@@ -33,9 +34,9 @@ namespace Mapsui.Tests.Common.Maps
             return map;
         }
 
-        private static MemoryProvider CreateProviderWithLabels()
+        private static MemoryProvider<IGeometryFeature> CreateProviderWithLabels()
         {
-            var features = new Features
+            var features = new List<IGeometryFeature>
             {
                 new Feature
                 {
@@ -105,7 +106,7 @@ namespace Mapsui.Tests.Common.Maps
                     }
                 },
             };
-            var provider = new MemoryProvider(features);
+            var provider = new MemoryProvider<IGeometryFeature>(features);
             return provider;
         }
     }

@@ -146,35 +146,47 @@ namespace Mapsui.Rendering.Skia
 
         private void RenderFeature(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IStyle style, IFeature feature, float layerOpacity)
         {
-            // Check, if we have a special renderer for this style
-            if (StyleRenderers.ContainsKey(style.GetType()))
+            if (feature is IGeometryFeature geometryFeature)
             {
-                // Save canvas
-                canvas.Save();
-                // We have a special renderer, so try, if it could draw this
-                var result = ((ISkiaStyleRenderer)StyleRenderers[style.GetType()]).Draw(canvas, viewport, layer, feature, style, _symbolCache);
-                // Restore old canvas
-                canvas.Restore();
-                // Was it drawn?
-                if (result)
-                    // Yes, special style renderer drawn correct
-                    return;
+                // Check, if we have a special renderer for this style
+                if (StyleRenderers.ContainsKey(style.GetType()))
+                {
+                    // Save canvas
+                    canvas.Save();
+                    // We have a special renderer, so try, if it could draw this
+                    var result = ((ISkiaStyleRenderer) StyleRenderers[style.GetType()]).Draw(canvas, viewport, layer,
+                        geometryFeature, style, _symbolCache);
+                    // Restore old canvas
+                    canvas.Restore();
+                    // Was it drawn?
+                    if (result)
+                        // Yes, special style renderer drawn correct
+                        return;
+                }
+
+                // No special style renderer handled this up to now, than try standard renderers
+                if (geometryFeature.Geometry is Point)
+                    PointRenderer.Draw(canvas, viewport, style, geometryFeature, geometryFeature.Geometry, _symbolCache,
+                        layerOpacity * style.Opacity);
+                else if (geometryFeature.Geometry is MultiPoint)
+                    MultiPointRenderer.Draw(canvas, viewport, style, geometryFeature, geometryFeature.Geometry,
+                        _symbolCache, layerOpacity * style.Opacity);
+                else if (geometryFeature.Geometry is LineString)
+                    LineStringRenderer.Draw(canvas, viewport, style, geometryFeature, geometryFeature.Geometry,
+                        layerOpacity * style.Opacity);
+                else if (geometryFeature.Geometry is MultiLineString)
+                    MultiLineStringRenderer.Draw(canvas, viewport, style, geometryFeature, geometryFeature.Geometry,
+                        layerOpacity * style.Opacity);
+                else if (geometryFeature.Geometry is Polygon)
+                    PolygonRenderer.Draw(canvas, viewport, style, geometryFeature, geometryFeature.Geometry,
+                        layerOpacity * style.Opacity, _symbolCache);
+                else if (geometryFeature.Geometry is MultiPolygon)
+                    MultiPolygonRenderer.Draw(canvas, viewport, style, geometryFeature, geometryFeature.Geometry,
+                        layerOpacity * style.Opacity, _symbolCache);
+                else if (geometryFeature.Geometry is IRaster)
+                    RasterRenderer.Draw(canvas, viewport, style, geometryFeature, layerOpacity * style.Opacity,
+                        _tileCache, _currentIteration);
             }
-            // No special style renderer handled this up to now, than try standard renderers
-            if (feature.Geometry is Point)
-                PointRenderer.Draw(canvas, viewport, style, feature, feature.Geometry, _symbolCache, layerOpacity * style.Opacity);
-            else if (feature.Geometry is MultiPoint)
-                MultiPointRenderer.Draw(canvas, viewport, style, feature, feature.Geometry, _symbolCache, layerOpacity * style.Opacity);
-            else if (feature.Geometry is LineString)
-                LineStringRenderer.Draw(canvas, viewport, style, feature, feature.Geometry, layerOpacity * style.Opacity);
-            else if (feature.Geometry is MultiLineString)
-                MultiLineStringRenderer.Draw(canvas, viewport, style, feature, feature.Geometry, layerOpacity * style.Opacity);
-            else if (feature.Geometry is Polygon)
-                PolygonRenderer.Draw(canvas, viewport, style, feature, feature.Geometry, layerOpacity * style.Opacity, _symbolCache);
-            else if (feature.Geometry is MultiPolygon)
-                MultiPolygonRenderer.Draw(canvas, viewport, style, feature, feature.Geometry, layerOpacity * style.Opacity, _symbolCache);
-            else if (feature.Geometry is IRaster)
-                RasterRenderer.Draw(canvas, viewport, style, feature, layerOpacity * style.Opacity, _tileCache, _currentIteration);
         }
 
         private void Render(object canvas, IReadOnlyViewport viewport, IEnumerable<IWidget> widgets, float layerOpacity)

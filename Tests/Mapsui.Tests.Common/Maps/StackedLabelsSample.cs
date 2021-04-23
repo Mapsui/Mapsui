@@ -37,7 +37,7 @@ namespace Mapsui.Tests.Common.Maps
             return map;
         }
 
-        private static ILayer CreateStackedLabelLayer(IProvider provider, string labelColumn)
+        private static ILayer CreateStackedLabelLayer(IProvider<IGeometryFeature> provider, string labelColumn)
         {
             return new MemoryLayer
             {
@@ -46,7 +46,7 @@ namespace Mapsui.Tests.Common.Maps
             };
         }
 
-        private static ILayer CreateLayer(IProvider dataSource)
+        private static ILayer CreateLayer(IProvider<IGeometryFeature> dataSource)
         {
             return new MemoryLayer
             {
@@ -55,9 +55,9 @@ namespace Mapsui.Tests.Common.Maps
             };
         }
 
-        private static MemoryProvider CreateRandomPointsProvider(IEnumerable<IGeometry> randomPoints)
+        private static MemoryProvider<IGeometryFeature> CreateRandomPointsProvider(IEnumerable<IGeometry> randomPoints)
         {
-            var features = new Features();
+            var features = new List<IGeometryFeature>();
             var count = 0;
             foreach (var point in randomPoints)
             {
@@ -69,7 +69,7 @@ namespace Mapsui.Tests.Common.Maps
                 features.Add(feature);
                 count++;
             }
-            return new MemoryProvider(features);
+            return new MemoryProvider<IGeometryFeature>(features);
         }
 
         private static IEnumerable<IGeometry> GenerateRandomPoints(BoundingBox box, int count = 25)

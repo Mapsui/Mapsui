@@ -1,13 +1,20 @@
-﻿using Mapsui.UI;
+﻿using System.Windows.Navigation;
+using Mapsui.Providers;
+using Mapsui.UI;
 
 namespace Mapsui.Samples.Wpf.Editing
 {
     static class InfoEventArgsExtensions
     {
-        public static string ToDisplayText(this MapInfo args)
+        public static string ToDisplayText(this MapInfo mapInfo)
         {
-            return $"World Position={args.WorldPosition.X:F0},{args.WorldPosition.Y:F0}\n" +
-                   $"Feature={args.Feature.ToDisplayText()}";
+            if (mapInfo.Feature is IGeometryFeature geometryFeature)
+            {
+                return $"World Position={mapInfo.WorldPosition.X:F0},{mapInfo.WorldPosition.Y:F0}\n" +
+                       $"Feature={geometryFeature.ToDisplayText()}";
+            }
+
+            return $"Not a {nameof(IGeometryFeature)}";
         }
     }
 }

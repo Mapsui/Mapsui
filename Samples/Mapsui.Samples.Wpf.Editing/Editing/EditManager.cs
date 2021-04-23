@@ -148,14 +148,17 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
             {
                 if (mapInfo.Feature != null)
                 {
-                    var vertexTouched = FindVertexTouched(mapInfo, mapInfo.Feature.Geometry.MainVertices(), screenDistance);
-                    if (vertexTouched != null)
+                    if (mapInfo.Feature is IGeometryFeature geometryFeature)
                     {
-                        _dragInfo.Feature = mapInfo.Feature;
-                        _dragInfo.Vertex = vertexTouched;
-                        _dragInfo.StartOffsetToVertex = mapInfo.WorldPosition - _dragInfo.Vertex;
+                        var vertexTouched = FindVertexTouched(mapInfo, geometryFeature.Geometry.MainVertices(), screenDistance);
+                        if (vertexTouched != null)
+                        {
+                            _dragInfo.Feature = geometryFeature;
+                            _dragInfo.Vertex = vertexTouched;
+                            _dragInfo.StartOffsetToVertex = mapInfo.WorldPosition - _dragInfo.Vertex;
 
-                        return true; // to indicate start of drag
+                            return true; // to indicate start of drag
+                        }
                     }
                 }
             }
@@ -196,43 +199,46 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
 
         public bool TryDeleteVertrex(MapInfo mapInfo, double screenDistance)
         {
-            if (mapInfo.Feature == null) return false;
-
-            var feature = mapInfo.Feature;
-            var vertexTouched = FindVertexTouched(mapInfo, feature.Geometry.MainVertices(), screenDistance);
-            if (vertexTouched != null)
+            if (mapInfo.Feature is IGeometryFeature geometryFeature)
             {
-                var vertices = feature.Geometry.MainVertices();
-                var index = vertices.IndexOf(vertexTouched);
-                if (index >= 0)
+                var feature = mapInfo.Feature;
+                var vertexTouched = FindVertexTouched(mapInfo, geometryFeature.Geometry.MainVertices(), screenDistance);
+                if (vertexTouched != null)
                 {
-                    vertices.RemoveAt(index);
-                    var count = vertices.Count;
+                    var vertices = geometryFeature.Geometry.MainVertices();
+                    var index = vertices.IndexOf(vertexTouched);
+                    if (index >= 0)
+                    {
+                        vertices.RemoveAt(index);
+                        var count = vertices.Count;
 
-                    // It is a ring where the first should be the same as the last.
-                    // So if the first was removed than set the last to the value of the new first
-                    if (index == 0) SetPointXY(vertices[count - 1], vertices[0]); 
-                    // If the last was removed then set the first to the value of the new last
-                    else if (index == vertices.Count) SetPointXY(vertices[0], vertices[count - 1]);
+                        // It is a ring where the first should be the same as the last.
+                        // So if the first was removed than set the last to the value of the new first
+                        if (index == 0) SetPointXY(vertices[count - 1], vertices[0]);
+                        // If the last was removed then set the first to the value of the new last
+                        else if (index == vertices.Count) SetPointXY(vertices[0], vertices[count - 1]);
 
-                    feature.RenderedGeometry.Clear();
-                    Layer.DataHasChanged();
+                        feature.RenderedGeometry.Clear();
+                        Layer.DataHasChanged();
+                    }
+
                 }
-                
             }
+
             return false;
         }
 
         public bool TryInsertVertex(MapInfo mapInfo)
         {
-            if (mapInfo.Feature == null) return false;
-
-            var vertices = mapInfo.Feature.Geometry.MainVertices();
-
-            if (EditHelper.TryInsertVertex(mapInfo, vertices, VertexRadius))
+            if (mapInfo.Feature is IGeometryFeature geometryFeature)
             {
-                mapInfo.Feature.RenderedGeometry.Clear();
-                Layer.DataHasChanged();
+                var vertices = geometryFeature.Geometry.MainVertices();
+
+                if (EditHelper.TryInsertVertex(mapInfo, vertices, VertexRadius))
+                {
+                    mapInfo.Feature.RenderedGeometry.Clear();
+                    Layer.DataHasChanged();
+                }
             }
 
             return false;
@@ -240,13 +246,14 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
 
         public bool StartRotating(MapInfo mapInfo)
         {
-            if (EditMode != EditMode.Rotate) return false;
-            if (mapInfo.Feature == null) return false;
+            if (mapInfo.Feature is IGeometryFeature geometryFeature)
+            {
+                if (EditMode != EditMode.Rotate) return false;
 
-            _rotateInfo.Feature = mapInfo.Feature;
-            _rotateInfo.PreviousPosition = mapInfo.WorldPosition;
-            _rotateInfo.Center = mapInfo.Feature.Geometry.BoundingBox.Centroid;
-
+                _rotateInfo.Feature = geometryFeature;
+                _rotateInfo.PreviousPosition = mapInfo.WorldPosition;
+                _rotateInfo.Center = geometryFeature.Geometry.BoundingBox.Centroid;
+            }
             return true; // to signal pan lock
         }
 
@@ -286,12 +293,14 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
 
         public bool StartScaling(MapInfo mapInfo)
         {
-            if (EditMode != EditMode.Scale) return false;
-            if (mapInfo.Feature == null) return false;
+            if (mapInfo.Feature is IGeometryFeature geometryFeature)
+            {
+                if (EditMode != EditMode.Scale) return false;
 
-            _scaleInfo.Feature = mapInfo.Feature;
-            _scaleInfo.PreviousPosition = mapInfo.WorldPosition;
-            _scaleInfo.Center = mapInfo.Feature.Geometry.BoundingBox.Centroid;
+                _scaleInfo.Feature = geometryFeature;
+                _scaleInfo.PreviousPosition = mapInfo.WorldPosition;
+                _scaleInfo.Center = geometryFeature.Geometry.BoundingBox.Centroid;
+            }
 
             return true; // to signal pan lock
         }

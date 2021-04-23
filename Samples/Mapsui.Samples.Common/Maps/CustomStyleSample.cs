@@ -23,14 +23,14 @@ namespace Mapsui.Samples.Common.Maps
 
     public class SkiaCustomStyleRenderer : ISkiaStyleRenderer
     {
-        public static Random rnd = new Random();
-        public bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, IStyle style, ISymbolCache symbolCache)
+        public static Random Random = new Random();
+        public bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IGeometryFeature feature, IStyle style, ISymbolCache symbolCache)
         {
-            if (!(feature.Geometry is global::Mapsui.Geometries.Point worldPoint))
+            if (!(feature.Geometry is Point worldPoint))
                 return false;
 
             var screenPoint = viewport.WorldToScreen(worldPoint);
-            var color = new SKColor((byte)rnd.Next(0, 256), (byte)rnd.Next(0, 256), (byte)rnd.Next(0, 256), (byte)(256.0 * layer.Opacity * style.Opacity));
+            var color = new SKColor((byte)Random.Next(0, 256), (byte)Random.Next(0, 256), (byte)Random.Next(0, 256), (byte)(256.0 * layer.Opacity * style.Opacity));
             var colored = new SKPaint() { Color = color, IsAntialias = true };
             var black = new SKPaint() { Color = SKColors.Black, IsAntialias = true };
 
@@ -84,15 +84,15 @@ namespace Mapsui.Samples.Common.Maps
             };
         }
 
-        public static MemoryProvider CreateMemoryProviderWithDiverseSymbols(BoundingBox envelope, int count = 100)
+        public static MemoryProvider<IGeometryFeature> CreateMemoryProviderWithDiverseSymbols(BoundingBox envelope, int count = 100)
         {
             
-            return new MemoryProvider(CreateDiverseFeatures(RandomPointHelper.GenerateRandomPoints(envelope, count)));
+            return new MemoryProvider<IGeometryFeature>(CreateDiverseFeatures(RandomPointHelper.GenerateRandomPoints(envelope, count)));
         }
 
-        private static Features CreateDiverseFeatures(IEnumerable<IGeometry> randomPoints)
+        private static IEnumerable<IGeometryFeature> CreateDiverseFeatures(IEnumerable<IGeometry> randomPoints)
         {
-            var features = new Features();
+            var features = new List<IGeometryFeature>();
             var style = new CustomStyle();
             var counter = 1;
             foreach (var point in randomPoints)

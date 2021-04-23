@@ -1,4 +1,5 @@
-﻿using Mapsui.Geometries;
+﻿using System.Collections.Generic;
+using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
@@ -36,9 +37,9 @@ namespace Mapsui.Tests.Common.Maps
             return map;
         }
 
-        private static MemoryProvider CreateLineProvider()
+        private static MemoryProvider<IGeometryFeature> CreateLineProvider()
         {
-            var features = new Features();
+            var features = new List<IGeometryFeature>();
             var feature = new Feature
             {
                 Geometry = Geometry.GeomFromText(
@@ -97,7 +98,7 @@ namespace Mapsui.Tests.Common.Maps
             feature.Styles.Add(new VectorStyle { Line = new Pen(Color.Red) { PenStyle = PenStyle.Solid, PenStrokeCap = PenStrokeCap.Butt } });
             features.Add(feature);
 
-            var provider = new MemoryProvider(features);
+            var provider = new MemoryProvider<IGeometryFeature>(features);
 
             return provider;
         }

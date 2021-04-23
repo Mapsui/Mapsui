@@ -37,8 +37,8 @@ namespace Mapsui.Samples.Common.Maps
 
         private static ILayer CreatePolygonLayer()
         {
-            var features = new Features { CreatePolygonFeature(), CreateMultiPolygonFeature() };
-            var provider = new MemoryProvider(features);
+            var features = new List<IGeometryFeature> { CreatePolygonFeature(), CreateMultiPolygonFeature() };
+            var provider = new MemoryProvider<IGeometryFeature>(features);
 
             var layer = new MemoryLayer
             {
@@ -56,7 +56,7 @@ namespace Mapsui.Samples.Common.Maps
             return new MemoryLayer
             {
                 Name = LineLayerName,
-                DataSource = new MemoryProvider(CreateLineFeature()),
+                DataSource = new MemoryProvider<IGeometryFeature>(CreateLineFeature()),
                 Style = null,
                 IsMapInfoLayer = true
             };

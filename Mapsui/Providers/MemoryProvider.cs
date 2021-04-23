@@ -56,7 +56,7 @@ namespace Mapsui.Providers
     /// </code>
     /// </example>
     /// </remarks>
-    public class MemoryProvider : IProvider
+    public class MemoryProvider<T> : IProvider<T> where T : IFeature
     {
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace Mapsui.Providers
         {
         }
 
-        public virtual IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        public virtual IEnumerable<T> GetFeaturesInView(BoundingBox box, double resolution)
         {
             if (box == null) throw new ArgumentNullException(nameof(box));
 
@@ -156,8 +156,8 @@ namespace Mapsui.Providers
 
             // Use a larger extent so that symbols partially outside of the extent are included
             var grownBox = box.Grow(resolution * SymbolSize * 0.5);
-
-            return features.Where(f => f.Geometry != null && f.Geometry.BoundingBox.Intersects(grownBox)).ToList();
+            var grownFeatures = features.Where(f => f != null && f.BoundingBox.Intersects(grownBox));
+            return (IEnumerable<T>) grownFeatures.ToList(); // Why do I need to cast if T is constrained to IFeature?
         }
 
         public IFeature Find(object value, string primaryKey)

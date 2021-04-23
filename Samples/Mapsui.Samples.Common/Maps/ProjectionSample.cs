@@ -1,4 +1,5 @@
-﻿using Mapsui.Geometries;
+﻿using System.Collections.Generic;
+using Mapsui.Geometries;
 using Mapsui.Geometries.WellKnownText;
 using Mapsui.Layers;
 using Mapsui.Projection;
@@ -44,12 +45,12 @@ namespace Mapsui.Samples.Common.Maps
 
         public static Layer CreateWgs84PointLayer()
         {
-            var features = new Features
+            var features = new List<IGeometryFeature>
             {
                 new Feature {Geometry = SomeWhereNearHaarlem},
                 new Feature {Geometry = GeometryFromWKT.Parse(WktOfAmsterdam)}
             };
-            var dataSource = new MemoryProvider(features)
+            var dataSource = new MemoryProvider<IGeometryFeature>(features)
             {
                 CRS = "EPSG:4326" // The DataSource CRS needs to be set
             };

@@ -6,15 +6,15 @@ using Mapsui.Styles.Thematics;
 
 namespace Mapsui.Providers
 {
-    public class StackedLabelProvider : IProvider
+    public class StackedLabelProvider : IProvider<IFeature>
     {
         private const int SymbolSize = 32; // todo: determine margin by symbol size
         private const int BoxMargin = SymbolSize/2;
 
-        private readonly IProvider _provider;
+        private readonly IProvider<IGeometryFeature> _provider;
         private readonly LabelStyle _labelStyle;
 
-        public StackedLabelProvider(IProvider provider, LabelStyle labelStyle, Pen rectangleLine = null,
+        public StackedLabelProvider(IProvider<IGeometryFeature> provider, LabelStyle labelStyle, Pen rectangleLine = null,
             Brush rectangleFill = null)
         {
             _provider = provider;
@@ -41,12 +41,12 @@ namespace Mapsui.Providers
         }
 
         private static List<Feature> GetFeaturesInView(double resolution, LabelStyle labelStyle,
-            IEnumerable<IFeature> features, Pen line, Brush fill)
+            IEnumerable<IGeometryFeature> features, Pen line, Brush fill)
         {
             var margin = resolution * 50;
             var clusters = new List<Cluster>();
             // todo: repeat until there are no more merges
-            ClusterFeatures(clusters, features.Cast<IGeometryFeature>(), margin, labelStyle, resolution);
+            ClusterFeatures(clusters, features, margin, labelStyle, resolution);
 
             const int textHeight = 18;
 

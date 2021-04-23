@@ -49,14 +49,14 @@ namespace Mapsui.Samples.Common.Maps
             };
         }
 
-        public static MemoryProvider CreateMemoryProviderWithDiverseSymbols(BoundingBox envelope, int count = 100)
+        public static MemoryProvider<IGeometryFeature> CreateMemoryProviderWithDiverseSymbols(BoundingBox envelope, int count = 100)
         {
-            return new MemoryProvider(CreateAtlasFeatures(RandomPointHelper.GenerateRandomPoints(envelope, count)));
+            return new MemoryProvider<IGeometryFeature>(CreateAtlasFeatures(RandomPointHelper.GenerateRandomPoints(envelope, count)));
         }
 
-        private static Features CreateAtlasFeatures(IEnumerable<IGeometry> randomPoints)
+        private static IEnumerable<IGeometryFeature> CreateAtlasFeatures(IEnumerable<IGeometry> randomPoints)
         {
-            var features = new Features();
+            var features = new List<IGeometryFeature>();
             var counter = 0;
             foreach (var point in randomPoints)
             {

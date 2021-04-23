@@ -5,7 +5,6 @@ using Mapsui.UI.Forms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Xamarin.Forms;
 
 namespace Mapsui.UI.Objects
@@ -146,7 +145,7 @@ namespace Mapsui.UI.Objects
                 Opacity = 1,
             });
 
-            DataSource = new MemoryProvider(new List<Feature> { feature });
+            DataSource = new MemoryProvider<IGeometryFeature>(new List<Feature> { feature });
             Style = null;
         }
 

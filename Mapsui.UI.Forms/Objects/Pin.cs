@@ -55,7 +55,6 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Mapsui.UI.Forms.Pin"/> class
         /// </summary>
-        /// <param name="mapView">MapView to which this pin belongs</param>
         public Pin()
         {
         }
@@ -249,7 +248,7 @@ namespace Mapsui.UI.Forms
         /// Mapsui feature for this pin
         /// </summary>
         /// <value>Mapsui feature</value>
-        public Feature Feature { get; private set; }
+        public IGeometryFeature Feature { get; private set; }
 
         private Callout _callout;
 

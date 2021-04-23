@@ -35,7 +35,7 @@ namespace Mapsui.Samples.Common.Desktop
             return map;
         }
 
-        private static ILayer CreateCountryLayer(IProvider countrySource)
+        private static ILayer CreateCountryLayer(IProvider<IGeometryFeature> countrySource)
         {
             return new Layer
             {
@@ -50,8 +50,9 @@ namespace Mapsui.Samples.Common.Desktop
         {
             return new ThemeStyle(f =>
             {
-                if (f.Geometry is Point)
-                    return null;
+                if (f is IGeometryFeature geometryFeature)
+                    if (geometryFeature.Geometry is Point)
+                        return null;
 
                 var style = new VectorStyle();
 
@@ -85,13 +86,13 @@ namespace Mapsui.Samples.Common.Desktop
 
         public static ILayer CreateCityHoverPoints()
         {
-            var features = GenenerateTop100MajorCitiesFeatures();
+            var features = GenerateTop100();
 
             var imageStream = EmbeddedResourceLoader.Load("Images.location.png", typeof(GeodanOfficesSample));
 
             var layer = new MemoryLayer
             {
-                DataSource = new MemoryProvider(features),
+                DataSource = new MemoryProvider<IGeometryFeature>(features),
                 Style = new SymbolStyle
                 {
                     BitmapId = BitmapRegistry.Instance.Register(imageStream),
@@ -110,7 +111,7 @@ namespace Mapsui.Samples.Common.Desktop
             return Path.GetDirectoryName(Assembly.GetEntryAssembly().GetModules()[0].FullyQualifiedName);
         }
 
-        private static Features GenenerateTop100MajorCitiesFeatures()
+        private static IEnumerable<IGeometryFeature> GenerateTop100()
         {
             List<City> c = new List<City>();
             c.Add(new City { CityName = "Tokyo", Lat = 35.69, Long = 139.75, Population = 22006300, Country = "Japan" });
@@ -214,7 +215,7 @@ namespace Mapsui.Samples.Common.Desktop
             c.Add(new City { CityName = "Johannesburg", Lat = -26.17, Long = 28.03, Population = 2730735, Country = "South Africa" });
             c.Add(new City { CityName = "Durban", Lat = -29.87, Long = 30.98, Population = 2729000, Country = "South Africa" });
 
-            var features = new Features();
+            var features = new List<IGeometryFeature>();
             foreach (City item in c)
             {
                 var geo = new Point(item.Long, item.Lat);

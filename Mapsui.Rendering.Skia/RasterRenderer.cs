@@ -10,7 +10,7 @@ namespace Mapsui.Rendering.Skia
 {
     public static class RasterRenderer
     {
-		public static void Draw (SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, IFeature feature,
+		public static void Draw (SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, IGeometryFeature feature,
             float opacity, IDictionary<object, BitmapInfo> tileCache, long currentIteration)
 		{
 		    try
