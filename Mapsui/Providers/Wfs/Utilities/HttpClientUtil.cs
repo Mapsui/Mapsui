@@ -22,6 +22,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         private string _url;
         private HttpWebRequest _webRequest;
         private HttpWebResponse _webResponse;
+        private ICredentials _credentials;
 
         /// <summary>
         /// Gets ans sets the Url of the request.
@@ -49,7 +50,14 @@ namespace Mapsui.Providers.Wfs.Utilities
             set { _postData = value; }
         }
 
-        
+        /// <summary>
+        /// Gets or sets the network credentials used for authenticating the request with the Internet resource
+        /// </summary>
+        public ICredentials Credentials
+        {
+            get { return _credentials; }
+            set { _credentials = value; }
+        }
         
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpClientUtil"/> class.
@@ -107,6 +115,12 @@ namespace Mapsui.Providers.Wfs.Utilities
             {
                 _webRequest.Headers.Add(_requestHeaders);
 
+                if (Credentials != null)
+                {
+                    _webRequest.UseDefaultCredentials = false;
+                    _webRequest.Credentials = Credentials;
+                }
+                
                 /* HTTP POST */
                 if (_postData != null)
                 {
@@ -117,7 +131,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                         requestStream.Write(_postData, 0, _postData.Length);
                     }
                 }
-                    /* HTTP GET */
+                /* HTTP GET */
                 else
                     _webRequest.Method = WebRequestMethods.Http.Get;
 
@@ -155,5 +169,5 @@ namespace Mapsui.Providers.Wfs.Utilities
             }
         }
 
-            }
+    }
 }

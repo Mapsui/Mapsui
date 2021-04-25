@@ -169,8 +169,24 @@ namespace Mapsui.Providers.Wfs
             set { _labels = value; }
         }
 
-        
-        
+        /// <summary>
+        /// Gets or sets the network credentials used for authenticating the request with the Internet resource
+        /// </summary>
+        public ICredentials Credentials
+        {
+            get { return _httpClientUtil.Credentials; }
+            set { _httpClientUtil.Credentials = value; }
+        }
+
+        /// <summary>
+        /// Gets and sets the proxy Url of the request. 
+        /// </summary>
+        public string ProxyUrl
+        {
+            get { return _httpClientUtil.ProxyUrl; }
+            set { _httpClientUtil.ProxyUrl = value; }
+        }
+
         /// <summary>
         /// Use this constructor for initializing this dataprovider with all necessary
         /// parameters to gather metadata from 'GetCapabilities' contract.
