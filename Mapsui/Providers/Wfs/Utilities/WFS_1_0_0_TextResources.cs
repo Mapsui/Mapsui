@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using Mapsui.Geometries;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Web;
 using System.Xml;
@@ -102,11 +103,9 @@ namespace Mapsui.Providers.Wfs.Utilities
                     xWriter.WriteAttributeString("typeName", qualification + featureTypeInfo.Name);
                     xWriter.WriteAttributeString("srsName", ProjectionHelper.EpsgPrefix + featureTypeInfo.SRID);
                     xWriter.WriteElementString("PropertyName", qualification + featureTypeInfo.Geometry.GeometryName);
-                    foreach (var labelProperty in labelProperties)
-                    {
-                        if (!string.IsNullOrEmpty(labelProperty))
-                            xWriter.WriteElementString("PropertyName", qualification + labelProperty);
-                    }
+                    if (!labelProperties.All(string.IsNullOrWhiteSpace))
+                        xWriter.WriteElementString("PropertyName", string.Join(",", 
+                            labelProperties.Where(x => !string.IsNullOrWhiteSpace(x)).Select(lbl => qualification + lbl)));
 
                     AppendGml2Filter(xWriter, featureTypeInfo, boundingBox, filter, qualification);
                     
