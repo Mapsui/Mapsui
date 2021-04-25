@@ -65,34 +65,12 @@ namespace Mapsui.Providers.Wfs.Utilities
             {
                 paramBuilder.Append("&FILTER=");
 
-                var filterBuilder = new StringBuilder();
-                filterBuilder.Append("<Filter xmlns=\"" + NSOGC + "\" xmlns:gml=\"" + NSGML + "\"");
-                if (!string.IsNullOrEmpty(featureTypeInfo.Prefix))
+                using var sWriter = new StringWriter();
+                using var xWriter = new XmlTextWriter(sWriter);
                 {
-                    filterBuilder.Append(" xmlns:" + featureTypeInfo.Prefix + "=\"" +
-                                         featureTypeInfo.FeatureTypeNamespace + "\"");
-                    //added by PDD to get it to work for deegree default sample
+                    AppendGml2Filter(xWriter, featureTypeInfo, boundingBox, filter, qualification);
                 }
-
-                filterBuilder.Append(">");
-                if (boundingBox != null)
-                {
-                    filterBuilder.Append("<BBOX><PropertyName>");
-                    filterBuilder.Append(qualification).Append(featureTypeInfo.Geometry.GeometryName);
-                    filterBuilder.Append("</PropertyName>");
-                    filterBuilder.Append("<gml:Box srsName=\"" + ProjectionHelper.EpsgPrefix + featureTypeInfo.SRID + "\">");
-                    filterBuilder.Append("<gml:coordinates>");
-                    filterBuilder.Append(XmlConvert.ToString(boundingBox.Left) + ",");
-                    filterBuilder.Append(XmlConvert.ToString(boundingBox.Bottom) + " ");
-                    filterBuilder.Append(XmlConvert.ToString(boundingBox.Right) + ",");
-                    filterBuilder.Append(XmlConvert.ToString(boundingBox.Top));
-                    filterBuilder.Append("</gml:coordinates></gml:Box></BBOX>");
-                }
-
-                if (filter != null) filterBuilder.Append(filter.Encode());
-                
-                filterBuilder.Append("</Filter>");
-                paramBuilder.Append(HttpUtility.UrlEncode(filterBuilder.ToString()));
+                paramBuilder.Append(HttpUtility.UrlEncode(sWriter.ToString()));
             }
 
             return paramBuilder.ToString();
@@ -129,38 +107,45 @@ namespace Mapsui.Providers.Wfs.Utilities
                         if (!string.IsNullOrEmpty(labelProperty))
                             xWriter.WriteElementString("PropertyName", qualification + labelProperty);
                     }
-                    xWriter.WriteStartElement("Filter", NSOGC);
-                    if (filter != null && boundingBox != null) xWriter.WriteStartElement("And");
-                    if (boundingBox != null)
-                    {
-                        xWriter.WriteStartElement("BBOX");
-                        if (!string.IsNullOrEmpty(featureTypeInfo.Prefix) &&
-                            !string.IsNullOrEmpty(featureTypeInfo.FeatureTypeNamespace))
-                            xWriter.WriteElementString("PropertyName",
-                                qualification + featureTypeInfo.Geometry.GeometryName);
-                        //added qualification to get it to work for deegree default sample
-                        else
-                            xWriter.WriteElementString("PropertyName", featureTypeInfo.Geometry.GeometryName);
-                        xWriter.WriteStartElement("gml", "Box", NSGML);
-                        xWriter.WriteAttributeString("srsName",
-                            "http://www.opengis.net/gml/srs/epsg.xml#" + featureTypeInfo.SRID);
-                        xWriter.WriteElementString("coordinates", NSGML,
-                            XmlConvert.ToString(boundingBox.Left) + "," +
-                            XmlConvert.ToString(boundingBox.Bottom) + " " +
-                            XmlConvert.ToString(boundingBox.Right) + "," +
-                            XmlConvert.ToString(boundingBox.Top));
-                        xWriter.WriteEndElement();
-                        xWriter.WriteEndElement();
-                    }
-                    if (filter != null) xWriter.WriteRaw(filter.Encode());
-                    if (filter != null && boundingBox != null) xWriter.WriteEndElement();
-                    xWriter.WriteEndElement();
+
+                    AppendGml2Filter(xWriter, featureTypeInfo, boundingBox, filter, qualification);
+                    
                     xWriter.WriteEndElement();
                     xWriter.WriteEndElement();
                     xWriter.Flush();
                     return Encoding.UTF8.GetBytes(sWriter.ToString());
                 }
             }
+        }
+
+        private void AppendGml2Filter(XmlTextWriter xWriter, WfsFeatureTypeInfo featureTypeInfo, BoundingBox boundingBox, IFilter filter, string qualification)
+        {
+            xWriter.WriteStartElement("Filter", NSOGC);
+            if (filter != null && boundingBox != null) xWriter.WriteStartElement("And");
+            if (boundingBox != null)
+            {
+                xWriter.WriteStartElement("BBOX");
+                if (!string.IsNullOrEmpty(featureTypeInfo.Prefix) &&
+                    !string.IsNullOrEmpty(featureTypeInfo.FeatureTypeNamespace))
+                    xWriter.WriteElementString("PropertyName",
+                        qualification + featureTypeInfo.Geometry.GeometryName);
+                //added qualification to get it to work for degree default sample
+                else
+                    xWriter.WriteElementString("PropertyName", featureTypeInfo.Geometry.GeometryName);
+                xWriter.WriteStartElement("gml", "Box", NSGML);
+                xWriter.WriteAttributeString("srsName",
+                    "http://www.opengis.net/gml/srs/epsg.xml#" + featureTypeInfo.SRID);
+                xWriter.WriteElementString("coordinates", NSGML,
+                    XmlConvert.ToString(boundingBox.Left) + "," +
+                    XmlConvert.ToString(boundingBox.Bottom) + " " +
+                    XmlConvert.ToString(boundingBox.Right) + "," +
+                    XmlConvert.ToString(boundingBox.Top));
+                xWriter.WriteEndElement();
+                xWriter.WriteEndElement();
+            }
+            if (filter != null) xWriter.WriteRaw(filter.Encode());
+            if (filter != null && boundingBox != null) xWriter.WriteEndElement();
+            xWriter.WriteEndElement();
         }
 
     }

@@ -63,38 +63,12 @@ namespace Mapsui.Providers.Wfs.Utilities
             if (filter != null || boundingBox != null) {
                 paramBuilder.Append("&FILTER=");
 
-                var filterBuilder = new StringBuilder();
-                filterBuilder.Append("<Filter xmlns=\"" + NSOGC + "\" xmlns:gml=\"" + NSGML + "\"");
-                if (!string.IsNullOrEmpty(featureTypeInfo.Prefix))
+                using var sWriter = new StringWriter();
+                using var xWriter = new XmlTextWriter(sWriter);
                 {
-                    filterBuilder.Append(" xmlns:" + featureTypeInfo.Prefix + "=\"" +
-                                         featureTypeInfo.FeatureTypeNamespace + "\"");
-                    //added by PDD to get it to work for degree default sample
+                    AppendGml3Filter(xWriter, featureTypeInfo, boundingBox, filter, qualification);
                 }
-                filterBuilder.Append(">");
-                
-                if (boundingBox != null)
-                {
-                    filterBuilder.Append("<BBOX><PropertyName>");
-                    filterBuilder.Append(qualification).Append(featureTypeInfo.Geometry.GeometryName);
-                    filterBuilder.Append("</PropertyName>");
-                    
-                    filterBuilder.Append("<gml:Envelope srsName=\"http://www.opengis.net/gml/srs/epsg.xml#" + featureTypeInfo.SRID + "\">");
-                    filterBuilder.Append("<gml:lowerCorner>");
-                    filterBuilder.Append(XmlConvert.ToString(boundingBox.Left) + " ");
-                    filterBuilder.Append(XmlConvert.ToString(boundingBox.Bottom) + " ");
-                    filterBuilder.Append("</gml:lowerCorner>");
-                    filterBuilder.Append("<gml:upperCorner>");
-                    filterBuilder.Append(XmlConvert.ToString(boundingBox.Right) + " ");
-                    filterBuilder.Append(XmlConvert.ToString(boundingBox.Top));
-                    filterBuilder.Append("</gml:upperCorner>");
-                    filterBuilder.Append("</gml:Envelope></BBOX>");
-                }
-
-                if (filter != null) filterBuilder.Append(filter.Encode());
-                
-                filterBuilder.Append("</Filter>");
-                paramBuilder.Append(HttpUtility.UrlEncode(filterBuilder.ToString()));
+                paramBuilder.Append(HttpUtility.UrlEncode(sWriter.ToString()));
             }
 
             if (!string.IsNullOrEmpty(featureTypeInfo.Prefix))
@@ -132,7 +106,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                         !string.IsNullOrEmpty(featureTypeInfo.FeatureTypeNamespace))
                         xWriter.WriteAttributeString("xmlns:" + featureTypeInfo.Prefix,
                                                      featureTypeInfo.FeatureTypeNamespace);
-                    //added by PDD to get it to work for deegree default sample
+                    //added by PDD to get it to work for degree default sample
                     xWriter.WriteStartElement("Query", NSWFS);
                     xWriter.WriteAttributeString("typeName", qualification + featureTypeInfo.Name);
                     xWriter.WriteAttributeString("srsName", ProjectionHelper.EpsgPrefix + featureTypeInfo.SRID);
@@ -142,33 +116,9 @@ namespace Mapsui.Providers.Wfs.Utilities
                         if (!string.IsNullOrEmpty(labelProperty))
                             xWriter.WriteElementString("PropertyName", qualification + labelProperty);
                     }
-                    xWriter.WriteStartElement("Filter", NSOGC);
-                    if (filter != null && boundingBox != null) xWriter.WriteStartElement("And");
-                    if (boundingBox != null)
-                    {
-                        xWriter.WriteStartElement("BBOX");
-                        if (!string.IsNullOrEmpty(featureTypeInfo.Prefix) &&
-                            !string.IsNullOrEmpty(featureTypeInfo.FeatureTypeNamespace))
-                            xWriter.WriteElementString("PropertyName",
-                                qualification + featureTypeInfo.Geometry.GeometryName);
-                        //added qualification to get it to work for deegree default sample
-                        else
-                            xWriter.WriteElementString("PropertyName", featureTypeInfo.Geometry.GeometryName);
-                        xWriter.WriteStartElement("gml", "Envelope", NSGML);
-                        xWriter.WriteAttributeString("srsName",
-                                                     "http://www.opengis.net/gml/srs/epsg.xml#" + featureTypeInfo.SRID);
-                        xWriter.WriteElementString("lowerCorner", NSGML,
-                                                   XmlConvert.ToString(boundingBox.Left) + " " +
-                                                   XmlConvert.ToString(boundingBox.Bottom));
-                        xWriter.WriteElementString("upperCorner", NSGML,
-                                                   XmlConvert.ToString(boundingBox.Right) + " " +
-                                                   XmlConvert.ToString(boundingBox.Top));
-                        xWriter.WriteEndElement();
-                        xWriter.WriteEndElement();
-                    }
-                    if (filter != null) xWriter.WriteRaw(filter.Encode());
-                    if (filter != null && boundingBox != null) xWriter.WriteEndElement();
-                    xWriter.WriteEndElement();
+                    
+                    AppendGml3Filter(xWriter, featureTypeInfo, boundingBox, filter, qualification);
+                    
                     xWriter.WriteEndElement();
                     xWriter.WriteEndElement();
                     xWriter.Flush();
@@ -177,5 +127,37 @@ namespace Mapsui.Providers.Wfs.Utilities
             }
         }
 
+        private void AppendGml3Filter(XmlTextWriter xWriter, WfsFeatureTypeInfo featureTypeInfo, BoundingBox boundingBox,
+            IFilter filter, string qualification)
+        {
+            xWriter.WriteStartElement("Filter", NSOGC);
+            if (filter != null && boundingBox != null) xWriter.WriteStartElement("And");
+            if (boundingBox != null)
+            {
+                xWriter.WriteStartElement("BBOX");
+                if (!string.IsNullOrEmpty(featureTypeInfo.Prefix) &&
+                    !string.IsNullOrEmpty(featureTypeInfo.FeatureTypeNamespace))
+                    xWriter.WriteElementString("PropertyName",
+                        qualification + featureTypeInfo.Geometry.GeometryName);
+                //added qualification to get it to work for deegree default sample
+                else
+                    xWriter.WriteElementString("PropertyName", featureTypeInfo.Geometry.GeometryName);
+                xWriter.WriteStartElement("gml", "Envelope", NSGML);
+                xWriter.WriteAttributeString("srsName",
+                    "http://www.opengis.net/gml/srs/epsg.xml#" + featureTypeInfo.SRID);
+                xWriter.WriteElementString("lowerCorner", NSGML,
+                    XmlConvert.ToString(boundingBox.Left) + " " +
+                    XmlConvert.ToString(boundingBox.Bottom));
+                xWriter.WriteElementString("upperCorner", NSGML,
+                    XmlConvert.ToString(boundingBox.Right) + " " +
+                    XmlConvert.ToString(boundingBox.Top));
+                xWriter.WriteEndElement();
+                xWriter.WriteEndElement();
+            }
+
+            if (filter != null) xWriter.WriteRaw(filter.Encode());
+            if (filter != null && boundingBox != null) xWriter.WriteEndElement();
+            xWriter.WriteEndElement();
+        }
     }
 }
