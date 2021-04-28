@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using BruTile;
@@ -11,7 +12,7 @@ using Mapsui.Providers.Wfs;
 using Mapsui.Styles;
 using Mapsui.UI;
 
-namespace Mapsui.Samples.Common.Wfs
+namespace Mapsui.Samples.Common.Maps
 {
     public class WfsSample : ISample
     {
@@ -30,8 +31,10 @@ namespace Mapsui.Samples.Common.Wfs
                 const string serviceUri = "https://geoservices.buergernetz.bz.it/geoserver/ows";
 
                 var map = new Map() {CRS = "EPSG:25832"};
+                var provider = CreateWfsProvider(serviceUri);
                 map.Layers.Add(CreateTileLayer(CreateTileSource()));
-                map.Layers.Add(CreateWfsLayer(serviceUri));
+                map.Layers.Add(CreateWfsLayer(provider));
+                map.Layers.Add(CreateLabelLayer(provider));
                 
                 var bb = new BoundingBox(550000, 5050000, 800000, 5400000);
                 map.Limiter = new ViewportLimiterKeepWithin
@@ -49,14 +52,13 @@ namespace Mapsui.Samples.Common.Wfs
             }
         }
 
-        private static ILayer CreateWfsLayer(string getCapabilitiesUri)
+        private static ILayer CreateWfsLayer(WFSProvider provider)
         {
-            var provider = CreateWfsProvider(getCapabilitiesUri);
-
             return new Layer("COMUNI_AMMINISTRATIVI")
             {
                 Style = new VectorStyle {Fill = new Brush {Color = Color.Red}},
-                DataSource = provider
+                DataSource = provider,
+                IsMapInfoLayer = true
             };
         }
 
@@ -67,10 +69,38 @@ namespace Mapsui.Samples.Common.Wfs
             {
                 QuickGeometries = false,
                 GetFeatureGetRequest = true,
-                CRS = "EPSG:25832"
+                CRS = "EPSG:25832",
+                Labels = new List<string> {"CAMM_NOME_DE"}
             };
             return provider;
         }
+        
+        private static ILayer CreateLabelLayer(WFSProvider provider)
+        {
+            // Labels
+            // Labels are collected when parsing the geometry. So there's just one 'GetFeature' call necessary.
+            // Otherwise (when calling twice for retrieving labels) there may be an inconsistent read...
+            // If a label property is set, the quick geometry option is automatically set to 'false'.
+            const string labelField = "CAMM_NOME_DE";
+            provider.Labels.Add(labelField);
+
+            return new Layer("labels")
+            {
+                DataSource = provider,
+                MaxVisible = 350,
+                Style = new LabelStyle
+                {
+                    CollisionDetection = false,
+                    ForeColor = Color.Black,
+                    Font = new Font {FontFamily = "GenericSerif", Size = 10},
+                    HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
+                    LabelColumn = labelField
+                }
+            };
+        }
+        
+        
+        
         
         public static HttpTileSource CreateTileSource()
         {
