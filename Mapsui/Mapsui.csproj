@@ -16,6 +16,9 @@
     <Folder Include="Properties\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Providers\Wfs\" />
+  </ItemGroup>
   <PropertyGroup>
     <DebugType>portable</DebugType>
     <PackageId>NotMapsui</PackageId>

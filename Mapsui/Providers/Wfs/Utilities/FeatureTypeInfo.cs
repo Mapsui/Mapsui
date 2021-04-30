@@ -1,6 +1,9 @@
 // WFS provider by Peter Robineau (peter.robineau@gmx.at)
 // This file can be redistributed and/or modified under the terms of the GNU Lesser General Public License.
 
+using System;
+using System.Collections.Generic;
+
 namespace Mapsui.Providers.Wfs.Utilities
 {
     public enum GeometryTypeEnum
@@ -32,6 +35,15 @@ namespace Mapsui.Providers.Wfs.Utilities
         private string _serviceUri = string.Empty;
         private string _srid = "4326";
         private string _ts = " ";
+        private readonly List<ElementInfo> _elements = new List<ElementInfo>();
+
+        /// <summary>
+        /// Gets the elements associated to the feature.
+        /// </summary>
+        public List<ElementInfo> Elements
+        {
+            get { return _elements; }
+        }
 
         /// <summary>
         /// Gets or sets the name of the featuretype.
@@ -146,7 +158,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         }
 
 
-        public string LableField { get; set; } // temp solution 
+        public List<string> LabelFields { get; set; } // temp solution 
 
         
         
@@ -235,6 +247,35 @@ namespace Mapsui.Providers.Wfs.Utilities
             public string GeometryType = string.Empty;
         }
 
-        
+        /// <summary>
+        /// The element info associated to the feature.
+        /// </summary>
+        [Serializable]
+        public class ElementInfo
+        {
+            public ElementInfo(string name, string dataType)
+            {
+                if (name == null)
+                    throw new ArgumentNullException("name");
+
+                if (dataType == null)
+                    throw new ArgumentNullException("dataType");
+
+                Name = name;
+                DataType = dataType;
             }
+
+            /// <summary>
+            /// Gets the name of the element
+            /// </summary>
+            public string Name { get; private set; }
+
+            /// <summary>
+            /// Gets the type of the element
+            /// </summary>
+            public string DataType { get; private set; }
+        }
+
+
+    }
 }

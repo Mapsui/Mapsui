@@ -8,6 +8,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Net;
+using System.Xml.XPath;
+using Mapsui.Projection;
 using Mapsui.Providers.Wfs.Xml;
 using Mapsui.Utilities;
 
@@ -38,12 +40,18 @@ namespace Mapsui.Providers.Wfs
         /// </summary>
         public enum WFSVersionEnum
         {
+            /// <summary>
+            /// Version 1.0.0
+            /// </summary>
             WFS_1_0_0,
+            /// <summary>
+            /// Version 1.1.0
+            /// </summary>
             WFS_1_1_0
         } 
 
         
-                private readonly GeometryTypeEnum _geometryType = GeometryTypeEnum.Unknown;
+        private readonly GeometryTypeEnum _geometryType = GeometryTypeEnum.Unknown;
         private readonly string _getCapabilitiesUri;
         private readonly HttpClientUtil _httpClientUtil = new HttpClientUtil();
         private readonly IWFS_TextResources _textResources;
@@ -54,10 +62,11 @@ namespace Mapsui.Providers.Wfs
         private IXPathQueryManager _featureTypeInfoQueryManager;
         private string _nsPrefix;
         private bool _getFeatureGetRequest;
-        private string _label;
+        private List<string> _labels = new List<string>();
         private bool _multiGeometries = true;
         private IFilter _ogcFilter;
         private bool _quickGeometries;
+        private int[] _axisOrder;
 
         // The type of geometry can be specified in case of unprecise information (e.g. 'GeometryAssociationType').
         // It helps to accelerate the rendering process significantly.
@@ -82,6 +91,37 @@ namespace Mapsui.Providers.Wfs
             get { return _featureTypeInfo; }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating the axis order
+        /// </summary>
+        /// <remarks>
+        /// The axis order is an array of array offsets. It can be either {0, 1} or {1, 0}.
+        /// <para/>If not set explictly, <see cref="AxisOrderRegistry"/> is asked for a value based on <see cref="SRID"/>.</remarks>
+        public int[] AxisOrder
+        {
+            get
+            {
+                //https://docs.geoserver.org/stable/en/user/services/wfs/axis_order.html#wfs-basics-axis
+                return _axisOrder ?? (_wfsVersion == WFSVersionEnum.WFS_1_0_0
+                    ? new[] {0, 1}
+                    : new AxisOrderRegistry()[CRS]);
+            }
+            set
+            {
+                if (value != null)
+                {
+                    if (value.Length != 2)
+                        throw new ArgumentException("Axis order array must have 2 elements");
+                    if (!((value[0] == 0 && value[1] == 1)||
+                          (value[0] == 1 && value[1] == 0)))
+                        throw new ArgumentException("Axis order array values must be 0 or 1");
+                    if (value[0] + value[1] != 1)
+                        throw new ArgumentException("Sum of values in axis order array must 1");
+                }
+                _axisOrder = value;
+            }
+        }
+        
         /// <summary>
         /// Gets or sets a value indicating whether extracting geometry information 
         /// from 'GetFeature' response shall be done quickly without paying attention to
@@ -129,18 +169,44 @@ namespace Mapsui.Providers.Wfs
         /// <summary>
         /// Gets or sets the property of the featuretype responsible for labels
         /// </summary>
-        public string Label
+        public List<string> Labels
         {
-            get { return _label; }
-            set { _label = value; }
+            get { return _labels; }
+            set { _labels = value; }
         }
 
-        
-        
+        /// <summary>
+        /// Gets or sets the network credentials used for authenticating the request with the Internet resource
+        /// </summary>
+        public ICredentials Credentials
+        {
+            get { return _httpClientUtil.Credentials; }
+            set { _httpClientUtil.Credentials = value; }
+        }
+
+        /// <summary>
+        /// Gets and sets the proxy Url of the request. 
+        /// </summary>
+        public string ProxyUrl
+        {
+            get { return _httpClientUtil.ProxyUrl; }
+            set { _httpClientUtil.ProxyUrl = value; }
+        }
+
         /// <summary>
         /// Use this constructor for initializing this dataprovider with all necessary
         /// parameters to gather metadata from 'GetCapabilities' contract.
         /// </summary>
+        /// <param name="getCapabilitiesUri">The URL for the 'GetCapabilities' request.</param>
+        /// <param name="nsPrefix">
+        /// Use an empty string or 'null', if there is no prefix for the featuretype.
+        /// </param>
+        /// <param name="featureType">The name of the feature type</param>
+        /// <param name="geometryType">
+        /// Specifying the geometry type helps to accelerate the rendering process, 
+        /// if the geometry type in 'DescribeFeatureType is unprecise.   
+        /// </param>
+        /// <param name="wfsVersion">The desired WFS Server version.</param>
         public WFSProvider(string getCapabilitiesUri, string nsPrefix, string featureType, GeometryTypeEnum geometryType,
                    WFSVersionEnum wfsVersion)
         {
@@ -168,6 +234,12 @@ namespace Mapsui.Providers.Wfs
         /// Use this constructor for initializing this dataprovider with all necessary
         /// parameters to gather metadata from 'GetCapabilities' contract.
         /// </summary>
+        /// <param name="getCapabilitiesUri">The URL for the 'GetCapabilities' request.</param>
+        /// <param name="nsPrefix">
+        /// Use an empty string or 'null', if there is no prefix for the featuretype.
+        /// </param>
+        /// <param name="featureType">The name of the feature type</param>
+        /// <param name="wfsVersion">The desired WFS Server version.</param>
         public WFSProvider(string getCapabilitiesUri, string nsPrefix, string featureType, WFSVersionEnum wfsVersion)
             : this(getCapabilitiesUri, nsPrefix, featureType, GeometryTypeEnum.Unknown, wfsVersion)
         {
@@ -178,6 +250,8 @@ namespace Mapsui.Providers.Wfs
         /// <see cref="WfsFeatureTypeInfo"/> object, 
         /// so that 'GetCapabilities' and 'DescribeFeatureType' can be bypassed.
         /// </summary>
+        /// <param name="featureTypeInfo">The featureTypeInfo Instance</param>
+        /// <param name="wfsVersion">The desired WFS Server version.</param>
         public WFSProvider(WfsFeatureTypeInfo featureTypeInfo, WFSVersionEnum wfsVersion)
         {
             _featureTypeInfo = featureTypeInfo;
@@ -193,6 +267,22 @@ namespace Mapsui.Providers.Wfs
         /// Use this constructor for initializing this dataprovider with all mandatory
         /// metadata for retrieving a featuretype, so that 'GetCapabilities' and 'DescribeFeatureType' can be bypassed.
         /// </summary>
+        /// <param name="serviceUri">The service URL</param>
+        /// <param name="nsPrefix">
+        /// Use an empty string or 'null', if there is no prefix for the featuretype.
+        /// </param>
+        /// <param name="featureTypeNamespace">
+        /// Use an empty string or 'null', if there is no namespace for the featuretype.
+        /// You don't need to know the namespace of the feature type, if you use the quick geometries option.
+        /// </param>
+        /// <param name="geometryName">
+        /// The name of the geometry.   
+        /// </param>
+        /// <param name="geometryType">
+        /// Specifying the geometry type helps to accelerate the rendering process.   
+        /// </param>
+        /// <param name="featureType">The name of the feature type</param>
+        /// <param name="wfsVersion">The desired WFS Server version.</param>
         public WFSProvider(string serviceUri, string nsPrefix, string featureTypeNamespace, string featureType,
                    string geometryName, GeometryTypeEnum geometryType, WFSVersionEnum wfsVersion)
         {
@@ -210,6 +300,17 @@ namespace Mapsui.Providers.Wfs
         /// Use this constructor for initializing this dataprovider with all mandatory
         /// metadata for retrieving a featuretype, so that 'GetCapabilities' and 'DescribeFeatureType' can be bypassed.
         /// </summary>
+        /// <param name="serviceUri">The service URL</param>
+        /// <param name="nsPrefix">
+        /// Use an empty string or 'null', if there is no prefix for the featuretype.
+        /// </param>
+        /// <param name="featureTypeNamespace">
+        /// Use an empty string or 'null', if there is no namespace for the featuretype.
+        /// You don't need to know the namespace of the feature type, if you use the quick geometries option.
+        /// </param>
+        /// <param name="geometryName">The name of the geometry</param>
+        /// <param name="featureType">The name of the feature type</param>
+        /// <param name="wfsVersion">The desired WFS Server version.</param>
         public WFSProvider(string serviceUri, string nsPrefix, string featureTypeNamespace, string featureType,
                    string geometryName, WFSVersionEnum wfsVersion)
             : this(
@@ -222,6 +323,19 @@ namespace Mapsui.Providers.Wfs
         /// Use this constructor for initializing this dataprovider with all necessary
         /// parameters to gather metadata from 'GetCapabilities' contract.
         /// </summary>
+        /// <param name="getCapabilitiesCache">
+        /// This cache (obtained from an already instantiated dataprovider that retrieves a featuretype hosted by the same service) 
+        /// helps to speed up gathering metadata. It caches the 'GetCapabilities' response. 
+        /// </param>
+        /// <param name="nsPrefix">
+        /// Use an empty string or 'null', if there is no prefix for the featuretype.
+        /// </param>
+        /// <param name="geometryType">
+        /// Specifying the geometry type helps to accelerate the rendering process, 
+        /// if the geometry type in 'DescribeFeatureType is unprecise.   
+        /// </param>
+        /// <param name="featureType">The name of the feature type</param>
+        /// <param name="wfsVersion">The desired WFS Server version.</param>
         public WFSProvider(IXPathQueryManager getCapabilitiesCache, string nsPrefix, string featureType,
                    GeometryTypeEnum geometryType, WFSVersionEnum wfsVersion)
         {
@@ -245,25 +359,30 @@ namespace Mapsui.Providers.Wfs
             GetFeatureTypeInfo();
         }
 
-        ///  <summary>
-        ///  Use this constructor for initializing this dataprovider with all necessary
-        ///  parameters to gather metadata from 'GetCapabilities' contract.
-        ///  </summary>
-        ///  <param name="getCapabilitiesCache">
-        ///  This cache (obtained from an already instantiated dataprovider that retrieves a featuretype hosted by the same service) 
-        ///  helps to speed up gathering metadata. It caches the 'GetCapabilities' response. 
+        /// <summary>
+        /// Use this constructor for initializing this dataprovider with all necessary
+        /// parameters to gather metadata from 'GetCapabilities' contract.
+        /// </summary>
+        /// <param name="getCapabilitiesCache">
+        /// This cache (obtained from an already instantiated dataprovider that retrieves a featuretype hosted by the same service) 
+        /// helps to speed up gathering metadata. It caches the 'GetCapabilities' response. 
         /// </param>
-        ///  <param name="nsPrefix">
-        ///  Use an empty string or 'null', if there is no prefix for the featuretype.
-        ///  </param>
-        /// <param name="featureType"></param>
-        /// <param name="wfsVersion"></param>
+        /// <param name="nsPrefix">
+        /// Use an empty string or 'null', if there is no prefix for the featuretype.
+        /// </param>
+        /// <param name="featureType">The name of the feature type</param>
+        /// <param name="wfsVersion">The desired WFS Server version.</param>
         public WFSProvider(IXPathQueryManager getCapabilitiesCache, string nsPrefix, string featureType,
                    WFSVersionEnum wfsVersion)
             : this(getCapabilitiesCache, nsPrefix, featureType, GeometryTypeEnum.Unknown, wfsVersion)
         {
         }
         
+        /// <summary>
+        /// Returns all features whose <see cref="Mapsui.Geometries.BoundingBox"/> intersects 'bbox'.
+        /// </summary>
+        /// <param name="bbox"></param>
+        /// <returns>Features within the specified <see cref="Mapsui.Geometries.BoundingBox"/></returns>
         public Features ExecuteIntersectionQuery(BoundingBox bbox)
         {
             if (_featureTypeInfo == null) return null;
@@ -274,15 +393,15 @@ namespace Mapsui.Providers.Wfs
 
             GeometryFactory geomFactory = null;
 
-            if (!string.IsNullOrEmpty(_label))
+            if (_labels != null && _labels.Count > 0)
             {
-                _featureTypeInfo.LableField = _label;
+                _featureTypeInfo.LabelFields = _labels;
                 _quickGeometries = false;
             }
 
             // Configuration for GetFeature request */
             var config = new WFSClientHttpConfigurator(_textResources);
-            config.ConfigureForWfsGetFeatureRequest(_httpClientUtil, _featureTypeInfo, _label, bbox, _ogcFilter,
+            config.ConfigureForWfsGetFeatureRequest(_httpClientUtil, _featureTypeInfo, _labels, bbox, _ogcFilter,
                                                     _getFeatureGetRequest);
 
             try
@@ -366,11 +485,12 @@ namespace Mapsui.Providers.Wfs
                         break;
                 }
 
+                geomFactory.AxisOrder = AxisOrder;
                 geomFactory.CreateGeometries(features);
                 geomFactory.Dispose();
                 return features;
             }
-                // Free resources (net connection of geometry factory)
+            // Free resources (net connection of geometry factory)
             finally
             {
                 geomFactory?.Dispose();
@@ -588,6 +708,24 @@ namespace Mapsui.Providers.Wfs
                     /* Just, if not set manually... */
                     if (geomType == null)
                         geomType = geomQuery.GetValueFromNode(geomQuery.Compile(_textResources.XPATH_TYPEATTRIBUTEQUERY));
+                    
+                    /* read all the elements */
+                    var iterator = geomQuery.GetIterator(geomQuery.Compile("//ancestor::xs:sequence/xs:element"));
+                    foreach (XPathNavigator node in iterator)
+                    {
+                        node.MoveToAttribute("type", string.Empty);
+                        var type = node.Value;
+
+                        if (type.StartsWith("gml:")) // we skip geometry element cause we already found it
+                            continue;
+
+                        node.MoveToParent();
+
+                        node.MoveToAttribute("name", string.Empty);
+                        var name = node.Value;
+
+                        _featureTypeInfo.Elements.Add(new WfsFeatureTypeInfo.ElementInfo(name, type));
+                    }
                 }
                 else
                 {
@@ -785,7 +923,7 @@ namespace Mapsui.Providers.Wfs
             /// The <see cref="HttpClientUtil"/> instance is returned for immediate usage. 
             /// </summary>
             internal void ConfigureForWfsGetFeatureRequest(HttpClientUtil httpClientUtil, 
-                WfsFeatureTypeInfo featureTypeInfo, string labelProperty, BoundingBox boundingBox,
+                WfsFeatureTypeInfo featureTypeInfo, List<string> labelProperties, BoundingBox boundingBox,
                 IFilter filter, bool get)
             {
                 httpClientUtil.Reset();
@@ -795,20 +933,28 @@ namespace Mapsui.Providers.Wfs
                 {
                     /* HTTP-GET */
                     httpClientUtil.Url += _wfsTextResources.GetFeatureGETRequest(
-                        featureTypeInfo, labelProperty, boundingBox, filter);
+                        featureTypeInfo, labelProperties, boundingBox, filter);
                 }
-
-                /* HTTP-POST */
-                httpClientUtil.PostData = _wfsTextResources.GetFeaturePOSTRequest(
-                    featureTypeInfo, labelProperty, boundingBox, filter);
-                httpClientUtil.AddHeader(HttpRequestHeader.ContentType.ToString(), "text/xml");
+                else
+                {
+                    /* HTTP-POST */
+                    httpClientUtil.PostData = _wfsTextResources.GetFeaturePOSTRequest(
+                        featureTypeInfo, labelProperties, boundingBox, filter);
+                    httpClientUtil.AddHeader(HttpRequestHeader.ContentType.ToString(), "text/xml");
+                }
             }
         }
         
+        /// <summary>
+        /// Gets the features within the specified <see cref="Mapsui.Geometries.BoundingBox"/>
+        /// </summary>
+        /// <param name="box"></param>
+        /// <param name="resolution">unused parameter (for backwards compatibility)</param>
+        /// <returns>Features within the specified <see cref="Mapsui.Geometries.BoundingBox"/></returns>
         public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
             return ExecuteIntersectionQuery(box);
         }
                 
-            }
+    }
 }
