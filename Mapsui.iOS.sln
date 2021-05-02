@@ -19,18 +19,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{08
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
-		licence.txt = licence.txt
 		Mapsui.sln.DotSettings = Mapsui.sln.DotSettings
 		README.md = README.md
+		LICENSE.md = LICENSE.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{B2DB6CAC-1C30-42C9-B628-BACEBF790AB9}"
 	ProjectSection(SolutionItems) = preProject
 		Scripts\build.proj = Scripts\build.proj
-		Scripts\build_with_ios.proj = Scripts\build_with_ios.proj
 		Scripts\buildpack.bat = Scripts\buildpack.bat
 		Scripts\buildpackpush.bat = Scripts\buildpackpush.bat
-		Scripts\Mapsui.nuspec = Scripts\Mapsui.nuspec
 		Scripts\readme.txt = Scripts\readme.txt
 		Scripts\rename.ps1 = Scripts\rename.ps1
 		Scripts\updateversionnumber.proj = Scripts\updateversionnumber.proj
