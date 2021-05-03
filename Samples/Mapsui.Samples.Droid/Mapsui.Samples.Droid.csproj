@@ -116,7 +116,7 @@
       <Name>Mapsui.Geometries</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj">
-      <Project>{ae632270-38ca-4203-93a5-8612629cd944}</Project>
+      <Project>{DEA6E9AE-2B6A-4E83-83B7-E9DF0E492301}</Project>
       <Name>Mapsui.Rendering.Skia</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Mapsui.UI.Android\Mapsui.UI.Android.csproj">
@@ -132,7 +132,7 @@
       <Name>Mapsui.Samples.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj">
-      <Project>{3EB5D6AA-8B52-4E93-9000-61EEE6D6B044}</Project>
+      <Project>{AB12E84B-E58B-4DFA-8050-C9E69DE707B4}</Project>
       <Name>Mapsui.Samples.CustomWidget</Name>
     </ProjectReference>
   </ItemGroup>

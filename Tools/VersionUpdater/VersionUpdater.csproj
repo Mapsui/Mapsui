@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Build" ToolsVersion="15.0">
    <PropertyGroup>
     <TargetFramework>net48</TargetFramework>
     <OutputType>Exe</OutputType>
@@ -17,16 +17,13 @@
   <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="CmdLine">
-      <Version>1.0.7.509</Version>
+    <PackageReference Include="CmdLine" Version="1.0.7.509">
     </PackageReference>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
-    <PackageReference Include="System.Memory">
-      <Version>4.5.4</Version>
+    <PackageReference Include="System.Memory" Version="4.5.4">
     </PackageReference>
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe">
-      <Version>4.7.1</Version>
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.7.1">
     </PackageReference>
   </ItemGroup>
 </Project>
