@@ -10,19 +10,19 @@ trigger_map:
 workflows:
   primary:
     steps:
-    - activate-ssh-key@4.0.3:
+    - activate-ssh-key:
         run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
-    - git-clone@4.0.17: {}
-    - script@1.1.5:
+    - git-clone: {}
+    - script:
         title: Do anything with Script step
     - certificate-and-profile-installer@1.10.1: {}
-    - nuget-restore@1.1.0: {}
-    - xamarin-archive@1.5.1:
+    - nuget-restore: {}
+    - xamarin-archive:
         inputs:
         - xamarin_solution: "$BITRISE_PROJECT_PATH"
         - xamarin_configuration: "$BITRISE_XAMARIN_CONFIGURATION"
         - xamarin_platform: "$BITRISE_XAMARIN_PLATFORM"
-    - deploy-to-bitrise-io@1.9.2: {}
+    - deploy-to-bitrise-io: {}
 app:
   envs:
   - opts:
