@@ -151,7 +151,7 @@
       <Version>2.80.2</Version>
     </PackageReference>
     <PackageReference Include="Topten.RichTextKit">
-      <Version>0.3.134</Version>
+      <Version>0.4.138</Version>
     </PackageReference>
     <PackageReference Include="Xam.Plugin.Geolocator">
       <Version>4.5.0.6</Version>
