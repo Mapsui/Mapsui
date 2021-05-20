@@ -25,7 +25,7 @@
         <dependency id="SkiaSharp" version="[2.80.2,3.0.0)"/>
         <dependency id="Svg.Skia" version="[0.4.1,0.6)"/>
         <dependency id="SkiaSharp.Views" version="[2.80.2,3.0.0)"/>
-        <dependency id="Topten.RichTextKit" version="[0.3.134,0.4)"/>
+        <dependency id="Topten.RichTextKit" version="[0.4.138,0.5)"/>
       </group>
       <group targetFramework="uap">
         <dependency id="BruTile" version="[3.1.3,4.0.0)"/>
@@ -33,7 +33,7 @@
         <dependency id="SkiaSharp" version="[2.80.2,3.0.0)"/>
         <dependency id="Svg.Skia" version="[0.4.1,0.6)"/>
         <dependency id="SkiaSharp.Views" version="[2.80.2,3.0.0)"/>
-        <dependency id="Topten.RichTextKit" version="[0.3.134,0.4)"/>
+        <dependency id="Topten.RichTextKit" version="[0.4.138,0.5)"/>
       </group>
       <group targetFramework="MonoAndroid">
         <dependency id="BruTile" version="[3.1.3,4.0.0)"/>
@@ -41,7 +41,7 @@
         <dependency id="SkiaSharp" version="[2.80.2,3.0.0)"/>
         <dependency id="Svg.Skia" version="[0.4.1,0.6)"/>
         <dependency id="SkiaSharp.Views" version="[2.80.2,3.0.0)"/>
-        <dependency id="Topten.RichTextKit" version="[0.3.134,0.4)"/>
+        <dependency id="Topten.RichTextKit" version="[0.4.138,0.5)"/>
       </group>
       <group targetFramework="Xamarin.iOS">
         <dependency id="BruTile" version="[3.1.3,4.0.0)"/>
@@ -49,7 +49,7 @@
         <dependency id="SkiaSharp" version="[2.80.2,3.0.0)"/>
         <dependency id="Svg.Skia" version="[0.4.1,0.6)"/>
         <dependency id="SkiaSharp.Views" version="[2.80.2,3.0.0)"/>
-        <dependency id="Topten.RichTextKit" version="[0.3.134,0.4)"/>
+        <dependency id="Topten.RichTextKit" version="[0.4.138,0.5)"/>
       </group>
     </dependencies>
   </metadata>
@@ -58,7 +58,7 @@
     <file src="..\Mapsui\bin\Release\netstandard2.0\Mapsui.Geometries.dll" target="lib\netstandard2.0\Mapsui.Geometries.dll" />
     <file src="..\Mapsui\bin\Release\netstandard2.0\Mapsui.dll" target="lib\netstandard2.0\Mapsui.dll" />
     <file src="..\Mapsui.Rendering.Skia\bin\Release\netstandard2.0\Mapsui.Rendering.Skia.dll" target="lib\netstandard2.0\Mapsui.Rendering.Skia.dll" />
-    
+
     <file src="..\Mapsui.UI.Wpf\bin\Release\net48\Mapsui.Geometries.dll" target="lib\net48\Mapsui.Geometries.dll" />
     <file src="..\Mapsui.UI.Wpf\bin\Release\net48\Mapsui.dll" target="lib\net48\Mapsui.dll" />
     <file src="..\Mapsui.UI.Wpf\bin\Release\net48\Mapsui.Rendering.Xaml.dll" target="lib\net48\Mapsui.Rendering.Xaml.dll" />
