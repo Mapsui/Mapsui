@@ -101,7 +101,7 @@ namespace Mapsui.UI.Forms
                     Feature.Styles.Clear();
                     Feature.Styles.Add(new VectorStyle
                     {
-                        Outline = new Pen { Width = StrokeWidth, Color = StrokeColor.ToMapsui() },
+                        Line = new Pen { Width = StrokeWidth, Color = StrokeColor.ToMapsui() },
                         Fill = new Styles.Brush { Color = FillColor.ToMapsui() }
                     });
                 }
