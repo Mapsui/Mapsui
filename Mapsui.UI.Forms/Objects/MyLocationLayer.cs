@@ -73,12 +73,6 @@ namespace Mapsui.UI.Objects
         public double Direction { get; private set; } = 0.0;
 
         /// <summary>
-        /// Speed of moving
-        /// </summary>
-        /// <value>Speed of moving</value>
-        public double Speed { get; } = 0.0;
-
-        /// <summary>
         /// Viewing direction of device (in degrees wrt. north direction)
         /// </summary>
         /// <value>Direction at location</value>
