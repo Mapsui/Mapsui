@@ -70,7 +70,7 @@ namespace Mapsui.UI.Objects
         /// Movement direction of device at location
         /// </summary>
         /// <value>Direction at location</value>
-        public double Direction { get; set; } = 0.0;
+        public double Direction { get; private set; } = 0.0;
 
         /// <summary>
         /// Speed of moving
