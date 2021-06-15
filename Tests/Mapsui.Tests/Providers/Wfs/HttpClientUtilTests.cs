@@ -26,5 +26,22 @@ namespace Mapsui.Tests.Providers.Wfs
             // Assert
             Assert.DoesNotThrow(httpClientUtil.Close);
         }
+
+        [Test]
+        public void TwoCloseDoesNotThrowException()
+        {
+            // Arrange
+            var httpClientUtil = new HttpClientUtil
+            {
+                Url = "https://www.google.com"
+            };
+
+            // Act
+            using var stream = httpClientUtil.GetDataStream();
+            httpClientUtil.Close();
+
+            // Assert
+            Assert.DoesNotThrow(httpClientUtil.Close);
+        }
     }
 }
