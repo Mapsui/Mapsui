@@ -47,7 +47,7 @@ namespace Mapsui.Samples.Wpf.Editing
                         {
                             if (IsShiftDown())
                             {
-                                return editManager.TryDeleteVertrex(
+                                return editManager.TryDeleteVertex(
                                     mapControl.GetMapInfo(screenPosition, editManager.VertexRadius), editManager.VertexRadius);
                             }
                             return editManager.TryInsertVertex(
