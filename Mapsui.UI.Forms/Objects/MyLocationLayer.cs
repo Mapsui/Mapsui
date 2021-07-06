@@ -175,7 +175,7 @@ namespace Mapsui.UI.Objects
                 Opacity = 1,
             });
 
-            DataSource = new MemoryProvider(new List<Feature> { feature, featureDir });
+            DataSource = new MemoryProvider(new List<Feature> { featureDir, feature });
             Style = null;
         }
 
