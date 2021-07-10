@@ -901,7 +901,7 @@ namespace Mapsui.Providers.Wfs
                                                                           string targetUrl)
             {
                 httpClientUtil.Reset();
-                httpClientUtil.Url = targetUrl + _wfsTextResources.GetCapabilitiesRequest();
+                httpClientUtil.Url = targetUrl.AppendQuery(_wfsTextResources.GetCapabilitiesRequest());
                 return httpClientUtil;
             }
 
@@ -914,7 +914,7 @@ namespace Mapsui.Providers.Wfs
                                                                               string featureTypeName)
             {
                 httpClientUtil.Reset();
-                httpClientUtil.Url = targetUrl + _wfsTextResources.DescribeFeatureTypeRequest(featureTypeName);
+                httpClientUtil.Url = targetUrl.AppendQuery(_wfsTextResources.DescribeFeatureTypeRequest(featureTypeName));
                 return httpClientUtil;
             }
 
@@ -932,8 +932,8 @@ namespace Mapsui.Providers.Wfs
                 if (get)
                 {
                     /* HTTP-GET */
-                    httpClientUtil.Url += _wfsTextResources.GetFeatureGETRequest(
-                        featureTypeInfo, labelProperties, boundingBox, filter);
+                    httpClientUtil.Url = httpClientUtil.Url.AppendQuery(_wfsTextResources.GetFeatureGETRequest(
+                        featureTypeInfo, labelProperties, boundingBox, filter));
                 }
                 else
                 {
