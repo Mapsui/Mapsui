@@ -194,7 +194,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
             }
         }
 
-        public bool TryDeleteVertrex(MapInfo mapInfo, double screenDistance)
+        public bool TryDeleteVertex(MapInfo mapInfo, double screenDistance)
         {
             if (mapInfo.Feature == null) return false;
 
