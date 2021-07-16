@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -13,4 +14,7 @@
     <ProjectReference Include="..\..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Xamarin.Essentials" />
+  </ItemGroup>
 </Project>

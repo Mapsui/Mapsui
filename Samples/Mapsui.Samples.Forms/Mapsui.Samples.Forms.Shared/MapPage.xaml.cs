@@ -8,6 +8,7 @@ using Mapsui.UI;
 using System.Threading.Tasks;
 using Mapsui.Rendering.Skia;
 using Mapsui.Samples.CustomWidget;
+using Xamarin.Essentials;
 
 namespace Mapsui.Samples.Forms
 {
@@ -32,12 +33,21 @@ namespace Mapsui.Samples.Forms
             mapView.PinClicked += OnPinClicked;
             mapView.MapClicked += OnMapClicked;
 
+            Compass.ReadingChanged += Compass_ReadingChanged;
+
             mapView.MyLocationLayer.UpdateMyLocation(new UI.Forms.Position());
 
             mapView.Info += MapView_Info;
             mapView.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
 
             Task.Run(() => StartGPS());
+
+            try
+            {
+                if (!Compass.IsMonitoring)
+                    Compass.Start(SensorSpeed.Default);
+            }
+            catch (Exception) { }
 
             setup(mapView);
 
@@ -152,6 +162,11 @@ namespace Mapsui.Samples.Forms
                 mapView.MyLocationLayer.UpdateMyDirection(e.Position.Heading, mapView.Viewport.Rotation);
                 mapView.MyLocationLayer.UpdateMySpeed(e.Position.Speed);
             });
+        }
+
+        private void Compass_ReadingChanged(object sender, CompassChangedEventArgs e)
+        {
+            mapView.MyLocationLayer.UpdateMyViewDirection(e.Reading.HeadingMagneticNorth, mapView.Viewport.Rotation, false);
         }
     }
 }

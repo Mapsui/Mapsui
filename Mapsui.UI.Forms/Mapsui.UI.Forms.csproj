@@ -44,6 +44,7 @@
     <None Remove="Images\RotationZero.svg" />
     <None Remove="Images\ZoomIn.svg" />
     <None Remove="Images\ZoomOut.svg" />
+    <None Remove="Images\MyLocationDir.svg" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Images\Close.svg" />
@@ -55,6 +56,7 @@
     <EmbeddedResource Include="Images\RotationZero.svg" />
     <EmbeddedResource Include="Images\ZoomIn.svg" />
     <EmbeddedResource Include="Images\ZoomOut.svg" />
+    <EmbeddedResource Include="Images\MyLocationDir.svg" />
   </ItemGroup>
   <Import Project="..\Mapsui.UI.Shared\Mapsui.UI.Shared.projitems" Label="Shared" />
 

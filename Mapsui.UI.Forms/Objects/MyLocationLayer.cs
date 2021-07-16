@@ -5,7 +5,6 @@ using Mapsui.UI.Forms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Xamarin.Forms;
 
 namespace Mapsui.UI.Objects
@@ -21,9 +20,11 @@ namespace Mapsui.UI.Objects
     {
         MapView mapView;
         Feature feature;
+        Feature featureDir;
 
         private static int bitmapMovingId = -1;
         private static int bitmapStillId = -1;
+        private static int bitmapDirId = -1;
 
         private const string animationMyLocationName = "animationMyLocationPosition";
         private const string animationMyDirectionName = "animationMyDirectionPosition";
@@ -66,16 +67,16 @@ namespace Mapsui.UI.Objects
         }
 
         /// <summary>
-        /// Direction of device at location
+        /// Movement direction of device at location
         /// </summary>
         /// <value>Direction at location</value>
-        public double Direction { get; set; } = 0.0;
+        public double Direction { get; private set; } = 0.0;
 
         /// <summary>
-        /// Speed of moving
+        /// Viewing direction of device (in degrees wrt. north direction)
         /// </summary>
-        /// <value>Speed of moving</value>
-        public double Speed { get; } = 0.0;
+        /// <value>Direction at location</value>
+        public double ViewingDirection { get; private set; } = -1.0;
 
         /// <summary>
         /// Scale of symbol
@@ -109,7 +110,7 @@ namespace Mapsui.UI.Objects
 
             if (bitmapMovingId == -1)
             {
-                var bitmapMoving = Mapsui.Utilities.EmbeddedResourceLoader.Load($"Images.MyLocationMoving.svg", typeof(MyLocationLayer));
+                var bitmapMoving = Utilities.EmbeddedResourceLoader.Load($"Images.MyLocationMoving.svg", typeof(MyLocationLayer));
 
                 if (bitmapMoving != null)
                 {
@@ -120,12 +121,23 @@ namespace Mapsui.UI.Objects
 
             if (bitmapStillId == -1)
             {
-                var bitmapStill = Mapsui.Utilities.EmbeddedResourceLoader.Load($"Images.MyLocationStill.svg", typeof(MyLocationLayer));
+                var bitmapStill = Utilities.EmbeddedResourceLoader.Load($"Images.MyLocationStill.svg", typeof(MyLocationLayer));
 
                 if (bitmapStill != null)
                 {
                     // Register bitmap
                     bitmapStillId = BitmapRegistry.Instance.Register(bitmapStill);
+                }
+            }
+
+            if (bitmapDirId == -1)
+            {
+                var bitmapDir = Utilities.EmbeddedResourceLoader.Load($"Images.MyLocationDir.svg", typeof(MyLocationLayer));
+
+                if (bitmapDir != null)
+                {
+                    // Register bitmap
+                    bitmapDirId = BitmapRegistry.Instance.Register(bitmapDir);
                 }
             }
 
@@ -146,7 +158,24 @@ namespace Mapsui.UI.Objects
                 Opacity = 1,
             });
 
-            DataSource = new MemoryProvider(new List<Feature> { feature });
+            featureDir = new Feature
+            {
+                Geometry = myLocation.ToMapsui(),
+                ["Label"] = "My view direction",
+            };
+
+            featureDir.Styles.Clear();
+            featureDir.Styles.Add(new SymbolStyle
+            {
+                Enabled = false,
+                BitmapId = bitmapDirId,
+                SymbolScale = 0.2,
+                SymbolRotation = 0,
+                SymbolOffset = new Offset(0, 0),
+                Opacity = 1,
+            });
+
+            DataSource = new MemoryProvider(new List<Feature> { featureDir, feature });
             Style = null;
         }
 
@@ -198,7 +227,7 @@ namespace Mapsui.UI.Objects
         }
 
         /// <summary>
-        /// Updates my direction
+        /// Updates my movement direction
         /// </summary>
         /// <param name="newDirection">New direction</param>
         /// <param name="newViewportRotation">New viewport rotation</param>
@@ -269,6 +298,60 @@ namespace Mapsui.UI.Objects
                 mapView.Refresh();
         }
 
+        /// <summary>
+        /// Updates my view direction
+        /// </summary>
+        /// <param name="newDirection">New direction</param>
+        /// <param name="newViewportRotation">New viewport rotation</param>
+        public void UpdateMyViewDirection(double newDirection, double newViewportRotation, bool animated = true)
+        {
+            var newRotation = (int)(newDirection - newViewportRotation);
+            var oldRotation = (int)((SymbolStyle)featureDir.Styles.First()).SymbolRotation;
+
+            if (newRotation == -1.0)
+            {
+                // disable bitmap
+                ((SymbolStyle)featureDir.Styles.First()).Enabled = false;
+            }
+            else if (newRotation != oldRotation)
+            {
+                ((SymbolStyle)featureDir.Styles.First()).Enabled = true;
+                ViewingDirection = newDirection;
+
+                // We have a direction update, so abort last animation
+                if (mapView.AnimationIsRunning(animationMyDirectionName))
+                    mapView.AbortAnimation(animationMyDirectionName);
+
+                if (newRotation < 90 && oldRotation > 270)
+                {
+                    newRotation += 360;
+                }
+                else if (newRotation > 270 && oldRotation < 90)
+                {
+                    oldRotation += 360;
+                }
+
+                if (animated)
+                {
+                    var animation = new Animation((v) =>
+                    {
+                        if ((int)v != (int)((SymbolStyle)featureDir.Styles.First()).SymbolRotation)
+                        {
+                            ((SymbolStyle)featureDir.Styles.First()).SymbolRotation = (int)v % 360;
+                            mapView.Refresh();
+                        }
+                    }, oldRotation, newRotation);
+
+                    animation.Commit(mapView, animationMyDirectionName, 50, 500);
+                }
+                else
+                {
+                    ((SymbolStyle)featureDir.Styles.First()).SymbolRotation = newRotation % 360;
+                    mapView.Refresh();
+                }
+            }
+        }
+
         private bool InternalUpdateMyLocation(Position newLocation)
         {
             var modified = false;
@@ -277,6 +360,7 @@ namespace Mapsui.UI.Objects
             {
                 myLocation = newLocation;
                 feature.Geometry = myLocation.ToMapsui();
+                featureDir.Geometry = myLocation.ToMapsui();
                 modified = true;
             }
 
