@@ -111,6 +111,10 @@ namespace Mapsui.UI.Forms
 
             var location = GetScreenPosition(e.Location);
 
+            // if user handles action by his own return
+            TouchAction?.Invoke(sender, e);
+            if (e.Handled) return;
+
             if (e.ActionType == SKTouchAction.Pressed)
             {
                 _firstTouch = location;
@@ -308,6 +312,11 @@ namespace Mapsui.UI.Forms
         public new event EventHandler<TouchedEventArgs> TouchMove;
 #else
         public event EventHandler<TouchedEventArgs> TouchMove;
+
+        /// <summary>
+        /// TouchAction is called, when user provoques a touch event
+        /// </summary>
+        public event EventHandler<SKTouchEventArgs> TouchAction;
 #endif
 
         /// <summary>

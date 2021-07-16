@@ -13,6 +13,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using Svg.Skia;
 using Xamarin.Forms;
+using SkiaSharp.Views.Forms;
 
 namespace Mapsui.UI.Forms
 {
@@ -77,6 +78,7 @@ namespace Mapsui.UI.Forms
             _mapControl.TouchEntered += HandlerTouchEntered;
             _mapControl.TouchExited += HandlerTouchExited;
             _mapControl.TouchMove += HandlerTouchMove;
+            _mapControl.TouchAction += HandlerTouchAction;
             _mapControl.Swipe += HandlerSwipe;
             _mapControl.Fling += HandlerFling;
             _mapControl.Zoomed += HandlerZoomed;
@@ -220,6 +222,11 @@ namespace Mapsui.UI.Forms
         /// TouchMove is called, when user move mouse over map (independent from mouse button state) or move finger on display
         /// </summary>
         public event EventHandler<TouchedEventArgs> TouchMove;
+
+        /// <summary>
+        /// TouchAction is called, when user provoques a touch event
+        /// </summary>
+        public event EventHandler<SKTouchEventArgs> TouchAction;
 
         /// <summary>
         /// Hovered is called, when user move mouse over map without pressing mouse button
@@ -949,6 +956,11 @@ namespace Mapsui.UI.Forms
         private void HandlerTouchExited(object sender, TouchedEventArgs e)
         {
             TouchExited?.Invoke(sender, e);
+        }
+
+        private void HandlerTouchAction(object sender, SKTouchEventArgs e)
+        {
+            TouchAction?.Invoke(sender, e);
         }
 
         private void HandlerPinPropertyChanged(object sender, PropertyChangedEventArgs e)
