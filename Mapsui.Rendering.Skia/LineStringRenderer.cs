@@ -30,6 +30,7 @@ namespace Mapsui.Rendering.Skia
                 var strokeMiterLimit = 4f;
                 var strokeStyle = PenStyle.Solid;
                 float[] dashArray = null;
+                float dashOffset = 0;
 
                 if (vectorStyle != null)
                 {
@@ -40,6 +41,7 @@ namespace Mapsui.Rendering.Skia
                     strokeMiterLimit = vectorStyle.Line.StrokeMiterLimit;
                     strokeStyle = vectorStyle.Line.PenStyle;
                     dashArray = vectorStyle.Line.DashArray;
+                    dashOffset = vectorStyle.Line.DashOffset;
                 }
 
                 using (var path = lineString.ToSkiaPath(viewport, canvas.LocalClipBounds))
@@ -52,7 +54,7 @@ namespace Mapsui.Rendering.Skia
                     paint.StrokeJoin = strokeJoin.ToSkia();
                     paint.StrokeMiter = strokeMiterLimit;
                     if (strokeStyle != PenStyle.Solid)
-                        paint.PathEffect = strokeStyle.ToSkia(lineWidth, dashArray);
+                        paint.PathEffect = strokeStyle.ToSkia(lineWidth, dashArray, dashOffset);
                     else
                         paint.PathEffect = null;
                     canvas.DrawPath(path, paint);

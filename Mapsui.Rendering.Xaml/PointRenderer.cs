@@ -57,6 +57,7 @@ namespace Mapsui.Rendering.Xaml
                 path.Stroke = new XamlMedia.SolidColorBrush(style.Outline.Color.ToXaml());
                 path.StrokeThickness = style.Outline.Width;
                 path.StrokeDashArray = style.Outline.PenStyle.ToXaml(style.Outline.DashArray);
+                path.StrokeDashOffset = style.Outline.DashOffset;
             }
 
             switch (symbolType)

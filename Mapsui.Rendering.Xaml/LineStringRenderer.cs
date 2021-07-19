@@ -28,6 +28,7 @@ namespace Mapsui.Rendering.Xaml
             }
             path.Stroke = new SolidColorBrush(style.Line.Color.ToXaml());
             path.StrokeDashArray = style.Line.PenStyle.ToXaml(style.Line.DashArray);
+            path.StrokeDashOffset = style.Line.DashOffset;
             var penStrokeCap = style.Line.PenStrokeCap.ToXaml();
             path.StrokeEndLineCap = penStrokeCap;
             path.StrokeStartLineCap = penStrokeCap;

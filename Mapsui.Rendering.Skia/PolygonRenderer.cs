@@ -35,7 +35,8 @@ namespace Mapsui.Rendering.Skia
                 var strokeMiterLimit = 4f; // default
                 var strokeStyle = PenStyle.Solid; // default
                 float[] dashArray = null; // default
-      
+                float dashOffset = 0; // default
+
                 if (vectorStyle.Outline != null)
                 {
                     lineWidth = (float)vectorStyle.Outline.Width;
@@ -45,6 +46,7 @@ namespace Mapsui.Rendering.Skia
                     strokeMiterLimit = vectorStyle.Outline.StrokeMiterLimit;
                     strokeStyle = vectorStyle.Outline.PenStyle;
                     dashArray = vectorStyle.Outline.DashArray;
+                    dashOffset = vectorStyle.Outline.DashOffset;
                 }
 
                 if (vectorStyle.Fill != null)
@@ -159,7 +161,7 @@ namespace Mapsui.Rendering.Skia
                             paintStroke.StrokeJoin = strokeJoin.ToSkia();
                             paintStroke.StrokeMiter = strokeMiterLimit;
                             if (strokeStyle != PenStyle.Solid)
-                                paintStroke.PathEffect = strokeStyle.ToSkia(lineWidth, dashArray);
+                                paintStroke.PathEffect = strokeStyle.ToSkia(lineWidth, dashArray, dashOffset);
                             else
                                 paintStroke.PathEffect = null;
                             canvas.DrawPath(path, paintStroke);
