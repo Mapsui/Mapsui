@@ -32,6 +32,7 @@ namespace Mapsui.Rendering.Xaml
                 path.Stroke = new System.Windows.Media.SolidColorBrush(style.Outline.Color.ToXaml());
                 path.StrokeThickness = style.Outline.Width * resolution;
                 path.StrokeDashArray = style.Outline.PenStyle.ToXaml(style.Outline.DashArray);
+                path.StrokeDashOffset = style.Outline.DashOffset;
                 path.StrokeLineJoin = style.Outline.StrokeJoin.ToXaml();
                 path.StrokeMiterLimit = style.Outline.StrokeMiterLimit;
                 path.Tag = style.Outline.Width; // see #linewidthhack

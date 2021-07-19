@@ -33,6 +33,11 @@ namespace Mapsui.Styles
         public float[] DashArray { get; set; } = null;
 
         /// <summary>
+        /// Offset for drawing user defined dashes
+        /// </summary>
+        public float DashOffset { get; set; } = 0;
+
+        /// <summary>
         /// Defines the end of a line
         /// </summary>
         public PenStrokeCap PenStrokeCap { get; set; } = PenStrokeCap.Butt;
@@ -69,6 +74,8 @@ namespace Mapsui.Styles
             if (PenStyle != pen.PenStyle) return false;
 
             if (DashArray != pen.DashArray) return false;
+
+            if (DashOffset != pen.DashOffset) return false;
 
             if (PenStrokeCap != pen.PenStrokeCap) return false;
 
