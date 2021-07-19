@@ -31,7 +31,6 @@ using Windows.UI.Xaml.Shapes;
 using SkiaSharp.Views.UWP;
 using HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment;
 using VerticalAlignment = Windows.UI.Xaml.VerticalAlignment;
-using Mapsui.Utilities;
 
 namespace Mapsui.UI.Uwp
 {
@@ -63,6 +62,7 @@ namespace Mapsui.UI.Uwp
             ManipulationMode = ManipulationModes.Scale | ManipulationModes.TranslateX | ManipulationModes.TranslateY | ManipulationModes.Rotate;
             ManipulationStarted += OnManipulationStarted;
             ManipulationDelta += OnManipulationDelta;
+            ManipulationCompleted += OnManipulationCompleted;
 
             ManipulationInertiaStarting += OnManipulationInertiaStarting;
 
@@ -74,6 +74,11 @@ namespace Mapsui.UI.Uwp
                 orientationSensor.OrientationChanged += (sender, args) => RunOnUIThread(() => Refresh());
         }
 
+        private void OnManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
+        {
+            RefreshData();
+            Console.WriteLine(Guid.NewGuid());
+        }
 
         private void OnManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
         {

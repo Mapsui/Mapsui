@@ -9,16 +9,10 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
   </PropertyGroup>
-
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="BruTile" Version="4.0.0" />
     <PackageReference Include="SkiaSharp" Version="2.80.2" />
   </ItemGroup>
-
   <ItemGroup Condition=" '$(TargetFramework)' == 'net48' ">
     <PackageReference Include="SkiaSharp.Views" Version="2.80.2" />
   </ItemGroup>
