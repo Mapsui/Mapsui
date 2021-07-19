@@ -14,7 +14,7 @@
     <ProjectReference Include="..\Mapsui.Samples.Forms.Shared\Mapsui.Samples.Forms.Shared.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="BruTile.MbTiles" Version="3.1.3">
+    <PackageReference Include="BruTile.MbTiles" Version="4.0.0">
     </PackageReference>
     <PackageReference Include="HarfBuzzSharp" Version="2.6.1.7">
     </PackageReference>
