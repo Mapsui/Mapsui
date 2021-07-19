@@ -31,4 +31,4 @@ using Android.App;
 // Add some common permissions, these can be removed if not needed
 [assembly: UsesPermission(Android.Manifest.Permission.Internet)]
 [assembly: UsesPermission(Android.Manifest.Permission.WriteExternalStorage)]
-[assembly: AssemblyInformationalVersion("3.0.0-alpha.4")]
+[assembly: AssemblyInformationalVersion("3.0.0-rc.1")]
