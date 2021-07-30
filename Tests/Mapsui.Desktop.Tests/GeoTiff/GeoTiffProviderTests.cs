@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Globalization;
-using Mapsui.Desktop.GeoTiff;
+using Mapsui.Providers;
 using Mapsui.Desktop.Tests.Utilities;
 using NUnit.Framework;
 
