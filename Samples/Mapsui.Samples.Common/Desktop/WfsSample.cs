@@ -12,7 +12,7 @@ using Mapsui.Providers.Wfs;
 using Mapsui.Styles;
 using Mapsui.UI;
 
-namespace Mapsui.Samples.Common.Maps
+namespace Mapsui.Samples.Common.Desktop
 {
     public class WfsSample : ISample
     {
