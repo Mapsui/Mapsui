@@ -1,4 +1,4 @@
-﻿using Mapsui.Desktop.Wms;
+﻿using Mapsui.Providers.Wms;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.UI;

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Xml;
 using Mapsui.Desktop.Tests.Utilities;
-using Mapsui.Desktop.Wms;
+using Mapsui.Providers.Wms;
 using NUnit.Framework;
 
 namespace Mapsui.Desktop.Tests.Wms
