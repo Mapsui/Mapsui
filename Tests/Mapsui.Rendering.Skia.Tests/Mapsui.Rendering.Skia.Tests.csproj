@@ -108,7 +108,7 @@
     </PackageReference>
     <PackageReference Include="OpenTK.GLControl" Version="3.1.0">
     </PackageReference>
-    <PackageReference Include="SkiaSharp.Views" Version="2.80.2">
+    <PackageReference Include="SkiaSharp.Views" Version="2.80.3">
     </PackageReference>
     <PackageReference Include="Svg.Skia" Version="0.5.0">
     </PackageReference>

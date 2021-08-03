@@ -129,7 +129,7 @@
       <Version>2.1.0.4</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Views.Forms">
-      <Version>2.80.2</Version>
+      <Version>2.80.3</Version>
     </PackageReference>
     <PackageReference Include="SQLitePCLRaw.bundle_green">
       <Version>1.1.14</Version>

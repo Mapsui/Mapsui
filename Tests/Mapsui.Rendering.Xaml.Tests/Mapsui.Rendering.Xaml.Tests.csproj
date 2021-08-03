@@ -73,7 +73,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="SkiaSharp" Version="2.80.2">
+    <PackageReference Include="SkiaSharp" Version="2.80.3">
     </PackageReference>
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
     <PackageReference Include="System.Memory" Version="4.5.4">
