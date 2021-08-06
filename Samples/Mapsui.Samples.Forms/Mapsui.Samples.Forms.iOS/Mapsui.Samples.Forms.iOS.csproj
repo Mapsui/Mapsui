@@ -157,7 +157,7 @@
       <Version>4.5.0.6</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>5.0.0.1905</Version>
+      <Version>5.0.0.2083</Version>
     </PackageReference>
     <PackageReference Include="sqlite-net-pcl">
       <Version>1.6.292</Version>
