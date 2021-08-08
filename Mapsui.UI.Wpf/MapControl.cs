@@ -37,7 +37,7 @@ namespace Mapsui.UI.Wpf
         private bool _hasBeenManipulated;
         private double _innerRotation;
         private readonly FlingTracker _flingTracker = new FlingTracker();
-        
+
         public MouseWheelAnimation MouseWheelAnimation { get; } = new MouseWheelAnimation();
 
         /// <summary>
@@ -76,6 +76,10 @@ namespace Mapsui.UI.Wpf
 
             RenderMode = RenderMode.Skia;
         }
+
+        public void RemoveMouseMoveHandler() => MouseMove -= new MouseEventHandler(MapControlMouseMove);
+
+        public void AddMouseMoveHandler() => MouseMove += new MouseEventHandler(MapControlMouseMove);
 
         protected override void OnRender(DrawingContext dc)
         {
