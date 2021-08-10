@@ -16,6 +16,7 @@
     <dependencies>
       <!-- [ or ] is including, ( or ) is excluding -->
       <group targetFramework="net48">
+        <dependency id="Mapsui" version="$version$"/>
         <dependency id="BruTile" version="[4.0.0,5.0.0)"/>
         <dependency id="Newtonsoft.json" version="[11.0.1,)"/>
         <dependency id="SkiaSharp" version="[2.80.2,3.0.0)"/>
@@ -24,6 +25,7 @@
         <dependency id="Topten.RichTextKit" version="[0.4.139,0.5)"/>
       </group>
       <group targetFramework="uap">
+        <dependency id="Mapsui" version="$version$"/>
         <dependency id="BruTile" version="[4.0.0,5.0.0)"/>
         <dependency id="Newtonsoft.json" version="[11.0.1,)"/>
         <dependency id="SkiaSharp" version="[2.80.2,3.0.0)"/>
@@ -32,6 +34,7 @@
         <dependency id="Topten.RichTextKit" version="[0.4.139,0.5)"/>
       </group>
       <group targetFramework="MonoAndroid">
+        <dependency id="Mapsui" version="$version$"/>
         <dependency id="BruTile" version="[4.0.0,5.0.0)"/>
         <dependency id="Newtonsoft.json" version="[11.0.1,)"/>
         <dependency id="SkiaSharp" version="[2.80.2,3.0.0)"/>
@@ -40,6 +43,7 @@
         <dependency id="Topten.RichTextKit" version="[0.4.139,0.5)"/>
       </group>
       <group targetFramework="Xamarin.iOS">
+        <dependency id="Mapsui" version="$version$"/>
         <dependency id="BruTile" version="[4.0.0,5.0.0)"/>
         <dependency id="Newtonsoft.json" version="[11.0.1,)"/>
         <dependency id="SkiaSharp" version="[2.80.2,3.0.0)"/>
