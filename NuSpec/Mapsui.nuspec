@@ -55,27 +55,22 @@
   </metadata>
   <files>
 
-    <file src="..\Mapsui\bin\Release\netstandard2.0\Mapsui.Geometries.dll" target="lib\netstandard2.0\Mapsui.Geometries.dll" />
     <file src="..\Mapsui\bin\Release\netstandard2.0\Mapsui.dll" target="lib\netstandard2.0\Mapsui.dll" />
     <file src="..\Mapsui.Rendering.Skia\bin\Release\netstandard2.0\Mapsui.Rendering.Skia.dll" target="lib\netstandard2.0\Mapsui.Rendering.Skia.dll" />
 
-    <file src="..\Mapsui.UI.Wpf\bin\Release\net48\Mapsui.Geometries.dll" target="lib\net48\Mapsui.Geometries.dll" />
     <file src="..\Mapsui.UI.Wpf\bin\Release\net48\Mapsui.dll" target="lib\net48\Mapsui.dll" />
     <file src="..\Mapsui.UI.Wpf\bin\Release\net48\Mapsui.Rendering.Xaml.dll" target="lib\net48\Mapsui.Rendering.Xaml.dll" />
     <file src="..\Mapsui.UI.Wpf\bin\Release\net48\Mapsui.Rendering.Skia.dll" target="lib\net48\Mapsui.Rendering.Skia.dll" />
     <file src="..\Mapsui.UI.Wpf\bin\Release\net48\Mapsui.UI.Wpf.dll" target="lib\net48\Mapsui.UI.Wpf.dll" />
 
-    <file src="..\Mapsui.UI.Uwp\bin\Release\Mapsui.Geometries.dll" target="lib\uap\Mapsui.Geometries.dll" />
     <file src="..\Mapsui.UI.Uwp\bin\Release\Mapsui.dll" target="lib\uap\Mapsui.dll" />
     <file src="..\Mapsui.UI.Uwp\bin\Release\Mapsui.Rendering.Skia.dll" target="lib\uap\Mapsui.Rendering.Skia.dll" />
     <file src="..\Mapsui.UI.Uwp\bin\Release\Mapsui.UI.Uwp.dll" target="lib\uap\Mapsui.UI.Uwp.dll" />
 
-    <file src="..\Mapsui.UI.Android\bin\Release\Mapsui.Geometries.dll" target="lib\MonoAndroid\Mapsui.Geometries.dll" />
     <file src="..\Mapsui.UI.Android\bin\Release\Mapsui.dll" target="lib\MonoAndroid\Mapsui.dll" />
     <file src="..\Mapsui.UI.Android\bin\Release\Mapsui.Rendering.Skia.dll" target="lib\MonoAndroid\Mapsui.Rendering.Skia.dll" />
     <file src="..\Mapsui.UI.Android\bin\Release\Mapsui.UI.Android.dll" target="lib\MonoAndroid\Mapsui.UI.Android.dll" />
 
-    <file src="..\Mapsui.UI.iOS\bin\Release\Mapsui.Geometries.dll" target="lib\Xamarin.iOS\Mapsui.Geometries.dll" />
     <file src="..\Mapsui.UI.iOS\bin\Release\Mapsui.dll" target="lib\Xamarin.iOS\Mapsui.dll" />
     <file src="..\Mapsui.UI.iOS\bin\Release\Mapsui.Rendering.Skia.dll" target="lib\Xamarin.iOS\Mapsui.Rendering.Skia.dll" />
     <file src="..\Mapsui.UI.iOS\bin\Release\Mapsui.UI.iOS.dll" target="lib\Xamarin.iOS\Mapsui.UI.iOS.dll" />
