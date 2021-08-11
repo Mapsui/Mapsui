@@ -31,7 +31,6 @@
     <EmbeddedResource Include="Resources\SampleTiles\1_1_1.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Mapsui.Geometries\Mapsui.Geometries.csproj" />
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />
     <ProjectReference Include="..\..\Samples\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
     <ProjectReference Include="..\..\Samples\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />

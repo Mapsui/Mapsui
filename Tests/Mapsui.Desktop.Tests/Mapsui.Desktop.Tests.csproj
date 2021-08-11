@@ -26,6 +26,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.Geometries\Mapsui.Geometries.csproj" />
+    <ProjectReference Include="..\..\Mapsui.Desktop\Mapsui.Desktop.csproj" />
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />
   </ItemGroup>
   <ItemGroup>
