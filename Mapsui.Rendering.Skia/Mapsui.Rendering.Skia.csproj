@@ -9,7 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="SkiaSharp" Version="2.80.3" />
-    <PackageReference Include="Svg.Skia" Version="0.5.0" />
+    <PackageReference Include="Svg.Skia" Version="0.5.7.1" />
     <PackageReference Include="Topten.RichTextKit" Version="0.4.139" />
   </ItemGroup>
 
