@@ -40,6 +40,7 @@ namespace Mapsui.Samples.Forms.Shared
                         Color = new Color(_random.Next(0, 256) / 256.0, _random.Next(0, 256) / 256.0, _random.Next(0, 256) / 256.0),
                         Transparency = 0.5f,
                         Scale = _random.Next(50, 130) / 100f,
+                        RotateWithMap = true,
                     };
                     pin.Callout.Anchor = new Point(0, pin.Height * pin.Scale);
                     pin.Callout.RectRadius = _random.Next(0, 10);

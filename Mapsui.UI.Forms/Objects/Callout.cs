@@ -613,6 +613,7 @@ namespace Mapsui.UI.Forms
             style.BackgroundColor = BackgroundColor.ToMapsui(); ;
             style.Color = Color.ToMapsui();
             style.SymbolOffset = new Offset(Anchor.X, Anchor.Y);
+            style.SymbolOffsetRotatesWithMap = _pin.RotateWithMap;
             style.Padding = new BoundingBox(Padding.Left, Padding.Top, Padding.Right, Padding.Bottom);
             style.RectRadius = (float)RectRadius;
             style.RotateWithMap = RotateWithMap;
