@@ -119,6 +119,7 @@ namespace Mapsui.Samples.Common.Maps
             featureWithColors.Styles.Add(new LabelStyle
             {
                 Text = "Long line break mode test",
+                Font = new Font { FontFamily = "Courier New", Bold = true, Italic = true, },
                 BackColor = new Brush(Color.Transparent),
                 ForeColor = Color.White,
                 Halo = new Pen(Color.Black, 2),
@@ -135,6 +136,7 @@ namespace Mapsui.Samples.Common.Maps
             featureWithColors.Styles.Add(new LabelStyle
             {
                 Text = "Long line break mode test",
+                Font = new Font { Size = 16, Bold = true, Italic = false, },
                 BackColor = new Brush(Color.Transparent),
                 ForeColor = Color.White,
                 Halo = new Pen(Color.Black, 2),
@@ -151,6 +153,7 @@ namespace Mapsui.Samples.Common.Maps
             featureWithColors.Styles.Add(new LabelStyle
             {
                 Text = "Long line break mode test",
+                Font = new Font { Size = 30 },
                 BackColor = new Brush(Color.Transparent),
                 ForeColor = Color.White,
                 Halo = new Pen(Color.Black, 2),

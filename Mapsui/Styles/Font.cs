@@ -7,7 +7,10 @@ namespace Mapsui.Styles
         private bool _italic;
         private bool _bold;
 
-        public Font(){}
+        public Font()
+        {
+            _size = 10;
+        }
 
         public Font(Font font)
         {
@@ -72,5 +75,9 @@ namespace Mapsui.Styles
 
         public bool Invalidated { get; set; }
 
+        public override string ToString()
+        {
+            return (string.IsNullOrEmpty(_fontFamily) ? "unknown" : _fontFamily) + ", size=" + _size + ", bold=" + _bold + ", italic=" + _italic;
+        }
     }
 }
