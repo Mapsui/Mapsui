@@ -28,10 +28,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using Mapsui.Geometries;
-using Mapsui.Providers;
 using Mapsui.Rendering;
 
-namespace Mapsui.Desktop.Wms
+namespace Mapsui.Providers.Wms
 {
     /// <summary>
     /// Web Map Service layer

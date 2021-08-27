@@ -11,7 +11,7 @@ using Mapsui.Geometries;
 using Mapsui.Logging;
 using Mapsui.Styles;
 
-namespace Mapsui.Desktop.Wms
+namespace Mapsui.Providers.Wms
 {
     /// <summary>
     /// Class for requesting and parsing a WMS servers capabilities

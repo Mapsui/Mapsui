@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace Mapsui.Desktop.Wms
+namespace Mapsui.Providers.Wms
 {
     public interface IGetFeatureInfoParser
     {

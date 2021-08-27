@@ -5,7 +5,7 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace Mapsui.Desktop.Wms
+namespace Mapsui.Providers.Wms
 {
     public class GmlGetFeatureInfoParser : IGetFeatureInfoParser
     {

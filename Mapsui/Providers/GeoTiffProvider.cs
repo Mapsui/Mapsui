@@ -7,12 +7,11 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using Mapsui.Geometries;
-using Mapsui.Providers;
 using Mapsui.Styles;
 using Bitmap = System.Drawing.Bitmap;
 using Color = System.Drawing.Color;
 
-namespace Mapsui.Desktop.GeoTiff
+namespace Mapsui.Providers
 {
     public class GeoTiffProvider : IProvider
     {
