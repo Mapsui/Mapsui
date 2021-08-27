@@ -1,0 +1,86 @@
+name: ci/github-actions
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+
+  macBuild:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - uses: nuget/setup-nuget@v1
+    # - name: Set default Xamarin SDK versions
+    #   run: |
+    #     $VM_ASSETS/select-xamarin-sdk-v2.sh --mono=6.12 --ios=14.14 --android=11.1
+    # - name: Set default Xcode 12.4
+    #   run: |
+    #     XCODE_ROOT=/Applications/Xcode_12.4.app
+    #     echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV
+    #     sudo xcode-select -s $XCODE_ROOT
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - name: Restore dependencies
+      run: nuget restore Mapsui.Mac.sln
+    - name: Build Mapsui
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui/Mapsui.csproj
+    - name: Build Mapsui.Rendering.Skia
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Rendering.Skia/Mapsui.Rendering.Skia.csproj
+    - name: Build Mapsui.UI.Android
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Android/Mapsui.UI.Android.csproj
+    - name: Build Mapsui.UI.iOS
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.iOS/Mapsui.UI.iOS.csproj
+    - name: Build Mapsui.UI.Forms
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Forms/Mapsui.UI.Forms.csproj
+    - name: Generate nuget package (Mapsui)
+      run: nuget pack NuSpec/Mapsui.Mac.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
+    - name: Generate nuget package (Mapsui.Forms)
+      run: nuget pack NuSpec/Mapsui.Forms.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
+    - name: Upload packages
+      uses: actions/upload-artifact@v2
+      with:
+        name: nupkg.mac
+        path: Artifacts/*.nupkg
+
+  winBuild:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - uses: nuget/setup-nuget@v1
+    - uses: microsoft/setup-msbuild@v1.0.2
+    - name: Restore dependencies
+      run: nuget restore Mapsui.sln
+    - name: Build Mapsui
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui/Mapsui.csproj
+    - name: Build Mapsui.Rendering.Skia
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Rendering.Skia/Mapsui.Rendering.Skia.csproj
+    - name: Build Mapsui.UI.Wpf
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Wpf/Mapsui.UI.Wpf.csproj
+    - name: Build Mapsui.UI.Uwp
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Uwp/Mapsui.UI.Uwp.csproj
+    - name: Build Mapsui.UI.Android
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Android/Mapsui.UI.Android.csproj
+    - name: Build Mapsui.UI.iOS
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.iOS/Mapsui.UI.iOS.csproj
+    - name: Build Mapsui.UI.Forms
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Forms/Mapsui.UI.Forms.csproj
+    - name: Generate nuget package (Mapsui)
+      run: nuget pack NuSpec/Mapsui.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
+    - name: Generate nuget package (Mapsui.Forms)
+      run: nuget pack NuSpec/Mapsui.Forms.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
+    - name: Upload packages
+      uses: actions/upload-artifact@v2
+      with:
+        name: nupkg.win
+        path: Artifacts/*.nupkg
