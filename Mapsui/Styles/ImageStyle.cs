@@ -55,5 +55,10 @@ namespace Mapsui.Styles
         ///     <see cref="SymbolScale" />=1.0.
         /// </remarks>
         public Offset SymbolOffset { get; set; }
+
+        /// <summary>
+        /// Should SymbolOffset position rotate with map
+        /// </summary>
+        public bool SymbolOffsetRotatesWithMap { get; set; }
     }
 }

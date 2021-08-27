@@ -35,7 +35,18 @@ namespace Mapsui.Rendering.Skia
             var symbolOffsetY = calloutStyle.SymbolOffset.IsRelative ? picture.CullRect.Height * (float)calloutStyle.SymbolOffset.Y : (float)calloutStyle.SymbolOffset.Y;
 
             var rotation = (float)calloutStyle.SymbolRotation;
-            if (calloutStyle.RotateWithMap) rotation += (float)viewport.Rotation;
+            
+            if (viewport.Rotation != 0 && calloutStyle.RotateWithMap) 
+                rotation += (float)viewport.Rotation;
+            
+            if (viewport.Rotation != 0 && calloutStyle.SymbolOffsetRotatesWithMap)
+            { 
+                var mapRotation = viewport.Rotation / 180.0 * Math.PI;
+                var x = Math.Cos(mapRotation) * symbolOffsetX - Math.Sin(mapRotation) * symbolOffsetY;
+                var y = Math.Sin(mapRotation) * symbolOffsetX + Math.Cos(mapRotation) * symbolOffsetY;
+                symbolOffsetX = (float)x;
+                symbolOffsetY = (float)y;
+            }
 
             // Save state of the canvas, so we could move and rotate the canvas
             canvas.Save();
