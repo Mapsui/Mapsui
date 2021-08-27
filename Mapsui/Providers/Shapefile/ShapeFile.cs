@@ -152,7 +152,7 @@ namespace Mapsui.Providers.Shapefile
         /// </remarks>
         /// <returns>true if this feature should be included, false if it should be filtered</returns>
         public delegate bool FilterMethod(IFeature dr);
-        
+
         private BoundingBox _envelope;
         private int _featureCount;
         private readonly bool _fileBasedIndex;
@@ -226,7 +226,8 @@ namespace Mapsui.Providers.Shapefile
             {
                 if (value != _filename)
                 {
-                    lock (_syncRoot) {
+                    lock (_syncRoot)
+                    {
                         _filename = value;
                     }
                     if (_isOpen)
@@ -280,7 +281,7 @@ namespace Mapsui.Providers.Shapefile
         /// <seealso cref="FilterMethod"/>
         public FilterMethod FilterDelegate { get; set; }
 
-        
+
         private bool _disposed;
 
         /// <summary>
@@ -314,8 +315,8 @@ namespace Mapsui.Providers.Shapefile
             Dispose();
         }
 
-        
-        
+
+
         /// <summary>
         /// Opens the datasource
         /// </summary>
@@ -370,21 +371,35 @@ namespace Mapsui.Providers.Shapefile
         /// <returns></returns>
         public Collection<IGeometry> GetGeometriesInView(BoundingBox bbox)
         {
-            //Use the spatial index to get a list of features whose boundingbox intersects bbox
-            Collection<uint> objectlist = GetObjectIDsInView(bbox);
-            if (objectlist.Count == 0) //no features found. Return an empty set
-                return new Collection<IGeometry>();
-
-            //Collection<Mapsui.Geometries.Geometry> geometries = new Collection<Mapsui.Geometries.Geometry>(objectlist.Count);
-            var geometries = new Collection<IGeometry>();
-
-            for (int i = 0; i < objectlist.Count; i++)
+            lock (_syncRoot)
             {
-                IGeometry g = GetGeometry(objectlist[i]);
-                if (g != null) geometries.Add(g);
+                Open();
+
+                try
+                {
+                    //Use the spatial index to get a list of features whose boundingbox intersects bbox
+                    Collection<uint> objectlist = GetObjectIDsInViewPrivate(bbox);
+                    if (objectlist.Count == 0) //no features found. Return an empty set
+                        return new Collection<IGeometry>();
+
+                    //Collection<Mapsui.Geometries.Geometry> geometries = new Collection<Mapsui.Geometries.Geometry>(objectlist.Count);
+                    var geometries = new Collection<IGeometry>();
+
+                    for (int i = 0; i < objectlist.Count; i++)
+                    {
+                        IGeometry g = GetGeometryPrivate(objectlist[i]);
+                        if (g != null) geometries.Add(g);
+                    }
+                    return geometries;
+                }
+                finally
+                {
+                    Close();
+                }
             }
-            return geometries;
+
         }
+
 
         /// <summary>
         /// Returns geometry Object IDs whose bounding box intersects 'bbox'
@@ -392,6 +407,24 @@ namespace Mapsui.Providers.Shapefile
         /// <param name="bbox"></param>
         /// <returns></returns>
         public Collection<uint> GetObjectIDsInView(BoundingBox bbox)
+        {
+            lock (_syncRoot)
+            {
+                Open();
+
+                try
+                {
+                    return GetObjectIDsInViewPrivate(bbox);
+                }
+                finally
+                {
+                    Close();
+                }
+            }
+
+        }
+
+        private Collection<uint> GetObjectIDsInViewPrivate(BoundingBox bbox)
         {
             if (!_isOpen)
                 throw (new ApplicationException("An attempt was made to read from a closed datasource"));
@@ -405,6 +438,23 @@ namespace Mapsui.Providers.Shapefile
         /// <param name="oid">Object ID</param>
         /// <returns>geometry</returns>
         public IGeometry GetGeometry(uint oid)
+        {
+            lock (_syncRoot)
+            {
+                Open();
+
+                try
+                {
+                    return GetGeometryPrivate(oid);
+                }
+                finally
+                {
+                    Close();
+                }
+            }
+        }
+
+        private IGeometry GetGeometryPrivate(uint oid)
         {
             if (FilterDelegate != null) //Apply filtering
             {
@@ -458,7 +508,7 @@ namespace Mapsui.Providers.Shapefile
             set { _crs = value; }
         }
 
-        
+
         private void InitializeShape(string filename, bool fileBasedIndex)
         {
             if (!File.Exists(filename))
@@ -839,7 +889,7 @@ namespace Mapsui.Providers.Shapefile
             throw (new ApplicationException("An attempt was made to read DBase data from a shapefile without a valid .DBF file"));
         }
 
-        
+
         public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
             lock (_syncRoot)
@@ -848,7 +898,7 @@ namespace Mapsui.Providers.Shapefile
                 try
                 {
                     //Use the spatial index to get a list of features whose boundingbox intersects bbox
-                    var objectlist = GetObjectIDsInView(box);
+                    var objectlist = GetObjectIDsInViewPrivate(box);
                     var features = new Features();
 
                     foreach (var index in objectlist)
@@ -869,5 +919,5 @@ namespace Mapsui.Providers.Shapefile
             }
         }
 
-            }
+    }
 }
