@@ -272,10 +272,13 @@ namespace Mapsui.Rendering.Skia
 
         private static void UpdatePaint(LabelStyle style, float layerOpacity)
         {
-            if (!CacheTypeface.TryGetValue(style.Font.FontFamily, out SKTypeface typeface))
+            if (!CacheTypeface.TryGetValue(style.Font.ToString(), out SKTypeface typeface))
             {
-                typeface = SKTypeface.FromFamilyName(style.Font.FontFamily);
-                CacheTypeface[style.Font.FontFamily] = typeface;
+                typeface = SKTypeface.FromFamilyName(style.Font.FontFamily,
+                    style.Font.Bold ? SKFontStyleWeight.Bold : SKFontStyleWeight.Normal,
+                    SKFontStyleWidth.Normal,
+                    style.Font.Italic ? SKFontStyleSlant.Italic : SKFontStyleSlant.Upright);
+                CacheTypeface[style.Font.ToString()] = typeface;
             }
 
             Paint.Style = SKPaintStyle.Fill;
