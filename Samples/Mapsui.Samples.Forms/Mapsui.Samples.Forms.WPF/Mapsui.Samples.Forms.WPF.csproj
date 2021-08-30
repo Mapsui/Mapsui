@@ -23,18 +23,16 @@
     </PackageReference>
     <PackageReference Include="OpenTK.GLControl" Version="3.1.0">
     </PackageReference>
-    <PackageReference Include="SkiaSharp.Views.Forms.WPF" Version="2.80.2">
+    <PackageReference Include="SkiaSharp.Views.Forms.WPF" Version="2.80.3">
     </PackageReference>
     <PackageReference Include="SQLitePCLRaw.bundle_green" Version="1.1.14">
     </PackageReference>
-    <PackageReference Include="Svg.Skia" Version="0.5.0">
+    <PackageReference Include="Svg.Skia" Version="0.5.7.1">
     </PackageReference>
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
     <PackageReference Include="System.Memory" Version="4.5.4">
     </PackageReference>
     <PackageReference Include="System.Net.Http" Version="4.3.4">
-    </PackageReference>
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.7.1">
     </PackageReference>
     <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.1">
     </PackageReference>

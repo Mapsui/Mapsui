@@ -108,9 +108,9 @@
     </PackageReference>
     <PackageReference Include="OpenTK.GLControl" Version="3.1.0">
     </PackageReference>
-    <PackageReference Include="SkiaSharp.Views" Version="2.80.2">
+    <PackageReference Include="SkiaSharp.Views" Version="2.80.3">
     </PackageReference>
-    <PackageReference Include="Svg.Skia" Version="0.5.0">
+    <PackageReference Include="Svg.Skia" Version="0.5.7.1">
     </PackageReference>
     <PackageReference Include="System.AppContext" Version="4.3.0">
     </PackageReference>
@@ -161,8 +161,6 @@
     <PackageReference Include="System.Resources.ResourceManager" Version="4.3.0">
     </PackageReference>
     <PackageReference Include="System.Runtime" Version="4.3.1">
-    </PackageReference>
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="4.7.1">
     </PackageReference>
     <PackageReference Include="System.Runtime.Extensions" Version="4.3.1">
     </PackageReference>
