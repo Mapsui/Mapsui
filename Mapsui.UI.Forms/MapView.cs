@@ -706,11 +706,8 @@ namespace Mapsui.UI.Forms
             if (layer == MyLocationLayer || layer == _mapDrawableLayer || layer == _mapPinLayer || layer == _mapCalloutLayer)
                 return;
 
-            // Remove MapView layers
-            RemoveLayers();
-
-            // Readd them, so that they always on top
-            AddLayers();
+            // Readd MapView layers, so that they always on top
+            ReAddLayers();
         }
 
         private void HandlerMultipleLayersChanged(IEnumerable<ILayer> layers)
@@ -719,11 +716,8 @@ namespace Mapsui.UI.Forms
             if (localLayers.Contains(MyLocationLayer) || localLayers.Contains(_mapDrawableLayer) || localLayers.Contains(_mapPinLayer) || localLayers.Contains(_mapCalloutLayer))
                 return;
 
-            // Remove MapView layers
-            RemoveLayers();
-
-            // Readd them, so that they always on top
-            AddLayers();
+            // Readd MapView layers, so that they always on top
+            ReAddLayers();
         }
 
         private void HandlerMultipleLayersModified(IEnumerable<ILayer> layersRemoved, IEnumerable<ILayer> layersAdded)
@@ -735,11 +729,8 @@ namespace Mapsui.UI.Forms
                 localAddedLayers.Contains(MyLocationLayer) || localAddedLayers.Contains(_mapDrawableLayer) || localAddedLayers.Contains(_mapPinLayer) || localAddedLayers.Contains(_mapCalloutLayer))
                 return;
 
-            // Remove MapView layers
-            RemoveLayers();
-
-            // Readd them, so that they always on top
-            AddLayers();
+            // Readd MapView layers, so that they always on top
+            ReAddLayers();
         }
 
         private void HandlerPinsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -1030,6 +1021,18 @@ namespace Mapsui.UI.Forms
         {
             // Remove MapView layers
             _mapControl.Map.Layers.RemoveMultiple(new[] { MyLocationLayer, _mapCalloutLayer, _mapPinLayer, _mapDrawableLayer });
+        }
+
+        /// <summary>
+        /// Re-adds all layers that MapView uses
+        /// </summary>
+        private void ReAddLayers()
+        {
+            // Remove MapView layers
+            RemoveLayers();
+
+            // Readd them, so that they always on top
+            AddLayers();
         }
 
         /// <summary>

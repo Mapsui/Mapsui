@@ -134,48 +134,69 @@ namespace Mapsui.Layers
         public void AddMultiple(IEnumerable<ILayer> layers)
         {
             var copy = layers?.ToArray().ToList();
-            if (copy == null || !copy.Any()) throw new ArgumentException("Layers cannot be null or empty");
 
-            foreach (var layer in copy)
-                _layers.Enqueue(layer);
-
+            MassAddLayers(copy);
             OnMultipleLayersAdded(copy);
         }
 
         public bool RemoveMultiple(IEnumerable<ILayer> layers)
         {
             var inputCopy = layers?.ToArray().ToList();
-            var copy = _layers.ToArray().ToList();
 
             var success = inputCopy != null;
             if (inputCopy != null)
-            {
-                foreach (var layer in inputCopy)
-                {
-                    if (!copy.Remove(layer))
-                        success = false;
-
-                    if (layer is IAsyncDataFetcher asyncLayer)
-                    {
-                        asyncLayer.AbortFetch();
-                        asyncLayer.ClearCache();
-                    }
-                }
-            }
-
-            _layers = new ConcurrentQueue<ILayer>(copy);
-
+                success = MassRemoveLayers(inputCopy);
+            
             OnMultipleLayersRemoved(inputCopy);
             return success;
         }
 
         public bool RemoveMultiple(Func<ILayer, bool> predicate)
         {
-            var copy = _layers.ToArray().ToList();
-            var inputCopy = copy.Where(predicate).ToList();
+            var inputCopy = _layers.ToArray().Where(predicate).ToList();
+            var success = MassRemoveLayers(inputCopy);
 
+            OnMultipleLayersRemoved(inputCopy);
+            return success;
+        }
+
+        public void ModifyMultiple(IEnumerable<ILayer> layersToRemove, IEnumerable<ILayer> layersToAdd)
+        {
+            var copyLayersToRemove = layersToRemove?.ToArray().ToList();
+            var copyLayersToAdd = layersToAdd?.ToArray().ToList();
+
+            MassRemoveLayers(copyLayersToRemove);
+            MassAddLayers(copyLayersToAdd);
+
+            OnMultipleLayersModified(copyLayersToRemove, copyLayersToAdd);
+        }
+
+        public void ModifyMultiple(Func<ILayer, bool> removePredicate, IEnumerable<ILayer> layersToAdd)
+        {
+            var copyLayersToRemove = _layers.ToArray().Where(removePredicate).ToList();
+            var copyLayersToAdd = layersToAdd?.ToArray().ToList();
+
+            MassRemoveLayers(copyLayersToRemove);
+            MassAddLayers(copyLayersToAdd);
+
+            OnMultipleLayersModified(copyLayersToRemove, copyLayersToAdd);
+        }
+
+        private void MassAddLayers(IList<ILayer> layers)
+        {
+            if (layers == null || !layers.Any()) 
+                throw new ArgumentException("Layers cannot be null or empty");
+
+            foreach (var layer in layers)
+                _layers.Enqueue(layer);
+        }
+
+        private bool MassRemoveLayers(IList<ILayer> layers)
+        {
+            var copy = _layers.ToArray().ToList();
             var success = true;
-            foreach (var layer in inputCopy)
+
+            foreach (var layer in layers)
             {
                 if (!copy.Remove(layer))
                     success = false;
@@ -188,66 +209,7 @@ namespace Mapsui.Layers
             }
 
             _layers = new ConcurrentQueue<ILayer>(copy);
-
-            OnMultipleLayersRemoved(inputCopy);
             return success;
-        }
-
-        public void ModifyMultiple(IEnumerable<ILayer> layersToRemove, IEnumerable<ILayer> layersToAdd)
-        {
-            var copyLayersToRemove = layersToRemove?.ToArray().ToList();
-            var copyLayersToAdd = layersToAdd?.ToArray().ToList();
-
-            if (copyLayersToAdd == null || !copyLayersToAdd.Any()) 
-                throw new ArgumentException("Layers cannot be null or empty");
-
-            var copy = _layers.ToArray().ToList();
-
-            if (layersToRemove != null)
-            {
-                foreach (var layer in copyLayersToRemove)
-                {
-                    copy.Remove(layer);
-                    if (layer is IAsyncDataFetcher asyncLayer)
-                    {
-                        asyncLayer.AbortFetch();
-                        asyncLayer.ClearCache();
-                    }
-                }
-            }
-
-            _layers = new ConcurrentQueue<ILayer>(copy);
-            foreach (var layer in copyLayersToAdd)
-                _layers.Enqueue(layer);
-
-            OnMultipleLayersModified(copyLayersToRemove, copyLayersToAdd);
-        }
-
-        public void ModifyMultiple(Func<ILayer, bool> removePredicate, IEnumerable<ILayer> layersToAdd)
-        {
-            var copy = _layers.ToArray().ToList();
-
-            var copyLayersToRemove = copy.Where(removePredicate).ToList();
-            var copyLayersToAdd = layersToAdd?.ToArray().ToList();
-
-            if (copyLayersToAdd == null || !copyLayersToAdd.Any()) 
-                throw new ArgumentException("Layers cannot be null or empty");
-            
-            foreach (var layer in copyLayersToRemove)
-            {
-                copy.Remove(layer);
-                if (layer is IAsyncDataFetcher asyncLayer)
-                {
-                    asyncLayer.AbortFetch();
-                    asyncLayer.ClearCache();
-                }
-            }
-
-            _layers = new ConcurrentQueue<ILayer>(copy);
-            foreach (var layer in copyLayersToAdd)
-                _layers.Enqueue(layer);
-
-            OnMultipleLayersModified(copyLayersToRemove, copyLayersToAdd);
         }
 
         private void OnLayerRemoved(ILayer layer)

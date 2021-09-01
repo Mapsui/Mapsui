@@ -232,84 +232,63 @@ namespace Mapsui
 
         private void LayersLayerAdded(ILayer layer)
         {
-            layer.DataChanged += LayerDataChanged;
-            layer.PropertyChanged += LayerPropertyChanged;
-
-            layer.Transformation = Transformation;
-            layer.CRS = CRS;
-            Resolutions = DetermineResolutions(Layers);
-            OnPropertyChanged(nameof(Layers));
+            LayerAdded(layer);
+            LayersChanged();
         }
 
         private void LayersLayerRemoved(ILayer layer)
         {
-            if (layer is IAsyncDataFetcher asyncLayer)
-            {
-                asyncLayer.AbortFetch();
-            }
-
-            layer.DataChanged -= LayerDataChanged;
-            layer.PropertyChanged -= LayerPropertyChanged;
-
-            Resolutions = DetermineResolutions(Layers);
-
-            OnPropertyChanged(nameof(Layers));
+            LayerRemoved(layer);
+            LayersChanged();
         }
 
         private void LayersMultipleLayersAdded(IEnumerable<ILayer> layers)
         {
             foreach (var layer in layers)
-            {
-                layer.DataChanged += LayerDataChanged;
-                layer.PropertyChanged += LayerPropertyChanged;
+                LayerAdded(layer);
 
-                layer.Transformation = Transformation;
-                layer.CRS = CRS;
-            }
-
-            Resolutions = DetermineResolutions(Layers);
-            OnPropertyChanged(nameof(Layers));
+            LayersChanged();
         }
 
         private void LayersMultipleLayersRemoved(IEnumerable<ILayer> layers)
         {
             foreach (var layer in layers)
-            {
-                if (layer is IAsyncDataFetcher asyncLayer)
-                {
-                    asyncLayer.AbortFetch();
-                }
+                LayerRemoved(layer);
 
-                layer.DataChanged -= LayerDataChanged;
-                layer.PropertyChanged -= LayerPropertyChanged;
-            }
-
-            Resolutions = DetermineResolutions(Layers);
-            OnPropertyChanged(nameof(Layers));
+            LayersChanged();
         }
 
         private void LayersMultipleLayersModified(IEnumerable<ILayer> layersRemoved, IEnumerable<ILayer> layersAdded)
         {
             foreach (var layer in layersRemoved)
-            {
-                if (layer is IAsyncDataFetcher asyncLayer)
-                {
-                    asyncLayer.AbortFetch();
-                }
-
-                layer.DataChanged -= LayerDataChanged;
-                layer.PropertyChanged -= LayerPropertyChanged;
-            }
+                LayerRemoved(layer);
 
             foreach (var layer in layersAdded)
-            {
-                layer.DataChanged += LayerDataChanged;
-                layer.PropertyChanged += LayerPropertyChanged;
+                LayerAdded(layer);
 
-                layer.Transformation = Transformation;
-                layer.CRS = CRS;
-            }
+            LayersChanged();
+        }
 
+        private void LayerAdded(ILayer layer)
+        {
+            layer.DataChanged += LayerDataChanged;
+            layer.PropertyChanged += LayerPropertyChanged;
+
+            layer.Transformation = Transformation;
+            layer.CRS = CRS;
+        }
+
+        private void LayerRemoved(ILayer layer)
+        {
+            if (layer is IAsyncDataFetcher asyncLayer)
+                asyncLayer.AbortFetch();
+
+            layer.DataChanged -= LayerDataChanged;
+            layer.PropertyChanged -= LayerPropertyChanged;
+        }
+
+        private void LayersChanged()
+        {
             Resolutions = DetermineResolutions(Layers);
             OnPropertyChanged(nameof(Layers));
         }
