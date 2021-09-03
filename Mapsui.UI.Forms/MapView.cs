@@ -92,13 +92,7 @@ namespace Mapsui.UI.Forms
             AddLayers();
 
             // Add some events to _mapControl.Map.Layers
-            _mapControl.Map.Layers.LayerAdded += HandlerLayerChanged;
-            _mapControl.Map.Layers.LayerMoved += HandlerLayerChanged;
-            _mapControl.Map.Layers.LayerRemoved += HandlerLayerChanged;
-
-            _mapControl.Map.Layers.MultipleLayersAdded += HandlerMultipleLayersChanged;
-            _mapControl.Map.Layers.MultipleLayersRemoved += HandlerMultipleLayersChanged;
-            _mapControl.Map.Layers.MultipleLayersModified += HandlerMultipleLayersModified;
+            _mapControl.Map.Layers.Changed += HandleLayersChanged;
 
             AbsoluteLayout.SetLayoutBounds(_mapControl, new Rectangle(0, 0, 1, 1));
             AbsoluteLayout.SetLayoutFlags(_mapControl, AbsoluteLayoutFlags.All);
@@ -700,37 +694,21 @@ namespace Mapsui.UI.Forms
         {
             ViewportInitialized?.Invoke(sender, e);
         }
-
-        private void HandlerLayerChanged(ILayer layer)
+        
+        private void HandleLayersChanged(object sender, LayerCollectionChangedEventArgs args)
         {
-            if (layer == MyLocationLayer || layer == _mapDrawableLayer || layer == _mapPinLayer || layer == _mapCalloutLayer)
-                return;
-
-            // Readd MapView layers, so that they always on top
-            ReAddLayers();
-        }
-
-        private void HandlerMultipleLayersChanged(IEnumerable<ILayer> layers)
-        {
-            var localLayers = layers.ToList();
-            if (localLayers.Contains(MyLocationLayer) || localLayers.Contains(_mapDrawableLayer) || localLayers.Contains(_mapPinLayer) || localLayers.Contains(_mapCalloutLayer))
-                return;
-
-            // Readd MapView layers, so that they always on top
-            ReAddLayers();
-        }
-
-        private void HandlerMultipleLayersModified(IEnumerable<ILayer> layersRemoved, IEnumerable<ILayer> layersAdded)
-        {
-            var localRemovedLayers = layersRemoved.ToList();
-            var localAddedLayers = layersAdded.ToList();
+            var localRemovedLayers = args.RemovedLayers?.ToList() ?? new List<ILayer>();
+            var localAddedLayers = args.AddedLayers?.ToList() ?? new List<ILayer>();
 
             if (localRemovedLayers.Contains(MyLocationLayer) || localRemovedLayers.Contains(_mapDrawableLayer) || localRemovedLayers.Contains(_mapPinLayer) || localRemovedLayers.Contains(_mapCalloutLayer) || 
                 localAddedLayers.Contains(MyLocationLayer) || localAddedLayers.Contains(_mapDrawableLayer) || localAddedLayers.Contains(_mapPinLayer) || localAddedLayers.Contains(_mapCalloutLayer))
                 return;
 
-            // Readd MapView layers, so that they always on top
-            ReAddLayers();
+            // Remove MapView layers
+            RemoveLayers();
+
+            // Readd them, so that they always on top
+            AddLayers();
         }
 
         private void HandlerPinsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -1011,7 +989,7 @@ namespace Mapsui.UI.Forms
         private void AddLayers()
         {
             // Add MapView layers
-            _mapControl.Map.Layers.AddMultiple(new [] { _mapDrawableLayer, _mapPinLayer, _mapCalloutLayer, MyLocationLayer });
+            _mapControl.Map.Layers.Add(_mapDrawableLayer, _mapPinLayer, _mapCalloutLayer, MyLocationLayer);
         }
 
         /// <summary>
@@ -1020,19 +998,7 @@ namespace Mapsui.UI.Forms
         private void RemoveLayers()
         {
             // Remove MapView layers
-            _mapControl.Map.Layers.RemoveMultiple(new[] { MyLocationLayer, _mapCalloutLayer, _mapPinLayer, _mapDrawableLayer });
-        }
-
-        /// <summary>
-        /// Re-adds all layers that MapView uses
-        /// </summary>
-        private void ReAddLayers()
-        {
-            // Remove MapView layers
-            RemoveLayers();
-
-            // Readd them, so that they always on top
-            AddLayers();
+            _mapControl.Map.Layers.Remove(MyLocationLayer, _mapCalloutLayer, _mapPinLayer, _mapDrawableLayer);
         }
 
         /// <summary>

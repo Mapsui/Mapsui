@@ -112,22 +112,10 @@ namespace Mapsui
             {
                 var tempLayers = _layers;
                 if (tempLayers != null)
-                {
-                    _layers.LayerAdded -= LayersLayerAdded;
-                    _layers.LayerRemoved -= LayersLayerRemoved;
-
-                    _layers.MultipleLayersAdded -= LayersMultipleLayersAdded;
-                    _layers.MultipleLayersRemoved -= LayersMultipleLayersRemoved;
-                    _layers.MultipleLayersModified -= LayersMultipleLayersModified;
-                }
+                    _layers.Changed -= LayersCollectionChanged;
 
                 _layers = value;
-                _layers.LayerAdded += LayersLayerAdded;
-                _layers.LayerRemoved += LayersLayerRemoved;
-
-                _layers.MultipleLayersAdded += LayersMultipleLayersAdded;
-                _layers.MultipleLayersRemoved += LayersMultipleLayersRemoved;
-                _layers.MultipleLayersModified += LayersMultipleLayersModified;
+                _layers.Changed += LayersCollectionChanged;
             }
         }
 
@@ -229,41 +217,13 @@ namespace Mapsui
                 layer.RefreshData(extent, resolution, changeType);
             }
         }
-
-        private void LayersLayerAdded(ILayer layer)
+        
+        private void LayersCollectionChanged(object sender, LayerCollectionChangedEventArgs args)
         {
-            LayerAdded(layer);
-            LayersChanged();
-        }
-
-        private void LayersLayerRemoved(ILayer layer)
-        {
-            LayerRemoved(layer);
-            LayersChanged();
-        }
-
-        private void LayersMultipleLayersAdded(IEnumerable<ILayer> layers)
-        {
-            foreach (var layer in layers)
-                LayerAdded(layer);
-
-            LayersChanged();
-        }
-
-        private void LayersMultipleLayersRemoved(IEnumerable<ILayer> layers)
-        {
-            foreach (var layer in layers)
+            foreach (var layer in args.RemovedLayers ?? Enumerable.Empty<ILayer>())
                 LayerRemoved(layer);
 
-            LayersChanged();
-        }
-
-        private void LayersMultipleLayersModified(IEnumerable<ILayer> layersRemoved, IEnumerable<ILayer> layersAdded)
-        {
-            foreach (var layer in layersRemoved)
-                LayerRemoved(layer);
-
-            foreach (var layer in layersAdded)
+            foreach (var layer in args.AddedLayers ?? Enumerable.Empty<ILayer>())
                 LayerAdded(layer);
 
             LayersChanged();

@@ -15,17 +15,13 @@ namespace Mapsui.Layers
         public delegate void LayerAddedEventHandler(ILayer layer);
         public delegate void LayerMovedEventHandler(ILayer layer);
 
-        public delegate void MultipleLayersRemovedEventHandler(IEnumerable<ILayer> layers);
-        public delegate void MultipleLayersAddedEventHandler(IEnumerable<ILayer> layers);
-        public delegate void MultipleLayersModifiedEventHandler(IEnumerable<ILayer> layersRemoved, IEnumerable<ILayer> layersAdded);
+        public delegate void LayerCollectionChangedEventHandler(object sender, LayerCollectionChangedEventArgs args);
 
         public event LayerRemovedEventHandler LayerRemoved;
         public event LayerAddedEventHandler LayerAdded;
         public event LayerMovedEventHandler LayerMoved;
 
-        public event MultipleLayersRemovedEventHandler MultipleLayersRemoved;
-        public event MultipleLayersAddedEventHandler MultipleLayersAdded;
-        public event MultipleLayersModifiedEventHandler MultipleLayersModified;
+        public event LayerCollectionChangedEventHandler Changed;
 
         public int Count => _layers.Count;
 
@@ -76,122 +72,97 @@ namespace Mapsui.Layers
 
         public ILayer this[int index] => _layers.ToArray()[index];
 
-        public void Add(ILayer layer)
+        public void Add(params ILayer[] layers)
         {
-            if (layer == null) throw new ArgumentException("Layer cannot be null");
-            
-            _layers.Enqueue(layer);
-            OnLayerAdded(layer);
+            AddLayers(layers);
+            OnChanged(layers, null);
         }
 
         public void Move(int index, ILayer layer)
         {
             var copy = _layers.ToArray().ToList();
             copy.Remove(layer);
+
             if (copy.Count() > index)
-            {
                 copy.Insert(index, layer);
-            }
             else
-            {
                 copy.Add(layer);
-            }
+
             _layers = new ConcurrentQueue<ILayer>(copy);
             OnLayerMoved(layer);
+            OnChanged(null, null, new [] { layer });
         }
 
-        public void Insert(int index, ILayer layer)
+        public void Insert(int index, params ILayer[] layers)
         {
+            if (layers == null || !layers.Any())
+                throw new ArgumentException("Layers cannot be null or empty");
+
             var copy = _layers.ToArray().ToList();
             if (copy.Count() > index)
-            {
-                copy.Insert(index, layer);
-            }
+                copy.InsertRange(index, layers);
             else
-            {
-                copy.Add(layer);
-            }
+                copy.AddRange(layers);
+
             _layers = new ConcurrentQueue<ILayer>(copy);
-            OnLayerAdded(layer);
+            foreach (var layer in layers)
+                OnLayerAdded(layer);
+
+            OnChanged(layers, null);
         }
 
-        public bool Remove(ILayer layer)
+        public bool Remove(params ILayer[] layers)
         {
-            var copy = _layers.ToArray().ToList();
-            var success = copy.Remove(layer);
-            _layers = new ConcurrentQueue<ILayer>(copy);
+            var success = RemoveLayers(layers);
+            OnChanged(null, layers);
 
-            if (layer is IAsyncDataFetcher asyncLayer)
-            {
-                asyncLayer.AbortFetch();
-                asyncLayer.ClearCache();
-            }
-
-            OnLayerRemoved(layer);
             return success;
         }
         
-        public void AddMultiple(IEnumerable<ILayer> layers)
+        public bool Remove(Func<ILayer, bool> predicate)
         {
-            var copy = layers?.ToArray().ToList();
+            var copyLayers = _layers.ToArray().Where(predicate).ToArray();
+            var success = RemoveLayers(copyLayers);
 
-            MassAddLayers(copy);
-            OnMultipleLayersAdded(copy);
-        }
-
-        public bool RemoveMultiple(IEnumerable<ILayer> layers)
-        {
-            var inputCopy = layers?.ToArray().ToList();
-
-            var success = inputCopy != null;
-            if (inputCopy != null)
-                success = MassRemoveLayers(inputCopy);
-            
-            OnMultipleLayersRemoved(inputCopy);
+            OnChanged(null, copyLayers);
             return success;
         }
 
-        public bool RemoveMultiple(Func<ILayer, bool> predicate)
+        public void Modify(IEnumerable<ILayer> layersToRemove, IEnumerable<ILayer> layersToAdd)
         {
-            var inputCopy = _layers.ToArray().Where(predicate).ToList();
-            var success = MassRemoveLayers(inputCopy);
+            var copyLayersToRemove = layersToRemove?.ToArray();
+            var copyLayersToAdd = layersToAdd?.ToArray();
 
-            OnMultipleLayersRemoved(inputCopy);
-            return success;
+            RemoveLayers(copyLayersToRemove);
+            AddLayers(copyLayersToAdd);
+
+            OnChanged(copyLayersToAdd, copyLayersToRemove);
         }
 
-        public void ModifyMultiple(IEnumerable<ILayer> layersToRemove, IEnumerable<ILayer> layersToAdd)
+        public void Modify(Func<ILayer, bool> removePredicate, IEnumerable<ILayer> layersToAdd)
         {
-            var copyLayersToRemove = layersToRemove?.ToArray().ToList();
-            var copyLayersToAdd = layersToAdd?.ToArray().ToList();
+            var copyLayersToRemove = _layers.ToArray().Where(removePredicate).ToArray();
+            var copyLayersToAdd = layersToAdd?.ToArray();
 
-            MassRemoveLayers(copyLayersToRemove);
-            MassAddLayers(copyLayersToAdd);
+            RemoveLayers(copyLayersToRemove);
+            AddLayers(copyLayersToAdd);
 
-            OnMultipleLayersModified(copyLayersToRemove, copyLayersToAdd);
+            OnChanged(copyLayersToAdd, copyLayersToRemove);
         }
 
-        public void ModifyMultiple(Func<ILayer, bool> removePredicate, IEnumerable<ILayer> layersToAdd)
-        {
-            var copyLayersToRemove = _layers.ToArray().Where(removePredicate).ToList();
-            var copyLayersToAdd = layersToAdd?.ToArray().ToList();
-
-            MassRemoveLayers(copyLayersToRemove);
-            MassAddLayers(copyLayersToAdd);
-
-            OnMultipleLayersModified(copyLayersToRemove, copyLayersToAdd);
-        }
-
-        private void MassAddLayers(IList<ILayer> layers)
+        private void AddLayers(ILayer[] layers)
         {
             if (layers == null || !layers.Any()) 
                 throw new ArgumentException("Layers cannot be null or empty");
 
             foreach (var layer in layers)
+            {
                 _layers.Enqueue(layer);
+                OnLayerAdded(layer);
+            }
         }
 
-        private bool MassRemoveLayers(IList<ILayer> layers)
+        private bool RemoveLayers(ILayer[] layers)
         {
             var copy = _layers.ToArray().ToList();
             var success = true;
@@ -209,6 +180,9 @@ namespace Mapsui.Layers
             }
 
             _layers = new ConcurrentQueue<ILayer>(copy);
+            foreach (var layer in layers)
+                OnLayerRemoved(layer);
+
             return success;
         }
 
@@ -227,19 +201,9 @@ namespace Mapsui.Layers
             LayerMoved?.Invoke(layer);
         }
 
-        private void OnMultipleLayersRemoved(IEnumerable<ILayer> layers)
+        private void OnChanged(IEnumerable<ILayer> added, IEnumerable<ILayer> removed, IEnumerable<ILayer> moved = null)
         {
-            MultipleLayersRemoved?.Invoke(layers);
-        }
-
-        private void OnMultipleLayersAdded(IEnumerable<ILayer> layers)
-        {
-            MultipleLayersAdded?.Invoke(layers);
-        }
-
-        private void OnMultipleLayersModified(IEnumerable<ILayer> layersRemoved, IEnumerable<ILayer> layersAdded)
-        {
-            MultipleLayersModified?.Invoke(layersRemoved, layersAdded);
+            Changed?.Invoke(this, new LayerCollectionChangedEventArgs(added, removed, moved));
         }
 
         public IEnumerable<ILayer> FindLayer(string layername)
