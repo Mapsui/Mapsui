@@ -92,9 +92,7 @@ namespace Mapsui.UI.Forms
             AddLayers();
 
             // Add some events to _mapControl.Map.Layers
-            _mapControl.Map.Layers.LayerAdded += HandlerLayerChanged;
-            _mapControl.Map.Layers.LayerMoved += HandlerLayerChanged;
-            _mapControl.Map.Layers.LayerRemoved += HandlerLayerChanged;
+            _mapControl.Map.Layers.Changed += HandleLayersChanged;
 
             AbsoluteLayout.SetLayoutBounds(_mapControl, new Rectangle(0, 0, 1, 1));
             AbsoluteLayout.SetLayoutFlags(_mapControl, AbsoluteLayoutFlags.All);
@@ -696,10 +694,14 @@ namespace Mapsui.UI.Forms
         {
             ViewportInitialized?.Invoke(sender, e);
         }
-
-        private void HandlerLayerChanged(ILayer layer)
+        
+        private void HandleLayersChanged(object sender, LayerCollectionChangedEventArgs args)
         {
-            if (layer == MyLocationLayer || layer == _mapDrawableLayer || layer == _mapPinLayer || layer == _mapCalloutLayer)
+            var localRemovedLayers = args.RemovedLayers?.ToList() ?? new List<ILayer>();
+            var localAddedLayers = args.AddedLayers?.ToList() ?? new List<ILayer>();
+
+            if (localRemovedLayers.Contains(MyLocationLayer) || localRemovedLayers.Contains(_mapDrawableLayer) || localRemovedLayers.Contains(_mapPinLayer) || localRemovedLayers.Contains(_mapCalloutLayer) || 
+                localAddedLayers.Contains(MyLocationLayer) || localAddedLayers.Contains(_mapDrawableLayer) || localAddedLayers.Contains(_mapPinLayer) || localAddedLayers.Contains(_mapCalloutLayer))
                 return;
 
             // Remove MapView layers
@@ -987,10 +989,7 @@ namespace Mapsui.UI.Forms
         private void AddLayers()
         {
             // Add MapView layers
-            _mapControl.Map.Layers.Add(_mapDrawableLayer);
-            _mapControl.Map.Layers.Add(_mapPinLayer);
-            _mapControl.Map.Layers.Add(_mapCalloutLayer);
-            _mapControl.Map.Layers.Add(MyLocationLayer);
+            _mapControl.Map.Layers.Add(_mapDrawableLayer, _mapPinLayer, _mapCalloutLayer, MyLocationLayer);
         }
 
         /// <summary>
@@ -999,10 +998,7 @@ namespace Mapsui.UI.Forms
         private void RemoveLayers()
         {
             // Remove MapView layers
-            _mapControl.Map.Layers.Remove(MyLocationLayer);
-            _mapControl.Map.Layers.Remove(_mapCalloutLayer);
-            _mapControl.Map.Layers.Remove(_mapPinLayer);
-            _mapControl.Map.Layers.Remove(_mapDrawableLayer);
+            _mapControl.Map.Layers.Remove(MyLocationLayer, _mapCalloutLayer, _mapPinLayer, _mapDrawableLayer);
         }
 
         /// <summary>

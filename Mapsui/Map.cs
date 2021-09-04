@@ -112,13 +112,10 @@ namespace Mapsui
             {
                 var tempLayers = _layers;
                 if (tempLayers != null)
-                {
-                    _layers.LayerAdded -= LayersLayerAdded;
-                    _layers.LayerRemoved -= LayersLayerRemoved;
-                }
+                    _layers.Changed -= LayersCollectionChanged;
+
                 _layers = value;
-                _layers.LayerAdded += LayersLayerAdded;
-                _layers.LayerRemoved += LayersLayerRemoved;
+                _layers.Changed += LayersCollectionChanged;
             }
         }
 
@@ -220,30 +217,39 @@ namespace Mapsui
                 layer.RefreshData(extent, resolution, changeType);
             }
         }
+        
+        private void LayersCollectionChanged(object sender, LayerCollectionChangedEventArgs args)
+        {
+            foreach (var layer in args.RemovedLayers ?? Enumerable.Empty<ILayer>())
+                LayerRemoved(layer);
 
-        private void LayersLayerAdded(ILayer layer)
+            foreach (var layer in args.AddedLayers ?? Enumerable.Empty<ILayer>())
+                LayerAdded(layer);
+
+            LayersChanged();
+        }
+
+        private void LayerAdded(ILayer layer)
         {
             layer.DataChanged += LayerDataChanged;
             layer.PropertyChanged += LayerPropertyChanged;
 
             layer.Transformation = Transformation;
             layer.CRS = CRS;
-            Resolutions = DetermineResolutions(Layers);
-            OnPropertyChanged(nameof(Layers));
         }
 
-        private void LayersLayerRemoved(ILayer layer)
+        private void LayerRemoved(ILayer layer)
         {
             if (layer is IAsyncDataFetcher asyncLayer)
-            {
                 asyncLayer.AbortFetch();
-            }
 
             layer.DataChanged -= LayerDataChanged;
             layer.PropertyChanged -= LayerPropertyChanged;
+        }
 
+        private void LayersChanged()
+        {
             Resolutions = DetermineResolutions(Layers);
-
             OnPropertyChanged(nameof(Layers));
         }
 
