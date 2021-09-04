@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>Mapsui</id>
+    <id>Mapsui.Native</id>
     <version>$version$</version>
     <title>Mapsui</title>
     <authors>Paul den Dulk</authors>
@@ -9,17 +9,32 @@
     <projectUrl>https://github.com/Mapsui/Mapsui</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>
-      Mapsui - Library for mapping
+      Mapsui - Library for mapping (native UI for different platforms)
     </description>
     <tags>map maps mapping geo gis osm</tags>
     <language>en-US</language>
     <dependencies>
       <!-- [ or ] is including, ( or ) is excluding -->
-      <group targetFramework="netstandard2.0">
+      <group targetFramework="net48">
+        <dependency id="Mapsui" version="$version$"/>
         <dependency id="BruTile" version="[4.0.0,5.0.0)"/>
         <dependency id="Newtonsoft.json" version="[11.0.1,)"/>
+        <dependency id="SkiaSharp" version="[2.80.2,3.0.0)"/>
+        <dependency id="Svg.Skia" version="[0.5.0,0.6)"/>
+        <dependency id="SkiaSharp.Views" version="[2.80.2,3.0.0)"/>
+        <dependency id="Topten.RichTextKit" version="[0.4.139,0.5)"/>
+      </group>
+      <group targetFramework="uap">
+        <dependency id="Mapsui" version="$version$"/>
+        <dependency id="BruTile" version="[4.0.0,5.0.0)"/>
+        <dependency id="Newtonsoft.json" version="[11.0.1,)"/>
+        <dependency id="SkiaSharp" version="[2.80.2,3.0.0)"/>
+        <dependency id="Svg.Skia" version="[0.5.0,0.6)"/>
+        <dependency id="SkiaSharp.Views" version="[2.80.2,3.0.0)"/>
+        <dependency id="Topten.RichTextKit" version="[0.4.139,0.5)"/>
       </group>
       <group targetFramework="MonoAndroid">
+        <dependency id="Mapsui" version="$version$"/>
         <dependency id="BruTile" version="[4.0.0,5.0.0)"/>
         <dependency id="Newtonsoft.json" version="[11.0.1,)"/>
         <dependency id="SkiaSharp" version="[2.80.2,3.0.0)"/>
@@ -28,6 +43,7 @@
         <dependency id="Topten.RichTextKit" version="[0.4.139,0.5)"/>
       </group>
       <group targetFramework="Xamarin.iOS">
+        <dependency id="Mapsui" version="$version$"/>
         <dependency id="BruTile" version="[4.0.0,5.0.0)"/>
         <dependency id="Newtonsoft.json" version="[11.0.1,)"/>
         <dependency id="SkiaSharp" version="[2.80.2,3.0.0)"/>
@@ -39,9 +55,16 @@
   </metadata>
   <files>
 
-    <file src="..\Mapsui\bin\Release\netstandard2.0\Mapsui.Geometries.dll" target="lib\netstandard2.0\Mapsui.Geometries.dll" />
-    <file src="..\Mapsui\bin\Release\netstandard2.0\Mapsui.dll" target="lib\netstandard2.0\Mapsui.dll" />
-    <file src="..\Mapsui.Rendering.Skia\bin\Release\netstandard2.0\Mapsui.Rendering.Skia.dll" target="lib\netstandard2.0\Mapsui.Rendering.Skia.dll" />
+    <file src="..\Mapsui.UI.Wpf\bin\Release\net48\Mapsui.Geometries.dll" target="lib\net48\Mapsui.Geometries.dll" />
+    <file src="..\Mapsui.UI.Wpf\bin\Release\net48\Mapsui.dll" target="lib\net48\Mapsui.dll" />
+    <file src="..\Mapsui.UI.Wpf\bin\Release\net48\Mapsui.Rendering.Xaml.dll" target="lib\net48\Mapsui.Rendering.Xaml.dll" />
+    <file src="..\Mapsui.UI.Wpf\bin\Release\net48\Mapsui.Rendering.Skia.dll" target="lib\net48\Mapsui.Rendering.Skia.dll" />
+    <file src="..\Mapsui.UI.Wpf\bin\Release\net48\Mapsui.UI.Wpf.dll" target="lib\net48\Mapsui.UI.Wpf.dll" />
+
+    <file src="..\Mapsui.UI.Uwp\bin\Release\Mapsui.Geometries.dll" target="lib\uap\Mapsui.Geometries.dll" />
+    <file src="..\Mapsui.UI.Uwp\bin\Release\Mapsui.dll" target="lib\uap\Mapsui.dll" />
+    <file src="..\Mapsui.UI.Uwp\bin\Release\Mapsui.Rendering.Skia.dll" target="lib\uap\Mapsui.Rendering.Skia.dll" />
+    <file src="..\Mapsui.UI.Uwp\bin\Release\Mapsui.UI.Uwp.dll" target="lib\uap\Mapsui.UI.Uwp.dll" />
 
     <file src="..\Mapsui.UI.Android\bin\Release\Mapsui.Geometries.dll" target="lib\MonoAndroid\Mapsui.Geometries.dll" />
     <file src="..\Mapsui.UI.Android\bin\Release\Mapsui.dll" target="lib\MonoAndroid\Mapsui.dll" />
