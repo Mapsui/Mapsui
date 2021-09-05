@@ -75,7 +75,7 @@ namespace Mapsui.UI.Wpf
             if (_drawing || !_refresh)
                 return;
 
-            _invalidate();
+            _invalidate?.Invoke();
         }
 
         /// <summary>
