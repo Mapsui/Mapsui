@@ -109,6 +109,9 @@ namespace Mapsui.UI.Wpf
             get => _updateInterval;
             set
             {
+                if (value <= 0)
+                    throw new ArgumentOutOfRangeException("UpdateInterval must be greater than 0");
+
                 if (_updateInterval != value)
                 {
                     _updateInterval = value;
