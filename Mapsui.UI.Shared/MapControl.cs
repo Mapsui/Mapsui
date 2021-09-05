@@ -46,7 +46,7 @@ namespace Mapsui.UI.Wpf
             // Create timer for invalidating the control
             _invalidateTimer = new((state) => InvalidateTimerCallback(state), null, System.Threading.Timeout.Infinite, 16);
             // Start the invalidation timer
-            StartUpdates();
+            StartUpdates(false);
         }
 
         void CommonDrawControl(object canvas)
@@ -84,8 +84,9 @@ namespace Mapsui.UI.Wpf
         /// <remarks>
         /// When this function is called, the control is redrawn if needed
         /// </remarks>
-        public void StartUpdates()
+        public void StartUpdates(bool refresh = true)
         {
+            _refresh = refresh;
             _invalidateTimer.Change(0, _updateInterval);
         }
 
