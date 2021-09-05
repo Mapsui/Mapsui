@@ -50,7 +50,12 @@ namespace Mapsui.UI.Uwp
 
         void Initialize()
         {
-            _invalidate = () => { RunOnUIThread(() => _canvas?.Invalidate()); };
+            _invalidate = () => {
+                // The commented out code crashes the app when MouseWheelAnimation.Duration > 0. Could be a bug in SKXamlCanvas
+                //if (Dispatcher.HasThreadAccess) _canvas?.Invalidate();
+                //else RunOnUIThread(() => _canvas?.Invalidate());
+                RunOnUIThread(() => _canvas?.Invalidate()); 
+            };
 
             Background = new SolidColorBrush(Colors.White); // DON'T REMOVE! Touch events do not work without a background
 
@@ -159,14 +164,6 @@ namespace Mapsui.UI.Uwp
             Navigator.ZoomTo(resolution, mousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
 
             e.Handled = true;
-        }
-        
-        public void RefreshGraphics()
-        {
-            _refresh = true;
-            // The commented out code crashes the app when MouseWheelAnimation.Duration > 0. Could be a bug in SKXamlCanvas
-            //if (Dispatcher.HasThreadAccess) _canvas?.Invalidate();
-            //else RunOnUIThread(() => _canvas?.Invalidate());
         }
 
         private void MapControlLoaded(object sender, RoutedEventArgs e)
