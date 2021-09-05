@@ -311,7 +311,7 @@ namespace Mapsui.UI.Forms
 
             canvas.Scale(PixelDensity, PixelDensity);
 
-            CommonPaintControl(canvas);
+            CommonDrawControl(canvas);
         }
 
         private Geometries.Point GetScreenPosition(SKPoint point)

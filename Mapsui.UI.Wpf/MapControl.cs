@@ -492,12 +492,12 @@ namespace Mapsui.UI.Wpf
             
             canvas.Scale(PixelDensity, PixelDensity);
 
-            CommonPaintControl(canvas);
+            CommonDrawControl(canvas);
         }
 
         private void PaintWpf()
         {
-            CommonPaintControl(WpfCanvas);
+            CommonDrawControl(WpfCanvas);
         }
 
         private float GetPixelDensity()

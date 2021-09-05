@@ -194,7 +194,7 @@ namespace Mapsui.UI.Uwp
             
             canvas.Scale(PixelDensity, PixelDensity);
 
-            CommonPaintControl(canvas);
+            CommonDrawControl(canvas);
         }
 
         [Obsolete("Use MapControl.Navigate.NavigateTo instead", true)]

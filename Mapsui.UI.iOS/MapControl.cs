@@ -106,7 +106,7 @@ namespace Mapsui.UI.iOS
             
             canvas.Scale(PixelDensity, PixelDensity);
 
-            CommonPaintControl(canvas);
+            CommonDrawControl(canvas);
         }
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)
