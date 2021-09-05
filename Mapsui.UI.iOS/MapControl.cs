@@ -22,18 +22,27 @@ namespace Mapsui.UI.iOS
         public MapControl(CGRect frame)
             : base(frame)
         {
+            CommonInitialize();
             Initialize();
         }
 
         [Preserve]
         public MapControl(IntPtr handle) : base(handle) // used when initialized from storyboard
         {
+            CommonInitialize();
             Initialize();
         }
 
         public void Initialize()
         {
-            Map = new Map();
+            _invalidate = () => {
+                RunOnUIThread(() =>
+                {
+                    SetNeedsDisplay();
+                    _canvas?.SetNeedsDisplay();
+                });
+            };
+
             BackgroundColor = UIColor.White;
 
             _canvas.TranslatesAutoresizingMaskIntoConstraints = false;
@@ -182,15 +191,6 @@ namespace Mapsui.UI.iOS
         private void RunOnUIThread(Action action)
         {
             DispatchQueue.MainQueue.DispatchAsync(action);
-        }
-
-        public void RefreshGraphics()
-        {
-            RunOnUIThread(() =>
-            {
-                SetNeedsDisplay();
-                _canvas?.SetNeedsDisplay();
-            });
         }
 
         public override CGRect Frame

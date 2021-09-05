@@ -47,13 +47,22 @@ namespace Mapsui.UI.Wpf
 
         public MapControl()
         {
+            CommonInitialize();
+            Initialize();
+        }
+
+        void Initialize()
+        {
+            _invalidate = () => {
+                if (Dispatcher.CheckAccess()) InvalidateCanvas();
+                else RunOnUIThread(InvalidateCanvas);
+            };
+
             Children.Add(WpfCanvas);
             Children.Add(SkiaCanvas);
             Children.Add(_selectRectangle);
 
             SkiaCanvas.PaintSurface += SKElementOnPaintSurface;
-
-            Map = new Map();
 
             Loaded += MapControlLoaded;
             MouseLeftButtonDown += MapControlMouseLeftButtonDown;
@@ -147,12 +156,6 @@ namespace Mapsui.UI.Wpf
         }
 
         public event EventHandler<FeatureInfoEventArgs> FeatureInfo; // todo: Remove and add sample for alternative
-
-        public void RefreshGraphics()
-        {
-            if (Dispatcher.CheckAccess()) InvalidateCanvas();
-            else RunOnUIThread(InvalidateCanvas);
-        }
 
         internal void InvalidateCanvas()
         {

@@ -28,6 +28,17 @@ namespace Mapsui.UI.Wpf
     {
         private Map _map;
         private double _unSnapRotationDegrees;
+        // Flag indicating if a drawing process is running
+        private bool _drawing = false;
+        // Flag indicating if a new drawing process should start
+        private bool _refresh = false;
+        // Action to call for a redraw of the control
+        private Action _invalidate;
+
+       void CommonInitialize()
+        {
+            Map = new Map();
+        }
 
         /// <summary>
         /// After how many degrees start rotation to take place
@@ -186,6 +197,11 @@ namespace Mapsui.UI.Wpf
         {
             RefreshData(changeType);
             RefreshGraphics();
+        }
+
+        public void RefreshGraphics()
+        {
+            _refresh = true;
         }
 
         private void MapDataChanged(object sender, DataChangedEventArgs e)

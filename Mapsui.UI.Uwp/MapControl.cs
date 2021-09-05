@@ -44,14 +44,20 @@ namespace Mapsui.UI.Uwp
 
         public MapControl()
         {
+            CommonInitialize();
+            Initialize();
+        }
+
+        void Initialize()
+        {
+            _invalidate = () => { RunOnUIThread(() => _canvas?.Invalidate()); };
+
             Background = new SolidColorBrush(Colors.White); // DON'T REMOVE! Touch events do not work without a background
 
             Children.Add(_canvas);
             Children.Add(_selectRectangle);
 
             _canvas.PaintSurface += Canvas_PaintSurface;
-
-            Map = new Map();
 
             Loaded += MapControlLoaded;
 
@@ -157,10 +163,10 @@ namespace Mapsui.UI.Uwp
         
         public void RefreshGraphics()
         {
+            _refresh = true;
             // The commented out code crashes the app when MouseWheelAnimation.Duration > 0. Could be a bug in SKXamlCanvas
             //if (Dispatcher.HasThreadAccess) _canvas?.Invalidate();
             //else RunOnUIThread(() => _canvas?.Invalidate());
-            RunOnUIThread(() => _canvas?.Invalidate());
         }
 
         private void MapControlLoaded(object sender, RoutedEventArgs e)

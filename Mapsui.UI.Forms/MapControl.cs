@@ -36,7 +36,6 @@ namespace Mapsui.UI.Forms
 
         private SKGLView _glView;
         private SKCanvasView _canvasView;
-        private Action _invalidate;
 
         // See http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/4.0.4_r2.1/android/view/ViewConfiguration.java#ViewConfiguration.0PRESSED_STATE_DURATION for values
         private const int shortTap = 125;
@@ -76,6 +75,7 @@ namespace Mapsui.UI.Forms
         public MapControl()
         {
             Initialize();
+            CommonInitialize();
         }
 
         public float ScreenWidth => (float)Width;
@@ -318,11 +318,6 @@ namespace Mapsui.UI.Forms
         private Geometries.Point GetScreenPosition(SKPoint point)
         {
             return new Geometries.Point(point.X / PixelDensity, point.Y / PixelDensity);
-        }
-
-        public void RefreshGraphics()
-        {
-            _invalidate();
         }
 
         /// <summary>

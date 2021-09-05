@@ -56,24 +56,27 @@ namespace Mapsui.UI.Android
         public MapControl(Context context, IAttributeSet attrs) :
             base(context, attrs)
         {
+            InternalInitialize();
             Initialize();
         }
 
         public MapControl(Context context, IAttributeSet attrs, int defStyle) :
             base(context, attrs, defStyle)
         {
+            InternalInitialize();
             Initialize();
         }
 
         public void Initialize()
         {
+            _invalidate = () => { RunOnUIThread(RefreshGraphicsWithTryCatch); };
+
             SetBackgroundColor(Color.Transparent);
             _canvas = RenderMode == SkiaRenderMode.Software ? StartSoftwareRenderMode() : StartHardwareRenderMode();
             _mainLooperHandler = new Handler(Looper.MainLooper);
 
             SetViewportSize(); // todo: check if size is available, perhaps we need a load event
 
-            Map = new Map();
             Touch += MapView_Touch;
 
             var listener = new MapControlGestureListener();
@@ -307,11 +310,6 @@ namespace Mapsui.UI.Android
         private static Point GetScreenPositionInPixels(MotionEvent motionEvent, View view)
         {
             return new PointF(motionEvent.GetX(0) - view.Left, motionEvent.GetY(0) - view.Top).ToMapsui();
-        }
-
-        public void RefreshGraphics()
-        {
-            RunOnUIThread(RefreshGraphicsWithTryCatch);
         }
 
         private void RefreshGraphicsWithTryCatch()
