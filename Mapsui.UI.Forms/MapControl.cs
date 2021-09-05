@@ -90,7 +90,7 @@ namespace Mapsui.UI.Forms
 
         public bool UseDoubleTap = true;
 
-        public void Initialize()
+        void Initialize()
         {
             Xamarin.Forms.View view;
 

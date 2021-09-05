@@ -67,7 +67,7 @@ namespace Mapsui.UI.Android
             Initialize();
         }
 
-        public void Initialize()
+        void Initialize()
         {
             _invalidate = () => { RunOnUIThread(RefreshGraphicsWithTryCatch); };
 

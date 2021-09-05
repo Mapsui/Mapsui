@@ -33,7 +33,7 @@ namespace Mapsui.UI.iOS
             Initialize();
         }
 
-        public void Initialize()
+        void Initialize()
         {
             _invalidate = () => {
                 RunOnUIThread(() =>
