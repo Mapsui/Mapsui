@@ -306,13 +306,12 @@ namespace Mapsui.UI.Forms
 
         void PaintSurface(SKCanvas canvas)
         {
-            if (PixelDensity <= 0) return;
-
-            Navigator.UpdateAnimations();
+            if (PixelDensity <= 0) 
+                return;
 
             canvas.Scale(PixelDensity, PixelDensity);
 
-            _renderer.Render(canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
+            CommonPaintControl(canvas);
         }
 
         private Geometries.Point GetScreenPosition(SKPoint point)

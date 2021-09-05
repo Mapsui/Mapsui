@@ -40,6 +40,19 @@ namespace Mapsui.UI.Wpf
             Map = new Map();
         }
 
+        void CommonPaintControl(object canvas)
+        {
+            if (Renderer == null) 
+                return;
+            if (_map == null) 
+                return;
+            if (!Viewport.HasSize) 
+                return;
+
+            Navigator.UpdateAnimations();
+            Renderer.Render(canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
+        }
+
         /// <summary>
         /// After how many degrees start rotation to take place
         /// </summary>

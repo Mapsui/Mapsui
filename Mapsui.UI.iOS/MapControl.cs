@@ -99,12 +99,14 @@ namespace Mapsui.UI.iOS
 
         void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs args)
         {
-            if (PixelDensity <= 0) return;
+            if (PixelDensity <= 0) 
+                return;
 
-            args.Surface.Canvas.Scale(PixelDensity, PixelDensity);
+            var canvas = args.Surface.Canvas;
+            
+            canvas.Scale(PixelDensity, PixelDensity);
 
-            Navigator.UpdateAnimations();
-            Renderer.Render(args.Surface.Canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
+            CommonPaintControl(canvas);
         }
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)

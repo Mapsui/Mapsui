@@ -149,10 +149,14 @@ namespace Mapsui.UI.Android
 
         private void CanvasOnPaintSurfaceGL(object sender, SKPaintGLSurfaceEventArgs args)
         {
-            args.Surface.Canvas.Scale(PixelDensity, PixelDensity);
+            if (PixelDensity <= 0)
+                return;
 
-            Navigator.UpdateAnimations();
-            Renderer.Render(args.Surface.Canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
+            var canvas = args.Surface.Canvas;
+
+            canvas.Scale(PixelDensity, PixelDensity);
+
+            CommonPaintControl(canvas);
         }
 
         public void OnFling(object sender, GestureDetector.FlingEventArgs args)

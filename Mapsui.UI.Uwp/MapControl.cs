@@ -187,15 +187,14 @@ namespace Mapsui.UI.Uwp
 
         private void Canvas_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
-            if (Renderer == null) return;
-            if (_map == null) return;
-            if (!Viewport.HasSize) return;
-            if (PixelDensity <= 0) return;
+            if (PixelDensity <= 0) 
+                return;
 
-            e.Surface.Canvas.Scale(PixelDensity, PixelDensity);
+            var canvas = e.Surface.Canvas;
+            
+            canvas.Scale(PixelDensity, PixelDensity);
 
-            Navigator.UpdateAnimations();
-            Renderer.Render(e.Surface.Canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
+            CommonPaintControl(canvas);
         }
 
         [Obsolete("Use MapControl.Navigate.NavigateTo instead", true)]
