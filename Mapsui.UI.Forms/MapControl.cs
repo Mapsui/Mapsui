@@ -74,8 +74,8 @@ namespace Mapsui.UI.Forms
 
         public MapControl()
         {
-            Initialize();
             CommonInitialize();
+            Initialize();
         }
 
         public float ScreenWidth => (float)Width;
