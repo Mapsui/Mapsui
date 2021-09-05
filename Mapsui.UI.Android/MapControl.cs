@@ -56,14 +56,14 @@ namespace Mapsui.UI.Android
         public MapControl(Context context, IAttributeSet attrs) :
             base(context, attrs)
         {
-            InternalInitialize();
+            CommonInitialize();
             Initialize();
         }
 
         public MapControl(Context context, IAttributeSet attrs, int defStyle) :
             base(context, attrs, defStyle)
         {
-            InternalInitialize();
+            CommonInitialize();
             Initialize();
         }
 
@@ -88,14 +88,16 @@ namespace Mapsui.UI.Android
             _gestureDetector.DoubleTap += OnDoubleTapped;
         }
 
-        private void CanvasOnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
+        private void CanvasOnPaintSurface(object sender, SKPaintSurfaceEventArgs args)
         {
-            if (PixelDensity <= 0) return;
+            if (PixelDensity <= 0) 
+                return;
 
-            e.Surface.Canvas.Scale(PixelDensity, PixelDensity);
+            var canvas = args.Surface.Canvas;
+                
+            canvas.Scale(PixelDensity, PixelDensity);
 
-            Navigator.UpdateAnimations();
-            Renderer.Render(e.Surface.Canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
+            CommonDrawControl(canvas);
         }
 
         public SkiaRenderMode RenderMode
@@ -156,7 +158,7 @@ namespace Mapsui.UI.Android
 
             canvas.Scale(PixelDensity, PixelDensity);
 
-            CommonPaintControl(canvas);
+            CommonDrawControl(canvas);
         }
 
         public void OnFling(object sender, GestureDetector.FlingEventArgs args)
