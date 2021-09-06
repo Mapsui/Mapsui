@@ -461,7 +461,14 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Update interval for invalidation timer in ms
         /// </summary>
-        public int UpdateInterval => _mapControl.UpdateInterval;
+        public int UpdateInterval
+        {
+            get => _mapControl.UpdateInterval;
+            set
+            {
+                _mapControl.UpdateInterval = value;
+            }
+        }
 
         /// <summary>
         /// IMapControl
