@@ -539,7 +539,7 @@ namespace Mapsui.UI.Forms
         /// <remarks>
         /// When this function is called, the control is redrawn if needed
         /// </remarks>
-        public void StartUpdates(bool refresh)
+        public void StartUpdates(bool refresh = true)
         {
             _mapControl.StartUpdates(refresh);
         }
