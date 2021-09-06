@@ -103,6 +103,17 @@ namespace Mapsui.UI.Wpf
         }
 
         /// <summary>
+        /// Force a update of control
+        /// </summary>
+        /// <remarks>
+        /// When this function is called, the control draws itself once 
+        /// </remarks>
+        public void ForceUpdate()
+        {
+            _invalidate?.Invoke();
+        }
+
+        /// <summary>
         /// Interval between two redraws of the MapControl in ms
         /// </summary>
         public int UpdateInterval

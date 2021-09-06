@@ -556,6 +556,17 @@ namespace Mapsui.UI.Forms
             _mapControl.StopUpdates();
         }
 
+        /// <summary>
+        /// Force a update of control
+        /// </summary>
+        /// <remarks>
+        /// When this function is called, the control draws itself once 
+        /// </remarks>
+        public void ForceUpdate()
+        {
+            _mapControl.ForceUpdate();
+        }
+
         internal void AddCallout(Callout callout)
         {
             if (!_callouts.Contains(callout))
