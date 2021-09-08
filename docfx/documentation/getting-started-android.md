@@ -6,7 +6,7 @@ Create 'Blank App (Android)' in Visual Studio
 
 ### Step 2
 
-$ Install-Package Mapsui
+$ Install-Package Mapsui.Native
 
 ### Step 3
 
@@ -54,5 +54,5 @@ using Mapsui.UI.Android;
 ```
 
 
-### Step 5: 
+### Step 5:
 Run!
