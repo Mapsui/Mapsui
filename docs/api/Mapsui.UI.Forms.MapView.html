@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class MapView
    ">
-    <meta name="generator" content="docfx 2.48.0.0">
+    <meta name="generator" content="docfx 2.58.3.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -61,11 +61,11 @@
       <div class="container body-content">
         
         <div id="search-results">
-          <div class="search-list"></div>
+          <div class="search-list">Search Results for <span></span></div>
           <div class="sr-items">
             <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
           </div>
-          <ul id="pagination"></ul>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
         </div>
       </div>
       <div role="main" class="container body-content hide-when-search">
@@ -89,592 +89,29 @@
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><span class="xref">Xamarin.Forms.BindableObject</span></div>
-    <div class="level2"><span class="xref">Xamarin.Forms.Element</span></div>
-    <div class="level3"><span class="xref">Xamarin.Forms.NavigableElement</span></div>
-    <div class="level4"><span class="xref">Xamarin.Forms.VisualElement</span></div>
-    <div class="level5"><span class="xref">Xamarin.Forms.View</span></div>
-    <div class="level6"><span class="xref">Xamarin.Forms.Layout</span></div>
-    <div class="level7"><span class="xref">Xamarin.Forms.TemplatedView</span></div>
-    <div class="level8"><span class="xref">Xamarin.Forms.ContentView</span></div>
-    <div class="level9"><span class="xref">MapView</span></div>
+    <div class="level1"><span class="xref">MapView</span></div>
   </div>
   <div classs="implements">
     <h5>Implements</h5>
-    <div><span class="xref">Xamarin.Forms.IAnimatable</span></div>
-    <div><span class="xref">Xamarin.Forms.ITabStopElement</span></div>
-    <div><span class="xref">Xamarin.Forms.IViewController</span></div>
-    <div><span class="xref">Xamarin.Forms.IVisualElementController</span></div>
-    <div><span class="xref">Xamarin.Forms.IElementController</span></div>
-    <div><span class="xref">Xamarin.Forms.Internals.IGestureController</span></div>
-    <div><span class="xref">Xamarin.Forms.IGestureRecognizers</span></div>
-    <div><span class="xref">Xamarin.Forms.ILayout</span></div>
-    <div><span class="xref">Xamarin.Forms.ILayoutController</span></div>
-    <div><span class="xref">IMapControl</span></div>
+    <div><a class="xref" href="Mapsui.UI.IMapControl.html">IMapControl</a></div>
     <div><span class="xref">System.ComponentModel.INotifyPropertyChanged</span></div>
     <div><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Mapsui.UI.Forms.Pin.html">Pin</a>&gt;</div>
     <div><span class="xref">System.Collections.IEnumerable</span></div>
-  </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <span class="xref">Xamarin.Forms.ContentView.ContentProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.ContentView.OnBindingContextChanged()</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.ContentView.Content</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.TemplatedView.ControlTemplateProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.TemplatedView.LayoutChildren(System.Double, System.Double, System.Double, System.Double)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.TemplatedView.OnApplyTemplate()</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.TemplatedView.OnChildRemoved(Xamarin.Forms.Element)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.TemplatedView.OnChildRemoved(Xamarin.Forms.Element, System.Int32)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.TemplatedView.GetTemplateChild(System.String)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.TemplatedView.ResolveControlTemplate()</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.TemplatedView.ControlTemplate</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Layout.IsClippedToBoundsProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Layout.CascadeInputTransparentProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Layout.PaddingProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Layout.ForceLayout()</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Layout.LayoutChildIntoBoundingRegion(Xamarin.Forms.VisualElement, Xamarin.Forms.Rectangle)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Layout.LowerChild(Xamarin.Forms.View)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Layout.RaiseChild(Xamarin.Forms.View)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Layout.InvalidateLayout()</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Layout.OnChildMeasureInvalidated(System.Object, System.EventArgs)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Layout.OnChildMeasureInvalidated()</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Layout.OnSizeAllocated(System.Double, System.Double)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Layout.ShouldInvalidateOnChildAdded(Xamarin.Forms.View)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Layout.ShouldInvalidateOnChildRemoved(Xamarin.Forms.View)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Layout.UpdateChildrenLayout()</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Layout.ResolveLayoutChanges()</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Layout.IsClippedToBounds</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Layout.Padding</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Layout.CascadeInputTransparent</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Layout.LayoutChanged</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.View.VerticalOptionsProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.View.HorizontalOptionsProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.View.MarginProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.View.GetChildElements(Xamarin.Forms.Point)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.View.GestureController</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.View.GestureRecognizers</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.View.Xamarin.Forms.Internals.IGestureController.CompositeGestureRecognizers</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.View.HorizontalOptions</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.View.Margin</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.View.VerticalOptions</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.NavigationProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.StyleProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.InputTransparentProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.IsEnabledProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.XProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.YProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.AnchorXProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.AnchorYProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.TranslationXProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.TranslationYProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.WidthProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.HeightProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.RotationProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.RotationXProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.RotationYProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.ScaleProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.ScaleXProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.ScaleYProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.ClipProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.VisualProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.IsVisibleProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.OpacityProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.BackgroundColorProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.BackgroundProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.BehaviorsProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.TriggersProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.WidthRequestProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.HeightRequestProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.MinimumWidthRequestProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.MinimumHeightRequestProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.IsFocusedProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.FlowDirectionProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.TabIndexProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.IsTabStopProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.OnTabIndexPropertyChanged(System.Int32, System.Int32)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.TabIndexDefaultValueCreator()</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.OnTabStopPropertyChanged(System.Boolean, System.Boolean)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.TabStopDefaultValueCreator()</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.BatchBegin()</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.BatchCommit()</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.Focus()</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.Layout(Xamarin.Forms.Rectangle)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.Measure(System.Double, System.Double, Xamarin.Forms.MeasureFlags)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.Unfocus()</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.InvalidateMeasure()</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.OnChildAdded(Xamarin.Forms.Element)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.OnChildrenReordered()</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.OnMeasure(System.Double, System.Double)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.SizeAllocated(System.Double, System.Double)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.Xamarin.Forms.IVisualElementController.InvalidateMeasure(Xamarin.Forms.Internals.InvalidationTrigger)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.ChangeVisualState()</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.Visual</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.FlowDirection</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.Xamarin.Forms.IVisualElementController.EffectiveFlowDirection</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.AnchorX</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.AnchorY</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.BackgroundColor</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.Background</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.Behaviors</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.Bounds</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.Height</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.HeightRequest</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.InputTransparent</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.IsEnabled</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.IsFocused</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.IsVisible</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.MinimumHeightRequest</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.MinimumWidthRequest</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.Opacity</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.Rotation</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.RotationX</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.RotationY</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.Scale</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.ScaleX</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.ScaleY</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.TabIndex</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.IsTabStop</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.TranslationX</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.TranslationY</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.Triggers</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.Width</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.WidthRequest</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.X</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.Y</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.Clip</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.Resources</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.ChildrenReordered</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.Focused</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.MeasureInvalidated</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.SizeChanged</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.VisualElement.Unfocused</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.NavigableElement.OnParentSet()</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.NavigableElement.Navigation</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.NavigableElement.Style</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.NavigableElement.StyleClass</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.NavigableElement.class</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Element.MenuProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Element.AutomationIdProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Element.ClassIdProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Element.GetMenu(Xamarin.Forms.BindableObject)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Element.SetMenu(Xamarin.Forms.BindableObject, Xamarin.Forms.Menu)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Element.Xamarin.Forms.IElementController.SetValueFromRenderer(Xamarin.Forms.BindableProperty, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Element.FindByName(System.String)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Element.RemoveDynamicResource(Xamarin.Forms.BindableProperty)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Element.SetDynamicResource(Xamarin.Forms.BindableProperty, System.String)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Element.AutomationId</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Element.ClassId</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Element.Effects</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Element.Id</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Element.StyleId</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Element.Parent</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Element.ChildAdded</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Element.ChildRemoved</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Element.DescendantAdded</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.Element.DescendantRemoved</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.BindableObject.BindingContextProperty</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.BindableObject.ClearValue(Xamarin.Forms.BindableProperty)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.BindableObject.ClearValue(Xamarin.Forms.BindablePropertyKey)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.BindableObject.GetValue(Xamarin.Forms.BindableProperty)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.BindableObject.IsSet(Xamarin.Forms.BindableProperty)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.BindableObject.RemoveBinding(Xamarin.Forms.BindableProperty)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.BindableObject.SetBinding(Xamarin.Forms.BindableProperty, Xamarin.Forms.BindingBase)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.BindableObject.ApplyBindings()</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.BindableObject.OnPropertyChanging(System.String)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.BindableObject.UnapplyBindings()</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.BindableObject.SetValue(Xamarin.Forms.BindableProperty, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.BindableObject.SetValue(Xamarin.Forms.BindablePropertyKey, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.BindableObject.CoerceValue(Xamarin.Forms.BindableProperty)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.BindableObject.CoerceValue(Xamarin.Forms.BindablePropertyKey)</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.BindableObject.Dispatcher</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.BindableObject.BindingContext</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.BindableObject.PropertyChanged</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.BindableObject.PropertyChanging</span>
-    </div>
-    <div>
-      <span class="xref">Xamarin.Forms.BindableObject.BindingContextChanged</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.UI.Forms.html">Mapsui.UI.Forms</a></h6>
   <h6><strong>Assembly</strong>: Mapsui.UI.Forms.dll</h6>
   <h5 id="Mapsui_UI_Forms_MapView_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class MapView : ContentView, IDynamicResourceHandler, IElement, INameScope, INavigationProxy, IStyleSelectable, IAnimatable, IResourcesProvider, IStyleElement, IFlowDirectionController, IPropertyPropagationController, IVisualController, ITabStopElement, IStylable, IViewController, IVisualElementController, IElementController, IGestureController, IGestureRecognizers, ILayout, ILayoutController, IPaddingElement, IControlTemplated, IMapControl, INotifyPropertyChanged, IEnumerable&lt;Pin&gt;, IEnumerable</code></pre>
+    <pre><code class="lang-csharp hljs">public class MapView : ContentView, IMapControl, INotifyPropertyChanged, IEnumerable&lt;Pin&gt;, IEnumerable</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView__ctor.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView__ctor.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L49">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L49">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView__ctor_" data-uid="Mapsui.UI.Forms.MapView.#ctor*"></a>
   <h4 id="Mapsui_UI_Forms_MapView__ctor" data-uid="Mapsui.UI.Forms.MapView.#ctor">MapView()</h4>
@@ -689,10 +126,10 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_IsMyLocationButtonVisibleProperty.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.IsMyLocationButtonVisibleProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_IsMyLocationButtonVisibleProperty.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.IsMyLocationButtonVisibleProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L269">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L269">View Source</a>
   </span>
   <h4 id="Mapsui_UI_Forms_MapView_IsMyLocationButtonVisibleProperty" data-uid="Mapsui.UI.Forms.MapView.IsMyLocationButtonVisibleProperty">IsMyLocationButtonVisibleProperty</h4>
   <div class="markdown level1 summary"></div>
@@ -711,17 +148,17 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Xamarin.Forms.BindableProperty</span></td>
+        <td><span class="xref">BindableProperty</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_IsNorthingButtonVisibleProperty.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.IsNorthingButtonVisibleProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_IsNorthingButtonVisibleProperty.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.IsNorthingButtonVisibleProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L270">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L270">View Source</a>
   </span>
   <h4 id="Mapsui_UI_Forms_MapView_IsNorthingButtonVisibleProperty" data-uid="Mapsui.UI.Forms.MapView.IsNorthingButtonVisibleProperty">IsNorthingButtonVisibleProperty</h4>
   <div class="markdown level1 summary"></div>
@@ -740,17 +177,17 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Xamarin.Forms.BindableProperty</span></td>
+        <td><span class="xref">BindableProperty</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_IsZoomButtonVisibleProperty.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.IsZoomButtonVisibleProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_IsZoomButtonVisibleProperty.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.IsZoomButtonVisibleProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L268">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L268">View Source</a>
   </span>
   <h4 id="Mapsui_UI_Forms_MapView_IsZoomButtonVisibleProperty" data-uid="Mapsui.UI.Forms.MapView.IsZoomButtonVisibleProperty">IsZoomButtonVisibleProperty</h4>
   <div class="markdown level1 summary"></div>
@@ -769,17 +206,17 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Xamarin.Forms.BindableProperty</span></td>
+        <td><span class="xref">BindableProperty</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_MyLocationEnabledProperty.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.MyLocationEnabledProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_MyLocationEnabledProperty.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.MyLocationEnabledProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L261">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L261">View Source</a>
   </span>
   <h4 id="Mapsui_UI_Forms_MapView_MyLocationEnabledProperty" data-uid="Mapsui.UI.Forms.MapView.MyLocationEnabledProperty">MyLocationEnabledProperty</h4>
   <div class="markdown level1 summary"></div>
@@ -798,17 +235,17 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Xamarin.Forms.BindableProperty</span></td>
+        <td><span class="xref">BindableProperty</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_MyLocationFollowProperty.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.MyLocationFollowProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_MyLocationFollowProperty.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.MyLocationFollowProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L262">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L262">View Source</a>
   </span>
   <h4 id="Mapsui_UI_Forms_MapView_MyLocationFollowProperty" data-uid="Mapsui.UI.Forms.MapView.MyLocationFollowProperty">MyLocationFollowProperty</h4>
   <div class="markdown level1 summary"></div>
@@ -827,17 +264,17 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Xamarin.Forms.BindableProperty</span></td>
+        <td><span class="xref">BindableProperty</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_PanLockProperty.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.PanLockProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_PanLockProperty.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.PanLockProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L267">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L267">View Source</a>
   </span>
   <h4 id="Mapsui_UI_Forms_MapView_PanLockProperty" data-uid="Mapsui.UI.Forms.MapView.PanLockProperty">PanLockProperty</h4>
   <div class="markdown level1 summary"></div>
@@ -856,17 +293,17 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Xamarin.Forms.BindableProperty</span></td>
+        <td><span class="xref">BindableProperty</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_ReSnapRotationDegreesProperty.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.ReSnapRotationDegreesProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_ReSnapRotationDegreesProperty.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.ReSnapRotationDegreesProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L264">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L264">View Source</a>
   </span>
   <h4 id="Mapsui_UI_Forms_MapView_ReSnapRotationDegreesProperty" data-uid="Mapsui.UI.Forms.MapView.ReSnapRotationDegreesProperty">ReSnapRotationDegreesProperty</h4>
   <div class="markdown level1 summary"></div>
@@ -885,17 +322,17 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Xamarin.Forms.BindableProperty</span></td>
+        <td><span class="xref">BindableProperty</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_RotationLockProperty.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.RotationLockProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_RotationLockProperty.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.RotationLockProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L265">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L265">View Source</a>
   </span>
   <h4 id="Mapsui_UI_Forms_MapView_RotationLockProperty" data-uid="Mapsui.UI.Forms.MapView.RotationLockProperty">RotationLockProperty</h4>
   <div class="markdown level1 summary"></div>
@@ -914,17 +351,17 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Xamarin.Forms.BindableProperty</span></td>
+        <td><span class="xref">BindableProperty</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_SelectedPinProperty.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.SelectedPinProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_SelectedPinProperty.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.SelectedPinProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L259">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L259">View Source</a>
   </span>
   <h4 id="Mapsui_UI_Forms_MapView_SelectedPinProperty" data-uid="Mapsui.UI.Forms.MapView.SelectedPinProperty">SelectedPinProperty</h4>
   <div class="markdown level1 summary"></div>
@@ -943,17 +380,17 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Xamarin.Forms.BindableProperty</span></td>
+        <td><span class="xref">BindableProperty</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_UniqueCalloutProperty.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.UniqueCalloutProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_UniqueCalloutProperty.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.UniqueCalloutProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L260">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L260">View Source</a>
   </span>
   <h4 id="Mapsui_UI_Forms_MapView_UniqueCalloutProperty" data-uid="Mapsui.UI.Forms.MapView.UniqueCalloutProperty">UniqueCalloutProperty</h4>
   <div class="markdown level1 summary"></div>
@@ -972,17 +409,17 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Xamarin.Forms.BindableProperty</span></td>
+        <td><span class="xref">BindableProperty</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_UnSnapRotationDegreesProperty.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.UnSnapRotationDegreesProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_UnSnapRotationDegreesProperty.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.UnSnapRotationDegreesProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L263">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L263">View Source</a>
   </span>
   <h4 id="Mapsui_UI_Forms_MapView_UnSnapRotationDegreesProperty" data-uid="Mapsui.UI.Forms.MapView.UnSnapRotationDegreesProperty">UnSnapRotationDegreesProperty</h4>
   <div class="markdown level1 summary"></div>
@@ -1001,17 +438,17 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Xamarin.Forms.BindableProperty</span></td>
+        <td><span class="xref">BindableProperty</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_UseDoubleTapProperty.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.UseDoubleTapProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_UseDoubleTapProperty.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.UseDoubleTapProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L271">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L271">View Source</a>
   </span>
   <h4 id="Mapsui_UI_Forms_MapView_UseDoubleTapProperty" data-uid="Mapsui.UI.Forms.MapView.UseDoubleTapProperty">UseDoubleTapProperty</h4>
   <div class="markdown level1 summary"></div>
@@ -1030,17 +467,17 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Xamarin.Forms.BindableProperty</span></td>
+        <td><span class="xref">BindableProperty</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_ZoomLockProperty.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.ZoomLockProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_ZoomLockProperty.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.ZoomLockProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L266">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L266">View Source</a>
   </span>
   <h4 id="Mapsui_UI_Forms_MapView_ZoomLockProperty" data-uid="Mapsui.UI.Forms.MapView.ZoomLockProperty">ZoomLockProperty</h4>
   <div class="markdown level1 summary"></div>
@@ -1059,7 +496,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Xamarin.Forms.BindableProperty</span></td>
+        <td><span class="xref">BindableProperty</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -1068,10 +505,10 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_Drawables.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.Drawables%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_Drawables.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.Drawables%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L354">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L354">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView_Drawables_" data-uid="Mapsui.UI.Forms.MapView.Drawables*"></a>
   <h4 id="Mapsui_UI_Forms_MapView_Drawables" data-uid="Mapsui.UI.Forms.MapView.Drawables">Drawables</h4>
@@ -1099,10 +536,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_IsMyLocationButtonVisible.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.IsMyLocationButtonVisible%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_IsMyLocationButtonVisible.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.IsMyLocationButtonVisible%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L413">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L413">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView_IsMyLocationButtonVisible_" data-uid="Mapsui.UI.Forms.MapView.IsMyLocationButtonVisible*"></a>
   <h4 id="Mapsui_UI_Forms_MapView_IsMyLocationButtonVisible" data-uid="Mapsui.UI.Forms.MapView.IsMyLocationButtonVisible">IsMyLocationButtonVisible</h4>
@@ -1130,10 +567,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_IsNorthingButtonVisible.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.IsNorthingButtonVisible%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_IsNorthingButtonVisible.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.IsNorthingButtonVisible%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L422">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L422">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView_IsNorthingButtonVisible_" data-uid="Mapsui.UI.Forms.MapView.IsNorthingButtonVisible*"></a>
   <h4 id="Mapsui_UI_Forms_MapView_IsNorthingButtonVisible" data-uid="Mapsui.UI.Forms.MapView.IsNorthingButtonVisible">IsNorthingButtonVisible</h4>
@@ -1161,10 +598,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_IsZoomButtonVisible.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.IsZoomButtonVisible%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_IsZoomButtonVisible.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.IsZoomButtonVisible%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L404">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L404">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView_IsZoomButtonVisible_" data-uid="Mapsui.UI.Forms.MapView.IsZoomButtonVisible*"></a>
   <h4 id="Mapsui_UI_Forms_MapView_IsZoomButtonVisible" data-uid="Mapsui.UI.Forms.MapView.IsZoomButtonVisible">IsZoomButtonVisible</h4>
@@ -1192,10 +629,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_Map.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.Map%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_Map.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.Map%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L280">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L280">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView_Map_" data-uid="Mapsui.UI.Forms.MapView.Map*"></a>
   <h4 id="Mapsui_UI_Forms_MapView_Map" data-uid="Mapsui.UI.Forms.MapView.Map">Map</h4>
@@ -1216,17 +653,17 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Map</span></td>
+        <td><a class="xref" href="Mapsui.Map.html">Map</a></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_MyLocationEnabled.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.MyLocationEnabled%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_MyLocationEnabled.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.MyLocationEnabled%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L313">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L313">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView_MyLocationEnabled_" data-uid="Mapsui.UI.Forms.MapView.MyLocationEnabled*"></a>
   <h4 id="Mapsui_UI_Forms_MapView_MyLocationEnabled" data-uid="Mapsui.UI.Forms.MapView.MyLocationEnabled">MyLocationEnabled</h4>
@@ -1257,10 +694,10 @@
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_MyLocationFollow.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.MyLocationFollow%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_MyLocationFollow.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.MyLocationFollow%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L322">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L322">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView_MyLocationFollow_" data-uid="Mapsui.UI.Forms.MapView.MyLocationFollow*"></a>
   <h4 id="Mapsui_UI_Forms_MapView_MyLocationFollow" data-uid="Mapsui.UI.Forms.MapView.MyLocationFollow">MyLocationFollow</h4>
@@ -1288,10 +725,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_MyLocationLayer.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.MyLocationLayer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_MyLocationLayer.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.MyLocationLayer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L305">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L305">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView_MyLocationLayer_" data-uid="Mapsui.UI.Forms.MapView.MyLocationLayer*"></a>
   <h4 id="Mapsui_UI_Forms_MapView_MyLocationLayer" data-uid="Mapsui.UI.Forms.MapView.MyLocationLayer">MyLocationLayer</h4>
@@ -1319,10 +756,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_Navigator.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.Navigator%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_Navigator.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.Navigator%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L447">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L447">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView_Navigator_" data-uid="Mapsui.UI.Forms.MapView.Navigator*"></a>
   <h4 id="Mapsui_UI_Forms_MapView_Navigator" data-uid="Mapsui.UI.Forms.MapView.Navigator">Navigator</h4>
@@ -1343,17 +780,17 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">INavigator</span></td>
+        <td><a class="xref" href="Mapsui.INavigator.html">INavigator</a></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_PanLock.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.PanLock%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_PanLock.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.PanLock%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L395">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L395">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView_PanLock_" data-uid="Mapsui.UI.Forms.MapView.PanLock*"></a>
   <h4 id="Mapsui_UI_Forms_MapView_PanLock" data-uid="Mapsui.UI.Forms.MapView.PanLock">PanLock</h4>
@@ -1381,10 +818,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_Pins.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.Pins%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_Pins.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.Pins%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L331">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L331">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView_Pins_" data-uid="Mapsui.UI.Forms.MapView.Pins*"></a>
   <h4 id="Mapsui_UI_Forms_MapView_Pins" data-uid="Mapsui.UI.Forms.MapView.Pins">Pins</h4>
@@ -1412,10 +849,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_PixelDensity.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.PixelDensity%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_PixelDensity.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.PixelDensity%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L466">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L466">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView_PixelDensity_" data-uid="Mapsui.UI.Forms.MapView.PixelDensity*"></a>
   <h4 id="Mapsui_UI_Forms_MapView_PixelDensity" data-uid="Mapsui.UI.Forms.MapView.PixelDensity">PixelDensity</h4>
@@ -1443,10 +880,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_Renderer.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.Renderer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_Renderer.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.Renderer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L469">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L469">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView_Renderer_" data-uid="Mapsui.UI.Forms.MapView.Renderer*"></a>
   <h4 id="Mapsui_UI_Forms_MapView_Renderer" data-uid="Mapsui.UI.Forms.MapView.Renderer">Renderer</h4>
@@ -1466,17 +903,17 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IRenderer</span></td>
+        <td><a class="xref" href="Mapsui.Rendering.IRenderer.html">IRenderer</a></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_ReSnapRotationDegrees.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.ReSnapRotationDegrees%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_ReSnapRotationDegrees.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.ReSnapRotationDegrees%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L368">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L368">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView_ReSnapRotationDegrees_" data-uid="Mapsui.UI.Forms.MapView.ReSnapRotationDegrees*"></a>
   <h4 id="Mapsui_UI_Forms_MapView_ReSnapRotationDegrees" data-uid="Mapsui.UI.Forms.MapView.ReSnapRotationDegrees">ReSnapRotationDegrees</h4>
@@ -1504,10 +941,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_RotationLock.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.RotationLock%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_RotationLock.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.RotationLock%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L377">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L377">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView_RotationLock_" data-uid="Mapsui.UI.Forms.MapView.RotationLock*"></a>
   <h4 id="Mapsui_UI_Forms_MapView_RotationLock" data-uid="Mapsui.UI.Forms.MapView.RotationLock">RotationLock</h4>
@@ -1535,10 +972,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_SelectedPin.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.SelectedPin%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_SelectedPin.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.SelectedPin%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L336">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L336">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView_SelectedPin_" data-uid="Mapsui.UI.Forms.MapView.SelectedPin*"></a>
   <h4 id="Mapsui_UI_Forms_MapView_SelectedPin" data-uid="Mapsui.UI.Forms.MapView.SelectedPin">SelectedPin</h4>
@@ -1566,10 +1003,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_UniqueCallout.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.UniqueCallout%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_UniqueCallout.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.UniqueCallout%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L345">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L345">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView_UniqueCallout_" data-uid="Mapsui.UI.Forms.MapView.UniqueCallout*"></a>
   <h4 id="Mapsui_UI_Forms_MapView_UniqueCallout" data-uid="Mapsui.UI.Forms.MapView.UniqueCallout">UniqueCallout</h4>
@@ -1597,10 +1034,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_UnSnapRotationDegrees.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.UnSnapRotationDegrees%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_UnSnapRotationDegrees.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.UnSnapRotationDegrees%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L359">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L359">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView_UnSnapRotationDegrees_" data-uid="Mapsui.UI.Forms.MapView.UnSnapRotationDegrees*"></a>
   <h4 id="Mapsui_UI_Forms_MapView_UnSnapRotationDegrees" data-uid="Mapsui.UI.Forms.MapView.UnSnapRotationDegrees">UnSnapRotationDegrees</h4>
@@ -1628,10 +1065,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_UseDoubleTap.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.UseDoubleTap%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_UseDoubleTap.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.UseDoubleTap%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L433">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L433">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView_UseDoubleTap_" data-uid="Mapsui.UI.Forms.MapView.UseDoubleTap*"></a>
   <h4 id="Mapsui_UI_Forms_MapView_UseDoubleTap" data-uid="Mapsui.UI.Forms.MapView.UseDoubleTap">UseDoubleTap</h4>
@@ -1661,10 +1098,10 @@ tap is returned.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_Viewport.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.Viewport%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_Viewport.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.Viewport%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L442">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L442">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView_Viewport_" data-uid="Mapsui.UI.Forms.MapView.Viewport*"></a>
   <h4 id="Mapsui_UI_Forms_MapView_Viewport" data-uid="Mapsui.UI.Forms.MapView.Viewport">Viewport</h4>
@@ -1685,17 +1122,17 @@ tap is returned.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IReadOnlyViewport</span></td>
+        <td><a class="xref" href="Mapsui.IReadOnlyViewport.html">IReadOnlyViewport</a></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_ZoomLock.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.ZoomLock%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_ZoomLock.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.ZoomLock%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L386">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L386">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView_ZoomLock_" data-uid="Mapsui.UI.Forms.MapView.ZoomLock*"></a>
   <h4 id="Mapsui_UI_Forms_MapView_ZoomLock" data-uid="Mapsui.UI.Forms.MapView.ZoomLock">ZoomLock</h4>
@@ -1725,10 +1162,10 @@ tap is returned.</p>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_GetEnumerator.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.GetEnumerator%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_GetEnumerator.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.GetEnumerator%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L572">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L572">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView_GetEnumerator_" data-uid="Mapsui.UI.Forms.MapView.GetEnumerator*"></a>
   <h4 id="Mapsui_UI_Forms_MapView_GetEnumerator" data-uid="Mapsui.UI.Forms.MapView.GetEnumerator">GetEnumerator()</h4>
@@ -1755,18 +1192,18 @@ tap is returned.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_GetMapInfo_Geometries_Point_System_Int32_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.GetMapInfo(Geometries.Point%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_GetMapInfo_Mapsui_Geometries_Point_System_Int32_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.GetMapInfo(Mapsui.Geometries.Point%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L482">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L482">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView_GetMapInfo_" data-uid="Mapsui.UI.Forms.MapView.GetMapInfo*"></a>
-  <h4 id="Mapsui_UI_Forms_MapView_GetMapInfo_Geometries_Point_System_Int32_" data-uid="Mapsui.UI.Forms.MapView.GetMapInfo(Geometries.Point,System.Int32)">GetMapInfo(Geometries.Point, Int32)</h4>
+  <h4 id="Mapsui_UI_Forms_MapView_GetMapInfo_Mapsui_Geometries_Point_System_Int32_" data-uid="Mapsui.UI.Forms.MapView.GetMapInfo(Mapsui.Geometries.Point,System.Int32)">GetMapInfo(Point, Int32)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public MapInfo GetMapInfo(Geometries.Point screenPosition, int margin = 0)</code></pre>
+    <pre><code class="lang-csharp hljs">public MapInfo GetMapInfo(Point screenPosition, int margin = 0)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1779,7 +1216,7 @@ tap is returned.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Geometries.Point</span></td>
+        <td><a class="xref" href="Mapsui.Geometries.Point.html">Point</a></td>
         <td><span class="parametername">screenPosition</span></td>
         <td></td>
       </tr>
@@ -1800,20 +1237,20 @@ tap is returned.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">MapInfo</span></td>
+        <td><a class="xref" href="Mapsui.UI.MapInfo.html">MapInfo</a></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_GetSnapshot_System_Collections_Generic_IEnumerable_ILayer__.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.GetSnapshot(System.Collections.Generic.IEnumerable%7BILayer%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.GetSnapshot(System.Collections.Generic.IEnumerable%7BMapsui.Layers.ILayer%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L488">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L488">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView_GetSnapshot_" data-uid="Mapsui.UI.Forms.MapView.GetSnapshot*"></a>
-  <h4 id="Mapsui_UI_Forms_MapView_GetSnapshot_System_Collections_Generic_IEnumerable_ILayer__" data-uid="Mapsui.UI.Forms.MapView.GetSnapshot(System.Collections.Generic.IEnumerable{ILayer})">GetSnapshot(IEnumerable&lt;ILayer&gt;)</h4>
+  <h4 id="Mapsui_UI_Forms_MapView_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__" data-uid="Mapsui.UI.Forms.MapView.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})">GetSnapshot(IEnumerable&lt;ILayer&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1831,7 +1268,7 @@ tap is returned.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">ILayer</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
         <td><span class="parametername">layers</span></td>
         <td></td>
       </tr>
@@ -1854,10 +1291,10 @@ tap is returned.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_HideCallouts.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.HideCallouts%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_HideCallouts.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.HideCallouts%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L562">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L562">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView_HideCallouts_" data-uid="Mapsui.UI.Forms.MapView.HideCallouts*"></a>
   <h4 id="Mapsui_UI_Forms_MapView_HideCallouts" data-uid="Mapsui.UI.Forms.MapView.HideCallouts">HideCallouts()</h4>
@@ -1870,10 +1307,10 @@ tap is returned.</p>
   </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_OnPropertyChanged_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.OnPropertyChanged(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_OnPropertyChanged_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.OnPropertyChanged(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L577">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L577">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView_OnPropertyChanged_" data-uid="Mapsui.UI.Forms.MapView.OnPropertyChanged*"></a>
   <h4 id="Mapsui_UI_Forms_MapView_OnPropertyChanged_System_String_" data-uid="Mapsui.UI.Forms.MapView.OnPropertyChanged(System.String)">OnPropertyChanged(String)</h4>
@@ -1900,14 +1337,12 @@ tap is returned.</p>
       </tr>
     </tbody>
   </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><span class="xref">Xamarin.Forms.Element.OnPropertyChanged(System.String)</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_OpenBrowser_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.OpenBrowser(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_OpenBrowser_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.OpenBrowser(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L512">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L512">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView_OpenBrowser_" data-uid="Mapsui.UI.Forms.MapView.OpenBrowser*"></a>
   <h4 id="Mapsui_UI_Forms_MapView_OpenBrowser_System_String_" data-uid="Mapsui.UI.Forms.MapView.OpenBrowser(System.String)">OpenBrowser(String)</h4>
@@ -1936,18 +1371,18 @@ tap is returned.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_Refresh_ChangeType_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.Refresh(ChangeType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_Refresh_Mapsui_ChangeType_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.Refresh(Mapsui.ChangeType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L476">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L476">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView_Refresh_" data-uid="Mapsui.UI.Forms.MapView.Refresh*"></a>
-  <h4 id="Mapsui_UI_Forms_MapView_Refresh_ChangeType_" data-uid="Mapsui.UI.Forms.MapView.Refresh(ChangeType)">Refresh(ChangeType)</h4>
+  <h4 id="Mapsui_UI_Forms_MapView_Refresh_Mapsui_ChangeType_" data-uid="Mapsui.UI.Forms.MapView.Refresh(Mapsui.ChangeType)">Refresh(ChangeType)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Refresh(ChangeType changeType = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Refresh(ChangeType changeType = ChangeType.Discrete)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1960,7 +1395,7 @@ tap is returned.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">ChangeType</span></td>
+        <td><a class="xref" href="Mapsui.ChangeType.html">ChangeType</a></td>
         <td><span class="parametername">changeType</span></td>
         <td></td>
       </tr>
@@ -1968,18 +1403,18 @@ tap is returned.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_RefreshData_ChangeType_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.RefreshData(ChangeType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_RefreshData_Mapsui_ChangeType_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.RefreshData(Mapsui.ChangeType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L500">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L500">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView_RefreshData_" data-uid="Mapsui.UI.Forms.MapView.RefreshData*"></a>
-  <h4 id="Mapsui_UI_Forms_MapView_RefreshData_ChangeType_" data-uid="Mapsui.UI.Forms.MapView.RefreshData(ChangeType)">RefreshData(ChangeType)</h4>
+  <h4 id="Mapsui_UI_Forms_MapView_RefreshData_Mapsui_ChangeType_" data-uid="Mapsui.UI.Forms.MapView.RefreshData(Mapsui.ChangeType)">RefreshData(ChangeType)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void RefreshData(ChangeType changeType = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public void RefreshData(ChangeType changeType = ChangeType.Discrete)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1992,7 +1427,7 @@ tap is returned.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">ChangeType</span></td>
+        <td><a class="xref" href="Mapsui.ChangeType.html">ChangeType</a></td>
         <td><span class="parametername">changeType</span></td>
         <td></td>
       </tr>
@@ -2000,10 +1435,10 @@ tap is returned.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_RefreshGraphics.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.RefreshGraphics%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_RefreshGraphics.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.RefreshGraphics%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L494">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L494">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView_RefreshGraphics_" data-uid="Mapsui.UI.Forms.MapView.RefreshGraphics*"></a>
   <h4 id="Mapsui_UI_Forms_MapView_RefreshGraphics" data-uid="Mapsui.UI.Forms.MapView.RefreshGraphics">RefreshGraphics()</h4>
@@ -2015,18 +1450,18 @@ tap is returned.</p>
   </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_ToDeviceIndependentUnits_Geometries_Point_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.ToDeviceIndependentUnits(Geometries.Point)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_ToDeviceIndependentUnits_Mapsui_Geometries_Point_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.ToDeviceIndependentUnits(Mapsui.Geometries.Point)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L518">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L518">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView_ToDeviceIndependentUnits_" data-uid="Mapsui.UI.Forms.MapView.ToDeviceIndependentUnits*"></a>
-  <h4 id="Mapsui_UI_Forms_MapView_ToDeviceIndependentUnits_Geometries_Point_" data-uid="Mapsui.UI.Forms.MapView.ToDeviceIndependentUnits(Geometries.Point)">ToDeviceIndependentUnits(Geometries.Point)</h4>
+  <h4 id="Mapsui_UI_Forms_MapView_ToDeviceIndependentUnits_Mapsui_Geometries_Point_" data-uid="Mapsui.UI.Forms.MapView.ToDeviceIndependentUnits(Mapsui.Geometries.Point)">ToDeviceIndependentUnits(Point)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Geometries.Point ToDeviceIndependentUnits(Geometries.Point coordinateInPixels)</code></pre>
+    <pre><code class="lang-csharp hljs">public Point ToDeviceIndependentUnits(Point coordinateInPixels)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -2039,7 +1474,7 @@ tap is returned.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Geometries.Point</span></td>
+        <td><a class="xref" href="Mapsui.Geometries.Point.html">Point</a></td>
         <td><span class="parametername">coordinateInPixels</span></td>
         <td></td>
       </tr>
@@ -2055,25 +1490,25 @@ tap is returned.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Geometries.Point</span></td>
+        <td><a class="xref" href="Mapsui.Geometries.Point.html">Point</a></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_ToPixels_Geometries_Point_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.ToPixels(Geometries.Point)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_ToPixels_Mapsui_Geometries_Point_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.ToPixels(Mapsui.Geometries.Point)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L524">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L524">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView_ToPixels_" data-uid="Mapsui.UI.Forms.MapView.ToPixels*"></a>
-  <h4 id="Mapsui_UI_Forms_MapView_ToPixels_Geometries_Point_" data-uid="Mapsui.UI.Forms.MapView.ToPixels(Geometries.Point)">ToPixels(Geometries.Point)</h4>
+  <h4 id="Mapsui_UI_Forms_MapView_ToPixels_Mapsui_Geometries_Point_" data-uid="Mapsui.UI.Forms.MapView.ToPixels(Mapsui.Geometries.Point)">ToPixels(Point)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Geometries.Point ToPixels(Geometries.Point coordinateInDeviceIndependentUnits)</code></pre>
+    <pre><code class="lang-csharp hljs">public Point ToPixels(Point coordinateInDeviceIndependentUnits)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -2086,7 +1521,7 @@ tap is returned.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Geometries.Point</span></td>
+        <td><a class="xref" href="Mapsui.Geometries.Point.html">Point</a></td>
         <td><span class="parametername">coordinateInDeviceIndependentUnits</span></td>
         <td></td>
       </tr>
@@ -2102,17 +1537,17 @@ tap is returned.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Geometries.Point</span></td>
+        <td><a class="xref" href="Mapsui.Geometries.Point.html">Point</a></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_Unsubscribe.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.Unsubscribe%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_Unsubscribe.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.Unsubscribe%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L506">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L506">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView_Unsubscribe_" data-uid="Mapsui.UI.Forms.MapView.Unsubscribe*"></a>
   <h4 id="Mapsui_UI_Forms_MapView_Unsubscribe" data-uid="Mapsui.UI.Forms.MapView.Unsubscribe">Unsubscribe()</h4>
@@ -2126,10 +1561,10 @@ tap is returned.</p>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_Fling.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.Fling%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_Fling.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.Fling%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L242">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L242">View Source</a>
   </span>
   <h4 id="Mapsui_UI_Forms_MapView_Fling" data-uid="Mapsui.UI.Forms.MapView.Fling">Fling</h4>
   <div class="markdown level1 summary"><p>Fling is called, when user release mouse button or lift finger while moving with a certain speed, higher than speed of swipe </p>
@@ -2156,10 +1591,10 @@ tap is returned.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_Hovered.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.Hovered%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_Hovered.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.Hovered%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L232">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L232">View Source</a>
   </span>
   <h4 id="Mapsui_UI_Forms_MapView_Hovered" data-uid="Mapsui.UI.Forms.MapView.Hovered">Hovered</h4>
   <div class="markdown level1 summary"><p>Hovered is called, when user move mouse over map without pressing mouse button</p>
@@ -2186,10 +1621,10 @@ tap is returned.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_Info.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.Info%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_Info.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.Info%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L253">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L253">View Source</a>
   </span>
   <h4 id="Mapsui_UI_Forms_MapView_Info" data-uid="Mapsui.UI.Forms.MapView.Info">Info</h4>
   <div class="markdown level1 summary"></div>
@@ -2208,17 +1643,17 @@ tap is returned.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.EventHandler</span>&lt;<span class="xref">MapInfoEventArgs</span>&gt;</td>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="Mapsui.UI.MapInfoEventArgs.html">MapInfoEventArgs</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_MapClicked.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.MapClicked%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_MapClicked.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.MapClicked%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L192">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L192">View Source</a>
   </span>
   <h4 id="Mapsui_UI_Forms_MapView_MapClicked" data-uid="Mapsui.UI.Forms.MapView.MapClicked">MapClicked</h4>
   <div class="markdown level1 summary"><p>Occurs when map clicked</p>
@@ -2245,10 +1680,10 @@ tap is returned.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_MapLongClicked.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.MapLongClicked%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_MapLongClicked.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.MapLongClicked%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L197">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L197">View Source</a>
   </span>
   <h4 id="Mapsui_UI_Forms_MapView_MapLongClicked" data-uid="Mapsui.UI.Forms.MapView.MapLongClicked">MapLongClicked</h4>
   <div class="markdown level1 summary"><p>Occurs when map long clicked</p>
@@ -2275,10 +1710,10 @@ tap is returned.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_PinClicked.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.PinClicked%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_PinClicked.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.PinClicked%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L182">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L182">View Source</a>
   </span>
   <h4 id="Mapsui_UI_Forms_MapView_PinClicked" data-uid="Mapsui.UI.Forms.MapView.PinClicked">PinClicked</h4>
   <div class="markdown level1 summary"><p>Occurs when a pin clicked</p>
@@ -2305,10 +1740,10 @@ tap is returned.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_SelectedPinChanged.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.SelectedPinChanged%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_SelectedPinChanged.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.SelectedPinChanged%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L187">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L187">View Source</a>
   </span>
   <h4 id="Mapsui_UI_Forms_MapView_SelectedPinChanged" data-uid="Mapsui.UI.Forms.MapView.SelectedPinChanged">SelectedPinChanged</h4>
   <div class="markdown level1 summary"><p>Occurs when selected pin changed</p>
@@ -2335,10 +1770,10 @@ tap is returned.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_Swipe.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.Swipe%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_Swipe.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.Swipe%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L237">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L237">View Source</a>
   </span>
   <h4 id="Mapsui_UI_Forms_MapView_Swipe" data-uid="Mapsui.UI.Forms.MapView.Swipe">Swipe</h4>
   <div class="markdown level1 summary"><p>Swipe is called, when user release mouse button or lift finger while moving with a certain speed </p>
@@ -2365,10 +1800,10 @@ tap is returned.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_TouchAction.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.TouchAction%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_TouchAction.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.TouchAction%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L227">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L227">View Source</a>
   </span>
   <h4 id="Mapsui_UI_Forms_MapView_TouchAction" data-uid="Mapsui.UI.Forms.MapView.TouchAction">TouchAction</h4>
   <div class="markdown level1 summary"><p>TouchAction is called, when user provoques a touch event</p>
@@ -2388,17 +1823,17 @@ tap is returned.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.EventHandler</span>&lt;<span class="xref">SkiaSharp.Views.Forms.SKTouchEventArgs</span>&gt;</td>
+        <td><span class="xref">System.EventHandler</span>&lt;<span class="xref">SKTouchEventArgs</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_TouchEnded.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.TouchEnded%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_TouchEnded.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.TouchEnded%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L207">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L207">View Source</a>
   </span>
   <h4 id="Mapsui_UI_Forms_MapView_TouchEnded" data-uid="Mapsui.UI.Forms.MapView.TouchEnded">TouchEnded</h4>
   <div class="markdown level1 summary"><p>TouchEnd is called, when user release a mouse button or doesn&apos;t touch display anymore</p>
@@ -2425,10 +1860,10 @@ tap is returned.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_TouchEntered.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.TouchEntered%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_TouchEntered.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.TouchEntered%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L212">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L212">View Source</a>
   </span>
   <h4 id="Mapsui_UI_Forms_MapView_TouchEntered" data-uid="Mapsui.UI.Forms.MapView.TouchEntered">TouchEntered</h4>
   <div class="markdown level1 summary"><p>TouchEntered is called, when user moves an active touch onto the view</p>
@@ -2455,10 +1890,10 @@ tap is returned.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_TouchExited.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.TouchExited%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_TouchExited.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.TouchExited%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L217">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L217">View Source</a>
   </span>
   <h4 id="Mapsui_UI_Forms_MapView_TouchExited" data-uid="Mapsui.UI.Forms.MapView.TouchExited">TouchExited</h4>
   <div class="markdown level1 summary"><p>TouchExited is called, when user moves an active touch off the view</p>
@@ -2485,10 +1920,10 @@ tap is returned.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_TouchMove.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.TouchMove%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_TouchMove.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.TouchMove%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L222">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L222">View Source</a>
   </span>
   <h4 id="Mapsui_UI_Forms_MapView_TouchMove" data-uid="Mapsui.UI.Forms.MapView.TouchMove">TouchMove</h4>
   <div class="markdown level1 summary"><p>TouchMove is called, when user move mouse over map (independent from mouse button state) or move finger on display</p>
@@ -2515,10 +1950,10 @@ tap is returned.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_TouchStarted.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.TouchStarted%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_TouchStarted.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.TouchStarted%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L202">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L202">View Source</a>
   </span>
   <h4 id="Mapsui_UI_Forms_MapView_TouchStarted" data-uid="Mapsui.UI.Forms.MapView.TouchStarted">TouchStarted</h4>
   <div class="markdown level1 summary"><p>TouchStart is called, when user press a mouse button or touch the display</p>
@@ -2545,10 +1980,10 @@ tap is returned.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_ViewportInitialized.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.ViewportInitialized%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_ViewportInitialized.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.ViewportInitialized%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L250">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L250">View Source</a>
   </span>
   <h4 id="Mapsui_UI_Forms_MapView_ViewportInitialized" data-uid="Mapsui.UI.Forms.MapView.ViewportInitialized">ViewportInitialized</h4>
   <div class="markdown level1 summary"></div>
@@ -2574,10 +2009,10 @@ tap is returned.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_Zoomed.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.Zoomed%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_Zoomed.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.Zoomed%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L247">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L247">View Source</a>
   </span>
   <h4 id="Mapsui_UI_Forms_MapView_Zoomed" data-uid="Mapsui.UI.Forms.MapView.Zoomed">Zoomed</h4>
   <div class="markdown level1 summary"><p>Zoom is called, when map should be zoomed</p>
@@ -2606,10 +2041,10 @@ tap is returned.</p>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView_System_Collections_IEnumerable_GetEnumerator.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.System%23Collections%23IEnumerable%23GetEnumerator%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView_System_Collections_IEnumerable_GetEnumerator.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView.System%23Collections%23IEnumerable%23GetEnumerator%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L567">View Source</a>
+    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L567">View Source</a>
   </span>
   <a id="Mapsui_UI_Forms_MapView_System_Collections_IEnumerable_GetEnumerator_" data-uid="Mapsui.UI.Forms.MapView.System#Collections#IEnumerable#GetEnumerator*"></a>
   <h4 id="Mapsui_UI_Forms_MapView_System_Collections_IEnumerable_GetEnumerator" data-uid="Mapsui.UI.Forms.MapView.System#Collections#IEnumerable#GetEnumerator">IEnumerable.GetEnumerator()</h4>
@@ -2636,34 +2071,7 @@ tap is returned.</p>
   </table>
   <h3 id="implements">Implements</h3>
   <div>
-      <span class="xref">Xamarin.Forms.IAnimatable</span>
-  </div>
-  <div>
-      <span class="xref">Xamarin.Forms.ITabStopElement</span>
-  </div>
-  <div>
-      <span class="xref">Xamarin.Forms.IViewController</span>
-  </div>
-  <div>
-      <span class="xref">Xamarin.Forms.IVisualElementController</span>
-  </div>
-  <div>
-      <span class="xref">Xamarin.Forms.IElementController</span>
-  </div>
-  <div>
-      <span class="xref">Xamarin.Forms.Internals.IGestureController</span>
-  </div>
-  <div>
-      <span class="xref">Xamarin.Forms.IGestureRecognizers</span>
-  </div>
-  <div>
-      <span class="xref">Xamarin.Forms.ILayout</span>
-  </div>
-  <div>
-      <span class="xref">Xamarin.Forms.ILayoutController</span>
-  </div>
-  <div>
-      <span class="xref">IMapControl</span>
+      <a class="xref" href="Mapsui.UI.IMapControl.html">IMapControl</a>
   </div>
   <div>
       <span class="xref">System.ComponentModel.INotifyPropertyChanged</span>
@@ -2682,15 +2090,16 @@ tap is returned.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Forms_MapView.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/janusw/Mapsui/new/Mapsui.Native_doc/apiSpec/new?filename=Mapsui_UI_Forms_MapView.md&amp;value=---%0Auid%3A%20Mapsui.UI.Forms.MapView%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/MapView.cs/#L23" class="contribution-link">View Source</a>
+                    <a href="https://github.com/janusw/Mapsui/blob/Mapsui.Native_doc/Mapsui.UI.Forms/MapView.cs/#L23" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>
