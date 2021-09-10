@@ -65,7 +65,7 @@ $(function () {
   (function () {
     anchors.options = {
       placement: 'left',
-      visible: 'hover'
+      visible: 'touch'
     };
     anchors.add('article h2:not(.no-anchor), article h3:not(.no-anchor), article h4:not(.no-anchor)');
   })();
@@ -232,7 +232,7 @@ $(function () {
     // Highlight the searching keywords
     function highlightKeywords() {
       var q = url('?q');
-      if (q) {
+      if (q !== null) {
         var keywords = q.split("%20");
         keywords.forEach(function (keyword) {
           if (keyword !== "") {
@@ -256,7 +256,7 @@ $(function () {
           } else {
             flipContents("hide");
             $("body").trigger("queryReady");
-            $('#search-results>.search-list>span').text('"' + query + '"');
+            $('#search-results>.search-list').text('Search Results for "' + query + '"');
           }
         }).off("keydown");
       });
@@ -301,17 +301,12 @@ $(function () {
 
     function handleSearchResults(hits) {
       var numPerPage = 10;
-      var pagination = $('#pagination');
-      pagination.empty();
-      pagination.removeData("twbs-pagination");
+      $('#pagination').empty();
+      $('#pagination').removeData("twbs-pagination");
       if (hits.length === 0) {
         $('#search-results>.sr-items').html('<p>No results found</p>');
-      } else {        
-        pagination.twbsPagination({
-          first: pagination.data('first'),
-          prev: pagination.data('prev'),
-          next: pagination.data('next'),
-          last: pagination.data('last'),
+      } else {
+        $('#pagination').twbsPagination({
           totalPages: Math.ceil(hits.length / numPerPage),
           visiblePages: 5,
           onPageClick: function (event, page) {
@@ -326,7 +321,7 @@ $(function () {
                 var itemBrief = extractContentBrief(hit.keywords);
 
                 var itemNode = $('<div>').attr('class', 'sr-item');
-                var itemTitleNode = $('<div>').attr('class', 'item-title').append($('<a>').attr('href', itemHref).attr("target", "_blank").attr("rel", "noopener noreferrer").text(itemTitle));
+                var itemTitleNode = $('<div>').attr('class', 'item-title').append($('<a>').attr('href', itemHref).attr("target", "_blank").text(itemTitle));
                 var itemHrefNode = $('<div>').attr('class', 'item-href').text(itemRawHref);
                 var itemBriefNode = $('<div>').attr('class', 'item-brief').text(itemBrief);
                 itemNode.append(itemTitleNode).append(itemHrefNode).append(itemBriefNode);
@@ -379,7 +374,7 @@ $(function () {
           navrel = navbarPath.substr(0, index + 1);
         }
         $('#navbar>ul').addClass('navbar-nav');
-        var currentAbsPath = util.getCurrentWindowAbsolutePath();
+        var currentAbsPath = util.getAbsolutePath(window.location.pathname);
         // set active item
         $('#navbar').find('a[href]').each(function (i, e) {
           var href = $(e).attr("href");
@@ -427,8 +422,6 @@ $(function () {
       $('#toc a.active').parents('li').each(function (i, e) {
         $(e).addClass(active).addClass(expanded);
         $(e).children('a').addClass(active);
-      })
-      $('#toc a.active').parents('li').each(function (i, e) {
         top += $(e).position().top;
       })
       $('.sidetoc').scrollTop(top - 50);
@@ -454,11 +447,7 @@ $(function () {
         var val = this.value;
         //Save filter string to local session storage
         if (typeof(Storage) !== "undefined") {
-          try {
-            sessionStorage.filterString = val;
-            }
-          catch(e)
-            {}
+          sessionStorage.filterString = val;
         }
         if (val === '') {
           // Clear 'filtered' class
@@ -467,16 +456,6 @@ $(function () {
           return;
         }
         tocFilterClearButton.fadeIn();
-
-        // set all parent nodes status
-        $('#toc li>a').filter(function (i, e) {
-          return $(e).siblings().length > 0
-        }).each(function (i, anchor) {
-          var parent = $(anchor).parent();
-          parent.addClass(hide);
-          parent.removeClass(show);
-          parent.removeClass(filtered);
-        })
         
         // Get leaf nodes
         $('#toc li>a').filter(function (i, e) {
@@ -525,22 +504,14 @@ $(function () {
         tocFilterInput.val("");
         tocFilterInput.trigger('input');
         if (typeof(Storage) !== "undefined") {
-          try {
-            sessionStorage.filterString = "";
-            }
-          catch(e)
-            {}
+          sessionStorage.filterString = "";
         }
       });
 
       //Set toc filter from local session storage on page load
       if (typeof(Storage) !== "undefined") {
-        try {
-          tocFilterInput.val(sessionStorage.filterString);
-          tocFilterInput.trigger('input');
-          }
-        catch(e)
-          {}
+        tocFilterInput.val(sessionStorage.filterString);
+        tocFilterInput.trigger('input');
       }
     }
 
@@ -556,10 +527,7 @@ $(function () {
         if (index > -1) {
           tocrel = tocPath.substr(0, index + 1);
         }
-        var currentHref = util.getCurrentWindowAbsolutePath();
-        if(!currentHref.endsWith('.html')) {
-          currentHref += '.html';
-        }
+        var currentHref = util.getAbsolutePath(window.location.pathname);
         $('#sidetoc').find('a[href]').each(function (i, e) {
           var href = $(e).attr("href");
           if (util.isRelativePath(href)) {
@@ -601,12 +569,10 @@ $(function () {
   //Setup Affix
   function renderAffix() {
     var hierarchy = getHierarchy();
-    if (!hierarchy || hierarchy.length <= 0) {
-      $("#affix").hide();
-    }
-    else {
-      var html = util.formList(hierarchy, ['nav', 'bs-docs-sidenav']);
-      $("#affix>div").empty().append(html);
+    if (hierarchy && hierarchy.length > 0) {
+      var html = '<h5 class="title">In This Article</h5>'
+      html += util.formList(hierarchy, ['nav', 'bs-docs-sidenav']);
+      $("#affix").empty().append(html);
       if ($('footer').is(':visible')) {
         $(".sideaffix").css("bottom", "70px");
       }
@@ -1057,25 +1023,14 @@ $(function () {
     this.getAbsolutePath = getAbsolutePath;
     this.isRelativePath = isRelativePath;
     this.isAbsolutePath = isAbsolutePath;
-    this.getCurrentWindowAbsolutePath = getCurrentWindowAbsolutePath;
     this.getDirectory = getDirectory;
     this.formList = formList;
 
     function getAbsolutePath(href) {
-      if (isAbsolutePath(href)) return href;
-      var currentAbsPath = getCurrentWindowAbsolutePath();
-      var stack = currentAbsPath.split("/");
-      stack.pop();
-      var parts = href.split("/");
-      for (var i=0; i< parts.length; i++) {
-        if (parts[i] == ".") continue;
-        if (parts[i] == ".." && stack.length > 0)
-          stack.pop();
-        else
-          stack.push(parts[i]);
-      }
-      var p = stack.join("/");
-      return p;
+      // Use anchor to normalize href
+      var anchor = $('<a href="' + href + '"></a>')[0];
+      // Ignore protocal, remove search and query
+      return anchor.host + anchor.pathname;
     }
 
     function isRelativePath(href) {
@@ -1089,9 +1044,6 @@ $(function () {
       return (/^(?:[a-z]+:)?\/\//i).test(href);
     }
 
-    function getCurrentWindowAbsolutePath() {
-      return window.location.origin + window.location.pathname;
-    }
     function getDirectory(href) {
       if (!href) return '';
       var index = href.lastIndexOf('/');
@@ -1210,7 +1162,7 @@ $(function () {
 
     $(window).on('hashchange', scrollToCurrent);
 
-    $(window).on('load', function () {
+    $(window).load(function () {
         // scroll to the anchor if present, offset by the header
         scrollToCurrent();
     });
