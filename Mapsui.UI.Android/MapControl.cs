@@ -56,24 +56,27 @@ namespace Mapsui.UI.Android
         public MapControl(Context context, IAttributeSet attrs) :
             base(context, attrs)
         {
+            CommonInitialize();
             Initialize();
         }
 
         public MapControl(Context context, IAttributeSet attrs, int defStyle) :
             base(context, attrs, defStyle)
         {
+            CommonInitialize();
             Initialize();
         }
 
-        public void Initialize()
+        void Initialize()
         {
+            _invalidate = () => { RunOnUIThread(RefreshGraphicsWithTryCatch); };
+
             SetBackgroundColor(Color.Transparent);
             _canvas = RenderMode == SkiaRenderMode.Software ? StartSoftwareRenderMode() : StartHardwareRenderMode();
             _mainLooperHandler = new Handler(Looper.MainLooper);
 
             SetViewportSize(); // todo: check if size is available, perhaps we need a load event
 
-            Map = new Map();
             Touch += MapView_Touch;
 
             var listener = new MapControlGestureListener();
@@ -85,14 +88,16 @@ namespace Mapsui.UI.Android
             _gestureDetector.DoubleTap += OnDoubleTapped;
         }
 
-        private void CanvasOnPaintSurface(object sender, SKPaintSurfaceEventArgs e)
+        private void CanvasOnPaintSurface(object sender, SKPaintSurfaceEventArgs args)
         {
-            if (PixelDensity <= 0) return;
+            if (PixelDensity <= 0) 
+                return;
 
-            e.Surface.Canvas.Scale(PixelDensity, PixelDensity);
+            var canvas = args.Surface.Canvas;
+                
+            canvas.Scale(PixelDensity, PixelDensity);
 
-            Navigator.UpdateAnimations();
-            Renderer.Render(e.Surface.Canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
+            CommonDrawControl(canvas);
         }
 
         public SkiaRenderMode RenderMode
@@ -146,10 +151,14 @@ namespace Mapsui.UI.Android
 
         private void CanvasOnPaintSurfaceGL(object sender, SKPaintGLSurfaceEventArgs args)
         {
-            args.Surface.Canvas.Scale(PixelDensity, PixelDensity);
+            if (PixelDensity <= 0)
+                return;
 
-            Navigator.UpdateAnimations();
-            Renderer.Render(args.Surface.Canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
+            var canvas = args.Surface.Canvas;
+
+            canvas.Scale(PixelDensity, PixelDensity);
+
+            CommonDrawControl(canvas);
         }
 
         public void OnFling(object sender, GestureDetector.FlingEventArgs args)
@@ -307,11 +316,6 @@ namespace Mapsui.UI.Android
         private static Point GetScreenPositionInPixels(MotionEvent motionEvent, View view)
         {
             return new PointF(motionEvent.GetX(0) - view.Left, motionEvent.GetY(0) - view.Top).ToMapsui();
-        }
-
-        public void RefreshGraphics()
-        {
-            RunOnUIThread(RefreshGraphicsWithTryCatch);
         }
 
         private void RefreshGraphicsWithTryCatch()

@@ -47,13 +47,22 @@ namespace Mapsui.UI.Wpf
 
         public MapControl()
         {
+            CommonInitialize();
+            Initialize();
+        }
+
+        void Initialize()
+        {
+            _invalidate = () => {
+                if (Dispatcher.CheckAccess()) InvalidateCanvas();
+                else RunOnUIThread(InvalidateCanvas);
+            };
+
             Children.Add(WpfCanvas);
             Children.Add(SkiaCanvas);
             Children.Add(_selectRectangle);
 
             SkiaCanvas.PaintSurface += SKElementOnPaintSurface;
-
-            Map = new Map();
 
             Loaded += MapControlLoaded;
             MouseLeftButtonDown += MapControlMouseLeftButtonDown;
@@ -148,17 +157,10 @@ namespace Mapsui.UI.Wpf
 
         public event EventHandler<FeatureInfoEventArgs> FeatureInfo; // todo: Remove and add sample for alternative
 
-        public void RefreshGraphics()
-        {
-            if (Dispatcher.CheckAccess()) InvalidateCanvas();
-            else RunOnUIThread(InvalidateCanvas);
-        }
-
         internal void InvalidateCanvas()
         {
             if (RenderMode == RenderMode.Wpf) InvalidateVisual(); // To trigger OnRender of this MapControl
             else SkiaCanvas.InvalidateVisual();
-
         }
 
         private void MapControlLoaded(object sender, RoutedEventArgs e)
@@ -483,23 +485,19 @@ namespace Mapsui.UI.Wpf
 
         private void SKElementOnPaintSurface(object sender, SKPaintSurfaceEventArgs args)
         {
-            if (Renderer == null) return;
-            if (_map == null) return;
-            if (PixelDensity <= 0) return;
+            if (PixelDensity <= 0) 
+                return;
 
-            args.Surface.Canvas.Scale(PixelDensity, PixelDensity);
+            var canvas = args.Surface.Canvas;
+            
+            canvas.Scale(PixelDensity, PixelDensity);
 
-            Navigator.UpdateAnimations();
-            Renderer.Render(args.Surface.Canvas, new Viewport(Viewport), Map.Layers, Map.Widgets, Map.BackColor);
+            CommonDrawControl(canvas);
         }
 
         private void PaintWpf()
         {
-            if (Renderer == null) return;
-            if (_map == null) return;
-
-            Navigator.UpdateAnimations();
-            Renderer.Render(WpfCanvas, Viewport, _map.Layers, Map.Widgets, _map.BackColor);
+            CommonDrawControl(WpfCanvas);
         }
 
         private float GetPixelDensity()

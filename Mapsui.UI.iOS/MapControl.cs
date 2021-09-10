@@ -22,18 +22,27 @@ namespace Mapsui.UI.iOS
         public MapControl(CGRect frame)
             : base(frame)
         {
+            CommonInitialize();
             Initialize();
         }
 
         [Preserve]
         public MapControl(IntPtr handle) : base(handle) // used when initialized from storyboard
         {
+            CommonInitialize();
             Initialize();
         }
 
-        public void Initialize()
+        void Initialize()
         {
-            Map = new Map();
+            _invalidate = () => {
+                RunOnUIThread(() =>
+                {
+                    SetNeedsDisplay();
+                    _canvas?.SetNeedsDisplay();
+                });
+            };
+
             BackgroundColor = UIColor.White;
 
             _canvas.TranslatesAutoresizingMaskIntoConstraints = false;
@@ -90,12 +99,14 @@ namespace Mapsui.UI.iOS
 
         void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs args)
         {
-            if (PixelDensity <= 0) return;
+            if (PixelDensity <= 0) 
+                return;
 
-            args.Surface.Canvas.Scale(PixelDensity, PixelDensity);
+            var canvas = args.Surface.Canvas;
+            
+            canvas.Scale(PixelDensity, PixelDensity);
 
-            Navigator.UpdateAnimations();
-            Renderer.Render(args.Surface.Canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
+            CommonDrawControl(canvas);
         }
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)
@@ -182,15 +193,6 @@ namespace Mapsui.UI.iOS
         private void RunOnUIThread(Action action)
         {
             DispatchQueue.MainQueue.DispatchAsync(action);
-        }
-
-        public void RefreshGraphics()
-        {
-            RunOnUIThread(() =>
-            {
-                SetNeedsDisplay();
-                _canvas?.SetNeedsDisplay();
-            });
         }
 
         public override CGRect Frame

@@ -35,7 +35,6 @@ namespace Mapsui.UI.Forms
 
         private SKGLView _glView;
         private SKCanvasView _canvasView;
-        private Action _invalidate;
 
         // See http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/4.0.4_r2.1/android/view/ViewConfiguration.java#ViewConfiguration.0PRESSED_STATE_DURATION for values
         private const int shortTap = 125;
@@ -74,6 +73,7 @@ namespace Mapsui.UI.Forms
 
         public MapControl()
         {
+            CommonInitialize();
             Initialize();
         }
 
@@ -90,7 +90,7 @@ namespace Mapsui.UI.Forms
         public bool UseDoubleTap = true;
         public bool UseFling = true;
 
-        public void Initialize()
+        void Initialize()
         {
             Xamarin.Forms.View view;
 
@@ -309,23 +309,17 @@ namespace Mapsui.UI.Forms
 
         void PaintSurface(SKCanvas canvas)
         {
-            if (PixelDensity <= 0) return;
-
-            Navigator.UpdateAnimations();
+            if (PixelDensity <= 0) 
+                return;
 
             canvas.Scale(PixelDensity, PixelDensity);
 
-            _renderer.Render(canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
+            CommonDrawControl(canvas);
         }
 
         private Geometries.Point GetScreenPosition(SKPoint point)
         {
             return new Geometries.Point(point.X / PixelDensity, point.Y / PixelDensity);
-        }
-
-        public void RefreshGraphics()
-        {
-            _invalidate();
         }
 
         /// <summary>

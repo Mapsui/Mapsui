@@ -28,7 +28,109 @@ namespace Mapsui.UI.Wpf
     {
         private Map _map;
         private double _unSnapRotationDegrees;
+        // Flag indicating if a drawing process is running
+        private bool _drawing = false;
+        // Flag indicating if a new drawing process should start
+        private bool _refresh = false;
+        // Action to call for a redraw of the control
+        private Action _invalidate;
+        // Timer for loop to invalidating the control
+        private System.Threading.Timer _invalidateTimer;
+        // Interval between two calls of the invalidate function in ms
+        private int _updateInterval = 16;
 
+       void CommonInitialize()
+        {
+            // Create map
+            Map = new Map();
+            // Create timer for invalidating the control
+            _invalidateTimer = new((state) => InvalidateTimerCallback(state), null, System.Threading.Timeout.Infinite, 16);
+            // Start the invalidation timer
+            StartUpdates(false);
+        }
+
+        void CommonDrawControl(object canvas)
+        {
+            if (_drawing)
+                return;
+            if (Renderer == null) 
+                return;
+            if (_map == null) 
+                return;
+            if (!Viewport.HasSize) 
+                return;
+
+            // Start drawing
+            _drawing = true;
+            // All requested updates up to this points will be handled by this redraw
+            _refresh = false;
+            Navigator.UpdateAnimations();
+            Renderer.Render(canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
+            // End drawing
+            _drawing = false;
+        }
+
+        void InvalidateTimerCallback(object state)
+        {
+            if (_drawing || !_refresh)
+                return;
+
+            _invalidate?.Invoke();
+        }
+
+        /// <summary>
+        /// Start updates for control
+        /// </summary>
+        /// <remarks>
+        /// When this function is called, the control is redrawn if needed
+        /// </remarks>
+        public void StartUpdates(bool refresh = true)
+        {
+            _refresh = refresh;
+            _invalidateTimer.Change(0, _updateInterval);
+        }
+
+        /// <summary>
+        /// Stop updates for control
+        /// </summary>
+        /// <remarks>
+        /// When this function is called, the control stops to redraw itself, 
+        /// even if it is needed
+        /// </remarks>
+        public void StopUpdates()
+        {
+            _invalidateTimer.Change(System.Threading.Timeout.Infinite, System.Threading.Timeout.Infinite);
+        }
+
+        /// <summary>
+        /// Force a update of control
+        /// </summary>
+        /// <remarks>
+        /// When this function is called, the control draws itself once 
+        /// </remarks>
+        public void ForceUpdate()
+        {
+            _invalidate?.Invoke();
+        }
+
+        /// <summary>
+        /// Interval between two redraws of the MapControl in ms
+        /// </summary>
+        public int UpdateInterval
+        {
+            get => _updateInterval;
+            set
+            {
+                if (value <= 0)
+                    throw new ArgumentOutOfRangeException("UpdateInterval must be greater than 0");
+
+                if (_updateInterval != value)
+                {
+                    _updateInterval = value;
+                    StartUpdates();
+                }
+            }
+        }
         /// <summary>
         /// After how many degrees start rotation to take place
         /// </summary>
@@ -186,6 +288,11 @@ namespace Mapsui.UI.Wpf
         {
             RefreshData(changeType);
             RefreshGraphics();
+        }
+
+        public void RefreshGraphics()
+        {
+            _refresh = true;
         }
 
         private void MapDataChanged(object sender, DataChangedEventArgs e)

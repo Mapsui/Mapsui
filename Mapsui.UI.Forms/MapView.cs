@@ -471,6 +471,18 @@ namespace Mapsui.UI.Forms
         internal IMapControl MapControl => _mapControl;
 
         /// <summary>
+        /// Update interval for invalidation timer in ms
+        /// </summary>
+        public int UpdateInterval
+        {
+            get => _mapControl.UpdateInterval;
+            set
+            {
+                _mapControl.UpdateInterval = value;
+            }
+        }
+
+        /// <summary>
         /// IMapControl
         /// </summary>
 
@@ -539,6 +551,40 @@ namespace Mapsui.UI.Forms
         }
 
         #endregion
+
+        /// <summary>
+        /// Start updates for control
+        /// </summary>
+        /// <remarks>
+        /// When this function is called, the control is redrawn if needed
+        /// </remarks>
+        public void StartUpdates(bool refresh = true)
+        {
+            _mapControl.StartUpdates(refresh);
+        }
+
+        /// <summary>
+        /// Stop updates for control
+        /// </summary>
+        /// <remarks>
+        /// When this function is called, the control stops to redraw itself, 
+        /// even if it is needed
+        /// </remarks>
+        public void StopUpdates()
+        {
+            _mapControl.StopUpdates();
+        }
+
+        /// <summary>
+        /// Force a update of control
+        /// </summary>
+        /// <remarks>
+        /// When this function is called, the control draws itself once 
+        /// </remarks>
+        public void ForceUpdate()
+        {
+            _mapControl.ForceUpdate();
+        }
 
         internal void AddCallout(Callout callout)
         {

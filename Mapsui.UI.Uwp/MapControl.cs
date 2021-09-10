@@ -44,14 +44,25 @@ namespace Mapsui.UI.Uwp
 
         public MapControl()
         {
+            CommonInitialize();
+            Initialize();
+        }
+
+        void Initialize()
+        {
+            _invalidate = () => {
+                // The commented out code crashes the app when MouseWheelAnimation.Duration > 0. Could be a bug in SKXamlCanvas
+                //if (Dispatcher.HasThreadAccess) _canvas?.Invalidate();
+                //else RunOnUIThread(() => _canvas?.Invalidate());
+                RunOnUIThread(() => _canvas?.Invalidate()); 
+            };
+
             Background = new SolidColorBrush(Colors.White); // DON'T REMOVE! Touch events do not work without a background
 
             Children.Add(_canvas);
             Children.Add(_selectRectangle);
 
             _canvas.PaintSurface += Canvas_PaintSurface;
-
-            Map = new Map();
 
             Loaded += MapControlLoaded;
 
@@ -154,14 +165,6 @@ namespace Mapsui.UI.Uwp
 
             e.Handled = true;
         }
-        
-        public void RefreshGraphics()
-        {
-            // The commented out code crashes the app when MouseWheelAnimation.Duration > 0. Could be a bug in SKXamlCanvas
-            //if (Dispatcher.HasThreadAccess) _canvas?.Invalidate();
-            //else RunOnUIThread(() => _canvas?.Invalidate());
-            RunOnUIThread(() => _canvas?.Invalidate());
-        }
 
         private void MapControlLoaded(object sender, RoutedEventArgs e)
         {
@@ -181,15 +184,14 @@ namespace Mapsui.UI.Uwp
 
         private void Canvas_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
-            if (Renderer == null) return;
-            if (_map == null) return;
-            if (!Viewport.HasSize) return;
-            if (PixelDensity <= 0) return;
+            if (PixelDensity <= 0) 
+                return;
 
-            e.Surface.Canvas.Scale(PixelDensity, PixelDensity);
+            var canvas = e.Surface.Canvas;
+            
+            canvas.Scale(PixelDensity, PixelDensity);
 
-            Navigator.UpdateAnimations();
-            Renderer.Render(e.Surface.Canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
+            CommonDrawControl(canvas);
         }
 
         [Obsolete("Use MapControl.Navigate.NavigateTo instead", true)]
