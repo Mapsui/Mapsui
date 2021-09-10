@@ -1,0 +1,50 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "versionupdater/3.0.0-rc.2": {
+        "dependencies": {
+          "CommandLineParser": "2.8.0",
+          "Microsoft.Net.Compilers.Toolset": "3.11.0"
+        },
+        "runtime": {
+          "versionupdater.dll": {}
+        }
+      },
+      "CommandLineParser/2.8.0": {
+        "runtime": {
+          "lib/netstandard2.0/CommandLine.dll": {
+            "assemblyVersion": "2.8.0.0",
+            "fileVersion": "2.8.0.0"
+          }
+        }
+      },
+      "Microsoft.Net.Compilers.Toolset/3.11.0": {}
+    }
+  },
+  "libraries": {
+    "versionupdater/3.0.0-rc.2": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "CommandLineParser/2.8.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-eco2HlKQBY4Joz9odHigzGpVzv6pjsXnY5lziioMveQxr+i2Z7xYcIOMeZTgYiqnMtMAbXMXsVhrNfWO5vJS8Q==",
+      "path": "commandlineparser/2.8.0",
+      "hashPath": "commandlineparser.2.8.0.nupkg.sha512"
+    },
+    "Microsoft.Net.Compilers.Toolset/3.11.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-B1IsmNdUC4ytcdVuxuY2qKfc/pePaALn/Qr/8WBt/Bk+DytTZUar0JkmDxbMSa+gAEhVEVdeKEPBy9m7JZ1OEA==",
+      "path": "microsoft.net.compilers.toolset/3.11.0",
+      "hashPath": "microsoft.net.compilers.toolset.3.11.0.nupkg.sha512"
+    }
+  }
+}
