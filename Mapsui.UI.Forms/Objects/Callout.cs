@@ -4,12 +4,9 @@ using Mapsui.Rendering.Skia;
 using Mapsui.Styles;
 using Mapsui.UI.Forms.Extensions;
 using Mapsui.UI.Objects;
-using SkiaSharp;
 using System;
-using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using Topten.RichTextKit;
 using Xamarin.Forms;
 
 namespace Mapsui.UI.Forms
