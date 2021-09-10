@@ -9,7 +9,6 @@ using System.Linq;
 using Mapsui.Geometries.Utilities;
 using Xamarin.Forms;
 using System.Threading.Tasks;
-using Mapsui.Utilities;
 
 namespace Mapsui.UI.Forms
 {
@@ -89,6 +88,7 @@ namespace Mapsui.UI.Forms
         public ISymbolCache SymbolCache => _renderer.SymbolCache;
 
         public bool UseDoubleTap = true;
+        public bool UseFling = true;
 
         public void Initialize()
         {
@@ -178,14 +178,17 @@ namespace Mapsui.UI.Forms
                     double velocityX;
                     double velocityY;
 
-                    (velocityX, velocityY) = _flingTracker.CalcVelocity(e.Id, ticks);
-
-                    if (Math.Abs(velocityX) > 200 || Math.Abs(velocityY) > 200)
+                    if (UseFling)
                     {
-                        // This was the last finger on screen, so this is a fling
-                        e.Handled = OnFlinged(velocityX, velocityY);
-                    }
+                        (velocityX, velocityY) = _flingTracker.CalcVelocity(e.Id, ticks);
 
+                        if (Math.Abs(velocityX) > 200 || Math.Abs(velocityY) > 200)
+                        {
+                            // This was the last finger on screen, so this is a fling
+                            e.Handled = OnFlinged(velocityX, velocityY);
+                        }
+                    }
+                
                     // Do we have a tap event
                     if (releasedTouch == null)
                     {

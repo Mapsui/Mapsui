@@ -269,6 +269,7 @@ namespace Mapsui.UI.Forms
         public static readonly BindableProperty IsMyLocationButtonVisibleProperty = BindableProperty.Create(nameof(IsMyLocationButtonVisibleProperty), typeof(bool), typeof(MapView), true);
         public static readonly BindableProperty IsNorthingButtonVisibleProperty = BindableProperty.Create(nameof(IsNorthingButtonVisibleProperty), typeof(bool), typeof(MapView), true);
         public static readonly BindableProperty UseDoubleTapProperty = BindableProperty.Create(nameof(UseDoubleTapProperty), typeof(bool), typeof(MapView), default(bool));
+        public static readonly BindableProperty UseFlingProperty = BindableProperty.Create(nameof(UseFlingProperty), typeof(bool), typeof(MapView), default(bool));
 
         #endregion
 
@@ -427,13 +428,24 @@ namespace Mapsui.UI.Forms
 
         /// <summary>
         /// Enable checks for double tapping. 
-        /// But be carefull, this will add some extra time, before a single
+        /// But be careful, this will add some extra time, before a single
         /// tap is returned.
         /// </summary>
         public bool UseDoubleTap
         {
             get => (bool)GetValue(UseDoubleTapProperty);
             set => SetValue(UseDoubleTapProperty, value);
+        }
+
+
+        /// <summary>
+        /// Enable fling of the map. If touch is lifted during dragging
+        /// the map the map will slide a bit more in the same direction.
+        /// </summary>
+        public bool UseFling
+        {
+            get => (bool)GetValue(UseFlingProperty);
+            set => SetValue(UseFlingProperty, value);
         }
 
         /// <summary>
@@ -638,6 +650,9 @@ namespace Mapsui.UI.Forms
 
             if (propertyName.Equals(nameof(UseDoubleTapProperty)) || propertyName.Equals(nameof(UseDoubleTap)))
                 _mapControl.UseDoubleTap = UseDoubleTap;
+
+            if (propertyName.Equals(nameof(UseFlingProperty)) || propertyName.Equals(nameof(UseFlingProperty)))
+                _mapControl.UseFling = UseFling;
         }
 
         #region Handlers
