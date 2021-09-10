@@ -10,7 +10,7 @@ namespace VersionUpdater
 {
     public class Options
     {
-        [Option('v', "version", Required = true, HelpText = "Specifies the version in semver format")]
+        [Option('v', "version", Required = true, HelpText = "Specifies the version to set in semver format")]
         public string Version { get; set; }
     }
 
