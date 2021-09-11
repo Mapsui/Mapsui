@@ -19,8 +19,6 @@
     <PackageReference Include="HarfBuzzSharp" Version="2.6.1.7">
     </PackageReference>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3">
-    </PackageReference>
     <PackageReference Include="OpenTK.GLControl" Version="3.1.0">
     </PackageReference>
     <PackageReference Include="SkiaSharp.Views.Forms.WPF" Version="2.80.3">
