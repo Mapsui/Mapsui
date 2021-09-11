@@ -35,7 +35,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{B2DB
 		Scripts\readme.txt = Scripts\readme.txt
 		Scripts\rename.ps1 = Scripts\rename.ps1
 		Scripts\test-image-copier.cmd = Scripts\test-image-copier.cmd
-		Scripts\updateversionnumber.proj = Scripts\updateversionnumber.proj
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Rendering.Skia.Tests", "Tests\Mapsui.Rendering.Skia.Tests\Mapsui.Rendering.Skia.Tests.csproj", "{53A4E033-F814-46CC-8105-DAC289524455}"
