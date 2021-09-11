@@ -22,19 +22,20 @@ namespace VersionUpdater
                 .WithParsed(o =>
                 {
                     var version = Version.Parse(o.Version);
-                    Console.WriteLine($"{nameof(version.Major)}  {version.Major}");
-                    Console.WriteLine($"{nameof(version.Minor)}  {version.Minor}");
-                    Console.WriteLine($"{nameof(version.Patch)} {version.Patch}");
-                    Console.WriteLine($"{nameof(version.PreRelease)} {version.PreRelease}");
 
-                    var files = GetAssemblyInfoFiles().ToList();
-                    UpdateAssemblyInfoFiles(version, files);
-                    UpdateCommonPropsFile(version, "Mapsui.common.props");
+                    Console.WriteLine($"{nameof(version.FullVersion)}: {version.FullVersion}");
+                    Console.WriteLine($"{nameof(version.Major)}:       {version.Major}");
+                    Console.WriteLine($"{nameof(version.Minor)}:       {version.Minor}");
+                    Console.WriteLine($"{nameof(version.Patch)}:       {version.Patch}");
+                    Console.WriteLine($"{nameof(version.PreRelease)}:  {version.PreRelease}");
+
+                    UpdateAssemblyInfoFiles(version);
+                    UpdateVersionXmlNodeInFile(version, "Directory.Build.props");
                 })
                 .WithNotParsed(HandleParseError);
         }
 
-        private static void UpdateCommonPropsFile(Version version, string file)
+        private static void UpdateVersionXmlNodeInFile(Version version, string file)
         {
             var text = File.ReadAllText(file);
             var assemblyVersionRegex = new Regex("<Version>(.*?)</Version>");
@@ -43,7 +44,7 @@ namespace VersionUpdater
             File.WriteAllText(file, text, utf8WithBom);
         }
 
-        public static IEnumerable<string> GetAssemblyInfoFiles()
+        private static IEnumerable<string> GetAssemblyInfoFiles()
         {
             foreach (string file in Directory.EnumerateFiles(
                 Environment.CurrentDirectory, "AssemblyInfo.cs", SearchOption.AllDirectories))
@@ -52,8 +53,10 @@ namespace VersionUpdater
             }
         }
 
-        public static void UpdateAssemblyInfoFiles(Version version, IEnumerable<string> files)
+        private static void UpdateAssemblyInfoFiles(Version version)
         {
+            var files = GetAssemblyInfoFiles().ToList();
+
             foreach (var file in files)
             {
                 var text = File.ReadAllText(file);
@@ -68,7 +71,7 @@ namespace VersionUpdater
             }
         }
 
-        static void HandleParseError(IEnumerable<Error> errors)
+        private static void HandleParseError(IEnumerable<Error> errors)
         {
             Console.WriteLine("Parse error");
 
