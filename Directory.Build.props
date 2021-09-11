@@ -1,7 +1,7 @@
 ﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
-    <Version>3.0.0-alpha.4</Version>
+    <Version>3.0.0-rc.2</Version>
     <NeutralLanguage>en</NeutralLanguage>
     <Copyright>Copyright © Mapsui Developers 2018</Copyright>
     <PackageLicenseUrl>https://raw.githubusercontent.com/Mapsui/Mapsui/master/LICENSE.md</PackageLicenseUrl>
