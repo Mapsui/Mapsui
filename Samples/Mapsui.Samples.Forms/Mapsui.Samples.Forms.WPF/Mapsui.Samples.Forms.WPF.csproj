@@ -16,8 +16,6 @@
   <ItemGroup>
     <PackageReference Include="BruTile.MbTiles" Version="4.0.0">
     </PackageReference>
-    <PackageReference Include="HarfBuzzSharp" Version="2.6.1.7">
-    </PackageReference>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="OpenTK.GLControl" Version="3.1.0">
     </PackageReference>
