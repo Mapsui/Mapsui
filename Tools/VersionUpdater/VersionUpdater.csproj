@@ -1,27 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk" DefaultTargets="Build" ToolsVersion="15.0">
-   <PropertyGroup>
-    <TargetFramework>net48</TargetFramework>
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
     <OutputType>Exe</OutputType>
-     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-  <PlatformTarget>AnyCPU</PlatformTarget>
-  <DebugSymbols>true</DebugSymbols>
-  <DebugType>portable</DebugType>
-  <Optimize>false</Optimize>
-  <OutputPath>bin\Debug\</OutputPath>
-  <DefineConstants>DEBUG;TRACE</DefineConstants>
-  <ErrorReport>prompt</ErrorReport>
-  <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <PackageReference Include="CmdLine" Version="1.0.7.509">
-    </PackageReference>
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
-    <PackageReference Include="System.Memory" Version="4.5.4">
-    </PackageReference>
+    <PackageReference Include="CommandLineParser" Version="2.8.0" />
   </ItemGroup>
+
 </Project>
