@@ -63,7 +63,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuSpec", "NuSpec", "{D90027DD-A6D6-4C32-91DC-237B55141EB8}"
 	ProjectSection(SolutionItems) = preProject
 		NuSpec\Mapsui.Forms.nuspec = NuSpec\Mapsui.Forms.nuspec
-		NuSpec\Mapsui.Mac.nuspec = NuSpec\Mapsui.Mac.nuspec
+		NuSpec\Mapsui.Native.nuspec = NuSpec\Mapsui.Native.nuspec
 		NuSpec\Mapsui.nuspec = NuSpec\Mapsui.nuspec
 	EndProjectSection
 EndProject
