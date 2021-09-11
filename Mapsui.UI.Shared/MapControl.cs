@@ -38,6 +38,8 @@ namespace Mapsui.UI.Wpf
         private System.Threading.Timer _invalidateTimer;
         // Interval between two calls of the invalidate function in ms
         private int _updateInterval = 16;
+        // Stopwatch for drawing
+        private System.Diagnostics.Stopwatch _stopwatch = new System.Diagnostics.Stopwatch();
 
        void CommonInitialize()
         {
@@ -62,10 +64,14 @@ namespace Mapsui.UI.Wpf
 
             // Start drawing
             _drawing = true;
-            // All requested updates up to this points will be handled by this redraw
+            // Start stopwatch
+            _stopwatch.Restart();
+            // All requested updates up to this point will be handled by this redraw
             _refresh = false;
             Navigator.UpdateAnimations();
             Renderer.Render(canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
+            _stopwatch.Stop();
+            System.Diagnostics.Debug.WriteLine($"Time for drawing control [ms]: {_stopwatch.Elapsed.TotalMilliseconds}");
             // End drawing
             _drawing = false;
         }
