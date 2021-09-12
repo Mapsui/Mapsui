@@ -7,7 +7,7 @@ Start a new WPF application in Visual Studio.
 ### Step 2
 In the package manager console type:
 ```
-PM> Install-Package Mapsui
+PM> Install-Package Mapsui.Native
 ```
 
 ### Step 3
