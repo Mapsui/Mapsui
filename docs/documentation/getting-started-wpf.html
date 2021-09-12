@@ -8,7 +8,7 @@
     <title>Mapsui WPF getting started </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Mapsui WPF getting started ">
-    <meta name="generator" content="docfx 2.48.0.0">
+    <meta name="generator" content="docfx 2.58.3.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -59,11 +59,11 @@
       <div class="container body-content">
         
         <div id="search-results">
-          <div class="search-list"></div>
+          <div class="search-list">Search Results for <span></span></div>
           <div class="sr-items">
             <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
           </div>
-          <ul id="pagination"></ul>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
         </div>
       </div>
       <div role="main" class="container body-content hide-when-search">
@@ -86,12 +86,12 @@
 <pre><code>PM&gt; Install-Package Mapsui.Native
 </code></pre><h3 id="step-3">Step 3</h3>
 <p>In WpfApplication1.MainWindow.xaml add this in the Grid element:</p>
-<pre><code>&lt;xaml:MapControl Name=&quot;MyMapControl&quot;&gt;&lt;/xaml:MapControl&gt;
-</code></pre><p>And add the namespace: <code>xmlns:xaml=&quot;clr-namespace:Mapsui.UI.Wpf;assembly=Mapsui.UI.Wpf&quot;</code></p>
+<pre><code>&lt;mapsui:MapControl Name=&quot;MyMapControl&quot;&gt;&lt;/mapsui:MapControl&gt;
+</code></pre><p>And add the namespace: <code>xmlns:mapsui=&quot;clr-namespace:Mapsui.UI.Wpf;assembly=Mapsui.UI.Wpf&quot;</code></p>
 <h3 id="step-4">Step 4</h3>
-<p>In WpfApplication1.MainWindow.xaml.cs add in the constructor:</p>
-<pre><code>MyMapControl.Map.Layers.Add(new TileLayer(KnownTileSources.Create()));
-</code></pre><p>And add the namespaces: <code>using BruTile.Predefined; using Mapsui.Layers;</code></p>
+<p>In WpfApplication1.MainWindow.xaml.cs add in the constructor <strong>after</strong> InitializeComponent():</p>
+<pre><code>MyMapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer(&quot;your-user-agent&quot;));
+</code></pre><p>And add the namespaces: <code>using Mapsui.Utilities; using Mapsui.Layers;</code></p>
 <h3 id="step-5">Step 5</h3>
 <p>Run!</p>
 </article>
@@ -102,12 +102,13 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Mapsui/Mapsui/blob/master/docfx/documentation/getting-started-wpf.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/janusw/Mapsui/blob/pauldendulk-patch-2/docfx/documentation/getting-started-wpf.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>
