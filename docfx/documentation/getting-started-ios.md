@@ -10,7 +10,17 @@ Add package 'Mapsui.Native' to the project (don't forget to enable check at 'Inc
 
 ### Step 3
 
-Open ViewController.cs and add code to ViewDidLoad() method:
+Open ViewController.cs 
+
+add namespaces:
+
+```
+using Mapsui;
+using Mapsui.UI.iOS;
+using Mapsui.Utilities;
+```
+
+add code to ViewDidLoad() method:
 
 ```
 public override void ViewDidLoad()
@@ -19,7 +29,7 @@ public override void ViewDidLoad()
 
    var mapControl = new MapControl(View.Bounds);
    var map = new Map();
-   map.Layers.Add(OpenStreetMap.CreateTileLayer());
+   map.Layers.Add(OpenStreetMap.CreateTileLayer("your-user-agent"));
    mapControl.Map = map;
    View = mapControl;
 }
