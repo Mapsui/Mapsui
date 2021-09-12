@@ -1,10 +1,16 @@
 # Mapsui iOS Getting Started
 
-### Step 1: Create new 'Single View App' in Visual Studio for Mac
+### Step 1 
 
-### Step 2: Add package 'Mapsui.Native' to the project (don't forget to enable check at 'Include prereleases')
+Create new 'Single View App' in Visual Studio for Mac
 
-### Step 3: Open ViewController.cs and add code to ViewDidLoad() method:
+### Step 2
+
+Add package 'Mapsui.Native' to the project (don't forget to enable check at 'Include prereleases')
+
+### Step 3
+
+Open ViewController.cs and add code to ViewDidLoad() method:
 
 ```
 public override void ViewDidLoad()
