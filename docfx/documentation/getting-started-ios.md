@@ -2,7 +2,7 @@
 
 ### Step 1 
 
-Create new 'Single View App' in Visual Studio for Mac
+Create new 'Single View App' in Visual Studio
 
 ### Step 2
 
@@ -34,3 +34,7 @@ public override void ViewDidLoad()
    View = mapControl;
 }
 ```
+
+### Step 4
+
+Run!
