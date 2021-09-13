@@ -598,7 +598,9 @@ namespace Mapsui
 
         private void FlingFinal(AnimationEntry entry)
         {
-            // Nothing to do
+            _viewport.SetCenter(_viewport.Center.X, _viewport.Center.Y);
+
+            Navigated?.Invoke(this, ChangeType.Discrete);
         }
 
         public void UpdateAnimations()
