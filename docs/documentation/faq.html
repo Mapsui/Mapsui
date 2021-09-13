@@ -81,7 +81,8 @@
 
 <h3 id="the-openstreetmap-layer-does-not-show">The openstreetmap layer does not show</h3>
 <p>The most common reason is that the default user-agent used by the osm layer is blocked.  The default user-agent gets blocked by osm at some point because there is always someone somewhere abusing the api. Within your app you need to use a user-agent that is specific to your app. We change the user agent from time to time so that the samples work but it will probably get blocked again at some point. Better not to wait until that happens and create you own user-agent right away.</p>
-<h3 id="why-is-all-my-data-in-a-small-area-near-the-west-coast-of-africa">Why is all my data in a small area near the west coast of Africa?</h3>
+<pre><code class="lang-csharp">MapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer(&quot;your-user-agent&quot;));
+</code></pre><h3 id="why-is-all-my-data-in-a-small-area-near-the-west-coast-of-africa">Why is all my data in a small area near the west coast of Africa?</h3>
 <p>This is because the background data is in SphericalMercator (it is in the SphericalMercator 
 coordinate system) and the foreground data is in WGS84 (latlon). Use 
 SphericalMercator.FromLonLat to transform it.
