@@ -18,6 +18,15 @@ add namespace:
 xmlns:uwp="using:Mapsui.UI.Uwp"
 ```
 
+Add MapControl to the Grid:
+
+```
+<Grid>
+    <uwp:MapControl x:Name="MapControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+</Grid>
+```
+
+
 In MainPage.xaml.cs, add namespace:
 
 ```
