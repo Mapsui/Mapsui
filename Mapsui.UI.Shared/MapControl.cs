@@ -66,19 +66,19 @@ namespace Mapsui.UI.Wpf
 
             // Start drawing
             _drawing = true;
-#if DEBUG
+
             // Start stopwatch before updating animations and drawing control
             _stopwatch.Restart();
-#endif
+
             // All requested updates up to this point will be handled by this redraw
             _refresh = false;
             Navigator.UpdateAnimations();
             Renderer.Render(canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
-#if DEBUG
+
             // Stop stopwatch after drawing control
             _stopwatch.Stop();
             Logger.Log(LogLevel.Information, $"Time for drawing control [ms]: {_stopwatch.Elapsed.TotalMilliseconds}");
-#endif
+
             // End drawing
             _drawing = false;
         }
