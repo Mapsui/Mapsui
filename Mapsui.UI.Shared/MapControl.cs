@@ -38,10 +38,8 @@ namespace Mapsui.UI.Wpf
         private System.Threading.Timer _invalidateTimer;
         // Interval between two calls of the invalidate function in ms
         private int _updateInterval = 16;
-#if DEBUG
         // Stopwatch for measuring drawing times
         private System.Diagnostics.Stopwatch _stopwatch = new System.Diagnostics.Stopwatch();
-#endif
 
         void CommonInitialize()
         {
