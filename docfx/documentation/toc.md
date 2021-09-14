@@ -3,6 +3,7 @@
 ## [Quickstart WPF](getting-started-wpf.md)
 ## [Quickstart Android](getting-started-android.md)
 ## [Quickstart UWP](getting-started-uwp.md)
+## [Quickstart iOS](getting-started-ios.md)
 ## [Samples](samples.md)
 ## [Tutorials](tutorials.md)
 ## [How to work with Mapsui](how-to-work-with-mapsui.md)

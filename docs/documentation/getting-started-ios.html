@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Frequently Asked Questions </title>
+    <title>Mapsui iOS Getting Started </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Frequently Asked Questions ">
+    <meta name="title" content="Mapsui iOS Getting Started ">
     <meta name="generator" content="docfx 2.48.0.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
@@ -77,27 +77,31 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="frequently-asked-questions">Frequently Asked Questions</h1>
+<h1 id="mapsui-ios-getting-started">Mapsui iOS Getting Started</h1>
 
-<h3 id="the-openstreetmap-layer-does-not-show">The openstreetmap layer does not show</h3>
-<p>The most common reason is that the default user-agent used by the osm layer is blocked.  The default user-agent gets blocked by osm at some point because there is always someone somewhere abusing the api. Within your app you need to use a user-agent that is specific to your app. We change the user agent from time to time so that the samples work but it will probably get blocked again at some point. Better not to wait until that happens and create you own user-agent right away.</p>
-<pre><code class="lang-csharp">MapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer(&quot;your-user-agent&quot;));
-</code></pre><h3 id="why-is-all-my-data-in-a-small-area-near-the-west-coast-of-africa">Why is all my data in a small area near the west coast of Africa?</h3>
-<p>This is because the background data is in SphericalMercator (it is in the SphericalMercator 
-coordinate system) and the foreground data is in WGS84 (latlon). Use 
-SphericalMercator.FromLonLat to transform it.
-Note: There can be many other forms of mixing up coordinate systems, but this is the most common.</p>
-<h3 id="why-does-navigateto-zoom-into-an-area-near-the-west-coast-of-africa">Why does NavigateTo zoom into an area near the west coast of Africa?</h3>
-<p>This is because the coordinates you pass to NavigateTo are in WGS84 whereas the
-background data is in SphericalMercator. Use SphericalMercator.FromLonLat to transform 
-the NavigateTo arguments to SphericalMercator.
-Note: There can be many other forms of mixing up coordinate systems, but this is the most common.</p>
-<h3 id="how-can-i-get-rid-of-the-white-dots-or-black-lines">How can I get rid of the white dots or black lines?</h3>
-<p>In Mapsui v1 and v2 a layer is created with a default style (<code>Layer.Style</code>). This style applies to all features
-in the layer. You need to set the Style field to null if you do not want to use it (<code>Layer.Style = null</code>). 
-The default style shows as a white dot on Point geometries and a black line on LineStrings and Polygons.
-Since most users work with styles on the <em>feature</em> they are not aware of the style on the <em>layer</em>, this make 
-the default style confusing and it should be removed in v3.</p>
+<h3 id="step-1">Step 1</h3>
+<p>Create new &#39;Single View App&#39; in Visual Studio</p>
+<h3 id="step-2">Step 2</h3>
+<p>Add package &#39;Mapsui.Native&#39; to the project (don&#39;t forget to enable check at &#39;Include prereleases&#39;)</p>
+<h3 id="step-3">Step 3</h3>
+<p>Open ViewController.cs </p>
+<p>add namespaces:</p>
+<pre><code>using Mapsui;
+using Mapsui.UI.iOS;
+using Mapsui.Utilities;
+</code></pre><p>add code to ViewDidLoad() method:</p>
+<pre><code>public override void ViewDidLoad()
+{
+   base.ViewDidLoad();
+
+   var mapControl = new MapControl(View.Bounds);
+   var map = new Map();
+   map.Layers.Add(OpenStreetMap.CreateTileLayer(&quot;your-user-agent&quot;));
+   mapControl.Map = map;
+   View = mapControl;
+}
+</code></pre><h3 id="step-4">Step 4</h3>
+<p>Run!</p>
 </article>
           </div>
           
@@ -106,7 +110,7 @@ the default style confusing and it should be removed in v3.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Mapsui/Mapsui/blob/master/docfx/documentation/faq.md/#L1" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/master/docfx/documentation/getting-started-ios.md/#L1" class="contribution-link">Improve this Doc</a>
                   </li>
                 </ul>
               </div>
