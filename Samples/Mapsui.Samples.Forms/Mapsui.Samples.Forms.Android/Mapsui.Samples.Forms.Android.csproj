@@ -123,7 +123,7 @@
       <Version>2.80.3</Version>
     </PackageReference>
     <PackageReference Include="sqlite-net-pcl">
-      <Version>1.6.292</Version>
+      <Version>1.8.116</Version>
     </PackageReference>
     <PackageReference Include="Svg.Skia">
       <Version>0.5.7.1</Version>
