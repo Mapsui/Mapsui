@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Mapsui.iOS</id>
+    <version>$version$</version>
+    <title>Mapsui</title>
+    <authors>Paul den Dulk</authors>
+    <owners>Paul den Dulk</owners>
+    <projectUrl>https://github.com/Mapsui/Mapsui</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>
+      Xamarin iOS map components based on the Mapsui library
+    </description>
+    <tags>map maps mapping geo gis osm</tags>
+    <copyright>© Mapsui Contributors</copyright>
+    <language>en-US</language>
+    <dependencies>
+      <!-- [ or ] is including, ( or ) is excluding -->
+      <group targetFramework="Xamarin.iOS">
+        <dependency id="Mapsui" version="$version$"/>
+        <dependency id="SkiaSharp.Views" version="[2.80.3,3.0.0)"/>
+        <dependency id="System.Memory" version="[4.5.4,5.0.0]"/>
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\Mapsui.UI.iOS\bin\Release\Mapsui.UI.iOS.dll" target="lib\Xamarin.iOS\Mapsui.UI.iOS.dll" />
+  </files>
+</package>
