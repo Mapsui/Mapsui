@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Mapsui.Uwp</id>
+    <version>$version$</version>
+    <title>Mapsui</title>
+    <authors>Paul den Dulk</authors>
+    <owners>Paul den Dulk</owners>
+    <projectUrl>https://github.com/Mapsui/Mapsui</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>
+      UWP map components based on the Mapsui library
+    </description>
+    <tags>map maps mapping geo gis osm uwp</tags>
+    <language>en-US</language>
+    <dependencies>
+      <!-- [ or ] is including, ( or ) is excluding -->
+      <group targetFramework="uap">
+        <dependency id="Mapsui" version="$version$"/>
+        <dependency id="SkiaSharp.Views" version="[2.80.3,3.0.0)"/>
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\Mapsui.UI.Uwp\bin\Release\Mapsui.UI.Uwp.dll" target="lib\uap\Mapsui.UI.Uwp.dll" />
+  </files>
+</package>
