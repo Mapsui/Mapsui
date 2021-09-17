@@ -9,7 +9,7 @@
     <projectUrl>https://github.com/Mapsui/Mapsui</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>
-      Mapsui - Library for mapping (native UI for different platforms)
+      WPF map components based on the Mapsui library
     </description>
     <tags>map maps mapping geo gis osm</tags>
     <copyright>© Mapsui Contributors</copyright>
