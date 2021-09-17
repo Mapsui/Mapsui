@@ -2,6 +2,7 @@
 ## [Quickstart Xamarin.Forms](getting-started-xamarin-forms.md)
 ## [Quickstart WPF](getting-started-wpf.md)
 ## [Quickstart Android](getting-started-android.md)
+## [Quickstart UWP](getting-started-uwp.md)
 ## [Quickstart iOS](getting-started-ios.md)
 ## [Samples](samples.md)
 ## [Tutorials](tutorials.md)
