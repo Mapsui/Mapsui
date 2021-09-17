@@ -12,18 +12,15 @@
       Mapsui - Library for mapping (native UI for different platforms)
     </description>
     <tags>map maps mapping geo gis osm</tags>
-    <copyright>© Mapsui Contributers</copyright>
+    <copyright>© Mapsui Contributors</copyright>
     <language>en-US</language>
     <dependencies>
       <!-- [ or ] is including, ( or ) is excluding -->
       <group targetFramework="net48">
         <dependency id="Mapsui" version="$version$"/>
         <dependency id="BruTile" version="[4.0.0,5.0.0)"/>
-        <dependency id="Newtonsoft.json" version="[11.0.1,)"/>
         <dependency id="SkiaSharp" version="[2.80.3,3.0.0)"/>
-        <dependency id="Svg.Skia" version="[0.5.0,0.6)"/>
         <dependency id="SkiaSharp.Views" version="[2.80.3,3.0.0)"/>
-        <dependency id="Topten.RichTextKit" version="[0.4.145,0.5)"/>
       </group>
     </dependencies>
   </metadata>
