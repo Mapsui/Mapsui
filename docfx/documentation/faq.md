@@ -3,6 +3,10 @@
 ### The openstreetmap layer does not show 
 The most common reason is that the default user-agent used by the osm layer is blocked.  The default user-agent gets blocked by osm at some point because there is always someone somewhere abusing the api. Within your app you need to use a user-agent that is specific to your app. We change the user agent from time to time so that the samples work but it will probably get blocked again at some point. Better not to wait until that happens and create you own user-agent right away.
 
+```csharp
+MapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer("your-user-agent"));
+```
+
 ### Why is all my data in a small area near the west coast of Africa?
 This is because the background data is in SphericalMercator (it is in the SphericalMercator 
 coordinate system) and the foreground data is in WGS84 (latlon). Use 

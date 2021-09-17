@@ -1,4 +1,5 @@
-﻿using BruTile.Predefined;
+﻿using System.IO;
+using BruTile.Predefined;
 using BruTile.Web;
 using Mapsui.Layers;
 
@@ -6,12 +7,13 @@ namespace Mapsui.Utilities
 {
     public static class OpenStreetMap
     {
-        private const string DefaultUserAgent = "Default Mapsui user-agent";
         private static readonly BruTile.Attribution OpenStreetMapAttribution = new BruTile.Attribution(
             "© OpenStreetMap contributors", "https://www.openstreetmap.org/copyright");
 
-        public static TileLayer CreateTileLayer(string userAgent = DefaultUserAgent)
+        public static TileLayer CreateTileLayer(string userAgent = null)
         {
+            userAgent ??= $"user-agent-of-{Path.GetFileNameWithoutExtension(System.AppDomain.CurrentDomain.FriendlyName)}";
+
             return new TileLayer(CreateTileSource(userAgent)) { Name = "OpenStreetMap" };
         }
 

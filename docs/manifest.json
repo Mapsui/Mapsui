@@ -18,7 +18,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Android.MapControl.html",
-          "hash": "JRjS9MfHYKGD70zcq1xyrw=="
+          "hash": "lWKhw4n4Gcu9dBhDXe2S5Q=="
         }
       },
       "is_incremental": false,
@@ -246,7 +246,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.MapControl.html",
-          "hash": "ZmnKOl2HXJ5VH2+3MTw92w=="
+          "hash": "Lmnw5SbCDR466axMf7e5FA=="
         }
       },
       "is_incremental": false,
@@ -558,7 +558,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Wpf.MapControl.html",
-          "hash": "g72Cc1pEiMlpRW6+O9bSug=="
+          "hash": "kyGob1UZ/8glOKUN3X10Bg=="
         }
       },
       "is_incremental": false,
@@ -654,7 +654,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.iOS.MapControl.html",
-          "hash": "/cN27+Ot+K+5WMn49244JQ=="
+          "hash": "gXzyqEadQSKewSHdUh5e/g=="
         }
       },
       "is_incremental": false,
@@ -798,7 +798,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/faq.html",
-          "hash": "3nUy9H6oRNo7NUJQcYxZ5w=="
+          "hash": "Z80/WAPXFHld67e142VytQ=="
         }
       },
       "is_incremental": false,
@@ -818,11 +818,35 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "documentation/getting-started-ios.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/getting-started-ios.html",
+          "hash": "QWuomfJX0XoRKxUYK80bQw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/getting-started-uwp.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/getting-started-uwp.html",
+          "hash": "cNavSwOcSaKai0wgDw3fEw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "documentation/getting-started-wpf.md",
       "output": {
         ".html": {
           "relative_path": "documentation/getting-started-wpf.html",
-          "hash": "thAOXsfQtNcqfiDXi+uKig=="
+          "hash": "EZBCLbLa74y+eWVaKxomuw=="
         }
       },
       "is_incremental": false,
@@ -1000,7 +1024,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/toc.html",
-          "hash": "L6ua9LbNXVqDGL2QDHiwmQ=="
+          "hash": "KGXckfJXf0hTAnRmEPQGRQ=="
         }
       },
       "is_incremental": false,
@@ -1121,17 +1145,10 @@
         "full_build_reason_code": "NoAvailableBuildCache"
       },
       "processors": {
-        "TocDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build",
-          "total_file_count": 0,
-          "skipped_file_count": 0
-        },
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 24,
+          "total_file_count": 26,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
@@ -1143,6 +1160,13 @@
         "ResourceDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
           "total_file_count": 0,
           "skipped_file_count": 0
