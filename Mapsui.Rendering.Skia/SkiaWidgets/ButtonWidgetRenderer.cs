@@ -18,7 +18,10 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
             if (button.Picture == null)
                 button.Picture = new SKSvg().FromSvg(button.SVGImage);
 
-            var picture = (SKPicture)button.Picture;
+            var picture = button.Picture as SKPicture;
+
+            if (picture == null)
+                return;
 
             // Get the scale for picture in each direction
             float scaleX = (float)(button.Envelope.Width / picture.CullRect.Width);
