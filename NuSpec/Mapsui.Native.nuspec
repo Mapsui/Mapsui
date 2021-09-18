@@ -20,7 +20,7 @@
         <dependency id="BruTile" version="[4.0.0,5.0.0)"/>
         <dependency id="Newtonsoft.json" version="[11.0.1,)"/>
         <dependency id="SkiaSharp" version="[2.80.3,3.0.0)"/>
-        <dependency id="Svg.Skia" version="[0.5.0,0.6)"/>
+        <dependency id="Svg.Skia" version="[0.5.7.1,0.6)"/>
         <dependency id="SkiaSharp.Views" version="[2.80.3,3.0.0)"/>
         <dependency id="Topten.RichTextKit" version="[0.4.145,0.5)"/>
       </group>
@@ -29,7 +29,7 @@
         <dependency id="BruTile" version="[4.0.0,5.0.0)"/>
         <dependency id="Newtonsoft.json" version="[11.0.1,)"/>
         <dependency id="SkiaSharp" version="[2.80.3,3.0.0)"/>
-        <dependency id="Svg.Skia" version="[0.5.0,0.6)"/>
+        <dependency id="Svg.Skia" version="[0.5.7.1,0.6)"/>
         <dependency id="SkiaSharp.Views" version="[2.80.3,3.0.0)"/>
         <dependency id="Topten.RichTextKit" version="[0.4.145,0.5)"/>
       </group>
@@ -38,7 +38,7 @@
         <dependency id="BruTile" version="[4.0.0,5.0.0)"/>
         <dependency id="Newtonsoft.json" version="[11.0.1,)"/>
         <dependency id="SkiaSharp" version="[2.80.3,3.0.0)"/>
-        <dependency id="Svg.Skia" version="[0.5.0,0.6)"/>
+        <dependency id="Svg.Skia" version="[0.5.7.1,0.6)"/>
         <dependency id="SkiaSharp.Views" version="[2.80.3,3.0.0)"/>
         <dependency id="Topten.RichTextKit" version="[0.4.145,0.5)"/>
       </group>
@@ -47,14 +47,13 @@
         <dependency id="BruTile" version="[4.0.0,5.0.0)"/>
         <dependency id="Newtonsoft.json" version="[11.0.1,)"/>
         <dependency id="SkiaSharp" version="[2.80.3,3.0.0)"/>
-        <dependency id="Svg.Skia" version="[0.5.0,0.6)"/>
+        <dependency id="Svg.Skia" version="[0.5.7.1,0.6)"/>
         <dependency id="SkiaSharp.Views" version="[2.80.3,3.0.0)"/>
         <dependency id="Topten.RichTextKit" version="[0.4.145,0.5)"/>
       </group>
     </dependencies>
   </metadata>
   <files>
-    <file src="..\Mapsui.UI.Wpf\bin\Release\net48\Mapsui.UI.Wpf.dll" target="lib\net48\Mapsui.UI.Wpf.dll" />
     <file src="..\Mapsui.UI.Uwp\bin\Release\Mapsui.UI.Uwp.dll" target="lib\uap\Mapsui.UI.Uwp.dll" />
     <file src="..\Mapsui.UI.Android\bin\Release\Mapsui.UI.Android.dll" target="lib\MonoAndroid\Mapsui.UI.Android.dll" />
     <file src="..\Mapsui.UI.iOS\bin\Release\Mapsui.UI.iOS.dll" target="lib\Xamarin.iOS\Mapsui.UI.iOS.dll" />
