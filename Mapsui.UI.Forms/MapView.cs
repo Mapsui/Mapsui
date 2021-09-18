@@ -14,6 +14,8 @@ using System.Runtime.CompilerServices;
 using Svg.Skia;
 using Xamarin.Forms;
 using SkiaSharp.Views.Forms;
+using Mapsui.Widgets.Button;
+using Mapsui.Widgets;
 
 namespace Mapsui.UI.Forms
 {
@@ -29,15 +31,15 @@ namespace Mapsui.UI.Forms
         private readonly MemoryLayer _mapCalloutLayer;
         private readonly MemoryLayer _mapPinLayer;
         private readonly MemoryLayer _mapDrawableLayer;
-        private readonly StackLayout _mapButtons;
-        private readonly SvgButton _mapZoomInButton;
-        private readonly SvgButton _mapZoomOutButton;
-        private readonly Image _mapSpacingButton1;
-        private readonly SvgButton _mapMyLocationButton;
-        private readonly Image _mapSpacingButton2;
-        private readonly SvgButton _mapNorthingButton;
+        private ButtonWidget _mapZoomInButton;
+        private ButtonWidget _mapZoomOutButton;
+        private ButtonWidget _mapMyLocationButton;
+        private ButtonWidget _mapNorthingButton;
         private readonly SKPicture _pictMyLocationNoCenter;
         private readonly SKPicture _pictMyLocationCenter;
+        private readonly SKPicture _pictZoomIn;
+        private readonly SKPicture _pictZoomOut;
+        private readonly SKPicture _pictNorthing;
 
         readonly ObservableRangeCollection<Pin> _pins = new ObservableRangeCollection<Pin>();
         readonly ObservableRangeCollection<Drawable> _drawable = new ObservableRangeCollection<Drawable>();
@@ -82,6 +84,7 @@ namespace Mapsui.UI.Forms
             _mapControl.Swipe += HandlerSwipe;
             _mapControl.Fling += HandlerFling;
             _mapControl.Zoomed += HandlerZoomed;
+            _mapControl.SizeChanged += HandlerSizeChanged;
 
             _mapControl.TouchMove += (s, e) =>
             {
@@ -100,66 +103,11 @@ namespace Mapsui.UI.Forms
             _pictMyLocationNoCenter = new SKSvg().Load(Utilities.EmbeddedResourceLoader.Load("Images.LocationNoCenter.svg", typeof(MapView)));
             _pictMyLocationCenter = new SKSvg().Load(Utilities.EmbeddedResourceLoader.Load("Images.LocationCenter.svg", typeof(MapView)));
 
-            _mapZoomInButton = new SvgButton(Utilities.EmbeddedResourceLoader.Load("Images.ZoomIn.svg", typeof(MapView)))
-            {
-                BackgroundColor = Color.Transparent,
-                WidthRequest = 40,
-                HeightRequest = 40,
-                Command = new Command(obj => { _mapControl.Navigator.ZoomIn(); })
-            };
+            _pictZoomIn = new SKSvg().Load(Utilities.EmbeddedResourceLoader.Load("Images.ZoomIn.svg", typeof(MapView)));
+            _pictZoomOut = new SKSvg().Load(Utilities.EmbeddedResourceLoader.Load("Images.ZoomOut.svg", typeof(MapView)));
+            _pictNorthing = new SKSvg().Load(Utilities.EmbeddedResourceLoader.Load("Images.RotationZero.svg", typeof(MapView)));
 
-            _mapZoomOutButton = new SvgButton(Utilities.EmbeddedResourceLoader.Load("Images.ZoomOut.svg", typeof(MapView)))
-            {
-                BackgroundColor = Color.Transparent,
-                WidthRequest = 40,
-                HeightRequest = 40,
-                Command = new Command(obj => { _mapControl.Navigator.ZoomOut(); }),
-            };
-
-            _mapSpacingButton1 = new Image { BackgroundColor = Color.Transparent, WidthRequest = 40, HeightRequest = 8, InputTransparent = true };
-
-            _mapMyLocationButton = new SvgButton(_pictMyLocationNoCenter)
-            {
-                BackgroundColor = Color.Transparent,
-                WidthRequest = 40,
-                HeightRequest = 40,
-                Command = new Command(obj => MyLocationFollow = true),
-            };
-
-            _mapSpacingButton2 = new Image { BackgroundColor = Color.Transparent, WidthRequest = 40, HeightRequest = 8, InputTransparent = true };
-
-            _mapNorthingButton = new SvgButton(Utilities.EmbeddedResourceLoader.Load("Images.RotationZero.svg", typeof(MapView)))
-            {
-                BackgroundColor = Color.Transparent,
-                WidthRequest = 40,
-                HeightRequest = 40,
-                Command = new Command(obj => Device.BeginInvokeOnMainThread(() => _mapControl.Navigator.RotateTo(0))),
-            };
-
-            _mapButtons = new StackLayout { BackgroundColor = Color.Transparent, Spacing = 0, IsVisible = true, InputTransparent = true, CascadeInputTransparent = false };
-
-            _mapButtons.Children.Add(_mapZoomInButton);
-            _mapButtons.Children.Add(_mapZoomOutButton);
-            _mapButtons.Children.Add(_mapSpacingButton1);
-            _mapButtons.Children.Add(_mapMyLocationButton);
-            _mapButtons.Children.Add(_mapSpacingButton2);
-            _mapButtons.Children.Add(_mapNorthingButton);
-
-            if (Device.RuntimePlatform == Device.iOS)
-                // the buttons are placed a bit lower on iOS to avoid overlap with the transparent status bar
-                AbsoluteLayout.SetLayoutBounds(_mapButtons, new Rectangle(0.95, 0.07, 40, 176));
-            else
-                AbsoluteLayout.SetLayoutBounds(_mapButtons, new Rectangle(0.95, 0.03, 40, 176));
-
-            AbsoluteLayout.SetLayoutFlags(_mapButtons, AbsoluteLayoutFlags.PositionProportional);
-
-            Content = new AbsoluteLayout
-            {
-                Children = {
-                    _mapControl,
-                    _mapButtons,
-                }
-            };
+            Content = _mapControl;
 
             _pins.CollectionChanged += HandlerPinsOnCollectionChanged;
             _drawable.CollectionChanged += HandlerDrawablesOnCollectionChanged;
@@ -268,6 +216,9 @@ namespace Mapsui.UI.Forms
         public static readonly BindableProperty IsZoomButtonVisibleProperty = BindableProperty.Create(nameof(IsZoomButtonVisibleProperty), typeof(bool), typeof(MapView), true);
         public static readonly BindableProperty IsMyLocationButtonVisibleProperty = BindableProperty.Create(nameof(IsMyLocationButtonVisibleProperty), typeof(bool), typeof(MapView), true);
         public static readonly BindableProperty IsNorthingButtonVisibleProperty = BindableProperty.Create(nameof(IsNorthingButtonVisibleProperty), typeof(bool), typeof(MapView), true);
+        public static readonly BindableProperty ButtonMarginProperty = BindableProperty.Create(nameof(ButtonMarginProperty), typeof(Thickness), typeof(MapView), new Thickness(20, 20));
+        public static readonly BindableProperty ButtonSpacingProperty = BindableProperty.Create(nameof(ButtonSpacingProperty), typeof(double), typeof(MapView), 8.0);
+        public static readonly BindableProperty ButtonSizeProperty = BindableProperty.Create(nameof(ButtonSizeProperty), typeof(double), typeof(MapView), 40.0);
         public static readonly BindableProperty UseDoubleTapProperty = BindableProperty.Create(nameof(UseDoubleTapProperty), typeof(bool), typeof(MapView), default(bool));
         public static readonly BindableProperty UseFlingProperty = BindableProperty.Create(nameof(UseFlingProperty), typeof(bool), typeof(MapView), true);
 
@@ -293,10 +244,13 @@ namespace Mapsui.UI.Forms
                 {
                     _mapControl.Viewport.ViewportChanged -= HandlerViewportChanged;
                     _mapControl.Info -= HandlerInfo;
+                    RemoveButtons();
                     RemoveLayers();
                 }
 
                 _mapControl.Map = value;
+
+                CreateButtons();
             }
         }
 
@@ -424,6 +378,33 @@ namespace Mapsui.UI.Forms
         {
             get => (bool)GetValue(IsNorthingButtonVisibleProperty);
             set => SetValue(IsNorthingButtonVisibleProperty, value);
+        }
+
+        /// <summary>
+        /// Margin for buttons
+        /// </summary>
+        public Thickness ButtonMargin
+        {
+            get => (Thickness)GetValue(ButtonMarginProperty);
+            set => SetValue(ButtonMarginProperty, value);
+        }
+
+        /// <summary>
+        /// Spacing between buttons
+        /// </summary>
+        public double ButtonSpacing
+        {
+            get => (double)GetValue(ButtonSpacingProperty);
+            set => SetValue(ButtonSpacingProperty, value);
+        }
+
+        /// <summary>
+        /// Size of buttons in x- and y-direction
+        /// </summary>
+        public double ButtonSize
+        {
+            get => (double)GetValue(ButtonSizeProperty);
+            set => SetValue(ButtonSizeProperty, value);
         }
 
         /// <summary>
@@ -674,24 +655,36 @@ namespace Mapsui.UI.Forms
 
             if (propertyName.Equals(nameof(IsZoomButtonVisibleProperty)) || propertyName.Equals(nameof(IsZoomButtonVisible)))
             {
-                _mapZoomInButton.IsVisible = IsZoomButtonVisible;
-                _mapZoomOutButton.IsVisible = IsZoomButtonVisible;
-                _mapSpacingButton1.IsVisible = IsZoomButtonVisible && IsMyLocationButtonVisible;
-                _mapButtons.IsVisible = IsZoomButtonVisible || IsMyLocationButtonVisible || IsNorthingButtonVisible;
+                _mapZoomInButton.Enabled = IsZoomButtonVisible;
+                _mapZoomOutButton.Enabled = IsZoomButtonVisible;
+                UpdateButtonPositions();
             }
 
             if (propertyName.Equals(nameof(IsMyLocationButtonVisibleProperty)) || propertyName.Equals(nameof(IsMyLocationButtonVisible)))
             {
-                _mapMyLocationButton.IsVisible = IsMyLocationButtonVisible;
-                _mapSpacingButton1.IsVisible = IsZoomButtonVisible && IsMyLocationButtonVisible;
-                _mapButtons.IsVisible = IsZoomButtonVisible || IsMyLocationButtonVisible || IsNorthingButtonVisible;
+                _mapMyLocationButton.Enabled = IsMyLocationButtonVisible;
+                UpdateButtonPositions();
             }
 
             if (propertyName.Equals(nameof(IsNorthingButtonVisibleProperty)) || propertyName.Equals(nameof(IsNorthingButtonVisible)))
             {
-                _mapNorthingButton.IsVisible = IsNorthingButtonVisible;
-                _mapSpacingButton2.IsVisible = (IsMyLocationButtonVisible || IsZoomButtonVisible) && IsNorthingButtonVisible;
-                _mapButtons.IsVisible = IsZoomButtonVisible || IsMyLocationButtonVisible || IsNorthingButtonVisible;
+                _mapNorthingButton.Enabled = IsNorthingButtonVisible;
+                UpdateButtonPositions();
+            }
+
+            if (propertyName.Equals(nameof(ButtonMarginProperty)) || propertyName.Equals(nameof(ButtonMargin)))
+            {
+                UpdateButtonPositions();
+            }
+
+            if (propertyName.Equals(nameof(ButtonSpacingProperty)) || propertyName.Equals(nameof(ButtonSpacing)))
+            {
+                UpdateButtonPositions();
+            }
+
+            if (propertyName.Equals(nameof(ButtonSizeProperty)) || propertyName.Equals(nameof(ButtonSize)))
+            {
+                UpdateButtonPositions();
             }
 
             if (propertyName.Equals(nameof(UseDoubleTapProperty)) || propertyName.Equals(nameof(UseDoubleTap)))
@@ -739,7 +732,7 @@ namespace Mapsui.UI.Forms
                 MyLocationLayer.UpdateMyDirection(MyLocationLayer.Direction, _mapControl.Viewport.Rotation);
 
                 // Update rotationButton
-                _mapNorthingButton.Rotation = _mapControl.Viewport.Rotation;
+                _mapNorthingButton.Rotation = (float)_mapControl.Viewport.Rotation;
             }
 
             if (e.PropertyName.Equals(nameof(Viewport.Center)))
@@ -1055,6 +1048,11 @@ namespace Mapsui.UI.Forms
             _mapControl.RefreshGraphics();
         }
 
+        private void HandlerSizeChanged(object sender, EventArgs e)
+        {
+            UpdateButtonPositions();
+        }
+
         #endregion
 
         /// <summary>
@@ -1109,6 +1107,78 @@ namespace Mapsui.UI.Forms
                 drawables.Reverse();
 
             return drawables;
+        }
+
+        private void UpdateButtonPositions()
+        {
+            var newX = _mapControl.Width - ButtonMargin.Right - ButtonSize;
+            var newY = ButtonMargin.Top;
+
+            if (IsZoomButtonVisible && _mapZoomInButton != null && _mapZoomOutButton != null)
+            {
+                _mapZoomInButton.Envelope = new Geometries.BoundingBox(newX, newY, newX + ButtonSize, newY + ButtonSize);
+                newY += ButtonSize;
+                _mapZoomOutButton.Envelope = new Geometries.BoundingBox(newX, newY, newX + ButtonSize, newY + ButtonSize);
+                newY += ButtonSize + ButtonSpacing;
+            }
+
+            if (IsMyLocationButtonVisible && _mapMyLocationButton != null)
+            {
+                _mapMyLocationButton.Envelope = new Geometries.BoundingBox(newX, newY, newX + ButtonSize, newY + ButtonSize);
+                newY += ButtonSize + ButtonSpacing;
+            }
+
+            if (IsNorthingButtonVisible && _mapNorthingButton != null)
+            {
+                _mapNorthingButton.Envelope = new Geometries.BoundingBox(newX, newY, newX + ButtonSize, newY + ButtonSize);
+            }
+
+            _mapControl.RefreshGraphics();
+        }
+
+        private void RemoveButtons()
+        {
+            var widgets = _mapControl.Map.Widgets.ToList();
+            widgets.Remove(_mapZoomInButton);
+            widgets.Remove(_mapZoomOutButton); 
+            widgets.Remove(_mapMyLocationButton);
+            widgets.Remove(_mapNorthingButton);
+            _mapControl.Map.Widgets.Clear();
+            _mapControl.Map.Widgets.AddRange(widgets);
+
+            _mapControl.RefreshGraphics();
+        }
+
+        private void CreateButtons()
+        {
+            _mapZoomInButton = CreateButton(0, 0, _pictZoomIn, (s, e) => { _mapControl.Navigator.ZoomIn(); e.Handled = true; });
+            _mapControl.Map.Widgets.Add(_mapZoomInButton);
+
+            _mapZoomOutButton = CreateButton(0, 40, _pictZoomOut, (s, e) => { _mapControl.Navigator.ZoomOut(); e.Handled = true; });
+            _mapControl.Map.Widgets.Add(_mapZoomOutButton);
+
+            _mapMyLocationButton = CreateButton(0, 88, _pictMyLocationNoCenter, (s, e) => { MyLocationFollow = true; e.Handled = true; });
+            _mapControl.Map.Widgets.Add(_mapMyLocationButton);
+
+            _mapNorthingButton = CreateButton(0, 136, _pictNorthing, (s, e) => { Device.BeginInvokeOnMainThread(() => _mapControl.Navigator.RotateTo(0)); e.Handled = true; });
+            _mapControl.Map.Widgets.Add(_mapNorthingButton);
+
+            UpdateButtonPositions();
+        }
+
+        private ButtonWidget CreateButton(float x, float y, SKPicture picture, Action<object, WidgetTouchedEventArgs> action)
+        {
+            var result = new Widgets.Button.ButtonWidget
+            {
+                Picture = picture,
+                Envelope = new Geometries.BoundingBox(x, y, x + ButtonSize, y + ButtonSize),
+                Rotation = 0,
+                Enabled = true,
+            };
+            result.WidgetTouched += (s, e) => action(s, e);
+            result.PropertyChanged += (s, e) => _mapControl.RefreshGraphics();
+
+            return result;
         }
     }
 }
