@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>Mapsui</id>
+    <id>Mapsui.Wpf</id>
     <version>$version$</version>
     <title>Mapsui</title>
     <authors>Paul den Dulk</authors>
@@ -9,26 +9,23 @@
     <projectUrl>https://github.com/Mapsui/Mapsui</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>
-      Mapsui - Library for mapping
+      WPF map components based on the Mapsui library
     </description>
     <tags>map maps mapping geo gis osm</tags>
+    <copyright>© Mapsui Contributors</copyright>
     <language>en-US</language>
     <dependencies>
       <!-- [ or ] is including, ( or ) is excluding -->
-      <group targetFramework="netstandard2.0">
+      <group targetFramework="net48">
+        <dependency id="Mapsui" version="$version$"/>
         <dependency id="BruTile" version="[4.0.0,5.0.0)"/>
-        <dependency id="Newtonsoft.json" version="[11.0.1,)"/>
         <dependency id="SkiaSharp" version="[2.80.3,3.0.0)"/>
-        <dependency id="Svg.Skia" version="[0.5.7.1,0.6)"/>
-        <dependency id="Topten.RichTextKit" version="[0.4.145,0.5)"/>
+        <dependency id="SkiaSharp.Views" version="[2.80.3,3.0.0)"/>
       </group>
     </dependencies>
   </metadata>
   <files>
-
-    <file src="..\Mapsui\bin\Release\netstandard2.0\Mapsui.Geometries.dll" target="lib\netstandard2.0\Mapsui.Geometries.dll" />
-    <file src="..\Mapsui\bin\Release\netstandard2.0\Mapsui.dll" target="lib\netstandard2.0\Mapsui.dll" />
-    <file src="..\Mapsui.Rendering.Skia\bin\Release\netstandard2.0\Mapsui.Rendering.Skia.dll" target="lib\netstandard2.0\Mapsui.Rendering.Skia.dll" />
-
+    <file src="..\Mapsui.UI.Wpf\bin\Release\net48\Mapsui.UI.Wpf.dll" target="lib\net48\Mapsui.UI.Wpf.dll" />
+    <file src="..\Mapsui.UI.Wpf\bin\Release\net48\Mapsui.Rendering.Xaml.dll" target="lib\net48\Mapsui.Rendering.Xaml.dll" />
   </files>
 </package>
