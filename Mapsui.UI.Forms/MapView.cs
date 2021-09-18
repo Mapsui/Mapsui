@@ -949,11 +949,24 @@ namespace Mapsui.UI.Forms
 
             e.Handled = false;
 
-            // Check, if we hit a widget or drawable
-            // Is there a widget at this position
-            // Is there a drawable at this position
             if (Map != null)
             {
+                // Check, if we hit a widget
+                // Is there a widget at this position
+                foreach (var widget in _mapControl.Map.Widgets)
+                {
+                    if (widget.Enabled && widget.Envelope.Contains(e.ScreenPosition))
+                    {
+                        if (widget.HandleWidgetTouched(_mapControl.Navigator, e.ScreenPosition))
+                        {
+                            e.Handled = true;
+                            return;
+                        }
+                    }
+                }
+
+                // Check, if we hit a drawable
+                // Is there a drawable at this position
                 var mapInfo = _mapControl.GetMapInfo(e.ScreenPosition);
 
                 if (mapInfo.Feature == null)
