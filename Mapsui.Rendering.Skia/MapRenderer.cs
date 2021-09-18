@@ -11,6 +11,7 @@ using Mapsui.Rendering.Skia.SkiaWidgets;
 using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Widgets;
+using Mapsui.Widgets.Button;
 using Mapsui.Widgets.ScaleBar;
 using Mapsui.Widgets.Zoom;
 using SkiaSharp;
@@ -45,6 +46,7 @@ namespace Mapsui.Rendering.Skia
             WidgetRenders[typeof(Hyperlink)] = new HyperlinkWidgetRenderer();
             WidgetRenders[typeof(ScaleBarWidget)] = new ScaleBarWidgetRenderer();
             WidgetRenders[typeof(ZoomInOutWidget)] = new ZoomInOutWidgetRenderer();
+            WidgetRenders[typeof(ButtonWidget)] = new ButtonWidgetRenderer();
         }
 
         public void Render(object target, IReadOnlyViewport viewport, IEnumerable<ILayer> layers,
