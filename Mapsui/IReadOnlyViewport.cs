@@ -25,7 +25,7 @@ namespace Mapsui
         double Resolution { get; }
 
         /// <summary>
-        /// BoundingBox of viewport in map coordinates respection Rotation
+        /// BoundingBox of viewport in map coordinates respecting Rotation
         /// </summary>
         /// <remarks>
         /// This BoundingBox is horizontally and vertically aligned, even if the viewport

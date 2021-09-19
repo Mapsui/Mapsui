@@ -39,7 +39,7 @@ namespace Mapsui.Providers.Wms
 
         private static Dictionary<string, string> ExtractFeatureFromField(XElement featureMember)
         {
-            //No layername is resturned from XML
+            //No layer name is returned from XML
             var featureInfo = new Dictionary<string, string>();
 
             if (featureMember.HasElements)

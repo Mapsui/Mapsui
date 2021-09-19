@@ -17,7 +17,7 @@ namespace Mapsui.UI
         /// </summary>
         /// <param name="layers">The layers to query for MapInfo</param>
         /// <param name="viewport">The current Viewport</param>
-        /// <param name="screenPosition">The screenposition to query</param>
+        /// <param name="screenPosition">The screen position to query</param>
         /// <param name="symbolCache">The </param>
         /// <param name="margin">Margin of error in pixels. If the distance between screen position and geometry 
         /// is smaller than the margin it is seen as a hit.</param>

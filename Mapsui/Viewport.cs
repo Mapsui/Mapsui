@@ -24,7 +24,7 @@ using System.ComponentModel;
 namespace Mapsui
 {
     /// <summary>
-    /// Viewport holds all informations about the visible part of the map.
+    /// Viewport holds all information about the visible part of the map.
     /// </summary>
     /// <remarks>
     /// Viewport is the connection between Map and MapControl. It tells MapControl,

@@ -27,7 +27,7 @@ namespace Mapsui.Providers.Wms
         }
 
         /// <summary>
-        /// Timeout of webrequest in milliseconds. Default is 7 seconds
+        /// Timeout of web request in milliseconds. Default is 7 seconds
         /// </summary>
         public int TimeOut
         {

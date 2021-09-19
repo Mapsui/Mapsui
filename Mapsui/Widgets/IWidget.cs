@@ -15,7 +15,7 @@ namespace Mapsui.Widgets
         BoundingBox Envelope { get; set; }
 
         /// <summary>
-        /// Function, which is called, when a Widget is hiten
+        /// Function, which is called, when a Widget is hidden
         /// </summary>
         /// <param name="navigator">Navigator of MapControl</param>
         /// <param name="position">Screen position</param>

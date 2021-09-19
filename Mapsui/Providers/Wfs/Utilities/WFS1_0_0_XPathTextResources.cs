@@ -17,7 +17,7 @@ namespace Mapsui.Providers.Wfs.Utilities
  
 
         /// <summary>
-        /// Gets an XPath string addressing the SRID of a featuretype in 'GetCapabilities'.
+        /// Gets an XPath string addressing the SRID of a FeatureType in 'GetCapabilities'.
         /// </summary>
         public string XPATH_SRS
         {

@@ -24,7 +24,7 @@ namespace Mapsui.Rendering.Skia
     }
 
     /// <summary>
-    /// Determins, where the pointer is
+    /// Determines, where the pointer is
     /// </summary>
     public enum ArrowAlignment
     {

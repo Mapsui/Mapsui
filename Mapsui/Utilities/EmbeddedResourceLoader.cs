@@ -11,7 +11,7 @@ namespace Mapsui.Utilities
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="relativePathToEmbeddedResource">This is the path of the resource without the assemlby path but including 
+        /// <param name="relativePathToEmbeddedResource">This is the path of the resource without the assembly path but including 
         /// possible project folders. So if an image 'myimage.png' is in a project folders 'images' the path is
         /// 'images.myimage.png'. Resources always uses '.' as separators. </param>
         /// <param name="typeInAssemblyOfEmbeddedResource">This should be a type that is in the same assembly

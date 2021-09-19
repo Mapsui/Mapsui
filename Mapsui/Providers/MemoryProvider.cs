@@ -25,14 +25,14 @@ using Mapsui.Geometries.WellKnownText;
 namespace Mapsui.Providers
 {
     /// <summary>
-    /// Datasource for storing a limited set of geometries.
+    /// Data source for storing a limited set of geometries.
     /// </summary>
     /// <remarks>
-    /// <para>The MemoryProvider doesn’t utilize performance optimizations of spatial indexing,
+    /// <para>The MemoryProvider does not utilize performance optimizations of spatial indexing,
     /// and thus is primarily meant for rendering a limited set of Geometries.</para>
     /// <para>A common use of the MemoryProvider is for highlighting a set of selected features.</para>
     /// <example>
-    /// The following example gets data within a BoundingBox of another datasource and adds it to the map.
+    /// The following example gets data within a BoundingBox of another data source and adds it to the map.
     /// <code lang="C#">
     /// List&#60;Geometry&#62; geometries = myMap.Layers[0].DataSource.GetGeometriesInView(myBox);
     /// VectorLayer laySelected = new VectorLayer("Selected Features");
@@ -60,7 +60,7 @@ namespace Mapsui.Providers
     {
 
         /// <summary>
-        /// Gets or sets the geometries this datasource contains
+        /// Gets or sets the geometries this data source contains
         /// </summary>
         public IReadOnlyList<IFeature> Features { get; private set; }
 
