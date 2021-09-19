@@ -81,7 +81,7 @@ namespace Mapsui.Samples.Wpf
         private void FillComboBoxWithCategories()
         {
             // todo: find proper way to load assembly
-            WmsSample.LoadAssembly();
+            DesktopSamplesUtilities.LoadAssembly();
             Tests.Common.Utilities.LoadAssembly();
 
             var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c);
