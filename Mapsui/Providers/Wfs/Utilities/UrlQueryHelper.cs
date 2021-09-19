@@ -30,7 +30,7 @@
                     query = query.Substring(1, query.Length - 1);
                 }
 
-                // Add & if necessery
+                // Add & if necessary
                 if (!url.EndsWith("&"))
                 {
                     url = url + "&";

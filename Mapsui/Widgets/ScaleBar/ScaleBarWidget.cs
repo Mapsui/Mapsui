@@ -17,14 +17,14 @@ namespace Mapsui.Widgets.ScaleBar
     ///   map.Widgets.Add(new ScaleBarWidget(map));
     ///   
     /// Customize
-    /// ScaleBarMode: Determins, how much scalebars are shown. Could be Single or Both.
+    /// ScaleBarMode: Determines, how much scalebars are shown. Could be Single or Both.
     /// SecondaryUnitConverter: First UnitConverter for upper scalebar. There are UnitConverters for metric, imperial and nautical units.
     /// SecondaryUnitConverter = NauticalUnitConverter.Instance });
     /// MaxWidth: Maximal width of the scalebar. Real width could be smaller.
     /// HorizontalAlignment: Where the ScaleBarWidget is shown. Could be Left, Right, Center or Position.
     /// VerticalAlignment: Where the ScaleBarWidget is shown. Could be Top, Bottom, Center or Position.
-    /// PositionX: If HorizontalAlignment is Position, this value determins the distance to the left
-    /// PositionY: If VerticalAlignment is Position, this value determins the distance to the top
+    /// PositionX: If HorizontalAlignment is Position, this value determines the distance to the left
+    /// PositionY: If VerticalAlignment is Position, this value determines the distance to the top
     /// TextColor: Color for text and lines
     /// Halo: Color used around text and lines, so the scalebar is better visible
     /// TextAlignment: Alignment of scalebar text to the lines. Could be Left, Right or Center

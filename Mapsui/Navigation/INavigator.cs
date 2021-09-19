@@ -15,7 +15,7 @@ namespace Mapsui
         /// Navigate center of viewport to center of extent and change resolution
         /// </summary>
         /// <param name="extent">New extent for viewport to show</param>
-        /// <param name="scaleMethod">Scale method to use to determin resolution</param>
+        /// <param name="scaleMethod">Scale method to use to determine the resolution</param>
         /// <param name="duration">Duration of animation in milliseconds</param>
         void NavigateTo(BoundingBox extent, ScaleMethod scaleMethod = ScaleMethod.Fit, long duration = 0, Easing easing = default);
 

@@ -14,9 +14,9 @@
     <!-- legal -->
     <licenseUrl>https://github.com/Mapsui/Mapsui/blob/master/LICENSE.md</licenseUrl>
     <authors>Dirk Weltz</authors>
-    <owners>Mapsui Contributers</owners>
+    <owners>Mapsui Contributors</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <copyright>© Mapsui Contributers</copyright>
+    <copyright>© Mapsui Contributors</copyright>
 
     <dependencies>
       <group targetFramework="netstandard2.0">

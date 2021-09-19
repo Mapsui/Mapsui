@@ -23,7 +23,7 @@ namespace Mapsui.Widgets
 
             foreach (var widget in widgets.Reverse())
             {
-                // Also check for start position because it shoudl be click on the widget,
+                // Also check for start position because it should be click on the widget,
                 // not a drag that ends above the widget.
                 if (widget.Envelope != null &&
                     widget.Enabled &&
