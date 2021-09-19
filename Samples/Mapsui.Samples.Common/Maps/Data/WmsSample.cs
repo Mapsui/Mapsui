@@ -1,13 +1,13 @@
-﻿using Mapsui.Providers.Wms;
-using Mapsui.Layers;
+﻿using Mapsui.Layers;
+using Mapsui.Providers.Wms;
 using Mapsui.UI;
 
-namespace Mapsui.Samples.Common.Desktop
+namespace Mapsui.Samples.Common.Maps.Data
 {
     public class WmsSample : ISample
     {
-        public string Name => "2 WMS";
-        public string Category => "Desktop";
+        public string Name => "6. WMS";
+        public string Category => "Data";
 
         public void Setup(IMapControl mapControl)
         {
