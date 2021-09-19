@@ -1,6 +1,6 @@
 [<p align="left"><img src="logo/png/icon.png" alt="Mapsui" height="180px"></p>](https://mapsui.com).
 
-|   | Status  | 
+|   | Status  |
 | ------------- |:-------------:|
 | Mapsui NuGet   | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.svg?style=flat)](https://www.nuget.org/packages/Mapsui/) |
 | Mapsui.Forms Nuget   | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Forms.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Forms/) |
@@ -16,7 +16,7 @@
   - Thanks go to all contributors:  https://github.com/Mapsui/Mapsui/graphs/contributors
   - Many users entered valuable bug reports as well, thanks.
 - 2020 March 10: Follow Mapsui on Twitter https://twitter.com/mapsui
-- 2020 Februari 2: We have a gitter channel https://gitter.im/Mapsui/Lobby
+- 2020 February 2: We have a gitter channel https://gitter.im/Mapsui/Lobby
 
 ## Mapsui (pronounced map-su-wii)
 
@@ -49,11 +49,11 @@ The best way to get going with Mapsui is by using the Samples. If you clone the 
 If you have a question please submit this as an issue [here on github](https://github.com/mapsui/Mapsui/issues).
 
 ## How can I help as a user
-- Write clear issues. Mention the Mapsui version and which platform you use. 
+- Write clear issues. Mention the Mapsui version and which platform you use.
 - Use screenshots and capture gif animations for issues that are hard to explain.
 - Create minimal reproducible samples if possible. This speeds up fixing the issue a lot.
 - Make yourself heard. We need to know what you are struggling with. Sure, you need to be respectful but don't be too modest.
-- You can vote on [feature-request issues](https://github.com/Mapsui/Mapsui/issues?q=is%3Aopen+label%3Afeature-request+sort%3Areactions-%2B1-desc) by adding a thumbs up on the first post of the issue. 
+- You can vote on [feature-request issues](https://github.com/Mapsui/Mapsui/issues?q=is%3Aopen+label%3Afeature-request+sort%3Areactions-%2B1-desc) by adding a thumbs up on the first post of the issue.
 - Close an issue if your question is answered.
 
 ## Contributing
@@ -72,6 +72,6 @@ We are delighted with our first gold sponsor Sebastian Kruse, who has also contr
 
 [Sebastian Kruse](https://github.com/Sebastian1989101)
 
-## License 
+## License
 
 [LGPL](https://raw.githubusercontent.com/mapsui/Mapsui/master/LICENSE.md)
