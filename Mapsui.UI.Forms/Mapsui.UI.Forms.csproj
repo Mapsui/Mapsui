@@ -1,15 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageVersion>2.0</PackageVersion>
-    <Authors>Mapsui Contributors</Authors>
-    <PackageIconUrl>https://github.com/Mapsui/Mapsui/blob/master/logo/png/icon.png</PackageIconUrl>
     <NeutralLanguage>en</NeutralLanguage>
-    <PackageProjectUrl>https://github.com/Mapsui/Mapsui</PackageProjectUrl>
-    <Summary>Xamarin.Forms implementation of Mapsui</Summary>
-    <PackageTags>Mapsui Xamarin.Forms map maps mapping</PackageTags>
-    <Description>Xamarin.Forms implementation of Mapsui</Description>
-    <PackageId>Mapsui.Forms</PackageId>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>TRACE;__FORMS__;DEBUG;NETSTANDARD1_3</DefineConstants>

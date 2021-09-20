@@ -19,8 +19,6 @@
 
   <PropertyGroup>
     <DebugType>portable</DebugType>
-    <PackageId>Mapsui</PackageId>
-    <Description>Mapsui</Description>
   </PropertyGroup>
 
 </Project>
