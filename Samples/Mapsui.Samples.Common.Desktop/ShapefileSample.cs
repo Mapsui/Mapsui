@@ -11,7 +11,7 @@ namespace Mapsui.Samples.Common.Desktop
 {
     public class ShapefileSample : ISample
     {
-        public string Name => "1 Shapefile";
+        public string Name => "2 Shapefile with labels";
         public string Category => "Desktop";
 
         public void Setup(IMapControl mapControl)

@@ -7,9 +7,9 @@ using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Desktop
 {
-    public class ArcGISImageServiceSample : ISample
+    public class ArcGISImageServiceSample // disabled as sample because the service can not be reached : ISample
     {
-        public string Name => "7 ArcGIS image";
+        public string Name => "4 ArcGIS image";
         public string Category => "Desktop";
 
         public void Setup(IMapControl mapControl)

@@ -10,7 +10,7 @@ namespace Mapsui.Samples.Common.Desktop
 {
     public class MapTilerSample : ISample
     {
-        public string Name => "5 Map Tiler";
+        public string Name => "3 Map Tiler";
         public string Category => "Desktop";
 
         public void Setup(IMapControl mapControl)

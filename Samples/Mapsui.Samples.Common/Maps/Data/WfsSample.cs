@@ -12,12 +12,12 @@ using Mapsui.Providers.Wfs;
 using Mapsui.Styles;
 using Mapsui.UI;
 
-namespace Mapsui.Samples.Common.Desktop
+namespace Mapsui.Samples.Common.Maps.Data
 {
     public class WfsSample : ISample
     {
-        public string Name => "6 WFS Sample";
-        public string Category => "Desktop";
+        public string Name => "7. WFS";
+        public string Category => "Data";
 
         public void Setup(IMapControl mapControl)
         {
