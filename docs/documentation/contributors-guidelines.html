@@ -104,7 +104,7 @@
 </code></pre><p>exmple nuspec</p>
 <pre><code>&lt;dependency id=&quot;SkiaSharp&quot; version=&quot;[2.80.2,3.0.0)&quot;/&gt;
 </code></pre><h2 id="keep-our-direct-and-indirect-dependencies-in-sync">Keep our direct and indirect dependencies in sync</h2>
-<p>When we have direct and indirect dependecies on a nuget package those should all refer to the same version. For instance we have a direct dependency on SkiaSharp, but SvgSkia and RichTextKit also have a dependency to SkiaSharp. It would be optimal if all referred to that same version. This might not always be possible.</p>
+<p>When we have direct and indirect dependecies on a nuget package those should all refer to the same version. For instance we have a direct dependency on SkiaSharp, but we also use  SvgSkia and RichTextKit and those have a dependency on SkiaSharp too. It would be optimal if all referred to the same version of SkiaSharp. This might not always be possible.</p>
 </article>
           </div>
           
