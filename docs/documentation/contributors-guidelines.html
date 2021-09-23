@@ -103,7 +103,9 @@
 <pre><code class="lang-xml">&lt;PackageReference Include=&quot;SkiaSharp&quot; Version=&quot;2.80.2&quot; /&gt;
 </code></pre><p>exmple nuspec</p>
 <pre><code>&lt;dependency id=&quot;SkiaSharp&quot; version=&quot;[2.80.2,3.0.0)&quot;/&gt;
-</code></pre></article>
+</code></pre><h2 id="keep-our-direct-and-indirect-dependencies-in-sync">Keep our direct and indirect dependencies in sync</h2>
+<p>When we have direct and indirect dependecies on a nuget package those should all refer to the same version. For instance we have a direct dependency on SkiaSharp, but SvgSkia and RichTextKit also have a dependency to SkiaSharp. It would be optimal if all referred to that same version. This might not always be possible.</p>
+</article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">
