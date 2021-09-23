@@ -34,3 +34,6 @@ exmple nuspec
 ```
 <dependency id="SkiaSharp" version="[2.80.2,3.0.0)"/>
 ```
+
+## Keep our direct and indirect dependencies in sync
+When we have direct and indirect dependecies on a nuget package those should all refer to the same version. For instance we have a direct dependency on SkiaSharp, but SvgSkia and RichTextKit also have a dependency to SkiaSharp. It would be optimal if all referred to that same version. This might not always be possible.
