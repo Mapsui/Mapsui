@@ -62,9 +62,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Geometries.Tests", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuSpec", "NuSpec", "{D90027DD-A6D6-4C32-91DC-237B55141EB8}"
 	ProjectSection(SolutionItems) = preProject
+		NuSpec\Mapsui.Android.nuspec = NuSpec\Mapsui.Android.nuspec
 		NuSpec\Mapsui.Forms.nuspec = NuSpec\Mapsui.Forms.nuspec
-		NuSpec\Mapsui.Native.nuspec = NuSpec\Mapsui.Native.nuspec
+		NuSpec\Mapsui.iOS.nuspec = NuSpec\Mapsui.iOS.nuspec
 		NuSpec\Mapsui.nuspec = NuSpec\Mapsui.nuspec
+		NuSpec\Mapsui.Uwp.nuspec = NuSpec\Mapsui.Uwp.nuspec
 		NuSpec\Mapsui.Wpf.nuspec = NuSpec\Mapsui.Wpf.nuspec
 	EndProjectSection
 EndProject
