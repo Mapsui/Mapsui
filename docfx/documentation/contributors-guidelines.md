@@ -22,3 +22,18 @@ At all times:
 
 ## Use ReSharper
 Mapsui uses the resharper team settings by committing the DotSettings to git, so that all developers can use the same settings. We should have zero warnings. Suggestions should be treated as actual suggestions, use them only when you think it improves the code.
+
+## Keep dependencies in the csproj and nuspec in sync
+If we upgrade a nuget package in the solution we should also upgrade the lower bound of the nuget package in the nuspec because this is what nuget installs. We want the user to get the same version as the one that we are working and testing with.
+
+example csproj
+```xml
+<PackageReference Include="SkiaSharp" Version="2.80.2" />
+```
+exmple nuspec
+```
+<dependency id="SkiaSharp" version="[2.80.2,3.0.0)"/>
+```
+
+## Keep our direct and indirect dependencies in sync
+When we have direct and indirect dependecies on a nuget package those should all refer to the same version. For instance we have a direct dependency on SkiaSharp, but we also use  SvgSkia and RichTextKit and those have a dependency on SkiaSharp too. It would be optimal if all referred to the same version of SkiaSharp. This might not always be possible.

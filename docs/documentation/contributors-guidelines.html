@@ -97,6 +97,14 @@
 </ul>
 <h2 id="use-resharper">Use ReSharper</h2>
 <p>Mapsui uses the resharper team settings by committing the DotSettings to git, so that all developers can use the same settings. We should have zero warnings. Suggestions should be treated as actual suggestions, use them only when you think it improves the code.</p>
+<h2 id="keep-dependencies-in-the-csproj-and-nuspec-in-sync">Keep dependencies in the csproj and nuspec in sync</h2>
+<p>If we upgrade a nuget package in the solution we should also upgrade the lower bound of the nuget package in the nuspec because this is what nuget installs. We want the user to get the same version as the one that we are working and testing with.</p>
+<p>example csproj</p>
+<pre><code class="lang-xml">&lt;PackageReference Include=&quot;SkiaSharp&quot; Version=&quot;2.80.2&quot; /&gt;
+</code></pre><p>exmple nuspec</p>
+<pre><code>&lt;dependency id=&quot;SkiaSharp&quot; version=&quot;[2.80.2,3.0.0)&quot;/&gt;
+</code></pre><h2 id="keep-our-direct-and-indirect-dependencies-in-sync">Keep our direct and indirect dependencies in sync</h2>
+<p>When we have direct and indirect dependecies on a nuget package those should all refer to the same version. For instance we have a direct dependency on SkiaSharp, but we also use  SvgSkia and RichTextKit and those have a dependency on SkiaSharp too. It would be optimal if all referred to the same version of SkiaSharp. This might not always be possible.</p>
 </article>
           </div>
           
