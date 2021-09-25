@@ -4,7 +4,10 @@
 | ------------- |:-------------:|
 | Mapsui NuGet   | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.svg?style=flat)](https://www.nuget.org/packages/Mapsui/) |
 | Mapsui.Forms Nuget   | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Forms.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Forms/) |
-| Mapsui.Native Nuget   | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Native.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Native/) |
+| Mapsui.Wpf Nuget   | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Wpf.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Wpf/) |
+| Mapsui.Uwp Nuget   | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Uwp.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Uwp/) |
+| Mapsui.iOS Nuget   | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.iOS.svg?style=flat)](https://www.nuget.org/packages/Mapsui.iOS/) |
+| Mapsui.Android Nuget   | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Android.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Android/) |
 | Build on Windows    | [![Build status](https://ci.appveyor.com/api/projects/status/p20w43qv4ixkkftp?svg=true)](https://ci.appveyor.com/project/pauldendulk/mapsui) |
 | Build docs | [![Build status](https://ci.appveyor.com/api/projects/status/c8hcfeoafmf51gin/branch/master?svg=true)](https://ci.appveyor.com/project/pauldendulk/mapsui-373p1/branch/master) |
 
