@@ -6,7 +6,10 @@ Create a normal Xamarin.Forms project
 
 ### Step 2
 
-Add Mapsui.Forms from NuGet to the packages
+In the package manager console type:
+```console
+PM> Install-Package Mapsui.Forms -pre
+```
 
 ### Step 3
 
@@ -67,4 +70,4 @@ mapView.Map = map;
 ```
 
 ### Step 6
-Run!
+Run it and you should see a map of the world.
