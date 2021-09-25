@@ -6,6 +6,7 @@ Create new 'Single View App' in Visual Studio
 
 ### Step 2
 
+In the package manager console type:
 ```console
 PM> Install-Package Mapsui.iOS -pre
 ```
@@ -39,4 +40,4 @@ public override void ViewDidLoad()
 
 ### Step 4
 
-Run and you should see a map.
+Run it and you should see a map of the world.
