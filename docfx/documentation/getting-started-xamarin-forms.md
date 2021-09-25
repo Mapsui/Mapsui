@@ -10,7 +10,7 @@ File -> New Project -> Mobile App (Xamarin.Forms) -> Select template 'Blank'
 
 Update Xamarin.Forms to the latest version available for all projects.
 
-In the Package Manager Console select the head project (the project without .Android/.iOS/.UWP extension) as default project and 
+In the Package Manager Console select the shared project (the project without .Android/.iOS/.UWP extension) as default project and 
 type:
 ```console
 PM> Install-Package Mapsui.Forms -pre
