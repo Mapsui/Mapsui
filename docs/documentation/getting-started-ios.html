@@ -96,7 +96,7 @@ using Mapsui.Utilities;
 
    var mapControl = new MapControl(View.Bounds);
    var map = new Map();
-   map.Layers.Add(OpenStreetMap.CreateTileLayer(&quot;your-user-agent&quot;));
+   map.Layers.Add(OpenStreetMap.CreateTileLayer());
    mapControl.Map = map;
    View = mapControl;
 }
