@@ -273,7 +273,11 @@ namespace Mapsui.UI.Uwp
 
         private float GetPixelDensity()
         {
+#if __WINUI__
+            return (float)XamlRoot.RasterizationScale;
+#else
             return (float)DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
+#endif
         }
 
     }
