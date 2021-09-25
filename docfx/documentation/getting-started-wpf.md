@@ -25,4 +25,4 @@ MyMapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer();
 And add the namespaces: ```using Mapsui.Utilities; using Mapsui.Layers; ```
 
 ### Step 5
-Run and you should see a map of the world.
+Run it and you should see a map of the world.
