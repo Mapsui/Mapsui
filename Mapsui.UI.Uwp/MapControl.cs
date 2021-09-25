@@ -31,6 +31,9 @@ using Microsoft.UI.Xaml.Shapes;
 using SkiaSharp.Views.Windows;
 using HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment;
 using VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment;
+using System.Runtime.Versioning;
+
+[assembly:SupportedOSPlatform("windows10.0.1903")]
 #else
 using Windows.UI;
 using Windows.UI.Core;
