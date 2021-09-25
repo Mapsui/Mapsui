@@ -2557,6 +2557,63 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapView.MapView
   nameWithType: MapView.MapView
+- uid: Mapsui.UI.Forms.MapView.ButtonMargin
+  name: ButtonMargin
+  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_ButtonMargin
+  commentId: P:Mapsui.UI.Forms.MapView.ButtonMargin
+  fullName: Mapsui.UI.Forms.MapView.ButtonMargin
+  nameWithType: MapView.ButtonMargin
+- uid: Mapsui.UI.Forms.MapView.ButtonMargin*
+  name: ButtonMargin
+  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_ButtonMargin_
+  commentId: Overload:Mapsui.UI.Forms.MapView.ButtonMargin
+  isSpec: "True"
+  fullName: Mapsui.UI.Forms.MapView.ButtonMargin
+  nameWithType: MapView.ButtonMargin
+- uid: Mapsui.UI.Forms.MapView.ButtonMarginProperty
+  name: ButtonMarginProperty
+  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_ButtonMarginProperty
+  commentId: F:Mapsui.UI.Forms.MapView.ButtonMarginProperty
+  fullName: Mapsui.UI.Forms.MapView.ButtonMarginProperty
+  nameWithType: MapView.ButtonMarginProperty
+- uid: Mapsui.UI.Forms.MapView.ButtonSize
+  name: ButtonSize
+  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_ButtonSize
+  commentId: P:Mapsui.UI.Forms.MapView.ButtonSize
+  fullName: Mapsui.UI.Forms.MapView.ButtonSize
+  nameWithType: MapView.ButtonSize
+- uid: Mapsui.UI.Forms.MapView.ButtonSize*
+  name: ButtonSize
+  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_ButtonSize_
+  commentId: Overload:Mapsui.UI.Forms.MapView.ButtonSize
+  isSpec: "True"
+  fullName: Mapsui.UI.Forms.MapView.ButtonSize
+  nameWithType: MapView.ButtonSize
+- uid: Mapsui.UI.Forms.MapView.ButtonSizeProperty
+  name: ButtonSizeProperty
+  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_ButtonSizeProperty
+  commentId: F:Mapsui.UI.Forms.MapView.ButtonSizeProperty
+  fullName: Mapsui.UI.Forms.MapView.ButtonSizeProperty
+  nameWithType: MapView.ButtonSizeProperty
+- uid: Mapsui.UI.Forms.MapView.ButtonSpacing
+  name: ButtonSpacing
+  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_ButtonSpacing
+  commentId: P:Mapsui.UI.Forms.MapView.ButtonSpacing
+  fullName: Mapsui.UI.Forms.MapView.ButtonSpacing
+  nameWithType: MapView.ButtonSpacing
+- uid: Mapsui.UI.Forms.MapView.ButtonSpacing*
+  name: ButtonSpacing
+  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_ButtonSpacing_
+  commentId: Overload:Mapsui.UI.Forms.MapView.ButtonSpacing
+  isSpec: "True"
+  fullName: Mapsui.UI.Forms.MapView.ButtonSpacing
+  nameWithType: MapView.ButtonSpacing
+- uid: Mapsui.UI.Forms.MapView.ButtonSpacingProperty
+  name: ButtonSpacingProperty
+  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_ButtonSpacingProperty
+  commentId: F:Mapsui.UI.Forms.MapView.ButtonSpacingProperty
+  fullName: Mapsui.UI.Forms.MapView.ButtonSpacingProperty
+  nameWithType: MapView.ButtonSpacingProperty
 - uid: Mapsui.UI.Forms.MapView.Drawables
   name: Drawables
   href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Drawables

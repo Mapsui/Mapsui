@@ -82,15 +82,15 @@
 <h3 id="step-1">Step 1</h3>
 <p>Create new &#39;Single View App&#39; in Visual Studio</p>
 <h3 id="step-2">Step 2</h3>
-<p>Add package &#39;Mapsui.Native&#39; to the project (don&#39;t forget to enable check at &#39;Include prereleases&#39;)</p>
-<h3 id="step-3">Step 3</h3>
+<pre><code class="lang-console">PM&gt; Install-Package Mapsui.iOS -pre
+</code></pre><h3 id="step-3">Step 3</h3>
 <p>Open ViewController.cs </p>
 <p>add namespaces:</p>
-<pre><code>using Mapsui;
+<pre><code class="lang-csharp">using Mapsui;
 using Mapsui.UI.iOS;
 using Mapsui.Utilities;
 </code></pre><p>add code to ViewDidLoad() method:</p>
-<pre><code>public override void ViewDidLoad()
+<pre><code class="lang-csharp">public override void ViewDidLoad()
 {
    base.ViewDidLoad();
 
@@ -101,7 +101,7 @@ using Mapsui.Utilities;
    View = mapControl;
 }
 </code></pre><h3 id="step-4">Step 4</h3>
-<p>Run!</p>
+<p>Run and you should see a map.</p>
 </article>
           </div>
           
