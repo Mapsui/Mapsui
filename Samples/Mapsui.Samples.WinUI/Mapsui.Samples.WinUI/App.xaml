@@ -2,8 +2,7 @@
     x:Class="Mapsui.Samples.WinUI.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Mapsui.Samples.WinUI.App"
-    RequestedTheme="Light">
+    xmlns:local="using:Mapsui.Samples.WinUI">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
