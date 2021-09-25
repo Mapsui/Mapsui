@@ -83,17 +83,17 @@
 <p>Start a new WPF application in Visual Studio.</p>
 <h3 id="step-2">Step 2</h3>
 <p>In the package manager console type:</p>
-<pre><code>PM&gt; Install-Package Mapsui.Native
+<pre><code class="lang-console">PM&gt; Install-Package Mapsui.Wpf -pre
 </code></pre><h3 id="step-3">Step 3</h3>
 <p>In WpfApplication1.MainWindow.xaml add this in the Grid element:</p>
-<pre><code>&lt;mapsui:MapControl Name=&quot;MyMapControl&quot;&gt;&lt;/mapsui:MapControl&gt;
+<pre><code class="lang-xml">&lt;mapsui:MapControl Name=&quot;MyMapControl&quot;&gt;&lt;/mapsui:MapControl&gt;
 </code></pre><p>And add the namespace: <code>xmlns:mapsui=&quot;clr-namespace:Mapsui.UI.Wpf;assembly=Mapsui.UI.Wpf&quot;</code></p>
 <h3 id="step-4">Step 4</h3>
 <p>In WpfApplication1.MainWindow.xaml.cs add in the constructor <strong>after</strong> InitializeComponent():</p>
-<pre><code>MyMapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer(&quot;your-user-agent&quot;));
+<pre><code class="lang-csharp">MyMapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer();
 </code></pre><p>And add the namespaces: <code>using Mapsui.Utilities; using Mapsui.Layers;</code></p>
 <h3 id="step-5">Step 5</h3>
-<p>Run!</p>
+<p>Run and you should see a map of the world.</p>
 </article>
           </div>
           

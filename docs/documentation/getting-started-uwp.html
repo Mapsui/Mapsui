@@ -82,26 +82,25 @@
 <h3 id="step-1">Step 1</h3>
 <p>Create new &#39;Blank App (Universal Windows)&#39; in Visual Studio</p>
 <h3 id="step-2">Step 2</h3>
-<p>Add package &#39;Mapsui.Native&#39; to the project (don&#39;t forget to enable check at &#39;Include prereleases&#39;)</p>
-<h3 id="step-3">Step 3</h3>
-<p>Open MainPage.xaml</p>
-<p>add namespace:</p>
-<pre><code>xmlns:uwp=&quot;using:Mapsui.UI.Uwp&quot;
+<pre><code class="lang-console">Install-Package Mapsui.Uwp -pre
+</code></pre><h3 id="step-3">Step 3</h3>
+<p>Open MainPage.xaml and add namespace:</p>
+<pre><code class="lang-xml">xmlns:uwp=&quot;using:Mapsui.UI.Uwp&quot;
 </code></pre><p>Add MapControl to the Grid:</p>
-<pre><code>&lt;Grid&gt;
-    &lt;uwp:MapControl x:Name=&quot;MapControl&quot; VerticalAlignment=&quot;Stretch&quot; HorizontalAlignment=&quot;Stretch&quot; /&gt;
+<pre><code class="lang-xml">&lt;Grid&gt;
+  &lt;uwp:MapControl x:Name=&quot;MyMap&quot; VerticalAlignment=&quot;Stretch&quot; HorizontalAlignment=&quot;Stretch&quot; /&gt;
 &lt;/Grid&gt;
 </code></pre><p>In MainPage.xaml.cs, add namespace:</p>
-<pre><code>using Mapsui.Utilities;
+<pre><code class="lang-csharp">using Mapsui.Utilities;
 </code></pre><p>Add code to the constructor:</p>
-<pre><code>        public MainPage()
+<pre><code class="lang-csharp">        public MainPage()
         {
             this.InitializeComponent();
 
-            MapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer(&quot;your-user-agent&quot;));
+            MyMap.Map.Layers.Add(OpenStreetMap.CreateTileLayer(&quot;your-user-agent&quot;));
         }
 </code></pre><h3 id="step-4">Step 4</h3>
-<p>Run!</p>
+<p>Run and you should see a map of the world.</p>
 </article>
           </div>
           
