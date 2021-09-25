@@ -6,6 +6,7 @@
 | Mapsui.Forms Nuget   | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Forms.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Forms/) |
 | Mapsui.Wpf Nuget   | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Wpf.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Wpf/) |
 | Mapsui.Uwp Nuget   | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Uwp.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Uwp/) |
+| Mapsui.WinUI Nuget   | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Uwp.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Uwp/) |
 | Mapsui.Android Nuget   | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Android.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Android/) |
 | Mapsui.iOS Nuget   | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.iOS.svg?style=flat)](https://www.nuget.org/packages/Mapsui.iOS/) |
 | Build on Windows    | [![Build status](https://ci.appveyor.com/api/projects/status/p20w43qv4ixkkftp?svg=true)](https://ci.appveyor.com/project/pauldendulk/mapsui) |
@@ -40,6 +41,7 @@ Quickly get a sample running
 - [Xamarin Forms](https://mapsui.com/documentation/getting-started-xamarin-forms.html)
 - [WPF](https://mapsui.com/documentation/getting-started-wpf.html)
 - [UWP](https://mapsui.com/documentation/getting-started-uwp.html)
+- [WinUi](https://mapsui.com/documentation/getting-started-winui.html)
 - [Android](https://mapsui.com/documentation/getting-started-android.html)
 - [iOS](https://mapsui.com/documentation/getting-started-ios.html)
 

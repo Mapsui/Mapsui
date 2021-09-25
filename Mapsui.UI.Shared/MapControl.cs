@@ -18,6 +18,8 @@ namespace Mapsui.UI.Android
 namespace Mapsui.UI.iOS
 #elif __UWP__
 namespace Mapsui.UI.Uwp
+#elif __WINUI__
+namespace Mapsui.UI.WinUI
 #elif __FORMS__
 namespace Mapsui.UI.Forms
 #else
