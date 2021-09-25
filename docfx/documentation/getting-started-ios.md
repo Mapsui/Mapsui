@@ -31,7 +31,7 @@ public override void ViewDidLoad()
 
    var mapControl = new MapControl(View.Bounds);
    var map = new Map();
-   map.Layers.Add(OpenStreetMap.CreateTileLayer("your-user-agent"));
+   map.Layers.Add(OpenStreetMap.CreateTileLayer());
    mapControl.Map = map;
    View = mapControl;
 }
