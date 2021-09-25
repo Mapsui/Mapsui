@@ -25,6 +25,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\Mapsui.UI.WinUI\bin\Release\Mapsui.UI.WinUI.dll" target="lib\WinUI\Mapsui.UI.WinUI.dll" />
+    <file src="..\Mapsui.UI.WinUI\bin\Release\net5.0-windows10.0.18362.0\Mapsui.UI.WinUI.dll" target="lib\net5.0-windows10.0.18362.0\Mapsui.UI.WinUI.dll" />
   </files>
 </package>
