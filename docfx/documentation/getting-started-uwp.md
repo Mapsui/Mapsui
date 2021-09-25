@@ -12,9 +12,7 @@ Install-Package Mapsui.Uwp -pre
 
 ### Step 3
 
-Open MainPage.xaml
-
-add namespace:
+Open MainPage.xaml and add namespace:
 
 ```xml
 xmlns:uwp="using:Mapsui.UI.Uwp"
@@ -24,7 +22,7 @@ Add MapControl to the Grid:
 
 ```xml
 <Grid>
-    <uwp:MapControl x:Name="MapControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+  <uwp:MapControl x:Name="MyMap" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
 </Grid>
 ```
 
@@ -42,7 +40,7 @@ Add code to the constructor:
         {
             this.InitializeComponent();
 
-            MapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer("your-user-agent"));
+            MyMap.Map.Layers.Add(OpenStreetMap.CreateTileLayer("your-user-agent"));
         }
 
 ```
