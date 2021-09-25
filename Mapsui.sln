@@ -152,7 +152,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.UI.WinUI", "Mapsui.U
 EndProject
 Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "Mapsui.Samples.WinUI (Package)", "Samples\Mapsui.Samples.WinUI\Mapsui.Samples.WinUI (Package)\Mapsui.Samples.WinUI (Package).wapproj", "{78C38F63-A104-47DE-A328-2D57F132E0D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.WinUI", "Samples\Mapsui.Samples.WinUI\Mapsui.Samples.WinUI\Mapsui.Samples.WinUI.csproj", "{F8B5F48E-5412-4D7A-A76F-01198D6E1768}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.WinUI", "Samples\Mapsui.Samples.WinUI\Mapsui.Samples.WinUI\Mapsui.Samples.WinUI.csproj", "{F8B5F48E-5412-4D7A-A76F-01198D6E1768}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -2084,6 +2084,7 @@ Global
 		{F8B5F48E-5412-4D7A-A76F-01198D6E1768}.Debug|x86.ActiveCfg = Debug|x86
 		{F8B5F48E-5412-4D7A-A76F-01198D6E1768}.Debug|x86.Build.0 = Debug|x86
 		{F8B5F48E-5412-4D7A-A76F-01198D6E1768}.Release|AnyCPU.ActiveCfg = Release|x86
+		{F8B5F48E-5412-4D7A-A76F-01198D6E1768}.Release|AnyCPU.Build.0 = Release|x86
 		{F8B5F48E-5412-4D7A-A76F-01198D6E1768}.Release|ARM.ActiveCfg = Release|x86
 		{F8B5F48E-5412-4D7A-A76F-01198D6E1768}.Release|arm64.ActiveCfg = Release|arm64
 		{F8B5F48E-5412-4D7A-A76F-01198D6E1768}.Release|arm64.Build.0 = Release|arm64
