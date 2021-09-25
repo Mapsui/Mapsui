@@ -6,8 +6,9 @@ Create new 'Blank App (Universal Windows)' in Visual Studio
 
 ### Step 2
 
+In the package manager console type:
 ```console
-Install-Package Mapsui.Uwp -pre
+PM> Install-Package Mapsui.Uwp -pre
 ```
 
 ### Step 3
@@ -47,4 +48,4 @@ Add code to the constructor:
 
 ### Step 4
 
-Run and you should see a map of the world.
+Run it and you should see a map of the world.
