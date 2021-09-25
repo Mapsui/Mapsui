@@ -6,8 +6,9 @@ Create 'Blank App (Android)' in Visual Studio
 
 ### Step 2
 
+In the package manager console type:
 ```
-$ Install-Package Mapsui.Android -pre
+PM> Install-Package Mapsui.Android -pre
 ```
 
 ### Step 3
