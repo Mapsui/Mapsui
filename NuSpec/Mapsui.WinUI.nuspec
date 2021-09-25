@@ -15,7 +15,7 @@
     <language>en-US</language>
     <dependencies>
       <!-- [ or ] is including, ( or ) is excluding -->
-      <group targetFramework="uap">
+      <group targetFramework="net5.0-windows10.0.18362.0">
         <dependency id="Mapsui" version="$version$"/>
         <dependency id="SkiaSharp.Views.WinUI" version="[2.80.3,3.0.0)"/>
         <dependency id="Microsoft.ProjectReunion" Version="[0.8.4, 0.9.0)" />
