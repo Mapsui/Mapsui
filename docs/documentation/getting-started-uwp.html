@@ -82,7 +82,8 @@
 <h3 id="step-1">Step 1</h3>
 <p>Create new &#39;Blank App (Universal Windows)&#39; in Visual Studio</p>
 <h3 id="step-2">Step 2</h3>
-<pre><code class="lang-console">Install-Package Mapsui.Uwp -pre
+<p>In the package manager console type:</p>
+<pre><code class="lang-console">PM&gt; Install-Package Mapsui.Uwp -pre
 </code></pre><h3 id="step-3">Step 3</h3>
 <p>Open MainPage.xaml and add namespace:</p>
 <pre><code class="lang-xml">xmlns:uwp=&quot;using:Mapsui.UI.Uwp&quot;
@@ -100,7 +101,7 @@
             MyMap.Map.Layers.Add(OpenStreetMap.CreateTileLayer());
         }
 </code></pre><h3 id="step-4">Step 4</h3>
-<p>Run and you should see a map of the world.</p>
+<p>Run it and you should see a map of the world.</p>
 </article>
           </div>
           

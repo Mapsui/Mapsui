@@ -82,8 +82,9 @@
 <h3 id="step-1">Step 1</h3>
 <p>Create a normal Xamarin.Forms project</p>
 <h3 id="step-2">Step 2</h3>
-<p>Add Mapsui.Forms from NuGet to the packages</p>
-<h3 id="step-3">Step 3</h3>
+<p>In the package manager console type:</p>
+<pre><code class="lang-console">PM&gt; Install-Package Mapsui.Forms -pre
+</code></pre><h3 id="step-3">Step 3</h3>
 <p>Add the line <code>xmlns:mapsui=&quot;clr-namespace:Mapsui.UI.Forms;assembly=Mapsui.UI.Forms&quot;</code>
 to the Xaml file</p>
 <h3 id="step-4">Step 4</h3>
@@ -127,7 +128,7 @@ map.Widgets.Add(new Widgets.ScaleBar.ScaleBarWidget(map) { TextAlignment = Widge
 
 mapView.Map = map;
 </code></pre><h3 id="step-6">Step 6</h3>
-<p>Run!</p>
+<p>Run it and you should see a map of the world.</p>
 </contentpage></article>
           </div>
           

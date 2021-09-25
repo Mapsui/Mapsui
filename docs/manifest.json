@@ -810,7 +810,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/getting-started-android.html",
-          "hash": "mtyFm6ASMs9IDnEYhV/7QQ=="
+          "hash": "SWS7+i6R4hwgAtwbQz3Oqg=="
         }
       },
       "is_incremental": false,
@@ -822,7 +822,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/getting-started-ios.html",
-          "hash": "TFkXzvLpp6DRZKFVlm/8nw=="
+          "hash": "hu6s/ePOwtqjAPstKaTcSg=="
         }
       },
       "is_incremental": false,
@@ -834,7 +834,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/getting-started-uwp.html",
-          "hash": "VjhnFDWAGM10js0qozfo7g=="
+          "hash": "HV/CinDMPxRK0JQAPvcnxA=="
         }
       },
       "is_incremental": false,
@@ -846,7 +846,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/getting-started-wpf.html",
-          "hash": "FwTVIEI2HLmzzbmYUylIHA=="
+          "hash": "4uk5Vsuy7aMJXj0lV6xP9A=="
         }
       },
       "is_incremental": false,
@@ -858,7 +858,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/getting-started-xamarin-forms.html",
-          "hash": "+8/1RgAT3xl5eboGWnGApg=="
+          "hash": "tPyg58ENNHLYimZ4oaJkAQ=="
         }
       },
       "is_incremental": false,
@@ -1145,9 +1145,9 @@
         "full_build_reason_code": "NoAvailableBuildCache"
       },
       "processors": {
-        "ResourceDocumentProcessor": {
+        "TocDocumentProcessor": {
           "can_incremental": false,
-          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
           "total_file_count": 0,
           "skipped_file_count": 0
@@ -1158,17 +1158,17 @@
           "total_file_count": 26,
           "skipped_file_count": 0
         },
-        "TocDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build",
-          "total_file_count": 0,
-          "skipped_file_count": 0
-        },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
           "total_file_count": 58,
+          "skipped_file_count": 0
+        },
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
           "skipped_file_count": 0
         }
       }
