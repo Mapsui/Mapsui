@@ -33,7 +33,7 @@ using HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment;
 using VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment;
 using System.Runtime.Versioning;
 
-[assembly:SupportedOSPlatform("windows10.0.1903")]
+[assembly:SupportedOSPlatform("windows10.0.18362.0")]
 #else
 using Windows.UI;
 using Windows.UI.Core;
