@@ -822,7 +822,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/getting-started-ios.html",
-          "hash": "rfdeIHn+jPRV7x4a59ShSA=="
+          "hash": "TFkXzvLpp6DRZKFVlm/8nw=="
         }
       },
       "is_incremental": false,
@@ -834,7 +834,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/getting-started-uwp.html",
-          "hash": "lhqH5Dpv4dx8J4g66Tde7Q=="
+          "hash": "VjhnFDWAGM10js0qozfo7g=="
         }
       },
       "is_incremental": false,
@@ -1145,13 +1145,6 @@
         "full_build_reason_code": "NoAvailableBuildCache"
       },
       "processors": {
-        "TocDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build",
-          "total_file_count": 0,
-          "skipped_file_count": 0
-        },
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
@@ -1162,6 +1155,13 @@
           "can_incremental": false,
           "incrementalPhase": "build",
           "total_file_count": 58,
+          "skipped_file_count": 0
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
