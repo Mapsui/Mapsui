@@ -16,6 +16,7 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA f
 
 using System;
+using System.Runtime.Versioning;
 using System.Threading.Tasks;
 using Windows.Devices.Sensors;
 using Windows.Foundation;
@@ -31,9 +32,6 @@ using Microsoft.UI.Xaml.Shapes;
 using SkiaSharp.Views.Windows;
 using HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment;
 using VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment;
-using System.Runtime.Versioning;
-
-[assembly:SupportedOSPlatform("windows10.0.18362.0")]
 #else
 using Windows.UI;
 using Windows.UI.Core;
@@ -48,6 +46,7 @@ using VerticalAlignment = Windows.UI.Xaml.VerticalAlignment;
 #endif
 
 #if __WINUI__
+[assembly:SupportedOSPlatform("windows10.0.18362.0")]
 namespace Mapsui.UI.WinUI
 #else
 namespace Mapsui.UI.Uwp
