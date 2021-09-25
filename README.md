@@ -6,8 +6,8 @@
 | Mapsui.Forms Nuget   | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Forms.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Forms/) |
 | Mapsui.Wpf Nuget   | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Wpf.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Wpf/) |
 | Mapsui.Uwp Nuget   | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Uwp.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Uwp/) |
-| Mapsui.iOS Nuget   | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.iOS.svg?style=flat)](https://www.nuget.org/packages/Mapsui.iOS/) |
 | Mapsui.Android Nuget   | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Android.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Android/) |
+| Mapsui.iOS Nuget   | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.iOS.svg?style=flat)](https://www.nuget.org/packages/Mapsui.iOS/) |
 | Build on Windows    | [![Build status](https://ci.appveyor.com/api/projects/status/p20w43qv4ixkkftp?svg=true)](https://ci.appveyor.com/project/pauldendulk/mapsui) |
 | Build docs | [![Build status](https://ci.appveyor.com/api/projects/status/c8hcfeoafmf51gin/branch/master?svg=true)](https://ci.appveyor.com/project/pauldendulk/mapsui-373p1/branch/master) |
 
@@ -27,20 +27,21 @@ Mapsui is a C# map component for apps
 
 - Supported platforms:
   - Xamarin.Forms (including Android, iOS, MacOS, UWP and WPF)
+  - WPF
+  - UWP
   - Xamarin.Android
   - Xamarin.iOS
-  - UWP
-  - WPF
 - The Mapsui core assemblies are .NET Standard 2.0
 - Designed to be fast and responsive
 
 ## Quickstart
 Quickly get a sample running 
 
-- [iOS](https://mapsui.com/documentation/getting-started-ios.html)
-- [WPF](https://mapsui.com/documentation/getting-started-wpf.html)
-- [Android](https://mapsui.com/documentation/getting-started-android.html)
 - [Xamarin Forms](https://mapsui.com/documentation/getting-started-xamarin-forms.html)
+- [WPF](https://mapsui.com/documentation/getting-started-wpf.html)
+- [UWP](https://mapsui.com/documentation/getting-started-uwp.html)
+- [Android](https://mapsui.com/documentation/getting-started-android.html)
+- [iOS](https://mapsui.com/documentation/getting-started-ios.html)
 
 ## Documentation
 The documentation can be found at [mapsui.com](https://mapsui.com). Let us know what kind of information you are missing.
