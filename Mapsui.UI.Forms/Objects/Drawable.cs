@@ -8,10 +8,16 @@ using Mapsui.UI.Maui;
 using Mapsui.UI.Maui.Extensions;
 using Microsoft.Maui;
 using Microsoft.Maui.Controls;
+
+using Color = Microsoft.Maui.Graphics.Color;
+using KnownColor = Mapsui.UI.Maui.KnownColor;
 #else
 using Mapsui.UI.Forms;
 using Mapsui.UI.Forms.Extensions;
 using Xamarin.Forms;
+
+using Color = Xamarin.Forms.Color;
+using KnownColor = Xamarin.Forms.Color;
 #endif
 
 namespace Mapsui.UI.Objects
@@ -27,11 +33,7 @@ namespace Mapsui.UI.Objects
         public static readonly BindableProperty MaxVisibleProperty = BindableProperty.Create(nameof(MaxVisible), typeof(double), typeof(Circle), double.MaxValue);
         public static readonly BindableProperty ZIndexProperty = BindableProperty.Create(nameof(ZIndex), typeof(int), typeof(Circle), 0);
         public static readonly BindableProperty IsClickableProperty = BindableProperty.Create(nameof(IsClickable), typeof(bool), typeof(Drawable), false);
-#if __MAUI__
-        public static readonly BindableProperty StrokeColorProperty = BindableProperty.Create(nameof(StrokeColor), typeof(Microsoft.Maui.Graphics.Color), typeof(Circle), Mapsui.Styles.Color.Black.ToMaui());
-#else
-        public static readonly BindableProperty StrokeColorProperty = BindableProperty.Create(nameof(StrokeColor), typeof(Xamarin.Forms.Color), typeof(Circle), Xamarin.Forms.Color.Black);
-#endif
+        public static readonly BindableProperty StrokeColorProperty = BindableProperty.Create(nameof(StrokeColor), typeof(Color), typeof(Circle), KnownColor.Black);
 
         /// <summary>
         /// Label of drawable

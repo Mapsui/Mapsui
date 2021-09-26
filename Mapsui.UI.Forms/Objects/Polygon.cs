@@ -13,10 +13,16 @@ using Microsoft.Maui;
 using Microsoft.Maui.Controls;
 using Mapsui.UI.Maui.Extensions;
 using Mapsui.UI.Maui.Utils;
+
+using Color = Microsoft.Maui.Graphics.Color;
+using KnownColor = Mapsui.UI.Maui.KnownColor;
 #else
 using Mapsui.UI.Forms.Extensions;
 using Mapsui.UI.Forms.Utils;
 using Xamarin.Forms;
+
+using Color = Xamarin.Forms.Color;
+using KnownColor = Xamarin.Forms.Color;
 #endif
 
 
@@ -28,12 +34,7 @@ namespace Mapsui.UI.Forms
 {
     public class Polygon : Drawable
     {
-#if __MAUI__
-        public static readonly BindableProperty FillColorProperty = BindableProperty.Create(nameof(FillColor), typeof(Microsoft.Maui.Graphics.Color), typeof(Polygon), Mapsui.Styles.Color.DarkGray.ToMaui());
-#else
-        public static readonly BindableProperty FillColorProperty = BindableProperty.Create(nameof(FillColor), typeof(Xamarin.Forms.Color), typeof(Polygon), Xamarin.Forms.Color.DarkGray);
-#endif
-
+        public static readonly BindableProperty FillColorProperty = BindableProperty.Create(nameof(FillColor), typeof(Color), typeof(Polygon), KnownColor.DarkGray);
         private readonly ObservableRangeCollection<Position> _positions = new ObservableRangeCollection<Position>();
         private readonly ObservableRangeCollection<Position[]> _holes = new ObservableRangeCollection<Position[]>();
 

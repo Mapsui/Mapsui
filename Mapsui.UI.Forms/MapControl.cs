@@ -14,9 +14,15 @@ using Microsoft.Maui.Essentials;
 using Microsoft.Maui.Graphics;
 using SkiaSharp.Views.Maui;
 using SkiaSharp.Views.Maui.Controls;
+
+using Color = Microsoft.Maui.Graphics.Color;
+using KnownColor = Mapsui.UI.Maui.KnownColor;
 #else
 using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
+
+using Color = Xamarin.Forms.Color;
+using KnownColor = Xamarin.Forms.Color;
 #endif
 
 #if __MAUI__
@@ -140,11 +146,7 @@ namespace Mapsui.UI.Forms
             Content = view;
 
             Map = new Map();
-#if __MAUI__
-            BackgroundColor = Mapsui.Styles.Color.White.ToMaui();
-#else
-            BackgroundColor = Color.White;
-#endif
+            BackgroundColor = KnownColor.White;
 
             _initialized = true;
         }

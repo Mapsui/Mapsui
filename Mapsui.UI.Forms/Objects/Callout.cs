@@ -11,9 +11,15 @@ using System.Runtime.CompilerServices;
 using Mapsui.UI.Maui.Extensions;
 using Microsoft.Maui;
 using Microsoft.Maui.Controls;
+
+using Color = Microsoft.Maui.Graphics.Color;
+using KnownColor = Mapsui.UI.Maui.KnownColor;
 #else
 using Mapsui.UI.Forms.Extensions;
 using Xamarin.Forms;
+
+using Color = Xamarin.Forms.Color;
+using KnownColor = Xamarin.Forms.Color;
 #endif
 
 #if __MAUI__
@@ -35,15 +41,12 @@ namespace Mapsui.UI.Forms
         public static double DefaultSubtitleFontSize = Device.GetNamedSize(NamedSize.Subtitle, typeof(Label));
         public static FontAttributes DefaultSubtitleFontAttributes = FontAttributes.None;
         public static TextAlignment DefaultSubtitleTextAlignment = TextAlignment.Start; // Center;
-
+        public static Color DefaultTitleFontColor = KnownColor.Black;
+        public static Color DefaultSubtitleFontColor = KnownColor.Black;
 #if __MAUI__
-        public static Microsoft.Maui.Graphics.Color DefaultTitleFontColor = Mapsui.Styles.Color.Black.ToMaui();
-        public static Microsoft.Maui.Graphics.Color DefaultSubtitleFontColor = Mapsui.Styles.Color.Black.ToMaui();
         public static string DefaultTitleFontName = null; // TODO: default font per platform
         public static string DefaultSubtitleFontName = null; // TODO: default font per platform
 #else
-        public static Xamarin.Forms.Color DefaultTitleFontColor = Xamarin.Forms.Color.Black;
-        public static Xamarin.Forms.Color DefaultSubtitleFontColor = Xamarin.Forms.Color.Black;
         public static string DefaultTitleFontName = Xamarin.Forms.Font.Default.FontFamily;
         public static string DefaultSubtitleFontName = Xamarin.Forms.Font.Default.FontFamily;
 #endif
@@ -87,19 +90,12 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Bindable property for the <see cref="Color"/> property
         /// </summary>
-#if __MAUI__
-        public static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color), typeof(Microsoft.Maui.Graphics.Color), typeof(MapView), Mapsui.Styles.Color.White.ToMaui());
-#else
-        public static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color), typeof(Xamarin.Forms.Color), typeof(MapView), Xamarin.Forms.Color.White);
-#endif
+        public static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color), typeof(Color), typeof(MapView), KnownColor.White);
+
         /// <summary>
         /// Bindable property for the <see cref="BackgroundColor"/> property
         /// </summary>
-#if __MAUI__
-        public static readonly BindableProperty BackgroundColorProperty = BindableProperty.Create(nameof(BackgroundColor), typeof(Microsoft.Maui.Graphics.Color), typeof(MapView), Mapsui.Styles.Color.White.ToMaui());
-#else
-        public static readonly BindableProperty BackgroundColorProperty = BindableProperty.Create(nameof(BackgroundColor), typeof(Xamarin.Forms.Color), typeof(MapView), Xamarin.Forms.Color.White);
-#endif
+        public static readonly BindableProperty BackgroundColorProperty = BindableProperty.Create(nameof(BackgroundColor), typeof(Color), typeof(MapView), KnownColor.White);
 
         /// <summary>
         /// Bindable property for the <see cref="ShadowWidth"/> property

@@ -9,9 +9,15 @@ using Mapsui.UI.Maui.Extensions;
 using Microsoft.Maui;
 using Microsoft.Maui.Controls;
 using Mapsui.UI.Maui;
+
+using Color = Microsoft.Maui.Graphics.Color;
+using KnownColor = Mapsui.UI.Maui.KnownColor;
 #else
 using Xamarin.Forms;
 using Mapsui.UI.Forms.Extensions;
+
+using Color = Xamarin.Forms.Color;
+using KnownColor = Xamarin.Forms.Color;
 #endif
 
 #if __MAUI__
@@ -25,11 +31,7 @@ namespace Mapsui.UI.Forms
         public static readonly BindableProperty CenterProperty = BindableProperty.Create(nameof(Center), typeof(Position), typeof(Circle), default(Position));
         public static readonly BindableProperty RadiusProperty = BindableProperty.Create(nameof(Radius), typeof(Distance), typeof(Circle), Distance.FromMeters(1));
         public static readonly BindableProperty QualityProperty = BindableProperty.Create(nameof(Quality), typeof(double), typeof(Circle), 3.0);
-#if __MAUI__
-        public static readonly BindableProperty FillColorProperty = BindableProperty.Create(nameof(FillColor), typeof(Microsoft.Maui.Graphics.Color), typeof(Circle), Mapsui.Styles.Color.DarkGray.ToMaui());
-#else
-        public static readonly BindableProperty FillColorProperty = BindableProperty.Create(nameof(FillColor), typeof(Xamarin.Forms.Color), typeof(Circle), Xamarin.Forms.Color.DarkGray);
-#endif
+        public static readonly BindableProperty FillColorProperty = BindableProperty.Create(nameof(FillColor), typeof(Color), typeof(Circle), KnownColor.DarkGray);
 
         public Circle()
         {
