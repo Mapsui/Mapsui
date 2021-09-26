@@ -12,7 +12,9 @@ using Mapsui.Widgets;
 using System.Runtime.CompilerServices;
 using Mapsui.Utilities;
 
-#if __ANDROID__
+#if __MAUI__
+namespace Mapsui.UI.Maui
+#elif __ANDROID__
 namespace Mapsui.UI.Android
 #elif __IOS__
 namespace Mapsui.UI.iOS
@@ -20,8 +22,6 @@ namespace Mapsui.UI.iOS
 namespace Mapsui.UI.Uwp
 #elif __FORMS__
 namespace Mapsui.UI.Forms
-#elif __MAUI__
-namespace Mapsui.UI.Maui
 #else
 namespace Mapsui.UI.Wpf
 #endif
