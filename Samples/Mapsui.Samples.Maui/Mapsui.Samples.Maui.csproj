@@ -40,11 +40,17 @@
 
 	<ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
 		<!-- Required - WinUI does not yet have buildTransitive for everything -->
-		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0-experimental1" />
+		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0-preview1" />
 		<PackageReference Include="Microsoft.WindowsAppSDK.Foundation" Version="1.0.0-experimental1" />
 		<PackageReference Include="Microsoft.WindowsAppSDK.WinUI" Version="1.0.0-experimental1" />
 		<PackageReference Include="Microsoft.WindowsAppSDK.InteractiveExperiences" Version="1.0.0-experimental1" NoWarn="NU1701" />
 	</ItemGroup>
+
+	<ItemGroup>
+    <PackageReference Include="SkiaSharp" Version="2.88.0-preview.140" />
+    <PackageReference Include="SkiaSharp.HarfBuzz" Version="2.88.0-preview.140" />
+    <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.0-preview.140" />
+  </ItemGroup>
 
 	<ItemGroup>
 	  <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\AnimationSample.cs" Link="AnimationSample.cs" />
