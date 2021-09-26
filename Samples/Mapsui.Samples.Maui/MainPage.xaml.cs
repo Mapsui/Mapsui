@@ -34,7 +34,7 @@ namespace Mapsui.Samples.Maui
             FillListWithSamples();
         }
 
-        void OnSelection(object sender, SelectedItemChangedEventArgs e)
+        private void OnSelection(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem == null)
             {

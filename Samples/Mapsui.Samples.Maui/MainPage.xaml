@@ -3,11 +3,15 @@
              x:Class="Mapsui.Samples.Maui.MainPage"
              BackgroundColor="{DynamicResource SecondaryColor}">
 
-    <StackLayout Orientation="Vertical" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-        <Picker x:Name="picker" />
-        <ListView x:Name="listView"
+    <Grid BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Picker x:Name="picker" Grid.Row="0" />
+        <ListView x:Name="listView" Grid.Row="1" 
                   VerticalOptions="FillAndExpand" 
                   HorizontalOptions="FillAndExpand"
                   ItemSelected="OnSelection"/>
-    </StackLayout>
+    </Grid>
 </ContentPage>
