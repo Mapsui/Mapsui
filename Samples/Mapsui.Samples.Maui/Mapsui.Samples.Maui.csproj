@@ -69,7 +69,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
+	  <PackageReference Include="Xam.Plugin.Geolocator" Version="4.6.2-beta" />
 	</ItemGroup>
 
 	<ItemGroup>
