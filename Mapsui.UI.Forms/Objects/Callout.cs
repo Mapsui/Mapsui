@@ -58,7 +58,11 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Bindable property for the <see cref="Anchor"/> property
         /// </summary>
-        public static readonly BindableProperty AnchorProperty = BindableProperty.Create(nameof(Anchor), typeof(Point), typeof(MapView), default(Point));
+#if __MAUI__
+        public static readonly BindableProperty AnchorProperty = BindableProperty.Create(nameof(Anchor), typeof(Microsoft.Maui.Graphics.Point), typeof(MapView), default(Microsoft.Maui.Graphics.Point));
+#else
+        public static readonly BindableProperty AnchorProperty = BindableProperty.Create(nameof(Anchor), typeof(Xamarin.Forms.Point), typeof(MapView), default(Xamarin.Forms.Point));
+#endif
 
         /// <summary>
         /// Bindable property for the <see cref="ArrowAlignment"/> property
@@ -255,11 +259,19 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Anchor position of Callout
         /// </summary>
-        public Point Anchor
+#if __MAUI__
+        public Microsoft.Maui.Graphics.Point Anchor
         {
-            get { return (Point)GetValue(AnchorProperty); }
+            get { return (Microsoft.Maui.Graphics.Point)GetValue(AnchorProperty); }
             set { SetValue(AnchorProperty, value); }
         }
+#else        
+        public Xamarin.Forms.Point Anchor
+        {
+            get { return (Xamarin.Forms.Point)GetValue(AnchorProperty); }
+            set { SetValue(AnchorProperty, value); }
+        }
+#endif
 
         /// <summary>
         /// Arrow alignment of Callout

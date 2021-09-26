@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Geometries.Utilities;
 using System.Threading.Tasks;
-using Mapsui.UI.Maui.Extensions;
 #if __MAUI__
+using Mapsui.UI.Maui.Extensions;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Essentials;
 using Microsoft.Maui.Graphics;
