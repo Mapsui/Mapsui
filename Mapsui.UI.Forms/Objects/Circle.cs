@@ -59,19 +59,11 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Color to fill circle with
         /// </summary>
-#if __MAUI__
-        public Microsoft.Maui.Graphics.Color FillColor
+        public Color FillColor
         {
-            get => (Microsoft.Maui.Graphics.Color)GetValue(FillColorProperty);
+            get => (Color)GetValue(FillColorProperty);
             set => SetValue(FillColorProperty, value);
         }
-#else
-        public Xamarin.Forms.Color FillColor
-        {
-            get => (Xamarin.Forms.Color)GetValue(FillColorProperty);
-            set => SetValue(FillColorProperty, value);
-        }
-#endif
 
         /// <summary>
         /// Quality for circle. Determines, how many points used to draw circle. 3 is poorest, 360 best quality.

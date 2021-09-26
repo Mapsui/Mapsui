@@ -873,11 +873,7 @@ namespace Mapsui.UI.Forms
                     SelectedPin = clickedPin;
 
                     SelectedPinChanged?.Invoke(this, new SelectedPinChangedEventArgs(SelectedPin));
-#if __MAUI__
-                    var pinArgs = new PinClickedEventArgs(clickedPin, _mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition).ToMaui(), e.NumTaps);
-#else
-                    var pinArgs = new PinClickedEventArgs(clickedPin, _mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition).ToForms(), e.NumTaps);
-#endif
+                    var pinArgs = new PinClickedEventArgs(clickedPin, _mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition).ToNative(), e.NumTaps);
 
                     PinClicked?.Invoke(this, pinArgs);
 
@@ -902,16 +898,10 @@ namespace Mapsui.UI.Forms
                         break;
                     }
                 }
-
-#if __MAUI__
+                
                 var calloutArgs = new CalloutClickedEventArgs(clickedCallout, 
-                    _mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition).ToMaui(),
+                    _mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition).ToNative(),
                     new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.NumTaps);
-#else
-          var calloutArgs = new CalloutClickedEventArgs(clickedCallout, 
-                    _mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition).ToForms(),
-                    new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.NumTaps);
-#endif
 
                 clickedCallout?.HandleCalloutClicked(this, calloutArgs);
 
@@ -934,15 +924,9 @@ namespace Mapsui.UI.Forms
                     }
                 }
 
-#if __MAUI__
                 var drawableArgs = new DrawableClickedEventArgs(
-                    _mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition).ToMaui(),
+                    _mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition).ToNative(),
                     new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.NumTaps);
-#else
-                var drawableArgs = new DrawableClickedEventArgs(
-                    _mapControl.Viewport.ScreenToWorld(e.MapInfo.ScreenPosition).ToForms(),
-                    new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.NumTaps);
-#endif
 
                 clickedDrawable?.HandleClicked(drawableArgs);
 
@@ -957,11 +941,7 @@ namespace Mapsui.UI.Forms
 
         private void HandlerLongTap(object sender, TappedEventArgs e)
         {
-#if __MAUI__
-            var args = new MapLongClickedEventArgs(_mapControl.Viewport.ScreenToWorld(e.ScreenPosition).ToMaui());
-#else
-            var args = new MapLongClickedEventArgs(_mapControl.Viewport.ScreenToWorld(e.ScreenPosition).ToForms());
-#endif
+            var args = new MapLongClickedEventArgs(_mapControl.Viewport.ScreenToWorld(e.ScreenPosition).ToNative());
 
             MapLongClicked?.Invoke(this, args);
 
@@ -1000,11 +980,7 @@ namespace Mapsui.UI.Forms
 
                 if (mapInfo.Feature == null)
                 {
-#if __MAUI__
-                    var args = new MapClickedEventArgs(_mapControl.Viewport.ScreenToWorld(e.ScreenPosition).ToMaui(), e.NumOfTaps);
-#else
-                    var args = new MapClickedEventArgs(_mapControl.Viewport.ScreenToWorld(e.ScreenPosition).ToForms(), e.NumOfTaps);
-#endif
+                    var args = new MapClickedEventArgs(_mapControl.Viewport.ScreenToWorld(e.ScreenPosition).ToNative(), e.NumOfTaps);
 
                     MapClicked?.Invoke(this, args);
 

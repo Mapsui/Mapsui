@@ -13,9 +13,15 @@ using Microsoft.Maui;
 using Microsoft.Maui.Graphics;
 using Microsoft.Maui.Controls;
 using SkiaSharp.Views.Maui;
+
+using Color = Microsoft.Maui.Graphics.Color;
+using KnownColor = Mapsui.UI.Maui.KnownColor;
 #else
 using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
+
+using Color = Xamarin.Forms.Color;
+using KnownColor = Xamarin.Forms.Color;
 #endif
 
 #if __MAUI__
@@ -50,11 +56,7 @@ namespace Mapsui.UI.Forms
         public static readonly BindableProperty HeightProperty = BindableProperty.Create(nameof(Height), typeof(double), typeof(Pin), -1.0);
         public static readonly BindableProperty AnchorProperty = BindableProperty.Create(nameof(Anchor), typeof(Point), typeof(Pin), new Point(0, 28));
         public static readonly BindableProperty TransparencyProperty = BindableProperty.Create(nameof(Transparency), typeof(float), typeof(Pin), 0f);
-#if __MAUI__
-        public static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color), typeof(Microsoft.Maui.Graphics.Color), typeof(Pin), SKColors.Red.ToMauiColor());
-#else
-        public static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color), typeof(Xamarin.Forms.Color), typeof(Pin), SKColors.Red.ToFormsColor());
-#endif
+        public static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color), typeof(Color), typeof(Pin), KnownColor.Red);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Mapsui.UI.Forms.Pin"/> class
@@ -131,19 +133,11 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Color of pin
         /// </summary>
-#if __MAUI__
-        public Microsoft.Maui.Graphics.Color Color
+        public Color Color
         {
-            get { return (Microsoft.Maui.Graphics.Color)GetValue(ColorProperty); }
+            get { return (Color)GetValue(ColorProperty); }
             set { SetValue(ColorProperty, value); }
         }
-#else
-        public Xamarin.Forms.Color Color
-        {
-            get { return (Xamarin.Forms.Color)GetValue(ColorProperty); }
-            set { SetValue(ColorProperty, value); }
-        }
-#endif
 
         /// <summary>
         /// Label of pin

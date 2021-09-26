@@ -6,19 +6,28 @@ namespace Mapsui.UI.Forms.Extensions
 {
     public static class PositionExtensions
     {
+#if __MAUI__
+        /// <summary>
+        /// Convert Mapsui.Geometries.Point to Mapsui.UI.Maui.Position
+        /// </summary>
+        /// <param name="point">Point in Mapsui format</param>
+        /// <returns>Position in Xamarin.Forms.Maps format</returns>
+        public static Position ToMaui(this Geometries.Point point)
+#else
         /// <summary>
         /// Convert Mapsui.Geometries.Point to Xamarin.Forms.Maps.Position
         /// </summary>
         /// <param name="point">Point in Mapsui format</param>
         /// <returns>Position in Xamarin.Forms.Maps format</returns>
-#if __MAUI__
-        public static Position ToMaui(this Geometries.Point point)
-#else
         public static Position ToForms(this Geometries.Point point)
 #endif
         {
-            var latLon = Projection.SphericalMercator.ToLonLat(point.X, point.Y);
+            return point.ToNative();
+        }
 
+        public static Position ToNative(this Geometries.Point point)
+        {
+            var latLon = Projection.SphericalMercator.ToLonLat(point.X, point.Y);
             return new Position(latLon.Y, latLon.X);
         }
     }

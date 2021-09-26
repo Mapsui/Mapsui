@@ -52,19 +52,11 @@ namespace Mapsui.UI.Forms
         /// <summary>
         ///  Color to fill circle with
         /// </summary>
-#if __MAUI__
-        public Microsoft.Maui.Graphics.Color FillColor
+        public Color FillColor
         {
-            get { return (Microsoft.Maui.Graphics.Color)GetValue(FillColorProperty); }
+            get { return (Color)GetValue(FillColorProperty); }
             set { SetValue(FillColorProperty, value); }
         }
-#else
-        public Xamarin.Forms.Color FillColor
-        {
-            get { return (Xamarin.Forms.Color)GetValue(FillColorProperty); }
-            set { SetValue(FillColorProperty, value); }
-        }
-#endif
 
         /// <summary>
         /// Outer contour of polygon

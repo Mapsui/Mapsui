@@ -56,19 +56,11 @@ namespace Mapsui.UI.Objects
         /// <summary>
         /// StrokeColor for drawable
         /// </summary>
-#if __MAUI__
-        public Microsoft.Maui.Graphics.Color StrokeColor
+        public Color StrokeColor
         {
-            get { return (Microsoft.Maui.Graphics.Color)GetValue(StrokeColorProperty); }
+            get { return (Color)GetValue(StrokeColorProperty); }
             set { SetValue(StrokeColorProperty, value); }
         }
-#else
-        public Xamarin.Forms.Color StrokeColor
-        {
-            get { return (Xamarin.Forms.Color)GetValue(StrokeColorProperty); }
-            set { SetValue(StrokeColorProperty, value); }
-        }
-#endif
 
         /// <summary>
         /// MinVisible for drawable in resolution of Mapsui (smaller values are higher zoom levels)

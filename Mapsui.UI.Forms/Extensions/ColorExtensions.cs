@@ -14,14 +14,9 @@ namespace Mapsui.UI.Forms.Extensions
         /// <returns>Color in Microsoft.Maui.Graphics format</returns>
         public static Microsoft.Maui.Graphics.Color ToMaui(this Styles.Color color)
         {
-            return new Microsoft.Maui.Graphics.Color(color.R / 255.0f, color.G / 255.0f, color.B / 255.0f, color.A / 255.0f);
+            return color.ToNative();
         }
 
-        /// <summary>
-        /// Convert Mapsui.Styles.Color to Microsoft.Maui.Graphics.Color
-        /// </summary>
-        /// <param name="color">Color in Mapsui format</param>
-        /// <returns>Color in Microsoft.Maui.Graphics format</returns>
         public static Microsoft.Maui.Graphics.Color ToNative(this Styles.Color color)
         {
             return new Microsoft.Maui.Graphics.Color(color.R / 255.0f, color.G / 255.0f, color.B / 255.0f, color.A / 255.0f);
@@ -34,14 +29,9 @@ namespace Mapsui.UI.Forms.Extensions
         /// <returns>Color in Xamarin.Forms.Maps format</returns>
         public static Xamarin.Forms.Color ToForms(this Styles.Color color)
         {
-            return new Xamarin.Forms.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0, color.A / 255.0);
+            return color.ToNative();
         }
 
-        /// <summary>
-        /// Convert Mapsui.Styles.Color to Xamarin.Forms.Color
-        /// </summary>
-        /// <param name="color">Color in Mapsui format</param>
-        /// <returns>Color in Xamarin.Forms.Maps format</returns>
         public static Xamarin.Forms.Color ToNative(this Styles.Color color)
         {
             return new Xamarin.Forms.Color(color.R / 255.0, color.G / 255.0, color.B / 255.0, color.A / 255.0);
