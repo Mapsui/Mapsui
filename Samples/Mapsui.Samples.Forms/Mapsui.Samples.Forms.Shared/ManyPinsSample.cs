@@ -2,15 +2,28 @@
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.UI;
-using Mapsui.UI.Forms;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+#if __MAUI__
+using Mapsui.UI.Maui;
+using Microsoft.Maui.Graphics;
+using Color = Microsoft.Maui.Graphics.Color;
+using KnownColor = Mapsui.UI.Maui.KnownColor;
+#else
+using Mapsui.UI.Forms;
 using Xamarin.Forms;
+using Color = Xamarin.Forms.Color;
+using KnownColor = Xamarin.Forms.Color;
+#endif
 
+#if __MAUI__
+namespace Mapsui.Samples.Maui
+#else
 namespace Mapsui.Samples.Forms
+#endif
 {
     public class ManyPinsSample : IFormsSample
     {
@@ -39,7 +52,7 @@ namespace Mapsui.Samples.Forms
                         Address = e.Point.ToString(),
                         Position = e.Point,
                         Type = PinType.Pin,
-                        Color = new Xamarin.Forms.Color(rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0),
+                        Color = new Color(rnd.Next(0, 256) / 256.0f, rnd.Next(0, 256) / 256.0f, rnd.Next(0, 256) / 256.0f),
                         Transparency = 0.5f,
                         Scale = rnd.Next(50, 130) / 100f,
                     };
@@ -49,14 +62,14 @@ namespace Mapsui.Samples.Forms
                     pin.Callout.ArrowWidth = rnd.Next(0, 20);
                     pin.Callout.ArrowAlignment = (ArrowAlignment)rnd.Next(0, 4);
                     pin.Callout.ArrowPosition = rnd.Next(0, 100) / 100;
-                    pin.Callout.BackgroundColor = Color.White;
+                    pin.Callout.BackgroundColor = KnownColor.White;
                     pin.Callout.Color = pin.Color;
                     if (rnd.Next(0, 3) < 2)
                     {
                         pin.Callout.Type = CalloutType.Detail;
                         pin.Callout.TitleFontSize = rnd.Next(15, 30);
                         pin.Callout.SubtitleFontSize = pin.Callout.TitleFontSize - 5;
-                        pin.Callout.TitleFontColor = new Xamarin.Forms.Color(rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0);
+                        pin.Callout.TitleFontColor = new Color(rnd.Next(0, 256) / 256.0f, rnd.Next(0, 256) / 256.0f, rnd.Next(0, 256) / 256.0f);
                         pin.Callout.SubtitleFontColor = pin.Color;
                     }
                     else
@@ -135,7 +148,7 @@ namespace Mapsui.Samples.Forms
                 Address = position.ToString(),
                 Position = position,
                 Type = PinType.Pin,
-                Color = new Xamarin.Forms.Color(rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0),
+                Color = new Color(rnd.Next(0, 256) / 256.0f, rnd.Next(0, 256) / 256.0f, rnd.Next(0, 256) / 256.0f),
                 Transparency = 0.5f,
                 Scale = rnd.Next(50, 130) / 100f,
             };
@@ -145,14 +158,14 @@ namespace Mapsui.Samples.Forms
             pin.Callout.ArrowWidth = rnd.Next(0, 20);
             pin.Callout.ArrowAlignment = (ArrowAlignment)rnd.Next(0, 4);
             pin.Callout.ArrowPosition = rnd.Next(0, 100) / 100;
-            pin.Callout.BackgroundColor = Color.White;
+            pin.Callout.BackgroundColor = KnownColor.White;
             pin.Callout.Color = pin.Color;
             if (rnd.Next(0, 3) < 2)
             {
                 pin.Callout.Type = CalloutType.Detail;
                 pin.Callout.TitleFontSize = rnd.Next(15, 30);
                 pin.Callout.SubtitleFontSize = pin.Callout.TitleFontSize - 5;
-                pin.Callout.TitleFontColor = new Xamarin.Forms.Color(rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0);
+                pin.Callout.TitleFontColor = new Color(rnd.Next(0, 256) / 256.0f, rnd.Next(0, 256) / 256.0f, rnd.Next(0, 256) / 256.0f);
                 pin.Callout.SubtitleFontColor = pin.Color;
             }
             else

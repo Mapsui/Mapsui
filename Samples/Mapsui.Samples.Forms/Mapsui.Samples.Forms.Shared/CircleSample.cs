@@ -1,10 +1,21 @@
 ﻿using System;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.UI;
+#if __MAUI__
+using Mapsui.UI.Maui;
+using Microsoft.Maui;
+
+using Color = Microsoft.Maui.Graphics.Color;
+#else
 using Mapsui.UI.Forms;
 using Xamarin.Forms;
+#endif
 
+#if __MAUI__
+namespace Mapsui.Samples.Maui
+#else
 namespace Mapsui.Samples.Forms
+#endif
 {
     public class CircleSample : IFormsSample
     {
@@ -24,9 +35,9 @@ namespace Mapsui.Samples.Forms
                 Center = e.Point,
                 Radius = Distance.FromMeters(rnd.Next(100000, 1000000)),
                 Quality = rnd.Next(0, 60),
-                StrokeColor = new Color(rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0),
+                StrokeColor = new Color(rnd.Next(0, 255) / 255.0f, rnd.Next(0, 255) / 255.0f, rnd.Next(0, 255) / 255.0f),
                 StrokeWidth = rnd.Next(1, 5),
-                FillColor = new Color(rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0, rnd.Next(0, 255) / 255.0)
+                FillColor = new Color(rnd.Next(0, 255) / 255.0f, rnd.Next(0, 255) / 255.0f, rnd.Next(0, 255) / 255.0f, rnd.Next(0, 255) / 255.0f)
             };
 
             mapView.Drawables.Add(circle);

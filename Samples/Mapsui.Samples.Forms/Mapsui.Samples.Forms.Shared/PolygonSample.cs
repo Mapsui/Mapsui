@@ -1,10 +1,19 @@
 ﻿using System;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.UI;
+#if __MAUI__
+using Mapsui.UI.Maui;
+using Microsoft.Maui.Graphics;
+#else
 using Mapsui.UI.Forms;
 using Xamarin.Forms;
+#endif
 
+#if __MAUI__
+namespace Mapsui.Samples.Maui
+#else
 namespace Mapsui.Samples.Forms
+#endif
 {
     public class PolygonSample : IFormsSample
     {
@@ -25,8 +34,8 @@ namespace Mapsui.Samples.Forms
 
             var polygon = new Polygon
             {
-                StrokeColor = new Color(random.Next(0, 255) / 255.0, random.Next(0, 255) / 255.0, random.Next(0, 255) / 255.0),
-                FillColor = new Color(random.Next(0, 255) / 255.0, random.Next(0, 255) / 255.0, random.Next(0, 255) / 255.0)
+                StrokeColor = new Color(random.Next(0, 255) / 255.0f, random.Next(0, 255) / 255.0f, random.Next(0, 255) / 255.0f),
+                FillColor = new Color(random.Next(0, 255) / 255.0f, random.Next(0, 255) / 255.0f, random.Next(0, 255) / 255.0f)
             };
 
             polygon.Positions.Add(new Position(center.Latitude - diffY, center.Longitude - diffX));
@@ -45,7 +54,7 @@ namespace Mapsui.Samples.Forms
             polygon.IsClickable = true;
             polygon.Clicked += (s, a) =>
             {
-                ((Polygon)s).FillColor = new Color(random.Next(0, 255) / 255.0, random.Next(0, 255) / 255.0, random.Next(0, 255) / 255.0);
+                ((Polygon)s).FillColor = new Color(random.Next(0, 255) / 255.0f, random.Next(0, 255) / 255.0f, random.Next(0, 255) / 255.0f);
                 a.Handled = true;
             };
 

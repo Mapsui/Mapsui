@@ -2,10 +2,21 @@
 using System.Linq;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.UI;
+#if __MAUI__
+using Mapsui.UI.Maui;
+using Microsoft.Maui.Graphics;
+using KnownColor = Mapsui.UI.Maui.KnownColor;
+#else
 using Mapsui.UI.Forms;
 using Xamarin.Forms;
+using KnownColor = Xamarin.Forms.Color;
+#endif
 
+#if __MAUI__
+namespace Mapsui.Samples.Maui
+#else
 namespace Mapsui.Samples.Forms
+#endif
 {
     public class PolylineSample : IFormsSample
     {
@@ -24,7 +35,7 @@ namespace Mapsui.Samples.Forms
             {
                 if (mapView.Drawables.Count == 0)
                 {
-                    f = new Polyline { StrokeWidth = 4, StrokeColor = Color.Red, IsClickable = true };
+                    f = new Polyline { StrokeWidth = 4, StrokeColor = KnownColor.Red, IsClickable = true };
                     mapView.Drawables.Add(f);
                 }
                 else

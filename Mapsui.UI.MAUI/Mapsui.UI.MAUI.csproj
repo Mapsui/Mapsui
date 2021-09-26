@@ -59,7 +59,6 @@
 	  <Folder Include="Extensions\" />
 	  <Folder Include="EventArgs\" />
 	  <Folder Include="Images\" />
-	  <Folder Include="Utils\" />
 	  <Folder Include="Objects\" />
 	</ItemGroup>
 
