@@ -1,6 +1,7 @@
-﻿using Microsoft.Maui;
+﻿using System;
+using System.Diagnostics;
+using Mapsui.Logging;
 using Microsoft.Maui.Controls;
-using Microsoft.Maui.Controls.PlatformConfiguration.WindowsSpecific;
 using Application = Microsoft.Maui.Controls.Application;
 
 namespace Mapsui.Samples.Maui
@@ -11,7 +12,17 @@ namespace Mapsui.Samples.Maui
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            Logger.LogDelegate += LogMethod;
+
+            if (Device.Idiom == TargetIdiom.Phone)
+                MainPage = new NavigationPage(new MainPage());
+            else
+                MainPage = new MainPageLarge();
+        }
+
+        private void LogMethod(LogLevel logLevel, string message, Exception exception)
+        {
+            Debug.WriteLine($"{logLevel}: {message}, {exception}");
         }
     }
 }

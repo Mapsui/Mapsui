@@ -9,11 +9,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Mapsui.UI.Maui;
 using Microsoft.Maui.Controls;
-using Microsoft.Maui.Controls.Xaml;
 
 namespace Mapsui.Samples.Maui
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPageLarge : ContentPage
     {
         IEnumerable<ISample> allSamples;

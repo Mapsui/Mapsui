@@ -13,8 +13,7 @@ using Compass = Microsoft.Maui.Essentials.Compass;
 
 namespace Mapsui.Samples.Maui
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class MapPage : ContentPage
+    public partial class MapPage : ContentPage
 	{
         public Func<MapView, MapClickedEventArgs, bool> Clicker { get; set; }
 
