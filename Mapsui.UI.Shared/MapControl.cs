@@ -20,6 +20,8 @@ namespace Mapsui.UI.iOS
 namespace Mapsui.UI.Uwp
 #elif __FORMS__
 namespace Mapsui.UI.Forms
+#elif __MAUI__
+namespace Mapsui.UI.Maui
 #else
 namespace Mapsui.UI.Wpf
 #endif

@@ -1,5 +1,9 @@
-﻿using Mapsui.UI.Forms;
-using System;
+﻿using System;
+#if __MAUI__
+using Mapsui.UI.Maui;
+#else
+using Mapsui.UI.Forms;
+#endif
 
 namespace Mapsui.UI.Objects
 {

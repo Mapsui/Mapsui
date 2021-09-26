@@ -3,15 +3,26 @@ using Mapsui.Rendering.Skia;
 using Mapsui.Styles;
 using Mapsui.UI.Objects;
 using SkiaSharp;
-using SkiaSharp.Views.Forms;
 using Svg.Skia;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+#if __MAUI__
+using Microsoft.Maui;
+using Microsoft.Maui.Graphics;
+using Microsoft.Maui.Controls;
+using SkiaSharp.Views.Maui;
+#else
+using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
+#endif
 
+#if __MAUI__
+namespace Mapsui.UI.Maui
+#else
 namespace Mapsui.UI.Forms
+#endif
 {
     public class Pin : BindableObject, IFeatureProvider
     {
@@ -24,7 +35,6 @@ namespace Mapsui.UI.Forms
         private MapView _mapView;
 
         public static readonly BindableProperty TypeProperty = BindableProperty.Create(nameof(Type), typeof(PinType), typeof(Pin), default(PinType));
-        public static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color), typeof(Xamarin.Forms.Color), typeof(Pin), SKColors.Red.ToFormsColor());
         public static readonly BindableProperty PositionProperty = BindableProperty.Create(nameof(Position), typeof(Position), typeof(Pin), default(Position));
         public static readonly BindableProperty LabelProperty = BindableProperty.Create(nameof(Label), typeof(string), typeof(Pin), default(string));
         public static readonly BindableProperty AddressProperty = BindableProperty.Create(nameof(Address), typeof(string), typeof(Pin), default(string));
@@ -40,6 +50,11 @@ namespace Mapsui.UI.Forms
         public static readonly BindableProperty HeightProperty = BindableProperty.Create(nameof(Height), typeof(double), typeof(Pin), -1.0);
         public static readonly BindableProperty AnchorProperty = BindableProperty.Create(nameof(Anchor), typeof(Point), typeof(Pin), new Point(0, 28));
         public static readonly BindableProperty TransparencyProperty = BindableProperty.Create(nameof(Transparency), typeof(float), typeof(Pin), 0f);
+#if __MAUI__
+        public static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color), typeof(Microsoft.Maui.Graphics.Color), typeof(Pin), SKColors.Red.ToMauiColor());
+#else
+        public static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color), typeof(Xamarin.Forms.Color), typeof(Pin), SKColors.Red.ToFormsColor());
+#endif
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Mapsui.UI.Forms.Pin"/> class
@@ -116,11 +131,19 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Color of pin
         /// </summary>
+#if __MAUI__
+        public Microsoft.Maui.Graphics.Color Color
+        {
+            get { return (Microsoft.Maui.Graphics.Color)GetValue(ColorProperty); }
+            set { SetValue(ColorProperty, value); }
+        }
+#else
         public Xamarin.Forms.Color Color
         {
             get { return (Xamarin.Forms.Color)GetValue(ColorProperty); }
             set { SetValue(ColorProperty, value); }
         }
+#endif
 
         /// <summary>
         /// Label of pin

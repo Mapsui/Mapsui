@@ -1,16 +1,29 @@
 using Mapsui.Rendering;
 using Mapsui.UI.Utils;
 using SkiaSharp;
-using SkiaSharp.Views.Forms;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Geometries.Utilities;
-using Xamarin.Forms;
 using System.Threading.Tasks;
+using Mapsui.UI.Maui.Extensions;
+#if __MAUI__
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Essentials;
+using Microsoft.Maui.Graphics;
+using SkiaSharp.Views.Maui;
+using SkiaSharp.Views.Maui.Controls;
+#else
+using SkiaSharp.Views.Forms;
+using Xamarin.Forms;
+#endif
 
+#if __MAUI__
+namespace Mapsui.UI.Maui
+#else
 namespace Mapsui.UI.Forms
+#endif
 {
     /// <summary>
     /// Class, that uses the API of all other Mapsui MapControls
@@ -92,7 +105,7 @@ namespace Mapsui.UI.Forms
 
         void Initialize()
         {
-            Xamarin.Forms.View view;
+            View view;
 
             if (UseGPU)
             {
@@ -127,7 +140,11 @@ namespace Mapsui.UI.Forms
             Content = view;
 
             Map = new Map();
+#if __MAUI__
+            BackgroundColor = Mapsui.Styles.Color.White.ToMaui();
+#else
             BackgroundColor = Color.White;
+#endif
 
             _initialized = true;
         }
@@ -765,7 +782,11 @@ namespace Mapsui.UI.Forms
 
         public void OpenBrowser(string url)
         {
+#if __MAUI__
+            Launcher.OpenAsync(new Uri(url));
+#else
             Device.OpenUri(new Uri(url));
+#endif
         }
 
         private void RunOnUIThread(Action action)

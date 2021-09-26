@@ -1,20 +1,38 @@
 ﻿using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Styles;
-using Mapsui.UI.Forms.Extensions;
 using Mapsui.UI.Objects;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using Xamarin.Forms;
 
+#if __MAUI__
+using Microsoft.Maui;
+using Microsoft.Maui.Controls;
+using Mapsui.UI.Maui.Extensions;
+using Mapsui.UI.Maui.Utils;
+#else
+using Mapsui.UI.Forms.Extensions;
+using Mapsui.UI.Forms.Utils;
+using Xamarin.Forms;
+#endif
+
+
+#if __MAUI__
+namespace Mapsui.UI.Maui
+#else
 namespace Mapsui.UI.Forms
+#endif
 {
     public class Polygon : Drawable
     {
+#if __MAUI__
+        public static readonly BindableProperty FillColorProperty = BindableProperty.Create(nameof(FillColor), typeof(Microsoft.Maui.Graphics.Color), typeof(Polygon), Mapsui.Styles.Color.DarkGray.ToMaui());
+#else
         public static readonly BindableProperty FillColorProperty = BindableProperty.Create(nameof(FillColor), typeof(Xamarin.Forms.Color), typeof(Polygon), Xamarin.Forms.Color.DarkGray);
+#endif
 
         private readonly ObservableRangeCollection<Position> _positions = new ObservableRangeCollection<Position>();
         private readonly ObservableRangeCollection<Position[]> _holes = new ObservableRangeCollection<Position[]>();
@@ -33,11 +51,19 @@ namespace Mapsui.UI.Forms
         /// <summary>
         ///  Color to fill circle with
         /// </summary>
+#if __MAUI__
+        public Microsoft.Maui.Graphics.Color FillColor
+        {
+            get { return (Microsoft.Maui.Graphics.Color)GetValue(FillColorProperty); }
+            set { SetValue(FillColorProperty, value); }
+        }
+#else
         public Xamarin.Forms.Color FillColor
         {
             get { return (Xamarin.Forms.Color)GetValue(FillColorProperty); }
             set { SetValue(FillColorProperty, value); }
         }
+#endif
 
         /// <summary>
         /// Outer contour of polygon

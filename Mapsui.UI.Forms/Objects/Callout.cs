@@ -2,14 +2,25 @@
 using Mapsui.Providers;
 using Mapsui.Rendering.Skia;
 using Mapsui.Styles;
-using Mapsui.UI.Forms.Extensions;
 using Mapsui.UI.Objects;
 using System;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using Xamarin.Forms;
 
+#if __MAUI__
+using Mapsui.UI.Maui.Extensions;
+using Microsoft.Maui;
+using Microsoft.Maui.Controls;
+#else
+using Mapsui.UI.Forms.Extensions;
+using Xamarin.Forms;
+#endif
+
+#if __MAUI__
+namespace Mapsui.UI.Maui
+#else
 namespace Mapsui.UI.Forms
+#endif
 {
     public class Callout : BindableObject, IFeatureProvider
     {
@@ -18,16 +29,24 @@ namespace Mapsui.UI.Forms
         public event EventHandler<EventArgs> CalloutClosed;
         public event EventHandler<CalloutClickedEventArgs> CalloutClicked;
 
-        public static string DefaultTitleFontName = Xamarin.Forms.Font.Default.FontFamily;
         public static double DefaultTitleFontSize = Device.GetNamedSize(NamedSize.Title, typeof(Label));
         public static FontAttributes DefaultTitleFontAttributes = FontAttributes.Bold;
-        public static Xamarin.Forms.Color DefaultTitleFontColor = Xamarin.Forms.Color.Black;
-        public static Xamarin.Forms.TextAlignment DefaultTitleTextAlignment = Xamarin.Forms.TextAlignment.Center;
-        public static string DefaultSubtitleFontName = Xamarin.Forms.Font.Default.FontFamily;
+        public static TextAlignment DefaultTitleTextAlignment = TextAlignment.Center;
         public static double DefaultSubtitleFontSize = Device.GetNamedSize(NamedSize.Subtitle, typeof(Label));
         public static FontAttributes DefaultSubtitleFontAttributes = FontAttributes.None;
+        public static TextAlignment DefaultSubtitleTextAlignment = TextAlignment.Start; // Center;
+
+#if __MAUI__
+        public static Microsoft.Maui.Graphics.Color DefaultTitleFontColor = Mapsui.Styles.Color.Black.ToMaui();
+        public static Microsoft.Maui.Graphics.Color DefaultSubtitleFontColor = Mapsui.Styles.Color.Black.ToMaui();
+        public static string DefaultTitleFontName = null; // TODO: default font per platform
+        public static string DefaultSubtitleFontName = null; // TODO: default font per platform
+#else
+        public static Xamarin.Forms.Color DefaultTitleFontColor = Xamarin.Forms.Color.Black;
         public static Xamarin.Forms.Color DefaultSubtitleFontColor = Xamarin.Forms.Color.Black;
-        public static Xamarin.Forms.TextAlignment DefaultSubtitleTextAlignment = Xamarin.Forms.TextAlignment.Start; // Center;
+        public static string DefaultTitleFontName = Xamarin.Forms.Font.Default.FontFamily;
+        public static string DefaultSubtitleFontName = Xamarin.Forms.Font.Default.FontFamily;
+#endif
 
         #region Bindings
 
@@ -39,7 +58,7 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Bindable property for the <see cref="Anchor"/> property
         /// </summary>
-        public static readonly BindableProperty AnchorProperty = BindableProperty.Create(nameof(Anchor), typeof(Xamarin.Forms.Point), typeof(MapView), default(Xamarin.Forms.Point));
+        public static readonly BindableProperty AnchorProperty = BindableProperty.Create(nameof(Anchor), typeof(Point), typeof(MapView), default(Point));
 
         /// <summary>
         /// Bindable property for the <see cref="ArrowAlignment"/> property
@@ -64,12 +83,19 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Bindable property for the <see cref="Color"/> property
         /// </summary>
+#if __MAUI__
+        public static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color), typeof(Microsoft.Maui.Graphics.Color), typeof(MapView), Mapsui.Styles.Color.White.ToMaui());
+#else
         public static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color), typeof(Xamarin.Forms.Color), typeof(MapView), Xamarin.Forms.Color.White);
-
+#endif
         /// <summary>
         /// Bindable property for the <see cref="BackgroundColor"/> property
         /// </summary>
+#if __MAUI__
+        public static readonly BindableProperty BackgroundColorProperty = BindableProperty.Create(nameof(BackgroundColor), typeof(Microsoft.Maui.Graphics.Color), typeof(MapView), Mapsui.Styles.Color.White.ToMaui());
+#else
         public static readonly BindableProperty BackgroundColorProperty = BindableProperty.Create(nameof(BackgroundColor), typeof(Xamarin.Forms.Color), typeof(MapView), Xamarin.Forms.Color.White);
+#endif
 
         /// <summary>
         /// Bindable property for the <see cref="ShadowWidth"/> property
@@ -144,12 +170,16 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Bindable property for the <see cref="TitleFontColor"/> property
         /// </summary>
+#if __MAUI__
+        public static readonly BindableProperty TitleFontColorProperty = BindableProperty.Create(nameof(TitleFontColor), typeof(Microsoft.Maui.Graphics.Color), typeof(MapView), DefaultTitleFontColor);
+#else
         public static readonly BindableProperty TitleFontColorProperty = BindableProperty.Create(nameof(TitleFontColor), typeof(Xamarin.Forms.Color), typeof(MapView), DefaultTitleFontColor);
+#endif
 
         /// <summary>
         /// Bindable property for the <see cref="TitleTextAlignment"/> property
         /// </summary>
-        public static readonly BindableProperty TitleTextAlignmentProperty = BindableProperty.Create(nameof(TitleTextAlignment), typeof(Xamarin.Forms.TextAlignment), typeof(MapView), DefaultTitleTextAlignment);
+        public static readonly BindableProperty TitleTextAlignmentProperty = BindableProperty.Create(nameof(TitleTextAlignment), typeof(TextAlignment), typeof(MapView), DefaultTitleTextAlignment);
 
         /// <summary>
         /// Bindable property for the <see cref="Subtitle"/> property
@@ -174,12 +204,16 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Bindable property for the <see cref="SubtitleFontColor"/> property
         /// </summary>
+#if __MAUI__
+        public static readonly BindableProperty SubtitleFontColorProperty = BindableProperty.Create(nameof(SubtitleFontColor), typeof(Microsoft.Maui.Graphics.Color), typeof(MapView), DefaultSubtitleFontColor);
+#else
         public static readonly BindableProperty SubtitleFontColorProperty = BindableProperty.Create(nameof(SubtitleFontColor), typeof(Xamarin.Forms.Color), typeof(MapView), DefaultSubtitleFontColor);
+#endif
 
         /// <summary>
         /// Bindable property for the <see cref="SubtitleTextAlignment"/> property
         /// </summary>
-        public static readonly BindableProperty SubtitleTextAlignmentProperty = BindableProperty.Create(nameof(SubtitleTextAlignment), typeof(Xamarin.Forms.TextAlignment), typeof(MapView), DefaultSubtitleTextAlignment);
+        public static readonly BindableProperty SubtitleTextAlignmentProperty = BindableProperty.Create(nameof(SubtitleTextAlignment), typeof(TextAlignment), typeof(MapView), DefaultSubtitleTextAlignment);
 
         #endregion
 
@@ -221,9 +255,9 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Anchor position of Callout
         /// </summary>
-        public Xamarin.Forms.Point Anchor
+        public Point Anchor
         {
-            get { return (Xamarin.Forms.Point)GetValue(AnchorProperty); }
+            get { return (Point)GetValue(AnchorProperty); }
             set { SetValue(AnchorProperty, value); }
         }
 
@@ -266,20 +300,36 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Color of stroke around Callout
         /// </summary>
+#if __MAUI__
+        public Microsoft.Maui.Graphics.Color Color
+        {
+            get { return (Microsoft.Maui.Graphics.Color)GetValue(ColorProperty); }
+            set { SetValue(ColorProperty, value); }
+        }
+#else
         public Xamarin.Forms.Color Color
         {
             get { return (Xamarin.Forms.Color)GetValue(ColorProperty); }
             set { SetValue(ColorProperty, value); }
         }
+#endif
 
         /// <summary>
         /// BackgroundColor of Callout
         /// </summary>
+#if __MAUI__
+        public Microsoft.Maui.Graphics.Color BackgroundColor
+        {
+            get { return (Microsoft.Maui.Graphics.Color)GetValue(BackgroundColorProperty); }
+            set { SetValue(BackgroundColorProperty, value); }
+        }
+#else
         public Xamarin.Forms.Color BackgroundColor
         {
             get { return (Xamarin.Forms.Color)GetValue(BackgroundColorProperty); }
             set { SetValue(BackgroundColorProperty, value); }
         }
+#endif
 
         /// <summary>
         /// Shadow width around Callout
@@ -418,18 +468,26 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Font color to render title
         /// </summary>
+#if __MAUI__
+        public Microsoft.Maui.Graphics.Color TitleFontColor
+        {
+            get { return (Microsoft.Maui.Graphics.Color)GetValue(TitleFontColorProperty); }
+            set { SetValue(TitleFontColorProperty, value); }
+        }
+#else
         public Xamarin.Forms.Color TitleFontColor
         {
             get { return (Xamarin.Forms.Color)GetValue(TitleFontColorProperty); }
             set { SetValue(TitleFontColorProperty, value); }
         }
+#endif
 
         /// <summary>
         /// Text alignment of title
         /// </summary>
-        public Xamarin.Forms.TextAlignment TitleTextAlignment
+        public TextAlignment TitleTextAlignment
         {
-            get { return (Xamarin.Forms.TextAlignment)GetValue(TitleTextAlignmentProperty); }
+            get { return (TextAlignment)GetValue(TitleTextAlignmentProperty); }
             set { SetValue(TitleTextAlignmentProperty, value); }
         }
 
@@ -472,18 +530,26 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Font color to render subtitle
         /// </summary>
+#if __MAUI__
+        public Microsoft.Maui.Graphics.Color SubtitleFontColor
+        {
+            get { return (Microsoft.Maui.Graphics.Color)GetValue(SubtitleFontColorProperty); }
+            set { SetValue(SubtitleFontColorProperty, value); }
+        }
+#else
         public Xamarin.Forms.Color SubtitleFontColor
         {
             get { return (Xamarin.Forms.Color)GetValue(SubtitleFontColorProperty); }
             set { SetValue(SubtitleFontColorProperty, value); }
         }
+#endif
 
         /// <summary>
         /// Text alignment of title
         /// </summary>
-        public Xamarin.Forms.TextAlignment SubtitleTextAlignment
+        public TextAlignment SubtitleTextAlignment
         {
-            get { return (Xamarin.Forms.TextAlignment)GetValue(SubtitleTextAlignmentProperty); }
+            get { return (TextAlignment)GetValue(SubtitleTextAlignmentProperty); }
             set { SetValue(SubtitleTextAlignmentProperty, value); }
         }
 
