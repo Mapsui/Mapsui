@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<controls:ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:mapsui="clr-namespace:Mapsui.UI.Maui;assembly=Mapsui.UI.Maui"
+			 xmlns:controls="http://schemas.microsoft.com/dotnet/2021/maui"
+			 x:Class="Mapsui.Samples.Maui.MapPage">
+    <controls:ContentPage.Content>
+        <controls:StackLayout>
+          <mapsui:MapView x:Name="mapView"
+            IsVisible="False"
+		    VerticalOptions="FillAndExpand"
+            HorizontalOptions="Fill"
+		    BackgroundColor="Gray" 
+		    Margin="10" />
+          <controls:Label x:Name="info" 
+            HorizontalOptions="CenterAndExpand"
+            Text="unknown" />
+        </controls:StackLayout>
+    </controls:ContentPage.Content>
+</controls:ContentPage>

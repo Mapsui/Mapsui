@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:mapsui="clr-namespace:Mapsui.UI.Maui;assembly=Mapsui.UI.Maui"
+			 xmlns:controls="http://schemas.microsoft.com/dotnet/2021/maui"
+			 x:Class="Mapsui.Samples.Maui.MainPageLarge">
+    <controls:ContentPage.Content>
+        <controls:StackLayout Orientation="Horizontal">
+            <controls:StackLayout Orientation="Vertical">
+                <controls:Picker x:Name="picker" />
+                <controls:ListView x:Name="listView"
+                    VerticalOptions="FillAndExpand" 
+                    HorizontalOptions="Start"
+                    WidthRequest="200"
+                    Margin="10"
+                    ItemSelected="OnSelection"/>
+                <controls:Label x:Name="featureInfo"></controls:Label>
+            </controls:StackLayout>
+            <mapsui:MapView x:Name="mapView"
+    		    VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand"
+		        BackgroundColor="Gray" 
+		        Margin="0" />
+        </controls:StackLayout>
+    </controls:ContentPage.Content>
+</controls:ContentPage>
