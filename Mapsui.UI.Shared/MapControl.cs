@@ -75,6 +75,7 @@ namespace Mapsui.UI.Wpf
 
             // Stop stopwatch after drawing control
             _stopwatch.Stop();
+            DrawingTime = _stopwatch.Elapsed.TotalMilliseconds;
             Logger.Log(LogLevel.Information, $"Time for drawing control [ms]: {_stopwatch.Elapsed.TotalMilliseconds}");
 
             // End drawing
@@ -139,6 +140,21 @@ namespace Mapsui.UI.Wpf
                 {
                     _updateInterval = value;
                     StartUpdates();
+                }
+            }
+        }
+
+        private double _drawingTime;
+
+        public double DrawingTime
+        {
+            get { return _drawingTime; }
+            set
+            {
+                if (_drawingTime != value)
+                {
+                    _drawingTime = value;
+                    OnPropertyChanged();
                 }
             }
         }
