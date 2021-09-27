@@ -9,7 +9,10 @@
             IsVisible="False"
 		    VerticalOptions="FillAndExpand"
             HorizontalOptions="Fill"
-		    BackgroundColor="Gray" 
+            IsZoomButtonVisible="True"
+            IsMyLocationButtonVisible="True"
+            IsNorthingButtonVisible="True"
+            BackgroundColor="Gray" 
 		    Margin="10" />
           <Label x:Name="info" 
             HorizontalOptions="CenterAndExpand"
