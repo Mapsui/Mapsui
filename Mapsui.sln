@@ -376,10 +376,10 @@ Global
 		{B83B1717-4AFA-4DD8-AB3C-A713C7963271}.Release|iPhone.Build.0 = Release|Any CPU
 		{B83B1717-4AFA-4DD8-AB3C-A713C7963271}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{B83B1717-4AFA-4DD8-AB3C-A713C7963271}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{B83B1717-4AFA-4DD8-AB3C-A713C7963271}.Release|x64.ActiveCfg = Release|x64
-		{B83B1717-4AFA-4DD8-AB3C-A713C7963271}.Release|x64.Build.0 = Release|x64
-		{B83B1717-4AFA-4DD8-AB3C-A713C7963271}.Release|x86.ActiveCfg = Release|x86
-		{B83B1717-4AFA-4DD8-AB3C-A713C7963271}.Release|x86.Build.0 = Release|x86
+		{B83B1717-4AFA-4DD8-AB3C-A713C7963271}.Release|x64.ActiveCfg = Release|Any CPU
+		{B83B1717-4AFA-4DD8-AB3C-A713C7963271}.Release|x64.Build.0 = Release|Any CPU
+		{B83B1717-4AFA-4DD8-AB3C-A713C7963271}.Release|x86.ActiveCfg = Release|Any CPU
+		{B83B1717-4AFA-4DD8-AB3C-A713C7963271}.Release|x86.Build.0 = Release|Any CPU
 		{512DB2DB-61A0-4723-A6AC-E9AE23243283}.Ad-Hoc|AnyCPU.ActiveCfg = Release|Any CPU
 		{512DB2DB-61A0-4723-A6AC-E9AE23243283}.Ad-Hoc|AnyCPU.Build.0 = Release|Any CPU
 		{512DB2DB-61A0-4723-A6AC-E9AE23243283}.Ad-Hoc|ARM.ActiveCfg = Release|Any CPU
@@ -1756,15 +1756,10 @@ Global
 		{D8A498F6-EBBB-4AD2-9881-DBDD84A560CC}.Debug|x86.Build.0 = Debug|Any CPU
 		{D8A498F6-EBBB-4AD2-9881-DBDD84A560CC}.Release|AnyCPU.ActiveCfg = Release|Any CPU
 		{D8A498F6-EBBB-4AD2-9881-DBDD84A560CC}.Release|ARM.ActiveCfg = Release|Any CPU
-		{D8A498F6-EBBB-4AD2-9881-DBDD84A560CC}.Release|ARM.Build.0 = Release|Any CPU
 		{D8A498F6-EBBB-4AD2-9881-DBDD84A560CC}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{D8A498F6-EBBB-4AD2-9881-DBDD84A560CC}.Release|iPhone.Build.0 = Release|Any CPU
 		{D8A498F6-EBBB-4AD2-9881-DBDD84A560CC}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{D8A498F6-EBBB-4AD2-9881-DBDD84A560CC}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{D8A498F6-EBBB-4AD2-9881-DBDD84A560CC}.Release|x64.ActiveCfg = Release|Any CPU
-		{D8A498F6-EBBB-4AD2-9881-DBDD84A560CC}.Release|x64.Build.0 = Release|Any CPU
 		{D8A498F6-EBBB-4AD2-9881-DBDD84A560CC}.Release|x86.ActiveCfg = Release|Any CPU
-		{D8A498F6-EBBB-4AD2-9881-DBDD84A560CC}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

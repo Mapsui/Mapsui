@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Runtime.Versioning;
+
+[assembly:SupportedOSPlatform("maccatalyst15.0")]
 
 namespace Mapsui.UI.Maui
 {

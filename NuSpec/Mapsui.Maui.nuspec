@@ -24,17 +24,17 @@
         <dependency id="Microsoft.Maui.Dependencies" version="[6.0.100-rc.1.1608,7.0)" />
         <dependency id="SkiaSharp.Views.Maui.Controls" version="[2.88.0-preview.140,3.0.0)" />
       </group>
-      <group targetFramework="net6.0-android">
+      <group targetFramework="net6.0-android31.0">
         <dependency id="Mapsui" version="$version$"/>
         <dependency id="Microsoft.Maui.Dependencies" version="[6.0.100-rc.1.1608,7.0)" />
         <dependency id="SkiaSharp.Views.Maui.Controls" version="[2.88.0-preview.140,3.0.0)" />
       </group>
-      <group targetFramework="net6.0-ios">
+      <group targetFramework="net6.0-ios15.0">
         <dependency id="Mapsui" version="$version$"/>
         <dependency id="Microsoft.Maui.Dependencies" version="[6.0.100-rc.1.1608,7.0)" />
         <dependency id="SkiaSharp.Views.Maui.Controls" version="[2.88.0-preview.140,3.0.0)" />
       </group>
-      <group targetFramework="net6.0-maccatalyst">
+      <group targetFramework="net6.0-maccatalyst15.0">
         <dependency id="Mapsui" version="$version$"/>
         <dependency id="Microsoft.Maui.Dependencies" version="[6.0.100-rc.1.1608,7.0)" />
         <dependency id="SkiaSharp.Views.Maui.Controls" version="[2.88.0-preview.140,3.0.0)" />
@@ -49,9 +49,9 @@
   </metadata>
   <files>
     <file src="../Mapsui.UI.Maui/bin/Release/net6.0/Mapsui.UI.Maui.dll" target="lib/net6.0/" />
-    <file src="../Mapsui.UI.Maui/bin/Release/net6.0-android/Mapsui.UI.Maui.dll" target="lib/net6.0-android/" />
-    <file src="../Mapsui.UI.Maui/bin/Release/net6.0-ios/Mapsui.UI.Maui.dll" target="lib/net6.0-ios/" />
-    <file src="../Mapsui.UI.Maui/bin/Release/net6.0-maccatalyst/Mapsui.UI.Maui.dll" target="lib/net6.0-maccatalyst/" />
+    <file src="../Mapsui.UI.Maui/bin/Release/net6.0-android/Mapsui.UI.Maui.dll" target="lib/net6.0-android31.0/" />
+    <file src="../Mapsui.UI.Maui/bin/Release/net6.0-ios/Mapsui.UI.Maui.dll" target="lib/net6.0-ios15.0/" />
+    <file src="../Mapsui.UI.Maui/bin/Release/net6.0-maccatalyst/Mapsui.UI.Maui.dll" target="lib/net6.0-maccatalyst15.0/" />
     <file src="../Mapsui.UI.Maui/bin/Release/net6.0-windows10.0.19041/Mapsui.UI.Maui.dll" target="lib/net6.0-windows10.0.19041/" />
   </files>
 </package>
