@@ -67,9 +67,9 @@
     <PackageReference Include="Microsoft.CodeCoverage" Version="16.5.0">
     </PackageReference>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="NUnit" Version="3.12.0">
+    <PackageReference Include="NUnit" Version="3.13.2">
     </PackageReference>
-    <PackageReference Include="NUnit3TestAdapter" Version="3.16.1">
+    <PackageReference Include="NUnit3TestAdapter" Version="4.0.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
