@@ -19,7 +19,7 @@ nuget:
   disable_publish_on_pr: true
 install:
 - ps: Invoke-WebRequest 'https://dot.net/v1/dotnet-install.ps1' -OutFile 'dotnet-install.ps1';
-      ./dotnet-install.ps1 -InstallDir '~/.dotnet' -Version '6.0.100-rc.1.21458.32';
+- ps: ./dotnet-install.ps1 -InstallDir '~/.dotnet' -Version '6.0.100-rc.1.21458.32';
 - cmd: "C:\Program Files\dotnet\sdk\5.0.400\dotnet" tool install -g Redth.Net.Maui.Check
 - cmd: maui-check --fix --non-interactive
 before_build:
