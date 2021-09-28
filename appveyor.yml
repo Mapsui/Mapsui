@@ -6,7 +6,7 @@ skip_commits:
     - docfx/**/*
     - logo/**/*
     - '**/*.md'
-image: Visual Studio 2022
+image: Visual Studio 2019
 assembly_info:
   patch: true
   file: '**\AssemblyInfo.*'
@@ -21,7 +21,7 @@ install:
 - ps: Invoke-WebRequest 'https://dot.net/v1/dotnet-install.ps1' -OutFile 'dotnet-install.ps1';
 - ps: ./dotnet-install.ps1 -InstallDir '~/.dotnet' -Version '6.0.100-rc.1.21458.32';
 - cmd: dotnet tool install -g Redth.Net.Maui.Check
-- cmd: maui-check --fix --non-interactive
+- cmd: maui-check --fix --non-interactive --skip vswin --skip emulators
 before_build:
 - cmd: nuget restore mapsui.sln
 build:
