@@ -11,7 +11,6 @@
     <ProjectReference Include="..\..\Mapsui.Rendering.Xaml\Mapsui.Rendering.Xaml.csproj" />
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />
     <ProjectReference Include="..\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj" />
-    <ProjectReference Include="..\Mapsui.Tests\Mapsui.Tests.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Images\Original\bitmap_atlas.png">
@@ -55,15 +54,15 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="BruTile" Version="4.0.0"/>
+    <PackageReference Include="BruTile" Version="4.0.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="NUnit" Version="3.12.0"/>
-    <PackageReference Include="NUnit3TestAdapter" Version="3.17.0"/>
-    <PackageReference Include="SkiaSharp" Version="2.80.2"/>
+    <PackageReference Include="NUnit" Version="3.12.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
+    <PackageReference Include="SkiaSharp" Version="2.80.2" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
-    <PackageReference Include="System.Net.Http" Version="4.3.4"/>
-    <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.1"/>
-    <PackageReference Include="System.Security.Cryptography.X509Certificates" Version="4.3.2"/>
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
+    <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.1" />
+    <PackageReference Include="System.Security.Cryptography.X509Certificates" Version="4.3.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
   </ItemGroup>
 </Project>
