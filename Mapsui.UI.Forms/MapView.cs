@@ -16,6 +16,7 @@ using Xamarin.Forms;
 using SkiaSharp.Views.Forms;
 using Mapsui.Widgets.Button;
 using Mapsui.Widgets;
+using Mapsui.Utilities;
 
 namespace Mapsui.UI.Forms
 {
@@ -460,6 +461,21 @@ namespace Mapsui.UI.Forms
             set
             {
                 _mapControl.UpdateInterval = value;
+            }
+        }
+
+        /// <summary>
+        /// Object to save performance information about the drawing of the map
+        /// </summary>
+        /// <remarks>
+        /// If this is null, no performance information is saved.
+        /// </remarks>
+        public Performance Performance
+        {
+            get => _mapControl.Performance;
+            set 
+            { 
+                _mapControl.Performance = value; 
             }
         }
 
