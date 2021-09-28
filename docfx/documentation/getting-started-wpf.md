@@ -20,7 +20,7 @@ And add the namespace: ```xmlns:mapsui="clr-namespace:Mapsui.UI.Wpf;assembly=Map
 ### Step 4
 In WpfApplication1.MainWindow.xaml.cs add in the constructor **after** InitializeComponent():
 ```csharp
-MyMapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer();
+MyMapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer());
 ```
 And add the namespaces: ```using Mapsui.Utilities; using Mapsui.Layers; ```
 
