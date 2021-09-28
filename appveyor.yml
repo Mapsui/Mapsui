@@ -27,6 +27,10 @@ before_build:
 build:
   project: Mapsui.sln
   verbosity: minimal
+configuration:
+- Release
+platform:
+- Any CPU
 before_package:
 - cmd: ''
 after_build:
