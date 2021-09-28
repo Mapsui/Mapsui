@@ -235,6 +235,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.OpenBrowser
   nameWithType: MapControl.OpenBrowser
+- uid: Mapsui.UI.Android.MapControl.Performance
+  name: Performance
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Performance
+  commentId: P:Mapsui.UI.Android.MapControl.Performance
+  fullName: Mapsui.UI.Android.MapControl.Performance
+  nameWithType: MapControl.Performance
+- uid: Mapsui.UI.Android.MapControl.Performance*
+  name: Performance
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Performance_
+  commentId: Overload:Mapsui.UI.Android.MapControl.Performance
+  isSpec: "True"
+  fullName: Mapsui.UI.Android.MapControl.Performance
+  nameWithType: MapControl.Performance
 - uid: Mapsui.UI.Android.MapControl.PixelDensity
   name: PixelDensity
   href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_PixelDensity
@@ -2023,6 +2036,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapControl.OpenBrowser
   nameWithType: MapControl.OpenBrowser
+- uid: Mapsui.UI.Forms.MapControl.Performance
+  name: Performance
+  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_Performance
+  commentId: P:Mapsui.UI.Forms.MapControl.Performance
+  fullName: Mapsui.UI.Forms.MapControl.Performance
+  nameWithType: MapControl.Performance
+- uid: Mapsui.UI.Forms.MapControl.Performance*
+  name: Performance
+  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_Performance_
+  commentId: Overload:Mapsui.UI.Forms.MapControl.Performance
+  isSpec: "True"
+  fullName: Mapsui.UI.Forms.MapControl.Performance
+  nameWithType: MapControl.Performance
 - uid: Mapsui.UI.Forms.MapControl.PixelDensity
   name: PixelDensity
   href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_PixelDensity
@@ -2904,6 +2930,19 @@ references:
   commentId: F:Mapsui.UI.Forms.MapView.PanLockProperty
   fullName: Mapsui.UI.Forms.MapView.PanLockProperty
   nameWithType: MapView.PanLockProperty
+- uid: Mapsui.UI.Forms.MapView.Performance
+  name: Performance
+  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Performance
+  commentId: P:Mapsui.UI.Forms.MapView.Performance
+  fullName: Mapsui.UI.Forms.MapView.Performance
+  nameWithType: MapView.Performance
+- uid: Mapsui.UI.Forms.MapView.Performance*
+  name: Performance
+  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Performance_
+  commentId: Overload:Mapsui.UI.Forms.MapView.Performance
+  isSpec: "True"
+  fullName: Mapsui.UI.Forms.MapView.Performance
+  nameWithType: MapView.Performance
 - uid: Mapsui.UI.Forms.MapView.PinClicked
   name: PinClicked
   href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_PinClicked
@@ -4453,6 +4492,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.iOS.MapControl.OpenBrowser
   nameWithType: MapControl.OpenBrowser
+- uid: Mapsui.UI.iOS.MapControl.Performance
+  name: Performance
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_Performance
+  commentId: P:Mapsui.UI.iOS.MapControl.Performance
+  fullName: Mapsui.UI.iOS.MapControl.Performance
+  nameWithType: MapControl.Performance
+- uid: Mapsui.UI.iOS.MapControl.Performance*
+  name: Performance
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_Performance_
+  commentId: Overload:Mapsui.UI.iOS.MapControl.Performance
+  isSpec: "True"
+  fullName: Mapsui.UI.iOS.MapControl.Performance
+  nameWithType: MapControl.Performance
 - uid: Mapsui.UI.iOS.MapControl.PixelDensity
   name: PixelDensity
   href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_PixelDensity
@@ -5586,6 +5638,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.OpenBrowser
   nameWithType: MapControl.OpenBrowser
+- uid: Mapsui.UI.Wpf.MapControl.Performance
+  name: Performance
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_Performance
+  commentId: P:Mapsui.UI.Wpf.MapControl.Performance
+  fullName: Mapsui.UI.Wpf.MapControl.Performance
+  nameWithType: MapControl.Performance
+- uid: Mapsui.UI.Wpf.MapControl.Performance*
+  name: Performance
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_Performance_
+  commentId: Overload:Mapsui.UI.Wpf.MapControl.Performance
+  isSpec: "True"
+  fullName: Mapsui.UI.Wpf.MapControl.Performance
+  nameWithType: MapControl.Performance
 - uid: Mapsui.UI.Wpf.MapControl.PixelDensity
   name: PixelDensity
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_PixelDensity
