@@ -4,7 +4,7 @@ using Microsoft.Maui;
 using System;
 
 namespace Mapsui.Samples.Maui
-{
+{    
     [Application]
     public class MainApplication : MauiApplication
     {

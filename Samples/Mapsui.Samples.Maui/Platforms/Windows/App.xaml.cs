@@ -1,9 +1,12 @@
-﻿using Microsoft.Maui;
+﻿using System.Runtime.Versioning;
+using Microsoft.Maui;
 using Microsoft.UI.Xaml;
 using Windows.ApplicationModel;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
+
+[assembly:SupportedOSPlatform("windows10.0.19041.0")]
 
 namespace Mapsui.Samples.Maui.WinUI
 {

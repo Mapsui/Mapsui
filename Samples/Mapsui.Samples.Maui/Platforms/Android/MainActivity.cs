@@ -1,6 +1,9 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Microsoft.Maui;
+using System.Runtime.Versioning;
+
+[assembly:SupportedOSPlatform("android31.0")]
 
 namespace Mapsui.Samples.Maui
 {
