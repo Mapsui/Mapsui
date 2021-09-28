@@ -30,7 +30,7 @@ build:
 configuration:
 - Release
 platform:
-- Any CPU
+- AnyCPU
 before_package:
 - cmd: ''
 after_build:
