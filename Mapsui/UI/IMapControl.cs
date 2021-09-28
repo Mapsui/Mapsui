@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Rendering;
+using Mapsui.Utilities;
 
 namespace Mapsui.UI
 {
@@ -65,5 +66,6 @@ namespace Mapsui.UI
 
         INavigator Navigator { get; }
 
+        Performance Performance { get; set; }
     }
 }

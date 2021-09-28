@@ -75,7 +75,12 @@ namespace Mapsui.UI.Wpf
 
             // Stop stopwatch after drawing control
             _stopwatch.Stop();
-            DrawingTime = _stopwatch.Elapsed.TotalMilliseconds;
+
+            // If we are interessted in performance measurements, we save the new drawing time
+            if (_performance != null)
+                _performance.Add(_stopwatch.Elapsed.TotalMilliseconds);
+            
+            // Log drawing time
             Logger.Log(LogLevel.Information, $"Time for drawing control [ms]: {_stopwatch.Elapsed.TotalMilliseconds}");
 
             // End drawing
@@ -144,20 +149,27 @@ namespace Mapsui.UI.Wpf
             }
         }
 
-        private double _drawingTime;
+        private Performance _performance;
 
-        public double DrawingTime
+        /// <summary>
+        /// Object to save performance information about the drawing of the map
+        /// </summary>
+        /// <remarks>
+        /// If this is null, no performance information is saved.
+        /// </remarks>
+        public Performance Performance
         {
-            get { return _drawingTime; }
+            get { return _performance; }
             set
             {
-                if (_drawingTime != value)
+                if (_performance != value)
                 {
-                    _drawingTime = value;
+                    _performance = value;
                     OnPropertyChanged();
                 }
             }
         }
+
         /// <summary>
         /// After how many degrees start rotation to take place
         /// </summary>

@@ -1,28 +1,32 @@
 ﻿using Mapsui.Geometries;
+using Mapsui.Utilities;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Mapsui.Widgets.DrawingTime
+namespace Mapsui.Widgets.Performance
 {
     /// <summary>
-    /// Widget which shows a buttons
+    /// Widget which shows the drawing performance
     /// </summary>
     /// <remarks>
-    /// With this, the user could add buttons with SVG icons to the map.
-    /// 
-    /// Usage
-    /// To show a ButtonWidget, add a instance of the ButtonWidget to Map.Widgets by
-    /// 
-    ///   map.Widgets.Add(new ButtonWidget(map, picture));
-    ///   
-    /// Customize
-    /// Picture: SVG image to display for button
-    /// Rotation: Value for rotation in degrees
-    /// Opacity: Opacity of button
+    /// With this, the user could see the drawing performance on the screen.
+    /// It shows always the values for the last draw before this draw.
     /// </remarks>
-    public class DrawingTimeWidget : Widget, INotifyPropertyChanged
+    public class PerformanceWidget : Widget, INotifyPropertyChanged
     {
+        Utilities.Performance _performance;
+
+        public PerformanceWidget(Utilities.Performance performance)
+        {
+            _performance = performance;
+        }
+
+        /// <summary>
+        /// Performance object which holds the values
+        /// </summary>
+        public Utilities.Performance Performance => _performance;
+
         /// <summary>
         /// Event handler which is called, when the button is touched
         /// </summary>
@@ -32,8 +36,6 @@ namespace Mapsui.Widgets.DrawingTime
         /// Event handler which is called, when the button is touched
         /// </summary>
         public event EventHandler<WidgetTouchedEventArgs> WidgetTouched;
-
-        public double LastDrawingTime { get; set; }
 
         private float _opacity = 0.8f;
 
