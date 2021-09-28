@@ -7,6 +7,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>SKIA</DefineConstants>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>SKIA</DefineConstants>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\Mapsui.Rendering.Xaml.Tests\File.cs">
       <Link>File.cs</Link>
