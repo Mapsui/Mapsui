@@ -655,21 +655,30 @@ namespace Mapsui.UI.Forms
 
             if (propertyName.Equals(nameof(IsZoomButtonVisibleProperty)) || propertyName.Equals(nameof(IsZoomButtonVisible)))
             {
-                _mapZoomInButton.Enabled = IsZoomButtonVisible;
-                _mapZoomOutButton.Enabled = IsZoomButtonVisible;
-                UpdateButtonPositions();
+                if (_mapZoomInButton != null && _mapZoomOutButton != null)
+                {
+                    _mapZoomInButton.Enabled = IsZoomButtonVisible;
+                    _mapZoomOutButton.Enabled = IsZoomButtonVisible;
+                    UpdateButtonPositions();
+                }
             }
 
             if (propertyName.Equals(nameof(IsMyLocationButtonVisibleProperty)) || propertyName.Equals(nameof(IsMyLocationButtonVisible)))
             {
-                _mapMyLocationButton.Enabled = IsMyLocationButtonVisible;
-                UpdateButtonPositions();
+                if (_mapMyLocationButton != null)
+                {
+                    _mapMyLocationButton.Enabled = IsMyLocationButtonVisible;
+                    UpdateButtonPositions();
+                }
             }
 
             if (propertyName.Equals(nameof(IsNorthingButtonVisibleProperty)) || propertyName.Equals(nameof(IsNorthingButtonVisible)))
             {
-                _mapNorthingButton.Enabled = IsNorthingButtonVisible;
-                UpdateButtonPositions();
+                if (_mapNorthingButton != null)
+                {
+                    _mapNorthingButton.Enabled = IsNorthingButtonVisible;
+                    UpdateButtonPositions();
+                }
             }
 
             if (propertyName.Equals(nameof(ButtonMarginProperty)) || propertyName.Equals(nameof(ButtonMargin)))
@@ -1152,15 +1161,19 @@ namespace Mapsui.UI.Forms
         private void CreateButtons()
         {
             _mapZoomInButton = CreateButton(0, 0, _pictZoomIn, (s, e) => { _mapControl.Navigator.ZoomIn(); e.Handled = true; });
+            _mapZoomInButton.Enabled = IsZoomButtonVisible;
             _mapControl.Map.Widgets.Add(_mapZoomInButton);
 
             _mapZoomOutButton = CreateButton(0, 40, _pictZoomOut, (s, e) => { _mapControl.Navigator.ZoomOut(); e.Handled = true; });
+            _mapZoomOutButton.Enabled = IsZoomButtonVisible;
             _mapControl.Map.Widgets.Add(_mapZoomOutButton);
 
             _mapMyLocationButton = CreateButton(0, 88, _pictMyLocationNoCenter, (s, e) => { MyLocationFollow = true; e.Handled = true; });
+            _mapMyLocationButton.Enabled = IsMyLocationButtonVisible;
             _mapControl.Map.Widgets.Add(_mapMyLocationButton);
 
             _mapNorthingButton = CreateButton(0, 136, _pictNorthing, (s, e) => { Device.BeginInvokeOnMainThread(() => _mapControl.Navigator.RotateTo(0)); e.Handled = true; });
+            _mapNorthingButton.Enabled = IsNorthingButtonVisible;
             _mapControl.Map.Widgets.Add(_mapNorthingButton);
 
             UpdateButtonPositions();
