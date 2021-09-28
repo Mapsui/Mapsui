@@ -8,6 +8,7 @@ namespace Mapsui.Utilities
         int _pos;
         int _maxValues;
         int _count;
+        double _min, _max;
         double _sum = 0;
         public double[] _drawingTimes;
 
@@ -19,12 +20,24 @@ namespace Mapsui.Utilities
             _maxValues = maxValues;
             _pos = 0;
             _drawingTimes = new double[_maxValues];
+            _min = 1000;
+            _max = 0;
         }
 
         /// <summary>
         /// Counter for number of redraws of map
         /// </summary>
         public int Count => _count;
+
+        /// <summary>
+        /// Minimal drawing time
+        /// </summary>
+        public double Min => _min;
+
+        /// <summary>
+        /// Maximal drawing time
+        /// </summary>
+        public double Max => _max;
 
         /// <summary>
         /// MaxValues of drawing times that are saved and used for mean value
@@ -35,20 +48,6 @@ namespace Mapsui.Utilities
         /// Mean value of all MaxValues drawing times
         /// </summary>
         public double Mean => _sum / _maxValues;
-
-        /// <summary>
-        /// Add next drawing time
-        /// </summary>
-        /// <param name="time"></param>
-        public void Add(double time)
-        {
-            _sum = _sum - _drawingTimes[_pos] + time;
-            _drawingTimes[_pos++] = time;
-            _count++;
-
-            if (_pos >= _maxValues)
-                _pos = 0;
-        }
 
         /// <summary>
         /// Time be used for the last drawing
@@ -83,6 +82,40 @@ namespace Mapsui.Utilities
 
                 return result;
             }
-        } 
+        }
+
+        /// <summary>
+        /// Add next drawing time
+        /// </summary>
+        /// <param name="time"></param>
+        public void Add(double time)
+        {
+            _sum = _sum - _drawingTimes[_pos] + time;
+            _drawingTimes[_pos++] = time;
+            _count++;
+
+            if (_pos >= _maxValues)
+                _pos = 0;
+
+            if (_max < time)
+                _max = time;
+
+            if (_min > time)
+                _min = time;
+        }
+
+        /// <summary>
+        /// Clear all existing values up to now
+        /// </summary>
+        public void Clear()
+        {
+            _pos = 0;
+            _sum = 0;
+            for (var i = 0; i < _maxValues; i++)
+                _drawingTimes[i] = 0.0;
+            _min = 1000;
+            _max = 0;
+            _count = 0;
+        }
     }
 }
