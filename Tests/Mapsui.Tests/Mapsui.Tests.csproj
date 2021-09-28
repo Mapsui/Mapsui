@@ -6,6 +6,12 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Resources\capabilities_1_1_1.xml" />
+    <None Remove="Resources\capabilities_1_3_0.xml" />
+    <None Remove="Resources\example.tfw" />
+    <None Remove="Resources\example.tif" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="..\Mapsui.Rendering.Xaml.Tests\File.cs">
       <Link>File.cs</Link>
     </Compile>
@@ -27,6 +33,18 @@
     <PackageReference Include="coverlet.collector" Version="3.0.2" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\capabilities_1_1_1.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\capabilities_1_3_0.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\example.tfw">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\example.tif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\Original\Pin.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
