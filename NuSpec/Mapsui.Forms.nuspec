@@ -22,12 +22,19 @@
       <group targetFramework="netstandard2.0">
         <dependency id="Mapsui" version="$version$"/>
         <dependency id="Xamarin.Forms" version="[5.0.0.2083,6.0)" />
-        <dependency id="SkiaSharp.Views.Forms" version="[2.80.2,3.0.0)" />
+        <dependency id="SkiaSharp.Views.Forms" version="[2.80.2,3.0.0)" />		
+      </group>
+	  <group targetFramework="xamarinios1.0">
+        <dependency id="Mapsui" version="$version$"/>
+        <dependency id="Xamarin.Forms" version="[5.0.0.2083,6.0)" />
+        <dependency id="SkiaSharp.Views.Forms" version="[2.80.2,3.0.0)" />		
       </group>
     </dependencies>
 
   </metadata>
   <files>
+	<file src="Mapsui.Forms.targets" target="build/xamarinios1.0/Mapsui.Forms.targets" />	
     <file src="../Mapsui.UI.Forms/bin/Release/netstandard2.0/Mapsui.UI.Forms.dll" target="lib/netstandard2.0/" />
+	<file src="../Mapsui.UI.Forms/bin/Release/netstandard2.0/Mapsui.UI.Forms.dll" target="lib/xamarinios1.0/" />
   </files>
 </package>
