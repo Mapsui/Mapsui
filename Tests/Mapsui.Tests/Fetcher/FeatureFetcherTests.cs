@@ -12,6 +12,7 @@ namespace Mapsui.Tests.Fetcher
     public class FeatureFetcherTests
     {
         [Test]
+        [Ignore("Possible hang")]
         public void TestFeatureFetcherDelay()
         {
             // arrange
