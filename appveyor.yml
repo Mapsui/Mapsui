@@ -38,4 +38,4 @@ deploy:
   skip_symbols: true
   artifact: mapsuipackage-nu-even-niet
 configuration: Release
-platform: Any CPU
+platform: AnyCPU
