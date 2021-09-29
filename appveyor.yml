@@ -38,7 +38,4 @@ deploy:
   skip_symbols: true
   artifact: mapsuipackage-nu-even-niet
 configuration: Release
-platform: AnyCPU
-test_script:
-- cmd: nuget install Appveyor.TestLogger -Version 2.0.0
-- cmd: dotnet test mapsui.sln --no-build --no-restore --test-adapter-path:. --logger:Appveyor
+platform: Any CPU
