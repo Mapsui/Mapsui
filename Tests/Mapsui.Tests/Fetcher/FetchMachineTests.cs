@@ -13,7 +13,6 @@ namespace Mapsui.Tests.Fetcher
     public class FetchMachineTests
     {
         [Test]
-        [Ignore("Possible hang")]
         public void TileFetcherShouldRequestAllTilesJustOnes()
         {
             // Arrange
@@ -45,7 +44,6 @@ namespace Mapsui.Tests.Fetcher
         }
 
         [Test]
-        [Ignore("Possible hang")]
         public void TileRequestThatReturnsNullShouldNotBeRequestedAgain()
         {
             // Arrange
@@ -66,7 +64,7 @@ namespace Mapsui.Tests.Fetcher
             fetchDispatcher.SetViewport(tileSchema.Extent.ToBoundingBox(), tileSchema.Resolutions[level].UnitsPerPixel);
             tileMachine.Start();
             while (fetchDispatcher.Busy) { Thread.Sleep(1); }
-
+            
             // Assert
             Assert.AreEqual(tilesInLevel, tileProvider.TotalCount);
         }
