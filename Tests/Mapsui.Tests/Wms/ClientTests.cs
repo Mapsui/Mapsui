@@ -1,9 +1,9 @@
 ﻿using System.Xml;
-using Mapsui.Desktop.Tests.Utilities;
 using Mapsui.Providers.Wms;
+using Mapsui.Tests.Utilities;
 using NUnit.Framework;
 
-namespace Mapsui.Desktop.Tests.Wms
+namespace Mapsui.Tests.Wms
 {
     [TestFixture]
     public class ClientTests

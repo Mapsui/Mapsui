@@ -7,6 +7,7 @@ using BruTile.Predefined;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Providers;
+using Mapsui.Tests.Fetcher.Providers;
 using NUnit.Framework;
 
 namespace Mapsui.Tests.Fetcher
@@ -27,8 +28,8 @@ namespace Mapsui.Tests.Fetcher
             var cache = new MemoryCache<Feature>();
             var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, tileInfo => TileToFeature(tileSource, tileInfo));
             var tileMachine = new FetchMachine(fetchDispatcher);
-            var level = 4;
-            var expectedTiles = 256;
+            var level = 3;
+            var expectedTiles = 64;
 
             // Act
             // Get all tiles of level 3
@@ -41,6 +42,37 @@ namespace Mapsui.Tests.Fetcher
             Assert.AreEqual(expectedTiles, tileProvider.CountByTile.Values.Sum());
             Assert.AreEqual(expectedTiles, tileProvider.TotalCount);
         }
+
+        [Test]
+        public void TilesFetchedShouldNotBeFetchAgain()
+        {
+            // Arrange
+            var tileProvider = new CountingTileProvider();
+            var tileSchema = new GlobalSphericalMercator();
+            var tileSource = new TileSource(tileProvider, tileSchema);
+            var cache = new MemoryCache<Feature>();
+            var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, tileInfo => TileToFeature(tileSource, tileInfo));
+            var tileMachine = new FetchMachine(fetchDispatcher);
+            var level = 3;
+            var expectedTiles = 64;
+
+            // Act
+            fetchDispatcher.SetViewport(tileSchema.Extent.ToBoundingBox(), tileSchema.Resolutions[level].UnitsPerPixel);
+            tileMachine.Start();
+            while (fetchDispatcher.Busy) { Thread.Sleep(1); }
+            var countAfterFirstTry = tileProvider.CountByTile.Keys.Count;
+            // do it again
+            fetchDispatcher.SetViewport(tileSchema.Extent.ToBoundingBox(), tileSchema.Resolutions[level].UnitsPerPixel);
+            tileMachine.Start();
+            while (fetchDispatcher.Busy) { Thread.Sleep(1); }
+
+            // Assert
+            Assert.AreEqual(countAfterFirstTry, tileProvider.CountByTile.Values.Sum());
+            Assert.AreEqual(expectedTiles, tileProvider.CountByTile.Keys.Count);
+            Assert.AreEqual(expectedTiles, tileProvider.CountByTile.Values.Sum());
+            Assert.AreEqual(expectedTiles, tileProvider.TotalCount);
+        }
+
 
         [Test]
         public void TileRequestThatReturnsNullShouldNotBeRequestedAgain()
@@ -94,7 +126,38 @@ namespace Mapsui.Tests.Fetcher
             // Assert
             Assert.AreEqual(tilesInLevel * 2, tileProvider.TotalCount); // tried all tiles twice
         }
-        
+
+        [Test]
+        public void TileFetcherWithSometimesFailingFetchesShouldTryAgain()
+        {
+            // Arrange
+            var tileProvider = new SometimesFailingTileProvider();
+            var tileSchema = new GlobalSphericalMercator();
+            var tileSource = new TileSource(tileProvider, tileSchema);
+            var cache = new MemoryCache<Feature>();
+            var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, tileInfo => TileToFeature(tileSource, tileInfo));
+            var tileMachine = new FetchMachine(fetchDispatcher);
+            var level = 3;
+            var tilesInLevel = 64;
+
+            // Act
+            fetchDispatcher.SetViewport(tileSchema.Extent.ToBoundingBox(), tileSchema.Resolutions[level].UnitsPerPixel);
+            tileMachine.Start();
+            while (fetchDispatcher.Busy) { Thread.Sleep(1); }
+
+            var tileCountAfterFirstBatch = tileProvider.TotalCount;
+
+            // Act again
+            fetchDispatcher.SetViewport(tileSchema.Extent.ToBoundingBox(), tileSchema.Resolutions[level].UnitsPerPixel);
+            tileMachine.Start();
+            while (fetchDispatcher.Busy) { Thread.Sleep(1); }
+
+            // Assert
+            Assert.GreaterOrEqual(tileProvider.TotalCount, tileCountAfterFirstBatch);
+            Assert.GreaterOrEqual(tileProvider.CountByTile.Values.Sum(), tilesInLevel);
+
+        }
+
         [Test]
         public void RepeatedRestartsShouldNotCauseInfiniteLoop()
         {
