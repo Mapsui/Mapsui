@@ -56,6 +56,11 @@ namespace Mapsui.Utilities
         public int FPS => Mean == 0 ? 0 : (int)(1000.0 / Mean);
 
         /// <summary>
+        /// Number of dropped frames, because the screen is already updated
+        /// </summary>
+        public int Dropped { get; set; }
+
+        /// <summary>
         /// Time be used for the last drawing
         /// </summary>
         public double LastDrawingTime
@@ -126,6 +131,8 @@ namespace Mapsui.Utilities
             _max = 0;
             _count = 0;
             _turnaround = false;
+
+            Dropped = 0;
         }
     }
 }

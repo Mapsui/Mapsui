@@ -10,8 +10,8 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
         readonly SKPaint _backgroundPaint;
         readonly int _textSize;
         readonly float _widthHeader;
-        readonly string[] _textHeader = new string[6] { "Last", "Mean", "Frames", "Min", "Max", "Count" };
-        readonly string[] _text = new string[6];
+        readonly string[] _textHeader = new string[7] { "Last", "Mean", "Frames", "Min", "Max", "Count", "Dropped" };
+        readonly string[] _text = new string[7];
         SKRect _rect;
         Geometries.BoundingBox _envelope;
 
@@ -42,6 +42,7 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
             _text[3] = performanceWidget.Performance.Min.ToString("0.000 ms");
             _text[4] = performanceWidget.Performance.Max.ToString("0.000 ms");
             _text[5] = performanceWidget.Performance.Count.ToString("0");
+            _text[6] = performanceWidget.Performance.Dropped.ToString("0");
 
             var paint = _backgroundPaint;
             paint.Color = _backgroundPaint.Color.WithAlpha((byte)(255.0f * performanceWidget.Opacity));
