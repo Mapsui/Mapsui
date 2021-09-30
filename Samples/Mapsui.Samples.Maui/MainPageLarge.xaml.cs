@@ -2,8 +2,6 @@
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.ExtensionMethods;
 using Mapsui.Samples.CustomWidget;
-using Plugin.Geolocator;
-using Plugin.Geolocator.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
