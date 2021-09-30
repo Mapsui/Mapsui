@@ -1,6 +1,6 @@
 ﻿using BruTile;
 
-namespace Mapsui.Tests.Fetcher
+namespace Mapsui.Tests.Fetcher.Providers
 {
     class NullTileProvider : CountingTileProvider
     {

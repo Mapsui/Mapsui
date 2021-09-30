@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace Mapsui.Desktop.Tests.Wfs
+namespace Mapsui.Tests.Wfs
 {
     [TestFixture]
     public class WfsProviderTests

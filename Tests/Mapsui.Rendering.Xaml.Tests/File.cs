@@ -21,10 +21,8 @@ namespace Mapsui.Rendering.Xaml.Tests
             if (folder == null) throw new Exception("Images folder was not found");
             if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
 
-            using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
-            {
-                stream.WriteTo(fileStream);
-            }
+            using var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write);
+            stream.WriteTo(fileStream);
         }
         
         public static string AssemblyDirectory

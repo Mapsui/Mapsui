@@ -1,5 +1,4 @@
 ﻿using Mapsui.Geometries;
-using Mapsui.Utilities;
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;

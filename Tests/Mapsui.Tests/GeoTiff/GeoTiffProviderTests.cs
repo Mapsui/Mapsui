@@ -2,10 +2,10 @@
 using System.Globalization;
 using System.IO;
 using Mapsui.Providers;
-using Mapsui.Desktop.Tests.Utilities;
+using Mapsui.Tests.Utilities;
 using NUnit.Framework;
 
-namespace Mapsui.Desktop.Tests.GeoTiff
+namespace Mapsui.Tests.GeoTiff
 {
     [TestFixture]
     public class GeoTiffProviderTests
