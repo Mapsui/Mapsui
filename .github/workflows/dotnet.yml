@@ -106,10 +106,14 @@ jobs:
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.iOS/Mapsui.UI.iOS.csproj
     - name: Build Mapsui.UI.Forms
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Forms/Mapsui.UI.Forms.csproj
+    - name: Build Mapsui.UI.Maui
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Maui/Mapsui.UI.Maui.csproj
     - name: Generate nuget package (Mapsui)
       run: nuget pack NuSpec/Mapsui.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
     - name: Generate nuget package (Mapsui.Forms)
       run: nuget pack NuSpec/Mapsui.Forms.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
+    - name: Generate nuget package (Mapsui.Maui)
+      run: nuget pack NuSpec/Mapsui.Maui.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
     - name: Upload packages
       uses: actions/upload-artifact@v2
       with:
