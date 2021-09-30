@@ -3,10 +3,10 @@
   <metadata>
 
     <!-- package -->
-    <id>Mapsui.Forms</id>
+    <id>Mapsui.Maui</id>
     <title>Mapsui for Xamarin.Maui</title>
     <version>$version$</version>
-    <description>Mapsui.Forms - Library for mapping for Maui</description>
+    <description>Mapsui.Maui - Library for mapping for Maui</description>
     <projectUrl>https://github.com/Mapsui/Mapsui</projectUrl>
     <iconUrl>https://github.com/Mapsui/Mapsui/blob/master/logo/png/icon.png</iconUrl>
     <tags>mapsui maui map maps mapping xamarin ios android windows uwp macos cross-platform</tags>
