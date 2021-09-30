@@ -1,14 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net48</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <OutputType>Library</OutputType>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Resources\capabilities_1_1_1.xml" />
+    <None Remove="Resources\capabilities_1_3_0.xml" />
+    <None Remove="Resources\example.tfw" />
+    <None Remove="Resources\example.tif" />
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Mapsui.Rendering.Xaml.Tests\File.cs">
       <Link>File.cs</Link>
@@ -20,35 +22,30 @@
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+    <PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
+    <PackageReference Include="BruTile" Version="4.0.0" />
+    <PackageReference Include="System.Diagnostics.Debug" Version="4.3.0" />
+    <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.1" />
+    <PackageReference Include="System.Security.Cryptography.X509Certificates" Version="4.3.2" />
+    <PackageReference Include="System.Threading" Version="4.3.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
+    <PackageReference Include="NUnit" Version="3.12.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
+    <PackageReference Include="coverlet.collector" Version="3.0.2" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="BruTile" Version="4.0.0">
-    </PackageReference>
-    <PackageReference Include="Microsoft.CodeCoverage" Version="16.5.0">
-    </PackageReference>
-    <PackageReference Include="NUnit" Version="3.12.0">
-    </PackageReference>
-    <PackageReference Include="NUnit3TestAdapter" Version="3.16.1">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="System.Collections" Version="4.3.0">
-    </PackageReference>
-    <PackageReference Include="System.Diagnostics.Debug" Version="4.3.0">
-    </PackageReference>
-    <PackageReference Include="System.Net.Http" Version="4.3.4">
-    </PackageReference>
-    <PackageReference Include="System.Runtime.Extensions" Version="4.3.1">
-    </PackageReference>
-    <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.1">
-    </PackageReference>
-    <PackageReference Include="System.Security.Cryptography.X509Certificates" Version="4.3.2">
-    </PackageReference>
-    <PackageReference Include="System.Threading" Version="4.3.0">
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
+    <Content Include="Resources\capabilities_1_1_1.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\capabilities_1_3_0.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\example.tfw">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\example.tif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\Original\Pin.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
