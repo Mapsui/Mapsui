@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -7,7 +8,7 @@ namespace Mapsui.Fetcher
     class FetchWorker
     {
         private readonly IFetchDispatcher _fetchDispatcher;
-        private CancellationTokenSource _fetchLoopCancellationTokenSource;
+        private readonly ManualResetEvent _waitHandle = new ManualResetEvent(false);
         public static long RestartCounter;
 
         public FetchWorker(IFetchDispatcher fetchDispatcher)
@@ -17,33 +18,31 @@ namespace Mapsui.Fetcher
 
         public void Start()
         {
-            if (_fetchLoopCancellationTokenSource == null || _fetchLoopCancellationTokenSource.IsCancellationRequested)
-            {
-                Interlocked.Increment(ref RestartCounter);
-                _fetchLoopCancellationTokenSource = new CancellationTokenSource();
-                Task.Run(() => Fetch(_fetchLoopCancellationTokenSource));
-            }
+            _waitHandle.Go();
+            Debug.WriteLine("Go");
+            Interlocked.Increment(ref RestartCounter);
+            Task.Run(() => Fetch(_waitHandle));
         }
 
         public void Stop()
         {
-            _fetchLoopCancellationTokenSource?.Cancel();
-            _fetchLoopCancellationTokenSource = null;
+            _waitHandle.Stop();
         }
 
-        private void Fetch(CancellationTokenSource cancellationTokenSource)
+        private void Fetch(ManualResetEvent waitHandle)
         {
-            while (cancellationTokenSource != null && !cancellationTokenSource.Token.IsCancellationRequested)
+            Action method = null;
+            while (waitHandle.WaitOne())
             {
-                Action method = null;
-                
                 if (_fetchDispatcher.TryTake(ref method))
                 {
+                    Debug.WriteLine("Fetch");
                     method();
                 }
                 else
                 {
-                    cancellationTokenSource.Cancel();
+                    Debug.WriteLine("Stop");
+                    waitHandle.Stop();
                 }
             }
         }
