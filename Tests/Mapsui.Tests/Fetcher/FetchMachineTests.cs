@@ -14,6 +14,9 @@ namespace Mapsui.Tests.Fetcher
     [TestFixture]
     public class FetchMachineTests
     {
+        // Note, The Thread.Sleep(1) in the while loop is necessary to avoid
+        // a hang in some rare cases.
+
         [Test]
         public void TileFetcherShouldRequestAllTilesJustOnes()
         {
@@ -37,13 +40,6 @@ namespace Mapsui.Tests.Fetcher
             Assert.AreEqual(expectedTiles, tileProvider.CountByTile.Keys.Count);
             Assert.AreEqual(expectedTiles, tileProvider.CountByTile.Values.Sum());
             Assert.AreEqual(expectedTiles, tileProvider.TotalCount);
-        }
-
-        private Feature TileToFeature(ITileSource tileProvider, TileInfo tileInfo)
-        {
-            var tile = tileProvider.GetTile(tileInfo);
-            if (tile == null) return new Feature();
-            return new Feature{ Geometry = new Raster(new MemoryStream(tile), tileInfo.Extent.ToBoundingBox() )};
         }
 
         [Test]
@@ -73,7 +69,6 @@ namespace Mapsui.Tests.Fetcher
         }
 
         [Test]
-        [Ignore("Possible hang")]
         public void TileFetcherWithFailingFetchesShouldTryAgain()
         {
             // Arrange
@@ -101,7 +96,6 @@ namespace Mapsui.Tests.Fetcher
         }
         
         [Test]
-        [Ignore("Possible hang")]
         public void RepeatedRestartsShouldNotCauseInfiniteLoop()
         {
             // Arrange
@@ -124,6 +118,22 @@ namespace Mapsui.Tests.Fetcher
 
             // Assert
             Assert.Greater(numberOfWorkers * numberOfRestarts, FetchWorker.RestartCounter);
+        }
+
+        private Feature TileToFeature(ITileSource tileProvider, TileInfo tileInfo)
+        {
+            var tile = tileProvider.GetTile(tileInfo);
+            // A tile layer can return a null value. This indicates the tile is not
+            // present in the source, permanently. If this is the case no further 
+            // requests should be done. To avoid further fetches a feature should
+            // be returned with the Geometry set to null. If a null Feature is returned
+            // this equates to having no tile at all and attempts to fetch the tile will
+            // continue. TileLayer.ToGeometry() follows the same implementations.
+            // 
+            // Note, the fact that we have to define this complex method on the outside
+            // indicates a design flaw.
+            if (tile == null) return new Feature { Geometry = null }; 
+            return new Feature { Geometry = new Raster(new MemoryStream(tile), tileInfo.Extent.ToBoundingBox()) };
         }
     }
 }
