@@ -26,11 +26,6 @@ before_build:
 - cmd: nuget restore mapsui.sln
 build:
   project: Mapsui.sln
-  verbosity: minimal
-configuration:
-- Release
-platform:
-- AnyCPU
 before_package:
 - cmd: ''
 after_build:

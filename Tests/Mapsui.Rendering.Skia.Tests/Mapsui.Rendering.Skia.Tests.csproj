@@ -3,8 +3,6 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <OutputType>Library</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <Platforms>AnyCPU;x64;x86</Platforms>
-    <RuntimeIdentifiers>win10-x64;win7-x64</RuntimeIdentifiers>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DefineConstants>DEBUG;SKIA</DefineConstants>
@@ -68,104 +66,6 @@
     <PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
     <PackageReference Include="BruTile" Version="4.0.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="Microsoft.NETCore.Platforms" Version="3.1.0">
-    </PackageReference>
-    <PackageReference Include="Microsoft.Win32.Primitives" Version="4.3.0">
-    </PackageReference>
-    <PackageReference Include="NETStandard.Library" Version="2.0.3">
-    </PackageReference>
-    <PackageReference Include="NUnit" Version="3.13.2">
-    </PackageReference>
-    <PackageReference Include="NUnit3TestAdapter" Version="4.0.0">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="OpenTK.GLControl" Version="3.1.0">
-    </PackageReference>
-    <PackageReference Include="SkiaSharp.Views" Version="2.88.0-preview.145">
-    </PackageReference>
-    <PackageReference Include="Svg.Skia" Version="0.5.7.1">
-    </PackageReference>
-    <PackageReference Include="System.AppContext" Version="4.3.0">
-    </PackageReference>
-    <PackageReference Include="System.Collections" Version="4.3.0">
-    </PackageReference>
-    <PackageReference Include="System.ComponentModel.Composition" Version="5.0.0" />
-    <PackageReference Include="System.Console" Version="4.3.1">
-    </PackageReference>
-    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
-    <PackageReference Include="System.Diagnostics.Debug" Version="4.3.0">
-    </PackageReference>
-    <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="4.7.0">
-    </PackageReference>
-    <PackageReference Include="System.Diagnostics.Tools" Version="4.3.0">
-    </PackageReference>
-    <PackageReference Include="System.Diagnostics.Tracing" Version="4.3.0">
-    </PackageReference>
-    <PackageReference Include="System.Globalization" Version="4.3.0">
-    </PackageReference>
-    <PackageReference Include="System.Globalization.Calendars" Version="4.3.0">
-    </PackageReference>
-    <PackageReference Include="System.IO.Compression" Version="4.3.0">
-    </PackageReference>
-    <PackageReference Include="System.IO.Compression.ZipFile" Version="4.3.0">
-    </PackageReference>
-    <PackageReference Include="System.IO.FileSystem" Version="4.3.0">
-    </PackageReference>
-    <PackageReference Include="System.Linq" Version="4.3.0">
-    </PackageReference>
-    <PackageReference Include="System.Linq.Expressions" Version="4.3.0">
-    </PackageReference>
-    <PackageReference Include="System.Memory" Version="4.5.4">
-    </PackageReference>
-    <PackageReference Include="System.Net.Http" Version="4.3.4">
-    </PackageReference>
-    <PackageReference Include="System.Net.Primitives" Version="4.3.1">
-    </PackageReference>
-    <PackageReference Include="System.Net.Sockets" Version="4.3.0">
-    </PackageReference>
-    <PackageReference Include="System.ObjectModel" Version="4.3.0">
-    </PackageReference>
-    <PackageReference Include="System.Reflection" Version="4.3.0">
-    </PackageReference>
-    <PackageReference Include="System.Reflection.Extensions" Version="4.3.0">
-    </PackageReference>
-    <PackageReference Include="System.Reflection.Primitives" Version="4.3.0">
-    </PackageReference>
-    <PackageReference Include="System.Resources.ResourceManager" Version="4.3.0">
-    </PackageReference>
-    <PackageReference Include="System.Runtime" Version="4.3.1">
-    </PackageReference>
-    <PackageReference Include="System.Runtime.Extensions" Version="4.3.1">
-    </PackageReference>
-    <PackageReference Include="System.Runtime.Handles" Version="4.3.0">
-    </PackageReference>
-    <PackageReference Include="System.Runtime.InteropServices" Version="4.3.0">
-    </PackageReference>
-    <PackageReference Include="System.Runtime.InteropServices.RuntimeInformation" Version="4.3.0">
-    </PackageReference>
-    <PackageReference Include="System.Runtime.Numerics" Version="4.3.0">
-    </PackageReference>
-    <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.1">
-    </PackageReference>
-    <PackageReference Include="System.Security.Cryptography.X509Certificates" Version="4.3.2">
-    </PackageReference>
-    <PackageReference Include="System.Text.Encoding" Version="4.3.0">
-    </PackageReference>
-    <PackageReference Include="System.Text.Encoding.Extensions" Version="4.3.0">
-    </PackageReference>
-    <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1">
-    </PackageReference>
-    <PackageReference Include="System.Threading" Version="4.3.0">
-    </PackageReference>
-    <PackageReference Include="System.Threading.Tasks" Version="4.3.0">
-    </PackageReference>
-    <PackageReference Include="System.Threading.Timer" Version="4.3.0">
-    </PackageReference>
-    <PackageReference Include="System.Xml.ReaderWriter" Version="4.3.1">
-    </PackageReference>
-    <PackageReference Include="System.Xml.XDocument" Version="4.3.0">
-    </PackageReference>
     <PackageReference Include="Microsoft.Win32.Primitives" Version="4.3.0" />
     <PackageReference Include="NETStandard.Library" Version="2.0.3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
