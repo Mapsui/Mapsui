@@ -33,6 +33,7 @@ mapControl.Map.Widgets.Add(widget);
 ```csharp
 mapControl.Renderer.WidgetRenders[typeof(Widgets.Performance.PerformanceWidget)] = new Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer(10, 10, 12, SkiaSharp.SKColors.Black, SkiaSharp.SKColors.White);
 ```
+The first two parameters are the X and Y coordiantes for the widget. Third parameter is the text size. Fourth is the text color and fifth is the background color.
 ## Code copy
 
 ```csharp
