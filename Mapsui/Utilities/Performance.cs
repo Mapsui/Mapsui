@@ -5,12 +5,14 @@ namespace Mapsui.Utilities
 {
     public class Performance
     {
+        readonly int _maxValues;
+        readonly double[] _drawingTimes;
+
+        bool _turnaround;
         int _pos;
-        int _maxValues;
         int _count;
         double _min, _max;
         double _sum = 0;
-        public double[] _drawingTimes;
 
         public Performance(int maxValues = 20)
         {
@@ -18,10 +20,9 @@ namespace Mapsui.Utilities
                 throw new ArgumentException("maxValues must not be equal or less 0");
 
             _maxValues = maxValues;
-            _pos = 0;
             _drawingTimes = new double[_maxValues];
-            _min = 1000;
-            _max = 0;
+
+            Clear();
         }
 
         /// <summary>
@@ -32,7 +33,7 @@ namespace Mapsui.Utilities
         /// <summary>
         /// Minimal drawing time
         /// </summary>
-        public double Min => _min;
+        public double Min => _min == double.MaxValue ? 0 : _min;
 
         /// <summary>
         /// Maximal drawing time
@@ -47,7 +48,12 @@ namespace Mapsui.Utilities
         /// <summary>
         /// Mean value of all MaxValues drawing times
         /// </summary>
-        public double Mean => _sum / _maxValues;
+        public double Mean => _turnaround ? _sum / _maxValues : (_pos > 0 ? _sum / _pos : 0);
+
+        /// <summary>
+        /// Possible frames per second calculated from Mean
+        /// </summary>
+        public int FPS => Mean == 0 ? 0 : (int)(1000.0 / Mean);
 
         /// <summary>
         /// Time be used for the last drawing
@@ -95,7 +101,10 @@ namespace Mapsui.Utilities
             _count++;
 
             if (_pos >= _maxValues)
+            {
                 _pos = 0;
+                _turnaround = true;
+            }
 
             if (_max < time)
                 _max = time;
@@ -113,9 +122,10 @@ namespace Mapsui.Utilities
             _sum = 0;
             for (var i = 0; i < _maxValues; i++)
                 _drawingTimes[i] = 0.0;
-            _min = 1000;
+            _min = double.MaxValue;
             _max = 0;
             _count = 0;
+            _turnaround = false;
         }
     }
 }
