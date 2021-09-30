@@ -15,6 +15,14 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
         SKRect _rect;
         Geometries.BoundingBox _envelope;
 
+        /// <summary>
+        /// Renderer for PerformanceWidget
+        /// </summary>
+        /// <param name="x">X position of widget on screen</param>
+        /// <param name="y">Y position of widget on screen</param>
+        /// <param name="textSize">Size of text</param>
+        /// <param name="textColor">Color for text</param>
+        /// <param name="backgroundColor">Color for background</param>
         public PerformanceWidgetRenderer(float x, float y, int textSize, SKColor textColor, SKColor backgroundColor)
         {
             _textSize = textSize;
