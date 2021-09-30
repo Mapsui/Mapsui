@@ -7,8 +7,11 @@ using Plugin.Geolocator.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Mapsui.UI.Maui;
 using Microsoft.Maui.Controls;
+using Microsoft.Maui.Essentials;
 
 namespace Mapsui.Samples.Maui
 {
@@ -16,6 +19,7 @@ namespace Mapsui.Samples.Maui
     {
         IEnumerable<ISample> allSamples;
         Func<object, EventArgs, bool> clicker;
+        private CancellationTokenSource gpsCancelation;
 
         public MainPageLarge()
         {
@@ -133,46 +137,30 @@ namespace Mapsui.Samples.Maui
 
         public async void StartGPS()
         {
-            if (Device.RuntimePlatform == Device.WPF)
-                return;
-            // Start GPS
-            await CrossGeolocator.Current.StartListeningAsync(TimeSpan.FromSeconds(1),
-                    1,
-                    true,
-                    new ListenerSettings
-                    {
-                        ActivityType = ActivityType.Fitness,
-                        AllowBackgroundUpdates = false,
-                        DeferLocationUpdates = true,
-                        DeferralDistanceMeters = 1,
-                        DeferralTime = TimeSpan.FromSeconds(0.2),
-                        ListenForSignificantChanges = false,
-                        PauseLocationUpdatesAutomatically = true
-                    });
+            this.gpsCancelation = new CancellationTokenSource();
 
-            CrossGeolocator.Current.PositionChanged += MyLocationPositionChanged;
-            CrossGeolocator.Current.PositionError += MyLocationPositionError;
-        }
-
-        public async void StopGPS()
-        {
-            if (Device.RuntimePlatform == Device.WPF)
-                return;
-
-            // Stop GPS
-            if (CrossGeolocator.Current.IsListening)
+            await Task.Run(async () =>
             {
-                await CrossGeolocator.Current.StopListeningAsync();
-            }
+                while (!gpsCancelation.IsCancellationRequested)
+                {
+                    var request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
+                    await Device.InvokeOnMainThreadAsync(async () =>
+                    {
+                        var location = await Geolocation.GetLocationAsync(request, this.gpsCancelation.Token).ConfigureAwait(false);
+                        if (location != null)
+                        {
+                            MyLocationPositionChanged(location);
+                        }
+                    }).ConfigureAwait(false);
+
+                    await Task.Delay(200).ConfigureAwait(false);
+                }
+            }, gpsCancelation.Token).ConfigureAwait(false);
         }
 
-        /// <summary>
-        /// If there was an error while getting GPS coordinates
-        /// </summary>
-        /// <param name="sender">Geolocator</param>
-        /// <param name="e">Event arguments for position error</param>
-        private void MyLocationPositionError(object sender, PositionErrorEventArgs e)
+        public void StopGPS()
         {
+            this.gpsCancelation?.Cancel();
         }
 
         /// <summary>
@@ -180,13 +168,20 @@ namespace Mapsui.Samples.Maui
         /// </summary>
         /// <param name="sender">Geolocator</param>
         /// <param name="e">Event arguments for new position</param>
-        private void MyLocationPositionChanged(object sender, PositionEventArgs e)
+        private void MyLocationPositionChanged(Location e)
         {
             Device.BeginInvokeOnMainThread(() =>
             {
-                mapView.MyLocationLayer.UpdateMyLocation(new UI.Maui.Position(e.Position.Latitude, e.Position.Longitude));
-                mapView.MyLocationLayer.UpdateMyDirection(e.Position.Heading, mapView.Viewport.Rotation);
-                mapView.MyLocationLayer.UpdateMySpeed(e.Position.Speed);
+                mapView.MyLocationLayer.UpdateMyLocation(new UI.Maui.Position(e.Latitude, e.Longitude));
+                if (e.Course != null)
+                {
+                    mapView.MyLocationLayer.UpdateMyDirection(e.Course.Value, mapView.Viewport.Rotation);
+                }
+                
+                if (e.Speed != null)
+                {
+                    mapView.MyLocationLayer.UpdateMySpeed(e.Speed.Value);
+                }
             });
         }
 
