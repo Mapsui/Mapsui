@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31702.278
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31717.71
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui", "Mapsui\Mapsui.csproj", "{D74C052A-C07E-4B37-A898-134218ACA5C9}"
 EndProject
@@ -1743,6 +1743,7 @@ Global
 		{0039C41D-515A-4B67-9813-55969D2F09B5}.AppStore|x86.Build.0 = Debug|Any CPU
 		{0039C41D-515A-4B67-9813-55969D2F09B5}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
 		{0039C41D-515A-4B67-9813-55969D2F09B5}.Debug|AnyCPU.Build.0 = Debug|Any CPU
+		{0039C41D-515A-4B67-9813-55969D2F09B5}.Debug|AnyCPU.Deploy.0 = Debug|Any CPU
 		{0039C41D-515A-4B67-9813-55969D2F09B5}.Debug|ARM.ActiveCfg = Debug|Any CPU
 		{0039C41D-515A-4B67-9813-55969D2F09B5}.Debug|ARM.Build.0 = Debug|Any CPU
 		{0039C41D-515A-4B67-9813-55969D2F09B5}.Debug|iPhone.ActiveCfg = Debug|Any CPU
