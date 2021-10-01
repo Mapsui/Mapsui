@@ -89,8 +89,16 @@ namespace Mapsui.UI.Wpf
 
         void InvalidateTimerCallback(object state)
         {
-            if (_drawing || !_refresh)
+            if (!_refresh)
                 return;
+
+            if (_drawing)
+            {
+                if (_performance != null)
+                    _performance.Dropped++;
+
+                return;
+            }
 
             _invalidate?.Invoke();
         }

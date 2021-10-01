@@ -18,6 +18,7 @@
 ## [Skia Scale](skia-scale.md)
 ## [Projections](projections.md)
 ## [Custom Style Renderers](custom-style-renders.md)
+## [Performance Widget](PerformanceWidget.md)
 # Developing Mapsui
 ## [Contributors Guidelines](contributors-guidelines.md)
 ## [Development Constraints](development-constraints.md)
