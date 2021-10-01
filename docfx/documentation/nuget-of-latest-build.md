@@ -4,9 +4,10 @@ On every commit the build server is triggered which publishes a NuGet package of
 
 ## Package Manager Console
 
+```console
+PM> nuget install-package mapsui -source https://ci.appveyor.com/nuget/mapsui -pre
 ```
-nuget install-package mapsui -source https://ci.appveyor.com/nuget/mapsui -pre
-```
+This installs only the mapsui core package but you could install any other package this way.
 
 ## Add the feed in Visual Studio
 
