@@ -21,7 +21,7 @@ And under 'manage nuget packages' select this as source on the top right.
 
 In you sln folder add a .nuget folder and in it a NuGet.Config file with content:
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 
 <configuration>
