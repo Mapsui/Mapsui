@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using Mapsui.Logging;
+using Mapsui.Rendering.Skia;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.Samples.Wpf.Utilities;
 using Mapsui.UI;
@@ -152,6 +153,9 @@ namespace Mapsui.Samples.Wpf
         {
             if (args.MapInfo?.Feature != null)
             {
+                var calloutStyle = args.MapInfo.Feature.Styles.Cast<CalloutStyle>().FirstOrDefault();
+                if (calloutStyle != null) calloutStyle.Enabled = !calloutStyle.Enabled;
+
                 FeatureInfoBorder.Visibility = Visibility.Visible;
                 FeatureInfo.Text = $"Click Info:{Environment.NewLine}{args.MapInfo.Feature.ToDisplayText()}";
             }

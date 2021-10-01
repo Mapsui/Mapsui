@@ -10,6 +10,7 @@ using Mapsui.Rendering.Skia;
 using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Utilities;
+using Mapsui.Widgets;
 using Newtonsoft.Json;
 using SkiaSharp;
 
@@ -19,7 +20,7 @@ namespace Mapsui.Samples.Common.Maps
 {
     public class CalloutSample : ISample
     {
-        private static Random Random = new Random();
+        private static readonly Random Random = new Random();
 
         public string Name => "1 Callout";
         public string Category => "Geometries";
@@ -46,7 +47,7 @@ namespace Mapsui.Samples.Common.Maps
                 Name = "Points",
                 IsMapInfoLayer = true,
                 DataSource = new MemoryProvider(GetCitiesFromEmbeddedResource()),
-                Style = new VectorStyle() { }
+                Style = new VectorStyle()
             };
         }
 
@@ -64,19 +65,38 @@ namespace Mapsui.Samples.Common.Maps
                 feature.Geometry = point;
                 feature["name"] = c.Name;
                 feature["country"] = c.Country;
-
-                var callbackImage = CreateCallbackImage(c);
-                var bitmapId = BitmapRegistry.Instance.Register(callbackImage);
-                var calloutStyle = CreateCalloutStyle(bitmapId);
+                var calloutStyle = CreateCalloutStyle2(c.Name);
                 feature.Styles.Add(calloutStyle);
-
                 return feature;
             });
         }
 
-        private static IStyle CreateCalloutStyle(int bitmapId)
+        private static CalloutStyle CreateCalloutStyle2(string name)
         {
-            var calloutStyle = new CalloutStyle() { Content = bitmapId, ArrowPosition = Random.Next(1, 9) * 0.1f, RotateWithMap = true };
+            return new CalloutStyle
+            {
+                Title = name,
+                Type = CalloutType.Detail,
+                Content = -1,
+                TitleFont = { FontFamily = null, Size = 12, Italic = false, Bold = true },
+                TitleFontColor = Color.Gray,
+                TitleTextAlignment = Alignment.Center,
+                Spacing = 2,
+                MaxWidth = 111,
+                RectRadius = 10,
+                ShadowWidth = 4,
+                StrokeWidth = 0,
+                ArrowAlignment = ArrowAlignment.Bottom,
+                Offset = new Offset(SymbolStyle.DefaultHeight * 0.5f, 0),
+                RotateWithMap = true,
+                ArrowPosition = 1,
+                Enabled = false
+            };
+        }
+
+        private static CalloutStyle CreateCalloutStyle(int bitmapId)
+        {
+            var calloutStyle = new CalloutStyle { Content = bitmapId, ArrowPosition = Random.Next(1, 9) * 0.1f, RotateWithMap = true };
             switch (Random.Next(0, 4))
             {
                 case 0:
@@ -96,38 +116,46 @@ namespace Mapsui.Samples.Common.Maps
                     calloutStyle.Offset = new Offset(-SymbolStyle.DefaultHeight * 0.5f, 0);
                     break;
             }
+
             calloutStyle.RectRadius = 10; // Random.Next(0, 9);
             calloutStyle.ShadowWidth = 4; // Random.Next(0, 9);
             calloutStyle.StrokeWidth = 0;
+
             return calloutStyle;
         }
 
         private static MemoryStream CreateCallbackImage(City city)
         {
-            SKRect bounds;
-            using (SKPaint paint = new SKPaint())
+            using var paint = new SKPaint
             {
-                paint.Color = new SKColor((byte)Random.Next(0, 256), (byte)Random.Next(0, 256), (byte)Random.Next(0, 256));
-                paint.Typeface = SKTypeface.FromFamilyName(null, SKFontStyleWeight.Bold, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright);
-                paint.TextSize = 20;
+                Color = new SKColor((byte)Random.Next(0, 256), (byte)Random.Next(0, 256), (byte)Random.Next(0, 256)),
+                Typeface = SKTypeface.FromFamilyName(null, SKFontStyleWeight.Bold, SKFontStyleWidth.Normal,
+                    SKFontStyleSlant.Upright),
+                TextSize = 20
+            };
 
-                using (SKPath textPath = paint.GetTextPath(city.Name, 0, 0))
+            SKRect bounds;
+            using (var textPath = paint.GetTextPath(city.Name, 0, 0))
+            {
+                // Set transform to center and enlarge clip path to window height
+                textPath.GetTightBounds(out bounds);
+            }
+            using (var bitmap = new SKBitmap((int)(bounds.Width + 1), (int)(bounds.Height + 1)))
+            using (var canvas = new SKCanvas(bitmap))
+            {
+                canvas.Clear();
+                canvas.DrawText(city.Name, -bounds.Left, -bounds.Top, paint);
+                var memStream = new MemoryStream();
+                using (var wStream = new SKManagedWStream(memStream))
                 {
-                    // Set transform to center and enlarge clip path to window height
-                    textPath.GetTightBounds(out bounds);
+                    bitmap.Encode(wStream, SKEncodedImageFormat.Png, 100);
                 }
-                using (var bitmap = new SKBitmap((int)(bounds.Width + 1), (int)(bounds.Height + 1)))
-                using (var canvas = new SKCanvas(bitmap))
-                {
-                    canvas.Clear();
-                    canvas.DrawText(city.Name, -bounds.Left, -bounds.Top, paint);
-                    var memStream = new MemoryStream();
-                    using (var wstream = new SKManagedWStream(memStream))
-                    {
-                        bitmap.Encode(wstream, SKEncodedImageFormat.Png, 100);
-                    }
-                    return memStream;
-                }
+
+                // To check if the image is generated correctly you could add:
+                // memStream.Position = 0;
+                // File.WriteAllBytes("C:/temp/test-image.png", memStream.ToBytes());
+
+                return memStream;
             }
         }
 
@@ -143,11 +171,9 @@ namespace Mapsui.Samples.Common.Maps
         {
             var serializer = new JsonSerializer();
 
-            using (var sr = new StreamReader(stream))
-            using (var jsonTextReader = new JsonTextReader(sr))
-            {
-                return serializer.Deserialize<List<T>>(jsonTextReader);
-            }
+            using var sr = new StreamReader(stream);
+            using var jsonTextReader = new JsonTextReader(sr);
+            return serializer.Deserialize<List<T>>(jsonTextReader);
         }
     }
 }
