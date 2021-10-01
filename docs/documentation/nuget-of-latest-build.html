@@ -81,14 +81,15 @@
 
 <p>On every commit the build server is triggered which publishes a NuGet package of that build. It&#39;s version number is the current version of the master branch followed by a dot and the build number. The package is not published to nuget.org but to a AppVeyor feed. You need to add this feed to be able to install the package to your project. There are three ways to add this feed to your environment.</p>
 <h2 id="package-manager-console">Package Manager Console</h2>
-<pre><code>nuget install-package mapsui -source https://ci.appveyor.com/nuget/mapsui -pre
-</code></pre><h2 id="add-the-feed-in-visual-studio">Add the feed in Visual Studio</h2>
+<pre><code class="lang-console">PM&gt; nuget install-package mapsui -source https://ci.appveyor.com/nuget/mapsui -pre
+</code></pre><p>This installs only the mapsui core package but you could install any other package this way.</p>
+<h2 id="add-the-feed-in-visual-studio">Add the feed in Visual Studio</h2>
 <p>Add the feed in tools | options | nuget | package sources </p>
 <p><a href="https://ci.appveyor.com/nuget/mapsui">https://ci.appveyor.com/nuget/mapsui</a> </p>
 <p>And under &#39;manage nuget packages&#39; select this as source on the top right.</p>
 <h2 id="add-a-nugetnugetconfig-xml">Add a .nuget\NuGet.Config xml</h2>
 <p>In you sln folder add a .nuget folder and in it a NuGet.Config file with content:</p>
-<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+<pre><code class="lang-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 
 &lt;configuration&gt;
   &lt;solution&gt;
