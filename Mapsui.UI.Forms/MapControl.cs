@@ -9,6 +9,7 @@ using Mapsui.Geometries.Utilities;
 using System.Threading.Tasks;
 #if __MAUI__
 using Mapsui.UI.Maui.Extensions;
+using Microsoft.Maui;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Essentials;
 using Microsoft.Maui.Graphics;
@@ -108,6 +109,9 @@ namespace Mapsui.UI.Forms
 
         public bool UseDoubleTap = true;
         public bool UseFling = true;
+#if __MAUI__
+        private Size oldSize;
+#endif
 
         void Initialize()
         {
@@ -150,6 +154,34 @@ namespace Mapsui.UI.Forms
 
             _initialized = true;
         }
+
+#if __MAUI__
+        protected override void InvalidateLayout()
+        {
+            base.InvalidateLayout();
+            SizeChangedWorkaround();
+        }
+
+        protected override void OnSizeAllocated(double width, double height)
+        {
+            base.OnSizeAllocated(width, height);
+            SizeChangedWorkaround();
+        }
+
+        private void SizeChangedWorkaround()
+        {
+            var newSize = new Size(this.Width, this.Height);
+
+            if (newSize.Width > 0 && newSize.Height > 0 && this.oldSize != newSize)
+            {
+                this.oldSize = newSize;
+                // Maui Workaround because the OnSizeChanged Events don't fire.
+                // Maybe this is a Bug and will be fixed in later versions.
+                this.OnSizeChanged(this, new EventArgs());
+                this.RefreshGraphics();
+            }
+        }
+#endif
 
         private void OnSizeChanged(object sender, EventArgs e)
         {
