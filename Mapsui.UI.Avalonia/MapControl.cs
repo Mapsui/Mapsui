@@ -20,9 +20,12 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Avalonia;
+using Avalonia.Collections;
 using Avalonia.Controls;
+using Avalonia.Controls.Shapes;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Platform;
 using Avalonia.Rendering.SceneGraph;
@@ -32,19 +35,19 @@ using Mapsui.UI.Uwp;
 
 namespace Mapsui.UI.Avalonia
 {
-    public partial class MapControl : Control, IMapControl, ICustomDrawOperation
+    public partial class MapControl : Grid, IMapControl
     {
-        private readonly FormattedText noSkia = new FormattedText()
-        {
-            Text = "Current rendering API is not Skia"
-        };
-
         private Point mousePos;
+        private MapsuiCustomDrawOp _drawOp;
+        private readonly Rectangle _selectRectangle = CreateSelectRectangle();
 
         public MouseWheelAnimation MouseWheelAnimation { get; } = new MouseWheelAnimation { Duration = 0 };
 
         public MapControl()
         {
+            ClipToBounds = true;
+            Children.Add(_selectRectangle);
+
             CommonInitialize();
             Initialize();
         }
@@ -98,7 +101,9 @@ namespace Mapsui.UI.Avalonia
 
         public override void Render(DrawingContext context)
         {
-            context.Custom(this);
+            if (_drawOp == null) _drawOp = new MapsuiCustomDrawOp(new Rect(0,0,Bounds.Width,Bounds.Height), this);
+            _drawOp.Bounds = new Rect(0, 0, Bounds.Width, Bounds.Height);
+            context.Custom(_drawOp);
         }
 
         private void MapControl_PointerWheelChanged(object? sender, PointerWheelEventArgs e)
@@ -130,7 +135,7 @@ namespace Mapsui.UI.Avalonia
 
         private void RunOnUIThread(Action action)
         {
-            Task.Run(() => Dispatcher.UIThread.InvokeAsync(action, DispatcherPriority.Normal));
+            Task.Run(() => Dispatcher.UIThread.InvokeAsync(action));
         }
 
         public void OpenBrowser(string url)
@@ -147,33 +152,6 @@ namespace Mapsui.UI.Avalonia
         private float ViewportWidth => Convert.ToSingle(Bounds.Width);
         private float ViewportHeight => Convert.ToSingle(Bounds.Height);
 
-        public void Dispose()
-        {
-            // No-op
-        }
-
-        public bool HitTest(Point p)
-        {
-            return false;
-        }
-
-        public void Render(IDrawingContextImpl context)
-        {
-            var canvas = (context as ISkiaDrawingContextImpl)?.SkCanvas;
-            if (canvas == null)
-                context.DrawText(Brushes.Black, new Point(), noSkia.PlatformImpl);
-            else
-            {
-                canvas.Save();
-                CommonDrawControl(canvas);
-                canvas.Restore();
-            }
-        }
-
-        public bool Equals(ICustomDrawOperation? other)
-        {
-            return false;
-        }
 
         private float GetPixelDensity()
         {
@@ -183,6 +161,62 @@ namespace Mapsui.UI.Avalonia
             }
 
             return 1f;
+        }
+
+        private static Rectangle CreateSelectRectangle()
+        {
+            return new Rectangle
+            {
+                Fill = new SolidColorBrush(Colors.Red),
+                Stroke = new SolidColorBrush(Colors.Black),
+                StrokeThickness = 3,
+                StrokeDashArray = new AvaloniaList<double>() { 3.0 },
+                Opacity = 0.3,
+                VerticalAlignment = VerticalAlignment.Top,
+                HorizontalAlignment = HorizontalAlignment.Left,
+                IsVisible = false
+
+            };
+        }
+
+        private class MapsuiCustomDrawOp : ICustomDrawOperation
+        {
+            private readonly MapControl mapControl;
+
+            private readonly FormattedText noSkia = new FormattedText()
+            {
+                Text = "Current rendering API is not Skia"
+            };
+
+            public MapsuiCustomDrawOp(Rect bounds, MapControl mapControl)
+            {
+                Bounds = bounds;
+                this.mapControl = mapControl;
+            }
+
+            public void Dispose()
+            {
+                // No-op
+            }
+
+            public Rect Bounds { get; set; }
+            public bool HitTest(Point p)
+            {
+                return true;
+            }
+            public bool Equals(ICustomDrawOperation other) => false;
+            public void Render(IDrawingContextImpl context)
+            {
+                var canvas = (context as ISkiaDrawingContextImpl)?.SkCanvas;
+                if (canvas == null)
+                    context.DrawText(Brushes.Black, new Point(), noSkia.PlatformImpl);
+                else
+                {
+                    canvas.Save();
+                    mapControl.CommonDrawControl(canvas);
+                    canvas.Restore();
+                }
+            }
         }
     }
 }
