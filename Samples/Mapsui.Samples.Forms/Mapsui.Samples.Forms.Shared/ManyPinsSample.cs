@@ -116,6 +116,22 @@ namespace Mapsui.Samples.Forms
         {
             mapControl.Map = OsmSample.CreateMap();
 
+            if (mapControl.Performance == null)
+                mapControl. Performance = new Utilities.Performance();
+
+            var widget = new Widgets.Performance.PerformanceWidget(mapControl.Performance);
+
+            widget.WidgetTouched += (sender, args) =>
+            {
+                mapControl?.Performance.Clear();
+                mapControl?.RefreshGraphics();
+
+                args.Handled = true;
+            };
+
+            mapControl.Map.Widgets.Add(widget);
+            mapControl.Renderer.WidgetRenders[typeof(Widgets.Performance.PerformanceWidget)] = new Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer(10, 10, 12, SkiaSharp.SKColors.Black, SkiaSharp.SKColors.White);
+
             ((MapView)mapControl).UseDoubleTap = true;
             ((MapView)mapControl).UniqueCallout = true;
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -8,7 +7,7 @@ namespace Mapsui.Fetcher
     class FetchWorker
     {
         private readonly IFetchDispatcher _fetchDispatcher;
-        private readonly ManualResetEvent _waitHandle = new ManualResetEvent(false);
+        private volatile bool _busy;
         public static long RestartCounter;
 
         public FetchWorker(IFetchDispatcher fetchDispatcher)
@@ -18,31 +17,28 @@ namespace Mapsui.Fetcher
 
         public void Start()
         {
-            _waitHandle.Go();
-            Debug.WriteLine("Go");
+            _busy = true;
             Interlocked.Increment(ref RestartCounter);
-            Task.Run(() => Fetch(_waitHandle));
+            Task.Run(Fetch);
         }
 
         public void Stop()
         {
-            _waitHandle.Stop();
+            _busy = false;
         }
 
-        private void Fetch(ManualResetEvent waitHandle)
+        private void Fetch()
         {
             Action method = null;
-            while (waitHandle.WaitOne())
+            while (_busy)
             {
                 if (_fetchDispatcher.TryTake(ref method))
                 {
-                    Debug.WriteLine("Fetch");
                     method();
                 }
                 else
                 {
-                    Debug.WriteLine("Stop");
-                    waitHandle.Stop();
+                    _busy = false;
                 }
             }
         }
