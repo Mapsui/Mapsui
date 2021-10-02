@@ -17,7 +17,6 @@ using Avalonia.Skia;
 using Avalonia.Threading;
 using Mapsui.Layers;
 using Mapsui.Providers;
-using Mapsui.Providers.Wms;
 using Mapsui.UI.Uwp;
 using Mapsui.Utilities;
 
@@ -75,7 +74,7 @@ namespace Mapsui.UI.Avalonia
 
         private void MapControl_PointerPressed(object sender, global::Avalonia.Input.PointerPressedEventArgs e)
         {
-            if(e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
+            if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
             {
                 MapControlMouseLeftButtonDown(e);
             }
@@ -107,8 +106,6 @@ namespace Mapsui.UI.Avalonia
             Navigator.CenterOn(new Geometries.Point(Viewport.Center.X + 0.000000001, Viewport.Center.Y + 0.000000001));
 
             StartZoomAnimation(Viewport.Resolution, _toResolution);
-
-            
         }
 
         private void StartZoomAnimation(double begin, double end)
@@ -116,19 +113,16 @@ namespace Mapsui.UI.Avalonia
             //TODO TEMP
             Navigator.ZoomTo(_toResolution, _currentMousePosition);
             RefreshGraphics();
-
-       
         }
 
-        private void MapControlMouseLeftButtonDown( global::Avalonia.Input.PointerPressedEventArgs e)
+        private void MapControlMouseLeftButtonDown(global::Avalonia.Input.PointerPressedEventArgs e)
         {
             var touchPosition = e.GetPosition(this).ToMapsui();
             _previousMousePosition = touchPosition;
             _downMousePosition = touchPosition;
             _mouseDown = true;
             e.Pointer.Capture(this);
-            //     CaptureMouse();
-                    
+            
             if (!IsInBoxZoomMode())
             {
                 if (IsClick(_currentMousePosition, _downMousePosition))
@@ -157,11 +151,9 @@ namespace Mapsui.UI.Avalonia
             FeatureInfo?.Invoke(this, new FeatureInfoEventArgs { FeatureInfo = features });
         }
 
-
         private void MapControlMouseLeave(object sender, global::Avalonia.Input.PointerEventArgs e)
         {
             _previousMousePosition = new Geometries.Point();
-            //  ReleaseMouseCapture();
         }
 
         private void MapControlMouseMove(object sender, global::Avalonia.Input.PointerEventArgs e)
@@ -220,7 +212,8 @@ namespace Mapsui.UI.Avalonia
 
         private void MapControl_PointerReleased(object sender, global::Avalonia.Input.PointerReleasedEventArgs e)
         {
-            if (e.GetCurrentPoint(this).Properties.PointerUpdateKind == global::Avalonia.Input.PointerUpdateKind.LeftButtonReleased)
+            if (e.GetCurrentPoint(this).Properties.PointerUpdateKind ==
+                global::Avalonia.Input.PointerUpdateKind.LeftButtonReleased)
             {
                 MapControlMouseLeftButtonUp(e);
             }
@@ -273,7 +266,7 @@ namespace Mapsui.UI.Avalonia
         {
             RunOnUIThread(() => _selectRectangle.IsVisible = false);
         }
-        
+
         private static bool IsClick(Geometries.Point currentPosition, Geometries.Point previousPosition)
         {
             return
@@ -306,7 +299,7 @@ namespace Mapsui.UI.Avalonia
 
         public override void Render(DrawingContext context)
         {
-            if (_drawOp == null) _drawOp = new MapsuiCustomDrawOp(new Rect(0,0,Bounds.Width,Bounds.Height), this);
+            if (_drawOp == null) _drawOp = new MapsuiCustomDrawOp(new Rect(0, 0, Bounds.Width, Bounds.Height), this);
             _drawOp.Bounds = new Rect(0, 0, Bounds.Width, Bounds.Height);
             context.Custom(_drawOp);
         }
@@ -334,12 +327,11 @@ namespace Mapsui.UI.Avalonia
                 Arguments = RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? $"-e {url}" : "",
                 CreateNoWindow = true,
                 UseShellExecute = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-            }));
+            })) ;
         }
 
         private float ViewportWidth => Convert.ToSingle(Bounds.Width);
         private float ViewportHeight => Convert.ToSingle(Bounds.Height);
-
 
         private float GetPixelDensity()
         {
@@ -363,7 +355,6 @@ namespace Mapsui.UI.Avalonia
                 VerticalAlignment = VerticalAlignment.Top,
                 HorizontalAlignment = HorizontalAlignment.Left,
                 IsVisible = false
-
             };
         }
 
@@ -388,11 +379,14 @@ namespace Mapsui.UI.Avalonia
             }
 
             public Rect Bounds { get; set; }
+
             public bool HitTest(Point p)
             {
                 return true;
             }
+
             public bool Equals(ICustomDrawOperation other) => false;
+
             public void Render(IDrawingContextImpl context)
             {
                 var canvas = (context as ISkiaDrawingContextImpl)?.SkCanvas;
