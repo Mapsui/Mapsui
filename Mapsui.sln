@@ -54,8 +54,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.iOS", "Samples\Mapsui.Samples.iOS\Mapsui.Samples.iOS.csproj", "{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Desktop.Tests", "Tests\Mapsui.Desktop.Tests\Mapsui.Desktop.Tests.csproj", "{FF1A03F0-8C0C-4FAB-A229-42AD625B5456}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.UI.Wpf", "Mapsui.UI.Wpf\Mapsui.UI.Wpf.csproj", "{AE693902-FEDA-4034-A7C5-9AA9872F7878}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Geometries.Tests", "Tests\Mapsui.Geometries.Tests\Mapsui.Geometries.Tests.csproj", "{46519792-2F00-4FB7-99EF-1465AC7B8994}"
@@ -112,6 +110,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "documentation", "documentat
 		docfx\documentation\Mapsui-2.0.md = docfx\documentation\Mapsui-2.0.md
 		docfx\documentation\Mapsui-Components.md = docfx\documentation\Mapsui-Components.md
 		docfx\documentation\NuGet-of-latest-build.md = docfx\documentation\NuGet-of-latest-build.md
+		PerformanceWidget.md = PerformanceWidget.md
 		docfx\documentation\projections.md = docfx\documentation\projections.md
 		docfx\documentation\Renderers.md = docfx\documentation\Renderers.md
 		docfx\documentation\Rendering-Tests.md = docfx\documentation\Rendering-Tests.md
@@ -1726,6 +1725,7 @@ Global
 		{28848162-20B7-46F1-8364-8B41B0393CD4}.AppStore|x64.Deploy.0 = Release|x64
 		{28848162-20B7-46F1-8364-8B41B0393CD4}.AppStore|x86.ActiveCfg = Release|x86
 		{28848162-20B7-46F1-8364-8B41B0393CD4}.Debug|AnyCPU.ActiveCfg = Debug|x86
+		{28848162-20B7-46F1-8364-8B41B0393CD4}.Debug|AnyCPU.Build.0 = Debug|x86
 		{28848162-20B7-46F1-8364-8B41B0393CD4}.Debug|AnyCPU.Deploy.0 = Debug|x86
 		{28848162-20B7-46F1-8364-8B41B0393CD4}.Debug|ARM.ActiveCfg = Debug|ARM
 		{28848162-20B7-46F1-8364-8B41B0393CD4}.Debug|ARM.Build.0 = Debug|ARM
@@ -2107,7 +2107,6 @@ Global
 		{81BB36D2-4D01-44E3-9024-E7CBD10DA316} = {F7130D3D-4E62-4EB3-B74C-1E819E017048}
 		{53A4E033-F814-46CC-8105-DAC289524455} = {F7130D3D-4E62-4EB3-B74C-1E819E017048}
 		{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C} = {969DB691-49FB-4785-98F4-2112CC1BA7C4}
-		{FF1A03F0-8C0C-4FAB-A229-42AD625B5456} = {F7130D3D-4E62-4EB3-B74C-1E819E017048}
 		{46519792-2F00-4FB7-99EF-1465AC7B8994} = {F7130D3D-4E62-4EB3-B74C-1E819E017048}
 		{A6D5A694-454C-432B-BB24-AB784876E8E1} = {CB6BE9F9-5ECF-471B-9D93-605E2BD6825D}
 		{CA0C7AF3-03ED-42D0-A001-001E8EE095E6} = {969DB691-49FB-4785-98F4-2112CC1BA7C4}

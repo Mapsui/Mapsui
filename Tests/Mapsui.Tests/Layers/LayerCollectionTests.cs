@@ -70,7 +70,7 @@ namespace Mapsui.Tests.Layers
 
             // assert
             var list = layerCollection.ToList();
-            Assert.AreEqual(3, list.Count());
+            Assert.AreEqual(3, list.Count);
             Assert.NotNull(list[0]);
             Assert.AreEqual("Layer1", list[0].Name);
             Assert.NotNull(list[1]);
@@ -97,7 +97,7 @@ namespace Mapsui.Tests.Layers
 
             // assert
             var list = layerCollection.ToList();
-            Assert.AreEqual(2, list.Count());
+            Assert.AreEqual(2, list.Count);
             Assert.NotNull(list[0]);
             Assert.AreEqual("Layer2", list[0].Name);
             Assert.NotNull(list[1]);
@@ -121,7 +121,7 @@ namespace Mapsui.Tests.Layers
 
             // assert
             var list = layerCollection.ToList();
-            Assert.AreEqual(3, list.Count());
+            Assert.AreEqual(3, list.Count);
             Assert.NotNull(list[0]);
             Assert.AreEqual("Layer1", list[0].Name);
             Assert.NotNull(list[1]);
@@ -147,7 +147,7 @@ namespace Mapsui.Tests.Layers
 
             // assert
             var list = layerCollection.ToList();
-            Assert.AreEqual(3, list.Count());
+            Assert.AreEqual(3, list.Count);
             Assert.NotNull(list[0]);
             Assert.AreEqual("Layer2", list[0].Name);
             Assert.NotNull(list[1]);

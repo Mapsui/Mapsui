@@ -39,10 +39,6 @@ namespace Mapsui.Samples.Forms
 
             mapView.MyLocationLayer.UpdateMyLocation(new UI.Forms.Position());
 
-            mapView.IsZoomButtonVisible = true;
-            mapView.IsMyLocationButtonVisible = true;
-            mapView.IsNorthingButtonVisible = true;
-
             mapView.Info += MapView_Info;
             mapView.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
 

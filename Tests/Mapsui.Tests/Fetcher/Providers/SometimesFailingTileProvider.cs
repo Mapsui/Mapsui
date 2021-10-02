@@ -1,7 +1,7 @@
 ﻿using System;
 using BruTile;
 
-namespace Mapsui.Tests.Fetcher
+namespace Mapsui.Tests.Fetcher.Providers
 {
     class SometimesFailingTileProvider : CountingTileProvider
     {

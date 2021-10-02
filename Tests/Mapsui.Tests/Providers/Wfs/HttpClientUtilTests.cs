@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Mapsui.Providers.Wfs.Utilities;
+﻿using Mapsui.Providers.Wfs.Utilities;
 using NUnit.Framework;
 
 namespace Mapsui.Tests.Providers.Wfs

@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace Mapsui.Desktop.Tests.Utilities
+namespace Mapsui.Tests.Utilities
 {
     public static class AssemblyInfo
     {

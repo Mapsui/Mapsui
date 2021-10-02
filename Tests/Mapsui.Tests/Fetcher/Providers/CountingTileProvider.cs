@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Threading;
 using BruTile;
 
-namespace Mapsui.Tests.Fetcher
+namespace Mapsui.Tests.Fetcher.Providers
 {
     class CountingTileProvider : ITileProvider
     {
