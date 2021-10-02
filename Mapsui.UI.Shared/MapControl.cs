@@ -273,7 +273,7 @@ namespace Mapsui.UI.Wpf
         /// <summary>
         /// Called whenever a property is changed
         /// </summary>
-#if __FORMS__
+#if __FORMS__ || __MAUI__
         public new event PropertyChangedEventHandler PropertyChanged;
 
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = "")
