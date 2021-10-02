@@ -337,7 +337,6 @@ namespace Mapsui.UI.Wpf
         {
             RefreshData(changeType);
             RefreshGraphics();
-            this.InvalidateVisual();
         }
 
         public void RefreshGraphics()

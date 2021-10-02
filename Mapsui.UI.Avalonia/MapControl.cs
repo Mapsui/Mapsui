@@ -67,7 +67,6 @@ namespace Mapsui.UI.Avalonia
                 case nameof(this.Bounds):
                     // size changed
                     MapControlSizeChanged();
-                    RunOnUIThread(() => Refresh()); // orientation changed;
                     break;
             }
         }
