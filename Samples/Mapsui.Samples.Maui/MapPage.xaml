@@ -4,16 +4,21 @@
 			 xmlns:mapsui="clr-namespace:Mapsui.UI.Maui;assembly=Mapsui.UI.Maui"
              x:Class="Mapsui.Samples.Maui.MapPage">
     <ContentPage.Content>
-        <StackLayout>
-          <mapsui:MapView x:Name="mapView"
-            IsVisible="False"
-		    VerticalOptions="FillAndExpand"
-            HorizontalOptions="Fill"
-		    BackgroundColor="Gray" 
-		    Margin="10" />
-          <Label x:Name="info" 
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <mapsui:MapView x:Name="mapView"
+                            Grid.Row ="0"
+                            IsVisible="true"
+                            VerticalOptions="FillAndExpand"
+                            HorizontalOptions="FillAndExpand"
+                            BackgroundColor="Gray" 
+                            Margin="10" />
+          <Label Grid.Row="1"  x:Name="info" 
             HorizontalOptions="CenterAndExpand"
             Text="unknown" />
-        </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
