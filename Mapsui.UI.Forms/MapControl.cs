@@ -178,8 +178,9 @@ namespace Mapsui.UI.Forms
                 // Maui Workaround because the OnSizeChanged Events don't fire.
                 // Maybe this is a Bug and will be fixed in later versions.
                 this.OnSizeChanged(this, new EventArgs());
-                this.RefreshGraphics();
             }
+
+            this.RefreshGraphics();
         }
 #endif
 
