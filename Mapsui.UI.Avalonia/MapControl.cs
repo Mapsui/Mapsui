@@ -78,6 +78,7 @@ namespace Mapsui.UI.Avalonia
             {
                 case nameof(this.Height): 
                 case nameof(this.Width):
+                default:
                     MapControlSizeChanged(sender);
                     RunOnUIThread(() => Refresh()); // orientation changed;
                     break;
@@ -196,12 +197,7 @@ namespace Mapsui.UI.Avalonia
                 context.DrawText(Brushes.Black, new Point(), noSkia.PlatformImpl);
             else
             {
-                canvas.Save();
-                // create the first shader
-
                 CommonDrawControl(canvas);
-
-                canvas.Restore();
             }
         }
 

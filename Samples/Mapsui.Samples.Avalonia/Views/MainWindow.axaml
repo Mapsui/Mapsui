@@ -10,8 +10,16 @@
         Title="Mapsui.UI.Avalonia">
     <Grid Background="White">
         <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Gray">
-            <avalonia:MapControl x:Name="MapControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
-            <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6" MinWidth="140"
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <avalonia:MapControl Grid.Column="1" x:Name="MapControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+            <Border Grid.Row ="0" Grid.Column="0" BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6" MinWidth="140"
                     MinHeight="30" HorizontalAlignment="Left">
                 <RelativePanel VerticalAlignment="Stretch" >
                     <ComboBox x:Name="CategoryComboBox" Margin="0,0, 0, 10">
@@ -24,16 +32,7 @@
                 </RelativePanel>
             </Border>
 
-            <Border BorderBrush="White" Opacity="0.65" Background="White"
-                    BorderThickness="6" HorizontalAlignment="Center" VerticalAlignment="Top">
-            </Border>
-            <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6"
-                    VerticalAlignment="Center" HorizontalAlignment="Right">
-                <TextBlock x:Name="FeatureInfo" TextWrapping="Wrap"/>
-            </Border>
-            <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6" 
-                    VerticalAlignment="Bottom" HorizontalAlignment="Center" MinWidth="40" MinHeight="30">
-            </Border>
+            <TextBlock Grid.Column="0" Grid.Row ="1" Grid.ColumnSpan="2" x:Name="FeatureInfo" TextWrapping="Wrap"/>
         </Grid>
     </Grid>
 </Window>
