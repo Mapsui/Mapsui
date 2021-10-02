@@ -20,25 +20,20 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Avalonia;
-using Avalonia.Collections;
 using Avalonia.Controls;
-using Avalonia.Controls.Shapes;
 using Avalonia.Input;
 using Avalonia.Interactivity;
-using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Platform;
 using Avalonia.Rendering.SceneGraph;
 using Avalonia.Skia;
 using Avalonia.Threading;
 using Mapsui.UI.Uwp;
-using ReactiveUI;
 
 namespace Mapsui.UI.Avalonia
 {
-    public partial class MapControl : Grid, IMapControl, ICustomDrawOperation
+    public partial class MapControl : Control, IMapControl, ICustomDrawOperation
     {
-        private readonly Rectangle _selectRectangle = CreateSelectRectangle();
         private readonly FormattedText noSkia = new FormattedText()
         {
             Text = "Current rendering API is not Skia"
@@ -56,15 +51,13 @@ namespace Mapsui.UI.Avalonia
 
         void Initialize()
         {
-            _invalidate = () => { RunOnUIThread(this.InvalidateVisual); 
-            };
-
-            Background = new SolidColorBrush(Colors.White); // DON'T REMOVE! Touch events do not work without a background
-            Children.Add(_selectRectangle);
+            _invalidate = () => { RunOnUIThread(()=>
+            {
+                this.InvalidateVisual();
+                this.InvalidateMeasure();
+            }); };
 
             this.Initialized += MapControlInitialized;
-
-            this.PropertyChanged += MapControl_PropertyChanged;
 
             this.PointerWheelChanged += MapControl_PointerWheelChanged;
 
@@ -72,14 +65,13 @@ namespace Mapsui.UI.Avalonia
             DoubleTapped += OnDoubleTapped;
         }
 
-        private void MapControl_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        protected override void OnPropertyChanged<T>(AvaloniaPropertyChangedEventArgs<T> change)
         {
-            switch (e.PropertyName)
+            switch (change.Property.Name)
             {
-                case nameof(this.Height): 
-                case nameof(this.Width):
-                default:
-                    MapControlSizeChanged(sender);
+                case nameof(this.Bounds):
+                    // size changed
+                    MapControlSizeChanged();
                     RunOnUIThread(() => Refresh()); // orientation changed;
                     break;
             }
@@ -108,30 +100,10 @@ namespace Mapsui.UI.Avalonia
             OnInfo(InvokeInfo(tapPosition, tapPosition, 1));
         }
 
-        private static Rectangle CreateSelectRectangle()
-        {
-            return new Rectangle
-            {
-                Fill = new SolidColorBrush(Colors.Red),
-                Stroke = new SolidColorBrush(Colors.Black),
-                StrokeThickness = 3,
-                StrokeDashArray = new AvaloniaList<double> { 3.0 },
-                Opacity = 0.3,
-                VerticalAlignment = VerticalAlignment.Top,
-                HorizontalAlignment = HorizontalAlignment.Left,
-                IsVisible = false,
-            };
-        }
-
         public override void Render(DrawingContext context)
         {
             context.Custom(this);
         }
-
-        [Obsolete("Use Viewport.ViewportChanged", true)]
-#pragma warning disable 67
-        public event EventHandler<ViewChangedEventArgs> ViewChanged;
-#pragma warning restore 67
 
         private void MapControl_PointerWheelChanged(object? sender, PointerWheelEventArgs e)
         {
@@ -155,9 +127,8 @@ namespace Mapsui.UI.Avalonia
             SetViewportSize();
         }
 
-        private void MapControlSizeChanged(object sender)
+        private void MapControlSizeChanged()
         {
-            Clip = new RectangleGeometry { Rect = new Rect(0, 0, Width, Height) };
             SetViewportSize();
         }
 
@@ -177,8 +148,8 @@ namespace Mapsui.UI.Avalonia
             }));
         }
 
-        private float ViewportWidth => (float)this.Width;
-        private float ViewportHeight => (float)this.Height;
+        private float ViewportWidth => Convert.ToSingle(Bounds.Width);
+        private float ViewportHeight => Convert.ToSingle(Bounds.Height);
 
         public void Dispose()
         {
@@ -197,7 +168,9 @@ namespace Mapsui.UI.Avalonia
                 context.DrawText(Brushes.Black, new Point(), noSkia.PlatformImpl);
             else
             {
+                canvas.Save();
                 CommonDrawControl(canvas);
+                canvas.Restore();
             }
         }
 

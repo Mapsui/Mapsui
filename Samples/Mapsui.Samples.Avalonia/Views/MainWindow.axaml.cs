@@ -4,7 +4,6 @@ using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using Mapsui.Providers.Wms;
 using Mapsui.Samples.Avalonia;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Helpers;

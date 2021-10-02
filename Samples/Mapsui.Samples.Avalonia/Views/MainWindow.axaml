@@ -9,9 +9,9 @@
         Icon="/Assets/avalonia-logo.ico"
         Title="Mapsui.UI.Avalonia">
     <Grid Background="White">
-        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Gray">
+        <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="White">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="5*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
