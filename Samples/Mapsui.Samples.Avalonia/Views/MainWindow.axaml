@@ -7,19 +7,19 @@
         x:Class="Mapsui.UI.Avalonia.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="Mapsui.UI.Avalonia">
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="White">
         <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Gray">
             <avalonia:MapControl x:Name="MapControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
             <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6" MinWidth="140"
                     MinHeight="30" HorizontalAlignment="Left">
                 <RelativePanel VerticalAlignment="Stretch" >
-                    <ComboBox Name="CategoryComboBox" Margin="0,0, 0, 10">
+                    <ComboBox x:Name="CategoryComboBox" Margin="0,0, 0, 10">
                     </ComboBox>
 
                     <ScrollViewer RelativePanel.Below="CategoryComboBox">
-                        <StackPanel Width="Auto" Name="SampleList"/>
+                        <StackPanel Width="Auto" x:Name="SampleList"/>
                     </ScrollViewer>
-                    <Slider RelativePanel.AlignBottomWithPanel="True" x:Name="RotationSlider" MinWidth="140" ValueChanged="RotationSlider_OnValueChanged" />
+                    <Slider RelativePanel.AlignBottomWithPanel="True" x:Name="RotationSlider" MinWidth="140" />
                 </RelativePanel>
             </Border>
 
@@ -28,7 +28,7 @@
             </Border>
             <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6"
                     VerticalAlignment="Center" HorizontalAlignment="Right">
-                <TextBlock Name="FeatureInfo" TextWrapping="Wrap"/>
+                <TextBlock x:Name="FeatureInfo" TextWrapping="Wrap"/>
             </Border>
             <Border BorderBrush="White" Opacity="0.65" Background="White" BorderThickness="6" 
                     VerticalAlignment="Bottom" HorizontalAlignment="Center" MinWidth="40" MinHeight="30">

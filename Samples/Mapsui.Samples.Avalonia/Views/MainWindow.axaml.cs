@@ -29,14 +29,16 @@ namespace Mapsui.UI.Avalonia.Views
             AvaloniaXamlLoader.Load(this);
 
             // Hack to tell the platform independent samples where the files can be found on Android.
-            MbTilesSample.MbTilesLocation = MbTilesLocationOnUwp;
-            MbTilesHelper.DeployMbTilesFile(s => File.Create(Path.Combine(MbTilesLocationOnUwp, s)));
+            MbTilesSample.MbTilesLocation = MbTilesLocationOnAvalonia;
+            MbTilesHelper.DeployMbTilesFile(s => File.Create(Path.Combine(MbTilesLocationOnAvalonia, s)));
 
             MapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer());
             MapControl.Map.RotationLock = false;
             MapControl.UnSnapRotationDegrees = 30;
             MapControl.ReSnapRotationDegrees = 5;
             MapControl.Renderer.WidgetRenders[typeof(Samples.CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
+
+            this.RotationSlider.PropertyChanged += RotationSlider_PropertyChanged;
 
             CategoryComboBox.SelectionChanged += CategoryComboBoxSelectionChanged;
 
@@ -104,13 +106,16 @@ namespace Mapsui.UI.Avalonia.Views
             return radioButton;
         }
 
-        private static string MbTilesLocationOnUwp => ApplicationData.Current.LocalFolder.Path;
+        private static string MbTilesLocationOnAvalonia => Environment.GetFolderPath(Environment.SpecialFolder.Personal);
 
-        private void RotationSlider_OnValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        private void RotationSlider_PropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
         {
-            var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
-            MapControl.Navigator.RotateTo(percent * 360);
-            MapControl.Refresh();
+            if (e.Property.Name == nameof(this.RotationSlider.Name))
+            {
+                var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
+                MapControl.Navigator.RotateTo(percent * 360);
+                MapControl.Refresh();
+            }
         }
     }
 }
