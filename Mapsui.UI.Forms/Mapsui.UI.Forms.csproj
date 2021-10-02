@@ -13,8 +13,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SkiaSharp" Version="2.88.0-preview.145" />
-    <PackageReference Include="SkiaSharp.Views.Forms" Version="2.88.0-preview.145" />
+    <PackageReference Include="SkiaSharp" Version="2.88.0-preview.140" />
+    <PackageReference Include="SkiaSharp.Views.Forms" Version="2.88.0-preview.140" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2083" />
   </ItemGroup>
 
