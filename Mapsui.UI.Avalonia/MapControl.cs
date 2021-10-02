@@ -51,11 +51,7 @@ namespace Mapsui.UI.Avalonia
 
         void Initialize()
         {
-            _invalidate = () => { RunOnUIThread(()=>
-            {
-                this.InvalidateVisual();
-                this.InvalidateMeasure();
-            }); };
+            _invalidate = () => { RunOnUIThread(this.InvalidateVisual); };
 
             this.Initialized += MapControlInitialized;
 
