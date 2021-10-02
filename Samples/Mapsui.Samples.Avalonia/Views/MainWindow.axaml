@@ -3,6 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:avalonia="clr-namespace:Mapsui.UI.Avalonia;assembly=Mapsui.UI.Avalonia"
+        xmlns:sys="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Mapsui.UI.Avalonia.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
@@ -17,7 +18,7 @@
                     </ComboBox>
 
                     <ScrollViewer RelativePanel.Below="CategoryComboBox">
-                        <StackPanel Width="Auto" x:Name="SampleList"/>
+                        <StackPanel Width="{x:Static sys:Double.NaN}" x:Name="SampleList"/>
                     </ScrollViewer>
                     <Slider RelativePanel.AlignBottomWithPanel="True" x:Name="RotationSlider" MinWidth="140" />
                 </RelativePanel>
