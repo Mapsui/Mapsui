@@ -192,7 +192,7 @@ namespace Mapsui.UI.Forms
 
         private async void OnTouch(object sender, SKTouchEventArgs e)
         {
-            // Save time, when the event occures
+            // Save time, when the event occurs
             long ticks = DateTime.Now.Ticks;
 
             var location = GetScreenPosition(e.Location);
