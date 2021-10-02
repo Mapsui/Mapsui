@@ -7,7 +7,7 @@
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="5*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -19,8 +19,7 @@
             <ListView x:Name="listView"
                 Grid.Row ="1" Grid.Column="0"
                 VerticalOptions="FillAndExpand" 
-                HorizontalOptions="Start"
-                WidthRequest="200"
+                HorizontalOptions="FillAndExpand"
                 Margin="10"
                 ItemSelected="OnSelection"/>
             <Label x:Name="featureInfo"
