@@ -13,4 +13,5 @@ nuget pack NuSpec\Mapsui.Forms.nuspec -Version %VERSION% -outputdirectory Artifa
 nuget pack NuSpec\Mapsui.Wpf.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1
 nuget pack NuSpec\Mapsui.iOS.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1
 nuget pack NuSpec\Mapsui.Android.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1
+nuget pack NuSpec\Mapsui.Uno.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1
 nuget pack NuSpec\Mapsui.Uwp.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1
