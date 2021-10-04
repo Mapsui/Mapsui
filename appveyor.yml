@@ -18,7 +18,7 @@ environment:
 nuget:
   disable_publish_on_pr: true
 install:
-- cmd: sdkmanager "platform-tools" "platforms;android-30"
+- C:\android-sdk-windows\tools\bin\sdkmanager.bat "platforms;android-30"
 before_build:
 - cmd: nuget restore mapsui.sln
 build:
