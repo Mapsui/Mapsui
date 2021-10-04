@@ -815,19 +815,19 @@ namespace Mapsui.UI.Forms
 
         private void CreateButtons()
         {
-            _mapZoomInButton = CreateButton(0, 0, _pictZoomIn, (s, e) => { Navigator.ZoomIn(); e.Handled = true; });
+            _mapZoomInButton = _mapZoomInButton ?? CreateButton(0, 0, _pictZoomIn, (s, e) => { Navigator.ZoomIn(); e.Handled = true; });
             _mapZoomInButton.Enabled = IsZoomButtonVisible;
             Map.Widgets.Add(_mapZoomInButton);
 
-            _mapZoomOutButton = CreateButton(0, 40, _pictZoomOut, (s, e) => { Navigator.ZoomOut(); e.Handled = true; });
+            _mapZoomOutButton = _mapZoomOutButton ?? CreateButton(0, 40, _pictZoomOut, (s, e) => { Navigator.ZoomOut(); e.Handled = true; });
             _mapZoomOutButton.Enabled = IsZoomButtonVisible;
             Map.Widgets.Add(_mapZoomOutButton);
 
-            _mapMyLocationButton = CreateButton(0, 88, _pictMyLocationNoCenter, (s, e) => { MyLocationFollow = true; e.Handled = true; });
+            _mapMyLocationButton = _mapMyLocationButton ?? CreateButton(0, 88, _pictMyLocationNoCenter, (s, e) => { MyLocationFollow = true; e.Handled = true; });
             _mapMyLocationButton.Enabled = IsMyLocationButtonVisible;
             Map.Widgets.Add(_mapMyLocationButton);
 
-            _mapNorthingButton = CreateButton(0, 136, _pictNorthing, (s, e) => { RunOnUIThread(() => Navigator.RotateTo(0)); e.Handled = true; });
+            _mapNorthingButton = _mapNorthingButton ?? CreateButton(0, 136, _pictNorthing, (s, e) => { RunOnUIThread(() => Navigator.RotateTo(0)); e.Handled = true; });
             _mapNorthingButton.Enabled = IsNorthingButtonVisible;
             Map.Widgets.Add(_mapNorthingButton);
 
