@@ -17,6 +17,9 @@ environment:
   version-short: 3.0.0
 nuget:
   disable_publish_on_pr: true
+install:
+- cmd: dotnet tool install -g Redth.Net.Maui.Check
+- cmd: maui-check --fix --non-interactive --skip vswin --skip edgewebview2 --skip androidemulator --skip dotnet --skip openjdk --skip vsmac --skip xcode
 before_build:
 - cmd: nuget restore mapsui.sln
 build:
