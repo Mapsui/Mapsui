@@ -11,6 +11,7 @@ using Mapsui.Samples.Wpf.Utilities;
 using Mapsui.UI;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Desktop;
+using Mapsui.Samples.Common.ExtensionMethods;
 
 namespace Mapsui.Samples.Wpf
 {
