@@ -50,7 +50,7 @@ namespace Mapsui.UI.Forms
         /// </summary>
         private const int touchSlop = 8;
 
-        private bool _initialized = false;
+        protected bool _initialized = false;
         private double _innerRotation;
         private ConcurrentDictionary<long, TouchEvent> _touches = new ConcurrentDictionary<long, TouchEvent>();
         private Geometries.Point _firstTouch;
