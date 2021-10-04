@@ -768,7 +768,7 @@ namespace Mapsui.UI.Forms
             Device.OpenUri(new Uri(url));
         }
 
-        private void RunOnUIThread(Action action)
+        protected void RunOnUIThread(Action action)
         {
             Device.BeginInvokeOnMainThread(action);
         }

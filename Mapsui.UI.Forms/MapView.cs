@@ -73,7 +73,7 @@ namespace Mapsui.UI.Forms
 
             TouchMove += (s, e) =>
             {
-                Device.BeginInvokeOnMainThread(() => MyLocationFollow = false);
+                RunOnUIThread(() => MyLocationFollow = false);
             };
 
             // Add MapView layers to Map
@@ -827,7 +827,7 @@ namespace Mapsui.UI.Forms
             _mapMyLocationButton.Enabled = IsMyLocationButtonVisible;
             Map.Widgets.Add(_mapMyLocationButton);
 
-            _mapNorthingButton = CreateButton(0, 136, _pictNorthing, (s, e) => { Device.BeginInvokeOnMainThread(() => Navigator.RotateTo(0)); e.Handled = true; });
+            _mapNorthingButton = CreateButton(0, 136, _pictNorthing, (s, e) => { RunOnUIThread(() => Navigator.RotateTo(0)); e.Handled = true; });
             _mapNorthingButton.Enabled = IsNorthingButtonVisible;
             Map.Widgets.Add(_mapNorthingButton);
 
