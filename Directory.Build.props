@@ -17,7 +17,7 @@
     <LangVersion>9.0</LangVersion>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(OS)' == 'Unix'">
     <!--Specify Compiler for Mac Builds-->
     <PackageReference Include="Microsoft.Net.Compilers.Toolset" Version="*">
       <PrivateAssets>all</PrivateAssets>
