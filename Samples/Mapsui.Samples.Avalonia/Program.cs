@@ -1,6 +1,5 @@
 ﻿using Avalonia;
 using Avalonia.ReactiveUI;
-using Mapsui.UI.Avalonia;
 
 namespace Mapsui.Samples.Avalonia
 {
