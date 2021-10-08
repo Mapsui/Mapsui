@@ -177,6 +177,7 @@ namespace Mapsui
         /// <param name="centerOfZoom">Center of zoom. This is the one point in the map that stays on the same location while zooming in.
         /// For instance, in mouse wheel zoom animation the position of the mouse pointer can be the center of zoom.</param>
         /// <param name="duration">Duration for animation in milliseconds. If less then 0, then <see cref="DefaultDuration"/> is used.</param>
+        /// <param name="easing">The easing of the animation when duration is > 0</param>
         public void ZoomTo(double resolution, Point centerOfZoom, long duration = -1, Easing easing = default)
         {
             // todo: Perhaps centerOfZoom should be passed in in world coordinates. 
@@ -190,9 +191,10 @@ namespace Mapsui
 
             if (duration == 0)
             {
-                _viewport.SetResolution(resolution);
+                // The order matters because SetCenter depends on the current resolution
                 _viewport.SetCenter(CalculateCenterOfMap(centerOfZoom, resolution));
-                
+                _viewport.SetResolution(resolution);
+
                 Navigated?.Invoke(this, ChangeType.Discrete);
             }
             else
@@ -230,7 +232,7 @@ namespace Mapsui
 
         /// <summary>
         /// Calculates the new CenterOfMap based on the CenterOfZoom and the new resolution.
-        /// The CenterOfzoom is not the same as the CenterOfmap. CenterOfZoom is the one place in
+        /// The CenterOfZoom is not the same as the CenterOfMap. CenterOfZoom is the one place in
         /// the map that stays on the same location when zooming. In Mapsui is can be equal to the 
         /// CenterOfMap, for instance when using the +/- buttons. When using mouse wheel zoom the
         /// CenterOfZoom is the location of the mouse. 
@@ -360,9 +362,6 @@ namespace Mapsui
             StopRunningAnimation();
 
             duration = duration < 0 ? _defaultDuration : duration;
-
-            var halfCenter = new Point(_viewport.Center.X + (center.X - _viewport.Center.X) / 2.0, _viewport.Center.Y + (center.Y - _viewport.Center.Y) / 2.0);
-            var resolution = _viewport.Resolution;
 
             if (duration == 0)
             {
