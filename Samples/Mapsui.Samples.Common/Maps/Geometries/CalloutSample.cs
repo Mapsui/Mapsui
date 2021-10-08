@@ -76,7 +76,7 @@ namespace Mapsui.Samples.Common.Maps
 
         private static IStyle CreateCalloutStyle(int bitmapId)
         {
-            var calloutStyle = new CalloutStyle() { Content = bitmapId, ArrowPosition = Random.Next(1, 9) * 0.1f, RotateWithMap = true };
+            var calloutStyle = new CalloutStyle() { Content = bitmapId, ArrowPosition = Random.Next(1, 9) * 0.1f, RotateWithMap = true, Type = CalloutType.Custom };
             switch (Random.Next(0, 4))
             {
                 case 0:
