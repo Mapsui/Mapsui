@@ -18,22 +18,21 @@ namespace Mapsui.Samples.Common
 
             try
             {
-            return assemblies
-                .SelectMany(s => s.GetTypes())
-                .Where(p => type.IsAssignableFrom(p) && !p.IsInterface)
-                .Select(Activator.CreateInstance).Select(t => t as ISample)
-                .OrderBy(s => s?.Name)
-                .ThenBy(s => s?.Category)
-                .ToList();
+                return assemblies
+                    .SelectMany(s => s.GetTypes())
+                    .Where(p => type.IsAssignableFrom(p) && !p.IsInterface)
+                    .Select(Activator.CreateInstance).Select(t => t as ISample)
+                    .OrderBy(s => s?.Name)
+                    .ThenBy(s => s?.Category)
+                    .ToList();
             }
             catch (ReflectionTypeLoadException ex)
             {
-                StringBuilder sb = new StringBuilder();
-                foreach (Exception exSub in ex.LoaderExceptions)
+                var sb = new StringBuilder();
+                foreach (var exSub in ex.LoaderExceptions)
                 {
                     sb.AppendLine(exSub.Message);
-                    FileNotFoundException exFileNotFound = exSub as FileNotFoundException;
-                    if (exFileNotFound != null)
+                    if (exSub is FileNotFoundException exFileNotFound)
                     {
                         if (!string.IsNullOrEmpty(exFileNotFound.FusionLog))
                         {
@@ -43,8 +42,7 @@ namespace Mapsui.Samples.Common
                     }
                     sb.AppendLine();
                 }
-                string errorMessage = sb.ToString();
-                Logger.Log(LogLevel.Error, errorMessage, ex);
+                Logger.Log(LogLevel.Error, sb.ToString(), ex);
             }
 
             return null;
