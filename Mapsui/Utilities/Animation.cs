@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Timers;
 
 namespace Mapsui.Utilities
@@ -110,8 +111,14 @@ namespace Mapsui.Utilities
                 return;
             }
 
+            List<AnimationEntry> copyOfEntries;
+            lock (_syncObject)
+            {
+                copyOfEntries = _entries.ToList();
+            }
+
             // Calc new values
-            foreach (var entry in _entries)
+            foreach (var entry in copyOfEntries)
             {
                 if (value >= entry.AnimationStart && value <= entry.AnimationEnd)
                     entry.Tick(value);
