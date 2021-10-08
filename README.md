@@ -1,5 +1,3 @@
-[<p align="left"><img src="logo/png/icon.png" alt="Mapsui" height="180px"></p>](https://mapsui.com).
-
 ## Nugets
 
 | package | version  |
@@ -82,3 +80,5 @@ We are delighted with our first gold sponsor Sebastian Kruse, who has also contr
 ## License
 
 [LGPL](https://raw.githubusercontent.com/mapsui/Mapsui/master/LICENSE.md)
+
+[<p align="left"><img src="logo/png/icon.png" alt="Mapsui" height="180px"></p>](https://mapsui.com).
