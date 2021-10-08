@@ -1,13 +1,13 @@
 ## Nugets
 
-| package | version  |
-| ---------------|:-------------:|
-| Mapsui         | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.svg?style=flat)](https://www.nuget.org/packages/Mapsui/) |
-| Mapsui.Forms   | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Forms.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Forms/) |
-| Mapsui.Wpf     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Wpf.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Wpf/) |
-| Mapsui.Uwp     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Uwp.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Uwp/) |
-| Mapsui.Android | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Android.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Android/) |
-| Mapsui.iOS     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.iOS.svg?style=flat)](https://www.nuget.org/packages/Mapsui.iOS/) |
+| package | version  | downloads |
+| ---------------|:-------------:|:-------------:|
+| Mapsui         | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.svg?style=flat)](https://www.nuget.org/packages/Mapsui/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.svg)](https://www.nuget.org/packages/Mapsui) |
+| Mapsui.Forms   | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Forms.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Forms/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.Forms.svg)](https://www.nuget.org/packages/Mapsui.Forms) |
+| Mapsui.Wpf     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Wpf.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Wpf/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Wpf.svg)](https://www.nuget.org/packages/Mapsui.Wpf) |
+| Mapsui.Uwp     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Uwp.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Uwp/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Uwp.svg)](https://www.nuget.org/packages/Mapsui.Uwp) |
+| Mapsui.Android | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Android.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Android/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Android.svg)](https://www.nuget.org/packages/Mapsui.Android) |
+| Mapsui.iOS     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.iOS.svg?style=flat)](https://www.nuget.org/packages/Mapsui.iOS/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.iOS.svg)](https://www.nuget.org/packages/Mapsui.iOS) |
 
 ## Build Status
 | platform | status |
