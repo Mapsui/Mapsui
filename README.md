@@ -1,3 +1,15 @@
+## News
+
+- 2021 October 1: Released Mapsui 3.0.0 https://github.com/Mapsui/Mapsui/releases/tag/3.0.0
+
+## Mapsui (pronounced map-su-wii)
+
+Mapsui is a C# map component for apps
+
+- Supported platforms: Xamarin.Forms (including Android, iOS, MacOS, UWP and WPF), WPF, UWP, Xamarin.Android, Xamarin.iOS. 
+- The Mapsui core assemblies are .NET Standard 2.0
+- Designed to be fast and responsive
+
 ## Nugets
 
 | package | version  | downloads |
@@ -14,18 +26,6 @@
 | ------------- |:-------------:|
 | Build on Windows    | [![Build status](https://ci.appveyor.com/api/projects/status/p20w43qv4ixkkftp?svg=true)](https://ci.appveyor.com/project/pauldendulk/mapsui) |
 | Build docs | [![Build status](https://ci.appveyor.com/api/projects/status/c8hcfeoafmf51gin/branch/master?svg=true)](https://ci.appveyor.com/project/pauldendulk/mapsui-373p1/branch/master) |
-
-## News
-
-- 2021 October 1: Released Mapsui 3.0.0 https://github.com/Mapsui/Mapsui/releases/tag/3.0.0
-
-## Mapsui (pronounced map-su-wii)
-
-Mapsui is a C# map component for apps
-
-- Supported platforms: Xamarin.Forms (including Android, iOS, MacOS, UWP and WPF), WPF, UWP, Xamarin.Android, Xamarin.iOS. 
-- The Mapsui core assemblies are .NET Standard 2.0
-- Designed to be fast and responsive
 
 ## Quickstart
 Quickly get a sample running 
