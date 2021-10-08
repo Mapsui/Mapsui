@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using Mapsui.Logging;
 
 namespace Mapsui.Samples.Common
 {
@@ -43,7 +44,7 @@ namespace Mapsui.Samples.Common
                     sb.AppendLine();
                 }
                 string errorMessage = sb.ToString();
-                //Display or log the error based on your application.
+                Logger.Log(LogLevel.Error, errorMessage, ex);
             }
 
             return null;
