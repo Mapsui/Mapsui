@@ -23,12 +23,7 @@
 
 Mapsui is a C# map component for apps
 
-- Supported platforms:
-  - Xamarin.Forms (including Android, iOS, MacOS, UWP and WPF)
-  - WPF
-  - UWP
-  - Xamarin.Android
-  - Xamarin.iOS
+- Supported platforms: Xamarin.Forms (including Android, iOS, MacOS, UWP and WPF), WPF, UWP, Xamarin.Android, Xamarin.iOS. 
 - The Mapsui core assemblies are .NET Standard 2.0
 - Designed to be fast and responsive
 
