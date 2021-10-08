@@ -1,9 +1,9 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using Mapsui.UI.Avalonia.Views;
+using Mapsui.Samples.Avalonia.Views;
 
-namespace Mapsui.UI.Avalonia
+namespace Mapsui.Samples.Avalonia
 {
     public class App : Application
     {

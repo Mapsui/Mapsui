@@ -3,15 +3,18 @@ using System.IO;
 using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Markup.Xaml;
-using Mapsui.Samples.Avalonia;
+using Mapsui.Samples.Avalonia.ExtensionMethods;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.CustomWidget;
+using Mapsui.UI;
+using Mapsui.UI.Avalonia;
 using Mapsui.Utilities;
 
-namespace Mapsui.UI.Avalonia.Views
+namespace Mapsui.Samples.Avalonia.Views
 {
     public partial class MainWindow : Window
     {
@@ -37,14 +40,14 @@ namespace Mapsui.UI.Avalonia.Views
             MapControl.ReSnapRotationDegrees = 5;
             MapControl.Renderer.WidgetRenders[typeof(Samples.CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
 
-            this.RotationSlider.PropertyChanged += RotationSlider_PropertyChanged;
+            RotationSlider.PointerMoved += RotationSliderOnPointerMoved;
 
             CategoryComboBox.SelectionChanged += CategoryComboBoxSelectionChanged;
 
             FillComboBoxWithCategories();
             FillListWithSamples();
         }
-
+        
         private MapControl MapControl => this.FindControl<MapControl>("MapControl");
         private ComboBox CategoryComboBox => this.FindControl<ComboBox>("CategoryComboBox");
         private TextBlock FeatureInfo => this.FindControl<TextBlock>("FeatureInfo");
@@ -54,12 +57,10 @@ namespace Mapsui.UI.Avalonia.Views
 
         private void FillComboBoxWithCategories()
         {
-            var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c);
-            ////foreach (var category in categories)
-            ////{
-            ////    CategoryComboBox.Items?.Add(category);
-            ////}
+            Tests.Common.Utilities.LoadAssembly();
 
+            var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c);
+ 
             CategoryComboBox.Items = categories;
 
             CategoryComboBox.SelectedIndex = 1;
@@ -107,14 +108,13 @@ namespace Mapsui.UI.Avalonia.Views
 
         private static string MbTilesLocationOnAvalonia => Environment.GetFolderPath(Environment.SpecialFolder.Personal);
 
-        private void RotationSlider_PropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
+        private void RotationSliderOnPointerMoved(object? sender, PointerEventArgs e)
         {
-            if (e.Property.Name == nameof(this.RotationSlider.Name))
-            {
-                var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
-                MapControl.Navigator.RotateTo(percent * 360);
-                MapControl.Refresh();
-            }
+            // This is probably not the proper event handler for this but I don't know what is.
+            var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
+            MapControl.Navigator.RotateTo(percent * 360);
+            MapControl.Refresh();
         }
+
     }
 }
