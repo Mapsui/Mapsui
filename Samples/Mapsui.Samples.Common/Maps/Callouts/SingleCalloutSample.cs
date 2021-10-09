@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using Mapsui.Layers;
-using Mapsui.Logging;
 using Mapsui.Projection;
 using Mapsui.Providers;
 using Mapsui.Rendering.Skia;
 using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Utilities;
-using Mapsui.Widgets;
 using Newtonsoft.Json;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Local
@@ -88,23 +84,14 @@ namespace Mapsui.Samples.Common.Maps.Callouts
             return new CalloutStyle
             {
                 Title = name,
-                Type = CalloutType.Single,
-                Content = -1,
                 TitleFont = { FontFamily = null, Size = 12, Italic = false, Bold = true },
                 TitleFontColor = Color.Gray,
-                TitleTextAlignment = Alignment.Center,
-                Spacing = 2,
-                MaxWidth = 111,
+                MaxWidth = 120,
                 RectRadius = 10,
                 ShadowWidth = 4,
-                StrokeWidth = 0,
-                ArrowAlignment = ArrowAlignment.Bottom,
-                Offset = new Offset(SymbolStyle.DefaultHeight * 0.5f, 0),
-                RotateWithMap = true,
-                ArrowPosition = 1,
-                Enabled = true,
-                SymbolOffset = new Offset(-SymbolStyle.DefaultHeight * 0.5f, 0)
-        };
+                Enabled = false,
+                SymbolOffset = new Offset(0, SymbolStyle.DefaultHeight * 0.3f)
+            };
         }
         private class City
         {
