@@ -14,15 +14,16 @@ using Newtonsoft.Json;
 using SkiaSharp;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Local
+// ReSharper disable once ClassNeverInstantiated.Local
 
-namespace Mapsui.Samples.Common.Maps
+namespace Mapsui.Samples.Common.Maps.Callouts
 {
     public class CalloutSample : ISample
     {
-        private static Random Random = new Random();
+        private static readonly Random Random = new Random();
 
-        public string Name => "1 Callout";
-        public string Category => "Geometries";
+        public string Name => "1 Custom Callout";
+        public string Category => "Callouts";
 
         public void Setup(IMapControl mapControl)
         {
@@ -46,13 +47,13 @@ namespace Mapsui.Samples.Common.Maps
                 Name = "Points",
                 IsMapInfoLayer = true,
                 DataSource = new MemoryProvider(GetCitiesFromEmbeddedResource()),
-                Style = new VectorStyle() { }
+                Style = new VectorStyle()
             };
         }
 
         private static IEnumerable<IFeature> GetCitiesFromEmbeddedResource()
         {
-            var path = "Mapsui.Samples.Common.EmbeddedResources.congo.json";
+            const string path = "Mapsui.Samples.Common.EmbeddedResources.congo.json";
             var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
             var stream = assembly.GetManifestResourceStream(path);
             var cities = DeserializeFromStream<City>(stream);
@@ -76,7 +77,7 @@ namespace Mapsui.Samples.Common.Maps
 
         private static IStyle CreateCalloutStyle(int bitmapId)
         {
-            var calloutStyle = new CalloutStyle() { Content = bitmapId, ArrowPosition = Random.Next(1, 9) * 0.1f, RotateWithMap = true, Type = CalloutType.Custom };
+            var calloutStyle = new CalloutStyle { Content = bitmapId, ArrowPosition = Random.Next(1, 9) * 0.1f, RotateWithMap = true, Type = CalloutType.Custom };
             switch (Random.Next(0, 4))
             {
                 case 0:
@@ -104,30 +105,32 @@ namespace Mapsui.Samples.Common.Maps
 
         private static MemoryStream CreateCallbackImage(City city)
         {
-            SKRect bounds;
-            using (SKPaint paint = new SKPaint())
+            using var paint = new SKPaint
             {
-                paint.Color = new SKColor((byte)Random.Next(0, 256), (byte)Random.Next(0, 256), (byte)Random.Next(0, 256));
-                paint.Typeface = SKTypeface.FromFamilyName(null, SKFontStyleWeight.Bold, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright);
-                paint.TextSize = 20;
+                Color = new SKColor((byte) Random.Next(0, 256), (byte) Random.Next(0, 256), (byte) Random.Next(0, 256)),
+                Typeface = SKTypeface.FromFamilyName(null, SKFontStyleWeight.Bold, SKFontStyleWidth.Normal,
+                    SKFontStyleSlant.Upright),
+                TextSize = 20
+            };
 
-                using (SKPath textPath = paint.GetTextPath(city.Name, 0, 0))
+            SKRect bounds;
+            using (var textPath = paint.GetTextPath(city.Name, 0, 0))
+            {
+                // Set transform to center and enlarge clip path to window height
+                textPath.GetTightBounds(out bounds);
+            }
+
+            using (var bitmap = new SKBitmap((int)(bounds.Width + 1), (int)(bounds.Height + 1)))
+            using (var canvas = new SKCanvas(bitmap))
+            {
+                canvas.Clear();
+                canvas.DrawText(city.Name, -bounds.Left, -bounds.Top, paint);
+                var memStream = new MemoryStream();
+                using (var wStream = new SKManagedWStream(memStream))
                 {
-                    // Set transform to center and enlarge clip path to window height
-                    textPath.GetTightBounds(out bounds);
+                    bitmap.Encode(wStream, SKEncodedImageFormat.Png, 100);
                 }
-                using (var bitmap = new SKBitmap((int)(bounds.Width + 1), (int)(bounds.Height + 1)))
-                using (var canvas = new SKCanvas(bitmap))
-                {
-                    canvas.Clear();
-                    canvas.DrawText(city.Name, -bounds.Left, -bounds.Top, paint);
-                    var memStream = new MemoryStream();
-                    using (var wstream = new SKManagedWStream(memStream))
-                    {
-                        bitmap.Encode(wstream, SKEncodedImageFormat.Png, 100);
-                    }
-                    return memStream;
-                }
+                return memStream;
             }
         }
 
@@ -142,12 +145,9 @@ namespace Mapsui.Samples.Common.Maps
         public static IEnumerable<T> DeserializeFromStream<T>(Stream stream)
         {
             var serializer = new JsonSerializer();
-
-            using (var sr = new StreamReader(stream))
-            using (var jsonTextReader = new JsonTextReader(sr))
-            {
-                return serializer.Deserialize<List<T>>(jsonTextReader);
-            }
+            using var sr = new StreamReader(stream);
+            using var jsonTextReader = new JsonTextReader(sr);
+            return serializer.Deserialize<List<T>>(jsonTextReader);
         }
     }
 }
