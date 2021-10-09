@@ -18,7 +18,7 @@ namespace Mapsui.Samples.Common.Maps.Callouts
 {
     public class SingleCalloutSample : ISample
     {
-        public string Name => "1 Simple Callout";
+        public string Name => "1 Single Callout";
         public string Category => "Info";
 
         public void Setup(IMapControl mapControl)
