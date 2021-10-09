@@ -273,7 +273,8 @@ namespace Mapsui.UI.Wpf
         public event EventHandler ViewportInitialized; //todo: Consider to use the Viewport PropertyChanged
 
         /// <summary>
-        /// Called whenever a feature in one of the layers in InfoLayers is hidden by a click 
+        /// Called whenever the map is clicked. The MapInfoEventArgs contain the features that were hit in
+        /// the layers that have IsMapInfoLayer set to true. 
         /// </summary>
         public event EventHandler<MapInfoEventArgs> Info;
 
@@ -483,6 +484,7 @@ namespace Mapsui.UI.Wpf
         {
             if (mapInfoEventArgs == null) return;
 
+            Map?.OnInfo(mapInfoEventArgs); // Also propagate to Map
             Info?.Invoke(this, mapInfoEventArgs);
         }
 
