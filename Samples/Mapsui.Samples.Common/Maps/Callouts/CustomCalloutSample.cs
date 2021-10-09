@@ -18,12 +18,12 @@ using SkiaSharp;
 
 namespace Mapsui.Samples.Common.Maps.Callouts
 {
-    public class CalloutSample : ISample
+    public class CustomCalloutSample : ISample
     {
         private static readonly Random Random = new Random();
 
-        public string Name => "1 Custom Callout";
-        public string Category => "Callouts";
+        public string Name => "2 Custom Callout";
+        public string Category => "Info";
 
         public void Setup(IMapControl mapControl)
         {
