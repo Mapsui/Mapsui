@@ -7,7 +7,7 @@ namespace Mapsui.Fetcher
     class FetchWorker
     {
         private readonly IFetchDispatcher _fetchDispatcher;
-        private volatile bool _busy;
+        private CancellationTokenSource _fetchLoopCancellationTokenSource;
         public static long RestartCounter;
 
         public FetchWorker(IFetchDispatcher fetchDispatcher)
@@ -17,28 +17,33 @@ namespace Mapsui.Fetcher
 
         public void Start()
         {
-            _busy = true;
-            Interlocked.Increment(ref RestartCounter);
-            Task.Run(Fetch);
+            if (_fetchLoopCancellationTokenSource == null || _fetchLoopCancellationTokenSource.IsCancellationRequested)
+            {
+                Interlocked.Increment(ref RestartCounter);
+                _fetchLoopCancellationTokenSource = new CancellationTokenSource();
+                Task.Run(() => Fetch(_fetchLoopCancellationTokenSource));
+            }
         }
 
         public void Stop()
         {
-            _busy = false;
+            _fetchLoopCancellationTokenSource?.Cancel();
+            _fetchLoopCancellationTokenSource = null;
         }
 
-        private void Fetch()
+        private void Fetch(CancellationTokenSource cancellationTokenSource)
         {
-            Action method = null;
-            while (_busy)
+            while (cancellationTokenSource != null && !cancellationTokenSource.Token.IsCancellationRequested)
             {
+                Action method = null;
+
                 if (_fetchDispatcher.TryTake(ref method))
                 {
                     method();
                 }
                 else
                 {
-                    _busy = false;
+                    cancellationTokenSource.Cancel();
                 }
             }
         }
