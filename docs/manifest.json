@@ -18,7 +18,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Android.MapControl.html",
-          "hash": "9yLWble5kiaQp95gy5Dijg=="
+          "hash": "/7A0wvy9xt8lonv//A6KmA=="
         }
       },
       "is_incremental": false,
@@ -246,7 +246,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.MapControl.html",
-          "hash": "SPQ4LtrSHKT8yZlPAx/b6A=="
+          "hash": "sxH6MM+TTkMuTFFFSvOkPw=="
         }
       },
       "is_incremental": false,
@@ -282,7 +282,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.MapView.html",
-          "hash": "pKahrdFquaDtCacFa1WvWA=="
+          "hash": "frO4o86aOJ10zB0Oo7SIKQ=="
         }
       },
       "is_incremental": false,
@@ -558,7 +558,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Wpf.MapControl.html",
-          "hash": "B7EZDfwaEYXEZdbOjqwq9g=="
+          "hash": "JjkPncAPGrVfq+ndJLfANw=="
         }
       },
       "is_incremental": false,
@@ -654,7 +654,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.iOS.MapControl.html",
-          "hash": "Gp3+tkUeiydJkDNkZ/iWtw=="
+          "hash": "cSiO91S7WiJdM3gDxsDQsA=="
         }
       },
       "is_incremental": false,
@@ -835,6 +835,18 @@
         ".html": {
           "relative_path": "documentation/getting-started-uwp.html",
           "hash": "HV/CinDMPxRK0JQAPvcnxA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/getting-started-winui.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/getting-started-winui.html",
+          "hash": "2z4jpnH6P2eQWYfUqYriTA=="
         }
       },
       "is_incremental": false,
@@ -1157,9 +1169,9 @@
         "full_build_reason_code": "NoAvailableBuildCache"
       },
       "processors": {
-        "TocDocumentProcessor": {
+        "ResourceDocumentProcessor": {
           "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
           "total_file_count": 0,
           "skipped_file_count": 0
@@ -1167,12 +1179,12 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 27,
+          "total_file_count": 28,
           "skipped_file_count": 0
         },
-        "ResourceDocumentProcessor": {
+        "TocDocumentProcessor": {
           "can_incremental": false,
-          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
           "total_file_count": 0,
           "skipped_file_count": 0
