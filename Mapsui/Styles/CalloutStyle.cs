@@ -46,6 +46,18 @@ namespace Mapsui.Rendering.Skia
         Right,
     }
 
+    /// <summary>
+    /// A CalloutStyle shows a callout or InfoWindow in Google Maps
+    /// </summary>
+    /// <remarks>
+    /// There are three different types of Callouts
+    /// 1. Type = CalloutType.Single
+    ///    The text in Title will be shown
+    /// 2. Type = CalloutType.Detail
+    ///    The text in Title and SubTitle will be shown
+    /// 3. Type = CalloutType.Custom
+    ///    The bitmap with ID in Content will be shown
+    /// </remarks>
     public class CalloutStyle : SymbolStyle
     {
         private CalloutType _type = CalloutType.Single;
@@ -83,7 +95,7 @@ namespace Mapsui.Rendering.Skia
         /// Type of Callout
         /// </summary>
         /// <remarks>
-        /// Could be single, detail or custom. The last is a bitmap id for an owner drawn image.
+        /// Could be Single, Detail or Custom. The last need a bitmap id in Content for an owner drawn image.
         /// </remarks>
         public CalloutType Type
         {
