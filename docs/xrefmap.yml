@@ -1867,6 +1867,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapControl.MapControl
   nameWithType: MapControl.MapControl
+- uid: Mapsui.UI.Forms.MapControl._initialized
+  name: _initialized
+  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl__initialized
+  commentId: F:Mapsui.UI.Forms.MapControl._initialized
+  fullName: Mapsui.UI.Forms.MapControl._initialized
+  nameWithType: MapControl._initialized
 - uid: Mapsui.UI.Forms.MapControl.CallHomeIfNeeded
   name: CallHomeIfNeeded()
   href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_CallHomeIfNeeded
@@ -2133,6 +2139,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapControl.ReSnapRotationDegrees
   nameWithType: MapControl.ReSnapRotationDegrees
+- uid: Mapsui.UI.Forms.MapControl.RunOnUIThread(System.Action)
+  name: RunOnUIThread(Action)
+  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_RunOnUIThread_System_Action_
+  commentId: M:Mapsui.UI.Forms.MapControl.RunOnUIThread(System.Action)
+  fullName: Mapsui.UI.Forms.MapControl.RunOnUIThread(System.Action)
+  nameWithType: MapControl.RunOnUIThread(Action)
+- uid: Mapsui.UI.Forms.MapControl.RunOnUIThread*
+  name: RunOnUIThread
+  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_RunOnUIThread_
+  commentId: Overload:Mapsui.UI.Forms.MapControl.RunOnUIThread
+  isSpec: "True"
+  fullName: Mapsui.UI.Forms.MapControl.RunOnUIThread
+  nameWithType: MapControl.RunOnUIThread
 - uid: Mapsui.UI.Forms.MapControl.ScreenHeight
   name: ScreenHeight
   href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_ScreenHeight
@@ -2653,25 +2672,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapView.Drawables
   nameWithType: MapView.Drawables
-- uid: Mapsui.UI.Forms.MapView.Fling
-  name: Fling
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Fling
-  commentId: E:Mapsui.UI.Forms.MapView.Fling
-  fullName: Mapsui.UI.Forms.MapView.Fling
-  nameWithType: MapView.Fling
-- uid: Mapsui.UI.Forms.MapView.ForceUpdate
-  name: ForceUpdate()
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_ForceUpdate
-  commentId: M:Mapsui.UI.Forms.MapView.ForceUpdate
-  fullName: Mapsui.UI.Forms.MapView.ForceUpdate()
-  nameWithType: MapView.ForceUpdate()
-- uid: Mapsui.UI.Forms.MapView.ForceUpdate*
-  name: ForceUpdate
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_ForceUpdate_
-  commentId: Overload:Mapsui.UI.Forms.MapView.ForceUpdate
-  isSpec: "True"
-  fullName: Mapsui.UI.Forms.MapView.ForceUpdate
-  nameWithType: MapView.ForceUpdate
 - uid: Mapsui.UI.Forms.MapView.GetEnumerator
   name: GetEnumerator()
   href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_GetEnumerator
@@ -2685,35 +2685,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapView.GetEnumerator
   nameWithType: MapView.GetEnumerator
-- uid: Mapsui.UI.Forms.MapView.GetMapInfo(Geometries.Point,System.Int32)
-  name: GetMapInfo(Geometries.Point, Int32)
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_GetMapInfo_Geometries_Point_System_Int32_
-  commentId: M:Mapsui.UI.Forms.MapView.GetMapInfo(Geometries.Point,System.Int32)
-  fullName: Mapsui.UI.Forms.MapView.GetMapInfo(Geometries.Point, System.Int32)
-  nameWithType: MapView.GetMapInfo(Geometries.Point, Int32)
-- uid: Mapsui.UI.Forms.MapView.GetMapInfo*
-  name: GetMapInfo
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_GetMapInfo_
-  commentId: Overload:Mapsui.UI.Forms.MapView.GetMapInfo
-  isSpec: "True"
-  fullName: Mapsui.UI.Forms.MapView.GetMapInfo
-  nameWithType: MapView.GetMapInfo
-- uid: Mapsui.UI.Forms.MapView.GetSnapshot(System.Collections.Generic.IEnumerable{ILayer})
-  name: GetSnapshot(IEnumerable<ILayer>)
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_GetSnapshot_System_Collections_Generic_IEnumerable_ILayer__
-  commentId: M:Mapsui.UI.Forms.MapView.GetSnapshot(System.Collections.Generic.IEnumerable{ILayer})
-  name.vb: GetSnapshot(IEnumerable(Of ILayer))
-  fullName: Mapsui.UI.Forms.MapView.GetSnapshot(System.Collections.Generic.IEnumerable<ILayer>)
-  fullName.vb: Mapsui.UI.Forms.MapView.GetSnapshot(System.Collections.Generic.IEnumerable(Of ILayer))
-  nameWithType: MapView.GetSnapshot(IEnumerable<ILayer>)
-  nameWithType.vb: MapView.GetSnapshot(IEnumerable(Of ILayer))
-- uid: Mapsui.UI.Forms.MapView.GetSnapshot*
-  name: GetSnapshot
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_GetSnapshot_
-  commentId: Overload:Mapsui.UI.Forms.MapView.GetSnapshot
-  isSpec: "True"
-  fullName: Mapsui.UI.Forms.MapView.GetSnapshot
-  nameWithType: MapView.GetSnapshot
 - uid: Mapsui.UI.Forms.MapView.HideCallouts
   name: HideCallouts()
   href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_HideCallouts
@@ -2727,18 +2698,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapView.HideCallouts
   nameWithType: MapView.HideCallouts
-- uid: Mapsui.UI.Forms.MapView.Hovered
-  name: Hovered
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Hovered
-  commentId: E:Mapsui.UI.Forms.MapView.Hovered
-  fullName: Mapsui.UI.Forms.MapView.Hovered
-  nameWithType: MapView.Hovered
-- uid: Mapsui.UI.Forms.MapView.Info
-  name: Info
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Info
-  commentId: E:Mapsui.UI.Forms.MapView.Info
-  fullName: Mapsui.UI.Forms.MapView.Info
-  nameWithType: MapView.Info
 - uid: Mapsui.UI.Forms.MapView.IsMyLocationButtonVisible
   name: IsMyLocationButtonVisible
   href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_IsMyLocationButtonVisible
@@ -2796,19 +2755,6 @@ references:
   commentId: F:Mapsui.UI.Forms.MapView.IsZoomButtonVisibleProperty
   fullName: Mapsui.UI.Forms.MapView.IsZoomButtonVisibleProperty
   nameWithType: MapView.IsZoomButtonVisibleProperty
-- uid: Mapsui.UI.Forms.MapView.Map
-  name: Map
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Map
-  commentId: P:Mapsui.UI.Forms.MapView.Map
-  fullName: Mapsui.UI.Forms.MapView.Map
-  nameWithType: MapView.Map
-- uid: Mapsui.UI.Forms.MapView.Map*
-  name: Map
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Map_
-  commentId: Overload:Mapsui.UI.Forms.MapView.Map
-  isSpec: "True"
-  fullName: Mapsui.UI.Forms.MapView.Map
-  nameWithType: MapView.Map
 - uid: Mapsui.UI.Forms.MapView.MapClicked
   name: MapClicked
   href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_MapClicked
@@ -2872,19 +2818,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapView.MyLocationLayer
   nameWithType: MapView.MyLocationLayer
-- uid: Mapsui.UI.Forms.MapView.Navigator
-  name: Navigator
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Navigator
-  commentId: P:Mapsui.UI.Forms.MapView.Navigator
-  fullName: Mapsui.UI.Forms.MapView.Navigator
-  nameWithType: MapView.Navigator
-- uid: Mapsui.UI.Forms.MapView.Navigator*
-  name: Navigator
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Navigator_
-  commentId: Overload:Mapsui.UI.Forms.MapView.Navigator
-  isSpec: "True"
-  fullName: Mapsui.UI.Forms.MapView.Navigator
-  nameWithType: MapView.Navigator
 - uid: Mapsui.UI.Forms.MapView.OnPropertyChanged(System.String)
   name: OnPropertyChanged(String)
   href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_OnPropertyChanged_System_String_
@@ -2898,19 +2831,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapView.OnPropertyChanged
   nameWithType: MapView.OnPropertyChanged
-- uid: Mapsui.UI.Forms.MapView.OpenBrowser(System.String)
-  name: OpenBrowser(String)
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_OpenBrowser_System_String_
-  commentId: M:Mapsui.UI.Forms.MapView.OpenBrowser(System.String)
-  fullName: Mapsui.UI.Forms.MapView.OpenBrowser(System.String)
-  nameWithType: MapView.OpenBrowser(String)
-- uid: Mapsui.UI.Forms.MapView.OpenBrowser*
-  name: OpenBrowser
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_OpenBrowser_
-  commentId: Overload:Mapsui.UI.Forms.MapView.OpenBrowser
-  isSpec: "True"
-  fullName: Mapsui.UI.Forms.MapView.OpenBrowser
-  nameWithType: MapView.OpenBrowser
 - uid: Mapsui.UI.Forms.MapView.PanLock
   name: PanLock
   href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_PanLock
@@ -2930,19 +2850,6 @@ references:
   commentId: F:Mapsui.UI.Forms.MapView.PanLockProperty
   fullName: Mapsui.UI.Forms.MapView.PanLockProperty
   nameWithType: MapView.PanLockProperty
-- uid: Mapsui.UI.Forms.MapView.Performance
-  name: Performance
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Performance
-  commentId: P:Mapsui.UI.Forms.MapView.Performance
-  fullName: Mapsui.UI.Forms.MapView.Performance
-  nameWithType: MapView.Performance
-- uid: Mapsui.UI.Forms.MapView.Performance*
-  name: Performance
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Performance_
-  commentId: Overload:Mapsui.UI.Forms.MapView.Performance
-  isSpec: "True"
-  fullName: Mapsui.UI.Forms.MapView.Performance
-  nameWithType: MapView.Performance
 - uid: Mapsui.UI.Forms.MapView.PinClicked
   name: PinClicked
   href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_PinClicked
@@ -2962,84 +2869,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapView.Pins
   nameWithType: MapView.Pins
-- uid: Mapsui.UI.Forms.MapView.PixelDensity
-  name: PixelDensity
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_PixelDensity
-  commentId: P:Mapsui.UI.Forms.MapView.PixelDensity
-  fullName: Mapsui.UI.Forms.MapView.PixelDensity
-  nameWithType: MapView.PixelDensity
-- uid: Mapsui.UI.Forms.MapView.PixelDensity*
-  name: PixelDensity
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_PixelDensity_
-  commentId: Overload:Mapsui.UI.Forms.MapView.PixelDensity
-  isSpec: "True"
-  fullName: Mapsui.UI.Forms.MapView.PixelDensity
-  nameWithType: MapView.PixelDensity
-- uid: Mapsui.UI.Forms.MapView.Refresh(ChangeType)
-  name: Refresh(ChangeType)
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Refresh_ChangeType_
-  commentId: M:Mapsui.UI.Forms.MapView.Refresh(ChangeType)
-  fullName: Mapsui.UI.Forms.MapView.Refresh(ChangeType)
-  nameWithType: MapView.Refresh(ChangeType)
-- uid: Mapsui.UI.Forms.MapView.Refresh*
-  name: Refresh
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Refresh_
-  commentId: Overload:Mapsui.UI.Forms.MapView.Refresh
-  isSpec: "True"
-  fullName: Mapsui.UI.Forms.MapView.Refresh
-  nameWithType: MapView.Refresh
-- uid: Mapsui.UI.Forms.MapView.RefreshData(ChangeType)
-  name: RefreshData(ChangeType)
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_RefreshData_ChangeType_
-  commentId: M:Mapsui.UI.Forms.MapView.RefreshData(ChangeType)
-  fullName: Mapsui.UI.Forms.MapView.RefreshData(ChangeType)
-  nameWithType: MapView.RefreshData(ChangeType)
-- uid: Mapsui.UI.Forms.MapView.RefreshData*
-  name: RefreshData
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_RefreshData_
-  commentId: Overload:Mapsui.UI.Forms.MapView.RefreshData
-  isSpec: "True"
-  fullName: Mapsui.UI.Forms.MapView.RefreshData
-  nameWithType: MapView.RefreshData
-- uid: Mapsui.UI.Forms.MapView.RefreshGraphics
-  name: RefreshGraphics()
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_RefreshGraphics
-  commentId: M:Mapsui.UI.Forms.MapView.RefreshGraphics
-  fullName: Mapsui.UI.Forms.MapView.RefreshGraphics()
-  nameWithType: MapView.RefreshGraphics()
-- uid: Mapsui.UI.Forms.MapView.RefreshGraphics*
-  name: RefreshGraphics
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_RefreshGraphics_
-  commentId: Overload:Mapsui.UI.Forms.MapView.RefreshGraphics
-  isSpec: "True"
-  fullName: Mapsui.UI.Forms.MapView.RefreshGraphics
-  nameWithType: MapView.RefreshGraphics
-- uid: Mapsui.UI.Forms.MapView.Renderer
-  name: Renderer
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Renderer
-  commentId: P:Mapsui.UI.Forms.MapView.Renderer
-  fullName: Mapsui.UI.Forms.MapView.Renderer
-  nameWithType: MapView.Renderer
-- uid: Mapsui.UI.Forms.MapView.Renderer*
-  name: Renderer
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Renderer_
-  commentId: Overload:Mapsui.UI.Forms.MapView.Renderer
-  isSpec: "True"
-  fullName: Mapsui.UI.Forms.MapView.Renderer
-  nameWithType: MapView.Renderer
-- uid: Mapsui.UI.Forms.MapView.ReSnapRotationDegrees
-  name: ReSnapRotationDegrees
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_ReSnapRotationDegrees
-  commentId: P:Mapsui.UI.Forms.MapView.ReSnapRotationDegrees
-  fullName: Mapsui.UI.Forms.MapView.ReSnapRotationDegrees
-  nameWithType: MapView.ReSnapRotationDegrees
-- uid: Mapsui.UI.Forms.MapView.ReSnapRotationDegrees*
-  name: ReSnapRotationDegrees
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_ReSnapRotationDegrees_
-  commentId: Overload:Mapsui.UI.Forms.MapView.ReSnapRotationDegrees
-  isSpec: "True"
-  fullName: Mapsui.UI.Forms.MapView.ReSnapRotationDegrees
-  nameWithType: MapView.ReSnapRotationDegrees
 - uid: Mapsui.UI.Forms.MapView.ReSnapRotationDegreesProperty
   name: ReSnapRotationDegreesProperty
   href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_ReSnapRotationDegreesProperty
@@ -3090,38 +2919,6 @@ references:
   commentId: F:Mapsui.UI.Forms.MapView.SelectedPinProperty
   fullName: Mapsui.UI.Forms.MapView.SelectedPinProperty
   nameWithType: MapView.SelectedPinProperty
-- uid: Mapsui.UI.Forms.MapView.StartUpdates(System.Boolean)
-  name: StartUpdates(Boolean)
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_StartUpdates_System_Boolean_
-  commentId: M:Mapsui.UI.Forms.MapView.StartUpdates(System.Boolean)
-  fullName: Mapsui.UI.Forms.MapView.StartUpdates(System.Boolean)
-  nameWithType: MapView.StartUpdates(Boolean)
-- uid: Mapsui.UI.Forms.MapView.StartUpdates*
-  name: StartUpdates
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_StartUpdates_
-  commentId: Overload:Mapsui.UI.Forms.MapView.StartUpdates
-  isSpec: "True"
-  fullName: Mapsui.UI.Forms.MapView.StartUpdates
-  nameWithType: MapView.StartUpdates
-- uid: Mapsui.UI.Forms.MapView.StopUpdates
-  name: StopUpdates()
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_StopUpdates
-  commentId: M:Mapsui.UI.Forms.MapView.StopUpdates
-  fullName: Mapsui.UI.Forms.MapView.StopUpdates()
-  nameWithType: MapView.StopUpdates()
-- uid: Mapsui.UI.Forms.MapView.StopUpdates*
-  name: StopUpdates
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_StopUpdates_
-  commentId: Overload:Mapsui.UI.Forms.MapView.StopUpdates
-  isSpec: "True"
-  fullName: Mapsui.UI.Forms.MapView.StopUpdates
-  nameWithType: MapView.StopUpdates
-- uid: Mapsui.UI.Forms.MapView.Swipe
-  name: Swipe
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Swipe
-  commentId: E:Mapsui.UI.Forms.MapView.Swipe
-  fullName: Mapsui.UI.Forms.MapView.Swipe
-  nameWithType: MapView.Swipe
 - uid: Mapsui.UI.Forms.MapView.System#Collections#IEnumerable#GetEnumerator
   name: IEnumerable.GetEnumerator()
   href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_System_Collections_IEnumerable_GetEnumerator
@@ -3139,68 +2936,6 @@ references:
   fullName: Mapsui.UI.Forms.MapView.System.Collections.IEnumerable.GetEnumerator
   nameWithType: MapView.IEnumerable.GetEnumerator
   nameWithType.vb: MapView.System.Collections.IEnumerable.GetEnumerator
-- uid: Mapsui.UI.Forms.MapView.ToDeviceIndependentUnits(Geometries.Point)
-  name: ToDeviceIndependentUnits(Geometries.Point)
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_ToDeviceIndependentUnits_Geometries_Point_
-  commentId: M:Mapsui.UI.Forms.MapView.ToDeviceIndependentUnits(Geometries.Point)
-  fullName: Mapsui.UI.Forms.MapView.ToDeviceIndependentUnits(Geometries.Point)
-  nameWithType: MapView.ToDeviceIndependentUnits(Geometries.Point)
-- uid: Mapsui.UI.Forms.MapView.ToDeviceIndependentUnits*
-  name: ToDeviceIndependentUnits
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_ToDeviceIndependentUnits_
-  commentId: Overload:Mapsui.UI.Forms.MapView.ToDeviceIndependentUnits
-  isSpec: "True"
-  fullName: Mapsui.UI.Forms.MapView.ToDeviceIndependentUnits
-  nameWithType: MapView.ToDeviceIndependentUnits
-- uid: Mapsui.UI.Forms.MapView.ToPixels(Geometries.Point)
-  name: ToPixels(Geometries.Point)
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_ToPixels_Geometries_Point_
-  commentId: M:Mapsui.UI.Forms.MapView.ToPixels(Geometries.Point)
-  fullName: Mapsui.UI.Forms.MapView.ToPixels(Geometries.Point)
-  nameWithType: MapView.ToPixels(Geometries.Point)
-- uid: Mapsui.UI.Forms.MapView.ToPixels*
-  name: ToPixels
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_ToPixels_
-  commentId: Overload:Mapsui.UI.Forms.MapView.ToPixels
-  isSpec: "True"
-  fullName: Mapsui.UI.Forms.MapView.ToPixels
-  nameWithType: MapView.ToPixels
-- uid: Mapsui.UI.Forms.MapView.TouchAction
-  name: TouchAction
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_TouchAction
-  commentId: E:Mapsui.UI.Forms.MapView.TouchAction
-  fullName: Mapsui.UI.Forms.MapView.TouchAction
-  nameWithType: MapView.TouchAction
-- uid: Mapsui.UI.Forms.MapView.TouchEnded
-  name: TouchEnded
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_TouchEnded
-  commentId: E:Mapsui.UI.Forms.MapView.TouchEnded
-  fullName: Mapsui.UI.Forms.MapView.TouchEnded
-  nameWithType: MapView.TouchEnded
-- uid: Mapsui.UI.Forms.MapView.TouchEntered
-  name: TouchEntered
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_TouchEntered
-  commentId: E:Mapsui.UI.Forms.MapView.TouchEntered
-  fullName: Mapsui.UI.Forms.MapView.TouchEntered
-  nameWithType: MapView.TouchEntered
-- uid: Mapsui.UI.Forms.MapView.TouchExited
-  name: TouchExited
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_TouchExited
-  commentId: E:Mapsui.UI.Forms.MapView.TouchExited
-  fullName: Mapsui.UI.Forms.MapView.TouchExited
-  nameWithType: MapView.TouchExited
-- uid: Mapsui.UI.Forms.MapView.TouchMove
-  name: TouchMove
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_TouchMove
-  commentId: E:Mapsui.UI.Forms.MapView.TouchMove
-  fullName: Mapsui.UI.Forms.MapView.TouchMove
-  nameWithType: MapView.TouchMove
-- uid: Mapsui.UI.Forms.MapView.TouchStarted
-  name: TouchStarted
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_TouchStarted
-  commentId: E:Mapsui.UI.Forms.MapView.TouchStarted
-  fullName: Mapsui.UI.Forms.MapView.TouchStarted
-  nameWithType: MapView.TouchStarted
 - uid: Mapsui.UI.Forms.MapView.UniqueCallout
   name: UniqueCallout
   href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_UniqueCallout
@@ -3220,114 +2955,24 @@ references:
   commentId: F:Mapsui.UI.Forms.MapView.UniqueCalloutProperty
   fullName: Mapsui.UI.Forms.MapView.UniqueCalloutProperty
   nameWithType: MapView.UniqueCalloutProperty
-- uid: Mapsui.UI.Forms.MapView.UnSnapRotationDegrees
-  name: UnSnapRotationDegrees
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_UnSnapRotationDegrees
-  commentId: P:Mapsui.UI.Forms.MapView.UnSnapRotationDegrees
-  fullName: Mapsui.UI.Forms.MapView.UnSnapRotationDegrees
-  nameWithType: MapView.UnSnapRotationDegrees
-- uid: Mapsui.UI.Forms.MapView.UnSnapRotationDegrees*
-  name: UnSnapRotationDegrees
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_UnSnapRotationDegrees_
-  commentId: Overload:Mapsui.UI.Forms.MapView.UnSnapRotationDegrees
-  isSpec: "True"
-  fullName: Mapsui.UI.Forms.MapView.UnSnapRotationDegrees
-  nameWithType: MapView.UnSnapRotationDegrees
 - uid: Mapsui.UI.Forms.MapView.UnSnapRotationDegreesProperty
   name: UnSnapRotationDegreesProperty
   href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_UnSnapRotationDegreesProperty
   commentId: F:Mapsui.UI.Forms.MapView.UnSnapRotationDegreesProperty
   fullName: Mapsui.UI.Forms.MapView.UnSnapRotationDegreesProperty
   nameWithType: MapView.UnSnapRotationDegreesProperty
-- uid: Mapsui.UI.Forms.MapView.Unsubscribe
-  name: Unsubscribe()
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Unsubscribe
-  commentId: M:Mapsui.UI.Forms.MapView.Unsubscribe
-  fullName: Mapsui.UI.Forms.MapView.Unsubscribe()
-  nameWithType: MapView.Unsubscribe()
-- uid: Mapsui.UI.Forms.MapView.Unsubscribe*
-  name: Unsubscribe
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Unsubscribe_
-  commentId: Overload:Mapsui.UI.Forms.MapView.Unsubscribe
-  isSpec: "True"
-  fullName: Mapsui.UI.Forms.MapView.Unsubscribe
-  nameWithType: MapView.Unsubscribe
-- uid: Mapsui.UI.Forms.MapView.UpdateInterval
-  name: UpdateInterval
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_UpdateInterval
-  commentId: P:Mapsui.UI.Forms.MapView.UpdateInterval
-  fullName: Mapsui.UI.Forms.MapView.UpdateInterval
-  nameWithType: MapView.UpdateInterval
-- uid: Mapsui.UI.Forms.MapView.UpdateInterval*
-  name: UpdateInterval
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_UpdateInterval_
-  commentId: Overload:Mapsui.UI.Forms.MapView.UpdateInterval
-  isSpec: "True"
-  fullName: Mapsui.UI.Forms.MapView.UpdateInterval
-  nameWithType: MapView.UpdateInterval
-- uid: Mapsui.UI.Forms.MapView.UseDoubleTap
-  name: UseDoubleTap
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_UseDoubleTap
-  commentId: P:Mapsui.UI.Forms.MapView.UseDoubleTap
-  fullName: Mapsui.UI.Forms.MapView.UseDoubleTap
-  nameWithType: MapView.UseDoubleTap
-- uid: Mapsui.UI.Forms.MapView.UseDoubleTap*
-  name: UseDoubleTap
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_UseDoubleTap_
-  commentId: Overload:Mapsui.UI.Forms.MapView.UseDoubleTap
-  isSpec: "True"
-  fullName: Mapsui.UI.Forms.MapView.UseDoubleTap
-  nameWithType: MapView.UseDoubleTap
 - uid: Mapsui.UI.Forms.MapView.UseDoubleTapProperty
   name: UseDoubleTapProperty
   href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_UseDoubleTapProperty
   commentId: F:Mapsui.UI.Forms.MapView.UseDoubleTapProperty
   fullName: Mapsui.UI.Forms.MapView.UseDoubleTapProperty
   nameWithType: MapView.UseDoubleTapProperty
-- uid: Mapsui.UI.Forms.MapView.UseFling
-  name: UseFling
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_UseFling
-  commentId: P:Mapsui.UI.Forms.MapView.UseFling
-  fullName: Mapsui.UI.Forms.MapView.UseFling
-  nameWithType: MapView.UseFling
-- uid: Mapsui.UI.Forms.MapView.UseFling*
-  name: UseFling
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_UseFling_
-  commentId: Overload:Mapsui.UI.Forms.MapView.UseFling
-  isSpec: "True"
-  fullName: Mapsui.UI.Forms.MapView.UseFling
-  nameWithType: MapView.UseFling
 - uid: Mapsui.UI.Forms.MapView.UseFlingProperty
   name: UseFlingProperty
   href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_UseFlingProperty
   commentId: F:Mapsui.UI.Forms.MapView.UseFlingProperty
   fullName: Mapsui.UI.Forms.MapView.UseFlingProperty
   nameWithType: MapView.UseFlingProperty
-- uid: Mapsui.UI.Forms.MapView.Viewport
-  name: Viewport
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Viewport
-  commentId: P:Mapsui.UI.Forms.MapView.Viewport
-  fullName: Mapsui.UI.Forms.MapView.Viewport
-  nameWithType: MapView.Viewport
-- uid: Mapsui.UI.Forms.MapView.Viewport*
-  name: Viewport
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Viewport_
-  commentId: Overload:Mapsui.UI.Forms.MapView.Viewport
-  isSpec: "True"
-  fullName: Mapsui.UI.Forms.MapView.Viewport
-  nameWithType: MapView.Viewport
-- uid: Mapsui.UI.Forms.MapView.ViewportInitialized
-  name: ViewportInitialized
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_ViewportInitialized
-  commentId: E:Mapsui.UI.Forms.MapView.ViewportInitialized
-  fullName: Mapsui.UI.Forms.MapView.ViewportInitialized
-  nameWithType: MapView.ViewportInitialized
-- uid: Mapsui.UI.Forms.MapView.Zoomed
-  name: Zoomed
-  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Zoomed
-  commentId: E:Mapsui.UI.Forms.MapView.Zoomed
-  fullName: Mapsui.UI.Forms.MapView.Zoomed
-  nameWithType: MapView.Zoomed
 - uid: Mapsui.UI.Forms.MapView.ZoomLock
   name: ZoomLock
   href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_ZoomLock

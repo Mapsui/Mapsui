@@ -72,7 +72,7 @@ namespace Mapsui.UI.Avalonia
                     break;
             }
         }
-
+        
         private void MapControl_PointerPressed(object sender, PointerPressedEventArgs e)
         {
             if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
@@ -120,7 +120,6 @@ namespace Mapsui.UI.Avalonia
                 if (IsClick(_currentMousePosition, _downMousePosition))
                 {
                     HandleFeatureInfo(e);
-                    OnInfo(InvokeInfo(touchPosition, _downMousePosition, e.ClickCount));
                 }
             }
         }
