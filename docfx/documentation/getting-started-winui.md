@@ -1,4 +1,4 @@
-# Mapsui UWP Getting Started
+# Mapsui WinUI Getting Started
 
 ### Step 1 
 
