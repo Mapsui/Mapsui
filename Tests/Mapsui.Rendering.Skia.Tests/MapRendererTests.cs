@@ -307,8 +307,8 @@ namespace Mapsui.Rendering.Skia.Tests
                 }
             }
 
-            var propertion = (double)(trueCount - falseCount) / trueCount;
-            return proportionCorrect <= propertion;
+            var proportion = (double)(trueCount - falseCount) / trueCount;
+            return proportionCorrect <= proportion;
         }
     }
 }
