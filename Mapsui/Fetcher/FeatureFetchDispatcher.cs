@@ -58,7 +58,10 @@ namespace Mapsui.Fetcher
                 if (exception == null)
                 {
                     _cache.Clear();
-                    _cache.PushRange(features.ToArray());
+                    if (features.Any())
+                    {
+                        _cache.PushRange(features.ToArray());
+                    }
                 }
                 
                 Busy = _modified;
