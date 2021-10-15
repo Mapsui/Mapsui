@@ -32,27 +32,12 @@ namespace Mapsui.Samples.Wpf
             Logger.LogDelegate += LogMethod;
 
             CategoryComboBox.SelectionChanged += CategoryComboBoxSelectionChanged;
-            RenderMode.SelectionChanged += RenderModeOnSelectionChanged;
-
+            
             FillComboBoxWithCategories();
             FillListWithSamples();
         }
         
-        private void RenderModeOnSelectionChanged(object sender, SelectionChangedEventArgs selectionChangedEventArgs)
-        {
-            var selectedValue = ((ComboBoxItem)((ComboBox)sender).SelectedItem).Content.ToString();
 
-            if (selectedValue.ToLower().Contains("wpf"))
-            {
-                MapControl.RenderMode = UI.Wpf.RenderMode.Wpf;
-                if (!((Rendering.Xaml.MapRenderer)MapControl.Renderer).StyleRenderers.ContainsKey(typeof(Common.Maps.CustomStyle)))
-                    ((Rendering.Xaml.MapRenderer)MapControl.Renderer).StyleRenderers.Add(typeof(Common.Maps.CustomStyle), new XamlCustomStyleRenderer());
-            }
-            else if (selectedValue.ToLower().Contains("skia"))
-                MapControl.RenderMode = UI.Wpf.RenderMode.Skia;
-            else
-                throw new Exception("Unknown ComboBox item");
-        }
 
         private void MapControlOnMouseMove(object sender, MouseEventArgs e)
         {

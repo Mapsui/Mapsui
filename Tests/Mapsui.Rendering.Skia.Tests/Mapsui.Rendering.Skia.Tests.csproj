@@ -11,14 +11,6 @@
     <DefineConstants>SKIA</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\Mapsui.Rendering.Xaml.Tests\File.cs">
-      <Link>File.cs</Link>
-    </Compile>
-    <Compile Include="..\Mapsui.Rendering.Xaml.Tests\MapRendererTests.cs">
-      <Link>MapRendererTests.cs</Link>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.Geometries\Mapsui.Geometries.csproj" />
     <ProjectReference Include="..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />

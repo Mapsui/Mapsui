@@ -46,7 +46,8 @@ namespace Mapsui.Samples.iOS
                 result.Append($"{field}={feature[field]}, ");
             }
             
-            result.Append($"Geometry={feature.Geometry}");
+            if (feature is IGeometryFeature geometryFeature)
+                result.Append($"Geometry={geometryFeature.Geometry}");
             return result.ToString();
         }
 

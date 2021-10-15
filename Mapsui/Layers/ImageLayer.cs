@@ -34,7 +34,7 @@ namespace Mapsui.Layers
         private class FeatureSets
         {
             public long TimeRequested { get; set; }
-            public IEnumerable<IFeature> Features { get; set; }
+            public IEnumerable<IGeometryFeature> Features { get; set; }
         }
 
         private bool _isFetching;
@@ -43,7 +43,7 @@ namespace Mapsui.Layers
         private BoundingBox _newExtent;
         private List<FeatureSets> _sets = new List<FeatureSets>();
         private readonly Timer _startFetchTimer;
-        private IProvider _dataSource;
+        private IProvider<IFeature> _dataSource;
         private readonly int _numberOfFeaturesReturned;
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Mapsui.Layers
         /// </summary>
         public int FetchDelay { get; set; } = 1000;
 
-        public IProvider DataSource
+        public IProvider<IFeature> DataSource
         {
             get => _dataSource;
             set
@@ -102,7 +102,7 @@ namespace Mapsui.Layers
             return result;
         }
 
-        private static IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, IEnumerable<IFeature> features)
+        private static IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, IEnumerable<IGeometryFeature> features)
         {
             foreach (var feature in features)
             {
@@ -170,10 +170,10 @@ namespace Mapsui.Layers
             });
         }
 
-        private void DataArrived(IEnumerable<IFeature> features, object state)
+        private void DataArrived(IEnumerable<IFeature> arrivingFeatures, object state)
         {
             //the data in the cache is stored in the map projection so it projected only once.
-            features = features?.ToList() ?? throw new ArgumentException("argument features may not be null");
+            var features = arrivingFeatures?.Cast<IGeometryFeature>().ToList() ?? throw new ArgumentException("argument features may not be null");
 
             // We can get 0 features if some error was occured up call stack
             // We should not add new FeatureSets if we have not any feature
@@ -209,7 +209,7 @@ namespace Mapsui.Layers
         {
             foreach (var cache in _sets)
             {
-                cache.Features = new Features();
+                cache.Features = new List<IGeometryFeature>();
             }
         }
 

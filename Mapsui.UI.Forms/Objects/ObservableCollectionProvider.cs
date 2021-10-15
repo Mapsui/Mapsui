@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace Mapsui.UI.Objects
 {
-    public class ObservableCollectionProvider<T> : IProvider where T : IFeatureProvider
+    public class ObservableCollectionProvider<T, U> : IProvider<U> where T : IFeatureProvider where U : IFeature
     {
         private object _syncRoot = new object();
 
@@ -18,9 +18,9 @@ namespace Mapsui.UI.Objects
             Collection = collection;
         }
 
-        public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        public IEnumerable<U> GetFeaturesInView(BoundingBox box, double resolution)
         {
-            var list = new List<IFeature>();
+            var list = new List<U>();
 
             if (Collection == null || Collection.Count == 0)
                 return list;
@@ -29,8 +29,8 @@ namespace Mapsui.UI.Objects
             {
                 foreach (T item in Collection)
                 {
-                    if (box.Intersects(item.Feature.Geometry.BoundingBox))
-                        list.Add(item.Feature);
+                    if (box.Intersects(item.Feature.BoundingBox))
+                        list.Add((U)item.Feature);
                 }
             }
 
@@ -50,12 +50,12 @@ namespace Mapsui.UI.Objects
                 {
                     if (item.Feature != null)
                     {
-                        if (item.Feature.Geometry.BoundingBox != null)
+                        if (item.Feature.BoundingBox != null)
                         {
                             if (extents == null)
-                                extents = new BoundingBox(item.Feature.Geometry.BoundingBox);
+                                extents = new BoundingBox(item.Feature.BoundingBox);
                             else
-                                extents = extents.Join(item.Feature.Geometry.BoundingBox);
+                                extents = extents.Join(item.Feature.BoundingBox);
                         }
                     }
                 }

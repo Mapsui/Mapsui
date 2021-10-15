@@ -1,4 +1,5 @@
-﻿using Mapsui.Geometries;
+﻿using System.Collections.Generic;
+using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
@@ -33,9 +34,9 @@ namespace Mapsui.Tests.Common.Maps
             return map;
         }
 
-        public static MemoryProvider CreateProviderWithPointsWithVectorStyle()
+        public static MemoryProvider<IGeometryFeature> CreateProviderWithPointsWithVectorStyle()
         {
-            var features = new Features
+            var features = new List<IGeometryFeature>
             {
                 new Feature
                 {
@@ -58,7 +59,7 @@ namespace Mapsui.Tests.Common.Maps
                     Styles = new[] {new VectorStyle {Fill = new Brush(Color.Green), Outline = null}}
                 }
             };
-            var provider = new MemoryProvider(features);
+            var provider = new MemoryProvider<IGeometryFeature>(features);
             return provider;
         }
     }

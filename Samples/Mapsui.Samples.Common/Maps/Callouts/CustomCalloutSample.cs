@@ -46,12 +46,12 @@ namespace Mapsui.Samples.Common.Maps.Callouts
             {
                 Name = "Points",
                 IsMapInfoLayer = true,
-                DataSource = new MemoryProvider(GetCitiesFromEmbeddedResource()),
+                DataSource = new MemoryProvider<IGeometryFeature>(GetCitiesFromEmbeddedResource()),
                 Style = new VectorStyle()
             };
         }
 
-        private static IEnumerable<IFeature> GetCitiesFromEmbeddedResource()
+        private static IEnumerable<IGeometryFeature> GetCitiesFromEmbeddedResource()
         {
             const string path = "Mapsui.Samples.Common.EmbeddedResources.congo.json";
             var assembly = typeof(PointsSample).GetTypeInfo().Assembly;

@@ -21,7 +21,7 @@ namespace Mapsui.Layers
         /// <param name="layername">Name to use for layer</param>
         public MemoryLayer(string layername) : base(layername) { }
 
-        public IProvider DataSource { get; set; }
+        public IProvider<IFeature> DataSource { get; set; }
 
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {

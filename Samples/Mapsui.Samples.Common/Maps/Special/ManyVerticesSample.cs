@@ -37,11 +37,11 @@ namespace Mapsui.Samples.Common.Maps
             {
                 Name = "Points",
                 IsMapInfoLayer = true,
-                DataSource = new MemoryProvider(GetFeature())
+                DataSource = new MemoryProvider<IGeometryFeature>(GetFeature())
             };
         }
 
-        private static IFeature GetFeature()
+        private static IGeometryFeature GetFeature()
         {
             var feature = new Feature();
 

@@ -17,8 +17,10 @@
 // along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Providers;
@@ -29,12 +31,12 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Layers
 {
-    public class Layer : BaseLayer, IAsyncDataFetcher
+    public class Layer: BaseLayer, IAsyncDataFetcher
     {
-        private IProvider _dataSource;
+        private IProvider<IFeature> _dataSource;
         private readonly object _syncRoot = new object();
-        private readonly MemoryProvider _cache = new MemoryProvider();
-        private readonly FeatureFetchDispatcher _fetchDispatcher;
+        private readonly ConcurrentStack<IFeature> _cache = new ConcurrentStack<IFeature>();
+        private readonly FeatureFetchDispatcher<IFeature> _fetchDispatcher;
         private readonly FetchMachine _fetchMachine;
         public Delayer Delayer { get; } = new Delayer();
 
@@ -49,7 +51,7 @@ namespace Mapsui.Layers
         /// <param name="layername">Name to use for layer</param>
         public Layer(string layername) : base(layername)
         {
-            _fetchDispatcher = new FeatureFetchDispatcher(_cache, Transformer);
+            _fetchDispatcher = new FeatureFetchDispatcher<IFeature>(_cache, Transformer);
             _fetchDispatcher.DataChanged += FetchDispatcherOnDataChanged;
             _fetchDispatcher.PropertyChanged += FetchDispatcherOnPropertyChanged;
 
@@ -73,7 +75,7 @@ namespace Mapsui.Layers
         /// <summary>
         /// Data source for this layer
         /// </summary>
-        public IProvider DataSource
+        public IProvider<IFeature> DataSource
         {
             get => _dataSource;
             set
@@ -131,7 +133,7 @@ namespace Mapsui.Layers
         /// <inheritdoc />
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox extent, double resolution)
         {
-            return _cache.Features;
+            return _cache.ToList();
         }
 
         /// <inheritdoc />

@@ -6,7 +6,6 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
-using BruTile.Extensions;
 using Mapsui.Geometries;
 using Mapsui.Logging;
 using Mapsui.Utilities;
@@ -95,13 +94,15 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             if (ArcGisDynamicCapabilities.layers == null)
                 return new Features();
 
-            IFeatures features = new Features();
+            var features = new List<IGeometryFeature>();
             IRaster raster = null;
             IViewport viewport = new Viewport { Resolution = resolution, Center = box.Centroid, Width = (box.Width / resolution), Height = (box.Height / resolution) };
             if (TryGetMap(viewport, ref raster))
             {
-                var feature = features.New();
-                feature.Geometry = raster;
+                var feature = new Feature
+                {
+                    Geometry = raster
+                };
                 features.Add(feature);
             }
             return features;
