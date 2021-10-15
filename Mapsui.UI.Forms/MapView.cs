@@ -13,6 +13,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Mapsui.Providers;
 using Xamarin.Forms;
 
 namespace Mapsui.UI.Forms
@@ -750,24 +751,25 @@ namespace Mapsui.UI.Forms
             if (layer.MinVisible > Viewport.Resolution) return drawables;
             if (layer.MaxVisible < Viewport.Resolution) return drawables;
 
-            var allFeatures = layer.GetFeaturesInView(layer.Envelope, Viewport.Resolution);
-            var mapInfo = GetMapInfo(point);
-
-            // Now check all features, if they are clicked and clickable
-            foreach (var feature in allFeatures)
+            if (layer.GetFeaturesInView(layer.Envelope, Viewport.Resolution) is
+                IEnumerable<IGeometryFeature> allFeatures)
             {
-                if (feature.Geometry.Contains(point))
+                // Now check all features, if they are clicked and clickable
+                foreach (var feature in allFeatures)
                 {
-                    var drawable = _drawable.Where(f => f.Feature == feature).First();
-                    // Take only the clickable object
-                    if (drawable.IsClickable)
-                        drawables.Add(drawable);
+                    if (feature.Geometry.Contains(point))
+                    {
+                        var drawable = _drawable.Where(f => f.Feature == feature).First();
+                        // Take only the clickable object
+                        if (drawable.IsClickable)
+                            drawables.Add(drawable);
+                    }
                 }
             }
 
             // If there more than one drawables found, than reverse, because the top most should be the first
             if (drawables.Count > 1)
-                drawables.Reverse();
+                    drawables.Reverse();
 
             return drawables;
         }

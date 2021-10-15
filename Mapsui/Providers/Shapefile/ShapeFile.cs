@@ -899,7 +899,7 @@ namespace Mapsui.Providers.Shapefile
                 {
                     //Use the spatial index to get a list of features whose boundingbox intersects bbox
                     var objectlist = GetObjectIDsInViewPrivate(box);
-                    var features = new Features();
+                    var features = new List<IGeometryFeature>();
 
                     foreach (var index in objectlist)
                     {

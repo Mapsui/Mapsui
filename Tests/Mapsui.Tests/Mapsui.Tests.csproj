@@ -12,7 +12,7 @@
     <None Remove="Resources\example.tif" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Mapsui.Rendering.Xaml.Tests\File.cs">
+    <Compile Include="..\Mapsui.Rendering.Skia.Tests\File.cs">
       <Link>File.cs</Link>
     </Compile>
   </ItemGroup>
@@ -35,11 +35,11 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeCoverage" Version="16.5.0">
+    <PackageReference Include="Microsoft.CodeCoverage" Version="16.11.0">
     </PackageReference>
     <PackageReference Include="NUnit" Version="3.12.0">
     </PackageReference>
-    <PackageReference Include="NUnit3TestAdapter" Version="3.16.1">
+    <PackageReference Include="NUnit3TestAdapter" Version="3.17.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>

@@ -125,8 +125,7 @@ namespace Mapsui.UI.Wpf
 
         internal void InvalidateCanvas()
         {
-            if (RenderMode == RenderMode.Wpf) InvalidateVisual(); // To trigger OnRender of this MapControl
-            else SkiaCanvas.InvalidateVisual();
+            SkiaCanvas.InvalidateVisual();
         }
 
         private void MapControlLoaded(object sender, RoutedEventArgs e)
