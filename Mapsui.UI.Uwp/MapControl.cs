@@ -16,11 +16,23 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA f
 
 using System;
+using System.Runtime.Versioning;
 using System.Threading.Tasks;
 using Windows.Devices.Sensors;
 using Windows.Foundation;
 using Windows.Graphics.Display;
 using Windows.System;
+#if __WINUI__
+using Microsoft.UI;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Shapes;
+using SkiaSharp.Views.Windows;
+using HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment;
+using VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment;
+#else
 using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -31,8 +43,14 @@ using Windows.UI.Xaml.Shapes;
 using SkiaSharp.Views.UWP;
 using HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment;
 using VerticalAlignment = Windows.UI.Xaml.VerticalAlignment;
+#endif
 
+#if __WINUI__
+[assembly:SupportedOSPlatform("windows10.0.18362.0")]
+namespace Mapsui.UI.WinUI
+#else
 namespace Mapsui.UI.Uwp
+#endif
 {
     public partial class MapControl : Grid, IMapControl
     {
@@ -179,7 +197,11 @@ namespace Mapsui.UI.Uwp
 
         private void RunOnUIThread(Action action)
         {
+#if __WINUI__
+            Task.Run(() => DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Normal, () => action()));
+#else
             Task.Run(() => Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => action()));
+#endif
         }
 
         private void Canvas_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
@@ -253,7 +275,11 @@ namespace Mapsui.UI.Uwp
 
         private float GetPixelDensity()
         {
+#if __WINUI__
+            return (float)XamlRoot.RasterizationScale;
+#else
             return (float)DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
+#endif
         }
 
     }

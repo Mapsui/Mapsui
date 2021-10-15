@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using Mapsui.Providers;
-
+#if __WINUI__
+namespace Mapsui.Samples.WinUI
+#else
 namespace Mapsui.Samples.Uwp
+#endif
 {
     static class FeatureExtensions
     {
