@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using Mapsui.Providers;
 
-namespace Mapsui.Samples.Avalonia.ExtensionMethods
+namespace Mapsui.Samples.Avalonia.Extensions
 {
     static class FeatureExtensions
     {

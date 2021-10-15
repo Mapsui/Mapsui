@@ -9,7 +9,6 @@ using CoreGraphics;
 using Mapsui.Geometries;
 using Mapsui.Geometries.Utilities;
 using SkiaSharp.Views.iOS;
-using Mapsui.Utilities;
 
 namespace Mapsui.UI.iOS
 {

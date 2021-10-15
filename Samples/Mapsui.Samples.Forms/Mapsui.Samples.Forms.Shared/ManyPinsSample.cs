@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using Mapsui.Extensions;
 using Xamarin.Forms;
 
 namespace Mapsui.Samples.Forms

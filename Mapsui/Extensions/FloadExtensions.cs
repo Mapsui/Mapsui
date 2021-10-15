@@ -1,5 +1,4 @@
-﻿// ReSharper disable once CheckNamespace
-namespace System
+﻿namespace System
 {
     public static class FloatExtensions
     {

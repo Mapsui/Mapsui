@@ -16,13 +16,15 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA f
 
 using System;
-using System.Runtime.Versioning;
+
 using System.Threading.Tasks;
 using Windows.Devices.Sensors;
 using Windows.Foundation;
-using Windows.Graphics.Display;
+
 using Windows.System;
 #if __WINUI__
+using System.Runtime.Versioning;
+using Mapsui.UI.WinUI.Extensions;
 using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -33,6 +35,7 @@ using SkiaSharp.Views.Windows;
 using HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment;
 using VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment;
 #else
+using Windows.Graphics.Display;
 using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml;

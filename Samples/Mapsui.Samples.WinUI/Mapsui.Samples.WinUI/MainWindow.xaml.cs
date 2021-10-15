@@ -13,10 +13,12 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
+using Mapsui.Providers.Wms;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.CustomWidget;
+using Mapsui.Samples.WinUI.Extensions;
 using Mapsui.UI;
 using Mapsui.Utilities;
 
