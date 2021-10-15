@@ -4734,101 +4734,101 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Objects.MyLocationLayer.ViewingDirection
   nameWithType: MyLocationLayer.ViewingDirection
-- uid: Mapsui.UI.Objects.ObservableCollectionProvider`1
-  name: ObservableCollectionProvider<T>
-  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-1.html
-  commentId: T:Mapsui.UI.Objects.ObservableCollectionProvider`1
-  name.vb: ObservableCollectionProvider(Of T)
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T>
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T)
-  nameWithType: ObservableCollectionProvider<T>
-  nameWithType.vb: ObservableCollectionProvider(Of T)
-- uid: Mapsui.UI.Objects.ObservableCollectionProvider`1.#ctor(System.Collections.ObjectModel.ObservableCollection{`0})
+- uid: Mapsui.UI.Objects.ObservableCollectionProvider`2
+  name: ObservableCollectionProvider<T, U>
+  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html
+  commentId: T:Mapsui.UI.Objects.ObservableCollectionProvider`2
+  name.vb: ObservableCollectionProvider(Of T, U)
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, U>
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, U)
+  nameWithType: ObservableCollectionProvider<T, U>
+  nameWithType.vb: ObservableCollectionProvider(Of T, U)
+- uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.#ctor(System.Collections.ObjectModel.ObservableCollection{`0})
   name: ObservableCollectionProvider(ObservableCollection<T>)
-  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-1.html#Mapsui_UI_Objects_ObservableCollectionProvider_1__ctor_System_Collections_ObjectModel_ObservableCollection__0__
-  commentId: M:Mapsui.UI.Objects.ObservableCollectionProvider`1.#ctor(System.Collections.ObjectModel.ObservableCollection{`0})
+  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2__ctor_System_Collections_ObjectModel_ObservableCollection__0__
+  commentId: M:Mapsui.UI.Objects.ObservableCollectionProvider`2.#ctor(System.Collections.ObjectModel.ObservableCollection{`0})
   name.vb: ObservableCollectionProvider(ObservableCollection(Of T))
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T>.ObservableCollectionProvider(System.Collections.ObjectModel.ObservableCollection<T>)
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T).ObservableCollectionProvider(System.Collections.ObjectModel.ObservableCollection(Of T))
-  nameWithType: ObservableCollectionProvider<T>.ObservableCollectionProvider(ObservableCollection<T>)
-  nameWithType.vb: ObservableCollectionProvider(Of T).ObservableCollectionProvider(ObservableCollection(Of T))
-- uid: Mapsui.UI.Objects.ObservableCollectionProvider`1.#ctor*
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, U>.ObservableCollectionProvider(System.Collections.ObjectModel.ObservableCollection<T>)
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, U).ObservableCollectionProvider(System.Collections.ObjectModel.ObservableCollection(Of T))
+  nameWithType: ObservableCollectionProvider<T, U>.ObservableCollectionProvider(ObservableCollection<T>)
+  nameWithType.vb: ObservableCollectionProvider(Of T, U).ObservableCollectionProvider(ObservableCollection(Of T))
+- uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.#ctor*
   name: ObservableCollectionProvider
-  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-1.html#Mapsui_UI_Objects_ObservableCollectionProvider_1__ctor_
-  commentId: Overload:Mapsui.UI.Objects.ObservableCollectionProvider`1.#ctor
+  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2__ctor_
+  commentId: Overload:Mapsui.UI.Objects.ObservableCollectionProvider`2.#ctor
   isSpec: "True"
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T>.ObservableCollectionProvider
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T).ObservableCollectionProvider
-  nameWithType: ObservableCollectionProvider<T>.ObservableCollectionProvider
-  nameWithType.vb: ObservableCollectionProvider(Of T).ObservableCollectionProvider
-- uid: Mapsui.UI.Objects.ObservableCollectionProvider`1.Collection
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, U>.ObservableCollectionProvider
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, U).ObservableCollectionProvider
+  nameWithType: ObservableCollectionProvider<T, U>.ObservableCollectionProvider
+  nameWithType.vb: ObservableCollectionProvider(Of T, U).ObservableCollectionProvider
+- uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.Collection
   name: Collection
-  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-1.html#Mapsui_UI_Objects_ObservableCollectionProvider_1_Collection
-  commentId: P:Mapsui.UI.Objects.ObservableCollectionProvider`1.Collection
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T>.Collection
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T).Collection
-  nameWithType: ObservableCollectionProvider<T>.Collection
-  nameWithType.vb: ObservableCollectionProvider(Of T).Collection
-- uid: Mapsui.UI.Objects.ObservableCollectionProvider`1.Collection*
+  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2_Collection
+  commentId: P:Mapsui.UI.Objects.ObservableCollectionProvider`2.Collection
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, U>.Collection
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, U).Collection
+  nameWithType: ObservableCollectionProvider<T, U>.Collection
+  nameWithType.vb: ObservableCollectionProvider(Of T, U).Collection
+- uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.Collection*
   name: Collection
-  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-1.html#Mapsui_UI_Objects_ObservableCollectionProvider_1_Collection_
-  commentId: Overload:Mapsui.UI.Objects.ObservableCollectionProvider`1.Collection
+  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2_Collection_
+  commentId: Overload:Mapsui.UI.Objects.ObservableCollectionProvider`2.Collection
   isSpec: "True"
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T>.Collection
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T).Collection
-  nameWithType: ObservableCollectionProvider<T>.Collection
-  nameWithType.vb: ObservableCollectionProvider(Of T).Collection
-- uid: Mapsui.UI.Objects.ObservableCollectionProvider`1.CRS
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, U>.Collection
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, U).Collection
+  nameWithType: ObservableCollectionProvider<T, U>.Collection
+  nameWithType.vb: ObservableCollectionProvider(Of T, U).Collection
+- uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.CRS
   name: CRS
-  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-1.html#Mapsui_UI_Objects_ObservableCollectionProvider_1_CRS
-  commentId: P:Mapsui.UI.Objects.ObservableCollectionProvider`1.CRS
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T>.CRS
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T).CRS
-  nameWithType: ObservableCollectionProvider<T>.CRS
-  nameWithType.vb: ObservableCollectionProvider(Of T).CRS
-- uid: Mapsui.UI.Objects.ObservableCollectionProvider`1.CRS*
+  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2_CRS
+  commentId: P:Mapsui.UI.Objects.ObservableCollectionProvider`2.CRS
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, U>.CRS
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, U).CRS
+  nameWithType: ObservableCollectionProvider<T, U>.CRS
+  nameWithType.vb: ObservableCollectionProvider(Of T, U).CRS
+- uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.CRS*
   name: CRS
-  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-1.html#Mapsui_UI_Objects_ObservableCollectionProvider_1_CRS_
-  commentId: Overload:Mapsui.UI.Objects.ObservableCollectionProvider`1.CRS
+  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2_CRS_
+  commentId: Overload:Mapsui.UI.Objects.ObservableCollectionProvider`2.CRS
   isSpec: "True"
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T>.CRS
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T).CRS
-  nameWithType: ObservableCollectionProvider<T>.CRS
-  nameWithType.vb: ObservableCollectionProvider(Of T).CRS
-- uid: Mapsui.UI.Objects.ObservableCollectionProvider`1.GetExtents
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, U>.CRS
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, U).CRS
+  nameWithType: ObservableCollectionProvider<T, U>.CRS
+  nameWithType.vb: ObservableCollectionProvider(Of T, U).CRS
+- uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.GetExtents
   name: GetExtents()
-  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-1.html#Mapsui_UI_Objects_ObservableCollectionProvider_1_GetExtents
-  commentId: M:Mapsui.UI.Objects.ObservableCollectionProvider`1.GetExtents
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T>.GetExtents()
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T).GetExtents()
-  nameWithType: ObservableCollectionProvider<T>.GetExtents()
-  nameWithType.vb: ObservableCollectionProvider(Of T).GetExtents()
-- uid: Mapsui.UI.Objects.ObservableCollectionProvider`1.GetExtents*
+  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2_GetExtents
+  commentId: M:Mapsui.UI.Objects.ObservableCollectionProvider`2.GetExtents
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, U>.GetExtents()
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, U).GetExtents()
+  nameWithType: ObservableCollectionProvider<T, U>.GetExtents()
+  nameWithType.vb: ObservableCollectionProvider(Of T, U).GetExtents()
+- uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.GetExtents*
   name: GetExtents
-  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-1.html#Mapsui_UI_Objects_ObservableCollectionProvider_1_GetExtents_
-  commentId: Overload:Mapsui.UI.Objects.ObservableCollectionProvider`1.GetExtents
+  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2_GetExtents_
+  commentId: Overload:Mapsui.UI.Objects.ObservableCollectionProvider`2.GetExtents
   isSpec: "True"
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T>.GetExtents
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T).GetExtents
-  nameWithType: ObservableCollectionProvider<T>.GetExtents
-  nameWithType.vb: ObservableCollectionProvider(Of T).GetExtents
-- uid: Mapsui.UI.Objects.ObservableCollectionProvider`1.GetFeaturesInView(BoundingBox,System.Double)
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, U>.GetExtents
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, U).GetExtents
+  nameWithType: ObservableCollectionProvider<T, U>.GetExtents
+  nameWithType.vb: ObservableCollectionProvider(Of T, U).GetExtents
+- uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.GetFeaturesInView(BoundingBox,System.Double)
   name: GetFeaturesInView(BoundingBox, Double)
-  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-1.html#Mapsui_UI_Objects_ObservableCollectionProvider_1_GetFeaturesInView_BoundingBox_System_Double_
-  commentId: M:Mapsui.UI.Objects.ObservableCollectionProvider`1.GetFeaturesInView(BoundingBox,System.Double)
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T>.GetFeaturesInView(BoundingBox, System.Double)
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T).GetFeaturesInView(BoundingBox, System.Double)
-  nameWithType: ObservableCollectionProvider<T>.GetFeaturesInView(BoundingBox, Double)
-  nameWithType.vb: ObservableCollectionProvider(Of T).GetFeaturesInView(BoundingBox, Double)
-- uid: Mapsui.UI.Objects.ObservableCollectionProvider`1.GetFeaturesInView*
+  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2_GetFeaturesInView_BoundingBox_System_Double_
+  commentId: M:Mapsui.UI.Objects.ObservableCollectionProvider`2.GetFeaturesInView(BoundingBox,System.Double)
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, U>.GetFeaturesInView(BoundingBox, System.Double)
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, U).GetFeaturesInView(BoundingBox, System.Double)
+  nameWithType: ObservableCollectionProvider<T, U>.GetFeaturesInView(BoundingBox, Double)
+  nameWithType.vb: ObservableCollectionProvider(Of T, U).GetFeaturesInView(BoundingBox, Double)
+- uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.GetFeaturesInView*
   name: GetFeaturesInView
-  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-1.html#Mapsui_UI_Objects_ObservableCollectionProvider_1_GetFeaturesInView_
-  commentId: Overload:Mapsui.UI.Objects.ObservableCollectionProvider`1.GetFeaturesInView
+  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2_GetFeaturesInView_
+  commentId: Overload:Mapsui.UI.Objects.ObservableCollectionProvider`2.GetFeaturesInView
   isSpec: "True"
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T>.GetFeaturesInView
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T).GetFeaturesInView
-  nameWithType: ObservableCollectionProvider<T>.GetFeaturesInView
-  nameWithType.vb: ObservableCollectionProvider(Of T).GetFeaturesInView
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, U>.GetFeaturesInView
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, U).GetFeaturesInView
+  nameWithType: ObservableCollectionProvider<T, U>.GetFeaturesInView
+  nameWithType.vb: ObservableCollectionProvider(Of T, U).GetFeaturesInView
 - uid: Mapsui.UI.SwipedEventArgs
   name: SwipedEventArgs
   href: api/Mapsui.UI.SwipedEventArgs.html
@@ -5257,19 +5257,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.OnPropertyChanged
   nameWithType: MapControl.OnPropertyChanged
-- uid: Mapsui.UI.Wpf.MapControl.OnRender(DrawingContext)
-  name: OnRender(DrawingContext)
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_OnRender_DrawingContext_
-  commentId: M:Mapsui.UI.Wpf.MapControl.OnRender(DrawingContext)
-  fullName: Mapsui.UI.Wpf.MapControl.OnRender(DrawingContext)
-  nameWithType: MapControl.OnRender(DrawingContext)
-- uid: Mapsui.UI.Wpf.MapControl.OnRender*
-  name: OnRender
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_OnRender_
-  commentId: Overload:Mapsui.UI.Wpf.MapControl.OnRender
-  isSpec: "True"
-  fullName: Mapsui.UI.Wpf.MapControl.OnRender
-  nameWithType: MapControl.OnRender
 - uid: Mapsui.UI.Wpf.MapControl.OpenBrowser(System.String)
   name: OpenBrowser(String)
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_OpenBrowser_System_String_
@@ -5367,19 +5354,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.Renderer
   nameWithType: MapControl.Renderer
-- uid: Mapsui.UI.Wpf.MapControl.RenderMode
-  name: RenderMode
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_RenderMode
-  commentId: P:Mapsui.UI.Wpf.MapControl.RenderMode
-  fullName: Mapsui.UI.Wpf.MapControl.RenderMode
-  nameWithType: MapControl.RenderMode
-- uid: Mapsui.UI.Wpf.MapControl.RenderMode*
-  name: RenderMode
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_RenderMode_
-  commentId: Overload:Mapsui.UI.Wpf.MapControl.RenderMode
-  isSpec: "True"
-  fullName: Mapsui.UI.Wpf.MapControl.RenderMode
-  nameWithType: MapControl.RenderMode
 - uid: Mapsui.UI.Wpf.MapControl.ReSnapRotationDegrees
   name: ReSnapRotationDegrees
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ReSnapRotationDegrees
@@ -5567,24 +5541,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.PointExtensions.ApplyScale
   nameWithType: PointExtensions.ApplyScale
-- uid: Mapsui.UI.Wpf.RenderMode
-  name: RenderMode
-  href: api/Mapsui.UI.Wpf.RenderMode.html
-  commentId: T:Mapsui.UI.Wpf.RenderMode
-  fullName: Mapsui.UI.Wpf.RenderMode
-  nameWithType: RenderMode
-- uid: Mapsui.UI.Wpf.RenderMode.Skia
-  name: Skia
-  href: api/Mapsui.UI.Wpf.RenderMode.html#Mapsui_UI_Wpf_RenderMode_Skia
-  commentId: F:Mapsui.UI.Wpf.RenderMode.Skia
-  fullName: Mapsui.UI.Wpf.RenderMode.Skia
-  nameWithType: RenderMode.Skia
-- uid: Mapsui.UI.Wpf.RenderMode.Wpf
-  name: Wpf
-  href: api/Mapsui.UI.Wpf.RenderMode.html#Mapsui_UI_Wpf_RenderMode_Wpf
-  commentId: F:Mapsui.UI.Wpf.RenderMode.Wpf
-  fullName: Mapsui.UI.Wpf.RenderMode.Wpf
-  nameWithType: RenderMode.Wpf
 - uid: Mapsui.UI.Wpf.WindowsPointExtensions
   name: WindowsPointExtensions
   href: api/Mapsui.UI.Wpf.WindowsPointExtensions.html
