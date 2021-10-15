@@ -17,7 +17,7 @@ using Avalonia.Skia;
 using Avalonia.Threading;
 using Mapsui.Layers;
 using Mapsui.Providers;
-using Mapsui.UI.Avalonia.ExtensionMethods;
+using Mapsui.UI.Avalonia.Extensions;
 using Mapsui.Utilities;
 
 namespace Mapsui.UI.Avalonia

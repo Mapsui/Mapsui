@@ -1,4 +1,3 @@
-// ReSharper disable CheckNamespace
 namespace Mapsui.Geometries
 {
     public static class GeometryExtensions

@@ -6,6 +6,13 @@ namespace Mapsui.Extensions
 {
     public static class StreamExtensions
     {
+        public static byte[] ToBytes(this Stream input)
+        {
+            using var ms = new MemoryStream();
+            input.CopyTo(ms);
+            return ms.ToArray();
+        }
+
         /// <summary>
         /// Detects if stream is svg stream
         /// </summary>
@@ -29,7 +36,7 @@ namespace Mapsui.Extensions
                 if (ReadOneSearch(stream, "<svg") >= 0)
                 {
                     return true;
-                };
+                }
             }
 
             return false;

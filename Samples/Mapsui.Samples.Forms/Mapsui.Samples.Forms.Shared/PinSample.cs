@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using Mapsui.Extensions;
 using Mapsui.Rendering.Skia;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Maps;

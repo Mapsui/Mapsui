@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Mapsui.Providers;
 
-namespace Mapsui.Samples.Forms.Shared.ExtensionMethods
+namespace Mapsui.Samples.WinUI.Extensions
 {
     static class FeatureExtensions
     {

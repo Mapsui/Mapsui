@@ -1,6 +1,5 @@
 ﻿using Mapsui.Geometries;
 
-// ReSharper disable CheckNamespace
 namespace BruTile
 {
     public static class ExtentExtensions

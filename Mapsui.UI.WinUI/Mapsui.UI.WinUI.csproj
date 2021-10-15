@@ -8,7 +8,6 @@
     <DefineConstants>__WINUI__</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\Mapsui.UI.Uwp\ExtensionMethods\PointExtensions.cs" Link="ExtensionMethods\PointExtensions.cs" />
     <Compile Include="..\Mapsui.UI.Uwp\MapControl.cs" Link="MapControl.cs" />
   </ItemGroup>
 
@@ -17,10 +16,6 @@
       <PackageReference Include="Microsoft.ProjectReunion.Foundation" Version="0.8.4" />
       <PackageReference Include="Microsoft.ProjectReunion.WinUI" Version="0.8.4" />
       <PackageReference Include="SkiaSharp.Views.WinUI" Version="2.80.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ExtensionMethods\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Geometries;
 
-// ReSharper disable CheckNamespace
 namespace Mapsui.Providers
 {
     public static class FeatureExtensions

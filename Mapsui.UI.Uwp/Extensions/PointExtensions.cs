@@ -1,6 +1,6 @@
-﻿using Avalonia;
+﻿using Windows.Foundation;
 
-namespace Mapsui.UI.Avalonia.ExtensionMethods
+namespace Mapsui.UI.Uwp
 {
     public static class PointExtensions
     {

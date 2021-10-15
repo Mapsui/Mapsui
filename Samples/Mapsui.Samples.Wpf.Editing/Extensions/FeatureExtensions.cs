@@ -2,7 +2,7 @@
 using System.Text;
 using Mapsui.Providers;
 
-namespace Mapsui.Samples.Wpf.Editing
+namespace Mapsui.Samples.Wpf.Editing.Extensions
 {
     static class FeatureExtensions
     {
