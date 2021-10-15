@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace Mapsui.Rendering.Xaml.Tests
+namespace Mapsui.Rendering.Skia.Tests
 {
     internal static class File
     {

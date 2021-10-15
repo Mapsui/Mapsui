@@ -6,11 +6,7 @@ using Mapsui.Tests.Common.Maps;
 using NUnit.Framework;
 using SkiaSharp;
 
-#if SKIA
-using Mapsui.Rendering.Skia;
-#endif
-
-namespace Mapsui.Rendering.Xaml.Tests
+namespace Mapsui.Rendering.Skia.Tests
 {
     [TestFixture, Apartment(ApartmentState.STA)]
     class MapRendererTests

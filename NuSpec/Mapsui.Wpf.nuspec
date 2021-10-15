@@ -30,9 +30,6 @@
   </metadata>
   <files>
     <file src="..\Mapsui.UI.Wpf\bin\Release\net48\Mapsui.UI.Wpf.dll" target="lib\net48\Mapsui.UI.Wpf.dll" />
-    <file src="..\Mapsui.UI.Wpf\bin\Release\net48\Mapsui.Rendering.Xaml.dll" target="lib\net48\Mapsui.Rendering.Xaml.dll" />
-
     <file src="..\Mapsui.UI.Wpf\bin\Release\netcoreapp3.1\Mapsui.UI.Wpf.dll" target="lib\netcoreapp3.1\Mapsui.UI.Wpf.dll" />
-    <file src="..\Mapsui.UI.Wpf\bin\Release\netcoreapp3.1\Mapsui.Rendering.Xaml.dll" target="lib\netcoreapp3.1\Mapsui.Rendering.Xaml.dll" />
   </files>
 </package>
