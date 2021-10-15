@@ -12,29 +12,20 @@ Mapsui is a C# map component for apps
 
 ## Nugets
 
-| package | version  | downloads |
-| ---------------|:-------------:|:-------------:|
-| Mapsui         | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.svg?style=flat)](https://www.nuget.org/packages/Mapsui/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.svg)](https://www.nuget.org/packages/Mapsui) |
-| Mapsui.Forms   | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Forms.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Forms/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.Forms.svg)](https://www.nuget.org/packages/Mapsui.Forms) |
-| Mapsui.Wpf     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Wpf.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Wpf/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Wpf.svg)](https://www.nuget.org/packages/Mapsui.Wpf) |
-| Mapsui.Uwp     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Uwp.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Uwp/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Uwp.svg)](https://www.nuget.org/packages/Mapsui.Uwp) |
-| Mapsui.Android | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Android.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Android/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Android.svg)](https://www.nuget.org/packages/Mapsui.Android) |
-| Mapsui.iOS     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.iOS.svg?style=flat)](https://www.nuget.org/packages/Mapsui.iOS/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.iOS.svg)](https://www.nuget.org/packages/Mapsui.iOS) |
+| package | version  | downloads | quickstart guide |
+| ---------------|:-------------:|:-------------:|:-------------:|
+| Mapsui         | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.svg?style=flat)](https://www.nuget.org/packages/Mapsui/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.svg)](https://www.nuget.org/packages/Mapsui) | |
+| Mapsui.Forms   | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Forms.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Forms/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.Forms.svg)](https://www.nuget.org/packages/Mapsui.Forms) | [Xamarin.Forms](https://mapsui.com/documentation/getting-started-xamarin-forms.html) |
+| Mapsui.Wpf     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Wpf.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Wpf/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Wpf.svg)](https://www.nuget.org/packages/Mapsui.Wpf) | [WPF](https://mapsui.com/documentation/getting-started-wpf.html) |
+| Mapsui.Uwp     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Uwp.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Uwp/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Uwp.svg)](https://www.nuget.org/packages/Mapsui.Uwp) | [UWP](https://mapsui.com/documentation/getting-started-uwp.html) |
+| Mapsui.Android | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Android.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Android/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Android.svg)](https://www.nuget.org/packages/Mapsui.Android) | [Xamarin.Android](https://mapsui.com/documentation/getting-started-android.html) |
+| Mapsui.iOS     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.iOS.svg?style=flat)](https://www.nuget.org/packages/Mapsui.iOS/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.iOS.svg)](https://www.nuget.org/packages/Mapsui.iOS) | [Xamarin.iOS](https://mapsui.com/documentation/getting-started-ios.html) |
 
 ## Build Status
 | platform | status |
 | ------------- |:-------------:|
 | Build on Windows    | [![Build status](https://ci.appveyor.com/api/projects/status/p20w43qv4ixkkftp?svg=true)](https://ci.appveyor.com/project/pauldendulk/mapsui) |
 | Build docs | [![Build status](https://ci.appveyor.com/api/projects/status/c8hcfeoafmf51gin/branch/master?svg=true)](https://ci.appveyor.com/project/pauldendulk/mapsui-373p1/branch/master) |
-
-## Quickstart
-Quickly get a sample running 
-
-- [Xamarin Forms](https://mapsui.com/documentation/getting-started-xamarin-forms.html)
-- [WPF](https://mapsui.com/documentation/getting-started-wpf.html)
-- [UWP](https://mapsui.com/documentation/getting-started-uwp.html)
-- [Android](https://mapsui.com/documentation/getting-started-android.html)
-- [iOS](https://mapsui.com/documentation/getting-started-ios.html)
 
 ## Documentation
 The documentation can be found at [mapsui.com](https://mapsui.com). Let us know what kind of information you are missing.
