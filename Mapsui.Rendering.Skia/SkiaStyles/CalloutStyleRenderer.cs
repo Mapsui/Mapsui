@@ -2,6 +2,7 @@
 using Mapsui.Styles;
 using SkiaSharp;
 using System;
+using Mapsui.Rendering.Skia.Extensions;
 using Topten.RichTextKit;
 
 namespace Mapsui.Rendering.Skia
