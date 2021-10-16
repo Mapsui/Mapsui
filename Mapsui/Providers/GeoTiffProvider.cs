@@ -37,19 +37,18 @@ namespace Mapsui.Providers
             public double YCenterOfUpperLeftPixel;
         }
 
-        private const string WorldExtention = ".tfw";
+        private const string WorldExtension = ".tfw";
         private readonly IFeature _feature;
         private readonly BoundingBox _extent;
 
         public GeoTiffProvider(string tiffPath, List<Color> noDataColors = null)
         {
-            MemoryStream data;
             if (!File.Exists(tiffPath))
             {
                 throw new ArgumentException($"Tiff file expected at {tiffPath}");
             }
 
-            string worldPath = GetPathWithoutExtension(tiffPath) + WorldExtention;
+            var worldPath = GetPathWithoutExtension(tiffPath) + WorldExtension;
             if (!File.Exists(worldPath))
             {
                 throw new ArgumentException($"World file expected at {worldPath}");
@@ -59,7 +58,7 @@ namespace Mapsui.Providers
             var worldProperties = LoadWorld(worldPath);
             _extent = CalculateExtent(tiffProperties, worldProperties);
 
-            data = ReadImageAsStream(tiffPath, noDataColors);
+            var data = ReadImageAsStream(tiffPath, noDataColors);
             
             _feature = new Feature { Geometry = new Raster(data, _extent) };
             _feature.Styles.Add(new VectorStyle());
@@ -93,16 +92,13 @@ namespace Mapsui.Providers
         {
             TiffProperties tiffFileProperties;
 
-            using (var stream = new FileStream(location, FileMode.Open, FileAccess.Read))
-            {
-                using (var tif = Image.FromStream(stream, false, false))
-                {
-                    tiffFileProperties.Width = tif.PhysicalDimension.Width;
-                    tiffFileProperties.Height = tif.PhysicalDimension.Height;
-                    tiffFileProperties.HResolution = tif.HorizontalResolution;
-                    tiffFileProperties.VResolution = tif.VerticalResolution;
-                }
-            }
+            using var stream = new FileStream(location, FileMode.Open, FileAccess.Read);
+            using var tif = Image.FromStream(stream, false, false);
+            tiffFileProperties.Width = tif.PhysicalDimension.Width;
+            tiffFileProperties.Height = tif.PhysicalDimension.Height;
+            tiffFileProperties.HResolution = tif.HorizontalResolution;
+            tiffFileProperties.VResolution = tif.VerticalResolution;
+
             return tiffFileProperties;
         }
 
@@ -178,15 +174,13 @@ namespace Mapsui.Providers
         private static WorldProperties LoadWorld(string location)
         {
             WorldProperties worldProperties;
-            using (TextReader reader = File.OpenText(location))
-            {
-                worldProperties.PixelSizeX = Convert.ToDouble(reader.ReadLine()?.Replace(',', '.'), CultureInfo.InvariantCulture);
-                worldProperties.RotationAroundYAxis = Convert.ToDouble(reader.ReadLine()?.Replace(',', '.'), CultureInfo.InvariantCulture);
-                worldProperties.RotationAroundXAxis = Convert.ToDouble(reader.ReadLine()?.Replace(',', '.'), CultureInfo.InvariantCulture);
-                worldProperties.PixelSizeY = Convert.ToDouble(reader.ReadLine()?.Replace(',', '.'), CultureInfo.InvariantCulture);
-                worldProperties.XCenterOfUpperLeftPixel = Convert.ToDouble(reader.ReadLine()?.Replace(',', '.'), CultureInfo.InvariantCulture);
-                worldProperties.YCenterOfUpperLeftPixel = Convert.ToDouble(reader.ReadLine()?.Replace(',', '.'), CultureInfo.InvariantCulture);
-            }
+            using TextReader reader = File.OpenText(location);
+            worldProperties.PixelSizeX = Convert.ToDouble(reader.ReadLine()?.Replace(',', '.'), CultureInfo.InvariantCulture);
+            worldProperties.RotationAroundYAxis = Convert.ToDouble(reader.ReadLine()?.Replace(',', '.'), CultureInfo.InvariantCulture);
+            worldProperties.RotationAroundXAxis = Convert.ToDouble(reader.ReadLine()?.Replace(',', '.'), CultureInfo.InvariantCulture);
+            worldProperties.PixelSizeY = Convert.ToDouble(reader.ReadLine()?.Replace(',', '.'), CultureInfo.InvariantCulture);
+            worldProperties.XCenterOfUpperLeftPixel = Convert.ToDouble(reader.ReadLine()?.Replace(',', '.'), CultureInfo.InvariantCulture);
+            worldProperties.YCenterOfUpperLeftPixel = Convert.ToDouble(reader.ReadLine()?.Replace(',', '.'), CultureInfo.InvariantCulture);
             return worldProperties;
         }
 

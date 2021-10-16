@@ -92,7 +92,7 @@ namespace Mapsui
             {
                 var animations = new List<AnimationEntry>();
 
-                if (!_viewport.Center.Equals(center))
+                if (!center.Equals(_viewport.Center))
                 {
                     var entry = new AnimationEntry(
                         start: _viewport.Center,
@@ -335,7 +335,7 @@ namespace Mapsui
             {
                 var animations = new List<AnimationEntry>();
 
-                if (_viewport.Center.Equals(center))
+                if (center.Equals(_viewport.Center))
                     return;
 
                 var entry = new AnimationEntry(
@@ -377,7 +377,7 @@ namespace Mapsui
                 var animations = new List<AnimationEntry>();
                 AnimationEntry entry;
 
-                if (!_viewport.Center.Equals(center))
+                if (!center.Equals(_viewport.Center))
                 {
                     entry = new AnimationEntry(
                         start: _viewport.Center,
@@ -439,12 +439,11 @@ namespace Mapsui
             else
             {
                 var animations = new List<AnimationEntry>();
-                AnimationEntry entry;
 
                 if (_viewport.Rotation == rotation)
                     return;
 
-                entry = new AnimationEntry(
+                var entry = new AnimationEntry(
                     start: _viewport.Rotation,
                     end: rotation,
                     animationStart: 0,
@@ -481,8 +480,8 @@ namespace Mapsui
             if (maxDuration < 16)
                 return;
 
-            velocityX = -velocityX;// reverse as it finger direction is oposite to map movement
-            velocityY = -velocityY;// reverse as it finger direction is oposite to map movement
+            velocityX = -velocityX;// reverse as it finger direction is opposite to map movement
+            velocityY = -velocityY;// reverse as it finger direction is opposite to map movement
 
             var magnitudeOfV = Math.Sqrt((velocityX * velocityX) + (velocityY * velocityY));
 
@@ -495,9 +494,8 @@ namespace Mapsui
                 animateMillis = maxDuration;
 
             var animations = new List<AnimationEntry>();
-            AnimationEntry entry;
 
-            entry = new AnimationEntry(
+            var entry = new AnimationEntry(
                 start: (velocityX, velocityY),
                 end: (0d, 0d),
                 animationStart: 0,

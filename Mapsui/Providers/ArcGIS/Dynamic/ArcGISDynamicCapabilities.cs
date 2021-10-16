@@ -25,7 +25,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
 
         public string[] GetSupportedImageFormatTypes()
         {
-            return supportedImageFormatTypes == null ? null : supportedImageFormatTypes.Split(',');
+            return supportedImageFormatTypes?.Split(',');
         }
     }
 }

@@ -706,8 +706,7 @@ namespace Mapsui.Providers.Wfs
                     geomName = geomQuery.GetValueFromNode(geomQuery.Compile(_textResources.XPATH_NAMEATTRIBUTEQUERY));
 
                     /* Just, if not set manually... */
-                    if (geomType == null)
-                        geomType = geomQuery.GetValueFromNode(geomQuery.Compile(_textResources.XPATH_TYPEATTRIBUTEQUERY));
+                    geomType ??= geomQuery.GetValueFromNode(geomQuery.Compile(_textResources.XPATH_TYPEATTRIBUTEQUERY));
                     
                     /* read all the elements */
                     var iterator = geomQuery.GetIterator(geomQuery.Compile("//ancestor::xs:sequence/xs:element"));
@@ -827,16 +826,14 @@ namespace Mapsui.Providers.Wfs
                     }
                 }
 
-                if (geomName == null)
-                    /* Default value for geometry column = geom */
-                    geomName = "geom";
+                // Default value for geometry column = geom 
+                geomName ??= "geom";
 
-                if (geomType == null)
-                    /* Set geomType to an empty string in order to avoid exceptions.
-                    The geometry type is not necessary by all means - it can be detected in 'GetFeature' response too.. */
-                    geomType = string.Empty;
+                // Set geomType to an empty string in order to avoid exceptions.
+                // The geometry type is not necessary by all means - it can be detected in 'GetFeature' response too.. 
+                geomType ??= string.Empty;
 
-                /* Remove prefix */
+                // Remove prefix
                 if (geomType.Contains(":"))
                     geomType = geomType.Substring(geomType.IndexOf(":", StringComparison.Ordinal) + 1);
 

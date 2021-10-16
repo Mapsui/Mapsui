@@ -154,12 +154,12 @@ namespace Mapsui.Styles
         public bool CollisionDetection { get; set; }
 
         /// <summary>
-        /// The horisontal alignment of the text in relation to the labelpoint
+        /// The horizontal alignment of the text in relation to the label point
         /// </summary>
         public HorizontalAlignmentEnum HorizontalAlignment { get; set; }
 
         /// <summary>
-        /// The horisontal alignment of the text in relation to the labelpoint
+        /// The horizontal alignment of the text in relation to the label point
         /// </summary>
         public VerticalAlignmentEnum VerticalAlignment { get; set; }
 

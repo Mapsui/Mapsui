@@ -255,14 +255,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         {
             public ElementInfo(string name, string dataType)
             {
-                if (name == null)
-                    throw new ArgumentNullException("name");
-
-                if (dataType == null)
-                    throw new ArgumentNullException("dataType");
-
-                Name = name;
-                DataType = dataType;
+                Name = name ?? throw new ArgumentNullException("name");
+                DataType = dataType ?? throw new ArgumentNullException("dataType");
             }
 
             /// <summary>

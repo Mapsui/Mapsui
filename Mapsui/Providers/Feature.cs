@@ -32,20 +32,17 @@ namespace Mapsui.Providers
 
         public IGeometry Geometry { get; set; }
 
-        public IDictionary<IStyle, object> RenderedGeometry { get; private set; }
+        public IDictionary<IStyle, object> RenderedGeometry { get; }
 
         public ICollection<IStyle> Styles { get; set; }
 
         public virtual object this[string key]
         {
-            get { return _dictionary.ContainsKey(key) ? _dictionary[key] : null; }
-            set { _dictionary[key] = value; }
+            get => _dictionary.ContainsKey(key) ? _dictionary[key] : null;
+            set => _dictionary[key] = value;
         }
 
-        public IEnumerable<string> Fields
-        {
-            get { return _dictionary.Keys; }
-        }
+        public IEnumerable<string> Fields => _dictionary.Keys;
 
         public BoundingBox BoundingBox => Geometry.BoundingBox;
 

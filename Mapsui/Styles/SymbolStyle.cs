@@ -13,8 +13,6 @@ namespace Mapsui.Styles
 
     public class SymbolStyle : ImageStyle // todo: derive SymbolStyle from VectorStyle after v2.
     {
-        public SymbolStyle() : base() { }
-
         public static double DefaultWidth { get; set; } = 32;
         public static double DefaultHeight { get; set; } = 32;
         public SymbolType SymbolType { get; set; }

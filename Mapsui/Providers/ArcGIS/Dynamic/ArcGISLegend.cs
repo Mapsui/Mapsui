@@ -116,13 +116,13 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
         private void OnLegendReceived(ArcGISLegendResponse legendInfo)
         {
             var handler = LegendReceived;
-            if (handler != null) handler(this, legendInfo);
+            handler?.Invoke(this, legendInfo);
         }
 
         private void OnLegendFailed()
         {
             var handler = LegendFailed;
-            if (handler != null) handler(this, null);
+            handler?.Invoke(this, null);
         }
     }
 }

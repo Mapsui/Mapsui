@@ -62,7 +62,7 @@ namespace Mapsui.Layers
         string Name { get; set; }
 
         /// <summary>
-        /// Gets the boundingbox of the entire layer
+        /// Gets the BoundingBox of the entire layer
         /// </summary>
         BoundingBox Envelope { get; }
         

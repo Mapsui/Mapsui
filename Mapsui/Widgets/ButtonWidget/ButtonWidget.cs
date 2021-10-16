@@ -1,9 +1,9 @@
-﻿using Mapsui.Geometries;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Mapsui.Geometries;
 
-namespace Mapsui.Widgets.Button
+namespace Mapsui.Widgets.ButtonWidget
 {
     /// <summary>
     /// Widget which shows a buttons
@@ -38,12 +38,9 @@ namespace Mapsui.Widgets.Button
         /// <summary>
         /// SVG image to show for button
         /// </summary>
-        public string SVGImage
+        public string SvgImage
         {
-            get
-            {
-                return _svgImage;
-            }
+            get => _svgImage;
             set
             {
                 if (_svgImage == value)
@@ -60,17 +57,14 @@ namespace Mapsui.Widgets.Button
         /// </summary>
         public object Picture { get; set; }
 
-        private float _rotation = 0;
+        private float _rotation;
 
         /// <summary>
         /// Rotation of the SVG image
         /// </summary>
         public float Rotation
         {
-            get
-            {
-                return _rotation;
-            }
+            get => _rotation;
             set
             {
                 if (_rotation == value)
@@ -87,10 +81,7 @@ namespace Mapsui.Widgets.Button
         /// </summary>
         public float Opacity
         {
-            get
-            {
-                return _opacity;
-            }
+            get => _opacity;
             set
             {
                 if (_opacity == value)

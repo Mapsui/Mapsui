@@ -2,17 +2,16 @@
 using Mapsui.UI;
 using Mapsui.Utilities;
 using Mapsui.Widgets;
-using Mapsui.Widgets.Performance;
 using SkiaSharp;
-using System;
 using Mapsui.Extensions;
+using Mapsui.Widgets.PerformanceWidget;
 
 namespace Mapsui.Samples.Common.Maps
 {
     public class PerformanceWidgetSample : ISample
     {
         IMapControl _mapControl;
-        Performance _performance = new Performance(10);
+        readonly Performance _performance = new Performance(10);
 
         public string Name => "4 Performance Widget";
 
@@ -21,7 +20,7 @@ namespace Mapsui.Samples.Common.Maps
         public void OnClick(object sender, WidgetTouchedEventArgs args)
         {
             _mapControl?.Performance.Clear();
-            _mapControl.RefreshGraphics();
+            _mapControl?.RefreshGraphics();
 
             args.Handled = true;
         }

@@ -87,7 +87,7 @@ namespace Mapsui.Styles
         /// Converts a string in Mapbox GL format to a Mapsui Color
         /// 
         /// This function assumes, that alpha is a float in range from 0.0 to 1.0.
-        /// It converts this float in Maspui Color alpha without rounding.
+        /// It converts this float in Mapsui Color alpha without rounding.
         /// The following colors could be converted:
         /// - Named colors with known Html names 
         /// - Colors as Html color values with leading '#' and 6 or 3 numbers

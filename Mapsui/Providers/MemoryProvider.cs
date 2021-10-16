@@ -44,21 +44,10 @@ namespace Mapsui.Providers
     /// </example>
     /// <example>
     /// Adding points of interest to the map. This is useful for vehicle tracking etc.
-    /// <code lang="C#">
-    /// List&#60;Mapsui.Geometries.Geometry&#62; geometries = new List&#60;Mapsui.Geometries.Geometry&#62;();
-    /// //Add two points
-    /// geometries.Add(new Mapsui.Geometries.Point(23.345,64.325));
-    /// geometries.Add(new Mapsui.Geometries.Point(23.879,64.194));
-    /// Mapsui.Layers.VectorLayer layerVehicles = new Mapsui.Layers.VectorLayer("Vechicles");
-    /// layerVehicles.DataSource = new Mapsui.Data.Providers.MemoryProvider(geometries);
-    /// layerVehicles.Style.Symbol = Bitmap.FromFile(@"C:\data\car.gif");
-    /// myMap.Layers.Add(layerVehicles);
-    /// </code>
     /// </example>
     /// </remarks>
     public class MemoryProvider<T> : IProvider<T> where T : IFeature
     {
-
         /// <summary>
         /// Gets or sets the geometries this data source contains
         /// </summary>
@@ -81,9 +70,9 @@ namespace Mapsui.Providers
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MemoryProvider"/>
+        /// Initializes a new instance of the MemoryProvider
         /// </summary>
-        /// <param name="geometries">Set of geometries that this datasource should contain</param>
+        /// <param name="geometries">Set of geometries that this data source should contain</param>
         public MemoryProvider(IEnumerable<IGeometry> geometries)
         {
             CRS = "";
@@ -92,7 +81,7 @@ namespace Mapsui.Providers
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MemoryProvider"/>
+        /// Initializes a new instance of the MemoryProvider
         /// </summary>
         /// <param name="feature">Feature to be in this dataSource</param>
         public MemoryProvider(IGeometryFeature feature)
@@ -103,16 +92,16 @@ namespace Mapsui.Providers
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MemoryProvider"/>
+        /// Initializes a new instance of the MemoryProvider
         /// </summary>
-        /// <param name="wellKnownTextGeometry"><see cref="Geometry"/> as Well-known Text to be included in this datasource</param>
+        /// <param name="wellKnownTextGeometry"><see cref="Geometry"/> as Well-known Text to be included in this data source</param>
         public MemoryProvider(string wellKnownTextGeometry)
             : this(GeometryFromWKT.Parse(wellKnownTextGeometry))
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MemoryProvider"/>
+        /// Initializes a new instance of the MemoryProvider
         /// </summary>
         /// <param name="features">Features to be included in this dataSource</param>
         public MemoryProvider(IEnumerable<IGeometryFeature> features)
@@ -123,7 +112,7 @@ namespace Mapsui.Providers
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MemoryProvider"/>
+        /// Initializes a new instance of the MemoryProvider
         /// </summary>
         /// <param name="geometry">Geometry to be in this dataSource</param>
         public MemoryProvider(Geometry geometry)
@@ -141,9 +130,9 @@ namespace Mapsui.Providers
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MemoryProvider"/>
+        /// Initializes a new instance of the MemoryProvider
         /// </summary>
-        /// <param name="wellKnownBinaryGeometry"><see cref="Geometry"/> as Well-known Binary to be included in this datasource</param>
+        /// <param name="wellKnownBinaryGeometry"><see cref="Geometry"/> as Well-known Binary to be included in this data source</param>
         public MemoryProvider(byte[] wellKnownBinaryGeometry) : this(GeometryFromWKB.Parse(wellKnownBinaryGeometry))
         {
         }
@@ -167,9 +156,9 @@ namespace Mapsui.Providers
         }
 
         /// <summary>
-        /// Boundingbox of dataset
+        /// BoundingBox of data set
         /// </summary>
-        /// <returns>boundingbox</returns>
+        /// <returns>BoundingBox</returns>
         public BoundingBox GetExtents()
         {
             return _boundingBox;

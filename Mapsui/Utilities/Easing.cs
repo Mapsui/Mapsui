@@ -81,10 +81,7 @@ namespace Mapsui.Utilities
 
         public Easing(Func<double, double> easingFunc)
         {
-            if (easingFunc == null)
-                throw new ArgumentNullException("easingFunc");
-
-            _easingFunc = easingFunc;
+            _easingFunc = easingFunc ?? throw new ArgumentNullException(nameof(easingFunc));
         }
 
         public double Ease(double v)

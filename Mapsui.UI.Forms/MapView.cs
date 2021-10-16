@@ -2,7 +2,6 @@
 using Mapsui.UI.Forms.Extensions;
 using Mapsui.UI.Objects;
 using Mapsui.Widgets;
-using Mapsui.Widgets.Button;
 using SkiaSharp;
 using Svg.Skia;
 using System;
@@ -15,6 +14,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using Mapsui.Extensions;
 using Mapsui.Providers;
+using Mapsui.Widgets.ButtonWidget;
 using Xamarin.Forms;
 
 namespace Mapsui.UI.Forms
@@ -842,7 +842,7 @@ namespace Mapsui.UI.Forms
 
         private ButtonWidget CreateButton(float x, float y, SKPicture picture, Action<object, WidgetTouchedEventArgs> action)
         {
-            var result = new Widgets.Button.ButtonWidget
+            var result = new ButtonWidget
             {
                 Picture = picture,
                 Envelope = new Geometries.BoundingBox(x, y, x + ButtonSize, y + ButtonSize),

@@ -28,21 +28,22 @@ namespace Mapsui.Layers
         private IRenderer _rasterizer;
         private double _resolution;
         public Delayer Delayer { get; } = new Delayer();
-        private Delayer _rasterizeDelayer = new Delayer();
+        private readonly Delayer _rasterizeDelayer = new Delayer();
 
         /// <summary>
         ///     Creates a RasterizingLayer which rasterizes a layer for performance
         /// </summary>
         /// <param name="layer">The Layer to be rasterized</param>
-        /// <param name="delayBeforeRasterize">Delay after viewport change to start rerasterising</param>
+        /// <param name="delayBeforeRasterize">Delay after viewport change to start re-rasterizing</param>
         /// <param name="renderResolutionMultiplier"></param>
         /// <param name="rasterizer">Rasterizer to use. null will use the default</param>
         /// <param name="overscanRatio">The ratio of the size of the rasterized output to the current viewport</param>
         /// <param name="onlyRerasterizeIfOutsideOverscan">
-        ///     Set the rasterization policy. false will trigger a Rasterization on
-        ///     every viewport change. true will trigger a Rerasterization only if the viewport moves outside the existing
+        ///     Set the rasterization policy. false will trigger a rasterization on
+        ///     every viewport change. true will trigger a re-rasterization only if the viewport moves outside the existing
         ///     rasterization.
         /// </param>
+        /// <param name="pixelDensity"></param>
         public RasterizingLayer(
             ILayer layer,
             int delayBeforeRasterize = 1000,
@@ -102,7 +103,7 @@ namespace Mapsui.Layers
 
                     _currentViewport = viewport;
 
-                    _rasterizer = _rasterizer ?? DefaultRendererFactory.Create();
+                    _rasterizer ??= DefaultRendererFactory.Create();
 
                     var bitmapStream = _rasterizer.RenderToBitmapStream(viewport, new[] { _layer }, pixelDensity: _pixelDensity);
                     RemoveExistingFeatures();
