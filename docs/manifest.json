@@ -18,7 +18,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Android.MapControl.html",
-          "hash": "DZVc3AVFG+K+4G7JDfJOPQ=="
+          "hash": "j3nSxkxmC+0YueYBJtqFWg=="
         }
       },
       "is_incremental": false,
@@ -30,7 +30,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Android.PointExtensions.html",
-          "hash": "W5yLm0O3W9r2gIlyBRy3ow=="
+          "hash": "6he3ehFLqAjYft/nRWnNkw=="
         }
       },
       "is_incremental": false,
@@ -90,7 +90,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Android.SkiaRenderMode.html",
-          "hash": "pnX6f6ketCSRvlGfi1GDFw=="
+          "hash": "jVpAegMXjsGYGAEFWzN+Fw=="
         }
       },
       "is_incremental": false,
@@ -570,7 +570,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Wpf.MouseButtonEventArgsExtensions.html",
-          "hash": "QGONe1p5egxVxcKqrOBr1g=="
+          "hash": "oFmK7/PND4Z0TBnJvldnqQ=="
         }
       },
       "is_incremental": false,
@@ -582,7 +582,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Wpf.PointExtensions.html",
-          "hash": "dWhNW5zoKXZ8Wx/oA6z9Dg=="
+          "hash": "NIC6gaqdNP2uaEQ05pDAxg=="
         }
       },
       "is_incremental": false,
@@ -594,7 +594,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Wpf.WindowsPointExtensions.html",
-          "hash": "XV/H3hRQesOw1U5oTzcLoA=="
+          "hash": "3mR8HAQnq+H2rfCFrzv+qg=="
         }
       },
       "is_incremental": false,
@@ -642,7 +642,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.iOS.MapControl.html",
-          "hash": "9uTubxdsp8Xv36vXJyVzWA=="
+          "hash": "de+IqdszqW1cnyY+/39YsQ=="
         }
       },
       "is_incremental": false,
@@ -738,7 +738,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/contributors-guidelines.html",
-          "hash": "L2pO8a1F+xj4RYSm+hqViw=="
+          "hash": "dApcbpZtW4AYDr+DIRZFzQ=="
         }
       },
       "is_incremental": false,
@@ -1157,9 +1157,9 @@
         "full_build_reason_code": "NoAvailableBuildCache"
       },
       "processors": {
-        "ResourceDocumentProcessor": {
+        "TocDocumentProcessor": {
           "can_incremental": false,
-          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
           "total_file_count": 0,
           "skipped_file_count": 0
@@ -1176,9 +1176,9 @@
           "total_file_count": 57,
           "skipped_file_count": 0
         },
-        "TocDocumentProcessor": {
+        "ResourceDocumentProcessor": {
           "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
           "total_file_count": 0,
           "skipped_file_count": 0
