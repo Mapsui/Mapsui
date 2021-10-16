@@ -148,7 +148,7 @@ namespace Mapsui.Providers.Wms
         public void AddLayer(string name)
         {
             if (!LayerExists(_wmsClient.Layer, name))
-                throw new ArgumentException("Cannot add WMS Layer - Unknown layername");
+                throw new ArgumentException("Cannot add WMS Layer - Unknown layer name");
 
             LayerList.Add(name);
         }

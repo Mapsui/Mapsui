@@ -218,7 +218,7 @@ namespace Mapsui.Providers.Shapefile
                         _filename = value;
                     }
                     if (_isOpen)
-                        throw new ApplicationException("Cannot change filename while datasource is open");
+                        throw new ApplicationException("Cannot change filename while data source is open");
 
                     ParseHeader();
                     ParseProjection();
@@ -412,7 +412,7 @@ namespace Mapsui.Providers.Shapefile
         private Collection<uint> GetObjectIDsInViewPrivate(BoundingBox bbox)
         {
             if (!_isOpen)
-                throw (new ApplicationException("An attempt was made to read from a closed datasource"));
+                throw new ApplicationException("An attempt was made to read from a closed data source");
             //Use the spatial index to get a list of features whose BoundingBox intersects bbox
             return _tree.Search(bbox);
         }
@@ -818,14 +818,14 @@ namespace Mapsui.Providers.Shapefile
                 }
             }
 
-            throw (new ApplicationException("Shapefile type " + _shapeType.ToString() + " not supported"));
+            throw new ApplicationException($"Shapefile type {_shapeType} not supported");
         }
 
         /// <summary>
-        /// Gets a datarow from the datasource at the specified index belonging to the specified datatable
+        /// Gets a data row from the data source at the specified index belonging to the specified datatable
         /// </summary>
         /// <param name="rowId"></param>
-        /// <param name="features">Datatable to feature should belong to.</param>
+        /// <param name="features">Data table to feature should belong to.</param>
         /// <returns></returns>
         public IGeometryFeature GetFeature(uint rowId, List<IGeometryFeature> features = null)
         {
