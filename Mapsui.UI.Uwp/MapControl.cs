@@ -16,11 +16,9 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA f
 
 using System;
-
 using System.Threading.Tasks;
 using Windows.Devices.Sensors;
 using Windows.Foundation;
-
 using Windows.System;
 #if __WINUI__
 using System.Runtime.Versioning;

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-
 using Foundation;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
