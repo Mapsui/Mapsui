@@ -1,6 +1,6 @@
 ﻿using Mapsui.Geometries;
 
-namespace Mapsui.UI.Wpf
+namespace Mapsui.UI.Wpf.Extensions
 {
     public static class PointExtensions
     {

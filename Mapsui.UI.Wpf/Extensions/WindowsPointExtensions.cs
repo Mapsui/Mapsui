@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Mapsui.UI.Wpf
+namespace Mapsui.UI.Wpf.Extensions
 {
     public static class WindowsPointExtensions
     {

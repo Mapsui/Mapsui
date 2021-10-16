@@ -1,6 +1,6 @@
 ﻿using Mapsui.Geometries;
 
-namespace Mapsui.UI.Android
+namespace Mapsui.UI.Android.Extensions
 {
     public static class PointExtensions
     {

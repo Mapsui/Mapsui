@@ -1,6 +1,6 @@
 using Android.Graphics;
 
-namespace Mapsui.UI.Android
+namespace Mapsui.UI.Android.Extensions
 {
     static class PointFExtensions
     {

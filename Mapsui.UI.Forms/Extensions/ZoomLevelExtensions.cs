@@ -3,7 +3,7 @@
     public static class ZoomLevelExtensions
     {
         /// <summary>
-        /// Convert zoom level (as discribed at https://wiki.openstreetmap.org/wiki/Zoom_levels) into a Mapsui resolution
+        /// Convert zoom level (as described at https://wiki.openstreetmap.org/wiki/Zoom_levels) into a Mapsui resolution
         /// </summary>
         /// <param name="zoomLevel">Zoom level</param>
         /// <returns>Resolution in Mapsui format</returns>
@@ -16,7 +16,7 @@
         }
 
         /// <summary>
-        /// Convert zoom level (as discribed at https://wiki.openstreetmap.org/wiki/Zoom_levels) into a Mapsui resolution
+        /// Convert zoom level (as described at https://wiki.openstreetmap.org/wiki/Zoom_levels) into a Mapsui resolution
         /// </summary>
         /// <param name="zoomLevel">Zoom level</param>
         /// <returns>Resolution in Mapsui format</returns>
@@ -26,7 +26,7 @@
         }
 
         /// <summary>
-        /// Convert zoom level (as discribed at https://wiki.openstreetmap.org/wiki/Zoom_levels) into a Mapsui resolution
+        /// Convert zoom level (as described at https://wiki.openstreetmap.org/wiki/Zoom_levels) into a Mapsui resolution
         /// </summary>
         /// <param name="zoomLevel">Zoom level</param>
         /// <returns>Resolution in Mapsui format</returns>
@@ -36,9 +36,9 @@
         }
 
         /// <summary>
-        /// Convert Mapsui resolution to zoom level (as discribed at https://wiki.openstreetmap.org/wiki/Zoom_levels)
+        /// Convert Mapsui resolution to zoom level (as described at https://wiki.openstreetmap.org/wiki/Zoom_levels)
         /// </summary>
-        /// <param name="resolution">Resolution in Mpsui format</param>
+        /// <param name="resolution">Resolution in Mapsui format</param>
         /// <returns>Zoom level</returns>
         public static double ToZoomLevel(this double resolution)
         {
