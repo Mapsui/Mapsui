@@ -29,9 +29,9 @@ namespace Mapsui.Styles
 
         public override bool Equals(object obj)
         {
-            if (!(obj is Offset))
+            if (!(obj is Offset offset))
                 return false;
-            return Equals((Offset) obj);
+            return Equals(offset);
         }
 
         public bool Equals(Offset offset)

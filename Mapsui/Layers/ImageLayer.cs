@@ -41,7 +41,7 @@ namespace Mapsui.Layers
         private bool _needsUpdate = true;
         private double _newResolution;
         private BoundingBox _newExtent;
-        private List<FeatureSets> _sets = new List<FeatureSets>();
+        private List<FeatureSets> _sets = new();
         private readonly Timer _startFetchTimer;
         private IProvider<IFeature> _dataSource;
         private readonly int _numberOfFeaturesReturned;

@@ -9,7 +9,7 @@ namespace Mapsui.Layers
 {
     public class LayerCollection : IEnumerable<ILayer>
     {
-        private ConcurrentQueue<ILayer> _layers = new ConcurrentQueue<ILayer>();
+        private ConcurrentQueue<ILayer> _layers = new();
         
         public delegate void LayerRemovedEventHandler(ILayer layer);
         public delegate void LayerAddedEventHandler(ILayer layer);

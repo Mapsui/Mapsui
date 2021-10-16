@@ -15,7 +15,7 @@ namespace Mapsui.Fetcher
     {
         private BoundingBox _extent;
         private double _resolution;
-        private readonly object _lockRoot = new object();
+        private readonly object _lockRoot = new ();
         private bool _busy;
         private readonly ConcurrentStack<T> _cache;
         private readonly Transformer _transformer;

@@ -104,7 +104,7 @@ namespace Mapsui.Providers
                     new LabelStyle(labelStyle)
                     {
                         Offset = {Y = offsetY},
-                        LabelMethod = f => text
+                        LabelMethod = _ => text
                     }
                 }
             };

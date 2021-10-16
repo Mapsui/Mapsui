@@ -8,7 +8,7 @@ namespace Mapsui.Projection
     {
         public static IEnumerable<Point> AllVertices(this IGeometry geometry)
         {
-            if (geometry == null) return new Point[0];
+            if (geometry == null) return Array.Empty<Point>();
 
             if (geometry is Point point) return new[] { point };
             if (geometry is LineString lineString) return AllVertices(lineString);

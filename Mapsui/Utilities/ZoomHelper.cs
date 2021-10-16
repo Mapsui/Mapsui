@@ -123,9 +123,7 @@ namespace Mapsui.Utilities
         
         private static void Swap(ref double xMin, ref double xMax)
         {
-            var tempX = xMin;
-            xMin = xMax;
-            xMax = tempX;
+            (xMin, xMax) = (xMax, xMin);
         }
     }
 

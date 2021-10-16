@@ -69,7 +69,7 @@ namespace Mapsui.Widgets.Zoom
             }
         }
 
-        private Color _strokeColor = new Color(192, 192, 192);
+        private Color _strokeColor = new(192, 192, 192);
 
         /// <summary>
         /// Color of button frames
@@ -86,7 +86,7 @@ namespace Mapsui.Widgets.Zoom
             }
         }
 
-        private Color _textColor = new Color(192, 192, 192);
+        private Color _textColor = new(192, 192, 192);
 
         /// <summary>
         /// Color of "+" and "-" sign
@@ -103,7 +103,7 @@ namespace Mapsui.Widgets.Zoom
             }
         }
 
-        private Color _backColor = new Color(224, 224, 224);
+        private Color _backColor = new(224, 224, 224);
 
         /// <summary>
         /// Color of background

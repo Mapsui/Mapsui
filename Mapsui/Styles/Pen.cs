@@ -54,11 +54,11 @@ namespace Mapsui.Styles
 
         public override bool Equals(object obj)
         {
-            if (!(obj is Pen))
+            if (!(obj is Pen pen))
             {
                 return false;
             }
-            return Equals((Pen)obj);
+            return Equals(pen);
         }
 
         public bool Equals(Pen pen)

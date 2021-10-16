@@ -8,7 +8,7 @@ namespace Mapsui.Widgets.ScaleBar
 {
     public class MetricUnitConverter : IUnitConverter
     {
-        public static readonly MetricUnitConverter Instance = new MetricUnitConverter();
+        public static readonly MetricUnitConverter Instance = new();
 
         private static readonly int _oneKilometer = 1000;
 

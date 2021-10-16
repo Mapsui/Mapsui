@@ -32,8 +32,8 @@ namespace Mapsui.Providers
     public class TileProvider : IProvider<IFeature>
     {
         readonly ITileSource _source;
-        readonly MemoryCache<byte[]> _bitmaps = new MemoryCache<byte[]>(100, 200);
-        readonly List<TileIndex> _queue = new List<TileIndex>();
+        readonly MemoryCache<byte[]> _bitmaps = new(100, 200);
+        readonly List<TileIndex> _queue = new();
 
         public BoundingBox GetExtents()
         {
