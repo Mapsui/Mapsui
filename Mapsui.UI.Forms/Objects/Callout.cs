@@ -7,6 +7,7 @@ using Mapsui.UI.Objects;
 using System;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Mapsui.Extensions;
 using Xamarin.Forms;
 
 namespace Mapsui.UI.Forms

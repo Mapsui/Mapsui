@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 
-namespace Mapsui
+namespace Mapsui.Extensions
 {
     static class EventWaitHandleExtensions
     {

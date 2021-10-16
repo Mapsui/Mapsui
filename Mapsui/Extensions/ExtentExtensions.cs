@@ -1,6 +1,7 @@
-﻿using Mapsui.Geometries;
+﻿using BruTile;
+using Mapsui.Geometries;
 
-namespace BruTile
+namespace Mapsui.Extensions
 {
     public static class ExtentExtensions
     {

@@ -7,6 +7,7 @@ using Mapsui.Layers;
 using Mapsui.Providers;
 using NUnit.Framework;
 using BruTile.Predefined;
+using Mapsui.Extensions;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
 

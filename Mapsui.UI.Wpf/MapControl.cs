@@ -10,6 +10,7 @@ using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Rendering.Skia;
 using Mapsui.UI.Utils;
+using Mapsui.UI.Wpf.Extensions;
 using Mapsui.Utilities;
 using SkiaSharp.Views.Desktop;
 using SkiaSharp.Views.WPF;

@@ -1,4 +1,4 @@
-namespace System
+namespace Mapsui.Extensions
 {
     public static class DoubleExtensions
     {

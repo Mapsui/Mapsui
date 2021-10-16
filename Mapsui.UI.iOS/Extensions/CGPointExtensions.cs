@@ -1,6 +1,6 @@
 using CoreGraphics;
 
-namespace Mapsui.UI.iOS
+namespace Mapsui.UI.iOS.Extensions
 {
     static class CGPointExtensions
     {

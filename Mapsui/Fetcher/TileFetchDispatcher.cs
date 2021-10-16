@@ -5,6 +5,7 @@ using System.Linq;
 using BruTile;
 using BruTile.Cache;
 using ConcurrentCollections;
+using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.Providers;
 

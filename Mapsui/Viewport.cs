@@ -20,6 +20,7 @@ using Mapsui.Geometries;
 using Mapsui.Utilities;
 using System.Runtime.CompilerServices;
 using System.ComponentModel;
+using Mapsui.Extensions;
 
 namespace Mapsui
 {

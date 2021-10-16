@@ -1,6 +1,7 @@
 using BruTile;
+using Mapsui.Geometries;
 
-namespace Mapsui.Geometries
+namespace Mapsui.Extensions
 {
     public static class BoundingBoxExtensions
     {

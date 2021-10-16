@@ -13,6 +13,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Mapsui.Extensions;
 using Mapsui.Providers;
 using Xamarin.Forms;
 

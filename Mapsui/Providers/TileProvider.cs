@@ -24,6 +24,7 @@ using BruTile.Cache;
 using Mapsui.Geometries;
 using System.IO;
 using System.Threading.Tasks;
+using Mapsui.Extensions;
 using Mapsui.Logging;
 
 namespace Mapsui.Providers

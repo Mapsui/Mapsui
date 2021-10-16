@@ -1,7 +1,6 @@
 ﻿using System.IO;
 using System.Text;
 
-
 namespace Mapsui.Extensions
 {
     public static class StreamExtensions

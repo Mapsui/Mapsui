@@ -1,6 +1,6 @@
 ﻿using Windows.Foundation;
 
-namespace Mapsui.UI.Uwp
+namespace Mapsui.UI.Uwp.Extensions
 {
     public static class PointExtensions
     {

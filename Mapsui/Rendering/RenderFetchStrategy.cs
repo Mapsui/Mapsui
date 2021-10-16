@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using BruTile;
 using BruTile.Cache;
+using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.Providers;
 
