@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Mapsui.Geometries;
+using Mapsui.Providers;
 
-namespace Mapsui.Providers
+namespace Mapsui.Extensions
 {
     public static class FeatureExtensions
     {

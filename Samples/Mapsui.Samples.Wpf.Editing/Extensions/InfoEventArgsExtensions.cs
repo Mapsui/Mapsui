@@ -1,4 +1,5 @@
-﻿using Mapsui.Providers;
+﻿using Mapsui.Extensions;
+using Mapsui.Providers;
 using Mapsui.UI;
 
 namespace Mapsui.Samples.Wpf.Editing

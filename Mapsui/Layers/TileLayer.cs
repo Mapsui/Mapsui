@@ -28,6 +28,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using Mapsui.Extensions;
 
 namespace Mapsui.Layers
 {

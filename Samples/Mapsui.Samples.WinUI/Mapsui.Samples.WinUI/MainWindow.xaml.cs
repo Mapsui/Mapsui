@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using System.Linq;
 using Windows.Storage;
+using Mapsui.Extensions;
 using Mapsui.Providers;
 using Mapsui.Providers.Wms;
 using Mapsui.Samples.Common;
