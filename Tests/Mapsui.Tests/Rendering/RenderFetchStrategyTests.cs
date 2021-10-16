@@ -1,5 +1,4 @@
-﻿using BruTile;
-using BruTile.Cache;
+﻿using BruTile.Cache;
 using BruTile.Predefined;
 using Mapsui.Extensions;
 using Mapsui.Providers;

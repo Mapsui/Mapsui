@@ -12,7 +12,6 @@ using Mapsui.Samples.Wpf.Editing.Editing;
 using Mapsui.Samples.Wpf.Editing.Utilities;
 using Mapsui.Logging;
 using Mapsui.Providers;
-using Mapsui.UI.Wpf;
 using Mapsui.UI.Wpf.Extensions;
 
 namespace Mapsui.Samples.Wpf.Editing

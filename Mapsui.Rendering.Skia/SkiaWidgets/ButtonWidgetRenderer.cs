@@ -2,7 +2,6 @@
 using Mapsui.Widgets.Button;
 using SkiaSharp;
 using Svg.Skia;
-using System;
 
 namespace Mapsui.Rendering.Skia.SkiaWidgets
 {
