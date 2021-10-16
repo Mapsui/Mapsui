@@ -11,7 +11,7 @@ namespace Mapsui.Layers
 {
     public  class WritableLayer : BaseLayer
     {
-        private readonly ConcurrentHashSet<IGeometryFeature> _cache = new ConcurrentHashSet<IGeometryFeature>();
+        private readonly ConcurrentHashSet<IGeometryFeature> _cache = new();
 
         public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {

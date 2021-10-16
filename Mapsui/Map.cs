@@ -38,7 +38,7 @@ namespace Mapsui
     /// </remarks>
     public class Map : INotifyPropertyChanged, IMap
     {
-        private LayerCollection _layers = new LayerCollection();
+        private LayerCollection _layers = new();
         private Color _backColor = Color.White;
         private IViewportLimiter _limiter = new ViewportLimiter();
 
@@ -74,7 +74,7 @@ namespace Mapsui
         /// <summary>
         /// List of Widgets belonging to map
         /// </summary>
-        public ConcurrentQueue<IWidget> Widgets { get; } = new ConcurrentQueue<IWidget>();
+        public ConcurrentQueue<IWidget> Widgets { get; } = new();
 
         /// <summary>
         /// Limit the extent to which the user can navigate

@@ -10,7 +10,7 @@ namespace Mapsui
     {
         private readonly Map _map;
         private readonly IViewport _viewport;
-        private readonly Animation _animation = new Animation();
+        private readonly Animation _animation = new();
         private double _rotationDelta;
 
         private static long _defaultDuration;

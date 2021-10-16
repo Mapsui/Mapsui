@@ -19,9 +19,9 @@ namespace Mapsui.Styles
 
         public override bool Equals(object obj)
         {
-            if (!(obj is SymbolStyle))
+            if (!(obj is SymbolStyle style))
                 return false;
-            return Equals((SymbolStyle)obj);
+            return Equals(style);
         }
 
         public bool Equals(SymbolStyle symbolStyle)

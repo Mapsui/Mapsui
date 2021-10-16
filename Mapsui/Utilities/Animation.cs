@@ -13,7 +13,7 @@ namespace Mapsui.Utilities
         private Stopwatch _stopwatch;
         private long _stopwatchStart;
         private long _durationTicks;
-        private readonly object _syncObject = new object();
+        private readonly object _syncObject = new();
 
         public Animation()
         {
@@ -41,7 +41,7 @@ namespace Mapsui.Utilities
         /// <summary>
         /// Animations, that should be made
         /// </summary>
-        private readonly List<AnimationEntry> _entries = new List<AnimationEntry>();
+        private readonly List<AnimationEntry> _entries = new();
 
         /// <summary>
         /// True, if animation is running

@@ -9,7 +9,7 @@ namespace Mapsui.Providers
 {
     public class Feature : IGeometryFeature, IDisposable
     {
-        private readonly Dictionary<string, object> _dictionary = new Dictionary<string, object>();
+        private readonly Dictionary<string, object> _dictionary = new();
         private bool _disposed;
 
         public Feature()

@@ -8,7 +8,7 @@ namespace Mapsui.Widgets.ScaleBar
 {
     public class NauticalUnitConverter : IUnitConverter
     {
-        public static readonly NauticalUnitConverter Instance = new NauticalUnitConverter();
+        public static readonly NauticalUnitConverter Instance = new();
         private const int OneMile = 1852;
 
         private NauticalUnitConverter()

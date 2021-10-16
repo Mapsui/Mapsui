@@ -19,7 +19,7 @@ namespace Mapsui.Layers
         private readonly double _overscan;
         private readonly double _renderResolutionMultiplier;
         private readonly float _pixelDensity;
-        private readonly object _syncLock = new object();
+        private readonly object _syncLock = new();
         private bool _busy;
         private Viewport _currentViewport;
         private BoundingBox _extent;
@@ -27,8 +27,8 @@ namespace Mapsui.Layers
         private IEnumerable<IFeature> _previousFeatures;
         private IRenderer _rasterizer;
         private double _resolution;
-        public Delayer Delayer { get; } = new Delayer();
-        private readonly Delayer _rasterizeDelayer = new Delayer();
+        public Delayer Delayer { get; } = new();
+        private readonly Delayer _rasterizeDelayer = new();
 
         /// <summary>
         ///     Creates a RasterizingLayer which rasterizes a layer for performance

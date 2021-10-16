@@ -50,11 +50,11 @@ namespace Mapsui.Styles
 
         public override bool Equals(object obj)
         {
-            if (!(obj is Brush))
+            if (!(obj is Brush brush))
             {
                 return false;
             }
-            return Equals((Brush)obj);
+            return Equals(brush);
         }
 
         public bool Equals(Brush brush)

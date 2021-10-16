@@ -40,7 +40,7 @@ namespace Mapsui
         private double _resolution = Constants.DefaultResolution;
         private double _width;
         private double _rotation;
-        private ReadOnlyPoint _center = new ReadOnlyPoint(0, 0);
+        private ReadOnlyPoint _center = new(0, 0);
         private bool _modified = true;
 
         /// <summary>

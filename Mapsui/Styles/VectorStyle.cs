@@ -26,11 +26,11 @@ namespace Mapsui.Styles
         
         public override bool Equals(object obj)
         {
-            if (!(obj is VectorStyle))
+            if (!(obj is VectorStyle style))
             {
                 return false;
             }
-            return Equals((VectorStyle)obj);
+            return Equals(style);
         }
 
         public bool Equals(VectorStyle vectorStyle)

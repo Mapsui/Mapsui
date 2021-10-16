@@ -41,7 +41,7 @@ namespace Mapsui.Providers.Wms
         private void LookExtractMultipleElements(XElement layer)
         {
             if (!layer.HasElements) return;
-            var element = layer.Descendants().First();
+            var element = layer.Descendants().FirstOrDefault();
 
             if (element != null)
             {

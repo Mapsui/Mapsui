@@ -66,12 +66,12 @@ namespace Mapsui.Styles
         private float _arrowPosition = 0.5f;
         private float _rectRadius = 4f;
         private float _shadowWidth = 2f;
-        private BoundingBox _padding = new BoundingBox(3f, 3f, 3f, 3f);
+        private BoundingBox _padding = new(3f, 3f, 3f, 3f);
         private Color _color = Color.Black;
         private Color _backgroundColor = Color.White;
         private float _strokeWidth = 1f;
         private int _content = -1;
-        private Offset _offset = new Offset(0, 0);
+        private Offset _offset = new(0, 0);
         private double _rotation;
         private string _title;
         private string _subtitle;
@@ -125,7 +125,7 @@ namespace Mapsui.Styles
         /// <summary>
         /// BoundingBox relative to offset point
         /// </summary>
-        public BoundingBox BoundingBox = new BoundingBox();
+        public BoundingBox BoundingBox = new();
 
         /// <summary>
         /// Gets or sets the rotation of the Callout in degrees (clockwise is positive)
@@ -446,8 +446,8 @@ namespace Mapsui.Styles
 
         public int InternalContent { get; set; } = -1;
 
-        private Font _titleFont = new Font();
-        private Font _subtitleFont = new Font();
+        private Font _titleFont = new();
+        private Font _subtitleFont = new();
 
         public Font TitleFont
         {

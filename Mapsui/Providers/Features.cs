@@ -24,7 +24,7 @@ namespace Mapsui.Providers
 {
     public class Features : IEnumerable<IFeature>
     {
-        private readonly List<IFeature> _features = new List<IFeature>();
+        private readonly List<IFeature> _features = new();
         
         public string PrimaryKey { get; private set; }
 

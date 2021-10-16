@@ -17,7 +17,7 @@ namespace Mapsui.Layers
     public class AnimatedFeatures
     {
         private readonly Timer _animationTimer;
-        private List<AnimatedItem> _cache = new List<AnimatedItem>();
+        private List<AnimatedItem> _cache = new();
         private long _startTimeAnimation;
         private readonly int _millisecondsBetweenUpdates;
 
@@ -71,7 +71,7 @@ namespace Mapsui.Layers
 
         protected virtual void OnAnimatedPositionChanged()
         {
-            AnimatedPositionChanged?.Invoke(this, new EventArgs());
+            AnimatedPositionChanged?.Invoke(this, EventArgs.Empty);
         }
 
         private static void AnimationCallback(object state)
