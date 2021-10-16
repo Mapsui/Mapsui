@@ -37,3 +37,8 @@ exmple nuspec
 
 ## Keep our direct and indirect dependencies in sync
 When we have direct and indirect dependecies on a nuget package those should all refer to the same version. For instance we have a direct dependency on SkiaSharp, but we also use  SvgSkia and RichTextKit and those have a dependency on SkiaSharp too. It would be optimal if all referred to the same version of SkiaSharp. This might not always be possible.
+
+## Extension methods
+- Extension methods should always be in a Extensions folder. 
+- They should be in a class that has the name '{ClassItExtents}Extensions'. 
+- It should be in a namespace that follows the folder name (so not in the namespace of the class it extents).
