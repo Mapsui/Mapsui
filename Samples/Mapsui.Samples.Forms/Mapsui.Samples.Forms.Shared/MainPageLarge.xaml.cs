@@ -1,5 +1,4 @@
 ﻿using Mapsui.Providers;
-using Mapsui.Rendering.Skia;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.UI.Forms;
@@ -9,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Extensions;
+using Mapsui.Styles;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

@@ -64,14 +64,8 @@ namespace Mapsui.Layers
         /// </summary>
         public int FetchingPostponedInMilliseconds
         {
-            get
-            {
-                return Delayer.MillisecondsToWait;
-            }
-            set
-            {
-                Delayer.MillisecondsToWait = value;
-            }
+            get => Delayer.MillisecondsToWait;
+            set => Delayer.MillisecondsToWait = value;
         }
         /// <summary>
         /// Data source for this layer

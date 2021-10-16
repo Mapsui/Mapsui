@@ -16,7 +16,7 @@ namespace Mapsui
         /// Resolution of the viewport in units per pixel
         /// </summary>
         /// <remarks>
-        /// Resolution is Mapsuis form of zoom level. Because Mapsui is projection independent, there 
+        /// The Resolution in Mapsui is what is often called zoom level. Because Mapsui is projection independent, there 
         /// aren't any zoom levels as other map libraries have. If your map has EPSG:3857 as projection
         /// and you want to calculate the zoom, you should use the following equation
         /// 

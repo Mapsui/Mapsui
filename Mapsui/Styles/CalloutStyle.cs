@@ -1,8 +1,7 @@
 ﻿using Mapsui.Geometries;
-using Mapsui.Styles;
 using Mapsui.Widgets;
 
-namespace Mapsui.Rendering.Skia
+namespace Mapsui.Styles
 {
     /// <summary>
     /// Type of CalloutStyle
@@ -73,7 +72,7 @@ namespace Mapsui.Rendering.Skia
         private float _strokeWidth = 1f;
         private int _content = -1;
         private Offset _offset = new Offset(0, 0);
-        private double _rotation = 0;
+        private double _rotation;
         private string _title;
         private string _subtitle;
         private Alignment _titleTextAlignment;
@@ -86,11 +85,7 @@ namespace Mapsui.Rendering.Skia
 
         public new static double DefaultWidth { get; set; } = 100;
         public new static double DefaultHeight { get; set; } = 30;
-
-        public CalloutStyle()
-        {
-        }
-
+        
         /// <summary>
         /// Type of Callout
         /// </summary>
@@ -284,7 +279,7 @@ namespace Mapsui.Rendering.Skia
             get => _padding;
             set
             {
-                if (value != _padding)
+                if (!value.Equals(_padding))
                 {
                     _padding = value;
                     Invalidated = true;
@@ -348,7 +343,7 @@ namespace Mapsui.Rendering.Skia
         /// </summary>
         public Color TitleFontColor 
         {
-            get { return _titleFontColor; }
+            get => _titleFontColor;
             set
             {
                 _titleFontColor = value;
@@ -393,7 +388,7 @@ namespace Mapsui.Rendering.Skia
         /// </summary>
         public Color SubtitleFontColor
         {
-            get { return _subtitleFontColor; }
+            get => _subtitleFontColor;
             set
             {
                 _subtitleFontColor = value;
@@ -418,7 +413,7 @@ namespace Mapsui.Rendering.Skia
         }
 
         /// <summary>
-        /// Space between Title and Subtitel of Callout
+        /// Space between Title and Subtitle of Callout
         /// </summary>
         public double Spacing
         {
@@ -434,7 +429,7 @@ namespace Mapsui.Rendering.Skia
         }
 
         /// <summary>
-        /// MaxWidth for Title and Subtitel of Callout
+        /// MaxWidth for Title and Subtitle of Callout
         /// </summary>
         public double MaxWidth
         {
@@ -456,10 +451,7 @@ namespace Mapsui.Rendering.Skia
 
         public Font TitleFont
         {
-            get
-            {
-                return _titleFont;
-            }
+            get => _titleFont;
             set 
             {
                 _titleFont = value;
@@ -469,10 +461,7 @@ namespace Mapsui.Rendering.Skia
 
         public Font SubtitleFont
         {
-            get
-            {
-                return _subtitleFont;
-            }
+            get => _subtitleFont;
             set
             {
                 _subtitleFont = value;
@@ -482,10 +471,7 @@ namespace Mapsui.Rendering.Skia
 
         public bool Invalidated
         {
-            get
-            {
-                return _invalidated | TitleFont.Invalidated | SubtitleFont.Invalidated;
-            }
+            get => _invalidated | TitleFont.Invalidated | SubtitleFont.Invalidated;
             set
             {
                 _invalidated = value;

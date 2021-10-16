@@ -5,26 +5,26 @@ namespace Mapsui.Utilities
 {
     public class AnimationTimer : IAnimationTimer
     {
-        private readonly Timer timer;
-        private readonly IMapControl mapControl;
-        private int counter = 0;
+        private readonly Timer _timer;
+        private readonly IMapControl _mapControl;
+        private int _counter;
 
         public int Duration { get; }
 
-        public bool IsRunning { get => timer.Enabled; }
+        public bool IsRunning => _timer.Enabled;
 
         public AnimationTimer(IMapControl control, int duration = 16)
         {
-            mapControl = control;
+            _mapControl = control;
             Duration = duration;
 
             // Create timer for animation
-            timer = new Timer
+            _timer = new Timer
             {
                 Interval = duration,
                 AutoReset = true,
             };
-            timer.Elapsed += HandleTimerElapse;
+            _timer.Elapsed += HandleTimerElapse;
         }
 
         /// <summary>
@@ -32,8 +32,8 @@ namespace Mapsui.Utilities
         /// </summary>
         public void Start()
         {
-            if (++counter == 1)
-                timer.Start();
+            if (++_counter == 1)
+                _timer.Start();
         }
 
         /// <summary>
@@ -41,8 +41,8 @@ namespace Mapsui.Utilities
         /// </summary>
         public void Stop()
         {
-            if (--counter == 0)
-                timer.Stop();
+            if (--_counter == 0)
+                _timer.Stop();
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Mapsui.Utilities
         /// <param name="e">Timer tick arguments</param>
         private void HandleTimerElapse(object sender, ElapsedEventArgs e)
         {
-            mapControl?.RefreshGraphics();
+            _mapControl?.RefreshGraphics();
         }
     }
 }

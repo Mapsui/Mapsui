@@ -1,9 +1,9 @@
-﻿using Mapsui.Geometries;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Mapsui.Geometries;
 
-namespace Mapsui.Widgets.Performance
+namespace Mapsui.Widgets.PerformanceWidget
 {
     /// <summary>
     /// Widget which shows the drawing performance
@@ -14,17 +14,15 @@ namespace Mapsui.Widgets.Performance
     /// </remarks>
     public class PerformanceWidget : Widget, INotifyPropertyChanged
     {
-        Utilities.Performance _performance;
-
         public PerformanceWidget(Utilities.Performance performance)
         {
-            _performance = performance;
+            Performance = performance;
         }
 
         /// <summary>
         /// Performance object which holds the values
         /// </summary>
-        public Utilities.Performance Performance => _performance;
+        public Utilities.Performance Performance { get; }
 
         /// <summary>
         /// Event handler which is called, when the button is touched
@@ -43,10 +41,7 @@ namespace Mapsui.Widgets.Performance
         /// </summary>
         public float Opacity
         {
-            get
-            {
-                return _opacity;
-            }
+            get => _opacity;
             set
             {
                 if (_opacity == value)

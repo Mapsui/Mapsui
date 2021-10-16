@@ -42,7 +42,7 @@ namespace Mapsui.Styles
         ///     Scale of the symbol (defaults to 1)
         /// </summary>
         /// <remarks>
-        ///     Setting the symbolscale to '2.0' doubles the size of the symbol, where a scale of 0.5 makes the scale half the size
+        ///     Setting the SymbolScale to '2.0' doubles the size of the symbol. A SymbolScale of 0.5 makes the scale half the size.
         ///     of the original image
         /// </remarks>
         public double SymbolScale { get; set; }

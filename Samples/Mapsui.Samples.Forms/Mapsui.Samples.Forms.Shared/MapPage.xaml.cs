@@ -6,8 +6,8 @@ using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
 using Mapsui.UI;
 using System.Threading.Tasks;
-using Mapsui.Rendering.Skia;
 using Mapsui.Samples.CustomWidget;
+using Mapsui.Styles;
 using Xamarin.Essentials;
 
 namespace Mapsui.Samples.Forms

@@ -278,7 +278,7 @@ namespace Mapsui
             }
             else
             {
-                // Calculate the extent that will encompass a rotated viewport (slighly larger - used for tiles).
+                // Calculate the extent that will encompass a rotated viewport (slightly larger - used for tiles).
                 // Perform rotations on corner offsets and then add them to the Center point.
                 _windowExtent = _windowExtent.Rotate(-_rotation, Center.X, Center.Y);
                 var rotatedBoundingBox = _windowExtent.ToBoundingBox();

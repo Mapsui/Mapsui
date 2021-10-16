@@ -17,6 +17,7 @@ namespace Mapsui
         /// <param name="extent">New extent for viewport to show</param>
         /// <param name="scaleMethod">Scale method to use to determine the resolution</param>
         /// <param name="duration">Duration of animation in milliseconds</param>
+        /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
         void NavigateTo(BoundingBox extent, ScaleMethod scaleMethod = ScaleMethod.Fit, long duration = 0, Easing easing = default);
 
         /// <summary>
@@ -25,6 +26,7 @@ namespace Mapsui
         /// <param name="center">The new center</param>
         /// <param name="resolution">The new resolution</param>
         /// <param name="duration">Duration of animation in milliseconds</param>
+        /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
         void NavigateTo(Point center, double resolution, long duration = 0, Easing easing = default);
 
         /// <summary>
@@ -32,6 +34,7 @@ namespace Mapsui
         /// </summary>
         /// <param name="scaleMethod"></param>
         /// <param name="duration">Duration of animation in millisecondsScale method to use to determine resolution</param>
+        /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
         void NavigateToFullEnvelope(ScaleMethod scaleMethod = ScaleMethod.Fill, long duration = 0, Easing easing = default);
 
         /// <summary>
@@ -39,14 +42,16 @@ namespace Mapsui
         /// </summary>
         /// <param name="resolution">New resolution to use</param>
         /// <param name="duration">Duration of animation in milliseconds</param>
+        /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
         void ZoomTo(double resolution, long duration = 0, Easing easing = default);
 
         /// <summary>
         /// Change resolution of viewport about the centerOfZoom
         /// </summary>
-        /// <param name="center">screen center point to zoom at</param>
         /// <param name="resolution">New resolution to use</param>
+        /// /// <param name="centerOfZoom">screen center point to zoom at</param>
         /// <param name="duration">Duration of animation in milliseconds</param>
+        /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
         void ZoomTo(double resolution, Point centerOfZoom, long duration = 0, Easing easing = default);
 
         /// <summary>
@@ -54,6 +59,7 @@ namespace Mapsui
         /// </summary>
         /// <param name="center">New center point of viewport</param>
         /// <param name="duration">Duration of animation in milliseconds</param>
+        /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
         void CenterOn(Point center, long duration = 0, Easing easing = default);
 
         /// <summary>
@@ -62,6 +68,7 @@ namespace Mapsui
         /// <param name="x">X value of the new center</param>
         /// <param name="y">Y value of the new center</param>
         /// <param name="duration">Duration of animation in milliseconds</param>
+        /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
         void CenterOn(double x, double y, long duration = 0, Easing easing = default);
 
         /// <summary>
@@ -69,30 +76,38 @@ namespace Mapsui
         /// </summary>
         /// <param name="rotation">New rotation in degrees of viewport></param>
         /// <param name="duration">Duration of animation in milliseconds</param>
+        /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
+
         void RotateTo(double rotation, long duration = 0, Easing easing = default);
 
         /// <summary>
         /// Zoom out to the next resolution
         /// </summary>
         /// <param name="duration">Duration of animation in milliseconds</param>
+        /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
         void ZoomOut(long duration = 0, Easing easing = default);
 
         /// <summary>
         /// Zoom in to the next resolution
         /// </summary>
         /// <param name="duration">Duration of animation in milliseconds</param>
+        /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
         void ZoomIn(long duration = 0, Easing easing = default);
 
         /// <summary>
         /// Zoom in about a given point
         /// </summary>
         /// <param name="centerOfZoom">Center to use for zoom in</param>
+        /// <param name="duration">Duration of animation in milliseconds</param>
+        /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
         void ZoomIn(Point centerOfZoom, long duration = 0, Easing easing = default);
 
         /// <summary>
         /// Zoom out about a given point
         /// </summary>
         /// <param name="centerOfZoom">Center to use for zoom in</param>
+        /// <param name="duration">Duration of animation in milliseconds</param>
+        /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
         void ZoomOut(Point centerOfZoom, long duration = 0, Easing easing = default);
 
         /// <summary>

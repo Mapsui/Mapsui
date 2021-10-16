@@ -294,7 +294,7 @@ namespace Mapsui.Widgets.ScaleBar
         }
 
         /// <summary>
-        /// Get pairs of points, which determin start and stop of the lines used to draw the scalebar
+        /// Get pairs of points, which determine start and stop of the lines used to draw the scalebar
         /// </summary>
         /// <param name="viewport">The viewport of the map</param>
         /// <param name="scaleBarLength1">Length of upper scalebar</param>
@@ -512,9 +512,9 @@ namespace Mapsui.Widgets.ScaleBar
             Map map, IReadOnlyViewport viewport, float width, IUnitConverter unitConverter)
         {
             // We have to calc the angle difference to the equator (angle = 0), 
-            // because EPSG:3857 is only there 1 m. At othere angles, we
+            // because EPSG:3857 is only there 1 m. At other angles, we
             // should calculate the correct length.
-            var position = (Point)map.Transformation.Transform(map.CRS, "EPSG:4326", ((Point)viewport.Center).Clone()); // clone or else you will transform the orginal viewport center
+            var position = (Point)map.Transformation.Transform(map.CRS, "EPSG:4326", ((Point)viewport.Center).Clone()); // clone or else you will transform the original viewport center
 
             // Calc ground resolution in meters per pixel of viewport for this latitude
             double groundResolution = viewport.Resolution * Math.Cos(position.Y / 180.0 * Math.PI);

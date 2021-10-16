@@ -77,9 +77,6 @@ namespace Mapsui.Layers
             return _cache.FirstOrDefault(f => f == feature);
         }
 
-        [Obsolete("Use DataHasChanged instead", true)]
-        public void SignalDataChanged() {}
-
         /// <summary>
         /// Tries to remove a feature.
         /// </summary>

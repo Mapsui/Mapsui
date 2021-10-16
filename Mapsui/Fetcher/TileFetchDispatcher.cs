@@ -24,7 +24,7 @@ namespace Mapsui.Fetcher
         private readonly ConcurrentHashSet<TileIndex> _tilesInProgress = new ConcurrentHashSet<TileIndex>();
         private readonly ITileSchema _tileSchema;
         private readonly FetchMachine _fetchMachine;
-        private Func<TileInfo, Feature> _fetchTileAsFeature;
+        private readonly Func<TileInfo, Feature> _fetchTileAsFeature;
 
         public TileFetchDispatcher(
             ITileCache<Feature> tileCache, 

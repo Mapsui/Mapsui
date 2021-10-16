@@ -204,7 +204,7 @@ namespace Mapsui.Layers
 
        
         /// <summary>
-        /// Returns the envelope of all avaiable data in the layer
+        /// Returns the envelope of all available data in the layer
         /// </summary>
         public virtual BoundingBox Envelope
         {

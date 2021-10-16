@@ -28,15 +28,9 @@ namespace Mapsui.Providers
         
         public string PrimaryKey { get; private set; }
 
-        public int Count
-        {
-            get { return _features.Count; }
-        }
+        public int Count => _features.Count;
 
-        public IFeature this[int index]
-        {
-            get { return _features[index]; }
-        }
+        public IFeature this[int index] => _features[index];
 
         public Features()
         {

@@ -191,13 +191,13 @@ namespace Mapsui.Providers.Wms
         public WmsOnlineResource[] GetFeatureInfoRequests { get; private set; }
 
         /// <summary>
-        /// Gets the hiarchial layer structure
+        /// Gets the hierarchical layer structure
         /// </summary>
         public WmsServerLayer Layer { get; private set; }
 
 
         /// <summary>
-        /// Initalizes WMS server and parses the Capabilities request
+        /// Initializes WMS server and parses the Capabilities request
         /// </summary>
         /// <param name="url">URL of wms server</param>
         /// <param name="wmsVersion">WMS version number, null to get the default from service</param>
@@ -247,15 +247,15 @@ namespace Mapsui.Providers.Wms
         }
 
         /// <summary>
-        /// Exposes the capabilitie's VendorSpecificCapabilities as XmlNode object. External modules 
+        /// Exposes the capabilities' VendorSpecificCapabilities as XmlNode object. External modules 
         /// could use this to parse the vendor specific capabilities for their specific purpose.
         /// </summary>
         public XmlNode VendorSpecificCapabilities => _vendorSpecificCapabilities;
 
         /// <summary>
-        /// Downloads servicedescription from WMS service
+        /// Downloads service description from WMS service
         /// </summary>
-        /// <returns>XmlDocument from Url. Null if Url is empty or inproper XmlDocument</returns>
+        /// <returns>XmlDocument from Url. Null if Url is empty or improper XmlDocument</returns>
         private XmlDocument GetRemoteXml(string url)
         {
             try
@@ -284,7 +284,7 @@ namespace Mapsui.Providers.Wms
         }
 
         /// <summary>
-        /// Parses a servicedescription and stores the data in the ServiceDescription property
+        /// Parses a service description and stores the data in the ServiceDescription property
         /// </summary>
         /// <param name="doc">XmlDocument containing a valid Service Description</param>
         private void ParseCapabilities(XmlDocument doc)
@@ -301,20 +301,20 @@ namespace Mapsui.Providers.Wms
                 _nsmgr.AddNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
             }
             else
-                throw (new ApplicationException("No service version number found!"));
+                throw new ApplicationException("No service version number found!");
 
-            XmlNode xnService = doc.DocumentElement.SelectSingleNode("sm:Service", _nsmgr);
-            XmlNode xnCapability = doc.DocumentElement.SelectSingleNode("sm:Capability", _nsmgr);
+            var xnService = doc.DocumentElement.SelectSingleNode("sm:Service", _nsmgr);
+            var xnCapability = doc.DocumentElement.SelectSingleNode("sm:Capability", _nsmgr);
             if (xnService != null)
                 ParseServiceDescription(xnService);
             else
-                throw (new ApplicationException("No service tag found!"));
+                throw new ApplicationException("No service tag found!");
 
 
             if (xnCapability != null)
                 ParseCapability(xnCapability);
             else
-                throw (new ApplicationException("No capability tag found!"));
+                throw new ApplicationException("No capability tag found!");
         }
 
         /// <summary>
@@ -323,18 +323,18 @@ namespace Mapsui.Providers.Wms
         /// <param name="xnlServiceDescription"></param>
         private void ParseServiceDescription(XmlNode xnlServiceDescription)
         {
-            XmlNode node = xnlServiceDescription.SelectSingleNode("sm:Title", _nsmgr);
-            _serviceDescription.Title = (node != null ? node.InnerText : null);
+            var node = xnlServiceDescription.SelectSingleNode("sm:Title", _nsmgr);
+            _serviceDescription.Title = node?.InnerText;
             node = xnlServiceDescription.SelectSingleNode("sm:OnlineResource/@xlink:href", _nsmgr);
-            _serviceDescription.OnlineResource = (node != null ? node.InnerText : null);
+            _serviceDescription.OnlineResource = node?.InnerText;
             node = xnlServiceDescription.SelectSingleNode("sm:Abstract", _nsmgr);
-            _serviceDescription.Abstract = (node != null ? node.InnerText : null);
+            _serviceDescription.Abstract = node?.InnerText;
             node = xnlServiceDescription.SelectSingleNode("sm:Fees", _nsmgr);
-            _serviceDescription.Fees = (node != null ? node.InnerText : null);
+            _serviceDescription.Fees = node?.InnerText;
             node = xnlServiceDescription.SelectSingleNode("sm:AccessConstraints", _nsmgr);
-            _serviceDescription.AccessConstraints = (node != null ? node.InnerText : null);
+            _serviceDescription.AccessConstraints = node?.InnerText;
 
-            XmlNodeList xnlKeywords = xnlServiceDescription.SelectNodes("sm:KeywordList/sm:Keyword", _nsmgr);
+            var xnlKeywords = xnlServiceDescription.SelectNodes("sm:KeywordList/sm:Keyword", _nsmgr);
             if (xnlKeywords != null)
             {
                 _serviceDescription.Keywords = new string[xnlKeywords.Count];
@@ -344,32 +344,32 @@ namespace Mapsui.Providers.Wms
             //Contact information
             _serviceDescription.ContactInformation = new Capabilities.WmsContactInformation();
             node = xnlServiceDescription.SelectSingleNode("sm:ContactInformation/sm:ContactAddress/sm:Address", _nsmgr);
-            _serviceDescription.ContactInformation.Address.Address = (node != null ? node.InnerText : null);
+            _serviceDescription.ContactInformation.Address.Address = node?.InnerText;
             node = xnlServiceDescription.SelectSingleNode("sm:ContactInformation/sm:ContactAddress/sm:AddressType",
                                                           _nsmgr);
-            _serviceDescription.ContactInformation.Address.AddressType = (node != null ? node.InnerText : null);
+            _serviceDescription.ContactInformation.Address.AddressType = node?.InnerText;
             node = xnlServiceDescription.SelectSingleNode("sm:ContactInformation/sm:ContactAddress/sm:City", _nsmgr);
-            _serviceDescription.ContactInformation.Address.City = (node != null ? node.InnerText : null);
+            _serviceDescription.ContactInformation.Address.City = node?.InnerText;
             node = xnlServiceDescription.SelectSingleNode("sm:ContactInformation/sm:ContactAddress/sm:Country", _nsmgr);
-            _serviceDescription.ContactInformation.Address.Country = (node != null ? node.InnerText : null);
+            _serviceDescription.ContactInformation.Address.Country = node?.InnerText;
             node = xnlServiceDescription.SelectSingleNode("sm:ContactInformation/sm:ContactAddress/sm:PostCode", _nsmgr);
-            _serviceDescription.ContactInformation.Address.PostCode = (node != null ? node.InnerText : null);
+            _serviceDescription.ContactInformation.Address.PostCode = node?.InnerText;
             node = xnlServiceDescription.SelectSingleNode("sm:ContactInformation/sm:StateOrProvince", _nsmgr);
-            _serviceDescription.ContactInformation.Address.StateOrProvince = (node != null ? node.InnerText : null);
+            _serviceDescription.ContactInformation.Address.StateOrProvince = node?.InnerText;
             node = xnlServiceDescription.SelectSingleNode("sm:ContactInformation/sm:ContactElectronicMailAddress", _nsmgr);
-            _serviceDescription.ContactInformation.ElectronicMailAddress = (node != null ? node.InnerText : null);
+            _serviceDescription.ContactInformation.ElectronicMailAddress = node?.InnerText;
             node = xnlServiceDescription.SelectSingleNode("sm:ContactInformation/sm:ContactFacsimileTelephone", _nsmgr);
-            _serviceDescription.ContactInformation.FacsimileTelephone = (node != null ? node.InnerText : null);
+            _serviceDescription.ContactInformation.FacsimileTelephone = node?.InnerText;
             node =
                 xnlServiceDescription.SelectSingleNode(
                     "sm:ContactInformation/sm:ContactPersonPrimary/sm:ContactOrganization", _nsmgr);
-            _serviceDescription.ContactInformation.PersonPrimary.Organisation = (node != null ? node.InnerText : null);
+            _serviceDescription.ContactInformation.PersonPrimary.Organisation = node?.InnerText;
             node =
                 xnlServiceDescription.SelectSingleNode(
                     "sm:ContactInformation/sm:ContactPersonPrimary/sm:ContactPerson", _nsmgr);
-            _serviceDescription.ContactInformation.PersonPrimary.Person = (node != null ? node.InnerText : null);
+            _serviceDescription.ContactInformation.PersonPrimary.Person = node?.InnerText;
             node = xnlServiceDescription.SelectSingleNode("sm:ContactInformation/sm:ContactVoiceTelephone", _nsmgr);
-            _serviceDescription.ContactInformation.VoiceTelephone = (node != null ? node.InnerText : null);
+            _serviceDescription.ContactInformation.VoiceTelephone = node?.InnerText;
         }
 
         /// <summary>
@@ -380,7 +380,7 @@ namespace Mapsui.Providers.Wms
         {
             var xnRequest = xnCapability.SelectSingleNode("sm:Request", _nsmgr);
             if (xnRequest == null)
-                throw (new Exception("Request parameter not specified in Service Description"));
+                throw new Exception("Request parameter not specified in Service Description");
             ParseRequest(xnRequest);
 
 			// Workaround for some WMS servers that have returning more than one root layer
@@ -403,7 +403,7 @@ namespace Mapsui.Providers.Wms
 			{
 				XmlNode xnLayer = xnCapability.SelectSingleNode("sm:Layer", _nsmgr);
 				if (xnLayer == null)
-					throw (new Exception("No layer tag found in Service Description"));
+					throw new Exception("No layer tag found in Service Description");
 				Layer = ParseLayer(xnLayer);
 			}
 
@@ -554,18 +554,18 @@ namespace Mapsui.Providers.Wms
                 }
             }
 
-            XmlNodeList xnlStyle = xmlLayer.SelectNodes("sm:Style", _nsmgr);
+            var xnlStyle = xmlLayer.SelectNodes("sm:Style", _nsmgr);
             if (xnlStyle != null)
             {
                 wmsServerLayer.Style = new WmsLayerStyle[xnlStyle.Count];
                 for (int i = 0; i < xnlStyle.Count; i++)
                 {
                     node = xnlStyle[i].SelectSingleNode("sm:Name", _nsmgr);
-                    wmsServerLayer.Style[i].Name = (node != null ? node.InnerText : null);
+                    wmsServerLayer.Style[i].Name = node?.InnerText;
                     node = xnlStyle[i].SelectSingleNode("sm:Title", _nsmgr);
-                    wmsServerLayer.Style[i].Title = (node != null ? node.InnerText : null);
+                    wmsServerLayer.Style[i].Title = node?.InnerText;
                     node = xnlStyle[i].SelectSingleNode("sm:Abstract", _nsmgr);
-                    wmsServerLayer.Style[i].Abstract = (node != null ? node.InnerText : null);
+                    wmsServerLayer.Style[i].Abstract = node?.InnerText;
                     node = xnlStyle[i].SelectSingleNode("sm:LegendURL", _nsmgr) ??
                            xnlStyle[i].SelectSingleNode("sm:LegendUrl", _nsmgr);
                     if (node != null)
@@ -587,7 +587,6 @@ namespace Mapsui.Providers.Wms
                         wmsServerLayer.Style[i].StyleSheetUrl = new WmsOnlineResource();
                         wmsServerLayer.Style[i].StyleSheetUrl.OnlineResource =
                             node.SelectSingleNode("sm:OnlineResource", _nsmgr).Attributes["xlink:href"].InnerText;
-                        //layer.Style[i].StyleSheetUrl.OnlineResource = node.SelectSingleNode("sm:Format", nsmgr).InnerText;
                     }
                 }
             }
@@ -601,16 +600,12 @@ namespace Mapsui.Providers.Wms
             node = xmlLayer.SelectSingleNode("sm:LatLonBoundingBox", _nsmgr);
             if (node != null)
             {
-                double minx;
-                double miny;
-                double maxx;
-                double maxy;
-                if (!double.TryParse(node.Attributes["minx"].Value, NumberStyles.Any, CultureInfo.InvariantCulture, out minx) &
-                    !double.TryParse(node.Attributes["miny"].Value, NumberStyles.Any, CultureInfo.InvariantCulture, out miny) &
-                    !double.TryParse(node.Attributes["maxx"].Value, NumberStyles.Any, CultureInfo.InvariantCulture, out maxx) &
-                    !double.TryParse(node.Attributes["maxy"].Value, NumberStyles.Any, CultureInfo.InvariantCulture, out maxy))
+                if (!double.TryParse(node.Attributes["minx"].Value, NumberStyles.Any, CultureInfo.InvariantCulture, out var minX) &
+                    !double.TryParse(node.Attributes["miny"].Value, NumberStyles.Any, CultureInfo.InvariantCulture, out var minY) &
+                    !double.TryParse(node.Attributes["maxx"].Value, NumberStyles.Any, CultureInfo.InvariantCulture, out var maxX) &
+                    !double.TryParse(node.Attributes["maxy"].Value, NumberStyles.Any, CultureInfo.InvariantCulture, out var maxY))
                     throw new ArgumentException("Invalid LatLonBoundingBox on layer '" + wmsServerLayer.Name + "'");
-                wmsServerLayer.LatLonBoundingBox = new BoundingBox(minx, miny, maxx, maxy);
+                wmsServerLayer.LatLonBoundingBox = new BoundingBox(minX, minY, maxX, maxY);
             }
             return wmsServerLayer;
         }

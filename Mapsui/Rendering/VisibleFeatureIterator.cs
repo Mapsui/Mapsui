@@ -35,7 +35,7 @@ namespace Mapsui.Rendering
 
                 foreach (var feature in features)
                 {
-                    if (layerStyle is IThemeStyle) style = (layerStyle as IThemeStyle).GetStyle(feature);
+                    if (layerStyle is IThemeStyle themeStyle) style = themeStyle.GetStyle(feature);
                     if (ShouldNotBeApplied(style, viewport)) continue;
 
                     if (style is StyleCollection styles) // The ThemeStyle can again return a StyleCollection

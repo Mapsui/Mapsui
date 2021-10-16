@@ -12,7 +12,7 @@ using Mapsui.Rendering.Skia.SkiaWidgets;
 using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Widgets;
-using Mapsui.Widgets.Button;
+using Mapsui.Widgets.ButtonWidget;
 using Mapsui.Widgets.ScaleBar;
 using Mapsui.Widgets.Zoom;
 using SkiaSharp;
