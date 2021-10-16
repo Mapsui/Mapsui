@@ -5,6 +5,7 @@ using Mapsui.Widgets;
 using Mapsui.Widgets.Performance;
 using SkiaSharp;
 using System;
+using Mapsui.Extensions;
 
 namespace Mapsui.Samples.Common.Maps
 {

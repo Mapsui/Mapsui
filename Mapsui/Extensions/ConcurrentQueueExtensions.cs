@@ -1,7 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
 
-namespace Mapsui
+namespace Mapsui.Extensions
 {
     public static class ConcurrentQueueExtensions
     {
