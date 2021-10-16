@@ -2,6 +2,7 @@ using System.Linq;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Logging;
