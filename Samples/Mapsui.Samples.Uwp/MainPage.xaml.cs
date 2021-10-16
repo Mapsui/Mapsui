@@ -5,13 +5,13 @@ using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
+using Mapsui.Providers;
 using Mapsui.UI;
 using Mapsui.Utilities;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.CustomWidget;
-using Mapsui.Samples.Uwp.Extensions;
 
 namespace Mapsui.Samples.Uwp
 {
