@@ -10,10 +10,10 @@ namespace Mapsui
     {
         private readonly Map _map;
         private readonly IViewport _viewport;
-        private Animation _animation = new Animation();
+        private readonly Animation _animation = new Animation();
         private double _rotationDelta;
 
-        private static long _defaultDuration = 0;
+        private static long _defaultDuration;
 
         /// <summary>
         /// Default value for duration, if nothing is given by the different functions
@@ -21,13 +21,7 @@ namespace Mapsui
         public static long DefaultDuration
         {
             get => _defaultDuration;
-            set
-            {
-                if (value < 0)
-                    _defaultDuration = 0;
-                else
-                    _defaultDuration = value;
-            }
+            set => _defaultDuration = value < 0 ? 0 : value;
         }
 
         public EventHandler<ChangeType> Navigated { get; set; }
@@ -51,6 +45,7 @@ namespace Mapsui
         /// <param name="extent">New extent for viewport to show</param>
         /// <param name="scaleMethod">Scale method to use to determine resolution</param>
         /// <param name="duration">Duration for animation in milliseconds. If less then 0, then <see cref="DefaultDuration"/> is used.</param>
+        /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
         public void NavigateTo(BoundingBox extent, ScaleMethod scaleMethod = ScaleMethod.Fit, long duration = -1, Easing easing = default)
         {
             if (extent == null) return;
@@ -66,6 +61,7 @@ namespace Mapsui
         /// </summary>
         /// <param name="scaleMethod">Scale method to use to determine resolution</param>
         /// <param name="duration">Duration for animation in milliseconds. If less then 0, then <see cref="DefaultDuration"/> is used.</param>
+        /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
         public void NavigateToFullEnvelope(ScaleMethod scaleMethod = ScaleMethod.Fill, long duration = -1, Easing easing = default)
         {
             NavigateTo(_map.Envelope, scaleMethod, duration, easing);
@@ -77,6 +73,7 @@ namespace Mapsui
         /// <param name="center">New center to move to</param>
         /// <param name="resolution">New resolution to use</param>
         /// <param name="duration">Duration for animation in milliseconds. If less then 0, then <see cref="DefaultDuration"/> is used.</param>
+        /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
         public void NavigateTo(Point center, double resolution, long duration = -1, Easing easing = default)
         {
             // Stop any old animation if there is one
@@ -136,6 +133,7 @@ namespace Mapsui
         /// </summary>
         /// <param name="resolution">New resolution to use</param>
         /// <param name="duration">Duration for animation in milliseconds. If less then 0, then <see cref="DefaultDuration"/> is used.</param>
+        /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
         public void ZoomTo(double resolution, long duration = -1, Easing easing = default)
         {
             // Stop any old animation if there is one
@@ -255,6 +253,7 @@ namespace Mapsui
         /// Zoom in to the next resolution
         /// </summary>
         /// <param name="duration">Duration for animation in milliseconds. If less then 0, then <see cref="DefaultDuration"/> is used.</param>
+        /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
         public void ZoomIn(long duration = -1, Easing easing = default)
         {
             var resolution = ZoomHelper.ZoomIn(_map.Resolutions, _viewport.Resolution);
@@ -266,6 +265,7 @@ namespace Mapsui
         /// Zoom out to the next resolution
         /// </summary>
         /// <param name="duration">Duration for animation in milliseconds. If less then 0, then <see cref="DefaultDuration"/> is used.</param>
+        /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
         public void ZoomOut(long duration = -1, Easing easing = default)
         {
             var resolution = ZoomHelper.ZoomOut(_map.Resolutions, _viewport.Resolution);
@@ -279,6 +279,7 @@ namespace Mapsui
         /// <param name="centerOfZoom">Center of zoom. This is the one point in the map that stays on the same location while zooming in.
         /// For instance, in mouse wheel zoom animation the position of the mouse pointer can be the center of zoom.</param>
         /// <param name="duration">Duration for animation in milliseconds. If less then 0, then <see cref="DefaultDuration"/> is used.</param>
+        /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
         public void ZoomIn(Point centerOfZoom, long duration = -1, Easing easing = default)
         {
             var resolution = ZoomHelper.ZoomIn(_map.Resolutions, _viewport.Resolution);
@@ -292,6 +293,7 @@ namespace Mapsui
         /// <param name="centerOfZoom">Center of zoom. This is the one point in the map that stays on the same location while zooming in.
         /// For instance, in mouse wheel zoom animation the position of the mouse pointer can be the center of zoom.</param>
         /// <param name="duration">Duration for animation in milliseconds. If less then 0, then <see cref="DefaultDuration"/> is used.</param>
+        /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
         public void ZoomOut(Point centerOfZoom, long duration = -1, Easing easing = default)
         {
             var resolution = ZoomHelper.ZoomOut(_map.Resolutions, _viewport.Resolution);
@@ -420,6 +422,7 @@ namespace Mapsui
         /// </summary>
         /// <param name="rotation">New rotation in degrees of viewport></param>
         /// <param name="duration">Duration for animation in milliseconds. If less then 0, then <see cref="DefaultDuration"/> is used.</param>
+        /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
         public void RotateTo(double rotation, long duration = -1, Easing easing = default)
         {
             // Stop any old animation if there is one
