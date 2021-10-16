@@ -16,7 +16,7 @@ namespace Mapsui.Fetcher
 
         internal delegate void DataArrivedDelegate(IEnumerable<IFeature> features, object state = null);
 
-        public FeatureFetcher(BoundingBox extent, double resolution, IProvider<IFeature> provider, DataArrivedDelegate dataArrived, long timeOfRequest = default(long))
+        public FeatureFetcher(BoundingBox extent, double resolution, IProvider<IFeature> provider, DataArrivedDelegate dataArrived, long timeOfRequest = default)
         {
             _dataArrived = dataArrived;
             var biggerBox = extent.Grow(SymbolStyle.DefaultWidth * 2 * resolution, SymbolStyle.DefaultHeight * 2 * resolution);

@@ -28,7 +28,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
         public Node<T, TU> LeftNode;
         public Node<T, TU> RightNode;
 
-        public Node() : this(default(T), default(TU), null, null)
+        public Node() : this(default, default, null, null)
         {
         }
 
