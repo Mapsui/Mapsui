@@ -8,7 +8,6 @@ using Android.Support.V7.App;
 using Android.Views;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
-using Mapsui.Samples.Common.Extensions;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.CustomWidget;
@@ -45,8 +44,8 @@ namespace Mapsui.Samples.Droid
             _mapControl.ReSnapRotationDegrees = 5;
             _mapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
 
-            FindViewById<RelativeLayout>(Resource.Id.mainLayout).AddView(_popup = CreatePopup());
-
+            var relativeLayout = FindViewById<RelativeLayout>(Resource.Id.mainLayout);
+            relativeLayout.AddView(_popup = CreatePopup());
             _mapControl.Map.Layers.Clear();
             var sample=new MbTilesOverlaySample();
             sample.Setup(_mapControl);

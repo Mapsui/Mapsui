@@ -1,6 +1,4 @@
-﻿using System.Windows.Navigation;
-using Mapsui.Providers;
-using Mapsui.Samples.Wpf.Editing.Extensions;
+﻿using Mapsui.Providers;
 using Mapsui.UI;
 
 namespace Mapsui.Samples.Wpf.Editing
