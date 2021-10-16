@@ -22,7 +22,6 @@ using Windows.Devices.Sensors;
 using Windows.Foundation;
 
 using Windows.System;
-using Mapsui.UI.Uwp.Extensions;
 #if __WINUI__
 using System.Runtime.Versioning;
 using Mapsui.UI.WinUI.Extensions;
@@ -36,6 +35,7 @@ using SkiaSharp.Views.Windows;
 using HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment;
 using VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment;
 #else
+using Mapsui.UI.Uwp.Extensions;
 using Windows.Graphics.Display;
 using Windows.UI;
 using Windows.UI.Core;
