@@ -57,17 +57,12 @@
 	<ItemGroup>
 	  <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\AnimationSample.cs" Link="AnimationSample.cs" />
 	  <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\CircleSample.cs" Link="CircleSample.cs" />
-	  <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\ExtensionMethods\FeatureExtensions.cs" Link="ExtensionMethods\FeatureExtensions.cs" />
 	  <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\IFormsSample.cs" Link="IFormsSample.cs" />
 	  <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\ManyPinsSample.cs" Link="ManyPinsSample.cs" />
 	  <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\MyLocationSample.cs" Link="MyLocationSample.cs" />
 	  <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\PolygonSample.cs" Link="PolygonSample.cs" />
 	  <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\PolylineSample.cs" Link="PolylineSample.cs" />
 	  <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\SnapshotSample.cs" Link="SnapshotSample.cs" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="ExtensionMethods\" />
 	</ItemGroup>
 
   <ItemGroup>

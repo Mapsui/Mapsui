@@ -27,7 +27,10 @@ namespace Mapsui.UI.Android
 		{
 			
 			// aapt resource value: 0x7F010000
-			public static int start_with_openstreetmap = 2130771968;
+			public static int ignorePixelScaling = 2130771968;
+			
+			// aapt resource value: 0x7F010001
+			public static int start_with_openstreetmap = 2130771969;
 			
 			static Attribute()
 			{
@@ -62,8 +65,15 @@ namespace Mapsui.UI.Android
 		{
 			
 			// aapt resource value: { 0x7F010000 }
-			public static int[] start_with_openstreetmap_style = new int[] {
+			public static int[] SKCanvasView = new int[] {
 					2130771968};
+			
+			// aapt resource value: 0
+			public static int SKCanvasView_ignorePixelScaling = 0;
+			
+			// aapt resource value: { 0x7F010001 }
+			public static int[] start_with_openstreetmap_style = new int[] {
+					2130771969};
 			
 			// aapt resource value: 0
 			public static int start_with_openstreetmap_style_start_with_openstreetmap = 0;
