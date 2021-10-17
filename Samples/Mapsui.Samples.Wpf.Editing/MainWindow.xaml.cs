@@ -6,19 +6,20 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Samples.Wpf.Editing.Editing;
 using Mapsui.Samples.Wpf.Editing.Utilities;
 using Mapsui.Logging;
 using Mapsui.Providers;
-using Mapsui.UI.Wpf;
+using Mapsui.UI.Wpf.Extensions;
 
 namespace Mapsui.Samples.Wpf.Editing
 {
     public partial class MainWindow
     {
         private WritableLayer _targetLayer;
-        private IEnumerable<IFeature> _tempFeatures;
+        private IEnumerable<IGeometryFeature> _tempFeatures;
         private readonly EditManager _editManager = new EditManager();
         private readonly EditManipulation _editManipulation = new EditManipulation();
         private bool _selectMode;
@@ -62,14 +63,7 @@ namespace Mapsui.Samples.Wpf.Editing
 
         private void RenderModeOnSelectionChanged(object sender, SelectionChangedEventArgs selectionChangedEventArgs)
         {
-            var selectedValue = ((ComboBoxItem)((ComboBox)sender).SelectedItem).Content.ToString();
-
-            if (selectedValue.ToLower().Contains("wpf"))
-                MapControl.RenderMode = UI.Wpf.RenderMode.Wpf;
-            else if (selectedValue.ToLower().Contains("skia"))
-                MapControl.RenderMode = UI.Wpf.RenderMode.Skia;
-            else
-                throw new Exception("Unknown ComboBox item");
+            // todo: remove entire dropdown
         }
 
         private void FillComboBoxWithDemoSamples()
@@ -175,14 +169,14 @@ namespace Mapsui.Samples.Wpf.Editing
 
         private void AddPoint_OnClick(object sender, RoutedEventArgs args)
         {
-            IEnumerable<IFeature> features = _targetLayer.GetFeatures().Copy();
+            IEnumerable<IGeometryFeature> features = _targetLayer.GetFeatures().Copy();
 
 			foreach (var feature in features)
 	        {
 		        feature.RenderedGeometry.Clear();
 	        }
 
-			_tempFeatures = new List<IFeature>(features);
+			_tempFeatures = new List<IGeometryFeature>(features);
 
             _editManager.EditMode = EditMode.AddPoint;
         }
@@ -212,28 +206,28 @@ namespace Mapsui.Samples.Wpf.Editing
 
         private void AddLine_OnClick(object sender, RoutedEventArgs args)
         {
-            IEnumerable<IFeature> features = _targetLayer.GetFeatures().Copy();
+            IEnumerable<IGeometryFeature> features = _targetLayer.GetFeatures().Copy();
 
 			foreach (var feature in features)
 	        {
 		        feature.RenderedGeometry.Clear();
 	        }
 
-			_tempFeatures = new List<IFeature>(features);
+			_tempFeatures = new List<IGeometryFeature>(features);
 
             _editManager.EditMode = EditMode.AddLine;
         }
 
         private void AddPolygon_OnClick(object sender, RoutedEventArgs args)
         {
-			IEnumerable<IFeature> features = _targetLayer.GetFeatures().Copy();
+			IEnumerable<IGeometryFeature> features = _targetLayer.GetFeatures().Copy();
 
 			foreach (var feature in features)
 	        {
 		        feature.RenderedGeometry.Clear();
 	        }
 
-			_tempFeatures = new List<IFeature>(features);
+			_tempFeatures = new List<IGeometryFeature>(features);
 
             _editManager.EditMode = EditMode.AddPolygon;
         }
@@ -249,14 +243,14 @@ namespace Mapsui.Samples.Wpf.Editing
         
         private void Load_OnClick(object sender, RoutedEventArgs args)
         {
-	        IEnumerable<IFeature> features = _targetLayer.GetFeatures().Copy();
+	        IEnumerable<IGeometryFeature> features = _targetLayer.GetFeatures().Copy();
 
 			foreach (var feature in features)
 	        {
 		        feature.RenderedGeometry.Clear();
 	        }
 
-			_tempFeatures = new List<IFeature>(features);
+			_tempFeatures = new List<IGeometryFeature>(features);
 
 			_editManager.Layer.AddRange(features);
 			_targetLayer.Clear();

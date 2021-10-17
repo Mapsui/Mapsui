@@ -7,6 +7,7 @@ using Mapsui.UI.Objects;
 using System;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Mapsui.Extensions;
 using Xamarin.Forms;
 
 namespace Mapsui.UI.Forms
@@ -490,7 +491,7 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Feature, which belongs to callout. Should be the same as for the pin to which this callout belongs.
         /// </summary>
-        public Feature Feature { get; }
+        public IGeometryFeature Feature { get; }
 
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {

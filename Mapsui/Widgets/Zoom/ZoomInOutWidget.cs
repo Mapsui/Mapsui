@@ -59,10 +59,7 @@ namespace Mapsui.Widgets.Zoom
         /// </summary>
         public Orientation Orientation
         {
-            get
-            {
-                return _orientation;
-            }
+            get => _orientation;
             set
             {
                 if (_orientation == value)
@@ -72,17 +69,14 @@ namespace Mapsui.Widgets.Zoom
             }
         }
 
-        private Color _strokeColor = new Color(192, 192, 192);
+        private Color _strokeColor = new(192, 192, 192);
 
         /// <summary>
         /// Color of button frames
         /// </summary>
         public Color StrokeColor
         {
-            get
-            {
-                return _strokeColor;
-            }
+            get => _strokeColor;
             set
             {
                 if (_strokeColor == value)
@@ -92,17 +86,14 @@ namespace Mapsui.Widgets.Zoom
             }
         }
 
-        private Color _textColor = new Color(192, 192, 192);
+        private Color _textColor = new(192, 192, 192);
 
         /// <summary>
         /// Color of "+" and "-" sign
         /// </summary>
         public Color TextColor
         {
-            get
-            {
-                return _textColor;
-            }
+            get => _textColor;
             set
             {
                 if (_textColor == value)
@@ -112,17 +103,14 @@ namespace Mapsui.Widgets.Zoom
             }
         }
 
-        private Color _backColor = new Color(224, 224, 224);
+        private Color _backColor = new(224, 224, 224);
 
         /// <summary>
         /// Color of background
         /// </summary>
         public Color BackColor
         {
-            get
-            {
-                return _backColor;
-            }
+            get => _backColor;
             set
             {
                 if (_backColor == value)
@@ -139,10 +127,7 @@ namespace Mapsui.Widgets.Zoom
         /// </summary>
         public float Opacity
         {
-            get
-            {
-                return _opacity;
-            }
+            get => _opacity;
             set
             {
                 if (_opacity == value)

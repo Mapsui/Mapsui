@@ -37,7 +37,7 @@ namespace Mapsui.Providers.Wms
     /// </summary>
     /// <remarks>
     /// The WmsLayer is currently very basic and doesn't support automatic fetching of the WMS Service Description.
-    /// Instead you would have to add the nessesary parameters to the URL,
+    /// Instead you would have to add the necessary parameters to the URL,
     /// and the WmsLayer will set the remaining BoundingBox property and proper requests that changes between the requests.
     /// See the example below.
     /// </remarks>
@@ -92,52 +92,37 @@ namespace Mapsui.Providers.Wms
         /// <summary>
         /// Gets the list of enabled layers
         /// </summary>
-        public Collection<string> LayerList { get; private set; }
+        public Collection<string> LayerList { get; }
 
         /// <summary>
         /// Gets the list of enabled styles
         /// </summary>
-        public Collection<string> StylesList { get; private set; }
+        public Collection<string> StylesList { get; }
 
         /// <summary>
-        /// Gets the hiarchial list of available WMS layers from this service
+        /// Gets the hierarchical list of available WMS layers from this service
         /// </summary>
-        public Client.WmsServerLayer RootLayer
-        {
-            get { return _wmsClient.Layer; }
-        }
+        public Client.WmsServerLayer RootLayer => _wmsClient.Layer;
 
         /// <summary>
         /// Gets the list of available formats
         /// </summary>
-        public Collection<string> OutputFormats
-        {
-            get { return _wmsClient.GetMapOutputFormats; }
-        }
+        public Collection<string> OutputFormats => _wmsClient.GetMapOutputFormats;
 
         /// <summary>
         /// Gets the list of available FeatureInfo Output Format
         /// </summary>
-        public Collection<string> GetFeatureInfoFormats
-        {
-            get { return _wmsClient.GetFeatureInfoOutputFormats; }
-        }
+        public Collection<string> GetFeatureInfoFormats => _wmsClient.GetFeatureInfoOutputFormats;
 
         /// <summary>
         /// Gets the service description from this server
         /// </summary>
-        public Capabilities.WmsServiceDescription ServiceDescription
-        {
-            get { return _wmsClient.ServiceDescription; }
-        }
+        public Capabilities.WmsServiceDescription ServiceDescription => _wmsClient.ServiceDescription;
 
         /// <summary>
         /// Gets the WMS Server version of this service
         /// </summary>
-        public string Version
-        {
-            get { return _wmsClient.WmsVersion; }
-        }
+        public string Version => _wmsClient.WmsVersion;
 
         /// <summary>
         /// Specifies whether to throw an exception if the Wms request failed, or to just skip rendering the layer
@@ -150,7 +135,7 @@ namespace Mapsui.Providers.Wms
         public ICredentials Credentials { get; set; }
 
         /// <summary>
-        /// Timeout of webrequest in milliseconds. Defaults to 10 seconds
+        /// Timeout of web request in milliseconds. Defaults to 10 seconds
         /// </summary>
         public int TimeOut { get; set; }
 
@@ -163,7 +148,7 @@ namespace Mapsui.Providers.Wms
         public void AddLayer(string name)
         {
             if (!LayerExists(_wmsClient.Layer, name))
-                throw new ArgumentException("Cannot add WMS Layer - Unknown layername");
+                throw new ArgumentException("Cannot add WMS Layer - Unknown layer name");
 
             LayerList.Add(name);
         }
@@ -176,22 +161,21 @@ namespace Mapsui.Providers.Wms
         /// <exception cref="System.ArgumentException">Throws an exception if the layer is not found</exception>
         public Client.WmsServerLayer GetLayer(string name)
         {
-            Client.WmsServerLayer layer;
-            if (FindLayer(_wmsClient.Layer, name, out layer))
+            if (FindLayer(_wmsClient.Layer, name, out var layer))
                 return layer;
 
             throw new ArgumentException("Layer not found");
         }
 
         /// <summary>
-        /// Recursive method for checking whether a layername exists
+        /// Recursive method for checking whether a layer name exists
         /// </summary>
         /// <param name="layer"></param>
         /// <param name="name"></param>
         /// <returns></returns>
         private bool LayerExists(Client.WmsServerLayer layer, string name)
         {
-            return name == layer.Name || layer.ChildLayers.Any(childlayer => LayerExists(childlayer, name));
+            return name == layer.Name || layer.ChildLayers.Any(childLayer => LayerExists(childLayer, name));
         }
 
         private bool FindLayer(Client.WmsServerLayer layer, string name, out Client.WmsServerLayer result)
@@ -245,12 +229,12 @@ namespace Mapsui.Providers.Wms
         public void AddStyle(string name)
         {
             if (!StyleExists(_wmsClient.Layer, name))
-                throw new ArgumentException("Cannot add WMS Layer - Unknown layername");
+                throw new ArgumentException("Cannot add WMS Layer - Unknown layer name");
             StylesList.Add(name);
         }
 
         /// <summary>
-        /// Recursive method for checking whether a layername exists
+        /// Recursive method for checking whether a layer name exists
         /// </summary>
         /// <param name="layer">layer</param>
         /// <param name="name">name of style</param>
@@ -258,7 +242,7 @@ namespace Mapsui.Providers.Wms
         private bool StyleExists(Client.WmsServerLayer layer, string name)
         {
             if (layer.Style.Any(style => name == style.Name)) return true;
-            return layer.ChildLayers.Any(childlayer => StyleExists(childlayer, name));
+            return layer.ChildLayers.Any(childLayer => StyleExists(childLayer, name));
         }
 
         /// <summary>
@@ -324,13 +308,11 @@ namespace Mapsui.Providers.Wms
 
             try
             {
-				using (var task = _getStreamAsync(url))
-				using (var result = task.Result)    // We should correctly dispose the stream even if exception will thrown
-				{
-					// PDD: This could be more efficient
-					var bytes = BruTile.Utilities.ReadFully(result);
-					raster = new Raster(new MemoryStream(bytes), viewport.Extent);	// This can throw exception
-				}
+                using var task = _getStreamAsync(url);
+                using var result = task.Result;
+                // PDD: This could be more efficient
+                var bytes = BruTile.Utilities.ReadFully(result);
+                raster = new Raster(new MemoryStream(bytes), viewport.Extent);	// This can throw exception
                 return true;
             }
             catch (WebException webEx)
@@ -344,14 +326,14 @@ namespace Mapsui.Providers.Wms
             catch (Exception ex)
             {
                 if (!ContinueOnError)
-                    throw (new RenderException("There was a problem while attempting to request the WMS", ex));
+                    throw new RenderException("There was a problem while attempting to request the WMS", ex);
                 Trace.Write("There was a problem while attempting to request the WMS" + ex.Message);
             }
             return false;
         }
 
         /// <summary>
-        /// Gets the URL for a map request base on current settings, the image size and boundingbox
+        /// Gets the URL for a map request base on current settings, the image size and BoundingBox
         /// </summary>
         /// <returns>URL for WMS request</returns>
         public string GetRequestUrl(BoundingBox box, int width, int height)
@@ -397,7 +379,7 @@ namespace Mapsui.Providers.Wms
         }
 
         /// <summary>
-        /// Gets the URL for a map request base on current settings, the image size and boundingbox
+        /// Gets the URL for a map request base on current settings, the image size and BoundingBox
         /// </summary>
         /// <returns>URL for WMS request</returns>
         public IEnumerable<string> GetLegendRequestUrls()
@@ -429,12 +411,10 @@ namespace Mapsui.Providers.Wms
             {
                 try
                 {
-                    using (var task = _getStreamAsync(url))
-                    {
-                        var bytes = BruTile.Utilities.ReadFully(task.Result);                        
-                        images.Add(new MemoryStream(bytes));
-                        task.Result.Close();
-                    }
+                    using var task = _getStreamAsync(url);
+                    var bytes = BruTile.Utilities.ReadFully(task.Result);                        
+                    images.Add(new MemoryStream(bytes));
+                    task.Result.Close();
                 }
                 catch (WebException e)
                 {
@@ -480,14 +460,15 @@ namespace Mapsui.Providers.Wms
 
         public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
-            var features = new Features();
+            var features = new List<IGeometryFeature>();
             IRaster raster = null;
             var view = new Viewport { Resolution = resolution, Center = box.Centroid, Width = (box.Width / resolution), Height = (box.Height / resolution) };
             if (TryGetMap(view, ref raster))
             {
-                var feature = features.New();
-                feature.Geometry = raster;
-                features.Add(feature);
+                features.Add(new Feature
+                {
+                    Geometry = raster
+                });
             }
             return features;
         }
@@ -506,7 +487,7 @@ namespace Mapsui.Providers.Wms
 
             if (response.Content.Headers.ContentType.MediaType.ToLower() != _mimeType)
             { 
-                throw new Exception($"Unexpected WMS response content type. Expected - {_mimeType}, getted - {response.Content.Headers.ContentType.MediaType}");
+                throw new Exception($"Unexpected WMS response content type. Expected - {_mimeType}, got - {response.Content.Headers.ContentType.MediaType}");
             }
        
             return await response.Content.ReadAsStreamAsync();

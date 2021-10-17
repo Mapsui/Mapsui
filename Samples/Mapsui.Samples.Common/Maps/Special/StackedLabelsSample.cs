@@ -29,7 +29,7 @@ namespace Mapsui.Samples.Common.Maps
             return map;
         }
 
-        private static ILayer CreateStackedLabelLayer(IProvider provider, string labelColumn)
+        private static ILayer CreateStackedLabelLayer(IProvider<IGeometryFeature> provider, string labelColumn)
         {
             return new MemoryLayer
             {
@@ -45,7 +45,7 @@ namespace Mapsui.Samples.Common.Maps
             };
         }
 
-        private static ILayer CreateLayer(IProvider dataSource)
+        private static ILayer CreateLayer(IProvider<IGeometryFeature> dataSource)
         {
             return new Layer("Point Layer")
             {

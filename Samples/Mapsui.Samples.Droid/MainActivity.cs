@@ -6,8 +6,9 @@ using Android.Graphics;
 using Android.Widget;
 using Android.Support.V7.App;
 using Android.Views;
+using Mapsui.Extensions;
+using Mapsui.Providers;
 using Mapsui.Samples.Common;
-using Mapsui.Samples.Common.ExtensionMethods;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.CustomWidget;
@@ -44,8 +45,8 @@ namespace Mapsui.Samples.Droid
             _mapControl.ReSnapRotationDegrees = 5;
             _mapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
 
-            FindViewById<RelativeLayout>(Resource.Id.mainLayout).AddView(_popup = CreatePopup());
-
+            var relativeLayout = FindViewById<RelativeLayout>(Resource.Id.mainLayout);
+            relativeLayout.AddView(_popup = CreatePopup());
             _mapControl.Map.Layers.Clear();
             var sample=new MbTilesOverlaySample();
             sample.Setup(_mapControl);
@@ -150,18 +151,21 @@ namespace Mapsui.Samples.Droid
 
         private void ShowPopup(MapInfoEventArgs args)
         {
-            // Position on click position:
-            // var screenPositionInPixels = args.MapInfo.ScreenPosition;
+            if (args.MapInfo.Feature is IGeometryFeature geometryFeature)
+            {
+                // Position on click position:
+                // var screenPositionInPixels = args.MapInfo.ScreenPosition;
 
-            // Or position on feature position: 
-            var screenPosition = _mapControl.Viewport.WorldToScreen(args.MapInfo.Feature.Geometry.BoundingBox.Centroid);
-            var screenPositionInPixels = _mapControl.ToPixels(screenPosition);
+                // Or position on feature position: 
+                var screenPosition = _mapControl.Viewport.WorldToScreen(geometryFeature.Geometry.BoundingBox.Centroid);
+                var screenPositionInPixels = _mapControl.ToPixels(screenPosition);
 
-            _popup.SetX((float)screenPositionInPixels.X);
-            _popup.SetY((float)screenPositionInPixels.Y);
+                _popup.SetX((float) screenPositionInPixels.X);
+                _popup.SetY((float) screenPositionInPixels.Y);
 
-            _popup.Visibility = ViewStates.Visible;
-            _textView.Text = args.MapInfo.Feature.ToDisplayText();
+                _popup.Visibility = ViewStates.Visible;
+                _textView.Text = geometryFeature.ToDisplayText();
+            }
         }
 
         private static string MbTilesLocationOnAndroid => Environment.GetFolderPath(Environment.SpecialFolder.Personal);

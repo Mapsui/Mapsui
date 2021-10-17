@@ -12,13 +12,13 @@
     <None Remove="Resources\example.tif" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Mapsui.Rendering.Xaml.Tests\File.cs">
+    <Compile Include="..\Mapsui.Rendering.Skia.Tests\File.cs">
       <Link>File.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.Geometries\Mapsui.Geometries.csproj" />
-    <ProjectReference Include="..\..\Mapsui.Rendering.Xaml\Mapsui.Rendering.Xaml.csproj" />
+    <ProjectReference Include="..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />
   </ItemGroup>
   <ItemGroup>
@@ -32,6 +32,17 @@
     <PackageReference Include="NUnit" Version="3.12.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
     <PackageReference Include="coverlet.collector" Version="3.0.2" />
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeCoverage" Version="16.11.0">
+    </PackageReference>
+    <PackageReference Include="NUnit" Version="3.12.0">
+    </PackageReference>
+    <PackageReference Include="NUnit3TestAdapter" Version="3.17.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\capabilities_1_1_1.xml">

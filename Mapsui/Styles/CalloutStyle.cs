@@ -1,8 +1,7 @@
 ﻿using Mapsui.Geometries;
-using Mapsui.Styles;
 using Mapsui.Widgets;
 
-namespace Mapsui.Rendering.Skia
+namespace Mapsui.Styles
 {
     /// <summary>
     /// Type of CalloutStyle
@@ -46,6 +45,18 @@ namespace Mapsui.Rendering.Skia
         Right,
     }
 
+    /// <summary>
+    /// A CalloutStyle shows a callout or InfoWindow in Google Maps
+    /// </summary>
+    /// <remarks>
+    /// There are three different types of Callouts
+    /// 1. Type = CalloutType.Single
+    ///    The text in Title will be shown
+    /// 2. Type = CalloutType.Detail
+    ///    The text in Title and SubTitle will be shown
+    /// 3. Type = CalloutType.Custom
+    ///    The bitmap with ID in Content will be shown
+    /// </remarks>
     public class CalloutStyle : SymbolStyle
     {
         private CalloutType _type = CalloutType.Single;
@@ -55,13 +66,13 @@ namespace Mapsui.Rendering.Skia
         private float _arrowPosition = 0.5f;
         private float _rectRadius = 4f;
         private float _shadowWidth = 2f;
-        private BoundingBox _padding = new BoundingBox(3f, 3f, 3f, 3f);
+        private BoundingBox _padding = new(3f, 3f, 3f, 3f);
         private Color _color = Color.Black;
         private Color _backgroundColor = Color.White;
         private float _strokeWidth = 1f;
         private int _content = -1;
-        private Offset _offset = new Offset(0, 0);
-        private double _rotation = 0;
+        private Offset _offset = new(0, 0);
+        private double _rotation;
         private string _title;
         private string _subtitle;
         private Alignment _titleTextAlignment;
@@ -74,16 +85,12 @@ namespace Mapsui.Rendering.Skia
 
         public new static double DefaultWidth { get; set; } = 100;
         public new static double DefaultHeight { get; set; } = 30;
-
-        public CalloutStyle()
-        {
-        }
-
+        
         /// <summary>
         /// Type of Callout
         /// </summary>
         /// <remarks>
-        /// Could be single, detail or custom. The last is a bitmap id for an owner drawn image.
+        /// Could be Single, Detail or Custom. The last need a bitmap id in Content for an owner drawn image.
         /// </remarks>
         public CalloutType Type
         {
@@ -118,7 +125,7 @@ namespace Mapsui.Rendering.Skia
         /// <summary>
         /// BoundingBox relative to offset point
         /// </summary>
-        public BoundingBox BoundingBox = new BoundingBox();
+        public BoundingBox BoundingBox = new();
 
         /// <summary>
         /// Gets or sets the rotation of the Callout in degrees (clockwise is positive)
@@ -272,7 +279,7 @@ namespace Mapsui.Rendering.Skia
             get => _padding;
             set
             {
-                if (value != _padding)
+                if (!value.Equals(_padding))
                 {
                     _padding = value;
                     Invalidated = true;
@@ -336,7 +343,7 @@ namespace Mapsui.Rendering.Skia
         /// </summary>
         public Color TitleFontColor 
         {
-            get { return _titleFontColor; }
+            get => _titleFontColor;
             set
             {
                 _titleFontColor = value;
@@ -381,7 +388,7 @@ namespace Mapsui.Rendering.Skia
         /// </summary>
         public Color SubtitleFontColor
         {
-            get { return _subtitleFontColor; }
+            get => _subtitleFontColor;
             set
             {
                 _subtitleFontColor = value;
@@ -406,7 +413,7 @@ namespace Mapsui.Rendering.Skia
         }
 
         /// <summary>
-        /// Space between Title and Subtitel of Callout
+        /// Space between Title and Subtitle of Callout
         /// </summary>
         public double Spacing
         {
@@ -422,7 +429,7 @@ namespace Mapsui.Rendering.Skia
         }
 
         /// <summary>
-        /// MaxWidth for Title and Subtitel of Callout
+        /// MaxWidth for Title and Subtitle of Callout
         /// </summary>
         public double MaxWidth
         {
@@ -439,15 +446,12 @@ namespace Mapsui.Rendering.Skia
 
         public int InternalContent { get; set; } = -1;
 
-        private Font _titleFont = new Font();
-        private Font _subtitleFont = new Font();
+        private Font _titleFont = new();
+        private Font _subtitleFont = new();
 
         public Font TitleFont
         {
-            get
-            {
-                return _titleFont;
-            }
+            get => _titleFont;
             set 
             {
                 _titleFont = value;
@@ -457,10 +461,7 @@ namespace Mapsui.Rendering.Skia
 
         public Font SubtitleFont
         {
-            get
-            {
-                return _subtitleFont;
-            }
+            get => _subtitleFont;
             set
             {
                 _subtitleFont = value;
@@ -470,10 +471,7 @@ namespace Mapsui.Rendering.Skia
 
         public bool Invalidated
         {
-            get
-            {
-                return _invalidated | TitleFont.Invalidated | SubtitleFont.Invalidated;
-            }
+            get => _invalidated | TitleFont.Invalidated | SubtitleFont.Invalidated;
             set
             {
                 _invalidated = value;

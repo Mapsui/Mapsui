@@ -1,11 +1,12 @@
-﻿using System.Reflection;
+﻿using System.Collections.Generic;
+using System.Reflection;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.UI;
-using Svg.Skia;
+
 
 namespace Mapsui.Tests.Common.Maps
 {
@@ -29,17 +30,17 @@ namespace Mapsui.Tests.Common.Maps
             map.Layers.Add(new MemoryLayer
             {
                 Style = null,
-                DataSource = new MemoryProvider(CreateFeatures()),
+                DataSource = new MemoryProvider<IGeometryFeature>(CreateFeatures()),
                 Name = "Points with Svg"
             });
             return map;
         }
 
-        public static Features CreateFeatures()
+        public static IEnumerable<IGeometryFeature> CreateFeatures()
         {
             var pinId = LoadSvg("Mapsui.Tests.Common.Resources.Images.Pin.svg");            
 
-            return new Features
+            return new List<IGeometryFeature>
             {
                 new Feature
                 {
@@ -64,7 +65,7 @@ namespace Mapsui.Tests.Common.Maps
             };
         }
 
-        private static int LoadSvg(string bitmapPath, bool registerImage = false)
+        private static int LoadSvg(string bitmapPath)
         {
             var bitmapStream = typeof(Utilities).GetTypeInfo().Assembly.GetManifestResourceStream(bitmapPath);        
             return BitmapRegistry.Instance.Register(bitmapStream);                

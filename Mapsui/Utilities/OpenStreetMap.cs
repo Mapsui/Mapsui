@@ -7,7 +7,7 @@ namespace Mapsui.Utilities
 {
     public static class OpenStreetMap
     {
-        private static readonly BruTile.Attribution OpenStreetMapAttribution = new BruTile.Attribution(
+        private static readonly BruTile.Attribution OpenStreetMapAttribution = new(
             "© OpenStreetMap contributors", "https://www.openstreetmap.org/copyright");
 
         public static TileLayer CreateTileLayer(string userAgent = null)

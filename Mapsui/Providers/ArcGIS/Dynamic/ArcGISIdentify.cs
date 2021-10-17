@@ -5,9 +5,7 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using BruTile.Extensions;
 using Mapsui.Logging;
-using Mapsui.Providers.ArcGIS.Image;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -19,10 +17,8 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
 
     public class ArcGISIdentify
     {
-        private int _timeOut { get; set; }
-        private HttpWebRequest _webRequest { get; set; }
-        private ArcGISFeatureInfo _featureInfo { get; set; }
-
+        private int _timeOut;
+        private ArcGISFeatureInfo _featureInfo;
         public event StatusEventHandler IdentifyFinished;
         public event StatusEventHandler IdentifyFailed;
 
@@ -32,7 +28,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
         }
 
         /// <summary>
-        /// Timeout of webrequest in milliseconds. Default is 5 seconds
+        /// Timeout of webRequest in milliseconds. Default is 5 seconds
         /// </summary>
         public int TimeOut
         {
@@ -158,13 +154,13 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
         private void OnIdentifyFinished()
         {
             var handler = IdentifyFinished;
-            if (handler != null) handler(this, _featureInfo);
+            handler?.Invoke(this, _featureInfo);
         }
 
         private void OnIdentifyFailed()
         {
             var handler = IdentifyFailed;
-            if (handler != null) handler(this, null);
+            handler?.Invoke(this, null);
         }
     }
 }

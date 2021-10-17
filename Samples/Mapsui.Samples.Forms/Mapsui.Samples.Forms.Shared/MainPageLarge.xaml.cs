@@ -1,6 +1,5 @@
-﻿using Mapsui.Rendering.Skia;
+﻿using Mapsui.Providers;
 using Mapsui.Samples.Common;
-using Mapsui.Samples.Common.ExtensionMethods;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.UI.Forms;
 using Plugin.Geolocator;
@@ -8,6 +7,8 @@ using Plugin.Geolocator.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Mapsui.Extensions;
+using Mapsui.Styles;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -52,22 +53,25 @@ namespace Mapsui.Samples.Forms
 
         private void MapView_Info(object sender, UI.MapInfoEventArgs e)
         {
-            featureInfo.Text = $"Click Info:";
-
-            if (e?.MapInfo?.Feature != null)
+            if (e.MapInfo.Feature is IGeometryFeature geometryFeature)
             {
-                featureInfo.Text = $"Click Info:{Environment.NewLine}{e.MapInfo.Feature.ToDisplayText()}";
+                featureInfo.Text = $"Click Info:";
 
-                foreach (var style in e.MapInfo.Feature.Styles)
+                if (e?.MapInfo?.Feature != null)
                 {
-                    if (style is CalloutStyle)
-                    {
-                        style.Enabled = !style.Enabled;
-                        e.Handled = true;
-                    }
-                }
+                    featureInfo.Text = $"Click Info:{Environment.NewLine}{geometryFeature.ToDisplayText()}";
 
-                mapView.Refresh();
+                    foreach (var style in e.MapInfo.Feature.Styles)
+                    {
+                        if (style is CalloutStyle)
+                        {
+                            style.Enabled = !style.Enabled;
+                            e.Handled = true;
+                        }
+                    }
+
+                    mapView.Refresh();
+                }
             }
         }
 

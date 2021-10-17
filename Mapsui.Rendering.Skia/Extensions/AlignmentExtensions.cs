@@ -1,7 +1,7 @@
 ﻿using Mapsui.Widgets;
 using Topten.RichTextKit;
 
-namespace Mapsui.Rendering.Skia
+namespace Mapsui.Rendering.Skia.Extensions
 {
     public static class AlignmentExtensions
     {

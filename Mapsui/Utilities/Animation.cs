@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Timers;
 
 namespace Mapsui.Utilities
 {
     public class Animation
     {
-        private Timer _timer;
+        // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
+        private readonly Timer _timer;
         private Stopwatch _stopwatch;
         private long _stopwatchStart;
         private long _durationTicks;
-        private object _syncObject = new object();
+        private readonly object _syncObject = new();
 
         public Animation()
         {
@@ -39,7 +41,7 @@ namespace Mapsui.Utilities
         /// <summary>
         /// Animations, that should be made
         /// </summary>
-        private List<AnimationEntry> _entries { get; } = new List<AnimationEntry>();
+        private readonly List<AnimationEntry> _entries = new();
 
         /// <summary>
         /// True, if animation is running
@@ -106,12 +108,18 @@ namespace Mapsui.Utilities
 
             if (value >= 1.0)
             {
-                Stop(true);
+                Stop();
                 return;
             }
 
+            List<AnimationEntry> copyOfEntries;
+            lock (_syncObject)
+            {
+                copyOfEntries = _entries.ToList();
+            }
+
             // Calc new values
-            foreach (var entry in _entries)
+            foreach (var entry in copyOfEntries)
             {
                 if (value >= entry.AnimationStart && value <= entry.AnimationEnd)
                     entry.Tick(value);

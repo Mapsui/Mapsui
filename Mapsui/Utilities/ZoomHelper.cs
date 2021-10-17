@@ -26,10 +26,10 @@ namespace Mapsui.Utilities
         {
             if (resolutions == null || resolutions.Count == 0) return resolution / 2.0;
 
-            for (var i = 0; i < resolutions.Count; i++)
+            foreach (var t in resolutions)
             {
                 // If there is a smaller resolution in the array return it
-                if (resolutions[i] < (resolution - double.Epsilon)) return resolutions[i];
+                if (t < resolution - double.Epsilon) return t;
             }
 
             // Else return half of the current resolution
@@ -123,9 +123,7 @@ namespace Mapsui.Utilities
         
         private static void Swap(ref double xMin, ref double xMax)
         {
-            var tempX = xMin;
-            xMin = xMax;
-            xMax = tempX;
+            (xMin, xMax) = (xMax, xMin);
         }
     }
 

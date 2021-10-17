@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Collections.Generic;
+using System.Reflection;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -35,9 +36,9 @@ namespace Mapsui.Tests.Common.Maps
             return map;
         }
 
-        private static IProvider CreateProviderWithRotatedBitmapSymbols()
+        private static IProvider<IGeometryFeature> CreateProviderWithRotatedBitmapSymbols()
         {
-            var features = new Features
+            var features = new List<IGeometryFeature>
             {
                 new Feature
                 {
@@ -48,7 +49,7 @@ namespace Mapsui.Tests.Common.Maps
                 CreateFeatureWithRotatedBitmapSymbol(125, 125, 180),
                 CreateFeatureWithRotatedBitmapSymbol(125, 75, 270)
             };
-            return new MemoryProvider(features);
+            return new MemoryProvider<IGeometryFeature>(features);
         }
 
         private static Feature CreateFeatureWithRotatedBitmapSymbol(double x, double y, double rotation)

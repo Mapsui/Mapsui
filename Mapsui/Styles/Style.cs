@@ -53,9 +53,9 @@ namespace Mapsui.Styles
 
         public override bool Equals(object obj)
         {
-            if (!(obj is Style))
+            if (!(obj is Style style))
                 return false;
-            return Equals((Style) obj);
+            return Equals(style);
         }
 
         public bool Equals(Style style)

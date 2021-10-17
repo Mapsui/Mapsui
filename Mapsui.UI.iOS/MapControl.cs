@@ -8,8 +8,8 @@ using System.Linq;
 using CoreGraphics;
 using Mapsui.Geometries;
 using Mapsui.Geometries.Utilities;
+using Mapsui.UI.iOS.Extensions;
 using SkiaSharp.Views.iOS;
-using Mapsui.Utilities;
 
 namespace Mapsui.UI.iOS
 {

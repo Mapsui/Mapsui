@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace Mapsui.Layers
         private ITransformation _transformation;
         private BoundingBox _envelope;
 
-        public Transformer Transformer { get; } = new Transformer();
+        public Transformer Transformer { get; } = new();
 
         /// <summary>
         /// Get a layer's styles
@@ -35,7 +36,7 @@ namespace Mapsui.Layers
         /// <returns>Enumerable with styles belonging to layer</returns>
         public static IEnumerable<IStyle> GetLayerStyles(ILayer layer)
         {
-            if (layer == null) return new IStyle[0];
+            if (layer == null) return Array.Empty<IStyle>();
             var style = layer.Style as StyleCollection;
             return style?.ToArray() ?? new[] { layer.Style };
         }
@@ -204,7 +205,7 @@ namespace Mapsui.Layers
 
        
         /// <summary>
-        /// Returns the envelope of all avaiable data in the layer
+        /// Returns the envelope of all available data in the layer
         /// </summary>
         public virtual BoundingBox Envelope
         {

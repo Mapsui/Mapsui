@@ -18,8 +18,12 @@ namespace Mapsui.UI.Uwp
 namespace Mapsui.UI.Android
 #elif __IOS__
 namespace Mapsui.UI.iOS
+#elif __WINUI__
+namespace Mapsui.UI.WinUI
 #elif __FORMS__
 namespace Mapsui.UI.Forms
+#elif __AVALONIA__
+namespace Mapsui.UI.Avalonia
 #else
 namespace Mapsui.UI.Wpf
 #endif
@@ -29,9 +33,9 @@ namespace Mapsui.UI.Wpf
         private Map _map;
         private double _unSnapRotationDegrees;
         // Flag indicating if a drawing process is running
-        private bool _drawing = false;
+        private bool _drawing;
         // Flag indicating if a new drawing process should start
-        private bool _refresh = false;
+        private bool _refresh;
         // Action to call for a redraw of the control
         private Action _invalidate;
         // Timer for loop to invalidating the control
@@ -39,14 +43,14 @@ namespace Mapsui.UI.Wpf
         // Interval between two calls of the invalidate function in ms
         private int _updateInterval = 16;
         // Stopwatch for measuring drawing times
-        private System.Diagnostics.Stopwatch _stopwatch = new System.Diagnostics.Stopwatch();
+        private readonly System.Diagnostics.Stopwatch _stopwatch = new System.Diagnostics.Stopwatch();
 
         void CommonInitialize()
         {
             // Create map
             Map = new Map();
             // Create timer for invalidating the control
-            _invalidateTimer = new((state) => InvalidateTimerCallback(state), null, System.Threading.Timeout.Infinite, 16);
+            _invalidateTimer = new System.Threading.Timer(InvalidateTimerCallback, null, System.Threading.Timeout.Infinite, 16);
             // Start the invalidation timer
             StartUpdates(false);
         }
@@ -76,10 +80,9 @@ namespace Mapsui.UI.Wpf
             // Stop stopwatch after drawing control
             _stopwatch.Stop();
 
-            // If we are interessted in performance measurements, we save the new drawing time
-            if (_performance != null)
-                _performance.Add(_stopwatch.Elapsed.TotalMilliseconds);
-            
+            // If we are interested in performance measurements, we save the new drawing time
+            _performance?.Add(_stopwatch.Elapsed.TotalMilliseconds);
+
             // Log drawing time
             Logger.Log(LogLevel.Information, $"Time for drawing control [ms]: {_stopwatch.Elapsed.TotalMilliseconds}");
 
@@ -147,7 +150,7 @@ namespace Mapsui.UI.Wpf
             set
             {
                 if (value <= 0)
-                    throw new ArgumentOutOfRangeException("UpdateInterval must be greater than 0");
+                    throw new ArgumentOutOfRangeException($"{nameof(UpdateInterval)} must be greater than 0");
 
                 if (_updateInterval != value)
                 {
@@ -272,7 +275,8 @@ namespace Mapsui.UI.Wpf
         public event EventHandler ViewportInitialized; //todo: Consider to use the Viewport PropertyChanged
 
         /// <summary>
-        /// Called whenever a feature in one of the layers in InfoLayers is hitten by a click 
+        /// Called whenever the map is clicked. The MapInfoEventArgs contain the features that were hit in
+        /// the layers that have IsMapInfoLayer set to true. 
         /// </summary>
         public event EventHandler<MapInfoEventArgs> Info;
 
@@ -314,7 +318,7 @@ namespace Mapsui.UI.Wpf
         }
 
         /// <summary>
-        /// Unsubcribe from map events
+        /// Unsubscribe from map events
         /// </summary>
         /// <param name="map">Map, to which events to unsubscribe</param>
         private void UnsubscribeFromMapEvents(Map map)
@@ -482,6 +486,7 @@ namespace Mapsui.UI.Wpf
         {
             if (mapInfoEventArgs == null) return;
 
+            Map?.OnInfo(mapInfoEventArgs); // Also propagate to Map
             Info?.Invoke(this, mapInfoEventArgs);
         }
 

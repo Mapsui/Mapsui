@@ -30,24 +30,24 @@ namespace Mapsui.Utilities
 {
     public class Easing
     {
-        public static readonly Easing Linear = new Easing(x => x);
+        public static readonly Easing Linear = new(x => x);
 
-        public static readonly Easing SinOut = new Easing(x => Math.Sin(x * Math.PI * 0.5f));
-        public static readonly Easing SinIn = new Easing(x => 1.0f - Math.Cos(x * Math.PI * 0.5f));
-        public static readonly Easing SinInOut = new Easing(x => -Math.Cos(Math.PI * x) / 2.0f + 0.5f);
+        public static readonly Easing SinOut = new(x => Math.Sin(x * Math.PI * 0.5f));
+        public static readonly Easing SinIn = new(x => 1.0f - Math.Cos(x * Math.PI * 0.5f));
+        public static readonly Easing SinInOut = new(x => -Math.Cos(Math.PI * x) / 2.0f + 0.5f);
 
-        public static readonly Easing CubicIn = new Easing(x => x * x * x);
-        public static readonly Easing CubicOut = new Easing(x => Math.Pow(x - 1.0f, 3.0f) + 1.0f);
-        public static readonly Easing CubicInOut = new Easing(x => x < 0.5f ? Math.Pow(x * 2.0f, 3.0f) / 2.0f : (Math.Pow((x - 1) * 2.0f, 3.0f) + 2.0f) / 2.0f);
+        public static readonly Easing CubicIn = new(x => x * x * x);
+        public static readonly Easing CubicOut = new(x => Math.Pow(x - 1.0f, 3.0f) + 1.0f);
+        public static readonly Easing CubicInOut = new(x => x < 0.5f ? Math.Pow(x * 2.0f, 3.0f) / 2.0f : (Math.Pow((x - 1) * 2.0f, 3.0f) + 2.0f) / 2.0f);
 
-        public static readonly Easing QuarticIn = new Easing(x => x * x * x * x * x);
-        public static readonly Easing QuarticOut = new Easing(x => 1 - (--x) * x * x * x);
+        public static readonly Easing QuarticIn = new(x => x * x * x * x * x);
+        public static readonly Easing QuarticOut = new(x => 1 - (--x) * x * x * x);
 
         public static readonly Easing BounceOut;
         public static readonly Easing BounceIn;
 
-        public static readonly Easing SpringIn = new Easing(x => x * x * ((1.70158f + 1) * x - 1.70158f));
-        public static readonly Easing SpringOut = new Easing(x => (x - 1) * (x - 1) * ((1.70158f + 1) * (x - 1) + 1.70158f) + 1);
+        public static readonly Easing SpringIn = new(x => x * x * ((1.70158f + 1) * x - 1.70158f));
+        public static readonly Easing SpringOut = new(x => (x - 1) * (x - 1) * ((1.70158f + 1) * (x - 1) + 1.70158f) + 1);
 
         readonly Func<double, double> _easingFunc;
 
@@ -81,10 +81,7 @@ namespace Mapsui.Utilities
 
         public Easing(Func<double, double> easingFunc)
         {
-            if (easingFunc == null)
-                throw new ArgumentNullException("easingFunc");
-
-            _easingFunc = easingFunc;
+            _easingFunc = easingFunc ?? throw new ArgumentNullException(nameof(easingFunc));
         }
 
         public double Ease(double v)

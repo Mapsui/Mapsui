@@ -6,15 +6,15 @@ using Mapsui.Styles.Thematics;
 
 namespace Mapsui.Providers
 {
-    public class StackedLabelProvider : IProvider
+    public class StackedLabelProvider : IProvider<IFeature>
     {
         private const int SymbolSize = 32; // todo: determine margin by symbol size
         private const int BoxMargin = SymbolSize/2;
 
-        private readonly IProvider _provider;
+        private readonly IProvider<IGeometryFeature> _provider;
         private readonly LabelStyle _labelStyle;
 
-        public StackedLabelProvider(IProvider provider, LabelStyle labelStyle, Pen rectangleLine = null,
+        public StackedLabelProvider(IProvider<IGeometryFeature> provider, LabelStyle labelStyle, Pen rectangleLine = null,
             Brush rectangleFill = null)
         {
             _provider = provider;
@@ -41,7 +41,7 @@ namespace Mapsui.Providers
         }
 
         private static List<Feature> GetFeaturesInView(double resolution, LabelStyle labelStyle,
-            IEnumerable<IFeature> features, Pen line, Brush fill)
+            IEnumerable<IGeometryFeature> features, Pen line, Brush fill)
         {
             var margin = resolution * 50;
             var clusters = new List<Cluster>();
@@ -104,7 +104,7 @@ namespace Mapsui.Providers
                     new LabelStyle(labelStyle)
                     {
                         Offset = {Y = offsetY},
-                        LabelMethod = f => text
+                        LabelMethod = _ => text
                     }
                 }
             };
@@ -147,7 +147,7 @@ namespace Mapsui.Providers
 
         private static void ClusterFeatures(
             ICollection<Cluster> clusters,
-            IEnumerable<IFeature> features,
+            IEnumerable<IGeometryFeature> features,
             double minDistance,
             IStyle layerStyle,
             double resolution)
@@ -180,7 +180,7 @@ namespace Mapsui.Providers
                 clusters.Add(new Cluster
                 {
                     Box = feature.Geometry.BoundingBox.Clone(),
-                    Features = new List<IFeature> {feature}
+                    Features = new List<IGeometryFeature> {feature}
                 });
             }
         }
@@ -188,7 +188,7 @@ namespace Mapsui.Providers
         private class Cluster
         {
             public BoundingBox Box { get; set; }
-            public IList<IFeature> Features { get; set; }
+            public IList<IGeometryFeature> Features { get; set; }
         }
     }
 }

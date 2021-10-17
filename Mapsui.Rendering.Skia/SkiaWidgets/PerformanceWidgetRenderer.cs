@@ -1,5 +1,5 @@
 ﻿using Mapsui.Widgets;
-using Mapsui.Widgets.Performance;
+using Mapsui.Widgets.PerformanceWidget;
 using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia.SkiaWidgets
@@ -10,10 +10,10 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
         readonly SKPaint _backgroundPaint;
         readonly int _textSize;
         readonly float _widthHeader;
-        readonly string[] _textHeader = new string[7] { "Last", "Mean", "Frames", "Min", "Max", "Count", "Dropped" };
+        readonly string[] _textHeader = { "Last", "Mean", "Frames", "Min", "Max", "Count", "Dropped" };
         readonly string[] _text = new string[7];
         SKRect _rect;
-        Geometries.BoundingBox _envelope;
+        readonly Geometries.BoundingBox _envelope;
 
         /// <summary>
         /// Renderer for PerformanceWidget

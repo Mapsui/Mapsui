@@ -101,17 +101,5 @@ namespace Mapsui.UI
             }
             viewport.SetCenter(x, y);
         }
-
-        private static bool MapWidthSpansViewport(double extentWidth, double viewportWidth, double resolution)
-        {
-            var mapWidth = extentWidth / resolution; // in screen units
-            return viewportWidth <= mapWidth;
-        }
-
-        private static bool MapHeightSpansViewport(double extentHeight, double viewportHeight, double resolution)
-        {
-            var mapHeight = extentHeight / resolution; // in screen units
-            return viewportHeight <= mapHeight;
-        }
     }
 }

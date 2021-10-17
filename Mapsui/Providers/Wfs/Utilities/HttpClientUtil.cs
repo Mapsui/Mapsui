@@ -164,12 +164,9 @@ namespace Mapsui.Providers.Wfs.Utilities
             if (_webResponse != null)
             {
                 // ATTENTION: Dispose first the Response Stream
-                // or else a disposed exception occours.
+                // or else a disposed exception occurs.
                 var responseStream = _webResponse?.GetResponseStream();
-                if (responseStream != null)
-                {
-                    responseStream.Dispose();
-                }
+                responseStream?.Dispose();
                 _webResponse?.Close();
                 
                 _webResponse = null;

@@ -69,3 +69,5 @@ Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Android/Resources/Resource.des
 /Mapsui.UI.Uno/Shared/Enums/TouchMode.cs
 /Mapsui.UI.Uno/Shared/Utils/PCLTimer.cs
 AppPackages/
+*.nupkg
+

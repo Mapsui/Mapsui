@@ -4,7 +4,6 @@ namespace Mapsui.Styles
     public class Brush
     {
         private int _bitmapId = -1;
-        private FillStyle _fillStyle = FillStyle.Solid;
 
         public Brush()
         {
@@ -35,7 +34,7 @@ namespace Mapsui.Styles
         /// </summary>
         public int BitmapId
         {
-            get { return _bitmapId; }
+            get => _bitmapId;
             set
             {
                 _bitmapId = value;
@@ -47,19 +46,15 @@ namespace Mapsui.Styles
         /// <summary>
         /// This identifies how the brush is applied, works for Color not for bitmaps
         /// </summary>
-        public FillStyle FillStyle
-        {
-            get { return _fillStyle; }
-            set { _fillStyle = value; }
-        }
+        public FillStyle FillStyle { get; set; } = FillStyle.Solid;
 
         public override bool Equals(object obj)
         {
-            if (!(obj is Brush))
+            if (!(obj is Brush brush))
             {
                 return false;
             }
-            return Equals((Brush)obj);
+            return Equals(brush);
         }
 
         public bool Equals(Brush brush)

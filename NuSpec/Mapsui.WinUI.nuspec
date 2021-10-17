@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Mapsui.WinUI</id>
+    <version>$version$</version>
+    <title>Mapsui</title>
+    <authors>Paul den Dulk</authors>
+    <owners>Paul den Dulk</owners>
+    <projectUrl>https://github.com/Mapsui/Mapsui</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>
+      WinUI map components based on the Mapsui library
+    </description>
+    <tags>map maps mapping geo gis osm winui</tags>
+    <language>en-US</language>
+    <dependencies>
+      <!-- [ or ] is including, ( or ) is excluding -->
+      <group targetFramework="net5.0-windows10.0.18362.0">
+        <dependency id="Mapsui" version="$version$"/>
+        <dependency id="SkiaSharp.Views.WinUI" version="[2.80.3,3.0.0)"/>
+        <dependency id="Microsoft.ProjectReunion" version="[0.8.4, 0.9.0)" />
+        <dependency id="Microsoft.ProjectReunion.Foundation" version="[0.8.4, 0.9.0)" />
+        <dependency id="Microsoft.ProjectReunion.WinUI" version="[0.8.4, 0.9.0)" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\Mapsui.UI.WinUI\bin\Release\net5.0-windows10.0.18362.0\Mapsui.UI.WinUI.dll" target="lib\net5.0-windows10.0.18362.0\Mapsui.UI.WinUI.dll" />
+  </files>
+</package>

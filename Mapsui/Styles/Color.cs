@@ -33,30 +33,30 @@ namespace Mapsui.Styles
         public int G { get; set; }
         public int B { get; set; }
         public int A { get; set; }
-        
-        public static Color Transparent => new Color {A = 0, R = 255, G = 255, B = 255};
-        public static Color Black => new Color {A = 255, R = 0, G = 0, B = 0};
-        public static Color White => new Color {A = 255, R = 255, G = 255, B = 255};
-        public static Color Gray => new Color {A = 255, R = 128, G = 128, B = 128};
-        public static Color Red => new Color {A = 255, R = 255, G = 0, B = 0};
-        public static Color Yellow => new Color {A = 255, R = 255, G = 255, B = 0};
-        public static Color Green => new Color {A = 255, R = 0, G = 128, B = 0};
-        public static Color Cyan => new Color {A = 255, R = 0, G = 255, B = 255};
-        public static Color Blue => new Color {A = 255, R = 0, G = 0, B = 255};
-        public static Color Orange => new Color {A = 255, R = 255, G = 165, B = 0};
-        public static Color Indigo => new Color {A = 255, R = 75, G = 0, B = 130};
-        public static Color Violet => new Color {A = 255, R = 238, G = 130, B = 238};
+
+        public static Color Transparent => new() { A = 0, R = 255, G = 255, B = 255 };
+        public static Color Black => new() { A = 255, R = 0, G = 0, B = 0 };
+        public static Color White => new() { A = 255, R = 255, G = 255, B = 255 };
+        public static Color Gray => new() { A = 255, R = 128, G = 128, B = 128 };
+        public static Color Red => new() { A = 255, R = 255, G = 0, B = 0 };
+        public static Color Yellow => new() { A = 255, R = 255, G = 255, B = 0 };
+        public static Color Green => new() { A = 255, R = 0, G = 128, B = 0 };
+        public static Color Cyan => new() { A = 255, R = 0, G = 255, B = 255 };
+        public static Color Blue => new() { A = 255, R = 0, G = 0, B = 255 };
+        public static Color Orange => new() { A = 255, R = 255, G = 165, B = 0 };
+        public static Color Indigo => new() { A = 255, R = 75, G = 0, B = 130 };
+        public static Color Violet => new() { A = 255, R = 238, G = 130, B = 238 };
 
         public static Color FromArgb(int a, int r, int g, int b)
         {
-            return new Color {A = a, R = r, G = g, B = b};
+            return new Color { A = a, R = r, G = g, B = b };
         }
-        
+
         public override bool Equals(object obj)
         {
-            if (!(obj is Color))
+            if (!(obj is Color color))
                 return false;
-            return Equals((Color) obj);
+            return Equals(color);
         }
 
         public bool Equals(Color color)
@@ -87,7 +87,7 @@ namespace Mapsui.Styles
         /// Converts a string in Mapbox GL format to a Mapsui Color
         /// 
         /// This function assumes, that alpha is a float in range from 0.0 to 1.0.
-        /// It converts this float in Maspui Color alpha without rounding.
+        /// It converts this float in Mapsui Color alpha without rounding.
         /// The following colors could be converted:
         /// - Named colors with known Html names 
         /// - Colors as Html color values with leading '#' and 6 or 3 numbers
@@ -265,7 +265,7 @@ namespace Mapsui.Styles
         /// <summary>
         /// Known HTML color names and hex code for RGB color
         /// </summary>
-        public static readonly Dictionary<string, string> KnownColors = new Dictionary<string, string>
+        public static readonly Dictionary<string, string> KnownColors = new()
         {
             {"AliceBlue".ToLower(), "#F0F8FF"},
             {"AntiqueWhite".ToLower(), "#FAEBD7"},

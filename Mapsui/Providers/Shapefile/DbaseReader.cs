@@ -19,6 +19,7 @@
 // Good stuff on DBase format: http://www.clicketyclick.dk/databases/xbase/format/
 
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.IO;
@@ -52,7 +53,7 @@ namespace Mapsui.Providers.Shapefile
         public DbaseReader(string filename)
         {
             if (!File.Exists(filename))
-                throw new FileNotFoundException(String.Format("Could not find file \"{0}\"", filename));
+                throw new FileNotFoundException($"Could not find file \"{filename}\"");
             _filename = filename;
             _headerIsParsed = false;
         }
@@ -61,8 +62,8 @@ namespace Mapsui.Providers.Shapefile
 
         public bool IsOpen
         {
-            get { return _isOpen; }
-            set { _isOpen = value; }
+            get => _isOpen;
+            set => _isOpen = value;
         }
 
         public void Open()
@@ -87,10 +88,7 @@ namespace Mapsui.Providers.Shapefile
             _br = null;
             _fs = null;
         }
-
-        // Binary Tree not working yet on Mono 
-        // see bug: http://bugzilla.ximian.com/show_bug.cgi?id=78502
-#if !MONO
+        
         /// <summary>
         /// Indexes a DBF column in a binary tree [NOT COMPLETE]
         /// </summary>
@@ -104,7 +102,7 @@ namespace Mapsui.Providers.Shapefile
                 tree.Add(new BinaryTree<T, uint>.ItemValue((T) GetValue(i, columnId), i));
             return tree;
         }
-#endif
+
         /*
 		/// <summary>
 		/// Creates an index on the columns for faster searching [EXPERIMENTAL - Requires Lucene dependencies]
@@ -145,10 +143,7 @@ namespace Mapsui.Providers.Shapefile
         /// <summary>
         /// Gets the date this file was last updated.
         /// </summary>
-        public DateTime LastUpdate
-        {
-            get { return _lastUpdate; }
-        }
+        public DateTime LastUpdate => _lastUpdate;
 
         private void ParseDbfHeader()
         {
@@ -438,8 +433,8 @@ namespace Mapsui.Providers.Shapefile
         /// </remarks>
         public Encoding Encoding
         {
-            get { return _encoding; }
-            set { _encoding = value; }
+            get => _encoding;
+            set => _encoding = value;
         }
 
         /// <summary>
@@ -448,13 +443,13 @@ namespace Mapsui.Providers.Shapefile
         /// <param name="oid"></param>
         /// <param name="table"></param>
         /// <returns></returns>
-        internal IFeature GetFeature(uint oid, IFeatures table)
+        internal IGeometryFeature GetFeature(uint oid, IEnumerable<IGeometryFeature> table)
         {
             if (oid >= _numberOfRecords)
                 throw (new ArgumentException("Invalid DataRow requested at index " + oid.ToString(CultureInfo.InvariantCulture)));
             _fs.Seek(_headerLength + oid * _recordLength, 0);
 
-            var dr = table.New();
+            var dr = new Feature();
 
             if (_br.ReadChar() == '*') return null; // is record marked deleted?
                 
@@ -476,56 +471,38 @@ namespace Mapsui.Providers.Shapefile
                     return _encoding.GetString(_br.ReadBytes(dbf.Length)).Replace("\0", "").Trim();
                 case "System.Double":
                     string temp = Encoding.UTF7.GetString(_br.ReadBytes(dbf.Length)).Replace("\0", "").Trim();
-                    double dbl;
-                    if (double.TryParse(temp, NumberStyles.Float, CultureInfo.InvariantCulture, out dbl))
+                    if (double.TryParse(temp, NumberStyles.Float, CultureInfo.InvariantCulture, out var dbl))
                         return dbl;
                     return DBNull.Value;
                 case "System.Int16":
                     string temp16 = Encoding.UTF7.GetString((_br.ReadBytes(dbf.Length))).Replace("\0", "").Trim();
-                    Int16 i16;
-                    if (Int16.TryParse(temp16, NumberStyles.Float, CultureInfo.InvariantCulture, out i16))
+                    if (short.TryParse(temp16, NumberStyles.Float, CultureInfo.InvariantCulture, out var i16))
                         return i16;
                     return DBNull.Value;
                 case "System.Int32":
                     string temp32 = Encoding.UTF7.GetString((_br.ReadBytes(dbf.Length))).Replace("\0", "").Trim();
-                    Int32 i32;
-                    if (Int32.TryParse(temp32, NumberStyles.Float, CultureInfo.InvariantCulture, out i32))
+                    if (int.TryParse(temp32, NumberStyles.Float, CultureInfo.InvariantCulture, out var i32))
                         return i32;
                     return DBNull.Value;
                 case "System.Int64":
                     string temp64 = Encoding.UTF7.GetString((_br.ReadBytes(dbf.Length))).Replace("\0", "").Trim();
-                    Int64 i64;
-                    if (Int64.TryParse(temp64, NumberStyles.Float, CultureInfo.InvariantCulture, out i64))
+                    if (long.TryParse(temp64, NumberStyles.Float, CultureInfo.InvariantCulture, out var i64))
                         return i64;
                     return DBNull.Value;
                 case "System.Single":
                     string temp4 = Encoding.UTF8.GetString((_br.ReadBytes(dbf.Length)));
-                    float f;
-                    if (float.TryParse(temp4, NumberStyles.Float, CultureInfo.InvariantCulture, out f))
+                    if (float.TryParse(temp4, NumberStyles.Float, CultureInfo.InvariantCulture, out var f))
                         return f;
                     return DBNull.Value;
                 case "System.Boolean":
                     char tempChar = _br.ReadChar();
-                    return ((tempChar == 'T') || (tempChar == 't') || (tempChar == 'Y') || (tempChar == 'y'));
+                    return (tempChar == 'T') || (tempChar == 't') || (tempChar == 'Y') || (tempChar == 'y');
                 case "System.DateTime":
-                    DateTime date;
                     // Mono has not yet implemented DateTime.TryParseExact
-#if !MONO
                     if (DateTime.TryParseExact(Encoding.UTF7.GetString((_br.ReadBytes(8))),
-                                               "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+                                               "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var date))
                         return date;
                     return DBNull.Value;
-#else
-					try 
-					{
-						return date = DateTime.ParseExact ( System.Text.Encoding.UTF7.GetString((br.ReadBytes(8))), 	
-						"yyyyMMdd", Mapsui.Map.numberFormat_EnUS, System.Globalization.DateTimeStyles.None );
-					}
-					catch ( Exception e )
-					{
-						return DBNull.Value;
-					}
-#endif
                 default:
                     throw (new NotSupportedException("Cannot parse DBase field '" + dbf.ColumnName + "' of type '" +
                                                      dbf.DataType + "'"));

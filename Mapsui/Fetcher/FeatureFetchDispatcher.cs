@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.Projection;
 using Mapsui.Providers;
@@ -9,19 +11,19 @@ using Mapsui.Styles;
 
 namespace Mapsui.Fetcher
 {
-    class FeatureFetchDispatcher : IFetchDispatcher
+    class FeatureFetchDispatcher<T> : IFetchDispatcher where T : IFeature
     {
         private BoundingBox _extent;
         private double _resolution;
-        private readonly object _lockRoot = new object();
+        private readonly object _lockRoot = new ();
         private bool _busy;
-        private readonly MemoryProvider _cache;
+        private readonly ConcurrentStack<T> _cache;
         private readonly Transformer _transformer;
         private bool _modified;
 
         // todo: Check whether busy and modified state are set correctly in all stages
 
-        public FeatureFetchDispatcher(MemoryProvider cache, Transformer transformer)
+        public FeatureFetchDispatcher(ConcurrentStack<T> cache, Transformer transformer)
         {
             _cache = cache;
             _transformer = transformer;
@@ -50,13 +52,17 @@ namespace Mapsui.Fetcher
             }
         }
 
-        private void FetchCompleted(IEnumerable<IFeature> features, Exception exception)
+        private void FetchCompleted(IEnumerable<T> features, Exception exception)
         {
             lock (_lockRoot)
             {
                 if (exception == null)
                 {
-                    _cache.ReplaceFeatures(_transformer.Transform(features));
+                    _cache.Clear();
+                    if (features.Any())
+                    {
+                        _cache.PushRange(features.ToArray());
+                    }
                 }
                 
                 Busy = _modified;
@@ -82,7 +88,7 @@ namespace Mapsui.Fetcher
             }
         }
 
-        public IProvider DataSource { get; set; }
+        public IProvider<T> DataSource { get; set; }
 
         public bool Busy
         {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Mapsui.Geometries;
 using Mapsui.Providers;
+using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using SkiaSharp;
 
@@ -22,7 +23,7 @@ namespace Mapsui.Rendering.Skia
             IsEmbeddedBitmapText = true
         };
 
-        public static void DrawAsBitmap(SKCanvas canvas, LabelStyle style, IFeature feature, float x, float y, float layerOpacity)
+        public static void DrawAsBitmap(SKCanvas canvas, LabelStyle style, IGeometryFeature feature, float x, float y, float layerOpacity)
         {
             var text = style.GetLabelText(feature);
 
@@ -41,7 +42,7 @@ namespace Mapsui.Rendering.Skia
                 horizontalAlignment: style.HorizontalAlignment, verticalAlignment: style.VerticalAlignment);
         }
 
-        public static void Draw(SKCanvas canvas, LabelStyle style, IFeature feature, Point destination,
+        public static void Draw(SKCanvas canvas, LabelStyle style, IGeometryFeature feature, Point destination,
             float layerOpacity)
         {
             var text = style.GetLabelText(feature);

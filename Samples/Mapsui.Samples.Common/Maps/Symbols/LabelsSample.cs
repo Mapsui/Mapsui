@@ -1,4 +1,5 @@
-﻿using Mapsui.Geometries;
+﻿using System.Collections.Generic;
+using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
@@ -27,7 +28,7 @@ namespace Mapsui.Samples.Common.Maps
 
         public static ILayer CreateLayer()
         {
-            var features = new Features
+            var features = new List<IGeometryFeature>
             {
                 CreateFeatureWithDefaultStyle(),
                 CreateFeatureWithRightAlignedStyle(),
@@ -44,7 +45,7 @@ namespace Mapsui.Samples.Common.Maps
                 CreateFeatureWithCharacterWrap(),
             };
 
-            var memoryProvider = new MemoryProvider(features);
+            var memoryProvider = new MemoryProvider<IGeometryFeature>(features);
 
             return new MemoryLayer {Name = "Points with labels", DataSource = memoryProvider};
         }
@@ -113,7 +114,7 @@ namespace Mapsui.Samples.Common.Maps
             };
         }
 
-        private static IFeature CreateFeatureWithTailTruncation()
+        private static IGeometryFeature CreateFeatureWithTailTruncation()
         {
             var featureWithColors = new Feature { Geometry = new Point(8000000, 2000000) };
             featureWithColors.Styles.Add(new LabelStyle
@@ -130,7 +131,7 @@ namespace Mapsui.Samples.Common.Maps
             return featureWithColors;
         }
 
-        private static IFeature CreateFeatureWithHeadTruncation()
+        private static IGeometryFeature CreateFeatureWithHeadTruncation()
         {
             var featureWithColors = new Feature { Geometry = new Point(-8000000, 2000000) };
             featureWithColors.Styles.Add(new LabelStyle
@@ -147,7 +148,7 @@ namespace Mapsui.Samples.Common.Maps
             return featureWithColors;
         }
 
-        private static IFeature CreateFeatureWithMiddleTruncation()
+        private static IGeometryFeature CreateFeatureWithMiddleTruncation()
         {
             var featureWithColors = new Feature { Geometry = new Point(0, 2000000) };
             featureWithColors.Styles.Add(new LabelStyle
@@ -164,7 +165,7 @@ namespace Mapsui.Samples.Common.Maps
             return featureWithColors;
         }
 
-        private static IFeature CreateFeatureWithWordWrapLeft()
+        private static IGeometryFeature CreateFeatureWithWordWrapLeft()
         {
             var featureWithColors = new Feature { Geometry = new Point(-8000000, 6000000) };
             featureWithColors.Styles.Add(new LabelStyle
@@ -181,7 +182,7 @@ namespace Mapsui.Samples.Common.Maps
             return featureWithColors;
         }
 
-        private static IFeature CreateFeatureWithWordWrapCenter()
+        private static IGeometryFeature CreateFeatureWithWordWrapCenter()
         {
             var featureWithColors = new Feature { Geometry = new Point(0, 6000000) };
             featureWithColors.Styles.Add(new LabelStyle
@@ -199,7 +200,7 @@ namespace Mapsui.Samples.Common.Maps
             return featureWithColors;
         }
 
-        private static IFeature CreateFeatureWithWordWrapRight()
+        private static IGeometryFeature CreateFeatureWithWordWrapRight()
         {
             var featureWithColors = new Feature { Geometry = new Point(8000000, 6000000) };
             featureWithColors.Styles.Add(new LabelStyle
@@ -215,7 +216,7 @@ namespace Mapsui.Samples.Common.Maps
             return featureWithColors;
         }
 
-        private static IFeature CreateFeatureWithCharacterWrap()
+        private static IGeometryFeature CreateFeatureWithCharacterWrap()
         {
             var featureWithColors = new Feature { Geometry = new Point(0, 10000000) };
             featureWithColors.Styles.Add(new LabelStyle
@@ -231,7 +232,7 @@ namespace Mapsui.Samples.Common.Maps
             return featureWithColors;
         }
 
-        private static IFeature CreateFeatureWithHalo()
+        private static IGeometryFeature CreateFeatureWithHalo()
         {
             var featureWithColors = new Feature { Geometry = new Point(0, -12000000) };
             featureWithColors.Styles.Add(new LabelStyle
