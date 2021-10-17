@@ -373,30 +373,21 @@ namespace Mapsui.UI.Forms
 
             if (propertyName.Equals(nameof(IsZoomButtonVisibleProperty)) || propertyName.Equals(nameof(IsZoomButtonVisible)))
             {
-                if (_mapZoomInButton != null && _mapZoomOutButton != null)
-                {
-                    _mapZoomInButton.Enabled = IsZoomButtonVisible;
-                    _mapZoomOutButton.Enabled = IsZoomButtonVisible;
-                    UpdateButtonPositions();
-                }
+                _mapZoomInButton.Enabled = IsZoomButtonVisible;
+                _mapZoomOutButton.Enabled = IsZoomButtonVisible;
+                UpdateButtonPositions();
             }
 
             if (propertyName.Equals(nameof(IsMyLocationButtonVisibleProperty)) || propertyName.Equals(nameof(IsMyLocationButtonVisible)))
             {
-                if (_mapMyLocationButton != null)
-                {
-                    _mapMyLocationButton.Enabled = IsMyLocationButtonVisible;
-                    UpdateButtonPositions();
-                }
+                _mapMyLocationButton.Enabled = IsMyLocationButtonVisible;
+                UpdateButtonPositions();
             }
 
             if (propertyName.Equals(nameof(IsNorthingButtonVisibleProperty)) || propertyName.Equals(nameof(IsNorthingButtonVisible)))
             {
-                if (_mapNorthingButton != null)
-                {
-                    _mapNorthingButton.Enabled = IsNorthingButtonVisible;
-                    UpdateButtonPositions();
-                }
+                _mapNorthingButton.Enabled = IsNorthingButtonVisible;
+                UpdateButtonPositions();
             }
 
             if (propertyName.Equals(nameof(ButtonMarginProperty)) || propertyName.Equals(nameof(ButtonMargin)))
@@ -798,7 +789,7 @@ namespace Mapsui.UI.Forms
             var newX = Width - ButtonMargin.Right - ButtonSize;
             var newY = ButtonMargin.Top;
 
-            if (IsZoomButtonVisible && _mapZoomInButton != null && _mapZoomOutButton != null)
+            if (IsZoomButtonVisible)
             {
                 _mapZoomInButton.Envelope = new MRect(newX, newY, newX + ButtonSize, newY + ButtonSize);
                 newY += ButtonSize;
@@ -806,13 +797,13 @@ namespace Mapsui.UI.Forms
                 newY += ButtonSize + ButtonSpacing;
             }
 
-            if (IsMyLocationButtonVisible && _mapMyLocationButton != null)
+            if (IsMyLocationButtonVisible)
             {
                 _mapMyLocationButton.Envelope = new MRect(newX, newY, newX + ButtonSize, newY + ButtonSize);
                 newY += ButtonSize + ButtonSpacing;
             }
 
-            if (IsNorthingButtonVisible && _mapNorthingButton != null)
+            if (IsNorthingButtonVisible)
             {
                 _mapNorthingButton.Envelope = new MRect(newX, newY, newX + ButtonSize, newY + ButtonSize);
             }
