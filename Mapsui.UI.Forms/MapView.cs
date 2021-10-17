@@ -91,6 +91,8 @@ namespace Mapsui.UI.Forms
             _pictZoomOut = new SKSvg().Load(Utilities.EmbeddedResourceLoader.Load("Images.ZoomOut.svg", typeof(MapView)));
             _pictNorthing = new SKSvg().Load(Utilities.EmbeddedResourceLoader.Load("Images.RotationZero.svg", typeof(MapView)));
 
+            CreateButtons();
+
             _pins.CollectionChanged += HandlerPinsOnCollectionChanged;
             _drawable.CollectionChanged += HandlerDrawablesOnCollectionChanged;
 
