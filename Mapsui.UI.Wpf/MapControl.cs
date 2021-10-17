@@ -389,6 +389,8 @@ namespace Mapsui.UI.Wpf
         {
             if (_mouseDown)
             {
+                if (_previousMousePosition == null || _previousMousePosition.IsEmpty()) return;
+
                 var from = _previousMousePosition;
                 var to = newPos;
 
