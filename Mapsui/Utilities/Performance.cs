@@ -12,7 +12,7 @@ namespace Mapsui.Utilities
         int _pos;
         int _count;
         double _min, _max;
-        double _sum = 0;
+        double _sum;
 
         public Performance(int maxValues = 20)
         {
@@ -88,7 +88,7 @@ namespace Mapsui.Utilities
                 while (pos != _pos)
                 {
                     result.Add(_drawingTimes[pos]);
-                    pos = pos <= 0 ? _maxValues - 1 : pos--;
+                    pos = pos <= 0 ? _maxValues - 1 : --pos;
                 }
 
                 return result;

@@ -9,7 +9,7 @@ namespace Mapsui.Layers
 {
     public class LayerCollection : IEnumerable<ILayer>
     {
-        private ConcurrentQueue<ILayer> _layers = new ConcurrentQueue<ILayer>();
+        private ConcurrentQueue<ILayer> _layers = new();
         
         public delegate void LayerRemovedEventHandler(ILayer layer);
         public delegate void LayerAddedEventHandler(ILayer layer);
@@ -63,7 +63,7 @@ namespace Mapsui.Layers
         {
             var copy = _layers.ToArray().ToList();
 
-            var maxCount = Math.Min(array.Length, copy.Count());
+            var maxCount = Math.Min(array.Length, copy.Count);
             var count = maxCount - arrayIndex;
             copy.CopyTo(0, array, arrayIndex, count);
 
@@ -83,7 +83,7 @@ namespace Mapsui.Layers
             var copy = _layers.ToArray().ToList();
             copy.Remove(layer);
 
-            if (copy.Count() > index)
+            if (copy.Count > index)
                 copy.Insert(index, layer);
             else
                 copy.Add(layer);
@@ -99,7 +99,7 @@ namespace Mapsui.Layers
                 throw new ArgumentException("Layers cannot be null or empty");
 
             var copy = _layers.ToArray().ToList();
-            if (copy.Count() > index)
+            if (copy.Count > index)
                 copy.InsertRange(index, layers);
             else
                 copy.AddRange(layers);

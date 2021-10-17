@@ -13,17 +13,15 @@ namespace Mapsui.Styles
 
     public class SymbolStyle : ImageStyle // todo: derive SymbolStyle from VectorStyle after v2.
     {
-        public SymbolStyle() : base() { }
-
         public static double DefaultWidth { get; set; } = 32;
         public static double DefaultHeight { get; set; } = 32;
         public SymbolType SymbolType { get; set; }
 
         public override bool Equals(object obj)
         {
-            if (!(obj is SymbolStyle))
+            if (!(obj is SymbolStyle style))
                 return false;
-            return Equals((SymbolStyle)obj);
+            return Equals(style);
         }
 
         public bool Equals(SymbolStyle symbolStyle)

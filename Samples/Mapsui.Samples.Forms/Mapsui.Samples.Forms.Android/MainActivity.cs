@@ -1,13 +1,7 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Plugin.Permissions;
-using Plugin.Permissions.Abstractions;
-using Plugin.Geolocator.Abstractions;
 using Android.App;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;

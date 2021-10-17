@@ -5,6 +5,8 @@ using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
+using Mapsui.Extensions;
+using Mapsui.Providers;
 using Mapsui.UI;
 using Mapsui.Utilities;
 using Mapsui.Samples.Common;

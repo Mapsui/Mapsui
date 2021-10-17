@@ -1,6 +1,8 @@
 using System.Linq;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Logging;
@@ -11,13 +13,13 @@ namespace Mapsui.Layers
 {
     public class RasterizingLayer : BaseLayer, IAsyncDataFetcher
     {
-        private readonly MemoryProvider _cache;
+        private readonly ConcurrentStack<IGeometryFeature> _cache;
         private readonly ILayer _layer;
         private readonly bool _onlyRerasterizeIfOutsideOverscan;
         private readonly double _overscan;
         private readonly double _renderResolutionMultiplier;
         private readonly float _pixelDensity;
-        private readonly object _syncLock = new object();
+        private readonly object _syncLock = new();
         private bool _busy;
         private Viewport _currentViewport;
         private BoundingBox _extent;
@@ -25,22 +27,23 @@ namespace Mapsui.Layers
         private IEnumerable<IFeature> _previousFeatures;
         private IRenderer _rasterizer;
         private double _resolution;
-        public Delayer Delayer { get; } = new Delayer();
-        private Delayer _rasterizeDelayer = new Delayer();
+        public Delayer Delayer { get; } = new();
+        private readonly Delayer _rasterizeDelayer = new();
 
         /// <summary>
         ///     Creates a RasterizingLayer which rasterizes a layer for performance
         /// </summary>
         /// <param name="layer">The Layer to be rasterized</param>
-        /// <param name="delayBeforeRasterize">Delay after viewport change to start rerasterising</param>
+        /// <param name="delayBeforeRasterize">Delay after viewport change to start re-rasterizing</param>
         /// <param name="renderResolutionMultiplier"></param>
         /// <param name="rasterizer">Rasterizer to use. null will use the default</param>
         /// <param name="overscanRatio">The ratio of the size of the rasterized output to the current viewport</param>
         /// <param name="onlyRerasterizeIfOutsideOverscan">
-        ///     Set the rasterization policy. false will trigger a Rasterization on
-        ///     every viewport change. true will trigger a Rerasterization only if the viewport moves outside the existing
+        ///     Set the rasterization policy. false will trigger a rasterization on
+        ///     every viewport change. true will trigger a re-rasterization only if the viewport moves outside the existing
         ///     rasterization.
         /// </param>
+        /// <param name="pixelDensity"></param>
         public RasterizingLayer(
             ILayer layer,
             int delayBeforeRasterize = 1000,
@@ -57,7 +60,7 @@ namespace Mapsui.Layers
             Name = layer.Name;
             _renderResolutionMultiplier = renderResolutionMultiplier;
             _rasterizer = rasterizer;
-            _cache = new MemoryProvider();
+            _cache = new ConcurrentStack<IGeometryFeature>();
             _overscan = overscanRatio;
             _onlyRerasterizeIfOutsideOverscan = onlyRerasterizeIfOutsideOverscan;
             _pixelDensity = pixelDensity;
@@ -100,18 +103,17 @@ namespace Mapsui.Layers
 
                     _currentViewport = viewport;
 
-                    _rasterizer = _rasterizer ?? DefaultRendererFactory.Create();
+                    _rasterizer ??= DefaultRendererFactory.Create();
 
                     var bitmapStream = _rasterizer.RenderToBitmapStream(viewport, new[] { _layer }, pixelDensity: _pixelDensity);
                     RemoveExistingFeatures();
 
                     if (bitmapStream != null)
                     {
-                        _cache.ReplaceFeatures(new Features
-                        {
-                            new Feature {Geometry = new Raster(bitmapStream, viewport.Extent)}
-                        });
-
+                        _cache.Clear();
+                        var features = new IGeometryFeature[1];
+                        features[0] = new Feature {Geometry = new Raster(bitmapStream, viewport.Extent)};
+                        _cache.PushRange(features);
 #if DEBUG
                         Logger.Log(LogLevel.Debug, $"Memory after rasterizing layer {GC.GetTotalMemory(true):N0}");
 #endif
@@ -130,7 +132,7 @@ namespace Mapsui.Layers
 
         private void RemoveExistingFeatures()
         {
-            var features = _cache.Features.ToList();
+            var features = _cache.ToArray();
             _cache.Clear(); // clear before dispose to prevent possible null disposed exception on render
 
             // Disposing previous and storing current in the previous field to prevent dispose during rendering.
@@ -140,7 +142,7 @@ namespace Mapsui.Layers
 
         private static void DisposeRenderedGeometries(IEnumerable<IFeature> features)
         {
-            foreach (var feature in features)
+            foreach (var feature in features.Cast<Feature>())
             {
                 var raster = feature.Geometry as Raster;
                 raster?.Data?.Dispose();
@@ -153,9 +155,18 @@ namespace Mapsui.Layers
             }
         }
 
-        public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox extent, double resolution)
+        public static double SymbolSize { get; set; } = 64;
+
+        public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
         {
-            return _cache.GetFeaturesInView(extent, resolution);
+            if (box == null) throw new ArgumentNullException(nameof(box));
+
+            var features = _cache.ToArray();
+
+            // Use a larger extent so that symbols partially outside of the extent are included
+            var grownBox = box.Grow(resolution * SymbolSize * 0.5);
+
+            return features.Where(f => f.Geometry != null && f.Geometry.BoundingBox.Intersects(grownBox)).ToList();
         }
 
         public void AbortFetch()

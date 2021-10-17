@@ -1,12 +1,14 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
-using Mapsui.Rendering.Skia;
+using Mapsui.Extensions;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Maps;
+using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.UI.Forms;
 using Xamarin.Forms;
+using Color = Xamarin.Forms.Color;
 
 namespace Mapsui.Samples.Forms.Shared
 {

@@ -46,7 +46,7 @@
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExtensionMethods\CGPointExtensions.cs" />
+    <Compile Include="Extensions\CGPointExtensions.cs" />
     <Compile Include="MapControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -5,6 +5,7 @@ using System.Linq;
 using BruTile;
 using BruTile.Cache;
 using ConcurrentCollections;
+using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.Providers;
 
@@ -14,16 +15,16 @@ namespace Mapsui.Fetcher
     {
         private BoundingBox _extent;
         private double _resolution;
-        private readonly object _lockRoot = new object();
+        private readonly object _lockRoot = new();
         private bool _busy;
         private bool _viewportIsModified;
         private readonly ITileCache<Feature> _tileCache;
         private readonly IDataFetchStrategy _dataFetchStrategy;
-        private readonly ConcurrentQueue<TileInfo> _tilesToFetch = new ConcurrentQueue<TileInfo>();
-        private readonly ConcurrentHashSet<TileIndex> _tilesInProgress = new ConcurrentHashSet<TileIndex>();
+        private readonly ConcurrentQueue<TileInfo> _tilesToFetch = new();
+        private readonly ConcurrentHashSet<TileIndex> _tilesInProgress = new();
         private readonly ITileSchema _tileSchema;
         private readonly FetchMachine _fetchMachine;
-        private Func<TileInfo, Feature> _fetchTileAsFeature;
+        private readonly Func<TileInfo, Feature> _fetchTileAsFeature;
 
         public TileFetchDispatcher(
             ITileCache<Feature> tileCache, 

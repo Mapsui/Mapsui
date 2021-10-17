@@ -1,4 +1,5 @@
-﻿using Mapsui.Styles;
+﻿using Mapsui.Extensions;
+using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Widgets;
 using Mapsui.Widgets.Zoom;

@@ -44,25 +44,14 @@ namespace Mapsui.Providers
     /// </example>
     /// <example>
     /// Adding points of interest to the map. This is useful for vehicle tracking etc.
-    /// <code lang="C#">
-    /// List&#60;Mapsui.Geometries.Geometry&#62; geometries = new List&#60;Mapsui.Geometries.Geometry&#62;();
-    /// //Add two points
-    /// geometries.Add(new Mapsui.Geometries.Point(23.345,64.325));
-    /// geometries.Add(new Mapsui.Geometries.Point(23.879,64.194));
-    /// Mapsui.Layers.VectorLayer layerVehicles = new Mapsui.Layers.VectorLayer("Vechicles");
-    /// layerVehicles.DataSource = new Mapsui.Data.Providers.MemoryProvider(geometries);
-    /// layerVehicles.Style.Symbol = Bitmap.FromFile(@"C:\data\car.gif");
-    /// myMap.Layers.Add(layerVehicles);
-    /// </code>
     /// </example>
     /// </remarks>
-    public class MemoryProvider : IProvider
+    public class MemoryProvider<T> : IProvider<T> where T : IFeature
     {
-
         /// <summary>
         /// Gets or sets the geometries this data source contains
         /// </summary>
-        public IReadOnlyList<IFeature> Features { get; private set; }
+        public IReadOnlyList<IGeometryFeature> Features { get; private set; }
 
         public double SymbolSize { get; set; } = 64;
 
@@ -76,14 +65,14 @@ namespace Mapsui.Providers
         public MemoryProvider()
         {
             CRS = "";
-            Features = new List<IFeature>();
+            Features = new List<IGeometryFeature>();
             _boundingBox = GetExtents(Features);
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MemoryProvider"/>
+        /// Initializes a new instance of the MemoryProvider
         /// </summary>
-        /// <param name="geometries">Set of geometries that this datasource should contain</param>
+        /// <param name="geometries">Set of geometries that this data source should contain</param>
         public MemoryProvider(IEnumerable<IGeometry> geometries)
         {
             CRS = "";
@@ -92,30 +81,30 @@ namespace Mapsui.Providers
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MemoryProvider"/>
+        /// Initializes a new instance of the MemoryProvider
         /// </summary>
-        /// <param name="feature">Feature to be in this datasource</param>
-        public MemoryProvider(IFeature feature)
+        /// <param name="feature">Feature to be in this dataSource</param>
+        public MemoryProvider(IGeometryFeature feature)
         {
             CRS = "";
-            Features = new List<IFeature> { feature };
+            Features = new List<IGeometryFeature> { feature };
             _boundingBox = GetExtents(Features);
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MemoryProvider"/>
+        /// Initializes a new instance of the MemoryProvider
         /// </summary>
-        /// <param name="wellKnownTextGeometry"><see cref="Geometry"/> as Well-known Text to be included in this datasource</param>
+        /// <param name="wellKnownTextGeometry"><see cref="Geometry"/> as Well-known Text to be included in this data source</param>
         public MemoryProvider(string wellKnownTextGeometry)
             : this(GeometryFromWKT.Parse(wellKnownTextGeometry))
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MemoryProvider"/>
+        /// Initializes a new instance of the MemoryProvider
         /// </summary>
-        /// <param name="features">Features to be included in this datasource</param>
-        public MemoryProvider(IEnumerable<IFeature> features)
+        /// <param name="features">Features to be included in this dataSource</param>
+        public MemoryProvider(IEnumerable<IGeometryFeature> features)
         {
             CRS = "";
             Features = features.ToList();
@@ -123,14 +112,14 @@ namespace Mapsui.Providers
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MemoryProvider"/>
+        /// Initializes a new instance of the MemoryProvider
         /// </summary>
-        /// <param name="geometry">Geometry to be in this datasource</param>
+        /// <param name="geometry">Geometry to be in this dataSource</param>
         public MemoryProvider(Geometry geometry)
         {
             CRS = "";
 
-            Features = new List<IFeature>
+            Features = new List<IGeometryFeature>
             {
                 new Feature
                 {
@@ -141,14 +130,14 @@ namespace Mapsui.Providers
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MemoryProvider"/>
+        /// Initializes a new instance of the MemoryProvider
         /// </summary>
-        /// <param name="wellKnownBinaryGeometry"><see cref="Geometry"/> as Well-known Binary to be included in this datasource</param>
+        /// <param name="wellKnownBinaryGeometry"><see cref="Geometry"/> as Well-known Binary to be included in this data source</param>
         public MemoryProvider(byte[] wellKnownBinaryGeometry) : this(GeometryFromWKB.Parse(wellKnownBinaryGeometry))
         {
         }
 
-        public virtual IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        public virtual IEnumerable<T> GetFeaturesInView(BoundingBox box, double resolution)
         {
             if (box == null) throw new ArgumentNullException(nameof(box));
 
@@ -156,8 +145,8 @@ namespace Mapsui.Providers
 
             // Use a larger extent so that symbols partially outside of the extent are included
             var grownBox = box.Grow(resolution * SymbolSize * 0.5);
-
-            return features.Where(f => f.Geometry != null && f.Geometry.BoundingBox.Intersects(grownBox)).ToList();
+            var grownFeatures = features.Where(f => f != null && f.BoundingBox.Intersects(grownBox));
+            return (IEnumerable<T>) grownFeatures.ToList(); // Why do I need to cast if T is constrained to IFeature?
         }
 
         public IFeature Find(object value, string primaryKey)
@@ -167,15 +156,15 @@ namespace Mapsui.Providers
         }
 
         /// <summary>
-        /// Boundingbox of dataset
+        /// BoundingBox of data set
         /// </summary>
-        /// <returns>boundingbox</returns>
+        /// <returns>BoundingBox</returns>
         public BoundingBox GetExtents()
         {
             return _boundingBox;
         }
 
-        private static BoundingBox GetExtents(IReadOnlyList<IFeature> features)
+        private static BoundingBox GetExtents(IReadOnlyList<IGeometryFeature> features)
         {
             BoundingBox box = null;
             foreach (var feature in features)
@@ -190,10 +179,10 @@ namespace Mapsui.Providers
 
         public void Clear()
         {
-            Features = new List<IFeature>();
+            Features = new List<IGeometryFeature>();
         }
 
-        public void ReplaceFeatures(IEnumerable<IFeature> features)
+        public void ReplaceFeatures(IEnumerable<IGeometryFeature> features)
         {
             Features = features.ToList();
             _boundingBox = GetExtents(Features);

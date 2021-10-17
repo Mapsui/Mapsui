@@ -282,7 +282,7 @@ namespace Mapsui.Providers.Wfs.Xml
         private void SetDocumentToParse(XPathDocument xPathDoc)
         {
             _xPathDoc = xPathDoc;
-            if (_xNav == null) _xNav = _xPathDoc.CreateNavigator().Clone();
+            _xNav ??= _xPathDoc.CreateNavigator().Clone();
         }
 
         /// <summary>

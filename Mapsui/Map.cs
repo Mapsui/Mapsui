@@ -38,7 +38,7 @@ namespace Mapsui
     /// </remarks>
     public class Map : INotifyPropertyChanged, IMap
     {
-        private LayerCollection _layers = new LayerCollection();
+        private LayerCollection _layers = new();
         private Color _backColor = Color.White;
         private IViewportLimiter _limiter = new ViewportLimiter();
 
@@ -74,7 +74,7 @@ namespace Mapsui
         /// <summary>
         /// List of Widgets belonging to map
         /// </summary>
-        public ConcurrentQueue<IWidget> Widgets { get; } = new ConcurrentQueue<IWidget>();
+        public ConcurrentQueue<IWidget> Widgets { get; } = new();
 
         /// <summary>
         /// Limit the extent to which the user can navigate
@@ -178,11 +178,12 @@ namespace Mapsui
         public event EventHandler RefreshGraphics;
 #pragma warning restore 67
 
-        [Obsolete("Use MapControl.Info instead", true)]
-#pragma warning disable 67
+        /// <summary>
+        /// Called whenever the map is clicked. The MapInfoEventArgs contain the features that were hit in
+        /// the layers that have IsMapInfoLayer set to true. 
+        /// </summary>
         public event EventHandler<MapInfoEventArgs> Info;
-#pragma warning restore 67
-
+        
         [Obsolete("Use your own hover event instead and call MapControl.GetMapInfo", true)]
 #pragma warning disable 67
         public event EventHandler<MapInfoEventArgs> Hover;
@@ -318,6 +319,17 @@ namespace Mapsui
         {
             return Widgets.Concat(Layers.Where(l => l.Enabled).Select(l => l.Attribution))
                 .Where(a => a != null && a.Enabled).ToList();
+        }
+
+        /// <summary>
+        /// This method is to invoke the Info event from the Map. This method is called
+        /// by the MapControl/MapView and should usually not be called from user code.
+        /// </summary>
+        public void OnInfo(MapInfoEventArgs mapInfoEventArgs)
+        {
+            if (mapInfoEventArgs == null) return;
+
+            Info?.Invoke(this, mapInfoEventArgs);
         }
     }
 }

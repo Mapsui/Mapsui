@@ -1,5 +1,4 @@
-﻿using Mapsui.Rendering.Skia;
-using Mapsui.Samples.Common;
+﻿using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.UI;
 using System;
@@ -7,6 +6,9 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using Mapsui.Extensions;
+using Mapsui.Styles;
+using Mapsui.Widgets.PerformanceWidget;
 #if __MAUI__
 using Mapsui.UI.Maui;
 using Microsoft.Maui.Graphics;
@@ -119,7 +121,7 @@ namespace Mapsui.Samples.Forms
             if (mapControl.Performance == null)
                 mapControl. Performance = new Utilities.Performance();
 
-            var widget = new Widgets.Performance.PerformanceWidget(mapControl.Performance);
+            var widget = new PerformanceWidget(mapControl.Performance);
 
             widget.WidgetTouched += (sender, args) =>
             {
@@ -130,7 +132,7 @@ namespace Mapsui.Samples.Forms
             };
 
             mapControl.Map.Widgets.Add(widget);
-            mapControl.Renderer.WidgetRenders[typeof(Widgets.Performance.PerformanceWidget)] = new Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer(10, 10, 12, SkiaSharp.SKColors.Black, SkiaSharp.SKColors.White);
+            mapControl.Renderer.WidgetRenders[typeof(PerformanceWidget)] = new Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer(10, 10, 12, SkiaSharp.SKColors.Black, SkiaSharp.SKColors.White);
 
             ((MapView)mapControl).UseDoubleTap = true;
             ((MapView)mapControl).UniqueCallout = true;

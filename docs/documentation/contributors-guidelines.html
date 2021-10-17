@@ -105,6 +105,12 @@
 <pre><code>&lt;dependency id=&quot;SkiaSharp&quot; version=&quot;[2.80.2,3.0.0)&quot;/&gt;
 </code></pre><h2 id="keep-our-direct-and-indirect-dependencies-in-sync">Keep our direct and indirect dependencies in sync</h2>
 <p>When we have direct and indirect dependecies on a nuget package those should all refer to the same version. For instance we have a direct dependency on SkiaSharp, but we also use  SvgSkia and RichTextKit and those have a dependency on SkiaSharp too. It would be optimal if all referred to the same version of SkiaSharp. This might not always be possible.</p>
+<h2 id="extension-methods">Extension methods</h2>
+<ul>
+<li>Extension methods should always be in a Extensions folder. </li>
+<li>They should be in a class that has the name &#39;{ClassItExtents}Extensions&#39;. </li>
+<li>It should be in a namespace that follows the folder name (so not in the namespace of the class it extents).</li>
+</ul>
 </article>
           </div>
           

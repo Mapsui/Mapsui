@@ -8,7 +8,7 @@ namespace Mapsui.Widgets.ScaleBar
 {
     public class ImperialUnitConverter : IUnitConverter
     {
-        public static readonly ImperialUnitConverter Instance = new ImperialUnitConverter();
+        public static readonly ImperialUnitConverter Instance = new();
         private static readonly double MeterFootRatio = 0.3048;
         private const int OneMile = 5280;
 

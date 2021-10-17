@@ -22,21 +22,15 @@ using System.Linq;
 
 namespace Mapsui.Providers
 {
-    public class Features : IFeatures
+    public class Features : IEnumerable<IFeature>
     {
-        private readonly List<IFeature> _features = new List<IFeature>();
+        private readonly List<IFeature> _features = new();
         
         public string PrimaryKey { get; private set; }
 
-        public int Count
-        {
-            get { return _features.Count; }
-        }
+        public int Count => _features.Count;
 
-        public IFeature this[int index]
-        {
-            get { return _features[index]; }
-        }
+        public IFeature this[int index] => _features[index];
 
         public Features()
         {
@@ -60,7 +54,7 @@ namespace Mapsui.Providers
         public IFeature New()
         {
             // At this point it is possible to initialize an improved version of
-            // Feature with a specifed set of columns.
+            // Feature with a specified set of columns.
             return new Feature();
         }
 

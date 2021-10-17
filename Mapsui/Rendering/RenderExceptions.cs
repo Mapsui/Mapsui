@@ -27,13 +27,6 @@ namespace Mapsui.Rendering
         /// <summary>
         /// Exception thrown when layer rendering has failed
         /// </summary>
-        public RenderException()
-        {
-        }
-
-        /// <summary>
-        /// Exception thrown when layer rendering has failed
-        /// </summary>
         /// <param name="message"></param>
         public RenderException(string message) : base(message)
         {

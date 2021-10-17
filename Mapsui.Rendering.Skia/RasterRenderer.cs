@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Mapsui.Geometries;
 using Mapsui.Logging;
 using Mapsui.Providers;
+using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using SkiaSharp;
 
@@ -10,7 +11,7 @@ namespace Mapsui.Rendering.Skia
 {
     public static class RasterRenderer
     {
-		public static void Draw (SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, IFeature feature,
+		public static void Draw (SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, IGeometryFeature feature,
             float opacity, IDictionary<object, BitmapInfo> tileCache, long currentIteration)
 		{
 		    try

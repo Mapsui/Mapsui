@@ -15,11 +15,11 @@
 // along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-using System;
 using Mapsui.Geometries;
 using Mapsui.Utilities;
 using System.Runtime.CompilerServices;
 using System.ComponentModel;
+using Mapsui.Extensions;
 
 namespace Mapsui
 {
@@ -40,7 +40,7 @@ namespace Mapsui
         private double _resolution = Constants.DefaultResolution;
         private double _width;
         private double _rotation;
-        private ReadOnlyPoint _center = new ReadOnlyPoint(0, 0);
+        private ReadOnlyPoint _center = new(0, 0);
         private bool _modified = true;
 
         /// <summary>
@@ -278,7 +278,7 @@ namespace Mapsui
             }
             else
             {
-                // Calculate the extent that will encompass a rotated viewport (slighly larger - used for tiles).
+                // Calculate the extent that will encompass a rotated viewport (slightly larger - used for tiles).
                 // Perform rotations on corner offsets and then add them to the Center point.
                 _windowExtent = _windowExtent.Rotate(-_rotation, Center.X, Center.Y);
                 var rotatedBoundingBox = _windowExtent.ToBoundingBox();

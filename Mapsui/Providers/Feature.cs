@@ -7,9 +7,9 @@ using Mapsui.Styles;
 
 namespace Mapsui.Providers
 {
-    public class Feature : IFeature, IDisposable
+    public class Feature : IGeometryFeature, IDisposable
     {
-        private readonly Dictionary<string, object> _dictionary = new Dictionary<string, object>();
+        private readonly Dictionary<string, object> _dictionary = new();
         private bool _disposed;
 
         public Feature()
@@ -18,7 +18,7 @@ namespace Mapsui.Providers
             Styles = new Collection<IStyle>();
         }
 
-        public Feature(IFeature feature)
+        public Feature(IGeometryFeature feature)
         {
             Geometry = feature.Geometry;
             RenderedGeometry = feature.RenderedGeometry.ToDictionary(entry => entry.Key,
@@ -32,20 +32,19 @@ namespace Mapsui.Providers
 
         public IGeometry Geometry { get; set; }
 
-        public IDictionary<IStyle, object> RenderedGeometry { get; private set; }
+        public IDictionary<IStyle, object> RenderedGeometry { get; }
 
         public ICollection<IStyle> Styles { get; set; }
 
         public virtual object this[string key]
         {
-            get { return _dictionary.ContainsKey(key) ? _dictionary[key] : null; }
-            set { _dictionary[key] = value; }
+            get => _dictionary.ContainsKey(key) ? _dictionary[key] : null;
+            set => _dictionary[key] = value;
         }
 
-        public IEnumerable<string> Fields
-        {
-            get { return _dictionary.Keys; }
-        }
+        public IEnumerable<string> Fields => _dictionary.Keys;
+
+        public BoundingBox BoundingBox => Geometry.BoundingBox;
 
         public void Dispose()
         {

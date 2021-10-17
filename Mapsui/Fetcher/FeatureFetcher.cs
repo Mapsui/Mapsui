@@ -11,12 +11,12 @@ namespace Mapsui.Fetcher
         private readonly BoundingBox _extent;
         private readonly double _resolution;
         private readonly DataArrivedDelegate _dataArrived;
-        private readonly IProvider _provider;
+        private readonly IProvider<IFeature> _provider;
         private readonly long _timeOfRequest;
 
         internal delegate void DataArrivedDelegate(IEnumerable<IFeature> features, object state = null);
 
-        public FeatureFetcher(BoundingBox extent, double resolution, IProvider provider, DataArrivedDelegate dataArrived, long timeOfRequest = default(long))
+        public FeatureFetcher(BoundingBox extent, double resolution, IProvider<IFeature> provider, DataArrivedDelegate dataArrived, long timeOfRequest = default)
         {
             _dataArrived = dataArrived;
             var biggerBox = extent.Grow(SymbolStyle.DefaultWidth * 2 * resolution, SymbolStyle.DefaultHeight * 2 * resolution);

@@ -1,6 +1,6 @@
 ﻿using Mapsui.Extensions;
+using Mapsui.Rendering.Skia.Tests;
 using NUnit.Framework;
-using Mapsui.Rendering.Xaml.Tests;
 
 namespace Mapsui.Tests.Utilities
 {

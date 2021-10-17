@@ -10,7 +10,7 @@ namespace Mapsui.Rendering
     {
         /// <summary>
         /// Given the current extent and resolution it determines which tiles should
-        /// be returned from the memorycache
+        /// be returned from the memory cache
         /// </summary>
         /// <param name="extent">The extent of the target area</param>
         /// <param name="resolution">The resolution of the target area</param>

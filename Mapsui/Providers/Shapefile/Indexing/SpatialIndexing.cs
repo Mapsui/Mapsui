@@ -89,19 +89,19 @@ namespace Mapsui.Providers.Shapefile.Indexing
                 objBuckets[0] = new List<BoxObjects>();
                 objBuckets[1] = new List<BoxObjects>();
 
-                uint longaxis = _box.LongestAxis; // longest axis
-                double geoavg = 0; // geometric average - midpoint of ALL the objects
+                uint longAxis = _box.LongestAxis; // longest axis
+                double geoAverage = 0; // geometric average - midpoint of ALL the objects
 
                 // go through all bbox and calculate the average of the midpoints
-                double frac = 1.0f/objList.Count;
+                double fraction = 1.0f/objList.Count;
                 for (int i = 0; i < objList.Count; i++)
-                    geoavg += objList[i].Box.Centroid[longaxis]*frac;
+                    geoAverage += objList[i].Box.Centroid[longAxis]*fraction;
 
                 // bucket bbox based on their midpoint's side of the geo average in the longest axis
                 for (int i = 0; i < objList.Count; i++)
-                    objBuckets[geoavg > objList[i].Box.Centroid[longaxis] ? 1 : 0].Add(objList[i]);
+                    objBuckets[geoAverage > objList[i].Box.Centroid[longAxis] ? 1 : 0].Add(objList[i]);
 
-                //If objects couldn't be splitted, just store them at the leaf
+                //If objects couldn't be split, just store them at the leaf
                 //TODO: Try splitting on another axis
                 if (objBuckets[0].Count == 0 || objBuckets[1].Count == 0)
                 {
@@ -129,7 +129,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
         }
 
         /// <summary>
-        /// This instantiator is used internally for loading a tree from a file
+        /// This constructor is used internally for loading a tree from a file
         /// </summary>
         private QuadTree()
         {
@@ -220,7 +220,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
         /// <param name="sw">Reference to BinaryWriter</param>
         private void SaveNode(QuadTree node, ref BinaryWriter sw)
         {
-            //Write node boundingbox
+            //Write node BoundingBox
             sw.Write(node.Box.Min.X);
             sw.Write(node.Box.Min.Y);
             sw.Write(node.Box.Max.X);
@@ -229,7 +229,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
             if (node.IsLeaf)
             {
                 sw.Write(node._objList.Count); //Write number of features at node
-                for (int i = 0; i < node._objList.Count; i++) //Write each featurebox
+                for (int i = 0; i < node._objList.Count; i++) //Write each feature box
                 {
                     sw.Write(node._objList[i].Box.Min.X);
                     sw.Write(node._objList[i].Box.Min.Y);
@@ -261,27 +261,15 @@ namespace Mapsui.Providers.Shapefile.Indexing
         /// <summary>
         /// Determines whether the node is a leaf (if data is stored at the node, we assume the node is a leaf)
         /// </summary>
-        public bool IsLeaf
-        {
-            get { return (_objList != null); }
-        }
-
-        ///// <summary>
-        ///// Gets/sets the list of objects in the node
-        ///// </summary>
-        //public List<Mapsui.Geometries.IGeometry> ObjList
-        //{
-        //    get { return _objList; }
-        //    set { _objList = value; }
-        //}
+        public bool IsLeaf => (_objList != null);
 
         /// <summary>
         /// Gets/sets the Axis Aligned Bounding Box
         /// </summary>
         public BoundingBox Box
         {
-            get { return _box; }
-            set { _box = value; }
+            get => _box;
+            set => _box = value;
         }
 
         /// <summary>
@@ -289,8 +277,8 @@ namespace Mapsui.Providers.Shapefile.Indexing
         /// </summary>
         public QuadTree Child0
         {
-            get { return _child0; }
-            set { _child0 = value; }
+            get => _child0;
+            set => _child0 = value;
         }
 
         /// <summary>
@@ -298,8 +286,8 @@ namespace Mapsui.Providers.Shapefile.Indexing
         /// </summary>
         public QuadTree Child1
         {
-            get { return _child1; }
-            set { _child1 = value; }
+            get => _child1;
+            set => _child1 = value;
         }
 
         /// <summary>
@@ -330,9 +318,9 @@ namespace Mapsui.Providers.Shapefile.Indexing
         }
 
         /// <summary>
-        /// Searches the tree and looks for intersections with the boundingbox 'bbox'
+        /// Searches the tree and looks for intersections with the BoundingBox 'bbox'
         /// </summary>
-        /// <param name="box">Boundingbox to intersect with</param>
+        /// <param name="box">BoundingBox to intersect with</param>
         public Collection<uint> Search(BoundingBox box)
         {
             Collection<uint> objectlist = new Collection<uint>();
@@ -341,9 +329,9 @@ namespace Mapsui.Providers.Shapefile.Indexing
         }
 
         /// <summary>
-        /// Recursive function that traverses the tree and looks for intersections with a boundingbox
+        /// Recursive function that traverses the tree and looks for intersections with a BoundingBox
         /// </summary>
-        /// <param name="box">Boundingbox to intersect with</param>
+        /// <param name="box">BoundingBox to intersect with</param>
         /// <param name="node">Node to search from</param>
         /// <param name="list">List of found intersections</param>
         private void IntersectTreeRecursive(BoundingBox box, QuadTree node, ref Collection<uint> list)
@@ -374,7 +362,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
         public struct BoxObjects
         {
             /// <summary>
-            /// Boundingbox
+            /// BoundingBox
             /// </summary>
             public BoundingBox Box;
 

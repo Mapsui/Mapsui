@@ -6,16 +6,16 @@ using System;
 namespace Mapsui.Projection
 {
     /// <summary>
-    /// A registry for the axis order of coordinate systems as defined in EPSG 8.4 dataset
+    /// A registry for the axis order of coordinate systems as defined in EPSG 8.4 data set
     /// </summary>
     public sealed class AxisOrderRegistry
     {
-        private static readonly int[] _usual = { 0, 1 };
-        private static readonly int[] _unusual = { 1, 0 };
+        private static readonly int[] Usual = { 0, 1 };
+        private static readonly int[] Unusual = { 1, 0 };
 
         //Generated with test from https://github.com/BruTile/BruTile/blob/master/Tests/BruTile.Desktop.Tests/Crs/CrsAxisOrderRegistryTest.cs
         //Updated on 12.02.2021
-        private static readonly byte[] _epsgAxisOrderBitField =
+        private static readonly byte[] EpsgAxisOrderBitField =
         {
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -246,7 +246,7 @@ namespace Mapsui.Projection
                 {
                     //case "OGC":
                     default:
-                        Buffer.BlockCopy(_unusual, 0, res, 0, 2);
+                        Buffer.BlockCopy(Unusual, 0, res, 0, 2);
                         return res;
 
                     case "EPSG":
@@ -259,7 +259,7 @@ namespace Mapsui.Projection
                         var bitIndex = code % 8;
                         var flag = 1 << bitIndex;//1 << (7 - bitIndex);
                         // BlockCopy copies the bytes so length is 8 (2 ints)
-                        Buffer.BlockCopy((_epsgAxisOrderBitField[byteIndex] & flag) == flag ? _unusual : _usual, 0, res, 0, 8);
+                        Buffer.BlockCopy((EpsgAxisOrderBitField[byteIndex] & flag) == flag ? Unusual : Usual, 0, res, 0, 8);
                         return res;
 
                 }

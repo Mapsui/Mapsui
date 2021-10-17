@@ -69,7 +69,7 @@ namespace Mapsui.Styles.Thematics
         /// Initializes a new instance of the GradientTheme class
         /// </summary>
         /// <remarks>
-        /// <para>The gradient theme interpolates linearly between two styles based on a numerical attribute in the datasource.
+        /// <para>The gradient theme interpolates linearly between two styles based on a numerical attribute in the data source.
         /// This is useful for scaling symbols, line widths, line and fill colors from numerical attributes.</para>
         /// <para>Colors are interpolated between two colors, but if you want to interpolate through more colors (fx. a rainbow),
         /// set the <see cref="TextColorBlend"/>, <see cref="LineColorBlend"/> and <see cref="FillColorBlend"/> properties
@@ -86,7 +86,7 @@ namespace Mapsui.Styles.Thematics
         /// </list>
         /// </para>
         /// <example>
-        /// Creating a rainbow colorblend showing colors from red, through yellow, green and blue depicting 
+        /// Creating a rainbow color blend showing colors from red, through yellow, green and blue depicting 
         /// the population density of a country.
         /// <code lang="C#">
         /// //Create two vector styles to interpolate between

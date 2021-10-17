@@ -109,7 +109,7 @@ namespace Mapsui.Styles.Thematics
 
         
         /// <summary>
-        /// Gets a linear gradient scale with seven colours making a rainbow from red to violet.
+        /// Gets a linear gradient scale with seven colors making a rainbow from red to violet.
         /// </summary>
         /// <remarks>
         /// Colors span the following with an interval of 1/6:
@@ -130,7 +130,7 @@ namespace Mapsui.Styles.Thematics
         }
 
         /// <summary>
-        /// Gets a linear gradient scale with five colours making a rainbow from red to blue.
+        /// Gets a linear gradient scale with five colors making a rainbow from red to blue.
         /// </summary>
         /// <remarks>
         /// Colors span the following with an interval of 0.25:

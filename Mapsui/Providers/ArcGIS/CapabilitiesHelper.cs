@@ -4,7 +4,6 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using BruTile;
-using BruTile.Extensions;
 using Mapsui.Logging;
 using Mapsui.Providers.ArcGIS.Dynamic;
 using Mapsui.Providers.ArcGIS.Image;
@@ -20,10 +19,11 @@ namespace Mapsui.Providers.ArcGIS
 
     public class CapabilitiesHelper
     {
-        private IArcGISCapabilities _arcGisCapabilities { get; set; }
+        private IArcGISCapabilities _arcGisCapabilities;
         private CapabilitiesType _capabilitiesType;
-        private int _timeOut { get; set; }
-        private string _url { get; set; }
+        private int _timeOut;
+        private string _url;
+
         public delegate void StatusEventHandler(object sender, EventArgs e);
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Mapsui.Providers.ArcGIS
         /// <param name="url">Url of map service example: http://url/arcgis/rest/services/test/MapServer </param>
         /// <param name="capabilitiesType"></param>
         /// <param name="token">Token string to access the service </param>
-        public void GetCapabilities(string url, CapabilitiesType capabilitiesType, string token = null)
+        public void GetCapabilities(string url, CapabilitiesType capabilitiesType, string token)
         {
             ExecuteRequest(url, capabilitiesType, null, token);
         }
@@ -81,7 +81,7 @@ namespace Mapsui.Providers.ArcGIS
         /// <param name="url">Url of map service example: http://url/arcgis/rest/services/test/MapServer </param>
         /// <param name="capabilitiesType"></param>
         /// <param name="credentials">Credentials to access the service </param>
-        public void GetCapabilities(string url, CapabilitiesType capabilitiesType, ICredentials credentials = null)
+        public void GetCapabilities(string url, CapabilitiesType capabilitiesType, ICredentials credentials)
         {
             ExecuteRequest(url, capabilitiesType, credentials);
         }

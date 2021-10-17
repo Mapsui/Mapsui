@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Mapsui.Utilities
 {
     public class AnimationEntry
     {
-        private double _animationDelta;
-        private Action<AnimationEntry, double> _tick;
-        private Action<AnimationEntry> _final;
+        private readonly double _animationDelta;
+        private readonly Action<AnimationEntry, double> _tick;
+        private readonly Action<AnimationEntry> _final;
 
         public AnimationEntry(object start, object end, 
             double animationStart = 0, double animationEnd = 1, 

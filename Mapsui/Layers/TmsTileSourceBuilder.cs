@@ -64,7 +64,6 @@ namespace Mapsui.Layers
             {
                 Logger.Log(LogLevel.Error, ex.Message, ex);
                 errorCallback?.Invoke(ex);
-                // else: hopelesly lost with an error on a background thread and no option to report back.
             }
         }
     }

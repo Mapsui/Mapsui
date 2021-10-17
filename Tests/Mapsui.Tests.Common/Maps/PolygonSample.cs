@@ -1,4 +1,5 @@
-﻿using Mapsui.Geometries;
+﻿using System.Collections.Generic;
+using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
@@ -41,9 +42,9 @@ namespace Mapsui.Tests.Common.Maps
             return map;
         }
 
-        public static MemoryProvider CreatePolygonProvider()
+        public static MemoryProvider<IGeometryFeature> CreatePolygonProvider()
         {
-            var features = new Features();
+            var features = new List<IGeometryFeature>();
 
             var feature = new Feature
             {
@@ -177,7 +178,7 @@ namespace Mapsui.Tests.Common.Maps
             });
             features.Add(feature);
 
-            var provider = new MemoryProvider(features);
+            var provider = new MemoryProvider<IGeometryFeature>(features);
 
             return provider;
         }

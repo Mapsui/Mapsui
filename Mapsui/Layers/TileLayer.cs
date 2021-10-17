@@ -28,6 +28,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using Mapsui.Extensions;
 
 namespace Mapsui.Layers
 {
@@ -63,7 +64,7 @@ namespace Mapsui.Layers
             _tileSource = tileSource ?? throw new ArgumentException("source can not null");
             MemoryCache = new MemoryCache<Feature>(minTiles, maxTiles);
             Style = new VectorStyle { Outline = { Color = Color.FromArgb(0, 0, 0, 0) } }; // initialize with transparent outline
-            if (Attribution == null) Attribution = new Hyperlink();
+            Attribution ??= new Hyperlink();
             Attribution.Text = _tileSource.Attribution?.Text;
             Attribution.Url = _tileSource.Attribution?.Url;
             _envelope = _tileSource?.Schema?.Extent.ToBoundingBox();

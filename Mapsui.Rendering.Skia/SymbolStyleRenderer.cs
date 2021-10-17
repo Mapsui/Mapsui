@@ -2,6 +2,7 @@
 using Mapsui.Styles;
 using SkiaSharp;
 using System;
+using Mapsui.Rendering.Skia.Extensions;
 
 namespace Mapsui.Rendering.Skia
 {

@@ -24,15 +24,16 @@ using BruTile.Cache;
 using Mapsui.Geometries;
 using System.IO;
 using System.Threading.Tasks;
+using Mapsui.Extensions;
 using Mapsui.Logging;
 
 namespace Mapsui.Providers
 {
-    public class TileProvider : IProvider
+    public class TileProvider : IProvider<IFeature>
     {
         readonly ITileSource _source;
-        readonly MemoryCache<byte[]> _bitmaps = new MemoryCache<byte[]>(100, 200);
-        readonly List<TileIndex> _queue = new List<TileIndex>();
+        readonly MemoryCache<byte[]> _bitmaps = new(100, 200);
+        readonly List<TileIndex> _queue = new();
 
         public BoundingBox GetExtents()
         {
@@ -66,14 +67,16 @@ namespace Mapsui.Providers
 
             WaitHandle.WaitAll(waitHandles.ToArray());
             
-            IFeatures features = new Features();
+            var features = new Features();
             foreach (TileInfo info in infos)
             {
                 byte[] bitmap = _bitmaps.Find(info.Index);
                 if (bitmap == null) continue;
                 IRaster raster = new Raster(new MemoryStream(bitmap), new BoundingBox(info.Extent.MinX, info.Extent.MinY, info.Extent.MaxX, info.Extent.MaxY));
-                IFeature feature = features.New();
-                feature.Geometry = raster;
+                var feature = new Feature
+                {
+                    Geometry = raster
+                };
                 features.Add(feature);
             }
             return features;
