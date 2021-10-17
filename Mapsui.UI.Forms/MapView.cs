@@ -1,13 +1,11 @@
 ﻿using Mapsui.Layers;
 using Mapsui.Rendering;
-using Mapsui.UI.Forms.Extensions;
 using Mapsui.UI.Objects;
 using Mapsui.Widgets;
 using Mapsui.Extensions;
 using Mapsui.Providers;
 using Mapsui.Widgets.ButtonWidget;
 using Mapsui.Utilities;
-using Mapsui.Widgets.Button;
 using SkiaSharp;
 using Svg.Skia;
 using System;

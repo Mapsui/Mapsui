@@ -155,7 +155,6 @@ namespace Mapsui.UI.Forms
             Map = new Map();
             
             BackgroundColor = KnownColor.White;
-            _initialized = true;
         }
 
 #if __MAUI__
