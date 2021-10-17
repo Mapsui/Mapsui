@@ -15,8 +15,8 @@
     <PackageReference Include="Microsoft.ProjectReunion" Version="0.8.4" />
     <PackageReference Include="Microsoft.ProjectReunion.Foundation" Version="0.8.4" />
     <PackageReference Include="Microsoft.ProjectReunion.WinUI" Version="0.8.4" />
-    <PackageReference Include="SkiaSharp" Version="2.88.0-preview.140" />
-    <PackageReference Include="SkiaSharp.Views.WinUI" Version="2.80.3" />
+    <PackageReference Include="SkiaSharp" Version="2.88.0-preview.150" />
+    <PackageReference Include="SkiaSharp.Views.WinUI" Version="2.88.0-preview.150" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
 

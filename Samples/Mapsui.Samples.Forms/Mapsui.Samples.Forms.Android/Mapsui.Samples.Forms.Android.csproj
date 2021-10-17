@@ -120,7 +120,7 @@
       <Version>2.1.0.4</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Views.Forms">
-      <Version>2.88.0-preview.140</Version>
+      <Version>2.88.0-preview.150</Version>
     </PackageReference>
     <PackageReference Include="sqlite-net-pcl">
       <Version>1.6.292</Version>

@@ -4,6 +4,7 @@ using Mapsui.UI;
 using System.Threading.Tasks;
 using Mapsui.Rendering.Skia;
 using Mapsui.Samples.CustomWidget;
+using Mapsui.Styles;
 using Mapsui.UI.Maui;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Xaml;
