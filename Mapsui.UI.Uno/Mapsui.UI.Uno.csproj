@@ -32,11 +32,11 @@
     <UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Mapsui.UI.Uwp\ExtensionMethods\PointExtensions.cs" Link="ExtensionMethods\PointExtensions.cs" />
+    <Compile Include="..\Mapsui.UI.Uwp\Extensions\PointExtensions.cs" Link="Extensions\PointExtensions.cs" />
     <Compile Include="..\Mapsui.UI.Uwp\MapControl.cs" Link="MapControl.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ExtensionMethods\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
 
   <Import Project="..\Mapsui.UI.Shared\Mapsui.UI.Shared.projitems" Label="Shared" />
