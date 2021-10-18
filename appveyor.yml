@@ -14,7 +14,7 @@ assembly_info:
   assembly_file_version: '{version}'
   assembly_informational_version: '{version}'
 environment:
-  version-short: 3.0.0
+  version-short: 3.0.0  
 nuget:
   disable_publish_on_pr: true
 install:
@@ -22,6 +22,7 @@ install:
 - ps: ./dotnet-install.ps1 -InstallDir '~/.dotnet' -Version '6.0.100-rc.2.21505.57';
 - cmd: dotnet tool install -g Redth.Net.Maui.Check
 - cmd: maui-check --fix --non-interactive --skip vswin --skip edgewebview2 --skip androidemulator
+- cmd: '"C:/Program Files (x86)/Android/android-sdk/tools/bin/sdkmanager.bat" "platforms;android-30"'
 before_build:
 - cmd: nuget restore mapsui.sln
 build:
