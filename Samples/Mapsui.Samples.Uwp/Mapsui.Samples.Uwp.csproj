@@ -174,9 +174,7 @@
   <ItemGroup>
     <None Include="Mapsui.Samples.Uwp_TemporaryKey.pfx" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ExtensionMethods\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
@@ -193,8 +191,7 @@
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>xcopy ..\..\..\MainPage.* ..\..\..\..\Mapsui.Samples.Uno\Mapsui.Samples.Uno.Shared /Y
-xcopy ..\..\..\ExtensionMethods\*.* ..\..\..\..\Mapsui.Samples.Uno\Mapsui.Samples.Uno.Shared /Y</PreBuildEvent>
+    <PreBuildEvent>xcopy ..\..\..\MainPage.* ..\..\..\..\Mapsui.Samples.Uno\Mapsui.Samples.Uno.Shared /Y</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
