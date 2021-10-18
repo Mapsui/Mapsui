@@ -10,6 +10,7 @@ using Mapsui.Providers;
 using Mapsui.UI;
 using Mapsui.Utilities;
 using Mapsui.Samples.Common;
+using Mapsui.Samples.Common.ExtensionMethods;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.CustomWidget;

@@ -12,12 +12,12 @@ using Mapsui.Widgets;
 using System.Runtime.CompilerServices;
 using Mapsui.Utilities;
 
-#if __ANDROID__
+#if __UWP__
+namespace Mapsui.UI.Uwp
+#elif __ANDROID__
 namespace Mapsui.UI.Android
 #elif __IOS__
 namespace Mapsui.UI.iOS
-#elif __UWP__
-namespace Mapsui.UI.Uwp
 #elif __WINUI__
 namespace Mapsui.UI.WinUI
 #elif __FORMS__
