@@ -2,6 +2,8 @@
 using System.IO;
 using System.Threading;
 using Mapsui.Geometries;
+using Mapsui.Layers;
+using Mapsui.Providers;
 using Mapsui.Tests.Common.Maps;
 using NUnit.Framework;
 using SkiaSharp;
@@ -34,6 +36,40 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = BitmapSymbolSample.CreateMap();
+            var viewport = new Viewport
+            {
+                Center = new Point(100, 100),
+                Width = 200,
+                Height = 200,
+                Resolution = 1
+            };
+            const string fileName = "points_with_symbolstyle.png";
+
+            // act
+            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
+
+            // aside
+            File.WriteToGeneratedFolder(fileName, bitmap);
+
+            // assert
+            Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        }
+
+        [Test]
+        public void RenderPointWithBitmapSymbolsInCollection()
+        {
+            // arrange
+            var map = BitmapSymbolSample.CreateMap();
+            var features = ((Providers.MemoryProvider<Providers.IGeometryFeature>)((MemoryLayer)map.Layers[0]).DataSource).Features;
+            foreach (IGeometryFeature feature in features)
+            {
+                if (feature.Geometry is Geometry geometry)
+                {
+                    var collection = new GeometryCollection();
+                    collection.Collection.Add(geometry);
+                    feature.Geometry = collection;
+                }
+            }
             var viewport = new Viewport
             {
                 Center = new Point(100, 100),

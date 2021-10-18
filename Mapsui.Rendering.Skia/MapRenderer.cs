@@ -168,28 +168,44 @@ namespace Mapsui.Rendering.Skia
                 }
 
                 // No special style renderer handled this up to now, than try standard renderers
-                if (geometryFeature.Geometry is Point)
-                    PointRenderer.Draw(canvas, viewport, style, geometryFeature, geometryFeature.Geometry, _symbolCache,
-                        layerOpacity * style.Opacity);
-                else if (geometryFeature.Geometry is MultiPoint)
-                    MultiPointRenderer.Draw(canvas, viewport, style, geometryFeature, geometryFeature.Geometry,
-                        _symbolCache, layerOpacity * style.Opacity);
-                else if (geometryFeature.Geometry is LineString)
-                    LineStringRenderer.Draw(canvas, viewport, style, geometryFeature, geometryFeature.Geometry,
-                        layerOpacity * style.Opacity);
-                else if (geometryFeature.Geometry is MultiLineString)
-                    MultiLineStringRenderer.Draw(canvas, viewport, style, geometryFeature, geometryFeature.Geometry,
-                        layerOpacity * style.Opacity);
-                else if (geometryFeature.Geometry is Polygon)
-                    PolygonRenderer.Draw(canvas, viewport, style, geometryFeature, geometryFeature.Geometry,
-                        layerOpacity * style.Opacity, _symbolCache);
-                else if (geometryFeature.Geometry is MultiPolygon)
-                    MultiPolygonRenderer.Draw(canvas, viewport, style, geometryFeature, geometryFeature.Geometry,
-                        layerOpacity * style.Opacity, _symbolCache);
-                else if (geometryFeature.Geometry is IRaster)
-                    RasterRenderer.Draw(canvas, viewport, style, geometryFeature, layerOpacity * style.Opacity,
-                        _tileCache, _currentIteration);
+                RenderGeometry(canvas, viewport, style, layerOpacity, geometryFeature, geometryFeature.Geometry);
             }
+        }
+
+        private void RenderGeometry(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, float layerOpacity,
+            IGeometryFeature geometryFeature, IGeometry geometry)
+        {
+            if (geometry is Point)
+                PointRenderer.Draw(canvas, viewport, style, geometryFeature, geometry, _symbolCache,
+                    layerOpacity * style.Opacity);
+            else if (geometry is MultiPoint)
+                MultiPointRenderer.Draw(canvas, viewport, style, geometryFeature, geometry,
+                    _symbolCache, layerOpacity * style.Opacity);
+            else if (geometry is LineString)
+                LineStringRenderer.Draw(canvas, viewport, style, geometryFeature, geometry,
+                    layerOpacity * style.Opacity);
+            else if (geometry is MultiLineString)
+                MultiLineStringRenderer.Draw(canvas, viewport, style, geometryFeature, geometry,
+                    layerOpacity * style.Opacity);
+            else if (geometry is Polygon)
+                PolygonRenderer.Draw(canvas, viewport, style, geometryFeature, geometry,
+                    layerOpacity * style.Opacity, _symbolCache);
+            else if (geometry is MultiPolygon)
+                MultiPolygonRenderer.Draw(canvas, viewport, style, geometryFeature, geometry,
+                    layerOpacity * style.Opacity, _symbolCache);
+            else if (geometry is IRaster)
+                RasterRenderer.Draw(canvas, viewport, style, geometryFeature, layerOpacity * style.Opacity,
+                    _tileCache, _currentIteration);
+            else if (geometry is IGeometryCollection collection)
+            {
+                for (int i = 0; i < collection.NumGeometries; i++)
+                {
+                    RenderGeometry(canvas, viewport, style, layerOpacity, geometryFeature, collection.Geometry(i));
+                }
+            }
+            else
+                Logger.Log(LogLevel.Warning,
+                    $"Failed to find renderer for geometry feature of type {geometry.GetType()}");
         }
 
         private void Render(object canvas, IReadOnlyViewport viewport, IEnumerable<IWidget> widgets, float layerOpacity)
