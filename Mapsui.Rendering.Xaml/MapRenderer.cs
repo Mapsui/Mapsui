@@ -238,20 +238,9 @@ namespace Mapsui.Rendering.Xaml
                     renderedGeometry = (Shape)cachedObject; // Has to be Shape
                     PositionGeometry(renderedGeometry, viewport, style, feature);
                 }
-                else if(feature.Geometry is IGeometryCollection collection)
-                {
-                    for (int i = 0; i < collection.NumGeometries; i++)
-                    {
-                        IGeometry g = collection.Geometry(i);
-                        var shape = RenderGeometry(viewport, style, g, symbolCache);
-                        canvas.Children.Add(shape);
-                        // NB: No caching for geometry collections
-                    }
-                    return;
-                }
                 else
                 {
-                    renderedGeometry = RenderGeometry(viewport, style, feature.Geometry, symbolCache);
+                    renderedGeometry = RenderGeometry(viewport, style, feature, symbolCache);
                     if (!rasterizing) feature.RenderedGeometry[style] = renderedGeometry;
                 }
 
@@ -261,26 +250,24 @@ namespace Mapsui.Rendering.Xaml
             }
         }
 
-        private static Shape RenderGeometry(IReadOnlyViewport viewport, IStyle style, IGeometry geometry, SymbolCache symbolCache)
+        private static Shape RenderGeometry(IReadOnlyViewport viewport, IStyle style, IFeature feature,
+            SymbolCache symbolCache)
         {
-            if (geometry is Geometries.Point)
-                return PointRenderer.RenderPoint(geometry as Geometries.Point, style, viewport, symbolCache);
-            if (geometry is MultiPoint)
-                return GeometryRenderer.RenderMultiPoint(geometry as MultiPoint, style, viewport, symbolCache);
-            if (geometry is LineString)
-                return LineStringRenderer.RenderLineString(geometry as LineString, style, viewport);
-            if (geometry is MultiLineString)
-                return MultiLineStringRenderer.Render(geometry as MultiLineString, style, viewport);
-            if (geometry is Polygon)
-                return PolygonRenderer.RenderPolygon(geometry as Polygon, style, viewport, symbolCache);
-            if (geometry is MultiPolygon)
-                return MultiPolygonRenderer.RenderMultiPolygon(geometry as MultiPolygon, style, viewport, symbolCache);
-            if (geometry is IRaster)
-                return GeometryRenderer.RenderRaster(geometry as IRaster, style, viewport);
-            if (geometry is IGeometryCollection)
-                throw new InvalidOperationException($"{nameof(IGeometryCollection)} should be handled outside of this function");
-            
-            Logger.Log(LogLevel.Warning, $"No renderer found for collection of type {geometry.GetType()}");
+            if (feature.Geometry is Geometries.Point)
+                return PointRenderer.RenderPoint(feature.Geometry as Geometries.Point, style, viewport, symbolCache);
+            if (feature.Geometry is MultiPoint)
+                return GeometryRenderer.RenderMultiPoint(feature.Geometry as MultiPoint, style, viewport, symbolCache);
+            if (feature.Geometry is LineString)
+                return LineStringRenderer.RenderLineString(feature.Geometry as LineString, style, viewport);
+            if (feature.Geometry is MultiLineString)
+                return MultiLineStringRenderer.Render(feature.Geometry as MultiLineString, style, viewport);
+            if (feature.Geometry is Polygon)
+                return PolygonRenderer.RenderPolygon(feature.Geometry as Polygon, style, viewport, symbolCache);
+            if (feature.Geometry is MultiPolygon)
+                return MultiPolygonRenderer.RenderMultiPolygon(feature.Geometry as MultiPolygon, style, viewport, symbolCache);
+            if (feature.Geometry is IRaster)
+                return GeometryRenderer.RenderRaster(feature.Geometry as IRaster, style, viewport);
+            Logger.Log(LogLevel.Warning, $"Failed to find renderer for geometry of type {feature.Geometry?.GetType()}");
             return null;
         }
 

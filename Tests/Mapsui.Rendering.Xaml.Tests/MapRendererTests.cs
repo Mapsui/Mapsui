@@ -58,13 +58,13 @@ namespace Mapsui.Rendering.Xaml.Tests
             // assert
             Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
         }
-
+#if SKIA
         [Test]
         public void RenderPointWithBitmapSymbolsInCollection()
         {
             // arrange
             var map = BitmapSymbolSample.CreateMap();
-            var features = ((Providers.MemoryProvider)((MemoryLayer)map.Layers[0]).DataSource).Features;
+            var features = ((MemoryProvider)((MemoryLayer)map.Layers[0]).DataSource).Features;
             foreach (var feature in features)
             {
                 if (feature.Geometry is Geometry geometry)
@@ -92,7 +92,7 @@ namespace Mapsui.Rendering.Xaml.Tests
             // assert
             Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
         }
-
+#endif
         [Test]
         public void RenderPointWithSvgSymbols()
         {
