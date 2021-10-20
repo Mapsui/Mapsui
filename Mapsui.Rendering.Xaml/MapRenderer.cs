@@ -267,6 +267,7 @@ namespace Mapsui.Rendering.Xaml
                 return MultiPolygonRenderer.RenderMultiPolygon(feature.Geometry as MultiPolygon, style, viewport, symbolCache);
             if (feature.Geometry is IRaster)
                 return GeometryRenderer.RenderRaster(feature.Geometry as IRaster, style, viewport);
+            Logger.Log(LogLevel.Warning, $"Failed to find renderer for geometry of type {feature.Geometry?.GetType()}");
             return null;
         }
 
