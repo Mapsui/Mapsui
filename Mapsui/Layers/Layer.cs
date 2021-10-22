@@ -114,7 +114,7 @@ namespace Mapsui.Layers
             {
                 lock (_syncRoot)
                 {
-                    return DataSource?.GetExtents().ToMRect();
+                    return DataSource?.GetExtent().ToMRect();
                 }
             }
         }

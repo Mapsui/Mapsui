@@ -499,7 +499,7 @@ namespace Mapsui.Providers.Wfs
             }
         }
 
-        public BoundingBox GetExtents()
+        public BoundingBox GetExtent()
         {
             return new BoundingBox(_featureTypeInfo.BBox.MinLong,
                                    _featureTypeInfo.BBox.MinLat,

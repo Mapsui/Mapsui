@@ -28,12 +28,12 @@ namespace Mapsui.Providers
             return ProjectionHelper.Transform(features, _geometryTransformation, _provider.CRS, CRS);
         }
 
-        public BoundingBox GetExtents()
+        public BoundingBox GetExtent()
         {
             // This transforms the full extent of the source. Usually the full extent of the source does not change,
             // so perhaps this should be calculated just once. Then again, there are probably situations where it does
             // change so a way to refresh this should be possible.
-            return ProjectionHelper.Transform(_provider.GetExtents(), _geometryTransformation, _provider.CRS, CRS);
+            return ProjectionHelper.Transform(_provider.GetExtent(), _geometryTransformation, _provider.CRS, CRS);
         }
     }
 }

@@ -36,7 +36,7 @@ namespace Mapsui.Providers
         readonly MemoryCache<byte[]> _bitmaps = new(100, 200);
         readonly List<TileIndex> _queue = new();
 
-        public BoundingBox GetExtents()
+        public BoundingBox GetExtent()
         {
             return _source.Schema.Extent.ToBoundingBox();
         }

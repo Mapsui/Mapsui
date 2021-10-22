@@ -201,7 +201,7 @@ namespace Mapsui.Providers
             return new Features();
         }
 
-        public BoundingBox GetExtents()
+        public BoundingBox GetExtent()
         {
             return _extent.ToBoundingBox();
         }

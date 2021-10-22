@@ -37,6 +37,6 @@ namespace Mapsui.Providers
         /// <see cref="Mapsui.Geometries.BoundingBox"/> of data set
         /// </summary>
         /// <returns>BoundingBox</returns>
-        BoundingBox GetExtents();
+        BoundingBox GetExtent();
     }
 }

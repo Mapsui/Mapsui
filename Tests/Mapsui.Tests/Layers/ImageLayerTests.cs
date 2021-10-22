@@ -23,7 +23,7 @@ namespace Mapsui.Tests.Layers
                 throw new Exception(ExceptionMessage);
             }
 
-            public BoundingBox GetExtents()
+            public BoundingBox GetExtent()
             {
                 return new BoundingBox(-1, -1, 0, 0);
             }

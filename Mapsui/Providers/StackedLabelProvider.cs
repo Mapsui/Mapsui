@@ -36,9 +36,9 @@ namespace Mapsui.Providers
             return GetFeaturesInView(fetchInfo.Resolution, _labelStyle, features, _rectangleLine, _rectangleFill);
         }
 
-        public BoundingBox GetExtents()
+        public BoundingBox GetExtent()
         {
-            return _provider.GetExtents();
+            return _provider.GetExtent();
         }
 
         private static List<Feature> GetFeaturesInView(double resolution, LabelStyle labelStyle,

@@ -30,7 +30,7 @@ namespace Mapsui.Layers
             });
         }
 
-        public override MRect Envelope => _dataSource?.GetExtents().ToMRect();
+        public override MRect Envelope => _dataSource?.GetExtent().ToMRect();
 
         public override IEnumerable<IFeature> GetFeatures(MRect extent, double resolution)
         {

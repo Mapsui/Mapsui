@@ -39,7 +39,7 @@ namespace Mapsui.UI.Objects
             return list;
         }
 
-        public BoundingBox GetExtents()
+        public BoundingBox GetExtent()
         {
             if (Collection == null || Collection.Count == 0)
                 return null;

@@ -465,7 +465,7 @@ namespace Mapsui.Providers.Shapefile
         /// Returns the extents of the data source
         /// </summary>
         /// <returns></returns>
-        public BoundingBox GetExtents()
+        public BoundingBox GetExtent()
         {
             lock (_syncRoot)
             {

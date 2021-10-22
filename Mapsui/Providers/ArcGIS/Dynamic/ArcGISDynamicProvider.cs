@@ -112,7 +112,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             return features;
         }
 
-        public BoundingBox GetExtents()
+        public BoundingBox GetExtent()
         {
             return new BoundingBox(ArcGisDynamicCapabilities.initialExtent.xmin, ArcGisDynamicCapabilities.initialExtent.ymin, ArcGisDynamicCapabilities.initialExtent.xmax, ArcGisDynamicCapabilities.initialExtent.ymax);
         }

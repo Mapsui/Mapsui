@@ -156,7 +156,7 @@ namespace Mapsui.Providers
         /// BoundingBox of data set
         /// </summary>
         /// <returns>BoundingBox</returns>
-        public BoundingBox GetExtents()
+        public BoundingBox GetExtent()
         {
             return _boundingBox;
         }
