@@ -43,7 +43,7 @@ namespace Mapsui.Layers
                 Resolution = resolution,
                 CRS = CRS
             };
-            return DataSource.GetFeaturesInView(fetchInfo);
+            return DataSource.GetFeatures(fetchInfo);
         }
 
         public override void RefreshData(FetchInfo fetchInfo)

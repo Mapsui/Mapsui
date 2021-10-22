@@ -132,7 +132,7 @@ namespace Mapsui.Providers
         {
         }
 
-        public virtual IEnumerable<T> GetFeaturesInView(FetchInfo fetchInfo)
+        public virtual IEnumerable<T> GetFeatures(FetchInfo fetchInfo)
         {
             if (fetchInfo == null) throw new ArgumentNullException(nameof(fetchInfo));
             if (fetchInfo.Extent == null) throw new ArgumentNullException(nameof(fetchInfo.Extent));

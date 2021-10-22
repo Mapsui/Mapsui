@@ -90,7 +90,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             set { _crs = value; }
         }
 
-        public IEnumerable<IFeature> GetFeaturesInView(FetchInfo fetchInfo)
+        public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {
             //If there are no layers (probably not initialised) return nothing
             if (ArcGisDynamicCapabilities.layers == null)

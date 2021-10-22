@@ -51,7 +51,7 @@ namespace Mapsui.Samples.Common.Maps.Special
         {
             private readonly Random _random = new (0);
 
-            public override IEnumerable<IGeometryFeature> GetFeaturesInView(FetchInfo fetchInfo)
+            public override IEnumerable<IGeometryFeature> GetFeatures(FetchInfo fetchInfo)
             {
                 var features = new List<IGeometryFeature>();
                 var geometries = RandomPointHelper.GenerateRandomPoints(fetchInfo.Extent, 10, _random.Next()).ToList();

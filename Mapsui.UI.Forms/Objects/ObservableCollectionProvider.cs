@@ -20,7 +20,7 @@ namespace Mapsui.UI.Objects
             Collection = collection;
         }
 
-        public IEnumerable<TU> GetFeaturesInView(FetchInfo fetchInfo)
+        public IEnumerable<TU> GetFeatures(FetchInfo fetchInfo)
         {
             var list = new List<TU>();
 

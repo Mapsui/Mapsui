@@ -20,11 +20,11 @@ namespace Mapsui.Providers
 
         public string CRS { get; set; }
 
-        public IEnumerable<IGeometryFeature> GetFeaturesInView(FetchInfo fetchInfo)
+        public IEnumerable<IGeometryFeature> GetFeatures(FetchInfo fetchInfo)
         {
             fetchInfo = new FetchInfo(fetchInfo); // Copy so we do not modify the original
             fetchInfo.Extent = ProjectionHelper.Transform(fetchInfo.Extent.ToBoundingBox(), _geometryTransformation, CRS, _provider.CRS).ToMRect();
-            var features = _provider.GetFeaturesInView(fetchInfo);
+            var features = _provider.GetFeatures(fetchInfo);
             return ProjectionHelper.Transform(features, _geometryTransformation, _provider.CRS, CRS);
         }
 

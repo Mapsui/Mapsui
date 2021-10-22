@@ -460,7 +460,7 @@ namespace Mapsui.Providers.Wms
             //nothing to dispose
         }
 
-        public IEnumerable<IFeature> GetFeaturesInView(FetchInfo fetchInfo)
+        public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {
             var features = new List<IGeometryFeature>();
             IRaster raster = null;

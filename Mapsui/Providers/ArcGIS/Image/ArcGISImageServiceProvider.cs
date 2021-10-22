@@ -95,7 +95,7 @@ namespace Mapsui.Providers.ArcGIS.Image
             set { _timeOut = value; }
         }
 
-        public IEnumerable<IFeature> GetFeaturesInView(FetchInfo fetchInfo)
+        public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {
             var features = new List<IGeometryFeature>();
             IRaster raster = null;

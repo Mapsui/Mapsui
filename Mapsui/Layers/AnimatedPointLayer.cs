@@ -25,7 +25,7 @@ namespace Mapsui.Layers
 
             Task.Factory.StartNew(() =>
             {
-                _animatedFeatures.AddFeatures(_dataSource.GetFeaturesInView(_fetchInfo));
+                _animatedFeatures.AddFeatures(_dataSource.GetFeatures(_fetchInfo));
                 OnDataChanged(new DataChangedEventArgs());
             });
         }

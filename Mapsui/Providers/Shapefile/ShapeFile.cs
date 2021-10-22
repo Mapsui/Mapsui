@@ -861,7 +861,7 @@ namespace Mapsui.Providers.Shapefile
         }
 
         
-        public IEnumerable<IGeometryFeature> GetFeaturesInView(FetchInfo fetchInfo)
+        public IEnumerable<IGeometryFeature> GetFeatures(FetchInfo fetchInfo)
         {
             lock (_syncRoot)
             {

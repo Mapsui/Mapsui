@@ -18,7 +18,7 @@ namespace Mapsui.Tests.Layers
         class FakeProvider : IProvider<IGeometryFeature>
         {
             public string CRS { get; set; }
-            public IEnumerable<IGeometryFeature> GetFeaturesInView(FetchInfo fetchInfo)
+            public IEnumerable<IGeometryFeature> GetFeatures(FetchInfo fetchInfo)
             {
                 throw new Exception(ExceptionMessage);
             }

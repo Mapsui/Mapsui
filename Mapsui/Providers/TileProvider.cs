@@ -109,7 +109,7 @@ namespace Mapsui.Providers
             }
         }
 
-        public IEnumerable<IFeature> GetFeaturesInView(FetchInfo fetchInfo)
+        public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {
             return FetchTiles(fetchInfo);
         }

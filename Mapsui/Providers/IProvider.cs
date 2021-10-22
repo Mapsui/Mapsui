@@ -31,7 +31,7 @@ namespace Mapsui.Providers
         /// </summary>
         string CRS { get; set; }
 
-        IEnumerable<T> GetFeaturesInView(FetchInfo fetchInfo);
+        IEnumerable<T> GetFeatures(FetchInfo fetchInfo);
 
         /// <summary>
         /// <see cref="Mapsui.Geometries.BoundingBox"/> of data set
