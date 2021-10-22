@@ -7,7 +7,7 @@ using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Utilities;
 
-namespace Mapsui.Samples.Common.Maps
+namespace Mapsui.Samples.Common.Maps.Special
 {
     public class ProjectionSample : ISample
     {
@@ -30,23 +30,27 @@ namespace Mapsui.Samples.Common.Maps
             // 3) The Transformation to transform from the DataSource CRS to
             // the Map CRS.
 
+            var geometryLayer = CreateWgs84Layer();
+            var extent = geometryLayer.Envelope.Grow(10000);
             var map = new Map
             {
                 CRS = "EPSG:3857", // The Map CRS needs to be set
                 BackColor = Color.Gray
             };
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            map.Layers.Add(CreateWgs84PointLayer());
+            map.Layers.Add(geometryLayer);
+            map.Home = n => n.NavigateTo(extent);
             return map;
         }
 
-        public static MemoryLayer CreateWgs84PointLayer()
+        public static MemoryLayer CreateWgs84Layer()
         {
             var features = new List<IGeometryFeature>
             {
                 new Feature {Geometry = SomeWhereNearHaarlem},
                 new Feature {Geometry = GeometryFromWKT.Parse(WktOfAmsterdam)}
             };
+
             var memoryProvider = new MemoryProvider<IGeometryFeature>(features)
             {
                 CRS = "EPSG:4326" // The DataSource CRS needs to be set
@@ -60,7 +64,7 @@ namespace Mapsui.Samples.Common.Maps
             return new MemoryLayer
             {
                 DataSource = dataSource,
-                Name = "WGS84 Point"
+                Name = "WGS84 Geometries"
             };
         }
     }
