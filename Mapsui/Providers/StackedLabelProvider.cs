@@ -30,15 +30,15 @@ namespace Mapsui.Providers
 
         private readonly Pen _rectangleLine;
 
-        public IEnumerable<IFeature> GetFeaturesInView(FetchInfo fetchInfo)
+        public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {
-            var features = _provider.GetFeaturesInView(fetchInfo);
+            var features = _provider.GetFeatures(fetchInfo);
             return GetFeaturesInView(fetchInfo.Resolution, _labelStyle, features, _rectangleLine, _rectangleFill);
         }
 
-        public BoundingBox GetExtents()
+        public BoundingBox GetExtent()
         {
-            return _provider.GetExtents();
+            return _provider.GetExtent();
         }
 
         private static List<Feature> GetFeaturesInView(double resolution, LabelStyle labelStyle,

@@ -30,7 +30,7 @@ namespace Mapsui.Layers
         // This field allows a workaround for when transformation is needed.
         public string CRS { get; set; }
 
-        public override IEnumerable<IFeature> GetFeaturesInView(MRect box, double resolution)
+        public override IEnumerable<IFeature> GetFeatures(MRect box, double resolution)
         {
             // Safeguard in case BoundingBox is null, most likely due to no features in layer
             if (box == null) { return new List<IFeature>(); }
@@ -43,7 +43,7 @@ namespace Mapsui.Layers
                 Resolution = resolution,
                 CRS = CRS
             };
-            return DataSource.GetFeaturesInView(fetchInfo);
+            return DataSource.GetFeatures(fetchInfo);
         }
 
         public override void RefreshData(FetchInfo fetchInfo)
@@ -54,6 +54,6 @@ namespace Mapsui.Layers
             // DataHasChanged should be called.
         }
 
-        public override MRect Envelope => DataSource?.GetExtents().ToMRect();
+        public override MRect Envelope => DataSource?.GetExtent().ToMRect();
     }
 }

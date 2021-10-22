@@ -76,7 +76,7 @@ namespace Mapsui.Layers
                 {
                     // Run in background because it could take time because
                     // this could involve database access or a web request
-                    Envelope = DataSource.GetExtents().ToMRect(); 
+                    Envelope = DataSource.GetExtent().ToMRect(); 
                 });
             }
         }
@@ -88,7 +88,7 @@ namespace Mapsui.Layers
             StartNewFetch(_fetchInfo);
         }
 
-        public override IEnumerable<IFeature> GetFeaturesInView(MRect box, double resolution)
+        public override IEnumerable<IFeature> GetFeatures(MRect box, double resolution)
         {
             var result = new List<IFeature>();
             foreach (var featureSet in _sets.OrderBy(c => c.TimeRequested))

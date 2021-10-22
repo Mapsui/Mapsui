@@ -20,7 +20,7 @@ namespace Mapsui.UI.Objects
             Collection = collection;
         }
 
-        public IEnumerable<TU> GetFeaturesInView(FetchInfo fetchInfo)
+        public IEnumerable<TU> GetFeatures(FetchInfo fetchInfo)
         {
             var list = new List<TU>();
 
@@ -39,12 +39,12 @@ namespace Mapsui.UI.Objects
             return list;
         }
 
-        public BoundingBox GetExtents()
+        public BoundingBox GetExtent()
         {
             if (Collection == null || Collection.Count == 0)
                 return null;
 
-            BoundingBox extents = null;
+            BoundingBox extent = null;
 
             lock (_syncRoot)
             {
@@ -54,16 +54,16 @@ namespace Mapsui.UI.Objects
                     {
                         if (item.Feature.BoundingBox != null)
                         {
-                            if (extents == null)
-                                extents = new BoundingBox(item.Feature.BoundingBox.ToBoundingBox());
+                            if (extent == null)
+                                extent = new BoundingBox(item.Feature.BoundingBox.ToBoundingBox());
                             else
-                                extents = extents.Join(item.Feature.BoundingBox.ToBoundingBox());
+                                extent = extent.Join(item.Feature.BoundingBox.ToBoundingBox());
                         }
                     }
                 }
             }
 
-            return extents;
+            return extent;
         }
     }
 }

@@ -114,13 +114,13 @@ namespace Mapsui.Layers
             {
                 lock (_syncRoot)
                 {
-                    return DataSource?.GetExtents().ToMRect();
+                    return DataSource?.GetExtent().ToMRect();
                 }
             }
         }
 
         /// <inheritdoc />
-        public override IEnumerable<IFeature> GetFeaturesInView(MRect extent, double resolution)
+        public override IEnumerable<IFeature> GetFeatures(MRect extent, double resolution)
         {
             return _cache.ToList();
         }

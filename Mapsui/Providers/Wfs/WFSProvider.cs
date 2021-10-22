@@ -499,7 +499,7 @@ namespace Mapsui.Providers.Wfs
             }
         }
 
-        public BoundingBox GetExtents()
+        public BoundingBox GetExtent()
         {
             return new BoundingBox(_featureTypeInfo.BBox.MinLong,
                                    _featureTypeInfo.BBox.MinLat,
@@ -950,7 +950,7 @@ namespace Mapsui.Providers.Wfs
         /// <param name="box"></param>
         /// <param name="resolution">unused parameter (for backwards compatibility)</param>
         /// <returns>Features within the specified <see cref="Mapsui.Geometries.BoundingBox"/></returns>
-        public IEnumerable<IFeature> GetFeaturesInView(FetchInfo fetchInfo)
+        public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {
             return ExecuteIntersectionQuery(fetchInfo.Extent.ToBoundingBox());
         }

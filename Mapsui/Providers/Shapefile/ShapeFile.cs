@@ -462,10 +462,10 @@ namespace Mapsui.Providers.Shapefile
         }
 
         /// <summary>
-        /// Returns the extents of the data source
+        /// Returns the extent of the data source
         /// </summary>
         /// <returns></returns>
-        public BoundingBox GetExtents()
+        public BoundingBox GetExtent()
         {
             lock (_syncRoot)
             {
@@ -861,7 +861,7 @@ namespace Mapsui.Providers.Shapefile
         }
 
         
-        public IEnumerable<IGeometryFeature> GetFeaturesInView(FetchInfo fetchInfo)
+        public IEnumerable<IGeometryFeature> GetFeatures(FetchInfo fetchInfo)
         {
             lock (_syncRoot)
             {

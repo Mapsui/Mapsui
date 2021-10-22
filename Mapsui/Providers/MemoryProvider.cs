@@ -66,7 +66,7 @@ namespace Mapsui.Providers
         public MemoryProvider()
         {
             Features = new List<IGeometryFeature>();
-            _boundingBox = GetExtents(Features);
+            _boundingBox = GetExtent(Features);
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace Mapsui.Providers
         public MemoryProvider(IEnumerable<IGeometry> geometries)
         {
             Features = geometries.Select(g => new Feature { Geometry = g }).ToList();
-            _boundingBox = GetExtents(Features);
+            _boundingBox = GetExtent(Features);
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace Mapsui.Providers
         public MemoryProvider(IGeometryFeature feature)
         {
             Features = new List<IGeometryFeature> { feature };
-            _boundingBox = GetExtents(Features);
+            _boundingBox = GetExtent(Features);
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace Mapsui.Providers
         public MemoryProvider(IEnumerable<IGeometryFeature> features)
         {
             Features = features.ToList();
-            _boundingBox = GetExtents(Features);
+            _boundingBox = GetExtent(Features);
         }
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace Mapsui.Providers
                     Geometry = geometry
                 }
             };
-            _boundingBox = GetExtents(Features);
+            _boundingBox = GetExtent(Features);
         }
 
         /// <summary>
@@ -132,7 +132,7 @@ namespace Mapsui.Providers
         {
         }
 
-        public virtual IEnumerable<T> GetFeaturesInView(FetchInfo fetchInfo)
+        public virtual IEnumerable<T> GetFeatures(FetchInfo fetchInfo)
         {
             if (fetchInfo == null) throw new ArgumentNullException(nameof(fetchInfo));
             if (fetchInfo.Extent == null) throw new ArgumentNullException(nameof(fetchInfo.Extent));
@@ -156,12 +156,12 @@ namespace Mapsui.Providers
         /// BoundingBox of data set
         /// </summary>
         /// <returns>BoundingBox</returns>
-        public BoundingBox GetExtents()
+        public BoundingBox GetExtent()
         {
             return _boundingBox;
         }
 
-        private static BoundingBox GetExtents(IReadOnlyList<IGeometryFeature> features)
+        private static BoundingBox GetExtent(IReadOnlyList<IGeometryFeature> features)
         {
             BoundingBox box = null;
             foreach (var feature in features)

@@ -44,7 +44,7 @@ namespace Mapsui.UI
         public ZoomMode ZoomMode { get; set; } = ZoomMode.KeepWithinResolutions;
 
         /// <summary>
-        /// Set this property in combination KeepCenterWithinExtents or KeepViewportWithinExtents.
+        /// Sets the limit to which the user can pan the map.
         /// If PanLimits is not set, Map.Extent will be used as restricted extent.
         /// </summary>
         public MRect PanLimits { get; set; }

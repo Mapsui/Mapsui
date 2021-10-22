@@ -157,7 +157,7 @@ namespace Mapsui.Layers
 
         public static double SymbolSize { get; set; } = 64;
 
-        public override IEnumerable<IFeature> GetFeaturesInView(MRect box, double resolution)
+        public override IEnumerable<IFeature> GetFeatures(MRect box, double resolution)
         {
             if (box == null) throw new ArgumentNullException(nameof(box));
 

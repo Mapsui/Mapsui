@@ -253,7 +253,7 @@ namespace Mapsui
 
 
         /// <summary>
-        /// Recalculates extents for viewport
+        /// Recalculates extent for viewport
         /// </summary>
         private void UpdateExtent()
         {

@@ -25,14 +25,14 @@ namespace Mapsui.Layers
 
             Task.Factory.StartNew(() =>
             {
-                _animatedFeatures.AddFeatures(_dataSource.GetFeaturesInView(_fetchInfo));
+                _animatedFeatures.AddFeatures(_dataSource.GetFeatures(_fetchInfo));
                 OnDataChanged(new DataChangedEventArgs());
             });
         }
 
-        public override MRect Envelope => _dataSource?.GetExtents().ToMRect();
+        public override MRect Envelope => _dataSource?.GetExtent().ToMRect();
 
-        public override IEnumerable<IFeature> GetFeaturesInView(MRect extent, double resolution)
+        public override IEnumerable<IFeature> GetFeatures(MRect extent, double resolution)
         {
             return _animatedFeatures.GetFeatures();
         }

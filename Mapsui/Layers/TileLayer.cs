@@ -93,7 +93,7 @@ namespace Mapsui.Layers
         public override MRect Envelope => _envelope;
 
         /// <inheritdoc />
-        public override IEnumerable<IFeature> GetFeaturesInView(MRect box, double resolution)
+        public override IEnumerable<IFeature> GetFeatures(MRect box, double resolution)
         {
             if (_tileSource?.Schema == null) return Enumerable.Empty<IFeature>();
             UpdateMemoryCacheMinAndMax();

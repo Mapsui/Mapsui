@@ -18,12 +18,12 @@ namespace Mapsui.Tests.Layers
         class FakeProvider : IProvider<IGeometryFeature>
         {
             public string CRS { get; set; }
-            public IEnumerable<IGeometryFeature> GetFeaturesInView(FetchInfo fetchInfo)
+            public IEnumerable<IGeometryFeature> GetFeatures(FetchInfo fetchInfo)
             {
                 throw new Exception(ExceptionMessage);
             }
 
-            public BoundingBox GetExtents()
+            public BoundingBox GetExtent()
             {
                 return new BoundingBox(-1, -1, 0, 0);
             }

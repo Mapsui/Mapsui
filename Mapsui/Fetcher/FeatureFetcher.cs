@@ -28,7 +28,7 @@ namespace Mapsui.Fetcher
         {
             lock (_provider)
             {
-                var features = _provider.GetFeaturesInView(_fetchInfo).ToList();
+                var features = _provider.GetFeatures(_fetchInfo).ToList();
                 _dataArrived?.Invoke(features, _timeOfRequest);
             }
         }

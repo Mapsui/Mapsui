@@ -192,7 +192,7 @@ namespace Mapsui.Providers
 
         public string CRS { get; set; }
 
-        public IEnumerable<IFeature> GetFeaturesInView(FetchInfo fetchInfo)
+        public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {
             if (_extent.Intersects(fetchInfo.Extent))
             {
@@ -201,7 +201,7 @@ namespace Mapsui.Providers
             return new Features();
         }
 
-        public BoundingBox GetExtents()
+        public BoundingBox GetExtent()
         {
             return _extent.ToBoundingBox();
         }

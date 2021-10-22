@@ -14,7 +14,6 @@ namespace Mapsui.Layers
         private static int _instanceCounter;
         private bool _busy;
         private bool _enabled;
-        private bool _exclusive;
         private string _name;
         private double _maxVisible;
         private double _minVisible;
@@ -129,17 +128,6 @@ namespace Mapsui.Layers
         }
 
         /// <inheritdoc />
-        public bool Exclusive
-        {
-            get => _exclusive;
-            set
-            {
-                _exclusive = value;
-                OnPropertyChanged(nameof(Exclusive));
-            }
-        }
-
-        /// <inheritdoc />
         public double Opacity
         {
             get => _opacity;
@@ -196,7 +184,7 @@ namespace Mapsui.Layers
         public bool IsMapInfoLayer { get; set; }
 
         /// <inheritdoc />
-        public abstract IEnumerable<IFeature> GetFeaturesInView(MRect box, double resolution);
+        public abstract IEnumerable<IFeature> GetFeatures(MRect box, double resolution);
 
         /// <inheritdoc />
         public abstract void RefreshData(FetchInfo fetchInfo);

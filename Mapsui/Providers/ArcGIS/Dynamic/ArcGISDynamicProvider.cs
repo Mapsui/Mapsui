@@ -90,7 +90,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             set { _crs = value; }
         }
 
-        public IEnumerable<IFeature> GetFeaturesInView(FetchInfo fetchInfo)
+        public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {
             //If there are no layers (probably not initialised) return nothing
             if (ArcGisDynamicCapabilities.layers == null)
@@ -112,7 +112,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             return features;
         }
 
-        public BoundingBox GetExtents()
+        public BoundingBox GetExtent()
         {
             return new BoundingBox(ArcGisDynamicCapabilities.initialExtent.xmin, ArcGisDynamicCapabilities.initialExtent.ymin, ArcGisDynamicCapabilities.initialExtent.xmax, ArcGisDynamicCapabilities.initialExtent.ymax);
         }

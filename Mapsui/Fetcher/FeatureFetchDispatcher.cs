@@ -34,7 +34,7 @@ namespace Mapsui.Fetcher
         {
             try
             {
-                var features = DataSource.GetFeaturesInView(fetchInfo).ToList();
+                var features = DataSource.GetFeatures(fetchInfo).ToList();
                 FetchCompleted(features, null);
             }
             catch (Exception exception)
