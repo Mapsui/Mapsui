@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using Mapsui.Extensions;
+using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Logging;
 using Mapsui.Utilities;
@@ -89,7 +90,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             set { _crs = value; }
         }
 
-        public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        public IEnumerable<IFeature> GetFeaturesInView(FetchInfo fetchInfo)
         {
             //If there are no layers (probably not initialised) return nothing
             if (ArcGisDynamicCapabilities.layers == null)
@@ -97,7 +98,9 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
 
             var features = new List<IGeometryFeature>();
             IRaster raster = null;
-            IViewport viewport = new Viewport { Resolution = resolution, Center = box.Centroid.ToMPoint(), Width = (box.Width / resolution), Height = (box.Height / resolution) };
+
+            IViewport viewport = fetchInfo.ToViewport();
+            
             if (TryGetMap(viewport, ref raster))
             {
                 var feature = new Feature

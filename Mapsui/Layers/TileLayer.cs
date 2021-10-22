@@ -113,11 +113,15 @@ namespace Mapsui.Layers
         }
 
         /// <inheritdoc />
-        public override void RefreshData(MRect extent, double resolution, ChangeType changeType)
+        public override void RefreshData(FetchInfo fetchInfo)
         {
-            if (Enabled && extent.GetArea() > 0 && _tileFetchDispatcher != null && MaxVisible >= resolution && MinVisible <= resolution)
+            if (Enabled
+                && fetchInfo.Extent.GetArea() > 0 
+                && _tileFetchDispatcher != null
+                && MaxVisible >= fetchInfo.Resolution
+                && MinVisible <= fetchInfo.Resolution)
             {
-                _tileFetchDispatcher.SetViewport(extent.ToBoundingBox(), resolution);
+                _tileFetchDispatcher.SetViewport(fetchInfo);
                 _tileFetchDispatcher.StartFetching();
             }
         }

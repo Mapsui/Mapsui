@@ -65,7 +65,7 @@ namespace Mapsui.Rendering.Skia
         {
             if (!viewport.HasSize) return;
 
-            if (background != null) canvas.Clear(background.ToSkia(1));
+            if (background != null) canvas.Clear(background.ToSkia());
             Render(canvas, viewport, layers);
             Render(canvas, viewport, widgets, 1);
         }
@@ -79,23 +79,17 @@ namespace Mapsui.Rendering.Skia
                 var imageInfo = new SKImageInfo((int)Math.Round(width * pixelDensity), (int)Math.Round(height * pixelDensity), 
                     SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
 
-                using (var surface = SKSurface.Create(imageInfo))
-                {
-                    if (surface == null) return null;
-                    // Not sure if this is needed here:
-                    if (background != null) surface.Canvas.Clear(background.ToSkia(1));
-                    surface.Canvas.Scale(pixelDensity, pixelDensity);
-                    Render(surface.Canvas, viewport, layers);
-                    using (var image = surface.Snapshot())
-                    {
-                        using (var data = image.Encode())
-                        {
-                            var memoryStream = new MemoryStream();
-                            data.SaveTo(memoryStream);
-                            return memoryStream;
-                        }
-                    }
-                }
+                using var surface = SKSurface.Create(imageInfo);
+                if (surface == null) return null;
+                // Not sure if this is needed here:
+                if (background != null) surface.Canvas.Clear(background.ToSkia());
+                surface.Canvas.Scale(pixelDensity, pixelDensity);
+                Render(surface.Canvas, viewport, layers);
+                using var image = surface.Snapshot();
+                using var data = image.Encode();
+                var memoryStream = new MemoryStream();
+                data.SaveTo(memoryStream);
+                return memoryStream;
             }
             catch (Exception ex)
             {
@@ -241,7 +235,9 @@ namespace Mapsui.Rendering.Skia
                     var pixmap = surface.PeekPixels();
                     var color = pixmap.GetPixelColor(intX, intY);
 
+
                     VisibleFeatureIterator.IterateLayers(viewport, layers, (v, layer, style, feature, opacity) => {
+                        // ReSharper disable AccessToDisposedClosure // There is no delayed fetch. After IterateLayers returns all is done. I do not see a problem.
                         surface.Canvas.Save();
                         // 1) Clear the entire bitmap
                         surface.Canvas.Clear(SKColors.Transparent);
@@ -252,6 +248,7 @@ namespace Mapsui.Rendering.Skia
                             // 4) Add feature and style to result
                             list.Add(new MapInfoRecord(feature, style, layer));
                         surface.Canvas.Restore();
+                        // ReSharper restore AccessToDisposedClosure
                     });
                 }
 

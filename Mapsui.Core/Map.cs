@@ -22,7 +22,6 @@ using System.ComponentModel;
 using System.Linq;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
-using Mapsui.Projection;
 using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Widgets;
@@ -95,11 +94,6 @@ namespace Mapsui
         /// Projection type of Map. Normally in format like "EPSG:3857"
         /// </summary>
         public string CRS { get; set; }
-
-        /// <summary>
-        /// Transformation to use for the different coordinate systems
-        /// </summary>
-        public ITransformation Transformation { get; set; }
 
         /// <summary>
         /// A collection of layers. The first layer in the list is drawn first, the last one on top.
@@ -210,11 +204,11 @@ namespace Mapsui
             }
         }
 
-        public void RefreshData(MRect extent, double resolution, ChangeType changeType)
+        public void RefreshData(FetchInfo fetchInfo)
         {
             foreach (var layer in _layers.ToList())
             {
-                layer.RefreshData(extent, resolution, changeType);
+                layer.RefreshData(fetchInfo);
             }
         }
         
@@ -233,8 +227,6 @@ namespace Mapsui
         {
             layer.DataChanged += LayerDataChanged;
             layer.PropertyChanged += LayerPropertyChanged;
-
-            layer.CRS = CRS;
         }
 
         private void LayerRemoved(ILayer layer)

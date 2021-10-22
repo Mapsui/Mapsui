@@ -9,6 +9,7 @@ using System.Linq;
 using Mapsui.Geometries.Utilities;
 using Xamarin.Forms;
 using System.Threading.Tasks;
+using Mapsui.Fetcher;
 
 namespace Mapsui.UI.Forms
 {
@@ -550,7 +551,14 @@ namespace Mapsui.UI.Forms
             if (touchPoints.Count == 0)
             {
                 _mode = TouchMode.None;
-                _map.RefreshData(_viewport.Extent, _viewport.Resolution, ChangeType.Discrete);
+                var fetchInfo = new FetchInfo
+                {
+                    Extent = _viewport.Extent,
+                    Resolution = _viewport.Resolution,
+                    CRS = Map.CRS,
+                    ChangeType = ChangeType.Discrete
+                };
+                _map.RefreshData(fetchInfo);
             }
 
             return args.Handled;
@@ -594,7 +602,14 @@ namespace Mapsui.UI.Forms
             if (touchPoints.Count == 0)
             {
                 _mode = TouchMode.None;
-                _map.RefreshData(_viewport.Extent, _viewport.Resolution, ChangeType.Discrete);
+                var fetchInfo = new FetchInfo
+                {
+                    Extent = _viewport.Extent,
+                    Resolution = _viewport.Resolution,
+                    CRS = Map.CRS,
+                    ChangeType = ChangeType.Discrete
+                };
+                _map.RefreshData(fetchInfo);
             }
 
             return args.Handled;

@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using Mapsui.Extensions;
+using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Logging;
 using Mapsui.Rendering;
@@ -94,12 +95,14 @@ namespace Mapsui.Providers.ArcGIS.Image
             set { _timeOut = value; }
         }
 
-        public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        public IEnumerable<IFeature> GetFeaturesInView(FetchInfo fetchInfo)
         {
             var features = new List<IGeometryFeature>();
             IRaster raster = null;
-            var view = new Viewport { Resolution = resolution, Center = box.Centroid.ToMPoint(), Width = (box.Width / resolution), Height = (box.Height / resolution) };
-            if (TryGetMap(view, ref raster))
+
+            var viewport = fetchInfo.ToViewport();
+            
+            if (TryGetMap(viewport, ref raster))
             {
                 var feature = new Feature
                 {

@@ -4,7 +4,7 @@ using BruTile.Wmts;
 using Mapsui.Layers;
 using Mapsui.UI;
 
-namespace Mapsui.Samples.Common.Maps
+namespace Mapsui.Samples.Common.Maps.Data
 {
     public class WmtsSample : ISample
     {
@@ -19,6 +19,7 @@ namespace Mapsui.Samples.Common.Maps
         public static Map CreateMap()
         {
             var map = new Map();
+            map.CRS = "EPSG:28992";
             map.Layers.Add(CreateLayer());
             map.Layers.Add(GeodanOfficesSample.CreateLayer());
             return map;

@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Net;
 using System.Xml.XPath;
+using Mapsui.Extensions;
+using Mapsui.Fetcher;
 using Mapsui.Projection;
 using Mapsui.Providers.Wfs.Xml;
 using Mapsui.Utilities;
@@ -948,9 +950,9 @@ namespace Mapsui.Providers.Wfs
         /// <param name="box"></param>
         /// <param name="resolution">unused parameter (for backwards compatibility)</param>
         /// <returns>Features within the specified <see cref="Mapsui.Geometries.BoundingBox"/></returns>
-        public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        public IEnumerable<IFeature> GetFeaturesInView(FetchInfo fetchInfo)
         {
-            return ExecuteIntersectionQuery(box);
+            return ExecuteIntersectionQuery(fetchInfo.Extent.ToBoundingBox());
         }
                 
     }

@@ -13,7 +13,6 @@ namespace Mapsui.Layers
     {
         private static int _instanceCounter;
         private bool _busy;
-        private string _crs;
         private bool _enabled;
         private bool _exclusive;
         private string _name;
@@ -130,17 +129,6 @@ namespace Mapsui.Layers
         }
 
         /// <inheritdoc />
-        public string CRS
-        {
-            get => _crs;
-            set
-            {
-                _crs = value;
-                OnPropertyChanged(nameof(CRS));
-            }
-        }
-
-        /// <inheritdoc />
         public bool Exclusive
         {
             get => _exclusive;
@@ -211,8 +199,7 @@ namespace Mapsui.Layers
         public abstract IEnumerable<IFeature> GetFeaturesInView(MRect box, double resolution);
 
         /// <inheritdoc />
-
-        public abstract void RefreshData(MRect extent, double resolution, ChangeType changeType);
+        public abstract void RefreshData(FetchInfo fetchInfo);
 
         public void DataHasChanged()
         {

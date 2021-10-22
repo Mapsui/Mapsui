@@ -3,10 +3,11 @@ using Mapsui.Providers;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Mapsui.Extensions;
+using Mapsui.Fetcher;
 
 namespace Mapsui.UI.Objects
 {
-    public class ObservableCollectionProvider<T, U> : IProvider<U> where T : IFeatureProvider where U : IFeature
+    public class ObservableCollectionProvider<T, TU> : IProvider<TU> where T : IFeatureProvider where TU : IFeature
     {
         private readonly object _syncRoot = new();
 
@@ -19,9 +20,9 @@ namespace Mapsui.UI.Objects
             Collection = collection;
         }
 
-        public IEnumerable<U> GetFeaturesInView(BoundingBox box, double resolution)
+        public IEnumerable<TU> GetFeaturesInView(FetchInfo fetchInfo)
         {
-            var list = new List<U>();
+            var list = new List<TU>();
 
             if (Collection == null || Collection.Count == 0)
                 return list;
@@ -30,8 +31,8 @@ namespace Mapsui.UI.Objects
             {
                 foreach (T item in Collection)
                 {
-                    if (box.Intersects(item.Feature.BoundingBox.ToBoundingBox()))
-                        list.Add((U)item.Feature);
+                    if (fetchInfo.Extent.Intersects(item.Feature.BoundingBox))
+                        list.Add((TU)item.Feature);
                 }
             }
 

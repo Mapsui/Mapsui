@@ -17,6 +17,7 @@
 
 using Mapsui.Geometries;
 using System.Collections.Generic;
+using Mapsui.Fetcher;
 
 namespace Mapsui.Providers
 {
@@ -28,9 +29,9 @@ namespace Mapsui.Providers
         /// <summary>
         /// The spatial reference ID (CRS)
         /// </summary>
-        string CRS { get; set; } // todo: Remove the set
+        string CRS { get; set; }
 
-        IEnumerable<T> GetFeaturesInView(BoundingBox box, double resolution);
+        IEnumerable<T> GetFeaturesInView(FetchInfo fetchInfo);
 
         /// <summary>
         /// <see cref="Mapsui.Geometries.BoundingBox"/> of data set

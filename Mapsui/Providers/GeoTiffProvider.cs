@@ -6,6 +6,8 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using Mapsui.Extensions;
+using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Styles;
 using Bitmap = System.Drawing.Bitmap;
@@ -39,7 +41,7 @@ namespace Mapsui.Providers
 
         private const string WorldExtension = ".tfw";
         private readonly IFeature _feature;
-        private readonly BoundingBox _extent;
+        private readonly MRect _extent;
 
         public GeoTiffProvider(string tiffPath, List<Color> noDataColors = null)
         {
@@ -60,17 +62,17 @@ namespace Mapsui.Providers
 
             var data = ReadImageAsStream(tiffPath, noDataColors);
             
-            _feature = new Feature { Geometry = new Raster(data, _extent) };
+            _feature = new Feature { Geometry = new Raster(data, _extent.ToBoundingBox()) };
             _feature.Styles.Add(new VectorStyle());
         }
 
-        private static BoundingBox CalculateExtent(TiffProperties tiffProperties, WorldProperties worldProperties)
+        private static MRect CalculateExtent(TiffProperties tiffProperties, WorldProperties worldProperties)
         {
             var minX = worldProperties.XCenterOfUpperLeftPixel - worldProperties.PixelSizeX * 0.5;
             var maxX = minX + worldProperties.PixelSizeX * tiffProperties.Width + worldProperties.PixelSizeX * 0.5;
             var maxY = worldProperties.YCenterOfUpperLeftPixel + worldProperties.PixelSizeY * 0.5;
             var minY = maxY + worldProperties.PixelSizeY * tiffProperties.Height - worldProperties.PixelSizeY * 0.5;
-            return new BoundingBox(minX, minY, maxX, maxY);
+            return new MRect(minX, minY, maxX, maxY);
         }
 
         private static MemoryStream ReadImageAsStream(string tiffPath, List<Color> noDataColors)
@@ -190,9 +192,9 @@ namespace Mapsui.Providers
 
         public string CRS { get; set; }
 
-        public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        public IEnumerable<IFeature> GetFeaturesInView(FetchInfo fetchInfo)
         {
-            if (_extent.Intersects(box))
+            if (_extent.Intersects(fetchInfo.Extent))
             {
                 return new[] { _feature };
             }
@@ -201,7 +203,7 @@ namespace Mapsui.Providers
 
         public BoundingBox GetExtents()
         {
-            return _extent;
+            return _extent.ToBoundingBox();
         }
 
         private static string GetPathWithoutExtension(string path)

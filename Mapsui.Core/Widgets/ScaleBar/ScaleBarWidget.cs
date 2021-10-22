@@ -3,6 +3,7 @@ using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Mapsui.Logging;
+using Mapsui.Projection;
 
 namespace Mapsui.Widgets.ScaleBar
 {
@@ -34,6 +35,7 @@ namespace Mapsui.Widgets.ScaleBar
     public class ScaleBarWidget : Widget, INotifyPropertyChanged
     {
         private readonly Map _map;
+        private readonly ITransformation _transformation;
 
         ///
         /// Default position of the scale bar.
@@ -44,9 +46,10 @@ namespace Mapsui.Widgets.ScaleBar
         private static readonly ScaleBarMode DefaultScaleBarMode = ScaleBarMode.Single;
         private static readonly Font DefaultFont = new() { FontFamily = "Arial", Size = 10 };
 
-        public ScaleBarWidget(Map map)
+        public ScaleBarWidget(Map map, ITransformation transformation)
         {
             _map = map;
+            _transformation = transformation;
 
             HorizontalAlignment = DefaultScaleBarHorizontalAlignment;
             VerticalAlignment = DefaultScaleBarVerticalAlignment;
@@ -173,7 +176,7 @@ namespace Mapsui.Widgets.ScaleBar
         /// <summary>
         /// Margin between end of tick and text
         /// </summary>
-        public float TextMargin { get; } = 1;
+        public float TextMargin => 1;
 
         private Font _font = DefaultFont;
 
@@ -279,13 +282,13 @@ namespace Mapsui.Widgets.ScaleBar
             float length1;
             string text1;
             
-            (length1, text1) = CalculateScaleBarLengthAndValue(_map, viewport, MaxWidth, UnitConverter);
+            (length1, text1) = CalculateScaleBarLengthAndValue(_map, _transformation, viewport, MaxWidth, UnitConverter);
 
             float length2;
             string text2;
 
             if (SecondaryUnitConverter != null)
-                (length2, text2) = CalculateScaleBarLengthAndValue(_map, viewport, MaxWidth, SecondaryUnitConverter);
+                (length2, text2) = CalculateScaleBarLengthAndValue(_map, _transformation, viewport, MaxWidth, SecondaryUnitConverter);
             else
                 (length2, text2) = (0, null);
 
@@ -480,13 +483,13 @@ namespace Mapsui.Widgets.ScaleBar
                 return false;
             }
 
-            if (_map.Transformation == null)
+            if (_transformation == null)
             {
-                Logger.Log(LogLevel.Warning, $"ScaleBarWidget can not draw because the {nameof(Map)}.{nameof(Map.Transformation)} is not set");
+                Logger.Log(LogLevel.Warning, $"ScaleBarWidget can not draw because the {nameof(Map)}.{nameof(_transformation)} is not set");
                 return false;
             }
 
-            if (_map.Transformation.IsProjectionSupported(_map.CRS, "EPSG:4326") != true)
+            if (_transformation.IsProjectionSupported(_map.CRS, "EPSG:4326") != true)
             {
                 Logger.Log(LogLevel.Warning, $"ScaleBarWidget can not draw because the projection between {_map.CRS} and EPSG:4326 is not supported");
                 return false;
@@ -508,13 +511,13 @@ namespace Mapsui.Widgets.ScaleBar
         /// @param unitConverter the DistanceUnitConverter to calculate for
         /// @return scaleBarLength and scaleBarText
         private static (float scaleBarLength, string scaleBarText) CalculateScaleBarLengthAndValue(
-            Map map, IReadOnlyViewport viewport, float width, IUnitConverter unitConverter)
+            Map map, ITransformation transformation, IReadOnlyViewport viewport, float width, IUnitConverter unitConverter)
         {
             // We have to calc the angle difference to the equator (angle = 0), 
             // because EPSG:3857 is only there 1 m. At other angles, we
             // should calculate the correct length.
 
-            var (_, y) = map.Transformation.Transform(map.CRS, "EPSG:4326", viewport.Center.X, viewport.Center.Y); // clone or else you will transform the original viewport center
+            var (_, y) = transformation.Transform(map.CRS, "EPSG:4326", viewport.Center.X, viewport.Center.Y); // clone or else you will transform the original viewport center
 
             // Calc ground resolution in meters per pixel of viewport for this latitude
             double groundResolution = viewport.Resolution * Math.Cos(y / 180.0 * Math.PI);

@@ -32,9 +32,15 @@ namespace Mapsui.Tests.Fetcher
             var level = 3;
             var expectedTiles = 64;
 
+            var fetchInfo = new FetchInfo
+            {
+                Extent = tileSchema.Extent.ToMRect(),
+                Resolution = tileSchema.Resolutions[level].UnitsPerPixel
+            };
+
             // Act
             // Get all tiles of level 3
-            fetchDispatcher.SetViewport(tileSchema.Extent.ToBoundingBox(), tileSchema.Resolutions[level].UnitsPerPixel);
+            fetchDispatcher.SetViewport(fetchInfo);
             tileMachine.Start();
             // Assert
             while (fetchDispatcher.Busy) { Thread.Sleep(1); }
@@ -56,14 +62,18 @@ namespace Mapsui.Tests.Fetcher
             var tileMachine = new FetchMachine(fetchDispatcher);
             var level = 3;
             var expectedTiles = 64;
-
+            var fetchInfo = new FetchInfo
+            {
+                Extent = tileSchema.Extent.ToMRect(),
+                Resolution = tileSchema.Resolutions[level].UnitsPerPixel
+            };
             // Act
-            fetchDispatcher.SetViewport(tileSchema.Extent.ToBoundingBox(), tileSchema.Resolutions[level].UnitsPerPixel);
+            fetchDispatcher.SetViewport(fetchInfo);
             tileMachine.Start();
             while (fetchDispatcher.Busy) { Thread.Sleep(1); }
             var countAfterFirstTry = tileProvider.CountByTile.Keys.Count;
             // do it again
-            fetchDispatcher.SetViewport(tileSchema.Extent.ToBoundingBox(), tileSchema.Resolutions[level].UnitsPerPixel);
+            fetchDispatcher.SetViewport(fetchInfo);
             tileMachine.Start();
             while (fetchDispatcher.Busy) { Thread.Sleep(1); }
 
@@ -87,13 +97,17 @@ namespace Mapsui.Tests.Fetcher
             var tileMachine = new FetchMachine(fetchDispatcher);
             var level = 3;
             var tilesInLevel = 64;
-
+            var fetchInfo = new FetchInfo
+            {
+                Extent = tileSchema.Extent.ToMRect(),
+                Resolution = tileSchema.Resolutions[level].UnitsPerPixel
+            };
             // Act
-            fetchDispatcher.SetViewport(tileSchema.Extent.ToBoundingBox(), tileSchema.Resolutions[level].UnitsPerPixel);
+            fetchDispatcher.SetViewport(fetchInfo);
             tileMachine.Start();
             while (fetchDispatcher.Busy) { Thread.Sleep(1); }
             // do it again
-            fetchDispatcher.SetViewport(tileSchema.Extent.ToBoundingBox(), tileSchema.Resolutions[level].UnitsPerPixel);
+            fetchDispatcher.SetViewport(fetchInfo);
             tileMachine.Start();
             while (fetchDispatcher.Busy) { Thread.Sleep(1); }
             
@@ -113,14 +127,19 @@ namespace Mapsui.Tests.Fetcher
             var tileMachine = new FetchMachine(fetchDispatcher);
             var level = 3;
             var tilesInLevel = 64;
+            var fetchInfo = new FetchInfo
+            {
+                Extent = tileSchema.Extent.ToMRect(),
+                Resolution = tileSchema.Resolutions[level].UnitsPerPixel
+            };
 
             // Act
-            fetchDispatcher.SetViewport(tileSchema.Extent.ToBoundingBox(), tileSchema.Resolutions[level].UnitsPerPixel);
+            fetchDispatcher.SetViewport(fetchInfo);
             tileMachine.Start();
             while (fetchDispatcher.Busy) { Thread.Sleep(1); }
 
             // Act again
-            fetchDispatcher.SetViewport(tileSchema.Extent.ToBoundingBox(), tileSchema.Resolutions[level].UnitsPerPixel);
+            fetchDispatcher.SetViewport(fetchInfo);
             tileMachine.Start();
             while (fetchDispatcher.Busy) { Thread.Sleep(1); }
 
@@ -140,16 +159,20 @@ namespace Mapsui.Tests.Fetcher
             var tileMachine = new FetchMachine(fetchDispatcher);
             var level = 3;
             var tilesInLevel = 64;
-
+            var fetchInfo = new FetchInfo
+            {
+                Extent = tileSchema.Extent.ToMRect(),
+                Resolution = tileSchema.Resolutions[level].UnitsPerPixel
+            };
             // Act
-            fetchDispatcher.SetViewport(tileSchema.Extent.ToBoundingBox(), tileSchema.Resolutions[level].UnitsPerPixel);
+            fetchDispatcher.SetViewport(fetchInfo);
             tileMachine.Start();
             while (fetchDispatcher.Busy) { Thread.Sleep(1); }
 
             var tileCountAfterFirstBatch = tileProvider.TotalCount;
 
             // Act again
-            fetchDispatcher.SetViewport(tileSchema.Extent.ToBoundingBox(), tileSchema.Resolutions[level].UnitsPerPixel);
+            fetchDispatcher.SetViewport(fetchInfo);
             tileMachine.Start();
             while (fetchDispatcher.Busy) { Thread.Sleep(1); }
 
@@ -171,11 +194,16 @@ namespace Mapsui.Tests.Fetcher
             var tileMachine = new FetchMachine(fetchDispatcher);
             var numberOfWorkers = 8;
             var numberOfRestarts = 3;
+            var fetchInfo = new FetchInfo
+            {
+                Extent = tileSchema.Extent.ToMRect(),
+                Resolution = tileSchema.Resolutions[3].UnitsPerPixel
+            };
 
             // Act
             for (int i = 0; i < numberOfRestarts; i++)
             {
-                fetchDispatcher.SetViewport(tileSchema.Extent.ToBoundingBox(), tileSchema.Resolutions[3].UnitsPerPixel);
+                fetchDispatcher.SetViewport(fetchInfo);
                 tileMachine.Start();
                 while (fetchDispatcher.Busy) { Thread.Sleep(1); }
             }
