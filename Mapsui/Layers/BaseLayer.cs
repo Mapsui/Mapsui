@@ -14,7 +14,6 @@ namespace Mapsui.Layers
         private static int _instanceCounter;
         private bool _busy;
         private bool _enabled;
-        private bool _exclusive;
         private string _name;
         private double _maxVisible;
         private double _minVisible;
@@ -125,17 +124,6 @@ namespace Mapsui.Layers
             {
                 _name = value;
                 OnPropertyChanged(nameof(Name));
-            }
-        }
-
-        /// <inheritdoc />
-        public bool Exclusive
-        {
-            get => _exclusive;
-            set
-            {
-                _exclusive = value;
-                OnPropertyChanged(nameof(Exclusive));
             }
         }
 
