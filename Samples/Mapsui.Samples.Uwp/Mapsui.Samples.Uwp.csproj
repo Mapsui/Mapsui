@@ -178,9 +178,6 @@
   <ItemGroup>
     <None Include="Mapsui.Samples.Uwp_TemporaryKey.pfx" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ExtensionMethods\" />
-  </ItemGroup>
   <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
