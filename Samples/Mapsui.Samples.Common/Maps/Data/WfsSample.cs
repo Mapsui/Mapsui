@@ -36,7 +36,7 @@ namespace Mapsui.Samples.Common.Maps.Data
                 map.Layers.Add(CreateWfsLayer(provider));
                 map.Layers.Add(CreateLabelLayer(provider));
                 
-                var bb = new BoundingBox(550000, 5050000, 800000, 5400000);
+                var bb = new MRect(550000, 5050000, 800000, 5400000);
                 map.Limiter = new ViewportLimiterKeepWithin
                 {
                     PanLimits = bb

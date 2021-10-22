@@ -1,3 +1,4 @@
+using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Rendering.Skia.Extensions;
@@ -13,9 +14,8 @@ namespace Mapsui.Rendering.Skia
         {
             if (style is LabelStyle labelStyle)
             {
-                var worldCenter = geometry.BoundingBox.Centroid;
-                var center = viewport.WorldToScreen(worldCenter);
-                LabelRenderer.Draw(canvas, labelStyle, feature, center, opacity);
+                var center = viewport.WorldToScreen(feature.BoundingBox.Centroid);
+                LabelRenderer.Draw(canvas, labelStyle, feature, center.ToPoint(), opacity);
             }
             else
             {

@@ -1,15 +1,15 @@
 using Mapsui.Fetcher;
-using Mapsui.Geometries;
 using Mapsui.Providers;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Mapsui.Extensions;
 
 namespace Mapsui.Layers
 {
     public class AnimatedPointLayer : BaseLayer
     {
         private readonly IProvider<IGeometryFeature> _dataSource;
-        private BoundingBox _extent;
+        private MRect _extent;
         private double _resolution;
         private readonly AnimatedFeatures _animatedFeatures = new();
 
@@ -26,18 +26,18 @@ namespace Mapsui.Layers
 
             Task.Factory.StartNew(() =>
             {
-                _animatedFeatures.AddFeatures(_dataSource.GetFeaturesInView(_extent, _resolution));
+                _animatedFeatures.AddFeatures(_dataSource.GetFeaturesInView(_extent.ToBoundingBox(), _resolution));
                 OnDataChanged(new DataChangedEventArgs());
             });
         }
 
-        public override BoundingBox Envelope => _dataSource?.GetExtents();
+        public override MRect Envelope => _dataSource?.GetExtents().ToMRect();
 
-        public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox extent, double resolution)
+        public override IEnumerable<IFeature> GetFeaturesInView(MRect extent, double resolution)
         {
             return _animatedFeatures.GetFeatures();
         }
-        public override void RefreshData(BoundingBox extent, double resolution, ChangeType changeType)
+        public override void RefreshData(MRect extent, double resolution, ChangeType changeType)
         {
             _extent = extent;
             _resolution = resolution;

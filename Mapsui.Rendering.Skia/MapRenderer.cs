@@ -209,9 +209,9 @@ namespace Mapsui.Rendering.Skia
                 .Where(l => l.IsMapInfoLayer);
 
             var list = new List<MapInfoRecord>();
-            var result = new MapInfo()
+            var result = new MapInfo
             {
-                ScreenPosition = new Point(x, y),
+                ScreenPosition = new MPoint(x, y),
                 WorldPosition = viewport.ScreenToWorld(x, y),
                 Resolution = viewport.Resolution
             };
@@ -275,7 +275,7 @@ namespace Mapsui.Rendering.Skia
             return result;
         }
 
-        public MapInfo GetMapInfo(Point screenPosition, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, int margin = 0)
+        public MapInfo GetMapInfo(MPoint screenPosition, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, int margin = 0)
         {
             return GetMapInfo(screenPosition.X, screenPosition.Y, viewport, layers, margin);
         }

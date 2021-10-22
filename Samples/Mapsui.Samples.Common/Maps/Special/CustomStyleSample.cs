@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -23,16 +24,16 @@ namespace Mapsui.Samples.Common.Maps
 
     public class SkiaCustomStyleRenderer : ISkiaStyleRenderer
     {
-        public static Random Random = new Random();
+        public static Random Random = new();
         public bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IGeometryFeature feature, IStyle style, ISymbolCache symbolCache)
         {
             if (!(feature.Geometry is Point worldPoint))
                 return false;
 
-            var screenPoint = viewport.WorldToScreen(worldPoint);
+            var screenPoint = viewport.WorldToScreen(worldPoint.ToMPoint());
             var color = new SKColor((byte)Random.Next(0, 256), (byte)Random.Next(0, 256), (byte)Random.Next(0, 256), (byte)(256.0 * layer.Opacity * style.Opacity));
-            var colored = new SKPaint() { Color = color, IsAntialias = true };
-            var black = new SKPaint() { Color = SKColors.Black, IsAntialias = true };
+            var colored = new SKPaint { Color = color, IsAntialias = true };
+            var black = new SKPaint { Color = SKColors.Black, IsAntialias = true };
 
             canvas.Translate((float)screenPoint.X, (float)screenPoint.Y);
             canvas.DrawCircle(0, 0, 15, colored);
@@ -40,11 +41,10 @@ namespace Mapsui.Samples.Common.Maps
             canvas.DrawCircle(8, -12, 8, colored);
             canvas.DrawCircle(8, -8, 2, black);
             canvas.DrawCircle(-8, -8, 2, black);
-            using (var path = new SKPath())
-            {
-                path.ArcTo(new SKRect(-8, 2, 8, 10), 25, 135, true);
-                canvas.DrawPath(path, new SKPaint() { Style = SKPaintStyle.Stroke, Color = SKColors.Black, IsAntialias = true });
-            }
+
+            using var path = new SKPath();
+            path.ArcTo(new SKRect(-8, 2, 8, 10), 25, 135, true);
+            canvas.DrawPath(path, new SKPaint { Style = SKPaintStyle.Stroke, Color = SKColors.Black, IsAntialias = true });
 
             return true;
         }
@@ -73,7 +73,7 @@ namespace Mapsui.Samples.Common.Maps
             return map;
         }
 
-        private static ILayer CreateStylesLayer(BoundingBox envelope)
+        private static ILayer CreateStylesLayer(MRect envelope)
         {
             return new MemoryLayer
             {
@@ -84,20 +84,20 @@ namespace Mapsui.Samples.Common.Maps
             };
         }
 
-        public static MemoryProvider<IGeometryFeature> CreateMemoryProviderWithDiverseSymbols(BoundingBox envelope, int count = 100)
+        public static MemoryProvider<IGeometryFeature> CreateMemoryProviderWithDiverseSymbols(MRect envelope, int count = 100)
         {
             
             return new MemoryProvider<IGeometryFeature>(CreateDiverseFeatures(RandomPointHelper.GenerateRandomPoints(envelope, count)));
         }
 
-        private static IEnumerable<IGeometryFeature> CreateDiverseFeatures(IEnumerable<IGeometry> randomPoints)
+        private static IEnumerable<IGeometryFeature> CreateDiverseFeatures(IEnumerable<MPoint> randomPoints)
         {
             var features = new List<IGeometryFeature>();
             var style = new CustomStyle();
             var counter = 1;
             foreach (var point in randomPoints)
             {
-                var feature = new Feature { Geometry = point };
+                var feature = new Feature { Geometry = point.ToPoint() };
                 feature["Label"] = $"I'm no. {counter++} and, \nautsch, you hit me!";
                 feature.Styles.Add(style); // Here the custom style is set!
                 feature.Styles.Add(SmalleDot());

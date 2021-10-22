@@ -4,12 +4,9 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Avalonia;
-using Avalonia.Collections;
 using Avalonia.Controls;
-using Avalonia.Controls.Shapes;
 using Avalonia.Input;
 using Avalonia.Interactivity;
-using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Platform;
 using Avalonia.Rendering.SceneGraph;
@@ -24,23 +21,20 @@ namespace Mapsui.UI.Avalonia
 {
     public partial class MapControl : Grid, IMapControl
     {
-        private Point _mousePosition;
+        private MPoint _mousePosition;
         private MapsuiCustomDrawOp _drawOp;
-        private readonly Rectangle _selectRectangle = CreateSelectRectangle();
-        private Geometries.Point _currentMousePosition;
-        private Geometries.Point _downMousePosition;
+        private MPoint _currentMousePosition;
+        private MPoint _downMousePosition;
         private bool _mouseDown;
-        private Geometries.Point _previousMousePosition;
+        private MPoint _previousMousePosition;
         private double _toResolution = double.NaN;
 
         public event EventHandler<FeatureInfoEventArgs> FeatureInfo;
-        public MouseWheelAnimation MouseWheelAnimation { get; } = new MouseWheelAnimation { Duration = 0 };
+        public MouseWheelAnimation MouseWheelAnimation { get; } = new() { Duration = 0 };
 
         public MapControl()
         {
             ClipToBounds = true;
-            Children.Add(_selectRectangle);
-
             CommonInitialize();
             Initialize();
         }
@@ -72,7 +66,7 @@ namespace Mapsui.UI.Avalonia
                     break;
             }
         }
-        
+
         private void MapControl_PointerPressed(object sender, PointerPressedEventArgs e)
         {
             if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
@@ -115,12 +109,9 @@ namespace Mapsui.UI.Avalonia
             _mouseDown = true;
             e.Pointer.Capture(this);
 
-            if (!IsInBoxZoomMode())
+            if (IsClick(_currentMousePosition, _downMousePosition))
             {
-                if (IsClick(_currentMousePosition, _downMousePosition))
-                {
-                    HandleFeatureInfo(e);
-                }
+                HandleFeatureInfo(e);
             }
         }
 
@@ -144,22 +135,16 @@ namespace Mapsui.UI.Avalonia
 
         private void MapControlMouseLeave(object sender, PointerEventArgs e)
         {
-            _previousMousePosition = new Geometries.Point();
+            _previousMousePosition = null;
         }
 
         private void MapControlMouseMove(object sender, PointerEventArgs e)
         {
-            if (IsInBoxZoomMode())
-            {
-                DrawBbox(e.GetPosition(this));
-                return;
-            }
-
             _currentMousePosition = e.GetPosition(this).ToMapsui(); // Needed for both MouseMove and MouseWheel event
 
             if (_mouseDown)
             {
-                if (_previousMousePosition == null || _previousMousePosition.IsEmpty())
+                if (_previousMousePosition == null)
                 {
                     // Usually MapControlMouseLeftButton down initializes _previousMousePosition but in some
                     // situations it can be null. So far I could only reproduce this in debug mode when putting
@@ -173,34 +158,6 @@ namespace Mapsui.UI.Avalonia
             }
         }
 
-        private void DrawBbox(Point newPos)
-        {
-            if (_mouseDown)
-            {
-                var from = _previousMousePosition;
-                var to = newPos;
-
-                if (from.X > to.X)
-                {
-                    var temp = from;
-                    from.X = to.X;
-                    to = to.WithX(temp.X);
-                }
-
-                if (from.Y > to.Y)
-                {
-                    var temp = from;
-                    from.Y = to.Y;
-                    to = to.WithY(temp.Y);
-                }
-
-                _selectRectangle.Width = to.X - from.X;
-                _selectRectangle.Height = to.Y - from.Y;
-                _selectRectangle.Margin = new Thickness(from.X, from.Y, 0, 0);
-                _selectRectangle.IsVisible = true;
-            }
-        }
-
         private void MapControl_PointerReleased(object sender, PointerReleasedEventArgs e)
         {
             if (e.GetCurrentPoint(this).Properties.PointerUpdateKind == PointerUpdateKind.LeftButtonReleased)
@@ -209,55 +166,15 @@ namespace Mapsui.UI.Avalonia
             }
         }
 
-        private static bool IsInBoxZoomMode()
-        {
-            // return Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl);
-            return false;
-        }
-
         private void MapControlMouseLeftButtonUp(PointerReleasedEventArgs e)
         {
-            var mousePosition = e.GetPosition(this).ToMapsui();
-
-            if (IsInBoxZoomMode())
-            {
-                var previous = Viewport.ScreenToWorld(_previousMousePosition.X, _previousMousePosition.Y);
-                var current = Viewport.ScreenToWorld(mousePosition.X, mousePosition.Y);
-                ZoomToBox(previous, current);
-            }
-
             RefreshData();
             _mouseDown = false;
-
-            _previousMousePosition = new Geometries.Point();
-            //      ReleaseMouseCapture();
+            _previousMousePosition = null;
+            e.Pointer.Capture(null);
         }
 
-        public void ZoomToBox(Geometries.Point beginPoint, Geometries.Point endPoint)
-        {
-            var width = Math.Abs(endPoint.X - beginPoint.X);
-            var height = Math.Abs(endPoint.Y - beginPoint.Y);
-            if (width <= 0) return;
-            if (height <= 0) return;
-
-            ZoomHelper.ZoomToBoudingbox(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y,
-                Bounds.Width, Bounds.Height, out var x, out var y, out var resolution);
-
-            Navigator.NavigateTo(new Geometries.Point(x, y), resolution);
-
-            _toResolution = resolution; // for animation
-
-            RefreshData();
-            RefreshGraphics();
-            ClearBBoxDrawing();
-        }
-
-        private void ClearBBoxDrawing()
-        {
-            RunOnUIThread(() => _selectRectangle.IsVisible = false);
-        }
-
-        private static bool IsClick(Geometries.Point currentPosition, Geometries.Point previousPosition)
+        private static bool IsClick(MPoint currentPosition, MPoint previousPosition)
         {
             return
                 Math.Abs(currentPosition.X - previousPosition.X) < 1 &&
@@ -267,14 +184,14 @@ namespace Mapsui.UI.Avalonia
         protected override void OnPointerMoved(PointerEventArgs e)
         {
             base.OnPointerMoved(e);
-            _mousePosition = e.GetPosition(this);
+            _mousePosition = e.GetPosition(this).ToMapsui();
         }
 
         private void OnDoubleTapped(object sender, RoutedEventArgs e)
         {
             // We have a new interaction with the screen, so stop all navigator animations
             Navigator.StopRunningAnimation();
-            var tapPosition = _mousePosition.ToMapsui();
+            var tapPosition = _mousePosition;
             OnInfo(InvokeInfo(tapPosition, tapPosition, 2));
         }
 
@@ -283,7 +200,7 @@ namespace Mapsui.UI.Avalonia
             // We have a new interaction with the screen, so stop all navigator animations
             Navigator.StopRunningAnimation();
 
-            var tapPosition = _mousePosition.ToMapsui();
+            var tapPosition = _mousePosition;
             OnInfo(InvokeInfo(tapPosition, tapPosition, 1));
         }
 
@@ -333,26 +250,11 @@ namespace Mapsui.UI.Avalonia
             return 1f;
         }
 
-        private static Rectangle CreateSelectRectangle()
-        {
-            return new Rectangle
-            {
-                Fill = new SolidColorBrush(Colors.Red),
-                Stroke = new SolidColorBrush(Colors.Black),
-                StrokeThickness = 3,
-                StrokeDashArray = new AvaloniaList<double> { 3.0 },
-                Opacity = 0.3,
-                VerticalAlignment = VerticalAlignment.Top,
-                HorizontalAlignment = HorizontalAlignment.Left,
-                IsVisible = false
-            };
-        }
-
         private class MapsuiCustomDrawOp : ICustomDrawOperation
         {
             private readonly MapControl _mapControl;
 
-            private readonly FormattedText _noSkia = new FormattedText()
+            private readonly FormattedText _noSkia = new()
             {
                 Text = "Current rendering API is not Skia"
             };

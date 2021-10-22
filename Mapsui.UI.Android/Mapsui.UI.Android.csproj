@@ -64,6 +64,10 @@
     <AndroidResource Include="Resources\Values\Strings.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Mapsui.Core\Mapsui.Core.csproj">
+      <Project>{7f15a600-a0c7-400e-bfbe-83105fadbc63}</Project>
+      <Name>Mapsui.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Mapsui.Geometries\Mapsui.Geometries.csproj">
       <Project>{EE55B62D-FFA2-4C24-A4AD-7A47ACE55CE5}</Project>
       <Name>Mapsui.Geometries</Name>

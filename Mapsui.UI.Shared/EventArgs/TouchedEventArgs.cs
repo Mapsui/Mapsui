@@ -5,10 +5,10 @@ namespace Mapsui.UI
 {
     public class TouchedEventArgs : EventArgs
     {
-        public List<Geometries.Point> ScreenPoints { get; }
+        public List<MPoint> ScreenPoints { get; }
         public bool Handled { get; set; } = false;
 
-        public TouchedEventArgs(List<Geometries.Point> screenPoints)
+        public TouchedEventArgs(List<MPoint> screenPoints)
         {
             ScreenPoints = screenPoints;
         }

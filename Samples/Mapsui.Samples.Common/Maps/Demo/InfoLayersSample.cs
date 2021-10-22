@@ -149,7 +149,7 @@ namespace Mapsui.Samples.Common.Maps
             });
         }
 
-        private static ILayer CreateInfoLayer(BoundingBox envelope)
+        private static ILayer CreateInfoLayer(MRect envelope)
         {
             return new Layer(InfoLayerName)
             {

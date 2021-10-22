@@ -1,5 +1,4 @@
-﻿using Mapsui.Geometries;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Net;
@@ -456,17 +455,17 @@ namespace Mapsui.UI.Wpf
         }
 
         /// <inheritdoc />
-        public Point ToPixels(Point coordinateInDeviceIndependentUnits)
+        public MPoint ToPixels(MPoint coordinateInDeviceIndependentUnits)
         {
-            return new Point(
+            return new MPoint(
                 coordinateInDeviceIndependentUnits.X * PixelDensity,
                 coordinateInDeviceIndependentUnits.Y * PixelDensity);
         }
 
         /// <inheritdoc />
-        public Point ToDeviceIndependentUnits(Point coordinateInPixels)
+        public MPoint ToDeviceIndependentUnits(MPoint coordinateInPixels)
         {
-            return new Point(coordinateInPixels.X / PixelDensity, coordinateInPixels.Y / PixelDensity);
+            return new MPoint(coordinateInPixels.X / PixelDensity, coordinateInPixels.Y / PixelDensity);
         }
 
         private void OnViewportSizeInitialized()
@@ -490,7 +489,7 @@ namespace Mapsui.UI.Wpf
             Info?.Invoke(this, mapInfoEventArgs);
         }
 
-        private bool WidgetTouched(IWidget widget, Point screenPosition)
+        private bool WidgetTouched(IWidget widget, MPoint screenPosition)
         {
             var result = widget.HandleWidgetTouched(Navigator, screenPosition);
 
@@ -505,7 +504,7 @@ namespace Mapsui.UI.Wpf
         }
 
         /// <inheritdoc />
-        public MapInfo GetMapInfo(Point screenPosition, int margin = 0)
+        public MapInfo GetMapInfo(MPoint screenPosition, int margin = 0)
         {
             return Renderer.GetMapInfo(screenPosition.X, screenPosition.Y, Viewport, Map.Layers, margin);
         }
@@ -531,7 +530,7 @@ namespace Mapsui.UI.Wpf
         /// <param name="startScreenPosition">Screen position of Viewport/MapControl</param>
         /// <param name="numTaps">Number of clickes/taps</param>
         /// <returns>True, if something done </returns>
-        private MapInfoEventArgs InvokeInfo(Point screenPosition, Point startScreenPosition, int numTaps)
+        private MapInfoEventArgs InvokeInfo(MPoint screenPosition, MPoint startScreenPosition, int numTaps)
         {
             return InvokeInfo(
                 Map.GetWidgetsOfMapAndLayers(), 
@@ -550,8 +549,8 @@ namespace Mapsui.UI.Wpf
         /// <param name="widgetCallback">Callback, which is called when Widget is hit</param>
         /// <param name="numTaps">Number of clickes/taps</param>
         /// <returns>True, if something done </returns>
-        private MapInfoEventArgs InvokeInfo(IEnumerable<IWidget> widgets, Point screenPosition, 
-            Point startScreenPosition, Func<IWidget, Point, bool> widgetCallback, int numTaps)
+        private MapInfoEventArgs InvokeInfo(IEnumerable<IWidget> widgets, MPoint screenPosition, 
+            MPoint startScreenPosition, Func<IWidget, MPoint, bool> widgetCallback, int numTaps)
         {
             // Check if a Widget is tapped. In the current design they are always on top of the map.
             var touchedWidgets = WidgetTouch.GetTouchedWidget(screenPosition, startScreenPosition, widgets);

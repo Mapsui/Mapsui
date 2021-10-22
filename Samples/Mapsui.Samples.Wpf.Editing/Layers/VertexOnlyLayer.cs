@@ -12,16 +12,16 @@ namespace Mapsui.Samples.Wpf.Editing.Layers
     {
         private readonly WritableLayer _source;
 
-        public override BoundingBox Envelope => _source.Envelope;
+        public override MRect Envelope => _source.Envelope;
 
         public VertexOnlyLayer(WritableLayer source)
         {
             _source = source;
-            _source.DataChanged += (sender, args) => OnDataChanged(args);
+            _source.DataChanged += (_, args) => OnDataChanged(args);
             Style = new SymbolStyle {SymbolScale = 0.5};
         }
 
-        public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        public override IEnumerable<IFeature> GetFeaturesInView(MRect box, double resolution)
         {
             var features = _source.GetFeaturesInView(box, resolution).Cast<IGeometryFeature>().ToList();
             foreach (var feature in features)
@@ -34,7 +34,7 @@ namespace Mapsui.Samples.Wpf.Editing.Layers
             }
         }
 
-        public override void RefreshData(BoundingBox extent, double resolution, ChangeType changeType)
+        public override void RefreshData(MRect extent, double resolution, ChangeType changeType)
         {
             OnDataChanged(new DataChangedEventArgs());
         }

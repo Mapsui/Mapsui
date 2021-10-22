@@ -10,8 +10,8 @@ namespace Mapsui.Samples.CustomWidget
         public VerticalAlignment VerticalAlignment { get; set; }
         public float MarginX { get; set; } = 20;
         public float MarginY { get; set; } = 20;
-        public BoundingBox Envelope { get; set; }
-        public bool HandleWidgetTouched(INavigator navigator, Point position)
+        public MRect Envelope { get; set; }
+        public bool HandleWidgetTouched(INavigator navigator, MPoint position)
         {
             navigator.CenterOn(0, 0);
             return true;

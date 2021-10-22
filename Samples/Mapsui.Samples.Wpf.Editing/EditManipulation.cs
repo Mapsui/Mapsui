@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
+using Mapsui.Extensions;
 using Mapsui.Samples.Wpf.Editing.Editing;
-using Mapsui.Geometries;
 using Mapsui.UI.Wpf;
 
 namespace Mapsui.Samples.Wpf.Editing
@@ -17,12 +17,12 @@ namespace Mapsui.Samples.Wpf.Editing
 
     public class EditManipulation
     {
-        private Point _mouseDownPosition;
+        private MPoint _mouseDownPosition;
         private bool _inDoubleClick;
 
         public static int MinPixelsMovedForDrag { get; set; } = 4;
 
-        public bool Manipulate(MouseState mouseState, Point screenPosition,
+        public bool Manipulate(MouseState mouseState, MPoint screenPosition,
             EditManager editManager, MapControl mapControl)
         {
             switch (mouseState)
@@ -53,7 +53,7 @@ namespace Mapsui.Samples.Wpf.Editing
                             return editManager.TryInsertVertex(
                                 mapControl.GetMapInfo(screenPosition, editManager.VertexRadius));
                         }
-                        return editManager.AddVertex(mapControl.Viewport.ScreenToWorld(screenPosition));
+                        return editManager.AddVertex(mapControl.Viewport.ScreenToWorld(screenPosition).ToPoint());
                     }
                     return false;
                 case MouseState.Down:
@@ -80,11 +80,11 @@ namespace Mapsui.Samples.Wpf.Editing
                 {
                     var args = mapControl.GetMapInfo(screenPosition);
                     if (editManager.EditMode == EditMode.Modify)
-                        return editManager.Dragging(args.WorldPosition);
+                        return editManager.Dragging(args.WorldPosition.ToPoint());
                     if (editManager.EditMode == EditMode.Rotate)
-                        return editManager.Rotating(args.WorldPosition);
+                        return editManager.Rotating(args.WorldPosition.ToPoint());
                     if (editManager.EditMode == EditMode.Scale)
-                        return editManager.Scaling(args.WorldPosition);
+                        return editManager.Scaling(args.WorldPosition.ToPoint());
 
                         return false;
                 }
@@ -106,7 +106,7 @@ namespace Mapsui.Samples.Wpf.Editing
             return Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift);
         }
 
-        private static bool IsClick(Point screenPosition, Point mouseDownScreenPosition)
+        private static bool IsClick(MPoint screenPosition, MPoint mouseDownScreenPosition)
         {
 	        if (mouseDownScreenPosition == null || screenPosition == null)
 		        return false;

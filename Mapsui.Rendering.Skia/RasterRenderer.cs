@@ -88,8 +88,8 @@ namespace Mapsui.Rendering.Skia
 
         private static BoundingBox WorldToScreen(IReadOnlyViewport viewport, BoundingBox boundingBox)
         {
-            var first = viewport.WorldToScreen(boundingBox.Min);
-            var second = viewport.WorldToScreen(boundingBox.Max);
+            var first = viewport.WorldToScreen(boundingBox.Min.X, boundingBox.Min.Y);
+            var second = viewport.WorldToScreen(boundingBox.Max.X, boundingBox.Max.Y);
             return new BoundingBox
             (
                 Math.Min(first.X, second.X),

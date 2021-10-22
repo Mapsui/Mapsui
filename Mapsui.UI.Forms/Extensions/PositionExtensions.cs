@@ -7,11 +7,11 @@
         /// </summary>
         /// <param name="point">Point in Mapsui format</param>
         /// <returns>Position in Xamarin.Forms.Maps format</returns>
-        public static Position ToForms(this Geometries.Point point)
+        public static Position ToForms(this MPoint point)
         {
-            var latLon = Projection.SphericalMercator.ToLonLat(point.X, point.Y);
+            var (lat, lon) = Projection.SphericalMercator.ToLonLat(point.X, point.Y);
 
-            return new Position(latLon.Y, latLon.X);
+            return new Position(lat, lon);
         }
     }
 }

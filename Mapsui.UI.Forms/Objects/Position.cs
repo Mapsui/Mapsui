@@ -1,4 +1,5 @@
 ﻿using System;
+using Mapsui.Geometries;
 
 namespace Mapsui.UI.Forms
 {
@@ -42,9 +43,16 @@ namespace Mapsui.UI.Forms
         /// Convert Xamarin.Forms.Maps.Position to Mapsui.Geometries.Point
         /// </summary>
         /// <returns>Position in Mapsui format</returns>
-        public Mapsui.Geometries.Point ToMapsui()
+        public MPoint ToMapsui()
         {
-            return Mapsui.Projection.SphericalMercator.FromLonLat(Longitude, Latitude);
+            var (x, y) = Projection.SphericalMercator.FromLonLat(Longitude, Latitude);
+            return new MPoint(x, y);
+        }
+
+        public Point ToPoint()
+        {
+            var (x, y) = Projection.SphericalMercator.FromLonLat(Longitude, Latitude);
+            return new Point(x, y);
         }
 
         public override bool Equals(object obj)

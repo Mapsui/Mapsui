@@ -1,5 +1,4 @@
-﻿using Mapsui.Geometries;
-using Mapsui.Rendering.Skia.Extensions;
+﻿using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Widgets;
 using Mapsui.Widgets.Zoom;
 using SkiaSharp;
@@ -65,9 +64,9 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
 
             // Perhaps we should resize the Envelop about half of stroke, because of Skia rendering have of line outside
             if (zoomInOut.Orientation == Orientation.Vertical)
-                zoomInOut.Envelope = new BoundingBox(posX, posY, posX + rect.Width, posY + rect.Width * 2 - Stroke);
+                zoomInOut.Envelope = new MRect(posX, posY, posX + rect.Width, posY + rect.Width * 2 - Stroke);
             else
-                zoomInOut.Envelope = new BoundingBox(posX, posY, posX + rect.Width * 2 - Stroke, posY + rect.Width);
+                zoomInOut.Envelope = new MRect(posX, posY, posX + rect.Width * 2 - Stroke, posY + rect.Width);
         }
 
         private static SKPaint CreatePaint(SKColor color, float strokeWidth, SKPaintStyle style)
