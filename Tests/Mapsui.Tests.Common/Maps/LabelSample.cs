@@ -23,7 +23,7 @@ namespace Mapsui.Tests.Common.Maps
             var map = new Map
             {
                 BackColor = Color.Transparent,
-                Home = n => n.NavigateTo(new Point(100, 100), 1)
+                Home = n => n.NavigateTo(new MPoint(100, 100), 1)
             };
             map.Layers.Add(new MemoryLayer
             {

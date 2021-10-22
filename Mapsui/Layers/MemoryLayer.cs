@@ -1,6 +1,7 @@
-using Mapsui.Geometries;
 using Mapsui.Providers;
 using System.Collections.Generic;
+using Mapsui.Extensions;
+using Mapsui.Fetcher;
 using Mapsui.Styles;
 
 namespace Mapsui.Layers
@@ -18,21 +19,34 @@ namespace Mapsui.Layers
         /// <summary>
         /// Create layer with name
         /// </summary>
-        /// <param name="layername">Name to use for layer</param>
-        public MemoryLayer(string layername) : base(layername) { }
+        /// <param name="layerName">Name to use for layer</param>
+        public MemoryLayer(string layerName) : base(layerName) { }
 
         public IProvider<IFeature> DataSource { get; set; }
 
-        public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        // Unlike other Layers the MemoryLayer has a CRS field. This is because the 
+        // MemoryLayer calls its provider from the GetFeatures method instead of the 
+        // RefreshData method. The GetFeatures arguments do not have a CRS argument.
+        // This field allows a workaround for when transformation is needed.
+        public string CRS { get; set; }
+
+        public override IEnumerable<IFeature> GetFeatures(MRect box, double resolution)
         {
             // Safeguard in case BoundingBox is null, most likely due to no features in layer
             if (box == null) { return new List<IFeature>(); }
 
-            var biggerBox = box.Grow(SymbolStyle.DefaultWidth * 2 * resolution, SymbolStyle.DefaultHeight * 2 * resolution);
-            return DataSource.GetFeaturesInView(biggerBox, resolution);
+            var fetchInfo = new FetchInfo
+            {
+                Extent = box.Grow(
+                    SymbolStyle.DefaultWidth * 2 * resolution,
+                    SymbolStyle.DefaultHeight * 2 * resolution),
+                Resolution = resolution,
+                CRS = CRS
+            };
+            return DataSource.GetFeatures(fetchInfo);
         }
 
-        public override void RefreshData(BoundingBox extent, double resolution, ChangeType changeType)
+        public override void RefreshData(FetchInfo fetchInfo)
         {
             // RefreshData needs no implementation for the MemoryLayer. Calling OnDataChanged here
             // would trigger an extra needless render iteration.
@@ -40,6 +54,6 @@ namespace Mapsui.Layers
             // DataHasChanged should be called.
         }
 
-        public override BoundingBox Envelope => DataSource?.GetExtents();
+        public override MRect Envelope => DataSource?.GetExtent().ToMRect();
     }
 }

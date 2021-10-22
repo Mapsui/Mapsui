@@ -1,16 +1,15 @@
 using Mapsui.Fetcher;
-using Mapsui.Geometries;
 using Mapsui.Providers;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Mapsui.Extensions;
 
 namespace Mapsui.Layers
 {
     public class AnimatedPointLayer : BaseLayer
     {
         private readonly IProvider<IGeometryFeature> _dataSource;
-        private BoundingBox _extent;
-        private double _resolution;
+        private FetchInfo _fetchInfo;
         private readonly AnimatedFeatures _animatedFeatures = new();
 
         public AnimatedPointLayer(IProvider<IGeometryFeature> dataSource)
@@ -21,26 +20,26 @@ namespace Mapsui.Layers
 
         public void UpdateData()
         {
-            if (_extent == null) return;
+            if (_fetchInfo == null) return;
             if (_dataSource == null) return;
 
             Task.Factory.StartNew(() =>
             {
-                _animatedFeatures.AddFeatures(_dataSource.GetFeaturesInView(_extent, _resolution));
+                _animatedFeatures.AddFeatures(_dataSource.GetFeatures(_fetchInfo));
                 OnDataChanged(new DataChangedEventArgs());
             });
         }
 
-        public override BoundingBox Envelope => _dataSource?.GetExtents();
+        public override MRect Envelope => _dataSource?.GetExtent().ToMRect();
 
-        public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox extent, double resolution)
+        public override IEnumerable<IFeature> GetFeatures(MRect extent, double resolution)
         {
             return _animatedFeatures.GetFeatures();
         }
-        public override void RefreshData(BoundingBox extent, double resolution, ChangeType changeType)
+
+        public override void RefreshData(FetchInfo fetchInfo)
         {
-            _extent = extent;
-            _resolution = resolution;
+            _fetchInfo = fetchInfo;
         }
     }
 }

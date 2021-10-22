@@ -30,6 +30,10 @@ using SkiaSharp.Views.Maui.Controls;
 using Rectangle = Microsoft.Maui.Graphics.Rectangle;
 #else
 using Mapsui.UI.Forms.Extensions;
+using Mapsui.Extensions;
+using Mapsui.Fetcher;
+using Mapsui.Providers;
+using Mapsui.Widgets.ButtonWidget;
 using Xamarin.Forms;
 using SkiaSharp.Views.Forms;
 #endif
@@ -711,7 +715,15 @@ namespace Mapsui.UI.Forms
 
         private void HandlerPinPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Map.RefreshData(Viewport.Extent, Viewport.Resolution, ChangeType.Continuous);
+            var fetchInfo = new FetchInfo
+            {
+                Extent = Viewport.Extent,
+                Resolution = Viewport.Resolution,
+                CRS = Map.CRS,
+                ChangeType = ChangeType.Continuous
+            };
+
+            Map.RefreshData(fetchInfo);
 
             // Repaint map, because something could have changed
             RefreshGraphics();
@@ -719,7 +731,15 @@ namespace Mapsui.UI.Forms
 
         private void HandlerDrawablePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Map.RefreshData(Viewport.Extent, Viewport.Resolution, ChangeType.Continuous);
+            var fetchInfo = new FetchInfo
+            {
+                Extent = Viewport.Extent,
+                Resolution = Viewport.Resolution,
+                CRS = Map.CRS,
+                ChangeType = ChangeType.Continuous
+            };
+
+            Map.RefreshData(fetchInfo);
 
             // Repaint map, because something could have changed
             RefreshGraphics();
@@ -770,7 +790,7 @@ namespace Mapsui.UI.Forms
             if (layer.MinVisible > Viewport.Resolution) return drawables;
             if (layer.MaxVisible < Viewport.Resolution) return drawables;
 
-            if (layer.GetFeaturesInView(layer.Envelope, Viewport.Resolution) is
+            if (layer.GetFeatures(layer.Envelope, Viewport.Resolution) is
                 IEnumerable<IGeometryFeature> allFeatures)
             {
                 // Now check all features, if they are clicked and clickable
@@ -800,21 +820,21 @@ namespace Mapsui.UI.Forms
 
             if (IsZoomButtonVisible && _mapZoomInButton != null && _mapZoomOutButton != null)
             {
-                _mapZoomInButton.Envelope = new Geometries.BoundingBox(newX, newY, newX + ButtonSize, newY + ButtonSize);
+                _mapZoomInButton.Envelope = new MRect(newX, newY, newX + ButtonSize, newY + ButtonSize);
                 newY += ButtonSize;
-                _mapZoomOutButton.Envelope = new Geometries.BoundingBox(newX, newY, newX + ButtonSize, newY + ButtonSize);
+                _mapZoomOutButton.Envelope = new MRect(newX, newY, newX + ButtonSize, newY + ButtonSize);
                 newY += ButtonSize + ButtonSpacing;
             }
 
             if (IsMyLocationButtonVisible && _mapMyLocationButton != null)
             {
-                _mapMyLocationButton.Envelope = new Geometries.BoundingBox(newX, newY, newX + ButtonSize, newY + ButtonSize);
+                _mapMyLocationButton.Envelope = new MRect(newX, newY, newX + ButtonSize, newY + ButtonSize);
                 newY += ButtonSize + ButtonSpacing;
             }
 
             if (IsNorthingButtonVisible && _mapNorthingButton != null)
             {
-                _mapNorthingButton.Envelope = new Geometries.BoundingBox(newX, newY, newX + ButtonSize, newY + ButtonSize);
+                _mapNorthingButton.Envelope = new MRect(newX, newY, newX + ButtonSize, newY + ButtonSize);
             }
 
             RefreshGraphics();
@@ -863,7 +883,7 @@ namespace Mapsui.UI.Forms
             var result = new ButtonWidget
             {
                 Picture = picture,
-                Envelope = new Geometries.BoundingBox(x, y, x + ButtonSize, y + ButtonSize),
+                Envelope = new MRect(x, y, x + ButtonSize, y + ButtonSize),
                 Rotation = 0,
                 Enabled = true,
             };

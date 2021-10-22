@@ -22,11 +22,10 @@ namespace Mapsui.Layers
         private readonly object _syncLock = new();
         private bool _busy;
         private Viewport _currentViewport;
-        private BoundingBox _extent;
         private bool _modified;
         private IEnumerable<IFeature> _previousFeatures;
         private IRenderer _rasterizer;
-        private double _resolution;
+        private FetchInfo _fetchInfo;
         public Delayer Delayer { get; } = new();
         private readonly Delayer _rasterizeDelayer = new();
 
@@ -69,15 +68,15 @@ namespace Mapsui.Layers
             Delayer.MillisecondsToWait = delayBeforeRasterize;
         }
 
-        public override BoundingBox Envelope => _layer.Envelope;
+        public override MRect Envelope => _layer.Envelope;
 
         public ILayer ChildLayer => _layer;
 
         private void LayerOnDataChanged(object sender, DataChangedEventArgs dataChangedEventArgs)
         {
             if (!Enabled) return;
-            if (MinVisible > _resolution) return;
-            if (MaxVisible < _resolution) return;
+            if (MinVisible > _fetchInfo.Resolution) return;
+            if (MaxVisible < _fetchInfo.Resolution) return;
             if (_busy) return;
 
             _modified = true;
@@ -97,9 +96,10 @@ namespace Mapsui.Layers
             {
                 try
                 {
-                    if (double.IsNaN(_resolution) || _resolution <= 0) return;
-                    if (_extent.Width <= 0 || _extent.Height <= 0) return;
-                    var viewport = CreateViewport(_extent, _resolution, _renderResolutionMultiplier, _overscan);
+                    if (_fetchInfo == null) return;
+                    if (double.IsNaN(_fetchInfo.Resolution) || _fetchInfo.Resolution <= 0) return;
+                    if (_fetchInfo.Extent.Width <= 0 || _fetchInfo.Extent.Height <= 0) return;
+                    var viewport = CreateViewport(_fetchInfo.Extent, _fetchInfo.Resolution, _renderResolutionMultiplier, _overscan);
 
                     _currentViewport = viewport;
 
@@ -112,7 +112,7 @@ namespace Mapsui.Layers
                     {
                         _cache.Clear();
                         var features = new IGeometryFeature[1];
-                        features[0] = new Feature {Geometry = new Raster(bitmapStream, viewport.Extent)};
+                        features[0] = new Feature {Geometry = new Raster(bitmapStream, viewport.Extent.ToBoundingBox())};
                         _cache.PushRange(features);
 #if DEBUG
                         Logger.Log(LogLevel.Debug, $"Memory after rasterizing layer {GC.GetTotalMemory(true):N0}");
@@ -121,7 +121,7 @@ namespace Mapsui.Layers
                         OnDataChanged(new DataChangedEventArgs());
                     }
 
-                    if (_modified) Delayer.ExecuteDelayed(() => _layer.RefreshData(_extent.Copy(), _resolution, ChangeType.Discrete));
+                    if (_modified) Delayer.ExecuteDelayed(() => _layer.RefreshData(_fetchInfo));
                 }
                 finally
                 {
@@ -157,7 +157,7 @@ namespace Mapsui.Layers
 
         public static double SymbolSize { get; set; } = 64;
 
-        public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        public override IEnumerable<IFeature> GetFeatures(MRect box, double resolution)
         {
             if (box == null) throw new ArgumentNullException(nameof(box));
 
@@ -166,7 +166,7 @@ namespace Mapsui.Layers
             // Use a larger extent so that symbols partially outside of the extent are included
             var grownBox = box.Grow(resolution * SymbolSize * 0.5);
 
-            return features.Where(f => f.Geometry != null && f.Geometry.BoundingBox.Intersects(grownBox)).ToList();
+            return features.Where(f => f.Geometry != null && f.Geometry.BoundingBox.Intersects(grownBox.ToBoundingBox())).ToList();
         }
 
         public void AbortFetch()
@@ -174,13 +174,13 @@ namespace Mapsui.Layers
             if (_layer is IAsyncDataFetcher asyncLayer) asyncLayer.AbortFetch();
         }
 
-        public override void RefreshData(BoundingBox extent, double resolution, ChangeType changeType)
+        public override void RefreshData(FetchInfo fetchInfo)
         {
-            var newViewport = CreateViewport(extent, resolution, _renderResolutionMultiplier, 1);
+            var newViewport = CreateViewport(fetchInfo.Extent, fetchInfo.Resolution, _renderResolutionMultiplier, 1);
 
             if (!Enabled) return;
-            if (MinVisible > resolution) return;
-            if (MaxVisible < resolution) return;
+            if (MinVisible > fetchInfo.Resolution) return;
+            if (MaxVisible < fetchInfo.Resolution) return;
 
             if (!_onlyRerasterizeIfOutsideOverscan ||
                 (_currentViewport == null) ||
@@ -188,10 +188,12 @@ namespace Mapsui.Layers
                 (_currentViewport.Resolution != newViewport.Resolution) ||
                 !_currentViewport.Extent.Contains(newViewport.Extent))
             {
-                _extent = extent;
-                _resolution = resolution;
+                _fetchInfo = new FetchInfo(fetchInfo)
+                {
+                    ChangeType = ChangeType.Discrete
+                };
                 if (_layer is IAsyncDataFetcher)
-                    Delayer.ExecuteDelayed(() => _layer.RefreshData(extent.Copy(), resolution, changeType));
+                    Delayer.ExecuteDelayed(() => _layer.RefreshData(_fetchInfo));
                 else
                     Delayer.ExecuteDelayed(Rasterize);
             }
@@ -202,7 +204,7 @@ namespace Mapsui.Layers
             if (_layer is IAsyncDataFetcher asyncLayer) asyncLayer.ClearCache();
         }
 
-        private static Viewport CreateViewport(BoundingBox extent, double resolution, double renderResolutionMultiplier,
+        private static Viewport CreateViewport(MRect extent, double resolution, double renderResolutionMultiplier,
             double overscan)
         {
             var renderResolution = resolution / renderResolutionMultiplier;

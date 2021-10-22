@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -15,24 +16,28 @@ namespace Mapsui.Tests.Fetcher
         public void TestFeatureFetcherDelay()
         {
             // arrange
-            var extent = new BoundingBox(0, 0, 10, 10);
+            var extent = new MRect(0, 0, 10, 10);
             var layer = new Layer();
             layer.DataSource = new MemoryProvider<IGeometryFeature>(GenerateRandomPoints(extent, 25));
             layer.Delayer.MillisecondsToWait = 0;
 
             var notifications = new List<bool>();
-            layer.PropertyChanged += (sender, args) =>
+            layer.PropertyChanged += (_, args) =>
             {
                 if (args.PropertyName == nameof(Layer.Busy))
                 {
                     notifications.Add(layer.Busy);
                 }
             };
+            var fetchInfo = new FetchInfo
+            {
+                Extent = extent,
+                Resolution = 1,
+                ChangeType = ChangeType.Discrete
+            };
 
             // act
-            layer.RefreshData(extent, 1, ChangeType.Discrete);
-
-
+            layer.RefreshData(fetchInfo);
 
             // assert
             Task.Run(() => 
@@ -46,7 +51,7 @@ namespace Mapsui.Tests.Fetcher
             Assert.IsFalse(notifications[1]);
         }
 
-        private static IEnumerable<IGeometry> GenerateRandomPoints(BoundingBox envelope, int count)
+        private static IEnumerable<IGeometry> GenerateRandomPoints(MRect envelope, int count)
         {
             var random = new Random();
             var result = new List<IGeometry>();

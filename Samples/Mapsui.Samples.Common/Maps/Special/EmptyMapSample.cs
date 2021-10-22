@@ -17,7 +17,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new Map
             {
-                Home = n => n.NavigateTo(new BoundingBox(-180, -90, 180, 90))
+                Home = n => n.NavigateTo(new MRect(-180, -90, 180, 90))
             };
         }
     }

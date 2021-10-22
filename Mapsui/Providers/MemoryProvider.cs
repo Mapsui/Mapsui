@@ -19,6 +19,7 @@ using Mapsui.Geometries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Mapsui.Fetcher;
 using Mapsui.Geometries.WellKnownBinary;
 using Mapsui.Geometries.WellKnownText;
 
@@ -58,15 +59,14 @@ namespace Mapsui.Providers
         /// <summary>
         /// The spatial reference ID (CRS)
         /// </summary>
-        public string CRS { get; set; }
+        public string CRS { get; set; } = "";
 
         BoundingBox _boundingBox;
 
         public MemoryProvider()
         {
-            CRS = "";
             Features = new List<IGeometryFeature>();
-            _boundingBox = GetExtents(Features);
+            _boundingBox = GetExtent(Features);
         }
 
         /// <summary>
@@ -75,9 +75,8 @@ namespace Mapsui.Providers
         /// <param name="geometries">Set of geometries that this data source should contain</param>
         public MemoryProvider(IEnumerable<IGeometry> geometries)
         {
-            CRS = "";
             Features = geometries.Select(g => new Feature { Geometry = g }).ToList();
-            _boundingBox = GetExtents(Features);
+            _boundingBox = GetExtent(Features);
         }
 
         /// <summary>
@@ -86,9 +85,8 @@ namespace Mapsui.Providers
         /// <param name="feature">Feature to be in this dataSource</param>
         public MemoryProvider(IGeometryFeature feature)
         {
-            CRS = "";
             Features = new List<IGeometryFeature> { feature };
-            _boundingBox = GetExtents(Features);
+            _boundingBox = GetExtent(Features);
         }
 
         /// <summary>
@@ -106,9 +104,8 @@ namespace Mapsui.Providers
         /// <param name="features">Features to be included in this dataSource</param>
         public MemoryProvider(IEnumerable<IGeometryFeature> features)
         {
-            CRS = "";
             Features = features.ToList();
-            _boundingBox = GetExtents(Features);
+            _boundingBox = GetExtent(Features);
         }
 
         /// <summary>
@@ -117,8 +114,6 @@ namespace Mapsui.Providers
         /// <param name="geometry">Geometry to be in this dataSource</param>
         public MemoryProvider(Geometry geometry)
         {
-            CRS = "";
-
             Features = new List<IGeometryFeature>
             {
                 new Feature
@@ -126,7 +121,7 @@ namespace Mapsui.Providers
                     Geometry = geometry
                 }
             };
-            _boundingBox = GetExtents(Features);
+            _boundingBox = GetExtent(Features);
         }
 
         /// <summary>
@@ -137,14 +132,16 @@ namespace Mapsui.Providers
         {
         }
 
-        public virtual IEnumerable<T> GetFeaturesInView(BoundingBox box, double resolution)
+        public virtual IEnumerable<T> GetFeatures(FetchInfo fetchInfo)
         {
-            if (box == null) throw new ArgumentNullException(nameof(box));
+            if (fetchInfo == null) throw new ArgumentNullException(nameof(fetchInfo));
+            if (fetchInfo.Extent == null) throw new ArgumentNullException(nameof(fetchInfo.Extent));
 
             var features = Features.ToList();
 
+            fetchInfo = new FetchInfo(fetchInfo);
             // Use a larger extent so that symbols partially outside of the extent are included
-            var grownBox = box.Grow(resolution * SymbolSize * 0.5);
+            var grownBox = fetchInfo.Extent.Grow(fetchInfo.Resolution * SymbolSize * 0.5);
             var grownFeatures = features.Where(f => f != null && f.BoundingBox.Intersects(grownBox));
             return (IEnumerable<T>) grownFeatures.ToList(); // Why do I need to cast if T is constrained to IFeature?
         }
@@ -159,12 +156,12 @@ namespace Mapsui.Providers
         /// BoundingBox of data set
         /// </summary>
         /// <returns>BoundingBox</returns>
-        public BoundingBox GetExtents()
+        public BoundingBox GetExtent()
         {
             return _boundingBox;
         }
 
-        private static BoundingBox GetExtents(IReadOnlyList<IGeometryFeature> features)
+        private static BoundingBox GetExtent(IReadOnlyList<IGeometryFeature> features)
         {
             BoundingBox box = null;
             foreach (var feature in features)
@@ -181,12 +178,5 @@ namespace Mapsui.Providers
         {
             Features = new List<IGeometryFeature>();
         }
-
-        public void ReplaceFeatures(IEnumerable<IGeometryFeature> features)
-        {
-            Features = features.ToList();
-            _boundingBox = GetExtents(Features);
-        }
-
     }
 }

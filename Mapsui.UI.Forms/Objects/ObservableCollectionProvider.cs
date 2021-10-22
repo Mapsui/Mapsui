@@ -2,12 +2,14 @@
 using Mapsui.Providers;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Mapsui.Extensions;
+using Mapsui.Fetcher;
 
 namespace Mapsui.UI.Objects
 {
-    public class ObservableCollectionProvider<T, U> : IProvider<U> where T : IFeatureProvider where U : IFeature
+    public class ObservableCollectionProvider<T, TU> : IProvider<TU> where T : IFeatureProvider where TU : IFeature
     {
-        private object _syncRoot = new object();
+        private readonly object _syncRoot = new();
 
         public ObservableCollection<T> Collection { get; }
 
@@ -18,9 +20,9 @@ namespace Mapsui.UI.Objects
             Collection = collection;
         }
 
-        public IEnumerable<U> GetFeaturesInView(BoundingBox box, double resolution)
+        public IEnumerable<TU> GetFeatures(FetchInfo fetchInfo)
         {
-            var list = new List<U>();
+            var list = new List<TU>();
 
             if (Collection == null || Collection.Count == 0)
                 return list;
@@ -29,20 +31,20 @@ namespace Mapsui.UI.Objects
             {
                 foreach (T item in Collection)
                 {
-                    if (box.Intersects(item.Feature.BoundingBox))
-                        list.Add((U)item.Feature);
+                    if (fetchInfo.Extent.Intersects(item.Feature.BoundingBox))
+                        list.Add((TU)item.Feature);
                 }
             }
 
             return list;
         }
 
-        public BoundingBox GetExtents()
+        public BoundingBox GetExtent()
         {
             if (Collection == null || Collection.Count == 0)
                 return null;
 
-            BoundingBox extents = null;
+            BoundingBox extent = null;
 
             lock (_syncRoot)
             {
@@ -52,16 +54,16 @@ namespace Mapsui.UI.Objects
                     {
                         if (item.Feature.BoundingBox != null)
                         {
-                            if (extents == null)
-                                extents = new BoundingBox(item.Feature.BoundingBox);
+                            if (extent == null)
+                                extent = new BoundingBox(item.Feature.BoundingBox.ToBoundingBox());
                             else
-                                extents = extents.Join(item.Feature.BoundingBox);
+                                extent = extent.Join(item.Feature.BoundingBox.ToBoundingBox());
                         }
                     }
                 }
             }
 
-            return extents;
+            return extent;
         }
     }
 }

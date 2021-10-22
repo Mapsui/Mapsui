@@ -6,15 +6,13 @@ using BruTile;
 using BruTile.Cache;
 using ConcurrentCollections;
 using Mapsui.Extensions;
-using Mapsui.Geometries;
 using Mapsui.Providers;
 
 namespace Mapsui.Fetcher
 {
     class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
     {
-        private BoundingBox _extent;
-        private double _resolution;
+        private FetchInfo  _fetchInfo;
         private readonly object _lockRoot = new();
         private bool _busy;
         private bool _viewportIsModified;
@@ -43,12 +41,11 @@ namespace Mapsui.Fetcher
         public event PropertyChangedEventHandler PropertyChanged;
         public int NumberTilesNeeded { get; private set; }
 
-        public void SetViewport(BoundingBox extent, double resolution)
+        public void SetViewport(FetchInfo fetchInfo)
         {
             lock (_lockRoot)
             {
-                _extent = extent;
-                _resolution = resolution;
+                _fetchInfo = fetchInfo;
                 Busy = true;
                 _viewportIsModified = true;
             }
@@ -140,8 +137,8 @@ namespace Mapsui.Fetcher
 
         private void UpdateTilesToFetchForViewportChange()
         {
-            var levelId = BruTile.Utilities.GetNearestLevel(_tileSchema.Resolutions, _resolution);
-            var tilesToCoverViewport = _dataFetchStrategy.Get(_tileSchema, _extent.ToExtent(), levelId);
+            var levelId = BruTile.Utilities.GetNearestLevel(_tileSchema.Resolutions, _fetchInfo.Resolution);
+            var tilesToCoverViewport = _dataFetchStrategy.Get(_tileSchema, _fetchInfo.Extent.ToExtent(), levelId);
             NumberTilesNeeded = tilesToCoverViewport.Count;
             var tilesToFetch = tilesToCoverViewport.Where(t => _tileCache.Find(t.Index) == null && !_tilesInProgress.Contains(t.Index));
             _tilesToFetch.Clear();

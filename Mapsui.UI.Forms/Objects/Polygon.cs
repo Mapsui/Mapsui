@@ -81,10 +81,10 @@ namespace Mapsui.UI.Forms
             switch (propertyName)
             {
                 case nameof(Positions):
-                    ((Mapsui.Geometries.Polygon)Feature.Geometry).ExteriorRing = new LinearRing(Positions.Select(p => p.ToMapsui()).ToList());
+                    ((Geometries.Polygon)Feature.Geometry).ExteriorRing = new LinearRing(Positions.Select(p => p.ToPoint()).ToList());
                     break;
                 case nameof(Holes):
-                    ((Mapsui.Geometries.Polygon)Feature.Geometry).InteriorRings = Holes.Select(h => new LinearRing(h.Select(p => p.ToMapsui()).ToList())).ToList();
+                    ((Geometries.Polygon)Feature.Geometry).InteriorRings = Holes.Select(h => new LinearRing(h.Select(p => p.ToPoint()).ToList())).ToList();
                     break;
                 case nameof(FillColor):
                     ((VectorStyle)Feature.Styles.First()).Fill = new Styles.Brush(FillColor.ToMapsui());

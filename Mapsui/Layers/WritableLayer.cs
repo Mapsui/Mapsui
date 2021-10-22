@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ConcurrentCollections;
+using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Providers;
@@ -13,19 +14,19 @@ namespace Mapsui.Layers
     {
         private readonly ConcurrentHashSet<IGeometryFeature> _cache = new();
 
-        public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        public override IEnumerable<IFeature> GetFeatures(MRect box, double resolution)
         {
-            // Safeguard in case BoundingBox is null, most likely due to no features in layer
+            // Safeguard in case MRect is null, most likely due to no features in layer
             if (box == null) { return new List<IFeature>(); }
             var cache = _cache;
             var biggerBox = box.Grow(SymbolStyle.DefaultWidth * 2 * resolution, SymbolStyle.DefaultHeight * 2 * resolution);
-            var result = cache.Where(f => biggerBox.Intersects(f.Geometry?.BoundingBox));
+            var result = cache.Where(f => biggerBox.Intersects(f.Geometry?.BoundingBox.ToMRect()));
             return result;
         }
 
-        private BoundingBox GetExtents()
+        private MRect GetExtent()
         {
-            // todo: Calculate extents only once. Use a _modified field to determine when this is needed.
+            // todo: Calculate extent only once. Use a _modified field to determine when this is needed.
 
             var geometries = _cache
                 .Select(f => f.Geometry)
@@ -39,12 +40,12 @@ namespace Mapsui.Layers
             var maxX = geometries.Max(g => g.BoundingBox.MaxX);
             var maxY = geometries.Max(g => g.BoundingBox.MaxY);
 
-            return new BoundingBox(minX, minY, maxX, maxY);
+            return new BoundingBox(minX, minY, maxX, maxY).ToMRect();
         }
 
-        public override BoundingBox Envelope => GetExtents();
+        public override MRect Envelope => GetExtent();
 
-        public override void RefreshData(BoundingBox extent, double resolution, ChangeType changeType)
+        public override void RefreshData(FetchInfo fetchInfo)
         {
             //The MemoryLayer always has it's data ready so can fire a DataChanged event immediately so that listeners can act on it.
             OnDataChanged(new DataChangedEventArgs());

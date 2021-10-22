@@ -3,9 +3,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using Mapsui.Extensions;
-using Mapsui.Geometries;
-using Mapsui.Projection;
 using Mapsui.Providers;
 using Mapsui.Styles;
 
@@ -13,37 +10,31 @@ namespace Mapsui.Fetcher
 {
     class FeatureFetchDispatcher<T> : IFetchDispatcher where T : IFeature
     {
-        private BoundingBox _extent;
-        private double _resolution;
-        private readonly object _lockRoot = new ();
+        private FetchInfo _fetchInfo;
         private bool _busy;
         private readonly ConcurrentStack<T> _cache;
-        private readonly Transformer _transformer;
         private bool _modified;
 
-        // todo: Check whether busy and modified state are set correctly in all stages
-
-        public FeatureFetchDispatcher(ConcurrentStack<T> cache, Transformer transformer)
+        public FeatureFetchDispatcher(ConcurrentStack<T> cache)
         {
             _cache = cache;
-            _transformer = transformer;
         }
 
         public bool TryTake(ref Action method)
         {
             if (!_modified) return false;
-            if (DataSource == null) return false; 
+            if (DataSource == null) return false;
 
-            method = () => FetchOnThread(_extent.Copy(), _resolution);
+            method = () => FetchOnThread(new FetchInfo(_fetchInfo));
             _modified = false;
             return true;
         }
 
-        public void FetchOnThread(BoundingBox extent, double resolution)
+        public void FetchOnThread(FetchInfo fetchInfo)
         {
             try
             {
-                var features = DataSource.GetFeaturesInView(extent, resolution).ToList();
+                var features = DataSource.GetFeatures(fetchInfo).ToList();
                 FetchCompleted(features, null);
             }
             catch (Exception exception)
@@ -54,38 +45,34 @@ namespace Mapsui.Fetcher
 
         private void FetchCompleted(IEnumerable<T> features, Exception exception)
         {
-            lock (_lockRoot)
+            if (exception == null)
             {
-                if (exception == null)
+                _cache.Clear();
+                if (features.Any())
                 {
-                    _cache.Clear();
-                    if (features.Any())
-                    {
-                        _cache.PushRange(features.ToArray());
-                    }
+                    _cache.PushRange(features.ToArray());
                 }
-                
-                Busy = _modified;
-
-                DataChanged?.Invoke(this, new DataChangedEventArgs(exception, false, null));
             }
+
+            Busy = _modified;
+
+            DataChanged?.Invoke(this, new DataChangedEventArgs(exception, false, null));
         }
 
-        public void SetViewport(BoundingBox extent, double resolution)
+        public void SetViewport(FetchInfo fetchInfo)
         {
-            lock (_lockRoot)
+            // Fetch a bigger extent to include partially visible symbols. 
+            // todo: Take into account the maximum symbol size of the layer
+
+            _fetchInfo = new FetchInfo(fetchInfo)
             {
-                // Fetch a bigger extent to include partially visible symbols. 
-                // todo: Take into account the maximum symbol size of the layer
-                var grownExtent = extent.Grow(
-                    SymbolStyle.DefaultWidth * 2 * resolution,
-                    SymbolStyle.DefaultHeight * 2 * resolution);
-                var transformedExtent = _transformer.TransformBack(grownExtent);
-                _extent = transformedExtent;
-                _resolution = resolution;
-                _modified = true;
-                Busy = true;
-            }
+                Extent = fetchInfo.Extent.Grow(
+                    SymbolStyle.DefaultWidth * 2 * fetchInfo.Resolution,
+                    SymbolStyle.DefaultHeight * 2 * fetchInfo.Resolution)
+            };
+
+            _modified = true;
+            Busy = true;
         }
 
         public IProvider<T> DataSource { get; set; }

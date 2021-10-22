@@ -12,6 +12,8 @@ using Microsoft.Maui;
 using Microsoft.Maui.Controls;
 #else
 using Mapsui.UI.Forms;
+using Mapsui.Extensions;
+using Mapsui.Fetcher;
 using Xamarin.Forms;
 #endif
 
@@ -60,7 +62,7 @@ namespace Mapsui.UI.Objects
             }
         }
 
-        Position myLocation = new Position(0, 0);
+        Position myLocation = new (0, 0);
 
         /// <summary>
         /// Position of location, that is displayed
@@ -151,7 +153,7 @@ namespace Mapsui.UI.Objects
 
             feature = new Feature
             {
-                Geometry = myLocation.ToMapsui(),
+                Geometry = myLocation.ToMapsui().ToPoint(),
                 ["Label"] = "MyLocation moving",
             };
 
@@ -168,7 +170,7 @@ namespace Mapsui.UI.Objects
 
             featureDir = new Feature
             {
-                Geometry = myLocation.ToMapsui(),
+                Geometry = myLocation.ToMapsui().ToPoint(),
                 ["Label"] = "My view direction",
             };
 
@@ -218,8 +220,15 @@ namespace Mapsui.UI.Objects
                             mapView.Refresh();
                     }, 0.0, 1.0);
 
+                    var fetchInfo = new FetchInfo
+                    {
+                        Extent = mapView.Viewport.Extent,
+                        Resolution = mapView.Viewport.Resolution,
+                        CRS = mapView.Map.CRS,
+                        ChangeType = ChangeType.Discrete
+                    };
                     // At the end, update viewport
-                    animation.Commit(mapView, animationMyLocationName, 100, 3000, finished: (s, v) => mapView.Map.RefreshData(mapView.Viewport.Extent, mapView.Viewport.Resolution, ChangeType.Discrete));
+                    animation.Commit(mapView, animationMyLocationName, 100, 3000, finished: (s, v) => mapView.Map.RefreshData(fetchInfo));
                 }
                 else
                 {
@@ -367,8 +376,8 @@ namespace Mapsui.UI.Objects
             if (!myLocation.Equals(newLocation))
             {
                 myLocation = newLocation;
-                feature.Geometry = myLocation.ToMapsui();
-                featureDir.Geometry = myLocation.ToMapsui();
+                feature.Geometry = myLocation.ToPoint();
+                featureDir.Geometry = myLocation.ToPoint();
                 modified = true;
             }
 

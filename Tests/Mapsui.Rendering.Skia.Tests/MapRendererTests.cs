@@ -16,7 +16,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = VectorStyleSample.CreateMap();
-            var viewport = new Viewport {Center = new Point(100, 100), Width = 200, Height = 200, Resolution = 1};
+            var viewport = new Viewport {Center = new MPoint(100, 100), Width = 200, Height = 200, Resolution = 1};
             const string fileName = "vector_symbol.png";
 
             // act
@@ -36,7 +36,7 @@ namespace Mapsui.Rendering.Skia.Tests
             var map = BitmapSymbolSample.CreateMap();
             var viewport = new Viewport
             {
-                Center = new Point(100, 100),
+                Center = new MPoint(100, 100),
                 Width = 200,
                 Height = 200,
                 Resolution = 1
@@ -60,7 +60,7 @@ namespace Mapsui.Rendering.Skia.Tests
             var map = SvgSymbolSample.CreateMap();
             var viewport = new Viewport
             {
-                Center = new Point(100, 100),
+                Center = new MPoint(100, 100),
                 Width = 200,
                 Height = 200,
                 Resolution = 1
@@ -84,7 +84,7 @@ namespace Mapsui.Rendering.Skia.Tests
             var map = BitmapSample.CreateMap();
             var viewport = new Viewport
             {
-                Center = new Point(256, 200),
+                Center = new MPoint(256, 200),
                 Width = 512,
                 Height = 400,
                 Resolution = 1
@@ -109,7 +109,7 @@ namespace Mapsui.Rendering.Skia.Tests
             var map = BitmapSymbolWithRotationAndOffsetSample.CreateMap();
             var viewport = new Viewport
             {
-                Center = new Point(80, 80),
+                Center = new MPoint(80, 80),
                 Width = 200,
                 Height = 200,
                 Resolution = 1
@@ -136,7 +136,7 @@ namespace Mapsui.Rendering.Skia.Tests
 
             var viewport = new Viewport
             {
-                Center = new Point(0, 0),
+                Center = new MPoint(0, 0),
                 Width = 200,
                 Height = 200,
                 Resolution = 0.5
@@ -157,7 +157,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = PointInWorldUnits.CreateMap();
-            var viewport = new Viewport {Center = new Point(0, 0), Width = 200, Height = 100, Resolution = 0.5};
+            var viewport = new Viewport {Center = new MPoint(0, 0), Width = 200, Height = 100, Resolution = 0.5};
             const string fileName = "vector_symbol_unittype.png";
 
             // act
@@ -177,7 +177,7 @@ namespace Mapsui.Rendering.Skia.Tests
             var map = PolygonSample.CreateMap();
             var viewport = new Viewport
             {
-                Center = new Point(0, 0),
+                Center = new MPoint(0, 0),
                 Width = 600,
                 Height = 400,
                 Resolution = 63000
@@ -201,7 +201,7 @@ namespace Mapsui.Rendering.Skia.Tests
             var map = LineSample.CreateMap();
             var viewport = new Viewport
             {
-                Center = new Point(0, 0),
+                Center = new MPoint(0, 0),
                 Width = 600,
                 Height = 400,
                 Resolution = 63000
@@ -225,7 +225,7 @@ namespace Mapsui.Rendering.Skia.Tests
             var map = TilesSample.CreateMap();
             var viewport = new Viewport
             {
-                Center = new Point(-7641856, 4804912),
+                Center = new MPoint(-7641856, 4804912),
                 Width = 600,
                 Height = 400,
                 Resolution = 51116
@@ -249,7 +249,7 @@ namespace Mapsui.Rendering.Skia.Tests
             var map = LabelSample.CreateMap();
             var viewport = new Viewport
             {
-                Center = new Point(100, 100),
+                Center = new MPoint(100, 100),
                 Width = 200,
                 Height = 200,
                 Resolution = 1

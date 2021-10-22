@@ -6,6 +6,8 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using Mapsui.Extensions;
+using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Logging;
 using Mapsui.Utilities;
@@ -88,7 +90,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             set { _crs = value; }
         }
 
-        public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {
             //If there are no layers (probably not initialised) return nothing
             if (ArcGisDynamicCapabilities.layers == null)
@@ -96,7 +98,9 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
 
             var features = new List<IGeometryFeature>();
             IRaster raster = null;
-            IViewport viewport = new Viewport { Resolution = resolution, Center = box.Centroid, Width = (box.Width / resolution), Height = (box.Height / resolution) };
+
+            IViewport viewport = fetchInfo.ToViewport();
+            
             if (TryGetMap(viewport, ref raster))
             {
                 var feature = new Feature
@@ -108,7 +112,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             return features;
         }
 
-        public BoundingBox GetExtents()
+        public BoundingBox GetExtent()
         {
             return new BoundingBox(ArcGisDynamicCapabilities.initialExtent.xmin, ArcGisDynamicCapabilities.initialExtent.ymin, ArcGisDynamicCapabilities.initialExtent.xmax, ArcGisDynamicCapabilities.initialExtent.ymax);
         }
@@ -146,7 +150,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
                 return false;
             }
            
-            var uri = new Uri(GetRequestUrl(viewport.Extent, width, height));
+            var uri = new Uri(GetRequestUrl(viewport.Extent.ToBoundingBox(), width, height));
             var handler = new HttpClientHandler { Credentials = Credentials ?? CredentialCache.DefaultCredentials };
             var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(_timeOut) };
            
@@ -154,7 +158,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             {
                 var response = client.GetAsync(uri).Result;
                 var bytes = BruTile.Utilities.ReadFully(response.Content.ReadAsStreamAsync().Result);
-                raster = new Raster(new MemoryStream(bytes), viewport.Extent);
+                raster = new Raster(new MemoryStream(bytes), viewport.Extent.ToBoundingBox());
                 response.Dispose();
                 return true;
             }

@@ -25,6 +25,7 @@ using Mapsui.Geometries;
 using System.IO;
 using System.Threading.Tasks;
 using Mapsui.Extensions;
+using Mapsui.Fetcher;
 using Mapsui.Logging;
 
 namespace Mapsui.Providers
@@ -35,7 +36,7 @@ namespace Mapsui.Providers
         readonly MemoryCache<byte[]> _bitmaps = new(100, 200);
         readonly List<TileIndex> _queue = new();
 
-        public BoundingBox GetExtents()
+        public BoundingBox GetExtent()
         {
             return _source.Schema.Extent.ToBoundingBox();
         }
@@ -47,10 +48,11 @@ namespace Mapsui.Providers
             _source = tileSource;
         }
 
-        public IEnumerable<IFeature> FetchTiles(BoundingBox boundingBox, double resolution)
+        public IEnumerable<IFeature> FetchTiles(FetchInfo fetchInfo)
         {
-            var extent = new Extent(boundingBox.Min.X, boundingBox.Min.Y, boundingBox.Max.X, boundingBox.Max.Y);
-            var levelId = BruTile.Utilities.GetNearestLevel(_source.Schema.Resolutions, resolution);
+            var box = fetchInfo.Extent;
+            var extent = new Extent(box.Min.X, box.Min.Y, box.Max.X, box.Max.Y);
+            var levelId = BruTile.Utilities.GetNearestLevel(_source.Schema.Resolutions, fetchInfo.Resolution);
             var infos = _source.Schema.GetTileInfos(extent, levelId).ToList();
 
             ICollection<WaitHandle> waitHandles = new List<WaitHandle>();
@@ -107,9 +109,9 @@ namespace Mapsui.Providers
             }
         }
 
-        public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {
-            return FetchTiles(box, resolution);
+            return FetchTiles(fetchInfo);
         }
     }
 }

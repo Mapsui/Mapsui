@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.Styles;
 
@@ -44,7 +45,7 @@ namespace Mapsui.Providers
 
         public IEnumerable<string> Fields => _dictionary.Keys;
 
-        public BoundingBox BoundingBox => Geometry.BoundingBox;
+        public MRect BoundingBox => Geometry.BoundingBox.ToMRect();
 
         public void Dispose()
         {

@@ -55,7 +55,7 @@ namespace Mapsui.Geometries
         ///     Create a new point by a douuble[] array
         /// </summary>
         /// <param name="point"></param>
-        public Point(double[] point)
+        public Point(params double[] point)
         {
             if (point.Length != 2)
                 throw new Exception("Only 2 dimensions are supported for points");

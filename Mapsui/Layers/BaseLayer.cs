@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using Mapsui.Fetcher;
-using Mapsui.Geometries;
-using Mapsui.Projection;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.Widgets;
@@ -15,19 +13,14 @@ namespace Mapsui.Layers
     {
         private static int _instanceCounter;
         private bool _busy;
-        private string _crs;
         private bool _enabled;
-        private bool _exclusive;
         private string _name;
         private double _maxVisible;
         private double _minVisible;
         private double _opacity;
         private IStyle _style;
         private object _tag;
-        private ITransformation _transformation;
-        private BoundingBox _envelope;
-
-        public Transformer Transformer { get; } = new();
+        private MRect _envelope;
 
         /// <summary>
         /// Get a layer's styles
@@ -135,29 +128,6 @@ namespace Mapsui.Layers
         }
 
         /// <inheritdoc />
-        public string CRS
-        {
-            get => _crs;
-            set
-            {
-                _crs = value;
-                Transformer.ToCrs = CRS;
-                OnPropertyChanged(nameof(CRS));
-            }
-        }
-
-        /// <inheritdoc />
-        public bool Exclusive
-        {
-            get => _exclusive;
-            set
-            {
-                _exclusive = value;
-                OnPropertyChanged(nameof(Exclusive));
-            }
-        }
-
-        /// <inheritdoc />
         public double Opacity
         {
             get => _opacity;
@@ -191,23 +161,10 @@ namespace Mapsui.Layers
             }
         }
 
-        /// <inheritdoc />
-        public ITransformation Transformation
-        {
-            get => _transformation;
-            set
-            {
-                _transformation = value;
-                Transformer.Transformation = _transformation;
-                OnPropertyChanged(nameof(Transformation));
-            }
-        }
-
-       
         /// <summary>
         /// Returns the envelope of all available data in the layer
         /// </summary>
-        public virtual BoundingBox Envelope
+        public virtual MRect Envelope
         {
             get => _envelope;
             protected set
@@ -227,21 +184,14 @@ namespace Mapsui.Layers
         public bool IsMapInfoLayer { get; set; }
 
         /// <inheritdoc />
-        public abstract IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution);
+        public abstract IEnumerable<IFeature> GetFeatures(MRect box, double resolution);
 
         /// <inheritdoc />
-
-        public abstract void RefreshData(BoundingBox extent, double resolution, ChangeType changeType);
+        public abstract void RefreshData(FetchInfo fetchInfo);
 
         public void DataHasChanged()
         {
             DataChanged?.Invoke(this, new DataChangedEventArgs());
-        }
-
-        /// <inheritdoc />
-        public virtual bool? IsCrsSupported(string crs)
-        {
-            return null;
         }
 
         public override string ToString()

@@ -48,29 +48,9 @@ namespace Mapsui.Utilities
             throw new Exception($"crs not recognized: '{crs}'");
         }
 
-        public static bool NeedsTransform(ITransformation transformation, string fromCRS, string toCRS)
+        private static bool IsCrsProvided(string fromCRS, string toCRS)
         {
-            return transformation != null && !string.IsNullOrWhiteSpace(fromCRS) && !string.IsNullOrWhiteSpace(toCRS) && fromCRS != toCRS;
-        }
-
-        public static BoundingBox GetTransformedBoundingBox(ITransformation transformatiom, BoundingBox extent, string fromCRS, string toCRS)
-        {
-            if (!IsTransformationNeeded(fromCRS, toCRS))
-                return extent;
-
-            if (!IsProjectionInfoAvailable(transformatiom, fromCRS, toCRS))
-                return null;
-
-            if (IsTransformationSupported(transformatiom, fromCRS, toCRS))
-                return transformatiom.Transform(fromCRS, toCRS, extent);
-
-            return null;
-
-        }
-
-        private static bool IsProjectionInfoAvailable(ITransformation transformation, string fromCRS, string toCRS)
-        {
-            return !string.IsNullOrEmpty(fromCRS) && !string.IsNullOrEmpty(toCRS) && transformation != null;
+            return !string.IsNullOrEmpty(fromCRS) && !string.IsNullOrEmpty(toCRS);
         }
 
         private static bool IsTransformationNeeded(string fromCRS, string toCRS)
@@ -78,30 +58,49 @@ namespace Mapsui.Utilities
            return !fromCRS?.Equals(toCRS) == true;
         }
 
-        private static bool IsTransformationSupported(ITransformation transformation, string fromCRS, string toCRS)
+        private static bool IsTransformationSupported(IGeometryTransformation geometryTransformation, string fromCRS, string toCRS)
         {
-            return transformation.IsProjectionSupported(fromCRS, toCRS) == true;
+            return geometryTransformation.IsProjectionSupported(fromCRS, toCRS) == true;
         }
 
         public static BoundingBox Transform(BoundingBox extent,
-            ITransformation transformation, string fromCRS, string toCRS)
+            IGeometryTransformation geometryTransformation, string fromCRS, string toCRS)
         {
             if (extent == null) return null;
-            if (NeedsTransform(transformation, fromCRS, toCRS))
-                return transformation.Transform(fromCRS, toCRS, extent.Copy());
-            return extent;
+
+            if (!IsTransformationNeeded(fromCRS, toCRS)) return extent;
+
+            if (!IsCrsProvided(fromCRS, toCRS))
+                throw new NotSupportedException($"CRS is not provided. From CRS: {fromCRS}. To CRS {toCRS}");
+
+            if (!IsTransformationSupported(geometryTransformation, fromCRS, toCRS))
+                throw new NotSupportedException($"Transformation is not supported. From CRS: {fromCRS}. To CRS {toCRS}");
+
+            var copiedExtent = extent.Copy();
+            geometryTransformation.Transform(fromCRS, toCRS, copiedExtent);
+            return copiedExtent;
         }
 
-        public static IEnumerable<IFeature> Transform(IEnumerable<IFeature> features,
-            ITransformation transformation, string fromCRS, string toCRS)
+        public static IEnumerable<IGeometryFeature> Transform(IEnumerable<IGeometryFeature> features,
+            IGeometryTransformation geometryTransformation, string fromCRS, string toCRS)
         {
-            if (!NeedsTransform(transformation, fromCRS, toCRS)) return features;
+            if (features == null) return null;
 
-            var copiedFeatures = features.Cast<IGeometryFeature>().Copy().ToList();
-            foreach (var feature in copiedFeatures)
+            if (!IsTransformationNeeded(fromCRS, toCRS)) return features;
+
+            if (!IsCrsProvided(fromCRS, toCRS))
+                throw new NotSupportedException($"CRS is not provided. From CRS: {fromCRS}. To CRS {toCRS}");
+
+            if (!IsTransformationSupported(geometryTransformation, fromCRS, toCRS))
+                throw new NotSupportedException($"Transformation is not supported. From CRS: {fromCRS}. To CRS {toCRS}");
+
+            var copiedFeatures = features.Copy().ToList();
+            foreach (var copiedFeature in copiedFeatures)
             {
-                if (feature.Geometry is Raster) continue;
-                feature.Geometry = transformation.Transform(fromCRS, toCRS, feature.Geometry.Copy());
+                if (copiedFeature.Geometry is Raster) continue;
+                var copiedGeometry = copiedFeature.Geometry.Copy();
+                geometryTransformation.Transform(fromCRS, toCRS, copiedGeometry);
+                copiedFeature.Geometry = copiedGeometry;
             }
             return copiedFeatures;
         }

@@ -7,6 +7,7 @@ using Mapsui.Providers;
 using NUnit.Framework;
 using BruTile.Predefined;
 using Mapsui.Extensions;
+using Mapsui.Fetcher;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
 
@@ -16,30 +17,36 @@ namespace Mapsui.Tests.Layers
     public class RasterizingLayerTests
     {
         [Test]
-        //!!![Ignore("This test is hanging")]
         public void TestTimer()
         {
             // arrange
             var layer = new RasterizingLayer(CreatePointLayer());
             var schema = new GlobalSphericalMercator();
-            var box = schema.Extent.ToBoundingBox();
+            var box = schema.Extent.ToMRect();
             var resolution = schema.Resolutions.First().Value.UnitsPerPixel;
             var waitHandle = new AutoResetEvent(false);
             DefaultRendererFactory.Create = () => new MapRenderer(); // Using xaml renderer here to test rasterizer. Suboptimal. 
-            
-            Assert.AreEqual(0, layer.GetFeaturesInView(box, resolution).Count());
-            layer.DataChanged += (sender, args) =>
+
+            Assert.AreEqual(0, layer.GetFeatures(box, resolution).Count());
+            layer.DataChanged += (_, _) =>
             {
                 // assert
                 waitHandle.Set();
             };
 
+            var fetchInfo = new FetchInfo
+            {
+                Extent = box,
+                Resolution = resolution,
+                ChangeType = ChangeType.Discrete
+            };
+
             // act
-            layer.RefreshData(box, resolution, ChangeType.Discrete);
+            layer.RefreshData(fetchInfo);
 
             // assert
             waitHandle.WaitOne();
-            Assert.AreEqual(layer.GetFeaturesInView(box, resolution).Count(), 1);
+            Assert.AreEqual(layer.GetFeatures(box, resolution).Count(), 1);
         }
 
         private static MemoryLayer CreatePointLayer()

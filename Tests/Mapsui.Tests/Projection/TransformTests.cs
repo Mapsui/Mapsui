@@ -1,6 +1,8 @@
 ﻿using Mapsui.Projection;
 using NUnit.Framework;
 using System.Linq;
+using Mapsui.Extensions;
+using Mapsui.Geometries;
 using Mapsui.Geometries.WellKnownText;
 
 namespace Mapsui.Tests.Projection
@@ -40,14 +42,21 @@ namespace Mapsui.Tests.Projection
         public void AllVerticesTransformTest()
         {
             // arrange
-            var geomety = GeometryFromWKT.Parse("MULTIPOLYGON (((40 40, 20 45, 45 30, 40 40)), ((20 35, 10 30, 10 10, 30 5, 45 20, 20 35), (30 20, 20 15, 20 25, 30 20)))");
-            var transformation = new MinimalTransformation();
+            var multiPolygon = (MultiPolygon)GeometryFromWKT.Parse("MULTIPOLYGON (((40 40, 20 45, 45 30, 40 40)), ((20 35, 10 30, 10 10, 30 5, 45 20, 20 35), (30 20, 20 15, 20 25, 30 20)))");
+            var copiedMultiPolygon = multiPolygon.Copy();
+            var transformation = new GeometryTransformation();
 
             // act
-            var enumeration = transformation.Transform("EPSG:4326", "EPSG:3857", geomety);
+            transformation.Transform("EPSG:4326", "EPSG:3857", copiedMultiPolygon);
 
             // assert
-            Assert.AreEqual(14, enumeration.AllVertices().Count());
+            var vertices = multiPolygon.AllVertices().ToList();
+            var copiedVertices = copiedMultiPolygon.AllVertices().ToList();
+            for (var i = 0; i < vertices.Count; i++)
+            {
+                Assert.AreNotEqual(vertices[i].X, copiedVertices[i].X);
+                Assert.AreNotEqual(vertices[i].Y, copiedVertices[i].Y);
+            }
         }
     }
 }

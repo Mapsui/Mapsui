@@ -1,4 +1,3 @@
-using Mapsui.Geometries;
 using Mapsui.Providers;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,21 +7,20 @@ namespace Mapsui.Fetcher
 {
     class FeatureFetcher
     {
-        private readonly BoundingBox _extent;
-        private readonly double _resolution;
+        private readonly FetchInfo _fetchInfo;
         private readonly DataArrivedDelegate _dataArrived;
         private readonly IProvider<IFeature> _provider;
         private readonly long _timeOfRequest;
 
         internal delegate void DataArrivedDelegate(IEnumerable<IFeature> features, object state = null);
 
-        public FeatureFetcher(BoundingBox extent, double resolution, IProvider<IFeature> provider, DataArrivedDelegate dataArrived, long timeOfRequest = default)
+        public FeatureFetcher(FetchInfo fetchInfo, IProvider<IFeature> provider, DataArrivedDelegate dataArrived, long timeOfRequest = default)
         {
             _dataArrived = dataArrived;
-            var biggerBox = extent.Grow(SymbolStyle.DefaultWidth * 2 * resolution, SymbolStyle.DefaultHeight * 2 * resolution);
-            _extent = biggerBox;
+            _fetchInfo = fetchInfo;
+            var biggerBox = _fetchInfo.Extent.Grow(SymbolStyle.DefaultWidth * 2 * fetchInfo.Resolution, SymbolStyle.DefaultHeight * 2 * fetchInfo.Resolution);
+            _fetchInfo.Extent = biggerBox;
             _provider = provider;
-            _resolution = resolution;
             _timeOfRequest = timeOfRequest;
         }
 
@@ -30,7 +28,7 @@ namespace Mapsui.Fetcher
         {
             lock (_provider)
             {
-                var features = _provider.GetFeaturesInView(_extent, _resolution).ToList();
+                var features = _provider.GetFeatures(_fetchInfo).ToList();
                 _dataArrived?.Invoke(features, _timeOfRequest);
             }
         }

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Projection;
 using Mapsui.Providers;
-using Mapsui.Rendering.Skia;
 using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Utilities;
@@ -62,7 +62,7 @@ namespace Mapsui.Samples.Common.Maps.Callouts
             {
                 var feature = new Feature();
                 var point = SphericalMercator.FromLonLat(c.Lng, c.Lat);
-                feature.Geometry = point;
+                feature.Geometry =new Point(point.x, point.y);
                 feature["name"] = c.Name;
                 feature["country"] = c.Country;
 

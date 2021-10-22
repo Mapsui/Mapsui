@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Geometries.Utilities;
 using System.Threading.Tasks;
+using Mapsui.Fetcher;
 #if __MAUI__
 using Mapsui.UI.Maui.Extensions;
 using Microsoft.Maui;
@@ -42,10 +43,10 @@ namespace Mapsui.UI.Forms
         class TouchEvent
         {
             public long Id { get; }
-            public Geometries.Point Location { get; }
+            public MPoint Location { get; }
             public long Tick { get; }
 
-            public TouchEvent(long id, Geometries.Point screenPosition, long tick)
+            public TouchEvent(long id, MPoint screenPosition, long tick)
             {
                 Id = id;
                 Location = screenPosition;
@@ -70,15 +71,15 @@ namespace Mapsui.UI.Forms
         /// </summary>
         private const int touchSlop = 8;
 
-        protected readonly bool _initialized = false;
+        protected readonly bool _initialized;
 
         private double _innerRotation;
-        private ConcurrentDictionary<long, TouchEvent> _touches = new ConcurrentDictionary<long, TouchEvent>();
-        private Geometries.Point _firstTouch;
+        private ConcurrentDictionary<long, TouchEvent> _touches = new();
+        private MPoint _firstTouch;
         private bool _waitingForDoubleTap;
-        private int _numOfTaps = 0;
-        private readonly FlingTracker _flingTracker = new FlingTracker();
-        private Geometries.Point _previousCenter;
+        private int _numOfTaps;
+        private readonly FlingTracker _flingTracker = new();
+        private MPoint _previousCenter;
 
         /// <summary>
         /// Saver for angle before last pinch movement
@@ -339,7 +340,7 @@ namespace Mapsui.UI.Forms
         {
             if (_firstTouch == null) { return false; }
             if (releasedTouch.Location == null) { return false; }
-            return _firstTouch == null ? false : Algorithms.Distance(releasedTouch.Location, _firstTouch) < touchSlop;
+            return _firstTouch != null && Utilities.Algorithms.Distance(releasedTouch.Location, _firstTouch) < touchSlop;
         }
 
         void OnGLPaintSurface(object sender, SKPaintGLSurfaceEventArgs args)
@@ -371,9 +372,9 @@ namespace Mapsui.UI.Forms
             CommonDrawControl(canvas);
         }
 
-        private Geometries.Point GetScreenPosition(SKPoint point)
+        private MPoint GetScreenPosition(SKPoint point)
         {
-            return new Geometries.Point(point.X / PixelDensity, point.Y / PixelDensity);
+            return new MPoint(point.X / PixelDensity, point.Y / PixelDensity);
         }
 
         /// <summary>
@@ -457,7 +458,7 @@ namespace Mapsui.UI.Forms
         /// Called, when map should zoom out
         /// </summary>
         /// <param name="screenPosition">Center of zoom out event</param>
-        private bool OnZoomOut(Geometries.Point screenPosition)
+        private bool OnZoomOut(MPoint screenPosition)
         {
             if (Map.ZoomLock)
             {
@@ -481,7 +482,7 @@ namespace Mapsui.UI.Forms
         /// Called, when map should zoom in
         /// </summary>
         /// <param name="screenPosition">Center of zoom in event</param>
-        private bool OnZoomIn(Geometries.Point screenPosition)
+        private bool OnZoomIn(MPoint screenPosition)
         {
             if (Map.ZoomLock)
             {
@@ -505,7 +506,7 @@ namespace Mapsui.UI.Forms
         /// Called, when mouse/finger/pen hovers around
         /// </summary>
         /// <param name="screenPosition">Actual position of mouse/finger/pen</param>
-        private bool OnHovered(Geometries.Point screenPosition)
+        private bool OnHovered(MPoint screenPosition)
         {
             var args = new HoveredEventArgs(screenPosition);
 
@@ -557,7 +558,7 @@ namespace Mapsui.UI.Forms
         /// Called, when mouse/finger/pen click/touch map
         /// </summary>
         /// <param name="touchPoints">List of all touched points</param>
-        private bool OnTouchStart(List<Geometries.Point> touchPoints)
+        private bool OnTouchStart(List<MPoint> touchPoints)
         {
             // Sanity check
             if (touchPoints.Count == 0)
@@ -593,7 +594,7 @@ namespace Mapsui.UI.Forms
         /// </summary>
         /// <param name="touchPoints">List of all touched points</param>
         /// <param name="releasedPoint">Released point, which was touched before</param>
-        private bool OnTouchEnd(List<Geometries.Point> touchPoints, Geometries.Point releasedPoint)
+        private bool OnTouchEnd(List<MPoint> touchPoints, MPoint releasedPoint)
         {
             var args = new TouchedEventArgs(touchPoints);
 
@@ -603,7 +604,14 @@ namespace Mapsui.UI.Forms
             if (touchPoints.Count == 0)
             {
                 _mode = TouchMode.None;
-                _map.RefreshData(_viewport.Extent, _viewport.Resolution, ChangeType.Discrete);
+                var fetchInfo = new FetchInfo
+                {
+                    Extent = _viewport.Extent,
+                    Resolution = _viewport.Resolution,
+                    CRS = Map.CRS,
+                    ChangeType = ChangeType.Discrete
+                };
+                _map.RefreshData(fetchInfo);
             }
 
             return args.Handled;
@@ -613,7 +621,7 @@ namespace Mapsui.UI.Forms
         /// Called when touch enters map
         /// </summary>
         /// <param name="touchPoints">List of all touched points</param>
-        private bool OnTouchEntered(List<Geometries.Point> touchPoints)
+        private bool OnTouchEntered(List<MPoint> touchPoints)
         {
             // Sanity check
             if (touchPoints.Count == 0)
@@ -637,7 +645,7 @@ namespace Mapsui.UI.Forms
         /// </summary>
         /// <param name="touchPoints">List of all touched points</param>
         /// <param name="releasedPoint">Released point, which was touched before</param>
-        private bool OnTouchExited(List<Geometries.Point> touchPoints, Geometries.Point releasedPoint)
+        private bool OnTouchExited(List<MPoint> touchPoints, MPoint releasedPoint)
         {
             var args = new TouchedEventArgs(touchPoints);
 
@@ -647,7 +655,14 @@ namespace Mapsui.UI.Forms
             if (touchPoints.Count == 0)
             {
                 _mode = TouchMode.None;
-                _map.RefreshData(_viewport.Extent, _viewport.Resolution, ChangeType.Discrete);
+                var fetchInfo = new FetchInfo
+                {
+                    Extent = _viewport.Extent,
+                    Resolution = _viewport.Resolution,
+                    CRS = Map.CRS,
+                    ChangeType = ChangeType.Discrete
+                };
+                _map.RefreshData(fetchInfo);
             }
 
             return args.Handled;
@@ -657,7 +672,7 @@ namespace Mapsui.UI.Forms
         /// Called, when mouse/finger/pen moves over map
         /// </summary>
         /// <param name="touchPoints">List of all touched points</param>
-        private bool OnTouchMove(List<Geometries.Point> touchPoints)
+        private bool OnTouchMove(List<MPoint> touchPoints)
         {
             var args = new TouchedEventArgs(touchPoints);
 
@@ -675,7 +690,7 @@ namespace Mapsui.UI.Forms
 
                         var touchPosition = touchPoints.First();
 
-                        if (!Map.PanLock && _previousCenter != null && !_previousCenter.IsEmpty())
+                        if (!Map.PanLock && _previousCenter != null)
                         {
                             _viewport.Transform(touchPosition, _previousCenter);
 
@@ -734,7 +749,7 @@ namespace Mapsui.UI.Forms
         /// <param name="screenPosition">First clicked/touched position on screen</param>
         /// <param name="numOfTaps">Number of taps on map (2 is a double click/tap)</param>
         /// <returns>True, if the event is handled</returns>
-        private bool OnDoubleTapped(Geometries.Point screenPosition, int numOfTaps)
+        private bool OnDoubleTapped(MPoint screenPosition, int numOfTaps)
         {
             var args = new TappedEventArgs(screenPosition, numOfTaps);
 
@@ -757,7 +772,7 @@ namespace Mapsui.UI.Forms
         /// </summary>
         /// <param name="screenPosition">Clicked/touched position on screen</param>
         /// <returns>True, if the event is handled</returns>
-        private bool OnSingleTapped(Geometries.Point screenPosition)
+        private bool OnSingleTapped(MPoint screenPosition)
         {
             var args = new TappedEventArgs(screenPosition, 1);
 
@@ -780,7 +795,7 @@ namespace Mapsui.UI.Forms
         /// </summary>
         /// <param name="screenPosition">Clicked/touched position on screen</param>
         /// <returns>True, if the event is handled</returns>
-        private bool OnLongTapped(Geometries.Point screenPosition)
+        private bool OnLongTapped(MPoint screenPosition)
         {
             var args = new TappedEventArgs(screenPosition, 1);
 
@@ -789,7 +804,7 @@ namespace Mapsui.UI.Forms
             return args.Handled;
         }
 
-        private static (Geometries.Point centre, double radius, double angle) GetPinchValues(List<Geometries.Point> locations)
+        private static (MPoint centre, double radius, double angle) GetPinchValues(List<MPoint> locations)
         {
             if (locations.Count < 2)
                 throw new ArgumentException();
@@ -810,7 +825,7 @@ namespace Mapsui.UI.Forms
 
             var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
 
-            return (new Geometries.Point(centerX, centerY), radius, angle);
+            return (new MPoint(centerX, centerY), radius, angle);
         }
 
         /// <summary>

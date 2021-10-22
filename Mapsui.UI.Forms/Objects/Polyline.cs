@@ -64,7 +64,7 @@ namespace Mapsui.UI.Forms
             switch (propertyName)
             {
                 case nameof(Positions):
-                    Feature.Geometry = new LineString(Positions.Select(p => p.ToMapsui()).ToList());
+                    Feature.Geometry = new LineString(Positions.Select(p => p.ToPoint()).ToList());
                     break;
             }
         }
@@ -88,7 +88,7 @@ namespace Mapsui.UI.Forms
                     // Create a new one
                     Feature = new Feature
                     {
-                        Geometry = new LineString(Positions.Select(p => p.ToMapsui()).ToList()),
+                        Geometry = new LineString(Positions.Select(p => p.ToPoint()).ToList()),
                         ["Label"] = Label,
                     };
                     Feature.Styles.Clear();

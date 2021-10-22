@@ -1,4 +1,5 @@
 ﻿using System;
+using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Styles;
@@ -11,8 +12,8 @@ namespace Mapsui.Rendering.Skia
         public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, IGeometryFeature feature, 
             IGeometry geometry, SymbolCache symbolCache, float opacity)
         {
-            var point = geometry as Point;
-            var destination = viewport.WorldToScreen(point);
+            var point = (Point)geometry;
+            var destination = viewport.WorldToScreen(point.X, point.Y).ToPoint();
 
             if (style is CalloutStyle calloutStyle)
             {

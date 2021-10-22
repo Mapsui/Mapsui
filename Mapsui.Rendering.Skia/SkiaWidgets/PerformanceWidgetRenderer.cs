@@ -13,7 +13,7 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
         readonly string[] _textHeader = { "Last", "Mean", "Frames", "Min", "Max", "Count", "Dropped" };
         readonly string[] _text = new string[7];
         SKRect _rect;
-        readonly Geometries.BoundingBox _envelope;
+        readonly MRect _envelope;
 
         /// <summary>
         /// Renderer for PerformanceWidget
@@ -37,7 +37,7 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
 
             _rect = new SKRect(x, y, x + width + 4, y + _textHeader.Length * (textSize + 2) - 2 + 4);
 
-            _envelope = new Geometries.BoundingBox(_rect.Left, _rect.Top, _rect.Right, _rect.Bottom);
+            _envelope = new MRect(_rect.Left, _rect.Top, _rect.Right, _rect.Bottom);
         }
 
         public void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IWidget widget, float layerOpacity)

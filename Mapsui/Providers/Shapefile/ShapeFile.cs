@@ -21,6 +21,8 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using Mapsui.Extensions;
+using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Providers.Shapefile.Indexing;
 
@@ -460,10 +462,10 @@ namespace Mapsui.Providers.Shapefile
         }
 
         /// <summary>
-        /// Returns the extents of the data source
+        /// Returns the extent of the data source
         /// </summary>
         /// <returns></returns>
-        public BoundingBox GetExtents()
+        public BoundingBox GetExtent()
         {
             lock (_syncRoot)
             {
@@ -859,7 +861,7 @@ namespace Mapsui.Providers.Shapefile
         }
 
         
-        public IEnumerable<IGeometryFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        public IEnumerable<IGeometryFeature> GetFeatures(FetchInfo fetchInfo)
         {
             lock (_syncRoot)
             {
@@ -867,7 +869,7 @@ namespace Mapsui.Providers.Shapefile
                 try
                 {
                     //Use the spatial index to get a list of features whose BoundingBox intersects bbox
-                    var objectList = GetObjectIDsInViewPrivate(box);
+                    var objectList = GetObjectIDsInViewPrivate(fetchInfo.Extent.ToBoundingBox());
                     var features = new List<IGeometryFeature>();
 
                     foreach (var index in objectList)
@@ -875,7 +877,7 @@ namespace Mapsui.Providers.Shapefile
                         var feature = _dbaseFile.GetFeature(index, features);
                         feature.Geometry = ReadGeometry(index);
                         if (feature.Geometry == null) continue;
-                        if (!feature.Geometry.BoundingBox.Intersects(box)) continue;
+                        if (!feature.Geometry.BoundingBox.Intersects(fetchInfo.Extent.ToBoundingBox())) continue;
                         if (FilterDelegate != null && !FilterDelegate(feature)) continue;
                         features.Add(feature);
                     }

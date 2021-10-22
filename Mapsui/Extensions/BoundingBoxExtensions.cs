@@ -24,5 +24,11 @@ namespace Mapsui.Extensions
         {
             return new Extent(boundingBox.MinX, boundingBox.MinY, boundingBox.MaxX, boundingBox.MaxY);
         }
+
+        public static MRect ToMRect(this BoundingBox boundingBox)
+        {
+            if (boundingBox == null) return null;
+            return new MRect(boundingBox.MinX, boundingBox.MinY, boundingBox.MaxX, boundingBox.MaxY);
+        }
     }
 }

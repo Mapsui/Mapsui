@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
@@ -29,15 +30,15 @@ namespace Mapsui.Providers
 
         private readonly Pen _rectangleLine;
 
-        public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {
-            var features = _provider.GetFeaturesInView(box, resolution);
-            return GetFeaturesInView(resolution, _labelStyle, features, _rectangleLine, _rectangleFill);
+            var features = _provider.GetFeatures(fetchInfo);
+            return GetFeaturesInView(fetchInfo.Resolution, _labelStyle, features, _rectangleLine, _rectangleFill);
         }
 
-        public BoundingBox GetExtents()
+        public BoundingBox GetExtent()
         {
-            return _provider.GetExtents();
+            return _provider.GetExtent();
         }
 
         private static List<Feature> GetFeaturesInView(double resolution, LabelStyle labelStyle,

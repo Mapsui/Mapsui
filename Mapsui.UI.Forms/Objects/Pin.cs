@@ -383,7 +383,7 @@ namespace Mapsui.UI.Forms
                 case nameof(Position):
                     if (Feature != null)
                     {
-                        Feature.Geometry = Position.ToMapsui();
+                        Feature.Geometry = Position.ToPoint();
                         _callout.Feature.Geometry = Feature.Geometry;
                     }
                     break;
@@ -449,11 +449,11 @@ namespace Mapsui.UI.Forms
                     // Create a new one
                     Feature = new Feature
                     {
-                        Geometry = Position.ToMapsui(),
+                        Geometry = Position.ToPoint(),
                         ["Label"] = Label,
                     };
                     if (_callout != null)
-                        _callout.Feature.Geometry = Position.ToMapsui();
+                        _callout.Feature.Geometry = Position.ToPoint();
                 }
                 // Check for bitmapId
                 if (_bitmapId != -1)

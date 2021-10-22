@@ -2,10 +2,10 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Projection;
 using Mapsui.Providers;
-using Mapsui.Rendering.Skia;
 using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Utilities;
@@ -69,8 +69,7 @@ namespace Mapsui.Samples.Common.Maps.Callouts
             return cities.Select(c =>
             {
                 var feature = new Feature();
-                var point = SphericalMercator.FromLonLat(c.Lng, c.Lat);
-                feature.Geometry = point;
+                feature.Geometry = SphericalMercator.FromLonLat(c.Lng, c.Lat).ToMPoint().ToPoint();
                 feature["name"] = c.Name;
                 feature["country"] = c.Country;
                 var calloutStyle = CreateCalloutStyle(c.Name);

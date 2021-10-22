@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Mapsui.Samples.Common.Maps;
+using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.UI;
 #if __MAUI__
 using Mapsui.UI.Maui;

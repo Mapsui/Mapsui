@@ -12,14 +12,14 @@ namespace Mapsui.UI.Forms.Extensions
         /// </summary>
         /// <param name="point">Point in Mapsui format</param>
         /// <returns>Position in Xamarin.Forms.Maps format</returns>
-        public static Position ToMaui(this Geometries.Point point)
+        public static Position ToMaui(this MPoint point)
 #else
         /// <summary>
         /// Convert Mapsui.Geometries.Point to Xamarin.Forms.Maps.Position
         /// </summary>
         /// <param name="point">Point in Mapsui format</param>
         /// <returns>Position in Xamarin.Forms.Maps format</returns>
-        public static Position ToForms(this Geometries.Point point)
+        public static Position ToForms(this MPoint point)
 #endif
         {
             return point.ToNative();
@@ -27,8 +27,8 @@ namespace Mapsui.UI.Forms.Extensions
 
         public static Position ToNative(this Geometries.Point point)
         {
-            var latLon = Projection.SphericalMercator.ToLonLat(point.X, point.Y);
-            return new Position(latLon.Y, latLon.X);
+            var (lat, lon) = Projection.SphericalMercator.ToLonLat(point.X, point.Y);
+            return new Position(lat, lon);
         }
     }
 }

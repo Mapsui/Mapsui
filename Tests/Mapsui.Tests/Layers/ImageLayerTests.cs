@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using Mapsui.Extensions;
+using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -17,12 +18,12 @@ namespace Mapsui.Tests.Layers
         class FakeProvider : IProvider<IGeometryFeature>
         {
             public string CRS { get; set; }
-            public IEnumerable<IGeometryFeature> GetFeaturesInView(BoundingBox box, double resolution)
+            public IEnumerable<IGeometryFeature> GetFeatures(FetchInfo fetchInfo)
             {
                 throw new Exception(ExceptionMessage);
             }
 
-            public BoundingBox GetExtents()
+            public BoundingBox GetExtent()
             {
                 return new BoundingBox(-1, -1, 0, 0);
             }
@@ -39,14 +40,21 @@ namespace Mapsui.Tests.Layers
             var waitHandle = new AutoResetEvent(false);
             Exception exception = null;
 
-            imageLayer.DataChanged += (sender, args) =>
+            imageLayer.DataChanged += (_, args) =>
             {
                 exception = args.Error;
                 waitHandle.Go();
             };
 
+            var fetchInfo = new FetchInfo
+            {
+                Extent = new MRect(-1, -1, 0, 0), 
+                Resolution = 1, 
+                ChangeType = ChangeType.Discrete
+            };
+
             // act
-            map.RefreshData(new BoundingBox(-1, -1, 0, 0), 1, ChangeType.Discrete);
+            map.RefreshData(fetchInfo);
 
             // assert
             waitHandle.WaitOne();

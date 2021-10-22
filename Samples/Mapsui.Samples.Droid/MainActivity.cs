@@ -157,7 +157,7 @@ namespace Mapsui.Samples.Droid
                 // var screenPositionInPixels = args.MapInfo.ScreenPosition;
 
                 // Or position on feature position: 
-                var screenPosition = _mapControl.Viewport.WorldToScreen(geometryFeature.Geometry.BoundingBox.Centroid);
+                var screenPosition = _mapControl.Viewport.WorldToScreen(geometryFeature.Geometry.BoundingBox.Centroid.ToMPoint());
                 var screenPositionInPixels = _mapControl.ToPixels(screenPosition);
 
                 _popup.SetX((float) screenPositionInPixels.X);
