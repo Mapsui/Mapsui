@@ -19,10 +19,10 @@ namespace Mapsui.Tests.Layers
             writableLayer.Add(new Feature { Geometry = new Polygon() });
 
             // act
-            var extents = writableLayer.Envelope;
+            var extent = writableLayer.Envelope;
 
             // assert
-            Assert.IsNull(extents);
+            Assert.IsNull(extent);
         }
     }
 }

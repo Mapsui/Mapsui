@@ -24,9 +24,9 @@ namespace Mapsui.Layers
             return result;
         }
 
-        private MRect GetExtents()
+        private MRect GetExtent()
         {
-            // todo: Calculate extents only once. Use a _modified field to determine when this is needed.
+            // todo: Calculate extent only once. Use a _modified field to determine when this is needed.
 
             var geometries = _cache
                 .Select(f => f.Geometry)
@@ -43,7 +43,7 @@ namespace Mapsui.Layers
             return new BoundingBox(minX, minY, maxX, maxY).ToMRect();
         }
 
-        public override MRect Envelope => GetExtents();
+        public override MRect Envelope => GetExtent();
 
         public override void RefreshData(FetchInfo fetchInfo)
         {

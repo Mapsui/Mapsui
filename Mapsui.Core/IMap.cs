@@ -32,9 +32,9 @@ namespace Mapsui
         Color BackColor { get; set; }
 
         /// <summary>
-        /// Gets the extents of the map based on the extents of all the layers in the layers collection
+        /// Gets the extent of the map based on the extent of all the layers in the layers collection
         /// </summary>
-        /// <returns>Full map extents</returns>
+        /// <returns>Full map extent</returns>
         MRect Envelope { get; }
 
         /// <summary>

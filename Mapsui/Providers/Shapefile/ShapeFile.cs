@@ -462,7 +462,7 @@ namespace Mapsui.Providers.Shapefile
         }
 
         /// <summary>
-        /// Returns the extents of the data source
+        /// Returns the extent of the data source
         /// </summary>
         /// <returns></returns>
         public BoundingBox GetExtent()

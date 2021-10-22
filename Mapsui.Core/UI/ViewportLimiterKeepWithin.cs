@@ -11,7 +11,7 @@ namespace Mapsui.UI
     public class ViewportLimiterKeepWithin : IViewportLimiter
     {
         /// <summary>
-        /// Set this property in combination KeepCenterWithinExtents or KeepViewportWithinExtents.
+        /// Sets the limit to which the user can pan the map.
         /// If PanLimits is not set, Map.Extent will be used as restricted extent.
         /// </summary>
         public MRect PanLimits { get; set; }
@@ -75,7 +75,7 @@ namespace Mapsui.UI
             // todo: Figure out if the span check is useful
             // It is possible to specify a combination of PanLimits and ZoomLimits that are 
             // impossible to apply. If the lowest allowed resolution does not fill the 
-            // screen it can never be kept within extents. At some point it was useful
+            // screen it can never be kept within extent. At some point it was useful
             // to add a check for this. This check is not causing problems in case of small
             // rounding errors. I am not sure what the original problem was without the check.
             // I think the map started jumping from side to side when zooming out. Perhaps 

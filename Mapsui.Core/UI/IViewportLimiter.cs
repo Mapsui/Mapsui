@@ -5,7 +5,7 @@ namespace Mapsui.UI
     public interface IViewportLimiter
     {
         /// <summary>
-        /// Set this property in combination KeepCenterWithinExtents or KeepViewportWithinExtents.
+        /// Sets the limit to which the user can pan the map.
         /// If PanLimits is not set, Map.Extent will be used as restricted extent.
         /// </summary>
         MRect PanLimits { get; set; }
