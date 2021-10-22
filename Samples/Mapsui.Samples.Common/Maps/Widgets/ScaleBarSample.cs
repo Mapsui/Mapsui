@@ -22,7 +22,7 @@ namespace Mapsui.Samples.Common.Maps
             var map = new Map
             {
                 CRS = "EPSG:3857",
-                //!!!Transformation = new GeometryTransformation()
+                Transformation = new GeometryTransformation()
             };
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             
