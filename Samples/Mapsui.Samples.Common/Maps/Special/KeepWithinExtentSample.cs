@@ -2,7 +2,7 @@
 using Mapsui.UI;
 using Mapsui.Utilities;
 
-namespace Mapsui.Samples.Common.Maps
+namespace Mapsui.Samples.Common.Maps.Special
 {
     public class KeepWithinExtentSample : ISample
     {
