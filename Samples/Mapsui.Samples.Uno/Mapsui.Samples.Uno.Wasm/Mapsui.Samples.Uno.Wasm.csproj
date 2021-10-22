@@ -49,6 +49,7 @@
     <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="3.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Mapsui.Core\Mapsui.Core.csproj" />
     <ProjectReference Include="..\..\..\Mapsui.Geometries\Mapsui.Geometries.csproj" />
     <ProjectReference Include="..\..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
     <ProjectReference Include="..\..\..\Mapsui.UI.Uno\Mapsui.UI.Uno.csproj" />
