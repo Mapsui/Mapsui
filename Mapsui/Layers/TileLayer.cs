@@ -43,7 +43,7 @@ namespace Mapsui.Layers
         private readonly int _maxExtraTiles;
         private int _numberTilesNeeded;
         private readonly TileFetchDispatcher _tileFetchDispatcher;
-        private readonly BoundingBox _envelope;
+        private readonly MRect _envelope;
 
         /// <summary>
         /// Create tile layer for given tile source
@@ -67,7 +67,7 @@ namespace Mapsui.Layers
             Attribution ??= new Hyperlink();
             Attribution.Text = _tileSource.Attribution?.Text;
             Attribution.Url = _tileSource.Attribution?.Url;
-            _envelope = _tileSource?.Schema?.Extent.ToBoundingBox();
+            _envelope = _tileSource?.Schema?.Extent.ToBoundingBox().ToMRect();
             dataFetchStrategy ??= new DataFetchStrategy(3);
             _renderFetchStrategy = renderFetchStrategy ?? new RenderFetchStrategy();
             _minExtraTiles = minExtraTiles;
@@ -90,14 +90,14 @@ namespace Mapsui.Layers
         public override IReadOnlyList<double> Resolutions => _tileSource?.Schema?.Resolutions.Select(r => r.Value.UnitsPerPixel).ToList();
 
         /// <inheritdoc />
-        public override BoundingBox Envelope => _envelope;
+        public override MRect Envelope => _envelope;
 
         /// <inheritdoc />
-        public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        public override IEnumerable<IFeature> GetFeaturesInView(MRect box, double resolution)
         {
             if (_tileSource?.Schema == null) return Enumerable.Empty<IFeature>();
             UpdateMemoryCacheMinAndMax();
-            return _renderFetchStrategy.Get(box, resolution, _tileSource?.Schema, MemoryCache);
+            return _renderFetchStrategy.Get(box.ToBoundingBox(), resolution, _tileSource?.Schema, MemoryCache);
         }
 
         /// <inheritdoc />
@@ -113,20 +113,15 @@ namespace Mapsui.Layers
         }
 
         /// <inheritdoc />
-        public override void RefreshData(BoundingBox extent, double resolution, ChangeType changeType)
+        public override void RefreshData(MRect extent, double resolution, ChangeType changeType)
         {
             if (Enabled && extent.GetArea() > 0 && _tileFetchDispatcher != null && MaxVisible >= resolution && MinVisible <= resolution)
             {
-                _tileFetchDispatcher.SetViewport(extent, resolution);
+                _tileFetchDispatcher.SetViewport(extent.ToBoundingBox(), resolution);
                 _tileFetchDispatcher.StartFetching();
             }
         }
 
-        /// <inheritdoc />
-        public override bool? IsCrsSupported(string crs)
-        {
-            return (string.Equals(ToSimpleEpsgCode(), crs, StringComparison.CurrentCultureIgnoreCase));
-        }
         private void TileFetchDispatcherOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             if (propertyChangedEventArgs.PropertyName == nameof(Busy))
@@ -148,13 +143,6 @@ namespace Mapsui.Layers
         private void TileFetchDispatcherOnDataChanged(object sender, DataChangedEventArgs e)
         {
             OnDataChanged(e);
-        }
-
-        private string ToSimpleEpsgCode()
-        {
-            var startEpsgCode = _tileSource.Schema.Srs.IndexOf("EPSG:", StringComparison.Ordinal);
-            if (startEpsgCode < 0) return _tileSource.Schema.Srs;
-            return _tileSource.Schema.Srs.Substring(startEpsgCode).Replace("::", ":").Trim();
         }
 
         private Feature ToFeature(TileInfo tileInfo)

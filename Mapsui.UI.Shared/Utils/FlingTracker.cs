@@ -14,7 +14,7 @@ namespace Mapsui.UI.Utils
             events = new Dictionary<long, Queue<(double x, double y, long time)>>();
         }
 
-        public void AddEvent(long id, Geometries.Point location, long ticks)
+        public void AddEvent(long id, MPoint location, long ticks)
         {
             // Save event data
             if (!events.ContainsKey(id))

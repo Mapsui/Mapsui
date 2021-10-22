@@ -164,11 +164,6 @@ namespace Mapsui.UI.Uwp
             };
         }
 
-        [Obsolete("Use Viewport.ViewportChanged", true)]
-#pragma warning disable 67
-        public event EventHandler<ViewChangedEventArgs> ViewChanged;
-#pragma warning restore 67
-
         private void MapControl_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
         {
             if (Map.ZoomLock) return;
@@ -176,7 +171,7 @@ namespace Mapsui.UI.Uwp
 
             var currentPoint = e.GetCurrentPoint(this);
 
-            var mousePosition = new Geometries.Point(currentPoint.RawPosition.X, currentPoint.RawPosition.Y);
+            var mousePosition = new MPoint(currentPoint.RawPosition.X, currentPoint.RawPosition.Y);
 
             var resolution = MouseWheelAnimation.GetResolution(currentPoint.Properties.MouseWheelDelta, _viewport, _map);
             // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay

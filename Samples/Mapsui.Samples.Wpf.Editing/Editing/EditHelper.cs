@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.Geometries.Utilities;
 using Mapsui.UI;
@@ -17,10 +18,10 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
         /// <returns></returns>
         public static bool TryInsertVertex(MapInfo mapInfo, IList<Point> vertices, double screenDistance)
         {
-            var (distance, segment) = GetDistanceAndSegment(mapInfo.WorldPosition, vertices);
+            var (distance, segment) = GetDistanceAndSegment(mapInfo.WorldPosition.ToPoint(), vertices);
             if (IsCloseEnough(distance, mapInfo.Resolution, screenDistance))
             {
-                vertices.Insert(segment + 1, mapInfo.WorldPosition.Clone());
+                vertices.Insert(segment + 1, mapInfo.WorldPosition.Clone().ToPoint());
                 return true;
             }
             return false;

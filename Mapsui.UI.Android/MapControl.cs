@@ -50,7 +50,7 @@ namespace Mapsui.UI.Android
         /// <summary>
         /// Saver for center before last pinch movement
         /// </summary>
-        private Point _previousTouch = new Point();
+        private MPoint _previousTouch = new MPoint();
         private SkiaRenderMode _renderMode = SkiaRenderMode.Hardware;
 
         public MapControl(Context context, IAttributeSet attrs) :
@@ -227,7 +227,7 @@ namespace Mapsui.UI.Android
                                     return;
 
                                 var touch = touchPoints.First();
-                                if (_previousTouch != null && !_previousTouch.IsEmpty())
+                                if (_previousTouch != null)
                                 {
                                     _viewport.Transform(touch, _previousTouch);
                                     RefreshGraphics();
@@ -285,12 +285,12 @@ namespace Mapsui.UI.Android
         /// <param name="motionEvent"></param>
         /// <param name="view"></param>
         /// <returns></returns>
-        private List<Point> GetScreenPositions(MotionEvent motionEvent, View view)
+        private List<MPoint> GetScreenPositions(MotionEvent motionEvent, View view)
         {
-            var result = new List<Point>();
+            var result = new List<MPoint>();
             for (var i = 0; i < motionEvent.PointerCount; i++)
             {
-                var pixelCoordinate = new Point(motionEvent.GetX(i) - view.Left, motionEvent.GetY(i) - view.Top);
+                var pixelCoordinate = new MPoint(motionEvent.GetX(i) - view.Left, motionEvent.GetY(i) - view.Top);
                 result.Add(pixelCoordinate.ToDeviceIndependentUnits(PixelDensity));
             }
             return result;
@@ -302,7 +302,7 @@ namespace Mapsui.UI.Android
         /// <param name="motionEvent"></param>
         /// <param name="view"></param>
         /// <returns></returns>
-        private Point GetScreenPosition(MotionEvent motionEvent, View view)
+        private MPoint GetScreenPosition(MotionEvent motionEvent, View view)
         {
             return GetScreenPositionInPixels(motionEvent, view).ToDeviceIndependentUnits(PixelDensity);
         }
@@ -313,7 +313,7 @@ namespace Mapsui.UI.Android
         /// <param name="motionEvent"></param>
         /// <param name="view"></param>
         /// <returns></returns>
-        private static Point GetScreenPositionInPixels(MotionEvent motionEvent, View view)
+        private static MPoint GetScreenPositionInPixels(MotionEvent motionEvent, View view)
         {
             return new PointF(motionEvent.GetX(0) - view.Left, motionEvent.GetY(0) - view.Top).ToMapsui();
         }
@@ -372,7 +372,7 @@ namespace Mapsui.UI.Android
             base.Dispose(disposing);
         }
 
-        private static (Point centre, double radius, double angle) GetPinchValues(List<Point> locations)
+        private static (MPoint centre, double radius, double angle) GetPinchValues(List<MPoint> locations)
         {
             if (locations.Count < 2)
                 throw new ArgumentException();
@@ -393,7 +393,7 @@ namespace Mapsui.UI.Android
 
             var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
 
-            return (new Point(centerX, centerY), radius, angle);
+            return (new MPoint(centerX, centerY), radius, angle);
         }
 
         private float ViewportWidth => ToDeviceIndependentUnits(Width);

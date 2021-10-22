@@ -22,7 +22,7 @@ namespace Mapsui.Layers
         private readonly object _syncLock = new();
         private bool _busy;
         private Viewport _currentViewport;
-        private BoundingBox _extent;
+        private MRect _extent;
         private bool _modified;
         private IEnumerable<IFeature> _previousFeatures;
         private IRenderer _rasterizer;
@@ -69,7 +69,7 @@ namespace Mapsui.Layers
             Delayer.MillisecondsToWait = delayBeforeRasterize;
         }
 
-        public override BoundingBox Envelope => _layer.Envelope;
+        public override MRect Envelope => _layer.Envelope;
 
         public ILayer ChildLayer => _layer;
 
@@ -112,7 +112,7 @@ namespace Mapsui.Layers
                     {
                         _cache.Clear();
                         var features = new IGeometryFeature[1];
-                        features[0] = new Feature {Geometry = new Raster(bitmapStream, viewport.Extent)};
+                        features[0] = new Feature {Geometry = new Raster(bitmapStream, viewport.Extent.ToBoundingBox())};
                         _cache.PushRange(features);
 #if DEBUG
                         Logger.Log(LogLevel.Debug, $"Memory after rasterizing layer {GC.GetTotalMemory(true):N0}");
@@ -121,7 +121,7 @@ namespace Mapsui.Layers
                         OnDataChanged(new DataChangedEventArgs());
                     }
 
-                    if (_modified) Delayer.ExecuteDelayed(() => _layer.RefreshData(_extent.Copy(), _resolution, ChangeType.Discrete));
+                    if (_modified) Delayer.ExecuteDelayed(() => _layer.RefreshData(new MRect(_extent), _resolution, ChangeType.Discrete));
                 }
                 finally
                 {
@@ -157,7 +157,7 @@ namespace Mapsui.Layers
 
         public static double SymbolSize { get; set; } = 64;
 
-        public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        public override IEnumerable<IFeature> GetFeaturesInView(MRect box, double resolution)
         {
             if (box == null) throw new ArgumentNullException(nameof(box));
 
@@ -166,7 +166,7 @@ namespace Mapsui.Layers
             // Use a larger extent so that symbols partially outside of the extent are included
             var grownBox = box.Grow(resolution * SymbolSize * 0.5);
 
-            return features.Where(f => f.Geometry != null && f.Geometry.BoundingBox.Intersects(grownBox)).ToList();
+            return features.Where(f => f.Geometry != null && f.Geometry.BoundingBox.Intersects(grownBox.ToBoundingBox())).ToList();
         }
 
         public void AbortFetch()
@@ -174,7 +174,7 @@ namespace Mapsui.Layers
             if (_layer is IAsyncDataFetcher asyncLayer) asyncLayer.AbortFetch();
         }
 
-        public override void RefreshData(BoundingBox extent, double resolution, ChangeType changeType)
+        public override void RefreshData(MRect extent, double resolution, ChangeType changeType)
         {
             var newViewport = CreateViewport(extent, resolution, _renderResolutionMultiplier, 1);
 
@@ -191,7 +191,7 @@ namespace Mapsui.Layers
                 _extent = extent;
                 _resolution = resolution;
                 if (_layer is IAsyncDataFetcher)
-                    Delayer.ExecuteDelayed(() => _layer.RefreshData(extent.Copy(), resolution, changeType));
+                    Delayer.ExecuteDelayed(() => _layer.RefreshData(new MRect(extent), resolution, changeType));
                 else
                     Delayer.ExecuteDelayed(Rasterize);
             }
@@ -202,7 +202,7 @@ namespace Mapsui.Layers
             if (_layer is IAsyncDataFetcher asyncLayer) asyncLayer.ClearCache();
         }
 
-        private static Viewport CreateViewport(BoundingBox extent, double resolution, double renderResolutionMultiplier,
+        private static Viewport CreateViewport(MRect extent, double resolution, double renderResolutionMultiplier,
             double overscan)
         {
             var renderResolution = resolution / renderResolutionMultiplier;

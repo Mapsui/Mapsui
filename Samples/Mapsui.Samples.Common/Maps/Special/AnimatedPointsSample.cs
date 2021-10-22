@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
+using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -53,7 +54,7 @@ namespace Mapsui.Samples.Common.Maps
             public override IEnumerable<IGeometryFeature> GetFeaturesInView(BoundingBox box, double resolution)
             {
                 var features = new List<IGeometryFeature>();
-                var geometries = RandomPointHelper.GenerateRandomPoints(box, 10, _random.Next()).ToList();
+                var geometries = RandomPointHelper.GenerateRandomPoints(box.ToMRect(), 10, _random.Next()).ToList();
                 var count = 0;
                 var random = _random.Next(geometries.Count);
 
@@ -63,7 +64,7 @@ namespace Mapsui.Samples.Common.Maps
                     {
                         var feature = new Feature
                         {
-                            Geometry = geometry,
+                            Geometry = geometry.ToPoint(),
                             ["ID"] = count.ToString(CultureInfo.InvariantCulture)
                         };
                         features.Add(feature);

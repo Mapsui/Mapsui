@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Projection;
@@ -32,7 +33,7 @@ namespace Mapsui.Samples.Common.Maps
         public static ILayer CreateLineStringLayer(IStyle style = null)
         {
             var lineString = (LineString)Geometry.GeomFromText(WKTGr5);
-            lineString = new LineString(lineString.Vertices.Select(v => SphericalMercator.FromLonLat(v.Y, v.X)));
+            lineString = new LineString(lineString.Vertices.Select(v => SphericalMercator.FromLonLat(v.Y, v.X).ToMPoint().ToPoint()));
 
             return new MemoryLayer
             {

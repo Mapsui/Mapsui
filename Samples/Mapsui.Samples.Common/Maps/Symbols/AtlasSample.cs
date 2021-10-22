@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
+using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -38,7 +40,7 @@ namespace Mapsui.Samples.Common.Maps
             return map;
         }
 
-        private static ILayer CreateAtlasLayer(BoundingBox envelope)
+        private static ILayer CreateAtlasLayer(MRect envelope)
         {
             return new MemoryLayer
             {
@@ -49,9 +51,10 @@ namespace Mapsui.Samples.Common.Maps
             };
         }
 
-        public static MemoryProvider<IGeometryFeature> CreateMemoryProviderWithDiverseSymbols(BoundingBox envelope, int count = 100)
+        public static MemoryProvider<IGeometryFeature> CreateMemoryProviderWithDiverseSymbols(MRect envelope, int count = 100)
         {
-            return new MemoryProvider<IGeometryFeature>(CreateAtlasFeatures(RandomPointHelper.GenerateRandomPoints(envelope, count)));
+            var points = RandomPointHelper.GenerateRandomPoints(envelope, count).Select(p => p.ToPoint());
+            return new MemoryProvider<IGeometryFeature>(CreateAtlasFeatures(points));
         }
 
         private static IEnumerable<IGeometryFeature> CreateAtlasFeatures(IEnumerable<IGeometry> randomPoints)

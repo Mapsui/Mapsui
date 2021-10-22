@@ -1,5 +1,4 @@
-﻿using Mapsui.Geometries;
-using Mapsui.Projection;
+﻿using Mapsui.Projection;
 using Mapsui.UI;
 using Mapsui.Utilities;
 
@@ -26,11 +25,11 @@ namespace Mapsui.Samples.Common.Maps
             return map;
         }
 
-        private static BoundingBox GetLimitsOfMadagaskar()
+        private static MRect GetLimitsOfMadagaskar()
         {
-            return new BoundingBox(
-                SphericalMercator.FromLonLat(41.8, -27.2),
-                SphericalMercator.FromLonLat(52.5, -11.6));
+            var (minX, minY) = SphericalMercator.FromLonLat(41.8, -27.2);
+            var (maxX, maxY) = SphericalMercator.FromLonLat(52.5, -11.6);
+            return new MRect(minX, minY, maxX, maxY);
         }
     }
 }

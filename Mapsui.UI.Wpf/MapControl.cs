@@ -24,15 +24,15 @@ namespace Mapsui.UI.Wpf
     public partial class MapControl : Grid, IMapControl
     {
         private readonly Rectangle _selectRectangle = CreateSelectRectangle();
-        private Geometries.Point _currentMousePosition;
-        private Geometries.Point _downMousePosition;
+        private MPoint _currentMousePosition;
+        private MPoint _downMousePosition;
         private bool _mouseDown;
-        private Geometries.Point _previousMousePosition;
+        private MPoint _previousMousePosition;
         private bool _hasBeenManipulated;
         private double _innerRotation;
-        private readonly FlingTracker _flingTracker = new FlingTracker();
+        private readonly FlingTracker _flingTracker = new();
         
-        public MouseWheelAnimation MouseWheelAnimation { get; } = new MouseWheelAnimation();
+        public MouseWheelAnimation MouseWheelAnimation { get; } = new();
 
         /// <summary>
         /// Fling is called, when user release mouse button or lift finger while moving with a certain speed, higher than speed of swipe 
@@ -157,7 +157,7 @@ namespace Mapsui.UI.Wpf
 
         private void MapControlMouseLeave(object sender, MouseEventArgs e)
         {
-            _previousMousePosition = new Geometries.Point();
+            _previousMousePosition = null;
             ReleaseMouseCapture();
         }
 
@@ -227,7 +227,7 @@ namespace Mapsui.UI.Wpf
             }
             _flingTracker.RemoveId(1);
 
-            _previousMousePosition = new Geometries.Point();
+            _previousMousePosition = new MPoint();
             ReleaseMouseCapture();
         }
 
@@ -250,7 +250,7 @@ namespace Mapsui.UI.Wpf
             return true;
         }
 
-        private static bool IsClick(Geometries.Point currentPosition, Geometries.Point previousPosition)
+        private static bool IsClick(MPoint currentPosition, MPoint previousPosition)
         {
             return
                 Math.Abs(currentPosition.X - previousPosition.X) < SystemParameters.MinimumHorizontalDragDistance &&
@@ -304,7 +304,7 @@ namespace Mapsui.UI.Wpf
 
             if (_mouseDown)
             {
-                if (_previousMousePosition == null || _previousMousePosition.IsEmpty())
+                if (_previousMousePosition == null)
                 {
                     // Usually MapControlMouseLeftButton down initializes _previousMousePosition but in some
                     // situations it can be null. So far I could only reproduce this in debug mode when putting
@@ -329,7 +329,7 @@ namespace Mapsui.UI.Wpf
             }
         }
 
-        public void ZoomToBox(Geometries.Point beginPoint, Geometries.Point endPoint)
+        public void ZoomToBox(MPoint beginPoint, MPoint endPoint)
         {
             var width = Math.Abs(endPoint.X - beginPoint.X);
             var height = Math.Abs(endPoint.Y - beginPoint.Y);
@@ -339,7 +339,7 @@ namespace Mapsui.UI.Wpf
             ZoomHelper.ZoomToBoudingbox(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y,
                 ActualWidth, ActualHeight, out var x, out var y, out var resolution);
 
-            Navigator.NavigateTo(new Geometries.Point(x, y), resolution, 384);
+            Navigator.NavigateTo(new MPoint(x, y), resolution, 384);
 
             RefreshData();
             RefreshGraphics();
@@ -355,7 +355,7 @@ namespace Mapsui.UI.Wpf
         {
             if (_mouseDown)
             {
-                if (_previousMousePosition == null || _previousMousePosition.IsEmpty()) return; // can happen during debug
+                if (_previousMousePosition == null) return; // can happen during debug
 
                 var from = _previousMousePosition;
                 var to = newPos;

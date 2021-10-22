@@ -24,7 +24,7 @@ namespace Mapsui.Samples.Common.Desktop
 
         public static Map CreateMap()
         {
-            var map = new Map {Home = n => n.NavigateTo(new Point(0, 0), 1)};
+            var map = new Map {Home = n => n.NavigateTo(new MPoint(0, 0), 1)};
             map.Layers.Add(CreateLayer());
             return map;
         }

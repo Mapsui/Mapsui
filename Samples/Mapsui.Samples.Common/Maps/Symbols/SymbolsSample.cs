@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -31,7 +32,7 @@ namespace Mapsui.Samples.Common.Maps
             return map;
         }
 
-        private static ILayer CreateStylesLayer(BoundingBox envelope)
+        private static ILayer CreateStylesLayer(MRect envelope)
         {
             return new MemoryLayer
             {
@@ -42,20 +43,24 @@ namespace Mapsui.Samples.Common.Maps
             };
         }
 
-        public static MemoryProvider<IGeometryFeature> CreateMemoryProviderWithDiverseSymbols(BoundingBox envelope, int count = 100)
+        public static MemoryProvider<IGeometryFeature> CreateMemoryProviderWithDiverseSymbols(MRect envelope, int count = 100)
         {
             
             return new MemoryProvider<IGeometryFeature>(CreateDiverseFeatures(RandomPointHelper.GenerateRandomPoints(envelope, count)));
         }
 
-        private static IEnumerable<IGeometryFeature> CreateDiverseFeatures(IEnumerable<IGeometry> randomPoints)
+        private static IEnumerable<IGeometryFeature> CreateDiverseFeatures(IEnumerable<MPoint> randomPoints)
         {
             var features = new List<IGeometryFeature>();
             var counter = 0;
             var styles = CreateDiverseStyles().ToList();
             foreach (var point in randomPoints)
             {
-                var feature = new Feature { Geometry = point, ["Label"] = counter.ToString() };
+                var feature = new Feature
+                {
+                    Geometry = point.ToPoint(), 
+                    ["Label"] = counter.ToString()
+                };
 
                 feature.Styles.Add(styles[counter]);
                 feature.Styles.Add(SmalleDot());

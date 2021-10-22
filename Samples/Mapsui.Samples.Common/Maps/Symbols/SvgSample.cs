@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Reflection;
+using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Logging;
@@ -34,7 +35,7 @@ namespace Mapsui.Samples.Common.Maps
             return map;
         }
 
-        private static ILayer CreateSvgLayer(BoundingBox envelope)
+        private static ILayer CreateSvgLayer(MRect envelope)
         {
             return new MemoryLayer
             {
@@ -45,18 +46,18 @@ namespace Mapsui.Samples.Common.Maps
             };
         }
 
-        public static MemoryProvider<IGeometryFeature> CreateMemoryProviderWithDiverseSymbols(BoundingBox envelope, int count = 100)
+        public static MemoryProvider<IGeometryFeature> CreateMemoryProviderWithDiverseSymbols(MRect envelope, int count = 100)
         {
             return new MemoryProvider<IGeometryFeature>(CreateSvgFeatures(RandomPointHelper.GenerateRandomPoints(envelope, count)));
         }
 
-        private static IEnumerable<IGeometryFeature> CreateSvgFeatures(IEnumerable<IGeometry> randomPoints)
+        private static IEnumerable<IGeometryFeature> CreateSvgFeatures(IEnumerable<MPoint> randomPoints)
         {
             var features = new List<IGeometryFeature>();
             var counter = 0;
             foreach (var point in randomPoints)
             {
-                var feature = new Feature { Geometry = point, ["Label"] = counter.ToString() };
+                var feature = new Feature { Geometry = point.ToPoint(), ["Label"] = counter.ToString() };
                 feature.Styles.Add(CreateSvgStyle("Mapsui.Samples.Common.Images.Pin.svg", 0.5));
                 features.Add(feature);
                 counter++;

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ConcurrentCollections;
+using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Providers;
@@ -13,17 +14,17 @@ namespace Mapsui.Layers
     {
         private readonly ConcurrentHashSet<IGeometryFeature> _cache = new();
 
-        public override IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        public override IEnumerable<IFeature> GetFeaturesInView(MRect box, double resolution)
         {
-            // Safeguard in case BoundingBox is null, most likely due to no features in layer
+            // Safeguard in case MRect is null, most likely due to no features in layer
             if (box == null) { return new List<IFeature>(); }
             var cache = _cache;
             var biggerBox = box.Grow(SymbolStyle.DefaultWidth * 2 * resolution, SymbolStyle.DefaultHeight * 2 * resolution);
-            var result = cache.Where(f => biggerBox.Intersects(f.Geometry?.BoundingBox));
+            var result = cache.Where(f => biggerBox.Intersects(f.Geometry?.BoundingBox.ToMRect()));
             return result;
         }
 
-        private BoundingBox GetExtents()
+        private MRect GetExtents()
         {
             // todo: Calculate extents only once. Use a _modified field to determine when this is needed.
 
@@ -39,12 +40,12 @@ namespace Mapsui.Layers
             var maxX = geometries.Max(g => g.BoundingBox.MaxX);
             var maxY = geometries.Max(g => g.BoundingBox.MaxY);
 
-            return new BoundingBox(minX, minY, maxX, maxY);
+            return new BoundingBox(minX, minY, maxX, maxY).ToMRect();
         }
 
-        public override BoundingBox Envelope => GetExtents();
+        public override MRect Envelope => GetExtents();
 
-        public override void RefreshData(BoundingBox extent, double resolution, ChangeType changeType)
+        public override void RefreshData(MRect extent, double resolution, ChangeType changeType)
         {
             //The MemoryLayer always has it's data ready so can fire a DataChanged event immediately so that listeners can act on it.
             OnDataChanged(new DataChangedEventArgs());

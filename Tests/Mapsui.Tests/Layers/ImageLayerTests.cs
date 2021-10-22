@@ -46,7 +46,7 @@ namespace Mapsui.Tests.Layers
             };
 
             // act
-            map.RefreshData(new BoundingBox(-1, -1, 0, 0), 1, ChangeType.Discrete);
+            map.RefreshData(new MRect(-1, -1, 0, 0), 1, ChangeType.Discrete);
 
             // assert
             waitHandle.WaitOne();

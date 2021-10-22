@@ -27,6 +27,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.Rendering;
 
@@ -304,7 +305,7 @@ namespace Mapsui.Providers.Wms
                 return false;
             }
 
-            var url = GetRequestUrl(viewport.Extent, width, height);
+            var url = GetRequestUrl(viewport.Extent.ToBoundingBox(), width, height);
 
             try
             {
@@ -312,7 +313,7 @@ namespace Mapsui.Providers.Wms
                 using var result = task.Result;
                 // PDD: This could be more efficient
                 var bytes = BruTile.Utilities.ReadFully(result);
-                raster = new Raster(new MemoryStream(bytes), viewport.Extent);	// This can throw exception
+                raster = new Raster(new MemoryStream(bytes), viewport.Extent.ToBoundingBox());	// This can throw exception
                 return true;
             }
             catch (WebException webEx)
@@ -462,7 +463,7 @@ namespace Mapsui.Providers.Wms
         {
             var features = new List<IGeometryFeature>();
             IRaster raster = null;
-            var view = new Viewport { Resolution = resolution, Center = box.Centroid, Width = (box.Width / resolution), Height = (box.Height / resolution) };
+            var view = new Viewport { Resolution = resolution, Center = box.Centroid.ToMPoint(), Width = (box.Width / resolution), Height = (box.Height / resolution) };
             if (TryGetMap(view, ref raster))
             {
                 features.Add(new Feature

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Projection;
 using Mapsui.Providers;
@@ -55,8 +56,7 @@ namespace Mapsui.Samples.Common.Maps
             return cities.Select(c =>
             {
                 var feature = new Feature();
-                var point = SphericalMercator.FromLonLat(c.Lng, c.Lat);
-                feature.Geometry = point;
+                feature.Geometry = SphericalMercator.FromLonLat(c.Lng, c.Lat).ToMPoint().ToPoint();
                 feature["name"] = c.Name;
                 feature["country"] = c.Country;
                 return feature;

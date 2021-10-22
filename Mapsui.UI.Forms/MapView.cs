@@ -782,21 +782,21 @@ namespace Mapsui.UI.Forms
 
             if (IsZoomButtonVisible && _mapZoomInButton != null && _mapZoomOutButton != null)
             {
-                _mapZoomInButton.Envelope = new Geometries.BoundingBox(newX, newY, newX + ButtonSize, newY + ButtonSize);
+                _mapZoomInButton.Envelope = new MRect(newX, newY, newX + ButtonSize, newY + ButtonSize);
                 newY += ButtonSize;
-                _mapZoomOutButton.Envelope = new Geometries.BoundingBox(newX, newY, newX + ButtonSize, newY + ButtonSize);
+                _mapZoomOutButton.Envelope = new MRect(newX, newY, newX + ButtonSize, newY + ButtonSize);
                 newY += ButtonSize + ButtonSpacing;
             }
 
             if (IsMyLocationButtonVisible && _mapMyLocationButton != null)
             {
-                _mapMyLocationButton.Envelope = new Geometries.BoundingBox(newX, newY, newX + ButtonSize, newY + ButtonSize);
+                _mapMyLocationButton.Envelope = new MRect(newX, newY, newX + ButtonSize, newY + ButtonSize);
                 newY += ButtonSize + ButtonSpacing;
             }
 
             if (IsNorthingButtonVisible && _mapNorthingButton != null)
             {
-                _mapNorthingButton.Envelope = new Geometries.BoundingBox(newX, newY, newX + ButtonSize, newY + ButtonSize);
+                _mapNorthingButton.Envelope = new MRect(newX, newY, newX + ButtonSize, newY + ButtonSize);
             }
 
             RefreshGraphics();
@@ -845,7 +845,7 @@ namespace Mapsui.UI.Forms
             var result = new ButtonWidget
             {
                 Picture = picture,
-                Envelope = new Geometries.BoundingBox(x, y, x + ButtonSize, y + ButtonSize),
+                Envelope = new MRect(x, y, x + ButtonSize, y + ButtonSize),
                 Rotation = 0,
                 Enabled = true,
             };

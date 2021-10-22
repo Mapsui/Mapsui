@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -66,7 +67,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
         {
             if (_addInfo.Vertex != null)
             {
-                SetPointXY(_addInfo.Vertex, mapInfo.WorldPosition);
+                SetPointXY(_addInfo.Vertex, mapInfo.WorldPosition.ToPoint());
                 _addInfo.Feature.RenderedGeometry?.Clear();
                 Layer.DataHasChanged();
             }
@@ -133,7 +134,8 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
 
         private static Point FindVertexTouched(MapInfo mapInfo, IEnumerable<Point> vertices, double screenDistance)
         {
-            return vertices.OrderBy(v => v.Distance(mapInfo.WorldPosition)).FirstOrDefault(v => v.Distance(mapInfo.WorldPosition) < mapInfo.Resolution * screenDistance);
+            return vertices.OrderBy(v => v.Distance(mapInfo.WorldPosition.ToPoint()))
+                .FirstOrDefault(v => v.Distance(mapInfo.WorldPosition.ToPoint()) < mapInfo.Resolution * screenDistance);
         }
         
         private void SetPointXY(Point target, Point position)
@@ -155,7 +157,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
                         {
                             _dragInfo.Feature = geometryFeature;
                             _dragInfo.Vertex = vertexTouched;
-                            _dragInfo.StartOffsetToVertex = mapInfo.WorldPosition - _dragInfo.Vertex;
+                            _dragInfo.StartOffsetToVertex = mapInfo.WorldPosition.ToPoint() - _dragInfo.Vertex;
 
                             return true; // to indicate start of drag
                         }
@@ -251,7 +253,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
                 if (EditMode != EditMode.Rotate) return false;
 
                 _rotateInfo.Feature = geometryFeature;
-                _rotateInfo.PreviousPosition = mapInfo.WorldPosition;
+                _rotateInfo.PreviousPosition = mapInfo.WorldPosition.ToPoint();
                 _rotateInfo.Center = geometryFeature.Geometry.BoundingBox.Centroid;
             }
             return true; // to signal pan lock
@@ -298,7 +300,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
                 if (EditMode != EditMode.Scale) return false;
 
                 _scaleInfo.Feature = geometryFeature;
-                _scaleInfo.PreviousPosition = mapInfo.WorldPosition;
+                _scaleInfo.PreviousPosition = mapInfo.WorldPosition.ToPoint();
                 _scaleInfo.Center = geometryFeature.Geometry.BoundingBox.Centroid;
             }
 

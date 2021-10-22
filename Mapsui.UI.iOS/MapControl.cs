@@ -139,10 +139,10 @@ namespace Mapsui.UI.iOS
             else if (evt.AllTouches.Count >= 2)
             {
                 var previousLocation = evt.AllTouches.Select(t => ((UITouch) t).PreviousLocationInView(this))
-                    .Select(p => new Point(p.X, p.Y)).ToList();
+                    .Select(p => new MPoint(p.X, p.Y)).ToList();
 
                 var locations = evt.AllTouches.Select(t => ((UITouch) t).LocationInView(this))
-                    .Select(p => new Point(p.X, p.Y)).ToList();
+                    .Select(p => new MPoint(p.X, p.Y)).ToList();
 
                 var (previousCenter, previousRadius, previousAngle) = GetPinchValues(previousLocation);
                 var (center, radius, angle) = GetPinchValues(locations);
@@ -185,9 +185,9 @@ namespace Mapsui.UI.iOS
         /// </summary>
         /// <param name="point"></param>
         /// <returns></returns>
-        private Point GetScreenPosition(CGPoint point)
+        private MPoint GetScreenPosition(CGPoint point)
         {
-            return new Point(point.X, point.Y);
+            return new MPoint(point.X, point.Y);
         }
 
         private void RunOnUIThread(Action action)
@@ -232,7 +232,7 @@ namespace Mapsui.UI.iOS
             base.Dispose(disposing);
         }
 
-        private static (Point centre, double radius, double angle) GetPinchValues(List<Point> locations)
+        private static (MPoint centre, double radius, double angle) GetPinchValues(List<MPoint> locations)
         {
             if (locations.Count < 2)
                 throw new ArgumentException();
@@ -253,7 +253,7 @@ namespace Mapsui.UI.iOS
 
             var angle = Math.Atan2(locations[1].Y - locations[0].Y, locations[1].X - locations[0].X) * 180.0 / Math.PI;
 
-            return (new Point(centerX, centerY), radius, angle);
+            return (new MPoint(centerX, centerY), radius, angle);
         }
 
         private float ViewportWidth => (float) _canvas.Frame.Width; // todo: check if we need _canvas

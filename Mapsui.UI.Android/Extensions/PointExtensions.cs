@@ -4,9 +4,9 @@ namespace Mapsui.UI.Android.Extensions
 {
     public static class PointExtensions
     {
-        public static Point ToDeviceIndependentUnits(this Point point, float pixelDensity)
+        public static MPoint ToDeviceIndependentUnits(this MPoint point, float pixelDensity)
         {
-            return new Point(
+            return new MPoint(
                 ToDeviceIndependentUnits(point.X, pixelDensity), 
                 ToDeviceIndependentUnits(point.Y, pixelDensity));
         }

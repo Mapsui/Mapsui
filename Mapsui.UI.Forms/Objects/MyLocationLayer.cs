@@ -5,6 +5,7 @@ using Mapsui.UI.Forms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Mapsui.Extensions;
 using Xamarin.Forms;
 
 namespace Mapsui.UI.Objects
@@ -52,7 +53,7 @@ namespace Mapsui.UI.Objects
             }
         }
 
-        Position myLocation = new Position(0, 0);
+        Position myLocation = new (0, 0);
 
         /// <summary>
         /// Position of location, that is displayed
@@ -143,7 +144,7 @@ namespace Mapsui.UI.Objects
 
             feature = new Feature
             {
-                Geometry = myLocation.ToMapsui(),
+                Geometry = myLocation.ToMapsui().ToPoint(),
                 ["Label"] = "MyLocation moving",
             };
 
@@ -160,7 +161,7 @@ namespace Mapsui.UI.Objects
 
             featureDir = new Feature
             {
-                Geometry = myLocation.ToMapsui(),
+                Geometry = myLocation.ToMapsui().ToPoint(),
                 ["Label"] = "My view direction",
             };
 
@@ -359,8 +360,8 @@ namespace Mapsui.UI.Objects
             if (!myLocation.Equals(newLocation))
             {
                 myLocation = newLocation;
-                feature.Geometry = myLocation.ToMapsui();
-                featureDir.Geometry = myLocation.ToMapsui();
+                feature.Geometry = myLocation.ToPoint();
+                featureDir.Geometry = myLocation.ToPoint();
                 modified = true;
             }
 

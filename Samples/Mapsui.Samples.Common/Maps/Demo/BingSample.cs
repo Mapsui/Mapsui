@@ -1,6 +1,5 @@
 ﻿using BruTile.Predefined;
 using Mapsui.Fetcher;
-using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Styles;
 using Mapsui.UI;
@@ -26,7 +25,7 @@ namespace Mapsui.Samples.Common.Maps
             {
                 Name = "Bing Aerial",
             });
-            map.Home = n => n.NavigateTo(new Point(1059114.80157058, 5179580.75916194), map.Resolutions[14]);
+            map.Home = n => n.NavigateTo(new MPoint(1059114.80157058, 5179580.75916194), map.Resolutions[14]);
             map.BackColor = Color.FromString("#000613");
 
             return map;

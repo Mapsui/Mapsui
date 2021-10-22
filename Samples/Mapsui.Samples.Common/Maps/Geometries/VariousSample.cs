@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
-using Mapsui.Geometries;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
@@ -33,16 +34,16 @@ namespace Mapsui.Samples.Common.Maps
             return map;
         }
 
-        private static ILayer CreateLayerWithStyleOnLayer(BoundingBox envelope, int count = 25)
+        private static ILayer CreateLayerWithStyleOnLayer(MRect envelope, int count = 25)
         {
             return new Layer("Style on Layer")
             {
-                DataSource = new MemoryProvider<IGeometryFeature>(RandomPointHelper.GenerateRandomPoints(envelope, count)),
+                DataSource = new MemoryProvider<IGeometryFeature>(RandomPointHelper.GenerateRandomPoints(envelope, count).Select(p => p.ToPoint())),
                 Style = CreateBitmapStyle("Mapsui.Samples.Common.Images.ic_place_black_24dp.png")
             };
         }
 
-        private static ILayer CreateLayerWithStyleOnFeature(BoundingBox envelope, int count = 25)
+        private static ILayer CreateLayerWithStyleOnFeature(MRect envelope, int count = 25)
         {
             var style = CreateBitmapStyle("Mapsui.Samples.Common.Images.loc.png");
 
@@ -53,13 +54,13 @@ namespace Mapsui.Samples.Common.Maps
             };
         }
 
-        private static IEnumerable<IGeometryFeature> GenerateRandomFeatures(BoundingBox envelope, int count, IStyle style)
+        private static IEnumerable<IGeometryFeature> GenerateRandomFeatures(MRect envelope, int count, IStyle style)
         {
             var result = new List<Feature>();
             var points = RandomPointHelper.GenerateRandomPoints(envelope, count, 123);
             foreach (var point in points)
             {
-                result.Add(new Feature { Geometry = point, Styles = new List<IStyle> { style } });
+                result.Add(new Feature { Geometry = point.ToPoint(), Styles = new List<IStyle> { style } });
             }
             return result;
         }
