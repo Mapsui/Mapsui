@@ -169,10 +169,10 @@
       <Version>6.2.10</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp">
-      <Version>2.88.0-preview.150</Version>
+      <Version>2.88.0-preview.152</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Views">
-      <Version>2.88.0-preview.150</Version>
+      <Version>2.88.0-preview.152</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

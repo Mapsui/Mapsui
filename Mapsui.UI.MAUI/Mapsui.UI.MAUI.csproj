@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net6.0;net6.0-ios;net6.0-android;net6.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks>net6.0;net6.0-ios13.6;net6.0-android30.0;net6.0-maccatalyst13.5</TargetFrameworks>
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows')) and '$(MSBuildRuntimeType)' == 'Full'">$(TargetFrameworks);net6.0-windows10.0.19041</TargetFrameworks>
 		<TargetPlatformMinVersion Condition="$(TargetFramework.Contains('-windows'))">10.0.17763.0</TargetPlatformMinVersion>
 		<UseMaui>true</UseMaui>
@@ -45,9 +45,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="SkiaSharp" Version="2.88.0-preview.150" />
-	  <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.0-preview.150" />
-    <PackageReference Include="SkiaSharp.Views.Maui.Controls.Compatibility" Version="2.88.0-preview.150" />
+	  <PackageReference Include="SkiaSharp" Version="2.88.0-preview.152" />
+	  <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.0-preview.152" />
+    <PackageReference Include="SkiaSharp.Views.Maui.Controls.Compatibility" Version="2.88.0-preview.152" />
 	</ItemGroup>
 
 	<ItemGroup>

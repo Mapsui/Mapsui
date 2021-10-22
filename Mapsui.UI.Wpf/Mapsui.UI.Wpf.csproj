@@ -10,8 +10,8 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="BruTile" Version="4.0.0" />
-    <PackageReference Include="SkiaSharp" Version="2.88.0-preview.150" />
-    <PackageReference Include="SkiaSharp.Views.WPF" Version="2.88.0-preview.150" />
+    <PackageReference Include="SkiaSharp" Version="2.88.0-preview.152" />
+    <PackageReference Include="SkiaSharp.Views.WPF" Version="2.88.0-preview.152" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mapsui.Geometries\Mapsui.Geometries.csproj" />
