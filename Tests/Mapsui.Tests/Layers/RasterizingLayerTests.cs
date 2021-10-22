@@ -27,7 +27,7 @@ namespace Mapsui.Tests.Layers
             var waitHandle = new AutoResetEvent(false);
             DefaultRendererFactory.Create = () => new MapRenderer(); // Using xaml renderer here to test rasterizer. Suboptimal. 
 
-            Assert.AreEqual(0, layer.GetFeaturesInView(box, resolution).Count());
+            Assert.AreEqual(0, layer.GetFeatures(box, resolution).Count());
             layer.DataChanged += (_, _) =>
             {
                 // assert
@@ -46,7 +46,7 @@ namespace Mapsui.Tests.Layers
 
             // assert
             waitHandle.WaitOne();
-            Assert.AreEqual(layer.GetFeaturesInView(box, resolution).Count(), 1);
+            Assert.AreEqual(layer.GetFeatures(box, resolution).Count(), 1);
         }
 
         private static MemoryLayer CreatePointLayer()

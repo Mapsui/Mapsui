@@ -120,7 +120,7 @@ namespace Mapsui.Layers
         }
 
         /// <inheritdoc />
-        public override IEnumerable<IFeature> GetFeaturesInView(MRect extent, double resolution)
+        public override IEnumerable<IFeature> GetFeatures(MRect extent, double resolution)
         {
             return _cache.ToList();
         }

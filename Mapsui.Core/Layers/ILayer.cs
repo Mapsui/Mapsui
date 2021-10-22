@@ -91,7 +91,7 @@ namespace Mapsui.Layers
         /// <param name="extent">Bounding box</param>
         /// <param name="resolution">Resolution of viewport</param>
         /// <returns></returns>
-        IEnumerable<IFeature> GetFeaturesInView(MRect extent, double resolution);
+        IEnumerable<IFeature> GetFeatures(MRect extent, double resolution);
 
         /// <summary>
         /// Attribution for layer

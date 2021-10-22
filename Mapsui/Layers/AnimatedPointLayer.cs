@@ -32,7 +32,7 @@ namespace Mapsui.Layers
 
         public override MRect Envelope => _dataSource?.GetExtents().ToMRect();
 
-        public override IEnumerable<IFeature> GetFeaturesInView(MRect extent, double resolution)
+        public override IEnumerable<IFeature> GetFeatures(MRect extent, double resolution)
         {
             return _animatedFeatures.GetFeatures();
         }

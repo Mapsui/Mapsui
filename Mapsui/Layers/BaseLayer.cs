@@ -196,7 +196,7 @@ namespace Mapsui.Layers
         public bool IsMapInfoLayer { get; set; }
 
         /// <inheritdoc />
-        public abstract IEnumerable<IFeature> GetFeaturesInView(MRect box, double resolution);
+        public abstract IEnumerable<IFeature> GetFeatures(MRect box, double resolution);
 
         /// <inheritdoc />
         public abstract void RefreshData(FetchInfo fetchInfo);

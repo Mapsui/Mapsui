@@ -14,7 +14,7 @@ namespace Mapsui.Layers
     {
         private readonly ConcurrentHashSet<IGeometryFeature> _cache = new();
 
-        public override IEnumerable<IFeature> GetFeaturesInView(MRect box, double resolution)
+        public override IEnumerable<IFeature> GetFeatures(MRect box, double resolution)
         {
             // Safeguard in case MRect is null, most likely due to no features in layer
             if (box == null) { return new List<IFeature>(); }
