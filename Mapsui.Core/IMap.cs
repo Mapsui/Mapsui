@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
-using Mapsui.Projection;
 using Mapsui.Styles;
 using Mapsui.Widgets;
 
@@ -21,11 +20,6 @@ namespace Mapsui
         /// Projection type of Map. Normally in format like "EPSG:3857"
         /// </summary>
         string CRS { get; set; }
-
-        /// <summary>
-        /// Transformation to use for the different coordinate systems
-        /// </summary>
-        ITransformation Transformation { get; set; }
 
         /// <summary>
         /// A collection of layers. The first layer in the list is drawn first, the last one on top.
@@ -70,6 +64,6 @@ namespace Mapsui
         /// </summary>
         void ClearCache();
 
-        void RefreshData(MRect extent, double resolution, ChangeType changeType);
+        void RefreshData(FetchInfo fetchInfo);
     }
 }

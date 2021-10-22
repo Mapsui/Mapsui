@@ -13,6 +13,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Mapsui.Extensions;
+using Mapsui.Fetcher;
 using Mapsui.Providers;
 using Mapsui.Widgets.ButtonWidget;
 using Xamarin.Forms;
@@ -693,7 +694,15 @@ namespace Mapsui.UI.Forms
 
         private void HandlerPinPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Map.RefreshData(Viewport.Extent, Viewport.Resolution, ChangeType.Continuous);
+            var fetchInfo = new FetchInfo
+            {
+                Extent = Viewport.Extent,
+                Resolution = Viewport.Resolution,
+                CRS = Map.CRS,
+                ChangeType = ChangeType.Continuous
+            };
+
+            Map.RefreshData(fetchInfo);
 
             // Repaint map, because something could have changed
             RefreshGraphics();
@@ -701,7 +710,15 @@ namespace Mapsui.UI.Forms
 
         private void HandlerDrawablePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Map.RefreshData(Viewport.Extent, Viewport.Resolution, ChangeType.Continuous);
+            var fetchInfo = new FetchInfo
+            {
+                Extent = Viewport.Extent,
+                Resolution = Viewport.Resolution,
+                CRS = Map.CRS,
+                ChangeType = ChangeType.Continuous
+            };
+
+            Map.RefreshData(fetchInfo);
 
             // Repaint map, because something could have changed
             RefreshGraphics();

@@ -38,8 +38,7 @@ namespace Mapsui.Layers
 
         private bool _isFetching;
         private bool _needsUpdate = true;
-        private double _newResolution;
-        private MRect _newExtent;
+        private FetchInfo _fetchInfo;
         private List<FeatureSets> _sets = new();
         private readonly Timer _startFetchTimer;
         private IProvider<IFeature> _dataSource;
@@ -71,8 +70,7 @@ namespace Mapsui.Layers
 
         protected void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(CRS) ||
-                e.PropertyName == nameof(DataSource))
+            if (e.PropertyName == nameof(DataSource))
             {
                 Task.Run(() => 
                 {
@@ -85,9 +83,9 @@ namespace Mapsui.Layers
 
         void StartFetchTimerElapsed(object state)
         {
-            if (_newExtent == null) return;
-            if (double.IsNaN(_newResolution)) return;
-            StartNewFetch(_newExtent, _newResolution);
+            if (_fetchInfo.Extent == null) return;
+            if (double.IsNaN(_fetchInfo.Resolution)) return;
+            StartNewFetch(_fetchInfo);
         }
 
         public override IEnumerable<IFeature> GetFeaturesInView(MRect box, double resolution)
@@ -119,15 +117,14 @@ namespace Mapsui.Layers
             // not implemented for ImageLayer
         }
 
-        public override void RefreshData(MRect extent, double resolution, ChangeType changeType)
+        public override void RefreshData(FetchInfo fetchInfo)
         {
             if (!Enabled) return;
             if (DataSource == null) return;
             // Fetching an image, that often covers the whole map, is expensive. Only do it on Discrete changes.
-            if (changeType == ChangeType.Continuous) return;
+            if (fetchInfo.ChangeType == ChangeType.Continuous) return;
 
-            _newExtent = extent;
-            _newResolution = resolution;
+            _fetchInfo = fetchInfo;
 
             if (_isFetching)
             {
@@ -138,14 +135,12 @@ namespace Mapsui.Layers
             _startFetchTimer.Change(FetchDelay, Timeout.Infinite);
         }
 
-        private void StartNewFetch(MRect extent, double resolution)
+        private void StartNewFetch(FetchInfo fetchInfo)
         {
             _isFetching = true;
             _needsUpdate = false;
 
-            var newExtent = new MRect(extent);
-            
-            var fetcher = new FeatureFetcher(newExtent.ToBoundingBox(), resolution, DataSource, DataArrived, DateTime.Now.Ticks);
+            var fetcher = new FeatureFetcher(new FetchInfo(fetchInfo), DataSource, DataArrived, DateTime.Now.Ticks);
 
             Task.Run(() =>
             {
@@ -186,7 +181,7 @@ namespace Mapsui.Layers
 
             if (_needsUpdate)
             {
-                StartNewFetch(_newExtent, _newResolution);
+                StartNewFetch(_fetchInfo);
             }
         }
 

@@ -22,11 +22,10 @@ namespace Mapsui.Layers
         private readonly object _syncLock = new();
         private bool _busy;
         private Viewport _currentViewport;
-        private MRect _extent;
         private bool _modified;
         private IEnumerable<IFeature> _previousFeatures;
         private IRenderer _rasterizer;
-        private double _resolution;
+        private FetchInfo _fetchInfo;
         public Delayer Delayer { get; } = new();
         private readonly Delayer _rasterizeDelayer = new();
 
@@ -76,8 +75,8 @@ namespace Mapsui.Layers
         private void LayerOnDataChanged(object sender, DataChangedEventArgs dataChangedEventArgs)
         {
             if (!Enabled) return;
-            if (MinVisible > _resolution) return;
-            if (MaxVisible < _resolution) return;
+            if (MinVisible > _fetchInfo.Resolution) return;
+            if (MaxVisible < _fetchInfo.Resolution) return;
             if (_busy) return;
 
             _modified = true;
@@ -97,9 +96,10 @@ namespace Mapsui.Layers
             {
                 try
                 {
-                    if (double.IsNaN(_resolution) || _resolution <= 0) return;
-                    if (_extent.Width <= 0 || _extent.Height <= 0) return;
-                    var viewport = CreateViewport(_extent, _resolution, _renderResolutionMultiplier, _overscan);
+                    if (_fetchInfo == null) return;
+                    if (double.IsNaN(_fetchInfo.Resolution) || _fetchInfo.Resolution <= 0) return;
+                    if (_fetchInfo.Extent.Width <= 0 || _fetchInfo.Extent.Height <= 0) return;
+                    var viewport = CreateViewport(_fetchInfo.Extent, _fetchInfo.Resolution, _renderResolutionMultiplier, _overscan);
 
                     _currentViewport = viewport;
 
@@ -121,7 +121,7 @@ namespace Mapsui.Layers
                         OnDataChanged(new DataChangedEventArgs());
                     }
 
-                    if (_modified) Delayer.ExecuteDelayed(() => _layer.RefreshData(new MRect(_extent), _resolution, ChangeType.Discrete));
+                    if (_modified) Delayer.ExecuteDelayed(() => _layer.RefreshData(_fetchInfo));
                 }
                 finally
                 {
@@ -174,13 +174,13 @@ namespace Mapsui.Layers
             if (_layer is IAsyncDataFetcher asyncLayer) asyncLayer.AbortFetch();
         }
 
-        public override void RefreshData(MRect extent, double resolution, ChangeType changeType)
+        public override void RefreshData(FetchInfo fetchInfo)
         {
-            var newViewport = CreateViewport(extent, resolution, _renderResolutionMultiplier, 1);
+            var newViewport = CreateViewport(fetchInfo.Extent, fetchInfo.Resolution, _renderResolutionMultiplier, 1);
 
             if (!Enabled) return;
-            if (MinVisible > resolution) return;
-            if (MaxVisible < resolution) return;
+            if (MinVisible > fetchInfo.Resolution) return;
+            if (MaxVisible < fetchInfo.Resolution) return;
 
             if (!_onlyRerasterizeIfOutsideOverscan ||
                 (_currentViewport == null) ||
@@ -188,10 +188,12 @@ namespace Mapsui.Layers
                 (_currentViewport.Resolution != newViewport.Resolution) ||
                 !_currentViewport.Extent.Contains(newViewport.Extent))
             {
-                _extent = extent;
-                _resolution = resolution;
+                _fetchInfo = new FetchInfo(fetchInfo)
+                {
+                    ChangeType = ChangeType.Discrete
+                };
                 if (_layer is IAsyncDataFetcher)
-                    Delayer.ExecuteDelayed(() => _layer.RefreshData(new MRect(extent), resolution, changeType));
+                    Delayer.ExecuteDelayed(() => _layer.RefreshData(_fetchInfo));
                 else
                     Delayer.ExecuteDelayed(Rasterize);
             }

@@ -19,7 +19,7 @@ using Mapsui.Geometries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Mapsui.Extensions;
+using Mapsui.Fetcher;
 using Mapsui.Geometries.WellKnownBinary;
 using Mapsui.Geometries.WellKnownText;
 
@@ -132,15 +132,17 @@ namespace Mapsui.Providers
         {
         }
 
-        public virtual IEnumerable<T> GetFeaturesInView(BoundingBox box, double resolution)
+        public virtual IEnumerable<T> GetFeaturesInView(FetchInfo fetchInfo)
         {
-            if (box == null) throw new ArgumentNullException(nameof(box));
+            if (fetchInfo == null) throw new ArgumentNullException(nameof(fetchInfo));
+            if (fetchInfo.Extent == null) throw new ArgumentNullException(nameof(fetchInfo.Extent));
 
             var features = Features.ToList();
 
+            fetchInfo = new FetchInfo(fetchInfo);
             // Use a larger extent so that symbols partially outside of the extent are included
-            var grownBox = box.Grow(resolution * SymbolSize * 0.5);
-            var grownFeatures = features.Where(f => f != null && f.BoundingBox.Intersects(grownBox.ToMRect()));
+            var grownBox = fetchInfo.Extent.Grow(fetchInfo.Resolution * SymbolSize * 0.5);
+            var grownFeatures = features.Where(f => f != null && f.BoundingBox.Intersects(grownBox));
             return (IEnumerable<T>) grownFeatures.ToList(); // Why do I need to cast if T is constrained to IFeature?
         }
 

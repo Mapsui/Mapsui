@@ -7,6 +7,7 @@ using Mapsui.Providers;
 using NUnit.Framework;
 using BruTile.Predefined;
 using Mapsui.Extensions;
+using Mapsui.Fetcher;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
 
@@ -25,7 +26,7 @@ namespace Mapsui.Tests.Layers
             var resolution = schema.Resolutions.First().Value.UnitsPerPixel;
             var waitHandle = new AutoResetEvent(false);
             DefaultRendererFactory.Create = () => new MapRenderer(); // Using xaml renderer here to test rasterizer. Suboptimal. 
-            
+
             Assert.AreEqual(0, layer.GetFeaturesInView(box, resolution).Count());
             layer.DataChanged += (_, _) =>
             {
@@ -33,8 +34,15 @@ namespace Mapsui.Tests.Layers
                 waitHandle.Set();
             };
 
+            var fetchInfo = new FetchInfo
+            {
+                Extent = box,
+                Resolution = resolution,
+                ChangeType = ChangeType.Discrete
+            };
+
             // act
-            layer.RefreshData(box, resolution, ChangeType.Discrete);
+            layer.RefreshData(fetchInfo);
 
             // assert
             waitHandle.WaitOne();

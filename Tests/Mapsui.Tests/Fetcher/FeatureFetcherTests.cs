@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -21,18 +22,22 @@ namespace Mapsui.Tests.Fetcher
             layer.Delayer.MillisecondsToWait = 0;
 
             var notifications = new List<bool>();
-            layer.PropertyChanged += (sender, args) =>
+            layer.PropertyChanged += (_, args) =>
             {
                 if (args.PropertyName == nameof(Layer.Busy))
                 {
                     notifications.Add(layer.Busy);
                 }
             };
+            var fetchInfo = new FetchInfo
+            {
+                Extent = extent,
+                Resolution = 1,
+                ChangeType = ChangeType.Discrete
+            };
 
             // act
-            layer.RefreshData(extent, 1, ChangeType.Discrete);
-
-
+            layer.RefreshData(fetchInfo);
 
             // assert
             Task.Run(() => 

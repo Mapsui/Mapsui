@@ -3,8 +3,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using Mapsui.Extensions;
-using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Styles;
 
@@ -12,8 +10,7 @@ namespace Mapsui.Fetcher
 {
     class FeatureFetchDispatcher<T> : IFetchDispatcher where T : IFeature
     {
-        private BoundingBox _extent;
-        private double _resolution;
+        private FetchInfo _fetchInfo;
         private bool _busy;
         private readonly ConcurrentStack<T> _cache;
         private bool _modified;
@@ -28,16 +25,16 @@ namespace Mapsui.Fetcher
             if (!_modified) return false;
             if (DataSource == null) return false;
 
-            method = () => FetchOnThread(_extent.Copy(), _resolution);
+            method = () => FetchOnThread(new FetchInfo(_fetchInfo));
             _modified = false;
             return true;
         }
 
-        public void FetchOnThread(BoundingBox extent, double resolution)
+        public void FetchOnThread(FetchInfo fetchInfo)
         {
             try
             {
-                var features = DataSource.GetFeaturesInView(extent, resolution).ToList();
+                var features = DataSource.GetFeaturesInView(fetchInfo).ToList();
                 FetchCompleted(features, null);
             }
             catch (Exception exception)
@@ -62,15 +59,18 @@ namespace Mapsui.Fetcher
             DataChanged?.Invoke(this, new DataChangedEventArgs(exception, false, null));
         }
 
-        public void SetViewport(BoundingBox extent, double resolution)
+        public void SetViewport(FetchInfo fetchInfo)
         {
             // Fetch a bigger extent to include partially visible symbols. 
             // todo: Take into account the maximum symbol size of the layer
-            var grownExtent = extent.Grow(
-                SymbolStyle.DefaultWidth * 2 * resolution,
-                SymbolStyle.DefaultHeight * 2 * resolution);
-            _extent = grownExtent.ToMRect().ToBoundingBox();
-            _resolution = resolution;
+
+            _fetchInfo = new FetchInfo(fetchInfo)
+            {
+                Extent = fetchInfo.Extent.Grow(
+                    SymbolStyle.DefaultWidth * 2 * fetchInfo.Resolution,
+                    SymbolStyle.DefaultHeight * 2 * fetchInfo.Resolution)
+            };
+
             _modified = true;
             Busy = true;
         }

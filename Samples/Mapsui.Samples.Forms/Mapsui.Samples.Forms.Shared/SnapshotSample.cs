@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Mapsui.Samples.Common.Maps;
+using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.UI;
 using Mapsui.UI.Forms;
 using Xamarin.Forms;

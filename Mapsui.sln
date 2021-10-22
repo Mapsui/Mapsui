@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31717.71
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui", "Mapsui\Mapsui.csproj", "{D74C052A-C07E-4B37-A898-134218ACA5C9}"
 EndProject
@@ -182,7 +182,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.UI.Avalonia", "Mapsu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.Avalonia", "Samples\Mapsui.Samples.Avalonia\Mapsui.Samples.Avalonia.csproj", "{1F214F09-D7F4-42DB-8B0F-D2468D2FE642}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Core", "Mapsui.Core\Mapsui.Core.csproj", "{7F15A600-A0C7-400E-BFBE-83105FADBC63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Core", "Mapsui.Core\Mapsui.Core.csproj", "{7F15A600-A0C7-400E-BFBE-83105FADBC63}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -2651,8 +2651,8 @@ Global
 		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.Ad-Hoc|AnyCPU.Build.0 = Debug|Any CPU
 		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.Ad-Hoc|ARM.ActiveCfg = Debug|Any CPU
 		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.Ad-Hoc|ARM.Build.0 = Debug|Any CPU
-		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.Ad-Hoc|arm64.ActiveCfg = Debug|Any CPU
-		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.Ad-Hoc|arm64.Build.0 = Debug|Any CPU
+		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.Ad-Hoc|ARM64.ActiveCfg = Release|Any CPU
+		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.Ad-Hoc|ARM64.Build.0 = Release|Any CPU
 		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.Ad-Hoc|iPhone.ActiveCfg = Debug|Any CPU
 		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.Ad-Hoc|iPhone.Build.0 = Debug|Any CPU
 		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Debug|Any CPU
@@ -2665,8 +2665,8 @@ Global
 		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.AppStore|AnyCPU.Build.0 = Debug|Any CPU
 		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.AppStore|ARM.ActiveCfg = Debug|Any CPU
 		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.AppStore|ARM.Build.0 = Debug|Any CPU
-		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.AppStore|arm64.ActiveCfg = Debug|Any CPU
-		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.AppStore|arm64.Build.0 = Debug|Any CPU
+		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.AppStore|ARM64.ActiveCfg = Release|Any CPU
+		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.AppStore|ARM64.Build.0 = Release|Any CPU
 		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.AppStore|iPhone.ActiveCfg = Debug|Any CPU
 		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.AppStore|iPhone.Build.0 = Debug|Any CPU
 		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.AppStore|iPhoneSimulator.ActiveCfg = Debug|Any CPU
@@ -2679,8 +2679,8 @@ Global
 		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.Debug|AnyCPU.Build.0 = Debug|Any CPU
 		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.Debug|ARM.ActiveCfg = Debug|Any CPU
 		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.Debug|ARM.Build.0 = Debug|Any CPU
-		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.Debug|arm64.ActiveCfg = Debug|Any CPU
-		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.Debug|arm64.Build.0 = Debug|Any CPU
+		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.Debug|ARM64.Build.0 = Debug|Any CPU
 		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.Debug|iPhone.ActiveCfg = Debug|Any CPU
 		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
@@ -2693,8 +2693,8 @@ Global
 		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.Release|AnyCPU.Build.0 = Release|Any CPU
 		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.Release|ARM.ActiveCfg = Release|Any CPU
 		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.Release|ARM.Build.0 = Release|Any CPU
-		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.Release|arm64.ActiveCfg = Release|Any CPU
-		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.Release|arm64.Build.0 = Release|Any CPU
+		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.Release|ARM64.Build.0 = Release|Any CPU
 		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.Release|iPhone.Build.0 = Release|Any CPU
 		{7F15A600-A0C7-400E-BFBE-83105FADBC63}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU

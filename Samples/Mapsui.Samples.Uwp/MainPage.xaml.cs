@@ -6,11 +6,9 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Mapsui.Extensions;
-using Mapsui.Providers;
 using Mapsui.UI;
 using Mapsui.Utilities;
 using Mapsui.Samples.Common;
-using Mapsui.Samples.Common.ExtensionMethods;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.CustomWidget;
@@ -79,7 +77,7 @@ namespace Mapsui.Samples.Uwp
                 Margin = new Thickness(4)
             };
 
-            radioButton.Click += (s, a) =>
+            radioButton.Click += (_, _) =>
             {
                 MapControl.Map.Layers.Clear();
                 MapControl.Info -= MapOnInfo;

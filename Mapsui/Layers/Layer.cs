@@ -98,9 +98,9 @@ namespace Mapsui.Layers
             OnDataChanged(args);
         }
 
-        private void DelayedFetch(MRect extent, double resolution)
+        private void DelayedFetch(FetchInfo fetchInfo)
         {
-            _fetchDispatcher.SetViewport(extent.ToBoundingBox(), resolution);
+            _fetchDispatcher.SetViewport(fetchInfo);
             _fetchMachine.Start();
         }
 
@@ -138,15 +138,15 @@ namespace Mapsui.Layers
         }
 
         /// <inheritdoc />
-        public override void RefreshData(MRect extent, double resolution, ChangeType changeType)
+        public override void RefreshData(FetchInfo fetchInfo)
         {
             if (!Enabled) return;
-            if (MinVisible > resolution) return;
-            if (MaxVisible < resolution) return;
+            if (MinVisible > fetchInfo.Resolution) return;
+            if (MaxVisible < fetchInfo.Resolution) return;
             if (DataSource == null) return;
-            if (changeType == ChangeType.Continuous) return;
+            if (fetchInfo.ChangeType == ChangeType.Continuous) return;
 
-            Delayer.ExecuteDelayed(() => DelayedFetch(new MRect(extent), resolution));
+            Delayer.ExecuteDelayed(() => DelayedFetch(fetchInfo));
         }
     }
 }

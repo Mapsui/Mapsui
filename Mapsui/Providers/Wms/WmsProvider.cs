@@ -28,6 +28,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using Mapsui.Extensions;
+using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Rendering;
 
@@ -459,11 +460,17 @@ namespace Mapsui.Providers.Wms
             //nothing to dispose
         }
 
-        public IEnumerable<IFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        public IEnumerable<IFeature> GetFeaturesInView(FetchInfo fetchInfo)
         {
             var features = new List<IGeometryFeature>();
             IRaster raster = null;
-            var view = new Viewport { Resolution = resolution, Center = box.Centroid.ToMPoint(), Width = (box.Width / resolution), Height = (box.Height / resolution) };
+            var view = new Viewport
+            {
+                Resolution = fetchInfo.Resolution, 
+                Center = fetchInfo.Extent.Centroid, 
+                Width = (fetchInfo.Extent.Width / fetchInfo.Resolution), 
+                Height = (fetchInfo.Extent.Height / fetchInfo.Resolution)
+            };
             if (TryGetMap(view, ref raster))
             {
                 features.Add(new Feature

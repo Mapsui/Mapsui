@@ -63,13 +63,6 @@ namespace Mapsui.Layers
         /// Gets the MRect of the entire layer
         /// </summary>
         MRect Envelope { get; }
-        
-        /// <summary>
-        /// The spatial reference CRS. 
-        /// This always needs to be equal to the CRS or the map. 
-        /// It should eventually be removed altogether
-        /// </summary>
-        string CRS { get; set; }
 
         /// <summary>
         /// Gets or sets rendering style of layer
@@ -124,14 +117,11 @@ namespace Mapsui.Layers
         /// <summary>
         /// Indicates that there has been a change in the view of the map
         /// </summary>
-        /// <param name="extent">The new extent of the visible map</param>
-        /// <param name="resolution">The new resolution of the visible map</param>
-        /// <param name="changeType">
         /// If Discrete an implementation should always refresh it's data. If Continuous the
         /// implementation could ignore it. Example: During dragging a map a WMS layer would not want
         /// to fetch data, only on the drag end.
-        /// </param>
-        void RefreshData(MRect extent, double resolution, ChangeType changeType);
+        /// <param name="fetchInfo">FetchInfo</param>
+        void RefreshData(FetchInfo fetchInfo);
 
         /// <summary>
         /// To indicate the data withing the layer has changed. This triggers a DataChanged event.

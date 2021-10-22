@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -12,9 +12,5 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Mapsui.UI.Forms\Mapsui.UI.Forms.csproj" />
     <ProjectReference Include="..\..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ExtensionMethods\" />
   </ItemGroup>
 </Project>

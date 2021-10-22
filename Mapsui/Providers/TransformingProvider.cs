@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using Mapsui.Extensions;
+using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Projection;
 using Mapsui.Utilities;
@@ -18,10 +20,11 @@ namespace Mapsui.Providers
 
         public string CRS { get; set; }
 
-        public IEnumerable<IGeometryFeature> GetFeaturesInView(BoundingBox box, double resolution)
+        public IEnumerable<IGeometryFeature> GetFeaturesInView(FetchInfo fetchInfo)
         {
-            var transformedBoundingBox = ProjectionHelper.Transform(box, _geometryTransformation, CRS, _provider.CRS);
-            var features = _provider.GetFeaturesInView(transformedBoundingBox, resolution);
+            fetchInfo = new FetchInfo(fetchInfo); // Copy so we do not modify the original
+            fetchInfo.Extent = ProjectionHelper.Transform(fetchInfo.Extent.ToBoundingBox(), _geometryTransformation, CRS, _provider.CRS).ToMRect();
+            var features = _provider.GetFeaturesInView(fetchInfo);
             return ProjectionHelper.Transform(features, _geometryTransformation, _provider.CRS, CRS);
         }
 

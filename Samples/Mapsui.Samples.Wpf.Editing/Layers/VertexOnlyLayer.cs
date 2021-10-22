@@ -34,7 +34,7 @@ namespace Mapsui.Samples.Wpf.Editing.Layers
             }
         }
 
-        public override void RefreshData(MRect extent, double resolution, ChangeType changeType)
+        public override void RefreshData(FetchInfo fetchInfo)
         {
             OnDataChanged(new DataChangedEventArgs());
         }

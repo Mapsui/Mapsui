@@ -43,7 +43,7 @@ namespace Mapsui.Samples.Common.Maps.Special
             return map;
         }
 
-        public static MemoryLayer CreateWgs84Layer()
+        public static Layer CreateWgs84Layer()
         {
             var features = new List<IGeometryFeature>
             {
@@ -61,7 +61,7 @@ namespace Mapsui.Samples.Common.Maps.Special
                 CRS = "EPSG:3857"
             };
 
-            return new MemoryLayer
+            return new Layer
             {
                 DataSource = dataSource,
                 Name = "WGS84 Geometries"

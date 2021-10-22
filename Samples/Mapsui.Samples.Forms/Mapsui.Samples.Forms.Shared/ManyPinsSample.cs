@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using Mapsui.Extensions;
+using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.Styles;
 using Mapsui.Widgets.PerformanceWidget;
 using Xamarin.Forms;

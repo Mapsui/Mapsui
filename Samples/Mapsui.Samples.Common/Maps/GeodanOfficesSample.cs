@@ -22,7 +22,6 @@ namespace Mapsui.Samples.Common.Maps
                     SymbolOffset = new Offset {Y = 64},
                     SymbolScale = 0.25
                 },
-                CRS = "EPSG:28992",
                 Name = "Geodan Offices"
             };
             return layer;
