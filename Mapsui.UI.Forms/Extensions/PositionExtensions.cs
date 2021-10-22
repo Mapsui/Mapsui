@@ -25,7 +25,7 @@ namespace Mapsui.UI.Forms.Extensions
             return point.ToNative();
         }
 
-        public static Position ToNative(this Geometries.Point point)
+        public static Position ToNative(this MPoint point)
         {
             var (lat, lon) = Projection.SphericalMercator.ToLonLat(point.X, point.Y);
             return new Position(lat, lon);
