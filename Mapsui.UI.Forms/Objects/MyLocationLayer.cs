@@ -6,14 +6,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+using Mapsui.Extensions;
+using Mapsui.Fetcher;
+
 #if __MAUI__
 using Mapsui.UI.Maui;
 using Microsoft.Maui;
 using Microsoft.Maui.Controls;
 #else
 using Mapsui.UI.Forms;
-using Mapsui.Extensions;
-using Mapsui.Fetcher;
 using Xamarin.Forms;
 #endif
 

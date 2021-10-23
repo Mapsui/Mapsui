@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31624.102
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31815.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui", "Mapsui\Mapsui.csproj", "{D74C052A-C07E-4B37-A898-134218ACA5C9}"
 EndProject
@@ -729,8 +729,8 @@ Global
 		{53A4E033-F814-46CC-8105-DAC289524455}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{53A4E033-F814-46CC-8105-DAC289524455}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
 		{53A4E033-F814-46CC-8105-DAC289524455}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{53A4E033-F814-46CC-8105-DAC289524455}.Debug|x64.ActiveCfg = Debug|x64
-		{53A4E033-F814-46CC-8105-DAC289524455}.Debug|x64.Build.0 = Debug|x64
+		{53A4E033-F814-46CC-8105-DAC289524455}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{53A4E033-F814-46CC-8105-DAC289524455}.Debug|x64.Build.0 = Debug|Any CPU
 		{53A4E033-F814-46CC-8105-DAC289524455}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{53A4E033-F814-46CC-8105-DAC289524455}.Debug|x86.Build.0 = Debug|Any CPU
 		{53A4E033-F814-46CC-8105-DAC289524455}.Release|AnyCPU.ActiveCfg = Release|Any CPU

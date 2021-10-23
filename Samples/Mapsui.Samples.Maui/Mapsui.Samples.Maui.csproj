@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net6.0;net6.0-ios13.6;net6.0-android30.0;net6.0-maccatalyst13.5</TargetFrameworks>
+		<TargetFrameworks>net6.0;net6.0-ios13.6;net6.0-android31.0;net6.0-maccatalyst13.5</TargetFrameworks>
         <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows')) and '$(MSBuildRuntimeType)' == 'Full'">$(TargetFrameworks);net6.0-windows10.0.19041</TargetFrameworks>
 		<OutputType>Exe</OutputType>
 		<RootNamespace>Mapsui.Samples.Maui</RootNamespace>
@@ -44,7 +44,7 @@
 		<PackageReference Include="Microsoft.WindowsAppSDK.Foundation" Version="1.0.0-experimental1" />
 		<PackageReference Include="Microsoft.WindowsAppSDK.WinUI" Version="1.0.0-experimental1" />
 		<PackageReference Include="Microsoft.WindowsAppSDK.InteractiveExperiences" Version="1.0.0-experimental1" NoWarn="NU1701" />
-    <PackageReference Include="Microsoft.Graphics.Win2D" Version="1.0.0.26-experimental1" />
+		<PackageReference Include="Microsoft.Graphics.Win2D" Version="1.0.0.26-experimental1" />
 	</ItemGroup>
 
 	<ItemGroup>
