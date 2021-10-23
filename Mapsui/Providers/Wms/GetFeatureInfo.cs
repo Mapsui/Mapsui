@@ -58,8 +58,7 @@ namespace Mapsui.Providers.Wms
             _infoFormat = infoFormat;
             var requestUrl = CreateRequestUrl(baseUrl, wmsVersion, infoFormat, srs, layer, extendXmin, extendYmin, extendXmax, extendYmax, x, y, mapWidth, mapHeight);
 
-            var thread = new Thread(delegate()
-            {
+            var thread = new Thread(delegate () {
                 using var task = _getStreamAsync(requestUrl);
                 try
                 {

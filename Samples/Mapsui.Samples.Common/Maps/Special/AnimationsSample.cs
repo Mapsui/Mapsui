@@ -21,7 +21,7 @@ namespace Mapsui.Samples.Common.Maps
         public static Map CreateMap(IMapControl mapControl)
         {
             var style = new SymbolStyle() { Fill = new Brush(Color.Red), SymbolScale = 1, };
-             
+
             var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(CreateLayer(style));
@@ -30,8 +30,7 @@ namespace Mapsui.Samples.Common.Maps
 
             // todo: Introduce one Animation for the MapControl that could be reused here.
             var animation = new Animation();
-            animation.Ticked += (s, e) =>
-            {
+            animation.Ticked += (s, e) => {
                 animation.UpdateAnimations();
                 mapControl.Refresh();
             };
@@ -42,7 +41,7 @@ namespace Mapsui.Samples.Common.Maps
 
         public static ILayer CreateLayer(IStyle style)
         {
-            
+
             return new Layer("Points")
             {
                 DataSource = new MemoryProvider<IGeometryFeature>(CreatePoints(style)),
@@ -62,7 +61,7 @@ namespace Mapsui.Samples.Common.Maps
         }
 
         private static List<AnimationEntry> CreateAnimationsForSymbolStyle(SymbolStyle style)
-        {            
+        {
             var animations = new List<AnimationEntry>();
 
             var entry1 = new AnimationEntry(
@@ -93,8 +92,7 @@ namespace Mapsui.Samples.Common.Maps
                 animationStart: 0,
                 animationEnd: 1,
                 easing: Easing.Linear,
-                tick: (entry, value) =>
-                {
+                tick: (entry, value) => {
                     var color = (Color)entry.Start;
                     style.Fill.Color = new Color(color.R, color.G, (int)(value < 0.5 ? (1.0 - 2.0 * value) * 255 : ((value - 0.5) * 2.0) * 255));
                 },

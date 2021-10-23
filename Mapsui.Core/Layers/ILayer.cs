@@ -27,7 +27,7 @@ namespace Mapsui.Layers
     /// <summary>
     /// Interface for map layers
     /// </summary>
-    public interface ILayer : INotifyPropertyChanged 
+    public interface ILayer : INotifyPropertyChanged
     {
         /// <summary>
         /// Numerical Id of layer

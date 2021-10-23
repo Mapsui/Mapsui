@@ -11,14 +11,14 @@ namespace Mapsui.Samples.Wpf
         {
             InitializeComponent();
         }
-        
+
         public void Initialize(LayerCollection layers)
         {
             Items.Children.Clear();
 
             foreach (var layer in layers)
             {
-                var item = new LayerListItem {LayerName = layer.Name};
+                var item = new LayerListItem { LayerName = layer.Name };
                 item.Enabled = layer.Enabled;
                 item.LayerOpacity = layer.Opacity;
                 item.Layer = layer;

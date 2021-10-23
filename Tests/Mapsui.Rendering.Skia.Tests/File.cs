@@ -24,7 +24,7 @@ namespace Mapsui.Rendering.Skia.Tests
             using var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write);
             stream.WriteTo(fileStream);
         }
-        
+
         public static string AssemblyDirectory
         {
             get

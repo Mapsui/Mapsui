@@ -58,11 +58,11 @@ namespace Mapsui.UI.Wpf
         {
             if (_drawing)
                 return;
-            if (Renderer == null) 
+            if (Renderer == null)
                 return;
-            if (_map == null) 
+            if (_map == null)
                 return;
-            if (!Viewport.HasSize) 
+            if (!Viewport.HasSize)
                 return;
 
             // Start drawing
@@ -347,8 +347,7 @@ namespace Mapsui.UI.Wpf
 
         private void MapDataChanged(object sender, DataChangedEventArgs e)
         {
-            RunOnUIThread(() =>
-            {
+            RunOnUIThread(() => {
                 try
                 {
                     if (e == null)
@@ -401,7 +400,7 @@ namespace Mapsui.UI.Wpf
             else if (e.PropertyName == nameof(Map.Envelope))
             {
                 CallHomeIfNeeded();
-                Refresh(); 
+                Refresh();
             }
             else if (e.PropertyName == nameof(Map.Layers))
             {
@@ -480,8 +479,8 @@ namespace Mapsui.UI.Wpf
         {
             var fetchInfo = new FetchInfo
             {
-                Extent = Viewport.Extent, 
-                Resolution = Viewport.Resolution, 
+                Extent = Viewport.Extent,
+                Resolution = Viewport.Resolution,
                 CRS = Map.CRS,
                 ChangeType = changeType
             };
@@ -520,11 +519,11 @@ namespace Mapsui.UI.Wpf
         public byte[] GetSnapshot(IEnumerable<ILayer> layers = null)
         {
             byte[] result = null;
-            
-            using (var stream = Renderer.RenderToBitmapStream(Viewport, layers ?? Map.Layers, pixelDensity: PixelDensity)) 
-            { 
+
+            using (var stream = Renderer.RenderToBitmapStream(Viewport, layers ?? Map.Layers, pixelDensity: PixelDensity))
+            {
                 if (stream != null)
-                    result = stream.ToArray(); 
+                    result = stream.ToArray();
             }
 
             return result;
@@ -540,10 +539,10 @@ namespace Mapsui.UI.Wpf
         private MapInfoEventArgs InvokeInfo(MPoint screenPosition, MPoint startScreenPosition, int numTaps)
         {
             return InvokeInfo(
-                Map.GetWidgetsOfMapAndLayers(), 
-                screenPosition, 
-                startScreenPosition, 
-                WidgetTouched, 
+                Map.GetWidgetsOfMapAndLayers(),
+                screenPosition,
+                startScreenPosition,
+                WidgetTouched,
                 numTaps);
         }
 
@@ -556,7 +555,7 @@ namespace Mapsui.UI.Wpf
         /// <param name="widgetCallback">Callback, which is called when Widget is hit</param>
         /// <param name="numTaps">Number of clickes/taps</param>
         /// <returns>True, if something done </returns>
-        private MapInfoEventArgs InvokeInfo(IEnumerable<IWidget> widgets, MPoint screenPosition, 
+        private MapInfoEventArgs InvokeInfo(IEnumerable<IWidget> widgets, MPoint screenPosition,
             MPoint startScreenPosition, Func<IWidget, MPoint, bool> widgetCallback, int numTaps)
         {
             // Check if a Widget is tapped. In the current design they are always on top of the map.
@@ -574,7 +573,7 @@ namespace Mapsui.UI.Wpf
                     };
                 }
             }
-        
+
             // Check which features in the map were tapped.
             var mapInfo = Renderer.GetMapInfo(screenPosition.X, screenPosition.Y, Viewport, Map.Layers);
 

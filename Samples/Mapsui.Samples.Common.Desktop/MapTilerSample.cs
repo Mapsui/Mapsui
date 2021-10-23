@@ -27,7 +27,7 @@ namespace Mapsui.Samples.Common.Desktop
 
         public static ILayer CreateLayer()
         {
-            return new TileLayer(new MapTilerTileSource()) {Name = "True Marble in MapTiler"};
+            return new TileLayer(new MapTilerTileSource()) { Name = "True Marble in MapTiler" };
         }
     }
 
@@ -49,7 +49,7 @@ namespace Mapsui.Samples.Common.Desktop
         {
             return Provider.GetTile(tileInfo);
         }
-        
+
         public static ITileProvider GetTileProvider()
         {
             return new FileTileProvider(new FileCache(GetAppDir() + "\\GeoData\\TrueMarble", "png"));

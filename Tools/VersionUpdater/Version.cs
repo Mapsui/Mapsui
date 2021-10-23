@@ -13,7 +13,7 @@ namespace VersionUpdater
 
         public static Version Parse(string version)
         {
-            var (firstPart, secondPart)  = SplitOnDash(version);
+            var (firstPart, secondPart) = SplitOnDash(version);
 
             var elements = firstPart.Split('.');
 

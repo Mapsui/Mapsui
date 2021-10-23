@@ -20,7 +20,7 @@ namespace Mapsui.Utilities
         public const string EpsgPrefix = "EPSG:";
         public const string EsriStringPrefix = "ESRISTRING:";
         public const string Proj4StringPrefix = "PROJ4STRING:";
-        
+
         public static string ToStandardizedCRS(string crs)
         {
             if (crs == null) return null;
@@ -55,7 +55,7 @@ namespace Mapsui.Utilities
 
         private static bool IsTransformationNeeded(string fromCRS, string toCRS)
         {
-           return !fromCRS?.Equals(toCRS) == true;
+            return !fromCRS?.Equals(toCRS) == true;
         }
 
         private static bool IsTransformationSupported(IGeometryTransformation geometryTransformation, string fromCRS, string toCRS)

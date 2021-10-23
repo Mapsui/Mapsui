@@ -48,20 +48,20 @@ namespace Mapsui.Samples.Avalonia.Views
             FillComboBoxWithCategories();
             FillListWithSamples();
         }
-        
+
         private MapControl MapControl => this.FindControl<MapControl>("MapControl");
         private ComboBox CategoryComboBox => this.FindControl<ComboBox>("CategoryComboBox");
         private TextBlock FeatureInfo => this.FindControl<TextBlock>("FeatureInfo");
         private StackPanel SampleList => this.FindControl<StackPanel>("SampleList");
         private Slider RotationSlider => this.FindControl<Slider>("RotationSlider");
-        
+
 
         private void FillComboBoxWithCategories()
         {
             Tests.Common.Utilities.LoadAssembly();
 
             var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c);
- 
+
             CategoryComboBox.Items = categories;
 
             CategoryComboBox.SelectedIndex = 1;
@@ -80,7 +80,7 @@ namespace Mapsui.Samples.Avalonia.Views
             foreach (var sample in AllSamples.GetSamples().Where(s => s.Category == selectedCategory))
                 SampleList.Children.Add(CreateRadioButton(sample));
         }
-        
+
         private void CategoryComboBoxSelectionChanged(object? sender, SelectionChangedEventArgs e)
         {
             FillListWithSamples();
@@ -95,8 +95,7 @@ namespace Mapsui.Samples.Avalonia.Views
                 Margin = new Thickness(4)
             };
 
-            radioButton.Click += (s, a) =>
-            {
+            radioButton.Click += (s, a) => {
                 MapControl.Map.Layers.Clear();
                 MapControl.Info -= MapOnInfo;
                 sample.Setup(MapControl);

@@ -25,14 +25,14 @@ using Mapsui.Providers;
 
 namespace Mapsui.Layers
 {
-    public class Layer: BaseLayer, IAsyncDataFetcher
+    public class Layer : BaseLayer, IAsyncDataFetcher
     {
         private IProvider<IFeature> _dataSource;
         private readonly object _syncRoot = new();
         private readonly ConcurrentStack<IFeature> _cache = new();
         private readonly FeatureFetchDispatcher<IFeature> _fetchDispatcher;
         private readonly FetchMachine _fetchMachine;
-        
+
         public Delayer Delayer { get; } = new();
 
         /// <summary>

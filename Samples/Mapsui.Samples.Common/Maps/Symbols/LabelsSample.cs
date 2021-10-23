@@ -47,26 +47,26 @@ namespace Mapsui.Samples.Common.Maps
 
             var memoryProvider = new MemoryProvider<IGeometryFeature>(features);
 
-            return new MemoryLayer {Name = "Points with labels", DataSource = memoryProvider};
+            return new MemoryLayer { Name = "Points with labels", DataSource = memoryProvider };
         }
 
         private static Feature CreateFeatureWithDefaultStyle()
         {
-            var featureWithDefaultStyle = new Feature {Geometry = new Point(0, 0)};
-            featureWithDefaultStyle.Styles.Add(new LabelStyle {Text = "Default Label"});
+            var featureWithDefaultStyle = new Feature { Geometry = new Point(0, 0) };
+            featureWithDefaultStyle.Styles.Add(new LabelStyle { Text = "Default Label" });
             return featureWithDefaultStyle;
         }
 
         private static Feature CreateFeatureWithColors()
         {
-            var featureWithColors = new Feature {Geometry = new Point(0, -7000000)};
+            var featureWithColors = new Feature { Geometry = new Point(0, -7000000) };
             featureWithColors.Styles.Add(CreateColoredLabelStyle());
             return featureWithColors;
         }
 
         private static Feature CreateFeatureWithBottomAlignedStyle()
         {
-            var featureWithBottomAlignedStyle = new Feature {Geometry = new Point(0, -5000000)};
+            var featureWithBottomAlignedStyle = new Feature { Geometry = new Point(0, -5000000) };
             featureWithBottomAlignedStyle.Styles.Add(new LabelStyle
             {
                 Text = "Bottom\nAligned",
@@ -78,7 +78,7 @@ namespace Mapsui.Samples.Common.Maps
 
         private static Feature CreateFeatureWithRightAlignedStyle()
         {
-            var featureWithRightAlignedStyle = new Feature {Geometry = new Point(0, -2000000)};
+            var featureWithRightAlignedStyle = new Feature { Geometry = new Point(0, -2000000) };
             featureWithRightAlignedStyle.Styles.Add(new LabelStyle
             {
                 Text = "Right Aligned",

@@ -58,7 +58,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             var capabilitiesHelper = new CapabilitiesHelper();
             capabilitiesHelper.CapabilitiesReceived += CapabilitiesHelperCapabilitiesReceived;
             capabilitiesHelper.CapabilitiesFailed += CapabilitiesHelperCapabilitiesFailed;
-            capabilitiesHelper.GetCapabilities(url, CapabilitiesType.DynamicServiceCapabilities, token);            
+            capabilitiesHelper.GetCapabilities(url, CapabilitiesType.DynamicServiceCapabilities, token);
         }
 
         public ArcGISDynamicCapabilities ArcGisDynamicCapabilities { get; private set; }
@@ -86,7 +86,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
 
         public string CRS
         {
-            get {  return _crs; }
+            get { return _crs; }
             set { _crs = value; }
         }
 
@@ -100,7 +100,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             IRaster raster = null;
 
             IViewport viewport = fetchInfo.ToViewport();
-            
+
             if (TryGetMap(viewport, ref raster))
             {
                 var feature = new Feature
@@ -121,7 +121,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
         {
             Debug.WriteLine("Error getting ArcGIS Capabilities");
         }
-        
+
         private void CapabilitiesHelperCapabilitiesReceived(object sender, EventArgs e)
         {
             var capabilities = sender as ArcGISDynamicCapabilities;
@@ -149,11 +149,11 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
                 Logger.Log(LogLevel.Error, "Error: Could not conver double to int (ExportMap size)", ex);
                 return false;
             }
-           
+
             var uri = new Uri(GetRequestUrl(viewport.Extent.ToBoundingBox(), width, height));
             var handler = new HttpClientHandler { Credentials = Credentials ?? CredentialCache.DefaultCredentials };
             var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(_timeOut) };
-           
+
             try
             {
                 var response = client.GetAsync(uri).Result;
@@ -179,7 +179,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
         public string GetRequestUrl(BoundingBox box, int width, int height)
         {
             //ArcGIS Export description see: http://resources.esri.com/help/9.3/arcgisserver/apis/rest/index.html?export.html
-            
+
             var sr = CreateSr(CRS);
             var strReq = new StringBuilder(_url);
             strReq.Append("/export?");
@@ -211,7 +211,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
                 strReq.AppendFormat("{0}", t.id);
                 oneAdded = true;
             }
-           
+
             strReq.AppendFormat("&format={0}", GetFormat(ArcGisDynamicCapabilities));
             strReq.Append("&transparent=true");
             strReq.Append("&f=image");

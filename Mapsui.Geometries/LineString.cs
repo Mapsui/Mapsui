@@ -42,7 +42,7 @@ namespace Mapsui.Geometries
         /// <summary>
         ///     Initializes an instance of a LineString
         /// </summary>
-        public LineString() : this(new List<Point>()) {}
+        public LineString() : this(new List<Point>()) { }
 
         /// <summary>
         ///     Initializes an instance of a LineString
@@ -238,7 +238,7 @@ namespace Mapsui.Geometries
         {
             return false;
         }
-        
+
         public override bool Equals(Geometry geom)
         {
             var lineString = geom as LineString;

@@ -76,7 +76,7 @@ namespace Mapsui.Rendering.Skia
             {
                 var width = (int)viewport.Width;
                 var height = (int)viewport.Height;
-                var imageInfo = new SKImageInfo((int)Math.Round(width * pixelDensity), (int)Math.Round(height * pixelDensity), 
+                var imageInfo = new SKImageInfo((int)Math.Round(width * pixelDensity), (int)Math.Round(height * pixelDensity),
                     SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
 
                 using var surface = SKSurface.Create(imageInfo);
@@ -151,7 +151,7 @@ namespace Mapsui.Rendering.Skia
                     // Save canvas
                     canvas.Save();
                     // We have a special renderer, so try, if it could draw this
-                    var result = ((ISkiaStyleRenderer) StyleRenderers[style.GetType()]).Draw(canvas, viewport, layer,
+                    var result = ((ISkiaStyleRenderer)StyleRenderers[style.GetType()]).Draw(canvas, viewport, layer,
                         geometryFeature, style, _symbolCache);
                     // Restore old canvas
                     canvas.Restore();
@@ -195,7 +195,7 @@ namespace Mapsui.Rendering.Skia
         {
             // todo: use margin to increase the pixel area
             // todo: We will need to select on style instead of layer
-            
+
 
 
             layers = layers

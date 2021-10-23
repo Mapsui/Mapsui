@@ -101,30 +101,30 @@ namespace Mapsui.Geometries.WellKnownBinary
             var byteOrder = reader.ReadByte();
 
             // Get the type of this geometry.
-            var type = ReadUInt32(reader, (WkbByteOrder) byteOrder);
+            var type = ReadUInt32(reader, (WkbByteOrder)byteOrder);
 
-            switch ((WKBGeometryType) type)
+            switch ((WKBGeometryType)type)
             {
                 case WKBGeometryType.WKBPoint:
-                    return CreateWKBPoint(reader, (WkbByteOrder) byteOrder);
+                    return CreateWKBPoint(reader, (WkbByteOrder)byteOrder);
 
                 case WKBGeometryType.WKBLineString:
-                    return CreateWKBLineString(reader, (WkbByteOrder) byteOrder);
+                    return CreateWKBLineString(reader, (WkbByteOrder)byteOrder);
 
                 case WKBGeometryType.WKBPolygon:
-                    return CreateWKBPolygon(reader, (WkbByteOrder) byteOrder);
+                    return CreateWKBPolygon(reader, (WkbByteOrder)byteOrder);
 
                 case WKBGeometryType.WKBMultiPoint:
-                    return CreateWKBMultiPoint(reader, (WkbByteOrder) byteOrder);
+                    return CreateWKBMultiPoint(reader, (WkbByteOrder)byteOrder);
 
                 case WKBGeometryType.WKBMultiLineString:
-                    return CreateWKBMultiLineString(reader, (WkbByteOrder) byteOrder);
+                    return CreateWKBMultiLineString(reader, (WkbByteOrder)byteOrder);
 
                 case WKBGeometryType.WKBMultiPolygon:
-                    return CreateWKBMultiPolygon(reader, (WkbByteOrder) byteOrder);
+                    return CreateWKBMultiPolygon(reader, (WkbByteOrder)byteOrder);
 
                 case WKBGeometryType.WKBGeometryCollection:
-                    return CreateWKBGeometryCollection(reader, (WkbByteOrder) byteOrder);
+                    return CreateWKBGeometryCollection(reader, (WkbByteOrder)byteOrder);
 
                 default:
                     if (!Enum.IsDefined(typeof(WKBGeometryType), type))
@@ -142,7 +142,7 @@ namespace Mapsui.Geometries.WellKnownBinary
         private static IEnumerable<Point> ReadCoordinates(BinaryReader reader, WkbByteOrder byteOrder)
         {
             // Get the number of points in this linestring.
-            var numPoints = (int) ReadUInt32(reader, byteOrder);
+            var numPoints = (int)ReadUInt32(reader, byteOrder);
 
             // Create a new array of coordinates.
             var coords = new Point[numPoints];
@@ -191,7 +191,7 @@ namespace Mapsui.Geometries.WellKnownBinary
         private static Polygon CreateWKBPolygon(BinaryReader reader, WkbByteOrder byteOrder)
         {
             // Get the Number of rings in this Polygon.
-            var numRings = (int) ReadUInt32(reader, byteOrder);
+            var numRings = (int)ReadUInt32(reader, byteOrder);
 
             Debug.Assert(numRings >= 1, "Number of rings in polygon must be 1 or more.");
 
@@ -210,7 +210,7 @@ namespace Mapsui.Geometries.WellKnownBinary
         private static MultiPoint CreateWKBMultiPoint(BinaryReader reader, WkbByteOrder byteOrder)
         {
             // Get the number of points in this multipoint.
-            var numPoints = (int) ReadUInt32(reader, byteOrder);
+            var numPoints = (int)ReadUInt32(reader, byteOrder);
 
             // Create a new array for the points.
             var points = new MultiPoint();
@@ -233,7 +233,7 @@ namespace Mapsui.Geometries.WellKnownBinary
         private static MultiLineString CreateWKBMultiLineString(BinaryReader reader, WkbByteOrder byteOrder)
         {
             // Get the number of linestrings in this multilinestring.
-            var numLineStrings = (int) ReadUInt32(reader, byteOrder);
+            var numLineStrings = (int)ReadUInt32(reader, byteOrder);
 
             // Create a new array for the linestrings .
             var mline = new MultiLineString();
@@ -256,7 +256,7 @@ namespace Mapsui.Geometries.WellKnownBinary
         private static MultiPolygon CreateWKBMultiPolygon(BinaryReader reader, WkbByteOrder byteOrder)
         {
             // Get the number of Polygons.
-            var numPolygons = (int) ReadUInt32(reader, byteOrder);
+            var numPolygons = (int)ReadUInt32(reader, byteOrder);
 
             // Create a new array for the Polygons.
             var polygons = new MultiPolygon();
@@ -281,7 +281,7 @@ namespace Mapsui.Geometries.WellKnownBinary
         private static Geometry CreateWKBGeometryCollection(BinaryReader reader, WkbByteOrder byteOrder)
         {
             // The next byte in the array tells the number of geometries in this collection.
-            var numGeometries = (int) ReadUInt32(reader, byteOrder);
+            var numGeometries = (int)ReadUInt32(reader, byteOrder);
 
             // Create a new array for the geometries.
             var geometries = new GeometryCollection();

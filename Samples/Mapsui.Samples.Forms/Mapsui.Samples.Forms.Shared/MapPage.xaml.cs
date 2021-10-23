@@ -12,13 +12,13 @@ using Xamarin.Essentials;
 
 namespace Mapsui.Samples.Forms
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class MapPage : ContentPage
-	{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class MapPage : ContentPage
+    {
         public Func<MapView, MapClickedEventArgs, bool> Clicker { get; set; }
 
-        public MapPage ()
-		{
+        public MapPage()
+        {
             InitializeComponent();
         }
 
@@ -153,11 +153,10 @@ namespace Mapsui.Samples.Forms
         /// <param name="e">Event arguments for new position</param>
         private void MyLocationPositionChanged(object sender, PositionEventArgs e)
         {
-            Device.BeginInvokeOnMainThread(() =>
-            {
+            Device.BeginInvokeOnMainThread(() => {
                 var coords = new UI.Forms.Position(e.Position.Latitude, e.Position.Longitude);
                 info.Text = $"{coords.ToString()} - D:{(int)e.Position.Heading} S:{Math.Round(e.Position.Speed, 2)}";
-                
+
                 mapView.MyLocationLayer.UpdateMyLocation(new UI.Forms.Position(e.Position.Latitude, e.Position.Longitude));
                 mapView.MyLocationLayer.UpdateMyDirection(e.Position.Heading, mapView.Viewport.Rotation);
                 mapView.MyLocationLayer.UpdateMySpeed(e.Position.Speed);

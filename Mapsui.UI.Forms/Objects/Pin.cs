@@ -63,11 +63,11 @@ namespace Mapsui.UI.Forms
         /// Internal MapView for refreshing of screen
         /// </summary>
         internal MapView MapView
-        { 
-            get 
-            { 
-                return _mapView; 
-            } 
+        {
+            get
+            {
+                return _mapView;
+            }
             set
             {
                 if (_mapView != value)
@@ -76,7 +76,7 @@ namespace Mapsui.UI.Forms
                     {
                         _mapView?.RemoveCallout(_callout);
                     }
-                    
+
                     Feature = null;
                     _mapView = value;
 
@@ -277,7 +277,7 @@ namespace Mapsui.UI.Forms
                         _callout.Subtitle = Address;
                     }
                 }
-                
+
                 return _callout;
             }
             internal set

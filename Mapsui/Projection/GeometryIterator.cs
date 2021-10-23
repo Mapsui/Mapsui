@@ -14,7 +14,7 @@ namespace Mapsui.Projection
             if (geometry is LineString lineString) return AllVertices(lineString);
             if (geometry is Polygon polygon) return AllVertices(polygon);
             if (geometry is IEnumerable<Geometry> geometries) return AllVertices(geometries);
-            
+
             var format = $"unsupported geometry: {geometry.GetType().Name}";
             throw new NotSupportedException(format);
         }

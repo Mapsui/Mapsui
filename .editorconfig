@@ -145,5 +145,5 @@ dotnet_style_qualification_for_property = false:suggestion
 dotnet_diagnostic.IDE0055.severity = warning
 
 # Category settings
-dotnet_analyzer_diagnostic.category-Style.severity = warning
+dotnet_analyzer_diagnostic.category-Style.severity = suggestion
 dotnet_analyzer_diagnostic.category-CodeQuality.severity = suggestion

@@ -5,7 +5,7 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class GeodanOfficesSample 
+    public class GeodanOfficesSample
     {
         public static MemoryLayer CreateLayer()
         {
@@ -15,11 +15,11 @@ namespace Mapsui.Samples.Common.Maps
 
             var layer = new MemoryLayer
             {
-                DataSource = new MemoryProvider<IGeometryFeature>(new[] {geodanAmsterdam, geodanDenBosch}),
+                DataSource = new MemoryProvider<IGeometryFeature>(new[] { geodanAmsterdam, geodanDenBosch }),
                 Style = new SymbolStyle
                 {
                     BitmapId = BitmapRegistry.Instance.Register(imageStream),
-                    SymbolOffset = new Offset {Y = 64},
+                    SymbolOffset = new Offset { Y = 64 },
                     SymbolScale = 0.25
                 },
                 Name = "Geodan Offices"

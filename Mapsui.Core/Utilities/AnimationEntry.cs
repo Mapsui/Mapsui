@@ -8,10 +8,10 @@ namespace Mapsui.Utilities
         private readonly Action<AnimationEntry, double> _tick;
         private readonly Action<AnimationEntry> _final;
 
-        public AnimationEntry(object start, object end, 
-            double animationStart = 0, double animationEnd = 1, 
+        public AnimationEntry(object start, object end,
+            double animationStart = 0, double animationEnd = 1,
             Easing easing = null,
-            Action<AnimationEntry, double> tick = null, 
+            Action<AnimationEntry, double> tick = null,
             Action<AnimationEntry> final = null)
         {
             AnimationStart = animationStart;

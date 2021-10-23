@@ -30,7 +30,7 @@ namespace Mapsui.Projection
         {
             (point.X, point.Y) = transformFunc(point.X, point.Y);
         }
-        
+
         public void Transform(string fromCRS, string toCRS, MRect rect)
         {
             Transform(rect.Min, _toLonLat[fromCRS]);

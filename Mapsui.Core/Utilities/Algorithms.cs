@@ -46,7 +46,7 @@ namespace Mapsui.Utilities
         /// <returns>Returns the angle in radians</returns>
         public static double DegreesToRadians(double degrees)
         {
-            return degrees*Math.PI/180.0;
+            return degrees * Math.PI / 180.0;
         }
 
         /// <summary>
@@ -74,8 +74,8 @@ namespace Mapsui.Utilities
         {
             var cos = Math.Cos(-radians);
             var sin = Math.Sin(-radians);
-            var newX = x*cos - y*sin;
-            var newY = x*sin + y*cos;
+            var newX = x * cos - y * sin;
+            var newY = x * sin + y * cos;
 
             return new MPoint(newX, newY);
         }

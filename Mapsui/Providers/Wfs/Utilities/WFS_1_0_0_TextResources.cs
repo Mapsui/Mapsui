@@ -16,7 +16,7 @@ namespace Mapsui.Providers.Wfs.Utilities
 {
     public class WFS_1_0_0_TextResources : WFS_1_0_0_XPathTextResources, IWFS_TextResources
     {
-        
+
         ////////////////////////////////////////////////////////////////////////
         // HTTP Configuration                                                 //                      
         // POST & GET                                                         //
@@ -39,8 +39,8 @@ namespace Mapsui.Providers.Wfs.Utilities
             return "?SERVICE=WFS&Version=1.0.0&REQUEST=DescribeFeatureType&TYPENAME=" + featureTypeName;
         }
 
-        
-        
+
+
         /// <summary>
         /// This method returns the query string for 'GetFeature'.
         /// </summary>
@@ -48,7 +48,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <param name="labelProperties">A list of properties necessary for label rendering</param>
         /// <param name="boundingBox">The bounding box of the query</param>
         /// <param name="filter">An instance implementing <see cref="IFilter"/></param>
-        public string GetFeatureGETRequest(WfsFeatureTypeInfo featureTypeInfo, List<string> labelProperties, 
+        public string GetFeatureGETRequest(WfsFeatureTypeInfo featureTypeInfo, List<string> labelProperties,
                                            BoundingBox boundingBox, IFilter filter)
         {
             string qualification = string.IsNullOrEmpty(featureTypeInfo.Prefix)
@@ -104,11 +104,11 @@ namespace Mapsui.Providers.Wfs.Utilities
                     xWriter.WriteAttributeString("srsName", ProjectionHelper.EpsgPrefix + featureTypeInfo.SRID);
                     xWriter.WriteElementString("PropertyName", qualification + featureTypeInfo.Geometry.GeometryName);
                     if (!labelProperties.All(string.IsNullOrWhiteSpace))
-                        xWriter.WriteElementString("PropertyName", string.Join(",", 
+                        xWriter.WriteElementString("PropertyName", string.Join(",",
                             labelProperties.Where(x => !string.IsNullOrWhiteSpace(x)).Select(lbl => qualification + lbl)));
 
                     AppendGml2Filter(xWriter, featureTypeInfo, boundingBox, filter, qualification);
-                    
+
                     xWriter.WriteEndElement();
                     xWriter.WriteEndElement();
                     xWriter.Flush();

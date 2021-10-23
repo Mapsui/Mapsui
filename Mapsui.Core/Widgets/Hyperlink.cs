@@ -13,7 +13,7 @@ namespace Mapsui.Widgets
             var args = new HyperlinkWidgetArguments();
 
             Touched?.Invoke(this, args);
-            
+
             return args.Handled;
         }
     }

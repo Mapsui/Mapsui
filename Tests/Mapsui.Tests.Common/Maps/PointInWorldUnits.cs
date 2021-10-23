@@ -38,7 +38,7 @@ namespace Mapsui.Tests.Common.Maps
                 BackColor = Color.Transparent,
                 Home = n => n.ZoomTo(0.5)
             };
-            
+
             map.Layers.Add(layer);
             return map;
         }
@@ -48,7 +48,7 @@ namespace Mapsui.Tests.Common.Maps
             return new Feature
             {
                 Geometry = new Point(x, y),
-                Styles = new List<IStyle> {new SymbolStyle {UnitType = unitType}}
+                Styles = new List<IStyle> { new SymbolStyle { UnitType = unitType } }
             };
         }
     }

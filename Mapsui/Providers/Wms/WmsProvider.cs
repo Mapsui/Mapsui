@@ -414,7 +414,7 @@ namespace Mapsui.Providers.Wms
                 try
                 {
                     using var task = _getStreamAsync(url);
-                    var bytes = BruTile.Utilities.ReadFully(task.Result);                        
+                    var bytes = BruTile.Utilities.ReadFully(task.Result);
                     images.Add(new MemoryStream(bytes));
                     task.Result.Close();
                 }
@@ -466,9 +466,9 @@ namespace Mapsui.Providers.Wms
             IRaster raster = null;
             var view = new Viewport
             {
-                Resolution = fetchInfo.Resolution, 
-                Center = fetchInfo.Extent.Centroid, 
-                Width = (fetchInfo.Extent.Width / fetchInfo.Resolution), 
+                Resolution = fetchInfo.Resolution,
+                Center = fetchInfo.Extent.Centroid,
+                Width = (fetchInfo.Extent.Width / fetchInfo.Resolution),
                 Height = (fetchInfo.Extent.Height / fetchInfo.Resolution)
             };
             if (TryGetMap(view, ref raster))
@@ -483,8 +483,8 @@ namespace Mapsui.Providers.Wms
 
         private async Task<Stream> GetStreamAsync(string url)
         {
-            var handler = new HttpClientHandler {Credentials = Credentials ?? CredentialCache.DefaultCredentials};
-            var client = new HttpClient(handler) {Timeout = TimeSpan.FromMilliseconds(TimeOut)};
+            var handler = new HttpClientHandler { Credentials = Credentials ?? CredentialCache.DefaultCredentials };
+            var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
             var req = new HttpRequestMessage(new HttpMethod(GetPreferredMethod().Type), url);
             var response = await client.SendAsync(req);
 
@@ -494,10 +494,10 @@ namespace Mapsui.Providers.Wms
             }
 
             if (response.Content.Headers.ContentType.MediaType.ToLower() != _mimeType)
-            { 
+            {
                 throw new Exception($"Unexpected WMS response content type. Expected - {_mimeType}, got - {response.Content.Headers.ContentType.MediaType}");
             }
-       
+
             return await response.Content.ReadAsStreamAsync();
         }
     }

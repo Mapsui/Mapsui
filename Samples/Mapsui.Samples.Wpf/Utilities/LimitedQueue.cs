@@ -6,7 +6,7 @@ namespace Mapsui.Samples.Wpf.Utilities
     {
         public int Limit { get; set; }
 
-        public LimitedQueue(int limit) 
+        public LimitedQueue(int limit)
         {
             Limit = limit;
         }
@@ -15,7 +15,7 @@ namespace Mapsui.Samples.Wpf.Utilities
         {
             while (Count >= Limit)
             {
-                TryDequeue(out _); 
+                TryDequeue(out _);
             }
             base.Enqueue(item);
         }

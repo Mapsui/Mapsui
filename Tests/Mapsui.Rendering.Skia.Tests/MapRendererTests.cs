@@ -16,7 +16,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = VectorStyleSample.CreateMap();
-            var viewport = new Viewport {Center = new MPoint(100, 100), Width = 200, Height = 200, Resolution = 1};
+            var viewport = new Viewport { Center = new MPoint(100, 100), Width = 200, Height = 200, Resolution = 1 };
             const string fileName = "vector_symbol.png";
 
             // act
@@ -131,7 +131,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = SymbolTypesSample.CreateMap();
-            
+
             const string fileName = "vector_symbol_symboltype.png";
 
             var viewport = new Viewport
@@ -157,7 +157,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = PointInWorldUnits.CreateMap();
-            var viewport = new Viewport {Center = new MPoint(0, 0), Width = 200, Height = 100, Resolution = 0.5};
+            var viewport = new Viewport { Center = new MPoint(0, 0), Width = 200, Height = 100, Resolution = 0.5 };
             const string fileName = "vector_symbol_unittype.png";
 
             // act
@@ -271,7 +271,7 @@ namespace Mapsui.Rendering.Skia.Tests
             if (color1.Alpha == 0 && color2.Alpha == 0) return true; // If both are transparent all colors are ignored
             if (Math.Abs(color1.Alpha - color2.Alpha) > allowedColorDistance) return false;
             if (Math.Abs(color1.Red - color2.Red) > allowedColorDistance) return false;
-            if (Math.Abs(color1.Green- color2.Green) > allowedColorDistance) return false;
+            if (Math.Abs(color1.Green - color2.Green) > allowedColorDistance) return false;
             if (Math.Abs(color1.Blue - color2.Blue) > allowedColorDistance) return false;
             return true;
         }

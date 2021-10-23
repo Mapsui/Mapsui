@@ -243,7 +243,7 @@ namespace Mapsui
         ///     The minimum bounding box for this Geometry.
         /// </summary>
         /// <returns></returns>
-        public MRect MRect => new (X, Y, X, Y);
+        public MRect MRect => new(X, Y, X, Y);
 
         /// <summary>
         ///     Calculates a new point by rotating this point clockwise about the specified center point

@@ -22,12 +22,12 @@ namespace Mapsui.Samples.Common.Maps.Widgets
             var map = new Map
             {
                 CRS = "EPSG:3857",
-                
+
             };
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
 
             var transformation = new MinimalTransformation();
-            
+
             // Add many different ScaleBarWidgets to Viewport of Map
             map.Widgets.Add(new ScaleBarWidget(map, transformation) { ScaleBarMode = ScaleBarMode.Both, MarginX = 10, MarginY = 10 });
             map.Widgets.Add(new ScaleBarWidget(map, transformation) { HorizontalAlignment = Mapsui.Widgets.HorizontalAlignment.Center, VerticalAlignment = Mapsui.Widgets.VerticalAlignment.Bottom, TextAlignment = Mapsui.Widgets.Alignment.Center });

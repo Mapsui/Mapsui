@@ -110,7 +110,7 @@ namespace Mapsui.Tests.Fetcher
             fetchDispatcher.SetViewport(fetchInfo);
             tileMachine.Start();
             while (fetchDispatcher.Busy) { Thread.Sleep(1); }
-            
+
             // Assert
             Assert.AreEqual(tilesInLevel, tileProvider.TotalCount);
         }
@@ -224,7 +224,7 @@ namespace Mapsui.Tests.Fetcher
             // 
             // Note, the fact that we have to define this complex method on the outside
             // indicates a design flaw.
-            if (tile == null) return new Feature { Geometry = null }; 
+            if (tile == null) return new Feature { Geometry = null };
             return new Feature { Geometry = new Raster(new MemoryStream(tile), tileInfo.Extent.ToBoundingBox()) };
         }
     }

@@ -19,8 +19,7 @@ namespace VersionUpdater
         static void Main(string[] args)
         {
             Parser.Default.ParseArguments<Options>(args)
-                .WithParsed(o =>
-                {
+                .WithParsed(o => {
                     var version = Version.Parse(o.Version);
 
                     Console.WriteLine($"{nameof(version.FullVersion)}: {version.FullVersion}");

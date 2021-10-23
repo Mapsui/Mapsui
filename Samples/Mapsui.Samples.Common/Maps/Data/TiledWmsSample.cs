@@ -32,7 +32,7 @@ namespace Mapsui.Samples.Common.Maps
 
         public static ILayer CreateLayer()
         {
-            return new TileLayer(CreateTileSource()) {Name = "Omgevingswarmte (PDOK)"};
+            return new TileLayer(CreateTileSource()) { Name = "Omgevingswarmte (PDOK)" };
         }
 
         public static ITileSource CreateTileSource()

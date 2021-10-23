@@ -30,7 +30,7 @@ namespace Mapsui.Rendering.Skia
             canvas.Translate(-halfWidth + offsetX, -halfHeight - offsetY);
 
             var alpha = Convert.ToByte(255 * opacity);
-            var transparency = SKColors.White.WithAlpha(alpha); 
+            var transparency = SKColors.White.WithAlpha(alpha);
             using (var cf = SKColorFilter.CreateBlendMode(transparency, SKBlendMode.DstIn))
             {
                 canvas.DrawPicture(svg.Picture, new SKPaint()

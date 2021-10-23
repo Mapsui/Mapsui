@@ -24,7 +24,7 @@ namespace Mapsui.Samples.Common.Desktop
 
         public static Map CreateMap()
         {
-            var map = new Map {Home = n => n.NavigateTo(new MPoint(0, 0), 1)};
+            var map = new Map { Home = n => n.NavigateTo(new MPoint(0, 0), 1) };
             map.Layers.Add(CreateLayer());
             return map;
         }
@@ -36,7 +36,7 @@ namespace Mapsui.Samples.Common.Desktop
             capabilitiesHelper.CapabilitiesReceived += CapabilitiesReceived;
             capabilitiesHelper.CapabilitiesFailed += capabilitiesHelper_CapabilitiesFailed;
             capabilitiesHelper.GetCapabilities(@"http://imagery.arcgisonline.com/ArcGIS/rest/services/LandsatGLS/FalseColor/ImageServer", CapabilitiesType.ImageServiceCapabilities);
-           
+
             //Create own
             return new ArcGISImageServiceProvider(
                 new ArcGISImageCapabilities("http://imagery.arcgisonline.com/ArcGIS/rest/services/LandsatGLS/FalseColor/ImageServer/exportImage", 268211520000, 1262217600000))

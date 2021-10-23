@@ -19,7 +19,7 @@ namespace Mapsui.Tests.Layers
 
             var size = layerCollection.Count();
             var array = new ILayer[size];
-            
+
             // act
             layerCollection.CopyTo(array, 0);
 
@@ -51,7 +51,7 @@ namespace Mapsui.Tests.Layers
             Assert.NotNull(array[0], "first element not null");
             // We have no crash but the seconds element is null.
             // This might have unpleasant consequences.
-            Assert.Null(array[1], "second element IS null"); 
+            Assert.Null(array[1], "second element IS null");
         }
 
         [Test]
@@ -115,7 +115,7 @@ namespace Mapsui.Tests.Layers
             layerCollection.Add(layer1);
             layerCollection.Add(layer2);
             layerCollection.Add(layer3);
-            
+
             // act
             layerCollection.Move(1, layer3);
 

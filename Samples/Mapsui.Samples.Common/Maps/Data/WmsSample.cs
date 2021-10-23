@@ -16,7 +16,7 @@ namespace Mapsui.Samples.Common.Maps.Data
 
         public static Map CreateMap()
         {
-            var map = new Map {CRS = "EPSG:28992"};
+            var map = new Map { CRS = "EPSG:28992" };
             // The WMS request needs a CRS
             map.Layers.Add(CreateLayer());
             return map;
@@ -24,7 +24,7 @@ namespace Mapsui.Samples.Common.Maps.Data
 
         public static ILayer CreateLayer()
         {
-            return new ImageLayer("Windsnelheden (PDOK)") {DataSource = CreateWmsProvider()};
+            return new ImageLayer("Windsnelheden (PDOK)") { DataSource = CreateWmsProvider() };
         }
 
         private static WmsProvider CreateWmsProvider()

@@ -33,7 +33,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
         readonly ScaleInfo _scaleInfo = new ScaleInfo();
 
         public EditMode EditMode { get; set; }
-        
+
         public int VertexRadius { get; set; } = 12;
 
         public bool EndEdit()
@@ -72,7 +72,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
                 Layer.DataHasChanged();
             }
         }
-   
+
         public bool AddVertex(Point worldPosition)
         {
             if (EditMode == EditMode.AddPoint)
@@ -137,7 +137,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
             return vertices.OrderBy(v => v.Distance(mapInfo.WorldPosition.ToPoint()))
                 .FirstOrDefault(v => v.Distance(mapInfo.WorldPosition.ToPoint()) < mapInfo.Resolution * screenDistance);
         }
-        
+
         private void SetPointXY(Point target, Point position)
         {
             target.X = position.X;
@@ -166,11 +166,11 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
             }
             return false;
         }
-        
+
         public bool Dragging(Point worldPosition)
         {
             if (EditMode != EditMode.Modify || _dragInfo.Feature == null) return false;
-            
+
             SetPointXY(_dragInfo.Vertex, worldPosition - _dragInfo.StartOffsetToVertex);
 
             if (_dragInfo.Feature.Geometry is Polygon polygon) // Not this only works correctly it the feature is in the outerring.
@@ -262,7 +262,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
         public bool Rotating(Point worldPosition)
         {
             if (EditMode != EditMode.Rotate || _rotateInfo.Feature == null) return false;
-            
+
             var previousVector = _rotateInfo.Center - _rotateInfo.PreviousPosition;
             var currentVector = _rotateInfo.Center - worldPosition;
             var degrees = AngleBetween(currentVector, previousVector);
@@ -273,7 +273,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
 
             _rotateInfo.Feature.RenderedGeometry.Clear();
             Layer.DataHasChanged();
-            
+
             return true; // to signal pan lock
         }
 

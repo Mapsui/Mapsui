@@ -38,7 +38,7 @@ namespace Mapsui.Tests.Common.Maps
 
         public static IEnumerable<IGeometryFeature> CreateFeatures()
         {
-            var pinId = LoadSvg("Mapsui.Tests.Common.Resources.Images.Pin.svg");            
+            var pinId = LoadSvg("Mapsui.Tests.Common.Resources.Images.Pin.svg");
 
             return new List<IGeometryFeature>
             {
@@ -67,8 +67,8 @@ namespace Mapsui.Tests.Common.Maps
 
         private static int LoadSvg(string bitmapPath)
         {
-            var bitmapStream = typeof(Utilities).GetTypeInfo().Assembly.GetManifestResourceStream(bitmapPath);        
-            return BitmapRegistry.Instance.Register(bitmapStream);                
+            var bitmapStream = typeof(Utilities).GetTypeInfo().Assembly.GetManifestResourceStream(bitmapPath);
+            return BitmapRegistry.Instance.Register(bitmapStream);
         }
     }
 }
