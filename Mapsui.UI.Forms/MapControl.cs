@@ -149,7 +149,11 @@ namespace Mapsui.UI.Forms
                 view = _canvasView;
             }
 
+#if __MAUI__
+            view.PropertyChanged += View_PropertyChanged; 
+#else
             view.SizeChanged += OnSizeChanged;
+#endif
 
             Content = view;
 
@@ -159,31 +163,24 @@ namespace Mapsui.UI.Forms
         }
 
 #if __MAUI__
-        protected override void InvalidateLayout()
+        private void View_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            base.InvalidateLayout();
-            SizeChangedWorkaround();
-        }
-
-        protected override void OnSizeAllocated(double width, double height)
-        {
-            base.OnSizeAllocated(width, height);
-            SizeChangedWorkaround();
-        }
-
-        private void SizeChangedWorkaround()
-        {
-            var newSize = new Size(this.Width, this.Height);
-
-            if (newSize.Width > 0 && newSize.Height > 0 && this.oldSize != newSize)
+            switch (e.PropertyName)
             {
-                this.oldSize = newSize;
-                // Maui Workaround because the OnSizeChanged Events don't fire.
-                // Maybe this is a Bug and will be fixed in later versions.
-                this.OnSizeChanged(this, new EventArgs());
-            }
+                case nameof(this.Width):
+                case nameof(this.Height):
+                    var newSize = new Size(this.Width, this.Height);
 
-            this.RefreshGraphics();
+                    if (newSize.Width > 0 && newSize.Height > 0 && this.oldSize != newSize)
+                    {
+                        this.oldSize = newSize;
+                        // Maui Workaround because the OnSizeChanged Events don't fire.
+                        // Maybe this is a Bug and will be fixed in later versions.
+                        this.OnSizeChanged(this, EventArgs.Empty);
+                    }
+
+                    break;
+            }
         }
 #endif
 
