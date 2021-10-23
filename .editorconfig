@@ -1,8 +1,10 @@
+# Remove the line below if you want to inherit .editorconfig settings from higher directories
+root = true
+
 # Rules in this file were initially inferred by Visual Studio IntelliCode from the C:\Users\ts\Documents\GitHub\Mapsui codebase based on best match to current usage at 10/23/2021
 # You can modify the rules from these initially generated values to suit your own policies
 # You can learn more about editorconfig here: https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference
 [*.cs]
-
 
 #Core editorconfig formatting - indentation
 
@@ -138,3 +140,10 @@ dotnet_style_qualification_for_field = false:suggestion
 dotnet_style_qualification_for_method = false:suggestion
 #prefer properties not to be prefaced with this. or Me. in Visual Basic
 dotnet_style_qualification_for_property = false:suggestion
+
+# IDE0055: Fix formatting
+dotnet_diagnostic.IDE0055.severity = warning
+
+# Category settings
+dotnet_analyzer_diagnostic.category-Style.severity = warning
+dotnet_analyzer_diagnostic.category-CodeQuality.severity = suggestion
