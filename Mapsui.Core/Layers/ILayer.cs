@@ -18,7 +18,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using Mapsui.Fetcher;
-using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.Widgets;
 

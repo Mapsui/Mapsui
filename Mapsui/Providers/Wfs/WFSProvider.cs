@@ -11,6 +11,7 @@ using System.Net;
 using System.Xml.XPath;
 using Mapsui.Extensions;
 using Mapsui.Fetcher;
+using Mapsui.Layers;
 using Mapsui.Projection;
 using Mapsui.Providers.Wfs.Xml;
 using Mapsui.Utilities;

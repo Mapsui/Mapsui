@@ -7,8 +7,8 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using Mapsui.Extensions;
-using Mapsui.Fetcher;
 using Mapsui.Geometries;
+using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Utilities;
 

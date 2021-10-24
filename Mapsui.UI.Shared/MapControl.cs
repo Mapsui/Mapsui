@@ -9,6 +9,7 @@ using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
 using Mapsui.Widgets;
 using System.Runtime.CompilerServices;
+using Mapsui.Providers;
 using Mapsui.Utilities;
 
 #if __UWP__

@@ -1,5 +1,5 @@
-using Mapsui.Providers;
 using System;
+using Mapsui.Layers;
 
 namespace Mapsui.Styles.Thematics
 {

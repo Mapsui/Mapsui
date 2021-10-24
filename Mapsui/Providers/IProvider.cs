@@ -18,6 +18,7 @@
 using Mapsui.Geometries;
 using System.Collections.Generic;
 using Mapsui.Fetcher;
+using Mapsui.Layers;
 
 namespace Mapsui.Providers
 {

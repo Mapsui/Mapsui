@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
+using Mapsui.Layers;
 using Mapsui.Styles;
 using Bitmap = System.Drawing.Bitmap;
 using Color = System.Drawing.Color;

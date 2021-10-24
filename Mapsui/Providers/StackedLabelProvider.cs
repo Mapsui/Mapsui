@@ -2,6 +2,7 @@
 using System.Linq;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
+using Mapsui.Layers;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 

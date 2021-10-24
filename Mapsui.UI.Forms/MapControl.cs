@@ -10,6 +10,8 @@ using Mapsui.Geometries.Utilities;
 using Xamarin.Forms;
 using System.Threading.Tasks;
 using Mapsui.Fetcher;
+using Mapsui.Layers;
+using Mapsui.Providers;
 
 namespace Mapsui.UI.Forms
 {

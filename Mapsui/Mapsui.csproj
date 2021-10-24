@@ -20,10 +20,6 @@
     <ProjectReference Include="..\Mapsui.Geometries\Mapsui.Geometries.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="UI\" />
-  </ItemGroup>
-
   <PropertyGroup>
     <DebugType>portable</DebugType>
   </PropertyGroup>
