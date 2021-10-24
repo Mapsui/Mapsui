@@ -17,9 +17,8 @@ namespace Mapsui.Samples.Maui
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseSkiaSharp(true)
-                .UseMauiApp<App>()                
-                .ConfigureFonts(fonts =>
-                {
+                .UseMauiApp<App>()
+                .ConfigureFonts(fonts => {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 });
 

@@ -138,13 +138,11 @@ namespace Mapsui.Samples.Maui
         {
             this.gpsCancelation = new CancellationTokenSource();
 
-            await Task.Run(async () =>
-            {
+            await Task.Run(async () => {
                 while (!gpsCancelation.IsCancellationRequested)
                 {
                     var request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
-                    await Device.InvokeOnMainThreadAsync(async () =>
-                    {
+                    await Device.InvokeOnMainThreadAsync(async () => {
                         var location = await Geolocation.GetLocationAsync(request, this.gpsCancelation.Token).ConfigureAwait(false);
                         if (location != null)
                         {
@@ -169,14 +167,13 @@ namespace Mapsui.Samples.Maui
         /// <param name="e">Event arguments for new position</param>
         private void MyLocationPositionChanged(Location e)
         {
-            Device.BeginInvokeOnMainThread(() =>
-            {
+            Device.BeginInvokeOnMainThread(() => {
                 mapView.MyLocationLayer.UpdateMyLocation(new UI.Maui.Position(e.Latitude, e.Longitude));
                 if (e.Course != null)
                 {
                     mapView.MyLocationLayer.UpdateMyDirection(e.Course.Value, mapView.Viewport.Rotation);
                 }
-                
+
                 if (e.Speed != null)
                 {
                     mapView.MyLocationLayer.UpdateMySpeed(e.Speed.Value);

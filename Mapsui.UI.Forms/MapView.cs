@@ -16,11 +16,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using Svg.Skia;
-using Mapsui.Extensions;
 using Mapsui.Fetcher;
-using Mapsui.Providers;
-using Mapsui.Widgets.ButtonWidget;
 #if __MAUI__
 using Mapsui.UI.Maui.Extensions;
 using Microsoft.Maui;
@@ -610,8 +606,8 @@ namespace Mapsui.UI.Forms
                         break;
                     }
                 }
-                
-                var calloutArgs = new CalloutClickedEventArgs(clickedCallout,                     
+
+                var calloutArgs = new CalloutClickedEventArgs(clickedCallout,
                     Viewport.ScreenToWorld(e.MapInfo.ScreenPosition).ToNative(),
                     new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.NumTaps);
 
@@ -650,7 +646,7 @@ namespace Mapsui.UI.Forms
 
         private void HandlerLongTap(object sender, TappedEventArgs e)
         {
-            var args = new MapLongClickedEventArgs(Viewport.ScreenToWorld(e.ScreenPosition).ToNative());            
+            var args = new MapLongClickedEventArgs(Viewport.ScreenToWorld(e.ScreenPosition).ToNative());
             MapLongClicked?.Invoke(this, args);
 
             if (args.Handled)

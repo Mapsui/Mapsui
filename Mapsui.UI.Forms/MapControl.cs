@@ -152,7 +152,7 @@ namespace Mapsui.UI.Forms
             }
 
 #if __MAUI__
-            view.PropertyChanged += View_PropertyChanged; 
+            view.PropertyChanged += View_PropertyChanged;
 #else
             view.SizeChanged += OnSizeChanged;
 #endif
@@ -160,7 +160,7 @@ namespace Mapsui.UI.Forms
             Content = view;
 
             Map = new Map();
-            
+
             BackgroundColor = KnownColor.White;
         }
 

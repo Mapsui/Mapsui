@@ -292,6 +292,13 @@ namespace Mapsui.UI.Wpf
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+#elif __AVALONIA__
+        public new event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 #else
         public event PropertyChangedEventHandler PropertyChanged;
 
