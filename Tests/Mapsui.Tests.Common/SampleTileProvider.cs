@@ -9,7 +9,7 @@ namespace Mapsui.Tests.Common
     public class SampleTileProvider : ITileProvider
     {
         readonly IDictionary<TileIndex, byte[]> _dictionary = new Dictionary<TileIndex, byte[]>();
-        
+
         public SampleTileProvider()
         {
             AddTile(new TileIndex(0, 0, 0));

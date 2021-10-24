@@ -138,12 +138,12 @@ namespace Mapsui.Geometries.WellKnownText
             var nextToken = GetNextEmptyOrOpener(tokenizer);
             if (nextToken == "EMPTY") return coordinates;
 
-            var externalCoordinate = new Point {X = GetNextNumber(tokenizer), Y = GetNextNumber(tokenizer)};
+            var externalCoordinate = new Point { X = GetNextNumber(tokenizer), Y = GetNextNumber(tokenizer) };
             coordinates.Add(externalCoordinate);
             nextToken = GetNextCloserOrComma(tokenizer);
             while (nextToken == ",")
             {
-                var internalCoordinate = new Point {X = GetNextNumber(tokenizer), Y = GetNextNumber(tokenizer)};
+                var internalCoordinate = new Point { X = GetNextNumber(tokenizer), Y = GetNextNumber(tokenizer) };
                 coordinates.Add(internalCoordinate);
                 nextToken = GetNextCloserOrComma(tokenizer);
             }

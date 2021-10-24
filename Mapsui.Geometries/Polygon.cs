@@ -47,12 +47,12 @@ namespace Mapsui.Geometries
         ///     Instatiates a polygon based on one extorier ring.
         /// </summary>
         /// <param name="exteriorRing">Exterior ring</param>
-        public Polygon(LinearRing exteriorRing) : this(exteriorRing, new Collection<LinearRing>()) {}
+        public Polygon(LinearRing exteriorRing) : this(exteriorRing, new Collection<LinearRing>()) { }
 
         /// <summary>
         ///     Instatiates a polygon
         /// </summary>
-        public Polygon() : this(new LinearRing(), new Collection<LinearRing>()) {}
+        public Polygon() : this(new LinearRing(), new Collection<LinearRing>()) { }
 
         /// <summary>
         ///     Gets or sets the exterior ring of this Polygon
@@ -92,7 +92,7 @@ namespace Mapsui.Geometries
                 return area;
             }
         }
-        
+
         /// <summary>
         ///     Returns the Nth interior ring for this Polygon as a LineString
         /// </summary>
@@ -133,7 +133,7 @@ namespace Mapsui.Geometries
         /// <returns>Copy of Geometry</returns>
         public new Polygon Clone()
         {
-            var polygon = new Polygon {ExteriorRing = ExteriorRing.Clone()};
+            var polygon = new Polygon { ExteriorRing = ExteriorRing.Clone() };
             foreach (var interiorRing in InteriorRings)
             {
                 polygon.InteriorRings.Add(interiorRing.Clone());
@@ -203,7 +203,7 @@ namespace Mapsui.Geometries
             return BoundingBox.Contains(point) && // First check bounds for performance
                 Algorithms.PointInPolygon(ExteriorRing.Vertices, point);
         }
-        
+
         public override bool Equals(Geometry geom)
         {
             var polygon = geom as Polygon;

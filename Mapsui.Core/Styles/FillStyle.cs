@@ -9,7 +9,7 @@ namespace Mapsui.Styles
         DiagonalCross,
         ForwardDiagonal,
         Hollow,
-        Horizontal,        
+        Horizontal,
         Vertical,
         Bitmap,
         BitmapRotated,

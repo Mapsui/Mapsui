@@ -72,13 +72,13 @@ namespace Mapsui.Layers
         public int Id { get; }
 
         /// <inheritdoc />
-        public object Tag 
-        { 
+        public object Tag
+        {
             get => _tag;
             set
-            { 
-                _tag = value; 
-                OnPropertyChanged(nameof(Tag)); 
+            {
+                _tag = value;
+                OnPropertyChanged(nameof(Tag));
             }
         }
 

@@ -147,7 +147,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
                 TraceInOrder(root.RightNode);
         }
 
-        
+
         /// <summary>
         /// Gets an enumerator for all the values in the tree in ascending order
         /// </summary>
@@ -216,7 +216,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
 
         private IEnumerable<ItemValue> ScanString(string val, Node<T, TU> root)
         {
-            if (string.Compare(root.Item.Value.ToString().Substring(0, val.Length).ToUpper(), 
+            if (string.Compare(root.Item.Value.ToString().Substring(0, val.Length).ToUpper(),
                 val, StringComparison.Ordinal) > 0)
             {
                 if (root.LeftNode != null)
@@ -295,7 +295,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
                 }
             }
         }
-        
+
         /// <summary>
         /// A value in a <see cref="BinaryTree&lt;T, U&gt;"/>.
         /// </summary>

@@ -142,9 +142,9 @@ namespace Mapsui
             unchecked
             {
                 var hashCode = BottomLeft != null ? BottomLeft.GetHashCode() : 0;
-                hashCode = (hashCode*397) ^ (TopLeft != null ? TopLeft.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (TopRight != null ? TopRight.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (BottomRight != null ? BottomRight.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (TopLeft != null ? TopLeft.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (TopRight != null ? TopRight.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (BottomRight != null ? BottomRight.GetHashCode() : 0);
                 return hashCode;
             }
         }

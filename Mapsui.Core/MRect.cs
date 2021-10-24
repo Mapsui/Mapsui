@@ -122,13 +122,13 @@ namespace Mapsui
         /// </summary>
         public double Bottom => Min.Y;
 
-        public MPoint TopLeft => new (Left, Top);
+        public MPoint TopLeft => new(Left, Top);
 
-        public MPoint TopRight => new (Right, Top);
+        public MPoint TopRight => new(Right, Top);
 
-        public MPoint BottomLeft => new (Left, Bottom);
+        public MPoint BottomLeft => new(Left, Bottom);
 
-        public MPoint BottomRight => new (Right, Bottom);
+        public MPoint BottomRight => new(Right, Bottom);
 
         /// <summary>
         ///     Returns the width of the bounding box

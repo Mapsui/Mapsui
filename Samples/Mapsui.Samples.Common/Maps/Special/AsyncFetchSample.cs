@@ -45,7 +45,7 @@ namespace Mapsui.Samples.Common.Maps
             return new Layer
             {
                 Name = "Async Layer",
-                IsMapInfoLayer=true,
+                IsMapInfoLayer = true,
                 DataSource = new MemoryProvider<IGeometryFeature>(GetCitiesFromEmbeddedResource()),
                 Style = CreateBitmapStyle()
             };
@@ -57,9 +57,8 @@ namespace Mapsui.Samples.Common.Maps
             var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
             var stream = assembly.GetManifestResourceStream(path);
             var cities = DeserializeFromStream<City>(stream);
-            
-            return cities.Select(c =>
-            {
+
+            return cities.Select(c => {
                 var feature = new Feature();
                 feature.Geometry = SphericalMercator.FromLonLat(c.Lng, c.Lat).ToMPoint().ToPoint();
                 feature["name"] = c.Name;

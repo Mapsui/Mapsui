@@ -72,11 +72,10 @@ namespace Mapsui.Layers
         {
             if (e.PropertyName == nameof(DataSource))
             {
-                Task.Run(() => 
-                {
+                Task.Run(() => {
                     // Run in background because it could take time because
                     // this could involve database access or a web request
-                    Envelope = DataSource.GetExtent().ToMRect(); 
+                    Envelope = DataSource.GetExtent().ToMRect();
                 });
             }
         }
@@ -128,7 +127,7 @@ namespace Mapsui.Layers
 
             if (_isFetching)
             {
-                _needsUpdate = true;    
+                _needsUpdate = true;
                 return;
             }
 
@@ -142,10 +141,9 @@ namespace Mapsui.Layers
 
             var fetcher = new FeatureFetcher(new FetchInfo(fetchInfo), DataSource, DataArrived, DateTime.Now.Ticks);
 
-            Task.Run(() =>
-            {
-                try 
-                { 
+            Task.Run(() => {
+                try
+                {
                     Logger.Log(LogLevel.Debug, $"Start image fetch at {DateTime.Now.TimeOfDay}");
                     fetcher.FetchOnThread();
                     Logger.Log(LogLevel.Debug, $"Finished image fetch at {DateTime.Now.TimeOfDay}");

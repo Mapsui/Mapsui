@@ -15,7 +15,7 @@ namespace Mapsui.Providers.Wfs.Utilities
     /// </summary>
     public class HttpClientUtil
     {
-        
+
         private readonly NameValueCollection _requestHeaders;
         private byte[] _postData;
         private string _proxyUrl;
@@ -58,7 +58,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             get { return _credentials; }
             set { _credentials = value; }
         }
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpClientUtil"/> class.
         /// </summary>
@@ -67,8 +67,8 @@ namespace Mapsui.Providers.Wfs.Utilities
             _requestHeaders = new NameValueCollection();
         }
 
-        
-        
+
+
         /// <summary>
         /// Adds a HTTP header.
         /// </summary>
@@ -92,7 +92,7 @@ namespace Mapsui.Providers.Wfs.Utilities
 
             try
             {
-                _webRequest = (HttpWebRequest) WebRequest.Create(_url);
+                _webRequest = (HttpWebRequest)WebRequest.Create(_url);
             }
             catch (SecurityException ex)
             {
@@ -120,7 +120,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                     _webRequest.UseDefaultCredentials = false;
                     _webRequest.Credentials = Credentials;
                 }
-                
+
                 /* HTTP POST */
                 if (_postData != null)
                 {
@@ -135,7 +135,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                 else
                     _webRequest.Method = WebRequestMethods.Http.Get;
 
-                _webResponse = (HttpWebResponse) _webRequest.GetResponse();
+                _webResponse = (HttpWebResponse)_webRequest.GetResponse();
                 return _webResponse.GetResponseStream();
             }
             catch (Exception ex)
@@ -168,7 +168,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                 var responseStream = _webResponse?.GetResponseStream();
                 responseStream?.Dispose();
                 _webResponse?.Close();
-                
+
                 _webResponse = null;
             }
         }

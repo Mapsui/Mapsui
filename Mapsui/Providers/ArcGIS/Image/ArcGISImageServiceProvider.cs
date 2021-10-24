@@ -18,7 +18,7 @@ namespace Mapsui.Providers.ArcGIS.Image
     {
         private int _timeOut;
         private string _url;
-		
+
         public string Token { get; set; }
         public ArcGISImageCapabilities ArcGisImageCapabilities { get; private set; }
 
@@ -26,7 +26,7 @@ namespace Mapsui.Providers.ArcGIS.Image
         {
             Token = token;
             CRS = "";
-            TimeOut = 10000;     
+            TimeOut = 10000;
             ContinueOnError = continueOnError;
             ArcGisImageCapabilities = capabilities;
             Url = ArcGisImageCapabilities.ServiceUrl;
@@ -70,7 +70,7 @@ namespace Mapsui.Providers.ArcGIS.Image
 
         private static void CapabilitiesHelperCapabilitiesFailed(object sender, EventArgs e)
         {
- 	        throw new Exception("Unable to get ArcGISImage capbilities");
+            throw new Exception("Unable to get ArcGISImage capbilities");
         }
 
         private void CapabilitiesHelperCapabilitiesReceived(object sender, EventArgs e)
@@ -101,7 +101,7 @@ namespace Mapsui.Providers.ArcGIS.Image
             IRaster raster = null;
 
             var viewport = fetchInfo.ToViewport();
-            
+
             if (TryGetMap(viewport, ref raster))
             {
                 var feature = new Feature
@@ -135,21 +135,21 @@ namespace Mapsui.Providers.ArcGIS.Image
 
             try
             {
-               var response = client.GetAsync(uri).Result;
-               using (var dataStream = response.Content.ReadAsStreamAsync().Result)
-               {
-                   try
-                   {
-                       var bytes = BruTile.Utilities.ReadFully(dataStream);
-                       raster = new Raster(new MemoryStream(bytes), viewport.Extent.ToBoundingBox());
-                   }
-                   catch (Exception ex)
-                   {
+                var response = client.GetAsync(uri).Result;
+                using (var dataStream = response.Content.ReadAsStreamAsync().Result)
+                {
+                    try
+                    {
+                        var bytes = BruTile.Utilities.ReadFully(dataStream);
+                        raster = new Raster(new MemoryStream(bytes), viewport.Extent.ToBoundingBox());
+                    }
+                    catch (Exception ex)
+                    {
                         Logger.Log(LogLevel.Error, ex.Message, ex);
                         return false;
-                   }                   
-               }
-               return true;
+                    }
+                }
+                return true;
             }
             catch (WebException ex)
             {
@@ -168,7 +168,7 @@ namespace Mapsui.Providers.ArcGIS.Image
             }
             return false;
         }
-        
+
         private string GetRequestUrl(BoundingBox boundingBox, int width, int height)
         {
             var url = new StringBuilder(Url);
@@ -195,11 +195,11 @@ namespace Mapsui.Providers.ArcGIS.Image
                 else if (ArcGisImageCapabilities.timeInfo.timeExtent.Length == 1)
                     url.AppendFormat("&time={0}, null", ArcGisImageCapabilities.timeInfo.timeExtent[0]);
                 else if (ArcGisImageCapabilities.timeInfo.timeExtent.Length > 1)
-                    url.AppendFormat("&time={0}, {1}", ArcGisImageCapabilities.timeInfo.timeExtent[0], ArcGisImageCapabilities.timeInfo.timeExtent[ArcGisImageCapabilities.timeInfo.timeExtent.Length -  1]);
+                    url.AppendFormat("&time={0}, {1}", ArcGisImageCapabilities.timeInfo.timeExtent[0], ArcGisImageCapabilities.timeInfo.timeExtent[ArcGisImageCapabilities.timeInfo.timeExtent.Length - 1]);
             }
             else
             {
-                if(ArcGisImageCapabilities.StartTime != -1 && ArcGisImageCapabilities.EndTime != -1)
+                if (ArcGisImageCapabilities.StartTime != -1 && ArcGisImageCapabilities.EndTime != -1)
                     url.AppendFormat("&time={0}, {1}", ArcGisImageCapabilities.StartTime, ArcGisImageCapabilities.EndTime);
                 if (ArcGisImageCapabilities.StartTime != -1 && ArcGisImageCapabilities.EndTime == -1)
                     url.AppendFormat("&time={0}, null", ArcGisImageCapabilities.StartTime);

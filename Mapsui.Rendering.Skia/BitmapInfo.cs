@@ -22,7 +22,7 @@ namespace Mapsui.Rendering.Skia
             get
             {
                 if (Type == BitmapType.Bitmap)
-                    return (SKImage) _data;
+                    return (SKImage)_data;
                 else
                     return null;
             }
@@ -38,7 +38,7 @@ namespace Mapsui.Rendering.Skia
             get
             {
                 if (Type == BitmapType.Svg)
-                    return (SKSvg) _data;
+                    return (SKSvg)_data;
                 else
                     return null;
             }
@@ -78,7 +78,7 @@ namespace Mapsui.Rendering.Skia
                     case BitmapType.Svg:
                         return Svg.Picture.CullRect.Width;
                     case BitmapType.Sprite:
-                        return ((Sprite) _data).Width;
+                        return ((Sprite)_data).Width;
                     default:
                         return 0;
                 }
@@ -96,7 +96,7 @@ namespace Mapsui.Rendering.Skia
                     case BitmapType.Svg:
                         return Svg.Picture.CullRect.Height;
                     case BitmapType.Sprite:
-                        return ((Sprite) _data).Height;
+                        return ((Sprite)_data).Height;
                     default:
                         return 0;
                 }

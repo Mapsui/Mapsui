@@ -33,16 +33,16 @@ namespace Mapsui.Rendering.Skia
                     var svg = new SKSvg();
                     svg.Load(stream);
 
-                    return new BitmapInfo {Svg = svg};
+                    return new BitmapInfo { Svg = svg };
                 }
 
                 var image = SKImage.FromEncodedData(SKData.CreateCopy(stream.ToBytes()));
-                return new BitmapInfo {Bitmap = image};
+                return new BitmapInfo { Bitmap = image };
             }
 
             if (bitmapStream is Sprite sprite)
             {
-                return new BitmapInfo {Sprite = sprite};
+                return new BitmapInfo { Sprite = sprite };
             }
 
             return null;

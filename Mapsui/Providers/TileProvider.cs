@@ -42,7 +42,7 @@ namespace Mapsui.Providers
         }
 
         public string CRS { get; set; }
-        
+
         public TileProvider(ITileSource tileSource)
         {
             _source = tileSource;
@@ -56,8 +56,8 @@ namespace Mapsui.Providers
             var infos = _source.Schema.GetTileInfos(extent, levelId).ToList();
 
             ICollection<WaitHandle> waitHandles = new List<WaitHandle>();
-                        
-            foreach (TileInfo info in infos)    
+
+            foreach (TileInfo info in infos)
             {
                 if (_bitmaps.Find(info.Index) != null) continue;
                 if (_queue.Contains(info.Index)) continue;
@@ -68,7 +68,7 @@ namespace Mapsui.Providers
             }
 
             WaitHandle.WaitAll(waitHandles.ToArray());
-            
+
             var features = new Features();
             foreach (TileInfo info in infos)
             {
@@ -83,7 +83,7 @@ namespace Mapsui.Providers
             }
             return features;
         }
-        
+
         private void GetTileOnThread(object parameter) // This could accept normal parameters now we use PCL Profile111
         {
             var parameters = (object[])parameter;

@@ -14,7 +14,7 @@ namespace Mapsui.Projection
 
         private readonly IDictionary<string, Func<double, double, (double, double)>> _fromLonLat =
             new Dictionary<string, Func<double, double, (double, double)>>();
-        
+
         public MinimalTransformation()
         {
             _toLonLat["EPSG:4326"] = (x, y) => (x, y);
@@ -29,7 +29,7 @@ namespace Mapsui.Projection
             return Transform(lon, lat, _fromLonLat[toCRS]);
         }
 
-        private static (double X, double Y) Transform( double x, double y, Func<double, double, (double, double)> transformFunc)
+        private static (double X, double Y) Transform(double x, double y, Func<double, double, (double, double)> transformFunc)
         {
             return transformFunc(x, y);
         }

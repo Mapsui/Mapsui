@@ -3,7 +3,7 @@ using Mapsui.Geometries;
 
 namespace Mapsui
 {
-    public interface IReadOnlyViewport 
+    public interface IReadOnlyViewport
     {
         event PropertyChangedEventHandler ViewportChanged;
 
@@ -49,7 +49,7 @@ namespace Mapsui
         double Rotation { get; }
 
         bool HasSize { get; }
-        
+
         /// <summary>
         /// IsRotated is true, when viewport displays map rotated
         /// </summary>

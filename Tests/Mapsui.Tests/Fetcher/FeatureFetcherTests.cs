@@ -22,8 +22,7 @@ namespace Mapsui.Tests.Fetcher
             layer.Delayer.MillisecondsToWait = 0;
 
             var notifications = new List<bool>();
-            layer.PropertyChanged += (_, args) =>
-            {
+            layer.PropertyChanged += (_, args) => {
                 if (args.PropertyName == nameof(Layer.Busy))
                 {
                     notifications.Add(layer.Busy);
@@ -40,8 +39,7 @@ namespace Mapsui.Tests.Fetcher
             layer.RefreshData(fetchInfo);
 
             // assert
-            Task.Run(() => 
-            {
+            Task.Run(() => {
                 while (notifications.Count < 2)
                 {
                     // just wait until we have two

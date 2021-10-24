@@ -27,7 +27,7 @@ namespace Mapsui.Styles
         // todo: 
         // Perhaps rename to something like SecondaryColor. The 'Color' 
         // field is itself a background in many cases. This is confusing
-        public Color Background { get; set; } 
+        public Color Background { get; set; }
 
         /// <summary>
         /// This identifies bitmap in the BitmapRegistry
@@ -38,7 +38,7 @@ namespace Mapsui.Styles
             set
             {
                 _bitmapId = value;
-                if(_bitmapId != -1 && !(FillStyle == FillStyle.Bitmap || FillStyle == FillStyle.BitmapRotated))
+                if (_bitmapId != -1 && !(FillStyle == FillStyle.Bitmap || FillStyle == FillStyle.BitmapRotated))
                     FillStyle = FillStyle.Bitmap;
             }
         }
@@ -72,7 +72,7 @@ namespace Mapsui.Styles
         }
 
         public override int GetHashCode()
-        {            
+        {
             return Color == null ? 0 : Color.GetHashCode();
         }
 

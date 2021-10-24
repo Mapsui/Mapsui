@@ -11,7 +11,7 @@ using Attribution = BruTile.Attribution;
 namespace Mapsui.Samples.Common.Maps
 {
     public class WmscSample // Disable because the WMSC service is down (or moved) : ISample
-        // todo: Replace with another.
+                            // todo: Replace with another.
     {
         public string Name => "";
 
@@ -62,7 +62,7 @@ namespace Mapsui.Samples.Common.Maps
             const string url = "http://geoserver.nl/tiles/tilecache.aspx?";
             var parameters = new Dictionary<string, string>();
             var request = new WmscRequest(new Uri(url), schema,
-                new List<string>(new[] {"world_GM"}), new List<string>(), parameters);
+                new List<string>(new[] { "world_GM" }), new List<string>(), parameters);
             return request;
         }
     }

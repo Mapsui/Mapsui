@@ -38,7 +38,7 @@ namespace Mapsui.Tests.Rendering
                 {
                     if ((tile.Index.Col + tile.Index.Row) % 2 == 0) // Add only 50% of the tiles with the arbitrary rule.
                     {
-                        cache.Add(tile.Index, new Feature { Geometry = new Point()});
+                        cache.Add(tile.Index, new Feature { Geometry = new Point() });
                     }
                 }
             }

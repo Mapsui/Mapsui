@@ -57,40 +57,40 @@ namespace Mapsui.Samples.Wpf.Editing
                     }
                     return false;
                 case MouseState.Down:
-                {
-                    _mouseDownPosition = screenPosition;
+                    {
+                        _mouseDownPosition = screenPosition;
                         // Take into account VertexRadius in feature select, because the objective
                         // is vertext select.
-                    var mapInfo = mapControl.GetMapInfo(screenPosition, editManager.VertexRadius);
-                    if (editManager.EditMode == EditMode.Modify && mapInfo.Feature != null)
-                    {
-                        return editManager.StartDragging(mapInfo, editManager.VertexRadius);
+                        var mapInfo = mapControl.GetMapInfo(screenPosition, editManager.VertexRadius);
+                        if (editManager.EditMode == EditMode.Modify && mapInfo.Feature != null)
+                        {
+                            return editManager.StartDragging(mapInfo, editManager.VertexRadius);
+                        }
+                        if (editManager.EditMode == EditMode.Rotate && mapInfo.Feature != null)
+                        {
+                            return editManager.StartRotating(mapInfo);
+                        }
+                        if (editManager.EditMode == EditMode.Scale && mapInfo.Feature != null)
+                        {
+                            return editManager.StartScaling(mapInfo);
+                        }
+                        return false;
                     }
-                    if (editManager.EditMode == EditMode.Rotate && mapInfo.Feature != null)
-                    {
-                        return editManager.StartRotating(mapInfo);
-                    }
-                    if (editManager.EditMode == EditMode.Scale && mapInfo.Feature != null)
-                    {
-                        return editManager.StartScaling(mapInfo);
-                    }
-                    return false;
-                }
                 case MouseState.Dragging:
-                {
-                    var args = mapControl.GetMapInfo(screenPosition);
-                    if (editManager.EditMode == EditMode.Modify)
-                        return editManager.Dragging(args.WorldPosition.ToPoint());
-                    if (editManager.EditMode == EditMode.Rotate)
-                        return editManager.Rotating(args.WorldPosition.ToPoint());
-                    if (editManager.EditMode == EditMode.Scale)
-                        return editManager.Scaling(args.WorldPosition.ToPoint());
+                    {
+                        var args = mapControl.GetMapInfo(screenPosition);
+                        if (editManager.EditMode == EditMode.Modify)
+                            return editManager.Dragging(args.WorldPosition.ToPoint());
+                        if (editManager.EditMode == EditMode.Rotate)
+                            return editManager.Rotating(args.WorldPosition.ToPoint());
+                        if (editManager.EditMode == EditMode.Scale)
+                            return editManager.Scaling(args.WorldPosition.ToPoint());
 
                         return false;
-                }
+                    }
                 case MouseState.Moving:
                     editManager.HoveringVertex(mapControl.GetMapInfo(screenPosition));
-                    return false; 
+                    return false;
                 case MouseState.DoubleClick:
                     _inDoubleClick = true;
                     if (editManager.EditMode != EditMode.Modify)
@@ -108,8 +108,8 @@ namespace Mapsui.Samples.Wpf.Editing
 
         private static bool IsClick(MPoint screenPosition, MPoint mouseDownScreenPosition)
         {
-	        if (mouseDownScreenPosition == null || screenPosition == null)
-		        return false;
+            if (mouseDownScreenPosition == null || screenPosition == null)
+                return false;
             return mouseDownScreenPosition.Distance(screenPosition) < MinPixelsMovedForDrag;
         }
     }

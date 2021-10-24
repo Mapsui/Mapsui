@@ -44,8 +44,7 @@ namespace Mapsui.Samples.Forms
             });
 
             polygon.IsClickable = true;
-            polygon.Clicked += (s, a) =>
-            {
+            polygon.Clicked += (s, a) => {
                 ((Polygon)s).FillColor = new Color(random.Next(0, 255) / 255.0, random.Next(0, 255) / 255.0, random.Next(0, 255) / 255.0);
                 a.Handled = true;
             };

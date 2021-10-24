@@ -23,8 +23,7 @@ namespace Mapsui.Layers
             if (_fetchInfo == null) return;
             if (_dataSource == null) return;
 
-            Task.Factory.StartNew(() =>
-            {
+            Task.Factory.StartNew(() => {
                 _animatedFeatures.AddFeatures(_dataSource.GetFeatures(_fetchInfo));
                 OnDataChanged(new DataChangedEventArgs());
             });

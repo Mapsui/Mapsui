@@ -90,11 +90,11 @@ namespace Mapsui.UI.Android
 
         private void CanvasOnPaintSurface(object sender, SKPaintSurfaceEventArgs args)
         {
-            if (PixelDensity <= 0) 
+            if (PixelDensity <= 0)
                 return;
 
             var canvas = args.Surface.Canvas;
-                
+
             canvas.Scale(PixelDensity, PixelDensity);
 
             CommonDrawControl(canvas);

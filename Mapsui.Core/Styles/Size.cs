@@ -5,7 +5,7 @@ namespace Mapsui.Styles
         public double Width { get; set; }
         public double Height { get; set; }
 
-        public Size() {}
+        public Size() { }
 
         public Size(double width, double height)
         {

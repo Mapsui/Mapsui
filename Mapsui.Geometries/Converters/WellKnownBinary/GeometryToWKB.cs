@@ -78,7 +78,7 @@ namespace Mapsui.Geometries.WellKnownBinary
             var bw = new BinaryWriter(ms);
 
             //Write the byteorder format.
-            bw.Write((byte) wkbByteOrder);
+            bw.Write((byte)wkbByteOrder);
 
             //Write the type of this geometry
             WriteType(g, bw, wkbByteOrder);
@@ -138,31 +138,31 @@ namespace Mapsui.Geometries.WellKnownBinary
             {
                 //Points are type 1.
                 case "Mapsui.Geometries.Point":
-                    WriteUInt32((uint) WKBGeometryType.WKBPoint, bWriter, byteorder);
+                    WriteUInt32((uint)WKBGeometryType.WKBPoint, bWriter, byteorder);
                     break;
                 //Linestrings are type 2.
                 case "Mapsui.Geometries.LineString":
-                    WriteUInt32((uint) WKBGeometryType.WKBLineString, bWriter, byteorder);
+                    WriteUInt32((uint)WKBGeometryType.WKBLineString, bWriter, byteorder);
                     break;
                 //Polygons are type 3.
                 case "Mapsui.Geometries.Polygon":
-                    WriteUInt32((uint) WKBGeometryType.WKBPolygon, bWriter, byteorder);
+                    WriteUInt32((uint)WKBGeometryType.WKBPolygon, bWriter, byteorder);
                     break;
                 //Mulitpoints are type 4.
                 case "Mapsui.Geometries.MultiPoint":
-                    WriteUInt32((uint) WKBGeometryType.WKBMultiPoint, bWriter, byteorder);
+                    WriteUInt32((uint)WKBGeometryType.WKBMultiPoint, bWriter, byteorder);
                     break;
                 //Multilinestrings are type 5.
                 case "Mapsui.Geometries.MultiLineString":
-                    WriteUInt32((uint) WKBGeometryType.WKBMultiLineString, bWriter, byteorder);
+                    WriteUInt32((uint)WKBGeometryType.WKBMultiLineString, bWriter, byteorder);
                     break;
                 //Multipolygons are type 6.
                 case "Mapsui.Geometries.MultiPolygon":
-                    WriteUInt32((uint) WKBGeometryType.WKBMultiPolygon, bWriter, byteorder);
+                    WriteUInt32((uint)WKBGeometryType.WKBMultiPolygon, bWriter, byteorder);
                     break;
                 //Geometrycollections are type 7.
                 case "Mapsui.Geometries.GeometryCollection":
-                    WriteUInt32((uint) WKBGeometryType.WKBGeometryCollection, bWriter, byteorder);
+                    WriteUInt32((uint)WKBGeometryType.WKBGeometryCollection, bWriter, byteorder);
                     break;
                 //If the type is not of the above 7 throw an exception.
                 default:
@@ -182,30 +182,30 @@ namespace Mapsui.Geometries.WellKnownBinary
             {
                 //Write the point.
                 case "Mapsui.Geometries.Point":
-                    WritePoint((Point) geometry, bWriter, byteorder);
+                    WritePoint((Point)geometry, bWriter, byteorder);
                     break;
                 case "Mapsui.Geometries.LineString":
-                    var ls = (LineString) geometry;
+                    var ls = (LineString)geometry;
                     WriteLineString(ls, bWriter, byteorder);
                     break;
                 case "Mapsui.Geometries.Polygon":
-                    WritePolygon((Polygon) geometry, bWriter, byteorder);
+                    WritePolygon((Polygon)geometry, bWriter, byteorder);
                     break;
                 //Write the Multipoint.
                 case "Mapsui.Geometries.MultiPoint":
-                    WriteMultiPoint((MultiPoint) geometry, bWriter, byteorder);
+                    WriteMultiPoint((MultiPoint)geometry, bWriter, byteorder);
                     break;
                 //Write the Multilinestring.
                 case "Mapsui.Geometries.MultiLineString":
-                    WriteMultiLineString((MultiLineString) geometry, bWriter, byteorder);
+                    WriteMultiLineString((MultiLineString)geometry, bWriter, byteorder);
                     break;
                 //Write the Multipolygon.
                 case "Mapsui.Geometries.MultiPolygon":
-                    WriteMultiPolygon((MultiPolygon) geometry, bWriter, byteorder);
+                    WriteMultiPolygon((MultiPolygon)geometry, bWriter, byteorder);
                     break;
                 //Write the Geometrycollection.
                 case "Mapsui.Geometries.GeometryCollection":
-                    WriteGeometryCollection((GeometryCollection) geometry, bWriter, byteorder);
+                    WriteGeometryCollection((GeometryCollection)geometry, bWriter, byteorder);
                     break;
                 //If the type is not of the above 7 throw an exception.
                 default:
@@ -236,7 +236,7 @@ namespace Mapsui.Geometries.WellKnownBinary
         private static void WriteLineString(LineString ls, BinaryWriter bWriter, WkbByteOrder byteorder)
         {
             //Write the number of points in this linestring.
-            WriteUInt32((uint) ls.Vertices.Count, bWriter, byteorder);
+            WriteUInt32((uint)ls.Vertices.Count, bWriter, byteorder);
 
             //Loop on each vertices.
             foreach (var p in ls.Vertices)
@@ -257,14 +257,14 @@ namespace Mapsui.Geometries.WellKnownBinary
             var numRings = poly.InteriorRings.Count + 1;
 
             //Write the number of rings to the stream (add one for the shell)
-            WriteUInt32((uint) numRings, bWriter, byteorder);
+            WriteUInt32((uint)numRings, bWriter, byteorder);
 
             //Write the exterior of this polygon.
             WriteLineString(poly.ExteriorRing, bWriter, byteorder);
 
             //Loop on the number of rings - 1 because we already wrote the shell.
             foreach (var lr in poly.InteriorRings)
-                //Write the (lineString)LinearRing.
+            //Write the (lineString)LinearRing.
             {
                 WriteLineString(lr, bWriter, byteorder);
             }
@@ -279,14 +279,14 @@ namespace Mapsui.Geometries.WellKnownBinary
         private static void WriteMultiPoint(MultiPoint mp, BinaryWriter bWriter, WkbByteOrder byteorder)
         {
             //Write the number of points.
-            WriteUInt32((uint) mp.Points.Count, bWriter, byteorder);
+            WriteUInt32((uint)mp.Points.Count, bWriter, byteorder);
 
             //Loop on the number of points.
             foreach (var p in mp.Points)
             {
                 //Write Points Header
-                bWriter.Write((byte) byteorder);
-                WriteUInt32((uint) WKBGeometryType.WKBPoint, bWriter, byteorder);
+                bWriter.Write((byte)byteorder);
+                WriteUInt32((uint)WKBGeometryType.WKBPoint, bWriter, byteorder);
                 //Write each point.
                 WritePoint(p, bWriter, byteorder);
             }
@@ -301,14 +301,14 @@ namespace Mapsui.Geometries.WellKnownBinary
         private static void WriteMultiLineString(MultiLineString mls, BinaryWriter bWriter, WkbByteOrder byteorder)
         {
             //Write the number of linestrings.
-            WriteUInt32((uint) mls.LineStrings.Count, bWriter, byteorder);
+            WriteUInt32((uint)mls.LineStrings.Count, bWriter, byteorder);
 
             //Loop on the number of linestrings.
             foreach (var ls in mls.LineStrings)
             {
                 //Write LineString Header
-                bWriter.Write((byte) byteorder);
-                WriteUInt32((uint) WKBGeometryType.WKBLineString, bWriter, byteorder);
+                bWriter.Write((byte)byteorder);
+                WriteUInt32((uint)WKBGeometryType.WKBLineString, bWriter, byteorder);
                 //Write each linestring.
                 WriteLineString(ls, bWriter, byteorder);
             }
@@ -323,14 +323,14 @@ namespace Mapsui.Geometries.WellKnownBinary
         private static void WriteMultiPolygon(MultiPolygon mp, BinaryWriter bWriter, WkbByteOrder byteorder)
         {
             //Write the number of polygons.
-            WriteUInt32((uint) mp.Polygons.Count, bWriter, byteorder);
+            WriteUInt32((uint)mp.Polygons.Count, bWriter, byteorder);
 
             //Loop on the number of polygons.
             foreach (var poly in mp.Polygons)
             {
                 //Write polygon header
-                bWriter.Write((byte) byteorder);
-                WriteUInt32((uint) WKBGeometryType.WKBPolygon, bWriter, byteorder);
+                bWriter.Write((byte)byteorder);
+                WriteUInt32((uint)WKBGeometryType.WKBPolygon, bWriter, byteorder);
                 //Write each polygon.
                 WritePolygon(poly, bWriter, byteorder);
             }
@@ -348,13 +348,13 @@ namespace Mapsui.Geometries.WellKnownBinary
             var numGeometries = gc.NumGeometries;
 
             //Write the number of geometries.
-            WriteUInt32((uint) numGeometries, bWriter, byteorder);
+            WriteUInt32((uint)numGeometries, bWriter, byteorder);
 
             //Loop on the number of geometries.
             for (var i = 0; i < numGeometries; i++)
             {
                 //Write the byte-order format of the following geometry.
-                bWriter.Write((byte) byteorder);
+                bWriter.Write((byte)byteorder);
                 //Write the type of each geometry.
                 WriteType(gc[i], bWriter, byteorder);
                 //Write each geometry.

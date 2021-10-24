@@ -16,7 +16,7 @@ namespace Mapsui.Providers.Wfs.Utilities
 {
     public class WFS_1_1_0_TextResources : WFS_1_1_0_XPathTextResources, IWFS_TextResources
     {
-        
+
         ////////////////////////////////////////////////////////////////////////
         // HTTP Configuration                                                 //                      
         // POST & GET                                                         //
@@ -60,8 +60,9 @@ namespace Mapsui.Providers.Wfs.Utilities
             paramBuilder.Append(HttpUtility.UrlEncode(qualification + featureTypeInfo.Name));
             paramBuilder.Append("&srsName=");
             paramBuilder.Append(HttpUtility.UrlEncode(ProjectionHelper.EpsgPrefix + featureTypeInfo.SRID));
-            
-            if (filter != null || boundingBox != null) {
+
+            if (filter != null || boundingBox != null)
+            {
                 paramBuilder.Append("&FILTER=");
 
                 using var sWriter = new StringWriter();
@@ -113,11 +114,11 @@ namespace Mapsui.Providers.Wfs.Utilities
                     xWriter.WriteAttributeString("srsName", ProjectionHelper.EpsgPrefix + featureTypeInfo.SRID);
                     xWriter.WriteElementString("PropertyName", qualification + featureTypeInfo.Geometry.GeometryName);
                     if (!labelProperties.All(string.IsNullOrWhiteSpace))
-                        xWriter.WriteElementString("PropertyName", string.Join(",", 
+                        xWriter.WriteElementString("PropertyName", string.Join(",",
                             labelProperties.Where(x => !string.IsNullOrWhiteSpace(x)).Select(lbl => qualification + lbl)));
 
                     AppendGml3Filter(xWriter, featureTypeInfo, boundingBox, filter, qualification);
-                    
+
                     xWriter.WriteEndElement();
                     xWriter.WriteEndElement();
                     xWriter.Flush();

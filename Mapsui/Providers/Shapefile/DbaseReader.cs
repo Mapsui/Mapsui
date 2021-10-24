@@ -88,7 +88,7 @@ namespace Mapsui.Providers.Shapefile
             _br = null;
             _fs = null;
         }
-        
+
         /// <summary>
         /// Indexes a DBF column in a binary tree [NOT COMPLETE]
         /// </summary>
@@ -99,7 +99,7 @@ namespace Mapsui.Providers.Shapefile
         {
             var tree = new BinaryTree<T, uint>();
             for (uint i = 0; i < ((_numberOfRecords > 10000) ? 10000 : _numberOfRecords); i++)
-                tree.Add(new BinaryTree<T, uint>.ItemValue((T) GetValue(i, columnId), i));
+                tree.Add(new BinaryTree<T, uint>.ItemValue((T)GetValue(i, columnId), i));
             return tree;
         }
 
@@ -151,7 +151,7 @@ namespace Mapsui.Providers.Shapefile
                 throw new NotSupportedException("Unsupported DBF Type");
 
             _lastUpdate = new DateTime(_br.ReadByte() + 1900, _br.ReadByte(), _br.ReadByte());
-                //Read the last update date
+            //Read the last update date
             _numberOfRecords = _br.ReadInt32(); // read number of records.
             _headerLength = _br.ReadInt16(); // read length of header structure.
             _recordLength = _br.ReadInt16(); // read length of a record
@@ -159,34 +159,34 @@ namespace Mapsui.Providers.Shapefile
             _fileEncoding = GetDbaseLanguageDriver(_br.ReadByte()); //Read and parse Language driver
             _fs.Seek(32, SeekOrigin.Begin); //Move past the reserved bytes
 
-            int numberOfColumns = (_headerLength - 31)/32; // calculate the number of DataColumns in the header
+            int numberOfColumns = (_headerLength - 31) / 32; // calculate the number of DataColumns in the header
             _dbaseColumns = new DbaseField[numberOfColumns];
             for (int i = 0; i < _dbaseColumns.Length; i++)
             {
                 _dbaseColumns[i] = new DbaseField
-                    {
-                        ColumnName = Encoding.UTF7.GetString((_br.ReadBytes(11))).Replace("\0", "").Trim()
-                    };
+                {
+                    ColumnName = Encoding.UTF7.GetString((_br.ReadBytes(11))).Replace("\0", "").Trim()
+                };
                 char fieldtype = _br.ReadChar();
                 switch (fieldtype)
                 {
                     case 'L':
-                        _dbaseColumns[i].DataType = typeof (bool);
+                        _dbaseColumns[i].DataType = typeof(bool);
                         break;
                     case 'C':
-                        _dbaseColumns[i].DataType = typeof (string);
+                        _dbaseColumns[i].DataType = typeof(string);
                         break;
                     case 'D':
-                        _dbaseColumns[i].DataType = typeof (DateTime);
+                        _dbaseColumns[i].DataType = typeof(DateTime);
                         break;
                     case 'N':
-                        _dbaseColumns[i].DataType = typeof (double);
+                        _dbaseColumns[i].DataType = typeof(double);
                         break;
                     case 'F':
-                        _dbaseColumns[i].DataType = typeof (float);
+                        _dbaseColumns[i].DataType = typeof(float);
                         break;
                     case 'B':
-                        _dbaseColumns[i].DataType = typeof (byte[]);
+                        _dbaseColumns[i].DataType = typeof(byte[]);
                         break;
                     default:
                         throw (new NotSupportedException("Invalid or unknown DBase field type '" + fieldtype +
@@ -199,13 +199,13 @@ namespace Mapsui.Providers.Shapefile
                 _dbaseColumns[i].Length = length;
                 _dbaseColumns[i].Decimals = _br.ReadByte();
                 //If the double-type doesn't have any decimals, make the type an integer
-                if (_dbaseColumns[i].Decimals == 0 && _dbaseColumns[i].DataType == typeof (double))
+                if (_dbaseColumns[i].Decimals == 0 && _dbaseColumns[i].DataType == typeof(double))
                     if (_dbaseColumns[i].Length <= 2)
-                        _dbaseColumns[i].DataType = typeof (Int16);
+                        _dbaseColumns[i].DataType = typeof(Int16);
                     else if (_dbaseColumns[i].Length <= 4)
-                        _dbaseColumns[i].DataType = typeof (Int32);
+                        _dbaseColumns[i].DataType = typeof(Int32);
                     else
-                        _dbaseColumns[i].DataType = typeof (Int64);
+                        _dbaseColumns[i].DataType = typeof(Int64);
                 _fs.Seek(_fs.Position + 14, 0);
             }
             _headerIsParsed = true;
@@ -363,19 +363,19 @@ namespace Mapsui.Providers.Shapefile
         {
             var tab = new DataTable();
             // all of common, non "base-table" fields implemented
-            tab.Columns.Add("ColumnName", typeof (String));
-            tab.Columns.Add("ColumnSize", typeof (Int32));
-            tab.Columns.Add("ColumnOrdinal", typeof (Int32));
-            tab.Columns.Add("NumericPrecision", typeof (Int16));
-            tab.Columns.Add("NumericScale", typeof (Int16));
-            tab.Columns.Add("DataType", typeof (Type));
-            tab.Columns.Add("AllowDBNull", typeof (bool));
-            tab.Columns.Add("IsReadOnly", typeof (bool));
-            tab.Columns.Add("IsUnique", typeof (bool));
-            tab.Columns.Add("IsRowVersion", typeof (bool));
-            tab.Columns.Add("IsKey", typeof (bool));
-            tab.Columns.Add("IsAutoIncrement", typeof (bool));
-            tab.Columns.Add("IsLong", typeof (bool));
+            tab.Columns.Add("ColumnName", typeof(String));
+            tab.Columns.Add("ColumnSize", typeof(Int32));
+            tab.Columns.Add("ColumnOrdinal", typeof(Int32));
+            tab.Columns.Add("NumericPrecision", typeof(Int16));
+            tab.Columns.Add("NumericScale", typeof(Int16));
+            tab.Columns.Add("DataType", typeof(Type));
+            tab.Columns.Add("AllowDBNull", typeof(bool));
+            tab.Columns.Add("IsReadOnly", typeof(bool));
+            tab.Columns.Add("IsUnique", typeof(bool));
+            tab.Columns.Add("IsRowVersion", typeof(bool));
+            tab.Columns.Add("IsKey", typeof(bool));
+            tab.Columns.Add("IsAutoIncrement", typeof(bool));
+            tab.Columns.Add("IsLong", typeof(bool));
 
             foreach (DbaseField dbf in _dbaseColumns)
                 tab.Columns.Add(dbf.ColumnName, dbf.DataType);
@@ -415,7 +415,7 @@ namespace Mapsui.Providers.Shapefile
             if (colid >= _dbaseColumns.Length || colid < 0)
                 throw ((new ArgumentException("Column index out of range")));
 
-            _fs.Seek(_headerLength + oid*_recordLength, 0);
+            _fs.Seek(_headerLength + oid * _recordLength, 0);
             for (int i = 0; i < colid; i++)
                 _br.BaseStream.Seek(_dbaseColumns[i].Length, SeekOrigin.Current);
 
@@ -452,7 +452,7 @@ namespace Mapsui.Providers.Shapefile
             var dr = new Feature();
 
             if (_br.ReadChar() == '*') return null; // is record marked deleted?
-                
+
 
             foreach (var dbf in _dbaseColumns)
             {

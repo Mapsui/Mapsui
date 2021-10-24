@@ -130,7 +130,7 @@ namespace Mapsui.UI.Forms
             }
             return new MapSpan(new Position((minLat + maxLat) / 2d, (minLon + maxLon) / 2d), maxLat - minLat, maxLon - minLon);
         }
-        
+
         public override int GetHashCode()
         {
             unchecked

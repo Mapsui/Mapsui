@@ -36,8 +36,7 @@ namespace Mapsui.UI.iOS
         void Initialize()
         {
             _invalidate = () => {
-                RunOnUIThread(() =>
-                {
+                RunOnUIThread(() => {
                     SetNeedsDisplay();
                     _canvas?.SetNeedsDisplay();
                 });
@@ -99,11 +98,11 @@ namespace Mapsui.UI.iOS
 
         void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs args)
         {
-            if (PixelDensity <= 0) 
+            if (PixelDensity <= 0)
                 return;
 
             var canvas = args.Surface.Canvas;
-            
+
             canvas.Scale(PixelDensity, PixelDensity);
 
             CommonDrawControl(canvas);
@@ -138,10 +137,10 @@ namespace Mapsui.UI.iOS
             }
             else if (evt.AllTouches.Count >= 2)
             {
-                var previousLocation = evt.AllTouches.Select(t => ((UITouch) t).PreviousLocationInView(this))
+                var previousLocation = evt.AllTouches.Select(t => ((UITouch)t).PreviousLocationInView(this))
                     .Select(p => new MPoint(p.X, p.Y)).ToList();
 
-                var locations = evt.AllTouches.Select(t => ((UITouch) t).LocationInView(this))
+                var locations = evt.AllTouches.Select(t => ((UITouch)t).LocationInView(this))
                     .Select(p => new MPoint(p.X, p.Y)).ToList();
 
                 var (previousCenter, previousRadius, previousAngle) = GetPinchValues(previousLocation);
@@ -256,12 +255,12 @@ namespace Mapsui.UI.iOS
             return (new MPoint(centerX, centerY), radius, angle);
         }
 
-        private float ViewportWidth => (float) _canvas.Frame.Width; // todo: check if we need _canvas
-        private float ViewportHeight => (float) _canvas.Frame.Height; // todo: check if we need _canvas
+        private float ViewportWidth => (float)_canvas.Frame.Width; // todo: check if we need _canvas
+        private float ViewportHeight => (float)_canvas.Frame.Height; // todo: check if we need _canvas
 
         private float GetPixelDensity()
         {
-            return (float) _canvas.ContentScaleFactor; // todo: Check if I need canvas        
+            return (float)_canvas.ContentScaleFactor; // todo: Check if I need canvas        
         }
     }
 }

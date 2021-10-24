@@ -6,13 +6,13 @@ using Android.Views;
 
 namespace Mapsui.Samples.Uno.Droid
 {
-	[Activity(
-			MainLauncher = true,
-			ConfigurationChanges = global::Uno.UI.ActivityHelper.AllConfigChanges,
-			WindowSoftInputMode = SoftInput.AdjustPan | SoftInput.StateHidden
-		)]
-	public class MainActivity : Windows.UI.Xaml.ApplicationActivity
-	{
-	}
+    [Activity(
+            MainLauncher = true,
+            ConfigurationChanges = global::Uno.UI.ActivityHelper.AllConfigChanges,
+            WindowSoftInputMode = SoftInput.AdjustPan | SoftInput.StateHidden
+        )]
+    public class MainActivity : Windows.UI.Xaml.ApplicationActivity
+    {
+    }
 }
 

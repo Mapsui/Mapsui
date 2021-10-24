@@ -15,7 +15,7 @@ namespace Mapsui.Providers.Wms
         {
             _featureInfo = new FeatureInfo { LayerName = layerName, FeatureInfos = new List<Dictionary<string, string>>() };
             XDocument xdoc;
-            
+
             try
             {
                 xdoc = XDocument.Load(result);
@@ -23,7 +23,7 @@ namespace Mapsui.Providers.Wms
             catch (XmlException e)
             {
                 throw new ApplicationException("Bad formatted XML response", e);
-            }            
+            }
 
             ExtractFeatureInfo(xdoc.Root);
 

@@ -116,7 +116,7 @@ namespace Mapsui.Styles.Thematics
             MinStyle = minStyle;
         }
 
-        
+
         /// <summary>
         /// Returns the style based on a numeric DataColumn, where style
         /// properties are linearly interpolated between max and min values.
@@ -135,7 +135,7 @@ namespace Mapsui.Styles.Thematics
             var style = (IStyle)Activator.CreateInstance(MinStyle.GetType());
             if (MinStyle is LabelStyle && MaxStyle is LabelStyle)
                 CalculateLabelStyle(style as LabelStyle, MinStyle as LabelStyle, MaxStyle as LabelStyle, attr);
-            if (MinStyle is VectorStyle && MaxStyle is VectorStyle) 
+            if (MinStyle is VectorStyle && MaxStyle is VectorStyle)
                 CalculateVectorStyle(style as VectorStyle, MinStyle as VectorStyle, MaxStyle as VectorStyle, attr);
             if (MinStyle is SymbolStyle && MaxStyle is SymbolStyle)
                 CalculateSymbolStyle(style as SymbolStyle, MinStyle as SymbolStyle, MaxStyle as SymbolStyle, attr);
@@ -182,8 +182,8 @@ namespace Mapsui.Styles.Thematics
             if (min.BackColor != null && max.BackColor != null)
                 style.BackColor = InterpolateBrush(min.BackColor, max.BackColor, value);
 
-            style.ForeColor = TextColorBlend == null ? 
-                InterpolateColor(min.ForeColor, max.ForeColor, value) : 
+            style.ForeColor = TextColorBlend == null ?
+                InterpolateColor(min.ForeColor, max.ForeColor, value) :
                 LineColorBlend.GetColor(Convert.ToSingle(Fraction(value)));
 
             if (min.Halo != null && max.Halo != null)
@@ -255,5 +255,5 @@ namespace Mapsui.Styles.Thematics
 
             return Color.FromArgb((int)a, (int)r, (int)g, (int)b);
         }
-            }
+    }
 }

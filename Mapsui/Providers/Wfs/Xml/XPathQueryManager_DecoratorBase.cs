@@ -14,11 +14,11 @@ namespace Mapsui.Providers.Wfs.Xml
     /// </summary>
     public abstract class XPathQueryManagerDecoratorBase
     {
-        
+
         protected IXPathQueryManager XPathQueryManager;
 
-        
-        
+
+
         /// <summary>
         /// Protected constructor for the abstract class.
         /// </summary>
@@ -28,8 +28,8 @@ namespace Mapsui.Providers.Wfs.Xml
             XPathQueryManager = xPathQueryManager;
         }
 
-        
-        
+
+
         /// <summary>
         /// This method invokes the corresponding method of the inherent <see cref="IXPathQueryManager"/> instance.
         /// </summary>
@@ -73,7 +73,7 @@ namespace Mapsui.Providers.Wfs.Xml
         {
             return XPathQueryManager.GetIterator(xPath, queryParameters);
         }
-        
+
         /// <summary>
         /// This method invokes the corresponding method of the inherent <see cref="IXPathQueryManager"/> instance.
         /// </summary>
@@ -119,5 +119,5 @@ namespace Mapsui.Providers.Wfs.Xml
             XPathQueryManager.SetDocumentToParse(httpClientUtil);
         }
 
-            }
+    }
 }

@@ -41,7 +41,7 @@ namespace Mapsui.Tests.Providers
 
                 features.Add(new Feature { [keyField] = id1 });
                 features.Add(new Feature { [keyField] = id2 });
-                
+
                 // Act
                 features.Delete(id1);
 
@@ -76,8 +76,8 @@ namespace Mapsui.Tests.Providers
                 const string keyField = "theIdField";
                 var features = new Features(keyField);
 
-                var featureA = new Feature {[keyField] = "a"};
-                var featureB = new Feature {[keyField] = "b"};
+                var featureA = new Feature { [keyField] = "a" };
+                var featureB = new Feature { [keyField] = "b" };
                 var otherInstancefeatureA = new Feature { [keyField] = "a" };
 
                 features.Add(featureA);

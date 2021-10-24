@@ -79,7 +79,8 @@ namespace Mapsui.Utilities
         /// <remarks>
         /// First entry is the newest time
         /// </remarks>
-        public List<double> DrawingTimes {
+        public List<double> DrawingTimes
+        {
             get
             {
                 List<double> result = new List<double>(_maxValues);

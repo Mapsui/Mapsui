@@ -17,7 +17,7 @@ namespace Mapsui.Tests.Providers.Wfs.Utilities
             string combinedUrl = url.AppendQuery(query);
 
             // Assert
-            Assert.AreEqual("www.test.de/test?query=test" ,combinedUrl);
+            Assert.AreEqual("www.test.de/test?query=test", combinedUrl);
         }
 
         [Test]
@@ -31,7 +31,7 @@ namespace Mapsui.Tests.Providers.Wfs.Utilities
             string combinedUrl = url.AppendQuery(query);
 
             // Assert
-            Assert.AreEqual("www.test.de/test?Service=WFS&query=test" ,combinedUrl);
+            Assert.AreEqual("www.test.de/test?Service=WFS&query=test", combinedUrl);
         }
 
         [Test]
@@ -45,7 +45,7 @@ namespace Mapsui.Tests.Providers.Wfs.Utilities
             string combinedUrl = url.AppendQuery(query);
 
             // Assert
-            Assert.AreEqual("www.test.de/test?Service=WFS&query=test" ,combinedUrl);
+            Assert.AreEqual("www.test.de/test?Service=WFS&query=test", combinedUrl);
         }
 
         [Test]
@@ -59,7 +59,7 @@ namespace Mapsui.Tests.Providers.Wfs.Utilities
             string combinedUrl = url.AppendQuery(query);
 
             // Assert
-            Assert.AreEqual("www.test.de/test?Service=WFS&query=test" ,combinedUrl);
+            Assert.AreEqual("www.test.de/test?Service=WFS&query=test", combinedUrl);
         }
     }
 }

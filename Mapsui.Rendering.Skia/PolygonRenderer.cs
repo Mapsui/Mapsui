@@ -154,7 +154,7 @@ namespace Mapsui.Rendering.Skia
 
                     if (vectorStyle.Outline != null)
                     {
-                        using (var paintStroke = new SKPaint {IsAntialias = true})
+                        using (var paintStroke = new SKPaint { IsAntialias = true })
                         {
                             paintStroke.Style = SKPaintStyle.Stroke;
                             paintStroke.StrokeWidth = lineWidth;

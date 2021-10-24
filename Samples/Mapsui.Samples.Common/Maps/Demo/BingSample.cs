@@ -20,7 +20,7 @@ namespace Mapsui.Samples.Common.Maps
             var map = new Map();
 
             var apiKey = "Enter your api key here"; // Contact Microsoft about how to use this
-            map.Layers.Add(new TileLayer(KnownTileSources.Create(source, apiKey), 
+            map.Layers.Add(new TileLayer(KnownTileSources.Create(source, apiKey),
                 dataFetchStrategy: new DataFetchStrategy()) // DataFetchStrategy prefetches tiles from higher levels
             {
                 Name = "Bing Aerial",

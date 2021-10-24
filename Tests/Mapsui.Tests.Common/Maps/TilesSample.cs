@@ -38,7 +38,7 @@ namespace Mapsui.Tests.Common.Maps
             };
 
             var features = TileIndexToFeatures(tileIndexes, new SampleTileSource());
-            map.Layers.Add(new MemoryLayer {DataSource = new MemoryProvider<IGeometryFeature>(features), Name = "Tiles"});
+            map.Layers.Add(new MemoryLayer { DataSource = new MemoryProvider<IGeometryFeature>(features), Name = "Tiles" });
             return map;
         }
 

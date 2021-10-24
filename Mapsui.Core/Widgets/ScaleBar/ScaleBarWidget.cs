@@ -221,7 +221,7 @@ namespace Mapsui.Widgets.ScaleBar
         }
 
         private IUnitConverter _secondaryUnitConverter;
-        
+
         /// <summary>
         /// Secondary unit converter for lower text if ScaleBarMode is Both. Default is ImperialUnitConverter.
         /// </summary>
@@ -274,14 +274,14 @@ namespace Mapsui.Widgets.ScaleBar
         /// Length of lower scalebar
         /// Text of lower scalebar
         /// </returns>
-        public (float scaleBarLength1, string scaleBarText1, float scaleBarLength2, string scaleBarText2) 
+        public (float scaleBarLength1, string scaleBarText1, float scaleBarLength2, string scaleBarText2)
             GetScaleBarLengthAndText(IReadOnlyViewport viewport)
         {
             if (_map == null) return (0, null, 0, null);
 
             float length1;
             string text1;
-            
+
             (length1, text1) = CalculateScaleBarLengthAndValue(_map, _transformation, viewport, MaxWidth, UnitConverter);
 
             float length2;
@@ -435,15 +435,15 @@ namespace Mapsui.Widgets.ScaleBar
                 case Alignment.Center:
                     if (drawNoSecondScaleBar)
                     {
-                        return (posX + (stroke + TextMargin) * Scale + (MaxWidth - 2.0f * (stroke + TextMargin) * Scale - (float)textSize1.Width) / 2.0f, 
+                        return (posX + (stroke + TextMargin) * Scale + (MaxWidth - 2.0f * (stroke + TextMargin) * Scale - (float)textSize1.Width) / 2.0f,
                             top,
-                            0, 
+                            0,
                             0);
                     }
                     else
                     {
                         return (posX + (stroke + TextMargin) * Scale + (MaxWidth - 2.0f * (stroke + TextMargin) * Scale - (float)textSize1.Width) / 2.0f,
-                                top, 
+                                top,
                                 posX + (stroke + TextMargin) * Scale + (MaxWidth - 2.0f * (stroke + TextMargin) * Scale - (float)textSize2.Width) / 2.0f,
                                 bottom);
                     }
@@ -477,7 +477,7 @@ namespace Mapsui.Widgets.ScaleBar
 
         public bool CanTransform()
         {
-            if (_map?.CRS == null) 
+            if (_map?.CRS == null)
             {
                 Logger.Log(LogLevel.Warning, $"ScaleBarWidget can not draw because the {nameof(Map)}.{nameof(Map.CRS)} is not set");
                 return false;

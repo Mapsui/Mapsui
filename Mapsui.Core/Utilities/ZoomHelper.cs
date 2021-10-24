@@ -35,7 +35,7 @@ namespace Mapsui.Utilities
             // Else return half of the current resolution
             return resolution / 2.0;
         }
-        
+
         public static double ZoomOut(IReadOnlyList<double> resolutions, double resolution)
         {
             if (resolutions == null || resolutions.Count == 0) return resolution * 2.0;
@@ -67,8 +67,8 @@ namespace Mapsui.Utilities
         public static double DetermineResolution(double worldWidth, double worldHeight, double screenWidth,
             double screenHeight, ScaleMethod scaleMethod = ScaleMethod.Fit)
         {
-            var widthResolution = worldWidth/screenWidth;
-            var heightResolution = worldHeight/screenHeight;
+            var widthResolution = worldWidth / screenWidth;
+            var heightResolution = worldHeight / screenHeight;
 
             switch (scaleMethod)
             {
@@ -93,8 +93,8 @@ namespace Mapsui.Utilities
             if (x1 > x2) Swap(ref x1, ref x2);
             if (y1 > y2) Swap(ref y1, ref y2);
 
-            x = (x2 + x1)/2;
-            y = (y2 + y1)/2;
+            x = (x2 + x1) / 2;
+            y = (y2 + y1) / 2;
 
             if (scaleMethod == ScaleMethod.Fit)
                 resolution = Math.Max((x2 - x1) / screenWidth, (y2 - y1) / screenHeight);
@@ -120,7 +120,7 @@ namespace Mapsui.Utilities
 
             viewport.Resolution = resolution;
         }
-        
+
         private static void Swap(ref double xMin, ref double xMax)
         {
             (xMin, xMax) = (xMax, xMin);

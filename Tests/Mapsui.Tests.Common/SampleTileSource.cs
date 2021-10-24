@@ -20,7 +20,7 @@ namespace Mapsui.Tests.Common
         {
             return Provider.GetTile(tileInfo);
         }
-        
+
         public static ITileSchema GetTileSchema()
         {
             var schema = new GlobalSphericalMercator(YAxis.TMS);

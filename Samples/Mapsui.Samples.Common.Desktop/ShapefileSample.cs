@@ -30,7 +30,7 @@ namespace Mapsui.Samples.Common.Desktop
             map.Layers.Add(new RasterizingLayer(CreateCityLayer(citySource)));
             map.Layers.Add(new RasterizingLayer(CreateCountryLabelLayer(countrySource)));
             map.Layers.Add(new RasterizingLayer(CreateCityLabelLayer(citySource)));
-            
+
             return map;
         }
 
@@ -84,8 +84,8 @@ namespace Mapsui.Samples.Common.Desktop
             var localAssembly = Assembly.GetAssembly(typeof(ShapefileSample));
             var bitmapStream = localAssembly.GetManifestResourceStream("Mapsui.Samples.Common.Desktop.Images.icon.png");
             var bitmapId = BitmapRegistry.Instance.Register(bitmapStream);
-            var citymin = new SymbolStyle {BitmapId = bitmapId, SymbolScale = 0.5f};
-            var citymax = new SymbolStyle {BitmapId = bitmapId, SymbolScale = 1f};
+            var citymin = new SymbolStyle { BitmapId = bitmapId, SymbolScale = 0.5f };
+            var citymax = new SymbolStyle { BitmapId = bitmapId, SymbolScale = 1f };
             return new GradientTheme("Population", 1000000, 5000000, citymin, citymax);
         }
 
@@ -96,11 +96,11 @@ namespace Mapsui.Samples.Common.Desktop
             //In this case we will just use the default values and override the fill-colors
             //using a colorblender. If different line-widths, line- and fill-colors where used
             //in the min and max styles, these would automatically get linearly interpolated.
-            var min = new VectorStyle {Outline = new Pen {Color = Color.Black}};
-            var max = new VectorStyle {Outline = new Pen {Color = Color.Black}};
+            var min = new VectorStyle { Outline = new Pen { Color = Color.Black } };
+            var max = new VectorStyle { Outline = new Pen { Color = Color.Black } };
 
             //Create theme using a density from 0 (min) to 400 (max)
-            return new GradientTheme("PopDens", 0, 400, min, max) {FillColorBlend = ColorBlend.Rainbow5};
+            return new GradientTheme("PopDens", 0, 400, min, max) { FillColorBlend = ColorBlend.Rainbow5 };
         }
 
         private static LabelStyle CreateCityLabelStyle()
@@ -108,13 +108,13 @@ namespace Mapsui.Samples.Common.Desktop
             return new LabelStyle
             {
                 ForeColor = Color.Black,
-                BackColor = new Brush {Color = Color.Orange},
-                Font = new Font {FontFamily = "GenericSerif", Size = 11},
+                BackColor = new Brush { Color = Color.Orange },
+                Font = new Font { FontFamily = "GenericSerif", Size = 11 },
                 HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
                 VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Center,
-                Offset = new Offset {X = 0, Y = 0},
-                Halo = new Pen {Color = Color.Yellow, Width = 2},
-                CollisionDetection = true, 
+                Offset = new Offset { X = 0, Y = 0 },
+                Halo = new Pen { Color = Color.Yellow, Width = 2 },
+                CollisionDetection = true,
                 LabelColumn = "NAME"
             };
         }
@@ -122,13 +122,13 @@ namespace Mapsui.Samples.Common.Desktop
         private static GradientTheme CreateCountryLabelTheme()
         {
             //Lets scale the labels so that big countries have larger texts as well
-            var backColor = new Brush {Color = new Color (255, 255, 255, 128)};
+            var backColor = new Brush { Color = new Color(255, 255, 255, 128) };
 
             var lblMin = new LabelStyle
             {
                 ForeColor = Color.Black,
                 BackColor = backColor,
-                Font = new Font {FontFamily = "GenericSerif", Size = 6},
+                Font = new Font { FontFamily = "GenericSerif", Size = 6 },
                 LabelColumn = "NAME"
             };
 
@@ -136,8 +136,8 @@ namespace Mapsui.Samples.Common.Desktop
             {
                 ForeColor = Color.Blue,
                 BackColor = backColor,
-                Font = new Font {FontFamily = "GenericSerif", Size = 9},
-                LabelColumn= "NAME"
+                Font = new Font { FontFamily = "GenericSerif", Size = 9 },
+                LabelColumn = "NAME"
             };
 
             return new GradientTheme("PopDens", 0, 400, lblMin, lblMax);

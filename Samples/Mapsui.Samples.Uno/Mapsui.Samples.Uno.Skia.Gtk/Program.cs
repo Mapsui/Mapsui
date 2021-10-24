@@ -8,8 +8,7 @@ namespace Mapsui.Samples.Uno.Skia.Gtk
     {
         static void Main(string[] args)
         {
-            ExceptionManager.UnhandledException += delegate (UnhandledExceptionArgs expArgs)
-            {
+            ExceptionManager.UnhandledException += delegate (UnhandledExceptionArgs expArgs) {
                 Console.WriteLine("GLIB UNHANDLED EXCEPTION" + expArgs.ExceptionObject.ToString());
                 expArgs.ExitApplication = true;
             };

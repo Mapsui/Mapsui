@@ -69,7 +69,7 @@ namespace Mapsui.Samples.Common.Maps
 
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(CreateStylesLayer(map.Envelope));
-            
+
             return map;
         }
 
@@ -86,7 +86,7 @@ namespace Mapsui.Samples.Common.Maps
 
         public static MemoryProvider<IGeometryFeature> CreateMemoryProviderWithDiverseSymbols(MRect envelope, int count = 100)
         {
-            
+
             return new MemoryProvider<IGeometryFeature>(CreateDiverseFeatures(RandomPointHelper.GenerateRandomPoints(envelope, count)));
         }
 

@@ -10,7 +10,7 @@ namespace Mapsui.Rendering.Skia
         public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, IGeometryFeature feature,
             IGeometry geometry, SymbolCache symbolCache, float opacity)
         {
-            var multiPoint = (MultiPoint) geometry;
+            var multiPoint = (MultiPoint)geometry;
 
             foreach (var point in multiPoint)
             {

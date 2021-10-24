@@ -49,7 +49,7 @@ namespace Mapsui.Samples.Common.Maps
             {
                 Fill = null,
                 Outline = null,
-                Line = { Color = Color.FromString("YellowGreen"), Width = 4}
+                Line = { Color = Color.FromString("YellowGreen"), Width = 4 }
             };
         }
 

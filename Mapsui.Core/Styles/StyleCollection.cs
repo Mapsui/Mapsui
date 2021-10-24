@@ -6,7 +6,7 @@ namespace Mapsui.Styles
     {
         public double MinVisible { get; set; }
         public double MaxVisible { get; set; }
-        public bool Enabled  { get; set; }
+        public bool Enabled { get; set; }
         public float Opacity { get; set; }
     }
 }

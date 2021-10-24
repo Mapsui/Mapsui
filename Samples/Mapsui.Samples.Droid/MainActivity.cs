@@ -48,7 +48,7 @@ namespace Mapsui.Samples.Droid
             var relativeLayout = FindViewById<RelativeLayout>(Resource.Id.mainLayout);
             relativeLayout.AddView(_popup = CreatePopup());
             _mapControl.Map.Layers.Clear();
-            var sample=new MbTilesOverlaySample();
+            var sample = new MbTilesOverlaySample();
             sample.Setup(_mapControl);
 
             //_mapControl.Info += MapControlOnInfo;
@@ -108,7 +108,7 @@ namespace Mapsui.Samples.Droid
                     return true;
                 }
             }
-            
+
             return base.OnOptionsItemSelected(item);
         }
 
@@ -160,8 +160,8 @@ namespace Mapsui.Samples.Droid
                 var screenPosition = _mapControl.Viewport.WorldToScreen(geometryFeature.Geometry.BoundingBox.Centroid.ToMPoint());
                 var screenPositionInPixels = _mapControl.ToPixels(screenPosition);
 
-                _popup.SetX((float) screenPositionInPixels.X);
-                _popup.SetY((float) screenPositionInPixels.Y);
+                _popup.SetX((float)screenPositionInPixels.X);
+                _popup.SetY((float)screenPositionInPixels.Y);
 
                 _popup.Visibility = ViewStates.Visible;
                 _textView.Text = geometryFeature.ToDisplayText();

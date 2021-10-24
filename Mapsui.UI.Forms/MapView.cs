@@ -74,8 +74,7 @@ namespace Mapsui.UI.Forms
             LongTap += HandlerLongTap;
             SizeChanged += HandlerSizeChanged;
 
-            TouchMove += (s, e) =>
-            {
+            TouchMove += (s, e) => {
                 RunOnUIThread(() => MyLocationFollow = false);
             };
 
@@ -465,7 +464,7 @@ namespace Mapsui.UI.Forms
             var localRemovedLayers = args.RemovedLayers?.ToList() ?? new List<ILayer>();
             var localAddedLayers = args.AddedLayers?.ToList() ?? new List<ILayer>();
 
-            if (localRemovedLayers.Contains(MyLocationLayer) || localRemovedLayers.Contains(_mapDrawableLayer) || localRemovedLayers.Contains(_mapPinLayer) || localRemovedLayers.Contains(_mapCalloutLayer) || 
+            if (localRemovedLayers.Contains(MyLocationLayer) || localRemovedLayers.Contains(_mapDrawableLayer) || localRemovedLayers.Contains(_mapPinLayer) || localRemovedLayers.Contains(_mapCalloutLayer) ||
                 localAddedLayers.Contains(MyLocationLayer) || localAddedLayers.Contains(_mapDrawableLayer) || localAddedLayers.Contains(_mapPinLayer) || localAddedLayers.Contains(_mapCalloutLayer))
                 return;
 
@@ -589,7 +588,7 @@ namespace Mapsui.UI.Forms
                     }
                 }
 
-                var calloutArgs = new CalloutClickedEventArgs(clickedCallout, 
+                var calloutArgs = new CalloutClickedEventArgs(clickedCallout,
                     Viewport.ScreenToWorld(e.MapInfo.ScreenPosition).ToForms(),
                     new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.NumTaps);
 
@@ -621,7 +620,7 @@ namespace Mapsui.UI.Forms
                 clickedDrawable?.HandleClicked(drawableArgs);
 
                 e.Handled = drawableArgs.Handled;
-                
+
                 return;
             }
         }
@@ -787,7 +786,7 @@ namespace Mapsui.UI.Forms
 
             // If there more than one drawables found, than reverse, because the top most should be the first
             if (drawables.Count > 1)
-                    drawables.Reverse();
+                drawables.Reverse();
 
             return drawables;
         }
@@ -823,7 +822,7 @@ namespace Mapsui.UI.Forms
         {
             var widgets = Map.Widgets.ToList();
             widgets.Remove(_mapZoomInButton);
-            widgets.Remove(_mapZoomOutButton); 
+            widgets.Remove(_mapZoomOutButton);
             widgets.Remove(_mapMyLocationButton);
             widgets.Remove(_mapNorthingButton);
             Map.Widgets.Clear();

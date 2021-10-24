@@ -10,7 +10,7 @@ using Mapsui.Styles;
 
 namespace Mapsui.Layers
 {
-    public  class WritableLayer : BaseLayer
+    public class WritableLayer : BaseLayer
     {
         private readonly ConcurrentHashSet<IGeometryFeature> _cache = new();
 
