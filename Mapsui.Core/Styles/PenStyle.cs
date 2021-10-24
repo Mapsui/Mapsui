@@ -6,7 +6,7 @@ namespace Mapsui.Styles
         Dash,
         Dot,
         DashDot,
-        DashDotDot,        
+        DashDotDot,
         LongDash,
         LongDashDot,
         ShortDash,

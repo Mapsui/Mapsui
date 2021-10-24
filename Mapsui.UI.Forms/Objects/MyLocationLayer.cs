@@ -63,7 +63,7 @@ namespace Mapsui.UI.Objects
             }
         }
 
-        Position myLocation = new (0, 0);
+        Position myLocation = new(0, 0);
 
         /// <summary>
         /// Position of location, that is displayed
@@ -114,7 +114,7 @@ namespace Mapsui.UI.Objects
         {
             if (view == null)
                 throw new ArgumentNullException("MapView shouldn't be null");
-            
+
             mapView = view;
 
             Enabled = false;
@@ -208,16 +208,15 @@ namespace Mapsui.UI.Objects
                     animationMyLocationStart = MyLocation;
                     animationMyLocationEnd = newLocation;
 
-                    var animation = new Animation((v) =>
-                    {
+                    var animation = new Animation((v) => {
                         var deltaLat = (animationMyLocationEnd.Latitude - animationMyLocationStart.Latitude) * v;
                         var deltaLon = (animationMyLocationEnd.Longitude - animationMyLocationStart.Longitude) * v;
                         var modified = InternalUpdateMyLocation(new Position(animationMyLocationStart.Latitude + deltaLat, animationMyLocationStart.Longitude + deltaLon));
-                    // Update viewport
-                    if (modified && mapView.MyLocationFollow && mapView.MyLocationEnabled)
+                        // Update viewport
+                        if (modified && mapView.MyLocationFollow && mapView.MyLocationEnabled)
                             mapView.Navigator.CenterOn(MyLocation.ToMapsui());
-                    // Refresh map
-                    if (mapView.MyLocationEnabled && modified)
+                        // Refresh map
+                        if (mapView.MyLocationEnabled && modified)
                             mapView.Refresh();
                     }, 0.0, 1.0);
 
@@ -273,8 +272,7 @@ namespace Mapsui.UI.Objects
 
                 if (animated)
                 {
-                    var animation = new Animation((v) =>
-                    {
+                    var animation = new Animation((v) => {
                         if ((int)v != (int)((SymbolStyle)feature.Styles.First()).SymbolRotation)
                         {
                             ((SymbolStyle)feature.Styles.First()).SymbolRotation = (int)v % 360;
@@ -351,8 +349,7 @@ namespace Mapsui.UI.Objects
 
                 if (animated)
                 {
-                    var animation = new Animation((v) =>
-                    {
+                    var animation = new Animation((v) => {
                         if ((int)v != (int)((SymbolStyle)featureDir.Styles.First()).SymbolRotation)
                         {
                             ((SymbolStyle)featureDir.Styles.First()).SymbolRotation = (int)v % 360;

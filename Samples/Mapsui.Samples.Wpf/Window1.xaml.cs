@@ -34,11 +34,11 @@ namespace Mapsui.Samples.Wpf
             Logger.LogDelegate += LogMethod;
 
             CategoryComboBox.SelectionChanged += CategoryComboBoxSelectionChanged;
-            
+
             FillComboBoxWithCategories();
             FillListWithSamples();
         }
-        
+
 
 
         private void MapControlOnMouseMove(object sender, MouseEventArgs e)
@@ -64,7 +64,7 @@ namespace Mapsui.Samples.Wpf
         {
             FillListWithSamples();
         }
-        
+
         private void FillComboBoxWithCategories()
         {
             // todo: find proper way to load assembly
@@ -89,8 +89,7 @@ namespace Mapsui.Samples.Wpf
                 Margin = new Thickness(4)
             };
 
-            radioButton.Click += (s, a) =>
-            {
+            radioButton.Click += (s, a) => {
                 MapControl.Map.Layers.Clear();
 
                 sample.Setup(MapControl);
@@ -127,7 +126,7 @@ namespace Mapsui.Samples.Wpf
         {
             MessageBox.Show(e.FeatureInfo.ToDisplayText());
         }
-        
+
         private void RotationSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);

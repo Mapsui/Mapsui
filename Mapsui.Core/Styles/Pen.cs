@@ -3,7 +3,7 @@ namespace Mapsui.Styles
 {
     public class Pen
     {
-        public Pen() {}
+        public Pen() { }
 
         public Pen(Color color, double width = 1)
         {
@@ -65,7 +65,7 @@ namespace Mapsui.Styles
         {
             // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (Width != pen.Width) return false;
-            
+
             //if one or the other is null then they are not equal, but not when they are both null
             if ((Color == null) ^ (pen.Color == null)) return false;
 

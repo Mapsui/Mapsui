@@ -31,7 +31,7 @@ namespace Mapsui.UI.Wpf
         private bool _hasBeenManipulated;
         private double _innerRotation;
         private readonly FlingTracker _flingTracker = new();
-        
+
         public MouseWheelAnimation MouseWheelAnimation { get; } = new();
 
         /// <summary>
@@ -453,11 +453,11 @@ namespace Mapsui.UI.Wpf
 
         private void SKElementOnPaintSurface(object sender, SKPaintSurfaceEventArgs args)
         {
-            if (PixelDensity <= 0) 
+            if (PixelDensity <= 0)
                 return;
 
             var canvas = args.Surface.Canvas;
-            
+
             canvas.Scale(PixelDensity, PixelDensity);
 
             CommonDrawControl(canvas);

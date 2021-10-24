@@ -15,14 +15,14 @@ namespace Mapsui.Providers.Wfs.Xml
     public class XPathQueryManagerCompiledExpressionsDecorator
         : XPathQueryManagerDecoratorBase, IXPathQueryManager
     {
-        
+
         private static readonly Dictionary<string, XPathExpression> CompiledExpressions =
             new Dictionary<string, XPathExpression>();
 
         private static readonly NameTable NameTable = new NameTable();
 
-        
-        
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="XPathQueryManagerCompiledExpressionsDecorator"/> class.
         /// </summary>
@@ -32,8 +32,8 @@ namespace Mapsui.Providers.Wfs.Xml
         {
         }
 
-        
-        
+
+
         /// <summary>
         /// This method compiles an XPath string, if not already saved.  
         /// Otherwise it returns the available XPath compilation. 
@@ -82,5 +82,5 @@ namespace Mapsui.Providers.Wfs.Xml
             return new XPathQueryManagerCompiledExpressionsDecorator(xPathQueryManager);
         }
 
-            }
+    }
 }

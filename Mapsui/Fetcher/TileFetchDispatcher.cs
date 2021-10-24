@@ -6,13 +6,14 @@ using BruTile;
 using BruTile.Cache;
 using ConcurrentCollections;
 using Mapsui.Extensions;
+using Mapsui.Layers;
 using Mapsui.Providers;
 
 namespace Mapsui.Fetcher
 {
     class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
     {
-        private FetchInfo  _fetchInfo;
+        private FetchInfo _fetchInfo;
         private readonly object _lockRoot = new();
         private bool _busy;
         private bool _viewportIsModified;
@@ -25,9 +26,9 @@ namespace Mapsui.Fetcher
         private readonly Func<TileInfo, Feature> _fetchTileAsFeature;
 
         public TileFetchDispatcher(
-            ITileCache<Feature> tileCache, 
-            ITileSchema tileSchema, 
-            Func<TileInfo, Feature> fetchTileAsFeature, 
+            ITileCache<Feature> tileCache,
+            ITileSchema tileSchema,
+            Func<TileInfo, Feature> fetchTileAsFeature,
             IDataFetchStrategy dataFetchStrategy = null)
         {
             _tileCache = tileCache;

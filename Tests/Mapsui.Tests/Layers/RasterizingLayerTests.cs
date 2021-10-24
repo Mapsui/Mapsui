@@ -28,8 +28,7 @@ namespace Mapsui.Tests.Layers
             DefaultRendererFactory.Create = () => new MapRenderer(); // Using xaml renderer here to test rasterizer. Suboptimal. 
 
             Assert.AreEqual(0, layer.GetFeatures(box, resolution).Count());
-            layer.DataChanged += (_, _) =>
-            {
+            layer.DataChanged += (_, _) => {
                 // assert
                 waitHandle.Set();
             };

@@ -36,7 +36,7 @@ namespace Mapsui.Samples.Common.Maps
             return map;
         }
 
-        private static IWidget CreateHyperlink(string text, VerticalAlignment verticalAlignment, 
+        private static IWidget CreateHyperlink(string text, VerticalAlignment verticalAlignment,
             HorizontalAlignment horizontalAlignment)
         {
             return new Hyperlink()

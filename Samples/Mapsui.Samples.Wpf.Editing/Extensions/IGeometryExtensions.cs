@@ -17,11 +17,11 @@ namespace Mapsui.Samples.Wpf.Editing
         {
             if (geometry is Point point)
             {
-                return new List<IList<Point>> { new List<Point>{point} };
+                return new List<IList<Point>> { new List<Point> { point } };
             }
             if (geometry is LineString lineString)
             {
-                return new List<IList<Point>> {new List<Point>(lineString.Vertices)};
+                return new List<IList<Point>> { new List<Point>(lineString.Vertices) };
             }
             if (geometry is Polygon polygon)
             {
@@ -47,7 +47,7 @@ namespace Mapsui.Samples.Wpf.Editing
             }
             if (geometry is Point point)
             {
-                return new List<Point>{point};
+                return new List<Point> { point };
             }
             throw new NotImplementedException();
         }

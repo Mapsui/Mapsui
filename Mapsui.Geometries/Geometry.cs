@@ -147,7 +147,7 @@ namespace Mapsui.Geometries
         {
             return AsBinary().GetHashCode();
         }
-        
+
         public abstract bool Contains(Point point);
         public abstract bool Equals(Geometry geom);
     }

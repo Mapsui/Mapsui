@@ -19,13 +19,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Mapsui.Layers;
 
 namespace Mapsui.Providers
 {
     public class Features : IEnumerable<IFeature>
     {
         private readonly List<IFeature> _features = new();
-        
+
         public string PrimaryKey { get; private set; }
 
         public int Count => _features.Count;
@@ -100,11 +101,11 @@ namespace Mapsui.Providers
                     throw new Exception("Feature not found");
             }
         }
-        
+
         public void Clear()
         {
             _features.Clear();
         }
-    }        
+    }
 }
 

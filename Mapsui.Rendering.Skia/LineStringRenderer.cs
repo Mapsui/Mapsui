@@ -20,7 +20,7 @@ namespace Mapsui.Rendering.Skia
             else
             {
 
-                var lineString = ((LineString) geometry).Vertices;
+                var lineString = ((LineString)geometry).Vertices;
 
                 float lineWidth = 1;
                 var lineColor = new Color();
@@ -35,7 +35,7 @@ namespace Mapsui.Rendering.Skia
 
                 if (vectorStyle != null)
                 {
-                    lineWidth = (float) vectorStyle.Line.Width;
+                    lineWidth = (float)vectorStyle.Line.Width;
                     lineColor = vectorStyle.Line.Color;
                     strokeCap = vectorStyle.Line.PenStrokeCap;
                     strokeJoin = vectorStyle.Line.StrokeJoin;

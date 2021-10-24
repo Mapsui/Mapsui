@@ -5,6 +5,7 @@ using System.Text;
 using Mapsui.UI.iOS;
 using UIKit;
 using CoreGraphics;
+using Mapsui.Layers;
 using Mapsui.UI;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
@@ -45,7 +46,7 @@ namespace Mapsui.Samples.iOS
             {
                 result.Append($"{field}={feature[field]}, ");
             }
-            
+
             if (feature is IGeometryFeature geometryFeature)
                 result.Append($"Geometry={geometryFeature.Geometry}");
             return result.ToString();
@@ -58,7 +59,7 @@ namespace Mapsui.Samples.iOS
                 Map = InfoLayersSample.CreateMap(),
                 UnSnapRotationDegrees = 30,
                 ReSnapRotationDegrees = 5
-            };                        
+            };
         }
 
         private static string MbTilesLocationOnIos => Environment.GetFolderPath(Environment.SpecialFolder.Personal);

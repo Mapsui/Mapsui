@@ -34,10 +34,10 @@ namespace Mapsui.UI
         public void Limit(IViewport viewport, IReadOnlyList<double> mapResolutions, MRect mapEnvelope)
         {
             viewport.SetResolution(LimitResolution(viewport.Resolution, viewport.Width, viewport.Height, mapResolutions, mapEnvelope));
-            LimitExtent(viewport,  mapEnvelope);
+            LimitExtent(viewport, mapEnvelope);
         }
 
-        public double LimitResolution(double resolution, double screenWidth, double screenHeight,  
+        public double LimitResolution(double resolution, double screenWidth, double screenHeight,
             IReadOnlyList<double> mapResolutions, MRect mapEnvelope)
         {
             var zoomLimits = ZoomLimits ?? GetExtremes(mapResolutions);
@@ -45,13 +45,13 @@ namespace Mapsui.UI
             if (zoomLimits == null) return resolution;
 
             if (zoomLimits.Min > resolution) return zoomLimits.Min;
-            
+
             // This is the ...AndAlwaysFillViewport part
             var viewportFillingResolution = CalculateResolutionAtWhichMapFillsViewport(screenWidth, screenHeight, panLimit);
             if (viewportFillingResolution < zoomLimits.Min) return resolution; // Mission impossible. Can't adhere to both restrictions
             var limit = Math.Min(zoomLimits.Max, viewportFillingResolution);
             if (limit < resolution) return limit;
-        
+
             return resolution;
         }
 
@@ -67,7 +67,7 @@ namespace Mapsui.UI
             {
                 // Can be null because both panLimits and Map.Extent can be null. 
                 // The Map.Extent can be null if the extent of all layers is null
-                return; 
+                return;
             }
 
             var x = viewport.Center.X;
@@ -85,7 +85,7 @@ namespace Mapsui.UI
             //if (MapWidthSpansViewport(maxExtent.Width, viewport.Width, viewport.Resolution)) // if it doesn't fit don't restrict
             {
                 if (viewport.Extent.Left < maxExtent.Left)
-                    x  += maxExtent.Left - viewport.Extent.Left;
+                    x += maxExtent.Left - viewport.Extent.Left;
                 else if (viewport.Extent.Right > maxExtent.Right)
                     x += maxExtent.Right - viewport.Extent.Right;
             }

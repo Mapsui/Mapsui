@@ -38,7 +38,7 @@ namespace Mapsui.Samples.Common.Maps
 
         private static IProvider<IGeometryFeature> CreateProvider()
         {
-            var netherlands = new Feature {Geometry = new Point(710000, 6800000)};
+            var netherlands = new Feature { Geometry = new Point(710000, 6800000) };
 
             var styleInWorldUnits = CreateNetherlandsBitmapStyle(1400);
             styleInWorldUnits.UnitType = UnitType.WorldUnit;
@@ -61,7 +61,7 @@ namespace Mapsui.Samples.Common.Maps
                 HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left
             });
 
-            return new MemoryProvider<IGeometryFeature>(new IGeometryFeature[] { netherlands, netherlandsInPixelUnits});
+            return new MemoryProvider<IGeometryFeature>(new IGeometryFeature[] { netherlands, netherlandsInPixelUnits });
         }
 
         private static SymbolStyle CreateNetherlandsBitmapStyle(double scale)

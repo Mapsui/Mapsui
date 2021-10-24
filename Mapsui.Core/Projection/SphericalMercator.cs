@@ -6,8 +6,8 @@ namespace Mapsui.Projection
     public class SphericalMercator
     {
         private const double Radius = 6378137;
-        private const double D2R = Math.PI/180;
-        private const double HalfPi = Math.PI/2;
+        private const double D2R = Math.PI / 180;
+        private const double HalfPi = Math.PI / 2;
 
         public static MPoint FromLonLat(MPoint point)
         {
@@ -22,7 +22,7 @@ namespace Mapsui.Projection
             var x = Radius * lonRadians;
             var y = Radius * Math.Log(Math.Tan(Math.PI * 0.25 + latRadians * 0.5));
 
-            return new (x, y);
+            return new(x, y);
         }
 
         public static MPoint ToLonLat(MPoint point)
@@ -41,7 +41,7 @@ namespace Mapsui.Projection
             var lon = lonRadians / D2R;
             var lat = latRadians / D2R;
 
-            return new (lon, lat);
+            return new(lon, lat);
         }
     }
 }

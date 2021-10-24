@@ -16,7 +16,7 @@ namespace Mapsui.UI.Forms.Extensions
             if (zoomLevel < 0 || zoomLevel > 30)
                 return 0;
 
-            return 156543.03392 / System.Math.Pow(2,zoomLevel);
+            return 156543.03392 / System.Math.Pow(2, zoomLevel);
         }
     }
 }

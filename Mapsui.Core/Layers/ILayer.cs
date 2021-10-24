@@ -18,7 +18,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using Mapsui.Fetcher;
-using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.Widgets;
 
@@ -27,7 +26,7 @@ namespace Mapsui.Layers
     /// <summary>
     /// Interface for map layers
     /// </summary>
-    public interface ILayer : INotifyPropertyChanged 
+    public interface ILayer : INotifyPropertyChanged
     {
         /// <summary>
         /// Numerical Id of layer

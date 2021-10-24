@@ -29,7 +29,7 @@ namespace Mapsui.Samples.Common.Maps.Special
         {
             var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            map.Layers.Add(new AnimatedPointsWithAutoUpdateLayer {Name = "Animated Points"});
+            map.Layers.Add(new AnimatedPointsWithAutoUpdateLayer { Name = "Animated Points" });
             return map;
         }
     }
@@ -43,13 +43,13 @@ namespace Mapsui.Samples.Common.Maps.Special
         public AnimatedPointsWithAutoUpdateLayer()
             : base(new DynamicMemoryProvider())
         {
-            Style = new SymbolStyle {Fill = {Color = new Color(255, 215, 0, 200)}, SymbolScale = 0.9};
+            Style = new SymbolStyle { Fill = { Color = new Color(255, 215, 0, 200) }, SymbolScale = 0.9 };
             _timer = new Timer(_ => UpdateData(), this, 0, 2000);
         }
 
         private class DynamicMemoryProvider : MemoryProvider<IGeometryFeature>
         {
-            private readonly Random _random = new (0);
+            private readonly Random _random = new(0);
 
             public override IEnumerable<IGeometryFeature> GetFeatures(FetchInfo fetchInfo)
             {

@@ -9,12 +9,12 @@ namespace Mapsui.Providers.Wfs.Utilities
     /// </summary>
     public class WFS_1_0_0_XPathTextResources : WFS_XPathTextResourcesBase
     {
-        
+
         ////////////////////////////////////////////////////////////////////////
         // XPath                                                              //                      
         // GetCapabilities WFS 1.0.0                                          //
         ////////////////////////////////////////////////////////////////////////
- 
+
 
         /// <summary>
         /// Gets an XPath string addressing the SRID of a FeatureType in 'GetCapabilities'.
@@ -84,7 +84,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             get { return "@maxy"; }
         }
 
-        
-        
-            }
+
+
+    }
 }

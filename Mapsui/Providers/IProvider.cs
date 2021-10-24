@@ -18,13 +18,14 @@
 using Mapsui.Geometries;
 using System.Collections.Generic;
 using Mapsui.Fetcher;
+using Mapsui.Layers;
 
 namespace Mapsui.Providers
 {
     /// <summary>
     /// Interface for data providers
     /// </summary>
-    public interface IProvider <out T> where T : IFeature
+    public interface IProvider<out T> where T : IFeature
     {
         /// <summary>
         /// The spatial reference ID (CRS)

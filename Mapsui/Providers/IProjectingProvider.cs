@@ -1,3 +1,5 @@
+using Mapsui.Layers;
+
 namespace Mapsui.Providers
 {
     public interface IProjectingProvider : IProvider<IFeature>

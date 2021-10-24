@@ -31,19 +31,19 @@ namespace Mapsui.Geometries
         /// </summary>
         /// <param name="vertices"></param>
         public LinearRing(IEnumerable<Point> vertices)
-            : base(vertices) {}
+            : base(vertices) { }
 
         /// <summary>
         ///     Initializes an instance of a LinearRing
         /// </summary>
-        public LinearRing() {}
+        public LinearRing() { }
 
         /// <summary>
         ///     Initializes an instance of a LinearRing
         /// </summary>
         /// <param name="points"></param>
         public LinearRing(IEnumerable<double[]> points)
-            : base(points) {}
+            : base(points) { }
 
         /// <summary>
         ///     Returns the area of the LinearRing
@@ -63,14 +63,14 @@ namespace Mapsui.Geometries
                     var by = Vertices[i].Y;
                     var cx = Vertices[i + 1].X;
                     var cy = Vertices[i + 1].Y;
-                    sum += ax*by - ay*bx +
-                           ay*cx - ax*cy +
-                           bx*cy - cx*by;
+                    sum += ax * by - ay * bx +
+                           ay * cx - ax * cy +
+                           bx * cy - cx * by;
                 }
-                return Math.Abs(-sum/2);
+                return Math.Abs(-sum / 2);
             }
         }
-        
+
         /// <summary>
         ///     Return a copy of this geometry
         /// </summary>
@@ -127,7 +127,7 @@ namespace Mapsui.Geometries
             var next2Y = next.Y - hip.Y;
             // compute cross-product of vectors hip->next and hip->prev
             // (e.g. area of parallelogram they enclose)
-            var disc = next2X*prev2Y - next2Y*prev2X;
+            var disc = next2X * prev2Y - next2Y * prev2X;
             // If disc is exactly 0, lines are collinear.  There are two possible cases:
             //	(1) the lines lie along the x axis in opposite directions
             //	(2) the line lie on top of one another
@@ -155,7 +155,7 @@ namespace Mapsui.Geometries
                 if ((((Vertices[i].Y <= p.Y) && (p.Y < Vertices[j].Y)) ||
                      ((Vertices[j].Y <= p.Y) && (p.Y < Vertices[i].Y))) &&
                     (p.X <
-                     (Vertices[j].X - Vertices[i].X)*(p.Y - Vertices[i].Y)/(Vertices[j].Y - Vertices[i].Y) +
+                     (Vertices[j].X - Vertices[i].X) * (p.Y - Vertices[i].Y) / (Vertices[j].Y - Vertices[i].Y) +
                      Vertices[i].X))
                     c = !c;
             }
@@ -182,7 +182,7 @@ namespace Mapsui.Geometries
         }
 
 
-        
+
         public LinearRing Rotate(double degrees, Point center)
         {
             var rotatedLinearRing = Clone();

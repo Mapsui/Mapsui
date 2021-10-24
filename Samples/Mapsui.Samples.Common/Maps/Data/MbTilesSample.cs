@@ -29,7 +29,7 @@ namespace Mapsui.Samples.Common.Maps
         public static TileLayer CreateMbTilesLayer(string path, string name)
         {
             var mbTilesTileSource = new MbTilesTileSource(new SQLiteConnectionString(path, true));
-            var mbTilesLayer = new TileLayer(mbTilesTileSource) { Name = name};
+            var mbTilesLayer = new TileLayer(mbTilesTileSource) { Name = name };
             return mbTilesLayer;
         }
     }

@@ -53,8 +53,7 @@ namespace Mapsui.Utilities
 
         static Easing()
         {
-            BounceOut = new Easing(p =>
-            {
+            BounceOut = new Easing(p => {
                 if (p < 1 / 2.75f)
                 {
                     return 7.5625f * p * p;

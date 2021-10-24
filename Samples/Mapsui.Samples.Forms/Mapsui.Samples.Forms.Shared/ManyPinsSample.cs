@@ -120,12 +120,11 @@ namespace Mapsui.Samples.Forms
             mapControl.Map = OsmSample.CreateMap();
 
             if (mapControl.Performance == null)
-                mapControl. Performance = new Utilities.Performance();
+                mapControl.Performance = new Utilities.Performance();
 
             var widget = new PerformanceWidget(mapControl.Performance);
 
-            widget.WidgetTouched += (sender, args) =>
-            {
+            widget.WidgetTouched += (sender, args) => {
                 mapControl?.Performance.Clear();
                 mapControl?.RefreshGraphics();
 
@@ -192,7 +191,7 @@ namespace Mapsui.Samples.Forms
                 pin.Callout.Type = CalloutType.Detail;
                 pin.Callout.Content = 1;
             }
-            
+
             return pin;
         }
     }

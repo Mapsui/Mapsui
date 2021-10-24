@@ -116,7 +116,7 @@ namespace Mapsui.Layers
         public override void RefreshData(FetchInfo fetchInfo)
         {
             if (Enabled
-                && fetchInfo.Extent.GetArea() > 0 
+                && fetchInfo.Extent.GetArea() > 0
                 && _tileFetchDispatcher != null
                 && MaxVisible >= fetchInfo.Resolution
                 && MinVisible <= fetchInfo.Resolution)

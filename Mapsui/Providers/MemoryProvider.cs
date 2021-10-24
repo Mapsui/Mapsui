@@ -22,6 +22,7 @@ using System.Linq;
 using Mapsui.Fetcher;
 using Mapsui.Geometries.WellKnownBinary;
 using Mapsui.Geometries.WellKnownText;
+using Mapsui.Layers;
 
 namespace Mapsui.Providers
 {
@@ -143,7 +144,7 @@ namespace Mapsui.Providers
             // Use a larger extent so that symbols partially outside of the extent are included
             var grownBox = fetchInfo.Extent.Grow(fetchInfo.Resolution * SymbolSize * 0.5);
             var grownFeatures = features.Where(f => f != null && f.BoundingBox.Intersects(grownBox));
-            return (IEnumerable<T>) grownFeatures.ToList(); // Why do I need to cast if T is constrained to IFeature?
+            return (IEnumerable<T>)grownFeatures.ToList(); // Why do I need to cast if T is constrained to IFeature?
         }
 
         public IFeature Find(object value, string primaryKey)

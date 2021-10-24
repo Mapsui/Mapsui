@@ -1,4 +1,4 @@
-﻿namespace Mapsui.Fetcher
+﻿namespace Mapsui.Layers
 {
     public class FetchInfo
     {

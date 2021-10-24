@@ -58,11 +58,10 @@ namespace Mapsui.Samples.Common.Maps.Callouts
             var stream = assembly.GetManifestResourceStream(path);
             var cities = DeserializeFromStream<City>(stream);
 
-            return cities.Select(c =>
-            {
+            return cities.Select(c => {
                 var feature = new Feature();
                 var point = SphericalMercator.FromLonLat(c.Lng, c.Lat);
-                feature.Geometry =new Point(point.x, point.y);
+                feature.Geometry = new Point(point.x, point.y);
                 feature["name"] = c.Name;
                 feature["country"] = c.Country;
 
@@ -107,7 +106,7 @@ namespace Mapsui.Samples.Common.Maps.Callouts
         {
             using var paint = new SKPaint
             {
-                Color = new SKColor((byte) Random.Next(0, 256), (byte) Random.Next(0, 256), (byte) Random.Next(0, 256)),
+                Color = new SKColor((byte)Random.Next(0, 256), (byte)Random.Next(0, 256), (byte)Random.Next(0, 256)),
                 Typeface = SKTypeface.FromFamilyName(null, SKFontStyleWeight.Bold, SKFontStyleWidth.Normal,
                     SKFontStyleSlant.Upright),
                 TextSize = 20

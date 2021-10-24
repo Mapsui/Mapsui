@@ -167,7 +167,7 @@ namespace Mapsui.Geometries
         /// <returns></returns>
         public double[] ToDoubleArray()
         {
-            return new[] {_x, _y};
+            return new[] { _x, _y };
         }
 
         /// <summary>
@@ -184,8 +184,8 @@ namespace Mapsui.Geometries
         public static Point FromDMS(double longDegrees, double longMinutes, double longSeconds,
             double latDegrees, double latMinutes, double latSeconds)
         {
-            return new Point(longDegrees + longMinutes/60 + longSeconds/3600,
-                latDegrees + latMinutes/60 + latSeconds/3600);
+            return new Point(longDegrees + longMinutes / 60 + longSeconds / 3600,
+                latDegrees + latMinutes / 60 + latSeconds / 3600);
         }
 
         /// <summary>
@@ -238,7 +238,7 @@ namespace Mapsui.Geometries
         /// <returns></returns>
         public static Point operator *(Point m, double d)
         {
-            return new Point(m.X*d, m.Y*d);
+            return new Point(m.X * d, m.Y * d);
         }
 
         /// <summary>
@@ -297,7 +297,7 @@ namespace Mapsui.Geometries
         ///     The minimum bounding box for this Geometry.
         /// </summary>
         /// <returns></returns>
-        public override BoundingBox BoundingBox =>  _isEmpty ? null : new BoundingBox(X, Y, X, Y);
+        public override BoundingBox BoundingBox => _isEmpty ? null : new BoundingBox(X, Y, X, Y);
 
         /// <summary>
         ///     Calculates a new point by rotating this point clockwise about the specified center point
@@ -348,7 +348,7 @@ namespace Mapsui.Geometries
         {
             return false;
         }
-        
+
         public override bool Equals(Geometry geom)
         {
             var point = geom as Point;

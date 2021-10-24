@@ -15,7 +15,7 @@ namespace Mapsui.Projection
 
         private readonly IDictionary<string, Func<double, double, (double, double)>> _fromLonLat =
             new Dictionary<string, Func<double, double, (double, double)>>();
-        
+
         public GeometryTransformation()
         {
             _toLonLat["EPSG:4326"] = (x, y) => (x, y);

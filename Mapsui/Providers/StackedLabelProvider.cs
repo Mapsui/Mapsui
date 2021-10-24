@@ -2,6 +2,7 @@
 using System.Linq;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
+using Mapsui.Layers;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 
@@ -10,7 +11,7 @@ namespace Mapsui.Providers
     public class StackedLabelProvider : IProvider<IFeature>
     {
         private const int SymbolSize = 32; // todo: determine margin by symbol size
-        private const int BoxMargin = SymbolSize/2;
+        private const int BoxMargin = SymbolSize / 2;
 
         private readonly IProvider<IGeometryFeature> _provider;
         private readonly LabelStyle _labelStyle;
@@ -23,7 +24,7 @@ namespace Mapsui.Providers
             _rectangleLine = rectangleLine ?? new Pen(Color.Gray);
             _rectangleFill = rectangleFill;
         }
-        
+
         public string CRS { get; set; }
 
         private readonly Brush _rectangleFill;
@@ -79,7 +80,7 @@ namespace Mapsui.Providers
         private static double CalculateOffsetY(double offsetY, int textHeight)
         {
             if (double.IsNaN(offsetY)) // first time
-                offsetY = textHeight*0.5 + BoxMargin;
+                offsetY = textHeight * 0.5 + BoxMargin;
             else
                 offsetY += textHeight; // todo: get size from text (or just pass stack nr)
             return offsetY;
@@ -111,7 +112,7 @@ namespace Mapsui.Providers
             };
         }
 
-        private static Feature CreateBoxFeature(double resolution, Cluster cluster, Pen line, 
+        private static Feature CreateBoxFeature(double resolution, Cluster cluster, Pen line,
             Brush fill)
         {
             return new Feature
@@ -142,8 +143,8 @@ namespace Mapsui.Providers
         private static BoundingBox GrowBox(BoundingBox box, double resolution)
         {
             const int symbolSize = 32; // todo: determine margin by symbol size
-            const int boxMargin = symbolSize/2;
-            return box.Grow(boxMargin*resolution);
+            const int boxMargin = symbolSize / 2;
+            return box.Grow(boxMargin * resolution);
         }
 
         private static void ClusterFeatures(
@@ -181,7 +182,7 @@ namespace Mapsui.Providers
                 clusters.Add(new Cluster
                 {
                     Box = feature.Geometry.BoundingBox.Clone(),
-                    Features = new List<IGeometryFeature> {feature}
+                    Features = new List<IGeometryFeature> { feature }
                 });
             }
         }

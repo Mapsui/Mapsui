@@ -31,7 +31,7 @@ namespace Mapsui.Samples.Common.Maps
             map.Layers.Add(CreatePolygonLayer());
             map.Layers.Add(new WritableLayer());
             map.Layers.Add(CreateLineLayer());
-            
+
             return map;
         }
 
@@ -90,7 +90,7 @@ namespace Mapsui.Samples.Common.Maps
             {
                 Geometry = CreateLine(),
                 ["Name"] = "Line 1",
-                Styles = new List<IStyle> { new VectorStyle{ Line = new Pen(Color.Violet, 6)}}
+                Styles = new List<IStyle> { new VectorStyle { Line = new Pen(Color.Violet, 6) } }
             };
         }
 

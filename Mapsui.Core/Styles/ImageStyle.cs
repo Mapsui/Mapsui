@@ -23,7 +23,7 @@ namespace Mapsui.Styles
         ///     Gets or sets the rotation of the symbol in degrees (clockwise is positive)
         /// </summary>
         public double SymbolRotation { get; set; }
-        
+
         /// <summary>
         ///     This identifies bitmap in the BitmapRegistry.
         /// </summary>

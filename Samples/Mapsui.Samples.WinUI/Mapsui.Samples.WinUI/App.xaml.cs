@@ -4,7 +4,7 @@ using System.Runtime.Versioning;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-[assembly:SupportedOSPlatform("windows10.0.18362.0")]
+[assembly: SupportedOSPlatform("windows10.0.18362.0")]
 namespace Mapsui.Samples.WinUI
 {
     /// <summary>

@@ -93,9 +93,9 @@ namespace Mapsui.Providers.Shapefile.Indexing
                 double geoAverage = 0; // geometric average - midpoint of ALL the objects
 
                 // go through all bbox and calculate the average of the midpoints
-                double fraction = 1.0f/objList.Count;
+                double fraction = 1.0f / objList.Count;
                 for (int i = 0; i < objList.Count; i++)
-                    geoAverage += objList[i].Box.Centroid[longAxis]*fraction;
+                    geoAverage += objList[i].Box.Centroid[longAxis] * fraction;
 
                 // bucket bbox based on their midpoint's side of the geo average in the longest axis
                 for (int i = 0; i < objList.Count; i++)
@@ -135,7 +135,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
         {
         }
 
-        
+
         private const double Indexfileversion = 1.0;
 
         /// <summary>
@@ -184,9 +184,9 @@ namespace Mapsui.Providers.Shapefile.Indexing
                     BoxObjects box = new BoxObjects
                     {
                         Box = new BoundingBox(
-                            br.ReadDouble(), br.ReadDouble(), 
+                            br.ReadDouble(), br.ReadDouble(),
                             br.ReadDouble(), br.ReadDouble()),
-                        Id = (uint) br.ReadInt32()
+                        Id = (uint)br.ReadInt32()
                     };
                     node._objList.Add(box);
                 }
@@ -257,7 +257,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
             }
         }
 
-        
+
         /// <summary>
         /// Determines whether the node is a leaf (if data is stored at the node, we assume the node is a leaf)
         /// </summary>
@@ -306,7 +306,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
             _objList = null;
         }
 
-        
+
         /// <summary>
         /// Calculate the floating point error metric 
         /// </summary>
@@ -314,7 +314,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
         public double ErrorMetric(BoundingBox box)
         {
             Point temp = new Point(1, 1) + (box.Max - box.Min);
-            return temp.X*temp.Y;
+            return temp.X * temp.Y;
         }
 
         /// <summary>
@@ -340,7 +340,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
             {
                 foreach (BoxObjects boxObject in node._objList)
                 {
-                    if(box.Intersects(boxObject.Box))
+                    if (box.Intersects(boxObject.Box))
                         list.Add(boxObject.Id);
 
                 }
@@ -355,7 +355,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
             }
         }
 
-        
+
         /// <summary>
         /// BoundingBox and Feature ID structure used for storing in the quadtree 
         /// </summary>

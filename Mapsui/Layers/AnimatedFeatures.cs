@@ -43,12 +43,12 @@ namespace Mapsui.Layers
         public EasingFunction Function { get; set; }
 
         public event EventHandler AnimatedPositionChanged;
-        
+
         public void AddFeatures(IEnumerable<IGeometryFeature> features)
         {
             var previousCache = _cache;
- 
-           _cache = ConvertToAnimatedItems(features.ToList(), previousCache, IdField);
+
+            _cache = ConvertToAnimatedItems(features.ToList(), previousCache, IdField);
             _startTimeAnimation = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
             _animationTimer.Change(_millisecondsBetweenUpdates, _millisecondsBetweenUpdates);
             _first = true;
@@ -129,7 +129,7 @@ namespace Mapsui.Layers
             {
                 var target = item.Feature.Geometry as Point;
                 if (item.PreviousPoint == null || item.CurrentPoint == null || target == null) continue;
-                if (item.PreviousPoint.Distance(item.CurrentPoint) > threshold) continue; 
+                if (item.PreviousPoint.Distance(item.CurrentPoint) > threshold) continue;
                 target.X = item.PreviousPoint.X + (item.CurrentPoint.X - item.PreviousPoint.X) * progress;
                 target.Y = item.PreviousPoint.Y + (item.CurrentPoint.Y - item.PreviousPoint.Y) * progress;
             }

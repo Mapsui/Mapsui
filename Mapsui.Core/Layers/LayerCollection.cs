@@ -10,7 +10,7 @@ namespace Mapsui.Layers
     public class LayerCollection : IEnumerable<ILayer>
     {
         private ConcurrentQueue<ILayer> _layers = new();
-        
+
         public delegate void LayerRemovedEventHandler(ILayer layer);
         public delegate void LayerAddedEventHandler(ILayer layer);
         public delegate void LayerMovedEventHandler(ILayer layer);
@@ -31,7 +31,7 @@ namespace Mapsui.Layers
         {
             return _layers.GetEnumerator();
         }
-        
+
         IEnumerator IEnumerable.GetEnumerator()
         {
             return _layers.GetEnumerator();
@@ -90,7 +90,7 @@ namespace Mapsui.Layers
 
             _layers = new ConcurrentQueue<ILayer>(copy);
             OnLayerMoved(layer);
-            OnChanged(null, null, new [] { layer });
+            OnChanged(null, null, new[] { layer });
         }
 
         public void Insert(int index, params ILayer[] layers)
@@ -118,7 +118,7 @@ namespace Mapsui.Layers
 
             return success;
         }
-        
+
         public bool Remove(Func<ILayer, bool> predicate)
         {
             var copyLayers = _layers.ToArray().Where(predicate).ToArray();
@@ -152,7 +152,7 @@ namespace Mapsui.Layers
 
         private void AddLayers(ILayer[] layers)
         {
-            if (layers == null || !layers.Any()) 
+            if (layers == null || !layers.Any())
                 throw new ArgumentException("Layers cannot be null or empty");
 
             foreach (var layer in layers)

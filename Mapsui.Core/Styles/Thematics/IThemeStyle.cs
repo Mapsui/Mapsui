@@ -15,20 +15,20 @@
 // along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-using Mapsui.Providers;
+using Mapsui.Layers;
 
 namespace Mapsui.Styles.Thematics
 {
-	/// <summary>
-	/// Interface for rendering a thematic layer
-	/// </summary>
-	public interface IThemeStyle : IStyle
-	{
-		/// <summary>
-		/// Returns the style based on a feature
-		/// </summary>
-		/// <param name="feature">Feature to calculate color from</param>
-		/// <returns>Color</returns>
-		IStyle GetStyle(IFeature feature);
-	}
+    /// <summary>
+    /// Interface for rendering a thematic layer
+    /// </summary>
+    public interface IThemeStyle : IStyle
+    {
+        /// <summary>
+        /// Returns the style based on a feature
+        /// </summary>
+        /// <param name="feature">Feature to calculate color from</param>
+        /// <returns>Color</returns>
+        IStyle GetStyle(IFeature feature);
+    }
 }

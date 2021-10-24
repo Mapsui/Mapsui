@@ -30,7 +30,7 @@ namespace Mapsui.Samples.Forms
             var e = args as MapClickedEventArgs;
 
             var snapshot = mapView.GetSnapshot();
-            
+
             var test = ImageSource.FromStream(() => new MemoryStream(snapshot));
 
             return true;

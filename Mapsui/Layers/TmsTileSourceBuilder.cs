@@ -10,10 +10,10 @@ namespace Mapsui.Layers
     public static class TmsTileSourceBuilder
     {
         public static ITileSource Build(
-            string urlToTileMapXml, 
+            string urlToTileMapXml,
             bool overrideTmsUrlWithUrlToTileMapXml)
         {
-            var webRequest = (HttpWebRequest) WebRequest.Create(urlToTileMapXml);
+            var webRequest = (HttpWebRequest)WebRequest.Create(urlToTileMapXml);
             var waitHandle = new AutoResetEvent(false);
             ITileSource tileSource = null;
             Exception error = null;

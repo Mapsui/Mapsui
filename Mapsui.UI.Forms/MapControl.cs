@@ -8,6 +8,8 @@ using System.Linq;
 using Mapsui.Geometries.Utilities;
 using System.Threading.Tasks;
 using Mapsui.Fetcher;
+using Mapsui.Layers;
+using Mapsui.Providers;
 #if __MAUI__
 using Mapsui.UI.Maui.Extensions;
 using Microsoft.Maui;
@@ -36,7 +38,7 @@ namespace Mapsui.UI.Forms
     /// <summary>
     /// Class, that uses the API of all other Mapsui MapControls
     /// </summary>
-    public partial class MapControl :  ContentView, IMapControl, IDisposable
+    public partial class MapControl : ContentView, IMapControl, IDisposable
     {
         public static bool UseGPU = true;
 
@@ -240,7 +242,7 @@ namespace Mapsui.UI.Forms
                             e.Handled = OnFlinged(velocityX, velocityY);
                         }
                     }
-                
+
                     // Do we have a tap event
                     if (releasedTouch == null)
                     {
@@ -361,7 +363,7 @@ namespace Mapsui.UI.Forms
 
         void PaintSurface(SKCanvas canvas)
         {
-            if (PixelDensity <= 0) 
+            if (PixelDensity <= 0)
                 return;
 
             canvas.Scale(PixelDensity, PixelDensity);

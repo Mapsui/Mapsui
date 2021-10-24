@@ -22,8 +22,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 using Mapsui.Extensions;
-using Mapsui.Fetcher;
 using Mapsui.Geometries;
+using Mapsui.Layers;
 using Mapsui.Providers.Shapefile.Indexing;
 
 namespace Mapsui.Providers.Shapefile
@@ -119,7 +119,7 @@ namespace Mapsui.Providers.Shapefile
         /// Mapsui doesn't support this feature type.
         /// </summary>
         MultiPatch = 31
-    } ;
+    };
 
     /// <summary>
     /// Shapefile data provider
@@ -773,7 +773,7 @@ namespace Mapsui.Providers.Shapefile
                         return multiLineString[0];
                     return multiLineString;
                 }
-                else 
+                else
                 {
                     // First read all the rings
                     var rings = new List<LinearRing>();
@@ -860,7 +860,7 @@ namespace Mapsui.Providers.Shapefile
             throw (new ApplicationException("An attempt was made to read DBase data from a shapefile without a valid .DBF file"));
         }
 
-        
+
         public IEnumerable<IGeometryFeature> GetFeatures(FetchInfo fetchInfo)
         {
             lock (_syncRoot)
