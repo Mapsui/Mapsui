@@ -17,7 +17,7 @@ namespace Mapsui.Providers.ArcGIS
             public double y { get; set; }
         }
 
-        public class Lod 
+        public class Lod
         {
             public int level { get; set; }
             public double resolution { get; set; }

@@ -176,12 +176,12 @@ namespace Mapsui
         /// the layers that have IsMapInfoLayer set to true. 
         /// </summary>
         public event EventHandler<MapInfoEventArgs> Info;
-        
+
         [Obsolete("Use your own hover event instead and call MapControl.GetMapInfo", true)]
 #pragma warning disable 67
         public event EventHandler<MapInfoEventArgs> Hover;
 #pragma warning restore 67
-        
+
         /// <summary>
         /// Abort fetching of all layers
         /// </summary>
@@ -211,7 +211,7 @@ namespace Mapsui
                 layer.RefreshData(fetchInfo);
             }
         }
-        
+
         private void LayersCollectionChanged(object sender, LayerCollectionChangedEventArgs args)
         {
             foreach (var layer in args.RemovedLayers ?? Enumerable.Empty<ILayer>())
@@ -282,7 +282,7 @@ namespace Mapsui
         {
             OnPropertyChanged(sender, e.PropertyName);
         }
-        
+
         private void OnPropertyChanged(object sender, string propertyName)
         {
             PropertyChanged?.Invoke(sender, new PropertyChangedEventArgs(propertyName));

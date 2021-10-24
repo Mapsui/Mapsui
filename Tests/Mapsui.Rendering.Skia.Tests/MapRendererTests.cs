@@ -2,6 +2,8 @@
 using System.IO;
 using System.Threading;
 using Mapsui.Geometries;
+using Mapsui.Layers;
+using Mapsui.Providers;
 using Mapsui.Tests.Common.Maps;
 using NUnit.Framework;
 using SkiaSharp;
@@ -16,7 +18,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = VectorStyleSample.CreateMap();
-            var viewport = new Viewport {Center = new MPoint(100, 100), Width = 200, Height = 200, Resolution = 1};
+            var viewport = new Viewport { Center = new MPoint(100, 100), Width = 200, Height = 200, Resolution = 1 };
             const string fileName = "vector_symbol.png";
 
             // act
@@ -37,6 +39,40 @@ namespace Mapsui.Rendering.Skia.Tests
             var viewport = new Viewport
             {
                 Center = new MPoint(100, 100),
+                Width = 200,
+                Height = 200,
+                Resolution = 1
+            };
+            const string fileName = "points_with_symbolstyle.png";
+
+            // act
+            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
+
+            // aside
+            File.WriteToGeneratedFolder(fileName, bitmap);
+
+            // assert
+            Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        }
+
+        [Test]
+        public void RenderPointWithBitmapSymbolsInCollection()
+        {
+            // arrange
+            var map = BitmapSymbolSample.CreateMap();
+            var features = ((Providers.MemoryProvider<Providers.IGeometryFeature>)((MemoryLayer)map.Layers[0]).DataSource).Features;
+            foreach (IGeometryFeature feature in features)
+            {
+                if (feature.Geometry is Geometry geometry)
+                {
+                    var collection = new GeometryCollection();
+                    collection.Collection.Add(geometry);
+                    feature.Geometry = collection;
+                }
+            }
+            var viewport = new Viewport
+            {
+                Center = new Point(100, 100),
                 Width = 200,
                 Height = 200,
                 Resolution = 1
@@ -131,7 +167,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = SymbolTypesSample.CreateMap();
-            
+
             const string fileName = "vector_symbol_symboltype.png";
 
             var viewport = new Viewport
@@ -157,7 +193,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = PointInWorldUnits.CreateMap();
-            var viewport = new Viewport {Center = new MPoint(0, 0), Width = 200, Height = 100, Resolution = 0.5};
+            var viewport = new Viewport { Center = new MPoint(0, 0), Width = 200, Height = 100, Resolution = 0.5 };
             const string fileName = "vector_symbol_unittype.png";
 
             // act
@@ -271,7 +307,7 @@ namespace Mapsui.Rendering.Skia.Tests
             if (color1.Alpha == 0 && color2.Alpha == 0) return true; // If both are transparent all colors are ignored
             if (Math.Abs(color1.Alpha - color2.Alpha) > allowedColorDistance) return false;
             if (Math.Abs(color1.Red - color2.Red) > allowedColorDistance) return false;
-            if (Math.Abs(color1.Green- color2.Green) > allowedColorDistance) return false;
+            if (Math.Abs(color1.Green - color2.Green) > allowedColorDistance) return false;
             if (Math.Abs(color1.Blue - color2.Blue) > allowedColorDistance) return false;
             return true;
         }

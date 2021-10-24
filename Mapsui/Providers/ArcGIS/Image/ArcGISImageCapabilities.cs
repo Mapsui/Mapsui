@@ -8,10 +8,10 @@ namespace Mapsui.Providers.ArcGIS.Image
         RSP_NearestNeighbor
     }
 
-    
+
     public class ArcGISImageCapabilities : IArcGISCapabilities
     {
-        public ArcGISImageCapabilities() : this(""){ }
+        public ArcGISImageCapabilities() : this("") { }
 
         public ArcGISImageCapabilities(string url, long startTime = -1, long endTime = -1, string format = "jpgpng", InterpolationType interpolation = InterpolationType.RSP_NearestNeighbor)
         {
@@ -19,7 +19,7 @@ namespace Mapsui.Providers.ArcGIS.Image
             Format = format;
             Interpolation = interpolation;
             StartTime = startTime;
-            EndTime = endTime;           
+            EndTime = endTime;
         }
 
         public long StartTime { get; set; }

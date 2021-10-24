@@ -22,7 +22,7 @@ namespace Mapsui.Providers.Wms
             {
                 throw new ArgumentException(e.Message);
             }
-            
+
             var fields = (from XElement element in xdoc.Descendants()
                           where (element.Name.LocalName.Equals("FIELDS"))
                           select element);
@@ -56,12 +56,12 @@ namespace Mapsui.Providers.Wms
                 }
             }
 
-            if(featureMember.HasAttributes)
+            if (featureMember.HasAttributes)
             {
                 foreach (var attribute in featureMember.Attributes())
                 {
-                     featureInfo.Add(attribute.Name.ToString(), attribute.Value);
-                }                
+                    featureInfo.Add(attribute.Name.ToString(), attribute.Value);
+                }
             }
 
             return featureInfo;

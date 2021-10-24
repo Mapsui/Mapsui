@@ -31,7 +31,7 @@ namespace Mapsui
             _map = map;
             _viewport = viewport;
             _animation.Ticked += AnimationTimerTicked;
-                 
+
         }
 
         private void AnimationTimerTicked(object sender, AnimationEventArgs e)
@@ -123,7 +123,7 @@ namespace Mapsui
                 if (animations.Count == 0)
                     return;
 
-                
+
                 _animation.Start(animations, duration);
             }
         }
@@ -514,7 +514,7 @@ namespace Mapsui
         /// </summary>
         public void StopRunningAnimation()
         {
-             _animation.Stop(false);
+            _animation.Stop(false);
         }
 
         private void CenterTick(AnimationEntry entry, double value)
@@ -539,7 +539,7 @@ namespace Mapsui
             var r = (double)entry.Start + ((double)entry.End - (double)entry.Start) * entry.Easing.Ease(value);
 
             _viewport.SetResolution(r);
-            
+
             Navigated?.Invoke(this, ChangeType.Continuous);
         }
 

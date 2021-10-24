@@ -17,14 +17,17 @@ namespace Mapsui.Tests.Common.Maps
         public void Setup(IMapControl mapControl)
         {
             mapControl.Map = CreateMap();
-            _writableLayer = (WritableLayer) mapControl.Map.Layers[1];
+            _writableLayer = (WritableLayer)mapControl.Map.Layers[1];
             mapControl.Info += MapControlOnInfo;
         }
 
         private void MapControlOnInfo(object sender, MapInfoEventArgs e)
         {
-            _writableLayer.Add(new Feature{ Geometry =
-                new Point(e.MapInfo.WorldPosition.X, e.MapInfo.WorldPosition.Y)});
+            _writableLayer.Add(new Feature
+            {
+                Geometry =
+                new Point(e.MapInfo.WorldPosition.X, e.MapInfo.WorldPosition.Y)
+            });
             _writableLayer.DataHasChanged();
         }
 
@@ -36,7 +39,7 @@ namespace Mapsui.Tests.Common.Maps
             writableLayer.Add(new Feature());
             writableLayer.Add(new Feature { Geometry = new Point() });
             writableLayer.Add(new Feature { Geometry = new LineString() });
-            writableLayer.Add(new Feature{Geometry = new Polygon()});
+            writableLayer.Add(new Feature { Geometry = new Polygon() });
             map.Layers.Add(writableLayer);
 
             return map;

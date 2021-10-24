@@ -13,10 +13,10 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
         private SKPaint _paintScaleText;
         private SKPaint _paintScaleTextStroke;
 
-        public void Draw(SKCanvas canvas, IReadOnlyViewport viewport,  IWidget widget,
+        public void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IWidget widget,
             float layerOpacity)
         {
-            var scaleBar = (ScaleBarWidget) widget;
+            var scaleBar = (ScaleBarWidget)widget;
             if (!scaleBar.CanTransform()) return;
 
             // If this is the first time, we call this renderer, ...
@@ -36,12 +36,12 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
             _paintScaleBarStroke.StrokeWidth = scaleBar.StrokeWidthHalo * scaleBar.Scale;
             _paintScaleText.Color = scaleBar.TextColor.ToSkia(layerOpacity);
             _paintScaleText.StrokeWidth = scaleBar.StrokeWidth * scaleBar.Scale;
-            _paintScaleText.Typeface = SKTypeface.FromFamilyName(scaleBar.Font.FontFamily, 
+            _paintScaleText.Typeface = SKTypeface.FromFamilyName(scaleBar.Font.FontFamily,
                 SKFontStyleWeight.Bold, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright);
             _paintScaleText.TextSize = (float)scaleBar.Font.Size * scaleBar.Scale;
             _paintScaleTextStroke.Color = scaleBar.Halo.ToSkia(layerOpacity);
             _paintScaleTextStroke.StrokeWidth = scaleBar.StrokeWidthHalo / 2 * scaleBar.Scale;
-            _paintScaleTextStroke.Typeface = SKTypeface.FromFamilyName(scaleBar.Font.FontFamily, 
+            _paintScaleTextStroke.Typeface = SKTypeface.FromFamilyName(scaleBar.Font.FontFamily,
                 SKFontStyleWeight.Bold, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright);
             _paintScaleTextStroke.TextSize = (float)scaleBar.Font.Size * scaleBar.Scale;
 
@@ -111,7 +111,7 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
 
             scaleBarText1 = scaleBarText1 ?? string.Empty;
             _paintScaleTextStroke.MeasureText(scaleBarText1, ref textSize1);
-            
+
             var (posX1, posY1, posX2, posY2) = scaleBar.GetScaleBarTextPositions(viewport, textSize.ToMRect(), textSize1.ToMRect(), textSize2.ToMRect(), scaleBar.StrokeWidthHalo);
 
             // Now draw text

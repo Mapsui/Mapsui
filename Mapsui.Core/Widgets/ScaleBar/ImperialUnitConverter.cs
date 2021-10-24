@@ -19,7 +19,7 @@ namespace Mapsui.Widgets.ScaleBar
 
         public double MeterRatio => MeterFootRatio;
 
-        public IEnumerable<int> ScaleBarValues { get; } = new []        
+        public IEnumerable<int> ScaleBarValues { get; } = new[]
         {
             26400000, 10560000, 5280000, 2640000, 1056000, 528000, 264000,
             105600, 52800, 26400, 10560, 5280, 2000, 1000, 500, 200, 100, 50, 20, 10, 5, 2, 1

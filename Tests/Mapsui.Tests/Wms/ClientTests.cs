@@ -26,7 +26,7 @@ namespace Mapsui.Tests.Wms
         public void ParseCapabilities_WhenInputIsWellFormattedWms130_ShouldParseWithoutExceptions()
         {
             // arrange
-            var capabilties = new XmlDocument {XmlResolver = null};
+            var capabilties = new XmlDocument { XmlResolver = null };
             capabilties.Load($"{AssemblyInfo.AssemblyDirectory}\\Resources\\capabilities_1_3_0.xml");
 
             // act

@@ -31,13 +31,14 @@ namespace Mapsui.Geometries
     /// </remarks>
     public class BoundingBox : IEquatable<BoundingBox>
     {
-        public BoundingBox() {}
+        public BoundingBox() { }
 
         public BoundingBox(BoundingBox boundingBox) : this(
             boundingBox.Min.X,
             boundingBox.Min.Y,
             boundingBox.Max.X,
-            boundingBox.Max.Y) {}
+            boundingBox.Max.Y)
+        { }
 
         /// <summary>
         ///     Initializes a bounding box
@@ -62,13 +63,13 @@ namespace Mapsui.Geometries
         /// <param name="minPoint">Lower left corner</param>
         /// <param name="maxPoint">Upper right corner</param>
         public BoundingBox(Point minPoint, Point maxPoint)
-            : this(minPoint.X, minPoint.Y, maxPoint.X, maxPoint.Y) {}
+            : this(minPoint.X, minPoint.Y, maxPoint.X, maxPoint.Y) { }
 
         /// <summary>
         ///     Initializes a new Bounding Box based on the bounds from a set of geometries
         /// </summary>
         /// <param name="objects">list of objects</param>
-        public BoundingBox(IEnumerable<Geometry> objects) : this(objects.Select(o => o.BoundingBox)) {}
+        public BoundingBox(IEnumerable<Geometry> objects) : this(objects.Select(o => o.BoundingBox)) { }
 
         /// <summary>
         ///     Initializes a new Bounding Box based on the bounds from a set of bounding boxes
@@ -302,7 +303,7 @@ namespace Mapsui.Geometries
         /// <returns>Area of box</returns>
         public double GetArea()
         {
-            return Width*Height;
+            return Width * Height;
         }
 
         /// <summary>
@@ -457,7 +458,7 @@ namespace Mapsui.Geometries
 
                 if (box.Max[cIndex] < Min[cIndex]) x = Math.Abs(box.Max[cIndex] - Min[cIndex]);
                 else if (Max[cIndex] < box.Min[cIndex]) x = Math.Abs(box.Min[cIndex] - Max[cIndex]);
-                ret += x*x;
+                ret += x * x;
             }
             return Math.Sqrt(ret);
         }

@@ -22,7 +22,7 @@ using Android.App;
 //      Build Number
 //      Revision
 //
- 
+
 
 
 [assembly: AssemblyVersion("3.0.0")]

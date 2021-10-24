@@ -25,11 +25,11 @@ namespace Mapsui.Geometries.Tests
         public void TestLineStringEquals()
         {
             // arrange
-            var lineString = new LineString(new[] {new Point(0, 42), new Point(42, 1337)});
+            var lineString = new LineString(new[] { new Point(0, 42), new Point(42, 1337) });
             var lineStringSame = new LineString(new[] { new Point(0, 42), new Point(42, 1337) });
             var lineStringDifferent = new LineString(new[] { new Point(42, 1337), new Point(0, 42) });
             Geometry geometry = lineStringSame;
-            
+
             // assert
             Assert.IsTrue(lineString.Equals(lineStringSame));
             Assert.IsFalse(lineString.Equals(lineStringDifferent));

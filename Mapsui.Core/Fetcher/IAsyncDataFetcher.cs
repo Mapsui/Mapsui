@@ -26,7 +26,7 @@ namespace Mapsui.Fetcher
         /// the threads will terminate naturally. It will just take a little longer.
         /// </summary>
         void AbortFetch();
-        
+
         /// <summary>
         /// Clear cache of layer
         /// </summary>

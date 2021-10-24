@@ -21,19 +21,19 @@ namespace Mapsui.Providers
         {
             public double Width;
             public double Height;
-// ReSharper disable NotAccessedField.Local
+            // ReSharper disable NotAccessedField.Local
             public double HResolution;
             public double VResolution;
-// ReSharper restore NotAccessedField.Local
+            // ReSharper restore NotAccessedField.Local
         }
 
         private struct WorldProperties
         {
             public double PixelSizeX;
-// ReSharper disable NotAccessedField.Local
+            // ReSharper disable NotAccessedField.Local
             public double RotationAroundYAxis;
             public double RotationAroundXAxis;
-// ReSharper restore NotAccessedField.Local
+            // ReSharper restore NotAccessedField.Local
             public double PixelSizeY;
             public double XCenterOfUpperLeftPixel;
             public double YCenterOfUpperLeftPixel;
@@ -61,7 +61,7 @@ namespace Mapsui.Providers
             _extent = CalculateExtent(tiffProperties, worldProperties);
 
             var data = ReadImageAsStream(tiffPath, noDataColors);
-            
+
             _feature = new Feature { Geometry = new Raster(data, _extent.ToBoundingBox()) };
             _feature.Styles.Add(new VectorStyle());
         }
@@ -159,8 +159,8 @@ namespace Mapsui.Providers
                 var a = argbValues[counter + 3];
 
                 var found = filterValues.Any(
-                    filterValue => filterValue[0] == a && 
-                    filterValue[1] == r && filterValue[2] == g && 
+                    filterValue => filterValue[0] == a &&
+                    filterValue[1] == r && filterValue[2] == g &&
                     filterValue[3] == b);
 
                 if (found)

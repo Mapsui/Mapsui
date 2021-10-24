@@ -9,7 +9,7 @@ namespace Mapsui.Rendering.Skia
 {
     static class PointRenderer
     {
-        public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, IGeometryFeature feature, 
+        public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, IGeometryFeature feature,
             IGeometry geometry, SymbolCache symbolCache, float opacity)
         {
             var point = (Point)geometry;
@@ -19,7 +19,7 @@ namespace Mapsui.Rendering.Skia
             {
                 CalloutStyleRenderer.Draw(canvas, viewport, opacity, destination, calloutStyle);
             }
-            else if (style is LabelStyle labelStyle) 
+            else if (style is LabelStyle labelStyle)
             {
                 LabelRenderer.Draw(canvas, labelStyle, feature, destination, opacity);
             }
@@ -39,7 +39,7 @@ namespace Mapsui.Rendering.Skia
             {
                 ImageStyleRenderer.Draw(canvas, imageStyle, destination, symbolCache, opacity, viewport.Rotation);
             }
-            else if (style is VectorStyle vectorStyle) 
+            else if (style is VectorStyle vectorStyle)
             {
                 // Use the SymbolStyleRenderer and specify Ellipse
                 SymbolStyleRenderer.Draw(canvas, vectorStyle, destination, opacity, SymbolType.Ellipse);

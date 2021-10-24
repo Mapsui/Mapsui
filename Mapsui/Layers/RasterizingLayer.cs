@@ -112,7 +112,7 @@ namespace Mapsui.Layers
                     {
                         _cache.Clear();
                         var features = new IGeometryFeature[1];
-                        features[0] = new Feature {Geometry = new Raster(bitmapStream, viewport.Extent.ToBoundingBox())};
+                        features[0] = new Feature { Geometry = new Raster(bitmapStream, viewport.Extent.ToBoundingBox()) };
                         _cache.PushRange(features);
 #if DEBUG
                         Logger.Log(LogLevel.Debug, $"Memory after rasterizing layer {GC.GetTotalMemory(true):N0}");

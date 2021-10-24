@@ -26,7 +26,7 @@ namespace Mapsui.Widgets
                 // not a drag that ends above the widget.
                 if (widget.Envelope != null &&
                     widget.Enabled &&
-                    widget.Envelope.Contains(screenPosition) && 
+                    widget.Envelope.Contains(screenPosition) &&
                     widget.Envelope.Contains(startScreenPosition))
                     touchedWidgets.Add(widget);
             }

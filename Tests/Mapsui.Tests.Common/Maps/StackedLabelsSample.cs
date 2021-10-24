@@ -41,7 +41,7 @@ namespace Mapsui.Tests.Common.Maps
         {
             return new MemoryLayer
             {
-                DataSource = new StackedLabelProvider(provider, new LabelStyle {LabelColumn = labelColumn}),
+                DataSource = new StackedLabelProvider(provider, new LabelStyle { LabelColumn = labelColumn }),
                 Style = null
             };
         }
@@ -51,7 +51,7 @@ namespace Mapsui.Tests.Common.Maps
             return new MemoryLayer
             {
                 DataSource = dataSource,
-                Style = new SymbolStyle {SymbolScale = 1, Fill = new Brush(new Color {A = 128, R = 8, G = 20, B = 192})}
+                Style = new SymbolStyle { SymbolScale = 1, Fill = new Brush(new Color { A = 128, R = 8, G = 20, B = 192 }) }
             };
         }
 
@@ -79,8 +79,8 @@ namespace Mapsui.Tests.Common.Maps
 
             for (var i = 0; i < count; i++)
             {
-                var x = random.NextDouble()*box.Width + box.Left;
-                var y = random.NextDouble()*box.Height - (box.Height - box.Top);
+                var x = random.NextDouble() * box.Width + box.Left;
+                var y = random.NextDouble() * box.Height - (box.Height - box.Top);
                 result.Add(new Point(x, y));
             }
 

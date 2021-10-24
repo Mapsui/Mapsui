@@ -127,8 +127,7 @@ namespace Mapsui.Samples.Uno
         /// </summary>
         private static void InitializeLogging()
         {
-            var factory = LoggerFactory.Create(builder =>
-            {
+            var factory = LoggerFactory.Create(builder => {
 #if __WASM__
                 builder.AddProvider(new global::Uno.Extensions.Logging.WebAssembly.WebAssemblyConsoleLoggerProvider());
 #elif __IOS__

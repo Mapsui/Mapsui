@@ -76,7 +76,7 @@ namespace Mapsui.Rendering.Skia
             {
                 var width = (int)viewport.Width;
                 var height = (int)viewport.Height;
-                var imageInfo = new SKImageInfo((int)Math.Round(width * pixelDensity), (int)Math.Round(height * pixelDensity), 
+                var imageInfo = new SKImageInfo((int)Math.Round(width * pixelDensity), (int)Math.Round(height * pixelDensity),
                     SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
 
                 using var surface = SKSurface.Create(imageInfo);
@@ -151,7 +151,7 @@ namespace Mapsui.Rendering.Skia
                     // Save canvas
                     canvas.Save();
                     // We have a special renderer, so try, if it could draw this
-                    var result = ((ISkiaStyleRenderer) StyleRenderers[style.GetType()]).Draw(canvas, viewport, layer,
+                    var result = ((ISkiaStyleRenderer)StyleRenderers[style.GetType()]).Draw(canvas, viewport, layer,
                         geometryFeature, style, _symbolCache);
                     // Restore old canvas
                     canvas.Restore();
@@ -162,28 +162,44 @@ namespace Mapsui.Rendering.Skia
                 }
 
                 // No special style renderer handled this up to now, than try standard renderers
-                if (geometryFeature.Geometry is Point)
-                    PointRenderer.Draw(canvas, viewport, style, geometryFeature, geometryFeature.Geometry, _symbolCache,
-                        layerOpacity * style.Opacity);
-                else if (geometryFeature.Geometry is MultiPoint)
-                    MultiPointRenderer.Draw(canvas, viewport, style, geometryFeature, geometryFeature.Geometry,
-                        _symbolCache, layerOpacity * style.Opacity);
-                else if (geometryFeature.Geometry is LineString)
-                    LineStringRenderer.Draw(canvas, viewport, style, geometryFeature, geometryFeature.Geometry,
-                        layerOpacity * style.Opacity);
-                else if (geometryFeature.Geometry is MultiLineString)
-                    MultiLineStringRenderer.Draw(canvas, viewport, style, geometryFeature, geometryFeature.Geometry,
-                        layerOpacity * style.Opacity);
-                else if (geometryFeature.Geometry is Polygon)
-                    PolygonRenderer.Draw(canvas, viewport, style, geometryFeature, geometryFeature.Geometry,
-                        layerOpacity * style.Opacity, _symbolCache);
-                else if (geometryFeature.Geometry is MultiPolygon)
-                    MultiPolygonRenderer.Draw(canvas, viewport, style, geometryFeature, geometryFeature.Geometry,
-                        layerOpacity * style.Opacity, _symbolCache);
-                else if (geometryFeature.Geometry is IRaster)
-                    RasterRenderer.Draw(canvas, viewport, style, geometryFeature, layerOpacity * style.Opacity,
-                        _tileCache, _currentIteration);
+                RenderGeometry(canvas, viewport, style, layerOpacity, geometryFeature, geometryFeature.Geometry);
             }
+        }
+
+        private void RenderGeometry(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, float layerOpacity,
+            IGeometryFeature geometryFeature, IGeometry geometry)
+        {
+            if (geometry is Point)
+                PointRenderer.Draw(canvas, viewport, style, geometryFeature, geometry, _symbolCache,
+                    layerOpacity * style.Opacity);
+            else if (geometry is MultiPoint)
+                MultiPointRenderer.Draw(canvas, viewport, style, geometryFeature, geometry,
+                    _symbolCache, layerOpacity * style.Opacity);
+            else if (geometry is LineString)
+                LineStringRenderer.Draw(canvas, viewport, style, geometryFeature, geometry,
+                    layerOpacity * style.Opacity);
+            else if (geometry is MultiLineString)
+                MultiLineStringRenderer.Draw(canvas, viewport, style, geometryFeature, geometry,
+                    layerOpacity * style.Opacity);
+            else if (geometry is Polygon)
+                PolygonRenderer.Draw(canvas, viewport, style, geometryFeature, geometry,
+                    layerOpacity * style.Opacity, _symbolCache);
+            else if (geometry is MultiPolygon)
+                MultiPolygonRenderer.Draw(canvas, viewport, style, geometryFeature, geometry,
+                    layerOpacity * style.Opacity, _symbolCache);
+            else if (geometry is IRaster)
+                RasterRenderer.Draw(canvas, viewport, style, geometryFeature, layerOpacity * style.Opacity,
+                    _tileCache, _currentIteration);
+            else if (geometry is IGeometryCollection collection)
+            {
+                for (int i = 0; i < collection.NumGeometries; i++)
+                {
+                    RenderGeometry(canvas, viewport, style, layerOpacity, geometryFeature, collection.Geometry(i));
+                }
+            }
+            else
+                Logger.Log(LogLevel.Warning,
+                    $"Failed to find renderer for geometry feature of type {geometry.GetType()}");
         }
 
         private void Render(object canvas, IReadOnlyViewport viewport, IEnumerable<IWidget> widgets, float layerOpacity)
@@ -195,7 +211,7 @@ namespace Mapsui.Rendering.Skia
         {
             // todo: use margin to increase the pixel area
             // todo: We will need to select on style instead of layer
-            
+
 
 
             layers = layers

@@ -62,7 +62,7 @@ namespace Mapsui.Samples.Uwp
             foreach (var sample in AllSamples.GetSamples().Where(s => s.Category == selectedCategory))
                 SampleList.Children.Add(CreateRadioButton(sample));
         }
-        
+
         private void CategoryComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             FillListWithSamples();
@@ -77,8 +77,7 @@ namespace Mapsui.Samples.Uwp
                 Margin = new Thickness(4)
             };
 
-            radioButton.Click += (_, _) =>
-            {
+            radioButton.Click += (_, _) => {
                 MapControl.Map.Layers.Clear();
                 MapControl.Info -= MapOnInfo;
                 sample.Setup(MapControl);

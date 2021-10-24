@@ -10,7 +10,7 @@ namespace Mapsui.Rendering.Skia
         public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, IGeometryFeature feature, IGeometry geometry,
             float opacity)
         {
-            var multiLineString = (MultiLineString) geometry;
+            var multiLineString = (MultiLineString)geometry;
 
             foreach (var lineString in multiLineString)
             {

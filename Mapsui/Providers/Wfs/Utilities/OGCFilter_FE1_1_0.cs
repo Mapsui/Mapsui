@@ -20,7 +20,7 @@ namespace Mapsui.Providers.Wfs.Utilities
     /// </summary>
     public class OGCFilterCollection : IFilter
     {
-        
+
         /// <summary>
         /// This enumeration consists of expressions denoting FE logical operators.
         /// </summary>
@@ -28,10 +28,10 @@ namespace Mapsui.Providers.Wfs.Utilities
         {
             And,
             Or
-        } ;
+        };
 
-        
-        
+
+
         private List<IFilter> _filters;
 
         private JunctorEnum _junctor = JunctorEnum.And;
@@ -54,8 +54,8 @@ namespace Mapsui.Providers.Wfs.Utilities
             set { _junctor = value; }
         }
 
-        
-        
+
+
         /// <summary>
         /// Initializes a new instance of the <see cref="OGCFilterCollection"/> class.
         /// </summary>
@@ -64,8 +64,8 @@ namespace Mapsui.Providers.Wfs.Utilities
             _filters = new List<IFilter>();
         }
 
-        
-        
+
+
         /// <summary>
         /// This method adds an instance implementing <see cref="IFilter"/>.
         /// </summary>
@@ -85,8 +85,8 @@ namespace Mapsui.Providers.Wfs.Utilities
                 _filters.Add(filterCollection);
         }
 
-        
-        
+
+
         /// <summary>
         /// This method encodes the filter in XML.
         /// </summary>
@@ -101,7 +101,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             return filterBuilder.ToString();
         }
 
-            }
+    }
 
     /// <summary>
     /// This class is the base class of all filters.
@@ -109,11 +109,11 @@ namespace Mapsui.Providers.Wfs.Utilities
     /// </summary>
     public abstract class OgcFilterBase
     {
-        
+
         protected string[] Args;
 
-        
-        
+
+
         /// <summary>
         /// Protected constructor for the abstract class.
         /// </summary>
@@ -123,24 +123,24 @@ namespace Mapsui.Providers.Wfs.Utilities
             Args = args;
         }
 
-            }
+    }
 
     /// <summary>
     /// This class provides an interface for creating an OGC PropertyIsEqualToFilter Version 1.1.0.
     /// </summary>
     public class PropertyIsEqualToFilter_FE1_1_0 : OgcFilterBase, IFilter
     {
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PropertyIsEqualToFilter_FE1_1_0"/> class.
         /// </summary>
         public PropertyIsEqualToFilter_FE1_1_0(string propertyName, string arg)
-            : base(new[] {propertyName, arg})
+            : base(new[] { propertyName, arg })
         {
         }
 
-        
-        
+
+
         /// <summary>
         /// This method encodes the filter in XML.
         /// </summary>
@@ -156,24 +156,24 @@ namespace Mapsui.Providers.Wfs.Utilities
             </PropertyIsEqualTo>";
         }
 
-            }
+    }
 
     /// <summary>
     /// This class provides an interface for creating an OGC PropertyIsNotEqualToFilter Version 1.1.0.
     /// </summary>
     public class PropertyIsNotEqualToFilter_FE1_1_0 : OgcFilterBase, IFilter
     {
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PropertyIsNotEqualToFilter_FE1_1_0"/> class.
         /// </summary>
         public PropertyIsNotEqualToFilter_FE1_1_0(string propertyName, string arg)
-            : base(new[] {propertyName, arg})
+            : base(new[] { propertyName, arg })
         {
         }
 
-        
-        
+
+
         /// <summary>
         /// This method encodes the filter in XML.
         /// </summary>
@@ -189,24 +189,24 @@ namespace Mapsui.Providers.Wfs.Utilities
             </PropertyIsNotEqualTo>";
         }
 
-            }
+    }
 
     /// <summary>
     /// This class provides an interface for creating an OGC PropertyIsLessThanFilter Version 1.1.0.
     /// </summary>
     public class PropertyIsLessThanFilter_FE1_1_0 : OgcFilterBase, IFilter
     {
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PropertyIsLessThanFilter_FE1_1_0"/> class.
         /// </summary>
         public PropertyIsLessThanFilter_FE1_1_0(string propertyName, string arg)
-            : base(new[] {propertyName, arg})
+            : base(new[] { propertyName, arg })
         {
         }
 
-        
-        
+
+
         /// <summary>
         /// This method encodes the filter in XML.
         /// </summary>
@@ -222,24 +222,24 @@ namespace Mapsui.Providers.Wfs.Utilities
             </PropertyIsLessThan>";
         }
 
-            }
+    }
 
     /// <summary>
     /// This class provides an interface for creating an OGC PropertyIsGreaterThanFilter Version 1.1.0.
     /// </summary>
     public class PropertyIsGreaterThanFilter_FE1_1_0 : OgcFilterBase, IFilter
     {
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PropertyIsGreaterThanFilter_FE1_1_0"/> class.
         /// </summary>
         public PropertyIsGreaterThanFilter_FE1_1_0(string propertyName, string arg)
-            : base(new[] {propertyName, arg})
+            : base(new[] { propertyName, arg })
         {
         }
 
-        
-        
+
+
         /// <summary>
         /// This method encodes the filter in XML.
         /// </summary>
@@ -255,24 +255,24 @@ namespace Mapsui.Providers.Wfs.Utilities
             </PropertyIsGreaterThan>";
         }
 
-            }
+    }
 
     /// <summary>
     /// This class provides an interface for creating an OGC PropertyIsLessThanOrEqualToFilter Version 1.1.0.
     /// </summary>
     public class PropertyIsLessThanOrEqualToFilter_FE1_1_0 : OgcFilterBase, IFilter
     {
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PropertyIsLessThanOrEqualToFilter_FE1_1_0"/> class.
         /// </summary>
         public PropertyIsLessThanOrEqualToFilter_FE1_1_0(string propertyName, string arg)
-            : base(new[] {propertyName, arg})
+            : base(new[] { propertyName, arg })
         {
         }
 
-        
-        
+
+
         /// <summary>
         /// This method encodes the filter in XML.
         /// </summary>
@@ -288,24 +288,24 @@ namespace Mapsui.Providers.Wfs.Utilities
             </PropertyIsLessThanOrEqualTo>";
         }
 
-            }
+    }
 
     /// <summary>
     /// This class provides an interface for creating an OGC PropertyIsGreaterThanOrEqualToFilter Version 1.1.0.
     /// </summary>
     public class PropertyIsGreaterThanOrEqualToFilter_FE1_1_0 : OgcFilterBase, IFilter
     {
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PropertyIsGreaterThanOrEqualToFilter_FE1_1_0"/> class.
         /// </summary>
         public PropertyIsGreaterThanOrEqualToFilter_FE1_1_0(string propertyName, string arg)
-            : base(new[] {propertyName, arg})
+            : base(new[] { propertyName, arg })
         {
         }
 
-        
-        
+
+
         /// <summary>
         /// This method encodes the filter in XML.
         /// </summary>
@@ -321,24 +321,24 @@ namespace Mapsui.Providers.Wfs.Utilities
             </PropertyIsGreaterThanOrEqualTo>";
         }
 
-            }
+    }
 
     /// <summary>
     /// This class provides an interface for creating an OGC PropertyIsBetweenFilter Version 1.1.0.
     /// </summary>
     public class PropertyIsBetweenFilter_FE1_1_0 : OgcFilterBase, IFilter
     {
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PropertyIsBetweenFilter_FE1_1_0"/> class.
         /// </summary>
         public PropertyIsBetweenFilter_FE1_1_0(string propertyName, string lowerBoundary, string upperBoundary)
-            : base(new[] {propertyName, lowerBoundary, upperBoundary})
+            : base(new[] { propertyName, lowerBoundary, upperBoundary })
         {
         }
 
-        
-        
+
+
         /// <summary>
         /// This method encodes the filter in XML.
         /// </summary>
@@ -356,24 +356,24 @@ namespace Mapsui.Providers.Wfs.Utilities
             </PropertyIsBetween>";
         }
 
-            }
+    }
 
     /// <summary>
     /// This class provides an interface for creating an OGC PropertyIsLikeFilter Version 1.1.0.
     /// </summary>
     public class PropertyIsLikeFilter_FE1_1_0 : OgcFilterBase, IFilter
     {
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PropertyIsLikeFilter_FE1_1_0"/> class.
         /// </summary>
         public PropertyIsLikeFilter_FE1_1_0(string propertyName, string arg)
-            : base(new[] {propertyName, arg})
+            : base(new[] { propertyName, arg })
         {
         }
 
-        
-        
+
+
         /// <summary>
         /// This method encodes the filter in XML.
         /// </summary>
@@ -390,28 +390,28 @@ namespace Mapsui.Providers.Wfs.Utilities
             </PropertyIsLike>";
         }
 
-            }
+    }
 
     /// <summary>
     /// This class provides an interface for creating an OGC FeatureIdFilter Version 1.1.0.
     /// </summary>
     public class FeatureIdFilter_FE1_1_0 : OgcFilterBase, IFilter
     {
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="FeatureIdFilter_FE1_1_0 "/> class.
         /// </summary>
         public FeatureIdFilter_FE1_1_0(string id)
-            : base(new[] {id})
+            : base(new[] { id })
         {
         }
 
-        
-        
+
+
         public string Encode()
         {
             return "<FeatureId fid=" + Args[0] + "/>";
         }
 
-            }
+    }
 }

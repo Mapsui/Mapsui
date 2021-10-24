@@ -31,7 +31,7 @@ namespace Mapsui.Samples.Common.Desktop
 
             map.Layers.Add(CreateCountryLayer(countrySource));
             map.Layers.Add(CreateCityHoverPoints());
-            
+
             return map;
         }
 
@@ -48,8 +48,7 @@ namespace Mapsui.Samples.Common.Desktop
 
         private static ThemeStyle CreateThemeStyle()
         {
-            return new ThemeStyle(f =>
-            {
+            return new ThemeStyle(f => {
                 if (f is IGeometryFeature geometryFeature)
                     if (geometryFeature.Geometry is Point)
                         return null;

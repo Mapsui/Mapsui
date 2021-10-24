@@ -263,7 +263,7 @@ namespace Mapsui.Providers.Wms
                 var doc = new XmlDocument { XmlResolver = null };
 
                 using (var task = _getStreamAsync(url))
-                {                     
+                {
                     using (var stReader = new StreamReader(task.Result))
                     {
                         var r = new XmlTextReader(url, stReader) { XmlResolver = null };
@@ -383,29 +383,29 @@ namespace Mapsui.Providers.Wms
                 throw new Exception("Request parameter not specified in Service Description");
             ParseRequest(xnRequest);
 
-			// Workaround for some WMS servers that have returning more than one root layer
-			var layerNodes = xnCapability.SelectNodes("sm:Layer", _nsmgr);
-			if (layerNodes != null && layerNodes.Count > 1)
-			{
-				List<WmsServerLayer> layers = new List<WmsServerLayer>();
-				foreach (XmlNode l in layerNodes)
-				{
-					layers.Add(ParseLayer(l));
-				}
+            // Workaround for some WMS servers that have returning more than one root layer
+            var layerNodes = xnCapability.SelectNodes("sm:Layer", _nsmgr);
+            if (layerNodes != null && layerNodes.Count > 1)
+            {
+                List<WmsServerLayer> layers = new List<WmsServerLayer>();
+                foreach (XmlNode l in layerNodes)
+                {
+                    layers.Add(ParseLayer(l));
+                }
 
-			    var rootLayer = layers[0];
-				rootLayer.Name = "__auto_generated_root_layer__";
-				rootLayer.Title = "";
-				rootLayer.ChildLayers = layers.ToArray();
-				Layer = rootLayer;
-			}
-			else
-			{
-				XmlNode xnLayer = xnCapability.SelectSingleNode("sm:Layer", _nsmgr);
-				if (xnLayer == null)
-					throw new Exception("No layer tag found in Service Description");
-				Layer = ParseLayer(xnLayer);
-			}
+                var rootLayer = layers[0];
+                rootLayer.Name = "__auto_generated_root_layer__";
+                rootLayer.Title = "";
+                rootLayer.ChildLayers = layers.ToArray();
+                Layer = rootLayer;
+            }
+            else
+            {
+                XmlNode xnLayer = xnCapability.SelectSingleNode("sm:Layer", _nsmgr);
+                if (xnLayer == null)
+                    throw new Exception("No layer tag found in Service Description");
+                Layer = ParseLayer(xnLayer);
+            }
 
             XmlNode xnException = xnCapability.SelectSingleNode("sm:Exception", _nsmgr);
             if (xnException != null)
@@ -520,7 +520,8 @@ namespace Mapsui.Providers.Wms
             wmsServerLayer.Title = node?.InnerText;
             node = xmlLayer.SelectSingleNode("sm:Abstract", _nsmgr);
             wmsServerLayer.Abstract = node?.InnerText;
-            if (xmlLayer.Attributes != null) {
+            if (xmlLayer.Attributes != null)
+            {
                 var attr = xmlLayer.Attributes["queryable"];
                 wmsServerLayer.Queryable = attr != null && attr.InnerText == "1";
             }

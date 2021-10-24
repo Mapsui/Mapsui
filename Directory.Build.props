@@ -14,7 +14,9 @@
 
   <!-- Common Project Properties -->
   <PropertyGroup>
-    <LangVersion>9.0</LangVersion>
+	  <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+	  <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+	  <LangVersion>9.0</LangVersion>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(OS)' == 'Unix'">

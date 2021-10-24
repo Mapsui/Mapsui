@@ -23,7 +23,7 @@ namespace Mapsui.UI.Utils
             }
 
             events[id].Enqueue((location.X, location.Y, ticks));
-            
+
             // Check, if we at the end of array
             if (events[id].Count > 2)
             {
@@ -61,7 +61,7 @@ namespace Mapsui.UI.Utils
 
             long finalTime = 0;
 
-            for (var i = 1; i < eventsArray.Length; i ++)
+            for (var i = 1; i < eventsArray.Length; i++)
             {
                 (var lastX, var lastY, var lastTime) = eventsArray[i - 1];
                 (var nowX, var nowY, var nowTime) = eventsArray[i];
@@ -78,7 +78,7 @@ namespace Mapsui.UI.Utils
             }
 
             var totalTime = finalTime - firstTime;
-            
+
             return (distanceX / totalTime, distanceY / totalTime);
         }
     }

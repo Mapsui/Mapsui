@@ -32,7 +32,7 @@ namespace Mapsui.Samples.Forms
                 {
                     f = mapView.Drawables.First();
                 }
-                
+
                 if (f is Polyline polyline)
                 {
                     polyline.Positions.Add(e.Point);

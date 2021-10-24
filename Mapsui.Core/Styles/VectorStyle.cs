@@ -23,7 +23,7 @@ namespace Mapsui.Styles
         /// Fill style for Polygon geometries
         /// </summary>
         public Brush Fill { get; set; }
-        
+
         public override bool Equals(object obj)
         {
             if (!(obj is VectorStyle style))
@@ -76,8 +76,8 @@ namespace Mapsui.Styles
         public override int GetHashCode()
         {
             return (Line == null ? 0 : Line.GetHashCode())
-                ^ (Outline == null ? 0 :  Outline.GetHashCode()) 
-                ^ (Fill ==  null ? 0 : Fill.GetHashCode())
+                ^ (Outline == null ? 0 : Outline.GetHashCode())
+                ^ (Fill == null ? 0 : Fill.GetHashCode())
                 ^ base.GetHashCode();
         }
 

@@ -84,7 +84,7 @@ namespace Mapsui.Styles
 
         public new static double DefaultWidth { get; set; } = 100;
         public new static double DefaultHeight { get; set; } = 30;
-        
+
         /// <summary>
         /// Type of Callout
         /// </summary>
@@ -340,7 +340,7 @@ namespace Mapsui.Styles
         /// <summary>
         /// Font color to render title
         /// </summary>
-        public Color TitleFontColor 
+        public Color TitleFontColor
         {
             get => _titleFontColor;
             set
@@ -451,7 +451,7 @@ namespace Mapsui.Styles
         public Font TitleFont
         {
             get => _titleFont;
-            set 
+            set
             {
                 _titleFont = value;
                 Invalidated = true;

@@ -30,7 +30,7 @@
         {
             return new MPoint(readOnlyPoint.X, readOnlyPoint.Y);
         }
-        
+
         /// <summary>
         /// Implicit conversion from ReadOnlyPoint to MPoint
         /// </summary>

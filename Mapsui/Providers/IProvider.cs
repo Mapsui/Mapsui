@@ -24,7 +24,7 @@ namespace Mapsui.Providers
     /// <summary>
     /// Interface for data providers
     /// </summary>
-    public interface IProvider <out T> where T : IFeature
+    public interface IProvider<out T> where T : IFeature
     {
         /// <summary>
         /// The spatial reference ID (CRS)

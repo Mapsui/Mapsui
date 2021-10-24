@@ -24,7 +24,7 @@ namespace Mapsui.Samples.Wpf.Editing
         private readonly EditManipulation _editManipulation = new EditManipulation();
         private bool _selectMode;
         private readonly LimitedQueue<LogModel> _logMessage = new LimitedQueue<LogModel>(6);
-        
+
         public MainWindow()
         {
             InitializeComponent();
@@ -89,11 +89,10 @@ namespace Mapsui.Samples.Wpf.Editing
                 Margin = new Thickness(4)
             };
 
-            radioButton.Click += (s, a) =>
-            {
+            radioButton.Click += (s, a) => {
                 MapControl.Map.Layers.Clear();
                 MapControl.Map = sample.Value();
- 
+
                 LayerList.Initialize(MapControl.Map.Layers);
                 InitializeZoomSlider(MapControl.Map.Resolutions);
                 if (MapControl.Map.Layers.Any(l => l.Name.ToLower().Contains("edit"))) InitializeEditSetup();
@@ -115,11 +114,10 @@ namespace Mapsui.Samples.Wpf.Editing
             ZoomSlider.TickPlacement = TickPlacement.BottomRight;
             ZoomSlider.EndInit();
         }
-        
+
         private void LogMethod(LogLevel logLevel, string message, Exception exception)
         {
-            Dispatcher.Invoke(() =>
-            {
+            Dispatcher.Invoke(() => {
                 _logMessage.Enqueue(new LogModel { Exception = exception, LogLevel = logLevel, Message = message });
                 return LogTextBox.Text = ToMultiLineString(_logMessage);
             });
@@ -161,8 +159,7 @@ namespace Mapsui.Samples.Wpf.Editing
             _targetLayer.Clear();
 
             _editManager.EditMode = EditMode.Modify;
-            Loaded += (sender, args) =>
-            {
+            Loaded += (sender, args) => {
                 MapControl.Navigator.NavigateTo(_editManager.Layer.Envelope.Grow(_editManager.Layer.Envelope.Width * 0.2));
             };
         }
@@ -171,16 +168,16 @@ namespace Mapsui.Samples.Wpf.Editing
         {
             IEnumerable<IGeometryFeature> features = _targetLayer.GetFeatures().Copy();
 
-			foreach (var feature in features)
-	        {
-		        feature.RenderedGeometry.Clear();
-	        }
+            foreach (var feature in features)
+            {
+                feature.RenderedGeometry.Clear();
+            }
 
-			_tempFeatures = new List<IGeometryFeature>(features);
+            _tempFeatures = new List<IGeometryFeature>(features);
 
             _editManager.EditMode = EditMode.AddPoint;
         }
-        
+
         private void Modify_OnClick(object sender, RoutedEventArgs args)
         {
             _editManager.EditMode = EditMode.Modify;
@@ -208,26 +205,26 @@ namespace Mapsui.Samples.Wpf.Editing
         {
             IEnumerable<IGeometryFeature> features = _targetLayer.GetFeatures().Copy();
 
-			foreach (var feature in features)
-	        {
-		        feature.RenderedGeometry.Clear();
-	        }
+            foreach (var feature in features)
+            {
+                feature.RenderedGeometry.Clear();
+            }
 
-			_tempFeatures = new List<IGeometryFeature>(features);
+            _tempFeatures = new List<IGeometryFeature>(features);
 
             _editManager.EditMode = EditMode.AddLine;
         }
 
         private void AddPolygon_OnClick(object sender, RoutedEventArgs args)
         {
-			IEnumerable<IGeometryFeature> features = _targetLayer.GetFeatures().Copy();
+            IEnumerable<IGeometryFeature> features = _targetLayer.GetFeatures().Copy();
 
-			foreach (var feature in features)
-	        {
-		        feature.RenderedGeometry.Clear();
-	        }
+            foreach (var feature in features)
+            {
+                feature.RenderedGeometry.Clear();
+            }
 
-			_tempFeatures = new List<IGeometryFeature>(features);
+            _tempFeatures = new List<IGeometryFeature>(features);
 
             _editManager.EditMode = EditMode.AddPolygon;
         }
@@ -240,46 +237,46 @@ namespace Mapsui.Samples.Wpf.Editing
         {
             _editManager.EditMode = EditMode.Scale;
         }
-        
+
         private void Load_OnClick(object sender, RoutedEventArgs args)
         {
-	        IEnumerable<IGeometryFeature> features = _targetLayer.GetFeatures().Copy();
+            IEnumerable<IGeometryFeature> features = _targetLayer.GetFeatures().Copy();
 
-			foreach (var feature in features)
-	        {
-		        feature.RenderedGeometry.Clear();
-	        }
+            foreach (var feature in features)
+            {
+                feature.RenderedGeometry.Clear();
+            }
 
-			_tempFeatures = new List<IGeometryFeature>(features);
+            _tempFeatures = new List<IGeometryFeature>(features);
 
-			_editManager.Layer.AddRange(features);
-			_targetLayer.Clear();
+            _editManager.Layer.AddRange(features);
+            _targetLayer.Clear();
 
             MapControl.RefreshGraphics();
         }
 
-	    private void Cancel_OnClick(object sender, RoutedEventArgs args)
-	    {
+        private void Cancel_OnClick(object sender, RoutedEventArgs args)
+        {
             if (_targetLayer != null && _tempFeatures != null)
-		    {
-			    _targetLayer.Clear(); _targetLayer.AddRange(_tempFeatures.Copy());
-			    MapControl.RefreshGraphics();
-			}
+            {
+                _targetLayer.Clear(); _targetLayer.AddRange(_tempFeatures.Copy());
+                MapControl.RefreshGraphics();
+            }
 
-		    _editManager.Layer.Clear();
+            _editManager.Layer.Clear();
 
-		    MapControl.RefreshGraphics();
+            MapControl.RefreshGraphics();
 
-		    _editManager.EditMode = EditMode.None;
+            _editManager.EditMode = EditMode.None;
 
-			_tempFeatures = null;
-	    }
+            _tempFeatures = null;
+        }
 
         private void Delete_OnClick(object sender, RoutedEventArgs args)
         {
             if (_selectMode)
             {
-                var selectedFeatures = _editManager.Layer.GetFeatures().Where(f => (bool?) f["Selected"] == true);
+                var selectedFeatures = _editManager.Layer.GetFeatures().Where(f => (bool?)f["Selected"] == true);
 
                 foreach (var selectedFeature in selectedFeatures)
                 {

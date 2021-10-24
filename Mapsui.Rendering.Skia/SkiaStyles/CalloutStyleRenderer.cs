@@ -9,7 +9,7 @@ namespace Mapsui.Rendering.Skia
 {
     public class CalloutStyleRenderer : SymbolStyle
     {
-        public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, 
+        public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport,
             float opacity, Point destination, CalloutStyle calloutStyle)
         {
             if (calloutStyle.BitmapId < 0 || calloutStyle.Invalidated)
@@ -36,12 +36,12 @@ namespace Mapsui.Rendering.Skia
             var symbolOffsetY = calloutStyle.SymbolOffset.IsRelative ? picture.CullRect.Height * (float)calloutStyle.SymbolOffset.Y : (float)calloutStyle.SymbolOffset.Y;
 
             var rotation = (float)calloutStyle.SymbolRotation;
-            
-            if (viewport.Rotation != 0 && calloutStyle.RotateWithMap) 
+
+            if (viewport.Rotation != 0 && calloutStyle.RotateWithMap)
                 rotation += (float)viewport.Rotation;
-            
+
             if (viewport.Rotation != 0 && calloutStyle.SymbolOffsetRotatesWithMap)
-            { 
+            {
                 var mapRotation = viewport.Rotation / 180.0 * Math.PI;
                 var x = Math.Cos(mapRotation) * symbolOffsetX - Math.Sin(mapRotation) * symbolOffsetY;
                 var y = Math.Sin(mapRotation) * symbolOffsetX + Math.Cos(mapRotation) * symbolOffsetY;
@@ -94,7 +94,7 @@ namespace Mapsui.Rendering.Skia
             // Create a canvas for drawing
             using (var rec = new SKPictureRecorder())
             using (var canvas = rec.BeginRecording(new SKRect(0, 0, (float)width, (float)height)))
-            { 
+            {
                 (var path, var center) = CreateCalloutPath(callout, contentWidth, contentHeight);
                 // Now move Offset to the position of the arrow
                 callout.Offset = new Offset(-center.X, -center.Y);
@@ -240,7 +240,7 @@ namespace Mapsui.Rendering.Skia
         }
 
         private static void DrawContent(CalloutStyle callout, SKCanvas canvas)
-        { 
+        {
             // Draw content
             if (callout.Content >= 0)
             {

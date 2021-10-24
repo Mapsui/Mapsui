@@ -14,7 +14,7 @@ namespace Mapsui.Samples.Common.Helpers
         {
             return new MemoryProvider<IGeometryFeature>(CreateFeatures(GenerateRandomPoints(envelope, count, seed)));
         }
-        
+
         private static IEnumerable<IGeometryFeature> CreateFeatures(IEnumerable<MPoint> randomPoints)
         {
             var counter = 0;

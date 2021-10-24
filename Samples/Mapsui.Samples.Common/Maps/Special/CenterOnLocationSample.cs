@@ -29,7 +29,7 @@ namespace Mapsui.Samples.Common.Maps
             // Set the center of the viewport to the coordinate. The UI will refresh automatically
             // Additionally you might want to set the resolution, this could depend on your specific purpose
             map.Home = n => n.NavigateTo(sphericalMercatorCoordinate, map.Resolutions[9]);
-           
+
             return map;
         }
     }

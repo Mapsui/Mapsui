@@ -31,7 +31,7 @@ namespace Mapsui.Samples.Common.Maps
 
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(CreateSvgLayer(map.Envelope));
-            
+
             return map;
         }
 

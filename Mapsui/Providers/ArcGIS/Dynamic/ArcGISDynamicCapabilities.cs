@@ -6,7 +6,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
     {
         public string ServiceUrl { get; set; } //Not returned from service itself
         public string currentVersion { get; set; }
-        public string serviceDescription { get; set; }        
+        public string serviceDescription { get; set; }
         public string description { get; set; }
         public string copyrightText { get; set; }
         public string capabilities { get; set; }
@@ -20,7 +20,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
         public string units { get; set; }
         public string supportedImageFormatTypes { get; set; }
         public Table[] tables;
-        public ArcGISLayer[] layers { get; set; }          
+        public ArcGISLayer[] layers { get; set; }
         public IDictionary<string, string> documentInfo { get; set; }
 
         public string[] GetSupportedImageFormatTypes()

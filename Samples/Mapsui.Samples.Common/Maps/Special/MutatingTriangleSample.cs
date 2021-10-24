@@ -31,9 +31,9 @@ namespace Mapsui.Samples.Common.Maps
         }
 
         private static ILayer CreateMutatingTriangleLayer(MRect envelope)
-        {   
+        {
             var layer = new MemoryLayer();
-           
+
             var polygon = new Polygon(new LinearRing(GenerateRandomPoints(envelope, 3)));
             var feature = new Feature() { Geometry = polygon };
             var features = new List<IGeometryFeature>();
@@ -41,8 +41,7 @@ namespace Mapsui.Samples.Common.Maps
 
             layer.DataSource = new MemoryProvider<IGeometryFeature>(features);
 
-            PeriodicTask.Run(() =>
-            {
+            PeriodicTask.Run(() => {
                 polygon.ExteriorRing = new LinearRing(GenerateRandomPoints(envelope, 3));
                 // Clear cache for change to show
                 feature.RenderedGeometry.Clear();

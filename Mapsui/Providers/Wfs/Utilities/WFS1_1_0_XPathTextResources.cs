@@ -9,7 +9,7 @@ namespace Mapsui.Providers.Wfs.Utilities
     /// </summary>
     public class WFS_1_1_0_XPathTextResources : WFS_XPathTextResourcesBase
     {
-        
+
         ////////////////////////////////////////////////////////////////////////
         // XPath                                                              //                      
         // GetCapabilities WFS 1.1.0                                          //
@@ -100,6 +100,6 @@ namespace Mapsui.Providers.Wfs.Utilities
             get { return _XPATH_BOUNDINGBOXMAXY; }
         }
 
-        
+
     }
 }

@@ -36,7 +36,7 @@ namespace Mapsui.Providers.Wfs
     /// </summary>
     public class WFSProvider : IProvider<IFeature>
     {
-        
+
         /// <summary>
         /// This enumeration consists of expressions denoting WFS versions.
         /// </summary>
@@ -50,9 +50,9 @@ namespace Mapsui.Providers.Wfs
             /// Version 1.1.0
             /// </summary>
             WFS_1_1_0
-        } 
+        }
 
-        
+
         private readonly GeometryTypeEnum _geometryType = GeometryTypeEnum.Unknown;
         private readonly string _getCapabilitiesUri;
         private readonly HttpClientUtil _httpClientUtil = new HttpClientUtil();
@@ -73,8 +73,8 @@ namespace Mapsui.Providers.Wfs
         // The type of geometry can be specified in case of unprecise information (e.g. 'GeometryAssociationType').
         // It helps to accelerate the rendering process significantly.
 
-        
-        
+
+
         /// <summary>
         /// This cache (obtained from an already instantiated dataprovider that retrieves a featuretype hosted by the same service) 
         /// helps to speed up gathering metadata. It caches the 'GetCapabilities' response. 
@@ -105,7 +105,7 @@ namespace Mapsui.Providers.Wfs
             {
                 //https://docs.geoserver.org/stable/en/user/services/wfs/axis_order.html#wfs-basics-axis
                 return _axisOrder ?? (_wfsVersion == WFSVersionEnum.WFS_1_0_0
-                    ? new[] {0, 1}
+                    ? new[] { 0, 1 }
                     : new AxisOrderRegistry()[CRS]);
             }
             set
@@ -114,7 +114,7 @@ namespace Mapsui.Providers.Wfs
                 {
                     if (value.Length != 2)
                         throw new ArgumentException("Axis order array must have 2 elements");
-                    if (!((value[0] == 0 && value[1] == 1)||
+                    if (!((value[0] == 0 && value[1] == 1) ||
                           (value[0] == 1 && value[1] == 0)))
                         throw new ArgumentException("Axis order array values must be 0 or 1");
                     if (value[0] + value[1] != 1)
@@ -123,7 +123,7 @@ namespace Mapsui.Providers.Wfs
                 _axisOrder = value;
             }
         }
-        
+
         /// <summary>
         /// Gets or sets a value indicating whether extracting geometry information 
         /// from 'GetFeature' response shall be done quickly without paying attention to
@@ -379,7 +379,7 @@ namespace Mapsui.Providers.Wfs
             : this(getCapabilitiesCache, nsPrefix, featureType, GeometryTypeEnum.Unknown, wfsVersion)
         {
         }
-        
+
         /// <summary>
         /// Returns all features whose <see cref="Mapsui.Geometries.BoundingBox"/> intersects 'bbox'.
         /// </summary>
@@ -390,7 +390,7 @@ namespace Mapsui.Providers.Wfs
             if (_featureTypeInfo == null) return null;
 
             var features = new Features();
-  
+
             string geometryTypeString = _featureTypeInfo.Geometry.GeometryType;
 
             GeometryFactory geomFactory = null;
@@ -410,36 +410,36 @@ namespace Mapsui.Providers.Wfs
             {
                 switch (geometryTypeString)
                 {
-                        /* Primitive geometry elements */
+                    /* Primitive geometry elements */
 
-                        // GML2
+                    // GML2
                     case "PointPropertyType":
                         geomFactory = new PointFactory(_httpClientUtil, _featureTypeInfo);
                         break;
 
-                        // GML2
+                    // GML2
                     case "LineStringPropertyType":
                         geomFactory = new LineStringFactory(_httpClientUtil, _featureTypeInfo);
                         break;
 
-                        // GML2
+                    // GML2
                     case "PolygonPropertyType":
                         geomFactory = new PolygonFactory(_httpClientUtil, _featureTypeInfo);
                         break;
 
-                        // GML3
+                    // GML3
                     case "CurvePropertyType":
                         geomFactory = new LineStringFactory(_httpClientUtil, _featureTypeInfo);
                         break;
 
-                        // GML3
+                    // GML3
                     case "SurfacePropertyType":
                         geomFactory = new PolygonFactory(_httpClientUtil, _featureTypeInfo);
                         break;
 
-                        /* Aggregate geometry elements */
+                    /* Aggregate geometry elements */
 
-                        // GML2
+                    // GML2
                     case "MultiPointPropertyType":
                         if (_multiGeometries)
                             geomFactory = new MultiPointFactory(_httpClientUtil, _featureTypeInfo);
@@ -447,7 +447,7 @@ namespace Mapsui.Providers.Wfs
                             geomFactory = new PointFactory(_httpClientUtil, _featureTypeInfo);
                         break;
 
-                        // GML2
+                    // GML2
                     case "MultiLineStringPropertyType":
                         if (_multiGeometries)
                             geomFactory = new MultiLineStringFactory(_httpClientUtil, _featureTypeInfo);
@@ -455,7 +455,7 @@ namespace Mapsui.Providers.Wfs
                             geomFactory = new LineStringFactory(_httpClientUtil, _featureTypeInfo);
                         break;
 
-                        // GML2
+                    // GML2
                     case "MultiPolygonPropertyType":
                         if (_multiGeometries)
                             geomFactory = new MultiPolygonFactory(_httpClientUtil, _featureTypeInfo);
@@ -463,7 +463,7 @@ namespace Mapsui.Providers.Wfs
                             geomFactory = new PolygonFactory(_httpClientUtil, _featureTypeInfo);
                         break;
 
-                        // GML3
+                    // GML3
                     case "MultiCurvePropertyType":
                         if (_multiGeometries)
                             geomFactory = new MultiLineStringFactory(_httpClientUtil, _featureTypeInfo);
@@ -471,7 +471,7 @@ namespace Mapsui.Providers.Wfs
                             geomFactory = new LineStringFactory(_httpClientUtil, _featureTypeInfo);
                         break;
 
-                        // GML3
+                    // GML3
                     case "MultiSurfacePropertyType":
                         if (_multiGeometries)
                             geomFactory = new MultiPolygonFactory(_httpClientUtil, _featureTypeInfo);
@@ -479,8 +479,8 @@ namespace Mapsui.Providers.Wfs
                             geomFactory = new PolygonFactory(_httpClientUtil, _featureTypeInfo);
                         break;
 
-                        // .e.g. 'gml:GeometryAssociationType' or 'GeometryPropertyType'
-                        //It's better to set the geometry type manually, if it is known...
+                    // .e.g. 'gml:GeometryAssociationType' or 'GeometryPropertyType'
+                    //It's better to set the geometry type manually, if it is known...
                     default:
                         geomFactory = new UnspecifiedGeometryFactoryWfs100Gml2(_httpClientUtil, _featureTypeInfo,
                                                                                    _multiGeometries, _quickGeometries);
@@ -506,13 +506,13 @@ namespace Mapsui.Providers.Wfs
                                    _featureTypeInfo.BBox.MaxLong,
                                    _featureTypeInfo.BBox.MaxLat);
         }
-        
+
         public string CRS
         {
             get { return ProjectionHelper.EpsgPrefix + _featureTypeInfo.SRID; }
             set { _featureTypeInfo.SRID = value.Substring(ProjectionHelper.EpsgPrefix.Length); }
         }
-        
+
         public void Dispose()
         {
             Dispose(true);
@@ -528,7 +528,7 @@ namespace Mapsui.Providers.Wfs
             }
             _disposed = true;
         }
-        
+
         /// <summary>
         /// This method gets metadata about the featuretype to query from 'GetCapabilities' and 'DescribeFeatureType'.
         /// </summary>
@@ -580,10 +580,10 @@ namespace Mapsui.Providers.Wfs
                 else if (describeFeatureTypeUri.EndsWith("?", StringComparison.Ordinal))
                     describeFeatureTypeUri =
                         describeFeatureTypeUri.Remove(describeFeatureTypeUri.Length - 1);
-                
+
                 /* Spatial reference ID */
                 var srid = _featureTypeInfoQueryManager.GetValueFromNode
-                    (_featureTypeInfoQueryManager.Compile(_textResources.XPATH_SRS), new[] {new DictionaryEntry("_param1", featureQueryName)});
+                    (_featureTypeInfoQueryManager.Compile(_textResources.XPATH_SRS), new[] { new DictionaryEntry("_param1", featureQueryName) });
                 /* If no SRID could be found, try '4326' by default */
                 srid = (srid == null) ? "4326" : srid.Substring(srid.LastIndexOf(":", StringComparison.Ordinal) + 1);
                 _featureTypeInfo.SRID = srid;
@@ -591,13 +591,13 @@ namespace Mapsui.Providers.Wfs
                 /* Bounding Box */
                 IXPathQueryManager bboxQuery = _featureTypeInfoQueryManager.GetXPathQueryManagerInContext(
                     _featureTypeInfoQueryManager.Compile(_textResources.XPATH_BBOX),
-                    new[] {new DictionaryEntry("_param1", featureQueryName)});
+                    new[] { new DictionaryEntry("_param1", featureQueryName) });
 
                 if (bboxQuery != null)
                 {
                     var bbox = new WfsFeatureTypeInfo.BoundingBox();
-                    var formatInfo = new NumberFormatInfo {NumberDecimalSeparator = "."};
-                    string bboxVal ;
+                    var formatInfo = new NumberFormatInfo { NumberDecimalSeparator = "." };
+                    string bboxVal;
 
                     if (_wfsVersion == WFSVersionEnum.WFS_1_0_0)
                         bbox.MinLat =
@@ -709,7 +709,7 @@ namespace Mapsui.Providers.Wfs
 
                     /* Just, if not set manually... */
                     geomType ??= geomQuery.GetValueFromNode(geomQuery.Compile(_textResources.XPATH_TYPEATTRIBUTEQUERY));
-                    
+
                     /* read all the elements */
                     var iterator = geomQuery.GetIterator(geomQuery.Compile("//ancestor::xs:sequence/xs:element"));
                     foreach (XPathNavigator node in iterator)
@@ -840,10 +840,10 @@ namespace Mapsui.Providers.Wfs
                     geomType = geomType.Substring(geomType.IndexOf(":", StringComparison.Ordinal) + 1);
 
                 _featureTypeInfo.Geometry = new WfsFeatureTypeInfo.GeometryInfo
-                    {
-                        GeometryName = geomName, 
-                        GeometryType = geomType
-                    };
+                {
+                    GeometryName = geomName,
+                    GeometryType = geomType
+                };
             }
             finally
             {
@@ -863,20 +863,20 @@ namespace Mapsui.Providers.Wfs
                 _featureType = featureType;
         }
 
-        
-        
-        
+
+
+
         /// <summary>
         /// This class configures a <see cref="HttpClientUtil"/> class 
         /// for requests to a Web Feature Service.
         /// </summary>
         private class WFSClientHttpConfigurator
         {
-            
+
             private readonly IWFS_TextResources _wfsTextResources;
 
-            
-            
+
+
             /// <summary>
             /// Initializes a new instance of the <see cref="WFSClientHttpConfigurator"/> class.
             /// An instance of this class can be used to configure a <see cref="HttpClientUtil"/> object.
@@ -890,8 +890,8 @@ namespace Mapsui.Providers.Wfs
                 _wfsTextResources = wfsTextResources;
             }
 
-            
-            
+
+
             /// <summary>
             /// Configures for WFS 'GetCapabilities' request using an instance implementing <see cref="IWFS_TextResources"/>.
             /// The <see cref="HttpClientUtil"/> instance is returned for immediate usage. 
@@ -921,7 +921,7 @@ namespace Mapsui.Providers.Wfs
             /// Configures for WFS 'GetFeature' request using an instance implementing <see cref="IWFS_TextResources"/>.
             /// The <see cref="HttpClientUtil"/> instance is returned for immediate usage. 
             /// </summary>
-            internal void ConfigureForWfsGetFeatureRequest(HttpClientUtil httpClientUtil, 
+            internal void ConfigureForWfsGetFeatureRequest(HttpClientUtil httpClientUtil,
                 WfsFeatureTypeInfo featureTypeInfo, List<string> labelProperties, BoundingBox boundingBox,
                 IFilter filter, bool get)
             {
@@ -943,7 +943,7 @@ namespace Mapsui.Providers.Wfs
                 }
             }
         }
-        
+
         /// <summary>
         /// Gets the features within the specified <see cref="Mapsui.Geometries.BoundingBox"/>
         /// </summary>
@@ -954,6 +954,6 @@ namespace Mapsui.Providers.Wfs
         {
             return ExecuteIntersectionQuery(fetchInfo.Extent.ToBoundingBox());
         }
-                
+
     }
 }

@@ -19,13 +19,13 @@ namespace Mapsui.Widgets.ScaleBar
 
         public double MeterRatio => 1;
 
-        public IEnumerable<int> ScaleBarValues { get; } = new [] {
+        public IEnumerable<int> ScaleBarValues { get; } = new[] {
             10000000, 5000000, 2000000, 1000000, 500000, 200000, 100000, 50000,
             20000, 10000, 5000, 2000, 1000, 500, 200, 100, 50, 20, 10, 5, 2, 1
-            
+
         };
 
-    public string GetScaleText(int mapScaleValue)
+        public string GetScaleText(int mapScaleValue)
         {
             if (mapScaleValue < _oneKilometer)
             {

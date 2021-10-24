@@ -56,7 +56,7 @@ namespace Mapsui.Providers.Wms
             /// Telephone
             /// </summary>
             public string VoiceTelephone;
-            
+
             /// <summary>
             /// Information about a contact address for the service.
             /// </summary>
@@ -92,7 +92,7 @@ namespace Mapsui.Providers.Wms
                 /// </summary>
                 public string StateOrProvince;
             }
-            
+
             /// <summary>
             /// Information about a contact person for the service.
             /// </summary>
@@ -109,7 +109,7 @@ namespace Mapsui.Providers.Wms
                 public string Person;
             }
         }
-        
+
         /// <summary>
         /// The Wms Service Description stores metadata parameters for a WMS service
         /// </summary>

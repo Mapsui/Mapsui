@@ -55,14 +55,15 @@ namespace Mapsui.Tests.Common.Maps
             feature.Styles.Add(new VectorStyle
             {
                 Enabled = true,
-                Fill = CreateBrush(new Color(255,0,0, 120) , FillStyle.BitmapRotated, _bitmapId),
+                Fill = CreateBrush(new Color(255, 0, 0, 120), FillStyle.BitmapRotated, _bitmapId),
                 Outline = CreatePen(new Color(255, 255, 0), 2, PenStyle.DashDot),
                 Line = null
             });
 
             features.Add(feature);
 
-            feature = new Feature {
+            feature = new Feature
+            {
                 Geometry = Geometry.GeomFromText("POLYGON ((2000000 10000000, 2000000 8000000, 10000000 8000000, 10000000 10000000, 2000000 10000000))")
             };
             feature.Styles.Add(new VectorStyle
@@ -183,7 +184,7 @@ namespace Mapsui.Tests.Common.Maps
             return provider;
         }
 
-        private static Brush CreateBrush(Color color, FillStyle fillStyle, int ?imageId = null)
+        private static Brush CreateBrush(Color color, FillStyle fillStyle, int? imageId = null)
         {
             if (imageId.HasValue && !(fillStyle == FillStyle.Bitmap || fillStyle == FillStyle.BitmapRotated))
                 fillStyle = FillStyle.Bitmap;

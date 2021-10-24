@@ -48,7 +48,7 @@ using VerticalAlignment = Windows.UI.Xaml.VerticalAlignment;
 #endif
 
 #if __WINUI__
-[assembly:SupportedOSPlatform("windows10.0.18362.0")]
+[assembly: SupportedOSPlatform("windows10.0.18362.0")]
 namespace Mapsui.UI.WinUI
 #else
 namespace Mapsui.UI.Uwp
@@ -74,7 +74,7 @@ namespace Mapsui.UI.Uwp
                 // The commented out code crashes the app when MouseWheelAnimation.Duration > 0. Could be a bug in SKXamlCanvas
                 //if (Dispatcher.HasThreadAccess) _canvas?.Invalidate();
                 //else RunOnUIThread(() => _canvas?.Invalidate());
-                RunOnUIThread(() => _canvas?.Invalidate()); 
+                RunOnUIThread(() => _canvas?.Invalidate());
             };
 
             Background = new SolidColorBrush(Colors.White); // DON'T REMOVE! Touch events do not work without a background
@@ -203,11 +203,11 @@ namespace Mapsui.UI.Uwp
 
         private void Canvas_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
         {
-            if (PixelDensity <= 0) 
+            if (PixelDensity <= 0)
                 return;
 
             var canvas = e.Surface.Canvas;
-            
+
             canvas.Scale(PixelDensity, PixelDensity);
 
             CommonDrawControl(canvas);
@@ -220,7 +220,7 @@ namespace Mapsui.UI.Uwp
         {
             e.TranslationBehavior.DesiredDeceleration = 25 * 96.0 / (1000.0 * 1000.0);
         }
-        
+
         private void OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
             // We have a new interaction with the screen, so stop all navigator animations
@@ -230,7 +230,7 @@ namespace Mapsui.UI.Uwp
             var radius = e.Delta.Scale;
             var rotation = e.Delta.Rotation;
 
-            var previousCenter=  e.Position.ToMapsui().Offset(-e.Delta.Translation.X, -e.Delta.Translation.Y);
+            var previousCenter = e.Position.ToMapsui().Offset(-e.Delta.Translation.X, -e.Delta.Translation.Y);
             var previousRadius = 1f;
             var previousRotation = 0f;
 

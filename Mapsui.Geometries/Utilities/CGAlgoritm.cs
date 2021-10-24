@@ -69,8 +69,8 @@ namespace Mapsui.Geometries.Utilities
             var r = ProjectionFactor(p, lineSegFrom, lineSegTo);
             var coord = new Point
             {
-                X = lineSegFrom.X + r*(lineSegTo.X - lineSegFrom.X),
-                Y = lineSegFrom.Y + r*(lineSegTo.Y - lineSegFrom.Y)
+                X = lineSegFrom.X + r * (lineSegTo.X - lineSegFrom.X),
+                Y = lineSegFrom.Y + r * (lineSegTo.Y - lineSegFrom.Y)
             };
             return coord;
         }
@@ -100,8 +100,8 @@ namespace Mapsui.Geometries.Utilities
             */
             var dx = lineSegTo.X - lineSegFrom.X;
             var dy = lineSegTo.Y - lineSegFrom.Y;
-            var len2 = dx*dx + dy*dy;
-            var r = ((p.X - lineSegFrom.X)*dx + (p.Y - lineSegFrom.Y)*dy)/len2;
+            var len2 = dx * dx + dy * dy;
+            var r = ((p.X - lineSegFrom.X) * dx + (p.Y - lineSegFrom.Y) * dy) / len2;
             return r;
         }
 
@@ -132,26 +132,26 @@ namespace Mapsui.Geometries.Utilities
                         0<r<1 Point is interior to AB
             */
 
-            var r = ((p.X - a.X)*(b.X - a.X) + (p.Y - a.Y)*(b.Y - a.Y))
+            var r = ((p.X - a.X) * (b.X - a.X) + (p.Y - a.Y) * (b.Y - a.Y))
                     /
-                    ((b.X - a.X)*(b.X - a.X) + (b.Y - a.Y)*(b.Y - a.Y));
+                    ((b.X - a.X) * (b.X - a.X) + (b.Y - a.Y) * (b.Y - a.Y));
 
             if (r <= 0.0) return p.Distance(a);
             if (r >= 1.0) return p.Distance(b);
 
-/*(2)
-                                                                (Ay-Cy)(Bx-Ax)-(Ax-Cx)(By-Ay)
-                                                            s = -----------------------------
-                                                                            Curve^2
-                                    
-                                                            Then the distance from C to Point = |s|*Curve.
-                                                */
+            /*(2)
+                                                                            (Ay-Cy)(Bx-Ax)-(Ax-Cx)(By-Ay)
+                                                                        s = -----------------------------
+                                                                                        Curve^2
 
-            var s = ((a.Y - p.Y)*(b.X - a.X) - (a.X - p.X)*(b.Y - a.Y))
+                                                                        Then the distance from C to Point = |s|*Curve.
+                                                            */
+
+            var s = ((a.Y - p.Y) * (b.X - a.X) - (a.X - p.X) * (b.Y - a.Y))
                     /
-                    ((b.X - a.X)*(b.X - a.X) + (b.Y - a.Y)*(b.Y - a.Y));
+                    ((b.X - a.X) * (b.X - a.X) + (b.Y - a.Y) * (b.Y - a.Y));
 
-            return Math.Abs(s)*Math.Sqrt((b.X - a.X)*(b.X - a.X) + (b.Y - a.Y)*(b.Y - a.Y));
+            return Math.Abs(s) * Math.Sqrt((b.X - a.X) * (b.X - a.X) + (b.Y - a.Y) * (b.Y - a.Y));
         }
 
         /// <summary>
@@ -173,11 +173,11 @@ namespace Mapsui.Geometries.Utilities
                         Then the distance from C to Point = |s|*Curve.
             */
 
-            var s = ((a.Y - p.Y)*(b.X - a.X) - (a.X - p.X)*(b.Y - a.Y))
+            var s = ((a.Y - p.Y) * (b.X - a.X) - (a.X - p.X) * (b.Y - a.Y))
                     /
-                    ((b.X - a.X)*(b.X - a.X) + (b.Y - a.Y)*(b.Y - a.Y));
+                    ((b.X - a.X) * (b.X - a.X) + (b.Y - a.Y) * (b.Y - a.Y));
 
-            return Math.Abs(s)*Math.Sqrt((b.X - a.X)*(b.X - a.X) + (b.Y - a.Y)*(b.Y - a.Y));
+            return Math.Abs(s) * Math.Sqrt((b.X - a.X) * (b.X - a.X) + (b.Y - a.Y) * (b.Y - a.Y));
         }
 
         /// <summary>
@@ -220,11 +220,11 @@ namespace Mapsui.Geometries.Utilities
                     If the numerator in eqn 1 is also zero, AB & CD are collinear.
 
             */
-            var rTop = (a.Y - c.Y)*(d.X - c.X) - (a.X - c.X)*(d.Y - c.Y);
-            var rBottom = (b.X - a.X)*(d.Y - c.Y) - (b.Y - a.Y)*(d.X - c.X);
+            var rTop = (a.Y - c.Y) * (d.X - c.X) - (a.X - c.X) * (d.Y - c.Y);
+            var rBottom = (b.X - a.X) * (d.Y - c.Y) - (b.Y - a.Y) * (d.X - c.X);
 
-            var sTop = (a.Y - c.Y)*(b.X - a.X) - (a.X - c.X)*(b.Y - a.Y);
-            var sBottom = (b.X - a.X)*(d.Y - c.Y) - (b.Y - a.Y)*(d.X - c.X);
+            var sTop = (a.Y - c.Y) * (b.X - a.X) - (a.X - c.X) * (b.Y - a.Y);
+            var sBottom = (b.X - a.X) * (d.Y - c.Y) - (b.Y - a.Y) * (d.X - c.X);
 
             // ReSharper disable CompareOfFloatsByEqualityOperator
             if ((rBottom == 0) || (sBottom == 0))
@@ -235,8 +235,8 @@ namespace Mapsui.Geometries.Utilities
                             DistancePointLine(d, a, b))));
             // ReSharper restore CompareOfFloatsByEqualityOperator
 
-            var s = sTop/sBottom;
-            var r = rTop/rBottom;
+            var s = sTop / sBottom;
+            var r = rTop / rBottom;
 
             if ((r < 0) || (r > 1) || (s < 0) || (s > 1))
                 //no intersection
@@ -265,9 +265,9 @@ namespace Mapsui.Geometries.Utilities
                 var by = ring[i].Y;
                 var cx = ring[i + 1].X;
                 var cy = ring[i + 1].Y;
-                sum += (bx + cx)*(cy - by);
+                sum += (bx + cx) * (cy - by);
             }
-            return -sum/2.0;
+            return -sum / 2.0;
         }
 
         /// <summary>
