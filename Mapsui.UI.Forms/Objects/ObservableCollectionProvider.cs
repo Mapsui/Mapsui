@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Mapsui.Extensions;
 using Mapsui.Fetcher;
+using Mapsui.Layers;
 
 namespace Mapsui.UI.Objects
 {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Mapsui.Styles;
 
-namespace Mapsui.Providers
+namespace Mapsui.Layers
 {
     public interface IFeature
     {

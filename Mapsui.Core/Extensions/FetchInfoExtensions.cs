@@ -1,4 +1,5 @@
 ﻿using Mapsui.Fetcher;
+using Mapsui.Layers;
 
 namespace Mapsui.Extensions
 {

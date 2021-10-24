@@ -22,6 +22,7 @@ using System.Linq;
 using Mapsui.Fetcher;
 using Mapsui.Geometries.WellKnownBinary;
 using Mapsui.Geometries.WellKnownText;
+using Mapsui.Layers;
 
 namespace Mapsui.Providers
 {

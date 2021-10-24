@@ -26,6 +26,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Fetcher;
+using Mapsui.Layers;
 using Mapsui.Logging;
 
 namespace Mapsui.Providers

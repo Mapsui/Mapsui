@@ -28,8 +28,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using Mapsui.Extensions;
-using Mapsui.Fetcher;
 using Mapsui.Geometries;
+using Mapsui.Layers;
 using Mapsui.Rendering;
 
 namespace Mapsui.Providers.Wms

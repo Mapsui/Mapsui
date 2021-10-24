@@ -22,8 +22,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 using Mapsui.Extensions;
-using Mapsui.Fetcher;
 using Mapsui.Geometries;
+using Mapsui.Layers;
 using Mapsui.Providers.Shapefile.Indexing;
 
 namespace Mapsui.Providers.Shapefile

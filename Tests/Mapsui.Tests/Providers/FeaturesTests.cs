@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using Mapsui.Providers;
 using System.Linq;
+using Mapsui.Layers;
 
 namespace Mapsui.Tests.Providers
 {
