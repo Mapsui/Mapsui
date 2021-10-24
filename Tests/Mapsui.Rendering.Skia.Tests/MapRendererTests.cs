@@ -72,7 +72,7 @@ namespace Mapsui.Rendering.Skia.Tests
             }
             var viewport = new Viewport
             {
-                Center = new Point(100, 100),
+                Center = new MPoint(100, 100),
                 Width = 200,
                 Height = 200,
                 Resolution = 1
