@@ -24,9 +24,9 @@ namespace Mapsui.UI.Android
 
     class MapControlGestureListener : GestureDetector.SimpleOnGestureListener
     {
-        public EventHandler<GestureDetector.FlingEventArgs> Fling;
+        public EventHandler<GestureDetector.FlingEventArgs>? Fling;
 
-        public override bool OnFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
+        public override bool OnFling(MotionEvent? e1, MotionEvent? e2, float velocityX, float velocityY)
         {
             if (Fling != null)
             {

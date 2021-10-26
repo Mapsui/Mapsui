@@ -61,9 +61,9 @@ namespace Mapsui.UI
         /// </summary>
         /// <param name="layers">Layers that should be included in snapshot</param>
         /// <returns>Byte array with snapshot in png format. If there are any problems than returns null.</returns>
-        byte[] GetSnapshot(IEnumerable<ILayer> layers = null);
+        byte[]? GetSnapshot(IEnumerable<ILayer>? layers = null);
 
-        INavigator Navigator { get; }
+        INavigator? Navigator { get; }
 
         Performance Performance { get; set; }
     }

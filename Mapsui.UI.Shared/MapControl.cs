@@ -30,7 +30,7 @@ namespace Mapsui.UI.Wpf
 {
     public partial class MapControl : INotifyPropertyChanged
     {
-        private Map _map;
+        private Map? _map;
         private double _unSnapRotationDegrees;
         // Flag indicating if a drawing process is running
         private bool _drawing;
@@ -239,7 +239,7 @@ namespace Mapsui.UI.Wpf
         }
 
         private readonly LimitedViewport _viewport = new LimitedViewport();
-        private INavigator _navigator;
+        private INavigator? _navigator;
 
         /// <summary>
         /// Viewport holding information about visible part of the map. Viewport can never be null.
@@ -249,7 +249,7 @@ namespace Mapsui.UI.Wpf
         /// <summary>
         /// Handles all manipulations of the map viewport
         /// </summary>
-        public INavigator Navigator
+        public INavigator? Navigator
         {
             get => _navigator;
             set
@@ -517,9 +517,9 @@ namespace Mapsui.UI.Wpf
         }
 
         /// <inheritdoc />
-        public byte[] GetSnapshot(IEnumerable<ILayer> layers = null)
+        public byte[]? GetSnapshot(IEnumerable<ILayer>? layers = null)
         {
-            byte[] result = null;
+            byte[]? result = null;
 
             using (var stream = Renderer.RenderToBitmapStream(Viewport, layers ?? Map.Layers, pixelDensity: PixelDensity))
             {
@@ -556,7 +556,7 @@ namespace Mapsui.UI.Wpf
         /// <param name="widgetCallback">Callback, which is called when Widget is hit</param>
         /// <param name="numTaps">Number of clickes/taps</param>
         /// <returns>True, if something done </returns>
-        private MapInfoEventArgs InvokeInfo(IEnumerable<IWidget> widgets, MPoint screenPosition,
+        private MapInfoEventArgs? InvokeInfo(IEnumerable<IWidget> widgets, MPoint screenPosition,
             MPoint startScreenPosition, Func<IWidget, MPoint, bool> widgetCallback, int numTaps)
         {
             // Check if a Widget is tapped. In the current design they are always on top of the map.
