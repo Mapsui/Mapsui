@@ -10,7 +10,7 @@ namespace Mapsui.UI
     {
         event EventHandler<MapInfoEventArgs> Info;
 
-        Map Map { get; set; }
+        Map? Map { get; set; }
 
         event EventHandler ViewportInitialized;
 

@@ -321,7 +321,7 @@ namespace Mapsui.UI.Wpf
         /// Unsubscribe from map events
         /// </summary>
         /// <param name="map">Map, to which events to unsubscribe</param>
-        private void UnsubscribeFromMapEvents(Map map)
+        private void UnsubscribeFromMapEvents(Map? map)
         {
             var temp = map;
             if (temp != null)
@@ -346,7 +346,7 @@ namespace Mapsui.UI.Wpf
             _refresh = true;
         }
 
-        private void MapDataChanged(object sender, DataChangedEventArgs e)
+        private void MapDataChanged(object sender, DataChangedEventArgs? e)
         {
             RunOnUIThread(() => {
                 try
@@ -427,7 +427,7 @@ namespace Mapsui.UI.Wpf
         /// <summary>
         /// Map holding data for which is shown in this MapControl
         /// </summary>
-        public Map Map
+        public Map? Map
         {
             get => _map;
             set
@@ -444,8 +444,8 @@ namespace Mapsui.UI.Wpf
                 {
                     SubscribeToMapEvents(_map);
                     Navigator = new Navigator(_map, _viewport);
-                    _viewport.Map = Map;
-                    _viewport.Limiter = Map.Limiter;
+                    _viewport.Map = _map;
+                    _viewport.Limiter = _map.Limiter;
                     CallHomeIfNeeded();
                 }
 
