@@ -21,7 +21,7 @@ namespace Mapsui.UI.Forms
         public int NumOfTaps { get; }
 
         /// <summary>
-        /// Flag, if this event was handled
+        /// Flag, if this event was?  handled
         /// </summary>
         /// <value><c>true</c> if handled; otherwise, <c>false</c>.</value>
         public bool Handled { get; set; } = false;

@@ -25,10 +25,10 @@ namespace Mapsui.Widgets.Zoom
     /// </summary>
     public class ZoomInOutWidget : Widget, INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler?  PropertyChanged;
 
         /// <summary>
-        /// Event handler which is called, when buttons are touched. If there
+        /// event handler?  which is called, when buttons are touched. If there
         /// isn't one, than the default handler is used, which change the Resolution
         /// of Viewport.
         /// </summary>

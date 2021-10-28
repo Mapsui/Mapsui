@@ -9,7 +9,7 @@ namespace Mapsui.Fetcher
         bool TryTake(ref Action method);
         void SetViewport(FetchInfo fetchInfo);
         bool Busy { get; }
-        event DataChangedEventHandler DataChanged;
-        event PropertyChangedEventHandler PropertyChanged;
+        event DataChangedEventHandler?  DataChanged;
+        event PropertyChangedEventHandler?  PropertyChanged;
     }
 }

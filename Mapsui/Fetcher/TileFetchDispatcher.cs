@@ -38,8 +38,8 @@ namespace Mapsui.Fetcher
             _fetchMachine = new FetchMachine(this);
         }
 
-        public event DataChangedEventHandler DataChanged;
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event DataChangedEventHandler?  DataChanged;
+        public event PropertyChangedEventHandler?  PropertyChanged;
         public int NumberTilesNeeded { get; private set; }
 
         public void SetViewport(FetchInfo fetchInfo)
@@ -115,7 +115,7 @@ namespace Mapsui.Fetcher
             get => _busy;
             private set
             {
-                if (_busy == value) return; // prevent notify              
+                if (_busy == value) return; // prevent notify?               
                 _busy = value;
                 OnPropertyChanged(nameof(Busy));
             }

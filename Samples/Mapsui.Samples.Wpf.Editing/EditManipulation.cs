@@ -28,7 +28,7 @@ namespace Mapsui.Samples.Wpf.Editing
             switch (mouseState)
             {
                 case MouseState.Up:
-                    if (_inDoubleClick) // Workaround to prevent that after a double click the 'up' event will immediately add a new geometry.
+                    if (_inDoubleClick) // Workaround to prevent that?  after a double click the 'up' event will?  immediately add a new geometry.
                     {
                         _inDoubleClick = false;
                         return false;

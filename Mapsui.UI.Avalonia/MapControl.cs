@@ -81,7 +81,7 @@ namespace Mapsui.UI.Avalonia
             if (!Viewport.HasSize) return;
 
             _currentMousePosition = e.GetPosition(this).ToMapsui();
-            //Needed for both MouseMove and MouseWheel event for mousewheel event
+            //Needed for both MouseMove and MouseWheel event for?  mousewheel event
 
             if (double.IsNaN(_toResolution))
                 _toResolution = Viewport.Resolution;

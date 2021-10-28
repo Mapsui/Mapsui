@@ -20,8 +20,8 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
         private HttpWebRequest _webRequest;
         private ArcGISLegendResponse _legendResponse;
 
-        public event ArcGISLegendEventHandler LegendReceived;
-        public event ArcGISLegendEventHandler LegendFailed;
+        public event ArcGISLegendEventHandler?  LegendReceived;
+        public event ArcGISLegendEventHandler?  LegendFailed;
 
         public ArcGisLegend()
         {

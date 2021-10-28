@@ -110,7 +110,7 @@ namespace Mapsui.Samples.Avalonia.Views
 
         private void RotationSliderOnPointerMoved(object? sender, PointerEventArgs e)
         {
-            // This is probably not the proper event handler for this but I don't know what is.
+            // This is probably not the proper event handler?  for this but I don't know what is.
             var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
             MapControl.Navigator.RotateTo(percent * 360);
             MapControl.Refresh();

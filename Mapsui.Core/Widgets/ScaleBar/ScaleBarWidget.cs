@@ -62,7 +62,7 @@ namespace Mapsui.Widgets.ScaleBar
             _unitConverter = MetricUnitConverter.Instance;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler?  PropertyChanged;
 
         float _maxWidth;
 

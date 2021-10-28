@@ -83,7 +83,7 @@ namespace Mapsui.Fetcher
             get => _busy;
             private set
             {
-                if (_busy == value) return; // prevent notify              
+                if (_busy == value) return; // prevent notify?               
                 _busy = value;
                 OnPropertyChanged(nameof(Busy));
             }

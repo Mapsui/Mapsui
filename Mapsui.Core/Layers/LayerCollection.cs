@@ -17,11 +17,11 @@ namespace Mapsui.Layers
 
         public delegate void LayerCollectionChangedEventHandler(object sender, LayerCollectionChangedEventArgs args);
 
-        public event LayerRemovedEventHandler LayerRemoved;
-        public event LayerAddedEventHandler LayerAdded;
-        public event LayerMovedEventHandler LayerMoved;
+        public event LayerRemovedEventHandler?  LayerRemoved;
+        public event LayerAddedEventHandler?  LayerAdded;
+        public event LayerMovedEventHandler?  LayerMoved;
 
-        public event LayerCollectionChangedEventHandler Changed;
+        public event LayerCollectionChangedEventHandler?  Changed;
 
         public int Count => _layers.Count;
 

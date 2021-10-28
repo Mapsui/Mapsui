@@ -432,7 +432,7 @@ namespace Mapsui.UI.Forms
         /// Viewport of map has changed
         /// </summary>
         /// <param name="sender">Viewport of this event</param>
-        /// <param name="e">Event arguments containing what changed</param>
+        /// <param name="e">event arguments?  containing what changed</param>
         private void HandlerViewportChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName.Equals(nameof(Viewport.Rotation)))

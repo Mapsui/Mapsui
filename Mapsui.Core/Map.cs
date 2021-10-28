@@ -115,7 +115,7 @@ namespace Mapsui
         [Obsolete("Use ILayer.IsMapInfoLayer instead", true)]
         public IList<ILayer> InfoLayers { get; } = new List<ILayer>();
 
-        [Obsolete("Use your own hover event and call MapControl.GetMapInfo", true)]
+        [Obsolete("Use your own hover event and?  call MapControl.GetMapInfo", true)]
         public IList<ILayer> HoverLayers { get; } = new List<ILayer>();
 
         /// <summary>
@@ -177,7 +177,7 @@ namespace Mapsui
         /// </summary>
         public event EventHandler<MapInfoEventArgs>? Info;
 
-        [Obsolete("Use your own hover event instead and call MapControl.GetMapInfo", true)]
+        [Obsolete("Use your own hover event instead?  and call MapControl.GetMapInfo", true)]
 #pragma warning disable 67
         public event EventHandler<MapInfoEventArgs>? Hover;
 #pragma warning restore 67
@@ -312,7 +312,7 @@ namespace Mapsui
         }
 
         /// <summary>
-        /// This method is to invoke the Info event from the Map. This method is called
+        /// This method is to invoke the Info event from?  the Map. This method is called
         /// by the MapControl/MapView and should usually not be called from user code.
         /// </summary>
         public void OnInfo(MapInfoEventArgs mapInfoEventArgs)

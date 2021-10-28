@@ -133,9 +133,9 @@ namespace Mapsui.Layers
         private void RemoveExistingFeatures()
         {
             var features = _cache.ToArray();
-            _cache.Clear(); // clear before dispose to prevent possible null disposed exception on render
+            _cache.Clear(); // clear before dispose to prevent possible?  null disposed exception on render
 
-            // Disposing previous and storing current in the previous field to prevent dispose during rendering.
+            // Disposing previous and storing current in the previous field to prevent dispose?  during rendering.
             if (_previousFeatures != null) DisposeRenderedGeometries(_previousFeatures);
             _previousFeatures = features;
         }

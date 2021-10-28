@@ -5,7 +5,7 @@ namespace Mapsui
 {
     public interface IReadOnlyViewport
     {
-        event PropertyChangedEventHandler ViewportChanged;
+        event PropertyChangedEventHandler?  ViewportChanged;
 
         /// <summary>
         /// Coordinate of center of viewport in map coordinates
