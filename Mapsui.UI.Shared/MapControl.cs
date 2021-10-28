@@ -220,12 +220,12 @@ namespace Mapsui.UI.Wpf
             get => GetPixelDensity();
         }
 
-        private IRenderer? _renderer = new MapRenderer();
+        private IRenderer _renderer = new MapRenderer();
 
         /// <summary>
         /// Renderer that is used from this MapControl
         /// </summary>
-        public IRenderer? Renderer
+        public IRenderer Renderer
         {
             get { return _renderer; }
             set
@@ -239,7 +239,7 @@ namespace Mapsui.UI.Wpf
         }
 
         private readonly LimitedViewport _viewport = new LimitedViewport();
-        private INavigator? _navigator;
+        private INavigator _navigator = default!;
 
         /// <summary>
         /// Viewport holding information about visible part of the map. Viewport can never be null.
@@ -249,7 +249,7 @@ namespace Mapsui.UI.Wpf
         /// <summary>
         /// Handles all manipulations of the map viewport
         /// </summary>
-        public INavigator? Navigator
+        public INavigator Navigator
         {
             get => _navigator;
             set
@@ -282,20 +282,20 @@ namespace Mapsui.UI.Wpf
         /// Called whenever the map is clicked. The MapInfoEventArgs contain the features that were hit in
         /// the layers that have IsMapInfoLayer set to true. 
         /// </summary>
-        public event EventHandler<MapInfoEventArgs> Info;
+        public event EventHandler<MapInfoEventArgs>? Info;
 
         /// <summary>
         /// Called whenever a property is changed
         /// </summary>
 #if __FORMS__
-        public new event PropertyChangedEventHandler PropertyChanged;
+        public new event PropertyChangedEventHandler? PropertyChanged;
 
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 #else
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
@@ -414,7 +414,7 @@ namespace Mapsui.UI.Wpf
             }
             if (e.PropertyName.Equals(nameof(Map.Limiter)))
             {
-                _viewport.Limiter = Map.Limiter;
+                _viewport.Limiter = Map?.Limiter;
             }
         }
         // ReSharper restore RedundantNameQualifier
@@ -486,13 +486,13 @@ namespace Mapsui.UI.Wpf
             {
                 Extent = Viewport.Extent,
                 Resolution = Viewport.Resolution,
-                CRS = Map.CRS,
+                CRS = Map?.CRS,
                 ChangeType = changeType
             };
             _map?.RefreshData(fetchInfo);
         }
 
-        private void OnInfo(MapInfoEventArgs mapInfoEventArgs)
+        private void OnInfo(MapInfoEventArgs? mapInfoEventArgs)
         {
             if (mapInfoEventArgs == null) return;
 
