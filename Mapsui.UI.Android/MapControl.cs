@@ -40,13 +40,13 @@ namespace Mapsui.UI.Android
 
     public partial class MapControl : ViewGroup, IMapControl
     {
-        private View _canvas;
+        private View _canvas = default!;
         private double _innerRotation;
-        private GestureDetector _gestureDetector;
+        private GestureDetector _gestureDetector = default!;
         private double _previousAngle;
         private double _previousRadius = 1f;
         private TouchMode _mode = TouchMode.None;
-        private Handler _mainLooperHandler;
+        private Handler _mainLooperHandler = default!;
         /// <summary>
         /// Saver for center before last pinch movement
         /// </summary>
@@ -163,13 +163,13 @@ namespace Mapsui.UI.Android
 
         public void OnFling(object sender, GestureDetector.FlingEventArgs args)
         {
-            Navigator.FlingWith(args.VelocityX / 10, args.VelocityY / 10, 1000);
+            Navigator?.FlingWith(args.VelocityX / 10, args.VelocityY / 10, 1000);
         }
 
         public void MapView_Touch(object sender, TouchEventArgs args)
         {
             // We have an interaction with the screen, so stop all animations
-            Navigator.StopRunningAnimation();
+            Navigator?.StopRunningAnimation();
 
             if (_gestureDetector.OnTouchEvent(args.Event))
                 return;
@@ -245,7 +245,7 @@ namespace Mapsui.UI.Android
 
                                 double rotationDelta = 0;
 
-                                if (!Map.RotationLock)
+                                if (!(Map?.RotationLock ?? true))
                                 {
                                     _innerRotation += angle - previousAngle;
                                     _innerRotation %= 360;
@@ -357,7 +357,7 @@ namespace Mapsui.UI.Android
 
             Intent chooser = Intent.CreateChooser(intent, "Open with");
 
-            Context.StartActivity(chooser);
+            Context?.StartActivity(chooser);
         }
 
         public new void Dispose()
@@ -448,7 +448,7 @@ namespace Mapsui.UI.Android
 
         private float GetPixelDensity()
         {
-            return Resources.DisplayMetrics.Density;
+            return Resources?.DisplayMetrics?.Density ?? 0;
         }
     }
 }

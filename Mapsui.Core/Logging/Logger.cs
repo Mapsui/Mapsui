@@ -13,13 +13,13 @@ namespace Mapsui.Logging
 
     public static class Logger
     {
-        public static Action<LogLevel, string, Exception> LogDelegate
+        public static Action<LogLevel, string, Exception?> LogDelegate
         {
             get;
             set;
         }
 
-        public static void Log(LogLevel level, string message, Exception exception = null)
+        public static void Log(LogLevel level, string message, Exception? exception = null)
         {
             LogDelegate?.Invoke(level, message, exception);
         }

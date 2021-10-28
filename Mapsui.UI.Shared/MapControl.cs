@@ -37,9 +37,9 @@ namespace Mapsui.UI.Wpf
         // Flag indicating if a new drawing process should start
         private bool _refresh;
         // Action to call for a redraw of the control
-        private Action _invalidate;
+        private Action? _invalidate;
         // Timer for loop to invalidating the control
-        private System.Threading.Timer _invalidateTimer;
+        private System.Threading.Timer _invalidateTimer = default!;
         // Interval between two calls of the invalidate function in ms
         private int _updateInterval = 16;
         // Stopwatch for measuring drawing times
@@ -74,7 +74,7 @@ namespace Mapsui.UI.Wpf
 
             // All requested updates up to this point will be handled by this redraw
             _refresh = false;
-            Navigator.UpdateAnimations();
+            Navigator?.UpdateAnimations();
             Renderer.Render(canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
 
             // Stop stopwatch after drawing control
@@ -90,7 +90,7 @@ namespace Mapsui.UI.Wpf
             _drawing = false;
         }
 
-        void InvalidateTimerCallback(object state)
+        void InvalidateTimerCallback(object? state)
         {
             if (!_refresh)
                 return;
@@ -160,7 +160,7 @@ namespace Mapsui.UI.Wpf
             }
         }
 
-        private Performance _performance;
+        private Performance? _performance;
 
         /// <summary>
         /// Object to save performance information about the drawing of the map
@@ -168,7 +168,7 @@ namespace Mapsui.UI.Wpf
         /// <remarks>
         /// If this is null, no performance information is saved.
         /// </remarks>
-        public Performance Performance
+        public Performance? Performance
         {
             get { return _performance; }
             set
@@ -220,12 +220,12 @@ namespace Mapsui.UI.Wpf
             get => GetPixelDensity();
         }
 
-        private IRenderer _renderer = new MapRenderer();
+        private IRenderer? _renderer = new MapRenderer();
 
         /// <summary>
         /// Renderer that is used from this MapControl
         /// </summary>
-        public IRenderer Renderer
+        public IRenderer? Renderer
         {
             get { return _renderer; }
             set
@@ -265,14 +265,18 @@ namespace Mapsui.UI.Wpf
 
         private void Navigated(object sender, ChangeType changeType)
         {
-            _map.Initialized = true;
+            if (_map != null)
+            {
+                _map.Initialized = true;
+            }
+            
             Refresh(changeType);
         }
 
         /// <summary>
         /// Called when the viewport is initialized
         /// </summary>
-        public event EventHandler ViewportInitialized; //todo: Consider to use the Viewport PropertyChanged
+        public event EventHandler? ViewportInitialized; //todo: Consider to use the Viewport PropertyChanged
 
         /// <summary>
         /// Called whenever the map is clicked. The MapInfoEventArgs contain the features that were hit in
@@ -511,9 +515,9 @@ namespace Mapsui.UI.Wpf
         }
 
         /// <inheritdoc />
-        public MapInfo GetMapInfo(MPoint screenPosition, int margin = 0)
+        public MapInfo? GetMapInfo(MPoint screenPosition, int margin = 0)
         {
-            return Renderer.GetMapInfo(screenPosition.X, screenPosition.Y, Viewport, Map.Layers, margin);
+            return Renderer?.GetMapInfo(screenPosition.X, screenPosition.Y, Viewport, Map?.Layers ?? new LayerCollection(), margin);
         }
 
         /// <inheritdoc />
@@ -521,7 +525,7 @@ namespace Mapsui.UI.Wpf
         {
             byte[]? result = null;
 
-            using (var stream = Renderer.RenderToBitmapStream(Viewport, layers ?? Map.Layers, pixelDensity: PixelDensity))
+            using (var stream = Renderer?.RenderToBitmapStream(Viewport, layers ?? Map?.Layers ?? new LayerCollection(), pixelDensity: PixelDensity))
             {
                 if (stream != null)
                     result = stream.ToArray();
@@ -537,10 +541,10 @@ namespace Mapsui.UI.Wpf
         /// <param name="startScreenPosition">Screen position of Viewport/MapControl</param>
         /// <param name="numTaps">Number of clickes/taps</param>
         /// <returns>True, if something done </returns>
-        private MapInfoEventArgs InvokeInfo(MPoint screenPosition, MPoint startScreenPosition, int numTaps)
+        private MapInfoEventArgs? InvokeInfo(MPoint screenPosition, MPoint startScreenPosition, int numTaps)
         {
             return InvokeInfo(
-                Map.GetWidgetsOfMapAndLayers(),
+                Map?.GetWidgetsOfMapAndLayers() ?? new List<IWidget>(),
                 screenPosition,
                 startScreenPosition,
                 WidgetTouched,
@@ -576,7 +580,7 @@ namespace Mapsui.UI.Wpf
             }
 
             // Check which features in the map were tapped.
-            var mapInfo = Renderer.GetMapInfo(screenPosition.X, screenPosition.Y, Viewport, Map.Layers);
+            var mapInfo = Renderer?.GetMapInfo(screenPosition.X, screenPosition.Y, Viewport, Map?.Layers ?? new LayerCollection());
 
             if (mapInfo != null)
             {
