@@ -5,7 +5,7 @@ namespace Mapsui.Rendering.Skia.Extensions
 {
     public static class PenStyleExtension
     {
-        public static SKPathEffect ToSkia(this PenStyle penStyle, float width, float[] dashArray = null, float dashOffset = 0)
+        public static SKPathEffect ToSkia(this PenStyle penStyle, float width, float[]? dashArray = null, float dashOffset = 0)
         {
             switch (penStyle)
             {

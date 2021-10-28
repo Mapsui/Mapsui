@@ -28,7 +28,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
         /// <param name="url">url to map service example: http://url/arcgis/rest/services/test/MapServer</param>
         /// <param name="arcGisDynamicCapabilities"></param>
         /// <param name="token">token to request service</param>        
-        public ArcGISDynamicProvider(string url, ArcGISDynamicCapabilities arcGisDynamicCapabilities, string token = null)
+        public ArcGISDynamicProvider(string url, ArcGISDynamicCapabilities arcGisDynamicCapabilities, string? token = null)
         {
             _timeOut = 10000;
             Token = token;
@@ -43,7 +43,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
         /// </summary>
         /// <param name="url">url to map service example: http://url/arcgis/rest/services/test/MapServer</param>
         /// <param name="token">token to request service</param>        
-        public ArcGISDynamicProvider(string url, string token = null)
+        public ArcGISDynamicProvider(string url, string? token = null)
         {
             _timeOut = 10000;
             Token = token;

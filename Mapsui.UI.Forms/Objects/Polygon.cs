@@ -55,7 +55,7 @@ namespace Mapsui.UI.Forms
             get { return _holes; }
         }
 
-        protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected override void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             base.OnPropertyChanged(propertyName);
 

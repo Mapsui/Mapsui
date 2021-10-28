@@ -86,7 +86,7 @@ namespace Mapsui.Providers.ArcGIS
             ExecuteRequest(url, capabilitiesType, credentials);
         }
 
-        private void ExecuteRequest(string url, CapabilitiesType capabilitiesType, ICredentials credentials = null, string token = null)
+        private void ExecuteRequest(string url, CapabilitiesType capabilitiesType, ICredentials? credentials = null, string? token = null)
         {
             Task.Run(async () => {
                 _capabilitiesType = capabilitiesType;

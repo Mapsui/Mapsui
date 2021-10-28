@@ -19,7 +19,7 @@ namespace Mapsui.Providers.Wms
         public event StatusEventHandler IdentifyFailed;
         private readonly Func<string, Task<Stream>> _getStreamAsync;
 
-        public GetFeatureInfo(Func<string, Task<Stream>> getStreamAsync = null)
+        public GetFeatureInfo(Func<string, Task<Stream>>? getStreamAsync = null)
         {
             TimeOut = 7000;
             _getStreamAsync = getStreamAsync ?? GetStreamAsync;

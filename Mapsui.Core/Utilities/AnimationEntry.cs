@@ -10,9 +10,9 @@ namespace Mapsui.Utilities
 
         public AnimationEntry(object start, object end,
             double animationStart = 0, double animationEnd = 1,
-            Easing easing = null,
-            Action<AnimationEntry, double> tick = null,
-            Action<AnimationEntry> final = null)
+            Easing? easing = null,
+            Action<AnimationEntry, double>? tick = null,
+            Action<AnimationEntry>? final = null)
         {
             AnimationStart = animationStart;
             AnimationEnd = animationEnd;

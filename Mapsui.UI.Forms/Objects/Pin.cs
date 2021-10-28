@@ -357,7 +357,7 @@ namespace Mapsui.UI.Forms
             return string.Equals(Label, other.Label) && Equals(Position, other.Position) && Type == other.Type && string.Equals(Address, other.Address);
         }
 
-        protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected override void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             base.OnPropertyChanged(propertyName);
 

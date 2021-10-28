@@ -85,7 +85,7 @@ namespace Mapsui.Layers
         /// <param name="compare">Optional method to compare the feature with any of the other 
         /// features in the list. If omitted a reference compare is done.</param>
         /// <returns></returns>
-        public bool TryRemove(IGeometryFeature feature, Func<IGeometryFeature, IGeometryFeature, bool> compare = null)
+        public bool TryRemove(IGeometryFeature feature, Func<IGeometryFeature, IGeometryFeature, bool>? compare = null)
         {
             if (compare == null) return _cache.TryRemove(feature);
 

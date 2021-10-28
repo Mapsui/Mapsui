@@ -16,8 +16,8 @@ namespace Mapsui.Providers
         private readonly IProvider<IGeometryFeature> _provider;
         private readonly LabelStyle _labelStyle;
 
-        public StackedLabelProvider(IProvider<IGeometryFeature> provider, LabelStyle labelStyle, Pen rectangleLine = null,
-            Brush rectangleFill = null)
+        public StackedLabelProvider(IProvider<IGeometryFeature> provider, LabelStyle labelStyle, Pen? rectangleLine = null,
+            Brush? rectangleFill = null)
         {
             _provider = provider;
             _labelStyle = labelStyle;

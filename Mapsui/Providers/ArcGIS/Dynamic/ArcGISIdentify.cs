@@ -54,7 +54,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
         /// <param name="returnGeometry"></param>
         /// <param name="credentials"></param>
         /// <param name="sr">sr code of input geometry</param>
-        public void Request(string url, double x, double y, int tolerance, string[] layers, double extendXmin, double extendYmin, double extendXmax, double extendYmax, double mapWidth, double mapHeight, double mapDpi, bool returnGeometry, ICredentials credentials = null, int sr = int.MinValue)
+        public void Request(string url, double x, double y, int tolerance, string[] layers, double extendXmin, double extendYmin, double extendXmax, double extendYmax, double mapWidth, double mapHeight, double mapDpi, bool returnGeometry, ICredentials? credentials = null, int sr = int.MinValue)
         {
             Task.Run(async () => {
                 //remove trailing slash from url
