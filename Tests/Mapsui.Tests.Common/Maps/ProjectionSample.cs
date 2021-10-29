@@ -29,7 +29,7 @@ namespace Mapsui.Tests.Common.Maps
             // 3) The Transformation to transform from the DataSource CRS to the Map CRS.
 
             var geometryLayer = CreateAmsterdamLayer();
-            var extent = geometryLayer.Envelope.Grow(10000);
+            var extent = geometryLayer.Envelope.Grow(geometryLayer.Envelope.Width * 0.1);
             var map = new Map
             {
                 CRS = "EPSG:3857", // The Map CRS needs to be set
