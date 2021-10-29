@@ -26,8 +26,7 @@ namespace Mapsui.Tests.Common.Maps
             // For Projections to work three things need to be set:
             // 1) The CRS on the Map to know what to project to.
             // 2) The CRS on the DataSource to know what to project from.
-            // 3) The Transformation to transform from the DataSource CRS to
-            // the Map CRS.
+            // 3) The Transformation to transform from the DataSource CRS to the Map CRS.
 
             var geometryLayer = CreateAmsterdamLayer();
             var extent = geometryLayer.Envelope.Grow(10000);
