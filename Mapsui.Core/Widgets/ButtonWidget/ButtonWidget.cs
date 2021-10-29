@@ -32,7 +32,7 @@ namespace Mapsui.Widgets.ButtonWidget
         /// </summary>
         public event EventHandler<WidgetTouchedEventArgs> WidgetTouched;
 
-        private string _svgImage;
+        private string? _svgImage;
 
         /// <summary>
         /// SVG image to show for button
@@ -54,7 +54,7 @@ namespace Mapsui.Widgets.ButtonWidget
         /// <summary>
         /// Object for prerendered image. For internal use only.
         /// </summary>
-        public object Picture { get; set; }
+        public object? Picture { get; set; }
 
         private float _rotation;
 

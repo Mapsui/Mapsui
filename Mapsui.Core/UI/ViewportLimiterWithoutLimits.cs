@@ -4,8 +4,8 @@ namespace Mapsui.UI
 {
     public class ViewportLimiterWithoutLimits : IViewportLimiter
     {
-        public MRect PanLimits { get; set; }
-        public MinMax ZoomLimits { get; set; }
+        public MRect? PanLimits { get; set; }
+        public MinMax? ZoomLimits { get; set; }
 
         public void Limit(IViewport viewport, IReadOnlyList<double> mapResolutions, MRect mapEnvelope)
         {

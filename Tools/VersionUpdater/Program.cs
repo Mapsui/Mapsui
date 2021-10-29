@@ -11,7 +11,7 @@ namespace VersionUpdater
     public class Options
     {
         [Option('v', Required = true, HelpText = "Specifies the version to set in semver format")]
-        public string Version { get; set; }
+        public string Version { get; set; } = default!;
     }
 
     static class Program

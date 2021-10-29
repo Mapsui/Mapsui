@@ -25,7 +25,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
 
     public class EditManager
     {
-        public WritableLayer Layer { get; set; }
+        public WritableLayer? Layer { get; set; }
 
         readonly DragInfo _dragInfo = new DragInfo();
         readonly AddInfo _addInfo = new AddInfo();

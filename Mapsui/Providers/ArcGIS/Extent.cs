@@ -6,6 +6,6 @@ namespace Mapsui.Providers.ArcGIS
         public double ymin { get; set; }
         public double xmax { get; set; }
         public double ymax { get; set; }
-        public SpatialReference spatialReference { get; set; }
+        public SpatialReference? spatialReference { get; set; }
     }
 }

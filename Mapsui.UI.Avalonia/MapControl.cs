@@ -21,15 +21,15 @@ namespace Mapsui.UI.Avalonia
 {
     public partial class MapControl : Grid, IMapControl
     {
-        private MPoint _mousePosition;
-        private MapsuiCustomDrawOp _drawOp;
-        private MPoint _currentMousePosition;
-        private MPoint _downMousePosition;
+        private MPoint? _mousePosition;
+        private MapsuiCustomDrawOp? _drawOp;
+        private MPoint? _currentMousePosition;
+        private MPoint? _downMousePosition;
         private bool _mouseDown;
-        private MPoint _previousMousePosition;
+        private MPoint? _previousMousePosition;
         private double _toResolution = double.NaN;
 
-        public event EventHandler<FeatureInfoEventArgs> FeatureInfo;
+        public event EventHandler<FeatureInfoEventArgs>? FeatureInfo;
         public MouseWheelAnimation MouseWheelAnimation { get; } = new() { Duration = 0 };
 
         public MapControl()
@@ -67,7 +67,7 @@ namespace Mapsui.UI.Avalonia
             }
         }
 
-        private void MapControl_PointerPressed(object sender, PointerPressedEventArgs e)
+        private void MapControl_PointerPressed(object? sender, PointerPressedEventArgs e)
         {
             if (e.GetCurrentPoint(this).Properties.IsLeftButtonPressed)
             {
@@ -75,7 +75,7 @@ namespace Mapsui.UI.Avalonia
             }
         }
 
-        private void MapControlMouseWheel(object sender, PointerWheelEventArgs e)
+        private void MapControlMouseWheel(object? sender, PointerWheelEventArgs e)
         {
             if (Map.ZoomLock) return;
             if (!Viewport.HasSize) return;
@@ -133,12 +133,12 @@ namespace Mapsui.UI.Avalonia
             FeatureInfo?.Invoke(this, new FeatureInfoEventArgs { FeatureInfo = features });
         }
 
-        private void MapControlMouseLeave(object sender, PointerEventArgs e)
+        private void MapControlMouseLeave(object? sender, PointerEventArgs e)
         {
             _previousMousePosition = null;
         }
 
-        private void MapControlMouseMove(object sender, PointerEventArgs e)
+        private void MapControlMouseMove(object? sender, PointerEventArgs e)
         {
             _currentMousePosition = e.GetPosition(this).ToMapsui(); // Needed for both MouseMove and MouseWheel event
 
@@ -158,7 +158,7 @@ namespace Mapsui.UI.Avalonia
             }
         }
 
-        private void MapControl_PointerReleased(object sender, PointerReleasedEventArgs e)
+        private void MapControl_PointerReleased(object? sender, PointerReleasedEventArgs e)
         {
             if (e.GetCurrentPoint(this).Properties.PointerUpdateKind == PointerUpdateKind.LeftButtonReleased)
             {
@@ -187,7 +187,7 @@ namespace Mapsui.UI.Avalonia
             _mousePosition = e.GetPosition(this).ToMapsui();
         }
 
-        private void OnDoubleTapped(object sender, RoutedEventArgs e)
+        private void OnDoubleTapped(object? sender, RoutedEventArgs e)
         {
             // We have a new interaction with the screen, so stop all navigator animations
             Navigator.StopRunningAnimation();
@@ -195,7 +195,7 @@ namespace Mapsui.UI.Avalonia
             OnInfo(InvokeInfo(tapPosition, tapPosition, 2));
         }
 
-        private void OnSingleTapped(object sender, RoutedEventArgs e)
+        private void OnSingleTapped(object? sender, RoutedEventArgs e)
         {
             // We have a new interaction with the screen, so stop all navigator animations
             Navigator.StopRunningAnimation();
@@ -211,7 +211,7 @@ namespace Mapsui.UI.Avalonia
             context.Custom(_drawOp);
         }
 
-        private void MapControlInitialized(object sender, EventArgs eventArgs)
+        private void MapControlInitialized(object? sender, EventArgs eventArgs)
         {
             SetViewportSize();
         }
@@ -277,7 +277,7 @@ namespace Mapsui.UI.Avalonia
                 return true;
             }
 
-            public bool Equals(ICustomDrawOperation other) => false;
+            public bool Equals(ICustomDrawOperation? other) => false;
 
             public void Render(IDrawingContextImpl context)
             {

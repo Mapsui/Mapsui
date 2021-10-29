@@ -181,9 +181,9 @@ namespace Mapsui.Layers
 
         private class AnimatedItem
         {
-            public IGeometryFeature Feature { get; set; }
-            public Point PreviousPoint { get; set; }
-            public Point CurrentPoint { get; set; }
+            public IGeometryFeature? Feature { get; set; }
+            public Point? PreviousPoint { get; set; }
+            public Point? CurrentPoint { get; set; }
         }
     }
 }

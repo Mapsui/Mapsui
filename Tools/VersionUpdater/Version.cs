@@ -8,8 +8,8 @@ namespace VersionUpdater
         public int Minor { get; set; }
         public int Patch { get; set; }
         public int Build { get; set; }
-        public string PreRelease { get; set; }
-        public string FullVersion { get; set; }
+        public string? PreRelease { get; set; }
+        public string? FullVersion { get; set; }
 
         public static Version Parse(string version)
         {

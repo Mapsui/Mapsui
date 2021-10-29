@@ -9,7 +9,7 @@ namespace Mapsui.Providers.Wms
 {
     public class GmlGetFeatureInfoParser : IGetFeatureInfoParser
     {
-        private FeatureInfo _featureInfo;
+        private FeatureInfo? _featureInfo;
 
         public FeatureInfo ParseWMSResult(string layerName, Stream result)
         {

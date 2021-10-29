@@ -33,7 +33,7 @@ namespace Mapsui.Layers
         private class FeatureSets
         {
             public long TimeRequested { get; set; }
-            public IEnumerable<IGeometryFeature> Features { get; set; }
+            public IEnumerable<IGeometryFeature>? Features { get; set; }
         }
 
         private bool _isFetching;

@@ -13,7 +13,7 @@ namespace Mapsui.Rendering.Skia
 
     public class BitmapInfo
     {
-        private object _data;
+        private object? _data;
 
         public BitmapType Type { get; private set; }
 
