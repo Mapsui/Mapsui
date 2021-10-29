@@ -115,7 +115,7 @@ namespace Mapsui
         [Obsolete("Use ILayer.IsMapInfoLayer instead", true)]
         public IList<ILayer> InfoLayers { get; } = new List<ILayer>();
 
-        [Obsolete("Use your own hover event and?  call MapControl.GetMapInfo", true)]
+        [Obsolete("Use your own hover event and call MapControl.GetMapInfo", true)]
         public IList<ILayer> HoverLayers { get; } = new List<ILayer>();
 
         /// <summary>
