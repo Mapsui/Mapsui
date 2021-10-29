@@ -7,6 +7,8 @@ using Mapsui.Providers;
 using Mapsui.Tests.Common.Maps;
 using NUnit.Framework;
 using SkiaSharp;
+using Mapsui.Extensions;
+using Mapsui.Rendering.Skia.Tests.Extensions;
 
 namespace Mapsui.Rendering.Skia.Tests
 {
@@ -60,7 +62,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = BitmapSymbolSample.CreateMap();
-            var features = ((Providers.MemoryProvider<Providers.IGeometryFeature>)((MemoryLayer)map.Layers[0]).DataSource).Features;
+            var features = ((MemoryProvider<IGeometryFeature>)((MemoryLayer)map.Layers[0]).DataSource).Features;
             foreach (IGeometryFeature feature in features)
             {
                 if (feature.Geometry is Geometry geometry)
@@ -143,13 +145,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = BitmapSymbolWithRotationAndOffsetSample.CreateMap();
-            var viewport = new Viewport
-            {
-                Center = new MPoint(80, 80),
-                Width = 200,
-                Height = 200,
-                Resolution = 1
-            };
+            var viewport = map.Envelope.ToViewport(200, 4);
             const string fileName = "bitmap_symbol.png";
 
             // act
@@ -271,7 +267,7 @@ namespace Mapsui.Rendering.Skia.Tests
             // act
             var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
 
-            // aside;
+            // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
@@ -283,19 +279,31 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = LabelSample.CreateMap();
-            var viewport = new Viewport
-            {
-                Center = new MPoint(100, 100),
-                Width = 200,
-                Height = 200,
-                Resolution = 1
-            };
+            var viewport = map.Envelope.ToViewport(scaleEnvelope: 2);
             const string fileName = "labels.png";
 
             // act
             var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
 
-            // aside;
+            // aside
+            File.WriteToGeneratedFolder(fileName, bitmap);
+
+            // assert
+            Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        }
+
+        [Test]
+        public void RenderProjection()
+        {
+            // arrange
+            var map = ProjectionSample.CreateMap();
+            var viewport = map.Envelope.ToViewport();
+            const string fileName = "projection.png";
+
+            // act 
+            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
+
+            // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert

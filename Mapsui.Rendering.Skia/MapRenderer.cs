@@ -76,6 +76,7 @@ namespace Mapsui.Rendering.Skia
             {
                 var width = (int)viewport.Width;
                 var height = (int)viewport.Height;
+
                 var imageInfo = new SKImageInfo((int)Math.Round(width * pixelDensity), (int)Math.Round(height * pixelDensity),
                     SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
 
