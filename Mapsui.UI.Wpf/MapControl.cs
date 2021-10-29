@@ -24,10 +24,10 @@ namespace Mapsui.UI.Wpf
     public partial class MapControl : Grid, IMapControl
     {
         private readonly Rectangle _selectRectangle = CreateSelectRectangle();
-        private MPoint _currentMousePosition;
-        private MPoint _downMousePosition;
+        private MPoint? _currentMousePosition;
+        private MPoint? _downMousePosition;
         private bool _mouseDown;
-        private MPoint _previousMousePosition;
+        private MPoint? _previousMousePosition;
         private bool _hasBeenManipulated;
         private double _innerRotation;
         private readonly FlingTracker _flingTracker = new();

@@ -77,7 +77,7 @@ namespace Mapsui.UI.Avalonia
 
         private void MapControlMouseWheel(object? sender, PointerWheelEventArgs e)
         {
-            if (Map.ZoomLock) return;
+            if (_map?.ZoomLock ?? true) return;
             if (!Viewport.HasSize) return;
 
             _currentMousePosition = e.GetPosition(this).ToMapsui();
@@ -97,7 +97,7 @@ namespace Mapsui.UI.Avalonia
 
             var resolution = MouseWheelAnimation.GetResolution((int)e.Delta.Y, _viewport, _map);
             // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
-            resolution = Map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, Map.Resolutions, Map.Envelope);
+            resolution = _map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, _map.Resolutions, Map.Envelope);
             Navigator.ZoomTo(resolution, _currentMousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
         }
 
