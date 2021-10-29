@@ -201,7 +201,7 @@ namespace Mapsui.Layers
             LayerMoved?.Invoke(layer);
         }
 
-        private void OnChanged(IEnumerable<ILayer> added, IEnumerable<ILayer> removed, IEnumerable<ILayer> moved = null)
+        private void OnChanged(IEnumerable<ILayer> added, IEnumerable<ILayer> removed, IEnumerable<ILayer>? moved = null)
         {
             Changed?.Invoke(this, new LayerCollectionChangedEventArgs(added, removed, moved));
         }

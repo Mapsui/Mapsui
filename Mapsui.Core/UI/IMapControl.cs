@@ -10,9 +10,9 @@ namespace Mapsui.UI
     {
         event EventHandler<MapInfoEventArgs> Info;
 
-        Map Map { get; set; }
+        Map? Map { get; set; }
 
-        event EventHandler ViewportInitialized;
+        event EventHandler? ViewportInitialized;
 
         void RefreshGraphics();
 
@@ -54,17 +54,17 @@ namespace Mapsui.UI
         /// </summary>
         /// <param name="screenPosition">Screen position to check for widgets and features</param>
         /// <param name="margin">An optional extra margin around the feature to enlarge the hit area.</param>
-        MapInfo GetMapInfo(MPoint screenPosition, int margin = 0);
+        MapInfo? GetMapInfo(MPoint screenPosition, int margin = 0);
 
         /// <summary>
         /// Create a snapshot form map as PNG image
         /// </summary>
         /// <param name="layers">Layers that should be included in snapshot</param>
         /// <returns>Byte array with snapshot in png format. If there are any problems than returns null.</returns>
-        byte[] GetSnapshot(IEnumerable<ILayer> layers = null);
+        byte[]? GetSnapshot(IEnumerable<ILayer>? layers = null);
 
-        INavigator Navigator { get; }
+        INavigator? Navigator { get; }
 
-        Performance Performance { get; set; }
+        Performance? Performance { get; set; }
     }
 }

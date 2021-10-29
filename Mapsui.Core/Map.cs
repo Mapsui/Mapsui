@@ -159,27 +159,27 @@ namespace Mapsui
         /// <summary>
         /// Called whenever a property changed
         /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
         /// DataChanged should be triggered by any data changes of any of the child layers
         /// </summary>
-        public event DataChangedEventHandler DataChanged;
+        public event DataChangedEventHandler? DataChanged;
 
 #pragma warning disable 67
         [Obsolete("Use PropertyChanged instead", true)]
-        public event EventHandler RefreshGraphics;
+        public event EventHandler? RefreshGraphics;
 #pragma warning restore 67
 
         /// <summary>
         /// Called whenever the map is clicked. The MapInfoEventArgs contain the features that were hit in
         /// the layers that have IsMapInfoLayer set to true. 
         /// </summary>
-        public event EventHandler<MapInfoEventArgs> Info;
+        public event EventHandler<MapInfoEventArgs>? Info;
 
         [Obsolete("Use your own hover event instead and call MapControl.GetMapInfo", true)]
 #pragma warning disable 67
-        public event EventHandler<MapInfoEventArgs> Hover;
+        public event EventHandler<MapInfoEventArgs>? Hover;
 #pragma warning restore 67
 
         /// <summary>

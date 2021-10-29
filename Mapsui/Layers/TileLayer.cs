@@ -58,8 +58,8 @@ namespace Mapsui.Layers
         /// <param name="fetchTileAsFeature">Fetch tile as feature</param>
         // ReSharper disable once UnusedParameter.Local // Is public and won't break this now
         public TileLayer(ITileSource tileSource, int minTiles = 200, int maxTiles = 300,
-            IDataFetchStrategy dataFetchStrategy = null, IRenderFetchStrategy renderFetchStrategy = null,
-            int minExtraTiles = -1, int maxExtraTiles = -1, Func<TileInfo, Feature> fetchTileAsFeature = null)
+            IDataFetchStrategy? dataFetchStrategy = null, IRenderFetchStrategy? renderFetchStrategy = null,
+            int minExtraTiles = -1, int maxExtraTiles = -1, Func<TileInfo, Feature>? fetchTileAsFeature = null)
         {
             _tileSource = tileSource ?? throw new ArgumentException("source can not null");
             MemoryCache = new MemoryCache<Feature>(minTiles, maxTiles);

@@ -326,7 +326,7 @@ namespace Mapsui
         /// Property change event
         /// </summary>
         /// <param name="propertyName">Name of property that changed</param>
-        private void OnViewportChanged([CallerMemberName] string propertyName = null)
+        private void OnViewportChanged([CallerMemberName] string? propertyName = null)
         {
             _modified = true;
             ViewportChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

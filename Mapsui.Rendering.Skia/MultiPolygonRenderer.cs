@@ -8,7 +8,7 @@ namespace Mapsui.Rendering.Skia
     public static class MultiPolygonRenderer
     {
         public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, IGeometryFeature feature, IGeometry geometry,
-            float opacity, SymbolCache symbolCache = null)
+            float opacity, SymbolCache? symbolCache = null)
         {
             var multiPolygon = (MultiPolygon)geometry;
 

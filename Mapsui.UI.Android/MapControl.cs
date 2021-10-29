@@ -24,9 +24,9 @@ namespace Mapsui.UI.Android
 
     class MapControlGestureListener : GestureDetector.SimpleOnGestureListener
     {
-        public EventHandler<GestureDetector.FlingEventArgs> Fling;
+        public EventHandler<GestureDetector.FlingEventArgs>? Fling;
 
-        public override bool OnFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
+        public override bool OnFling(MotionEvent? e1, MotionEvent? e2, float velocityX, float velocityY)
         {
             if (Fling != null)
             {
@@ -40,13 +40,13 @@ namespace Mapsui.UI.Android
 
     public partial class MapControl : ViewGroup, IMapControl
     {
-        private View _canvas;
+        private View _canvas = default!;
         private double _innerRotation;
-        private GestureDetector _gestureDetector;
+        private GestureDetector _gestureDetector = default!;
         private double _previousAngle;
         private double _previousRadius = 1f;
         private TouchMode _mode = TouchMode.None;
-        private Handler _mainLooperHandler;
+        private Handler _mainLooperHandler = default!;
         /// <summary>
         /// Saver for center before last pinch movement
         /// </summary>
@@ -125,12 +125,18 @@ namespace Mapsui.UI.Android
 
         private void OnDoubleTapped(object sender, GestureDetector.DoubleTapEventArgs e)
         {
+            if (e.Event == null)
+                return;
+            
             var position = GetScreenPosition(e.Event, this);
             OnInfo(InvokeInfo(position, position, 2));
         }
 
         private void OnSingleTapped(object sender, GestureDetector.SingleTapConfirmedEventArgs e)
         {
+            if (e.Event == null)
+                return;
+
             var position = GetScreenPosition(e.Event, this);
             OnInfo(InvokeInfo(position, position, 1));
         }
@@ -163,20 +169,20 @@ namespace Mapsui.UI.Android
 
         public void OnFling(object sender, GestureDetector.FlingEventArgs args)
         {
-            Navigator.FlingWith(args.VelocityX / 10, args.VelocityY / 10, 1000);
+            Navigator?.FlingWith(args.VelocityX / 10, args.VelocityY / 10, 1000);
         }
 
         public void MapView_Touch(object sender, TouchEventArgs args)
         {
             // We have an interaction with the screen, so stop all animations
-            Navigator.StopRunningAnimation();
+            Navigator?.StopRunningAnimation();
 
             if (_gestureDetector.OnTouchEvent(args.Event))
                 return;
 
             var touchPoints = GetScreenPositions(args.Event, this);
 
-            switch (args.Event.Action)
+            switch (args.Event?.Action)
             {
                 case MotionEventActions.Up:
                     Refresh();
@@ -245,7 +251,7 @@ namespace Mapsui.UI.Android
 
                                 double rotationDelta = 0;
 
-                                if (!Map.RotationLock)
+                                if (!(Map?.RotationLock ?? true))
                                 {
                                     _innerRotation += angle - previousAngle;
                                     _innerRotation %= 360;
@@ -285,8 +291,11 @@ namespace Mapsui.UI.Android
         /// <param name="motionEvent"></param>
         /// <param name="view"></param>
         /// <returns></returns>
-        private List<MPoint> GetScreenPositions(MotionEvent motionEvent, View view)
+        private List<MPoint> GetScreenPositions(MotionEvent? motionEvent, View view)
         {
+            if (motionEvent == null)
+                return new List<MPoint>();
+
             var result = new List<MPoint>();
             for (var i = 0; i < motionEvent.PointerCount; i++)
             {
@@ -351,13 +360,13 @@ namespace Mapsui.UI.Android
 
         public void OpenBrowser(string url)
         {
-            global::Android.Net.Uri uri = global::Android.Net.Uri.Parse(url);
+            global::Android.Net.Uri? uri = global::Android.Net.Uri.Parse(url);
             Intent intent = new Intent(Intent.ActionView);
             intent.SetData(uri);
 
-            Intent chooser = Intent.CreateChooser(intent, "Open with");
+            Intent? chooser = Intent.CreateChooser(intent, "Open with");
 
-            Context.StartActivity(chooser);
+            Context?.StartActivity(chooser);
         }
 
         public new void Dispose()
@@ -448,7 +457,7 @@ namespace Mapsui.UI.Android
 
         private float GetPixelDensity()
         {
-            return Resources.DisplayMetrics.Density;
+            return Resources?.DisplayMetrics?.Density ?? 0;
         }
     }
 }

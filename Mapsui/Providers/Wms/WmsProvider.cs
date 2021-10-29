@@ -49,7 +49,7 @@ namespace Mapsui.Providers.Wms
         private readonly Client _wmsClient;
         private Func<string, Task<Stream>> _getStreamAsync;
 
-        public WmsProvider(XmlDocument capabilities, Func<string, Task<Stream>> getStreamAsync = null)
+        public WmsProvider(XmlDocument capabilities, Func<string, Task<Stream>>? getStreamAsync = null)
             : this(new Client(capabilities, getStreamAsync))
         {
             InitialiseGetStreamAsyncMethod(getStreamAsync);
@@ -61,13 +61,13 @@ namespace Mapsui.Providers.Wms
         /// <param name="url">Url of WMS server</param>
         /// <param name="wmsVersion">Version number of wms leave null to get the default service version</param>
         /// <param name="getStreamAsync">Download method, leave null for default</param>
-        public WmsProvider(string url, string wmsVersion = null, Func<string, Task<Stream>> getStreamAsync = null)
+        public WmsProvider(string url, string? wmsVersion = null, Func<string, Task<Stream>>? getStreamAsync = null)
             : this(new Client(url, wmsVersion, getStreamAsync))
         {
             InitialiseGetStreamAsyncMethod(getStreamAsync);
         }
 
-        private WmsProvider(Client wmsClient, Func<string, Task<Stream>> getStreamAsync = null)
+        private WmsProvider(Client wmsClient, Func<string, Task<Stream>>? getStreamAsync = null)
         {
             InitialiseGetStreamAsyncMethod(getStreamAsync);
             _wmsClient = wmsClient;

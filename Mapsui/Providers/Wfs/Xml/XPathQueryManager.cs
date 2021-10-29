@@ -165,7 +165,7 @@ namespace Mapsui.Providers.Wfs.Xml
         /// </summary>
         /// <param name="xPath">The compiled XPath expression</param>
         /// <param name="queryParameters">Parameters for the compiled XPath expression</param>
-        public string GetValueFromNode(XPathExpression xPath, DictionaryEntry[] queryParameters = null)
+        public string GetValueFromNode(XPathExpression xPath, DictionaryEntry[]? queryParameters = null)
         {
             if (queryParameters != null) _paramContext.AddParam(queryParameters);
             string result = null;
@@ -205,7 +205,7 @@ namespace Mapsui.Providers.Wfs.Xml
         /// </summary>
         /// <param name="xPath">The compiled XPath expression</param>
         /// <param name="queryParameters">Parameters for the compiled XPath expression</param>
-        public IXPathQueryManager GetXPathQueryManagerInContext(XPathExpression xPath, DictionaryEntry[] queryParameters = null)
+        public IXPathQueryManager GetXPathQueryManagerInContext(XPathExpression xPath, DictionaryEntry[]? queryParameters = null)
         {
             if (queryParameters != null) _paramContext.AddParam(queryParameters);
             FindXPath(xPath);

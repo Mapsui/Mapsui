@@ -41,12 +41,12 @@ namespace Mapsui.Fetcher
         {
         }
 
-        public DataChangedEventArgs(Exception error, bool cancelled, object info)
+        public DataChangedEventArgs(Exception? error, bool cancelled, object? info)
             : this(error, cancelled, info, string.Empty)
         {
         }
 
-        public DataChangedEventArgs(Exception error, bool cancelled, object info, string layerName)
+        public DataChangedEventArgs(Exception? error, bool cancelled, object? info, string layerName)
         {
             Error = error;
             Cancelled = cancelled;
@@ -54,9 +54,9 @@ namespace Mapsui.Fetcher
             LayerName = layerName;
         }
 
-        public Exception Error { get; }
+        public Exception? Error { get; }
         public bool Cancelled { get; }
-        public object Info { get; }
+        public object? Info { get; }
         public string LayerName { get; }
     }
 }

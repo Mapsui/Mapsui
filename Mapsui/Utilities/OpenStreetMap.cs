@@ -10,7 +10,7 @@ namespace Mapsui.Utilities
         private static readonly BruTile.Attribution OpenStreetMapAttribution = new(
             "© OpenStreetMap contributors", "https://www.openstreetmap.org/copyright");
 
-        public static TileLayer CreateTileLayer(string userAgent = null)
+        public static TileLayer CreateTileLayer(string? userAgent = null)
         {
             userAgent ??= $"user-agent-of-{Path.GetFileNameWithoutExtension(System.AppDomain.CurrentDomain.FriendlyName)}";
 

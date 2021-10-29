@@ -23,7 +23,7 @@ namespace Mapsui.Providers.ArcGIS.Image
         public string Token { get; set; }
         public ArcGISImageCapabilities ArcGisImageCapabilities { get; private set; }
 
-        public ArcGISImageServiceProvider(ArcGISImageCapabilities capabilities, bool continueOnError = true, string token = null)
+        public ArcGISImageServiceProvider(ArcGISImageCapabilities capabilities, bool continueOnError = true, string? token = null)
         {
             Token = token;
             CRS = "";
@@ -33,7 +33,7 @@ namespace Mapsui.Providers.ArcGIS.Image
             Url = ArcGisImageCapabilities.ServiceUrl;
         }
 
-        public ArcGISImageServiceProvider(string url, bool continueOnError = false, string format = "jpgpng", InterpolationType interpolation = InterpolationType.RSP_NearestNeighbor, long startTime = -1, long endTime = -1, string token = null)
+        public ArcGISImageServiceProvider(string url, bool continueOnError = false, string format = "jpgpng", InterpolationType interpolation = InterpolationType.RSP_NearestNeighbor, long startTime = -1, long endTime = -1, string? token = null)
         {
             Token = token;
             Url = url;

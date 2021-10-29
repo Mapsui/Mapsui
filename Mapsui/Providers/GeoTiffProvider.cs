@@ -44,7 +44,7 @@ namespace Mapsui.Providers
         private readonly IFeature _feature;
         private readonly MRect _extent;
 
-        public GeoTiffProvider(string tiffPath, List<Color> noDataColors = null)
+        public GeoTiffProvider(string tiffPath, List<Color>? noDataColors = null)
         {
             if (!File.Exists(tiffPath))
             {
