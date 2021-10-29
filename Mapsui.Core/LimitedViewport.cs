@@ -15,7 +15,7 @@ namespace Mapsui
         public IViewportLimiter? Limiter { get; set; }
         public Map Map { get; set; }
 
-        public event PropertyChangedEventHandler ViewportChanged;
+        public event PropertyChangedEventHandler? ViewportChanged;
         public MReadOnlyPoint Center => _viewport.Center;
         public double Resolution => _viewport.Resolution;
         public MRect Extent => _viewport.Extent;

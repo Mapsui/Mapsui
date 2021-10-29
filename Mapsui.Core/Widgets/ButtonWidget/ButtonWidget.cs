@@ -25,7 +25,7 @@ namespace Mapsui.Widgets.ButtonWidget
         /// <summary>
         /// Event handler which is called, when the button is touched
         /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
         /// Event handler which is called, when the button is touched
