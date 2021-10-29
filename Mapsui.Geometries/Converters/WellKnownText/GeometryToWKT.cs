@@ -232,7 +232,7 @@ namespace Mapsui.Geometries.WellKnownText
         /// </summary>
         /// <param name="coordinate">The Coordinate to process.</param>
         /// <param name="writer">The output stream writer to Append to.</param>
-        private static void AppendPointText(Point coordinate, StringWriter writer)
+        private static void AppendPointText(Point? coordinate, StringWriter writer)
         {
             if ((coordinate == null) || coordinate.IsEmpty())
                 writer.Write("EMPTY");
@@ -274,7 +274,7 @@ namespace Mapsui.Geometries.WellKnownText
         /// </summary>
         /// <param name="lineString">The LineString to process.</param>
         /// <param name="writer">The output stream to Append to.</param>
-        private static void AppendLineStringText(LineString lineString, StringWriter writer)
+        private static void AppendLineStringText(LineString? lineString, StringWriter writer)
         {
             if ((lineString == null) || lineString.IsEmpty())
                 writer.Write("EMPTY");
@@ -297,7 +297,7 @@ namespace Mapsui.Geometries.WellKnownText
         /// </summary>
         /// <param name="polygon">The Polygon to process.</param>
         /// <param name="writer"></param>
-        private static void AppendPolygonText(Polygon polygon, StringWriter writer)
+        private static void AppendPolygonText(Polygon? polygon, StringWriter writer)
         {
             if ((polygon == null) || polygon.IsEmpty())
                 writer.Write("EMPTY");
@@ -320,7 +320,7 @@ namespace Mapsui.Geometries.WellKnownText
         /// </summary>
         /// <param name="multiPoint">The MultiPoint to process.</param>
         /// <param name="writer">The output stream writer to Append to.</param>
-        private static void AppendMultiPointText(MultiPoint multiPoint, StringWriter writer)
+        private static void AppendMultiPointText(MultiPoint? multiPoint, StringWriter writer)
         {
             if ((multiPoint == null) || multiPoint.IsEmpty())
                 writer.Write("EMPTY");
@@ -343,7 +343,7 @@ namespace Mapsui.Geometries.WellKnownText
         /// </summary>
         /// <param name="multiLineString">The MultiLineString to process.</param>
         /// <param name="writer">The output stream writer to Append to.</param>
-        private static void AppendMultiLineStringText(MultiLineString multiLineString, StringWriter writer)
+        private static void AppendMultiLineStringText(MultiLineString? multiLineString, StringWriter writer)
         {
             if ((multiLineString == null) || multiLineString.IsEmpty())
                 writer.Write("EMPTY");
@@ -365,7 +365,7 @@ namespace Mapsui.Geometries.WellKnownText
         /// </summary>
         /// <param name="multiPolygon">The MultiPolygon to process.</param>
         /// <param name="writer">The output stream to Append to.</param>
-        private static void AppendMultiPolygonText(MultiPolygon multiPolygon, StringWriter writer)
+        private static void AppendMultiPolygonText(MultiPolygon? multiPolygon, StringWriter writer)
         {
             if ((multiPolygon == null) || multiPolygon.IsEmpty())
                 writer.Write("EMPTY");
@@ -387,7 +387,7 @@ namespace Mapsui.Geometries.WellKnownText
         /// </summary>
         /// <param name="geometryCollection">The GeometryCollection to process.</param>
         /// <param name="writer">The output stream writer to Append to.</param>
-        private static void AppendGeometryCollectionText(GeometryCollection geometryCollection, StringWriter writer)
+        private static void AppendGeometryCollectionText(GeometryCollection? geometryCollection, StringWriter writer)
         {
             if ((geometryCollection == null) || geometryCollection.IsEmpty())
                 writer.Write("EMPTY");

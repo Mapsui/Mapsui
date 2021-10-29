@@ -27,7 +27,7 @@ namespace Mapsui.Layers
         /// </summary>
         /// <param name="layer">Layer, for which styles should be returned</param>
         /// <returns>Enumerable with styles belonging to layer</returns>
-        public static IEnumerable<IStyle> GetLayerStyles(ILayer layer)
+        public static IEnumerable<IStyle> GetLayerStyles(ILayer? layer)
         {
             if (layer == null) return Array.Empty<IStyle>();
             var style = layer.Style as StyleCollection;

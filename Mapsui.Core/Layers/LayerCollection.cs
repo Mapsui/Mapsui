@@ -128,7 +128,7 @@ namespace Mapsui.Layers
             return success;
         }
 
-        public void Modify(IEnumerable<ILayer> layersToRemove, IEnumerable<ILayer> layersToAdd)
+        public void Modify(IEnumerable<ILayer>? layersToRemove, IEnumerable<ILayer>? layersToAdd)
         {
             var copyLayersToRemove = layersToRemove?.ToArray();
             var copyLayersToAdd = layersToAdd?.ToArray();
@@ -139,7 +139,7 @@ namespace Mapsui.Layers
             OnChanged(copyLayersToAdd, copyLayersToRemove);
         }
 
-        public void Modify(Func<ILayer, bool> removePredicate, IEnumerable<ILayer> layersToAdd)
+        public void Modify(Func<ILayer, bool> removePredicate, IEnumerable<ILayer>? layersToAdd)
         {
             var copyLayersToRemove = _layers.ToArray().Where(removePredicate).ToArray();
             var copyLayersToAdd = layersToAdd?.ToArray();

@@ -94,7 +94,7 @@ namespace Mapsui.Fetcher
             }
         }
 
-        private void FetchCompleted(TileInfo tileInfo, Feature feature, Exception exception)
+        private void FetchCompleted(TileInfo tileInfo, Feature feature, Exception? exception)
         {
             lock (_lockRoot)
             {

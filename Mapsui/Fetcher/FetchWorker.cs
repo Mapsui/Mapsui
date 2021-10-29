@@ -31,7 +31,7 @@ namespace Mapsui.Fetcher
             _fetchLoopCancellationTokenSource = null;
         }
 
-        private void Fetch(CancellationTokenSource cancellationTokenSource)
+        private void Fetch(CancellationTokenSource? cancellationTokenSource)
         {
             while (cancellationTokenSource != null && !cancellationTokenSource.Token.IsCancellationRequested)
             {

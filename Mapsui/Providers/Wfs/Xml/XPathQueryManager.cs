@@ -98,7 +98,7 @@ namespace Mapsui.Providers.Wfs.Xml
         /// <param name="xPathDoc">An XmlDocument instance</param>
         /// <param name="xIter">An XPathNodeIterator instance</param>
         /// <param name="paramContext">A <see cref="XPathQueryManager.CustomQueryContext"/> instance for parameterized XPath expressions</param>
-        private XPathQueryManager(XPathDocument xPathDoc, XPathNodeIterator xIter, CustomQueryContext paramContext)
+        private XPathQueryManager(XPathDocument xPathDoc, XPathNodeIterator? xIter, CustomQueryContext paramContext)
             : this(xPathDoc)
         {
             if (xIter != null)

@@ -86,7 +86,7 @@ namespace Mapsui.Providers.Wms
             StylesList = new Collection<string>();
         }
 
-        private void InitialiseGetStreamAsyncMethod(Func<string, Task<Stream>> getStreamAsync)
+        private void InitialiseGetStreamAsyncMethod(Func<string, Task<Stream>>? getStreamAsync)
         {
             _getStreamAsync = getStreamAsync ?? GetStreamAsync;
         }

@@ -172,7 +172,7 @@ namespace Mapsui
         /// </summary>
         /// <param name="other"><see cref="MRect" /> to compare to.</param>
         /// <returns>True if equal</returns>
-        public bool Equals(MRect other)
+        public bool Equals(MRect? other)
         {
             if (other == null) return false;
 
@@ -224,7 +224,7 @@ namespace Mapsui
         /// </summary>
         /// <param name="box"></param>
         /// <returns></returns>
-        public bool Intersects(MRect box)
+        public bool Intersects(MRect? box)
         {
             if (box == null) return false;
             return !((box.Min.X > Max.X) ||
@@ -322,7 +322,7 @@ namespace Mapsui
         /// </summary>
         /// <param name="box">boundingBox to join with</param>
         /// <returns>boundingBox containing both boundingBoxes</returns>
-        public MRect Join(MRect box)
+        public MRect Join(MRect? box)
         {
             if (box == null)
                 return Clone();
@@ -336,7 +336,7 @@ namespace Mapsui
         /// <param name="box1"></param>
         /// <param name="box2"></param>
         /// <returns></returns>
-        public static MRect Join(MRect box1, MRect box2)
+        public static MRect Join(MRect? box1, MRect? box2)
         {
             if ((box1 == null) && (box2 == null))
                 return null;
@@ -350,7 +350,7 @@ namespace Mapsui
         /// </summary>
         /// <param name="boxes">Boxes to join</param>
         /// <returns>Combined MRect</returns>
-        public static MRect Join(MRect[] boxes)
+        public static MRect Join(MRect[]? boxes)
         {
             if (boxes == null) return null;
             if (boxes.Length == 1) return boxes[0];

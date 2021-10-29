@@ -201,7 +201,7 @@ namespace Mapsui
         /// </summary>
         /// <param name="p">MPoint to compare to</param>
         /// <returns></returns>
-        public virtual bool Equals(MPoint p)
+        public virtual bool Equals(MPoint? p)
         {
             // ReSharper disable CompareOfFloatsByEqualityOperator
             return (p != null) && (p.X == X) && (p.Y == Y);

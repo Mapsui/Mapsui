@@ -173,7 +173,7 @@ namespace Mapsui.Geometries
         /// </summary>
         /// <param name="lineString">LineString to compare to</param>
         /// <returns>true of the objects are spatially equal</returns>
-        public bool Equals(LineString lineString)
+        public bool Equals(LineString? lineString)
         {
             if (lineString?.Vertices.Count != Vertices.Count)
                 return false;

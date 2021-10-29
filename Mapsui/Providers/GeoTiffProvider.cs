@@ -76,7 +76,7 @@ namespace Mapsui.Providers
             return new MRect(minX, minY, maxX, maxY);
         }
 
-        private static MemoryStream ReadImageAsStream(string tiffPath, List<Color> noDataColors)
+        private static MemoryStream ReadImageAsStream(string tiffPath, List<Color>? noDataColors)
         {
             var img = Image.FromFile(tiffPath);
             var imageStream = new MemoryStream();

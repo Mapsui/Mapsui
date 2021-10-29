@@ -55,7 +55,7 @@ namespace Mapsui.UI
         /// </summary>
         public MinMax ZoomLimits { get; set; }
 
-        private MinMax GetExtremes(IReadOnlyList<double> resolutions)
+        private MinMax GetExtremes(IReadOnlyList<double>? resolutions)
         {
             if (resolutions == null || resolutions.Count == 0) return null;
             resolutions = resolutions.OrderByDescending(r => r).ToList();

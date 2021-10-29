@@ -155,7 +155,7 @@ namespace Mapsui.Layers
             return new Feature { Geometry = ToGeometry(tileInfo, tileData) };
         }
 
-        private static Raster ToGeometry(TileInfo tileInfo, byte[] tileData)
+        private static Raster ToGeometry(TileInfo tileInfo, byte[]? tileData)
         {
             // A TileSource may return a byte array that is null. This is currently only implemented
             // for MbTilesTileSource. It is to indicate that the tile is not present in the source,

@@ -55,7 +55,7 @@ namespace Mapsui.UI.Forms
             return new Point(x, y);
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (ReferenceEquals(null, obj))
                 return false;

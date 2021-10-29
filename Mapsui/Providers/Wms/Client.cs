@@ -228,7 +228,7 @@ namespace Mapsui.Providers.Wms
             ParseCapabilities(capabilitiesXmlDocument);
         }
 
-        private void InitialiseGetStreamAsyncMethod(Func<string, Task<Stream>> getStreamAsync)
+        private void InitialiseGetStreamAsyncMethod(Func<string, Task<Stream>>? getStreamAsync)
         {
             _getStreamAsync = getStreamAsync ?? GetStreamAsync;
         }

@@ -56,7 +56,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             return _legendResponse;
         }
 
-        private HttpWebRequest CreateRequest(string serviceUrl, ICredentials credentials)
+        private HttpWebRequest CreateRequest(string serviceUrl, ICredentials? credentials)
         {
             var trailing = serviceUrl.Contains("?") ? "&" : "?";
             var requestUrl = $"{serviceUrl}/legend{trailing}f=json";
