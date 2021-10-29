@@ -102,7 +102,7 @@ namespace Mapsui.Layers
         bool IsMapInfoLayer { get; set; }
 
         /// <summary>
-        /// event called?  when the data within the layer has changed allowing
+        /// event called  when the data within the layer has changed allowing
         /// listeners to react to this.
         /// </summary>
         event DataChangedEventHandler?  DataChanged;
