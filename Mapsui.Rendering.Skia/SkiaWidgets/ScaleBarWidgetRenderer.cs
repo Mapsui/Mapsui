@@ -1,5 +1,4 @@
-﻿using Mapsui.Geometries;
-using Mapsui.Rendering.Skia.Extensions;
+﻿using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ScaleBar;
 using SkiaSharp;
@@ -53,7 +52,7 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
             (scaleBarLength1, scaleBarText1, scaleBarLength2, scaleBarText2) = scaleBar.GetScaleBarLengthAndText(viewport);
 
             // Calc height of scale bar
-            SKRect textSize = SKRect.Empty;
+            var textSize = SKRect.Empty;
 
             // Do this, because height of text changes sometimes (e.g. from 2 m to 1 m)
             _paintScaleTextStroke.MeasureText("9999 m", ref textSize);
@@ -82,20 +81,20 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
             if (points != null)
             {
                 // Draw outline of scale bar
-                for (int i = 0; i < points.Length; i += 2)
+                for (var i = 0; i < points.Length; i += 2)
                 {
                     canvas.DrawLine((float)points[i].X, (float)points[i].Y, (float)points[i + 1].X, (float)points[i + 1].Y, _paintScaleBarStroke);
                 }
 
                 // Draw scale bar
-                for (int i = 0; i < points.Length; i += 2)
+                for (var i = 0; i < points.Length; i += 2)
                 {
                     canvas.DrawLine((float)points[i].X, (float)points[i].Y, (float)points[i + 1].X, (float)points[i + 1].Y, _paintScaleBar);
                 }
 
                 envelop = points[0].MRect;
 
-                for (int i = 1; i < points.Length; i++)
+                for (var i = 1; i < points.Length; i++)
                 {
                     envelop = envelop.Join(points[i].MRect);
                 }
@@ -106,10 +105,10 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
             // Draw text
 
             // Calc text height
-            SKRect textSize1 = SKRect.Empty;
-            SKRect textSize2 = SKRect.Empty;
+            var textSize1 = SKRect.Empty;
+            var textSize2 = SKRect.Empty;
 
-            scaleBarText1 = scaleBarText1 ?? string.Empty;
+            scaleBarText1 ??= string.Empty;
             _paintScaleTextStroke.MeasureText(scaleBarText1, ref textSize1);
 
             var (posX1, posY1, posX2, posY2) = scaleBar.GetScaleBarTextPositions(viewport, textSize.ToMRect(), textSize1.ToMRect(), textSize2.ToMRect(), scaleBar.StrokeWidthHalo);
@@ -123,7 +122,7 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
             if (scaleBar.ScaleBarMode == ScaleBarMode.Both && scaleBar.SecondaryUnitConverter != null)
             {
                 // Now draw second text
-                scaleBarText2 = scaleBarText2 ?? string.Empty;
+                scaleBarText2 ??= string.Empty;
                 _paintScaleTextStroke.MeasureText(scaleBarText2, ref textSize2);
 
                 canvas.DrawText(scaleBarText2, posX2, posY2 - textSize2.Top, _paintScaleTextStroke);

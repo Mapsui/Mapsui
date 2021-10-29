@@ -1,4 +1,5 @@
-﻿using Mapsui.Styles;
+﻿using System;
+using Mapsui.Styles;
 using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia.Extensions
@@ -12,9 +13,9 @@ namespace Mapsui.Rendering.Skia.Extensions
                 case PenStyle.UserDefined:
                     // If dashArray is empty or not even, create sold dash
                     if (dashArray == null || dashArray.Length == 0 || dashArray.Length % 2 != 0)
-                        return SKPathEffect.CreateDash(new float[0], 0);
+                        return SKPathEffect.CreateDash(Array.Empty<float>(), 0);
                     // Multiply each dash entry with line width
-                    float[] dash = new float[dashArray.Length];
+                    var dash = new float[dashArray.Length];
                     for (var i = 0; i < dashArray.Length; i++)
                     {
                         dash[i] = dashArray[i] * width;
@@ -41,7 +42,7 @@ namespace Mapsui.Rendering.Skia.Extensions
                 case PenStyle.ShortDot:
                     return SKPathEffect.CreateDash(new[] { width * 1f, width * 3f }, dashOffset);
                 default:
-                    return SKPathEffect.CreateDash(new float[0], dashOffset);
+                    return SKPathEffect.CreateDash(Array.Empty<float>(), dashOffset);
             }
         }
     }

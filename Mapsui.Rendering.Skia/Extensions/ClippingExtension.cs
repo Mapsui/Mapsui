@@ -21,7 +21,7 @@ namespace Mapsui.Rendering.Skia.Extensions
             var vertices = WorldToScreen(viewport, lineString);
 
             var path = new SKPath();
-            SKPoint lastPoint = SKPoint.Empty;
+            var lastPoint = SKPoint.Empty;
 
             for (var i = 1; i < vertices.Count; i++)
             {
@@ -30,7 +30,7 @@ namespace Mapsui.Rendering.Skia.Extensions
 
                 if (intersect != Intersection.CompleteOutside)
                 {
-                    // If the last point isn't the same as actuall starting point ...
+                    // If the last point isn't the same as actual starting point ...
                     if (lastPoint.IsEmpty || !lastPoint.Equals(intersectionPoint1))
                     {
                         // ... than move to this point
@@ -47,12 +47,12 @@ namespace Mapsui.Rendering.Skia.Extensions
         }
 
         /// <summary>
-        /// Converts a Polygon into a SKPath, that is clipped to cliptRect, where exterior is bigger than interior
+        /// Converts a Polygon into a SKPath, that is clipped to clipRect, where exterior is bigger than interior
         /// </summary>
         /// <param name="polygon">Polygon to convert</param>
         /// <param name="viewport">Viewport implementation</param>
         /// <param name="clipRect">Rectangle to clip to. All lines outside aren't drawn.</param>
-        /// <param name="strokeWidth">StrokeWidth for inflating cliptRect</param>
+        /// <param name="strokeWidth">StrokeWidth for inflating clipRect</param>
         /// <returns></returns>
         public static SKPath ToSkiaPath(this Polygon polygon, IReadOnlyViewport viewport, SKRect clipRect, float strokeWidth)
         {
@@ -251,7 +251,7 @@ namespace Mapsui.Rendering.Skia.Extensions
             intersectionPoint2 = point2;
 
             // Check, if points are complete outside
-            for (int i = 0; i < 4; i++)
+            for (var i = 0; i < 4; i++)
             {
                 if (p[i] == 0)
                 {

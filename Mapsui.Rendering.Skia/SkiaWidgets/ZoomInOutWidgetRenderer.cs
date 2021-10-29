@@ -71,7 +71,7 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
 
         private static SKPaint CreatePaint(SKColor color, float strokeWidth, SKPaintStyle style)
         {
-            SKPaint paint = new SKPaint();
+            var paint = new SKPaint();
 
             paint.LcdRenderText = true;
             paint.Color = color;

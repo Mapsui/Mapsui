@@ -89,7 +89,7 @@ namespace Mapsui.Rendering.Skia
 
             float emHeight = 0;
             float maxWidth = 0;
-            bool hasNewline = text.Contains("\n"); // There could be a multi line text by newline
+            var hasNewline = text.Contains("\n"); // There could be a multi line text by newline
 
             // Get default values for unit em
             if (style.MaxWidth > 0 || hasNewline)
@@ -273,7 +273,7 @@ namespace Mapsui.Rendering.Skia
 
         private static void UpdatePaint(LabelStyle style, float layerOpacity)
         {
-            if (!CacheTypeface.TryGetValue(style.Font.ToString(), out SKTypeface typeface))
+            if (!CacheTypeface.TryGetValue(style.Font.ToString(), out var typeface))
             {
                 typeface = SKTypeface.FromFamilyName(style.Font.FontFamily,
                     style.Font.Bold ? SKFontStyleWeight.Bold : SKFontStyleWeight.Normal,
