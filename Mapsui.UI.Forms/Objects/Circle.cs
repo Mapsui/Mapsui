@@ -57,7 +57,7 @@ namespace Mapsui.UI.Forms
             set => SetValue(QualityProperty, value);
         }
 
-        protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected override void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             base.OnPropertyChanged(propertyName);
 

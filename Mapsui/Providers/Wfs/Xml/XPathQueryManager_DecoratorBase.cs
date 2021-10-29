@@ -79,7 +79,7 @@ namespace Mapsui.Providers.Wfs.Xml
         /// </summary>
         /// <param name="xPath">A compiled XPath expression</param>
         /// <param name="queryParameters">Parameters for the compiled XPath expression</param>
-        public virtual string GetValueFromNode(XPathExpression xPath, DictionaryEntry[] queryParameters = null)
+        public virtual string GetValueFromNode(XPathExpression xPath, DictionaryEntry[]? queryParameters = null)
         {
             if (queryParameters == null) return XPathQueryManager.GetValueFromNode(xPath);
             return XPathQueryManager.GetValueFromNode(xPath, queryParameters);
@@ -91,7 +91,7 @@ namespace Mapsui.Providers.Wfs.Xml
         /// <param name="xPath">A compiled XPath expression</param>
         /// <param name="queryParameters">Parameters for the compiled XPath expression</param>
         public abstract IXPathQueryManager GetXPathQueryManagerInContext(XPathExpression xPath,
-                                                                         DictionaryEntry[] queryParameters = null);
+                                                                         DictionaryEntry[]? queryParameters = null);
 
         /// <summary>
         /// This method invokes the corresponding method of the inherent <see cref="IXPathQueryManager"/> instance.

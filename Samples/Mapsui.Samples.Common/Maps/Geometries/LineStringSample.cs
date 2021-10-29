@@ -30,7 +30,7 @@ namespace Mapsui.Samples.Common.Maps
             return map;
         }
 
-        public static ILayer CreateLineStringLayer(IStyle style = null)
+        public static ILayer CreateLineStringLayer(IStyle? style = null)
         {
             var lineString = (LineString)Geometry.GeomFromText(WKTGr5);
             lineString = new LineString(lineString.Vertices.Select(v => SphericalMercator.FromLonLat(v.Y, v.X).ToMPoint().ToPoint()));

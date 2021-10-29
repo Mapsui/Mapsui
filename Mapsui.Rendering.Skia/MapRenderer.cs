@@ -51,7 +51,7 @@ namespace Mapsui.Rendering.Skia
         }
 
         public void Render(object target, IReadOnlyViewport viewport, IEnumerable<ILayer> layers,
-            IEnumerable<IWidget> widgets, Color background = null)
+            IEnumerable<IWidget> widgets, Color? background = null)
         {
             var attributions = layers.Where(l => l.Enabled).Select(l => l.Attribution).Where(w => w != null).ToList();
 
@@ -61,7 +61,7 @@ namespace Mapsui.Rendering.Skia
         }
 
         private void RenderTypeSave(SKCanvas canvas, IReadOnlyViewport viewport, IEnumerable<ILayer> layers,
-            IEnumerable<IWidget> widgets, Color background = null)
+            IEnumerable<IWidget> widgets, Color? background = null)
         {
             if (!viewport.HasSize) return;
 
@@ -70,7 +70,7 @@ namespace Mapsui.Rendering.Skia
             Render(canvas, viewport, widgets, 1);
         }
 
-        public MemoryStream RenderToBitmapStream(IReadOnlyViewport viewport, IEnumerable<ILayer> layers, Color background = null, float pixelDensity = 1)
+        public MemoryStream RenderToBitmapStream(IReadOnlyViewport viewport, IEnumerable<ILayer> layers, Color? background = null, float pixelDensity = 1)
         {
             try
             {

@@ -18,8 +18,8 @@ namespace Mapsui.Providers.Wfs.Xml
         IXPathQueryManager Clone();
         XPathNodeIterator GetIterator(XPathExpression xPath);
         XPathNodeIterator GetIterator(XPathExpression xPath, DictionaryEntry[] queryParameters);
-        string GetValueFromNode(XPathExpression xPath, DictionaryEntry[] queryParameters = null);
-        IXPathQueryManager GetXPathQueryManagerInContext(XPathExpression xPath, DictionaryEntry[] queryParameters = null);
+        string GetValueFromNode(XPathExpression xPath, DictionaryEntry[]? queryParameters = null);
+        IXPathQueryManager GetXPathQueryManagerInContext(XPathExpression xPath, DictionaryEntry[]? queryParameters = null);
         void ResetNamespaces();
         void SetDocumentToParse(Stream documentStream);
         void SetDocumentToParse(HttpClientUtil httpClientUtil);

@@ -95,7 +95,7 @@ namespace Mapsui.Fetcher
             handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public event DataChangedEventHandler DataChanged;
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event DataChangedEventHandler? DataChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
     }
 }

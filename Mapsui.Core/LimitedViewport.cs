@@ -12,7 +12,7 @@ namespace Mapsui
         }
 
         private readonly IViewport _viewport = new Viewport();
-        public IViewportLimiter Limiter { get; set; }
+        public IViewportLimiter? Limiter { get; set; }
         public Map Map { get; set; }
 
         public event PropertyChangedEventHandler ViewportChanged;

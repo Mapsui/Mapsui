@@ -88,7 +88,7 @@ namespace Mapsui.Providers
             _features.Remove(_features.First(f => f[PrimaryKey].Equals(id)));
         }
 
-        public void Delete(IFeature feature, Func<IFeature, IFeature, bool> compare = null)
+        public void Delete(IFeature feature, Func<IFeature, IFeature, bool>? compare = null)
         {
             if (compare == null)
             {

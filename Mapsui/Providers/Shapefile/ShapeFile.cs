@@ -829,7 +829,7 @@ namespace Mapsui.Providers.Shapefile
         /// <param name="rowId"></param>
         /// <param name="features">Data table to feature should belong to.</param>
         /// <returns></returns>
-        public IGeometryFeature GetFeature(uint rowId, List<IGeometryFeature> features = null)
+        public IGeometryFeature GetFeature(uint rowId, List<IGeometryFeature>? features = null)
         {
             lock (_syncRoot)
             {

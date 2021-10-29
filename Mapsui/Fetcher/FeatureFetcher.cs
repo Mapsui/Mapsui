@@ -13,7 +13,7 @@ namespace Mapsui.Fetcher
         private readonly IProvider<IFeature> _provider;
         private readonly long _timeOfRequest;
 
-        internal delegate void DataArrivedDelegate(IEnumerable<IFeature> features, object state = null);
+        internal delegate void DataArrivedDelegate(IEnumerable<IFeature> features, object? state = null);
 
         public FeatureFetcher(FetchInfo fetchInfo, IProvider<IFeature> provider, DataArrivedDelegate dataArrived, long timeOfRequest = default)
         {
