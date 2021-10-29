@@ -697,7 +697,7 @@ namespace Mapsui.UI.Forms
         /// </summary>
         /// <param name="screenPosition">First clicked/touched position on screen</param>
         /// <param name="numOfTaps">Number of taps on map (2 is a double click/tap)</param>
-        /// <returns>True, if the event is?  handled</returns>
+        /// <returns>True, if the event is handled</returns>
         private bool OnDoubleTapped(MPoint screenPosition, int numOfTaps)
         {
             var args = new TappedEventArgs(screenPosition, numOfTaps);
@@ -720,7 +720,7 @@ namespace Mapsui.UI.Forms
         /// Called, when mouse/finger/pen tapped on map one time
         /// </summary>
         /// <param name="screenPosition">Clicked/touched position on screen</param>
-        /// <returns>True, if the event is?  handled</returns>
+        /// <returns>True, if the event is handled</returns>
         private bool OnSingleTapped(MPoint screenPosition)
         {
             var args = new TappedEventArgs(screenPosition, 1);
@@ -743,7 +743,7 @@ namespace Mapsui.UI.Forms
         /// Called, when mouse/finger/pen tapped long on map
         /// </summary>
         /// <param name="screenPosition">Clicked/touched position on screen</param>
-        /// <returns>True, if the event is?  handled</returns>
+        /// <returns>True, if the event is handled</returns>
         private bool OnLongTapped(MPoint screenPosition)
         {
             var args = new TappedEventArgs(screenPosition, 1);

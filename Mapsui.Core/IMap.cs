@@ -47,12 +47,12 @@ namespace Mapsui
         /// <summary>
         /// Called whenever a property changed
         /// </summary>
-        event PropertyChangedEventHandler?  PropertyChanged;
+        event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// DataChanged should be triggered by any data changes of any of the child layers
         /// </summary>
-        event DataChangedEventHandler?  DataChanged;
+        event DataChangedEventHandler DataChanged;
 
         /// <summary>
         /// Abort fetching of all layers

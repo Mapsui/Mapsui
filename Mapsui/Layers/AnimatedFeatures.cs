@@ -42,7 +42,7 @@ namespace Mapsui.Layers
         public int AnimationDuration { get; set; }
         public EasingFunction Function { get; set; }
 
-        public event EventHandler?  AnimatedPositionChanged;
+        public event EventHandler AnimatedPositionChanged;
 
         public void AddFeatures(IEnumerable<IGeometryFeature> features)
         {

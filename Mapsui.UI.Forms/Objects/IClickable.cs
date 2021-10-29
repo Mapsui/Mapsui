@@ -17,7 +17,7 @@ namespace Mapsui.UI.Objects
         /// <summary>
         /// Handle click event
         /// </summary>
-        /// <param name="e">event args?  for drawable clicked</param>
+        /// <param name="e">Event args for drawable clicked</param>
         void HandleClicked(DrawableClickedEventArgs e);
 
         /// <summary>

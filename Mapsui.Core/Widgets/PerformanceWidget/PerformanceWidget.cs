@@ -24,12 +24,12 @@ namespace Mapsui.Widgets.PerformanceWidget
         public Utilities.Performance Performance { get; }
 
         /// <summary>
-        /// event handler?  which is called, when the button is touched
+        /// Event handler which is called, when the button is touched
         /// </summary>
-        public event PropertyChangedEventHandler?  PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        /// event handler?  which is called, when the button is touched
+        /// Event handler which is called, when the button is touched
         /// </summary>
         public event EventHandler<WidgetTouchedEventArgs> WidgetTouched;
 

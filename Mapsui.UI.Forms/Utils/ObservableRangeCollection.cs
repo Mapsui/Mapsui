@@ -339,7 +339,7 @@
         /// <param name="collection">The items to fill the collection with, after clearing it.</param>
         /// <param name="comparer">An <see cref="IEqualityComparer{T}"/> to be used
         /// to check whether an item in the same location already existed before,
-        /// which in case it would not be added to the collection, and no event will?  be raised for it.</param>
+        /// which in case it would not be added to the collection, and no event will be raised for it.</param>
         /// <exception cref="ArgumentNullException"><paramref name="collection"/> is null.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="comparer"/> is null.</exception>
         public void ReplaceRange(IEnumerable<T> collection, IEqualityComparer<T> comparer)
@@ -501,7 +501,7 @@
 
         /// <summary>
         /// Called by base class Collection&lt;T&gt; when the list is being cleared;
-        /// raises a CollectionChanged event to?  any listeners.
+        /// raises a CollectionChanged event to any listeners.
         /// </summary>
         protected override void ClearItems()
         {
@@ -516,7 +516,7 @@
 
         /// <summary>
         /// Called by base class Collection&lt;T&gt; when an item is set in list;
-        /// raises a CollectionChanged event to?  any listeners.
+        /// raises a CollectionChanged event to any listeners.
         /// </summary>
         protected override void SetItem(int index, T item)
         {
@@ -532,9 +532,9 @@
         }
 
         /// <summary>
-        /// Raise CollectionChanged event to?  any listeners.
+        /// Raise CollectionChanged event to any listeners.
         /// Properties/methods modifying this ObservableCollection will raise
-        /// a collection changed event through?  this virtual method.
+        /// a collection changed event through this virtual method.
         /// </summary>
         /// <remarks>
         /// When overriding this method, either call its base implementation
@@ -584,25 +584,25 @@
         }
 
         /// <summary>
-        /// /// Helper to raise a PropertyChanged event for?  the Indexer property
+        /// /// Helper to raise a PropertyChanged event for the Indexer property
         /// /// </summary>
         private void OnIndexerPropertyChanged() =>
           OnPropertyChanged(EventArgsCache.IndexerPropertyChanged);
 
         /// <summary>
-        /// Helper to raise CollectionChanged event to?  any listeners
+        /// Helper to raise CollectionChanged event to any listeners
         /// </summary>
         private void OnCollectionChanged(NotifyCollectionChangedAction action, object oldItem, object newItem, int index) =>
           OnCollectionChanged(new NotifyCollectionChangedEventArgs(action, newItem, oldItem, index));
 
         /// <summary>
-        /// Helper to raise CollectionChanged event with?  action == Reset to any listeners
+        /// Helper to raise CollectionChanged event with action == Reset to any listeners
         /// </summary>
         private void OnCollectionReset() =>
           OnCollectionChanged(EventArgsCache.ResetCollectionChanged);
 
         /// <summary>
-        /// Helper to raise event for?  clustered action and clear cluster.
+        /// Helper to raise event for clustered action and clear cluster.
         /// </summary>
         /// <param name="followingItemIndex">The index of the item following the replacement block.</param>
         /// <param name="newCluster"></param>

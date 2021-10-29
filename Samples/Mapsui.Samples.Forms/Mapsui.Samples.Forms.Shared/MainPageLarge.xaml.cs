@@ -172,7 +172,7 @@ namespace Mapsui.Samples.Forms
         /// If there was an error while getting GPS coordinates
         /// </summary>
         /// <param name="sender">Geolocator</param>
-        /// <param name="e">event arguments?  for position error</param>
+        /// <param name="e">Event arguments for position error</param>
         private void MyLocationPositionError(object sender, PositionErrorEventArgs e)
         {
         }
@@ -181,7 +181,7 @@ namespace Mapsui.Samples.Forms
         /// New informations from Geolocator arrived
         /// </summary>
         /// <param name="sender">Geolocator</param>
-        /// <param name="e">event arguments?  for new position</param>
+        /// <param name="e">Event arguments for new position</param>
         private void MyLocationPositionChanged(object sender, PositionEventArgs e)
         {
             Device.BeginInvokeOnMainThread(() => {

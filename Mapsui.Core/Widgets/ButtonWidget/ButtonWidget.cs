@@ -23,12 +23,12 @@ namespace Mapsui.Widgets.ButtonWidget
     public class ButtonWidget : Widget, INotifyPropertyChanged
     {
         /// <summary>
-        /// event handler?  which is called, when the button is touched
+        /// Event handler which is called, when the button is touched
         /// </summary>
-        public event PropertyChangedEventHandler?  PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        /// event handler?  which is called, when the button is touched
+        /// Event handler which is called, when the button is touched
         /// </summary>
         public event EventHandler<WidgetTouchedEventArgs> WidgetTouched;
 

@@ -32,7 +32,7 @@ namespace Mapsui
     /// </remarks>
     public class Viewport : IViewport
     {
-        public event PropertyChangedEventHandler?  ViewportChanged;
+        public event PropertyChangedEventHandler ViewportChanged;
 
         private readonly MRect _extent;
         private MQuad _windowExtent;
