@@ -289,14 +289,16 @@ namespace Mapsui.UI.Wpf
         /// </summary>
 #if __FORMS__ || __AVALONIA__
         public new event PropertyChangedEventHandler? PropertyChanged;
+#else
+        public event PropertyChangedEventHandler? PropertyChanged;
+#endif
 
+#if __FORMS__
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 #else
-        public event PropertyChangedEventHandler? PropertyChanged;
-
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

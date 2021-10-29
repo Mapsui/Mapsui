@@ -257,7 +257,7 @@ namespace Mapsui.UI.Wpf
                 Math.Abs(currentPosition.Y - previousPosition.Y) < SystemParameters.MinimumVerticalDragDistance;
         }
 
-        private void MapControlTouchUp(object sender, TouchEventArgs e)
+        private void MapControlTouchUp(object? sender, TouchEventArgs e)
         {
             if (!_hasBeenManipulated)
             {
@@ -384,18 +384,18 @@ namespace Mapsui.UI.Wpf
         private float ViewportWidth => (float)ActualWidth;
         private float ViewportHeight => (float)ActualHeight;
 
-        private static void OnManipulationInertiaStarting(object sender, ManipulationInertiaStartingEventArgs e)
+        private static void OnManipulationInertiaStarting(object? sender, ManipulationInertiaStartingEventArgs e)
         {
             e.TranslationBehavior.DesiredDeceleration = 25 * 96.0 / (1000.0 * 1000.0);
         }
 
-        private void OnManipulationStarted(object sender, ManipulationStartedEventArgs e)
+        private void OnManipulationStarted(object? sender, ManipulationStartedEventArgs e)
         {
             _hasBeenManipulated = false;
             _innerRotation = _viewport.Rotation;
         }
 
-        private void OnManipulationDelta(object sender, ManipulationDeltaEventArgs e)
+        private void OnManipulationDelta(object? sender, ManipulationDeltaEventArgs e)
         {
             var translation = e.DeltaManipulation.Translation;
             var center = e.ManipulationOrigin.ToMapsui().Offset(translation.X, translation.Y);
@@ -446,12 +446,12 @@ namespace Mapsui.UI.Wpf
             return deltaScale;
         }
 
-        private void OnManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
+        private void OnManipulationCompleted(object? sender, ManipulationCompletedEventArgs e)
         {
             Refresh();
         }
 
-        private void SKElementOnPaintSurface(object sender, SKPaintSurfaceEventArgs args)
+        private void SKElementOnPaintSurface(object? sender, SKPaintSurfaceEventArgs args)
         {
             if (PixelDensity <= 0)
                 return;
