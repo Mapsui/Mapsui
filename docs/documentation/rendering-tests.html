@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Unit Tests for Rendering </title>
+    <title>Rendering Tests </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Unit Tests for Rendering ">
+    <meta name="title" content="Rendering Tests ">
     <meta name="generator" content="docfx 2.48.0.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
@@ -77,23 +77,29 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
-<h1 id="unit-tests-for-rendering">Unit Tests for Rendering</h1>
+<h1 id="rendering-tests">Rendering Tests</h1>
 
-<p>Testing the renderers in done in two ways.</p>
+<p>Mapsui has a way of testing rendering where a Map state is rendered to a bitmap. This bitmap is then compared to the original images which are stored as resource in the repository. This is thus a kind of regresssion test (1). If there are differences between these images the test will fail. If this is the case the developer needs to visually inspect the generated images (2). If the generated image is as expected and the original is not then the original needs to be overwritten. </p>
 <ol>
-<li>Unit tests that compare the current output to previous output.</li>
+<li>Regression tests </li>
 <li>Visual inspection.</li>
 </ol>
-<p>Unit tests are useful during refactoring when you expect no changes. Visual tests are useful when you are working on a change in the rendering output.</p>
-<h2 id="1-unit-tests">1. Unit tests</h2>
+<p>The regression tests are useful during refactoring when you expect no changes. When you are working on changes in the rendered output the regression tests will fail but the visual inspection of the output is still useful to check if this is as intended.</p>
+<h2 id="1-regression-tests">1. Regression tests</h2>
 <p>The generated images are written to:</p>
-<pre><code>{test project folder}\bin\Debug\Resources\Images\Generated\
+<pre><code>{test project folder}\bin\Debug\netcoreapp3.1\Resources\Images\Generated
 </code></pre><p>Those will be compared to the original images in:</p>
 <pre><code>{test project folder}\bin\Debug\Resources\Images\Original\
 </code></pre><p>If after code changes there are expected changes in the generated files they should be committed to git so they need to be copied to:</p>
 <pre><code>{test project folder}\Resources\Images\Original\
-</code></pre><h2 id="2-visual-inspection">2. Visual inspection</h2>
-<p>In the WPF sample there is an option to select the list of unit tests. Both WPF and Skia renderers can be selected. We assume the skia renderer on other platforms are identical.</p>
+</code></pre><p>This can be done with a script: <code>scripts\test-image-copier.cmd</code>. </p>
+<h2 id="2-visual-inspection">2. Visual inspection</h2>
+<p>There tests can be inspected in two ways. </p>
+<ol>
+<li>In the WPF sample there is a &#39;Tests&#39; category, that shows an interactive version of the test sample.</li>
+<li>In the output folder (see above) the generated images can be viewed. Currently this folder looks like this:</li>
+</ol>
+<p><img src="https://user-images.githubusercontent.com/963462/139462183-cf8126ba-8dc5-4c17-b107-11752196dd19.png" alt="image"></p>
 </article>
           </div>
           
