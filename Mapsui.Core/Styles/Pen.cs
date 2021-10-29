@@ -30,7 +30,7 @@ namespace Mapsui.Styles
         /// Array for drawing user defined dashes. Should be even and values are 
         /// multiplied by line width before drawing.
         /// </summary>
-        public float[] DashArray { get; set; } = null;
+        public float[]? DashArray { get; set; } = null;
 
         /// <summary>
         /// Offset for drawing user defined dashes

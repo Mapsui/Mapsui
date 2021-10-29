@@ -202,7 +202,7 @@ namespace Mapsui.Providers.Wms
         /// <param name="url">URL of wms server</param>
         /// <param name="wmsVersion">WMS version number, null to get the default from service</param>
         /// <param name="getStreamAsync">Download method, leave null for default</param>
-        public Client(string url, string wmsVersion = null, Func<string, Task<Stream>> getStreamAsync = null)
+        public Client(string url, string? wmsVersion = null, Func<string, Task<Stream>>? getStreamAsync = null)
         {
             InitialiseGetStreamAsyncMethod(getStreamAsync);
             var strReq = new StringBuilder(url);
@@ -221,7 +221,7 @@ namespace Mapsui.Providers.Wms
             ParseCapabilities(xml);
         }
 
-        public Client(XmlDocument capabilitiesXmlDocument, Func<string, Task<Stream>> getStreamAsync = null)
+        public Client(XmlDocument capabilitiesXmlDocument, Func<string, Task<Stream>>? getStreamAsync = null)
         {
             InitialiseGetStreamAsyncMethod(getStreamAsync);
             _nsmgr = new XmlNamespaceManager(capabilitiesXmlDocument.NameTable);

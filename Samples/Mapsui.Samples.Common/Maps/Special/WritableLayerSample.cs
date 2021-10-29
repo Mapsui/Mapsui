@@ -10,10 +10,10 @@ namespace Mapsui.Tests.Common.Maps
     public class WritableLayerSample : ISample
     {
         public string Name => "WritableLayer";
-
-        public string Category => "Tests";
+        public string Category => "Special";
 
         private WritableLayer _writableLayer;
+
         public void Setup(IMapControl mapControl)
         {
             mapControl.Map = CreateMap();
@@ -34,6 +34,7 @@ namespace Mapsui.Tests.Common.Maps
         private Map CreateMap()
         {
             var map = new Map();
+
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             var writableLayer = new WritableLayer();
             writableLayer.Add(new Feature());

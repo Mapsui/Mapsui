@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
+using System.Reflection;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.UI;
-using System.Reflection;
-using Mapsui.Samples.Common;
+using Mapsui.Utilities;
 
 namespace Mapsui.Tests.Common.Maps
 {
     public class PolygonSample : ISample
     {
-        static int _bitmapId;
+        private static int _bitmapId;
 
         public string Name => "Polygon";
         public string Category => "Tests";
@@ -27,19 +28,26 @@ namespace Mapsui.Tests.Common.Maps
             var image = assembly.GetManifestResourceStream("Mapsui.Tests.Common.Resources.Images.avion_silhouette.png");
             _bitmapId = BitmapRegistry.Instance.Register(image);
 
+            var layer = CreateLayer();
+
             var map = new Map
             {
-                BackColor = Color.Transparent,
-                Home = n => n.NavigateTo(new MPoint(0, 0), 63000)
+                BackColor = Color.FromString("WhiteSmoke"),
+                Home = n => n.NavigateToFullEnvelope(ScaleMethod.Fit)
             };
 
-            var layer = new MemoryLayer
+            map.Layers.Add(layer);
+
+            return map;
+        }
+
+        private static MemoryLayer CreateLayer()
+        {
+            return new MemoryLayer
             {
                 DataSource = CreatePolygonProvider(),
                 Name = "Polygon"
             };
-            map.Layers.Add(layer);
-            return map;
         }
 
         public static MemoryProvider<IGeometryFeature> CreatePolygonProvider()

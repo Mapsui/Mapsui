@@ -29,7 +29,7 @@ namespace Mapsui.Fetcher
             ITileCache<Feature> tileCache,
             ITileSchema tileSchema,
             Func<TileInfo, Feature> fetchTileAsFeature,
-            IDataFetchStrategy dataFetchStrategy = null)
+            IDataFetchStrategy? dataFetchStrategy = null)
         {
             _tileCache = tileCache;
             _tileSchema = tileSchema;

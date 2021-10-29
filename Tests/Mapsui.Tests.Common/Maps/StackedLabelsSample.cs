@@ -24,20 +24,23 @@ namespace Mapsui.Tests.Common.Maps
 
         public static Map CreateMap()
         {
+            var provider = CreateRandomPointsProvider(GenerateRandomPoints(new BoundingBox(-100, -100, 100, 100), 20));
+            var layer = CreateLayer(provider);
+            var stackedLabelLayer = CreateStackedLabelLayer(provider, LabelColumn);
+
             var map = new Map
             {
-                BackColor = Color.Transparent,
-                Home = n => n.ZoomTo(0.5)
+                BackColor = Color.FromString("WhiteSmoke"),
+                Home = n => n.NavigateTo(layer.Envelope.Grow(layer.Envelope.Width * 0.3))
             };
 
-            var provider = CreateRandomPointsProvider(GenerateRandomPoints(new BoundingBox(-100, -100, 100, 100), 20));
-            map.Layers.Add(CreateStackedLabelLayer(provider, LabelColumn));
-            map.Layers.Add(CreateLayer(provider));
+            map.Layers.Add(stackedLabelLayer);
+            map.Layers.Add(layer);
 
             return map;
         }
 
-        private static ILayer CreateStackedLabelLayer(IProvider<IGeometryFeature> provider, string labelColumn)
+        private static MemoryLayer CreateStackedLabelLayer(IProvider<IGeometryFeature> provider, string labelColumn)
         {
             return new MemoryLayer
             {
@@ -46,7 +49,7 @@ namespace Mapsui.Tests.Common.Maps
             };
         }
 
-        private static ILayer CreateLayer(IProvider<IGeometryFeature> dataSource)
+        private static MemoryLayer CreateLayer(IProvider<IGeometryFeature> dataSource)
         {
             return new MemoryLayer
             {

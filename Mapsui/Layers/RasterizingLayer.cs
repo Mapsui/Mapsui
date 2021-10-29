@@ -47,7 +47,7 @@ namespace Mapsui.Layers
             ILayer layer,
             int delayBeforeRasterize = 1000,
             double renderResolutionMultiplier = 1,
-            IRenderer rasterizer = null,
+            IRenderer? rasterizer = null,
             double overscanRatio = 1,
             bool onlyRerasterizeIfOutsideOverscan = false,
             float pixelDensity = 1)

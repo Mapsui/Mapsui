@@ -14,7 +14,7 @@
 
         public MRect Extent { get; set; }
         public double Resolution { get; set; }
-        public string CRS { get; set; }
+        public string? CRS { get; set; }
         public ChangeType ChangeType { get; set; }
     }
 }

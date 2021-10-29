@@ -17,7 +17,12 @@
 	  <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
 	  <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 	  <LangVersion>9.0</LangVersion>
+	  <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+	  <Compile Include="$(MSBuildThisFileDirectory)/Nullable.cs" />
+  </ItemGroup>
 
   <ItemGroup Condition="'$(OS)' == 'Unix'">
     <!--Specify Compiler for Mac Builds-->

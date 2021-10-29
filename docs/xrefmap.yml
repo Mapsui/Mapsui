@@ -13,6 +13,31 @@ references:
   commentId: N:Mapsui.UI.Android
   fullName: Mapsui.UI.Android
   nameWithType: Mapsui.UI.Android
+- uid: Mapsui.UI.Android.Extensions
+  name: Mapsui.UI.Android.Extensions
+  href: api/Mapsui.UI.Android.Extensions.html
+  commentId: N:Mapsui.UI.Android.Extensions
+  fullName: Mapsui.UI.Android.Extensions
+  nameWithType: Mapsui.UI.Android.Extensions
+- uid: Mapsui.UI.Android.Extensions.PointExtensions
+  name: PointExtensions
+  href: api/Mapsui.UI.Android.Extensions.PointExtensions.html
+  commentId: T:Mapsui.UI.Android.Extensions.PointExtensions
+  fullName: Mapsui.UI.Android.Extensions.PointExtensions
+  nameWithType: PointExtensions
+- uid: Mapsui.UI.Android.Extensions.PointExtensions.ToDeviceIndependentUnits(Mapsui.MPoint,System.Single)
+  name: ToDeviceIndependentUnits(MPoint, Single)
+  href: api/Mapsui.UI.Android.Extensions.PointExtensions.html#Mapsui_UI_Android_Extensions_PointExtensions_ToDeviceIndependentUnits_Mapsui_MPoint_System_Single_
+  commentId: M:Mapsui.UI.Android.Extensions.PointExtensions.ToDeviceIndependentUnits(Mapsui.MPoint,System.Single)
+  fullName: Mapsui.UI.Android.Extensions.PointExtensions.ToDeviceIndependentUnits(Mapsui.MPoint, System.Single)
+  nameWithType: PointExtensions.ToDeviceIndependentUnits(MPoint, Single)
+- uid: Mapsui.UI.Android.Extensions.PointExtensions.ToDeviceIndependentUnits*
+  name: ToDeviceIndependentUnits
+  href: api/Mapsui.UI.Android.Extensions.PointExtensions.html#Mapsui_UI_Android_Extensions_PointExtensions_ToDeviceIndependentUnits_
+  commentId: Overload:Mapsui.UI.Android.Extensions.PointExtensions.ToDeviceIndependentUnits
+  isSpec: "True"
+  fullName: Mapsui.UI.Android.Extensions.PointExtensions.ToDeviceIndependentUnits
+  nameWithType: PointExtensions.ToDeviceIndependentUnits
 - uid: Mapsui.UI.Android.MapControl
   name: MapControl
   href: api/Mapsui.UI.Android.MapControl.html
@@ -96,12 +121,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.ForceUpdate
   nameWithType: MapControl.ForceUpdate
-- uid: Mapsui.UI.Android.MapControl.GetMapInfo(Point,System.Int32)
-  name: GetMapInfo(Point, Int32)
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_GetMapInfo_Point_System_Int32_
-  commentId: M:Mapsui.UI.Android.MapControl.GetMapInfo(Point,System.Int32)
-  fullName: Mapsui.UI.Android.MapControl.GetMapInfo(Point, System.Int32)
-  nameWithType: MapControl.GetMapInfo(Point, Int32)
+- uid: Mapsui.UI.Android.MapControl.GetMapInfo(Mapsui.MPoint,System.Int32)
+  name: GetMapInfo(MPoint, Int32)
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_GetMapInfo_Mapsui_MPoint_System_Int32_
+  commentId: M:Mapsui.UI.Android.MapControl.GetMapInfo(Mapsui.MPoint,System.Int32)
+  fullName: Mapsui.UI.Android.MapControl.GetMapInfo(Mapsui.MPoint, System.Int32)
+  nameWithType: MapControl.GetMapInfo(MPoint, Int32)
 - uid: Mapsui.UI.Android.MapControl.GetMapInfo*
   name: GetMapInfo
   href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_GetMapInfo_
@@ -109,13 +134,13 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.GetMapInfo
   nameWithType: MapControl.GetMapInfo
-- uid: Mapsui.UI.Android.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{ILayer})
+- uid: Mapsui.UI.Android.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
   name: GetSnapshot(IEnumerable<ILayer>)
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_GetSnapshot_System_Collections_Generic_IEnumerable_ILayer__
-  commentId: M:Mapsui.UI.Android.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{ILayer})
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
+  commentId: M:Mapsui.UI.Android.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
   name.vb: GetSnapshot(IEnumerable(Of ILayer))
-  fullName: Mapsui.UI.Android.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable<ILayer>)
-  fullName.vb: Mapsui.UI.Android.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable(Of ILayer))
+  fullName: Mapsui.UI.Android.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>)
+  fullName.vb: Mapsui.UI.Android.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer))
   nameWithType: MapControl.GetSnapshot(IEnumerable<ILayer>)
   nameWithType.vb: MapControl.GetSnapshot(IEnumerable(Of ILayer))
 - uid: Mapsui.UI.Android.MapControl.GetSnapshot*
@@ -267,11 +292,11 @@ references:
   commentId: E:Mapsui.UI.Android.MapControl.PropertyChanged
   fullName: Mapsui.UI.Android.MapControl.PropertyChanged
   nameWithType: MapControl.PropertyChanged
-- uid: Mapsui.UI.Android.MapControl.Refresh(ChangeType)
+- uid: Mapsui.UI.Android.MapControl.Refresh(Mapsui.ChangeType)
   name: Refresh(ChangeType)
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Refresh_ChangeType_
-  commentId: M:Mapsui.UI.Android.MapControl.Refresh(ChangeType)
-  fullName: Mapsui.UI.Android.MapControl.Refresh(ChangeType)
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Refresh_Mapsui_ChangeType_
+  commentId: M:Mapsui.UI.Android.MapControl.Refresh(Mapsui.ChangeType)
+  fullName: Mapsui.UI.Android.MapControl.Refresh(Mapsui.ChangeType)
   nameWithType: MapControl.Refresh(ChangeType)
 - uid: Mapsui.UI.Android.MapControl.Refresh*
   name: Refresh
@@ -280,11 +305,11 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.Refresh
   nameWithType: MapControl.Refresh
-- uid: Mapsui.UI.Android.MapControl.RefreshData(ChangeType)
+- uid: Mapsui.UI.Android.MapControl.RefreshData(Mapsui.ChangeType)
   name: RefreshData(ChangeType)
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_RefreshData_ChangeType_
-  commentId: M:Mapsui.UI.Android.MapControl.RefreshData(ChangeType)
-  fullName: Mapsui.UI.Android.MapControl.RefreshData(ChangeType)
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_RefreshData_Mapsui_ChangeType_
+  commentId: M:Mapsui.UI.Android.MapControl.RefreshData(Mapsui.ChangeType)
+  fullName: Mapsui.UI.Android.MapControl.RefreshData(Mapsui.ChangeType)
   nameWithType: MapControl.RefreshData(ChangeType)
 - uid: Mapsui.UI.Android.MapControl.RefreshData*
   name: RefreshData
@@ -371,12 +396,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.StopUpdates
   nameWithType: MapControl.StopUpdates
-- uid: Mapsui.UI.Android.MapControl.ToDeviceIndependentUnits(Point)
-  name: ToDeviceIndependentUnits(Point)
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ToDeviceIndependentUnits_Point_
-  commentId: M:Mapsui.UI.Android.MapControl.ToDeviceIndependentUnits(Point)
-  fullName: Mapsui.UI.Android.MapControl.ToDeviceIndependentUnits(Point)
-  nameWithType: MapControl.ToDeviceIndependentUnits(Point)
+- uid: Mapsui.UI.Android.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+  name: ToDeviceIndependentUnits(MPoint)
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_
+  commentId: M:Mapsui.UI.Android.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+  fullName: Mapsui.UI.Android.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+  nameWithType: MapControl.ToDeviceIndependentUnits(MPoint)
 - uid: Mapsui.UI.Android.MapControl.ToDeviceIndependentUnits*
   name: ToDeviceIndependentUnits
   href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ToDeviceIndependentUnits_
@@ -384,12 +409,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.ToDeviceIndependentUnits
   nameWithType: MapControl.ToDeviceIndependentUnits
-- uid: Mapsui.UI.Android.MapControl.ToPixels(Point)
-  name: ToPixels(Point)
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ToPixels_Point_
-  commentId: M:Mapsui.UI.Android.MapControl.ToPixels(Point)
-  fullName: Mapsui.UI.Android.MapControl.ToPixels(Point)
-  nameWithType: MapControl.ToPixels(Point)
+- uid: Mapsui.UI.Android.MapControl.ToPixels(Mapsui.MPoint)
+  name: ToPixels(MPoint)
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ToPixels_Mapsui_MPoint_
+  commentId: M:Mapsui.UI.Android.MapControl.ToPixels(Mapsui.MPoint)
+  fullName: Mapsui.UI.Android.MapControl.ToPixels(Mapsui.MPoint)
+  nameWithType: MapControl.ToPixels(MPoint)
 - uid: Mapsui.UI.Android.MapControl.ToPixels*
   name: ToPixels
   href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ToPixels_
@@ -455,25 +480,6 @@ references:
   commentId: E:Mapsui.UI.Android.MapControl.ViewportInitialized
   fullName: Mapsui.UI.Android.MapControl.ViewportInitialized
   nameWithType: MapControl.ViewportInitialized
-- uid: Mapsui.UI.Android.PointExtensions
-  name: PointExtensions
-  href: api/Mapsui.UI.Android.PointExtensions.html
-  commentId: T:Mapsui.UI.Android.PointExtensions
-  fullName: Mapsui.UI.Android.PointExtensions
-  nameWithType: PointExtensions
-- uid: Mapsui.UI.Android.PointExtensions.ToDeviceIndependentUnits(Point,System.Single)
-  name: ToDeviceIndependentUnits(Point, Single)
-  href: api/Mapsui.UI.Android.PointExtensions.html#Mapsui_UI_Android_PointExtensions_ToDeviceIndependentUnits_Point_System_Single_
-  commentId: M:Mapsui.UI.Android.PointExtensions.ToDeviceIndependentUnits(Point,System.Single)
-  fullName: Mapsui.UI.Android.PointExtensions.ToDeviceIndependentUnits(Point, System.Single)
-  nameWithType: PointExtensions.ToDeviceIndependentUnits(Point, Single)
-- uid: Mapsui.UI.Android.PointExtensions.ToDeviceIndependentUnits*
-  name: ToDeviceIndependentUnits
-  href: api/Mapsui.UI.Android.PointExtensions.html#Mapsui_UI_Android_PointExtensions_ToDeviceIndependentUnits_
-  commentId: Overload:Mapsui.UI.Android.PointExtensions.ToDeviceIndependentUnits
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.PointExtensions.ToDeviceIndependentUnits
-  nameWithType: PointExtensions.ToDeviceIndependentUnits
 - uid: Mapsui.UI.Android.Resource
   name: Resource
   href: api/Mapsui.UI.Android.Resource.html
@@ -1695,12 +1701,12 @@ references:
   commentId: T:Mapsui.UI.Forms.Extensions.ColorExtensions
   fullName: Mapsui.UI.Forms.Extensions.ColorExtensions
   nameWithType: ColorExtensions
-- uid: Mapsui.UI.Forms.Extensions.ColorExtensions.ToForms(Styles.Color)
-  name: ToForms(Styles.Color)
-  href: api/Mapsui.UI.Forms.Extensions.ColorExtensions.html#Mapsui_UI_Forms_Extensions_ColorExtensions_ToForms_Styles_Color_
-  commentId: M:Mapsui.UI.Forms.Extensions.ColorExtensions.ToForms(Styles.Color)
-  fullName: Mapsui.UI.Forms.Extensions.ColorExtensions.ToForms(Styles.Color)
-  nameWithType: ColorExtensions.ToForms(Styles.Color)
+- uid: Mapsui.UI.Forms.Extensions.ColorExtensions.ToForms(Mapsui.Styles.Color)
+  name: ToForms(Color)
+  href: api/Mapsui.UI.Forms.Extensions.ColorExtensions.html#Mapsui_UI_Forms_Extensions_ColorExtensions_ToForms_Mapsui_Styles_Color_
+  commentId: M:Mapsui.UI.Forms.Extensions.ColorExtensions.ToForms(Mapsui.Styles.Color)
+  fullName: Mapsui.UI.Forms.Extensions.ColorExtensions.ToForms(Mapsui.Styles.Color)
+  nameWithType: ColorExtensions.ToForms(Color)
 - uid: Mapsui.UI.Forms.Extensions.ColorExtensions.ToForms*
   name: ToForms
   href: api/Mapsui.UI.Forms.Extensions.ColorExtensions.html#Mapsui_UI_Forms_Extensions_ColorExtensions_ToForms_
@@ -1727,12 +1733,12 @@ references:
   commentId: T:Mapsui.UI.Forms.Extensions.PositionExtensions
   fullName: Mapsui.UI.Forms.Extensions.PositionExtensions
   nameWithType: PositionExtensions
-- uid: Mapsui.UI.Forms.Extensions.PositionExtensions.ToForms(Geometries.Point)
-  name: ToForms(Geometries.Point)
-  href: api/Mapsui.UI.Forms.Extensions.PositionExtensions.html#Mapsui_UI_Forms_Extensions_PositionExtensions_ToForms_Geometries_Point_
-  commentId: M:Mapsui.UI.Forms.Extensions.PositionExtensions.ToForms(Geometries.Point)
-  fullName: Mapsui.UI.Forms.Extensions.PositionExtensions.ToForms(Geometries.Point)
-  nameWithType: PositionExtensions.ToForms(Geometries.Point)
+- uid: Mapsui.UI.Forms.Extensions.PositionExtensions.ToForms(Mapsui.MPoint)
+  name: ToForms(MPoint)
+  href: api/Mapsui.UI.Forms.Extensions.PositionExtensions.html#Mapsui_UI_Forms_Extensions_PositionExtensions_ToForms_Mapsui_MPoint_
+  commentId: M:Mapsui.UI.Forms.Extensions.PositionExtensions.ToForms(Mapsui.MPoint)
+  fullName: Mapsui.UI.Forms.Extensions.PositionExtensions.ToForms(Mapsui.MPoint)
+  nameWithType: PositionExtensions.ToForms(MPoint)
 - uid: Mapsui.UI.Forms.Extensions.PositionExtensions.ToForms*
   name: ToForms
   href: api/Mapsui.UI.Forms.Extensions.PositionExtensions.html#Mapsui_UI_Forms_Extensions_PositionExtensions_ToForms_
@@ -1771,18 +1777,6 @@ references:
   commentId: M:Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.ToMapsuiResolution(System.Double)
   fullName: Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.ToMapsuiResolution(System.Double)
   nameWithType: ZoomLevelExtensions.ToMapsuiResolution(Double)
-- uid: Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.ToMapsuiResolution(System.Int32)
-  name: ToMapsuiResolution(Int32)
-  href: api/Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.html#Mapsui_UI_Forms_Extensions_ZoomLevelExtensions_ToMapsuiResolution_System_Int32_
-  commentId: M:Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.ToMapsuiResolution(System.Int32)
-  fullName: Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.ToMapsuiResolution(System.Int32)
-  nameWithType: ZoomLevelExtensions.ToMapsuiResolution(Int32)
-- uid: Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.ToMapsuiResolution(System.Single)
-  name: ToMapsuiResolution(Single)
-  href: api/Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.html#Mapsui_UI_Forms_Extensions_ZoomLevelExtensions_ToMapsuiResolution_System_Single_
-  commentId: M:Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.ToMapsuiResolution(System.Single)
-  fullName: Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.ToMapsuiResolution(System.Single)
-  nameWithType: ZoomLevelExtensions.ToMapsuiResolution(Single)
 - uid: Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.ToMapsuiResolution*
   name: ToMapsuiResolution
   href: api/Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.html#Mapsui_UI_Forms_Extensions_ZoomLevelExtensions_ToMapsuiResolution_
@@ -1790,19 +1784,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.ToMapsuiResolution
   nameWithType: ZoomLevelExtensions.ToMapsuiResolution
-- uid: Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.ToZoomLevel(System.Double)
-  name: ToZoomLevel(Double)
-  href: api/Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.html#Mapsui_UI_Forms_Extensions_ZoomLevelExtensions_ToZoomLevel_System_Double_
-  commentId: M:Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.ToZoomLevel(System.Double)
-  fullName: Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.ToZoomLevel(System.Double)
-  nameWithType: ZoomLevelExtensions.ToZoomLevel(Double)
-- uid: Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.ToZoomLevel*
-  name: ToZoomLevel
-  href: api/Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.html#Mapsui_UI_Forms_Extensions_ZoomLevelExtensions_ToZoomLevel_
-  commentId: Overload:Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.ToZoomLevel
-  isSpec: "True"
-  fullName: Mapsui.UI.Forms.Extensions.ZoomLevelExtensions.ToZoomLevel
-  nameWithType: ZoomLevelExtensions.ToZoomLevel
 - uid: Mapsui.UI.Forms.MapClickedEventArgs
   name: MapClickedEventArgs
   href: api/Mapsui.UI.Forms.MapClickedEventArgs.html
@@ -1943,12 +1924,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapControl.ForceUpdate
   nameWithType: MapControl.ForceUpdate
-- uid: Mapsui.UI.Forms.MapControl.GetMapInfo(Point,System.Int32)
-  name: GetMapInfo(Point, Int32)
-  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_GetMapInfo_Point_System_Int32_
-  commentId: M:Mapsui.UI.Forms.MapControl.GetMapInfo(Point,System.Int32)
-  fullName: Mapsui.UI.Forms.MapControl.GetMapInfo(Point, System.Int32)
-  nameWithType: MapControl.GetMapInfo(Point, Int32)
+- uid: Mapsui.UI.Forms.MapControl.GetMapInfo(Mapsui.MPoint,System.Int32)
+  name: GetMapInfo(MPoint, Int32)
+  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_GetMapInfo_Mapsui_MPoint_System_Int32_
+  commentId: M:Mapsui.UI.Forms.MapControl.GetMapInfo(Mapsui.MPoint,System.Int32)
+  fullName: Mapsui.UI.Forms.MapControl.GetMapInfo(Mapsui.MPoint, System.Int32)
+  nameWithType: MapControl.GetMapInfo(MPoint, Int32)
 - uid: Mapsui.UI.Forms.MapControl.GetMapInfo*
   name: GetMapInfo
   href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_GetMapInfo_
@@ -1956,13 +1937,13 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapControl.GetMapInfo
   nameWithType: MapControl.GetMapInfo
-- uid: Mapsui.UI.Forms.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{ILayer})
+- uid: Mapsui.UI.Forms.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
   name: GetSnapshot(IEnumerable<ILayer>)
-  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_GetSnapshot_System_Collections_Generic_IEnumerable_ILayer__
-  commentId: M:Mapsui.UI.Forms.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{ILayer})
+  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
+  commentId: M:Mapsui.UI.Forms.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
   name.vb: GetSnapshot(IEnumerable(Of ILayer))
-  fullName: Mapsui.UI.Forms.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable<ILayer>)
-  fullName.vb: Mapsui.UI.Forms.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable(Of ILayer))
+  fullName: Mapsui.UI.Forms.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>)
+  fullName.vb: Mapsui.UI.Forms.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer))
   nameWithType: MapControl.GetSnapshot(IEnumerable<ILayer>)
   nameWithType.vb: MapControl.GetSnapshot(IEnumerable(Of ILayer))
 - uid: Mapsui.UI.Forms.MapControl.GetSnapshot*
@@ -2074,11 +2055,11 @@ references:
   commentId: E:Mapsui.UI.Forms.MapControl.PropertyChanged
   fullName: Mapsui.UI.Forms.MapControl.PropertyChanged
   nameWithType: MapControl.PropertyChanged
-- uid: Mapsui.UI.Forms.MapControl.Refresh(ChangeType)
+- uid: Mapsui.UI.Forms.MapControl.Refresh(Mapsui.ChangeType)
   name: Refresh(ChangeType)
-  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_Refresh_ChangeType_
-  commentId: M:Mapsui.UI.Forms.MapControl.Refresh(ChangeType)
-  fullName: Mapsui.UI.Forms.MapControl.Refresh(ChangeType)
+  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_Refresh_Mapsui_ChangeType_
+  commentId: M:Mapsui.UI.Forms.MapControl.Refresh(Mapsui.ChangeType)
+  fullName: Mapsui.UI.Forms.MapControl.Refresh(Mapsui.ChangeType)
   nameWithType: MapControl.Refresh(ChangeType)
 - uid: Mapsui.UI.Forms.MapControl.Refresh*
   name: Refresh
@@ -2087,11 +2068,11 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapControl.Refresh
   nameWithType: MapControl.Refresh
-- uid: Mapsui.UI.Forms.MapControl.RefreshData(ChangeType)
+- uid: Mapsui.UI.Forms.MapControl.RefreshData(Mapsui.ChangeType)
   name: RefreshData(ChangeType)
-  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_RefreshData_ChangeType_
-  commentId: M:Mapsui.UI.Forms.MapControl.RefreshData(ChangeType)
-  fullName: Mapsui.UI.Forms.MapControl.RefreshData(ChangeType)
+  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_RefreshData_Mapsui_ChangeType_
+  commentId: M:Mapsui.UI.Forms.MapControl.RefreshData(Mapsui.ChangeType)
+  fullName: Mapsui.UI.Forms.MapControl.RefreshData(Mapsui.ChangeType)
   nameWithType: MapControl.RefreshData(ChangeType)
 - uid: Mapsui.UI.Forms.MapControl.RefreshData*
   name: RefreshData
@@ -2229,12 +2210,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapControl.SymbolCache
   nameWithType: MapControl.SymbolCache
-- uid: Mapsui.UI.Forms.MapControl.ToDeviceIndependentUnits(Point)
-  name: ToDeviceIndependentUnits(Point)
-  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_ToDeviceIndependentUnits_Point_
-  commentId: M:Mapsui.UI.Forms.MapControl.ToDeviceIndependentUnits(Point)
-  fullName: Mapsui.UI.Forms.MapControl.ToDeviceIndependentUnits(Point)
-  nameWithType: MapControl.ToDeviceIndependentUnits(Point)
+- uid: Mapsui.UI.Forms.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+  name: ToDeviceIndependentUnits(MPoint)
+  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_
+  commentId: M:Mapsui.UI.Forms.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+  fullName: Mapsui.UI.Forms.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+  nameWithType: MapControl.ToDeviceIndependentUnits(MPoint)
 - uid: Mapsui.UI.Forms.MapControl.ToDeviceIndependentUnits*
   name: ToDeviceIndependentUnits
   href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_ToDeviceIndependentUnits_
@@ -2242,12 +2223,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapControl.ToDeviceIndependentUnits
   nameWithType: MapControl.ToDeviceIndependentUnits
-- uid: Mapsui.UI.Forms.MapControl.ToPixels(Point)
-  name: ToPixels(Point)
-  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_ToPixels_Point_
-  commentId: M:Mapsui.UI.Forms.MapControl.ToPixels(Point)
-  fullName: Mapsui.UI.Forms.MapControl.ToPixels(Point)
-  nameWithType: MapControl.ToPixels(Point)
+- uid: Mapsui.UI.Forms.MapControl.ToPixels(Mapsui.MPoint)
+  name: ToPixels(MPoint)
+  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_ToPixels_Mapsui_MPoint_
+  commentId: M:Mapsui.UI.Forms.MapControl.ToPixels(Mapsui.MPoint)
+  fullName: Mapsui.UI.Forms.MapControl.ToPixels(Mapsui.MPoint)
+  nameWithType: MapControl.ToPixels(MPoint)
 - uid: Mapsui.UI.Forms.MapControl.ToPixels*
   name: ToPixels
   href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_ToPixels_
@@ -3827,6 +3808,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.Position.ToMapsui
   nameWithType: Position.ToMapsui
+- uid: Mapsui.UI.Forms.Position.ToPoint
+  name: ToPoint()
+  href: api/Mapsui.UI.Forms.Position.html#Mapsui_UI_Forms_Position_ToPoint
+  commentId: M:Mapsui.UI.Forms.Position.ToPoint
+  fullName: Mapsui.UI.Forms.Position.ToPoint()
+  nameWithType: Position.ToPoint()
+- uid: Mapsui.UI.Forms.Position.ToPoint*
+  name: ToPoint
+  href: api/Mapsui.UI.Forms.Position.html#Mapsui_UI_Forms_Position_ToPoint_
+  commentId: Overload:Mapsui.UI.Forms.Position.ToPoint
+  isSpec: "True"
+  fullName: Mapsui.UI.Forms.Position.ToPoint
+  nameWithType: Position.ToPoint
 - uid: Mapsui.UI.Forms.Position.ToString
   name: ToString()
   href: api/Mapsui.UI.Forms.Position.html#Mapsui_UI_Forms_Position_ToString
@@ -3896,12 +3890,12 @@ references:
   commentId: T:Mapsui.UI.HoveredEventArgs
   fullName: Mapsui.UI.HoveredEventArgs
   nameWithType: HoveredEventArgs
-- uid: Mapsui.UI.HoveredEventArgs.#ctor(Geometries.Point)
-  name: HoveredEventArgs(Geometries.Point)
-  href: api/Mapsui.UI.HoveredEventArgs.html#Mapsui_UI_HoveredEventArgs__ctor_Geometries_Point_
-  commentId: M:Mapsui.UI.HoveredEventArgs.#ctor(Geometries.Point)
-  fullName: Mapsui.UI.HoveredEventArgs.HoveredEventArgs(Geometries.Point)
-  nameWithType: HoveredEventArgs.HoveredEventArgs(Geometries.Point)
+- uid: Mapsui.UI.HoveredEventArgs.#ctor(MPoint)
+  name: HoveredEventArgs(MPoint)
+  href: api/Mapsui.UI.HoveredEventArgs.html#Mapsui_UI_HoveredEventArgs__ctor_MPoint_
+  commentId: M:Mapsui.UI.HoveredEventArgs.#ctor(MPoint)
+  fullName: Mapsui.UI.HoveredEventArgs.HoveredEventArgs(MPoint)
+  nameWithType: HoveredEventArgs.HoveredEventArgs(MPoint)
 - uid: Mapsui.UI.HoveredEventArgs.#ctor*
   name: HoveredEventArgs
   href: api/Mapsui.UI.HoveredEventArgs.html#Mapsui_UI_HoveredEventArgs__ctor_
@@ -4037,12 +4031,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.iOS.MapControl.Frame
   nameWithType: MapControl.Frame
-- uid: Mapsui.UI.iOS.MapControl.GetMapInfo(Point,System.Int32)
-  name: GetMapInfo(Point, Int32)
-  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_GetMapInfo_Point_System_Int32_
-  commentId: M:Mapsui.UI.iOS.MapControl.GetMapInfo(Point,System.Int32)
-  fullName: Mapsui.UI.iOS.MapControl.GetMapInfo(Point, System.Int32)
-  nameWithType: MapControl.GetMapInfo(Point, Int32)
+- uid: Mapsui.UI.iOS.MapControl.GetMapInfo(Mapsui.MPoint,System.Int32)
+  name: GetMapInfo(MPoint, Int32)
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_GetMapInfo_Mapsui_MPoint_System_Int32_
+  commentId: M:Mapsui.UI.iOS.MapControl.GetMapInfo(Mapsui.MPoint,System.Int32)
+  fullName: Mapsui.UI.iOS.MapControl.GetMapInfo(Mapsui.MPoint, System.Int32)
+  nameWithType: MapControl.GetMapInfo(MPoint, Int32)
 - uid: Mapsui.UI.iOS.MapControl.GetMapInfo*
   name: GetMapInfo
   href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_GetMapInfo_
@@ -4050,13 +4044,13 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.iOS.MapControl.GetMapInfo
   nameWithType: MapControl.GetMapInfo
-- uid: Mapsui.UI.iOS.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{ILayer})
+- uid: Mapsui.UI.iOS.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
   name: GetSnapshot(IEnumerable<ILayer>)
-  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_GetSnapshot_System_Collections_Generic_IEnumerable_ILayer__
-  commentId: M:Mapsui.UI.iOS.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{ILayer})
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
+  commentId: M:Mapsui.UI.iOS.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
   name.vb: GetSnapshot(IEnumerable(Of ILayer))
-  fullName: Mapsui.UI.iOS.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable<ILayer>)
-  fullName.vb: Mapsui.UI.iOS.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable(Of ILayer))
+  fullName: Mapsui.UI.iOS.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>)
+  fullName.vb: Mapsui.UI.iOS.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer))
   nameWithType: MapControl.GetSnapshot(IEnumerable<ILayer>)
   nameWithType.vb: MapControl.GetSnapshot(IEnumerable(Of ILayer))
 - uid: Mapsui.UI.iOS.MapControl.GetSnapshot*
@@ -4169,11 +4163,11 @@ references:
   commentId: E:Mapsui.UI.iOS.MapControl.PropertyChanged
   fullName: Mapsui.UI.iOS.MapControl.PropertyChanged
   nameWithType: MapControl.PropertyChanged
-- uid: Mapsui.UI.iOS.MapControl.Refresh(ChangeType)
+- uid: Mapsui.UI.iOS.MapControl.Refresh(Mapsui.ChangeType)
   name: Refresh(ChangeType)
-  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_Refresh_ChangeType_
-  commentId: M:Mapsui.UI.iOS.MapControl.Refresh(ChangeType)
-  fullName: Mapsui.UI.iOS.MapControl.Refresh(ChangeType)
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_Refresh_Mapsui_ChangeType_
+  commentId: M:Mapsui.UI.iOS.MapControl.Refresh(Mapsui.ChangeType)
+  fullName: Mapsui.UI.iOS.MapControl.Refresh(Mapsui.ChangeType)
   nameWithType: MapControl.Refresh(ChangeType)
 - uid: Mapsui.UI.iOS.MapControl.Refresh*
   name: Refresh
@@ -4182,11 +4176,11 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.iOS.MapControl.Refresh
   nameWithType: MapControl.Refresh
-- uid: Mapsui.UI.iOS.MapControl.RefreshData(ChangeType)
+- uid: Mapsui.UI.iOS.MapControl.RefreshData(Mapsui.ChangeType)
   name: RefreshData(ChangeType)
-  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_RefreshData_ChangeType_
-  commentId: M:Mapsui.UI.iOS.MapControl.RefreshData(ChangeType)
-  fullName: Mapsui.UI.iOS.MapControl.RefreshData(ChangeType)
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_RefreshData_Mapsui_ChangeType_
+  commentId: M:Mapsui.UI.iOS.MapControl.RefreshData(Mapsui.ChangeType)
+  fullName: Mapsui.UI.iOS.MapControl.RefreshData(Mapsui.ChangeType)
   nameWithType: MapControl.RefreshData(ChangeType)
 - uid: Mapsui.UI.iOS.MapControl.RefreshData*
   name: RefreshData
@@ -4260,12 +4254,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.iOS.MapControl.StopUpdates
   nameWithType: MapControl.StopUpdates
-- uid: Mapsui.UI.iOS.MapControl.ToDeviceIndependentUnits(Point)
-  name: ToDeviceIndependentUnits(Point)
-  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_ToDeviceIndependentUnits_Point_
-  commentId: M:Mapsui.UI.iOS.MapControl.ToDeviceIndependentUnits(Point)
-  fullName: Mapsui.UI.iOS.MapControl.ToDeviceIndependentUnits(Point)
-  nameWithType: MapControl.ToDeviceIndependentUnits(Point)
+- uid: Mapsui.UI.iOS.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+  name: ToDeviceIndependentUnits(MPoint)
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_
+  commentId: M:Mapsui.UI.iOS.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+  fullName: Mapsui.UI.iOS.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+  nameWithType: MapControl.ToDeviceIndependentUnits(MPoint)
 - uid: Mapsui.UI.iOS.MapControl.ToDeviceIndependentUnits*
   name: ToDeviceIndependentUnits
   href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_ToDeviceIndependentUnits_
@@ -4273,12 +4267,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.iOS.MapControl.ToDeviceIndependentUnits
   nameWithType: MapControl.ToDeviceIndependentUnits
-- uid: Mapsui.UI.iOS.MapControl.ToPixels(Point)
-  name: ToPixels(Point)
-  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_ToPixels_Point_
-  commentId: M:Mapsui.UI.iOS.MapControl.ToPixels(Point)
-  fullName: Mapsui.UI.iOS.MapControl.ToPixels(Point)
-  nameWithType: MapControl.ToPixels(Point)
+- uid: Mapsui.UI.iOS.MapControl.ToPixels(Mapsui.MPoint)
+  name: ToPixels(MPoint)
+  href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_ToPixels_Mapsui_MPoint_
+  commentId: M:Mapsui.UI.iOS.MapControl.ToPixels(Mapsui.MPoint)
+  fullName: Mapsui.UI.iOS.MapControl.ToPixels(Mapsui.MPoint)
+  nameWithType: MapControl.ToPixels(MPoint)
 - uid: Mapsui.UI.iOS.MapControl.ToPixels*
   name: ToPixels
   href: api/Mapsui.UI.iOS.MapControl.html#Mapsui_UI_iOS_MapControl_ToPixels_
@@ -4735,100 +4729,100 @@ references:
   fullName: Mapsui.UI.Objects.MyLocationLayer.ViewingDirection
   nameWithType: MyLocationLayer.ViewingDirection
 - uid: Mapsui.UI.Objects.ObservableCollectionProvider`2
-  name: ObservableCollectionProvider<T, U>
+  name: ObservableCollectionProvider<T, TU>
   href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html
   commentId: T:Mapsui.UI.Objects.ObservableCollectionProvider`2
-  name.vb: ObservableCollectionProvider(Of T, U)
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, U>
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, U)
-  nameWithType: ObservableCollectionProvider<T, U>
-  nameWithType.vb: ObservableCollectionProvider(Of T, U)
+  name.vb: ObservableCollectionProvider(Of T, TU)
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, TU>
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, TU)
+  nameWithType: ObservableCollectionProvider<T, TU>
+  nameWithType.vb: ObservableCollectionProvider(Of T, TU)
 - uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.#ctor(System.Collections.ObjectModel.ObservableCollection{`0})
   name: ObservableCollectionProvider(ObservableCollection<T>)
   href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2__ctor_System_Collections_ObjectModel_ObservableCollection__0__
   commentId: M:Mapsui.UI.Objects.ObservableCollectionProvider`2.#ctor(System.Collections.ObjectModel.ObservableCollection{`0})
   name.vb: ObservableCollectionProvider(ObservableCollection(Of T))
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, U>.ObservableCollectionProvider(System.Collections.ObjectModel.ObservableCollection<T>)
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, U).ObservableCollectionProvider(System.Collections.ObjectModel.ObservableCollection(Of T))
-  nameWithType: ObservableCollectionProvider<T, U>.ObservableCollectionProvider(ObservableCollection<T>)
-  nameWithType.vb: ObservableCollectionProvider(Of T, U).ObservableCollectionProvider(ObservableCollection(Of T))
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, TU>.ObservableCollectionProvider(System.Collections.ObjectModel.ObservableCollection<T>)
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, TU).ObservableCollectionProvider(System.Collections.ObjectModel.ObservableCollection(Of T))
+  nameWithType: ObservableCollectionProvider<T, TU>.ObservableCollectionProvider(ObservableCollection<T>)
+  nameWithType.vb: ObservableCollectionProvider(Of T, TU).ObservableCollectionProvider(ObservableCollection(Of T))
 - uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.#ctor*
   name: ObservableCollectionProvider
   href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2__ctor_
   commentId: Overload:Mapsui.UI.Objects.ObservableCollectionProvider`2.#ctor
   isSpec: "True"
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, U>.ObservableCollectionProvider
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, U).ObservableCollectionProvider
-  nameWithType: ObservableCollectionProvider<T, U>.ObservableCollectionProvider
-  nameWithType.vb: ObservableCollectionProvider(Of T, U).ObservableCollectionProvider
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, TU>.ObservableCollectionProvider
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, TU).ObservableCollectionProvider
+  nameWithType: ObservableCollectionProvider<T, TU>.ObservableCollectionProvider
+  nameWithType.vb: ObservableCollectionProvider(Of T, TU).ObservableCollectionProvider
 - uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.Collection
   name: Collection
   href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2_Collection
   commentId: P:Mapsui.UI.Objects.ObservableCollectionProvider`2.Collection
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, U>.Collection
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, U).Collection
-  nameWithType: ObservableCollectionProvider<T, U>.Collection
-  nameWithType.vb: ObservableCollectionProvider(Of T, U).Collection
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, TU>.Collection
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, TU).Collection
+  nameWithType: ObservableCollectionProvider<T, TU>.Collection
+  nameWithType.vb: ObservableCollectionProvider(Of T, TU).Collection
 - uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.Collection*
   name: Collection
   href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2_Collection_
   commentId: Overload:Mapsui.UI.Objects.ObservableCollectionProvider`2.Collection
   isSpec: "True"
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, U>.Collection
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, U).Collection
-  nameWithType: ObservableCollectionProvider<T, U>.Collection
-  nameWithType.vb: ObservableCollectionProvider(Of T, U).Collection
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, TU>.Collection
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, TU).Collection
+  nameWithType: ObservableCollectionProvider<T, TU>.Collection
+  nameWithType.vb: ObservableCollectionProvider(Of T, TU).Collection
 - uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.CRS
   name: CRS
   href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2_CRS
   commentId: P:Mapsui.UI.Objects.ObservableCollectionProvider`2.CRS
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, U>.CRS
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, U).CRS
-  nameWithType: ObservableCollectionProvider<T, U>.CRS
-  nameWithType.vb: ObservableCollectionProvider(Of T, U).CRS
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, TU>.CRS
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, TU).CRS
+  nameWithType: ObservableCollectionProvider<T, TU>.CRS
+  nameWithType.vb: ObservableCollectionProvider(Of T, TU).CRS
 - uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.CRS*
   name: CRS
   href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2_CRS_
   commentId: Overload:Mapsui.UI.Objects.ObservableCollectionProvider`2.CRS
   isSpec: "True"
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, U>.CRS
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, U).CRS
-  nameWithType: ObservableCollectionProvider<T, U>.CRS
-  nameWithType.vb: ObservableCollectionProvider(Of T, U).CRS
-- uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.GetExtents
-  name: GetExtents()
-  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2_GetExtents
-  commentId: M:Mapsui.UI.Objects.ObservableCollectionProvider`2.GetExtents
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, U>.GetExtents()
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, U).GetExtents()
-  nameWithType: ObservableCollectionProvider<T, U>.GetExtents()
-  nameWithType.vb: ObservableCollectionProvider(Of T, U).GetExtents()
-- uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.GetExtents*
-  name: GetExtents
-  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2_GetExtents_
-  commentId: Overload:Mapsui.UI.Objects.ObservableCollectionProvider`2.GetExtents
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, TU>.CRS
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, TU).CRS
+  nameWithType: ObservableCollectionProvider<T, TU>.CRS
+  nameWithType.vb: ObservableCollectionProvider(Of T, TU).CRS
+- uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.GetExtent
+  name: GetExtent()
+  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2_GetExtent
+  commentId: M:Mapsui.UI.Objects.ObservableCollectionProvider`2.GetExtent
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, TU>.GetExtent()
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, TU).GetExtent()
+  nameWithType: ObservableCollectionProvider<T, TU>.GetExtent()
+  nameWithType.vb: ObservableCollectionProvider(Of T, TU).GetExtent()
+- uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.GetExtent*
+  name: GetExtent
+  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2_GetExtent_
+  commentId: Overload:Mapsui.UI.Objects.ObservableCollectionProvider`2.GetExtent
   isSpec: "True"
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, U>.GetExtents
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, U).GetExtents
-  nameWithType: ObservableCollectionProvider<T, U>.GetExtents
-  nameWithType.vb: ObservableCollectionProvider(Of T, U).GetExtents
-- uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.GetFeaturesInView(BoundingBox,System.Double)
-  name: GetFeaturesInView(BoundingBox, Double)
-  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2_GetFeaturesInView_BoundingBox_System_Double_
-  commentId: M:Mapsui.UI.Objects.ObservableCollectionProvider`2.GetFeaturesInView(BoundingBox,System.Double)
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, U>.GetFeaturesInView(BoundingBox, System.Double)
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, U).GetFeaturesInView(BoundingBox, System.Double)
-  nameWithType: ObservableCollectionProvider<T, U>.GetFeaturesInView(BoundingBox, Double)
-  nameWithType.vb: ObservableCollectionProvider(Of T, U).GetFeaturesInView(BoundingBox, Double)
-- uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.GetFeaturesInView*
-  name: GetFeaturesInView
-  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2_GetFeaturesInView_
-  commentId: Overload:Mapsui.UI.Objects.ObservableCollectionProvider`2.GetFeaturesInView
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, TU>.GetExtent
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, TU).GetExtent
+  nameWithType: ObservableCollectionProvider<T, TU>.GetExtent
+  nameWithType.vb: ObservableCollectionProvider(Of T, TU).GetExtent
+- uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.GetFeatures(Mapsui.Layers.FetchInfo)
+  name: GetFeatures(FetchInfo)
+  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2_GetFeatures_Mapsui_Layers_FetchInfo_
+  commentId: M:Mapsui.UI.Objects.ObservableCollectionProvider`2.GetFeatures(Mapsui.Layers.FetchInfo)
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, TU>.GetFeatures(Mapsui.Layers.FetchInfo)
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, TU).GetFeatures(Mapsui.Layers.FetchInfo)
+  nameWithType: ObservableCollectionProvider<T, TU>.GetFeatures(FetchInfo)
+  nameWithType.vb: ObservableCollectionProvider(Of T, TU).GetFeatures(FetchInfo)
+- uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.GetFeatures*
+  name: GetFeatures
+  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2_GetFeatures_
+  commentId: Overload:Mapsui.UI.Objects.ObservableCollectionProvider`2.GetFeatures
   isSpec: "True"
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, U>.GetFeaturesInView
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, U).GetFeaturesInView
-  nameWithType: ObservableCollectionProvider<T, U>.GetFeaturesInView
-  nameWithType.vb: ObservableCollectionProvider(Of T, U).GetFeaturesInView
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, TU>.GetFeatures
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, TU).GetFeatures
+  nameWithType: ObservableCollectionProvider<T, TU>.GetFeatures
+  nameWithType.vb: ObservableCollectionProvider(Of T, TU).GetFeatures
 - uid: Mapsui.UI.SwipedEventArgs
   name: SwipedEventArgs
   href: api/Mapsui.UI.SwipedEventArgs.html
@@ -4893,12 +4887,12 @@ references:
   commentId: T:Mapsui.UI.TappedEventArgs
   fullName: Mapsui.UI.TappedEventArgs
   nameWithType: TappedEventArgs
-- uid: Mapsui.UI.TappedEventArgs.#ctor(Geometries.Point,System.Int32)
-  name: TappedEventArgs(Geometries.Point, Int32)
-  href: api/Mapsui.UI.TappedEventArgs.html#Mapsui_UI_TappedEventArgs__ctor_Geometries_Point_System_Int32_
-  commentId: M:Mapsui.UI.TappedEventArgs.#ctor(Geometries.Point,System.Int32)
-  fullName: Mapsui.UI.TappedEventArgs.TappedEventArgs(Geometries.Point, System.Int32)
-  nameWithType: TappedEventArgs.TappedEventArgs(Geometries.Point, Int32)
+- uid: Mapsui.UI.TappedEventArgs.#ctor(MPoint,System.Int32)
+  name: TappedEventArgs(MPoint, Int32)
+  href: api/Mapsui.UI.TappedEventArgs.html#Mapsui_UI_TappedEventArgs__ctor_MPoint_System_Int32_
+  commentId: M:Mapsui.UI.TappedEventArgs.#ctor(MPoint,System.Int32)
+  fullName: Mapsui.UI.TappedEventArgs.TappedEventArgs(MPoint, System.Int32)
+  nameWithType: TappedEventArgs.TappedEventArgs(MPoint, Int32)
 - uid: Mapsui.UI.TappedEventArgs.#ctor*
   name: TappedEventArgs
   href: api/Mapsui.UI.TappedEventArgs.html#Mapsui_UI_TappedEventArgs__ctor_
@@ -4951,15 +4945,15 @@ references:
   commentId: T:Mapsui.UI.TouchedEventArgs
   fullName: Mapsui.UI.TouchedEventArgs
   nameWithType: TouchedEventArgs
-- uid: Mapsui.UI.TouchedEventArgs.#ctor(List{Geometries.Point})
-  name: TouchedEventArgs(List<Geometries.Point>)
-  href: api/Mapsui.UI.TouchedEventArgs.html#Mapsui_UI_TouchedEventArgs__ctor_List_Geometries_Point__
-  commentId: M:Mapsui.UI.TouchedEventArgs.#ctor(List{Geometries.Point})
-  name.vb: TouchedEventArgs(List(Of Geometries.Point))
-  fullName: Mapsui.UI.TouchedEventArgs.TouchedEventArgs(List<Geometries.Point>)
-  fullName.vb: Mapsui.UI.TouchedEventArgs.TouchedEventArgs(List(Of Geometries.Point))
-  nameWithType: TouchedEventArgs.TouchedEventArgs(List<Geometries.Point>)
-  nameWithType.vb: TouchedEventArgs.TouchedEventArgs(List(Of Geometries.Point))
+- uid: Mapsui.UI.TouchedEventArgs.#ctor(List{MPoint})
+  name: TouchedEventArgs(List<MPoint>)
+  href: api/Mapsui.UI.TouchedEventArgs.html#Mapsui_UI_TouchedEventArgs__ctor_List_MPoint__
+  commentId: M:Mapsui.UI.TouchedEventArgs.#ctor(List{MPoint})
+  name.vb: TouchedEventArgs(List(Of MPoint))
+  fullName: Mapsui.UI.TouchedEventArgs.TouchedEventArgs(List<MPoint>)
+  fullName.vb: Mapsui.UI.TouchedEventArgs.TouchedEventArgs(List(Of MPoint))
+  nameWithType: TouchedEventArgs.TouchedEventArgs(List<MPoint>)
+  nameWithType.vb: TouchedEventArgs.TouchedEventArgs(List(Of MPoint))
 - uid: Mapsui.UI.TouchedEventArgs.#ctor*
   name: TouchedEventArgs
   href: api/Mapsui.UI.TouchedEventArgs.html#Mapsui_UI_TouchedEventArgs__ctor_
@@ -5042,12 +5036,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Utils.FlingTracker.FlingTracker
   nameWithType: FlingTracker.FlingTracker
-- uid: Mapsui.UI.Utils.FlingTracker.AddEvent(System.Int64,Geometries.Point,System.Int64)
-  name: AddEvent(Int64, Geometries.Point, Int64)
-  href: api/Mapsui.UI.Utils.FlingTracker.html#Mapsui_UI_Utils_FlingTracker_AddEvent_System_Int64_Geometries_Point_System_Int64_
-  commentId: M:Mapsui.UI.Utils.FlingTracker.AddEvent(System.Int64,Geometries.Point,System.Int64)
-  fullName: Mapsui.UI.Utils.FlingTracker.AddEvent(System.Int64, Geometries.Point, System.Int64)
-  nameWithType: FlingTracker.AddEvent(Int64, Geometries.Point, Int64)
+- uid: Mapsui.UI.Utils.FlingTracker.AddEvent(System.Int64,MPoint,System.Int64)
+  name: AddEvent(Int64, MPoint, Int64)
+  href: api/Mapsui.UI.Utils.FlingTracker.html#Mapsui_UI_Utils_FlingTracker_AddEvent_System_Int64_MPoint_System_Int64_
+  commentId: M:Mapsui.UI.Utils.FlingTracker.AddEvent(System.Int64,MPoint,System.Int64)
+  fullName: Mapsui.UI.Utils.FlingTracker.AddEvent(System.Int64, MPoint, System.Int64)
+  nameWithType: FlingTracker.AddEvent(Int64, MPoint, Int64)
 - uid: Mapsui.UI.Utils.FlingTracker.AddEvent*
   name: AddEvent
   href: api/Mapsui.UI.Utils.FlingTracker.html#Mapsui_UI_Utils_FlingTracker_AddEvent_
@@ -5100,6 +5094,31 @@ references:
   commentId: N:Mapsui.UI.Wpf
   fullName: Mapsui.UI.Wpf
   nameWithType: Mapsui.UI.Wpf
+- uid: Mapsui.UI.Wpf.Extensions
+  name: Mapsui.UI.Wpf.Extensions
+  href: api/Mapsui.UI.Wpf.Extensions.html
+  commentId: N:Mapsui.UI.Wpf.Extensions
+  fullName: Mapsui.UI.Wpf.Extensions
+  nameWithType: Mapsui.UI.Wpf.Extensions
+- uid: Mapsui.UI.Wpf.Extensions.WindowsPointExtensions
+  name: WindowsPointExtensions
+  href: api/Mapsui.UI.Wpf.Extensions.WindowsPointExtensions.html
+  commentId: T:Mapsui.UI.Wpf.Extensions.WindowsPointExtensions
+  fullName: Mapsui.UI.Wpf.Extensions.WindowsPointExtensions
+  nameWithType: WindowsPointExtensions
+- uid: Mapsui.UI.Wpf.Extensions.WindowsPointExtensions.ToMapsui(Point)
+  name: ToMapsui(Point)
+  href: api/Mapsui.UI.Wpf.Extensions.WindowsPointExtensions.html#Mapsui_UI_Wpf_Extensions_WindowsPointExtensions_ToMapsui_Point_
+  commentId: M:Mapsui.UI.Wpf.Extensions.WindowsPointExtensions.ToMapsui(Point)
+  fullName: Mapsui.UI.Wpf.Extensions.WindowsPointExtensions.ToMapsui(Point)
+  nameWithType: WindowsPointExtensions.ToMapsui(Point)
+- uid: Mapsui.UI.Wpf.Extensions.WindowsPointExtensions.ToMapsui*
+  name: ToMapsui
+  href: api/Mapsui.UI.Wpf.Extensions.WindowsPointExtensions.html#Mapsui_UI_Wpf_Extensions_WindowsPointExtensions_ToMapsui_
+  commentId: Overload:Mapsui.UI.Wpf.Extensions.WindowsPointExtensions.ToMapsui
+  isSpec: "True"
+  fullName: Mapsui.UI.Wpf.Extensions.WindowsPointExtensions.ToMapsui
+  nameWithType: WindowsPointExtensions.ToMapsui
 - uid: Mapsui.UI.Wpf.MapControl
   name: MapControl
   href: api/Mapsui.UI.Wpf.MapControl.html
@@ -5170,12 +5189,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.ForceUpdate
   nameWithType: MapControl.ForceUpdate
-- uid: Mapsui.UI.Wpf.MapControl.GetMapInfo(Point,System.Int32)
-  name: GetMapInfo(Point, Int32)
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_GetMapInfo_Point_System_Int32_
-  commentId: M:Mapsui.UI.Wpf.MapControl.GetMapInfo(Point,System.Int32)
-  fullName: Mapsui.UI.Wpf.MapControl.GetMapInfo(Point, System.Int32)
-  nameWithType: MapControl.GetMapInfo(Point, Int32)
+- uid: Mapsui.UI.Wpf.MapControl.GetMapInfo(MPoint,System.Int32)
+  name: GetMapInfo(MPoint, Int32)
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_GetMapInfo_MPoint_System_Int32_
+  commentId: M:Mapsui.UI.Wpf.MapControl.GetMapInfo(MPoint,System.Int32)
+  fullName: Mapsui.UI.Wpf.MapControl.GetMapInfo(MPoint, System.Int32)
+  nameWithType: MapControl.GetMapInfo(MPoint, Int32)
 - uid: Mapsui.UI.Wpf.MapControl.GetMapInfo*
   name: GetMapInfo
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_GetMapInfo_
@@ -5183,15 +5202,15 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.GetMapInfo
   nameWithType: MapControl.GetMapInfo
-- uid: Mapsui.UI.Wpf.MapControl.GetSnapshot(IEnumerable{ILayer})
-  name: GetSnapshot(IEnumerable<ILayer>)
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_GetSnapshot_IEnumerable_ILayer__
-  commentId: M:Mapsui.UI.Wpf.MapControl.GetSnapshot(IEnumerable{ILayer})
-  name.vb: GetSnapshot(IEnumerable(Of ILayer))
-  fullName: Mapsui.UI.Wpf.MapControl.GetSnapshot(IEnumerable<ILayer>)
-  fullName.vb: Mapsui.UI.Wpf.MapControl.GetSnapshot(IEnumerable(Of ILayer))
-  nameWithType: MapControl.GetSnapshot(IEnumerable<ILayer>)
-  nameWithType.vb: MapControl.GetSnapshot(IEnumerable(Of ILayer))
+- uid: Mapsui.UI.Wpf.MapControl.GetSnapshot(System.Nullable{IEnumerable{ILayer}})
+  name: GetSnapshot(Nullable<IEnumerable<ILayer>>)
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_GetSnapshot_System_Nullable_IEnumerable_ILayer___
+  commentId: M:Mapsui.UI.Wpf.MapControl.GetSnapshot(System.Nullable{IEnumerable{ILayer}})
+  name.vb: GetSnapshot(Nullable(Of IEnumerable(Of ILayer)))
+  fullName: Mapsui.UI.Wpf.MapControl.GetSnapshot(System.Nullable<IEnumerable<ILayer>>)
+  fullName.vb: Mapsui.UI.Wpf.MapControl.GetSnapshot(System.Nullable(Of IEnumerable(Of ILayer)))
+  nameWithType: MapControl.GetSnapshot(Nullable<IEnumerable<ILayer>>)
+  nameWithType.vb: MapControl.GetSnapshot(Nullable(Of IEnumerable(Of ILayer)))
 - uid: Mapsui.UI.Wpf.MapControl.GetSnapshot*
   name: GetSnapshot
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_GetSnapshot_
@@ -5393,12 +5412,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.StopUpdates
   nameWithType: MapControl.StopUpdates
-- uid: Mapsui.UI.Wpf.MapControl.ToDeviceIndependentUnits(Point)
-  name: ToDeviceIndependentUnits(Point)
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ToDeviceIndependentUnits_Point_
-  commentId: M:Mapsui.UI.Wpf.MapControl.ToDeviceIndependentUnits(Point)
-  fullName: Mapsui.UI.Wpf.MapControl.ToDeviceIndependentUnits(Point)
-  nameWithType: MapControl.ToDeviceIndependentUnits(Point)
+- uid: Mapsui.UI.Wpf.MapControl.ToDeviceIndependentUnits(MPoint)
+  name: ToDeviceIndependentUnits(MPoint)
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ToDeviceIndependentUnits_MPoint_
+  commentId: M:Mapsui.UI.Wpf.MapControl.ToDeviceIndependentUnits(MPoint)
+  fullName: Mapsui.UI.Wpf.MapControl.ToDeviceIndependentUnits(MPoint)
+  nameWithType: MapControl.ToDeviceIndependentUnits(MPoint)
 - uid: Mapsui.UI.Wpf.MapControl.ToDeviceIndependentUnits*
   name: ToDeviceIndependentUnits
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ToDeviceIndependentUnits_
@@ -5406,12 +5425,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.ToDeviceIndependentUnits
   nameWithType: MapControl.ToDeviceIndependentUnits
-- uid: Mapsui.UI.Wpf.MapControl.ToPixels(Point)
-  name: ToPixels(Point)
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ToPixels_Point_
-  commentId: M:Mapsui.UI.Wpf.MapControl.ToPixels(Point)
-  fullName: Mapsui.UI.Wpf.MapControl.ToPixels(Point)
-  nameWithType: MapControl.ToPixels(Point)
+- uid: Mapsui.UI.Wpf.MapControl.ToPixels(MPoint)
+  name: ToPixels(MPoint)
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ToPixels_MPoint_
+  commentId: M:Mapsui.UI.Wpf.MapControl.ToPixels(MPoint)
+  fullName: Mapsui.UI.Wpf.MapControl.ToPixels(MPoint)
+  nameWithType: MapControl.ToPixels(MPoint)
 - uid: Mapsui.UI.Wpf.MapControl.ToPixels*
   name: ToPixels
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ToPixels_
@@ -5490,12 +5509,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.WpfCanvas
   nameWithType: MapControl.WpfCanvas
-- uid: Mapsui.UI.Wpf.MapControl.ZoomToBox(Geometries.Point,Geometries.Point)
-  name: ZoomToBox(Geometries.Point, Geometries.Point)
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ZoomToBox_Geometries_Point_Geometries_Point_
-  commentId: M:Mapsui.UI.Wpf.MapControl.ZoomToBox(Geometries.Point,Geometries.Point)
-  fullName: Mapsui.UI.Wpf.MapControl.ZoomToBox(Geometries.Point, Geometries.Point)
-  nameWithType: MapControl.ZoomToBox(Geometries.Point, Geometries.Point)
+- uid: Mapsui.UI.Wpf.MapControl.ZoomToBox(MPoint,MPoint)
+  name: ZoomToBox(MPoint, MPoint)
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ZoomToBox_MPoint_MPoint_
+  commentId: M:Mapsui.UI.Wpf.MapControl.ZoomToBox(MPoint,MPoint)
+  fullName: Mapsui.UI.Wpf.MapControl.ZoomToBox(MPoint, MPoint)
+  nameWithType: MapControl.ZoomToBox(MPoint, MPoint)
 - uid: Mapsui.UI.Wpf.MapControl.ZoomToBox*
   name: ZoomToBox
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_ZoomToBox_
@@ -5503,63 +5522,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.ZoomToBox
   nameWithType: MapControl.ZoomToBox
-- uid: Mapsui.UI.Wpf.MouseButtonEventArgsExtensions
-  name: MouseButtonEventArgsExtensions
-  href: api/Mapsui.UI.Wpf.MouseButtonEventArgsExtensions.html
-  commentId: T:Mapsui.UI.Wpf.MouseButtonEventArgsExtensions
-  fullName: Mapsui.UI.Wpf.MouseButtonEventArgsExtensions
-  nameWithType: MouseButtonEventArgsExtensions
-- uid: Mapsui.UI.Wpf.MouseButtonEventArgsExtensions.GetMapInfo(MouseButtonEventArgs,Mapsui.UI.Wpf.MapControl)
-  name: GetMapInfo(MouseButtonEventArgs, MapControl)
-  href: api/Mapsui.UI.Wpf.MouseButtonEventArgsExtensions.html#Mapsui_UI_Wpf_MouseButtonEventArgsExtensions_GetMapInfo_MouseButtonEventArgs_Mapsui_UI_Wpf_MapControl_
-  commentId: M:Mapsui.UI.Wpf.MouseButtonEventArgsExtensions.GetMapInfo(MouseButtonEventArgs,Mapsui.UI.Wpf.MapControl)
-  fullName: Mapsui.UI.Wpf.MouseButtonEventArgsExtensions.GetMapInfo(MouseButtonEventArgs, Mapsui.UI.Wpf.MapControl)
-  nameWithType: MouseButtonEventArgsExtensions.GetMapInfo(MouseButtonEventArgs, MapControl)
-- uid: Mapsui.UI.Wpf.MouseButtonEventArgsExtensions.GetMapInfo*
-  name: GetMapInfo
-  href: api/Mapsui.UI.Wpf.MouseButtonEventArgsExtensions.html#Mapsui_UI_Wpf_MouseButtonEventArgsExtensions_GetMapInfo_
-  commentId: Overload:Mapsui.UI.Wpf.MouseButtonEventArgsExtensions.GetMapInfo
-  isSpec: "True"
-  fullName: Mapsui.UI.Wpf.MouseButtonEventArgsExtensions.GetMapInfo
-  nameWithType: MouseButtonEventArgsExtensions.GetMapInfo
-- uid: Mapsui.UI.Wpf.PointExtensions
-  name: PointExtensions
-  href: api/Mapsui.UI.Wpf.PointExtensions.html
-  commentId: T:Mapsui.UI.Wpf.PointExtensions
-  fullName: Mapsui.UI.Wpf.PointExtensions
-  nameWithType: PointExtensions
-- uid: Mapsui.UI.Wpf.PointExtensions.ApplyScale(Point,System.Double)
-  name: ApplyScale(Point, Double)
-  href: api/Mapsui.UI.Wpf.PointExtensions.html#Mapsui_UI_Wpf_PointExtensions_ApplyScale_Point_System_Double_
-  commentId: M:Mapsui.UI.Wpf.PointExtensions.ApplyScale(Point,System.Double)
-  fullName: Mapsui.UI.Wpf.PointExtensions.ApplyScale(Point, System.Double)
-  nameWithType: PointExtensions.ApplyScale(Point, Double)
-- uid: Mapsui.UI.Wpf.PointExtensions.ApplyScale*
-  name: ApplyScale
-  href: api/Mapsui.UI.Wpf.PointExtensions.html#Mapsui_UI_Wpf_PointExtensions_ApplyScale_
-  commentId: Overload:Mapsui.UI.Wpf.PointExtensions.ApplyScale
-  isSpec: "True"
-  fullName: Mapsui.UI.Wpf.PointExtensions.ApplyScale
-  nameWithType: PointExtensions.ApplyScale
-- uid: Mapsui.UI.Wpf.WindowsPointExtensions
-  name: WindowsPointExtensions
-  href: api/Mapsui.UI.Wpf.WindowsPointExtensions.html
-  commentId: T:Mapsui.UI.Wpf.WindowsPointExtensions
-  fullName: Mapsui.UI.Wpf.WindowsPointExtensions
-  nameWithType: WindowsPointExtensions
-- uid: Mapsui.UI.Wpf.WindowsPointExtensions.ToMapsui(Point)
-  name: ToMapsui(Point)
-  href: api/Mapsui.UI.Wpf.WindowsPointExtensions.html#Mapsui_UI_Wpf_WindowsPointExtensions_ToMapsui_Point_
-  commentId: M:Mapsui.UI.Wpf.WindowsPointExtensions.ToMapsui(Point)
-  fullName: Mapsui.UI.Wpf.WindowsPointExtensions.ToMapsui(Point)
-  nameWithType: WindowsPointExtensions.ToMapsui(Point)
-- uid: Mapsui.UI.Wpf.WindowsPointExtensions.ToMapsui*
-  name: ToMapsui
-  href: api/Mapsui.UI.Wpf.WindowsPointExtensions.html#Mapsui_UI_Wpf_WindowsPointExtensions_ToMapsui_
-  commentId: Overload:Mapsui.UI.Wpf.WindowsPointExtensions.ToMapsui
-  isSpec: "True"
-  fullName: Mapsui.UI.Wpf.WindowsPointExtensions.ToMapsui
-  nameWithType: WindowsPointExtensions.ToMapsui
 - uid: Mapsui.UI.ZoomDirection
   name: ZoomDirection
   href: api/Mapsui.UI.ZoomDirection.html
@@ -5584,12 +5546,12 @@ references:
   commentId: T:Mapsui.UI.ZoomedEventArgs
   fullName: Mapsui.UI.ZoomedEventArgs
   nameWithType: ZoomedEventArgs
-- uid: Mapsui.UI.ZoomedEventArgs.#ctor(Geometries.Point,Mapsui.UI.ZoomDirection)
-  name: ZoomedEventArgs(Geometries.Point, ZoomDirection)
-  href: api/Mapsui.UI.ZoomedEventArgs.html#Mapsui_UI_ZoomedEventArgs__ctor_Geometries_Point_Mapsui_UI_ZoomDirection_
-  commentId: M:Mapsui.UI.ZoomedEventArgs.#ctor(Geometries.Point,Mapsui.UI.ZoomDirection)
-  fullName: Mapsui.UI.ZoomedEventArgs.ZoomedEventArgs(Geometries.Point, Mapsui.UI.ZoomDirection)
-  nameWithType: ZoomedEventArgs.ZoomedEventArgs(Geometries.Point, ZoomDirection)
+- uid: Mapsui.UI.ZoomedEventArgs.#ctor(MPoint,Mapsui.UI.ZoomDirection)
+  name: ZoomedEventArgs(MPoint, ZoomDirection)
+  href: api/Mapsui.UI.ZoomedEventArgs.html#Mapsui_UI_ZoomedEventArgs__ctor_MPoint_Mapsui_UI_ZoomDirection_
+  commentId: M:Mapsui.UI.ZoomedEventArgs.#ctor(MPoint,Mapsui.UI.ZoomDirection)
+  fullName: Mapsui.UI.ZoomedEventArgs.ZoomedEventArgs(MPoint, Mapsui.UI.ZoomDirection)
+  nameWithType: ZoomedEventArgs.ZoomedEventArgs(MPoint, ZoomDirection)
 - uid: Mapsui.UI.ZoomedEventArgs.#ctor*
   name: ZoomedEventArgs
   href: api/Mapsui.UI.ZoomedEventArgs.html#Mapsui_UI_ZoomedEventArgs__ctor_

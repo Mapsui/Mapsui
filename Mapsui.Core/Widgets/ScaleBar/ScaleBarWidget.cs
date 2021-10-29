@@ -36,7 +36,10 @@ namespace Mapsui.Widgets.ScaleBar
     {
         private readonly Map _map;
         private readonly ITransformation _transformation;
-
+        // Instead of using this property we could initialize _transformation with ProjectionDefaults.Transformation
+        // in the constructor but in that way the overriding of ProjectionDefaults.Transformation would not have 
+        // effect if it was set after the ScaleBarWidget was constructed.
+        private ITransformation Transformation => _transformation ?? ProjectionDefaults.Transformation;
         ///
         /// Default position of the scale bar.
         ///
@@ -46,7 +49,8 @@ namespace Mapsui.Widgets.ScaleBar
         private static readonly ScaleBarMode DefaultScaleBarMode = ScaleBarMode.Single;
         private static readonly Font DefaultFont = new() { FontFamily = "Arial", Size = 10 };
 
-        public ScaleBarWidget(Map map, ITransformation transformation)
+
+        public ScaleBarWidget(Map map, ITransformation transformation = null)
         {
             _map = map;
             _transformation = transformation;
@@ -282,13 +286,13 @@ namespace Mapsui.Widgets.ScaleBar
             float length1;
             string text1;
 
-            (length1, text1) = CalculateScaleBarLengthAndValue(_map, _transformation, viewport, MaxWidth, UnitConverter);
+            (length1, text1) = CalculateScaleBarLengthAndValue(_map, Transformation, viewport, MaxWidth, UnitConverter);
 
             float length2;
             string text2;
 
             if (SecondaryUnitConverter != null)
-                (length2, text2) = CalculateScaleBarLengthAndValue(_map, _transformation, viewport, MaxWidth, SecondaryUnitConverter);
+                (length2, text2) = CalculateScaleBarLengthAndValue(_map, Transformation, viewport, MaxWidth, SecondaryUnitConverter);
             else
                 (length2, text2) = (0, null);
 
@@ -483,13 +487,13 @@ namespace Mapsui.Widgets.ScaleBar
                 return false;
             }
 
-            if (_transformation == null)
+            if (Transformation == null)
             {
-                Logger.Log(LogLevel.Warning, $"ScaleBarWidget can not draw because the {nameof(Map)}.{nameof(_transformation)} is not set");
+                Logger.Log(LogLevel.Warning, $"ScaleBarWidget can not draw because the {nameof(Map)}.{nameof(Transformation)} is not set");
                 return false;
             }
 
-            if (_transformation.IsProjectionSupported(_map.CRS, "EPSG:4326") != true)
+            if (Transformation.IsProjectionSupported(_map.CRS, "EPSG:4326") != true)
             {
                 Logger.Log(LogLevel.Warning, $"ScaleBarWidget can not draw because the projection between {_map.CRS} and EPSG:4326 is not supported");
                 return false;

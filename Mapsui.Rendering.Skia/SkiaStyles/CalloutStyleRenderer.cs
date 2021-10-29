@@ -1,8 +1,8 @@
-﻿using Mapsui.Geometries;
+﻿using System;
+using Mapsui.Geometries;
+using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using SkiaSharp;
-using System;
-using Mapsui.Rendering.Skia.Extensions;
 using Topten.RichTextKit;
 
 namespace Mapsui.Rendering.Skia

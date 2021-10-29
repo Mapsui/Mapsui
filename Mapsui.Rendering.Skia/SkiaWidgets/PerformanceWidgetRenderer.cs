@@ -6,14 +6,14 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
 {
     public class PerformanceWidgetRenderer : ISkiaWidgetRenderer
     {
-        readonly SKPaint _textPaint;
-        readonly SKPaint _backgroundPaint;
-        readonly int _textSize;
-        readonly float _widthHeader;
-        readonly string[] _textHeader = { "Last", "Mean", "Frames", "Min", "Max", "Count", "Dropped" };
-        readonly string[] _text = new string[7];
-        SKRect _rect;
-        readonly MRect _envelope;
+        private readonly SKPaint _textPaint;
+        private readonly SKPaint _backgroundPaint;
+        private readonly int _textSize;
+        private readonly float _widthHeader;
+        private readonly string[] _textHeader = { "Last", "Mean", "Frames", "Min", "Max", "Count", "Dropped" };
+        private readonly string[] _text = new string[7];
+        private readonly SKRect _rect;
+        private readonly MRect _envelope;
 
         /// <summary>
         /// Renderer for PerformanceWidget

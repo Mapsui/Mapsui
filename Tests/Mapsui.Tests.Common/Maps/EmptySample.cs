@@ -1,5 +1,4 @@
-﻿using Mapsui.Geometries;
-using Mapsui.Samples.Common;
+﻿using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.UI;
 
@@ -19,7 +18,7 @@ namespace Mapsui.Tests.Common.Maps
         {
             var map = new Map
             {
-                BackColor = Color.Transparent,
+                BackColor = Color.FromString("WhiteSmoke"),
                 Home = n => n.NavigateTo(new MPoint(0, 0), 1)
             };
             return map;

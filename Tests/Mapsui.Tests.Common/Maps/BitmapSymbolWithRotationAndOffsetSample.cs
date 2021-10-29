@@ -21,18 +21,21 @@ namespace Mapsui.Tests.Common.Maps
 
         public static Map CreateMap()
         {
-            var map = new Map
-            {
-                BackColor = Color.Transparent,
-                Home = n => n.NavigateTo(new MPoint(80, 80), 1)
-            };
             var layer = new MemoryLayer
             {
                 DataSource = CreateProviderWithRotatedBitmapSymbols(),
                 Name = "Points with rotated bitmaps",
                 Style = null
             };
+
+            var map = new Map
+            {
+                BackColor = Color.FromString("WhiteSmoke"),
+                Home = n => n.NavigateTo(layer.Envelope.Grow(layer.Envelope.Width * 2))
+            };
+
             map.Layers.Add(layer);
+
             return map;
         }
 

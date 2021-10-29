@@ -25,7 +25,7 @@ namespace Mapsui.Samples.Common.Maps.Demo
                 CRS = "EPSG:3857"
             };
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            map.Widgets.Add(new ScaleBarWidget(map, new MinimalTransformation()) { TextAlignment = Alignment.Center, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Top });
+            map.Widgets.Add(new ScaleBarWidget(map) { TextAlignment = Alignment.Center, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Top });
             map.Widgets.Add(new ZoomInOutWidget { MarginX = 20, MarginY = 40 });
             return map;
         }

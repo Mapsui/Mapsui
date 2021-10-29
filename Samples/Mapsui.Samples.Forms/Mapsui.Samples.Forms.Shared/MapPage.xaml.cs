@@ -22,7 +22,7 @@ namespace Mapsui.Samples.Forms
             InitializeComponent();
         }
 
-        public MapPage(Action<IMapControl> setup, Func<MapView, MapClickedEventArgs, bool> c = null)
+        public MapPage(Action<IMapControl> setup, Func<MapView, MapClickedEventArgs, bool>? c = null)
         {
             InitializeComponent();
 

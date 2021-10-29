@@ -57,7 +57,7 @@ namespace Mapsui.UI.Forms
             get { return _positions; }
         }
 
-        protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected override void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             base.OnPropertyChanged(propertyName);
 

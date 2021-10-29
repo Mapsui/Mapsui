@@ -20,17 +20,19 @@ namespace Mapsui.Tests.Common.Maps
 
         public static Map CreateMap()
         {
-            var map = new Map
-            {
-                BackColor = Color.Transparent,
-                Home = n => n.NavigateTo(new MPoint(100, 100), 1)
-            };
-            map.Layers.Add(new MemoryLayer
+            var layer = new MemoryLayer
             {
                 Style = null,
                 DataSource = CreateProviderWithPointsWithVectorStyle(),
                 Name = "Points with VectorStyle"
-            });
+            };
+
+            var map = new Map
+            {
+                BackColor = Color.FromString("WhiteSmoke"),
+                Home = n => n.NavigateTo(layer.Envelope.Grow(layer.Envelope.Width * 2))
+            };
+            map.Layers.Add(layer);
             return map;
         }
 
