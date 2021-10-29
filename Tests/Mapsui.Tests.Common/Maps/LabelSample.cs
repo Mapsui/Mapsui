@@ -22,7 +22,7 @@ namespace Mapsui.Tests.Common.Maps
         {
             var map = new Map
             {
-                BackColor = Color.Transparent,
+                BackColor = Color.FromString("WhiteSmoke"),
                 Home = n => n.NavigateTo(new MPoint(100, 100), 1)
             };
             map.Layers.Add(new MemoryLayer
@@ -40,19 +40,18 @@ namespace Mapsui.Tests.Common.Maps
             {
                 new Feature
                 {
-                    Geometry = new Point(50, 50),
+                    Geometry = new Point(100, 100),
                     Styles = new[] {new VectorStyle {Fill = new Brush(Color.Gray), Outline = new Pen(Color.Black)}}
                 },
                 new Feature
                 {
-                    Geometry = new Point(50, 150),
+                    Geometry = new Point(100, 200),
                     Styles = new[] {new LabelStyle {Text = "Black Text", BackColor = null}}
                 },
                 new Feature
                 {
-                    Geometry = new Point(150, 50),
-                    Styles =
-                        new[]
+                    Geometry = new Point(100, 300),
+                    Styles = new[]
                         {
                             new LabelStyle
                             {
@@ -64,7 +63,7 @@ namespace Mapsui.Tests.Common.Maps
                 },
                 new Feature
                 {
-                    Geometry = new Point(150, 150),
+                    Geometry = new Point(300, 100),
                     Styles =
                         new[]
                         {
@@ -79,7 +78,7 @@ namespace Mapsui.Tests.Common.Maps
                 },
                 new Feature
                 {
-                    Geometry = new Point(50, -50),
+                    Geometry = new Point(300, 200),
                     Styles = new[]
                     {
                         new LabelStyle
@@ -93,7 +92,7 @@ namespace Mapsui.Tests.Common.Maps
                 },
                 new Feature
                 {
-                    Geometry = new Point(100, 100),
+                    Geometry = new Point(300, 300),
                     Styles = new[]
                     {
                         new LabelStyle

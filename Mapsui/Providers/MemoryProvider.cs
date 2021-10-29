@@ -19,7 +19,6 @@ using Mapsui.Geometries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Mapsui.Fetcher;
 using Mapsui.Geometries.WellKnownBinary;
 using Mapsui.Geometries.WellKnownText;
 using Mapsui.Layers;
