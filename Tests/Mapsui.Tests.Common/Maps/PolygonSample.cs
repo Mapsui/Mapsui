@@ -1,18 +1,18 @@
 ﻿using System.Collections.Generic;
+using System.Reflection;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.UI;
-using System.Reflection;
-using Mapsui.Samples.Common;
 using Mapsui.Utilities;
 
 namespace Mapsui.Tests.Common.Maps
 {
     public class PolygonSample : ISample
     {
-        static int _bitmapId;
+        private static int _bitmapId;
 
         public string Name => "Polygon";
         public string Category => "Tests";

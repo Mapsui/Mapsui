@@ -1,14 +1,14 @@
 ﻿using System;
-using BruTile;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using BruTile;
 
 namespace Mapsui.Tests.Common
 {
     public class SampleTileProvider : ITileProvider
     {
-        readonly IDictionary<TileIndex, byte[]> _dictionary = new Dictionary<TileIndex, byte[]>();
+        private readonly IDictionary<TileIndex, byte[]> _dictionary = new Dictionary<TileIndex, byte[]>();
 
         public SampleTileProvider()
         {
