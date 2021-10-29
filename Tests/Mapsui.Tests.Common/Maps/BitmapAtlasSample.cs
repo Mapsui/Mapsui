@@ -9,9 +9,9 @@ using Mapsui.UI;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public class BitmapSample : ISample
+    public class BitmapAtlasSample : ISample
     {
-        public string Name => "Bitmap Symbol";
+        public string Name => "Bitmap Atlas";
         public string Category => "Tests";
 
         public void Setup(IMapControl mapControl)
@@ -21,18 +21,27 @@ namespace Mapsui.Tests.Common.Maps
 
         public static Map CreateMap()
         {
+            var layer = CreatLayer();
+
             var map = new Map
             {
-                BackColor = Color.Transparent,
+                BackColor = Color.FromString("WhiteSmoke"),
                 Home = n => n.NavigateTo(new MPoint(256, 200), 1)
             };
-            map.Layers.Add(new MemoryLayer
+
+            map.Layers.Add(layer);
+
+            return map;
+        }
+
+        private static MemoryLayer CreatLayer()
+        {
+            return new MemoryLayer
             {
                 Style = null,
                 DataSource = new MemoryProvider<IGeometryFeature>(CreateFeatures()),
                 Name = "Points with bitmaps"
-            });
-            return map;
+            };
         }
 
         public static List<IGeometryFeature> CreateFeatures()

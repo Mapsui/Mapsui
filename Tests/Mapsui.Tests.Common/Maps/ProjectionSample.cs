@@ -6,6 +6,7 @@ using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.UI;
+using Mapsui.Utilities;
 
 namespace Mapsui.Tests.Common.Maps
 {
@@ -33,11 +34,11 @@ namespace Mapsui.Tests.Common.Maps
             var map = new Map
             {
                 CRS = "EPSG:3857", // The Map CRS needs to be set
-                BackColor = Color.Gray
+                BackColor = Color.FromString("WhiteSmoke")
             };
             map.Layers.Add(geometryLayer);
             map.Layers.Add(CreateCenterOfAmsterdamLayer());
-            map.Home = n => n.NavigateTo(extent);
+            map.Home = n => n.NavigateToFullEnvelope(ScaleMethod.Fit);
             return map;
         }
 

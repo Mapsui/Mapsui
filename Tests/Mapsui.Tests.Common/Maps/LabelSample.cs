@@ -20,18 +20,27 @@ namespace Mapsui.Tests.Common.Maps
 
         public static Map CreateMap()
         {
+            var layer = CreateLayer();
+
             var map = new Map
             {
                 BackColor = Color.FromString("WhiteSmoke"),
-                Home = n => n.NavigateTo(new MPoint(100, 100), 1)
+                Home = n => n.NavigateTo(layer.Envelope.Grow(layer.Envelope.Width * 2))
             };
-            map.Layers.Add(new MemoryLayer
+
+            map.Layers.Add(layer);
+
+            return map;
+        }
+
+        private static MemoryLayer CreateLayer()
+        {
+            return new MemoryLayer
             {
                 Style = null,
                 DataSource = CreateProviderWithLabels(),
                 Name = "Labels"
-            });
-            return map;
+            };
         }
 
         private static MemoryProvider<IGeometryFeature> CreateProviderWithLabels()
