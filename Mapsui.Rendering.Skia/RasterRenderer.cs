@@ -78,7 +78,7 @@ namespace Mapsui.Rendering.Skia
 
             // We'll concatenate them like so: incomingMatrix * centerInScreen * userRotation * zoomScale * focalPointOffset
 
-            SKMatrix matrix = SKMatrix.Concat(zoomScale, focalPointOffset);
+            var matrix = SKMatrix.Concat(zoomScale, focalPointOffset);
             matrix = SKMatrix.Concat(userRotation, matrix);
             matrix = SKMatrix.Concat(centerInScreen, matrix);
             matrix = SKMatrix.Concat(priorMatrix, matrix);

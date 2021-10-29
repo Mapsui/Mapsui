@@ -3,7 +3,7 @@ using BruTile.Predefined;
 
 namespace Mapsui.Tests.Common
 {
-    class SampleTileSource : ITileSource
+    internal class SampleTileSource : ITileSource
     {
         public SampleTileSource()
         {

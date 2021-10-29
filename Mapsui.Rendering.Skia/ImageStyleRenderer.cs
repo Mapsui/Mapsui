@@ -4,7 +4,7 @@ using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia
 {
-    class ImageStyleRenderer
+    internal class ImageStyleRenderer
     {
         public static void Draw(SKCanvas canvas, ImageStyle symbolStyle, Point destination,
                 SymbolCache symbolCache, float opacity, double mapRotation)

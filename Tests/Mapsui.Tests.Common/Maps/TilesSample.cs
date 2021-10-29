@@ -23,12 +23,21 @@ namespace Mapsui.Tests.Common.Maps
 
         public static Map CreateMap()
         {
+            var layer = CreateLayer();
+
             var map = new Map
             {
-                BackColor = Color.Transparent,
-                Home = n => n.NavigateTo(new MPoint(-7641856, 4804912), 51116)
+                BackColor = Color.FromString("WhiteSmoke"),
+                Home = n => n.NavigateToFullEnvelope()
             };
 
+            map.Layers.Add(layer);
+
+            return map;
+        }
+
+        private static MemoryLayer CreateLayer()
+        {
             var tileIndexes = new[]
             {
                 new TileIndex(0, 0, 1),
@@ -38,8 +47,8 @@ namespace Mapsui.Tests.Common.Maps
             };
 
             var features = TileIndexToFeatures(tileIndexes, new SampleTileSource());
-            map.Layers.Add(new MemoryLayer { DataSource = new MemoryProvider<IGeometryFeature>(features), Name = "Tiles" });
-            return map;
+            var layer = new MemoryLayer { DataSource = new MemoryProvider<IGeometryFeature>(features), Name = "Tiles" };
+            return layer;
         }
 
         private static List<IGeometryFeature> TileIndexToFeatures(TileIndex[] tileIndexes, ITileSource tileSource)

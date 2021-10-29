@@ -1,10 +1,10 @@
-﻿using Mapsui.Styles;
+﻿using System;
+using Mapsui.Styles;
 using SkiaSharp;
-using System;
 
 namespace Mapsui.Rendering.Skia
 {
-    class BitmapRenderer
+    internal class BitmapRenderer
     {
         // The field below is static for performance. Effect has not been measured.
         // Note that the default FilterQuality is None. Setting it explicitly to Low increases the quality.

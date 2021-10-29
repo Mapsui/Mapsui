@@ -4,23 +4,22 @@ using System.Threading;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Rendering.Skia.Tests.Extensions;
 using Mapsui.Tests.Common.Maps;
 using NUnit.Framework;
 using SkiaSharp;
-using Mapsui.Extensions;
-using Mapsui.Rendering.Skia.Tests.Extensions;
 
 namespace Mapsui.Rendering.Skia.Tests
 {
     [TestFixture, Apartment(ApartmentState.STA)]
-    class MapRendererTests
+    internal class MapRendererTests
     {
         [Test]
         public void RenderPointsWithVectorStyle()
         {
             // arrange
             var map = VectorStyleSample.CreateMap();
-            var viewport = new Viewport { Center = new MPoint(100, 100), Width = 200, Height = 200, Resolution = 1 };
+            var viewport = map.Envelope.ToViewport(200, 4);
             const string fileName = "vector_symbol.png";
 
             // act
@@ -38,13 +37,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = BitmapSymbolSample.CreateMap();
-            var viewport = new Viewport
-            {
-                Center = new MPoint(100, 100),
-                Width = 200,
-                Height = 200,
-                Resolution = 1
-            };
+            var viewport = map.Envelope.ToViewport(200, 4);
             const string fileName = "points_with_symbolstyle.png";
 
             // act
@@ -63,7 +56,7 @@ namespace Mapsui.Rendering.Skia.Tests
             // arrange
             var map = BitmapSymbolSample.CreateMap();
             var features = ((MemoryProvider<IGeometryFeature>)((MemoryLayer)map.Layers[0]).DataSource).Features;
-            foreach (IGeometryFeature feature in features)
+            foreach (var feature in features)
             {
                 if (feature.Geometry is Geometry geometry)
                 {
@@ -72,13 +65,7 @@ namespace Mapsui.Rendering.Skia.Tests
                     feature.Geometry = collection;
                 }
             }
-            var viewport = new Viewport
-            {
-                Center = new MPoint(100, 100),
-                Width = 200,
-                Height = 200,
-                Resolution = 1
-            };
+            var viewport = map.Envelope.ToViewport(200, 4);
             const string fileName = "points_with_symbolstyle.png";
 
             // act
@@ -96,13 +83,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = SvgSymbolSample.CreateMap();
-            var viewport = new Viewport
-            {
-                Center = new MPoint(100, 100),
-                Width = 200,
-                Height = 200,
-                Resolution = 1
-            };
+            var viewport = map.Envelope.ToViewport(200, 4);
             const string fileName = "points_with_svgsymbolstyle.png";
 
             // act
@@ -119,7 +100,8 @@ namespace Mapsui.Rendering.Skia.Tests
         public void RenderBitmapAtlas()
         {
             // arrange
-            var map = BitmapSample.CreateMap();
+            var map = BitmapAtlasSample.CreateMap();
+
             var viewport = new Viewport
             {
                 Center = new MPoint(256, 200),
@@ -163,16 +145,8 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = SymbolTypesSample.CreateMap();
-
+            var viewport = map.Envelope.ToViewport(200, 4);
             const string fileName = "vector_symbol_symboltype.png";
-
-            var viewport = new Viewport
-            {
-                Center = new MPoint(0, 0),
-                Width = 200,
-                Height = 200,
-                Resolution = 0.5
-            };
 
             // act
             var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
@@ -189,7 +163,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = PointInWorldUnits.CreateMap();
-            var viewport = new Viewport { Center = new MPoint(0, 0), Width = 200, Height = 100, Resolution = 0.5 };
+            var viewport = map.Envelope.ToViewport(200, 4);
             const string fileName = "vector_symbol_unittype.png";
 
             // act
@@ -207,13 +181,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = PolygonSample.CreateMap();
-            var viewport = new Viewport
-            {
-                Center = new MPoint(0, 0),
-                Width = 600,
-                Height = 400,
-                Resolution = 63000
-            };
+            var viewport = map.Envelope.ToViewport(600, 1.2);
             const string fileName = "polygon.png";
 
             // act
@@ -231,13 +199,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = LineSample.CreateMap();
-            var viewport = new Viewport
-            {
-                Center = new MPoint(0, 0),
-                Width = 600,
-                Height = 400,
-                Resolution = 63000
-            };
+            var viewport = map.Envelope.ToViewport(600, 1.2);
             const string fileName = "line.png";
 
             // act
@@ -255,13 +217,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = TilesSample.CreateMap();
-            var viewport = new Viewport
-            {
-                Center = new MPoint(-7641856, 4804912),
-                Width = 600,
-                Height = 400,
-                Resolution = 51116
-            };
+            var viewport = map.Envelope.ToViewport(600, 1.2);
             const string fileName = "tilelayer.png";
 
             // act
@@ -297,8 +253,26 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = ProjectionSample.CreateMap();
-            var viewport = map.Envelope.ToViewport();
+            var viewport = map.Envelope.ToViewport(scaleEnvelope: 1.1);
             const string fileName = "projection.png";
+
+            // act 
+            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
+
+            // aside
+            File.WriteToGeneratedFolder(fileName, bitmap);
+
+            // assert
+            Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        }
+
+        [Test]
+        public void RenderStackedLablesLayer()
+        {
+            // arrange
+            var map = StackedLabelsSample.CreateMap();
+            var viewport = map.Envelope.ToViewport(scaleEnvelope: 1.2);
+            const string fileName = "stacked_labels.png";
 
             // act 
             var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);

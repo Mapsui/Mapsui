@@ -193,7 +193,7 @@ namespace Mapsui.Rendering.Skia
                     _tileCache, _currentIteration);
             else if (geometry is IGeometryCollection collection)
             {
-                for (int i = 0; i < collection.NumGeometries; i++)
+                for (var i = 0; i < collection.NumGeometries; i++)
                 {
                     RenderGeometry(canvas, viewport, style, layerOpacity, geometryFeature, collection.Geometry(i));
                 }
