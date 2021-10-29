@@ -312,7 +312,7 @@ namespace Mapsui
         }
 
         /// <summary>
-        /// This method is to invoke the Info event from?  the Map. This method is called
+        /// This method is to invoke the Info event from the Map. This method is called
         /// by the MapControl/MapView and should usually not be called from user code.
         /// </summary>
         public void OnInfo(MapInfoEventArgs mapInfoEventArgs)
