@@ -1,4 +1,4 @@
-﻿namespace Mapsui.Extensions
+﻿namespace Mapsui.Rendering.Skia.Tests.Extensions
 {
     public static class MRectExtensions
     {

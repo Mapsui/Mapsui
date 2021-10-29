@@ -8,6 +8,7 @@ using Mapsui.Tests.Common.Maps;
 using NUnit.Framework;
 using SkiaSharp;
 using Mapsui.Extensions;
+using Mapsui.Rendering.Skia.Tests.Extensions;
 
 namespace Mapsui.Rendering.Skia.Tests
 {
