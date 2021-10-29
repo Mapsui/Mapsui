@@ -21,7 +21,7 @@ namespace Mapsui.Tests.Common.Maps
 
         public static Map CreateMap()
         {
-            var layer = CreatLayer();
+            var layer = CreateLayer();
 
             var map = new Map
             {
@@ -34,7 +34,7 @@ namespace Mapsui.Tests.Common.Maps
             return map;
         }
 
-        private static MemoryLayer CreatLayer()
+        private static MemoryLayer CreateLayer()
         {
             return new MemoryLayer
             {
