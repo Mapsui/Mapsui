@@ -412,7 +412,7 @@ namespace Mapsui.UI.Wpf
                 CallHomeIfNeeded();
                 Refresh();
             }
-            if (e.PropertyName.Equals(nameof(Map.Limiter)))
+            if (e.PropertyName == nameof(Map.Limiter))
             {
                 _viewport.Limiter = Map?.Limiter;
             }
@@ -506,7 +506,7 @@ namespace Mapsui.UI.Wpf
 
             if (!result && widget is Hyperlink hyperlink && !string.IsNullOrWhiteSpace(hyperlink.Url))
             {
-                OpenBrowser(hyperlink.Url);
+                OpenBrowser(hyperlink.Url!);
 
                 return true;
             }
