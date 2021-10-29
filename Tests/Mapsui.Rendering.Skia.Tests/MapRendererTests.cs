@@ -4,16 +4,15 @@ using System.Threading;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Rendering.Skia.Tests.Extensions;
 using Mapsui.Tests.Common.Maps;
 using NUnit.Framework;
 using SkiaSharp;
-using Mapsui.Extensions;
-using Mapsui.Rendering.Skia.Tests.Extensions;
 
 namespace Mapsui.Rendering.Skia.Tests
 {
     [TestFixture, Apartment(ApartmentState.STA)]
-    class MapRendererTests
+    internal class MapRendererTests
     {
         [Test]
         public void RenderPointsWithVectorStyle()
@@ -57,7 +56,7 @@ namespace Mapsui.Rendering.Skia.Tests
             // arrange
             var map = BitmapSymbolSample.CreateMap();
             var features = ((MemoryProvider<IGeometryFeature>)((MemoryLayer)map.Layers[0]).DataSource).Features;
-            foreach (IGeometryFeature feature in features)
+            foreach (var feature in features)
             {
                 if (feature.Geometry is Geometry geometry)
                 {
