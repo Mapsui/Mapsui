@@ -177,7 +177,7 @@ namespace Mapsui
         /// </summary>
         public event EventHandler<MapInfoEventArgs>? Info;
 
-        [Obsolete("Use your own hover event instead and call MapControl.GetMapInfo", true)]
+        [Obsolete("Use your own hover event instead?  and call MapControl.GetMapInfo", true)]
 #pragma warning disable 67
         public event EventHandler<MapInfoEventArgs>? Hover;
 #pragma warning restore 67
