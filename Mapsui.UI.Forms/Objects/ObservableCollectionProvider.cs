@@ -1,9 +1,6 @@
-﻿using Mapsui.Geometries;
-using Mapsui.Providers;
+﻿using Mapsui.Providers;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Mapsui.Extensions;
-using Mapsui.Fetcher;
 using Mapsui.Layers;
 
 namespace Mapsui.UI.Objects
@@ -40,12 +37,12 @@ namespace Mapsui.UI.Objects
             return list;
         }
 
-        public BoundingBox? GetExtent()
+        public MRect? GetExtent()
         {
             if (Collection == null || Collection.Count == 0)
                 return null;
 
-            BoundingBox? extent = null;
+            MRect? extent = null;
 
             lock (_syncRoot)
             {
@@ -56,9 +53,9 @@ namespace Mapsui.UI.Objects
                         if (item.Feature.BoundingBox != null)
                         {
                             if (extent == null)
-                                extent = new BoundingBox(item.Feature.BoundingBox.ToBoundingBox());
+                                extent = new MRect(item.Feature.BoundingBox);
                             else
-                                extent = extent.Join(item.Feature.BoundingBox.ToBoundingBox());
+                                extent = extent.Join(item.Feature.BoundingBox);
                         }
                     }
                 }

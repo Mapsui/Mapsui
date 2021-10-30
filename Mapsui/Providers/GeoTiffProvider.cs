@@ -201,9 +201,9 @@ namespace Mapsui.Providers
             return new Features();
         }
 
-        public BoundingBox GetExtent()
+        public MRect GetExtent()
         {
-            return _extent.ToBoundingBox();
+            return _extent;
         }
 
         private static string GetPathWithoutExtension(string path)

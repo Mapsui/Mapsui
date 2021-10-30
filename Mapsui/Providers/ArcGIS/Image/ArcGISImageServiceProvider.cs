@@ -215,7 +215,7 @@ namespace Mapsui.Providers.ArcGIS.Image
             return url.ToString();
         }
 
-        public BoundingBox GetExtent()
+        public MRect GetExtent()
         {
             return null;
         }

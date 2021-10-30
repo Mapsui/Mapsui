@@ -9,9 +9,9 @@
         /// <returns>Position in Xamarin.Forms.Maps format</returns>
         public static Position ToForms(this MPoint point)
         {
-            var (lat, lon) = Projection.SphericalMercator.ToLonLat(point.X, point.Y);
+            var result = Projection.SphericalMercator.ToLonLat(point.X, point.Y);
 
-            return new Position(lat, lon);
+            return new Position(result.lat, result.lon);
         }
     }
 }
