@@ -17,7 +17,7 @@ namespace Mapsui.Providers.Wms
         private string? _layerName;
         public event StatusEventHandler? IdentifyFinished;
         public event StatusEventHandler? IdentifyFailed;
-        private readonly Func<string, Task<Stream>>? _getStreamAsync;
+        private readonly Func<string, Task<Stream>> _getStreamAsync;
 
         public GetFeatureInfo(Func<string, Task<Stream>>? getStreamAsync = null)
         {
