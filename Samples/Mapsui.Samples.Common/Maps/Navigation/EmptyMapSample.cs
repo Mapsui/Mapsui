@@ -1,7 +1,6 @@
-﻿using Mapsui.Geometries;
-using Mapsui.UI;
+﻿using Mapsui.UI;
 
-namespace Mapsui.Samples.Common.Maps
+namespace Mapsui.Samples.Common.Maps.Navigation
 {
     public class EmptyMapSample : ISample
     {

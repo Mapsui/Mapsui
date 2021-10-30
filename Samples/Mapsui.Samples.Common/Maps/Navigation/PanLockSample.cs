@@ -1,7 +1,7 @@
 ﻿using Mapsui.UI;
 using Mapsui.Utilities;
 
-namespace Mapsui.Samples.Common.Maps
+namespace Mapsui.Samples.Common.Maps.Navigation
 {
     class PanLockSample : ISample
     {

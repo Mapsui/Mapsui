@@ -4,7 +4,7 @@ using Mapsui.Projection;
 using Mapsui.UI;
 using Mapsui.Utilities;
 
-namespace Mapsui.Samples.Common.Maps
+namespace Mapsui.Samples.Common.Maps.Navigation
 {
     public class CenterOnLocationSample : ISample
     {
