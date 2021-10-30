@@ -29,7 +29,7 @@ namespace Mapsui.UI.Objects
             {
                 foreach (T item in Collection)
                 {
-                    if (fetchInfo.Extent.Intersects(item.Feature?.BoundingBox))
+                    if (fetchInfo.Extent?.Intersects(item.Feature?.BoundingBox) ?? false)
                         list.Add((TU)item.Feature!);
                 }
             }
