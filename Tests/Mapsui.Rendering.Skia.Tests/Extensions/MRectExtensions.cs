@@ -2,14 +2,14 @@
 {
     public static class MRectExtensions
     {
-        public static Viewport ToViewport(this MRect rect, double width = 400, double scaleEnvelope = 1)
+        public static Viewport ToViewport(this MRect rect, double width)
         {
             return new Viewport
             {
-                Resolution = rect.Width * scaleEnvelope / width,
+                Resolution = rect.Width / width,
                 Center = rect.Centroid,
                 Width = width,
-                Height = width * (rect.Height * scaleEnvelope / (rect.Width * scaleEnvelope))
+                Height = width * (rect.Height / rect.Width)
             };
         }
     }

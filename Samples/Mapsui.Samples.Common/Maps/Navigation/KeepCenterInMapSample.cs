@@ -25,10 +25,8 @@ namespace Mapsui.Samples.Common.Maps.Navigation
             // Madagaskar is used. In such a scenario it makes sense to also limit
             // the top ZoomLimit.
 
-            const int maxResolution = 2500;
-
             map.Limiter.PanLimits = GetLimitsOfMadagaskar();
-            map.Limiter.ZoomLimits = new MinMax(0.15, maxResolution);
+            map.Limiter.ZoomLimits = new MinMax(0.15, 2500);
             map.Home = n => n.NavigateTo(map.Limiter.PanLimits);
             return map;
         }

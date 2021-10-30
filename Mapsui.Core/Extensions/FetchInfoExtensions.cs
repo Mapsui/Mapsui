@@ -6,13 +6,7 @@ namespace Mapsui.Extensions
     {
         public static Viewport ToViewport(this FetchInfo fetchInfo)
         {
-            return new Viewport
-            {
-                Resolution = fetchInfo.Resolution,
-                Center = fetchInfo.Extent.Centroid,
-                Width = fetchInfo.Extent.Width / fetchInfo.Resolution,
-                Height = fetchInfo.Extent.Height / fetchInfo.Resolution
-            };
+            return Viewport.Create(fetchInfo.Extent, fetchInfo.Resolution);
         }
     }
 }
