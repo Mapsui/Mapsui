@@ -122,11 +122,6 @@ namespace Mapsui.Styles
         }
 
         /// <summary>
-        /// MRect relative to offset point
-        /// </summary>
-        public MRect? MRect;
-
-        /// <summary>
         /// Gets or sets the rotation of the Callout in degrees (clockwise is positive)
         /// </summary>
         public double Rotation
