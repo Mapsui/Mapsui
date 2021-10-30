@@ -34,8 +34,8 @@ namespace Mapsui.UI.Forms
     {
         private Pin _pin;
 
-        public event EventHandler<EventArgs> CalloutClosed;
-        public event EventHandler<CalloutClickedEventArgs> CalloutClicked;
+        public event EventHandler<EventArgs>? CalloutClosed;
+        public event EventHandler<CalloutClickedEventArgs>? CalloutClicked;
 
         public static double DefaultTitleFontSize = Device.GetNamedSize(NamedSize.Title, typeof(Label));
         public static FontAttributes DefaultTitleFontAttributes = FontAttributes.Bold;

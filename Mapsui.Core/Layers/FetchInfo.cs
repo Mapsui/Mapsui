@@ -6,7 +6,7 @@
 
         public FetchInfo(FetchInfo fetchInfo)
         {
-            Extent = fetchInfo.Extent;
+            Extent = new MRect(fetchInfo.Extent);
             Resolution = fetchInfo.Resolution;
             CRS = fetchInfo.CRS;
             ChangeType = fetchInfo.ChangeType;

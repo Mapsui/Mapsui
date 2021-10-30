@@ -443,7 +443,7 @@ namespace Mapsui.Providers.Wms
 
         public Dictionary<string, string> ExtraParams { get; set; }
 
-        public BoundingBox GetExtent()
+        public MRect GetExtent()
         {
             return _wmsClient.Layer.BoundingBoxes.ContainsKey(CRS) ? _wmsClient.Layer.BoundingBoxes[CRS] : null;
         }
@@ -463,7 +463,7 @@ namespace Mapsui.Providers.Wms
         public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {
             var features = new List<IGeometryFeature>();
-            IRaster raster = null;
+            IRaster? raster = null;
             var view = new Viewport
             {
                 Resolution = fetchInfo.Resolution,

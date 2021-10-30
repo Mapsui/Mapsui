@@ -29,12 +29,12 @@ namespace Mapsui.Styles.Thematics
         /// </summary>
         /// <param name="feature">Feature</param>
         /// <returns>Style to be applied to feature</returns>
-        public delegate IStyle GetStyleMethod(IFeature feature);
+        public delegate IStyle? GetStyleMethod(IFeature feature);
 
         /// <summary>
         /// Gets or sets the default style when an attribute isn't found in any bucket
         /// </summary>
-        public IStyle DefaultStyle { get; set; }
+        public IStyle? DefaultStyle { get; set; }
 
         /// <summary>
         /// Gets or sets the style delegate used for determining the style of a feature
@@ -52,7 +52,7 @@ namespace Mapsui.Styles.Thematics
             StyleDelegate = getStyleMethod;
         }
 
-        public IStyle GetStyle(IFeature row)
+        public IStyle? GetStyle(IFeature row)
         {
             return StyleDelegate(row) ?? DefaultStyle;
         }

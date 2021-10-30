@@ -98,7 +98,7 @@ namespace Mapsui.Providers.Wms
             /// <summary>
             /// Coordinate Reference Systems supported by layer
             /// </summary>
-            public IDictionary<string, BoundingBox> BoundingBoxes;
+            public IDictionary<string, MRect> BoundingBoxes;
 
             /// <summary>
             /// Keywords
@@ -539,14 +539,14 @@ namespace Mapsui.Providers.Wms
             var xnlBoundingBox = xmlLayer.SelectNodes("sm:BoundingBox", _nsmgr);
             if (xnlBoundingBox != null)
             {
-                wmsServerLayer.BoundingBoxes = new Dictionary<string, BoundingBox>();
+                wmsServerLayer.BoundingBoxes = new Dictionary<string, MRect>();
                 for (var i = 0; i < xnlBoundingBox.Count; i++)
                 {
                     var xmlAttributeCollection = xnlBoundingBox[i].Attributes;
                     if (xmlAttributeCollection != null)
                     {
                         var crs = (xmlAttributeCollection["CRS"] ?? xmlAttributeCollection["SRS"]).Value;
-                        wmsServerLayer.BoundingBoxes[crs] = new BoundingBox(
+                        wmsServerLayer.BoundingBoxes[crs] = new MRect(
                             double.Parse(xmlAttributeCollection["minx"].Value, NumberFormatInfo.InvariantInfo),
                             double.Parse(xmlAttributeCollection["miny"].Value, NumberFormatInfo.InvariantInfo),
                             double.Parse(xmlAttributeCollection["maxx"].Value, NumberFormatInfo.InvariantInfo),

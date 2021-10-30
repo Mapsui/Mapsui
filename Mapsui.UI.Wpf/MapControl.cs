@@ -37,7 +37,7 @@ namespace Mapsui.UI.Wpf
         /// <summary>
         /// Fling is called, when user release mouse button or lift finger while moving with a certain speed, higher than speed of swipe 
         /// </summary>
-        public event EventHandler<SwipedEventArgs> Fling;
+        public event EventHandler<SwipedEventArgs>? Fling;
 
         public MapControl()
         {
@@ -122,7 +122,7 @@ namespace Mapsui.UI.Wpf
             };
         }
 
-        public event EventHandler<FeatureInfoEventArgs> FeatureInfo; // todo: Remove and add sample for alternative
+        public event EventHandler<FeatureInfoEventArgs>? FeatureInfo; // todo: Remove and add sample for alternative
 
         internal void InvalidateCanvas()
         {
@@ -138,14 +138,14 @@ namespace Mapsui.UI.Wpf
 
         private void MapControlMouseWheel(object sender, MouseWheelEventArgs e)
         {
-            if (Map.ZoomLock) return;
+            if (_map?.ZoomLock ?? true) return;
             if (!Viewport.HasSize) return;
 
             _currentMousePosition = e.GetPosition(this).ToMapsui();
 
             var resolution = MouseWheelAnimation.GetResolution(e.Delta, _viewport, _map);
             // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
-            resolution = Map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, Map.Resolutions, Map.Envelope);
+            resolution = _map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, _map.Resolutions, _map.Envelope);
             Navigator.ZoomTo(resolution, _currentMousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
         }
 
@@ -410,7 +410,7 @@ namespace Mapsui.UI.Wpf
 
             double rotationDelta = 0;
 
-            if (!Map.RotationLock)
+            if (!(_map?.RotationLock ?? false))
             {
                 _innerRotation += angle - prevAngle;
                 _innerRotation %= 360;
@@ -438,7 +438,7 @@ namespace Mapsui.UI.Wpf
 
         private double GetDeltaScale(XamlVector scale)
         {
-            if (Map.ZoomLock) return 1;
+            if (_map?.ZoomLock ?? true) return 1;
             var deltaScale = (scale.X + scale.Y) / 2;
             if (Math.Abs(deltaScale) < Constants.Epsilon)
                 return 1; // If there is no scaling the deltaScale will be 0.0 in Windows Phone (while it is 1.0 in wpf)

@@ -97,7 +97,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
                 return new Features();
 
             var features = new List<IGeometryFeature>();
-            IRaster raster = null;
+            IRaster? raster = null;
 
             IViewport viewport = fetchInfo.ToViewport();
 
@@ -112,9 +112,9 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             return features;
         }
 
-        public BoundingBox GetExtent()
+        public MRect GetExtent()
         {
-            return new BoundingBox(ArcGisDynamicCapabilities.initialExtent.xmin, ArcGisDynamicCapabilities.initialExtent.ymin, ArcGisDynamicCapabilities.initialExtent.xmax, ArcGisDynamicCapabilities.initialExtent.ymax);
+            return new MRect(ArcGisDynamicCapabilities.initialExtent.xmin, ArcGisDynamicCapabilities.initialExtent.ymin, ArcGisDynamicCapabilities.initialExtent.xmax, ArcGisDynamicCapabilities.initialExtent.ymax);
         }
 
         private void CapabilitiesHelperCapabilitiesFailed(object sender, EventArgs e)

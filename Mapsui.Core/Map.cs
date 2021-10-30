@@ -142,7 +142,7 @@ namespace Mapsui
             {
                 if (_layers.Count == 0) return null;
 
-                MRect bbox = null;
+                MRect? bbox = null;
                 foreach (var layer in _layers)
                 {
                     bbox = bbox == null ? layer.Envelope : bbox.Join(layer.Envelope);

@@ -23,9 +23,9 @@ namespace Mapsui.Tests.Layers
                 throw new Exception(ExceptionMessage);
             }
 
-            public BoundingBox GetExtent()
+            public MRect GetExtent()
             {
-                return new BoundingBox(-1, -1, 0, 0);
+                return new MRect(-1, -1, 0, 0);
             }
         }
 
@@ -38,7 +38,7 @@ namespace Mapsui.Tests.Layers
             var map = new Map();
             map.Layers.Add(imageLayer);
             var waitHandle = new AutoResetEvent(false);
-            Exception exception = null;
+            Exception? exception = null;
 
             imageLayer.DataChanged += (_, args) => {
                 exception = args.Error;

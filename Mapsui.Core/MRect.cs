@@ -32,15 +32,15 @@ namespace Mapsui
     {
         public MRect() { }
 
-        public MRect(MRect boundingBox) : this(
-            boundingBox.Min.X,
-            boundingBox.Min.Y,
-            boundingBox.Max.X,
-            boundingBox.Max.Y)
+        public MRect(MRect rect) : this(
+            rect.Min.X,
+            rect.Min.Y,
+            rect.Max.X,
+            rect.Max.Y)
         { }
 
         /// <summary>
-        ///     Initializes a bounding box
+        ///     Initializes a rect box
         /// </summary>
         /// <remarks>
         ///     In case min values are larger than max values, the parameters will be swapped to ensure correct min/max boundary
@@ -67,20 +67,20 @@ namespace Mapsui
         /// <summary>
         ///     Initializes a new Bounding Box based on the bounds from a set of bounding boxes
         /// </summary>
-        public MRect(IEnumerable<MRect> boundingBoxes)
+        public MRect(IEnumerable<MRect> rects)
         {
             Max = null;
             Min = null;
 
-            foreach (var boundingBox in boundingBoxes)
+            foreach (var rect in rects)
             {
-                Min ??= boundingBox.Min.Clone();
-                Max ??= boundingBox.Max.Clone();
+                Min ??= rect.Min.Clone();
+                Max ??= rect.Max.Clone();
 
-                Min.X = Math.Min(boundingBox.Min.X, Min.X);
-                Min.Y = Math.Min(boundingBox.Min.Y, Min.Y);
-                Max.X = Math.Max(boundingBox.Max.X, Max.X);
-                Max.Y = Math.Max(boundingBox.Max.Y, Max.Y);
+                Min.X = Math.Min(rect.Min.X, Min.X);
+                Min.Y = Math.Min(rect.Min.Y, Min.Y);
+                Max.X = Math.Max(rect.Max.X, Max.X);
+                Max.Y = Math.Max(rect.Max.Y, Max.Y);
             }
         }
 
@@ -131,15 +131,15 @@ namespace Mapsui
         public MPoint BottomRight => new(Right, Bottom);
 
         /// <summary>
-        ///     Returns the width of the bounding box
+        ///     Returns the width of the rect
         /// </summary>
-        /// <returns>Width of boundingBox</returns>
+        /// <returns>Width of rect</returns>
         public double Width => Math.Abs(Max.X - Min.X);
 
         /// <summary>
-        ///     Returns the height of the bounding box
+        ///     Returns the height of the rect
         /// </summary>
-        /// <returns>Height of boundingBox</returns>
+        /// <returns>Height of rect</returns>
         public double Height => Math.Abs(Max.Y - Min.Y);
 
         /// <summary>
@@ -202,7 +202,7 @@ namespace Mapsui
         /// <summary>
         ///     Checks whether min values are actually smaller than max values and in that case swaps them.
         /// </summary>
-        /// <returns>true if the bounding was changed</returns>
+        /// <returns>true if the rect was changed</returns>
         public bool CheckMinMax()
         {
             var wasSwapped = false;
@@ -220,7 +220,7 @@ namespace Mapsui
         }
 
         /// <summary>
-        ///     Determines whether the boundingBox intersects another boundingBox
+        ///     Determines whether the rect intersects another rect
         /// </summary>
         /// <param name="box"></param>
         /// <returns></returns>
@@ -294,7 +294,7 @@ namespace Mapsui
         }
 
         /// <summary>
-        ///     Gets the intersecting area between two boundingBoxes
+        ///     Gets the intersecting area between two rects
         /// </summary>
         /// <param name="r">MRect</param>
         /// <returns>Area</returns>
@@ -318,10 +318,10 @@ namespace Mapsui
         }
 
         /// <summary>
-        ///     Computes the joined boundingBox of this instance and another boundingBox
+        ///     Computes the joined rect of this instance and another rect
         /// </summary>
-        /// <param name="box">boundingBox to join with</param>
-        /// <returns>boundingBox containing both boundingBoxes</returns>
+        /// <param name="box">Rect to join with</param>
+        /// <returns>Rect containing both rects</returns>
         public MRect Join(MRect? box)
         {
             if (box == null)
@@ -331,7 +331,7 @@ namespace Mapsui
         }
 
         /// <summary>
-        ///     Computes the joined boundingBox of two boundingBoxes
+        ///     Computes the joined rect of two rects
         /// </summary>
         /// <param name="box1"></param>
         /// <param name="box2"></param>
@@ -346,7 +346,7 @@ namespace Mapsui
         }
 
         /// <summary>
-        ///     Computes the joined <see cref="MRect" /> of an array of boundingBoxes.
+        ///     Computes the joined <see cref="MRect" /> of an array of rects.
         /// </summary>
         /// <param name="boxes">Boxes to join</param>
         /// <returns>Combined MRect</returns>
@@ -363,7 +363,7 @@ namespace Mapsui
         }
 
         /// <summary>
-        ///     Increases the size of the boundingBox by the given amount in all directions
+        ///     Increases the size of the rect by the given amount in all directions
         /// </summary>
         /// <param name="amount">Amount to grow in all directions</param>
         public MRect Grow(double amount)
@@ -394,7 +394,7 @@ namespace Mapsui
         }
 
         /// <summary>
-        ///     Calculates a new quad by rotating this bounding box about its center by the
+        ///     Calculates a new quad by rotating this rect about its center by the
         ///     specified angle clockwise
         /// </summary>
         /// <param name="degrees">Angle about which to rotate (degrees)</param>
@@ -412,7 +412,7 @@ namespace Mapsui
         }
 
         /// <summary>
-        ///     Checks whether a point lies within the bounding box
+        ///     Checks whether a point lies within the rect
         /// </summary>
         /// <param name="p">MPoint</param>
         /// <returns>true if point is within</returns>
@@ -462,7 +462,7 @@ namespace Mapsui
         }
 
         /// <summary>
-        ///     Returns the center of the bounding box
+        ///     Returns the center of the rect
         /// </summary>
         public MPoint Centroid => (Min + Max) * .5;
 
@@ -476,12 +476,12 @@ namespace Mapsui
         }
 
         /// <summary>
-        ///     Returns a string representation of the boundingBox as LowerLeft + UpperRight formatted as "MinX,MinY MaxX,MaxY"
+        ///     Returns a string representation of the rect as LowerLeft + UpperRight formatted as "MinX, MinY, MaxX, MaxY"
         /// </summary>
         /// <returns>MinX,MinY MaxX,MaxY</returns>
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "{0},{1} {2},{3}", Min.X, Min.Y, Max.X, Max.Y);
+            return string.Format(CultureInfo.InvariantCulture, "MinX: {0}, MinY: {1}, MaxX: {2}, MaxY: {3}", Min.X, Min.Y, Max.X, Max.Y);
         }
 
         /// <summary>

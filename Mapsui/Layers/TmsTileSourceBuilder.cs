@@ -15,8 +15,8 @@ namespace Mapsui.Layers
         {
             var webRequest = (HttpWebRequest)WebRequest.Create(urlToTileMapXml);
             var waitHandle = new AutoResetEvent(false);
-            ITileSource tileSource = null;
-            Exception error = null;
+            ITileSource? tileSource = null;
+            Exception? error = null;
 
             var state = new object[]
             {

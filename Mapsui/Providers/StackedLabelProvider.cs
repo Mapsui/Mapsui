@@ -36,7 +36,7 @@ namespace Mapsui.Providers
             return GetFeaturesInView(fetchInfo.Resolution, _labelStyle, features, _rectangleLine, _rectangleFill);
         }
 
-        public BoundingBox GetExtent()
+        public MRect GetExtent()
         {
             return _provider.GetExtent();
         }

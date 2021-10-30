@@ -98,7 +98,7 @@ namespace Mapsui.Providers.ArcGIS.Image
         public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {
             var features = new List<IGeometryFeature>();
-            IRaster raster = null;
+            IRaster? raster = null;
 
             var viewport = fetchInfo.ToViewport();
 
@@ -215,7 +215,7 @@ namespace Mapsui.Providers.ArcGIS.Image
             return url.ToString();
         }
 
-        public BoundingBox GetExtent()
+        public MRect GetExtent()
         {
             return null;
         }
