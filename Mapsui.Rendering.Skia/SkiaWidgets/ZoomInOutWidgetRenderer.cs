@@ -9,9 +9,9 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
     {
         private const float Stroke = 3;
 
-        private static SKPaint _paintStroke;
-        private static SKPaint _paintBackground;
-        private static SKPaint _paintText;
+        private static SKPaint? _paintStroke;
+        private static SKPaint? _paintBackground;
+        private static SKPaint? _paintText;
 
         public void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IWidget widget,
             float layerOpacity)

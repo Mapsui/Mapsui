@@ -263,7 +263,7 @@ namespace Mapsui.UI.Wpf
             }
         }
 
-        private void Navigated(object sender, ChangeType changeType)
+        private void Navigated(object? sender, ChangeType changeType)
         {
             if (_map != null)
             {
@@ -287,16 +287,18 @@ namespace Mapsui.UI.Wpf
         /// <summary>
         /// Called whenever a property is changed
         /// </summary>
-#if __FORMS__
+#if __FORMS__ || __AVALONIA__
         public new event PropertyChangedEventHandler? PropertyChanged;
+#else
+        public event PropertyChangedEventHandler? PropertyChanged;
+#endif
 
+#if __FORMS__
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 #else
-        public event PropertyChangedEventHandler? PropertyChanged;
-
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -384,7 +386,7 @@ namespace Mapsui.UI.Wpf
         }
         // ReSharper disable RedundantNameQualifier - needed for iOS for disambiguation
 
-        private void MapPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void MapPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(Layers.Layer.Enabled))
             {
@@ -412,7 +414,7 @@ namespace Mapsui.UI.Wpf
                 CallHomeIfNeeded();
                 Refresh();
             }
-            if (e.PropertyName.Equals(nameof(Map.Limiter)))
+            if (e.PropertyName == nameof(Map.Limiter))
             {
                 _viewport.Limiter = Map?.Limiter;
             }
@@ -506,7 +508,7 @@ namespace Mapsui.UI.Wpf
 
             if (!result && widget is Hyperlink hyperlink && !string.IsNullOrWhiteSpace(hyperlink.Url))
             {
-                OpenBrowser(hyperlink.Url);
+                OpenBrowser(hyperlink.Url!);
 
                 return true;
             }
@@ -541,7 +543,7 @@ namespace Mapsui.UI.Wpf
         /// <param name="startScreenPosition">Screen position of Viewport/MapControl</param>
         /// <param name="numTaps">Number of clickes/taps</param>
         /// <returns>True, if something done </returns>
-        private MapInfoEventArgs? InvokeInfo(MPoint screenPosition, MPoint startScreenPosition, int numTaps)
+        private MapInfoEventArgs? InvokeInfo(MPoint? screenPosition, MPoint? startScreenPosition, int numTaps)
         {
             return InvokeInfo(
                 Map?.GetWidgetsOfMapAndLayers() ?? new List<IWidget>(),
@@ -560,8 +562,8 @@ namespace Mapsui.UI.Wpf
         /// <param name="widgetCallback">Callback, which is called when Widget is hit</param>
         /// <param name="numTaps">Number of clickes/taps</param>
         /// <returns>True, if something done </returns>
-        private MapInfoEventArgs? InvokeInfo(IEnumerable<IWidget> widgets, MPoint screenPosition,
-            MPoint startScreenPosition, Func<IWidget, MPoint, bool> widgetCallback, int numTaps)
+        private MapInfoEventArgs? InvokeInfo(IEnumerable<IWidget> widgets, MPoint? screenPosition,
+            MPoint? startScreenPosition, Func<IWidget, MPoint, bool> widgetCallback, int numTaps)
         {
             // Check if a Widget is tapped. In the current design they are always on top of the map.
             var touchedWidgets = WidgetTouch.GetTouchedWidget(screenPosition, startScreenPosition, widgets);

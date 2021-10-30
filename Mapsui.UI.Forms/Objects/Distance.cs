@@ -126,7 +126,7 @@ namespace Mapsui.UI.Forms
             return Meters.Equals(other.Meters);
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (ReferenceEquals(null, obj))
                 return false;

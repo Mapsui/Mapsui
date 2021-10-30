@@ -22,7 +22,7 @@ namespace Mapsui.Utilities
 {
     public static class ZoomHelper
     {
-        public static double ZoomIn(IReadOnlyList<double> resolutions, double resolution)
+        public static double ZoomIn(IReadOnlyList<double>? resolutions, double resolution)
         {
             if (resolutions == null || resolutions.Count == 0) return resolution / 2.0;
 
@@ -36,7 +36,7 @@ namespace Mapsui.Utilities
             return resolution / 2.0;
         }
 
-        public static double ZoomOut(IReadOnlyList<double> resolutions, double resolution)
+        public static double ZoomOut(IReadOnlyList<double>? resolutions, double resolution)
         {
             if (resolutions == null || resolutions.Count == 0) return resolution * 2.0;
 

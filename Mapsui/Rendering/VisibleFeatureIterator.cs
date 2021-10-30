@@ -66,7 +66,7 @@ namespace Mapsui.Rendering
             }
         }
 
-        private static bool ShouldNotBeApplied(IStyle style, IReadOnlyViewport viewport)
+        private static bool ShouldNotBeApplied(IStyle? style, IReadOnlyViewport viewport)
         {
             return style == null || !style.Enabled || style.MinVisible > viewport.Resolution || style.MaxVisible < viewport.Resolution;
         }

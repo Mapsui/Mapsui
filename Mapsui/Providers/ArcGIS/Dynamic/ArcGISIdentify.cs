@@ -19,8 +19,8 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
     {
         private int _timeOut;
         private ArcGISFeatureInfo _featureInfo;
-        public event StatusEventHandler IdentifyFinished;
-        public event StatusEventHandler IdentifyFailed;
+        public event StatusEventHandler? IdentifyFinished;
+        public event StatusEventHandler? IdentifyFailed;
 
         public ArcGISIdentify()
         {

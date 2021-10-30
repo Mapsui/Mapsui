@@ -10,7 +10,7 @@ namespace Mapsui.Extensions
             return new BoundingBox(original.MinX, original.MinY, original.MaxX, original.MaxY);
         }
 
-        public static bool IsInitialized(this BoundingBox box)
+        public static bool IsInitialized(this BoundingBox? box)
         {
             if (box == null) return false;
             if (double.IsNaN(box.Width)) return false;
@@ -25,7 +25,7 @@ namespace Mapsui.Extensions
             return new Extent(boundingBox.MinX, boundingBox.MinY, boundingBox.MaxX, boundingBox.MaxY);
         }
 
-        public static MRect ToMRect(this BoundingBox boundingBox)
+        public static MRect ToMRect(this BoundingBox? boundingBox)
         {
             if (boundingBox == null) return null;
             return new MRect(boundingBox.MinX, boundingBox.MinY, boundingBox.MaxX, boundingBox.MaxY);

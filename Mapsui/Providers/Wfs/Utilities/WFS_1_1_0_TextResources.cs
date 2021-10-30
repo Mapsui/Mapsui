@@ -48,7 +48,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <param name="boundingBox">The bounding box of the query</param>
         /// <param name="filter">An instance implementing <see cref="IFilter"/></param>
         public string GetFeatureGETRequest(WfsFeatureTypeInfo featureTypeInfo, List<string> labelProperties,
-                                           BoundingBox boundingBox, IFilter filter)
+                                           BoundingBox? boundingBox, IFilter? filter)
         {
             string qualification = string.IsNullOrEmpty(featureTypeInfo.Prefix)
                 ? string.Empty
@@ -127,8 +127,8 @@ namespace Mapsui.Providers.Wfs.Utilities
             }
         }
 
-        private void AppendGml3Filter(XmlTextWriter xWriter, WfsFeatureTypeInfo featureTypeInfo, BoundingBox boundingBox,
-            IFilter filter, string qualification)
+        private void AppendGml3Filter(XmlTextWriter xWriter, WfsFeatureTypeInfo featureTypeInfo, BoundingBox? boundingBox,
+            IFilter? filter, string qualification)
         {
             xWriter.WriteStartElement("Filter", NSOGC);
             if (filter != null && boundingBox != null) xWriter.WriteStartElement("And");

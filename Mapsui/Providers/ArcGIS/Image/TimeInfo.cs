@@ -4,10 +4,10 @@ namespace Mapsui.Providers.ArcGIS.Image
 {
     public class TimeInfo
     {
-        public string startTimeField { get; set; }
-        public string endTimeField { get; set; }
-        public long[] timeExtent { get; set; }
-        public TimeReference timeReference { get; set; }
+        public string? startTimeField { get; set; }
+        public string? endTimeField { get; set; }
+        public long[]? timeExtent { get; set; }
+        public TimeReference? timeReference { get; set; }
 
         public DateTime? StartDate
         {

@@ -21,7 +21,7 @@ namespace Mapsui.Utilities
         public const string EsriStringPrefix = "ESRISTRING:";
         public const string Proj4StringPrefix = "PROJ4STRING:";
 
-        public static string ToStandardizedCRS(string crs)
+        public static string ToStandardizedCRS(string? crs)
         {
             if (crs == null) return null;
             if (string.IsNullOrWhiteSpace(crs)) return crs.Trim();
@@ -53,7 +53,7 @@ namespace Mapsui.Utilities
             return !string.IsNullOrEmpty(fromCRS) && !string.IsNullOrEmpty(toCRS);
         }
 
-        private static bool IsTransformationNeeded(string fromCRS, string toCRS)
+        private static bool IsTransformationNeeded(string? fromCRS, string toCRS)
         {
             return !fromCRS?.Equals(toCRS) == true;
         }
@@ -63,7 +63,7 @@ namespace Mapsui.Utilities
             return geometryTransformation.IsProjectionSupported(fromCRS, toCRS) == true;
         }
 
-        public static BoundingBox Transform(BoundingBox extent,
+        public static BoundingBox Transform(BoundingBox? extent,
             IGeometryTransformation geometryTransformation, string fromCRS, string toCRS)
         {
             if (extent == null) return null;
@@ -81,7 +81,7 @@ namespace Mapsui.Utilities
             return copiedExtent;
         }
 
-        public static IEnumerable<IGeometryFeature> Transform(IEnumerable<IGeometryFeature> features,
+        public static IEnumerable<IGeometryFeature> Transform(IEnumerable<IGeometryFeature>? features,
             IGeometryTransformation geometryTransformation, string fromCRS, string toCRS)
         {
             if (features == null) return null;

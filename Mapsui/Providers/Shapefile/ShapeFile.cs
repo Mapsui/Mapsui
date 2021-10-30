@@ -847,7 +847,7 @@ namespace Mapsui.Providers.Shapefile
 
         }
 
-        private IGeometryFeature GetFeaturePrivate(uint rowId, IEnumerable<IGeometryFeature> dt)
+        private IGeometryFeature GetFeaturePrivate(uint rowId, IEnumerable<IGeometryFeature>? dt)
         {
             if (_dbaseFile != null)
             {

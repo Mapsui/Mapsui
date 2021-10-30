@@ -72,14 +72,14 @@ namespace Mapsui.Styles
         private int _content = -1;
         private Offset _offset = new(0, 0);
         private double _rotation;
-        private string _title;
-        private string _subtitle;
+        private string? _title;
+        private string? _subtitle;
         private Alignment _titleTextAlignment;
         private Alignment _subtitleTextAlignment;
         private double _spacing;
         private double _maxWidth;
-        private Color _titleFontColor;
-        private Color _subtitleFontColor;
+        private Color? _titleFontColor;
+        private Color? _subtitleFontColor;
         private bool _invalidated;
 
         public new static double DefaultWidth { get; set; } = 100;

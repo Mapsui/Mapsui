@@ -228,7 +228,7 @@ namespace ConcurrentCollections
         {
         }
 
-        private ConcurrentHashSet(int concurrencyLevel, int capacity, bool growLockArray, IEqualityComparer<T> comparer)
+        private ConcurrentHashSet(int concurrencyLevel, int capacity, bool growLockArray, IEqualityComparer<T>? comparer)
         {
             if (concurrencyLevel < 1) throw new ArgumentOutOfRangeException(nameof(concurrencyLevel));
             if (capacity < 0) throw new ArgumentOutOfRangeException(nameof(capacity));

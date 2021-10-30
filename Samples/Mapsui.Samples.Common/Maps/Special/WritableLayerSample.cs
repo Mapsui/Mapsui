@@ -12,7 +12,7 @@ namespace Mapsui.Tests.Common.Maps
         public string Name => "WritableLayer";
         public string Category => "Special";
 
-        private WritableLayer _writableLayer;
+        private WritableLayer? _writableLayer;
 
         public void Setup(IMapControl mapControl)
         {

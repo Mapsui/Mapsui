@@ -17,7 +17,7 @@ namespace Mapsui.Samples.Wpf.Editing
 
     public class EditManipulation
     {
-        private MPoint _mouseDownPosition;
+        private MPoint? _mouseDownPosition;
         private bool _inDoubleClick;
 
         public static int MinPixelsMovedForDrag { get; set; } = 4;

@@ -38,8 +38,8 @@ namespace Mapsui.Fetcher
             _fetchMachine = new FetchMachine(this);
         }
 
-        public event DataChangedEventHandler DataChanged;
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event DataChangedEventHandler? DataChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
         public int NumberTilesNeeded { get; private set; }
 
         public void SetViewport(FetchInfo fetchInfo)
@@ -94,7 +94,7 @@ namespace Mapsui.Fetcher
             }
         }
 
-        private void FetchCompleted(TileInfo tileInfo, Feature feature, Exception exception)
+        private void FetchCompleted(TileInfo tileInfo, Feature feature, Exception? exception)
         {
             lock (_lockRoot)
             {

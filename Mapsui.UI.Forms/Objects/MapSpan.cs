@@ -89,7 +89,7 @@ namespace Mapsui.UI.Forms
         /// <param name="obj">The <see cref="object"/> to compare with current <see cref="T:Mapsui.UI.Forms.MapSpan"/></param>
         /// <returns><c>true</c> if the specified <see cref="object"/> is equal to the current
         /// <see cref="T:Mapsui.UI.Forms.MapSpan"/>; otherwise, <c>false</c>.</returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (ReferenceEquals(null, obj))
                 return false;

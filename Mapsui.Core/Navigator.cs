@@ -46,7 +46,7 @@ namespace Mapsui
         /// <param name="scaleMethod">Scale method to use to determine resolution</param>
         /// <param name="duration">Duration for animation in milliseconds. If less then 0, then <see cref="DefaultDuration"/> is used.</param>
         /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
-        public void NavigateTo(MRect extent, ScaleMethod scaleMethod = ScaleMethod.Fit, long duration = -1, Easing? easing = default)
+        public void NavigateTo(MRect? extent, ScaleMethod scaleMethod = ScaleMethod.Fit, long duration = -1, Easing? easing = default)
         {
             if (extent == null) return;
 

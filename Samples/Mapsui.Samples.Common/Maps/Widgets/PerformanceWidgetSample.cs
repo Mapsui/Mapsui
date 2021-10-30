@@ -10,7 +10,7 @@ namespace Mapsui.Samples.Common.Maps
 {
     public class PerformanceWidgetSample : ISample
     {
-        IMapControl _mapControl;
+        IMapControl? _mapControl;
         readonly Performance _performance = new Performance(10);
 
         public string Name => "4 Performance Widget";

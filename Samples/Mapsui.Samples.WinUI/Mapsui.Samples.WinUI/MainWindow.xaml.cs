@@ -33,7 +33,7 @@ namespace Mapsui.Samples.WinUI
             MbTilesSample.MbTilesLocation = MbTilesLocationOnWinUI;
             MbTilesHelper.DeployMbTilesFile(s => File.Create(Path.Combine(MbTilesLocationOnWinUI, s)));
 
-            MapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer());
+            MapControl.Map!.Layers.Add(OpenStreetMap.CreateTileLayer());
             MapControl.Map.RotationLock = false;
             MapControl.UnSnapRotationDegrees = 30;
             MapControl.ReSnapRotationDegrees = 5;
@@ -56,7 +56,7 @@ namespace Mapsui.Samples.WinUI
             CategoryComboBox.SelectedIndex = 1;
         }
 
-        private void MapOnInfo(object sender, MapInfoEventArgs args)
+        private void MapOnInfo(object? sender, MapInfoEventArgs args)
         {
             if (args.MapInfo?.Feature != null)
                 FeatureInfo.Text = $"Click Info:{Environment.NewLine}{args.MapInfo.Feature.ToDisplayText()}";
@@ -85,7 +85,7 @@ namespace Mapsui.Samples.WinUI
             };
 
             radioButton.Click += (s, a) => {
-                MapControl.Map.Layers.Clear();
+                MapControl.Map!.Layers.Clear();
                 MapControl.Info -= MapOnInfo;
                 sample.Setup(MapControl);
                 MapControl.Info += MapOnInfo;

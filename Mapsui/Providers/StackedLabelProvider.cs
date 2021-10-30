@@ -189,8 +189,8 @@ namespace Mapsui.Providers
 
         private class Cluster
         {
-            public BoundingBox Box { get; set; }
-            public IList<IGeometryFeature> Features { get; set; }
+            public BoundingBox? Box { get; set; }
+            public IList<IGeometryFeature>? Features { get; set; }
         }
     }
 }

@@ -33,7 +33,7 @@ namespace Mapsui.Layers
         private class FeatureSets
         {
             public long TimeRequested { get; set; }
-            public IEnumerable<IGeometryFeature> Features { get; set; }
+            public IEnumerable<IGeometryFeature>? Features { get; set; }
         }
 
         private bool _isFetching;
@@ -155,7 +155,7 @@ namespace Mapsui.Layers
             });
         }
 
-        private void DataArrived(IEnumerable<IFeature> arrivingFeatures, object state)
+        private void DataArrived(IEnumerable<IFeature>? arrivingFeatures, object state)
         {
             //the data in the cache is stored in the map projection so it projected only once.
             var features = arrivingFeatures?.Cast<IGeometryFeature>().ToList() ?? throw new ArgumentException("argument features may not be null");

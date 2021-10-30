@@ -158,7 +158,7 @@ namespace Mapsui.Geometries
         /// </summary>
         /// <param name="g"></param>
         /// <returns>True if the GeometryCollections are equals</returns>
-        public bool Equals(GeometryCollection g)
+        public bool Equals(GeometryCollection? g)
         {
             if (g == null)
                 return false;

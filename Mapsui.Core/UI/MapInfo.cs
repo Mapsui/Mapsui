@@ -9,23 +9,23 @@ namespace Mapsui.UI
         /// <summary>
         /// The layer to which the touched feature belongs
         /// </summary>
-        public ILayer Layer { get; set; }
+        public ILayer? Layer { get; set; }
         /// <summary>
         ///  The feature touched by the user
         /// </summary>
-        public IFeature Feature { get; set; }
+        public IFeature? Feature { get; set; }
         /// <summary>
         ///  The style of feature touched by the user
         /// </summary>
-        public Styles.IStyle Style { get; set; }
+        public Styles.IStyle? Style { get; set; }
         /// <summary>
         /// World position of the place the user touched
         /// </summary>
-        public MPoint WorldPosition { get; set; }
+        public MPoint? WorldPosition { get; set; }
         /// <summary>
         /// Screen position of the place the user touched
         /// </summary>
-        public MPoint ScreenPosition { get; set; }
+        public MPoint? ScreenPosition { get; set; }
 
         /// <summary>
         /// The resolution at which the info was retrieved. This can

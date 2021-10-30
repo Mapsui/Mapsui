@@ -80,7 +80,7 @@ namespace Mapsui
         /// </summary>
         /// <param name="other">Other object to compare</param>
         /// <returns>Returns true if they are equal</returns>
-        public bool Equals(MQuad other)
+        public bool Equals(MQuad? other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
@@ -159,7 +159,7 @@ namespace Mapsui
                    $"TR: {ToString(TopRight)}  BR: {ToString(BottomRight)}";
         }
 
-        private static string ToString(MPoint p)
+        private static string ToString(MPoint? p)
         {
             if (p == null)
                 return "";
