@@ -163,7 +163,7 @@ namespace Mapsui.Providers
 
         private static BoundingBox GetExtent(IReadOnlyList<IGeometryFeature> features)
         {
-            BoundingBox box = null;
+            BoundingBox? box = null;
             foreach (var feature in features)
             {
                 if (feature.Geometry.IsEmpty()) continue;

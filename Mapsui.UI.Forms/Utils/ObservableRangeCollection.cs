@@ -24,7 +24,7 @@
 
         #region Private Fields    
         [NonSerialized]
-        private DeferredEventsCollection _deferredEvents;
+        private DeferredEventsCollection? _deferredEvents;
         #endregion Private Fields
 
 
@@ -167,7 +167,7 @@
 
             var clusters = new Dictionary<int, List<T>>();
             var lastIndex = -1;
-            List<T> lastCluster = null;
+            List<T>? lastCluster = null;
             foreach (T item in collection)
             {
                 var index = IndexOf(item);
@@ -235,7 +235,7 @@
             if (Count == 0)
                 return 0;
 
-            List<T> cluster = null;
+            List<T>? cluster = null;
             var clusterIndex = -1;
             var removedCount = 0;
 
@@ -253,7 +253,7 @@
                         if (clusterIndex == index)
                         {
                             Debug.Assert(cluster != null);
-                            cluster.Add(item);
+                            cluster!.Add(item);
                         }
                         else
                         {
@@ -417,7 +417,7 @@
                 var addedCount = list.Count;
 
                 var changesMade = false;
-                List<T>
+                List<T>?
                     newCluster = null,
                     oldCluster = null;
 
@@ -429,7 +429,7 @@
                     T old = this[i], @new = list[i - index];
                     if (comparer.Equals(old, @new))
                     {
-                        OnRangeReplaced(i, newCluster, oldCluster);
+                        OnRangeReplaced(i, newCluster!, oldCluster);
                         continue;
                     }
                     else
@@ -445,14 +445,14 @@
                         else
                         {
                             newCluster.Add(@new);
-                            oldCluster.Add(old);
+                            oldCluster!.Add(old);
                         }
 
                         changesMade = true;
                     }
                 }
 
-                OnRangeReplaced(i, newCluster, oldCluster);
+                OnRangeReplaced(i, newCluster!, oldCluster);
 
                 //exceeding position
                 if (count != addedCount)
@@ -592,7 +592,7 @@
         /// <summary>
         /// Helper to raise CollectionChanged event to any listeners
         /// </summary>
-        private void OnCollectionChanged(NotifyCollectionChangedAction action, object oldItem, object newItem, int index) =>
+        private void OnCollectionChanged(NotifyCollectionChangedAction action, object? oldItem, object? newItem, int index) =>
           OnCollectionChanged(new NotifyCollectionChangedEventArgs(action, newItem, oldItem, index));
 
         /// <summary>
@@ -643,7 +643,7 @@
             public DeferredEventsCollection(ObservableRangeCollection<T> collection)
             {
                 Debug.Assert(collection != null);
-                Debug.Assert(collection._deferredEvents == null);
+                Debug.Assert(collection!._deferredEvents == null);
                 _collection = collection;
                 _collection._deferredEvents = this;
             }

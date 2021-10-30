@@ -100,7 +100,7 @@ namespace Mapsui.Styles
         /// <returns>Converted Mapsui Color</returns>
         public static Color FromString(string from)
         {
-            Color result = null;
+            Color? result = null;
 
             from = from.Trim().ToLower();
 

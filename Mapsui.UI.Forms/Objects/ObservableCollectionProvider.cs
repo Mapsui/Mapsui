@@ -12,7 +12,7 @@ namespace Mapsui.UI.Objects
     {
         private readonly object _syncRoot = new();
 
-        public ObservableCollection<T> Collection { get; }
+        public ObservableCollection<T>? Collection { get; }
 
         public string CRS { get; set; } = "";
 
@@ -40,12 +40,12 @@ namespace Mapsui.UI.Objects
             return list;
         }
 
-        public BoundingBox GetExtent()
+        public BoundingBox? GetExtent()
         {
             if (Collection == null || Collection.Count == 0)
                 return null;
 
-            BoundingBox extent = null;
+            BoundingBox? extent = null;
 
             lock (_syncRoot)
             {

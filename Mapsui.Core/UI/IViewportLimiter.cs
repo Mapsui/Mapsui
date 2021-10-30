@@ -8,19 +8,19 @@ namespace Mapsui.UI
         /// Sets the limit to which the user can pan the map.
         /// If PanLimits is not set, Map.Extent will be used as restricted extent.
         /// </summary>
-        MRect PanLimits { get; set; }
+        MRect? PanLimits { get; set; }
 
         /// <summary>
         /// Pair of the limits for the resolutions (smallest and biggest). If ZoomMode is set 
         /// to anything else than None, resolution is kept between these values.
         /// </summary>
-        MinMax ZoomLimits { get; set; }
+        MinMax? ZoomLimits { get; set; }
 
         void Limit(IViewport viewport, IReadOnlyList<double> mapResolutions, MRect mapEnvelope);
 
         double LimitResolution(double resolution, double screenWidth, double screenHeight,
             IReadOnlyList<double> mapResolutions, MRect mapEnvelope);
 
-        void LimitExtent(IViewport viewport, MRect mapEnvelope);
+        void LimitExtent(IViewport viewport, MRect? mapEnvelope);
     }
 }

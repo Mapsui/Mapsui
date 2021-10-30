@@ -30,14 +30,14 @@ namespace Mapsui.Widgets.ButtonWidget
         /// <summary>
         /// Event handler which is called, when the button is touched
         /// </summary>
-        public event EventHandler<WidgetTouchedEventArgs> WidgetTouched;
+        public event EventHandler<WidgetTouchedEventArgs>? WidgetTouched;
 
         private string? _svgImage;
 
         /// <summary>
         /// SVG image to show for button
         /// </summary>
-        public string SvgImage
+        public string? SvgImage
         {
             get => _svgImage;
             set

@@ -168,7 +168,7 @@ namespace Mapsui.Providers.Wfs.Xml
         public string GetValueFromNode(XPathExpression xPath, DictionaryEntry[]? queryParameters = null)
         {
             if (queryParameters != null) _paramContext.AddParam(queryParameters);
-            string result = null;
+            string? result = null;
             FindXPath(xPath);
             if (_xIter.MoveNext())
                 result = _xIter.Current.Value;
