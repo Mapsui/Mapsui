@@ -6,7 +6,7 @@ namespace Mapsui.Samples.Common.Maps
     class PanLockSample : ISample
     {
         public string Name => "PanLock";
-        public string Category => "Special";
+        public string Category => "Navigation";
         public void Setup(IMapControl mapControl)
         {
             mapControl.Map = CreateMap();

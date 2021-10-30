@@ -6,7 +6,7 @@ namespace Mapsui.Samples.Common.Maps
     public class EmptyMapSample : ISample
     {
         public string Name => "Empty Map";
-        public string Category => "Special";
+        public string Category => "Navigation";
 
         public void Setup(IMapControl mapControl)
         {

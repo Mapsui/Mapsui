@@ -10,7 +10,7 @@ namespace Mapsui.Samples.Common.Maps
     {
         public string Name => "Center on location";
 
-        public string Category => "Special";
+        public string Category => "Navigation";
 
         public void Setup(IMapControl mapControl)
         {

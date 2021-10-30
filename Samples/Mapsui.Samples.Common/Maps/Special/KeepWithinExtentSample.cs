@@ -7,7 +7,7 @@ namespace Mapsui.Samples.Common.Maps.Special
     public class KeepWithinExtentSample : ISample
     {
         public string Name => "Keep Within Extent";
-        public string Category => "Special";
+        public string Category => "Navigation";
 
         public void Setup(IMapControl mapControl)
         {
