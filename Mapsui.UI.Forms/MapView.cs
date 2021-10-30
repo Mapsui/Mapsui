@@ -823,13 +823,16 @@ namespace Mapsui.UI.Forms
 
         private void RemoveButtons()
         {
-            var widgets = Map?.Widgets.ToList() ?? new List<IWidget>();
-            widgets.Remove(_mapZoomInButton);
-            widgets.Remove(_mapZoomOutButton);
-            widgets.Remove(_mapMyLocationButton);
-            widgets.Remove(_mapNorthingButton);
-            Map?.Widgets.Clear();
-            Map?.Widgets.AddRange(widgets);
+            if (Map != null)
+            {
+                var widgets = Map.Widgets.ToList();
+                widgets.Remove(_mapZoomInButton);
+                widgets.Remove(_mapZoomOutButton);
+                widgets.Remove(_mapMyLocationButton);
+                widgets.Remove(_mapNorthingButton);
+                Map.Widgets.Clear();
+                Map.Widgets.AddRange(widgets);
+            }
 
             RefreshGraphics();
         }
