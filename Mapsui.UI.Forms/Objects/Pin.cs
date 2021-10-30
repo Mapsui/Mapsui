@@ -20,8 +20,8 @@ namespace Mapsui.UI.Forms
 
         private string _bitmapIdKey = string.Empty; // Key for active _bitmapIds entry
         private int _bitmapId = -1;
-        private byte[] _bitmapData;
-        private MapView _mapView;
+        private byte[]? _bitmapData;
+        private MapView? _mapView;
 
         public static readonly BindableProperty TypeProperty = BindableProperty.Create(nameof(Type), typeof(PinType), typeof(Pin), default(PinType));
         public static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color), typeof(Xamarin.Forms.Color), typeof(Pin), SKColors.Red.ToFormsColor());
@@ -62,7 +62,7 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Internal MapView for refreshing of screen
         /// </summary>
-        internal MapView MapView
+        internal MapView? MapView
         {
             get
             {
@@ -242,15 +242,15 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Tag holding free data
         /// </summary>
-        public object Tag { get; set; }
+        public object? Tag { get; set; }
 
         /// <summary>
         /// Mapsui feature for this pin
         /// </summary>
         /// <value>Mapsui feature</value>
-        public IGeometryFeature Feature { get; private set; }
+        public IGeometryFeature Feature { get; private set; } = default!;
 
-        private Callout _callout;
+        private Callout? _callout;
 
         /// <summary>
         /// Gets the callout
@@ -292,8 +292,11 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public void ShowCallout()
         {
-            _callout.Update();
-            _mapView.AddCallout(_callout);
+            if (_callout != null)
+            {
+                _callout.Update();
+                _mapView?.AddCallout(_callout);
+            }
         }
 
         /// <summary>
@@ -301,7 +304,7 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public void HideCallout()
         {
-            _mapView.RemoveCallout(_callout);
+            _mapView?.RemoveCallout(_callout);
         }
 
         /// <summary>
@@ -310,7 +313,7 @@ namespace Mapsui.UI.Forms
         /// <returns>True, if callout is visible on map</returns>
         public bool IsCalloutVisible()
         {
-            return _mapView != null ? _mapView.IsCalloutVisible(_callout) : false;
+            return _mapView != null && _callout != null && _mapView.IsCalloutVisible(_callout);
         }
 
         /// <summary>
@@ -367,7 +370,8 @@ namespace Mapsui.UI.Forms
                     if (Feature != null)
                     {
                         Feature.Geometry = Position.ToPoint();
-                        _callout.Feature.Geometry = Feature.Geometry;
+                        if (_callout != null)
+                            _callout.Feature.Geometry = Feature.Geometry;
                     }
                     break;
                 case nameof(Label):
@@ -480,7 +484,12 @@ namespace Mapsui.UI.Forms
                         var stream = Utilities.EmbeddedResourceLoader.Load("Images.Pin.svg", typeof(Pin));
                         if (stream == null)
                             return;
+
                         svg.Load(stream);
+
+                        if (svg.Picture == null)
+                            return;
+
                         Width = svg.Picture.CullRect.Width * Scale;
                         Height = svg.Picture.CullRect.Height * Scale;
                         // Create bitmap to hold canvas

@@ -680,7 +680,8 @@ namespace Mapsui.UI.Forms
                             }
                         }
 
-                        _viewport.Transform(center, prevCenter, (Map?.ZoomLock ?? true) ? 1 : radius / prevRadius, rotationDelta);
+                        if (prevCenter != null)
+                            _viewport.Transform(center, prevCenter, (Map?.ZoomLock ?? true) ? 1 : radius / prevRadius, rotationDelta);
 
                         (_previousCenter, _previousRadius, _previousAngle) = (center, radius, angle);
 
