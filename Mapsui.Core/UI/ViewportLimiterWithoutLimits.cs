@@ -17,7 +17,7 @@ namespace Mapsui.UI
             return resolution;
         }
 
-        public void LimitExtent(IViewport viewport, MRect mapEnvelope)
+        public void LimitExtent(IViewport viewport, MRect? mapEnvelope)
         {
         }
     }

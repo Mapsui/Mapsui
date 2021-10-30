@@ -22,7 +22,7 @@ namespace Mapsui.Rendering.Skia
             get
             {
                 if (Type == BitmapType.Bitmap)
-                    return (SKImage)_data;
+                    return _data as SKImage;
                 else
                     return null;
             }
@@ -38,7 +38,7 @@ namespace Mapsui.Rendering.Skia
             get
             {
                 if (Type == BitmapType.Svg)
-                    return (SKSvg)_data;
+                    return _data as SKSvg;
                 else
                     return null;
             }
@@ -54,7 +54,7 @@ namespace Mapsui.Rendering.Skia
             get
             {
                 if (Type == BitmapType.Sprite)
-                    return (Sprite)_data;
+                    return _data as Sprite;
                 else
                     return null;
             }
@@ -74,11 +74,11 @@ namespace Mapsui.Rendering.Skia
                 switch (Type)
                 {
                     case BitmapType.Bitmap:
-                        return Bitmap.Width;
+                        return Bitmap?.Width ?? 0;
                     case BitmapType.Svg:
-                        return Svg.Picture.CullRect.Width;
+                        return Svg?.Picture?.CullRect.Width ?? 0;
                     case BitmapType.Sprite:
-                        return ((Sprite)_data).Width;
+                        return Sprite?.Width ?? 0;
                     default:
                         return 0;
                 }
@@ -92,11 +92,11 @@ namespace Mapsui.Rendering.Skia
                 switch (Type)
                 {
                     case BitmapType.Bitmap:
-                        return Bitmap.Height;
+                        return Bitmap?.Height ?? 0;
                     case BitmapType.Svg:
-                        return Svg.Picture.CullRect.Height;
+                        return Svg?.Picture?.CullRect.Height ?? 0;
                     case BitmapType.Sprite:
-                        return ((Sprite)_data).Height;
+                        return Sprite?.Height ?? 0;
                     default:
                         return 0;
                 }

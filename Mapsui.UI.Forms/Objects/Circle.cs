@@ -73,13 +73,16 @@ namespace Mapsui.UI.Forms
                     UpdateFeature();
                     break;
                 case nameof(FillColor):
-                    ((VectorStyle)Feature.Styles.First()).Fill = new Styles.Brush(FillColor.ToMapsui());
+                    if (Feature != null)
+                        ((VectorStyle)Feature.Styles.First()).Fill = new Styles.Brush(FillColor.ToMapsui());
                     break;
                 case nameof(StrokeWidth):
-                    ((VectorStyle)Feature.Styles.First()).Outline.Width = StrokeWidth;
+                    if (Feature != null)
+                        ((VectorStyle)Feature.Styles.First()).Outline.Width = StrokeWidth;
                     break;
                 case nameof(StrokeColor):
-                    ((VectorStyle)Feature.Styles.First()).Outline.Color = StrokeColor.ToMapsui();
+                    if (Feature != null)
+                        ((VectorStyle)Feature.Styles.First()).Outline.Color = StrokeColor.ToMapsui();
                     break;
             }
         }
@@ -129,7 +132,7 @@ namespace Mapsui.UI.Forms
                 exteriorRing.Vertices.Add(new Geometries.Point(radius * Math.Sin(angleRad) + centerX, radius * Math.Cos(angleRad) + centerY));
             }
 
-            Feature.Geometry = new Geometries.Polygon(exteriorRing);
+            Feature!.Geometry = new Geometries.Polygon(exteriorRing);
         }
     }
 }

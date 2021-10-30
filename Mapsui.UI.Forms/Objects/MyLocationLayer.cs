@@ -215,11 +215,11 @@ namespace Mapsui.UI.Objects
                     {
                         Extent = mapView.Viewport.Extent,
                         Resolution = mapView.Viewport.Resolution,
-                        CRS = mapView.Map.CRS,
+                        CRS = mapView.Map?.CRS,
                         ChangeType = ChangeType.Discrete
                     };
                     // At the end, update viewport
-                    animation.Commit(mapView, animationMyLocationName, 100, 3000, finished: (s, v) => mapView.Map.RefreshData(fetchInfo));
+                    animation.Commit(mapView, animationMyLocationName, 100, 3000, finished: (s, v) => mapView.Map?.RefreshData(fetchInfo));
                 }
                 else
                 {

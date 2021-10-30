@@ -6,13 +6,13 @@
 
         public FetchInfo(FetchInfo fetchInfo)
         {
-            Extent = new MRect(fetchInfo.Extent);
+            Extent = fetchInfo.Extent != null ? new MRect(fetchInfo.Extent) : null;
             Resolution = fetchInfo.Resolution;
             CRS = fetchInfo.CRS;
             ChangeType = fetchInfo.ChangeType;
         }
 
-        public MRect Extent { get; set; }
+        public MRect? Extent { get; set; }
         public double Resolution { get; set; }
         public string? CRS { get; set; }
         public ChangeType ChangeType { get; set; }

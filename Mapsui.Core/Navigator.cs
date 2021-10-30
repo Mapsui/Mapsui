@@ -24,7 +24,7 @@ namespace Mapsui
             set => _defaultDuration = value < 0 ? 0 : value;
         }
 
-        public EventHandler<ChangeType> Navigated { get; set; }
+        public EventHandler<ChangeType>? Navigated { get; set; }
 
         public Navigator(Map map, IViewport viewport)
         {
