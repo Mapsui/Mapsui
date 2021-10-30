@@ -17,7 +17,7 @@ namespace Mapsui.Layers
         private double _maxVisible;
         private double _minVisible;
         private double _opacity;
-        private IStyle _style;
+        private IStyle? _style;
         private object _tag;
         private MRect _envelope;
 
@@ -26,7 +26,7 @@ namespace Mapsui.Layers
         /// </summary>
         /// <param name="layer">Layer, for which styles should be returned</param>
         /// <returns>Enumerable with styles belonging to layer</returns>
-        public static IEnumerable<IStyle> GetLayerStyles(ILayer? layer)
+        public static IEnumerable<IStyle?> GetLayerStyles(ILayer? layer)
         {
             if (layer == null) return Array.Empty<IStyle>();
             var style = layer.Style as StyleCollection;
@@ -150,7 +150,7 @@ namespace Mapsui.Layers
         }
 
         /// <inheritdoc />
-        public IStyle Style
+        public IStyle? Style
         {
             get => _style;
             set

@@ -97,7 +97,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
                 return new Features();
 
             var features = new List<IGeometryFeature>();
-            IRaster raster = null;
+            IRaster? raster = null;
 
             IViewport viewport = fetchInfo.ToViewport();
 

@@ -800,7 +800,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <returns></returns>
         internal override Collection<Geometry> CreateGeometries(Features features)
         {
-            GeometryFactory geomFactory = null;
+            GeometryFactory? geomFactory = null;
 
             var geometryTypeString = string.Empty;
 

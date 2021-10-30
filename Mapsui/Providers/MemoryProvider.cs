@@ -164,7 +164,7 @@ namespace Mapsui.Providers
 
         private static MRect GetExtent(IReadOnlyList<IGeometryFeature> features)
         {
-            MRect box = null;
+            MRect? box = null;
             foreach (var feature in features)
             {
                 if (feature.Geometry.IsEmpty()) continue;

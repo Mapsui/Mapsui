@@ -9,7 +9,7 @@ namespace Mapsui.UI.Objects
     {
         private readonly object _syncRoot = new();
 
-        public ObservableCollection<T> Collection { get; }
+        public ObservableCollection<T>? Collection { get; }
 
         public string CRS { get; set; } = "";
 
@@ -37,12 +37,12 @@ namespace Mapsui.UI.Objects
             return list;
         }
 
-        public MRect GetExtent()
+        public MRect? GetExtent()
         {
             if (Collection == null || Collection.Count == 0)
                 return null;
 
-            MRect extent = null;
+            MRect? extent = null;
 
             lock (_syncRoot)
             {

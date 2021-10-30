@@ -12,6 +12,8 @@ using System.Runtime.CompilerServices;
 using Mapsui.Providers;
 using Mapsui.Utilities;
 
+#nullable enable
+
 #if __UWP__
 namespace Mapsui.UI.Uwp
 #elif __ANDROID__
@@ -565,6 +567,9 @@ namespace Mapsui.UI.Wpf
         private MapInfoEventArgs? InvokeInfo(IEnumerable<IWidget> widgets, MPoint? screenPosition,
             MPoint? startScreenPosition, Func<IWidget, MPoint, bool> widgetCallback, int numTaps)
         {
+            if (screenPosition == null || startScreenPosition == null)
+                return null;
+
             // Check if a Widget is tapped. In the current design they are always on top of the map.
             var touchedWidgets = WidgetTouch.GetTouchedWidget(screenPosition, startScreenPosition, widgets);
 

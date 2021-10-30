@@ -13,7 +13,7 @@ namespace Mapsui
 
         private readonly IViewport _viewport = new Viewport();
         public IViewportLimiter? Limiter { get; set; }
-        public Map Map { get; set; }
+        public Map? Map { get; set; }
 
         public event PropertyChangedEventHandler? ViewportChanged;
         public MReadOnlyPoint Center => _viewport.Center;
@@ -28,6 +28,9 @@ namespace Mapsui
 
         public void Transform(MPoint position, MPoint previousPosition, double deltaResolution = 1, double deltaRotation = 0)
         {
+            if (Map == null || Limiter == null)
+                return;
+
             if (Map.ZoomLock) deltaResolution = 1;
             if (Map.PanLock) position = previousPosition;
             _viewport.Transform(position, previousPosition, deltaResolution, deltaRotation);
@@ -37,35 +40,39 @@ namespace Mapsui
         public void SetSize(double width, double height)
         {
             _viewport.SetSize(width, height);
-            if (_viewport.HasSize) Limiter?.LimitExtent(_viewport, Map.Envelope);
+            if (_viewport.HasSize) Limiter?.LimitExtent(_viewport, Map?.Envelope);
         }
 
         public virtual void SetCenter(double x, double y)
         {
-            if (Map.PanLock) return;
+            if (Map?.PanLock ?? false) return;
             _viewport.SetCenter(x, y);
-            Limiter.LimitExtent(_viewport, Map.Envelope);
+            Limiter?.LimitExtent(_viewport, Map?.Envelope);
         }
 
         public void SetCenter(MReadOnlyPoint center)
         {
-            if (Map.PanLock) return;
+            if (Map?.PanLock ?? false) return;
             _viewport.SetCenter(center);
-            Limiter.LimitExtent(_viewport, Map.Envelope);
+            Limiter?.LimitExtent(_viewport, Map?.Envelope);
         }
 
         public void SetResolution(double resolution)
         {
-            if (Map.ZoomLock) return;
-            resolution = Limiter.LimitResolution(resolution, _viewport.Width, _viewport.Height, Map.Resolutions, Map.Envelope);
+            if (Map?.ZoomLock ?? true) return;
+            if (Limiter != null)
+            {
+                resolution = Limiter.LimitResolution(resolution, _viewport.Width, _viewport.Height, Map.Resolutions, Map.Envelope);
+            }
+            
             _viewport.SetResolution(resolution);
         }
 
         public void SetRotation(double rotation)
         {
-            if (Map.RotationLock) return;
+            if (Map?.RotationLock ?? false) return;
             _viewport.SetRotation(rotation);
-            Limiter.LimitExtent(_viewport, Map.Envelope);
+            Limiter?.LimitExtent(_viewport, Map?.Envelope);
         }
 
         public MPoint ScreenToWorld(MPoint position)

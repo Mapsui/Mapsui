@@ -66,7 +66,7 @@ namespace Mapsui.Layers
         /// <summary>
         /// Gets or sets rendering style of layer
         /// </summary>
-        IStyle Style { get; set; }
+        IStyle? Style { get; set; }
 
         /// <summary>
         /// Opacity of layer
