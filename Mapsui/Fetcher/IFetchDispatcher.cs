@@ -4,7 +4,7 @@ using Mapsui.Layers;
 
 namespace Mapsui.Fetcher
 {
-    interface IFetchDispatcher
+    internal interface IFetchDispatcher
     {
         bool TryTake(ref Action method);
         void SetViewport(FetchInfo fetchInfo);

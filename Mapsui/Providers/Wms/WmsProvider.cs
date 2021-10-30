@@ -86,7 +86,7 @@ namespace Mapsui.Providers.Wms
             StylesList = new Collection<string>();
         }
 
-        private void InitialiseGetStreamAsyncMethod(Func<string, Task<Stream>> getStreamAsync)
+        private void InitialiseGetStreamAsyncMethod(Func<string, Task<Stream>>? getStreamAsync)
         {
             _getStreamAsync = getStreamAsync ?? GetStreamAsync;
         }
@@ -188,7 +188,7 @@ namespace Mapsui.Providers.Wms
                 return true;
             }
 
-            foreach (Client.WmsServerLayer childlayer in layer.ChildLayers)
+            foreach (var childlayer in layer.ChildLayers)
             {
                 if (FindLayer(childlayer, name, out result))
                     return true;
@@ -389,7 +389,7 @@ namespace Mapsui.Providers.Wms
             var legendUrls = new List<string>();
             if (LayerList != null && LayerList.Count > 0)
             {
-                foreach (string layer in LayerList)
+                foreach (var layer in LayerList)
                 {
                     if (FindLayer(_wmsClient.Layer, layer, out var result))
                     {
@@ -451,7 +451,7 @@ namespace Mapsui.Providers.Wms
         public bool? IsCrsSupported(string crs)
         {
             if (_wmsClient == null) return null;
-            return _wmsClient.Layer.CRS.FirstOrDefault(item => String.Equals(item.Trim(), crs.Trim(), StringComparison.CurrentCultureIgnoreCase)) != null;
+            return _wmsClient.Layer.CRS.FirstOrDefault(item => string.Equals(item.Trim(), crs.Trim(), StringComparison.CurrentCultureIgnoreCase)) != null;
         }
 
 

@@ -15,8 +15,6 @@
 // along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-using Mapsui.Fetcher;
-using Mapsui.Providers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,7 +22,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Extensions;
+using Mapsui.Fetcher;
 using Mapsui.Logging;
+using Mapsui.Providers;
 
 namespace Mapsui.Layers
 {
@@ -33,7 +33,7 @@ namespace Mapsui.Layers
         private class FeatureSets
         {
             public long TimeRequested { get; set; }
-            public IEnumerable<IGeometryFeature> Features { get; set; }
+            public IEnumerable<IGeometryFeature>? Features { get; set; }
         }
 
         private bool _isFetching;
@@ -80,7 +80,7 @@ namespace Mapsui.Layers
             }
         }
 
-        void StartFetchTimerElapsed(object state)
+        private void StartFetchTimerElapsed(object state)
         {
             if (_fetchInfo.Extent == null) return;
             if (double.IsNaN(_fetchInfo.Resolution)) return;
@@ -155,7 +155,7 @@ namespace Mapsui.Layers
             });
         }
 
-        private void DataArrived(IEnumerable<IFeature> arrivingFeatures, object state)
+        private void DataArrived(IEnumerable<IFeature>? arrivingFeatures, object state)
         {
             //the data in the cache is stored in the map projection so it projected only once.
             var features = arrivingFeatures?.Cast<IGeometryFeature>().ToList() ?? throw new ArgumentException("argument features may not be null");

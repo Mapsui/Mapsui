@@ -30,8 +30,8 @@ namespace Mapsui.Projection
 
         public static Point ToLonLat(double x, double y)
         {
-            double g = HalfPi - 2 * Math.Atan(1 / Math.Exp(y / Radius));
-            double latRadians = g + C1 * Math.Sin(2 * g) + C2 * Math.Sin(4 * g) + C3 * Math.Sin(6 * g) + C4 * Math.Sin(8 * g);
+            var g = HalfPi - 2 * Math.Atan(1 / Math.Exp(y / Radius));
+            var latRadians = g + C1 * Math.Sin(2 * g) + C2 * Math.Sin(4 * g) + C3 * Math.Sin(6 * g) + C4 * Math.Sin(8 * g);
 
             var lonRadians = x / Radius;
 

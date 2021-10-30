@@ -80,7 +80,7 @@ namespace Mapsui.Geometries
         /// </summary>
         /// <param name="other">Other object to compare</param>
         /// <returns>Returns true if they are equal</returns>
-        public bool Equals(Quad other)
+        public bool Equals(Quad? other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
@@ -159,7 +159,7 @@ namespace Mapsui.Geometries
                 ToString(BottomLeft), ToString(TopLeft), ToString(TopRight), ToString(BottomRight));
         }
 
-        private static string ToString(Point p)
+        private static string ToString(Point? p)
         {
             if (p == null)
                 return "";

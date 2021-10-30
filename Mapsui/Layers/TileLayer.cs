@@ -15,20 +15,20 @@
 // along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using System.Linq;
 using BruTile;
 using BruTile.Cache;
+using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Rendering;
 using Mapsui.Styles;
 using Mapsui.Widgets;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using Mapsui.Extensions;
 
 namespace Mapsui.Layers
 {
@@ -151,11 +151,11 @@ namespace Mapsui.Layers
 
         private Feature ToFeature(TileInfo tileInfo)
         {
-            byte[] tileData = _tileSource.GetTile(tileInfo);
+            var tileData = _tileSource.GetTile(tileInfo);
             return new Feature { Geometry = ToGeometry(tileInfo, tileData) };
         }
 
-        private static Raster ToGeometry(TileInfo tileInfo, byte[] tileData)
+        private static Raster ToGeometry(TileInfo tileInfo, byte[]? tileData)
         {
             // A TileSource may return a byte array that is null. This is currently only implemented
             // for MbTilesTileSource. It is to indicate that the tile is not present in the source,

@@ -88,8 +88,8 @@
 <h2 id="1-regression-tests">1. Regression tests</h2>
 <p>The generated images are written to:</p>
 <pre><code>{test project folder}\bin\Debug\netcoreapp3.1\Resources\Images\Generated
-</code></pre><p>Those will be compared to the original images in:</p>
-<pre><code>{test project folder}\bin\Debug\Resources\Images\Original\
+</code></pre><p>Those will be compared to the original images that were deployed in the build located here:</p>
+<pre><code>{test project folder}\bin\Debug\netcoreapp3.1\Resources\Images\Original\
 </code></pre><p>If after code changes there are expected changes in the generated files they should be committed to git so they need to be copied to:</p>
 <pre><code>{test project folder}\Resources\Images\Original\
 </code></pre><p>This can be done with a script: <code>scripts\test-image-copier.cmd</code>. </p>

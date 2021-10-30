@@ -228,7 +228,7 @@ namespace ConcurrentCollections
         {
         }
 
-        private ConcurrentHashSet(int concurrencyLevel, int capacity, bool growLockArray, IEqualityComparer<T> comparer)
+        private ConcurrentHashSet(int concurrencyLevel, int capacity, bool growLockArray, IEqualityComparer<T>? comparer)
         {
             if (concurrencyLevel < 1) throw new ArgumentOutOfRangeException(nameof(concurrencyLevel));
             if (capacity < 0) throw new ArgumentOutOfRangeException(nameof(capacity));
@@ -263,8 +263,10 @@ namespace ConcurrentCollections
         /// successfully; false if it already exists.</returns>
         /// <exception cref="T:System.OverflowException">The <see cref="ConcurrentHashSet{T}"/>
         /// contains too many items.</exception>
-        public bool Add(T item) =>
-            AddInternal(item, _comparer.GetHashCode(item), true);
+        public bool Add(T item)
+        {
+            return AddInternal(item, _comparer.GetHashCode(item), true);
+        }
 
         /// <summary>
         /// Removes all items from the <see cref="ConcurrentHashSet{T}"/>.
@@ -329,7 +331,7 @@ namespace ConcurrentCollections
             {
                 var tables = _tables;
 
-                GetBucketAndLockNo(hashcode, out int bucketNo, out int lockNo, tables.Buckets.Length, tables.Locks.Length);
+                GetBucketAndLockNo(hashcode, out var bucketNo, out var lockNo, tables.Buckets.Length, tables.Locks.Length);
 
                 lock (tables.Locks[lockNo])
                 {
@@ -367,7 +369,10 @@ namespace ConcurrentCollections
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
 
         /// <summary>Returns an enumerator that iterates through the <see
         /// cref="ConcurrentHashSet{T}"/>.</summary>
@@ -395,7 +400,10 @@ namespace ConcurrentCollections
             }
         }
 
-        void ICollection<T>.Add(T item) => Add(item);
+        void ICollection<T>.Add(T item)
+        {
+            Add(item);
+        }
 
         bool ICollection<T>.IsReadOnly => false;
 
@@ -429,7 +437,10 @@ namespace ConcurrentCollections
             }
         }
 
-        bool ICollection<T>.Remove(T item) => TryRemove(item);
+        bool ICollection<T>.Remove(T item)
+        {
+            return TryRemove(item);
+        }
 
         private void InitializeFromCollection(IEnumerable<T> collection)
         {
@@ -450,7 +461,7 @@ namespace ConcurrentCollections
             {
                 var tables = _tables;
 
-                GetBucketAndLockNo(hashcode, out int bucketNo, out int lockNo, tables.Buckets.Length, tables.Locks.Length);
+                GetBucketAndLockNo(hashcode, out var bucketNo, out var lockNo, tables.Buckets.Length, tables.Locks.Length);
 
                 var resizeDesired = false;
                 var lockTaken = false;
@@ -641,7 +652,7 @@ namespace ConcurrentCollections
                     while (current != null)
                     {
                         var next = current.Next;
-                        GetBucketAndLockNo(current.Hashcode, out int newBucketNo, out int newLockNo, newBuckets.Length, newLocks.Length);
+                        GetBucketAndLockNo(current.Hashcode, out var newBucketNo, out var newLockNo, newBuckets.Length, newLocks.Length);
 
                         newBuckets[newBucketNo] = new Node(current.Item, current.Hashcode, newBuckets[newBucketNo]);
 

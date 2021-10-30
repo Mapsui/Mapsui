@@ -98,7 +98,7 @@ namespace Mapsui.Providers.Wfs.Xml
         /// <param name="xPathDoc">An XmlDocument instance</param>
         /// <param name="xIter">An XPathNodeIterator instance</param>
         /// <param name="paramContext">A <see cref="XPathQueryManager.CustomQueryContext"/> instance for parameterized XPath expressions</param>
-        private XPathQueryManager(XPathDocument xPathDoc, XPathNodeIterator xIter, CustomQueryContext paramContext)
+        private XPathQueryManager(XPathDocument xPathDoc, XPathNodeIterator? xIter, CustomQueryContext paramContext)
             : this(xPathDoc)
         {
             if (xIter != null)
@@ -329,7 +329,7 @@ namespace Mapsui.Providers.Wfs.Xml
 
         private void InitializeCustomContext(CustomQueryContext paramContext)
         {
-            IDictionary<string, string> namespaces = paramContext.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
+            var namespaces = paramContext.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
             _paramContext = new CustomQueryContext((NameTable)paramContext.NameTable);
             _paramContext.AddNamespace(namespaces);
         }
@@ -369,10 +369,7 @@ namespace Mapsui.Providers.Wfs.Xml
             /// <summary>
             /// Method from XsltContext.
             /// </summary>
-            public override bool Whitespace
-            {
-                get { return true; }
-            }
+            public override bool Whitespace => true;
 
             /// <summary>
             /// This method adds a list of namespaces to use in the custom context.
@@ -380,7 +377,7 @@ namespace Mapsui.Providers.Wfs.Xml
             /// <param name="namespaces">A list of namespaces</param>
             public void AddNamespace(IDictionary<string, string> namespaces)
             {
-                foreach (string ns in namespaces.Keys)
+                foreach (var ns in namespaces.Keys)
                     AddNamespace(ns, namespaces[ns]);
             }
 
@@ -421,7 +418,7 @@ namespace Mapsui.Providers.Wfs.Xml
             /// <param name="name">The name of the variable</param>
             public override IXsltContextVariable ResolveVariable(string prefix, string name)
             {
-                object param = GetParam(name);
+                var param = GetParam(name);
                 if (param != null)
                     return new ParamFunctionVar(param);
                 return null;
@@ -443,8 +440,8 @@ namespace Mapsui.Providers.Wfs.Xml
             /// <param name="parameters">A list of parameters</param>
             public void AddParam(DictionaryEntry[] parameters)
             {
-                int length = parameters.Length;
-                for (int i = 0; i < length; i++)
+                var length = parameters.Length;
+                for (var i = 0; i < length; i++)
                     _argumentList.AddParam(parameters[i].Key.ToString(),
                                            string.Empty, parameters[i].Value.ToString());
             }
@@ -495,34 +492,22 @@ namespace Mapsui.Providers.Wfs.Xml
             /// <summary>
             /// Gets the argument types.
             /// </summary>
-            public XPathResultType[] ArgTypes
-            {
-                get { return _argTypes; }
-            }
+            public XPathResultType[] ArgTypes => _argTypes;
 
             /// <summary>
             /// Gets the return type.
             /// </summary>
-            public XPathResultType ReturnType
-            {
-                get { return _returnType; }
-            }
+            public XPathResultType ReturnType => _returnType;
 
             /// <summary>
             /// Gets the minimum number of arguments allowed.
             /// </summary>
-            public int Minargs
-            {
-                get { return _minArgs; }
-            }
+            public int Minargs => _minArgs;
 
             /// <summary>
             /// Gets the maximum number of arguments allowed.
             /// </summary>
-            public int Maxargs
-            {
-                get { return _maxArgs; }
-            }
+            public int Maxargs => _maxArgs;
 
 
 
@@ -618,7 +603,7 @@ namespace Mapsui.Providers.Wfs.Xml
             {
                 if (args.Contains(":"))
                 {
-                    string prefix = args.Substring(0, args.IndexOf(":", StringComparison.Ordinal));
+                    var prefix = args.Substring(0, args.IndexOf(":", StringComparison.Ordinal));
                     string ns;
                     if (!string.IsNullOrEmpty((ns = xsltContext.LookupNamespace(prefix))))
                         args = args.Replace(prefix + ":", ns);
@@ -640,7 +625,7 @@ namespace Mapsui.Providers.Wfs.Xml
             /// <summary>
             /// The name to use when embedding the function in an XPath expression.
             /// </summary>
-            public new static readonly string FunctionName = "_PARAMCOMPWITHTARGETNS_";
+            public static readonly new string FunctionName = "_PARAMCOMPWITHTARGETNS_";
 
 
 
@@ -684,7 +669,7 @@ namespace Mapsui.Providers.Wfs.Xml
             {
                 if (args.Contains(":"))
                 {
-                    string prefix = args.Substring(0, args.IndexOf(":", StringComparison.Ordinal));
+                    var prefix = args.Substring(0, args.IndexOf(":", StringComparison.Ordinal));
                     string ns;
                     if (!string.IsNullOrEmpty((ns = docContext.LookupNamespace(prefix))))
                         return args.Replace(prefix + ":", ns);
@@ -729,26 +714,17 @@ namespace Mapsui.Providers.Wfs.Xml
             /// <summary>
             /// Method implementing IXsltContextVariable
             /// </summary>
-            public bool IsLocal
-            {
-                get { return true; }
-            }
+            public bool IsLocal => true;
 
             /// <summary>
             /// Method implementing IXsltContextVariable
             /// </summary>
-            public bool IsParam
-            {
-                get { return true; }
-            }
+            public bool IsParam => true;
 
             /// <summary>
             /// Method implementing IXsltContextVariable
             /// </summary>
-            public XPathResultType VariableType
-            {
-                get { return XPathResultType.Any; }
-            }
+            public XPathResultType VariableType => XPathResultType.Any;
 
         }
 

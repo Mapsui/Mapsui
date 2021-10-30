@@ -1,4 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <TargetFramework>net5.0-windows10.0.18362.0</TargetFramework>
     <TargetPlatformMinVersion>10.0.18362.0</TargetPlatformMinVersion>
@@ -7,6 +8,7 @@
     <UseWinUI>true</UseWinUI>
     <DefineConstants>__WINUI__</DefineConstants>
   </PropertyGroup>
+
   <ItemGroup>
     <Compile Include="..\Mapsui.UI.Uwp\MapControl.cs" Link="MapControl.cs" />
   </ItemGroup>
@@ -33,4 +35,5 @@
   </ItemGroup>
 
   <Import Project="..\Mapsui.UI.Shared\Mapsui.UI.Shared.projitems" Label="Shared" />
+
 </Project>

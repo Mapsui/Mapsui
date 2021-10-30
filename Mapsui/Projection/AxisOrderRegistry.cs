@@ -250,7 +250,7 @@ namespace Mapsui.Projection
                         return res;
 
                     case "EPSG":
-                        var code = Int32.Parse(identifier);
+                        var code = int.Parse(identifier);
                         if (code == 900913) code = 3857;
                         if (code < 0)
                             throw new ArgumentException("Invalid Epsg identifier");

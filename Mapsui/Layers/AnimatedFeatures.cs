@@ -1,10 +1,10 @@
-using System.Diagnostics;
-using Mapsui.Geometries;
-using Mapsui.Providers;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using Mapsui.Geometries;
+using Mapsui.Providers;
 
 namespace Mapsui.Layers
 {
@@ -42,7 +42,7 @@ namespace Mapsui.Layers
         public int AnimationDuration { get; set; }
         public EasingFunction Function { get; set; }
 
-        public event EventHandler AnimatedPositionChanged;
+        public event EventHandler? AnimatedPositionChanged;
 
         public void AddFeatures(IEnumerable<IGeometryFeature> features)
         {
@@ -153,7 +153,7 @@ namespace Mapsui.Layers
             Debug.WriteLine("-------------------------------------------------");
         }
 
-        private static Point FindPreviousPoint(IEnumerable<AnimatedItem> previousItems, IFeature feature,
+        private static Point FindPreviousPoint(IEnumerable<AnimatedItem>? previousItems, IFeature feature,
             string idField)
         {
             return previousItems?.FirstOrDefault(f => f.Feature[idField].Equals(feature[idField]))?.CurrentPoint;
@@ -181,9 +181,9 @@ namespace Mapsui.Layers
 
         private class AnimatedItem
         {
-            public IGeometryFeature Feature { get; set; }
-            public Point PreviousPoint { get; set; }
-            public Point CurrentPoint { get; set; }
+            public IGeometryFeature? Feature { get; set; }
+            public Point? PreviousPoint { get; set; }
+            public Point? CurrentPoint { get; set; }
         }
     }
 }

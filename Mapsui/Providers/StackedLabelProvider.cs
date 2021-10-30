@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Styles;
@@ -189,8 +188,8 @@ namespace Mapsui.Providers
 
         private class Cluster
         {
-            public BoundingBox Box { get; set; }
-            public IList<IGeometryFeature> Features { get; set; }
+            public BoundingBox? Box { get; set; }
+            public IList<IGeometryFeature>? Features { get; set; }
         }
     }
 }

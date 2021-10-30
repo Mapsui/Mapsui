@@ -13,9 +13,9 @@ The generated images are written to:
 
     {test project folder}\bin\Debug\netcoreapp3.1\Resources\Images\Generated
 
-Those will be compared to the original images in:
+Those will be compared to the original images that were deployed in the build located here:
 
-    {test project folder}\bin\Debug\Resources\Images\Original\
+    {test project folder}\bin\Debug\netcoreapp3.1\Resources\Images\Original\
 
 If after code changes there are expected changes in the generated files they should be committed to git so they need to be copied to:
 

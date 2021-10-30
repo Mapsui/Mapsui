@@ -166,7 +166,7 @@ namespace Mapsui.UI.Uwp
 
         private void MapControl_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
         {
-            if (Map.ZoomLock) return;
+            if (_map?.ZoomLock ?? true) return;
             if (!Viewport.HasSize) return;
 
             var currentPoint = e.GetCurrentPoint(this);
@@ -203,7 +203,7 @@ namespace Mapsui.UI.Uwp
 #endif
         }
 
-        private void Canvas_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
+        private void Canvas_PaintSurface(object? sender, SKPaintSurfaceEventArgs e)
         {
             if (PixelDensity <= 0)
                 return;
@@ -238,7 +238,7 @@ namespace Mapsui.UI.Uwp
 
             double rotationDelta = 0;
 
-            if (!Map.RotationLock)
+            if (!(Map?.RotationLock ?? false))
             {
                 _innerRotation += rotation - previousRotation;
                 _innerRotation %= 360;

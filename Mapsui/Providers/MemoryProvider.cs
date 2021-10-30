@@ -15,10 +15,10 @@
 // along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-using Mapsui.Geometries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Mapsui.Geometries;
 using Mapsui.Geometries.WellKnownBinary;
 using Mapsui.Geometries.WellKnownText;
 using Mapsui.Layers;
@@ -61,7 +61,7 @@ namespace Mapsui.Providers
         /// </summary>
         public string CRS { get; set; } = "";
 
-        BoundingBox _boundingBox;
+        private readonly BoundingBox _boundingBox;
 
         public MemoryProvider()
         {
@@ -146,7 +146,7 @@ namespace Mapsui.Providers
             return (IEnumerable<T>)grownFeatures.ToList(); // Why do I need to cast if T is constrained to IFeature?
         }
 
-        public IFeature Find(object value, string primaryKey)
+        public IFeature Find(object? value, string primaryKey)
         {
             return Features.FirstOrDefault(f => f[primaryKey] != null && value != null &&
                 f[primaryKey].Equals(value));

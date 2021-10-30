@@ -6,7 +6,7 @@ namespace Mapsui.Projection
 {
     public static class GeometryIterator
     {
-        public static IEnumerable<Point> AllVertices(this IGeometry geometry)
+        public static IEnumerable<Point> AllVertices(this IGeometry? geometry)
         {
             if (geometry == null) return Array.Empty<Point>();
 

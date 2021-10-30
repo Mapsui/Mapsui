@@ -29,12 +29,12 @@ namespace Mapsui.Providers.ArcGIS
         /// <summary>
         /// Triggered when finished parsing capabilities, returns Capabilities object
         /// </summary>
-        public event StatusEventHandler CapabilitiesReceived;
+        public event StatusEventHandler? CapabilitiesReceived;
 
         /// <summary>
         /// Triggered when failed parsing or getting capabilities
         /// </summary>
-        public event StatusEventHandler CapabilitiesFailed;
+        public event StatusEventHandler? CapabilitiesFailed;
 
 
         /// <summary>
@@ -50,8 +50,8 @@ namespace Mapsui.Providers.ArcGIS
         /// </summary>
         public int TimeOut
         {
-            get { return _timeOut; }
-            set { _timeOut = value; }
+            get => _timeOut;
+            set => _timeOut = value;
         }
 
         /// <summary>

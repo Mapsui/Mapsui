@@ -146,7 +146,7 @@ namespace Mapsui.Geometries
         /// </summary>
         /// <param name="p">Polygon to compare with</param>
         /// <returns></returns>
-        public bool Equals(Polygon p)
+        public bool Equals(Polygon? p)
         {
             if (p == null)
                 return false;

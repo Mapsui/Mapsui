@@ -7,10 +7,10 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
 {
     public class ScaleBarWidgetRenderer : ISkiaWidgetRenderer
     {
-        private SKPaint _paintScaleBar;
-        private SKPaint _paintScaleBarStroke;
-        private SKPaint _paintScaleText;
-        private SKPaint _paintScaleTextStroke;
+        private SKPaint? _paintScaleBar;
+        private SKPaint? _paintScaleBarStroke;
+        private SKPaint? _paintScaleText;
+        private SKPaint? _paintScaleTextStroke;
 
         public void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IWidget widget,
             float layerOpacity)

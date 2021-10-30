@@ -1,9 +1,9 @@
-﻿using Mapsui.Styles;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Mapsui.Logging;
 using Mapsui.Projection;
+using Mapsui.Styles;
 
 namespace Mapsui.Widgets.ScaleBar
 {
@@ -66,9 +66,9 @@ namespace Mapsui.Widgets.ScaleBar
             _unitConverter = MetricUnitConverter.Instance;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        float _maxWidth;
+        private float _maxWidth;
 
         /// <summary>
         /// Maximum usable width for scalebar. The real used width could be less, because we 
@@ -88,7 +88,7 @@ namespace Mapsui.Widgets.ScaleBar
             }
         }
 
-        float _height;
+        private float _height;
 
         /// <summary>
         /// Real height of scalebar. Depends on number of unit converters and text size.
@@ -108,7 +108,7 @@ namespace Mapsui.Widgets.ScaleBar
             }
         }
 
-        Color _textColor = new(0, 0, 0);
+        private Color _textColor = new(0, 0, 0);
 
         /// <summary>
         /// Foreground color of scalebar and text
@@ -125,7 +125,7 @@ namespace Mapsui.Widgets.ScaleBar
             }
         }
 
-        Color _haloColor = new(255, 255, 255);
+        private Color _haloColor = new(255, 255, 255);
 
         /// <summary>
         /// Halo color of scalebar and text, so that it is better visible
@@ -159,7 +159,7 @@ namespace Mapsui.Widgets.ScaleBar
         /// </summary>
         public float TickLength { get; set; } = 3;
 
-        Alignment _textAlignment;
+        private Alignment _textAlignment;
 
         /// <summary>
         /// Alignment of text of scalebar
@@ -311,19 +311,19 @@ namespace Mapsui.Widgets.ScaleBar
         {
             MPoint[] points = null;
 
-            bool drawNoSecondScaleBar = ScaleBarMode == ScaleBarMode.Single || ScaleBarMode == ScaleBarMode.Both && SecondaryUnitConverter == null;
+            var drawNoSecondScaleBar = ScaleBarMode == ScaleBarMode.Single || ScaleBarMode == ScaleBarMode.Both && SecondaryUnitConverter == null;
 
-            float maxScaleBarLength = Math.Max(scaleBarLength1, scaleBarLength2);
+            var maxScaleBarLength = Math.Max(scaleBarLength1, scaleBarLength2);
 
             var posX = CalculatePositionX(0, (int)viewport.Width, _maxWidth);
             var posY = CalculatePositionY(0, (int)viewport.Height, _height);
 
-            float left = posX + stroke * 0.5f * Scale;
-            float right = posX + _maxWidth - stroke * 0.5f * Scale;
-            float center1 = posX + (_maxWidth - scaleBarLength1) / 2;
-            float center2 = posX + (_maxWidth - scaleBarLength2) / 2;
+            var left = posX + stroke * 0.5f * Scale;
+            var right = posX + _maxWidth - stroke * 0.5f * Scale;
+            var center1 = posX + (_maxWidth - scaleBarLength1) / 2;
+            var center2 = posX + (_maxWidth - scaleBarLength2) / 2;
             // Top position is Y in the middle of scale bar line
-            float top = posY + (drawNoSecondScaleBar ? _height - stroke * 0.5f * Scale : _height * 0.5f);
+            var top = posY + (drawNoSecondScaleBar ? _height - stroke * 0.5f * Scale : _height * 0.5f);
 
             switch (TextAlignment)
             {
@@ -423,16 +423,16 @@ namespace Mapsui.Widgets.ScaleBar
         public (float posX1, float posY1, float posX2, float posY2) GetScaleBarTextPositions(IReadOnlyViewport viewport,
             MRect textSize, MRect textSize1, MRect textSize2, float stroke)
         {
-            bool drawNoSecondScaleBar = ScaleBarMode == ScaleBarMode.Single || (ScaleBarMode == ScaleBarMode.Both && SecondaryUnitConverter == null);
+            var drawNoSecondScaleBar = ScaleBarMode == ScaleBarMode.Single || (ScaleBarMode == ScaleBarMode.Both && SecondaryUnitConverter == null);
 
-            float posX = CalculatePositionX(0, (int)viewport.Width, _maxWidth);
-            float posY = CalculatePositionY(0, (int)viewport.Height, _height);
+            var posX = CalculatePositionX(0, (int)viewport.Width, _maxWidth);
+            var posY = CalculatePositionY(0, (int)viewport.Height, _height);
 
-            float left = posX + (stroke + TextMargin) * Scale;
-            float right1 = posX + _maxWidth - (stroke + TextMargin) * Scale - (float)textSize1.Width;
-            float right2 = posX + _maxWidth - (stroke + TextMargin) * Scale - (float)textSize2.Width;
-            float top = posY;
-            float bottom = posY + _height - (float)textSize2.Height;
+            var left = posX + (stroke + TextMargin) * Scale;
+            var right1 = posX + _maxWidth - (stroke + TextMargin) * Scale - (float)textSize1.Width;
+            var right2 = posX + _maxWidth - (stroke + TextMargin) * Scale - (float)textSize2.Width;
+            var top = posY;
+            var bottom = posY + _height - (float)textSize2.Height;
 
             switch (TextAlignment)
             {
@@ -524,7 +524,7 @@ namespace Mapsui.Widgets.ScaleBar
             var (_, y) = transformation.Transform(map.CRS, "EPSG:4326", viewport.Center.X, viewport.Center.Y); // clone or else you will transform the original viewport center
 
             // Calc ground resolution in meters per pixel of viewport for this latitude
-            double groundResolution = viewport.Resolution * Math.Cos(y / 180.0 * Math.PI);
+            var groundResolution = viewport.Resolution * Math.Cos(y / 180.0 * Math.PI);
 
             // Convert in units of UnitConverter
             groundResolution = groundResolution / unitConverter.MeterRatio;
@@ -532,9 +532,9 @@ namespace Mapsui.Widgets.ScaleBar
             var scaleBarValues = unitConverter.ScaleBarValues;
 
             float scaleBarLength = 0;
-            int scaleBarValue = 0;
+            var scaleBarValue = 0;
 
-            foreach (int value in scaleBarValues)
+            foreach (var value in scaleBarValues)
             {
                 scaleBarValue = value;
                 scaleBarLength = (float)(scaleBarValue / groundResolution);

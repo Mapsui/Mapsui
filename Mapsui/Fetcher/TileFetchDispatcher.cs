@@ -11,7 +11,7 @@ using Mapsui.Providers;
 
 namespace Mapsui.Fetcher
 {
-    class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
+    internal class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
     {
         private FetchInfo _fetchInfo;
         private readonly object _lockRoot = new();
@@ -38,8 +38,8 @@ namespace Mapsui.Fetcher
             _fetchMachine = new FetchMachine(this);
         }
 
-        public event DataChangedEventHandler DataChanged;
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event DataChangedEventHandler? DataChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
         public int NumberTilesNeeded { get; private set; }
 
         public void SetViewport(FetchInfo fetchInfo)
@@ -57,7 +57,7 @@ namespace Mapsui.Fetcher
             lock (_lockRoot)
             {
                 UpdateIfViewportIsModified();
-                var success = _tilesToFetch.TryDequeue(out TileInfo tileInfo);
+                var success = _tilesToFetch.TryDequeue(out var tileInfo);
 
                 if (success)
                 {
@@ -94,7 +94,7 @@ namespace Mapsui.Fetcher
             }
         }
 
-        private void FetchCompleted(TileInfo tileInfo, Feature feature, Exception exception)
+        private void FetchCompleted(TileInfo tileInfo, Feature feature, Exception? exception)
         {
             lock (_lockRoot)
             {

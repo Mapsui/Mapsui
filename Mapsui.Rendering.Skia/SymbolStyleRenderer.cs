@@ -93,14 +93,14 @@ namespace Mapsui.Rendering.Skia
             };
         }
 
-        private static void DrawCircle(SKCanvas canvas, float x, float y, float radius, SKPaint fillColor,
-          SKPaint lineColor)
+        private static void DrawCircle(SKCanvas canvas, float x, float y, float radius, SKPaint? fillColor,
+          SKPaint? lineColor)
         {
             if (fillColor != null && fillColor.Color.Alpha != 0) canvas.DrawCircle(x, y, radius, fillColor);
             if (lineColor != null && lineColor.Color.Alpha != 0) canvas.DrawCircle(x, y, radius, lineColor);
         }
 
-        private static void DrawRect(SKCanvas canvas, SKRect rect, SKPaint fillColor, SKPaint lineColor)
+        private static void DrawRect(SKCanvas canvas, SKRect rect, SKPaint? fillColor, SKPaint? lineColor)
         {
             if (fillColor != null && fillColor.Color.Alpha != 0) canvas.DrawRect(rect, fillColor);
             if (lineColor != null && lineColor.Color.Alpha != 0) canvas.DrawRect(rect, lineColor);
@@ -109,7 +109,7 @@ namespace Mapsui.Rendering.Skia
         /// <summary>
         /// Equilateral triangle of side 'sideLength', centered on the same point as if a circle of diameter 'sideLength' was there
         /// </summary>
-        private static void DrawTriangle(SKCanvas canvas, float x, float y, float sideLength, SKPaint fillColor, SKPaint lineColor)
+        private static void DrawTriangle(SKCanvas canvas, float x, float y, float sideLength, SKPaint? fillColor, SKPaint? lineColor)
         {
             var altitude = Math.Sqrt(3) / 2.0 * sideLength;
             var inradius = altitude / 3.0;

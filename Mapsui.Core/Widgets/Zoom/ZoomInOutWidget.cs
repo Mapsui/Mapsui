@@ -1,7 +1,7 @@
-﻿using Mapsui.Styles;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Mapsui.Styles;
 
 namespace Mapsui.Widgets.Zoom
 {
@@ -25,7 +25,7 @@ namespace Mapsui.Widgets.Zoom
     /// </summary>
     public class ZoomInOutWidget : Widget, INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
         /// Event handler which is called, when buttons are touched. If there

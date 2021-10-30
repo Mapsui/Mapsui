@@ -101,9 +101,9 @@ namespace Mapsui.UI.Objects
         /// <summary>
         /// Object for free use
         /// </summary>
-        public object Tag { get; set; }
+        public object? Tag { get; set; }
 
-        private IGeometryFeature feature;
+        private IGeometryFeature? feature;
 
         /// <summary>
         /// Mapsui Feature belonging to this drawable

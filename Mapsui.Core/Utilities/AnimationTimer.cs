@@ -1,5 +1,5 @@
-﻿using Mapsui.UI;
-using System.Timers;
+﻿using System.Timers;
+using Mapsui.UI;
 
 namespace Mapsui.Utilities
 {

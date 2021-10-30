@@ -7,7 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using Mapsui.Extensions;
-using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Styles;
@@ -76,7 +75,7 @@ namespace Mapsui.Providers
             return new MRect(minX, minY, maxX, maxY);
         }
 
-        private static MemoryStream ReadImageAsStream(string tiffPath, List<Color> noDataColors)
+        private static MemoryStream ReadImageAsStream(string tiffPath, List<Color>? noDataColors)
         {
             var img = Image.FromFile(tiffPath);
             var imageStream = new MemoryStream();
@@ -217,7 +216,7 @@ namespace Mapsui.Providers
 
         public bool? IsCrsSupported(string crs)
         {
-            return String.Equals(crs.Trim(), CRS.Trim(), StringComparison.CurrentCultureIgnoreCase);
+            return string.Equals(crs.Trim(), CRS.Trim(), StringComparison.CurrentCultureIgnoreCase);
         }
     }
 }

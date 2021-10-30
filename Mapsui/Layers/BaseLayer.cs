@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using Mapsui.Fetcher;
-using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.Widgets;
 
@@ -27,7 +26,7 @@ namespace Mapsui.Layers
         /// </summary>
         /// <param name="layer">Layer, for which styles should be returned</param>
         /// <returns>Enumerable with styles belonging to layer</returns>
-        public static IEnumerable<IStyle> GetLayerStyles(ILayer layer)
+        public static IEnumerable<IStyle> GetLayerStyles(ILayer? layer)
         {
             if (layer == null) return Array.Empty<IStyle>();
             var style = layer.Style as StyleCollection;
@@ -61,12 +60,12 @@ namespace Mapsui.Layers
         /// <summary>
         /// Called whenever a property changed
         /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>
         /// DataChanged should be triggered by any data changes
         /// </summary>
-        public event DataChangedEventHandler DataChanged;
+        public event DataChangedEventHandler? DataChanged;
 
         /// <inheritdoc />
         public int Id { get; }

@@ -2,12 +2,12 @@
 // This file can be redistributed and/or modified under the terms of the GNU Lesser General Public License.
 
 using System.Collections.Generic;
-using Mapsui.Geometries;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
 using System.Xml;
+using Mapsui.Geometries;
 using Mapsui.Utilities;
 
 // ReSharper disable InconsistentNaming
@@ -49,9 +49,9 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <param name="boundingBox">The bounding box of the query</param>
         /// <param name="filter">An instance implementing <see cref="IFilter"/></param>
         public string GetFeatureGETRequest(WfsFeatureTypeInfo featureTypeInfo, List<string> labelProperties,
-                                           BoundingBox boundingBox, IFilter filter)
+                                           BoundingBox? boundingBox, IFilter? filter)
         {
-            string qualification = string.IsNullOrEmpty(featureTypeInfo.Prefix)
+            var qualification = string.IsNullOrEmpty(featureTypeInfo.Prefix)
                                        ? string.Empty
                                        : featureTypeInfo.Prefix + ":";
 
@@ -87,7 +87,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         public byte[] GetFeaturePOSTRequest(WfsFeatureTypeInfo featureTypeInfo, List<string> labelProperties,
                                             BoundingBox boundingBox, IFilter filter)
         {
-            string qualification = string.IsNullOrEmpty(featureTypeInfo.Prefix)
+            var qualification = string.IsNullOrEmpty(featureTypeInfo.Prefix)
                                        ? string.Empty
                                        : featureTypeInfo.Prefix + ":";
 
@@ -117,7 +117,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             }
         }
 
-        private void AppendGml2Filter(XmlTextWriter xWriter, WfsFeatureTypeInfo featureTypeInfo, BoundingBox boundingBox, IFilter filter, string qualification)
+        private void AppendGml2Filter(XmlTextWriter xWriter, WfsFeatureTypeInfo featureTypeInfo, BoundingBox? boundingBox, IFilter? filter, string qualification)
         {
             xWriter.WriteStartElement("Filter", NSOGC);
             if (filter != null && boundingBox != null) xWriter.WriteStartElement("And");

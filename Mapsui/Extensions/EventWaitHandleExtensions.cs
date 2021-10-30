@@ -2,7 +2,7 @@
 
 namespace Mapsui.Extensions
 {
-    static class EventWaitHandleExtensions
+    internal static class EventWaitHandleExtensions
     {
         public static void Stop(this EventWaitHandle waitHandle)
         {

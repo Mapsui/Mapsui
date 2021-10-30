@@ -72,7 +72,7 @@ namespace Mapsui.Providers.Wfs.Xml
         public override IXPathQueryManager GetXPathQueryManagerInContext(XPathExpression xPath,
                                                                          DictionaryEntry[]? queryParameters = null)
         {
-            IXPathQueryManager xPathQueryManager = (queryParameters == null)
+            var xPathQueryManager = (queryParameters == null)
                                                        ? XPathQueryManager.GetXPathQueryManagerInContext(xPath)
                                                        : XPathQueryManager.GetXPathQueryManagerInContext(xPath,
                                                                                                           queryParameters);

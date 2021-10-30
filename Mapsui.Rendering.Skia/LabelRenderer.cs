@@ -290,7 +290,7 @@ namespace Mapsui.Rendering.Skia
 
         private class Line
         {
-            public string Value { get; set; }
+            public string? Value { get; set; }
             public float Width { get; set; }
             public float Baseline { get; set; }
         }
