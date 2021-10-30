@@ -1,5 +1,5 @@
-﻿using Mapsui.Utilities;
-using System;
+﻿using System;
+using Mapsui.Utilities;
 
 namespace Mapsui.UI
 {

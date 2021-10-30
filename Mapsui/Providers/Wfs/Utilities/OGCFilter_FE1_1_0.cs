@@ -41,8 +41,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public List<IFilter> Filters
         {
-            get { return _filters; }
-            set { _filters = value; }
+            get => _filters;
+            set => _filters = value;
         }
 
         /// <summary>
@@ -50,8 +50,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public JunctorEnum Junctor
         {
-            get { return _junctor; }
-            set { _junctor = value; }
+            get => _junctor;
+            set => _junctor = value;
         }
 
 
@@ -95,7 +95,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         {
             var filterBuilder = new StringBuilder();
             filterBuilder.Append("<" + _junctor + ">");
-            foreach (IFilter filter in Filters)
+            foreach (var filter in Filters)
                 filterBuilder.Append(filter.Encode());
             filterBuilder.Append("</" + _junctor + ">");
             return filterBuilder.ToString();

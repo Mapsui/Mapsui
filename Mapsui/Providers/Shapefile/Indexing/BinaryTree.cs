@@ -53,13 +53,13 @@ namespace Mapsui.Providers.Shapefile.Indexing
 
         public static bool operator >(Node<T, TU> lhs, Node<T, TU> rhs)
         {
-            int res = lhs.Item.Value.CompareTo(rhs.Item.Value);
+            var res = lhs.Item.Value.CompareTo(rhs.Item.Value);
             return res > 0;
         }
 
         public static bool operator <(Node<T, TU> lhs, Node<T, TU> rhs)
         {
-            int res = lhs.Item.Value.CompareTo(rhs.Item.Value);
+            var res = lhs.Item.Value.CompareTo(rhs.Item.Value);
             return res < 0;
         }
     }
@@ -191,7 +191,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
                 if (root.LeftNode != null)
                 {
                     if (root.LeftNode.Item.Value.CompareTo(value) > 0)
-                        foreach (ItemValue item in ScanFind(value, root.LeftNode))
+                        foreach (var item in ScanFind(value, root.LeftNode))
                         {
                             yield return item;
                         }
@@ -206,7 +206,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
                 if (root.RightNode != null)
                 {
                     if (root.RightNode.Item.Value.CompareTo(value) > 0)
-                        foreach (ItemValue item in ScanFind(value, root.RightNode))
+                        foreach (var item in ScanFind(value, root.RightNode))
                         {
                             yield return item;
                         }
@@ -237,7 +237,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
                 if (root.RightNode != null)
                 {
                     if (string.Compare(root.RightNode.Item.Value.ToString().Substring(0, val.Length).ToUpper(), val, StringComparison.Ordinal) > 0)
-                        foreach (ItemValue item in ScanString(val, root.RightNode))
+                        foreach (var item in ScanString(val, root.RightNode))
                         {
                             yield return item;
                         }
@@ -252,7 +252,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
                 if (root.LeftNode != null)
                 {
                     if (root.LeftNode.Item.Value.CompareTo(min) > 0)
-                        foreach (ItemValue item in ScanBetween(min, max, root.LeftNode))
+                        foreach (var item in ScanBetween(min, max, root.LeftNode))
                         {
                             yield return item;
                         }
@@ -267,7 +267,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
                 if (root.RightNode != null)
                 {
                     if (root.RightNode.Item.Value.CompareTo(min) > 0)
-                        foreach (ItemValue item in ScanBetween(min, max, root.RightNode))
+                        foreach (var item in ScanBetween(min, max, root.RightNode))
                         {
                             yield return item;
                         }
@@ -279,7 +279,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
         {
             if (root.LeftNode != null)
             {
-                foreach (ItemValue item in ScanInOrder(root.LeftNode))
+                foreach (var item in ScanInOrder(root.LeftNode))
                 {
                     yield return item;
                 }
@@ -289,7 +289,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
 
             if (root.RightNode != null)
             {
-                foreach (ItemValue item in ScanInOrder(root.RightNode))
+                foreach (var item in ScanInOrder(root.RightNode))
                 {
                     yield return item;
                 }

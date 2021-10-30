@@ -29,8 +29,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public string Url
         {
-            get { return _url; }
-            set { _url = value; }
+            get => _url;
+            set => _url = value;
         }
 
         /// <summary>
@@ -38,8 +38,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public string ProxyUrl
         {
-            get { return _proxyUrl; }
-            set { _proxyUrl = value; }
+            get => _proxyUrl;
+            set => _proxyUrl = value;
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public byte[] PostData
         {
-            set { _postData = value; }
+            set => _postData = value;
         }
 
         /// <summary>
@@ -55,8 +55,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public ICredentials Credentials
         {
-            get { return _credentials; }
-            set { _credentials = value; }
+            get => _credentials;
+            set => _credentials = value;
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                 {
                     _webRequest.ContentLength = _postData.Length;
                     _webRequest.Method = WebRequestMethods.Http.Post;
-                    using (Stream requestStream = _webRequest.GetRequestStream())
+                    using (var requestStream = _webRequest.GetRequestStream())
                     {
                         requestStream.Write(_postData, 0, _postData.Length);
                     }

@@ -1,10 +1,9 @@
-using Mapsui.Layers;
-using Mapsui.Providers;
-using Mapsui.Styles;
-using Mapsui.Styles.Thematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Mapsui.Layers;
+using Mapsui.Styles;
+using Mapsui.Styles.Thematics;
 
 namespace Mapsui.Rendering
 {

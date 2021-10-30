@@ -5,14 +5,13 @@ namespace Mapsui.Utilities
 {
     public class Performance
     {
-        readonly int _maxValues;
-        readonly double[] _drawingTimes;
-
-        bool _turnaround;
-        int _pos;
-        int _count;
-        double _min, _max;
-        double _sum;
+        private readonly int _maxValues;
+        private readonly double[] _drawingTimes;
+        private bool _turnaround;
+        private int _pos;
+        private int _count;
+        private double _min, _max;
+        private double _sum;
 
         public Performance(int maxValues = 20)
         {
@@ -67,7 +66,7 @@ namespace Mapsui.Utilities
         {
             get
             {
-                int pos = _pos == 0 ? _maxValues - 1 : _pos - 1;
+                var pos = _pos == 0 ? _maxValues - 1 : _pos - 1;
 
                 return _drawingTimes[pos];
             }
@@ -83,8 +82,8 @@ namespace Mapsui.Utilities
         {
             get
             {
-                List<double> result = new List<double>(_maxValues);
-                int pos = _pos == 0 ? _maxValues - 1 : _pos - 1;
+                var result = new List<double>(_maxValues);
+                var pos = _pos == 0 ? _maxValues - 1 : _pos - 1;
 
                 while (pos != _pos)
                 {

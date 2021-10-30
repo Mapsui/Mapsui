@@ -2,13 +2,13 @@
 
 namespace Mapsui.Fetcher
 {
-    class FetchMachine
+    internal class FetchMachine
     {
         private readonly List<FetchWorker> _worker = new();
 
         public FetchMachine(IFetchDispatcher fetchDispatcher, int numberOfWorkers = 4)
         {
-            for (int i = 0; i < numberOfWorkers; i++)
+            for (var i = 0; i < numberOfWorkers; i++)
             {
                 _worker.Add(new FetchWorker(fetchDispatcher));
             }

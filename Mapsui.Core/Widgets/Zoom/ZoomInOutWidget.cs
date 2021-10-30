@@ -1,7 +1,7 @@
-﻿using Mapsui.Styles;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Mapsui.Styles;
 
 namespace Mapsui.Widgets.Zoom
 {

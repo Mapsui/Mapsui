@@ -1,8 +1,6 @@
 // WFS provider by Peter Robineau (peter.robineau@gmx.at)
 // This file can be redistributed and/or modified under the terms of the GNU Lesser General Public License.
 
-using Mapsui.Geometries;
-using Mapsui.Providers.Wfs.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,9 +8,10 @@ using System.Globalization;
 using System.Net;
 using System.Xml.XPath;
 using Mapsui.Extensions;
-using Mapsui.Fetcher;
+using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Projection;
+using Mapsui.Providers.Wfs.Utilities;
 using Mapsui.Providers.Wfs.Xml;
 using Mapsui.Utilities;
 
@@ -82,17 +81,14 @@ namespace Mapsui.Providers.Wfs
         /// </summary>
         public IXPathQueryManager GetCapabilitiesCache
         {
-            get { return _featureTypeInfoQueryManager; }
-            set { _featureTypeInfoQueryManager = value; }
+            get => _featureTypeInfoQueryManager;
+            set => _featureTypeInfoQueryManager = value;
         }
 
         /// <summary>
         /// Gets feature metadata 
         /// </summary>
-        public WfsFeatureTypeInfo FeatureTypeInfo
-        {
-            get { return _featureTypeInfo; }
-        }
+        public WfsFeatureTypeInfo FeatureTypeInfo => _featureTypeInfo;
 
         /// <summary>
         /// Gets or sets a value indicating the axis order
@@ -102,13 +98,11 @@ namespace Mapsui.Providers.Wfs
         /// <para/>If not set explictly, <see cref="AxisOrderRegistry"/> is asked for a value based on <see cref="SRID"/>.</remarks>
         public int[] AxisOrder
         {
-            get
-            {
+            get =>
                 //https://docs.geoserver.org/stable/en/user/services/wfs/axis_order.html#wfs-basics-axis
-                return _axisOrder ?? (_wfsVersion == WFSVersionEnum.WFS_1_0_0
+                _axisOrder ?? (_wfsVersion == WFSVersionEnum.WFS_1_0_0
                     ? new[] { 0, 1 }
                     : new AxisOrderRegistry()[CRS]);
-            }
             set
             {
                 if (value != null)
@@ -134,8 +128,8 @@ namespace Mapsui.Providers.Wfs
         /// </summary>
         public bool QuickGeometries
         {
-            get { return _quickGeometries; }
-            set { _quickGeometries = value; }
+            get => _quickGeometries;
+            set => _quickGeometries = value;
         }
 
         /// <summary>
@@ -145,8 +139,8 @@ namespace Mapsui.Providers.Wfs
         /// </summary>
         public bool MultiGeometries
         {
-            get { return _multiGeometries; }
-            set { _multiGeometries = value; }
+            get => _multiGeometries;
+            set => _multiGeometries = value;
         }
 
         /// <summary>
@@ -156,8 +150,8 @@ namespace Mapsui.Providers.Wfs
         /// </summary>
         public bool GetFeatureGetRequest
         {
-            get { return _getFeatureGetRequest; }
-            set { _getFeatureGetRequest = value; }
+            get => _getFeatureGetRequest;
+            set => _getFeatureGetRequest = value;
         }
 
         /// <summary>
@@ -165,8 +159,8 @@ namespace Mapsui.Providers.Wfs
         /// </summary>
         public IFilter OgcFilter
         {
-            get { return _ogcFilter; }
-            set { _ogcFilter = value; }
+            get => _ogcFilter;
+            set => _ogcFilter = value;
         }
 
         /// <summary>
@@ -174,8 +168,8 @@ namespace Mapsui.Providers.Wfs
         /// </summary>
         public List<string> Labels
         {
-            get { return _labels; }
-            set { _labels = value; }
+            get => _labels;
+            set => _labels = value;
         }
 
         /// <summary>
@@ -183,8 +177,8 @@ namespace Mapsui.Providers.Wfs
         /// </summary>
         public ICredentials Credentials
         {
-            get { return _httpClientUtil.Credentials; }
-            set { _httpClientUtil.Credentials = value; }
+            get => _httpClientUtil.Credentials;
+            set => _httpClientUtil.Credentials = value;
         }
 
         /// <summary>
@@ -192,8 +186,8 @@ namespace Mapsui.Providers.Wfs
         /// </summary>
         public string ProxyUrl
         {
-            get { return _httpClientUtil.ProxyUrl; }
-            set { _httpClientUtil.ProxyUrl = value; }
+            get => _httpClientUtil.ProxyUrl;
+            set => _httpClientUtil.ProxyUrl = value;
         }
 
         /// <summary>
@@ -392,7 +386,7 @@ namespace Mapsui.Providers.Wfs
 
             var features = new Features();
 
-            string geometryTypeString = _featureTypeInfo.Geometry.GeometryType;
+            var geometryTypeString = _featureTypeInfo.Geometry.GeometryType;
 
             GeometryFactory? geomFactory = null;
 
@@ -510,8 +504,8 @@ namespace Mapsui.Providers.Wfs
 
         public string CRS
         {
-            get { return ProjectionHelper.EpsgPrefix + _featureTypeInfo.SRID; }
-            set { _featureTypeInfo.SRID = value.Substring(ProjectionHelper.EpsgPrefix.Length); }
+            get => ProjectionHelper.EpsgPrefix + _featureTypeInfo.SRID;
+            set => _featureTypeInfo.SRID = value.Substring(ProjectionHelper.EpsgPrefix.Length);
         }
 
         public void Dispose()
@@ -543,7 +537,7 @@ namespace Mapsui.Providers.Wfs
                 _featureTypeInfo.Prefix = _nsPrefix;
                 _featureTypeInfo.Name = _featureType;
 
-                string featureQueryName = string.IsNullOrEmpty(_nsPrefix)
+                var featureQueryName = string.IsNullOrEmpty(_nsPrefix)
                                               ? _featureType
                                               : _nsPrefix + ":" + _featureType;
 
@@ -574,7 +568,7 @@ namespace Mapsui.Providers.Wfs
                         _featureTypeInfo.ServiceUri.Remove(_featureTypeInfo.ServiceUri.Length - 1);
 
                 /* URI for DescribeFeatureType request */
-                string describeFeatureTypeUri = _featureTypeInfoQueryManager.GetValueFromNode
+                var describeFeatureTypeUri = _featureTypeInfoQueryManager.GetValueFromNode
                     (_featureTypeInfoQueryManager.Compile(_textResources.XPATH_DESCRIBEFEATURETYPERESOURCE));
                 /* If no DescribeFeatureType URI could be found, try GetCapabilities URI */
                 if (describeFeatureTypeUri == null) describeFeatureTypeUri = _getCapabilitiesUri;
@@ -590,7 +584,7 @@ namespace Mapsui.Providers.Wfs
                 _featureTypeInfo.SRID = srid;
 
                 /* Bounding Box */
-                IXPathQueryManager bboxQuery = _featureTypeInfoQueryManager.GetXPathQueryManagerInContext(
+                var bboxQuery = _featureTypeInfoQueryManager.GetXPathQueryManagerInContext(
                     _featureTypeInfoQueryManager.Compile(_textResources.XPATH_BBOX),
                     new[] { new DictionaryEntry("_param1", featureQueryName) });
 
@@ -672,7 +666,7 @@ namespace Mapsui.Providers.Wfs
                 }
 
                 //Continue with a clone in order to preserve the 'GetCapabilities' response
-                IXPathQueryManager describeFeatureTypeQueryManager = _featureTypeInfoQueryManager.Clone();
+                var describeFeatureTypeQueryManager = _featureTypeInfoQueryManager.Clone();
 
                 /******************************/
                 /* DescribeFeatureType request /
@@ -689,20 +683,20 @@ namespace Mapsui.Providers.Wfs
                 describeFeatureTypeQueryManager.AddNamespace(_textResources.NSGMLPREFIX, _textResources.NSGML);
 
                 /* Get target namespace */
-                string targetNs = describeFeatureTypeQueryManager.GetValueFromNode(
+                var targetNs = describeFeatureTypeQueryManager.GetValueFromNode(
                     describeFeatureTypeQueryManager.Compile(_textResources.XPATH_TARGETNS));
                 if (targetNs != null)
                     _featureTypeInfo.FeatureTypeNamespace = targetNs;
 
                 /* Get geometry */
-                string? geomType = _geometryType == GeometryTypeEnum.Unknown ? null : _geometryType.ToString();
+                var geomType = _geometryType == GeometryTypeEnum.Unknown ? null : _geometryType.ToString();
                 string? geomName = null;
 
                 /* The easiest way to get geometry info, just ask for the 'gml'-prefixed type-attribute... 
                    Simple, but effective in 90% of all cases...this is the standard GeoServer creates.*/
                 /* example: <xs:element nillable = "false" name = "the_geom" maxOccurs = "1" type = "gml:MultiPolygonPropertyType" minOccurs = "0" /> */
                 /* Try to get context of the geometry element by asking for a 'gml:*' type-attribute */
-                IXPathQueryManager geomQuery = describeFeatureTypeQueryManager.GetXPathQueryManagerInContext(
+                var geomQuery = describeFeatureTypeQueryManager.GetXPathQueryManagerInContext(
                     describeFeatureTypeQueryManager.Compile(_textResources.XPATH_GEOMETRYELEMENT_BYTYPEATTRIBUTEQUERY));
                 if (geomQuery != null)
                 {
@@ -744,7 +738,7 @@ namespace Mapsui.Providers.Wfs
                     if (geomQuery != null)
                     {
                         /* Ask for the name of the complextype - use the local context*/
-                        string geomComplexTypeName = geomQuery.GetValueFromNode(geomQuery.Compile(_textResources.XPATH_NAMEATTRIBUTEQUERY));
+                        var geomComplexTypeName = geomQuery.GetValueFromNode(geomQuery.Compile(_textResources.XPATH_NAMEATTRIBUTEQUERY));
 
                         if (geomComplexTypeName != null)
                         {
@@ -856,7 +850,7 @@ namespace Mapsui.Providers.Wfs
         {
             if (featureType.Contains(":"))
             {
-                string[] split = featureType.Split(':');
+                var split = featureType.Split(':');
                 _nsPrefix = split[0];
                 _featureType = split[1];
             }
