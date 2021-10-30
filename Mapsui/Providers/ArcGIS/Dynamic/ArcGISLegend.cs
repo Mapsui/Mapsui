@@ -33,8 +33,8 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
         /// </summary>
         public int TimeOut
         {
-            get { return _timeOut; }
-            set { _timeOut = value; }
+            get => _timeOut;
+            set => _timeOut = value;
         }
 
         /// <summary>

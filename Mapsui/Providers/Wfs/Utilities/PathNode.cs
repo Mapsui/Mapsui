@@ -26,18 +26,12 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <summary>
         /// Gets the namespace URI of the element-node
         /// </summary>
-        internal string XmlElementNsUri
-        {
-            get { return _xmlElementNsUri; }
-        }
+        internal string XmlElementNsUri => _xmlElementNsUri;
 
         /// <summary>
         /// Gets the local name of the element-node
         /// </summary>
-        internal string XmlElementNodeName
-        {
-            get { return _xmlElementNodeName; }
-        }
+        internal string XmlElementNodeName => _xmlElementNodeName;
 
 
 
@@ -80,8 +74,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public bool IsActive
         {
-            get { return _isActive; }
-            set { _isActive = value; }
+            get => _isActive;
+            set => _isActive = value;
         }
 
     }
@@ -114,7 +108,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <param name="reader">An XmlReader instance</param>
         public bool Matches(XmlReader reader)
         {
-            foreach (IPathNode pathNode in _pathNodes)
+            foreach (var pathNode in _pathNodes)
                 if (pathNode.Matches(reader)) return true;
             return false;
         }
@@ -125,10 +119,10 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public bool IsActive
         {
-            get { return _pathNodes[0].IsActive; }
+            get => _pathNodes[0].IsActive;
             set
             {
-                foreach (IPathNode pathNode in _pathNodes)
+                foreach (var pathNode in _pathNodes)
                     pathNode.IsActive = value;
             }
         }

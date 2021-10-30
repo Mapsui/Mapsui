@@ -26,7 +26,7 @@ namespace Mapsui.Rendering
             // to improve performance, convert the resolutions to a list so they can be walked up by
             // simply decrementing an index when the level index needs to change
             var resolutions = schema.Resolutions.OrderByDescending(pair => pair.Value.UnitsPerPixel).ToList();
-            for (int i = 0; i < resolutions.Count; i++)
+            for (var i = 0; i < resolutions.Count; i++)
             {
                 if (level == resolutions[i].Key)
                 {

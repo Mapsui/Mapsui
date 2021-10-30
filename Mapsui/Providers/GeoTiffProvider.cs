@@ -7,7 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using Mapsui.Extensions;
-using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Styles;
@@ -217,7 +216,7 @@ namespace Mapsui.Providers
 
         public bool? IsCrsSupported(string crs)
         {
-            return String.Equals(crs.Trim(), CRS.Trim(), StringComparison.CurrentCultureIgnoreCase);
+            return string.Equals(crs.Trim(), CRS.Trim(), StringComparison.CurrentCultureIgnoreCase);
         }
     }
 }

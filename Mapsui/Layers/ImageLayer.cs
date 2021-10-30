@@ -15,8 +15,6 @@
 // along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-using Mapsui.Fetcher;
-using Mapsui.Providers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,7 +22,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Extensions;
+using Mapsui.Fetcher;
 using Mapsui.Logging;
+using Mapsui.Providers;
 
 namespace Mapsui.Layers
 {
@@ -80,7 +80,7 @@ namespace Mapsui.Layers
             }
         }
 
-        void StartFetchTimerElapsed(object state)
+        private void StartFetchTimerElapsed(object state)
         {
             if (_fetchInfo.Extent == null) return;
             if (double.IsNaN(_fetchInfo.Resolution)) return;

@@ -295,7 +295,7 @@ namespace Mapsui.Providers.Wms
                 if (WmsVersion != "1.0.0" && WmsVersion != "1.1.0" && WmsVersion != "1.1.1" && WmsVersion != "1.3.0")
                     throw new ApplicationException("WMS Version " + WmsVersion + " not supported");
 
-                _nsmgr.AddNamespace(String.Empty, "http://www.opengis.net/wms");
+                _nsmgr.AddNamespace(string.Empty, "http://www.opengis.net/wms");
                 _nsmgr.AddNamespace("sm", WmsVersion == "1.3.0" ? "http://www.opengis.net/wms" : "");
                 _nsmgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
                 _nsmgr.AddNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
@@ -338,7 +338,7 @@ namespace Mapsui.Providers.Wms
             if (xnlKeywords != null)
             {
                 _serviceDescription.Keywords = new string[xnlKeywords.Count];
-                for (int i = 0; i < xnlKeywords.Count; i++)
+                for (var i = 0; i < xnlKeywords.Count; i++)
                     ServiceDescription.Keywords[i] = xnlKeywords[i].InnerText;
             }
             //Contact information
@@ -387,7 +387,7 @@ namespace Mapsui.Providers.Wms
             var layerNodes = xnCapability.SelectNodes("sm:Layer", _nsmgr);
             if (layerNodes != null && layerNodes.Count > 1)
             {
-                List<WmsServerLayer> layers = new List<WmsServerLayer>();
+                var layers = new List<WmsServerLayer>();
                 foreach (XmlNode l in layerNodes)
                 {
                     layers.Add(ParseLayer(l));
@@ -401,13 +401,13 @@ namespace Mapsui.Providers.Wms
             }
             else
             {
-                XmlNode xnLayer = xnCapability.SelectSingleNode("sm:Layer", _nsmgr);
+                var xnLayer = xnCapability.SelectSingleNode("sm:Layer", _nsmgr);
                 if (xnLayer == null)
                     throw new Exception("No layer tag found in Service Description");
                 Layer = ParseLayer(xnLayer);
             }
 
-            XmlNode xnException = xnCapability.SelectSingleNode("sm:Exception", _nsmgr);
+            var xnException = xnCapability.SelectSingleNode("sm:Exception", _nsmgr);
             if (xnException != null)
                 ParseExceptions(xnException);
 
@@ -420,11 +420,11 @@ namespace Mapsui.Providers.Wms
         /// <param name="xnlExceptionNode"></param>
         private void ParseExceptions(XmlNode xnlExceptionNode)
         {
-            XmlNodeList xnlFormats = xnlExceptionNode.SelectNodes("sm:Format", _nsmgr);
+            var xnlFormats = xnlExceptionNode.SelectNodes("sm:Format", _nsmgr);
             if (xnlFormats != null)
             {
                 _exceptionFormats = new string[xnlFormats.Count];
-                for (int i = 0; i < xnlFormats.Count; i++)
+                for (var i = 0; i < xnlFormats.Count; i++)
                 {
                     _exceptionFormats[i] = xnlFormats[i].InnerText;
                 }
@@ -437,10 +437,10 @@ namespace Mapsui.Providers.Wms
         /// <param name="xmlRequestNode"></param>
         private void ParseRequest(XmlNode xmlRequestNode)
         {
-            XmlNode xnGetMap = xmlRequestNode.SelectSingleNode("sm:GetMap", _nsmgr);
+            var xnGetMap = xmlRequestNode.SelectSingleNode("sm:GetMap", _nsmgr);
             ParseGetMapRequest(xnGetMap);
 
-            XmlNode xnGetFeatureInfo = xmlRequestNode.SelectSingleNode("sm:GetFeatureInfo", _nsmgr);
+            var xnGetFeatureInfo = xmlRequestNode.SelectSingleNode("sm:GetFeatureInfo", _nsmgr);
             if (xnGetFeatureInfo == null)
                 return;
 
@@ -449,11 +449,11 @@ namespace Mapsui.Providers.Wms
 
         private void ParseGetFeatureInfo(XmlNode getFeatureInfoRequestNodes)
         {
-            XmlNode xnlHttp = getFeatureInfoRequestNodes.SelectSingleNode("sm:DCPType/sm:HTTP", _nsmgr);
+            var xnlHttp = getFeatureInfoRequestNodes.SelectSingleNode("sm:DCPType/sm:HTTP", _nsmgr);
             if (xnlHttp != null && xnlHttp.HasChildNodes)
             {
                 GetFeatureInfoRequests = new WmsOnlineResource[xnlHttp.ChildNodes.Count];
-                for (int i = 0; i < xnlHttp.ChildNodes.Count; i++)
+                for (var i = 0; i < xnlHttp.ChildNodes.Count; i++)
                 {
                     var wor = new WmsOnlineResource
                     {
@@ -479,11 +479,11 @@ namespace Mapsui.Providers.Wms
         /// <param name="getMapRequestNodes"></param>
         private void ParseGetMapRequest(XmlNode getMapRequestNodes)
         {
-            XmlNode xnlHttp = getMapRequestNodes.SelectSingleNode("sm:DCPType/sm:HTTP", _nsmgr);
+            var xnlHttp = getMapRequestNodes.SelectSingleNode("sm:DCPType/sm:HTTP", _nsmgr);
             if (xnlHttp != null && xnlHttp.HasChildNodes)
             {
                 GetMapRequests = new WmsOnlineResource[xnlHttp.ChildNodes.Count];
-                for (int i = 0; i < xnlHttp.ChildNodes.Count; i++)
+                for (var i = 0; i < xnlHttp.ChildNodes.Count; i++)
                 {
                     var wor = new WmsOnlineResource
                     {
@@ -530,13 +530,13 @@ namespace Mapsui.Providers.Wms
             if (xnlKeywords != null)
             {
                 wmsServerLayer.Keywords = new string[xnlKeywords.Count];
-                for (int i = 0; i < xnlKeywords.Count; i++)
+                for (var i = 0; i < xnlKeywords.Count; i++)
                     wmsServerLayer.Keywords[i] = xnlKeywords[i].InnerText;
             }
 
             wmsServerLayer.CRS = ParseCrses(xmlLayer);
 
-            XmlNodeList xnlBoundingBox = xmlLayer.SelectNodes("sm:BoundingBox", _nsmgr);
+            var xnlBoundingBox = xmlLayer.SelectNodes("sm:BoundingBox", _nsmgr);
             if (xnlBoundingBox != null)
             {
                 wmsServerLayer.BoundingBoxes = new Dictionary<string, BoundingBox>();
@@ -559,7 +559,7 @@ namespace Mapsui.Providers.Wms
             if (xnlStyle != null)
             {
                 wmsServerLayer.Style = new WmsLayerStyle[xnlStyle.Count];
-                for (int i = 0; i < xnlStyle.Count; i++)
+                for (var i = 0; i < xnlStyle.Count; i++)
                 {
                     node = xnlStyle[i].SelectSingleNode("sm:Name", _nsmgr);
                     wmsServerLayer.Style[i].Name = node?.InnerText;
@@ -585,17 +585,19 @@ namespace Mapsui.Providers.Wms
                     node = xnlStyle[i].SelectSingleNode("sm:StyleSheetURL", _nsmgr);
                     if (node != null)
                     {
-                        wmsServerLayer.Style[i].StyleSheetUrl = new WmsOnlineResource();
-                        wmsServerLayer.Style[i].StyleSheetUrl.OnlineResource =
-                            node.SelectSingleNode("sm:OnlineResource", _nsmgr).Attributes["xlink:href"].InnerText;
+                        wmsServerLayer.Style[i].StyleSheetUrl = new WmsOnlineResource
+                        {
+                            OnlineResource =
+                            node.SelectSingleNode("sm:OnlineResource", _nsmgr).Attributes["xlink:href"].InnerText
+                        };
                     }
                 }
             }
-            XmlNodeList xnlLayers = xmlLayer.SelectNodes("sm:Layer", _nsmgr);
+            var xnlLayers = xmlLayer.SelectNodes("sm:Layer", _nsmgr);
             if (xnlLayers != null)
             {
                 wmsServerLayer.ChildLayers = new WmsServerLayer[xnlLayers.Count];
-                for (int i = 0; i < xnlLayers.Count; i++)
+                for (var i = 0; i < xnlLayers.Count; i++)
                     wmsServerLayer.ChildLayers[i] = ParseLayer(xnlLayers[i]);
             }
             node = xmlLayer.SelectSingleNode("sm:LatLonBoundingBox", _nsmgr);
@@ -615,17 +617,17 @@ namespace Mapsui.Providers.Wms
         {
             var crses = new List<string>();
 
-            XmlNodeList xnlSrs = xmlLayer.SelectNodes("sm:SRS", _nsmgr);
+            var xnlSrs = xmlLayer.SelectNodes("sm:SRS", _nsmgr);
             if (xnlSrs != null)
             {
-                for (int i = 0; i < xnlSrs.Count; i++)
+                for (var i = 0; i < xnlSrs.Count; i++)
                     crses.Add(xnlSrs[i].InnerText);
             }
 
-            XmlNodeList xnlCrs = xmlLayer.SelectNodes("sm:CRS", _nsmgr);
+            var xnlCrs = xmlLayer.SelectNodes("sm:CRS", _nsmgr);
             if (xnlCrs != null)
             {
-                for (int i = 0; i < xnlCrs.Count; i++)
+                for (var i = 0; i < xnlCrs.Count; i++)
                     crses.Add(xnlCrs[i].InnerText);
             }
 

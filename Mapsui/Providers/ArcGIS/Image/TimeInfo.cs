@@ -9,21 +9,9 @@ namespace Mapsui.Providers.ArcGIS.Image
         public long[]? timeExtent { get; set; }
         public TimeReference? timeReference { get; set; }
 
-        public DateTime? StartDate
-        {
-            get
-            {
-                return timeExtent.Length == 2 ? ConvertUnixTimeStamp(timeExtent[0]) : ConvertUnixTimeStamp(0);
-            }
-        }
+        public DateTime? StartDate => timeExtent.Length == 2 ? ConvertUnixTimeStamp(timeExtent[0]) : ConvertUnixTimeStamp(0);
 
-        public DateTime? EndDate
-        {
-            get
-            {
-                return timeExtent.Length == 2 ? ConvertUnixTimeStamp(timeExtent[1]) : ConvertUnixTimeStamp(0);
-            }
-        }
+        public DateTime? EndDate => timeExtent.Length == 2 ? ConvertUnixTimeStamp(timeExtent[1]) : ConvertUnixTimeStamp(0);
 
         public static DateTime? ConvertUnixTimeStamp(long unixTimeStamp)
         {

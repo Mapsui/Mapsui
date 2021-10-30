@@ -1,8 +1,8 @@
-using BruTile;
-using BruTile.Tms;
 using System;
 using System.Net;
 using System.Threading;
+using BruTile;
+using BruTile.Tms;
 using Mapsui.Logging;
 
 namespace Mapsui.Layers
