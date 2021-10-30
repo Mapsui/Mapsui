@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.Geometries.WellKnownBinary;
 using Mapsui.Geometries.WellKnownText;
@@ -61,7 +62,7 @@ namespace Mapsui.Providers
         /// </summary>
         public string CRS { get; set; } = "";
 
-        private readonly BoundingBox _boundingBox;
+        private readonly MRect _boundingBox;
 
         public MemoryProvider()
         {
@@ -156,20 +157,20 @@ namespace Mapsui.Providers
         /// BoundingBox of data set
         /// </summary>
         /// <returns>BoundingBox</returns>
-        public BoundingBox GetExtent()
+        public MRect GetExtent()
         {
             return _boundingBox;
         }
 
-        private static BoundingBox GetExtent(IReadOnlyList<IGeometryFeature> features)
+        private static MRect GetExtent(IReadOnlyList<IGeometryFeature> features)
         {
-            BoundingBox box = null;
+            MRect box = null;
             foreach (var feature in features)
             {
                 if (feature.Geometry.IsEmpty()) continue;
                 box = box == null
-                    ? feature.Geometry.BoundingBox
-                    : box.Join(feature.Geometry.BoundingBox);
+                    ? feature.Geometry.BoundingBox.ToMRect()
+                    : box.Join(feature.Geometry.BoundingBox.ToMRect());
             }
             return box;
         }

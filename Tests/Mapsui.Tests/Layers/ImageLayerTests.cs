@@ -23,9 +23,9 @@ namespace Mapsui.Tests.Layers
                 throw new Exception(ExceptionMessage);
             }
 
-            public BoundingBox GetExtent()
+            public MRect GetExtent()
             {
-                return new BoundingBox(-1, -1, 0, 0);
+                return new MRect(-1, -1, 0, 0);
             }
         }
 

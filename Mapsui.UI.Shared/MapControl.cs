@@ -269,7 +269,7 @@ namespace Mapsui.UI.Wpf
             {
                 _map.Initialized = true;
             }
-            
+
             Refresh(changeType);
         }
 

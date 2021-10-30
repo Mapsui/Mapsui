@@ -16,7 +16,6 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 using System.Collections.Generic;
-using Mapsui.Geometries;
 using Mapsui.Layers;
 
 namespace Mapsui.Providers
@@ -37,6 +36,6 @@ namespace Mapsui.Providers
         /// <see cref="Mapsui.Geometries.BoundingBox"/> of data set
         /// </summary>
         /// <returns>BoundingBox</returns>
-        BoundingBox GetExtent();
+        MRect GetExtent();
     }
 }

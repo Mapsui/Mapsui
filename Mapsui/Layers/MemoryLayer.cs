@@ -53,6 +53,6 @@ namespace Mapsui.Layers
             // DataHasChanged should be called.
         }
 
-        public override MRect Envelope => DataSource?.GetExtent().ToMRect();
+        public override MRect Envelope => DataSource?.GetExtent();
     }
 }

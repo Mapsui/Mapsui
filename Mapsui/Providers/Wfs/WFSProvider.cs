@@ -494,9 +494,9 @@ namespace Mapsui.Providers.Wfs
             }
         }
 
-        public BoundingBox GetExtent()
+        public MRect GetExtent()
         {
-            return new BoundingBox(_featureTypeInfo.BBox.MinLong,
+            return new MRect(_featureTypeInfo.BBox.MinLong,
                                    _featureTypeInfo.BBox.MinLat,
                                    _featureTypeInfo.BBox.MaxLong,
                                    _featureTypeInfo.BBox.MaxLat);
