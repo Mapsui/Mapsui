@@ -76,10 +76,10 @@ namespace Mapsui.Styles.Thematics
             if (Positions[Positions.Length - 1] != 1f)
                 throw new ArgumentException("Last position value must be 1.0f");
             if (pos > 1 || pos < 0) pos -= Math.Floor(pos);
-            int i = 1;
+            var i = 1;
             while (i < Positions.Length && Positions[i] < pos)
                 i++;
-            double frac = (pos - Positions[i - 1]) / (Positions[i] - Positions[i - 1]);
+            var frac = (pos - Positions[i - 1]) / (Positions[i] - Positions[i - 1]);
             var red = (int)Math.Round((Colors[i - 1].R * (1 - frac) + Colors[i].R * frac));
             var green = (int)Math.Round((Colors[i - 1].G * (1 - frac) + Colors[i].G * frac));
             var blue = (int)Math.Round((Colors[i - 1].B * (1 - frac) + Colors[i].B * frac));

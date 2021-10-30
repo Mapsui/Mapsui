@@ -82,8 +82,8 @@ namespace Mapsui.Styles
         private Color? _subtitleFontColor;
         private bool _invalidated;
 
-        public new static double DefaultWidth { get; set; } = 100;
-        public new static double DefaultHeight { get; set; } = 30;
+        public static new double DefaultWidth { get; set; } = 100;
+        public static new double DefaultHeight { get; set; } = 30;
 
         /// <summary>
         /// Type of Callout
