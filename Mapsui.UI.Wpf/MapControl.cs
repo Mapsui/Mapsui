@@ -37,7 +37,7 @@ namespace Mapsui.UI.Wpf
         /// <summary>
         /// Fling is called, when user release mouse button or lift finger while moving with a certain speed, higher than speed of swipe 
         /// </summary>
-        public event EventHandler<SwipedEventArgs> Fling;
+        public event EventHandler<SwipedEventArgs>? Fling;
 
         public MapControl()
         {
@@ -122,7 +122,7 @@ namespace Mapsui.UI.Wpf
             };
         }
 
-        public event EventHandler<FeatureInfoEventArgs> FeatureInfo; // todo: Remove and add sample for alternative
+        public event EventHandler<FeatureInfoEventArgs>? FeatureInfo; // todo: Remove and add sample for alternative
 
         internal void InvalidateCanvas()
         {

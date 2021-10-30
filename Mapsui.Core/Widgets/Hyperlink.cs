@@ -6,7 +6,7 @@ namespace Mapsui.Widgets
     {
         public string? Url { get; set; }
 
-        public event EventHandler<HyperlinkWidgetArguments> Touched;
+        public event EventHandler<HyperlinkWidgetArguments>? Touched;
 
         public override bool HandleWidgetTouched(INavigator navigator, MPoint position)
         {

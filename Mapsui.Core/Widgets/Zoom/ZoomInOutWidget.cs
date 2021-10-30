@@ -32,7 +32,7 @@ namespace Mapsui.Widgets.Zoom
         /// isn't one, than the default handler is used, which change the Resolution
         /// of Viewport.
         /// </summary>
-        public event EventHandler<WidgetTouchedEventArgs> WidgetTouched;
+        public event EventHandler<WidgetTouchedEventArgs>? WidgetTouched;
 
         private float _size = 40;
 

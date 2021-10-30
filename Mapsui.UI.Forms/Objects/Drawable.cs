@@ -111,7 +111,7 @@ namespace Mapsui.UI.Objects
         /// <summary>
         /// Event called, if this drawable is clicked an IsClickable is true
         /// </summary>
-        public event EventHandler<DrawableClickedEventArgs> Clicked;
+        public event EventHandler<DrawableClickedEventArgs>? Clicked;
 
         void IClickable.HandleClicked(DrawableClickedEventArgs e)
         {

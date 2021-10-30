@@ -111,22 +111,22 @@ namespace Mapsui.UI.Forms
         ///<summary>
         /// Occurs when a pin clicked
         /// </summary>
-        public event EventHandler<PinClickedEventArgs> PinClicked;
+        public event EventHandler<PinClickedEventArgs>? PinClicked;
 
         /// <summary>
         /// Occurs when selected pin changed
         /// </summary>
-        public event EventHandler<SelectedPinChangedEventArgs> SelectedPinChanged;
+        public event EventHandler<SelectedPinChangedEventArgs>? SelectedPinChanged;
 
         /// <summary>
         /// Occurs when map clicked
         /// </summary>
-        public event EventHandler<MapClickedEventArgs> MapClicked;
+        public event EventHandler<MapClickedEventArgs>? MapClicked;
 
         /// <summary>
         /// Occurs when map long clicked
         /// </summary>
-        public event EventHandler<MapLongClickedEventArgs> MapLongClicked;
+        public event EventHandler<MapLongClickedEventArgs>? MapLongClicked;
 
         #endregion
 

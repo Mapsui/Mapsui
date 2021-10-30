@@ -333,22 +333,22 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// TouchStart is called, when user press a mouse button or touch the display
         /// </summary>
-        public event EventHandler<TouchedEventArgs> TouchStarted;
+        public event EventHandler<TouchedEventArgs>? TouchStarted;
 
         /// <summary>
         /// TouchEnd is called, when user release a mouse button or doesn't touch display anymore
         /// </summary>
-        public event EventHandler<TouchedEventArgs> TouchEnded;
+        public event EventHandler<TouchedEventArgs>? TouchEnded;
 
         /// <summary>
         /// TouchEntered is called, when user moves an active touch onto the view
         /// </summary>
-        public event EventHandler<TouchedEventArgs> TouchEntered;
+        public event EventHandler<TouchedEventArgs>? TouchEntered;
 
         /// <summary>
         /// TouchExited is called, when user moves an active touch off the view
         /// </summary>
-        public event EventHandler<TouchedEventArgs> TouchExited;
+        public event EventHandler<TouchedEventArgs>? TouchExited;
 
         /// <summary>
         /// TouchMove is called, when user move mouse over map (independent from mouse button state) or move finger on display
@@ -356,12 +356,12 @@ namespace Mapsui.UI.Forms
 #if __WPF__
         public new event EventHandler<TouchedEventArgs> TouchMove;
 #else
-        public event EventHandler<TouchedEventArgs> TouchMove;
+        public event EventHandler<TouchedEventArgs>? TouchMove;
 
         /// <summary>
         /// TouchAction is called, when user provoques a touch event
         /// </summary>
-        public event EventHandler<SKTouchEventArgs> TouchAction;
+        public event EventHandler<SKTouchEventArgs>? TouchAction;
 #endif
 
         /// <summary>
@@ -370,38 +370,38 @@ namespace Mapsui.UI.Forms
 #if __ANDROID__
         public new event EventHandler<HoveredEventArgs> Hovered;
 #else
-        public event EventHandler<HoveredEventArgs> Hovered;
+        public event EventHandler<HoveredEventArgs>? Hovered;
 #endif
 
         /// <summary>
         /// Swipe is called, when user release mouse button or lift finger while moving with a certain speed 
         /// </summary>
-        public event EventHandler<SwipedEventArgs> Swipe;
+        public event EventHandler<SwipedEventArgs>? Swipe;
 
         /// <summary>
         /// Fling is called, when user release mouse button or lift finger while moving with a certain speed, higher than speed of swipe 
         /// </summary>
-        public event EventHandler<SwipedEventArgs> Fling;
+        public event EventHandler<SwipedEventArgs>? Fling;
 
         /// <summary>
         /// SingleTap is called, when user clicks with a mouse button or tap with a finger on map 
         /// </summary>
-        public event EventHandler<TappedEventArgs> SingleTap;
+        public event EventHandler<TappedEventArgs>? SingleTap;
 
         /// <summary>
         /// LongTap is called, when user clicks with a mouse button or tap with a finger on map for 500 ms
         /// </summary>
-        public event EventHandler<TappedEventArgs> LongTap;
+        public event EventHandler<TappedEventArgs>? LongTap;
 
         /// <summary>
         /// DoubleTap is called, when user clicks with a mouse button or tap with a finger two or more times on map
         /// </summary>
-        public event EventHandler<TappedEventArgs> DoubleTap;
+        public event EventHandler<TappedEventArgs>? DoubleTap;
 
         /// <summary>
         /// Zoom is called, when map should be zoomed
         /// </summary>
-        public event EventHandler<ZoomedEventArgs> Zoomed;
+        public event EventHandler<ZoomedEventArgs>? Zoomed;
 
         /// <summary>
         /// Called, when map should zoom out
