@@ -331,5 +331,16 @@ namespace Mapsui
             _modified = true;
             ViewportChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public static Viewport Create(MRect extent, double resolution)
+        {
+            return new Viewport
+            {
+                Resolution = resolution,
+                Center = extent.Centroid,
+                Width = extent.Width / resolution,
+                Height = extent.Height / resolution
+            };
+        }
     }
 }
