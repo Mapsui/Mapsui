@@ -14,6 +14,9 @@ namespace Mapsui.Rendering.Skia
         {
             if (style is LabelStyle labelStyle)
             {
+                if (feature.BoundingBox == null)
+                    return;
+
                 var center = viewport.WorldToScreen(feature.BoundingBox.Centroid);
                 LabelRenderer.Draw(canvas, labelStyle, feature, center.ToPoint(), opacity);
             }
@@ -33,7 +36,7 @@ namespace Mapsui.Rendering.Skia
                 float[]? dashArray = null;
                 float dashOffset = 0;
 
-                if (vectorStyle != null)
+                if (vectorStyle is not null)
                 {
                     lineWidth = (float)vectorStyle.Line.Width;
                     lineColor = vectorStyle.Line.Color;

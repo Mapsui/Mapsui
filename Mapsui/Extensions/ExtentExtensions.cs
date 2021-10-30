@@ -5,7 +5,7 @@ namespace Mapsui.Extensions
 {
     public static class ExtentExtensions
     {
-        public static BoundingBox ToBoundingBox(this Extent extent)
+        public static BoundingBox? ToBoundingBox(this Extent extent)
         {
             return new BoundingBox(
                 extent.MinX,

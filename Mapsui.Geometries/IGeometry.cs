@@ -35,10 +35,10 @@ namespace Mapsui.Geometries
         ///     The minimum <see cref="Geometries.BoundingBox" /> for this <see cref="Geometry" />.
         /// </summary>
         /// <returns><see cref="Geometries.BoundingBox" /> for this <see cref="Geometry" /></returns>
-        BoundingBox BoundingBox { get; }
+        BoundingBox? BoundingBox { get; }
 
         [Obsolete("Use the BoundingBox field instead")]
-        BoundingBox GetBoundingBox();
+        BoundingBox? GetBoundingBox();
 
         /// <summary>
         ///     Exports this <see cref="Geometry" /> to a specific well-known text representation of <see cref="Geometry" />.

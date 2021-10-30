@@ -335,7 +335,7 @@ namespace Mapsui.Geometries
         /// </summary>
         /// <param name="box">Boundingbox to join with</param>
         /// <returns>Boundingbox containing both boundingboxes</returns>
-        public BoundingBox Join(BoundingBox? box)
+        public BoundingBox? Join(BoundingBox? box)
         {
             if (box == null)
                 return Clone();
@@ -379,7 +379,7 @@ namespace Mapsui.Geometries
         ///     Increases the size of the boundingbox by the givent amount in all directions
         /// </summary>
         /// <param name="amount">Amount to grow in all directions</param>
-        public BoundingBox Grow(double amount)
+        public BoundingBox? Grow(double amount)
         {
             var box = Clone();
             box.Min.X -= amount;
@@ -395,7 +395,7 @@ namespace Mapsui.Geometries
         /// </summary>
         /// <param name="amountInX">Amount to grow in horizontal direction</param>
         /// <param name="amountInY">Amount to grow in vertical direction</param>
-        public BoundingBox Grow(double amountInX, double amountInY)
+        public BoundingBox? Grow(double amountInX, double amountInY)
         {
             var box = Clone();
             box.Min.X -= amountInX;
@@ -496,7 +496,7 @@ namespace Mapsui.Geometries
         ///     Creates a copy of the BoundingBox
         /// </summary>
         /// <returns></returns>
-        public BoundingBox Clone()
+        public BoundingBox? Clone()
         {
             return new BoundingBox(Min.X, Min.Y, Max.X, Max.Y);
         }

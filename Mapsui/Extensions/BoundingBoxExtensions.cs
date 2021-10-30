@@ -20,7 +20,7 @@ namespace Mapsui.Extensions
             return true;
         }
 
-        public static Extent ToExtent(this BoundingBox boundingBox)
+        public static Extent ToExtent(this BoundingBox? boundingBox)
         {
             return new Extent(boundingBox.MinX, boundingBox.MinY, boundingBox.MaxX, boundingBox.MaxY);
         }

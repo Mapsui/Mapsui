@@ -8,7 +8,7 @@
         public int Width { get; }
         public int Height { get; }
         public float PixelRatio { get; }
-        public object Data { get; set; }
+        public object? Data { get; set; }
 
         public Sprite(int atlas, int x, int y, int width, int height, float pixelRatio)
         {

@@ -112,7 +112,7 @@ namespace Mapsui.Geometries
         }
 
         [Obsolete("Use the BoundingBox field instead")]
-        public new BoundingBox GetBoundingBox()
+        public new BoundingBox? GetBoundingBox()
         {
             return BoundingBox;
         }

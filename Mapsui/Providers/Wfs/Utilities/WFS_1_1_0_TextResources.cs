@@ -90,7 +90,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <param name="boundingBox">The bounding box of the query</param>
         /// <param name="filter">An instance implementing <see cref="IFilter"/></param>
         public byte[] GetFeaturePOSTRequest(WfsFeatureTypeInfo featureTypeInfo, List<string> labelProperties,
-                                            BoundingBox boundingBox, IFilter filter)
+                                            BoundingBox? boundingBox, IFilter filter)
         {
             var qualification = string.IsNullOrEmpty(featureTypeInfo.Prefix)
                                        ? string.Empty
