@@ -173,7 +173,7 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        private static SKImage GetImage(SymbolCache symbolCache, int bitmapId)
+        private static SKImage? GetImage(SymbolCache symbolCache, int bitmapId)
         {
             var bitmapInfo = symbolCache.GetOrCreate(bitmapId);
             if (bitmapInfo.Type == BitmapType.Bitmap)

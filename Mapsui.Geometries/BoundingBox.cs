@@ -349,7 +349,7 @@ namespace Mapsui.Geometries
         /// <param name="box1"></param>
         /// <param name="box2"></param>
         /// <returns></returns>
-        public static BoundingBox Join(BoundingBox? box1, BoundingBox? box2)
+        public static BoundingBox? Join(BoundingBox? box1, BoundingBox? box2)
         {
             if ((box1 == null) && (box2 == null))
                 return null;
@@ -363,7 +363,7 @@ namespace Mapsui.Geometries
         /// </summary>
         /// <param name="boxes">Boxes to join</param>
         /// <returns>Combined BoundingBox</returns>
-        public static BoundingBox Join(BoundingBox[]? boxes)
+        public static BoundingBox? Join(BoundingBox[]? boxes)
         {
             if (boxes == null) return null;
             if (boxes.Length == 1) return boxes[0];

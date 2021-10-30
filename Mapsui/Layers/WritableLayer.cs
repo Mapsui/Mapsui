@@ -24,7 +24,7 @@ namespace Mapsui.Layers
             return result;
         }
 
-        private MRect GetExtent()
+        private MRect? GetExtent()
         {
             // todo: Calculate extent only once. Use a _modified field to determine when this is needed.
 

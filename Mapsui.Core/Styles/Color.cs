@@ -98,7 +98,7 @@ namespace Mapsui.Styles
         /// </summary>
         /// <param name="from">String with HTML color representation or function like rgb() or hsl()</param>
         /// <returns>Converted Mapsui Color</returns>
-        public static Color FromString(string from)
+        public static Color? FromString(string from)
         {
             Color? result = null;
 

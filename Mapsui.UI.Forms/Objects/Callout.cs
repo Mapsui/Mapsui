@@ -9,6 +9,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using Mapsui.Extensions;
 using Xamarin.Forms;
+using CalloutStyle = Mapsui.Styles.CalloutStyle;
 
 namespace Mapsui.UI.Forms
 {
@@ -186,12 +187,7 @@ namespace Mapsui.UI.Forms
 
         public Callout(Pin pin)
         {
-            if (pin == null)
-            {
-                throw new ArgumentNullException("Pin shouldn't be null");
-            }
-
-            _pin = pin;
+            _pin = pin ?? throw new ArgumentNullException("Pin shouldn't be null");;
             if (_pin.Feature != null)
                 Feature = (Feature)_pin.Feature.Copy();
             else
@@ -564,9 +560,9 @@ namespace Mapsui.UI.Forms
         /// </summary>
         private void UpdateContent()
         {
-            CalloutStyle style = (CalloutStyle)Feature.Styles.Where((s) => s is CalloutStyle).FirstOrDefault();
+            CalloutStyle? style = Feature.Styles.Where((s) => s is CalloutStyle).FirstOrDefault() as CalloutStyle;
 
-            if (style == null)
+            if (style is null)
             {
                 style = new CalloutStyle();
                 Feature.Styles.Add(style);
@@ -597,9 +593,9 @@ namespace Mapsui.UI.Forms
         /// </summary>
         private void UpdateCalloutStyle()
         {
-            CalloutStyle style = (CalloutStyle)Feature.Styles.Where((s) => s is CalloutStyle).FirstOrDefault();
+            CalloutStyle? style = Feature.Styles.Where((s) => s is CalloutStyle).FirstOrDefault() as CalloutStyle;
 
-            if (style == null)
+            if (style is null)
             {
                 style = new CalloutStyle();
                 Feature.Styles.Add(style);

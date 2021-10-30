@@ -7,7 +7,7 @@ namespace Mapsui.Tests.Fetcher.Providers
     {
         private readonly Random _random = new Random(DateTime.Now.Millisecond);
 
-        public override byte[] GetTile(TileInfo tileInfo)
+        public override byte[]? GetTile(TileInfo tileInfo)
         {
             base.GetTile(tileInfo); // Just for counting
 

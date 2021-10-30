@@ -66,7 +66,7 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        private static SKPaint CreateLinePaint(Pen outline, float opacity)
+        private static SKPaint? CreateLinePaint(Pen outline, float opacity)
         {
             if (outline == null) return null;
 
@@ -81,7 +81,7 @@ namespace Mapsui.Rendering.Skia
             };
         }
 
-        private static SKPaint CreateFillPaint(Brush fill, float opacity)
+        private static SKPaint? CreateFillPaint(Brush fill, float opacity)
         {
             if (fill == null) return null;
 

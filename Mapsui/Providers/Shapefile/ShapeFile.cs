@@ -718,7 +718,7 @@ namespace Mapsui.Providers.Shapefile
         /// <param name="oid">Object ID</param>
         /// <returns>geometry</returns>
         // ReSharper disable once CyclomaticComplexity // Fix when changes need to be made here
-        private Geometry ReadGeometry(uint oid)
+        private Geometry? ReadGeometry(uint oid)
         {
             _brShapeFile.BaseStream.Seek(GetShapeIndex(oid) + 8, 0); //Skip record number and content length
             var type = (ShapeType)_brShapeFile.ReadInt32(); //Shape type
@@ -847,7 +847,7 @@ namespace Mapsui.Providers.Shapefile
 
         }
 
-        private IGeometryFeature GetFeaturePrivate(uint rowId, IEnumerable<IGeometryFeature>? dt)
+        private IGeometryFeature? GetFeaturePrivate(uint rowId, IEnumerable<IGeometryFeature>? dt)
         {
             if (_dbaseFile != null)
             {

@@ -105,7 +105,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         /// <param name="reader">An XmlReader instance at the position of the coordinates to read</param>
         /// <returns>A point collection (the collected coordinates)</returns>
-        protected Collection<Point> ParseCoordinates(XmlReader reader)
+        protected Collection<Point>? ParseCoordinates(XmlReader reader)
         {
             if (!reader.Read()) return null;
 
@@ -167,7 +167,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <param name="labels">A dictionary for recording label values. Pass 'null' to ignore searching for label values</param>
         /// <param name="pathNodes">A list of <see cref="IPathNode"/> instances defining the context of the retrieved reader</param>
         /// <returns>A sub-reader of the XmlReader given as argument</returns>
-        protected XmlReader GetSubReaderOf(XmlReader reader, Dictionary<string, string> labels, List<IPathNode> pathNodes)
+        protected XmlReader? GetSubReaderOf(XmlReader reader, Dictionary<string, string> labels, List<IPathNode> pathNodes)
         {
             while (reader.Read())
             {

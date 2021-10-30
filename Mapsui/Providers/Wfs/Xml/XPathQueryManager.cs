@@ -205,7 +205,7 @@ namespace Mapsui.Providers.Wfs.Xml
         /// </summary>
         /// <param name="xPath">The compiled XPath expression</param>
         /// <param name="queryParameters">Parameters for the compiled XPath expression</param>
-        public IXPathQueryManager GetXPathQueryManagerInContext(XPathExpression xPath, DictionaryEntry[]? queryParameters = null)
+        public IXPathQueryManager? GetXPathQueryManagerInContext(XPathExpression xPath, DictionaryEntry[]? queryParameters = null)
         {
             if (queryParameters != null) _paramContext.AddParam(queryParameters);
             FindXPath(xPath);
@@ -403,7 +403,7 @@ namespace Mapsui.Providers.Wfs.Xml
             /// <param name="prefix">The prefix of the function</param>
             /// <param name="name">The name of the function</param>
             /// <param name="argTypes">A list of argument types of the function</param>
-            public override IXsltContextFunction ResolveFunction(string prefix, string name, XPathResultType[] argTypes)
+            public override IXsltContextFunction? ResolveFunction(string prefix, string name, XPathResultType[] argTypes)
             {
                 if (name.Equals(ParamCompare.FunctionName)) return new ParamCompare(argTypes, 2, 2);
                 if (name.Equals(ParamCompareWithTargetNs.FunctionName))
@@ -416,7 +416,7 @@ namespace Mapsui.Providers.Wfs.Xml
             /// </summary>
             /// <param name="prefix">The prefix of the variable</param>
             /// <param name="name">The name of the variable</param>
-            public override IXsltContextVariable ResolveVariable(string prefix, string name)
+            public override IXsltContextVariable? ResolveVariable(string prefix, string name)
             {
                 var param = GetParam(name);
                 if (param != null)

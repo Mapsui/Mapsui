@@ -65,12 +65,12 @@ namespace Mapsui.Rendering.Skia
         {
             if (!viewport.HasSize) return;
 
-            if (background != null) canvas.Clear(background.ToSkia());
+            if (background is not null) canvas.Clear(background.ToSkia());
             Render(canvas, viewport, layers);
             Render(canvas, viewport, widgets, 1);
         }
 
-        public MemoryStream RenderToBitmapStream(IReadOnlyViewport viewport, IEnumerable<ILayer> layers, Color? background = null, float pixelDensity = 1)
+        public MemoryStream? RenderToBitmapStream(IReadOnlyViewport viewport, IEnumerable<ILayer> layers, Color? background = null, float pixelDensity = 1)
         {
             try
             {
@@ -83,7 +83,7 @@ namespace Mapsui.Rendering.Skia
                 using var surface = SKSurface.Create(imageInfo);
                 if (surface == null) return null;
                 // Not sure if this is needed here:
-                if (background != null) surface.Canvas.Clear(background.ToSkia());
+                if (background is not null) surface.Canvas.Clear(background.ToSkia());
                 surface.Canvas.Scale(pixelDensity, pixelDensity);
                 Render(surface.Canvas, viewport, layers);
                 using var image = surface.Snapshot();
@@ -137,7 +137,7 @@ namespace Mapsui.Rendering.Skia
                 if (counter >= numberToRemove) break;
                 var textureInfo = tileCache[key];
                 tileCache.Remove(key);
-                textureInfo.Bitmap.Dispose();
+                textureInfo.Bitmap?.Dispose();
                 counter++;
             }
         }
@@ -208,7 +208,7 @@ namespace Mapsui.Rendering.Skia
             WidgetRenderer.Render(canvas, viewport, widgets, WidgetRenders, layerOpacity);
         }
 
-        public MapInfo GetMapInfo(double x, double y, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, int margin = 0)
+        public MapInfo? GetMapInfo(double x, double y, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, int margin = 0)
         {
             // todo: use margin to increase the pixel area
             // todo: We will need to select on style instead of layer
@@ -289,7 +289,7 @@ namespace Mapsui.Rendering.Skia
             return result;
         }
 
-        public MapInfo GetMapInfo(MPoint screenPosition, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, int margin = 0)
+        public MapInfo? GetMapInfo(MPoint screenPosition, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, int margin = 0)
         {
             return GetMapInfo(screenPosition.X, screenPosition.Y, viewport, layers, margin);
         }

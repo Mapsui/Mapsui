@@ -9,7 +9,7 @@ namespace Mapsui.Rendering.Skia
 {
     public static class BitmapHelper
     {
-        public static BitmapInfo LoadBitmap(object bitmapStream)
+        public static BitmapInfo? LoadBitmap(object bitmapStream)
         {
             // todo: Our BitmapRegistry stores not only bitmaps. Perhaps we should store a class in it
             // which has all information. So we should have a SymbolImageRegistry in which we store a

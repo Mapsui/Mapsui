@@ -336,12 +336,12 @@ namespace Mapsui
         /// <param name="box1"></param>
         /// <param name="box2"></param>
         /// <returns></returns>
-        public static MRect Join(MRect? box1, MRect? box2)
+        public static MRect? Join(MRect? box1, MRect? box2)
         {
             if ((box1 == null) && (box2 == null))
                 return null;
             if (box1 == null)
-                return box2.Clone();
+                return box2!.Clone();
             return box1.Join(box2);
         }
 
@@ -350,7 +350,7 @@ namespace Mapsui
         /// </summary>
         /// <param name="boxes">Boxes to join</param>
         /// <returns>Combined MRect</returns>
-        public static MRect Join(MRect[]? boxes)
+        public static MRect? Join(MRect[]? boxes)
         {
             if (boxes == null) return null;
             if (boxes.Length == 1) return boxes[0];

@@ -248,7 +248,7 @@ namespace Mapsui.UI.Forms
         /// Mapsui feature for this pin
         /// </summary>
         /// <value>Mapsui feature</value>
-        public IGeometryFeature Feature { get; private set; } = default!;
+        public IGeometryFeature? Feature { get; private set; }
 
         private Callout? _callout;
 
@@ -383,32 +383,40 @@ namespace Mapsui.UI.Forms
                     Callout.Subtitle = Address;
                     break;
                 case nameof(Transparency):
-                    ((SymbolStyle)Feature.Styles.First()).Opacity = 1 - Transparency;
+                    if (Feature != null)
+                        ((SymbolStyle)Feature.Styles.First()).Opacity = 1 - Transparency;
                     break;
                 case nameof(Anchor):
-                    ((SymbolStyle)Feature.Styles.First()).SymbolOffset = new Offset(Anchor.X, Anchor.Y);
+                    if (Feature != null)
+                        ((SymbolStyle)Feature.Styles.First()).SymbolOffset = new Offset(Anchor.X, Anchor.Y);
                     break;
                 case nameof(Rotation):
-                    ((SymbolStyle)Feature.Styles.First()).SymbolRotation = Rotation;
+                    if (Feature != null)
+                        ((SymbolStyle)Feature.Styles.First()).SymbolRotation = Rotation;
                     break;
                 case nameof(RotateWithMap):
-                    ((SymbolStyle)Feature.Styles.First()).RotateWithMap = RotateWithMap;
+                    if (Feature != null)
+                        ((SymbolStyle)Feature.Styles.First()).RotateWithMap = RotateWithMap;
                     break;
                 case nameof(IsVisible):
                     if (!IsVisible)
                         HideCallout();
-                    ((SymbolStyle)Feature.Styles.First()).Enabled = IsVisible;
+                    if (Feature != null)
+                        ((SymbolStyle)Feature.Styles.First()).Enabled = IsVisible;
                     break;
                 case nameof(MinVisible):
                     // TODO: Update callout MinVisble too
-                    ((SymbolStyle)Feature.Styles.First()).MinVisible = MinVisible;
+                    if (Feature != null)
+                        ((SymbolStyle)Feature.Styles.First()).MinVisible = MinVisible;
                     break;
                 case nameof(MaxVisible):
                     // TODO: Update callout MaxVisble too
-                    ((SymbolStyle)Feature.Styles.First()).MaxVisible = MaxVisible;
+                    if (Feature != null)
+                        ((SymbolStyle)Feature.Styles.First()).MaxVisible = MaxVisible;
                     break;
                 case nameof(Scale):
-                    ((SymbolStyle)Feature.Styles.First()).SymbolScale = Scale;
+                    if (Feature != null)
+                        ((SymbolStyle)Feature.Styles.First()).SymbolScale = Scale;
                     break;
                 case nameof(Type):
                 case nameof(Color):

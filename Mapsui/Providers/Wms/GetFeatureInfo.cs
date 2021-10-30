@@ -157,7 +157,7 @@ namespace Mapsui.Providers.Wms
         /// Get a parser that is able to parse the output returned from the service
         /// </summary>
         /// <param name="format">Output format of the service</param>
-        private static IGetFeatureInfoParser GetParserFromFormat(string format)
+        private static IGetFeatureInfoParser? GetParserFromFormat(string format)
         {
             if (format.Equals("application/vnd.ogc.gml"))
                 return new GmlGetFeatureInfoParser();

@@ -9,6 +9,6 @@ namespace Mapsui.Layers
         ICollection<IStyle> Styles { get; }
         object this[string key] { get; set; }
         IEnumerable<string> Fields { get; }
-        MRect BoundingBox { get; }
+        MRect? BoundingBox { get; }
     }
 }

@@ -108,7 +108,7 @@ namespace Mapsui.Geometries
         ///     Returns the bounding box of the object
         /// </summary>
         /// <returns>bounding box</returns>
-        public override BoundingBox BoundingBox
+        public override BoundingBox? BoundingBox
         {
             get
             {

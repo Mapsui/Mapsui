@@ -17,7 +17,7 @@ namespace Mapsui.Rendering.Skia
 
         public BitmapType Type { get; private set; }
 
-        public SKImage Bitmap
+        public SKImage? Bitmap
         {
             get
             {
@@ -33,7 +33,7 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        public SKSvg Svg
+        public SKSvg? Svg
         {
             get
             {
@@ -49,7 +49,7 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        public Sprite Sprite
+        public Sprite? Sprite
         {
             get
             {

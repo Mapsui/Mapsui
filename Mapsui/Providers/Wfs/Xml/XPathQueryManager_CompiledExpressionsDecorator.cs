@@ -69,7 +69,7 @@ namespace Mapsui.Providers.Wfs.Xml
         /// </summary>
         /// <param name="xPath">The compiled XPath expression</param>
         /// <param name="queryParameters">Parameters for the compiled XPath expression</param>
-        public override IXPathQueryManager GetXPathQueryManagerInContext(XPathExpression xPath,
+        public override IXPathQueryManager? GetXPathQueryManagerInContext(XPathExpression xPath,
                                                                          DictionaryEntry[]? queryParameters = null)
         {
             var xPathQueryManager = (queryParameters == null)

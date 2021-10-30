@@ -174,7 +174,7 @@ namespace Mapsui.Providers.ArcGIS
         /// Generate BruTile TileSchema based on ArcGIS Capabilities
         /// </summary>
         /// <returns>TileSchema, returns null if service is not tiled</returns>
-        public static ITileSchema GetTileSchema(ArcGISDynamicCapabilities arcGisDynamicCapabilities)
+        public static ITileSchema? GetTileSchema(ArcGISDynamicCapabilities arcGisDynamicCapabilities)
         {
             //TODO: Does this belong in Mapsui.Providers?
 
