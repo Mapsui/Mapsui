@@ -394,7 +394,7 @@ namespace Mapsui.Providers.Wfs
 
             string geometryTypeString = _featureTypeInfo.Geometry.GeometryType;
 
-            GeometryFactory geomFactory = null;
+            GeometryFactory? geomFactory = null;
 
             if (_labels != null && _labels.Count > 0)
             {
@@ -695,8 +695,8 @@ namespace Mapsui.Providers.Wfs
                     _featureTypeInfo.FeatureTypeNamespace = targetNs;
 
                 /* Get geometry */
-                string geomType = _geometryType == GeometryTypeEnum.Unknown ? null : _geometryType.ToString();
-                string geomName = null;
+                string? geomType = _geometryType == GeometryTypeEnum.Unknown ? null : _geometryType.ToString();
+                string? geomName = null;
 
                 /* The easiest way to get geometry info, just ask for the 'gml'-prefixed type-attribute... 
                    Simple, but effective in 90% of all cases...this is the standard GeoServer creates.*/

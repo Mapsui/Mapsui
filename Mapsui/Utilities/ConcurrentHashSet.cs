@@ -340,7 +340,7 @@ namespace ConcurrentCollections
                         continue;
                     }
 
-                    Node previous = null;
+                    Node? previous = null;
                     for (var current = tables.Buckets[bucketNo]; current != null; current = current.Next)
                     {
                         Debug.Assert((previous == null && current == tables.Buckets[bucketNo]) || previous.Next == current);
@@ -467,7 +467,7 @@ namespace ConcurrentCollections
                     }
 
                     // Try to find this item in the bucket
-                    Node previous = null;
+                    Node? previous = null;
                     for (var current = tables.Buckets[bucketNo]; current != null; current = current.Next)
                     {
                         Debug.Assert(previous == null && current == tables.Buckets[bucketNo] || previous.Next == current);

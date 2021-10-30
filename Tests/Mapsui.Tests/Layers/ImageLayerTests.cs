@@ -38,7 +38,7 @@ namespace Mapsui.Tests.Layers
             var map = new Map();
             map.Layers.Add(imageLayer);
             var waitHandle = new AutoResetEvent(false);
-            Exception exception = null;
+            Exception? exception = null;
 
             imageLayer.DataChanged += (_, args) => {
                 exception = args.Error;

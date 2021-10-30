@@ -45,7 +45,7 @@ namespace Mapsui.UI.Objects
             if (Collection == null || Collection.Count == 0)
                 return null;
 
-            BoundingBox extent = null;
+            BoundingBox? extent = null;
 
             lock (_syncRoot)
             {

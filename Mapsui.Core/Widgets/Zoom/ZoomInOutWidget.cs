@@ -147,6 +147,9 @@ namespace Mapsui.Widgets.Zoom
                 return args.Handled;
             }
 
+            if (Envelope == null)
+                return false;
+
             if (Orientation == Orientation.Vertical && position.Y < Envelope.MinY + Envelope.Height * 0.5 ||
                 Orientation == Orientation.Horizontal && position.X < Envelope.MinX + Envelope.Width * 0.5)
             {

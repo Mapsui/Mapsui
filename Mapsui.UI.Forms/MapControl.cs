@@ -36,8 +36,8 @@ namespace Mapsui.UI.Forms
             }
         }
 
-        private SKGLView _glView;
-        private SKCanvasView _canvasView;
+        private SKGLView? _glView;
+        private SKCanvasView? _canvasView;
 
         // See http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/4.0.4_r2.1/android/view/ViewConfiguration.java#ViewConfiguration.0PRESSED_STATE_DURATION for values
         private const int shortTap = 125;
@@ -57,11 +57,11 @@ namespace Mapsui.UI.Forms
 
         private double _innerRotation;
         private ConcurrentDictionary<long, TouchEvent> _touches = new();
-        private MPoint _firstTouch;
+        private MPoint? _firstTouch;
         private bool _waitingForDoubleTap;
         private int _numOfTaps;
         private readonly FlingTracker _flingTracker = new();
-        private MPoint _previousCenter;
+        private MPoint? _previousCenter;
 
         /// <summary>
         /// Saver for angle before last pinch movement
@@ -294,7 +294,7 @@ namespace Mapsui.UI.Forms
 
         void OnGLPaintSurface(object sender, SKPaintGLSurfaceEventArgs args)
         {
-            if (!_initialized && _glView.GRContext == null)
+            if (!_initialized && _glView?.GRContext == null)
             {
                 // Could this be null before Home is called? If so we should change the logic.
                 Logging.Logger.Log(Logging.LogLevel.Warning, "Refresh can not be called because GRContext is null");
@@ -409,7 +409,7 @@ namespace Mapsui.UI.Forms
         /// <param name="screenPosition">Center of zoom out event</param>
         private bool OnZoomOut(MPoint screenPosition)
         {
-            if (Map.ZoomLock)
+            if (Map?.ZoomLock ?? true)
             {
                 return true;
             }
@@ -433,7 +433,7 @@ namespace Mapsui.UI.Forms
         /// <param name="screenPosition">Center of zoom in event</param>
         private bool OnZoomIn(MPoint screenPosition)
         {
-            if (Map.ZoomLock)
+            if (Map?.ZoomLock ?? true)
             {
                 return true;
             }
@@ -557,10 +557,10 @@ namespace Mapsui.UI.Forms
                 {
                     Extent = _viewport.Extent,
                     Resolution = _viewport.Resolution,
-                    CRS = Map.CRS,
+                    CRS = Map?.CRS,
                     ChangeType = ChangeType.Discrete
                 };
-                _map.RefreshData(fetchInfo);
+                _map?.RefreshData(fetchInfo);
             }
 
             return args.Handled;
@@ -608,10 +608,10 @@ namespace Mapsui.UI.Forms
                 {
                     Extent = _viewport.Extent,
                     Resolution = _viewport.Resolution,
-                    CRS = Map.CRS,
+                    CRS = Map?.CRS,
                     ChangeType = ChangeType.Discrete
                 };
-                _map.RefreshData(fetchInfo);
+                _map?.RefreshData(fetchInfo);
             }
 
             return args.Handled;
@@ -639,7 +639,7 @@ namespace Mapsui.UI.Forms
 
                         var touchPosition = touchPoints.First();
 
-                        if (!Map.PanLock && _previousCenter != null)
+                        if (!(Map?.PanLock ?? false)&& _previousCenter != null)
                         {
                             _viewport.Transform(touchPosition, _previousCenter);
 
@@ -659,7 +659,7 @@ namespace Mapsui.UI.Forms
 
                         double rotationDelta = 0;
 
-                        if (!Map.RotationLock)
+                        if (!(Map?.RotationLock ?? false))
                         {
                             _innerRotation += angle - prevAngle;
                             _innerRotation %= 360;
@@ -680,7 +680,7 @@ namespace Mapsui.UI.Forms
                             }
                         }
 
-                        _viewport.Transform(center, prevCenter, Map.ZoomLock ? 1 : radius / prevRadius, rotationDelta);
+                        _viewport.Transform(center, prevCenter, (Map?.ZoomLock ?? true) ? 1 : radius / prevRadius, rotationDelta);
 
                         (_previousCenter, _previousRadius, _previousAngle) = (center, radius, angle);
 
@@ -805,9 +805,9 @@ namespace Mapsui.UI.Forms
         {
             if (Width <= 0) return 0;
             if (UseGPU)
-                return (float)(_glView.CanvasSize.Width / Width);
+                return (float)(_glView!.CanvasSize.Width / Width);
             else
-                return (float)(_canvasView.CanvasSize.Width / Width);
+                return (float)(_canvasView!.CanvasSize.Width / Width);
         }
     }
 }

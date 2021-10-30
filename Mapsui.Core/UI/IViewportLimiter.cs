@@ -21,6 +21,6 @@ namespace Mapsui.UI
         double LimitResolution(double resolution, double screenWidth, double screenHeight,
             IReadOnlyList<double> mapResolutions, MRect mapEnvelope);
 
-        void LimitExtent(IViewport viewport, MRect mapEnvelope);
+        void LimitExtent(IViewport viewport, MRect? mapEnvelope);
     }
 }

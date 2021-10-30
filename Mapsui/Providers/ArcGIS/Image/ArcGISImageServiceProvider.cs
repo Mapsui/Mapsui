@@ -99,7 +99,7 @@ namespace Mapsui.Providers.ArcGIS.Image
         public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {
             var features = new List<IGeometryFeature>();
-            IRaster raster = null;
+            IRaster? raster = null;
 
             var viewport = fetchInfo.ToViewport();
 

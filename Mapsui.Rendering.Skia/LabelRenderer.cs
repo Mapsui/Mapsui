@@ -85,7 +85,7 @@ namespace Mapsui.Rendering.Skia
 
             var rect = new SKRect();
 
-            Line[] lines = null;
+            Line[]? lines = null;
 
             float emHeight = 0;
             float maxWidth = 0;

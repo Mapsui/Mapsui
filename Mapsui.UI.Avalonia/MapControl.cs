@@ -97,7 +97,7 @@ namespace Mapsui.UI.Avalonia
 
             var resolution = MouseWheelAnimation.GetResolution((int)e.Delta.Y, _viewport, _map);
             // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
-            resolution = _map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, _map.Resolutions, Map.Envelope);
+            resolution = _map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, _map.Resolutions, _map.Envelope);
             Navigator.ZoomTo(resolution, _currentMousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
         }
 
@@ -119,7 +119,7 @@ namespace Mapsui.UI.Avalonia
         {
             if (FeatureInfo == null) return; // don't fetch if you the call back is not set.
 
-            if (_downMousePosition == e.GetPosition(this).ToMapsui())
+            if (Map != null && _downMousePosition == e.GetPosition(this).ToMapsui())
                 foreach (var layer in Map.Layers)
                 {
                     // ReSharper disable once SuspiciousTypeConversion.Global
@@ -174,8 +174,11 @@ namespace Mapsui.UI.Avalonia
             e.Pointer.Capture(null);
         }
 
-        private static bool IsClick(MPoint currentPosition, MPoint previousPosition)
+        private static bool IsClick(MPoint? currentPosition, MPoint? previousPosition)
         {
+            if (currentPosition == null || previousPosition == null)
+                return false;
+
             return
                 Math.Abs(currentPosition.X - previousPosition.X) < 1 &&
                 Math.Abs(currentPosition.Y - previousPosition.Y) < 1;

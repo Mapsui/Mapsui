@@ -309,7 +309,7 @@ namespace Mapsui.Widgets.ScaleBar
         /// <returns>Array with pairs of Points. First is always the start point, the second is the end point.</returns>
         public MPoint[] GetScaleBarLinePositions(IReadOnlyViewport viewport, float scaleBarLength1, float scaleBarLength2, float stroke)
         {
-            MPoint[] points = null;
+            MPoint[]? points = null;
 
             bool drawNoSecondScaleBar = ScaleBarMode == ScaleBarMode.Single || ScaleBarMode == ScaleBarMode.Both && SecondaryUnitConverter == null;
 

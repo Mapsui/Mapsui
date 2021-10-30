@@ -123,7 +123,7 @@ namespace Mapsui.Styles.Thematics
         /// </summary>
         /// <param name="row">Feature</param>
         /// <returns><see cref="Mapsui.Styles.IStyle">Style</see> calculated by a linear interpolation between the min/max styles</returns>
-        public IStyle GetStyle(IFeature row)
+        public IStyle? GetStyle(IFeature row)
         {
             double attr;
             try { attr = Convert.ToDouble(row[ColumnName.ToUpper()]); }

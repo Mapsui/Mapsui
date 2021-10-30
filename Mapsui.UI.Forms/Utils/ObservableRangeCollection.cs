@@ -167,7 +167,7 @@
 
             var clusters = new Dictionary<int, List<T>>();
             var lastIndex = -1;
-            List<T> lastCluster = null;
+            List<T>? lastCluster = null;
             foreach (T item in collection)
             {
                 var index = IndexOf(item);
@@ -235,7 +235,7 @@
             if (Count == 0)
                 return 0;
 
-            List<T> cluster = null;
+            List<T>? cluster = null;
             var clusterIndex = -1;
             var removedCount = 0;
 

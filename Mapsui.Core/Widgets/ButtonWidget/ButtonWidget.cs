@@ -37,7 +37,7 @@ namespace Mapsui.Widgets.ButtonWidget
         /// <summary>
         /// SVG image to show for button
         /// </summary>
-        public string SvgImage
+        public string? SvgImage
         {
             get => _svgImage;
             set

@@ -71,7 +71,7 @@ namespace Mapsui.Rendering
             return style == null || !style.Enabled || style.MinVisible > viewport.Resolution || style.MaxVisible < viewport.Resolution;
         }
 
-        private static IStyle[] ToArray(ILayer layer)
+        private static IStyle?[] ToArray(ILayer layer)
         {
             return (layer.Style as StyleCollection)?.ToArray() ?? new[] { layer.Style };
         }

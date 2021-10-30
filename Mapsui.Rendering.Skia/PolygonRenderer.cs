@@ -36,7 +36,7 @@ namespace Mapsui.Rendering.Skia
                 var strokeJoin = StrokeJoin.Miter; // default
                 var strokeMiterLimit = 4f; // default
                 var strokeStyle = PenStyle.Solid; // default
-                float[] dashArray = null; // default
+                float[]? dashArray = null; // default
                 float dashOffset = 0; // default
 
                 if (vectorStyle.Outline != null)

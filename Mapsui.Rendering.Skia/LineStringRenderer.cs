@@ -30,7 +30,7 @@ namespace Mapsui.Rendering.Skia
                 var strokeJoin = StrokeJoin.Miter;
                 var strokeMiterLimit = 4f;
                 var strokeStyle = PenStyle.Solid;
-                float[] dashArray = null;
+                float[]? dashArray = null;
                 float dashOffset = 0;
 
                 if (vectorStyle != null)
