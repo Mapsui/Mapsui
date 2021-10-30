@@ -139,7 +139,7 @@ namespace Mapsui.Geometries
         ///     The minimum bounding box for this Geometry.
         /// </summary>
         /// <returns></returns>
-        public override BoundingBox BoundingBox
+        public override BoundingBox? BoundingBox
         {
             get
             {

@@ -95,7 +95,7 @@ namespace Mapsui.UI.Objects
         /// <summary>
         /// Mapsui Feature belonging to this drawable
         /// </summary>
-        public IGeometryFeature Feature
+        public IGeometryFeature? Feature
         {
             get
             {
@@ -129,16 +129,20 @@ namespace Mapsui.UI.Objects
             switch (propertyName)
             {
                 case nameof(StrokeWidth):
-                    ((VectorStyle)Feature.Styles.First()).Line.Width = StrokeWidth;
+                    if (Feature != null)
+                        ((VectorStyle)Feature.Styles.First()).Line.Width = StrokeWidth;
                     break;
                 case nameof(StrokeColor):
-                    ((VectorStyle)Feature.Styles.First()).Line.Color = StrokeColor.ToMapsui();
+                    if (Feature != null)
+                        ((VectorStyle)Feature.Styles.First()).Line.Color = StrokeColor.ToMapsui();
                     break;
                 case nameof(MinVisible):
-                    ((VectorStyle)Feature.Styles.First()).MinVisible = MinVisible;
+                    if (Feature != null)
+                        ((VectorStyle)Feature.Styles.First()).MinVisible = MinVisible;
                     break;
                 case nameof(MaxVisible):
-                    ((VectorStyle)Feature.Styles.First()).MaxVisible = MaxVisible;
+                    if (Feature != null)
+                        ((VectorStyle)Feature.Styles.First()).MaxVisible = MaxVisible;
                     break;
             }
         }

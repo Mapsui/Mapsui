@@ -13,7 +13,7 @@ namespace Mapsui.UI.Forms.Utils
         /// </summary>
         /// <param name="encodedPolyline"></param>
         /// <returns></returns>
-        public static List<Position> DecodePolyline(string encodedPolyline)
+        public static List<Position>? DecodePolyline(string encodedPolyline)
         {
             if (string.IsNullOrWhiteSpace(encodedPolyline))
                 return null;

@@ -24,7 +24,7 @@ namespace Mapsui.Providers.ArcGIS
         private int _timeOut;
         private string _url;
 
-        public delegate void StatusEventHandler(object sender, EventArgs e);
+        public delegate void StatusEventHandler(object? sender, EventArgs e);
 
         /// <summary>
         /// Triggered when finished parsing capabilities, returns Capabilities object
@@ -174,7 +174,7 @@ namespace Mapsui.Providers.ArcGIS
         /// Generate BruTile TileSchema based on ArcGIS Capabilities
         /// </summary>
         /// <returns>TileSchema, returns null if service is not tiled</returns>
-        public static ITileSchema GetTileSchema(ArcGISDynamicCapabilities arcGisDynamicCapabilities)
+        public static ITileSchema? GetTileSchema(ArcGISDynamicCapabilities arcGisDynamicCapabilities)
         {
             //TODO: Does this belong in Mapsui.Providers?
 

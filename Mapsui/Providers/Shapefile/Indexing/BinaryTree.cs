@@ -25,8 +25,8 @@ namespace Mapsui.Providers.Shapefile.Indexing
     internal class Node<T, TU> where T : IComparable<T>
     {
         public BinaryTree<T, TU>.ItemValue Item;
-        public Node<T, TU> LeftNode;
-        public Node<T, TU> RightNode;
+        public Node<T, TU>? LeftNode;
+        public Node<T, TU>? RightNode;
 
         public Node() : this(default, default, null, null)
         {
@@ -40,7 +40,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
         {
         }
 
-        public Node(T item, TU itemIndex, Node<T, TU> right, Node<T, TU> left)
+        public Node(T item, TU itemIndex, Node<T, TU>? right, Node<T, TU>? left)
         {
             RightNode = right;
             LeftNode = left;

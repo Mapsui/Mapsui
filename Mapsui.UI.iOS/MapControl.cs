@@ -11,6 +11,8 @@ using Mapsui.Geometries.Utilities;
 using Mapsui.UI.iOS.Extensions;
 using SkiaSharp.Views.iOS;
 
+#nullable enable
+
 namespace Mapsui.UI.iOS
 {
     [Register("MapControl"), DesignTimeVisible(true)]
@@ -108,7 +110,7 @@ namespace Mapsui.UI.iOS
             CommonDrawControl(canvas);
         }
 
-        public override void TouchesBegan(NSSet touches, UIEvent evt)
+        public override void TouchesBegan(NSSet touches, UIEvent? evt)
         {
             base.TouchesBegan(touches, evt);
 
@@ -118,11 +120,11 @@ namespace Mapsui.UI.iOS
             Navigator.StopRunningAnimation();
         }
 
-        public override void TouchesMoved(NSSet touches, UIEvent evt)
+        public override void TouchesMoved(NSSet touches, UIEvent? evt)
         {
             base.TouchesMoved(touches, evt);
 
-            if (evt.AllTouches.Count == 1)
+            if (evt?.AllTouches.Count == 1)
             {
                 if (touches.AnyObject is UITouch touch)
                 {
@@ -135,7 +137,7 @@ namespace Mapsui.UI.iOS
                     _innerRotation = Viewport.Rotation;
                 }
             }
-            else if (evt.AllTouches.Count >= 2)
+            else if (evt?.AllTouches.Count >= 2)
             {
                 var previousLocation = evt.AllTouches.Select(t => ((UITouch)t).PreviousLocationInView(this))
                     .Select(p => new MPoint(p.X, p.Y)).ToList();
@@ -148,7 +150,7 @@ namespace Mapsui.UI.iOS
 
                 double rotationDelta = 0;
 
-                if (!Map.RotationLock)
+                if (!(Map?.RotationLock ?? false))
                 {
                     _innerRotation += angle - previousAngle;
                     _innerRotation %= 360;
@@ -174,7 +176,7 @@ namespace Mapsui.UI.iOS
             }
         }
 
-        public override void TouchesEnded(NSSet touches, UIEvent e)
+        public override void TouchesEnded(NSSet touches, UIEvent? e)
         {
             Refresh();
         }

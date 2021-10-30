@@ -6,8 +6,8 @@ namespace Mapsui.Rendering
 {
     public interface IRenderInfo
     {
-        MapInfo GetMapInfo(double screenX, double screenY, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, int margin = 0);
-        MapInfo GetMapInfo(MPoint screenPosition, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, int margin = 0);
+        MapInfo? GetMapInfo(double screenX, double screenY, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, int margin = 0);
+        MapInfo? GetMapInfo(MPoint screenPosition, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, int margin = 0);
 
     }
 }

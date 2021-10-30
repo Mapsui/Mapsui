@@ -24,6 +24,9 @@ namespace Mapsui.Rendering.Skia
             switch (bitmap.Type)
             {
                 case BitmapType.Bitmap:
+                    if (bitmap.Bitmap == null)
+                        return;
+
                     BitmapRenderer.Draw(canvas, bitmap.Bitmap,
                         (float)destination.X, (float)destination.Y,
                         rotation,
@@ -31,6 +34,9 @@ namespace Mapsui.Rendering.Skia
                         opacity: opacity, scale: (float)symbolStyle.SymbolScale);
                     break;
                 case BitmapType.Svg:
+                    if (bitmap.Svg == null)
+                        return;
+
                     SvgRenderer.Draw(canvas, bitmap.Svg,
                         (float)destination.X, (float)destination.Y,
                         rotation,
@@ -38,18 +44,22 @@ namespace Mapsui.Rendering.Skia
                         opacity: opacity, scale: (float)symbolStyle.SymbolScale);
                     break;
                 case BitmapType.Sprite:
+                    if (bitmap.Sprite == null)
+                        return;
+
                     var sprite = bitmap.Sprite;
                     if (sprite.Data == null)
                     {
                         var bitmapAtlas = symbolCache.GetOrCreate(sprite.Atlas);
-                        sprite.Data = bitmapAtlas.Bitmap.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width,
+                        sprite.Data = bitmapAtlas.Bitmap?.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width,
                             sprite.Y + sprite.Height));
                     }
-                    BitmapRenderer.Draw(canvas, (SKImage)sprite.Data,
-                        (float)destination.X, (float)destination.Y,
-                        rotation,
-                        (float)offsetX, (float)offsetY,
-                        opacity: opacity, scale: (float)symbolStyle.SymbolScale);
+                    if (sprite.Data is SKImage skImage)
+                        BitmapRenderer.Draw(canvas, skImage,
+                            (float)destination.X, (float)destination.Y,
+                            rotation,
+                            (float)offsetX, (float)offsetY,
+                            opacity: opacity, scale: (float)symbolStyle.SymbolScale);
                     break;
             }
         }

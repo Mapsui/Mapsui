@@ -12,13 +12,15 @@ namespace Mapsui.Rendering.Skia
     public static class RasterRenderer
     {
         public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, IGeometryFeature feature,
-            float opacity, IDictionary<object, BitmapInfo> tileCache, long currentIteration)
+            float opacity, IDictionary<object, BitmapInfo?> tileCache, long currentIteration)
         {
             try
             {
-                var raster = (IRaster)feature.Geometry;
+                var raster = feature.Geometry as IRaster;
+                if (raster == null)
+                    return;
 
-                BitmapInfo bitmapInfo;
+                BitmapInfo? bitmapInfo;
 
                 if (!tileCache.Keys.Contains(raster))
                 {
@@ -30,10 +32,19 @@ namespace Mapsui.Rendering.Skia
                     bitmapInfo = tileCache[raster];
                 }
 
+                if (bitmapInfo == null)
+                    return;
+
                 bitmapInfo.IterationUsed = currentIteration;
                 tileCache[raster] = bitmapInfo;
 
-                var boundingBox = feature.Geometry.BoundingBox;
+                var boundingBox = feature.Geometry?.BoundingBox;
+
+                if (boundingBox == null)
+                    return;
+
+                if (bitmapInfo.Bitmap == null)
+                    return;
 
                 if (viewport.IsRotated)
                 {
@@ -51,7 +62,7 @@ namespace Mapsui.Rendering.Skia
                 }
                 else
                 {
-                    var destination = WorldToScreen(viewport, feature.Geometry.BoundingBox);
+                    var destination = WorldToScreen(viewport, boundingBox);
                     BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap, RoundToPixel(destination).ToSkia(), opacity);
                 }
             }

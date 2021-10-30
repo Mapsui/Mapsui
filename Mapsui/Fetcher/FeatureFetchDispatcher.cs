@@ -44,7 +44,7 @@ namespace Mapsui.Fetcher
             }
         }
 
-        private void FetchCompleted(IEnumerable<T> features, Exception? exception)
+        private void FetchCompleted(IEnumerable<T>? features, Exception? exception)
         {
             if (exception == null)
             {

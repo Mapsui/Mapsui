@@ -16,7 +16,7 @@ namespace Mapsui.UI
         /// </summary>
         MinMax? ZoomLimits { get; set; }
 
-        void Limit(IViewport viewport, IReadOnlyList<double> mapResolutions, MRect mapEnvelope);
+        void Limit(IViewport viewport, IReadOnlyList<double> mapResolutions, MRect? mapEnvelope);
 
         double LimitResolution(double resolution, double screenWidth, double screenHeight,
             IReadOnlyList<double> mapResolutions, MRect mapEnvelope);

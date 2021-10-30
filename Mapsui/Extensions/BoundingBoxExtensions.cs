@@ -20,12 +20,12 @@ namespace Mapsui.Extensions
             return true;
         }
 
-        public static Extent ToExtent(this BoundingBox boundingBox)
+        public static Extent ToExtent(this BoundingBox? boundingBox)
         {
             return new Extent(boundingBox.MinX, boundingBox.MinY, boundingBox.MaxX, boundingBox.MaxY);
         }
 
-        public static MRect ToMRect(this BoundingBox? boundingBox)
+        public static MRect? ToMRect(this BoundingBox? boundingBox)
         {
             if (boundingBox == null) return null;
             return new MRect(boundingBox.MinX, boundingBox.MinY, boundingBox.MaxX, boundingBox.MaxY);

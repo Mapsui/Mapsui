@@ -22,6 +22,7 @@
 
   <ItemGroup>
 	  <Compile Include="$(MSBuildThisFileDirectory)/Nullable.cs" />
+	  <Compile Include="$(MSBuildThisFileDirectory)/InitProperty.cs" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(OS)' == 'Unix'">

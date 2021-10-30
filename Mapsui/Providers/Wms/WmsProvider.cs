@@ -338,7 +338,7 @@ namespace Mapsui.Providers.Wms
         /// Gets the URL for a map request base on current settings, the image size and BoundingBox
         /// </summary>
         /// <returns>URL for WMS request</returns>
-        public string GetRequestUrl(BoundingBox box, int width, int height)
+        public string GetRequestUrl(BoundingBox? box, int width, int height)
         {
             var resource = GetPreferredMethod();
             var strReq = new StringBuilder(resource.OnlineResource);
@@ -443,7 +443,7 @@ namespace Mapsui.Providers.Wms
 
         public Dictionary<string, string> ExtraParams { get; set; }
 
-        public MRect GetExtent()
+        public MRect? GetExtent()
         {
             return _wmsClient.Layer.BoundingBoxes.ContainsKey(CRS) ? _wmsClient.Layer.BoundingBoxes[CRS] : null;
         }

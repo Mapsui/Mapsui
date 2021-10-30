@@ -61,7 +61,7 @@ namespace Mapsui.Providers.Wfs
         private bool _disposed;
         private string _featureType;
         private WfsFeatureTypeInfo _featureTypeInfo;
-        private IXPathQueryManager _featureTypeInfoQueryManager;
+        private IXPathQueryManager? _featureTypeInfoQueryManager;
         private string _nsPrefix;
         private bool _getFeatureGetRequest;
         private List<string> _labels = new List<string>();
@@ -380,7 +380,7 @@ namespace Mapsui.Providers.Wfs
         /// </summary>
         /// <param name="bbox"></param>
         /// <returns>Features within the specified <see cref="Mapsui.Geometries.BoundingBox"/></returns>
-        public Features ExecuteIntersectionQuery(BoundingBox bbox)
+        public Features? ExecuteIntersectionQuery(BoundingBox? bbox)
         {
             if (_featureTypeInfo == null) return null;
 
@@ -917,7 +917,7 @@ namespace Mapsui.Providers.Wfs
             /// The <see cref="HttpClientUtil"/> instance is returned for immediate usage. 
             /// </summary>
             internal void ConfigureForWfsGetFeatureRequest(HttpClientUtil httpClientUtil,
-                WfsFeatureTypeInfo featureTypeInfo, List<string> labelProperties, BoundingBox boundingBox,
+                WfsFeatureTypeInfo featureTypeInfo, List<string> labelProperties, BoundingBox? boundingBox,
                 IFilter filter, bool get)
             {
                 httpClientUtil.Reset();

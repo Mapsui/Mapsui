@@ -136,7 +136,7 @@ namespace Mapsui
         /// Gets the extent of the map based on the extent of all the layers in the layers collection
         /// </summary>
         /// <returns>Full map extent</returns>
-        public MRect Envelope
+        public MRect? Envelope
         {
             get
             {

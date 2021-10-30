@@ -169,7 +169,7 @@ namespace Mapsui.Providers.ArcGIS.Image
             return false;
         }
 
-        private string GetRequestUrl(BoundingBox boundingBox, int width, int height)
+        private string GetRequestUrl(BoundingBox? boundingBox, int width, int height)
         {
             var url = new StringBuilder(Url);
 
@@ -215,7 +215,7 @@ namespace Mapsui.Providers.ArcGIS.Image
             return url.ToString();
         }
 
-        public MRect GetExtent()
+        public MRect? GetExtent()
         {
             return null;
         }

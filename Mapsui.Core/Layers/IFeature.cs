@@ -7,8 +7,8 @@ namespace Mapsui.Layers
     {
         IDictionary<IStyle, object> RenderedGeometry { get; }
         ICollection<IStyle> Styles { get; }
-        object this[string key] { get; set; }
+        object? this[string key] { get; set; }
         IEnumerable<string> Fields { get; }
-        MRect BoundingBox { get; }
+        MRect? BoundingBox { get; }
     }
 }

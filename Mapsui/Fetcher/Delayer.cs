@@ -9,7 +9,7 @@ namespace Mapsui.Fetcher
     public class Delayer
     {
         private readonly Timer _waitTimer;
-        private Action _action;
+        private Action? _action;
         private bool _waiting;
 
         /// <summary>

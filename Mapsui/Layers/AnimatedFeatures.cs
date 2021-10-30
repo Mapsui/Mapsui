@@ -114,7 +114,7 @@ namespace Mapsui.Layers
             return result;
         }
 
-        private static Point CopyAsPoint(IGeometry geometry)
+        private static Point? CopyAsPoint(IGeometry geometry)
         {
             var point = geometry as Point;
             return point == null ? null : new Point(point.X, point.Y);

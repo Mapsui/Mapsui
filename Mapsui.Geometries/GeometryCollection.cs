@@ -112,7 +112,7 @@ namespace Mapsui.Geometries
         }
 
         [Obsolete("Use the BoundingBox field instead")]
-        public new BoundingBox GetBoundingBox()
+        public new BoundingBox? GetBoundingBox()
         {
             return BoundingBox;
         }
@@ -121,7 +121,7 @@ namespace Mapsui.Geometries
         ///     The minimum bounding box for this Geometry, returned as a BoundingBox.
         /// </summary>
         /// <returns></returns>
-        public override BoundingBox BoundingBox
+        public override BoundingBox? BoundingBox
         {
             get
             {

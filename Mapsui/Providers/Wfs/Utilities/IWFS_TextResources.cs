@@ -44,8 +44,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         string DescribeFeatureTypeRequest(string featureTypeName);
         string GetCapabilitiesRequest();
         string GetFeatureGETRequest(WfsFeatureTypeInfo featureTypeInfo, List<string> labelProperties,
-            BoundingBox boundingBox, IFilter filter);
+            BoundingBox? boundingBox, IFilter filter);
         byte[] GetFeaturePOSTRequest(WfsFeatureTypeInfo featureTypeInfo, List<string> labelProperties,
-            BoundingBox boundingBox, IFilter filter);
+            BoundingBox? boundingBox, IFilter filter);
     }
 }

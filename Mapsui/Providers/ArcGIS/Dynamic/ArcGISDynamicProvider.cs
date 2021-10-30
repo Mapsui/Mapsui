@@ -176,7 +176,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
         /// <param name="width"> </param>
         /// <param name="height"> </param>
         /// <returns>URL for ArcGIS Dynamic request</returns>
-        public string GetRequestUrl(BoundingBox box, int width, int height)
+        public string GetRequestUrl(BoundingBox? box, int width, int height)
         {
             //ArcGIS Export description see: http://resources.esri.com/help/9.3/arcgisserver/apis/rest/index.html?export.html
 

@@ -31,7 +31,7 @@ namespace Mapsui
         /// This MRect is horizontally and vertically aligned, even if the viewport
         /// is rotated. So this MRect perhaps contain parts, that are not visible.
         /// </remarks>
-        MRect Extent { get; }
+        MRect? Extent { get; }
 
         /// <summary>
         /// Width of viewport in screen pixels
@@ -111,6 +111,6 @@ namespace Mapsui
         /// If viewport is rotated, this corner points are not horizontally or vertically
         /// aligned.
         /// </remarks>
-        MQuad WindowExtent { get; }
+        MQuad? WindowExtent { get; }
     }
 }

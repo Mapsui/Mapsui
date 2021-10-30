@@ -10,7 +10,7 @@ namespace Mapsui.Samples.Common
 {
     public static class AllSamples
     {
-        public static IEnumerable<ISample> GetSamples()
+        public static IEnumerable<ISample>? GetSamples()
         {
             var type = typeof(ISample);
             var assemblies = AppDomain.CurrentDomain.GetAssemblies()

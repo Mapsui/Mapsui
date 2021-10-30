@@ -61,7 +61,7 @@ namespace Mapsui.Geometries
         }
 
         [Obsolete("Use the BoundingBox field instead")]
-        public BoundingBox GetBoundingBox()
+        public BoundingBox? GetBoundingBox()
         {
             return BoundingBox;
         }
@@ -70,7 +70,7 @@ namespace Mapsui.Geometries
         ///     The minimum bounding box for this <see cref="Geometry" />, returned as a <see cref="Geometries.BoundingBox" />.
         /// </summary>
         /// <returns></returns>
-        public abstract BoundingBox BoundingBox { get; }
+        public abstract BoundingBox? BoundingBox { get; }
 
         /// <summary>
         ///     Exports this <see cref="Geometry" /> to a specific well-known text representation of <see cref="Geometry" />.

@@ -128,7 +128,7 @@ namespace Mapsui.Providers
             };
         }
 
-        private static Polygon ToPolygon(BoundingBox box)
+        private static Polygon ToPolygon(BoundingBox? box)
         {
             return new Polygon
             {
@@ -139,7 +139,7 @@ namespace Mapsui.Providers
             };
         }
 
-        private static BoundingBox GrowBox(BoundingBox box, double resolution)
+        private static BoundingBox? GrowBox(BoundingBox box, double resolution)
         {
             const int symbolSize = 32; // todo: determine margin by symbol size
             const int boxMargin = symbolSize / 2;

@@ -6,6 +6,6 @@ namespace Mapsui.Geometries
     {
         MemoryStream Data { get; }
         long TickFetched { get; }
-        new BoundingBox BoundingBox { get; }
+        new BoundingBox? BoundingBox { get; }
     }
 }
