@@ -32,10 +32,10 @@ namespace Mapsui.UI.Forms
         private readonly MemoryLayer _mapCalloutLayer;
         private readonly MemoryLayer _mapPinLayer;
         private readonly MemoryLayer _mapDrawableLayer;
-        private ButtonWidget _mapZoomInButton = default!;
-        private ButtonWidget _mapZoomOutButton = default!;
-        private ButtonWidget _mapMyLocationButton = default!;
-        private ButtonWidget _mapNorthingButton = default!;
+        private ButtonWidget? _mapZoomInButton;
+        private ButtonWidget? _mapZoomOutButton;
+        private ButtonWidget? _mapMyLocationButton;
+        private ButtonWidget? _mapNorthingButton;
         private readonly SKPicture _pictMyLocationNoCenter;
         private readonly SKPicture _pictMyLocationCenter;
         private readonly SKPicture _pictZoomIn;
@@ -352,12 +352,12 @@ namespace Mapsui.UI.Forms
             {
                 if (MyLocationFollow)
                 {
-                    _mapMyLocationButton.Picture = _pictMyLocationCenter;
+                    _mapMyLocationButton!.Picture = _pictMyLocationCenter;
                     Navigator.CenterOn(MyLocationLayer.MyLocation.ToMapsui());
                 }
                 else
                 {
-                    _mapMyLocationButton.Picture = _pictMyLocationNoCenter;
+                    _mapMyLocationButton!.Picture = _pictMyLocationNoCenter;
                 }
 
                 Refresh();
@@ -374,20 +374,20 @@ namespace Mapsui.UI.Forms
 
             if (propertyName.Equals(nameof(IsZoomButtonVisibleProperty)) || propertyName.Equals(nameof(IsZoomButtonVisible)))
             {
-                _mapZoomInButton.Enabled = IsZoomButtonVisible;
-                _mapZoomOutButton.Enabled = IsZoomButtonVisible;
+                _mapZoomInButton!.Enabled = IsZoomButtonVisible;
+                _mapZoomOutButton!.Enabled = IsZoomButtonVisible;
                 UpdateButtonPositions();
             }
 
             if (propertyName.Equals(nameof(IsMyLocationButtonVisibleProperty)) || propertyName.Equals(nameof(IsMyLocationButtonVisible)))
             {
-                _mapMyLocationButton.Enabled = IsMyLocationButtonVisible;
+                _mapMyLocationButton!.Enabled = IsMyLocationButtonVisible;
                 UpdateButtonPositions();
             }
 
             if (propertyName.Equals(nameof(IsNorthingButtonVisibleProperty)) || propertyName.Equals(nameof(IsNorthingButtonVisible)))
             {
-                _mapNorthingButton.Enabled = IsNorthingButtonVisible;
+                _mapNorthingButton!.Enabled = IsNorthingButtonVisible;
                 UpdateButtonPositions();
             }
 
@@ -441,7 +441,7 @@ namespace Mapsui.UI.Forms
                 MyLocationLayer.UpdateMyDirection(MyLocationLayer.Direction, Viewport.Rotation);
 
                 // Update rotationButton
-                _mapNorthingButton.Rotation = (float)Viewport.Rotation;
+                _mapNorthingButton!.Rotation = (float)Viewport.Rotation;
             }
 
             if (e.PropertyName.Equals(nameof(Viewport.Center)))
@@ -801,21 +801,21 @@ namespace Mapsui.UI.Forms
 
             if (IsZoomButtonVisible)
             {
-                _mapZoomInButton.Envelope = new MRect(newX, newY, newX + ButtonSize, newY + ButtonSize);
+                _mapZoomInButton!.Envelope = new MRect(newX, newY, newX + ButtonSize, newY + ButtonSize);
                 newY += ButtonSize;
-                _mapZoomOutButton.Envelope = new MRect(newX, newY, newX + ButtonSize, newY + ButtonSize);
+                _mapZoomOutButton!.Envelope = new MRect(newX, newY, newX + ButtonSize, newY + ButtonSize);
                 newY += ButtonSize + ButtonSpacing;
             }
 
             if (IsMyLocationButtonVisible)
             {
-                _mapMyLocationButton.Envelope = new MRect(newX, newY, newX + ButtonSize, newY + ButtonSize);
+                _mapMyLocationButton!.Envelope = new MRect(newX, newY, newX + ButtonSize, newY + ButtonSize);
                 newY += ButtonSize + ButtonSpacing;
             }
 
             if (IsNorthingButtonVisible)
             {
-                _mapNorthingButton.Envelope = new MRect(newX, newY, newX + ButtonSize, newY + ButtonSize);
+                _mapNorthingButton!.Envelope = new MRect(newX, newY, newX + ButtonSize, newY + ButtonSize);
             }
 
             RefreshGraphics();
@@ -826,10 +826,10 @@ namespace Mapsui.UI.Forms
             if (Map != null)
             {
                 var widgets = Map.Widgets.ToList();
-                widgets.Remove(_mapZoomInButton);
-                widgets.Remove(_mapZoomOutButton);
-                widgets.Remove(_mapMyLocationButton);
-                widgets.Remove(_mapNorthingButton);
+                widgets.Remove(_mapZoomInButton!);
+                widgets.Remove(_mapZoomOutButton!);
+                widgets.Remove(_mapMyLocationButton!);
+                widgets.Remove(_mapNorthingButton!);
                 Map.Widgets.Clear();
                 Map.Widgets.AddRange(widgets);
             }
