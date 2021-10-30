@@ -9,7 +9,7 @@ using Mapsui.Styles;
 
 namespace Mapsui.Fetcher
 {
-    class FeatureFetchDispatcher<T> : IFetchDispatcher where T : IFeature
+    internal class FeatureFetchDispatcher<T> : IFetchDispatcher where T : IFeature
     {
         private FetchInfo _fetchInfo;
         private bool _busy;

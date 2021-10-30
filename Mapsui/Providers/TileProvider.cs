@@ -17,15 +17,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
-using Mapsui.Geometries;
-using System.IO;
-using System.Threading.Tasks;
 using Mapsui.Extensions;
-using Mapsui.Fetcher;
+using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Logging;
 
@@ -33,9 +32,9 @@ namespace Mapsui.Providers
 {
     public class TileProvider : IProvider<IFeature>
     {
-        readonly ITileSource _source;
-        readonly MemoryCache<byte[]> _bitmaps = new(100, 200);
-        readonly List<TileIndex> _queue = new();
+        private readonly ITileSource _source;
+        private readonly MemoryCache<byte[]> _bitmaps = new(100, 200);
+        private readonly List<TileIndex> _queue = new();
 
         public BoundingBox GetExtent()
         {
@@ -58,7 +57,7 @@ namespace Mapsui.Providers
 
             ICollection<WaitHandle> waitHandles = new List<WaitHandle>();
 
-            foreach (TileInfo info in infos)
+            foreach (var info in infos)
             {
                 if (_bitmaps.Find(info.Index) != null) continue;
                 if (_queue.Contains(info.Index)) continue;
@@ -71,9 +70,9 @@ namespace Mapsui.Providers
             WaitHandle.WaitAll(waitHandles.ToArray());
 
             var features = new Features();
-            foreach (TileInfo info in infos)
+            foreach (var info in infos)
             {
-                byte[] bitmap = _bitmaps.Find(info.Index);
+                var bitmap = _bitmaps.Find(info.Index);
                 if (bitmap == null) continue;
                 IRaster raster = new Raster(new MemoryStream(bitmap), new BoundingBox(info.Extent.MinX, info.Extent.MinY, info.Extent.MaxX, info.Extent.MaxY));
                 var feature = new Feature

@@ -1,12 +1,12 @@
-using Mapsui.Providers;
 using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Layers;
+using Mapsui.Providers;
 using Mapsui.Styles;
 
 namespace Mapsui.Fetcher
 {
-    class FeatureFetcher
+    internal class FeatureFetcher
     {
         private readonly FetchInfo _fetchInfo;
         private readonly DataArrivedDelegate _dataArrived;

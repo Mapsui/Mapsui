@@ -11,7 +11,7 @@ using Mapsui.Providers;
 
 namespace Mapsui.Fetcher
 {
-    class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
+    internal class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
     {
         private FetchInfo _fetchInfo;
         private readonly object _lockRoot = new();
@@ -57,7 +57,7 @@ namespace Mapsui.Fetcher
             lock (_lockRoot)
             {
                 UpdateIfViewportIsModified();
-                var success = _tilesToFetch.TryDequeue(out TileInfo tileInfo);
+                var success = _tilesToFetch.TryDequeue(out var tileInfo);
 
                 if (success)
                 {

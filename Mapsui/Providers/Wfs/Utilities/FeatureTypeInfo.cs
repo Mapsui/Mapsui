@@ -40,10 +40,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <summary>
         /// Gets the elements associated to the feature.
         /// </summary>
-        public List<ElementInfo> Elements
-        {
-            get { return _elements; }
-        }
+        public List<ElementInfo> Elements => _elements;
 
         /// <summary>
         /// Gets or sets the name of the featuretype.
@@ -52,8 +49,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <value>The name.</value>
         public string Name
         {
-            get { return _name; }
-            set { _name = value; }
+            get => _name;
+            set => _name = value;
         }
 
         /// <summary>
@@ -64,8 +61,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <value>The prefix.</value>
         public string Prefix
         {
-            get { return _prefix; }
-            set { _prefix = value; }
+            get => _prefix;
+            set => _prefix = value;
         }
 
         /// <summary>
@@ -74,17 +71,14 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public string FeatureTypeNamespace
         {
-            get { return _featureTypeNamespace; }
-            set { _featureTypeNamespace = value; }
+            get => _featureTypeNamespace;
+            set => _featureTypeNamespace = value;
         }
 
         /// <summary>
         /// Gets the qualified name of the featuretype (with namespace URI).
         /// </summary>
-        internal string QualifiedName
-        {
-            get { return _featureTypeNamespace + _name; }
-        }
+        internal string QualifiedName => _featureTypeNamespace + _name;
 
         /// <summary>
         /// Gets or sets the service URI for WFS 'GetFeature' request.
@@ -92,8 +86,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public string ServiceUri
         {
-            get { return _serviceUri; }
-            set { _serviceUri = value; }
+            get => _serviceUri;
+            set => _serviceUri = value;
         }
 
         /// <summary>
@@ -102,8 +96,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public GeometryInfo Geometry
         {
-            get { return _geometry; }
-            set { _geometry = value; }
+            get => _geometry;
+            set => _geometry = value;
         }
 
         /// <summary>
@@ -111,8 +105,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public BoundingBox BBox
         {
-            get { return _boundingBox; }
-            set { _boundingBox = value; }
+            get => _boundingBox;
+            set => _boundingBox = value;
         }
 
         /// <summary>
@@ -120,8 +114,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public string SRID
         {
-            get { return _srid; }
-            set { _srid = value; }
+            get => _srid;
+            set => _srid = value;
         }
 
         //Coordinates can be included in a single string, but there is no 
@@ -135,8 +129,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public string DecimalDel
         {
-            get { return _decimalDel; }
-            set { _decimalDel = value; }
+            get => _decimalDel;
+            set => _decimalDel = value;
         }
 
         /// <summary>
@@ -144,8 +138,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public string Cs
         {
-            get { return _cs; }
-            set { _cs = value; }
+            get => _cs;
+            set => _cs = value;
         }
 
         /// <summary>
@@ -153,8 +147,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         public string Ts
         {
-            get { return _ts; }
-            set { _ts = value; }
+            get => _ts;
+            set => _ts = value;
         }
 
 

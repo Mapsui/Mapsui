@@ -50,8 +50,8 @@ namespace Mapsui.Providers.ArcGIS
         /// </summary>
         public int TimeOut
         {
-            get { return _timeOut; }
-            set { _timeOut = value; }
+            get => _timeOut;
+            set => _timeOut = value;
         }
 
         /// <summary>

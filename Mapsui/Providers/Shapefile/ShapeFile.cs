@@ -184,7 +184,7 @@ namespace Mapsui.Providers.Shapefile
             _fileBasedIndex = (fileBasedIndex) && File.Exists(Path.ChangeExtension(filename, ".shx"));
 
             //Initialize DBF
-            string dbfFile = Path.ChangeExtension(filename, ".dbf");
+            var dbfFile = Path.ChangeExtension(filename, ".dbf");
             if (File.Exists(dbfFile))
                 _dbaseFile = new DbaseReader(dbfFile);
             //Parse shape header
@@ -366,13 +366,13 @@ namespace Mapsui.Providers.Shapefile
                 try
                 {
                     //Use the spatial index to get a list of features whose BoundingBox intersects bbox
-                    Collection<uint> objectList = GetObjectIDsInViewPrivate(bbox);
+                    var objectList = GetObjectIDsInViewPrivate(bbox);
                     if (objectList.Count == 0) //no features found. Return an empty set
                         return new Collection<IGeometry>();
 
                     var geometries = new Collection<IGeometry>();
 
-                    for (int i = 0; i < objectList.Count; i++)
+                    for (var i = 0; i < objectList.Count; i++)
                     {
                         var g = GetGeometryPrivate(objectList[i]);
                         if (g != null) geometries.Add(g);
@@ -445,7 +445,7 @@ namespace Mapsui.Providers.Shapefile
         {
             if (FilterDelegate != null) //Apply filtering
             {
-                IGeometryFeature fdr = GetFeature(oid);
+                var fdr = GetFeature(oid);
                 return fdr?.Geometry;
             }
 
@@ -515,7 +515,7 @@ namespace Mapsui.Providers.Shapefile
                 throw (new ApplicationException("Invalid Shapefile Index (.shx)"));
 
             _brShapeIndex.BaseStream.Seek(24, 0); //seek to File Length
-            int indexFileSize = SwapByteOrder(_brShapeIndex.ReadInt32());
+            var indexFileSize = SwapByteOrder(_brShapeIndex.ReadInt32());
             //Read file length as big-endian. The length is based on 16bit words
             _featureCount = (2 * indexFileSize - 100) / 8;
             //Calculate FeatureCount. Each feature takes up 8 bytes. The header is 100 bytes
@@ -537,7 +537,7 @@ namespace Mapsui.Providers.Shapefile
         /// </summary>
         private void ParseProjection()
         {
-            string projFile = Path.GetDirectoryName(Filename) + "\\" + Path.GetFileNameWithoutExtension(Filename) +
+            var projFile = Path.GetDirectoryName(Filename) + "\\" + Path.GetFileNameWithoutExtension(Filename) +
                               ".prj";
             if (File.Exists(projFile))
             {
@@ -565,7 +565,7 @@ namespace Mapsui.Providers.Shapefile
             var offsetOfRecord = new int[_featureCount];
             _brShapeIndex.BaseStream.Seek(100, 0); //skip the header
 
-            for (int x = 0; x < _featureCount; ++x)
+            for (var x = 0; x < _featureCount; ++x)
             {
                 offsetOfRecord[x] = 2 * SwapByteOrder(_brShapeIndex.ReadInt32()); //Read shape data position // ibuffer);
                 _brShapeIndex.BaseStream.Seek(_brShapeIndex.BaseStream.Position + 4, 0); //Skip content length
@@ -591,7 +591,7 @@ namespace Mapsui.Providers.Shapefile
         /// <returns>Byte Order swapped int32</returns>
         private int SwapByteOrder(int i)
         {
-            byte[] buffer = BitConverter.GetBytes(i);
+            var buffer = BitConverter.GetBytes(i);
             Array.Reverse(buffer, 0, buffer.Length);
             return BitConverter.ToInt32(buffer, 0);
         }
@@ -616,7 +616,7 @@ namespace Mapsui.Providers.Shapefile
                 }
             }
 
-            QuadTree tree = CreateSpatialIndex();
+            var tree = CreateSpatialIndex();
             tree.SaveIndex(filename + ".sidx");
             return tree;
         }
@@ -684,24 +684,24 @@ namespace Mapsui.Providers.Shapefile
         /// <returns></returns>
         private IEnumerable<BoundingBox> GetAllFeatureBoundingBoxes()
         {
-            int[] offsetOfRecord = ReadIndex(); //Read the whole .idx file
+            var offsetOfRecord = ReadIndex(); //Read the whole .idx file
 
             if (_shapeType == ShapeType.Point)
             {
-                for (int a = 0; a < _featureCount; ++a)
+                for (var a = 0; a < _featureCount; ++a)
                 {
                     _fsShapeFile.Seek(offsetOfRecord[a] + 8, 0); //skip record number and content length
                     if ((ShapeType)_brShapeFile.ReadInt32() != ShapeType.Null)
                     {
-                        double x = _brShapeFile.ReadDouble();
-                        double y = _brShapeFile.ReadDouble();
+                        var x = _brShapeFile.ReadDouble();
+                        var y = _brShapeFile.ReadDouble();
                         yield return new BoundingBox(x, y, x, y);
                     }
                 }
             }
             else
             {
-                for (int a = 0; a < _featureCount; ++a)
+                for (var a = 0; a < _featureCount; ++a)
                 {
                     _fsShapeFile.Seek(offsetOfRecord[a] + 8, 0); //skip record number and content length
                     if ((ShapeType)_brShapeFile.ReadInt32() != ShapeType.Null)
@@ -733,10 +733,10 @@ namespace Mapsui.Providers.Shapefile
             {
                 _brShapeFile.BaseStream.Seek(32 + _brShapeFile.BaseStream.Position, 0); //skip min/max box
                 var feature = new MultiPoint();
-                int nPoints = _brShapeFile.ReadInt32(); // get the number of points
+                var nPoints = _brShapeFile.ReadInt32(); // get the number of points
                 if (nPoints == 0)
                     return null;
-                for (int i = 0; i < nPoints; i++)
+                for (var i = 0; i < nPoints; i++)
                     feature.Points.Add(new Point(_brShapeFile.ReadDouble(), _brShapeFile.ReadDouble()));
 
                 return feature;
@@ -747,14 +747,14 @@ namespace Mapsui.Providers.Shapefile
             {
                 _brShapeFile.BaseStream.Seek(32 + _brShapeFile.BaseStream.Position, 0); //skip min/max box
 
-                int nParts = _brShapeFile.ReadInt32(); // get number of parts (segments)
+                var nParts = _brShapeFile.ReadInt32(); // get number of parts (segments)
                 if (nParts == 0)
                     return null;
-                int nPoints = _brShapeFile.ReadInt32(); // get number of points
+                var nPoints = _brShapeFile.ReadInt32(); // get number of points
 
                 var segments = new int[nParts + 1];
                 //Read in the segment indexes
-                for (int b = 0; b < nParts; b++)
+                for (var b = 0; b < nParts; b++)
                     segments[b] = _brShapeFile.ReadInt32();
                 //add end point
                 segments[nParts] = nPoints;
@@ -762,10 +762,10 @@ namespace Mapsui.Providers.Shapefile
                 if ((int)_shapeType % 10 == 3)
                 {
                     var multiLineString = new MultiLineString();
-                    for (int lineId = 0; lineId < nParts; lineId++)
+                    for (var lineId = 0; lineId < nParts; lineId++)
                     {
                         var line = new LineString();
-                        for (int i = segments[lineId]; i < segments[lineId + 1]; i++)
+                        for (var i = segments[lineId]; i < segments[lineId + 1]; i++)
                             line.Vertices.Add(new Point(_brShapeFile.ReadDouble(), _brShapeFile.ReadDouble()));
                         multiLineString.LineStrings.Add(line);
                     }
@@ -777,16 +777,16 @@ namespace Mapsui.Providers.Shapefile
                 {
                     // First read all the rings
                     var rings = new List<LinearRing>();
-                    for (int ringId = 0; ringId < nParts; ringId++)
+                    for (var ringId = 0; ringId < nParts; ringId++)
                     {
                         var ring = new LinearRing();
-                        for (int i = segments[ringId]; i < segments[ringId + 1]; i++)
+                        for (var i = segments[ringId]; i < segments[ringId + 1]; i++)
                             ring.Vertices.Add(new Point(_brShapeFile.ReadDouble(), _brShapeFile.ReadDouble()));
                         rings.Add(ring);
                     }
                     var isCounterClockWise = new bool[rings.Count];
-                    int polygonCount = 0;
-                    for (int i = 0; i < rings.Count; i++)
+                    var polygonCount = 0;
+                    for (var i = 0; i < rings.Count; i++)
                     {
                         isCounterClockWise[i] = rings[i].IsCCW();
                         if (!isCounterClockWise[i])
@@ -796,7 +796,7 @@ namespace Mapsui.Providers.Shapefile
                     {
                         var poly = new Polygon { ExteriorRing = rings[0] };
                         if (rings.Count > 1)
-                            for (int i = 1; i < rings.Count; i++)
+                            for (var i = 1; i < rings.Count; i++)
                                 poly.InteriorRings.Add(rings[i]);
                         return poly;
                     }

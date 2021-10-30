@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Mapsui.Fetcher
 {
-    class FetchWorker
+    internal class FetchWorker
     {
         private readonly IFetchDispatcher _fetchDispatcher;
         private CancellationTokenSource _fetchLoopCancellationTokenSource;

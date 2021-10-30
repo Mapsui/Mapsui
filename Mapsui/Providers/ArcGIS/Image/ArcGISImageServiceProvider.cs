@@ -7,7 +7,6 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using Mapsui.Extensions;
-using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Logging;
@@ -55,7 +54,7 @@ namespace Mapsui.Providers.ArcGIS.Image
 
         public string Url
         {
-            get { return _url; }
+            get => _url;
             set
             {
                 _url = value;
@@ -92,8 +91,8 @@ namespace Mapsui.Providers.ArcGIS.Image
         /// </summary>
         public int TimeOut
         {
-            get { return _timeOut; }
-            set { _timeOut = value; }
+            get => _timeOut;
+            set => _timeOut = value;
         }
 
         public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)

@@ -1,7 +1,6 @@
-using Mapsui.Providers;
 using System.Collections.Generic;
 using Mapsui.Extensions;
-using Mapsui.Fetcher;
+using Mapsui.Providers;
 using Mapsui.Styles;
 
 namespace Mapsui.Layers

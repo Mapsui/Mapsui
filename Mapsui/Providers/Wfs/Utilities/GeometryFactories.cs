@@ -42,8 +42,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         internal int[] AxisOrder
         {
-            get { return _axisOrder; }
-            set { _axisOrder = value; }
+            get => _axisOrder;
+            set => _axisOrder = value;
         }
 
         /// <summary>
@@ -109,11 +109,11 @@ namespace Mapsui.Providers.Wfs.Utilities
         {
             if (!reader.Read()) return null;
 
-            string name = reader.LocalName;
-            string coordinateString = reader.ReadElementString();
+            var name = reader.LocalName;
+            var coordinateString = reader.ReadElementString();
             var vertices = new Collection<Point>();
             string[][] coordinateValues;
-            int i = 0;
+            var i = 0;
 
             if (name.Equals("coordinates"))
             {
@@ -128,7 +128,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                 var evens = coords.Where((s, idx) => idx % 2 != 0);
                 coordinateValues = odds.Zip(evens, (odd, even) => new[] { odd, even }).ToArray();
             }
-            int length = coordinateValues.Length;
+            var length = coordinateValues.Length;
 
             while (i < length)
             {
@@ -200,7 +200,7 @@ namespace Mapsui.Providers.Wfs.Utilities
 
                     if (!ServiceExceptionNode.Matches(reader)) continue;
 
-                    string errorMessage = reader.ReadInnerXml();
+                    var errorMessage = reader.ReadInnerXml();
                     Trace.TraceError("A service exception occured: " + errorMessage);
                     throw new Exception("A service exception occured: " + errorMessage);
                 }
@@ -280,7 +280,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         private void InitializeSeparators()
         {
-            string decimalDel = string.IsNullOrEmpty(FeatureTypeInfo.DecimalDel) ? ":" : FeatureTypeInfo.DecimalDel;
+            var decimalDel = string.IsNullOrEmpty(FeatureTypeInfo.DecimalDel) ? ":" : FeatureTypeInfo.DecimalDel;
             _cs = string.IsNullOrEmpty(FeatureTypeInfo.Cs) ? "," : FeatureTypeInfo.Cs;
             _ts = string.IsNullOrEmpty(FeatureTypeInfo.Ts) ? " " : FeatureTypeInfo.Ts;
             _formatInfo.NumberDecimalSeparator = decimalDel;
@@ -337,7 +337,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         {
             IPathNode pointNode = new PathNode(Gmlns, "Point", (NameTable)XmlReader.NameTable);
             var labelValues = new Dictionary<string, string>();
-            bool geomFound = false;
+            var geomFound = false;
 
             try
             {
@@ -403,7 +403,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         {
             IPathNode lineStringNode = new PathNode(Gmlns, "LineString", (NameTable)XmlReader.NameTable);
             var labelValues = new Dictionary<string, string>();
-            bool geomFound = false;
+            var geomFound = false;
 
             try
             {
@@ -478,7 +478,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             IPathNode innerBoundaryNodeAlt = new AlternativePathNodesCollection(innerBoundaryNode, interiorNode);
             IPathNode linearRingNode = new PathNode(Gmlns, "LinearRing", (NameTable)XmlReader.NameTable);
             var labelValues = new Dictionary<string, string>();
-            bool geomFound = false;
+            var geomFound = false;
 
             try
             {
@@ -559,7 +559,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             IPathNode multiPointNode = new PathNode(Gmlns, "MultiPoint", (NameTable)XmlReader.NameTable);
             IPathNode pointMemberNode = new PathNode(Gmlns, "pointMember", (NameTable)XmlReader.NameTable);
             var labelValues = new Dictionary<string, string>();
-            bool geomFound = false;
+            var geomFound = false;
 
             try
             {
@@ -572,7 +572,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                     {
                         var multiPoint = new MultiPoint();
                         GeometryFactory geomFactory = new PointFactory(GeomReader, FeatureTypeInfo) { AxisOrder = AxisOrder }; ;
-                        Collection<Geometry> points = geomFactory.CreateGeometries(features);
+                        var points = geomFactory.CreateGeometries(features);
 
                         foreach (var geometry in points)
                         {
@@ -640,7 +640,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             IPathNode curveMemberNode = new PathNode(Gmlns, "curveMember", (NameTable)XmlReader.NameTable);
             IPathNode lineStringMemberNodeAlt = new AlternativePathNodesCollection(lineStringMemberNode, curveMemberNode);
             var labelValues = new Dictionary<string, string>();
-            bool geomFound = false;
+            var geomFound = false;
 
             try
             {
@@ -654,7 +654,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                     {
                         var multiLineString = new MultiLineString();
                         GeometryFactory geomFactory = new LineStringFactory(GeomReader, FeatureTypeInfo) { AxisOrder = AxisOrder };
-                        Collection<Geometry> lineStrings = geomFactory.CreateGeometries(features);
+                        var lineStrings = geomFactory.CreateGeometries(features);
 
                         foreach (var geometry in lineStrings)
                         {
@@ -721,7 +721,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             IPathNode polygonMemberNodeAlt = new AlternativePathNodesCollection(polygonMemberNode, surfaceMemberNode);
             IPathNode linearRingNode = new PathNode(Gmlns, "LinearRing", (NameTable)XmlReader.NameTable);
             var labelValues = new Dictionary<string, string>();
-            bool geomFound = false;
+            var geomFound = false;
 
             try
             {
@@ -734,7 +734,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                     {
                         var multiPolygon = new MultiPolygon();
                         GeometryFactory geomFactory = new PolygonFactory(GeomReader, FeatureTypeInfo) { AxisOrder = AxisOrder };
-                        Collection<Geometry> polygons = geomFactory.CreateGeometries(features);
+                        var polygons = geomFactory.CreateGeometries(features);
 
                         foreach (var geometry in polygons)
                         {
@@ -802,7 +802,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         {
             GeometryFactory geomFactory = null;
 
-            string geometryTypeString = string.Empty;
+            var geometryTypeString = string.Empty;
 
             if (_quickGeometries) _multiGeometries = false;
 
@@ -863,7 +863,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                     }
                     if (ServiceExceptionNode.Matches(XmlReader))
                     {
-                        string serviceException = XmlReader.ReadInnerXml();
+                        var serviceException = XmlReader.ReadInnerXml();
                         Trace.TraceError("A service exception occured: " + serviceException);
                         throw new Exception("A service exception occured: " + serviceException);
                     }

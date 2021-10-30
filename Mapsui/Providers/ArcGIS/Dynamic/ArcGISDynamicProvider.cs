@@ -66,7 +66,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
 
         public string Url
         {
-            get { return _url; }
+            get => _url;
             set
             {
                 _url = value;
@@ -80,14 +80,14 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
         /// </summary>
         public int TimeOut
         {
-            get { return _timeOut; }
-            set { _timeOut = value; }
+            get => _timeOut;
+            set => _timeOut = value;
         }
 
         public string CRS
         {
-            get { return _crs; }
-            set { _crs = value; }
+            get => _crs;
+            set => _crs = value;
         }
 
         public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)

@@ -19,7 +19,7 @@ namespace Mapsui.Extensions
         /// <returns>true if is svg stream</returns>
         public static bool IsSvg(this Stream stream)
         {
-            byte[] buffer = new byte[5];
+            var buffer = new byte[5];
 
             stream.Position = 0;
             stream.Read(buffer, 0, 5);
