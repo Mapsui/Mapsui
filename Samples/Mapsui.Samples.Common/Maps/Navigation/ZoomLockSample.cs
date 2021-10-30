@@ -1,16 +1,16 @@
 ﻿using Mapsui.UI;
 using Mapsui.Utilities;
 
-namespace Mapsui.Samples.Common.Maps
+namespace Mapsui.Samples.Common.Maps.Navigation
 {
-    class PanLockSample : ISample
+    class ZoomLockSample : ISample
     {
-        public string Name => "PanLock";
-        public string Category => "Special";
+        public string Name => "ZoomLock";
+        public string Category => "Navigation";
         public void Setup(IMapControl mapControl)
         {
             mapControl.Map = CreateMap();
-            mapControl.Map.PanLock = true;
+            mapControl.Map.ZoomLock = true;
         }
 
         public static Map CreateMap()

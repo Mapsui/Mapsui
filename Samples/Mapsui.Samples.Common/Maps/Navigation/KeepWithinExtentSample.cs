@@ -2,12 +2,12 @@
 using Mapsui.UI;
 using Mapsui.Utilities;
 
-namespace Mapsui.Samples.Common.Maps.Special
+namespace Mapsui.Samples.Common.Maps.Navigation
 {
     public class KeepWithinExtentSample : ISample
     {
         public string Name => "Keep Within Extent";
-        public string Category => "Special";
+        public string Category => "Navigation";
 
         public void Setup(IMapControl mapControl)
         {

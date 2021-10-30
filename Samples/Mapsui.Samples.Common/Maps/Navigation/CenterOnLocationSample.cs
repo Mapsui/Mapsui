@@ -4,13 +4,13 @@ using Mapsui.Projection;
 using Mapsui.UI;
 using Mapsui.Utilities;
 
-namespace Mapsui.Samples.Common.Maps
+namespace Mapsui.Samples.Common.Maps.Navigation
 {
     public class CenterOnLocationSample : ISample
     {
         public string Name => "Center on location";
 
-        public string Category => "Special";
+        public string Category => "Navigation";
 
         public void Setup(IMapControl mapControl)
         {

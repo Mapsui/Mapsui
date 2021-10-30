@@ -64,7 +64,7 @@ namespace Mapsui
             {
                 resolution = Limiter.LimitResolution(resolution, _viewport.Width, _viewport.Height, Map.Resolutions, Map.Envelope);
             }
-            
+
             _viewport.SetResolution(resolution);
         }
 

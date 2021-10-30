@@ -10,6 +10,13 @@ namespace Mapsui.UI
     /// </summary>
     public class ViewportLimiterKeepWithin : IViewportLimiter
     {
+        // todo: Check validity of the PanLimits and ZoomLimits.
+        // It is possible to specify a combination of PanLimits and ZoomLimits that is 
+        // impossible to apply. If the lowest allowed resolution does not fill the 
+        // screen it can never be kept within the extent. Weird jumpy map behavior will
+        // be the result of this. In the history of this file there is a MapWidthSpansViewport
+        // method that might be helpful. 
+
         /// <summary>
         /// Sets the limit to which the user can pan the map.
         /// If PanLimits is not set, Map.Extent will be used as restricted extent.
@@ -17,8 +24,8 @@ namespace Mapsui.UI
         public MRect? PanLimits { get; set; }
 
         /// <summary>
-        /// Pair of the limits for the resolutions (smallest and biggest). If ZoomMode is set 
-        /// to anything else than None, resolution is kept between these values.
+        /// Pair of the limits for the resolutions (smallest and biggest). The resolution is kept 
+        /// between these values.
         /// </summary>
         public MinMax? ZoomLimits { get; set; }
 
@@ -46,7 +53,6 @@ namespace Mapsui.UI
 
             if (zoomLimits.Min > resolution) return zoomLimits.Min;
 
-            // This is the ...AndAlwaysFillViewport part
             var viewportFillingResolution = CalculateResolutionAtWhichMapFillsViewport(screenWidth, screenHeight, panLimit);
             if (viewportFillingResolution < zoomLimits.Min) return resolution; // Mission impossible. Can't adhere to both restrictions
             var limit = Math.Min(zoomLimits.Max, viewportFillingResolution);
@@ -72,32 +78,18 @@ namespace Mapsui.UI
 
             var x = viewport.Center.X;
 
-            // todo: Figure out if the span check is useful
-            // It is possible to specify a combination of PanLimits and ZoomLimits that are 
-            // impossible to apply. If the lowest allowed resolution does not fill the 
-            // screen it can never be kept within extent. At some point it was useful
-            // to add a check for this. This check is not causing problems in case of small
-            // rounding errors. I am not sure what the original problem was without the check.
-            // I think the map started jumping from side to side when zooming out. Perhaps 
-            // The check should be done when setting the Pan/ZoomLimits. I disabled the check 
-            // for now.
-
-            //if (MapWidthSpansViewport(maxExtent.Width, viewport.Width, viewport.Resolution)) // if it doesn't fit don't restrict
-            {
-                if (viewport.Extent.Left < maxExtent.Left)
-                    x += maxExtent.Left - viewport.Extent.Left;
-                else if (viewport.Extent.Right > maxExtent.Right)
-                    x += maxExtent.Right - viewport.Extent.Right;
-            }
+            if (viewport.Extent.Left < maxExtent.Left)
+                x += maxExtent.Left - viewport.Extent.Left;
+            else if (viewport.Extent.Right > maxExtent.Right)
+                x += maxExtent.Right - viewport.Extent.Right;
 
             var y = viewport.Center.Y;
-            //if (MapHeightSpansViewport(maxExtent.Height, viewport.Height, viewport.Resolution)) // if it doesn't fit don't restrict
-            {
-                if (viewport.Extent.Top > maxExtent.Top)
-                    y += maxExtent.Top - viewport.Extent.Top;
-                else if (viewport.Extent.Bottom < maxExtent.Bottom)
-                    y += maxExtent.Bottom - viewport.Extent.Bottom;
-            }
+
+            if (viewport.Extent.Top > maxExtent.Top)
+                y += maxExtent.Top - viewport.Extent.Top;
+            else if (viewport.Extent.Bottom < maxExtent.Bottom)
+                y += maxExtent.Bottom - viewport.Extent.Bottom;
+
             viewport.SetCenter(x, y);
         }
     }
