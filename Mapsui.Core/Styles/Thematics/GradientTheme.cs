@@ -144,7 +144,7 @@ namespace Mapsui.Styles.Thematics
 
         private void CalculateVectorStyle(VectorStyle style, VectorStyle min, VectorStyle max, double value)
         {
-            double dFrac = Fraction(value);
+            var dFrac = Fraction(value);
             double fFrac = Convert.ToSingle(dFrac);
             style.Enabled = (dFrac > 0.5 ? min.Enabled : max.Enabled);
             if (FillColorBlend != null)
@@ -163,7 +163,7 @@ namespace Mapsui.Styles.Thematics
 
         private void CalculateSymbolStyle(SymbolStyle style, SymbolStyle min, SymbolStyle max, double value)
         {
-            double dFrac = Fraction(value);
+            var dFrac = Fraction(value);
             style.BitmapId = (dFrac > 0.5) ? min.BitmapId : max.BitmapId;
             style.SymbolOffset = (dFrac > 0.5 ? min.SymbolOffset : max.SymbolOffset);
             //We don't interpolate the offset but let it follow the symbol instead
@@ -176,7 +176,7 @@ namespace Mapsui.Styles.Thematics
             style.Enabled = InterpolateBool(min.Enabled, max.Enabled, value);
             style.LabelColumn = InterpolateString(min.LabelColumn, max.LabelColumn, value);
 
-            double fontSize = InterpolateDouble(min.Font.Size, max.Font.Size, value);
+            var fontSize = InterpolateDouble(min.Font.Size, max.Font.Size, value);
             style.Font = new Font { FontFamily = min.Font.FontFamily, Size = fontSize };
 
             if (min.BackColor != null && max.BackColor != null)
@@ -238,16 +238,16 @@ namespace Mapsui.Styles.Thematics
 
         private Color InterpolateColor(Color minCol, Color maxCol, double attr)
         {
-            double frac = Fraction(attr);
+            var frac = Fraction(attr);
             if (Math.Abs(frac - 1) < Utilities.Constants.Epsilon)
                 return maxCol;
             if (Math.Abs(frac - 0) < Utilities.Constants.Epsilon)
                 return minCol;
 
-            double r = (maxCol.R - minCol.R) * frac + minCol.R;
-            double g = (maxCol.G - minCol.G) * frac + minCol.G;
-            double b = (maxCol.B - minCol.B) * frac + minCol.B;
-            double a = (maxCol.A - minCol.A) * frac + minCol.A;
+            var r = (maxCol.R - minCol.R) * frac + minCol.R;
+            var g = (maxCol.G - minCol.G) * frac + minCol.G;
+            var b = (maxCol.B - minCol.B) * frac + minCol.B;
+            var a = (maxCol.A - minCol.A) * frac + minCol.A;
             if (r > 255) r = 255;
             if (g > 255) g = 255;
             if (b > 255) b = 255;

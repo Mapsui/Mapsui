@@ -210,7 +210,7 @@ namespace Mapsui.Styles
                     else
                         temp2 = l + s - (l * s);
 
-                    float temp1 = 2.0f * l - temp2;
+                    var temp1 = 2.0f * l - temp2;
 
                     r = GetColorComponent(temp1, temp2, h + 1.0f / 3.0f);
                     g = GetColorComponent(temp1, temp2, h);
