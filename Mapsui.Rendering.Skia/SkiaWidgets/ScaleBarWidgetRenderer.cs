@@ -1,4 +1,6 @@
-﻿using Mapsui.Rendering.Skia.Extensions;
+﻿using System;
+using System.Linq;
+using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ScaleBar;
 using SkiaSharp;
@@ -75,32 +77,22 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
             // Get lines for scale bar
             var points = scaleBar.GetScaleBarLinePositions(viewport, scaleBarLength1, scaleBarLength2, scaleBar.StrokeWidthHalo);
 
-            // BoundingBox for scale bar
-            MRect? envelop = null;
-
-            if (points != null)
+            // Draw outline of scale bar
+            for (var i = 0; i < points.Count; i += 2)
             {
-                // Draw outline of scale bar
-                for (var i = 0; i < points.Length; i += 2)
-                {
-                    canvas.DrawLine((float)points[i].X, (float)points[i].Y, (float)points[i + 1].X, (float)points[i + 1].Y, _paintScaleBarStroke);
-                }
-
-                // Draw scale bar
-                for (var i = 0; i < points.Length; i += 2)
-                {
-                    canvas.DrawLine((float)points[i].X, (float)points[i].Y, (float)points[i + 1].X, (float)points[i + 1].Y, _paintScaleBar);
-                }
-
-                envelop = points[0].MRect;
-
-                for (var i = 1; i < points.Length; i++)
-                {
-                    envelop = envelop.Join(points[i].MRect);
-                }
-
-                envelop = envelop.Grow(scaleBar.StrokeWidthHalo * 0.5f * scaleBar.Scale);
+                canvas.DrawLine((float)points[i].X, (float)points[i].Y, (float)points[i + 1].X, (float)points[i + 1].Y, _paintScaleBarStroke);
             }
+
+            // Draw scale bar
+            for (var i = 0; i < points.Count; i += 2)
+            {
+                canvas.DrawLine((float)points[i].X, (float)points[i].Y, (float)points[i + 1].X, (float)points[i + 1].Y, _paintScaleBar);
+            }
+
+            if (!points.Any()) throw new NotImplementedException($"A {nameof(ScaleBarWidget)} can not be drawn without line positions");
+
+            var envelop = new MRect(points.Select(p => p.MRect));
+            envelop = envelop.Grow(scaleBar.StrokeWidthHalo * 0.5f * scaleBar.Scale);
 
             // Draw text
 
