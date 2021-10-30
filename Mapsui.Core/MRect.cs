@@ -30,8 +30,6 @@ namespace Mapsui
     /// </remarks>
     public class MRect : IEquatable<MRect>
     {
-        public MRect() { }
-
         public MRect(MRect rect) : this(
             rect.Min.X,
             rect.Min.Y,
@@ -69,9 +67,6 @@ namespace Mapsui
         /// </summary>
         public MRect(IEnumerable<MRect> rects)
         {
-            Max = null;
-            Min = null;
-
             foreach (var rect in rects)
             {
                 Min ??= rect.Min.Clone();
@@ -82,6 +77,9 @@ namespace Mapsui
                 Max.X = Math.Max(rect.Max.X, Max.X);
                 Max.Y = Math.Max(rect.Max.Y, Max.Y);
             }
+
+            if (this.Min == null) throw new ArgumentException("Empty Collection", nameof(rects));
+            if (this.Max == null) throw new ArgumentException("Empty Collection", nameof(rects));
         }
 
         public double MinX => Min.X;
