@@ -1,12 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.10.7" />
     <PackageReference Include="Avalonia.Desktop" Version="0.10.7" />
@@ -16,6 +19,7 @@
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.7" />
   </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.Geometries\Mapsui.Geometries.csproj" />
     <ProjectReference Include="..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
@@ -25,4 +29,5 @@
     <ProjectReference Include="..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
     <ProjectReference Include="..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
   </ItemGroup>
+
 </Project>

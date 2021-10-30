@@ -1,8 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>TRACE;__FORMS__;DEBUG;NETSTANDARD1_3</DefineConstants>
   </PropertyGroup>
@@ -37,6 +39,7 @@
     <None Remove="Images\ZoomOut.svg" />
     <None Remove="Images\MyLocationDir.svg" />
   </ItemGroup>
+
   <ItemGroup>
     <EmbeddedResource Include="Images\Close.svg" />
     <EmbeddedResource Include="Images\MyLocationStill.svg" />
@@ -49,6 +52,7 @@
     <EmbeddedResource Include="Images\ZoomOut.svg" />
     <EmbeddedResource Include="Images\MyLocationDir.svg" />
   </ItemGroup>
+
   <Import Project="..\Mapsui.UI.Shared\Mapsui.UI.Shared.projitems" Label="Shared" />
 
 </Project>

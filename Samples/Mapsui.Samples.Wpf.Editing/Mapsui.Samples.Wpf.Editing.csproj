@@ -1,13 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
   <PropertyGroup>
     <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
     <OutputType>WinExe</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.Core\Mapsui.Core.csproj" />
     <ProjectReference Include="..\..\Mapsui.UI.Wpf\Mapsui.UI.Wpf.csproj" />
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />
   </ItemGroup>
+
 </Project>
