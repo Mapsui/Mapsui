@@ -1,9 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Mapsui Contributers</Authors>
     <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
   </PropertyGroup>
+
   <ItemGroup>
     <None Remove="EmbeddedResources\cities.geojson" />
     <None Remove="EmbeddedResources\cities.json" />
@@ -26,6 +28,7 @@
     <None Remove="MbTiles\torrejon-de-ardoz.mbtiles" />
     <None Remove="MbTiles\world.mbtiles" />
   </ItemGroup>
+
   <ItemGroup>
     <EmbeddedResource Include="EmbeddedResources\cities.geojson" />
     <EmbeddedResource Include="EmbeddedResources\cities.json" />
