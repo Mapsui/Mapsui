@@ -148,7 +148,7 @@ namespace Mapsui.Providers.Shapefile
         /// <returns>true if this feature should be included, false if it should be filtered</returns>
         public delegate bool FilterMethod(IFeature dr);
 
-        private MRect _envelope;
+        private MRect? _envelope;
         private int _featureCount;
         private readonly bool _fileBasedIndex;
         private string _filename;
@@ -164,7 +164,7 @@ namespace Mapsui.Providers.Shapefile
         /// <summary>
         /// Tree used for fast query of data
         /// </summary>
-        private QuadTree _tree;
+        private QuadTree? _tree;
 
         /// <summary>
         /// Initializes a ShapeFile DataProvider.

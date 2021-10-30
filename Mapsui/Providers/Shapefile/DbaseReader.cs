@@ -46,8 +46,8 @@ namespace Mapsui.Providers.Shapefile
         private short _recordLength;
         private readonly string _filename;
         private DbaseField[] _dbaseColumns;
-        private FileStream _fs;
-        private BinaryReader _br;
+        private FileStream? _fs;
+        private BinaryReader? _br;
         private bool _headerIsParsed;
 
         public DbaseReader(string filename)

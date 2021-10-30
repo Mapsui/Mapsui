@@ -56,15 +56,15 @@ namespace Mapsui.Providers.Shapefile.Indexing
     public class QuadTree : IDisposable
     {
         private MRect _box;
-        private QuadTree _child0;
-        private QuadTree _child1;
+        private QuadTree? _child0;
+        private QuadTree? _child1;
 
         /// <summary>
         /// Nodes depth in a tree
         /// </summary>
         private uint _depth;
 
-        private List<BoxObjects> _objList;
+        private List<BoxObjects>? _objList;
 
         /// <summary>
         /// Creates a node and either splits the objects recursively into sub-nodes, or stores them at the node depending on the heuristics.

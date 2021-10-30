@@ -8,7 +8,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Mapsui.Providers.ArcGIS.Dynamic
 {
-    public delegate void ArcGISLegendEventHandler(object sender, ArcGISLegendResponse legendInfo);
+    public delegate void ArcGISLegendEventHandler(object sender, ArcGISLegendResponse? legendInfo);
 
     /// <summary>
     /// ArcGislegend for getting the layer legends for ArcGIS layers only supports

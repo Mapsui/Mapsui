@@ -61,7 +61,7 @@ namespace Mapsui.Providers.Wfs
         private bool _disposed;
         private string _featureType;
         private WfsFeatureTypeInfo _featureTypeInfo;
-        private IXPathQueryManager _featureTypeInfoQueryManager;
+        private IXPathQueryManager? _featureTypeInfoQueryManager;
         private string _nsPrefix;
         private bool _getFeatureGetRequest;
         private List<string> _labels = new List<string>();

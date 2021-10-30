@@ -24,7 +24,7 @@ namespace Mapsui.Providers.ArcGIS
         private int _timeOut;
         private string _url;
 
-        public delegate void StatusEventHandler(object sender, EventArgs e);
+        public delegate void StatusEventHandler(object? sender, EventArgs e);
 
         /// <summary>
         /// Triggered when finished parsing capabilities, returns Capabilities object

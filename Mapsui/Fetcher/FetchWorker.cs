@@ -7,7 +7,7 @@ namespace Mapsui.Fetcher
     internal class FetchWorker
     {
         private readonly IFetchDispatcher _fetchDispatcher;
-        private CancellationTokenSource _fetchLoopCancellationTokenSource;
+        private CancellationTokenSource? _fetchLoopCancellationTokenSource;
         public static long RestartCounter;
 
         public FetchWorker(IFetchDispatcher fetchDispatcher)

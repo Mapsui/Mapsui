@@ -19,7 +19,7 @@ namespace Mapsui.Providers.Wfs.Xml
     public class XPathQueryManager : IXPathQueryManager
     {
 
-        private CustomQueryContext _paramContext;
+        private CustomQueryContext? _paramContext;
         private XPathNodeIterator _xIter;
         private XPathNavigator _xNav;
         private XPathDocument _xPathDoc;

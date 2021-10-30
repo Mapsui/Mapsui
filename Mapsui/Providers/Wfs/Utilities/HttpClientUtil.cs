@@ -17,11 +17,11 @@ namespace Mapsui.Providers.Wfs.Utilities
     {
 
         private readonly NameValueCollection _requestHeaders;
-        private byte[] _postData;
-        private string _proxyUrl;
-        private string _url;
+        private byte[]? _postData;
+        private string? _proxyUrl;
+        private string? _url;
         private HttpWebRequest _webRequest;
-        private HttpWebResponse _webResponse;
+        private HttpWebResponse? _webResponse;
         private ICredentials _credentials;
 
         /// <summary>

@@ -152,7 +152,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <param name="labels">A dictionary for recording label values. Pass 'null' to ignore searching for label values</param>
         /// <param name="pathNodes">A list of <see cref="IPathNode"/> instances defining the context of the retrieved reader</param>
         /// <returns>A sub-reader of the XmlReader given as argument</returns>
-        protected XmlReader GetSubReaderOf(XmlReader reader, Dictionary<string, string> labels, params IPathNode[] pathNodes)
+        protected XmlReader GetSubReaderOf(XmlReader reader, Dictionary<string, string>? labels, params IPathNode[] pathNodes)
         {
             _pathNodes.Clear();
             _pathNodes.AddRange(pathNodes);
@@ -167,7 +167,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <param name="labels">A dictionary for recording label values. Pass 'null' to ignore searching for label values</param>
         /// <param name="pathNodes">A list of <see cref="IPathNode"/> instances defining the context of the retrieved reader</param>
         /// <returns>A sub-reader of the XmlReader given as argument</returns>
-        protected XmlReader? GetSubReaderOf(XmlReader reader, Dictionary<string, string> labels, List<IPathNode> pathNodes)
+        protected XmlReader? GetSubReaderOf(XmlReader reader, Dictionary<string, string>? labels, List<IPathNode> pathNodes)
         {
             while (reader.Read())
             {

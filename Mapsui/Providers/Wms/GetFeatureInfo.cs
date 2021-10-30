@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace Mapsui.Providers.Wms
 {
-    public delegate void StatusEventHandler(object sender, FeatureInfo featureInfo);
+    public delegate void StatusEventHandler(object sender, FeatureInfo? featureInfo);
 
     public class GetFeatureInfo
     {
-        private string _infoFormat;
-        private string _layerName;
+        private string? _infoFormat;
+        private string? _layerName;
         public event StatusEventHandler? IdentifyFinished;
         public event StatusEventHandler? IdentifyFailed;
-        private readonly Func<string, Task<Stream>> _getStreamAsync;
+        private readonly Func<string, Task<Stream>>? _getStreamAsync;
 
         public GetFeatureInfo(Func<string, Task<Stream>>? getStreamAsync = null)
         {
@@ -30,12 +30,12 @@ namespace Mapsui.Providers.Wms
         /// </summary>
         public int TimeOut { get; set; }
 
-        public Dictionary<string, string> ExtraParams { get; set; }
+        public Dictionary<string, string>? ExtraParams { get; set; }
 
         /// <summary>
         /// Provides the base authentication interface for retrieving credentials for Web client authentication.
         /// </summary>
-        public ICredentials Credentials { get; set; }
+        public ICredentials? Credentials { get; set; }
 
         /// <summary>
         /// Request FeatureInfo for a WMS Server
