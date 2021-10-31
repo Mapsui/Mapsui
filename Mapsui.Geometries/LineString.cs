@@ -253,10 +253,10 @@ namespace Mapsui.Geometries
         /// <returns>List of LineString</returns>
         public List<LineString> GetSegments()
         {
-            List<LineString> segments = new List<LineString>();
-            for (int i = 0; i < Vertices.Count - 1; i++)
+            var segments = new List<LineString>();
+            for (var i = 0; i < Vertices.Count - 1; i++)
             {
-                LineString tmp = new LineString();
+                var tmp = new LineString();
                 tmp.Vertices.Add(Vertices[i]);
                 tmp.Vertices.Add(Vertices[i + 1]);
                 segments.Add(tmp);

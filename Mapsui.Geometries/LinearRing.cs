@@ -172,8 +172,8 @@ namespace Mapsui.Geometries
             var tmpLineString = Clone();
 
             // Check if first vertex is approximately equal to last vertex
-            if (Math.Abs(tmpLineString.StartPoint.X - tmpLineString.EndPoint.X) > Double.Epsilon ||
-                Math.Abs(tmpLineString.StartPoint.Y - tmpLineString.EndPoint.Y) > Double.Epsilon)
+            if (Math.Abs(tmpLineString.StartPoint.X - tmpLineString.EndPoint.X) > double.Epsilon ||
+                Math.Abs(tmpLineString.StartPoint.Y - tmpLineString.EndPoint.Y) > double.Epsilon)
             {
                 tmpLineString.Vertices.Add(tmpLineString.Vertices.First());
             }
