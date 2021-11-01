@@ -12,7 +12,6 @@ using Mapsui.Logging;
 using Mapsui.UI.Android.Extensions;
 using SkiaSharp.Views.Android;
 using Math = System.Math;
-using Point = Mapsui.Geometries.Point;
 
 namespace Mapsui.UI.Android
 {
@@ -22,7 +21,7 @@ namespace Mapsui.UI.Android
         Software
     }
 
-    class MapControlGestureListener : GestureDetector.SimpleOnGestureListener
+    internal class MapControlGestureListener : GestureDetector.SimpleOnGestureListener
     {
         public EventHandler<GestureDetector.FlingEventArgs>? Fling;
 
@@ -67,7 +66,7 @@ namespace Mapsui.UI.Android
             Initialize();
         }
 
-        void Initialize()
+        private void Initialize()
         {
             _invalidate = () => { RunOnUIThread(RefreshGraphicsWithTryCatch); };
 
@@ -127,7 +126,7 @@ namespace Mapsui.UI.Android
         {
             if (e.Event == null)
                 return;
-            
+
             var position = GetScreenPosition(e.Event, this);
             OnInfo(InvokeInfo(position, position, 2));
         }
@@ -360,11 +359,11 @@ namespace Mapsui.UI.Android
 
         public void OpenBrowser(string url)
         {
-            global::Android.Net.Uri? uri = global::Android.Net.Uri.Parse(url);
-            Intent intent = new Intent(Intent.ActionView);
+            var uri = global::Android.Net.Uri.Parse(url);
+            var intent = new Intent(Intent.ActionView);
             intent.SetData(uri);
 
-            Intent? chooser = Intent.CreateChooser(intent, "Open with");
+            var chooser = Intent.CreateChooser(intent, "Open with");
 
             Context?.StartActivity(chooser);
         }
