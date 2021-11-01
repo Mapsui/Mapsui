@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Threading;
 using Mapsui.Extensions;
-using Mapsui.Fetcher;
-using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using NUnit.Framework;
@@ -15,7 +13,7 @@ namespace Mapsui.Tests.Layers
     {
         private const string ExceptionMessage = "This exception should return on OnDataChange";
 
-        class FakeProvider : IProvider<IGeometryFeature>
+        private class FakeProvider : IProvider<IGeometryFeature>
         {
             public string? CRS { get; set; }
             public IEnumerable<IGeometryFeature> GetFeatures(FetchInfo fetchInfo)

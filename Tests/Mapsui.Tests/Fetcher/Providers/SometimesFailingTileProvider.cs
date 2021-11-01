@@ -3,7 +3,7 @@ using BruTile;
 
 namespace Mapsui.Tests.Fetcher.Providers
 {
-    class SometimesFailingTileProvider : CountingTileProvider
+    internal class SometimesFailingTileProvider : CountingTileProvider
     {
         private readonly Random _random = new Random(DateTime.Now.Millisecond);
 

@@ -9,11 +9,11 @@ namespace Mapsui.Geometries.Tests
         public void BoundingBoxTouches()
         {
             // Arrange 
-            BoundingBox b1 = new BoundingBox(0, 0, 1, 1);
-            BoundingBox b2 = new BoundingBox(0, 1, 1, 2);
+            var b1 = new BoundingBox(0, 0, 1, 1);
+            var b2 = new BoundingBox(0, 1, 1, 2);
 
             // Act
-            bool touch = b1.Touches(b2);
+            var touch = b1.Touches(b2);
 
             // Assert
             Assert.AreEqual(true, touch);

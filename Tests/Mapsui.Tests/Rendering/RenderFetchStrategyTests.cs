@@ -1,10 +1,10 @@
 ﻿using BruTile.Cache;
 using BruTile.Predefined;
 using Mapsui.Extensions;
+using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Rendering;
 using NUnit.Framework;
-using Mapsui.Geometries;
 
 namespace Mapsui.Tests.Rendering
 {
