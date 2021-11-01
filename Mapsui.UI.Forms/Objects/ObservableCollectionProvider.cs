@@ -1,7 +1,7 @@
-﻿using Mapsui.Providers;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Mapsui.Layers;
+using Mapsui.Providers;
 
 namespace Mapsui.UI.Objects
 {
@@ -27,7 +27,7 @@ namespace Mapsui.UI.Objects
 
             lock (_syncRoot)
             {
-                foreach (T item in Collection)
+                foreach (var item in Collection)
                 {
                     if (fetchInfo.Extent?.Intersects(item.Feature?.BoundingBox) ?? false)
                         list.Add((TU)item.Feature!);
@@ -46,7 +46,7 @@ namespace Mapsui.UI.Objects
 
             lock (_syncRoot)
             {
-                foreach (T item in Collection)
+                foreach (var item in Collection)
                 {
                     if (item.Feature != null)
                     {

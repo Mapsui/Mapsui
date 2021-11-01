@@ -1,14 +1,14 @@
-﻿using Mapsui.Geometries;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using Mapsui.Geometries;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.UI.Forms.Extensions;
 using Mapsui.UI.Forms.Utils;
 using Mapsui.UI.Objects;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Runtime.CompilerServices;
 
 namespace Mapsui.UI.Forms
 {
@@ -42,10 +42,7 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Positions of line
         /// </summary>
-        public IList<Position> Positions
-        {
-            get { return _positions; }
-        }
+        public IList<Position> Positions => _positions;
 
         protected override void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
@@ -59,12 +56,12 @@ namespace Mapsui.UI.Forms
             }
         }
 
-        void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             OnPropertyChanged(nameof(Positions));
         }
 
-        private object sync = new object();
+        private readonly object sync = new object();
 
         /// <summary>
         /// Create feature

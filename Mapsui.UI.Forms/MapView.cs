@@ -1,10 +1,4 @@
-﻿using Mapsui.Layers;
-using Mapsui.UI.Forms.Extensions;
-using Mapsui.UI.Objects;
-using Mapsui.Widgets;
-using SkiaSharp;
-using Svg.Skia;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,9 +8,14 @@ using System.Linq;
 using System.Resources;
 using System.Runtime.CompilerServices;
 using Mapsui.Extensions;
-using Mapsui.Fetcher;
+using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.UI.Forms.Extensions;
+using Mapsui.UI.Objects;
+using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidget;
+using SkiaSharp;
+using Svg.Skia;
 using Xamarin.Forms;
 
 namespace Mapsui.UI.Forms
@@ -41,10 +40,9 @@ namespace Mapsui.UI.Forms
         private readonly SKPicture _pictZoomIn;
         private readonly SKPicture _pictZoomOut;
         private readonly SKPicture _pictNorthing;
-
-        readonly ObservableRangeCollection<Pin> _pins = new ObservableRangeCollection<Pin>();
-        readonly ObservableRangeCollection<Drawable> _drawable = new ObservableRangeCollection<Drawable>();
-        readonly ObservableRangeCollection<Callout> _callouts = new ObservableRangeCollection<Callout>();
+        private readonly ObservableRangeCollection<Pin> _pins = new ObservableRangeCollection<Pin>();
+        private readonly ObservableRangeCollection<Drawable> _drawable = new ObservableRangeCollection<Drawable>();
+        private readonly ObservableRangeCollection<Callout> _callouts = new ObservableRangeCollection<Callout>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Mapsui.UI.Forms.MapView"/> class.
@@ -86,11 +84,11 @@ namespace Mapsui.UI.Forms
             Map!.Layers.Changed += HandleLayersChanged;
 
             _pictMyLocationNoCenter = new SKSvg().Load(Utilities.EmbeddedResourceLoader.Load("Images.LocationNoCenter.svg", typeof(MapView))) ?? throw new MissingManifestResourceException("Images.LocationNoCenter.svg");
-            _pictMyLocationCenter = new SKSvg().Load(Utilities.EmbeddedResourceLoader.Load("Images.LocationCenter.svg", typeof(MapView))) ?? throw new MissingManifestResourceException("Images.LocationCenter.svg");;
+            _pictMyLocationCenter = new SKSvg().Load(Utilities.EmbeddedResourceLoader.Load("Images.LocationCenter.svg", typeof(MapView))) ?? throw new MissingManifestResourceException("Images.LocationCenter.svg"); ;
 
-            _pictZoomIn = new SKSvg().Load(Utilities.EmbeddedResourceLoader.Load("Images.ZoomIn.svg", typeof(MapView))) ?? throw new MissingManifestResourceException("Images.ZoomIn.svg");;
-            _pictZoomOut = new SKSvg().Load(Utilities.EmbeddedResourceLoader.Load("Images.ZoomOut.svg", typeof(MapView))) ?? throw new MissingManifestResourceException("Images.ZoomOut.svg");;
-            _pictNorthing = new SKSvg().Load(Utilities.EmbeddedResourceLoader.Load("Images.RotationZero.svg", typeof(MapView))) ?? throw new MissingManifestResourceException("Images.RotationZero.svg");;
+            _pictZoomIn = new SKSvg().Load(Utilities.EmbeddedResourceLoader.Load("Images.ZoomIn.svg", typeof(MapView))) ?? throw new MissingManifestResourceException("Images.ZoomIn.svg"); ;
+            _pictZoomOut = new SKSvg().Load(Utilities.EmbeddedResourceLoader.Load("Images.ZoomOut.svg", typeof(MapView))) ?? throw new MissingManifestResourceException("Images.ZoomOut.svg"); ;
+            _pictNorthing = new SKSvg().Load(Utilities.EmbeddedResourceLoader.Load("Images.RotationZero.svg", typeof(MapView))) ?? throw new MissingManifestResourceException("Images.RotationZero.svg"); ;
 
             CreateButtons();
 
@@ -168,8 +166,8 @@ namespace Mapsui.UI.Forms
         /// </remarks>
         public bool MyLocationEnabled
         {
-            get { return (bool)GetValue(MyLocationEnabledProperty); }
-            set { Device.BeginInvokeOnMainThread(() => SetValue(MyLocationEnabledProperty, value)); }
+            get => (bool)GetValue(MyLocationEnabledProperty);
+            set => Device.BeginInvokeOnMainThread(() => SetValue(MyLocationEnabledProperty, value));
         }
 
         /// <summary>
@@ -177,8 +175,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public bool MyLocationFollow
         {
-            get { return (bool)GetValue(MyLocationFollowProperty); }
-            set { SetValue(MyLocationFollowProperty, value); }
+            get => (bool)GetValue(MyLocationFollowProperty);
+            set => SetValue(MyLocationFollowProperty, value);
         }
 
         /// <summary>
@@ -191,8 +189,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public Pin? SelectedPin
         {
-            get { return (Pin?)GetValue(SelectedPinProperty); }
-            set { SetValue(SelectedPinProperty, value); }
+            get => (Pin?)GetValue(SelectedPinProperty);
+            set => SetValue(SelectedPinProperty, value);
         }
 
         /// <summary>
@@ -200,8 +198,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public bool UniqueCallout
         {
-            get { return (bool)GetValue(UniqueCalloutProperty); }
-            set { SetValue(UniqueCalloutProperty, value); }
+            get => (bool)GetValue(UniqueCalloutProperty);
+            set => SetValue(UniqueCalloutProperty, value);
         }
 
         /// <summary>
@@ -214,8 +212,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public bool RotationLock
         {
-            get { return (bool)GetValue(RotationLockProperty); }
-            set { SetValue(RotationLockProperty, value); }
+            get => (bool)GetValue(RotationLockProperty);
+            set => SetValue(RotationLockProperty, value);
         }
 
         /// <summary>
@@ -223,8 +221,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public bool ZoomLock
         {
-            get { return (bool)GetValue(ZoomLockProperty); }
-            set { SetValue(ZoomLockProperty, value); }
+            get => (bool)GetValue(ZoomLockProperty);
+            set => SetValue(ZoomLockProperty, value);
         }
 
         /// <summary>
@@ -232,8 +230,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public bool PanLock
         {
-            get { return (bool)GetValue(PanLockProperty); }
-            set { SetValue(PanLockProperty, value); }
+            get => (bool)GetValue(PanLockProperty);
+            set => SetValue(PanLockProperty, value);
         }
 
         /// <summary>
@@ -241,8 +239,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public bool IsZoomButtonVisible
         {
-            get { return (bool)GetValue(IsZoomButtonVisibleProperty); }
-            set { SetValue(IsZoomButtonVisibleProperty, value); }
+            get => (bool)GetValue(IsZoomButtonVisibleProperty);
+            set => SetValue(IsZoomButtonVisibleProperty, value);
         }
 
         /// <summary>
@@ -250,8 +248,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public bool IsMyLocationButtonVisible
         {
-            get { return (bool)GetValue(IsMyLocationButtonVisibleProperty); }
-            set { SetValue(IsMyLocationButtonVisibleProperty, value); }
+            get => (bool)GetValue(IsMyLocationButtonVisibleProperty);
+            set => SetValue(IsMyLocationButtonVisibleProperty, value);
         }
 
         /// <summary>
@@ -765,7 +763,7 @@ namespace Mapsui.UI.Forms
         /// <returns>List with all drawables at point, which are clickable</returns>
         private IList<Drawable> GetDrawablesAt(Geometries.Point point, ILayer layer)
         {
-            List<Drawable> drawables = new List<Drawable>();
+            var drawables = new List<Drawable>();
 
             if (layer.Enabled == false) return drawables;
             if (layer.MinVisible > Viewport.Resolution) return drawables;

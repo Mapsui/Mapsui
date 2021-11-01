@@ -18,17 +18,17 @@ namespace Mapsui.UI.Forms.Utils
             if (string.IsNullOrWhiteSpace(encodedPolyline))
                 return null;
 
-            int index = 0;
+            var index = 0;
             var polylineChars = encodedPolyline.ToCharArray();
             var poly = new List<Position>();
-            int currentLat = 0;
-            int currentLng = 0;
+            var currentLat = 0;
+            var currentLng = 0;
             int next5Bits;
 
             while (index < polylineChars.Length)
             {
-                int sum = 0;
-                int shifter = 0;
+                var sum = 0;
+                var shifter = 0;
 
                 do
                 {

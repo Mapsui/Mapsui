@@ -10,17 +10,17 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Conversion for for Miles in Meters
         /// </summary>
-        const double MetersPerMile = 1609.344;
+        private const double MetersPerMile = 1609.344;
 
         /// <summary>
         /// Conversion from Nautic Miles in Meters
         /// </summary>
-        const double MetersPerNauticalMile = 1852.216;
+        private const double MetersPerNauticalMile = 1852.216;
 
         /// <summary>
         /// Conversion from Kilometers in Meters
         /// </summary>
-        const double MetersPerKilometer = 1000.0;
+        private const double MetersPerKilometer = 1000.0;
 
         /// <summary>
         /// Constructor for <see cref="T:Mapsui.UI.Forms.Distance"/> object.
