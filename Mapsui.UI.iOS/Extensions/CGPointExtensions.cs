@@ -2,7 +2,7 @@ using CoreGraphics;
 
 namespace Mapsui.UI.iOS.Extensions
 {
-    static class CGPointExtensions
+    internal static class CGPointExtensions
     {
         public static MPoint ToMapsui(this CGPoint point)
         {
