@@ -4,7 +4,6 @@ using System.Globalization;
 using System.Linq;
 using System.Threading;
 using Mapsui.Extensions;
-using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;

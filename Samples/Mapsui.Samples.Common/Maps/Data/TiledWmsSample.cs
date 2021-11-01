@@ -6,7 +6,6 @@ using BruTile.Web;
 using BruTile.Wmsc;
 using Mapsui.Layers;
 using Mapsui.UI;
-using Attribution = BruTile.Attribution;
 
 namespace Mapsui.Samples.Common.Maps
 {

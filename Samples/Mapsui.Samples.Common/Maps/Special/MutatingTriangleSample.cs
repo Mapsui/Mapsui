@@ -36,8 +36,10 @@ namespace Mapsui.Samples.Common.Maps
 
             var polygon = new Polygon(new LinearRing(GenerateRandomPoints(envelope, 3)));
             var feature = new Feature() { Geometry = polygon };
-            var features = new List<IGeometryFeature>();
-            features.Add(feature);
+            var features = new List<IGeometryFeature>
+            {
+                feature
+            };
 
             layer.DataSource = new MemoryProvider<IGeometryFeature>(features);
 

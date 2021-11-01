@@ -49,7 +49,7 @@ namespace Mapsui.Samples.Common.Maps
 
             var points = new List<Point>();
 
-            for (int i = 0; i < 10000; i++)
+            for (var i = 0; i < 10000; i++)
             {
                 points.Add(new Point(startPoint.X + i, startPoint.Y + i));
             }
@@ -63,13 +63,13 @@ namespace Mapsui.Samples.Common.Maps
         private static void AddStyles(Feature feature)
         {
             // route outline style
-            VectorStyle vsout = new VectorStyle
+            var vsout = new VectorStyle
             {
                 Opacity = 0.5f,
                 Line = new Pen(Color.White, 10f),
             };
 
-            VectorStyle vs = new VectorStyle
+            var vs = new VectorStyle
             {
                 Fill = null,
                 Outline = null,
