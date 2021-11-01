@@ -1,8 +1,8 @@
 ﻿using System;
-using NUnit.Framework;
-using Mapsui.Providers;
 using System.Linq;
 using Mapsui.Layers;
+using Mapsui.Providers;
+using NUnit.Framework;
 
 namespace Mapsui.Tests.Providers
 {

@@ -3,7 +3,7 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps.Navigation
 {
-    class ZoomLockSample : ISample
+    internal class ZoomLockSample : ISample
     {
         public string Name => "ZoomLock";
         public string Category => "Navigation";

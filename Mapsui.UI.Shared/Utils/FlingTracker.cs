@@ -4,10 +4,10 @@ namespace Mapsui.UI.Utils
 {
     public class FlingTracker
     {
-        const int maxSize = 50;
-        const long maxTicks = 200 * 10000;  // Use only events from the last 200 ms
+        private const int maxSize = 50;
+        private const long maxTicks = 200 * 10000;  // Use only events from the last 200 ms
 
-        readonly Dictionary<long, Queue<(double x, double y, long time)>> events;
+        private readonly Dictionary<long, Queue<(double x, double y, long time)>> events;
 
         public FlingTracker()
         {

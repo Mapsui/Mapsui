@@ -111,7 +111,7 @@ namespace Mapsui.Samples.Common.Desktop
 
         private static IEnumerable<IGeometryFeature> GenerateTop100()
         {
-            List<City> c = new List<City>
+            var c = new List<City>
             {
                 new City { CityName = "Tokyo", Lat = 35.69, Long = 139.75, Population = 22006300, Country = "Japan" },
                 new City { CityName = "Mumbai", Lat = 19.02, Long = 72.86, Population = 15834918, Country = "India" },
@@ -216,7 +216,7 @@ namespace Mapsui.Samples.Common.Desktop
             };
 
             var features = new List<IGeometryFeature>();
-            foreach (City item in c)
+            foreach (var item in c)
             {
                 var geo = new Point(item.Long, item.Lat);
                 features.Add(new Feature { Geometry = geo, ["NAME"] = item.CityName, ["COUNTRY"] = item.Country, ["POPULATION"] = item.Population });

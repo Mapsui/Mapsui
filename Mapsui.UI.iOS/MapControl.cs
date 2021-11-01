@@ -1,15 +1,14 @@
-using CoreFoundation;
-using Foundation;
-using UIKit;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using CoreFoundation;
 using CoreGraphics;
-using Mapsui.Geometries;
+using Foundation;
 using Mapsui.Geometries.Utilities;
 using Mapsui.UI.iOS.Extensions;
 using SkiaSharp.Views.iOS;
+using UIKit;
 
 #nullable enable
 
@@ -35,7 +34,7 @@ namespace Mapsui.UI.iOS
             Initialize();
         }
 
-        void Initialize()
+        private void Initialize()
         {
             _invalidate = () => {
                 RunOnUIThread(() => {
@@ -98,7 +97,7 @@ namespace Mapsui.UI.iOS
             OnInfo(InvokeInfo(position, position, 1));
         }
 
-        void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs args)
+        private void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs args)
         {
             if (PixelDensity <= 0)
                 return;

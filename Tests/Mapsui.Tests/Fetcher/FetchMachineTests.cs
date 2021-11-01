@@ -202,7 +202,7 @@ namespace Mapsui.Tests.Fetcher
             };
 
             // Act
-            for (int i = 0; i < numberOfRestarts; i++)
+            for (var i = 0; i < numberOfRestarts; i++)
             {
                 fetchDispatcher.SetViewport(fetchInfo);
                 tileMachine.Start();
