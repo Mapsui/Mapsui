@@ -104,7 +104,7 @@ namespace Mapsui.Providers.ArcGIS.Image
 
             if (TryGetMap(viewport, ref raster))
             {
-                var feature = new GeometryFeature
+                var feature = new Feature
                 {
                     Geometry = raster
                 };

@@ -77,7 +77,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
         {
             if (EditMode == EditMode.AddPoint)
             {
-                Layer.Add(new GeometryFeature { Geometry = worldPosition });
+                Layer.Add(new Feature { Geometry = worldPosition });
             }
             else if (EditMode == EditMode.AddLine)
             {
@@ -85,7 +85,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
                 // Add a second point right away. The second one will be the 'hover' vertex
                 var secondPoint = worldPosition.Clone();
                 _addInfo.Vertex = secondPoint;
-                _addInfo.Feature = new GeometryFeature { Geometry = new LineString(new[] { firstPoint, secondPoint }) };
+                _addInfo.Feature = new Feature { Geometry = new LineString(new[] { firstPoint, secondPoint }) };
                 _addInfo.Vertices = _addInfo.Feature.Geometry.MainVertices();
                 Layer.Add(_addInfo.Feature);
                 Layer.DataHasChanged();
@@ -107,7 +107,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
                 // Add a second point right away. The second one will be the 'hover' vertex
                 var secondPoint = worldPosition.Clone();
                 _addInfo.Vertex = secondPoint;
-                _addInfo.Feature = new GeometryFeature
+                _addInfo.Feature = new Feature
                 {
                     Geometry = new Polygon
                     {
@@ -220,7 +220,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
                         // If the last was removed then set the first to the value of the new last
                         else if (index == vertices.Count) SetPointXY(vertices[0], vertices[count - 1]);
 
-                        geometryFeature.RenderedGeometry.Clear();
+                        feature.RenderedGeometry.Clear();
                         Layer.DataHasChanged();
                     }
 
@@ -238,7 +238,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
 
                 if (EditHelper.TryInsertVertex(mapInfo, vertices, VertexRadius))
                 {
-                    geometryFeature.RenderedGeometry.Clear();
+                    mapInfo.Feature.RenderedGeometry.Clear();
                     Layer.DataHasChanged();
                 }
             }

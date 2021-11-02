@@ -33,7 +33,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new Layer("Polygons")
             {
-                DataSource = new GeometryMemoryProvider<IGeometryFeature>(CreatePolygon()),
+                DataSource = new MemoryProvider<IGeometryFeature>(CreatePolygon()),
                 Style = null
             };
         }
@@ -42,7 +42,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new[]
             {
-                new GeometryFeature
+                new Feature
                 {
                     Geometry = new LineString(new[]
                     {
@@ -59,7 +59,7 @@ namespace Mapsui.Samples.Common.Maps
                         }
                     },
                 },
-                new GeometryFeature
+                new Feature
                 {
                     Geometry = new LineString(new[]
                     {
@@ -76,7 +76,7 @@ namespace Mapsui.Samples.Common.Maps
                         }
                     },
                 },
-                new GeometryFeature
+                new Feature
                 {
                     Geometry = new LineString(new[]
                     {
@@ -93,7 +93,7 @@ namespace Mapsui.Samples.Common.Maps
                         }
                     },
                 },
-                new GeometryFeature
+                new Feature
                 {
                     Geometry = new LineString(new[]
                     {
@@ -110,7 +110,7 @@ namespace Mapsui.Samples.Common.Maps
                         }
                     },
                 },
-                new GeometryFeature
+                new Feature
                 {
                     Geometry = new LineString(new[]
                     {
@@ -127,7 +127,7 @@ namespace Mapsui.Samples.Common.Maps
                         }
                     },
                 },
-                new GeometryFeature
+                new Feature
                 {
                     Geometry = new LineString(new[]
                     {

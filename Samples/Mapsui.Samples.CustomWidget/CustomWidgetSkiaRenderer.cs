@@ -1,5 +1,4 @@
-﻿using Mapsui.Geometries;
-using Mapsui.Rendering.Skia.Extensions;
+﻿using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Rendering.Skia.SkiaWidgets;
 using Mapsui.Widgets;
 using SkiaSharp;

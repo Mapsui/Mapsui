@@ -33,7 +33,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new Layer("Polygons")
             {
-                DataSource = new GeometryMemoryProvider<IGeometryFeature>(CreatePolygon()),
+                DataSource = new MemoryProvider<IGeometryFeature>(CreatePolygon()),
                 Style = new VectorStyle
                 {
                     Fill = new Brush(new Color(150, 150, 30, 128)),

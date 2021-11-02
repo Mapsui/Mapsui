@@ -473,7 +473,7 @@ namespace Mapsui.Providers.Wms
             };
             if (TryGetMap(view, ref raster))
             {
-                features.Add(new GeometryFeature
+                features.Add(new Feature
                 {
                     Geometry = raster
                 });

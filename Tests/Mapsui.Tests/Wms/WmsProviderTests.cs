@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace Mapsui.Tests.Wms
 {
     [TestFixture]
-    class WmsProviderTests
+    internal class WmsProviderTests
     {
         [Test]
         public void GetLegendRequestUrls_WhenInitialized_ShouldReturnListOfUrls()

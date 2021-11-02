@@ -46,15 +46,15 @@ namespace Mapsui.Tests.Common.Maps
             var layer = new MemoryLayer
             {
                 Style = null,
-                DataSource = new GeometryMemoryProvider<IGeometryFeature>(features),
+                DataSource = new MemoryProvider<IGeometryFeature>(features),
                 Name = "Points in world units"
             };
             return layer;
         }
 
-        private static GeometryFeature CreateFeature(double x, double y, UnitType unitType)
+        private static Feature CreateFeature(double x, double y, UnitType unitType)
         {
-            return new GeometryFeature
+            return new Feature
             {
                 Geometry = new Point(x, y),
                 Styles = new List<IStyle> { new SymbolStyle { UnitType = unitType } }

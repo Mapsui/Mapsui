@@ -19,6 +19,6 @@ namespace Mapsui.Rendering
         /// <param name="memoryCache">The cached features from which to select</param>
         /// <returns></returns>
         IList<IFeature> Get(BoundingBox? extent, double resolution, ITileSchema schema,
-            ITileCache<GeometryFeature> memoryCache);
+            ITileCache<Feature> memoryCache);
     }
 }

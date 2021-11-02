@@ -1,13 +1,13 @@
-﻿using Mapsui.Geometries;
-using Mapsui.Providers;
-using Mapsui.Styles;
-using Mapsui.UI.Forms.Extensions;
-using Mapsui.UI.Objects;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Mapsui.Geometries;
+using Mapsui.Providers;
+using Mapsui.Styles;
+using Mapsui.UI.Forms.Extensions;
+using Mapsui.UI.Objects;
 using Xamarin.Forms;
 
 namespace Mapsui.UI.Forms
@@ -35,25 +35,19 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public Xamarin.Forms.Color FillColor
         {
-            get { return (Xamarin.Forms.Color)GetValue(FillColorProperty); }
-            set { SetValue(FillColorProperty, value); }
+            get => (Xamarin.Forms.Color)GetValue(FillColorProperty);
+            set => SetValue(FillColorProperty, value);
         }
 
         /// <summary>
         /// Outer contour of polygon
         /// </summary>
-        public IList<Position> Positions
-        {
-            get { return _positions; }
-        }
+        public IList<Position> Positions => _positions;
 
         /// <summary>
         /// Holes contained by polygon
         /// </summary>
-        public IList<Position[]> Holes
-        {
-            get { return _holes; }
-        }
+        public IList<Position[]> Holes => _holes;
 
         protected override void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
@@ -79,17 +73,17 @@ namespace Mapsui.UI.Forms
             }
         }
 
-        void OnPositionsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void OnPositionsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             OnPropertyChanged(nameof(Positions));
         }
 
-        void OnHolesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void OnHolesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             OnPropertyChanged(nameof(Holes));
         }
 
-        private object sync = new object();
+        private readonly object sync = new object();
 
         private void CreateFeature()
         {
@@ -98,9 +92,9 @@ namespace Mapsui.UI.Forms
                 if (Feature == null)
                 {
                     // Create a new one
-                    Feature = new GeometryFeature
+                    Feature = new Feature
                     {
-                        Geometry = new Geometries.Polygon(),
+                        Geometry = new Mapsui.Geometries.Polygon(),
                         ["Label"] = Label,
                     };
                     Feature.Styles.Clear();

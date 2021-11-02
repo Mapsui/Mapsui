@@ -44,18 +44,19 @@ namespace Mapsui.Samples.Common.Maps
 
             return new Layer("Points")
             {
-                DataSource = new GeometryMemoryProvider<IGeometryFeature>(CreatePoints(style)),
+                DataSource = new MemoryProvider<IGeometryFeature>(CreatePoints(style)),
             };
         }
 
-        private static List<GeometryFeature> CreatePoints(IStyle style)
+        private static List<Feature> CreatePoints(IStyle style)
         {
-            var result = new List<GeometryFeature>();
-
-            result.Add(CreatePoint(1000000, 1000000, style));
-            result.Add(CreatePoint(9000000, 1000000, style));
-            result.Add(CreatePoint(9000000, 9000000, style));
-            result.Add(CreatePoint(1000000, 9000000, style));
+            var result = new List<Feature>
+            {
+                CreatePoint(1000000, 1000000, style),
+                CreatePoint(9000000, 1000000, style),
+                CreatePoint(9000000, 9000000, style),
+                CreatePoint(1000000, 9000000, style)
+            };
 
             return result;
         }
@@ -103,10 +104,12 @@ namespace Mapsui.Samples.Common.Maps
             return animations;
         }
 
-        private static GeometryFeature CreatePoint(double x, double y, IStyle style)
+        private static Feature CreatePoint(double x, double y, IStyle style)
         {
-            var result = new GeometryFeature();
-            result.Geometry = new Point(x, y);
+            var result = new Feature
+            {
+                Geometry = new Point(x, y)
+            };
             result.Styles.Add(style);
             return result;
         }

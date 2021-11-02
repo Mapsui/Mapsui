@@ -84,10 +84,10 @@ namespace Mapsui.Samples.Common.Maps
             };
         }
 
-        public static GeometryMemoryProvider<IGeometryFeature> CreateMemoryProviderWithDiverseSymbols(MRect envelope, int count = 100)
+        public static MemoryProvider<IGeometryFeature> CreateMemoryProviderWithDiverseSymbols(MRect envelope, int count = 100)
         {
 
-            return new GeometryMemoryProvider<IGeometryFeature>(CreateDiverseFeatures(RandomPointHelper.GenerateRandomPoints(envelope, count)));
+            return new MemoryProvider<IGeometryFeature>(CreateDiverseFeatures(RandomPointHelper.GenerateRandomPoints(envelope, count)));
         }
 
         private static IEnumerable<IGeometryFeature> CreateDiverseFeatures(IEnumerable<MPoint> randomPoints)
@@ -97,7 +97,7 @@ namespace Mapsui.Samples.Common.Maps
             var counter = 1;
             foreach (var point in randomPoints)
             {
-                var feature = new GeometryFeature { Geometry = point.ToPoint() };
+                var feature = new Feature { Geometry = point.ToPoint() };
                 feature["Label"] = $"I'm no. {counter++} and, \nautsch, you hit me!";
                 feature.Styles.Add(style); // Here the custom style is set!
                 feature.Styles.Add(SmalleDot());

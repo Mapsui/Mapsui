@@ -1,17 +1,15 @@
-using Mapsui.Rendering;
-using Mapsui.UI.Utils;
-using SkiaSharp;
-using SkiaSharp.Views.Forms;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using Mapsui.Geometries.Utilities;
-using Xamarin.Forms;
 using System.Threading.Tasks;
-using Mapsui.Fetcher;
+using Mapsui.Geometries.Utilities;
 using Mapsui.Layers;
-using Mapsui.Providers;
+using Mapsui.Rendering;
+using Mapsui.UI.Utils;
+using SkiaSharp;
+using SkiaSharp.Views.Forms;
+using Xamarin.Forms;
 
 namespace Mapsui.UI.Forms
 {
@@ -22,7 +20,7 @@ namespace Mapsui.UI.Forms
     {
         public static bool UseGPU = true;
 
-        class TouchEvent
+        private class TouchEvent
         {
             public long Id { get; }
             public MPoint Location { get; }
@@ -56,7 +54,7 @@ namespace Mapsui.UI.Forms
         protected readonly bool _initialized;
 
         private double _innerRotation;
-        private ConcurrentDictionary<long, TouchEvent> _touches = new();
+        private readonly ConcurrentDictionary<long, TouchEvent> _touches = new();
         private MPoint? _firstTouch;
         private bool _waitingForDoubleTap;
         private int _numOfTaps;
@@ -96,7 +94,7 @@ namespace Mapsui.UI.Forms
         public bool UseDoubleTap = true;
         public bool UseFling = true;
 
-        void Initialize()
+        private void Initialize()
         {
             Xamarin.Forms.View view;
 
@@ -145,7 +143,7 @@ namespace Mapsui.UI.Forms
         private async void OnTouch(object sender, SKTouchEventArgs e)
         {
             // Save time, when the event occurs
-            long ticks = DateTime.Now.Ticks;
+            var ticks = DateTime.Now.Ticks;
 
             var location = GetScreenPosition(e.Location);
 
@@ -203,7 +201,7 @@ namespace Mapsui.UI.Forms
                     // While tapping on screen, there could be a small movement of the finger
                     // (especially on Samsung). So check, if touch start location isn't more 
                     // than a number of pixels away from touch end location.
-                    bool isAround = IsAround(releasedTouch);
+                    var isAround = IsAround(releasedTouch);
 
                     // If touch start and end is in the same area and the touch time is shorter
                     // than longTap, than we have a tap.
@@ -292,7 +290,7 @@ namespace Mapsui.UI.Forms
             return _firstTouch != null && Utilities.Algorithms.Distance(releasedTouch.Location, _firstTouch) < touchSlop;
         }
 
-        void OnGLPaintSurface(object sender, SKPaintGLSurfaceEventArgs args)
+        private void OnGLPaintSurface(object sender, SKPaintGLSurfaceEventArgs args)
         {
             if (!_initialized && _glView?.GRContext == null)
             {
@@ -305,13 +303,13 @@ namespace Mapsui.UI.Forms
             PaintSurface(args.Surface.Canvas);
         }
 
-        void OnPaintSurface(object sender, SKPaintSurfaceEventArgs args)
+        private void OnPaintSurface(object sender, SKPaintSurfaceEventArgs args)
         {
             // Called on UI thread
             PaintSurface(args.Surface.Canvas);
         }
 
-        void PaintSurface(SKCanvas canvas)
+        private void PaintSurface(SKCanvas canvas)
         {
             if (PixelDensity <= 0)
                 return;
@@ -639,7 +637,7 @@ namespace Mapsui.UI.Forms
 
                         var touchPosition = touchPoints.First();
 
-                        if (!(Map?.PanLock ?? false)&& _previousCenter != null)
+                        if (!(Map?.PanLock ?? false) && _previousCenter != null)
                         {
                             _viewport.Transform(touchPosition, _previousCenter);
 

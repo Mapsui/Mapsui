@@ -45,9 +45,9 @@ namespace Mapsui.Samples.Common.Maps
             };
         }
 
-        public static GeometryMemoryProvider<IGeometryFeature> CreateMemoryProviderWithDiverseSymbols(MRect envelope, int count = 100)
+        public static MemoryProvider<IGeometryFeature> CreateMemoryProviderWithDiverseSymbols(MRect envelope, int count = 100)
         {
-            return new GeometryMemoryProvider<IGeometryFeature>(CreateSvgFeatures(RandomPointHelper.GenerateRandomPoints(envelope, count)));
+            return new MemoryProvider<IGeometryFeature>(CreateSvgFeatures(RandomPointHelper.GenerateRandomPoints(envelope, count)));
         }
 
         private static IEnumerable<IGeometryFeature> CreateSvgFeatures(IEnumerable<MPoint> randomPoints)
@@ -56,7 +56,7 @@ namespace Mapsui.Samples.Common.Maps
             var counter = 0;
             foreach (var point in randomPoints)
             {
-                var feature = new GeometryFeature { Geometry = point.ToPoint(), ["Label"] = counter.ToString() };
+                var feature = new Feature { Geometry = point.ToPoint(), ["Label"] = counter.ToString() };
                 feature.Styles.Add(CreateSvgStyle("Mapsui.Samples.Common.Images.Pin.svg", 0.5));
                 features.Add(feature);
                 counter++;

@@ -103,7 +103,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
 
             if (TryGetMap(viewport, ref raster))
             {
-                var feature = new GeometryFeature
+                var feature = new Feature
                 {
                     Geometry = raster
                 };

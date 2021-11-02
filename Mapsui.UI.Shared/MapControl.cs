@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Net;
+using System.Runtime.CompilerServices;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
-using Mapsui.Widgets;
-using System.Runtime.CompilerServices;
-using Mapsui.Providers;
 using Mapsui.Utilities;
+using Mapsui.Widgets;
 
 #nullable enable
 
@@ -47,7 +46,7 @@ namespace Mapsui.UI.Wpf
         // Stopwatch for measuring drawing times
         private readonly System.Diagnostics.Stopwatch _stopwatch = new System.Diagnostics.Stopwatch();
 
-        void CommonInitialize()
+        private void CommonInitialize()
         {
             // Create map
             Map = new Map();
@@ -57,7 +56,7 @@ namespace Mapsui.UI.Wpf
             StartUpdates(false);
         }
 
-        void CommonDrawControl(object canvas)
+        private void CommonDrawControl(object canvas)
         {
             if (_drawing)
                 return;
@@ -92,7 +91,7 @@ namespace Mapsui.UI.Wpf
             _drawing = false;
         }
 
-        void InvalidateTimerCallback(object? state)
+        private void InvalidateTimerCallback(object? state)
         {
             if (!_refresh)
                 return;
@@ -172,7 +171,7 @@ namespace Mapsui.UI.Wpf
         /// </remarks>
         public Performance? Performance
         {
-            get { return _performance; }
+            get => _performance;
             set
             {
                 if (_performance != value)
@@ -188,7 +187,7 @@ namespace Mapsui.UI.Wpf
         /// </summary>
         public double UnSnapRotationDegrees
         {
-            get { return _unSnapRotationDegrees; }
+            get => _unSnapRotationDegrees;
             set
             {
                 if (_unSnapRotationDegrees != value)
@@ -206,7 +205,7 @@ namespace Mapsui.UI.Wpf
         /// </summary>
         public double ReSnapRotationDegrees
         {
-            get { return _reSnapRotationDegrees; }
+            get => _reSnapRotationDegrees;
             set
             {
                 if (_reSnapRotationDegrees != value)
@@ -217,10 +216,7 @@ namespace Mapsui.UI.Wpf
             }
         }
 
-        public float PixelDensity
-        {
-            get => GetPixelDensity();
-        }
+        public float PixelDensity => GetPixelDensity();
 
         private IRenderer _renderer = new MapRenderer();
 
@@ -229,7 +225,7 @@ namespace Mapsui.UI.Wpf
         /// </summary>
         public IRenderer Renderer
         {
-            get { return _renderer; }
+            get => _renderer;
             set
             {
                 if (_renderer != value)

@@ -11,7 +11,7 @@ namespace Mapsui.Rendering
 {
     public class RenderFetchStrategy : IRenderFetchStrategy
     {
-        public IList<IFeature> Get(BoundingBox? extent, double resolution, ITileSchema schema, ITileCache<GeometryFeature> memoryCache)
+        public IList<IFeature> Get(BoundingBox? extent, double resolution, ITileSchema schema, ITileCache<Feature> memoryCache)
         {
             var dictionary = new Dictionary<TileIndex, IFeature>();
             var level = BruTile.Utilities.GetNearestLevel(schema.Resolutions, resolution);
@@ -21,7 +21,7 @@ namespace Mapsui.Rendering
         }
 
         public static void GetRecursive(IDictionary<TileIndex, IFeature> resultTiles, ITileSchema schema,
-            ITileCache<GeometryFeature> cache, Extent extent, int level)
+            ITileCache<Feature> cache, Extent extent, int level)
         {
             // to improve performance, convert the resolutions to a list so they can be walked up by
             // simply decrementing an index when the level index needs to change
@@ -37,7 +37,7 @@ namespace Mapsui.Rendering
         }
 
         private static void GetRecursive(IDictionary<TileIndex, IFeature> resultTiles, ITileSchema schema,
-            ITileCache<GeometryFeature> cache, Extent extent, IList<KeyValuePair<int, Resolution>> resolutions, int resolutionIndex)
+            ITileCache<Feature> cache, Extent extent, IList<KeyValuePair<int, Resolution>> resolutions, int resolutionIndex)
         {
             if (resolutionIndex < 0 || resolutionIndex >= resolutions.Count)
                 return;

@@ -41,7 +41,7 @@ namespace Mapsui.Providers
             return _provider.GetExtent();
         }
 
-        private static List<GeometryFeature> GetFeaturesInView(double resolution, LabelStyle labelStyle,
+        private static List<Feature> GetFeaturesInView(double resolution, LabelStyle labelStyle,
             IEnumerable<IGeometryFeature> features, Pen line, Brush fill)
         {
             var margin = resolution * 50;
@@ -51,7 +51,7 @@ namespace Mapsui.Providers
 
             const int textHeight = 18;
 
-            var results = new List<GeometryFeature>();
+            var results = new List<Feature>();
 
             foreach (var cluster in clusters)
             {
@@ -94,10 +94,10 @@ namespace Mapsui.Providers
             return position;
         }
 
-        private static GeometryFeature CreateLabelFeature(Point position, LabelStyle labelStyle, double offsetY,
+        private static Feature CreateLabelFeature(Point position, LabelStyle labelStyle, double offsetY,
             string text)
         {
-            return new GeometryFeature
+            return new Feature
             {
                 Geometry = position,
                 Styles = new[]
@@ -111,10 +111,10 @@ namespace Mapsui.Providers
             };
         }
 
-        private static GeometryFeature CreateBoxFeature(double resolution, Cluster cluster, Pen line,
+        private static Feature CreateBoxFeature(double resolution, Cluster cluster, Pen line,
             Brush fill)
         {
-            return new GeometryFeature
+            return new Feature
             {
                 Geometry = ToPolygon(GrowBox(cluster.Box, resolution)),
                 Styles = new[]

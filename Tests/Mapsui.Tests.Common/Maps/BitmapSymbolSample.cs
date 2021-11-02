@@ -24,7 +24,7 @@ namespace Mapsui.Tests.Common.Maps
             var layer = new MemoryLayer
             {
                 Style = null,
-                DataSource = new GeometryMemoryProvider<IGeometryFeature>(CreateFeatures()),
+                DataSource = new MemoryProvider<IGeometryFeature>(CreateFeatures()),
                 Name = "Points with bitmaps"
             };
 
@@ -46,22 +46,22 @@ namespace Mapsui.Tests.Common.Maps
 
             return new List<IGeometryFeature>
             {
-                new GeometryFeature
+                new Feature
                 {
                     Geometry = new Point(50, 50),
                     Styles = new[] {new VectorStyle {Fill = new Brush(Color.Red)}}
                 },
-                new GeometryFeature
+                new Feature
                 {
                     Geometry = new Point(50, 100),
                     Styles = new[] {new SymbolStyle {BitmapId = circleIconId}}
                 },
-                new GeometryFeature
+                new Feature
                 {
                     Geometry = new Point(100, 50),
                     Styles = new[] {new SymbolStyle {BitmapId = checkeredIconId}}
                 },
-                new GeometryFeature
+                new Feature
                 {
                     Geometry = new Point(100, 100),
                     Styles = new[] {new VectorStyle {Fill = new Brush(Color.Green), Outline = null}}

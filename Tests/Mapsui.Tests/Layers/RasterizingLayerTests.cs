@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using Mapsui.Layers;
-using Mapsui.Providers;
-using NUnit.Framework;
 using BruTile.Predefined;
 using Mapsui.Extensions;
-using Mapsui.Fetcher;
+using Mapsui.Layers;
+using Mapsui.Providers;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
+using NUnit.Framework;
 
 namespace Mapsui.Tests.Layers
 {
@@ -54,13 +53,13 @@ namespace Mapsui.Tests.Layers
             var features = new List<IGeometryFeature>();
             for (var i = 0; i < 100; i++)
             {
-                var feature = new GeometryFeature
+                var feature = new Feature
                 {
                     Geometry = new Geometries.Point(random.Next(100000, 5000000), random.Next(100000, 5000000))
                 };
                 features.Add(feature);
             }
-            var provider = new GeometryMemoryProvider<IGeometryFeature>(features);
+            var provider = new MemoryProvider<IGeometryFeature>(features);
 
             return new MemoryLayer { DataSource = provider };
         }

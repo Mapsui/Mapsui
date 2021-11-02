@@ -1,8 +1,8 @@
 ﻿using System;
-using NUnit.Framework;
-using Mapsui.Providers;
 using System.Linq;
 using Mapsui.Layers;
+using Mapsui.Providers;
+using NUnit.Framework;
 
 namespace Mapsui.Tests.Providers
 {
@@ -20,8 +20,8 @@ namespace Mapsui.Tests.Providers
                 const int id1 = 1;
                 const int id2 = 2;
 
-                features.Add(new GeometryFeature { [keyField] = id1 });
-                features.Add(new GeometryFeature { [keyField] = id2 });
+                features.Add(new Feature { [keyField] = id1 });
+                features.Add(new Feature { [keyField] = id2 });
 
                 // Act
                 var first = features.First(f => f[keyField].Equals(id1));
@@ -40,8 +40,8 @@ namespace Mapsui.Tests.Providers
                 const int id1 = 1;
                 const int id2 = 2;
 
-                features.Add(new GeometryFeature { [keyField] = id1 });
-                features.Add(new GeometryFeature { [keyField] = id2 });
+                features.Add(new Feature { [keyField] = id1 });
+                features.Add(new Feature { [keyField] = id2 });
 
                 // Act
                 features.Delete(id1);
@@ -60,8 +60,8 @@ namespace Mapsui.Tests.Providers
                 const string idA = "a";
                 const string idB = "b";
 
-                features.Add(new GeometryFeature { [keyField] = idA });
-                features.Add(new GeometryFeature { [keyField] = idB });
+                features.Add(new Feature { [keyField] = idA });
+                features.Add(new Feature { [keyField] = idB });
 
                 // Act
                 features.Delete(idA);
@@ -77,9 +77,9 @@ namespace Mapsui.Tests.Providers
                 const string keyField = "theIdField";
                 var features = new Features(keyField);
 
-                var featureA = new GeometryFeature { [keyField] = "a" };
-                var featureB = new GeometryFeature { [keyField] = "b" };
-                var otherInstancefeatureA = new GeometryFeature { [keyField] = "a" };
+                var featureA = new Feature { [keyField] = "a" };
+                var featureB = new Feature { [keyField] = "b" };
+                var otherInstancefeatureA = new Feature { [keyField] = "a" };
 
                 features.Add(featureA);
                 features.Add(featureB);
@@ -98,9 +98,9 @@ namespace Mapsui.Tests.Providers
                 const string keyField = "theIdField";
                 var features = new Features(keyField);
 
-                var featureA = new GeometryFeature { [keyField] = 1 };
-                var featureB = new GeometryFeature { [keyField] = 2 };
-                var otherInstancefeatureA = new GeometryFeature { [keyField] = 1 };
+                var featureA = new Feature { [keyField] = 1 };
+                var featureB = new Feature { [keyField] = 2 };
+                var otherInstancefeatureA = new Feature { [keyField] = 1 };
 
                 features.Add(featureA);
                 features.Add(featureB);

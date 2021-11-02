@@ -7,7 +7,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using Mapsui.Layers;
-using Mapsui.Providers;
 using Mapsui.Rendering.Skia;
 using Mapsui.UI.Utils;
 using Mapsui.UI.Wpf.Extensions;
@@ -45,7 +44,7 @@ namespace Mapsui.UI.Wpf
             Initialize();
         }
 
-        void Initialize()
+        private void Initialize()
         {
             _invalidate = () => {
                 if (Dispatcher.CheckAccess()) InvalidateCanvas();

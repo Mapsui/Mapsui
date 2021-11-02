@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -17,8 +16,10 @@ namespace Mapsui.Tests.Fetcher
         {
             // arrange
             var extent = new MRect(0, 0, 10, 10);
-            var layer = new Layer();
-            layer.DataSource = new GeometryMemoryProvider<IGeometryFeature>(GenerateRandomPoints(extent, 25));
+            var layer = new Layer
+            {
+                DataSource = new MemoryProvider<IGeometryFeature>(GenerateRandomPoints(extent, 25))
+            };
             layer.Delayer.MillisecondsToWait = 0;
 
             var notifications = new List<bool>();

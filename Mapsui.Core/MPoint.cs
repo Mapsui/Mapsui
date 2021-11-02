@@ -39,16 +39,6 @@ namespace Mapsui
             Y = y;
         }
 
-        /// <summary>
-        /// Copy constructor
-        /// </summary>
-        /// <param name="point">The point to copy from</param>
-        public MPoint(MPoint point)
-        {
-            X = point.X;
-            Y = point.Y;
-        }
-
         public MPoint() : this(0, 0)
         {
         }

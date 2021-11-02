@@ -5,9 +5,9 @@ using BruTile;
 
 namespace Mapsui.Tests.Fetcher.Providers
 {
-    class CountingTileProvider : ITileProvider
+    internal class CountingTileProvider : ITileProvider
     {
-        readonly Random _random = new Random(32435);
+        private readonly Random _random = new Random(32435);
         public ConcurrentDictionary<TileIndex, long> CountByTile { get; } = new ConcurrentDictionary<TileIndex, long>();
         public long TotalCount;
 

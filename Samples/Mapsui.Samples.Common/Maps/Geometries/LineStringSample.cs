@@ -37,7 +37,7 @@ namespace Mapsui.Samples.Common.Maps
 
             return new MemoryLayer
             {
-                DataSource = new GeometryMemoryProvider<IGeometryFeature>(new GeometryFeature { Geometry = lineString }),
+                DataSource = new MemoryProvider<IGeometryFeature>(new Feature { Geometry = lineString }),
                 Name = "LineStringLayer",
                 Style = style
             };

@@ -1,13 +1,11 @@
-﻿using Mapsui.Geometries;
-using Mapsui.Providers;
-using Mapsui.Rendering.Skia;
-using Mapsui.Styles;
-using Mapsui.UI.Forms.Extensions;
-using Mapsui.UI.Objects;
-using System;
+﻿using System;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Mapsui.Extensions;
+using Mapsui.Providers;
+using Mapsui.Styles;
+using Mapsui.UI.Forms.Extensions;
+using Mapsui.UI.Objects;
 using Xamarin.Forms;
 using CalloutStyle = Mapsui.Styles.CalloutStyle;
 
@@ -15,7 +13,7 @@ namespace Mapsui.UI.Forms
 {
     public class Callout : BindableObject, IFeatureProvider
     {
-        private Pin _pin;
+        private readonly Pin _pin;
 
         public event EventHandler<EventArgs>? CalloutClosed;
         public event EventHandler<CalloutClickedEventArgs>? CalloutClicked;
@@ -187,21 +185,18 @@ namespace Mapsui.UI.Forms
 
         public Callout(Pin pin)
         {
-            _pin = pin ?? throw new ArgumentNullException("Pin shouldn't be null");;
+            _pin = pin ?? throw new ArgumentNullException("Pin shouldn't be null"); ;
             if (_pin.Feature != null)
-                Feature = (GeometryFeature)_pin.Feature.Copy();
+                Feature = (Feature)_pin.Feature.Copy();
             else
-                Feature = new GeometryFeature();
+                Feature = new Feature();
             Feature.Styles.Clear();
         }
 
         /// <summary>
         /// Pin to which this callout belongs
         /// </summary>
-        public Pin Pin
-        {
-            get { return _pin; }
-        }
+        public Pin Pin => _pin;
 
         /// <summary>
         /// Type of Callout
@@ -211,8 +206,8 @@ namespace Mapsui.UI.Forms
         /// </remarks>
         public CalloutType Type
         {
-            get { return (CalloutType)GetValue(TypeProperty); }
-            set { SetValue(TypeProperty, value); }
+            get => (CalloutType)GetValue(TypeProperty);
+            set => SetValue(TypeProperty, value);
         }
 
         /// <summary>
@@ -220,8 +215,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public Xamarin.Forms.Point Anchor
         {
-            get { return (Xamarin.Forms.Point)GetValue(AnchorProperty); }
-            set { SetValue(AnchorProperty, value); }
+            get => (Xamarin.Forms.Point)GetValue(AnchorProperty);
+            set => SetValue(AnchorProperty, value);
         }
 
         /// <summary>
@@ -229,8 +224,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public ArrowAlignment ArrowAlignment
         {
-            get { return (ArrowAlignment)GetValue(ArrowAlignmentProperty); }
-            set { SetValue(ArrowAlignmentProperty, value); }
+            get => (ArrowAlignment)GetValue(ArrowAlignmentProperty);
+            set => SetValue(ArrowAlignmentProperty, value);
         }
 
         /// <summary>
@@ -238,8 +233,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public double ArrowWidth
         {
-            get { return (double)GetValue(ArrowWidthProperty); }
-            set { SetValue(ArrowWidthProperty, value); }
+            get => (double)GetValue(ArrowWidthProperty);
+            set => SetValue(ArrowWidthProperty, value);
         }
 
         /// <summary>
@@ -247,8 +242,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public double ArrowHeight
         {
-            get { return (double)GetValue(ArrowHeightProperty); }
-            set { SetValue(ArrowHeightProperty, value); }
+            get => (double)GetValue(ArrowHeightProperty);
+            set => SetValue(ArrowHeightProperty, value);
         }
 
         /// <summary>
@@ -256,8 +251,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public double ArrowPosition
         {
-            get { return (double)GetValue(ArrowPositionProperty); }
-            set { SetValue(ArrowPositionProperty, value); }
+            get => (double)GetValue(ArrowPositionProperty);
+            set => SetValue(ArrowPositionProperty, value);
         }
 
         /// <summary>
@@ -265,8 +260,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public Xamarin.Forms.Color Color
         {
-            get { return (Xamarin.Forms.Color)GetValue(ColorProperty); }
-            set { SetValue(ColorProperty, value); }
+            get => (Xamarin.Forms.Color)GetValue(ColorProperty);
+            set => SetValue(ColorProperty, value);
         }
 
         /// <summary>
@@ -274,8 +269,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public Xamarin.Forms.Color BackgroundColor
         {
-            get { return (Xamarin.Forms.Color)GetValue(BackgroundColorProperty); }
-            set { SetValue(BackgroundColorProperty, value); }
+            get => (Xamarin.Forms.Color)GetValue(BackgroundColorProperty);
+            set => SetValue(BackgroundColorProperty, value);
         }
 
         /// <summary>
@@ -283,8 +278,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public double ShadowWidth
         {
-            get { return (double)GetValue(ShadowWidthProperty); }
-            set { SetValue(ShadowWidthProperty, value); }
+            get => (double)GetValue(ShadowWidthProperty);
+            set => SetValue(ShadowWidthProperty, value);
         }
 
         /// <summary>
@@ -292,8 +287,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public double StrokeWidth
         {
-            get { return (double)GetValue(StrokeWidthProperty); }
-            set { SetValue(StrokeWidthProperty, value); }
+            get => (double)GetValue(StrokeWidthProperty);
+            set => SetValue(StrokeWidthProperty, value);
         }
 
         /// <summary>
@@ -301,8 +296,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public double Rotation
         {
-            get { return (double)GetValue(RotationProperty); }
-            set { SetValue(RotationProperty, value); }
+            get => (double)GetValue(RotationProperty);
+            set => SetValue(RotationProperty, value);
         }
 
         /// <summary>
@@ -310,8 +305,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public bool RotateWithMap
         {
-            get { return (bool)GetValue(RotateWithMapProperty); }
-            set { SetValue(RotateWithMapProperty, value); }
+            get => (bool)GetValue(RotateWithMapProperty);
+            set => SetValue(RotateWithMapProperty, value);
         }
 
         /// <summary>
@@ -319,8 +314,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public double RectRadius
         {
-            get { return (double)GetValue(RectRadiusProperty); }
-            set { SetValue(RectRadiusProperty, value); }
+            get => (double)GetValue(RectRadiusProperty);
+            set => SetValue(RectRadiusProperty, value);
         }
 
         /// <summary>
@@ -328,8 +323,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public Thickness Padding
         {
-            get { return (Thickness)GetValue(PaddingProperty); }
-            set { SetValue(PaddingProperty, value); }
+            get => (Thickness)GetValue(PaddingProperty);
+            set => SetValue(PaddingProperty, value);
         }
 
         /// <summary>
@@ -337,8 +332,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public double Spacing
         {
-            get { return (double)GetValue(SpacingProperty); }
-            set { SetValue(SpacingProperty, value); }
+            get => (double)GetValue(SpacingProperty);
+            set => SetValue(SpacingProperty, value);
         }
 
         /// <summary>
@@ -346,25 +341,22 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public double MaxWidth
         {
-            get { return (double)GetValue(MaxWidthProperty); }
-            set { SetValue(MaxWidthProperty, value); }
+            get => (double)GetValue(MaxWidthProperty);
+            set => SetValue(MaxWidthProperty, value);
         }
 
         /// <summary>
         /// Is Callout visible on map
         /// </summary>
-        public bool IsVisible
-        {
-            get { return _pin.IsCalloutVisible(); }
-        }
+        public bool IsVisible => _pin.IsCalloutVisible();
 
         /// <summary>
         /// Is Callout closable by a click on the callout
         /// </summary>
         public bool IsClosableByClick
         {
-            get { return (bool)GetValue(IsClosableByClickProperty); }
-            set { SetValue(IsClosableByClickProperty, value); }
+            get => (bool)GetValue(IsClosableByClickProperty);
+            set => SetValue(IsClosableByClickProperty, value);
         }
 
         /// <summary>
@@ -372,8 +364,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public int Content
         {
-            get { return (int)GetValue(ContentProperty); }
-            set { SetValue(ContentProperty, value); }
+            get => (int)GetValue(ContentProperty);
+            set => SetValue(ContentProperty, value);
         }
 
         /// <summary>
@@ -381,8 +373,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public string Title
         {
-            get { return (string)GetValue(TitleProperty); }
-            set { SetValue(TitleProperty, value); }
+            get => (string)GetValue(TitleProperty);
+            set => SetValue(TitleProperty, value);
         }
 
         /// <summary>
@@ -390,8 +382,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public string TitleFontName
         {
-            get { return (string)GetValue(TitleFontNameProperty); }
-            set { SetValue(TitleFontNameProperty, value); }
+            get => (string)GetValue(TitleFontNameProperty);
+            set => SetValue(TitleFontNameProperty, value);
         }
 
         /// <summary>
@@ -399,8 +391,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public double TitleFontSize
         {
-            get { return (double)GetValue(TitleFontSizeProperty); }
-            set { SetValue(TitleFontSizeProperty, value); }
+            get => (double)GetValue(TitleFontSizeProperty);
+            set => SetValue(TitleFontSizeProperty, value);
         }
 
         /// <summary>
@@ -408,8 +400,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public FontAttributes TitleFontAttributes
         {
-            get { return (FontAttributes)GetValue(TitleFontAttributesProperty); }
-            set { SetValue(TitleFontAttributesProperty, value); }
+            get => (FontAttributes)GetValue(TitleFontAttributesProperty);
+            set => SetValue(TitleFontAttributesProperty, value);
         }
 
         /// <summary>
@@ -417,8 +409,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public Xamarin.Forms.Color TitleFontColor
         {
-            get { return (Xamarin.Forms.Color)GetValue(TitleFontColorProperty); }
-            set { SetValue(TitleFontColorProperty, value); }
+            get => (Xamarin.Forms.Color)GetValue(TitleFontColorProperty);
+            set => SetValue(TitleFontColorProperty, value);
         }
 
         /// <summary>
@@ -426,8 +418,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public Xamarin.Forms.TextAlignment TitleTextAlignment
         {
-            get { return (Xamarin.Forms.TextAlignment)GetValue(TitleTextAlignmentProperty); }
-            set { SetValue(TitleTextAlignmentProperty, value); }
+            get => (Xamarin.Forms.TextAlignment)GetValue(TitleTextAlignmentProperty);
+            set => SetValue(TitleTextAlignmentProperty, value);
         }
 
         /// <summary>
@@ -435,8 +427,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public string Subtitle
         {
-            get { return (string)GetValue(SubtitleProperty); }
-            set { SetValue(SubtitleProperty, value); }
+            get => (string)GetValue(SubtitleProperty);
+            set => SetValue(SubtitleProperty, value);
         }
 
         /// <summary>
@@ -444,8 +436,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public string SubtitleFontName
         {
-            get { return (string)GetValue(SubtitleFontNameProperty); }
-            set { SetValue(SubtitleFontNameProperty, value); }
+            get => (string)GetValue(SubtitleFontNameProperty);
+            set => SetValue(SubtitleFontNameProperty, value);
         }
 
         /// <summary>
@@ -453,8 +445,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public double SubtitleFontSize
         {
-            get { return (double)GetValue(SubtitleFontSizeProperty); }
-            set { SetValue(SubtitleFontSizeProperty, value); }
+            get => (double)GetValue(SubtitleFontSizeProperty);
+            set => SetValue(SubtitleFontSizeProperty, value);
         }
 
         /// <summary>
@@ -462,8 +454,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public FontAttributes SubtitleFontAttributes
         {
-            get { return (FontAttributes)GetValue(SubtitleFontAttributesProperty); }
-            set { SetValue(SubtitleFontAttributesProperty, value); }
+            get => (FontAttributes)GetValue(SubtitleFontAttributesProperty);
+            set => SetValue(SubtitleFontAttributesProperty, value);
         }
 
         /// <summary>
@@ -471,8 +463,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public Xamarin.Forms.Color SubtitleFontColor
         {
-            get { return (Xamarin.Forms.Color)GetValue(SubtitleFontColorProperty); }
-            set { SetValue(SubtitleFontColorProperty, value); }
+            get => (Xamarin.Forms.Color)GetValue(SubtitleFontColorProperty);
+            set => SetValue(SubtitleFontColorProperty, value);
         }
 
         /// <summary>
@@ -480,8 +472,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public Xamarin.Forms.TextAlignment SubtitleTextAlignment
         {
-            get { return (Xamarin.Forms.TextAlignment)GetValue(SubtitleTextAlignmentProperty); }
-            set { SetValue(SubtitleTextAlignmentProperty, value); }
+            get => (Xamarin.Forms.TextAlignment)GetValue(SubtitleTextAlignmentProperty);
+            set => SetValue(SubtitleTextAlignmentProperty, value);
         }
 
         /// <summary>
@@ -560,7 +552,7 @@ namespace Mapsui.UI.Forms
         /// </summary>
         private void UpdateContent()
         {
-            CalloutStyle? style = Feature.Styles.Where((s) => s is CalloutStyle).FirstOrDefault() as CalloutStyle;
+            var style = Feature.Styles.Where((s) => s is CalloutStyle).FirstOrDefault() as CalloutStyle;
 
             if (style is null)
             {
@@ -593,7 +585,7 @@ namespace Mapsui.UI.Forms
         /// </summary>
         private void UpdateCalloutStyle()
         {
-            CalloutStyle? style = Feature.Styles.Where((s) => s is CalloutStyle).FirstOrDefault() as CalloutStyle;
+            var style = Feature.Styles.Where((s) => s is CalloutStyle).FirstOrDefault() as CalloutStyle;
 
             if (style is null)
             {

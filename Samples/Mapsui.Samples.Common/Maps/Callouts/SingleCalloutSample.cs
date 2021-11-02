@@ -54,7 +54,7 @@ namespace Mapsui.Samples.Common.Maps.Callouts
             {
                 Name = "Points",
                 IsMapInfoLayer = true,
-                DataSource = new GeometryMemoryProvider<IGeometryFeature>(GetCitiesFromEmbeddedResource()),
+                DataSource = new MemoryProvider<IGeometryFeature>(GetCitiesFromEmbeddedResource()),
                 Style = new VectorStyle()
             };
         }
@@ -67,8 +67,10 @@ namespace Mapsui.Samples.Common.Maps.Callouts
             var cities = DeserializeFromStream<City>(stream);
 
             return cities.Select(c => {
-                var feature = new GeometryFeature();
-                feature.Geometry = SphericalMercator.FromLonLat(c.Lng, c.Lat).ToMPoint().ToPoint();
+                var feature = new Feature
+                {
+                    Geometry = SphericalMercator.FromLonLat(c.Lng, c.Lat).ToMPoint().ToPoint()
+                };
                 feature["name"] = c.Name;
                 feature["country"] = c.Country;
                 var calloutStyle = CreateCalloutStyle(c.Name);

@@ -3,7 +3,7 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps.Navigation
 {
-    class PanLockSample : ISample
+    internal class PanLockSample : ISample
     {
         public string Name => "PanLock";
         public string Category => "Navigation";

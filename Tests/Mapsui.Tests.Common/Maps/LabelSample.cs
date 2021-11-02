@@ -43,21 +43,21 @@ namespace Mapsui.Tests.Common.Maps
             };
         }
 
-        private static GeometryMemoryProvider<IGeometryFeature> CreateProviderWithLabels()
+        private static MemoryProvider<IGeometryFeature> CreateProviderWithLabels()
         {
             var features = new List<IGeometryFeature>
             {
-                new GeometryFeature
+                new Feature
                 {
                     Geometry = new Point(100, 100),
                     Styles = new[] {new VectorStyle {Fill = new Brush(Color.Gray), Outline = new Pen(Color.Black)}}
                 },
-                new GeometryFeature
+                new Feature
                 {
                     Geometry = new Point(100, 200),
                     Styles = new[] {new LabelStyle {Text = "Black Text", BackColor = null}}
                 },
-                new GeometryFeature
+                new Feature
                 {
                     Geometry = new Point(100, 300),
                     Styles = new[]
@@ -70,7 +70,7 @@ namespace Mapsui.Tests.Common.Maps
                             }
                         }
                 },
-                new GeometryFeature
+                new Feature
                 {
                     Geometry = new Point(300, 100),
                     Styles =
@@ -85,7 +85,7 @@ namespace Mapsui.Tests.Common.Maps
                             }
                         }
                 },
-                new GeometryFeature
+                new Feature
                 {
                     Geometry = new Point(300, 200),
                     Styles = new[]
@@ -99,7 +99,7 @@ namespace Mapsui.Tests.Common.Maps
                         }
                     }
                 },
-                new GeometryFeature
+                new Feature
                 {
                     Geometry = new Point(300, 300),
                     Styles = new[]
@@ -114,7 +114,7 @@ namespace Mapsui.Tests.Common.Maps
                     }
                 },
             };
-            var provider = new GeometryMemoryProvider<IGeometryFeature>(features);
+            var provider = new MemoryProvider<IGeometryFeature>(features);
             return provider;
         }
     }

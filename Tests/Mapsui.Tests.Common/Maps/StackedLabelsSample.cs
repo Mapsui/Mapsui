@@ -58,13 +58,13 @@ namespace Mapsui.Tests.Common.Maps
             };
         }
 
-        private static GeometryMemoryProvider<IGeometryFeature> CreateRandomPointsProvider(IEnumerable<IGeometry> randomPoints)
+        private static MemoryProvider<IGeometryFeature> CreateRandomPointsProvider(IEnumerable<IGeometry> randomPoints)
         {
             var features = new List<IGeometryFeature>();
             var count = 0;
             foreach (var point in randomPoints)
             {
-                var feature = new GeometryFeature
+                var feature = new Feature
                 {
                     Geometry = point,
                     [LabelColumn] = count.ToString(CultureInfo.InvariantCulture)
@@ -72,7 +72,7 @@ namespace Mapsui.Tests.Common.Maps
                 features.Add(feature);
                 count++;
             }
-            return new GeometryMemoryProvider<IGeometryFeature>(features);
+            return new MemoryProvider<IGeometryFeature>(features);
         }
 
         private static IEnumerable<IGeometry> GenerateRandomPoints(BoundingBox box, int count = 25)

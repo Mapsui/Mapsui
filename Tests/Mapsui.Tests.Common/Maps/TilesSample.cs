@@ -47,7 +47,7 @@ namespace Mapsui.Tests.Common.Maps
             };
 
             var features = TileIndexToFeatures(tileIndexes, new SampleTileSource());
-            var layer = new MemoryLayer { DataSource = new GeometryMemoryProvider<IGeometryFeature>(features), Name = "Tiles" };
+            var layer = new MemoryLayer { DataSource = new MemoryProvider<IGeometryFeature>(features), Name = "Tiles" };
             return layer;
         }
 
@@ -63,7 +63,7 @@ namespace Mapsui.Tests.Common.Maps
                         new TileRange(tileIndex.Col, tileIndex.Row), tileIndex.Level, tileSource.Schema)
                 };
 
-                var feature = new GeometryFeature
+                var feature = new Feature
                 {
                     Geometry = new Raster(new MemoryStream(
                         tileSource.GetTile(tileInfo)), tileInfo.Extent.ToBoundingBox())

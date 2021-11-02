@@ -4,7 +4,6 @@ using System.Globalization;
 using System.Linq;
 using System.Threading;
 using Mapsui.Extensions;
-using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
@@ -47,24 +46,24 @@ namespace Mapsui.Samples.Common.Maps.Special
             _timer = new Timer(_ => UpdateData(), this, 0, 2000);
         }
 
-        private class DynamicMemoryProvider : GeometryMemoryProvider<IPointFeature>
+        private class DynamicMemoryProvider : MemoryProvider<IGeometryFeature>
         {
             private readonly Random _random = new(0);
 
-            public override IEnumerable<IPointFeature> GetFeatures(FetchInfo fetchInfo)
+            public override IEnumerable<IGeometryFeature> GetFeatures(FetchInfo fetchInfo)
             {
-                var features = new List<IPointFeature>();
-                var points = RandomPointHelper.GenerateRandomPoints(fetchInfo.Extent, 10, _random.Next()).ToList();
+                var features = new List<IGeometryFeature>();
+                var geometries = RandomPointHelper.GenerateRandomPoints(fetchInfo.Extent, 10, _random.Next()).ToList();
                 var count = 0;
-                var random = _random.Next(points.Count);
+                var random = _random.Next(geometries.Count);
 
-                foreach (var point in points)
+                foreach (var geometry in geometries)
                 {
                     if (count != random) // skip a random element to test robustness
                     {
-                        var feature = new PointFeature
+                        var feature = new Feature
                         {
-                            Point = point,
+                            Geometry = geometry.ToPoint(),
                             ["ID"] = count.ToString(CultureInfo.InvariantCulture)
                         };
                         features.Add(feature);

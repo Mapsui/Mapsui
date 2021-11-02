@@ -151,7 +151,7 @@
                 if (countable.Count == 0)
                     return;
                 else if (countable.Count == 1)
-                    using (IEnumerator<T> enumerator = countable.GetEnumerator())
+                    using (var enumerator = countable.GetEnumerator())
                     {
                         enumerator.MoveNext();
                         Remove(enumerator.Current);
@@ -168,7 +168,7 @@
             var clusters = new Dictionary<int, List<T>>();
             var lastIndex = -1;
             List<T>? lastCluster = null;
-            foreach (T item in collection)
+            foreach (var item in collection)
             {
                 var index = IndexOf(item);
                 if (index < 0)
@@ -193,7 +193,7 @@
             if (Count == 0)
                 OnCollectionReset();
             else
-                foreach (KeyValuePair<int, List<T>> cluster in clusters)
+                foreach (var cluster in clusters)
                     OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, cluster.Value, cluster.Key));
 
         }
@@ -244,7 +244,7 @@
             {
                 for (var i = 0; i < count; i++, index++)
                 {
-                    T item = Items[index];
+                    var item = Items[index];
                     if (match(item))
                     {
                         Items.RemoveAt(index);
@@ -307,7 +307,7 @@
 
             //Items will always be List<T>, see constructors
             var items = (List<T>)Items;
-            List<T> removedItems = items.GetRange(index, count);
+            var removedItems = items.GetRange(index, count);
 
             CheckReentrancy();
 
@@ -422,7 +422,7 @@
                     oldCluster = null;
 
 
-                int i = index;
+                var i = index;
                 for (; i < rangeCount && i - index < addedCount; i++)
                 {
                     //parallel position
@@ -461,7 +461,7 @@
                     if (count > addedCount)
                     {
                         var removedCount = rangeCount - addedCount;
-                        T[] removed = new T[removedCount];
+                        var removed = new T[removedCount];
                         items.CopyTo(i, removed, 0, removed.Length);
                         items.RemoveRange(i, removedCount);
                         OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, removed, i));
@@ -469,10 +469,10 @@
                     else
                     {
                         var k = i - index;
-                        T[] added = new T[addedCount - k];
-                        for (int j = k; j < addedCount; j++)
+                        var added = new T[addedCount - k];
+                        for (var j = k; j < addedCount; j++)
                         {
-                            T @new = list[j];
+                            var @new = list[j];
                             added[j - k] = @new;
                         }
                         items.InsertRange(i, added);
@@ -524,7 +524,7 @@
                 return;
 
             CheckReentrancy();
-            T originalItem = this[index];
+            var originalItem = this[index];
             base.SetItem(index, item);
 
             OnIndexerPropertyChanged();
@@ -550,7 +550,10 @@
             base.OnCollectionChanged(e);
         }
 
-        protected virtual IDisposable DeferEvents() => new DeferredEventsCollection(this);
+        protected virtual IDisposable DeferEvents()
+        {
+            return new DeferredEventsCollection(this);
+        }
 
         #endregion Protected Methods
 
@@ -570,7 +573,7 @@
         /// <returns></returns>
         private static bool ContainsAny(IEnumerable<T> collection)
         {
-            using (IEnumerator<T> enumerator = collection.GetEnumerator())
+            using (var enumerator = collection.GetEnumerator())
                 return enumerator.MoveNext();
         }
 
@@ -586,20 +589,26 @@
         /// <summary>
         /// /// Helper to raise a PropertyChanged event for the Indexer property
         /// /// </summary>
-        private void OnIndexerPropertyChanged() =>
-          OnPropertyChanged(EventArgsCache.IndexerPropertyChanged);
+        private void OnIndexerPropertyChanged()
+        {
+            OnPropertyChanged(EventArgsCache.IndexerPropertyChanged);
+        }
 
         /// <summary>
         /// Helper to raise CollectionChanged event to any listeners
         /// </summary>
-        private void OnCollectionChanged(NotifyCollectionChangedAction action, object? oldItem, object? newItem, int index) =>
-          OnCollectionChanged(new NotifyCollectionChangedEventArgs(action, newItem, oldItem, index));
+        private void OnCollectionChanged(NotifyCollectionChangedAction action, object? oldItem, object? newItem, int index)
+        {
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(action, newItem, oldItem, index));
+        }
 
         /// <summary>
         /// Helper to raise CollectionChanged event with action == Reset to any listeners
         /// </summary>
-        private void OnCollectionReset() =>
-          OnCollectionChanged(EventArgsCache.ResetCollectionChanged);
+        private void OnCollectionReset()
+        {
+            OnCollectionChanged(EventArgsCache.ResetCollectionChanged);
+        }
 
         /// <summary>
         /// Helper to raise event for clustered action and clear cluster.
