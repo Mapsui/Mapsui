@@ -1,11 +1,11 @@
-﻿using Mapsui.UI.Objects;
-using Mapsui.Styles;
-using Mapsui.Providers;
-using Mapsui.UI.Forms.Extensions;
-using System.Runtime.CompilerServices;
+﻿using System;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using Mapsui.Providers;
+using Mapsui.Styles;
+using Mapsui.UI.Forms.Extensions;
+using Mapsui.UI.Objects;
 using Xamarin.Forms;
-using System;
 
 namespace Mapsui.UI.Forms
 {
