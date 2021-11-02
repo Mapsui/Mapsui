@@ -59,10 +59,10 @@ namespace Mapsui.Layers
         // ReSharper disable once UnusedParameter.Local // Is public and won't break this now
         public TileLayer(ITileSource tileSource, int minTiles = 200, int maxTiles = 300,
             IDataFetchStrategy? dataFetchStrategy = null, IRenderFetchStrategy? renderFetchStrategy = null,
-            int minExtraTiles = -1, int maxExtraTiles = -1, Func<TileInfo, Feature>? fetchTileAsFeature = null)
+            int minExtraTiles = -1, int maxExtraTiles = -1, Func<TileInfo, GeometryFeature>? fetchTileAsFeature = null)
         {
             _tileSource = tileSource ?? throw new ArgumentException("source can not null");
-            MemoryCache = new MemoryCache<Feature>(minTiles, maxTiles);
+            MemoryCache = new MemoryCache<GeometryFeature>(minTiles, maxTiles);
             Style = new VectorStyle { Outline = { Color = Color.FromArgb(0, 0, 0, 0) } }; // initialize with transparent outline
             Attribution ??= new Hyperlink();
             Attribution.Text = _tileSource.Attribution?.Text;
@@ -84,7 +84,7 @@ namespace Mapsui.Layers
         /// <summary>
         /// Memory cache for this layer
         /// </summary>
-        private MemoryCache<Feature> MemoryCache { get; }
+        private MemoryCache<GeometryFeature> MemoryCache { get; }
 
         /// <inheritdoc />
         public override IReadOnlyList<double> Resolutions => _tileSource?.Schema?.Resolutions.Select(r => r.Value.UnitsPerPixel).ToList();
@@ -149,10 +149,10 @@ namespace Mapsui.Layers
             OnDataChanged(e);
         }
 
-        private Feature ToFeature(TileInfo tileInfo)
+        private GeometryFeature ToFeature(TileInfo tileInfo)
         {
             var tileData = _tileSource.GetTile(tileInfo);
-            return new Feature { Geometry = ToGeometry(tileInfo, tileData) };
+            return new GeometryFeature { Geometry = ToGeometry(tileInfo, tileData) };
         }
 
         private static Raster? ToGeometry(TileInfo tileInfo, byte[]? tileData)

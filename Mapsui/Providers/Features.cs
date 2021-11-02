@@ -56,7 +56,7 @@ namespace Mapsui.Providers
         {
             // At this point it is possible to initialize an improved version of
             // Feature with a specified set of columns.
-            return new Feature();
+            return new GeometryFeature();
         }
 
         public void Add(IFeature feature)

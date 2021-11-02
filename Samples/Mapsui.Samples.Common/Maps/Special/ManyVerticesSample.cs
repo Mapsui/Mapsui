@@ -37,13 +37,13 @@ namespace Mapsui.Samples.Common.Maps
             {
                 Name = "Points",
                 IsMapInfoLayer = true,
-                DataSource = new MemoryProvider<IGeometryFeature>(GetFeature())
+                DataSource = new GeometryMemoryProvider<IGeometryFeature>(GetFeature())
             };
         }
 
         private static IGeometryFeature GetFeature()
         {
-            var feature = new Feature();
+            var feature = new GeometryFeature();
 
             var startPoint = new Point(1623484, 7652571);
 
@@ -60,7 +60,7 @@ namespace Mapsui.Samples.Common.Maps
             return feature;
         }
 
-        private static void AddStyles(Feature feature)
+        private static void AddStyles(GeometryFeature feature)
         {
             // route outline style
             VectorStyle vsout = new VectorStyle

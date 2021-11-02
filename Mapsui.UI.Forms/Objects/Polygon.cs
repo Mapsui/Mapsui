@@ -98,9 +98,9 @@ namespace Mapsui.UI.Forms
                 if (Feature == null)
                 {
                     // Create a new one
-                    Feature = new Feature
+                    Feature = new GeometryFeature
                     {
-                        Geometry = new Mapsui.Geometries.Polygon(),
+                        Geometry = new Geometries.Polygon(),
                         ["Label"] = Label,
                     };
                     Feature.Styles.Clear();

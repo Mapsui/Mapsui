@@ -51,10 +51,10 @@ namespace Mapsui.Samples.Common.Maps
             };
         }
 
-        public static MemoryProvider<IGeometryFeature> CreateMemoryProviderWithDiverseSymbols(MRect envelope, int count = 100)
+        public static GeometryMemoryProvider<IGeometryFeature> CreateMemoryProviderWithDiverseSymbols(MRect envelope, int count = 100)
         {
             var points = RandomPointHelper.GenerateRandomPoints(envelope, count).Select(p => p.ToPoint());
-            return new MemoryProvider<IGeometryFeature>(CreateAtlasFeatures(points));
+            return new GeometryMemoryProvider<IGeometryFeature>(CreateAtlasFeatures(points));
         }
 
         private static IEnumerable<IGeometryFeature> CreateAtlasFeatures(IEnumerable<IGeometry> randomPoints)
@@ -63,7 +63,7 @@ namespace Mapsui.Samples.Common.Maps
             var counter = 0;
             foreach (var point in randomPoints)
             {
-                var feature = new Feature { Geometry = point, ["Label"] = counter.ToString() };
+                var feature = new GeometryFeature { Geometry = point, ["Label"] = counter.ToString() };
 
                 var x = 0 + Random.Next(0, 12) * 21;
                 var y = 64 + Random.Next(0, 6) * 21;

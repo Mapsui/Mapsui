@@ -36,32 +36,32 @@ namespace Mapsui.Tests.Common.Maps
             return map;
         }
 
-        public static MemoryProvider<IGeometryFeature> CreateProviderWithPointsWithVectorStyle()
+        public static GeometryMemoryProvider<IGeometryFeature> CreateProviderWithPointsWithVectorStyle()
         {
             var features = new List<IGeometryFeature>
             {
-                new Feature
+                new GeometryFeature
                 {
                     Geometry = new Point(50, 50),
                     Styles = new[] {new VectorStyle {Fill = new Brush(Color.Red)}}
                 },
-                new Feature
+                new GeometryFeature
                 {
                     Geometry = new Point(50, 100),
                     Styles = new[] {new VectorStyle {Fill = new Brush(Color.Yellow), Outline = new Pen(Color.Black, 2)}}
                 },
-                new Feature
+                new GeometryFeature
                 {
                     Geometry = new Point(100, 50),
                     Styles = new[] {new VectorStyle {Fill = new Brush(Color.Blue), Outline = new Pen(Color.White, 2)}}
                 },
-                new Feature
+                new GeometryFeature
                 {
                     Geometry = new Point(100, 100),
                     Styles = new[] {new VectorStyle {Fill = new Brush(Color.Green), Outline = null}}
                 }
             };
-            var provider = new MemoryProvider<IGeometryFeature>(features);
+            var provider = new GeometryMemoryProvider<IGeometryFeature>(features);
             return provider;
         }
     }

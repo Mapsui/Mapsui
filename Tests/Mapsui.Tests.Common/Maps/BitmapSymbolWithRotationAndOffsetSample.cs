@@ -43,7 +43,7 @@ namespace Mapsui.Tests.Common.Maps
         {
             var features = new List<IGeometryFeature>
             {
-                new Feature
+                new GeometryFeature
                 {
                     Geometry = new Point(75, 75),
                     Styles = new[] {new SymbolStyle {Fill = new Brush(Color.Red)}}
@@ -52,16 +52,16 @@ namespace Mapsui.Tests.Common.Maps
                 CreateFeatureWithRotatedBitmapSymbol(125, 125, 180),
                 CreateFeatureWithRotatedBitmapSymbol(125, 75, 270)
             };
-            return new MemoryProvider<IGeometryFeature>(features);
+            return new GeometryMemoryProvider<IGeometryFeature>(features);
         }
 
-        private static Feature CreateFeatureWithRotatedBitmapSymbol(double x, double y, double rotation)
+        private static GeometryFeature CreateFeatureWithRotatedBitmapSymbol(double x, double y, double rotation)
         {
             const string bitmapPath = @"Mapsui.Tests.Common.Resources.Images.iconthatneedsoffset.png";
             var bitmapStream = typeof(Utilities).GetTypeInfo().Assembly.GetManifestResourceStream(bitmapPath);
             var bitmapId = BitmapRegistry.Instance.Register(bitmapStream);
 
-            var feature = new Feature { Geometry = new Point(x, y) };
+            var feature = new GeometryFeature { Geometry = new Point(x, y) };
 
             feature.Styles.Add(new SymbolStyle
             {

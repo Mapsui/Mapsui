@@ -33,9 +33,10 @@ namespace Mapsui.Providers
         IEnumerable<T> GetFeatures(FetchInfo fetchInfo);
 
         /// <summary>
-        /// <see cref="Mapsui.Geometries.BoundingBox"/> of data set
+        /// <see cref="Geometries.BoundingBox"/> of data set
         /// </summary>
-        /// <returns>BoundingBox</returns>
+        /// <returns>Extent of all the data within this provider. 
+        /// This can be null if there are no features. </returns>
         MRect? GetExtent();
     }
 }

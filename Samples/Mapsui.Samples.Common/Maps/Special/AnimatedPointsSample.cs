@@ -47,24 +47,24 @@ namespace Mapsui.Samples.Common.Maps.Special
             _timer = new Timer(_ => UpdateData(), this, 0, 2000);
         }
 
-        private class DynamicMemoryProvider : MemoryProvider<IGeometryFeature>
+        private class DynamicMemoryProvider : GeometryMemoryProvider<IPointFeature>
         {
             private readonly Random _random = new(0);
 
-            public override IEnumerable<IGeometryFeature> GetFeatures(FetchInfo fetchInfo)
+            public override IEnumerable<IPointFeature> GetFeatures(FetchInfo fetchInfo)
             {
-                var features = new List<IGeometryFeature>();
-                var geometries = RandomPointHelper.GenerateRandomPoints(fetchInfo.Extent, 10, _random.Next()).ToList();
+                var features = new List<IPointFeature>();
+                var points = RandomPointHelper.GenerateRandomPoints(fetchInfo.Extent, 10, _random.Next()).ToList();
                 var count = 0;
-                var random = _random.Next(geometries.Count);
+                var random = _random.Next(points.Count);
 
-                foreach (var geometry in geometries)
+                foreach (var point in points)
                 {
                     if (count != random) // skip a random element to test robustness
                     {
-                        var feature = new Feature
+                        var feature = new PointFeature
                         {
-                            Geometry = geometry.ToPoint(),
+                            Point = point,
                             ["ID"] = count.ToString(CultureInfo.InvariantCulture)
                         };
                         features.Add(feature);

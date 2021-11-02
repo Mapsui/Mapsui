@@ -33,13 +33,13 @@ namespace Mapsui.Samples.Common.Maps
             var features = new List<IGeometryFeature>();
             for (var i = 0; i < 100; i++)
             {
-                var feature = new Feature
+                var feature = new GeometryFeature
                 {
                     Geometry = new Geometries.Point(rnd.Next(0, 5000000), rnd.Next(0, 5000000))
                 };
                 features.Add(feature);
             }
-            var provider = new MemoryProvider<IGeometryFeature>(features);
+            var provider = new GeometryMemoryProvider<IGeometryFeature>(features);
 
             return new MemoryLayer
             {
