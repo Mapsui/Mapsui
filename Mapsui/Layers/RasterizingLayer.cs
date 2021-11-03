@@ -164,9 +164,9 @@ namespace Mapsui.Layers
             var features = _cache.ToArray();
 
             // Use a larger extent so that symbols partially outside of the extent are included
-            var grownBox = box.Grow(resolution * SymbolSize * 0.5);
+            var biggerBox = box.Grow(resolution * SymbolSize * 0.5);
 
-            return features.Where(f => f.Geometry != null && f.Geometry.BoundingBox.Intersects(grownBox.ToBoundingBox())).ToList();
+            return features.Where(f => f.Geometry != null && f.Geometry.BoundingBox.Intersects(biggerBox.ToBoundingBox())).ToList();
         }
 
         public void AbortFetch()
@@ -188,10 +188,8 @@ namespace Mapsui.Layers
                 (_currentViewport.Resolution != newViewport.Resolution) ||
                 !_currentViewport.Extent.Contains(newViewport.Extent))
             {
-                _fetchInfo = new FetchInfo(fetchInfo)
-                {
-                    ChangeType = ChangeType.Discrete
-                };
+                // Explicitly set the change type to discrete for rasterization
+                _fetchInfo = new FetchInfo(fetchInfo.Extent, fetchInfo.Resolution, fetchInfo.CRS, ChangeType.Discrete);
                 if (_layer is IAsyncDataFetcher)
                     Delayer.ExecuteDelayed(() => _layer.RefreshData(_fetchInfo));
                 else

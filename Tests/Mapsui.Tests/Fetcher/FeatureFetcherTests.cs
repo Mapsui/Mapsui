@@ -29,12 +29,7 @@ namespace Mapsui.Tests.Fetcher
                     notifications.Add(layer.Busy);
                 }
             };
-            var fetchInfo = new FetchInfo
-            {
-                Extent = extent,
-                Resolution = 1,
-                ChangeType = ChangeType.Discrete
-            };
+            var fetchInfo = new FetchInfo(extent, 1, null, ChangeType.Discrete);
 
             // act
             layer.RefreshData(fetchInfo);

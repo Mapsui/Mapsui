@@ -694,13 +694,7 @@ namespace Mapsui.UI.Forms
 
         private void HandlerPinPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            var fetchInfo = new FetchInfo
-            {
-                Extent = Viewport.Extent,
-                Resolution = Viewport.Resolution,
-                CRS = Map?.CRS,
-                ChangeType = ChangeType.Continuous
-            };
+            var fetchInfo = new FetchInfo(Viewport.Extent, Viewport.Resolution, Map?.CRS, ChangeType.Continuous);
 
             Map?.RefreshData(fetchInfo);
 
@@ -710,13 +704,7 @@ namespace Mapsui.UI.Forms
 
         private void HandlerDrawablePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            var fetchInfo = new FetchInfo
-            {
-                Extent = Viewport.Extent,
-                Resolution = Viewport.Resolution,
-                CRS = Map?.CRS,
-                ChangeType = ChangeType.Continuous
-            };
+            var fetchInfo = new FetchInfo(Viewport.Extent, Viewport.Resolution, Map?.CRS, ChangeType.Continuous);
 
             Map?.RefreshData(fetchInfo);
 

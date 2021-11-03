@@ -65,12 +65,11 @@ namespace Mapsui.Fetcher
             // Fetch a bigger extent to include partially visible symbols. 
             // todo: Take into account the maximum symbol size of the layer
 
-            _fetchInfo = new FetchInfo(fetchInfo)
-            {
-                Extent = fetchInfo.Extent.Grow(
-                    SymbolStyle.DefaultWidth * 2 * fetchInfo.Resolution,
-                    SymbolStyle.DefaultHeight * 2 * fetchInfo.Resolution)
-            };
+            var biggerBox = fetchInfo.Extent.Grow(
+                SymbolStyle.DefaultWidth * 2 * fetchInfo.Resolution,
+                SymbolStyle.DefaultHeight * 2 * fetchInfo.Resolution);
+            _fetchInfo = new FetchInfo(biggerBox, fetchInfo.Resolution, fetchInfo.CRS, fetchInfo.ChangeType);
+
 
             _modified = true;
             Busy = true;

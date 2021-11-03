@@ -142,8 +142,8 @@ namespace Mapsui.Providers
 
             fetchInfo = new FetchInfo(fetchInfo);
             // Use a larger extent so that symbols partially outside of the extent are included
-            var grownBox = fetchInfo.Extent.Grow(fetchInfo.Resolution * SymbolSize * 0.5);
-            var grownFeatures = features.Where(f => f != null && f.BoundingBox.Intersects(grownBox));
+            var biggerBox = fetchInfo.Extent.Grow(fetchInfo.Resolution * SymbolSize * 0.5);
+            var grownFeatures = features.Where(f => f != null && f.BoundingBox.Intersects(biggerBox));
             return (IEnumerable<T>)grownFeatures.ToList(); // Why do I need to cast if T is constrained to IFeature?
         }
 
@@ -162,15 +162,15 @@ namespace Mapsui.Providers
             return _boundingBox;
         }
 
-        private static MRect GetExtent(IReadOnlyList<IGeometryFeature> features)
+        private static MRect GetExtent(IReadOnlyList<IFeature> features)
         {
             MRect? box = null;
             foreach (var feature in features)
             {
-                if (feature.Geometry.IsEmpty()) continue;
+                if (feature.BoundingBox == null) continue;
                 box = box == null
-                    ? feature.Geometry.BoundingBox.ToMRect()
-                    : box.Join(feature.Geometry.BoundingBox.ToMRect());
+                    ? feature.BoundingBox
+                    : box.Join(feature.BoundingBox);
             }
             return box;
         }

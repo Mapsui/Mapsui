@@ -33,11 +33,7 @@ namespace Mapsui.Tests.Fetcher
             var level = 3;
             var expectedTiles = 64;
 
-            var fetchInfo = new FetchInfo
-            {
-                Extent = tileSchema.Extent.ToMRect(),
-                Resolution = tileSchema.Resolutions[level].UnitsPerPixel
-            };
+            var fetchInfo = new FetchInfo(tileSchema.Extent.ToMRect(), tileSchema.Resolutions[level].UnitsPerPixel);
 
             // Act
             // Get all tiles of level 3
@@ -63,11 +59,8 @@ namespace Mapsui.Tests.Fetcher
             var tileMachine = new FetchMachine(fetchDispatcher);
             var level = 3;
             var expectedTiles = 64;
-            var fetchInfo = new FetchInfo
-            {
-                Extent = tileSchema.Extent.ToMRect(),
-                Resolution = tileSchema.Resolutions[level].UnitsPerPixel
-            };
+            var fetchInfo = new FetchInfo(tileSchema.Extent.ToMRect(), tileSchema.Resolutions[level].UnitsPerPixel);
+
             // Act
             fetchDispatcher.SetViewport(fetchInfo);
             tileMachine.Start();
@@ -98,11 +91,7 @@ namespace Mapsui.Tests.Fetcher
             var tileMachine = new FetchMachine(fetchDispatcher);
             var level = 3;
             var tilesInLevel = 64;
-            var fetchInfo = new FetchInfo
-            {
-                Extent = tileSchema.Extent.ToMRect(),
-                Resolution = tileSchema.Resolutions[level].UnitsPerPixel
-            };
+            var fetchInfo = new FetchInfo(tileSchema.Extent.ToMRect(), tileSchema.Resolutions[level].UnitsPerPixel);
             // Act
             fetchDispatcher.SetViewport(fetchInfo);
             tileMachine.Start();
@@ -128,11 +117,7 @@ namespace Mapsui.Tests.Fetcher
             var tileMachine = new FetchMachine(fetchDispatcher);
             var level = 3;
             var tilesInLevel = 64;
-            var fetchInfo = new FetchInfo
-            {
-                Extent = tileSchema.Extent.ToMRect(),
-                Resolution = tileSchema.Resolutions[level].UnitsPerPixel
-            };
+            var fetchInfo = new FetchInfo(tileSchema.Extent.ToMRect(), tileSchema.Resolutions[level].UnitsPerPixel);
 
             // Act
             fetchDispatcher.SetViewport(fetchInfo);
@@ -160,11 +145,8 @@ namespace Mapsui.Tests.Fetcher
             var tileMachine = new FetchMachine(fetchDispatcher);
             var level = 3;
             var tilesInLevel = 64;
-            var fetchInfo = new FetchInfo
-            {
-                Extent = tileSchema.Extent.ToMRect(),
-                Resolution = tileSchema.Resolutions[level].UnitsPerPixel
-            };
+            var fetchInfo = new FetchInfo(tileSchema.Extent.ToMRect(), tileSchema.Resolutions[level].UnitsPerPixel);
+
             // Act
             fetchDispatcher.SetViewport(fetchInfo);
             tileMachine.Start();
@@ -195,11 +177,7 @@ namespace Mapsui.Tests.Fetcher
             var tileMachine = new FetchMachine(fetchDispatcher);
             var numberOfWorkers = 8;
             var numberOfRestarts = 3;
-            var fetchInfo = new FetchInfo
-            {
-                Extent = tileSchema.Extent.ToMRect(),
-                Resolution = tileSchema.Resolutions[3].UnitsPerPixel
-            };
+            var fetchInfo = new FetchInfo(tileSchema.Extent.ToMRect(), tileSchema.Resolutions[3].UnitsPerPixel);
 
             // Act
             for (var i = 0; i < numberOfRestarts; i++)

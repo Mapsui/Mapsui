@@ -201,13 +201,7 @@ namespace Mapsui.UI.Objects
                             mapView.Refresh();
                     }, 0.0, 1.0);
 
-                    var fetchInfo = new FetchInfo
-                    {
-                        Extent = mapView.Viewport.Extent,
-                        Resolution = mapView.Viewport.Resolution,
-                        CRS = mapView.Map?.CRS,
-                        ChangeType = ChangeType.Discrete
-                    };
+                    var fetchInfo = new FetchInfo(mapView.Viewport.Extent, mapView.Viewport.Resolution, mapView.Map?.CRS, ChangeType.Discrete);
                     // At the end, update viewport
                     animation.Commit(mapView, animationMyLocationName, 100, 3000, finished: (s, v) => mapView.Map?.RefreshData(fetchInfo));
                 }
