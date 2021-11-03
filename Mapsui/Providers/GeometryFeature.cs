@@ -8,18 +8,18 @@ using Mapsui.Styles;
 
 namespace Mapsui.Providers
 {
-    public class Feature : IGeometryFeature, IDisposable
+    public class GeometryFeature : IGeometryFeature, IDisposable
     {
         private readonly Dictionary<string, object?> _dictionary = new();
         private bool _disposed;
 
-        public Feature()
+        public GeometryFeature()
         {
             RenderedGeometry = new Dictionary<IStyle, object>();
             Styles = new Collection<IStyle>();
         }
 
-        public Feature(IGeometryFeature feature)
+        public GeometryFeature(IGeometryFeature feature)
         {
             Geometry = feature.Geometry;
             RenderedGeometry = feature.RenderedGeometry.ToDictionary(entry => entry.Key,
@@ -53,7 +53,7 @@ namespace Mapsui.Providers
             GC.SuppressFinalize(this);
         }
 
-        ~Feature()
+        ~GeometryFeature()
         {
             Dispose(false);
         }

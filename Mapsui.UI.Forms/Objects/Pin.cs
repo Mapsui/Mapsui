@@ -438,7 +438,7 @@ namespace Mapsui.UI.Forms
                 if (Feature == null)
                 {
                     // Create a new one
-                    Feature = new Feature
+                    Feature = new GeometryFeature
                     {
                         Geometry = Position.ToPoint(),
                         ["Label"] = Label,

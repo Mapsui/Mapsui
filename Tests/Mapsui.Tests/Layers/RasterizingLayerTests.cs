@@ -53,13 +53,13 @@ namespace Mapsui.Tests.Layers
             var features = new List<IGeometryFeature>();
             for (var i = 0; i < 100; i++)
             {
-                var feature = new Feature
+                var feature = new GeometryFeature
                 {
                     Geometry = new Geometries.Point(random.Next(100000, 5000000), random.Next(100000, 5000000))
                 };
                 features.Add(feature);
             }
-            var provider = new MemoryProvider<IGeometryFeature>(features);
+            var provider = new GeometryMemoryProvider<IGeometryFeature>(features);
 
             return new MemoryLayer { DataSource = provider };
         }

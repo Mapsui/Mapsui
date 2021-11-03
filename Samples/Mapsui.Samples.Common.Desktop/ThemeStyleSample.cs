@@ -91,7 +91,7 @@ namespace Mapsui.Samples.Common.Desktop
 
             var layer = new MemoryLayer
             {
-                DataSource = new MemoryProvider<IGeometryFeature>(features),
+                DataSource = new GeometryMemoryProvider<IGeometryFeature>(features),
                 Style = new SymbolStyle
                 {
                     BitmapId = BitmapRegistry.Instance.Register(imageStream),
@@ -219,7 +219,7 @@ namespace Mapsui.Samples.Common.Desktop
             foreach (var item in c)
             {
                 var geo = new Point(item.Long, item.Lat);
-                features.Add(new Feature { Geometry = geo, ["NAME"] = item.CityName, ["COUNTRY"] = item.Country, ["POPULATION"] = item.Population });
+                features.Add(new GeometryFeature { Geometry = geo, ["NAME"] = item.CityName, ["COUNTRY"] = item.Country, ["POPULATION"] = item.Population });
             }
 
             return features;

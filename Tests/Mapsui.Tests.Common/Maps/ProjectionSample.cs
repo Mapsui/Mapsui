@@ -46,7 +46,7 @@ namespace Mapsui.Tests.Common.Maps
         {
             return new MemoryLayer("Center of Amsterdam")
             {
-                DataSource = new MemoryProvider<IGeometryFeature>(new Point(545465.50488704059, 6866697.0250906311)),
+                DataSource = new GeometryMemoryProvider<IGeometryFeature>(new Point(545465.50488704059, 6866697.0250906311)),
                 Style = new SymbolStyle { Fill = new Brush { Color = Color.Black }, SymbolScale = 0.5 }
             };
         }
@@ -55,10 +55,10 @@ namespace Mapsui.Tests.Common.Maps
         {
             var features = new List<IGeometryFeature>
             {
-                new Feature {Geometry = GeometryFromWKT.Parse(WktOfAmsterdam)}
+                new GeometryFeature {Geometry = GeometryFromWKT.Parse(WktOfAmsterdam)}
             };
 
-            var memoryProvider = new MemoryProvider<IGeometryFeature>(features)
+            var memoryProvider = new GeometryMemoryProvider<IGeometryFeature>(features)
             {
                 CRS = "EPSG:4326" // The DataSource CRS needs to be set
             };

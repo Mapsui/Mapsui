@@ -46,7 +46,7 @@ namespace Mapsui.Samples.Common.Maps
             {
                 Name = "Async Layer",
                 IsMapInfoLayer = true,
-                DataSource = new MemoryProvider<IGeometryFeature>(GetCitiesFromEmbeddedResource()),
+                DataSource = new GeometryMemoryProvider<IGeometryFeature>(GetCitiesFromEmbeddedResource()),
                 Style = CreateBitmapStyle()
             };
         }
@@ -59,7 +59,7 @@ namespace Mapsui.Samples.Common.Maps
             var cities = DeserializeFromStream<City>(stream);
 
             return cities.Select(c => {
-                var feature = new Feature
+                var feature = new GeometryFeature
                 {
                     Geometry = SphericalMercator.FromLonLat(c.Lng, c.Lat).ToMPoint().ToPoint()
                 };

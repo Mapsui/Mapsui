@@ -35,13 +35,13 @@ namespace Mapsui.Samples.Common.Maps
             var layer = new MemoryLayer();
 
             var polygon = new Polygon(new LinearRing(GenerateRandomPoints(envelope, 3)));
-            var feature = new Feature() { Geometry = polygon };
+            var feature = new GeometryFeature() { Geometry = polygon };
             var features = new List<IGeometryFeature>
             {
                 feature
             };
 
-            layer.DataSource = new MemoryProvider<IGeometryFeature>(features);
+            layer.DataSource = new GeometryMemoryProvider<IGeometryFeature>(features);
 
             PeriodicTask.Run(() => {
                 polygon.ExteriorRing = new LinearRing(GenerateRandomPoints(envelope, 3));

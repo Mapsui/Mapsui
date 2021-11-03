@@ -39,7 +39,7 @@ namespace Mapsui.Tests.Common.Maps
             return new MemoryLayer
             {
                 Style = null,
-                DataSource = new MemoryProvider<IGeometryFeature>(CreateFeatures()),
+                DataSource = new GeometryMemoryProvider<IGeometryFeature>(CreateFeatures()),
                 Name = "Points with bitmaps"
             };
         }
@@ -55,32 +55,32 @@ namespace Mapsui.Tests.Common.Maps
 
             return new List<IGeometryFeature>
             {
-                new Feature
+                new GeometryFeature
                 {
                     Geometry = new Point(256, 124),
                     Styles = new[] {new SymbolStyle {BitmapId = atlas}}
                 },
-                new Feature
+                new GeometryFeature
                 {
                     Geometry = new Point(20, 280),
                     Styles = new[] {new SymbolStyle {BitmapId = BitmapRegistry.Instance.Register(spriteAmusementPark15)} }
                 },
-                new Feature
+                new GeometryFeature
                 {
                     Geometry = new Point(60, 280),
                     Styles = new[] {new SymbolStyle {BitmapId = BitmapRegistry.Instance.Register(spriteClothingStore15)} }
                 },
-                new Feature
+                new GeometryFeature
                 {
                     Geometry = new Point(100, 280),
                     Styles = new[] {new SymbolStyle {BitmapId = BitmapRegistry.Instance.Register(spriteDentist15)} }
                 },
-                new Feature
+                new GeometryFeature
                 {
                     Geometry = new Point(180, 300),
                     Styles = new[] {new SymbolStyle {BitmapId = BitmapRegistry.Instance.Register(spritePedestrianPolygon)} }
                 },
-                new Feature
+                new GeometryFeature
                 {
                 Geometry = new Point(380, 280),
                 Styles = new[] {new SymbolStyle {BitmapId = svgTigerBitmapId, SymbolScale = 0.1} }

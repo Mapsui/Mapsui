@@ -27,7 +27,7 @@ namespace Mapsui.Tests.Fetcher
             var tileProvider = new CountingTileProvider();
             var tileSchema = new GlobalSphericalMercator();
             var tileSource = new TileSource(tileProvider, tileSchema);
-            var cache = new MemoryCache<Feature>();
+            var cache = new MemoryCache<GeometryFeature>();
             var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, tileInfo => TileToFeature(tileSource, tileInfo));
             var tileMachine = new FetchMachine(fetchDispatcher);
             var level = 3;
@@ -58,7 +58,7 @@ namespace Mapsui.Tests.Fetcher
             var tileProvider = new CountingTileProvider();
             var tileSchema = new GlobalSphericalMercator();
             var tileSource = new TileSource(tileProvider, tileSchema);
-            var cache = new MemoryCache<Feature>();
+            var cache = new MemoryCache<GeometryFeature>();
             var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, tileInfo => TileToFeature(tileSource, tileInfo));
             var tileMachine = new FetchMachine(fetchDispatcher);
             var level = 3;
@@ -93,7 +93,7 @@ namespace Mapsui.Tests.Fetcher
             var tileProvider = new NullTileProvider();
             var tileSchema = new GlobalSphericalMercator();
             var tileSource = new TileSource(tileProvider, tileSchema);
-            var cache = new MemoryCache<Feature>();
+            var cache = new MemoryCache<GeometryFeature>();
             var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, tileInfo => TileToFeature(tileSource, tileInfo));
             var tileMachine = new FetchMachine(fetchDispatcher);
             var level = 3;
@@ -123,7 +123,7 @@ namespace Mapsui.Tests.Fetcher
             var tileProvider = new FailingTileProvider();
             var tileSchema = new GlobalSphericalMercator();
             var tileSource = new TileSource(tileProvider, tileSchema);
-            var cache = new MemoryCache<Feature>();
+            var cache = new MemoryCache<GeometryFeature>();
             var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, tileInfo => TileToFeature(tileSource, tileInfo));
             var tileMachine = new FetchMachine(fetchDispatcher);
             var level = 3;
@@ -155,7 +155,7 @@ namespace Mapsui.Tests.Fetcher
             var tileProvider = new SometimesFailingTileProvider();
             var tileSchema = new GlobalSphericalMercator();
             var tileSource = new TileSource(tileProvider, tileSchema);
-            var cache = new MemoryCache<Feature>();
+            var cache = new MemoryCache<GeometryFeature>();
             var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, tileInfo => TileToFeature(tileSource, tileInfo));
             var tileMachine = new FetchMachine(fetchDispatcher);
             var level = 3;
@@ -190,7 +190,7 @@ namespace Mapsui.Tests.Fetcher
             var tileProvider = new CountingTileProvider();
             var tileSchema = new GlobalSphericalMercator();
             var tileSource = new TileSource(tileProvider, tileSchema);
-            var cache = new MemoryCache<Feature>();
+            var cache = new MemoryCache<GeometryFeature>();
             var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, tileInfo => TileToFeature(tileSource, tileInfo));
             var tileMachine = new FetchMachine(fetchDispatcher);
             var numberOfWorkers = 8;
@@ -213,7 +213,7 @@ namespace Mapsui.Tests.Fetcher
             Assert.Greater(numberOfWorkers * numberOfRestarts, FetchWorker.RestartCounter);
         }
 
-        private Feature TileToFeature(ITileSource tileProvider, TileInfo tileInfo)
+        private GeometryFeature TileToFeature(ITileSource tileProvider, TileInfo tileInfo)
         {
             var tile = tileProvider.GetTile(tileInfo);
             // A tile layer can return a null value. This indicates the tile is not
@@ -225,8 +225,8 @@ namespace Mapsui.Tests.Fetcher
             // 
             // Note, the fact that we have to define this complex method on the outside
             // indicates a design flaw.
-            if (tile == null) return new Feature { Geometry = null };
-            return new Feature { Geometry = new Raster(new MemoryStream(tile), tileInfo.Extent.ToBoundingBox()) };
+            if (tile == null) return new GeometryFeature { Geometry = null };
+            return new GeometryFeature { Geometry = new Raster(new MemoryStream(tile), tileInfo.Extent.ToBoundingBox()) };
         }
     }
 }
