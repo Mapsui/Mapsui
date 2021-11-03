@@ -39,6 +39,15 @@ namespace Mapsui
             Y = y;
         }
 
+        /// <summary>
+        ///     Copy constructor
+        /// </summary>
+        public MPoint(MPoint point)
+        {
+            X = point.X;
+            Y = point.Y;
+        }
+
         public MPoint() : this(0, 0)
         {
         }

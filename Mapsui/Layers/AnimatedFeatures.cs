@@ -44,7 +44,7 @@ namespace Mapsui.Layers
 
         public event EventHandler? AnimatedPositionChanged;
 
-        public void AddFeatures(IEnumerable<IGeometryFeature> features)
+        public void AddFeatures(IEnumerable<IPointFeature> features)
         {
             var previousCache = _cache;
 
@@ -90,14 +90,14 @@ namespace Mapsui.Layers
 
             foreach (var animatedItem in animatedItems)
             {
-                var target = animatedItem.Feature.Geometry as Point;
+                var target = animatedItem.Feature.Point;
                 if (animatedItem.PreviousPoint == null || animatedItem.CurrentPoint == null || target == null) continue;
                 if (animatedItem.PreviousPoint.Distance(animatedItem.CurrentPoint) < 10000) continue;
                 LogItem(animatedItem);
             }
         }
 
-        private static List<AnimatedItem> ConvertToAnimatedItems(IEnumerable<IGeometryFeature> features,
+        private static List<AnimatedItem> ConvertToAnimatedItems(IEnumerable<IPointFeature> features,
             List<AnimatedItem> previousItems, string idField)
         {
             var result = new List<AnimatedItem>();
@@ -106,7 +106,7 @@ namespace Mapsui.Layers
                 var animatedItem = new AnimatedItem
                 {
                     Feature = feature,
-                    CurrentPoint = CopyAsPoint(feature.Geometry),
+                    CurrentPoint = CopyAsPoint(feature.Point),
                     PreviousPoint = CopyAsPoint(FindPreviousPoint(previousItems, feature, idField))
                 };
                 result.Add(animatedItem);
@@ -114,10 +114,10 @@ namespace Mapsui.Layers
             return result;
         }
 
-        private static Point? CopyAsPoint(IGeometry geometry)
+        private static MPoint? CopyAsPoint(MPoint geometry)
         {
-            var point = geometry as Point;
-            return point == null ? null : new Point(point.X, point.Y);
+            var point = geometry;
+            return point == null ? null : new MPoint(point);
         }
 
         private static int _counter;
@@ -127,7 +127,7 @@ namespace Mapsui.Layers
         {
             foreach (var item in items)
             {
-                var target = item.Feature.Geometry as Point;
+                var target = item.Feature.Point;
                 if (item.PreviousPoint == null || item.CurrentPoint == null || target == null) continue;
                 if (item.PreviousPoint.Distance(item.CurrentPoint) > threshold) continue;
                 target.X = item.PreviousPoint.X + (item.CurrentPoint.X - item.PreviousPoint.X) * progress;
@@ -153,7 +153,7 @@ namespace Mapsui.Layers
             Debug.WriteLine("-------------------------------------------------");
         }
 
-        private static Point FindPreviousPoint(IEnumerable<AnimatedItem>? previousItems, IFeature feature,
+        private static MPoint FindPreviousPoint(IEnumerable<AnimatedItem>? previousItems, IFeature feature,
             string idField)
         {
             return previousItems?.FirstOrDefault(f => f.Feature[idField].Equals(feature[idField]))?.CurrentPoint;
@@ -176,14 +176,14 @@ namespace Mapsui.Layers
 
         private static double CubicEaseOut(double d, double t)
         {
-            return ((t = t / d - 1) * t * t + 1);
+            return (t = t / d - 1) * t * t + 1;
         }
 
         private class AnimatedItem
         {
-            public IGeometryFeature? Feature { get; set; }
-            public Point? PreviousPoint { get; set; }
-            public Point? CurrentPoint { get; set; }
+            public IPointFeature? Feature { get; set; }
+            public MPoint? PreviousPoint { get; set; }
+            public MPoint? CurrentPoint { get; set; }
         }
     }
 }
