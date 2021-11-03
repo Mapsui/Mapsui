@@ -203,7 +203,6 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
         {
             if (mapInfo.Feature is IGeometryFeature geometryFeature)
             {
-                var feature = mapInfo.Feature;
                 var vertexTouched = FindVertexTouched(mapInfo, geometryFeature.Geometry.MainVertices(), screenDistance);
                 if (vertexTouched != null)
                 {
@@ -220,7 +219,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
                         // If the last was removed then set the first to the value of the new last
                         else if (index == vertices.Count) SetPointXY(vertices[0], vertices[count - 1]);
 
-                        feature.RenderedGeometry.Clear();
+                        geometryFeature.RenderedGeometry.Clear();
                         Layer.DataHasChanged();
                     }
 
@@ -238,7 +237,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
 
                 if (EditHelper.TryInsertVertex(mapInfo, vertices, VertexRadius))
                 {
-                    mapInfo.Feature.RenderedGeometry.Clear();
+                    geometryFeature.RenderedGeometry.Clear();
                     Layer.DataHasChanged();
                 }
             }

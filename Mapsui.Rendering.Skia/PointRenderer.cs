@@ -1,7 +1,6 @@
 ﻿using System;
 using Mapsui.Extensions;
-using Mapsui.Geometries;
-using Mapsui.Providers;
+using Mapsui.Layers;
 using Mapsui.Styles;
 using SkiaSharp;
 
@@ -9,11 +8,10 @@ namespace Mapsui.Rendering.Skia
 {
     internal static class PointRenderer
     {
-        public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, IGeometryFeature feature,
-            IGeometry geometry, SymbolCache symbolCache, float opacity)
+        public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, IFeature feature,
+            double x, double y, SymbolCache symbolCache, float opacity)
         {
-            var point = (Point)geometry;
-            var destination = viewport.WorldToScreen(point.X, point.Y).ToPoint();
+            var destination = viewport.WorldToScreen(x, y).ToPoint();
 
             if (style is CalloutStyle calloutStyle)
             {

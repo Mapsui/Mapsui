@@ -45,33 +45,33 @@ namespace Mapsui.Samples.Common.Maps.Special
             Style = new SymbolStyle { Fill = { Color = new Color(255, 215, 0, 200) }, SymbolScale = 0.9 };
             _timer = new Timer(_ => UpdateData(), this, 0, 2000);
         }
+    }
 
-        private class DynamicMemoryProvider : GeometryMemoryProvider<IGeometryFeature>
+    internal class DynamicMemoryProvider : MemoryProvider<IPointFeature>
+    {
+        private readonly Random _random = new(0);
+
+        public override IEnumerable<IPointFeature> GetFeatures(FetchInfo fetchInfo)
         {
-            private readonly Random _random = new(0);
+            var features = new List<IPointFeature>();
+            var geometries = RandomPointHelper.GenerateRandomPoints(fetchInfo.Extent, 10, _random.Next()).ToList();
+            var count = 0;
+            var random = _random.Next(geometries.Count);
 
-            public override IEnumerable<IGeometryFeature> GetFeatures(FetchInfo fetchInfo)
+            foreach (var geometry in geometries)
             {
-                var features = new List<IGeometryFeature>();
-                var geometries = RandomPointHelper.GenerateRandomPoints(fetchInfo.Extent, 10, _random.Next()).ToList();
-                var count = 0;
-                var random = _random.Next(geometries.Count);
-
-                foreach (var geometry in geometries)
+                if (count != random) // skip a random element to test robustness
                 {
-                    if (count != random) // skip a random element to test robustness
+                    var feature = new PointFeature
                     {
-                        var feature = new GeometryFeature
-                        {
-                            Geometry = geometry.ToPoint(),
-                            ["ID"] = count.ToString(CultureInfo.InvariantCulture)
-                        };
-                        features.Add(feature);
-                    }
-                    count++;
+                        Point = new MPoint(geometry.ToPoint().X, geometry.ToPoint().Y),
+                        ["ID"] = count.ToString(CultureInfo.InvariantCulture)
+                    };
+                    features.Add(feature);
                 }
-                return features;
+                count++;
             }
+            return features;
         }
     }
 }

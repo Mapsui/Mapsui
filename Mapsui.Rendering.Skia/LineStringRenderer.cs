@@ -1,6 +1,6 @@
 using Mapsui.Extensions;
 using Mapsui.Geometries;
-using Mapsui.Providers;
+using Mapsui.Layers;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using SkiaSharp;
@@ -9,8 +9,8 @@ namespace Mapsui.Rendering.Skia
 {
     public static class LineStringRenderer
     {
-        public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, IGeometryFeature feature, IGeometry geometry,
-            float opacity)
+        public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, IFeature feature,
+            LineString lineString, float opacity)
         {
             if (style is LabelStyle labelStyle)
             {
@@ -22,9 +22,6 @@ namespace Mapsui.Rendering.Skia
             }
             else
             {
-
-                var lineString = ((LineString)geometry).Vertices;
-
                 float lineWidth = 1;
                 var lineColor = new Color();
 
@@ -48,7 +45,7 @@ namespace Mapsui.Rendering.Skia
                     dashOffset = vectorStyle.Line.DashOffset;
                 }
 
-                using (var path = lineString.ToSkiaPath(viewport, canvas.LocalClipBounds))
+                using (var path = lineString.Vertices.ToSkiaPath(viewport, canvas.LocalClipBounds))
                 using (var paint = new SKPaint { IsAntialias = true })
                 {
                     paint.IsStroke = true;

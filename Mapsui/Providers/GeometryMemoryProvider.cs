@@ -147,10 +147,15 @@ namespace Mapsui.Providers
             return (IEnumerable<T>)grownFeatures.ToList(); // Why do I need to cast if T is constrained to IFeature?
         }
 
-        public IFeature Find(object? value, string primaryKey)
+        /// <summary>
+        /// Search for a feature
+        /// </summary>
+        /// <param name="value">Value to search for</param>
+        /// <param name="fieldName">Name of the field to search in. This is the key of the IFeature dictionary</param>
+        /// <returns></returns>
+        public IFeature Find(object? value, string fieldName)
         {
-            return Features.FirstOrDefault(f => f[primaryKey] != null && value != null &&
-                f[primaryKey].Equals(value));
+            return Features.FirstOrDefault(f => value != null && f[fieldName] == value);
         }
 
         /// <summary>

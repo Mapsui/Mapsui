@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Providers;
 
@@ -8,11 +7,11 @@ namespace Mapsui.Layers
 {
     public class AnimatedPointLayer : BaseLayer
     {
-        private readonly IProvider<IGeometryFeature> _dataSource;
+        private readonly IProvider<IPointFeature> _dataSource;
         private FetchInfo _fetchInfo;
         private readonly AnimatedFeatures _animatedFeatures = new();
 
-        public AnimatedPointLayer(IProvider<IGeometryFeature> dataSource)
+        public AnimatedPointLayer(IProvider<IPointFeature> dataSource)
         {
             _dataSource = dataSource;
             _animatedFeatures.AnimatedPositionChanged += (_, _) => OnDataChanged(new DataChangedEventArgs());

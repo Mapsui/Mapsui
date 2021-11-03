@@ -1,22 +1,19 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using Mapsui.Extensions;
 using Mapsui.Geometries;
+using Mapsui.Layers;
 using Mapsui.Styles;
 
 namespace Mapsui.Providers
 {
-    public class GeometryFeature : IGeometryFeature, IDisposable
+    public class GeometryFeature : BaseFeature, IGeometryFeature, IDisposable
     {
-        private readonly Dictionary<string, object?> _dictionary = new();
         private bool _disposed;
 
         public GeometryFeature()
         {
-            RenderedGeometry = new Dictionary<IStyle, object>();
-            Styles = new Collection<IStyle>();
         }
 
         public GeometryFeature(IGeometryFeature feature)
@@ -33,17 +30,8 @@ namespace Mapsui.Providers
 
         public IGeometry? Geometry { get; set; }
 
-        public IDictionary<IStyle, object> RenderedGeometry { get; }
+        public IDictionary<IStyle, object> RenderedGeometry { get; } = new Dictionary<IStyle, object>();
 
-        public ICollection<IStyle> Styles { get; set; }
-
-        public virtual object? this[string key]
-        {
-            get => _dictionary.ContainsKey(key) ? _dictionary[key] : null;
-            set => _dictionary[key] = value;
-        }
-
-        public IEnumerable<string> Fields => _dictionary.Keys;
 
         public MRect? BoundingBox => Geometry?.BoundingBox.ToMRect();
 
