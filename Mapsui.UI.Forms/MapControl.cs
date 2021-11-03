@@ -551,13 +551,7 @@ namespace Mapsui.UI.Forms
             if (touchPoints.Count == 0)
             {
                 _mode = TouchMode.None;
-                var fetchInfo = new FetchInfo
-                {
-                    Extent = _viewport.Extent,
-                    Resolution = _viewport.Resolution,
-                    CRS = Map?.CRS,
-                    ChangeType = ChangeType.Discrete
-                };
+                var fetchInfo = new FetchInfo(_viewport.Extent, _viewport.Resolution, Map?.CRS, ChangeType.Discrete);
                 _map?.RefreshData(fetchInfo);
             }
 
@@ -602,13 +596,7 @@ namespace Mapsui.UI.Forms
             if (touchPoints.Count == 0)
             {
                 _mode = TouchMode.None;
-                var fetchInfo = new FetchInfo
-                {
-                    Extent = _viewport.Extent,
-                    Resolution = _viewport.Resolution,
-                    CRS = Map?.CRS,
-                    ChangeType = ChangeType.Discrete
-                };
+                var fetchInfo = new FetchInfo(_viewport.Extent, _viewport.Resolution, Map?.CRS, ChangeType.Discrete);
                 _map?.RefreshData(fetchInfo);
             }
 

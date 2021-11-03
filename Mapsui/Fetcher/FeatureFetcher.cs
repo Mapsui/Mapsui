@@ -18,9 +18,10 @@ namespace Mapsui.Fetcher
         public FeatureFetcher(FetchInfo fetchInfo, IProvider<IFeature> provider, DataArrivedDelegate dataArrived, long timeOfRequest = default)
         {
             _dataArrived = dataArrived;
-            _fetchInfo = fetchInfo;
-            var biggerBox = _fetchInfo.Extent.Grow(SymbolStyle.DefaultWidth * 2 * fetchInfo.Resolution, SymbolStyle.DefaultHeight * 2 * fetchInfo.Resolution);
-            _fetchInfo.Extent = biggerBox;
+            var biggerBox = fetchInfo.Extent.Grow(
+                SymbolStyle.DefaultWidth * 2 * fetchInfo.Resolution,
+                SymbolStyle.DefaultHeight * 2 * fetchInfo.Resolution);
+            _fetchInfo = new FetchInfo(biggerBox, fetchInfo.Resolution, fetchInfo.CRS, fetchInfo.ChangeType);
             _provider = provider;
             _timeOfRequest = timeOfRequest;
         }

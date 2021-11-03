@@ -32,12 +32,7 @@ namespace Mapsui.Tests.Layers
                 waitHandle.Set();
             };
 
-            var fetchInfo = new FetchInfo
-            {
-                Extent = box,
-                Resolution = resolution,
-                ChangeType = ChangeType.Discrete
-            };
+            var fetchInfo = new FetchInfo(box, resolution, null, ChangeType.Discrete);
 
             // act
             layer.RefreshData(fetchInfo);

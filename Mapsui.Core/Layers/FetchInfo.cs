@@ -2,19 +2,25 @@
 {
     public class FetchInfo
     {
-        public FetchInfo() { }
+        public FetchInfo(MRect extent, double resolution, string? crs = null, ChangeType changeType = ChangeType.Discrete)
+        {
+            Extent = extent;
+            Resolution = resolution;
+            CRS = crs;
+            ChangeType = changeType;
+        }
 
         public FetchInfo(FetchInfo fetchInfo)
         {
-            Extent = fetchInfo.Extent != null ? new MRect(fetchInfo.Extent) : null;
+            Extent = new MRect(fetchInfo.Extent);
             Resolution = fetchInfo.Resolution;
             CRS = fetchInfo.CRS;
             ChangeType = fetchInfo.ChangeType;
         }
 
-        public MRect? Extent { get; set; }
-        public double Resolution { get; set; }
-        public string? CRS { get; set; }
-        public ChangeType ChangeType { get; set; }
+        public MRect Extent { get; }
+        public double Resolution { get; }
+        public string? CRS { get; }
+        public ChangeType ChangeType { get; }
     }
 }

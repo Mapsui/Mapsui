@@ -34,14 +34,11 @@ namespace Mapsui.Layers
             // Safeguard in case BoundingBox is null, most likely due to no features in layer
             if (box == null) { return new List<IFeature>(); }
 
-            var fetchInfo = new FetchInfo
-            {
-                Extent = box.Grow(
+            var biggerBox = box.Grow(
                     SymbolStyle.DefaultWidth * 2 * resolution,
-                    SymbolStyle.DefaultHeight * 2 * resolution),
-                Resolution = resolution,
-                CRS = CRS
-            };
+                    SymbolStyle.DefaultHeight * 2 * resolution);
+            var fetchInfo = new FetchInfo(biggerBox, resolution, CRS);
+
             return DataSource.GetFeatures(fetchInfo);
         }
 

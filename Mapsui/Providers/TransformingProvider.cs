@@ -22,8 +22,10 @@ namespace Mapsui.Providers
 
         public IEnumerable<IGeometryFeature> GetFeatures(FetchInfo fetchInfo)
         {
-            fetchInfo = new FetchInfo(fetchInfo); // Copy so we do not modify the original
-            fetchInfo.Extent = ProjectionHelper.Transform(fetchInfo.Extent.ToBoundingBox(), _geometryTransformation, CRS, _provider.CRS).ToMRect();
+            var transformedExtent = ProjectionHelper.Transform(fetchInfo.Extent.ToBoundingBox(), _geometryTransformation, CRS, _provider.CRS).ToMRect();
+            if (transformedExtent == null) return new List<IGeometryFeature>(); // Perhaps Transform should not return null
+            fetchInfo = new FetchInfo(transformedExtent, fetchInfo.Resolution, fetchInfo.CRS, fetchInfo.ChangeType);
+
             var features = _provider.GetFeatures(fetchInfo);
             return ProjectionHelper.Transform(features, _geometryTransformation, _provider.CRS, CRS);
         }
