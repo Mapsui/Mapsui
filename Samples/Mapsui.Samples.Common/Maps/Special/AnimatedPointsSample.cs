@@ -46,7 +46,7 @@ namespace Mapsui.Samples.Common.Maps.Special
             _timer = new Timer(_ => UpdateData(), this, 0, 2000);
         }
 
-        private class DynamicMemoryProvider : MemoryProvider<IGeometryFeature>
+        private class DynamicMemoryProvider : GeometryMemoryProvider<IGeometryFeature>
         {
             private readonly Random _random = new(0);
 
@@ -61,7 +61,7 @@ namespace Mapsui.Samples.Common.Maps.Special
                 {
                     if (count != random) // skip a random element to test robustness
                     {
-                        var feature = new Feature
+                        var feature = new GeometryFeature
                         {
                             Geometry = geometry.ToPoint(),
                             ["ID"] = count.ToString(CultureInfo.InvariantCulture)

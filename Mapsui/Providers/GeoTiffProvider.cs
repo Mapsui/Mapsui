@@ -62,7 +62,7 @@ namespace Mapsui.Providers
 
             var data = ReadImageAsStream(tiffPath, noDataColors);
 
-            _feature = new Feature { Geometry = new Raster(data, _extent.ToBoundingBox()) };
+            _feature = new GeometryFeature { Geometry = new Raster(data, _extent.ToBoundingBox()) };
             _feature.Styles.Add(new VectorStyle());
         }
 

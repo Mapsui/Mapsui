@@ -449,7 +449,7 @@ namespace Mapsui.Providers.Shapefile
                 throw (new ArgumentException("Invalid DataRow requested at index " + oid.ToString(CultureInfo.InvariantCulture)));
             _fs.Seek(_headerLength + oid * _recordLength, 0);
 
-            var dr = new Feature();
+            var dr = new GeometryFeature();
 
             if (_br.ReadChar() == '*') return null; // is record marked deleted?
 

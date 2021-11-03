@@ -47,11 +47,11 @@ namespace Mapsui.Samples.Common.Maps.Special
         {
             var features = new List<IGeometryFeature>
             {
-                new Feature {Geometry = SomeWhereNearHaarlem},
-                new Feature {Geometry = GeometryFromWKT.Parse(WktOfAmsterdam)}
+                new GeometryFeature {Geometry = SomeWhereNearHaarlem},
+                new GeometryFeature {Geometry = GeometryFromWKT.Parse(WktOfAmsterdam)}
             };
 
-            var memoryProvider = new MemoryProvider<IGeometryFeature>(features)
+            var memoryProvider = new GeometryMemoryProvider<IGeometryFeature>(features)
             {
                 CRS = "EPSG:4326" // The DataSource CRS needs to be set
             };

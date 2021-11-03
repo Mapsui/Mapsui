@@ -55,7 +55,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = BitmapSymbolSample.CreateMap();
-            var features = ((MemoryProvider<IGeometryFeature>)((MemoryLayer)map.Layers[0]).DataSource).Features;
+            var features = ((GeometryMemoryProvider<IGeometryFeature>)((MemoryLayer)map.Layers[0]).DataSource).Features;
             foreach (var feature in features)
             {
                 if (feature.Geometry is Geometry geometry)

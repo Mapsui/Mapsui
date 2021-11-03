@@ -20,8 +20,8 @@ namespace Mapsui.UI.Objects
     public class MyLocationLayer : MemoryLayer
     {
         private readonly MapView mapView;
-        private readonly Feature feature;
-        private readonly Feature featureDir;
+        private readonly GeometryFeature feature;
+        private readonly GeometryFeature featureDir;
 
         private static int bitmapMovingId = -1;
         private static int bitmapStillId = -1;
@@ -133,7 +133,7 @@ namespace Mapsui.UI.Objects
                 }
             }
 
-            feature = new Feature
+            feature = new GeometryFeature
             {
                 Geometry = myLocation.ToMapsui().ToPoint(),
                 ["Label"] = "MyLocation moving",
@@ -150,7 +150,7 @@ namespace Mapsui.UI.Objects
                 Opacity = 1,
             });
 
-            featureDir = new Feature
+            featureDir = new GeometryFeature
             {
                 Geometry = myLocation.ToMapsui().ToPoint(),
                 ["Label"] = "My view direction",
@@ -167,7 +167,7 @@ namespace Mapsui.UI.Objects
                 Opacity = 1,
             });
 
-            DataSource = new MemoryProvider<IGeometryFeature>(new List<IGeometryFeature> { featureDir, feature });
+            DataSource = new GeometryMemoryProvider<IGeometryFeature>(new List<IGeometryFeature> { featureDir, feature });
             Style = null;
         }
 

@@ -48,7 +48,7 @@ namespace Mapsui.Providers
     /// Adding points of interest to the map. This is useful for vehicle tracking etc.
     /// </example>
     /// </remarks>
-    public class MemoryProvider<T> : IProvider<T> where T : IFeature
+    public class GeometryMemoryProvider<T> : IProvider<T> where T : IFeature
     {
         /// <summary>
         /// Gets or sets the geometries this data source contains
@@ -64,7 +64,7 @@ namespace Mapsui.Providers
 
         private readonly MRect _boundingBox;
 
-        public MemoryProvider()
+        public GeometryMemoryProvider()
         {
             Features = new List<IGeometryFeature>();
             _boundingBox = GetExtent(Features);
@@ -74,9 +74,9 @@ namespace Mapsui.Providers
         /// Initializes a new instance of the MemoryProvider
         /// </summary>
         /// <param name="geometries">Set of geometries that this data source should contain</param>
-        public MemoryProvider(IEnumerable<IGeometry> geometries)
+        public GeometryMemoryProvider(IEnumerable<IGeometry> geometries)
         {
-            Features = geometries.Select(g => new Feature { Geometry = g }).ToList();
+            Features = geometries.Select(g => new GeometryFeature { Geometry = g }).ToList();
             _boundingBox = GetExtent(Features);
         }
 
@@ -84,7 +84,7 @@ namespace Mapsui.Providers
         /// Initializes a new instance of the MemoryProvider
         /// </summary>
         /// <param name="feature">Feature to be in this dataSource</param>
-        public MemoryProvider(IGeometryFeature feature)
+        public GeometryMemoryProvider(IGeometryFeature feature)
         {
             Features = new List<IGeometryFeature> { feature };
             _boundingBox = GetExtent(Features);
@@ -94,7 +94,7 @@ namespace Mapsui.Providers
         /// Initializes a new instance of the MemoryProvider
         /// </summary>
         /// <param name="wellKnownTextGeometry"><see cref="Geometry"/> as Well-known Text to be included in this data source</param>
-        public MemoryProvider(string wellKnownTextGeometry)
+        public GeometryMemoryProvider(string wellKnownTextGeometry)
             : this(GeometryFromWKT.Parse(wellKnownTextGeometry))
         {
         }
@@ -103,7 +103,7 @@ namespace Mapsui.Providers
         /// Initializes a new instance of the MemoryProvider
         /// </summary>
         /// <param name="features">Features to be included in this dataSource</param>
-        public MemoryProvider(IEnumerable<IGeometryFeature> features)
+        public GeometryMemoryProvider(IEnumerable<IGeometryFeature> features)
         {
             Features = features.ToList();
             _boundingBox = GetExtent(Features);
@@ -113,11 +113,11 @@ namespace Mapsui.Providers
         /// Initializes a new instance of the MemoryProvider
         /// </summary>
         /// <param name="geometry">Geometry to be in this dataSource</param>
-        public MemoryProvider(Geometry geometry)
+        public GeometryMemoryProvider(Geometry geometry)
         {
             Features = new List<IGeometryFeature>
             {
-                new Feature
+                new GeometryFeature
                 {
                     Geometry = geometry
                 }
@@ -129,7 +129,7 @@ namespace Mapsui.Providers
         /// Initializes a new instance of the MemoryProvider
         /// </summary>
         /// <param name="wellKnownBinaryGeometry"><see cref="Geometry"/> as Well-known Binary to be included in this data source</param>
-        public MemoryProvider(byte[] wellKnownBinaryGeometry) : this(GeometryFromWKB.Parse(wellKnownBinaryGeometry))
+        public GeometryMemoryProvider(byte[] wellKnownBinaryGeometry) : this(GeometryFromWKB.Parse(wellKnownBinaryGeometry))
         {
         }
 

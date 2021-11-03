@@ -43,10 +43,10 @@ namespace Mapsui.Samples.Common.Maps
             };
         }
 
-        public static MemoryProvider<IGeometryFeature> CreateMemoryProviderWithDiverseSymbols(MRect envelope, int count = 100)
+        public static GeometryMemoryProvider<IGeometryFeature> CreateMemoryProviderWithDiverseSymbols(MRect envelope, int count = 100)
         {
 
-            return new MemoryProvider<IGeometryFeature>(CreateDiverseFeatures(RandomPointHelper.GenerateRandomPoints(envelope, count)));
+            return new GeometryMemoryProvider<IGeometryFeature>(CreateDiverseFeatures(RandomPointHelper.GenerateRandomPoints(envelope, count)));
         }
 
         private static IEnumerable<IGeometryFeature> CreateDiverseFeatures(IEnumerable<MPoint> randomPoints)
@@ -56,7 +56,7 @@ namespace Mapsui.Samples.Common.Maps
             var styles = CreateDiverseStyles().ToList();
             foreach (var point in randomPoints)
             {
-                var feature = new Feature
+                var feature = new GeometryFeature
                 {
                     Geometry = point.ToPoint(),
                     ["Label"] = counter.ToString()
@@ -124,7 +124,7 @@ namespace Mapsui.Samples.Common.Maps
 
         private static IGeometryFeature CreatePointWithStackedStyles()
         {
-            var feature = new Feature { Geometry = new Point(5000000, -5000000) };
+            var feature = new GeometryFeature { Geometry = new Point(5000000, -5000000) };
 
             feature.Styles.Add(new SymbolStyle
             {

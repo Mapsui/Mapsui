@@ -17,18 +17,18 @@ namespace Mapsui.Fetcher
         private readonly object _lockRoot = new();
         private bool _busy;
         private bool _viewportIsModified;
-        private readonly ITileCache<Feature> _tileCache;
+        private readonly ITileCache<GeometryFeature> _tileCache;
         private readonly IDataFetchStrategy _dataFetchStrategy;
         private readonly ConcurrentQueue<TileInfo> _tilesToFetch = new();
         private readonly ConcurrentHashSet<TileIndex> _tilesInProgress = new();
         private readonly ITileSchema _tileSchema;
         private readonly FetchMachine _fetchMachine;
-        private readonly Func<TileInfo, Feature> _fetchTileAsFeature;
+        private readonly Func<TileInfo, GeometryFeature> _fetchTileAsFeature;
 
         public TileFetchDispatcher(
-            ITileCache<Feature> tileCache,
+            ITileCache<GeometryFeature> tileCache,
             ITileSchema tileSchema,
-            Func<TileInfo, Feature> fetchTileAsFeature,
+            Func<TileInfo, GeometryFeature> fetchTileAsFeature,
             IDataFetchStrategy? dataFetchStrategy = null)
         {
             _tileCache = tileCache;
@@ -94,7 +94,7 @@ namespace Mapsui.Fetcher
             }
         }
 
-        private void FetchCompleted(TileInfo tileInfo, Feature? feature, Exception? exception)
+        private void FetchCompleted(TileInfo tileInfo, GeometryFeature? feature, Exception? exception)
         {
             lock (_lockRoot)
             {

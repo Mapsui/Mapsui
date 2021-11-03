@@ -10,15 +10,15 @@ namespace Mapsui.Samples.Common.Helpers
     {
         private static Random _random = new Random(0);
 
-        public static MemoryProvider<IGeometryFeature> CreateProviderWithRandomPoints(MRect envelope, int count = 25, int seed = 123)
+        public static GeometryMemoryProvider<IGeometryFeature> CreateProviderWithRandomPoints(MRect envelope, int count = 25, int seed = 123)
         {
-            return new MemoryProvider<IGeometryFeature>(CreateFeatures(GenerateRandomPoints(envelope, count, seed)));
+            return new GeometryMemoryProvider<IGeometryFeature>(CreateFeatures(GenerateRandomPoints(envelope, count, seed)));
         }
 
         private static IEnumerable<IGeometryFeature> CreateFeatures(IEnumerable<MPoint> randomPoints)
         {
             var counter = 0;
-            return randomPoints.Select(p => new Feature { Geometry = p.ToPoint(), ["Label"] = counter++.ToString() });
+            return randomPoints.Select(p => new GeometryFeature { Geometry = p.ToPoint(), ["Label"] = counter++.ToString() });
         }
 
         public static IEnumerable<MPoint> GenerateRandomPoints(MRect envelope, int count = 25, int seed = 192)
