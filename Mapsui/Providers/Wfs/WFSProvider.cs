@@ -380,11 +380,11 @@ namespace Mapsui.Providers.Wfs
         /// </summary>
         /// <param name="bbox"></param>
         /// <returns>Features within the specified <see cref="Mapsui.Geometries.BoundingBox"/></returns>
-        public Features? ExecuteIntersectionQuery(BoundingBox? bbox)
+        public IEnumerable<IFeature>? ExecuteIntersectionQuery(BoundingBox? bbox)
         {
             if (_featureTypeInfo == null) return null;
 
-            var features = new Features();
+            var features = new List<IFeature>();
 
             var geometryTypeString = _featureTypeInfo.Geometry.GeometryType;
 

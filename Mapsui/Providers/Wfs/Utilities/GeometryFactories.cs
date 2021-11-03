@@ -98,7 +98,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// Abstract method - overwritten by derived classes for producing instances
         /// derived from <see cref="Mapsui.Geometries.Geometry"/>.
         /// </summary>
-        internal abstract Collection<Geometry> CreateGeometries(Features features);
+        internal abstract Collection<Geometry> CreateGeometries(List<IFeature> features);
 
         /// <summary>
         /// This method parses a coordinates or posList(from 'GetFeature' response). 
@@ -333,7 +333,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// This method produces instances of type <see cref="Mapsui.Geometries.Point"/>.
         /// </summary>
         /// <returns>The created geometries</returns>
-        internal override Collection<Geometry> CreateGeometries(Features features)
+        internal override Collection<Geometry> CreateGeometries(List<IFeature> features)
         {
             IPathNode pointNode = new PathNode(Gmlns, "Point", (NameTable)XmlReader.NameTable);
             var labelValues = new Dictionary<string, string>();
@@ -399,7 +399,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// This method produces instances of type <see cref="Mapsui.Geometries.LineString"/>.
         /// </summary>
         /// <returns>The created geometries</returns>
-        internal override Collection<Geometry> CreateGeometries(Features features)
+        internal override Collection<Geometry> CreateGeometries(List<IFeature> features)
         {
             IPathNode lineStringNode = new PathNode(Gmlns, "LineString", (NameTable)XmlReader.NameTable);
             var labelValues = new Dictionary<string, string>();
@@ -467,7 +467,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// This method produces instances of type <see cref="Mapsui.Geometries.Polygon"/>.
         /// </summary>
         /// <returns>The created geometries</returns>
-        internal override Collection<Geometry> CreateGeometries(Features features)
+        internal override Collection<Geometry> CreateGeometries(List<IFeature> features)
         {
             IPathNode polygonNode = new PathNode(Gmlns, "Polygon", (NameTable)XmlReader.NameTable);
             IPathNode outerBoundaryNode = new PathNode(Gmlns, "outerBoundaryIs", (NameTable)XmlReader.NameTable);
@@ -554,7 +554,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// This method produces instances of type <see cref="Mapsui.Geometries.MultiPoint"/>.
         /// </summary>
         /// <returns>The created geometries</returns>
-        internal override Collection<Geometry> CreateGeometries(Features features)
+        internal override Collection<Geometry> CreateGeometries(List<IFeature> features)
         {
             IPathNode multiPointNode = new PathNode(Gmlns, "MultiPoint", (NameTable)XmlReader.NameTable);
             IPathNode pointMemberNode = new PathNode(Gmlns, "pointMember", (NameTable)XmlReader.NameTable);
@@ -631,7 +631,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// This method produces instances of type <see cref="Mapsui.Geometries.MultiLineString"/>.
         /// </summary>
         /// <returns>The created geometries</returns>
-        internal override Collection<Geometry> CreateGeometries(Features features)
+        internal override Collection<Geometry> CreateGeometries(List<IFeature> features)
         {
             IPathNode multiLineStringNode = new PathNode(Gmlns, "MultiLineString", (NameTable)XmlReader.NameTable);
             IPathNode multiCurveNode = new PathNode(Gmlns, "MultiCurve", (NameTable)XmlReader.NameTable);
@@ -711,7 +711,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// This method produces instances of type <see cref="Mapsui.Geometries.MultiPolygon"/>.
         /// </summary>
         /// <returns>The created geometries</returns>
-        internal override Collection<Geometry> CreateGeometries(Features features)
+        internal override Collection<Geometry> CreateGeometries(List<IFeature> features)
         {
             IPathNode multiPolygonNode = new PathNode(Gmlns, "MultiPolygon", (NameTable)XmlReader.NameTable);
             IPathNode multiSurfaceNode = new PathNode(Gmlns, "MultiSurface", (NameTable)XmlReader.NameTable);
@@ -798,7 +798,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// appropriate geometries.
         /// </summary>
         /// <returns></returns>
-        internal override Collection<Geometry> CreateGeometries(Features features)
+        internal override Collection<Geometry> CreateGeometries(List<IFeature> features)
         {
             GeometryFactory? geomFactory = null;
 

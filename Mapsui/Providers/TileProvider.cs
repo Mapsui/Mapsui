@@ -69,7 +69,7 @@ namespace Mapsui.Providers
 
             WaitHandle.WaitAll(waitHandles.ToArray());
 
-            var features = new Features();
+            var features = new List<IFeature>();
             foreach (var info in infos)
             {
                 var bitmap = _bitmaps.Find(info.Index);

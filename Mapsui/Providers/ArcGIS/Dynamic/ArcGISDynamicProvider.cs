@@ -94,7 +94,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
         {
             //If there are no layers (probably not initialised) return nothing
             if (ArcGisDynamicCapabilities.layers == null)
-                return new Features();
+                return new List<IFeature>();
 
             var features = new List<IGeometryFeature>();
             IRaster? raster = null;

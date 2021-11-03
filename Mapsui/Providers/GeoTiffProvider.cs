@@ -198,7 +198,7 @@ namespace Mapsui.Providers
             {
                 return new[] { _feature };
             }
-            return new Features();
+            return new List<IFeature>();
         }
 
         public MRect GetExtent()
