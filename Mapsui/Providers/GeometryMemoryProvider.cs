@@ -162,15 +162,15 @@ namespace Mapsui.Providers
             return _boundingBox;
         }
 
-        private static MRect GetExtent(IReadOnlyList<IGeometryFeature> features)
+        private static MRect GetExtent(IReadOnlyList<IFeature> features)
         {
             MRect? box = null;
             foreach (var feature in features)
             {
-                if (feature.Geometry.IsEmpty()) continue;
+                if (feature.BoundingBox == null) continue;
                 box = box == null
-                    ? feature.Geometry.BoundingBox.ToMRect()
-                    : box.Join(feature.Geometry.BoundingBox.ToMRect());
+                    ? feature.BoundingBox
+                    : box.Join(feature.BoundingBox);
             }
             return box;
         }
