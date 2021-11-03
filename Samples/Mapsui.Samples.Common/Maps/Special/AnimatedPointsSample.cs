@@ -47,7 +47,7 @@ namespace Mapsui.Samples.Common.Maps.Special
         }
     }
 
-    internal class DynamicMemoryProvider : GeometryMemoryProvider<IPointFeature>
+    internal class DynamicMemoryProvider : MemoryProvider<IPointFeature>
     {
         private readonly Random _random = new(0);
 
