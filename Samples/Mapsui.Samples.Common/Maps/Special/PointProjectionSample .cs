@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using Mapsui.Geometries.WellKnownText;
-using Mapsui.Layers;
+﻿using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Desktop.GeoData;
 using Mapsui.Styles;
