@@ -124,11 +124,11 @@ namespace Mapsui.Samples.Common.Desktop.GeoData
 
         public class City
         {
-            public string? CityName { get; set; }
-            public double Lat { get; set; }
-            public double Long { get; set; }
-            public long Population { get; set; }
-            public string? Country { get; set; }
+            public string CityName { get; init; } = "";
+            public double Lat { get; init; }
+            public double Long { get; init; }
+            public long Population { get; init; }
+            public string? Country { get; init; }
         }
     }
 }
