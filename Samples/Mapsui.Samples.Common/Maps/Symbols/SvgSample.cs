@@ -47,7 +47,7 @@ namespace Mapsui.Samples.Common.Maps
 
         public static GeometryMemoryProvider<IGeometryFeature> CreateMemoryProviderWithDiverseSymbols(MRect envelope, int count = 100)
         {
-            return new GeometryMemoryProvider<IGeometryFeature>(CreateSvgFeatures(RandomPointHelper.GenerateRandomPoints(envelope, count)));
+            return new GeometryMemoryProvider<IGeometryFeature>(CreateSvgFeatures(RandomPointGenerator.GenerateRandomPoints(envelope, count)));
         }
 
         private static IEnumerable<IGeometryFeature> CreateSvgFeatures(IEnumerable<MPoint> randomPoints)

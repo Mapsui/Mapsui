@@ -23,7 +23,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            var provider = RandomPointHelper.CreateProviderWithRandomPoints(map.Envelope);
+            var provider = RandomPointGenerator.CreateProviderWithRandomPoints(map.Envelope);
             map.Layers.Add(CreateStackedLabelLayer(provider, LabelColumn));
             map.Layers.Add(CreateLayer(provider));
             return map;

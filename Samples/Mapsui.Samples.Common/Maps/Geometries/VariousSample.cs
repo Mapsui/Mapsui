@@ -38,7 +38,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new Layer("Style on Layer")
             {
-                DataSource = new GeometryMemoryProvider<IGeometryFeature>(RandomPointHelper.GenerateRandomPoints(envelope, count).Select(p => p.ToPoint())),
+                DataSource = new GeometryMemoryProvider<IGeometryFeature>(RandomPointGenerator.GenerateRandomPoints(envelope, count).Select(p => p.ToPoint())),
                 Style = CreateBitmapStyle("Mapsui.Samples.Common.Images.ic_place_black_24dp.png")
             };
         }
@@ -57,7 +57,7 @@ namespace Mapsui.Samples.Common.Maps
         private static IEnumerable<IGeometryFeature> GenerateRandomFeatures(MRect envelope, int count, IStyle style)
         {
             var result = new List<GeometryFeature>();
-            var points = RandomPointHelper.GenerateRandomPoints(envelope, count, 123);
+            var points = RandomPointGenerator.GenerateRandomPoints(envelope, count, 123);
             foreach (var point in points)
             {
                 result.Add(new GeometryFeature { Geometry = point.ToPoint(), Styles = new List<IStyle> { style } });
