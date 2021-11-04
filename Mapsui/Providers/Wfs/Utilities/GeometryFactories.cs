@@ -21,17 +21,16 @@ namespace Mapsui.Providers.Wfs.Utilities
     {
 
         protected const string Gmlns = "http://www.opengis.net/gml";
-        private readonly NumberFormatInfo _formatInfo = new NumberFormatInfo();
+        private readonly NumberFormatInfo _formatInfo = new();
         private readonly HttpClientUtil _httpClientUtil;
-        private readonly List<IPathNode> _pathNodes = new List<IPathNode>();
-        private int[] _axisOrder;
+        private readonly List<IPathNode> _pathNodes = new();
         protected AlternativePathNodesCollection CoordinatesNode;
         private string _cs;
         protected IPathNode FeatureNode;
         protected XmlReader FeatureReader;
         protected WfsFeatureTypeInfo FeatureTypeInfo;
         protected XmlReader GeomReader;
-        protected Collection<Geometry> Geoms = new Collection<Geometry>();
+        protected Collection<Geometry> Geoms = new();
         protected IPathNode LabelNode;
         protected AlternativePathNodesCollection ServiceExceptionNode;
         private string _ts;
@@ -40,11 +39,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <summary>
         /// Gets or sets the axis order
         /// </summary>
-        internal int[] AxisOrder
-        {
-            get => _axisOrder;
-            set => _axisOrder = value;
-        }
+        internal int[] AxisOrder { get; set; }
 
         /// <summary>
         /// Protected constructor for the abstract class.
@@ -96,7 +91,7 @@ namespace Mapsui.Providers.Wfs.Utilities
 
         /// <summary>
         /// Abstract method - overwritten by derived classes for producing instances
-        /// derived from <see cref="Mapsui.Geometries.Geometry"/>.
+        /// derived from <see cref="Geometry"/>.
         /// </summary>
         internal abstract Collection<Geometry> CreateGeometries(List<IFeature> features);
 
@@ -134,8 +129,8 @@ namespace Mapsui.Providers.Wfs.Utilities
             {
                 var c = new double[2];
                 var values = coordinateValues[i++];
-                c[_axisOrder[0]] = Convert.ToDouble(values[0], _formatInfo);
-                c[_axisOrder[1]] = Convert.ToDouble(values[1], _formatInfo);
+                c[AxisOrder[0]] = Convert.ToDouble(values[0], _formatInfo);
+                c[AxisOrder[1]] = Convert.ToDouble(values[1], _formatInfo);
 
                 var coordinate = new Point(c[0], c[1]);
 
@@ -177,10 +172,9 @@ namespace Mapsui.Providers.Wfs.Utilities
                     {
                         pathNodes.RemoveAt(0);
 
-                        if (pathNodes.Count > 0)
-                            return GetSubReaderOf(reader.ReadSubtree(), null, pathNodes);
-
-                        return reader.ReadSubtree();
+                        return pathNodes.Count > 0
+                            ? GetSubReaderOf(reader.ReadSubtree(), null, pathNodes)
+                            : reader.ReadSubtree();
                     }
 
                     if (labels != null)
@@ -299,7 +293,7 @@ namespace Mapsui.Providers.Wfs.Utilities
     }
 
     /// <summary>
-    /// This class produces instances of type <see cref="Mapsui.Geometries.Point"/>.
+    /// This class produces instances of type <see cref="Point"/>.
     /// The base class is <see cref="GeometryFactory"/>.
     /// </summary>
     internal class PointFactory : GeometryFactory
@@ -330,7 +324,7 @@ namespace Mapsui.Providers.Wfs.Utilities
 
 
         /// <summary>
-        /// This method produces instances of type <see cref="Mapsui.Geometries.Point"/>.
+        /// This method produces instances of type <see cref="Point"/>.
         /// </summary>
         /// <returns>The created geometries</returns>
         internal override Collection<Geometry> CreateGeometries(List<IFeature> features)
@@ -365,7 +359,7 @@ namespace Mapsui.Providers.Wfs.Utilities
     }
 
     /// <summary>
-    /// This class produces instances of type <see cref="Mapsui.Geometries.LineString"/>.
+    /// This class produces instances of type <see cref="LineString"/>.
     /// The base class is <see cref="GeometryFactory"/>.
     /// </summary>
     internal class LineStringFactory : GeometryFactory
@@ -396,7 +390,7 @@ namespace Mapsui.Providers.Wfs.Utilities
 
 
         /// <summary>
-        /// This method produces instances of type <see cref="Mapsui.Geometries.LineString"/>.
+        /// This method produces instances of type <see cref="LineString"/>.
         /// </summary>
         /// <returns>The created geometries</returns>
         internal override Collection<Geometry> CreateGeometries(List<IFeature> features)
@@ -433,7 +427,7 @@ namespace Mapsui.Providers.Wfs.Utilities
     }
 
     /// <summary>
-    /// This class produces instances of type <see cref="Mapsui.Geometries.Polygon"/>.
+    /// This class produces instances of type <see cref="Polygon"/>.
     /// The base class is <see cref="GeometryFactory"/>.
     /// </summary>
     internal class PolygonFactory : GeometryFactory
@@ -464,7 +458,7 @@ namespace Mapsui.Providers.Wfs.Utilities
 
 
         /// <summary>
-        /// This method produces instances of type <see cref="Mapsui.Geometries.Polygon"/>.
+        /// This method produces instances of type <see cref="Polygon"/>.
         /// </summary>
         /// <returns>The created geometries</returns>
         internal override Collection<Geometry> CreateGeometries(List<IFeature> features)
@@ -522,7 +516,7 @@ namespace Mapsui.Providers.Wfs.Utilities
     }
 
     /// <summary>
-    /// This class produces instances of type <see cref="Mapsui.Geometries.MultiPoint"/>.
+    /// This class produces instances of type <see cref="MultiPoint"/>.
     /// The base class is <see cref="GeometryFactory"/>.
     /// </summary>
     internal class MultiPointFactory : GeometryFactory
@@ -551,7 +545,7 @@ namespace Mapsui.Providers.Wfs.Utilities
 
 
         /// <summary>
-        /// This method produces instances of type <see cref="Mapsui.Geometries.MultiPoint"/>.
+        /// This method produces instances of type <see cref="MultiPoint"/>.
         /// </summary>
         /// <returns>The created geometries</returns>
         internal override Collection<Geometry> CreateGeometries(List<IFeature> features)
@@ -599,7 +593,7 @@ namespace Mapsui.Providers.Wfs.Utilities
     }
 
     /// <summary>
-    /// This class produces objects of type <see cref="Mapsui.Geometries.MultiLineString"/>.
+    /// This class produces objects of type <see cref="MultiLineString"/>.
     /// The base class is <see cref="GeometryFactory"/>.
     /// </summary>
     internal class MultiLineStringFactory : GeometryFactory
@@ -628,7 +622,7 @@ namespace Mapsui.Providers.Wfs.Utilities
 
 
         /// <summary>
-        /// This method produces instances of type <see cref="Mapsui.Geometries.MultiLineString"/>.
+        /// This method produces instances of type <see cref="MultiLineString"/>.
         /// </summary>
         /// <returns>The created geometries</returns>
         internal override Collection<Geometry> CreateGeometries(List<IFeature> features)
@@ -681,7 +675,7 @@ namespace Mapsui.Providers.Wfs.Utilities
     }
 
     /// <summary>
-    /// This class produces instances of type <see cref="Mapsui.Geometries.MultiPolygon"/>.
+    /// This class produces instances of type <see cref="MultiPolygon"/>.
     /// The base class is <see cref="GeometryFactory"/>.
     /// </summary>
     internal class MultiPolygonFactory : GeometryFactory
@@ -708,7 +702,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         }
 
         /// <summary>
-        /// This method produces instances of type <see cref="Mapsui.Geometries.MultiPolygon"/>.
+        /// This method produces instances of type <see cref="MultiPolygon"/>.
         /// </summary>
         /// <returns>The created geometries</returns>
         internal override Collection<Geometry> CreateGeometries(List<IFeature> features)

@@ -6,7 +6,7 @@ using Mapsui.Providers;
 
 namespace Mapsui.Samples.Common.Helpers
 {
-    public static class RandomPointHelper
+    public static class RandomPointGenerator
     {
         private static Random _random = new Random(0);
 

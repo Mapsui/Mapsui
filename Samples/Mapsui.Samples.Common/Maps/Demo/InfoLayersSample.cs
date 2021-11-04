@@ -153,7 +153,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new Layer(InfoLayerName)
             {
-                DataSource = RandomPointHelper.CreateProviderWithRandomPoints(envelope, 25, 7),
+                DataSource = RandomPointGenerator.CreateProviderWithRandomPoints(envelope, 25, 7),
                 Style = CreateSymbolStyle(),
                 IsMapInfoLayer = true
             };
