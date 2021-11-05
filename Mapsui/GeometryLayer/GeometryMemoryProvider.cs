@@ -18,14 +18,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.Geometries.WellKnownBinary;
 using Mapsui.Geometries.WellKnownText;
-using Mapsui.GeometryLayer;
 using Mapsui.Layers;
+using Mapsui.Providers;
 
-namespace Mapsui.Providers
+namespace Mapsui.GeometryLayer
 {
     /// <summary>
     /// Data source for storing a limited set of geometries.

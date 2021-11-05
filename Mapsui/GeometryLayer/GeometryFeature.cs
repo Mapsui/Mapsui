@@ -4,7 +4,6 @@ using System.Linq;
 using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.Layers;
-using Mapsui.Providers;
 using Mapsui.Styles;
 
 namespace Mapsui.GeometryLayer

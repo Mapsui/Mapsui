@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Mapsui.Geometries;
+using Mapsui.GeometryLayer;
 using Mapsui.Logging;
 using Mapsui.Providers;
 using Mapsui.Rendering.Skia.Extensions;

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Mapsui.Extensions;
 using Mapsui.Providers;
 using Mapsui.Styles;
 

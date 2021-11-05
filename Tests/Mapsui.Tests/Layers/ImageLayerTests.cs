@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using Mapsui.Extensions;
+using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using NUnit.Framework;

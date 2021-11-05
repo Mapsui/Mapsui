@@ -8,6 +8,7 @@ using System.Linq;
 using System.Resources;
 using System.Runtime.CompilerServices;
 using Mapsui.Extensions;
+using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.UI.Forms.Extensions;
