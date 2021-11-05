@@ -45,21 +45,18 @@ namespace Mapsui.Rendering.Skia
                     dashOffset = vectorStyle.Line.DashOffset;
                 }
 
-                using (var path = lineString.Vertices.ToSkiaPath(viewport, canvas.LocalClipBounds))
-                using (var paint = new SKPaint { IsAntialias = true })
-                {
-                    paint.IsStroke = true;
-                    paint.StrokeWidth = lineWidth;
-                    paint.Color = lineColor.ToSkia(opacity);
-                    paint.StrokeCap = strokeCap.ToSkia();
-                    paint.StrokeJoin = strokeJoin.ToSkia();
-                    paint.StrokeMiter = strokeMiterLimit;
-                    if (strokeStyle != PenStyle.Solid)
-                        paint.PathEffect = strokeStyle.ToSkia(lineWidth, dashArray, dashOffset);
-                    else
-                        paint.PathEffect = null;
-                    canvas.DrawPath(path, paint);
-                }
+                using var path = lineString.Vertices.ToSkiaPath(viewport, canvas.LocalClipBounds);
+                using var paint = new SKPaint { IsAntialias = true };
+                paint.IsStroke = true;
+                paint.StrokeWidth = lineWidth;
+                paint.Color = lineColor.ToSkia(opacity);
+                paint.StrokeCap = strokeCap.ToSkia();
+                paint.StrokeJoin = strokeJoin.ToSkia();
+                paint.StrokeMiter = strokeMiterLimit;
+                paint.PathEffect = strokeStyle != PenStyle.Solid 
+                    ? strokeStyle.ToSkia(lineWidth, dashArray, dashOffset) 
+                    : null;
+                canvas.DrawPath(path, paint);
             }
         }
     }
