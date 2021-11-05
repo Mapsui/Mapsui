@@ -6,14 +6,14 @@ using Mapsui.Styles;
 
 namespace Mapsui.Fetcher
 {
-    internal class FeatureFetcher
+    public class FeatureFetcher // Todo: Make internal
     {
         private readonly FetchInfo _fetchInfo;
         private readonly DataArrivedDelegate _dataArrived;
         private readonly IProvider<IFeature> _provider;
         private readonly long _timeOfRequest;
 
-        internal delegate void DataArrivedDelegate(IEnumerable<IFeature> features, object? state = null);
+        public delegate void DataArrivedDelegate(IEnumerable<IFeature> features, object? state = null);
 
         public FeatureFetcher(FetchInfo fetchInfo, IProvider<IFeature> provider, DataArrivedDelegate dataArrived, long timeOfRequest = default)
         {

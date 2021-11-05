@@ -19,7 +19,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Providers;
 

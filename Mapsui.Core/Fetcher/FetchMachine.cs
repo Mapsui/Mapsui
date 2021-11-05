@@ -2,7 +2,7 @@
 
 namespace Mapsui.Fetcher
 {
-    internal class FetchMachine
+    public class FetchMachine // Todo: Make internal
     {
         private readonly List<FetchWorker> _worker = new();
 
