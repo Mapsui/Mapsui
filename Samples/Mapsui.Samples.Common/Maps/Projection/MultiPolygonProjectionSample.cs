@@ -8,7 +8,7 @@ using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Utilities;
 
-namespace Mapsui.Samples.Common.Maps.Special
+namespace Mapsui.Samples.Common.Maps.Projection
 {
     public class MultiPolygonProjectionSample : ISample
     {

@@ -6,7 +6,7 @@ using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Utilities;
 
-namespace Mapsui.Samples.Common.Maps.Special
+namespace Mapsui.Samples.Common.Maps.Projection
 {
     public class PointProjectionSample : ISample
     {
@@ -57,7 +57,8 @@ namespace Mapsui.Samples.Common.Maps.Special
             {
                 DataSource = dataSource,
                 Name = "Cities",
-                Style = CreateCityStyle()
+                Style = CreateCityStyle(),
+                IsMapInfoLayer = true
             };
         }
 
