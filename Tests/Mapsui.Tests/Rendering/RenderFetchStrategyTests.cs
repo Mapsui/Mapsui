@@ -1,4 +1,5 @@
-﻿using BruTile.Cache;
+﻿using System.IO;
+using BruTile.Cache;
 using BruTile.Predefined;
 using Mapsui.Extensions;
 using Mapsui.Layers;
@@ -37,7 +38,7 @@ namespace Mapsui.Tests.Rendering
                 {
                     if ((tile.Index.Col + tile.Index.Row) % 2 == 0) // Add only 50% of the tiles with the arbitrary rule.
                     {
-                        cache.Add(tile.Index, new RasterFeature { Raster = new MRaster(null, null) });
+                        cache.Add(tile.Index, new RasterFeature { Raster = new MRaster(new MemoryStream(), new MRect(0, 0, 1, 1)) });
                     }
                 }
             }
