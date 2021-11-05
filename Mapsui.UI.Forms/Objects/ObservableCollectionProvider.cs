@@ -29,7 +29,7 @@ namespace Mapsui.UI.Objects
             {
                 foreach (var item in Collection)
                 {
-                    if (fetchInfo.Extent?.Intersects(item.Feature?.BoundingBox) ?? false)
+                    if (fetchInfo.Extent?.Intersects(item.Feature?.Extent) ?? false)
                         list.Add((TU)item.Feature!);
                 }
             }
@@ -50,12 +50,12 @@ namespace Mapsui.UI.Objects
                 {
                     if (item.Feature != null)
                     {
-                        if (item.Feature.BoundingBox != null)
+                        if (item.Feature.Extent != null)
                         {
                             if (extent == null)
-                                extent = new MRect(item.Feature.BoundingBox);
+                                extent = new MRect(item.Feature.Extent);
                             else
-                                extent = extent.Join(item.Feature.BoundingBox);
+                                extent = extent.Join(item.Feature.Extent);
                         }
                     }
                 }

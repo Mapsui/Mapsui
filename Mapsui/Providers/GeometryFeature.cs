@@ -33,7 +33,7 @@ namespace Mapsui.Providers
         public IDictionary<IStyle, object> RenderedGeometry { get; } = new Dictionary<IStyle, object>();
 
 
-        public MRect? BoundingBox => Geometry?.BoundingBox.ToMRect();
+        public MRect? Extent => Geometry?.BoundingBox.ToMRect();
 
         public void Dispose()
         {
