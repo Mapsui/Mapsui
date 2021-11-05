@@ -22,6 +22,7 @@ using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.Geometries.WellKnownBinary;
 using Mapsui.Geometries.WellKnownText;
+using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 
 namespace Mapsui.Providers

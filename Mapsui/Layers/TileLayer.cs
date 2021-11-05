@@ -25,7 +25,7 @@ using BruTile.Cache;
 using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
-using Mapsui.Providers;
+using Mapsui.GeometryLayer;
 using Mapsui.Rendering;
 using Mapsui.Styles;
 using Mapsui.Widgets;

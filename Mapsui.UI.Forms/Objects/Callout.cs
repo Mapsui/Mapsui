@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Mapsui.Extensions;
+using Mapsui.GeometryLayer;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.UI.Forms.Extensions;

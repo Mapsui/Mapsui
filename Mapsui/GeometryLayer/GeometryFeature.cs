@@ -4,9 +4,10 @@ using System.Linq;
 using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.Layers;
+using Mapsui.Providers;
 using Mapsui.Styles;
 
-namespace Mapsui.Providers
+namespace Mapsui.GeometryLayer
 {
     public class GeometryFeature : BaseFeature, IGeometryFeature, IDisposable
     {
@@ -23,9 +24,7 @@ namespace Mapsui.Providers
                 entry => entry.Value);
             Styles = feature.Styles.ToList();
             foreach (var field in feature.Fields)
-            {
                 this[field] = feature[field];
-            }
         }
 
         public IGeometry? Geometry { get; set; }

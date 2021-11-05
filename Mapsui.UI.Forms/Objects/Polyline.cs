@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Mapsui.Geometries;
+using Mapsui.GeometryLayer;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.UI.Forms.Extensions;
