@@ -57,7 +57,8 @@ namespace Mapsui.Samples.Common.Maps.Projection
             {
                 DataSource = dataSource,
                 Name = "Cities",
-                Style = CreateCityStyle()
+                Style = CreateCityStyle(),
+                IsMapInfoLayer = true
             };
         }
 
