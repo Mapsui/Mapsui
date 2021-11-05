@@ -29,6 +29,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using Mapsui.Extensions;
 using Mapsui.Geometries;
+using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Rendering;
 

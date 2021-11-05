@@ -5,6 +5,7 @@ using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.Utilities;
+using Mapsui.GeometryLayer;
 
 namespace Mapsui.Samples.Wpf.Editing.Samples
 {

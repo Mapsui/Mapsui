@@ -24,6 +24,7 @@ using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using Mapsui.GeometryLayer;
 using Mapsui.Providers.Shapefile.Indexing;
 
 namespace Mapsui.Providers.Shapefile

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using Mapsui.Extensions;
 using Mapsui.Geometries;
+using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Styles;
 using Bitmap = System.Drawing.Bitmap;

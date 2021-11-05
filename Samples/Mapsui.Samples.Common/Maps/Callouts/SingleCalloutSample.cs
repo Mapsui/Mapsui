@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Mapsui.Extensions;
+using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Projection;
 using Mapsui.Providers;

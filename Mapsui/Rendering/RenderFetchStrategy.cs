@@ -4,8 +4,8 @@ using BruTile;
 using BruTile.Cache;
 using Mapsui.Extensions;
 using Mapsui.Geometries;
+using Mapsui.GeometryLayer;
 using Mapsui.Layers;
-using Mapsui.Providers;
 
 namespace Mapsui.Rendering
 {

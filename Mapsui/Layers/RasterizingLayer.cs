@@ -5,6 +5,7 @@ using System.Linq;
 using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
+using Mapsui.GeometryLayer;
 using Mapsui.Logging;
 using Mapsui.Providers;
 using Mapsui.Rendering;

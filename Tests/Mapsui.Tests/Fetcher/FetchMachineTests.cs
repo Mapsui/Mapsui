@@ -7,8 +7,8 @@ using BruTile.Predefined;
 using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
+using Mapsui.GeometryLayer;
 using Mapsui.Layers;
-using Mapsui.Providers;
 using Mapsui.Tests.Fetcher.Providers;
 using NUnit.Framework;
 

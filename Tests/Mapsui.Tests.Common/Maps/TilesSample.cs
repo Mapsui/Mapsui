@@ -3,6 +3,7 @@ using System.IO;
 using BruTile;
 using Mapsui.Extensions;
 using Mapsui.Geometries;
+using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
