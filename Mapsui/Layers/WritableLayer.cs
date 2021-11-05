@@ -5,7 +5,6 @@ using ConcurrentCollections;
 using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.GeometryLayer;
-using Mapsui.Providers;
 using Mapsui.Styles;
 
 namespace Mapsui.Layers
@@ -17,7 +16,7 @@ namespace Mapsui.Layers
         public override IEnumerable<IFeature> GetFeatures(MRect? box, double resolution)
         {
             // Safeguard in case MRect is null, most likely due to no features in layer
-            if (box == null) { return new List<IFeature>(); }
+            if (box == null) return new List<IFeature>(); 
             var cache = _cache;
             var biggerBox = box.Grow(SymbolStyle.DefaultWidth * 2 * resolution, SymbolStyle.DefaultHeight * 2 * resolution);
             var result = cache.Where(f => biggerBox.Intersects(f.Geometry?.BoundingBox.ToMRect()));
@@ -73,7 +72,7 @@ namespace Mapsui.Layers
             }
         }
 
-        public IFeature Find(IFeature feature)
+        public IFeature? Find(IFeature feature)
         {
             return _cache.FirstOrDefault(f => f == feature);
         }
@@ -88,8 +87,9 @@ namespace Mapsui.Layers
         public bool TryRemove(IGeometryFeature feature, Func<IGeometryFeature, IGeometryFeature, bool>? compare = null)
         {
             if (compare == null) return _cache.TryRemove(feature);
-
-            return _cache.TryRemove(_cache.FirstOrDefault(f => compare(f, feature)));
+            var item = _cache.FirstOrDefault(f => compare(f, feature));
+            if (item == null) return false;
+            return _cache.TryRemove(item);
         }
     }
 }
