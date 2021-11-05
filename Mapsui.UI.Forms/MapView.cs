@@ -787,21 +787,21 @@ namespace Mapsui.UI.Forms
 
             if (IsZoomButtonVisible)
             {
-                _mapZoomInButton!.Envelope = new MRect(newX, newY, newX + ButtonSize, newY + ButtonSize);
+                _mapZoomInButton!.Envelope = new MRectangle(newX, newY, newX + ButtonSize, newY + ButtonSize);
                 newY += ButtonSize;
-                _mapZoomOutButton!.Envelope = new MRect(newX, newY, newX + ButtonSize, newY + ButtonSize);
+                _mapZoomOutButton!.Envelope = new MRectangle(newX, newY, newX + ButtonSize, newY + ButtonSize);
                 newY += ButtonSize + ButtonSpacing;
             }
 
             if (IsMyLocationButtonVisible)
             {
-                _mapMyLocationButton!.Envelope = new MRect(newX, newY, newX + ButtonSize, newY + ButtonSize);
+                _mapMyLocationButton!.Envelope = new MRectangle(newX, newY, newX + ButtonSize, newY + ButtonSize);
                 newY += ButtonSize + ButtonSpacing;
             }
 
             if (IsNorthingButtonVisible)
             {
-                _mapNorthingButton!.Envelope = new MRect(newX, newY, newX + ButtonSize, newY + ButtonSize);
+                _mapNorthingButton!.Envelope = new MRectangle(newX, newY, newX + ButtonSize, newY + ButtonSize);
             }
 
             RefreshGraphics();
@@ -853,7 +853,7 @@ namespace Mapsui.UI.Forms
             var result = new ButtonWidget
             {
                 Picture = picture,
-                Envelope = new MRect(x, y, x + ButtonSize, y + ButtonSize),
+                Envelope = new MRectangle(x, y, x + ButtonSize, y + ButtonSize),
                 Rotation = 0,
                 Enabled = true,
             };

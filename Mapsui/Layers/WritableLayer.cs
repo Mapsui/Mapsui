@@ -14,7 +14,7 @@ namespace Mapsui.Layers
     {
         private readonly ConcurrentHashSet<IGeometryFeature> _cache = new();
 
-        public override IEnumerable<IFeature> GetFeatures(MRect? box, double resolution)
+        public override IEnumerable<IFeature> GetFeatures(MRectangle? box, double resolution)
         {
             // Safeguard in case MRect is null, most likely due to no features in layer
             if (box == null) { return new List<IFeature>(); }
@@ -24,7 +24,7 @@ namespace Mapsui.Layers
             return result;
         }
 
-        private MRect? GetExtent()
+        private MRectangle? GetExtent()
         {
             // todo: Calculate extent only once. Use a _modified field to determine when this is needed.
 
@@ -43,7 +43,7 @@ namespace Mapsui.Layers
             return new BoundingBox(minX, minY, maxX, maxY).ToMRect();
         }
 
-        public override MRect Envelope => GetExtent();
+        public override MRectangle Envelope => GetExtent();
 
         public override void RefreshData(FetchInfo fetchInfo)
         {

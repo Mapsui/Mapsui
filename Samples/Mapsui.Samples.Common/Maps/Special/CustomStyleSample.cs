@@ -73,7 +73,7 @@ namespace Mapsui.Samples.Common.Maps
             return map;
         }
 
-        private static ILayer CreateStylesLayer(MRect envelope)
+        private static ILayer CreateStylesLayer(MRectangle envelope)
         {
             return new MemoryLayer
             {
@@ -84,7 +84,7 @@ namespace Mapsui.Samples.Common.Maps
             };
         }
 
-        public static GeometryMemoryProvider<IGeometryFeature> CreateMemoryProviderWithDiverseSymbols(MRect envelope, int count = 100)
+        public static GeometryMemoryProvider<IGeometryFeature> CreateMemoryProviderWithDiverseSymbols(MRectangle envelope, int count = 100)
         {
 
             return new GeometryMemoryProvider<IGeometryFeature>(CreateDiverseFeatures(RandomPointGenerator.GenerateRandomPoints(envelope, count)));

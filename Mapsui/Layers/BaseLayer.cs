@@ -19,7 +19,7 @@ namespace Mapsui.Layers
         private double _opacity;
         private IStyle? _style;
         private object _tag;
-        private MRect _envelope;
+        private MRectangle _envelope;
 
         /// <summary>
         /// Get a layer's styles
@@ -163,7 +163,7 @@ namespace Mapsui.Layers
         /// <summary>
         /// Returns the envelope of all available data in the layer
         /// </summary>
-        public virtual MRect Envelope
+        public virtual MRectangle Envelope
         {
             get => _envelope;
             protected set
@@ -183,7 +183,7 @@ namespace Mapsui.Layers
         public bool IsMapInfoLayer { get; set; }
 
         /// <inheritdoc />
-        public abstract IEnumerable<IFeature> GetFeatures(MRect box, double resolution);
+        public abstract IEnumerable<IFeature> GetFeatures(MRectangle box, double resolution);
 
         /// <inheritdoc />
         public abstract void RefreshData(FetchInfo fetchInfo);

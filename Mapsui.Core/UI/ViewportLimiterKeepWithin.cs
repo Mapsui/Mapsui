@@ -21,7 +21,7 @@ namespace Mapsui.UI
         /// Sets the limit to which the user can pan the map.
         /// If PanLimits is not set, Map.Extent will be used as restricted extent.
         /// </summary>
-        public MRect? PanLimits { get; set; }
+        public MRectangle? PanLimits { get; set; }
 
         /// <summary>
         /// Pair of the limits for the resolutions (smallest and biggest). The resolution is kept 
@@ -38,14 +38,14 @@ namespace Mapsui.UI
             return new MinMax(mostZoomedOut, mostZoomedIn);
         }
 
-        public void Limit(IViewport viewport, IReadOnlyList<double> mapResolutions, MRect mapEnvelope)
+        public void Limit(IViewport viewport, IReadOnlyList<double> mapResolutions, MRectangle mapEnvelope)
         {
             viewport.SetResolution(LimitResolution(viewport.Resolution, viewport.Width, viewport.Height, mapResolutions, mapEnvelope));
             LimitExtent(viewport, mapEnvelope);
         }
 
         public double LimitResolution(double resolution, double screenWidth, double screenHeight,
-            IReadOnlyList<double> mapResolutions, MRect mapEnvelope)
+            IReadOnlyList<double> mapResolutions, MRectangle mapEnvelope)
         {
             var zoomLimits = ZoomLimits ?? GetExtremes(mapResolutions);
             var panLimit = PanLimits ?? mapEnvelope;
@@ -61,12 +61,12 @@ namespace Mapsui.UI
             return resolution;
         }
 
-        private static double CalculateResolutionAtWhichMapFillsViewport(double screenWidth, double screenHeight, MRect mapEnvelope)
+        private static double CalculateResolutionAtWhichMapFillsViewport(double screenWidth, double screenHeight, MRectangle mapEnvelope)
         {
             return Math.Min(mapEnvelope.Width / screenWidth, mapEnvelope.Height / screenHeight);
         }
 
-        public void LimitExtent(IViewport viewport, MRect mapEnvelope)
+        public void LimitExtent(IViewport viewport, MRectangle mapEnvelope)
         {
             var maxExtent = PanLimits ?? mapEnvelope;
             if (maxExtent == null)

@@ -40,7 +40,7 @@ namespace Mapsui.Samples.Common.Maps
             return map;
         }
 
-        private static ILayer CreateAtlasLayer(MRect envelope)
+        private static ILayer CreateAtlasLayer(MRectangle envelope)
         {
             return new MemoryLayer
             {
@@ -51,7 +51,7 @@ namespace Mapsui.Samples.Common.Maps
             };
         }
 
-        public static GeometryMemoryProvider<IGeometryFeature> CreateMemoryProviderWithDiverseSymbols(MRect envelope, int count = 100)
+        public static GeometryMemoryProvider<IGeometryFeature> CreateMemoryProviderWithDiverseSymbols(MRectangle envelope, int count = 100)
         {
             var points = RandomPointGenerator.GenerateRandomPoints(envelope, count).Select(p => p.ToPoint());
             return new GeometryMemoryProvider<IGeometryFeature>(CreateAtlasFeatures(points));

@@ -34,7 +34,7 @@ namespace Mapsui
     {
         public event PropertyChangedEventHandler? ViewportChanged;
 
-        private readonly MRect _extent;
+        private readonly MRectangle _extent;
         private MQuad _windowExtent;
         private double _height;
         private double _resolution = Constants.DefaultResolution;
@@ -48,7 +48,7 @@ namespace Mapsui
         /// </summary>
         public Viewport()
         {
-            _extent = new MRect(0, 0, 0, 0);
+            _extent = new MRectangle(0, 0, 0, 0);
             _windowExtent = new MQuad();
         }
 
@@ -63,7 +63,7 @@ namespace Mapsui
             _height = viewport.Height;
             _rotation = viewport.Rotation;
             _center = new MReadOnlyPoint(viewport.Center);
-            if (viewport.Extent != null) _extent = new MRect(viewport.Extent);
+            if (viewport.Extent != null) _extent = new MRectangle(viewport.Extent);
             if (viewport.WindowExtent != null) _windowExtent = new MQuad(viewport.WindowExtent);
 
             UpdateExtent();
@@ -135,7 +135,7 @@ namespace Mapsui
             !double.IsNaN(_rotation) && _rotation > Constants.Epsilon && _rotation < 360 - Constants.Epsilon;
 
         /// <inheritdoc />
-        public MRect Extent
+        public MRectangle Extent
         {
             get
             {
@@ -332,7 +332,7 @@ namespace Mapsui
             ViewportChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public static Viewport Create(MRect extent, double resolution)
+        public static Viewport Create(MRectangle extent, double resolution)
         {
             return new Viewport
             {

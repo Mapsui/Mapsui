@@ -21,9 +21,9 @@ namespace Mapsui.Tests.Layers
                 throw new Exception(ExceptionMessage);
             }
 
-            public MRect GetExtent()
+            public MRectangle GetExtent()
             {
-                return new MRect(-1, -1, 0, 0);
+                return new MRectangle(-1, -1, 0, 0);
             }
         }
 
@@ -43,7 +43,7 @@ namespace Mapsui.Tests.Layers
                 waitHandle.Go();
             };
 
-            var fetchInfo = new FetchInfo(new MRect(-1, -1, 0, 0), 1, null, ChangeType.Discrete);
+            var fetchInfo = new FetchInfo(new MRectangle(-1, -1, 0, 0), 1, null, ChangeType.Discrete);
 
             // act
             map.RefreshData(fetchInfo);

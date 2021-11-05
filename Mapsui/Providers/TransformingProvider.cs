@@ -30,7 +30,7 @@ namespace Mapsui.Providers
             return ProjectionHelper.Transform(features, _geometryTransformation, _provider.CRS, CRS);
         }
 
-        public MRect GetExtent()
+        public MRectangle GetExtent()
         {
             // This transforms the full extent of the source. Usually the full extent of the source does not change,
             // so perhaps this should be calculated just once. Then again, there are probably situations where it does

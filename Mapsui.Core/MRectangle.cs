@@ -28,9 +28,9 @@ namespace Mapsui
     /// <remarks>
     ///     The Bounding Box represents a box whose sides are parallel to the two axes of the coordinate system.
     /// </remarks>
-    public class MRect : IEquatable<MRect>
+    public class MRectangle : IEquatable<MRectangle>
     {
-        public MRect(MRect rect) : this(
+        public MRectangle(MRectangle rect) : this(
             rect.Min.X,
             rect.Min.Y,
             rect.Max.X,
@@ -47,7 +47,7 @@ namespace Mapsui
         /// <param name="minY">bottom</param>
         /// <param name="maxX">right</param>
         /// <param name="maxY">top</param>
-        public MRect(double minX, double minY, double maxX, double maxY)
+        public MRectangle(double minX, double minY, double maxX, double maxY)
         {
             Min = new MPoint(minX, minY);
             Max = new MPoint(maxX, maxY);
@@ -59,13 +59,13 @@ namespace Mapsui
         /// </summary>
         /// <param name="minPoint">Lower left corner</param>
         /// <param name="maxPoint">Upper right corner</param>
-        public MRect(MPoint minPoint, MPoint maxPoint)
+        public MRectangle(MPoint minPoint, MPoint maxPoint)
             : this(minPoint.X, minPoint.Y, maxPoint.X, maxPoint.Y) { }
 
         /// <summary>
         ///     Initializes a new Bounding Box based on the bounds from a set of bounding boxes
         /// </summary>
-        public MRect(IEnumerable<MRect> rects)
+        public MRectangle(IEnumerable<MRectangle> rects)
         {
             foreach (var rect in rects)
             {
@@ -168,9 +168,9 @@ namespace Mapsui
         /// <summary>
         ///     Checks whether the values of this instance is equal to the values of another instance.
         /// </summary>
-        /// <param name="other"><see cref="MRect" /> to compare to.</param>
+        /// <param name="other"><see cref="MRectangle" /> to compare to.</param>
         /// <returns>True if equal</returns>
-        public bool Equals(MRect? other)
+        public bool Equals(MRectangle? other)
         {
             if (other == null) return false;
 
@@ -180,7 +180,7 @@ namespace Mapsui
         }
 
         /// <summary>
-        ///     Moves/translates the <see cref="MRect" /> along the the specified vector
+        ///     Moves/translates the <see cref="MRectangle" /> along the the specified vector
         /// </summary>
         /// <param name="vector">Offset vector</param>
         public void Offset(MPoint vector)
@@ -222,7 +222,7 @@ namespace Mapsui
         /// </summary>
         /// <param name="box"></param>
         /// <returns></returns>
-        public bool Intersects(MRect? box)
+        public bool Intersects(MRectangle? box)
         {
             if (box == null) return false;
             return !((box.Min.X > Max.X) ||
@@ -232,13 +232,13 @@ namespace Mapsui
         }
 
         /// <summary>
-        ///     Returns true if this instance touches the <see cref="MRect" />
+        ///     Returns true if this instance touches the <see cref="MRectangle" />
         /// </summary>
         /// <param name="r">
-        ///     <see cref="MRect" />
+        ///     <see cref="MRectangle" />
         /// </param>
         /// <returns>True it touches</returns>
-        public bool Touches(MRect r)
+        public bool Touches(MRectangle r)
         {
             for (uint cIndex = 0; cIndex < 2; cIndex++)
             {
@@ -250,13 +250,13 @@ namespace Mapsui
         }
 
         /// <summary>
-        ///     Returns true if this instance contains the <see cref="MRect" />
+        ///     Returns true if this instance contains the <see cref="MRectangle" />
         /// </summary>
         /// <param name="r">
-        ///     <see cref="MRect" />
+        ///     <see cref="MRectangle" />
         /// </param>
         /// <returns>True it contains</returns>
-        public bool Contains(MRect r)
+        public bool Contains(MRectangle r)
         {
             for (uint cIndex = 0; cIndex < 2; cIndex++)
             {
@@ -296,7 +296,7 @@ namespace Mapsui
         /// </summary>
         /// <param name="r">MRect</param>
         /// <returns>Area</returns>
-        public double GetIntersectingArea(MRect r)
+        public double GetIntersectingArea(MRectangle r)
         {
             uint cIndex;
             for (cIndex = 0; cIndex < 2; cIndex++)
@@ -320,11 +320,11 @@ namespace Mapsui
         /// </summary>
         /// <param name="box">Rect to join with</param>
         /// <returns>Rect containing both rects</returns>
-        public MRect Join(MRect? box)
+        public MRectangle Join(MRectangle? box)
         {
             if (box == null)
                 return Clone();
-            return new MRect(Math.Min(Min.X, box.Min.X), Math.Min(Min.Y, box.Min.Y),
+            return new MRectangle(Math.Min(Min.X, box.Min.X), Math.Min(Min.Y, box.Min.Y),
                 Math.Max(Max.X, box.Max.X), Math.Max(Max.Y, box.Max.Y));
         }
 
@@ -334,7 +334,7 @@ namespace Mapsui
         /// <param name="box1"></param>
         /// <param name="box2"></param>
         /// <returns></returns>
-        public static MRect? Join(MRect? box1, MRect? box2)
+        public static MRectangle? Join(MRectangle? box1, MRectangle? box2)
         {
             if ((box1 == null) && (box2 == null))
                 return null;
@@ -344,11 +344,11 @@ namespace Mapsui
         }
 
         /// <summary>
-        ///     Computes the joined <see cref="MRect" /> of an array of rects.
+        ///     Computes the joined <see cref="MRectangle" /> of an array of rects.
         /// </summary>
         /// <param name="boxes">Boxes to join</param>
         /// <returns>Combined MRect</returns>
-        public static MRect? Join(MRect[]? boxes)
+        public static MRectangle? Join(MRectangle[]? boxes)
         {
             if (boxes == null) return null;
             if (boxes.Length == 1) return boxes[0];
@@ -364,7 +364,7 @@ namespace Mapsui
         ///     Increases the size of the rect by the given amount in all directions
         /// </summary>
         /// <param name="amount">Amount to grow in all directions</param>
-        public MRect Grow(double amount)
+        public MRectangle Grow(double amount)
         {
             var box = Clone();
             box.Min.X -= amount;
@@ -380,7 +380,7 @@ namespace Mapsui
         /// </summary>
         /// <param name="amountInX">Amount to grow in horizontal direction</param>
         /// <param name="amountInY">Amount to grow in vertical direction</param>
-        public MRect Grow(double amountInX, double amountInY)
+        public MRectangle Grow(double amountInX, double amountInY)
         {
             var box = Clone();
             box.Min.X -= amountInX;
@@ -396,7 +396,7 @@ namespace Mapsui
         /// </summary>
         /// <param name="factor"></param>
         /// <returns></returns>
-        public MRect Multiply(double factor)
+        public MRectangle Multiply(double factor)
         {
             if (factor < 0)
             {
@@ -449,7 +449,7 @@ namespace Mapsui
             return true;
         }
 
-        public virtual double Distance(MRect box)
+        public virtual double Distance(MRectangle box)
         {
             var ret = 0.0;
             for (uint cIndex = 0; cIndex < 2; cIndex++)
@@ -490,9 +490,9 @@ namespace Mapsui
         ///     Creates a copy of the MRect
         /// </summary>
         /// <returns></returns>
-        public MRect Clone()
+        public MRectangle Clone()
         {
-            return new MRect(Min.X, Min.Y, Max.X, Max.Y);
+            return new MRectangle(Min.X, Min.Y, Max.X, Max.Y);
         }
 
         /// <summary>
@@ -511,7 +511,7 @@ namespace Mapsui
         /// <returns></returns>
         public override bool Equals(object obj)
         {
-            var box = obj as MRect;
+            var box = obj as MRectangle;
             if (obj == null) return false;
             return Equals(box);
         }

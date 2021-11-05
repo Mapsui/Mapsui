@@ -34,7 +34,7 @@ namespace Mapsui.Samples.Common.Maps
             return map;
         }
 
-        private static ILayer CreateSvgLayer(MRect envelope)
+        private static ILayer CreateSvgLayer(MRectangle envelope)
         {
             return new MemoryLayer
             {
@@ -45,7 +45,7 @@ namespace Mapsui.Samples.Common.Maps
             };
         }
 
-        public static GeometryMemoryProvider<IGeometryFeature> CreateMemoryProviderWithDiverseSymbols(MRect envelope, int count = 100)
+        public static GeometryMemoryProvider<IGeometryFeature> CreateMemoryProviderWithDiverseSymbols(MRectangle envelope, int count = 100)
         {
             return new GeometryMemoryProvider<IGeometryFeature>(CreateSvgFeatures(RandomPointGenerator.GenerateRandomPoints(envelope, count)));
         }

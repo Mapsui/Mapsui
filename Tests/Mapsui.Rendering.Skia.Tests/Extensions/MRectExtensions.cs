@@ -2,7 +2,7 @@
 {
     public static class MRectExtensions
     {
-        public static Viewport ToViewport(this MRect rect, double width)
+        public static Viewport ToViewport(this MRectangle rect, double width)
         {
             return new Viewport
             {

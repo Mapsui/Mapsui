@@ -215,7 +215,7 @@ namespace Mapsui.Providers.ArcGIS.Image
             return url.ToString();
         }
 
-        public MRect? GetExtent()
+        public MRectangle? GetExtent()
         {
             return null;
         }

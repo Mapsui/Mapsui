@@ -112,9 +112,9 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             return features;
         }
 
-        public MRect GetExtent()
+        public MRectangle GetExtent()
         {
-            return new MRect(ArcGisDynamicCapabilities.initialExtent.xmin, ArcGisDynamicCapabilities.initialExtent.ymin, ArcGisDynamicCapabilities.initialExtent.xmax, ArcGisDynamicCapabilities.initialExtent.ymax);
+            return new MRectangle(ArcGisDynamicCapabilities.initialExtent.xmin, ArcGisDynamicCapabilities.initialExtent.ymin, ArcGisDynamicCapabilities.initialExtent.xmax, ArcGisDynamicCapabilities.initialExtent.ymax);
         }
 
         private void CapabilitiesHelperCapabilitiesFailed(object sender, EventArgs e)

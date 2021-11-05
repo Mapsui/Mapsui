@@ -108,7 +108,7 @@ namespace Mapsui.Layers
         /// Returns the extent of the layer
         /// </summary>
         /// <returns>Bounding box corresponding to the extent of the features in the layer</returns>
-        public override MRect Envelope
+        public override MRectangle Envelope
         {
             get
             {
@@ -120,7 +120,7 @@ namespace Mapsui.Layers
         }
 
         /// <inheritdoc />
-        public override IEnumerable<IFeature> GetFeatures(MRect extent, double resolution)
+        public override IEnumerable<IFeature> GetFeatures(MRectangle extent, double resolution)
         {
             return _cache.ToList();
         }

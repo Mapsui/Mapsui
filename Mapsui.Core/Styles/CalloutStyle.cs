@@ -65,7 +65,7 @@ namespace Mapsui.Styles
         private float _arrowPosition = 0.5f;
         private float _rectRadius = 4f;
         private float _shadowWidth = 2f;
-        private MRect _padding = new(3f, 3f, 3f, 3f);
+        private MRectangle _padding = new(3f, 3f, 3f, 3f);
         private Color _color = Color.Black;
         private Color _backgroundColor = Color.White;
         private float _strokeWidth = 1f;
@@ -268,7 +268,7 @@ namespace Mapsui.Styles
         /// <summary>
         /// Padding around content of Callout
         /// </summary>
-        public MRect Padding
+        public MRectangle Padding
         {
             get => _padding;
             set

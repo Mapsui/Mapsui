@@ -239,11 +239,11 @@ namespace Mapsui
         }
 
         /// <summary>
-        ///     Returns the distance between this point and a <see cref="Mapsui.MRect" />
+        ///     Returns the distance between this point and a <see cref="Mapsui.MRectangle" />
         /// </summary>
         /// <param name="box"></param>
         /// <returns></returns>
-        public double Distance(MRect box)
+        public double Distance(MRectangle box)
         {
             return box.Distance(this);
         }
@@ -252,7 +252,7 @@ namespace Mapsui
         ///     The minimum bounding box for this Geometry.
         /// </summary>
         /// <returns></returns>
-        public MRect MRect => new(X, Y, X, Y);
+        public MRectangle MRect => new(X, Y, X, Y);
 
         /// <summary>
         ///     Calculates a new point by rotating this point clockwise about the specified center point

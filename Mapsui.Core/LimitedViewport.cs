@@ -18,7 +18,7 @@ namespace Mapsui
         public event PropertyChangedEventHandler? ViewportChanged;
         public MReadOnlyPoint Center => _viewport.Center;
         public double Resolution => _viewport.Resolution;
-        public MRect Extent => _viewport.Extent;
+        public MRectangle Extent => _viewport.Extent;
         public double Width => _viewport.Width;
         public double Height => _viewport.Height;
         public double Rotation => _viewport.Rotation;

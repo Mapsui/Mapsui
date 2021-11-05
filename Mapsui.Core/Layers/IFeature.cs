@@ -8,6 +8,6 @@ namespace Mapsui.Layers
         ICollection<IStyle> Styles { get; }
         object? this[string key] { get; set; }
         IEnumerable<string> Fields { get; }
-        MRect? Extent { get; }
+        MRectangle? Extent { get; }
     }
 }

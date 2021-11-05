@@ -41,7 +41,7 @@ namespace Mapsui.Providers
 
         private const string WorldExtension = ".tfw";
         private readonly IFeature _feature;
-        private readonly MRect _extent;
+        private readonly MRectangle _extent;
 
         public GeoTiffProvider(string tiffPath, List<Color>? noDataColors = null)
         {
@@ -66,13 +66,13 @@ namespace Mapsui.Providers
             _feature.Styles.Add(new VectorStyle());
         }
 
-        private static MRect CalculateExtent(TiffProperties tiffProperties, WorldProperties worldProperties)
+        private static MRectangle CalculateExtent(TiffProperties tiffProperties, WorldProperties worldProperties)
         {
             var minX = worldProperties.XCenterOfUpperLeftPixel - worldProperties.PixelSizeX * 0.5;
             var maxX = minX + worldProperties.PixelSizeX * tiffProperties.Width + worldProperties.PixelSizeX * 0.5;
             var maxY = worldProperties.YCenterOfUpperLeftPixel + worldProperties.PixelSizeY * 0.5;
             var minY = maxY + worldProperties.PixelSizeY * tiffProperties.Height - worldProperties.PixelSizeY * 0.5;
-            return new MRect(minX, minY, maxX, maxY);
+            return new MRectangle(minX, minY, maxX, maxY);
         }
 
         private static MemoryStream ReadImageAsStream(string tiffPath, List<Color>? noDataColors)
@@ -201,7 +201,7 @@ namespace Mapsui.Providers
             return new List<IFeature>();
         }
 
-        public MRect GetExtent()
+        public MRectangle GetExtent()
         {
             return _extent;
         }

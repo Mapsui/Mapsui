@@ -26,7 +26,7 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
             var offsetY = GetOffsetY(backRect.Height, hyperlink.MarginY, hyperlink.VerticalAlignment, viewport.Height);
             backRect.Offset(offsetX, offsetY);
             canvas.DrawRoundRect(backRect, hyperlink.CornerRadius, hyperlink.CornerRadius, backPaint);
-            hyperlink.Envelope = backRect.ToMRect();
+            hyperlink.Envelope = backRect.ToMRectangle();
             // To position the text within the backRect correct using the textRect's offset.
             canvas.DrawText(hyperlink.Text,
                 offsetX - textRect.Left + hyperlink.PaddingX,

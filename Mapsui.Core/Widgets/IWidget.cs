@@ -10,7 +10,7 @@
         /// <summary>
         /// The hit box of the widget. This needs to be updated from the widget renderer.
         /// </summary>
-        MRect? Envelope { get; set; }
+        MRectangle? Envelope { get; set; }
 
         /// <summary>
         /// Function, which is called, when a Widget is hidden

@@ -55,7 +55,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
     /// </summary>
     public class QuadTree : IDisposable
     {
-        private MRect _box;
+        private MRectangle _box;
         private QuadTree? _child0;
         private QuadTree? _child1;
 
@@ -172,7 +172,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
             var node = new QuadTree
             {
                 _depth = depth,
-                Box = new MRect(br.ReadDouble(), br.ReadDouble(), br.ReadDouble(), br.ReadDouble())
+                Box = new MRectangle(br.ReadDouble(), br.ReadDouble(), br.ReadDouble(), br.ReadDouble())
             };
             var isLeaf = br.ReadBoolean();
             if (isLeaf)
@@ -183,7 +183,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
                 {
                     var box = new BoxObjects
                     {
-                        Box = new MRect(
+                        Box = new MRectangle(
                             br.ReadDouble(), br.ReadDouble(),
                             br.ReadDouble(), br.ReadDouble()),
                         Id = (uint)br.ReadInt32()
@@ -266,7 +266,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
         /// <summary>
         /// Gets/sets the Axis Aligned Bounding Box
         /// </summary>
-        public MRect Box
+        public MRectangle Box
         {
             get => _box;
             set => _box = value;
@@ -311,7 +311,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
         /// Calculate the floating point error metric 
         /// </summary>
         /// <returns></returns>
-        public double ErrorMetric(MRect box)
+        public double ErrorMetric(MRectangle box)
         {
             var temp = new MPoint(1, 1) + (box.Max - box.Min);
             return temp.X * temp.Y;
@@ -321,7 +321,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
         /// Searches the tree and looks for intersections with the BoundingBox 'bbox'
         /// </summary>
         /// <param name="box">BoundingBox to intersect with</param>
-        public Collection<uint> Search(MRect box)
+        public Collection<uint> Search(MRectangle box)
         {
             var objectlist = new Collection<uint>();
             IntersectTreeRecursive(box, this, ref objectlist);
@@ -334,7 +334,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
         /// <param name="box">BoundingBox to intersect with</param>
         /// <param name="node">Node to search from</param>
         /// <param name="list">List of found intersections</param>
-        private void IntersectTreeRecursive(MRect box, QuadTree node, ref Collection<uint> list)
+        private void IntersectTreeRecursive(MRectangle box, QuadTree node, ref Collection<uint> list)
         {
             if (node.IsLeaf) //Leaf has been reached
             {
@@ -364,7 +364,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
             /// <summary>
             /// BoundingBox
             /// </summary>
-            public MRect Box;
+            public MRectangle Box;
 
             /// <summary>
             /// Feature ID

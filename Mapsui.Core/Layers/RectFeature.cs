@@ -2,7 +2,7 @@
 {
     public class RectFeature : BaseFeature, IFeature
     {
-        public MRect? Rect { get; set; }
-        public MRect? Extent => Rect;
+        public MRectangle? Rect { get; set; }
+        public MRectangle? Extent => Rect;
     }
 }

@@ -136,13 +136,13 @@ namespace Mapsui
         /// Gets the extent of the map based on the extent of all the layers in the layers collection
         /// </summary>
         /// <returns>Full map extent</returns>
-        public MRect? Envelope
+        public MRectangle? Envelope
         {
             get
             {
                 if (_layers.Count == 0) return null;
 
-                MRect? bbox = null;
+                MRectangle? bbox = null;
                 foreach (var layer in _layers)
                 {
                     bbox = bbox == null ? layer.Envelope : bbox.Join(layer.Envelope);

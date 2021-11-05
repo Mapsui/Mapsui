@@ -419,7 +419,7 @@ namespace Mapsui.Widgets.ScaleBar
         /// posY2 as top position of lower scalebar text
         /// </returns>
         public (float posX1, float posY1, float posX2, float posY2) GetScaleBarTextPositions(IReadOnlyViewport viewport,
-            MRect textSize, MRect textSize1, MRect textSize2, float stroke)
+            MRectangle textSize, MRectangle textSize1, MRectangle textSize2, float stroke)
         {
             var drawNoSecondScaleBar = ScaleBarMode == ScaleBarMode.Single || (ScaleBarMode == ScaleBarMode.Both && SecondaryUnitConverter == null);
 

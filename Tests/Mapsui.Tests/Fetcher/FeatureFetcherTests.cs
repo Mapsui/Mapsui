@@ -15,7 +15,7 @@ namespace Mapsui.Tests.Fetcher
         public void TestFeatureFetcherDelay()
         {
             // arrange
-            var extent = new MRect(0, 0, 10, 10);
+            var extent = new MRectangle(0, 0, 10, 10);
             var layer = new Layer
             {
                 DataSource = new GeometryMemoryProvider<IGeometryFeature>(GenerateRandomPoints(extent, 25))
@@ -45,7 +45,7 @@ namespace Mapsui.Tests.Fetcher
             Assert.IsFalse(notifications[1]);
         }
 
-        private static IEnumerable<IGeometry> GenerateRandomPoints(MRect envelope, int count)
+        private static IEnumerable<IGeometry> GenerateRandomPoints(MRectangle envelope, int count)
         {
             var random = new Random();
             var result = new List<IGeometry>();

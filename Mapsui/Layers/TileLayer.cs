@@ -43,7 +43,7 @@ namespace Mapsui.Layers
         private readonly int _maxExtraTiles;
         private int _numberTilesNeeded;
         private readonly TileFetchDispatcher _tileFetchDispatcher;
-        private readonly MRect _envelope;
+        private readonly MRectangle _envelope;
 
         /// <summary>
         /// Create tile layer for given tile source
@@ -90,10 +90,10 @@ namespace Mapsui.Layers
         public override IReadOnlyList<double> Resolutions => _tileSource?.Schema?.Resolutions.Select(r => r.Value.UnitsPerPixel).ToList();
 
         /// <inheritdoc />
-        public override MRect Envelope => _envelope;
+        public override MRectangle Envelope => _envelope;
 
         /// <inheritdoc />
-        public override IEnumerable<IFeature> GetFeatures(MRect box, double resolution)
+        public override IEnumerable<IFeature> GetFeatures(MRectangle box, double resolution)
         {
             if (_tileSource?.Schema == null) return Enumerable.Empty<IFeature>();
             UpdateMemoryCacheMinAndMax();

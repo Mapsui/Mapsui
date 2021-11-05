@@ -35,7 +35,7 @@ namespace Mapsui
         /// Gets the extent of the map based on the extent of all the layers in the layers collection
         /// </summary>
         /// <returns>Full map extent</returns>
-        MRect Envelope { get; }
+        MRectangle Envelope { get; }
 
         /// <summary>
         /// List of all native resolutions of this map

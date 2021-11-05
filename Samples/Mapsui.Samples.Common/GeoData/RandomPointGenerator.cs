@@ -10,7 +10,7 @@ namespace Mapsui.Samples.Common.Helpers
     {
         private static Random _random = new Random(0);
 
-        public static MemoryProvider<IPointFeature> CreateProviderWithRandomPoints(MRect envelope, int count = 25, int seed = 123)
+        public static MemoryProvider<IPointFeature> CreateProviderWithRandomPoints(MRectangle envelope, int count = 25, int seed = 123)
         {
             return new MemoryProvider<IPointFeature>(CreateFeatures(GenerateRandomPoints(envelope, count, seed)));
         }
@@ -21,7 +21,7 @@ namespace Mapsui.Samples.Common.Helpers
             return randomPoints.Select(p => new PointFeature { Point = p, ["Label"] = counter++.ToString() });
         }
 
-        public static IEnumerable<MPoint> GenerateRandomPoints(MRect envelope, int count = 25, int seed = 192)
+        public static IEnumerable<MPoint> GenerateRandomPoints(MRectangle envelope, int count = 25, int seed = 192)
         {
             _random = new Random(seed);
 

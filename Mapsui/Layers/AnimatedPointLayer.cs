@@ -28,9 +28,9 @@ namespace Mapsui.Layers
             });
         }
 
-        public override MRect Envelope => _dataSource?.GetExtent();
+        public override MRectangle Envelope => _dataSource?.GetExtent();
 
-        public override IEnumerable<IFeature> GetFeatures(MRect extent, double resolution)
+        public override IEnumerable<IFeature> GetFeatures(MRectangle extent, double resolution)
         {
             return _animatedFeatures.GetFeatures();
         }

@@ -68,7 +68,7 @@ namespace Mapsui.Layers
             Delayer.MillisecondsToWait = delayBeforeRasterize;
         }
 
-        public override MRect Envelope => _layer.Envelope;
+        public override MRectangle Envelope => _layer.Envelope;
 
         public ILayer ChildLayer => _layer;
 
@@ -157,7 +157,7 @@ namespace Mapsui.Layers
 
         public static double SymbolSize { get; set; } = 64;
 
-        public override IEnumerable<IFeature> GetFeatures(MRect box, double resolution)
+        public override IEnumerable<IFeature> GetFeatures(MRectangle box, double resolution)
         {
             if (box == null) throw new ArgumentNullException(nameof(box));
 
@@ -202,7 +202,7 @@ namespace Mapsui.Layers
             if (_layer is IAsyncDataFetcher asyncLayer) asyncLayer.ClearCache();
         }
 
-        private static Viewport CreateViewport(MRect extent, double resolution, double renderResolutionMultiplier,
+        private static Viewport CreateViewport(MRectangle extent, double resolution, double renderResolutionMultiplier,
             double overscan)
         {
             var renderResolution = resolution / renderResolutionMultiplier;

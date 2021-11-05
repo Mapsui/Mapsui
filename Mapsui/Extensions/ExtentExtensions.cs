@@ -14,9 +14,9 @@ namespace Mapsui.Extensions
                 extent.MaxY);
         }
 
-        public static MRect ToMRect(this Extent extent)
+        public static MRectangle ToMRect(this Extent extent)
         {
-            return new MRect(
+            return new MRectangle(
                 extent.MinX,
                 extent.MinY,
                 extent.MaxX,

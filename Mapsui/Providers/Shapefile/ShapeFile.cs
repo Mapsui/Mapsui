@@ -148,7 +148,7 @@ namespace Mapsui.Providers.Shapefile
         /// <returns>true if this feature should be included, false if it should be filtered</returns>
         public delegate bool FilterMethod(IFeature dr);
 
-        private MRect? _envelope;
+        private MRectangle? _envelope;
         private int _featureCount;
         private readonly bool _fileBasedIndex;
         private string _filename;
@@ -357,7 +357,7 @@ namespace Mapsui.Providers.Shapefile
         /// </remarks>
         /// <param name="bbox"></param>
         /// <returns></returns>
-        public Collection<IGeometry> GetGeometriesInView(MRect bbox)
+        public Collection<IGeometry> GetGeometriesInView(MRectangle bbox)
         {
             lock (_syncRoot)
             {
@@ -393,7 +393,7 @@ namespace Mapsui.Providers.Shapefile
         /// </summary>
         /// <param name="bbox"></param>
         /// <returns></returns>
-        public Collection<uint> GetObjectIDsInView(MRect bbox)
+        public Collection<uint> GetObjectIDsInView(MRectangle bbox)
         {
             lock (_syncRoot)
             {
@@ -411,7 +411,7 @@ namespace Mapsui.Providers.Shapefile
 
         }
 
-        private Collection<uint> GetObjectIDsInViewPrivate(MRect bbox)
+        private Collection<uint> GetObjectIDsInViewPrivate(MRectangle bbox)
         {
             if (!_isOpen)
                 throw new ApplicationException("An attempt was made to read from a closed data source");
@@ -465,7 +465,7 @@ namespace Mapsui.Providers.Shapefile
         /// Returns the extent of the data source
         /// </summary>
         /// <returns></returns>
-        public MRect GetExtent()
+        public MRectangle GetExtent()
         {
             lock (_syncRoot)
             {
@@ -525,7 +525,7 @@ namespace Mapsui.Providers.Shapefile
 
             //Read the spatial bounding box of the contents
             _brShapeIndex.BaseStream.Seek(36, 0); //seek to box
-            _envelope = new MRect(_brShapeIndex.ReadDouble(), _brShapeIndex.ReadDouble(), _brShapeIndex.ReadDouble(),
+            _envelope = new MRectangle(_brShapeIndex.ReadDouble(), _brShapeIndex.ReadDouble(), _brShapeIndex.ReadDouble(),
                                         _brShapeIndex.ReadDouble());
 
             _brShapeIndex.Close();
@@ -682,7 +682,7 @@ namespace Mapsui.Providers.Shapefile
         /// Reads all BoundingBoxes of features in the shapefile. This is used for spatial indexing.
         /// </summary>
         /// <returns></returns>
-        private IEnumerable<MRect> GetAllFeatureBoundingBoxes()
+        private IEnumerable<MRectangle> GetAllFeatureBoundingBoxes()
         {
             var offsetOfRecord = ReadIndex(); //Read the whole .idx file
 
@@ -695,7 +695,7 @@ namespace Mapsui.Providers.Shapefile
                     {
                         var x = _brShapeFile.ReadDouble();
                         var y = _brShapeFile.ReadDouble();
-                        yield return new MRect(x, y, x, y);
+                        yield return new MRectangle(x, y, x, y);
                     }
                 }
             }
@@ -705,7 +705,7 @@ namespace Mapsui.Providers.Shapefile
                 {
                     _fsShapeFile.Seek(offsetOfRecord[a] + 8, 0); //skip record number and content length
                     if ((ShapeType)_brShapeFile.ReadInt32() != ShapeType.Null)
-                        yield return new MRect(_brShapeFile.ReadDouble(), _brShapeFile.ReadDouble(),
+                        yield return new MRectangle(_brShapeFile.ReadDouble(), _brShapeFile.ReadDouble(),
                                                      _brShapeFile.ReadDouble(), _brShapeFile.ReadDouble());
                 }
             }

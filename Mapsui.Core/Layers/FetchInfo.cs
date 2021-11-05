@@ -2,7 +2,7 @@
 {
     public class FetchInfo
     {
-        public FetchInfo(MRect extent, double resolution, string? crs = null, ChangeType changeType = ChangeType.Discrete)
+        public FetchInfo(MRectangle extent, double resolution, string? crs = null, ChangeType changeType = ChangeType.Discrete)
         {
             Extent = extent;
             Resolution = resolution;
@@ -12,13 +12,13 @@
 
         public FetchInfo(FetchInfo fetchInfo)
         {
-            Extent = new MRect(fetchInfo.Extent);
+            Extent = new MRectangle(fetchInfo.Extent);
             Resolution = fetchInfo.Resolution;
             CRS = fetchInfo.CRS;
             ChangeType = fetchInfo.ChangeType;
         }
 
-        public MRect Extent { get; }
+        public MRectangle Extent { get; }
         public double Resolution { get; }
         public string? CRS { get; }
         public ChangeType ChangeType { get; }

@@ -10,9 +10,9 @@ namespace Mapsui.Rendering.Skia.Extensions
             return new BoundingBox(rect.Left, rect.Top, rect.Right, rect.Bottom);
         }
 
-        public static MRect ToMRect(this SKRect rect)
+        public static MRectangle ToMRectangle(this SKRect rect)
         {
-            return new MRect(rect.Left, rect.Top, rect.Right, rect.Bottom);
+            return new MRectangle(rect.Left, rect.Top, rect.Right, rect.Bottom);
         }
     }
 }

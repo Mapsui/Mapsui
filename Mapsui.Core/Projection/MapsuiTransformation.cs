@@ -31,7 +31,7 @@ namespace Mapsui.Projection
             (point.X, point.Y) = transformFunc(point.X, point.Y);
         }
 
-        public void Transform(string fromCRS, string toCRS, MRect rect)
+        public void Transform(string fromCRS, string toCRS, MRectangle rect)
         {
             Transform(rect.Min, _toLonLat[fromCRS]);
             Transform(rect.Min, _fromLonLat[toCRS]);

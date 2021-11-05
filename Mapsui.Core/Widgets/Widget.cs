@@ -8,7 +8,7 @@ namespace Mapsui.Widgets
         public VerticalAlignment VerticalAlignment { get; set; } = VerticalAlignment.Bottom;
         public float MarginX { get; set; } = 2;
         public float MarginY { get; set; } = 2;
-        public MRect? Envelope { get; set; }
+        public MRectangle? Envelope { get; set; }
         public bool Enabled { get; set; } = true;
 
         public float CalculatePositionX(float left, float right, float width)

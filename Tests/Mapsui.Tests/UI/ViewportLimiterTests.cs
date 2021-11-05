@@ -14,7 +14,7 @@ namespace Mapsui.Tests.UI
             // viewport.Center is (0, 0) at this point
             var limiter = new ViewportLimiter
             {
-                PanLimits = new MRect(20, 40, 120, 140)  // Minimal X value is 20, Minimal Y value is 40
+                PanLimits = new MRectangle(20, 40, 120, 140)  // Minimal X value is 20, Minimal Y value is 40
             };
 
             // act 

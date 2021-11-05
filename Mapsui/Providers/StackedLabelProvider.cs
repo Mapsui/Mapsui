@@ -35,7 +35,7 @@ namespace Mapsui.Providers
             return GetFeaturesInView(fetchInfo.Resolution, _labelStyle, features, _rectangleLine, _rectangleFill);
         }
 
-        public MRect GetExtent()
+        public MRectangle GetExtent()
         {
             return _provider.GetExtent();
         }
@@ -127,7 +127,7 @@ namespace Mapsui.Providers
             };
         }
 
-        private static MRect? GrowBox(MRect box, double resolution)
+        private static MRectangle? GrowBox(MRectangle box, double resolution)
         {
             const int symbolSize = 32; // todo: determine margin by symbol size
             const int boxMargin = symbolSize / 2;
@@ -176,7 +176,7 @@ namespace Mapsui.Providers
 
         private class Cluster
         {
-            public MRect? Box { get; set; }
+            public MRectangle? Box { get; set; }
             public IList<IFeature>? Features { get; set; }
         }
     }

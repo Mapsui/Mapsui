@@ -494,9 +494,9 @@ namespace Mapsui.Providers.Wfs
             }
         }
 
-        public MRect GetExtent()
+        public MRectangle GetExtent()
         {
-            return new MRect(_featureTypeInfo.BBox.MinLong,
+            return new MRectangle(_featureTypeInfo.BBox.MinLong,
                                    _featureTypeInfo.BBox.MinLat,
                                    _featureTypeInfo.BBox.MaxLong,
                                    _featureTypeInfo.BBox.MaxLat);

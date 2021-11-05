@@ -37,12 +37,12 @@ namespace Mapsui.UI.Objects
             return list;
         }
 
-        public MRect? GetExtent()
+        public MRectangle? GetExtent()
         {
             if (Collection == null || Collection.Count == 0)
                 return null;
 
-            MRect? extent = null;
+            MRectangle? extent = null;
 
             lock (_syncRoot)
             {
@@ -53,7 +53,7 @@ namespace Mapsui.UI.Objects
                         if (item.Feature.Extent != null)
                         {
                             if (extent == null)
-                                extent = new MRect(item.Feature.Extent);
+                                extent = new MRectangle(item.Feature.Extent);
                             else
                                 extent = extent.Join(item.Feature.Extent);
                         }

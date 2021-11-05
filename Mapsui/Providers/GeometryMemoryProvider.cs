@@ -62,7 +62,7 @@ namespace Mapsui.Providers
         /// </summary>
         public string CRS { get; set; } = "";
 
-        private readonly MRect _boundingBox;
+        private readonly MRectangle _boundingBox;
 
         public GeometryMemoryProvider()
         {
@@ -162,14 +162,14 @@ namespace Mapsui.Providers
         /// BoundingBox of data set
         /// </summary>
         /// <returns>BoundingBox</returns>
-        public MRect GetExtent()
+        public MRectangle GetExtent()
         {
             return _boundingBox;
         }
 
-        private static MRect GetExtent(IReadOnlyList<IFeature> features)
+        private static MRectangle GetExtent(IReadOnlyList<IFeature> features)
         {
-            MRect? box = null;
+            MRectangle? box = null;
             foreach (var feature in features)
             {
                 if (feature.Extent == null) continue;

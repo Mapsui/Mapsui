@@ -36,7 +36,7 @@ namespace Mapsui.Providers
         private readonly MemoryCache<byte[]> _bitmaps = new(100, 200);
         private readonly List<TileIndex> _queue = new();
 
-        public MRect GetExtent()
+        public MRectangle GetExtent()
         {
             return _source.Schema.Extent.ToMRect();
         }

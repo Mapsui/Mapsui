@@ -61,7 +61,7 @@ namespace Mapsui.Layers
         /// <summary>
         /// Gets the MRect of the entire layer
         /// </summary>
-        MRect Envelope { get; }
+        MRectangle Envelope { get; }
 
         /// <summary>
         /// Gets or sets rendering style of layer
@@ -84,7 +84,7 @@ namespace Mapsui.Layers
         /// <param name="extent">Bounding box</param>
         /// <param name="resolution">Resolution of viewport</param>
         /// <returns></returns>
-        IEnumerable<IFeature> GetFeatures(MRect extent, double resolution);
+        IEnumerable<IFeature> GetFeatures(MRectangle extent, double resolution);
 
         /// <summary>
         /// Attribution for layer

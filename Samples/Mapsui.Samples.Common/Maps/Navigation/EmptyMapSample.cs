@@ -16,7 +16,7 @@ namespace Mapsui.Samples.Common.Maps.Navigation
         {
             return new Map
             {
-                Home = n => n.NavigateTo(new MRect(-180, -90, 180, 90))
+                Home = n => n.NavigateTo(new MRectangle(-180, -90, 180, 90))
             };
         }
     }

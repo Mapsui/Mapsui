@@ -30,7 +30,7 @@ namespace Mapsui.Samples.Common.Maps
             return map;
         }
 
-        private static ILayer CreateMutatingTriangleLayer(MRect envelope)
+        private static ILayer CreateMutatingTriangleLayer(MRectangle envelope)
         {
             var layer = new MemoryLayer();
 
@@ -55,7 +55,7 @@ namespace Mapsui.Samples.Common.Maps
             return layer;
         }
 
-        public static IEnumerable<Point> GenerateRandomPoints(MRect envelope, int count = 25)
+        public static IEnumerable<Point> GenerateRandomPoints(MRectangle envelope, int count = 25)
         {
             var result = new List<Point>();
 

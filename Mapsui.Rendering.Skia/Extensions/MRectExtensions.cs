@@ -4,7 +4,7 @@ namespace Mapsui.Rendering.Skia.Extensions
 {
     public static class MRectExtensions
     {
-        public static SKRect ToSkia(this MRect rect)
+        public static SKRect ToSkia(this MRectangle rect)
         {
             return new SKRect((float)rect.MinX, (float)rect.MinY, (float)rect.MaxX, (float)rect.MaxY);
         }

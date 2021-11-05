@@ -19,10 +19,10 @@ namespace Mapsui.Samples.CustomWidget
             canvas.DrawRect(widget.Envelope.ToSkia(), new SKPaint { Color = customWidget.Color.ToSkia(0.5f) });
         }
 
-        private static MRect ToEnvelope(CustomWidget customWidget)
+        private static MRectangle ToEnvelope(CustomWidget customWidget)
         {
             // A better implementation would take into account widget alignment
-            return new MRect(customWidget.MarginX, customWidget.MarginY,
+            return new MRectangle(customWidget.MarginX, customWidget.MarginY,
                 customWidget.MarginX + customWidget.Width,
                 customWidget.MarginY + customWidget.Height);
         }

@@ -87,7 +87,7 @@ namespace Mapsui.Layers
             StartNewFetch(_fetchInfo);
         }
 
-        public override IEnumerable<IFeature> GetFeatures(MRect box, double resolution)
+        public override IEnumerable<IFeature> GetFeatures(MRectangle box, double resolution)
         {
             var result = new List<IFeature>();
             foreach (var featureSet in _sets.OrderBy(c => c.TimeRequested))
@@ -97,7 +97,7 @@ namespace Mapsui.Layers
             return result;
         }
 
-        private static IEnumerable<IFeature> GetFeaturesInView(MRect box, IEnumerable<IGeometryFeature> features)
+        private static IEnumerable<IFeature> GetFeaturesInView(MRectangle box, IEnumerable<IGeometryFeature> features)
         {
             foreach (var feature in features)
             {

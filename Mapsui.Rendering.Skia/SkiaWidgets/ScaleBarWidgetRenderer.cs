@@ -91,7 +91,7 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
 
             if (!points.Any()) throw new NotImplementedException($"A {nameof(ScaleBarWidget)} can not be drawn without line positions");
 
-            var envelop = new MRect(points.Select(p => p.MRect));
+            var envelop = new MRectangle(points.Select(p => p.MRect));
             envelop = envelop.Grow(scaleBar.StrokeWidthHalo * 0.5f * scaleBar.Scale);
 
             // Draw text
@@ -103,13 +103,13 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
             scaleBarText1 ??= string.Empty;
             _paintScaleTextStroke.MeasureText(scaleBarText1, ref textSize1);
 
-            var (posX1, posY1, posX2, posY2) = scaleBar.GetScaleBarTextPositions(viewport, textSize.ToMRect(), textSize1.ToMRect(), textSize2.ToMRect(), scaleBar.StrokeWidthHalo);
+            var (posX1, posY1, posX2, posY2) = scaleBar.GetScaleBarTextPositions(viewport, textSize.ToMRectangle(), textSize1.ToMRectangle(), textSize2.ToMRectangle(), scaleBar.StrokeWidthHalo);
 
             // Now draw text
             canvas.DrawText(scaleBarText1, posX1, posY1 - textSize1.Top, _paintScaleTextStroke);
             canvas.DrawText(scaleBarText1, posX1, posY1 - textSize1.Top, _paintScaleText);
 
-            envelop = envelop?.Join(new MRect(posX1, posY1, posX1 + textSize1.Width, posY1 + textSize1.Height));
+            envelop = envelop?.Join(new MRectangle(posX1, posY1, posX1 + textSize1.Width, posY1 + textSize1.Height));
 
             if (scaleBar.ScaleBarMode == ScaleBarMode.Both && scaleBar.SecondaryUnitConverter != null)
             {
@@ -120,7 +120,7 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
                 canvas.DrawText(scaleBarText2, posX2, posY2 - textSize2.Top, _paintScaleTextStroke);
                 canvas.DrawText(scaleBarText2, posX2, posY2 - textSize2.Top, _paintScaleText);
 
-                envelop = envelop?.Join(new MRect(posX2, posY2, posX2 + textSize2.Width, posY2 + textSize2.Height));
+                envelop = envelop?.Join(new MRectangle(posX2, posY2, posX2 + textSize2.Width, posY2 + textSize2.Height));
             }
 
             scaleBar.Envelope = envelop;

@@ -31,11 +31,11 @@ namespace Mapsui.Samples.Common.Maps.Navigation
             return map;
         }
 
-        private static MRect GetLimitsOfMadagaskar()
+        private static MRectangle GetLimitsOfMadagaskar()
         {
             var (minX, minY) = SphericalMercator.FromLonLat(41.8, -27.2);
             var (maxX, maxY) = SphericalMercator.FromLonLat(52.5, -11.6);
-            return new MRect(minX, minY, maxX, maxY);
+            return new MRectangle(minX, minY, maxX, maxY);
         }
     }
 }

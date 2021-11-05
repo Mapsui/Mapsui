@@ -113,14 +113,14 @@ namespace Mapsui
         ///     Calculates a new bounding box that encompasses all 4 vertices.
         /// </summary>
         /// <returns>Returns the calculate bounding box</returns>
-        public MRect ToBoundingBox()
+        public MRectangle ToBoundingBox()
         {
             var minX = Vertices.Select(p => p.X).Min();
             var minY = Vertices.Select(p => p.Y).Min();
             var maxX = Vertices.Select(p => p.X).Max();
             var maxY = Vertices.Select(p => p.Y).Max();
 
-            return new MRect(minX, minY, maxX, maxY);
+            return new MRectangle(minX, minY, maxX, maxY);
         }
 
         /// <summary>
