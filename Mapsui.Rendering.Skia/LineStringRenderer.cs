@@ -14,10 +14,10 @@ namespace Mapsui.Rendering.Skia
         {
             if (style is LabelStyle labelStyle)
             {
-                if (feature.BoundingBox == null)
+                if (feature.Extent == null)
                     return;
 
-                var center = viewport.WorldToScreen(feature.BoundingBox.Centroid);
+                var center = viewport.WorldToScreen(feature.Extent.Centroid);
                 LabelRenderer.Draw(canvas, labelStyle, feature, center.ToPoint(), opacity);
             }
             else

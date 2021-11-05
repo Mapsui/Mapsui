@@ -58,7 +58,7 @@ namespace Mapsui.Providers
             fetchInfo = new FetchInfo(fetchInfo);
             // Use a larger extent so that symbols partially outside of the extent are included
             var biggerBox = fetchInfo.Extent.Grow(fetchInfo.Resolution * SymbolSize * 0.5);
-            var grownFeatures = features.Where(f => f != null && f.BoundingBox.Intersects(biggerBox));
+            var grownFeatures = features.Where(f => f != null && f.Extent.Intersects(biggerBox));
 
             return grownFeatures.ToList(); 
         }
@@ -88,10 +88,10 @@ namespace Mapsui.Providers
             MRect? box = null;
             foreach (var feature in features)
             {
-                if (feature.BoundingBox == null) continue;
+                if (feature.Extent == null) continue;
                 box = box == null
-                    ? feature.BoundingBox
-                    : box.Join(feature.BoundingBox);
+                    ? feature.Extent
+                    : box.Join(feature.Extent);
             }
             return box;
         }
