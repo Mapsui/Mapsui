@@ -170,6 +170,10 @@ namespace Mapsui.Rendering.Skia
                 PointRenderer.Draw(canvas, viewport, style, pointFeature, pointFeature.Point.X, pointFeature.Point.Y, _symbolCache,
                    layerOpacity * style.Opacity);
             }
+            else if (feature is RectFeature rectFeature)
+            {
+                RectRenderer.Draw(canvas, viewport, style, rectFeature, layerOpacity * style.Opacity);
+            }
         }
 
         private void RenderGeometry(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, float layerOpacity,

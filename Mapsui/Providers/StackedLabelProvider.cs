@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
@@ -12,10 +11,10 @@ namespace Mapsui.Providers
         private const int SymbolSize = 32; // todo: determine margin by symbol size
         private const int BoxMargin = SymbolSize / 2;
 
-        private readonly IProvider<IGeometryFeature> _provider;
+        private readonly IProvider<IFeature> _provider;
         private readonly LabelStyle _labelStyle;
 
-        public StackedLabelProvider(IProvider<IGeometryFeature> provider, LabelStyle labelStyle, Pen? rectangleLine = null,
+        public StackedLabelProvider(IProvider<IFeature> provider, LabelStyle labelStyle, Pen? rectangleLine = null,
             Brush? rectangleFill = null)
         {
             _provider = provider;
@@ -41,8 +40,8 @@ namespace Mapsui.Providers
             return _provider.GetExtent();
         }
 
-        private static List<GeometryFeature> GetFeaturesInView(double resolution, LabelStyle labelStyle,
-            IEnumerable<IGeometryFeature> features, Pen line, Brush fill)
+        private static List<IFeature> GetFeaturesInView(double resolution, LabelStyle labelStyle,
+            IEnumerable<IFeature> features, Pen line, Brush fill)
         {
             var margin = resolution * 50;
             var clusters = new List<Cluster>();
@@ -51,7 +50,7 @@ namespace Mapsui.Providers
 
             const int textHeight = 18;
 
-            var results = new List<GeometryFeature>();
+            var results = new List<IFeature>();
 
             foreach (var cluster in clusters)
             {
@@ -59,7 +58,7 @@ namespace Mapsui.Providers
 
                 var offsetY = double.NaN;
 
-                var orderedFeatures = cluster.Features.OrderBy(f => f.Geometry.BoundingBox.Centroid.Y);
+                var orderedFeatures = cluster.Features.OrderBy(f => f.BoundingBox.Centroid.Y);
 
                 foreach (var pointFeature in orderedFeatures)
                 {
@@ -85,21 +84,21 @@ namespace Mapsui.Providers
             return offsetY;
         }
 
-        private static Point CalculatePosition(Cluster cluster)
+        private static MPoint CalculatePosition(Cluster cluster)
         {
             // Since the box can be rotated, find the minimal Y value of all 4 corners
             var rotatedBox = cluster.Box.Rotate(0); // todo: Add rotation '-viewport.Rotation'
             var minY = rotatedBox.Vertices.Select(v => v.Y).Min();
-            var position = new Point(cluster.Box.Centroid.X, minY);
+            var position = new MPoint(cluster.Box.Centroid.X, minY);
             return position;
         }
 
-        private static GeometryFeature CreateLabelFeature(Point position, LabelStyle labelStyle, double offsetY,
+        private static IFeature CreateLabelFeature(MPoint position, LabelStyle labelStyle, double offsetY,
             string text)
         {
-            return new GeometryFeature
+            return new PointFeature
             {
-                Geometry = position,
+                Point = position,
                 Styles = new[]
                 {
                     new LabelStyle(labelStyle)
@@ -111,12 +110,12 @@ namespace Mapsui.Providers
             };
         }
 
-        private static GeometryFeature CreateBoxFeature(double resolution, Cluster cluster, Pen line,
+        private static IFeature CreateBoxFeature(double resolution, Cluster cluster, Pen line,
             Brush fill)
         {
-            return new GeometryFeature
+            return new RectFeature
             {
-                Geometry = ToPolygon(GrowBox(cluster.Box, resolution)),
+                Rect = GrowBox(cluster.Box, resolution),
                 Styles = new[]
                 {
                     new VectorStyle
@@ -128,18 +127,7 @@ namespace Mapsui.Providers
             };
         }
 
-        private static Polygon ToPolygon(BoundingBox? box)
-        {
-            return new Polygon
-            {
-                ExteriorRing = new LinearRing(new[]
-                {
-                    box.BottomLeft, box.TopLeft, box.TopRight, box.BottomRight, box.BottomLeft
-                })
-            };
-        }
-
-        private static BoundingBox? GrowBox(BoundingBox box, double resolution)
+        private static MRect? GrowBox(MRect box, double resolution)
         {
             const int symbolSize = 32; // todo: determine margin by symbol size
             const int boxMargin = symbolSize / 2;
@@ -148,7 +136,7 @@ namespace Mapsui.Providers
 
         private static void ClusterFeatures(
             ICollection<Cluster> clusters,
-            IEnumerable<IGeometryFeature> features,
+            IEnumerable<IFeature> features,
             double minDistance,
             IStyle layerStyle,
             double resolution)
@@ -156,7 +144,7 @@ namespace Mapsui.Providers
             var style = layerStyle;
 
             // todo: This method should repeated several times until there are no more merges
-            foreach (var feature in features.OrderBy(f => f.Geometry.BoundingBox.Centroid.Y))
+            foreach (var feature in features.OrderBy(f => f.BoundingBox.Centroid.Y))
             {
                 if (layerStyle is IThemeStyle themeStyle)
                     style = themeStyle.GetStyle(feature);
@@ -168,10 +156,10 @@ namespace Mapsui.Providers
 
                 var found = false;
                 foreach (var cluster in clusters)
-                    if (cluster.Box.Grow(minDistance).Contains(feature.Geometry.BoundingBox.Centroid))
+                    if (cluster.Box.Grow(minDistance).Contains(feature.BoundingBox.Centroid))
                     {
                         cluster.Features.Add(feature);
-                        cluster.Box = cluster.Box.Join(feature.Geometry.BoundingBox);
+                        cluster.Box = cluster.Box.Join(feature.BoundingBox);
                         found = true;
                         break;
                     }
@@ -180,16 +168,16 @@ namespace Mapsui.Providers
 
                 clusters.Add(new Cluster
                 {
-                    Box = feature.Geometry.BoundingBox.Clone(),
-                    Features = new List<IGeometryFeature> { feature }
+                    Box = feature.BoundingBox.Clone(),
+                    Features = new List<IFeature> { feature }
                 });
             }
         }
 
         private class Cluster
         {
-            public BoundingBox? Box { get; set; }
-            public IList<IGeometryFeature>? Features { get; set; }
+            public MRect? Box { get; set; }
+            public IList<IFeature>? Features { get; set; }
         }
     }
 }

@@ -14,5 +14,15 @@ namespace Mapsui.Extensions
         {
             return new Extent(rect.MinX, rect.MinY, rect.MaxX, rect.MaxY);
         }
+
+        public static Polygon ToPolygon(this MRect rect)
+        {
+            return new Polygon(new LinearRing(new[] {
+                rect.TopLeft.ToPoint(),
+                rect.TopRight.ToPoint(),
+                rect.BottomRight.ToPoint(),
+                rect.BottomLeft.ToPoint(),
+                rect.TopLeft.ToPoint() }));
+        }
     }
 }
