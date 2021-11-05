@@ -18,8 +18,8 @@ namespace Mapsui.Layers
         private double _minVisible;
         private double _opacity;
         private IStyle? _style;
-        private object _tag;
-        private MRect _envelope;
+        private object? _tag;
+        private MRect? _envelope;
 
         /// <summary>
         /// Get a layer's styles
@@ -38,7 +38,7 @@ namespace Mapsui.Layers
         /// </summary>
         protected BaseLayer()
         {
-            Name = "Layer";
+            _name = "Layer";
             Style = new VectorStyle();
             Enabled = true;
             MinVisible = 0;
@@ -71,7 +71,7 @@ namespace Mapsui.Layers
         public int Id { get; }
 
         /// <inheritdoc />
-        public object Tag
+        public object? Tag
         {
             get => _tag;
             set
@@ -163,7 +163,7 @@ namespace Mapsui.Layers
         /// <summary>
         /// Returns the envelope of all available data in the layer
         /// </summary>
-        public virtual MRect Envelope
+        public virtual MRect? Envelope
         {
             get => _envelope;
             protected set
@@ -174,7 +174,7 @@ namespace Mapsui.Layers
         }
 
         /// <inheritdoc />
-        public Hyperlink Attribution { get; set; }
+        public Hyperlink Attribution { get; set; } = new();
 
         /// <inheritdoc />
         public virtual IReadOnlyList<double> Resolutions { get; } = new List<double>();

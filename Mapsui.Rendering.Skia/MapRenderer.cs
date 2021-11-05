@@ -6,7 +6,6 @@ using Mapsui.Geometries;
 using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Logging;
-using Mapsui.Providers;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Rendering.Skia.SkiaWidgets;
@@ -167,14 +166,13 @@ namespace Mapsui.Rendering.Skia
                 RenderGeometry(canvas, viewport, style, layerOpacity, geometryFeature, geometryFeature.Geometry);
             }
             else if (feature is PointFeature pointFeature)
-            {
                 PointRenderer.Draw(canvas, viewport, style, pointFeature, pointFeature.Point.X, pointFeature.Point.Y, _symbolCache,
                    layerOpacity * style.Opacity);
-            }
             else if (feature is RectFeature rectFeature)
-            {
                 RectRenderer.Draw(canvas, viewport, style, rectFeature, layerOpacity * style.Opacity);
-            }
+            else if (feature is RasterFeature rasterFeature)
+                RasterRenderer.Draw(canvas, viewport, style, rasterFeature, rasterFeature.Raster, 
+                    layerOpacity * style.Opacity, _tileCache, _currentIteration);
         }
 
         private void RenderGeometry(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, float layerOpacity,
@@ -198,16 +196,9 @@ namespace Mapsui.Rendering.Skia
             else if (geometry is MultiPolygon multiPolygon)
                 MultiPolygonRenderer.Draw(canvas, viewport, style, geometryFeature, multiPolygon,
                     layerOpacity * style.Opacity, _symbolCache);
-            else if (geometry is IRaster)
-                RasterRenderer.Draw(canvas, viewport, style, geometryFeature, layerOpacity * style.Opacity,
-                    _tileCache, _currentIteration);
             else if (geometry is IGeometryCollection collection)
-            {
                 for (var i = 0; i < collection.NumGeometries; i++)
-                {
                     RenderGeometry(canvas, viewport, style, layerOpacity, geometryFeature, collection.Geometry(i));
-                }
-            }
             else
                 Logger.Log(LogLevel.Warning,
                     $"Failed to find renderer for geometry feature of type {geometry.GetType()}");

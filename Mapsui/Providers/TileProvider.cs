@@ -24,8 +24,6 @@ using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
 using Mapsui.Extensions;
-using Mapsui.Geometries;
-using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Logging;
 
@@ -42,7 +40,7 @@ namespace Mapsui.Providers
             return _source.Schema.Extent.ToMRect();
         }
 
-        public string CRS { get; set; }
+        public string CRS { get; set; } = "";
 
         public TileProvider(ITileSource tileSource)
         {
@@ -75,10 +73,10 @@ namespace Mapsui.Providers
             {
                 var bitmap = _bitmaps.Find(info.Index);
                 if (bitmap == null) continue;
-                IRaster raster = new Raster(new MemoryStream(bitmap), new BoundingBox(info.Extent.MinX, info.Extent.MinY, info.Extent.MaxX, info.Extent.MaxY));
-                var feature = new GeometryFeature
+                var raster = new MRaster(new MemoryStream(bitmap), new MRect(info.Extent.MinX, info.Extent.MinY, info.Extent.MaxX, info.Extent.MaxY));
+                var feature = new RasterFeature
                 {
-                    Geometry = raster
+                    Raster = raster
                 };
                 features.Add(feature);
             }

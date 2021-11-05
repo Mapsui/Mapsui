@@ -21,9 +21,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Mapsui.Extensions;
 using Mapsui.Fetcher;
-using Mapsui.GeometryLayer;
 using Mapsui.Logging;
 using Mapsui.Providers;
 
@@ -34,12 +32,12 @@ namespace Mapsui.Layers
         private class FeatureSets
         {
             public long TimeRequested { get; set; }
-            public IEnumerable<IGeometryFeature>? Features { get; set; }
+            public IEnumerable<RasterFeature>? Features { get; set; }
         }
 
         private bool _isFetching;
         private bool _needsUpdate = true;
-        private FetchInfo _fetchInfo;
+        private FetchInfo? _fetchInfo;
         private List<FeatureSets> _sets = new();
         private readonly Timer _startFetchTimer;
         private IProvider<IFeature> _dataSource;
@@ -61,9 +59,9 @@ namespace Mapsui.Layers
             }
         }
 
-        public ImageLayer(string layername)
+        public ImageLayer(string layerName)
         {
-            Name = layername;
+            Name = layerName;
             _startFetchTimer = new Timer(StartFetchTimerElapsed, null, Timeout.Infinite, Timeout.Infinite);
             _numberOfFeaturesReturned = 1;
             PropertyChanged += OnPropertyChanged;
@@ -83,7 +81,7 @@ namespace Mapsui.Layers
 
         private void StartFetchTimerElapsed(object state)
         {
-            if (_fetchInfo.Extent == null) return;
+            if (_fetchInfo?.Extent == null) return;
             if (double.IsNaN(_fetchInfo.Resolution)) return;
             StartNewFetch(_fetchInfo);
         }
@@ -98,14 +96,14 @@ namespace Mapsui.Layers
             return result;
         }
 
-        private static IEnumerable<IFeature> GetFeaturesInView(MRect box, IEnumerable<IGeometryFeature> features)
+        private static IEnumerable<IFeature> GetFeaturesInView(MRect box, IEnumerable<RasterFeature> features)
         {
             foreach (var feature in features)
             {
-                if (feature.Geometry == null)
+                if (feature.Raster == null)
                     continue;
 
-                if (box.Intersects(feature.Geometry.BoundingBox.ToMRect()))
+                if (box.Intersects(feature.Extent))
                 {
                     yield return feature;
                 }
@@ -120,7 +118,6 @@ namespace Mapsui.Layers
         public override void RefreshData(FetchInfo fetchInfo)
         {
             if (!Enabled) return;
-            if (DataSource == null) return;
             // Fetching an image, that often covers the whole map, is expensive. Only do it on Discrete changes.
             if (fetchInfo.ChangeType == ChangeType.Continuous) return;
 
@@ -156,10 +153,10 @@ namespace Mapsui.Layers
             });
         }
 
-        private void DataArrived(IEnumerable<IFeature>? arrivingFeatures, object state)
+        private void DataArrived(IEnumerable<IFeature> arrivingFeatures, object? state)
         {
             //the data in the cache is stored in the map projection so it projected only once.
-            var features = arrivingFeatures?.Cast<IGeometryFeature>().ToList() ?? throw new ArgumentException("argument features may not be null");
+            var features = arrivingFeatures?.Cast<RasterFeature>().ToList() ?? throw new ArgumentException("argument features may not be null");
 
             // We can get 0 features if some error was occurred up call stack
             // We should not add new FeatureSets if we have not any feature
@@ -180,7 +177,7 @@ namespace Mapsui.Layers
 
             if (_needsUpdate)
             {
-                StartNewFetch(_fetchInfo);
+                if (_fetchInfo != null) StartNewFetch(_fetchInfo);
             }
         }
 
@@ -188,7 +185,7 @@ namespace Mapsui.Layers
         {
             foreach (var cache in _sets)
             {
-                cache.Features = new List<IGeometryFeature>();
+                cache.Features = new List<RasterFeature>();
             }
         }
     }

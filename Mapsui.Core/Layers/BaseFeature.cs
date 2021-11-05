@@ -17,5 +17,6 @@ namespace Mapsui.Layers
             set => _dictionary[key] = value;
         }
 
+        public IDictionary<IStyle, object> RenderedGeometry { get; set; } = new Dictionary<IStyle, object>();
     }
 }

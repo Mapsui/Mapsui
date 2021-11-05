@@ -5,7 +5,6 @@ using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.GeometryLayer;
 using Mapsui.Projection;
-using Mapsui.Providers;
 
 namespace Mapsui.Utilities
 {
@@ -98,7 +97,7 @@ namespace Mapsui.Utilities
             var copiedFeatures = features.Copy().ToList();
             foreach (var copiedFeature in copiedFeatures)
             {
-                if (copiedFeature.Geometry is Raster) continue;
+                if (copiedFeature.Geometry == null) continue;
                 var copiedGeometry = copiedFeature.Geometry.Copy();
                 geometryTransformation.Transform(fromCRS, toCRS, copiedGeometry);
                 copiedFeature.Geometry = copiedGeometry;

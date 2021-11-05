@@ -27,9 +27,6 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
-using Mapsui.Extensions;
-using Mapsui.Geometries;
-using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Rendering;
 
@@ -290,7 +287,7 @@ namespace Mapsui.Providers.Wms
             _mimeType = mimeType;
         }
 
-        public bool TryGetMap(IViewport viewport, ref IRaster raster)
+        public bool TryGetMap(IViewport viewport, out MRaster? raster)
         {
 
             int width;
@@ -304,10 +301,11 @@ namespace Mapsui.Providers.Wms
             catch (OverflowException)
             {
                 Trace.Write("Could not convert double to int (ExportMap size)");
+                raster = null;
                 return false;
             }
 
-            var url = GetRequestUrl(viewport.Extent.ToBoundingBox(), width, height);
+            var url = GetRequestUrl(viewport.Extent, width, height);
 
             try
             {
@@ -315,7 +313,7 @@ namespace Mapsui.Providers.Wms
                 using var result = task.Result;
                 // PDD: This could be more efficient
                 var bytes = BruTile.Utilities.ReadFully(result);
-                raster = new Raster(new MemoryStream(bytes), viewport.Extent.ToBoundingBox());	// This can throw exception
+                raster = new MRaster(new MemoryStream(bytes), viewport.Extent);	// This can throw exception
                 return true;
             }
             catch (WebException webEx)
@@ -332,6 +330,8 @@ namespace Mapsui.Providers.Wms
                     throw new RenderException("There was a problem while attempting to request the WMS", ex);
                 Trace.Write("There was a problem while attempting to request the WMS" + ex.Message);
             }
+
+            raster = null;
             return false;
         }
 
@@ -339,7 +339,7 @@ namespace Mapsui.Providers.Wms
         /// Gets the URL for a map request base on current settings, the image size and BoundingBox
         /// </summary>
         /// <returns>URL for WMS request</returns>
-        public string GetRequestUrl(BoundingBox? box, int width, int height)
+        public string GetRequestUrl(MRect? box, int width, int height)
         {
             var resource = GetPreferredMethod();
             var strReq = new StringBuilder(resource.OnlineResource);
@@ -463,8 +463,8 @@ namespace Mapsui.Providers.Wms
 
         public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {
-            var features = new List<IGeometryFeature>();
-            IRaster? raster = null;
+            var features = new List<RasterFeature>();
+            
             var view = new Viewport
             {
                 Resolution = fetchInfo.Resolution,
@@ -472,11 +472,11 @@ namespace Mapsui.Providers.Wms
                 Width = (fetchInfo.Extent.Width / fetchInfo.Resolution),
                 Height = (fetchInfo.Extent.Height / fetchInfo.Resolution)
             };
-            if (TryGetMap(view, ref raster))
+            if (TryGetMap(view, out MRaster raster))
             {
-                features.Add(new GeometryFeature
+                features.Add(new RasterFeature
                 {
-                    Geometry = raster
+                    Raster = raster
                 });
             }
             return features;
@@ -484,7 +484,7 @@ namespace Mapsui.Providers.Wms
 
         private async Task<Stream> GetStreamAsync(string url)
         {
-            var handler = new HttpClientHandler { Credentials = Credentials ?? CredentialCache.DefaultCredentials };
+            var handler = new HttpClientHandler { Credentials = Credentials };
             var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
             var req = new HttpRequestMessage(new HttpMethod(GetPreferredMethod().Type), url);
             var response = await client.SendAsync(req);
