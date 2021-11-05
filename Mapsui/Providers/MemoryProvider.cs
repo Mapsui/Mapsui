@@ -10,7 +10,7 @@ namespace Mapsui.Providers
         /// <summary>
         /// Gets or sets the geometries this data source contains
         /// </summary>
-        public IReadOnlyList<IFeature> Features { get; private set; }
+        public IReadOnlyList<T> Features { get; private set; }
 
         public double SymbolSize { get; set; } = 64;
 
@@ -23,7 +23,7 @@ namespace Mapsui.Providers
 
         public MemoryProvider()
         {
-            Features = new List<IGeometryFeature>();
+            Features = new List<T>();
             _boundingBox = GetExtent(Features);
         }
 
@@ -31,9 +31,9 @@ namespace Mapsui.Providers
         /// Initializes a new instance of the MemoryProvider
         /// </summary>
         /// <param name="feature">Feature to be in this dataSource</param>
-        public MemoryProvider(IFeature feature)
+        public MemoryProvider(T feature)
         {
-            Features = new List<IFeature> { feature };
+            Features = new List<T> { feature };
             _boundingBox = GetExtent(Features);
         }
 
@@ -42,7 +42,7 @@ namespace Mapsui.Providers
         /// Initializes a new instance of the MemoryProvider
         /// </summary>
         /// <param name="features">Features to be included in this dataSource</param>
-        public MemoryProvider(IEnumerable<IGeometryFeature> features)
+        public MemoryProvider(IEnumerable<T> features)
         {
             Features = features.ToList();
             _boundingBox = GetExtent(Features);
@@ -59,16 +59,17 @@ namespace Mapsui.Providers
             // Use a larger extent so that symbols partially outside of the extent are included
             var biggerBox = fetchInfo.Extent.Grow(fetchInfo.Resolution * SymbolSize * 0.5);
             var grownFeatures = features.Where(f => f != null && f.BoundingBox.Intersects(biggerBox));
-            return (IEnumerable<T>)grownFeatures.ToList(); // Why do I need to cast if T is constrained to IFeature?
+
+            return grownFeatures.ToList(); 
         }
 
         /// <summary>
         /// Search for a feature
         /// </summary>
         /// <param name="value">Value to search for</param>
-        /// <param name="fieldName">Name of the field to search in. This is the key of the IFeature dictionary</param>
+        /// <param name="fieldName">Name of the field to search in. This is the key of the T dictionary</param>
         /// <returns></returns>
-        public IFeature Find(object? value, string fieldName)
+        public T Find(object? value, string fieldName)
         {
             return Features.FirstOrDefault(f => value != null && f[fieldName] == value);
         }
@@ -82,7 +83,7 @@ namespace Mapsui.Providers
             return _boundingBox;
         }
 
-        private static MRect GetExtent(IReadOnlyList<IFeature> features)
+        private static MRect GetExtent(IReadOnlyList<T> features)
         {
             MRect? box = null;
             foreach (var feature in features)
@@ -97,7 +98,7 @@ namespace Mapsui.Providers
 
         public void Clear()
         {
-            Features = new List<IGeometryFeature>();
+            Features = new List<T>();
         }
     }
 }
