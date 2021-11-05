@@ -165,7 +165,7 @@ namespace Mapsui.Rendering.Skia
                 // No special style renderer handled this up to now, than try standard renderers
                 RenderGeometry(canvas, viewport, style, layerOpacity, geometryFeature, geometryFeature.Geometry);
             }
-            else if (feature is IPointFeature pointFeature)
+            else if (feature is PointFeature pointFeature)
             {
                 PointRenderer.Draw(canvas, viewport, style, pointFeature, pointFeature.Point.X, pointFeature.Point.Y, _symbolCache,
                    layerOpacity * style.Opacity);

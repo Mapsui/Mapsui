@@ -44,7 +44,7 @@ namespace Mapsui.Layers
 
         public event EventHandler? AnimatedPositionChanged;
 
-        public void AddFeatures(IEnumerable<IPointFeature> features)
+        public void AddFeatures(IEnumerable<PointFeature> features)
         {
             var previousCache = _cache;
 
@@ -97,7 +97,7 @@ namespace Mapsui.Layers
             }
         }
 
-        private static List<AnimatedItem> ConvertToAnimatedItems(IEnumerable<IPointFeature> features,
+        private static List<AnimatedItem> ConvertToAnimatedItems(IEnumerable<PointFeature> features,
             List<AnimatedItem> previousItems, string idField)
         {
             var result = new List<AnimatedItem>();
@@ -181,7 +181,7 @@ namespace Mapsui.Layers
 
         private class AnimatedItem
         {
-            public IPointFeature? Feature { get; set; }
+            public PointFeature? Feature { get; set; }
             public MPoint? PreviousPoint { get; set; }
             public MPoint? CurrentPoint { get; set; }
         }
