@@ -97,16 +97,15 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             if (ArcGisDynamicCapabilities.layers == null)
                 return new List<IFeature>();
 
-            var features = new List<IGeometryFeature>();
-            IRaster? raster = null;
-
+            var features = new List<RasterFeature>();
+            
             IViewport viewport = fetchInfo.ToViewport();
 
-            if (TryGetMap(viewport, ref raster))
+            if (TryGetMap(viewport, out MRaster raster))
             {
-                var feature = new GeometryFeature
+                var feature = new RasterFeature
                 {
-                    Geometry = raster
+                    Raster = raster
                 };
                 features.Add(feature);
             }
@@ -135,7 +134,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
         /// <summary>
         /// Retrieves the bitmap from ArcGIS Dynamic service
         /// </summary>
-        public bool TryGetMap(IViewport viewport, ref IRaster raster)
+        public bool TryGetMap(IViewport viewport, out MRaster raster)
         {
             int width;
             int height;
@@ -148,6 +147,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             catch (OverflowException ex)
             {
                 Logger.Log(LogLevel.Error, "Error: Could not conver double to int (ExportMap size)", ex);
+                raster = null;
                 return false;
             }
 
@@ -159,13 +159,14 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             {
                 var response = client.GetAsync(uri).Result;
                 var bytes = BruTile.Utilities.ReadFully(response.Content.ReadAsStreamAsync().Result);
-                raster = new Raster(new MemoryStream(bytes), viewport.Extent.ToBoundingBox());
+                raster = new MRaster(new MemoryStream(bytes), viewport.Extent);
                 response.Dispose();
                 return true;
             }
             catch (Exception ex)
             {
                 Logger.Log(LogLevel.Error, ex.Message, ex);
+                raster = null;
                 return false;
             }
         }

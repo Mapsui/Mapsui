@@ -6,7 +6,6 @@ using BruTile;
 using BruTile.Cache;
 using ConcurrentCollections;
 using Mapsui.Extensions;
-using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 
 namespace Mapsui.Fetcher
@@ -17,18 +16,18 @@ namespace Mapsui.Fetcher
         private readonly object _lockRoot = new();
         private bool _busy;
         private bool _viewportIsModified;
-        private readonly ITileCache<GeometryFeature> _tileCache;
+        private readonly ITileCache<RasterFeature> _tileCache;
         private readonly IDataFetchStrategy _dataFetchStrategy;
         private readonly ConcurrentQueue<TileInfo> _tilesToFetch = new();
         private readonly ConcurrentHashSet<TileIndex> _tilesInProgress = new();
         private readonly ITileSchema _tileSchema;
         private readonly FetchMachine _fetchMachine;
-        private readonly Func<TileInfo, GeometryFeature> _fetchTileAsFeature;
+        private readonly Func<TileInfo, RasterFeature> _fetchTileAsFeature;
 
         public TileFetchDispatcher(
-            ITileCache<GeometryFeature> tileCache,
+            ITileCache<RasterFeature> tileCache,
             ITileSchema tileSchema,
-            Func<TileInfo, GeometryFeature> fetchTileAsFeature,
+            Func<TileInfo, RasterFeature> fetchTileAsFeature,
             IDataFetchStrategy? dataFetchStrategy = null)
         {
             _tileCache = tileCache;
@@ -94,7 +93,7 @@ namespace Mapsui.Fetcher
             }
         }
 
-        private void FetchCompleted(TileInfo tileInfo, GeometryFeature? feature, Exception? exception)
+        private void FetchCompleted(TileInfo tileInfo, RasterFeature? feature, Exception? exception)
         {
             lock (_lockRoot)
             {
@@ -123,7 +122,7 @@ namespace Mapsui.Fetcher
 
         public void StopFetching()
         {
-            _fetchMachine?.Stop();
+            _fetchMachine.Stop();
         }
 
         public void StartFetching()

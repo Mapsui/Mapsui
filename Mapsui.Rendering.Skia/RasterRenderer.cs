@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Mapsui.Geometries;
-using Mapsui.GeometryLayer;
+using Mapsui.Layers;
 using Mapsui.Logging;
-using Mapsui.Providers;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using SkiaSharp;
@@ -12,15 +11,11 @@ namespace Mapsui.Rendering.Skia
 {
     public static class RasterRenderer
     {
-        public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, IGeometryFeature feature,
-            float opacity, IDictionary<object, BitmapInfo?> tileCache, long currentIteration)
+        public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, IFeature feature, 
+            IRaster raster, float opacity, IDictionary<object, BitmapInfo> tileCache, long currentIteration)
         {
             try
             {
-                var raster = feature.Geometry as IRaster;
-                if (raster == null)
-                    return;
-
                 BitmapInfo? bitmapInfo;
 
                 if (!tileCache.Keys.Contains(raster))
@@ -39,9 +34,9 @@ namespace Mapsui.Rendering.Skia
                 bitmapInfo.IterationUsed = currentIteration;
                 tileCache[raster] = bitmapInfo;
 
-                var boundingBox = feature.Geometry?.BoundingBox;
+                var extent = feature.Extent;
 
-                if (boundingBox == null)
+                if (extent == null)
                     return;
 
                 if (bitmapInfo.Bitmap == null)
@@ -51,11 +46,11 @@ namespace Mapsui.Rendering.Skia
                 {
                     var priorMatrix = canvas.TotalMatrix;
 
-                    var matrix = CreateRotationMatrix(viewport, boundingBox, priorMatrix);
+                    var matrix = CreateRotationMatrix(viewport, extent, priorMatrix);
 
                     canvas.SetMatrix(matrix);
 
-                    var destination = new BoundingBox(0.0, 0.0, boundingBox.Width, boundingBox.Height);
+                    var destination = new BoundingBox(0.0, 0.0, extent.Width, extent.Height);
 
                     BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap, destination.ToSkia(), opacity);
 
@@ -63,7 +58,7 @@ namespace Mapsui.Rendering.Skia
                 }
                 else
                 {
-                    var destination = WorldToScreen(viewport, boundingBox);
+                    var destination = WorldToScreen(viewport, extent);
                     BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap, RoundToPixel(destination).ToSkia(), opacity);
                 }
             }
@@ -73,7 +68,7 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        private static SKMatrix CreateRotationMatrix(IReadOnlyViewport viewport, BoundingBox boundingBox, SKMatrix priorMatrix)
+        private static SKMatrix CreateRotationMatrix(IReadOnlyViewport viewport, MRect rect, SKMatrix priorMatrix)
         {
             // The front-end sets up the canvas with a matrix based on screen scaling (e.g. retina).
             // We need to retain that effect by combining our matrix with the incoming matrix.
@@ -83,8 +78,8 @@ namespace Mapsui.Rendering.Skia
 
             var userRotation = SKMatrix.CreateRotationDegrees((float)viewport.Rotation);
             var focalPointOffset = SKMatrix.CreateTranslation(
-                (float)(boundingBox.Left - viewport.Center.X),
-                (float)(viewport.Center.Y - boundingBox.Top));
+                (float)(rect.Left - viewport.Center.X),
+                (float)(viewport.Center.Y - rect.Top));
             var zoomScale = SKMatrix.CreateScale((float)(1.0 / viewport.Resolution), (float)(1.0 / viewport.Resolution));
             var centerInScreen = SKMatrix.CreateTranslation((float)(viewport.Width / 2.0), (float)(viewport.Height / 2.0));
 
@@ -98,10 +93,10 @@ namespace Mapsui.Rendering.Skia
             return matrix;
         }
 
-        private static BoundingBox WorldToScreen(IReadOnlyViewport viewport, BoundingBox boundingBox)
+        private static BoundingBox WorldToScreen(IReadOnlyViewport viewport, MRect rect)
         {
-            var first = viewport.WorldToScreen(boundingBox.Min.X, boundingBox.Min.Y);
-            var second = viewport.WorldToScreen(boundingBox.Max.X, boundingBox.Max.Y);
+            var first = viewport.WorldToScreen(rect.Min.X, rect.Min.Y);
+            var second = viewport.WorldToScreen(rect.Max.X, rect.Max.Y);
             return new BoundingBox
             (
                 Math.Min(first.X, second.X),

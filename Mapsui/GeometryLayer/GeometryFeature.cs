@@ -1,10 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.Layers;
-using Mapsui.Styles;
 
 namespace Mapsui.GeometryLayer
 {
@@ -27,9 +25,6 @@ namespace Mapsui.GeometryLayer
         }
 
         public IGeometry? Geometry { get; set; }
-
-        public IDictionary<IStyle, object> RenderedGeometry { get; } = new Dictionary<IStyle, object>();
-
 
         public MRect? Extent => Geometry?.BoundingBox.ToMRect();
 

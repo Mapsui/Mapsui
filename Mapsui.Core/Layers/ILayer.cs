@@ -36,7 +36,7 @@ namespace Mapsui.Layers
         /// <summary>
         /// Gets or sets an arbitrary object value that can be used to store custom information about this element
         /// </summary>
-        object Tag { get; set; }
+        object? Tag { get; set; }
 
         /// <summary>
         /// Minimum visible zoom level
@@ -59,9 +59,9 @@ namespace Mapsui.Layers
         string Name { get; set; }
 
         /// <summary>
-        /// Gets the MRect of the entire layer
+        /// Gets the MRect of the entire layer. Can be null if there are no features in the layer.
         /// </summary>
-        MRect Envelope { get; }
+        MRect? Envelope { get; }
 
         /// <summary>
         /// Gets or sets rendering style of layer

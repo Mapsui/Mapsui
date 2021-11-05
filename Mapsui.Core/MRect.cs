@@ -509,7 +509,7 @@ namespace Mapsui
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             var box = obj as MRect;
             if (obj == null) return false;
