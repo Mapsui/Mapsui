@@ -18,7 +18,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Android.Extensions.PointExtensions.html",
-          "hash": "+pIZnne/4xORI963TP7NXw=="
+          "hash": "jfxIVNZbCIK6wEXpaLUw2w=="
         }
       },
       "is_incremental": false,
@@ -42,7 +42,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Android.MapControl.html",
-          "hash": "RvU30ncdze7lmZTpE+S4Tg=="
+          "hash": "rLEqdYeRCRIwGnUFtKnAVQ=="
         }
       },
       "is_incremental": false,
@@ -102,7 +102,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Android.SkiaRenderMode.html",
-          "hash": "pnX6f6ketCSRvlGfi1GDFw=="
+          "hash": "jVpAegMXjsGYGAEFWzN+Fw=="
         }
       },
       "is_incremental": false,
@@ -126,7 +126,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.Callout.html",
-          "hash": "XKTEldM5CkO8K/PVoc4CuQ=="
+          "hash": "Mw7GcdQvBpWIVF9ZgPzHdw=="
         }
       },
       "is_incremental": false,
@@ -150,7 +150,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.Circle.html",
-          "hash": "W6jhuKZ75XEBhMOjXlHFGg=="
+          "hash": "yefu5QB6mTsxo7DaK7P0+w=="
         }
       },
       "is_incremental": false,
@@ -258,7 +258,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.MapControl.html",
-          "hash": "eQqtpKW6Il/7HKCV8IkQdg=="
+          "hash": "55vHKrL7I7JDQf2vt8ZIfw=="
         }
       },
       "is_incremental": false,
@@ -294,7 +294,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.MapView.html",
-          "hash": "t4J31ZSxsmksDXmx2NdRCg=="
+          "hash": "p+Y9hVh+NzL8DW6iSf488g=="
         }
       },
       "is_incremental": false,
@@ -306,7 +306,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.Pin.html",
-          "hash": "Bb1UdZnyqnXh3Gjrvwnxmw=="
+          "hash": "80AGgZ6fW9uo/ifGQBqyMw=="
         }
       },
       "is_incremental": false,
@@ -342,7 +342,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.Polygon.html",
-          "hash": "VJmnNj/Vg2VZdBJCJlfJvw=="
+          "hash": "Mvk5o5NP64RowvIA3gjCDg=="
         }
       },
       "is_incremental": false,
@@ -354,7 +354,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.Polyline.html",
-          "hash": "JbiAswB51ZxjCdGZHSiccw=="
+          "hash": "UJ1vtq9GCv6W9+a5RPM6Cg=="
         }
       },
       "is_incremental": false,
@@ -438,7 +438,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Objects.Drawable.html",
-          "hash": "P5ER1zIUJYyAyXx/DQaU9g=="
+          "hash": "Fcz9eYTYsMYjhNeZ4oinEg=="
         }
       },
       "is_incremental": false,
@@ -450,7 +450,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Objects.IFeatureProvider.html",
-          "hash": "q4UbzLFZuqQzJ4rGp/8nYw=="
+          "hash": "2ukpi7IdUaToufJ0Vj3NpQ=="
         }
       },
       "is_incremental": false,
@@ -462,7 +462,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Objects.MyLocationLayer.html",
-          "hash": "o0lDOCqa6cZLuB3FdVnsjw=="
+          "hash": "sr9z6pkGDyQLcKF5C6gJ/w=="
         }
       },
       "is_incremental": false,
@@ -474,7 +474,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html",
-          "hash": "QYehVZfBTlADVpPlagyl0Q=="
+          "hash": "LPNK/sjiMjJGsZaND6IZww=="
         }
       },
       "is_incremental": false,
@@ -594,7 +594,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Wpf.MapControl.html",
-          "hash": "ZOYmUvPcbr9YuzXltk4gZg=="
+          "hash": "KXROYt9AUIW3JLHlUxPYNw=="
         }
       },
       "is_incremental": false,
@@ -642,7 +642,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.iOS.MapControl.html",
-          "hash": "948yfRe9P37BwRRuGjQAzA=="
+          "hash": "+ZTedtEPGIeHSZxBUMTyIA=="
         }
       },
       "is_incremental": false,
@@ -738,7 +738,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/contributors-guidelines.html",
-          "hash": "dApcbpZtW4AYDr+DIRZFzQ=="
+          "hash": "N5Jipcx1E83FR+Gc3Xn0uA=="
         }
       },
       "is_incremental": false,
