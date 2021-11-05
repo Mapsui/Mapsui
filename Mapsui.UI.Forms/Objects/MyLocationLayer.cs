@@ -51,7 +51,7 @@ namespace Mapsui.UI.Objects
             }
         }
 
-        private Position myLocation = new(0, 0);
+        private Position myLocation = new Position { Longitude = 0, Latitude = 0 };
 
         /// <summary>
         /// Position of location, that is displayed
@@ -193,7 +193,11 @@ namespace Mapsui.UI.Objects
                     var animation = new Animation((v) => {
                         var deltaLat = (animationMyLocationEnd.Latitude - animationMyLocationStart.Latitude) * v;
                         var deltaLon = (animationMyLocationEnd.Longitude - animationMyLocationStart.Longitude) * v;
-                        var modified = InternalUpdateMyLocation(new Position(animationMyLocationStart.Latitude + deltaLat, animationMyLocationStart.Longitude + deltaLon));
+                        var modified = InternalUpdateMyLocation(new Position
+                        {
+                            Longitude = animationMyLocationStart.Longitude + deltaLon,
+                            Latitude = animationMyLocationStart.Latitude + deltaLat
+                        });
                         // Update viewport
                         if (modified && mapView.MyLocationFollow && mapView.MyLocationEnabled)
                             mapView.Navigator.CenterOn(MyLocation.ToMapsui());

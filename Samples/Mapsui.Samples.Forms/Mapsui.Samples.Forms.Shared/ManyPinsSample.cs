@@ -146,7 +146,7 @@ namespace Mapsui.Samples.Forms
 
         private Pin CreatePin(int num)
         {
-            var position = new Position(0 + rnd.Next(-85000, +85000) / 1000.0, 0 + rnd.Next(-180000, +180000) / 1000.0);
+            var position = new Position { Longitude = 0 + rnd.Next(-180000, +180000) / 1000.0, Latitude = 0 + rnd.Next(-85000, +85000) / 1000.0 };
 
             var pin = new Pin()
             {
@@ -154,7 +154,7 @@ namespace Mapsui.Samples.Forms
                 Address = position.ToString(),
                 Position = position,
                 Type = PinType.Pin,
-                Color = new Xamarin.Forms.Color(rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0),
+                Color = new Color(rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0, rnd.Next(0, 256) / 256.0),
                 Transparency = 0.5f,
                 Scale = rnd.Next(50, 130) / 100f,
             };

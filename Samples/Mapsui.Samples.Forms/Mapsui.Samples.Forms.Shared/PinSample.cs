@@ -78,7 +78,7 @@ namespace Mapsui.Samples.Forms.Shared
                         {
                             // Double click on callout moves pin
                             var p = e.Callout.Pin;
-                            p.Position = new Position(p.Position.Latitude + 0.01, p.Position.Longitude);
+                            p.Position = new Position { Longitude = p.Position.Longitude, Latitude = p.Position.Latitude + 0.01 };
                             e.Handled = true;
                             return;
                         }

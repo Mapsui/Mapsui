@@ -6,38 +6,37 @@ namespace Mapsui.UI.Forms
     /// <summary>
     /// Structure holding latitude and longitude of a position in spherical coordinate system
     /// </summary>
-    public struct Position
+    public readonly struct Position
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="T:Mapsui.UI.Forms.Position"/> from latitude and longitude
-        /// </summary>
-        /// <param name="latitude">Latitude of position</param>
-        /// <param name="longitude">Longitude of position</param>
-        public Position(double latitude, double longitude)
+        private static double DelimitLongitudeRange(double longitude)
         {
-            Latitude = Math.Min(Math.Max(latitude, -90.0), 90.0);
-            Longitude = Math.Min(Math.Max(longitude, -180.0), 180.0);
+            return Math.Min(Math.Max(longitude, -180.0), 180.0);
+        }
+
+        private static double DelimitLatitudeRange(double latitude)
+        {
+            return Math.Min(Math.Max(latitude, -90.0), 90.0);
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Mapsui.UI.Forms.Position"/> from position
         /// </summary>
-        /// <param name="point">Position to use</param>
-        public Position(Position point)
+        /// <param name="position">Position to use</param>
+        public Position(Position position)
         {
-            Latitude = point.Latitude;
-            Longitude = point.Longitude;
+            _longitude = position.Longitude;
+            _latitude = position.Latitude;
         }
 
         /// <summary>
         /// Latitude of position
         /// </summary>
-        public double Latitude { get; }
+        public double Latitude { get => _latitude; init => _latitude = DelimitLatitudeRange(value); }
 
         /// <summary>
         /// Longitude of position
         /// </summary>
-        public double Longitude { get; }
+        public double Longitude { get => _longitude; init => _longitude = DelimitLongitudeRange(value); }
 
         /// <summary>
         /// Convert Xamarin.Forms.Maps.Position to Mapsui.Geometries.Point
@@ -115,7 +114,7 @@ namespace Mapsui.UI.Forms
         /// <param name="format">Format string</param>
         public string ToString(string format)
         {
-            var formats = format.Split(new char[] { '|' }, StringSplitOptions.None);
+            var formats = format.Split(new[] { '|' }, StringSplitOptions.None);
 
             var formatLatitude = formats.Length > 0 && !string.IsNullOrEmpty(formats[0]) ? formats[0] : "P DD° MM.MMM'";
             var formatLongitude = formats.Length > 1 && !string.IsNullOrEmpty(formats[1]) ? formats[1] : "P DDD° MM.MMM'";
@@ -143,6 +142,8 @@ namespace Mapsui.UI.Forms
         /// Format for coordinates with decimal seconds
         /// </summary>
         public const string DecimalSeconds = "P DD° MM' SS.sss\"|P DDD° MM' SS.sss\"|N|S|E|W";
+        private readonly double _latitude;
+        private readonly double _longitude;
 
         private string FormatNumber(double value, string format, string positiveDirection, string negativDirection)
         {

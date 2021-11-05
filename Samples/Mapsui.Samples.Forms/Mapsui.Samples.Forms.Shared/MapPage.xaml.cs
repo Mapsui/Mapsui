@@ -154,10 +154,10 @@ namespace Mapsui.Samples.Forms
         private void MyLocationPositionChanged(object sender, PositionEventArgs e)
         {
             Device.BeginInvokeOnMainThread(() => {
-                var coords = new UI.Forms.Position(e.Position.Latitude, e.Position.Longitude);
-                info.Text = $"{coords.ToString()} - D:{(int)e.Position.Heading} S:{Math.Round(e.Position.Speed, 2)}";
+                var coords = new UI.Forms.Position { Longitude = e.Position.Longitude, Latitude = e.Position.Latitude };
+                info.Text = $"{coords} - D:{(int)e.Position.Heading} S:{Math.Round(e.Position.Speed, 2)}";
 
-                mapView.MyLocationLayer.UpdateMyLocation(new UI.Forms.Position(e.Position.Latitude, e.Position.Longitude));
+                mapView.MyLocationLayer.UpdateMyLocation(new UI.Forms.Position { Longitude = e.Position.Longitude, Latitude = e.Position.Latitude });
                 mapView.MyLocationLayer.UpdateMyDirection(e.Position.Heading, mapView.Viewport.Rotation);
                 mapView.MyLocationLayer.UpdateMySpeed(e.Position.Speed);
             });

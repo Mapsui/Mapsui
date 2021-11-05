@@ -80,7 +80,7 @@ namespace Mapsui.UI.Forms
             south = Math.Max(Math.Min(south, 0), -90);
             var lat = Math.Max(Math.Min(Center.Latitude, north), south);
             var maxDLat = Math.Min(north - lat, -south + lat) * 2;
-            return new MapSpan(new Position(lat, Center.Longitude), Math.Min(LatitudeDegrees, maxDLat), LongitudeDegrees);
+            return new MapSpan(new Position { Longitude = Center.Longitude, Latitude = lat }, Math.Min(LatitudeDegrees, maxDLat), LongitudeDegrees);
         }
 
         /// <summary>
@@ -128,7 +128,13 @@ namespace Mapsui.UI.Forms
                 maxLat = Math.Max(maxLat, p.Latitude);
                 maxLon = Math.Max(maxLon, p.Longitude);
             }
-            return new MapSpan(new Position((minLat + maxLat) / 2d, (minLon + maxLon) / 2d), maxLat - minLat, maxLon - minLon);
+            return new MapSpan(
+                new Position
+                {
+                    Longitude = (minLon + maxLon) / 2d,
+                    Latitude = (minLat + maxLat) / 2d
+                },
+                maxLat - minLat, maxLon - minLon);
         }
 
         public override int GetHashCode()

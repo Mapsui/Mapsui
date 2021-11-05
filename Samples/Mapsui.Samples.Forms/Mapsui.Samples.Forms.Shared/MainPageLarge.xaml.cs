@@ -186,7 +186,7 @@ namespace Mapsui.Samples.Forms
         private void MyLocationPositionChanged(object sender, PositionEventArgs e)
         {
             Device.BeginInvokeOnMainThread(() => {
-                mapView.MyLocationLayer.UpdateMyLocation(new UI.Forms.Position(e.Position.Latitude, e.Position.Longitude));
+                mapView.MyLocationLayer.UpdateMyLocation(new UI.Forms.Position { Longitude = e.Position.Longitude, Latitude = e.Position.Latitude, });
                 mapView.MyLocationLayer.UpdateMyDirection(e.Position.Heading, mapView.Viewport.Rotation);
                 mapView.MyLocationLayer.UpdateMySpeed(e.Position.Speed);
             });

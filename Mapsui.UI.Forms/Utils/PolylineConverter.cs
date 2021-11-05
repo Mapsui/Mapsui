@@ -59,7 +59,11 @@ namespace Mapsui.UI.Forms.Utils
                 }
 
                 currentLng += (sum & 1) == 1 ? ~(sum >> 1) : (sum >> 1);
-                var mLatLng = new Position(Convert.ToDouble(currentLat) / 100000.0, Convert.ToDouble(currentLng) / 100000.0);
+                var mLatLng = new Position
+                {
+                    Longitude = Convert.ToDouble(currentLng) / 100000.0,
+                    Latitude = Convert.ToDouble(currentLat) / 100000.0
+                };
                 poly.Add(mLatLng);
             }
 

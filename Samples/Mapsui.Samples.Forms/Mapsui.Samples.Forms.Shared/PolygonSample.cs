@@ -30,17 +30,17 @@ namespace Mapsui.Samples.Forms
                 FillColor = new Color(random.Next(0, 255) / 255.0, random.Next(0, 255) / 255.0, random.Next(0, 255) / 255.0)
             };
 
-            polygon.Positions.Add(new Position(center.Latitude - diffY, center.Longitude - diffX));
-            polygon.Positions.Add(new Position(center.Latitude + diffY, center.Longitude - diffX));
-            polygon.Positions.Add(new Position(center.Latitude + diffY, center.Longitude + diffX));
-            polygon.Positions.Add(new Position(center.Latitude - diffY, center.Longitude + diffX));
+            polygon.Positions.Add(new Position { Longitude = center.Longitude - diffX, Latitude = center.Latitude - diffY });
+            polygon.Positions.Add(new Position { Longitude = center.Longitude - diffX, Latitude = center.Latitude + diffY });
+            polygon.Positions.Add(new Position { Longitude = center.Longitude + diffX, Latitude = center.Latitude + diffY });
+            polygon.Positions.Add(new Position { Longitude = center.Longitude + diffX, Latitude = center.Latitude - diffY });
 
             // Be carefull: holes should have other direction of Positions.
             // If Positions is clockwise, than Holes should all be counter clockwise and the other way round.
             polygon.Holes.Add(new Position[] {
-                new Position(center.Latitude - diffY * 0.3, center.Longitude - diffX * 0.3),
-                new Position(center.Latitude + diffY * 0.3, center.Longitude + diffX * 0.3),
-                new Position(center.Latitude + diffY * 0.3, center.Longitude - diffX * 0.3),
+                new Position { Longitude = center.Longitude - diffX * 0.3, Latitude = center.Latitude - diffY * 0.3 },
+                new Position { Longitude = center.Longitude + diffX * 0.3, Latitude = center.Latitude + diffY * 0.3 },
+                new Position { Longitude = center.Longitude - diffX * 0.3, Latitude = center.Latitude + diffY * 0.3 },
             });
 
             polygon.IsClickable = true;

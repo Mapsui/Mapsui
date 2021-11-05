@@ -11,7 +11,7 @@
         {
             var result = Projection.SphericalMercator.ToLonLat(point.X, point.Y);
 
-            return new Position(result.lat, result.lon);
+            return new Position { Longitude = result.lon, Latitude = result.lat };
         }
     }
 }
