@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Reflection;
+using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Providers.Shapefile;

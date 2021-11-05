@@ -3,7 +3,7 @@ using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Styles;
 
-namespace Mapsui.Providers
+namespace Mapsui.GeometryLayer
 {
     public interface IGeometryFeature : IFeature
     {

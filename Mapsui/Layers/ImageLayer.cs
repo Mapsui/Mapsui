@@ -23,6 +23,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Fetcher;
+using Mapsui.GeometryLayer;
 using Mapsui.Logging;
 using Mapsui.Providers;
 

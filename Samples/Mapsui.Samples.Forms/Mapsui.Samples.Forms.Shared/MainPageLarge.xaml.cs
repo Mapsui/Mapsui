@@ -11,6 +11,7 @@ using Mapsui.Extensions;
 using Mapsui.Styles;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Mapsui.GeometryLayer;
 
 namespace Mapsui.Samples.Forms
 {

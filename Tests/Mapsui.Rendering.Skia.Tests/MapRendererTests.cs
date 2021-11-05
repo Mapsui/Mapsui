@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading;
 using Mapsui.Geometries;
+using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Rendering.Skia.Tests.Extensions;

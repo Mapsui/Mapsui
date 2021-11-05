@@ -23,6 +23,7 @@ using System.IO;
 using System.Text;
 using Mapsui.Extensions;
 using Mapsui.Geometries;
+using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Providers.Shapefile.Indexing;
 

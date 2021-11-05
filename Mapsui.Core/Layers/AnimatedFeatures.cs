@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
-using Mapsui.Geometries;
-using Mapsui.Providers;
 
 namespace Mapsui.Layers
 {
