@@ -115,7 +115,7 @@ namespace Mapsui.Providers
         {
             return new RectFeature
             {
-                Rect = GrowBox(cluster.Box, resolution),
+                Rectangle = GrowBox(cluster.Box, resolution),
                 Styles = new[]
                 {
                     new VectorStyle

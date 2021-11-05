@@ -318,8 +318,8 @@ namespace Mapsui
         /// <summary>
         ///     Computes the joined rect of this instance and another rect
         /// </summary>
-        /// <param name="box">Rect to join with</param>
-        /// <returns>Rect containing both rects</returns>
+        /// <param name="box">MRectangle to join with</param>
+        /// <returns>MRectangle containing both rects</returns>
         public MRectangle Join(MRectangle? box)
         {
             if (box == null)

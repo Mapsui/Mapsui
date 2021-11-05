@@ -14,7 +14,7 @@ namespace Mapsui.Rendering.Skia
         {
             try
             {
-                PolygonRenderer.Draw(canvas, viewport, style, rectFeature, rectFeature.Rect.ToPolygon(), opacity);
+                PolygonRenderer.Draw(canvas, viewport, style, rectFeature, rectFeature.Rectangle.ToPolygon(), opacity);
             }
             catch (Exception ex)
             {
