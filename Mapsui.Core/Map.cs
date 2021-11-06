@@ -142,12 +142,12 @@ namespace Mapsui
             {
                 if (_layers.Count == 0) return null;
 
-                MRect? bbox = null;
+                MRect? extent = null;
                 foreach (var layer in _layers)
                 {
-                    bbox = bbox == null ? layer.Extent : bbox.Join(layer.Extent);
+                    extent = extent == null ? layer.Extent : extent.Join(layer.Extent);
                 }
-                return bbox;
+                return extent;
             }
         }
 
