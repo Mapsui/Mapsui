@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using BruTile;
 using BruTile.Cache;
-using Mapsui.Geometries;
 using Mapsui.Layers;
 
 namespace Mapsui.Rendering
@@ -17,7 +16,7 @@ namespace Mapsui.Rendering
         /// <param name="schema">The tile schema of the tile source</param>
         /// <param name="memoryCache">The cached features from which to select</param>
         /// <returns></returns>
-        IList<IFeature> Get(BoundingBox? extent, double resolution, ITileSchema schema,
+        IList<IFeature> Get(MRect extent, double resolution, ITileSchema schema,
             ITileCache<RasterFeature> memoryCache);
     }
 }
