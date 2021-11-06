@@ -18,7 +18,7 @@ namespace Mapsui.Samples.Common.Helpers
         private static IEnumerable<PointFeature> CreateFeatures(IEnumerable<MPoint> randomPoints)
         {
             var counter = 0;
-            return randomPoints.Select(p => new PointFeature { Point = p, ["Label"] = counter++.ToString() });
+            return randomPoints.Select(p => new PointFeature(p) { ["Label"] = counter++.ToString() });
         }
 
         public static IEnumerable<MPoint> GenerateRandomPoints(MRect envelope, int count = 25, int seed = 192)

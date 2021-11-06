@@ -8,7 +8,7 @@ namespace Mapsui.Layers
     public class AnimatedPointLayer : BaseLayer
     {
         private readonly IProvider<PointFeature> _dataSource;
-        private FetchInfo _fetchInfo;
+        private FetchInfo? _fetchInfo;
         private readonly AnimatedFeatures _animatedFeatures = new();
 
         public AnimatedPointLayer(IProvider<PointFeature> dataSource)
@@ -20,7 +20,6 @@ namespace Mapsui.Layers
         public void UpdateData()
         {
             if (_fetchInfo == null) return;
-            if (_dataSource == null) return;
 
             Task.Factory.StartNew(() => {
                 _animatedFeatures.AddFeatures(_dataSource.GetFeatures(_fetchInfo));
@@ -28,7 +27,7 @@ namespace Mapsui.Layers
             });
         }
 
-        public override MRect Envelope => _dataSource?.GetExtent();
+        public override MRect? Envelope => _dataSource.GetExtent();
 
         public override IEnumerable<IFeature> GetFeatures(MRect extent, double resolution)
         {
