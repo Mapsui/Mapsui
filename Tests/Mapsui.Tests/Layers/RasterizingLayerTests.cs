@@ -20,13 +20,13 @@ namespace Mapsui.Tests.Layers
         public void TestTimer()
         {
             // arrange
+            DefaultRendererFactory.Create = () => new MapRenderer();
             var layer = new RasterizingLayer(CreatePointLayer());
             var schema = new GlobalSphericalMercator();
             var box = schema.Extent.ToMRect();
             var resolution = schema.Resolutions.First().Value.UnitsPerPixel;
             var waitHandle = new AutoResetEvent(false);
-            DefaultRendererFactory.Create = () => new MapRenderer(); // Using xaml renderer here to test rasterizer. Suboptimal. 
-
+            
             Assert.AreEqual(0, layer.GetFeatures(box, resolution).Count());
             layer.DataChanged += (_, _) => {
                 // assert

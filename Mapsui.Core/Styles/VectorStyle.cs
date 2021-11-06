@@ -12,17 +12,17 @@ namespace Mapsui.Styles
         /// <summary>
         /// Line style for line geometries
         /// </summary>
-        public Pen? Line { get; set; }
+        public Pen Line { get; set; }
 
         /// <summary>
         /// Outline style for line and polygon geometries
         /// </summary>
-        public Pen? Outline { get; set; }
+        public Pen Outline { get; set; }
 
         /// <summary>
         /// Fill style for Polygon geometries
         /// </summary>
-        public Brush? Fill { get; set; }
+        public Brush Fill { get; set; }
 
         public override bool Equals(object? obj)
         {
@@ -36,48 +36,25 @@ namespace Mapsui.Styles
         public bool Equals(VectorStyle vectorStyle)
         {
             if (!base.Equals(vectorStyle))
-            {
                 return false;
-            }
 
-            if ((Line is null) ^ (vectorStyle.Line is null))
-            {
+            if (!Line.Equals(vectorStyle.Line))
                 return false;
-            }
 
-            if (Line is not null && !Line.Equals(vectorStyle.Line))
-            {
+            if (!Outline.Equals(vectorStyle.Outline))
                 return false;
-            }
 
-            if ((Outline is null) ^ (vectorStyle.Outline is null))
-            {
+            if (!Fill.Equals(vectorStyle.Fill))
                 return false;
-            }
-
-            if (Outline is not null && !Outline.Equals(vectorStyle.Outline))
-            {
-                return false;
-            }
-
-            if ((Fill is null) ^ (vectorStyle.Fill is null))
-            {
-                return false;
-            }
-
-            if (Fill is not null && !Fill.Equals(vectorStyle.Fill))
-            {
-                return false;
-            }
 
             return true;
         }
 
         public override int GetHashCode()
         {
-            return (Line is null ? 0 : Line.GetHashCode())
-                ^ (Outline is null ? 0 : Outline.GetHashCode())
-                ^ (Fill is null ? 0 : Fill.GetHashCode())
+            return Line.GetHashCode()
+                ^ Outline.GetHashCode()
+                ^ Fill.GetHashCode()
                 ^ base.GetHashCode();
         }
 
