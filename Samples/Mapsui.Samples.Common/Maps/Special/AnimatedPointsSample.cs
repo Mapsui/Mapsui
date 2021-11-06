@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -63,9 +62,8 @@ namespace Mapsui.Samples.Common.Maps.Special
             {
                 if (count != random) // skip a random element to test robustness
                 {
-                    var feature = new PointFeature
+                    var feature = new PointFeature(new MPoint(geometry.ToPoint().X, geometry.ToPoint().Y))
                     {
-                        Point = new MPoint(geometry.ToPoint().X, geometry.ToPoint().Y),
                         ["ID"] = count.ToString(CultureInfo.InvariantCulture)
                     };
                     features.Add(feature);

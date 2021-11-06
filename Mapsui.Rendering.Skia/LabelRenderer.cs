@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using Mapsui.Geometries;
 using Mapsui.Layers;
-using Mapsui.Providers;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using SkiaSharp;
@@ -16,7 +15,7 @@ namespace Mapsui.Rendering.Skia
         private static readonly IDictionary<string, BitmapInfo> LabelCache =
             new Dictionary<string, BitmapInfo>();
 
-        private static readonly SKPaint Paint = new SKPaint
+        private static readonly SKPaint Paint = new() 
         {
             IsAntialias = true,
             IsStroke = false,

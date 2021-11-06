@@ -10,10 +10,8 @@ namespace Mapsui.Rendering.Skia
         public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, IFeature feature,
             MultiLineString multiLineString, float opacity)
         {
-            foreach (LineString lineString in multiLineString)
-            {
+            foreach (var lineString in multiLineString.LineStrings)
                 LineStringRenderer.Draw(canvas, viewport, style, feature, lineString, opacity);
-            }
         }
     }
 }

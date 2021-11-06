@@ -7,7 +7,6 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
-using Mapsui.Geometries;
 using Mapsui.Logging;
 using Mapsui.Styles;
 
@@ -108,7 +107,7 @@ namespace Mapsui.Providers.Wms
             /// <summary>
             /// Latitudal/longitudal extent of this layer
             /// </summary>
-            public BoundingBox LatLonBoundingBox;
+            public MRect LatLonBoundingBox;
 
             /// <summary>
             /// Unique name of this layer used for requesting layer
@@ -608,7 +607,7 @@ namespace Mapsui.Providers.Wms
                     !double.TryParse(node.Attributes["maxx"].Value, NumberStyles.Any, CultureInfo.InvariantCulture, out var maxX) &
                     !double.TryParse(node.Attributes["maxy"].Value, NumberStyles.Any, CultureInfo.InvariantCulture, out var maxY))
                     throw new ArgumentException("Invalid LatLonBoundingBox on layer '" + wmsServerLayer.Name + "'");
-                wmsServerLayer.LatLonBoundingBox = new BoundingBox(minX, minY, maxX, maxY);
+                wmsServerLayer.LatLonBoundingBox = new MRect(minX, minY, maxX, maxY);
             }
             return wmsServerLayer;
         }
