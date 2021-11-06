@@ -16,7 +16,7 @@ namespace Mapsui.Tests.Rendering
         {
             // arrange
             var schema = new GlobalSphericalMercator();
-            var box = schema.Extent.ToBoundingBox();
+            var box = schema.Extent.ToMRect();
             const int level = 3;
             var resolution = schema.Resolutions[level];
             var memoryCache = PopulateMemoryCache(schema, new MemoryCache<RasterFeature>(), level);

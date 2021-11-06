@@ -3,14 +3,13 @@ using System.Linq;
 using BruTile;
 using BruTile.Cache;
 using Mapsui.Extensions;
-using Mapsui.Geometries;
 using Mapsui.Layers;
 
 namespace Mapsui.Rendering
 {
     public class RenderFetchStrategy : IRenderFetchStrategy
     {
-        public IList<IFeature> Get(BoundingBox? extent, double resolution, ITileSchema schema, ITileCache<RasterFeature> memoryCache)
+        public IList<IFeature> Get(MRect extent, double resolution, ITileSchema schema, ITileCache<RasterFeature> memoryCache)
         {
             var dictionary = new Dictionary<TileIndex, IFeature>();
             var level = BruTile.Utilities.GetNearestLevel(schema.Resolutions, resolution);

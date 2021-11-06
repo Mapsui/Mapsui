@@ -58,7 +58,7 @@ namespace Mapsui.Layers
             IDataFetchStrategy? dataFetchStrategy = null, IRenderFetchStrategy? renderFetchStrategy = null,
             int minExtraTiles = -1, int maxExtraTiles = -1, Func<TileInfo, RasterFeature>? fetchTileAsFeature = null)
         {
-            _tileSource = tileSource ?? throw new ArgumentException("source can not null");
+            _tileSource = tileSource ?? throw new ArgumentException($"{tileSource} can not null");
             MemoryCache = new MemoryCache<RasterFeature>(minTiles, maxTiles);
             Style = new VectorStyle { Outline = { Color = Color.FromArgb(0, 0, 0, 0) } }; // initialize with transparent outline
             Attribution.Text = _tileSource.Attribution?.Text;
@@ -83,17 +83,17 @@ namespace Mapsui.Layers
         private MemoryCache<RasterFeature> MemoryCache { get; }
 
         /// <inheritdoc />
-        public override IReadOnlyList<double> Resolutions => _tileSource.Schema?.Resolutions.Select(r => r.Value.UnitsPerPixel).ToList();
+        public override IReadOnlyList<double> Resolutions => _tileSource.Schema.Resolutions.Select(r => r.Value.UnitsPerPixel).ToList();
 
         /// <inheritdoc />
         public override MRect? Extent => _extent;
 
         /// <inheritdoc />
-        public override IEnumerable<IFeature> GetFeatures(MRect box, double resolution)
+        public override IEnumerable<IFeature> GetFeatures(MRect extent, double resolution)
         {
             if (_tileSource.Schema == null) return Enumerable.Empty<IFeature>();
             UpdateMemoryCacheMinAndMax();
-            return _renderFetchStrategy.Get(box.ToBoundingBox(), resolution, _tileSource.Schema, MemoryCache);
+            return _renderFetchStrategy.Get(extent, resolution, _tileSource.Schema, MemoryCache);
         }
 
         /// <inheritdoc />

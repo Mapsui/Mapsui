@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using BruTile;
 using BruTile.Cache;
@@ -12,7 +13,7 @@ namespace Mapsui.Fetcher
 {
     internal class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
     {
-        private FetchInfo _fetchInfo;
+        private FetchInfo? _fetchInfo;
         private readonly object _lockRoot = new();
         private bool _busy;
         private bool _viewportIsModified;
@@ -51,7 +52,7 @@ namespace Mapsui.Fetcher
             }
         }
 
-        public bool TryTake(ref Action method)
+        public bool TryTake([NotNullWhen(true)] out Action? method)
         {
             lock (_lockRoot)
             {
@@ -67,6 +68,7 @@ namespace Mapsui.Fetcher
 
                 Busy = _tilesInProgress.Count > 0 || _tilesToFetch.Count > 0;
                 // else the queue is empty, we are done.
+                method = null;
                 return false;
             }
         }
