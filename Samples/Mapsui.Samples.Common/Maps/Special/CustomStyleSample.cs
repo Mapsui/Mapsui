@@ -69,7 +69,7 @@ namespace Mapsui.Samples.Common.Maps
             var map = new Map();
 
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            map.Layers.Add(CreateStylesLayer(map.Envelope));
+            map.Layers.Add(CreateStylesLayer(map.Extent));
 
             return map;
         }

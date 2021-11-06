@@ -27,7 +27,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            map.Layers.Add(CreateMutatingTriangleLayer(map.Envelope));
+            map.Layers.Add(CreateMutatingTriangleLayer(map.Extent));
             return map;
         }
 
