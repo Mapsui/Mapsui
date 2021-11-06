@@ -8,7 +8,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Mapsui.Geometries.Utilities;
 using Mapsui.Layers;
-using Mapsui.Providers;
 #if __MAUI__
 using Mapsui.UI.Maui.Extensions;
 using Microsoft.Maui;
@@ -27,11 +26,6 @@ using Xamarin.Forms;
 using Color = Xamarin.Forms.Color;
 using KnownColor = Xamarin.Forms.Color;
 #endif
-using Mapsui.Rendering;
-using Mapsui.UI.Utils;
-using SkiaSharp;
-using SkiaSharp.Views.Forms;
-using Xamarin.Forms;
 
 #if __MAUI__
 namespace Mapsui.UI.Maui

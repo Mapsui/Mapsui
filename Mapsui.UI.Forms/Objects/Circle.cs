@@ -3,6 +3,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using Mapsui.GeometryLayer;
 using Mapsui.Providers;
+using Mapsui.Styles;
+using Mapsui.UI.Objects;
 using System.Runtime.CompilerServices;
 using System.Linq;
 using System;
@@ -21,10 +23,6 @@ using Mapsui.UI.Forms.Extensions;
 using Color = Xamarin.Forms.Color;
 using KnownColor = Xamarin.Forms.Color;
 #endif
-using Mapsui.Styles;
-using Mapsui.UI.Forms.Extensions;
-using Mapsui.UI.Objects;
-using Xamarin.Forms;
 
 #if __MAUI__
 namespace Mapsui.UI.Maui

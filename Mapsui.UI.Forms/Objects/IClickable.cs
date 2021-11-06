@@ -4,7 +4,6 @@ using Mapsui.UI.Maui;
 #else
 using Mapsui.UI.Forms;
 #endif
-using Mapsui.UI.Forms;
 
 namespace Mapsui.UI.Objects
 {
