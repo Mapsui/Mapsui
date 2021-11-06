@@ -30,7 +30,6 @@ namespace Mapsui.Projection
             return ToLonLat(point.X, point.Y).ToMPoint();
         }
 
-
         public static (double lon, double lat) ToLonLat(double x, double y)
         {
             var ts = Math.Exp(-y / Radius);

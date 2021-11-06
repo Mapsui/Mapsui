@@ -54,15 +54,14 @@ namespace Mapsui.Styles
 
         public override bool Equals(object obj)
         {
-            if (!(obj is Pen pen))
-            {
-                return false;
-            }
-            return Equals(pen);
+            return obj is not Pen pen ? false : Equals(pen);
         }
 
-        public bool Equals(Pen pen)
+        public bool Equals(Pen? pen)
         {
+            if (pen == null)
+                return false;
+
             // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (Width != pen.Width) return false;
 

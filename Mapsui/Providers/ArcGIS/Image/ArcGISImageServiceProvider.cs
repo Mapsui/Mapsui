@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Text;
 using Mapsui.Extensions;
 using Mapsui.Geometries;
+using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Rendering;
@@ -97,23 +98,22 @@ namespace Mapsui.Providers.ArcGIS.Image
 
         public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {
-            var features = new List<IGeometryFeature>();
-            IRaster? raster = null;
+            var features = new List<RasterFeature>();
 
             var viewport = fetchInfo.ToViewport();
 
-            if (TryGetMap(viewport, ref raster))
+            if (TryGetMap(viewport, out MRaster raster))
             {
-                var feature = new Feature
+                var feature = new RasterFeature
                 {
-                    Geometry = raster
+                    Raster = raster
                 };
                 features.Add(feature);
             }
             return features;
         }
 
-        public bool TryGetMap(IViewport viewport, ref IRaster raster)
+        public bool TryGetMap(IViewport viewport, out MRaster raster)
         {
             int width;
             int height;
@@ -126,10 +126,11 @@ namespace Mapsui.Providers.ArcGIS.Image
             catch (OverflowException ex)
             {
                 Logger.Log(LogLevel.Error, "Could not convert double to int (ExportMap size)", ex);
+                raster = null;
                 return false;
             }
 
-            var uri = new Uri(GetRequestUrl(viewport.Extent.ToBoundingBox(), width, height));
+            var uri = new Uri(GetRequestUrl(viewport.Extent, width, height));
             var handler = new HttpClientHandler { Credentials = Credentials ?? CredentialCache.DefaultCredentials };
             var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(_timeOut) };
 
@@ -141,11 +142,12 @@ namespace Mapsui.Providers.ArcGIS.Image
                     try
                     {
                         var bytes = BruTile.Utilities.ReadFully(dataStream);
-                        raster = new Raster(new MemoryStream(bytes), viewport.Extent.ToBoundingBox());
+                        raster = new MRaster(new MemoryStream(bytes), viewport.Extent);
                     }
                     catch (Exception ex)
                     {
                         Logger.Log(LogLevel.Error, ex.Message, ex);
+                        raster = null;
                         return false;
                     }
                 }
@@ -166,10 +168,12 @@ namespace Mapsui.Providers.ArcGIS.Image
                     throw (new RenderException("There was a problem while attempting to request the WMS", ex));
                 Debug.WriteLine("There was a problem while attempting to request the WMS" + ex.Message);
             }
+
+            raster = null;
             return false;
         }
 
-        private string GetRequestUrl(BoundingBox boundingBox, int width, int height)
+        private string GetRequestUrl(MRect? boundingBox, int width, int height)
         {
             var url = new StringBuilder(Url);
 
@@ -215,7 +219,7 @@ namespace Mapsui.Providers.ArcGIS.Image
             return url.ToString();
         }
 
-        public MRect GetExtent()
+        public MRect? GetExtent()
         {
             return null;
         }

@@ -6,8 +6,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using Mapsui.Extensions;
-using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Styles;
 using Bitmap = System.Drawing.Bitmap;
@@ -62,7 +60,7 @@ namespace Mapsui.Providers
 
             var data = ReadImageAsStream(tiffPath, noDataColors);
 
-            _feature = new Feature { Geometry = new Raster(data, _extent.ToBoundingBox()) };
+            _feature = new RasterFeature { Raster = new MRaster(data, _extent) };
             _feature.Styles.Add(new VectorStyle());
         }
 
@@ -186,11 +184,7 @@ namespace Mapsui.Providers
             return worldProperties;
         }
 
-        public void Dispose()
-        {
-        }
-
-        public string CRS { get; set; }
+        public string CRS { get; set; } = "";
 
         public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {
@@ -198,7 +192,7 @@ namespace Mapsui.Providers
             {
                 return new[] { _feature };
             }
-            return new Features();
+            return new List<IFeature>();
         }
 
         public MRect GetExtent()

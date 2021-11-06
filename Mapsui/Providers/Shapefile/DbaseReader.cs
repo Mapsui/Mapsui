@@ -24,6 +24,7 @@ using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using Mapsui.GeometryLayer;
 using Mapsui.Providers.Shapefile.Indexing;
 
 namespace Mapsui.Providers.Shapefile
@@ -46,8 +47,8 @@ namespace Mapsui.Providers.Shapefile
         private short _recordLength;
         private readonly string _filename;
         private DbaseField[] _dbaseColumns;
-        private FileStream _fs;
-        private BinaryReader _br;
+        private FileStream? _fs;
+        private BinaryReader? _br;
         private bool _headerIsParsed;
 
         public DbaseReader(string filename)
@@ -443,13 +444,13 @@ namespace Mapsui.Providers.Shapefile
         /// <param name="oid"></param>
         /// <param name="table"></param>
         /// <returns></returns>
-        internal IGeometryFeature GetFeature(uint oid, IEnumerable<IGeometryFeature> table)
+        internal IGeometryFeature? GetFeature(uint oid, IEnumerable<IGeometryFeature> table)
         {
             if (oid >= _numberOfRecords)
                 throw (new ArgumentException("Invalid DataRow requested at index " + oid.ToString(CultureInfo.InvariantCulture)));
             _fs.Seek(_headerLength + oid * _recordLength, 0);
 
-            var dr = new Feature();
+            var dr = new GeometryFeature();
 
             if (_br.ReadChar() == '*') return null; // is record marked deleted?
 

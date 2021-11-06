@@ -18,8 +18,10 @@ namespace Mapsui.Samples.Common.Maps.Data
 
         public static Map CreateMap()
         {
-            var map = new Map();
-            map.CRS = "EPSG:28992";
+            var map = new Map
+            {
+                CRS = "EPSG:28992"
+            };
             map.Layers.Add(CreateLayer());
             map.Layers.Add(GeodanOfficesSample.CreateLayer());
             return map;

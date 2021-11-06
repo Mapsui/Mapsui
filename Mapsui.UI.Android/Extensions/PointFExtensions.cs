@@ -2,7 +2,7 @@ using Android.Graphics;
 
 namespace Mapsui.UI.Android.Extensions
 {
-    static class PointFExtensions
+    internal static class PointFExtensions
     {
         public static MPoint ToMapsui(this PointF point)
         {

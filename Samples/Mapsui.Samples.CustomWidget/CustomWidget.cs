@@ -1,5 +1,4 @@
-﻿using Mapsui.Geometries;
-using Mapsui.Styles;
+﻿using Mapsui.Styles;
 using Mapsui.Widgets;
 
 namespace Mapsui.Samples.CustomWidget

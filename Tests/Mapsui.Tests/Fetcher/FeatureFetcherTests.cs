@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Mapsui.Fetcher;
 using Mapsui.Geometries;
+using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using NUnit.Framework;
@@ -17,8 +17,10 @@ namespace Mapsui.Tests.Fetcher
         {
             // arrange
             var extent = new MRect(0, 0, 10, 10);
-            var layer = new Layer();
-            layer.DataSource = new MemoryProvider<IGeometryFeature>(GenerateRandomPoints(extent, 25));
+            var layer = new Layer
+            {
+                DataSource = new GeometryMemoryProvider<IGeometryFeature>(GenerateRandomPoints(extent, 25))
+            };
             layer.Delayer.MillisecondsToWait = 0;
 
             var notifications = new List<bool>();
@@ -28,12 +30,7 @@ namespace Mapsui.Tests.Fetcher
                     notifications.Add(layer.Busy);
                 }
             };
-            var fetchInfo = new FetchInfo
-            {
-                Extent = extent,
-                Resolution = 1,
-                ChangeType = ChangeType.Discrete
-            };
+            var fetchInfo = new FetchInfo(extent, 1, null, ChangeType.Discrete);
 
             // act
             layer.RefreshData(fetchInfo);

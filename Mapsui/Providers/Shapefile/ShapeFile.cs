@@ -23,6 +23,7 @@ using System.IO;
 using System.Text;
 using Mapsui.Extensions;
 using Mapsui.Geometries;
+using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Providers.Shapefile.Indexing;
 
@@ -148,7 +149,7 @@ namespace Mapsui.Providers.Shapefile
         /// <returns>true if this feature should be included, false if it should be filtered</returns>
         public delegate bool FilterMethod(IFeature dr);
 
-        private MRect _envelope;
+        private MRect? _envelope;
         private int _featureCount;
         private readonly bool _fileBasedIndex;
         private string _filename;
@@ -164,7 +165,7 @@ namespace Mapsui.Providers.Shapefile
         /// <summary>
         /// Tree used for fast query of data
         /// </summary>
-        private QuadTree _tree;
+        private QuadTree? _tree;
 
         /// <summary>
         /// Initializes a ShapeFile DataProvider.
@@ -718,7 +719,7 @@ namespace Mapsui.Providers.Shapefile
         /// <param name="oid">Object ID</param>
         /// <returns>geometry</returns>
         // ReSharper disable once CyclomaticComplexity // Fix when changes need to be made here
-        private Geometry ReadGeometry(uint oid)
+        private Geometry? ReadGeometry(uint oid)
         {
             _brShapeFile.BaseStream.Seek(GetShapeIndex(oid) + 8, 0); //Skip record number and content length
             var type = (ShapeType)_brShapeFile.ReadInt32(); //Shape type
@@ -847,7 +848,7 @@ namespace Mapsui.Providers.Shapefile
 
         }
 
-        private IGeometryFeature GetFeaturePrivate(uint rowId, IEnumerable<IGeometryFeature>? dt)
+        private IGeometryFeature? GetFeaturePrivate(uint rowId, IEnumerable<IGeometryFeature>? dt)
         {
             if (_dbaseFile != null)
             {

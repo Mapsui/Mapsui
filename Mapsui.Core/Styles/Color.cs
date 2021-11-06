@@ -182,6 +182,10 @@ namespace Mapsui.Styles
                 result = FromHsl(h / 360.0f, s / 100.0f, l / 100.0f);
             }
 
+            if (result is null)
+            {
+                throw new ArgumentException($"Could not create color from input string '{from}'");
+            }
             return result;
         }
 

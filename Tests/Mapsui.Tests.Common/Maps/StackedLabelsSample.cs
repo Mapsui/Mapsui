@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using Mapsui.Geometries;
+using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
@@ -58,13 +59,13 @@ namespace Mapsui.Tests.Common.Maps
             };
         }
 
-        private static MemoryProvider<IGeometryFeature> CreateRandomPointsProvider(IEnumerable<IGeometry> randomPoints)
+        private static GeometryMemoryProvider<IGeometryFeature> CreateRandomPointsProvider(IEnumerable<IGeometry> randomPoints)
         {
             var features = new List<IGeometryFeature>();
             var count = 0;
             foreach (var point in randomPoints)
             {
-                var feature = new Feature
+                var feature = new GeometryFeature
                 {
                     Geometry = point,
                     [LabelColumn] = count.ToString(CultureInfo.InvariantCulture)
@@ -72,7 +73,7 @@ namespace Mapsui.Tests.Common.Maps
                 features.Add(feature);
                 count++;
             }
-            return new MemoryProvider<IGeometryFeature>(features);
+            return new GeometryMemoryProvider<IGeometryFeature>(features);
         }
 
         private static IEnumerable<IGeometry> GenerateRandomPoints(BoundingBox box, int count = 25)

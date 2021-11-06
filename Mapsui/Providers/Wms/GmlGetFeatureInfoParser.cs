@@ -11,7 +11,7 @@ namespace Mapsui.Providers.Wms
     {
         private FeatureInfo? _featureInfo;
 
-        public FeatureInfo ParseWMSResult(string layerName, Stream result)
+        public FeatureInfo ParseWMSResult(string? layerName, Stream result)
         {
             _featureInfo = new FeatureInfo { LayerName = layerName, FeatureInfos = new List<Dictionary<string, string>>() };
             XDocument xdoc;
@@ -34,7 +34,7 @@ namespace Mapsui.Providers.Wms
         {
             LookExtractMultipleElements(root);
 
-            if (_featureInfo.FeatureInfos.Count == 0)
+            if (_featureInfo?.FeatureInfos?.Count == 0)
                 ExtractFeatures(root);
         }
 

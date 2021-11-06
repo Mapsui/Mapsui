@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Mapsui.Extensions;
 using Mapsui.Geometries;
+using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Projection;
 using Mapsui.Providers;
@@ -37,7 +38,7 @@ namespace Mapsui.Samples.Common.Maps
 
             return new MemoryLayer
             {
-                DataSource = new MemoryProvider<IGeometryFeature>(new Feature { Geometry = lineString }),
+                DataSource = new GeometryMemoryProvider<IGeometryFeature>(new GeometryFeature { Geometry = lineString }),
                 Name = "LineStringLayer",
                 Style = style
             };

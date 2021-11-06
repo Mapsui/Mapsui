@@ -1,5 +1,7 @@
-﻿using Mapsui.UI.Objects;
-using Mapsui.Styles;
+﻿using System;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using Mapsui.GeometryLayer;
 using Mapsui.Providers;
 using System.Runtime.CompilerServices;
 using System.Linq;
@@ -19,6 +21,10 @@ using Mapsui.UI.Forms.Extensions;
 using Color = Xamarin.Forms.Color;
 using KnownColor = Xamarin.Forms.Color;
 #endif
+using Mapsui.Styles;
+using Mapsui.UI.Forms.Extensions;
+using Mapsui.UI.Objects;
+using Xamarin.Forms;
 
 #if __MAUI__
 namespace Mapsui.UI.Maui
@@ -90,13 +96,16 @@ namespace Mapsui.UI.Forms
                     UpdateFeature();
                     break;
                 case nameof(FillColor):
-                    ((VectorStyle)Feature.Styles.First()).Fill = new Styles.Brush(FillColor.ToMapsui());
+                    if (Feature != null)
+                        ((VectorStyle)Feature.Styles.First()).Fill = new Styles.Brush(FillColor.ToMapsui());
                     break;
                 case nameof(StrokeWidth):
-                    ((VectorStyle)Feature.Styles.First()).Outline.Width = StrokeWidth;
+                    if (Feature != null)
+                        ((VectorStyle)Feature.Styles.First()).Outline.Width = StrokeWidth;
                     break;
                 case nameof(StrokeColor):
-                    ((VectorStyle)Feature.Styles.First()).Outline.Color = StrokeColor.ToMapsui();
+                    if (Feature != null)
+                        ((VectorStyle)Feature.Styles.First()).Outline.Color = StrokeColor.ToMapsui();
                     break;
             }
         }
@@ -110,7 +119,7 @@ namespace Mapsui.UI.Forms
                 if (Feature == null)
                 {
                     // Create a new one
-                    Feature = new Feature
+                    Feature = new GeometryFeature
                     {
                         Geometry = new Geometries.Polygon(),
                         ["Label"] = Label,
@@ -146,7 +155,7 @@ namespace Mapsui.UI.Forms
                 exteriorRing.Vertices.Add(new Geometries.Point(radius * Math.Sin(angleRad) + centerX, radius * Math.Cos(angleRad) + centerY));
             }
 
-            Feature.Geometry = new Geometries.Polygon(exteriorRing);
+            Feature!.Geometry = new Geometries.Polygon(exteriorRing);
         }
     }
 }

@@ -114,7 +114,7 @@ namespace Mapsui.Geometries
             var minDist = double.MaxValue;
             foreach (var ls in LineStrings)
             {
-                IList<Point> coord0 = ls.Vertices;
+                var coord0 = ls.Vertices;
                 for (var i = 0; i < coord0.Count - 1; i++)
                 {
                     var dist = CGAlgorithms.DistancePointLine(point, coord0[i], coord0[i + 1]);
@@ -139,7 +139,7 @@ namespace Mapsui.Geometries
         ///     The minimum bounding box for this Geometry.
         /// </summary>
         /// <returns></returns>
-        public override BoundingBox BoundingBox
+        public override BoundingBox? BoundingBox
         {
             get
             {

@@ -51,10 +51,7 @@ namespace Mapsui.Geometries
         /// <summary>
         ///     Returns summed area of the Polygons in the MultiPolygon collection
         /// </summary>
-        public double Area
-        {
-            get { return Polygons.Sum(polygon => polygon.Area); }
-        }
+        public double Area => Polygons.Sum(polygon => polygon.Area);
 
         /// <summary>
         ///     Returns the number of geometries in the collection.
@@ -113,7 +110,7 @@ namespace Mapsui.Geometries
         }
 
         [Obsolete("Use the BoundingBox field instead")]
-        public new BoundingBox GetBoundingBox()
+        public new BoundingBox? GetBoundingBox()
         {
             return BoundingBox;
         }
@@ -121,7 +118,7 @@ namespace Mapsui.Geometries
         ///     Returns the bounding box of the object
         /// </summary>
         /// <returns>bounding box</returns>
-        public override BoundingBox BoundingBox
+        public override BoundingBox? BoundingBox
         {
             get
             {

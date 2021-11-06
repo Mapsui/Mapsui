@@ -1,6 +1,6 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Geometries;
-using Mapsui.Providers;
+using Mapsui.Layers;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using SkiaSharp;
@@ -9,12 +9,12 @@ namespace Mapsui.Rendering.Skia
 {
     internal static class PolygonRenderer
     {
-        public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, IGeometryFeature feature, IGeometry geometry,
-            float opacity, SymbolCache? symbolCache = null)
+        public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, IFeature feature,
+            Polygon polygon, float opacity, SymbolCache? symbolCache = null)
         {
             if (style is LabelStyle labelStyle)
             {
-                var worldCenter = geometry.BoundingBox.Centroid;
+                var worldCenter = polygon.BoundingBox.Centroid;
                 var center = viewport.WorldToScreen(worldCenter.X, worldCenter.Y).ToPoint();
                 LabelRenderer.Draw(canvas, labelStyle, feature, center, opacity);
             }
@@ -22,13 +22,11 @@ namespace Mapsui.Rendering.Skia
             {
                 foreach (var s in styleCollection)
                 {
-                    Draw(canvas, viewport, s, feature, geometry, opacity, symbolCache);
+                    Draw(canvas, viewport, s, feature, polygon, opacity, symbolCache);
                 }
             }
             else if (style is VectorStyle vectorStyle)
             {
-                var polygon = (Polygon)geometry;
-
                 float lineWidth = 1;
                 var lineColor = Color.Black; // default
                 var fillColor = Color.Gray; // default
@@ -173,7 +171,7 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        private static SKImage GetImage(SymbolCache symbolCache, int bitmapId)
+        private static SKImage? GetImage(SymbolCache symbolCache, int bitmapId)
         {
             var bitmapInfo = symbolCache.GetOrCreate(bitmapId);
             if (bitmapInfo.Type == BitmapType.Bitmap)

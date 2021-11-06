@@ -1,4 +1,8 @@
-﻿using Mapsui.Providers;
+﻿using System;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using Mapsui.GeometryLayer;
+using Mapsui.Providers;
 using Mapsui.Styles;
 using System;
 using System.Linq;
@@ -40,8 +44,8 @@ namespace Mapsui.UI.Objects
         /// </summary>
         public string Label
         {
-            get { return (string)GetValue(LabelProperty); }
-            set { SetValue(LabelProperty, value); }
+            get => (string)GetValue(LabelProperty);
+            set => SetValue(LabelProperty, value);
         }
 
         /// <summary>
@@ -49,8 +53,8 @@ namespace Mapsui.UI.Objects
         /// </summary>
         public float StrokeWidth
         {
-            get { return (float)GetValue(StrokeWidthProperty); }
-            set { SetValue(StrokeWidthProperty, value); }
+            get => (float)GetValue(StrokeWidthProperty);
+            set => SetValue(StrokeWidthProperty, value);
         }
 
         /// <summary>
@@ -67,8 +71,8 @@ namespace Mapsui.UI.Objects
         /// </summary>
         public double MinVisible
         {
-            get { return (double)GetValue(MinVisibleProperty); }
-            set { SetValue(MinVisibleProperty, value); }
+            get => (double)GetValue(MinVisibleProperty);
+            set => SetValue(MinVisibleProperty, value);
         }
 
         /// <summary>
@@ -76,8 +80,8 @@ namespace Mapsui.UI.Objects
         /// </summary>
         public double MaxVisible
         {
-            get { return (double)GetValue(MaxVisibleProperty); }
-            set { SetValue(MaxVisibleProperty, value); }
+            get => (double)GetValue(MaxVisibleProperty);
+            set => SetValue(MaxVisibleProperty, value);
         }
 
         /// <summary>
@@ -85,8 +89,8 @@ namespace Mapsui.UI.Objects
         /// </summary>
         public int ZIndex
         {
-            get { return (int)GetValue(ZIndexProperty); }
-            set { SetValue(ZIndexProperty, value); }
+            get => (int)GetValue(ZIndexProperty);
+            set => SetValue(ZIndexProperty, value);
         }
 
         /// <summary>
@@ -94,8 +98,8 @@ namespace Mapsui.UI.Objects
         /// </summary>
         public bool IsClickable
         {
-            get { return (bool)GetValue(IsClickableProperty); }
-            set { SetValue(IsClickableProperty, value); }
+            get => (bool)GetValue(IsClickableProperty);
+            set => SetValue(IsClickableProperty, value);
         }
 
         /// <summary>
@@ -108,12 +112,9 @@ namespace Mapsui.UI.Objects
         /// <summary>
         /// Mapsui Feature belonging to this drawable
         /// </summary>
-        public IGeometryFeature Feature
+        public IGeometryFeature? Feature
         {
-            get
-            {
-                return feature;
-            }
+            get => feature;
             set
             {
                 if (feature == null || !feature.Equals(value))
@@ -142,16 +143,20 @@ namespace Mapsui.UI.Objects
             switch (propertyName)
             {
                 case nameof(StrokeWidth):
-                    ((VectorStyle)Feature.Styles.First()).Line.Width = StrokeWidth;
+                    if (Feature != null)
+                        ((VectorStyle)Feature.Styles.First()).Line.Width = StrokeWidth;
                     break;
                 case nameof(StrokeColor):
-                    ((VectorStyle)Feature.Styles.First()).Line.Color = StrokeColor.ToMapsui();
+                    if (Feature != null)
+                        ((VectorStyle)Feature.Styles.First()).Line.Color = StrokeColor.ToMapsui();
                     break;
                 case nameof(MinVisible):
-                    ((VectorStyle)Feature.Styles.First()).MinVisible = MinVisible;
+                    if (Feature != null)
+                        ((VectorStyle)Feature.Styles.First()).MinVisible = MinVisible;
                     break;
                 case nameof(MaxVisible):
-                    ((VectorStyle)Feature.Styles.First()).MaxVisible = MaxVisible;
+                    if (Feature != null)
+                        ((VectorStyle)Feature.Styles.First()).MaxVisible = MaxVisible;
                     break;
             }
         }

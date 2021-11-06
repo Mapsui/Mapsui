@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Geometries;
+using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.UI;
@@ -35,11 +36,13 @@ namespace Mapsui.Samples.Common.Maps
             var layer = new MemoryLayer();
 
             var polygon = new Polygon(new LinearRing(GenerateRandomPoints(envelope, 3)));
-            var feature = new Feature() { Geometry = polygon };
-            var features = new List<IGeometryFeature>();
-            features.Add(feature);
+            var feature = new GeometryFeature() { Geometry = polygon };
+            var features = new List<IGeometryFeature>
+            {
+                feature
+            };
 
-            layer.DataSource = new MemoryProvider<IGeometryFeature>(features);
+            layer.DataSource = new GeometryMemoryProvider<IGeometryFeature>(features);
 
             PeriodicTask.Run(() => {
                 polygon.ExteriorRing = new LinearRing(GenerateRandomPoints(envelope, 3));

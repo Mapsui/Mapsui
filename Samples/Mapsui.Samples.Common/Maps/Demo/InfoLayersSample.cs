@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Mapsui.Geometries;
+using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
@@ -38,7 +39,7 @@ namespace Mapsui.Samples.Common.Maps
         private static ILayer CreatePolygonLayer()
         {
             var features = new List<IGeometryFeature> { CreatePolygonFeature(), CreateMultiPolygonFeature() };
-            var provider = new MemoryProvider<IGeometryFeature>(features);
+            var provider = new GeometryMemoryProvider<IGeometryFeature>(features);
 
             var layer = new MemoryLayer
             {
@@ -56,15 +57,15 @@ namespace Mapsui.Samples.Common.Maps
             return new MemoryLayer
             {
                 Name = LineLayerName,
-                DataSource = new MemoryProvider<IGeometryFeature>(CreateLineFeature()),
+                DataSource = new GeometryMemoryProvider<IGeometryFeature>(CreateLineFeature()),
                 Style = null,
                 IsMapInfoLayer = true
             };
         }
 
-        private static Feature CreateMultiPolygonFeature()
+        private static GeometryFeature CreateMultiPolygonFeature()
         {
-            var feature = new Feature
+            var feature = new GeometryFeature
             {
                 Geometry = CreateMultiPolygon(),
                 ["Name"] = "Multipolygon 1"
@@ -73,9 +74,9 @@ namespace Mapsui.Samples.Common.Maps
             return feature;
         }
 
-        private static Feature CreatePolygonFeature()
+        private static GeometryFeature CreatePolygonFeature()
         {
-            var feature = new Feature
+            var feature = new GeometryFeature
             {
                 Geometry = CreatePolygon(),
                 ["Name"] = "Polygon 1"
@@ -84,9 +85,9 @@ namespace Mapsui.Samples.Common.Maps
             return feature;
         }
 
-        private static Feature CreateLineFeature()
+        private static GeometryFeature CreateLineFeature()
         {
-            return new Feature
+            return new GeometryFeature
             {
                 Geometry = CreateLine(),
                 ["Name"] = "Line 1",
@@ -153,7 +154,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new Layer(InfoLayerName)
             {
-                DataSource = RandomPointHelper.CreateProviderWithRandomPoints(envelope, 25, 7),
+                DataSource = RandomPointGenerator.CreateProviderWithRandomPoints(envelope, 25, 7),
                 Style = CreateSymbolStyle(),
                 IsMapInfoLayer = true
             };

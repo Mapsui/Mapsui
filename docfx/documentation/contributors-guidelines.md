@@ -42,3 +42,8 @@ When we have direct and indirect dependecies on a nuget package those should all
 - Extension methods should always be in a Extensions folder. 
 - They should be in a class that has the name '{ClassItExtents}Extensions'. 
 - It should be in a namespace that follows the folder name (so not in the namespace of the class it extents).
+
+## Ordering of lon lat
+- In our code we prefor a lon, lat order consistent with the x, y order of most cartographic projections.
+- Some background: The order of lon and lat always causes a lot of confusion. The official notation is lat, lon, but in map projections the lat corresponds to the y-axis and the lon to the x-axis. This is confusing because in math the ordering is the other way around: x, y. There is no way that this problem can be properly solved, there will always be some confusion. To mitigate it we choose one way of ordering which is lon, lat (consistent with x, y). 
+- Also there are many ways in which we can avoid ordering altogher. For instance if we work with Longitude and Latitude properties. Also the name of SphericalMercator.FromLonLat name helps to indicate the order.

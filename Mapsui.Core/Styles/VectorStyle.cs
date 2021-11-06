@@ -12,19 +12,19 @@ namespace Mapsui.Styles
         /// <summary>
         /// Line style for line geometries
         /// </summary>
-        public Pen Line { get; set; }
+        public Pen? Line { get; set; }
 
         /// <summary>
         /// Outline style for line and polygon geometries
         /// </summary>
-        public Pen Outline { get; set; }
+        public Pen? Outline { get; set; }
 
         /// <summary>
         /// Fill style for Polygon geometries
         /// </summary>
-        public Brush Fill { get; set; }
+        public Brush? Fill { get; set; }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (!(obj is VectorStyle style))
             {
@@ -40,32 +40,32 @@ namespace Mapsui.Styles
                 return false;
             }
 
-            if ((Line == null) ^ (vectorStyle.Line == null))
+            if ((Line is null) ^ (vectorStyle.Line is null))
             {
                 return false;
             }
 
-            if (Line != null && !Line.Equals(vectorStyle.Line))
+            if (Line is not null && !Line.Equals(vectorStyle.Line))
             {
                 return false;
             }
 
-            if ((Outline == null) ^ (vectorStyle.Outline == null))
+            if ((Outline is null) ^ (vectorStyle.Outline is null))
             {
                 return false;
             }
 
-            if (Outline != null && !Outline.Equals(vectorStyle.Outline))
+            if (Outline is not null && !Outline.Equals(vectorStyle.Outline))
             {
                 return false;
             }
 
-            if ((Fill == null) ^ (vectorStyle.Fill == null))
+            if ((Fill is null) ^ (vectorStyle.Fill is null))
             {
                 return false;
             }
 
-            if (Fill != null && !Fill.Equals(vectorStyle.Fill))
+            if (Fill is not null && !Fill.Equals(vectorStyle.Fill))
             {
                 return false;
             }
@@ -75,9 +75,9 @@ namespace Mapsui.Styles
 
         public override int GetHashCode()
         {
-            return (Line == null ? 0 : Line.GetHashCode())
-                ^ (Outline == null ? 0 : Outline.GetHashCode())
-                ^ (Fill == null ? 0 : Fill.GetHashCode())
+            return (Line is null ? 0 : Line.GetHashCode())
+                ^ (Outline is null ? 0 : Outline.GetHashCode())
+                ^ (Fill is null ? 0 : Fill.GetHashCode())
                 ^ base.GetHashCode();
         }
 

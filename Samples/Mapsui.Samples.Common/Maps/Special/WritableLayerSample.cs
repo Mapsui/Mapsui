@@ -1,4 +1,5 @@
 ﻿using Mapsui.Geometries;
+using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
@@ -23,7 +24,7 @@ namespace Mapsui.Tests.Common.Maps
 
         private void MapControlOnInfo(object sender, MapInfoEventArgs e)
         {
-            _writableLayer.Add(new Feature
+            _writableLayer.Add(new GeometryFeature
             {
                 Geometry =
                 new Point(e.MapInfo.WorldPosition.X, e.MapInfo.WorldPosition.Y)
@@ -37,10 +38,10 @@ namespace Mapsui.Tests.Common.Maps
 
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             var writableLayer = new WritableLayer();
-            writableLayer.Add(new Feature());
-            writableLayer.Add(new Feature { Geometry = new Point() });
-            writableLayer.Add(new Feature { Geometry = new LineString() });
-            writableLayer.Add(new Feature { Geometry = new Polygon() });
+            writableLayer.Add(new GeometryFeature());
+            writableLayer.Add(new GeometryFeature { Geometry = new Point() });
+            writableLayer.Add(new GeometryFeature { Geometry = new LineString() });
+            writableLayer.Add(new GeometryFeature { Geometry = new Polygon() });
             map.Layers.Add(writableLayer);
 
             return map;

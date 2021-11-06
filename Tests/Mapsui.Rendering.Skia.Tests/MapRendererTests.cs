@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading;
 using Mapsui.Geometries;
+using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Rendering.Skia.Tests.Extensions;
@@ -19,11 +20,11 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = VectorStyleSample.CreateMap();
-            var viewport = map.Envelope.ToViewport(200, 4);
+            var viewport = map.Envelope.Multiply(3).ToViewport(200);
             const string fileName = "vector_symbol.png";
 
             // act
-            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
+            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
             // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
@@ -37,11 +38,11 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = BitmapSymbolSample.CreateMap();
-            var viewport = map.Envelope.ToViewport(200, 4);
+            var viewport = map.Envelope.Multiply(3).ToViewport(200);
             const string fileName = "points_with_symbolstyle.png";
 
             // act
-            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
+            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
             // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
@@ -55,7 +56,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = BitmapSymbolSample.CreateMap();
-            var features = ((MemoryProvider<IGeometryFeature>)((MemoryLayer)map.Layers[0]).DataSource).Features;
+            var features = ((GeometryMemoryProvider<IGeometryFeature>)((MemoryLayer)map.Layers[0]).DataSource).Features;
             foreach (var feature in features)
             {
                 if (feature.Geometry is Geometry geometry)
@@ -65,11 +66,11 @@ namespace Mapsui.Rendering.Skia.Tests
                     feature.Geometry = collection;
                 }
             }
-            var viewport = map.Envelope.ToViewport(200, 4);
+            var viewport = map.Envelope.Multiply(3).ToViewport(200);
             const string fileName = "points_with_symbolstyle.png";
 
             // act
-            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
+            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
             // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
@@ -83,11 +84,11 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = SvgSymbolSample.CreateMap();
-            var viewport = map.Envelope.ToViewport(200, 4);
+            var viewport = map.Envelope.Multiply(3).ToViewport(200);
             const string fileName = "points_with_svgsymbolstyle.png";
 
             // act
-            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
+            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
             // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
@@ -127,11 +128,11 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = BitmapSymbolWithRotationAndOffsetSample.CreateMap();
-            var viewport = map.Envelope.ToViewport(200, 4);
+            var viewport = map.Envelope.Multiply(4).ToViewport(200);
             const string fileName = "bitmap_symbol.png";
 
             // act
-            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
+            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
             // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
@@ -145,11 +146,11 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = SymbolTypesSample.CreateMap();
-            var viewport = map.Envelope.ToViewport(200, 4);
+            var viewport = map.Envelope.Multiply(3).ToViewport(200);
             const string fileName = "vector_symbol_symboltype.png";
 
             // act
-            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
+            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
             // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
@@ -163,11 +164,11 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = PointInWorldUnits.CreateMap();
-            var viewport = map.Envelope.ToViewport(200, 4);
+            var viewport = map.Envelope.Multiply(3).ToViewport(200);
             const string fileName = "vector_symbol_unittype.png";
 
             // act
-            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
+            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
             // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
@@ -181,7 +182,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = PolygonSample.CreateMap();
-            var viewport = map.Envelope.ToViewport(600, 1.2);
+            var viewport = map.Envelope.Multiply(1.1).ToViewport(600);
             const string fileName = "polygon.png";
 
             // act
@@ -199,7 +200,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = LineSample.CreateMap();
-            var viewport = map.Envelope.ToViewport(600, 1.2);
+            var viewport = map.Envelope.Multiply(1.1).ToViewport(600);
             const string fileName = "line.png";
 
             // act
@@ -217,7 +218,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = TilesSample.CreateMap();
-            var viewport = map.Envelope.ToViewport(600, 1.2);
+            var viewport = map.Envelope.Multiply(1.1).ToViewport(600);
             const string fileName = "tilelayer.png";
 
             // act
@@ -235,11 +236,11 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = LabelSample.CreateMap();
-            var viewport = map.Envelope.ToViewport(scaleEnvelope: 2);
+            var viewport = map.Envelope.Multiply(2).ToViewport(200);
             const string fileName = "labels.png";
 
             // act
-            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
+            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
             // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
@@ -253,7 +254,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = ProjectionSample.CreateMap();
-            var viewport = map.Envelope.ToViewport(scaleEnvelope: 1.1);
+            var viewport = map.Envelope.Multiply(1.1).ToViewport(600);
             const string fileName = "projection.png";
 
             // act 
@@ -271,7 +272,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = StackedLabelsSample.CreateMap();
-            var viewport = map.Envelope.ToViewport(scaleEnvelope: 1.2);
+            var viewport = map.Envelope.Multiply(1.2).ToViewport(600);
             const string fileName = "stacked_labels.png";
 
             // act 
@@ -281,7 +282,7 @@ namespace Mapsui.Rendering.Skia.Tests
             File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
-            Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+            Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.995));
         }
 
         private static bool CompareColors(SKColor color1, SKColor color2, int allowedColorDistance)

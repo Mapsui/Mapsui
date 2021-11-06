@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using Mapsui.Extensions;
-using Mapsui.Fetcher;
-using Mapsui.Geometries;
+using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using NUnit.Framework;
@@ -15,7 +14,7 @@ namespace Mapsui.Tests.Layers
     {
         private const string ExceptionMessage = "This exception should return on OnDataChange";
 
-        class FakeProvider : IProvider<IGeometryFeature>
+        private class FakeProvider : IProvider<IGeometryFeature>
         {
             public string? CRS { get; set; }
             public IEnumerable<IGeometryFeature> GetFeatures(FetchInfo fetchInfo)
@@ -45,12 +44,7 @@ namespace Mapsui.Tests.Layers
                 waitHandle.Go();
             };
 
-            var fetchInfo = new FetchInfo
-            {
-                Extent = new MRect(-1, -1, 0, 0),
-                Resolution = 1,
-                ChangeType = ChangeType.Discrete
-            };
+            var fetchInfo = new FetchInfo(new MRect(-1, -1, 0, 0), 1, null, ChangeType.Discrete);
 
             // act
             map.RefreshData(fetchInfo);

@@ -3,6 +3,7 @@ using Mapsui.Providers;
 using Mapsui.Styles;
 
 using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,6 +15,10 @@ using Mapsui.UI.Maui;
 using Microsoft.Maui;
 using Microsoft.Maui.Controls;
 #else
+using Mapsui.GeometryLayer;
+using Mapsui.Layers;
+using Mapsui.Providers;
+using Mapsui.Styles;
 using Mapsui.UI.Forms;
 using Xamarin.Forms;
 #endif
@@ -29,9 +34,9 @@ namespace Mapsui.UI.Objects
     /// </remarks>
     public class MyLocationLayer : MemoryLayer
     {
-        MapView mapView;
-        Feature feature;
-        Feature featureDir;
+        private readonly MapView mapView;
+        private readonly GeometryFeature feature;
+        private readonly GeometryFeature featureDir;
 
         private static int bitmapMovingId = -1;
         private static int bitmapStillId = -1;
@@ -49,10 +54,7 @@ namespace Mapsui.UI.Objects
         /// </summary>
         public bool IsMoving
         {
-            get
-            {
-                return isMoving;
-            }
+            get => isMoving;
             set
             {
                 if (isMoving != value)
@@ -63,19 +65,13 @@ namespace Mapsui.UI.Objects
             }
         }
 
-        Position myLocation = new(0, 0);
+        private Position myLocation = new(0, 0);
 
         /// <summary>
         /// Position of location, that is displayed
         /// </summary>
         /// <value>Position of location</value>
-        public Position MyLocation
-        {
-            get
-            {
-                return myLocation;
-            }
-        }
+        public Position MyLocation => myLocation;
 
         /// <summary>
         /// Movement direction of device at location
@@ -152,7 +148,7 @@ namespace Mapsui.UI.Objects
                 }
             }
 
-            feature = new Feature
+            feature = new GeometryFeature
             {
                 Geometry = myLocation.ToMapsui().ToPoint(),
                 ["Label"] = "MyLocation moving",
@@ -169,7 +165,7 @@ namespace Mapsui.UI.Objects
                 Opacity = 1,
             });
 
-            featureDir = new Feature
+            featureDir = new GeometryFeature
             {
                 Geometry = myLocation.ToMapsui().ToPoint(),
                 ["Label"] = "My view direction",
@@ -186,7 +182,7 @@ namespace Mapsui.UI.Objects
                 Opacity = 1,
             });
 
-            DataSource = new MemoryProvider<IGeometryFeature>(new List<IGeometryFeature> { featureDir, feature });
+            DataSource = new GeometryMemoryProvider<IGeometryFeature>(new List<IGeometryFeature> { featureDir, feature });
             Style = null;
         }
 
@@ -220,15 +216,9 @@ namespace Mapsui.UI.Objects
                             mapView.Refresh();
                     }, 0.0, 1.0);
 
-                    var fetchInfo = new FetchInfo
-                    {
-                        Extent = mapView.Viewport.Extent,
-                        Resolution = mapView.Viewport.Resolution,
-                        CRS = mapView.Map.CRS,
-                        ChangeType = ChangeType.Discrete
-                    };
+                    var fetchInfo = new FetchInfo(mapView.Viewport.Extent, mapView.Viewport.Resolution, mapView.Map?.CRS, ChangeType.Discrete);
                     // At the end, update viewport
-                    animation.Commit(mapView, animationMyLocationName, 100, 3000, finished: (s, v) => mapView.Map.RefreshData(fetchInfo));
+                    animation.Commit(mapView, animationMyLocationName, 100, 3000, finished: (s, v) => mapView.Map?.RefreshData(fetchInfo));
                 }
                 else
                 {

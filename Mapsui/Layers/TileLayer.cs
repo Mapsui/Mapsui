@@ -24,11 +24,8 @@ using BruTile;
 using BruTile.Cache;
 using Mapsui.Extensions;
 using Mapsui.Fetcher;
-using Mapsui.Geometries;
-using Mapsui.Providers;
 using Mapsui.Rendering;
 using Mapsui.Styles;
-using Mapsui.Widgets;
 
 namespace Mapsui.Layers
 {
@@ -59,15 +56,14 @@ namespace Mapsui.Layers
         // ReSharper disable once UnusedParameter.Local // Is public and won't break this now
         public TileLayer(ITileSource tileSource, int minTiles = 200, int maxTiles = 300,
             IDataFetchStrategy? dataFetchStrategy = null, IRenderFetchStrategy? renderFetchStrategy = null,
-            int minExtraTiles = -1, int maxExtraTiles = -1, Func<TileInfo, Feature>? fetchTileAsFeature = null)
+            int minExtraTiles = -1, int maxExtraTiles = -1, Func<TileInfo, RasterFeature>? fetchTileAsFeature = null)
         {
             _tileSource = tileSource ?? throw new ArgumentException("source can not null");
-            MemoryCache = new MemoryCache<Feature>(minTiles, maxTiles);
+            MemoryCache = new MemoryCache<RasterFeature>(minTiles, maxTiles);
             Style = new VectorStyle { Outline = { Color = Color.FromArgb(0, 0, 0, 0) } }; // initialize with transparent outline
-            Attribution ??= new Hyperlink();
             Attribution.Text = _tileSource.Attribution?.Text;
             Attribution.Url = _tileSource.Attribution?.Url;
-            _envelope = _tileSource?.Schema?.Extent.ToBoundingBox().ToMRect();
+            _envelope = _tileSource.Schema?.Extent.ToBoundingBox().ToMRect();
             dataFetchStrategy ??= new DataFetchStrategy(3);
             _renderFetchStrategy = renderFetchStrategy ?? new RenderFetchStrategy();
             _minExtraTiles = minExtraTiles;
@@ -84,10 +80,10 @@ namespace Mapsui.Layers
         /// <summary>
         /// Memory cache for this layer
         /// </summary>
-        private MemoryCache<Feature> MemoryCache { get; }
+        private MemoryCache<RasterFeature> MemoryCache { get; }
 
         /// <inheritdoc />
-        public override IReadOnlyList<double> Resolutions => _tileSource?.Schema?.Resolutions.Select(r => r.Value.UnitsPerPixel).ToList();
+        public override IReadOnlyList<double> Resolutions => _tileSource.Schema?.Resolutions.Select(r => r.Value.UnitsPerPixel).ToList();
 
         /// <inheritdoc />
         public override MRect Envelope => _envelope;
@@ -95,9 +91,9 @@ namespace Mapsui.Layers
         /// <inheritdoc />
         public override IEnumerable<IFeature> GetFeatures(MRect box, double resolution)
         {
-            if (_tileSource?.Schema == null) return Enumerable.Empty<IFeature>();
+            if (_tileSource.Schema == null) return Enumerable.Empty<IFeature>();
             UpdateMemoryCacheMinAndMax();
-            return _renderFetchStrategy.Get(box.ToBoundingBox(), resolution, _tileSource?.Schema, MemoryCache);
+            return _renderFetchStrategy.Get(box.ToBoundingBox(), resolution, _tileSource.Schema, MemoryCache);
         }
 
         /// <inheritdoc />
@@ -117,7 +113,6 @@ namespace Mapsui.Layers
         {
             if (Enabled
                 && fetchInfo.Extent.GetArea() > 0
-                && _tileFetchDispatcher != null
                 && MaxVisible >= fetchInfo.Resolution
                 && MinVisible <= fetchInfo.Resolution)
             {
@@ -130,7 +125,7 @@ namespace Mapsui.Layers
         {
             if (propertyChangedEventArgs.PropertyName == nameof(Busy))
             {
-                if (_tileFetchDispatcher != null) Busy = _tileFetchDispatcher.Busy;
+                Busy = _tileFetchDispatcher.Busy;
             }
         }
 
@@ -149,13 +144,13 @@ namespace Mapsui.Layers
             OnDataChanged(e);
         }
 
-        private Feature ToFeature(TileInfo tileInfo)
+        private RasterFeature ToFeature(TileInfo tileInfo)
         {
             var tileData = _tileSource.GetTile(tileInfo);
-            return new Feature { Geometry = ToGeometry(tileInfo, tileData) };
+            return new RasterFeature { Raster = ToGeometry(tileInfo, tileData) };
         }
 
-        private static Raster ToGeometry(TileInfo tileInfo, byte[]? tileData)
+        private static MRaster? ToGeometry(TileInfo tileInfo, byte[]? tileData)
         {
             // A TileSource may return a byte array that is null. This is currently only implemented
             // for MbTilesTileSource. It is to indicate that the tile is not present in the source,
@@ -167,7 +162,7 @@ namespace Mapsui.Layers
 
             if (tileData == null) return null;
 
-            return new Raster(new MemoryStream(tileData), tileInfo.Extent.ToBoundingBox());
+            return new MRaster(new MemoryStream(tileData), tileInfo.Extent.ToMRect());
         }
     }
 }

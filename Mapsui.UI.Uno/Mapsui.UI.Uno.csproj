@@ -40,10 +40,6 @@
     <Compile Include="..\Mapsui.UI.Uwp\MapControl.cs" Link="MapControl.cs" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Extensions\" />
-  </ItemGroup>
-
   <Import Project="..\Mapsui.UI.Shared\Mapsui.UI.Shared.projitems" Label="Shared" />
   
 </Project>

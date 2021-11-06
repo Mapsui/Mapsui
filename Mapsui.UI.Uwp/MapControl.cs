@@ -70,7 +70,7 @@ namespace Mapsui.UI.Uwp
             Initialize();
         }
 
-        void Initialize()
+        private void Initialize()
         {
             _invalidate = () => {
                 // The commented out code crashes the app when MouseWheelAnimation.Duration > 0. Could be a bug in SKXamlCanvas

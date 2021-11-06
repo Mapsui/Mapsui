@@ -15,17 +15,17 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Radius of earth in EPSG:4327 in kilometers
         /// </summary>
-        const double EarthRadiusKm = 6378.137;
+        private const double EarthRadiusKm = 6378.137;
 
         /// <summary>
         /// Circumference of earth in km.
         /// </summary>
-        const double EarthCircumferenceKm = EarthRadiusKm * 2 * Math.PI;
+        private const double EarthCircumferenceKm = EarthRadiusKm * 2 * Math.PI;
 
         /// <summary>
         /// Minimum range degrees, here 1 m in degrees
         /// </summary>
-        const double MinimumRangeDegrees = 0.001 / EarthCircumferenceKm * 360; // 1 meter
+        private const double MinimumRangeDegrees = 0.001 / EarthCircumferenceKm * 360; // 1 meter
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Mapsui.UI.Forms.MapSpan"/> class.
@@ -66,8 +66,8 @@ namespace Mapsui.UI.Forms
         {
             get
             {
-                double latKm = LatitudeDegreesToKm(LatitudeDegrees);
-                double longKm = LongitudeDegreesToKm(Center, LongitudeDegrees);
+                var latKm = LatitudeDegreesToKm(LatitudeDegrees);
+                var longKm = LongitudeDegreesToKm(Center, LongitudeDegrees);
                 return new Distance(1000 * Math.Min(latKm, longKm) / 2);
             }
         }
@@ -82,8 +82,8 @@ namespace Mapsui.UI.Forms
         {
             north = Math.Min(Math.Max(north, 0), 90);
             south = Math.Max(Math.Min(south, 0), -90);
-            double lat = Math.Max(Math.Min(Center.Latitude, north), south);
-            double maxDLat = Math.Min(north - lat, -south + lat) * 2;
+            var lat = Math.Max(Math.Min(Center.Latitude, north), south);
+            var maxDLat = Math.Min(north - lat, -south + lat) * 2;
             return new MapSpan(new Position(lat, Center.Longitude), Math.Min(LatitudeDegrees, maxDLat), LongitudeDegrees);
         }
 
@@ -120,10 +120,10 @@ namespace Mapsui.UI.Forms
         /// <param name="positions">List of positions to get the new MapSpan</param>
         public static MapSpan FromPositions(IEnumerable<Position> positions)
         {
-            double minLat = double.MaxValue;
-            double minLon = double.MaxValue;
-            double maxLat = double.MinValue;
-            double maxLon = double.MinValue;
+            var minLat = double.MaxValue;
+            var minLon = double.MaxValue;
+            var maxLat = double.MinValue;
+            var maxLon = double.MinValue;
 
             foreach (var p in positions)
             {
@@ -139,7 +139,7 @@ namespace Mapsui.UI.Forms
         {
             unchecked
             {
-                int hashCode = Center.GetHashCode();
+                var hashCode = Center.GetHashCode();
                 hashCode = (hashCode * 397) ^ LongitudeDegrees.GetHashCode();
                 hashCode = (hashCode * 397) ^ LatitudeDegrees.GetHashCode();
                 return hashCode;
@@ -163,7 +163,7 @@ namespace Mapsui.UI.Forms
         /// <param name="zoomFactor">Zoom factor</param>
         public MapSpan WithZoom(double zoomFactor)
         {
-            double maxDLat = Math.Min(90 - Center.Latitude, 90 + Center.Latitude) * 2;
+            var maxDLat = Math.Min(90 - Center.Latitude, 90 + Center.Latitude) * 2;
             return new MapSpan(Center, Math.Min(LatitudeDegrees / zoomFactor, maxDLat), LongitudeDegrees / zoomFactor);
         }
 
@@ -172,7 +172,7 @@ namespace Mapsui.UI.Forms
         /// </summary>
         /// <returns>Latitude degrees</returns>
         /// <param name="distance">Distance</param>
-        static double DistanceToLatitudeDegrees(Distance distance)
+        private static double DistanceToLatitudeDegrees(Distance distance)
         {
             return distance.Kilometers / EarthCircumferenceKm * 360;
         }
@@ -183,13 +183,13 @@ namespace Mapsui.UI.Forms
         /// <returns>Longitude degrees</returns>
         /// <param name="position">Position for latitude to use for circumference</param>
         /// <param name="distance">Distance</param>
-        static double DistanceToLongitudeDegrees(Position position, Distance distance)
+        private static double DistanceToLongitudeDegrees(Position position, Distance distance)
         {
-            double latCircumference = LatitudeCircumferenceKm(position);
+            var latCircumference = LatitudeCircumferenceKm(position);
             return distance.Kilometers / latCircumference * 360;
         }
 
-        bool Equals(MapSpan other)
+        private bool Equals(MapSpan other)
         {
             return Center.Equals(other.Center) && LongitudeDegrees.Equals(other.LongitudeDegrees) && LatitudeDegrees.Equals(other.LatitudeDegrees);
         }
@@ -199,7 +199,7 @@ namespace Mapsui.UI.Forms
         /// </summary>
         /// <returns>Circumference in km</returns>
         /// <param name="position">Position to calculate circumference for</param>
-        static double LatitudeCircumferenceKm(Position position)
+        private static double LatitudeCircumferenceKm(Position position)
         {
             return EarthCircumferenceKm * Math.Cos(position.Latitude * Math.PI / 180.0);
         }
@@ -209,7 +209,7 @@ namespace Mapsui.UI.Forms
         /// </summary>
         /// <returns>Distance in km</returns>
         /// <param name="latitudeDegrees">Latitude degrees</param>
-        static double LatitudeDegreesToKm(double latitudeDegrees)
+        private static double LatitudeDegreesToKm(double latitudeDegrees)
         {
             return EarthCircumferenceKm * latitudeDegrees / 360;
         }
@@ -220,9 +220,9 @@ namespace Mapsui.UI.Forms
         /// <returns>Distance in km</returns>
         /// <param name="position">Position for latitude to use for calculation</param>
         /// <param name="longitudeDegrees">Longitude degrees</param>
-        static double LongitudeDegreesToKm(Position position, double longitudeDegrees)
+        private static double LongitudeDegreesToKm(Position position, double longitudeDegrees)
         {
-            double latCircumference = LatitudeCircumferenceKm(position);
+            var latCircumference = LatitudeCircumferenceKm(position);
             return latCircumference * longitudeDegrees / 360;
         }
     }

@@ -4,13 +4,14 @@ using Mapsui.UI.Maui;
 #else
 using Mapsui.UI.Forms;
 #endif
+using Mapsui.UI.Forms;
 
 namespace Mapsui.UI.Objects
 {
     /// <summary>
     /// Interface for objects that are clickable
     /// </summary>
-    interface IClickable
+    internal interface IClickable
     {
         /// <summary>
         /// Gets a value indicating whether this <see cref="T:Mapsui.UI.Objects.IClickable"/> is clickable.

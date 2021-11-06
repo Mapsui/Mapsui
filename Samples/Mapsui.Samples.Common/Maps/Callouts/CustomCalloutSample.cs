@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Mapsui.Geometries;
+using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Projection;
 using Mapsui.Providers;
@@ -46,7 +47,7 @@ namespace Mapsui.Samples.Common.Maps.Callouts
             {
                 Name = "Points",
                 IsMapInfoLayer = true,
-                DataSource = new MemoryProvider<IGeometryFeature>(GetCitiesFromEmbeddedResource()),
+                DataSource = new GeometryMemoryProvider<IGeometryFeature>(GetCitiesFromEmbeddedResource()),
                 Style = new VectorStyle()
             };
         }
@@ -59,7 +60,7 @@ namespace Mapsui.Samples.Common.Maps.Callouts
             var cities = DeserializeFromStream<City>(stream);
 
             return cities.Select(c => {
-                var feature = new Feature();
+                var feature = new GeometryFeature();
                 var point = SphericalMercator.FromLonLat(c.Lng, c.Lat);
                 feature.Geometry = new Point(point.x, point.y);
                 feature["name"] = c.Name;

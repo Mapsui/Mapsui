@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Mapsui.Logging;
@@ -34,8 +35,8 @@ namespace Mapsui.Widgets.ScaleBar
     /// </summary>
     public class ScaleBarWidget : Widget, INotifyPropertyChanged
     {
-        private readonly Map _map;
-        private readonly ITransformation _transformation;
+        private readonly Map? _map;
+        private readonly ITransformation? _transformation;
         // Instead of using this property we could initialize _transformation with ProjectionDefaults.Transformation
         // in the constructor but in that way the overriding of ProjectionDefaults.Transformation would not have 
         // effect if it was set after the ScaleBarWidget was constructed.
@@ -50,7 +51,7 @@ namespace Mapsui.Widgets.ScaleBar
         private static readonly Font DefaultFont = new() { FontFamily = "Arial", Size = 10 };
 
 
-        public ScaleBarWidget(Map map, ITransformation transformation = null)
+        public ScaleBarWidget(Map map, ITransformation? transformation = null)
         {
             _map = map;
             _transformation = transformation;
@@ -224,12 +225,12 @@ namespace Mapsui.Widgets.ScaleBar
             }
         }
 
-        private IUnitConverter _secondaryUnitConverter;
+        private IUnitConverter? _secondaryUnitConverter;
 
         /// <summary>
         /// Secondary unit converter for lower text if ScaleBarMode is Both. Default is ImperialUnitConverter.
         /// </summary>
-        public IUnitConverter SecondaryUnitConverter
+        public IUnitConverter? SecondaryUnitConverter
         {
             get => _secondaryUnitConverter;
             set
@@ -278,7 +279,7 @@ namespace Mapsui.Widgets.ScaleBar
         /// Length of lower scalebar
         /// Text of lower scalebar
         /// </returns>
-        public (float scaleBarLength1, string scaleBarText1, float scaleBarLength2, string scaleBarText2)
+        public (float scaleBarLength1, string? scaleBarText1, float scaleBarLength2, string? scaleBarText2)
             GetScaleBarLengthAndText(IReadOnlyViewport viewport)
         {
             if (_map == null) return (0, null, 0, null);
@@ -289,7 +290,7 @@ namespace Mapsui.Widgets.ScaleBar
             (length1, text1) = CalculateScaleBarLengthAndValue(_map, Transformation, viewport, MaxWidth, UnitConverter);
 
             float length2;
-            string text2;
+            string? text2;
 
             if (SecondaryUnitConverter != null)
                 (length2, text2) = CalculateScaleBarLengthAndValue(_map, Transformation, viewport, MaxWidth, SecondaryUnitConverter);
@@ -307,9 +308,9 @@ namespace Mapsui.Widgets.ScaleBar
         /// <param name="scaleBarLength2">Length of lower scalebar</param>
         /// <param name="stroke">Width of line</param>
         /// <returns>Array with pairs of Points. First is always the start point, the second is the end point.</returns>
-        public MPoint[] GetScaleBarLinePositions(IReadOnlyViewport viewport, float scaleBarLength1, float scaleBarLength2, float stroke)
+        public IReadOnlyList<MPoint> GetScaleBarLinePositions(IReadOnlyViewport viewport, float scaleBarLength1, float scaleBarLength2, float stroke)
         {
-            MPoint[]? points = null;
+            var points = new List<MPoint>();
 
             var drawNoSecondScaleBar = ScaleBarMode == ScaleBarMode.Single || ScaleBarMode == ScaleBarMode.Both && SecondaryUnitConverter == null;
 
@@ -330,77 +331,74 @@ namespace Mapsui.Widgets.ScaleBar
                 case Alignment.Center:
                     if (drawNoSecondScaleBar)
                     {
-                        points = new MPoint[6];
-                        points[0] = new MPoint(center1, top - TickLength * Scale);
-                        points[1] = new MPoint(center1, top);
-                        points[2] = new MPoint(center1, top);
-                        points[3] = new MPoint(center1 + maxScaleBarLength, top);
-                        points[4] = new MPoint(center1 + maxScaleBarLength, top);
-                        points[5] = new MPoint(center1 + scaleBarLength1, top - TickLength * Scale);
+                        points.Add(new MPoint(center1, top - TickLength * Scale));
+                        points.Add(new MPoint(center1, top));
+                        points.Add(new MPoint(center1, top));
+                        points.Add(new MPoint(center1 + maxScaleBarLength, top));
+                        points.Add(new MPoint(center1 + maxScaleBarLength, top));
+                        points.Add(new MPoint(center1 + scaleBarLength1, top - TickLength * Scale));
                     }
                     else
                     {
-                        points = new MPoint[10];
-                        points[0] = new MPoint(Math.Min(center1, center2), top);
-                        points[1] = new MPoint(Math.Min(center1, center2) + maxScaleBarLength, top);
-                        points[2] = new MPoint(center1, top - TickLength * Scale);
-                        points[3] = new MPoint(center1, top);
-                        points[4] = new MPoint(center1 + scaleBarLength1, top - TickLength * Scale);
-                        points[5] = new MPoint(center1 + scaleBarLength1, top);
-                        points[6] = new MPoint(center2, top + TickLength * Scale);
-                        points[7] = new MPoint(center2, top);
-                        points[8] = new MPoint(center2 + scaleBarLength2, top + TickLength * Scale);
-                        points[9] = new MPoint(center2 + scaleBarLength2, top);
+                        points.Add(new MPoint(Math.Min(center1, center2), top));
+                        points.Add(new MPoint(Math.Min(center1, center2) + maxScaleBarLength, top));
+                        points.Add(new MPoint(center1, top - TickLength * Scale));
+                        points.Add(new MPoint(center1, top));
+                        points.Add(new MPoint(center1 + scaleBarLength1, top - TickLength * Scale));
+                        points.Add(new MPoint(center1 + scaleBarLength1, top));
+                        points.Add(new MPoint(center2, top + TickLength * Scale));
+                        points.Add(new MPoint(center2, top));
+                        points.Add(new MPoint(center2 + scaleBarLength2, top + TickLength * Scale));
+                        points.Add(new MPoint(center2 + scaleBarLength2, top));
                     }
                     break;
                 case Alignment.Left:
                     if (drawNoSecondScaleBar)
                     {
-                        points = new MPoint[6];
-                        points[0] = new MPoint(left, top);
-                        points[1] = new MPoint(left + maxScaleBarLength, top);
-                        points[2] = new MPoint(left, top - TickLength * Scale);
-                        points[3] = new MPoint(left, top);
-                        points[4] = new MPoint(left + scaleBarLength1, top - TickLength * Scale);
-                        points[5] = new MPoint(left + scaleBarLength1, top);
+                        points.Add(new MPoint(left, top));
+                        points.Add(new MPoint(left + maxScaleBarLength, top));
+                        points.Add(new MPoint(left, top - TickLength * Scale));
+                        points.Add(new MPoint(left, top));
+                        points.Add(new MPoint(left + scaleBarLength1, top - TickLength * Scale));
+                        points.Add(new MPoint(left + scaleBarLength1, top));
                     }
                     else
                     {
-                        points = new MPoint[8];
-                        points[0] = new MPoint(left, top);
-                        points[1] = new MPoint(left + maxScaleBarLength, top);
-                        points[2] = new MPoint(left, top - TickLength * Scale);
-                        points[3] = new MPoint(left, top + TickLength * Scale);
-                        points[4] = new MPoint(left + scaleBarLength1, top - TickLength * Scale);
-                        points[5] = new MPoint(left + scaleBarLength1, top);
-                        points[6] = new MPoint(left + scaleBarLength2, top + TickLength * Scale);
-                        points[7] = new MPoint(left + scaleBarLength2, top);
+                        points.Add(new MPoint(left, top));
+                        points.Add(new MPoint(left + maxScaleBarLength, top));
+                        points.Add(new MPoint(left, top - TickLength * Scale));
+                        points.Add(new MPoint(left, top + TickLength * Scale));
+                        points.Add(new MPoint(left + scaleBarLength1, top - TickLength * Scale));
+                        points.Add(new MPoint(left + scaleBarLength1, top));
+                        points.Add(new MPoint(left + scaleBarLength2, top + TickLength * Scale));
+                        points.Add(new MPoint(left + scaleBarLength2, top));
                     }
                     break;
                 case Alignment.Right:
                     if (drawNoSecondScaleBar)
                     {
-                        points = new MPoint[6];
-                        points[0] = new MPoint(right, top);
-                        points[1] = new MPoint(right - maxScaleBarLength, top);
-                        points[2] = new MPoint(right, top - TickLength * Scale);
-                        points[3] = new MPoint(right, top);
-                        points[4] = new MPoint(right - scaleBarLength1, top - TickLength * Scale);
-                        points[5] = new MPoint(right - scaleBarLength1, top);
+
+                        points.Add(new MPoint(right, top));
+                        points.Add(new MPoint(right - maxScaleBarLength, top));
+                        points.Add(new MPoint(right, top - TickLength * Scale));
+                        points.Add(new MPoint(right, top));
+                        points.Add(new MPoint(right - scaleBarLength1, top - TickLength * Scale));
+                        points.Add(new MPoint(right - scaleBarLength1, top));
                     }
                     else
                     {
-                        points = new MPoint[8];
-                        points[0] = new MPoint(right, top);
-                        points[1] = new MPoint(right - maxScaleBarLength, top);
-                        points[2] = new MPoint(right, top - TickLength * Scale);
-                        points[3] = new MPoint(right, top + TickLength * Scale);
-                        points[4] = new MPoint(right - scaleBarLength1, top - TickLength * Scale);
-                        points[5] = new MPoint(right - scaleBarLength1, top);
-                        points[6] = new MPoint(right - scaleBarLength2, top + TickLength * Scale);
-                        points[7] = new MPoint(right - scaleBarLength2, top);
+                        points.Add(new MPoint(right, top));
+                        points.Add(new MPoint(right - maxScaleBarLength, top));
+                        points.Add(new MPoint(right, top - TickLength * Scale));
+                        points.Add(new MPoint(right, top + TickLength * Scale));
+                        points.Add(new MPoint(right - scaleBarLength1, top - TickLength * Scale));
+                        points.Add(new MPoint(right - scaleBarLength1, top));
+                        points.Add(new MPoint(right - scaleBarLength2, top + TickLength * Scale));
+                        points.Add(new MPoint(right - scaleBarLength2, top));
                     }
                     break;
+                default:
+                    throw new NotSupportedException($"TextAlignment {TextAlignment} is not supported");
             }
 
             return points;

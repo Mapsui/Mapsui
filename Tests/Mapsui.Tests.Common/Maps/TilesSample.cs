@@ -2,7 +2,6 @@
 using System.IO;
 using BruTile;
 using Mapsui.Extensions;
-using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
@@ -47,13 +46,13 @@ namespace Mapsui.Tests.Common.Maps
             };
 
             var features = TileIndexToFeatures(tileIndexes, new SampleTileSource());
-            var layer = new MemoryLayer { DataSource = new MemoryProvider<IGeometryFeature>(features), Name = "Tiles" };
+            var layer = new MemoryLayer { DataSource = new MemoryProvider<RasterFeature>(features), Name = "Tiles" };
             return layer;
         }
 
-        private static List<IGeometryFeature> TileIndexToFeatures(TileIndex[] tileIndexes, ITileSource tileSource)
+        private static List<RasterFeature> TileIndexToFeatures(TileIndex[] tileIndexes, ITileSource tileSource)
         {
-            var features = new List<IGeometryFeature>();
+            var features = new List<RasterFeature>();
             foreach (var tileIndex in tileIndexes)
             {
                 var tileInfo = new TileInfo
@@ -63,10 +62,10 @@ namespace Mapsui.Tests.Common.Maps
                         new TileRange(tileIndex.Col, tileIndex.Row), tileIndex.Level, tileSource.Schema)
                 };
 
-                var feature = new Feature
+                var feature = new RasterFeature
                 {
-                    Geometry = new Raster(new MemoryStream(
-                        tileSource.GetTile(tileInfo)), tileInfo.Extent.ToBoundingBox())
+                    Raster = new MRaster(new MemoryStream(
+                        tileSource.GetTile(tileInfo)), tileInfo.Extent.ToMRect())
                 };
 
                 features.Add(feature);

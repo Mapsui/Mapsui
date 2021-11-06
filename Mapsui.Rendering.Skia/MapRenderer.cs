@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Mapsui.Geometries;
+using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Logging;
-using Mapsui.Providers;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Rendering.Skia.SkiaWidgets;
@@ -65,12 +65,12 @@ namespace Mapsui.Rendering.Skia
         {
             if (!viewport.HasSize) return;
 
-            if (background != null) canvas.Clear(background.ToSkia());
+            if (background is not null) canvas.Clear(background.ToSkia());
             Render(canvas, viewport, layers);
             Render(canvas, viewport, widgets, 1);
         }
 
-        public MemoryStream RenderToBitmapStream(IReadOnlyViewport viewport, IEnumerable<ILayer> layers, Color? background = null, float pixelDensity = 1)
+        public MemoryStream? RenderToBitmapStream(IReadOnlyViewport viewport, IEnumerable<ILayer> layers, Color? background = null, float pixelDensity = 1)
         {
             try
             {
@@ -83,7 +83,7 @@ namespace Mapsui.Rendering.Skia
                 using var surface = SKSurface.Create(imageInfo);
                 if (surface == null) return null;
                 // Not sure if this is needed here:
-                if (background != null) surface.Canvas.Clear(background.ToSkia());
+                if (background is not null) surface.Canvas.Clear(background.ToSkia());
                 surface.Canvas.Scale(pixelDensity, pixelDensity);
                 Render(surface.Canvas, viewport, layers);
                 using var image = surface.Snapshot();
@@ -137,7 +137,7 @@ namespace Mapsui.Rendering.Skia
                 if (counter >= numberToRemove) break;
                 var textureInfo = tileCache[key];
                 tileCache.Remove(key);
-                textureInfo.Bitmap.Dispose();
+                textureInfo.Bitmap?.Dispose();
                 counter++;
             }
         }
@@ -165,39 +165,40 @@ namespace Mapsui.Rendering.Skia
                 // No special style renderer handled this up to now, than try standard renderers
                 RenderGeometry(canvas, viewport, style, layerOpacity, geometryFeature, geometryFeature.Geometry);
             }
+            else if (feature is PointFeature pointFeature)
+                PointRenderer.Draw(canvas, viewport, style, pointFeature, pointFeature.Point.X, pointFeature.Point.Y, _symbolCache,
+                   layerOpacity * style.Opacity);
+            else if (feature is RectFeature rectFeature)
+                RectRenderer.Draw(canvas, viewport, style, rectFeature, layerOpacity * style.Opacity);
+            else if (feature is RasterFeature rasterFeature)
+                RasterRenderer.Draw(canvas, viewport, style, rasterFeature, rasterFeature.Raster, 
+                    layerOpacity * style.Opacity, _tileCache, _currentIteration);
         }
 
         private void RenderGeometry(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, float layerOpacity,
             IGeometryFeature geometryFeature, IGeometry geometry)
         {
-            if (geometry is Point)
-                PointRenderer.Draw(canvas, viewport, style, geometryFeature, geometry, _symbolCache,
+            if (geometry is Point point)
+                PointRenderer.Draw(canvas, viewport, style, geometryFeature, point.X, point.Y, _symbolCache,
                     layerOpacity * style.Opacity);
-            else if (geometry is MultiPoint)
-                MultiPointRenderer.Draw(canvas, viewport, style, geometryFeature, geometry,
+            else if (geometry is MultiPoint multiPoint)
+                MultiPointRenderer.Draw(canvas, viewport, style, geometryFeature, multiPoint,
                     _symbolCache, layerOpacity * style.Opacity);
-            else if (geometry is LineString)
-                LineStringRenderer.Draw(canvas, viewport, style, geometryFeature, geometry,
+            else if (geometry is LineString lineString)
+                LineStringRenderer.Draw(canvas, viewport, style, geometryFeature, lineString,
                     layerOpacity * style.Opacity);
-            else if (geometry is MultiLineString)
-                MultiLineStringRenderer.Draw(canvas, viewport, style, geometryFeature, geometry,
+            else if (geometry is MultiLineString multiLineString)
+                MultiLineStringRenderer.Draw(canvas, viewport, style, geometryFeature, multiLineString,
                     layerOpacity * style.Opacity);
-            else if (geometry is Polygon)
-                PolygonRenderer.Draw(canvas, viewport, style, geometryFeature, geometry,
+            else if (geometry is Polygon polygon)
+                PolygonRenderer.Draw(canvas, viewport, style, geometryFeature, polygon,
                     layerOpacity * style.Opacity, _symbolCache);
-            else if (geometry is MultiPolygon)
-                MultiPolygonRenderer.Draw(canvas, viewport, style, geometryFeature, geometry,
+            else if (geometry is MultiPolygon multiPolygon)
+                MultiPolygonRenderer.Draw(canvas, viewport, style, geometryFeature, multiPolygon,
                     layerOpacity * style.Opacity, _symbolCache);
-            else if (geometry is IRaster)
-                RasterRenderer.Draw(canvas, viewport, style, geometryFeature, layerOpacity * style.Opacity,
-                    _tileCache, _currentIteration);
             else if (geometry is IGeometryCollection collection)
-            {
                 for (var i = 0; i < collection.NumGeometries; i++)
-                {
                     RenderGeometry(canvas, viewport, style, layerOpacity, geometryFeature, collection.Geometry(i));
-                }
-            }
             else
                 Logger.Log(LogLevel.Warning,
                     $"Failed to find renderer for geometry feature of type {geometry.GetType()}");
@@ -208,12 +209,10 @@ namespace Mapsui.Rendering.Skia
             WidgetRenderer.Render(canvas, viewport, widgets, WidgetRenders, layerOpacity);
         }
 
-        public MapInfo GetMapInfo(double x, double y, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, int margin = 0)
+        public MapInfo? GetMapInfo(double x, double y, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, int margin = 0)
         {
             // todo: use margin to increase the pixel area
             // todo: We will need to select on style instead of layer
-
-
 
             layers = layers
                 .Select(l => (l is RasterizingLayer rl) ? rl.ChildLayer : l)
@@ -289,7 +288,7 @@ namespace Mapsui.Rendering.Skia
             return result;
         }
 
-        public MapInfo GetMapInfo(MPoint screenPosition, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, int margin = 0)
+        public MapInfo? GetMapInfo(MPoint screenPosition, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, int margin = 0)
         {
             return GetMapInfo(screenPosition.X, screenPosition.Y, viewport, layers, margin);
         }

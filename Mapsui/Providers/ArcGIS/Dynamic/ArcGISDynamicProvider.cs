@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Text;
 using Mapsui.Extensions;
 using Mapsui.Geometries;
+using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Utilities;
@@ -94,18 +95,17 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
         {
             //If there are no layers (probably not initialised) return nothing
             if (ArcGisDynamicCapabilities.layers == null)
-                return new Features();
+                return new List<IFeature>();
 
-            var features = new List<IGeometryFeature>();
-            IRaster? raster = null;
-
+            var features = new List<RasterFeature>();
+            
             IViewport viewport = fetchInfo.ToViewport();
 
-            if (TryGetMap(viewport, ref raster))
+            if (TryGetMap(viewport, out MRaster raster))
             {
-                var feature = new Feature
+                var feature = new RasterFeature
                 {
-                    Geometry = raster
+                    Raster = raster
                 };
                 features.Add(feature);
             }
@@ -134,7 +134,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
         /// <summary>
         /// Retrieves the bitmap from ArcGIS Dynamic service
         /// </summary>
-        public bool TryGetMap(IViewport viewport, ref IRaster raster)
+        public bool TryGetMap(IViewport viewport, out MRaster raster)
         {
             int width;
             int height;
@@ -147,6 +147,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             catch (OverflowException ex)
             {
                 Logger.Log(LogLevel.Error, "Error: Could not conver double to int (ExportMap size)", ex);
+                raster = null;
                 return false;
             }
 
@@ -158,13 +159,14 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             {
                 var response = client.GetAsync(uri).Result;
                 var bytes = BruTile.Utilities.ReadFully(response.Content.ReadAsStreamAsync().Result);
-                raster = new Raster(new MemoryStream(bytes), viewport.Extent.ToBoundingBox());
+                raster = new MRaster(new MemoryStream(bytes), viewport.Extent);
                 response.Dispose();
                 return true;
             }
             catch (Exception ex)
             {
                 Logger.Log(LogLevel.Error, ex.Message, ex);
+                raster = null;
                 return false;
             }
         }
@@ -176,7 +178,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
         /// <param name="width"> </param>
         /// <param name="height"> </param>
         /// <returns>URL for ArcGIS Dynamic request</returns>
-        public string GetRequestUrl(BoundingBox box, int width, int height)
+        public string GetRequestUrl(BoundingBox? box, int width, int height)
         {
             //ArcGIS Export description see: http://resources.esri.com/help/9.3/arcgisserver/apis/rest/index.html?export.html
 

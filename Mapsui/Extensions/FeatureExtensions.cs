@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Providers;
 
@@ -11,7 +12,7 @@ namespace Mapsui.Extensions
     {
         public static IGeometryFeature Copy(this IGeometryFeature original)
         {
-            return new Feature(original) { Geometry = original.Geometry.Copy() };
+            return new GeometryFeature(original) { Geometry = original.Geometry?.Copy() };
         }
 
         public static IEnumerable<IGeometryFeature> Copy(this IEnumerable<IGeometryFeature> original)

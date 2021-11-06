@@ -73,7 +73,7 @@ namespace Mapsui.UI.Forms
         {
             unchecked
             {
-                int hashCode = Latitude.GetHashCode();
+                var hashCode = Latitude.GetHashCode();
                 hashCode = (hashCode * 397) ^ Longitude.GetHashCode();
                 return hashCode;
             }
@@ -148,10 +148,10 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public const string DecimalSeconds = "P DD° MM' SS.sss\"|P DDD° MM' SS.sss\"|N|S|E|W";
 
-        string FormatNumber(double value, string format, string positiveDirection, string negativDirection)
+        private string FormatNumber(double value, string format, string positiveDirection, string negativDirection)
         {
-            string direction = value > 0 ? positiveDirection : negativDirection;
-            string result = format;
+            var direction = value > 0 ? positiveDirection : negativDirection;
+            var result = format;
 
             value = Math.Abs(value);
 
@@ -177,23 +177,23 @@ namespace Mapsui.UI.Forms
             return result;
         }
 
-        int CountChar(string text, char character)
+        private int CountChar(string text, char character)
         {
-            int count = 0;
+            var count = 0;
 
-            foreach (char c in text)
+            foreach (var c in text)
                 if (c == character)
                     count++;
 
             return count;
         }
 
-        string ReplaceValue(string text, double value, char placeholder, bool multiply)
+        private string ReplaceValue(string text, double value, char placeholder, bool multiply)
         {
-            int count = CountChar(text, placeholder);
+            var count = CountChar(text, placeholder);
 
             if (count > 0)
-                return text.Replace(new String(placeholder, count), string.Format("{0:" + new String('0', count) + "}", multiply ? Math.Round(value * Math.Pow(10, count), 0) : value));
+                return text.Replace(new string(placeholder, count), string.Format("{0:" + new string('0', count) + "}", multiply ? Math.Round(value * Math.Pow(10, count), 0) : value));
 
             return text;
         }

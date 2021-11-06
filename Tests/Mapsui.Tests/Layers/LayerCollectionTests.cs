@@ -1,6 +1,6 @@
-﻿using Mapsui.Layers;
+﻿using System.Linq;
+using Mapsui.Layers;
 using NUnit.Framework;
-using System.Linq;
 
 namespace Mapsui.Tests.Layers
 {

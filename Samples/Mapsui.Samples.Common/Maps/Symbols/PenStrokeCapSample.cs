@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Mapsui.Geometries;
+using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
@@ -33,7 +34,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new Layer("Polygons")
             {
-                DataSource = new MemoryProvider<IGeometryFeature>(CreatePolygon()),
+                DataSource = new GeometryMemoryProvider<IGeometryFeature>(CreatePolygon()),
                 Style = null
             };
         }
@@ -42,7 +43,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new[]
             {
-                new Feature
+                new GeometryFeature
                 {
                     Geometry = new LineString(new[]
                     {
@@ -59,7 +60,7 @@ namespace Mapsui.Samples.Common.Maps
                         }
                     },
                 },
-                new Feature
+                new GeometryFeature
                 {
                     Geometry = new LineString(new[]
                     {
@@ -76,7 +77,7 @@ namespace Mapsui.Samples.Common.Maps
                         }
                     },
                 },
-                new Feature
+                new GeometryFeature
                 {
                     Geometry = new LineString(new[]
                     {
@@ -93,7 +94,7 @@ namespace Mapsui.Samples.Common.Maps
                         }
                     },
                 },
-                new Feature
+                new GeometryFeature
                 {
                     Geometry = new LineString(new[]
                     {
@@ -110,7 +111,7 @@ namespace Mapsui.Samples.Common.Maps
                         }
                     },
                 },
-                new Feature
+                new GeometryFeature
                 {
                     Geometry = new LineString(new[]
                     {
@@ -127,7 +128,7 @@ namespace Mapsui.Samples.Common.Maps
                         }
                     },
                 },
-                new Feature
+                new GeometryFeature
                 {
                     Geometry = new LineString(new[]
                     {

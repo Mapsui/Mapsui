@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Mapsui.Extensions;
+using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Projection;
 using Mapsui.Providers;
@@ -41,7 +42,7 @@ namespace Mapsui.Samples.Common.Maps
             {
                 Name = "Points",
                 IsMapInfoLayer = true,
-                DataSource = new MemoryProvider<IGeometryFeature>(GetCitiesFromEmbeddedResource()),
+                DataSource = new GeometryMemoryProvider<IGeometryFeature>(GetCitiesFromEmbeddedResource()),
                 Style = CreateBitmapStyle()
             };
         }
@@ -54,8 +55,10 @@ namespace Mapsui.Samples.Common.Maps
             var cities = DeserializeFromStream<City>(stream);
 
             return cities.Select(c => {
-                var feature = new Feature();
-                feature.Geometry = SphericalMercator.FromLonLat(c.Lng, c.Lat).ToMPoint().ToPoint();
+                var feature = new GeometryFeature
+                {
+                    Geometry = SphericalMercator.FromLonLat(c.Lng, c.Lat).ToMPoint().ToPoint()
+                };
                 feature["name"] = c.Name;
                 feature["country"] = c.Country;
                 return feature;

@@ -5,7 +5,6 @@ using System.Net.Http;
 using BruTile;
 using BruTile.Web;
 using BruTile.Wmts;
-using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Providers.Wfs;

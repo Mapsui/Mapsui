@@ -1,5 +1,5 @@
 ﻿using Mapsui.Geometries;
-using Mapsui.Providers;
+using Mapsui.Layers;
 using Mapsui.Styles;
 using SkiaSharp;
 
@@ -7,12 +7,10 @@ namespace Mapsui.Rendering.Skia
 {
     public static class MultiLineStringRenderer
     {
-        public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, IGeometryFeature feature, IGeometry geometry,
-            float opacity)
+        public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, IFeature feature,
+            MultiLineString multiLineString, float opacity)
         {
-            var multiLineString = (MultiLineString)geometry;
-
-            foreach (var lineString in multiLineString)
+            foreach (LineString lineString in multiLineString)
             {
                 LineStringRenderer.Draw(canvas, viewport, style, feature, lineString, opacity);
             }

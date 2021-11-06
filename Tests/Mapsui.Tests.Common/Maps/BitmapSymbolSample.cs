@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 using Mapsui.Geometries;
+using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
@@ -24,7 +25,7 @@ namespace Mapsui.Tests.Common.Maps
             var layer = new MemoryLayer
             {
                 Style = null,
-                DataSource = new MemoryProvider<IGeometryFeature>(CreateFeatures()),
+                DataSource = new GeometryMemoryProvider<IGeometryFeature>(CreateFeatures()),
                 Name = "Points with bitmaps"
             };
 
@@ -46,22 +47,22 @@ namespace Mapsui.Tests.Common.Maps
 
             return new List<IGeometryFeature>
             {
-                new Feature
+                new GeometryFeature
                 {
                     Geometry = new Point(50, 50),
                     Styles = new[] {new VectorStyle {Fill = new Brush(Color.Red)}}
                 },
-                new Feature
+                new GeometryFeature
                 {
                     Geometry = new Point(50, 100),
                     Styles = new[] {new SymbolStyle {BitmapId = circleIconId}}
                 },
-                new Feature
+                new GeometryFeature
                 {
                     Geometry = new Point(100, 50),
                     Styles = new[] {new SymbolStyle {BitmapId = checkeredIconId}}
                 },
-                new Feature
+                new GeometryFeature
                 {
                     Geometry = new Point(100, 100),
                     Styles = new[] {new VectorStyle {Fill = new Brush(Color.Green), Outline = null}}

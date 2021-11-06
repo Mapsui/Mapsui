@@ -71,14 +71,15 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
 
         private static SKPaint CreatePaint(SKColor color, float strokeWidth, SKPaintStyle style)
         {
-            var paint = new SKPaint();
-
-            paint.LcdRenderText = true;
-            paint.Color = color;
-            paint.StrokeWidth = strokeWidth;
-            paint.Style = style;
-            paint.StrokeCap = SKStrokeCap.Square;
-            paint.IsAntialias = true;
+            var paint = new SKPaint
+            {
+                LcdRenderText = true,
+                Color = color,
+                StrokeWidth = strokeWidth,
+                Style = style,
+                StrokeCap = SKStrokeCap.Square,
+                IsAntialias = true
+            };
 
             return paint;
         }

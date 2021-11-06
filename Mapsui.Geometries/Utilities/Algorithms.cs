@@ -174,7 +174,7 @@ namespace Mapsui.Geometries.Utilities
 
         public static double DistanceToLine(Point point, IList<Point> points)
         {
-            var minDist = Double.MaxValue;
+            var minDist = double.MaxValue;
 
             for (var i = 0; i < points.Count - 1; i++)
             {
@@ -195,8 +195,8 @@ namespace Mapsui.Geometries.Utilities
         /// <returns></returns>
         public static (double Distance, int Segment) GetDistanceAndSegmentIndex(Point point, IList<Point> points)
         {
-            var minDist = Double.MaxValue;
-            int segment = 0;
+            var minDist = double.MaxValue;
+            var segment = 0;
 
             for (var i = 0; i < points.Count - 1; i++)
             {

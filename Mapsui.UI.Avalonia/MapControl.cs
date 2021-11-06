@@ -13,7 +13,6 @@ using Avalonia.Rendering.SceneGraph;
 using Avalonia.Skia;
 using Avalonia.Threading;
 using Mapsui.Layers;
-using Mapsui.Providers;
 using Mapsui.UI.Avalonia.Extensions;
 using Mapsui.Utilities;
 
@@ -39,7 +38,7 @@ namespace Mapsui.UI.Avalonia
             Initialize();
         }
 
-        void Initialize()
+        private void Initialize()
         {
             _invalidate = () => { RunOnUIThread(InvalidateVisual); };
 
@@ -280,7 +279,10 @@ namespace Mapsui.UI.Avalonia
                 return true;
             }
 
-            public bool Equals(ICustomDrawOperation? other) => false;
+            public bool Equals(ICustomDrawOperation? other)
+            {
+                return false;
+            }
 
             public void Render(IDrawingContextImpl context)
             {

@@ -3,6 +3,7 @@ using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.UI.Objects;
 using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
@@ -19,6 +20,12 @@ using KnownColor = Mapsui.UI.Maui.KnownColor;
 #else
 using Mapsui.UI.Forms.Extensions;
 using Mapsui.UI.Forms.Utils;
+using Mapsui.Geometries;
+using Mapsui.GeometryLayer;
+using Mapsui.Providers;
+using Mapsui.Styles;
+using Mapsui.UI.Forms.Extensions;
+using Mapsui.UI.Objects;
 using Xamarin.Forms;
 
 using Color = Xamarin.Forms.Color;
@@ -61,18 +68,12 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Outer contour of polygon
         /// </summary>
-        public IList<Position> Positions
-        {
-            get { return _positions; }
-        }
+        public IList<Position> Positions => _positions;
 
         /// <summary>
         /// Holes contained by polygon
         /// </summary>
-        public IList<Position[]> Holes
-        {
-            get { return _holes; }
-        }
+        public IList<Position[]> Holes => _holes;
 
         protected override void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
@@ -98,17 +99,17 @@ namespace Mapsui.UI.Forms
             }
         }
 
-        void OnPositionsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void OnPositionsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             OnPropertyChanged(nameof(Positions));
         }
 
-        void OnHolesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void OnHolesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             OnPropertyChanged(nameof(Holes));
         }
 
-        private object sync = new object();
+        private readonly object sync = new object();
 
         private void CreateFeature()
         {
@@ -117,7 +118,7 @@ namespace Mapsui.UI.Forms
                 if (Feature == null)
                 {
                     // Create a new one
-                    Feature = new Feature
+                    Feature = new GeometryFeature
                     {
                         Geometry = new Mapsui.Geometries.Polygon(),
                         ["Label"] = Label,

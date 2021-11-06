@@ -1,9 +1,9 @@
-﻿using Mapsui.Projection;
-using NUnit.Framework;
-using System.Linq;
+﻿using System.Linq;
 using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.Geometries.WellKnownText;
+using Mapsui.Projection;
+using NUnit.Framework;
 
 namespace Mapsui.Tests.Projection
 {

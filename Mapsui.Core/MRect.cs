@@ -30,8 +30,6 @@ namespace Mapsui
     /// </remarks>
     public class MRect : IEquatable<MRect>
     {
-        public MRect() { }
-
         public MRect(MRect rect) : this(
             rect.Min.X,
             rect.Min.Y,
@@ -69,9 +67,6 @@ namespace Mapsui
         /// </summary>
         public MRect(IEnumerable<MRect> rects)
         {
-            Max = null;
-            Min = null;
-
             foreach (var rect in rects)
             {
                 Min ??= rect.Min.Clone();
@@ -82,6 +77,9 @@ namespace Mapsui
                 Max.X = Math.Max(rect.Max.X, Max.X);
                 Max.Y = Math.Max(rect.Max.Y, Max.Y);
             }
+
+            if (Min == null) throw new ArgumentException("Empty Collection", nameof(rects));
+            if (Max == null) throw new ArgumentException("Empty Collection", nameof(rects));
         }
 
         public double MinX => Min.X;
@@ -336,12 +334,12 @@ namespace Mapsui
         /// <param name="box1"></param>
         /// <param name="box2"></param>
         /// <returns></returns>
-        public static MRect Join(MRect? box1, MRect? box2)
+        public static MRect? Join(MRect? box1, MRect? box2)
         {
             if ((box1 == null) && (box2 == null))
                 return null;
             if (box1 == null)
-                return box2.Clone();
+                return box2!.Clone();
             return box1.Join(box2);
         }
 
@@ -350,7 +348,7 @@ namespace Mapsui
         /// </summary>
         /// <param name="boxes">Boxes to join</param>
         /// <returns>Combined MRect</returns>
-        public static MRect Join(MRect[]? boxes)
+        public static MRect? Join(MRect[]? boxes)
         {
             if (boxes == null) return null;
             if (boxes.Length == 1) return boxes[0];
@@ -390,6 +388,28 @@ namespace Mapsui
             box.Max.X += amountInX;
             box.Max.Y += amountInY;
             box.CheckMinMax();
+            return box;
+        }
+
+        /// <summary>
+        /// Adjusts the size by increasing Width and Heigh with (Width * Height) / 2 * factor.
+        /// </summary>
+        /// <param name="factor"></param>
+        /// <returns></returns>
+        public MRect Multiply(double factor)
+        {
+            if (factor < 0)
+            {
+                throw new ArgumentException($"{nameof(factor)} can not be smaller than zero");
+            }
+
+            var size = (Width + Height) * 0.5;
+            var change = (size * 0.5 * factor) - (size * 0.5);
+            var box = Clone();
+            box.Min.X -= change;
+            box.Min.Y -= change;
+            box.Max.X += change;
+            box.Max.Y += change;
             return box;
         }
 
@@ -489,7 +509,7 @@ namespace Mapsui
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             var box = obj as MRect;
             if (obj == null) return false;

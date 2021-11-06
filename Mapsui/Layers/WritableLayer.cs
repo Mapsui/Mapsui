@@ -4,7 +4,7 @@ using System.Linq;
 using ConcurrentCollections;
 using Mapsui.Extensions;
 using Mapsui.Fetcher;
-using Mapsui.Geometries;
+using Mapsui.GeometryLayer;
 using Mapsui.Providers;
 using Mapsui.Styles;
 
@@ -24,7 +24,7 @@ namespace Mapsui.Layers
             return result;
         }
 
-        private MRect GetExtent()
+        private MRect? GetExtent()
         {
             // todo: Calculate extent only once. Use a _modified field to determine when this is needed.
 
@@ -40,7 +40,7 @@ namespace Mapsui.Layers
             var maxX = geometries.Max(g => g.BoundingBox.MaxX);
             var maxY = geometries.Max(g => g.BoundingBox.MaxY);
 
-            return new BoundingBox(minX, minY, maxX, maxY).ToMRect();
+            return new MRect(minX, minY, maxX, maxY);
         }
 
         public override MRect Envelope => GetExtent();

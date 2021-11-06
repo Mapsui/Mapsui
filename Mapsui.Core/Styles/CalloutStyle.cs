@@ -122,11 +122,6 @@ namespace Mapsui.Styles
         }
 
         /// <summary>
-        /// MRect relative to offset point
-        /// </summary>
-        public MRect MRect = new();
-
-        /// <summary>
         /// Gets or sets the rotation of the Callout in degrees (clockwise is positive)
         /// </summary>
         public double Rotation
@@ -324,7 +319,7 @@ namespace Mapsui.Styles
         /// <summary>
         /// Content of Callout title label
         /// </summary>
-        public string Title
+        public string? Title
         {
             get => _title;
             set
@@ -340,7 +335,7 @@ namespace Mapsui.Styles
         /// <summary>
         /// Font color to render title
         /// </summary>
-        public Color TitleFontColor
+        public Color? TitleFontColor
         {
             get => _titleFontColor;
             set
@@ -369,7 +364,7 @@ namespace Mapsui.Styles
         /// <summary>
         /// Content of Callout subtitle label
         /// </summary>
-        public string Subtitle
+        public string? Subtitle
         {
             get => _subtitle;
             set
@@ -385,7 +380,7 @@ namespace Mapsui.Styles
         /// <summary>
         /// Font color to render subtitle
         /// </summary>
-        public Color SubtitleFontColor
+        public Color? SubtitleFontColor
         {
             get => _subtitleFontColor;
             set

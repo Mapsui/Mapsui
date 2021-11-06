@@ -97,6 +97,7 @@
     <h5>Implements</h5>
     <div><span class="xref">System.IEquatable</span>&lt;<span class="xref">Foundation.NSObject</span>&gt;</div>
     <div><span class="xref">Foundation.INSObjectProtocol</span></div>
+    <div><span class="xref">UIKit.IUIActivityItemsConfigurationProviding</span></div>
     <div><span class="xref">UIKit.IUIPasteConfigurationSupporting</span></div>
     <div><span class="xref">UIKit.IUIUserActivityRestoring</span></div>
     <div><span class="xref">System.Collections.IEnumerable</span></div>
@@ -594,6 +595,9 @@
       <span class="xref">UIKit.UIView.AnimationsEnabled</span>
     </div>
     <div>
+      <span class="xref">UIKit.UIView.AppliedContentSizeCategoryLimitsDescription</span>
+    </div>
+    <div>
       <span class="xref">UIKit.UIView.AutoresizingMask</span>
     </div>
     <div>
@@ -660,7 +664,13 @@
       <span class="xref">UIKit.UIView.FirstBaselineAnchor</span>
     </div>
     <div>
+      <span class="xref">UIKit.UIView.FocusEffect</span>
+    </div>
+    <div>
       <span class="xref">UIKit.UIView.FocusGroupIdentifier</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.FocusGroupPriority</span>
     </div>
     <div>
       <span class="xref">UIKit.UIView.FocusItemContainer</span>
@@ -696,6 +706,12 @@
       <span class="xref">UIKit.UIView.IsAccessibilityElement</span>
     </div>
     <div>
+      <span class="xref">UIKit.UIView.IsTransparentFocusItem</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.KeyboardLayoutGuide</span>
+    </div>
+    <div>
       <span class="xref">UIKit.UIView.LargeContentImage</span>
     </div>
     <div>
@@ -727,6 +743,12 @@
     </div>
     <div>
       <span class="xref">UIKit.UIView.MaskView</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.MaximumContentSizeCategory</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIView.MinimumContentSizeCategory</span>
     </div>
     <div>
       <span class="xref">UIKit.UIView.MotionEffects</span>
@@ -1074,6 +1096,9 @@
       <span class="xref">UIKit.UIResponder.CanPerform(ObjCRuntime.Selector, Foundation.NSObject)</span>
     </div>
     <div>
+      <span class="xref">UIKit.UIResponder.CaptureTextFromCamera(Foundation.NSObject)</span>
+    </div>
+    <div>
       <span class="xref">UIKit.UIResponder.ClearTextInputContextIdentifier(Foundation.NSString)</span>
     </div>
     <div>
@@ -1110,6 +1135,15 @@
       <span class="xref">UIKit.UIResponder.Paste(Foundation.NSItemProvider[])</span>
     </div>
     <div>
+      <span class="xref">UIKit.UIResponder.PasteAndGo(Foundation.NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.PasteAndMatchStyle(Foundation.NSObject)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.PasteAndSearch(Foundation.NSObject)</span>
+    </div>
+    <div>
       <span class="xref">UIKit.UIResponder.PressesBegan(Foundation.NSSet&lt;UIKit.UIPress&gt;, UIKit.UIPressesEvent)</span>
     </div>
     <div>
@@ -1120,6 +1154,9 @@
     </div>
     <div>
       <span class="xref">UIKit.UIResponder.PressesEnded(Foundation.NSSet&lt;UIKit.UIPress&gt;, UIKit.UIPressesEvent)</span>
+    </div>
+    <div>
+      <span class="xref">UIKit.UIResponder.Print(Foundation.NSObject)</span>
     </div>
     <div>
       <span class="xref">UIKit.UIResponder.ReloadInputViews()</span>
@@ -1505,7 +1542,7 @@
   <h5 id="Mapsui_UI_iOS_MapControl_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[Register(&quot;MapControl&quot;)]
-public class MapControl : UIView, IEquatable&lt;NSObject&gt;, INSObjectProtocol, IUIPasteConfigurationSupporting, IUIUserActivityRestoring, IEnumerable, INSCoding, IUIAccessibilityIdentification, IUIAppearance, IUIAppearanceContainer, IUICoordinateSpace, IUIDynamicItem, IUIFocusItem, IUIFocusEnvironment, IUIFocusItemContainer, IUILargeContentViewerItem, IUITraitEnvironment, ICALayerDelegate, INativeObject, IDisposable, IMapControl, INotifyPropertyChanged</code></pre>
+public class MapControl : UIView, IEquatable&lt;NSObject&gt;, INSObjectProtocol, IUIActivityItemsConfigurationProviding, IUIPasteConfigurationSupporting, IUIUserActivityRestoring, IEnumerable, INSCoding, IUIAccessibilityIdentification, IUIAppearance, IUIAppearanceContainer, IUICoordinateSpace, IUIDynamicItem, IUIFocusItem, IUIFocusEnvironment, IUIFocusItemContainer, IUILargeContentViewerItem, IUITraitEnvironment, ICALayerDelegate, INativeObject, IDisposable, IMapControl, INotifyPropertyChanged</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -1514,7 +1551,7 @@ public class MapControl : UIView, IEquatable&lt;NSObject&gt;, INSObjectProtocol,
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl__ctor_CoreGraphics_CGRect_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.%23ctor(CoreGraphics.CGRect)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.iOS/MapControl.cs/#L22">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.iOS/MapControl.cs/#L23">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl__ctor_" data-uid="Mapsui.UI.iOS.MapControl.#ctor*"></a>
   <h4 id="Mapsui_UI_iOS_MapControl__ctor_CoreGraphics_CGRect_" data-uid="Mapsui.UI.iOS.MapControl.#ctor(CoreGraphics.CGRect)">MapControl(CGRect)</h4>
@@ -1546,7 +1583,7 @@ public class MapControl : UIView, IEquatable&lt;NSObject&gt;, INSObjectProtocol,
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl__ctor_System_IntPtr_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.%23ctor(System.IntPtr)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.iOS/MapControl.cs/#L29">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.iOS/MapControl.cs/#L30">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl__ctor_" data-uid="Mapsui.UI.iOS.MapControl.#ctor*"></a>
   <h4 id="Mapsui_UI_iOS_MapControl__ctor_System_IntPtr_" data-uid="Mapsui.UI.iOS.MapControl.#ctor(System.IntPtr)">MapControl(IntPtr)</h4>
@@ -1581,7 +1618,7 @@ public MapControl(IntPtr handle)</code></pre>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_Frame.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.Frame%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.iOS/MapControl.cs/#L197">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.iOS/MapControl.cs/#L198">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_Frame_" data-uid="Mapsui.UI.iOS.MapControl.Frame*"></a>
   <h4 id="Mapsui_UI_iOS_MapControl_Frame" data-uid="Mapsui.UI.iOS.MapControl.Frame">Frame</h4>
@@ -1613,7 +1650,7 @@ public MapControl(IntPtr handle)</code></pre>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_Map.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.Map%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L436">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L434">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_Map_" data-uid="Mapsui.UI.iOS.MapControl.Map*"></a>
   <h4 id="Mapsui_UI_iOS_MapControl_Map" data-uid="Mapsui.UI.iOS.MapControl.Map">Map</h4>
@@ -1644,7 +1681,7 @@ public MapControl(IntPtr handle)</code></pre>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_Navigator.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.Navigator%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L252">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L250">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_Navigator_" data-uid="Mapsui.UI.iOS.MapControl.Navigator*"></a>
   <h4 id="Mapsui_UI_iOS_MapControl_Navigator" data-uid="Mapsui.UI.iOS.MapControl.Navigator">Navigator</h4>
@@ -1675,7 +1712,7 @@ public MapControl(IntPtr handle)</code></pre>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_Performance.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.Performance%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L171">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L172">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_Performance_" data-uid="Mapsui.UI.iOS.MapControl.Performance*"></a>
   <h4 id="Mapsui_UI_iOS_MapControl_Performance" data-uid="Mapsui.UI.iOS.MapControl.Performance">Performance</h4>
@@ -1709,7 +1746,7 @@ public MapControl(IntPtr handle)</code></pre>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_PixelDensity.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.PixelDensity%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L218">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L219">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_PixelDensity_" data-uid="Mapsui.UI.iOS.MapControl.PixelDensity*"></a>
   <h4 id="Mapsui_UI_iOS_MapControl_PixelDensity" data-uid="Mapsui.UI.iOS.MapControl.PixelDensity">PixelDensity</h4>
@@ -1739,7 +1776,7 @@ public MapControl(IntPtr handle)</code></pre>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_Renderer.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.Renderer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L228">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L226">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_Renderer_" data-uid="Mapsui.UI.iOS.MapControl.Renderer*"></a>
   <h4 id="Mapsui_UI_iOS_MapControl_Renderer" data-uid="Mapsui.UI.iOS.MapControl.Renderer">Renderer</h4>
@@ -1770,7 +1807,7 @@ public MapControl(IntPtr handle)</code></pre>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_ReSnapRotationDegrees.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.ReSnapRotationDegrees%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L205">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L206">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_ReSnapRotationDegrees_" data-uid="Mapsui.UI.iOS.MapControl.ReSnapRotationDegrees*"></a>
   <h4 id="Mapsui_UI_iOS_MapControl_ReSnapRotationDegrees" data-uid="Mapsui.UI.iOS.MapControl.ReSnapRotationDegrees">ReSnapRotationDegrees</h4>
@@ -1801,7 +1838,7 @@ public MapControl(IntPtr handle)</code></pre>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_UnSnapRotationDegrees.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.UnSnapRotationDegrees%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L187">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L188">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_UnSnapRotationDegrees_" data-uid="Mapsui.UI.iOS.MapControl.UnSnapRotationDegrees*"></a>
   <h4 id="Mapsui_UI_iOS_MapControl_UnSnapRotationDegrees" data-uid="Mapsui.UI.iOS.MapControl.UnSnapRotationDegrees">UnSnapRotationDegrees</h4>
@@ -1832,7 +1869,7 @@ public MapControl(IntPtr handle)</code></pre>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_UpdateInterval.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.UpdateInterval%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L147">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L148">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_UpdateInterval_" data-uid="Mapsui.UI.iOS.MapControl.UpdateInterval*"></a>
   <h4 id="Mapsui_UI_iOS_MapControl_UpdateInterval" data-uid="Mapsui.UI.iOS.MapControl.UpdateInterval">UpdateInterval</h4>
@@ -1863,7 +1900,7 @@ public MapControl(IntPtr handle)</code></pre>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_Viewport.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.Viewport%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L247">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L245">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_Viewport_" data-uid="Mapsui.UI.iOS.MapControl.Viewport*"></a>
   <h4 id="Mapsui_UI_iOS_MapControl_Viewport" data-uid="Mapsui.UI.iOS.MapControl.Viewport">Viewport</h4>
@@ -1896,7 +1933,7 @@ public MapControl(IntPtr handle)</code></pre>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_CallHomeIfNeeded.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.CallHomeIfNeeded%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L424">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L422">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_CallHomeIfNeeded_" data-uid="Mapsui.UI.iOS.MapControl.CallHomeIfNeeded*"></a>
   <h4 id="Mapsui_UI_iOS_MapControl_CallHomeIfNeeded" data-uid="Mapsui.UI.iOS.MapControl.CallHomeIfNeeded">CallHomeIfNeeded()</h4>
@@ -1911,7 +1948,7 @@ public MapControl(IntPtr handle)</code></pre>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_Clear.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.Clear%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L612">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L607">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_Clear_" data-uid="Mapsui.UI.iOS.MapControl.Clear*"></a>
   <h4 id="Mapsui_UI_iOS_MapControl_Clear" data-uid="Mapsui.UI.iOS.MapControl.Clear">Clear()</h4>
@@ -1927,7 +1964,7 @@ public MapControl(IntPtr handle)</code></pre>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_Dispose.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.Dispose%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.iOS/MapControl.cs/#L222">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.iOS/MapControl.cs/#L223">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_Dispose_" data-uid="Mapsui.UI.iOS.MapControl.Dispose*"></a>
   <h4 id="Mapsui_UI_iOS_MapControl_Dispose" data-uid="Mapsui.UI.iOS.MapControl.Dispose">Dispose()</h4>
@@ -1942,7 +1979,7 @@ public MapControl(IntPtr handle)</code></pre>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_Dispose_System_Boolean_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.Dispose(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.iOS/MapControl.cs/#L228">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.iOS/MapControl.cs/#L229">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_Dispose_" data-uid="Mapsui.UI.iOS.MapControl.Dispose*"></a>
   <h4 id="Mapsui_UI_iOS_MapControl_Dispose_System_Boolean_" data-uid="Mapsui.UI.iOS.MapControl.Dispose(System.Boolean)">Dispose(Boolean)</h4>
@@ -1976,7 +2013,7 @@ public MapControl(IntPtr handle)</code></pre>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_ForceUpdate.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.ForceUpdate%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L139">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L140">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_ForceUpdate_" data-uid="Mapsui.UI.iOS.MapControl.ForceUpdate*"></a>
   <h4 id="Mapsui_UI_iOS_MapControl_ForceUpdate" data-uid="Mapsui.UI.iOS.MapControl.ForceUpdate">ForceUpdate()</h4>
@@ -1995,7 +2032,7 @@ public MapControl(IntPtr handle)</code></pre>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_GetMapInfo_Mapsui_MPoint_System_Int32_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.GetMapInfo(Mapsui.MPoint%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L520">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L512">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_GetMapInfo_" data-uid="Mapsui.UI.iOS.MapControl.GetMapInfo*"></a>
   <h4 id="Mapsui_UI_iOS_MapControl_GetMapInfo_Mapsui_MPoint_System_Int32_" data-uid="Mapsui.UI.iOS.MapControl.GetMapInfo(Mapsui.MPoint,System.Int32)">GetMapInfo(MPoint, Int32)</h4>
@@ -2047,7 +2084,7 @@ public MapControl(IntPtr handle)</code></pre>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable%7BMapsui.Layers.ILayer%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L526">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L518">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_GetSnapshot_" data-uid="Mapsui.UI.iOS.MapControl.GetSnapshot*"></a>
   <h4 id="Mapsui_UI_iOS_MapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__" data-uid="Mapsui.UI.iOS.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})">GetSnapshot(IEnumerable&lt;ILayer&gt;)</h4>
@@ -2094,7 +2131,7 @@ public MapControl(IntPtr handle)</code></pre>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_LayoutMarginsDidChange.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.LayoutMarginsDidChange%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.iOS/MapControl.cs/#L209">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.iOS/MapControl.cs/#L210">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_LayoutMarginsDidChange_" data-uid="Mapsui.UI.iOS.MapControl.LayoutMarginsDidChange*"></a>
   <h4 id="Mapsui_UI_iOS_MapControl_LayoutMarginsDidChange" data-uid="Mapsui.UI.iOS.MapControl.LayoutMarginsDidChange">LayoutMarginsDidChange()</h4>
@@ -2111,7 +2148,7 @@ public MapControl(IntPtr handle)</code></pre>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_OnPropertyChanged_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.OnPropertyChanged(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L302">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L300">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_OnPropertyChanged_" data-uid="Mapsui.UI.iOS.MapControl.OnPropertyChanged*"></a>
   <h4 id="Mapsui_UI_iOS_MapControl_OnPropertyChanged_System_String_" data-uid="Mapsui.UI.iOS.MapControl.OnPropertyChanged(System.String)">OnPropertyChanged(String)</h4>
@@ -2143,7 +2180,7 @@ public MapControl(IntPtr handle)</code></pre>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_OpenBrowser_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.OpenBrowser(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.iOS/MapControl.cs/#L217">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.iOS/MapControl.cs/#L218">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_OpenBrowser_" data-uid="Mapsui.UI.iOS.MapControl.OpenBrowser*"></a>
   <h4 id="Mapsui_UI_iOS_MapControl_OpenBrowser_System_String_" data-uid="Mapsui.UI.iOS.MapControl.OpenBrowser(System.String)">OpenBrowser(String)</h4>
@@ -2175,7 +2212,7 @@ public MapControl(IntPtr handle)</code></pre>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_Refresh_Mapsui_ChangeType_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.Refresh(Mapsui.ChangeType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L344">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L342">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_Refresh_" data-uid="Mapsui.UI.iOS.MapControl.Refresh*"></a>
   <h4 id="Mapsui_UI_iOS_MapControl_Refresh_Mapsui_ChangeType_" data-uid="Mapsui.UI.iOS.MapControl.Refresh(Mapsui.ChangeType)">Refresh(ChangeType)</h4>
@@ -2208,7 +2245,7 @@ public MapControl(IntPtr handle)</code></pre>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_RefreshData_Mapsui_ChangeType_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.RefreshData(Mapsui.ChangeType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L485">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L483">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_RefreshData_" data-uid="Mapsui.UI.iOS.MapControl.RefreshData*"></a>
   <h4 id="Mapsui_UI_iOS_MapControl_RefreshData_Mapsui_ChangeType_" data-uid="Mapsui.UI.iOS.MapControl.RefreshData(Mapsui.ChangeType)">RefreshData(ChangeType)</h4>
@@ -2241,7 +2278,7 @@ public MapControl(IntPtr handle)</code></pre>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_RefreshGraphics.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.RefreshGraphics%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L350">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L348">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_RefreshGraphics_" data-uid="Mapsui.UI.iOS.MapControl.RefreshGraphics*"></a>
   <h4 id="Mapsui_UI_iOS_MapControl_RefreshGraphics" data-uid="Mapsui.UI.iOS.MapControl.RefreshGraphics">RefreshGraphics()</h4>
@@ -2256,7 +2293,7 @@ public MapControl(IntPtr handle)</code></pre>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_StartUpdates_System_Boolean_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.StartUpdates(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L115">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L116">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_StartUpdates_" data-uid="Mapsui.UI.iOS.MapControl.StartUpdates*"></a>
   <h4 id="Mapsui_UI_iOS_MapControl_StartUpdates_System_Boolean_" data-uid="Mapsui.UI.iOS.MapControl.StartUpdates(System.Boolean)">StartUpdates(Boolean)</h4>
@@ -2292,7 +2329,7 @@ public MapControl(IntPtr handle)</code></pre>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_StopUpdates.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.StopUpdates%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L128">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L129">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_StopUpdates_" data-uid="Mapsui.UI.iOS.MapControl.StopUpdates*"></a>
   <h4 id="Mapsui_UI_iOS_MapControl_StopUpdates" data-uid="Mapsui.UI.iOS.MapControl.StopUpdates">StopUpdates()</h4>
@@ -2312,7 +2349,7 @@ even if it is needed</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L472">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L470">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_ToDeviceIndependentUnits_" data-uid="Mapsui.UI.iOS.MapControl.ToDeviceIndependentUnits*"></a>
   <h4 id="Mapsui_UI_iOS_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_" data-uid="Mapsui.UI.iOS.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)">ToDeviceIndependentUnits(MPoint)</h4>
@@ -2359,7 +2396,7 @@ even if it is needed</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_ToPixels_Mapsui_MPoint_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.ToPixels(Mapsui.MPoint)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L464">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L462">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_ToPixels_" data-uid="Mapsui.UI.iOS.MapControl.ToPixels*"></a>
   <h4 id="Mapsui_UI_iOS_MapControl_ToPixels_Mapsui_MPoint_" data-uid="Mapsui.UI.iOS.MapControl.ToPixels(Mapsui.MPoint)">ToPixels(MPoint)</h4>
@@ -2406,7 +2443,7 @@ even if it is needed</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_TouchesBegan_Foundation_NSSet_UIKit_UIEvent_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.TouchesBegan(Foundation.NSSet%2CUIKit.UIEvent)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.iOS/MapControl.cs/#L111">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.iOS/MapControl.cs/#L112">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_TouchesBegan_" data-uid="Mapsui.UI.iOS.MapControl.TouchesBegan*"></a>
   <h4 id="Mapsui_UI_iOS_MapControl_TouchesBegan_Foundation_NSSet_UIKit_UIEvent_" data-uid="Mapsui.UI.iOS.MapControl.TouchesBegan(Foundation.NSSet,UIKit.UIEvent)">TouchesBegan(NSSet, UIEvent)</h4>
@@ -2445,7 +2482,7 @@ even if it is needed</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_TouchesEnded_Foundation_NSSet_UIKit_UIEvent_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.TouchesEnded(Foundation.NSSet%2CUIKit.UIEvent)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.iOS/MapControl.cs/#L177">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.iOS/MapControl.cs/#L178">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_TouchesEnded_" data-uid="Mapsui.UI.iOS.MapControl.TouchesEnded*"></a>
   <h4 id="Mapsui_UI_iOS_MapControl_TouchesEnded_Foundation_NSSet_UIKit_UIEvent_" data-uid="Mapsui.UI.iOS.MapControl.TouchesEnded(Foundation.NSSet,UIKit.UIEvent)">TouchesEnded(NSSet, UIEvent)</h4>
@@ -2484,7 +2521,7 @@ even if it is needed</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_TouchesMoved_Foundation_NSSet_UIKit_UIEvent_.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.TouchesMoved(Foundation.NSSet%2CUIKit.UIEvent)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.iOS/MapControl.cs/#L121">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.iOS/MapControl.cs/#L122">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_TouchesMoved_" data-uid="Mapsui.UI.iOS.MapControl.TouchesMoved*"></a>
   <h4 id="Mapsui_UI_iOS_MapControl_TouchesMoved_Foundation_NSSet_UIKit_UIEvent_" data-uid="Mapsui.UI.iOS.MapControl.TouchesMoved(Foundation.NSSet,UIKit.UIEvent)">TouchesMoved(NSSet, UIEvent)</h4>
@@ -2523,7 +2560,7 @@ even if it is needed</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_Unsubscribe.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.Unsubscribe%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L311">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L309">View Source</a>
   </span>
   <a id="Mapsui_UI_iOS_MapControl_Unsubscribe_" data-uid="Mapsui.UI.iOS.MapControl.Unsubscribe*"></a>
   <h4 id="Mapsui_UI_iOS_MapControl_Unsubscribe" data-uid="Mapsui.UI.iOS.MapControl.Unsubscribe">Unsubscribe()</h4>
@@ -2541,7 +2578,7 @@ even if it is needed</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_Info.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.Info%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L285">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L283">View Source</a>
   </span>
   <h4 id="Mapsui_UI_iOS_MapControl_Info" data-uid="Mapsui.UI.iOS.MapControl.Info">Info</h4>
   <div class="markdown level1 summary"><p>Called whenever the map is clicked. The MapInfoEventArgs contain the features that were hit in
@@ -2572,7 +2609,7 @@ the layers that have IsMapInfoLayer set to true. </p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_PropertyChanged.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.PropertyChanged%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L293">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L291">View Source</a>
   </span>
   <h4 id="Mapsui_UI_iOS_MapControl_PropertyChanged" data-uid="Mapsui.UI.iOS.MapControl.PropertyChanged">PropertyChanged</h4>
   <div class="markdown level1 summary"><p>Called whenever a property is changed</p>
@@ -2602,7 +2639,7 @@ the layers that have IsMapInfoLayer set to true. </p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl_ViewportInitialized.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl.ViewportInitialized%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L279">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L277">View Source</a>
   </span>
   <h4 id="Mapsui_UI_iOS_MapControl_ViewportInitialized" data-uid="Mapsui.UI.iOS.MapControl.ViewportInitialized">ViewportInitialized</h4>
   <div class="markdown level1 summary"><p>Called when the viewport is initialized</p>
@@ -2633,6 +2670,9 @@ the layers that have IsMapInfoLayer set to true. </p>
   </div>
   <div>
       <span class="xref">Foundation.INSObjectProtocol</span>
+  </div>
+  <div>
+      <span class="xref">UIKit.IUIActivityItemsConfigurationProviding</span>
   </div>
   <div>
       <span class="xref">UIKit.IUIPasteConfigurationSupporting</span>
@@ -2702,7 +2742,7 @@ the layers that have IsMapInfoLayer set to true. </p>
                     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_iOS_MapControl.md&amp;value=---%0Auid%3A%20Mapsui.UI.iOS.MapControl%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L31" class="contribution-link">View Source</a>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Shared/MapControl.cs/#L32" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

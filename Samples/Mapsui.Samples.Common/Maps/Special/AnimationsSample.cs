@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Mapsui.Geometries;
+using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
@@ -44,18 +45,19 @@ namespace Mapsui.Samples.Common.Maps
 
             return new Layer("Points")
             {
-                DataSource = new MemoryProvider<IGeometryFeature>(CreatePoints(style)),
+                DataSource = new GeometryMemoryProvider<IGeometryFeature>(CreatePoints(style)),
             };
         }
 
-        private static List<Feature> CreatePoints(IStyle style)
+        private static List<GeometryFeature> CreatePoints(IStyle style)
         {
-            var result = new List<Feature>();
-
-            result.Add(CreatePoint(1000000, 1000000, style));
-            result.Add(CreatePoint(9000000, 1000000, style));
-            result.Add(CreatePoint(9000000, 9000000, style));
-            result.Add(CreatePoint(1000000, 9000000, style));
+            var result = new List<GeometryFeature>
+            {
+                CreatePoint(1000000, 1000000, style),
+                CreatePoint(9000000, 1000000, style),
+                CreatePoint(9000000, 9000000, style),
+                CreatePoint(1000000, 9000000, style)
+            };
 
             return result;
         }
@@ -103,10 +105,12 @@ namespace Mapsui.Samples.Common.Maps
             return animations;
         }
 
-        private static Feature CreatePoint(double x, double y, IStyle style)
+        private static GeometryFeature CreatePoint(double x, double y, IStyle style)
         {
-            var result = new Feature();
-            result.Geometry = new Point(x, y);
+            var result = new GeometryFeature
+            {
+                Geometry = new Point(x, y)
+            };
             result.Styles.Add(style);
             return result;
         }

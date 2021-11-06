@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Extensions;
 using Mapsui.Geometries;
+using Mapsui.GeometryLayer;
 using Mapsui.Projection;
-using Mapsui.Providers;
 
 namespace Mapsui.Utilities
 {
@@ -21,7 +21,7 @@ namespace Mapsui.Utilities
         public const string EsriStringPrefix = "ESRISTRING:";
         public const string Proj4StringPrefix = "PROJ4STRING:";
 
-        public static string ToStandardizedCRS(string? crs)
+        public static string? ToStandardizedCRS(string? crs)
         {
             if (crs == null) return null;
             if (string.IsNullOrWhiteSpace(crs)) return crs.Trim();
@@ -63,7 +63,7 @@ namespace Mapsui.Utilities
             return geometryTransformation.IsProjectionSupported(fromCRS, toCRS) == true;
         }
 
-        public static BoundingBox Transform(BoundingBox? extent,
+        public static BoundingBox? Transform(BoundingBox? extent,
             IGeometryTransformation geometryTransformation, string fromCRS, string toCRS)
         {
             if (extent == null) return null;
@@ -81,7 +81,7 @@ namespace Mapsui.Utilities
             return copiedExtent;
         }
 
-        public static IEnumerable<IGeometryFeature> Transform(IEnumerable<IGeometryFeature>? features,
+        public static IEnumerable<IGeometryFeature>? Transform(IEnumerable<IGeometryFeature>? features,
             IGeometryTransformation geometryTransformation, string fromCRS, string toCRS)
         {
             if (features == null) return null;
@@ -97,7 +97,7 @@ namespace Mapsui.Utilities
             var copiedFeatures = features.Copy().ToList();
             foreach (var copiedFeature in copiedFeatures)
             {
-                if (copiedFeature.Geometry is Raster) continue;
+                if (copiedFeature.Geometry == null) continue;
                 var copiedGeometry = copiedFeature.Geometry.Copy();
                 geometryTransformation.Transform(fromCRS, toCRS, copiedGeometry);
                 copiedFeature.Geometry = copiedGeometry;

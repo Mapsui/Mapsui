@@ -7,6 +7,7 @@ using Android.Widget;
 using Android.Support.V7.App;
 using Android.Views;
 using Mapsui.Extensions;
+using Mapsui.GeometryLayer;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Helpers;

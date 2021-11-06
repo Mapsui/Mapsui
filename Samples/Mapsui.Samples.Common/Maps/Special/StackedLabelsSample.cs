@@ -23,13 +23,13 @@ namespace Mapsui.Samples.Common.Maps
         {
             var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            var provider = RandomPointHelper.CreateProviderWithRandomPoints(map.Envelope);
+            var provider = RandomPointGenerator.CreateProviderWithRandomPoints(map.Envelope);
             map.Layers.Add(CreateStackedLabelLayer(provider, LabelColumn));
             map.Layers.Add(CreateLayer(provider));
             return map;
         }
 
-        private static ILayer CreateStackedLabelLayer(IProvider<IGeometryFeature> provider, string labelColumn)
+        private static ILayer CreateStackedLabelLayer(IProvider<PointFeature> provider, string labelColumn)
         {
             return new MemoryLayer
             {
@@ -45,7 +45,7 @@ namespace Mapsui.Samples.Common.Maps
             };
         }
 
-        private static ILayer CreateLayer(IProvider<IGeometryFeature> dataSource)
+        private static ILayer CreateLayer(IProvider<PointFeature> dataSource)
         {
             return new Layer("Point Layer")
             {
