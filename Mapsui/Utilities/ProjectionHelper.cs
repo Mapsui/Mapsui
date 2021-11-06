@@ -21,42 +21,6 @@ namespace Mapsui.Utilities
         public const string EsriStringPrefix = "ESRISTRING:";
         public const string Proj4StringPrefix = "PROJ4STRING:";
 
-        public static string? ToStandardizedCRS(string? crs)
-        {
-            if (crs == null) return null;
-            if (string.IsNullOrWhiteSpace(crs)) return crs.Trim();
-
-            var crsType = GetCrsType(crs);
-
-            if (crsType == CrsType.Epgs) return EpsgPrefix + crs.Substring(EpsgPrefix.Length);
-            if (crsType == CrsType.EsriString) return EsriStringPrefix + crs.Substring(EsriStringPrefix.Length);
-            if (crsType == CrsType.Proj4String) return Proj4StringPrefix + crs.Substring(Proj4StringPrefix.Length);
-
-            throw new Exception($"crs is not recognized as a projection string: '{crs}'");
-        }
-
-        public static int ToEpsgCode(string crs)
-        {
-            return int.Parse(crs.Substring(EpsgPrefix.Length));
-        }
-
-        public static CrsType GetCrsType(string crs)
-        {
-            if (crs.StartsWith(EpsgPrefix)) return CrsType.Epgs;
-            if (crs.StartsWith(EsriStringPrefix)) return CrsType.EsriString;
-            if (crs.StartsWith(Proj4StringPrefix)) return CrsType.Proj4String;
-            throw new Exception($"crs not recognized: '{crs}'");
-        }
-
-        private static bool IsCrsProvided(string fromCRS, string toCRS)
-        {
-            return !string.IsNullOrEmpty(fromCRS) && !string.IsNullOrEmpty(toCRS);
-        }
-
-        private static bool IsTransformationNeeded(string? fromCRS, string toCRS)
-        {
-            return !fromCRS?.Equals(toCRS) == true;
-        }
 
         private static bool IsTransformationSupported(IGeometryTransformation geometryTransformation, string fromCRS, string toCRS)
         {
@@ -68,9 +32,9 @@ namespace Mapsui.Utilities
         {
             if (extent == null) return null;
 
-            if (!IsTransformationNeeded(fromCRS, toCRS)) return extent;
+            if (!CrsHelper.IsTransformationNeeded(fromCRS, toCRS)) return extent;
 
-            if (!IsCrsProvided(fromCRS, toCRS))
+            if (!CrsHelper.IsCrsProvided(fromCRS, toCRS))
                 throw new NotSupportedException($"CRS is not provided. From CRS: {fromCRS}. To CRS {toCRS}");
 
             if (!IsTransformationSupported(geometryTransformation, fromCRS, toCRS))
@@ -86,9 +50,9 @@ namespace Mapsui.Utilities
         {
             if (features == null) return null;
 
-            if (!IsTransformationNeeded(fromCRS, toCRS)) return features;
+            if (!CrsHelper.IsTransformationNeeded(fromCRS, toCRS)) return features;
 
-            if (!IsCrsProvided(fromCRS, toCRS))
+            if (!CrsHelper.IsCrsProvided(fromCRS, toCRS))
                 throw new NotSupportedException($"CRS is not provided. From CRS: {fromCRS}. To CRS {toCRS}");
 
             if (!IsTransformationSupported(geometryTransformation, fromCRS, toCRS))

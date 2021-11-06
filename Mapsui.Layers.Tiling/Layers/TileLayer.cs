@@ -63,7 +63,7 @@ namespace Mapsui.Layers
             Style = new VectorStyle { Outline = { Color = Color.FromArgb(0, 0, 0, 0) } }; // initialize with transparent outline
             Attribution.Text = _tileSource.Attribution?.Text;
             Attribution.Url = _tileSource.Attribution?.Url;
-            _extent = _tileSource.Schema?.Extent.ToBoundingBox().ToMRect();
+            _extent = _tileSource.Schema?.Extent.ToMRect();
             dataFetchStrategy ??= new DataFetchStrategy(3);
             _renderFetchStrategy = renderFetchStrategy ?? new RenderFetchStrategy();
             _minExtraTiles = minExtraTiles;

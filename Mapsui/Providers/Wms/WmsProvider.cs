@@ -29,6 +29,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using Mapsui.Layers;
 using Mapsui.Rendering;
+using Mapsui.Utilities;
 
 namespace Mapsui.Providers.Wms
 {
@@ -312,7 +313,7 @@ namespace Mapsui.Providers.Wms
                 using var task = _getStreamAsync(url);
                 using var result = task.Result;
                 // PDD: This could be more efficient
-                var bytes = BruTile.Utilities.ReadFully(result);
+                var bytes = StreamHelper.ReadFully(result);
                 raster = new MRaster(new MemoryStream(bytes), viewport.Extent);	// This can throw exception
                 return true;
             }
@@ -415,7 +416,7 @@ namespace Mapsui.Providers.Wms
                 try
                 {
                     using var task = _getStreamAsync(url);
-                    var bytes = BruTile.Utilities.ReadFully(task.Result);
+                    var bytes = StreamHelper.ReadFully(task.Result);
                     images.Add(new MemoryStream(bytes));
                     task.Result.Close();
                 }

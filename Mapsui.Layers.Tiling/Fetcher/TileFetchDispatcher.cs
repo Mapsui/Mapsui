@@ -11,7 +11,7 @@ using Mapsui.Layers;
 
 namespace Mapsui.Fetcher
 {
-    internal class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
+    public class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
     {
         private FetchInfo? _fetchInfo;
         private readonly object _lockRoot = new();

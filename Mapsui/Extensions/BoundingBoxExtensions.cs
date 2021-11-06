@@ -1,4 +1,3 @@
-using BruTile;
 using Mapsui.Geometries;
 
 namespace Mapsui.Extensions
@@ -18,11 +17,6 @@ namespace Mapsui.Extensions
             if (box.Centroid == null) return false;
 
             return true;
-        }
-
-        public static Extent ToExtent(this BoundingBox? boundingBox)
-        {
-            return new Extent(boundingBox.MinX, boundingBox.MinY, boundingBox.MaxX, boundingBox.MaxY);
         }
 
         public static MRect? ToMRect(this BoundingBox? boundingBox)
