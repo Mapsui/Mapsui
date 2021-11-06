@@ -19,6 +19,7 @@ using System.Linq;
 using System.Resources;
 using System.Runtime.CompilerServices;
 using Mapsui.Fetcher;
+using Mapsui.GeometryLayer;
 #if __MAUI__
 using Mapsui.UI.Maui.Extensions;
 using Microsoft.Maui;

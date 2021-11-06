@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Mapsui.GeometryLayer;
 
 #if __MAUI__
 using Microsoft.Maui;
@@ -20,12 +21,6 @@ using KnownColor = Mapsui.UI.Maui.KnownColor;
 #else
 using Mapsui.UI.Forms.Extensions;
 using Mapsui.UI.Forms.Utils;
-using Mapsui.Geometries;
-using Mapsui.GeometryLayer;
-using Mapsui.Providers;
-using Mapsui.Styles;
-using Mapsui.UI.Forms.Extensions;
-using Mapsui.UI.Objects;
 using Xamarin.Forms;
 
 using Color = Xamarin.Forms.Color;
