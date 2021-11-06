@@ -7,11 +7,9 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using Mapsui.Extensions;
-using Mapsui.Geometries;
-using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Logging;
-using Mapsui.Utilities;
+using Mapsui.Projection;
 
 namespace Mapsui.Providers.ArcGIS.Dynamic
 {
@@ -151,7 +149,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
                 return false;
             }
 
-            var uri = new Uri(GetRequestUrl(viewport.Extent.ToBoundingBox(), width, height));
+            var uri = new Uri(GetRequestUrl(viewport.Extent, width, height));
             var handler = new HttpClientHandler { Credentials = Credentials ?? CredentialCache.DefaultCredentials };
             var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(_timeOut) };
 
@@ -178,7 +176,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
         /// <param name="width"> </param>
         /// <param name="height"> </param>
         /// <returns>URL for ArcGIS Dynamic request</returns>
-        public string GetRequestUrl(BoundingBox? box, int width, int height)
+        public string GetRequestUrl(MRect? box, int width, int height)
         {
             //ArcGIS Export description see: http://resources.esri.com/help/9.3/arcgisserver/apis/rest/index.html?export.html
 
@@ -223,8 +221,8 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
 
         private static string CreateSr(string crs)
         {
-            if (crs.StartsWith(ProjectionHelper.EsriStringPrefix)) return "{\"wkt\":\"" + crs.Substring(ProjectionHelper.EsriStringPrefix.Length).Replace("\"", "\\\"") + "\"}";
-            if (crs.StartsWith(ProjectionHelper.EpsgPrefix)) return ProjectionHelper.ToEpsgCode(crs).ToString();
+            if (crs.StartsWith(CrsHelper.EsriStringPrefix)) return "{\"wkt\":\"" + crs.Substring(CrsHelper.EsriStringPrefix.Length).Replace("\"", "\\\"") + "\"}";
+            if (crs.StartsWith(CrsHelper.EpsgPrefix)) return CrsHelper.ToEpsgCode(crs).ToString();
             throw new Exception("crs type not supported");
         }
 

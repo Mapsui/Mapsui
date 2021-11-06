@@ -95,7 +95,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
 
             if (dataStream != null)
             {
-                var sReader = new StreamReader(dataStream);
+                var sReader = new System.IO.StreamReader(dataStream);
                 var jsonString = sReader.ReadToEnd();
 
                 var serializer = new JsonSerializer();
