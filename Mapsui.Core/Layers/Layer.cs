@@ -80,7 +80,7 @@ namespace Mapsui.Layers
                 }
 
                 OnPropertyChanged(nameof(DataSource));
-                OnPropertyChanged(nameof(Envelope));
+                OnPropertyChanged(nameof(Extent));
             }
         }
 
@@ -107,7 +107,7 @@ namespace Mapsui.Layers
         /// Returns the extent of the layer
         /// </summary>
         /// <returns>Bounding box corresponding to the extent of the features in the layer</returns>
-        public override MRect Envelope
+        public override MRect Extent
         {
             get
             {

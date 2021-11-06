@@ -165,7 +165,7 @@ namespace Mapsui.Samples.Wpf.Editing
 
             _editManager.EditMode = EditMode.Modify;
             Loaded += (sender, args) => {
-                MapControl.Navigator.NavigateTo(_editManager.Layer.Envelope.Grow(_editManager.Layer.Envelope.Width * 0.2));
+                MapControl.Navigator.NavigateTo(_editManager.Layer.Extent.Grow(_editManager.Layer.Extent.Width * 0.2));
             };
         }
 

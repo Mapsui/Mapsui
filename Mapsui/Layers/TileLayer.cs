@@ -40,7 +40,7 @@ namespace Mapsui.Layers
         private readonly int _maxExtraTiles;
         private int _numberTilesNeeded;
         private readonly TileFetchDispatcher _tileFetchDispatcher;
-        private readonly MRect _envelope;
+        private readonly MRect? _extent;
 
         /// <summary>
         /// Create tile layer for given tile source
@@ -63,7 +63,7 @@ namespace Mapsui.Layers
             Style = new VectorStyle { Outline = { Color = Color.FromArgb(0, 0, 0, 0) } }; // initialize with transparent outline
             Attribution.Text = _tileSource.Attribution?.Text;
             Attribution.Url = _tileSource.Attribution?.Url;
-            _envelope = _tileSource.Schema?.Extent.ToBoundingBox().ToMRect();
+            _extent = _tileSource.Schema?.Extent.ToBoundingBox().ToMRect();
             dataFetchStrategy ??= new DataFetchStrategy(3);
             _renderFetchStrategy = renderFetchStrategy ?? new RenderFetchStrategy();
             _minExtraTiles = minExtraTiles;
@@ -86,7 +86,7 @@ namespace Mapsui.Layers
         public override IReadOnlyList<double> Resolutions => _tileSource.Schema?.Resolutions.Select(r => r.Value.UnitsPerPixel).ToList();
 
         /// <inheritdoc />
-        public override MRect Envelope => _envelope;
+        public override MRect? Extent => _extent;
 
         /// <inheritdoc />
         public override IEnumerable<IFeature> GetFeatures(MRect box, double resolution)

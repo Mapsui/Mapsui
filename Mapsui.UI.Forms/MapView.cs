@@ -787,8 +787,9 @@ namespace Mapsui.UI.Forms
             if (layer.Enabled == false) return drawables;
             if (layer.MinVisible > Viewport.Resolution) return drawables;
             if (layer.MaxVisible < Viewport.Resolution) return drawables;
+            if (layer.Extent == null) return drawables;
 
-            if (layer.GetFeatures(layer.Envelope, Viewport.Resolution) is
+            if (layer.GetFeatures(layer.Extent, Viewport.Resolution) is
                 IEnumerable<IGeometryFeature> allFeatures)
             {
                 // Now check all features, if they are clicked and clickable

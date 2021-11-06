@@ -145,7 +145,7 @@ namespace Mapsui
                 MRect? bbox = null;
                 foreach (var layer in _layers)
                 {
-                    bbox = bbox == null ? layer.Envelope : bbox.Join(layer.Envelope);
+                    bbox = bbox == null ? layer.Extent : bbox.Join(layer.Extent);
                 }
                 return bbox;
             }

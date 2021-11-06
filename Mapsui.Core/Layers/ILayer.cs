@@ -61,7 +61,7 @@ namespace Mapsui.Layers
         /// <summary>
         /// Gets the MRect of the entire layer. Can be null if there are no features in the layer.
         /// </summary>
-        MRect? Envelope { get; }
+        MRect? Extent { get; }
 
         /// <summary>
         /// Gets or sets rendering style of layer

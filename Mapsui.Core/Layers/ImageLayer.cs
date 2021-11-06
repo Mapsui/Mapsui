@@ -74,7 +74,7 @@ namespace Mapsui.Layers
                 Task.Run(() => {
                     // Run in background because it could take time because
                     // this could involve database access or a web request
-                    Envelope = DataSource.GetExtent();
+                    Extent = DataSource.GetExtent();
                 });
             }
         }
