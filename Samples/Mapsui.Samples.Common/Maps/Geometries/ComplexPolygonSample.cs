@@ -26,7 +26,7 @@ namespace Mapsui.Samples.Common.Maps
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             var polygonLayer = CreateLayer();
             map.Layers.Add(polygonLayer);
-            map.Home = n => n.NavigateTo(polygonLayer.Envelope.Centroid, map.Resolutions[15]);
+            map.Home = n => n.NavigateTo(polygonLayer.Extent.Centroid, map.Resolutions[15]);
             return map;
         }
 

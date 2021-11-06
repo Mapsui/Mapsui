@@ -65,7 +65,7 @@ namespace Mapsui.Layers
             Delayer.MillisecondsToWait = delayBeforeRasterize;
         }
 
-        public override MRect? Envelope => _layer.Envelope;
+        public override MRect? Extent => _layer.Extent;
 
         public ILayer ChildLayer => _layer;
 
