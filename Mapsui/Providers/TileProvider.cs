@@ -23,7 +23,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
-using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
 
