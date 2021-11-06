@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -11,7 +12,7 @@ namespace Mapsui.Fetcher
 {
     internal class FeatureFetchDispatcher<T> : IFetchDispatcher where T : IFeature
     {
-        private FetchInfo _fetchInfo;
+        private FetchInfo? _fetchInfo;
         private bool _busy;
         private readonly ConcurrentStack<T> _cache;
         private bool _modified;
@@ -21,10 +22,11 @@ namespace Mapsui.Fetcher
             _cache = cache;
         }
 
-        public bool TryTake(ref Action method)
+        public bool TryTake([NotNullWhen(true)] out Action? method)
         {
+            method = null;
             if (!_modified) return false;
-            if (DataSource == null) return false;
+            if (_fetchInfo == null) return false;
 
             method = () => FetchOnThread(new FetchInfo(_fetchInfo));
             _modified = false;
@@ -50,9 +52,7 @@ namespace Mapsui.Fetcher
             {
                 _cache.Clear();
                 if (features.Any())
-                {
                     _cache.PushRange(features.ToArray());
-                }
             }
 
             Busy = _modified;

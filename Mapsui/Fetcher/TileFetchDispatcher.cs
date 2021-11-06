@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using BruTile;
 using BruTile.Cache;
@@ -51,7 +52,7 @@ namespace Mapsui.Fetcher
             }
         }
 
-        public bool TryTake(out Action? method)
+        public bool TryTake([NotNullWhen(true)] out Action? method)
         {
             lock (_lockRoot)
             {
