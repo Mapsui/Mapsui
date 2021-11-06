@@ -34,27 +34,27 @@ namespace Mapsui
             if (Map.ZoomLock) deltaResolution = 1;
             if (Map.PanLock) position = previousPosition;
             _viewport.Transform(position, previousPosition, deltaResolution, deltaRotation);
-            Limiter.Limit(_viewport, Map.Resolutions, Map.Envelope);
+            Limiter.Limit(_viewport, Map.Resolutions, Map.Extent);
         }
 
         public void SetSize(double width, double height)
         {
             _viewport.SetSize(width, height);
-            if (_viewport.HasSize) Limiter?.LimitExtent(_viewport, Map?.Envelope);
+            if (_viewport.HasSize) Limiter?.LimitExtent(_viewport, Map?.Extent);
         }
 
         public virtual void SetCenter(double x, double y)
         {
             if (Map?.PanLock ?? false) return;
             _viewport.SetCenter(x, y);
-            Limiter?.LimitExtent(_viewport, Map?.Envelope);
+            Limiter?.LimitExtent(_viewport, Map?.Extent);
         }
 
         public void SetCenter(MReadOnlyPoint center)
         {
             if (Map?.PanLock ?? false) return;
             _viewport.SetCenter(center);
-            Limiter?.LimitExtent(_viewport, Map?.Envelope);
+            Limiter?.LimitExtent(_viewport, Map?.Extent);
         }
 
         public void SetResolution(double resolution)
@@ -62,7 +62,7 @@ namespace Mapsui
             if (Map?.ZoomLock ?? true) return;
             if (Limiter != null)
             {
-                resolution = Limiter.LimitResolution(resolution, _viewport.Width, _viewport.Height, Map.Resolutions, Map.Envelope);
+                resolution = Limiter.LimitResolution(resolution, _viewport.Width, _viewport.Height, Map.Resolutions, Map.Extent);
             }
 
             _viewport.SetResolution(resolution);
@@ -72,7 +72,7 @@ namespace Mapsui
         {
             if (Map?.RotationLock ?? false) return;
             _viewport.SetRotation(rotation);
-            Limiter?.LimitExtent(_viewport, Map?.Envelope);
+            Limiter?.LimitExtent(_viewport, Map?.Extent);
         }
 
         public MPoint ScreenToWorld(MPoint position)
