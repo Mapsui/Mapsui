@@ -67,6 +67,4 @@
     <ProjectReference Include="..\..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
   </ItemGroup>
 
-  <Import Project="..\Mapsui.Samples.Uno.Shared\Mapsui.Samples.Uno.Shared.projitems" Label="Shared" Condition="Exists('..\Mapsui.Samples.Uno.Shared\Mapsui.Samples.Uno.Shared.projitems')" />
-
 </Project>
