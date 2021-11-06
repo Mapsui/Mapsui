@@ -32,7 +32,7 @@ namespace Mapsui.Tests.Common.Maps
             var map = new Map
             {
                 BackColor = Color.FromString("WhiteSmoke"),
-                Home = n => n.NavigateTo(layer.Envelope.Grow(layer.Envelope.Width * 0.3))
+                Home = n => n.NavigateTo(layer.Extent.Grow(layer.Extent.Width * 0.3))
             };
 
             map.Layers.Add(stackedLabelLayer);

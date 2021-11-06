@@ -20,7 +20,7 @@ namespace Mapsui.Tests.Layers
             writableLayer.Add(new GeometryFeature { Geometry = new Polygon() });
 
             // act
-            var extent = writableLayer.Envelope;
+            var extent = writableLayer.Extent;
 
             // assert
             Assert.IsNull(extent);

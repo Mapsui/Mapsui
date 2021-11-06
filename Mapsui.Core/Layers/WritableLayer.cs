@@ -40,7 +40,7 @@ namespace Mapsui.Layers
             return new MRect(minX, minY, maxX, maxY);
         }
 
-        public override MRect? Envelope => GetExtent();
+        public override MRect? Extent => GetExtent();
 
         public override void RefreshData(FetchInfo fetchInfo)
         {

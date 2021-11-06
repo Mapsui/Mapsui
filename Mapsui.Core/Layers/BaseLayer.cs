@@ -19,7 +19,7 @@ namespace Mapsui.Layers
         private double _opacity;
         private IStyle? _style;
         private object? _tag;
-        private MRect? _envelope;
+        private MRect? _extent;
 
         /// <summary>
         /// Get a layer's styles
@@ -163,13 +163,13 @@ namespace Mapsui.Layers
         /// <summary>
         /// Returns the envelope of all available data in the layer
         /// </summary>
-        public virtual MRect? Envelope
+        public virtual MRect? Extent
         {
-            get => _envelope;
+            get => _extent;
             protected set
             {
-                _envelope = value;
-                OnPropertyChanged(nameof(Envelope));
+                _extent = value;
+                OnPropertyChanged(nameof(Extent));
             }
         }
 
