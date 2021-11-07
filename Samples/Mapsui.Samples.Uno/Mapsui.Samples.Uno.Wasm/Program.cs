@@ -1,5 +1,6 @@
 ﻿using System;
 using Windows.UI.Xaml;
+using Mapsui.Samples.Uwp;
 
 namespace Mapsui.Samples.Uno.Wasm
 {
