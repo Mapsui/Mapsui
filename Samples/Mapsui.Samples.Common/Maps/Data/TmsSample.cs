@@ -8,9 +8,6 @@ namespace Mapsui.Samples.Common.Maps
         public string Name => "8 TMS openbasiskaart";
         public string Category => "Data";
 
-        private static readonly BruTile.Attribution OpenStreetMapAttribution = new(
-            "© OpenStreetMap contributors", "https://www.openstreetmap.org/copyright");
-
         public void Setup(IMapControl mapControl)
         {
             mapControl.Map = CreateMap();
