@@ -8,13 +8,6 @@ using Mapsui.Projection;
 
 namespace Mapsui.Utilities
 {
-    public enum CrsType
-    {
-        Epgs,
-        EsriString,
-        Proj4String
-    }
-
     public static class ProjectionHelper
     {
         public const string EpsgPrefix = "EPSG:";
