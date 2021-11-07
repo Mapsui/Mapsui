@@ -17,6 +17,9 @@ namespace Mapsui.Rendering.Skia
             // todo: I assume we also need to apply opacity.
             // todo: It seems horizontalAlignment and verticalAlignment would make sense too. Is this similar to Anchor?
 
+            if (svg.Picture == null)
+                return;
+
             canvas.Save();
 
             canvas.Translate(x, y);

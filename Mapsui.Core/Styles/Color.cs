@@ -52,15 +52,18 @@ namespace Mapsui.Styles
             return new Color { A = a, R = r, G = g, B = b };
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (!(obj is Color color))
                 return false;
             return Equals(color);
         }
 
-        public bool Equals(Color color)
+        public bool Equals(Color? color)
         {
+            if (color == null)
+                return false;
+
             if (R != color.R) return false;
             if (G != color.G) return false;
             if (B != color.B) return false;
@@ -73,12 +76,12 @@ namespace Mapsui.Styles
             return R.GetHashCode() ^ G.GetHashCode() ^ B.GetHashCode() ^ A.GetHashCode();
         }
 
-        public static bool operator ==(Color color1, Color color2)
+        public static bool operator ==(Color? color1, Color? color2)
         {
             return Equals(color1, color2);
         }
 
-        public static bool operator !=(Color color1, Color color2)
+        public static bool operator !=(Color? color1, Color? color2)
         {
             return !Equals(color1, color2);
         }

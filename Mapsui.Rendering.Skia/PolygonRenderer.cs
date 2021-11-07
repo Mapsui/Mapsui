@@ -9,14 +9,17 @@ namespace Mapsui.Rendering.Skia
 {
     internal static class PolygonRenderer
     {
-        public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, IFeature feature,
+        public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IStyle? style, IFeature feature,
             Polygon polygon, float opacity, SymbolCache? symbolCache = null)
         {
             if (style is LabelStyle labelStyle)
             {
-                var worldCenter = polygon.BoundingBox.Centroid;
-                var center = viewport.WorldToScreen(worldCenter.X, worldCenter.Y).ToPoint();
-                LabelRenderer.Draw(canvas, labelStyle, feature, center, opacity);
+                if (polygon.BoundingBox != null)
+                {
+                    var worldCenter = polygon.BoundingBox.Centroid;
+                    var center = viewport.WorldToScreen(worldCenter.X, worldCenter.Y).ToPoint();
+                    LabelRenderer.Draw(canvas, labelStyle, feature, center, opacity);
+                }
             }
             else if (style is StyleCollection styleCollection)
             {
@@ -171,21 +174,28 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        private static SKImage? GetImage(SymbolCache symbolCache, int bitmapId)
+        private static SKImage? GetImage(SymbolCache? symbolCache, int bitmapId)
         {
+            if (symbolCache == null)
+                return null;
             var bitmapInfo = symbolCache.GetOrCreate(bitmapId);
+            if (bitmapInfo == null)
+                return null;
             if (bitmapInfo.Type == BitmapType.Bitmap)
                 return bitmapInfo.Bitmap;
             if (bitmapInfo.Type == BitmapType.Sprite)
             {
                 var sprite = bitmapInfo.Sprite;
+                if (sprite == null)
+                    return null;
+
                 if (sprite.Data == null)
                 {
                     var bitmapAtlas = symbolCache.GetOrCreate(sprite.Atlas);
-                    sprite.Data = bitmapAtlas.Bitmap.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width,
+                    sprite.Data = bitmapAtlas?.Bitmap?.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width,
                         sprite.Y + sprite.Height));
                 }
-                return (SKImage)sprite.Data;
+                return (SKImage?)sprite.Data;
             }
             return null;
         }

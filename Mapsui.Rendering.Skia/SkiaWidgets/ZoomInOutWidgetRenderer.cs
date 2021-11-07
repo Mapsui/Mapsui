@@ -19,7 +19,7 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
             var zoomInOut = (ZoomInOutWidget)widget;
 
             // If this is the first time, we call this renderer, ...
-            if (_paintStroke == null)
+            if (_paintStroke == null || _paintBackground == null || _paintText == null)
             {
                 // ... than create the paints
                 _paintStroke = CreatePaint(zoomInOut.StrokeColor.ToSkia(layerOpacity), Stroke, SKPaintStyle.Stroke);

@@ -125,7 +125,7 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
 
             scaleBar.Envelope = envelop;
 
-            if (scaleBar.ShowEnvelop)
+            if (scaleBar.ShowEnvelop && envelop != null)
             {
                 // Draw a rect around the scale bar for testing
                 var tempPaint = _paintScaleTextStroke;

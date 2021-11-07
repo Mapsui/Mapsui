@@ -14,11 +14,14 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
             if (button.Picture == null && string.IsNullOrEmpty(button.SvgImage))
                 return;
 
-            button.Picture ??= new SKSvg().FromSvg(button.SvgImage);
+            button.Picture ??= button.SvgImage == null ? null : new SKSvg().FromSvg(button.SvgImage);
 
             var picture = button.Picture as SKPicture;
 
             if (picture == null)
+                return;
+
+            if (button.Envelope == null)
                 return;
 
             // Get the scale for picture in each direction

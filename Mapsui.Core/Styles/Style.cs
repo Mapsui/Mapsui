@@ -58,8 +58,11 @@ namespace Mapsui.Styles
             return Equals(style);
         }
 
-        public bool Equals(Style style)
+        public bool Equals(Style? style)
         {
+            if (style == null)
+                return false;
+
             // ReSharper disable CompareOfFloatsByEqualityOperator
             if (MinVisible != style.MinVisible)
                 return false;
@@ -79,12 +82,12 @@ namespace Mapsui.Styles
             return MinVisible.GetHashCode() ^ MaxVisible.GetHashCode() ^ Enabled.GetHashCode() ^ Opacity.GetHashCode();
         }
 
-        public static bool operator ==(Style style1, Style style2)
+        public static bool operator ==(Style? style1, Style? style2)
         {
             return Equals(style1, style2);
         }
 
-        public static bool operator !=(Style style1, Style style2)
+        public static bool operator !=(Style? style1, Style? style2)
         {
             return !Equals(style1, style2);
         }

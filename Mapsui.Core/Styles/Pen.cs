@@ -52,9 +52,9 @@ namespace Mapsui.Styles
         /// </summary>
         public float StrokeMiterLimit { get; set; } = 10f; // Default on Wpf, on Skia, it is 4f
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
-            return obj is not Pen pen ? false : Equals(pen);
+            return obj is Pen pen && Equals(pen);
         }
 
         public bool Equals(Pen? pen)
@@ -90,12 +90,12 @@ namespace Mapsui.Styles
             return Width.GetHashCode() ^ (Color == null ? 0 : Color.GetHashCode());
         }
 
-        public static bool operator ==(Pen pen1, Pen pen2)
+        public static bool operator ==(Pen? pen1, Pen? pen2)
         {
             return Equals(pen1, pen2);
         }
 
-        public static bool operator !=(Pen pen1, Pen pen2)
+        public static bool operator !=(Pen? pen1, Pen? pen2)
         {
             return !Equals(pen1, pen2);
         }

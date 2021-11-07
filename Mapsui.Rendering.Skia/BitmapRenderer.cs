@@ -15,13 +15,16 @@ namespace Mapsui.Rendering.Skia
             canvas.DrawImage(bitmap, rect, GetPaint(layerOpacity));
         }
 
-        public static void Draw(SKCanvas canvas, SKImage bitmap, float x, float y, float rotation = 0,
+        public static void Draw(SKCanvas canvas, SKImage? bitmap, float x, float y, float rotation = 0,
             float offsetX = 0, float offsetY = 0,
             LabelStyle.HorizontalAlignmentEnum horizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
             LabelStyle.VerticalAlignmentEnum verticalAlignment = LabelStyle.VerticalAlignmentEnum.Center,
             float opacity = 1f,
             float scale = 1f)
         {
+            if (bitmap == null)
+                return;
+
             canvas.Save();
 
             canvas.Translate(x, y);

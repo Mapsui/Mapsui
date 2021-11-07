@@ -9,7 +9,7 @@ namespace Mapsui.Rendering.Skia
 {
     public static class RectRenderer
     {
-        public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, RectFeature rectFeature,
+        public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IStyle? style, RectFeature rectFeature,
             float opacity)
         {
             try

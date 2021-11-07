@@ -8,6 +8,6 @@ namespace Mapsui.GeometryLayer
     public interface IGeometryFeature : IFeature
     {
         IDictionary<IStyle, object> RenderedGeometry { get; }
-        public IGeometry? Geometry { get; set; }
+        public IGeometry Geometry { get; set; }
     }
 }
