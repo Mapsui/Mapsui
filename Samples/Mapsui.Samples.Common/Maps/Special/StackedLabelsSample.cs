@@ -1,4 +1,5 @@
 ﻿using Mapsui.Layers;
+using Mapsui.Layers.Tiling;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
@@ -23,7 +24,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            var provider = RandomPointGenerator.CreateProviderWithRandomPoints(map.Envelope);
+            var provider = RandomPointGenerator.CreateProviderWithRandomPoints(map.Extent);
             map.Layers.Add(CreateStackedLabelLayer(provider, LabelColumn));
             map.Layers.Add(CreateLayer(provider));
             return map;

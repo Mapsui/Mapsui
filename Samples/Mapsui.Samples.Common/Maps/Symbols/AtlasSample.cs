@@ -6,6 +6,7 @@ using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.GeometryLayer;
 using Mapsui.Layers;
+using Mapsui.Layers.Tiling;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
@@ -36,7 +37,7 @@ namespace Mapsui.Samples.Common.Maps
             var map = new Map();
 
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            map.Layers.Add(CreateAtlasLayer(map.Envelope));
+            map.Layers.Add(CreateAtlasLayer(map.Extent));
 
             return map;
         }

@@ -1,4 +1,5 @@
-﻿using Mapsui.Projection;
+﻿using Mapsui.Layers.Tiling;
+using Mapsui.Projection;
 using Mapsui.UI;
 using Mapsui.Utilities;
 
@@ -21,7 +22,7 @@ namespace Mapsui.Samples.Common.Maps.Navigation
 
             // This is the default limiter. This limiter ensures that the center 
             // of the viewport always is within the extent. When no PanLimits are
-            // specified the Map.Envelope is used. In this sample the extent of
+            // specified the Map.Extent is used. In this sample the extent of
             // Madagaskar is used. In such a scenario it makes sense to also limit
             // the top ZoomLimit.
 

@@ -5,6 +5,7 @@ using System.Reflection;
 using Mapsui.Extensions;
 using Mapsui.GeometryLayer;
 using Mapsui.Layers;
+using Mapsui.Layers.Tiling;
 using Mapsui.Projection;
 using Mapsui.Providers;
 using Mapsui.Styles;
@@ -106,7 +107,7 @@ namespace Mapsui.Samples.Common.Maps.Callouts
         {
             var serializer = new JsonSerializer();
 
-            using var sr = new StreamReader(stream);
+            using var sr = new System.IO.StreamReader(stream);
             using var jsonTextReader = new JsonTextReader(sr);
             return serializer.Deserialize<List<T>>(jsonTextReader);
         }

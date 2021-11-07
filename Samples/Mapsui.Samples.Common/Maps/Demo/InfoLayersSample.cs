@@ -2,6 +2,7 @@
 using Mapsui.Geometries;
 using Mapsui.GeometryLayer;
 using Mapsui.Layers;
+using Mapsui.Layers.Tiling;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
@@ -28,7 +29,7 @@ namespace Mapsui.Samples.Common.Maps
             var map = new Map();
 
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            map.Layers.Add(CreateInfoLayer(map.Envelope));
+            map.Layers.Add(CreateInfoLayer(map.Extent));
             map.Layers.Add(CreatePolygonLayer());
             map.Layers.Add(new WritableLayer());
             map.Layers.Add(CreateLineLayer());
@@ -101,7 +102,7 @@ namespace Mapsui.Samples.Common.Maps
             {
                 Polygons = new List<Polygon>
                 {
-                    new Polygon(new LinearRing(new[]
+                    new (new LinearRing(new[]
                     {
                         new Point(4000000, 3000000),
                         new Point(4000000, 2000000),
@@ -110,7 +111,7 @@ namespace Mapsui.Samples.Common.Maps
                         new Point(4000000, 3000000)
                     })),
 
-                    new Polygon(new LinearRing(new[]
+                    new (new LinearRing(new[]
                     {
                         new Point(4000000, 5000000),
                         new Point(4000000, 4000000),

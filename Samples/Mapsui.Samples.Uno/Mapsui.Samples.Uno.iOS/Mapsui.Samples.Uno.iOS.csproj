@@ -196,6 +196,6 @@
       <Name>Mapsui.Samples.CustomWidget</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="..\Mapsui.Samples.Uno.Shared\Mapsui.Samples.Uno.Shared.projitems" Label="Shared" />
+  <Import Project="..\..\Mapsui.Samples.Uwp\Mapsui.Samples.Uno.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

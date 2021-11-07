@@ -6,6 +6,7 @@ using System.Reflection;
 using Mapsui.Geometries;
 using Mapsui.GeometryLayer;
 using Mapsui.Layers;
+using Mapsui.Layers.Tiling;
 using Mapsui.Projection;
 using Mapsui.Providers;
 using Mapsui.Styles;

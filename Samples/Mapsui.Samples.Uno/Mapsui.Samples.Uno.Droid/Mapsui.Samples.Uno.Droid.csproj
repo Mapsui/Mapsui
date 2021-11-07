@@ -124,7 +124,7 @@
       <Name>Mapsui.Samples.CustomWidget</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="..\Mapsui.Samples.Uno.Shared\Mapsui.Samples.Uno.Shared.projitems" Label="Shared" />
+  <Import Project="..\..\Mapsui.Samples.Uwp\Mapsui.Samples.Uno.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- This will force the generation of the APK when not building inside visual studio -->
   <Target Name="GenerateBuild" DependsOnTargets="SignAndroidPackage" AfterTargets="Build" Condition="'$(BuildingInsideVisualStudio)'==''" />

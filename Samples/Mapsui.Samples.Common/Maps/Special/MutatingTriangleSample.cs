@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Mapsui.Geometries;
 using Mapsui.GeometryLayer;
 using Mapsui.Layers;
+using Mapsui.Layers.Tiling;
 using Mapsui.Providers;
 using Mapsui.UI;
 using Mapsui.Utilities;
@@ -27,7 +28,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            map.Layers.Add(CreateMutatingTriangleLayer(map.Envelope));
+            map.Layers.Add(CreateMutatingTriangleLayer(map.Extent));
             return map;
         }
 

@@ -4,6 +4,7 @@ using System.Reflection;
 using Mapsui.Extensions;
 using Mapsui.GeometryLayer;
 using Mapsui.Layers;
+using Mapsui.Layers.Tiling;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
@@ -29,8 +30,8 @@ namespace Mapsui.Samples.Common.Maps
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(PolygonSample.CreateLayer());
             map.Layers.Add(LineStringSample.CreateLineStringLayer(LineStringSample.CreateLineStringStyle()));
-            map.Layers.Add(CreateLayerWithStyleOnLayer(map.Envelope, 10));
-            map.Layers.Add(CreateLayerWithStyleOnFeature(map.Envelope, 10));
+            map.Layers.Add(CreateLayerWithStyleOnLayer(map.Extent, 10));
+            map.Layers.Add(CreateLayerWithStyleOnFeature(map.Extent, 10));
 
             return map;
         }

@@ -6,6 +6,7 @@ using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.Utilities;
 using Mapsui.GeometryLayer;
+using Mapsui.Layers.Tiling;
 
 namespace Mapsui.Samples.Wpf.Editing.Samples
 {

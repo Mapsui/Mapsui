@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.Core\Mapsui.Core.csproj" />
+    <ProjectReference Include="..\..\Mapsui.Layers.Tiling\Mapsui.Layers.Tiling.csproj" />
     <ProjectReference Include="..\..\Mapsui.UI.Wpf\Mapsui.UI.Wpf.csproj" />
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />
   </ItemGroup>

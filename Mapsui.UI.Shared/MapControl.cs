@@ -404,7 +404,7 @@ namespace Mapsui.UI.Wpf
             {
                 Refresh(); // There is a new DataSource so let's fetch the new data.
             }
-            else if (e.PropertyName == nameof(Map.Envelope))
+            else if (e.PropertyName == nameof(Map.Extent))
             {
                 CallHomeIfNeeded();
                 Refresh();
@@ -423,7 +423,7 @@ namespace Mapsui.UI.Wpf
 
         public void CallHomeIfNeeded()
         {
-            if (_map != null && !_map.Initialized && _viewport.HasSize && _map?.Envelope != null)
+            if (_map != null && !_map.Initialized && _viewport.HasSize && _map?.Extent != null)
             {
                 _map.Home?.Invoke(Navigator);
                 _map.Initialized = true;
