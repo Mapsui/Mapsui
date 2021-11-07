@@ -1,9 +1,8 @@
 ﻿using System.IO;
 using BruTile.Predefined;
 using BruTile.Web;
-using Mapsui.Layers;
 
-namespace Mapsui.Utilities
+namespace Mapsui.Layers.Tiling
 {
     public static class OpenStreetMap
     {
