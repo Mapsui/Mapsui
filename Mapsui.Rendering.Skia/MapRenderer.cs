@@ -176,7 +176,7 @@ namespace Mapsui.Rendering.Skia
         }
 
         private void RenderGeometry(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, float layerOpacity,
-            IGeometryFeature geometryFeature, IGeometry geometry)
+            IFeature geometryFeature, IGeometry geometry)
         {
             if (geometry is Point point)
                 PointRenderer.Draw(canvas, viewport, style, geometryFeature, point.X, point.Y, _symbolCache,
