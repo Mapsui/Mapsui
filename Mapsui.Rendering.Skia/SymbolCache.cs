@@ -17,7 +17,7 @@ namespace Mapsui.Rendering.Skia
         {
             var bitmap = GetOrCreate(bitmapId);
             if (bitmap == null) 
-               return null;
+                return null;
 
             return new Size(bitmap.Width, bitmap.Height);
         }

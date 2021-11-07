@@ -199,9 +199,12 @@ namespace Mapsui.UI.Objects
                             mapView.Refresh();
                     }, 0.0, 1.0);
 
-                    var fetchInfo = new FetchInfo(mapView.Viewport.Extent, mapView.Viewport.Resolution, mapView.Map?.CRS, ChangeType.Discrete);
-                    // At the end, update viewport
-                    animation.Commit(mapView, animationMyLocationName, 100, 3000, finished: (s, v) => mapView.Map?.RefreshData(fetchInfo));
+                    if (mapView.Viewport.Extent != null)
+                    {
+                        var fetchInfo = new FetchInfo(mapView.Viewport.Extent, mapView.Viewport.Resolution, mapView.Map?.CRS, ChangeType.Discrete);
+                        // At the end, update viewport
+                        animation.Commit(mapView, animationMyLocationName, 100, 3000, finished: (s, v) => mapView.Map?.RefreshData(fetchInfo));
+                    }
                 }
                 else
                 {

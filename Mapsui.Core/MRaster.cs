@@ -11,6 +11,9 @@ namespace Mapsui
             TickFetched = DateTime.Now.Ticks;
         }
 
+        /// <summary> MRaster Empty </summary>
+        public static new readonly MRaster Empty = new(new MemoryStream(), MRect.Empty);
+
         public MemoryStream Data { get; }
         public long TickFetched { get; }
     }

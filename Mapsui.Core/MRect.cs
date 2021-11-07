@@ -486,6 +486,9 @@ namespace Mapsui
         /// </summary>
         public MPoint Centroid => (Min + Max) * .5;
 
+        /// <summary> MRect Empty </summary>
+        public static readonly MRect Empty = new(0, 0, 0, 0);
+
         /// <summary>
         ///     Creates a copy of the MRect
         /// </summary>

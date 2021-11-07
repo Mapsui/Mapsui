@@ -171,8 +171,7 @@ namespace Mapsui.Rendering.Skia
             else if (feature is RectFeature rectFeature)
                 RectRenderer.Draw(canvas, viewport, style, rectFeature, layerOpacity * style.Opacity);
             else if (feature is RasterFeature rasterFeature)
-                RasterRenderer.Draw(canvas, viewport, style, rasterFeature, rasterFeature.Raster, 
-                    layerOpacity * style.Opacity, _tileCache, _currentIteration);
+                RasterRenderer.Draw(canvas, viewport, style, rasterFeature, rasterFeature.Raster, layerOpacity * style.Opacity, _tileCache, _currentIteration);
         }
 
         private void RenderGeometry(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, float layerOpacity,
