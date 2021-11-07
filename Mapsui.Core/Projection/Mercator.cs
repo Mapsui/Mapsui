@@ -1,5 +1,4 @@
 ﻿using System;
-using Mapsui.Geometries;
 
 namespace Mapsui.Projection
 {
@@ -16,7 +15,7 @@ namespace Mapsui.Projection
         private const double C3 = 0.00000001764564338702;
         private const double C4 = 0.00000000005328478445;
 
-        public static Point FromLonLat(double lon, double lat)
+        public static MPoint FromLonLat(double lon, double lat)
         {
             var lonRadians = D2R * lon;
             var latRadians = D2R * lat;
@@ -25,10 +24,10 @@ namespace Mapsui.Projection
             //y=a×ln[tan(π/4+φ/2)×((1-e×sinφ)/(1+e×sinφ))^(e/2)]
             var y = Radius * Math.Log(Math.Tan(PiDiv4 + latRadians * 0.5) / Math.Pow(Math.Tan(PiDiv4 + Math.Asin(E * Math.Sin(latRadians)) / 2), E));
 
-            return new Point((float)x, (float)y);
+            return new MPoint((float)x, (float)y);
         }
 
-        public static Point ToLonLat(double x, double y)
+        public static MPoint ToLonLat(double x, double y)
         {
             var g = HalfPi - 2 * Math.Atan(1 / Math.Exp(y / Radius));
             var latRadians = g + C1 * Math.Sin(2 * g) + C2 * Math.Sin(4 * g) + C3 * Math.Sin(6 * g) + C4 * Math.Sin(8 * g);
@@ -38,7 +37,7 @@ namespace Mapsui.Projection
             var lon = lonRadians / D2R;
             var lat = latRadians / D2R;
 
-            return new Point((float)lon, (float)lat);
+            return new MPoint((float)lon, (float)lat);
         }
     }
 }
