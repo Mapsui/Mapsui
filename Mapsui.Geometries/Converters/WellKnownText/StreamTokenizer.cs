@@ -60,7 +60,7 @@ namespace Mapsui.Geometries.WellKnownText
     {
         private readonly bool _ignoreWhitespace;
         private readonly TextReader _reader;
-        private string _currentToken;
+        private string? _currentToken;
         private TokenType _currentTokenType;
 
         /// <summary>
@@ -72,9 +72,7 @@ namespace Mapsui.Geometries.WellKnownText
         {
             Column = 1;
             LineNumber = 1;
-            if (reader == null)
-                throw new ArgumentNullException(nameof(reader));
-            _reader = reader;
+            _reader = reader ?? throw new ArgumentNullException(nameof(reader));
             _ignoreWhitespace = ignoreWhitespace;
         }
 
@@ -109,7 +107,7 @@ namespace Mapsui.Geometries.WellKnownText
         /// <summary>
         ///     If the current token is a word token, this field contains a string giving the characters of the word token.
         /// </summary>
-        public string GetStringValue()
+        public string? GetStringValue()
         {
             return _currentToken;
         }

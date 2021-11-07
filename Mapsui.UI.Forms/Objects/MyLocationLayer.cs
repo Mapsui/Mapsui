@@ -94,10 +94,7 @@ namespace Mapsui.UI.Objects
         /// <param name="view">MapView, to which this layer belongs</param>
         public MyLocationLayer(MapView view)
         {
-            if (view == null)
-                throw new ArgumentNullException("MapView shouldn't be null");
-
-            mapView = view;
+            mapView = view ?? throw new ArgumentNullException("MapView shouldn't be null");
 
             Enabled = false;
 

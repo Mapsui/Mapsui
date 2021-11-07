@@ -130,7 +130,7 @@ namespace Mapsui.Geometries
                 var b = this[0].BoundingBox;
                 foreach (var geometry in Collection)
                 {
-                    b = b.Join(geometry.BoundingBox);
+                    b = b != null ? b.Join(geometry.BoundingBox) : geometry.BoundingBox?.Clone();
                 }
 
                 return b;
