@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Mapsui.Geometries;
-using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using NUnit.Framework;
@@ -19,7 +17,7 @@ namespace Mapsui.Tests.Fetcher
             var extent = new MRect(0, 0, 10, 10);
             var layer = new Layer
             {
-                DataSource = new GeometryMemoryProvider<IGeometryFeature>(GenerateRandomPoints(extent, 25))
+                DataSource = new MemoryProvider<IFeature>(GenerateRandomPoints(extent, 25))
             };
             layer.Delayer.MillisecondsToWait = 0;
 
@@ -46,16 +44,16 @@ namespace Mapsui.Tests.Fetcher
             Assert.IsFalse(notifications[1]);
         }
 
-        private static IEnumerable<IGeometry> GenerateRandomPoints(MRect envelope, int count)
+        private static IEnumerable<IFeature> GenerateRandomPoints(MRect envelope, int count)
         {
             var random = new Random();
-            var result = new List<IGeometry>();
+            var result = new List<PointFeature>();
 
             for (var i = 0; i < count; i++)
             {
-                result.Add(new Point(
+                result.Add(new PointFeature(new MPoint(
                     random.NextDouble() * envelope.Width + envelope.Left,
-                    random.NextDouble() * envelope.Height + envelope.Bottom));
+                    random.NextDouble() * envelope.Height + envelope.Bottom)));
             }
 
             return result;
