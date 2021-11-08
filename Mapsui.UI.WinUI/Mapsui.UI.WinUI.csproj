@@ -14,14 +14,14 @@
   </ItemGroup>
 
 	<!-- Workaround for https://github.com/microsoft/WindowsAppSDK/issues/1217 -->
-	<Target Name="FixBinPlaceBootstrapDll" BeforeTargets="BinPlaceBootstrapDll" >
+	<Target Name="FixBinPlaceBootstrapDll" BeforeTargets="BinPlaceBootstrapDll">
 		<PropertyGroup>
 			<_WindowsAppSDKFoundationPlatform>x86</_WindowsAppSDKFoundationPlatform>
 		</PropertyGroup>
 	</Target>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0-experimental1" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0-preview3" />
     <PackageReference Include="Microsoft.WindowsAppSDK.Foundation" Version="1.0.0-experimental1" />
     <PackageReference Include="Microsoft.WindowsAppSDK.WinUI" Version="1.0.0-experimental1" />
     <PackageReference Include="Microsoft.WindowsAppSDK.InteractiveExperiences" Version="1.0.0-experimental1" />
