@@ -26,7 +26,7 @@ namespace Mapsui.Tests.Common.Maps
             var layer = new MemoryLayer
             {
                 Style = null,
-                DataSource = new GeometryMemoryProvider<IGeometryFeature>(CreateFeatures()),
+                DataSource = new MemoryProvider<IFeature>(CreateFeatures()),
                 Name = "Points with Svg"
             };
 
@@ -41,11 +41,11 @@ namespace Mapsui.Tests.Common.Maps
             return map;
         }
 
-        public static IEnumerable<IGeometryFeature> CreateFeatures()
+        public static IEnumerable<IFeature> CreateFeatures()
         {
             var pinId = LoadSvg("Mapsui.Tests.Common.Resources.Images.Pin.svg");
 
-            return new List<IGeometryFeature>
+            return new List<IFeature>
             {
                 new GeometryFeature
                 {
