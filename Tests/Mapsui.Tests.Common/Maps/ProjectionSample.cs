@@ -54,12 +54,12 @@ namespace Mapsui.Tests.Common.Maps
 
         public static MemoryLayer CreateAmsterdamLayer() // Needs transform
         {
-            var features = new List<IGeometryFeature>
+            var features = new List<GeometryFeature>
             {
                 new GeometryFeature {Geometry = GeometryFromWKT.Parse(WktOfAmsterdam)}
             };
 
-            var memoryProvider = new MemoryProvider<IGeometryFeature>(features)
+            var memoryProvider = new MemoryProvider<GeometryFeature>(features)
             {
                 CRS = "EPSG:4326" // The DataSource CRS needs to be set
             };

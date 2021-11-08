@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.Reflection;
-using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Providers.Shapefile;
@@ -35,7 +34,7 @@ namespace Mapsui.Samples.Common.Desktop
             return map;
         }
 
-        private static ILayer CreateCountryLayer(IProvider<IGeometryFeature> countrySource)
+        private static ILayer CreateCountryLayer(IProvider<IFeature> countrySource)
         {
             return new Layer
             {
@@ -45,7 +44,7 @@ namespace Mapsui.Samples.Common.Desktop
             };
         }
 
-        private static ILayer CreateCityLayer(IProvider<IGeometryFeature> citySource)
+        private static ILayer CreateCityLayer(IProvider<IFeature> citySource)
         {
             return new Layer
             {
@@ -55,7 +54,7 @@ namespace Mapsui.Samples.Common.Desktop
             };
         }
 
-        private static ILayer CreateCountryLabelLayer(IProvider<IGeometryFeature> countryProvider)
+        private static ILayer CreateCountryLabelLayer(IProvider<IFeature> countryProvider)
         {
             return new Layer("Country labels")
             {
@@ -67,7 +66,7 @@ namespace Mapsui.Samples.Common.Desktop
             };
         }
 
-        private static ILayer CreateCityLabelLayer(IProvider<IGeometryFeature> citiesProvider)
+        private static ILayer CreateCityLabelLayer(IProvider<IFeature> citiesProvider)
         {
             return new Layer("City labels")
             {

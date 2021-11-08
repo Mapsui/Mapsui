@@ -13,7 +13,7 @@ namespace Mapsui.Providers
         private readonly IProvider<IGeometryFeature> _provider;
         private readonly IGeometryTransformation _geometryTransformation;
 
-        public TransformingProvider(IProvider<IGeometryFeature> provider, IGeometryTransformation? geometryTransformation = null)
+        public TransformingProvider(IProvider<GeometryFeature> provider, IGeometryTransformation? geometryTransformation = null)
         {
             _provider = provider;
             _geometryTransformation = geometryTransformation ?? new GeometryTransformation();
