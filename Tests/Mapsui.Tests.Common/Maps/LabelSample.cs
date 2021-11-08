@@ -44,9 +44,9 @@ namespace Mapsui.Tests.Common.Maps
             };
         }
 
-        private static GeometryMemoryProvider<IGeometryFeature> CreateProviderWithLabels()
+        private static MemoryProvider<IFeature> CreateProviderWithLabels()
         {
-            var features = new List<IGeometryFeature>
+            var features = new List<IFeature>
             {
                 new GeometryFeature
                 {
@@ -115,7 +115,7 @@ namespace Mapsui.Tests.Common.Maps
                     }
                 },
             };
-            var provider = new GeometryMemoryProvider<IGeometryFeature>(features);
+            var provider = new MemoryProvider<IFeature>(features);
             return provider;
         }
     }

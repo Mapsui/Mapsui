@@ -21,8 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Mapsui.Core\Mapsui.Core.csproj" />
-    <ProjectReference Include="..\..\Mapsui.Geometries\Mapsui.Geometries.csproj" />
     <ProjectReference Include="..\..\Mapsui.Layers.Tiling\Mapsui.Layers.Tiling.csproj" />
     <ProjectReference Include="..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />

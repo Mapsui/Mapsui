@@ -55,19 +55,9 @@ namespace Mapsui.Rendering.Skia.Tests
         public void RenderPointWithBitmapSymbolsInCollection()
         {
             // arrange
-            var map = BitmapSymbolSample.CreateMap();
-            var features = ((GeometryMemoryProvider<IGeometryFeature>)((MemoryLayer)map.Layers[0]).DataSource).Features;
-            foreach (var feature in features)
-            {
-                if (feature.Geometry is Geometry geometry)
-                {
-                    var collection = new GeometryCollection();
-                    collection.Collection.Add(geometry);
-                    feature.Geometry = collection;
-                }
-            }
+            var map = BitmapSymbolInCollectionSample.CreateMap();
             var viewport = map.Extent.Multiply(3).ToViewport(200);
-            const string fileName = "points_with_symbolstyle.png";
+            const string fileName = "points_with_symbolstyle.png"; // Todo: Do not reuse the png.
 
             // act
             var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);

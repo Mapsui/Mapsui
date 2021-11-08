@@ -38,15 +38,15 @@ namespace Mapsui.Tests.Common.Maps
         {
             return new MemoryLayer
             {
-                DataSource = new GeometryMemoryProvider<IGeometryFeature>(CreateFeatures()),
+                DataSource = new MemoryProvider<IFeature>(CreateFeatures()),
                 Name = "Symbol Types",
                 Style = null
             };
         }
 
-        private static IEnumerable<IGeometryFeature> CreateFeatures()
+        private static IEnumerable<IFeature> CreateFeatures()
         {
-            return new List<IGeometryFeature>()
+            return new List<IFeature>()
             {
                 new GeometryFeature
                 {

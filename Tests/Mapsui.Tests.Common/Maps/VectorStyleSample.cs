@@ -37,9 +37,9 @@ namespace Mapsui.Tests.Common.Maps
             return map;
         }
 
-        public static GeometryMemoryProvider<IGeometryFeature> CreateProviderWithPointsWithVectorStyle()
+        public static MemoryProvider<IFeature> CreateProviderWithPointsWithVectorStyle()
         {
-            var features = new List<IGeometryFeature>
+            var features = new List<IFeature>
             {
                 new GeometryFeature
                 {
@@ -62,8 +62,7 @@ namespace Mapsui.Tests.Common.Maps
                     Styles = new[] {new VectorStyle {Fill = new Brush(Color.Green), Outline = null}}
                 }
             };
-            var provider = new GeometryMemoryProvider<IGeometryFeature>(features);
-            return provider;
+            return new MemoryProvider<IFeature>(features);
         }
     }
 }
