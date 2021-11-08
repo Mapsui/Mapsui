@@ -8,7 +8,6 @@ using CoreGraphics;
 using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.UI;
-using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
 
@@ -48,7 +47,7 @@ namespace Mapsui.Samples.iOS
                 result.Append($"{field}={feature[field]}, ");
             }
 
-            if (feature is IGeometryFeature geometryFeature)
+            if (feature is GeometryFeature geometryFeature)
                 result.Append($"Geometry={geometryFeature.Geometry}");
             return result.ToString();
         }

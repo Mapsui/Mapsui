@@ -7,14 +7,13 @@ using Android.Widget;
 using Android.Support.V7.App;
 using Android.Views;
 using Mapsui.Extensions;
-using Mapsui.GeometryLayer;
-using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.UI;
 using Mapsui.UI.Android;
+using Mapsui.Layers;
 
 namespace Mapsui.Samples.Droid
 {
@@ -152,13 +151,13 @@ namespace Mapsui.Samples.Droid
 
         private void ShowPopup(MapInfoEventArgs args)
         {
-            if (args.MapInfo.Feature is IGeometryFeature geometryFeature)
+            if (args.MapInfo.Feature is IFeature geometryFeature)
             {
                 // Position on click position:
                 // var screenPositionInPixels = args.MapInfo.ScreenPosition;
 
                 // Or position on feature position: 
-                var screenPosition = _mapControl.Viewport.WorldToScreen(geometryFeature.Geometry.BoundingBox.Centroid.ToMPoint());
+                var screenPosition = _mapControl.Viewport.WorldToScreen(geometryFeature.Extent.Centroid);
                 var screenPositionInPixels = _mapControl.ToPixels(screenPosition);
 
                 _popup.SetX((float)screenPositionInPixels.X);

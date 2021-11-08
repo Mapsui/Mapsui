@@ -36,7 +36,7 @@ namespace Mapsui.Samples.Common.Desktop
             return map;
         }
 
-        private static ILayer CreateCountryLayer(IProvider<IGeometryFeature> countrySource)
+        private static ILayer CreateCountryLayer(IProvider<IFeature> countrySource)
         {
             return new Layer
             {
@@ -50,7 +50,7 @@ namespace Mapsui.Samples.Common.Desktop
         private static ThemeStyle CreateThemeStyle()
         {
             return new ThemeStyle(f => {
-                if (f is IGeometryFeature geometryFeature)
+                if (f is GeometryFeature geometryFeature)
                     if (geometryFeature.Geometry is Point)
                         return null;
 
@@ -90,7 +90,7 @@ namespace Mapsui.Samples.Common.Desktop
 
             var layer = new MemoryLayer
             {
-                DataSource = new GeometryMemoryProvider<IGeometryFeature>(features),
+                DataSource = new GeometryMemoryProvider<IFeature>(features),
                 Style = CreateCityStyle(),
                 Name = "Points",
                 IsMapInfoLayer = true

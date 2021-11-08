@@ -1,5 +1,4 @@
-﻿using Mapsui.Providers;
-using Mapsui.Samples.Common;
+﻿using Mapsui.Samples.Common;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.UI.Forms;
 using Plugin.Geolocator;
@@ -11,7 +10,7 @@ using Mapsui.Extensions;
 using Mapsui.Styles;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Mapsui.GeometryLayer;
+using Mapsui.Layers;
 
 namespace Mapsui.Samples.Forms
 {
@@ -54,13 +53,13 @@ namespace Mapsui.Samples.Forms
 
         private void MapView_Info(object sender, UI.MapInfoEventArgs e)
         {
-            if (e.MapInfo.Feature is IGeometryFeature geometryFeature)
+            if (e.MapInfo.Feature is IFeature feature)
             {
                 featureInfo.Text = $"Click Info:";
 
                 if (e?.MapInfo?.Feature != null)
                 {
-                    featureInfo.Text = $"Click Info:{Environment.NewLine}{geometryFeature.ToDisplayText()}";
+                    featureInfo.Text = $"Click Info:{Environment.NewLine}{feature.ToDisplayText()}";
 
                     foreach (var style in e.MapInfo.Feature.Styles)
                     {
