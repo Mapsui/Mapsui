@@ -17,15 +17,18 @@ namespace Mapsui.Styles
         public static double DefaultHeight { get; set; } = 32;
         public SymbolType SymbolType { get; set; }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (!(obj is SymbolStyle style))
                 return false;
             return Equals(style);
         }
 
-        public bool Equals(SymbolStyle symbolStyle)
+        public bool Equals(SymbolStyle? symbolStyle)
         {
+            if (symbolStyle == null)
+                return false;
+
             if (!base.Equals(symbolStyle))
                 return false;
 
@@ -68,12 +71,12 @@ namespace Mapsui.Styles
                 base.GetHashCode();
         }
 
-        public static bool operator ==(SymbolStyle symbolStyle1, SymbolStyle symbolStyle2)
+        public static bool operator ==(SymbolStyle? symbolStyle1, SymbolStyle? symbolStyle2)
         {
             return Equals(symbolStyle1, symbolStyle2);
         }
 
-        public static bool operator !=(SymbolStyle symbolStyle1, SymbolStyle symbolStyle2)
+        public static bool operator !=(SymbolStyle? symbolStyle1, SymbolStyle? symbolStyle2)
         {
             return !Equals(symbolStyle1, symbolStyle2);
         }
