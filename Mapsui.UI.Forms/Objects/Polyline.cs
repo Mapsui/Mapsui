@@ -58,7 +58,7 @@ namespace Mapsui.UI.Forms
                     }
                     else
                     {
-                        Feature.Geometry = new LineString(Positions.Select(p => p.ToPoint()).ToList());    
+                        Feature.Geometry = new LineString(Positions.Select(p => p.ToPoint()).ToList());
                     }
 
                     break;

@@ -25,7 +25,7 @@ namespace Mapsui.Samples.Common.Maps
             var url = "https://www.openbasiskaart.nl/mapcache/tms/1.0.0/osm@rd";
             var tileSource = TmsTileSourceBuilder.Build(url, true);
 
-            var tileLayer =  new TileLayer(tileSource)
+            var tileLayer = new TileLayer(tileSource)
             {
                 Name = "openbasiskaart.nl"
             };

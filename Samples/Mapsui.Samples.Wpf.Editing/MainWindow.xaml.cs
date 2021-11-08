@@ -25,11 +25,11 @@ namespace Mapsui.Samples.Wpf.Editing
 
         private WritableLayer _targetLayer;
         private IEnumerable<IGeometryFeature> _tempFeatures;
-        private readonly EditManager _editManager = new ();
-        private readonly EditManipulation _editManipulation = new ();
+        private readonly EditManager _editManager = new();
+        private readonly EditManipulation _editManipulation = new();
         private bool _selectMode;
-        private readonly LimitedQueue<LogModel> _logMessage = new (6);
-        
+        private readonly LimitedQueue<LogModel> _logMessage = new(6);
+
         public MainWindow()
         {
             InitializeComponent();
