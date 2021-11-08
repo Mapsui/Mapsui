@@ -45,9 +45,9 @@ namespace Mapsui.Tests.Common.Maps
             };
         }
 
-        private static GeometryMemoryProvider<IGeometryFeature> CreateLineProvider()
+        private static GeometryMemoryProvider<IFeature> CreateLineProvider()
         {
-            var features = new List<IGeometryFeature>();
+            var features = new List<IFeature>();
             var feature = new GeometryFeature
             {
                 Geometry = Geometry.GeomFromText(
@@ -130,7 +130,7 @@ namespace Mapsui.Tests.Common.Maps
             feature.Styles.Add(new VectorStyle { Line = new Pen(Color.Red) { PenStyle = PenStyle.Solid, PenStrokeCap = PenStrokeCap.Butt } });
             features.Add(feature);
 
-            var provider = new GeometryMemoryProvider<IGeometryFeature>(features);
+            var provider = new MemoryProvider<IFeature>(features);
 
             return provider;
         }
