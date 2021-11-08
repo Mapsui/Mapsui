@@ -465,7 +465,7 @@ namespace Mapsui.Providers.Wms
         public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {
             var features = new List<RasterFeature>();
-            
+
             var view = new Viewport
             {
                 Resolution = fetchInfo.Resolution,

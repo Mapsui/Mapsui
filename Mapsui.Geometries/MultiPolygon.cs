@@ -127,7 +127,7 @@ namespace Mapsui.Geometries
                 var bbox = Polygons[0].BoundingBox;
                 for (var i = 1; i < Polygons.Count; i++)
                 {
-                    bbox = bbox.Join(Polygons[i].BoundingBox);
+                    bbox = bbox != null ? bbox.Join(Polygons[i].BoundingBox) : Polygons[i].BoundingBox?.Clone();
                 }
 
                 return bbox;

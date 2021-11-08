@@ -60,7 +60,7 @@ namespace Mapsui.Providers
             var biggerBox = fetchInfo.Extent.Grow(fetchInfo.Resolution * SymbolSize * 0.5);
             var grownFeatures = features.Where(f => f != null && f.Extent.Intersects(biggerBox));
 
-            return grownFeatures.ToList(); 
+            return grownFeatures.ToList();
         }
 
         /// <summary>

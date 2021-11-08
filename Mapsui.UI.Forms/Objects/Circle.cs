@@ -99,11 +99,21 @@ namespace Mapsui.UI.Forms
                     break;
                 case nameof(StrokeWidth):
                     if (Feature != null)
-                        ((VectorStyle)Feature.Styles.First()).Outline.Width = StrokeWidth;
+                    {
+                        var outline = ((VectorStyle)Feature.Styles.First()).Outline;
+                        if (outline != null)
+                            outline.Width = StrokeWidth;
+                    }
+
                     break;
                 case nameof(StrokeColor):
                     if (Feature != null)
-                        ((VectorStyle)Feature.Styles.First()).Outline.Color = StrokeColor.ToMapsui();
+                    {
+                        var outline = ((VectorStyle)Feature.Styles.First()).Outline;
+                        if (outline != null)
+                            outline.Color = StrokeColor.ToMapsui();
+                    }
+
                     break;
             }
         }

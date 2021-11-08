@@ -6,6 +6,7 @@ using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
+using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
 using Mapsui.UI;
 
@@ -25,7 +26,7 @@ namespace Mapsui.Tests.Common.Maps
 
         public static Map CreateMap()
         {
-            var provider = CreateRandomPointsProvider(GenerateRandomPoints(new BoundingBox(-100, -100, 100, 100), 20));
+            var provider = RandomPointGenerator.CreateProviderWithRandomPoints(new MRect(-100, -100, 100, 100), 20, 0);
             var layer = CreateLayer(provider);
             var stackedLabelLayer = CreateStackedLabelLayer(provider, LabelColumn);
 
@@ -41,7 +42,7 @@ namespace Mapsui.Tests.Common.Maps
             return map;
         }
 
-        private static MemoryLayer CreateStackedLabelLayer(IProvider<IGeometryFeature> provider, string labelColumn)
+        private static MemoryLayer CreateStackedLabelLayer(IProvider<IFeature> provider, string labelColumn)
         {
             return new MemoryLayer
             {
@@ -50,45 +51,13 @@ namespace Mapsui.Tests.Common.Maps
             };
         }
 
-        private static MemoryLayer CreateLayer(IProvider<IGeometryFeature> dataSource)
+        private static MemoryLayer CreateLayer(IProvider<IFeature> dataSource)
         {
             return new MemoryLayer
             {
                 DataSource = dataSource,
                 Style = new SymbolStyle { SymbolScale = 1, Fill = new Brush(new Color { A = 128, R = 8, G = 20, B = 192 }) }
             };
-        }
-
-        private static GeometryMemoryProvider<IGeometryFeature> CreateRandomPointsProvider(IEnumerable<IGeometry> randomPoints)
-        {
-            var features = new List<IGeometryFeature>();
-            var count = 0;
-            foreach (var point in randomPoints)
-            {
-                var feature = new GeometryFeature
-                {
-                    Geometry = point,
-                    [LabelColumn] = count.ToString(CultureInfo.InvariantCulture)
-                };
-                features.Add(feature);
-                count++;
-            }
-            return new GeometryMemoryProvider<IGeometryFeature>(features);
-        }
-
-        private static IEnumerable<IGeometry> GenerateRandomPoints(BoundingBox box, int count = 25)
-        {
-            var result = new List<IGeometry>();
-            var random = new Random(0);
-
-            for (var i = 0; i < count; i++)
-            {
-                var x = random.NextDouble() * box.Width + box.Left;
-                var y = random.NextDouble() * box.Height - (box.Height - box.Top);
-                result.Add(new Point(x, y));
-            }
-
-            return result;
         }
     }
 }

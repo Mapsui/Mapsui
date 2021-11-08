@@ -24,8 +24,8 @@ namespace Mapsui.Rendering.Skia
         private const int TilesToKeepMultiplier = 3;
         private const int MinimumTilesToKeep = 32;
         private readonly SymbolCache _symbolCache = new SymbolCache();
-        private readonly IDictionary<object, BitmapInfo> _tileCache =
-            new Dictionary<object, BitmapInfo>(new IdentityComparer<object>());
+        private readonly IDictionary<object, BitmapInfo?> _tileCache =
+            new Dictionary<object, BitmapInfo?>(new IdentityComparer<object>());
         private long _currentIteration;
 
         public ISymbolCache SymbolCache => _symbolCache;
@@ -120,7 +120,7 @@ namespace Mapsui.Rendering.Skia
         private void RemovedUnusedBitmapsFromCache()
         {
             var tilesUsedInCurrentIteration =
-                _tileCache.Values.Count(i => i.IterationUsed == _currentIteration);
+                _tileCache.Values.Count(i => i?.IterationUsed == _currentIteration);
             var tilesToKeep = tilesUsedInCurrentIteration * TilesToKeepMultiplier;
             tilesToKeep = Math.Max(tilesToKeep, MinimumTilesToKeep);
             var tilesToRemove = _tileCache.Keys.Count - tilesToKeep;
@@ -128,80 +128,48 @@ namespace Mapsui.Rendering.Skia
             if (tilesToRemove > 0) RemoveOldBitmaps(_tileCache, tilesToRemove);
         }
 
-        private static void RemoveOldBitmaps(IDictionary<object, BitmapInfo> tileCache, int numberToRemove)
+        private static void RemoveOldBitmaps(IDictionary<object, BitmapInfo?> tileCache, int numberToRemove)
         {
             var counter = 0;
-            var orderedKeys = tileCache.OrderBy(kvp => kvp.Value.IterationUsed).Select(kvp => kvp.Key).ToList();
+            var orderedKeys = tileCache.OrderBy(kvp => kvp.Value?.IterationUsed).Select(kvp => kvp.Key).ToList();
             foreach (var key in orderedKeys)
             {
                 if (counter >= numberToRemove) break;
                 var textureInfo = tileCache[key];
                 tileCache.Remove(key);
-                textureInfo.Bitmap?.Dispose();
+                textureInfo?.Bitmap?.Dispose();
                 counter++;
             }
         }
 
         private void RenderFeature(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IStyle style, IFeature feature, float layerOpacity)
         {
-            if (feature is IGeometryFeature geometryFeature)
+            // Check, if we have a special renderer for this style
+            if (StyleRenderers.ContainsKey(style.GetType()))
             {
-                // Check, if we have a special renderer for this style
-                if (StyleRenderers.ContainsKey(style.GetType()))
-                {
-                    // Save canvas
-                    canvas.Save();
-                    // We have a special renderer, so try, if it could draw this
-                    var result = ((ISkiaStyleRenderer)StyleRenderers[style.GetType()]).Draw(canvas, viewport, layer,
-                        geometryFeature, style, _symbolCache);
-                    // Restore old canvas
-                    canvas.Restore();
-                    // Was it drawn?
-                    if (result)
-                        // Yes, special style renderer drawn correct
-                        return;
-                }
-
-                // No special style renderer handled this up to now, than try standard renderers
-                RenderGeometry(canvas, viewport, style, layerOpacity, geometryFeature, geometryFeature.Geometry);
+                // Save canvas
+                canvas.Save();
+                // We have a special renderer, so try, if it could draw this
+                var styleRenderer = (ISkiaStyleRenderer)StyleRenderers[style.GetType()];
+                var result = styleRenderer.Draw(canvas, viewport, layer, feature, style, _symbolCache);
+                // Restore old canvas
+                canvas.Restore();
+                // Was it drawn?
+                if (result)
+                    // Yes, special style renderer drawn correct
+                    return;
             }
+
+            // No special style renderer handled this up to now, than try standard renderers
+
+            if (feature is GeometryFeature geometryFeature)
+                GeometryRenderer.Draw(canvas, viewport, style, layerOpacity, geometryFeature, _symbolCache);
             else if (feature is PointFeature pointFeature)
-                PointRenderer.Draw(canvas, viewport, style, pointFeature, pointFeature.Point.X, pointFeature.Point.Y, _symbolCache,
-                   layerOpacity * style.Opacity);
+                PointRenderer.Draw(canvas, viewport, style, pointFeature, pointFeature.Point.X, pointFeature.Point.Y, _symbolCache, layerOpacity * style.Opacity);
             else if (feature is RectFeature rectFeature)
                 RectRenderer.Draw(canvas, viewport, style, rectFeature, layerOpacity * style.Opacity);
             else if (feature is RasterFeature rasterFeature)
-                RasterRenderer.Draw(canvas, viewport, style, rasterFeature, rasterFeature.Raster, 
-                    layerOpacity * style.Opacity, _tileCache, _currentIteration);
-        }
-
-        private void RenderGeometry(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, float layerOpacity,
-            IFeature geometryFeature, IGeometry geometry)
-        {
-            if (geometry is Point point)
-                PointRenderer.Draw(canvas, viewport, style, geometryFeature, point.X, point.Y, _symbolCache,
-                    layerOpacity * style.Opacity);
-            else if (geometry is MultiPoint multiPoint)
-                MultiPointRenderer.Draw(canvas, viewport, style, geometryFeature, multiPoint,
-                    _symbolCache, layerOpacity * style.Opacity);
-            else if (geometry is LineString lineString)
-                LineStringRenderer.Draw(canvas, viewport, style, geometryFeature, lineString,
-                    layerOpacity * style.Opacity);
-            else if (geometry is MultiLineString multiLineString)
-                MultiLineStringRenderer.Draw(canvas, viewport, style, geometryFeature, multiLineString,
-                    layerOpacity * style.Opacity);
-            else if (geometry is Polygon polygon)
-                PolygonRenderer.Draw(canvas, viewport, style, geometryFeature, polygon,
-                    layerOpacity * style.Opacity, _symbolCache);
-            else if (geometry is MultiPolygon multiPolygon)
-                MultiPolygonRenderer.Draw(canvas, viewport, style, geometryFeature, multiPolygon,
-                    layerOpacity * style.Opacity, _symbolCache);
-            else if (geometry is IGeometryCollection collection)
-                for (var i = 0; i < collection.NumGeometries; i++)
-                    RenderGeometry(canvas, viewport, style, layerOpacity, geometryFeature, collection.Geometry(i));
-            else
-                Logger.Log(LogLevel.Warning,
-                    $"Failed to find renderer for geometry feature of type {geometry.GetType()}");
+                RasterRenderer.Draw(canvas, viewport, style, rasterFeature, rasterFeature.Raster, layerOpacity * style.Opacity, _tileCache, _currentIteration);
         }
 
         private void Render(object canvas, IReadOnlyViewport viewport, IEnumerable<IWidget> widgets, float layerOpacity)
@@ -226,7 +194,7 @@ namespace Mapsui.Rendering.Skia
                 Resolution = viewport.Resolution
             };
 
-            if (!viewport.Extent.Contains(viewport.ScreenToWorld(result.ScreenPosition))) return result;
+            if (!viewport.Extent?.Contains(viewport.ScreenToWorld(result.ScreenPosition)) ?? false) return result;
 
             try
             {

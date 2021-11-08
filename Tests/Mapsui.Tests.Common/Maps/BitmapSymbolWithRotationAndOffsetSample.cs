@@ -40,9 +40,9 @@ namespace Mapsui.Tests.Common.Maps
             return map;
         }
 
-        private static IProvider<IGeometryFeature> CreateProviderWithRotatedBitmapSymbols()
+        private static IProvider<IFeature> CreateProviderWithRotatedBitmapSymbols()
         {
-            var features = new List<IGeometryFeature>
+            var features = new List<IFeature>
             {
                 new GeometryFeature
                 {
@@ -53,7 +53,7 @@ namespace Mapsui.Tests.Common.Maps
                 CreateFeatureWithRotatedBitmapSymbol(125, 125, 180),
                 CreateFeatureWithRotatedBitmapSymbol(125, 75, 270)
             };
-            return new GeometryMemoryProvider<IGeometryFeature>(features);
+            return new MemoryProvider<IFeature>(features);
         }
 
         private static GeometryFeature CreateFeatureWithRotatedBitmapSymbol(double x, double y, double rotation)

@@ -36,7 +36,7 @@ namespace Mapsui.Tests.Common.Maps
 
         private static MemoryLayer CreateLayer()
         {
-            var features = new List<IGeometryFeature>
+            var features = new List<IFeature>
             {
                 CreateFeature(0, 0, UnitType.Pixel),
                 CreateFeature(0, 20, UnitType.WorldUnit),
@@ -47,7 +47,7 @@ namespace Mapsui.Tests.Common.Maps
             var layer = new MemoryLayer
             {
                 Style = null,
-                DataSource = new GeometryMemoryProvider<IGeometryFeature>(features),
+                DataSource = new MemoryProvider<IFeature>(features),
                 Name = "Points in world units"
             };
             return layer;

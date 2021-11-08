@@ -134,7 +134,7 @@ namespace Mapsui.UI.Forms
         {
             if (ReferenceEquals(null, obj))
                 return false;
-            return obj is Distance && Equals((Distance)obj);
+            return obj is Distance distance && Equals(distance);
         }
 
         public override int GetHashCode()

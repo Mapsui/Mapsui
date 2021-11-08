@@ -53,8 +53,8 @@ namespace Mapsui.Rendering.Skia
                 paint.StrokeCap = strokeCap.ToSkia();
                 paint.StrokeJoin = strokeJoin.ToSkia();
                 paint.StrokeMiter = strokeMiterLimit;
-                paint.PathEffect = strokeStyle != PenStyle.Solid 
-                    ? strokeStyle.ToSkia(lineWidth, dashArray, dashOffset) 
+                paint.PathEffect = strokeStyle != PenStyle.Solid
+                    ? strokeStyle.ToSkia(lineWidth, dashArray, dashOffset)
                     : null;
                 canvas.DrawPath(path, paint);
             }

@@ -148,7 +148,7 @@ namespace Mapsui.Geometries
                 var bbox = LineStrings[0].BoundingBox;
                 for (var i = 1; i < LineStrings.Count; i++)
                 {
-                    bbox = bbox.Join(LineStrings[i].BoundingBox);
+                    bbox = bbox != null ? bbox.Join(LineStrings[i].BoundingBox) : LineStrings[i].BoundingBox?.Clone();
                 }
 
                 return bbox;

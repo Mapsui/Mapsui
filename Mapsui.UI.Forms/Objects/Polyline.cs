@@ -66,7 +66,15 @@ namespace Mapsui.UI.Forms
             switch (propertyName)
             {
                 case nameof(Positions):
-                    Feature.Geometry = new LineString(Positions.Select(p => p.ToPoint()).ToList());
+                    if (Feature == null)
+                    {
+                        this.CreateFeature();
+                    }
+                    else
+                    {
+                        Feature.Geometry = new LineString(Positions.Select(p => p.ToPoint()).ToList());
+                    }
+
                     break;
             }
         }

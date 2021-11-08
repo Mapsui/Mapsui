@@ -24,9 +24,9 @@ namespace Mapsui.GeometryLayer
                 this[field] = feature[field];
         }
 
-        public IGeometry? Geometry { get; set; }
+        public IGeometry Geometry { get; set; }
 
-        public MRect? Extent => Geometry?.BoundingBox.ToMRect();
+        public MRect? Extent => Geometry?.BoundingBox.ToMRect(); // Todo: Make not-nullable
 
         public void Dispose()
         {

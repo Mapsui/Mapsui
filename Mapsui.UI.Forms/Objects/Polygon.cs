@@ -74,6 +74,9 @@ namespace Mapsui.UI.Forms
         {
             base.OnPropertyChanged(propertyName);
 
+            if (Feature == null)
+                return;
+
             switch (propertyName)
             {
                 case nameof(Positions):
@@ -86,10 +89,14 @@ namespace Mapsui.UI.Forms
                     ((VectorStyle)Feature.Styles.First()).Fill = new Styles.Brush(FillColor.ToMapsui());
                     break;
                 case nameof(StrokeColor):
-                    ((VectorStyle)Feature.Styles.First()).Outline.Color = StrokeColor.ToMapsui();
+                    var outline = ((VectorStyle)Feature.Styles.First()).Outline;
+                    if (outline != null)
+                        outline.Color = StrokeColor.ToMapsui();
                     break;
                 case nameof(StrokeWidth):
-                    ((VectorStyle)Feature.Styles.First()).Outline.Width = StrokeWidth;
+                    var pen = ((VectorStyle)Feature.Styles.First()).Outline;
+                    if (pen != null)
+                        pen.Width = StrokeWidth;
                     break;
             }
         }

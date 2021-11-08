@@ -7,6 +7,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Mapsui.Extensions;
 using Mapsui.Layers.Tiling;
+using Mapsui.Providers.Wms;
 using Mapsui.UI;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Helpers;

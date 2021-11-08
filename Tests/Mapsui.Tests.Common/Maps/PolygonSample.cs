@@ -51,9 +51,9 @@ namespace Mapsui.Tests.Common.Maps
             };
         }
 
-        public static GeometryMemoryProvider<IGeometryFeature> CreatePolygonProvider()
+        public static MemoryProvider<IFeature> CreatePolygonProvider()
         {
-            var features = new List<IGeometryFeature>();
+            var features = new List<IFeature>();
 
             var feature = new GeometryFeature
             {
@@ -188,9 +188,7 @@ namespace Mapsui.Tests.Common.Maps
             });
             features.Add(feature);
 
-            var provider = new GeometryMemoryProvider<IGeometryFeature>(features);
-
-            return provider;
+            return new MemoryProvider<IFeature>(features);
         }
 
         private static Brush CreateBrush(Color color, FillStyle fillStyle, int? imageId = null)

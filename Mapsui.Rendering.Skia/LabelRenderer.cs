@@ -15,7 +15,7 @@ namespace Mapsui.Rendering.Skia
         private static readonly IDictionary<string, BitmapInfo> LabelCache =
             new Dictionary<string, BitmapInfo>();
 
-        private static readonly SKPaint Paint = new() 
+        private static readonly SKPaint Paint = new()
         {
             IsAntialias = true,
             IsStroke = false,

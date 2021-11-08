@@ -47,13 +47,13 @@ namespace Mapsui.Samples.Common.Maps.Projection
 
         public static Layer CreateWgs84Layer()
         {
-            var features = new List<IGeometryFeature>
+            var features = new List<GeometryFeature>
             {
                 new GeometryFeature {Geometry = SomeWhereNearHaarlem},
                 new GeometryFeature {Geometry = GeometryFromWKT.Parse(WktOfAmsterdam)}
             };
 
-            var memoryProvider = new GeometryMemoryProvider<IGeometryFeature>(features)
+            var memoryProvider = new GeometryMemoryProvider<GeometryFeature>(features)
             {
                 CRS = "EPSG:4326" // The DataSource CRS needs to be set
             };

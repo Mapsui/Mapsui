@@ -40,12 +40,12 @@ namespace Mapsui.Tests.Common.Maps
             return new MemoryLayer
             {
                 Style = null,
-                DataSource = new GeometryMemoryProvider<IGeometryFeature>(CreateFeatures()),
+                DataSource = new MemoryProvider<IFeature>(CreateFeatures()),
                 Name = "Points with bitmaps"
             };
         }
 
-        public static List<IGeometryFeature> CreateFeatures()
+        public static List<IFeature> CreateFeatures()
         {
             var atlas = LoadBitmap("Mapsui.Tests.Common.Resources.Images.osm-liberty.png");
             var spriteAmusementPark15 = new Sprite(atlas, 106, 0, 21, 21, 1);
@@ -54,7 +54,7 @@ namespace Mapsui.Tests.Common.Maps
             var spritePedestrianPolygon = new Sprite(atlas, 0, 0, 64, 64, 1);
             var svgTigerBitmapId = LoadBitmap("Mapsui.Tests.Common.Resources.Images.Ghostscript_Tiger.svg");
 
-            return new List<IGeometryFeature>
+            return new List<IFeature>
             {
                 new GeometryFeature
                 {

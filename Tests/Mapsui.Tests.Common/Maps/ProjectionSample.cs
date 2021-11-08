@@ -47,19 +47,19 @@ namespace Mapsui.Tests.Common.Maps
         {
             return new MemoryLayer("Center of Amsterdam")
             {
-                DataSource = new GeometryMemoryProvider<IGeometryFeature>(new Point(545465.50488704059, 6866697.0250906311)),
+                DataSource = new MemoryProvider<IFeature>(new PointFeature(new MPoint(545465.50488704059, 6866697.0250906311))),
                 Style = new SymbolStyle { Fill = new Brush { Color = Color.Black }, SymbolScale = 0.5 }
             };
         }
 
         public static MemoryLayer CreateAmsterdamLayer() // Needs transform
         {
-            var features = new List<IGeometryFeature>
+            var features = new List<GeometryFeature>
             {
                 new GeometryFeature {Geometry = GeometryFromWKT.Parse(WktOfAmsterdam)}
             };
 
-            var memoryProvider = new GeometryMemoryProvider<IGeometryFeature>(features)
+            var memoryProvider = new MemoryProvider<GeometryFeature>(features)
             {
                 CRS = "EPSG:4326" // The DataSource CRS needs to be set
             };

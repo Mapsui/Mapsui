@@ -26,7 +26,7 @@ namespace Mapsui.Tests.Layers
             var box = schema.Extent.ToMRect();
             var resolution = schema.Resolutions.First().Value.UnitsPerPixel;
             var waitHandle = new AutoResetEvent(false);
-            
+
             Assert.AreEqual(0, layer.GetFeatures(box, resolution).Count());
             layer.DataChanged += (_, _) => {
                 // assert
@@ -46,7 +46,7 @@ namespace Mapsui.Tests.Layers
         private static MemoryLayer CreatePointLayer()
         {
             var random = new Random();
-            var features = new List<IGeometryFeature>();
+            var features = new List<IFeature>();
             for (var i = 0; i < 100; i++)
             {
                 var feature = new GeometryFeature
@@ -55,7 +55,7 @@ namespace Mapsui.Tests.Layers
                 };
                 features.Add(feature);
             }
-            var provider = new GeometryMemoryProvider<IGeometryFeature>(features);
+            var provider = new MemoryProvider<IFeature>(features);
 
             return new MemoryLayer { DataSource = provider };
         }

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Mapsui.Samples.Uwp;
 
 namespace Mapsui.Samples.Uno.WPF.Host
 {
@@ -24,7 +25,7 @@ namespace Mapsui.Samples.Uno.WPF.Host
         {
             InitializeComponent();
 
-            root.Content = new global::Uno.UI.Skia.Platform.WpfHost(Dispatcher, () => new Mapsui.Samples.Uno.App());
+            root.Content = new global::Uno.UI.Skia.Platform.WpfHost(Dispatcher, () => new Mapsui.Samples.Uwp.App());
         }
     }
 }
