@@ -115,7 +115,7 @@ namespace Mapsui.Tests.Common.Maps
                     }
                 },
             };
-            var provider = new GeometryMemoryProvider<IFeature>(features);
+            var provider = new MemoryProvider<IFeature>(features);
             return provider;
         }
     }

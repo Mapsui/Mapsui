@@ -188,9 +188,7 @@ namespace Mapsui.Tests.Common.Maps
             });
             features.Add(feature);
 
-            var provider = new GeometryMemoryProvider<IFeature>(features);
-
-            return provider;
+            return new MemoryProvider<IFeature>(features);
         }
 
         private static Brush CreateBrush(Color color, FillStyle fillStyle, int? imageId = null)

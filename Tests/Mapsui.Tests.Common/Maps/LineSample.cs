@@ -45,7 +45,7 @@ namespace Mapsui.Tests.Common.Maps
             };
         }
 
-        private static GeometryMemoryProvider<IFeature> CreateLineProvider()
+        private static MemoryProvider<IFeature> CreateLineProvider()
         {
             var features = new List<IFeature>();
             var feature = new GeometryFeature
