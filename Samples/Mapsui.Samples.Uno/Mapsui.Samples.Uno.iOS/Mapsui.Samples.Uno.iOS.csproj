@@ -116,7 +116,7 @@
     <PackageReference Include="Uno.UI" Version="3.10.11" />
     <PackageReference Include="Uno.UI.RemoteControl" Version="3.10.11" Condition="'$(Configuration)'=='Debug'" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
-    <PackageReference Include="Uno.Extensions.Logging.OSLog " Version="1.0.1" />
+    <PackageReference Include="Uno.Extensions.Logging.OSLog " Version="1.1.0" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Contents.json">
@@ -174,6 +174,10 @@
     <ProjectReference Include="..\..\..\Mapsui.Geometries\Mapsui.Geometries.csproj">
       <Project>{ee55b62d-ffa2-4c24-a4ad-7a47ace55ce5}</Project>
       <Name>Mapsui.Geometries</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Mapsui.Layers.Tiling\Mapsui.Layers.Tiling.csproj">
+      <Project>{08072eca-528c-47d5-82a3-85e54300c22a}</Project>
+      <Name>Mapsui.Layers.Tiling</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj">
       <Project>{ae632270-38ca-4203-93a5-8612629cd944}</Project>

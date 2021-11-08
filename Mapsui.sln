@@ -190,7 +190,7 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mapsui.Samples.Uno.Shared",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Layers.ArcGIS", "Mapsui.Layers.ArcGIS\Mapsui.Layers.ArcGIS.csproj", "{9233883A-BA3F-4682-BEB5-0A531807CB54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Layers.Tiling", "Mapsui.Layers.Tiling\Mapsui.Layers.Tiling.csproj", "{08072ECA-528C-47D5-82A3-85E54300C22A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Layers.Tiling", "Mapsui.Layers.Tiling\Mapsui.Layers.Tiling.csproj", "{08072ECA-528C-47D5-82A3-85E54300C22A}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -202,6 +202,7 @@ Global
 		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{27b81fbb-f6e9-49bb-bae9-f99f0e01db73}*SharedItemsImports = 5
 		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{29e628d1-8e8a-49c5-b0f9-555c0f68572a}*SharedItemsImports = 4
 		Samples\Mapsui.Samples.Uwp\Mapsui.Samples.Uno.Shared.projitems*{2dde3d62-3669-45f6-9711-252d8164d025}*SharedItemsImports = 4
+		Samples\Mapsui.Samples.Uwp\Mapsui.Samples.Uno.Shared.projitems*{333f557c-52a4-417f-93a7-fb24a07984dd}*SharedItemsImports = 4
 		Samples\Mapsui.Samples.Uwp\Mapsui.Samples.Uno.Shared.projitems*{4b4088e0-67fb-4a9c-8cb9-34e9bf2bccae}*SharedItemsImports = 5
 		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{502c3fd3-b775-40f5-8760-0fe7071126f0}*SharedItemsImports = 5
 		Samples\Mapsui.Samples.Uwp\Mapsui.Samples.Uno.Shared.projitems*{6279c845-92f8-4333-ab99-3d213163593c}*SharedItemsImports = 13
@@ -210,6 +211,7 @@ Global
 		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{ae693902-feda-4034-a7c5-9aa9872f7878}*SharedItemsImports = 5
 		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{b78cde0f-568f-4064-8b74-fcd920e22351}*SharedItemsImports = 5
 		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{e71f3053-056c-4381-9638-048ed73bdff6}*SharedItemsImports = 4
+		Samples\Mapsui.Samples.Uwp\Mapsui.Samples.Uno.Shared.projitems*{f65dc264-19c3-48e4-8a67-2a871225d4fd}*SharedItemsImports = 5
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|AnyCPU = Ad-Hoc|AnyCPU
@@ -1081,7 +1083,7 @@ Global
 		{CA0C7AF3-03ED-42D0-A001-001E8EE095E6}.Debug|x86.ActiveCfg = Debug|x86
 		{CA0C7AF3-03ED-42D0-A001-001E8EE095E6}.Debug|x86.Build.0 = Debug|x86
 		{CA0C7AF3-03ED-42D0-A001-001E8EE095E6}.Debug|x86.Deploy.0 = Debug|x86
-		{CA0C7AF3-03ED-42D0-A001-001E8EE095E6}.Release|AnyCPU.ActiveCfg = Release|x86
+		{CA0C7AF3-03ED-42D0-A001-001E8EE095E6}.Release|AnyCPU.ActiveCfg = Release|x86		
 		{CA0C7AF3-03ED-42D0-A001-001E8EE095E6}.Release|ARM.ActiveCfg = Release|ARM
 		{CA0C7AF3-03ED-42D0-A001-001E8EE095E6}.Release|ARM.Build.0 = Release|ARM
 		{CA0C7AF3-03ED-42D0-A001-001E8EE095E6}.Release|ARM.Deploy.0 = Release|ARM
@@ -1501,6 +1503,7 @@ Global
 		{DE3B0CBF-CC20-4457-884B-2E5150B45A01}.AppStore|x64.ActiveCfg = AppStore|iPhone
 		{DE3B0CBF-CC20-4457-884B-2E5150B45A01}.AppStore|x86.ActiveCfg = AppStore|iPhone
 		{DE3B0CBF-CC20-4457-884B-2E5150B45A01}.Debug|AnyCPU.ActiveCfg = Debug|iPhone
+		{DE3B0CBF-CC20-4457-884B-2E5150B45A01}.Debug|AnyCPU.Build.0 = Debug|iPhone
 		{DE3B0CBF-CC20-4457-884B-2E5150B45A01}.Debug|ARM.ActiveCfg = Debug|iPhone
 		{DE3B0CBF-CC20-4457-884B-2E5150B45A01}.Debug|ARM64.ActiveCfg = Debug|iPhoneSimulator
 		{DE3B0CBF-CC20-4457-884B-2E5150B45A01}.Debug|iPhone.ActiveCfg = Debug|iPhone
@@ -1618,7 +1621,7 @@ Global
 		{28848162-20B7-46F1-8364-8B41B0393CD4}.Debug|x86.ActiveCfg = Debug|x86
 		{28848162-20B7-46F1-8364-8B41B0393CD4}.Debug|x86.Build.0 = Debug|x86
 		{28848162-20B7-46F1-8364-8B41B0393CD4}.Debug|x86.Deploy.0 = Debug|x86
-		{28848162-20B7-46F1-8364-8B41B0393CD4}.Release|AnyCPU.ActiveCfg = Release|x86
+		{28848162-20B7-46F1-8364-8B41B0393CD4}.Release|AnyCPU.ActiveCfg = Release|x86		
 		{28848162-20B7-46F1-8364-8B41B0393CD4}.Release|ARM.ActiveCfg = Release|ARM
 		{28848162-20B7-46F1-8364-8B41B0393CD4}.Release|ARM.Build.0 = Release|ARM
 		{28848162-20B7-46F1-8364-8B41B0393CD4}.Release|ARM.Deploy.0 = Release|ARM
@@ -2075,7 +2078,6 @@ Global
 		{F65DC264-19C3-48E4-8A67-2A871225D4FD}.AppStore|x86.ActiveCfg = Debug|Any CPU
 		{F65DC264-19C3-48E4-8A67-2A871225D4FD}.AppStore|x86.Build.0 = Debug|Any CPU
 		{F65DC264-19C3-48E4-8A67-2A871225D4FD}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{F65DC264-19C3-48E4-8A67-2A871225D4FD}.Debug|AnyCPU.Build.0 = Debug|Any CPU
 		{F65DC264-19C3-48E4-8A67-2A871225D4FD}.Debug|ARM.ActiveCfg = Debug|Any CPU
 		{F65DC264-19C3-48E4-8A67-2A871225D4FD}.Debug|ARM.Build.0 = Debug|Any CPU
 		{F65DC264-19C3-48E4-8A67-2A871225D4FD}.Debug|ARM64.ActiveCfg = Debug|Any CPU
@@ -2174,7 +2176,6 @@ Global
 		{CE325AB2-BA49-42F0-9574-B03E9517CB2B}.AppStore|x86.ActiveCfg = Debug|Any CPU
 		{CE325AB2-BA49-42F0-9574-B03E9517CB2B}.AppStore|x86.Build.0 = Debug|Any CPU
 		{CE325AB2-BA49-42F0-9574-B03E9517CB2B}.Debug|AnyCPU.ActiveCfg = Debug|Any CPU
-		{CE325AB2-BA49-42F0-9574-B03E9517CB2B}.Debug|AnyCPU.Build.0 = Debug|Any CPU
 		{CE325AB2-BA49-42F0-9574-B03E9517CB2B}.Debug|ARM.ActiveCfg = Debug|Any CPU
 		{CE325AB2-BA49-42F0-9574-B03E9517CB2B}.Debug|ARM.Build.0 = Debug|Any CPU
 		{CE325AB2-BA49-42F0-9574-B03E9517CB2B}.Debug|ARM64.ActiveCfg = Debug|Any CPU
@@ -2242,7 +2243,7 @@ Global
 		{4B4088E0-67FB-4A9C-8CB9-34E9BF2BCCAE}.Debug|x64.Build.0 = Debug|Any CPU
 		{4B4088E0-67FB-4A9C-8CB9-34E9BF2BCCAE}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{4B4088E0-67FB-4A9C-8CB9-34E9BF2BCCAE}.Debug|x86.Build.0 = Debug|Any CPU
-		{4B4088E0-67FB-4A9C-8CB9-34E9BF2BCCAE}.Release|AnyCPU.ActiveCfg = Release|Any CPU
+		{4B4088E0-67FB-4A9C-8CB9-34E9BF2BCCAE}.Release|AnyCPU.ActiveCfg = Release|Any CPU		
 		{4B4088E0-67FB-4A9C-8CB9-34E9BF2BCCAE}.Release|ARM.ActiveCfg = Release|Any CPU
 		{4B4088E0-67FB-4A9C-8CB9-34E9BF2BCCAE}.Release|ARM.Build.0 = Release|Any CPU
 		{4B4088E0-67FB-4A9C-8CB9-34E9BF2BCCAE}.Release|ARM64.ActiveCfg = Release|Any CPU
@@ -2297,7 +2298,7 @@ Global
 		{A1F42E2B-6E17-4C29-80FA-837F98079604}.Debug|x64.Build.0 = Debug|Any CPU
 		{A1F42E2B-6E17-4C29-80FA-837F98079604}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{A1F42E2B-6E17-4C29-80FA-837F98079604}.Debug|x86.Build.0 = Debug|Any CPU
-		{A1F42E2B-6E17-4C29-80FA-837F98079604}.Release|AnyCPU.ActiveCfg = Release|Any CPU
+		{A1F42E2B-6E17-4C29-80FA-837F98079604}.Release|AnyCPU.ActiveCfg = Release|Any CPU		
 		{A1F42E2B-6E17-4C29-80FA-837F98079604}.Release|ARM.ActiveCfg = Release|Any CPU
 		{A1F42E2B-6E17-4C29-80FA-837F98079604}.Release|ARM.Build.0 = Release|Any CPU
 		{A1F42E2B-6E17-4C29-80FA-837F98079604}.Release|ARM64.ActiveCfg = Release|Any CPU
