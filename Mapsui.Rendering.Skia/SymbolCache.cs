@@ -5,17 +5,20 @@ namespace Mapsui.Rendering.Skia
 {
     public class SymbolCache : ISymbolCache
     {
-        private readonly IDictionary<int, BitmapInfo> _cache = new Dictionary<int, BitmapInfo>();
+        private readonly IDictionary<int, BitmapInfo?> _cache = new Dictionary<int, BitmapInfo?>();
 
-        public BitmapInfo GetOrCreate(int bitmapId)
+        public BitmapInfo? GetOrCreate(int bitmapId)
         {
             if (_cache.Keys.Contains(bitmapId)) return _cache[bitmapId];
             return _cache[bitmapId] = BitmapHelper.LoadBitmap(BitmapRegistry.Instance.Get(bitmapId));
         }
 
-        public Size GetSize(int bitmapId)
+        public Size? GetSize(int bitmapId)
         {
             var bitmap = GetOrCreate(bitmapId);
+            if (bitmap == null)
+                return null;
+
             return new Size(bitmap.Width, bitmap.Height);
         }
     }

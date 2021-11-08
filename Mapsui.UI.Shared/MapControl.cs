@@ -482,8 +482,11 @@ namespace Mapsui.UI.Wpf
         /// </summary>
         public void RefreshData(ChangeType changeType = ChangeType.Discrete)
         {
-            var fetchInfo = new FetchInfo(Viewport.Extent, Viewport.Resolution, Map?.CRS, changeType);
-            _map?.RefreshData(fetchInfo);
+            if (Viewport.Extent != null)
+            {
+                var fetchInfo = new FetchInfo(Viewport.Extent, Viewport.Resolution, Map?.CRS, changeType);
+                _map?.RefreshData(fetchInfo);
+            }
         }
 
         private void OnInfo(MapInfoEventArgs? mapInfoEventArgs)

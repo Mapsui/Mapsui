@@ -95,7 +95,7 @@ namespace Mapsui.UI.Forms
                 return false;
             if (ReferenceEquals(this, obj))
                 return true;
-            return obj is MapSpan && Equals((MapSpan)obj);
+            return obj is MapSpan span && Equals(span);
         }
 
         /// <summary>

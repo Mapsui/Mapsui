@@ -100,7 +100,7 @@ namespace Mapsui.Layers
                     var viewport = CreateViewport(_fetchInfo.Extent, _fetchInfo.Resolution, _renderResolutionMultiplier, _overscan);
 
                     _currentViewport = viewport;
-                    
+
                     var bitmapStream = _rasterizer.RenderToBitmapStream(viewport, new[] { _layer }, pixelDensity: _pixelDensity);
                     RemoveExistingFeatures();
 

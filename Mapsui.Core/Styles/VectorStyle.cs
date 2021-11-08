@@ -17,12 +17,12 @@ namespace Mapsui.Styles
         /// <summary>
         /// Outline style for line and polygon geometries
         /// </summary>
-        public Pen Outline { get; set; }
+        public Pen? Outline { get; set; }
 
         /// <summary>
         /// Fill style for Polygon geometries
         /// </summary>
-        public Brush Fill { get; set; }
+        public Brush? Fill { get; set; }
 
         public override bool Equals(object? obj)
         {
@@ -33,7 +33,7 @@ namespace Mapsui.Styles
             return Equals(style);
         }
 
-        public bool Equals(VectorStyle vectorStyle)
+        public bool Equals(VectorStyle? vectorStyle)
         {
             if (!base.Equals(vectorStyle))
                 return false;

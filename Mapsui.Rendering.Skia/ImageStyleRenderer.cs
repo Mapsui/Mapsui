@@ -13,6 +13,8 @@ namespace Mapsui.Rendering.Skia
                 return;
 
             var bitmap = symbolCache.GetOrCreate(symbolStyle.BitmapId);
+            if (bitmap == null)
+                return;
 
             // Calc offset (relative or absolute)
             var offsetX = symbolStyle.SymbolOffset.IsRelative ? bitmap.Width * symbolStyle.SymbolOffset.X : symbolStyle.SymbolOffset.X;
@@ -51,7 +53,7 @@ namespace Mapsui.Rendering.Skia
                     if (sprite.Data == null)
                     {
                         var bitmapAtlas = symbolCache.GetOrCreate(sprite.Atlas);
-                        sprite.Data = bitmapAtlas.Bitmap?.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width,
+                        sprite.Data = bitmapAtlas?.Bitmap?.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width,
                             sprite.Y + sprite.Height));
                     }
                     if (sprite.Data is SKImage skImage)

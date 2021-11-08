@@ -78,8 +78,8 @@ namespace Mapsui.Rendering.Skia
             {
                 var bitmapInfo = BitmapHelper.LoadBitmap(BitmapRegistry.Instance.Get(callout.Content));
 
-                contentWidth = bitmapInfo.Width;
-                contentHeight = bitmapInfo.Height;
+                contentWidth = bitmapInfo?.Width ?? 0;
+                contentHeight = bitmapInfo?.Height ?? 0;
             }
             else if (callout.Type == CalloutType.Single || callout.Type == CalloutType.Detail)
             {
@@ -266,7 +266,7 @@ namespace Mapsui.Rendering.Skia
                     // Get size of content
                     var bitmapInfo = BitmapHelper.LoadBitmap(BitmapRegistry.Instance.Get(callout.Content));
 
-                    switch (bitmapInfo.Type)
+                    switch (bitmapInfo?.Type)
                     {
                         case BitmapType.Bitmap:
                             canvas.DrawImage(bitmapInfo.Bitmap, offset);
@@ -274,7 +274,8 @@ namespace Mapsui.Rendering.Skia
                         case BitmapType.Sprite:
                             throw new Exception();
                         case BitmapType.Svg:
-                            canvas.DrawPicture(bitmapInfo.Svg.Picture, offset, new SKPaint() { IsAntialias = true });
+                            if (bitmapInfo.Svg != null)
+                                canvas.DrawPicture(bitmapInfo.Svg.Picture, offset, new SKPaint() { IsAntialias = true });
                             break;
                     }
                 }

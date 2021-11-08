@@ -51,11 +51,15 @@ namespace Mapsui.Geometries
             {
                 var box = BoundingBox;
                 var envelope = new Polygon();
-                envelope.ExteriorRing.Vertices.Add(box.Min); //minx miny
-                envelope.ExteriorRing.Vertices.Add(new Point(box.Max.X, box.Min.Y)); //maxx minu
-                envelope.ExteriorRing.Vertices.Add(box.Max); //maxx maxy
-                envelope.ExteriorRing.Vertices.Add(new Point(box.Min.X, box.Max.Y)); //minx maxy
-                envelope.ExteriorRing.Vertices.Add(envelope.ExteriorRing.StartPoint); //close ring
+                if (envelope.ExteriorRing != null && box != null)
+                {
+                    envelope.ExteriorRing.Vertices.Add(box.Min); //minx miny
+                    envelope.ExteriorRing.Vertices.Add(new Point(box.Max.X, box.Min.Y)); //maxx minu
+                    envelope.ExteriorRing.Vertices.Add(box.Max); //maxx maxy
+                    envelope.ExteriorRing.Vertices.Add(new Point(box.Min.X, box.Max.Y)); //minx maxy
+                    envelope.ExteriorRing.Vertices.Add(envelope.ExteriorRing.StartPoint); //close ring
+                }
+
                 return envelope;
             }
         }

@@ -94,10 +94,7 @@ namespace Mapsui.UI.Objects
         /// <param name="view">MapView, to which this layer belongs</param>
         public MyLocationLayer(MapView view)
         {
-            if (view == null)
-                throw new ArgumentNullException("MapView shouldn't be null");
-
-            mapView = view;
+            mapView = view ?? throw new ArgumentNullException("MapView shouldn't be null");
 
             Enabled = false;
 
@@ -202,9 +199,12 @@ namespace Mapsui.UI.Objects
                             mapView.Refresh();
                     }, 0.0, 1.0);
 
-                    var fetchInfo = new FetchInfo(mapView.Viewport.Extent, mapView.Viewport.Resolution, mapView.Map?.CRS, ChangeType.Discrete);
-                    // At the end, update viewport
-                    animation.Commit(mapView, animationMyLocationName, 100, 3000, finished: (s, v) => mapView.Map?.RefreshData(fetchInfo));
+                    if (mapView.Viewport.Extent != null)
+                    {
+                        var fetchInfo = new FetchInfo(mapView.Viewport.Extent, mapView.Viewport.Resolution, mapView.Map?.CRS, ChangeType.Discrete);
+                        // At the end, update viewport
+                        animation.Commit(mapView, animationMyLocationName, 100, 3000, finished: (s, v) => mapView.Map?.RefreshData(fetchInfo));
+                    }
                 }
                 else
                 {

@@ -8,10 +8,13 @@ namespace Mapsui.Rendering
 {
     public class MinimalRenderFetchStrategy : IRenderFetchStrategy
     {
-        public IList<IFeature> Get(MRect? extent, double resolution, ITileSchema schema, ITileCache<RasterFeature> memoryCache)
+        public IList<IFeature> Get(MRect? extent, double resolution, ITileSchema schema, ITileCache<RasterFeature?> memoryCache)
         {
-            var tiles = schema.GetTileInfos(extent.ToExtent(), resolution);
             var result = new List<IFeature>();
+            if (extent == null)
+                return result;
+
+            var tiles = schema.GetTileInfos(extent.ToExtent(), resolution);
             foreach (var tileInfo in tiles)
             {
                 var feature = memoryCache.Find(tileInfo.Index);

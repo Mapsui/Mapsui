@@ -172,9 +172,13 @@ namespace Mapsui.Geometries.Utilities
             return result;
         }
 
-        public static double DistanceToLine(Point point, IList<Point> points)
+        public static double DistanceToLine(Point point, IList<Point>? points)
         {
             var minDist = double.MaxValue;
+            if (points == null)
+            {
+                return minDist;
+            }
 
             for (var i = 0; i < points.Count - 1; i++)
             {

@@ -14,7 +14,7 @@ namespace Mapsui.Layers
         public override IEnumerable<IFeature> GetFeatures(MRect? box, double resolution)
         {
             // Safeguard in case MRect is null, most likely due to no features in layer
-            if (box == null) return new List<IFeature>(); 
+            if (box == null) return new List<IFeature>();
             var cache = _cache;
             var biggerBox = box.Grow(SymbolStyle.DefaultWidth * 2 * resolution, SymbolStyle.DefaultHeight * 2 * resolution);
             var result = cache.Where(f => biggerBox.Intersects(f.Extent));
@@ -31,7 +31,7 @@ namespace Mapsui.Layers
                 .ToList();
 
             if (extents.Count == 0) return null;
-            
+
             var minX = extents.Min(g => g.MinX);
             var minY = extents.Min(g => g.MinY);
             var maxX = extents.Max(g => g.MaxX);

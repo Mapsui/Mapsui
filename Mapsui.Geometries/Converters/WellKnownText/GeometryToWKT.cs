@@ -122,23 +122,22 @@ namespace Mapsui.Geometries.WellKnownText
             if (geometry == null)
                 throw new NullReferenceException("Cannot write Well-Known Text: geometry was null");
 
-            if (geometry is Point)
+            if (geometry is Point point)
             {
-                var point = geometry as Point;
                 AppendPointTaggedText(point, writer);
             }
-            else if (geometry is LineString)
-                AppendLineStringTaggedText(geometry as LineString, writer);
-            else if (geometry is Polygon)
-                AppendPolygonTaggedText(geometry as Polygon, writer);
-            else if (geometry is MultiPoint)
-                AppendMultiPointTaggedText(geometry as MultiPoint, writer);
-            else if (geometry is MultiLineString)
-                AppendMultiLineStringTaggedText(geometry as MultiLineString, writer);
-            else if (geometry is MultiPolygon)
-                AppendMultiPolygonTaggedText(geometry as MultiPolygon, writer);
-            else if (geometry is GeometryCollection)
-                AppendGeometryCollectionTaggedText(geometry as GeometryCollection, writer);
+            else if (geometry is LineString lineString)
+                AppendLineStringTaggedText(lineString, writer);
+            else if (geometry is Polygon polygon)
+                AppendPolygonTaggedText(polygon, writer);
+            else if (geometry is MultiPoint multiPoint)
+                AppendMultiPointTaggedText(multiPoint, writer);
+            else if (geometry is MultiLineString multiLineString)
+                AppendMultiLineStringTaggedText(multiLineString, writer);
+            else if (geometry is MultiPolygon multiPolygon)
+                AppendMultiPolygonTaggedText(multiPolygon, writer);
+            else if (geometry is GeometryCollection collection)
+                AppendGeometryCollectionTaggedText(collection, writer);
             else
                 throw new NotSupportedException("Unsupported Geometry implementation:" + geometry.GetType().Name);
         }

@@ -58,7 +58,7 @@ namespace Mapsui.Rendering.Skia.Extensions
         {
             // Reduce exterior ring to parts, that are visible in clipping rectangle
             // Inflate clipRect, so that we could be sure, nothing of stroke is visible on screen
-            var exterior = ReducePointsToClipRect(polygon.ExteriorRing.Vertices, viewport, SKRect.Inflate(clipRect, strokeWidth * 2, strokeWidth * 2));
+            var exterior = ReducePointsToClipRect(polygon.ExteriorRing?.Vertices, viewport, SKRect.Inflate(clipRect, strokeWidth * 2, strokeWidth * 2));
 
             // Create path for exterior and interior parts
             var path = new SKPath();
@@ -139,7 +139,7 @@ namespace Mapsui.Rendering.Skia.Extensions
         /// <param name="viewport">Viewport implementation</param>
         /// <param name="clipRect">Rectangle to clip to. All points outside aren't drawn.</param>
         /// <returns></returns>
-        private static List<SKPoint> ReducePointsToClipRect(IEnumerable<Point> points, IReadOnlyViewport viewport, SKRect clipRect)
+        private static List<SKPoint> ReducePointsToClipRect(IEnumerable<Point>? points, IReadOnlyViewport viewport, SKRect clipRect)
         {
             var output = WorldToScreen(viewport, points);
 
@@ -147,7 +147,7 @@ namespace Mapsui.Rendering.Skia.Extensions
             for (var j = 0; j < 4; j++)
             {
                 // If there aren't any points to reduce
-                if (output == null || output.Count == 0)
+                if (output.Count == 0)
                     return new List<SKPoint>();
 
                 // New input list is the last output list of points
@@ -192,9 +192,12 @@ namespace Mapsui.Rendering.Skia.Extensions
         /// <param name="viewport">Viewport implementation</param>
         /// <param name="points">List of points in Mapsui world coordinates</param>
         /// <returns>List of screen coordinates in SKPoint</returns>
-        private static List<SKPoint> WorldToScreen(IReadOnlyViewport viewport, IEnumerable<Point> points)
+        private static List<SKPoint> WorldToScreen(IReadOnlyViewport viewport, IEnumerable<Point>? points)
         {
             var result = new List<SKPoint>();
+            if (points == null)
+                return result;
+
             var screenCenterX = viewport.Width * 0.5;
             var screenCenterY = viewport.Height * 0.5;
             var centerX = viewport.Center.X;

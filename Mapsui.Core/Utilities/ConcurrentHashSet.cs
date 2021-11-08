@@ -151,7 +151,7 @@ namespace ConcurrentCollections
         /// </summary>
         /// <param name="comparer">The <see cref="T:System.Collections.Generic.IEqualityComparer{T}"/>
         /// implementation to use when comparing items.</param>
-        public ConcurrentHashSet(IEqualityComparer<T> comparer)
+        public ConcurrentHashSet(IEqualityComparer<T>? comparer)
             : this(DefaultConcurrencyLevel, DefaultCapacity, true, comparer)
         {
         }
@@ -172,7 +172,7 @@ namespace ConcurrentCollections
         /// <exception cref="T:System.ArgumentNullException"><paramref name="collection"/> is a null reference
         /// (Nothing in Visual Basic).
         /// </exception>
-        public ConcurrentHashSet(IEnumerable<T> collection, IEqualityComparer<T> comparer)
+        public ConcurrentHashSet(IEnumerable<T> collection, IEqualityComparer<T>? comparer)
             : this(comparer)
         {
             if (collection == null) throw new ArgumentNullException(nameof(collection));
@@ -345,7 +345,7 @@ namespace ConcurrentCollections
                     Node? previous = null;
                     for (var current = tables.Buckets[bucketNo]; current != null; current = current.Next)
                     {
-                        Debug.Assert((previous == null && current == tables.Buckets[bucketNo]) || previous.Next == current);
+                        Debug.Assert((previous == null && current == tables.Buckets[bucketNo]) || previous?.Next == current);
 
                         if (hashcode == current.Hashcode && _comparer.Equals(current.Item, item))
                         {

@@ -64,14 +64,14 @@ namespace Mapsui.UI
             return new MinMax(mostZoomedOut, mostZoomedIn);
         }
 
-        public void Limit(IViewport viewport, IReadOnlyList<double> mapResolutions, MRect mapEnvelope)
+        public void Limit(IViewport viewport, IReadOnlyList<double> mapResolutions, MRect? mapEnvelope)
         {
             viewport.SetResolution(LimitResolution(viewport.Resolution, viewport.Width, viewport.Height, mapResolutions, mapEnvelope));
             LimitExtent(viewport, mapEnvelope);
         }
 
         public double LimitResolution(double resolution, double screenWidth, double screenHeight,
-            IReadOnlyList<double> mapResolutions, MRect mapEnvelope)
+            IReadOnlyList<double> mapResolutions, MRect? mapEnvelope)
         {
             if (ZoomMode == ZoomMode.Unlimited) return resolution;
 

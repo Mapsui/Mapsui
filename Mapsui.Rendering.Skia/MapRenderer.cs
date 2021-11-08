@@ -24,8 +24,8 @@ namespace Mapsui.Rendering.Skia
         private const int TilesToKeepMultiplier = 3;
         private const int MinimumTilesToKeep = 32;
         private readonly SymbolCache _symbolCache = new SymbolCache();
-        private readonly IDictionary<object, BitmapInfo> _tileCache =
-            new Dictionary<object, BitmapInfo>(new IdentityComparer<object>());
+        private readonly IDictionary<object, BitmapInfo?> _tileCache =
+            new Dictionary<object, BitmapInfo?>(new IdentityComparer<object>());
         private long _currentIteration;
 
         public ISymbolCache SymbolCache => _symbolCache;
@@ -120,7 +120,7 @@ namespace Mapsui.Rendering.Skia
         private void RemovedUnusedBitmapsFromCache()
         {
             var tilesUsedInCurrentIteration =
-                _tileCache.Values.Count(i => i.IterationUsed == _currentIteration);
+                _tileCache.Values.Count(i => i?.IterationUsed == _currentIteration);
             var tilesToKeep = tilesUsedInCurrentIteration * TilesToKeepMultiplier;
             tilesToKeep = Math.Max(tilesToKeep, MinimumTilesToKeep);
             var tilesToRemove = _tileCache.Keys.Count - tilesToKeep;
@@ -128,16 +128,16 @@ namespace Mapsui.Rendering.Skia
             if (tilesToRemove > 0) RemoveOldBitmaps(_tileCache, tilesToRemove);
         }
 
-        private static void RemoveOldBitmaps(IDictionary<object, BitmapInfo> tileCache, int numberToRemove)
+        private static void RemoveOldBitmaps(IDictionary<object, BitmapInfo?> tileCache, int numberToRemove)
         {
             var counter = 0;
-            var orderedKeys = tileCache.OrderBy(kvp => kvp.Value.IterationUsed).Select(kvp => kvp.Key).ToList();
+            var orderedKeys = tileCache.OrderBy(kvp => kvp.Value?.IterationUsed).Select(kvp => kvp.Key).ToList();
             foreach (var key in orderedKeys)
             {
                 if (counter >= numberToRemove) break;
                 var textureInfo = tileCache[key];
                 tileCache.Remove(key);
-                textureInfo.Bitmap?.Dispose();
+                textureInfo?.Bitmap?.Dispose();
                 counter++;
             }
         }
@@ -171,12 +171,11 @@ namespace Mapsui.Rendering.Skia
             else if (feature is RectFeature rectFeature)
                 RectRenderer.Draw(canvas, viewport, style, rectFeature, layerOpacity * style.Opacity);
             else if (feature is RasterFeature rasterFeature)
-                RasterRenderer.Draw(canvas, viewport, style, rasterFeature, rasterFeature.Raster, 
-                    layerOpacity * style.Opacity, _tileCache, _currentIteration);
+                RasterRenderer.Draw(canvas, viewport, style, rasterFeature, rasterFeature.Raster, layerOpacity * style.Opacity, _tileCache, _currentIteration);
         }
 
         private void RenderGeometry(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, float layerOpacity,
-            IFeature geometryFeature, IGeometry geometry)
+            IFeature geometryFeature, IGeometry? geometry)
         {
             if (geometry is Point point)
                 PointRenderer.Draw(canvas, viewport, style, geometryFeature, point.X, point.Y, _symbolCache,
@@ -201,7 +200,7 @@ namespace Mapsui.Rendering.Skia
                     RenderGeometry(canvas, viewport, style, layerOpacity, geometryFeature, collection.Geometry(i));
             else
                 Logger.Log(LogLevel.Warning,
-                    $"Failed to find renderer for geometry feature of type {geometry.GetType()}");
+                    $"Failed to find renderer for geometry feature of type {geometry?.GetType()}");
         }
 
         private void Render(object canvas, IReadOnlyViewport viewport, IEnumerable<IWidget> widgets, float layerOpacity)
@@ -226,7 +225,7 @@ namespace Mapsui.Rendering.Skia
                 Resolution = viewport.Resolution
             };
 
-            if (!viewport.Extent.Contains(viewport.ScreenToWorld(result.ScreenPosition))) return result;
+            if (!viewport.Extent?.Contains(viewport.ScreenToWorld(result.ScreenPosition)) ?? false) return result;
 
             try
             {

@@ -26,7 +26,7 @@ namespace Mapsui.Tests.Layers
             var box = schema.Extent.ToMRect();
             var resolution = schema.Resolutions.First().Value.UnitsPerPixel;
             var waitHandle = new AutoResetEvent(false);
-            
+
             Assert.AreEqual(0, layer.GetFeatures(box, resolution).Count());
             layer.DataChanged += (_, _) => {
                 // assert

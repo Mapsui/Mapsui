@@ -48,7 +48,7 @@ namespace Mapsui.Styles
         /// </summary>
         public FillStyle FillStyle { get; set; } = FillStyle.Solid;
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (!(obj is Brush brush))
             {
@@ -79,12 +79,12 @@ namespace Mapsui.Styles
             return Color is null ? 0 : Color.GetHashCode();
         }
 
-        public static bool operator ==(Brush brush1, Brush brush2)
+        public static bool operator ==(Brush? brush1, Brush? brush2)
         {
             return Equals(brush1, brush2);
         }
 
-        public static bool operator !=(Brush brush1, Brush brush2)
+        public static bool operator !=(Brush? brush1, Brush? brush2)
         {
             return !Equals(brush1, brush2);
         }

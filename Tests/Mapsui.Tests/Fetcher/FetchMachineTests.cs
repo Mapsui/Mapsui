@@ -25,7 +25,7 @@ namespace Mapsui.Tests.Fetcher
             var tileProvider = new CountingTileProvider();
             var tileSchema = new GlobalSphericalMercator();
             var tileSource = new TileSource(tileProvider, tileSchema);
-            var cache = new MemoryCache<RasterFeature>();
+            var cache = new MemoryCache<RasterFeature?>();
             var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, tileInfo => TileToFeature(tileSource, tileInfo));
             var tileMachine = new FetchMachine(fetchDispatcher);
             var level = 3;
@@ -52,7 +52,7 @@ namespace Mapsui.Tests.Fetcher
             var tileProvider = new CountingTileProvider();
             var tileSchema = new GlobalSphericalMercator();
             var tileSource = new TileSource(tileProvider, tileSchema);
-            var cache = new MemoryCache<RasterFeature>();
+            var cache = new MemoryCache<RasterFeature?>();
             var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, tileInfo => TileToFeature(tileSource, tileInfo));
             var tileMachine = new FetchMachine(fetchDispatcher);
             var level = 3;
@@ -84,7 +84,7 @@ namespace Mapsui.Tests.Fetcher
             var tileProvider = new NullTileProvider();
             var tileSchema = new GlobalSphericalMercator();
             var tileSource = new TileSource(tileProvider, tileSchema);
-            var cache = new MemoryCache<RasterFeature>();
+            var cache = new MemoryCache<RasterFeature?>();
             var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, tileInfo => TileToFeature(tileSource, tileInfo));
             var tileMachine = new FetchMachine(fetchDispatcher);
             var level = 3;
@@ -110,7 +110,7 @@ namespace Mapsui.Tests.Fetcher
             var tileProvider = new FailingTileProvider();
             var tileSchema = new GlobalSphericalMercator();
             var tileSource = new TileSource(tileProvider, tileSchema);
-            var cache = new MemoryCache<RasterFeature>();
+            var cache = new MemoryCache<RasterFeature?>();
             var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, tileInfo => TileToFeature(tileSource, tileInfo));
             var tileMachine = new FetchMachine(fetchDispatcher);
             var level = 3;
@@ -138,7 +138,7 @@ namespace Mapsui.Tests.Fetcher
             var tileProvider = new SometimesFailingTileProvider();
             var tileSchema = new GlobalSphericalMercator();
             var tileSource = new TileSource(tileProvider, tileSchema);
-            var cache = new MemoryCache<RasterFeature>();
+            var cache = new MemoryCache<RasterFeature?>();
             var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, tileInfo => TileToFeature(tileSource, tileInfo));
             var tileMachine = new FetchMachine(fetchDispatcher);
             var level = 3;
@@ -170,7 +170,7 @@ namespace Mapsui.Tests.Fetcher
             var tileProvider = new CountingTileProvider();
             var tileSchema = new GlobalSphericalMercator();
             var tileSource = new TileSource(tileProvider, tileSchema);
-            var cache = new MemoryCache<RasterFeature>();
+            var cache = new MemoryCache<RasterFeature?>();
             var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, tileInfo => TileToFeature(tileSource, tileInfo));
             var tileMachine = new FetchMachine(fetchDispatcher);
             var numberOfWorkers = 8;
