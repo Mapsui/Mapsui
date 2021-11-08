@@ -38,7 +38,7 @@ namespace Mapsui.Layers
 
             waitHandle.WaitOne();
             if (error != null) throw error;
-            return tileSource;
+            return tileSource!;
         }
 
         public static void LoadTmsLayer(IAsyncResult result)

@@ -17,17 +17,17 @@ namespace Mapsui.Fetcher
         private readonly object _lockRoot = new();
         private bool _busy;
         private bool _viewportIsModified;
-        private readonly ITileCache<RasterFeature> _tileCache;
+        private readonly ITileCache<RasterFeature?> _tileCache;
         private readonly IDataFetchStrategy _dataFetchStrategy;
         private readonly ConcurrentQueue<TileInfo> _tilesToFetch = new();
         private readonly ConcurrentHashSet<TileIndex> _tilesInProgress = new();
-        private readonly ITileSchema _tileSchema;
+        private readonly ITileSchema? _tileSchema;
         private readonly FetchMachine _fetchMachine;
         private readonly Func<TileInfo, RasterFeature> _fetchTileAsFeature;
 
         public TileFetchDispatcher(
-            ITileCache<RasterFeature> tileCache,
-            ITileSchema tileSchema,
+            ITileCache<RasterFeature?> tileCache,
+            ITileSchema? tileSchema,
             Func<TileInfo, RasterFeature> fetchTileAsFeature,
             IDataFetchStrategy? dataFetchStrategy = null)
         {
@@ -139,6 +139,9 @@ namespace Mapsui.Fetcher
 
         private void UpdateTilesToFetchForViewportChange()
         {
+            if (_fetchInfo == null || _tileSchema == null)
+                return;
+
             var levelId = BruTile.Utilities.GetNearestLevel(_tileSchema.Resolutions, _fetchInfo.Resolution);
             var tilesToCoverViewport = _dataFetchStrategy.Get(_tileSchema, _fetchInfo.Extent.ToExtent(), levelId);
             NumberTilesNeeded = tilesToCoverViewport.Count;

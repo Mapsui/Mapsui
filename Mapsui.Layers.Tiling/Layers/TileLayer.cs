@@ -27,6 +27,8 @@ using Mapsui.Fetcher;
 using Mapsui.Rendering;
 using Mapsui.Styles;
 
+#pragma warning disable CS8670 // Object or collection initializer implicitly dereferences possibly null member.
+
 namespace Mapsui.Layers
 {
     /// <summary>
@@ -59,7 +61,7 @@ namespace Mapsui.Layers
             int minExtraTiles = -1, int maxExtraTiles = -1, Func<TileInfo, RasterFeature>? fetchTileAsFeature = null)
         {
             _tileSource = tileSource ?? throw new ArgumentException($"{tileSource} can not null");
-            MemoryCache = new MemoryCache<RasterFeature>(minTiles, maxTiles);
+            MemoryCache = new MemoryCache<RasterFeature?>(minTiles, maxTiles);
             Style = new VectorStyle { Outline = { Color = Color.FromArgb(0, 0, 0, 0) } }; // initialize with transparent outline
             Attribution.Text = _tileSource.Attribution?.Text;
             Attribution.Url = _tileSource.Attribution?.Url;
@@ -80,7 +82,7 @@ namespace Mapsui.Layers
         /// <summary>
         /// Memory cache for this layer
         /// </summary>
-        private MemoryCache<RasterFeature> MemoryCache { get; }
+        private MemoryCache<RasterFeature?> MemoryCache { get; }
 
         /// <inheritdoc />
         public override IReadOnlyList<double> Resolutions => _tileSource.Schema.Resolutions.Select(r => r.Value.UnitsPerPixel).ToList();
