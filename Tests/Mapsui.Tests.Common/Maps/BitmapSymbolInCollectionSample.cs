@@ -10,7 +10,7 @@ using Mapsui.UI;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public class BitmapSymbolSample : ISample
+    public class BitmapSymbolInCollectionSample : ISample
     {
         public string Name => "Bitmap Symbol";
         public string Category => "Tests";
@@ -45,26 +45,29 @@ namespace Mapsui.Tests.Common.Maps
             var circleIconId = LoadBitmap("Mapsui.Tests.Common.Resources.Images.circle.png");
             var checkeredIconId = LoadBitmap("Mapsui.Tests.Common.Resources.Images.checkered.png");
 
+            // This test was created the easy way, by copying BitmapSymbol and the GeometryCollection. A test 
+            // written specifically for GeometryCollection would probably look different.
+
             return new List<IFeature>
             {
                 new GeometryFeature
                 {
-                    Geometry = new Point(50, 50),
+                    Geometry = new  GeometryCollection() { Collection =  new List<Geometry>() { new Point(50, 50) } },
                     Styles = new[] {new VectorStyle {Fill = new Brush(Color.Red)}}
                 },
                 new GeometryFeature
                 {
-                    Geometry = new Point(50, 100),
+                    Geometry = new  GeometryCollection() { Collection =  new List<Geometry>() { new Point(50, 100) } },
                     Styles = new[] {new SymbolStyle {BitmapId = circleIconId}}
                 },
                 new GeometryFeature
                 {
-                    Geometry = new Point(100, 50),
+                    Geometry = new GeometryCollection() { Collection =  new List<Geometry>() { new Point(100, 50) } },
                     Styles = new[] {new SymbolStyle {BitmapId = checkeredIconId}}
                 },
                 new GeometryFeature
                 {
-                    Geometry = new Point(100, 100),
+                    Geometry = new GeometryCollection() { Collection =  new List<Geometry>() { new Point(100, 100) } },
                     Styles = new[] {new VectorStyle {Fill = new Brush(Color.Green), Outline = null}}
                 }
             };
