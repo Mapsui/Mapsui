@@ -173,7 +173,7 @@ namespace Mapsui.UI.Objects
         /// Updates my location
         /// </summary>
         /// <param name="newLocation">New location</param>
-        public void UpdateMyLocation(Position newLocation, bool animated = true)
+        public void UpdateMyLocation(Position newLocation, bool animated = false)
         {
             if (!MyLocation.Equals(newLocation))
             {
@@ -224,7 +224,7 @@ namespace Mapsui.UI.Objects
         /// </summary>
         /// <param name="newDirection">New direction</param>
         /// <param name="newViewportRotation">New viewport rotation</param>
-        public void UpdateMyDirection(double newDirection, double newViewportRotation, bool animated = true)
+        public void UpdateMyDirection(double newDirection, double newViewportRotation, bool animated = false)
         {
             var newRotation = (int)(newDirection - newViewportRotation);
             var oldRotation = (int)((SymbolStyle)feature.Styles.First()).SymbolRotation;
@@ -295,7 +295,7 @@ namespace Mapsui.UI.Objects
         /// </summary>
         /// <param name="newDirection">New direction</param>
         /// <param name="newViewportRotation">New viewport rotation</param>
-        public void UpdateMyViewDirection(double newDirection, double newViewportRotation, bool animated = true)
+        public void UpdateMyViewDirection(double newDirection, double newViewportRotation, bool animated = false)
         {
             var newRotation = (int)(newDirection - newViewportRotation);
             var oldRotation = (int)((SymbolStyle)featureDir.Styles.First()).SymbolRotation;
