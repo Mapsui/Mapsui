@@ -12,7 +12,7 @@ namespace Mapsui.Tests.Common.Maps
 {
     public class BitmapSymbolInCollectionSample : ISample
     {
-        public string Name => "Bitmap Symbol";
+        public string Name => "Collection with Bitmap Symbol";
         public string Category => "Tests";
 
         public void Setup(IMapControl mapControl)

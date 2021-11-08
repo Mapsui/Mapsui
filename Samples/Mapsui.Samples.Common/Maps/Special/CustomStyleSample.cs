@@ -27,10 +27,10 @@ namespace Mapsui.Samples.Common.Maps
     public class SkiaCustomStyleRenderer : ISkiaStyleRenderer
     {
         public static Random Random = new();
-        public bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IGeometryFeature feature, IStyle style, ISymbolCache symbolCache)
+        public bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, IStyle style, ISymbolCache symbolCache)
         {
-            if (!(feature.Geometry is Point worldPoint))
-                return false;
+            if (!(feature is GeometryFeature geometryFeature)) return false;
+            if (!(geometryFeature.Geometry is Point worldPoint)) return false;
 
             var screenPoint = viewport.WorldToScreen(worldPoint.ToMPoint());
             var color = new SKColor((byte)Random.Next(0, 256), (byte)Random.Next(0, 256), (byte)Random.Next(0, 256), (byte)(256.0 * layer.Opacity * style.Opacity));
