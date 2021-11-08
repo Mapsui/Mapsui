@@ -2,7 +2,7 @@
 {
     public class RectFeature : BaseFeature, IFeature
     {
-        public MRect Rect { get; set; } = MRect.Empty;
+        public MRect Rect { get; set; } = default!;
         public MRect Extent => Rect;
     }
 }
