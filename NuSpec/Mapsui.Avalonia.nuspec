@@ -18,7 +18,7 @@
       <group targetFramework="netcoreapp3.1">
         <dependency id="Mapsui" version="$version$"/>
         <dependency id="BruTile" version="[4.0.0,5.0.0)"/>
-        <dependency id="SkiaSharp.Views.Avalonia" version="[2.80.2,3.0.0)"/>
+        <dependency id="SkiaSharp.Views.Avalonia" version="[2.88.0,3.0.0)"/>
         <dependency id="Avalonia" version="[0.10.7,0.11.0)" />
         <dependency id="Avalonia.Desktop" version="[0.10.7,0.11.0)" />
         <dependency id="Avalonia.ReactiveUI" version="[0.10.7,0.11.0)" />
