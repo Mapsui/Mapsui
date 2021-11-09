@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<!--<TargetFrameworks>net6.0-ios13.6;net6.0-android31.0;net6.0-maccatalyst13.5</TargetFrameworks>-->
+		<!--<TargetFrameworks>net6.0-android;net6.0-ios;net6.0-maccatalyst</TargetFrameworks>-->
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows')) and '$(MSBuildRuntimeType)' == 'Full'">$(TargetFrameworks);net6.0-windows10.0.19041</TargetFrameworks>
 		<OutputType>Exe</OutputType>
 		<RootNamespace>Mapsui.Samples.Maui</RootNamespace>
@@ -50,7 +50,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiImage Remove="Resources\Images\dotnet_bot.svg" />
+	  <MauiFont Remove="Resources\Fonts\OpenSans-Regular.ttf" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Resources\appicon.svg" />
+	  <None Remove="Resources\appiconfg.svg" />
+	  <None Remove="Resources\Images\dotnet_bot.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <AndroidResource Include="Resources\Fonts\OpenSans-Regular.ttf" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -69,6 +79,14 @@
 	  <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\PolygonSample.cs" Link="PolygonSample.cs" />
 	  <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\PolylineSample.cs" Link="PolylineSample.cs" />
 	  <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\SnapshotSample.cs" Link="SnapshotSample.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiSplashScreen Include="Resources\appiconfg.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiIcon Include="Resources\appicon.svg" />
 	</ItemGroup>
 
   <ItemGroup>
