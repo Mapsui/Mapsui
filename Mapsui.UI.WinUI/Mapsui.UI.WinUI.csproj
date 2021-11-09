@@ -23,7 +23,7 @@
   <ItemGroup>
 	<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0-preview3" />
 	<PackageReference Include="Microsoft.Graphics.Win2D" Version="1.0.0.29-preview3" />
-    <PackageReference Include="SkiaSharp.Views.WinUI" Version="2.88.0-preview.152" />
+    <PackageReference Include="SkiaSharp.Views.WinUI" Version="2.88.0-preview.155" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +31,11 @@
     <ProjectReference Include="..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
     <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
   </ItemGroup>
+
+	<!-- Required - WinUI can't deploy in a multi-targeting environment -->
+	<PropertyGroup Condition="$(TargetFramework.Contains('-windows'))">
+		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+	</PropertyGroup>
 
   <Import Project="..\Mapsui.UI.Shared\Mapsui.UI.Shared.projitems" Label="Shared" />
 
