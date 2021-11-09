@@ -31,4 +31,14 @@
     <ProjectReference Include="..\..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
   </ItemGroup>
 
+  <PropertyGroup Condition="$(TargetFramework.Contains('-windows'))">
+	  <OutputType>WinExe</OutputType>
+	  <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+  </PropertyGroup>
+
+  <PropertyGroup>
+	<!-- Required - WinUI can't deploy in a multi-targeting environment -->
+	<RuntimeIdentifier Condition="$(TargetFramework.Contains('-windows'))">win-x64</RuntimeIdentifier>
+  </PropertyGroup>
+
 </Project>
