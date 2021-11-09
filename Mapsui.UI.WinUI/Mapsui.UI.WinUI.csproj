@@ -21,7 +21,7 @@
 	</Target>
 
   <ItemGroup>
-	<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0-preview3" />
+	<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0-preview3" GeneratePathProperty="true" />
 	<PackageReference Include="Microsoft.Graphics.Win2D" Version="1.0.0.29-preview3" />
     <PackageReference Include="SkiaSharp.Views.WinUI" Version="2.88.0-preview.155" />
   </ItemGroup>
@@ -33,9 +33,11 @@
   </ItemGroup>
 
 	<!-- Required - WinUI can't deploy in a multi-targeting environment -->
-	<PropertyGroup Condition="$(TargetFramework.Contains('-windows'))">
-		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
-	</PropertyGroup>
+	<Target Name="FixReferenceCopyLocalPaths" BeforeTargets="ResolvePackageAssets">
+	  <ItemGroup>
+		<ReferenceCopyLocalPaths Remove="$(PkgMicrosoft_WindowsAppSDK)\build\..\runtimes\lib\native\AnyCPU\Microsoft.WindowsAppRuntime.Bootstrap.dll"/>
+	  </ItemGroup>
+	</Target>
 
   <Import Project="..\Mapsui.UI.Shared\Mapsui.UI.Shared.projitems" Label="Shared" />
 
