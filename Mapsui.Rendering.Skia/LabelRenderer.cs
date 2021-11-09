@@ -259,10 +259,20 @@ namespace Mapsui.Rendering.Skia
                 var color = style.BackColor?.Color?.ToSkia(layerOpacity);
                 if (color.HasValue)
                 {
-                    var rounding = 6;
-                    using (var backgroundPaint = new SKPaint {Color = color.Value})
+                    var rounding = style.CornerRounding;
+                    using var backgroundPaint = new SKPaint { Color = color.Value };
+                    target.DrawRoundRect(rect, rounding, rounding, backgroundPaint);
+                    if (style.BorderThickness > 0 && 
+                        style.BorderColor != null &&
+                        style.BorderColor != Color.Transparent)
                     {
-                        target.DrawRoundRect(rect, rounding, rounding, backgroundPaint);
+                        using SKPaint borderPaint = new SKPaint 
+                        { 
+                            Color = style.BorderColor.ToSkia(), 
+                            Style = SKPaintStyle.Stroke,
+                            StrokeWidth = (float)style.BorderThickness
+                        };
+                        target.DrawRoundRect(rect, rounding, rounding, borderPaint);
                     }
                 }
             }

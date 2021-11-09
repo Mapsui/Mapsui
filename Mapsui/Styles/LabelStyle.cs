@@ -103,6 +103,9 @@ namespace Mapsui.Styles
             MaxWidth = 0;
             LineHeight = 1.0;
             WordWrap = LineBreakMode.NoWrap;
+            BorderColor = Color.Transparent;
+            BorderThickness = 1.0;
+            CornerRounding = 6;
         }
 
         public LabelStyle(LabelStyle labelStyle)
@@ -120,6 +123,9 @@ namespace Mapsui.Styles
             Text = labelStyle.Text;
             LabelColumn = labelStyle.LabelColumn;
             LabelMethod = labelStyle.LabelMethod;
+            BorderColor = labelStyle.BorderColor;
+            BorderThickness = labelStyle.BorderThickness;
+            CornerRounding = labelStyle.CornerRounding;
         }
 
         /// <summary>
@@ -136,6 +142,21 @@ namespace Mapsui.Styles
         /// The background color of the label. Set to transparent brush or null if background isn't needed
         /// </summary>
         public Brush BackColor { get; set; } // todo: rename
+
+        /// <summary>
+        /// The color of the border around the background.
+        /// </summary>
+        public Color BorderColor { get; set; } 
+
+        /// <summary>
+        /// The thickness of the border around the background.
+        /// </summary>
+        public double BorderThickness { get; set; }
+
+        /// <summary>
+        /// The radius of the oval used to round the corners of the background. See <see cref="SkiaSharp.SkCanvas.DrawRoundRect"/>.
+        /// </summary>
+        public int CornerRounding { get; set; }
 
         /// <summary>
         /// Creates a halo around the text

@@ -104,6 +104,37 @@ namespace Mapsui.Tests.Common.Maps
                         }
                     }
                 },
+                new Feature()
+                {
+                    Geometry = new Point(250, 150),
+                    Styles = new[]
+                    {
+                        new LabelStyle
+                        {
+                            Text = "Border",
+                            BackColor = new Brush(Color.Gray),
+                            ForeColor = Color.Black,
+                            BorderColor = Color.Blue,
+                            BorderThickness = 7, // Thick borders are needed to fail test
+                        }
+                    }
+                },
+                new Feature()
+                {
+                    Geometry = new Point(250, 50),
+                    Styles = new[]
+                    {
+                        new LabelStyle
+                        {
+                            Text = "Sharp corners",
+                            BackColor = new Brush(Color.Gray),
+                            ForeColor = Color.Black,
+                            BorderColor = Color.Black,
+                            BorderThickness = 7,
+                            CornerRounding = 0,
+                        }
+                    }
+                }
             };
             var provider = new MemoryProvider(features);
             return provider;
