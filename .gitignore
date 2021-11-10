@@ -38,6 +38,7 @@ Release/
 *.ncrunchproject
 
 *.ncrunchsolution
+*.projitems
 /Tests/Mapsui.Rendering.Skia.Tests/Resources/Images/Generated
 *.user
 *.cache
@@ -56,3 +57,4 @@ project.lock.json
 
 Samples/Mapsui.Samples.Droid/Resources/Resource.Designer.cs
 Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Android/Resources/Resource.designer.cs
+

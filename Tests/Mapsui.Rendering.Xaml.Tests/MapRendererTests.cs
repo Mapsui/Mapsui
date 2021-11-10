@@ -289,8 +289,8 @@ namespace Mapsui.Rendering.Xaml.Tests
             var map = LabelSample.CreateMap();
             var viewport = new Viewport
             {
-                Center = new Point(100, 100),
-                Width = 200,
+                Center = new Point(150, 100),
+                Width = 300,
                 Height = 200,
                 Resolution = 1
             };
