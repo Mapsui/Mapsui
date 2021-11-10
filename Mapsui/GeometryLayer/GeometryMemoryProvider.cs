@@ -74,16 +74,6 @@ namespace Mapsui.GeometryLayer
         /// <summary>
         /// Initializes a new instance of the MemoryProvider
         /// </summary>
-        /// <param name="geometries">Set of geometries that this data source should contain</param>
-        public GeometryMemoryProvider(IEnumerable<IGeometry> geometries)
-        {
-            Features = geometries.Select(g => new GeometryFeature { Geometry = g }).ToList();
-            _boundingBox = GetExtent(Features);
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the MemoryProvider
-        /// </summary>
         /// <param name="feature">Feature to be in this dataSource</param>
         public GeometryMemoryProvider(IGeometryFeature feature)
         {

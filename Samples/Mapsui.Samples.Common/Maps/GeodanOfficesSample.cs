@@ -1,4 +1,4 @@
-﻿using Mapsui.GeometryLayer;
+﻿using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
@@ -16,7 +16,7 @@ namespace Mapsui.Samples.Common.Maps
 
             var layer = new MemoryLayer
             {
-                DataSource = new GeometryMemoryProvider<IGeometryFeature>(new[] { geodanAmsterdam, geodanDenBosch }),
+                DataSource = new MemoryProvider<IFeature>(new[] { geodanAmsterdam, geodanDenBosch }.ToFeatures()),
                 Style = new SymbolStyle
                 {
                     BitmapId = BitmapRegistry.Instance.Register(imageStream),
