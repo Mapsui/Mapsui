@@ -226,7 +226,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = LabelSample.CreateMap();
-            var viewport = map.Extent.Multiply(2).ToViewport(200);
+            var viewport = map.Extent.Multiply(2).ToViewport(300);
             const string fileName = "labels.png";
 
             // act
