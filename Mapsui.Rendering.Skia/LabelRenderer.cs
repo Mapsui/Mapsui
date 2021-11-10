@@ -255,16 +255,22 @@ namespace Mapsui.Rendering.Skia
 
         private static void DrawBackground(LabelStyle style, SKRect rect, SKCanvas target, float layerOpacity)
         {
-            if (style.BackColor != null)
+            var color = style.BackColor.Color?.ToSkia(layerOpacity);
+            if (color.HasValue)
             {
-                var color = style.BackColor?.Color?.ToSkia(layerOpacity);
-                if (color.HasValue)
+                var rounding = style.CornerRounding;
+                using var backgroundPaint = new SKPaint { Color = color.Value };
+                target.DrawRoundRect(rect, rounding, rounding, backgroundPaint);
+                if (style.BorderThickness > 0 &&
+                    style.BorderColor != Color.Transparent)
                 {
-                    var rounding = 6;
-                    using (var backgroundPaint = new SKPaint { Color = color.Value })
+                    using SKPaint borderPaint = new SKPaint
                     {
-                        target.DrawRoundRect(rect, rounding, rounding, backgroundPaint);
-                    }
+                        Color = style.BorderColor.ToSkia(),
+                        Style = SKPaintStyle.Stroke,
+                        StrokeWidth = (float)style.BorderThickness
+                    };
+                    target.DrawRoundRect(rect, rounding, rounding, borderPaint);
                 }
             }
         }
