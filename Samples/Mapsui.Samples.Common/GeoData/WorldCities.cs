@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Mapsui.Geometries;
 using Mapsui.GeometryLayer;
-using Mapsui.Providers;
 
 namespace Mapsui.Samples.Common.Desktop.GeoData
 {
     public class WorldCities
     {
-        public static IEnumerable<IGeometryFeature> GenerateTop100()
+        public static IEnumerable<GeometryFeature> GenerateTop100()
         {
-            var c = new List<City>
+            var cities = new List<City>
             {
                 new City { CityName = "Tokyo", Lat = 35.69, Long = 139.75, Population = 22006300, Country = "Japan" },
                 new City { CityName = "Mumbai", Lat = 19.02, Long = 72.86, Population = 15834918, Country = "India" },
@@ -113,14 +113,14 @@ namespace Mapsui.Samples.Common.Desktop.GeoData
                 new City { CityName = "Durban", Lat = -29.87, Long = 30.98, Population = 2729000, Country = "South Africa" }
             };
 
-            var features = new List<IGeometryFeature>();
-            foreach (var item in c)
-            {
-                var geo = new Point(item.Long, item.Lat);
-                features.Add(new GeometryFeature { Geometry = geo, ["NAME"] = item.CityName, ["COUNTRY"] = item.Country, ["POPULATION"] = item.Population });
-            }
-
-            return features;
+            return cities
+                .Select(item => new GeometryFeature
+                {
+                    Geometry = new Point(item.Long, item.Lat),
+                    ["NAME"] = item.CityName, ["COUNTRY"] = item.Country,
+                    ["POPULATION"] = item.Population
+                })
+                .ToList();
         }
 
         public class City
