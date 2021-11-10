@@ -40,7 +40,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new Layer("Style on Layer")
             {
-                DataSource = new GeometryMemoryProvider<IGeometryFeature>(RandomPointGenerator.GenerateRandomPoints(envelope, count).Select(p => p.ToPoint())),
+                DataSource = new MemoryProvider<PointFeature>(RandomPointGenerator.GenerateRandomPoints(envelope, count).ToFeatures()),
                 Style = CreateBitmapStyle("Mapsui.Samples.Common.Images.ic_place_black_24dp.png")
             };
         }
@@ -51,7 +51,7 @@ namespace Mapsui.Samples.Common.Maps
 
             return new Layer("Style on feature")
             {
-                DataSource = new GeometryMemoryProvider<IGeometryFeature>(GenerateRandomFeatures(envelope, count, style)),
+                DataSource = new MemoryProvider<IFeature>(GenerateRandomFeatures(envelope, count, style)),
                 Style = null
             };
         }

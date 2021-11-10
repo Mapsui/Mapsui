@@ -48,7 +48,7 @@ namespace Mapsui.Samples.Common.Maps
             {
                 Name = "Async Layer",
                 IsMapInfoLayer = true,
-                DataSource = new GeometryMemoryProvider<IGeometryFeature>(GetCitiesFromEmbeddedResource()),
+                DataSource = new MemoryProvider<IFeature>(GetCitiesFromEmbeddedResource()),
                 Style = CreateBitmapStyle()
             };
         }

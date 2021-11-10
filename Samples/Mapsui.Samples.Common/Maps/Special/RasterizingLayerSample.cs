@@ -6,7 +6,6 @@ using Mapsui.Layers.Tiling;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.UI;
-using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -41,7 +40,7 @@ namespace Mapsui.Samples.Common.Maps
                 };
                 features.Add(feature);
             }
-            var provider = new GeometryMemoryProvider<IGeometryFeature>(features);
+            var provider = new MemoryProvider<IFeature>(features);
 
             return new MemoryLayer
             {
