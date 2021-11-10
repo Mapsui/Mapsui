@@ -43,7 +43,7 @@ namespace Mapsui.Samples.Common.Maps
                 feature
             };
 
-            layer.DataSource = new GeometryMemoryProvider<IGeometryFeature>(features);
+            layer.DataSource = new MemoryProvider<IFeature>(features);
 
             PeriodicTask.Run(() => {
                 polygon.ExteriorRing = new LinearRing(GenerateRandomPoints(envelope, 3));

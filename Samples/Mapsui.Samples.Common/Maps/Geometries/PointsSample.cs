@@ -43,7 +43,7 @@ namespace Mapsui.Samples.Common.Maps
             {
                 Name = "Points",
                 IsMapInfoLayer = true,
-                DataSource = new GeometryMemoryProvider<IGeometryFeature>(GetCitiesFromEmbeddedResource()),
+                DataSource = new MemoryProvider<IFeature>(GetCitiesFromEmbeddedResource()),
                 Style = CreateBitmapStyle()
             };
         }

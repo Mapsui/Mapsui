@@ -53,7 +53,7 @@ namespace Mapsui.Samples.Common.Maps.Projection
                 new GeometryFeature {Geometry = GeometryFromWKT.Parse(WktOfAmsterdam)}
             };
 
-            var memoryProvider = new GeometryMemoryProvider<GeometryFeature>(features)
+            var memoryProvider = new MemoryProvider<GeometryFeature>(features)
             {
                 CRS = "EPSG:4326" // The DataSource CRS needs to be set
             };

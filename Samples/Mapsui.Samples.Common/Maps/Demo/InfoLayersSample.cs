@@ -39,8 +39,8 @@ namespace Mapsui.Samples.Common.Maps
 
         private static ILayer CreatePolygonLayer()
         {
-            var features = new List<IGeometryFeature> { CreatePolygonFeature(), CreateMultiPolygonFeature() };
-            var provider = new GeometryMemoryProvider<IGeometryFeature>(features);
+            var features = new List<IFeature> { CreatePolygonFeature(), CreateMultiPolygonFeature() };
+            var provider = new MemoryProvider<IFeature>(features);
 
             var layer = new MemoryLayer
             {

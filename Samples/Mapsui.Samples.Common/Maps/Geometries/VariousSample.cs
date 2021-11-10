@@ -51,7 +51,7 @@ namespace Mapsui.Samples.Common.Maps
 
             return new Layer("Style on feature")
             {
-                DataSource = new GeometryMemoryProvider<IGeometryFeature>(GenerateRandomFeatures(envelope, count, style)),
+                DataSource = new MemoryProvider<IFeature>(GenerateRandomFeatures(envelope, count, style)),
                 Style = null
             };
         }

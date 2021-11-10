@@ -18,10 +18,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Mapsui.Extensions;
-using Mapsui.Geometries;
-using Mapsui.Geometries.WellKnownBinary;
-using Mapsui.Geometries.WellKnownText;
 using Mapsui.Layers;
 using Mapsui.Providers;
 
@@ -68,16 +64,6 @@ namespace Mapsui.GeometryLayer
         public GeometryMemoryProvider()
         {
             Features = new List<IGeometryFeature>();
-            _boundingBox = GetExtent(Features);
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the MemoryProvider
-        /// </summary>
-        /// <param name="features">Features to be included in this dataSource</param>
-        public GeometryMemoryProvider(IEnumerable<IGeometryFeature> features)
-        {
-            Features = features.ToList();
             _boundingBox = GetExtent(Features);
         }
 

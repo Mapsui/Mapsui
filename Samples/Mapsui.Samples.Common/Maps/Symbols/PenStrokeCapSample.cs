@@ -35,12 +35,12 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new Layer("Polygons")
             {
-                DataSource = new GeometryMemoryProvider<IGeometryFeature>(CreatePolygon()),
+                DataSource = new MemoryProvider<IFeature>(CreatePolygon()),
                 Style = null
             };
         }
 
-        private static IEnumerable<IGeometryFeature> CreatePolygon()
+        private static IEnumerable<IFeature> CreatePolygon()
         {
             return new[]
             {

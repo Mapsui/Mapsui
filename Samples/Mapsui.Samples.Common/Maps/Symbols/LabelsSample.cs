@@ -47,7 +47,7 @@ namespace Mapsui.Samples.Common.Maps
                 CreateFeatureWithCharacterWrap(),
             };
 
-            var memoryProvider = new GeometryMemoryProvider<IGeometryFeature>(features);
+            var memoryProvider = new MemoryProvider<IFeature>(features);
 
             return new MemoryLayer { Name = "Points with labels", DataSource = memoryProvider };
         }

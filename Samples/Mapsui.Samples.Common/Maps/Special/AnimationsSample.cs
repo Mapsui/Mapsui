@@ -46,7 +46,7 @@ namespace Mapsui.Samples.Common.Maps
 
             return new Layer("Points")
             {
-                DataSource = new GeometryMemoryProvider<IGeometryFeature>(CreatePoints(style)),
+                DataSource = new MemoryProvider<IFeature>(CreatePoints(style)),
             };
         }
 

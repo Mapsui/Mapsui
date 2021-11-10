@@ -44,7 +44,7 @@ namespace Mapsui.Samples.Common.Maps.Projection
         {
             var features = WorldCities.GenerateTop100();
 
-            var memoryProvider = new GeometryMemoryProvider<GeometryFeature>(features)
+            var memoryProvider = new MemoryProvider<GeometryFeature>(features)
             {
                 CRS = "EPSG:4326" // The DataSource CRS needs to be set
             };

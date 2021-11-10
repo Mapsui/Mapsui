@@ -53,10 +53,10 @@ namespace Mapsui.Samples.Common.Maps
             };
         }
 
-        public static GeometryMemoryProvider<IGeometryFeature> CreateMemoryProviderWithDiverseSymbols(MRect envelope, int count = 100)
+        public static MemoryProvider<IFeature> CreateMemoryProviderWithDiverseSymbols(MRect envelope, int count = 100)
         {
             var points = RandomPointGenerator.GenerateRandomPoints(envelope, count).Select(p => p.ToPoint());
-            return new GeometryMemoryProvider<IGeometryFeature>(CreateAtlasFeatures(points));
+            return new MemoryProvider<IFeature>(CreateAtlasFeatures(points));
         }
 
         private static IEnumerable<IGeometryFeature> CreateAtlasFeatures(IEnumerable<IGeometry> randomPoints)
