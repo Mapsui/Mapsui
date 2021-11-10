@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Mapsui.Geometries;
-using Mapsui.GeometryLayer;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Layers.Tiling;
 using Mapsui.Projection;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.UI;
-using Mapsui.Utilities;
 using Newtonsoft.Json;
 using SkiaSharp;
 
@@ -48,12 +46,12 @@ namespace Mapsui.Samples.Common.Maps.Callouts
             {
                 Name = "Points",
                 IsMapInfoLayer = true,
-                DataSource = new GeometryMemoryProvider<IGeometryFeature>(GetCitiesFromEmbeddedResource()),
+                DataSource = new MemoryProvider<IFeature>(GetCitiesFromEmbeddedResource()),
                 Style = new VectorStyle()
             };
         }
 
-        private static IEnumerable<IGeometryFeature> GetCitiesFromEmbeddedResource()
+        private static IEnumerable<IFeature> GetCitiesFromEmbeddedResource()
         {
             const string path = "Mapsui.Samples.Common.EmbeddedResources.congo.json";
             var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
@@ -61,17 +59,13 @@ namespace Mapsui.Samples.Common.Maps.Callouts
             var cities = DeserializeFromStream<City>(stream);
 
             return cities.Select(c => {
-                var feature = new GeometryFeature();
-                var point = SphericalMercator.FromLonLat(c.Lng, c.Lat);
-                feature.Geometry = new Point(point.x, point.y);
+                var feature = new PointFeature(SphericalMercator.FromLonLat(c.Lng, c.Lat).ToMPoint());
                 feature["name"] = c.Name;
                 feature["country"] = c.Country;
-
                 var callbackImage = CreateCallbackImage(c);
                 var bitmapId = BitmapRegistry.Instance.Register(callbackImage);
                 var calloutStyle = CreateCalloutStyle(bitmapId);
                 feature.Styles.Add(calloutStyle);
-
                 return feature;
             });
         }

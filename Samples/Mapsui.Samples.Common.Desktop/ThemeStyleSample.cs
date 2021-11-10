@@ -88,14 +88,13 @@ namespace Mapsui.Samples.Common.Desktop
         {
             var features = WorldCities.GenerateTop100();
 
-            var layer = new MemoryLayer
+            return new MemoryLayer
             {
                 DataSource = new GeometryMemoryProvider<IFeature>(features),
                 Style = CreateCityStyle(),
                 Name = "Points",
                 IsMapInfoLayer = true
             };
-            return layer;
         }
 
         private static SymbolStyle CreateCityStyle()
