@@ -7,7 +7,6 @@ using Mapsui.Layers.Tiling;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.UI;
-using Mapsui.Utilities;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Local
 
@@ -39,7 +38,7 @@ namespace Mapsui.Samples.Common.Maps
             {
                 Name = "Points",
                 IsMapInfoLayer = true,
-                DataSource = new GeometryMemoryProvider<IGeometryFeature>(GetFeature())
+                DataSource = new MemoryProvider<IFeature>(GetFeature())
             };
         }
 

@@ -3,6 +3,7 @@ using Mapsui.Geometries;
 using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Layers.Tiling;
+using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.UI;
 
@@ -31,7 +32,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new Layer("Polygons")
             {
-                DataSource = new GeometryMemoryProvider<IGeometryFeature>(CreatePolygon().ToFeature()),
+                DataSource = new MemoryProvider<IFeature>(CreatePolygon().ToFeature()),
                 Style = new VectorStyle
                 {
                     Fill = new Brush(new Color(150, 150, 30)),
@@ -50,7 +51,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new Layer("Polygons")
             {
-                DataSource = new GeometryMemoryProvider<IGeometryFeature>(CreateLineString().ToFeature()),
+                DataSource = new MemoryProvider<IFeature>(CreateLineString().ToFeature()),
                 Style = new VectorStyle
                 {
                     Line = new Pen

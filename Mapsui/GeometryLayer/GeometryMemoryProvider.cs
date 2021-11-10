@@ -74,38 +74,11 @@ namespace Mapsui.GeometryLayer
         /// <summary>
         /// Initializes a new instance of the MemoryProvider
         /// </summary>
-        /// <param name="feature">Feature to be in this dataSource</param>
-        public GeometryMemoryProvider(IGeometryFeature feature)
-        {
-            Features = new List<IGeometryFeature> { feature };
-            _boundingBox = GetExtent(Features);
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the MemoryProvider
-        /// </summary>
-        /// <param name="wellKnownTextGeometry"><see cref="Geometry"/> as Well-known Text to be included in this data source</param>
-        public GeometryMemoryProvider(string wellKnownTextGeometry)
-            : this(GeometryFromWKT.Parse(wellKnownTextGeometry).ToFeature())
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the MemoryProvider
-        /// </summary>
         /// <param name="features">Features to be included in this dataSource</param>
         public GeometryMemoryProvider(IEnumerable<IGeometryFeature> features)
         {
             Features = features.ToList();
             _boundingBox = GetExtent(Features);
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the MemoryProvider
-        /// </summary>
-        /// <param name="wellKnownBinaryGeometry"><see cref="Geometry"/> as Well-known Binary to be included in this data source</param>
-        public GeometryMemoryProvider(byte[] wellKnownBinaryGeometry) : this(GeometryFromWKB.Parse(wellKnownBinaryGeometry).ToFeature())
-        {
         }
 
         public virtual IEnumerable<T> GetFeatures(FetchInfo fetchInfo)

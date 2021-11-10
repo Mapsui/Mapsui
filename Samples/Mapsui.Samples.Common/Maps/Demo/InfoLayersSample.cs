@@ -58,7 +58,7 @@ namespace Mapsui.Samples.Common.Maps
             return new MemoryLayer
             {
                 Name = LineLayerName,
-                DataSource = new GeometryMemoryProvider<IGeometryFeature>(CreateLineFeature()),
+                DataSource = new MemoryProvider<IFeature>(CreateLineFeature()),
                 Style = null,
                 IsMapInfoLayer = true
             };
