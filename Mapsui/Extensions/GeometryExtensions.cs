@@ -1,6 +1,5 @@
 using Mapsui.Geometries;
 using Mapsui.GeometryLayer;
-using Mapsui.Layers;
 
 namespace Mapsui.Extensions
 {
@@ -11,7 +10,7 @@ namespace Mapsui.Extensions
             return Geometry.GeomFromWKB(original.AsBinary());
         }
 
-        public static IFeature ToFeature(this IGeometry geometry)
+        public static GeometryFeature ToFeature(this IGeometry geometry)
         {
             return new GeometryFeature(geometry);
         }

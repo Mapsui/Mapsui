@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.Geometries.WellKnownBinary;
 using Mapsui.Geometries.WellKnownText;
@@ -95,7 +96,7 @@ namespace Mapsui.GeometryLayer
         /// </summary>
         /// <param name="wellKnownTextGeometry"><see cref="Geometry"/> as Well-known Text to be included in this data source</param>
         public GeometryMemoryProvider(string wellKnownTextGeometry)
-            : this(GeometryFromWKT.Parse(wellKnownTextGeometry))
+            : this(GeometryFromWKT.Parse(wellKnownTextGeometry).ToFeature())
         {
         }
 
@@ -112,24 +113,8 @@ namespace Mapsui.GeometryLayer
         /// <summary>
         /// Initializes a new instance of the MemoryProvider
         /// </summary>
-        /// <param name="geometry">Geometry to be in this dataSource</param>
-        public GeometryMemoryProvider(Geometry geometry)
-        {
-            Features = new List<IGeometryFeature>
-            {
-                new GeometryFeature
-                {
-                    Geometry = geometry
-                }
-            };
-            _boundingBox = GetExtent(Features);
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the MemoryProvider
-        /// </summary>
         /// <param name="wellKnownBinaryGeometry"><see cref="Geometry"/> as Well-known Binary to be included in this data source</param>
-        public GeometryMemoryProvider(byte[] wellKnownBinaryGeometry) : this(GeometryFromWKB.Parse(wellKnownBinaryGeometry))
+        public GeometryMemoryProvider(byte[] wellKnownBinaryGeometry) : this(GeometryFromWKB.Parse(wellKnownBinaryGeometry).ToFeature())
         {
         }
 
@@ -144,7 +129,7 @@ namespace Mapsui.GeometryLayer
             // Use a larger extent so that symbols partially outside of the extent are included
             var biggerBox = fetchInfo.Extent.Grow(fetchInfo.Resolution * SymbolSize * 0.5);
             var grownFeatures = features.Where(f => f != null && f.Extent.Intersects(biggerBox));
-            return (IEnumerable<T>)grownFeatures.ToList(); // Why do I need to cast if T is constrained to IFeature?
+            return grownFeatures.Cast<T>().ToList(); // Why do I need to cast if T is constrained to IFeature?
         }
 
         /// <summary>
