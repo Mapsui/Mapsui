@@ -42,10 +42,18 @@ namespace Mapsui.Samples.Common.Maps
             };
         }
 
-        private static IGeometryFeature GetFeature()
+        private static IFeature GetFeature()
         {
+            var lineString = CreateLineStringWithManyVertices();
             var feature = new GeometryFeature();
+            AddStyles(feature);
+            feature.Geometry = lineString;
+            feature["Name"] = $"LineString with {lineString.Vertices.Count()} vertices";
+            return feature;
+        }
 
+        private static LineString CreateLineStringWithManyVertices()
+        {
             var startPoint = new Point(1623484, 7652571);
 
             var points = new List<Point>();
@@ -55,13 +63,10 @@ namespace Mapsui.Samples.Common.Maps
                 points.Add(new Point(startPoint.X + i, startPoint.Y + i));
             }
 
-            AddStyles(feature);
-            feature.Geometry = new LineString(points);
-            feature["Name"] = $"LineString with {points.Count()} vertices";
-            return feature;
+            return new LineString(points);
         }
 
-        private static void AddStyles(GeometryFeature feature)
+        private static void AddStyles(IFeature feature)
         {
             // route outline style
             var vsout = new VectorStyle
