@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Mapsui.Extensions;
-using Mapsui.Geometries;
-using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Layers.Tiling;
 using Mapsui.Providers;
@@ -28,10 +26,10 @@ namespace Mapsui.Samples.Common.Maps
         public static Random Random = new();
         public bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, IStyle style, ISymbolCache symbolCache)
         {
-            if (!(feature is GeometryFeature geometryFeature)) return false;
-            if (!(geometryFeature.Geometry is Point worldPoint)) return false;
+            if (!(feature is PointFeature pointFeature)) return false;
+            var worldPoint = pointFeature.Point;
 
-            var screenPoint = viewport.WorldToScreen(worldPoint.ToMPoint());
+            var screenPoint = viewport.WorldToScreen(worldPoint);
             var color = new SKColor((byte)Random.Next(0, 256), (byte)Random.Next(0, 256), (byte)Random.Next(0, 256), (byte)(256.0 * layer.Opacity * style.Opacity));
             var colored = new SKPaint { Color = color, IsAntialias = true };
             var black = new SKPaint { Color = SKColors.Black, IsAntialias = true };
@@ -98,7 +96,7 @@ namespace Mapsui.Samples.Common.Maps
             var counter = 1;
             foreach (var point in randomPoints)
             {
-                var feature = new GeometryFeature { Geometry = point.ToPoint() };
+                var feature = new PointFeature(point);
                 feature["Label"] = $"I'm no. {counter++} and, \nautsch, you hit me!";
                 feature.Styles.Add(style); // Here the custom style is set!
                 feature.Styles.Add(SmalleDot());
