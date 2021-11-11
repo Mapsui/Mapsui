@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
-using Mapsui.Extensions;
-using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Layers.Tiling;
 using Mapsui.Logging;
@@ -11,7 +10,6 @@ using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
 using Mapsui.UI;
-using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -52,18 +50,16 @@ namespace Mapsui.Samples.Common.Maps
             return new MemoryProvider<IFeature>(CreateSvgFeatures(RandomPointGenerator.GenerateRandomPoints(envelope, count)));
         }
 
-        private static IEnumerable<IGeometryFeature> CreateSvgFeatures(IEnumerable<MPoint> randomPoints)
+        private static IEnumerable<IFeature> CreateSvgFeatures(IEnumerable<MPoint> randomPoints)
         {
-            var features = new List<IGeometryFeature>();
             var counter = 0;
-            foreach (var point in randomPoints)
-            {
-                var feature = new GeometryFeature { Geometry = point.ToPoint(), ["Label"] = counter.ToString() };
+
+            return randomPoints.Select(p => {
+                var feature = new PointFeature(p) { ["Label"] = counter.ToString() };
                 feature.Styles.Add(CreateSvgStyle("Mapsui.Samples.Common.Images.Pin.svg", 0.5));
-                features.Add(feature);
                 counter++;
-            }
-            return features;
+                return feature;
+            });
         }
 
         private static SymbolStyle CreateSvgStyle(string embeddedResourcePath, double scale)
