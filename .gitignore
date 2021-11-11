@@ -38,6 +38,7 @@ Release/
 *.ncrunchproject
 
 *.ncrunchsolution
+*.projitems
 /Tests/Mapsui.Rendering.Skia.Tests/Resources/Images/Generated
 *.user
 *.cache

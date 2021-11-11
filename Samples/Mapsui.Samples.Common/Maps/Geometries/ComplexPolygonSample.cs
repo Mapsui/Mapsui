@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.GeometryLayer;
 using Mapsui.Layers;
@@ -35,7 +36,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new Layer("Polygons")
             {
-                DataSource = new GeometryMemoryProvider<IGeometryFeature>(CreatePolygon()),
+                DataSource = new MemoryProvider<IFeature>(CreatePolygon().ToFeatures()),
                 Style = new VectorStyle
                 {
                     Fill = new Brush(new Color(150, 150, 30, 128)),

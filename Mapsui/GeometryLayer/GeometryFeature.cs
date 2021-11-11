@@ -14,6 +14,11 @@ namespace Mapsui.GeometryLayer
         {
         }
 
+        public GeometryFeature(IGeometry geometry)
+        {
+            Geometry = geometry;
+        }
+
         public GeometryFeature(IGeometryFeature feature)
         {
             Geometry = feature.Geometry;

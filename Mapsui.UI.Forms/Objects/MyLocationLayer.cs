@@ -179,7 +179,7 @@ namespace Mapsui.UI.Objects
                 Opacity = 1,
             });
 
-            DataSource = new GeometryMemoryProvider<IGeometryFeature>(new List<IGeometryFeature> { featureDir, feature });
+            DataSource = new MemoryProvider<IFeature>(new List<IFeature> { featureDir, feature });
             Style = null;
         }
 
