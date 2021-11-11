@@ -2,16 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Mapsui.Extensions;
-using Mapsui.Geometries;
-using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Layers.Tiling;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
 using Mapsui.UI;
-using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -55,27 +51,24 @@ namespace Mapsui.Samples.Common.Maps
 
         public static MemoryProvider<IFeature> CreateMemoryProviderWithDiverseSymbols(MRect envelope, int count = 100)
         {
-            var points = RandomPointGenerator.GenerateRandomPoints(envelope, count).Select(p => p.ToPoint());
+            var points = RandomPointGenerator.GenerateRandomPoints(envelope, count);
             return new MemoryProvider<IFeature>(CreateAtlasFeatures(points));
         }
 
-        private static IEnumerable<IGeometryFeature> CreateAtlasFeatures(IEnumerable<IGeometry> randomPoints)
+        private static IEnumerable<IFeature> CreateAtlasFeatures(IEnumerable<MPoint> randomPoints)
         {
-            var features = new List<IGeometryFeature>();
             var counter = 0;
-            foreach (var point in randomPoints)
-            {
-                var feature = new GeometryFeature { Geometry = point, ["Label"] = counter.ToString() };
+
+            return randomPoints.Select(p => {
+                var feature = new PointFeature(p) { ["Label"] = counter.ToString() };
 
                 var x = 0 + Random.Next(0, 12) * 21;
                 var y = 64 + Random.Next(0, 6) * 21;
                 var bitmapId = BitmapRegistry.Instance.Register(new Sprite(_atlasBitmapId, x, y, 21, 21, 1));
                 feature.Styles.Add(new SymbolStyle { BitmapId = bitmapId });
-
-                features.Add(feature);
                 counter++;
-            }
-            return features;
+                return feature;
+            }).ToList();
         }
     }
 }
