@@ -11,9 +11,6 @@ namespace Mapsui.Samples.Maui
     {
         public static MauiApp CreateMauiApp()
         {
-            // GPU does not work currently on MAUI
-            MapControl.UseGPU = false;
-
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseSkiaSharp(true)
