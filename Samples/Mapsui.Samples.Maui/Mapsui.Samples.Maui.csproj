@@ -47,21 +47,7 @@
 		<!-- Required - WinUI does not yet have buildTransitive for everything -->
         <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0-preview3" />
 		<PackageReference Include="Microsoft.Graphics.Win2D" Version="1.0.0.29-preview3" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiFont Remove="Resources\Fonts\OpenSans-Regular.ttf" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Remove="Resources\appicon.svg" />
-	  <None Remove="Resources\appiconfg.svg" />
-	  <None Remove="Resources\Images\dotnet_bot.svg" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <AndroidResource Include="Resources\Fonts\OpenSans-Regular.ttf" />
-	</ItemGroup>
+	</ItemGroup>	
 
 	<ItemGroup>
     <PackageReference Include="SkiaSharp" Version="2.88.0-preview.155" />
@@ -82,11 +68,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiSplashScreen Include="Resources\appiconfg.svg" />
+		<MauiSplashScreen Include="Resources\appiconfg.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiIcon Include="Resources\appicon.svg" />
+		<MauiIcon Include="Resources\appicon.svg" />
 	</ItemGroup>
 
   <ItemGroup>
@@ -96,26 +82,6 @@
 	  <ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />
 	  <ProjectReference Include="..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
 	  <ProjectReference Include="..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Compile Update="MainPageLarge.xaml.cs">
-	    <DependentUpon>%(Filename)</DependentUpon>
-	  </Compile>
-	  <Compile Update="MapPage.xaml.cs">
-	    <DependentUpon>%(Filename)</DependentUpon>
-	  </Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiXaml Update="MainPageLarge.xaml">
-	    <SubType>Designer</SubType>
-	    <Generator></Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="MapPage.xaml">
-	    <SubType>Designer</SubType>
-	    <Generator></Generator>
-	  </MauiXaml>
 	</ItemGroup>
 
 	<!-- Required - WinUI can't deploy in a multi-targeting environment -->
