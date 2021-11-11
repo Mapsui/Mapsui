@@ -30,14 +30,10 @@ namespace Mapsui.Samples.Common.Maps
         private static MemoryLayer CreateRandomPointLayer()
         {
             var rnd = new Random(3462); // Fix the random seed so the features don't move after a refresh
-            var features = new List<IGeometryFeature>();
+            var features = new List<IFeature>();
             for (var i = 0; i < 100; i++)
             {
-                var feature = new GeometryFeature
-                {
-                    Geometry = new Geometries.Point(rnd.Next(0, 5000000), rnd.Next(0, 5000000))
-                };
-                features.Add(feature);
+                features.Add(new PointFeature(new MPoint(rnd.Next(0, 5000000), rnd.Next(0, 5000000))));
             }
             var provider = new MemoryProvider<IFeature>(features);
 
