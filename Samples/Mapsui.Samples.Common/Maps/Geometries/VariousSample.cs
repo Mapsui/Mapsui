@@ -2,14 +2,12 @@
 using System.Linq;
 using System.Reflection;
 using Mapsui.Extensions;
-using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Layers.Tiling;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
 using Mapsui.UI;
-using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -56,15 +54,10 @@ namespace Mapsui.Samples.Common.Maps
             };
         }
 
-        private static IEnumerable<IGeometryFeature> GenerateRandomFeatures(MRect envelope, int count, IStyle style)
+        private static IEnumerable<IFeature> GenerateRandomFeatures(MRect envelope, int count, IStyle style)
         {
-            var result = new List<GeometryFeature>();
-            var points = RandomPointGenerator.GenerateRandomPoints(envelope, count, 123);
-            foreach (var point in points)
-            {
-                result.Add(new GeometryFeature { Geometry = point.ToPoint(), Styles = new List<IStyle> { style } });
-            }
-            return result;
+            return RandomPointGenerator.GenerateRandomPoints(envelope, count, 123)
+                .Select(p => new PointFeature(p) { Styles = new List<IStyle> { style } }).ToList();
         }
 
         private static SymbolStyle CreateBitmapStyle(string embeddedResourcePath)
