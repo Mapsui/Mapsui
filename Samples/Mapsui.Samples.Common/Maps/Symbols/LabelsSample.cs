@@ -6,7 +6,6 @@ using Mapsui.Layers.Tiling;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.UI;
-using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -30,7 +29,7 @@ namespace Mapsui.Samples.Common.Maps
 
         public static ILayer CreateLayer()
         {
-            var features = new List<IGeometryFeature>
+            var features = new List<IFeature>
             {
                 CreateFeatureWithDefaultStyle(),
                 CreateFeatureWithRightAlignedStyle(),
@@ -52,23 +51,23 @@ namespace Mapsui.Samples.Common.Maps
             return new MemoryLayer { Name = "Points with labels", DataSource = memoryProvider };
         }
 
-        private static GeometryFeature CreateFeatureWithDefaultStyle()
+        private static IFeature CreateFeatureWithDefaultStyle()
         {
-            var featureWithDefaultStyle = new GeometryFeature { Geometry = new Point(0, 0) };
+            var featureWithDefaultStyle = new PointFeature(new MPoint(0, 0));
             featureWithDefaultStyle.Styles.Add(new LabelStyle { Text = "Default Label" });
             return featureWithDefaultStyle;
         }
 
-        private static GeometryFeature CreateFeatureWithColors()
+        private static IFeature CreateFeatureWithColors()
         {
-            var featureWithColors = new GeometryFeature { Geometry = new Point(0, -7000000) };
+            var featureWithColors = new PointFeature(new MPoint(0, -7000000));
             featureWithColors.Styles.Add(CreateColoredLabelStyle());
             return featureWithColors;
         }
 
-        private static GeometryFeature CreateFeatureWithBottomAlignedStyle()
+        private static IFeature CreateFeatureWithBottomAlignedStyle()
         {
-            var featureWithBottomAlignedStyle = new GeometryFeature { Geometry = new Point(0, -5000000) };
+            var featureWithBottomAlignedStyle = new PointFeature(new MPoint(0, -5000000));
             featureWithBottomAlignedStyle.Styles.Add(new LabelStyle
             {
                 Text = "Bottom\nAligned",
@@ -78,9 +77,9 @@ namespace Mapsui.Samples.Common.Maps
             return featureWithBottomAlignedStyle;
         }
 
-        private static GeometryFeature CreateFeatureWithRightAlignedStyle()
+        private static IFeature CreateFeatureWithRightAlignedStyle()
         {
-            var featureWithRightAlignedStyle = new GeometryFeature { Geometry = new Point(0, -2000000) };
+            var featureWithRightAlignedStyle = new PointFeature(new MPoint(0, -2000000));
             featureWithRightAlignedStyle.Styles.Add(new LabelStyle
             {
                 Text = "Right Aligned",
@@ -90,7 +89,7 @@ namespace Mapsui.Samples.Common.Maps
             return featureWithRightAlignedStyle;
         }
 
-        private static GeometryFeature CreatePolygonWithLabel()
+        private static IFeature CreatePolygonWithLabel()
         {
             var polygon = new GeometryFeature
             {
@@ -116,9 +115,9 @@ namespace Mapsui.Samples.Common.Maps
             };
         }
 
-        private static IGeometryFeature CreateFeatureWithTailTruncation()
+        private static IFeature CreateFeatureWithTailTruncation()
         {
-            var featureWithColors = new GeometryFeature { Geometry = new Point(8000000, 2000000) };
+            var featureWithColors = new PointFeature(new MPoint(8000000, 2000000));
             featureWithColors.Styles.Add(new LabelStyle
             {
                 Text = "Long line break mode test",
@@ -133,9 +132,9 @@ namespace Mapsui.Samples.Common.Maps
             return featureWithColors;
         }
 
-        private static IGeometryFeature CreateFeatureWithHeadTruncation()
+        private static IFeature CreateFeatureWithHeadTruncation()
         {
-            var featureWithColors = new GeometryFeature { Geometry = new Point(-8000000, 2000000) };
+            var featureWithColors = new PointFeature(new MPoint(-8000000, 2000000));
             featureWithColors.Styles.Add(new LabelStyle
             {
                 Text = "Long line break mode test",
@@ -150,9 +149,9 @@ namespace Mapsui.Samples.Common.Maps
             return featureWithColors;
         }
 
-        private static IGeometryFeature CreateFeatureWithMiddleTruncation()
+        private static IFeature CreateFeatureWithMiddleTruncation()
         {
-            var featureWithColors = new GeometryFeature { Geometry = new Point(0, 2000000) };
+            var featureWithColors = new PointFeature(new MPoint(0, 2000000));
             featureWithColors.Styles.Add(new LabelStyle
             {
                 Text = "Long line break mode test",
@@ -167,9 +166,9 @@ namespace Mapsui.Samples.Common.Maps
             return featureWithColors;
         }
 
-        private static IGeometryFeature CreateFeatureWithWordWrapLeft()
+        private static IFeature CreateFeatureWithWordWrapLeft()
         {
-            var featureWithColors = new GeometryFeature { Geometry = new Point(-8000000, 6000000) };
+            var featureWithColors = new PointFeature(new MPoint(-8000000, 6000000));
             featureWithColors.Styles.Add(new LabelStyle
             {
                 Text = "Long line break mode test",
@@ -184,9 +183,9 @@ namespace Mapsui.Samples.Common.Maps
             return featureWithColors;
         }
 
-        private static IGeometryFeature CreateFeatureWithWordWrapCenter()
+        private static IFeature CreateFeatureWithWordWrapCenter()
         {
-            var featureWithColors = new GeometryFeature { Geometry = new Point(0, 6000000) };
+            var featureWithColors = new PointFeature(new MPoint(0, 6000000));
             featureWithColors.Styles.Add(new LabelStyle
             {
                 Text = "Long line break mode test",
@@ -202,9 +201,9 @@ namespace Mapsui.Samples.Common.Maps
             return featureWithColors;
         }
 
-        private static IGeometryFeature CreateFeatureWithWordWrapRight()
+        private static IFeature CreateFeatureWithWordWrapRight()
         {
-            var featureWithColors = new GeometryFeature { Geometry = new Point(8000000, 6000000) };
+            var featureWithColors = new PointFeature(new MPoint(8000000, 6000000));
             featureWithColors.Styles.Add(new LabelStyle
             {
                 Text = "Long line break mode test",
@@ -218,9 +217,9 @@ namespace Mapsui.Samples.Common.Maps
             return featureWithColors;
         }
 
-        private static IGeometryFeature CreateFeatureWithCharacterWrap()
+        private static IFeature CreateFeatureWithCharacterWrap()
         {
-            var featureWithColors = new GeometryFeature { Geometry = new Point(0, 10000000) };
+            var featureWithColors = new PointFeature(new MPoint(0, 10000000));
             featureWithColors.Styles.Add(new LabelStyle
             {
                 Text = "Long line break mode test",
@@ -234,9 +233,9 @@ namespace Mapsui.Samples.Common.Maps
             return featureWithColors;
         }
 
-        private static IGeometryFeature CreateFeatureWithHalo()
+        private static IFeature CreateFeatureWithHalo()
         {
-            var featureWithColors = new GeometryFeature { Geometry = new Point(0, -12000000) };
+            var featureWithColors = new PointFeature(new MPoint(0, -12000000));
             featureWithColors.Styles.Add(new LabelStyle
             {
                 Text = "Halo Halo Halo",
