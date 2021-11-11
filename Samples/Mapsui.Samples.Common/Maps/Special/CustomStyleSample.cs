@@ -11,7 +11,6 @@ using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
 using Mapsui.UI;
-using Mapsui.Utilities;
 using SkiaSharp;
 
 namespace Mapsui.Samples.Common.Maps
@@ -92,9 +91,9 @@ namespace Mapsui.Samples.Common.Maps
             return new MemoryProvider<IFeature>(CreateDiverseFeatures(RandomPointGenerator.GenerateRandomPoints(envelope, count)));
         }
 
-        private static IEnumerable<IGeometryFeature> CreateDiverseFeatures(IEnumerable<MPoint> randomPoints)
+        private static IEnumerable<IFeature> CreateDiverseFeatures(IEnumerable<MPoint> randomPoints)
         {
-            var features = new List<IGeometryFeature>();
+            var features = new List<IFeature>();
             var style = new CustomStyle();
             var counter = 1;
             foreach (var point in randomPoints)

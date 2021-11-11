@@ -3,14 +3,12 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Mapsui.Extensions;
-using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Layers.Tiling;
 using Mapsui.Projection;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.UI;
-using Mapsui.Utilities;
 using Newtonsoft.Json;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Local
@@ -48,7 +46,7 @@ namespace Mapsui.Samples.Common.Maps
             };
         }
 
-        private static IEnumerable<IGeometryFeature> GetCitiesFromEmbeddedResource()
+        private static IEnumerable<IFeature> GetCitiesFromEmbeddedResource()
         {
             var path = "Mapsui.Samples.Common.EmbeddedResources.congo.json";
             var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
@@ -56,10 +54,7 @@ namespace Mapsui.Samples.Common.Maps
             var cities = DeserializeFromStream<City>(stream);
 
             return cities.Select(c => {
-                var feature = new GeometryFeature
-                {
-                    Geometry = SphericalMercator.FromLonLat(c.Lng, c.Lat).ToMPoint().ToPoint()
-                };
+                var feature = new PointFeature(SphericalMercator.FromLonLat(c.Lng, c.Lat).ToMPoint());
                 feature["name"] = c.Name;
                 feature["country"] = c.Country;
                 return feature;
