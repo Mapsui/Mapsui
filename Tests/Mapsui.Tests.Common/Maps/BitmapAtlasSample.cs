@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
-using Mapsui.Geometries;
-using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
@@ -56,36 +54,30 @@ namespace Mapsui.Tests.Common.Maps
 
             return new List<IFeature>
             {
-                new GeometryFeature
+                new PointFeature(new MPoint(256, 124))
                 {
-                    Geometry = new Point(256, 124),
-                    Styles = new[] {new SymbolStyle {BitmapId = atlas}}
+                    Styles = new[] {new SymbolStyle {BitmapId = atlas} }
                 },
-                new GeometryFeature
+                new PointFeature(new MPoint(20, 280))
                 {
-                    Geometry = new Point(20, 280),
                     Styles = new[] {new SymbolStyle {BitmapId = BitmapRegistry.Instance.Register(spriteAmusementPark15)} }
                 },
-                new GeometryFeature
+                new PointFeature(new MPoint(60, 280))
                 {
-                    Geometry = new Point(60, 280),
                     Styles = new[] {new SymbolStyle {BitmapId = BitmapRegistry.Instance.Register(spriteClothingStore15)} }
                 },
-                new GeometryFeature
+                new PointFeature(new MPoint(100, 280))
                 {
-                    Geometry = new Point(100, 280),
                     Styles = new[] {new SymbolStyle {BitmapId = BitmapRegistry.Instance.Register(spriteDentist15)} }
                 },
-                new GeometryFeature
+                new PointFeature(new MPoint(180, 300))
                 {
-                    Geometry = new Point(180, 300),
                     Styles = new[] {new SymbolStyle {BitmapId = BitmapRegistry.Instance.Register(spritePedestrianPolygon)} }
                 },
-                new GeometryFeature
+                new PointFeature(new MPoint(380, 280))
                 {
-                Geometry = new Point(380, 280),
-                Styles = new[] {new SymbolStyle {BitmapId = svgTigerBitmapId, SymbolScale = 0.1} }
-            }
+                    Styles = new[] {new SymbolStyle {BitmapId = svgTigerBitmapId, SymbolScale = 0.1} }
+                }
             };
         }
 

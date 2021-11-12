@@ -24,8 +24,8 @@ namespace Mapsui.Tests.Common.Maps
             var layer = new MemoryLayer
             {
                 Style = null,
-                DataSource = CreateProviderWithPointsWithVectorStyle(),
-                Name = "Points with VectorStyle"
+                DataSource = CreateProviderWithMPointsWithVectorStyle(),
+                Name = "MPoints with VectorStyle"
             };
 
             var map = new Map
@@ -37,28 +37,20 @@ namespace Mapsui.Tests.Common.Maps
             return map;
         }
 
-        public static MemoryProvider<IFeature> CreateProviderWithPointsWithVectorStyle()
+        public static MemoryProvider<IFeature> CreateProviderWithMPointsWithVectorStyle()
         {
             var features = new List<IFeature>
             {
-                new GeometryFeature
-                {
-                    Geometry = new Point(50, 50),
+                new PointFeature(new MPoint(50, 50)) {
                     Styles = new[] {new VectorStyle {Fill = new Brush(Color.Red)}}
                 },
-                new GeometryFeature
-                {
-                    Geometry = new Point(50, 100),
+                new PointFeature(new MPoint(50, 100)) {
                     Styles = new[] {new VectorStyle {Fill = new Brush(Color.Yellow), Outline = new Pen(Color.Black, 2)}}
                 },
-                new GeometryFeature
-                {
-                    Geometry = new Point(100, 50),
+                new PointFeature(new MPoint(100, 50)) {
                     Styles = new[] {new VectorStyle {Fill = new Brush(Color.Blue), Outline = new Pen(Color.White, 2)}}
                 },
-                new GeometryFeature
-                {
-                    Geometry = new Point(100, 100),
+                new PointFeature(new MPoint(100, 100)) {
                     Styles = new[] {new VectorStyle {Fill = new Brush(Color.Green), Outline = null}}
                 }
             };
