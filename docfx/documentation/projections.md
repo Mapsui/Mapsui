@@ -4,7 +4,7 @@ A geospatial projection is the transformation of coordinates in one coordinate s
 
 ## Some background on projections 
 
-Projections is a complicated topic. Users of Mapsui have a wide variety of backgrounds. Some are experienced GIS users that just need to know how this specific map component works. Many others are app developers that just happen to need a map for their current app. This makes it hard to explain things clear for everyone. Below are some basic concepts. I like [this](https://www.youtube.com/watch?v=kIID5FDi2JQ) video introduction to map projections.
+The topic of geospatial projections is complicated. Users of Mapsui have a wide variety of backgrounds. Some are experienced GIS users that just need to know how this specific map component works. Many others are app developers that just happen to need a map for their current app. This makes it hard to explain things clear for everyone. Below are some basic concepts. I like [this](https://www.youtube.com/watch?v=kIID5FDi2JQ) video introduction to map projections.
 
 ## Spatial Reference System (CRS)
 
