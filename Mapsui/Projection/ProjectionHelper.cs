@@ -17,7 +17,7 @@ namespace Mapsui.Utilities
 
         private static bool IsTransformationSupported(IGeometryTransformation geometryTransformation, string fromCRS, string toCRS)
         {
-            return geometryTransformation.IsProjectionSupported(fromCRS, toCRS) == true;
+            return geometryTransformation.IsProjectionSupported(fromCRS, toCRS);
         }
 
         public static BoundingBox? Transform(BoundingBox? extent,

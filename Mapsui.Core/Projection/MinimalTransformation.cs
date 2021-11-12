@@ -34,7 +34,7 @@ namespace Mapsui.Projection
             return transformFunc(x, y);
         }
 
-        public bool? IsProjectionSupported(string fromCRS, string toCRS)
+        public bool IsProjectionSupported(string fromCRS, string toCRS)
         {
             if (!_toLonLat.ContainsKey(fromCRS)) return false;
             if (!_fromLonLat.ContainsKey(toCRS)) return false;
