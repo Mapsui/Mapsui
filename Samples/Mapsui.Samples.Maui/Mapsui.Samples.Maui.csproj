@@ -8,6 +8,7 @@
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
 		<EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
+	    <PublishedTrimmed>false</PublishedTrimmed>
         <DefineConstants>__MAUI__</DefineConstants>
 
 		<!-- Display name -->
