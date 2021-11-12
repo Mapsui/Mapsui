@@ -33,22 +33,9 @@ If you use OpenStreetMap the map is in SphericalMercator. Often you have geodata
 2. The Provider.CRS has to be set. If the data is in lat/lon set it to "EPSG:4326".
 3. Wrap the Provider om the ProjectingProvider. Search the code samples for ProjectingProvider.
 
-With this setup the ProjectingProvider will do the projection for you. Another way around is to do the projection yourself.
-
-If you use this layer in you map your coordinates also need to be in SphericalMercator. By default there is no automatic projection in Mapsui. If transformation is needed you could either use the ProjectingProvider or transform your coordinates before you store them in your data source.  Mapsui has a helper methods for the projection from lat/lon (EPSG:4326) to spherical mercator (EPSG:3857): SphericalMerator.FromLonLat/ToLonLat.
-
-## The most common scenario
-
-Most likely you will be fine if you use the coordinate system that Google Maps and OpenStreetMap uses. This projection is called SphericalMercator. The official code from the OGC for this projection is EPSG:3857. If you use the OpenStreetMap background layer you use EPSG:3857. Often you have GPS locations or points of interests (POIs) in WGS84 or EPGS:4326. These points need to be transformed to EPSG:3857. There are two ways: 
-- Follow the configuration for projections mentioned above and in the 
-ProjectionSample.cs.
-- Use SphericalMercator.FromLonLat to do the transformation manually.
+With this setup the ProjectingProvider will do the projection for you. Another way around is to do the projection yourself. You can used Mapsui's SphericalMerator.FromLonLat/ToLonLat to transform the data before you add them to a Memorylayer and no CRSes need to be set.
 
 ## Remarks
 
-- A Layer has a CRS field. This field is used by Mapsui to set it to the 
-Map projection. It should not be set by the user. This is could be confusing.
-- Mapsui is not capable of transforming images. So no transformation of tiles 
-as rasters. No attempt will be made to transform and the CRS fields will be 
-ignored.
+- Mapsui is not capable of transforming images. So no transformation of tiles as rasters. No attempt will be made to transform and the CRS fields will be ignored.
 
