@@ -54,10 +54,7 @@ namespace Mapsui.Utilities
             var copiedFeatures = features.Copy().ToList();
             foreach (var copiedFeature in copiedFeatures)
             {
-                if (copiedFeature.Geometry == null) continue;
-                var copiedGeometry = copiedFeature.Geometry.Copy();
-                geometryTransformation.Transform(fromCRS, toCRS, copiedGeometry);
-                copiedFeature.Geometry = copiedGeometry;
+                geometryTransformation.Transform(fromCRS, toCRS, copiedFeature.Geometry);
             }
             return copiedFeatures;
         }
