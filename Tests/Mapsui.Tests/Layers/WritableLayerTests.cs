@@ -1,7 +1,6 @@
 ﻿using Mapsui.Geometries;
 using Mapsui.GeometryLayer;
 using Mapsui.Layers;
-using Mapsui.Providers;
 using NUnit.Framework;
 
 namespace Mapsui.Tests.Layers
@@ -15,9 +14,9 @@ namespace Mapsui.Tests.Layers
             // arrange
             var writableLayer = new WritableLayer();
             writableLayer.Add(new GeometryFeature());
-            writableLayer.Add(new GeometryFeature { Geometry = new Point() });
-            writableLayer.Add(new GeometryFeature { Geometry = new LineString() });
-            writableLayer.Add(new GeometryFeature { Geometry = new Polygon() });
+            writableLayer.Add(new GeometryFeature(new Point()));
+            writableLayer.Add(new GeometryFeature(new LineString()));
+            writableLayer.Add(new GeometryFeature(new Polygon()));
 
             // act
             var extent = writableLayer.Extent;
