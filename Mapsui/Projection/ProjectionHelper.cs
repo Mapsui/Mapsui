@@ -11,14 +11,6 @@ namespace Mapsui.Utilities
     public static class ProjectionHelper
     {
         public const string EpsgPrefix = "EPSG:";
-        public const string EsriStringPrefix = "ESRISTRING:";
-        public const string Proj4StringPrefix = "PROJ4STRING:";
-
-
-        private static bool IsTransformationSupported(IGeometryTransformation geometryTransformation, string fromCRS, string toCRS)
-        {
-            return geometryTransformation.IsProjectionSupported(fromCRS, toCRS);
-        }
 
         public static BoundingBox? Transform(BoundingBox? extent,
             IGeometryTransformation geometryTransformation, string fromCRS, string toCRS)
@@ -30,7 +22,7 @@ namespace Mapsui.Utilities
             if (!CrsHelper.IsCrsProvided(fromCRS, toCRS))
                 throw new NotSupportedException($"CRS is not provided. From CRS: {fromCRS}. To CRS {toCRS}");
 
-            if (!IsTransformationSupported(geometryTransformation, fromCRS, toCRS))
+            if (!geometryTransformation.IsProjectionSupported(fromCRS, toCRS))
                 throw new NotSupportedException($"Transformation is not supported. From CRS: {fromCRS}. To CRS {toCRS}");
 
             var copiedExtent = extent.Copy();
@@ -48,7 +40,7 @@ namespace Mapsui.Utilities
             if (!CrsHelper.IsCrsProvided(fromCRS, toCRS))
                 throw new NotSupportedException($"CRS is not provided. From CRS: {fromCRS}. To CRS {toCRS}");
 
-            if (!IsTransformationSupported(geometryTransformation, fromCRS, toCRS))
+            if (!geometryTransformation.IsProjectionSupported(fromCRS, toCRS))
                 throw new NotSupportedException($"Transformation is not supported. From CRS: {fromCRS}. To CRS {toCRS}");
 
             var copiedFeatures = features.Copy().ToList();
