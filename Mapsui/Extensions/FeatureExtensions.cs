@@ -8,8 +8,7 @@ namespace Mapsui.Extensions
     {
         public static GeometryFeature Copy(this GeometryFeature original)
         {
-            var geometryFeature = new GeometryFeature();
-            geometryFeature.Geometry = original.Geometry.Copy();
+            var geometryFeature = new GeometryFeature(original.Geometry.Copy());
             geometryFeature.RenderedGeometry =
                 original.RenderedGeometry.ToDictionary(entry => entry.Key, entry => entry.Value);
             geometryFeature.Styles = original.Styles.ToList();
