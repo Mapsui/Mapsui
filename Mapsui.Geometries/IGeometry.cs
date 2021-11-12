@@ -37,9 +37,6 @@ namespace Mapsui.Geometries
         /// <returns><see cref="Geometries.BoundingBox" /> for this <see cref="Geometry" /></returns>
         BoundingBox? BoundingBox { get; }
 
-        [Obsolete("Use the BoundingBox field instead")]
-        BoundingBox? GetBoundingBox();
-
         /// <summary>
         ///     Exports this <see cref="Geometry" /> to a specific well-known text representation of <see cref="Geometry" />.
         /// </summary>
