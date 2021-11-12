@@ -42,7 +42,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Android.MapControl.html",
-          "hash": "rLEqdYeRCRIwGnUFtKnAVQ=="
+          "hash": "vuZ1oMmSqJQdS6FIdPOwpw=="
         }
       },
       "is_incremental": false,
@@ -126,7 +126,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.Callout.html",
-          "hash": "Mw7GcdQvBpWIVF9ZgPzHdw=="
+          "hash": "Iv8zL2Mt7A9tZmScAsoqUw=="
         }
       },
       "is_incremental": false,
@@ -258,7 +258,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.MapControl.html",
-          "hash": "55vHKrL7I7JDQf2vt8ZIfw=="
+          "hash": "gyF5tlN68M9npADyOZCGwA=="
         }
       },
       "is_incremental": false,
@@ -306,7 +306,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.Pin.html",
-          "hash": "80AGgZ6fW9uo/ifGQBqyMw=="
+          "hash": "8Pm5I7SzAVvRp2LYC4rOGA=="
         }
       },
       "is_incremental": false,
@@ -438,7 +438,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Objects.Drawable.html",
-          "hash": "Fcz9eYTYsMYjhNeZ4oinEg=="
+          "hash": "lzy0tO3horwV1jJlMunEUQ=="
         }
       },
       "is_incremental": false,
@@ -450,7 +450,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Objects.IFeatureProvider.html",
-          "hash": "2ukpi7IdUaToufJ0Vj3NpQ=="
+          "hash": "u6yHfpOX+Nz0pPk0SKCLwg=="
         }
       },
       "is_incremental": false,
@@ -462,7 +462,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Objects.MyLocationLayer.html",
-          "hash": "sr9z6pkGDyQLcKF5C6gJ/w=="
+          "hash": "NPpHLn1a9uF7eXdtJZ6pfg=="
         }
       },
       "is_incremental": false,
@@ -474,7 +474,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html",
-          "hash": "LPNK/sjiMjJGsZaND6IZww=="
+          "hash": "IHn0FIWdF/2idV2RxgzeWA=="
         }
       },
       "is_incremental": false,
@@ -594,7 +594,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Wpf.MapControl.html",
-          "hash": "KXROYt9AUIW3JLHlUxPYNw=="
+          "hash": "rwmXK6RCuwDxVxk0K9d4qQ=="
         }
       },
       "is_incremental": false,
@@ -642,7 +642,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.iOS.MapControl.html",
-          "hash": "+ZTedtEPGIeHSZxBUMTyIA=="
+          "hash": "fK4+M3BMN9ZN9bIoV3mGdw=="
         }
       },
       "is_incremental": false,
@@ -964,7 +964,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/projections.html",
-          "hash": "+z1yzMDgl4uj8pjcWwpERA=="
+          "hash": "RcQ8jIkP+o8dW3WTcIRR5A=="
         }
       },
       "is_incremental": false,
@@ -1169,16 +1169,16 @@
           "total_file_count": 57,
           "skipped_file_count": 0
         },
-        "TocDocumentProcessor": {
+        "ResourceDocumentProcessor": {
           "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
           "total_file_count": 0,
           "skipped_file_count": 0
         },
-        "ResourceDocumentProcessor": {
+        "TocDocumentProcessor": {
           "can_incremental": false,
-          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
           "total_file_count": 0,
           "skipped_file_count": 0
