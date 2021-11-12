@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using Mapsui.Geometries;
-using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
@@ -53,11 +51,10 @@ namespace Mapsui.Tests.Common.Maps
             return layer;
         }
 
-        private static GeometryFeature CreateFeature(double x, double y, UnitType unitType)
+        private static IFeature CreateFeature(double x, double y, UnitType unitType)
         {
-            return new GeometryFeature
+            return new PointFeature(new MPoint(x, y))
             {
-                Geometry = new Point(x, y),
                 Styles = new List<IStyle> { new SymbolStyle { UnitType = unitType } }
             };
         }
