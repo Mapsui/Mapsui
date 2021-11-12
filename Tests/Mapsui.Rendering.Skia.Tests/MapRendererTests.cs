@@ -153,7 +153,7 @@ namespace Mapsui.Rendering.Skia.Tests
         public void RenderSymbolWithWorldUnits()
         {
             // arrange
-            var map = PointInWorldUnits.CreateMap();
+            var map = PointInWorldUnitsSample.CreateMap();
             var viewport = map.Extent.Multiply(3).ToViewport(200);
             const string fileName = "vector_symbol_unittype.png";
 
