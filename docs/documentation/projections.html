@@ -79,7 +79,7 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="projections">Projections</h1>
 
-<p>A geospatial projection is the transformation of coordinates in one coordinate system to another coordinate system. If all your data is in one coordinate system there is no need for projection. With a geospectial projection we do not mean transforming spatial coordinates to pixel positions on screen. To distinguish it from that kind of transformation we use the term projection instead of transformation for geospatial projections in Mapsui, although these words mean rougly the same. </p>
+<p>A geospatial projection is the transformation of coordinates in one coordinate system to another coordinate system. If all your data is in one coordinate system there is no need for projection. With a geospectial projection we do not mean transforming spatial coordinates to pixel positions on screen. To distinguish it from that kind of transformation we use the term <em>projection</em> instead of <em>transformation</em> for geospatial projections in Mapsui, although these words mean rougly the same. </p>
 <h2 id="some-background-on-projections">Some background on projections</h2>
 <p>The topic of geospatial projections is complicated. Users of Mapsui have a wide variety of backgrounds. Some are experienced GIS users that just need to know how this specific map component works. Many others are app developers that just happen to need a map for their current app. This makes it hard to explain things clear for everyone. Below are some basic concepts. I like <a href="https://www.youtube.com/watch?v=kIID5FDi2JQ">this</a> video introduction to map projections.</p>
 <h2 id="spatial-reference-system-crs">Spatial Reference System (CRS)</h2>
@@ -106,10 +106,10 @@ will be drawn on top of each other and things go wrong. </li>
 <li>The Provider.CRS has to be set. If the data is in lat/lon set it to &quot;EPSG:4326&quot;.</li>
 <li>Wrap the Provider om the ProjectingProvider. Search the code samples for ProjectingProvider.</li>
 </ol>
-<p>With this setup the ProjectingProvider will do the projection for you. Another way around is to do the projection yourself. You can used Mapsui&#39;s SphericalMerator.FromLonLat/ToLonLat to transform the data before you add them to a Memorylayer and no CRSes need to be set.</p>
+<p>With this setup the ProjectingProvider will do the projection for you. Another option is to do the projection yourself. You can use Mapsui&#39;s SphericalMerator.FromLonLat/ToLonLat to project the data before you add them to a Memorylayer and no CRSes need to be set.</p>
 <h2 id="remarks">Remarks</h2>
 <ul>
-<li>Mapsui is not capable of transforming images. So no transformation of tiles as rasters. No attempt will be made to transform and the CRS fields will be ignored.</li>
+<li>Mapsui is not capable of projecting images. So no projection of tiles as rasters. No attempt will be made to project and the CRS fields will be ignored.</li>
 </ul>
 </article>
           </div>
