@@ -1,6 +1,6 @@
 # Projections
 
-A geospatial projection is the transformation of coordinates in one coordinate system to another coordinate system. If all your data is in one coordinate system there is no need for projection. With a geospectial projection we do not mean transforming spatial coordinates to pixel positions on screen. To distinguish it from that kind of transformation we use the term projection instead of transformation for geospatial projections in Mapsui, although these words mean rougly the same. 
+A geospatial projection is the transformation of coordinates in one coordinate system to another coordinate system. If all your data is in one coordinate system there is no need for projection. With a geospectial projection we do not mean transforming spatial coordinates to pixel positions on screen. To distinguish it from that kind of transformation we use the term *projection* instead of *transformation* for geospatial projections in Mapsui, although these words mean rougly the same. 
 
 ## Some background on projections 
 
@@ -33,9 +33,9 @@ If you use OpenStreetMap the map is in SphericalMercator. Often you have geodata
 2. The Provider.CRS has to be set. If the data is in lat/lon set it to "EPSG:4326".
 3. Wrap the Provider om the ProjectingProvider. Search the code samples for ProjectingProvider.
 
-With this setup the ProjectingProvider will do the projection for you. Another way around is to do the projection yourself. You can used Mapsui's SphericalMerator.FromLonLat/ToLonLat to transform the data before you add them to a Memorylayer and no CRSes need to be set.
+With this setup the ProjectingProvider will do the projection for you. Another option is to do the projection yourself. You can use Mapsui's SphericalMerator.FromLonLat/ToLonLat to project the data before you add them to a Memorylayer and no CRSes need to be set.
 
 ## Remarks
 
-- Mapsui is not capable of transforming images. So no transformation of tiles as rasters. No attempt will be made to transform and the CRS fields will be ignored.
+- Mapsui is not capable of projecting images. So no projection of tiles as rasters. No attempt will be made to project and the CRS fields will be ignored.
 
