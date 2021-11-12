@@ -96,13 +96,13 @@ namespace Mapsui.UI.Forms
             _pins.CollectionChanged += HandlerPinsOnCollectionChanged;
             _drawable.CollectionChanged += HandlerDrawablesOnCollectionChanged;
 
-            _mapCalloutLayer.DataSource = new ObservableCollectionProvider<Callout, IGeometryFeature>(_callouts);
+            _mapCalloutLayer.DataSource = new ObservableCollectionProvider<Callout, IFeature>(_callouts);
             _mapCalloutLayer.Style = null;  // We don't want a global style for this layer
 
-            _mapPinLayer.DataSource = new ObservableCollectionProvider<Pin, IGeometryFeature>(_pins);
+            _mapPinLayer.DataSource = new ObservableCollectionProvider<Pin, IFeature>(_pins);
             _mapPinLayer.Style = null;  // We don't want a global style for this layer
 
-            _mapDrawableLayer.DataSource = new ObservableCollectionProvider<Drawable, IGeometryFeature>(_drawable);
+            _mapDrawableLayer.DataSource = new ObservableCollectionProvider<Drawable, IFeature>(_drawable);
             _mapDrawableLayer.Style = null;  // We don't want a global style for this layer
         }
 
