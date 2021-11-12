@@ -64,12 +64,6 @@ namespace Mapsui.Geometries
             }
         }
 
-        [Obsolete("Use the BoundingBox field instead")]
-        public BoundingBox? GetBoundingBox()
-        {
-            return BoundingBox;
-        }
-
         /// <summary>
         ///     The minimum bounding box for this <see cref="Geometry" />, returned as a <see cref="Geometries.BoundingBox" />.
         /// </summary>

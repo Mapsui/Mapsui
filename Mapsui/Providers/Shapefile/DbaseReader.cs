@@ -444,7 +444,7 @@ namespace Mapsui.Providers.Shapefile
         /// <param name="oid"></param>
         /// <param name="table"></param>
         /// <returns></returns>
-        internal IGeometryFeature? GetFeature(uint oid, IEnumerable<IGeometryFeature> table)
+        internal GeometryFeature? GetFeature(uint oid, IEnumerable<GeometryFeature> table)
         {
             if (oid >= _numberOfRecords)
                 throw (new ArgumentException("Invalid DataRow requested at index " + oid.ToString(CultureInfo.InvariantCulture)));

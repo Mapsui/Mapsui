@@ -188,7 +188,7 @@ namespace Mapsui.UI.Forms
         {
             _pin = pin ?? throw new ArgumentNullException("Pin shouldn't be null"); ;
             if (_pin.Feature != null)
-                Feature = (GeometryFeature)_pin.Feature.Copy();
+                Feature = _pin.Feature.Copy();
             else
                 Feature = new GeometryFeature();
             Feature.Styles.Clear();
@@ -480,7 +480,7 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Feature, which belongs to callout. Should be the same as for the pin to which this callout belongs.
         /// </summary>
-        public IGeometryFeature Feature { get; }
+        public GeometryFeature Feature { get; }
 
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {

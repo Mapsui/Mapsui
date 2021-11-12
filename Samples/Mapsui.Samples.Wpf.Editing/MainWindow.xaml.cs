@@ -19,12 +19,12 @@ namespace Mapsui.Samples.Wpf.Editing
 {
     public partial class MainWindow
     {
-        // In this class we cast to IGeometryFeature and this only works because we happen to know
+        // In this class we cast to GeometryFeature and this only works because we happen to know
         // there we use only IGeometryFeatures in the writable layer. We need to cast to allow
         // us to copy. This needs to be improved.
 
         private WritableLayer _targetLayer;
-        private IEnumerable<IGeometryFeature> _tempFeatures;
+        private IEnumerable<GeometryFeature> _tempFeatures;
         private readonly EditManager _editManager = new();
         private readonly EditManipulation _editManipulation = new();
         private bool _selectMode;
@@ -160,7 +160,7 @@ namespace Mapsui.Samples.Wpf.Editing
             _targetLayer = (WritableLayer)MapControl.Map.Layers.First(l => l.Name == "PolygonLayer");
 
             // Load the polygon layer on startup so you can start modifying right away
-            _editManager.Layer.AddRange(_targetLayer.GetFeatures().Cast<IGeometryFeature>().Copy());
+            _editManager.Layer.AddRange(_targetLayer.GetFeatures().Cast<GeometryFeature>().Copy());
             _targetLayer.Clear();
 
             _editManager.EditMode = EditMode.Modify;
@@ -171,14 +171,14 @@ namespace Mapsui.Samples.Wpf.Editing
 
         private void AddPoint_OnClick(object sender, RoutedEventArgs args)
         {
-            IEnumerable<IGeometryFeature> features = _targetLayer.GetFeatures().Cast<IGeometryFeature>().Copy();
+            IEnumerable<GeometryFeature> features = _targetLayer.GetFeatures().Cast<GeometryFeature>().Copy();
 
             foreach (var feature in features)
             {
                 feature.RenderedGeometry.Clear();
             }
 
-            _tempFeatures = new List<IGeometryFeature>(features);
+            _tempFeatures = new List<GeometryFeature>(features);
 
             _editManager.EditMode = EditMode.AddPoint;
         }
@@ -190,7 +190,7 @@ namespace Mapsui.Samples.Wpf.Editing
 
         private void Save_OnClick(object sender, RoutedEventArgs args)
         {
-            _targetLayer.AddRange(_editManager.Layer.GetFeatures().Cast<IGeometryFeature>().Copy());
+            _targetLayer.AddRange(_editManager.Layer.GetFeatures().Cast<GeometryFeature>().Copy());
             _editManager.Layer.Clear();
 
             MapControl.RefreshGraphics();
@@ -208,28 +208,28 @@ namespace Mapsui.Samples.Wpf.Editing
 
         private void AddLine_OnClick(object sender, RoutedEventArgs args)
         {
-            IEnumerable<IGeometryFeature> features = _targetLayer.GetFeatures().Cast<IGeometryFeature>().Copy();
+            IEnumerable<GeometryFeature> features = _targetLayer.GetFeatures().Cast<GeometryFeature>().Copy();
 
             foreach (var feature in features)
             {
                 feature.RenderedGeometry.Clear();
             }
 
-            _tempFeatures = new List<IGeometryFeature>(features);
+            _tempFeatures = new List<GeometryFeature>(features);
 
             _editManager.EditMode = EditMode.AddLine;
         }
 
         private void AddPolygon_OnClick(object sender, RoutedEventArgs args)
         {
-            IEnumerable<IGeometryFeature> features = _targetLayer.GetFeatures().Cast<IGeometryFeature>().Copy();
+            IEnumerable<GeometryFeature> features = _targetLayer.GetFeatures().Cast<GeometryFeature>().Copy();
 
             foreach (var feature in features)
             {
                 feature.RenderedGeometry.Clear();
             }
 
-            _tempFeatures = new List<IGeometryFeature>(features);
+            _tempFeatures = new List<GeometryFeature>(features);
 
             _editManager.EditMode = EditMode.AddPolygon;
         }
@@ -245,14 +245,14 @@ namespace Mapsui.Samples.Wpf.Editing
 
         private void Load_OnClick(object sender, RoutedEventArgs args)
         {
-            IEnumerable<IGeometryFeature> features = _targetLayer.GetFeatures().Cast<IGeometryFeature>().Copy();
+            IEnumerable<GeometryFeature> features = _targetLayer.GetFeatures().Cast<GeometryFeature>().Copy();
 
             foreach (var feature in features)
             {
                 feature.RenderedGeometry.Clear();
             }
 
-            _tempFeatures = new List<IGeometryFeature>(features);
+            _tempFeatures = new List<GeometryFeature>(features);
 
             _editManager.Layer.AddRange(features);
             _targetLayer.Clear();

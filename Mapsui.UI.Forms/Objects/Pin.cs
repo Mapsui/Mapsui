@@ -245,7 +245,7 @@ namespace Mapsui.UI.Forms
         /// Mapsui feature for this pin
         /// </summary>
         /// <value>Mapsui feature</value>
-        public IGeometryFeature? Feature { get; private set; }
+        public GeometryFeature? Feature { get; private set; }
 
         private Callout? _callout;
 
