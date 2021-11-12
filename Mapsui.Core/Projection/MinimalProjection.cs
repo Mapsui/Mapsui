@@ -4,10 +4,10 @@ using System.Collections.Generic;
 namespace Mapsui.Projection
 {
     /// <summary>
-    /// A very minimal implementation of ITransformation. It is only capable of projecting between
+    /// A very minimal implementation that is only capable of projecting between
     /// SphericalMercator and WGS84.
     /// </summary>
-    public class MinimalTransformation : ITransformation
+    public class MinimalProjection : IProjection
     {
         private readonly IDictionary<string, Func<double, double, (double, double)>> _toLonLat =
             new Dictionary<string, Func<double, double, (double, double)>>();
@@ -15,7 +15,7 @@ namespace Mapsui.Projection
         private readonly IDictionary<string, Func<double, double, (double, double)>> _fromLonLat =
             new Dictionary<string, Func<double, double, (double, double)>>();
 
-        public MinimalTransformation()
+        public MinimalProjection()
         {
             _toLonLat["EPSG:4326"] = (x, y) => (x, y);
             _fromLonLat["EPSG:4326"] = (x, y) => (x, y);
@@ -23,15 +23,15 @@ namespace Mapsui.Projection
             _fromLonLat["EPSG:3857"] = SphericalMercator.FromLonLat;
         }
 
-        public (double X, double Y) Transform(string fromCRS, string toCRS, double x, double y)
+        public (double X, double Y) Project(string fromCRS, string toCRS, double x, double y)
         {
-            var (lon, lat) = Transform(x, y, _toLonLat[fromCRS]);
-            return Transform(lon, lat, _fromLonLat[toCRS]);
+            var (lon, lat) = Project(x, y, _toLonLat[fromCRS]);
+            return Project(lon, lat, _fromLonLat[toCRS]);
         }
 
-        private static (double X, double Y) Transform(double x, double y, Func<double, double, (double, double)> transformFunc)
+        private static (double X, double Y) Project(double x, double y, Func<double, double, (double, double)> projectFunc)
         {
-            return transformFunc(x, y);
+            return projectFunc(x, y);
         }
 
         public bool IsProjectionSupported(string fromCRS, string toCRS)

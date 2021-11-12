@@ -4,8 +4,8 @@
     {
 
         /// <summary>
-        /// Static property that can be overridden by a user defined ITransformation.
+        /// Static property that can be overridden by a user defined IProjection.
         /// </summary>
-        public static ITransformation Transformation { get; set; } = new MinimalTransformation();
+        public static IProjection Projection { get; set; } = new MinimalProjection();
     }
 }
