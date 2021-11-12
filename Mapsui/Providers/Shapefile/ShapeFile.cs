@@ -137,7 +137,7 @@ namespace Mapsui.Providers.Shapefile
     /// M and Z values in a shapefile is ignored by Mapsui.
     /// </para>
     /// </remarks>
-    public class ShapeFile : IProvider<IGeometryFeature>, IDisposable
+    public class ShapeFile : IProvider<GeometryFeature>, IDisposable
     {
         /// <summary>
         /// Filter Delegate Method
@@ -830,7 +830,7 @@ namespace Mapsui.Providers.Shapefile
         /// <param name="rowId"></param>
         /// <param name="features">Data table to feature should belong to.</param>
         /// <returns></returns>
-        public IGeometryFeature GetFeature(uint rowId, List<IGeometryFeature>? features = null)
+        public GeometryFeature GetFeature(uint rowId, List<GeometryFeature>? features = null)
         {
             lock (_syncRoot)
             {
@@ -848,11 +848,11 @@ namespace Mapsui.Providers.Shapefile
 
         }
 
-        private IGeometryFeature? GetFeaturePrivate(uint rowId, IEnumerable<IGeometryFeature>? dt)
+        private GeometryFeature? GetFeaturePrivate(uint rowId, IEnumerable<GeometryFeature>? dt)
         {
             if (_dbaseFile != null)
             {
-                var dr = _dbaseFile.GetFeature(rowId, dt ?? new List<IGeometryFeature>());
+                var dr = _dbaseFile.GetFeature(rowId, dt ?? new List<GeometryFeature>());
                 dr.Geometry = ReadGeometry(rowId);
                 if (FilterDelegate == null || FilterDelegate(dr))
                     return dr;
@@ -862,7 +862,7 @@ namespace Mapsui.Providers.Shapefile
         }
 
 
-        public IEnumerable<IGeometryFeature> GetFeatures(FetchInfo fetchInfo)
+        public IEnumerable<GeometryFeature> GetFeatures(FetchInfo fetchInfo)
         {
             lock (_syncRoot)
             {
@@ -871,7 +871,7 @@ namespace Mapsui.Providers.Shapefile
                 {
                     //Use the spatial index to get a list of features whose BoundingBox intersects bbox
                     var objectList = GetObjectIDsInViewPrivate(fetchInfo.Extent);
-                    var features = new List<IGeometryFeature>();
+                    var features = new List<GeometryFeature>();
 
                     foreach (var index in objectList)
                     {

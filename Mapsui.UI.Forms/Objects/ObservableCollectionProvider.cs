@@ -30,7 +30,10 @@ namespace Mapsui.UI.Objects
                 foreach (var item in Collection)
                 {
                     if (fetchInfo.Extent?.Intersects(item.Feature?.Extent) ?? false)
-                        list.Add((TU)item.Feature!);
+                    {
+                        IFeature feature = item.Feature!;
+                        list.Add((TU)feature);
+                    }
                 }
             }
 

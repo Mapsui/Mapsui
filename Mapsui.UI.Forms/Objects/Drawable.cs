@@ -91,12 +91,12 @@ namespace Mapsui.UI.Objects
         /// </summary>
         public object? Tag { get; set; }
 
-        private IGeometryFeature? feature;
+        private GeometryFeature? feature;
 
         /// <summary>
         /// Mapsui Feature belonging to this drawable
         /// </summary>
-        public IGeometryFeature? Feature
+        public GeometryFeature? Feature
         {
             get => feature;
             set

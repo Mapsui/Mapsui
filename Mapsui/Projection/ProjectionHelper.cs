@@ -38,7 +38,7 @@ namespace Mapsui.Utilities
             return copiedExtent;
         }
 
-        public static IEnumerable<IGeometryFeature>? Transform(IEnumerable<IGeometryFeature>? features,
+        public static IEnumerable<GeometryFeature>? Transform(IEnumerable<GeometryFeature>? features,
             IGeometryTransformation geometryTransformation, string fromCRS, string toCRS)
         {
             if (features == null) return null;

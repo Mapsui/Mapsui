@@ -7,7 +7,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
 {
     public class AddInfo
     {
-        public IGeometryFeature? Feature;
+        public GeometryFeature? Feature;
         public IList<Point>? Vertices;
         public Point? Vertex;
     }

@@ -6,7 +6,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
 {
     public class DragInfo
     {
-        public IGeometryFeature? Feature { get; set; }
+        public GeometryFeature? Feature { get; set; }
         public Point? Vertex { get; set; }
         public Point? StartOffsetToVertex { get; set; }
     }

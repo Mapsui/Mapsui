@@ -8,9 +8,9 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Providers
 {
-    public class TransformingProvider : IProvider<IGeometryFeature>
+    public class TransformingProvider : IProvider<GeometryFeature>
     {
-        private readonly IProvider<IGeometryFeature> _provider;
+        private readonly IProvider<GeometryFeature> _provider;
         private readonly IGeometryTransformation _geometryTransformation;
 
         public TransformingProvider(IProvider<GeometryFeature> provider, IGeometryTransformation? geometryTransformation = null)
@@ -21,10 +21,10 @@ namespace Mapsui.Providers
 
         public string CRS { get; set; }
 
-        public IEnumerable<IGeometryFeature> GetFeatures(FetchInfo fetchInfo)
+        public IEnumerable<GeometryFeature> GetFeatures(FetchInfo fetchInfo)
         {
             var transformedExtent = ProjectionHelper.Transform(fetchInfo.Extent.ToBoundingBox(), _geometryTransformation, CRS, _provider.CRS).ToMRect();
-            if (transformedExtent == null) return new List<IGeometryFeature>(); // Perhaps Transform should not return null
+            if (transformedExtent == null) return new List<GeometryFeature>(); // Perhaps Transform should not return null
             fetchInfo = new FetchInfo(transformedExtent, fetchInfo.Resolution, fetchInfo.CRS, fetchInfo.ChangeType);
 
             var features = _provider.GetFeatures(fetchInfo);
