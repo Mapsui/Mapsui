@@ -24,7 +24,7 @@ namespace Mapsui.Samples.Common.Maps.Projection
             // For Projections to work three things need to be set:
             // 1) The CRS on the Map to know what to project to.
             // 2) The CRS on the DataSource to know what to project from.
-            // 3) The Transformation to transform from the DataSource CRS to
+            // 3) The projection to project from the DataSource CRS to
             // the Map CRS.
 
             var geometryLayer = CreateWorldCitiesLayer();
@@ -49,7 +49,7 @@ namespace Mapsui.Samples.Common.Maps.Projection
                 CRS = "EPSG:4326" // The DataSource CRS needs to be set
             };
 
-            var dataSource = new TransformingProvider(memoryProvider)
+            var dataSource = new ProjectingProvider(memoryProvider)
             {
                 CRS = "EPSG:3857"
             };

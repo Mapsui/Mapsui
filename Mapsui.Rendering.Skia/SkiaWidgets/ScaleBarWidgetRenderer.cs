@@ -18,7 +18,7 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
             float layerOpacity)
         {
             var scaleBar = (ScaleBarWidget)widget;
-            if (!scaleBar.CanTransform()) return;
+            if (!scaleBar.CanProject()) return;
 
             // If this is the first time, we call this renderer, ...
             if (_paintScaleBar == null)

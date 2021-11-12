@@ -47,7 +47,7 @@ namespace Mapsui.Projection
             return !string.IsNullOrEmpty(fromCRS) && !string.IsNullOrEmpty(toCRS);
         }
 
-        public static bool IsTransformationNeeded(string? fromCRS, string toCRS)
+        public static bool IsProjectionNeeded(string? fromCRS, string toCRS)
         {
             return !fromCRS?.Equals(toCRS) == true;
         }
