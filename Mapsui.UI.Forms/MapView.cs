@@ -744,44 +744,6 @@ namespace Mapsui.UI.Forms
             Map?.Layers.Remove(MyLocationLayer, _mapCalloutLayer, _mapPinLayer, _mapDrawableLayer);
         }
 
-        /// <summary>
-        /// Get all drawables of layer that contain given point
-        /// </summary>
-        /// <param name="point">Point to search for in world coordinates</param>
-        /// <param name="layer">Layer to search for drawables</param>
-        /// <returns>List with all drawables at point, which are clickable</returns>
-        private IList<Drawable> GetDrawablesAt(Geometries.Point point, ILayer layer)
-        {
-            var drawables = new List<Drawable>();
-
-            if (layer.Enabled == false) return drawables;
-            if (layer.MinVisible > Viewport.Resolution) return drawables;
-            if (layer.MaxVisible < Viewport.Resolution) return drawables;
-            if (layer.Extent == null) return drawables;
-
-            if (layer.GetFeatures(layer.Extent, Viewport.Resolution) is
-                IEnumerable<IGeometryFeature> allFeatures)
-            {
-                // Now check all features, if they are clicked and clickable
-                foreach (var feature in allFeatures)
-                {
-                    if (feature.Geometry.Contains(point))
-                    {
-                        var drawable = _drawable.Where(f => f.Feature == feature).First();
-                        // Take only the clickable object
-                        if (drawable.IsClickable)
-                            drawables.Add(drawable);
-                    }
-                }
-            }
-
-            // If there more than one drawables found, than reverse, because the top most should be the first
-            if (drawables.Count > 1)
-                drawables.Reverse();
-
-            return drawables;
-        }
-
         private void UpdateButtonPositions()
         {
             var newX = Width - ButtonMargin.Right - ButtonSize;
