@@ -19,16 +19,6 @@ namespace Mapsui.GeometryLayer
             Geometry = geometry;
         }
 
-        public GeometryFeature(IGeometryFeature feature)
-        {
-            Geometry = feature.Geometry;
-            RenderedGeometry = feature.RenderedGeometry.ToDictionary(entry => entry.Key,
-                entry => entry.Value);
-            Styles = feature.Styles.ToList();
-            foreach (var field in feature.Fields)
-                this[field] = feature[field];
-        }
-
         public IGeometry Geometry { get; set; }
 
         public MRect? Extent => Geometry?.BoundingBox.ToMRect(); // Todo: Make not-nullable
