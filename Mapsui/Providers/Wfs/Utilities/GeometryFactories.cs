@@ -209,7 +209,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         protected IFeature AddLabel(Dictionary<string, string> labelValues, IGeometry geom)
         {
-            var feature = new GeometryFeature();
+            var feature = new GeometryFeature(geom);
+
             foreach (var keyPair in labelValues)
             {
                 var labelName = keyPair.Key;
@@ -217,8 +218,6 @@ namespace Mapsui.Providers.Wfs.Utilities
 
                 feature[labelName] = labelValue;
             }
-
-            feature.Geometry = geom;
 
             labelValues.Clear();
 
