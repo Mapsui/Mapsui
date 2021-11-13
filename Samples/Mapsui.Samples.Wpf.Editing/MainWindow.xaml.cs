@@ -24,7 +24,7 @@ namespace Mapsui.Samples.Wpf.Editing
         // us to copy. This needs to be improved.
 
         private WritableLayer _targetLayer;
-        private IEnumerable<GeometryFeature> _tempFeatures;
+        private IEnumerable<IFeature> _tempFeatures;
         private readonly EditManager _editManager = new();
         private readonly EditManipulation _editManipulation = new();
         private bool _selectMode;
@@ -160,7 +160,7 @@ namespace Mapsui.Samples.Wpf.Editing
             _targetLayer = (WritableLayer)MapControl.Map.Layers.First(l => l.Name == "PolygonLayer");
 
             // Load the polygon layer on startup so you can start modifying right away
-            _editManager.Layer.AddRange(_targetLayer.GetFeatures().Cast<GeometryFeature>().Copy());
+            _editManager.Layer.AddRange(_targetLayer.GetFeatures().Copy());
             _targetLayer.Clear();
 
             _editManager.EditMode = EditMode.Modify;
@@ -171,14 +171,14 @@ namespace Mapsui.Samples.Wpf.Editing
 
         private void AddPoint_OnClick(object sender, RoutedEventArgs args)
         {
-            IEnumerable<GeometryFeature> features = _targetLayer.GetFeatures().Cast<GeometryFeature>().Copy();
+            IEnumerable<IFeature> features = _targetLayer.GetFeatures().Copy();
 
             foreach (var feature in features)
             {
                 feature.RenderedGeometry.Clear();
             }
 
-            _tempFeatures = new List<GeometryFeature>(features);
+            _tempFeatures = new List<IFeature>(features);
 
             _editManager.EditMode = EditMode.AddPoint;
         }
@@ -190,7 +190,7 @@ namespace Mapsui.Samples.Wpf.Editing
 
         private void Save_OnClick(object sender, RoutedEventArgs args)
         {
-            _targetLayer.AddRange(_editManager.Layer.GetFeatures().Cast<GeometryFeature>().Copy());
+            _targetLayer.AddRange(_editManager.Layer.GetFeatures().Copy());
             _editManager.Layer.Clear();
 
             MapControl.RefreshGraphics();
@@ -208,28 +208,28 @@ namespace Mapsui.Samples.Wpf.Editing
 
         private void AddLine_OnClick(object sender, RoutedEventArgs args)
         {
-            IEnumerable<GeometryFeature> features = _targetLayer.GetFeatures().Cast<GeometryFeature>().Copy();
+            IEnumerable<IFeature> features = _targetLayer.GetFeatures().Copy();
 
             foreach (var feature in features)
             {
                 feature.RenderedGeometry.Clear();
             }
 
-            _tempFeatures = new List<GeometryFeature>(features);
+            _tempFeatures = new List<IFeature>(features);
 
             _editManager.EditMode = EditMode.AddLine;
         }
 
         private void AddPolygon_OnClick(object sender, RoutedEventArgs args)
         {
-            IEnumerable<GeometryFeature> features = _targetLayer.GetFeatures().Cast<GeometryFeature>().Copy();
+            IEnumerable<IFeature> features = _targetLayer.GetFeatures().Copy();
 
             foreach (var feature in features)
             {
                 feature.RenderedGeometry.Clear();
             }
 
-            _tempFeatures = new List<GeometryFeature>(features);
+            _tempFeatures = new List<IFeature>(features);
 
             _editManager.EditMode = EditMode.AddPolygon;
         }
@@ -245,14 +245,14 @@ namespace Mapsui.Samples.Wpf.Editing
 
         private void Load_OnClick(object sender, RoutedEventArgs args)
         {
-            IEnumerable<GeometryFeature> features = _targetLayer.GetFeatures().Cast<GeometryFeature>().Copy();
+            IEnumerable<IFeature> features = _targetLayer.GetFeatures().Copy();
 
             foreach (var feature in features)
             {
                 feature.RenderedGeometry.Clear();
             }
 
-            _tempFeatures = new List<GeometryFeature>(features);
+            _tempFeatures = new List<IFeature>(features);
 
             _editManager.Layer.AddRange(features);
             _targetLayer.Clear();

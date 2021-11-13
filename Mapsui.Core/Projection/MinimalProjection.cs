@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Mapsui.Layers;
 
 namespace Mapsui.Projection
 {
@@ -36,10 +37,41 @@ namespace Mapsui.Projection
 
         public bool IsProjectionSupported(string fromCRS, string toCRS)
         {
-            if (!_toLonLat.ContainsKey(fromCRS)) return false;
-            if (!_fromLonLat.ContainsKey(toCRS)) return false;
+            return _toLonLat.ContainsKey(fromCRS) && _fromLonLat.ContainsKey(toCRS);
+        }
 
-            return true;
+        public void Project(string fromCRS, string toCRS, MPoint point)
+        {
+            Project(point, _toLonLat[fromCRS]);
+            Project(point, _fromLonLat[toCRS]);
+        }
+
+        private static void Project(MPoint point, Func<double, double, (double, double)> projectFunc)
+        {
+            (point.X, point.Y) = projectFunc(point.X, point.Y);
+        }
+
+        public void Project(string fromCRS, string toCRS, MRect rect)
+        {
+            Project(rect.Min, _toLonLat[fromCRS]);
+            Project(rect.Min, _fromLonLat[toCRS]);
+
+            Project(rect.Max, _toLonLat[fromCRS]);
+            Project(rect.Max, _fromLonLat[toCRS]);
+        }
+
+        public void Project(string fromCRS, string toCRS, IFeature feature)
+        {
+            Project(feature, _toLonLat[fromCRS]);
+            Project(feature, _fromLonLat[toCRS]);
+        }
+
+        private static void Project(IFeature feature, Func<double, double, (double, double)> transformFunc)
+        {
+            feature.CoordinateVisitor((x, y, setter) => {
+                var (xOut, yOut) = transformFunc(x, y);
+                setter(xOut, yOut);
+            });
         }
     }
 }

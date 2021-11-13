@@ -149,10 +149,10 @@ namespace Mapsui.Layers
         private RasterFeature ToFeature(TileInfo tileInfo)
         {
             var tileData = _tileSource.GetTile(tileInfo);
-            return new RasterFeature { Raster = ToGeometry(tileInfo, tileData) };
+            return new RasterFeature(ToRaster(tileInfo, tileData));
         }
 
-        private static MRaster? ToGeometry(TileInfo tileInfo, byte[]? tileData)
+        private static MRaster? ToRaster(TileInfo tileInfo, byte[]? tileData)
         {
             // A TileSource may return a byte array that is null. This is currently only implemented
             // for MbTilesTileSource. It is to indicate that the tile is not present in the source,

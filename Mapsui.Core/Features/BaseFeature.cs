@@ -1,11 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Mapsui.Styles;
 
 namespace Mapsui.Layers
 {
     public abstract class BaseFeature
     {
+        public BaseFeature() { }
+
+        public BaseFeature(BaseFeature baseFeature)
+        {
+            Styles = baseFeature.Styles.ToList();
+            foreach (var field in baseFeature.Fields)
+                this[field] = baseFeature[field];
+        }
+
         private readonly Dictionary<string, object?> _dictionary = new();
 
         public ICollection<IStyle> Styles { get; set; } = new Collection<IStyle>();

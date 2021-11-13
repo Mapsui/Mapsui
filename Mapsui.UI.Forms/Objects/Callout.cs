@@ -43,12 +43,13 @@ namespace Mapsui.UI.Forms
 
         public static double DefaultTitleFontSize = Device.GetNamedSize(NamedSize.Title, typeof(Label));
         public static FontAttributes DefaultTitleFontAttributes = FontAttributes.Bold;
+        public static Xamarin.Forms.Color DefaultTitleFontColor = Xamarin.Forms.Color.Black;
         public static TextAlignment DefaultTitleTextAlignment = TextAlignment.Center;
+        public static string DefaultSubtitleFontName = Xamarin.Forms.Font.Default.FontFamily;
         public static double DefaultSubtitleFontSize = Device.GetNamedSize(NamedSize.Subtitle, typeof(Label));
         public static FontAttributes DefaultSubtitleFontAttributes = FontAttributes.None;
+        public static Xamarin.Forms.Color DefaultSubtitleFontColor = Xamarin.Forms.Color.Black;
         public static TextAlignment DefaultSubtitleTextAlignment = TextAlignment.Start; // Center;
-        public static Color DefaultTitleFontColor = KnownColor.Black;
-        public static Color DefaultSubtitleFontColor = KnownColor.Black;
 #if __MAUI__
         public static string DefaultTitleFontName = null; // TODO: default font per platform
         public static string DefaultSubtitleFontName = null; // TODO: default font per platform
@@ -215,7 +216,7 @@ namespace Mapsui.UI.Forms
         {
             _pin = pin ?? throw new ArgumentNullException("Pin shouldn't be null"); ;
             if (_pin.Feature != null)
-                Feature = _pin.Feature.Copy();
+                Feature = _pin.Feature.Copy<GeometryFeature>();
             else
                 Feature = new GeometryFeature();
             Feature.Styles.Clear();

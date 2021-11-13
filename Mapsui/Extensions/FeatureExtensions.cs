@@ -1,23 +1,23 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Mapsui.GeometryLayer;
+using Mapsui.Layers;
 
 namespace Mapsui.Extensions
 {
     public static class FeatureExtensions
     {
-        public static GeometryFeature Copy(this GeometryFeature original)
+        public static T Copy<T>(this IFeature original)
         {
-            var geometryFeature = new GeometryFeature(original.Geometry.Copy());
-            geometryFeature.RenderedGeometry =
-                original.RenderedGeometry.ToDictionary(entry => entry.Key, entry => entry.Value);
-            geometryFeature.Styles = original.Styles.ToList();
-            foreach (var field in original.Fields)
-                geometryFeature[field] = original[field];
-            return geometryFeature;
+            return (T)Activator.CreateInstance(original.GetType(), original);
         }
 
-        public static IEnumerable<GeometryFeature> Copy(this IEnumerable<GeometryFeature> original)
+        public static IFeature Copy(this IFeature original)
+        {
+            return (IFeature)Activator.CreateInstance(original.GetType(), original);
+        }
+
+        public static IEnumerable<IFeature> Copy(this IEnumerable<IFeature> original)
         {
             return original.Select(f => f.Copy()).ToList();
         }
