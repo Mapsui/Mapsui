@@ -10,7 +10,7 @@ namespace Mapsui.Utilities
     {
         // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
         private readonly Timer _timer;
-        private Stopwatch _stopwatch;
+        private Stopwatch? _stopwatch;
         private long _stopwatchStart;
         private long _durationTicks;
         private readonly object _syncObject = new();
@@ -29,9 +29,9 @@ namespace Mapsui.Utilities
             _timer.Start();
         }
 
-        public EventHandler<AnimationEventArgs> Started { get; set; }
-        public EventHandler<AnimationEventArgs> Stopped { get; set; }
-        public EventHandler<AnimationEventArgs> Ticked { get; set; }
+        public EventHandler<AnimationEventArgs>? Started { get; set; }
+        public EventHandler<AnimationEventArgs>? Stopped { get; set; }
+        public EventHandler<AnimationEventArgs>? Ticked { get; set; }
 
         /// <summary>
         /// Duration of the whole animation cycle in milliseconds
@@ -72,7 +72,7 @@ namespace Mapsui.Utilities
         {
             if (!IsRunning) return;
 
-            _stopwatch.Stop();
+            _stopwatch?.Stop();
 
             if (gotoEnd)
             {

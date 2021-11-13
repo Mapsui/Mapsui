@@ -26,7 +26,7 @@ namespace Mapsui.Layers
 {
     public class Layer : BaseLayer, IAsyncDataFetcher
     {
-        private IProvider<IFeature> _dataSource;
+        private IProvider<IFeature>? _dataSource;
         private readonly object _syncRoot = new();
         private readonly ConcurrentStack<IFeature> _cache = new();
         private readonly FeatureFetchDispatcher<IFeature> _fetchDispatcher;
@@ -64,7 +64,7 @@ namespace Mapsui.Layers
         /// <summary>
         /// Data source for this layer
         /// </summary>
-        public IProvider<IFeature> DataSource
+        public IProvider<IFeature>? DataSource
         {
             get => _dataSource;
             set

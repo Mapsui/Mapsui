@@ -66,7 +66,10 @@ namespace Mapsui.Utilities
             // Its independent from the global animation cycle
             var v = (value - AnimationStart) / _animationDelta;
 
-            _tick(this, v);
+            if (_tick != null)
+            {
+                _tick(this, v);
+            }
         }
 
         /// <summary>
@@ -74,7 +77,10 @@ namespace Mapsui.Utilities
         /// </summary>
         public void Final()
         {
-            _final(this);
+            if (_final != null)
+            {
+                _final(this);
+            }
         }
     }
 }

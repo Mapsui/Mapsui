@@ -40,7 +40,7 @@ namespace Mapsui.Layers
         private FetchInfo? _fetchInfo;
         private List<FeatureSets> _sets = new();
         private readonly Timer _startFetchTimer;
-        private IProvider<IFeature> _dataSource;
+        private IProvider<IFeature>? _dataSource;
         private readonly int _numberOfFeaturesReturned;
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Mapsui.Layers
         /// </summary>
         public int FetchDelay { get; set; } = 1000;
 
-        public IProvider<IFeature> DataSource
+        public IProvider<IFeature>? DataSource
         {
             get => _dataSource;
             set

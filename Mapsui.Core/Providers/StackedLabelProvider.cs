@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Layers;
 using Mapsui.Styles;
@@ -23,9 +24,9 @@ namespace Mapsui.Providers
             _rectangleFill = rectangleFill;
         }
 
-        public string CRS { get; set; }
+        public string? CRS { get; set; }
 
-        private readonly Brush _rectangleFill;
+        private readonly Brush? _rectangleFill;
 
         private readonly Pen _rectangleLine;
 
@@ -41,7 +42,7 @@ namespace Mapsui.Providers
         }
 
         private static List<IFeature> GetFeaturesInView(double resolution, LabelStyle labelStyle,
-            IEnumerable<IFeature> features, Pen line, Brush fill)
+            IEnumerable<IFeature> features, Pen line, Brush? fill)
         {
             var margin = resolution * 50;
             var clusters = new List<Cluster>();
@@ -54,22 +55,25 @@ namespace Mapsui.Providers
 
             foreach (var cluster in clusters)
             {
-                if (cluster.Features.Count > 1) results.Add(CreateBoxFeature(resolution, cluster, line, fill));
+                if (cluster.Features?.Count > 1) results.Add(CreateBoxFeature(resolution, cluster, line, fill));
 
                 var offsetY = double.NaN;
 
-                var orderedFeatures = cluster.Features.OrderBy(f => f.Extent.Centroid.Y);
+                var orderedFeatures = cluster.Features?.OrderBy(f => f.Extent.Centroid.Y);
 
-                foreach (var pointFeature in orderedFeatures)
+                if (orderedFeatures != null)
                 {
-                    var position = CalculatePosition(cluster);
+                    foreach (var pointFeature in orderedFeatures)
+                    {
+                        var position = CalculatePosition(cluster);
 
-                    offsetY = CalculateOffsetY(offsetY, textHeight);
+                        offsetY = CalculateOffsetY(offsetY, textHeight);
 
-                    var labelText = labelStyle.GetLabelText(pointFeature);
-                    var labelFeature = CreateLabelFeature(position, labelStyle, offsetY, labelText);
+                        var labelText = labelStyle.GetLabelText(pointFeature);
+                        var labelFeature = CreateLabelFeature(position, labelStyle, offsetY, labelText);
 
-                    results.Add(labelFeature);
+                        results.Add(labelFeature);
+                    }
                 }
             }
             return results;
@@ -110,7 +114,7 @@ namespace Mapsui.Providers
         }
 
         private static IFeature CreateBoxFeature(double resolution, Cluster cluster, Pen line,
-            Brush fill)
+            Brush? fill)
         {
             return new RectFeature(GrowBox(cluster.Box, resolution))
             {
@@ -154,9 +158,9 @@ namespace Mapsui.Providers
 
                 var found = false;
                 foreach (var cluster in clusters)
-                    if (cluster.Box.Grow(minDistance).Contains(feature.Extent.Centroid))
+                    if (cluster.Box?.Grow(minDistance).Contains(feature.Extent.Centroid) ?? false)
                     {
-                        cluster.Features.Add(feature);
+                        cluster.Features?.Add(feature);
                         cluster.Box = cluster.Box.Join(feature.Extent);
                         found = true;
                         break;

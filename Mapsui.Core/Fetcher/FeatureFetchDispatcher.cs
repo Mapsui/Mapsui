@@ -37,7 +37,7 @@ namespace Mapsui.Fetcher
         {
             try
             {
-                var features = DataSource.GetFeatures(fetchInfo).ToList();
+                var features = DataSource?.GetFeatures(fetchInfo).ToList();
                 FetchCompleted(features, null);
             }
             catch (Exception exception)
@@ -75,7 +75,7 @@ namespace Mapsui.Fetcher
             Busy = true;
         }
 
-        public IProvider<T> DataSource { get; set; }
+        public IProvider<T>? DataSource { get; set; }
 
         public bool Busy
         {

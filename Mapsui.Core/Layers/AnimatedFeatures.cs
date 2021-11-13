@@ -88,7 +88,7 @@ namespace Mapsui.Layers
 
             foreach (var animatedItem in animatedItems)
             {
-                var target = animatedItem.Feature.Point;
+                var target = animatedItem.Feature?.Point;
                 if (animatedItem.PreviousPoint == null || animatedItem.CurrentPoint == null || target == null) continue;
                 if (animatedItem.PreviousPoint.Distance(animatedItem.CurrentPoint) < 10000) continue;
                 LogItem(animatedItem);
@@ -125,7 +125,7 @@ namespace Mapsui.Layers
         {
             foreach (var item in items)
             {
-                var target = item.Feature.Point;
+                var target = item.Feature?.Point;
                 if (item.PreviousPoint == null || item.CurrentPoint == null || target == null) continue;
                 if (item.PreviousPoint.Distance(item.CurrentPoint) > threshold) continue;
                 target.X = item.PreviousPoint.X + (item.CurrentPoint.X - item.PreviousPoint.X) * progress;
@@ -135,19 +135,19 @@ namespace Mapsui.Layers
 
         private static void LogItem(AnimatedItem item)
         {
-            Debug.WriteLine("Trackee: " + item.Feature["Trackee"]);
-            Debug.WriteLine("ID: " + item.Feature["ID"]);
-            Debug.WriteLine("speed: " + item.Feature["Speed"]);
-            Debug.WriteLine("Bps: " + item.Feature["Bps"]);
-            Debug.WriteLine("DateGps: " + item.Feature["DateGps"]);
-            Debug.WriteLine("DateReceived: " + item.Feature["DateReceived"]);
-            Debug.WriteLine("Longitude: " + item.Feature["Longitude"]);
-            Debug.WriteLine("Latitude: " + item.Feature["Latitude"]);
+            Debug.WriteLine("Trackee: " + item.Feature?["Trackee"]);
+            Debug.WriteLine("ID: " + item.Feature?["ID"]);
+            Debug.WriteLine("speed: " + item.Feature?["Speed"]);
+            Debug.WriteLine("Bps: " + item.Feature?["Bps"]);
+            Debug.WriteLine("DateGps: " + item.Feature?["DateGps"]);
+            Debug.WriteLine("DateReceived: " + item.Feature?["DateReceived"]);
+            Debug.WriteLine("Longitude: " + item.Feature?["Longitude"]);
+            Debug.WriteLine("Latitude: " + item.Feature?["Latitude"]);
 
-            Debug.WriteLine("X: " + item.CurrentPoint.X);
-            Debug.WriteLine("Y: " + item.CurrentPoint.Y);
-            Debug.WriteLine("Previous X: " + item.PreviousPoint.X);
-            Debug.WriteLine("Previous Y: " + item.PreviousPoint.Y);
+            Debug.WriteLine("X: " + item.CurrentPoint?.X);
+            Debug.WriteLine("Y: " + item.CurrentPoint?.Y);
+            Debug.WriteLine("Previous X: " + item.PreviousPoint?.X);
+            Debug.WriteLine("Previous Y: " + item.PreviousPoint?.Y);
             Debug.WriteLine("-------------------------------------------------");
         }
 

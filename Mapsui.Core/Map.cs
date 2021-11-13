@@ -93,7 +93,7 @@ namespace Mapsui
         /// <summary>
         /// Projection type of Map. Normally in format like "EPSG:3857"
         /// </summary>
-        public string CRS { get; set; }
+        public string? CRS { get; set; }
 
         /// <summary>
         /// A collection of layers. The first layer in the list is drawn first, the last one on top.
@@ -154,7 +154,7 @@ namespace Mapsui
         /// <summary>
         /// List of all native resolutions of this map
         /// </summary>
-        public IReadOnlyList<double> Resolutions { get; private set; }
+        public IReadOnlyList<double> Resolutions { get; private set; } = new List<double>();
 
         /// <summary>
         /// Called whenever a property changed
