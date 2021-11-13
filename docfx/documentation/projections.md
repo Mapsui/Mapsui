@@ -13,8 +13,8 @@ In geospatial there is a standard way to refer to a coordinate systems, the CRS 
 ## Supported coordinate systems (CRSes)
 
 Out of the box Mapsui only supports the projection between two coordinate systems.
-- lat/lon, or WGS84, with the CRS: [EPSG:4326](https://epsg.io/4326). GPS coordinates are in lat/lon
-- SphericalMercator, or WebMercator, PseudoMercator with CRS: [EPSG:3857](https://epsg.io/3857). This is the coordinate system used in the maps of google and openstreetmap.
+- [EPSG:4326](https://epsg.io/4326) or lat/lon, or WGS84. GPS coordinates are in lat/lon
+- [EPSG:3857](https://epsg.io/3857) or SphericalMercator, or WebMercator, PseudoMercator. This is the coordinate system used in the maps of google and openstreetmap.
 
  It is however possible to create your own projection. You need to implement the IProjection interface. Within this implementation you need to use some other projection library. A recommended one is [ProjNet4GeoAPI](https://github.com/NetTopologySuite/ProjNet4GeoAPI).
 
@@ -24,7 +24,6 @@ Out of the box Mapsui only supports the projection between two coordinate system
 - **Layers**: There are several layers that provider data. The layers always need to return data in the coordinate system that the map is using. If not, different projections
 will be drawn on top of each other and things go wrong. 
 - **Providers**: Some Layers have a DataSource (Provider). This DataSource could contain data in another coordinate system. This data can be converted to the map coordinate system using the ProjectingProvider. 
- 
 
 ## The most common scenario
 
