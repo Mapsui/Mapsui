@@ -88,16 +88,20 @@ namespace Mapsui.Samples.Common.Maps
             animations.Add(entry2);
 
             var entry3 = new AnimationEntry(
-                start: style.Outline.Color,
-                end: style.Outline.Color,
+                start: style.Outline?.Color ?? Color.Gray,
+                end: style.Outline?.Color ?? Color.Gray,
                 animationStart: 0,
                 animationEnd: 1,
                 easing: Easing.Linear,
                 tick: (entry, value) => {
                     var color = (Color)entry.Start;
+                    style.Fill ??= new Brush();
                     style.Fill.Color = new Color(color.R, color.G, (int)(value < 0.5 ? (1.0 - 2.0 * value) * 255 : ((value - 0.5) * 2.0) * 255));
                 },
-                final: (entry) => { style.Fill.Color = (Color)entry.End; }
+                final: (entry) => {
+                    style.Fill ??= new Brush();
+                    style.Fill.Color = entry.End as Color;
+                }
             );
             animations.Add(entry3);
 
