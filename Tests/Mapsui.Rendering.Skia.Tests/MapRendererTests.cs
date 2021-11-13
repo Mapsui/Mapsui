@@ -20,7 +20,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = VectorStyleSample.CreateMap();
-            var viewport = map.Extent.Multiply(3).ToViewport(200);
+            var viewport = map.Extent!.Multiply(3).ToViewport(200);
             const string fileName = "vector_symbol.png";
 
             // act
@@ -38,7 +38,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = BitmapSymbolSample.CreateMap();
-            var viewport = map.Extent.Multiply(3).ToViewport(200);
+            var viewport = map.Extent!.Multiply(3).ToViewport(200);
             const string fileName = "points_with_symbolstyle.png";
 
             // act
@@ -56,7 +56,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = BitmapSymbolInCollectionSample.CreateMap();
-            var viewport = map.Extent.Multiply(3).ToViewport(200);
+            var viewport = map.Extent!.Multiply(3).ToViewport(200);
             const string fileName = "points_with_symbolstyle.png"; // Todo: Do not reuse the png.
 
             // act
@@ -74,7 +74,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = SvgSymbolSample.CreateMap();
-            var viewport = map.Extent.Multiply(3).ToViewport(200);
+            var viewport = map.Extent!.Multiply(3).ToViewport(200);
             const string fileName = "points_with_svgsymbolstyle.png";
 
             // act
@@ -118,7 +118,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = BitmapSymbolWithRotationAndOffsetSample.CreateMap();
-            var viewport = map.Extent.Multiply(4).ToViewport(200);
+            var viewport = map.Extent!.Multiply(4).ToViewport(200);
             const string fileName = "bitmap_symbol.png";
 
             // act
@@ -136,7 +136,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = SymbolTypesSample.CreateMap();
-            var viewport = map.Extent.Multiply(3).ToViewport(200);
+            var viewport = map.Extent!.Multiply(3).ToViewport(200);
             const string fileName = "vector_symbol_symboltype.png";
 
             // act
@@ -154,7 +154,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = PointInWorldUnitsSample.CreateMap();
-            var viewport = map.Extent.Multiply(3).ToViewport(200);
+            var viewport = map.Extent!.Multiply(3).ToViewport(200);
             const string fileName = "vector_symbol_unittype.png";
 
             // act
@@ -172,7 +172,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = PolygonSample.CreateMap();
-            var viewport = map.Extent.Multiply(1.1).ToViewport(600);
+            var viewport = map.Extent!.Multiply(1.1).ToViewport(600);
             const string fileName = "polygon.png";
 
             // act
@@ -190,7 +190,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = LineSample.CreateMap();
-            var viewport = map.Extent.Multiply(1.1).ToViewport(600);
+            var viewport = map.Extent!.Multiply(1.1).ToViewport(600);
             const string fileName = "line.png";
 
             // act
@@ -208,7 +208,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = TilesSample.CreateMap();
-            var viewport = map.Extent.Multiply(1.1).ToViewport(600);
+            var viewport = map.Extent!.Multiply(1.1).ToViewport(600);
             const string fileName = "tilelayer.png";
 
             // act
@@ -226,7 +226,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = LabelSample.CreateMap();
-            var viewport = map.Extent.Multiply(2).ToViewport(300);
+            var viewport = map.Extent!.Multiply(2).ToViewport(300);
             const string fileName = "labels.png";
 
             // act
@@ -244,7 +244,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = ProjectionSample.CreateMap();
-            var viewport = map.Extent.Multiply(1.1).ToViewport(600);
+            var viewport = map.Extent!.Multiply(1.1).ToViewport(600);
             const string fileName = "projection.png";
 
             // act 
@@ -262,7 +262,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             // arrange
             var map = StackedLabelsSample.CreateMap();
-            var viewport = map.Extent.Multiply(1.2).ToViewport(600);
+            var viewport = map.Extent!.Multiply(1.2).ToViewport(600);
             const string fileName = "stacked_labels.png";
 
             // act 
@@ -285,12 +285,22 @@ namespace Mapsui.Rendering.Skia.Tests
             return true;
         }
 
-        private bool CompareBitmaps(Stream bitmapStream1, Stream bitmapStream2, int allowedColorDistance = 0, double proportionCorrect = 1)
+        private bool CompareBitmaps(Stream? bitmapStream1, Stream? bitmapStream2, int allowedColorDistance = 0, double proportionCorrect = 1)
         {
             // The bitmaps in WPF can slightly differ from test to test. No idea why. So introduced proportion correct.
 
             long trueCount = 0;
             long falseCount = 0;
+
+            if (bitmapStream1 == null && bitmapStream2 == null)
+            {
+                return true;
+            }
+
+            if (bitmapStream1 == null || bitmapStream2 == null)
+            {
+                return false;
+            }
 
             bitmapStream1.Position = 0;
             bitmapStream2.Position = 0;

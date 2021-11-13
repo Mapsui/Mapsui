@@ -70,8 +70,11 @@ namespace Mapsui.Rendering.Skia
             Render(canvas, viewport, widgets, 1);
         }
 
-        public MemoryStream? RenderToBitmapStream(IReadOnlyViewport viewport, IEnumerable<ILayer> layers, Color? background = null, float pixelDensity = 1)
+        public MemoryStream? RenderToBitmapStream(IReadOnlyViewport? viewport, IEnumerable<ILayer> layers, Color? background = null, float pixelDensity = 1)
         {
+            if (viewport == null)
+                return null;
+
             try
             {
                 var width = (int)viewport.Width;
