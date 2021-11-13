@@ -108,7 +108,7 @@ namespace Mapsui.Providers.ArcGIS.Image
             return features;
         }
 
-        public bool TryGetMap(IViewport viewport, out MRaster? raster)
+        public bool TryGetMap(IViewport viewport, [NotNullWhen(true)] out MRaster? raster)
         {
             int width;
             int height;

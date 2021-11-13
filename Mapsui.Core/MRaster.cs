@@ -11,7 +11,7 @@ namespace Mapsui
             TickFetched = raster.TickFetched;
         }
 
-        public MRaster(MemoryStream data, MRect rect) : base(rect)
+        public MRaster(MemoryStream data, MRect? rect) : base(rect)
         {
             Data = data;
             TickFetched = DateTime.Now.Ticks;
