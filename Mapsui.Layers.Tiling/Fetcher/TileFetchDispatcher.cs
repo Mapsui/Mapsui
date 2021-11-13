@@ -23,12 +23,12 @@ namespace Mapsui.Fetcher
         private readonly ConcurrentHashSet<TileIndex> _tilesInProgress = new();
         private readonly ITileSchema? _tileSchema;
         private readonly FetchMachine _fetchMachine;
-        private readonly Func<TileInfo, RasterFeature> _fetchTileAsFeature;
+        private readonly Func<TileInfo, RasterFeature?> _fetchTileAsFeature;
 
         public TileFetchDispatcher(
             ITileCache<RasterFeature?> tileCache,
             ITileSchema? tileSchema,
-            Func<TileInfo, RasterFeature> fetchTileAsFeature,
+            Func<TileInfo, RasterFeature?> fetchTileAsFeature,
             IDataFetchStrategy? dataFetchStrategy = null)
         {
             _tileCache = tileCache;

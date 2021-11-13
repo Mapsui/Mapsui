@@ -12,7 +12,7 @@ namespace Mapsui.Styles
         /// <summary>
         /// Line style for line geometries
         /// </summary>
-        public Pen Line { get; set; }
+        public Pen? Line { get; set; }
 
         /// <summary>
         /// Outline style for line and polygon geometries

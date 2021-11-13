@@ -48,12 +48,14 @@ namespace Mapsui.Samples.WinUI
 
         private void FillComboBoxWithCategories()
         {
-            var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c);
+            var categories = AllSamples.GetSamples()?.Select(s => s.Category).Distinct().OrderBy(c => c);
+            if (categories == null)
+                return;
+
             foreach (var category in categories)
             {
                 CategoryComboBox.Items?.Add(category);
             }
-
             CategoryComboBox.SelectedIndex = 1;
         }
 
@@ -67,7 +69,11 @@ namespace Mapsui.Samples.WinUI
         {
             var selectedCategory = CategoryComboBox.SelectedValue?.ToString() ?? "";
             SampleList.Children.Clear();
-            foreach (var sample in AllSamples.GetSamples().Where(s => s.Category == selectedCategory))
+            var samples = AllSamples.GetSamples()?.Where(s => s.Category == selectedCategory);
+            if (samples == null)
+                return;
+
+            foreach (var sample in samples)
                 SampleList.Children.Add(CreateRadioButton(sample));
         }
 
