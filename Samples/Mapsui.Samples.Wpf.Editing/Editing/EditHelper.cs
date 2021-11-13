@@ -18,10 +18,10 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
         /// <returns></returns>
         public static bool TryInsertVertex(MapInfo mapInfo, IList<Point> vertices, double screenDistance)
         {
-            var (distance, segment) = GetDistanceAndSegment(mapInfo.WorldPosition.ToPoint(), vertices);
+            var (distance, segment) = GetDistanceAndSegment(mapInfo.WorldPosition?.ToPoint(), vertices);
             if (IsCloseEnough(distance, mapInfo.Resolution, screenDistance))
             {
-                vertices.Insert(segment + 1, mapInfo.WorldPosition.Clone().ToPoint());
+                vertices.Insert(segment + 1, mapInfo.WorldPosition!.Clone().ToPoint());
                 return true;
             }
             return false;
@@ -32,20 +32,23 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
             return distance <= resolution * screenDistance;
         }
 
-        private static (double Distance, int segment) GetDistanceAndSegment(Point point, IList<Point> points)
+        private static (double Distance, int segment) GetDistanceAndSegment(Point? point, IList<Point> points)
         {
             // Move this to Mapsui
 
             var minDist = double.MaxValue;
-            int segment = 0;
+            var segment = 0;
 
-            for (var i = 0; i < points.Count - 1; i++)
+            if (point != null)
             {
-                var dist = CGAlgorithms.DistancePointLine(point, points[i], points[i + 1]);
-                if (dist < minDist)
+                for (var i = 0; i < points.Count - 1; i++)
                 {
-                    minDist = dist;
-                    segment = i;
+                    var dist = CGAlgorithms.DistancePointLine(point, points[i], points[i + 1]);
+                    if (dist < minDist)
+                    {
+                        minDist = dist;
+                        segment = i;
+                    }
                 }
             }
 

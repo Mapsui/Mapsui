@@ -62,15 +62,15 @@ namespace Mapsui.Samples.Wpf.Editing
                         // Take into account VertexRadius in feature select, because the objective
                         // is vertext select.
                         var mapInfo = mapControl.GetMapInfo(screenPosition, editManager.VertexRadius);
-                        if (editManager.EditMode == EditMode.Modify && mapInfo.Feature != null)
+                        if (editManager.EditMode == EditMode.Modify && mapInfo?.Feature != null)
                         {
                             return editManager.StartDragging(mapInfo, editManager.VertexRadius);
                         }
-                        if (editManager.EditMode == EditMode.Rotate && mapInfo.Feature != null)
+                        if (editManager.EditMode == EditMode.Rotate && mapInfo?.Feature != null)
                         {
                             return editManager.StartRotating(mapInfo);
                         }
-                        if (editManager.EditMode == EditMode.Scale && mapInfo.Feature != null)
+                        if (editManager.EditMode == EditMode.Scale && mapInfo?.Feature != null)
                         {
                             return editManager.StartScaling(mapInfo);
                         }
@@ -80,11 +80,11 @@ namespace Mapsui.Samples.Wpf.Editing
                     {
                         var args = mapControl.GetMapInfo(screenPosition);
                         if (editManager.EditMode == EditMode.Modify)
-                            return editManager.Dragging(args.WorldPosition.ToPoint());
+                            return editManager.Dragging(args?.WorldPosition?.ToPoint());
                         if (editManager.EditMode == EditMode.Rotate)
-                            return editManager.Rotating(args.WorldPosition.ToPoint());
+                            return editManager.Rotating(args?.WorldPosition?.ToPoint());
                         if (editManager.EditMode == EditMode.Scale)
-                            return editManager.Scaling(args.WorldPosition.ToPoint());
+                            return editManager.Scaling(args?.WorldPosition?.ToPoint());
 
                         return false;
                     }
@@ -106,7 +106,7 @@ namespace Mapsui.Samples.Wpf.Editing
             return Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift);
         }
 
-        private static bool IsClick(MPoint screenPosition, MPoint mouseDownScreenPosition)
+        private static bool IsClick(MPoint? screenPosition, MPoint? mouseDownScreenPosition)
         {
             if (mouseDownScreenPosition == null || screenPosition == null)
                 return false;
