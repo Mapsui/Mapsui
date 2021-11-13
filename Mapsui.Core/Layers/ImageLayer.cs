@@ -167,7 +167,7 @@ namespace Mapsui.Layers
             {
                 features = features.ToList();
 
-                _sets.Add(new FeatureSets { TimeRequested = (long)state, Features = features });
+                _sets.Add(new FeatureSets { TimeRequested = state == null ? 0: (long)state , Features = features });
 
                 //Keep only two most recent sets. The older ones will be removed
                 _sets = _sets.OrderByDescending(c => c.TimeRequested).Take(_numberOfFeaturesReturned).ToList();

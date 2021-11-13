@@ -98,7 +98,7 @@ namespace Mapsui.Providers
         }
 
         private static IFeature CreateLabelFeature(MPoint position, LabelStyle labelStyle, double offsetY,
-            string text)
+            string? text)
         {
             return new PointFeature(position)
             {

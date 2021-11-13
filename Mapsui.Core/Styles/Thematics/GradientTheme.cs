@@ -142,7 +142,7 @@ namespace Mapsui.Styles.Thematics
             return style;
         }
 
-        private void CalculateVectorStyle(VectorStyle style, VectorStyle min, VectorStyle max, double value)
+        private void CalculateVectorStyle(VectorStyle? style, VectorStyle? min, VectorStyle? max, double value)
         {
             var dFrac = Fraction(value);
             double fFrac = Convert.ToSingle(dFrac);
@@ -161,7 +161,7 @@ namespace Mapsui.Styles.Thematics
                 style.Outline = InterpolatePen(min.Outline, max.Outline, value);
         }
 
-        private void CalculateSymbolStyle(SymbolStyle style, SymbolStyle min, SymbolStyle max, double value)
+        private void CalculateSymbolStyle(SymbolStyle? style, SymbolStyle? min, SymbolStyle? max, double value)
         {
             var dFrac = Fraction(value);
             style.BitmapId = (dFrac > 0.5) ? min.BitmapId : max.BitmapId;
