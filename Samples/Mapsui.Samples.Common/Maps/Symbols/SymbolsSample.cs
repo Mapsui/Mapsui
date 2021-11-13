@@ -30,7 +30,7 @@ namespace Mapsui.Samples.Common.Maps
             return map;
         }
 
-        private static ILayer CreateStylesLayer(MRect envelope)
+        private static ILayer CreateStylesLayer(MRect? envelope)
         {
             return new MemoryLayer
             {
@@ -41,7 +41,7 @@ namespace Mapsui.Samples.Common.Maps
             };
         }
 
-        public static MemoryProvider<IFeature> CreateMemoryProviderWithDiverseSymbols(MRect envelope, int count = 100)
+        public static MemoryProvider<IFeature> CreateMemoryProviderWithDiverseSymbols(MRect? envelope, int count = 100)
         {
 
             return new MemoryProvider<IFeature>(CreateDiverseFeatures(RandomPointGenerator.GenerateRandomPoints(envelope, count)));

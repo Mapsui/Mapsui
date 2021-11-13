@@ -5,6 +5,6 @@ namespace Mapsui.Samples.Forms
 {
     public interface IFormsSample : ISample
     {
-        bool OnClick(object sender, EventArgs args);
+        bool OnClick(object? sender, EventArgs args);
     }
 }

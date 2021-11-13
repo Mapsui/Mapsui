@@ -55,7 +55,7 @@ namespace Mapsui.Samples.Common.Maps.Callouts
         {
             const string path = "Mapsui.Samples.Common.EmbeddedResources.congo.json";
             var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
-            var stream = assembly.GetManifestResourceStream(path);
+            var stream = assembly.GetManifestResourceStream(path) ?? throw new NullReferenceException();
             var cities = DeserializeFromStream<City>(stream);
 
             return cities.Select(c => {

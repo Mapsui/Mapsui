@@ -11,7 +11,7 @@ namespace Mapsui.Samples.Forms
     public partial class MainPage : ContentPage
     {
         IEnumerable<ISample>? allSamples;
-        Func<object, EventArgs, bool> clicker;
+        Func<object?, EventArgs, bool>? clicker;
 
         public MainPage()
         {

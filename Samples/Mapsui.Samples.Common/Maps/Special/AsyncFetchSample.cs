@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -81,7 +82,7 @@ namespace Mapsui.Samples.Common.Maps
             using (var sr = new System.IO.StreamReader(stream))
             using (var jsonTextReader = new JsonTextReader(sr))
             {
-                return serializer.Deserialize<List<T>>(jsonTextReader);
+                return serializer.Deserialize<List<T>>(jsonTextReader) ?? throw new NullReferenceException();
             }
         }
 

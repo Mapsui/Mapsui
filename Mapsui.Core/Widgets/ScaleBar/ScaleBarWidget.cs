@@ -183,12 +183,12 @@ namespace Mapsui.Widgets.ScaleBar
         /// </summary>
         public float TextMargin => 1;
 
-        private Font _font = DefaultFont;
+        private Font? _font = DefaultFont;
 
         /// <summary>
         /// Font to use for drawing text
         /// </summary>
-        public Font Font
+        public Font? Font
         {
             get => _font ?? DefaultFont;
             set
