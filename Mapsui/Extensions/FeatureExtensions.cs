@@ -7,9 +7,9 @@ namespace Mapsui.Extensions
 {
     public static class FeatureExtensions
     {
-        public static T Copy<T>(this IFeature original)
+        public static T Copy<T>(this T original)
         {
-            return (T)Activator.CreateInstance(original.GetType(), original);
+            return (T)Activator.CreateInstance(typeof(T), original);
         }
 
         public static IFeature Copy(this IFeature original)
