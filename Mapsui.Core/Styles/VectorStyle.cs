@@ -52,18 +52,18 @@ namespace Mapsui.Styles
 
         public override int GetHashCode()
         {
-            return Line.GetHashCode()
-                ^ Outline.GetHashCode()
-                ^ Fill.GetHashCode()
+            return Line?.GetHashCode() ?? 0
+                ^ Outline?.GetHashCode() ?? 0
+                ^ Fill?.GetHashCode() ?? 0
                 ^ base.GetHashCode();
         }
 
-        public static bool operator ==(VectorStyle vectorStyle1, VectorStyle vectorStyle2)
+        public static bool operator ==(VectorStyle? vectorStyle1, VectorStyle? vectorStyle2)
         {
             return Equals(vectorStyle1, vectorStyle2);
         }
 
-        public static bool operator !=(VectorStyle vectorStyle1, VectorStyle vectorStyle2)
+        public static bool operator !=(VectorStyle? vectorStyle1, VectorStyle? vectorStyle2)
         {
             return !Equals(vectorStyle1, vectorStyle2);
         }

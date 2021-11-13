@@ -124,23 +124,23 @@ namespace Mapsui.UI.Objects
         {
             base.OnPropertyChanged(propertyName);
 
+            var vectorStyle = ((VectorStyle?)Feature?.Styles.FirstOrDefault());
+            if (vectorStyle == null || vectorStyle.Line == null)
+                return;
+
             switch (propertyName)
             {
                 case nameof(StrokeWidth):
-                    if (Feature != null)
-                        ((VectorStyle)Feature.Styles.First()).Line.Width = StrokeWidth;
+                    vectorStyle.Line.Width = StrokeWidth;
                     break;
                 case nameof(StrokeColor):
-                    if (Feature != null)
-                        ((VectorStyle)Feature.Styles.First()).Line.Color = StrokeColor.ToMapsui();
+                    vectorStyle.Line.Color = StrokeColor.ToMapsui();
                     break;
                 case nameof(MinVisible):
-                    if (Feature != null)
-                        ((VectorStyle)Feature.Styles.First()).MinVisible = MinVisible;
+                    vectorStyle.MinVisible = MinVisible;
                     break;
                 case nameof(MaxVisible):
-                    if (Feature != null)
-                        ((VectorStyle)Feature.Styles.First()).MaxVisible = MaxVisible;
+                    vectorStyle.MaxVisible = MaxVisible;
                     break;
             }
         }

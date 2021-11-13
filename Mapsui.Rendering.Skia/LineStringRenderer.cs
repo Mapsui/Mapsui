@@ -33,7 +33,7 @@ namespace Mapsui.Rendering.Skia
                 float[]? dashArray = null;
                 float dashOffset = 0;
 
-                if (vectorStyle is not null)
+                if (vectorStyle is not null && vectorStyle.Line != null)
                 {
                     lineWidth = (float)vectorStyle.Line.Width;
                     lineColor = vectorStyle.Line.Color;
