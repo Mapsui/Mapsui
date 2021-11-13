@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Net;
@@ -16,9 +17,9 @@ namespace Mapsui.Providers.ArcGIS.Image
     public class ArcGISImageServiceProvider : IProjectingProvider
     {
         private int _timeOut;
-        private string _url;
+        private string? _url;
 
-        public string Token { get; set; }
+        public string? Token { get; set; }
         public ArcGISImageCapabilities ArcGisImageCapabilities { get; private set; }
 
         public ArcGISImageServiceProvider(ArcGISImageCapabilities capabilities, bool continueOnError = true, string? token = null)
@@ -67,12 +68,12 @@ namespace Mapsui.Providers.ArcGIS.Image
             }
         }
 
-        private static void CapabilitiesHelperCapabilitiesFailed(object sender, EventArgs e)
+        private static void CapabilitiesHelperCapabilitiesFailed(object? sender, EventArgs e)
         {
             throw new Exception("Unable to get ArcGISImage capbilities");
         }
 
-        private void CapabilitiesHelperCapabilitiesReceived(object sender, EventArgs e)
+        private void CapabilitiesHelperCapabilitiesReceived(object? sender, EventArgs e)
         {
             var capabilities = sender as ArcGISImageCapabilities;
             if (capabilities == null)
@@ -83,7 +84,7 @@ namespace Mapsui.Providers.ArcGIS.Image
 
         public string CRS { get; set; }
 
-        public ICredentials Credentials { get; set; }
+        public ICredentials? Credentials { get; set; }
 
         /// <summary>
         /// Timeout of webrequest in milliseconds. Default is 10 seconds
@@ -100,14 +101,14 @@ namespace Mapsui.Providers.ArcGIS.Image
 
             var viewport = fetchInfo.ToViewport();
 
-            if (TryGetMap(viewport, out MRaster raster))
+            if (TryGetMap(viewport, out var raster))
             {
                 features.Add(new RasterFeature(raster));
             }
             return features;
         }
 
-        public bool TryGetMap(IViewport viewport, out MRaster raster)
+        public bool TryGetMap(IViewport viewport, out MRaster? raster)
         {
             int width;
             int height;
@@ -171,7 +172,7 @@ namespace Mapsui.Providers.ArcGIS.Image
         {
             var url = new StringBuilder(Url);
 
-            if (!ArcGisImageCapabilities.ServiceUrl.Contains("?")) url.Append("?");
+            if (!ArcGisImageCapabilities.ServiceUrl?.Contains("?") ?? false) url.Append("?");
             if (!url.ToString().EndsWith("&") && !url.ToString().EndsWith("?")) url.Append("&");
 
             url.AppendFormat(CultureInfo.InvariantCulture, "bbox={0},{1},{2},{3}",

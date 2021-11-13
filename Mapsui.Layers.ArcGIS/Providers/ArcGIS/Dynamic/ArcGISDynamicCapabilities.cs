@@ -23,7 +23,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
         public ArcGISLayer[]? layers { get; set; }
         public IDictionary<string, string>? documentInfo { get; set; }
 
-        public string[] GetSupportedImageFormatTypes()
+        public string[]? GetSupportedImageFormatTypes()
         {
             return supportedImageFormatTypes?.Split(',');
         }

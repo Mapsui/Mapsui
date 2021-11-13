@@ -16,10 +16,10 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
     public class ArcGISDynamicProvider : IProjectingProvider
     {
         private int _timeOut;
-        private string _url;
-        private string _crs;
+        private string? _url;
+        private string? _crs;
 
-        public string Token { get; set; }
+        public string? Token { get; set; }
 
         /// <summary>
         /// Create ArcGisDynamicProvider based on a given capabilities file
@@ -61,7 +61,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
         }
 
         public ArcGISDynamicCapabilities ArcGisDynamicCapabilities { get; private set; }
-        public ICredentials Credentials { get; set; }
+        public ICredentials? Credentials { get; set; }
 
         public string Url
         {
@@ -83,7 +83,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             set => _timeOut = value;
         }
 
-        public string CRS
+        public string? CRS
         {
             get => _crs;
             set => _crs = value;
@@ -99,7 +99,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
 
             IViewport viewport = fetchInfo.ToViewport();
 
-            if (TryGetMap(viewport, out MRaster raster))
+            if (TryGetMap(viewport, out var raster))
             {
                 features.Add(new RasterFeature(raster));
             }
@@ -111,12 +111,12 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             return new MRect(ArcGisDynamicCapabilities.initialExtent.xmin, ArcGisDynamicCapabilities.initialExtent.ymin, ArcGisDynamicCapabilities.initialExtent.xmax, ArcGisDynamicCapabilities.initialExtent.ymax);
         }
 
-        private void CapabilitiesHelperCapabilitiesFailed(object sender, EventArgs e)
+        private void CapabilitiesHelperCapabilitiesFailed(object? sender, EventArgs e)
         {
             Debug.WriteLine("Error getting ArcGIS Capabilities");
         }
 
-        private void CapabilitiesHelperCapabilitiesReceived(object sender, EventArgs e)
+        private void CapabilitiesHelperCapabilitiesReceived(object? sender, EventArgs e)
         {
             var capabilities = sender as ArcGISDynamicCapabilities;
             if (capabilities == null)
@@ -128,7 +128,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
         /// <summary>
         /// Retrieves the bitmap from ArcGIS Dynamic service
         /// </summary>
-        public bool TryGetMap(IViewport viewport, out MRaster raster)
+        public bool TryGetMap(IViewport viewport, out MRaster? raster)
         {
             int width;
             int height;
@@ -179,7 +179,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             var sr = CreateSr(CRS);
             var strReq = new StringBuilder(_url);
             strReq.Append("/export?");
-            strReq.AppendFormat(CultureInfo.InvariantCulture, "bbox={0},{1},{2},{3}", box.Min.X, box.Min.Y, box.Max.X, box.Max.Y);
+            strReq.AppendFormat(CultureInfo.InvariantCulture, "bbox={0},{1},{2},{3}", box?.Min.X, box?.Min.Y, box?.Max.X, box?.Max.Y);
             strReq.AppendFormat("&bboxSR={0}", sr);
             strReq.AppendFormat("&imageSR={0}", sr);
             strReq.AppendFormat("&size={0},{1}", width, height);

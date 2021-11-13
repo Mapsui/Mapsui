@@ -19,10 +19,10 @@ namespace Mapsui.Providers.ArcGIS
 
     public class CapabilitiesHelper
     {
-        private IArcGISCapabilities _arcGisCapabilities;
-        private CapabilitiesType _capabilitiesType;
+        private IArcGISCapabilities? _arcGisCapabilities;
+        private CapabilitiesType? _capabilitiesType;
         private int _timeOut;
-        private string _url;
+        private string? _url;
 
         public delegate void StatusEventHandler(object? sender, EventArgs e);
 
@@ -70,7 +70,7 @@ namespace Mapsui.Providers.ArcGIS
         /// <param name="url">Url of map service example: http://url/arcgis/rest/services/test/MapServer </param>
         /// <param name="capabilitiesType"></param>
         /// <param name="token">Token string to access the service </param>
-        public void GetCapabilities(string url, CapabilitiesType capabilitiesType, string token)
+        public void GetCapabilities(string url, CapabilitiesType capabilitiesType, string? token)
         {
             ExecuteRequest(url, capabilitiesType, null, token);
         }
