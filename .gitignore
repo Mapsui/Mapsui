@@ -72,3 +72,4 @@ Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Android/Resources/Resource.des
 AppPackages/
 *.nupkg
 
+.idea
