@@ -28,7 +28,7 @@ namespace Mapsui.Samples.Common.Maps
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             var lineStringLayer = CreateLineStringLayer(CreateLineStringStyle());
             map.Layers.Add(lineStringLayer);
-            map.Home = n => n.NavigateTo(lineStringLayer.Extent.Centroid, 200);
+            map.Home = n => n.NavigateTo(lineStringLayer.Extent?.Centroid, 200);
             return map;
         }
 

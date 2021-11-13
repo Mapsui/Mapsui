@@ -81,8 +81,12 @@ namespace Mapsui.Samples.Forms.Shared
                         {
                             // Double click on callout moves pin
                             var p = e.Callout?.Pin;
-                            p.Position = new Position(p.Position.Latitude + 0.01, p.Position.Longitude);
-                            e.Handled = true;
+                            if (p != null)
+                            {
+                                p.Position = new Position(p.Position.Latitude + 0.01, p.Position.Longitude);
+                                e.Handled = true;
+                            }
+
                             return;
                         }
                         if (e.Callout != null && e.Callout.Title != "You clicked me!")

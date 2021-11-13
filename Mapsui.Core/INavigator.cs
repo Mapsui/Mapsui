@@ -26,7 +26,7 @@ namespace Mapsui
         /// <param name="resolution">The new resolution</param>
         /// <param name="duration">Duration of animation in milliseconds</param>
         /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
-        void NavigateTo(MPoint center, double resolution, long duration = 0, Easing? easing = default);
+        void NavigateTo(MPoint? center, double resolution, long duration = 0, Easing? easing = default);
 
         /// <summary>
         /// Navigate to a resolution, so such the map uses the fill method
