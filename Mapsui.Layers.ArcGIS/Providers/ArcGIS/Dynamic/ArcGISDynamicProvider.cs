@@ -101,11 +101,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
 
             if (TryGetMap(viewport, out MRaster raster))
             {
-                var feature = new RasterFeature
-                {
-                    Raster = raster
-                };
-                features.Add(feature);
+                features.Add(new RasterFeature(raster));
             }
             return features;
         }

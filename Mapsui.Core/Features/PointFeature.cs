@@ -16,5 +16,14 @@ namespace Mapsui.Layers
 
         public MPoint Point { get; }
         public MRect Extent => Point.MRect;
+
+        public void CoordinateVisitor(Action<double, double, CoordinateSetter> visit)
+        {
+            visit(Point.X, Point.Y, (x, y) => {
+                Point.X = x;
+                Point.Y = x;
+            });
+        }
+
     }
 }

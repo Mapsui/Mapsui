@@ -2,6 +2,7 @@ using System;
 using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.Layers;
+using Mapsui.Projection;
 
 namespace Mapsui.GeometryLayer
 {
@@ -47,6 +48,18 @@ namespace Mapsui.GeometryLayer
                 RenderedGeometry.Clear();
             }
             _disposed = true;
+        }
+
+        public void CoordinateVisitor(Action<double, double, CoordinateSetter> visit)
+        {
+            var vertices = Geometry.AllVertices();
+            foreach (var vertex in vertices)
+            {
+                visit(vertex.X, vertex.Y, (x, y) => {
+                    vertex.X = x;
+                    vertex.Y = y;
+                });
+            }
         }
     }
 }

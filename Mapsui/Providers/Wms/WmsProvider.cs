@@ -475,10 +475,7 @@ namespace Mapsui.Providers.Wms
             };
             if (TryGetMap(view, out MRaster raster))
             {
-                features.Add(new RasterFeature
-                {
-                    Raster = raster
-                });
+                features.Add(new RasterFeature(raster));
             }
             return features;
         }

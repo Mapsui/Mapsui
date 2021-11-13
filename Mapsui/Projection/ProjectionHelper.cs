@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Extensions;
-using Mapsui.Geometries;
 using Mapsui.GeometryLayer;
 using Mapsui.Projection;
 
@@ -12,8 +11,8 @@ namespace Mapsui.Utilities
     {
         public const string EpsgPrefix = "EPSG:";
 
-        public static BoundingBox? Project(BoundingBox? extent,
-            IGeometryProjection geometryProjection, string fromCRS, string toCRS)
+        public static MRect? Project(MRect? extent,
+            IProjection geometryProjection, string fromCRS, string toCRS)
         {
             if (extent == null) return null;
 
@@ -25,13 +24,13 @@ namespace Mapsui.Utilities
             if (!geometryProjection.IsProjectionSupported(fromCRS, toCRS))
                 throw new NotSupportedException($"Projection is not supported. From CRS: {fromCRS}. To CRS {toCRS}");
 
-            var copiedExtent = extent.Copy();
+            var copiedExtent = new MRect(extent);
             geometryProjection.Project(fromCRS, toCRS, copiedExtent);
             return copiedExtent;
         }
 
         public static IEnumerable<GeometryFeature>? Project(IEnumerable<GeometryFeature>? features,
-            IGeometryProjection geometryProjection, string fromCRS, string toCRS)
+            IProjection geometryProjection, string fromCRS, string toCRS)
         {
             if (features == null) return null;
 
@@ -46,7 +45,7 @@ namespace Mapsui.Utilities
             var copiedFeatures = features.Copy().ToList();
             foreach (var copiedFeature in copiedFeatures)
             {
-                geometryProjection.Project(fromCRS, toCRS, copiedFeature.Geometry);
+                geometryProjection.Project(fromCRS, toCRS, copiedFeature);
             }
             return copiedFeatures;
         }
