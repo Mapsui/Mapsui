@@ -48,6 +48,19 @@
 		<!-- Required - WinUI does not yet have buildTransitive for everything -->
         <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0-preview3" />
 		<PackageReference Include="Microsoft.Graphics.Win2D" Version="1.0.0.29-preview3" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiFont Remove="Resources\Fonts\OpenSans-Regular.ttf" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiImage Remove="Resources\Images\dotnet_bot.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <AndroidResource Include="Resources\Fonts\OpenSans-Regular.ttf" />
+	  <AndroidResource Include="Resources\Images\dotnet_bot.svg" />
 	</ItemGroup>	
 
 	<ItemGroup>
@@ -69,11 +82,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<MauiSplashScreen Include="Resources\appiconfg.svg" />
+		<AndroidResource Include="Resources\appiconfg.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<MauiIcon Include="Resources\appicon.svg" />
+		<AndroidResource Include="Resources\appicon.svg" />
 	</ItemGroup>
 
   <ItemGroup>	  
