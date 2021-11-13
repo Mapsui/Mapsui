@@ -2,12 +2,13 @@
 using System.Linq;
 using Mapsui.Geometries;
 using Mapsui.GeometryLayer;
+using Mapsui.Layers;
 
 namespace Mapsui.Samples.Common.Desktop.GeoData
 {
     public class WorldCities
     {
-        public static IEnumerable<GeometryFeature> GenerateTop100()
+        public static IEnumerable<IFeature> GenerateTop100()
         {
             var cities = new List<City>
             {
@@ -114,9 +115,8 @@ namespace Mapsui.Samples.Common.Desktop.GeoData
             };
 
             return cities
-                .Select(item => new GeometryFeature
+                .Select(item => new PointFeature(new MPoint(item.Long, item.Lat))
                 {
-                    Geometry = new Point(item.Long, item.Lat),
                     ["NAME"] = item.CityName, ["COUNTRY"] = item.Country,
                     ["POPULATION"] = item.Population
                 })

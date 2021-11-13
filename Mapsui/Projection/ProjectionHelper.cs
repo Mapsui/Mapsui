@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Extensions;
-using Mapsui.GeometryLayer;
+using Mapsui.Layers;
 using Mapsui.Projection;
 
 namespace Mapsui.Utilities
@@ -11,8 +11,7 @@ namespace Mapsui.Utilities
     {
         public const string EpsgPrefix = "EPSG:";
 
-        public static MRect? Project(MRect? extent,
-            IProjection geometryProjection, string fromCRS, string toCRS)
+        public static MRect? Project(MRect? extent, IProjection projection, string fromCRS, string toCRS)
         {
             if (extent == null) return null;
 
@@ -21,16 +20,16 @@ namespace Mapsui.Utilities
             if (!CrsHelper.IsCrsProvided(fromCRS, toCRS))
                 throw new NotSupportedException($"CRS is not provided. From CRS: {fromCRS}. To CRS {toCRS}");
 
-            if (!geometryProjection.IsProjectionSupported(fromCRS, toCRS))
+            if (!projection.IsProjectionSupported(fromCRS, toCRS))
                 throw new NotSupportedException($"Projection is not supported. From CRS: {fromCRS}. To CRS {toCRS}");
 
             var copiedExtent = new MRect(extent);
-            geometryProjection.Project(fromCRS, toCRS, copiedExtent);
+            projection.Project(fromCRS, toCRS, copiedExtent);
             return copiedExtent;
         }
 
-        public static IEnumerable<GeometryFeature>? Project(IEnumerable<GeometryFeature>? features,
-            IProjection geometryProjection, string fromCRS, string toCRS)
+        public static IEnumerable<IFeature>? Project(IEnumerable<IFeature>? features,
+            IProjection projection, string fromCRS, string toCRS)
         {
             if (features == null) return null;
 
@@ -39,13 +38,13 @@ namespace Mapsui.Utilities
             if (!CrsHelper.IsCrsProvided(fromCRS, toCRS))
                 throw new NotSupportedException($"CRS is not provided. From CRS: {fromCRS}. To CRS {toCRS}");
 
-            if (!geometryProjection.IsProjectionSupported(fromCRS, toCRS))
+            if (!projection.IsProjectionSupported(fromCRS, toCRS))
                 throw new NotSupportedException($"Projection is not supported. From CRS: {fromCRS}. To CRS {toCRS}");
 
             var copiedFeatures = features.Copy().ToList();
             foreach (var copiedFeature in copiedFeatures)
             {
-                geometryProjection.Project(fromCRS, toCRS, copiedFeature);
+                projection.Project(fromCRS, toCRS, copiedFeature);
             }
             return copiedFeatures;
         }

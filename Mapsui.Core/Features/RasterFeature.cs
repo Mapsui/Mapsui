@@ -8,6 +8,11 @@ namespace Mapsui.Layers
         public MRaster Raster { get; }
         public MRect Extent => Raster;
 
+        public RasterFeature(RasterFeature rasterFeature) : base(rasterFeature)
+        {
+            Raster = new MRaster(rasterFeature.Raster);
+        }
+
         public RasterFeature(MRaster raster)
         {
             Raster = raster;

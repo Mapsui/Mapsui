@@ -23,12 +23,12 @@ namespace Mapsui.UI.Forms
         public static double DefaultTitleFontSize = Device.GetNamedSize(NamedSize.Title, typeof(Label));
         public static FontAttributes DefaultTitleFontAttributes = FontAttributes.Bold;
         public static Xamarin.Forms.Color DefaultTitleFontColor = Xamarin.Forms.Color.Black;
-        public static Xamarin.Forms.TextAlignment DefaultTitleTextAlignment = Xamarin.Forms.TextAlignment.Center;
+        public static TextAlignment DefaultTitleTextAlignment = TextAlignment.Center;
         public static string DefaultSubtitleFontName = Xamarin.Forms.Font.Default.FontFamily;
         public static double DefaultSubtitleFontSize = Device.GetNamedSize(NamedSize.Subtitle, typeof(Label));
         public static FontAttributes DefaultSubtitleFontAttributes = FontAttributes.None;
         public static Xamarin.Forms.Color DefaultSubtitleFontColor = Xamarin.Forms.Color.Black;
-        public static Xamarin.Forms.TextAlignment DefaultSubtitleTextAlignment = Xamarin.Forms.TextAlignment.Start; // Center;
+        public static TextAlignment DefaultSubtitleTextAlignment = TextAlignment.Start; // Center;
 
         #region Bindings
 
@@ -188,7 +188,7 @@ namespace Mapsui.UI.Forms
         {
             _pin = pin ?? throw new ArgumentNullException("Pin shouldn't be null"); ;
             if (_pin.Feature != null)
-                Feature = _pin.Feature.Copy();
+                Feature = (GeometryFeature)_pin.Feature.Copy();
             else
                 Feature = new GeometryFeature();
             Feature.Styles.Clear();

@@ -7,6 +7,11 @@ namespace Mapsui.Layers
         public MRect Rect { get; set; } = default!;
         public MRect Extent => Rect;
 
+        public RectFeature(RectFeature rectFeature) : base(rectFeature)
+        {
+            Rect = new MRect(rectFeature.Rect);
+        }
+
         public RectFeature(MRect rect)
         {
             Rect = rect;

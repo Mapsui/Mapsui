@@ -4,6 +4,11 @@ namespace Mapsui.Layers
 {
     public class PointFeature : BaseFeature, IFeature
     {
+        public PointFeature(PointFeature pointFeature) : base(pointFeature)
+        {
+            Point = new MPoint(pointFeature.Point);
+        }
+
         public PointFeature(MPoint point)
         {
             Point = point ?? throw new ArgumentNullException(nameof(point));
@@ -21,7 +26,7 @@ namespace Mapsui.Layers
         {
             visit(Point.X, Point.Y, (x, y) => {
                 Point.X = x;
-                Point.Y = x;
+                Point.Y = y;
             });
         }
 

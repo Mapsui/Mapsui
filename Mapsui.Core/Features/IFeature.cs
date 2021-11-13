@@ -12,6 +12,7 @@ namespace Mapsui.Layers
         object? this[string key] { get; set; }
         IEnumerable<string> Fields { get; }
         MRect Extent { get; }
+        public IDictionary<IStyle, object> RenderedGeometry { get; }
         void CoordinateVisitor(Action<double, double, CoordinateSetter> visit);
     }
 }
