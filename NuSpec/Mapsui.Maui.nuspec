@@ -22,7 +22,7 @@
       <group targetFramework="net6.0">
         <dependency id="Mapsui" version="$version$"/>
         <dependency id="Microsoft.Maui.Dependencies" version="[6.0.101-preview.10.2068,7.0)" />
-        <dependency id="SkiaSharp.Views.Maui.Controls" version="[2.88.0-preview.155,3.0.0)" />
+        <dependency id="SkiaSharp.Views.Maui.Controls" version="[2.80.2,3.0.0)" />
       </group>     
     </dependencies>
 

@@ -14,7 +14,7 @@ namespace Mapsui.UI.Android
 {
 	
 	
-	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "12.1.99.62")]
+	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "1.0.0.0")]
 	public partial class Resource
 	{
 		
@@ -27,10 +27,7 @@ namespace Mapsui.UI.Android
 		{
 			
 			// aapt resource value: 0x7F010000
-			public static int ignorePixelScaling = 2130771968;
-			
-			// aapt resource value: 0x7F010001
-			public static int start_with_openstreetmap = 2130771969;
+			public static int start_with_openstreetmap = 2130771968;
 			
 			static Attribute()
 			{
@@ -65,15 +62,8 @@ namespace Mapsui.UI.Android
 		{
 			
 			// aapt resource value: { 0x7F010000 }
-			public static int[] SKCanvasView = new int[] {
-					2130771968};
-			
-			// aapt resource value: 0
-			public static int SKCanvasView_ignorePixelScaling = 0;
-			
-			// aapt resource value: { 0x7F010001 }
 			public static int[] start_with_openstreetmap_style = new int[] {
-					2130771969};
+					2130771968};
 			
 			// aapt resource value: 0
 			public static int start_with_openstreetmap_style_start_with_openstreetmap = 0;
