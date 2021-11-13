@@ -87,8 +87,8 @@
 <h2 id="supported-coordinate-systems-crses">Supported coordinate systems (CRSes)</h2>
 <p>Out of the box Mapsui only supports the projection between two coordinate systems.</p>
 <ul>
-<li>lat/lon, or WGS84, with the CRS: <a href="https://epsg.io/4326">EPSG:4326</a>. GPS coordinates are in lat/lon</li>
-<li><p>SphericalMercator, or WebMercator, PseudoMercator with CRS: <a href="https://epsg.io/3857">EPSG:3857</a>. This is the coordinate system used in the maps of google and openstreetmap.</p>
+<li><a href="https://epsg.io/4326">EPSG:4326</a> or lat/lon, or WGS84. GPS coordinates are in lat/lon</li>
+<li><p><a href="https://epsg.io/3857">EPSG:3857</a> or SphericalMercator, or WebMercator, PseudoMercator. This is the coordinate system used in the maps of google and openstreetmap.</p>
 <p>It is however possible to create your own projection. You need to implement the IProjection interface. Within this implementation you need to use some other projection library. A recommended one is <a href="https://github.com/NetTopologySuite/ProjNet4GeoAPI">ProjNet4GeoAPI</a>.</p>
 </li>
 </ul>
