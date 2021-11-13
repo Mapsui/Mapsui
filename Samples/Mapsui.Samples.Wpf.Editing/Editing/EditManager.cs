@@ -135,6 +135,9 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
 
         private static Point? FindVertexTouched(MapInfo mapInfo, IEnumerable<Point> vertices, double screenDistance)
         {
+            if (mapInfo.WorldPosition == null)
+                return null;
+
             return vertices.OrderBy(v => v.Distance(mapInfo.WorldPosition.ToPoint()))
                 .FirstOrDefault(v => v.Distance(mapInfo.WorldPosition.ToPoint()) < mapInfo.Resolution * screenDistance);
         }
@@ -161,7 +164,10 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
                         {
                             _dragInfo.Feature = geometryFeature;
                             _dragInfo.Vertex = vertexTouched;
-                            _dragInfo.StartOffsetToVertex = mapInfo.WorldPosition.ToPoint() - _dragInfo.Vertex;
+                            if (mapInfo.WorldPosition != null && _dragInfo.Vertex != null)
+                            {
+                                _dragInfo.StartOffsetToVertex = mapInfo.WorldPosition.ToPoint() - _dragInfo.Vertex;
+                            }
 
                             return true; // to indicate start of drag
                         }
@@ -173,7 +179,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
 
         public bool Dragging(Point? worldPosition)
         {
-            if (EditMode != EditMode.Modify || _dragInfo.Feature == null || worldPosition == null) return false;
+            if (EditMode != EditMode.Modify || _dragInfo.Feature == null || worldPosition == null || _dragInfo.StartOffsetToVertex == null) return false;
 
             SetPointXY(_dragInfo.Vertex, worldPosition - _dragInfo.StartOffsetToVertex);
 
@@ -264,7 +270,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
 
         public bool Rotating(Point? worldPosition)
         {
-            if (EditMode != EditMode.Rotate || _rotateInfo.Feature == null || worldPosition == null) return false;
+            if (EditMode != EditMode.Rotate || _rotateInfo.Feature == null || worldPosition == null || _rotateInfo.Center == null || _rotateInfo.PreviousPosition == null) return false;
 
             var previousVector = _rotateInfo.Center - _rotateInfo.PreviousPosition;
             var currentVector = _rotateInfo.Center - worldPosition;
@@ -312,11 +318,11 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
 
         public bool Scaling(Point? worldPosition)
         {
-            if (EditMode != EditMode.Scale || _scaleInfo.Feature == null || worldPosition == null) return false;
+            if (EditMode != EditMode.Scale || _scaleInfo.Feature == null || worldPosition == null || _scaleInfo.PreviousPosition == null || _scaleInfo.Center == null) return false;
 
             var scale =
-                _scaleInfo.Center?.Distance(worldPosition) /
-                _scaleInfo.Center?.Distance(_scaleInfo.PreviousPosition);
+                _scaleInfo.Center.Distance(worldPosition) /
+                _scaleInfo.Center.Distance(_scaleInfo.PreviousPosition);
 
 
             Geomorpher.Scale(_scaleInfo.Feature.Geometry, scale, _scaleInfo.Center);

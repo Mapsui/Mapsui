@@ -16,6 +16,7 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Mapsui.Geometries.Utilities;
 
 // ReSharper disable NonReadonlyMemberInGetHashCode // todo: Fix this real issue
