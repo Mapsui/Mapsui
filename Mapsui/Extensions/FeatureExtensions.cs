@@ -7,6 +7,11 @@ namespace Mapsui.Extensions
 {
     public static class FeatureExtensions
     {
+        public static T Copy<T>(this IFeature original)
+        {
+            return (T)Activator.CreateInstance(original.GetType(), original);
+        }
+
         public static IFeature Copy(this IFeature original)
         {
             return (IFeature)Activator.CreateInstance(original.GetType(), original);

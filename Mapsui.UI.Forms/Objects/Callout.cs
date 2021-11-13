@@ -188,7 +188,7 @@ namespace Mapsui.UI.Forms
         {
             _pin = pin ?? throw new ArgumentNullException("Pin shouldn't be null"); ;
             if (_pin.Feature != null)
-                Feature = (GeometryFeature)_pin.Feature.Copy();
+                Feature = _pin.Feature.Copy<GeometryFeature>();
             else
                 Feature = new GeometryFeature();
             Feature.Styles.Clear();
