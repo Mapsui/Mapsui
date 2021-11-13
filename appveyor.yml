@@ -24,6 +24,7 @@ before_build:
 - cmd: nuget restore mapsui.sln
 build:
   project: Mapsui.sln
+  verbosity: minimal
 before_package:
 - cmd: ''
 after_build:
