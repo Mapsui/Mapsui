@@ -64,11 +64,11 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
             return false;
         }
 
-        internal void HoveringVertex(MapInfo mapInfo)
+        internal void HoveringVertex(MapInfo? mapInfo)
         {
             if (_addInfo.Vertex != null)
             {
-                SetPointXY(_addInfo.Vertex, mapInfo.WorldPosition?.ToPoint());
+                SetPointXY(_addInfo.Vertex, mapInfo?.WorldPosition?.ToPoint());
                 _addInfo.Feature?.RenderedGeometry?.Clear();
                 Layer?.DataHasChanged();
             }
@@ -203,9 +203,9 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
             }
         }
 
-        public bool TryDeleteVertex(MapInfo mapInfo, double screenDistance)
+        public bool TryDeleteVertex(MapInfo? mapInfo, double screenDistance)
         {
-            if (mapInfo.Feature is GeometryFeature geometryFeature)
+            if (mapInfo?.Feature is GeometryFeature geometryFeature)
             {
                 var vertexTouched = FindVertexTouched(mapInfo, geometryFeature.Geometry.MainVertices(), screenDistance);
                 if (vertexTouched != null)
@@ -233,9 +233,9 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
             return false;
         }
 
-        public bool TryInsertVertex(MapInfo mapInfo)
+        public bool TryInsertVertex(MapInfo? mapInfo)
         {
-            if (mapInfo.Feature is GeometryFeature geometryFeature)
+            if (mapInfo?.Feature is GeometryFeature geometryFeature)
             {
                 var vertices = geometryFeature.Geometry.MainVertices();
 

@@ -89,7 +89,7 @@ namespace Mapsui.Samples.Wpf.Editing
                         return false;
                     }
                 case MouseState.Moving:
-                    editManager.HoveringVertex(mapControl.GetMapInfo(screenPosition));
+                    editManager.HoveringVertex(mapControl?.GetMapInfo(screenPosition));
                     return false;
                 case MouseState.DoubleClick:
                     _inDoubleClick = true;

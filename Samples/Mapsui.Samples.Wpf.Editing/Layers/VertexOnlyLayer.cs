@@ -13,7 +13,7 @@ namespace Mapsui.Samples.Wpf.Editing.Layers
     {
         private readonly WritableLayer _source;
 
-        public override MRect Extent => _source.Extent;
+        public override MRect? Extent => _source.Extent;
 
         public VertexOnlyLayer(WritableLayer source)
         {
