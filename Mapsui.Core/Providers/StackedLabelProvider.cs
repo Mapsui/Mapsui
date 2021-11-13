@@ -112,9 +112,7 @@ namespace Mapsui.Providers
         private static IFeature CreateBoxFeature(double resolution, Cluster cluster, Pen line,
             Brush fill)
         {
-            return new RectFeature
-            {
-                Rect = GrowBox(cluster.Box, resolution),
+            return new RectFeature(GrowBox(cluster.Box, resolution)) { 
                 Styles = new[]
                 {
                     new VectorStyle
@@ -126,7 +124,7 @@ namespace Mapsui.Providers
             };
         }
 
-        private static MRect? GrowBox(MRect box, double resolution)
+        private static MRect GrowBox(MRect box, double resolution)
         {
             const int symbolSize = 32; // todo: determine margin by symbol size
             const int boxMargin = symbolSize / 2;

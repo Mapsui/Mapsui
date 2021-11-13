@@ -60,7 +60,7 @@ namespace Mapsui.Providers
 
             var data = ReadImageAsStream(tiffPath, noDataColors);
 
-            _feature = new RasterFeature { Raster = new MRaster(data, _extent) };
+            _feature = new RasterFeature(new MRaster(data, _extent));
             _feature.Styles.Add(new VectorStyle());
         }
 

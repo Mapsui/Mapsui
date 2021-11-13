@@ -74,11 +74,7 @@ namespace Mapsui.Providers
                 var bitmap = _bitmaps.Find(info.Index);
                 if (bitmap == null) continue;
                 var raster = new MRaster(new MemoryStream(bitmap), new MRect(info.Extent.MinX, info.Extent.MinY, info.Extent.MaxX, info.Extent.MaxY));
-                var feature = new RasterFeature
-                {
-                    Raster = raster
-                };
-                features.Add(feature);
+                features.Add(new RasterFeature(raster));
             }
             return features;
         }

@@ -54,7 +54,7 @@ namespace Mapsui.Samples.Common.Maps.Callouts
             {
                 Name = "Cities with callouts",
                 IsMapInfoLayer = true,
-                DataSource = new MemoryProvider<IFeature>(GetCitiesFromEmbeddedResource().Take(1)),
+                DataSource = new MemoryProvider<IFeature>(GetCitiesFromEmbeddedResource()),
                 Style = new VectorStyle()
             };
         }
