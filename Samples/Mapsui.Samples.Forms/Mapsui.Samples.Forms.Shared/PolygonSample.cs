@@ -15,10 +15,13 @@ namespace Mapsui.Samples.Forms
 
         public string Category => "Forms";
 
-        public bool OnClick(object sender, EventArgs args)
+        public bool OnClick(object? sender, EventArgs args)
         {
             var mapView = sender as MapView;
             var e = args as MapClickedEventArgs;
+
+            if (e == null)
+                return false;
 
             var center = new Position(e.Point);
             var diffX = random.Next(0, 1000) / 100.0;
@@ -49,7 +52,7 @@ namespace Mapsui.Samples.Forms
                 a.Handled = true;
             };
 
-            mapView.Drawables.Add(polygon);
+            mapView?.Drawables.Add(polygon);
 
             return true;
         }

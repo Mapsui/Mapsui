@@ -21,10 +21,13 @@ namespace Mapsui.Samples.Forms.Shared
 
         public string Category => "Forms";
 
-        public bool OnClick(object sender, EventArgs args)
+        public bool OnClick(object? sender, EventArgs args)
         {
-            var mapView = (MapView)sender;
+            var mapView = sender as MapView;
             var mapClickedArgs = (MapClickedEventArgs)args;
+
+            if (mapView == null)
+                return false;
 
             var assembly = typeof(AllSamples).GetTypeInfo().Assembly;
             foreach (var str in assembly.GetManifestResourceNames())

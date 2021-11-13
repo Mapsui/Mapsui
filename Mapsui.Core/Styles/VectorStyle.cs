@@ -35,16 +35,19 @@ namespace Mapsui.Styles
 
         public bool Equals(VectorStyle? vectorStyle)
         {
+            if (vectorStyle == null)
+                return false;
+
             if (!base.Equals(vectorStyle))
                 return false;
 
-            if (!Line.Equals(vectorStyle.Line))
+            if (!Line?.Equals(vectorStyle.Line) ?? false)
                 return false;
 
-            if (!Outline.Equals(vectorStyle.Outline))
+            if (!Outline?.Equals(vectorStyle.Outline) ?? false)
                 return false;
 
-            if (!Fill.Equals(vectorStyle.Fill))
+            if (!Fill?.Equals(vectorStyle.Fill) ?? false)
                 return false;
 
             return true;

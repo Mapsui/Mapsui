@@ -142,7 +142,7 @@ namespace Mapsui.Samples.Common.Maps.Callouts
             var serializer = new JsonSerializer();
             using var sr = new StreamReader(stream);
             using var jsonTextReader = new JsonTextReader(sr);
-            return serializer.Deserialize<List<T>>(jsonTextReader);
+            return serializer.Deserialize<List<T>>(jsonTextReader) ?? new List<T>();
         }
     }
 }

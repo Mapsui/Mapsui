@@ -25,16 +25,19 @@ namespace Mapsui.Samples.Forms
 
         public string Category => "Forms";
 
-        public bool OnClick(object sender, EventArgs args)
+        public bool OnClick(object? sender, EventArgs args)
         {
             var mapView = sender as MapView;
             var e = args as MapClickedEventArgs;
+
+            if (mapView == null)
+                return false;
 
             var assembly = typeof(AllSamples).GetTypeInfo().Assembly;
             foreach (var str in assembly.GetManifestResourceNames())
                 System.Diagnostics.Debug.WriteLine(str);
 
-            switch (e.NumOfTaps)
+            switch (e?.NumOfTaps)
             {
                 case 1:
                     var pin = new Pin(mapView)
@@ -78,7 +81,7 @@ namespace Mapsui.Samples.Forms
                     var stream = assembly.GetManifestResourceStream("Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg");
                     StreamReader reader = new StreamReader(stream);
                     string svgString = reader.ReadToEnd();
-                    mapView.Pins.Add(new Pin(mapView)
+                    mapView?.Pins.Add(new Pin(mapView)
                     {
                         Label = $"PinType.Svg {markerNum++}",
                         Position = e.Point,
@@ -89,7 +92,7 @@ namespace Mapsui.Samples.Forms
                     break;
                 case 3:
                     var icon = assembly.GetManifestResourceStream("Mapsui.Samples.Common.Images.loc.png").ToBytes();
-                    mapView.Pins.Add(new Pin(mapView)
+                    mapView?.Pins.Add(new Pin(mapView)
                     {
                         Label = $"PinType.Icon {markerNum++}",
                         Position = e.Point,

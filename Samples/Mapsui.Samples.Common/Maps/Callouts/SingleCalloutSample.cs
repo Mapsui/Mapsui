@@ -76,7 +76,7 @@ namespace Mapsui.Samples.Common.Maps.Callouts
             });
         }
 
-        private static CalloutStyle CreateCalloutStyle(string name)
+        private static CalloutStyle CreateCalloutStyle(string? name)
         {
             return new CalloutStyle
             {
@@ -104,7 +104,7 @@ namespace Mapsui.Samples.Common.Maps.Callouts
 
             using var sr = new System.IO.StreamReader(stream);
             using var jsonTextReader = new JsonTextReader(sr);
-            return serializer.Deserialize<List<T>>(jsonTextReader);
+            return serializer.Deserialize<List<T>>(jsonTextReader) ?? new List<T>();
         }
     }
 }
