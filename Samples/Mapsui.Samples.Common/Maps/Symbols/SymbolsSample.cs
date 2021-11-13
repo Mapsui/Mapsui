@@ -54,7 +54,8 @@ namespace Mapsui.Samples.Common.Maps
             var styles = CreateDiverseStyles().ToList();
             foreach (var point in randomPoints)
             {
-                var feature = new PointFeature(point) { 
+                var feature = new PointFeature(point)
+                {
                     ["Label"] = counter.ToString()
                 };
 
@@ -120,7 +121,7 @@ namespace Mapsui.Samples.Common.Maps
 
         private static IFeature CreatePointWithStackedStyles()
         {
-            var feature = new PointFeature (new MPoint(5000000, -5000000));
+            var feature = new PointFeature(new MPoint(5000000, -5000000));
 
             feature.Styles.Add(new SymbolStyle
             {

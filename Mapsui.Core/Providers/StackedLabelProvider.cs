@@ -112,7 +112,8 @@ namespace Mapsui.Providers
         private static IFeature CreateBoxFeature(double resolution, Cluster cluster, Pen line,
             Brush fill)
         {
-            return new RectFeature(GrowBox(cluster.Box, resolution)) { 
+            return new RectFeature(GrowBox(cluster.Box, resolution))
+            {
                 Styles = new[]
                 {
                     new VectorStyle

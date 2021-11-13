@@ -107,8 +107,11 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             return features;
         }
 
-        public MRect GetExtent()
+        public MRect? GetExtent()
         {
+            if (ArcGisDynamicCapabilities.initialExtent == null)
+                return null;
+
             return new MRect(ArcGisDynamicCapabilities.initialExtent.xmin, ArcGisDynamicCapabilities.initialExtent.ymin, ArcGisDynamicCapabilities.initialExtent.xmax, ArcGisDynamicCapabilities.initialExtent.ymax);
         }
 
@@ -129,7 +132,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
         /// <summary>
         /// Retrieves the bitmap from ArcGIS Dynamic service
         /// </summary>
-        public bool TryGetMap(IViewport viewport,[NotNullWhen(true)] out MRaster? raster)
+        public bool TryGetMap(IViewport viewport, [NotNullWhen(true)] out MRaster? raster)
         {
             int width;
             int height;
@@ -197,16 +200,19 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
              */
             var oneAdded = false;
 
-            foreach (var t in ArcGisDynamicCapabilities.layers)
+            if (ArcGisDynamicCapabilities.layers != null)
             {
-                if (t.defaultVisibility == false)
-                    continue;
+                foreach (var t in ArcGisDynamicCapabilities.layers)
+                {
+                    if (t.defaultVisibility == false)
+                        continue;
 
-                if (oneAdded)
-                    strReq.Append(",");
+                    if (oneAdded)
+                        strReq.Append(",");
 
-                strReq.AppendFormat("{0}", t.id);
-                oneAdded = true;
+                    strReq.AppendFormat("{0}", t.id);
+                    oneAdded = true;
+                }
             }
 
             strReq.AppendFormat("&format={0}", GetFormat(ArcGisDynamicCapabilities));
@@ -216,8 +222,11 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             return strReq.ToString();
         }
 
-        private static string CreateSr(string crs)
+        private static string CreateSr(string? crs)
         {
+            if (crs == null)
+                throw new Exception("crs type not supported");
+
             if (crs.StartsWith(CrsHelper.EsriStringPrefix)) return "{\"wkt\":\"" + crs.Substring(CrsHelper.EsriStringPrefix.Length).Replace("\"", "\\\"") + "\"}";
             if (crs.StartsWith(CrsHelper.EpsgPrefix)) return CrsHelper.ToEpsgCode(crs).ToString();
             throw new Exception("crs type not supported");

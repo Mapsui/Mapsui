@@ -82,7 +82,7 @@ namespace Mapsui.Providers.ArcGIS.Image
             ArcGisImageCapabilities = capabilities;
         }
 
-        public string CRS { get; set; }
+        public string? CRS { get; set; }
 
         public ICredentials? Credentials { get; set; }
 
@@ -175,8 +175,12 @@ namespace Mapsui.Providers.ArcGIS.Image
             if (!ArcGisImageCapabilities.ServiceUrl?.Contains("?") ?? false) url.Append("?");
             if (!url.ToString().EndsWith("&") && !url.ToString().EndsWith("?")) url.Append("&");
 
-            url.AppendFormat(CultureInfo.InvariantCulture, "bbox={0},{1},{2},{3}",
-                boundingBox.Min.X, boundingBox.Min.Y, boundingBox.Max.X, boundingBox.Max.Y);
+            if (boundingBox != null)
+            {
+                url.AppendFormat(CultureInfo.InvariantCulture, "bbox={0},{1},{2},{3}",
+                    boundingBox.Min.X, boundingBox.Min.Y, boundingBox.Max.X, boundingBox.Max.Y);
+            }
+
             url.AppendFormat("&size={0},{1}", width, height);
             url.AppendFormat("&interpolation={0}", ArcGisImageCapabilities.Interpolation);
             url.AppendFormat("&format={0}", ArcGisImageCapabilities.Format);

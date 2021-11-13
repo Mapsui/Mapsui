@@ -15,7 +15,7 @@ namespace Mapsui.Samples.Forms
         public bool OnClick(object? sender, EventArgs args)
         {
             var mapView = sender as MapView;
-            var e = args as MapClickedEventArgs;            
+            var e = args as MapClickedEventArgs;
 
             if (mapView == null)
                 return false;

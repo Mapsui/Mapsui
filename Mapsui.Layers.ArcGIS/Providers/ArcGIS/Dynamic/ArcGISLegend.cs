@@ -100,7 +100,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
 
                 var serializer = new JsonSerializer();
                 var jToken = JObject.Parse(jsonString);
-                var legendResponse = (ArcGISLegendResponse)serializer.Deserialize(new JTokenReader(jToken), typeof(ArcGISLegendResponse));
+                var legendResponse = serializer.Deserialize(new JTokenReader(jToken), typeof(ArcGISLegendResponse)) as ArcGISLegendResponse;
 
                 dataStream.Dispose();
                 webResponse?.Dispose();
