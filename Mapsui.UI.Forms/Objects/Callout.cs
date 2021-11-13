@@ -46,7 +46,7 @@ namespace Mapsui.UI.Forms
         public static TextAlignment DefaultTitleTextAlignment = TextAlignment.Center;
         public static double DefaultSubtitleFontSize = Device.GetNamedSize(NamedSize.Subtitle, typeof(Label));
         public static FontAttributes DefaultSubtitleFontAttributes = FontAttributes.None;
-        public static Xamarin.Forms.Color DefaultSubtitleFontColor = Xamarin.Forms.Color.Black;
+        public static Xamarin.Forms.Color DefaultSubtitleFontColor = Color.Black;
         public static TextAlignment DefaultSubtitleTextAlignment = TextAlignment.Start; // Center;
 #if __MAUI__
         public static string DefaultTitleFontName = null; // TODO: default font per platform
