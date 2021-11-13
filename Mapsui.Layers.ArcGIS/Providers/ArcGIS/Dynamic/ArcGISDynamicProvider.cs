@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Net;
@@ -16,7 +17,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
     public class ArcGISDynamicProvider : IProjectingProvider
     {
         private int _timeOut;
-        private string? _url;
+        private string _url = default!;
         private string? _crs;
 
         public string? Token { get; set; }
@@ -128,7 +129,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
         /// <summary>
         /// Retrieves the bitmap from ArcGIS Dynamic service
         /// </summary>
-        public bool TryGetMap(IViewport viewport, out MRaster? raster)
+        public bool TryGetMap(IViewport viewport,[NotNullWhen(true)] out MRaster? raster)
         {
             int width;
             int height;

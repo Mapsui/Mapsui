@@ -26,7 +26,7 @@ namespace Mapsui.Providers.ArcGIS.Image
         public long EndTime { get; set; }
         public InterpolationType Interpolation { get; set; }
         public string Format { get; set; }
-        public string? ServiceUrl { get; set; }
+        public string ServiceUrl { get; set; }
         public string? currentVersion { get; set; }
         public bool singleFusedMapCache { get; set; }
         public Extent? fullExtent { get; set; }
