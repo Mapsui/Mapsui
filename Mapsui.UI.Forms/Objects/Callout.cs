@@ -44,7 +44,7 @@ namespace Mapsui.UI.Forms
         public static double DefaultTitleFontSize = Device.GetNamedSize(NamedSize.Title, typeof(Label));
         public static FontAttributes DefaultTitleFontAttributes = FontAttributes.Bold;
         public static TextAlignment DefaultTitleTextAlignment = TextAlignment.Center;
-        public static Color DefaultTitleFontColor = Color.Black;
+        public static Color DefaultTitleFontColor = KnownColor.Black;
         public static double DefaultSubtitleFontSize = Device.GetNamedSize(NamedSize.Subtitle, typeof(Label));
         public static FontAttributes DefaultSubtitleFontAttributes = FontAttributes.None;
         public static Color DefaultSubtitleFontColor = KnownColor.Black;
