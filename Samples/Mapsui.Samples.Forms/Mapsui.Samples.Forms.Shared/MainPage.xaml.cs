@@ -10,7 +10,7 @@ namespace Mapsui.Samples.Forms
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage
     {
-        IEnumerable<ISample> allSamples;
+        IEnumerable<ISample>? allSamples;
         Func<object, EventArgs, bool> clicker;
 
         public MainPage()

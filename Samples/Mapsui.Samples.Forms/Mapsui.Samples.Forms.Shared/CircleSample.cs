@@ -20,6 +20,12 @@ namespace Mapsui.Samples.Forms
             var mapView = sender as MapView;
             var e = args as MapClickedEventArgs;
 
+            if (e == null)
+                return false;
+
+            if (mapView == null)
+                return false;
+
             var circle = new Circle
             {
                 Center = e.Point,

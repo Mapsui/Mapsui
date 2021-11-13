@@ -19,6 +19,12 @@ namespace Mapsui.Samples.Forms
             var mapView = sender as MapView;
             var e = args as MapClickedEventArgs;
 
+            if (mapView == null)
+                return false;
+
+            if (e == null)
+                return false;
+
             UI.Objects.Drawable f;
 
             lock (mapView.Drawables)

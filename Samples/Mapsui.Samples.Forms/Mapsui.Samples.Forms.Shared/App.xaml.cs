@@ -35,7 +35,7 @@ namespace Mapsui.Samples.Forms
             // Handle when your app resumes
         }
 
-        private void LogMethod(LogLevel logLevel, string message, Exception exception)
+        private void LogMethod(LogLevel logLevel, string? message, Exception? exception)
         {
             Debug.WriteLine($"{logLevel}: {message}, {exception}");
         }

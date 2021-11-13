@@ -31,7 +31,7 @@ namespace Mapsui.Samples.Common.Maps
 
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(CreateAsyncLayer());
-            map.Home = n => n.NavigateTo(map.Layers[1].Extent.Centroid, map.Resolutions[5]);
+            map.Home = n => n.NavigateTo(map.Layers[1].Extent?.Centroid, map.Resolutions[5]);
 
             return map;
         }

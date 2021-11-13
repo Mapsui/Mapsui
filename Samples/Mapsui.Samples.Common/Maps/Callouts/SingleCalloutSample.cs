@@ -40,11 +40,11 @@ namespace Mapsui.Samples.Common.Maps.Callouts
 
         private static void MapOnInfo(object sender, MapInfoEventArgs e)
         {
-            var calloutStyle = e.MapInfo.Feature?.Styles.Where(s => s is CalloutStyle).Cast<CalloutStyle>().FirstOrDefault();
+            var calloutStyle = e.MapInfo?.Feature?.Styles.Where(s => s is CalloutStyle).Cast<CalloutStyle>().FirstOrDefault();
             if (calloutStyle != null)
             {
                 calloutStyle.Enabled = !calloutStyle.Enabled;
-                e.MapInfo.Layer.DataHasChanged(); // To trigger a refresh of graphics.
+                e.MapInfo?.Layer?.DataHasChanged(); // To trigger a refresh of graphics.
             }
         }
 
