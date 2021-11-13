@@ -1,16 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Mapsui.Extensions;
-using Mapsui.Geometries;
-using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Layers.Tiling;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
 using Mapsui.UI;
-using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -51,16 +47,14 @@ namespace Mapsui.Samples.Common.Maps
             return new MemoryProvider<IFeature>(CreateDiverseFeatures(RandomPointGenerator.GenerateRandomPoints(envelope, count)));
         }
 
-        private static IEnumerable<IGeometryFeature> CreateDiverseFeatures(IEnumerable<MPoint> randomPoints)
+        private static IEnumerable<IFeature> CreateDiverseFeatures(IEnumerable<MPoint> randomPoints)
         {
-            var features = new List<IGeometryFeature>();
+            var features = new List<IFeature>();
             var counter = 0;
             var styles = CreateDiverseStyles().ToList();
             foreach (var point in randomPoints)
             {
-                var feature = new GeometryFeature
-                {
-                    Geometry = point.ToPoint(),
+                var feature = new PointFeature(point) { 
                     ["Label"] = counter.ToString()
                 };
 
@@ -124,9 +118,9 @@ namespace Mapsui.Samples.Common.Maps
             return bitmapId;
         }
 
-        private static IGeometryFeature CreatePointWithStackedStyles()
+        private static IFeature CreatePointWithStackedStyles()
         {
-            var feature = new GeometryFeature { Geometry = new Point(5000000, -5000000) };
+            var feature = new PointFeature (new MPoint(5000000, -5000000));
 
             feature.Styles.Add(new SymbolStyle
             {

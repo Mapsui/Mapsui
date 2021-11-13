@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using BruTile.Predefined;
 using Mapsui.Extensions;
+using Mapsui.Geometries;
 using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -49,11 +50,8 @@ namespace Mapsui.Tests.Layers
             var features = new List<IFeature>();
             for (var i = 0; i < 100; i++)
             {
-                var feature = new GeometryFeature
-                {
-                    Geometry = new Geometries.Point(random.Next(100000, 5000000), random.Next(100000, 5000000))
-                };
-                features.Add(feature);
+                features.Add(new GeometryFeature(
+                    new Point(random.Next(100000, 5000000), random.Next(100000, 5000000))));
             }
             var provider = new MemoryProvider<IFeature>(features);
 

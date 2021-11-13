@@ -32,7 +32,7 @@ namespace Mapsui
     /// Map class
     /// </summary>
     /// <remarks>
-    /// Map holds all map related infos like transformation, layers, widgets and so on.
+    /// Map holds all map related infos like the target CRS, layers, widgets and so on.
     /// </remarks>
     public class Map : INotifyPropertyChanged, IMap
     {

@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using Mapsui.Geometries;
-using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
@@ -48,19 +46,15 @@ namespace Mapsui.Tests.Common.Maps
         {
             var features = new List<IFeature>
             {
-                new GeometryFeature
+                new PointFeature(new MPoint(100, 100))
                 {
-                    Geometry = new Point(100, 100),
                     Styles = new[] {new VectorStyle {Fill = new Brush(Color.Gray), Outline = new Pen(Color.Black)}}
                 },
-                new GeometryFeature
+                new PointFeature(new MPoint(100, 200))
                 {
-                    Geometry = new Point(100, 200),
                     Styles = new[] {new LabelStyle {Text = "Black Text", BackColor = null}}
                 },
-                new GeometryFeature
-                {
-                    Geometry = new Point(100, 300),
+                new PointFeature(new MPoint(100, 300)){
                     Styles = new[]
                         {
                             new LabelStyle
@@ -71,9 +65,8 @@ namespace Mapsui.Tests.Common.Maps
                             }
                         }
                 },
-                new GeometryFeature
+                new PointFeature(new MPoint(300, 100))
                 {
-                    Geometry = new Point(300, 100),
                     Styles =
                         new[]
                         {
@@ -86,9 +79,8 @@ namespace Mapsui.Tests.Common.Maps
                             }
                         }
                 },
-                new GeometryFeature
+                new PointFeature(new MPoint(300, 200))
                 {
-                    Geometry = new Point(300, 200),
                     Styles = new[]
                     {
                         new LabelStyle
@@ -100,9 +92,8 @@ namespace Mapsui.Tests.Common.Maps
                         }
                     }
                 },
-                new GeometryFeature
+                new PointFeature(new MPoint(300, 300))
                 {
-                    Geometry = new Point(300, 300),
                     Styles = new[]
                     {
                         new LabelStyle
@@ -114,9 +105,8 @@ namespace Mapsui.Tests.Common.Maps
                         }
                     }
                 },
-                new GeometryFeature()
+                new PointFeature(new MPoint(250, 150))
                 {
-                    Geometry = new Point(250, 150),
                     Styles = new[]
                     {
                         new LabelStyle
@@ -129,9 +119,8 @@ namespace Mapsui.Tests.Common.Maps
                         }
                     }
                 },
-                new GeometryFeature()
+                new PointFeature(new MPoint(250, 50))
                 {
-                    Geometry = new Point(250, 50),
                     Styles = new[]
                     {
                         new LabelStyle

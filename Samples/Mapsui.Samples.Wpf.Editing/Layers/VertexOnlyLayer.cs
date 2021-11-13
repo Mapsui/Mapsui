@@ -24,7 +24,7 @@ namespace Mapsui.Samples.Wpf.Editing.Layers
 
         public override IEnumerable<IFeature> GetFeatures(MRect box, double resolution)
         {
-            var features = _source.GetFeatures(box, resolution).Cast<IGeometryFeature>().ToList();
+            var features = _source.GetFeatures(box, resolution).Cast<GeometryFeature>().ToList();
             foreach (var feature in features)
             {
                 if (feature.Geometry is Point || feature.Geometry is MultiPoint) continue; // Points with a vertex on top confuse me

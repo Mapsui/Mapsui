@@ -36,11 +36,11 @@ namespace Mapsui.Widgets.ScaleBar
     public class ScaleBarWidget : Widget, INotifyPropertyChanged
     {
         private readonly Map? _map;
-        private readonly ITransformation? _transformation;
-        // Instead of using this property we could initialize _transformation with ProjectionDefaults.Transformation
-        // in the constructor but in that way the overriding of ProjectionDefaults.Transformation would not have 
+        private readonly IProjection? _projection;
+        // Instead of using this property we could initialize _projection with ProjectionDefaults.Projection
+        // in the constructor but in that way the overriding of ProjectionDefaults.Projection would not have 
         // effect if it was set after the ScaleBarWidget was constructed.
-        private ITransformation Transformation => _transformation ?? ProjectionDefaults.Transformation;
+        private IProjection Projection => _projection ?? ProjectionDefaults.Projection;
         ///
         /// Default position of the scale bar.
         ///
@@ -51,10 +51,10 @@ namespace Mapsui.Widgets.ScaleBar
         private static readonly Font DefaultFont = new() { FontFamily = "Arial", Size = 10 };
 
 
-        public ScaleBarWidget(Map map, ITransformation? transformation = null)
+        public ScaleBarWidget(Map map, IProjection? projection = null)
         {
             _map = map;
-            _transformation = transformation;
+            _projection = projection;
 
             HorizontalAlignment = DefaultScaleBarHorizontalAlignment;
             VerticalAlignment = DefaultScaleBarVerticalAlignment;
@@ -287,13 +287,13 @@ namespace Mapsui.Widgets.ScaleBar
             float length1;
             string text1;
 
-            (length1, text1) = CalculateScaleBarLengthAndValue(_map, Transformation, viewport, MaxWidth, UnitConverter);
+            (length1, text1) = CalculateScaleBarLengthAndValue(_map, Projection, viewport, MaxWidth, UnitConverter);
 
             float length2;
             string? text2;
 
             if (SecondaryUnitConverter != null)
-                (length2, text2) = CalculateScaleBarLengthAndValue(_map, Transformation, viewport, MaxWidth, SecondaryUnitConverter);
+                (length2, text2) = CalculateScaleBarLengthAndValue(_map, Projection, viewport, MaxWidth, SecondaryUnitConverter);
             else
                 (length2, text2) = (0, null);
 
@@ -477,7 +477,7 @@ namespace Mapsui.Widgets.ScaleBar
             return false;
         }
 
-        public bool CanTransform()
+        public bool CanProject()
         {
             if (_map?.CRS == null)
             {
@@ -485,13 +485,13 @@ namespace Mapsui.Widgets.ScaleBar
                 return false;
             }
 
-            if (Transformation == null)
+            if (Projection == null)
             {
-                Logger.Log(LogLevel.Warning, $"ScaleBarWidget can not draw because the {nameof(Map)}.{nameof(Transformation)} is not set");
+                Logger.Log(LogLevel.Warning, $"ScaleBarWidget can not draw because the {nameof(Map)}.{nameof(Projection)} is not set");
                 return false;
             }
 
-            if (Transformation.IsProjectionSupported(_map.CRS, "EPSG:4326") != true)
+            if (Projection.IsProjectionSupported(_map.CRS, "EPSG:4326") != true)
             {
                 Logger.Log(LogLevel.Warning, $"ScaleBarWidget can not draw because the projection between {_map.CRS} and EPSG:4326 is not supported");
                 return false;
@@ -513,13 +513,13 @@ namespace Mapsui.Widgets.ScaleBar
         /// @param unitConverter the DistanceUnitConverter to calculate for
         /// @return scaleBarLength and scaleBarText
         private static (float scaleBarLength, string scaleBarText) CalculateScaleBarLengthAndValue(
-            Map map, ITransformation transformation, IReadOnlyViewport viewport, float width, IUnitConverter unitConverter)
+            Map map, IProjection projection, IReadOnlyViewport viewport, float width, IUnitConverter unitConverter)
         {
             // We have to calc the angle difference to the equator (angle = 0), 
             // because EPSG:3857 is only there 1 m. At other angles, we
             // should calculate the correct length.
 
-            var (_, y) = transformation.Transform(map.CRS, "EPSG:4326", viewport.Center.X, viewport.Center.Y); // clone or else you will transform the original viewport center
+            var (_, y) = projection.Project(map.CRS, "EPSG:4326", viewport.Center.X, viewport.Center.Y); // clone or else you will project the original viewport center
 
             // Calc ground resolution in meters per pixel of viewport for this latitude
             var groundResolution = viewport.Resolution * Math.Cos(y / 180.0 * Math.PI);

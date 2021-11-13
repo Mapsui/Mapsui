@@ -8,7 +8,6 @@ using Mapsui.Layers;
 using Mapsui.Layers.Tiling;
 using Mapsui.Providers;
 using Mapsui.UI;
-using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -37,8 +36,8 @@ namespace Mapsui.Samples.Common.Maps
             var layer = new MemoryLayer();
 
             var polygon = new Polygon(new LinearRing(GenerateRandomPoints(envelope, 3)));
-            var feature = new GeometryFeature() { Geometry = polygon };
-            var features = new List<IGeometryFeature>
+            var feature = new GeometryFeature(polygon);
+            var features = new List<IFeature>
             {
                 feature
             };

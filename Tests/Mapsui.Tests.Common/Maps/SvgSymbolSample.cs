@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
-using Mapsui.Geometries;
-using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
@@ -47,24 +45,16 @@ namespace Mapsui.Tests.Common.Maps
 
             return new List<IFeature>
             {
-                new GeometryFeature
-                {
-                    Geometry = new Point(50, 50),
+                new PointFeature(new MPoint(50, 50)) {
                     Styles = new[] {new SymbolStyle {BitmapId = pinId}}
                 },
-                new GeometryFeature
-                {
-                    Geometry = new Point(50, 100),
+                new PointFeature(new MPoint(50, 100)) {
                     Styles = new[] {new SymbolStyle {BitmapId = pinId}}
                 },
-                new GeometryFeature
-                {
-                    Geometry = new Point(100, 50),
+                new PointFeature(new MPoint(100, 50)) {
                     Styles = new[] {new SymbolStyle {BitmapId = pinId}}
                 },
-                new GeometryFeature
-                {
-                    Geometry = new Point(100, 100),
+                new PointFeature(new MPoint(100, 100)) {
                     Styles = new[] {new SymbolStyle {BitmapId = pinId}}
                 }
             };

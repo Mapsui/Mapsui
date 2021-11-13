@@ -25,7 +25,7 @@ namespace Mapsui.Layers
         // Unlike other Layers the MemoryLayer has a CRS field. This is because the 
         // MemoryLayer calls its provider from the GetFeatures method instead of the 
         // RefreshData method. The GetFeatures arguments do not have a CRS argument.
-        // This field allows a workaround for when transformation is needed.
+        // This field allows a workaround for when projection is needed.
         public string CRS { get; set; }
 
         public override IEnumerable<IFeature> GetFeatures(MRect? box, double resolution)

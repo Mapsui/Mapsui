@@ -151,7 +151,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
             {
                 if (mapInfo.Feature != null)
                 {
-                    if (mapInfo.Feature is IGeometryFeature geometryFeature)
+                    if (mapInfo.Feature is GeometryFeature geometryFeature)
                     {
                         var vertexTouched = FindVertexTouched(mapInfo, geometryFeature.Geometry.MainVertices(), screenDistance);
                         if (vertexTouched != null)
@@ -202,7 +202,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
 
         public bool TryDeleteVertex(MapInfo mapInfo, double screenDistance)
         {
-            if (mapInfo.Feature is IGeometryFeature geometryFeature)
+            if (mapInfo.Feature is GeometryFeature geometryFeature)
             {
                 var vertexTouched = FindVertexTouched(mapInfo, geometryFeature.Geometry.MainVertices(), screenDistance);
                 if (vertexTouched != null)
@@ -232,7 +232,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
 
         public bool TryInsertVertex(MapInfo mapInfo)
         {
-            if (mapInfo.Feature is IGeometryFeature geometryFeature)
+            if (mapInfo.Feature is GeometryFeature geometryFeature)
             {
                 var vertices = geometryFeature.Geometry.MainVertices();
 
@@ -248,7 +248,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
 
         public bool StartRotating(MapInfo mapInfo)
         {
-            if (mapInfo.Feature is IGeometryFeature geometryFeature)
+            if (mapInfo.Feature is GeometryFeature geometryFeature)
             {
                 if (EditMode != EditMode.Rotate) return false;
 
@@ -295,7 +295,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
 
         public bool StartScaling(MapInfo mapInfo)
         {
-            if (mapInfo.Feature is IGeometryFeature geometryFeature)
+            if (mapInfo.Feature is GeometryFeature geometryFeature)
             {
                 if (EditMode != EditMode.Scale) return false;
 

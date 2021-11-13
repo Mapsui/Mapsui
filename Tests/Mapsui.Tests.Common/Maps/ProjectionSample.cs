@@ -28,7 +28,7 @@ namespace Mapsui.Tests.Common.Maps
             // For Projections to work three things need to be set:
             // 1) The CRS on the Map to know what to project to.
             // 2) The CRS on the DataSource to know what to project from.
-            // 3) The Transformation to transform from the DataSource CRS to the Map CRS.
+            // 3) The projection to project from the DataSource CRS to the Map CRS.
 
             var geometryLayer = CreateAmsterdamLayer();
             var extent = geometryLayer.Extent.Grow(geometryLayer.Extent.Width * 0.1);
@@ -43,7 +43,7 @@ namespace Mapsui.Tests.Common.Maps
             return map;
         }
 
-        public static MemoryLayer CreateCenterOfAmsterdamLayer() // Needs no transform
+        public static MemoryLayer CreateCenterOfAmsterdamLayer() // Needs no projection
         {
             return new MemoryLayer("Center of Amsterdam")
             {
@@ -52,7 +52,7 @@ namespace Mapsui.Tests.Common.Maps
             };
         }
 
-        public static MemoryLayer CreateAmsterdamLayer() // Needs transform
+        public static MemoryLayer CreateAmsterdamLayer() // Needs projection
         {
             var features = new List<GeometryFeature>
             {
@@ -64,7 +64,7 @@ namespace Mapsui.Tests.Common.Maps
                 CRS = "EPSG:4326" // The DataSource CRS needs to be set
             };
 
-            var dataSource = new TransformingProvider(memoryProvider)
+            var dataSource = new ProjectingProvider(memoryProvider)
             {
                 CRS = "EPSG:3857"
             };

@@ -1,12 +1,11 @@
 using System;
-using System.Linq;
 using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 
 namespace Mapsui.GeometryLayer
 {
-    public class GeometryFeature : BaseFeature, IGeometryFeature, IDisposable
+    public class GeometryFeature : BaseFeature, IFeature, IDisposable
     {
         private bool _disposed;
 
@@ -17,16 +16,6 @@ namespace Mapsui.GeometryLayer
         public GeometryFeature(IGeometry geometry)
         {
             Geometry = geometry;
-        }
-
-        public GeometryFeature(IGeometryFeature feature)
-        {
-            Geometry = feature.Geometry;
-            RenderedGeometry = feature.RenderedGeometry.ToDictionary(entry => entry.Key,
-                entry => entry.Value);
-            Styles = feature.Styles.ToList();
-            foreach (var field in feature.Fields)
-                this[field] = feature[field];
         }
 
         public IGeometry Geometry { get; set; }
