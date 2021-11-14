@@ -1,6 +1,16 @@
 ﻿using Mapsui.Widgets;
 
+#if __MAUI__
+using Microsoft.Maui;
+#else
+using Xamarin.Forms;
+#endif
+
+#if __MAUI__
+namespace Mapsui.UI.Maui.Extensions
+#else
 namespace Mapsui.UI.Forms.Extensions
+#endif
 {
     public static class TextAlignmentExtensions
     {
@@ -9,19 +19,19 @@ namespace Mapsui.UI.Forms.Extensions
         /// </summary>
         /// <param name="textAlignment">TextAlignment in Xamarin.Forms format</param>
         /// <returns>TextAlignment in Mapsui/RichTextKit format</returns>
-        public static Alignment ToMapsui(this Xamarin.Forms.TextAlignment textAlignment)
+        public static Alignment ToMapsui(this TextAlignment textAlignment)
         {
             Alignment result;
 
             switch (textAlignment)
             {
-                case Xamarin.Forms.TextAlignment.Start:
+                case TextAlignment.Start:
                     result = Alignment.Left;
                     break;
-                case Xamarin.Forms.TextAlignment.Center:
+                case TextAlignment.Center:
                     result = Alignment.Center;
                     break;
-                case Xamarin.Forms.TextAlignment.End:
+                case TextAlignment.End:
                     result = Alignment.Right;
                     break;
                 default:

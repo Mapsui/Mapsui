@@ -1,6 +1,10 @@
 ﻿using System;
 
+#if __MAUI__
+namespace Mapsui.UI.Maui
+#else
 namespace Mapsui.UI.Forms
+#endif
 {
     public sealed class PinClickedEventArgs : EventArgs
     {

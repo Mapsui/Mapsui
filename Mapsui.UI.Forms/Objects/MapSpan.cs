@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
+#if __MAUI__
+namespace Mapsui.UI.Maui
+#else
 namespace Mapsui.UI.Forms
+#endif
 {
     /// <summary>
     /// MapSpan represents an area of the earth

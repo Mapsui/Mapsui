@@ -1,7 +1,11 @@
 ﻿using System;
 using Mapsui.Geometries;
 
+#if __MAUI__
+namespace Mapsui.UI.Maui
+#else
 namespace Mapsui.UI.Forms
+#endif
 {
     /// <summary>
     /// Structure holding latitude and longitude of a position in spherical coordinate system

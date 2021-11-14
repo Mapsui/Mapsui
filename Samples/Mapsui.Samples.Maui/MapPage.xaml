@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:mapsui="clr-namespace:Mapsui.UI.Maui;assembly=Mapsui.UI.Maui"
+             x:Class="Mapsui.Samples.Maui.MapPage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <mapsui:MapView x:Name="mapView"
+                            Grid.Row ="0"
+                            IsVisible="true"
+                            VerticalOptions="FillAndExpand"
+                            HorizontalOptions="FillAndExpand"
+                            BackgroundColor="Gray" 
+                            Margin="10" />
+          <Label Grid.Row="1"  x:Name="info" 
+            HorizontalOptions="CenterAndExpand"
+            Text="unknown" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
