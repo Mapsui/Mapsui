@@ -4,9 +4,25 @@ using System.Runtime.CompilerServices;
 using Mapsui.GeometryLayer;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using System;
+using System.Linq;
+using System.Runtime.CompilerServices;
+#if __MAUI__
+using Mapsui.UI.Maui;
+using Mapsui.UI.Maui.Extensions;
+using Microsoft.Maui;
+using Microsoft.Maui.Controls;
+
+using Color = Microsoft.Maui.Graphics.Color;
+using KnownColor = Mapsui.UI.Maui.KnownColor;
+#else
 using Mapsui.UI.Forms;
 using Mapsui.UI.Forms.Extensions;
 using Xamarin.Forms;
+
+using Color = Xamarin.Forms.Color;
+using KnownColor = Xamarin.Forms.Color;
+#endif
 
 namespace Mapsui.UI.Objects
 {
@@ -17,11 +33,11 @@ namespace Mapsui.UI.Objects
     {
         public static readonly BindableProperty LabelProperty = BindableProperty.Create(nameof(Label), typeof(string), typeof(Pin), default(string));
         public static readonly BindableProperty StrokeWidthProperty = BindableProperty.Create(nameof(StrokeWidth), typeof(float), typeof(Circle), 1f);
-        public static readonly BindableProperty StrokeColorProperty = BindableProperty.Create(nameof(StrokeColor), typeof(Xamarin.Forms.Color), typeof(Circle), Xamarin.Forms.Color.Black);
         public static readonly BindableProperty MinVisibleProperty = BindableProperty.Create(nameof(MinVisible), typeof(double), typeof(Circle), 0.0);
         public static readonly BindableProperty MaxVisibleProperty = BindableProperty.Create(nameof(MaxVisible), typeof(double), typeof(Circle), double.MaxValue);
         public static readonly BindableProperty ZIndexProperty = BindableProperty.Create(nameof(ZIndex), typeof(int), typeof(Circle), 0);
         public static readonly BindableProperty IsClickableProperty = BindableProperty.Create(nameof(IsClickable), typeof(bool), typeof(Drawable), false);
+        public static readonly BindableProperty StrokeColorProperty = BindableProperty.Create(nameof(StrokeColor), typeof(Color), typeof(Circle), KnownColor.Black);
 
         /// <summary>
         /// Label of drawable
@@ -44,10 +60,10 @@ namespace Mapsui.UI.Objects
         /// <summary>
         /// StrokeColor for drawable
         /// </summary>
-        public Xamarin.Forms.Color StrokeColor
+        public Color StrokeColor
         {
-            get => (Xamarin.Forms.Color)GetValue(StrokeColorProperty);
-            set => SetValue(StrokeColorProperty, value);
+            get { return (Color)GetValue(StrokeColorProperty); }
+            set { SetValue(StrokeColorProperty, value); }
         }
 
         /// <summary>

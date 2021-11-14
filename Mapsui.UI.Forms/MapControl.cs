@@ -1,3 +1,6 @@
+using Mapsui.Rendering;
+using Mapsui.UI.Utils;
+using SkiaSharp;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -5,13 +8,30 @@ using System.Linq;
 using System.Threading.Tasks;
 using Mapsui.Geometries.Utilities;
 using Mapsui.Layers;
-using Mapsui.Rendering;
-using Mapsui.UI.Utils;
-using SkiaSharp;
+#if __MAUI__
+using Mapsui.UI.Maui.Extensions;
+using Microsoft.Maui;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Essentials;
+using Microsoft.Maui.Graphics;
+using SkiaSharp.Views.Maui;
+using SkiaSharp.Views.Maui.Controls;
+
+using Color = Microsoft.Maui.Graphics.Color;
+using KnownColor = Mapsui.UI.Maui.KnownColor;
+#else
 using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
 
+using Color = Xamarin.Forms.Color;
+using KnownColor = Xamarin.Forms.Color;
+#endif
+
+#if __MAUI__
+namespace Mapsui.UI.Maui
+#else
 namespace Mapsui.UI.Forms
+#endif
 {
     /// <summary>
     /// Class, that uses the API of all other Mapsui MapControls
@@ -93,10 +113,13 @@ namespace Mapsui.UI.Forms
 
         public bool UseDoubleTap = true;
         public bool UseFling = true;
+#if __MAUI__
+        private Size oldSize;
+#endif
 
         private void Initialize()
         {
-            Xamarin.Forms.View view;
+            View view;
 
             if (UseGPU)
             {
@@ -126,13 +149,40 @@ namespace Mapsui.UI.Forms
                 view = _canvasView;
             }
 
+#if __MAUI__
+            view.PropertyChanged += View_PropertyChanged;
+#else
             view.SizeChanged += OnSizeChanged;
+#endif
 
             Content = view;
 
             Map = new Map();
-            BackgroundColor = Color.White;
+
+            BackgroundColor = KnownColor.White;
         }
+
+#if __MAUI__
+        private void View_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(this.Width):
+                case nameof(this.Height):
+                    var newSize = new Size(this.Width, this.Height);
+
+                    if (newSize.Width > 0 && newSize.Height > 0 && this.oldSize != newSize)
+                    {
+                        this.oldSize = newSize;
+                        // Maui Workaround because the OnSizeChanged Events don't fire.
+                        // Maybe this is a Bug and will be fixed in later versions.
+                        this.OnSizeChanged(this, EventArgs.Empty);
+                    }
+
+                    break;
+            }
+        }
+#endif
 
         private void OnSizeChanged(object sender, EventArgs e)
         {
@@ -770,7 +820,11 @@ namespace Mapsui.UI.Forms
 
         public void OpenBrowser(string url)
         {
+#if __MAUI__
+            Launcher.OpenAsync(new Uri(url));
+#else
             Device.OpenUri(new Uri(url));
+#endif
         }
 
         protected void RunOnUIThread(Action action)

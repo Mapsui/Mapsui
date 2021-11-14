@@ -1,3 +1,14 @@
+﻿using Mapsui.Layers;
+using Mapsui.Rendering;
+using Mapsui.UI.Objects;
+using Mapsui.Widgets;
+using Mapsui.Extensions;
+using Mapsui.Providers;
+using Mapsui.Widgets.ButtonWidget;
+using Mapsui.Utilities;
+using SkiaSharp;
+using Svg.Skia;
+using System;
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,6 +18,22 @@ using System.ComponentModel;
 using System.Linq;
 using System.Resources;
 using System.Runtime.CompilerServices;
+using Mapsui.Fetcher;
+using Mapsui.GeometryLayer;
+#if __MAUI__
+using Mapsui.UI.Maui.Extensions;
+using Microsoft.Maui;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Graphics;
+using Microsoft.Maui.Layouts;
+using SkiaSharp.Views;
+using SkiaSharp.Views.Maui;
+using SkiaSharp.Views.Maui.Controls;
+
+using Rectangle = Microsoft.Maui.Graphics.Rectangle;
+#else
+using Mapsui.UI.Forms.Extensions;
+using SkiaSharp.Views.Forms;
 using Mapsui.Extensions;
 using Mapsui.GeometryLayer;
 using Mapsui.Layers;
@@ -18,8 +45,13 @@ using Mapsui.Widgets.ButtonWidget;
 using SkiaSharp;
 using Svg.Skia;
 using Xamarin.Forms;
+#endif
 
+#if __MAUI__
+namespace Mapsui.UI.Maui
+#else
 namespace Mapsui.UI.Forms
+#endif
 {
     /// <summary>
     /// Class, that uses the API of the original Xamarin.Forms MapView
@@ -558,7 +590,7 @@ namespace Mapsui.UI.Forms
                     if (e.MapInfo!.ScreenPosition == null)
                         return;
 
-                    var pinArgs = new PinClickedEventArgs(clickedPin, Viewport.ScreenToWorld(e.MapInfo!.ScreenPosition).ToForms(), e.NumTaps);
+                    var pinArgs = new PinClickedEventArgs(clickedPin, Viewport.ScreenToWorld(e.MapInfo!.ScreenPosition).ToNative(), e.NumTaps);
 
                     PinClicked?.Invoke(this, pinArgs);
 
@@ -588,7 +620,7 @@ namespace Mapsui.UI.Forms
                     return;
 
                 var calloutArgs = new CalloutClickedEventArgs(clickedCallout,
-                    Viewport.ScreenToWorld(e.MapInfo!.ScreenPosition).ToForms(),
+                    Viewport.ScreenToWorld(e.MapInfo!.ScreenPosition).ToNative(),
                     new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.NumTaps);
 
                 clickedCallout?.HandleCalloutClicked(this, calloutArgs);
@@ -616,7 +648,7 @@ namespace Mapsui.UI.Forms
                     return;
 
                 var drawableArgs = new DrawableClickedEventArgs(
-                    Viewport.ScreenToWorld(e.MapInfo!.ScreenPosition).ToForms(),
+                    Viewport.ScreenToWorld(e.MapInfo!.ScreenPosition).ToNative(),
                     new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.NumTaps);
 
                 clickedDrawable?.HandleClicked(drawableArgs);
@@ -629,8 +661,7 @@ namespace Mapsui.UI.Forms
 
         private void HandlerLongTap(object sender, TappedEventArgs e)
         {
-            var args = new MapLongClickedEventArgs(Viewport.ScreenToWorld(e.ScreenPosition).ToForms());
-
+            var args = new MapLongClickedEventArgs(Viewport.ScreenToWorld(e.ScreenPosition).ToNative());
             MapLongClicked?.Invoke(this, args);
 
             if (args.Handled)
@@ -668,8 +699,7 @@ namespace Mapsui.UI.Forms
 
                 if (mapInfo?.Feature == null)
                 {
-                    var args = new MapClickedEventArgs(Viewport.ScreenToWorld(e.ScreenPosition).ToForms(), e.NumOfTaps);
-
+                    var args = new MapClickedEventArgs(Viewport.ScreenToWorld(e.ScreenPosition).ToNative(), e.NumOfTaps);
                     MapClicked?.Invoke(this, args);
 
                     if (args.Handled)

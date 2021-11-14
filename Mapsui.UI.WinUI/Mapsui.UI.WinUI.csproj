@@ -13,11 +13,17 @@
     <Compile Include="..\Mapsui.UI.Uwp\MapControl.cs" Link="MapControl.cs" />
   </ItemGroup>
 
+	<!-- Workaround for https://github.com/microsoft/WindowsAppSDK/issues/1217 -->
+	<Target Name="FixBinPlaceBootstrapDll" BeforeTargets="BinPlaceBootstrapDll">
+		<PropertyGroup>
+			<_WindowsAppSDKFoundationPlatform>x86</_WindowsAppSDKFoundationPlatform>
+		</PropertyGroup>
+	</Target>
+
   <ItemGroup>
-      <PackageReference Include="Microsoft.ProjectReunion" Version="0.8.4" />
-      <PackageReference Include="Microsoft.ProjectReunion.Foundation" Version="0.8.4" />
-      <PackageReference Include="Microsoft.ProjectReunion.WinUI" Version="0.8.4" />
-      <PackageReference Include="SkiaSharp.Views.WinUI" Version="2.80.3" />
+	<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0-preview3" GeneratePathProperty="true" />
+	<PackageReference Include="Microsoft.Graphics.Win2D" Version="1.0.0.29-preview3" />
+    <PackageReference Include="SkiaSharp.Views.WinUI" Version="2.88.0-preview.155" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +31,14 @@
     <ProjectReference Include="..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
     <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
   </ItemGroup>
+
+	<!-- Required - WinUI can't deploy in a multi-targeting environment -->
+	<Target Name="FixReferenceCopyLocalPaths" BeforeTargets="ResolvePackageAssets">
+	  <ItemGroup>
+		<ReferenceCopyLocalPaths Remove="$(PkgMicrosoft_WindowsAppSDK)\build\..\runtimes\lib\native\AnyCPU\Microsoft.WindowsAppRuntime.Bootstrap.dll"/>
+		<ReferenceCopyLocalPaths Remove="$(PkgMicrosoft_WindowsAppSDK)\build\..\runtimes\lib\native\\Microsoft.WindowsAppRuntime.Bootstrap.dll"/>
+	  </ItemGroup>
+	</Target>
 
   <Import Project="..\Mapsui.UI.Shared\Mapsui.UI.Shared.projitems" Label="Shared" />
 

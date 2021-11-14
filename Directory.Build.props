@@ -27,7 +27,7 @@
 
   <ItemGroup Condition="'$(OS)' == 'Unix'">
     <!--Specify Compiler for Mac Builds-->
-    <PackageReference Include="Microsoft.Net.Compilers.Toolset" Version="*">
+    <PackageReference Include="Microsoft.Net.Compilers.Toolset" Version="4.0.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
