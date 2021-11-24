@@ -15,14 +15,14 @@ namespace Mapsui.Samples.Forms
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MapPage : ContentPage
     {
-        public Func<MapView, MapClickedEventArgs, bool> Clicker { get; set; }
+        public Func<MapView?, MapClickedEventArgs, bool>? Clicker { get; set; }
 
         public MapPage()
         {
             InitializeComponent();
         }
 
-        public MapPage(Action<IMapControl> setup, Func<MapView, MapClickedEventArgs, bool>? c = null)
+        public MapPage(Action<IMapControl> setup, Func<MapView?, MapClickedEventArgs, bool>? c = null)
         {
             InitializeComponent();
 
@@ -79,7 +79,7 @@ namespace Mapsui.Samples.Forms
 
         private void OnMapClicked(object sender, MapClickedEventArgs e)
         {
-            e.Handled = Clicker != null ? (bool)Clicker?.Invoke(sender as MapView, e) : false;
+            e.Handled = Clicker != null ? (Clicker?.Invoke(sender as MapView, e) ?? false) : false;
             //Samples.SetPins(mapView, e);
             //Samples.DrawPolylines(mapView, e);
         }

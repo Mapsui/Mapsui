@@ -58,7 +58,7 @@ namespace Mapsui.Layers
         // ReSharper disable once UnusedParameter.Local // Is public and won't break this now
         public TileLayer(ITileSource tileSource, int minTiles = 200, int maxTiles = 300,
             IDataFetchStrategy? dataFetchStrategy = null, IRenderFetchStrategy? renderFetchStrategy = null,
-            int minExtraTiles = -1, int maxExtraTiles = -1, Func<TileInfo, RasterFeature>? fetchTileAsFeature = null)
+            int minExtraTiles = -1, int maxExtraTiles = -1, Func<TileInfo, RasterFeature?>? fetchTileAsFeature = null)
         {
             _tileSource = tileSource ?? throw new ArgumentException($"{tileSource} can not null");
             MemoryCache = new MemoryCache<RasterFeature?>(minTiles, maxTiles);
@@ -114,7 +114,7 @@ namespace Mapsui.Layers
         public override void RefreshData(FetchInfo fetchInfo)
         {
             if (Enabled
-                && fetchInfo.Extent.GetArea() > 0
+                && fetchInfo.Extent?.GetArea() > 0
                 && MaxVisible >= fetchInfo.Resolution
                 && MinVisible <= fetchInfo.Resolution)
             {
@@ -146,10 +146,14 @@ namespace Mapsui.Layers
             OnDataChanged(e);
         }
 
-        private RasterFeature ToFeature(TileInfo tileInfo)
+        private RasterFeature? ToFeature(TileInfo tileInfo)
         {
             var tileData = _tileSource.GetTile(tileInfo);
-            return new RasterFeature(ToRaster(tileInfo, tileData));
+            var mRaster = ToRaster(tileInfo, tileData);
+            if (mRaster != null)
+                return new RasterFeature(mRaster);
+
+            return null;
         }
 
         private static MRaster? ToRaster(TileInfo tileInfo, byte[]? tileData)

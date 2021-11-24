@@ -53,17 +53,17 @@ namespace Mapsui.Styles.Thematics
         /// <summary>
         /// Gets or sets the <see cref="Mapsui.Styles.Thematics.ColorBlend"/> used on labels
         /// </summary>
-        public ColorBlend TextColorBlend { get; set; }
+        public ColorBlend? TextColorBlend { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="Mapsui.Styles.Thematics.ColorBlend"/> used on lines
         /// </summary>
-        public ColorBlend LineColorBlend { get; set; }
+        public ColorBlend? LineColorBlend { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="Mapsui.Styles.Thematics.ColorBlend"/> used as Fill
         /// </summary>
-        public ColorBlend FillColorBlend { get; set; }
+        public ColorBlend? FillColorBlend { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the GradientTheme class
@@ -142,7 +142,7 @@ namespace Mapsui.Styles.Thematics
             return style;
         }
 
-        private void CalculateVectorStyle(VectorStyle style, VectorStyle min, VectorStyle max, double value)
+        private void CalculateVectorStyle(VectorStyle? style, VectorStyle? min, VectorStyle? max, double value)
         {
             var dFrac = Fraction(value);
             double fFrac = Convert.ToSingle(dFrac);
@@ -161,7 +161,7 @@ namespace Mapsui.Styles.Thematics
                 style.Outline = InterpolatePen(min.Outline, max.Outline, value);
         }
 
-        private void CalculateSymbolStyle(SymbolStyle style, SymbolStyle min, SymbolStyle max, double value)
+        private void CalculateSymbolStyle(SymbolStyle? style, SymbolStyle? min, SymbolStyle? max, double value)
         {
             var dFrac = Fraction(value);
             style.BitmapId = (dFrac > 0.5) ? min.BitmapId : max.BitmapId;
@@ -170,7 +170,7 @@ namespace Mapsui.Styles.Thematics
             style.SymbolScale = InterpolateDouble(min.SymbolScale, max.SymbolScale, value);
         }
 
-        private void CalculateLabelStyle(LabelStyle style, LabelStyle min, LabelStyle max, double value)
+        private void CalculateLabelStyle(LabelStyle? style, LabelStyle? min, LabelStyle? max, double value)
         {
             style.CollisionDetection = min.CollisionDetection;
             style.Enabled = InterpolateBool(min.Enabled, max.Enabled, value);

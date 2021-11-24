@@ -26,7 +26,7 @@ namespace Mapsui.Samples.Wpf
 
             MapControl.FeatureInfo += MapControlFeatureInfo;
             MapControl.MouseMove += MapControlOnMouseMove;
-            MapControl.Map.RotationLock = false;
+            MapControl.Map!.RotationLock = false;
             MapControl.UnSnapRotationDegrees = 30;
             MapControl.ReSnapRotationDegrees = 5;
             MapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
@@ -90,19 +90,20 @@ namespace Mapsui.Samples.Wpf
             };
 
             radioButton.Click += (s, a) => {
-                MapControl.Map.Layers.Clear();
+                MapControl.Map?.Layers.Clear();
 
                 sample.Setup(MapControl);
 
                 MapControl.Info += MapControlOnInfo;
-                LayerList.Initialize(MapControl.Map.Layers);
+                if (MapControl.Map != null)
+                    LayerList.Initialize(MapControl.Map.Layers);
             };
             return radioButton;
         }
 
         readonly LimitedQueue<LogModel> _logMessage = new LimitedQueue<LogModel>(6);
 
-        private void LogMethod(LogLevel logLevel, string message, Exception exception)
+        private void LogMethod(LogLevel logLevel, string? message, Exception? exception)
         {
             _logMessage.Enqueue(new LogModel { Exception = exception, LogLevel = logLevel, Message = message });
             Dispatcher.Invoke(() => LogTextBox.Text = ToMultiLineString(_logMessage));
@@ -122,9 +123,9 @@ namespace Mapsui.Samples.Wpf
             return result.ToString();
         }
 
-        private static void MapControlFeatureInfo(object sender, FeatureInfoEventArgs e)
+        private static void MapControlFeatureInfo(object? sender, FeatureInfoEventArgs e)
         {
-            MessageBox.Show(e.FeatureInfo.ToDisplayText());
+            MessageBox.Show(e.FeatureInfo?.ToDisplayText());
         }
 
         private void RotationSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -134,7 +135,7 @@ namespace Mapsui.Samples.Wpf
             MapControl.Refresh();
         }
 
-        private void MapControlOnInfo(object sender, MapInfoEventArgs args)
+        private void MapControlOnInfo(object? sender, MapInfoEventArgs args)
         {
             if (args.MapInfo?.Feature != null)
             {

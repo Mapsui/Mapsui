@@ -184,7 +184,7 @@ namespace Mapsui.UI.Wpf
             _flingTracker.Clear();
             CaptureMouse();
 
-            if (!IsInBoxZoomMode())
+            if (!IsInBoxZoomMode() && _currentMousePosition != null)
             {
                 if (IsClick(_currentMousePosition, _downMousePosition))
                 {
@@ -204,7 +204,7 @@ namespace Mapsui.UI.Wpf
         {
             var mousePosition = e.GetPosition(this).ToMapsui();
 
-            if (IsInBoxZoomMode())
+            if (IsInBoxZoomMode() && _previousMousePosition != null)
             {
                 var previous = Viewport.ScreenToWorld(_previousMousePosition.X, _previousMousePosition.Y);
                 var current = Viewport.ScreenToWorld(mousePosition.X, mousePosition.Y);
@@ -278,11 +278,14 @@ namespace Mapsui.UI.Wpf
             if (FeatureInfo == null) return; // don't fetch if you the call back is not set.
 
             if (_downMousePosition == e.GetPosition(this).ToMapsui())
-                foreach (var layer in Map.Layers)
+                if (this.Map != null)
                 {
-                    // ReSharper disable once SuspiciousTypeConversion.Global
-                    (layer as IFeatureInfo)?.GetFeatureInfo(Viewport, _downMousePosition.X, _downMousePosition.Y,
-                        OnFeatureInfo);
+                    foreach (var layer in Map.Layers)
+                    {
+                        // ReSharper disable once SuspiciousTypeConversion.Global
+                        (layer as IFeatureInfo)?.GetFeatureInfo(Viewport, _downMousePosition.X, _downMousePosition.Y,
+                            OnFeatureInfo);
+                    }
                 }
         }
 

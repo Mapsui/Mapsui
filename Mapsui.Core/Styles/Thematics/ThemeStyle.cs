@@ -5,9 +5,9 @@ namespace Mapsui.Styles.Thematics
 {
     public class ThemeStyle : Style, IThemeStyle
     {
-        private readonly Func<IFeature, IStyle> _method;
+        private readonly Func<IFeature, IStyle?> _method;
 
-        public ThemeStyle(Func<IFeature, IStyle> method)
+        public ThemeStyle(Func<IFeature, IStyle?> method)
         {
             _method = method;
         }

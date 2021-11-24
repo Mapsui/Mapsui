@@ -514,8 +514,11 @@ namespace Mapsui.UI.Wpf
         }
 
         /// <inheritdoc />
-        public MapInfo? GetMapInfo(MPoint screenPosition, int margin = 0)
+        public MapInfo? GetMapInfo(MPoint? screenPosition, int margin = 0)
         {
+            if (screenPosition == null)
+                return null;
+
             return Renderer?.GetMapInfo(screenPosition.X, screenPosition.Y, Viewport, Map?.Layers ?? new LayerCollection(), margin);
         }
 

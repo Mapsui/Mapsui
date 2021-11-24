@@ -363,18 +363,21 @@ namespace Mapsui.UI.Forms
             }
         }
 
-        public static bool operator ==(Pin left, Pin right)
+        public static bool operator ==(Pin? left, Pin? right)
         {
             return Equals(left, right);
         }
 
-        public static bool operator !=(Pin left, Pin right)
+        public static bool operator !=(Pin? left, Pin? right)
         {
             return !Equals(left, right);
         }
 
-        private bool Equals(Pin other)
+        private bool Equals(Pin? other)
         {
+            if (other == null)
+                return false;
+
             return string.Equals(Label, other.Label) && Equals(Position, other.Position) && Type == other.Type && string.Equals(Address, other.Address);
         }
 

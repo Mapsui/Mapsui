@@ -35,7 +35,7 @@ namespace Mapsui.Samples.Avalonia.Views
             MbTilesSample.MbTilesLocation = MbTilesLocationOnAvalonia;
             MbTilesHelper.DeployMbTilesFile(s => File.Create(Path.Combine(MbTilesLocationOnAvalonia, s)));
 
-            MapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer());
+            MapControl.Map!.Layers.Add(OpenStreetMap.CreateTileLayer());
             MapControl.Map.RotationLock = false;
             MapControl.UnSnapRotationDegrees = 30;
             MapControl.ReSnapRotationDegrees = 5;
@@ -96,7 +96,7 @@ namespace Mapsui.Samples.Avalonia.Views
             };
 
             radioButton.Click += (s, a) => {
-                MapControl.Map.Layers.Clear();
+                MapControl.Map?.Layers.Clear();
                 MapControl.Info -= MapOnInfo;
                 sample.Setup(MapControl);
                 MapControl.Info += MapOnInfo;

@@ -574,7 +574,7 @@ namespace Mapsui.UI.Forms
 
                 foreach (var pin in pins)
                 {
-                    if (pin.IsVisible && pin.Feature.Equals(e.MapInfo.Feature))
+                    if (pin.IsVisible && (pin.Feature?.Equals(e.MapInfo.Feature) ?? false))
                     {
                         clickedPin = pin;
                         break;
@@ -637,7 +637,7 @@ namespace Mapsui.UI.Forms
 
                 foreach (var drawable in drawables)
                 {
-                    if (drawable.IsClickable && drawable.Feature.Equals(e.MapInfo.Feature))
+                    if (drawable.IsClickable && (drawable.Feature?.Equals(e.MapInfo.Feature) ?? false))
                     {
                         clickedDrawable = drawable;
                         break;
@@ -725,9 +725,11 @@ namespace Mapsui.UI.Forms
 
         private void HandlerPinPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            var fetchInfo = new FetchInfo(Viewport.Extent, Viewport.Resolution, Map?.CRS, ChangeType.Continuous);
-
-            Map?.RefreshData(fetchInfo);
+            if (Viewport.Extent != null)
+            {
+                var fetchInfo = new FetchInfo(Viewport.Extent, Viewport.Resolution, Map?.CRS, ChangeType.Continuous);
+                Map?.RefreshData(fetchInfo);
+            }
 
             // Repaint map, because something could have changed
             RefreshGraphics();
@@ -735,9 +737,11 @@ namespace Mapsui.UI.Forms
 
         private void HandlerDrawablePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            var fetchInfo = new FetchInfo(Viewport.Extent, Viewport.Resolution, Map?.CRS, ChangeType.Continuous);
-
-            Map?.RefreshData(fetchInfo);
+            if (Viewport.Extent != null)
+            {
+                var fetchInfo = new FetchInfo(Viewport.Extent, Viewport.Resolution, Map?.CRS, ChangeType.Continuous);
+                Map?.RefreshData(fetchInfo);
+            }
 
             // Repaint map, because something could have changed
             RefreshGraphics();

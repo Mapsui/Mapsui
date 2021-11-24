@@ -17,8 +17,8 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
     public class ArcGisLegend
     {
         private int _timeOut;
-        private HttpWebRequest _webRequest;
-        private ArcGISLegendResponse _legendResponse;
+        private HttpWebRequest? _webRequest;
+        private ArcGISLegendResponse? _legendResponse;
 
         public event ArcGISLegendEventHandler? LegendReceived;
         public event ArcGISLegendEventHandler? LegendFailed;
@@ -48,7 +48,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             _webRequest.BeginGetResponse(FinishWebRequest, null);
         }
 
-        public ArcGISLegendResponse GetLegendInfo(string serviceUrl, ICredentials? credentials = null)
+        public ArcGISLegendResponse? GetLegendInfo(string serviceUrl, ICredentials? credentials = null)
         {
             _webRequest = CreateRequest(serviceUrl, credentials);
             var response = _webRequest.GetSyncResponse(_timeOut);
@@ -75,7 +75,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             {
                 var response = _webRequest.GetSyncResponse(_timeOut);
                 _legendResponse = GetLegendResponseFromWebresponse(response);
-                _webRequest.EndGetResponse(result);
+                _webRequest?.EndGetResponse(result);
 
                 if (_legendResponse == null)
                     OnLegendFailed();
@@ -89,9 +89,9 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             }
         }
 
-        private static ArcGISLegendResponse? GetLegendResponseFromWebresponse(WebResponse webResponse)
+        private static ArcGISLegendResponse? GetLegendResponseFromWebresponse(WebResponse? webResponse)
         {
-            var dataStream = webResponse.GetResponseStream();
+            var dataStream = webResponse?.GetResponseStream();
 
             if (dataStream != null)
             {
@@ -100,15 +100,15 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
 
                 var serializer = new JsonSerializer();
                 var jToken = JObject.Parse(jsonString);
-                var legendResponse = (ArcGISLegendResponse)serializer.Deserialize(new JTokenReader(jToken), typeof(ArcGISLegendResponse));
+                var legendResponse = serializer.Deserialize(new JTokenReader(jToken), typeof(ArcGISLegendResponse)) as ArcGISLegendResponse;
 
                 dataStream.Dispose();
-                webResponse.Dispose();
+                webResponse?.Dispose();
 
                 return legendResponse;
             }
 
-            webResponse.Dispose();
+            webResponse?.Dispose();
 
             return null;
         }

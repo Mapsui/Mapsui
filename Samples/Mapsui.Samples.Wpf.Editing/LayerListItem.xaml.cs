@@ -6,7 +6,7 @@ namespace Mapsui.Samples.Wpf.Editing
 {
     public partial class LayerListItem
     {
-        public ILayer Layer { get; set; }
+        public ILayer? Layer { get; set; }
 
         public string LayerName
         {

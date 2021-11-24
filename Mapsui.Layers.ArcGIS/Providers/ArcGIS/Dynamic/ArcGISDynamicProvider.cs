@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Net;
@@ -16,10 +17,10 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
     public class ArcGISDynamicProvider : IProjectingProvider
     {
         private int _timeOut;
-        private string _url;
-        private string _crs;
+        private string _url = default!;
+        private string? _crs;
 
-        public string Token { get; set; }
+        public string? Token { get; set; }
 
         /// <summary>
         /// Create ArcGisDynamicProvider based on a given capabilities file
@@ -61,7 +62,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
         }
 
         public ArcGISDynamicCapabilities ArcGisDynamicCapabilities { get; private set; }
-        public ICredentials Credentials { get; set; }
+        public ICredentials? Credentials { get; set; }
 
         public string Url
         {
@@ -83,7 +84,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             set => _timeOut = value;
         }
 
-        public string CRS
+        public string? CRS
         {
             get => _crs;
             set => _crs = value;
@@ -99,24 +100,27 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
 
             IViewport viewport = fetchInfo.ToViewport();
 
-            if (TryGetMap(viewport, out MRaster raster))
+            if (TryGetMap(viewport, out var raster))
             {
                 features.Add(new RasterFeature(raster));
             }
             return features;
         }
 
-        public MRect GetExtent()
+        public MRect? GetExtent()
         {
+            if (ArcGisDynamicCapabilities.initialExtent == null)
+                return null;
+
             return new MRect(ArcGisDynamicCapabilities.initialExtent.xmin, ArcGisDynamicCapabilities.initialExtent.ymin, ArcGisDynamicCapabilities.initialExtent.xmax, ArcGisDynamicCapabilities.initialExtent.ymax);
         }
 
-        private void CapabilitiesHelperCapabilitiesFailed(object sender, EventArgs e)
+        private void CapabilitiesHelperCapabilitiesFailed(object? sender, EventArgs e)
         {
             Debug.WriteLine("Error getting ArcGIS Capabilities");
         }
 
-        private void CapabilitiesHelperCapabilitiesReceived(object sender, EventArgs e)
+        private void CapabilitiesHelperCapabilitiesReceived(object? sender, EventArgs e)
         {
             var capabilities = sender as ArcGISDynamicCapabilities;
             if (capabilities == null)
@@ -128,7 +132,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
         /// <summary>
         /// Retrieves the bitmap from ArcGIS Dynamic service
         /// </summary>
-        public bool TryGetMap(IViewport viewport, out MRaster raster)
+        public bool TryGetMap(IViewport viewport, [NotNullWhen(true)] out MRaster? raster)
         {
             int width;
             int height;
@@ -179,7 +183,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             var sr = CreateSr(CRS);
             var strReq = new StringBuilder(_url);
             strReq.Append("/export?");
-            strReq.AppendFormat(CultureInfo.InvariantCulture, "bbox={0},{1},{2},{3}", box.Min.X, box.Min.Y, box.Max.X, box.Max.Y);
+            strReq.AppendFormat(CultureInfo.InvariantCulture, "bbox={0},{1},{2},{3}", box?.Min.X, box?.Min.Y, box?.Max.X, box?.Max.Y);
             strReq.AppendFormat("&bboxSR={0}", sr);
             strReq.AppendFormat("&imageSR={0}", sr);
             strReq.AppendFormat("&size={0},{1}", width, height);
@@ -196,16 +200,19 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
              */
             var oneAdded = false;
 
-            foreach (var t in ArcGisDynamicCapabilities.layers)
+            if (ArcGisDynamicCapabilities.layers != null)
             {
-                if (t.defaultVisibility == false)
-                    continue;
+                foreach (var t in ArcGisDynamicCapabilities.layers)
+                {
+                    if (t.defaultVisibility == false)
+                        continue;
 
-                if (oneAdded)
-                    strReq.Append(",");
+                    if (oneAdded)
+                        strReq.Append(",");
 
-                strReq.AppendFormat("{0}", t.id);
-                oneAdded = true;
+                    strReq.AppendFormat("{0}", t.id);
+                    oneAdded = true;
+                }
             }
 
             strReq.AppendFormat("&format={0}", GetFormat(ArcGisDynamicCapabilities));
@@ -215,8 +222,11 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             return strReq.ToString();
         }
 
-        private static string CreateSr(string crs)
+        private static string CreateSr(string? crs)
         {
+            if (crs == null)
+                throw new Exception("crs type not supported");
+
             if (crs.StartsWith(CrsHelper.EsriStringPrefix)) return "{\"wkt\":\"" + crs.Substring(CrsHelper.EsriStringPrefix.Length).Replace("\"", "\\\"") + "\"}";
             if (crs.StartsWith(CrsHelper.EpsgPrefix)) return CrsHelper.ToEpsgCode(crs).ToString();
             throw new Exception("crs type not supported");

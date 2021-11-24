@@ -52,7 +52,7 @@ namespace Mapsui.Samples.Common.Maps
             var result = new List<Polygon>();
 
             var polygon = new Polygon();
-            polygon.ExteriorRing.Vertices.Add(new Point(0, 0));
+            polygon.ExteriorRing!.Vertices.Add(new Point(0, 0));
             polygon.ExteriorRing.Vertices.Add(new Point(0, 10000000));
             polygon.ExteriorRing.Vertices.Add(new Point(10000000, 10000000));
             polygon.ExteriorRing.Vertices.Add(new Point(10000000, 0));
@@ -68,7 +68,7 @@ namespace Mapsui.Samples.Common.Maps
             result.Add(polygon);
 
             polygon = new Polygon();
-            polygon.ExteriorRing.Vertices.Add(new Point(-10000000, 0));
+            polygon.ExteriorRing!.Vertices.Add(new Point(-10000000, 0));
             polygon.ExteriorRing.Vertices.Add(new Point(-15000000, 5000000));
             polygon.ExteriorRing.Vertices.Add(new Point(-10000000, 10000000));
             polygon.ExteriorRing.Vertices.Add(new Point(-5000000, 5000000));

@@ -28,7 +28,7 @@ namespace Mapsui.Samples.Common.Maps
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             var lineStringLayer = CreateLineStringLayer(CreateLineStringStyle());
             map.Layers.Add(lineStringLayer);
-            map.Home = n => n.NavigateTo(lineStringLayer.Extent.Centroid, 200);
+            map.Home = n => n.NavigateTo(lineStringLayer.Extent?.Centroid, 200);
             return map;
         }
 
@@ -51,6 +51,7 @@ namespace Mapsui.Samples.Common.Maps
             {
                 Fill = null,
                 Outline = null,
+#pragma warning disable CS8670 // Object or collection initializer implicitly dereferences possibly null member.
                 Line = { Color = Color.FromString("YellowGreen"), Width = 4 }
             };
         }

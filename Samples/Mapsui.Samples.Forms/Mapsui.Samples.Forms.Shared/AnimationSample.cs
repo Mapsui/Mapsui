@@ -22,10 +22,16 @@ namespace Mapsui.Samples.Forms
 
         Random random = new Random();
 
-        public bool OnClick(object sender, EventArgs args)
+        public bool OnClick(object? sender, EventArgs args)
         {
             var mapView = sender as MapView;
             var e = args as MapClickedEventArgs;
+
+            if (e == null)
+                return false;
+
+            if (mapView == null)
+                return false;
 
             var navigator = (Navigator)mapView.Navigator;
 

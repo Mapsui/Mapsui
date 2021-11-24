@@ -17,8 +17,8 @@ namespace Mapsui.Samples.Forms
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPageLarge : ContentPage
     {
-        IEnumerable<ISample> allSamples;
-        Func<object, EventArgs, bool> clicker;
+        IEnumerable<ISample>? allSamples;
+        Func<object?, EventArgs, bool>? clicker;
 
         public MainPageLarge()
         {
@@ -53,7 +53,7 @@ namespace Mapsui.Samples.Forms
 
         private void MapView_Info(object sender, UI.MapInfoEventArgs e)
         {
-            if (e.MapInfo.Feature is IFeature feature)
+            if (e.MapInfo?.Feature is IFeature feature)
             {
                 featureInfo.Text = $"Click Info:";
 
@@ -88,7 +88,7 @@ namespace Mapsui.Samples.Forms
 
         private void OnMapClicked(object sender, MapClickedEventArgs e)
         {
-            e.Handled = clicker == null ? false : (bool)clicker?.Invoke(sender as MapView, e);
+            e.Handled = clicker != null && (clicker?.Invoke(sender as MapView, e) ?? false);
         }
 
         void OnSelection(object sender, SelectedItemChangedEventArgs e)
@@ -107,8 +107,8 @@ namespace Mapsui.Samples.Forms
             }
 
             clicker = null;
-            if (sample is IFormsSample)
-                clicker = ((IFormsSample)sample).OnClick;
+            if (sample is IFormsSample formsSample)
+                clicker = formsSample.OnClick;
 
             listView.SelectedItem = null;
         }

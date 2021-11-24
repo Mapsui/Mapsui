@@ -28,7 +28,7 @@ namespace Mapsui.Providers
         /// <summary>
         /// The spatial reference ID (CRS)
         /// </summary>
-        string CRS { get; set; }
+        string? CRS { get; set; }
 
         IEnumerable<T> GetFeatures(FetchInfo fetchInfo);
 

@@ -8,7 +8,6 @@
 
   <ItemGroup Condition="exists('..\Mapsui.Samples.Uno.UWP')">
     <EmbeddedResource Include="..\Mapsui.Samples.Uno.UWP\Package.appxmanifest" LogicalName="Package.appxmanifest" />
-    <Content Include="..\Mapsui.Samples.Uno.UWP\Assets\StoreLogo.png" Link="Assets\StoreLogo.png" />
     <Content Include="Assets\Fonts\uno-fluentui-assets.ttf" />
   </ItemGroup>
 

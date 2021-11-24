@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Mapsui.Providers;
 using Mapsui.Styles;
@@ -20,13 +21,13 @@ namespace Mapsui.Layers
         /// <param name="layerName">Name to use for layer</param>
         public MemoryLayer(string layerName) : base(layerName) { }
 
-        public IProvider<IFeature> DataSource { get; set; }
+        public IProvider<IFeature>? DataSource { get; set; }
 
         // Unlike other Layers the MemoryLayer has a CRS field. This is because the 
         // MemoryLayer calls its provider from the GetFeatures method instead of the 
         // RefreshData method. The GetFeatures arguments do not have a CRS argument.
         // This field allows a workaround for when projection is needed.
-        public string CRS { get; set; }
+        public string? CRS { get; set; }
 
         public override IEnumerable<IFeature> GetFeatures(MRect? box, double resolution)
         {
@@ -38,7 +39,7 @@ namespace Mapsui.Layers
                     SymbolStyle.DefaultHeight * 2 * resolution);
             var fetchInfo = new FetchInfo(biggerBox, resolution, CRS);
 
-            return DataSource.GetFeatures(fetchInfo);
+            return DataSource?.GetFeatures(fetchInfo) ?? Array.Empty<IFeature>();
         }
 
         public override void RefreshData(FetchInfo fetchInfo)
@@ -49,6 +50,6 @@ namespace Mapsui.Layers
             // DataHasChanged should be called.
         }
 
-        public override MRect? Extent => DataSource.GetExtent();
+        public override MRect? Extent => DataSource?.GetExtent();
     }
 }

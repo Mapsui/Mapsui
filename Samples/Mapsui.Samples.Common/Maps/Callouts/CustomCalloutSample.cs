@@ -36,7 +36,7 @@ namespace Mapsui.Samples.Common.Maps.Callouts
 
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(CreatePointLayer());
-            map.Home = n => n.NavigateTo(map.Layers[1].Extent.Centroid, map.Resolutions[5]);
+            map.Home = n => n.NavigateTo(map.Layers[1].Extent?.Centroid, map.Resolutions[5]);
             return map;
         }
 
@@ -55,7 +55,7 @@ namespace Mapsui.Samples.Common.Maps.Callouts
         {
             const string path = "Mapsui.Samples.Common.EmbeddedResources.congo.json";
             var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
-            var stream = assembly.GetManifestResourceStream(path);
+            var stream = assembly.GetManifestResourceStream(path) ?? throw new NullReferenceException();
             var cities = DeserializeFromStream<City>(stream);
 
             return cities.Select(c => {
@@ -142,7 +142,7 @@ namespace Mapsui.Samples.Common.Maps.Callouts
             var serializer = new JsonSerializer();
             using var sr = new StreamReader(stream);
             using var jsonTextReader = new JsonTextReader(sr);
-            return serializer.Deserialize<List<T>>(jsonTextReader);
+            return serializer.Deserialize<List<T>>(jsonTextReader) ?? new List<T>();
         }
     }
 }

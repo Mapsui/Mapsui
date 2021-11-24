@@ -34,8 +34,11 @@ namespace Mapsui.Styles
             return Equals(offset);
         }
 
-        public bool Equals(Offset offset)
+        public bool Equals(Offset? offset)
         {
+            if (offset == null)
+                return false;
+
             // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (X != offset.X) return false;
             // ReSharper disable once CompareOfFloatsByEqualityOperator
@@ -49,12 +52,12 @@ namespace Mapsui.Styles
             return X.GetHashCode() ^ Y.GetHashCode() ^ IsRelative.GetHashCode();
         }
 
-        public static bool operator ==(Offset offset1, Offset offset2)
+        public static bool operator ==(Offset? offset1, Offset? offset2)
         {
             return Equals(offset1, offset2);
         }
 
-        public static bool operator !=(Offset offset1, Offset offset2)
+        public static bool operator !=(Offset? offset1, Offset? offset2)
         {
             return !Equals(offset1, offset2);
         }

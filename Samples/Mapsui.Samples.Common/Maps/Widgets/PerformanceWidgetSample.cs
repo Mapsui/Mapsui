@@ -19,7 +19,7 @@ namespace Mapsui.Samples.Common.Maps
 
         public void OnClick(object sender, WidgetTouchedEventArgs args)
         {
-            _mapControl?.Performance.Clear();
+            _mapControl?.Performance?.Clear();
             _mapControl?.RefreshGraphics();
 
             args.Handled = true;

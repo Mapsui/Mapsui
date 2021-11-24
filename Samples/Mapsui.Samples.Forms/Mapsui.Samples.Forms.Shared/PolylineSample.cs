@@ -25,10 +25,16 @@ namespace Mapsui.Samples.Forms
 
         public string Category => "Forms";
 
-        public bool OnClick(object sender, EventArgs args)
+        public bool OnClick(object? sender, EventArgs args)
         {
             var mapView = sender as MapView;
             var e = args as MapClickedEventArgs;
+
+            if (mapView == null)
+                return false;
+
+            if (e == null)
+                return false;
 
             UI.Objects.Drawable f;
 

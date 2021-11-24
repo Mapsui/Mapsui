@@ -15,29 +15,31 @@ using Mapsui.UI;
 using Mapsui.UI.Android;
 using Mapsui.Layers;
 
+#nullable enable
+
 namespace Mapsui.Samples.Droid
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
-        private LinearLayout _popup;
-        private MapControl _mapControl;
-        private TextView _textView;
+        private LinearLayout? _popup;
+        private MapControl? _mapControl;
+        private TextView? _textView;
 
-        protected override void OnCreate(Android.OS.Bundle savedInstanceState)
+        protected override void OnCreate(Android.OS.Bundle? savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.activity_main);
 
-            Android.Support.V7.Widget.Toolbar toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
+            var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
             SetSupportActionBar(toolbar);
 
             // Hack to tell the platform independent samples where the files can be found on Android.
             MbTilesSample.MbTilesLocation = MbTilesLocationOnAndroid;
             MbTilesHelper.DeployMbTilesFile(s => File.Create(System.IO.Path.Combine(MbTilesLocationOnAndroid, s)));
 
-            _mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol);
+            _mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol) ?? throw new NullReferenceException();
             _mapControl.Map = MbTilesSample.CreateMap();
             _mapControl.Info += MapOnInfo;
             _mapControl.Map.RotationLock = true;
@@ -45,7 +47,7 @@ namespace Mapsui.Samples.Droid
             _mapControl.ReSnapRotationDegrees = 5;
             _mapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
 
-            var relativeLayout = FindViewById<RelativeLayout>(Resource.Id.mainLayout);
+            var relativeLayout = FindViewById<RelativeLayout>(Resource.Id.mainLayout) ?? throw new NullReferenceException(); ;
             relativeLayout.AddView(_popup = CreatePopup());
             _mapControl.Map.Layers.Clear();
             var sample = new MbTilesOverlaySample();
@@ -55,22 +57,32 @@ namespace Mapsui.Samples.Droid
             //LayerList.Initialize(_mapControl.Map.Layers);
         }
 
-        public override bool OnCreateOptionsMenu(IMenu menu)
+        public override bool OnCreateOptionsMenu(IMenu? menu)
         {
             MenuInflater.Inflate(Resource.Menu.menu_main, menu);
 
-            var rendererMenu = menu.AddSubMenu(nameof(SkiaRenderMode));
-            rendererMenu.Add(SkiaRenderMode.Software.ToString());
-            rendererMenu.Add(SkiaRenderMode.Hardware.ToString());
+            if (menu == null)
+                return false;
 
-            var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c);
+            var rendererMenu = menu.AddSubMenu(nameof(SkiaRenderMode));
+            rendererMenu?.Add(SkiaRenderMode.Software.ToString());
+            rendererMenu?.Add(SkiaRenderMode.Hardware.ToString());
+
+            var categories = AllSamples.GetSamples()?.Select(s => s.Category).Distinct().OrderBy(c => c);
+            if (categories == null)
+                return false;
+
             foreach (var category in categories)
             {
                 var submenu = menu.AddSubMenu(category);
 
-                foreach (var sample in AllSamples.GetSamples().Where(s => s.Category == category))
+                var allSamples = AllSamples.GetSamples()?.Where(s => s.Category == category);
+                if (allSamples == null)
+                    return false;
+
+                foreach (var sample in allSamples)
                 {
-                    submenu.Add(sample.Name);
+                    submenu?.Add(sample.Name);
                 }
             }
             return true;
@@ -78,7 +90,7 @@ namespace Mapsui.Samples.Droid
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
-            int id = item.ItemId;
+            var id = item.ItemId;
 
             if (item.HasSubMenu)
             {
@@ -90,21 +102,24 @@ namespace Mapsui.Samples.Droid
                 return true;
             }
 
-            if (item.TitleFormatted.ToString() == SkiaRenderMode.Software.ToString())
+            if (_mapControl == null)
+                return false;
+
+            if (item.TitleFormatted?.ToString() == SkiaRenderMode.Software.ToString())
             {
                 _mapControl.RenderMode = SkiaRenderMode.Software;
             }
-            else if (item.TitleFormatted.ToString() == SkiaRenderMode.Hardware.ToString())
+            else if (item.TitleFormatted?.ToString() == SkiaRenderMode.Hardware.ToString())
             {
                 _mapControl.RenderMode = SkiaRenderMode.Hardware;
             }
             else
             {
-                var sample = AllSamples.GetSamples().FirstOrDefault(s => s.Name == item.TitleFormatted.ToString());
+                var sample = AllSamples.GetSamples()?.FirstOrDefault(s => s.Name == item.TitleFormatted?.ToString());
                 if (sample != null)
                 {
-                    _mapControl.Map.Layers.Clear();
-                    sample.Setup(_mapControl);
+                    _mapControl?.Map?.Layers.Clear();
+                    sample.Setup(_mapControl!);
                     return true;
                 }
             }
@@ -151,10 +166,17 @@ namespace Mapsui.Samples.Droid
 
         private void ShowPopup(MapInfoEventArgs args)
         {
-            if (args.MapInfo.Feature is IFeature geometryFeature)
+            if (args.MapInfo?.Feature is IFeature geometryFeature)
             {
                 // Position on click position:
                 // var screenPositionInPixels = args.MapInfo.ScreenPosition;
+
+                if (_mapControl == null)
+                    return;
+
+                if (_popup == null)
+                    return;
+
 
                 // Or position on feature position: 
                 var screenPosition = _mapControl.Viewport.WorldToScreen(geometryFeature.Extent.Centroid);
@@ -164,7 +186,10 @@ namespace Mapsui.Samples.Droid
                 _popup.SetY((float)screenPositionInPixels.Y);
 
                 _popup.Visibility = ViewStates.Visible;
-                _textView.Text = geometryFeature.ToDisplayText();
+                if (_textView != null)
+                {
+                    _textView.Text = geometryFeature.ToDisplayText();
+                }
             }
         }
 

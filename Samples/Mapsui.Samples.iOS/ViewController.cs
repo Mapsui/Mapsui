@@ -35,7 +35,7 @@ namespace Mapsui.Samples.iOS
 
         private void MapOnInfo(object sender, MapInfoEventArgs e)
         {
-            if (e.MapInfo.Feature == null) return;
+            if (e.MapInfo?.Feature == null) return;
             Debug.WriteLine(ToString(e.MapInfo.Feature));
         }
 

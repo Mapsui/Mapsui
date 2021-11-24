@@ -30,7 +30,7 @@ namespace Mapsui.Samples.Common.Maps
             return map;
         }
 
-        private static ILayer CreateStylesLayer(MRect envelope)
+        private static ILayer CreateStylesLayer(MRect? envelope)
         {
             return new MemoryLayer
             {
@@ -41,7 +41,7 @@ namespace Mapsui.Samples.Common.Maps
             };
         }
 
-        public static MemoryProvider<IFeature> CreateMemoryProviderWithDiverseSymbols(MRect envelope, int count = 100)
+        public static MemoryProvider<IFeature> CreateMemoryProviderWithDiverseSymbols(MRect? envelope, int count = 100)
         {
 
             return new MemoryProvider<IFeature>(CreateDiverseFeatures(RandomPointGenerator.GenerateRandomPoints(envelope, count)));
@@ -54,7 +54,8 @@ namespace Mapsui.Samples.Common.Maps
             var styles = CreateDiverseStyles().ToList();
             foreach (var point in randomPoints)
             {
-                var feature = new PointFeature(point) { 
+                var feature = new PointFeature(point)
+                {
                     ["Label"] = counter.ToString()
                 };
 
@@ -120,7 +121,7 @@ namespace Mapsui.Samples.Common.Maps
 
         private static IFeature CreatePointWithStackedStyles()
         {
-            var feature = new PointFeature (new MPoint(5000000, -5000000));
+            var feature = new PointFeature(new MPoint(5000000, -5000000));
 
             feature.Styles.Add(new SymbolStyle
             {

@@ -18,7 +18,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
     public class ArcGISIdentify
     {
         private int _timeOut;
-        private ArcGISFeatureInfo _featureInfo;
+        private ArcGISFeatureInfo? _featureInfo;
         public event StatusEventHandler? IdentifyFinished;
         public event StatusEventHandler? IdentifyFailed;
 
@@ -89,7 +89,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
 
                         var serializer = new JsonSerializer();
                         var jToken = JObject.Parse(jsonString);
-                        _featureInfo = (ArcGISFeatureInfo)serializer.Deserialize(new JTokenReader(jToken), typeof(ArcGISFeatureInfo));
+                        _featureInfo = serializer.Deserialize(new JTokenReader(jToken), typeof(ArcGISFeatureInfo)) as ArcGISFeatureInfo;
 
                         dataStream.Position = 0;
 

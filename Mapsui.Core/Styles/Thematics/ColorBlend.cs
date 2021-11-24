@@ -27,7 +27,7 @@ namespace Mapsui.Styles.Thematics
         /// <summary>
         /// Gets or sets an array of colors that represents the colors to use at corresponding positions along a gradient.
         /// </summary>
-        public Color[] Colors { get; set; }
+        public Color[]? Colors { get; set; }
 
         /// <summary>
         /// Gets or sets the positions along a gradient line.
@@ -41,7 +41,7 @@ namespace Mapsui.Styles.Thematics
         /// last element must be 1.0f.</para>
         /// <pre>Along with the Colors property, this property defines a multicolor gradient.</pre>
         /// </remarks>
-        public double[] Positions { get; set; }
+        public double[]? Positions { get; set; }
 
         internal ColorBlend() { }
 
@@ -65,6 +65,8 @@ namespace Mapsui.Styles.Thematics
         /// <returns>Color on scale</returns>
         public Color GetColor(double pos)
         {
+            if (Colors == null || Positions == null)
+                throw new ArgumentException("Colors and Positions needs to be set");
             if (Colors.Length != Positions.Length)
                 throw new ArgumentException("Colors and Positions arrays must be of equal length");
             if (Colors.Length < 2)

@@ -67,14 +67,14 @@ namespace Mapsui.Samples.Wpf.Editing.Samples
         private static readonly Color PolygonLayerColor = new Color(20, 20, 20, 240);
 
 
-        private static readonly SymbolStyle SelectedStyle = new SymbolStyle
+        private static readonly SymbolStyle? SelectedStyle = new SymbolStyle
         {
             Fill = null,
             Outline = new Pen(Color.Red, 3),
             Line = new Pen(Color.Red, 3)
         };
 
-        private static readonly SymbolStyle DisableStyle = new SymbolStyle { Enabled = false };
+        private static readonly SymbolStyle? DisableStyle = new SymbolStyle { Enabled = false };
 
         private static IStyle CreateSelectedStyle()
         {

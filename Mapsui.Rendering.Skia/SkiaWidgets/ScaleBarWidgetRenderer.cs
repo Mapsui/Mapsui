@@ -37,14 +37,14 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
             _paintScaleBarStroke.StrokeWidth = scaleBar.StrokeWidthHalo * scaleBar.Scale;
             _paintScaleText!.Color = scaleBar.TextColor.ToSkia(layerOpacity);
             _paintScaleText.StrokeWidth = scaleBar.StrokeWidth * scaleBar.Scale;
-            _paintScaleText.Typeface = SKTypeface.FromFamilyName(scaleBar.Font.FontFamily,
+            _paintScaleText.Typeface = SKTypeface.FromFamilyName(scaleBar.Font?.FontFamily,
                 SKFontStyleWeight.Bold, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright);
-            _paintScaleText.TextSize = (float)scaleBar.Font.Size * scaleBar.Scale;
+            _paintScaleText.TextSize = (float)(scaleBar.Font?.Size ?? 10) * scaleBar.Scale;
             _paintScaleTextStroke!.Color = scaleBar.Halo.ToSkia(layerOpacity);
             _paintScaleTextStroke.StrokeWidth = scaleBar.StrokeWidthHalo / 2 * scaleBar.Scale;
-            _paintScaleTextStroke.Typeface = SKTypeface.FromFamilyName(scaleBar.Font.FontFamily,
+            _paintScaleTextStroke.Typeface = SKTypeface.FromFamilyName(scaleBar.Font?.FontFamily,
                 SKFontStyleWeight.Bold, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright);
-            _paintScaleTextStroke.TextSize = (float)scaleBar.Font.Size * scaleBar.Scale;
+            _paintScaleTextStroke.TextSize = (float)(scaleBar.Font?.Size ?? 10) * scaleBar.Scale;
 
             float scaleBarLength1;
             string? scaleBarText1;

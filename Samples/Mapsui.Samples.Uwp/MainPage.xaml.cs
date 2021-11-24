@@ -41,7 +41,11 @@ namespace Mapsui.Samples.Uwp
 
         private void FillComboBoxWithCategories()
         {
-            var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c);
+            var categories = AllSamples.GetSamples()?.Select(s => s.Category).Distinct().OrderBy(c => c);
+
+            if (categories == null)
+                return;
+
             foreach (var category in categories)
             {
                 CategoryComboBox.Items?.Add(category);
@@ -60,7 +64,11 @@ namespace Mapsui.Samples.Uwp
         {
             var selectedCategory = CategoryComboBox.SelectedValue?.ToString() ?? "";
             SampleList.Children.Clear();
-            foreach (var sample in AllSamples.GetSamples().Where(s => s.Category == selectedCategory))
+            var enumerable = AllSamples.GetSamples()?.Where(s => s.Category == selectedCategory);
+            if (enumerable == null)
+                return;
+
+            foreach (var sample in enumerable)
                 SampleList.Children.Add(CreateRadioButton(sample));
         }
 
@@ -79,7 +87,7 @@ namespace Mapsui.Samples.Uwp
             };
 
             radioButton.Click += (_, _) => {
-                MapControl.Map.Layers.Clear();
+                MapControl.Map?.Layers.Clear();
                 MapControl.Info -= MapOnInfo;
                 sample.Setup(MapControl);
                 MapControl.Info += MapOnInfo;

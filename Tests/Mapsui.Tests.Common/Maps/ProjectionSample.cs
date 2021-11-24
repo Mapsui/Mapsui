@@ -31,7 +31,7 @@ namespace Mapsui.Tests.Common.Maps
             // 3) The projection to project from the DataSource CRS to the Map CRS.
 
             var geometryLayer = CreateAmsterdamLayer();
-            var extent = geometryLayer.Extent.Grow(geometryLayer.Extent.Width * 0.1);
+            var extent = geometryLayer.Extent?.Grow(geometryLayer.Extent.Width * 0.1);
             var map = new Map
             {
                 CRS = "EPSG:3857", // The Map CRS needs to be set

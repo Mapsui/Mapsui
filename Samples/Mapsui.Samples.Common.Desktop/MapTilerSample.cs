@@ -66,8 +66,7 @@ namespace Mapsui.Samples.Common.Desktop
 
         private static string GetAppDir()
         {
-            return System.IO.Path.GetDirectoryName(
-              System.Reflection.Assembly.GetEntryAssembly().GetModules()[0].FullyQualifiedName);
+            return System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly()!.GetModules()[0].FullyQualifiedName)!;
         }
     }
 }

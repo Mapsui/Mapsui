@@ -12,7 +12,7 @@ namespace Mapsui.Styles
         /// <summary>
         /// Line style for line geometries
         /// </summary>
-        public Pen Line { get; set; }
+        public Pen? Line { get; set; }
 
         /// <summary>
         /// Outline style for line and polygon geometries
@@ -35,16 +35,19 @@ namespace Mapsui.Styles
 
         public bool Equals(VectorStyle? vectorStyle)
         {
+            if (vectorStyle == null)
+                return false;
+
             if (!base.Equals(vectorStyle))
                 return false;
 
-            if (!Line.Equals(vectorStyle.Line))
+            if (!Line?.Equals(vectorStyle.Line) ?? false)
                 return false;
 
-            if (!Outline.Equals(vectorStyle.Outline))
+            if (!Outline?.Equals(vectorStyle.Outline) ?? false)
                 return false;
 
-            if (!Fill.Equals(vectorStyle.Fill))
+            if (!Fill?.Equals(vectorStyle.Fill) ?? false)
                 return false;
 
             return true;
@@ -52,18 +55,18 @@ namespace Mapsui.Styles
 
         public override int GetHashCode()
         {
-            return Line.GetHashCode()
-                ^ Outline.GetHashCode()
-                ^ Fill.GetHashCode()
+            return Line?.GetHashCode() ?? 0
+                ^ Outline?.GetHashCode() ?? 0
+                ^ Fill?.GetHashCode() ?? 0
                 ^ base.GetHashCode();
         }
 
-        public static bool operator ==(VectorStyle vectorStyle1, VectorStyle vectorStyle2)
+        public static bool operator ==(VectorStyle? vectorStyle1, VectorStyle? vectorStyle2)
         {
             return Equals(vectorStyle1, vectorStyle2);
         }
 
-        public static bool operator !=(VectorStyle vectorStyle1, VectorStyle vectorStyle2)
+        public static bool operator !=(VectorStyle? vectorStyle1, VectorStyle? vectorStyle2)
         {
             return !Equals(vectorStyle1, vectorStyle2);
         }
