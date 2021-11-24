@@ -6,7 +6,7 @@ using Mapsui.Styles;
 
 namespace Mapsui.Fetcher
 {
-    public class FeatureFetcher // Todo: Make internal
+    internal class FeatureFetcher
     {
         private readonly FetchInfo _fetchInfo;
         private readonly DataArrivedDelegate _dataArrived;
@@ -22,6 +22,7 @@ namespace Mapsui.Fetcher
                 SymbolStyle.DefaultWidth * 2 * fetchInfo.Resolution,
                 SymbolStyle.DefaultHeight * 2 * fetchInfo.Resolution);
             _fetchInfo = new FetchInfo(biggerBox, fetchInfo.Resolution, fetchInfo.CRS, fetchInfo.ChangeType);
+
             _provider = provider;
             _timeOfRequest = timeOfRequest;
         }
