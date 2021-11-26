@@ -20,9 +20,6 @@ namespace Mapsui.Utilities
             if (!CrsHelper.IsCrsProvided(fromCRS, toCRS))
                 throw new NotSupportedException($"CRS is not provided. From CRS: {fromCRS}. To CRS {toCRS}");
 
-            if (!projection.IsProjectionSupported(fromCRS, toCRS))
-                throw new NotSupportedException($"Projection is not supported. From CRS: {fromCRS}. To CRS {toCRS}");
-
             var copiedExtent = new MRect(extent);
             projection.Project(fromCRS, toCRS, copiedExtent);
             return copiedExtent;
@@ -37,9 +34,6 @@ namespace Mapsui.Utilities
 
             if (!CrsHelper.IsCrsProvided(fromCRS, toCRS))
                 throw new NotSupportedException($"CRS is not provided. From CRS: {fromCRS}. To CRS {toCRS}");
-
-            if (!projection.IsProjectionSupported(fromCRS, toCRS))
-                throw new NotSupportedException($"Projection is not supported. From CRS: {fromCRS}. To CRS {toCRS}");
 
             var copiedFeatures = features.Copy().ToList();
             projection.Project(fromCRS, toCRS, copiedFeatures);
