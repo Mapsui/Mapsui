@@ -1956,12 +1956,15 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapControl.ForceUpdate
   nameWithType: MapControl.ForceUpdate
-- uid: Mapsui.UI.Forms.MapControl.GetMapInfo(MPoint,System.Int32)
-  name: GetMapInfo(MPoint, Int32)
-  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_GetMapInfo_MPoint_System_Int32_
-  commentId: M:Mapsui.UI.Forms.MapControl.GetMapInfo(MPoint,System.Int32)
-  fullName: Mapsui.UI.Forms.MapControl.GetMapInfo(MPoint, System.Int32)
-  nameWithType: MapControl.GetMapInfo(MPoint, Int32)
+- uid: Mapsui.UI.Forms.MapControl.GetMapInfo(System.Nullable{MPoint},System.Int32)
+  name: GetMapInfo(Nullable<MPoint>, Int32)
+  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_GetMapInfo_System_Nullable_MPoint__System_Int32_
+  commentId: M:Mapsui.UI.Forms.MapControl.GetMapInfo(System.Nullable{MPoint},System.Int32)
+  name.vb: GetMapInfo(Nullable(Of MPoint), Int32)
+  fullName: Mapsui.UI.Forms.MapControl.GetMapInfo(System.Nullable<MPoint>, System.Int32)
+  fullName.vb: Mapsui.UI.Forms.MapControl.GetMapInfo(System.Nullable(Of MPoint), System.Int32)
+  nameWithType: MapControl.GetMapInfo(Nullable<MPoint>, Int32)
+  nameWithType.vb: MapControl.GetMapInfo(Nullable(Of MPoint), Int32)
 - uid: Mapsui.UI.Forms.MapControl.GetMapInfo*
   name: GetMapInfo
   href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_GetMapInfo_
@@ -5225,12 +5228,15 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.ForceUpdate
   nameWithType: MapControl.ForceUpdate
-- uid: Mapsui.UI.Wpf.MapControl.GetMapInfo(MPoint,System.Int32)
-  name: GetMapInfo(MPoint, Int32)
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_GetMapInfo_MPoint_System_Int32_
-  commentId: M:Mapsui.UI.Wpf.MapControl.GetMapInfo(MPoint,System.Int32)
-  fullName: Mapsui.UI.Wpf.MapControl.GetMapInfo(MPoint, System.Int32)
-  nameWithType: MapControl.GetMapInfo(MPoint, Int32)
+- uid: Mapsui.UI.Wpf.MapControl.GetMapInfo(System.Nullable{MPoint},System.Int32)
+  name: GetMapInfo(Nullable<MPoint>, Int32)
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_GetMapInfo_System_Nullable_MPoint__System_Int32_
+  commentId: M:Mapsui.UI.Wpf.MapControl.GetMapInfo(System.Nullable{MPoint},System.Int32)
+  name.vb: GetMapInfo(Nullable(Of MPoint), Int32)
+  fullName: Mapsui.UI.Wpf.MapControl.GetMapInfo(System.Nullable<MPoint>, System.Int32)
+  fullName.vb: Mapsui.UI.Wpf.MapControl.GetMapInfo(System.Nullable(Of MPoint), System.Int32)
+  nameWithType: MapControl.GetMapInfo(Nullable<MPoint>, Int32)
+  nameWithType.vb: MapControl.GetMapInfo(Nullable(Of MPoint), Int32)
 - uid: Mapsui.UI.Wpf.MapControl.GetMapInfo*
   name: GetMapInfo
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_GetMapInfo_

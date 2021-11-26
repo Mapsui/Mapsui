@@ -42,7 +42,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Android.MapControl.html",
-          "hash": "BYjXvdrnf5KM3QT92I1taA=="
+          "hash": "dBu9Mt//zneoTcx/36k7Qg=="
         }
       },
       "is_incremental": false,
@@ -258,7 +258,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.MapControl.html",
-          "hash": "PlgwE0HnqlB8UQzOn6AVXg=="
+          "hash": "4sdBTLDDGotQTfu+92GKiA=="
         }
       },
       "is_incremental": false,
@@ -294,7 +294,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.MapView.html",
-          "hash": "7f9ceAaAdjq85y2e5BdJ6g=="
+          "hash": "J+exWiStLi7fKTPZskft8w=="
         }
       },
       "is_incremental": false,
@@ -306,7 +306,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.Pin.html",
-          "hash": "qZTGKkThWrbB1UOsEjaKpw=="
+          "hash": "1QiSROwMbwhSM4ktcfTfFg=="
         }
       },
       "is_incremental": false,
@@ -594,7 +594,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Wpf.MapControl.html",
-          "hash": "f66VyJ6KUIQPAk9NydQoSw=="
+          "hash": "SCc6b7qqdu0/lfoZfI4c3Q=="
         }
       },
       "is_incremental": false,
@@ -642,7 +642,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.iOS.MapControl.html",
-          "hash": "6LmarPbs3kXfOceZuyJ31Q=="
+          "hash": "a4aGZbSjXyZEQueAZaDk9w=="
         }
       },
       "is_incremental": false,
@@ -1157,10 +1157,11 @@
         "full_build_reason_code": "NoAvailableBuildCache"
       },
       "processors": {
-        "ManagedReferenceDocumentProcessor": {
+        "TocDocumentProcessor": {
           "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
-          "total_file_count": 57,
+          "total_file_count": 0,
           "skipped_file_count": 0
         },
         "ConceptualDocumentProcessor": {
@@ -1169,11 +1170,10 @@
           "total_file_count": 28,
           "skipped_file_count": 0
         },
-        "TocDocumentProcessor": {
+        "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
-          "total_file_count": 0,
+          "total_file_count": 57,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
