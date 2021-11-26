@@ -28,8 +28,8 @@ namespace Mapsui.Utilities
             return copiedExtent;
         }
 
-        public static IEnumerable<IFeature>? Project(IEnumerable<IFeature>? features,
-            IProjection projection, string fromCRS, string toCRS)
+        public static IEnumerable<IFeature>? Project(
+            IEnumerable<IFeature>? features, IProjection projection, string fromCRS, string toCRS)
         {
             if (features == null) return null;
 
@@ -42,10 +42,7 @@ namespace Mapsui.Utilities
                 throw new NotSupportedException($"Projection is not supported. From CRS: {fromCRS}. To CRS {toCRS}");
 
             var copiedFeatures = features.Copy().ToList();
-            foreach (var copiedFeature in copiedFeatures)
-            {
-                projection.Project(fromCRS, toCRS, copiedFeature);
-            }
+            projection.Project(fromCRS, toCRS, copiedFeatures);
             return copiedFeatures;
         }
     }

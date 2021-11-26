@@ -66,12 +66,27 @@ namespace Mapsui.Projection
             Project(feature, _fromLonLat[toCRS]);
         }
 
+        public void Project(string fromCRS, string toCRS, IEnumerable<IFeature> features)
+        {
+            Project(features, _toLonLat[fromCRS]);
+            Project(features, _fromLonLat[toCRS]);
+        }
+
         private static void Project(IFeature feature, Func<double, double, (double, double)> transformFunc)
         {
             feature.CoordinateVisitor((x, y, setter) => {
                 var (xOut, yOut) = transformFunc(x, y);
                 setter(xOut, yOut);
             });
+        }
+
+        private static void Project(IEnumerable<IFeature> features, Func<double, double, (double, double)> transformFunc)
+        {
+            foreach (var feature in features)
+                feature.CoordinateVisitor((x, y, setter) => {
+                    var (xOut, yOut) = transformFunc(x, y);
+                    setter(xOut, yOut);
+                });
         }
     }
 }
