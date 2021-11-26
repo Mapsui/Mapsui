@@ -34,7 +34,7 @@ namespace Mapsui.Samples.Common.Maps
             return map;
         }
 
-        private static ILayer CreateLayerWithStyleOnLayer(MRect envelope, int count = 25)
+        private static ILayer CreateLayerWithStyleOnLayer(MRect? envelope, int count = 25)
         {
             return new Layer("Style on Layer")
             {
@@ -43,7 +43,7 @@ namespace Mapsui.Samples.Common.Maps
             };
         }
 
-        private static ILayer CreateLayerWithStyleOnFeature(MRect envelope, int count = 25)
+        private static ILayer CreateLayerWithStyleOnFeature(MRect? envelope, int count = 25)
         {
             var style = CreateBitmapStyle("Mapsui.Samples.Common.Images.loc.png");
 
@@ -54,7 +54,7 @@ namespace Mapsui.Samples.Common.Maps
             };
         }
 
-        private static IEnumerable<IFeature> GenerateRandomFeatures(MRect envelope, int count, IStyle style)
+        private static IEnumerable<IFeature> GenerateRandomFeatures(MRect? envelope, int count, IStyle style)
         {
             return RandomPointGenerator.GenerateRandomPoints(envelope, count, 123)
                 .Select(p => new PointFeature(p) { Styles = new List<IStyle> { style } }).ToList();

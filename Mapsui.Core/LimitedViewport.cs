@@ -18,13 +18,13 @@ namespace Mapsui
         public event PropertyChangedEventHandler? ViewportChanged;
         public MReadOnlyPoint Center => _viewport.Center;
         public double Resolution => _viewport.Resolution;
-        public MRect Extent => _viewport.Extent;
+        public MRect? Extent => _viewport.Extent;
         public double Width => _viewport.Width;
         public double Height => _viewport.Height;
         public double Rotation => _viewport.Rotation;
         public bool HasSize => _viewport.HasSize;
         public bool IsRotated => _viewport.IsRotated;
-        public MQuad WindowExtent => _viewport.WindowExtent;
+        public MQuad? WindowExtent => _viewport.WindowExtent;
 
         public void Transform(MPoint position, MPoint previousPosition, double deltaResolution = 1, double deltaRotation = 0)
         {

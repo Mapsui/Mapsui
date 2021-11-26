@@ -18,13 +18,13 @@ namespace Mapsui.Samples.Common
 
             try
             {
-                return assemblies
-                    .SelectMany(s => s.GetTypes())
-                    .Where(p => type.IsAssignableFrom(p) && !p.IsInterface)
-                    .Select(Activator.CreateInstance).Select(t => t as ISample)
-                    .OrderBy(s => s?.Name)
-                    .ThenBy(s => s?.Category)
-                    .ToList();
+                return (assemblies?
+                        .SelectMany(s => s.GetTypes())
+                        .Where(p => type.IsAssignableFrom(p) && !p.IsInterface)
+                        .Select(Activator.CreateInstance)).Where(f => f is not null).OfType<ISample>()
+                        .OrderBy(s => s?.Name)
+                        .ThenBy(s => s?.Category)
+                        .ToList();
             }
             catch (ReflectionTypeLoadException ex)
             {

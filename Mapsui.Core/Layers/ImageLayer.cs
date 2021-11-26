@@ -40,7 +40,7 @@ namespace Mapsui.Layers
         private FetchInfo? _fetchInfo;
         private List<FeatureSets> _sets = new();
         private readonly Timer _startFetchTimer;
-        private IProvider<IFeature> _dataSource;
+        private IProvider<IFeature>? _dataSource;
         private readonly int _numberOfFeaturesReturned;
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Mapsui.Layers
         /// </summary>
         public int FetchDelay { get; set; } = 1000;
 
-        public IProvider<IFeature> DataSource
+        public IProvider<IFeature>? DataSource
         {
             get => _dataSource;
             set
@@ -167,7 +167,7 @@ namespace Mapsui.Layers
             {
                 features = features.ToList();
 
-                _sets.Add(new FeatureSets { TimeRequested = (long)state, Features = features });
+                _sets.Add(new FeatureSets { TimeRequested = state == null ? 0: (long)state , Features = features });
 
                 //Keep only two most recent sets. The older ones will be removed
                 _sets = _sets.OrderByDescending(c => c.TimeRequested).Take(_numberOfFeaturesReturned).ToList();

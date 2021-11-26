@@ -2,7 +2,7 @@ namespace Mapsui.Styles
 {
     public class Font
     {
-        private string _fontFamily;
+        private string? _fontFamily;
         private double _size;
         private bool _italic;
         private bool _bold;
@@ -14,11 +14,11 @@ namespace Mapsui.Styles
 
         public Font(Font font)
         {
-            FontFamily = new string(font.FontFamily.ToCharArray());
+            FontFamily = font.FontFamily != null ? new string(font.FontFamily.ToCharArray()) : null;
             Size = font.Size;
         }
 
-        public string FontFamily
+        public string? FontFamily
         {
             get => _fontFamily;
             set

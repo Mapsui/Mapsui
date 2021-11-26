@@ -142,7 +142,7 @@ namespace Mapsui.Styles
         /// <summary>
         /// The background color of the label. Set to transparent brush or null if background isn't needed
         /// </summary>
-        public Brush BackColor { get; set; } // todo: rename
+        public Brush? BackColor { get; set; } // todo: rename
 
         /// <summary>
         /// The color of the border around the background.
@@ -162,7 +162,7 @@ namespace Mapsui.Styles
         /// <summary>
         /// Creates a halo around the text
         /// </summary>
-        public Pen Halo { get; set; }
+        public Pen? Halo { get; set; }
 
         /// <summary>
         /// Specifies relative position of labels with respect to objects label point
@@ -203,21 +203,21 @@ namespace Mapsui.Styles
 
         /// <summary>The text used for this specific label.</summary>
         /// <remarks>Used only when LabelColumn and LabelMethod are not set.</remarks>
-        public string Text { private get; set; }
+        public string? Text { private get; set; }
 
         /// <summary>The column of the feature used by GetLabelText to return the label text.</summary>
         /// <remarks>Used only when LabelMethod is not set. Overrides use of the Text field.</remarks>
-        public string LabelColumn { get; set; }
+        public string? LabelColumn { get; set; }
 
         /// <summary>Method used by GetLabelText to return the label text.</summary>
         /// <remarks>Overrides use of Text and LabelColumn fields.</remarks>
-        public Func<IFeature, string> LabelMethod { get; set; }
+        public Func<IFeature, string?>? LabelMethod { get; set; }
 
         /// <summary>The text used for this specific label.</summary>
-        public string GetLabelText(IFeature feature)
+        public string? GetLabelText(IFeature feature)
         {
             if (LabelMethod != null) return LabelMethod(feature);
-            if (LabelColumn != null) return feature[LabelColumn].ToString();
+            if (LabelColumn != null) return feature[LabelColumn]?.ToString();
             return Text;
         }
 

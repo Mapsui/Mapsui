@@ -1,13 +1,27 @@
+﻿using Mapsui.Layers;
+using Mapsui.Providers;
+using Mapsui.Styles;
+
+using System;
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using Mapsui.Extensions;
+using Mapsui.Fetcher;
 using Mapsui.GeometryLayer;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
+
+#if __MAUI__
+using Mapsui.UI.Maui;
+using Microsoft.Maui;
+using Microsoft.Maui.Controls;
+#else
 using Mapsui.UI.Forms;
 using Xamarin.Forms;
+#endif
 
 namespace Mapsui.UI.Objects
 {

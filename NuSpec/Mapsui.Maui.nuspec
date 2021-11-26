@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+
+    <!-- package -->
+    <id>Mapsui.Maui</id>
+    <title>Mapsui for Xamarin.Maui</title>
+    <version>$version$</version>
+    <description>Mapsui.Maui - Library for mapping for Maui</description>
+    <projectUrl>https://github.com/Mapsui/Mapsui</projectUrl>
+    <iconUrl>https://github.com/Mapsui/Mapsui/blob/master/logo/png/icon.png</iconUrl>
+    <tags>mapsui maui map maps mapping xamarin ios android windows uwp macos cross-platform</tags>
+
+    <!-- legal -->
+    <licenseUrl>https://github.com/Mapsui/Mapsui/blob/master/LICENSE.md</licenseUrl>
+    <authors>Dirk Weltz</authors>
+    <owners>Mapsui Contributors</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <copyright>© Mapsui Contributors</copyright>
+
+    <dependencies>
+      <group targetFramework="net6.0">
+        <dependency id="Mapsui" version="$version$"/>
+        <dependency id="Microsoft.Maui.Dependencies" version="[6.0.101-preview.10.2068,7.0)" />
+        <dependency id="SkiaSharp.Views.Maui.Controls" version="[2.80.2,3.0.0)" />
+      </group>     
+    </dependencies>
+
+  </metadata>
+  <files>
+    <file src="../Mapsui.UI.Maui/bin/Release/net6.0/Mapsui.UI.Maui.dll" target="lib/net6.0/" />    
+  </files>
+</package>

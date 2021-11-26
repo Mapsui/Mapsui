@@ -27,7 +27,7 @@ namespace Mapsui.Samples.Wpf.Editing
             {
                 var lists = new List<IList<Point>>
                 {
-                    polygon.ExteriorRing.Vertices
+                    polygon.ExteriorRing?.Vertices ?? new List<Point>()
                 };
                 lists.AddRange(polygon.InteriorRings.Select(i => i.Vertices));
                 return lists;
@@ -43,7 +43,7 @@ namespace Mapsui.Samples.Wpf.Editing
             }
             if (geometry is Polygon polygon)
             {
-                return polygon.ExteriorRing.Vertices;
+                return polygon.ExteriorRing?.Vertices ?? new List<Point>();
             }
             if (geometry is Point point)
             {

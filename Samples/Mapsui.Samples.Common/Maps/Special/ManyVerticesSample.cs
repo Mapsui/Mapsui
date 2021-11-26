@@ -9,6 +9,7 @@ using Mapsui.Styles;
 using Mapsui.UI;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Local
+#pragma warning disable CS8670 // Object or collection initializer implicitly dereferences possibly null member.
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -28,7 +29,7 @@ namespace Mapsui.Samples.Common.Maps
 
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(new RasterizingLayer(CreatePointLayer(), pixelDensity: pixelDensity));
-            map.Home = n => n.NavigateTo(map.Layers[1].Extent.Grow(map.Layers[1].Extent.Width * 0.25));
+            map.Home = n => n.NavigateTo(map.Layers[1].Extent?.Grow(map.Layers[1].Extent!.Width * 0.25));
             return map;
         }
 

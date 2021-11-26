@@ -23,7 +23,7 @@ namespace Mapsui.Samples.Common.Maps
             var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(new RasterizingLayer(CreateRandomPointLayer(), pixelDensity: pixelDensity));
-            map.Home = n => n.NavigateTo(map.Layers[1].Extent.Grow(map.Layers[1].Extent.Width * 0.1));
+            map.Home = n => n.NavigateTo(map.Layers[1].Extent?.Grow(map.Layers[1].Extent!.Width * 0.1));
             return map;
         }
 

@@ -19,10 +19,10 @@ namespace Mapsui.Providers.ArcGIS
 
     public class CapabilitiesHelper
     {
-        private IArcGISCapabilities _arcGisCapabilities;
-        private CapabilitiesType _capabilitiesType;
+        private IArcGISCapabilities? _arcGisCapabilities;
+        private CapabilitiesType? _capabilitiesType;
         private int _timeOut;
-        private string _url;
+        private string? _url;
 
         public delegate void StatusEventHandler(object? sender, EventArgs e);
 
@@ -70,7 +70,7 @@ namespace Mapsui.Providers.ArcGIS
         /// <param name="url">Url of map service example: http://url/arcgis/rest/services/test/MapServer </param>
         /// <param name="capabilitiesType"></param>
         /// <param name="token">Token string to access the service </param>
-        public void GetCapabilities(string url, CapabilitiesType capabilitiesType, string token)
+        public void GetCapabilities(string url, CapabilitiesType capabilitiesType, string? token)
         {
             ExecuteRequest(url, capabilitiesType, null, token);
         }
@@ -114,6 +114,12 @@ namespace Mapsui.Providers.ArcGIS
                         _arcGisCapabilities = JsonConvert.DeserializeObject<ArcGISDynamicCapabilities>(dataStream);
                     else if (_capabilitiesType == CapabilitiesType.ImageServiceCapabilities)
                         _arcGisCapabilities = JsonConvert.DeserializeObject<ArcGISImageCapabilities>(dataStream);
+
+                    if (_arcGisCapabilities == null)
+                    {
+                        OnCapabilitiesFailed(EventArgs.Empty);
+                        return;
+                    }
 
                     _arcGisCapabilities.ServiceUrl = _url;
 
@@ -184,23 +190,38 @@ namespace Mapsui.Providers.ArcGIS
             var schema = new TileSchema();
             var count = 0;
 
-            foreach (var lod in arcGisDynamicCapabilities.tileInfo.lods)
+            if (arcGisDynamicCapabilities.tileInfo.lods != null)
             {
-                var level = count;
-                schema.Resolutions[level] = new Resolution(level, lod.resolution,
-                    arcGisDynamicCapabilities.tileInfo.cols,
-                    arcGisDynamicCapabilities.tileInfo.rows);
-                count++;
+                foreach (var lod in arcGisDynamicCapabilities.tileInfo.lods)
+                {
+                    var level = count;
+                    schema.Resolutions[level] = new Resolution(level, lod.resolution,
+                        arcGisDynamicCapabilities.tileInfo.cols,
+                        arcGisDynamicCapabilities.tileInfo.rows);
+                    count++;
+                }
             }
 
-            schema.Extent = new BruTile.Extent(arcGisDynamicCapabilities.fullExtent.xmin, arcGisDynamicCapabilities.fullExtent.ymin, arcGisDynamicCapabilities.fullExtent.xmax, arcGisDynamicCapabilities.fullExtent.ymax);
-            schema.OriginX = arcGisDynamicCapabilities.tileInfo.origin.x;
-            schema.OriginY = arcGisDynamicCapabilities.tileInfo.origin.y;
+            if (arcGisDynamicCapabilities.fullExtent != null)
+            {
+                schema.Extent = new BruTile.Extent(arcGisDynamicCapabilities.fullExtent.xmin,
+                    arcGisDynamicCapabilities.fullExtent.ymin, arcGisDynamicCapabilities.fullExtent.xmax,
+                    arcGisDynamicCapabilities.fullExtent.ymax);
+            }
+
+            if (arcGisDynamicCapabilities.tileInfo.origin != null)
+            {
+                schema.OriginX = arcGisDynamicCapabilities.tileInfo.origin.x;
+                schema.OriginY = arcGisDynamicCapabilities.tileInfo.origin.y;
+            }
 
             schema.Name = "ESRI";
             schema.Format = arcGisDynamicCapabilities.tileInfo.format;
             schema.YAxis = YAxis.OSM;
-            schema.Srs = $"EPSG:{arcGisDynamicCapabilities.tileInfo.spatialReference.wkid}";
+            if (arcGisDynamicCapabilities.tileInfo.spatialReference != null)
+            {
+                schema.Srs = $"EPSG:{arcGisDynamicCapabilities.tileInfo.spatialReference.wkid}";
+            }
 
             return schema;
         }

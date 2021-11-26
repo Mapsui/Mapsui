@@ -5,8 +5,8 @@ namespace Mapsui.Utilities
     public class AnimationEntry
     {
         private readonly double _animationDelta;
-        private readonly Action<AnimationEntry, double> _tick;
-        private readonly Action<AnimationEntry> _final;
+        private readonly Action<AnimationEntry, double>? _tick;
+        private readonly Action<AnimationEntry>? _final;
 
         public AnimationEntry(object start, object end,
             double animationStart = 0, double animationEnd = 1,
@@ -66,7 +66,10 @@ namespace Mapsui.Utilities
             // Its independent from the global animation cycle
             var v = (value - AnimationStart) / _animationDelta;
 
-            _tick(this, v);
+            if (_tick != null)
+            {
+                _tick(this, v);
+            }
         }
 
         /// <summary>
@@ -74,7 +77,10 @@ namespace Mapsui.Utilities
         /// </summary>
         public void Final()
         {
-            _final(this);
+            if (_final != null)
+            {
+                _final(this);
+            }
         }
     }
 }

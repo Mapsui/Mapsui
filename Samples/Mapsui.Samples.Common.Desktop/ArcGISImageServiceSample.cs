@@ -44,12 +44,12 @@ namespace Mapsui.Samples.Common.Desktop
             };
         }
 
-        private static void capabilitiesHelper_CapabilitiesFailed(object sender, System.EventArgs e)
+        private static void capabilitiesHelper_CapabilitiesFailed(object? sender, System.EventArgs e)
         {
             Logger.Log(LogLevel.Warning, "ArcGISImageService capabilities request failed");
         }
 
-        private static void CapabilitiesReceived(object sender, System.EventArgs e)
+        private static void CapabilitiesReceived(object? sender, System.EventArgs e)
         {
             //todo: make use of: var capabilities = sender as ArcGISImageCapabilities;
         }

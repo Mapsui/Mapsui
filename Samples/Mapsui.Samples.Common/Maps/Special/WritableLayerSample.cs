@@ -25,12 +25,15 @@ namespace Mapsui.Tests.Common.Maps
 
         private void MapControlOnInfo(object sender, MapInfoEventArgs e)
         {
-            _writableLayer.Add(new GeometryFeature
+            if (e.MapInfo?.WorldPosition == null)
+                return;
+
+            _writableLayer?.Add(new GeometryFeature
             {
                 Geometry =
                 new Point(e.MapInfo.WorldPosition.X, e.MapInfo.WorldPosition.Y)
             });
-            _writableLayer.DataHasChanged();
+            _writableLayer?.DataHasChanged();
         }
 
         private Map CreateMap()

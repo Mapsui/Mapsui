@@ -2,9 +2,17 @@
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.UI;
+#if __MAUI__
+using Mapsui.UI.Maui;
+#else
 using Mapsui.UI.Forms;
+#endif
 
+#if __MAUI__
+namespace Mapsui.Samples.Maui
+#else
 namespace Mapsui.Samples.Forms
+#endif
 {
     public class AnimationSample : IFormsSample
     {
@@ -14,10 +22,16 @@ namespace Mapsui.Samples.Forms
 
         Random random = new Random();
 
-        public bool OnClick(object sender, EventArgs args)
+        public bool OnClick(object? sender, EventArgs args)
         {
             var mapView = sender as MapView;
             var e = args as MapClickedEventArgs;
+
+            if (e == null)
+                return false;
+
+            if (mapView == null)
+                return false;
 
             var navigator = (Navigator)mapView.Navigator;
 

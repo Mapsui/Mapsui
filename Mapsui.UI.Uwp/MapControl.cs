@@ -172,11 +172,17 @@ namespace Mapsui.UI.Uwp
             if (!Viewport.HasSize) return;
 
             var currentPoint = e.GetCurrentPoint(this);
-
+#if __WINUI__
+            var mousePosition = new MPoint(currentPoint.Position.X, currentPoint.Position.Y);
+#else
             var mousePosition = new MPoint(currentPoint.RawPosition.X, currentPoint.RawPosition.Y);
-
+#endif
             var resolution = MouseWheelAnimation.GetResolution(currentPoint.Properties.MouseWheelDelta, _viewport, _map);
             // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
+
+            if (this.Map == null)
+                return;
+
             resolution = Map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, Map.Resolutions, Map.Extent);
             Navigator.ZoomTo(resolution, mousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
 

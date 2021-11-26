@@ -23,8 +23,8 @@ namespace Mapsui.Samples.Wpf.Editing
         // there we use only IGeometryFeatures in the writable layer. We need to cast to allow
         // us to copy. This needs to be improved.
 
-        private WritableLayer _targetLayer;
-        private IEnumerable<IFeature> _tempFeatures;
+        private WritableLayer? _targetLayer;
+        private IEnumerable<IFeature>? _tempFeatures;
         private readonly EditManager _editManager = new();
         private readonly EditManipulation _editManipulation = new();
         private bool _selectMode;
@@ -38,7 +38,7 @@ namespace Mapsui.Samples.Wpf.Editing
             MapControl.MouseLeftButtonDown += MapControlOnMouseLeftButtonDown;
             MapControl.MouseLeftButtonUp += MapControlOnMouseLeftButtonUp;
 
-            MapControl.Map.RotationLock = false;
+            MapControl.Map!.RotationLock = false;
             MapControl.UnSnapRotationDegrees = 30;
             MapControl.ReSnapRotationDegrees = 5;
 
@@ -56,12 +56,12 @@ namespace Mapsui.Samples.Wpf.Editing
         {
             var selectedValue = ((ComboBoxItem)((ComboBox)sender).SelectedItem).Content.ToString();
 
-            if (selectedValue.ToLower().Contains("point"))
-                _targetLayer = (WritableLayer)MapControl.Map.Layers.First(l => l.Name == "PointLayer");
-            else if (selectedValue.ToLower().Contains("line"))
-                _targetLayer = (WritableLayer)MapControl.Map.Layers.First(l => l.Name == "LineLayer");
-            else if (selectedValue.ToLower().Contains("polygon"))
-                _targetLayer = (WritableLayer)MapControl.Map.Layers.First(l => l.Name == "PolygonLayer");
+            if (selectedValue?.ToLower().Contains("point") ?? false)
+                _targetLayer = MapControl.Map?.Layers.First(l => l.Name == "PointLayer") as WritableLayer;
+            else if (selectedValue?.ToLower().Contains("line") ?? false)
+                _targetLayer = MapControl.Map?.Layers.First(l => l.Name == "LineLayer") as WritableLayer;
+            else if (selectedValue?.ToLower().Contains("polygon") ?? false)
+                _targetLayer = MapControl.Map?.Layers.First(l => l.Name == "PolygonLayer") as WritableLayer;
             else
                 throw new Exception("Unknown ComboBox item");
         }
@@ -120,7 +120,7 @@ namespace Mapsui.Samples.Wpf.Editing
             ZoomSlider.EndInit();
         }
 
-        private void LogMethod(LogLevel logLevel, string message, Exception exception)
+        private void LogMethod(LogLevel logLevel, string? message, Exception? exception)
         {
             Dispatcher.Invoke(() => {
                 _logMessage.Enqueue(new LogModel { Exception = exception, LogLevel = logLevel, Message = message });
@@ -165,13 +165,13 @@ namespace Mapsui.Samples.Wpf.Editing
 
             _editManager.EditMode = EditMode.Modify;
             Loaded += (sender, args) => {
-                MapControl.Navigator.NavigateTo(_editManager.Layer.Extent.Grow(_editManager.Layer.Extent.Width * 0.2));
+                MapControl.Navigator.NavigateTo(_editManager.Layer.Extent?.Grow(_editManager.Layer.Extent.Width * 0.2));
             };
         }
 
         private void AddPoint_OnClick(object sender, RoutedEventArgs args)
         {
-            IEnumerable<IFeature> features = _targetLayer.GetFeatures().Copy();
+            var features = _targetLayer?.GetFeatures().Copy() ?? Array.Empty<IFeature>();
 
             foreach (var feature in features)
             {
@@ -190,8 +190,8 @@ namespace Mapsui.Samples.Wpf.Editing
 
         private void Save_OnClick(object sender, RoutedEventArgs args)
         {
-            _targetLayer.AddRange(_editManager.Layer.GetFeatures().Copy());
-            _editManager.Layer.Clear();
+            _targetLayer?.AddRange(_editManager.Layer?.GetFeatures().Copy() ?? new List<IFeature>());
+            _editManager.Layer?.Clear();
 
             MapControl.RefreshGraphics();
         }
@@ -208,7 +208,7 @@ namespace Mapsui.Samples.Wpf.Editing
 
         private void AddLine_OnClick(object sender, RoutedEventArgs args)
         {
-            IEnumerable<IFeature> features = _targetLayer.GetFeatures().Copy();
+            var features = _targetLayer?.GetFeatures().Copy() ?? Array.Empty<IFeature>();
 
             foreach (var feature in features)
             {
@@ -222,7 +222,7 @@ namespace Mapsui.Samples.Wpf.Editing
 
         private void AddPolygon_OnClick(object sender, RoutedEventArgs args)
         {
-            IEnumerable<IFeature> features = _targetLayer.GetFeatures().Copy();
+            var features = _targetLayer?.GetFeatures().Copy() ?? Array.Empty<IFeature>();
 
             foreach (var feature in features)
             {
@@ -245,7 +245,7 @@ namespace Mapsui.Samples.Wpf.Editing
 
         private void Load_OnClick(object sender, RoutedEventArgs args)
         {
-            IEnumerable<IFeature> features = _targetLayer.GetFeatures().Copy();
+            var features = _targetLayer?.GetFeatures().Copy() ?? Array.Empty<IFeature>();
 
             foreach (var feature in features)
             {
@@ -254,8 +254,8 @@ namespace Mapsui.Samples.Wpf.Editing
 
             _tempFeatures = new List<IFeature>(features);
 
-            _editManager.Layer.AddRange(features);
-            _targetLayer.Clear();
+            _editManager.Layer?.AddRange(features);
+            _targetLayer?.Clear();
 
             MapControl.RefreshGraphics();
         }
@@ -268,7 +268,7 @@ namespace Mapsui.Samples.Wpf.Editing
                 MapControl.RefreshGraphics();
             }
 
-            _editManager.Layer.Clear();
+            _editManager.Layer?.Clear();
 
             MapControl.RefreshGraphics();
 
@@ -281,11 +281,11 @@ namespace Mapsui.Samples.Wpf.Editing
         {
             if (_selectMode)
             {
-                var selectedFeatures = _editManager.Layer.GetFeatures().Where(f => (bool?)f["Selected"] == true);
+                var selectedFeatures = _editManager.Layer?.GetFeatures().Where(f => (bool?)f["Selected"] == true) ?? Array.Empty<IFeature>();
 
                 foreach (var selectedFeature in selectedFeatures)
                 {
-                    _editManager.Layer.TryRemove(selectedFeature);
+                    _editManager.Layer?.TryRemove(selectedFeature);
                 }
                 MapControl.RefreshGraphics();
             }

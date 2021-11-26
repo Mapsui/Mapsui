@@ -233,8 +233,11 @@ namespace Mapsui.Geometries.WellKnownBinary
         /// <param name="ls">The linestring to be written.</param>
         /// <param name="bWriter">Stream to write to.</param>
         /// <param name="byteorder">Byte order</param>
-        private static void WriteLineString(LineString ls, BinaryWriter bWriter, WkbByteOrder byteorder)
+        private static void WriteLineString(LineString? ls, BinaryWriter bWriter, WkbByteOrder byteorder)
         {
+            if (ls == null)
+                return;
+
             //Write the number of points in this linestring.
             WriteUInt32((uint)ls.Vertices.Count, bWriter, byteorder);
 

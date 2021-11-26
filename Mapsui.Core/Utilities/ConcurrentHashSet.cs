@@ -481,7 +481,7 @@ namespace ConcurrentCollections
                     Node? previous = null;
                     for (var current = tables.Buckets[bucketNo]; current != null; current = current.Next)
                     {
-                        Debug.Assert(previous == null && current == tables.Buckets[bucketNo] || previous.Next == current);
+                        Debug.Assert(previous == null && current == tables.Buckets[bucketNo] || previous?.Next == current);
                         if (hashcode == current.Hashcode && _comparer.Equals(current.Item, item))
                         {
                             return false;

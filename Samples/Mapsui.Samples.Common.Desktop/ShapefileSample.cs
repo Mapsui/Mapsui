@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Reflection;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -82,8 +83,8 @@ namespace Mapsui.Samples.Common.Desktop
             // Cities below 1.000.000 gets the smallest symbol.
             // Cities with more than 5.000.000 the largest symbol.
             var localAssembly = Assembly.GetAssembly(typeof(ShapefileSample));
-            var bitmapStream = localAssembly.GetManifestResourceStream("Mapsui.Samples.Common.Desktop.Images.icon.png");
-            var bitmapId = BitmapRegistry.Instance.Register(bitmapStream);
+            var bitmapStream = localAssembly?.GetManifestResourceStream("Mapsui.Samples.Common.Desktop.Images.icon.png");
+            var bitmapId = BitmapRegistry.Instance.Register(bitmapStream ?? throw new InvalidOperationException());
             var citymin = new SymbolStyle { BitmapId = bitmapId, SymbolScale = 0.5f };
             var citymax = new SymbolStyle { BitmapId = bitmapId, SymbolScale = 1f };
             return new GradientTheme("Population", 1000000, 5000000, citymin, citymax);
@@ -145,7 +146,7 @@ namespace Mapsui.Samples.Common.Desktop
 
         private static string GetAppDir()
         {
-            return Path.GetDirectoryName(Assembly.GetEntryAssembly().GetModules()[0].FullyQualifiedName);
+            return Path.GetDirectoryName(Assembly.GetEntryAssembly()!.GetModules()[0].FullyQualifiedName)!;
         }
     }
 }

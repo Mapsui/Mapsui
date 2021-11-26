@@ -74,8 +74,11 @@ namespace Mapsui
         /// <param name="resolution">New resolution to use</param>
         /// <param name="duration">Duration for animation in milliseconds. If less then 0, then <see cref="DefaultDuration"/> is used.</param>
         /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
-        public void NavigateTo(MPoint center, double resolution, long duration = -1, Easing? easing = default)
+        public void NavigateTo(MPoint? center, double resolution, long duration = -1, Easing? easing = default)
         {
+            if (center == null)
+                return;
+
             // Stop any old animation if there is one
             StopRunningAnimation();
 

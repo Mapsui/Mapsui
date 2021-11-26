@@ -249,7 +249,7 @@ namespace Mapsui.Geometries.WellKnownText
             if (type == TokenType.Number)
                 throw new Exception("Expected a number but got " + token);
             if (type == TokenType.Word)
-                return token.ToUpper();
+                return token!.ToUpper();
             if (token == "(")
                 return "(";
             if (token == ")")
@@ -276,7 +276,7 @@ namespace Mapsui.Geometries.WellKnownText
         private static Geometry ReadGeometryTaggedText(WktStreamTokenizer tokenizer)
         {
             tokenizer.NextToken();
-            var type = tokenizer.GetStringValue().ToUpper();
+            var type = tokenizer.GetStringValue()?.ToUpper();
             Geometry geometry;
             switch (type)
             {

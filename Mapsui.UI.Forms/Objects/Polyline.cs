@@ -7,11 +7,25 @@ using Mapsui.Geometries;
 using Mapsui.GeometryLayer;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using Mapsui.UI.Objects;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.Linq;
+using System.Runtime.CompilerServices;
+#if __MAUI__
+using Mapsui.UI.Maui.Extensions;
+using Mapsui.UI.Maui.Utils;
+#else
 using Mapsui.UI.Forms.Extensions;
 using Mapsui.UI.Forms.Utils;
-using Mapsui.UI.Objects;
+#endif
 
+#if __MAUI__
+namespace Mapsui.UI.Maui
+#else
 namespace Mapsui.UI.Forms
+#endif
 {
     public class Polyline : Drawable
     {

@@ -1,6 +1,8 @@
 ﻿using Foundation;
 using UIKit;
 
+#nullable enable
+
 namespace Mapsui.Samples.iOS
 {
     // The UIApplicationDelegate for the application. This class is responsible for launching the 
@@ -11,7 +13,7 @@ namespace Mapsui.Samples.iOS
     {
         // class-level declarations
 
-        public override UIWindow Window
+        public override UIWindow? Window
         {
             get;
             set;
