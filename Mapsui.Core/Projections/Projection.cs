@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using Mapsui.Layers;
 
-namespace Mapsui.Projection
+namespace Mapsui.Projections
 {
     /// <summary>
     /// A very minimal implementation that is only capable of projecting between
     /// SphericalMercator and WGS84.
     /// </summary>
-    public class MinimalProjection : IProjection
+    public class Projection : IProjection
     {
         private readonly IDictionary<string, Func<double, double, (double, double)>> _toLonLat =
             new Dictionary<string, Func<double, double, (double, double)>>();
@@ -16,7 +16,7 @@ namespace Mapsui.Projection
         private readonly IDictionary<string, Func<double, double, (double, double)>> _fromLonLat =
             new Dictionary<string, Func<double, double, (double, double)>>();
 
-        public MinimalProjection()
+        public Projection()
         {
             _toLonLat["EPSG:4326"] = (x, y) => (x, y);
             _fromLonLat["EPSG:4326"] = (x, y) => (x, y);

@@ -1,6 +1,8 @@
 ﻿#if __MAUI__
 namespace Mapsui.UI.Maui.Extensions
 #else
+using Mapsui.Projections;
+
 namespace Mapsui.UI.Forms.Extensions
 #endif
 {
@@ -27,7 +29,7 @@ namespace Mapsui.UI.Forms.Extensions
 
         public static Position ToNative(this MPoint point)
         {
-            var result = Projection.SphericalMercator.ToLonLat(point.X, point.Y);
+            var result = SphericalMercator.ToLonLat(point.X, point.Y);
             return new Position(result.lat, result.lon);
         }
     }

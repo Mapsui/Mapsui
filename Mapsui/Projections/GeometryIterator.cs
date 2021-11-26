@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Mapsui.Geometries;
 
-namespace Mapsui.Projection
+namespace Mapsui.Projections
 {
     public static class GeometryIterator
     {
@@ -42,7 +42,7 @@ namespace Mapsui.Projection
             if (collection == null) throw new ArgumentNullException(nameof(collection));
 
             foreach (var geometry in collection)
-                foreach (var point in AllVertices(geometry))
+                foreach (var point in geometry.AllVertices())
                     yield return point;
         }
     }

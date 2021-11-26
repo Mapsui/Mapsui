@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Mapsui.Geometries;
 
-namespace Mapsui.Projection
+namespace Mapsui.Projections
 {
     public static class BoundingBoxIterator
     {

@@ -2,7 +2,7 @@ using System;
 using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.Layers;
-using Mapsui.Projection;
+using Mapsui.Projections;
 
 namespace Mapsui.GeometryLayer
 {

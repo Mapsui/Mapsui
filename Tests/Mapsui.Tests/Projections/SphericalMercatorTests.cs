@@ -1,8 +1,7 @@
-﻿using HaversineFormula;
-using Mapsui.Projection;
+﻿using Mapsui.Projections;
 using NUnit.Framework;
 
-namespace Mapsui.Tests.Projection
+namespace Mapsui.Tests.Projections
 {
     [TestFixture]
     internal class SphericalMercatorTests
@@ -11,8 +10,8 @@ namespace Mapsui.Tests.Projection
         public void SphericalMercatorPrecisionTest()
         {
             // Arrange
-            double inLon = 101.71046179910427;
-            double inLat = 3.1567427968766819;
+            var inLon = 101.71046179910427;
+            var inLat = 3.1567427968766819;
 
             // Act
             var (x, y) = SphericalMercator.FromLonLat(inLon, inLat);
