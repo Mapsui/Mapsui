@@ -496,16 +496,17 @@ namespace Mapsui.Providers.Wfs
 
         public MRect GetExtent()
         {
-            return new MRect(_featureTypeInfo.BBox.MinLong,
-                                   _featureTypeInfo.BBox.MinLat,
-                                   _featureTypeInfo.BBox.MaxLong,
-                                   _featureTypeInfo.BBox.MaxLat);
+            return new MRect(
+                _featureTypeInfo.BBox.MinLong,
+                _featureTypeInfo.BBox.MinLat,
+                _featureTypeInfo.BBox.MaxLong,
+                _featureTypeInfo.BBox.MaxLat);
         }
 
         public string CRS
         {
-            get => ProjectionHelper.EpsgPrefix + _featureTypeInfo.SRID;
-            set => _featureTypeInfo.SRID = value.Substring(ProjectionHelper.EpsgPrefix.Length);
+            get => CrsHelper.EpsgPrefix + _featureTypeInfo.SRID;
+            set => _featureTypeInfo.SRID = value.Substring(CrsHelper.EpsgPrefix.Length);
         }
 
         public void Dispose()
