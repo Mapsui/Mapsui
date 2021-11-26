@@ -23,7 +23,7 @@ namespace Mapsui.Providers
         public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {
             var projectedExtent = ProjectionHelper.Project(fetchInfo.Extent, _projection, CRS, _provider.CRS);
-            if (projectedExtent == null) return new List<GeometryFeature>(); // Perhaps Project should not return null
+            if (projectedExtent == null) return new List<IFeature>();
             fetchInfo = new FetchInfo(projectedExtent, fetchInfo.Resolution, fetchInfo.CRS, fetchInfo.ChangeType);
 
             var features = _provider.GetFeatures(fetchInfo);
