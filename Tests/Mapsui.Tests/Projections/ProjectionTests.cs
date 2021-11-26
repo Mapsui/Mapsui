@@ -6,7 +6,7 @@ using Mapsui.GeometryLayer;
 using Mapsui.Projections;
 using NUnit.Framework;
 
-namespace Mapsui.Tests.Projection
+namespace Mapsui.Tests.Projections
 {
     [TestFixture]
     public class ProjectionTests

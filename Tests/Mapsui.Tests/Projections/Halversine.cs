@@ -2,7 +2,7 @@
 // https://gist.github.com/jammin77/033a332542aa24889452
 using System;
 
-namespace HaversineFormula
+namespace Mapsui.Tests.Projections
 {
     /// <summary>
     /// The distance type to return the results in.
@@ -35,16 +35,16 @@ namespace HaversineFormula
         /// <returns></returns>
         public static double Distance(Position pos1, Position pos2, DistanceType type = DistanceType.Kilometers)
         {
-            double R = (type == DistanceType.Miles) ? 3960 : 6371;
+            double R = type == DistanceType.Miles ? 3960 : 6371;
 
-            double dLat = ToRadian(pos2.Latitude - pos1.Latitude);
-            double dLon = ToRadian(pos2.Longitude - pos1.Longitude);
+            var dLat = ToRadian(pos2.Latitude - pos1.Latitude);
+            var dLon = ToRadian(pos2.Longitude - pos1.Longitude);
 
-            double a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
-                (Math.Cos(ToRadian(pos1.Latitude)) * Math.Cos(ToRadian(pos2.Latitude)) *
-                Math.Sin(dLon / 2) * Math.Sin(dLon / 2));
-            double c = 2 * Math.Asin(Math.Min(1, Math.Sqrt(a)));
-            double d = R * c;
+            var a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
+                Math.Cos(ToRadian(pos1.Latitude)) * Math.Cos(ToRadian(pos2.Latitude)) *
+                Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
+            var c = 2 * Math.Asin(Math.Min(1, Math.Sqrt(a)));
+            var d = R * c;
 
             return d;
         }
