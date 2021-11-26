@@ -157,8 +157,6 @@ namespace Mapsui.UI.Forms
 
             Content = view;
 
-            Map = new Map();
-
             BackgroundColor = KnownColor.White;
         }
 
