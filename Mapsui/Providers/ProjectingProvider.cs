@@ -4,6 +4,7 @@ using System.Linq;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Projection;
+using Mapsui.Projections;
 
 namespace Mapsui.Providers
 {

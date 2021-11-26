@@ -1,4 +1,4 @@
-﻿namespace Mapsui.Projection
+﻿namespace Mapsui.Projections
 {
     public class ProjectionDefaults
     {

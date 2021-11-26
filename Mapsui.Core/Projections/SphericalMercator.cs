@@ -1,7 +1,7 @@
 using System;
 using Mapsui.Extensions;
 
-namespace Mapsui.Projection
+namespace Mapsui.Projections
 {
     public class SphericalMercator
     {

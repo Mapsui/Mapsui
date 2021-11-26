@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Mapsui.Layers;
 
-namespace Mapsui.Projection
+namespace Mapsui.Projections
 {
     /// <summary>
     /// A very minimal implementation that is only capable of projecting between

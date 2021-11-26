@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Mapsui.Layers;
 
-namespace Mapsui.Projection
+namespace Mapsui.Projections
 {
     public interface IProjection
     {

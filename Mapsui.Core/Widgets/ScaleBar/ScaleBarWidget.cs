@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Mapsui.Logging;
-using Mapsui.Projection;
+using Mapsui.Projections;
 using Mapsui.Styles;
 
 namespace Mapsui.Widgets.ScaleBar

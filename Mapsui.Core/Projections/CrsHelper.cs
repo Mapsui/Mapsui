@@ -1,6 +1,6 @@
 using System;
 
-namespace Mapsui.Projection
+namespace Mapsui.Projections
 {
     public enum CrsType
     {

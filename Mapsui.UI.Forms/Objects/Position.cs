@@ -1,5 +1,6 @@
 ﻿using System;
 using Mapsui.Geometries;
+using Mapsui.Projections;
 
 #if __MAUI__
 namespace Mapsui.UI.Maui
@@ -49,13 +50,13 @@ namespace Mapsui.UI.Forms
         /// <returns>Position in Mapsui format</returns>
         public MPoint ToMapsui()
         {
-            var (x, y) = Projection.SphericalMercator.FromLonLat(Longitude, Latitude);
+            var (x, y) = SphericalMercator.FromLonLat(Longitude, Latitude);
             return new MPoint(x, y);
         }
 
         public Point ToPoint()
         {
-            var (x, y) = Projection.SphericalMercator.FromLonLat(Longitude, Latitude);
+            var (x, y) = SphericalMercator.FromLonLat(Longitude, Latitude);
             return new Point(x, y);
         }
 

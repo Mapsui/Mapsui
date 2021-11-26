@@ -11,6 +11,7 @@ using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Projection;
+using Mapsui.Projections;
 using Mapsui.Providers.Wfs.Utilities;
 using Mapsui.Providers.Wfs.Xml;
 using Mapsui.Utilities;

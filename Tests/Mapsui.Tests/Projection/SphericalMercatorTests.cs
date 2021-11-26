@@ -1,5 +1,5 @@
 ﻿using HaversineFormula;
-using Mapsui.Projection;
+using Mapsui.Projections;
 using NUnit.Framework;
 
 namespace Mapsui.Tests.Projection

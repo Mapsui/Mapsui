@@ -10,7 +10,7 @@ using System.Text;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
-using Mapsui.Projection;
+using Mapsui.Projections;
 
 namespace Mapsui.Providers.ArcGIS.Dynamic
 {
