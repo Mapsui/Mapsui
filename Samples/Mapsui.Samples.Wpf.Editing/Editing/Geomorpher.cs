@@ -1,6 +1,6 @@
 ﻿using Mapsui.Geometries;
 using Mapsui.Geometries.Utilities;
-using Mapsui.Projection;
+using Mapsui.Projections;
 
 namespace Mapsui.Samples.Wpf.Editing.Editing
 {

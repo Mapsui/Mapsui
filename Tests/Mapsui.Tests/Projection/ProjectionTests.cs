@@ -3,7 +3,7 @@ using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.Geometries.WellKnownText;
 using Mapsui.GeometryLayer;
-using Mapsui.Projection;
+using Mapsui.Projections;
 using NUnit.Framework;
 
 namespace Mapsui.Tests.Projection
