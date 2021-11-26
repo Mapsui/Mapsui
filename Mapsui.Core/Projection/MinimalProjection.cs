@@ -42,6 +42,9 @@ namespace Mapsui.Projection
 
         public void Project(string fromCRS, string toCRS, MPoint point)
         {
+            if (!IsProjectionSupported(fromCRS, toCRS))
+                throw new NotSupportedException($"Projection is not supported. From CRS: {fromCRS}. To CRS {toCRS}");
+
             Project(point, _toLonLat[fromCRS]);
             Project(point, _fromLonLat[toCRS]);
         }
@@ -53,6 +56,9 @@ namespace Mapsui.Projection
 
         public void Project(string fromCRS, string toCRS, MRect rect)
         {
+            if (!IsProjectionSupported(fromCRS, toCRS))
+                throw new NotSupportedException($"Projection is not supported. From CRS: {fromCRS}. To CRS {toCRS}");
+
             Project(rect.Min, _toLonLat[fromCRS]);
             Project(rect.Min, _fromLonLat[toCRS]);
 
@@ -62,16 +68,35 @@ namespace Mapsui.Projection
 
         public void Project(string fromCRS, string toCRS, IFeature feature)
         {
+            if (!IsProjectionSupported(fromCRS, toCRS))
+                throw new NotSupportedException($"Projection is not supported. From CRS: {fromCRS}. To CRS {toCRS}");
+
             Project(feature, _toLonLat[fromCRS]);
             Project(feature, _fromLonLat[toCRS]);
         }
 
+        public void Project(string fromCRS, string toCRS, IEnumerable<IFeature> features)
+        {
+            Project(features, _toLonLat[fromCRS]);
+            Project(features, _fromLonLat[toCRS]);
+        }
+
         private static void Project(IFeature feature, Func<double, double, (double, double)> transformFunc)
         {
+
             feature.CoordinateVisitor((x, y, setter) => {
                 var (xOut, yOut) = transformFunc(x, y);
                 setter(xOut, yOut);
             });
+        }
+
+        private static void Project(IEnumerable<IFeature> features, Func<double, double, (double, double)> transformFunc)
+        {
+            foreach (var feature in features)
+                feature.CoordinateVisitor((x, y, setter) => {
+                    var (xOut, yOut) = transformFunc(x, y);
+                    setter(xOut, yOut);
+                });
         }
     }
 }

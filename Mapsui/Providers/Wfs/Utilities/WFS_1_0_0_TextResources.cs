@@ -8,6 +8,7 @@ using System.Text;
 using System.Web;
 using System.Xml;
 using Mapsui.Geometries;
+using Mapsui.Projection;
 using Mapsui.Utilities;
 
 // ReSharper disable InconsistentNaming
@@ -60,7 +61,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             paramBuilder.Append("?SERVICE=WFS&Version=1.0.0&REQUEST=GetFeature&TYPENAME=");
             paramBuilder.Append(HttpUtility.UrlEncode(qualification + featureTypeInfo.Name));
             paramBuilder.Append("&srsName=");
-            paramBuilder.Append(HttpUtility.UrlEncode(ProjectionHelper.EpsgPrefix + featureTypeInfo.SRID));
+            paramBuilder.Append(HttpUtility.UrlEncode(CrsHelper.EpsgPrefix + featureTypeInfo.SRID));
 
             if (filter != null || boundingBox != null)
             {
@@ -101,7 +102,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                     xWriter.WriteAttributeString("version", "1.0.0");
                     xWriter.WriteStartElement("Query", NSWFS);
                     xWriter.WriteAttributeString("typeName", qualification + featureTypeInfo.Name);
-                    xWriter.WriteAttributeString("srsName", ProjectionHelper.EpsgPrefix + featureTypeInfo.SRID);
+                    xWriter.WriteAttributeString("srsName", CrsHelper.EpsgPrefix + featureTypeInfo.SRID);
                     xWriter.WriteElementString("PropertyName", qualification + featureTypeInfo.Geometry.GeometryName);
                     if (!labelProperties.All(string.IsNullOrWhiteSpace))
                         xWriter.WriteElementString("PropertyName", string.Join(",",

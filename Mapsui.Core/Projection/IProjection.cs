@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Mapsui.Layers;
 
 namespace Mapsui.Projection
@@ -9,5 +10,6 @@ namespace Mapsui.Projection
         void Project(string fromCRS, string toCRS, MRect rect);
         bool IsProjectionSupported(string fromCRS, string toCRS);
         void Project(string fromCRS, string toCRS, IFeature feature);
+        void Project(string fromCRS, string toCRS, IEnumerable<IFeature> features);
     }
 }
