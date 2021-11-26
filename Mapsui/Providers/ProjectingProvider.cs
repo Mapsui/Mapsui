@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Extensions;
 using Mapsui.Layers;
-using Mapsui.Projection;
 using Mapsui.Projections;
 
 namespace Mapsui.Providers
@@ -16,7 +15,7 @@ namespace Mapsui.Providers
         public ProjectingProvider(IProvider<IFeature> provider, IProjection? projection = null)
         {
             _provider = provider;
-            _projection = projection ?? new MinimalProjection();
+            _projection = projection ?? new Projection();
         }
 
         /// <summary>

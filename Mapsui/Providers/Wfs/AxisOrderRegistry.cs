@@ -3,7 +3,7 @@
 
 using System;
 
-namespace Mapsui.Projection
+namespace Mapsui.Providers.Wfs
 {
     /// <summary>
     /// A registry for the axis order of coordinate systems as defined in EPSG 8.4 data set
