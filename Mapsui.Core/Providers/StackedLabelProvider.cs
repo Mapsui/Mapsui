@@ -168,18 +168,19 @@ namespace Mapsui.Providers
 
                 if (found) continue;
 
-                clusters.Add(new Cluster
-                {
-                    Box = feature.Extent.Clone(),
-                    Features = new List<IFeature> { feature }
-                });
+                clusters.Add(new Cluster(feature.Extent.Clone(), new List<IFeature> { feature }));
             }
         }
 
         private class Cluster
         {
-            public MRect? Box { get; set; }
-            public IList<IFeature>? Features { get; set; }
+            public Cluster(MRect box, IList<IFeature> features)
+            {
+                Box = box;
+                Features = features;
+            }
+            public MRect Box { get; set; }
+            public IList<IFeature> Features { get; }
         }
     }
 }
