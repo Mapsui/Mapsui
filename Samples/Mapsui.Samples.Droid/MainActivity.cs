@@ -13,7 +13,6 @@ using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.UI;
 using Mapsui.UI.Android;
-using Mapsui.Layers;
 
 #nullable enable
 

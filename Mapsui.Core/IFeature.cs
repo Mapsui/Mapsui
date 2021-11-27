@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Mapsui.Styles;
 
-namespace Mapsui.Layers
+namespace Mapsui
 {
     public delegate void CoordinateSetter(double x, double y);
 

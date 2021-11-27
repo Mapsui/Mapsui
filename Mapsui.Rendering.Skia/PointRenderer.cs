@@ -1,6 +1,5 @@
 ﻿using System;
 using Mapsui.Extensions;
-using Mapsui.Layers;
 using Mapsui.Styles;
 using SkiaSharp;
 
