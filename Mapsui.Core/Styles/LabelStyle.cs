@@ -113,7 +113,7 @@ namespace Mapsui.Styles
             Offset = new Offset(labelStyle.Offset);
             CollisionDetection = false;
             ForeColor = new Color(labelStyle.ForeColor);
-            BackColor = new Brush(labelStyle.BackColor);
+            BackColor = (labelStyle.BackColor == null) ? null : new Brush(labelStyle.BackColor);
             HorizontalAlignment = HorizontalAlignmentEnum.Center;
             VerticalAlignment = VerticalAlignmentEnum.Center;
             MaxWidth = labelStyle.MaxWidth;
