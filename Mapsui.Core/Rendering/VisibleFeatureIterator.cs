@@ -25,6 +25,7 @@ namespace Mapsui.Rendering
         private static void IterateLayer(IReadOnlyViewport viewport, ILayer layer,
             Action<IReadOnlyViewport, ILayer, IStyle, IFeature, float> callback)
         {
+            if (viewport.Extent == null) return;
             var features = layer.GetFeatures(viewport.Extent, viewport.Resolution).ToList();
 
             var layerStyles = ToArray(layer);
@@ -34,7 +35,13 @@ namespace Mapsui.Rendering
 
                 foreach (var feature in features)
                 {
-                    if (layerStyle is IThemeStyle themeStyle) style = themeStyle.GetStyle(feature);
+                    if (layerStyle is IThemeStyle themeStyle)
+                    {
+                        var styleForFeature = themeStyle.GetStyle(feature);
+                        if (styleForFeature == null) continue;
+                        style = styleForFeature;
+                    }
+
                     if (ShouldNotBeApplied(style, viewport)) continue;
 
                     if (style is StyleCollection styles) // The ThemeStyle can again return a StyleCollection
@@ -70,9 +77,10 @@ namespace Mapsui.Rendering
             return style == null || !style.Enabled || style.MinVisible > viewport.Resolution || style.MaxVisible < viewport.Resolution;
         }
 
-        private static IStyle?[] ToArray(ILayer layer)
+        private static IEnumerable<IStyle> ToArray(ILayer layer)
         {
-            return (layer.Style as StyleCollection)?.ToArray() ?? new[] { layer.Style };
+            return (layer.Style as StyleCollection)?.ToArray() ??
+                (layer.Style == null ? new IStyle[0] : new[] { layer.Style });
         }
     }
 }
