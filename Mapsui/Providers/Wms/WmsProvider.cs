@@ -289,7 +289,7 @@ namespace Mapsui.Providers.Wms
             _mimeType = mimeType;
         }
 
-        public bool TryGetMap(IViewport viewport,[NotNullWhen(true)] out MRaster? raster)
+        public bool TryGetMap(IViewport viewport, [NotNullWhen(true)] out MRaster? raster)
         {
 
             int width;

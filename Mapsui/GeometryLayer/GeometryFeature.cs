@@ -16,7 +16,7 @@ namespace Mapsui.GeometryLayer
 
         public GeometryFeature(GeometryFeature geometryFeature) : base(geometryFeature)
         {
-            Geometry = geometryFeature.Geometry.Copy();
+            Geometry = geometryFeature.Geometry?.Copy();
         }
 
         public GeometryFeature(IGeometry geometry)

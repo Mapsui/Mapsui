@@ -46,7 +46,7 @@ namespace Mapsui.Providers.Shapefile
         private short _headerLength;
         private short _recordLength;
         private readonly string _filename;
-        private DbaseField[] _dbaseColumns;
+        private DbaseField[]? _dbaseColumns;
         private FileStream? _fs;
         private BinaryReader? _br;
         private bool _headerIsParsed;
@@ -378,32 +378,36 @@ namespace Mapsui.Providers.Shapefile
             tab.Columns.Add("IsAutoIncrement", typeof(bool));
             tab.Columns.Add("IsLong", typeof(bool));
 
-            foreach (var dbf in _dbaseColumns)
-                tab.Columns.Add(dbf.ColumnName, dbf.DataType);
-
-            for (var i = 0; i < _dbaseColumns.Length; i++)
+            if (_dbaseColumns != null)
             {
-                var r = tab.NewRow();
-                r["ColumnName"] = _dbaseColumns[i].ColumnName;
-                r["ColumnSize"] = _dbaseColumns[i].Length;
-                r["ColumnOrdinal"] = i;
-                r["NumericPrecision"] = _dbaseColumns[i].Decimals;
-                r["NumericScale"] = 0;
-                r["DataType"] = _dbaseColumns[i].DataType;
-                r["AllowDBNull"] = true;
-                r["IsReadOnly"] = true;
-                r["IsUnique"] = false;
-                r["IsRowVersion"] = false;
-                r["IsKey"] = false;
-                r["IsAutoIncrement"] = false;
-                r["IsLong"] = false;
+                foreach (var dbf in _dbaseColumns)
+                    tab.Columns.Add(dbf.ColumnName, dbf.DataType);
 
-                // specializations, if ID is unique
-                //if (_ColumnNames[i] == "ID")
-                //	r["IsUnique"] = true;
+                for (var i = 0; i < _dbaseColumns.Length; i++)
+                {
+                    var r = tab.NewRow();
+                    r["ColumnName"] = _dbaseColumns[i].ColumnName;
+                    r["ColumnSize"] = _dbaseColumns[i].Length;
+                    r["ColumnOrdinal"] = i;
+                    r["NumericPrecision"] = _dbaseColumns[i].Decimals;
+                    r["NumericScale"] = 0;
+                    r["DataType"] = _dbaseColumns[i].DataType;
+                    r["AllowDBNull"] = true;
+                    r["IsReadOnly"] = true;
+                    r["IsUnique"] = false;
+                    r["IsRowVersion"] = false;
+                    r["IsKey"] = false;
+                    r["IsAutoIncrement"] = false;
+                    r["IsLong"] = false;
 
-                tab.Rows.Add(r);
+                    // specializations, if ID is unique
+                    //if (_ColumnNames[i] == "ID")
+                    //	r["IsUnique"] = true;
+
+                    tab.Rows.Add(r);
+                }
             }
+
             return tab;
         }
 
@@ -413,18 +417,18 @@ namespace Mapsui.Providers.Shapefile
                 throw (new ApplicationException("An attempt was made to read from a closed DBF file"));
             if (oid >= _numberOfRecords)
                 throw (new ArgumentException("Invalid DataRow requested at index " + oid.ToString(CultureInfo.InvariantCulture)));
-            if (colid >= _dbaseColumns.Length || colid < 0)
+            if (colid >= _dbaseColumns!.Length || colid < 0)
                 throw ((new ArgumentException("Column index out of range")));
 
-            _fs.Seek(_headerLength + oid * _recordLength, 0);
+            _fs!.Seek(_headerLength + oid * _recordLength, 0);
             for (var i = 0; i < colid; i++)
-                _br.BaseStream.Seek(_dbaseColumns[i].Length, SeekOrigin.Current);
+                _br!.BaseStream.Seek(_dbaseColumns[i].Length, SeekOrigin.Current);
 
             return ReadDbfValue(_dbaseColumns[colid]);
         }
 
         private Encoding? _encoding;
-        private Encoding _fileEncoding;
+        private Encoding _fileEncoding = Encoding.UTF7;
 
         /// <summary>
         /// Gets or sets the <see cref="System.Text.Encoding"/> used for parsing strings from the DBase DBF file.
@@ -455,7 +459,7 @@ namespace Mapsui.Providers.Shapefile
             if (_br.ReadChar() == '*') return null; // is record marked deleted?
 
 
-            foreach (var dbf in _dbaseColumns)
+            foreach (var dbf in _dbaseColumns!)
             {
                 dr[dbf.ColumnName] = ReadDbfValue(dbf);
             }
@@ -468,30 +472,30 @@ namespace Mapsui.Providers.Shapefile
             {
                 case "System.String":
                     if (_encoding == null)
-                        return _fileEncoding.GetString(_br.ReadBytes(dbf.Length)).Replace("\0", "").Trim();
-                    return _encoding.GetString(_br.ReadBytes(dbf.Length)).Replace("\0", "").Trim();
+                        return _fileEncoding.GetString(_br!.ReadBytes(dbf.Length)).Replace("\0", "").Trim();
+                    return _encoding.GetString(_br!.ReadBytes(dbf.Length)).Replace("\0", "").Trim();
                 case "System.Double":
-                    var temp = Encoding.UTF7.GetString(_br.ReadBytes(dbf.Length)).Replace("\0", "").Trim();
+                    var temp = Encoding.UTF7.GetString(_br!.ReadBytes(dbf.Length)).Replace("\0", "").Trim();
                     if (double.TryParse(temp, NumberStyles.Float, CultureInfo.InvariantCulture, out var dbl))
                         return dbl;
                     return DBNull.Value;
                 case "System.Int16":
-                    var temp16 = Encoding.UTF7.GetString((_br.ReadBytes(dbf.Length))).Replace("\0", "").Trim();
+                    var temp16 = Encoding.UTF7.GetString((_br!.ReadBytes(dbf.Length))).Replace("\0", "").Trim();
                     if (short.TryParse(temp16, NumberStyles.Float, CultureInfo.InvariantCulture, out var i16))
                         return i16;
                     return DBNull.Value;
                 case "System.Int32":
-                    var temp32 = Encoding.UTF7.GetString((_br.ReadBytes(dbf.Length))).Replace("\0", "").Trim();
+                    var temp32 = Encoding.UTF7.GetString((_br!.ReadBytes(dbf.Length))).Replace("\0", "").Trim();
                     if (int.TryParse(temp32, NumberStyles.Float, CultureInfo.InvariantCulture, out var i32))
                         return i32;
                     return DBNull.Value;
                 case "System.Int64":
-                    var temp64 = Encoding.UTF7.GetString((_br.ReadBytes(dbf.Length))).Replace("\0", "").Trim();
+                    var temp64 = Encoding.UTF7.GetString((_br!.ReadBytes(dbf.Length))).Replace("\0", "").Trim();
                     if (long.TryParse(temp64, NumberStyles.Float, CultureInfo.InvariantCulture, out var i64))
                         return i64;
                     return DBNull.Value;
                 case "System.Single":
-                    var temp4 = Encoding.UTF8.GetString((_br.ReadBytes(dbf.Length)));
+                    var temp4 = Encoding.UTF8.GetString((_br!.ReadBytes(dbf.Length)));
                     if (float.TryParse(temp4, NumberStyles.Float, CultureInfo.InvariantCulture, out var f))
                         return f;
                     return DBNull.Value;
@@ -500,7 +504,7 @@ namespace Mapsui.Providers.Shapefile
                     return (tempChar == 'T') || (tempChar == 't') || (tempChar == 'Y') || (tempChar == 'y');
                 case "System.DateTime":
                     // Mono has not yet implemented DateTime.TryParseExact
-                    if (DateTime.TryParseExact(Encoding.UTF7.GetString((_br.ReadBytes(8))),
+                    if (DateTime.TryParseExact(Encoding.UTF7.GetString((_br!.ReadBytes(8))),
                                                "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var date))
                         return date;
                     return DBNull.Value;

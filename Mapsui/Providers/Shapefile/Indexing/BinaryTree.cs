@@ -40,7 +40,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
         {
         }
 
-        public Node(T item, TU itemIndex, Node<T, TU>? right, Node<T, TU>? left)
+        public Node(T? item, TU? itemIndex, Node<T, TU>? right, Node<T, TU>? left)
         {
             RightNode = right;
             LeftNode = left;
@@ -304,12 +304,12 @@ namespace Mapsui.Providers.Shapefile.Indexing
             /// <summary>
             /// Identifier for the value
             /// </summary>
-            public TU Id;
+            public TU? Id;
 
             /// <summary>
             /// Value
             /// </summary>
-            public T Value;
+            public T? Value;
 
             /// <summary>
             /// Creates an instance of an item in a <see cref="BinaryTree&lt;T, U&gt;"/>.

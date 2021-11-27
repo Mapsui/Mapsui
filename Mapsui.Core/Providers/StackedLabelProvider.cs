@@ -42,8 +42,10 @@ namespace Mapsui.Providers
         }
 
         private static List<IFeature> GetFeaturesInView(double resolution, LabelStyle labelStyle,
-            IEnumerable<IFeature> features, Pen line, Brush? fill)
+            IEnumerable<IFeature>? features, Pen line, Brush? fill)
         {
+            if (features == null)
+                return new List<IFeature>();
             var margin = resolution * 50;
             var clusters = new List<Cluster>();
             // todo: repeat until there are no more merges

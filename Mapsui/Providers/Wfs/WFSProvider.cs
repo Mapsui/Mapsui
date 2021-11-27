@@ -60,7 +60,7 @@ namespace Mapsui.Providers.Wfs
         private readonly WFSVersionEnum _wfsVersion;
         private bool _disposed;
         private string _featureType;
-        private WfsFeatureTypeInfo _featureTypeInfo;
+        private WfsFeatureTypeInfo? _featureTypeInfo;
         private IXPathQueryManager? _featureTypeInfoQueryManager;
         private string _nsPrefix;
         private bool _getFeatureGetRequest;
@@ -88,7 +88,7 @@ namespace Mapsui.Providers.Wfs
         /// <summary>
         /// Gets feature metadata 
         /// </summary>
-        public WfsFeatureTypeInfo FeatureTypeInfo => _featureTypeInfo;
+        public WfsFeatureTypeInfo? FeatureTypeInfo => _featureTypeInfo;
 
         /// <summary>
         /// Gets or sets a value indicating the axis order
@@ -503,10 +503,14 @@ namespace Mapsui.Providers.Wfs
                 _featureTypeInfo.BBox.MaxLat);
         }
 
-        public string CRS
+        public string? CRS
         {
-            get => CrsHelper.EpsgPrefix + _featureTypeInfo.SRID;
-            set => _featureTypeInfo.SRID = value.Substring(CrsHelper.EpsgPrefix.Length);
+            get => CrsHelper.EpsgPrefix + _featureTypeInfo?.SRID;
+            set
+            {
+                if (_featureTypeInfo != null && value != null)
+                    _featureTypeInfo.SRID = value.Substring(CrsHelper.EpsgPrefix.Length);
+            }
         }
 
         public void Dispose()

@@ -155,11 +155,11 @@ namespace Mapsui.Providers.Shapefile
         private string _filename;
         private bool _isOpen;
         private ShapeType _shapeType;
-        private BinaryReader _brShapeFile;
-        private BinaryReader _brShapeIndex;
+        private BinaryReader _brShapeFile = default!;
+        private BinaryReader _brShapeIndex = default!;
         private readonly DbaseReader? _dbaseFile;
-        private FileStream _fsShapeFile;
-        private FileStream _fsShapeIndex;
+        private FileStream _fsShapeFile = default!;
+        private FileStream _fsShapeIndex = default!;
         private readonly object _syncRoot = new();
 
         /// <summary>
@@ -412,12 +412,14 @@ namespace Mapsui.Providers.Shapefile
 
         }
 
-        private Collection<uint> GetObjectIDsInViewPrivate(MRect bbox)
+        private Collection<uint> GetObjectIDsInViewPrivate(MRect? bbox)
         {
+            if (bbox == null)
+                return new Collection<uint>();
             if (!_isOpen)
                 throw new ApplicationException("An attempt was made to read from a closed data source");
             //Use the spatial index to get a list of features whose BoundingBox intersects bbox
-            return _tree.Search(bbox);
+            return _tree!.Search(bbox);
         }
 
         /// <summary>

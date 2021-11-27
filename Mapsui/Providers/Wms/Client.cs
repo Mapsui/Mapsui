@@ -31,7 +31,7 @@ namespace Mapsui.Providers.Wms
             /// <summary>
             /// Abstract
             /// </summary>
-            public string Abstract;
+            public string? Abstract;
 
             /// <summary>
             /// Legend
@@ -41,7 +41,7 @@ namespace Mapsui.Providers.Wms
             /// <summary>
             /// Name
             /// </summary>
-            public string Name;
+            public string? Name;
 
             /// <summary>
             /// Style Sheet Url
@@ -51,7 +51,7 @@ namespace Mapsui.Providers.Wms
             /// <summary>
             /// Title
             /// </summary>
-            public string Title;
+            public string? Title;
         }
 
 
@@ -82,7 +82,7 @@ namespace Mapsui.Providers.Wms
             /// <summary>
             /// Abstract
             /// </summary>
-            public string Abstract;
+            public string? Abstract;
 
             /// <summary>
             /// Collection of child layers
@@ -112,7 +112,7 @@ namespace Mapsui.Providers.Wms
             /// <summary>
             /// Unique name of this layer used for requesting layer
             /// </summary>
-            public string Name;
+            public string? Name;
 
             /// <summary>
             /// Specifies whether this layer is queryable using GetFeatureInfo requests
@@ -127,7 +127,7 @@ namespace Mapsui.Providers.Wms
             /// <summary>
             /// Layer title
             /// </summary>
-            public string Title;
+            public string? Title;
         }
 
 

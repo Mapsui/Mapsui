@@ -35,7 +35,7 @@ namespace Mapsui.Providers
             _projection.Project(CRS, _provider.CRS, copiedExtent);
             fetchInfo = new FetchInfo(copiedExtent, fetchInfo.Resolution, CRS, fetchInfo.ChangeType);
 
-            var features = _provider.GetFeatures(fetchInfo);
+            var features = _provider.GetFeatures(fetchInfo) ?? new List<IFeature>();
             if (!CrsHelper.IsProjectionNeeded(_provider.CRS, CRS)) return features;
 
             if (!CrsHelper.IsCrsProvided(_provider.CRS, CRS))

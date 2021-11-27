@@ -54,7 +54,7 @@ namespace Mapsui.Providers.Wfs.Utilities
 
             try
             {
-                if (featureTypeInfo.LabelFields != null)
+                if (featureTypeInfo?.LabelFields != null)
                 {
                     var pathNodes = new IPathNode[featureTypeInfo.LabelFields.Count];
                     for (var i = 0; i < pathNodes.Length; i++)

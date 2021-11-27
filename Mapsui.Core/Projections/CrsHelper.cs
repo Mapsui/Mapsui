@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Mapsui.Projections
 {
@@ -36,18 +37,20 @@ namespace Mapsui.Projections
 
         public static CrsType GetCrsType(string crs)
         {
+            if (crs == null)
+                throw new ArgumentException(nameof(crs));
             if (crs.StartsWith(EpsgPrefix)) return CrsType.Epgs;
             if (crs.StartsWith(EsriStringPrefix)) return CrsType.EsriString;
             if (crs.StartsWith(Proj4StringPrefix)) return CrsType.Proj4String;
             throw new Exception($"crs not recognized: '{crs}'");
         }
 
-        public static bool IsCrsProvided(string fromCRS, string toCRS)
+        public static bool IsCrsProvided([NotNullWhen(true)] string? fromCRS, [NotNullWhen(true)] string? toCRS)
         {
             return !string.IsNullOrEmpty(fromCRS) && !string.IsNullOrEmpty(toCRS);
         }
 
-        public static bool IsProjectionNeeded(string? fromCRS, string toCRS)
+        public static bool IsProjectionNeeded(string? fromCRS, string? toCRS)
         {
             return !fromCRS?.Equals(toCRS) == true;
         }

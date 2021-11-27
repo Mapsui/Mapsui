@@ -59,7 +59,7 @@ namespace Mapsui.Providers.Wms
         {
             foreach (var feature in layer.Elements())
             {
-                _featureInfo.FeatureInfos.Add(ExtractFeatureElements(feature));
+                _featureInfo?.FeatureInfos?.Add(ExtractFeatureElements(feature));
             }
         }
 

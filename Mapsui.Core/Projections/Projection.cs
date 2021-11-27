@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Mapsui.Projections
 {
@@ -34,8 +35,10 @@ namespace Mapsui.Projections
             return projectFunc(x, y);
         }
 
-        public bool IsProjectionSupported(string fromCRS, string toCRS)
+        public bool IsProjectionSupported([NotNullWhen(true)] string? fromCRS, [NotNullWhen(true)] string? toCRS)
         {
+            if (fromCRS == null || toCRS == null)
+                return false;
             return _toLonLat.ContainsKey(fromCRS) && _fromLonLat.ContainsKey(toCRS);
         }
 

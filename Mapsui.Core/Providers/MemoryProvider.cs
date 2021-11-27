@@ -57,7 +57,7 @@ namespace Mapsui.Providers
 
             fetchInfo = new FetchInfo(fetchInfo);
             // Use a larger extent so that symbols partially outside of the extent are included
-            var biggerBox = fetchInfo.Extent.Grow(fetchInfo.Resolution * SymbolSize * 0.5);
+            var biggerBox = fetchInfo.Extent?.Grow(fetchInfo.Resolution * SymbolSize * 0.5);
             var grownFeatures = features.Where(f => f != null && (f.Extent?.Intersects(biggerBox) ?? false));
 
             return grownFeatures.ToList();
