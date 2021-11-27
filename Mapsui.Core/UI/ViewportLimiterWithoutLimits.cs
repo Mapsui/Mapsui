@@ -12,7 +12,7 @@ namespace Mapsui.UI
         }
 
         public double LimitResolution(double resolution, double screenWidth, double screenHeight, IReadOnlyList<double> mapResolutions,
-            MRect mapEnvelope)
+            MRect? mapEnvelope)
         {
             return resolution;
         }

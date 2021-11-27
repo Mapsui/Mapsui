@@ -59,7 +59,7 @@ namespace Mapsui.Layers
             var progress = CalculateProgress(_startTimeAnimation, AnimationDuration, Function);
             if (!Completed(progress)) InterpolateAnimatedPosition(_cache, progress, DistanceThreshold);
             else _animationTimer.Change(Timeout.Infinite, Timeout.Infinite);
-            return _cache.Select(f => f.Feature);
+            return _cache.Select(i => i.Feature);
         }
 
         private static bool Completed(double progress)
@@ -95,27 +95,22 @@ namespace Mapsui.Layers
             }
         }
 
-        private static List<AnimatedItem> ConvertToAnimatedItems(IEnumerable<PointFeature> features,
-            List<AnimatedItem> previousItems, string idField)
+        private static List<AnimatedItem> ConvertToAnimatedItems(
+            IEnumerable<PointFeature> features, List<AnimatedItem> previousItems, string idField)
         {
             var result = new List<AnimatedItem>();
             foreach (var feature in features)
             {
+                var previousPoint = FindPreviousPoint(previousItems, feature, idField);
                 var animatedItem = new AnimatedItem
                 {
                     Feature = feature,
-                    CurrentPoint = CopyAsPoint(feature.Point),
-                    PreviousPoint = CopyAsPoint(FindPreviousPoint(previousItems, feature, idField))
+                    CurrentPoint = new MPoint(feature.Point),
+                    PreviousPoint = previousPoint == null ? null : new MPoint(previousPoint)
                 };
                 result.Add(animatedItem);
             }
             return result;
-        }
-
-        private static MPoint? CopyAsPoint(MPoint geometry)
-        {
-            var point = geometry;
-            return point == null ? null : new MPoint(point);
         }
 
         private static int _counter;
@@ -151,7 +146,7 @@ namespace Mapsui.Layers
             Debug.WriteLine("-------------------------------------------------");
         }
 
-        private static MPoint FindPreviousPoint(IEnumerable<AnimatedItem>? previousItems, IFeature feature,
+        private static MPoint? FindPreviousPoint(IEnumerable<AnimatedItem>? previousItems, IFeature feature,
             string idField)
         {
             return previousItems?.FirstOrDefault(f => f.Feature[idField].Equals(feature[idField]))?.CurrentPoint;
@@ -179,7 +174,7 @@ namespace Mapsui.Layers
 
         private class AnimatedItem
         {
-            public PointFeature? Feature { get; set; }
+            public PointFeature Feature { get; set; }
             public MPoint? PreviousPoint { get; set; }
             public MPoint? CurrentPoint { get; set; }
         }

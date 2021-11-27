@@ -17,7 +17,7 @@ namespace Mapsui.Providers
         /// <summary>
         /// The spatial reference ID (CRS)
         /// </summary>
-        public string CRS { get; set; } = "";
+        public string? CRS { get; set; }
 
         private readonly MRect? _boundingBox;
 
