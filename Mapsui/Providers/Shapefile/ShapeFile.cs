@@ -466,7 +466,7 @@ namespace Mapsui.Providers.Shapefile
         /// Returns the extent of the data source
         /// </summary>
         /// <returns></returns>
-        public MRect GetExtent()
+        public MRect? GetExtent()
         {
             lock (_syncRoot)
             {

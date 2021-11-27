@@ -19,7 +19,7 @@ namespace Mapsui
         /// <summary>
         /// Projection type of Map. Normally in format like "EPSG:3857"
         /// </summary>
-        string CRS { get; set; }
+        string? CRS { get; set; }
 
         /// <summary>
         /// A collection of layers. The first layer in the list is drawn first, the last one on top.

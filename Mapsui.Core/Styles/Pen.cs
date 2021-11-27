@@ -3,7 +3,7 @@ namespace Mapsui.Styles
 {
     public class Pen
     {
-        public Pen() { }
+        public Pen() : this(Color.Transparent) { }
 
         public Pen(Color color, double width = 1)
         {

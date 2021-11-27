@@ -32,7 +32,7 @@ namespace Mapsui.Layers
         private class FeatureSets
         {
             public long TimeRequested { get; set; }
-            public IEnumerable<RasterFeature>? Features { get; set; }
+            public IEnumerable<RasterFeature> Features { get; set; } = new List<RasterFeature>();
         }
 
         private bool _isFetching;
@@ -74,7 +74,7 @@ namespace Mapsui.Layers
                 Task.Run(() => {
                     // Run in background because it could take time because
                     // this could involve database access or a web request
-                    Extent = DataSource.GetExtent();
+                    Extent = DataSource?.GetExtent();
                 });
             }
         }
@@ -134,10 +134,12 @@ namespace Mapsui.Layers
 
         private void StartNewFetch(FetchInfo fetchInfo)
         {
+            if (_dataSource == null) return;
+
             _isFetching = true;
             _needsUpdate = false;
 
-            var fetcher = new FeatureFetcher(new FetchInfo(fetchInfo), DataSource, DataArrived, DateTime.Now.Ticks);
+            var fetcher = new FeatureFetcher(new FetchInfo(fetchInfo), _dataSource, DataArrived, DateTime.Now.Ticks);
 
             Task.Run(() => {
                 try
@@ -167,7 +169,7 @@ namespace Mapsui.Layers
             {
                 features = features.ToList();
 
-                _sets.Add(new FeatureSets { TimeRequested = state == null ? 0: (long)state , Features = features });
+                _sets.Add(new FeatureSets { TimeRequested = state == null ? 0 : (long)state, Features = features });
 
                 //Keep only two most recent sets. The older ones will be removed
                 _sets = _sets.OrderByDescending(c => c.TimeRequested).Take(_numberOfFeaturesReturned).ToList();

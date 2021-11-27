@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using System.Threading;
 
 namespace Mapsui.Layers
@@ -15,7 +15,7 @@ namespace Mapsui.Layers
     public class AnimatedFeatures
     {
         private readonly Timer _animationTimer;
-        private List<AnimatedItem> _cache = new();
+        private List<AnimatedFeature> _cache = new();
         private long _startTimeAnimation;
         private readonly int _millisecondsBetweenUpdates;
 
@@ -46,7 +46,7 @@ namespace Mapsui.Layers
         {
             var previousCache = _cache;
 
-            _cache = ConvertToAnimatedItems(features.ToList(), previousCache, IdField);
+            _cache = ConvertToAnimatedFeatures(features.ToList(), previousCache, IdField);
             _startTimeAnimation = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
             _animationTimer.Change(_millisecondsBetweenUpdates, _millisecondsBetweenUpdates);
             _first = true;
@@ -59,7 +59,7 @@ namespace Mapsui.Layers
             var progress = CalculateProgress(_startTimeAnimation, AnimationDuration, Function);
             if (!Completed(progress)) InterpolateAnimatedPosition(_cache, progress, DistanceThreshold);
             else _animationTimer.Change(Timeout.Infinite, Timeout.Infinite);
-            return _cache.Select(f => f.Feature);
+            return _cache.Select(i => i.Feature);
         }
 
         private static bool Completed(double progress)
@@ -78,50 +78,30 @@ namespace Mapsui.Layers
             animatedPointLayer.OnAnimatedPositionChanged();
         }
 
-        private static void LogAllFeatures(IEnumerable<AnimatedItem> animatedItems)
+        private static void LogAllFeatures(IEnumerable<AnimatedFeature> animatedFeatures)
         {
             if (!_first) return;
             _first = false;
-
-            Debug.WriteLine("ITERATION: " + _counter + " ===========================================================================");
             _counter++;
 
-            foreach (var animatedItem in animatedItems)
+            foreach (var animatedFeature in animatedFeatures)
             {
-                var target = animatedItem.Feature?.Point;
-                if (animatedItem.PreviousPoint == null || animatedItem.CurrentPoint == null || target == null) continue;
-                if (animatedItem.PreviousPoint.Distance(animatedItem.CurrentPoint) < 10000) continue;
-                LogItem(animatedItem);
+                var target = animatedFeature.Feature?.Point;
+                if (animatedFeature.PreviousPoint == null || animatedFeature.CurrentPoint == null || target == null) continue;
+                if (animatedFeature.PreviousPoint.Distance(animatedFeature.CurrentPoint) < 10000) continue;
             }
         }
 
-        private static List<AnimatedItem> ConvertToAnimatedItems(IEnumerable<PointFeature> features,
-            List<AnimatedItem> previousItems, string idField)
+        private static List<AnimatedFeature> ConvertToAnimatedFeatures(
+            IEnumerable<PointFeature> features, List<AnimatedFeature> previousItems, string idField)
         {
-            var result = new List<AnimatedItem>();
-            foreach (var feature in features)
-            {
-                var animatedItem = new AnimatedItem
-                {
-                    Feature = feature,
-                    CurrentPoint = CopyAsPoint(feature.Point),
-                    PreviousPoint = CopyAsPoint(FindPreviousPoint(previousItems, feature, idField))
-                };
-                result.Add(animatedItem);
-            }
-            return result;
-        }
-
-        private static MPoint? CopyAsPoint(MPoint geometry)
-        {
-            var point = geometry;
-            return point == null ? null : new MPoint(point);
+            return features.Select(f => new AnimatedFeature(f, FindPreviousPoint(previousItems, f, idField))).ToList();
         }
 
         private static int _counter;
         private static bool _first = true;
 
-        private static void InterpolateAnimatedPosition(IEnumerable<AnimatedItem> items, double progress, double threshold)
+        private static void InterpolateAnimatedPosition(IEnumerable<AnimatedFeature> items, double progress, double threshold)
         {
             foreach (var item in items)
             {
@@ -133,27 +113,12 @@ namespace Mapsui.Layers
             }
         }
 
-        private static void LogItem(AnimatedItem item)
-        {
-            Debug.WriteLine("Trackee: " + item.Feature?["Trackee"]);
-            Debug.WriteLine("ID: " + item.Feature?["ID"]);
-            Debug.WriteLine("speed: " + item.Feature?["Speed"]);
-            Debug.WriteLine("Bps: " + item.Feature?["Bps"]);
-            Debug.WriteLine("DateGps: " + item.Feature?["DateGps"]);
-            Debug.WriteLine("DateReceived: " + item.Feature?["DateReceived"]);
-            Debug.WriteLine("Longitude: " + item.Feature?["Longitude"]);
-            Debug.WriteLine("Latitude: " + item.Feature?["Latitude"]);
-
-            Debug.WriteLine("X: " + item.CurrentPoint?.X);
-            Debug.WriteLine("Y: " + item.CurrentPoint?.Y);
-            Debug.WriteLine("Previous X: " + item.PreviousPoint?.X);
-            Debug.WriteLine("Previous Y: " + item.PreviousPoint?.Y);
-            Debug.WriteLine("-------------------------------------------------");
-        }
-
-        private static MPoint FindPreviousPoint(IEnumerable<AnimatedItem>? previousItems, IFeature feature,
+        private static MPoint? FindPreviousPoint(IEnumerable<AnimatedFeature>? previousItems, IFeature feature,
             string idField)
         {
+            // There is no guarantee the idField is set since the features are added by the user. Things do not crash
+            // right now because AnimatedPointSample a feature is created with an "ID" field. This is an unresolved
+            // issue.
             return previousItems?.FirstOrDefault(f => f.Feature[idField].Equals(feature[idField]))?.CurrentPoint;
         }
 
@@ -174,14 +139,39 @@ namespace Mapsui.Layers
 
         private static double CubicEaseOut(double d, double t)
         {
-            return (t = t / d - 1) * t * t + 1;
+            return ((t = (t / d) - 1) * t * t) + 1;
         }
 
-        private class AnimatedItem
+        private class AnimatedFeature
         {
-            public PointFeature? Feature { get; set; }
-            public MPoint? PreviousPoint { get; set; }
+            public AnimatedFeature(PointFeature feature, MPoint? previousPoint)
+            {
+                Feature = feature;
+                CurrentPoint = new MPoint(feature.Point);
+                if (previousPoint != null)
+                    PreviousPoint = new MPoint(previousPoint);
+            }
+            public PointFeature Feature { get; }
             public MPoint? CurrentPoint { get; set; }
+            public MPoint? PreviousPoint { get; }
+
+            public override string ToString()
+            {
+                var stringBuilder = new StringBuilder();
+                stringBuilder.Append("Trackee: " + Feature?["Trackee"]);
+                stringBuilder.Append(", ID: " + Feature?["ID"]);
+                stringBuilder.Append(", speed: " + Feature?["Speed"]);
+                stringBuilder.Append(", Bps: " + Feature?["Bps"]);
+                stringBuilder.Append(", DateGps: " + Feature?["DateGps"]);
+                stringBuilder.Append(", DateReceived: " + Feature?["DateReceived"]);
+                stringBuilder.Append(", Longitude: " + Feature?["Longitude"]);
+                stringBuilder.Append(", Latitude: " + Feature?["Latitude"]);
+                stringBuilder.Append(", X: " + CurrentPoint?.X);
+                stringBuilder.Append(", Y: " + CurrentPoint?.Y);
+                stringBuilder.Append(", Previous X: " + PreviousPoint?.X);
+                stringBuilder.Append(", Previous Y: " + PreviousPoint?.Y);
+                return stringBuilder.ToString();
+            }
         }
     }
 }

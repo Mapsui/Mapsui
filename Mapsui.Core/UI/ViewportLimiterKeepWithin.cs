@@ -48,8 +48,10 @@ namespace Mapsui.UI
             IReadOnlyList<double> mapResolutions, MRect? mapEnvelope)
         {
             var zoomLimits = ZoomLimits ?? GetExtremes(mapResolutions);
-            var panLimit = PanLimits ?? mapEnvelope;
             if (zoomLimits == null) return resolution;
+
+            var panLimit = PanLimits ?? mapEnvelope;
+            if (panLimit == null) return resolution;
 
             if (zoomLimits.Min > resolution) return zoomLimits.Min;
 
