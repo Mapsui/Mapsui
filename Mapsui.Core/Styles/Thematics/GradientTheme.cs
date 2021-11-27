@@ -220,9 +220,6 @@ namespace Mapsui.Styles.Thematics
 
         private Brush InterpolateBrush(Brush min, Brush max, double attr)
         {
-            if (min.GetType() != typeof(Brush) || max.GetType() != typeof(Brush))
-                throw (new ArgumentException("Only Brush brushes are supported in GradientTheme"));
-
             return new Brush { Color = InterpolateColor(min.Color, max.Color, attr) };
         }
 
