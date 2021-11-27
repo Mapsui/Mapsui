@@ -139,10 +139,10 @@ namespace Mapsui.Layers
             OnChanged(copyLayersToAdd, copyLayersToRemove);
         }
 
-        public void Modify(Func<ILayer, bool> removePredicate, IEnumerable<ILayer>? layersToAdd)
+        public void Modify(Func<ILayer, bool> removePredicate, IEnumerable<ILayer> layersToAdd)
         {
             var copyLayersToRemove = _layers.ToArray().Where(removePredicate).ToArray();
-            var copyLayersToAdd = layersToAdd?.ToArray();
+            var copyLayersToAdd = layersToAdd.ToArray();
 
             RemoveLayers(copyLayersToRemove);
             AddLayers(copyLayersToAdd);
