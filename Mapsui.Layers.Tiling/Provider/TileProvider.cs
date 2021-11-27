@@ -40,7 +40,7 @@ namespace Mapsui.Providers
             return _source.Schema.Extent.ToMRect();
         }
 
-        public string CRS { get; set; } = "";
+        public string? CRS { get; set; }
 
         public TileProvider(ITileSource tileSource)
         {
