@@ -6,7 +6,7 @@ using System.Timers;
 
 namespace Mapsui.Utilities
 {
-    public class Animation
+    public class Animation : IDisposable
     {
         // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
         private readonly Timer _timer;
@@ -135,6 +135,22 @@ namespace Mapsui.Utilities
                 _entries.AddRange(entries);
                 Start();
             }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            _timer.Dispose();
+        }
+
+        ~Animation()
+        {
+            Dispose(false);
         }
     }
 }

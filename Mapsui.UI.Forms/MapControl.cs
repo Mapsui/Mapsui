@@ -832,12 +832,18 @@ namespace Mapsui.UI.Forms
 
         public void Dispose()
         {
-            Unsubscribe();
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
-        protected void Dispose(bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
-            Unsubscribe();
+            CommonDispose(disposing);
+        }
+
+        ~MapControl()
+        {
+            Dispose(false);
         }
 
         private float GetPixelDensity()

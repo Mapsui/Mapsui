@@ -3,7 +3,7 @@ using Mapsui.Utilities;
 
 namespace Mapsui
 {
-    public interface INavigator
+    public interface INavigator : IDisposable
     {
         /// <summary>
         /// Called each time one of the navigation methods is called

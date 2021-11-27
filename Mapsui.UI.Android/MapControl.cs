@@ -368,16 +368,10 @@ namespace Mapsui.UI.Android
             Context?.StartActivity(chooser);
         }
 
-        public new void Dispose()
-        {
-            Unsubscribe();
-            base.Dispose();
-        }
-
         protected override void Dispose(bool disposing)
         {
-            Unsubscribe();
             base.Dispose(disposing);
+            CommonDispose(disposing);
         }
 
         private static (MPoint centre, double radius, double angle) GetPinchValues(List<MPoint> locations)
