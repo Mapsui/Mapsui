@@ -22,7 +22,7 @@ namespace Mapsui.Providers
         /// The CRS of the target. The source CRS will be projected to this target CRS. This should be equal to the
         /// CRS of the Map and the FetchInfo.CRS.
         /// </summary>
-        public string CRS { get; set; }
+        public string? CRS { get; set; }
 
         public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {

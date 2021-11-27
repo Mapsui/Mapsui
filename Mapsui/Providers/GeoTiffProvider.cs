@@ -184,7 +184,7 @@ namespace Mapsui.Providers
             return worldProperties;
         }
 
-        public string CRS { get; set; } = "";
+        public string? CRS { get; set; } = "";
 
         public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {

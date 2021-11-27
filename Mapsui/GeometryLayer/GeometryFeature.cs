@@ -24,7 +24,7 @@ namespace Mapsui.GeometryLayer
             Geometry = geometry;
         }
 
-        public IGeometry Geometry { get; set; }
+        public IGeometry? Geometry { get; set; }
 
         public MRect? Extent => Geometry?.BoundingBox.ToMRect(); // Todo: Make not-nullable
 

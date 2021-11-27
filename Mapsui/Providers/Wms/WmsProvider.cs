@@ -19,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -288,7 +289,7 @@ namespace Mapsui.Providers.Wms
             _mimeType = mimeType;
         }
 
-        public bool TryGetMap(IViewport viewport, out MRaster? raster)
+        public bool TryGetMap(IViewport viewport,[NotNullWhen(true)] out MRaster? raster)
         {
 
             int width;
@@ -441,7 +442,7 @@ namespace Mapsui.Providers.Wms
             return _wmsClient.GetMapRequests[0];
         }
 
-        public string CRS { get; set; }
+        public string? CRS { get; set; }
 
         public Dictionary<string, string> ExtraParams { get; set; }
 
@@ -473,7 +474,7 @@ namespace Mapsui.Providers.Wms
                 Width = (fetchInfo.Extent.Width / fetchInfo.Resolution),
                 Height = (fetchInfo.Extent.Height / fetchInfo.Resolution)
             };
-            if (TryGetMap(view, out MRaster raster))
+            if (TryGetMap(view, out var raster))
             {
                 features.Add(new RasterFeature(raster));
             }

@@ -90,7 +90,7 @@ namespace Mapsui.Providers.Wfs.Xml
         /// </summary>
         /// <param name="xPath">A compiled XPath expression</param>
         /// <param name="queryParameters">Parameters for the compiled XPath expression</param>
-        public abstract IXPathQueryManager GetXPathQueryManagerInContext(XPathExpression xPath,
+        public abstract IXPathQueryManager? GetXPathQueryManagerInContext(XPathExpression xPath,
                                                                          DictionaryEntry[]? queryParameters = null);
 
         /// <summary>

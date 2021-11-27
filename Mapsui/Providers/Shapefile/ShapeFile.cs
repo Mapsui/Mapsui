@@ -157,7 +157,7 @@ namespace Mapsui.Providers.Shapefile
         private ShapeType _shapeType;
         private BinaryReader _brShapeFile;
         private BinaryReader _brShapeIndex;
-        private readonly DbaseReader _dbaseFile;
+        private readonly DbaseReader? _dbaseFile;
         private FileStream _fsShapeFile;
         private FileStream _fsShapeIndex;
         private readonly object _syncRoot = new();
@@ -269,7 +269,7 @@ namespace Mapsui.Providers.Shapefile
         /// </example>
         /// </remarks>
         /// <seealso cref="FilterMethod"/>
-        public FilterMethod FilterDelegate { get; set; }
+        public FilterMethod? FilterDelegate { get; set; }
 
 
         private bool _disposed;
@@ -488,7 +488,7 @@ namespace Mapsui.Providers.Shapefile
         /// <summary>
         /// Gets or sets the spatial reference ID (CRS)
         /// </summary>
-        public string CRS { get; set; } = "";
+        public string? CRS { get; set; } = "";
 
         private void InitializeShape(string filename, bool fileBasedIndex)
         {
@@ -830,7 +830,7 @@ namespace Mapsui.Providers.Shapefile
         /// <param name="rowId"></param>
         /// <param name="features">Data table to feature should belong to.</param>
         /// <returns></returns>
-        public GeometryFeature GetFeature(uint rowId, List<GeometryFeature>? features = null)
+        public GeometryFeature? GetFeature(uint rowId, List<GeometryFeature>? features = null)
         {
             lock (_syncRoot)
             {
@@ -853,9 +853,12 @@ namespace Mapsui.Providers.Shapefile
             if (_dbaseFile != null)
             {
                 var dr = _dbaseFile.GetFeature(rowId, dt ?? new List<GeometryFeature>());
-                dr.Geometry = ReadGeometry(rowId);
-                if (FilterDelegate == null || FilterDelegate(dr))
-                    return dr;
+                if (dr != null)
+                {
+                    dr.Geometry = ReadGeometry(rowId);
+                    if (FilterDelegate == null || FilterDelegate(dr))
+                        return dr;
+                }
                 return null;
             }
             throw (new ApplicationException("An attempt was made to read DBase data from a shapefile without a valid .DBF file"));
@@ -875,12 +878,15 @@ namespace Mapsui.Providers.Shapefile
 
                     foreach (var index in objectList)
                     {
-                        var feature = _dbaseFile.GetFeature(index, features);
-                        feature.Geometry = ReadGeometry(index);
-                        if (feature.Geometry == null) continue;
-                        if (!feature.Geometry.BoundingBox.Intersects(fetchInfo.Extent.ToBoundingBox())) continue;
-                        if (FilterDelegate != null && !FilterDelegate(feature)) continue;
-                        features.Add(feature);
+                        var feature = _dbaseFile?.GetFeature(index, features);
+                        if (feature != null)
+                        {
+                            feature.Geometry = ReadGeometry(index);
+                            if (feature.Geometry?.BoundingBox == null) continue;
+                            if (!feature.Geometry.BoundingBox.Intersects(fetchInfo.Extent.ToBoundingBox())) continue;
+                            if (FilterDelegate != null && !FilterDelegate(feature)) continue;
+                            features.Add(feature);
+                        }
                     }
                     return features;
                 }
