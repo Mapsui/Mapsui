@@ -282,18 +282,18 @@ namespace Mapsui.Widgets.ScaleBar
         public (float scaleBarLength1, string? scaleBarText1, float scaleBarLength2, string? scaleBarText2)
             GetScaleBarLengthAndText(IReadOnlyViewport viewport)
         {
-            if (_map == null) return (0, null, 0, null);
+            if (_map?.CRS == null) return (0, null, 0, null);
 
             float length1;
             string text1;
 
-            (length1, text1) = CalculateScaleBarLengthAndValue(_map, Projection, viewport, MaxWidth, UnitConverter);
+            (length1, text1) = CalculateScaleBarLengthAndValue(_map.CRS, Projection, viewport, MaxWidth, UnitConverter);
 
             float length2;
             string? text2;
 
             if (SecondaryUnitConverter != null)
-                (length2, text2) = CalculateScaleBarLengthAndValue(_map, Projection, viewport, MaxWidth, SecondaryUnitConverter);
+                (length2, text2) = CalculateScaleBarLengthAndValue(_map.CRS, Projection, viewport, MaxWidth, SecondaryUnitConverter);
             else
                 (length2, text2) = (0, null);
 
@@ -513,13 +513,13 @@ namespace Mapsui.Widgets.ScaleBar
         /// @param unitConverter the DistanceUnitConverter to calculate for
         /// @return scaleBarLength and scaleBarText
         private static (float scaleBarLength, string scaleBarText) CalculateScaleBarLengthAndValue(
-            Map map, IProjection projection, IReadOnlyViewport viewport, float width, IUnitConverter unitConverter)
+            string CRS, IProjection projection, IReadOnlyViewport viewport, float width, IUnitConverter unitConverter)
         {
             // We have to calc the angle difference to the equator (angle = 0), 
             // because EPSG:3857 is only there 1 m. At other angles, we
             // should calculate the correct length.
 
-            var (_, y) = projection.Project(map.CRS, "EPSG:4326", viewport.Center.X, viewport.Center.Y); // clone or else you will project the original viewport center
+            var (_, y) = projection.Project(CRS, "EPSG:4326", viewport.Center.X, viewport.Center.Y); // clone or else you will project the original viewport center
 
             // Calc ground resolution in meters per pixel of viewport for this latitude
             var groundResolution = viewport.Resolution * Math.Cos(y / 180.0 * Math.PI);
