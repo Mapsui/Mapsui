@@ -32,7 +32,7 @@ namespace Mapsui.Layers
         private class FeatureSets
         {
             public long TimeRequested { get; set; }
-            public IEnumerable<RasterFeature>? Features { get; set; }
+            public IEnumerable<RasterFeature> Features { get; set; } = new List<RasterFeature>();
         }
 
         private bool _isFetching;
@@ -134,10 +134,12 @@ namespace Mapsui.Layers
 
         private void StartNewFetch(FetchInfo fetchInfo)
         {
+            if (_dataSource == null) return;
+
             _isFetching = true;
             _needsUpdate = false;
 
-            var fetcher = new FeatureFetcher(new FetchInfo(fetchInfo), DataSource, DataArrived, DateTime.Now.Ticks);
+            var fetcher = new FeatureFetcher(new FetchInfo(fetchInfo), _dataSource, DataArrived, DateTime.Now.Ticks);
 
             Task.Run(() => {
                 try
