@@ -116,6 +116,9 @@ namespace Mapsui.Layers
         private static MPoint? FindPreviousPoint(IEnumerable<AnimatedFeature>? previousItems, IFeature feature,
             string idField)
         {
+            // There is no guarantee the idField is set since the features are added by the user. Things do not crash
+            // right now because AnimatedPointSample a feature is created with an "ID" field. This is an unresolved
+            // issue.
             return previousItems?.FirstOrDefault(f => f.Feature[idField].Equals(feature[idField]))?.CurrentPoint;
         }
 
