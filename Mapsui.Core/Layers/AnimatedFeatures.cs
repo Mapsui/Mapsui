@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using System.Threading;
 
 namespace Mapsui.Layers
@@ -46,7 +46,7 @@ namespace Mapsui.Layers
         {
             var previousCache = _cache;
 
-            _cache = ConvertToAnimatedItems(features.ToList(), previousCache, IdField);
+            _cache = ConvertToAnimatedFeatures(features.ToList(), previousCache, IdField);
             _startTimeAnimation = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
             _animationTimer.Change(_millisecondsBetweenUpdates, _millisecondsBetweenUpdates);
             _first = true;
@@ -78,24 +78,21 @@ namespace Mapsui.Layers
             animatedPointLayer.OnAnimatedPositionChanged();
         }
 
-        private static void LogAllFeatures(IEnumerable<AnimatedFeature> animatedItems)
+        private static void LogAllFeatures(IEnumerable<AnimatedFeature> animatedFeatures)
         {
             if (!_first) return;
             _first = false;
-
-            Debug.WriteLine("ITERATION: " + _counter + " ===========================================================================");
             _counter++;
 
-            foreach (var animatedItem in animatedItems)
+            foreach (var animatedFeature in animatedFeatures)
             {
-                var target = animatedItem.Feature?.Point;
-                if (animatedItem.PreviousPoint == null || animatedItem.CurrentPoint == null || target == null) continue;
-                if (animatedItem.PreviousPoint.Distance(animatedItem.CurrentPoint) < 10000) continue;
-                LogItem(animatedItem);
+                var target = animatedFeature.Feature?.Point;
+                if (animatedFeature.PreviousPoint == null || animatedFeature.CurrentPoint == null || target == null) continue;
+                if (animatedFeature.PreviousPoint.Distance(animatedFeature.CurrentPoint) < 10000) continue;
             }
         }
 
-        private static List<AnimatedFeature> ConvertToAnimatedItems(
+        private static List<AnimatedFeature> ConvertToAnimatedFeatures(
             IEnumerable<PointFeature> features, List<AnimatedFeature> previousItems, string idField)
         {
             return features.Select(f => new AnimatedFeature(f, FindPreviousPoint(previousItems, f, idField))).ToList();
@@ -114,24 +111,6 @@ namespace Mapsui.Layers
                 target.X = item.PreviousPoint.X + (item.CurrentPoint.X - item.PreviousPoint.X) * progress;
                 target.Y = item.PreviousPoint.Y + (item.CurrentPoint.Y - item.PreviousPoint.Y) * progress;
             }
-        }
-
-        private static void LogItem(AnimatedFeature item)
-        {
-            Debug.WriteLine("Trackee: " + item.Feature?["Trackee"]);
-            Debug.WriteLine("ID: " + item.Feature?["ID"]);
-            Debug.WriteLine("speed: " + item.Feature?["Speed"]);
-            Debug.WriteLine("Bps: " + item.Feature?["Bps"]);
-            Debug.WriteLine("DateGps: " + item.Feature?["DateGps"]);
-            Debug.WriteLine("DateReceived: " + item.Feature?["DateReceived"]);
-            Debug.WriteLine("Longitude: " + item.Feature?["Longitude"]);
-            Debug.WriteLine("Latitude: " + item.Feature?["Latitude"]);
-
-            Debug.WriteLine("X: " + item.CurrentPoint?.X);
-            Debug.WriteLine("Y: " + item.CurrentPoint?.Y);
-            Debug.WriteLine("Previous X: " + item.PreviousPoint?.X);
-            Debug.WriteLine("Previous Y: " + item.PreviousPoint?.Y);
-            Debug.WriteLine("-------------------------------------------------");
         }
 
         private static MPoint? FindPreviousPoint(IEnumerable<AnimatedFeature>? previousItems, IFeature feature,
@@ -172,6 +151,24 @@ namespace Mapsui.Layers
             public PointFeature Feature { get; }
             public MPoint? CurrentPoint { get; set; }
             public MPoint? PreviousPoint { get; }
+
+            public override string ToString()
+            {
+                var stringBuilder = new StringBuilder();
+                stringBuilder.Append("Trackee: " + Feature?["Trackee"]);
+                stringBuilder.Append(", ID: " + Feature?["ID"]);
+                stringBuilder.Append(", speed: " + Feature?["Speed"]);
+                stringBuilder.Append(", Bps: " + Feature?["Bps"]);
+                stringBuilder.Append(", DateGps: " + Feature?["DateGps"]);
+                stringBuilder.Append(", DateReceived: " + Feature?["DateReceived"]);
+                stringBuilder.Append(", Longitude: " + Feature?["Longitude"]);
+                stringBuilder.Append(", Latitude: " + Feature?["Latitude"]);
+                stringBuilder.Append(", X: " + CurrentPoint?.X);
+                stringBuilder.Append(", Y: " + CurrentPoint?.Y);
+                stringBuilder.Append(", Previous X: " + PreviousPoint?.X);
+                stringBuilder.Append(", Previous Y: " + PreviousPoint?.Y);
+                return stringBuilder.ToString();
+            }
         }
     }
 }
