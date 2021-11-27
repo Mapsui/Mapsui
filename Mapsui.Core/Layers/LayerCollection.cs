@@ -128,10 +128,10 @@ namespace Mapsui.Layers
             return success;
         }
 
-        public void Modify(IEnumerable<ILayer>? layersToRemove, IEnumerable<ILayer>? layersToAdd)
+        public void Modify(IEnumerable<ILayer> layersToRemove, IEnumerable<ILayer> layersToAdd)
         {
-            var copyLayersToRemove = layersToRemove?.ToArray();
-            var copyLayersToAdd = layersToAdd?.ToArray();
+            var copyLayersToRemove = layersToRemove.ToArray();
+            var copyLayersToAdd = layersToAdd.ToArray();
 
             RemoveLayers(copyLayersToRemove);
             AddLayers(copyLayersToAdd);
