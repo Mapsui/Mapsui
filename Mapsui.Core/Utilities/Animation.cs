@@ -93,6 +93,7 @@ namespace Mapsui.Utilities
         {
             if (IsRunning)
             {
+                if (_stopwatch == null) return;
                 var ticks = (_stopwatch.ElapsedTicks - _stopwatchStart) / _durationTicks;
                 var changeType = (ticks >= 1.0) ? ChangeType.Discrete : ChangeType.Continuous;
                 Ticked?.Invoke(sender, new AnimationEventArgs(ticks, changeType));
@@ -102,6 +103,7 @@ namespace Mapsui.Utilities
         public void UpdateAnimations()
         {
             if (!IsRunning) return;
+            if (_stopwatch == null) return;
 
             double ticks = _stopwatch.ElapsedTicks - _stopwatchStart;
             var value = ticks / _durationTicks;
