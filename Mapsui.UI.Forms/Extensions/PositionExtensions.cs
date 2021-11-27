@@ -1,8 +1,7 @@
-﻿#if __MAUI__
+﻿using Mapsui.Projections;
+#if __MAUI__
 namespace Mapsui.UI.Maui.Extensions
 #else
-using Mapsui.Projections;
-
 namespace Mapsui.UI.Forms.Extensions
 #endif
 {
