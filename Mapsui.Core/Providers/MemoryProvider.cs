@@ -19,7 +19,7 @@ namespace Mapsui.Providers
         /// </summary>
         public string CRS { get; set; } = "";
 
-        private readonly MRect _boundingBox;
+        private readonly MRect? _boundingBox;
 
         public MemoryProvider()
         {
@@ -78,12 +78,12 @@ namespace Mapsui.Providers
         /// BoundingBox of data set
         /// </summary>
         /// <returns>BoundingBox</returns>
-        public MRect GetExtent()
+        public MRect? GetExtent()
         {
             return _boundingBox;
         }
 
-        private static MRect GetExtent(IReadOnlyList<T> features)
+        private static MRect? GetExtent(IReadOnlyList<T> features)
         {
             MRect? box = null;
             foreach (var feature in features)
