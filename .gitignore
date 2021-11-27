@@ -73,3 +73,5 @@ AppPackages/
 *.nupkg
 
 .idea
+.DS_Store
+
