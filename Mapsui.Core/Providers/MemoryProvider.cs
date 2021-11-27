@@ -58,7 +58,7 @@ namespace Mapsui.Providers
             fetchInfo = new FetchInfo(fetchInfo);
             // Use a larger extent so that symbols partially outside of the extent are included
             var biggerBox = fetchInfo.Extent.Grow(fetchInfo.Resolution * SymbolSize * 0.5);
-            var grownFeatures = features.Where(f => f != null && f.Extent.Intersects(biggerBox));
+            var grownFeatures = features.Where(f => f != null && (f.Extent?.Intersects(biggerBox) ?? false));
 
             return grownFeatures.ToList();
         }
@@ -69,7 +69,7 @@ namespace Mapsui.Providers
         /// <param name="value">Value to search for</param>
         /// <param name="fieldName">Name of the field to search in. This is the key of the T dictionary</param>
         /// <returns></returns>
-        public T Find(object? value, string fieldName)
+        public T? Find(object? value, string fieldName)
         {
             return Features.FirstOrDefault(f => value != null && f[fieldName] == value);
         }

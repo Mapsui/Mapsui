@@ -79,7 +79,7 @@ namespace Mapsui.Providers.Wfs
         /// This cache (obtained from an already instantiated dataprovider that retrieves a featuretype hosted by the same service) 
         /// helps to speed up gathering metadata. It caches the 'GetCapabilities' response. 
         /// </summary>
-        public IXPathQueryManager GetCapabilitiesCache
+        public IXPathQueryManager? GetCapabilitiesCache
         {
             get => _featureTypeInfoQueryManager;
             set => _featureTypeInfoQueryManager = value;
@@ -946,7 +946,7 @@ namespace Mapsui.Providers.Wfs
         /// <param name="box"></param>
         /// <param name="resolution">unused parameter (for backwards compatibility)</param>
         /// <returns>Features within the specified <see cref="Mapsui.Geometries.BoundingBox"/></returns>
-        public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
+        public IEnumerable<IFeature>? GetFeatures(FetchInfo fetchInfo)
         {
             return ExecuteIntersectionQuery(fetchInfo.Extent.ToBoundingBox());
         }

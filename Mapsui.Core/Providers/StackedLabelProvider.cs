@@ -146,7 +146,7 @@ namespace Mapsui.Providers
             var style = layerStyle;
 
             // todo: This method should repeated several times until there are no more merges
-            foreach (var feature in features.OrderBy(f => f.Extent.Centroid.Y))
+            foreach (var feature in features.OrderBy(f => f.Extent?.Centroid.Y))
             {
                 if (layerStyle is IThemeStyle themeStyle)
                     style = themeStyle.GetStyle(feature);
@@ -158,7 +158,7 @@ namespace Mapsui.Providers
 
                 var found = false;
                 foreach (var cluster in clusters)
-                    if (cluster.Box?.Grow(minDistance).Contains(feature.Extent.Centroid) ?? false)
+                    if (cluster.Box?.Grow(minDistance).Contains(feature.Extent?.Centroid) ?? false)
                     {
                         cluster.Features?.Add(feature);
                         cluster.Box = cluster.Box.Join(feature.Extent);
@@ -168,7 +168,8 @@ namespace Mapsui.Providers
 
                 if (found) continue;
 
-                clusters.Add(new Cluster(feature.Extent.Clone(), new List<IFeature> { feature }));
+                if (feature.Extent != null)
+                    clusters.Add(new Cluster(feature.Extent.Clone(), new List<IFeature> { feature }));
             }
         }
 

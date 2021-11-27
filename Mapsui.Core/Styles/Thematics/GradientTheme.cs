@@ -143,55 +143,61 @@ namespace Mapsui.Styles.Thematics
 
         private void CalculateVectorStyle(VectorStyle? style, VectorStyle? min, VectorStyle? max, double value)
         {
+            if (style == null)
+                return;
             var dFrac = Fraction(value);
             double fFrac = Convert.ToSingle(dFrac);
-            style.Enabled = (dFrac > 0.5 ? min.Enabled : max.Enabled);
+            style.Enabled = (dFrac > 0.5 ? min?.Enabled ?? false : max?.Enabled ?? false);
             if (FillColorBlend != null)
                 style.Fill = new Brush { Color = FillColorBlend.GetColor(fFrac) };
-            else if (min.Fill != null && max.Fill != null)
+            else if (min?.Fill != null && max?.Fill != null)
                 style.Fill = InterpolateBrush(min.Fill, max.Fill, value);
 
-            if (min.Line != null && max.Line != null)
+            if (min?.Line != null && max?.Line != null)
                 style.Line = InterpolatePen(min.Line, max.Line, value);
-            if (LineColorBlend != null)
+            if (LineColorBlend != null && style.Line != null)
                 style.Line.Color = LineColorBlend.GetColor(fFrac);
 
-            if (min.Outline != null && max.Outline != null)
+            if (min?.Outline != null && max?.Outline != null)
                 style.Outline = InterpolatePen(min.Outline, max.Outline, value);
         }
 
         private void CalculateSymbolStyle(SymbolStyle? style, SymbolStyle? min, SymbolStyle? max, double value)
         {
+            if (style == null)
+                return;
             var dFrac = Fraction(value);
-            style.BitmapId = (dFrac > 0.5) ? min.BitmapId : max.BitmapId;
-            style.SymbolOffset = (dFrac > 0.5 ? min.SymbolOffset : max.SymbolOffset);
+            style.BitmapId = (dFrac > 0.5) ? min?.BitmapId ?? 0 : max?.BitmapId ?? 0;
+            style.SymbolOffset = (dFrac > 0.5 ? min?.SymbolOffset ?? new Offset() : max?.SymbolOffset ?? new Offset());
             //We don't interpolate the offset but let it follow the symbol instead
-            style.SymbolScale = InterpolateDouble(min.SymbolScale, max.SymbolScale, value);
+            style.SymbolScale = InterpolateDouble(min?.SymbolScale, max?.SymbolScale, value);
         }
 
         private void CalculateLabelStyle(LabelStyle? style, LabelStyle? min, LabelStyle? max, double value)
         {
-            style.CollisionDetection = min.CollisionDetection;
-            style.Enabled = InterpolateBool(min.Enabled, max.Enabled, value);
-            style.LabelColumn = InterpolateString(min.LabelColumn, max.LabelColumn, value);
+            if (style == null)
+                return;
+            style.CollisionDetection = min?.CollisionDetection ?? false;
+            style.Enabled = InterpolateBool(min?.Enabled ?? false, max?.Enabled ?? false, value);
+            style.LabelColumn = InterpolateString(min?.LabelColumn, max?.LabelColumn, value);
 
-            var fontSize = InterpolateDouble(min.Font.Size, max.Font.Size, value);
-            style.Font = new Font { FontFamily = min.Font.FontFamily, Size = fontSize };
+            var fontSize = InterpolateDouble(min?.Font.Size, max?.Font.Size, value);
+            style.Font = new Font { FontFamily = min?.Font.FontFamily, Size = fontSize };
 
-            if (min.BackColor != null && max.BackColor != null)
+            if (min?.BackColor != null && max?.BackColor != null)
                 style.BackColor = InterpolateBrush(min.BackColor, max.BackColor, value);
 
             style.ForeColor = TextColorBlend == null ?
-                InterpolateColor(min.ForeColor, max.ForeColor, value) :
-                LineColorBlend.GetColor(Convert.ToSingle(Fraction(value)));
+                InterpolateColor(min?.ForeColor, max?.ForeColor, value) :
+                TextColorBlend.GetColor(Convert.ToSingle(Fraction(value)));
 
-            if (min.Halo != null && max.Halo != null)
+            if (min?.Halo != null && max?.Halo != null)
                 style.Halo = InterpolatePen(min.Halo, max.Halo, value);
 
-            var x = InterpolateDouble(min.Offset.X, max.Offset.X, value);
-            var y = InterpolateDouble(min.Offset.Y, max.Offset.Y, value);
+            var x = InterpolateDouble(min?.Offset.X, max?.Offset.X, value);
+            var y = InterpolateDouble(min?.Offset.Y, max?.Offset.Y, value);
             style.Offset = new Offset { X = x, Y = y };
-            style.LabelColumn = min.LabelColumn;
+            style.LabelColumn = min?.LabelColumn;
         }
 
         private double Fraction(double attr)
@@ -207,15 +213,17 @@ namespace Mapsui.Styles.Thematics
             return frac > 0.5 ? max : min;
         }
 
-        private string InterpolateString(string min, string max, double attr)
+        private string? InterpolateString(string? min, string? max, double attr)
         {
             var frac = Fraction(attr);
             return frac > 0.5 ? max : min;
         }
 
-        private double InterpolateDouble(double min, double max, double attr)
+        private double InterpolateDouble(double? min, double? max, double attr)
         {
-            return (max - min) * Fraction(attr) + min;
+            min ??= 0;
+            max ??= 0;
+            return (max.Value - min.Value) * Fraction(attr) + min.Value;
         }
 
         private Brush InterpolateBrush(Brush min, Brush max, double attr)
@@ -232,8 +240,11 @@ namespace Mapsui.Styles.Thematics
             };
         }
 
-        private Color InterpolateColor(Color minCol, Color maxCol, double attr)
+        private Color InterpolateColor(Color? minCol, Color? maxCol, double attr)
         {
+            minCol ??= Color.Transparent;
+            maxCol ??= Color.Transparent;
+
             var frac = Fraction(attr);
             if (Math.Abs(frac - 1) < Utilities.Constants.Epsilon)
                 return maxCol;

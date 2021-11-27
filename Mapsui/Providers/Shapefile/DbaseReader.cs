@@ -77,8 +77,8 @@ namespace Mapsui.Providers.Shapefile
 
         public void Close()
         {
-            _br.Close();
-            _fs.Close();
+            _br?.Close();
+            _fs?.Close();
             _isOpen = false;
         }
 
@@ -148,7 +148,7 @@ namespace Mapsui.Providers.Shapefile
 
         private void ParseDbfHeader()
         {
-            if (_br.ReadByte() != 0x03)
+            if (_br?.ReadByte() != 0x03)
                 throw new NotSupportedException("Unsupported DBF Type");
 
             _lastUpdate = new DateTime(_br.ReadByte() + 1900, _br.ReadByte(), _br.ReadByte());
@@ -423,7 +423,7 @@ namespace Mapsui.Providers.Shapefile
             return ReadDbfValue(_dbaseColumns[colid]);
         }
 
-        private Encoding _encoding;
+        private Encoding? _encoding;
         private Encoding _fileEncoding;
 
         /// <summary>
@@ -432,7 +432,7 @@ namespace Mapsui.Providers.Shapefile
         /// <remarks>
         /// If the encoding type isn't set, the dbase driver will try to determine the correct <see cref="System.Text.Encoding"/>.
         /// </remarks>
-        public Encoding Encoding
+        public Encoding? Encoding
         {
             get => _encoding;
             set => _encoding = value;
