@@ -208,9 +208,9 @@ namespace Mapsui.Providers
                 Path.GetFileNameWithoutExtension(path);
         }
 
-        public bool? IsCrsSupported(string crs)
+        public bool? IsCrsSupported(string? crs)
         {
-            return string.Equals(crs.Trim(), CRS.Trim(), StringComparison.CurrentCultureIgnoreCase);
+            return string.Equals(crs?.Trim(), CRS?.Trim(), StringComparison.CurrentCultureIgnoreCase);
         }
     }
 }

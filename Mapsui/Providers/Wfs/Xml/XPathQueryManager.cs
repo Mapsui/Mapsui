@@ -327,15 +327,17 @@ namespace Mapsui.Providers.Wfs.Xml
             InitializeCustomContext(_paramContext);
         }
 
-        private void InitializeCustomContext(CustomQueryContext paramContext)
+        private void InitializeCustomContext(CustomQueryContext? paramContext)
         {
+            if (paramContext == null)
+                return;
             var namespaces = paramContext.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
             _paramContext = new CustomQueryContext((NameTable)paramContext.NameTable);
-            _paramContext.AddNamespace(namespaces);
+            if (namespaces != null)
+            {
+                _paramContext.AddNamespace(namespaces);
+            }
         }
-
-
-
 
         /// <summary>
         /// This class represents a custom context for XPath queries.

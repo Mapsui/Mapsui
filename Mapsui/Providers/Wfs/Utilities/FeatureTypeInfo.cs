@@ -152,7 +152,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         }
 
 
-        public List<string> LabelFields { get; set; } // temp solution 
+        public List<string>? LabelFields { get; set; } // temp solution 
 
 
 

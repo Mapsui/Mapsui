@@ -46,7 +46,7 @@ namespace Mapsui.Providers.Wms
     public class WmsProvider : IProjectingProvider
     {
         private string _mimeType;
-        private readonly Client _wmsClient;
+        private readonly Client? _wmsClient;
         private Func<string, Task<Stream>> _getStreamAsync;
 
         public WmsProvider(XmlDocument capabilities, Func<string, Task<Stream>>? getStreamAsync = null)
@@ -448,7 +448,7 @@ namespace Mapsui.Providers.Wms
 
         public MRect? GetExtent()
         {
-            return _wmsClient.Layer.BoundingBoxes.ContainsKey(CRS) ? _wmsClient.Layer.BoundingBoxes[CRS] : null;
+            return CRS != null && _wmsClient != null && _wmsClient.Layer.BoundingBoxes.ContainsKey(CRS) ? _wmsClient.Layer.BoundingBoxes[CRS] : null;
         }
 
         public bool? IsCrsSupported(string crs)
