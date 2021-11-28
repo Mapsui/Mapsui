@@ -1,9 +1,7 @@
 ﻿using Mapsui.Geometries;
-using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.UI.Objects;
 using System.Collections.Generic;
-﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
@@ -20,7 +18,6 @@ using Color = Microsoft.Maui.Graphics.Color;
 using KnownColor = Mapsui.UI.Maui.KnownColor;
 #else
 using Mapsui.UI.Forms.Extensions;
-using Mapsui.UI.Forms.Utils;
 using Xamarin.Forms;
 
 using Color = Xamarin.Forms.Color;
@@ -80,10 +77,12 @@ namespace Mapsui.UI.Forms
             switch (propertyName)
             {
                 case nameof(Positions):
-                    ((Geometries.Polygon)Feature.Geometry).ExteriorRing = new LinearRing(Positions.Select(p => p.ToPoint()).ToList());
+                    if (Feature.Geometry != null)
+                        ((Geometries.Polygon)Feature.Geometry).ExteriorRing = new LinearRing(Positions.Select(p => p.ToPoint()).ToList());
                     break;
                 case nameof(Holes):
-                    ((Geometries.Polygon)Feature.Geometry).InteriorRings = Holes.Select(h => new LinearRing(h.Select(p => p.ToPoint()).ToList())).ToList();
+                    if (Feature.Geometry != null)
+                        ((Geometries.Polygon)Feature.Geometry).InteriorRings = Holes.Select(h => new LinearRing(h.Select(p => p.ToPoint()).ToList())).ToList();
                     break;
                 case nameof(FillColor):
                     ((VectorStyle)Feature.Styles.First()).Fill = new Styles.Brush(FillColor.ToMapsui());

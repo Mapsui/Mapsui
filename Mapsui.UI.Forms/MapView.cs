@@ -1,14 +1,10 @@
 ﻿using Mapsui.Layers;
-using Mapsui.Rendering;
 using Mapsui.UI.Objects;
 using Mapsui.Widgets;
 using Mapsui.Extensions;
-using Mapsui.Providers;
 using Mapsui.Widgets.ButtonWidget;
-using Mapsui.Utilities;
 using SkiaSharp;
 using Svg.Skia;
-using System;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,8 +14,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Resources;
 using System.Runtime.CompilerServices;
-using Mapsui.Fetcher;
-using Mapsui.GeometryLayer;
 #if __MAUI__
 using Mapsui.UI.Maui.Extensions;
 using Microsoft.Maui;
@@ -33,16 +27,6 @@ using SkiaSharp.Views.Maui.Controls;
 using Rectangle = Microsoft.Maui.Graphics.Rectangle;
 #else
 using Mapsui.UI.Forms.Extensions;
-using SkiaSharp.Views.Forms;
-using Mapsui.Extensions;
-using Mapsui.GeometryLayer;
-using Mapsui.Providers;
-using Mapsui.UI.Forms.Extensions;
-using Mapsui.UI.Objects;
-using Mapsui.Widgets;
-using Mapsui.Widgets.ButtonWidget;
-using SkiaSharp;
-using Svg.Skia;
 using Xamarin.Forms;
 #endif
 

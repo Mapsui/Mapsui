@@ -3,13 +3,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using Mapsui.Extensions;
 using Mapsui.GeometryLayer;
-using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.UI.Objects;
-using System;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using Mapsui.Extensions;
 #if __MAUI__
 using Mapsui.UI.Maui.Extensions;
 using Microsoft.Maui;
