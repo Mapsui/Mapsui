@@ -935,7 +935,7 @@ namespace Mapsui.Providers.Wfs
                 if (get)
                 {
                     /* HTTP-GET */
-                    httpClientUtil.Url = httpClientUtil.Url.AppendQuery(_wfsTextResources.GetFeatureGETRequest(
+                    httpClientUtil.Url = httpClientUtil.Url?.AppendQuery(_wfsTextResources.GetFeatureGETRequest(
                         featureTypeInfo, labelProperties, boundingBox, filter));
                 }
                 else

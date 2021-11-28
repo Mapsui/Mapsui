@@ -55,7 +55,7 @@ namespace Mapsui.Providers.Wfs.Xml
         /// Initializes a new instance of the <see cref="XPathQueryManager"/> class.
         /// </summary>
         /// <param name="xPathDoc">An XmlDocument instance</param>
-        public XPathQueryManager(XPathDocument xPathDoc)
+        public XPathQueryManager(XPathDocument? xPathDoc)
         {
             SetDocumentToParse(xPathDoc);
             _paramContext = new CustomQueryContext(new NameTable());
@@ -98,7 +98,7 @@ namespace Mapsui.Providers.Wfs.Xml
         /// <param name="xPathDoc">An XmlDocument instance</param>
         /// <param name="xIter">An XPathNodeIterator instance</param>
         /// <param name="paramContext">A <see cref="XPathQueryManager.CustomQueryContext"/> instance for parameterized XPath expressions</param>
-        private XPathQueryManager(XPathDocument xPathDoc, XPathNodeIterator? xIter, CustomQueryContext? paramContext)
+        private XPathQueryManager(XPathDocument? xPathDoc, XPathNodeIterator? xIter, CustomQueryContext? paramContext)
             : this(xPathDoc)
         {
             if (xIter != null)
@@ -186,8 +186,9 @@ namespace Mapsui.Providers.Wfs.Xml
         {
             var valuesList = new List<string>();
             FindXPath(xPath);
-            while (_xIter.MoveNext())
-                valuesList.Add(_xIter.Current.ToString());
+            while (_xIter?.MoveNext() ?? false)
+                if (_xIter.Current != null)
+                    valuesList.Add(_xIter.Current.ToString());
             return valuesList;
         }
 

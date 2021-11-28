@@ -22,10 +22,10 @@ namespace Mapsui.Providers.Wfs.Utilities
 
         protected const string Gmlns = "http://www.opengis.net/gml";
         private readonly NumberFormatInfo _formatInfo = new();
-        private readonly HttpClientUtil _httpClientUtil;
+        private readonly HttpClientUtil? _httpClientUtil;
         private readonly List<IPathNode> _pathNodes = new();
         protected AlternativePathNodesCollection? CoordinatesNode;
-        private string? _cs;
+        private string _cs = ",";
         protected IPathNode? FeatureNode;
         protected XmlReader? FeatureReader;
         protected readonly WfsFeatureTypeInfo FeatureTypeInfo;
@@ -33,13 +33,13 @@ namespace Mapsui.Providers.Wfs.Utilities
         protected Collection<Geometry> Geoms = new();
         protected readonly IPathNode? LabelNode;
         protected AlternativePathNodesCollection? ServiceExceptionNode;
-        private string? _ts;
+        private string _ts = " ";
         protected XmlReader XmlReader;
 
         /// <summary>
         /// Gets or sets the axis order
         /// </summary>
-        internal int[]? AxisOrder { get; set; }
+        internal int[] AxisOrder { get; set; } = { 0, 1 }; // default value
 
         /// <summary>
         /// Protected constructor for the abstract class.
@@ -87,8 +87,6 @@ namespace Mapsui.Providers.Wfs.Utilities
             InitializePathNodes();
             InitializeSeparators();
         }
-
-
 
         /// <summary>
         /// Abstract method - overwritten by derived classes for producing instances
@@ -148,10 +146,12 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <param name="labels">A dictionary for recording label values. Pass 'null' to ignore searching for label values</param>
         /// <param name="pathNodes">A list of <see cref="IPathNode"/> instances defining the context of the retrieved reader</param>
         /// <returns>A sub-reader of the XmlReader given as argument</returns>
-        protected XmlReader? GetSubReaderOf(XmlReader reader, Dictionary<string, string>? labels, params IPathNode[] pathNodes)
+        protected XmlReader? GetSubReaderOf(XmlReader reader, Dictionary<string, string>? labels, params IPathNode?[] pathNodes)
         {
+            if (pathNodes.All(f => f == null))
+                return null;
             _pathNodes.Clear();
-            _pathNodes.AddRange(pathNodes);
+            _pathNodes.AddRange(pathNodes.Where(f => f != null)!);
             return GetSubReaderOf(reader, labels, _pathNodes);
         }
 
@@ -193,7 +193,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                             }
 
 
-                    if (!ServiceExceptionNode.Matches(reader)) continue;
+                    if (!(ServiceExceptionNode?.Matches(reader) ?? false)) continue;
 
                     var errorMessage = reader.ReadInnerXml();
                     Trace.TraceError("A service exception occured: " + errorMessage);
@@ -318,7 +318,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         internal PointFactory(XmlReader xmlReader, WfsFeatureTypeInfo featureTypeInfo)
             : base(xmlReader, featureTypeInfo)
         {
-            FeatureNode.IsActive = false;
+            FeatureNode!.IsActive = false;
         }
 
 
@@ -384,7 +384,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         internal LineStringFactory(XmlReader xmlReader, WfsFeatureTypeInfo featureTypeInfo)
             : base(xmlReader, featureTypeInfo)
         {
-            FeatureNode.IsActive = false;
+            FeatureNode!.IsActive = false;
         }
 
 
@@ -452,7 +452,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         internal PolygonFactory(XmlReader xmlReader, WfsFeatureTypeInfo featureTypeInfo)
             : base(xmlReader, featureTypeInfo)
         {
-            FeatureNode.IsActive = false;
+            FeatureNode!.IsActive = false;
         }
 
 
@@ -855,7 +855,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                         geometryTypeString = "PolygonPropertyType";
                         break;
                     }
-                    if (ServiceExceptionNode.Matches(XmlReader))
+                    if (ServiceExceptionNode?.Matches(XmlReader) ?? false)
                     {
                         var serviceException = XmlReader.ReadInnerXml();
                         Trace.TraceError("A service exception occured: " + serviceException);
