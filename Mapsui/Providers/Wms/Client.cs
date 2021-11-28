@@ -69,7 +69,7 @@ namespace Mapsui.Providers.Wms
             /// <summary>
             /// Type of online resource (Ex. request method 'Get' or 'Post')
             /// </summary>
-            public string Type;
+            public string? Type;
         }
 
 

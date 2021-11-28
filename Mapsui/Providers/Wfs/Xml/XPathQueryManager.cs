@@ -20,7 +20,7 @@ namespace Mapsui.Providers.Wfs.Xml
     {
 
         private CustomQueryContext? _paramContext;
-        private XPathNodeIterator _xIter;
+        private XPathNodeIterator? _xIter;
         private XPathNavigator? _xNav;
         private XPathDocument _xPathDoc;
 
@@ -85,9 +85,9 @@ namespace Mapsui.Providers.Wfs.Xml
         /// <param name="xPathDoc">An XmlDocument instance</param>
         /// <param name="xNav"></param>
         /// <param name="paramContext">A <see cref="XPathQueryManager.CustomQueryContext"/> instance for parameterized XPath expressions</param>
-        private XPathQueryManager(XPathDocument xPathDoc, XPathNavigator xNav, CustomQueryContext paramContext)
+        private XPathQueryManager(XPathDocument xPathDoc, XPathNavigator? xNav, CustomQueryContext? paramContext)
         {
-            _xNav = xNav.Clone();
+            _xNav = xNav?.Clone();
             SetDocumentToParse(xPathDoc);
             InitializeCustomContext(paramContext);
         }
@@ -98,7 +98,7 @@ namespace Mapsui.Providers.Wfs.Xml
         /// <param name="xPathDoc">An XmlDocument instance</param>
         /// <param name="xIter">An XPathNodeIterator instance</param>
         /// <param name="paramContext">A <see cref="XPathQueryManager.CustomQueryContext"/> instance for parameterized XPath expressions</param>
-        private XPathQueryManager(XPathDocument xPathDoc, XPathNodeIterator? xIter, CustomQueryContext paramContext)
+        private XPathQueryManager(XPathDocument xPathDoc, XPathNodeIterator? xIter, CustomQueryContext? paramContext)
             : this(xPathDoc)
         {
             if (xIter != null)
@@ -156,7 +156,8 @@ namespace Mapsui.Providers.Wfs.Xml
         /// <param name="queryParameters">Parameters for the compiled XPath expression</param>
         public XPathNodeIterator GetIterator(XPathExpression xPath, DictionaryEntry[] queryParameters)
         {
-            _paramContext.AddParam(queryParameters);
+            if (_paramContext != null)
+                _paramContext.AddParam(queryParameters);
             return GetIterator(xPath);
         }
 
@@ -165,13 +166,14 @@ namespace Mapsui.Providers.Wfs.Xml
         /// </summary>
         /// <param name="xPath">The compiled XPath expression</param>
         /// <param name="queryParameters">Parameters for the compiled XPath expression</param>
-        public string GetValueFromNode(XPathExpression xPath, DictionaryEntry[]? queryParameters = null)
+        public string? GetValueFromNode(XPathExpression xPath, DictionaryEntry[]? queryParameters = null)
         {
-            if (queryParameters != null) _paramContext.AddParam(queryParameters);
+            if (queryParameters != null && _paramContext != null)
+                _paramContext.AddParam(queryParameters);
             string? result = null;
             FindXPath(xPath);
-            if (_xIter.MoveNext())
-                result = _xIter.Current.Value;
+            if (_xIter?.MoveNext() ?? false)
+                result = _xIter?.Current?.Value;
             return result;
         }
 
@@ -195,7 +197,8 @@ namespace Mapsui.Providers.Wfs.Xml
         /// <param name="queryParameters">Parameters for the compiled XPath expression</param>
         public List<string> GetValuesFromNodes(XPathExpression xPath, DictionaryEntry[] queryParameters)
         {
-            _paramContext.AddParam(queryParameters);
+            if (_paramContext != null)
+                _paramContext.AddParam(queryParameters);
             return GetValuesFromNodes(xPath);
         }
 
@@ -207,9 +210,9 @@ namespace Mapsui.Providers.Wfs.Xml
         /// <param name="queryParameters">Parameters for the compiled XPath expression</param>
         public IXPathQueryManager? GetXPathQueryManagerInContext(XPathExpression xPath, DictionaryEntry[]? queryParameters = null)
         {
-            if (queryParameters != null) _paramContext.AddParam(queryParameters);
+            if (queryParameters != null && _paramContext != null) _paramContext.AddParam(queryParameters);
             FindXPath(xPath);
-            if (_xIter.MoveNext())
+            if (_xIter?.MoveNext() ?? false)
                 return new XPathQueryManager(_xPathDoc, _xIter, _paramContext);
             return null;
         }
@@ -323,7 +326,7 @@ namespace Mapsui.Providers.Wfs.Xml
         private void FindXPath(XPathExpression xPath)
         {
             xPath.SetContext(_paramContext);
-            _xIter = _xNav.Select(xPath);
+            _xIter = _xNav?.Select(xPath);
             InitializeCustomContext(_paramContext);
         }
 

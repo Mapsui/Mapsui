@@ -482,14 +482,14 @@ namespace Mapsui.Providers.Wfs.Utilities
                     {
                         var polygon = new Polygon();
 
-                        XmlReader outerBoundaryReader;
+                        XmlReader? outerBoundaryReader;
                         if (
                             (outerBoundaryReader =
                              GetSubReaderOf(GeomReader, null, outerBoundaryNodeAlt, linearRingNode, CoordinatesNode)) !=
                             null)
                             polygon.ExteriorRing = new LinearRing(ParseCoordinates(outerBoundaryReader));
 
-                        XmlReader innerBoundariesReader;
+                        XmlReader? innerBoundariesReader;
                         while (
                             (innerBoundariesReader =
                              GetSubReaderOf(GeomReader, null, innerBoundaryNodeAlt, linearRingNode, CoordinatesNode)) !=

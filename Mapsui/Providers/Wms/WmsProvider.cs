@@ -359,7 +359,7 @@ namespace Mapsui.Providers.Wms
         {
             var resource = GetPreferredMethod();
             var strReq = new StringBuilder(resource.OnlineResource);
-            if (!resource.OnlineResource.Contains("?"))
+            if (!resource.OnlineResource?.Contains("?") ?? false)
                 strReq.Append("?");
             if (!strReq.ToString().EndsWith("&") && !strReq.ToString().EndsWith("?"))
                 strReq.Append("&");
