@@ -86,7 +86,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <param name="boundingBox">The bounding box of the query</param>
         /// <param name="filter">An instance implementing <see cref="IFilter"/></param>
         public byte[] GetFeaturePOSTRequest(WfsFeatureTypeInfo featureTypeInfo, List<string>? labelProperties,
-                                            BoundingBox? boundingBox, IFilter filter)
+                                            BoundingBox? boundingBox, IFilter? filter)
         {
             var qualification = string.IsNullOrEmpty(featureTypeInfo.Prefix)
                                        ? string.Empty
@@ -104,7 +104,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                     xWriter.WriteAttributeString("typeName", qualification + featureTypeInfo.Name);
                     xWriter.WriteAttributeString("srsName", CrsHelper.EpsgPrefix + featureTypeInfo.SRID);
                     xWriter.WriteElementString("PropertyName", qualification + featureTypeInfo.Geometry.GeometryName);
-                    if (!labelProperties.All(string.IsNullOrWhiteSpace))
+                    if (labelProperties != null && !labelProperties.All(string.IsNullOrWhiteSpace))
                         xWriter.WriteElementString("PropertyName", string.Join(",",
                             labelProperties.Where(x => !string.IsNullOrWhiteSpace(x)).Select(lbl => qualification + lbl)));
 

@@ -55,19 +55,19 @@ namespace Mapsui.Providers.Wfs
 
 
         private readonly GeometryTypeEnum _geometryType = GeometryTypeEnum.Unknown;
-        private readonly string _getCapabilitiesUri;
+        private readonly string? _getCapabilitiesUri;
         private readonly HttpClientUtil _httpClientUtil = new HttpClientUtil();
         private readonly IWFS_TextResources _textResources;
         private readonly WFSVersionEnum _wfsVersion;
         private bool _disposed;
-        private string _featureType;
+        private string? _featureType;
         private WfsFeatureTypeInfo? _featureTypeInfo;
         private IXPathQueryManager? _featureTypeInfoQueryManager;
-        private string _nsPrefix;
+        private string? _nsPrefix;
         private bool _getFeatureGetRequest;
         private List<string> _labels = new List<string>();
         private bool _multiGeometries = true;
-        private IFilter _ogcFilter;
+        private IFilter? _ogcFilter;
         private bool _quickGeometries;
         private int[]? _axisOrder;
 
@@ -159,7 +159,7 @@ namespace Mapsui.Providers.Wfs
         /// <summary>
         /// Gets or sets an OGC Filter.
         /// </summary>
-        public IFilter OgcFilter
+        public IFilter? OgcFilter
         {
             get => _ogcFilter;
             set => _ogcFilter = value;
@@ -210,6 +210,7 @@ namespace Mapsui.Providers.Wfs
                    WFSVersionEnum wfsVersion)
         {
             _getCapabilitiesUri = getCapabilitiesUri;
+            _featureType = featureType;
 
             if (wfsVersion == WFSVersionEnum.WFS_1_0_0)
                 _textResources = new WFS_1_0_0_TextResources();
@@ -544,10 +545,10 @@ namespace Mapsui.Providers.Wfs
                 var config = new WFSClientHttpConfigurator(_textResources);
 
                 _featureTypeInfo.Prefix = _nsPrefix;
-                _featureTypeInfo.Name = _featureType;
+                _featureTypeInfo.Name = _featureType!; // is set in constructor
 
                 var featureQueryName = string.IsNullOrEmpty(_nsPrefix)
-                                              ? _featureType
+                                              ? _featureType! // is set in constructor
                                               : _nsPrefix + ":" + _featureType;
 
                 /***************************/
@@ -560,7 +561,7 @@ namespace Mapsui.Providers.Wfs
                     _featureTypeInfoQueryManager =
                         new XPathQueryManagerCompiledExpressionsDecorator(new XPathQueryManager());
                     _featureTypeInfoQueryManager.SetDocumentToParse(
-                        config.ConfigureForWfsGetCapabilitiesRequest(_httpClientUtil, _getCapabilitiesUri));
+                        config.ConfigureForWfsGetCapabilitiesRequest(_httpClientUtil, _getCapabilitiesUri!)); // is set in constructor
                     /* Namespaces for XPath queries */
                     _featureTypeInfoQueryManager.AddNamespace(_textResources.NSWFSPREFIX, _textResources.NSWFS);
                     _featureTypeInfoQueryManager.AddNamespace(_textResources.NSOWSPREFIX, _textResources.NSOWS);
@@ -684,7 +685,7 @@ namespace Mapsui.Providers.Wfs
                 /* Initialize IXPathQueryManager with configured HttpClientUtil */
                 describeFeatureTypeQueryManager.ResetNamespaces();
                 describeFeatureTypeQueryManager.SetDocumentToParse(config.ConfigureForWfsDescribeFeatureTypeRequest
-                                                                       (_httpClientUtil, describeFeatureTypeUri,
+                                                                       (_httpClientUtil, describeFeatureTypeUri!, // is set in constructor
                                                                         featureQueryName));
 
                 /* Namespaces for XPath queries */
@@ -928,7 +929,7 @@ namespace Mapsui.Providers.Wfs
             /// </summary>
             internal void ConfigureForWfsGetFeatureRequest(HttpClientUtil httpClientUtil,
                 WfsFeatureTypeInfo featureTypeInfo, List<string>? labelProperties, BoundingBox? boundingBox,
-                IFilter filter, bool get)
+                IFilter? filter, bool get)
             {
                 httpClientUtil.Reset();
                 httpClientUtil.Url = featureTypeInfo.ServiceUri;
