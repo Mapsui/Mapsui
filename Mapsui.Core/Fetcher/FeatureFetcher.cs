@@ -18,7 +18,7 @@ namespace Mapsui.Fetcher
         public FeatureFetcher(FetchInfo fetchInfo, IProvider<IFeature> provider, DataArrivedDelegate dataArrived, long timeOfRequest = default)
         {
             _dataArrived = dataArrived;
-            var biggerBox = fetchInfo.Extent?.Grow(
+            var biggerBox = fetchInfo.Extent.Grow(
                 SymbolStyle.DefaultWidth * 2 * fetchInfo.Resolution,
                 SymbolStyle.DefaultHeight * 2 * fetchInfo.Resolution);
             _fetchInfo = new FetchInfo(biggerBox, fetchInfo.Resolution, fetchInfo.CRS, fetchInfo.ChangeType);
@@ -31,7 +31,7 @@ namespace Mapsui.Fetcher
         {
             lock (_provider)
             {
-                var features = _provider.GetFeatures(_fetchInfo).ToList();
+                var features = _provider.GetFeatures(_fetchInfo).ToList() ?? new List<IFeature>();
                 _dataArrived.Invoke(features, _timeOfRequest);
             }
         }

@@ -486,6 +486,8 @@ namespace Mapsui.UI.Wpf
         {
             if (Viewport.Extent != null)
             {
+                if (Viewport.Extent == null)
+                    return;
                 var fetchInfo = new FetchInfo(Viewport.Extent, Viewport.Resolution, Map?.CRS, changeType);
                 _map?.RefreshData(fetchInfo);
             }
