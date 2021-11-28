@@ -7,13 +7,13 @@
         <StackLayout>
           <mapsui:MapView x:Name="mapView"
             IsVisible="True"
-		    VerticalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
             HorizontalOptions="Fill"
             IsZoomButtonVisible="True"
             IsMyLocationButtonVisible="True"
             IsNorthingButtonVisible="True"
             BackgroundColor="Gray" 
-		    Margin="10" />
+            Margin="10" />
           <Label x:Name="info" 
             HorizontalOptions="CenterAndExpand"
             Text="unknown" />

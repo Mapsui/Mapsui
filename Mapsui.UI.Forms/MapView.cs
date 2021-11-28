@@ -863,5 +863,12 @@ namespace Mapsui.UI.Forms
                 MyLocationLayer?.Dispose();
             }
         }
+
+        public void Reset()
+        {
+            Pins.Clear();
+            Drawables.Clear();
+            HideCallouts();
+        }
     }
 }

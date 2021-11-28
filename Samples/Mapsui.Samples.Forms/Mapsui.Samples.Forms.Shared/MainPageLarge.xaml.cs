@@ -102,6 +102,7 @@ namespace Mapsui.Samples.Forms
 
             if (sample != null)
             {
+                mapView.Reset();
                 sample.Setup(mapView);
             }
 
