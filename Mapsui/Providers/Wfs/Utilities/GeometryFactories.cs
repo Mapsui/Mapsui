@@ -31,7 +31,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         protected readonly WfsFeatureTypeInfo FeatureTypeInfo;
         protected XmlReader? GeomReader;
         protected Collection<Geometry> Geoms = new();
-        protected readonly IPathNode LabelNode;
+        protected readonly IPathNode? LabelNode;
         protected AlternativePathNodesCollection? ServiceExceptionNode;
         private string? _ts;
         protected XmlReader XmlReader;
@@ -39,7 +39,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <summary>
         /// Gets or sets the axis order
         /// </summary>
-        internal int[] AxisOrder { get; set; }
+        internal int[]? AxisOrder { get; set; }
 
         /// <summary>
         /// Protected constructor for the abstract class.
@@ -48,6 +48,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <param name="featureTypeInfo">A <see cref="WfsFeatureTypeInfo"/> instance providing metadata of the featuretype to query</param>
         protected GeometryFactory(HttpClientUtil httpClientUtil, WfsFeatureTypeInfo featureTypeInfo)
         {
+            XmlReader = default!;
             FeatureTypeInfo = featureTypeInfo;
             _httpClientUtil = httpClientUtil;
             CreateReader(httpClientUtil);

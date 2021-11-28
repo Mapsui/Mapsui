@@ -456,11 +456,11 @@ namespace Mapsui.Providers.Wms
                 throw new InvalidOperationException("Wms Client needs to be set");
             //We prefer get. Seek for supported 'get' method
             for (var i = 0; i < _wmsClient.GetMapRequests.Length; i++)
-                if (_wmsClient.GetMapRequests[i].Type.ToLower() == "get")
+                if (_wmsClient.GetMapRequests[i].Type?.ToLower() == "get")
                     return _wmsClient.GetMapRequests[i];
             //Next we prefer the 'post' method
             for (var i = 0; i < _wmsClient.GetMapRequests.Length; i++)
-                if (_wmsClient.GetMapRequests[i].Type.ToLower() == "post")
+                if (_wmsClient.GetMapRequests[i].Type?.ToLower() == "post")
                     return _wmsClient.GetMapRequests[i];
             return _wmsClient.GetMapRequests[0];
         }
