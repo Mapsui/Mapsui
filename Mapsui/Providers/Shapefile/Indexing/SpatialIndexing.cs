@@ -335,8 +335,10 @@ namespace Mapsui.Providers.Shapefile.Indexing
         /// <param name="box">BoundingBox to intersect with</param>
         /// <param name="node">Node to search from</param>
         /// <param name="list">List of found intersections</param>
-        private void IntersectTreeRecursive(MRect box, QuadTree node, ref Collection<uint> list)
+        private void IntersectTreeRecursive(MRect box, QuadTree? node, ref Collection<uint> list)
         {
+            if (node == null)
+                return;
             if (node.IsLeaf) //Leaf has been reached
             {
                 if (node._objList != null)
