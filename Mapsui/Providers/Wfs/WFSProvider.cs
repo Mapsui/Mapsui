@@ -716,21 +716,22 @@ namespace Mapsui.Providers.Wfs
 
                     /* read all the elements */
                     var iterator = geomQuery.GetIterator(geomQuery.Compile("//ancestor::xs:sequence/xs:element"));
-                    foreach (XPathNavigator node in iterator)
-                    {
-                        node.MoveToAttribute("type", string.Empty);
-                        var type = node.Value;
+                    if (iterator != null)
+                        foreach (XPathNavigator node in iterator)
+                        {
+                            node.MoveToAttribute("type", string.Empty);
+                            var type = node.Value;
 
-                        if (type.StartsWith("gml:")) // we skip geometry element cause we already found it
-                            continue;
+                            if (type.StartsWith("gml:")) // we skip geometry element cause we already found it
+                                continue;
 
-                        node.MoveToParent();
+                            node.MoveToParent();
 
-                        node.MoveToAttribute("name", string.Empty);
-                        var name = node.Value;
+                            node.MoveToAttribute("name", string.Empty);
+                            var name = node.Value;
 
-                        _featureTypeInfo.Elements.Add(new WfsFeatureTypeInfo.ElementInfo(name, type));
-                    }
+                            _featureTypeInfo.Elements.Add(new WfsFeatureTypeInfo.ElementInfo(name, type));
+                        }
                 }
                 else
                 {

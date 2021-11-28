@@ -15,12 +15,12 @@ namespace Mapsui.Providers.Wfs.Xml
     public interface IXPathQueryManager
     {
         void AddNamespace(string prefix, string ns);
-        XPathExpression Compile(string xPath);
+        XPathExpression? Compile(string xPath);
         IXPathQueryManager Clone();
-        XPathNodeIterator GetIterator(XPathExpression xPath);
-        XPathNodeIterator GetIterator(XPathExpression xPath, DictionaryEntry[] queryParameters);
-        string? GetValueFromNode(XPathExpression xPath, DictionaryEntry[]? queryParameters = null);
-        IXPathQueryManager? GetXPathQueryManagerInContext(XPathExpression xPath, DictionaryEntry[]? queryParameters = null);
+        XPathNodeIterator? GetIterator(XPathExpression? xPath);
+        XPathNodeIterator? GetIterator(XPathExpression xPath, DictionaryEntry[] queryParameters);
+        string? GetValueFromNode(XPathExpression? xPath, DictionaryEntry[]? queryParameters = null);
+        IXPathQueryManager? GetXPathQueryManagerInContext(XPathExpression? xPath, DictionaryEntry[]? queryParameters = null);
         void ResetNamespaces();
         void SetDocumentToParse(Stream documentStream);
         void SetDocumentToParse(HttpClientUtil httpClientUtil);

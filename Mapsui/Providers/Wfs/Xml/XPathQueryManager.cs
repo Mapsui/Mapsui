@@ -124,9 +124,9 @@ namespace Mapsui.Providers.Wfs.Xml
         /// </summary>
         /// <param name="xPath">The XPath string</param>
         /// <returns>A compiled XPath expression</returns>
-        public XPathExpression Compile(string xPath)
+        public XPathExpression? Compile(string xPath)
         {
-            return _xNav.Compile(xPath);
+            return _xNav?.Compile(xPath);
         }
 
         /// <summary>
@@ -143,10 +143,10 @@ namespace Mapsui.Providers.Wfs.Xml
         /// the XPath expression addresses.
         /// </summary>
         /// <param name="xPath">The compiled XPath expression</param>
-        public XPathNodeIterator GetIterator(XPathExpression xPath)
+        public XPathNodeIterator? GetIterator(XPathExpression? xPath)
         {
             FindXPath(xPath);
-            return _xIter.Clone();
+            return _xIter?.Clone();
         }
 
         /// <summary>
@@ -155,7 +155,7 @@ namespace Mapsui.Providers.Wfs.Xml
         /// </summary>
         /// <param name="xPath">The compiled XPath expression</param>
         /// <param name="queryParameters">Parameters for the compiled XPath expression</param>
-        public XPathNodeIterator GetIterator(XPathExpression xPath, DictionaryEntry[] queryParameters)
+        public XPathNodeIterator? GetIterator(XPathExpression xPath, DictionaryEntry[] queryParameters)
         {
             if (_paramContext != null)
                 _paramContext.AddParam(queryParameters);
@@ -167,7 +167,7 @@ namespace Mapsui.Providers.Wfs.Xml
         /// </summary>
         /// <param name="xPath">The compiled XPath expression</param>
         /// <param name="queryParameters">Parameters for the compiled XPath expression</param>
-        public string? GetValueFromNode(XPathExpression xPath, DictionaryEntry[]? queryParameters = null)
+        public string? GetValueFromNode(XPathExpression? xPath, DictionaryEntry[]? queryParameters = null)
         {
             if (queryParameters != null && _paramContext != null)
                 _paramContext.AddParam(queryParameters);
@@ -210,7 +210,7 @@ namespace Mapsui.Providers.Wfs.Xml
         /// </summary>
         /// <param name="xPath">The compiled XPath expression</param>
         /// <param name="queryParameters">Parameters for the compiled XPath expression</param>
-        public IXPathQueryManager? GetXPathQueryManagerInContext(XPathExpression xPath, DictionaryEntry[]? queryParameters = null)
+        public IXPathQueryManager? GetXPathQueryManagerInContext(XPathExpression? xPath, DictionaryEntry[]? queryParameters = null)
         {
             if (queryParameters != null && _paramContext != null) _paramContext.AddParam(queryParameters);
             FindXPath(xPath);
@@ -325,10 +325,11 @@ namespace Mapsui.Providers.Wfs.Xml
         /// This method sets the inherent XPathNodeIterator instance.
         /// </summary>
         /// <param name="xPath">A compiled XPath expression</param>
-        private void FindXPath(XPathExpression xPath)
+        private void FindXPath(XPathExpression? xPath)
         {
-            xPath.SetContext(_paramContext);
-            _xIter = _xNav?.Select(xPath);
+            xPath?.SetContext(_paramContext);
+            if (xPath != null)
+                _xIter = _xNav?.Select(xPath);
             InitializeCustomContext(_paramContext);
         }
 
