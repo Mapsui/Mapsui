@@ -133,6 +133,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
         /// </summary>
         private QuadTree()
         {
+            _box = default!;
         }
 
 

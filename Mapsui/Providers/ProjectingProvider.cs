@@ -32,7 +32,9 @@ namespace Mapsui.Providers
             if (fetchInfo.Extent == null) return new List<IFeature>();
 
             var copiedExtent = new MRect(fetchInfo.Extent);
-            _projection.Project(CRS, _provider.CRS, copiedExtent);
+
+            // throws exception when CRS or _provider.CRS is null (so I don't have to check it here)
+            _projection.Project(CRS!, _provider.CRS!, copiedExtent);
             fetchInfo = new FetchInfo(copiedExtent, fetchInfo.Resolution, CRS, fetchInfo.ChangeType);
 
             var features = _provider.GetFeatures(fetchInfo) ?? new List<IFeature>();
