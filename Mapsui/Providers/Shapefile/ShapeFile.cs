@@ -236,10 +236,16 @@ namespace Mapsui.Providers.Shapefile
         /// <remarks>
         /// The DBase default encoding is <see cref="System.Text.Encoding.UTF7"/>.
         /// </remarks>
-        public Encoding Encoding
+        public Encoding? Encoding
         {
-            get => _dbaseFile.Encoding;
-            set => _dbaseFile.Encoding = value;
+            get => _dbaseFile?.Encoding;
+            set
+            {
+                if (_dbaseFile != null)
+                {
+                    _dbaseFile.Encoding = value;
+                }
+            }
         }
 
         /// <summary>

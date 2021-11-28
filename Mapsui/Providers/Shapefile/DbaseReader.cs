@@ -96,7 +96,7 @@ namespace Mapsui.Providers.Shapefile
         /// <typeparam name="T">datatype to be indexed</typeparam>
         /// <param name="columnId">Column to index</param>
         /// <returns></returns>
-        public BinaryTree<T, uint> CreateDbfIndex<T>(int columnId) where T : IComparable<T>
+        public BinaryTree<T, uint> CreateDbfIndex<T>(int columnId) where T : IComparable<T?>
         {
             var tree = new BinaryTree<T, uint>();
             for (uint i = 0; i < ((_numberOfRecords > 10000) ? 10000 : _numberOfRecords); i++)
