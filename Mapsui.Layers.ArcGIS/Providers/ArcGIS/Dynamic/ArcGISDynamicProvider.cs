@@ -98,9 +98,9 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
 
             var features = new List<RasterFeature>();
 
-            IViewport viewport = fetchInfo.ToViewport();
+            IViewport? viewport = fetchInfo.ToViewport();
 
-            if (TryGetMap(viewport, out var raster))
+            if (viewport != null && TryGetMap(viewport, out var raster))
             {
                 features.Add(new RasterFeature(raster));
             }

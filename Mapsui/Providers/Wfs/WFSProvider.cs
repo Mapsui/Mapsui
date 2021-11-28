@@ -380,9 +380,9 @@ namespace Mapsui.Providers.Wfs
         /// </summary>
         /// <param name="bbox"></param>
         /// <returns>Features within the specified <see cref="Mapsui.Geometries.BoundingBox"/></returns>
-        public IEnumerable<IFeature>? ExecuteIntersectionQuery(BoundingBox? bbox)
+        public IEnumerable<IFeature> ExecuteIntersectionQuery(BoundingBox? bbox)
         {
-            if (_featureTypeInfo == null) return null;
+            if (_featureTypeInfo == null) return new List<IFeature>();
 
             var features = new List<IFeature>();
 
@@ -950,7 +950,7 @@ namespace Mapsui.Providers.Wfs
         /// <param name="box"></param>
         /// <param name="resolution">unused parameter (for backwards compatibility)</param>
         /// <returns>Features within the specified <see cref="Mapsui.Geometries.BoundingBox"/></returns>
-        public IEnumerable<IFeature>? GetFeatures(FetchInfo fetchInfo)
+        public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {
             return ExecuteIntersectionQuery(fetchInfo.Extent.ToBoundingBox());
         }
