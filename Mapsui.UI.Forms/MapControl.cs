@@ -413,11 +413,7 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Hover is called, when user move mouse over map without pressing mouse button
         /// </summary>
-#if __ANDROID__
         public event EventHandler<HoveredEventArgs>? Hovered;
-#else
-        public event EventHandler<HoveredEventArgs>? Hovered;
-#endif
 
         /// <summary>
         /// Swipe is called, when user release mouse button or lift finger while moving with a certain speed 
