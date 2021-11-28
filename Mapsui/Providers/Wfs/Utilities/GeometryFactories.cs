@@ -24,16 +24,16 @@ namespace Mapsui.Providers.Wfs.Utilities
         private readonly NumberFormatInfo _formatInfo = new();
         private readonly HttpClientUtil _httpClientUtil;
         private readonly List<IPathNode> _pathNodes = new();
-        protected AlternativePathNodesCollection CoordinatesNode;
-        private string _cs;
-        protected IPathNode FeatureNode;
+        protected AlternativePathNodesCollection? CoordinatesNode;
+        private string? _cs;
+        protected IPathNode? FeatureNode;
         protected XmlReader? FeatureReader;
-        protected WfsFeatureTypeInfo FeatureTypeInfo;
+        protected readonly WfsFeatureTypeInfo FeatureTypeInfo;
         protected XmlReader? GeomReader;
         protected Collection<Geometry> Geoms = new();
-        protected IPathNode LabelNode;
-        protected AlternativePathNodesCollection ServiceExceptionNode;
-        private string _ts;
+        protected readonly IPathNode LabelNode;
+        protected AlternativePathNodesCollection? ServiceExceptionNode;
+        private string? _ts;
         protected XmlReader XmlReader;
 
         /// <summary>

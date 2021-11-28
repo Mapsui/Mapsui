@@ -85,7 +85,7 @@ namespace Mapsui.Providers.Wfs.Xml
         /// <param name="xPathDoc">An XmlDocument instance</param>
         /// <param name="xNav"></param>
         /// <param name="paramContext">A <see cref="XPathQueryManager.CustomQueryContext"/> instance for parameterized XPath expressions</param>
-        private XPathQueryManager(XPathDocument xPathDoc, XPathNavigator? xNav, CustomQueryContext? paramContext)
+        private XPathQueryManager(XPathDocument? xPathDoc, XPathNavigator? xNav, CustomQueryContext? paramContext)
         {
             _xNav = xNav?.Clone();
             SetDocumentToParse(xPathDoc);
@@ -115,7 +115,8 @@ namespace Mapsui.Providers.Wfs.Xml
         /// <param name="ns">The namespace URI</param>
         public void AddNamespace(string prefix, string ns)
         {
-            _paramContext.AddNamespace(prefix, ns);
+            if (_paramContext != null)
+                _paramContext.AddNamespace(prefix, ns);
         }
 
         /// <summary>
@@ -282,10 +283,10 @@ namespace Mapsui.Providers.Wfs.Xml
         /// Sets a new XML document.
         /// </summary>
         /// <param name="xPathDoc">An XPathDocument instance</param>
-        private void SetDocumentToParse(XPathDocument xPathDoc)
+        private void SetDocumentToParse(XPathDocument? xPathDoc)
         {
             _xPathDoc = xPathDoc;
-            _xNav ??= _xPathDoc.CreateNavigator().Clone();
+            _xNav ??= _xPathDoc?.CreateNavigator().Clone();
         }
 
         /// <summary>

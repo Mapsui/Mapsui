@@ -175,7 +175,7 @@ namespace Mapsui.Providers.Wfs
         /// <summary>
         /// Gets or sets the network credentials used for authenticating the request with the Internet resource
         /// </summary>
-        public ICredentials Credentials
+        public ICredentials? Credentials
         {
             get => _httpClientUtil.Credentials;
             set => _httpClientUtil.Credentials = value;
@@ -184,7 +184,7 @@ namespace Mapsui.Providers.Wfs
         /// <summary>
         /// Gets and sets the proxy Url of the request. 
         /// </summary>
-        public string ProxyUrl
+        public string? ProxyUrl
         {
             get => _httpClientUtil.ProxyUrl;
             set => _httpClientUtil.ProxyUrl = value;
