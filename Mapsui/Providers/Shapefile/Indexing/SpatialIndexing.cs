@@ -219,15 +219,17 @@ namespace Mapsui.Providers.Shapefile.Indexing
         /// </summary>
         /// <param name="node">Node to save</param>
         /// <param name="sw">Reference to BinaryWriter</param>
-        private void SaveNode(QuadTree node, ref BinaryWriter sw)
+        private void SaveNode(QuadTree? node, ref BinaryWriter sw)
         {
+            if (node == null)
+                return;
             //Write node BoundingBox
             sw.Write(node.Box.Min.X);
             sw.Write(node.Box.Min.Y);
             sw.Write(node.Box.Max.X);
             sw.Write(node.Box.Max.Y);
             sw.Write(node.IsLeaf);
-            if (node.IsLeaf)
+            if (node.IsLeaf && node._objList != null)
             {
                 sw.Write(node._objList.Count); //Write number of features at node
                 for (var i = 0; i < node._objList.Count; i++) //Write each feature box
