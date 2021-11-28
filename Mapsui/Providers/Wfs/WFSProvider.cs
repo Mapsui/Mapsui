@@ -601,7 +601,7 @@ namespace Mapsui.Providers.Wfs
                 {
                     var bbox = new WfsFeatureTypeInfo.BoundingBox();
                     var formatInfo = new NumberFormatInfo { NumberDecimalSeparator = "." };
-                    string bboxVal;
+                    string? bboxVal;
 
                     if (_wfsVersion == WFSVersionEnum.WFS_1_0_0)
                         bbox.MinLat =

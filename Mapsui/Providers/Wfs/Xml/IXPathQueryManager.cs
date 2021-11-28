@@ -2,6 +2,7 @@
 // This file can be redistributed and/or modified under the terms of the GNU Lesser General Public License.
 
 using System.Collections;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Xml.XPath;
 using Mapsui.Providers.Wfs.Utilities;

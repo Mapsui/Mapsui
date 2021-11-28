@@ -18,8 +18,8 @@ namespace Mapsui.Providers.Wms
     [Serializable]
     public class Client
     {
-        private XmlNode _vendorSpecificCapabilities;
-        private XmlNamespaceManager _nsmgr;
+        private XmlNode? _vendorSpecificCapabilities;
+        private XmlNamespaceManager? _nsmgr;
 
 
 
@@ -203,6 +203,7 @@ namespace Mapsui.Providers.Wms
         /// <param name="getStreamAsync">Download method, leave null for default</param>
         public Client(string url, string? wmsVersion = null, Func<string, Task<Stream>>? getStreamAsync = null)
         {
+            _nsmgr = default!; // is later assigned
             InitialiseGetStreamAsyncMethod(getStreamAsync);
             var strReq = new StringBuilder(url);
             if (!url.Contains("?"))
@@ -249,7 +250,7 @@ namespace Mapsui.Providers.Wms
         /// Exposes the capabilities' VendorSpecificCapabilities as XmlNode object. External modules 
         /// could use this to parse the vendor specific capabilities for their specific purpose.
         /// </summary>
-        public XmlNode VendorSpecificCapabilities => _vendorSpecificCapabilities;
+        public XmlNode? VendorSpecificCapabilities => _vendorSpecificCapabilities;
 
         /// <summary>
         /// Downloads service description from WMS service
