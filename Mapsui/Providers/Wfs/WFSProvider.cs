@@ -4,6 +4,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Net;
 using System.Xml.XPath;
@@ -96,7 +97,8 @@ namespace Mapsui.Providers.Wfs
         /// <remarks>
         /// The axis order is an array of array offsets. It can be either {0, 1} or {1, 0}.
         /// <para/>If not set explictly, <see cref="AxisOrderRegistry"/> is asked for a value based on <see cref="SRID"/>.</remarks>
-        public int[]? AxisOrder
+        [AllowNull]
+        public int[] AxisOrder
         {
             get =>
                 //https://docs.geoserver.org/stable/en/user/services/wfs/axis_order.html#wfs-basics-axis
