@@ -151,7 +151,7 @@ namespace Mapsui.Providers.Wms
 
 
         private Func<string, Task<Stream>> _getStreamAsync;
-        private string[] _exceptionFormats;
+        private string[]? _exceptionFormats;
         private Capabilities.WmsServiceDescription _serviceDescription;
 
         /// <summary>
@@ -167,27 +167,27 @@ namespace Mapsui.Providers.Wms
         /// <summary>
         /// Gets a list of available image mime type formats
         /// </summary>
-        public Collection<string> GetMapOutputFormats { get; private set; }
+        public Collection<string>? GetMapOutputFormats { get; private set; }
 
         /// <summary>
         /// Gets a list of available feature info mime type formats
         /// </summary>
-        public Collection<string> GetFeatureInfoOutputFormats { get; private set; }
+        public Collection<string>? GetFeatureInfoOutputFormats { get; private set; }
 
         /// <summary>
         /// Gets a list of available exception mime type formats
         /// </summary>
-        public string[] ExceptionFormats => _exceptionFormats;
+        public string[]? ExceptionFormats => _exceptionFormats;
 
         /// <summary>
         /// Gets the available GetMap request methods and Online Resource URI
         /// </summary>
-        public WmsOnlineResource[] GetMapRequests { get; private set; }
+        public WmsOnlineResource[]? GetMapRequests { get; private set; }
 
         /// <summary>
         /// Gets the available GetMap request methods and Online Resource URI
         /// </summary>
-        public WmsOnlineResource[] GetFeatureInfoRequests { get; private set; }
+        public WmsOnlineResource[]? GetFeatureInfoRequests { get; private set; }
 
         /// <summary>
         /// Gets the hierarchical layer structure
@@ -203,7 +203,9 @@ namespace Mapsui.Providers.Wms
         /// <param name="getStreamAsync">Download method, leave null for default</param>
         public Client(string url, string? wmsVersion = null, Func<string, Task<Stream>>? getStreamAsync = null)
         {
+            _getStreamAsync = default!; // is later assigned 
             _nsmgr = default!; // is later assigned
+            WmsVersion = default!; // is later assigned
             InitialiseGetStreamAsyncMethod(getStreamAsync);
             var strReq = new StringBuilder(url);
             if (!url.Contains("?"))
@@ -223,6 +225,8 @@ namespace Mapsui.Providers.Wms
 
         public Client(XmlDocument capabilitiesXmlDocument, Func<string, Task<Stream>>? getStreamAsync = null)
         {
+            _getStreamAsync = default!; // is later assigned
+            WmsVersion = default!; // is later assigned
             InitialiseGetStreamAsyncMethod(getStreamAsync);
             _nsmgr = new XmlNamespaceManager(capabilitiesXmlDocument.NameTable);
             ParseCapabilities(capabilitiesXmlDocument);
@@ -295,7 +299,7 @@ namespace Mapsui.Providers.Wms
                 if (WmsVersion != "1.0.0" && WmsVersion != "1.1.0" && WmsVersion != "1.1.1" && WmsVersion != "1.3.0")
                     throw new ApplicationException("WMS Version " + WmsVersion + " not supported");
 
-                _nsmgr.AddNamespace(string.Empty, "http://www.opengis.net/wms");
+                _nsmgr!.AddNamespace(string.Empty, "http://www.opengis.net/wms");
                 _nsmgr.AddNamespace("sm", WmsVersion == "1.3.0" ? "http://www.opengis.net/wms" : "");
                 _nsmgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
                 _nsmgr.AddNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
@@ -309,7 +313,6 @@ namespace Mapsui.Providers.Wms
                 ParseServiceDescription(xnService);
             else
                 throw new ApplicationException("No service tag found!");
-
 
             if (xnCapability != null)
                 ParseCapability(xnCapability);

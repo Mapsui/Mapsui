@@ -452,7 +452,7 @@ namespace Mapsui.Providers.Wms
 
         private Client.WmsOnlineResource GetPreferredMethod()
         {
-            if (_wmsClient == null)
+            if (_wmsClient == null || _wmsClient.GetMapRequests == null)
                 throw new InvalidOperationException("Wms Client needs to be set");
             //We prefer get. Seek for supported 'get' method
             for (var i = 0; i < _wmsClient.GetMapRequests.Length; i++)
