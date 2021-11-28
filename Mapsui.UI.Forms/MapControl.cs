@@ -161,7 +161,7 @@ namespace Mapsui.UI.Forms
         }
 
 #if __MAUI__
-        private void View_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void View_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
@@ -182,13 +182,13 @@ namespace Mapsui.UI.Forms
         }
 #endif
 
-        private void OnSizeChanged(object sender, EventArgs e)
+        private void OnSizeChanged(object? sender, EventArgs e)
         {
             _touches.Clear();
             SetViewportSize();
         }
 
-        private async void OnTouch(object sender, SKTouchEventArgs e)
+        private async void OnTouch(object? sender, SKTouchEventArgs e)
         {
             // Save time, when the event occurs
             var ticks = DateTime.Now.Ticks;
@@ -338,7 +338,7 @@ namespace Mapsui.UI.Forms
             return _firstTouch != null && Utilities.Algorithms.Distance(releasedTouch.Location, _firstTouch) < touchSlop;
         }
 
-        private void OnGLPaintSurface(object sender, SKPaintGLSurfaceEventArgs args)
+        private void OnGLPaintSurface(object? sender, SKPaintGLSurfaceEventArgs args)
         {
             if (!_initialized && _glView?.GRContext == null)
             {
@@ -351,7 +351,7 @@ namespace Mapsui.UI.Forms
             PaintSurface(args.Surface.Canvas);
         }
 
-        private void OnPaintSurface(object sender, SKPaintSurfaceEventArgs args)
+        private void OnPaintSurface(object? sender, SKPaintSurfaceEventArgs args)
         {
             // Called on UI thread
             PaintSurface(args.Surface.Canvas);

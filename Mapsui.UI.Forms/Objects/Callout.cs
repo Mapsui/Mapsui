@@ -555,7 +555,7 @@ namespace Mapsui.UI.Forms
         /// </summary>
         /// <param name="sender">Sender</param>
         /// <param name="e">CalloutClickedEventArgs</param>
-        internal void HandleCalloutClicked(object sender, CalloutClickedEventArgs e)
+        internal void HandleCalloutClicked(object? sender, CalloutClickedEventArgs e)
         {
             CalloutClicked?.Invoke(this, e);
 
@@ -646,7 +646,7 @@ namespace Mapsui.UI.Forms
         /// </summary>
         /// <param name="sender">Sender</param>
         /// <param name="e">Event arguments</param>
-        private void CloseCalloutClicked(object sender, EventArgs e)
+        private void CloseCalloutClicked(object? sender, EventArgs e)
         {
             CalloutClosed?.Invoke(this, new EventArgs());
         }

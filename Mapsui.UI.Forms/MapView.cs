@@ -448,7 +448,7 @@ namespace Mapsui.UI.Forms
         /// </summary>
         /// <param name="sender">Viewport of this event</param>
         /// <param name="e">Event arguments containing what changed</param>
-        private void HandlerViewportChanged(object sender, PropertyChangedEventArgs e)
+        private void HandlerViewportChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName.Equals(nameof(Viewport.Rotation)))
             {
@@ -467,7 +467,7 @@ namespace Mapsui.UI.Forms
             }
         }
 
-        private void HandleLayersChanged(object sender, LayerCollectionChangedEventArgs args)
+        private void HandleLayersChanged(object? sender, LayerCollectionChangedEventArgs args)
         {
             var localRemovedLayers = args.RemovedLayers?.ToList() ?? new List<ILayer>();
             var localAddedLayers = args.AddedLayers?.ToList() ?? new List<ILayer>();
@@ -483,7 +483,7 @@ namespace Mapsui.UI.Forms
             AddLayers();
         }
 
-        private void HandlerPinsOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void HandlerPinsOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null && e.NewItems.Cast<Pin>().Any(pin => pin.Label == null))
                 throw new ArgumentException("Pin must have a Label to be added to a map");
@@ -521,7 +521,7 @@ namespace Mapsui.UI.Forms
             Refresh();
         }
 
-        private void HandlerDrawablesOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void HandlerDrawablesOnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             // TODO: Do we need any information about this?
             if (e.OldItems != null)
@@ -547,7 +547,7 @@ namespace Mapsui.UI.Forms
             Refresh();
         }
 
-        private void HandlerInfo(object sender, MapInfoEventArgs e)
+        private void HandlerInfo(object? sender, MapInfoEventArgs e)
         {
             // Click on pin?
             if (e.MapInfo?.Layer == _mapPinLayer)
@@ -642,7 +642,7 @@ namespace Mapsui.UI.Forms
             }
         }
 
-        private void HandlerLongTap(object sender, TappedEventArgs e)
+        private void HandlerLongTap(object? sender, TappedEventArgs e)
         {
             var args = new MapLongClickedEventArgs(Viewport.ScreenToWorld(e.ScreenPosition).ToNative());
             MapLongClicked?.Invoke(this, args);
@@ -653,7 +653,7 @@ namespace Mapsui.UI.Forms
             }
         }
 
-        private void HandlerTap(object sender, TappedEventArgs e)
+        private void HandlerTap(object? sender, TappedEventArgs e)
         {
             // Close all closable Callouts
             var pins = _pins.ToList();
@@ -706,7 +706,7 @@ namespace Mapsui.UI.Forms
             }
         }
 
-        private void HandlerPinPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void HandlerPinPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (Viewport.Extent != null)
             {
@@ -718,7 +718,7 @@ namespace Mapsui.UI.Forms
             RefreshGraphics();
         }
 
-        private void HandlerDrawablePropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void HandlerDrawablePropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (Viewport.Extent != null)
             {
@@ -730,7 +730,7 @@ namespace Mapsui.UI.Forms
             RefreshGraphics();
         }
 
-        private void HandlerSizeChanged(object sender, EventArgs e)
+        private void HandlerSizeChanged(object? sender, EventArgs e)
         {
             UpdateButtonPositions();
         }

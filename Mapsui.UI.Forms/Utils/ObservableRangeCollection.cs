@@ -538,7 +538,7 @@
         /// </summary>
         /// <remarks>
         /// When overriding this method, either call its base implementation
-        /// or call <see cref="BlockReentrancy"/> to guard against reentrant collection changes.
+        /// or call <see cref="ObservableCollection{T}.BlockReentrancy"/> to guard against reentrant collection changes.
         /// </remarks>
         protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
         {

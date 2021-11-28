@@ -352,7 +352,7 @@ namespace Mapsui.UI.Wpf
             _refresh = true;
         }
 
-        private void MapDataChanged(object sender, DataChangedEventArgs? e)
+        private void MapDataChanged(object? sender, DataChangedEventArgs? e)
         {
             RunOnUIThread(() => {
                 try

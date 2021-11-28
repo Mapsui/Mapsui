@@ -100,12 +100,12 @@ namespace Mapsui.UI.Forms
             }
         }
 
-        private void OnPositionsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void OnPositionsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             OnPropertyChanged(nameof(Positions));
         }
 
-        private void OnHolesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void OnHolesCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             OnPropertyChanged(nameof(Holes));
         }
