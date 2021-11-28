@@ -92,7 +92,7 @@
         /// Inserts the elements of a collection into the <see cref="ObservableCollection{T}"/> at the specified index.
         /// </summary>
         /// <param name="index">The zero-based index at which the new elements should be inserted.</param>
-        /// <param name="collection">The collection whose elements should be inserted into the List<T>.
+        /// <param name="collection">The collection whose elements should be inserted into the List{T}.
         /// The collection itself cannot be null, but it can contain elements that are null, if type T is a reference type.</param>                
         /// <exception cref="ArgumentNullException"><paramref name="collection"/> is null.</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="index"/> is not in the collection range.</exception>

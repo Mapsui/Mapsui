@@ -450,7 +450,7 @@ namespace Mapsui.UI.Forms
         /// <param name="e">Event arguments containing what changed</param>
         private void HandlerViewportChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName.Equals(nameof(Viewport.Rotation)))
+            if (e.PropertyName?.Equals(nameof(Viewport.Rotation)) ?? false)
             {
                 MyLocationLayer.UpdateMyDirection(MyLocationLayer.Direction, Viewport.Rotation);
 
@@ -458,7 +458,7 @@ namespace Mapsui.UI.Forms
                 _mapNorthingButton!.Rotation = (float)Viewport.Rotation;
             }
 
-            if (e.PropertyName.Equals(nameof(Viewport.Center)))
+            if (e.PropertyName?.Equals(nameof(Viewport.Center)) ?? false)
             {
                 if (MyLocationFollow && !Viewport.Center.Equals(MyLocationLayer.MyLocation.ToMapsui()))
                 {
@@ -829,7 +829,7 @@ namespace Mapsui.UI.Forms
             UpdateButtonPositions();
         }
 
-        private ButtonWidget CreateButton(float x, float y, SKPicture picture, Action<object, WidgetTouchedEventArgs> action)
+        private ButtonWidget CreateButton(float x, float y, SKPicture picture, Action<object?, WidgetTouchedEventArgs> action)
         {
             var result = new ButtonWidget
             {

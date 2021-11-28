@@ -270,7 +270,7 @@ namespace Mapsui.UI.Forms
         }
 
         /// <summary>
-        /// Relative position of anchor of Callout on the side given by <see cref="ArrowAlignment">
+        /// Relative position of anchor of Callout on the side given by <see cref="ArrowAlignment"/>
         /// </summary>
         public double ArrowPosition
         {

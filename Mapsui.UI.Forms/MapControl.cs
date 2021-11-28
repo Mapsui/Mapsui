@@ -400,7 +400,7 @@ namespace Mapsui.UI.Forms
         /// TouchMove is called, when user move mouse over map (independent from mouse button state) or move finger on display
         /// </summary>
 #if __WPF__
-        public new event EventHandler<TouchedEventArgs> TouchMove;
+        public new event EventHandler<TouchedEventArgs>? TouchMove;
 #else
         public event EventHandler<TouchedEventArgs>? TouchMove;
 
@@ -414,7 +414,7 @@ namespace Mapsui.UI.Forms
         /// Hover is called, when user move mouse over map without pressing mouse button
         /// </summary>
 #if __ANDROID__
-        public new event EventHandler<HoveredEventArgs> Hovered;
+        public event EventHandler<HoveredEventArgs>? Hovered;
 #else
         public event EventHandler<HoveredEventArgs>? Hovered;
 #endif
@@ -501,8 +501,10 @@ namespace Mapsui.UI.Forms
         /// Called, when mouse/finger/pen hovers around
         /// </summary>
         /// <param name="screenPosition">Actual position of mouse/finger/pen</param>
-        private bool OnHovered(MPoint screenPosition)
+        private bool OnHovered(MPoint? screenPosition)
         {
+            if (screenPosition == null)
+                return false;
             var args = new HoveredEventArgs(screenPosition);
 
             Hovered?.Invoke(this, args);
