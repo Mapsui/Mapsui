@@ -148,7 +148,7 @@ namespace Mapsui.Providers.Shapefile
 
         private void ParseDbfHeader()
         {
-            if (_br?.ReadByte() != 0x03)
+            if (_br!.ReadByte() != 0x03)
                 throw new NotSupportedException("Unsupported DBF Type");
 
             _lastUpdate = new DateTime(_br.ReadByte() + 1900, _br.ReadByte(), _br.ReadByte());
@@ -156,7 +156,7 @@ namespace Mapsui.Providers.Shapefile
             _numberOfRecords = _br.ReadInt32(); // read number of records.
             _headerLength = _br.ReadInt16(); // read length of header structure.
             _recordLength = _br.ReadInt16(); // read length of a record
-            _fs.Seek(29, SeekOrigin.Begin); //Seek to encoding flag
+            _fs!.Seek(29, SeekOrigin.Begin); //Seek to encoding flag
             _fileEncoding = GetDbaseLanguageDriver(_br.ReadByte()); //Read and parse Language driver
             _fs.Seek(32, SeekOrigin.Begin); //Move past the reserved bytes
 
