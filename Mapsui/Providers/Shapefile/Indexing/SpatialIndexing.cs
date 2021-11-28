@@ -276,7 +276,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
         /// <summary>
         /// Gets/sets the left child node
         /// </summary>
-        public QuadTree Child0
+        public QuadTree? Child0
         {
             get => _child0;
             set => _child0 = value;
@@ -285,7 +285,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
         /// <summary>
         /// Gets/sets the right child node
         /// </summary>
-        public QuadTree Child1
+        public QuadTree? Child1
         {
             get => _child1;
             set => _child1 = value;
@@ -339,11 +339,14 @@ namespace Mapsui.Providers.Shapefile.Indexing
         {
             if (node.IsLeaf) //Leaf has been reached
             {
-                foreach (var boxObject in node._objList)
+                if (node._objList != null)
                 {
-                    if (box.Intersects(boxObject.Box))
-                        list.Add(boxObject.Id);
+                    foreach (var boxObject in node._objList)
+                    {
+                        if (box.Intersects(boxObject.Box))
+                            list.Add(boxObject.Id);
 
+                    }
                 }
             }
             else

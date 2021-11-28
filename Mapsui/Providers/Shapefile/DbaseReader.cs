@@ -500,7 +500,7 @@ namespace Mapsui.Providers.Shapefile
                         return f;
                     return DBNull.Value;
                 case "System.Boolean":
-                    var tempChar = _br.ReadChar();
+                    var tempChar = _br!.ReadChar();
                     return (tempChar == 'T') || (tempChar == 't') || (tempChar == 'Y') || (tempChar == 'y');
                 case "System.DateTime":
                     // Mono has not yet implemented DateTime.TryParseExact

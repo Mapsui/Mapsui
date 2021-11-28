@@ -20,9 +20,9 @@ namespace Mapsui.Providers.Wfs.Utilities
         private byte[]? _postData;
         private string? _proxyUrl;
         private string? _url;
-        private HttpWebRequest _webRequest;
+        private HttpWebRequest? _webRequest;
         private HttpWebResponse? _webResponse;
-        private ICredentials _credentials;
+        private ICredentials? _credentials;
 
         /// <summary>
         /// Gets ans sets the Url of the request.

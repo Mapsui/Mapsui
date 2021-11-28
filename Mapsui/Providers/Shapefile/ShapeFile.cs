@@ -427,7 +427,7 @@ namespace Mapsui.Providers.Shapefile
         /// </summary>
         /// <param name="oid">Object ID</param>
         /// <returns>geometry</returns>
-        public IGeometry GetGeometry(uint oid)
+        public IGeometry? GetGeometry(uint oid)
         {
             lock (_syncRoot)
             {
@@ -444,7 +444,7 @@ namespace Mapsui.Providers.Shapefile
             }
         }
 
-        private IGeometry GetGeometryPrivate(uint oid)
+        private IGeometry? GetGeometryPrivate(uint oid)
         {
             if (FilterDelegate != null) //Apply filtering
             {
