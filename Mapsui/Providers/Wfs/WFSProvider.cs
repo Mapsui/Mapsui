@@ -68,7 +68,7 @@ namespace Mapsui.Providers.Wfs
         private bool _multiGeometries = true;
         private IFilter _ogcFilter;
         private bool _quickGeometries;
-        private int[] _axisOrder;
+        private int[]? _axisOrder;
 
         // The type of geometry can be specified in case of unprecise information (e.g. 'GeometryAssociationType').
         // It helps to accelerate the rendering process significantly.
@@ -96,13 +96,13 @@ namespace Mapsui.Providers.Wfs
         /// <remarks>
         /// The axis order is an array of array offsets. It can be either {0, 1} or {1, 0}.
         /// <para/>If not set explictly, <see cref="AxisOrderRegistry"/> is asked for a value based on <see cref="SRID"/>.</remarks>
-        public int[] AxisOrder
+        public int[]? AxisOrder
         {
             get =>
                 //https://docs.geoserver.org/stable/en/user/services/wfs/axis_order.html#wfs-basics-axis
                 _axisOrder ?? (_wfsVersion == WFSVersionEnum.WFS_1_0_0
                     ? new[] { 0, 1 }
-                    : new AxisOrderRegistry()[CRS]);
+                    : new AxisOrderRegistry()[CRS ?? throw new ArgumentException("CRS needs to be set")]);
             set
             {
                 if (value != null)
