@@ -494,8 +494,10 @@ namespace Mapsui.Providers.Wfs
             }
         }
 
-        public MRect GetExtent()
+        public MRect? GetExtent()
         {
+            if (_featureTypeInfo == null)
+                return null;
             return new MRect(
                 _featureTypeInfo.BBox.MinLong,
                 _featureTypeInfo.BBox.MinLat,

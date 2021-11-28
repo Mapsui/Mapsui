@@ -27,9 +27,9 @@ namespace Mapsui.Providers.Wfs.Utilities
         protected AlternativePathNodesCollection CoordinatesNode;
         private string _cs;
         protected IPathNode FeatureNode;
-        protected XmlReader FeatureReader;
+        protected XmlReader? FeatureReader;
         protected WfsFeatureTypeInfo FeatureTypeInfo;
-        protected XmlReader GeomReader;
+        protected XmlReader? GeomReader;
         protected Collection<Geometry> Geoms = new();
         protected IPathNode LabelNode;
         protected AlternativePathNodesCollection ServiceExceptionNode;
@@ -100,9 +100,9 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// </summary>
         /// <param name="reader">An XmlReader instance at the position of the coordinates to read</param>
         /// <returns>A point collection (the collected coordinates)</returns>
-        protected Collection<Point>? ParseCoordinates(XmlReader reader)
+        protected Collection<Point> ParseCoordinates(XmlReader reader)
         {
-            if (!reader.Read()) return null;
+            if (!reader.Read()) return new Collection<Point>();
 
             var name = reader.LocalName;
             var coordinateString = reader.ReadElementString();
@@ -147,7 +147,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <param name="labels">A dictionary for recording label values. Pass 'null' to ignore searching for label values</param>
         /// <param name="pathNodes">A list of <see cref="IPathNode"/> instances defining the context of the retrieved reader</param>
         /// <returns>A sub-reader of the XmlReader given as argument</returns>
-        protected XmlReader GetSubReaderOf(XmlReader reader, Dictionary<string, string>? labels, params IPathNode[] pathNodes)
+        protected XmlReader? GetSubReaderOf(XmlReader reader, Dictionary<string, string>? labels, params IPathNode[] pathNodes)
         {
             _pathNodes.Clear();
             _pathNodes.AddRange(pathNodes);

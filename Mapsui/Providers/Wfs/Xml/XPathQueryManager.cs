@@ -21,7 +21,7 @@ namespace Mapsui.Providers.Wfs.Xml
 
         private CustomQueryContext? _paramContext;
         private XPathNodeIterator _xIter;
-        private XPathNavigator _xNav;
+        private XPathNavigator? _xNav;
         private XPathDocument _xPathDoc;
 
 

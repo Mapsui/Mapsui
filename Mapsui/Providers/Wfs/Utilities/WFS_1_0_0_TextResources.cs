@@ -85,7 +85,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <param name="labelProperties">A list of properties necessary for label rendering</param>
         /// <param name="boundingBox">The bounding box of the query</param>
         /// <param name="filter">An instance implementing <see cref="IFilter"/></param>
-        public byte[] GetFeaturePOSTRequest(WfsFeatureTypeInfo featureTypeInfo, List<string> labelProperties,
+        public byte[] GetFeaturePOSTRequest(WfsFeatureTypeInfo featureTypeInfo, List<string>? labelProperties,
                                             BoundingBox? boundingBox, IFilter filter)
         {
             var qualification = string.IsNullOrEmpty(featureTypeInfo.Prefix)

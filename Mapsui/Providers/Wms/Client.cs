@@ -64,7 +64,7 @@ namespace Mapsui.Providers.Wms
             /// <summary>
             /// URI of online resource
             /// </summary>
-            public string OnlineResource;
+            public string? OnlineResource;
 
             /// <summary>
             /// Type of online resource (Ex. request method 'Get' or 'Post')
@@ -572,14 +572,14 @@ namespace Mapsui.Providers.Wms
                     {
                         wmsServerLayer.Style[i].LegendUrl = new WmsStyleLegend();
 
-                        if (node.Attributes["width"]?.InnerText != null && node.Attributes["height"]?.InnerText != null)
+                        if (node.Attributes?["width"]?.InnerText != null && node.Attributes["height"]?.InnerText != null)
                         {
                             wmsServerLayer.Style[i].LegendUrl.Size = new Size { Width = int.Parse(node.Attributes["width"].InnerText), Height = int.Parse(node.Attributes["height"].InnerText) };
                         }
 
-                        wmsServerLayer.Style[i].LegendUrl.OnlineResource.OnlineResource = node.SelectSingleNode("sm:OnlineResource", _nsmgr).Attributes["xlink:href"].InnerText;
+                        wmsServerLayer.Style[i].LegendUrl.OnlineResource.OnlineResource = node.SelectSingleNode("sm:OnlineResource", _nsmgr)?.Attributes["xlink:href"].InnerText;
                         wmsServerLayer.Style[i].LegendUrl.OnlineResource.Type =
-                            node.SelectSingleNode("sm:Format", _nsmgr).InnerText;
+                            node.SelectSingleNode("sm:Format", _nsmgr)?.InnerText;
                     }
                     node = xnlStyle[i].SelectSingleNode("sm:StyleSheetURL", _nsmgr);
                     if (node != null)
@@ -587,7 +587,7 @@ namespace Mapsui.Providers.Wms
                         wmsServerLayer.Style[i].StyleSheetUrl = new WmsOnlineResource
                         {
                             OnlineResource =
-                            node.SelectSingleNode("sm:OnlineResource", _nsmgr).Attributes["xlink:href"].InnerText
+                            node.SelectSingleNode("sm:OnlineResource", _nsmgr)?.Attributes["xlink:href"].InnerText
                         };
                     }
                 }
@@ -600,7 +600,7 @@ namespace Mapsui.Providers.Wms
                     wmsServerLayer.ChildLayers[i] = ParseLayer(xnlLayers[i]);
             }
             node = xmlLayer.SelectSingleNode("sm:LatLonBoundingBox", _nsmgr);
-            if (node != null)
+            if (node != null && node.Attributes != null)
             {
                 if (!double.TryParse(node.Attributes["minx"].Value, NumberStyles.Any, CultureInfo.InvariantCulture, out var minX) &
                     !double.TryParse(node.Attributes["miny"].Value, NumberStyles.Any, CultureInfo.InvariantCulture, out var minY) &
