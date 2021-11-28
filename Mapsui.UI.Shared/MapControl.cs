@@ -257,6 +257,7 @@ namespace Mapsui.UI.Wpf
                 if (_navigator != null)
                 {
                     _navigator.Navigated -= Navigated;
+                    _navigator.Dispose();
                 }
                 _navigator = value ?? throw new ArgumentException($"{nameof(Navigator)} can not be null");
                 _navigator.Navigated += Navigated;
@@ -617,6 +618,18 @@ namespace Mapsui.UI.Wpf
             // not sure if we need this method
             _map?.ClearCache();
             RefreshGraphics();
+        }
+
+        private void CommonDispose(bool disposing)
+        {
+            if (disposing)
+            {
+                Unsubscribe();
+                Navigator?.Dispose();
+                StopUpdates();
+                _invalidateTimer?.Dispose();
+            }
+            _invalidateTimer = null;
         }
     }
 }

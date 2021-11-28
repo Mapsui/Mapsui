@@ -31,7 +31,6 @@ namespace Mapsui
             _map = map;
             _viewport = viewport;
             _animation.Ticked += AnimationTimerTicked;
-
         }
 
         private void AnimationTimerTicked(object sender, AnimationEventArgs e)
@@ -610,6 +609,26 @@ namespace Mapsui
         public void UpdateAnimations()
         {
             _animation.UpdateAnimations();
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _animation.Ticked -= AnimationTimerTicked;
+                _animation.Dispose();
+            }
+        }
+
+        ~Navigator()
+        {
+            Dispose(false);
         }
     }
 }
