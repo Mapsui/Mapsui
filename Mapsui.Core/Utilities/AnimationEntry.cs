@@ -11,6 +11,7 @@ namespace Mapsui.Utilities
         public AnimationEntry(object start, object end,
             double animationStart = 0, double animationEnd = 1,
             Easing? easing = null,
+            bool repeat = false,
             Action<AnimationEntry, double>? tick = null,
             Action<AnimationEntry>? final = null)
         {
@@ -21,6 +22,7 @@ namespace Mapsui.Utilities
             End = end;
 
             Easing = easing ?? Easing.Linear;
+            Repeat = repeat;
 
             _animationDelta = AnimationEnd - AnimationStart;
 
@@ -54,9 +56,19 @@ namespace Mapsui.Utilities
         public Easing Easing { get; }
 
         /// <summary>
+        /// Is this a repeating animation that starts over and over again
+        /// </summary>
+        public bool Repeat { get; }
+
+        /// <summary>
         /// Time, where this AnimationEntry has started
         /// </summary>
         internal long StartTicks { get; set; }
+
+        /// <summary>
+        /// Time, where this AnimationEntry should end
+        /// </summary>
+        internal long EndTicks { get; set; }
 
         /// <summary>
         /// Lengths of this AnimationEntry in ticks

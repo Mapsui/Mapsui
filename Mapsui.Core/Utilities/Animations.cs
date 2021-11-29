@@ -15,22 +15,31 @@ namespace Mapsui.Utilities
 
         public static void Start(AnimationEntry entry, long duration)
         {
+            Start(entry, duration, DateTime.Now.Ticks);
+        }
+
+        public static void Start(IEnumerable<AnimationEntry> entries, long duration)
+        {
+            // Start all animations in entries with the same ticks
+            var ticks = DateTime.Now.Ticks;
+
+            foreach (var entry in entries)
+                Start(entry, duration, ticks);
+        }
+
+        private static void Start(AnimationEntry entry, long duration, long ticks)
+        {
             lock (_syncObject)
             {
                 if (_entries.Contains(entry))
                     Stop(entry, false);
 
-                entry.StartTicks = DateTime.Now.Ticks;
+                entry.StartTicks = ticks;
                 entry.DurationTicks = duration * TimeSpan.TicksPerMillisecond;
+                entry.EndTicks = entry.StartTicks + entry.DurationTicks;
 
                 _entries.Add(entry);
             }
-        }
-
-        public static void Start(List<AnimationEntry> entries, long duration)
-        {
-            foreach (var entry in entries)
-                Start(entry, duration);
         }
 
         public static void Stop(AnimationEntry entry, bool callFinal = true)
@@ -69,19 +78,26 @@ namespace Mapsui.Utilities
 
             for (int i = 0; i < entries.Length; i++)
             {
-                var value = (DateTime.Now.Ticks - entries[i].StartTicks) / (double)entries[i].DurationTicks;
-
-                if (value < entries[i].AnimationStart)
+                if (DateTime.Now.Ticks > entries[i].EndTicks)
                 {
-                    // Nothing to do before the animation starts
-                    continue;
+                    // Animation is at the end of duration
+                    isRunning = true;
+                    if (!entries[i].Repeat)
+                    {
+                        // Animation shouldn't be repeated, so remove it
+                        Stop(entries[i], true);
+                        continue;
+                    }
+                    // Set new values for repeating this animation
+                    entries[i].StartTicks = entries[i].EndTicks;
+                    entries[i].EndTicks = entries[i].StartTicks + entries[i].DurationTicks;
                 }
 
-                if (value > entries[i].AnimationEnd)
+                var value = (DateTime.Now.Ticks - entries[i].StartTicks) / (double)entries[i].DurationTicks;
+
+                if (value < entries[i].AnimationStart || value > entries[i].AnimationEnd)
                 {
-                    // Animation is at its end, so remove it
-                    isRunning = true;
-                    Stop(entries[i], true);
+                    // Nothing to do before the animation starts or after animation ended
                     continue;
                 }
 
