@@ -69,9 +69,6 @@ namespace Mapsui.Utilities
         /// <param name="value">Position in animation cycle between 0 and 1</param>
         internal bool Tick(double value)
         {
-            if (value < AnimationStart || value > AnimationEnd)
-                return false;
-
             // Each tick gets a value between 0 and 1 for its own cycle
             // Its independent from the global animation cycle
             var v = (value - AnimationStart) / _animationDelta;
