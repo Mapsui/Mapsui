@@ -3,15 +3,10 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Mapsui.GeometryLayer;
-using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.UI.Objects;
 using SkiaSharp;
 using Svg.Skia;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
 #if __MAUI__
 using Microsoft.Maui;
 using Microsoft.Maui.Graphics;

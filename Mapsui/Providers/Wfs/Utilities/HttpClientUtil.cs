@@ -20,14 +20,14 @@ namespace Mapsui.Providers.Wfs.Utilities
         private byte[]? _postData;
         private string? _proxyUrl;
         private string? _url;
-        private HttpWebRequest _webRequest;
+        private HttpWebRequest? _webRequest;
         private HttpWebResponse? _webResponse;
-        private ICredentials _credentials;
+        private ICredentials? _credentials;
 
         /// <summary>
         /// Gets ans sets the Url of the request.
         /// </summary>
-        public string Url
+        public string? Url
         {
             get => _url;
             set => _url = value;
@@ -36,7 +36,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <summary>
         /// Gets and sets the proxy Url of the request. 
         /// </summary>
-        public string ProxyUrl
+        public string? ProxyUrl
         {
             get => _proxyUrl;
             set => _proxyUrl = value;
@@ -53,7 +53,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <summary>
         /// Gets or sets the network credentials used for authenticating the request with the Internet resource
         /// </summary>
-        public ICredentials Credentials
+        public ICredentials? Credentials
         {
             get => _credentials;
             set => _credentials = value;

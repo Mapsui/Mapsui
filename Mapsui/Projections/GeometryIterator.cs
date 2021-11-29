@@ -30,8 +30,9 @@ namespace Mapsui.Projections
         {
             if (polygon == null) throw new ArgumentNullException(nameof(polygon));
 
-            foreach (var point in polygon.ExteriorRing.Vertices)
-                yield return point;
+            if (polygon.ExteriorRing != null)
+                foreach (var point in polygon.ExteriorRing.Vertices)
+                    yield return point;
             foreach (var ring in polygon.InteriorRings)
                 foreach (var point in ring.Vertices)
                     yield return point;

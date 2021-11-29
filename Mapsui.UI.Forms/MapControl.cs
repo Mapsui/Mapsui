@@ -22,8 +22,6 @@ using KnownColor = Mapsui.UI.Maui.KnownColor;
 #else
 using SkiaSharp.Views.Forms;
 using Xamarin.Forms;
-
-using Color = Xamarin.Forms.Color;
 using KnownColor = Xamarin.Forms.Color;
 #endif
 
@@ -161,7 +159,7 @@ namespace Mapsui.UI.Forms
         }
 
 #if __MAUI__
-        private void View_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void View_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
@@ -182,13 +180,13 @@ namespace Mapsui.UI.Forms
         }
 #endif
 
-        private void OnSizeChanged(object sender, EventArgs e)
+        private void OnSizeChanged(object? sender, EventArgs e)
         {
             _touches.Clear();
             SetViewportSize();
         }
 
-        private async void OnTouch(object sender, SKTouchEventArgs e)
+        private async void OnTouch(object? sender, SKTouchEventArgs e)
         {
             // Save time, when the event occurs
             var ticks = DateTime.Now.Ticks;
@@ -338,7 +336,7 @@ namespace Mapsui.UI.Forms
             return _firstTouch != null && Utilities.Algorithms.Distance(releasedTouch.Location, _firstTouch) < touchSlop;
         }
 
-        private void OnGLPaintSurface(object sender, SKPaintGLSurfaceEventArgs args)
+        private void OnGLPaintSurface(object? sender, SKPaintGLSurfaceEventArgs args)
         {
             if (!_initialized && _glView?.GRContext == null)
             {
@@ -351,7 +349,7 @@ namespace Mapsui.UI.Forms
             PaintSurface(args.Surface.Canvas);
         }
 
-        private void OnPaintSurface(object sender, SKPaintSurfaceEventArgs args)
+        private void OnPaintSurface(object? sender, SKPaintSurfaceEventArgs args)
         {
             // Called on UI thread
             PaintSurface(args.Surface.Canvas);
@@ -400,7 +398,7 @@ namespace Mapsui.UI.Forms
         /// TouchMove is called, when user move mouse over map (independent from mouse button state) or move finger on display
         /// </summary>
 #if __WPF__
-        public new event EventHandler<TouchedEventArgs> TouchMove;
+        public new event EventHandler<TouchedEventArgs>? TouchMove;
 #else
         public event EventHandler<TouchedEventArgs>? TouchMove;
 
@@ -413,11 +411,7 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Hover is called, when user move mouse over map without pressing mouse button
         /// </summary>
-#if __ANDROID__
-        public new event EventHandler<HoveredEventArgs> Hovered;
-#else
         public event EventHandler<HoveredEventArgs>? Hovered;
-#endif
 
         /// <summary>
         /// Swipe is called, when user release mouse button or lift finger while moving with a certain speed 
@@ -501,8 +495,10 @@ namespace Mapsui.UI.Forms
         /// Called, when mouse/finger/pen hovers around
         /// </summary>
         /// <param name="screenPosition">Actual position of mouse/finger/pen</param>
-        private bool OnHovered(MPoint screenPosition)
+        private bool OnHovered(MPoint? screenPosition)
         {
+            if (screenPosition == null)
+                return false;
             var args = new HoveredEventArgs(screenPosition);
 
             Hovered?.Invoke(this, args);
@@ -599,8 +595,11 @@ namespace Mapsui.UI.Forms
             if (touchPoints.Count == 0)
             {
                 _mode = TouchMode.None;
-                var fetchInfo = new FetchInfo(_viewport.Extent, _viewport.Resolution, Map?.CRS, ChangeType.Discrete);
-                _map?.RefreshData(fetchInfo);
+                if (_viewport.Extent != null)
+                {
+                    var fetchInfo = new FetchInfo(_viewport.Extent, _viewport.Resolution, Map?.CRS, ChangeType.Discrete);
+                    _map?.RefreshData(fetchInfo);
+                }
             }
 
             return args.Handled;
@@ -644,8 +643,11 @@ namespace Mapsui.UI.Forms
             if (touchPoints.Count == 0)
             {
                 _mode = TouchMode.None;
-                var fetchInfo = new FetchInfo(_viewport.Extent, _viewport.Resolution, Map?.CRS, ChangeType.Discrete);
-                _map?.RefreshData(fetchInfo);
+                if (_viewport.Extent != null)
+                {
+                    var fetchInfo = new FetchInfo(_viewport.Extent, _viewport.Resolution, Map?.CRS, ChangeType.Discrete);
+                    _map?.RefreshData(fetchInfo);
+                }
             }
 
             return args.Handled;

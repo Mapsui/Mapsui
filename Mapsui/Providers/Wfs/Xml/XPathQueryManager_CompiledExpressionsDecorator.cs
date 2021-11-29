@@ -40,15 +40,17 @@ namespace Mapsui.Providers.Wfs.Xml
         /// </summary>
         /// <param name="xPath">The XPath string</param>
         /// <returns>A compiled XPath expression</returns>
-        public override XPathExpression Compile(string xPath)
+        public override XPathExpression? Compile(string xPath)
         {
-            XPathExpression expr;
+            XPathExpression? expr;
             // Compare pointers instead of literal values
             if (ReferenceEquals(xPath, NameTable.Get(xPath)))
                 return CompiledExpressions[xPath];
 
             NameTable.Add(xPath);
-            CompiledExpressions.Add(xPath, (expr = XPathQueryManager.Compile(xPath)));
+            expr = XPathQueryManager.Compile(xPath);
+            if (expr != null)
+                CompiledExpressions.Add(xPath, expr);
             return expr;
         }
 
@@ -69,7 +71,7 @@ namespace Mapsui.Providers.Wfs.Xml
         /// </summary>
         /// <param name="xPath">The compiled XPath expression</param>
         /// <param name="queryParameters">Parameters for the compiled XPath expression</param>
-        public override IXPathQueryManager? GetXPathQueryManagerInContext(XPathExpression xPath,
+        public override IXPathQueryManager? GetXPathQueryManagerInContext(XPathExpression? xPath,
                                                                          DictionaryEntry[]? queryParameters = null)
         {
             var xPathQueryManager = (queryParameters == null)

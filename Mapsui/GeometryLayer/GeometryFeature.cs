@@ -16,7 +16,7 @@ namespace Mapsui.GeometryLayer
 
         public GeometryFeature(GeometryFeature geometryFeature) : base(geometryFeature)
         {
-            Geometry = geometryFeature.Geometry.Copy();
+            Geometry = geometryFeature.Geometry?.Copy();
         }
 
         public GeometryFeature(IGeometry geometry)
@@ -24,7 +24,7 @@ namespace Mapsui.GeometryLayer
             Geometry = geometry;
         }
 
-        public IGeometry Geometry { get; set; }
+        public IGeometry? Geometry { get; set; }
 
         public MRect? Extent => Geometry?.BoundingBox.ToMRect(); // Todo: Make not-nullable
 

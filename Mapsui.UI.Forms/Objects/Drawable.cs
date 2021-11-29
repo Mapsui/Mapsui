@@ -2,11 +2,7 @@
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Mapsui.GeometryLayer;
-using Mapsui.Providers;
 using Mapsui.Styles;
-using System;
-using System.Linq;
-using System.Runtime.CompilerServices;
 #if __MAUI__
 using Mapsui.UI.Maui;
 using Mapsui.UI.Maui.Extensions;

@@ -4,6 +4,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Net;
 using System.Xml.XPath;
@@ -54,21 +55,21 @@ namespace Mapsui.Providers.Wfs
 
 
         private readonly GeometryTypeEnum _geometryType = GeometryTypeEnum.Unknown;
-        private readonly string _getCapabilitiesUri;
+        private readonly string? _getCapabilitiesUri;
         private readonly HttpClientUtil _httpClientUtil = new HttpClientUtil();
         private readonly IWFS_TextResources _textResources;
         private readonly WFSVersionEnum _wfsVersion;
         private bool _disposed;
-        private string _featureType;
-        private WfsFeatureTypeInfo _featureTypeInfo;
+        private string? _featureType;
+        private WfsFeatureTypeInfo? _featureTypeInfo;
         private IXPathQueryManager? _featureTypeInfoQueryManager;
-        private string _nsPrefix;
+        private string? _nsPrefix;
         private bool _getFeatureGetRequest;
         private List<string> _labels = new List<string>();
         private bool _multiGeometries = true;
-        private IFilter _ogcFilter;
+        private IFilter? _ogcFilter;
         private bool _quickGeometries;
-        private int[] _axisOrder;
+        private int[]? _axisOrder;
 
         // The type of geometry can be specified in case of unprecise information (e.g. 'GeometryAssociationType').
         // It helps to accelerate the rendering process significantly.
@@ -79,7 +80,7 @@ namespace Mapsui.Providers.Wfs
         /// This cache (obtained from an already instantiated dataprovider that retrieves a featuretype hosted by the same service) 
         /// helps to speed up gathering metadata. It caches the 'GetCapabilities' response. 
         /// </summary>
-        public IXPathQueryManager GetCapabilitiesCache
+        public IXPathQueryManager? GetCapabilitiesCache
         {
             get => _featureTypeInfoQueryManager;
             set => _featureTypeInfoQueryManager = value;
@@ -88,7 +89,7 @@ namespace Mapsui.Providers.Wfs
         /// <summary>
         /// Gets feature metadata 
         /// </summary>
-        public WfsFeatureTypeInfo FeatureTypeInfo => _featureTypeInfo;
+        public WfsFeatureTypeInfo? FeatureTypeInfo => _featureTypeInfo;
 
         /// <summary>
         /// Gets or sets a value indicating the axis order
@@ -96,13 +97,14 @@ namespace Mapsui.Providers.Wfs
         /// <remarks>
         /// The axis order is an array of array offsets. It can be either {0, 1} or {1, 0}.
         /// <para/>If not set explictly, <see cref="AxisOrderRegistry"/> is asked for a value based on <see cref="SRID"/>.</remarks>
+        [AllowNull]
         public int[] AxisOrder
         {
             get =>
                 //https://docs.geoserver.org/stable/en/user/services/wfs/axis_order.html#wfs-basics-axis
                 _axisOrder ?? (_wfsVersion == WFSVersionEnum.WFS_1_0_0
                     ? new[] { 0, 1 }
-                    : new AxisOrderRegistry()[CRS]);
+                    : new AxisOrderRegistry()[CRS ?? throw new ArgumentException("CRS needs to be set")]);
             set
             {
                 if (value != null)
@@ -157,7 +159,7 @@ namespace Mapsui.Providers.Wfs
         /// <summary>
         /// Gets or sets an OGC Filter.
         /// </summary>
-        public IFilter OgcFilter
+        public IFilter? OgcFilter
         {
             get => _ogcFilter;
             set => _ogcFilter = value;
@@ -175,7 +177,7 @@ namespace Mapsui.Providers.Wfs
         /// <summary>
         /// Gets or sets the network credentials used for authenticating the request with the Internet resource
         /// </summary>
-        public ICredentials Credentials
+        public ICredentials? Credentials
         {
             get => _httpClientUtil.Credentials;
             set => _httpClientUtil.Credentials = value;
@@ -184,7 +186,7 @@ namespace Mapsui.Providers.Wfs
         /// <summary>
         /// Gets and sets the proxy Url of the request. 
         /// </summary>
-        public string ProxyUrl
+        public string? ProxyUrl
         {
             get => _httpClientUtil.ProxyUrl;
             set => _httpClientUtil.ProxyUrl = value;
@@ -208,6 +210,7 @@ namespace Mapsui.Providers.Wfs
                    WFSVersionEnum wfsVersion)
         {
             _getCapabilitiesUri = getCapabilitiesUri;
+            _featureType = featureType;
 
             if (wfsVersion == WFSVersionEnum.WFS_1_0_0)
                 _textResources = new WFS_1_0_0_TextResources();
@@ -380,9 +383,9 @@ namespace Mapsui.Providers.Wfs
         /// </summary>
         /// <param name="bbox"></param>
         /// <returns>Features within the specified <see cref="Mapsui.Geometries.BoundingBox"/></returns>
-        public IEnumerable<IFeature>? ExecuteIntersectionQuery(BoundingBox? bbox)
+        public IEnumerable<IFeature> ExecuteIntersectionQuery(BoundingBox? bbox)
         {
-            if (_featureTypeInfo == null) return null;
+            if (_featureTypeInfo == null) return new List<IFeature>();
 
             var features = new List<IFeature>();
 
@@ -494,8 +497,10 @@ namespace Mapsui.Providers.Wfs
             }
         }
 
-        public MRect GetExtent()
+        public MRect? GetExtent()
         {
+            if (_featureTypeInfo == null)
+                return null;
             return new MRect(
                 _featureTypeInfo.BBox.MinLong,
                 _featureTypeInfo.BBox.MinLat,
@@ -503,10 +508,14 @@ namespace Mapsui.Providers.Wfs
                 _featureTypeInfo.BBox.MaxLat);
         }
 
-        public string CRS
+        public string? CRS
         {
-            get => CrsHelper.EpsgPrefix + _featureTypeInfo.SRID;
-            set => _featureTypeInfo.SRID = value.Substring(CrsHelper.EpsgPrefix.Length);
+            get => CrsHelper.EpsgPrefix + _featureTypeInfo?.SRID;
+            set
+            {
+                if (_featureTypeInfo != null && value != null)
+                    _featureTypeInfo.SRID = value.Substring(CrsHelper.EpsgPrefix.Length);
+            }
         }
 
         public void Dispose()
@@ -536,10 +545,10 @@ namespace Mapsui.Providers.Wfs
                 var config = new WFSClientHttpConfigurator(_textResources);
 
                 _featureTypeInfo.Prefix = _nsPrefix;
-                _featureTypeInfo.Name = _featureType;
+                _featureTypeInfo.Name = _featureType!; // is set in constructor
 
                 var featureQueryName = string.IsNullOrEmpty(_nsPrefix)
-                                              ? _featureType
+                                              ? _featureType! // is set in constructor
                                               : _nsPrefix + ":" + _featureType;
 
                 /***************************/
@@ -552,7 +561,7 @@ namespace Mapsui.Providers.Wfs
                     _featureTypeInfoQueryManager =
                         new XPathQueryManagerCompiledExpressionsDecorator(new XPathQueryManager());
                     _featureTypeInfoQueryManager.SetDocumentToParse(
-                        config.ConfigureForWfsGetCapabilitiesRequest(_httpClientUtil, _getCapabilitiesUri));
+                        config.ConfigureForWfsGetCapabilitiesRequest(_httpClientUtil, _getCapabilitiesUri!)); // is set in constructor
                     /* Namespaces for XPath queries */
                     _featureTypeInfoQueryManager.AddNamespace(_textResources.NSWFSPREFIX, _textResources.NSWFS);
                     _featureTypeInfoQueryManager.AddNamespace(_textResources.NSOWSPREFIX, _textResources.NSOWS);
@@ -593,7 +602,7 @@ namespace Mapsui.Providers.Wfs
                 {
                     var bbox = new WfsFeatureTypeInfo.BoundingBox();
                     var formatInfo = new NumberFormatInfo { NumberDecimalSeparator = "." };
-                    string bboxVal;
+                    string? bboxVal;
 
                     if (_wfsVersion == WFSVersionEnum.WFS_1_0_0)
                         bbox.MinLat =
@@ -676,7 +685,7 @@ namespace Mapsui.Providers.Wfs
                 /* Initialize IXPathQueryManager with configured HttpClientUtil */
                 describeFeatureTypeQueryManager.ResetNamespaces();
                 describeFeatureTypeQueryManager.SetDocumentToParse(config.ConfigureForWfsDescribeFeatureTypeRequest
-                                                                       (_httpClientUtil, describeFeatureTypeUri,
+                                                                       (_httpClientUtil, describeFeatureTypeUri!, // is set in constructor
                                                                         featureQueryName));
 
                 /* Namespaces for XPath queries */
@@ -708,21 +717,22 @@ namespace Mapsui.Providers.Wfs
 
                     /* read all the elements */
                     var iterator = geomQuery.GetIterator(geomQuery.Compile("//ancestor::xs:sequence/xs:element"));
-                    foreach (XPathNavigator node in iterator)
-                    {
-                        node.MoveToAttribute("type", string.Empty);
-                        var type = node.Value;
+                    if (iterator != null)
+                        foreach (XPathNavigator node in iterator)
+                        {
+                            node.MoveToAttribute("type", string.Empty);
+                            var type = node.Value;
 
-                        if (type.StartsWith("gml:")) // we skip geometry element cause we already found it
-                            continue;
+                            if (type.StartsWith("gml:")) // we skip geometry element cause we already found it
+                                continue;
 
-                        node.MoveToParent();
+                            node.MoveToParent();
 
-                        node.MoveToAttribute("name", string.Empty);
-                        var name = node.Value;
+                            node.MoveToAttribute("name", string.Empty);
+                            var name = node.Value;
 
-                        _featureTypeInfo.Elements.Add(new WfsFeatureTypeInfo.ElementInfo(name, type));
-                    }
+                            _featureTypeInfo.Elements.Add(new WfsFeatureTypeInfo.ElementInfo(name, type));
+                        }
                 }
                 else
                 {
@@ -918,8 +928,8 @@ namespace Mapsui.Providers.Wfs
             /// The <see cref="HttpClientUtil"/> instance is returned for immediate usage. 
             /// </summary>
             internal void ConfigureForWfsGetFeatureRequest(HttpClientUtil httpClientUtil,
-                WfsFeatureTypeInfo featureTypeInfo, List<string> labelProperties, BoundingBox? boundingBox,
-                IFilter filter, bool get)
+                WfsFeatureTypeInfo featureTypeInfo, List<string>? labelProperties, BoundingBox? boundingBox,
+                IFilter? filter, bool get)
             {
                 httpClientUtil.Reset();
                 httpClientUtil.Url = featureTypeInfo.ServiceUri;
@@ -927,7 +937,7 @@ namespace Mapsui.Providers.Wfs
                 if (get)
                 {
                     /* HTTP-GET */
-                    httpClientUtil.Url = httpClientUtil.Url.AppendQuery(_wfsTextResources.GetFeatureGETRequest(
+                    httpClientUtil.Url = httpClientUtil.Url?.AppendQuery(_wfsTextResources.GetFeatureGETRequest(
                         featureTypeInfo, labelProperties, boundingBox, filter));
                 }
                 else

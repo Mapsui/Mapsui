@@ -22,7 +22,7 @@ namespace Mapsui.Providers
         /// The CRS of the target. The source CRS will be projected to this target CRS. This should be equal to the
         /// CRS of the Map and the FetchInfo.CRS.
         /// </summary>
-        public string CRS { get; set; }
+        public string? CRS { get; set; }
 
         public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {
@@ -32,10 +32,12 @@ namespace Mapsui.Providers
             if (fetchInfo.Extent == null) return new List<IFeature>();
 
             var copiedExtent = new MRect(fetchInfo.Extent);
-            _projection.Project(CRS, _provider.CRS, copiedExtent);
+
+            // throws exception when CRS or _provider.CRS is null (so I don't have to check it here)
+            _projection.Project(CRS!, _provider.CRS!, copiedExtent);
             fetchInfo = new FetchInfo(copiedExtent, fetchInfo.Resolution, CRS, fetchInfo.ChangeType);
 
-            var features = _provider.GetFeatures(fetchInfo);
+            var features = _provider.GetFeatures(fetchInfo) ?? new List<IFeature>();
             if (!CrsHelper.IsProjectionNeeded(_provider.CRS, CRS)) return features;
 
             if (!CrsHelper.IsCrsProvided(_provider.CRS, CRS))

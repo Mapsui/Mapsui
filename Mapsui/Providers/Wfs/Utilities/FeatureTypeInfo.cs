@@ -31,8 +31,8 @@ namespace Mapsui.Providers.Wfs.Utilities
         private GeometryInfo _geometry = new GeometryInfo();
         private string _name = string.Empty;
 
-        private string _prefix = string.Empty;
-        private string _serviceUri = string.Empty;
+        private string? _prefix = string.Empty;
+        private string? _serviceUri = string.Empty;
         private string _srid = "4326";
         private string _ts = " ";
         private readonly List<ElementInfo> _elements = new List<ElementInfo>();
@@ -59,7 +59,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// prefix in 'GetCapabilities'.
         /// </summary>
         /// <value>The prefix.</value>
-        public string Prefix
+        public string? Prefix
         {
             get => _prefix;
             set => _prefix = value;
@@ -84,7 +84,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// Gets or sets the service URI for WFS 'GetFeature' request.
         /// This argument is obligatory for data retrieving.
         /// </summary>
-        public string ServiceUri
+        public string? ServiceUri
         {
             get => _serviceUri;
             set => _serviceUri = value;
@@ -152,7 +152,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         }
 
 
-        public List<string> LabelFields { get; set; } // temp solution 
+        public List<string>? LabelFields { get; set; } // temp solution 
 
 
 

@@ -11,7 +11,7 @@ namespace Mapsui.UI.Objects
 
         public ObservableCollection<T>? Collection { get; }
 
-        public string CRS { get; set; } = "";
+        public string? CRS { get; set; } = "";
 
         public ObservableCollectionProvider(ObservableCollection<T> collection)
         {

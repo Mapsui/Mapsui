@@ -353,7 +353,7 @@ namespace Mapsui.UI.Wpf
             _refresh = true;
         }
 
-        private void MapDataChanged(object sender, DataChangedEventArgs? e)
+        private void MapDataChanged(object? sender, DataChangedEventArgs? e)
         {
             RunOnUIThread(() => {
                 try
@@ -487,6 +487,8 @@ namespace Mapsui.UI.Wpf
         {
             if (Viewport.Extent != null)
             {
+                if (Viewport.Extent == null)
+                    return;
                 var fetchInfo = new FetchInfo(Viewport.Extent, Viewport.Resolution, Map?.CRS, changeType);
                 _map?.RefreshData(fetchInfo);
             }
