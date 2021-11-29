@@ -19,7 +19,7 @@ namespace Mapsui.Samples.Maui
                 .UseSkiaSharp(true)
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts => {
-                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                    fonts.AddFont("OpenSansRegular.ttf", "OpenSansRegular");
                 });
 
             return builder.Build();

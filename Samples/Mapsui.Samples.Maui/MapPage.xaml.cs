@@ -15,19 +15,19 @@ namespace Mapsui.Samples.Maui
 {
     public partial class MapPage : ContentPage
     {
-        private CancellationTokenSource gpsCancelation;
-        public Func<MapView, MapClickedEventArgs, bool> Clicker { get; set; }
+        private CancellationTokenSource? gpsCancelation;
+        public Func<MapView?, MapClickedEventArgs, bool>? Clicker { get; set; }
 
         public MapPage()
         {
             InitializeComponent();
         }
 
-        public MapPage(Action<IMapControl> setup, Func<MapView, MapClickedEventArgs, bool> c = null)
+        public MapPage(Action<IMapControl> setup, Func<MapView, MapClickedEventArgs, bool>? c = null)
         {
             InitializeComponent();
 
-            mapView.RotationLock = false;
+            mapView!.RotationLock = false;
             mapView.UnSnapRotationDegrees = 30;
             mapView.ReSnapRotationDegrees = 5;
 
@@ -41,7 +41,7 @@ namespace Mapsui.Samples.Maui
             mapView.Info += MapView_Info;
             mapView.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
 
-            Task.Run(() => StartGPS());
+            Task.Run(StartGPS);
 
             try
             {
@@ -61,7 +61,7 @@ namespace Mapsui.Samples.Maui
             mapView.Refresh();
         }
 
-        private void MapView_Info(object sender, UI.MapInfoEventArgs e)
+        private void MapView_Info(object? sender, UI.MapInfoEventArgs e)
         {
             if (e?.MapInfo?.Feature != null)
             {
@@ -78,14 +78,14 @@ namespace Mapsui.Samples.Maui
             }
         }
 
-        private void OnMapClicked(object sender, MapClickedEventArgs e)
+        private void OnMapClicked(object? sender, MapClickedEventArgs e)
         {
-            e.Handled = Clicker != null ? (bool)Clicker?.Invoke(sender as MapView, e) : false;
+            e.Handled = Clicker?.Invoke(sender as MapView, e) ?? false;
             //Samples.SetPins(mapView, e);
             //Samples.DrawPolylines(mapView, e);
         }
 
-        private void OnPinClicked(object sender, PinClickedEventArgs e)
+        private void OnPinClicked(object? sender, PinClickedEventArgs e)
         {
             if (e.Pin != null)
             {
@@ -152,7 +152,7 @@ namespace Mapsui.Samples.Maui
             });
         }
 
-        private void Compass_ReadingChanged(object sender, CompassChangedEventArgs e)
+        private void Compass_ReadingChanged(object? sender, CompassChangedEventArgs e)
         {
             mapView.MyLocationLayer.UpdateMyViewDirection(e.Reading.HeadingMagneticNorth, mapView.Viewport.Rotation, false);
         }

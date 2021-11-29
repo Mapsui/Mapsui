@@ -9,16 +9,16 @@ namespace Mapsui.Samples.Maui
 {
     public partial class MainPage : ContentPage
     {
-        IEnumerable<ISample> allSamples;
-        Func<object, EventArgs, bool> clicker;
+        readonly IEnumerable<ISample> allSamples;
+        Func<object, EventArgs, bool>? clicker;
 
         public MainPage()
         {
             InitializeComponent();
-            allSamples = AllSamples.GetSamples();
+            allSamples = AllSamples.GetSamples() ?? new List<ISample>();
 
             var categories = allSamples.Select(s => s.Category).Distinct().OrderBy(c => c);
-            picker.ItemsSource = categories.ToList<string>();
+            picker!.ItemsSource = categories.ToList<string>();
             picker.SelectedIndexChanged += PickerSelectedIndexChanged;
             picker.SelectedItem = "Forms";
         }
@@ -29,7 +29,7 @@ namespace Mapsui.Samples.Maui
             listView.ItemsSource = allSamples.Where(s => s.Category == selectedCategory).Select(x => x.Name);
         }
 
-        private void PickerSelectedIndexChanged(object sender, EventArgs e)
+        private void PickerSelectedIndexChanged(object? sender, EventArgs e)
         {
             FillListWithSamples();
         }
@@ -42,13 +42,14 @@ namespace Mapsui.Samples.Maui
             }
 
             var sampleName = e.SelectedItem.ToString();
-            var sample = allSamples.Where(x => x.Name == sampleName).FirstOrDefault<ISample>();
+            var sample = allSamples.FirstOrDefault(x => x.Name == sampleName);
 
             clicker = null;
-            if (sample is IFormsSample)
-                clicker = ((IFormsSample)sample).OnClick;
+            if (sample is IFormsSample formsSample)
+                clicker = formsSample.OnClick;
 
-            ((NavigationPage)Application.Current.MainPage).PushAsync(new MapPage(sample.Setup, clicker));
+            if (sample != null)
+                (Application.Current?.MainPage as NavigationPage)?.PushAsync(new MapPage(sample.Setup, clicker));
 
             listView.SelectedItem = null;
         }
