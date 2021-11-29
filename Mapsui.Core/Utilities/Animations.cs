@@ -65,6 +65,7 @@ namespace Mapsui.Utilities
         public static bool UpdateAnimations()
         {
             AnimationEntry[] entries;
+            var ticks = DateTime.Now.Ticks;
 
             lock (_syncObject)
             {
@@ -78,7 +79,7 @@ namespace Mapsui.Utilities
 
             for (int i = 0; i < entries.Length; i++)
             {
-                if (DateTime.Now.Ticks > entries[i].EndTicks)
+                if (ticks > entries[i].EndTicks)
                 {
                     // Animation is at the end of duration
                     isRunning = true;
@@ -93,7 +94,7 @@ namespace Mapsui.Utilities
                     entries[i].EndTicks = entries[i].StartTicks + entries[i].DurationTicks;
                 }
 
-                var value = (DateTime.Now.Ticks - entries[i].StartTicks) / (double)entries[i].DurationTicks;
+                var value = (ticks - entries[i].StartTicks) / (double)entries[i].DurationTicks;
 
                 if (value < entries[i].AnimationStart || value > entries[i].AnimationEnd)
                 {
