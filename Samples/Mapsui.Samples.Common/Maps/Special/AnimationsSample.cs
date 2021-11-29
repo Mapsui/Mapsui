@@ -28,13 +28,7 @@ namespace Mapsui.Samples.Common.Maps
 
             var animations = CreateAnimationsForSymbolStyle(style);
 
-            // todo: Introduce one Animation for the MapControl that could be reused here.
-            var animation = new Animation();
-            animation.Ticked += (s, e) => {
-                animation.UpdateAnimations();
-                mapControl.Refresh();
-            };
-            animation.Start(animations, 10000);
+            Animations.Start(animations, 10000);
 
             return map;
         }
