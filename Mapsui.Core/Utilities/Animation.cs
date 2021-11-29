@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Mapsui.Utilities
 {
-    public static class Animations
+    public static class Animation
     {
         // Sync object for enries list
         private static readonly object _syncObject = new();

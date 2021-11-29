@@ -28,7 +28,7 @@ namespace Mapsui.Samples.Common.Maps
 
             var animations = CreateAnimationsForSymbolStyle(style);
 
-            Animations.Start(animations, 10000);
+            Animation.Start(animations, 10000);
 
             return map;
         }

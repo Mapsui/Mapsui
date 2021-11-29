@@ -125,7 +125,7 @@ namespace Mapsui
                     return;
 
 
-                Animations.Start(animations, duration);
+                Animation.Start(animations, duration);
 
                 _lastAnimations = animations;
             }
@@ -168,7 +168,7 @@ namespace Mapsui
                 );
                 animations.Add(entry);
 
-                Animations.Start(animations, duration);
+                Animation.Start(animations, duration);
 
                 _lastAnimations = animations;
             }
@@ -230,7 +230,7 @@ namespace Mapsui
                 );
                 animations.Add(entry);
 
-                Animations.Start(animations, duration);
+                Animation.Start(animations, duration);
 
                 _lastAnimations = animations;
             }
@@ -356,7 +356,7 @@ namespace Mapsui
                 );
                 animations.Add(entry);
 
-                Animations.Start(animations, duration);
+                Animation.Start(animations, duration);
 
                 _lastAnimations = animations;
             }
@@ -422,7 +422,7 @@ namespace Mapsui
                 );
                 animations.Add(entry);
 
-                Animations.Start(animations, duration);
+                Animation.Start(animations, duration);
 
                 _lastAnimations = animations;
             }
@@ -473,7 +473,7 @@ namespace Mapsui
                 if (_rotationDelta > 180.0)
                     _rotationDelta -= 360.0;
 
-                Animations.Start(animations, duration);
+                Animation.Start(animations, duration);
 
                 _lastAnimations = animations;
             }
@@ -519,7 +519,7 @@ namespace Mapsui
             );
             animations.Add(entry);
 
-            Animations.Start(animations, (long)animateMillis);
+            Animation.Start(animations, (long)animateMillis);
 
             _lastAnimations = animations;
         }
@@ -529,7 +529,7 @@ namespace Mapsui
         /// </summary>
         public void StopRunningAnimation()
         {
-            Animations.Stop(_lastAnimations, false);
+            Animation.Stop(_lastAnimations, false);
         }
 
         private void CenterTick(AnimationEntry entry, double value)
