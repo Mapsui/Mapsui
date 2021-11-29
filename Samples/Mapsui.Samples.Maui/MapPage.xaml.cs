@@ -21,11 +21,19 @@ namespace Mapsui.Samples.Maui
         public MapPage()
         {
             InitializeComponent();
+
+            // nullable warning workaround
+            var test = this.mapView ?? throw new InvalidOperationException();
+            var test1 = this.info ?? throw new InvalidOperationException();
         }
 
-        public MapPage(Action<IMapControl> setup, Func<MapView, MapClickedEventArgs, bool>? c = null)
+        public MapPage(Action<IMapControl> setup, Func<MapView?, MapClickedEventArgs, bool>? c = null)
         {
             InitializeComponent();
+
+            // nullable warning workaround
+            var test = this.mapView ?? throw new InvalidOperationException();
+            var test1 = this.info ?? throw new InvalidOperationException();
 
             mapView!.RotationLock = false;
             mapView.UnSnapRotationDegrees = 30;

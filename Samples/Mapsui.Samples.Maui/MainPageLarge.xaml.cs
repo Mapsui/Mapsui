@@ -24,6 +24,10 @@ namespace Mapsui.Samples.Maui
         {
             InitializeComponent();
 
+            // nullable warning workaround
+            var test = this.listView ?? throw new InvalidOperationException();
+            var test2 = this.featureInfo ?? throw new InvalidOperationException();
+
             allSamples = AllSamples.GetSamples() ?? new List<ISample>();
 
             var categories = allSamples.Select(s => s.Category).Distinct().OrderBy(c => c);

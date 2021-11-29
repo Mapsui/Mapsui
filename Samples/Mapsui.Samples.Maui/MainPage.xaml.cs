@@ -10,11 +10,15 @@ namespace Mapsui.Samples.Maui
     public partial class MainPage : ContentPage
     {
         readonly IEnumerable<ISample> allSamples;
-        Func<object, EventArgs, bool>? clicker;
+        Func<object?, EventArgs, bool>? clicker;
 
         public MainPage()
         {
             InitializeComponent();
+
+            // nullable warning workaround"
+            var test = this.listView ?? throw new InvalidOperationException();
+
             allSamples = AllSamples.GetSamples() ?? new List<ISample>();
 
             var categories = allSamples.Select(s => s.Category).Distinct().OrderBy(c => c);
