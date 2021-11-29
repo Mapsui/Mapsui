@@ -157,9 +157,15 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             {
                 var response = client.GetAsync(uri).Result;
                 var bytes = BruTile.Utilities.ReadFully(response.Content.ReadAsStreamAsync().Result);
-                raster = new MRaster(new MemoryStream(bytes), viewport.Extent);
-                response.Dispose();
-                return true;
+                if (viewport.Extent != null)
+                {
+                    raster = new MRaster(new MemoryStream(bytes), viewport.Extent);
+                    response.Dispose();
+                    return true;
+                }
+
+                raster = null;
+                return false;
             }
             catch (Exception ex)
             {

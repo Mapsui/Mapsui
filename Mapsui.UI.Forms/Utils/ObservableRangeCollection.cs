@@ -618,7 +618,7 @@
         /// <param name="oldCluster"></param>
         //TODO should have really been a local method inside ReplaceRange(int index, int count, IEnumerable<T> collection, IEqualityComparer<T> comparer),
         //move when supported language version updated.
-        private void OnRangeReplaced(int followingItemIndex, ICollection<T> newCluster, ICollection<T>? oldCluster)
+        private void OnRangeReplaced(int followingItemIndex, ICollection<T>? newCluster, ICollection<T>? oldCluster)
         {
             if (oldCluster == null || oldCluster.Count == 0)
             {
@@ -629,12 +629,12 @@
             OnCollectionChanged(
                 new NotifyCollectionChangedEventArgs(
                     NotifyCollectionChangedAction.Replace,
-                    new List<T>(newCluster),
+                    new List<T>(newCluster ?? new List<T>()),
                     new List<T>(oldCluster),
                     followingItemIndex - oldCluster.Count));
 
             oldCluster.Clear();
-            newCluster.Clear();
+            newCluster?.Clear();
         }
 
         #endregion Private Methods

@@ -17,7 +17,7 @@ namespace Mapsui.Tests.Fetcher.Providers
                     throw new Exception("this provider sometimes fails");
                 return null; // This means the tile is not available in the source
             }
-            return new byte[0];
+            return Array.Empty<byte>();
         }
     }
 }

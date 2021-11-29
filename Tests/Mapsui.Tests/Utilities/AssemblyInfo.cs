@@ -11,9 +11,9 @@ namespace Mapsui.Tests.Utilities
             get
             {
                 var codeBase = Assembly.GetExecutingAssembly().CodeBase;
-                var uri = new UriBuilder(codeBase);
+                var uri = new UriBuilder(codeBase!);
                 var path = Uri.UnescapeDataString(uri.Path);
-                return Path.GetDirectoryName(path);
+                return Path.GetDirectoryName(path)!;
             }
         }
     }

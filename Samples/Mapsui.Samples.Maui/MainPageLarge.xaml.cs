@@ -59,7 +59,7 @@ namespace Mapsui.Samples.Maui
             mapView.Refresh();
         }
 
-        private void MapView_Info(object? sender, UI.MapInfoEventArgs e)
+        private void MapView_Info(object? sender, UI.MapInfoEventArgs? e)
         {
             featureInfo.Text = $"Click Info:";
 
