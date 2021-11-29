@@ -2,7 +2,7 @@ namespace Mapsui.Providers.ArcGIS
 {
     public interface IArcGISCapabilities
     {
-        string ServiceUrl { get; set; }
+        string? ServiceUrl { get; set; }
         string? currentVersion { get; set; }
         string? copyrightText { get; set; }
         string? serviceDescription { get; set; }
