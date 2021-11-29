@@ -71,8 +71,6 @@ namespace Mapsui.Utilities
             {
                 var value = (DateTime.Now.Ticks - entries[i].StartTicks) / (double)entries[i].DurationTicks;
 
-                System.Diagnostics.Debug.WriteLine(value);
-
                 if (value < entries[i].AnimationStart)
                 {
                     // Nothing to do before the animation starts
