@@ -159,7 +159,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
                 {
                     if (mapInfo.Feature is GeometryFeature geometryFeature)
                     {
-                        var vertexTouched = FindVertexTouched(mapInfo, geometryFeature.Geometry.MainVertices(), screenDistance);
+                        var vertexTouched = FindVertexTouched(mapInfo, geometryFeature.Geometry?.MainVertices() ?? new List<Point>(), screenDistance);
                         if (vertexTouched != null)
                         {
                             _dragInfo.Feature = geometryFeature;
@@ -213,10 +213,10 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
         {
             if (mapInfo?.Feature is GeometryFeature geometryFeature)
             {
-                var vertexTouched = FindVertexTouched(mapInfo, geometryFeature.Geometry.MainVertices(), screenDistance);
+                var vertexTouched = FindVertexTouched(mapInfo, geometryFeature.Geometry?.MainVertices() ?? new List<Point>(), screenDistance);
                 if (vertexTouched != null)
                 {
-                    var vertices = geometryFeature.Geometry.MainVertices();
+                    var vertices = geometryFeature.Geometry?.MainVertices() ?? new List<Point>();
                     var index = vertices.IndexOf(vertexTouched);
                     if (index >= 0)
                     {
@@ -243,7 +243,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
         {
             if (mapInfo?.Feature is GeometryFeature geometryFeature)
             {
-                var vertices = geometryFeature.Geometry.MainVertices();
+                var vertices = geometryFeature.Geometry?.MainVertices() ?? new List<Point>();
 
                 if (EditHelper.TryInsertVertex(mapInfo, vertices, VertexRadius))
                 {
@@ -263,7 +263,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
 
                 _rotateInfo.Feature = geometryFeature;
                 _rotateInfo.PreviousPosition = mapInfo.WorldPosition.ToPoint();
-                _rotateInfo.Center = geometryFeature.Geometry.BoundingBox?.Centroid;
+                _rotateInfo.Center = geometryFeature.Geometry?.BoundingBox?.Centroid;
             }
             return true; // to signal pan lock
         }
@@ -276,7 +276,8 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
             var currentVector = _rotateInfo.Center - worldPosition;
             var degrees = AngleBetween(currentVector, previousVector);
 
-            Geomorpher.Rotate(_rotateInfo.Feature.Geometry, degrees, _rotateInfo.Center);
+            if (_rotateInfo.Feature.Geometry != null)
+                Geomorpher.Rotate(_rotateInfo.Feature.Geometry, degrees, _rotateInfo.Center);
 
             _rotateInfo.PreviousPosition = worldPosition;
 
@@ -310,7 +311,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
 
                 _scaleInfo.Feature = geometryFeature;
                 _scaleInfo.PreviousPosition = mapInfo.WorldPosition.ToPoint();
-                _scaleInfo.Center = geometryFeature.Geometry.BoundingBox?.Centroid;
+                _scaleInfo.Center = geometryFeature.Geometry?.BoundingBox?.Centroid;
             }
 
             return true; // to signal pan lock
@@ -325,7 +326,8 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
                 _scaleInfo.Center.Distance(_scaleInfo.PreviousPosition);
 
 
-            Geomorpher.Scale(_scaleInfo.Feature.Geometry, scale, _scaleInfo.Center);
+            if (_scaleInfo.Feature.Geometry != null)
+                Geomorpher.Scale(_scaleInfo.Feature.Geometry, scale, _scaleInfo.Center);
 
             _scaleInfo.PreviousPosition = worldPosition;
 
