@@ -84,7 +84,7 @@ namespace Mapsui.Utilities
         /// </summary>
         /// <param name="entry">AnimationEntry to stop</param>
         /// <param name="callFinal">Final function is called, if callFinal is true</param>
-        public static void Stop(List<AnimationEntry> entries, bool callFinal = true)
+        public static void Stop(IEnumerable<AnimationEntry> entries, bool callFinal = true)
         {
             foreach (var entry in entries)
                 Stop(entry, callFinal);
