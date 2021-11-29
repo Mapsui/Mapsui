@@ -69,8 +69,25 @@ namespace Mapsui.Utilities
 
             for (int i = 0; i < entries.Length; i++)
             {
-                var value = (DateTime.Now.Ticks - entries[i].StartTicks) / entries[i].DurationTicks; 
-                isRunning &= entries[i].Tick(value);
+                var value = (DateTime.Now.Ticks - entries[i].StartTicks) / (double)entries[i].DurationTicks;
+
+                System.Diagnostics.Debug.WriteLine(value);
+
+                if (value < entries[i].AnimationStart)
+                {
+                    // Nothing to do before the animation starts
+                    continue;
+                }
+
+                if (value > entries[i].AnimationEnd)
+                {
+                    // Animation is at its end, so remove it
+                    isRunning = true;
+                    Stop(entries[i], true);
+                    continue;
+                }
+
+                isRunning |= entries[i].Tick(value);
             }
 
             return isRunning;
