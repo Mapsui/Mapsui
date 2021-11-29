@@ -77,7 +77,6 @@ namespace Mapsui.UI.Wpf
 
             // All requested updates up to this point will be handled by this redraw
             _refresh = false;
-            Navigator?.UpdateAnimations();
             Renderer.Render(canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
 
             // Stop stopwatch after drawing control
@@ -95,7 +94,8 @@ namespace Mapsui.UI.Wpf
 
         private void InvalidateTimerCallback(object? state)
         {
-            if (!_refresh)
+            // Check, if we have to redraw the screen, because a animation is running or a refresh is wished
+            if (!Animations.UpdateAnimations() && !_refresh)
                 return;
 
             if (_drawing)
