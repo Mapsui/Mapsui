@@ -91,6 +91,15 @@ namespace Mapsui.Utilities
         }
 
         /// <summary>
+        /// Stop all animations
+        /// </summary>
+        /// <param name="callFinal">Final function is called, if callFinal is tru</param>
+        public static void StopAll(bool callFinal = true)
+        {
+            Stop(_entries.ToArray(), callFinal);
+        }
+
+        /// <summary>
         /// Update all AnimationEntrys and check, if a redraw is needed
         /// </summary>
         /// <returns>True, if a redraw of the screen ist needed</returns>
