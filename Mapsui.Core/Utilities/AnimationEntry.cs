@@ -54,13 +54,23 @@ namespace Mapsui.Utilities
         public Easing Easing { get; }
 
         /// <summary>
+        /// Time, where this AnimationEntry has started
+        /// </summary>
+        internal long StartTicks { get; set; }
+
+        /// <summary>
+        /// Lengths of this AnimationEntry in ticks
+        /// </summary>
+        internal long DurationTicks { get; set; }
+
+        /// <summary>
         /// Called when a value should changed
         /// </summary>
         /// <param name="value">Position in animation cycle between 0 and 1</param>
-        public void Tick(double value)
+        internal bool Tick(double value)
         {
             if (value < AnimationStart || value > AnimationEnd)
-                return;
+                return false;
 
             // Each tick gets a value between 0 and 1 for its own cycle
             // Its independent from the global animation cycle
@@ -69,13 +79,16 @@ namespace Mapsui.Utilities
             if (_tick != null)
             {
                 _tick(this, v);
+                return true;
             }
+
+            return false;
         }
 
         /// <summary>
         /// Called when the animation cycle is at the end
         /// </summary>
-        public void Final()
+        internal void Final()
         {
             if (_final != null)
             {
