@@ -34,11 +34,6 @@ namespace Mapsui
             _animation = animation;
         }
 
-        private void AnimationTimerTicked(object sender, AnimationEventArgs e)
-        {
-            Navigated?.Invoke(this, e.ChangeType);
-        }
-
         /// <summary>
         /// Navigate center of viewport to center of extent and change resolution
         /// </summary>
