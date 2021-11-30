@@ -3,22 +3,26 @@ using System.Collections.Generic;
 
 namespace Mapsui.Utilities
 {
-    public static class Animation
+    public class Animation
     {
         // Sync object for enries list
-        private static readonly object _syncObject = new();
+        private readonly object _syncObject = new();
 
         /// <summary>
         /// List of all active animations
         /// </summary>
-        private static readonly List<AnimationEntry> _entries = new();
+        private readonly List<AnimationEntry> _entries = new();
+
+        public Animation()
+        { 
+        }
 
         /// <summary>
         /// Start a single AnimationEntry
         /// </summary>
         /// <param name="entry">AnimationEntry to start</param>
         /// <param name="duration">Duration im ms for the given AnimationEntry</param>
-        public static void Start(AnimationEntry entry, long duration)
+        public void Start(AnimationEntry entry, long duration)
         {
             Start(entry, duration, DateTime.Now.Ticks);
         }
@@ -29,7 +33,7 @@ namespace Mapsui.Utilities
         /// <remarks>All AnimationEntries are started at the same time.</remarks>
         /// <param name="entries">List of AnimationEntry to start</param>
         /// <param name="duration">Duration im ms for the given AnimationEntry</param>
-        public static void Start(IEnumerable<AnimationEntry> entries, long duration)
+        public void Start(IEnumerable<AnimationEntry> entries, long duration)
         {
             // Start all animations in entries with the same ticks
             var ticks = DateTime.Now.Ticks;
@@ -45,7 +49,7 @@ namespace Mapsui.Utilities
         /// <param name="entry">AnimationEntry to start</param>
         /// <param name="duration">Duration im ms for the given AnimationEntry</param>
         /// <param name="ticks">StartTicks for this AnimationEntry</param>
-        private static void Start(AnimationEntry entry, long duration, long ticks)
+        private void Start(AnimationEntry entry, long duration, long ticks)
         {
             lock (_syncObject)
             {
@@ -65,7 +69,7 @@ namespace Mapsui.Utilities
         /// </summary>
         /// <param name="entry">AnimationEntry to stop</param>
         /// <param name="callFinal">Final function is called, if callFinal is true</param>
-        public static void Stop(AnimationEntry entry, bool callFinal = true)
+        public void Stop(AnimationEntry entry, bool callFinal = true)
         {
             if (entry == null || !_entries.Contains(entry))
                 return;
@@ -84,7 +88,7 @@ namespace Mapsui.Utilities
         /// </summary>
         /// <param name="entry">AnimationEntry to stop</param>
         /// <param name="callFinal">Final function is called, if callFinal is true</param>
-        public static void Stop(IEnumerable<AnimationEntry> entries, bool callFinal = true)
+        public void Stop(IEnumerable<AnimationEntry> entries, bool callFinal = true)
         {
             foreach (var entry in entries)
                 Stop(entry, callFinal);
@@ -94,7 +98,7 @@ namespace Mapsui.Utilities
         /// Stop all animations
         /// </summary>
         /// <param name="callFinal">Final function is called, if callFinal is tru</param>
-        public static void StopAll(bool callFinal = true)
+        public void StopAll(bool callFinal = true)
         {
             Stop(_entries.ToArray(), callFinal);
         }
@@ -103,7 +107,7 @@ namespace Mapsui.Utilities
         /// Update all AnimationEntrys and check, if a redraw is needed
         /// </summary>
         /// <returns>True, if a redraw of the screen ist needed</returns>
-        public static bool UpdateAnimations()
+        public bool UpdateAnimations()
         {
             AnimationEntry[] entries;
             var ticks = DateTime.Now.Ticks;
