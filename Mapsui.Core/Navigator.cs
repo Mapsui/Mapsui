@@ -10,6 +10,7 @@ namespace Mapsui
     {
         private readonly Map _map;
         private readonly IViewport _viewport;
+        private readonly Animation _animation;
         private double _rotationDelta;
         private List<AnimationEntry> _lastAnimations = new();
 
@@ -26,10 +27,11 @@ namespace Mapsui
 
         public EventHandler<ChangeType>? Navigated { get; set; }
 
-        public Navigator(Map map, IViewport viewport)
+        public Navigator(Map map, IViewport viewport, Animation animation)
         {
             _map = map;
             _viewport = viewport;
+            _animation = animation;
         }
 
         private void AnimationTimerTicked(object sender, AnimationEventArgs e)
@@ -125,7 +127,7 @@ namespace Mapsui
                     return;
 
 
-                Animation.Start(animations, duration);
+                _animation.Start(animations, duration);
 
                 _lastAnimations = animations;
             }
@@ -168,7 +170,7 @@ namespace Mapsui
                 );
                 animations.Add(entry);
 
-                Animation.Start(animations, duration);
+                _animation.Start(animations, duration);
 
                 _lastAnimations = animations;
             }
@@ -230,7 +232,7 @@ namespace Mapsui
                 );
                 animations.Add(entry);
 
-                Animation.Start(animations, duration);
+                _animation.Start(animations, duration);
 
                 _lastAnimations = animations;
             }
@@ -356,7 +358,7 @@ namespace Mapsui
                 );
                 animations.Add(entry);
 
-                Animation.Start(animations, duration);
+                _animation.Start(animations, duration);
 
                 _lastAnimations = animations;
             }
@@ -422,7 +424,7 @@ namespace Mapsui
                 );
                 animations.Add(entry);
 
-                Animation.Start(animations, duration);
+                _animation.Start(animations, duration);
 
                 _lastAnimations = animations;
             }
@@ -473,7 +475,7 @@ namespace Mapsui
                 if (_rotationDelta > 180.0)
                     _rotationDelta -= 360.0;
 
-                Animation.Start(animations, duration);
+                _animation.Start(animations, duration);
 
                 _lastAnimations = animations;
             }
@@ -519,7 +521,7 @@ namespace Mapsui
             );
             animations.Add(entry);
 
-            Animation.Start(animations, (long)animateMillis);
+            _animation.Start(animations, (long)animateMillis);
 
             _lastAnimations = animations;
         }
@@ -529,7 +531,7 @@ namespace Mapsui
         /// </summary>
         public void StopRunningAnimation()
         {
-            Animation.Stop(_lastAnimations, false);
+            _animation.Stop(_lastAnimations, false);
         }
 
         private void CenterTick(AnimationEntry entry, double value)

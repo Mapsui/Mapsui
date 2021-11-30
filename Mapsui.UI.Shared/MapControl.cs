@@ -461,7 +461,7 @@ namespace Mapsui.UI.Wpf
                 if (_map != null)
                 {
                     SubscribeToMapEvents(_map);
-                    Navigator = new Navigator(_map, _viewport);
+                    Navigator = new Navigator(_map, _viewport, _animation);
                     _viewport.Map = _map;
                     _viewport.Limiter = _map.Limiter;
                     CallHomeIfNeeded();
