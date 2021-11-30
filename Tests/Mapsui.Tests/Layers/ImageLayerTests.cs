@@ -50,7 +50,7 @@ namespace Mapsui.Tests.Layers
 
             // assert
             waitHandle.WaitOne();
-            Assert.AreEqual(ExceptionMessage, exception.Message);
+            Assert.AreEqual(ExceptionMessage, exception?.Message);
         }
     }
 }

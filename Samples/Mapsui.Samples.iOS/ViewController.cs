@@ -27,7 +27,7 @@ namespace Mapsui.Samples.iOS
             // Never tested this. PDD.
             MbTilesHelper.DeployMbTilesFile(s => File.Create(Path.Combine(MbTilesLocationOnIos, s)));
 
-            var mapControl = CreateMap(View.Bounds);
+            var mapControl = CreateMap(View!.Bounds);
             mapControl.Info += MapOnInfo;
             View = mapControl;
         }

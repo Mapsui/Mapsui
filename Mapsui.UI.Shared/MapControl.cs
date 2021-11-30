@@ -42,7 +42,7 @@ namespace Mapsui.UI.Wpf
         // Action to call for a redraw of the control
         private Action? _invalidate;
         // Timer for loop to invalidating the control
-        private System.Threading.Timer _invalidateTimer = default!;
+        private System.Threading.Timer? _invalidateTimer = default!;
         // Interval between two calls of the invalidate function in ms
         private int _updateInterval = 16;
         // Stopwatch for measuring drawing times
@@ -188,7 +188,7 @@ After:
         public void StartUpdates(bool refresh = true)
         {
             _refresh = refresh;
-            _invalidateTimer.Change(0, _updateInterval);
+            _invalidateTimer?.Change(0, _updateInterval);
         }
 
         /// <summary>
@@ -200,7 +200,7 @@ After:
         /// </remarks>
         public void StopUpdates()
         {
-            _invalidateTimer.Change(System.Threading.Timeout.Infinite, System.Threading.Timeout.Infinite);
+            _invalidateTimer?.Change(System.Threading.Timeout.Infinite, System.Threading.Timeout.Infinite);
         }
 
         /// <summary>
@@ -616,7 +616,7 @@ After:
         /// <param name="startScreenPosition">Screen position of Viewport/MapControl</param>
         /// <param name="numTaps">Number of clickes/taps</param>
         /// <returns>True, if something done </returns>
-        private MapInfoEventArgs? InvokeInfo(MPoint screenPosition, MPoint startScreenPosition, int numTaps)
+        private MapInfoEventArgs? InvokeInfo(MPoint? screenPosition, MPoint? startScreenPosition, int numTaps)
         {
             return InvokeInfo(
                 Map?.GetWidgetsOfMapAndLayers() ?? new List<IWidget>(),
@@ -635,8 +635,8 @@ After:
         /// <param name="widgetCallback">Callback, which is called when Widget is hit</param>
         /// <param name="numTaps">Number of clickes/taps</param>
         /// <returns>True, if something done </returns>
-        private MapInfoEventArgs? InvokeInfo(IEnumerable<IWidget> widgets, MPoint screenPosition,
-            MPoint startScreenPosition, Func<IWidget, MPoint, bool> widgetCallback, int numTaps)
+        private MapInfoEventArgs? InvokeInfo(IEnumerable<IWidget> widgets, MPoint? screenPosition,
+            MPoint? startScreenPosition, Func<IWidget, MPoint, bool> widgetCallback, int numTaps)
         {
             if (screenPosition == null || startScreenPosition == null)
                 return null;

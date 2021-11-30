@@ -176,6 +176,8 @@ namespace Mapsui.Samples.Droid
                 if (_popup == null)
                     return;
 
+                if (geometryFeature.Extent == null)
+                    return;
 
                 // Or position on feature position: 
                 var screenPosition = _mapControl.Viewport.WorldToScreen(geometryFeature.Extent.Centroid);
