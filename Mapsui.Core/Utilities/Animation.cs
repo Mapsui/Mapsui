@@ -1,158 +1,152 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Timers;
 
 namespace Mapsui.Utilities
 {
-    public class Animation : IDisposable
+    public static class Animation
     {
-        // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
-        private readonly Timer _timer;
-        private Stopwatch? _stopwatch;
-        private long _stopwatchStart;
-        private long _durationTicks;
-        private readonly object _syncObject = new();
+        // Sync object for enries list
+        private static readonly object _syncObject = new();
 
-        public Animation()
+        /// <summary>
+        /// List of all active animations
+        /// </summary>
+        private static readonly List<AnimationEntry> _entries = new();
+
+        /// <summary>
+        /// Start a single AnimationEntry
+        /// </summary>
+        /// <param name="entry">AnimationEntry to start</param>
+        /// <param name="duration">Duration im ms for the given AnimationEntry</param>
+        public static void Start(AnimationEntry entry, long duration)
         {
-            // Create timer for animation
-            _timer = new Timer
-            {
-                Interval = 16,
-                AutoReset = true
-            };
-            _timer.Elapsed += HandleTimerElapse;
-            // Start the timer, it will keep running during the Animation's lifetime. 
-            // If no animations are running the Ticked callback will not be called.
-            _timer.Start();
-        }
-
-        public EventHandler<AnimationEventArgs>? Started { get; set; }
-        public EventHandler<AnimationEventArgs>? Stopped { get; set; }
-        public EventHandler<AnimationEventArgs>? Ticked { get; set; }
-
-        /// <summary>
-        /// Duration of the whole animation cycle in milliseconds
-        /// </summary>
-        private long _duration = 300;
-
-        /// <summary>
-        /// Animations, that should be made
-        /// </summary>
-        private readonly List<AnimationEntry> _entries = new();
-
-        /// <summary>
-        /// True, if animation is running
-        /// </summary>
-        public bool IsRunning { get; set; }
-
-        private void Start()
-        {
-            if (IsRunning)
-            {
-                Stop(false);
-            }
-
-            // Animation in ticks;
-            _durationTicks = _duration * Stopwatch.Frequency / 1000;
-
-            _stopwatch = Stopwatch.StartNew();
-            _stopwatchStart = _stopwatch.ElapsedTicks;
-            IsRunning = true;
-            Started?.Invoke(this, new AnimationEventArgs(0, ChangeType.Discrete));
+            Start(entry, duration, DateTime.Now.Ticks);
         }
 
         /// <summary>
-        /// Stop a running animation if there is one
+        /// Start a list of AnimationEntrys
         /// </summary>
-        /// <param name="gotoEnd">Should final of each list entry be called</param>
-        public void Stop(bool gotoEnd = true)
+        /// <remarks>All AnimationEntries are started at the same time.</remarks>
+        /// <param name="entries">List of AnimationEntry to start</param>
+        /// <param name="duration">Duration im ms for the given AnimationEntry</param>
+        public static void Start(IEnumerable<AnimationEntry> entries, long duration)
         {
-            if (!IsRunning) return;
+            // Start all animations in entries with the same ticks
+            var ticks = DateTime.Now.Ticks;
 
-            _stopwatch?.Stop();
-
-            if (gotoEnd)
-            {
-                foreach (var entry in _entries)
-                {
-                    entry.Final();
-                }
-            }
-            IsRunning = false;
+            foreach (var entry in entries)
+                Start(entry, duration, ticks);
         }
 
         /// <summary>
-        /// Timer tick for animation
+        /// Start of a AnimationEntry with given duration at given ticks for StartTicks
         /// </summary>
-        /// <param name="sender">Sender of this tick</param>
-        /// <param name="e">Timer tick arguments</param>
-        private void HandleTimerElapse(object sender, ElapsedEventArgs e)
+        /// <remarks>When the ticks is given, more than one AnimationEntry with the same StartTicks could be started.</remarks>
+        /// <param name="entry">AnimationEntry to start</param>
+        /// <param name="duration">Duration im ms for the given AnimationEntry</param>
+        /// <param name="ticks">StartTicks for this AnimationEntry</param>
+        private static void Start(AnimationEntry entry, long duration, long ticks)
         {
-            if (IsRunning)
+            lock (_syncObject)
             {
-                if (_stopwatch == null) return;
-                var ticks = (_stopwatch.ElapsedTicks - _stopwatchStart) / _durationTicks;
-                var changeType = (ticks >= 1.0) ? ChangeType.Discrete : ChangeType.Continuous;
-                Ticked?.Invoke(sender, new AnimationEventArgs(ticks, changeType));
+                if (_entries.Contains(entry))
+                    Stop(entry, false);
+
+                entry.StartTicks = ticks;
+                entry.DurationTicks = duration * TimeSpan.TicksPerMillisecond;
+                entry.EndTicks = entry.StartTicks + entry.DurationTicks;
+
+                _entries.Add(entry);
             }
         }
 
-        public void UpdateAnimations()
+        /// <summary>
+        /// Stop a given AnimationEntry
+        /// </summary>
+        /// <param name="entry">AnimationEntry to stop</param>
+        /// <param name="callFinal">Final function is called, if callFinal is true</param>
+        public static void Stop(AnimationEntry entry, bool callFinal = true)
         {
-            if (!IsRunning) return;
-            if (_stopwatch == null) return;
-
-            double ticks = _stopwatch.ElapsedTicks - _stopwatchStart;
-            var value = ticks / _durationTicks;
-
-            if (value >= 1.0)
-            {
-                Stop();
+            if (entry == null || !_entries.Contains(entry))
                 return;
-            }
 
-            List<AnimationEntry> copyOfEntries;
+            if (callFinal)
+                entry.Final();
+
             lock (_syncObject)
             {
-                copyOfEntries = _entries.ToList();
-            }
-
-            // Calc new values
-            foreach (var entry in copyOfEntries)
-            {
-                if (value >= entry.AnimationStart && value <= entry.AnimationEnd)
-                    entry.Tick(value);
+                _entries.Remove(entry);
             }
         }
 
-        public void Start(List<AnimationEntry> entries, long duration)
+        /// <summary>
+        /// Stop all AnimationEntrys in a given list
+        /// </summary>
+        /// <param name="entry">AnimationEntry to stop</param>
+        /// <param name="callFinal">Final function is called, if callFinal is true</param>
+        public static void Stop(IEnumerable<AnimationEntry> entries, bool callFinal = true)
         {
+            foreach (var entry in entries)
+                Stop(entry, callFinal);
+        }
+
+        /// <summary>
+        /// Stop all animations
+        /// </summary>
+        /// <param name="callFinal">Final function is called, if callFinal is tru</param>
+        public static void StopAll(bool callFinal = true)
+        {
+            Stop(_entries.ToArray(), callFinal);
+        }
+
+        /// <summary>
+        /// Update all AnimationEntrys and check, if a redraw is needed
+        /// </summary>
+        /// <returns>True, if a redraw of the screen ist needed</returns>
+        public static bool UpdateAnimations()
+        {
+            AnimationEntry[] entries;
+            var ticks = DateTime.Now.Ticks;
+
             lock (_syncObject)
             {
-                _duration = duration;
-                _entries.Clear();
-                _entries.AddRange(entries);
-                Start();
+                entries = _entries.ToArray();
             }
-        }
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
+            if (entries.Length == 0)
+                return false;
 
-        protected virtual void Dispose(bool disposing)
-        {
-            _timer.Dispose();
-        }
+            var isRunning = false;
 
-        ~Animation()
-        {
-            Dispose(false);
+            for (int i = 0; i < entries.Length; i++)
+            {
+                if (ticks > entries[i].EndTicks)
+                {
+                    // Animation is at the end of duration
+                    isRunning = true;
+                    if (!entries[i].Repeat)
+                    {
+                        // Animation shouldn't be repeated, so remove it
+                        Stop(entries[i], true);
+                        continue;
+                    }
+                    // Set new values for repeating this animation
+                    entries[i].StartTicks = entries[i].EndTicks;
+                    entries[i].EndTicks = entries[i].StartTicks + entries[i].DurationTicks;
+                }
+
+                var value = (ticks - entries[i].StartTicks) / (double)entries[i].DurationTicks;
+
+                if (value < entries[i].AnimationStart || value > entries[i].AnimationEnd)
+                {
+                    // Nothing to do before the animation starts or after animation ended
+                    continue;
+                }
+
+                isRunning |= entries[i].Tick(value);
+            }
+
+            return isRunning;
         }
     }
 }

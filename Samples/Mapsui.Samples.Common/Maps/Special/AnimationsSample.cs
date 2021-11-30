@@ -28,13 +28,7 @@ namespace Mapsui.Samples.Common.Maps
 
             var animations = CreateAnimationsForSymbolStyle(style);
 
-            // todo: Introduce one Animation for the MapControl that could be reused here.
-            var animation = new Animation();
-            animation.Ticked += (s, e) => {
-                animation.UpdateAnimations();
-                mapControl.Refresh();
-            };
-            animation.Start(animations, 10000);
+            Animation.Start(animations, 10000);
 
             return map;
         }
@@ -66,13 +60,14 @@ namespace Mapsui.Samples.Common.Maps
             var animations = new List<AnimationEntry>();
 
             var entry1 = new AnimationEntry(
-               start: style.SymbolScale,
-               end: style.SymbolScale * 2,
-               animationStart: 0,
-               animationEnd: .5,
-               easing: Easing.SinInOut,
-               tick: (entry, value) => { style.SymbolScale = (double)((double)entry.Start + ((double)entry.End - (double)entry.Start) * entry.Easing.Ease(value)); },
-               final: (entry) => { style.SymbolScale = (double)entry.End; }
+                start: style.SymbolScale,
+                end: style.SymbolScale * 2,
+                animationStart: 0,
+                animationEnd: .5,
+                easing: Easing.SinInOut,
+                repeat: true,
+                tick: (entry, value) => { style.SymbolScale = (double)((double)entry.Start + ((double)entry.End - (double)entry.Start) * entry.Easing.Ease(value)); },
+                final: (entry) => { style.SymbolScale = (double)entry.End; }
             );
             animations.Add(entry1);
 
@@ -82,6 +77,7 @@ namespace Mapsui.Samples.Common.Maps
                 animationStart: .5,
                 animationEnd: 1,
                 easing: Easing.SinInOut,
+                repeat: true,
                 tick: (entry, value) => { style.SymbolScale = (double)((double)entry.Start + ((double)entry.End - (double)entry.Start) * entry.Easing.Ease(value)); },
                 final: (entry) => { style.SymbolScale = (double)entry.End; }
             );
