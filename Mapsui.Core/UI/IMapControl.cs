@@ -28,6 +28,8 @@ namespace Mapsui.UI
 
         IRenderer Renderer { get; }
 
+        Animation Animation { get; }
+
         void OpenBrowser(string url); //todo: Perhaps remove
 
         /// <summary>
