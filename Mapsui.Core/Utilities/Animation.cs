@@ -1,18 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Mapsui.Utilities
 {
     public static class Animation
     {
-        // Sync object for enries list
-        private static readonly object _syncObject = new();
-
-        /// <summary>
-        /// List of all active animations
-        /// </summary>
-        private static readonly List<AnimationEntry> _entries = new();
-
         /// <summary>
         /// Start a single AnimationEntry
         /// </summary>
@@ -33,8 +26,9 @@ namespace Mapsui.Utilities
         {
             // Start all animations in entries with the same ticks
             var ticks = DateTime.Now.Ticks;
+            var copiedEntries = entries.ToList();
 
-            foreach (var entry in entries)
+            foreach (var entry in copiedEntries)
                 Start(entry, duration, ticks);
         }
 
@@ -47,36 +41,12 @@ namespace Mapsui.Utilities
         /// <param name="ticks">StartTicks for this AnimationEntry</param>
         private static void Start(AnimationEntry entry, long duration, long ticks)
         {
-            lock (_syncObject)
-            {
-                if (_entries.Contains(entry))
-                    Stop(entry, false);
-
-                entry.StartTicks = ticks;
-                entry.DurationTicks = duration * TimeSpan.TicksPerMillisecond;
-                entry.EndTicks = entry.StartTicks + entry.DurationTicks;
-
-                _entries.Add(entry);
-            }
-        }
-
-        /// <summary>
-        /// Stop a given AnimationEntry
-        /// </summary>
-        /// <param name="entry">AnimationEntry to stop</param>
-        /// <param name="callFinal">Final function is called, if callFinal is true</param>
-        public static void Stop(AnimationEntry entry, bool callFinal = true)
-        {
-            if (entry == null || !_entries.Contains(entry))
+            if (entry == null)
                 return;
 
-            if (callFinal)
-                entry.Final();
-
-            lock (_syncObject)
-            {
-                _entries.Remove(entry);
-            }
+            entry.StartTicks = ticks;
+            entry.DurationTicks = duration * TimeSpan.TicksPerMillisecond;
+            entry.EndTicks = entry.StartTicks + entry.DurationTicks;
         }
 
         /// <summary>
@@ -86,67 +56,72 @@ namespace Mapsui.Utilities
         /// <param name="callFinal">Final function is called, if callFinal is true</param>
         public static void Stop(IEnumerable<AnimationEntry> entries, bool callFinal = true)
         {
-            foreach (var entry in entries)
+            var copiedEntries = entries.ToList();
+
+            foreach (var entry in copiedEntries)
                 Stop(entry, callFinal);
         }
 
         /// <summary>
-        /// Stop all animations
+        /// Stop a given AnimationEntry
         /// </summary>
-        /// <param name="callFinal">Final function is called, if callFinal is tru</param>
-        public static void StopAll(bool callFinal = true)
+        /// <param name="entry">AnimationEntry to stop</param>
+        /// <param name="callFinal">Final function is called, if callFinal is true</param>
+        public static void Stop(AnimationEntry entry, bool callFinal = true)
         {
-            Stop(_entries.ToArray(), callFinal);
+            if (entry == null)
+                return;
+
+            if (callFinal)
+                entry.Final();
         }
 
         /// <summary>
-        /// Update all AnimationEntrys and check, if a redraw is needed
+        /// Update more than one AnimationEntry and check, if a redraw is needed
         /// </summary>
         /// <returns>True, if a redraw of the screen ist needed</returns>
-        public static bool UpdateAnimations()
+        public static bool UpdateAnimations(IEnumerable<AnimationEntry> entries, long ticks, bool callFinal = true)
         {
-            AnimationEntry[] entries;
-            var ticks = DateTime.Now.Ticks;
+            bool isRunning = false;
+            var copiedEntries = entries.ToList();
 
-            lock (_syncObject)
-            {
-                entries = _entries.ToArray();
-            }
-
-            if (entries.Length == 0)
-                return false;
-
-            var isRunning = false;
-
-            for (int i = 0; i < entries.Length; i++)
-            {
-                if (ticks > entries[i].EndTicks)
-                {
-                    // Animation is at the end of duration
-                    isRunning = true;
-                    if (!entries[i].Repeat)
-                    {
-                        // Animation shouldn't be repeated, so remove it
-                        Stop(entries[i], true);
-                        continue;
-                    }
-                    // Set new values for repeating this animation
-                    entries[i].StartTicks = entries[i].EndTicks;
-                    entries[i].EndTicks = entries[i].StartTicks + entries[i].DurationTicks;
-                }
-
-                var value = (ticks - entries[i].StartTicks) / (double)entries[i].DurationTicks;
-
-                if (value < entries[i].AnimationStart || value > entries[i].AnimationEnd)
-                {
-                    // Nothing to do before the animation starts or after animation ended
-                    continue;
-                }
-
-                isRunning |= entries[i].Tick(value);
-            }
+            foreach (var entry in copiedEntries)
+                isRunning |= UpdateAnimation(entry, ticks, callFinal);
 
             return isRunning;
+        }
+
+        /// <summary>
+        /// Update AnimationEntry and check, if a redraw is needed
+        /// </summary>
+        /// <returns>True, if a redraw of the screen ist needed</returns>
+        public static bool UpdateAnimation(AnimationEntry entry, long ticks, bool callFinal = true)
+        {
+            if (entry == null)
+                return false;
+
+            if (ticks > entry.EndTicks)
+            {
+                // Animation is at the end of duration
+                if (!entry.Repeat && callFinal)
+                {
+                    // Animation shouldn't be repeated, so remove it
+                    return entry.Final();
+                }
+                // Set new values for repeating this animation
+                entry.StartTicks = entry.EndTicks;
+                entry.EndTicks = entry.StartTicks + entry.DurationTicks;
+            }
+
+            var value = (ticks - entry.StartTicks) / (double)entry.DurationTicks;
+
+            if (value < entry.AnimationStart || value > entry.AnimationEnd)
+            {
+                // Nothing to do before the animation starts or after animation ended
+                return false;
+            }
+
+            return entry.Tick(value);
         }
     }
 }
