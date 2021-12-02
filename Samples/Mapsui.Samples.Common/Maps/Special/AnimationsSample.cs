@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using Mapsui.Layers;
 using Mapsui.Layers.Tiling;
 using Mapsui.Providers;
@@ -18,28 +19,39 @@ namespace Mapsui.Samples.Common.Maps
             mapControl.Map = CreateMap(mapControl);
         }
 
+        private static Timer? timer;
+
         public static Map CreateMap(IMapControl mapControl)
         {
-            var style = new SymbolStyle() { Fill = new Brush(Color.Red), SymbolScale = 1, };
-
             var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            map.Layers.Add(CreateLayer(style));
+            map.Layers.Add(CreateLayer());
 
-            var animations = CreateAnimationsForSymbolStyle(style);
-
-            Animation.Start(animations, 10000);
+            // IMPORTANT:
+            // This is a temporary timer that is needed to show how passive animation works.
+            // In the eventual solution there render loop would be triggered a regular intervals.
+            // On each interval it should check if a render update is needed. So, the state of the
+            // animations should somehow be requestable at that point.
+            timer = new Timer((s) => mapControl.Refresh(), null, 16, 16);
 
             return map;
         }
 
-        public static ILayer CreateLayer(IStyle style)
+        public static ILayer CreateLayer()
         {
+            var style = new SymbolStyle() { Fill = new Brush(Color.Red), SymbolScale = 1, };
 
-            return new Layer("Points")
+            var layer = new Layer("Points")
             {
                 DataSource = new MemoryProvider<IFeature>(CreatePoints(style)),
             };
+
+            layer.Animations.AddRange(CreateAnimationsForSymbolStyle(style));
+
+            Animation.Start(layer.Animations, 10000); // This should not be necessary
+
+            return layer;
+
         }
 
         private static List<PointFeature> CreatePoints(IStyle style)

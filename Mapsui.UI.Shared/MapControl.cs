@@ -96,76 +96,7 @@ namespace Mapsui.UI.Wpf
         {
             // Check, if we have to redraw the screen, because a animation is running or a refresh is wished
 
-/* Unmerged change from project 'Mapsui.UI.Uwp'
-Before:
-            if (!Animations.UpdateAnimations() && !_refresh)
-After:
-            if (!Animation.UpdateAnimations() && !_refresh)
-*/
-
-/* Unmerged change from project 'Mapsui.UI.iOS'
-Before:
-            if (!Animations.UpdateAnimations() && !_refresh)
-After:
-            if (!Animation.UpdateAnimations() && !_refresh)
-*/
-
-/* Unmerged change from project 'Mapsui.UI.Wpf (netcoreapp3.1)'
-Before:
-            if (!Animations.UpdateAnimations() && !_refresh)
-After:
-            if (!Animation.UpdateAnimations() && !_refresh)
-*/
-
-/* Unmerged change from project 'Mapsui.UI.Forms'
-Before:
-            if (!Animations.UpdateAnimations() && !_refresh)
-After:
-            if (!Animation.UpdateAnimations() && !_refresh)
-*/
-
-/* Unmerged change from project 'Mapsui.UI.Uno (uap10.0.18362)'
-Before:
-            if (!Animations.UpdateAnimations() && !_refresh)
-After:
-            if (!Animation.UpdateAnimations() && !_refresh)
-*/
-
-/* Unmerged change from project 'Mapsui.UI.WinUI'
-Before:
-            if (!Animations.UpdateAnimations() && !_refresh)
-After:
-            if (!Animation.UpdateAnimations() && !_refresh)
-*/
-
-/* Unmerged change from project 'Mapsui.UI.Avalonia'
-Before:
-            if (!Animations.UpdateAnimations() && !_refresh)
-After:
-            if (!Animation.UpdateAnimations() && !_refresh)
-*/
-
-/* Unmerged change from project 'Mapsui.UI.Wpf (net48)'
-Before:
-            if (!Animations.UpdateAnimations() && !_refresh)
-After:
-            if (!Animation.UpdateAnimations() && !_refresh)
-*/
-
-/* Unmerged change from project 'Mapsui.UI.Uno (xamarinios10)'
-Before:
-            if (!Animations.UpdateAnimations() && !_refresh)
-After:
-            if (!Animation.UpdateAnimations() && !_refresh)
-*/
-
-/* Unmerged change from project 'Mapsui.UI.Uno (netstandard2.0)'
-Before:
-            if (!Animations.UpdateAnimations() && !_refresh)
-After:
-            if (!Animation.UpdateAnimations() && !_refresh)
-*/
-            if (!Utilities.Animation.UpdateAnimations() && !_refresh)
+            if (!Navigator.UpdateAnimations() && !_refresh)
                 return;
 
             if (_drawing)
@@ -702,7 +633,7 @@ After:
                 _invalidateTimer?.Dispose();
             }
             _invalidateTimer = null;
-        }
+        }        
     }
 }
 

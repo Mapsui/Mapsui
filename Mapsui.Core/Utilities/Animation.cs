@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Mapsui.Utilities
 {
@@ -11,7 +12,6 @@ namespace Mapsui.Utilities
         /// <summary>
         /// List of all active animations
         /// </summary>
-        private static readonly List<AnimationEntry> _entries = new();
 
         /// <summary>
         /// Start a single AnimationEntry
@@ -49,14 +49,10 @@ namespace Mapsui.Utilities
         {
             lock (_syncObject)
             {
-                if (_entries.Contains(entry))
-                    Stop(entry, false);
-
+                 Stop(entry, false);
                 entry.StartTicks = ticks;
                 entry.DurationTicks = duration * TimeSpan.TicksPerMillisecond;
                 entry.EndTicks = entry.StartTicks + entry.DurationTicks;
-
-                _entries.Add(entry);
             }
         }
 
@@ -67,16 +63,11 @@ namespace Mapsui.Utilities
         /// <param name="callFinal">Final function is called, if callFinal is true</param>
         public static void Stop(AnimationEntry entry, bool callFinal = true)
         {
-            if (entry == null || !_entries.Contains(entry))
+            if (entry == null)
                 return;
 
             if (callFinal)
                 entry.Final();
-
-            lock (_syncObject)
-            {
-                _entries.Remove(entry);
-            }
         }
 
         /// <summary>
@@ -91,27 +82,16 @@ namespace Mapsui.Utilities
         }
 
         /// <summary>
-        /// Stop all animations
-        /// </summary>
-        /// <param name="callFinal">Final function is called, if callFinal is tru</param>
-        public static void StopAll(bool callFinal = true)
-        {
-            Stop(_entries.ToArray(), callFinal);
-        }
-
-        /// <summary>
         /// Update all AnimationEntrys and check, if a redraw is needed
         /// </summary>
         /// <returns>True, if a redraw of the screen ist needed</returns>
-        public static bool UpdateAnimations()
+        public static bool UpdateAnimations(IEnumerable<AnimationEntry> entries1)
         {
-            AnimationEntry[] entries;
             var ticks = DateTime.Now.Ticks;
 
-            lock (_syncObject)
-            {
-                entries = _entries.ToArray();
-            }
+            AnimationEntry[] entries;
+
+            entries = entries1.ToArray();
 
             if (entries.Length == 0)
                 return false;

@@ -21,10 +21,8 @@ namespace Mapsui.Layers
         {
             if (_fetchInfo == null) return;
 
-            Task.Factory.StartNew(() => {
-                _animatedFeatures.AddFeatures(_dataSource.GetFeatures(_fetchInfo) ?? new List<PointFeature>());
-                OnDataChanged(new DataChangedEventArgs());
-            });
+            _animatedFeatures.AddFeatures(_dataSource.GetFeatures(_fetchInfo) ?? new List<PointFeature>());
+            OnDataChanged(new DataChangedEventArgs());
         }
 
         public override MRect? Extent => _dataSource.GetExtent();

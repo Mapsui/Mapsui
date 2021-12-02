@@ -121,5 +121,7 @@ namespace Mapsui
         /// Stop any current animation if it is running
         /// </summary>
         void StopRunningAnimation();
+
+        bool UpdateAnimations();
     }
 }

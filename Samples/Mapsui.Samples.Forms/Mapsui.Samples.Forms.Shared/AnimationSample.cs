@@ -39,7 +39,7 @@ namespace Mapsui.Samples.Forms
 
             //navigator.RotateTo(newRot, 500);
             navigator.FlyTo(e.Point.ToMapsui(), mapView.Viewport.Resolution * 8, 5000);
-
+            
             return true;
         }
 

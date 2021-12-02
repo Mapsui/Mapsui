@@ -625,6 +625,11 @@ namespace Mapsui
             GC.SuppressFinalize(this);
         }
 
+        public bool UpdateAnimations()
+        {
+            return Animation.UpdateAnimations(_lastAnimations);
+        }
+
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
