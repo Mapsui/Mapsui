@@ -42,7 +42,7 @@ namespace Mapsui.UI.Wpf
         // Action to call for a redraw of the control
         private Action? _invalidate;
         // Timer for loop to invalidating the control
-        private System.Threading.Timer _invalidateTimer = default!;
+        private System.Threading.Timer? _invalidateTimer = default!;
         // Interval between two calls of the invalidate function in ms
         private int _updateInterval = 16;
         // Stopwatch for measuring drawing times
@@ -77,7 +77,6 @@ namespace Mapsui.UI.Wpf
 
             // All requested updates up to this point will be handled by this redraw
             _refresh = false;
-            Navigator?.UpdateAnimations();
             Renderer.Render(canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
 
             // Stop stopwatch after drawing control
@@ -95,7 +94,78 @@ namespace Mapsui.UI.Wpf
 
         private void InvalidateTimerCallback(object? state)
         {
-            if (!_refresh)
+            // Check, if we have to redraw the screen, because a animation is running or a refresh is wished
+
+/* Unmerged change from project 'Mapsui.UI.Uwp'
+Before:
+            if (!Animations.UpdateAnimations() && !_refresh)
+After:
+            if (!Animation.UpdateAnimations() && !_refresh)
+*/
+
+/* Unmerged change from project 'Mapsui.UI.iOS'
+Before:
+            if (!Animations.UpdateAnimations() && !_refresh)
+After:
+            if (!Animation.UpdateAnimations() && !_refresh)
+*/
+
+/* Unmerged change from project 'Mapsui.UI.Wpf (netcoreapp3.1)'
+Before:
+            if (!Animations.UpdateAnimations() && !_refresh)
+After:
+            if (!Animation.UpdateAnimations() && !_refresh)
+*/
+
+/* Unmerged change from project 'Mapsui.UI.Forms'
+Before:
+            if (!Animations.UpdateAnimations() && !_refresh)
+After:
+            if (!Animation.UpdateAnimations() && !_refresh)
+*/
+
+/* Unmerged change from project 'Mapsui.UI.Uno (uap10.0.18362)'
+Before:
+            if (!Animations.UpdateAnimations() && !_refresh)
+After:
+            if (!Animation.UpdateAnimations() && !_refresh)
+*/
+
+/* Unmerged change from project 'Mapsui.UI.WinUI'
+Before:
+            if (!Animations.UpdateAnimations() && !_refresh)
+After:
+            if (!Animation.UpdateAnimations() && !_refresh)
+*/
+
+/* Unmerged change from project 'Mapsui.UI.Avalonia'
+Before:
+            if (!Animations.UpdateAnimations() && !_refresh)
+After:
+            if (!Animation.UpdateAnimations() && !_refresh)
+*/
+
+/* Unmerged change from project 'Mapsui.UI.Wpf (net48)'
+Before:
+            if (!Animations.UpdateAnimations() && !_refresh)
+After:
+            if (!Animation.UpdateAnimations() && !_refresh)
+*/
+
+/* Unmerged change from project 'Mapsui.UI.Uno (xamarinios10)'
+Before:
+            if (!Animations.UpdateAnimations() && !_refresh)
+After:
+            if (!Animation.UpdateAnimations() && !_refresh)
+*/
+
+/* Unmerged change from project 'Mapsui.UI.Uno (netstandard2.0)'
+Before:
+            if (!Animations.UpdateAnimations() && !_refresh)
+After:
+            if (!Animation.UpdateAnimations() && !_refresh)
+*/
+            if (!Utilities.Animation.UpdateAnimations() && !_refresh)
                 return;
 
             if (_drawing)
@@ -118,7 +188,7 @@ namespace Mapsui.UI.Wpf
         public void StartUpdates(bool refresh = true)
         {
             _refresh = refresh;
-            _invalidateTimer.Change(0, _updateInterval);
+            _invalidateTimer?.Change(0, _updateInterval);
         }
 
         /// <summary>
@@ -130,7 +200,7 @@ namespace Mapsui.UI.Wpf
         /// </remarks>
         public void StopUpdates()
         {
-            _invalidateTimer.Change(System.Threading.Timeout.Infinite, System.Threading.Timeout.Infinite);
+            _invalidateTimer?.Change(System.Threading.Timeout.Infinite, System.Threading.Timeout.Infinite);
         }
 
         /// <summary>
@@ -353,7 +423,7 @@ namespace Mapsui.UI.Wpf
             _refresh = true;
         }
 
-        private void MapDataChanged(object sender, DataChangedEventArgs? e)
+        private void MapDataChanged(object? sender, DataChangedEventArgs? e)
         {
             RunOnUIThread(() => {
                 try
@@ -487,6 +557,8 @@ namespace Mapsui.UI.Wpf
         {
             if (Viewport.Extent != null)
             {
+                if (Viewport.Extent == null)
+                    return;
                 var fetchInfo = new FetchInfo(Viewport.Extent, Viewport.Resolution, Map?.CRS, changeType);
                 _map?.RefreshData(fetchInfo);
             }
@@ -544,7 +616,7 @@ namespace Mapsui.UI.Wpf
         /// <param name="startScreenPosition">Screen position of Viewport/MapControl</param>
         /// <param name="numTaps">Number of clickes/taps</param>
         /// <returns>True, if something done </returns>
-        private MapInfoEventArgs? InvokeInfo(MPoint screenPosition, MPoint startScreenPosition, int numTaps)
+        private MapInfoEventArgs? InvokeInfo(MPoint? screenPosition, MPoint? startScreenPosition, int numTaps)
         {
             return InvokeInfo(
                 Map?.GetWidgetsOfMapAndLayers() ?? new List<IWidget>(),
@@ -563,8 +635,8 @@ namespace Mapsui.UI.Wpf
         /// <param name="widgetCallback">Callback, which is called when Widget is hit</param>
         /// <param name="numTaps">Number of clickes/taps</param>
         /// <returns>True, if something done </returns>
-        private MapInfoEventArgs? InvokeInfo(IEnumerable<IWidget> widgets, MPoint screenPosition,
-            MPoint startScreenPosition, Func<IWidget, MPoint, bool> widgetCallback, int numTaps)
+        private MapInfoEventArgs? InvokeInfo(IEnumerable<IWidget> widgets, MPoint? screenPosition,
+            MPoint? startScreenPosition, Func<IWidget, MPoint, bool> widgetCallback, int numTaps)
         {
             if (screenPosition == null || startScreenPosition == null)
                 return null;

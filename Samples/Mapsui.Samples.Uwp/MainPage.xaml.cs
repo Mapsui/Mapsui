@@ -27,8 +27,8 @@ namespace Mapsui.Samples.Uwp
             MbTilesSample.MbTilesLocation = MbTilesLocationOnUwp;
             MbTilesHelper.DeployMbTilesFile(s => File.Create(Path.Combine(MbTilesLocationOnUwp, s)));
 
-            MapControl.Map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            MapControl.Map.RotationLock = false;
+            MapControl.Map!.Layers.Add(OpenStreetMap.CreateTileLayer());
+            MapControl.Map!.RotationLock = false;
             MapControl.UnSnapRotationDegrees = 30;
             MapControl.ReSnapRotationDegrees = 5;
             MapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
@@ -54,7 +54,7 @@ namespace Mapsui.Samples.Uwp
             CategoryComboBox.SelectedIndex = 1;
         }
 
-        private void MapOnInfo(object sender, MapInfoEventArgs args)
+        private void MapOnInfo(object? sender, MapInfoEventArgs args)
         {
             if (args.MapInfo?.Feature != null)
                 FeatureInfo.Text = $"Click Info:{Environment.NewLine}{args.MapInfo.Feature.ToDisplayText()}";

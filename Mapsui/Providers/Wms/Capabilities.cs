@@ -35,12 +35,12 @@ namespace Mapsui.Providers.Wms
             /// <summary>
             /// Email address
             /// </summary>
-            public string ElectronicMailAddress;
+            public string? ElectronicMailAddress;
 
             /// <summary>
             /// Fax number
             /// </summary>
-            public string FacsimileTelephone;
+            public string? FacsimileTelephone;
 
             /// <summary>
             /// Primary contact person
@@ -50,12 +50,12 @@ namespace Mapsui.Providers.Wms
             /// <summary>
             /// Position of contact person
             /// </summary>
-            public string Position;
+            public string? Position;
 
             /// <summary>
             /// Telephone
             /// </summary>
-            public string VoiceTelephone;
+            public string? VoiceTelephone;
 
             /// <summary>
             /// Information about a contact address for the service.
@@ -65,32 +65,32 @@ namespace Mapsui.Providers.Wms
                 /// <summary>
                 /// Contact address
                 /// </summary>
-                public string Address;
+                public string? Address;
 
                 /// <summary>
                 /// Type of address (usually "postal").
                 /// </summary>
-                public string AddressType;
+                public string? AddressType;
 
                 /// <summary>
                 /// Contact City
                 /// </summary>
-                public string City;
+                public string? City;
 
                 /// <summary>
                 /// Country of contact address
                 /// </summary>
-                public string Country;
+                public string? Country;
 
                 /// <summary>
                 /// Zipcode of contact
                 /// </summary>
-                public string PostCode;
+                public string? PostCode;
 
                 /// <summary>
                 /// State or province of contact
                 /// </summary>
-                public string StateOrProvince;
+                public string? StateOrProvince;
             }
 
             /// <summary>
@@ -101,12 +101,12 @@ namespace Mapsui.Providers.Wms
                 /// <summary>
                 /// Organisation of primary person
                 /// </summary>
-                public string Organisation;
+                public string? Organisation;
 
                 /// <summary>
                 /// Primary contact person
                 /// </summary>
-                public string Person;
+                public string? Person;
             }
         }
 
@@ -118,7 +118,7 @@ namespace Mapsui.Providers.Wms
             /// <summary>
             /// Optional narrative description providing additional information
             /// </summary>
-            public string Abstract;
+            public string? Abstract;
 
             /// <summary>
             /// <para>The optional element "AccessConstraints" may be omitted if it do not apply to the server. If
@@ -127,7 +127,7 @@ namespace Mapsui.Providers.Wms
             /// <para>When constraints are imposed, no precise syntax has been defined for the text content of these elements, but
             /// client applications may display the content for user information and action.</para>
             /// </summary>
-            public string AccessConstraints;
+            public string? AccessConstraints;
 
             /// <summary>
             /// Optional WMS contact information
@@ -139,7 +139,7 @@ namespace Mapsui.Providers.Wms
             /// the element is present, the reserved word "none" (case-insensitive) shall be used if there are no
             /// fees, as follows: "none".
             /// </summary>
-            public string Fees;
+            public string? Fees;
 
             /// <summary>
             /// Optional list of keywords or keyword phrases describing the server as a whole to help catalog searching
@@ -164,12 +164,12 @@ namespace Mapsui.Providers.Wms
             /// <summary>
             /// Mandatory Top-level web address of service or service provider.
             /// </summary>
-            public string OnlineResource;
+            public string? OnlineResource;
 
             /// <summary>
             /// Mandatory Human-readable title for pick lists
             /// </summary>
-            public string Title;
+            public string? Title;
         }
     }
 }

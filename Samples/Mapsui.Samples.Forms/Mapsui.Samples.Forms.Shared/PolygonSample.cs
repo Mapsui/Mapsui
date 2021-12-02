@@ -57,8 +57,11 @@ namespace Mapsui.Samples.Forms
 
             polygon.IsClickable = true;
             polygon.Clicked += (s, a) => {
-                ((Polygon)s).FillColor = new Color(random.Next(0, 255) / 255.0f, random.Next(0, 255) / 255.0f, random.Next(0, 255) / 255.0f);
-                a.Handled = true;
+                if (s is Polygon p)
+                {
+                    p.FillColor = new Color(random.Next(0, 255) / 255.0f, random.Next(0, 255) / 255.0f, random.Next(0, 255) / 255.0f);
+                    a.Handled = true;
+                }
             };
 
             mapView?.Drawables.Add(polygon);

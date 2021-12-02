@@ -32,10 +32,10 @@ namespace Mapsui.Layers
 
             if (extents.Count == 0) return null;
 
-            var minX = extents.Min(g => g.MinX);
-            var minY = extents.Min(g => g.MinY);
-            var maxX = extents.Max(g => g.MaxX);
-            var maxY = extents.Max(g => g.MaxY);
+            var minX = extents.Min(g => g!.MinX);
+            var minY = extents.Min(g => g!.MinY);
+            var maxX = extents.Max(g => g!.MaxX);
+            var maxY = extents.Max(g => g!.MaxY);
 
             return new MRect(minX, minY, maxX, maxY);
         }

@@ -18,8 +18,8 @@ namespace Mapsui.Providers.Wms
     [Serializable]
     public class Client
     {
-        private XmlNode _vendorSpecificCapabilities;
-        private XmlNamespaceManager _nsmgr;
+        private XmlNode? _vendorSpecificCapabilities;
+        private XmlNamespaceManager? _nsmgr;
 
 
 
@@ -31,7 +31,7 @@ namespace Mapsui.Providers.Wms
             /// <summary>
             /// Abstract
             /// </summary>
-            public string Abstract;
+            public string? Abstract;
 
             /// <summary>
             /// Legend
@@ -41,7 +41,7 @@ namespace Mapsui.Providers.Wms
             /// <summary>
             /// Name
             /// </summary>
-            public string Name;
+            public string? Name;
 
             /// <summary>
             /// Style Sheet Url
@@ -51,7 +51,7 @@ namespace Mapsui.Providers.Wms
             /// <summary>
             /// Title
             /// </summary>
-            public string Title;
+            public string? Title;
         }
 
 
@@ -64,12 +64,12 @@ namespace Mapsui.Providers.Wms
             /// <summary>
             /// URI of online resource
             /// </summary>
-            public string OnlineResource;
+            public string? OnlineResource;
 
             /// <summary>
             /// Type of online resource (Ex. request method 'Get' or 'Post')
             /// </summary>
-            public string Type;
+            public string? Type;
         }
 
 
@@ -82,7 +82,7 @@ namespace Mapsui.Providers.Wms
             /// <summary>
             /// Abstract
             /// </summary>
-            public string Abstract;
+            public string? Abstract;
 
             /// <summary>
             /// Collection of child layers
@@ -112,7 +112,7 @@ namespace Mapsui.Providers.Wms
             /// <summary>
             /// Unique name of this layer used for requesting layer
             /// </summary>
-            public string Name;
+            public string? Name;
 
             /// <summary>
             /// Specifies whether this layer is queryable using GetFeatureInfo requests
@@ -127,7 +127,7 @@ namespace Mapsui.Providers.Wms
             /// <summary>
             /// Layer title
             /// </summary>
-            public string Title;
+            public string? Title;
         }
 
 
@@ -151,7 +151,7 @@ namespace Mapsui.Providers.Wms
 
 
         private Func<string, Task<Stream>> _getStreamAsync;
-        private string[] _exceptionFormats;
+        private string[]? _exceptionFormats;
         private Capabilities.WmsServiceDescription _serviceDescription;
 
         /// <summary>
@@ -167,27 +167,27 @@ namespace Mapsui.Providers.Wms
         /// <summary>
         /// Gets a list of available image mime type formats
         /// </summary>
-        public Collection<string> GetMapOutputFormats { get; private set; }
+        public Collection<string>? GetMapOutputFormats { get; private set; }
 
         /// <summary>
         /// Gets a list of available feature info mime type formats
         /// </summary>
-        public Collection<string> GetFeatureInfoOutputFormats { get; private set; }
+        public Collection<string>? GetFeatureInfoOutputFormats { get; private set; }
 
         /// <summary>
         /// Gets a list of available exception mime type formats
         /// </summary>
-        public string[] ExceptionFormats => _exceptionFormats;
+        public string[]? ExceptionFormats => _exceptionFormats;
 
         /// <summary>
         /// Gets the available GetMap request methods and Online Resource URI
         /// </summary>
-        public WmsOnlineResource[] GetMapRequests { get; private set; }
+        public WmsOnlineResource[]? GetMapRequests { get; private set; }
 
         /// <summary>
         /// Gets the available GetMap request methods and Online Resource URI
         /// </summary>
-        public WmsOnlineResource[] GetFeatureInfoRequests { get; private set; }
+        public WmsOnlineResource[]? GetFeatureInfoRequests { get; private set; }
 
         /// <summary>
         /// Gets the hierarchical layer structure
@@ -203,6 +203,9 @@ namespace Mapsui.Providers.Wms
         /// <param name="getStreamAsync">Download method, leave null for default</param>
         public Client(string url, string? wmsVersion = null, Func<string, Task<Stream>>? getStreamAsync = null)
         {
+            _getStreamAsync = default!; // is later assigned 
+            _nsmgr = default!; // is later assigned
+            WmsVersion = default!; // is later assigned
             InitialiseGetStreamAsyncMethod(getStreamAsync);
             var strReq = new StringBuilder(url);
             if (!url.Contains("?"))
@@ -222,6 +225,8 @@ namespace Mapsui.Providers.Wms
 
         public Client(XmlDocument capabilitiesXmlDocument, Func<string, Task<Stream>>? getStreamAsync = null)
         {
+            _getStreamAsync = default!; // is later assigned
+            WmsVersion = default!; // is later assigned
             InitialiseGetStreamAsyncMethod(getStreamAsync);
             _nsmgr = new XmlNamespaceManager(capabilitiesXmlDocument.NameTable);
             ParseCapabilities(capabilitiesXmlDocument);
@@ -249,7 +254,7 @@ namespace Mapsui.Providers.Wms
         /// Exposes the capabilities' VendorSpecificCapabilities as XmlNode object. External modules 
         /// could use this to parse the vendor specific capabilities for their specific purpose.
         /// </summary>
-        public XmlNode VendorSpecificCapabilities => _vendorSpecificCapabilities;
+        public XmlNode? VendorSpecificCapabilities => _vendorSpecificCapabilities;
 
         /// <summary>
         /// Downloads service description from WMS service
@@ -294,7 +299,7 @@ namespace Mapsui.Providers.Wms
                 if (WmsVersion != "1.0.0" && WmsVersion != "1.1.0" && WmsVersion != "1.1.1" && WmsVersion != "1.3.0")
                     throw new ApplicationException("WMS Version " + WmsVersion + " not supported");
 
-                _nsmgr.AddNamespace(string.Empty, "http://www.opengis.net/wms");
+                _nsmgr!.AddNamespace(string.Empty, "http://www.opengis.net/wms");
                 _nsmgr.AddNamespace("sm", WmsVersion == "1.3.0" ? "http://www.opengis.net/wms" : "");
                 _nsmgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
                 _nsmgr.AddNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
@@ -308,7 +313,6 @@ namespace Mapsui.Providers.Wms
                 ParseServiceDescription(xnService);
             else
                 throw new ApplicationException("No service tag found!");
-
 
             if (xnCapability != null)
                 ParseCapability(xnCapability);
@@ -572,14 +576,14 @@ namespace Mapsui.Providers.Wms
                     {
                         wmsServerLayer.Style[i].LegendUrl = new WmsStyleLegend();
 
-                        if (node.Attributes["width"]?.InnerText != null && node.Attributes["height"]?.InnerText != null)
+                        if (node.Attributes?["width"]?.InnerText != null && node.Attributes["height"]?.InnerText != null)
                         {
                             wmsServerLayer.Style[i].LegendUrl.Size = new Size { Width = int.Parse(node.Attributes["width"].InnerText), Height = int.Parse(node.Attributes["height"].InnerText) };
                         }
 
-                        wmsServerLayer.Style[i].LegendUrl.OnlineResource.OnlineResource = node.SelectSingleNode("sm:OnlineResource", _nsmgr).Attributes["xlink:href"].InnerText;
+                        wmsServerLayer.Style[i].LegendUrl.OnlineResource.OnlineResource = node.SelectSingleNode("sm:OnlineResource", _nsmgr)?.Attributes["xlink:href"].InnerText;
                         wmsServerLayer.Style[i].LegendUrl.OnlineResource.Type =
-                            node.SelectSingleNode("sm:Format", _nsmgr).InnerText;
+                            node.SelectSingleNode("sm:Format", _nsmgr)?.InnerText;
                     }
                     node = xnlStyle[i].SelectSingleNode("sm:StyleSheetURL", _nsmgr);
                     if (node != null)
@@ -587,7 +591,7 @@ namespace Mapsui.Providers.Wms
                         wmsServerLayer.Style[i].StyleSheetUrl = new WmsOnlineResource
                         {
                             OnlineResource =
-                            node.SelectSingleNode("sm:OnlineResource", _nsmgr).Attributes["xlink:href"].InnerText
+                            node.SelectSingleNode("sm:OnlineResource", _nsmgr)?.Attributes["xlink:href"].InnerText
                         };
                     }
                 }
@@ -600,7 +604,7 @@ namespace Mapsui.Providers.Wms
                     wmsServerLayer.ChildLayers[i] = ParseLayer(xnlLayers[i]);
             }
             node = xmlLayer.SelectSingleNode("sm:LatLonBoundingBox", _nsmgr);
-            if (node != null)
+            if (node != null && node.Attributes != null)
             {
                 if (!double.TryParse(node.Attributes["minx"].Value, NumberStyles.Any, CultureInfo.InvariantCulture, out var minX) &
                     !double.TryParse(node.Attributes["miny"].Value, NumberStyles.Any, CultureInfo.InvariantCulture, out var minY) &

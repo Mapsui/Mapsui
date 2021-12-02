@@ -3,13 +3,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using Mapsui.Extensions;
 using Mapsui.GeometryLayer;
-using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.UI.Objects;
-using System;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using Mapsui.Extensions;
 #if __MAUI__
 using Mapsui.UI.Maui.Extensions;
 using Microsoft.Maui;
@@ -50,8 +45,8 @@ namespace Mapsui.UI.Forms
         public static Color DefaultSubtitleFontColor = KnownColor.Black;
         public static TextAlignment DefaultSubtitleTextAlignment = TextAlignment.Start; // Center;
 #if __MAUI__
-        public static string DefaultTitleFontName = null; // TODO: default font per platform
-        public static string DefaultSubtitleFontName = null; // TODO: default font per platform
+        public static string? DefaultTitleFontName = null; // TODO: default font per platform
+        public static string? DefaultSubtitleFontName = null; // TODO: default font per platform
 #else
         public static string DefaultTitleFontName = Xamarin.Forms.Font.Default.FontFamily;
         public static string DefaultSubtitleFontName = Xamarin.Forms.Font.Default.FontFamily;
@@ -275,7 +270,7 @@ namespace Mapsui.UI.Forms
         }
 
         /// <summary>
-        /// Relative position of anchor of Callout on the side given by <see cref="ArrowAlignment">
+        /// Relative position of anchor of Callout on the side given by <see cref="ArrowAlignment"/>
         /// </summary>
         public double ArrowPosition
         {
@@ -560,7 +555,7 @@ namespace Mapsui.UI.Forms
         /// </summary>
         /// <param name="sender">Sender</param>
         /// <param name="e">CalloutClickedEventArgs</param>
-        internal void HandleCalloutClicked(object sender, CalloutClickedEventArgs e)
+        internal void HandleCalloutClicked(object? sender, CalloutClickedEventArgs e)
         {
             CalloutClicked?.Invoke(this, e);
 
@@ -651,7 +646,7 @@ namespace Mapsui.UI.Forms
         /// </summary>
         /// <param name="sender">Sender</param>
         /// <param name="e">Event arguments</param>
-        private void CloseCalloutClicked(object sender, EventArgs e)
+        private void CloseCalloutClicked(object? sender, EventArgs e)
         {
             CalloutClosed?.Invoke(this, new EventArgs());
         }

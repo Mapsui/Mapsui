@@ -436,8 +436,10 @@ namespace Mapsui
         /// </summary>
         /// <param name="p">MPoint</param>
         /// <returns>true if point is within</returns>
-        public bool Contains(MPoint p)
+        public bool Contains(MPoint? p)
         {
+            if (p == null)
+                return false;
             if (Max.X < p.X)
                 return false;
             if (Min.X > p.X)

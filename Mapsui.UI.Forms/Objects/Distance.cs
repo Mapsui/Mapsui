@@ -120,10 +120,10 @@ namespace Mapsui.UI.Forms
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="Mapsui.UI.Forms.Distance"/> is equal to the current <see cref="T:Mapsui.UI.Forms.Distance"/>.
+        /// Determines whether the specified <see cref="Distance"/> is equal to the current <see cref="T:Mapsui.UI.Forms.Distance"/>.
         /// </summary>
-        /// <param name="other">The <see cref="Mapsui.UI.Forms.Distance"/> to compare with the current <see cref="T:Mapsui.UI.Forms.Distance"/></param>
-        /// <returns><c>True</c> if the specified <see cref="Mapsui.UI.Forms.Distance"/> is equal to the current
+        /// <param name="other">The <see cref="Distance"/> to compare with the current <see cref="T:Mapsui.UI.Forms.Distance"/></param>
+        /// <returns><c>True</c> if the specified <see cref="Distance"/> is equal to the current
         /// <see cref="T:Mapsui.UI.Forms.Distance"/>; otherwise, <c>false</c>.</returns>
         public bool Equals(Distance other)
         {

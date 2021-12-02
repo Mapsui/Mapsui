@@ -17,21 +17,25 @@ namespace Mapsui.Samples.Maui
     public partial class MainPageLarge : ContentPage
     {
         IEnumerable<ISample> allSamples;
-        Func<object, EventArgs, bool> clicker;
-        private CancellationTokenSource gpsCancelation;
+        Func<object?, EventArgs, bool>? clicker;
+        private CancellationTokenSource? gpsCancelation;
 
         public MainPageLarge()
         {
             InitializeComponent();
 
-            allSamples = AllSamples.GetSamples();
+            // nullable warning workaround
+            var test = this.listView ?? throw new InvalidOperationException();
+            var test2 = this.featureInfo ?? throw new InvalidOperationException();
+
+            allSamples = AllSamples.GetSamples() ?? new List<ISample>();
 
             var categories = allSamples.Select(s => s.Category).Distinct().OrderBy(c => c);
-            picker.ItemsSource = categories.ToList<string>();
+            picker!.ItemsSource = categories.ToList<string>();
             picker.SelectedIndexChanged += PickerSelectedIndexChanged;
             picker.SelectedItem = "Forms";
 
-            mapView.RotationLock = false;
+            mapView!.RotationLock = false;
             mapView.UnSnapRotationDegrees = 30;
             mapView.ReSnapRotationDegrees = 5;
 
@@ -55,7 +59,7 @@ namespace Mapsui.Samples.Maui
             mapView.Refresh();
         }
 
-        private void MapView_Info(object sender, UI.MapInfoEventArgs e)
+        private void MapView_Info(object? sender, UI.MapInfoEventArgs? e)
         {
             featureInfo.Text = $"Click Info:";
 
@@ -82,14 +86,14 @@ namespace Mapsui.Samples.Maui
             listView.ItemsSource = allSamples.Where(s => s.Category == selectedCategory).Select(x => x.Name);
         }
 
-        private void PickerSelectedIndexChanged(object sender, EventArgs e)
+        private void PickerSelectedIndexChanged(object? sender, EventArgs e)
         {
             FillListWithSamples();
         }
 
-        private void OnMapClicked(object sender, MapClickedEventArgs e)
+        private void OnMapClicked(object? sender, MapClickedEventArgs e)
         {
-            e.Handled = clicker == null ? false : (bool)clicker?.Invoke(sender as MapView, e);
+            e.Handled = clicker?.Invoke(sender as MapView, e) ?? false;
         }
 
         void OnSelection(object sender, SelectedItemChangedEventArgs e)
@@ -100,7 +104,7 @@ namespace Mapsui.Samples.Maui
             }
 
             var sampleName = e.SelectedItem.ToString();
-            var sample = allSamples.Where(x => x.Name == sampleName).FirstOrDefault<ISample>();
+            var sample = allSamples.FirstOrDefault(x => x.Name == sampleName);
 
             if (sample != null)
             {
@@ -108,13 +112,13 @@ namespace Mapsui.Samples.Maui
             }
 
             clicker = null;
-            if (sample is IFormsSample)
-                clicker = ((IFormsSample)sample).OnClick;
+            if (sample is IFormsSample formsSample)
+                clicker = formsSample.OnClick;
 
             listView.SelectedItem = null;
         }
 
-        private void OnPinClicked(object sender, PinClickedEventArgs e)
+        private void OnPinClicked(object? sender, PinClickedEventArgs e)
         {
             if (e.Pin != null)
             {

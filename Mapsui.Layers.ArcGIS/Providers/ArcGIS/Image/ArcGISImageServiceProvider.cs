@@ -101,7 +101,7 @@ namespace Mapsui.Providers.ArcGIS.Image
 
             var viewport = fetchInfo.ToViewport();
 
-            if (TryGetMap(viewport, out var raster))
+            if (viewport != null && TryGetMap(viewport, out var raster))
             {
                 features.Add(new RasterFeature(raster));
             }
@@ -137,7 +137,15 @@ namespace Mapsui.Providers.ArcGIS.Image
                     try
                     {
                         var bytes = BruTile.Utilities.ReadFully(dataStream);
-                        raster = new MRaster(new MemoryStream(bytes), viewport.Extent);
+                        if (viewport.Extent != null)
+                        {
+                            raster = new MRaster(new MemoryStream(bytes), viewport.Extent);
+                        }
+                        else
+                        {
+                            raster = null;
+                            return false;
+                        }
                     }
                     catch (Exception ex)
                     {

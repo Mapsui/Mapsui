@@ -15,7 +15,7 @@ namespace Mapsui.Rendering.Skia
         }
 
         private static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, float layerOpacity,
-            IFeature feature, IGeometry geometry, SymbolCache symbolCache)
+            IFeature feature, IGeometry? geometry, SymbolCache symbolCache)
         {
             if (geometry is Point point)
                 PointRenderer.Draw(canvas, viewport, style, feature, point.X, point.Y, symbolCache,

@@ -80,7 +80,7 @@ namespace Mapsui.Rendering
         private static IEnumerable<IStyle> ToArray(ILayer layer)
         {
             return (layer.Style as StyleCollection)?.ToArray() ??
-                (layer.Style == null ? new IStyle[0] : new[] { layer.Style });
+                (layer.Style == null ? Array.Empty<IStyle>() : new[] { layer.Style });
         }
     }
 }

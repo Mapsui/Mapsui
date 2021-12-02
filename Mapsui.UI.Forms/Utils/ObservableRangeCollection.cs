@@ -92,7 +92,7 @@
         /// Inserts the elements of a collection into the <see cref="ObservableCollection{T}"/> at the specified index.
         /// </summary>
         /// <param name="index">The zero-based index at which the new elements should be inserted.</param>
-        /// <param name="collection">The collection whose elements should be inserted into the List<T>.
+        /// <param name="collection">The collection whose elements should be inserted into the List{T}.
         /// The collection itself cannot be null, but it can contain elements that are null, if type T is a reference type.</param>                
         /// <exception cref="ArgumentNullException"><paramref name="collection"/> is null.</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="index"/> is not in the collection range.</exception>
@@ -538,7 +538,7 @@
         /// </summary>
         /// <remarks>
         /// When overriding this method, either call its base implementation
-        /// or call <see cref="BlockReentrancy"/> to guard against reentrant collection changes.
+        /// or call <see cref="ObservableCollection{T}.BlockReentrancy"/> to guard against reentrant collection changes.
         /// </remarks>
         protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
@@ -618,7 +618,7 @@
         /// <param name="oldCluster"></param>
         //TODO should have really been a local method inside ReplaceRange(int index, int count, IEnumerable<T> collection, IEqualityComparer<T> comparer),
         //move when supported language version updated.
-        private void OnRangeReplaced(int followingItemIndex, ICollection<T> newCluster, ICollection<T>? oldCluster)
+        private void OnRangeReplaced(int followingItemIndex, ICollection<T>? newCluster, ICollection<T>? oldCluster)
         {
             if (oldCluster == null || oldCluster.Count == 0)
             {
@@ -629,12 +629,12 @@
             OnCollectionChanged(
                 new NotifyCollectionChangedEventArgs(
                     NotifyCollectionChangedAction.Replace,
-                    new List<T>(newCluster),
+                    new List<T>(newCluster ?? new List<T>()),
                     new List<T>(oldCluster),
                     followingItemIndex - oldCluster.Count));
 
             oldCluster.Clear();
-            newCluster.Clear();
+            newCluster?.Clear();
         }
 
         #endregion Private Methods

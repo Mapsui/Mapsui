@@ -15,7 +15,7 @@ namespace Mapsui.Tests.GeoTiff
         {
             var location = Path.Combine(AssemblyInfo.AssemblyDirectory, "Resources", "example.tif");
             var geoTiffProvider = new GeoTiffProvider(location);
-            var test = geoTiffProvider.GetExtent().Left.ToString(CultureInfo.InvariantCulture);
+            var test = geoTiffProvider.GetExtent()?.Left.ToString(CultureInfo.InvariantCulture);
             Console.WriteLine(test);
         }
     }

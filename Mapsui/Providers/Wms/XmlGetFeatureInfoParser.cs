@@ -9,7 +9,7 @@ namespace Mapsui.Providers.Wms
 {
     public class XmlGetFeatureInfoParser : IGetFeatureInfoParser
     {
-        public FeatureInfo ParseWMSResult(string layerName, Stream result)
+        public FeatureInfo ParseWMSResult(string? layerName, Stream result)
         {
             var featureInfos = new List<Dictionary<string, string>>();
             XDocument xdoc;

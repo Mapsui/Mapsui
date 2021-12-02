@@ -22,7 +22,7 @@ using System.Diagnostics;
 namespace Mapsui.Providers.Shapefile.Indexing
 {
     [Serializable]
-    internal class Node<T, TU> where T : IComparable<T>
+    internal class Node<T, TU> where T : IComparable<T?>
     {
         public BinaryTree<T, TU>.ItemValue Item;
         public Node<T, TU>? LeftNode;
@@ -32,7 +32,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
         {
         }
 
-        public Node(T item, TU itemIndex) : this(item, itemIndex, null, null)
+        public Node(T? item, TU? itemIndex) : this(item, itemIndex, null, null)
         {
         }
 
@@ -40,7 +40,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
         {
         }
 
-        public Node(T item, TU itemIndex, Node<T, TU>? right, Node<T, TU>? left)
+        public Node(T? item, TU? itemIndex, Node<T, TU>? right, Node<T, TU>? left)
         {
             RightNode = right;
             LeftNode = left;
@@ -53,13 +53,13 @@ namespace Mapsui.Providers.Shapefile.Indexing
 
         public static bool operator >(Node<T, TU> lhs, Node<T, TU> rhs)
         {
-            var res = lhs.Item.Value.CompareTo(rhs.Item.Value);
+            var res = lhs.Item.Value?.CompareTo(rhs.Item.Value);
             return res > 0;
         }
 
         public static bool operator <(Node<T, TU> lhs, Node<T, TU> rhs)
         {
-            var res = lhs.Item.Value.CompareTo(rhs.Item.Value);
+            var res = lhs.Item.Value?.CompareTo(rhs.Item.Value);
             return res < 0;
         }
     }
@@ -70,7 +70,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
     /// <typeparam name="T">Value type to be indexed</typeparam>
     /// <typeparam name="TU">Value ID type</typeparam>
     [Serializable]
-    public class BinaryTree<T, TU> where T : IComparable<T>
+    public class BinaryTree<T, TU> where T : IComparable<T?>
     {
         private readonly Node<T, TU> _root;
 
@@ -136,8 +136,10 @@ namespace Mapsui.Providers.Shapefile.Indexing
             TraceInOrder(_root.RightNode);
         }
 
-        private void TraceInOrder(Node<T, TU> root)
+        private void TraceInOrder(Node<T, TU>? root)
         {
+            if (root == null)
+                return;
             if (root.LeftNode != null)
                 TraceInOrder(root.LeftNode);
 
@@ -184,13 +186,15 @@ namespace Mapsui.Providers.Shapefile.Indexing
             return ScanFind(value, _root.RightNode);
         }
 
-        private IEnumerable<ItemValue> ScanFind(T value, Node<T, TU> root)
+        private IEnumerable<ItemValue> ScanFind(T value, Node<T, TU>? root)
         {
-            if (root.Item.Value.CompareTo(value) > 0)
+            if (root == null)
+                yield break;
+            if (root.Item.Value?.CompareTo(value) > 0)
             {
                 if (root.LeftNode != null)
                 {
-                    if (root.LeftNode.Item.Value.CompareTo(value) > 0)
+                    if (root.LeftNode.Item.Value?.CompareTo(value) > 0)
                         foreach (var item in ScanFind(value, root.LeftNode))
                         {
                             yield return item;
@@ -198,14 +202,14 @@ namespace Mapsui.Providers.Shapefile.Indexing
                 }
             }
 
-            if (root.Item.Value.CompareTo(value) == 0)
+            if (root.Item.Value?.CompareTo(value) == 0)
                 yield return root.Item;
 
-            if (root.Item.Value.CompareTo(value) < 0)
+            if (root.Item.Value?.CompareTo(value) < 0)
             {
                 if (root.RightNode != null)
                 {
-                    if (root.RightNode.Item.Value.CompareTo(value) > 0)
+                    if (root.RightNode.Item.Value?.CompareTo(value) > 0)
                         foreach (var item in ScanFind(value, root.RightNode))
                         {
                             yield return item;
@@ -214,14 +218,16 @@ namespace Mapsui.Providers.Shapefile.Indexing
             }
         }
 
-        private IEnumerable<ItemValue> ScanString(string val, Node<T, TU> root)
+        private IEnumerable<ItemValue> ScanString(string val, Node<T, TU>? root)
         {
-            if (string.Compare(root.Item.Value.ToString().Substring(0, val.Length).ToUpper(),
-                val, StringComparison.Ordinal) > 0)
+            if (root == null)
+                yield break;
+            if (string.Compare(root.Item.Value?.ToString().Substring(0, val.Length).ToUpper(),
+                    val, StringComparison.Ordinal) > 0)
             {
                 if (root.LeftNode != null)
                 {
-                    if (root.LeftNode.Item.Value.ToString().ToUpper().StartsWith(val))
+                    if (root.LeftNode.Item.Value?.ToString().ToUpper().StartsWith(val) ?? false)
                         foreach (var item in ScanString(val, root.LeftNode))
                         {
                             yield return item;
@@ -229,14 +235,14 @@ namespace Mapsui.Providers.Shapefile.Indexing
                 }
             }
 
-            if (root.Item.Value.ToString().ToUpper().StartsWith(val))
+            if (root.Item.Value?.ToString().ToUpper().StartsWith(val) ?? false)
                 yield return root.Item;
 
-            if (string.Compare(root.Item.Value.ToString(), val, StringComparison.Ordinal) < 0)
+            if (string.Compare(root.Item.Value?.ToString(), val, StringComparison.Ordinal) < 0)
             {
                 if (root.RightNode != null)
                 {
-                    if (string.Compare(root.RightNode.Item.Value.ToString().Substring(0, val.Length).ToUpper(), val, StringComparison.Ordinal) > 0)
+                    if (string.Compare(root.RightNode.Item.Value?.ToString().Substring(0, val.Length).ToUpper(), val, StringComparison.Ordinal) > 0)
                         foreach (var item in ScanString(val, root.RightNode))
                         {
                             yield return item;
@@ -245,13 +251,15 @@ namespace Mapsui.Providers.Shapefile.Indexing
             }
         }
 
-        private IEnumerable<ItemValue> ScanBetween(T min, T max, Node<T, TU> root)
+        private IEnumerable<ItemValue> ScanBetween(T min, T max, Node<T, TU>? root)
         {
-            if (root.Item.Value.CompareTo(min) > 0)
+            if (root == null)
+                yield break;
+            if (root.Item.Value?.CompareTo(min) > 0)
             {
                 if (root.LeftNode != null)
                 {
-                    if (root.LeftNode.Item.Value.CompareTo(min) > 0)
+                    if (root.LeftNode.Item.Value?.CompareTo(min) > 0)
                         foreach (var item in ScanBetween(min, max, root.LeftNode))
                         {
                             yield return item;
@@ -259,14 +267,14 @@ namespace Mapsui.Providers.Shapefile.Indexing
                 }
             }
 
-            if (root.Item.Value.CompareTo(min) > 0 && root.Item.Value.CompareTo(max) < 0)
+            if (root.Item.Value?.CompareTo(min) > 0 && root.Item.Value.CompareTo(max) < 0)
                 yield return root.Item;
 
-            if (root.Item.Value.CompareTo(max) < 0)
+            if (root.Item.Value?.CompareTo(max) < 0)
             {
                 if (root.RightNode != null)
                 {
-                    if (root.RightNode.Item.Value.CompareTo(min) > 0)
+                    if (root.RightNode.Item.Value?.CompareTo(min) > 0)
                         foreach (var item in ScanBetween(min, max, root.RightNode))
                         {
                             yield return item;
@@ -275,8 +283,10 @@ namespace Mapsui.Providers.Shapefile.Indexing
             }
         }
 
-        private IEnumerable<ItemValue> ScanInOrder(Node<T, TU> root)
+        private IEnumerable<ItemValue> ScanInOrder(Node<T, TU>? root)
         {
+            if (root == null)
+                yield break;
             if (root.LeftNode != null)
             {
                 foreach (var item in ScanInOrder(root.LeftNode))
@@ -304,12 +314,12 @@ namespace Mapsui.Providers.Shapefile.Indexing
             /// <summary>
             /// Identifier for the value
             /// </summary>
-            public TU Id;
+            public TU? Id;
 
             /// <summary>
             /// Value
             /// </summary>
-            public T Value;
+            public T? Value;
 
             /// <summary>
             /// Creates an instance of an item in a <see cref="BinaryTree&lt;T, U&gt;"/>.

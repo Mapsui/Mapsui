@@ -96,8 +96,8 @@ namespace Mapsui.Layers
                 {
                     if (_fetchInfo == null) return;
                     if (double.IsNaN(_fetchInfo.Resolution) || _fetchInfo.Resolution <= 0) return;
-                    if (_fetchInfo.Extent.Width <= 0 || _fetchInfo.Extent.Height <= 0) return;
-                    var viewport = CreateViewport(_fetchInfo.Extent, _fetchInfo.Resolution, _renderResolutionMultiplier, _overscan);
+                    if (_fetchInfo.Extent == null || _fetchInfo.Extent?.Width <= 0 || _fetchInfo.Extent?.Height <= 0) return;
+                    var viewport = CreateViewport(_fetchInfo.Extent!, _fetchInfo.Resolution, _renderResolutionMultiplier, _overscan);
 
                     _currentViewport = viewport;
 
@@ -172,6 +172,8 @@ namespace Mapsui.Layers
 
         public override void RefreshData(FetchInfo fetchInfo)
         {
+            if (fetchInfo.Extent == null)
+                return;
             var newViewport = CreateViewport(fetchInfo.Extent, fetchInfo.Resolution, _renderResolutionMultiplier, 1);
 
             if (!Enabled) return;

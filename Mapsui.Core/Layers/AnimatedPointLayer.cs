@@ -22,7 +22,7 @@ namespace Mapsui.Layers
             if (_fetchInfo == null) return;
 
             Task.Factory.StartNew(() => {
-                _animatedFeatures.AddFeatures(_dataSource.GetFeatures(_fetchInfo));
+                _animatedFeatures.AddFeatures(_dataSource.GetFeatures(_fetchInfo) ?? new List<PointFeature>());
                 OnDataChanged(new DataChangedEventArgs());
             });
         }

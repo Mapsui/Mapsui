@@ -95,12 +95,12 @@ namespace Mapsui.Samples.Wpf.Editing
             };
 
             radioButton.Click += (s, a) => {
-                MapControl.Map.Layers.Clear();
+                MapControl!.Map?.Layers.Clear();
                 MapControl.Map = sample.Value();
 
-                LayerList.Initialize(MapControl.Map.Layers);
-                InitializeZoomSlider(MapControl.Map.Resolutions);
-                if (MapControl.Map.Layers.Any(l => l.Name.ToLower().Contains("edit"))) InitializeEditSetup();
+                LayerList.Initialize(MapControl!.Map.Layers);
+                InitializeZoomSlider(MapControl!.Map.Resolutions);
+                if (MapControl!.Map.Layers.Any(l => l.Name.ToLower().Contains("edit"))) InitializeEditSetup();
             };
             return radioButton;
         }
@@ -151,12 +151,13 @@ namespace Mapsui.Samples.Wpf.Editing
 
         private void ZoomSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> args)
         {
-            MapControl.Navigator.ZoomTo(MapControl.Map.Resolutions[(int)args.NewValue]);
+            if (MapControl.Map != null)
+                MapControl.Navigator.ZoomTo(MapControl.Map.Resolutions[(int)args.NewValue]);
         }
 
         private void InitializeEditSetup()
         {
-            _editManager.Layer = (WritableLayer)MapControl.Map.Layers.First(l => l.Name == "EditLayer");
+            _editManager.Layer = (WritableLayer)MapControl.Map!.Layers.First(l => l.Name == "EditLayer");
             _targetLayer = (WritableLayer)MapControl.Map.Layers.First(l => l.Name == "PolygonLayer");
 
             // Load the polygon layer on startup so you can start modifying right away
@@ -311,13 +312,14 @@ namespace Mapsui.Samples.Wpf.Editing
 
         private void MapControlOnMouseLeftButtonUp(object sender, MouseButtonEventArgs args)
         {
-            MapControl.Map.PanLock = _editManipulation.Manipulate(MouseState.Up,
+            if (MapControl.Map != null)
+                MapControl.Map.PanLock = _editManipulation.Manipulate(MouseState.Up,
                 args.GetPosition(MapControl).ToMapsui(), _editManager, MapControl);
 
             if (_selectMode)
             {
                 var infoArgs = MapControl.GetMapInfo(args.GetPosition(MapControl).ToMapsui());
-                if (infoArgs.Feature != null)
+                if (infoArgs?.Feature != null)
                 {
                     var currentValue = (bool?)infoArgs.Feature["Selected"] == true;
                     infoArgs.Feature["Selected"] = !currentValue; // invert current value
@@ -327,6 +329,9 @@ namespace Mapsui.Samples.Wpf.Editing
 
         private void MapControlOnMouseLeftButtonDown(object sender, MouseButtonEventArgs args)
         {
+            if (MapControl.Map == null)
+                return;
+
             if (args.ClickCount > 1)
             {
                 MapControl.Map.PanLock = _editManipulation.Manipulate(MouseState.DoubleClick,

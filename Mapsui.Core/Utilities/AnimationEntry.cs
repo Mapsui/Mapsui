@@ -11,6 +11,7 @@ namespace Mapsui.Utilities
         public AnimationEntry(object start, object end,
             double animationStart = 0, double animationEnd = 1,
             Easing? easing = null,
+            bool repeat = false,
             Action<AnimationEntry, double>? tick = null,
             Action<AnimationEntry>? final = null)
         {
@@ -21,6 +22,7 @@ namespace Mapsui.Utilities
             End = end;
 
             Easing = easing ?? Easing.Linear;
+            Repeat = repeat;
 
             _animationDelta = AnimationEnd - AnimationStart;
 
@@ -54,14 +56,31 @@ namespace Mapsui.Utilities
         public Easing Easing { get; }
 
         /// <summary>
+        /// Is this a repeating animation that starts over and over again
+        /// </summary>
+        public bool Repeat { get; }
+
+        /// <summary>
+        /// Time, where this AnimationEntry has started
+        /// </summary>
+        internal long StartTicks { get; set; }
+
+        /// <summary>
+        /// Time, where this AnimationEntry should end
+        /// </summary>
+        internal long EndTicks { get; set; }
+
+        /// <summary>
+        /// Lengths of this AnimationEntry in ticks
+        /// </summary>
+        internal long DurationTicks { get; set; }
+
+        /// <summary>
         /// Called when a value should changed
         /// </summary>
         /// <param name="value">Position in animation cycle between 0 and 1</param>
-        public void Tick(double value)
+        internal bool Tick(double value)
         {
-            if (value < AnimationStart || value > AnimationEnd)
-                return;
-
             // Each tick gets a value between 0 and 1 for its own cycle
             // Its independent from the global animation cycle
             var v = (value - AnimationStart) / _animationDelta;
@@ -69,13 +88,16 @@ namespace Mapsui.Utilities
             if (_tick != null)
             {
                 _tick(this, v);
+                return true;
             }
+
+            return false;
         }
 
         /// <summary>
         /// Called when the animation cycle is at the end
         /// </summary>
-        public void Final()
+        internal void Final()
         {
             if (_final != null)
             {

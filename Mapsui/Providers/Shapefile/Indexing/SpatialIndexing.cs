@@ -133,6 +133,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
         /// </summary>
         private QuadTree()
         {
+            _box = default!;
         }
 
 
@@ -218,15 +219,17 @@ namespace Mapsui.Providers.Shapefile.Indexing
         /// </summary>
         /// <param name="node">Node to save</param>
         /// <param name="sw">Reference to BinaryWriter</param>
-        private void SaveNode(QuadTree node, ref BinaryWriter sw)
+        private void SaveNode(QuadTree? node, ref BinaryWriter sw)
         {
+            if (node == null)
+                return;
             //Write node BoundingBox
             sw.Write(node.Box.Min.X);
             sw.Write(node.Box.Min.Y);
             sw.Write(node.Box.Max.X);
             sw.Write(node.Box.Max.Y);
             sw.Write(node.IsLeaf);
-            if (node.IsLeaf)
+            if (node.IsLeaf && node._objList != null)
             {
                 sw.Write(node._objList.Count); //Write number of features at node
                 for (var i = 0; i < node._objList.Count; i++) //Write each feature box
@@ -275,7 +278,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
         /// <summary>
         /// Gets/sets the left child node
         /// </summary>
-        public QuadTree Child0
+        public QuadTree? Child0
         {
             get => _child0;
             set => _child0 = value;
@@ -284,7 +287,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
         /// <summary>
         /// Gets/sets the right child node
         /// </summary>
-        public QuadTree Child1
+        public QuadTree? Child1
         {
             get => _child1;
             set => _child1 = value;
@@ -334,15 +337,20 @@ namespace Mapsui.Providers.Shapefile.Indexing
         /// <param name="box">BoundingBox to intersect with</param>
         /// <param name="node">Node to search from</param>
         /// <param name="list">List of found intersections</param>
-        private void IntersectTreeRecursive(MRect box, QuadTree node, ref Collection<uint> list)
+        private void IntersectTreeRecursive(MRect box, QuadTree? node, ref Collection<uint> list)
         {
+            if (node == null)
+                return;
             if (node.IsLeaf) //Leaf has been reached
             {
-                foreach (var boxObject in node._objList)
+                if (node._objList != null)
                 {
-                    if (box.Intersects(boxObject.Box))
-                        list.Add(boxObject.Id);
+                    foreach (var boxObject in node._objList)
+                    {
+                        if (box.Intersects(boxObject.Box))
+                            list.Add(boxObject.Id);
 
+                    }
                 }
             }
             else

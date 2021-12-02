@@ -20,7 +20,7 @@ namespace Mapsui.Samples.Maui
                 MainPage = new MainPageLarge();
         }
 
-        private void LogMethod(LogLevel logLevel, string message, Exception exception)
+        private void LogMethod(LogLevel logLevel, string message, Exception? exception)
         {
             Debug.WriteLine($"{logLevel}: {message}, {exception}");
         }
