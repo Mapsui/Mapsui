@@ -175,7 +175,7 @@ namespace Mapsui.UI.Wpf
         private void MapControlMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             // We have a new interaction with the screen, so stop all navigator animations
-            Navigator.StopRunningAnimation();
+            Navigator.StopRunningAnimations();
 
             var touchPosition = e.GetPosition(this).ToMapsui();
             _previousMousePosition = touchPosition;

@@ -122,7 +122,7 @@ namespace Mapsui.UI.iOS
             _innerRotation = Viewport.Rotation;
 
             // We have a new interaction with the screen, so stop all navigator animations
-            Navigator.StopRunningAnimation();
+            Navigator.StopRunningAnimations();
         }
 
         public override void TouchesMoved(NSSet touches, UIEvent? evt)
