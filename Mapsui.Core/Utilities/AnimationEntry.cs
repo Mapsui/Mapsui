@@ -5,16 +5,19 @@ namespace Mapsui.Utilities
     public class AnimationEntry
     {
         private readonly double _animationDelta;
-        private readonly Action<AnimationEntry, double>? _tick;
-        private readonly Action<AnimationEntry>? _final;
+        private readonly Func<AnimationEntry, double, bool>? _tick;
+        private readonly Func<AnimationEntry, bool>? _final;
 
         public AnimationEntry(object start, object end,
             double animationStart = 0, double animationEnd = 1,
             Easing? easing = null,
             bool repeat = false,
-            Action<AnimationEntry, double>? tick = null,
-            Action<AnimationEntry>? final = null)
+            Func<AnimationEntry, double, bool>? tick = null,
+            Func<AnimationEntry, bool>? final = null,
+            string name = "")
         {
+            Name = name;
+
             AnimationStart = animationStart;
             AnimationEnd = animationEnd;
 
@@ -29,6 +32,11 @@ namespace Mapsui.Utilities
             _tick = tick;
             _final = final;
         }
+
+        /// <summary>
+        /// Name of this AnimationEntry
+        /// </summary>
+        public string Name { get; }
 
         /// <summary>
         /// When this animation starts in animation cycle. Value between 0 and 1.
@@ -87,8 +95,7 @@ namespace Mapsui.Utilities
 
             if (_tick != null)
             {
-                _tick(this, v);
-                return true;
+                return _tick(this, v);
             }
 
             return false;
@@ -97,12 +104,14 @@ namespace Mapsui.Utilities
         /// <summary>
         /// Called when the animation cycle is at the end
         /// </summary>
-        internal void Final()
+        internal bool Final()
         {
             if (_final != null)
             {
-                _final(this);
+                return _final(this);
             }
+
+            return false;
         }
     }
 }
