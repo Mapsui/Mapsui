@@ -116,7 +116,7 @@ namespace Mapsui.UI.Uwp
         private void OnManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
         {
             // We have a new interaction with the screen, so stop all navigator animations
-            Navigator.StopRunningAnimation();
+            Navigator.StopRunningAnimations();
 
             _innerRotation = _viewport.Rotation;
         }
@@ -124,7 +124,7 @@ namespace Mapsui.UI.Uwp
         private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             // We have a new interaction with the screen, so stop all navigator animations
-            Navigator.StopRunningAnimation();
+            Navigator.StopRunningAnimations();
 
             var tapPosition = e.GetPosition(this).ToMapsui();
             OnInfo(InvokeInfo(tapPosition, tapPosition, 2));
@@ -133,7 +133,7 @@ namespace Mapsui.UI.Uwp
         private void OnSingleTapped(object sender, TappedRoutedEventArgs e)
         {
             // We have a new interaction with the screen, so stop all navigator animations
-            Navigator.StopRunningAnimation();
+            Navigator.StopRunningAnimations();
 
             var tabPosition = e.GetPosition(this).ToMapsui();
             OnInfo(InvokeInfo(tabPosition, tabPosition, 1));
@@ -232,7 +232,7 @@ namespace Mapsui.UI.Uwp
         private void OnManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
             // We have a new interaction with the screen, so stop all navigator animations
-            Navigator.StopRunningAnimation();
+            Navigator.StopRunningAnimations();
 
             var center = e.Position.ToMapsui();
             var radius = e.Delta.Scale;

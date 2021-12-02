@@ -556,7 +556,7 @@ namespace Mapsui.UI.Forms
                 return false;
 
             // We have a new interaction with the screen, so stop all navigator animations
-            Navigator.StopRunningAnimation();
+            Navigator.StopRunningAnimations();
 
             var args = new TouchedEventArgs(touchPoints);
 
@@ -623,7 +623,7 @@ namespace Mapsui.UI.Forms
                 return true;
 
             // We have an interaction with the screen, so stop all animations
-            Navigator.StopRunningAnimation();
+            Navigator.StopRunningAnimations();
 
             return true;
         }

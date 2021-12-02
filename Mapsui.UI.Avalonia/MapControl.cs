@@ -192,7 +192,7 @@ namespace Mapsui.UI.Avalonia
         private void OnDoubleTapped(object? sender, RoutedEventArgs e)
         {
             // We have a new interaction with the screen, so stop all navigator animations
-            Navigator.StopRunningAnimation();
+            Navigator.StopRunningAnimations();
             var tapPosition = _mousePosition;
             OnInfo(InvokeInfo(tapPosition, tapPosition, 2));
         }
@@ -200,7 +200,7 @@ namespace Mapsui.UI.Avalonia
         private void OnSingleTapped(object? sender, RoutedEventArgs e)
         {
             // We have a new interaction with the screen, so stop all navigator animations
-            Navigator.StopRunningAnimation();
+            Navigator.StopRunningAnimations();
 
             var tapPosition = _mousePosition;
             OnInfo(InvokeInfo(tapPosition, tapPosition, 1));

@@ -6,12 +6,15 @@ using Mapsui.Utilities;
 
 namespace Mapsui
 {
-    public class Navigator : INavigator
+    /// <summary>
+    /// A Navigator is used to change the visible part (Viewport) of a MapControl
+    /// </summary>
+    public class Navigator : INavigator, IAnimatable
     {
         private readonly Map _map;
         private readonly IViewport _viewport;
         private double _rotationDelta;
-        private List<AnimationEntry> _lastAnimations = new();
+        private List<AnimationEntry> _animations = new();
 
         private static long _defaultDuration;
 
@@ -30,11 +33,6 @@ namespace Mapsui
         {
             _map = map;
             _viewport = viewport;
-        }
-
-        private void AnimationTimerTicked(object sender, AnimationEventArgs e)
-        {
-            Navigated?.Invoke(this, e.ChangeType);
         }
 
         /// <summary>
@@ -78,7 +76,7 @@ namespace Mapsui
                 return;
 
             // Stop any old animation if there is one
-            StopRunningAnimation();
+            StopRunningAnimations();
 
             duration = duration < 0 ? _defaultDuration : duration;
 
@@ -96,6 +94,7 @@ namespace Mapsui
                 if (!center.Equals(_viewport.Center))
                 {
                     var entry = new AnimationEntry(
+                        name: "Moving",
                         start: _viewport.Center,
                         end: (MReadOnlyPoint)center,
                         animationStart: 0,
@@ -110,6 +109,7 @@ namespace Mapsui
                 if (_viewport.Resolution != resolution)
                 {
                     var entry = new AnimationEntry(
+                        name: "Zooming",
                         start: _viewport.Resolution,
                         end: resolution,
                         animationStart: 0,
@@ -127,7 +127,7 @@ namespace Mapsui
 
                 Animation.Start(animations, duration);
 
-                _lastAnimations = animations;
+                _animations = animations;
             }
         }
 
@@ -140,7 +140,7 @@ namespace Mapsui
         public void ZoomTo(double resolution, long duration = -1, Easing? easing = default)
         {
             // Stop any old animation if there is one
-            StopRunningAnimation();
+            StopRunningAnimations();
 
             duration = duration < 0 ? _defaultDuration : duration;
 
@@ -158,6 +158,7 @@ namespace Mapsui
                     return;
 
                 var entry = new AnimationEntry(
+                    name: "Zooming",
                     start: _viewport.Resolution,
                     end: resolution,
                     animationStart: 0,
@@ -170,7 +171,7 @@ namespace Mapsui
 
                 Animation.Start(animations, duration);
 
-                _lastAnimations = animations;
+                _animations = animations;
             }
         }
 
@@ -189,7 +190,7 @@ namespace Mapsui
             // arguments to the navigator are in World coordinates as well.
 
             // Stop any old animation if there is one
-            StopRunningAnimation();
+            StopRunningAnimations();
 
             duration = duration < 0 ? _defaultDuration : duration;
 
@@ -206,6 +207,7 @@ namespace Mapsui
                 var animations = new List<AnimationEntry>();
 
                 var centerEntry = new AnimationEntry(
+                    name: "Moving",
                     start: _viewport.Center,
                     end: CalculateCenterOfMap(centerOfZoom, resolution),
                     animationStart: 0,
@@ -220,6 +222,7 @@ namespace Mapsui
                     return;
 
                 var entry = new AnimationEntry(
+                    name: "Zooming",
                     start: _viewport.Resolution,
                     end: resolution,
                     animationStart: 0,
@@ -232,7 +235,7 @@ namespace Mapsui
 
                 Animation.Start(animations, duration);
 
-                _lastAnimations = animations;
+                _animations = animations;
             }
         }
 
@@ -328,7 +331,7 @@ namespace Mapsui
         public void CenterOn(MPoint center, long duration = -1, Easing? easing = default)
         {
             // Stop any old animation if there is one
-            StopRunningAnimation();
+            StopRunningAnimations();
 
             duration = duration < 0 ? _defaultDuration : duration;
 
@@ -346,6 +349,7 @@ namespace Mapsui
                     return;
 
                 var entry = new AnimationEntry(
+                    name: "Moving",
                     start: _viewport.Center,
                     end: (MReadOnlyPoint)center,
                     animationStart: 0,
@@ -358,7 +362,7 @@ namespace Mapsui
 
                 Animation.Start(animations, duration);
 
-                _lastAnimations = animations;
+                _animations = animations;
             }
         }
 
@@ -371,7 +375,7 @@ namespace Mapsui
         public void FlyTo(MPoint center, double maxResolution, long duration = 2000)
         {
             // Stop any old animation if there is one
-            StopRunningAnimation();
+            StopRunningAnimations();
 
             duration = duration < 0 ? _defaultDuration : duration;
 
@@ -389,6 +393,7 @@ namespace Mapsui
                 if (!center.Equals(_viewport.Center))
                 {
                     entry = new AnimationEntry(
+                        name: "Moving",
                         start: _viewport.Center,
                         end: (MReadOnlyPoint)center,
                         animationStart: 0,
@@ -401,6 +406,7 @@ namespace Mapsui
                 }
 
                 entry = new AnimationEntry(
+                    name: "Zooming",
                     start: _viewport.Resolution,
                     end: maxResolution,
                     animationStart: 0,
@@ -412,6 +418,7 @@ namespace Mapsui
                 animations.Add(entry);
 
                 entry = new AnimationEntry(
+                    name: "Zooming",
                     start: maxResolution,
                     end: _viewport.Resolution,
                     animationStart: 0.5,
@@ -424,7 +431,7 @@ namespace Mapsui
 
                 Animation.Start(animations, duration);
 
-                _lastAnimations = animations;
+                _animations = animations;
             }
         }
 
@@ -437,7 +444,7 @@ namespace Mapsui
         public void RotateTo(double rotation, long duration = -1, Easing? easing = default)
         {
             // Stop any old animation if there is one
-            StopRunningAnimation();
+            StopRunningAnimations();
 
             duration = duration < 0 ? _defaultDuration : duration;
 
@@ -455,6 +462,7 @@ namespace Mapsui
                     return;
 
                 var entry = new AnimationEntry(
+                    name: "Rotation",
                     start: _viewport.Rotation,
                     end: rotation,
                     animationStart: 0,
@@ -475,7 +483,7 @@ namespace Mapsui
 
                 Animation.Start(animations, duration);
 
-                _lastAnimations = animations;
+                _animations = animations;
             }
         }
 
@@ -488,7 +496,7 @@ namespace Mapsui
         public void FlingWith(double velocityX, double velocityY, long maxDuration)
         {
             // Stop any old animation if there is one
-            StopRunningAnimation();
+            StopRunningAnimations();
 
             if (maxDuration < 16)
                 return;
@@ -509,6 +517,7 @@ namespace Mapsui
             var animations = new List<AnimationEntry>();
 
             var entry = new AnimationEntry(
+                name: "Moving",
                 start: (velocityX, velocityY),
                 end: (0d, 0d),
                 animationStart: 0,
@@ -521,67 +530,94 @@ namespace Mapsui
 
             Animation.Start(animations, (long)animateMillis);
 
-            _lastAnimations = animations;
+            _animations = animations;
         }
 
         /// <summary>
         /// Stop all running animations
         /// </summary>
-        public void StopRunningAnimation()
+        public void StopRunningAnimations()
         {
-            Animation.Stop(_lastAnimations, false);
+            Animation.Stop(_animations, false);
         }
 
-        private void CenterTick(AnimationEntry entry, double value)
+        private bool CenterTick(AnimationEntry entry, double value)
         {
             var x = ((MReadOnlyPoint)entry.Start).X + (((MReadOnlyPoint)entry.End).X - ((MReadOnlyPoint)entry.Start).X) * entry.Easing.Ease(value);
             var y = ((MReadOnlyPoint)entry.Start).Y + (((MReadOnlyPoint)entry.End).Y - ((MReadOnlyPoint)entry.Start).Y) * entry.Easing.Ease(value);
 
+            if (_viewport.Center.X == x && _viewport.Center.Y == y)
+                return false;
+
             _viewport.SetCenter(x, y);
 
             Navigated?.Invoke(this, ChangeType.Continuous);
+
+            return true;
         }
 
-        private void CenterFinal(AnimationEntry entry)
+        private bool CenterFinal(AnimationEntry entry)
         {
+            _animations.Remove(entry);
+
             _viewport.SetCenter((MReadOnlyPoint)entry.End);
 
             Navigated?.Invoke(this, ChangeType.Discrete);
+
+            return true;
         }
 
-        private void ResolutionTick(AnimationEntry entry, double value)
+        private bool ResolutionTick(AnimationEntry entry, double value)
         {
             var r = (double)entry.Start + ((double)entry.End - (double)entry.Start) * entry.Easing.Ease(value);
+
+            if (_viewport.Resolution == r)
+                return false;
 
             _viewport.SetResolution(r);
 
             Navigated?.Invoke(this, ChangeType.Continuous);
+
+            return true;
         }
 
-        private void ResolutionFinal(AnimationEntry entry)
+        private bool ResolutionFinal(AnimationEntry entry)
         {
+            _animations.Remove(entry);
+
             _viewport.SetResolution((double)entry.End);
 
             Navigated?.Invoke(this, ChangeType.Discrete);
+
+            return true;
         }
 
-        private void RotationTick(AnimationEntry entry, double value)
+        private bool RotationTick(AnimationEntry entry, double value)
         {
             var r = (double)entry.Start + _rotationDelta * entry.Easing.Ease(value);
+
+            if (_viewport.Rotation == r)
+                return false;
 
             _viewport.SetRotation(r);
 
             Navigated?.Invoke(this, ChangeType.Continuous);
+
+            return true;
         }
 
-        private void RotationFinal(AnimationEntry entry)
+        private bool RotationFinal(AnimationEntry entry)
         {
+            _animations.Remove(entry);
+
             _viewport.SetRotation((double)entry.End);
 
             Navigated?.Invoke(this, ChangeType.Discrete);
+
+            return true;
         }
 
-        private void FlingTick(AnimationEntry entry, double value)
+        private bool FlingTick(AnimationEntry entry, double value)
         {
             var timeAmount = 16 / 1000d; // 16 milliseconds 
 
@@ -596,7 +632,7 @@ namespace Mapsui
                 yMovement = 0;
 
             if (xMovement == 0 && yMovement == 0)
-                return;
+                return false;
 
             var previous = _viewport.ScreenToWorld(0, 0);
             var current = _viewport.ScreenToWorld(xMovement, yMovement);
@@ -607,16 +643,35 @@ namespace Mapsui
             var newX = _viewport.Center.X + xDiff;
             var newY = _viewport.Center.Y + yDiff;
 
+            if (_viewport.Center.X == newX && _viewport.Center.Y == newY)
+                return false;
+
             _viewport.SetCenter(newX, newY);
 
             Navigated?.Invoke(this, ChangeType.Continuous);
+
+            return true;
         }
 
-        private void FlingFinal(AnimationEntry entry)
+        private bool FlingFinal(AnimationEntry entry)
         {
+            _animations.Remove(entry);
+
             _viewport.SetCenter(_viewport.Center.X, _viewport.Center.Y);
 
             Navigated?.Invoke(this, ChangeType.Discrete);
+
+            return true;
+        }
+
+        public bool UpdateAnimations(long ticks)
+        {
+            if (_animations.Count == 0)
+            {
+                return false;
+            }
+
+            return Animation.UpdateAnimations(_animations, ticks, true);
         }
 
         public void Dispose()

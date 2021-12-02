@@ -94,85 +94,30 @@ namespace Mapsui.UI.Wpf
 
         private void InvalidateTimerCallback(object? state)
         {
-            // Check, if we have to redraw the screen, because a animation is running or a refresh is wished
-
-/* Unmerged change from project 'Mapsui.UI.Uwp'
-Before:
-            if (!Animations.UpdateAnimations() && !_refresh)
-After:
-            if (!Animation.UpdateAnimations() && !_refresh)
-*/
-
-/* Unmerged change from project 'Mapsui.UI.iOS'
-Before:
-            if (!Animations.UpdateAnimations() && !_refresh)
-After:
-            if (!Animation.UpdateAnimations() && !_refresh)
-*/
-
-/* Unmerged change from project 'Mapsui.UI.Wpf (netcoreapp3.1)'
-Before:
-            if (!Animations.UpdateAnimations() && !_refresh)
-After:
-            if (!Animation.UpdateAnimations() && !_refresh)
-*/
-
-/* Unmerged change from project 'Mapsui.UI.Forms'
-Before:
-            if (!Animations.UpdateAnimations() && !_refresh)
-After:
-            if (!Animation.UpdateAnimations() && !_refresh)
-*/
-
-/* Unmerged change from project 'Mapsui.UI.Uno (uap10.0.18362)'
-Before:
-            if (!Animations.UpdateAnimations() && !_refresh)
-After:
-            if (!Animation.UpdateAnimations() && !_refresh)
-*/
-
-/* Unmerged change from project 'Mapsui.UI.WinUI'
-Before:
-            if (!Animations.UpdateAnimations() && !_refresh)
-After:
-            if (!Animation.UpdateAnimations() && !_refresh)
-*/
-
-/* Unmerged change from project 'Mapsui.UI.Avalonia'
-Before:
-            if (!Animations.UpdateAnimations() && !_refresh)
-After:
-            if (!Animation.UpdateAnimations() && !_refresh)
-*/
-
-/* Unmerged change from project 'Mapsui.UI.Wpf (net48)'
-Before:
-            if (!Animations.UpdateAnimations() && !_refresh)
-After:
-            if (!Animation.UpdateAnimations() && !_refresh)
-*/
-
-/* Unmerged change from project 'Mapsui.UI.Uno (xamarinios10)'
-Before:
-            if (!Animations.UpdateAnimations() && !_refresh)
-After:
-            if (!Animation.UpdateAnimations() && !_refresh)
-*/
-
-/* Unmerged change from project 'Mapsui.UI.Uno (netstandard2.0)'
-Before:
-            if (!Animations.UpdateAnimations() && !_refresh)
-After:
-            if (!Animation.UpdateAnimations() && !_refresh)
-*/
-            if (!Utilities.Animation.UpdateAnimations() && !_refresh)
-                return;
-
+            // Check, if already a drawing takes place
             if (_drawing)
             {
                 if (_performance != null)
                     _performance.Dropped++;
 
+                return;
+            }
+
+            var ticks = DateTime.Now.Ticks;
+
+            // Check, if we have to redraw the screen, because a animation is running or a refresh is wished
+            foreach (var layer in _map?.Layers ?? new LayerCollection())
+            {
+                if (layer is IAnimatable animatable)
+                {
+                    _refresh |= animatable.UpdateAnimations(ticks);
+                }
+            }
+
+            _refresh |= ((IAnimatable)_navigator)?.UpdateAnimations(ticks) ?? false;
+
+            if (!_refresh)
+            {
                 return;
             }
 
