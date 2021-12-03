@@ -111,6 +111,10 @@ namespace Mapsui.UI.Wpf
             {
                 if (layer is IAnimatable animatable)
                 {
+                    if (layer.Enabled == false) continue;
+                    if (layer.MinVisible > _viewport.Resolution) continue;
+                    if (layer.MaxVisible < _viewport.Resolution) continue;
+
                     _refresh |= animatable.UpdateAnimations(ticks);
                 }
             }
@@ -120,6 +124,8 @@ namespace Mapsui.UI.Wpf
             {
                 if (widget is IAnimatable animatable)
                 {
+                    if (widget.Enabled == false) continue;
+
                     _refresh |= animatable.UpdateAnimations(ticks);
                 }
             }
