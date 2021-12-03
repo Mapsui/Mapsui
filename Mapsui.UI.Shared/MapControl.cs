@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Net;
@@ -105,10 +106,19 @@ namespace Mapsui.UI.Wpf
 
             var ticks = DateTime.Now.Ticks;
 
-            // Check, if we have to redraw the screen, because a animation is running or a refresh is wished
+            // Check, if we have to redraw the screen, because of an animation is running or a refresh is wished in a layer
             foreach (var layer in _map?.Layers ?? new LayerCollection())
             {
                 if (layer is IAnimatable animatable)
+                {
+                    _refresh |= animatable.UpdateAnimations(ticks);
+                }
+            }
+
+            // Check, if we have to redraw the screen, because of an animation is running or a refresh is wished in a widget
+            foreach (var widget in _map?.Widgets ?? new ConcurrentQueue<IWidget>())
+            {
+                if (widget is IAnimatable animatable)
                 {
                     _refresh |= animatable.UpdateAnimations(ticks);
                 }
