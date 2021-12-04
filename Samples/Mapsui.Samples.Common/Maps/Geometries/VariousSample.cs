@@ -69,7 +69,9 @@ namespace Mapsui.Samples.Common.Maps
         private static int GetBitmapIdForEmbeddedResource(string imagePath)
         {
             var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
+#pragma warning disable IDISP001            
             var image = assembly.GetManifestResourceStream(imagePath);
+#pragma warning restore IDISP001            
             var bitmapId = BitmapRegistry.Instance.Register(image);
             return bitmapId;
         }
