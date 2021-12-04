@@ -99,8 +99,9 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             var features = new List<RasterFeature>();
 
             IViewport? viewport = fetchInfo.ToViewport();
-
+#pragma warning disable IDISP001
             if (viewport != null && TryGetMap(viewport, out var raster))
+#pragma warning enable IDISP001                
             {
                 features.Add(new RasterFeature(raster));
             }

@@ -90,17 +90,20 @@ namespace Mapsui.Samples.Forms
                     foreach (var r in assembly.GetManifestResourceNames())
                         System.Diagnostics.Debug.WriteLine(r);
 
-                    var stream = assembly.GetManifestResourceStream("Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg");
-                    StreamReader reader = new StreamReader(stream!);
-                    var svgString = reader.ReadToEnd();
-                    mapView?.Pins.Add(new Pin(mapView)
+                    using (var stream = assembly.GetManifestResourceStream("Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg"))
                     {
-                        Label = $"PinType.Svg {markerNum++}",
-                        Position = e.Point,
-                        Type = PinType.Svg,
-                        Scale = 0.1f,
-                        Svg = svgString
-                    });
+                        using StreamReader reader = new StreamReader(stream!);
+                        var svgString = reader.ReadToEnd();
+                        mapView?.Pins.Add(new Pin(mapView)
+                        {
+                            Label = $"PinType.Svg {markerNum++}",
+                            Position = e.Point,
+                            Type = PinType.Svg,
+                            Scale = 0.1f,
+                            Svg = svgString
+                        });
+                    }
+
                     break;
                 case 3:
                     var icon = assembly.GetManifestResourceStream("Mapsui.Samples.Common.Images.loc.png")!.ToBytes();

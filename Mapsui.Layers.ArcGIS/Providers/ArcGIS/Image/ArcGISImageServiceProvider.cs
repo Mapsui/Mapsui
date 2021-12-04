@@ -100,8 +100,9 @@ namespace Mapsui.Providers.ArcGIS.Image
             var features = new List<RasterFeature>();
 
             var viewport = fetchInfo.ToViewport();
-
+#pragma warning disable IDISP001
             if (viewport != null && TryGetMap(viewport, out var raster))
+#pragma warning enable IDISP001                
             {
                 features.Add(new RasterFeature(raster));
             }
@@ -110,6 +111,7 @@ namespace Mapsui.Providers.ArcGIS.Image
 
         public bool TryGetMap(IViewport viewport, [NotNullWhen(true)] out MRaster? raster)
         {
+            raster = null;
             int width;
             int height;
 
@@ -151,6 +153,7 @@ namespace Mapsui.Providers.ArcGIS.Image
                     catch (Exception ex)
                     {
                         Logger.Log(LogLevel.Error, ex.Message, ex);
+                        raster?.Dispose();
                         raster = null;
                         return false;
                     }
