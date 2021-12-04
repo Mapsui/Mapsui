@@ -12,7 +12,7 @@ namespace Mapsui.Layers
         Linear
     }
 
-    public class AnimatedFeatures
+    public sealed class AnimatedFeatures : IDisposable
     {
         private readonly Timer _animationTimer;
         private List<AnimatedFeature> _cache = new();
@@ -62,12 +62,17 @@ namespace Mapsui.Layers
             return _cache.Select(i => i.Feature);
         }
 
+        public void Dispose()
+        {
+            this._animationTimer.Dispose();
+        }
+
         private static bool Completed(double progress)
         {
             return progress >= 1;
         }
 
-        protected virtual void OnAnimatedPositionChanged()
+        private void OnAnimatedPositionChanged()
         {
             AnimatedPositionChanged?.Invoke(this, EventArgs.Empty);
         }

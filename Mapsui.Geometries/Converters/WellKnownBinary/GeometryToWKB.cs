@@ -75,7 +75,7 @@ namespace Mapsui.Geometries.WellKnownBinary
         public static byte[] Write(Geometry g, WkbByteOrder wkbByteOrder = WkbByteOrder.Ndr)
         {
             var ms = new MemoryStream();
-            var bw = new BinaryWriter(ms);
+            using var bw = new BinaryWriter(ms);
 
             //Write the byteorder format.
             bw.Write((byte)wkbByteOrder);

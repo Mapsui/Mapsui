@@ -151,12 +151,13 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
 
             var uri = new Uri(GetRequestUrl(viewport.Extent, width, height));
             var handler = new HttpClientHandler { Credentials = Credentials ?? CredentialCache.DefaultCredentials };
-            var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(_timeOut) };
+            using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(_timeOut) };
 
             try
             {
-                var response = client.GetAsync(uri).Result;
-                var bytes = BruTile.Utilities.ReadFully(response.Content.ReadAsStreamAsync().Result);
+                using var response = client.GetAsync(uri).Result;
+                using var readAsStreamAsync = response.Content.ReadAsStreamAsync();
+                var bytes = BruTile.Utilities.ReadFully(readAsStreamAsync.Result);
                 if (viewport.Extent != null)
                 {
                     raster = new MRaster(new MemoryStream(bytes), viewport.Extent);

@@ -1,9 +1,11 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Mapsui.Fetcher
 {
-    public class FetchWorker // Todo: Make internal
+    public sealed class FetchWorker : IDisposable
+    // Todo: Make internal
     {
         private readonly IFetchDispatcher _fetchDispatcher;
         private CancellationTokenSource? _fetchLoopCancellationTokenSource;
@@ -19,6 +21,7 @@ namespace Mapsui.Fetcher
             if (_fetchLoopCancellationTokenSource == null || _fetchLoopCancellationTokenSource.IsCancellationRequested)
             {
                 Interlocked.Increment(ref RestartCounter);
+                _fetchLoopCancellationTokenSource?.Dispose();
                 _fetchLoopCancellationTokenSource = new CancellationTokenSource();
                 Task.Run(() => Fetch(_fetchLoopCancellationTokenSource));
             }
@@ -27,6 +30,13 @@ namespace Mapsui.Fetcher
         public void Stop()
         {
             _fetchLoopCancellationTokenSource?.Cancel();
+            _fetchLoopCancellationTokenSource?.Dispose();
+            _fetchLoopCancellationTokenSource = null;
+        }
+
+        public void Dispose()
+        {
+            _fetchLoopCancellationTokenSource?.Dispose();
             _fetchLoopCancellationTokenSource = null;
         }
 

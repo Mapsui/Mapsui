@@ -69,8 +69,8 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
                     $"{url}/identify?f=pjson&geometryType=esriGeometryPoint&geometry={pointGeom}&tolerance={tolerance}{layersString}&mapExtent={mapExtend}&imageDisplay={imageDisplay}&returnGeometry={returnGeometry}{(sr != int.MinValue ? $"&sr={sr}" : "")}";
 
                 var handler = new HttpClientHandler { Credentials = credentials ?? CredentialCache.DefaultCredentials };
-                var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
-                var response = await client.GetAsync(requestUrl);
+                using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
+                using var response = await client.GetAsync(requestUrl);
 
                 if (!response.IsSuccessStatusCode)
                 {
@@ -80,16 +80,17 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
 
                 try
                 {
-                    var dataStream = CopyAndClose(await response.Content.ReadAsStreamAsync());
+                    using var dataStream = CopyAndClose(await response.Content.ReadAsStreamAsync());
 
                     if (dataStream != null)
                     {
-                        var sReader = new System.IO.StreamReader(dataStream);
+                        using var sReader = new System.IO.StreamReader(dataStream);
                         var jsonString = sReader.ReadToEnd();
 
                         var serializer = new JsonSerializer();
                         var jToken = JObject.Parse(jsonString);
-                        _featureInfo = serializer.Deserialize(new JTokenReader(jToken), typeof(ArcGISFeatureInfo)) as ArcGISFeatureInfo;
+                        using var jTokenReader = new JTokenReader(jToken);
+                        _featureInfo = serializer.Deserialize(jTokenReader, typeof(ArcGISFeatureInfo)) as ArcGISFeatureInfo;
 
                         dataStream.Position = 0;
 
@@ -146,7 +147,9 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
                 count = inputStream.Read(buffer, 0, readSize);
             }
             ms.Position = 0;
+#pragma warning disable IDISP007
             inputStream.Dispose();
+#pragma warning restore IDISP007
             return ms;
         }
 

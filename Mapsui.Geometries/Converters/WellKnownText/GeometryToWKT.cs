@@ -93,7 +93,7 @@ namespace Mapsui.Geometries.WellKnownText
         /// </returns>
         public static string Write(IGeometry geometry)
         {
-            var sw = new StringWriter();
+            using var sw = new StringWriter();
             Write(geometry, sw);
             return sw.ToString();
         }

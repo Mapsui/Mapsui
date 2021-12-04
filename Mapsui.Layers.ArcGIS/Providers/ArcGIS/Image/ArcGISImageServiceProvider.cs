@@ -127,11 +127,12 @@ namespace Mapsui.Providers.ArcGIS.Image
 
             var uri = new Uri(GetRequestUrl(viewport.Extent, width, height));
             var handler = new HttpClientHandler { Credentials = Credentials ?? CredentialCache.DefaultCredentials };
-            var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(_timeOut) };
+            using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(_timeOut) };
 
             try
             {
-                var response = client.GetAsync(uri).Result;
+                using var task = client.GetAsync(uri);
+                using var response = task.Result;
                 using (var dataStream = response.Content.ReadAsStreamAsync().Result)
                 {
                     try

@@ -3,9 +3,11 @@ using System;
 
 namespace Mapsui.Layers
 {
-    public class RasterFeature : BaseFeature, IFeature
+    public sealed class RasterFeature : BaseFeature, IFeature, IDisposable
     {
+#pragma warning disable IDISP008
         public MRaster? Raster { get; }
+#pragma warning restore IDISP008
         public MRect? Extent => Raster;
 
         public RasterFeature(RasterFeature rasterFeature) : base(rasterFeature)
@@ -26,6 +28,11 @@ namespace Mapsui.Layers
                         point.X = x;
                         point.Y = x;
                     });
+        }
+
+        public void Dispose()
+        {
+            Raster?.Dispose();
         }
     }
 }
