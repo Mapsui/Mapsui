@@ -123,9 +123,12 @@ namespace Mapsui.Layers
             }
         }
 
-        public void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            MemoryCache.Dispose();
+            if (disposing)
+            {
+                MemoryCache.Dispose();
+            }
         }
 
         private void TileFetchDispatcherOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)

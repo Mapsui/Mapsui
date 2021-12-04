@@ -50,7 +50,7 @@ namespace Mapsui.Samples.Forms.Mac
             base.Dispose(disposing);
             if (disposing)
             {
-                window.Dispose();    
+                window.Dispose();
             }
         }
 
