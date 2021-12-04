@@ -129,6 +129,8 @@ namespace Mapsui.Layers
             {
                 MemoryCache.Dispose();
             }
+
+            base.Dispose(disposing);
         }
 
         private void TileFetchDispatcherOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)

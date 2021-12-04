@@ -50,6 +50,7 @@ namespace Mapsui.UI.iOS
             _canvas.PaintSurface += OnPaintSurface;
             AddSubview(_canvas);
 
+#pragma warning disable IDISP004 // Don't ignore created IDisposable.
             AddConstraints(new[]
             {
                 NSLayoutConstraint.Create(this, NSLayoutAttribute.Leading, NSLayoutRelation.Equal, _canvas,
@@ -61,23 +62,28 @@ namespace Mapsui.UI.iOS
                 NSLayoutConstraint.Create(this, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, _canvas,
                     NSLayoutAttribute.Bottom, 1.0f, 0.0f)
             });
+#pragma warning restore IDISP004 // Don't ignore created IDisposable.
 
             ClipsToBounds = true;
             MultipleTouchEnabled = true;
             UserInteractionEnabled = true;
 
+#pragma warning disable IDISP001 // Dispose created.
             var doubleTapGestureRecognizer = new UITapGestureRecognizer(OnDoubleTapped)
             {
                 NumberOfTapsRequired = 2,
                 CancelsTouchesInView = false,
             };
+#pragma warning restore IDISP001 // Dispose created.
             AddGestureRecognizer(doubleTapGestureRecognizer);
 
+#pragma warning disable IDISP001 // Dispose created.
             var tapGestureRecognizer = new UITapGestureRecognizer(OnSingleTapped)
             {
                 NumberOfTapsRequired = 1,
                 CancelsTouchesInView = false,
             };
+#pragma warning restore IDISP001 // Dispose created.
             tapGestureRecognizer.RequireGestureRecognizerToFail(doubleTapGestureRecognizer);
             AddGestureRecognizer(tapGestureRecognizer);
 
@@ -217,18 +223,18 @@ namespace Mapsui.UI.iOS
 
         public void OpenBrowser(string url)
         {
-            UIApplication.SharedApplication.OpenUrl(new NSUrl(url));
-        }
-
-        public new void Dispose()
-        {
-            Unsubscribe();
-            base.Dispose();
+            using var nsUrl = new NSUrl(url);
+            UIApplication.SharedApplication.OpenUrl(nsUrl);
         }
 
         protected override void Dispose(bool disposing)
         {
-            Unsubscribe();
+            if (disposing)
+            {
+                Unsubscribe();
+                _canvas?.Dispose();
+            }
+
             base.Dispose(disposing);
         }
 

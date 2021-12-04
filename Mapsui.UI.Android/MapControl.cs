@@ -13,6 +13,8 @@ using Mapsui.UI.Android.Extensions;
 using SkiaSharp.Views.Android;
 using Math = System.Math;
 
+#nullable enable
+
 namespace Mapsui.UI.Android
 {
     public enum SkiaRenderMode
@@ -71,17 +73,21 @@ namespace Mapsui.UI.Android
             _invalidate = () => { RunOnUIThread(RefreshGraphicsWithTryCatch); };
 
             SetBackgroundColor(Color.Transparent);
+            _canvas?.Dispose();
             _canvas = RenderMode == SkiaRenderMode.Software ? StartSoftwareRenderMode() : StartHardwareRenderMode();
+            _mainLooperHandler?.Dispose();
             _mainLooperHandler = new Handler(Looper.MainLooper);
 
             SetViewportSize(); // todo: check if size is available, perhaps we need a load event
 
             Touch += MapView_Touch;
 
+#pragma warning disable IDISP001 // Dispose created.
             var listener = new MapControlGestureListener();
+#pragma warning restore IDISP001 // Dispose created.
 
             listener.Fling += OnFling;
-
+            _gestureDetector?.Dispose();
             _gestureDetector = new GestureDetector(Context, listener);
             _gestureDetector.SingleTapConfirmed += OnSingleTapped;
             _gestureDetector.DoubleTap += OnDoubleTapped;
@@ -110,11 +116,13 @@ namespace Mapsui.UI.Android
                 if (_renderMode == SkiaRenderMode.Hardware)
                 {
                     StopSoftwareRenderMode(_canvas);
+                    _canvas?.Dispose();
                     _canvas = StartHardwareRenderMode();
                 }
                 else
                 {
                     StopHardwareRenderMode(_canvas);
+                    _canvas?.Dispose();
                     _canvas = StartSoftwareRenderMode();
                 }
                 RefreshGraphics();
@@ -323,7 +331,8 @@ namespace Mapsui.UI.Android
         /// <returns></returns>
         private static MPoint GetScreenPositionInPixels(MotionEvent motionEvent, View view)
         {
-            return new PointF(motionEvent.GetX(0) - view.Left, motionEvent.GetY(0) - view.Top).ToMapsui();
+            using var pointF = new PointF(motionEvent.GetX(0) - view.Left, motionEvent.GetY(0) - view.Top);
+            return pointF.ToMapsui();
         }
 
         private void RefreshGraphicsWithTryCatch()
@@ -360,18 +369,26 @@ namespace Mapsui.UI.Android
         public void OpenBrowser(string url)
         {
             var uri = global::Android.Net.Uri.Parse(url);
+#pragma warning disable IDISP001
             var intent = new Intent(Intent.ActionView);
             intent.SetData(uri);
 
             var chooser = Intent.CreateChooser(intent, "Open with");
-
+#pragma warning restore IDISP001
             Context?.StartActivity(chooser);
         }
 
         protected override void Dispose(bool disposing)
         {
+            if (disposing)
+            {
+                CommonDispose(disposing);
+                _mainLooperHandler?.Dispose();
+                _canvas?.Dispose();
+                _gestureDetector?.Dispose();
+            }
+
             base.Dispose(disposing);
-            CommonDispose(disposing);
         }
 
         private static (MPoint centre, double radius, double angle) GetPinchValues(List<MPoint> locations)
