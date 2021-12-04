@@ -54,7 +54,16 @@ namespace Mapsui.Fetcher
 
         public void Dispose()
         {
-            this._waitTimer.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                this._waitTimer.Dispose();
+            }
         }
 
         private void WaitTimerElapsed(object state)

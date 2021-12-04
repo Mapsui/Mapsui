@@ -76,7 +76,7 @@ namespace Mapsui.Providers
 #pragma warning disable IDISP004
 #pragma warning disable IDISP001
                 var raster = new MRaster(new MemoryStream(bitmap), new MRect(info.Extent.MinX, info.Extent.MinY, info.Extent.MaxX, info.Extent.MaxY));
-#pragma warning enable IDISP001 
+#pragma warning restore IDISP001 
 #pragma warning disable IDISP004                
                 features.Add(new RasterFeature(raster));
             }

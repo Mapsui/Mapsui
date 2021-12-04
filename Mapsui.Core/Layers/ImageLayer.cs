@@ -31,7 +31,16 @@ namespace Mapsui.Layers
     {
         public void Dispose()
         {
-            this._startFetchTimer.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                this._startFetchTimer.Dispose();
+            }
         }
 
         private class FeatureSets

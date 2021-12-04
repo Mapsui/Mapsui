@@ -176,7 +176,7 @@ namespace Mapsui.Layers
             if (tileData == null) return null;
 #pragma warning disable IDISP004
             return new MRaster(new MemoryStream(tileData), tileInfo.Extent.ToMRect());
-#pragma warning enable IDISP004           
+#pragma warning restore IDISP004           
         }
     }
 }

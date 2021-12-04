@@ -64,7 +64,16 @@ namespace Mapsui.Layers
 
         public void Dispose()
         {
-            this._animationTimer.Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                this._animationTimer.Dispose();
+            }
         }
 
         private static bool Completed(double progress)

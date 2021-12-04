@@ -101,7 +101,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             IViewport? viewport = fetchInfo.ToViewport();
 #pragma warning disable IDISP001
             if (viewport != null && TryGetMap(viewport, out var raster))
-#pragma warning enable IDISP001                
+#pragma warning restore IDISP001                
             {
                 features.Add(new RasterFeature(raster));
             }
@@ -161,7 +161,9 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
                 var bytes = BruTile.Utilities.ReadFully(readAsStreamAsync.Result);
                 if (viewport.Extent != null)
                 {
+#pragma warning disable IDISP004                    
                     raster = new MRaster(new MemoryStream(bytes), viewport.Extent);
+#pragma warning restore IDISP004                    
                     response.Dispose();
                     return true;
                 }

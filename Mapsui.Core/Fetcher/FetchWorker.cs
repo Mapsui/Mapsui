@@ -36,8 +36,17 @@ namespace Mapsui.Fetcher
 
         public void Dispose()
         {
-            _fetchLoopCancellationTokenSource?.Dispose();
-            _fetchLoopCancellationTokenSource = null;
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _fetchLoopCancellationTokenSource?.Dispose();
+                _fetchLoopCancellationTokenSource = null;
+            }
         }
 
         private void Fetch(CancellationTokenSource? cancellationTokenSource)

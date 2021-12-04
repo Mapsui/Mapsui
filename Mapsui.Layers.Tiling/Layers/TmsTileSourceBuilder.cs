@@ -14,7 +14,7 @@ namespace Mapsui.Layers
             bool overrideTmsUrlWithUrlToTileMapXml)
         {
             var webRequest = (HttpWebRequest)WebRequest.Create(urlToTileMapXml);
-            var waitHandle = new AutoResetEvent(false);
+            using var waitHandle = new AutoResetEvent(false);
             ITileSource? tileSource = null;
             Exception? error = null;
 

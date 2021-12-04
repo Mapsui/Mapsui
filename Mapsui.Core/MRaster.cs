@@ -22,9 +22,18 @@ namespace Mapsui
 
         public void Dispose()
         {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
 #pragma warning disable IDISP007
-            Data.Dispose();
+                Data.Dispose();
 #pragma warning restore IDISP007
+            }
         }
     }
 }
