@@ -116,15 +116,18 @@ namespace Mapsui.Samples.Forms.Shared
                     });
                     break;
                 case 3:
-                    var icon = assembly.GetManifestResourceStream("Mapsui.Samples.Common.Images.loc.png").ToBytes();
-                    mapView.Pins.Add(new Pin(mapView)
+                    using (var manifestResourceStream = assembly.GetManifestResourceStream("Mapsui.Samples.Common.Images.loc.png"))
                     {
-                        Label = $"PinType.Icon {_markerNum++}",
-                        Position = mapClickedArgs.Point,
-                        Type = PinType.Icon,
-                        Scale = 0.5f,
-                        Icon = icon
-                    });
+                        var icon = manifestResourceStream.ToBytes();
+                        mapView.Pins.Add(new Pin(mapView)
+                        {
+                            Label = $"PinType.Icon {_markerNum++}",
+                            Position = mapClickedArgs.Point,
+                            Type = PinType.Icon,
+                            Scale = 0.5f,
+                            Icon = icon
+                        });
+                    }
                     break;
             }
 
