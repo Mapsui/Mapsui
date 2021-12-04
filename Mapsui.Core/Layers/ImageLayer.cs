@@ -35,6 +35,8 @@ namespace Mapsui.Layers
             {
                 this._startFetchTimer.Dispose();
             }
+
+            base.Dispose(disposing);
         }
 
         private class FeatureSets

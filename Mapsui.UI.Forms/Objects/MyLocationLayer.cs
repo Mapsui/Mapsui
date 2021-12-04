@@ -352,6 +352,17 @@ namespace Mapsui.UI.Objects
             }
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                this.feature.Dispose();
+                this.featureDir.Dispose();
+            }
+
+            base.Dispose(disposing);
+        }
+
         private bool InternalUpdateMyLocation(Position newLocation)
         {
             var modified = false;

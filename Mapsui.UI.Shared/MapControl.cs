@@ -53,6 +53,7 @@ namespace Mapsui.UI.Wpf
             // Create map
             Map = new Map();
             // Create timer for invalidating the control
+            _invalidateTimer?.Dispose();
             _invalidateTimer = new System.Threading.Timer(InvalidateTimerCallback, null, System.Threading.Timeout.Infinite, 16);
             // Start the invalidation timer
             StartUpdates(false);
