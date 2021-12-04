@@ -27,7 +27,7 @@ using Mapsui.Providers;
 
 namespace Mapsui.Layers
 {
-    public sealed class ImageLayer : BaseLayer, IAsyncDataFetcher, IDisposable
+    public class ImageLayer : BaseLayer, IAsyncDataFetcher, IDisposable
     {
         public void Dispose()
         {

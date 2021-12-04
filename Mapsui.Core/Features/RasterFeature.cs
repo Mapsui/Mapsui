@@ -3,7 +3,7 @@ using System;
 
 namespace Mapsui.Layers
 {
-    public sealed class RasterFeature : BaseFeature, IFeature, IDisposable
+    public class RasterFeature : BaseFeature, IFeature, IDisposable
     {
 #pragma warning disable IDISP008
         public MRaster? Raster { get; }

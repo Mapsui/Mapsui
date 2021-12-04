@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Mapsui
 {
-    public sealed class MRaster : MRect, IDisposable
+    public class MRaster : MRect, IDisposable
     {
         public MRaster(MRaster raster) : base(raster.Min.X, raster.Min.Y, raster.Max.X, raster.Max.Y)
         {

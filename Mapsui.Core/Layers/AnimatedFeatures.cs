@@ -12,7 +12,7 @@ namespace Mapsui.Layers
         Linear
     }
 
-    public sealed class AnimatedFeatures : IDisposable
+    public class AnimatedFeatures : IDisposable
     {
         private readonly Timer _animationTimer;
         private List<AnimatedFeature> _cache = new();
