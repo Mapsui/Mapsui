@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Mapsui.Logging;
 
 namespace Mapsui.Fetcher
 {
-    public class FetchWorker : IDisposable
-    // Todo: Make internal
+    public class FetchWorker : IDisposable // Todo: Make internal
     {
         private readonly IFetchDispatcher _fetchDispatcher;
         private CancellationTokenSource? _fetchLoopCancellationTokenSource;
@@ -51,12 +51,19 @@ namespace Mapsui.Fetcher
 
         private void Fetch(CancellationTokenSource? cancellationTokenSource)
         {
-            while (cancellationTokenSource is { Token: { IsCancellationRequested: false } })
+            try
             {
-                if (_fetchDispatcher.TryTake(out var method))
-                    method();
-                else
-                    cancellationTokenSource.Cancel();
+                while (cancellationTokenSource is { Token: { IsCancellationRequested: false } })
+                {
+                    if (_fetchDispatcher.TryTake(out var method))
+                        method();
+                    else
+                        cancellationTokenSource.Cancel();
+                }
+            }
+            catch (ObjectDisposedException e)
+            {
+                Logger.Log(LogLevel.Error, e.Message, e);
             }
         }
     }
