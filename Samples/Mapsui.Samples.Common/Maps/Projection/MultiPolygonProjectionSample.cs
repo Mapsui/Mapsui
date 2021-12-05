@@ -41,7 +41,8 @@ namespace Mapsui.Samples.Common.Maps.Projection
             };
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(geometryLayer);
-            map.Home = n => n.NavigateTo(extent);
+            if (extent != null)
+                map.Home = n => n.NavigateTo(extent);
             return map;
         }
 

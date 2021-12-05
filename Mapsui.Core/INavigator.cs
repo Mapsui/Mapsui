@@ -17,7 +17,7 @@ namespace Mapsui
         /// <param name="scaleMethod">Scale method to use to determine the resolution</param>
         /// <param name="duration">Duration of animation in milliseconds</param>
         /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
-        void NavigateTo(MRect? extent, ScaleMethod scaleMethod = ScaleMethod.Fit, long duration = 0, Easing? easing = default);
+        void NavigateTo(MRect extent, ScaleMethod scaleMethod = ScaleMethod.Fit, long duration = 0, Easing? easing = default);
 
         /// <summary>
         /// Change both center and resolution of the viewport
@@ -26,7 +26,7 @@ namespace Mapsui
         /// <param name="resolution">The new resolution</param>
         /// <param name="duration">Duration of animation in milliseconds</param>
         /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
-        void NavigateTo(MPoint? center, double resolution, long duration = 0, Easing? easing = default);
+        void NavigateTo(MPoint center, double resolution, long duration = 0, Easing? easing = default);
 
         /// <summary>
         /// Navigate to a resolution, so such the map uses the fill method

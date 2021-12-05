@@ -28,7 +28,8 @@ namespace Mapsui.Samples.Common.Maps.Navigation
 
             map.Limiter.PanLimits = GetLimitsOfMadagaskar();
             map.Limiter.ZoomLimits = new MinMax(0.15, 2500);
-            map.Home = n => n.NavigateTo(map.Limiter.PanLimits);
+            if (map.Limiter.PanLimits != null)
+                map.Home = n => n.NavigateTo(map.Limiter.PanLimits);
             return map;
         }
 
