@@ -840,7 +840,7 @@ namespace Mapsui.UI.Forms
 
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing())
+            if (disposing)
             {
                 _map?.Dispose();
             }
