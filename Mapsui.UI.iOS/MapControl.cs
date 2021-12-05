@@ -230,21 +230,28 @@ namespace Mapsui.UI.iOS
 
         public new void Dispose()
         {
-            Dispose(true);
+            IosCommonDispose(true);
             base.Dispose();
         }
 
         protected override void Dispose(bool disposing)
+        {
+#pragma warning disable IDISP023 // Don't use reference types in finalizer context.
+            IosCommonDispose(disposing);
+#pragma warning restore IDISP023 // Don't use reference types in finalizer context.
+            base.Dispose(disposing);
+        }
+
+        private void IosCommonDispose(bool disposing)
         {
             if (disposing)
             {
                 _map?.Dispose();
                 Unsubscribe();
                 _canvas?.Dispose();
-                CommonDispose(disposing);
             }
 
-            base.Dispose(disposing);
+            CommonDispose(disposing);
         }
 
         private static (MPoint centre, double radius, double angle) GetPinchValues(List<MPoint> locations)

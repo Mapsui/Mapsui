@@ -840,8 +840,13 @@ namespace Mapsui.UI.Forms
 
         protected virtual void Dispose(bool disposing)
         {
-            _map?.Dispose();
+            if (disposing())
+            {
+                _map?.Dispose();
+            }
+#pragma warning disable IDISP023 // Don't use reference types in finalizer context.
             CommonDispose(disposing);
+#pragma warning restore IDISP023 // Don't use reference types in finalizer context.
         }
 
         ~MapControl()
