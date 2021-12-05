@@ -223,16 +223,25 @@ namespace Mapsui.UI.iOS
 
         public void OpenBrowser(string url)
         {
-            using var nsUrl = new NSUrl(url);
-            UIApplication.SharedApplication.OpenUrl(nsUrl);
+#pragma warning disable IDISP004
+            UIApplication.SharedApplication.OpenUrl(new NSUrl(url));
+#pragma warning restore IDISP004
+        }
+
+        public new void Dispose()
+        {
+            Dispose(true);
+            base.Dispose();
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
+                _map?.Dispose();
                 Unsubscribe();
                 _canvas?.Dispose();
+                CommonDispose(disposing);
             }
 
             base.Dispose(disposing);

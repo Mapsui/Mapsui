@@ -11,6 +11,7 @@ using Mapsui.Rendering.Skia;
 using Mapsui.Utilities;
 using Mapsui.Widgets;
 
+#pragma warning disable IDISP008
 #nullable enable
 
 #if __MAUI__
@@ -31,7 +32,7 @@ namespace Mapsui.UI.Avalonia
 namespace Mapsui.UI.Wpf
 #endif
 {
-    public partial class MapControl : INotifyPropertyChanged
+    public partial class MapControl : INotifyPropertyChanged, IDisposable
     {
         private Map? _map;
         private double _unSnapRotationDegrees;

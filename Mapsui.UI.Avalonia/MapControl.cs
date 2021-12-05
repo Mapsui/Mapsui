@@ -18,7 +18,7 @@ using Mapsui.Utilities;
 
 namespace Mapsui.UI.Avalonia
 {
-    public partial class MapControl : Grid, IMapControl
+    public partial class MapControl : Grid, IMapControl, IDisposable
     {
         private MPoint? _mousePosition;
         private MapsuiCustomDrawOp? _drawOp;
@@ -296,6 +296,22 @@ namespace Mapsui.UI.Avalonia
                     canvas.Restore();
                 }
             }
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _drawOp?.Dispose();
+                _map?.Dispose();
+                CommonDispose(disposing);
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

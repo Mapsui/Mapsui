@@ -382,6 +382,7 @@ namespace Mapsui.UI.Android
         {
             if (disposing)
             {
+                _map?.Dispose();
                 CommonDispose(disposing);
                 _mainLooperHandler?.Dispose();
                 _canvas?.Dispose();

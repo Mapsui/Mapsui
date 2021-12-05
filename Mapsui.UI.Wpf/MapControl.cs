@@ -20,7 +20,7 @@ using XamlVector = System.Windows.Vector;
 
 namespace Mapsui.UI.Wpf
 {
-    public partial class MapControl : Grid, IMapControl
+    public partial class MapControl : Grid, IMapControl, IDisposable
     {
         private readonly Rectangle _selectRectangle = CreateSelectRectangle();
         private MPoint? _currentMousePosition;
@@ -485,6 +485,21 @@ namespace Mapsui.UI.Wpf
             if (dpiX != dpiY) throw new ArgumentException();
 
             return (float)dpiX;
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _map?.Dispose();
+                CommonDispose(disposing);
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }
