@@ -21,6 +21,7 @@ using Color = Microsoft.Maui.Graphics.Color;
 using KnownColor = Mapsui.UI.Maui.KnownColor;
 #else
 using SkiaSharp.Views.Forms;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using KnownColor = Xamarin.Forms.Color;
 #endif
@@ -820,11 +821,7 @@ namespace Mapsui.UI.Forms
 
         public void OpenBrowser(string url)
         {
-#if __MAUI__
             Launcher.OpenAsync(new Uri(url));
-#else
-            Device.OpenUri(new Uri(url));
-#endif
         }
 
         protected void RunOnUIThread(Action action)
