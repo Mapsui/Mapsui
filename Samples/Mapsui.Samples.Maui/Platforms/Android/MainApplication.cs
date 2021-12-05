@@ -5,10 +5,10 @@ using System;
 using System.Runtime.Versioning;
 using Microsoft.Maui.Hosting;
 
-[assembly:SupportedOSPlatform("android31.0")]
+[assembly: SupportedOSPlatform("android31.0")]
 
 namespace Mapsui.Samples.Maui
-{    
+{
     [Application]
     public class MainApplication : MauiApplication
     {
@@ -17,6 +17,7 @@ namespace Mapsui.Samples.Maui
         {
         }
 
+        [SupportedOSPlatform("android21.0")]
         protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
     }
 }
