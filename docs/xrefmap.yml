@@ -1393,15 +1393,12 @@ references:
   commentId: F:Mapsui.UI.Forms.Circle.FillColorProperty
   fullName: Mapsui.UI.Forms.Circle.FillColorProperty
   nameWithType: Circle.FillColorProperty
-- uid: Mapsui.UI.Forms.Circle.OnPropertyChanged(System.Nullable{System.String})
-  name: OnPropertyChanged(Nullable<String>)
-  href: api/Mapsui.UI.Forms.Circle.html#Mapsui_UI_Forms_Circle_OnPropertyChanged_System_Nullable_System_String__
-  commentId: M:Mapsui.UI.Forms.Circle.OnPropertyChanged(System.Nullable{System.String})
-  name.vb: OnPropertyChanged(Nullable(Of String))
-  fullName: Mapsui.UI.Forms.Circle.OnPropertyChanged(System.Nullable<System.String>)
-  fullName.vb: Mapsui.UI.Forms.Circle.OnPropertyChanged(System.Nullable(Of System.String))
-  nameWithType: Circle.OnPropertyChanged(Nullable<String>)
-  nameWithType.vb: Circle.OnPropertyChanged(Nullable(Of String))
+- uid: Mapsui.UI.Forms.Circle.OnPropertyChanged(System.String)
+  name: OnPropertyChanged(String)
+  href: api/Mapsui.UI.Forms.Circle.html#Mapsui_UI_Forms_Circle_OnPropertyChanged_System_String_
+  commentId: M:Mapsui.UI.Forms.Circle.OnPropertyChanged(System.String)
+  fullName: Mapsui.UI.Forms.Circle.OnPropertyChanged(System.String)
+  nameWithType: Circle.OnPropertyChanged(String)
 - uid: Mapsui.UI.Forms.Circle.OnPropertyChanged*
   name: OnPropertyChanged
   href: api/Mapsui.UI.Forms.Circle.html#Mapsui_UI_Forms_Circle_OnPropertyChanged_
@@ -1472,15 +1469,12 @@ references:
   commentId: M:Mapsui.UI.Forms.Distance.Equals(Mapsui.UI.Forms.Distance)
   fullName: Mapsui.UI.Forms.Distance.Equals(Mapsui.UI.Forms.Distance)
   nameWithType: Distance.Equals(Distance)
-- uid: Mapsui.UI.Forms.Distance.Equals(System.Nullable{System.Object})
-  name: Equals(Nullable<Object>)
-  href: api/Mapsui.UI.Forms.Distance.html#Mapsui_UI_Forms_Distance_Equals_System_Nullable_System_Object__
-  commentId: M:Mapsui.UI.Forms.Distance.Equals(System.Nullable{System.Object})
-  name.vb: Equals(Nullable(Of Object))
-  fullName: Mapsui.UI.Forms.Distance.Equals(System.Nullable<System.Object>)
-  fullName.vb: Mapsui.UI.Forms.Distance.Equals(System.Nullable(Of System.Object))
-  nameWithType: Distance.Equals(Nullable<Object>)
-  nameWithType.vb: Distance.Equals(Nullable(Of Object))
+- uid: Mapsui.UI.Forms.Distance.Equals(System.Object)
+  name: Equals(Object)
+  href: api/Mapsui.UI.Forms.Distance.html#Mapsui_UI_Forms_Distance_Equals_System_Object_
+  commentId: M:Mapsui.UI.Forms.Distance.Equals(System.Object)
+  fullName: Mapsui.UI.Forms.Distance.Equals(System.Object)
+  nameWithType: Distance.Equals(Object)
 - uid: Mapsui.UI.Forms.Distance.Equals*
   name: Equals
   href: api/Mapsui.UI.Forms.Distance.html#Mapsui_UI_Forms_Distance_Equals_
@@ -1701,12 +1695,12 @@ references:
   commentId: T:Mapsui.UI.Forms.Extensions.ColorExtensions
   fullName: Mapsui.UI.Forms.Extensions.ColorExtensions
   nameWithType: ColorExtensions
-- uid: Mapsui.UI.Forms.Extensions.ColorExtensions.ToForms(Styles.Color)
-  name: ToForms(Styles.Color)
-  href: api/Mapsui.UI.Forms.Extensions.ColorExtensions.html#Mapsui_UI_Forms_Extensions_ColorExtensions_ToForms_Styles_Color_
-  commentId: M:Mapsui.UI.Forms.Extensions.ColorExtensions.ToForms(Styles.Color)
-  fullName: Mapsui.UI.Forms.Extensions.ColorExtensions.ToForms(Styles.Color)
-  nameWithType: ColorExtensions.ToForms(Styles.Color)
+- uid: Mapsui.UI.Forms.Extensions.ColorExtensions.ToForms(Mapsui.Styles.Color)
+  name: ToForms(Color)
+  href: api/Mapsui.UI.Forms.Extensions.ColorExtensions.html#Mapsui_UI_Forms_Extensions_ColorExtensions_ToForms_Mapsui_Styles_Color_
+  commentId: M:Mapsui.UI.Forms.Extensions.ColorExtensions.ToForms(Mapsui.Styles.Color)
+  fullName: Mapsui.UI.Forms.Extensions.ColorExtensions.ToForms(Mapsui.Styles.Color)
+  nameWithType: ColorExtensions.ToForms(Color)
 - uid: Mapsui.UI.Forms.Extensions.ColorExtensions.ToForms*
   name: ToForms
   href: api/Mapsui.UI.Forms.Extensions.ColorExtensions.html#Mapsui_UI_Forms_Extensions_ColorExtensions_ToForms_
@@ -1715,11 +1709,11 @@ references:
   fullName: Mapsui.UI.Forms.Extensions.ColorExtensions.ToForms
   nameWithType: ColorExtensions.ToForms
 - uid: Mapsui.UI.Forms.Extensions.ColorExtensions.ToMapsui(Xamarin.Forms.Color)
-  name: ToMapsui(Xamarin.Forms.Color)
+  name: ToMapsui(Color)
   href: api/Mapsui.UI.Forms.Extensions.ColorExtensions.html#Mapsui_UI_Forms_Extensions_ColorExtensions_ToMapsui_Xamarin_Forms_Color_
   commentId: M:Mapsui.UI.Forms.Extensions.ColorExtensions.ToMapsui(Xamarin.Forms.Color)
   fullName: Mapsui.UI.Forms.Extensions.ColorExtensions.ToMapsui(Xamarin.Forms.Color)
-  nameWithType: ColorExtensions.ToMapsui(Xamarin.Forms.Color)
+  nameWithType: ColorExtensions.ToMapsui(Color)
 - uid: Mapsui.UI.Forms.Extensions.ColorExtensions.ToMapsui*
   name: ToMapsui
   href: api/Mapsui.UI.Forms.Extensions.ColorExtensions.html#Mapsui_UI_Forms_Extensions_ColorExtensions_ToMapsui_
@@ -1727,12 +1721,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.Extensions.ColorExtensions.ToMapsui
   nameWithType: ColorExtensions.ToMapsui
-- uid: Mapsui.UI.Forms.Extensions.ColorExtensions.ToNative(Styles.Color)
-  name: ToNative(Styles.Color)
-  href: api/Mapsui.UI.Forms.Extensions.ColorExtensions.html#Mapsui_UI_Forms_Extensions_ColorExtensions_ToNative_Styles_Color_
-  commentId: M:Mapsui.UI.Forms.Extensions.ColorExtensions.ToNative(Styles.Color)
-  fullName: Mapsui.UI.Forms.Extensions.ColorExtensions.ToNative(Styles.Color)
-  nameWithType: ColorExtensions.ToNative(Styles.Color)
+- uid: Mapsui.UI.Forms.Extensions.ColorExtensions.ToNative(Mapsui.Styles.Color)
+  name: ToNative(Color)
+  href: api/Mapsui.UI.Forms.Extensions.ColorExtensions.html#Mapsui_UI_Forms_Extensions_ColorExtensions_ToNative_Mapsui_Styles_Color_
+  commentId: M:Mapsui.UI.Forms.Extensions.ColorExtensions.ToNative(Mapsui.Styles.Color)
+  fullName: Mapsui.UI.Forms.Extensions.ColorExtensions.ToNative(Mapsui.Styles.Color)
+  nameWithType: ColorExtensions.ToNative(Color)
 - uid: Mapsui.UI.Forms.Extensions.ColorExtensions.ToNative*
   name: ToNative
   href: api/Mapsui.UI.Forms.Extensions.ColorExtensions.html#Mapsui_UI_Forms_Extensions_ColorExtensions_ToNative_
@@ -1746,11 +1740,11 @@ references:
   commentId: T:Mapsui.UI.Forms.Extensions.PositionExtensions
   fullName: Mapsui.UI.Forms.Extensions.PositionExtensions
   nameWithType: PositionExtensions
-- uid: Mapsui.UI.Forms.Extensions.PositionExtensions.ToForms(MPoint)
+- uid: Mapsui.UI.Forms.Extensions.PositionExtensions.ToForms(Mapsui.MPoint)
   name: ToForms(MPoint)
-  href: api/Mapsui.UI.Forms.Extensions.PositionExtensions.html#Mapsui_UI_Forms_Extensions_PositionExtensions_ToForms_MPoint_
-  commentId: M:Mapsui.UI.Forms.Extensions.PositionExtensions.ToForms(MPoint)
-  fullName: Mapsui.UI.Forms.Extensions.PositionExtensions.ToForms(MPoint)
+  href: api/Mapsui.UI.Forms.Extensions.PositionExtensions.html#Mapsui_UI_Forms_Extensions_PositionExtensions_ToForms_Mapsui_MPoint_
+  commentId: M:Mapsui.UI.Forms.Extensions.PositionExtensions.ToForms(Mapsui.MPoint)
+  fullName: Mapsui.UI.Forms.Extensions.PositionExtensions.ToForms(Mapsui.MPoint)
   nameWithType: PositionExtensions.ToForms(MPoint)
 - uid: Mapsui.UI.Forms.Extensions.PositionExtensions.ToForms*
   name: ToForms
@@ -1759,11 +1753,11 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.Extensions.PositionExtensions.ToForms
   nameWithType: PositionExtensions.ToForms
-- uid: Mapsui.UI.Forms.Extensions.PositionExtensions.ToNative(MPoint)
+- uid: Mapsui.UI.Forms.Extensions.PositionExtensions.ToNative(Mapsui.MPoint)
   name: ToNative(MPoint)
-  href: api/Mapsui.UI.Forms.Extensions.PositionExtensions.html#Mapsui_UI_Forms_Extensions_PositionExtensions_ToNative_MPoint_
-  commentId: M:Mapsui.UI.Forms.Extensions.PositionExtensions.ToNative(MPoint)
-  fullName: Mapsui.UI.Forms.Extensions.PositionExtensions.ToNative(MPoint)
+  href: api/Mapsui.UI.Forms.Extensions.PositionExtensions.html#Mapsui_UI_Forms_Extensions_PositionExtensions_ToNative_Mapsui_MPoint_
+  commentId: M:Mapsui.UI.Forms.Extensions.PositionExtensions.ToNative(Mapsui.MPoint)
+  fullName: Mapsui.UI.Forms.Extensions.PositionExtensions.ToNative(Mapsui.MPoint)
   nameWithType: PositionExtensions.ToNative(MPoint)
 - uid: Mapsui.UI.Forms.Extensions.PositionExtensions.ToNative*
   name: ToNative
@@ -1778,11 +1772,11 @@ references:
   commentId: T:Mapsui.UI.Forms.Extensions.TextAlignmentExtensions
   fullName: Mapsui.UI.Forms.Extensions.TextAlignmentExtensions
   nameWithType: TextAlignmentExtensions
-- uid: Mapsui.UI.Forms.Extensions.TextAlignmentExtensions.ToMapsui(TextAlignment)
+- uid: Mapsui.UI.Forms.Extensions.TextAlignmentExtensions.ToMapsui(Xamarin.Forms.TextAlignment)
   name: ToMapsui(TextAlignment)
-  href: api/Mapsui.UI.Forms.Extensions.TextAlignmentExtensions.html#Mapsui_UI_Forms_Extensions_TextAlignmentExtensions_ToMapsui_TextAlignment_
-  commentId: M:Mapsui.UI.Forms.Extensions.TextAlignmentExtensions.ToMapsui(TextAlignment)
-  fullName: Mapsui.UI.Forms.Extensions.TextAlignmentExtensions.ToMapsui(TextAlignment)
+  href: api/Mapsui.UI.Forms.Extensions.TextAlignmentExtensions.html#Mapsui_UI_Forms_Extensions_TextAlignmentExtensions_ToMapsui_Xamarin_Forms_TextAlignment_
+  commentId: M:Mapsui.UI.Forms.Extensions.TextAlignmentExtensions.ToMapsui(Xamarin.Forms.TextAlignment)
+  fullName: Mapsui.UI.Forms.Extensions.TextAlignmentExtensions.ToMapsui(Xamarin.Forms.TextAlignment)
   nameWithType: TextAlignmentExtensions.ToMapsui(TextAlignment)
 - uid: Mapsui.UI.Forms.Extensions.TextAlignmentExtensions.ToMapsui*
   name: ToMapsui
@@ -1963,15 +1957,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapControl.ForceUpdate
   nameWithType: MapControl.ForceUpdate
-- uid: Mapsui.UI.Forms.MapControl.GetMapInfo(System.Nullable{MPoint},System.Int32)
-  name: GetMapInfo(Nullable<MPoint>, Int32)
-  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_GetMapInfo_System_Nullable_MPoint__System_Int32_
-  commentId: M:Mapsui.UI.Forms.MapControl.GetMapInfo(System.Nullable{MPoint},System.Int32)
-  name.vb: GetMapInfo(Nullable(Of MPoint), Int32)
-  fullName: Mapsui.UI.Forms.MapControl.GetMapInfo(System.Nullable<MPoint>, System.Int32)
-  fullName.vb: Mapsui.UI.Forms.MapControl.GetMapInfo(System.Nullable(Of MPoint), System.Int32)
-  nameWithType: MapControl.GetMapInfo(Nullable<MPoint>, Int32)
-  nameWithType.vb: MapControl.GetMapInfo(Nullable(Of MPoint), Int32)
+- uid: Mapsui.UI.Forms.MapControl.GetMapInfo(Mapsui.MPoint,System.Int32)
+  name: GetMapInfo(MPoint, Int32)
+  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_GetMapInfo_Mapsui_MPoint_System_Int32_
+  commentId: M:Mapsui.UI.Forms.MapControl.GetMapInfo(Mapsui.MPoint,System.Int32)
+  fullName: Mapsui.UI.Forms.MapControl.GetMapInfo(Mapsui.MPoint, System.Int32)
+  nameWithType: MapControl.GetMapInfo(MPoint, Int32)
 - uid: Mapsui.UI.Forms.MapControl.GetMapInfo*
   name: GetMapInfo
   href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_GetMapInfo_
@@ -1979,15 +1970,15 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapControl.GetMapInfo
   nameWithType: MapControl.GetMapInfo
-- uid: Mapsui.UI.Forms.MapControl.GetSnapshot(System.Nullable{IEnumerable{ILayer}})
-  name: GetSnapshot(Nullable<IEnumerable<ILayer>>)
-  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_GetSnapshot_System_Nullable_IEnumerable_ILayer___
-  commentId: M:Mapsui.UI.Forms.MapControl.GetSnapshot(System.Nullable{IEnumerable{ILayer}})
-  name.vb: GetSnapshot(Nullable(Of IEnumerable(Of ILayer)))
-  fullName: Mapsui.UI.Forms.MapControl.GetSnapshot(System.Nullable<IEnumerable<ILayer>>)
-  fullName.vb: Mapsui.UI.Forms.MapControl.GetSnapshot(System.Nullable(Of IEnumerable(Of ILayer)))
-  nameWithType: MapControl.GetSnapshot(Nullable<IEnumerable<ILayer>>)
-  nameWithType.vb: MapControl.GetSnapshot(Nullable(Of IEnumerable(Of ILayer)))
+- uid: Mapsui.UI.Forms.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name: GetSnapshot(IEnumerable<ILayer>)
+  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
+  commentId: M:Mapsui.UI.Forms.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name.vb: GetSnapshot(IEnumerable(Of ILayer))
+  fullName: Mapsui.UI.Forms.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>)
+  fullName.vb: Mapsui.UI.Forms.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer))
+  nameWithType: MapControl.GetSnapshot(IEnumerable<ILayer>)
+  nameWithType.vb: MapControl.GetSnapshot(IEnumerable(Of ILayer))
 - uid: Mapsui.UI.Forms.MapControl.GetSnapshot*
   name: GetSnapshot
   href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_GetSnapshot_
@@ -2097,11 +2088,11 @@ references:
   commentId: E:Mapsui.UI.Forms.MapControl.PropertyChanged
   fullName: Mapsui.UI.Forms.MapControl.PropertyChanged
   nameWithType: MapControl.PropertyChanged
-- uid: Mapsui.UI.Forms.MapControl.Refresh(ChangeType)
+- uid: Mapsui.UI.Forms.MapControl.Refresh(Mapsui.ChangeType)
   name: Refresh(ChangeType)
-  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_Refresh_ChangeType_
-  commentId: M:Mapsui.UI.Forms.MapControl.Refresh(ChangeType)
-  fullName: Mapsui.UI.Forms.MapControl.Refresh(ChangeType)
+  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_Refresh_Mapsui_ChangeType_
+  commentId: M:Mapsui.UI.Forms.MapControl.Refresh(Mapsui.ChangeType)
+  fullName: Mapsui.UI.Forms.MapControl.Refresh(Mapsui.ChangeType)
   nameWithType: MapControl.Refresh(ChangeType)
 - uid: Mapsui.UI.Forms.MapControl.Refresh*
   name: Refresh
@@ -2110,11 +2101,11 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapControl.Refresh
   nameWithType: MapControl.Refresh
-- uid: Mapsui.UI.Forms.MapControl.RefreshData(ChangeType)
+- uid: Mapsui.UI.Forms.MapControl.RefreshData(Mapsui.ChangeType)
   name: RefreshData(ChangeType)
-  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_RefreshData_ChangeType_
-  commentId: M:Mapsui.UI.Forms.MapControl.RefreshData(ChangeType)
-  fullName: Mapsui.UI.Forms.MapControl.RefreshData(ChangeType)
+  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_RefreshData_Mapsui_ChangeType_
+  commentId: M:Mapsui.UI.Forms.MapControl.RefreshData(Mapsui.ChangeType)
+  fullName: Mapsui.UI.Forms.MapControl.RefreshData(Mapsui.ChangeType)
   nameWithType: MapControl.RefreshData(ChangeType)
 - uid: Mapsui.UI.Forms.MapControl.RefreshData*
   name: RefreshData
@@ -2162,11 +2153,11 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapControl.ReSnapRotationDegrees
   nameWithType: MapControl.ReSnapRotationDegrees
-- uid: Mapsui.UI.Forms.MapControl.RunOnUIThread(Action)
+- uid: Mapsui.UI.Forms.MapControl.RunOnUIThread(System.Action)
   name: RunOnUIThread(Action)
-  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_RunOnUIThread_Action_
-  commentId: M:Mapsui.UI.Forms.MapControl.RunOnUIThread(Action)
-  fullName: Mapsui.UI.Forms.MapControl.RunOnUIThread(Action)
+  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_RunOnUIThread_System_Action_
+  commentId: M:Mapsui.UI.Forms.MapControl.RunOnUIThread(System.Action)
+  fullName: Mapsui.UI.Forms.MapControl.RunOnUIThread(System.Action)
   nameWithType: MapControl.RunOnUIThread(Action)
 - uid: Mapsui.UI.Forms.MapControl.RunOnUIThread*
   name: RunOnUIThread
@@ -2252,11 +2243,11 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapControl.SymbolCache
   nameWithType: MapControl.SymbolCache
-- uid: Mapsui.UI.Forms.MapControl.ToDeviceIndependentUnits(MPoint)
+- uid: Mapsui.UI.Forms.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
   name: ToDeviceIndependentUnits(MPoint)
-  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_ToDeviceIndependentUnits_MPoint_
-  commentId: M:Mapsui.UI.Forms.MapControl.ToDeviceIndependentUnits(MPoint)
-  fullName: Mapsui.UI.Forms.MapControl.ToDeviceIndependentUnits(MPoint)
+  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_
+  commentId: M:Mapsui.UI.Forms.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+  fullName: Mapsui.UI.Forms.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
   nameWithType: MapControl.ToDeviceIndependentUnits(MPoint)
 - uid: Mapsui.UI.Forms.MapControl.ToDeviceIndependentUnits*
   name: ToDeviceIndependentUnits
@@ -2265,11 +2256,11 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapControl.ToDeviceIndependentUnits
   nameWithType: MapControl.ToDeviceIndependentUnits
-- uid: Mapsui.UI.Forms.MapControl.ToPixels(MPoint)
+- uid: Mapsui.UI.Forms.MapControl.ToPixels(Mapsui.MPoint)
   name: ToPixels(MPoint)
-  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_ToPixels_MPoint_
-  commentId: M:Mapsui.UI.Forms.MapControl.ToPixels(MPoint)
-  fullName: Mapsui.UI.Forms.MapControl.ToPixels(MPoint)
+  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_ToPixels_Mapsui_MPoint_
+  commentId: M:Mapsui.UI.Forms.MapControl.ToPixels(Mapsui.MPoint)
+  fullName: Mapsui.UI.Forms.MapControl.ToPixels(Mapsui.MPoint)
   nameWithType: MapControl.ToPixels(MPoint)
 - uid: Mapsui.UI.Forms.MapControl.ToPixels*
   name: ToPixels
@@ -2473,15 +2464,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapSpan.ClampLatitude
   nameWithType: MapSpan.ClampLatitude
-- uid: Mapsui.UI.Forms.MapSpan.Equals(System.Nullable{System.Object})
-  name: Equals(Nullable<Object>)
-  href: api/Mapsui.UI.Forms.MapSpan.html#Mapsui_UI_Forms_MapSpan_Equals_System_Nullable_System_Object__
-  commentId: M:Mapsui.UI.Forms.MapSpan.Equals(System.Nullable{System.Object})
-  name.vb: Equals(Nullable(Of Object))
-  fullName: Mapsui.UI.Forms.MapSpan.Equals(System.Nullable<System.Object>)
-  fullName.vb: Mapsui.UI.Forms.MapSpan.Equals(System.Nullable(Of System.Object))
-  nameWithType: MapSpan.Equals(Nullable<Object>)
-  nameWithType.vb: MapSpan.Equals(Nullable(Of Object))
+- uid: Mapsui.UI.Forms.MapSpan.Equals(System.Object)
+  name: Equals(Object)
+  href: api/Mapsui.UI.Forms.MapSpan.html#Mapsui_UI_Forms_MapSpan_Equals_System_Object_
+  commentId: M:Mapsui.UI.Forms.MapSpan.Equals(System.Object)
+  fullName: Mapsui.UI.Forms.MapSpan.Equals(System.Object)
+  nameWithType: MapSpan.Equals(Object)
 - uid: Mapsui.UI.Forms.MapSpan.Equals*
   name: Equals
   href: api/Mapsui.UI.Forms.MapSpan.html#Mapsui_UI_Forms_MapSpan_Equals_
@@ -2502,13 +2490,13 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapSpan.FromCenterAndRadius
   nameWithType: MapSpan.FromCenterAndRadius
-- uid: Mapsui.UI.Forms.MapSpan.FromPositions(IEnumerable{Mapsui.UI.Forms.Position})
+- uid: Mapsui.UI.Forms.MapSpan.FromPositions(System.Collections.Generic.IEnumerable{Mapsui.UI.Forms.Position})
   name: FromPositions(IEnumerable<Position>)
-  href: api/Mapsui.UI.Forms.MapSpan.html#Mapsui_UI_Forms_MapSpan_FromPositions_IEnumerable_Mapsui_UI_Forms_Position__
-  commentId: M:Mapsui.UI.Forms.MapSpan.FromPositions(IEnumerable{Mapsui.UI.Forms.Position})
+  href: api/Mapsui.UI.Forms.MapSpan.html#Mapsui_UI_Forms_MapSpan_FromPositions_System_Collections_Generic_IEnumerable_Mapsui_UI_Forms_Position__
+  commentId: M:Mapsui.UI.Forms.MapSpan.FromPositions(System.Collections.Generic.IEnumerable{Mapsui.UI.Forms.Position})
   name.vb: FromPositions(IEnumerable(Of Position))
-  fullName: Mapsui.UI.Forms.MapSpan.FromPositions(IEnumerable<Mapsui.UI.Forms.Position>)
-  fullName.vb: Mapsui.UI.Forms.MapSpan.FromPositions(IEnumerable(Of Mapsui.UI.Forms.Position))
+  fullName: Mapsui.UI.Forms.MapSpan.FromPositions(System.Collections.Generic.IEnumerable<Mapsui.UI.Forms.Position>)
+  fullName.vb: Mapsui.UI.Forms.MapSpan.FromPositions(System.Collections.Generic.IEnumerable(Of Mapsui.UI.Forms.Position))
   nameWithType: MapSpan.FromPositions(IEnumerable<Position>)
   nameWithType.vb: MapSpan.FromPositions(IEnumerable(Of Position))
 - uid: Mapsui.UI.Forms.MapSpan.FromPositions*
@@ -2945,6 +2933,23 @@ references:
   commentId: F:Mapsui.UI.Forms.MapView.SelectedPinProperty
   fullName: Mapsui.UI.Forms.MapView.SelectedPinProperty
   nameWithType: MapView.SelectedPinProperty
+- uid: Mapsui.UI.Forms.MapView.System#Collections#IEnumerable#GetEnumerator
+  name: IEnumerable.GetEnumerator()
+  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_System_Collections_IEnumerable_GetEnumerator
+  commentId: M:Mapsui.UI.Forms.MapView.System#Collections#IEnumerable#GetEnumerator
+  name.vb: System.Collections.IEnumerable.GetEnumerator()
+  fullName: Mapsui.UI.Forms.MapView.System.Collections.IEnumerable.GetEnumerator()
+  nameWithType: MapView.IEnumerable.GetEnumerator()
+  nameWithType.vb: MapView.System.Collections.IEnumerable.GetEnumerator()
+- uid: Mapsui.UI.Forms.MapView.System#Collections#IEnumerable#GetEnumerator*
+  name: IEnumerable.GetEnumerator
+  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_System_Collections_IEnumerable_GetEnumerator_
+  commentId: Overload:Mapsui.UI.Forms.MapView.System#Collections#IEnumerable#GetEnumerator
+  isSpec: "True"
+  name.vb: System.Collections.IEnumerable.GetEnumerator
+  fullName: Mapsui.UI.Forms.MapView.System.Collections.IEnumerable.GetEnumerator
+  nameWithType: MapView.IEnumerable.GetEnumerator
+  nameWithType.vb: MapView.System.Collections.IEnumerable.GetEnumerator
 - uid: Mapsui.UI.Forms.MapView.UniqueCallout
   name: UniqueCallout
   href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_UniqueCallout
@@ -3096,15 +3101,12 @@ references:
   commentId: F:Mapsui.UI.Forms.Pin.ColorProperty
   fullName: Mapsui.UI.Forms.Pin.ColorProperty
   nameWithType: Pin.ColorProperty
-- uid: Mapsui.UI.Forms.Pin.Equals(System.Nullable{System.Object})
-  name: Equals(Nullable<Object>)
-  href: api/Mapsui.UI.Forms.Pin.html#Mapsui_UI_Forms_Pin_Equals_System_Nullable_System_Object__
-  commentId: M:Mapsui.UI.Forms.Pin.Equals(System.Nullable{System.Object})
-  name.vb: Equals(Nullable(Of Object))
-  fullName: Mapsui.UI.Forms.Pin.Equals(System.Nullable<System.Object>)
-  fullName.vb: Mapsui.UI.Forms.Pin.Equals(System.Nullable(Of System.Object))
-  nameWithType: Pin.Equals(Nullable<Object>)
-  nameWithType.vb: Pin.Equals(Nullable(Of Object))
+- uid: Mapsui.UI.Forms.Pin.Equals(System.Object)
+  name: Equals(Object)
+  href: api/Mapsui.UI.Forms.Pin.html#Mapsui_UI_Forms_Pin_Equals_System_Object_
+  commentId: M:Mapsui.UI.Forms.Pin.Equals(System.Object)
+  fullName: Mapsui.UI.Forms.Pin.Equals(System.Object)
+  nameWithType: Pin.Equals(Object)
 - uid: Mapsui.UI.Forms.Pin.Equals*
   name: Equals
   href: api/Mapsui.UI.Forms.Pin.html#Mapsui_UI_Forms_Pin_Equals_
@@ -3278,15 +3280,12 @@ references:
   commentId: F:Mapsui.UI.Forms.Pin.MinVisibleProperty
   fullName: Mapsui.UI.Forms.Pin.MinVisibleProperty
   nameWithType: Pin.MinVisibleProperty
-- uid: Mapsui.UI.Forms.Pin.OnPropertyChanged(System.Nullable{System.String})
-  name: OnPropertyChanged(Nullable<String>)
-  href: api/Mapsui.UI.Forms.Pin.html#Mapsui_UI_Forms_Pin_OnPropertyChanged_System_Nullable_System_String__
-  commentId: M:Mapsui.UI.Forms.Pin.OnPropertyChanged(System.Nullable{System.String})
-  name.vb: OnPropertyChanged(Nullable(Of String))
-  fullName: Mapsui.UI.Forms.Pin.OnPropertyChanged(System.Nullable<System.String>)
-  fullName.vb: Mapsui.UI.Forms.Pin.OnPropertyChanged(System.Nullable(Of System.String))
-  nameWithType: Pin.OnPropertyChanged(Nullable<String>)
-  nameWithType.vb: Pin.OnPropertyChanged(Nullable(Of String))
+- uid: Mapsui.UI.Forms.Pin.OnPropertyChanged(System.String)
+  name: OnPropertyChanged(String)
+  href: api/Mapsui.UI.Forms.Pin.html#Mapsui_UI_Forms_Pin_OnPropertyChanged_System_String_
+  commentId: M:Mapsui.UI.Forms.Pin.OnPropertyChanged(System.String)
+  fullName: Mapsui.UI.Forms.Pin.OnPropertyChanged(System.String)
+  nameWithType: Pin.OnPropertyChanged(String)
 - uid: Mapsui.UI.Forms.Pin.OnPropertyChanged*
   name: OnPropertyChanged
   href: api/Mapsui.UI.Forms.Pin.html#Mapsui_UI_Forms_Pin_OnPropertyChanged_
@@ -3631,15 +3630,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.Polygon.Holes
   nameWithType: Polygon.Holes
-- uid: Mapsui.UI.Forms.Polygon.OnPropertyChanged(System.Nullable{System.String})
-  name: OnPropertyChanged(Nullable<String>)
-  href: api/Mapsui.UI.Forms.Polygon.html#Mapsui_UI_Forms_Polygon_OnPropertyChanged_System_Nullable_System_String__
-  commentId: M:Mapsui.UI.Forms.Polygon.OnPropertyChanged(System.Nullable{System.String})
-  name.vb: OnPropertyChanged(Nullable(Of String))
-  fullName: Mapsui.UI.Forms.Polygon.OnPropertyChanged(System.Nullable<System.String>)
-  fullName.vb: Mapsui.UI.Forms.Polygon.OnPropertyChanged(System.Nullable(Of System.String))
-  nameWithType: Polygon.OnPropertyChanged(Nullable<String>)
-  nameWithType.vb: Polygon.OnPropertyChanged(Nullable(Of String))
+- uid: Mapsui.UI.Forms.Polygon.OnPropertyChanged(System.String)
+  name: OnPropertyChanged(String)
+  href: api/Mapsui.UI.Forms.Polygon.html#Mapsui_UI_Forms_Polygon_OnPropertyChanged_System_String_
+  commentId: M:Mapsui.UI.Forms.Polygon.OnPropertyChanged(System.String)
+  fullName: Mapsui.UI.Forms.Polygon.OnPropertyChanged(System.String)
+  nameWithType: Polygon.OnPropertyChanged(String)
 - uid: Mapsui.UI.Forms.Polygon.OnPropertyChanged*
   name: OnPropertyChanged
   href: api/Mapsui.UI.Forms.Polygon.html#Mapsui_UI_Forms_Polygon_OnPropertyChanged_
@@ -3685,15 +3681,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.Polyline.Polyline
   nameWithType: Polyline.Polyline
-- uid: Mapsui.UI.Forms.Polyline.OnPropertyChanged(System.Nullable{System.String})
-  name: OnPropertyChanged(Nullable<String>)
-  href: api/Mapsui.UI.Forms.Polyline.html#Mapsui_UI_Forms_Polyline_OnPropertyChanged_System_Nullable_System_String__
-  commentId: M:Mapsui.UI.Forms.Polyline.OnPropertyChanged(System.Nullable{System.String})
-  name.vb: OnPropertyChanged(Nullable(Of String))
-  fullName: Mapsui.UI.Forms.Polyline.OnPropertyChanged(System.Nullable<System.String>)
-  fullName.vb: Mapsui.UI.Forms.Polyline.OnPropertyChanged(System.Nullable(Of System.String))
-  nameWithType: Polyline.OnPropertyChanged(Nullable<String>)
-  nameWithType.vb: Polyline.OnPropertyChanged(Nullable(Of String))
+- uid: Mapsui.UI.Forms.Polyline.OnPropertyChanged(System.String)
+  name: OnPropertyChanged(String)
+  href: api/Mapsui.UI.Forms.Polyline.html#Mapsui_UI_Forms_Polyline_OnPropertyChanged_System_String_
+  commentId: M:Mapsui.UI.Forms.Polyline.OnPropertyChanged(System.String)
+  fullName: Mapsui.UI.Forms.Polyline.OnPropertyChanged(System.String)
+  nameWithType: Polyline.OnPropertyChanged(String)
 - uid: Mapsui.UI.Forms.Polyline.OnPropertyChanged*
   name: OnPropertyChanged
   href: api/Mapsui.UI.Forms.Polyline.html#Mapsui_UI_Forms_Polyline_OnPropertyChanged_
@@ -3757,15 +3750,12 @@ references:
   commentId: F:Mapsui.UI.Forms.Position.DecimalSeconds
   fullName: Mapsui.UI.Forms.Position.DecimalSeconds
   nameWithType: Position.DecimalSeconds
-- uid: Mapsui.UI.Forms.Position.Equals(System.Nullable{System.Object})
-  name: Equals(Nullable<Object>)
-  href: api/Mapsui.UI.Forms.Position.html#Mapsui_UI_Forms_Position_Equals_System_Nullable_System_Object__
-  commentId: M:Mapsui.UI.Forms.Position.Equals(System.Nullable{System.Object})
-  name.vb: Equals(Nullable(Of Object))
-  fullName: Mapsui.UI.Forms.Position.Equals(System.Nullable<System.Object>)
-  fullName.vb: Mapsui.UI.Forms.Position.Equals(System.Nullable(Of System.Object))
-  nameWithType: Position.Equals(Nullable<Object>)
-  nameWithType.vb: Position.Equals(Nullable(Of Object))
+- uid: Mapsui.UI.Forms.Position.Equals(System.Object)
+  name: Equals(Object)
+  href: api/Mapsui.UI.Forms.Position.html#Mapsui_UI_Forms_Position_Equals_System_Object_
+  commentId: M:Mapsui.UI.Forms.Position.Equals(System.Object)
+  fullName: Mapsui.UI.Forms.Position.Equals(System.Object)
+  nameWithType: Position.Equals(Object)
 - uid: Mapsui.UI.Forms.Position.Equals*
   name: Equals
   href: api/Mapsui.UI.Forms.Position.html#Mapsui_UI_Forms_Position_Equals_
@@ -4527,15 +4517,12 @@ references:
   commentId: F:Mapsui.UI.Objects.Drawable.MinVisibleProperty
   fullName: Mapsui.UI.Objects.Drawable.MinVisibleProperty
   nameWithType: Drawable.MinVisibleProperty
-- uid: Mapsui.UI.Objects.Drawable.OnPropertyChanged(System.Nullable{System.String})
-  name: OnPropertyChanged(Nullable<String>)
-  href: api/Mapsui.UI.Objects.Drawable.html#Mapsui_UI_Objects_Drawable_OnPropertyChanged_System_Nullable_System_String__
-  commentId: M:Mapsui.UI.Objects.Drawable.OnPropertyChanged(System.Nullable{System.String})
-  name.vb: OnPropertyChanged(Nullable(Of String))
-  fullName: Mapsui.UI.Objects.Drawable.OnPropertyChanged(System.Nullable<System.String>)
-  fullName.vb: Mapsui.UI.Objects.Drawable.OnPropertyChanged(System.Nullable(Of System.String))
-  nameWithType: Drawable.OnPropertyChanged(Nullable<String>)
-  nameWithType.vb: Drawable.OnPropertyChanged(Nullable(Of String))
+- uid: Mapsui.UI.Objects.Drawable.OnPropertyChanged(System.String)
+  name: OnPropertyChanged(String)
+  href: api/Mapsui.UI.Objects.Drawable.html#Mapsui_UI_Objects_Drawable_OnPropertyChanged_System_String_
+  commentId: M:Mapsui.UI.Objects.Drawable.OnPropertyChanged(System.String)
+  fullName: Mapsui.UI.Objects.Drawable.OnPropertyChanged(System.String)
+  nameWithType: Drawable.OnPropertyChanged(String)
 - uid: Mapsui.UI.Objects.Drawable.OnPropertyChanged*
   name: OnPropertyChanged
   href: api/Mapsui.UI.Objects.Drawable.html#Mapsui_UI_Objects_Drawable_OnPropertyChanged_
@@ -4783,13 +4770,13 @@ references:
   fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, TU)
   nameWithType: ObservableCollectionProvider<T, TU>
   nameWithType.vb: ObservableCollectionProvider(Of T, TU)
-- uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.#ctor(ObservableCollection{`0})
+- uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.#ctor(System.Collections.ObjectModel.ObservableCollection{`0})
   name: ObservableCollectionProvider(ObservableCollection<T>)
-  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2__ctor_ObservableCollection__0__
-  commentId: M:Mapsui.UI.Objects.ObservableCollectionProvider`2.#ctor(ObservableCollection{`0})
+  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2__ctor_System_Collections_ObjectModel_ObservableCollection__0__
+  commentId: M:Mapsui.UI.Objects.ObservableCollectionProvider`2.#ctor(System.Collections.ObjectModel.ObservableCollection{`0})
   name.vb: ObservableCollectionProvider(ObservableCollection(Of T))
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, TU>.ObservableCollectionProvider(ObservableCollection<T>)
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, TU).ObservableCollectionProvider(ObservableCollection(Of T))
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, TU>.ObservableCollectionProvider(System.Collections.ObjectModel.ObservableCollection<T>)
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, TU).ObservableCollectionProvider(System.Collections.ObjectModel.ObservableCollection(Of T))
   nameWithType: ObservableCollectionProvider<T, TU>.ObservableCollectionProvider(ObservableCollection<T>)
   nameWithType.vb: ObservableCollectionProvider(Of T, TU).ObservableCollectionProvider(ObservableCollection(Of T))
 - uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.#ctor*
@@ -4852,12 +4839,12 @@ references:
   fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, TU).GetExtent
   nameWithType: ObservableCollectionProvider<T, TU>.GetExtent
   nameWithType.vb: ObservableCollectionProvider(Of T, TU).GetExtent
-- uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.GetFeatures(FetchInfo)
+- uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.GetFeatures(Mapsui.Layers.FetchInfo)
   name: GetFeatures(FetchInfo)
-  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2_GetFeatures_FetchInfo_
-  commentId: M:Mapsui.UI.Objects.ObservableCollectionProvider`2.GetFeatures(FetchInfo)
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, TU>.GetFeatures(FetchInfo)
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, TU).GetFeatures(FetchInfo)
+  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2_GetFeatures_Mapsui_Layers_FetchInfo_
+  commentId: M:Mapsui.UI.Objects.ObservableCollectionProvider`2.GetFeatures(Mapsui.Layers.FetchInfo)
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, TU>.GetFeatures(Mapsui.Layers.FetchInfo)
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, TU).GetFeatures(Mapsui.Layers.FetchInfo)
   nameWithType: ObservableCollectionProvider<T, TU>.GetFeatures(FetchInfo)
   nameWithType.vb: ObservableCollectionProvider(Of T, TU).GetFeatures(FetchInfo)
 - uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.GetFeatures*
@@ -5134,6 +5121,415 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Utils.FlingTracker.RemoveId
   nameWithType: FlingTracker.RemoveId
+- uid: Mapsui.UI.Uwp
+  name: Mapsui.UI.Uwp
+  href: api/Mapsui.UI.Uwp.html
+  commentId: N:Mapsui.UI.Uwp
+  fullName: Mapsui.UI.Uwp
+  nameWithType: Mapsui.UI.Uwp
+- uid: Mapsui.UI.Uwp.Extensions
+  name: Mapsui.UI.Uwp.Extensions
+  href: api/Mapsui.UI.Uwp.Extensions.html
+  commentId: N:Mapsui.UI.Uwp.Extensions
+  fullName: Mapsui.UI.Uwp.Extensions
+  nameWithType: Mapsui.UI.Uwp.Extensions
+- uid: Mapsui.UI.Uwp.Extensions.PointExtensions
+  name: PointExtensions
+  href: api/Mapsui.UI.Uwp.Extensions.PointExtensions.html
+  commentId: T:Mapsui.UI.Uwp.Extensions.PointExtensions
+  fullName: Mapsui.UI.Uwp.Extensions.PointExtensions
+  nameWithType: PointExtensions
+- uid: Mapsui.UI.Uwp.Extensions.PointExtensions.ToMapsui(Windows.Foundation.Point)
+  name: ToMapsui(Point)
+  href: api/Mapsui.UI.Uwp.Extensions.PointExtensions.html#Mapsui_UI_Uwp_Extensions_PointExtensions_ToMapsui_Windows_Foundation_Point_
+  commentId: M:Mapsui.UI.Uwp.Extensions.PointExtensions.ToMapsui(Windows.Foundation.Point)
+  fullName: Mapsui.UI.Uwp.Extensions.PointExtensions.ToMapsui(Windows.Foundation.Point)
+  nameWithType: PointExtensions.ToMapsui(Point)
+- uid: Mapsui.UI.Uwp.Extensions.PointExtensions.ToMapsui*
+  name: ToMapsui
+  href: api/Mapsui.UI.Uwp.Extensions.PointExtensions.html#Mapsui_UI_Uwp_Extensions_PointExtensions_ToMapsui_
+  commentId: Overload:Mapsui.UI.Uwp.Extensions.PointExtensions.ToMapsui
+  isSpec: "True"
+  fullName: Mapsui.UI.Uwp.Extensions.PointExtensions.ToMapsui
+  nameWithType: PointExtensions.ToMapsui
+- uid: Mapsui.UI.Uwp.MapControl
+  name: MapControl
+  href: api/Mapsui.UI.Uwp.MapControl.html
+  commentId: T:Mapsui.UI.Uwp.MapControl
+  fullName: Mapsui.UI.Uwp.MapControl
+  nameWithType: MapControl
+- uid: Mapsui.UI.Uwp.MapControl.#ctor
+  name: MapControl()
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl__ctor
+  commentId: M:Mapsui.UI.Uwp.MapControl.#ctor
+  fullName: Mapsui.UI.Uwp.MapControl.MapControl()
+  nameWithType: MapControl.MapControl()
+- uid: Mapsui.UI.Uwp.MapControl.#ctor*
+  name: MapControl
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl__ctor_
+  commentId: Overload:Mapsui.UI.Uwp.MapControl.#ctor
+  isSpec: "True"
+  fullName: Mapsui.UI.Uwp.MapControl.MapControl
+  nameWithType: MapControl.MapControl
+- uid: Mapsui.UI.Uwp.MapControl.CallHomeIfNeeded
+  name: CallHomeIfNeeded()
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_CallHomeIfNeeded
+  commentId: M:Mapsui.UI.Uwp.MapControl.CallHomeIfNeeded
+  fullName: Mapsui.UI.Uwp.MapControl.CallHomeIfNeeded()
+  nameWithType: MapControl.CallHomeIfNeeded()
+- uid: Mapsui.UI.Uwp.MapControl.CallHomeIfNeeded*
+  name: CallHomeIfNeeded
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_CallHomeIfNeeded_
+  commentId: Overload:Mapsui.UI.Uwp.MapControl.CallHomeIfNeeded
+  isSpec: "True"
+  fullName: Mapsui.UI.Uwp.MapControl.CallHomeIfNeeded
+  nameWithType: MapControl.CallHomeIfNeeded
+- uid: Mapsui.UI.Uwp.MapControl.Clear
+  name: Clear()
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_Clear
+  commentId: M:Mapsui.UI.Uwp.MapControl.Clear
+  fullName: Mapsui.UI.Uwp.MapControl.Clear()
+  nameWithType: MapControl.Clear()
+- uid: Mapsui.UI.Uwp.MapControl.Clear*
+  name: Clear
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_Clear_
+  commentId: Overload:Mapsui.UI.Uwp.MapControl.Clear
+  isSpec: "True"
+  fullName: Mapsui.UI.Uwp.MapControl.Clear
+  nameWithType: MapControl.Clear
+- uid: Mapsui.UI.Uwp.MapControl.ForceUpdate
+  name: ForceUpdate()
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_ForceUpdate
+  commentId: M:Mapsui.UI.Uwp.MapControl.ForceUpdate
+  fullName: Mapsui.UI.Uwp.MapControl.ForceUpdate()
+  nameWithType: MapControl.ForceUpdate()
+- uid: Mapsui.UI.Uwp.MapControl.ForceUpdate*
+  name: ForceUpdate
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_ForceUpdate_
+  commentId: Overload:Mapsui.UI.Uwp.MapControl.ForceUpdate
+  isSpec: "True"
+  fullName: Mapsui.UI.Uwp.MapControl.ForceUpdate
+  nameWithType: MapControl.ForceUpdate
+- uid: Mapsui.UI.Uwp.MapControl.GetMapInfo(Mapsui.MPoint,System.Int32)
+  name: GetMapInfo(MPoint, Int32)
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_GetMapInfo_Mapsui_MPoint_System_Int32_
+  commentId: M:Mapsui.UI.Uwp.MapControl.GetMapInfo(Mapsui.MPoint,System.Int32)
+  fullName: Mapsui.UI.Uwp.MapControl.GetMapInfo(Mapsui.MPoint, System.Int32)
+  nameWithType: MapControl.GetMapInfo(MPoint, Int32)
+- uid: Mapsui.UI.Uwp.MapControl.GetMapInfo*
+  name: GetMapInfo
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_GetMapInfo_
+  commentId: Overload:Mapsui.UI.Uwp.MapControl.GetMapInfo
+  isSpec: "True"
+  fullName: Mapsui.UI.Uwp.MapControl.GetMapInfo
+  nameWithType: MapControl.GetMapInfo
+- uid: Mapsui.UI.Uwp.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name: GetSnapshot(IEnumerable<ILayer>)
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
+  commentId: M:Mapsui.UI.Uwp.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
+  name.vb: GetSnapshot(IEnumerable(Of ILayer))
+  fullName: Mapsui.UI.Uwp.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>)
+  fullName.vb: Mapsui.UI.Uwp.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer))
+  nameWithType: MapControl.GetSnapshot(IEnumerable<ILayer>)
+  nameWithType.vb: MapControl.GetSnapshot(IEnumerable(Of ILayer))
+- uid: Mapsui.UI.Uwp.MapControl.GetSnapshot*
+  name: GetSnapshot
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_GetSnapshot_
+  commentId: Overload:Mapsui.UI.Uwp.MapControl.GetSnapshot
+  isSpec: "True"
+  fullName: Mapsui.UI.Uwp.MapControl.GetSnapshot
+  nameWithType: MapControl.GetSnapshot
+- uid: Mapsui.UI.Uwp.MapControl.Info
+  name: Info
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_Info
+  commentId: E:Mapsui.UI.Uwp.MapControl.Info
+  fullName: Mapsui.UI.Uwp.MapControl.Info
+  nameWithType: MapControl.Info
+- uid: Mapsui.UI.Uwp.MapControl.Map
+  name: Map
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_Map
+  commentId: P:Mapsui.UI.Uwp.MapControl.Map
+  fullName: Mapsui.UI.Uwp.MapControl.Map
+  nameWithType: MapControl.Map
+- uid: Mapsui.UI.Uwp.MapControl.Map*
+  name: Map
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_Map_
+  commentId: Overload:Mapsui.UI.Uwp.MapControl.Map
+  isSpec: "True"
+  fullName: Mapsui.UI.Uwp.MapControl.Map
+  nameWithType: MapControl.Map
+- uid: Mapsui.UI.Uwp.MapControl.MouseWheelAnimation
+  name: MouseWheelAnimation
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_MouseWheelAnimation
+  commentId: P:Mapsui.UI.Uwp.MapControl.MouseWheelAnimation
+  fullName: Mapsui.UI.Uwp.MapControl.MouseWheelAnimation
+  nameWithType: MapControl.MouseWheelAnimation
+- uid: Mapsui.UI.Uwp.MapControl.MouseWheelAnimation*
+  name: MouseWheelAnimation
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_MouseWheelAnimation_
+  commentId: Overload:Mapsui.UI.Uwp.MapControl.MouseWheelAnimation
+  isSpec: "True"
+  fullName: Mapsui.UI.Uwp.MapControl.MouseWheelAnimation
+  nameWithType: MapControl.MouseWheelAnimation
+- uid: Mapsui.UI.Uwp.MapControl.Navigator
+  name: Navigator
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_Navigator
+  commentId: P:Mapsui.UI.Uwp.MapControl.Navigator
+  fullName: Mapsui.UI.Uwp.MapControl.Navigator
+  nameWithType: MapControl.Navigator
+- uid: Mapsui.UI.Uwp.MapControl.Navigator*
+  name: Navigator
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_Navigator_
+  commentId: Overload:Mapsui.UI.Uwp.MapControl.Navigator
+  isSpec: "True"
+  fullName: Mapsui.UI.Uwp.MapControl.Navigator
+  nameWithType: MapControl.Navigator
+- uid: Mapsui.UI.Uwp.MapControl.OnPropertyChanged(System.String)
+  name: OnPropertyChanged(String)
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_OnPropertyChanged_System_String_
+  commentId: M:Mapsui.UI.Uwp.MapControl.OnPropertyChanged(System.String)
+  fullName: Mapsui.UI.Uwp.MapControl.OnPropertyChanged(System.String)
+  nameWithType: MapControl.OnPropertyChanged(String)
+- uid: Mapsui.UI.Uwp.MapControl.OnPropertyChanged*
+  name: OnPropertyChanged
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_OnPropertyChanged_
+  commentId: Overload:Mapsui.UI.Uwp.MapControl.OnPropertyChanged
+  isSpec: "True"
+  fullName: Mapsui.UI.Uwp.MapControl.OnPropertyChanged
+  nameWithType: MapControl.OnPropertyChanged
+- uid: Mapsui.UI.Uwp.MapControl.OpenBrowser(System.String)
+  name: OpenBrowser(String)
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_OpenBrowser_System_String_
+  commentId: M:Mapsui.UI.Uwp.MapControl.OpenBrowser(System.String)
+  fullName: Mapsui.UI.Uwp.MapControl.OpenBrowser(System.String)
+  nameWithType: MapControl.OpenBrowser(String)
+- uid: Mapsui.UI.Uwp.MapControl.OpenBrowser*
+  name: OpenBrowser
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_OpenBrowser_
+  commentId: Overload:Mapsui.UI.Uwp.MapControl.OpenBrowser
+  isSpec: "True"
+  fullName: Mapsui.UI.Uwp.MapControl.OpenBrowser
+  nameWithType: MapControl.OpenBrowser
+- uid: Mapsui.UI.Uwp.MapControl.Performance
+  name: Performance
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_Performance
+  commentId: P:Mapsui.UI.Uwp.MapControl.Performance
+  fullName: Mapsui.UI.Uwp.MapControl.Performance
+  nameWithType: MapControl.Performance
+- uid: Mapsui.UI.Uwp.MapControl.Performance*
+  name: Performance
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_Performance_
+  commentId: Overload:Mapsui.UI.Uwp.MapControl.Performance
+  isSpec: "True"
+  fullName: Mapsui.UI.Uwp.MapControl.Performance
+  nameWithType: MapControl.Performance
+- uid: Mapsui.UI.Uwp.MapControl.PixelDensity
+  name: PixelDensity
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_PixelDensity
+  commentId: P:Mapsui.UI.Uwp.MapControl.PixelDensity
+  fullName: Mapsui.UI.Uwp.MapControl.PixelDensity
+  nameWithType: MapControl.PixelDensity
+- uid: Mapsui.UI.Uwp.MapControl.PixelDensity*
+  name: PixelDensity
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_PixelDensity_
+  commentId: Overload:Mapsui.UI.Uwp.MapControl.PixelDensity
+  isSpec: "True"
+  fullName: Mapsui.UI.Uwp.MapControl.PixelDensity
+  nameWithType: MapControl.PixelDensity
+- uid: Mapsui.UI.Uwp.MapControl.PropertyChanged
+  name: PropertyChanged
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_PropertyChanged
+  commentId: E:Mapsui.UI.Uwp.MapControl.PropertyChanged
+  fullName: Mapsui.UI.Uwp.MapControl.PropertyChanged
+  nameWithType: MapControl.PropertyChanged
+- uid: Mapsui.UI.Uwp.MapControl.Refresh(Mapsui.ChangeType)
+  name: Refresh(ChangeType)
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_Refresh_Mapsui_ChangeType_
+  commentId: M:Mapsui.UI.Uwp.MapControl.Refresh(Mapsui.ChangeType)
+  fullName: Mapsui.UI.Uwp.MapControl.Refresh(Mapsui.ChangeType)
+  nameWithType: MapControl.Refresh(ChangeType)
+- uid: Mapsui.UI.Uwp.MapControl.Refresh*
+  name: Refresh
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_Refresh_
+  commentId: Overload:Mapsui.UI.Uwp.MapControl.Refresh
+  isSpec: "True"
+  fullName: Mapsui.UI.Uwp.MapControl.Refresh
+  nameWithType: MapControl.Refresh
+- uid: Mapsui.UI.Uwp.MapControl.RefreshData(Mapsui.ChangeType)
+  name: RefreshData(ChangeType)
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_RefreshData_Mapsui_ChangeType_
+  commentId: M:Mapsui.UI.Uwp.MapControl.RefreshData(Mapsui.ChangeType)
+  fullName: Mapsui.UI.Uwp.MapControl.RefreshData(Mapsui.ChangeType)
+  nameWithType: MapControl.RefreshData(ChangeType)
+- uid: Mapsui.UI.Uwp.MapControl.RefreshData*
+  name: RefreshData
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_RefreshData_
+  commentId: Overload:Mapsui.UI.Uwp.MapControl.RefreshData
+  isSpec: "True"
+  fullName: Mapsui.UI.Uwp.MapControl.RefreshData
+  nameWithType: MapControl.RefreshData
+- uid: Mapsui.UI.Uwp.MapControl.RefreshGraphics
+  name: RefreshGraphics()
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_RefreshGraphics
+  commentId: M:Mapsui.UI.Uwp.MapControl.RefreshGraphics
+  fullName: Mapsui.UI.Uwp.MapControl.RefreshGraphics()
+  nameWithType: MapControl.RefreshGraphics()
+- uid: Mapsui.UI.Uwp.MapControl.RefreshGraphics*
+  name: RefreshGraphics
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_RefreshGraphics_
+  commentId: Overload:Mapsui.UI.Uwp.MapControl.RefreshGraphics
+  isSpec: "True"
+  fullName: Mapsui.UI.Uwp.MapControl.RefreshGraphics
+  nameWithType: MapControl.RefreshGraphics
+- uid: Mapsui.UI.Uwp.MapControl.Renderer
+  name: Renderer
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_Renderer
+  commentId: P:Mapsui.UI.Uwp.MapControl.Renderer
+  fullName: Mapsui.UI.Uwp.MapControl.Renderer
+  nameWithType: MapControl.Renderer
+- uid: Mapsui.UI.Uwp.MapControl.Renderer*
+  name: Renderer
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_Renderer_
+  commentId: Overload:Mapsui.UI.Uwp.MapControl.Renderer
+  isSpec: "True"
+  fullName: Mapsui.UI.Uwp.MapControl.Renderer
+  nameWithType: MapControl.Renderer
+- uid: Mapsui.UI.Uwp.MapControl.ReSnapRotationDegrees
+  name: ReSnapRotationDegrees
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_ReSnapRotationDegrees
+  commentId: P:Mapsui.UI.Uwp.MapControl.ReSnapRotationDegrees
+  fullName: Mapsui.UI.Uwp.MapControl.ReSnapRotationDegrees
+  nameWithType: MapControl.ReSnapRotationDegrees
+- uid: Mapsui.UI.Uwp.MapControl.ReSnapRotationDegrees*
+  name: ReSnapRotationDegrees
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_ReSnapRotationDegrees_
+  commentId: Overload:Mapsui.UI.Uwp.MapControl.ReSnapRotationDegrees
+  isSpec: "True"
+  fullName: Mapsui.UI.Uwp.MapControl.ReSnapRotationDegrees
+  nameWithType: MapControl.ReSnapRotationDegrees
+- uid: Mapsui.UI.Uwp.MapControl.StartUpdates(System.Boolean)
+  name: StartUpdates(Boolean)
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_StartUpdates_System_Boolean_
+  commentId: M:Mapsui.UI.Uwp.MapControl.StartUpdates(System.Boolean)
+  fullName: Mapsui.UI.Uwp.MapControl.StartUpdates(System.Boolean)
+  nameWithType: MapControl.StartUpdates(Boolean)
+- uid: Mapsui.UI.Uwp.MapControl.StartUpdates*
+  name: StartUpdates
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_StartUpdates_
+  commentId: Overload:Mapsui.UI.Uwp.MapControl.StartUpdates
+  isSpec: "True"
+  fullName: Mapsui.UI.Uwp.MapControl.StartUpdates
+  nameWithType: MapControl.StartUpdates
+- uid: Mapsui.UI.Uwp.MapControl.StopUpdates
+  name: StopUpdates()
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_StopUpdates
+  commentId: M:Mapsui.UI.Uwp.MapControl.StopUpdates
+  fullName: Mapsui.UI.Uwp.MapControl.StopUpdates()
+  nameWithType: MapControl.StopUpdates()
+- uid: Mapsui.UI.Uwp.MapControl.StopUpdates*
+  name: StopUpdates
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_StopUpdates_
+  commentId: Overload:Mapsui.UI.Uwp.MapControl.StopUpdates
+  isSpec: "True"
+  fullName: Mapsui.UI.Uwp.MapControl.StopUpdates
+  nameWithType: MapControl.StopUpdates
+- uid: Mapsui.UI.Uwp.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+  name: ToDeviceIndependentUnits(MPoint)
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_
+  commentId: M:Mapsui.UI.Uwp.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+  fullName: Mapsui.UI.Uwp.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
+  nameWithType: MapControl.ToDeviceIndependentUnits(MPoint)
+- uid: Mapsui.UI.Uwp.MapControl.ToDeviceIndependentUnits*
+  name: ToDeviceIndependentUnits
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_ToDeviceIndependentUnits_
+  commentId: Overload:Mapsui.UI.Uwp.MapControl.ToDeviceIndependentUnits
+  isSpec: "True"
+  fullName: Mapsui.UI.Uwp.MapControl.ToDeviceIndependentUnits
+  nameWithType: MapControl.ToDeviceIndependentUnits
+- uid: Mapsui.UI.Uwp.MapControl.ToPixels(Mapsui.MPoint)
+  name: ToPixels(MPoint)
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_ToPixels_Mapsui_MPoint_
+  commentId: M:Mapsui.UI.Uwp.MapControl.ToPixels(Mapsui.MPoint)
+  fullName: Mapsui.UI.Uwp.MapControl.ToPixels(Mapsui.MPoint)
+  nameWithType: MapControl.ToPixels(MPoint)
+- uid: Mapsui.UI.Uwp.MapControl.ToPixels*
+  name: ToPixels
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_ToPixels_
+  commentId: Overload:Mapsui.UI.Uwp.MapControl.ToPixels
+  isSpec: "True"
+  fullName: Mapsui.UI.Uwp.MapControl.ToPixels
+  nameWithType: MapControl.ToPixels
+- uid: Mapsui.UI.Uwp.MapControl.UnSnapRotationDegrees
+  name: UnSnapRotationDegrees
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_UnSnapRotationDegrees
+  commentId: P:Mapsui.UI.Uwp.MapControl.UnSnapRotationDegrees
+  fullName: Mapsui.UI.Uwp.MapControl.UnSnapRotationDegrees
+  nameWithType: MapControl.UnSnapRotationDegrees
+- uid: Mapsui.UI.Uwp.MapControl.UnSnapRotationDegrees*
+  name: UnSnapRotationDegrees
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_UnSnapRotationDegrees_
+  commentId: Overload:Mapsui.UI.Uwp.MapControl.UnSnapRotationDegrees
+  isSpec: "True"
+  fullName: Mapsui.UI.Uwp.MapControl.UnSnapRotationDegrees
+  nameWithType: MapControl.UnSnapRotationDegrees
+- uid: Mapsui.UI.Uwp.MapControl.Unsubscribe
+  name: Unsubscribe()
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_Unsubscribe
+  commentId: M:Mapsui.UI.Uwp.MapControl.Unsubscribe
+  fullName: Mapsui.UI.Uwp.MapControl.Unsubscribe()
+  nameWithType: MapControl.Unsubscribe()
+- uid: Mapsui.UI.Uwp.MapControl.Unsubscribe*
+  name: Unsubscribe
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_Unsubscribe_
+  commentId: Overload:Mapsui.UI.Uwp.MapControl.Unsubscribe
+  isSpec: "True"
+  fullName: Mapsui.UI.Uwp.MapControl.Unsubscribe
+  nameWithType: MapControl.Unsubscribe
+- uid: Mapsui.UI.Uwp.MapControl.UpdateInterval
+  name: UpdateInterval
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_UpdateInterval
+  commentId: P:Mapsui.UI.Uwp.MapControl.UpdateInterval
+  fullName: Mapsui.UI.Uwp.MapControl.UpdateInterval
+  nameWithType: MapControl.UpdateInterval
+- uid: Mapsui.UI.Uwp.MapControl.UpdateInterval*
+  name: UpdateInterval
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_UpdateInterval_
+  commentId: Overload:Mapsui.UI.Uwp.MapControl.UpdateInterval
+  isSpec: "True"
+  fullName: Mapsui.UI.Uwp.MapControl.UpdateInterval
+  nameWithType: MapControl.UpdateInterval
+- uid: Mapsui.UI.Uwp.MapControl.Viewport
+  name: Viewport
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_Viewport
+  commentId: P:Mapsui.UI.Uwp.MapControl.Viewport
+  fullName: Mapsui.UI.Uwp.MapControl.Viewport
+  nameWithType: MapControl.Viewport
+- uid: Mapsui.UI.Uwp.MapControl.Viewport*
+  name: Viewport
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_Viewport_
+  commentId: Overload:Mapsui.UI.Uwp.MapControl.Viewport
+  isSpec: "True"
+  fullName: Mapsui.UI.Uwp.MapControl.Viewport
+  nameWithType: MapControl.Viewport
+- uid: Mapsui.UI.Uwp.MapControl.ViewportInitialized
+  name: ViewportInitialized
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_ViewportInitialized
+  commentId: E:Mapsui.UI.Uwp.MapControl.ViewportInitialized
+  fullName: Mapsui.UI.Uwp.MapControl.ViewportInitialized
+  nameWithType: MapControl.ViewportInitialized
+- uid: Mapsui.UI.Uwp.MapControl.ZoomToBox(Mapsui.Geometries.Point,Mapsui.Geometries.Point)
+  name: ZoomToBox(Point, Point)
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_ZoomToBox_Mapsui_Geometries_Point_Mapsui_Geometries_Point_
+  commentId: M:Mapsui.UI.Uwp.MapControl.ZoomToBox(Mapsui.Geometries.Point,Mapsui.Geometries.Point)
+  fullName: Mapsui.UI.Uwp.MapControl.ZoomToBox(Mapsui.Geometries.Point, Mapsui.Geometries.Point)
+  nameWithType: MapControl.ZoomToBox(Point, Point)
+- uid: Mapsui.UI.Uwp.MapControl.ZoomToBox*
+  name: ZoomToBox
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_ZoomToBox_
+  commentId: Overload:Mapsui.UI.Uwp.MapControl.ZoomToBox
+  isSpec: "True"
+  fullName: Mapsui.UI.Uwp.MapControl.ZoomToBox
+  nameWithType: MapControl.ZoomToBox
 - uid: Mapsui.UI.Wpf
   name: Mapsui.UI.Wpf
   href: api/Mapsui.UI.Wpf.html
@@ -5670,22 +6066,22 @@ references:
   fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).ObservableRangeCollection()
   nameWithType: ObservableRangeCollection<T>.ObservableRangeCollection()
   nameWithType.vb: ObservableRangeCollection(Of T).ObservableRangeCollection()
-- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.#ctor(IEnumerable{`0})
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.#ctor(System.Collections.Generic.IEnumerable{`0})
   name: ObservableRangeCollection(IEnumerable<T>)
-  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1__ctor_IEnumerable__0__
-  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.#ctor(IEnumerable{`0})
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1__ctor_System_Collections_Generic_IEnumerable__0__
+  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.#ctor(System.Collections.Generic.IEnumerable{`0})
   name.vb: ObservableRangeCollection(IEnumerable(Of T))
-  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.ObservableRangeCollection(IEnumerable<T>)
-  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).ObservableRangeCollection(IEnumerable(Of T))
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.ObservableRangeCollection(System.Collections.Generic.IEnumerable<T>)
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).ObservableRangeCollection(System.Collections.Generic.IEnumerable(Of T))
   nameWithType: ObservableRangeCollection<T>.ObservableRangeCollection(IEnumerable<T>)
   nameWithType.vb: ObservableRangeCollection(Of T).ObservableRangeCollection(IEnumerable(Of T))
-- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.#ctor(List{`0})
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.#ctor(System.Collections.Generic.List{`0})
   name: ObservableRangeCollection(List<T>)
-  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1__ctor_List__0__
-  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.#ctor(List{`0})
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1__ctor_System_Collections_Generic_List__0__
+  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.#ctor(System.Collections.Generic.List{`0})
   name.vb: ObservableRangeCollection(List(Of T))
-  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.ObservableRangeCollection(List<T>)
-  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).ObservableRangeCollection(List(Of T))
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.ObservableRangeCollection(System.Collections.Generic.List<T>)
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).ObservableRangeCollection(System.Collections.Generic.List(Of T))
   nameWithType: ObservableRangeCollection<T>.ObservableRangeCollection(List<T>)
   nameWithType.vb: ObservableRangeCollection(Of T).ObservableRangeCollection(List(Of T))
 - uid: System.Collections.ObjectModel.ObservableRangeCollection`1.#ctor*
@@ -5697,13 +6093,13 @@ references:
   fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).ObservableRangeCollection
   nameWithType: ObservableRangeCollection<T>.ObservableRangeCollection
   nameWithType.vb: ObservableRangeCollection(Of T).ObservableRangeCollection
-- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.AddRange(IEnumerable{`0})
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.AddRange(System.Collections.Generic.IEnumerable{`0})
   name: AddRange(IEnumerable<T>)
-  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_AddRange_IEnumerable__0__
-  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.AddRange(IEnumerable{`0})
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_AddRange_System_Collections_Generic_IEnumerable__0__
+  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.AddRange(System.Collections.Generic.IEnumerable{`0})
   name.vb: AddRange(IEnumerable(Of T))
-  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.AddRange(IEnumerable<T>)
-  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).AddRange(IEnumerable(Of T))
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.AddRange(System.Collections.Generic.IEnumerable<T>)
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).AddRange(System.Collections.Generic.IEnumerable(Of T))
   nameWithType: ObservableRangeCollection<T>.AddRange(IEnumerable<T>)
   nameWithType.vb: ObservableRangeCollection(Of T).AddRange(IEnumerable(Of T))
 - uid: System.Collections.ObjectModel.ObservableRangeCollection`1.AddRange*
@@ -5749,13 +6145,13 @@ references:
   fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).DeferEvents
   nameWithType: ObservableRangeCollection<T>.DeferEvents
   nameWithType.vb: ObservableRangeCollection(Of T).DeferEvents
-- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.InsertRange(System.Int32,IEnumerable{`0})
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.InsertRange(System.Int32,System.Collections.Generic.IEnumerable{`0})
   name: InsertRange(Int32, IEnumerable<T>)
-  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_InsertRange_System_Int32_IEnumerable__0__
-  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.InsertRange(System.Int32,IEnumerable{`0})
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_InsertRange_System_Int32_System_Collections_Generic_IEnumerable__0__
+  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.InsertRange(System.Int32,System.Collections.Generic.IEnumerable{`0})
   name.vb: InsertRange(Int32, IEnumerable(Of T))
-  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.InsertRange(System.Int32, IEnumerable<T>)
-  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).InsertRange(System.Int32, IEnumerable(Of T))
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.InsertRange(System.Int32, System.Collections.Generic.IEnumerable<T>)
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).InsertRange(System.Int32, System.Collections.Generic.IEnumerable(Of T))
   nameWithType: ObservableRangeCollection<T>.InsertRange(Int32, IEnumerable<T>)
   nameWithType.vb: ObservableRangeCollection(Of T).InsertRange(Int32, IEnumerable(Of T))
 - uid: System.Collections.ObjectModel.ObservableRangeCollection`1.InsertRange*
@@ -5767,12 +6163,12 @@ references:
   fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).InsertRange
   nameWithType: ObservableRangeCollection<T>.InsertRange
   nameWithType.vb: ObservableRangeCollection(Of T).InsertRange
-- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.OnCollectionChanged(NotifyCollectionChangedEventArgs)
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
   name: OnCollectionChanged(NotifyCollectionChangedEventArgs)
-  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_OnCollectionChanged_NotifyCollectionChangedEventArgs_
-  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.OnCollectionChanged(NotifyCollectionChangedEventArgs)
-  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.OnCollectionChanged(NotifyCollectionChangedEventArgs)
-  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).OnCollectionChanged(NotifyCollectionChangedEventArgs)
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_OnCollectionChanged_System_Collections_Specialized_NotifyCollectionChangedEventArgs_
+  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)
   nameWithType: ObservableRangeCollection<T>.OnCollectionChanged(NotifyCollectionChangedEventArgs)
   nameWithType.vb: ObservableRangeCollection(Of T).OnCollectionChanged(NotifyCollectionChangedEventArgs)
 - uid: System.Collections.ObjectModel.ObservableRangeCollection`1.OnCollectionChanged*
@@ -5784,24 +6180,24 @@ references:
   fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).OnCollectionChanged
   nameWithType: ObservableRangeCollection<T>.OnCollectionChanged
   nameWithType.vb: ObservableRangeCollection(Of T).OnCollectionChanged
-- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.RemoveAll(Predicate{`0})
-  name: RemoveAll(Predicate<T>)
-  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_RemoveAll_Predicate__0__
-  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.RemoveAll(Predicate{`0})
-  name.vb: RemoveAll(Predicate(Of T))
-  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.RemoveAll(Predicate<T>)
-  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).RemoveAll(Predicate(Of T))
-  nameWithType: ObservableRangeCollection<T>.RemoveAll(Predicate<T>)
-  nameWithType.vb: ObservableRangeCollection(Of T).RemoveAll(Predicate(Of T))
-- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.RemoveAll(System.Int32,System.Int32,Predicate{`0})
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.RemoveAll(System.Int32,System.Int32,System.Predicate{`0})
   name: RemoveAll(Int32, Int32, Predicate<T>)
-  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_RemoveAll_System_Int32_System_Int32_Predicate__0__
-  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.RemoveAll(System.Int32,System.Int32,Predicate{`0})
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_RemoveAll_System_Int32_System_Int32_System_Predicate__0__
+  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.RemoveAll(System.Int32,System.Int32,System.Predicate{`0})
   name.vb: RemoveAll(Int32, Int32, Predicate(Of T))
-  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.RemoveAll(System.Int32, System.Int32, Predicate<T>)
-  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).RemoveAll(System.Int32, System.Int32, Predicate(Of T))
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.RemoveAll(System.Int32, System.Int32, System.Predicate<T>)
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).RemoveAll(System.Int32, System.Int32, System.Predicate(Of T))
   nameWithType: ObservableRangeCollection<T>.RemoveAll(Int32, Int32, Predicate<T>)
   nameWithType.vb: ObservableRangeCollection(Of T).RemoveAll(Int32, Int32, Predicate(Of T))
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.RemoveAll(System.Predicate{`0})
+  name: RemoveAll(Predicate<T>)
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_RemoveAll_System_Predicate__0__
+  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.RemoveAll(System.Predicate{`0})
+  name.vb: RemoveAll(Predicate(Of T))
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.RemoveAll(System.Predicate<T>)
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).RemoveAll(System.Predicate(Of T))
+  nameWithType: ObservableRangeCollection<T>.RemoveAll(Predicate<T>)
+  nameWithType.vb: ObservableRangeCollection(Of T).RemoveAll(Predicate(Of T))
 - uid: System.Collections.ObjectModel.ObservableRangeCollection`1.RemoveAll*
   name: RemoveAll
   href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_RemoveAll_
@@ -5811,13 +6207,13 @@ references:
   fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).RemoveAll
   nameWithType: ObservableRangeCollection<T>.RemoveAll
   nameWithType.vb: ObservableRangeCollection(Of T).RemoveAll
-- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.RemoveRange(IEnumerable{`0})
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.RemoveRange(System.Collections.Generic.IEnumerable{`0})
   name: RemoveRange(IEnumerable<T>)
-  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_RemoveRange_IEnumerable__0__
-  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.RemoveRange(IEnumerable{`0})
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_RemoveRange_System_Collections_Generic_IEnumerable__0__
+  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.RemoveRange(System.Collections.Generic.IEnumerable{`0})
   name.vb: RemoveRange(IEnumerable(Of T))
-  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.RemoveRange(IEnumerable<T>)
-  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).RemoveRange(IEnumerable(Of T))
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.RemoveRange(System.Collections.Generic.IEnumerable<T>)
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).RemoveRange(System.Collections.Generic.IEnumerable(Of T))
   nameWithType: ObservableRangeCollection<T>.RemoveRange(IEnumerable<T>)
   nameWithType.vb: ObservableRangeCollection(Of T).RemoveRange(IEnumerable(Of T))
 - uid: System.Collections.ObjectModel.ObservableRangeCollection`1.RemoveRange(System.Int32,System.Int32)
@@ -5837,40 +6233,40 @@ references:
   fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).RemoveRange
   nameWithType: ObservableRangeCollection<T>.RemoveRange
   nameWithType.vb: ObservableRangeCollection(Of T).RemoveRange
-- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.ReplaceRange(IEnumerable{`0})
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.ReplaceRange(System.Collections.Generic.IEnumerable{`0})
   name: ReplaceRange(IEnumerable<T>)
-  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_ReplaceRange_IEnumerable__0__
-  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.ReplaceRange(IEnumerable{`0})
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_ReplaceRange_System_Collections_Generic_IEnumerable__0__
+  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.ReplaceRange(System.Collections.Generic.IEnumerable{`0})
   name.vb: ReplaceRange(IEnumerable(Of T))
-  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.ReplaceRange(IEnumerable<T>)
-  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).ReplaceRange(IEnumerable(Of T))
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.ReplaceRange(System.Collections.Generic.IEnumerable<T>)
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).ReplaceRange(System.Collections.Generic.IEnumerable(Of T))
   nameWithType: ObservableRangeCollection<T>.ReplaceRange(IEnumerable<T>)
   nameWithType.vb: ObservableRangeCollection(Of T).ReplaceRange(IEnumerable(Of T))
-- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.ReplaceRange(IEnumerable{`0},IEqualityComparer{`0})
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.ReplaceRange(System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEqualityComparer{`0})
   name: ReplaceRange(IEnumerable<T>, IEqualityComparer<T>)
-  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_ReplaceRange_IEnumerable__0__IEqualityComparer__0__
-  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.ReplaceRange(IEnumerable{`0},IEqualityComparer{`0})
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_ReplaceRange_System_Collections_Generic_IEnumerable__0__System_Collections_Generic_IEqualityComparer__0__
+  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.ReplaceRange(System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEqualityComparer{`0})
   name.vb: ReplaceRange(IEnumerable(Of T), IEqualityComparer(Of T))
-  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.ReplaceRange(IEnumerable<T>, IEqualityComparer<T>)
-  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).ReplaceRange(IEnumerable(Of T), IEqualityComparer(Of T))
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.ReplaceRange(System.Collections.Generic.IEnumerable<T>, System.Collections.Generic.IEqualityComparer<T>)
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).ReplaceRange(System.Collections.Generic.IEnumerable(Of T), System.Collections.Generic.IEqualityComparer(Of T))
   nameWithType: ObservableRangeCollection<T>.ReplaceRange(IEnumerable<T>, IEqualityComparer<T>)
   nameWithType.vb: ObservableRangeCollection(Of T).ReplaceRange(IEnumerable(Of T), IEqualityComparer(Of T))
-- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.ReplaceRange(System.Int32,System.Int32,IEnumerable{`0})
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.ReplaceRange(System.Int32,System.Int32,System.Collections.Generic.IEnumerable{`0})
   name: ReplaceRange(Int32, Int32, IEnumerable<T>)
-  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_ReplaceRange_System_Int32_System_Int32_IEnumerable__0__
-  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.ReplaceRange(System.Int32,System.Int32,IEnumerable{`0})
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_ReplaceRange_System_Int32_System_Int32_System_Collections_Generic_IEnumerable__0__
+  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.ReplaceRange(System.Int32,System.Int32,System.Collections.Generic.IEnumerable{`0})
   name.vb: ReplaceRange(Int32, Int32, IEnumerable(Of T))
-  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.ReplaceRange(System.Int32, System.Int32, IEnumerable<T>)
-  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).ReplaceRange(System.Int32, System.Int32, IEnumerable(Of T))
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.ReplaceRange(System.Int32, System.Int32, System.Collections.Generic.IEnumerable<T>)
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).ReplaceRange(System.Int32, System.Int32, System.Collections.Generic.IEnumerable(Of T))
   nameWithType: ObservableRangeCollection<T>.ReplaceRange(Int32, Int32, IEnumerable<T>)
   nameWithType.vb: ObservableRangeCollection(Of T).ReplaceRange(Int32, Int32, IEnumerable(Of T))
-- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.ReplaceRange(System.Int32,System.Int32,IEnumerable{`0},IEqualityComparer{`0})
+- uid: System.Collections.ObjectModel.ObservableRangeCollection`1.ReplaceRange(System.Int32,System.Int32,System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEqualityComparer{`0})
   name: ReplaceRange(Int32, Int32, IEnumerable<T>, IEqualityComparer<T>)
-  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_ReplaceRange_System_Int32_System_Int32_IEnumerable__0__IEqualityComparer__0__
-  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.ReplaceRange(System.Int32,System.Int32,IEnumerable{`0},IEqualityComparer{`0})
+  href: api/System.Collections.ObjectModel.ObservableRangeCollection-1.html#System_Collections_ObjectModel_ObservableRangeCollection_1_ReplaceRange_System_Int32_System_Int32_System_Collections_Generic_IEnumerable__0__System_Collections_Generic_IEqualityComparer__0__
+  commentId: M:System.Collections.ObjectModel.ObservableRangeCollection`1.ReplaceRange(System.Int32,System.Int32,System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEqualityComparer{`0})
   name.vb: ReplaceRange(Int32, Int32, IEnumerable(Of T), IEqualityComparer(Of T))
-  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.ReplaceRange(System.Int32, System.Int32, IEnumerable<T>, IEqualityComparer<T>)
-  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).ReplaceRange(System.Int32, System.Int32, IEnumerable(Of T), IEqualityComparer(Of T))
+  fullName: System.Collections.ObjectModel.ObservableRangeCollection<T>.ReplaceRange(System.Int32, System.Int32, System.Collections.Generic.IEnumerable<T>, System.Collections.Generic.IEqualityComparer<T>)
+  fullName.vb: System.Collections.ObjectModel.ObservableRangeCollection(Of T).ReplaceRange(System.Int32, System.Int32, System.Collections.Generic.IEnumerable(Of T), System.Collections.Generic.IEqualityComparer(Of T))
   nameWithType: ObservableRangeCollection<T>.ReplaceRange(Int32, Int32, IEnumerable<T>, IEqualityComparer<T>)
   nameWithType.vb: ObservableRangeCollection(Of T).ReplaceRange(Int32, Int32, IEnumerable(Of T), IEqualityComparer(Of T))
 - uid: System.Collections.ObjectModel.ObservableRangeCollection`1.ReplaceRange*

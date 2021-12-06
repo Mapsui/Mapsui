@@ -89,13 +89,113 @@
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><span class="xref">MyLocationLayer</span></div>
+    <div class="level1"><span class="xref">Mapsui.Layers.BaseLayer</span></div>
+    <div class="level2"><span class="xref">Mapsui.Layers.MemoryLayer</span></div>
+    <div class="level3"><span class="xref">MyLocationLayer</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">Mapsui.Layers.ILayer</span></div>
+    <div><span class="xref">System.ComponentModel.INotifyPropertyChanged</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">Mapsui.Layers.MemoryLayer.DataSource</span>
+    </div>
+    <div>
+      <span class="xref">Mapsui.Layers.MemoryLayer.CRS</span>
+    </div>
+    <div>
+      <span class="xref">Mapsui.Layers.MemoryLayer.GetFeatures(Mapsui.MRect, System.Double)</span>
+    </div>
+    <div>
+      <span class="xref">Mapsui.Layers.MemoryLayer.RefreshData(Mapsui.Layers.FetchInfo)</span>
+    </div>
+    <div>
+      <span class="xref">Mapsui.Layers.MemoryLayer.Extent</span>
+    </div>
+    <div>
+      <span class="xref">Mapsui.Layers.BaseLayer.GetLayerStyles(Mapsui.Layers.ILayer)</span>
+    </div>
+    <div>
+      <span class="xref">Mapsui.Layers.BaseLayer.PropertyChanged</span>
+    </div>
+    <div>
+      <span class="xref">Mapsui.Layers.BaseLayer.DataChanged</span>
+    </div>
+    <div>
+      <span class="xref">Mapsui.Layers.BaseLayer.Id</span>
+    </div>
+    <div>
+      <span class="xref">Mapsui.Layers.BaseLayer.Tag</span>
+    </div>
+    <div>
+      <span class="xref">Mapsui.Layers.BaseLayer.MinVisible</span>
+    </div>
+    <div>
+      <span class="xref">Mapsui.Layers.BaseLayer.MaxVisible</span>
+    </div>
+    <div>
+      <span class="xref">Mapsui.Layers.BaseLayer.Enabled</span>
+    </div>
+    <div>
+      <span class="xref">Mapsui.Layers.BaseLayer.Name</span>
+    </div>
+    <div>
+      <span class="xref">Mapsui.Layers.BaseLayer.Opacity</span>
+    </div>
+    <div>
+      <span class="xref">Mapsui.Layers.BaseLayer.Busy</span>
+    </div>
+    <div>
+      <span class="xref">Mapsui.Layers.BaseLayer.Style</span>
+    </div>
+    <div>
+      <span class="xref">Mapsui.Layers.BaseLayer.Attribution</span>
+    </div>
+    <div>
+      <span class="xref">Mapsui.Layers.BaseLayer.Resolutions</span>
+    </div>
+    <div>
+      <span class="xref">Mapsui.Layers.BaseLayer.IsMapInfoLayer</span>
+    </div>
+    <div>
+      <span class="xref">Mapsui.Layers.BaseLayer.DataHasChanged()</span>
+    </div>
+    <div>
+      <span class="xref">Mapsui.Layers.BaseLayer.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">Mapsui.Layers.BaseLayer.OnPropertyChanged(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">Mapsui.Layers.BaseLayer.OnDataChanged(Mapsui.Fetcher.DataChangedEventArgs)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.UI.Objects.html">Mapsui.UI.Objects</a></h6>
   <h6><strong>Assembly</strong>: Mapsui.UI.Forms.dll</h6>
   <h5 id="Mapsui_UI_Objects_MyLocationLayer_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class MyLocationLayer : MemoryLayer</code></pre>
+    <pre><code class="lang-csharp hljs">public class MyLocationLayer : MemoryLayer, ILayer, INotifyPropertyChanged</code></pre>
   </div>
   <h5 id="Mapsui_UI_Objects_MyLocationLayer_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>There are two different symbols for own loaction: one is used when there isn&apos;t a change in position (still),
@@ -504,6 +604,13 @@ with a starting location.</p>
       </tr>
     </tbody>
   </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">Mapsui.Layers.ILayer</span>
+  </div>
+  <div>
+      <span class="xref">System.ComponentModel.INotifyPropertyChanged</span>
+  </div>
 </article>
           </div>
           
