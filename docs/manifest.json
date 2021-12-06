@@ -1007,15 +1007,12 @@
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidCodeSnippet"
-      ],
       "type": "Conceptual",
       "source_relative_path": "documentation/projections.md",
       "output": {
         ".html": {
           "relative_path": "documentation/projections.html",
-          "hash": "DnDK+5qzao3uliQRFL7JMQ=="
+          "hash": "tgHarre4lfhKNOCFJ+Zpug=="
         }
       },
       "is_incremental": false,
@@ -1208,13 +1205,6 @@
         "full_build_reason_code": "NoAvailableBuildCache"
       },
       "processors": {
-        "ResourceDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build",
-          "total_file_count": 0,
-          "skipped_file_count": 0
-        },
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
@@ -1225,6 +1215,13 @@
           "can_incremental": false,
           "incrementalPhase": "build",
           "total_file_count": 61,
+          "skipped_file_count": 0
+        },
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
           "skipped_file_count": 0
         },
         "TocDocumentProcessor": {
