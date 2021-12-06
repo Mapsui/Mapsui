@@ -38,3 +38,6 @@ With this setup the ProjectingProvider will do the projection for you. Another o
 
 - Mapsui is not capable of projecting images. So no projection of tiles as rasters. No attempt will be made to project and the CRS fields will be ignored.
 
+## Sample
+
+[!code-csharp[Main](../../Samples/Mapsui.Samples.Common/Maps/Projection/PointProjectionSample.cs#projectionsample "Projection Sample")]
