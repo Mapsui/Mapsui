@@ -11,6 +11,7 @@ using Mapsui.Rendering.Skia;
 using Mapsui.Utilities;
 using Mapsui.Widgets;
 
+#pragma warning disable IDISP008
 #nullable enable
 
 #if __MAUI__
@@ -31,7 +32,7 @@ namespace Mapsui.UI.Avalonia
 namespace Mapsui.UI.Wpf
 #endif
 {
-    public partial class MapControl : INotifyPropertyChanged
+    public partial class MapControl : INotifyPropertyChanged, IDisposable
     {
         private Map? _map;
         private double _unSnapRotationDegrees;
@@ -53,6 +54,7 @@ namespace Mapsui.UI.Wpf
             // Create map
             Map = new Map();
             // Create timer for invalidating the control
+            _invalidateTimer?.Dispose();
             _invalidateTimer = new System.Threading.Timer(InvalidateTimerCallback, null, System.Threading.Timeout.Infinite, 16);
             // Start the invalidation timer
             StartUpdates(false);
@@ -96,75 +98,75 @@ namespace Mapsui.UI.Wpf
         {
             // Check, if we have to redraw the screen, because a animation is running or a refresh is wished
 
-/* Unmerged change from project 'Mapsui.UI.Uwp'
-Before:
-            if (!Animations.UpdateAnimations() && !_refresh)
-After:
-            if (!Animation.UpdateAnimations() && !_refresh)
-*/
+            /* Unmerged change from project 'Mapsui.UI.Uwp'
+            Before:
+                        if (!Animations.UpdateAnimations() && !_refresh)
+            After:
+                        if (!Animation.UpdateAnimations() && !_refresh)
+            */
 
-/* Unmerged change from project 'Mapsui.UI.iOS'
-Before:
-            if (!Animations.UpdateAnimations() && !_refresh)
-After:
-            if (!Animation.UpdateAnimations() && !_refresh)
-*/
+            /* Unmerged change from project 'Mapsui.UI.iOS'
+            Before:
+                        if (!Animations.UpdateAnimations() && !_refresh)
+            After:
+                        if (!Animation.UpdateAnimations() && !_refresh)
+            */
 
-/* Unmerged change from project 'Mapsui.UI.Wpf (netcoreapp3.1)'
-Before:
-            if (!Animations.UpdateAnimations() && !_refresh)
-After:
-            if (!Animation.UpdateAnimations() && !_refresh)
-*/
+            /* Unmerged change from project 'Mapsui.UI.Wpf (netcoreapp3.1)'
+            Before:
+                        if (!Animations.UpdateAnimations() && !_refresh)
+            After:
+                        if (!Animation.UpdateAnimations() && !_refresh)
+            */
 
-/* Unmerged change from project 'Mapsui.UI.Forms'
-Before:
-            if (!Animations.UpdateAnimations() && !_refresh)
-After:
-            if (!Animation.UpdateAnimations() && !_refresh)
-*/
+            /* Unmerged change from project 'Mapsui.UI.Forms'
+            Before:
+                        if (!Animations.UpdateAnimations() && !_refresh)
+            After:
+                        if (!Animation.UpdateAnimations() && !_refresh)
+            */
 
-/* Unmerged change from project 'Mapsui.UI.Uno (uap10.0.18362)'
-Before:
-            if (!Animations.UpdateAnimations() && !_refresh)
-After:
-            if (!Animation.UpdateAnimations() && !_refresh)
-*/
+            /* Unmerged change from project 'Mapsui.UI.Uno (uap10.0.18362)'
+            Before:
+                        if (!Animations.UpdateAnimations() && !_refresh)
+            After:
+                        if (!Animation.UpdateAnimations() && !_refresh)
+            */
 
-/* Unmerged change from project 'Mapsui.UI.WinUI'
-Before:
-            if (!Animations.UpdateAnimations() && !_refresh)
-After:
-            if (!Animation.UpdateAnimations() && !_refresh)
-*/
+            /* Unmerged change from project 'Mapsui.UI.WinUI'
+            Before:
+                        if (!Animations.UpdateAnimations() && !_refresh)
+            After:
+                        if (!Animation.UpdateAnimations() && !_refresh)
+            */
 
-/* Unmerged change from project 'Mapsui.UI.Avalonia'
-Before:
-            if (!Animations.UpdateAnimations() && !_refresh)
-After:
-            if (!Animation.UpdateAnimations() && !_refresh)
-*/
+            /* Unmerged change from project 'Mapsui.UI.Avalonia'
+            Before:
+                        if (!Animations.UpdateAnimations() && !_refresh)
+            After:
+                        if (!Animation.UpdateAnimations() && !_refresh)
+            */
 
-/* Unmerged change from project 'Mapsui.UI.Wpf (net48)'
-Before:
-            if (!Animations.UpdateAnimations() && !_refresh)
-After:
-            if (!Animation.UpdateAnimations() && !_refresh)
-*/
+            /* Unmerged change from project 'Mapsui.UI.Wpf (net48)'
+            Before:
+                        if (!Animations.UpdateAnimations() && !_refresh)
+            After:
+                        if (!Animation.UpdateAnimations() && !_refresh)
+            */
 
-/* Unmerged change from project 'Mapsui.UI.Uno (xamarinios10)'
-Before:
-            if (!Animations.UpdateAnimations() && !_refresh)
-After:
-            if (!Animation.UpdateAnimations() && !_refresh)
-*/
+            /* Unmerged change from project 'Mapsui.UI.Uno (xamarinios10)'
+            Before:
+                        if (!Animations.UpdateAnimations() && !_refresh)
+            After:
+                        if (!Animation.UpdateAnimations() && !_refresh)
+            */
 
-/* Unmerged change from project 'Mapsui.UI.Uno (netstandard2.0)'
-Before:
-            if (!Animations.UpdateAnimations() && !_refresh)
-After:
-            if (!Animation.UpdateAnimations() && !_refresh)
-*/
+            /* Unmerged change from project 'Mapsui.UI.Uno (netstandard2.0)'
+            Before:
+                        if (!Animations.UpdateAnimations() && !_refresh)
+            After:
+                        if (!Animation.UpdateAnimations() && !_refresh)
+            */
             if (!Utilities.Animation.UpdateAnimations() && !_refresh)
                 return;
 
@@ -327,7 +329,9 @@ After:
                 if (_navigator != null)
                 {
                     _navigator.Navigated -= Navigated;
+#pragma warning disable IDISP007 // Don't dispose injected.
                     _navigator.Dispose();
+#pragma warning restore IDISP007 // Don't dispose injected.
                 }
                 _navigator = value ?? throw new ArgumentException($"{nameof(Navigator)} can not be null");
                 _navigator.Navigated += Navigated;
@@ -697,7 +701,9 @@ After:
             if (disposing)
             {
                 Unsubscribe();
+#pragma warning disable IDISP007 // Don't dispose injected.
                 Navigator?.Dispose();
+#pragma warning restore IDISP007 // Don't dispose injected.
                 StopUpdates();
                 _invalidateTimer?.Dispose();
             }

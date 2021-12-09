@@ -29,7 +29,7 @@ namespace Mapsui.UI.Maui
 namespace Mapsui.UI.Forms
 #endif
 {
-    public class Callout : BindableObject, IFeatureProvider
+    public class Callout : BindableObject, IFeatureProvider, IDisposable
     {
         private readonly Pin _pin;
 
@@ -649,6 +649,11 @@ namespace Mapsui.UI.Forms
         private void CloseCalloutClicked(object? sender, EventArgs e)
         {
             CalloutClosed?.Invoke(this, new EventArgs());
+        }
+
+        public void Dispose()
+        {
+            Feature.Dispose();
         }
     }
 }

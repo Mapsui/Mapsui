@@ -47,6 +47,7 @@ namespace Mapsui.Samples.Droid
             _mapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
 
             var relativeLayout = FindViewById<RelativeLayout>(Resource.Id.mainLayout) ?? throw new NullReferenceException(); ;
+            _popup?.Dispose();
             relativeLayout.AddView(_popup = CreatePopup());
             _mapControl.Map.Layers.Clear();
             var sample = new MbTilesOverlaySample();
@@ -63,9 +64,13 @@ namespace Mapsui.Samples.Droid
             if (menu == null)
                 return false;
 
+#pragma warning disable IDISP001 // Dispose created.
             var rendererMenu = menu.AddSubMenu(nameof(SkiaRenderMode));
+#pragma warning restore IDISP001 // Dispose created.
+#pragma warning disable IDISP004 // Don't ignore created IDisposable.
             rendererMenu?.Add(SkiaRenderMode.Software.ToString());
             rendererMenu?.Add(SkiaRenderMode.Hardware.ToString());
+#pragma warning restore IDISP004 // Don't ignore created IDisposable.
 
             var categories = AllSamples.GetSamples()?.Select(s => s.Category).Distinct().OrderBy(c => c);
             if (categories == null)
@@ -73,7 +78,9 @@ namespace Mapsui.Samples.Droid
 
             foreach (var category in categories)
             {
+#pragma warning disable IDISP001 // Dispose created.
                 var submenu = menu.AddSubMenu(category);
+#pragma warning restore IDISP001 // Dispose created.
 
                 var allSamples = AllSamples.GetSamples()?.Where(s => s.Category == category);
                 if (allSamples == null)
@@ -81,7 +88,9 @@ namespace Mapsui.Samples.Droid
 
                 foreach (var sample in allSamples)
                 {
+#pragma warning disable IDISP004 // Don't ignore created IDisposable.
                     submenu?.Add(sample.Name);
+#pragma warning restore IDISP004 // Don't ignore created IDisposable.
                 }
             }
             return true;
@@ -126,6 +135,19 @@ namespace Mapsui.Samples.Droid
             return base.OnOptionsItemSelected(item);
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _popup?.Dispose();
+                _popup = null;
+                _textView?.Dispose();
+                _textView = null;
+            }
+
+            base.Dispose(disposing);
+        }
+
         private LinearLayout CreatePopup()
         {
             var linearLayout = new LinearLayout(this);
@@ -138,6 +160,7 @@ namespace Mapsui.Samples.Droid
 
         private TextView CreateTextView()
         {
+            _textView?.Dispose();
             _textView = new TextView(this)
             {
                 TextSize = 16,

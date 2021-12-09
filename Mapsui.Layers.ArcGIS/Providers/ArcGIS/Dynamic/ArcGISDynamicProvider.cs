@@ -99,8 +99,9 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             var features = new List<RasterFeature>();
 
             IViewport? viewport = fetchInfo.ToViewport();
-
+#pragma warning disable IDISP001
             if (viewport != null && TryGetMap(viewport, out var raster))
+#pragma warning restore IDISP001                
             {
                 features.Add(new RasterFeature(raster));
             }
@@ -151,15 +152,18 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
 
             var uri = new Uri(GetRequestUrl(viewport.Extent, width, height));
             var handler = new HttpClientHandler { Credentials = Credentials ?? CredentialCache.DefaultCredentials };
-            var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(_timeOut) };
+            using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(_timeOut) };
 
             try
             {
-                var response = client.GetAsync(uri).Result;
-                var bytes = BruTile.Utilities.ReadFully(response.Content.ReadAsStreamAsync().Result);
+                using var response = client.GetAsync(uri).Result;
+                using var readAsStreamAsync = response.Content.ReadAsStreamAsync();
+                var bytes = BruTile.Utilities.ReadFully(readAsStreamAsync.Result);
                 if (viewport.Extent != null)
                 {
+#pragma warning disable IDISP004                    
                     raster = new MRaster(new MemoryStream(bytes), viewport.Extent);
+#pragma warning restore IDISP004                    
                     response.Dispose();
                     return true;
                 }

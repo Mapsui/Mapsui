@@ -15,6 +15,7 @@
 // along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Mapsui.Fetcher;
@@ -26,7 +27,7 @@ namespace Mapsui.Layers
     /// <summary>
     /// Interface for map layers
     /// </summary>
-    public interface ILayer : INotifyPropertyChanged
+    public interface ILayer : INotifyPropertyChanged, IDisposable
     {
         /// <summary>
         /// Numerical Id of layer

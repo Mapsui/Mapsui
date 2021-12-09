@@ -146,7 +146,9 @@ namespace Mapsui.Layers
                 foreach (var key in feature.RenderedGeometry.Keys)
                 {
                     var disposable = feature.RenderedGeometry[key] as IDisposable;
+#pragma warning disable IDISP007
                     disposable?.Dispose();
+#pragma warning restore IDISP007
                 }
             }
         }

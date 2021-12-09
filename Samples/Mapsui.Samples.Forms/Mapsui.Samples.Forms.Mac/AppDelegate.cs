@@ -12,7 +12,7 @@ namespace Mapsui.Samples.Forms.Mac
     [Register("AppDelegate")]
     public class AppDelegate : FormsApplicationDelegate
     {
-        NSWindow window;
+        readonly NSWindow window;
 
         public AppDelegate()
         {
@@ -43,6 +43,15 @@ namespace Mapsui.Samples.Forms.Mac
         public override void WillTerminate(NSNotification notification)
         {
             // Insert code here to tear down your application
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            if (disposing)
+            {
+                window.Dispose();
+            }
         }
 
         private static string MbTilesLocationOnMac => Environment.GetFolderPath(Environment.SpecialFolder.Personal);

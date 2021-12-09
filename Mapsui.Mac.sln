@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30323.103
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui", "Mapsui\Mapsui.csproj", "{D74C052A-C07E-4B37-A898-134218ACA5C9}"
 EndProject
@@ -17,8 +17,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Geometries", "Mapsui
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{08F7A74F-3AAF-4A0F-8E64-ADE4BCC4AA6F}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
 		LICENSE.md = LICENSE.md
 		Mapsui.sln.DotSettings = Mapsui.sln.DotSettings
 		README.md = README.md
@@ -905,8 +907,8 @@ Global
 		{53A4E033-F814-46CC-8105-DAC289524455}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{53A4E033-F814-46CC-8105-DAC289524455}.Debug|iPhoneSimulator.ActiveCfg = Debug|x86
 		{53A4E033-F814-46CC-8105-DAC289524455}.Debug|iPhoneSimulator.Build.0 = Debug|x86
-		{53A4E033-F814-46CC-8105-DAC289524455}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{53A4E033-F814-46CC-8105-DAC289524455}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{53A4E033-F814-46CC-8105-DAC289524455}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{53A4E033-F814-46CC-8105-DAC289524455}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{53A4E033-F814-46CC-8105-DAC289524455}.Debug|x64.ActiveCfg = Debug|x64
 		{53A4E033-F814-46CC-8105-DAC289524455}.Debug|x64.Build.0 = Debug|x64
 		{53A4E033-F814-46CC-8105-DAC289524455}.Debug|x86.ActiveCfg = Debug|x86
