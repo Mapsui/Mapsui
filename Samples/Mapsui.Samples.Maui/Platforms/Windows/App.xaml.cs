@@ -6,7 +6,7 @@ using Microsoft.Maui.Hosting;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-[assembly: SupportedOSPlatform("windows10.0.19041.0")]
+[assembly: SupportedOSPlatform("windows10.0.18362")]
 
 namespace Mapsui.Samples.Maui.WinUI
 {
@@ -24,6 +24,7 @@ namespace Mapsui.Samples.Maui.WinUI
             this.InitializeComponent();
         }
 
+        [SupportedOSPlatform("windows10.0.18362")]
         protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
 
         protected override void OnLaunched(LaunchActivatedEventArgs args)

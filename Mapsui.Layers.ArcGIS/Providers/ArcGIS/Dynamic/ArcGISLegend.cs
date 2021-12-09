@@ -51,7 +51,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
         public ArcGISLegendResponse? GetLegendInfo(string serviceUrl, ICredentials? credentials = null)
         {
             _webRequest = CreateRequest(serviceUrl, credentials);
-            var response = _webRequest.GetSyncResponse(_timeOut);
+            using var response = _webRequest.GetSyncResponse(_timeOut);
             _legendResponse = GetLegendResponseFromWebresponse(response);
             return _legendResponse;
         }
@@ -73,9 +73,9 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
         {
             try
             {
-                var response = _webRequest.GetSyncResponse(_timeOut);
+                using var response = _webRequest.GetSyncResponse(_timeOut);
                 _legendResponse = GetLegendResponseFromWebresponse(response);
-                _webRequest?.EndGetResponse(result);
+                using var _ = _webRequest?.EndGetResponse(result);
 
                 if (_legendResponse == null)
                     OnLegendFailed();
@@ -91,24 +91,22 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
 
         private static ArcGISLegendResponse? GetLegendResponseFromWebresponse(WebResponse? webResponse)
         {
-            var dataStream = webResponse?.GetResponseStream();
+            using var dataStream = webResponse?.GetResponseStream();
 
             if (dataStream != null)
             {
-                var sReader = new System.IO.StreamReader(dataStream);
+                using var sReader = new System.IO.StreamReader(dataStream);
                 var jsonString = sReader.ReadToEnd();
 
                 var serializer = new JsonSerializer();
                 var jToken = JObject.Parse(jsonString);
-                var legendResponse = serializer.Deserialize(new JTokenReader(jToken), typeof(ArcGISLegendResponse)) as ArcGISLegendResponse;
+                using var jTokenReader = new JTokenReader(jToken);
+                var legendResponse = serializer.Deserialize(jTokenReader, typeof(ArcGISLegendResponse)) as ArcGISLegendResponse;
 
                 dataStream.Dispose();
-                webResponse?.Dispose();
 
                 return legendResponse;
             }
-
-            webResponse?.Dispose();
 
             return null;
         }

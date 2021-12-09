@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Mapsui
 {
-    public class MRaster : MRect
+    public class MRaster : MRect, IDisposable
     {
         public MRaster(MRaster raster) : base(raster.Min.X, raster.Min.Y, raster.Max.X, raster.Max.Y)
         {
@@ -19,5 +19,21 @@ namespace Mapsui
 
         public MemoryStream Data { get; }
         public long TickFetched { get; }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+#pragma warning disable IDISP007
+                Data.Dispose();
+#pragma warning restore IDISP007
+            }
+        }
     }
 }

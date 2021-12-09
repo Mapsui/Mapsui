@@ -56,7 +56,7 @@ namespace Mapsui.UI.WinUI
 namespace Mapsui.UI.Uwp
 #endif
 {
-    public partial class MapControl : Grid, IMapControl
+    public partial class MapControl : Grid, IMapControl, IDisposable
     {
         private readonly Rectangle _selectRectangle = CreateSelectRectangle();
         private readonly SKXamlCanvas _canvas = CreateRenderTarget();
@@ -287,5 +287,38 @@ namespace Mapsui.UI.Uwp
 #endif
         }
 
+#if __ANDROID__ 
+        protected override void Dispose(bool disposing)
+#elif __IOS__ || __MACOS__
+        protected new virtual void Dispose(bool disposing)
+#else
+        protected virtual void Dispose(bool disposing)
+#endif
+        {
+            if (disposing)
+            {
+                _map?.Dispose();
+            }
+
+#pragma warning disable IDISP023 // Don't use reference types in finalizer context.
+            CommonDispose(disposing);
+#pragma warning restore IDISP023 // Don't use reference types in finalizer context.
+
+#if __ANDROID__ || __IOS__ || __MACOS__
+            base.Dispose(disposing);
+#endif
+        }
+
+#if !(__ANDROID__ )
+#if __IOS__ || __MACOS__ || NETSTANDARD
+        public new void Dispose()
+#else 
+        public void Dispose()
+#endif
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+#endif
     }
 }

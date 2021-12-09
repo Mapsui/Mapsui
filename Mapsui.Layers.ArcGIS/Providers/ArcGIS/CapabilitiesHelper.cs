@@ -97,8 +97,8 @@ namespace Mapsui.Providers.ArcGIS
                     requestUri = $"{requestUri}&token={token}";
 
                 var handler = new HttpClientHandler { Credentials = credentials ?? CredentialCache.DefaultCredentials };
-                var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
-                var response = await client.GetAsync(requestUri);
+                using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
+                using var response = await client.GetAsync(requestUri);
 
                 if (!response.IsSuccessStatusCode)
                 {
@@ -162,7 +162,9 @@ namespace Mapsui.Providers.ArcGIS
                 count = inputStream.Read(buffer, 0, readSize);
             }
             ms.Position = 0;
+#pragma warning disable IDISP007
             inputStream.Dispose();
+#pragma warning restore IDISP007
             return ms;
         }
 

@@ -29,7 +29,7 @@ using Mapsui.Providers.Shapefile.Indexing;
 
 namespace Mapsui.Providers.Shapefile
 {
-    internal class DbaseReader : IDisposable
+    internal sealed class DbaseReader : IDisposable
     {
         private struct DbaseField
         {

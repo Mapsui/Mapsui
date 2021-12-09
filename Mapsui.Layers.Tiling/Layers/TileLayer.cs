@@ -34,7 +34,7 @@ namespace Mapsui.Layers
     /// <summary>
     /// Layer, which displays a map consisting of individual tiles
     /// </summary>
-    public class TileLayer : BaseLayer, IAsyncDataFetcher
+    public sealed class TileLayer : BaseLayer, IAsyncDataFetcher, IDisposable
     {
         private readonly ITileSource _tileSource;
         private readonly IRenderFetchStrategy _renderFetchStrategy;
@@ -123,6 +123,16 @@ namespace Mapsui.Layers
             }
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                MemoryCache.Dispose();
+            }
+
+            base.Dispose(disposing);
+        }
+
         private void TileFetchDispatcherOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             if (propertyChangedEventArgs.PropertyName == nameof(Busy))
@@ -149,7 +159,9 @@ namespace Mapsui.Layers
         private RasterFeature? ToFeature(TileInfo tileInfo)
         {
             var tileData = _tileSource.GetTile(tileInfo);
+#pragma warning disable IDISP001
             var mRaster = ToRaster(tileInfo, tileData);
+#pragma warning restore IDISP001
             if (mRaster != null)
                 return new RasterFeature(mRaster);
 
@@ -167,8 +179,9 @@ namespace Mapsui.Layers
             // TileLayer.GetFeatureInView will have to return only the non null geometries.
 
             if (tileData == null) return null;
-
+#pragma warning disable IDISP004
             return new MRaster(new MemoryStream(tileData), tileInfo.Extent.ToMRect());
+#pragma warning restore IDISP004           
         }
     }
 }

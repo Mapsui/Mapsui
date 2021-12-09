@@ -55,14 +55,16 @@ namespace Mapsui.Samples.Common.Maps.Callouts
         {
             const string path = "Mapsui.Samples.Common.EmbeddedResources.congo.json";
             var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
-            var stream = assembly.GetManifestResourceStream(path) ?? throw new NullReferenceException();
+            using var stream = assembly.GetManifestResourceStream(path) ?? throw new NullReferenceException();
             var cities = DeserializeFromStream<City>(stream);
 
             return cities.Select(c => {
                 var feature = new PointFeature(SphericalMercator.FromLonLat(c.Lng, c.Lat).ToMPoint());
                 feature["name"] = c.Name;
                 feature["country"] = c.Country;
+#pragma warning disable IDISP001                
                 var callbackImage = CreateCallbackImage(c);
+#pragma warning restore IDISP001                
                 var bitmapId = BitmapRegistry.Instance.Register(callbackImage);
                 var calloutStyle = CreateCalloutStyle(bitmapId);
                 feature.Styles.Add(calloutStyle);

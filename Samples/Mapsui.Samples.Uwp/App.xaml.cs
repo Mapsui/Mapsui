@@ -45,7 +45,9 @@ namespace Mapsui.Samples.Uwp
             if (rootFrame == null)
             {
                 // Create a Frame to act as the navigation context and navigate to the first page
+#pragma warning disable IDISP001
                 rootFrame = new Frame();
+#pragma warning restore IDISP001
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 

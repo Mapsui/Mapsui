@@ -103,28 +103,34 @@ namespace Mapsui.Samples.Forms.Shared
                     var resourceName = "Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg";
                     var stream = assembly.GetManifestResourceStream(resourceName);
                     if (stream == null) throw new Exception($"Could not find EmbeddedResource {resourceName}");
-                    var reader = new StreamReader(stream);
-                    string svgString = reader.ReadToEnd();
-                    mapView.Pins.Add(new Pin(mapView)
+                    using (var reader = new StreamReader(stream))
                     {
-                        Label = $"PinType.Svg {_markerNum++}",
-                        Position = mapClickedArgs.Point,
-                        Type = PinType.Svg,
-                        Scale = 0.1f,
-                        RotateWithMap = true,
-                        Svg = svgString
-                    });
+                        string svgString = reader.ReadToEnd();
+                        mapView.Pins.Add(new Pin(mapView)
+                        {
+                            Label = $"PinType.Svg {_markerNum++}",
+                            Position = mapClickedArgs.Point,
+                            Type = PinType.Svg,
+                            Scale = 0.1f,
+                            RotateWithMap = true,
+                            Svg = svgString
+                        });
+                    }
+
                     break;
                 case 3:
-                    var icon = assembly.GetManifestResourceStream("Mapsui.Samples.Common.Images.loc.png").ToBytes();
-                    mapView.Pins.Add(new Pin(mapView)
+                    using (var manifestResourceStream = assembly.GetManifestResourceStream("Mapsui.Samples.Common.Images.loc.png"))
                     {
-                        Label = $"PinType.Icon {_markerNum++}",
-                        Position = mapClickedArgs.Point,
-                        Type = PinType.Icon,
-                        Scale = 0.5f,
-                        Icon = icon
-                    });
+                        var icon = manifestResourceStream!.ToBytes();
+                        mapView.Pins.Add(new Pin(mapView)
+                        {
+                            Label = $"PinType.Icon {_markerNum++}",
+                            Position = mapClickedArgs.Point,
+                            Type = PinType.Icon,
+                            Scale = 0.5f,
+                            Icon = icon
+                        });
+                    }
                     break;
             }
 

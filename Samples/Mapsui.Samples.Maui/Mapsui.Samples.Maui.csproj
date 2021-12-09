@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<!--<TargetFrameworks>net6.0-android;net6.0-ios;net6.0-maccatalyst</TargetFrameworks>-->
+		<TargetFrameworks>net6.0-android;net6.0-ios;net6.0-maccatalyst</TargetFrameworks>
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows')) and '$(MSBuildRuntimeType)' == 'Full'">$(TargetFrameworks);net6.0-windows10.0.19041</TargetFrameworks>
 		<OutputType>Exe</OutputType>
 		<RootNamespace>Mapsui.Samples.Maui</RootNamespace>
@@ -28,21 +28,27 @@
 		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-android'">21.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('-windows'))">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$(TargetFramework.Contains('-windows'))">10.0.17763.0</TargetPlatformMinVersion>
-	</PropertyGroup>
 
-	<ItemGroup>
-    <!-- App Icon -->
-    <BundleResource Include="Resources\appicon.svg" ForegroundFile="Resources\appiconfg.svg" IsAppIcon="true" Color="#512BD4" />
+        <!-- Don't display nuget warnings -->
+        <NoWarn>NU1703</NoWarn>
+    </PropertyGroup>
 
-    <!-- Splash Screen -->
-    <BundleResource Include="Resources\appiconfg.svg" Color="#512BD4" />
+    <ItemGroup>
+      <!-- App Icon -->
+      <MauiIcon
+        Include="Resources\appicon.svg"
+        ForegroundFile="Resources\appiconfg.svg"
+        Color="#512BD4" />
 
-		<!-- Images -->
-		<MauiImage Include="Resources\Images\*" />
+        <!-- Splash Screen -->
+        <MauiSplashScreen Include="Resources\appiconfg.svg" Color="#512BD4" />
 
-		<!-- Custom Fonts -->
-		<MauiFont Include="Resources\Fonts\*" />
-	</ItemGroup>
+        <!-- Images -->
+        <MauiImage Include="Resources\Images\*" />
+
+        <!-- Custom Fonts -->
+        <MauiFont Include="Resources\Fonts\*" />
+    </ItemGroup>
 
 	<ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
 		<!-- Required - WinUI does not yet have buildTransitive for everything -->
@@ -50,20 +56,7 @@
 		<PackageReference Include="Microsoft.Graphics.Win2D" Version="1.0.0.29-preview3" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <MauiFont Remove="Resources\Fonts\OpenSansRegular.ttf" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiImage Remove="Resources\Images\dotnet_bot.svg" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <AndroidResource Include="Resources\Fonts\OpenSansRegular.ttf" />
-	  <AndroidResource Include="Resources\Images\dotnet_bot.svg" />
-	</ItemGroup>	
-
-	<ItemGroup>
+  <ItemGroup>
     <PackageReference Include="SkiaSharp" Version="2.88.0-preview.155" />
     <PackageReference Include="SkiaSharp.HarfBuzz" Version="2.88.0-preview.155" />
     <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.0-preview.155" />
@@ -79,14 +72,6 @@
 	  <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\PolygonSample.cs" Link="PolygonSample.cs" />
 	  <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\PolylineSample.cs" Link="PolylineSample.cs" />
 	  <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\SnapshotSample.cs" Link="SnapshotSample.cs" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<AndroidResource Include="Resources\appiconfg.svg" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<AndroidResource Include="Resources\appicon.svg" />
 	</ItemGroup>
 
   <ItemGroup>	  
