@@ -33,7 +33,7 @@ namespace Mapsui.Samples.Common.Maps.Projection
             // the Map CRS.
 
             var geometryLayer = CreateWgs84Layer();
-            var extent = geometryLayer.Extent?.Grow(10000);
+            var extent = geometryLayer.Extent!.Grow(10000);
             var map = new Map
             {
                 CRS = "EPSG:3857", // The Map CRS needs to be set
@@ -41,8 +41,7 @@ namespace Mapsui.Samples.Common.Maps.Projection
             };
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(geometryLayer);
-            if (extent != null)
-                map.Home = n => n.NavigateTo(extent);
+            map.Home = n => n.NavigateTo(extent);
             return map;
         }
 
