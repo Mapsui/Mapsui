@@ -1,6 +1,10 @@
 version: '{build}'
 image: Visual Studio 2022
 
+branches:
+  only:
+    - master
+
 only_commits:
   files:
     - docfx/**/*
