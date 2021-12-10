@@ -25,15 +25,12 @@
 	  <Compile Include="$(MSBuildThisFileDirectory)/InitProperty.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(OS)' == 'Unix'">
+  <ItemGroup>
     <!--Specify Compiler for Mac Builds-->
     <PackageReference Include="Microsoft.Net.Compilers.Toolset" Version="4.0.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-  </ItemGroup>
-  
-  <ItemGroup>
     <!--Disposable Analyzer-->
     <PackageReference Include="IDisposableAnalyzers" Version="3.4.15">
         <PrivateAssets>all</PrivateAssets>
