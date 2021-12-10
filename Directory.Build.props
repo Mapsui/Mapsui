@@ -16,7 +16,7 @@
   <PropertyGroup>
 	  <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
 	  <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-	  <LangVersion>9.0</LangVersion>
+	  <LangVersion>10.0</LangVersion>
 	  <Nullable>enable</Nullable>
   </PropertyGroup>
 
@@ -31,10 +31,13 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+  
+  <ItemGroup>
     <!--Disposable Analyzer-->
     <PackageReference Include="IDisposableAnalyzers" Version="3.4.15">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
 
