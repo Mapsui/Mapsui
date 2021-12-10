@@ -80,13 +80,13 @@ namespace Mapsui.Utilities
         /// Update more than one AnimationEntry and check, if a redraw is needed
         /// </summary>
         /// <returns>True, if a redraw of the screen ist needed</returns>
-        public static bool UpdateAnimations(IEnumerable<AnimationEntry> entries, long ticks, bool callFinal = true)
+        public static bool Update(IEnumerable<AnimationEntry> entries, long ticks, bool callFinal = true)
         {
             bool isRunning = false;
             var copiedEntries = entries.ToList();
 
             foreach (var entry in copiedEntries)
-                isRunning |= UpdateAnimation(entry, ticks, callFinal);
+                isRunning |= Update(entry, ticks, callFinal);
 
             return isRunning;
         }
@@ -95,7 +95,7 @@ namespace Mapsui.Utilities
         /// Update AnimationEntry and check, if a redraw is needed
         /// </summary>
         /// <returns>True, if a redraw of the screen ist needed</returns>
-        public static bool UpdateAnimation(AnimationEntry entry, long ticks, bool callFinal = true)
+        public static bool Update(AnimationEntry entry, long ticks, bool callFinal = true)
         {
             if (entry == null)
                 return false;

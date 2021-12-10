@@ -39,7 +39,7 @@ namespace Mapsui.Samples.Common.Maps
                 }
             }
 
-            result |= Animation.UpdateAnimations(_animations, ticks);
+            result |= Animation.Update(_animations, ticks);
 
             return result;
         }
@@ -53,7 +53,7 @@ namespace Mapsui.Samples.Common.Maps
 
         public bool UpdateAnimations(long ticks)
         {
-            return Animation.UpdateAnimations(_animations, ticks);
+            return Animation.Update(_animations, ticks);
         }
 
         public List<AnimationEntry> Animations => _animations;

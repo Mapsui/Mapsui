@@ -60,8 +60,7 @@ namespace Mapsui
         /// <param name="easing">The type of easing function used to transform from begin tot end state</param>
         public void NavigateToFullEnvelope(ScaleMethod scaleMethod = ScaleMethod.Fill, long duration = -1, Easing? easing = default)
         {
-            if (_map.Extent != null)
-                NavigateTo(_map.Extent, scaleMethod, duration, easing);
+            NavigateTo(_map.Extent, scaleMethod, duration, easing);
         }
 
         /// <summary>
@@ -672,7 +671,7 @@ namespace Mapsui
                 return false;
             }
 
-            return Animation.UpdateAnimations(_animations, ticks, true);
+            return Animation.Update(_animations, ticks, true);
         }
 
         public void Dispose()
