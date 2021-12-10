@@ -42,6 +42,12 @@ jobs:
       run: dotnet tool install -g Redth.Net.Maui.Check
     - name: Restore dependencies
       run: nuget restore Mapsui.Mac.sln
+    - name: Build Mapsui.Core
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Core/Mapsui.Core.csproj
+    - name: Build Mapsui.Layers.Tiling
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Layers.Tiling/Mapsui.Layers.Tiling.csproj
+    - name: Build Mapsui.Layers.ArcGIS
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Layers.ArcGIS/Mapsui.Layers.ArcGIS.csproj
     - name: Build Mapsui
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui/Mapsui.csproj
     - name: Build Mapsui.Rendering.Skia
@@ -92,6 +98,12 @@ jobs:
       run: maui-check --fix --non-interactive --skip vswin --skip edgewebview2 --skip androidemulator
     - name: Restore dependencies
       run: nuget restore Mapsui.sln
+    - name: Build Mapsui.Core
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Core/Mapsui.Core.csproj
+    - name: Build Mapsui.Layers.Tiling
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Layers.Tiling/Mapsui.Layers.Tiling.csproj
+    - name: Build Mapsui.Layers.ArcGIS
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Layers.ArcGIS/Mapsui.Layers.ArcGIS.csproj
     - name: Build Mapsui
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui/Mapsui.csproj
     - name: Build Mapsui.Rendering.Skia
