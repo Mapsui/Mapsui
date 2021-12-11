@@ -100,8 +100,9 @@ namespace Mapsui.Providers.ArcGIS.Image
             var features = new List<RasterFeature>();
 
             var viewport = fetchInfo.ToViewport();
-
+#pragma warning disable IDISP001
             if (viewport != null && TryGetMap(viewport, out var raster))
+#pragma warning restore IDISP001                
             {
                 features.Add(new RasterFeature(raster));
             }
@@ -110,6 +111,7 @@ namespace Mapsui.Providers.ArcGIS.Image
 
         public bool TryGetMap(IViewport viewport, [NotNullWhen(true)] out MRaster? raster)
         {
+            raster = null;
             int width;
             int height;
 
@@ -127,11 +129,12 @@ namespace Mapsui.Providers.ArcGIS.Image
 
             var uri = new Uri(GetRequestUrl(viewport.Extent, width, height));
             var handler = new HttpClientHandler { Credentials = Credentials ?? CredentialCache.DefaultCredentials };
-            var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(_timeOut) };
+            using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(_timeOut) };
 
             try
             {
-                var response = client.GetAsync(uri).Result;
+                using var task = client.GetAsync(uri);
+                using var response = task.Result;
                 using (var dataStream = response.Content.ReadAsStreamAsync().Result)
                 {
                     try
@@ -139,7 +142,9 @@ namespace Mapsui.Providers.ArcGIS.Image
                         var bytes = BruTile.Utilities.ReadFully(dataStream);
                         if (viewport.Extent != null)
                         {
+#pragma warning disable IDISP004
                             raster = new MRaster(new MemoryStream(bytes), viewport.Extent);
+#pragma warning restore IDISP004                            
                         }
                         else
                         {
@@ -150,6 +155,7 @@ namespace Mapsui.Providers.ArcGIS.Image
                     catch (Exception ex)
                     {
                         Logger.Log(LogLevel.Error, ex.Message, ex);
+                        raster?.Dispose();
                         raster = null;
                         return false;
                     }

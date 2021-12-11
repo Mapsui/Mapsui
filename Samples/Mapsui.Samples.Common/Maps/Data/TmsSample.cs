@@ -32,7 +32,9 @@ namespace Mapsui.Samples.Common.Maps
 
             tileLayer.Attribution.Text = "© OpenStreetMap contributors (via openbasiskaart.nl)";
             tileLayer.Attribution.Url = "https://www.openstreetmap.org/copyright";
+#pragma warning disable IDISP005            
             return tileLayer;
+#pragma warning restore IDISP005            
         }
     }
 }

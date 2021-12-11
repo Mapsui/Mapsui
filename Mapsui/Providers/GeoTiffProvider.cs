@@ -13,7 +13,7 @@ using Color = System.Drawing.Color;
 
 namespace Mapsui.Providers
 {
-    public class GeoTiffProvider : IProvider<IFeature>
+    public sealed class GeoTiffProvider : IProvider<IFeature>
     {
         private struct TiffProperties
         {

@@ -15,6 +15,8 @@
 // along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
+#pragma warning disable IDISP025
+
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -34,7 +36,7 @@ namespace Mapsui
     /// <remarks>
     /// Map holds all map related infos like the target CRS, layers, widgets and so on.
     /// </remarks>
-    public class Map : INotifyPropertyChanged, IMap
+    public class Map : INotifyPropertyChanged, IMap, IDisposable
     {
         private LayerCollection _layers = new();
         private Color _backColor = Color.White;
@@ -320,6 +322,17 @@ namespace Mapsui
             if (mapInfoEventArgs == null) return;
 
             Info?.Invoke(this, mapInfoEventArgs);
+        }
+
+        public void Dispose()
+        {
+            foreach (var layer in this.Layers)
+            {
+                if (layer is IDisposable disposable)
+                {
+                    disposable.Dispose();
+                }
+            }
         }
     }
 }

@@ -98,7 +98,7 @@ namespace Mapsui.Geometries.WellKnownText
         public static Geometry Parse(string wellKnownText)
         {
             // throws a parsing exception is there is a problem.
-            var reader = new StringReader(wellKnownText);
+            using var reader = new StringReader(wellKnownText);
             return Parse(reader);
         }
 

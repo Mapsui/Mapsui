@@ -1,5 +1,4 @@
-﻿using Mapsui.GeometryLayer;
-using Mapsui.Layers;
+﻿using Mapsui.Layers;
 using Mapsui.Layers.Tiling;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Desktop.GeoData;
@@ -14,6 +13,7 @@ namespace Mapsui.Samples.Common.Maps.Projection
         public string Name => "Point projection";
         public string Category => "Projection";
 
+        #region projectionsample
         public void Setup(IMapControl mapControl)
         {
             mapControl.Map = CreateMap();
@@ -28,7 +28,7 @@ namespace Mapsui.Samples.Common.Maps.Projection
             // the Map CRS.
 
             var geometryLayer = CreateWorldCitiesLayer();
-            var extent = geometryLayer.Extent?.Grow(10000);
+            var extent = geometryLayer.Extent!.Grow(10000);
             var map = new Map
             {
                 CRS = "EPSG:3857", // The Map CRS needs to be set
@@ -76,5 +76,6 @@ namespace Mapsui.Samples.Common.Maps.Projection
                 Opacity = 0.5f
             };
         }
+        #endregion
     }
 }

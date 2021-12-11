@@ -27,8 +27,18 @@ using Mapsui.Providers;
 
 namespace Mapsui.Layers
 {
-    public class ImageLayer : BaseLayer, IAsyncDataFetcher
+    public class ImageLayer : BaseLayer, IAsyncDataFetcher, IDisposable
     {
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                this._startFetchTimer.Dispose();
+            }
+
+            base.Dispose(disposing);
+        }
+
         private class FeatureSets
         {
             public long TimeRequested { get; set; }
@@ -67,7 +77,7 @@ namespace Mapsui.Layers
             PropertyChanged += OnPropertyChanged;
         }
 
-        protected void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(DataSource))
             {

@@ -11,6 +11,7 @@ using Mapsui.Rendering.Skia;
 using Mapsui.Utilities;
 using Mapsui.Widgets;
 
+#pragma warning disable IDISP008
 #nullable enable
 
 #if __MAUI__
@@ -31,7 +32,7 @@ namespace Mapsui.UI.Avalonia
 namespace Mapsui.UI.Wpf
 #endif
 {
-    public partial class MapControl : INotifyPropertyChanged
+    public partial class MapControl : INotifyPropertyChanged, IDisposable
     {
         private Map? _map;
         private double _unSnapRotationDegrees;
@@ -53,6 +54,7 @@ namespace Mapsui.UI.Wpf
             // Create map
             Map = new Map();
             // Create timer for invalidating the control
+            _invalidateTimer?.Dispose();
             _invalidateTimer = new System.Threading.Timer(InvalidateTimerCallback, null, System.Threading.Timeout.Infinite, 16);
             // Start the invalidation timer
             StartUpdates(false);
@@ -258,7 +260,9 @@ namespace Mapsui.UI.Wpf
                 if (_navigator != null)
                 {
                     _navigator.Navigated -= Navigated;
+#pragma warning disable IDISP007 // Don't dispose injected.
                     _navigator.Dispose();
+#pragma warning restore IDISP007 // Don't dispose injected.
                 }
                 _navigator = value ?? throw new ArgumentException($"{nameof(Navigator)} can not be null");
                 _navigator.Navigated += Navigated;
@@ -628,7 +632,9 @@ namespace Mapsui.UI.Wpf
             if (disposing)
             {
                 Unsubscribe();
+#pragma warning disable IDISP007 // Don't dispose injected.
                 Navigator?.Dispose();
+#pragma warning restore IDISP007 // Don't dispose injected.
                 StopUpdates();
                 _invalidateTimer?.Dispose();
             }

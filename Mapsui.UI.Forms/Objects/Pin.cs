@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -29,7 +30,7 @@ namespace Mapsui.UI.Maui
 namespace Mapsui.UI.Forms
 #endif
 {
-    public class Pin : BindableObject, IFeatureProvider
+    public class Pin : BindableObject, IFeatureProvider, IDisposable
     {
         // Cache for used bitmaps
         private static readonly Dictionary<string, int> _bitmapIds = new Dictionary<string, int>();
@@ -90,6 +91,7 @@ namespace Mapsui.UI.Forms
                         _mapView?.RemoveCallout(_callout);
                     }
 
+                    Feature?.Dispose();
                     Feature = null;
                     _mapView = value;
 
@@ -568,6 +570,11 @@ namespace Mapsui.UI.Forms
                     });
                 }
             }
+        }
+
+        public void Dispose()
+        {
+            Feature?.Dispose();
         }
     }
 }

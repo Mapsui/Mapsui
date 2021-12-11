@@ -207,5 +207,18 @@ namespace Mapsui.Layers
         {
             DataChanged?.Invoke(this, args);
         }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
     }
 }

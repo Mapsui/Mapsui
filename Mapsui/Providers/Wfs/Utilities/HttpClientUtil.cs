@@ -13,7 +13,7 @@ namespace Mapsui.Providers.Wfs.Utilities
     /// <summary>
     /// This class provides an easy to use interface for HTTP-GET and HTTP-POST requests.
     /// </summary>
-    public class HttpClientUtil
+    public class HttpClientUtil : IDisposable
     {
 
         private readonly NameValueCollection _requestHeaders;
@@ -168,10 +168,14 @@ namespace Mapsui.Providers.Wfs.Utilities
                 var responseStream = _webResponse?.GetResponseStream();
                 responseStream?.Dispose();
                 _webResponse?.Close();
-
+                _webResponse?.Dispose();
                 _webResponse = null;
             }
         }
 
+        public void Dispose()
+        {
+            _webResponse?.Dispose();
+        }
     }
 }

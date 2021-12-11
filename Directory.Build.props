@@ -16,7 +16,7 @@
   <PropertyGroup>
 	  <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
 	  <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-	  <LangVersion>9.0</LangVersion>
+	  <LangVersion>10.0</LangVersion>
 	  <Nullable>enable</Nullable>
   </PropertyGroup>
 
@@ -25,11 +25,16 @@
 	  <Compile Include="$(MSBuildThisFileDirectory)/InitProperty.cs" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(OS)' == 'Unix'">
+  <ItemGroup>
     <!--Specify Compiler for Mac Builds-->
     <PackageReference Include="Microsoft.Net.Compilers.Toolset" Version="4.0.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <!--Disposable Analyzer-->
+    <PackageReference Include="IDisposableAnalyzers" Version="3.4.15">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
 

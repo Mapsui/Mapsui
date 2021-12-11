@@ -1,7 +1,6 @@
 ﻿using Mapsui.Layers.Tiling;
 using Mapsui.Projections;
 using Mapsui.UI;
-using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps.Navigation
 {
@@ -26,9 +25,10 @@ namespace Mapsui.Samples.Common.Maps.Navigation
             // Madagaskar is used. In such a scenario it makes sense to also limit
             // the top ZoomLimit.
 
-            map.Limiter.PanLimits = GetLimitsOfMadagaskar();
+            var extent = GetLimitsOfMadagaskar();
+            map.Limiter.PanLimits = extent;
             map.Limiter.ZoomLimits = new MinMax(0.15, 2500);
-            map.Home = n => n.NavigateTo(map.Limiter.PanLimits);
+            map.Home = n => n.NavigateTo(extent);
             return map;
         }
 

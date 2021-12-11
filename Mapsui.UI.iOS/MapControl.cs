@@ -50,6 +50,7 @@ namespace Mapsui.UI.iOS
             _canvas.PaintSurface += OnPaintSurface;
             AddSubview(_canvas);
 
+#pragma warning disable IDISP004 // Don't ignore created IDisposable.
             AddConstraints(new[]
             {
                 NSLayoutConstraint.Create(this, NSLayoutAttribute.Leading, NSLayoutRelation.Equal, _canvas,
@@ -61,23 +62,28 @@ namespace Mapsui.UI.iOS
                 NSLayoutConstraint.Create(this, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, _canvas,
                     NSLayoutAttribute.Bottom, 1.0f, 0.0f)
             });
+#pragma warning restore IDISP004 // Don't ignore created IDisposable.
 
             ClipsToBounds = true;
             MultipleTouchEnabled = true;
             UserInteractionEnabled = true;
 
+#pragma warning disable IDISP001 // Dispose created.
             var doubleTapGestureRecognizer = new UITapGestureRecognizer(OnDoubleTapped)
             {
                 NumberOfTapsRequired = 2,
                 CancelsTouchesInView = false,
             };
+#pragma warning restore IDISP001 // Dispose created.
             AddGestureRecognizer(doubleTapGestureRecognizer);
 
+#pragma warning disable IDISP001 // Dispose created.
             var tapGestureRecognizer = new UITapGestureRecognizer(OnSingleTapped)
             {
                 NumberOfTapsRequired = 1,
                 CancelsTouchesInView = false,
             };
+#pragma warning restore IDISP001 // Dispose created.
             tapGestureRecognizer.RequireGestureRecognizerToFail(doubleTapGestureRecognizer);
             AddGestureRecognizer(tapGestureRecognizer);
 
@@ -217,19 +223,35 @@ namespace Mapsui.UI.iOS
 
         public void OpenBrowser(string url)
         {
+#pragma warning disable IDISP004
             UIApplication.SharedApplication.OpenUrl(new NSUrl(url));
+#pragma warning restore IDISP004
         }
 
         public new void Dispose()
         {
-            Unsubscribe();
+            IosCommonDispose(true);
             base.Dispose();
         }
 
         protected override void Dispose(bool disposing)
         {
-            Unsubscribe();
+#pragma warning disable IDISP023 // Don't use reference types in finalizer context.
+            IosCommonDispose(disposing);
+#pragma warning restore IDISP023 // Don't use reference types in finalizer context.
             base.Dispose(disposing);
+        }
+
+        private void IosCommonDispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _map?.Dispose();
+                Unsubscribe();
+                _canvas?.Dispose();
+            }
+
+            CommonDispose(disposing);
         }
 
         private static (MPoint centre, double radius, double angle) GetPinchValues(List<MPoint> locations)

@@ -1,5 +1,9 @@
-version: 1.0.{build}
-image: Visual Studio 2019
+version: '{build}'
+image: Visual Studio 2022
+
+branches:
+  only:
+    - master
 
 only_commits:
   files:
