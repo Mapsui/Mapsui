@@ -60,7 +60,8 @@ namespace Mapsui.Rendering.Skia
             canvas.RotateDegrees(rotation);
             canvas.Translate((float)calloutStyle.Offset.X, (float)calloutStyle.Offset.Y);
 
-            canvas.DrawPicture(picture, new SKPaint() { IsAntialias = true });
+            using var skPaint = new SKPaint() { IsAntialias = true };
+            canvas.DrawPicture(picture, skPaint);
 
             canvas.Restore();
         }
@@ -158,9 +159,9 @@ namespace Mapsui.Rendering.Skia
 
         private static void DrawCallout(CalloutStyle callout, SKCanvas canvas, SKPath path)
         {
-            var shadow = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Stroke, StrokeWidth = 1.5f, Color = SKColors.Gray, MaskFilter = SKMaskFilter.CreateBlur(SKBlurStyle.Normal, callout.ShadowWidth) };
-            var fill = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Fill, Color = callout.BackgroundColor.ToSkia() };
-            var stroke = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Stroke, Color = callout.Color.ToSkia(), StrokeWidth = callout.StrokeWidth };
+            using var shadow = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Stroke, StrokeWidth = 1.5f, Color = SKColors.Gray, MaskFilter = SKMaskFilter.CreateBlur(SKBlurStyle.Normal, callout.ShadowWidth) };
+            using var fill = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Fill, Color = callout.BackgroundColor.ToSkia() };
+            using var stroke = new SKPaint { IsAntialias = true, Style = SKPaintStyle.Stroke, Color = callout.Color.ToSkia(), StrokeWidth = callout.StrokeWidth };
 
             canvas.DrawPath(path, shadow);
             canvas.DrawPath(path, fill);

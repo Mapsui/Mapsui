@@ -1,10 +1,11 @@
-﻿using Mapsui.Widgets;
+﻿using System;
+using Mapsui.Widgets;
 using Mapsui.Widgets.PerformanceWidget;
 using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia.SkiaWidgets
 {
-    public class PerformanceWidgetRenderer : ISkiaWidgetRenderer
+    public class PerformanceWidgetRenderer : ISkiaWidgetRenderer, IDisposable
     {
         private readonly SKPaint _textPaint;
         private readonly SKPaint _backgroundPaint;
@@ -64,6 +65,12 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
             }
 
             widget.Envelope = _envelope;
+        }
+
+        public void Dispose()
+        {
+            _textPaint.Dispose();
+            _backgroundPaint.Dispose();
         }
     }
 }

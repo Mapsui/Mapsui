@@ -69,7 +69,9 @@ namespace Mapsui.Providers.Shapefile
 
         public void Open()
         {
+            _fs?.Dispose();
             _fs = new FileStream(_filename, FileMode.Open, FileAccess.Read);
+            _br?.Dispose();
             _br = new BinaryReader(_fs);
             _isOpen = true;
             if (!_headerIsParsed) ParseDbfHeader(); // Don't read the header if it's already parsed
@@ -86,7 +88,9 @@ namespace Mapsui.Providers.Shapefile
         {
             if (_isOpen)
                 Close();
+            _br?.Dispose();
             _br = null;
+            _fs?.Dispose();
             _fs = null;
         }
 
@@ -364,6 +368,7 @@ namespace Mapsui.Providers.Shapefile
         {
             var tab = new DataTable();
             // all of common, non "base-table" fields implemented
+#pragma warning disable IDISP004
             tab.Columns.Add("ColumnName", typeof(string));
             tab.Columns.Add("ColumnSize", typeof(int));
             tab.Columns.Add("ColumnOrdinal", typeof(int));
@@ -377,6 +382,7 @@ namespace Mapsui.Providers.Shapefile
             tab.Columns.Add("IsKey", typeof(bool));
             tab.Columns.Add("IsAutoIncrement", typeof(bool));
             tab.Columns.Add("IsLong", typeof(bool));
+#pragma warning restore IDISP004
 
             if (_dbaseColumns != null)
             {

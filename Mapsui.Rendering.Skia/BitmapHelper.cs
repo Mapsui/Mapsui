@@ -20,7 +20,9 @@ namespace Mapsui.Rendering.Skia
                 if (str.ToLower().Contains("<svg"))
                 {
                     var svg = new SKSvg();
+#pragma warning disable IDISP004
                     svg.FromSvg(str);
+#pragma warning restore IDISP004
 
                     return new BitmapInfo { Svg = svg };
                 }
@@ -31,12 +33,15 @@ namespace Mapsui.Rendering.Skia
                 if (stream.IsSvg())
                 {
                     var svg = new SKSvg();
+#pragma warning disable IDISP004
                     svg.Load(stream);
+#pragma warning restore IDISP004
 
                     return new BitmapInfo { Svg = svg };
                 }
 
-                var image = SKImage.FromEncodedData(SKData.CreateCopy(stream.ToBytes()));
+                using var skData = SKData.CreateCopy(stream.ToBytes());
+                var image = SKImage.FromEncodedData(skData);
                 return new BitmapInfo { Bitmap = image };
             }
 

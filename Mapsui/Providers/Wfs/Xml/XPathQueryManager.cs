@@ -317,7 +317,9 @@ namespace Mapsui.Providers.Wfs.Xml
             }
             finally
             {
+#pragma warning disable IDISP007
                 xmlStream.Dispose();
+#pragma warning restore IDISP007
             }
         }
 

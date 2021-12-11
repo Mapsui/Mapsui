@@ -56,8 +56,10 @@ namespace Mapsui.Providers.Shapefile.Indexing
     public class QuadTree : IDisposable
     {
         private MRect _box;
+#pragma warning disable IDISP008
         private QuadTree? _child0;
         private QuadTree? _child1;
+#pragma warning restore IDISP008        
 
         /// <summary>
         /// Nodes depth in a tree
@@ -146,7 +148,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
         /// <returns></returns>
         public static QuadTree FromFile(string filename)
         {
-            var fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            using var fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
             var br = new BinaryReader(fs);
             // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (br.ReadDouble() != Indexfileversion) //Check fileindex version
@@ -156,8 +158,11 @@ namespace Mapsui.Providers.Shapefile.Indexing
                 throw new ObsoleteFileFormatException(
                     "Invalid index file version. Please rebuild the spatial index by either deleting the index");
             }
+#pragma warning disable IDISP003
             var node = ReadNode(0, ref br);
+#pragma warning restore IDISP003
             br.Close();
+            br.Dispose();
             fs.Close();
             return node;
         }
@@ -206,11 +211,14 @@ namespace Mapsui.Providers.Shapefile.Indexing
         /// <param name="filename"></param>
         public void SaveIndex(string filename)
         {
-            var fs = new FileStream(filename, FileMode.Create);
+            using var fs = new FileStream(filename, FileMode.Create);
             var bw = new BinaryWriter(fs);
             bw.Write(Indexfileversion); //Save index version
+#pragma warning disable IDISP003
             SaveNode(this, ref bw);
+#pragma warning restore IDISP003
             bw.Close();
+            bw.Dispose();
             fs.Close();
         }
 
@@ -304,7 +312,9 @@ namespace Mapsui.Providers.Shapefile.Indexing
         public void Dispose()
         {
             //this._box = null;
+            _child0?.Dispose();
             _child0 = null;
+            _child1?.Dispose();
             _child1 = null;
             _objList = null;
         }

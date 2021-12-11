@@ -34,7 +34,9 @@ namespace Mapsui.Providers.Wfs.Utilities
         protected readonly IPathNode? LabelNode;
         protected AlternativePathNodesCollection? ServiceExceptionNode;
         private string _ts = " ";
+#pragma warning disable IDISP008
         protected XmlReader XmlReader;
+#pragma warning restore IDISP008
 
         /// <summary>
         /// Gets or sets the axis order
@@ -285,7 +287,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <summary>
         /// This method closes the XmlReader member and the used <see cref="HttpClientUtil"/> instance.
         /// </summary>
-        public void Dispose()
+        public virtual void Dispose()
         {
             XmlReader?.Close();
             _httpClientUtil?.Close();

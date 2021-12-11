@@ -480,12 +480,6 @@ namespace Mapsui.Providers.Wms
             return _wmsClient.Layer.CRS.FirstOrDefault(item => string.Equals(item.Trim(), crs.Trim(), StringComparison.CurrentCultureIgnoreCase)) != null;
         }
 
-
-        public void Dispose()
-        {
-            //nothing to dispose
-        }
-
         public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {
             var features = new List<RasterFeature>();
@@ -507,9 +501,9 @@ namespace Mapsui.Providers.Wms
         private async Task<Stream> GetStreamAsync(string url)
         {
             var handler = new HttpClientHandler { Credentials = Credentials };
-            var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
-            var req = new HttpRequestMessage(new HttpMethod(GetPreferredMethod().Type), url);
-            var response = await client.SendAsync(req);
+            using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
+            using var req = new HttpRequestMessage(new HttpMethod(GetPreferredMethod().Type), url);
+            using var response = await client.SendAsync(req);
 
             if (!response.IsSuccessStatusCode)
             {

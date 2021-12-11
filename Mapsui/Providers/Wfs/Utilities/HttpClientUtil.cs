@@ -173,7 +173,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             }
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             _webResponse?.Dispose();
         }

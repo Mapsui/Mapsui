@@ -14,7 +14,9 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
             if (button.Picture == null && string.IsNullOrEmpty(button.SvgImage))
                 return;
 
+#pragma warning disable IDISP004
             button.Picture ??= button.SvgImage == null ? null : new SKSvg().FromSvg(button.SvgImage);
+#pragma warning restore IDISP004
 
             var picture = button.Picture as SKPicture;
 
@@ -37,7 +39,8 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
             // Translate picture to right place
             matrix = matrix.PostConcat(SKMatrix.CreateTranslation((float)button.Envelope.MinX, (float)button.Envelope.MinY));
 
-            canvas.DrawPicture(picture, ref matrix, new SKPaint { IsAntialias = true });
+            using var skPaint = new SKPaint { IsAntialias = true };
+            canvas.DrawPicture(picture, ref matrix, skPaint);
         }
     }
 }

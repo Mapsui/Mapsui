@@ -36,11 +36,12 @@ namespace Mapsui.Rendering.Skia
             var transparency = SKColors.White.WithAlpha(alpha);
             using (var cf = SKColorFilter.CreateBlendMode(transparency, SKBlendMode.DstIn))
             {
-                canvas.DrawPicture(svg.Picture, new SKPaint()
+                using var skPaint = new SKPaint
                 {
                     IsAntialias = true,
                     ColorFilter = cf,
-                });
+                };
+                canvas.DrawPicture(svg.Picture, skPaint);
             }
 
             canvas.Restore();

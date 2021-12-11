@@ -225,6 +225,7 @@ namespace Mapsui.Providers.Shapefile
 
                     ParseHeader();
                     ParseProjection();
+                    _tree?.Dispose();
                     _tree = null;
                 }
             }
@@ -297,6 +298,7 @@ namespace Mapsui.Providers.Shapefile
                 {
                     Close();
                     _envelope = null;
+                    _tree?.Dispose();
                     _tree = null;
                 }
                 _disposed = true;
@@ -308,7 +310,7 @@ namespace Mapsui.Providers.Shapefile
         /// </summary>
         ~ShapeFile()
         {
-            Dispose();
+            Dispose(false);
         }
 
 
@@ -324,10 +326,12 @@ namespace Mapsui.Providers.Shapefile
 
             if (!_isOpen)
             {
+#pragma warning disable IDISP003
                 _fsShapeIndex = new FileStream(_filename.Remove(_filename.Length - 4, 4) + ".shx", FileMode.Open, FileAccess.Read);
                 _brShapeIndex = new BinaryReader(_fsShapeIndex, Encoding.Unicode);
                 _fsShapeFile = new FileStream(_filename, FileMode.Open, FileAccess.Read);
                 _brShapeFile = new BinaryReader(_fsShapeFile);
+#pragma warning restore IDISP008                
                 InitializeShape(_filename, _fileBasedIndex);
                 _dbaseFile?.Open();
                 _isOpen = true;
@@ -344,10 +348,15 @@ namespace Mapsui.Providers.Shapefile
                 if (_isOpen)
                 {
                     _brShapeFile.Close();
+                    _brShapeFile.Dispose();
                     _fsShapeFile.Close();
+                    _fsShapeFile.Dispose();
                     _brShapeIndex.Close();
+                    _brShapeFile.Dispose();
                     _fsShapeIndex.Close();
+                    _fsShapeIndex.Dispose();
                     _dbaseFile?.Close();
+                    _dbaseFile?.Dispose();
                     _isOpen = false;
                 }
             }

@@ -13,7 +13,7 @@ using Color = System.Drawing.Color;
 
 namespace Mapsui.Providers
 {
-    public sealed class GeoTiffProvider : IProvider<IFeature>
+    public class GeoTiffProvider : IProvider<IFeature>, IDisposable
     {
         private struct TiffProperties
         {
@@ -40,6 +40,7 @@ namespace Mapsui.Providers
         private const string WorldExtension = ".tfw";
         private readonly IFeature _feature;
         private readonly MRect _extent;
+        private MRaster _mRaster;
 
         public GeoTiffProvider(string tiffPath, List<Color>? noDataColors = null)
         {
@@ -60,7 +61,8 @@ namespace Mapsui.Providers
 
             var data = ReadImageAsStream(tiffPath, noDataColors);
 
-            _feature = new RasterFeature(new MRaster(data, _extent));
+            _mRaster = new MRaster(data, _extent);
+            _feature = new RasterFeature(_mRaster);
             _feature.Styles.Add(new VectorStyle());
         }
 
@@ -211,6 +213,12 @@ namespace Mapsui.Providers
         public bool? IsCrsSupported(string? crs)
         {
             return string.Equals(crs?.Trim(), CRS?.Trim(), StringComparison.CurrentCultureIgnoreCase);
+        }
+
+        public virtual void Dispose()
+        {
+            (_feature as IDisposable)?.Dispose();
+            _mRaster?.Dispose();
         }
     }
 }

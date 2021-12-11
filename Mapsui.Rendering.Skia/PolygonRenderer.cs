@@ -76,7 +76,7 @@ namespace Mapsui.Rendering.Skia
                         paintFill.Shader = null;
                         paintFill.Color = fillColor.ToSkia(opacity);
                         var scale = 10.0f;
-                        var fillPath = new SKPath();
+                        using var fillPath = new SKPath();
                         var matrix = SKMatrix.CreateScale(scale, scale);
 
                         switch (vectorStyle.Fill?.FillStyle)

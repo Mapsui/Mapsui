@@ -12,7 +12,8 @@ namespace Mapsui.Rendering.Skia
 
         public static void Draw(SKCanvas canvas, SKImage bitmap, SKRect rect, float layerOpacity = 1f)
         {
-            canvas.DrawImage(bitmap, rect, GetPaint(layerOpacity));
+            using var skPaint = GetPaint(layerOpacity);
+            canvas.DrawImage(bitmap, rect, skPaint);
         }
 
         public static void Draw(SKCanvas canvas, SKImage? bitmap, float x, float y, float rotation = 0,
@@ -76,7 +77,7 @@ namespace Mapsui.Rendering.Skia
                     Color = new SKColor(255, 255, 255, (byte)(255 * layerOpacity))
                 };
             }
-            return DefaultPaint;
+            return DefaultPaint.Clone();
         }
     }
 }
