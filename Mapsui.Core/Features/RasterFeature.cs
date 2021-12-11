@@ -3,7 +3,7 @@ using System;
 
 namespace Mapsui.Layers
 {
-    public class RasterFeature : BaseFeature, IFeature, IDisposable
+    public class RasterFeature : BaseFeature, IFeature
     {
 #pragma warning disable IDISP008
         public MRaster? Raster { get; }
@@ -28,20 +28,6 @@ namespace Mapsui.Layers
                         point.X = x;
                         point.Y = x;
                     });
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                Raster?.Dispose();
-            }
         }
     }
 }
