@@ -18,6 +18,14 @@ namespace Mapsui.Styles
         /// </summary>
         public static BitmapRegistry Instance => _instance ??= new BitmapRegistry();
 
+        /// <summary> Register a new bitmap (as IDisposable to avoid warnings) </summary>
+        /// <param name="bitmapData">Bitmap data to register</param>
+        /// <returns>Id of registered bitmap data</returns>
+        public int Register(IDisposable bitmapData)
+        {
+            return Register((object)bitmapData);
+        }
+
         /// <summary>
         /// Register a new bitmap
         /// </summary>
@@ -59,6 +67,17 @@ namespace Mapsui.Styles
         public object Get(int id)
         {
             return _register[id];
+        }
+
+        /// <summary>
+        /// Set new bitmap data for a already registered bitmap (as IDisposable for avoiding warnings)
+        /// </summary>
+        /// <param name="id">Id of existing bitmap data</param>
+        /// <param name="bitmapData">New bitmap data to replace</param>
+        /// <returns>True, if replacing worked correct</returns>
+        public bool Set(int id, IDisposable bitmapData)
+        {
+            return Set(id, bitmapData);
         }
 
         /// <summary>

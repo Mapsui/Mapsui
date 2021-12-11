@@ -6,7 +6,7 @@ using Mapsui.Styles;
 
 namespace Mapsui.Layers
 {
-    public abstract class BaseFeature
+    public abstract class BaseFeature : IDisposable
     {
         public BaseFeature() { }
 
@@ -29,5 +29,9 @@ namespace Mapsui.Layers
         }
 
         public IDictionary<IStyle, object> RenderedGeometry { get; set; } = new Dictionary<IStyle, object>();
+
+        public virtual void Dispose()
+        {
+        }
     }
 }

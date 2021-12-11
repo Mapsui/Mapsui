@@ -31,8 +31,8 @@ namespace Mapsui.Samples.Common.Maps
 
             var screenPoint = viewport.WorldToScreen(worldPoint);
             var color = new SKColor((byte)Random.Next(0, 256), (byte)Random.Next(0, 256), (byte)Random.Next(0, 256), (byte)(256.0 * layer.Opacity * style.Opacity));
-            var colored = new SKPaint { Color = color, IsAntialias = true };
-            var black = new SKPaint { Color = SKColors.Black, IsAntialias = true };
+            using var colored = new SKPaint { Color = color, IsAntialias = true };
+            using var black = new SKPaint { Color = SKColors.Black, IsAntialias = true };
 
             canvas.Translate((float)screenPoint.X, (float)screenPoint.Y);
             canvas.DrawCircle(0, 0, 15, colored);
@@ -43,7 +43,8 @@ namespace Mapsui.Samples.Common.Maps
 
             using var path = new SKPath();
             path.ArcTo(new SKRect(-8, 2, 8, 10), 25, 135, true);
-            canvas.DrawPath(path, new SKPaint { Style = SKPaintStyle.Stroke, Color = SKColors.Black, IsAntialias = true });
+            using var skPaint = new SKPaint { Style = SKPaintStyle.Stroke, Color = SKColors.Black, IsAntialias = true };
+            canvas.DrawPath(path, skPaint);
 
             return true;
         }

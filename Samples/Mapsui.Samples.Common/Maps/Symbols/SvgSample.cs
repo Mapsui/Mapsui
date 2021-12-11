@@ -75,7 +75,7 @@ namespace Mapsui.Samples.Common.Maps
                 try
                 {
                     var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
-                    var image = assembly.GetManifestResourceStream(imagePath);
+                    var image = assembly.GetManifestResourceStream(imagePath)!;
                     id = BitmapRegistry.Instance.Register(image);
                     ImageCache[imagePath] = id;
                 }
