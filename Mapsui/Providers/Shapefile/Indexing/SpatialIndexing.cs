@@ -217,7 +217,6 @@ namespace Mapsui.Providers.Shapefile.Indexing
 #pragma warning disable IDISP003
             SaveNode(this, ref bw);
 #pragma warning restore IDISP003
-            bw.Close();
             bw.Dispose();
             fs.Close();
         }
