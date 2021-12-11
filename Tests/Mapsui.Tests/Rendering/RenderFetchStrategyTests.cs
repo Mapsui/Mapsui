@@ -38,7 +38,9 @@ namespace Mapsui.Tests.Rendering
                 {
                     if ((tile.Index.Col + tile.Index.Row) % 2 == 0) // Add only 50% of the tiles with the arbitrary rule.
                     {
+#pragma warning disable IDISP004
                         cache.Add(tile.Index, new RasterFeature(new MRaster(new MemoryStream(), new MRect(0, 0, 1, 1))));
+#pragma warning restore IDISP004
                     }
                 }
             }

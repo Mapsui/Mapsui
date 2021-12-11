@@ -347,6 +347,7 @@ namespace Mapsui.Providers.Shapefile
             {
                 if (_isOpen)
                 {
+                    _brShapeIndex.Dispose();
                     _brShapeFile.Dispose();
                     _fsShapeFile.Dispose();
                     _brShapeFile.Dispose();

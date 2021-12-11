@@ -14,7 +14,7 @@ namespace Mapsui.Tests.GeoTiff
         public void GeoTiffProviderConstructor_WhenInitialized_ShouldReturnFeatures()
         {
             var location = Path.Combine(AssemblyInfo.AssemblyDirectory, "Resources", "example.tif");
-            var geoTiffProvider = new GeoTiffProvider(location);
+            using var geoTiffProvider = new GeoTiffProvider(location);
             var test = geoTiffProvider.GetExtent()?.Left.ToString(CultureInfo.InvariantCulture);
             Console.WriteLine(test);
         }

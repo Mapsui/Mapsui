@@ -252,7 +252,7 @@ namespace Mapsui.UI.Avalonia
             return 1f;
         }
 
-        private class MapsuiCustomDrawOp : ICustomDrawOperation
+        private sealed class MapsuiCustomDrawOp : ICustomDrawOperation
         {
             private readonly MapControl _mapControl;
 
@@ -311,7 +311,7 @@ namespace Mapsui.UI.Avalonia
 #pragma warning restore IDISP023 // Don't use reference types in finalizer context.
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);

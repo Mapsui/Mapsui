@@ -214,5 +214,12 @@ namespace Mapsui.Layers
                 Height = extent.Height * overscan / renderResolution
             };
         }
+
+        public override void Dispose()
+        {
+#pragma warning disable IDISP007
+            this._layer.Dispose();
+#pragma warning restore IDISP007
+        }
     }
 }
