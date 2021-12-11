@@ -293,8 +293,11 @@ namespace Mapsui.Providers.Wfs.Xml
         /// <summary>
         /// This method does some XPath specific initializations.
         /// </summary>
-        private void InitializeXPathObjects(Stream xmlStream)
+        private void InitializeXPathObjects(Stream? xmlStream)
         {
+            if (xmlStream == null)
+                return;
+
             try
             {
                 _xPathDoc = new XPathDocument(xmlStream);

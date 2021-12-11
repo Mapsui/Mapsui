@@ -328,8 +328,9 @@ namespace Mapsui.Providers.Wms
                     raster = null;
                     return false;
                 }
-
+#pragma warning disable IDISP004
                 raster = new MRaster(new MemoryStream(bytes), viewport.Extent);	// This can throw exception
+#pragma warning restore IDISP004
                 return true;
             }
             catch (WebException webEx)
@@ -440,7 +441,7 @@ namespace Mapsui.Providers.Wms
                     using var task = _getStreamAsync(url);
                     var bytes = StreamHelper.ReadFully(task.Result);
                     images.Add(new MemoryStream(bytes));
-                    task.Result.Close();
+                    task.Result.Dispose();
                 }
                 catch (WebException e)
                 {

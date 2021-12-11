@@ -309,7 +309,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
         /// <summary>
         /// Disposes the node
         /// </summary>
-        public void Dispose()
+        public virtual void Dispose()
         {
             //this._box = null;
             _child0?.Dispose();

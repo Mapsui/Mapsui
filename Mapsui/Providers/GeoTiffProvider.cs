@@ -59,7 +59,9 @@ namespace Mapsui.Providers
             var worldProperties = LoadWorld(worldPath);
             _extent = CalculateExtent(tiffProperties, worldProperties);
 
+#pragma warning disable IDISP001 
             var data = ReadImageAsStream(tiffPath, noDataColors);
+#pragma warning restore IDISP001            
 
             _mRaster = new MRaster(data, _extent);
             _feature = new RasterFeature(_mRaster);

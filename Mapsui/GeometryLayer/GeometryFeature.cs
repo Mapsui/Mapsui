@@ -30,28 +30,16 @@ namespace Mapsui.GeometryLayer
 
         public override void Dispose()
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        ~GeometryFeature()
-        {
-            Dispose(false);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
             if (_disposed) return;
+            base.Dispose();
 
-            if (disposing)
+            foreach (var keyValuePair in RenderedGeometry)
             {
-                foreach (var keyValuePair in RenderedGeometry)
-                {
-                    var disposable = keyValuePair.Value as IDisposable;
-                    disposable?.Dispose();
-                }
-                RenderedGeometry.Clear();
+                var disposable = keyValuePair.Value as IDisposable;
+                disposable?.Dispose();
             }
+            RenderedGeometry.Clear();
+
             _disposed = true;
         }
 

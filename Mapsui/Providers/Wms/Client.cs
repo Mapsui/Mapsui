@@ -239,8 +239,10 @@ namespace Mapsui.Providers.Wms
 
         private async Task<Stream> GetStreamAsync(string url)
         {
+#pragma warning disable IDISP001
             var client = new HttpClient();
             var response = await client.GetAsync(url).ConfigureAwait(false);
+#pragma warning restore IDISP001            
 
             if (!response.IsSuccessStatusCode)
             {
@@ -272,7 +274,7 @@ namespace Mapsui.Providers.Wms
                     {
                         using var r = new XmlTextReader(url, stReader) { XmlResolver = null };
                         doc.Load(r);
-                        task.Result.Close();
+                        task.Result.Dispose();
                     }
                 }
 
@@ -498,7 +500,7 @@ namespace Mapsui.Providers.Wms
                 }
             }
 
-            var xnlFormats = getMapRequestNodes.SelectNodes("sm:Format", _nsmgr);
+            using var xnlFormats = getMapRequestNodes.SelectNodes("sm:Format", _nsmgr);
             if (xnlFormats != null)
             {
                 GetMapOutputFormats = new Collection<string>();

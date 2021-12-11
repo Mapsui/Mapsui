@@ -463,7 +463,9 @@ namespace Mapsui.Providers.Shapefile
         {
             if (FilterDelegate != null) //Apply filtering
             {
+#pragma warning disable IDISP001
                 var fdr = GetFeature(oid);
+#pragma warning restore IDISP001
                 return fdr?.Geometry;
             }
 

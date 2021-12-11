@@ -731,7 +731,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                          GetSubReaderOf(FeatureReader, labelValues, multiPolygonNodeAlt, polygonMemberNodeAlt)) != null)
                     {
                         var multiPolygon = new MultiPolygon();
-                        GeometryFactory geomFactory = new PolygonFactory(GeomReader, FeatureTypeInfo) { AxisOrder = AxisOrder };
+                        using GeometryFactory geomFactory = new PolygonFactory(GeomReader, FeatureTypeInfo) { AxisOrder = AxisOrder };
                         var polygons = geomFactory.CreateGeometries(features);
 
                         foreach (var geometry in polygons)
