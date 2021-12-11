@@ -347,15 +347,10 @@ namespace Mapsui.Providers.Shapefile
             {
                 if (_isOpen)
                 {
-                    _brShapeFile.Close();
                     _brShapeFile.Dispose();
-                    _fsShapeFile.Close();
                     _fsShapeFile.Dispose();
-                    _brShapeIndex.Close();
                     _brShapeFile.Dispose();
-                    _fsShapeIndex.Close();
                     _fsShapeIndex.Dispose();
-                    _dbaseFile?.Close();
                     _dbaseFile?.Dispose();
                     _isOpen = false;
                 }
