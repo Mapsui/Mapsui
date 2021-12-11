@@ -387,7 +387,9 @@ namespace Mapsui.Providers.Shapefile
             if (_dbaseColumns != null)
             {
                 foreach (var dbf in _dbaseColumns)
+#pragma warning disable IDISP004
                     tab.Columns.Add(dbf.ColumnName, dbf.DataType);
+#pragma warning restore IDISP004
 
                 for (var i = 0; i < _dbaseColumns.Length; i++)
                 {

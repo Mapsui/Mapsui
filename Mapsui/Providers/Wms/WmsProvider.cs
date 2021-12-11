@@ -491,7 +491,9 @@ namespace Mapsui.Providers.Wms
                 Width = (fetchInfo.Extent.Width / fetchInfo.Resolution),
                 Height = (fetchInfo.Extent.Height / fetchInfo.Resolution)
             };
+#pragma warning disable IDISP001
             if (TryGetMap(view, out var raster))
+#pragma warning restore IDISP001
             {
                 features.Add(new RasterFeature(raster));
             }

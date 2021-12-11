@@ -241,7 +241,9 @@ namespace Mapsui.Providers.Wfs.Utilities
                 IgnoreWhitespace = true,
                 DtdProcessing = DtdProcessing.Prohibit
             };
+#pragma warning disable IDISP004
             XmlReader = XmlReader.Create(httpClientUtil.GetDataStream(), xmlReaderSettings);
+#pragma warning restore IDISP004
         }
 
         /// <summary>
@@ -567,7 +569,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                         null)
                     {
                         var multiPoint = new MultiPoint();
-                        GeometryFactory geomFactory = new PointFactory(GeomReader, FeatureTypeInfo) { AxisOrder = AxisOrder }; ;
+                        using GeometryFactory geomFactory = new PointFactory(GeomReader, FeatureTypeInfo) { AxisOrder = AxisOrder }; ;
                         var points = geomFactory.CreateGeometries(features);
 
                         foreach (var geometry in points)
@@ -821,18 +823,21 @@ namespace Mapsui.Providers.Wfs.Utilities
                     {
                         if (multiPointNode.Matches(XmlReader))
                         {
+                            geomFactory?.Dispose();
                             geomFactory = new MultiPointFactory(_httpClientUtil, FeatureTypeInfo);
                             geometryTypeString = "MultiPointPropertyType";
                             break;
                         }
                         if (multiLineStringNodeAlt.Matches(XmlReader))
                         {
+                            geomFactory?.Dispose();
                             geomFactory = new MultiLineStringFactory(_httpClientUtil, FeatureTypeInfo);
                             geometryTypeString = "MultiLineStringPropertyType";
                             break;
                         }
                         if (multiPolygonNodeAlt.Matches(XmlReader))
                         {
+                            geomFactory?.Dispose();
                             geomFactory = new MultiPolygonFactory(_httpClientUtil, FeatureTypeInfo);
                             geometryTypeString = "MultiPolygonPropertyType";
                             break;
@@ -841,18 +846,21 @@ namespace Mapsui.Providers.Wfs.Utilities
 
                     if (pointNode.Matches(XmlReader))
                     {
+                        geomFactory?.Dispose();
                         geomFactory = new PointFactory(_httpClientUtil, FeatureTypeInfo);
                         geometryTypeString = "PointPropertyType";
                         break;
                     }
                     if (lineStringNode.Matches(XmlReader))
                     {
+                        geomFactory?.Dispose();
                         geomFactory = new LineStringFactory(_httpClientUtil, FeatureTypeInfo);
                         geometryTypeString = "LineStringPropertyType";
                         break;
                     }
                     if (polygonNode.Matches(XmlReader))
                     {
+                        geomFactory?.Dispose();
                         geomFactory = new PolygonFactory(_httpClientUtil, FeatureTypeInfo);
                         geometryTypeString = "PolygonPropertyType";
                         break;
