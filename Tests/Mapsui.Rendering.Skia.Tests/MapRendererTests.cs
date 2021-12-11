@@ -19,12 +19,12 @@ namespace Mapsui.Rendering.Skia.Tests
         public void RenderPointsWithVectorStyle()
         {
             // arrange
-            var map = VectorStyleSample.CreateMap();
+            using var map = VectorStyleSample.CreateMap();
             var viewport = map.Extent!.Multiply(3).ToViewport(200);
             const string fileName = "vector_symbol.png";
 
             // act
-            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
+            using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
             // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
@@ -37,12 +37,12 @@ namespace Mapsui.Rendering.Skia.Tests
         public void RenderPointWithBitmapSymbols()
         {
             // arrange
-            var map = BitmapSymbolSample.CreateMap();
+            using var map = BitmapSymbolSample.CreateMap();
             var viewport = map.Extent!.Multiply(3).ToViewport(200);
             const string fileName = "points_with_symbolstyle.png";
 
             // act
-            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
+            using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
             // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
@@ -55,12 +55,12 @@ namespace Mapsui.Rendering.Skia.Tests
         public void RenderPointWithBitmapSymbolsInCollection()
         {
             // arrange
-            var map = BitmapSymbolInCollectionSample.CreateMap();
+            using var map = BitmapSymbolInCollectionSample.CreateMap();
             var viewport = map.Extent!.Multiply(3).ToViewport(200);
             const string fileName = "points_with_symbolstyle.png"; // Todo: Do not reuse the png.
 
             // act
-            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
+            using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
             // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
@@ -73,12 +73,12 @@ namespace Mapsui.Rendering.Skia.Tests
         public void RenderPointWithSvgSymbols()
         {
             // arrange
-            var map = SvgSymbolSample.CreateMap();
+            using var map = SvgSymbolSample.CreateMap();
             var viewport = map.Extent!.Multiply(3).ToViewport(200);
             const string fileName = "points_with_svgsymbolstyle.png";
 
             // act
-            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
+            using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
             // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
@@ -91,7 +91,7 @@ namespace Mapsui.Rendering.Skia.Tests
         public void RenderBitmapAtlas()
         {
             // arrange
-            var map = BitmapAtlasSample.CreateMap();
+            using var map = BitmapAtlasSample.CreateMap();
 
             var viewport = new Viewport
             {
@@ -104,7 +104,7 @@ namespace Mapsui.Rendering.Skia.Tests
             const string fileName = "bitmap_atlas.png";
 
             // act
-            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
+            using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
 
             // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
@@ -117,12 +117,12 @@ namespace Mapsui.Rendering.Skia.Tests
         public void RenderRotatedBitmapSymbolWithOffset()
         {
             // arrange
-            var map = BitmapSymbolWithRotationAndOffsetSample.CreateMap();
+            using var map = BitmapSymbolWithRotationAndOffsetSample.CreateMap();
             var viewport = map.Extent!.Multiply(4).ToViewport(200);
             const string fileName = "bitmap_symbol.png";
 
             // act
-            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
+            using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
             // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
@@ -135,12 +135,12 @@ namespace Mapsui.Rendering.Skia.Tests
         public void RenderPointsWithDifferentSymbolTypes()
         {
             // arrange
-            var map = SymbolTypesSample.CreateMap();
+            using var map = SymbolTypesSample.CreateMap();
             var viewport = map.Extent!.Multiply(3).ToViewport(200);
             const string fileName = "vector_symbol_symboltype.png";
 
             // act
-            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
+            using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
             // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
@@ -153,12 +153,12 @@ namespace Mapsui.Rendering.Skia.Tests
         public void RenderSymbolWithWorldUnits()
         {
             // arrange
-            var map = PointInWorldUnitsSample.CreateMap();
+            using var map = PointInWorldUnitsSample.CreateMap();
             var viewport = map.Extent!.Multiply(3).ToViewport(200);
             const string fileName = "vector_symbol_unittype.png";
 
             // act
-            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
+            using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
             // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
@@ -171,12 +171,12 @@ namespace Mapsui.Rendering.Skia.Tests
         public void RenderPolygon()
         {
             // arrange
-            var map = PolygonSample.CreateMap();
+            using var map = PolygonSample.CreateMap();
             var viewport = map.Extent!.Multiply(1.1).ToViewport(600);
             const string fileName = "polygon.png";
 
             // act
-            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
+            using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
 
             // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
@@ -189,12 +189,12 @@ namespace Mapsui.Rendering.Skia.Tests
         public void RenderLine()
         {
             // arrange
-            var map = LineSample.CreateMap();
+            using var map = LineSample.CreateMap();
             var viewport = map.Extent!.Multiply(1.1).ToViewport(600);
             const string fileName = "line.png";
 
             // act
-            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
+            using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
 
             // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
@@ -207,12 +207,12 @@ namespace Mapsui.Rendering.Skia.Tests
         public void RenderTiles()
         {
             // arrange
-            var map = TilesSample.CreateMap();
+            using var map = TilesSample.CreateMap();
             var viewport = map.Extent!.Multiply(1.1).ToViewport(600);
             const string fileName = "tilelayer.png";
 
             // act
-            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
+            using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
 
             // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
@@ -225,12 +225,12 @@ namespace Mapsui.Rendering.Skia.Tests
         public void RenderLabels()
         {
             // arrange
-            var map = LabelSample.CreateMap();
+            using var map = LabelSample.CreateMap();
             var viewport = map.Extent!.Multiply(2).ToViewport(300);
             const string fileName = "labels.png";
 
             // act
-            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
+            using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
             // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
@@ -243,12 +243,12 @@ namespace Mapsui.Rendering.Skia.Tests
         public void RenderProjection()
         {
             // arrange
-            var map = ProjectionSample.CreateMap();
+            using var map = ProjectionSample.CreateMap();
             var viewport = map.Extent!.Multiply(1.1).ToViewport(600);
             const string fileName = "projection.png";
 
             // act 
-            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
+            using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
 
             // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
@@ -261,12 +261,12 @@ namespace Mapsui.Rendering.Skia.Tests
         public void RenderStackedLablesLayer()
         {
             // arrange
-            var map = StackedLabelsSample.CreateMap();
+            using var map = StackedLabelsSample.CreateMap();
             var viewport = map.Extent!.Multiply(1.2).ToViewport(600);
             const string fileName = "stacked_labels.png";
 
             // act 
-            var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
+            using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
 
             // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
@@ -305,8 +305,10 @@ namespace Mapsui.Rendering.Skia.Tests
             bitmapStream1.Position = 0;
             bitmapStream2.Position = 0;
 
-            var bitmap1 = SKBitmap.FromImage(SKImage.FromEncodedData(SKData.Create(bitmapStream1)));
-            var bitmap2 = SKBitmap.FromImage(SKImage.FromEncodedData(SKData.Create(bitmapStream2)));
+            using var skData1 = SKData.Create(bitmapStream1);
+            var bitmap1 = SKBitmap.FromImage(SKImage.FromEncodedData(skData1));
+            using var skData2 = SKData.Create(bitmapStream2);
+            var bitmap2 = SKBitmap.FromImage(SKImage.FromEncodedData(skData2));
 
             for (var x = 0; x < bitmap1.Width; x++)
             {
