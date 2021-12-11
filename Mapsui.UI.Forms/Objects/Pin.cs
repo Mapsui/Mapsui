@@ -265,7 +265,9 @@ namespace Mapsui.UI.Forms
         /// <value>Mapsui feature</value>
         public GeometryFeature? Feature { get; private set; }
 
+#pragma warning disable IDISP008
         private Callout? _callout;
+#pragma warning restore IDISP008
 
         /// <summary>
         /// Gets the callout
@@ -505,14 +507,17 @@ namespace Mapsui.UI.Forms
                         }
                         // First we have to create a bitmap from Svg code
                         // Create a new SVG object
+#pragma warning disable IDISP001
                         var svg = new SKSvg();
                         // Load the SVG document
                         var stream = Utilities.EmbeddedResourceLoader.Load("Images.Pin.svg", typeof(Pin));
+#pragma warning restore IDISP001
                         if (stream == null)
                             return;
 
+#pragma warning disable IDISP004
                         svg.Load(stream);
-
+#pragma warning restore IDISP004
                         if (svg.Picture == null)
                             return;
 
@@ -520,25 +525,30 @@ namespace Mapsui.UI.Forms
                         Height = svg.Picture.CullRect.Height * Scale;
                         // Create bitmap to hold canvas
                         var info = new SKImageInfo((int)svg.Picture.CullRect.Width, (int)svg.Picture.CullRect.Height) { AlphaType = SKAlphaType.Premul };
-                        var bitmap = new SKBitmap(info);
-                        var canvas = new SKCanvas(bitmap);
-                        // Now draw Svg image to bitmap
-                        using (var paint = new SKPaint() { IsAntialias = true })
+                        using (var bitmap = new SKBitmap(info))
                         {
-                            // Replace color while drawing
-                            paint.ColorFilter = SKColorFilter.CreateBlendMode(Color.ToSKColor(), SKBlendMode.SrcIn); // use the source color
-                            canvas.Clear();
-                            canvas.DrawPicture(svg.Picture, paint);
+                            using var canvas = new SKCanvas(bitmap);
+                            // Now draw Svg image to bitmap
+                            using (var paint = new SKPaint() { IsAntialias = true })
+                            {
+                                // Replace color while drawing
+                                paint.ColorFilter = SKColorFilter.CreateBlendMode(Color.ToSKColor(), SKBlendMode.SrcIn); // use the source color
+                                canvas.Clear();
+                                canvas.DrawPicture(svg.Picture, paint);
+                            }
+                            // Now convert canvas to bitmap
+                            using (var image = SKImage.FromBitmap(bitmap))
+                            using (var data = image.Encode(SKEncodedImageFormat.Png, 100))
+                            {
+                                _bitmapData = data.ToArray();
+                            }
+#pragma warning disable IDISP004 
+                            _bitmapId = BitmapRegistry.Instance.Register(new MemoryStream(_bitmapData));
+#pragma warning restore IDISP004                          
+                            _bitmapIdKey = colorInHex;
+                            _bitmapIds.Add(colorInHex, _bitmapId);
                         }
-                        // Now convert canvas to bitmap
-                        using (var image = SKImage.FromBitmap(bitmap))
-                        using (var data = image.Encode(SKEncodedImageFormat.Png, 100))
-                        {
-                            _bitmapData = data.ToArray();
-                        }
-                        _bitmapId = BitmapRegistry.Instance.Register(new MemoryStream(_bitmapData));
-                        _bitmapIdKey = colorInHex;
-                        _bitmapIds.Add(colorInHex, _bitmapId);
+
                         break;
                     case PinType.Icon:
                         if (Icon != null)
@@ -547,7 +557,9 @@ namespace Mapsui.UI.Forms
                             {
                                 Width = image.Width * Scale;
                                 Height = image.Height * Scale;
+#pragma warning disable IDISP004
                                 _bitmapId = BitmapRegistry.Instance.Register(new MemoryStream(Icon));
+#pragma warning restore IDISP004                                
                             }
                         }
                         break;
@@ -572,8 +584,9 @@ namespace Mapsui.UI.Forms
             }
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
+            _callout?.Dispose();
             Feature?.Dispose();
         }
     }

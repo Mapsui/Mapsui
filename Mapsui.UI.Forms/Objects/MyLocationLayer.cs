@@ -109,7 +109,9 @@ namespace Mapsui.UI.Objects
 
             if (bitmapMovingId == -1)
             {
+#pragma warning disable IDISP001
                 var bitmapMoving = Utilities.EmbeddedResourceLoader.Load($"Images.MyLocationMoving.svg", typeof(MyLocationLayer));
+#pragma warning restore IDISP001
 
                 if (bitmapMoving != null)
                 {
@@ -120,7 +122,9 @@ namespace Mapsui.UI.Objects
 
             if (bitmapStillId == -1)
             {
+#pragma warning disable IDISP001
                 var bitmapStill = Utilities.EmbeddedResourceLoader.Load($"Images.MyLocationStill.svg", typeof(MyLocationLayer));
+#pragma warning restore IDISP001
 
                 if (bitmapStill != null)
                 {
@@ -131,7 +135,9 @@ namespace Mapsui.UI.Objects
 
             if (bitmapDirId == -1)
             {
+#pragma warning disable IDISP001
                 var bitmapDir = Utilities.EmbeddedResourceLoader.Load($"Images.MyLocationDir.svg", typeof(MyLocationLayer));
+#pragma warning restore IDISP001
 
                 if (bitmapDir != null)
                 {

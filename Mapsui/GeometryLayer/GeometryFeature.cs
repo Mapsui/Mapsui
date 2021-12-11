@@ -28,7 +28,7 @@ namespace Mapsui.GeometryLayer
 
         public MRect? Extent => Geometry?.BoundingBox.ToMRect(); // Todo: Make not-nullable
 
-        public void Dispose()
+        public override void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);

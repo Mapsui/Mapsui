@@ -649,7 +649,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                         null)
                     {
                         var multiLineString = new MultiLineString();
-                        GeometryFactory geomFactory = new LineStringFactory(GeomReader, FeatureTypeInfo) { AxisOrder = AxisOrder };
+                        using GeometryFactory geomFactory = new LineStringFactory(GeomReader, FeatureTypeInfo) { AxisOrder = AxisOrder };
                         var lineStrings = geomFactory.CreateGeometries(features);
 
                         foreach (var geometry in lineStrings)
