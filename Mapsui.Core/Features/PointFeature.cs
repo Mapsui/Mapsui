@@ -29,6 +29,5 @@ namespace Mapsui.Layers
                 Point.Y = y;
             });
         }
-
     }
 }

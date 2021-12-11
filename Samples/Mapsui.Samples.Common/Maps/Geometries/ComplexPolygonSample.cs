@@ -9,6 +9,8 @@ using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Utilities;
 
+#pragma warning disable IDISP001
+
 namespace Mapsui.Samples.Common.Maps
 {
     public class ComplexPolygonSample : ISample
@@ -28,7 +30,7 @@ namespace Mapsui.Samples.Common.Maps
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             var polygonLayer = CreateLayer();
             map.Layers.Add(polygonLayer);
-            map.Home = n => n.NavigateTo(polygonLayer.Extent?.Centroid, map.Resolutions[15]);
+            map.Home = n => n.NavigateTo(polygonLayer.Extent!.Centroid, map.Resolutions[15]);
             return map;
         }
 
