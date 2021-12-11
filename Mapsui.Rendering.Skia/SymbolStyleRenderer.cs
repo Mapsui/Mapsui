@@ -117,7 +117,7 @@ namespace Mapsui.Rendering.Skia
             var top = new Point(x, y - circumradius);
             var left = new Point(x + sideLength * -0.5, y + inradius);
             var right = new Point(x + sideLength * 0.5, y + inradius);
-            
+
             using var path = new SKPath();
             path.MoveTo((float)top.X, (float)top.Y);
             path.LineTo((float)left.X, (float)left.Y);

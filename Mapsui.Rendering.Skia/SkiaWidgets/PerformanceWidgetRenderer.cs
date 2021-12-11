@@ -67,7 +67,7 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
             widget.Envelope = _envelope;
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             _textPaint.Dispose();
             _backgroundPaint.Dispose();

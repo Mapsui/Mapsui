@@ -107,7 +107,9 @@ namespace Mapsui.Rendering.Skia
                 DrawContent(callout, canvas);
 
                 // Create SKPicture from canvas
+#pragma warning disable IDISP001 
                 var picture = rec.EndRecording();
+#pragma warning restore IDISP001                
 
                 if (callout.BitmapId < 0)
                     callout.BitmapId = BitmapRegistry.Instance.Register(picture);
@@ -227,7 +229,9 @@ namespace Mapsui.Rendering.Skia
                 if (callout.Type == CalloutType.Detail)
                     textBlockSubtitle.Paint(canvas, new SKPoint(0, textBlockTitle.MeasuredHeight + (float)callout.Spacing), new TextPaintOptions() { IsAntialias = true });
                 // Create a SKPicture from canvas
+#pragma warning disable IDISP001                
                 var picture = rec.EndRecording();
+#pragma warning restore IDISP001                
                 if (callout.InternalContent >= 0)
                 {
                     BitmapRegistry.Instance.Set(callout.InternalContent, picture);
@@ -276,14 +280,19 @@ namespace Mapsui.Rendering.Skia
                             throw new Exception();
                         case BitmapType.Svg:
                             if (bitmapInfo.Svg != null)
-                                canvas.DrawPicture(bitmapInfo.Svg.Picture, offset, new SKPaint() { IsAntialias = true });
+                            {
+                                using var skPaint = new SKPaint() { IsAntialias = true };
+                                canvas.DrawPicture(bitmapInfo.Svg.Picture, offset, skPaint);
+                            }
+
                             break;
                     }
                 }
                 else if (callout.Type == CalloutType.Single || callout.Type == CalloutType.Detail)
                 {
                     var picture = (SKPicture)BitmapRegistry.Instance.Get(callout.Content);
-                    canvas.DrawPicture(picture, offset, new SKPaint() { IsAntialias = true });
+                    using var skPaint = new SKPaint() { IsAntialias = true };
+                    canvas.DrawPicture(picture, offset, skPaint);
                 }
             }
         }
@@ -349,7 +358,7 @@ namespace Mapsui.Rendering.Skia
             }
 
             // Create path
-            var path = new SKPath();
+            using var path = new SKPath();
 
             // Move to start point at left/top
             path.MoveTo(left + callout.RectRadius, top);

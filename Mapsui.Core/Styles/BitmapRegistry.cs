@@ -39,6 +39,15 @@ namespace Mapsui.Styles
         /// <param name="id">Id of registered bitmap data</param>
         public void Unregister(int id)
         {
+            if (_register.TryGetValue(id, out var old))
+            {
+                // dispose old disposable bitmaps
+                if (old is IDisposable disposable)
+                {
+                    disposable.Dispose();
+                }
+            }
+
             _register.Remove(id);
         }
 
@@ -64,6 +73,15 @@ namespace Mapsui.Styles
 
             if (id < 0 || id >= _counter || !_register.ContainsKey(id))
                 return false;
+
+            if (_register.TryGetValue(id, out var old))
+            {
+                // dispose old disposable bitmaps
+                if (old is IDisposable disposable)
+                {
+                    disposable.Dispose();
+                }
+            }
 
             _register[id] = bitmapData;
 
