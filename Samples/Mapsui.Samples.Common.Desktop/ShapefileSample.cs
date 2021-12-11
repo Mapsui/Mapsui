@@ -8,6 +8,9 @@ using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.UI;
 
+#pragma warning disable IDISP001
+#pragma warning disable IDISP004
+
 namespace Mapsui.Samples.Common.Desktop
 {
     public class ShapefileSample : ISample

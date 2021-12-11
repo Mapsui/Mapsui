@@ -12,6 +12,8 @@ using Mapsui.Styles.Thematics;
 using Mapsui.UI;
 using Mapsui.Utilities;
 
+#pragma warning disable IDISP001
+
 namespace Mapsui.Samples.Common.Desktop
 {
     public class ThemeStyleSample : ISample
