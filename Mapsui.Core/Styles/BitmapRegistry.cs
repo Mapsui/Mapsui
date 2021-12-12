@@ -66,15 +66,6 @@ namespace Mapsui.Styles
             if (id < 0 || id >= _counter || !_register.ContainsKey(id))
                 return false;
 
-            if (_register.TryGetValue(id, out var old))
-            {
-                // dispose old disposable bitmaps
-                if (old is IDisposable disposable)
-                {
-                    disposable.Dispose();
-                }
-            }
-
             _register[id] = bitmapData;
 
             return true;
