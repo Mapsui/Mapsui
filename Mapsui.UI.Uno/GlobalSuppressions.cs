@@ -7,3 +7,4 @@ using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP002:Dispose member.", Justification = "<Pending>", Scope = "member", Target = "~F:Mapsui.UI.Uwp.MapControl._selectRectangle")]
 [assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP002:Dispose member.", Justification = "<Pending>", Scope = "member", Target = "~F:Mapsui.UI.Uwp.MapControl._canvas")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP002:Dispose member.", Justification = "<Pending>", Scope = "member", Target = "~F:Mapsui.UI.Uwp.MapControl._invalidateTimer")]

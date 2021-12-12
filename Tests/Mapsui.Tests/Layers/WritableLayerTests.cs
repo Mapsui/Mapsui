@@ -13,12 +13,10 @@ namespace Mapsui.Tests.Layers
         {
             // arrange
             using var writableLayer = new WritableLayer();
-#pragma warning disable IDISP004            
             writableLayer.Add(new GeometryFeature());
             writableLayer.Add(new GeometryFeature(new Point()));
             writableLayer.Add(new GeometryFeature(new LineString()));
             writableLayer.Add(new GeometryFeature(new Polygon()));
-#pragma warning restore IDISP004
             // act
             var extent = writableLayer.Extent;
 

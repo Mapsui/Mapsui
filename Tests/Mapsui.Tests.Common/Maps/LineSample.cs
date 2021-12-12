@@ -8,8 +8,6 @@ using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Utilities;
 
-#pragma warning disable IDISP003
-
 namespace Mapsui.Tests.Common.Maps
 {
     public class LineSample : ISample

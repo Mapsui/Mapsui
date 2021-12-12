@@ -62,9 +62,7 @@ namespace Mapsui.Samples.Common.Maps.Callouts
                 var feature = new PointFeature(SphericalMercator.FromLonLat(c.Lng, c.Lat).ToMPoint());
                 feature["name"] = c.Name;
                 feature["country"] = c.Country;
-#pragma warning disable IDISP001                
                 var callbackImage = CreateCallbackImage(c);
-#pragma warning restore IDISP001                
                 var bitmapId = BitmapRegistry.Instance.Register(callbackImage);
                 var calloutStyle = CreateCalloutStyle(bitmapId);
                 feature.Styles.Add(calloutStyle);

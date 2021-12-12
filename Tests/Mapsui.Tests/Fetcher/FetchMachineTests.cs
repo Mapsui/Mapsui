@@ -202,9 +202,7 @@ namespace Mapsui.Tests.Fetcher
             // Note, the fact that we have to define this complex method on the outside
             // indicates a design flaw.
             if (tile == null) return new RasterFeature((MRaster?)null);
-#pragma warning disable IDISP004
             return new RasterFeature(new MRaster(new MemoryStream(tile), tileInfo.Extent.ToMRect()));
-#pragma warning restore IDISP004
         }
     }
 }

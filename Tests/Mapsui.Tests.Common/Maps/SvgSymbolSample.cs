@@ -6,8 +6,6 @@ using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.UI;
 
-#pragma warning disable IDISP001
-
 namespace Mapsui.Tests.Common.Maps
 {
     public class SvgSymbolSample : ISample
