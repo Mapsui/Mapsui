@@ -6,6 +6,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Styles;
 using Bitmap = System.Drawing.Bitmap;
@@ -59,9 +60,9 @@ namespace Mapsui.Providers
             var worldProperties = LoadWorld(worldPath);
             _extent = CalculateExtent(tiffProperties, worldProperties);
 
-            var data = ReadImageAsStream(tiffPath, noDataColors);
+            using var data = ReadImageAsStream(tiffPath, noDataColors);
 
-            _mRaster = new MRaster(data, _extent);
+            _mRaster = new MRaster(data.ToBytes(), _extent);
             _feature = new RasterFeature(_mRaster);
             _feature.Styles.Add(new VectorStyle());
         }
@@ -218,7 +219,6 @@ namespace Mapsui.Providers
         public virtual void Dispose()
         {
             (_feature as IDisposable)?.Dispose();
-            _mRaster?.Dispose();
         }
     }
 }

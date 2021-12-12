@@ -328,7 +328,7 @@ namespace Mapsui.Providers.Wms
                     raster = null;
                     return false;
                 }
-                raster = new MRaster(new MemoryStream(bytes), viewport.Extent);	// This can throw exception
+                raster = new MRaster(bytes, viewport.Extent);	// This can throw exception
                 return true;
             }
             catch (WebException webEx)

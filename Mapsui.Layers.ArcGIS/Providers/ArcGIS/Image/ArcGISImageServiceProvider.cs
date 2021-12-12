@@ -140,7 +140,7 @@ namespace Mapsui.Providers.ArcGIS.Image
                         var bytes = BruTile.Utilities.ReadFully(dataStream);
                         if (viewport.Extent != null)
                         {
-                            raster = new MRaster(new MemoryStream(bytes), viewport.Extent);
+                            raster = new MRaster(bytes, viewport.Extent);
                         }
                         else
                         {
@@ -151,7 +151,6 @@ namespace Mapsui.Providers.ArcGIS.Image
                     catch (Exception ex)
                     {
                         Logger.Log(LogLevel.Error, ex.Message, ex);
-                        raster?.Dispose();
                         raster = null;
                         return false;
                     }

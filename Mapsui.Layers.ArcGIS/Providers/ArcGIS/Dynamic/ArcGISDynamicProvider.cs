@@ -159,7 +159,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
                 var bytes = BruTile.Utilities.ReadFully(readAsStreamAsync.Result);
                 if (viewport.Extent != null)
                 {
-                    raster = new MRaster(new MemoryStream(bytes), viewport.Extent);
+                    raster = new MRaster(bytes, viewport.Extent);
                     response.Dispose();
                     return true;
                 }

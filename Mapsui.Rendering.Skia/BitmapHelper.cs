@@ -26,6 +26,25 @@ namespace Mapsui.Rendering.Skia
                 }
             }
 
+            if (bitmapStream is byte[] data)
+            {
+                if (data.IsXml())
+                {
+                    using var tempStream = new MemoryStream(data);
+                    if (tempStream.IsSvg())
+                    {
+                        var svg = new SKSvg();
+                        svg.Load(tempStream);
+
+                        return new BitmapInfo { Svg = svg };
+                    }
+                }
+
+                using var skData = SKData.CreateCopy(data);
+                var image = SKImage.FromEncodedData(skData);
+                return new BitmapInfo { Bitmap = image };
+            }
+
             if (bitmapStream is Stream stream)
             {
                 if (stream.IsSvg())

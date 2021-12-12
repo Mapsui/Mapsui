@@ -177,7 +177,7 @@ namespace Mapsui.Layers
             // TileLayer.GetFeatureInView will have to return only the non null geometries.
 
             if (tileData == null) return null;
-            return new MRaster(new MemoryStream(tileData), tileInfo.Extent.ToMRect());
+            return new MRaster(tileData, tileInfo.Extent.ToMRect());
         }
     }
 }

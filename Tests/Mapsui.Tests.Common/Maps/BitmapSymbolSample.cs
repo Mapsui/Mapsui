@@ -66,7 +66,7 @@ namespace Mapsui.Tests.Common.Maps
 
         private static int LoadBitmap(string bitmapPath)
         {
-            var bitmapStream = typeof(Utilities).GetTypeInfo().Assembly.GetManifestResourceStream(bitmapPath);
+            var bitmapStream = typeof(Utilities).GetTypeInfo().Assembly.GetManifestResourceStream(bitmapPath)!;
             return BitmapRegistry.Instance.Register(bitmapStream);
         }
     }

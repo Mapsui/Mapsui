@@ -59,7 +59,7 @@ namespace Mapsui.Tests.Common.Maps
         private static GeometryFeature CreateFeatureWithRotatedBitmapSymbol(double x, double y, double rotation)
         {
             const string bitmapPath = @"Mapsui.Tests.Common.Resources.Images.iconthatneedsoffset.png";
-            var bitmapStream = typeof(Utilities).GetTypeInfo().Assembly.GetManifestResourceStream(bitmapPath);
+            var bitmapStream = typeof(Utilities).GetTypeInfo().Assembly.GetManifestResourceStream(bitmapPath)!;
             var bitmapId = BitmapRegistry.Instance.Register(bitmapStream);
 
             var feature = new GeometryFeature { Geometry = new Point(x, y) };
