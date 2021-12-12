@@ -7,8 +7,6 @@ using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.UI;
 
-#pragma warning disable IDISP004
-
 namespace Mapsui.Samples.Common.Maps
 {
     public class OpacityStyleSample : ISample

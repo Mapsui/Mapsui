@@ -494,9 +494,7 @@ namespace Mapsui.UI.Wpf
                 _map?.Dispose();
             }
 
-#pragma warning disable IDISP023 // Don't use reference types in finalizer context.
             CommonDispose(disposing);
-#pragma warning restore IDISP023 // Don't use reference types in finalizer context.
         }
 
         public void Dispose()

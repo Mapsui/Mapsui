@@ -56,10 +56,8 @@ namespace Mapsui.Providers.Shapefile.Indexing
     public class QuadTree : IDisposable
     {
         private MRect _box;
-#pragma warning disable IDISP008
         private QuadTree? _child0;
         private QuadTree? _child1;
-#pragma warning restore IDISP008        
 
         /// <summary>
         /// Nodes depth in a tree
@@ -158,9 +156,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
                 throw new ObsoleteFileFormatException(
                     "Invalid index file version. Please rebuild the spatial index by either deleting the index");
             }
-#pragma warning disable IDISP003
             var node = ReadNode(0, ref br);
-#pragma warning restore IDISP003
             br.Close();
             br.Dispose();
             fs.Close();
@@ -214,9 +210,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
             using var fs = new FileStream(filename, FileMode.Create);
             var bw = new BinaryWriter(fs);
             bw.Write(Indexfileversion); //Save index version
-#pragma warning disable IDISP003
             SaveNode(this, ref bw);
-#pragma warning restore IDISP003
             bw.Dispose();
             fs.Close();
         }

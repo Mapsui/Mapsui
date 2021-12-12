@@ -7,8 +7,6 @@ using Mapsui.Samples.Common;
 using Mapsui.UI;
 using Mapsui.Utilities;
 
-#pragma warning disable IDISP004
-
 namespace Mapsui.Tests.Common.Maps
 {
     public class WritableLayerSample : ISample
@@ -44,12 +42,11 @@ namespace Mapsui.Tests.Common.Maps
 
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             var writableLayer = new WritableLayer();
-#pragma warning disable IDISP004            
+
             writableLayer.Add(new GeometryFeature());
             writableLayer.Add(new GeometryFeature { Geometry = new Point() });
             writableLayer.Add(new GeometryFeature { Geometry = new LineString() });
             writableLayer.Add(new GeometryFeature { Geometry = new Polygon() });
-#pragma warning restore IDISP004            
             map.Layers.Add(writableLayer);
 
             return map;

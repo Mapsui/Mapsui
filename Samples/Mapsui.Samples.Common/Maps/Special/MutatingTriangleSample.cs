@@ -9,8 +9,6 @@ using Mapsui.Layers.Tiling;
 using Mapsui.Providers;
 using Mapsui.UI;
 
-#pragma warning disable IDISP001
-
 namespace Mapsui.Samples.Common.Maps
 {
     public class MutatingTriangleSample : ISample

@@ -328,9 +328,7 @@ namespace Mapsui.Providers.Wms
                     raster = null;
                     return false;
                 }
-#pragma warning disable IDISP004
                 raster = new MRaster(new MemoryStream(bytes), viewport.Extent);	// This can throw exception
-#pragma warning restore IDISP004
                 return true;
             }
             catch (WebException webEx)
@@ -492,9 +490,7 @@ namespace Mapsui.Providers.Wms
                 Width = (fetchInfo.Extent.Width / fetchInfo.Resolution),
                 Height = (fetchInfo.Extent.Height / fetchInfo.Resolution)
             };
-#pragma warning disable IDISP001
             if (TryGetMap(view, out var raster))
-#pragma warning restore IDISP001
             {
                 features.Add(new RasterFeature(raster));
             }
@@ -504,11 +500,9 @@ namespace Mapsui.Providers.Wms
         private async Task<Stream> GetStreamAsync(string url)
         {
             var handler = new HttpClientHandler { Credentials = Credentials };
-#pragma warning disable IDISP001
             var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
             var req = new HttpRequestMessage(new HttpMethod(GetPreferredMethod().Type), url);
             var response = await client.SendAsync(req);
-#pragma warning restore IDISP001            
 
             if (!response.IsSuccessStatusCode)
             {

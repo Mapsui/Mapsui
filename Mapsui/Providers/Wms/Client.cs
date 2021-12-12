@@ -239,10 +239,8 @@ namespace Mapsui.Providers.Wms
 
         private async Task<Stream> GetStreamAsync(string url)
         {
-#pragma warning disable IDISP001
             var client = new HttpClient();
             var response = await client.GetAsync(url).ConfigureAwait(false);
-#pragma warning restore IDISP001            
 
             if (!response.IsSuccessStatusCode)
             {

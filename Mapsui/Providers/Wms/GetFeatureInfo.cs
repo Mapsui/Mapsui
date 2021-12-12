@@ -86,11 +86,9 @@ namespace Mapsui.Providers.Wms
         private async Task<Stream> GetStreamAsync(string url)
         {
             var handler = new HttpClientHandler { Credentials = Credentials ?? CredentialCache.DefaultCredentials };
-#pragma warning disable IDISP001
             var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
             var req = new HttpRequestMessage(HttpMethod.Get, url);
             var response = await client.SendAsync(req);
-#pragma warning restore IDISP001            
 
             if (!response.IsSuccessStatusCode)
             {

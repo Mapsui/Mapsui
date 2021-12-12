@@ -34,9 +34,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         protected readonly IPathNode? LabelNode;
         protected AlternativePathNodesCollection? ServiceExceptionNode;
         private string _ts = " ";
-#pragma warning disable IDISP008
         protected XmlReader XmlReader;
-#pragma warning restore IDISP008
 
         /// <summary>
         /// Gets or sets the axis order
@@ -241,9 +239,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                 IgnoreWhitespace = true,
                 DtdProcessing = DtdProcessing.Prohibit
             };
-#pragma warning disable IDISP004
             XmlReader = XmlReader.Create(httpClientUtil.GetDataStream(), xmlReaderSettings);
-#pragma warning restore IDISP004
         }
 
         /// <summary>

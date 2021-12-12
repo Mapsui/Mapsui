@@ -9,8 +9,6 @@ using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Utilities;
 
-#pragma warning disable IDISP001
-
 namespace Mapsui.Samples.Common.Maps
 {
     public class ComplexPolygonSample : ISample

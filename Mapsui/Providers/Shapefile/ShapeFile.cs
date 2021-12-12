@@ -326,12 +326,14 @@ namespace Mapsui.Providers.Shapefile
 
             if (!_isOpen)
             {
-#pragma warning disable IDISP003
+                _fsShapeIndex?.Dispose();
                 _fsShapeIndex = new FileStream(_filename.Remove(_filename.Length - 4, 4) + ".shx", FileMode.Open, FileAccess.Read);
+                _brShapeFile?.Dispose();
                 _brShapeIndex = new BinaryReader(_fsShapeIndex, Encoding.Unicode);
+                _fsShapeFile?.Dispose();
                 _fsShapeFile = new FileStream(_filename, FileMode.Open, FileAccess.Read);
+                _brShapeFile?.Dispose();
                 _brShapeFile = new BinaryReader(_fsShapeFile);
-#pragma warning restore IDISP008                
                 InitializeShape(_filename, _fileBasedIndex);
                 _dbaseFile?.Open();
                 _isOpen = true;
@@ -520,8 +522,10 @@ namespace Mapsui.Providers.Shapefile
         /// </summary>
         private void ParseHeader()
         {
+            _fsShapeIndex?.Dispose();
             _fsShapeIndex = new FileStream(Path.ChangeExtension(_filename, ".shx"), FileMode.Open,
                                           FileAccess.Read);
+            _brShapeIndex?.Dispose();
             _brShapeIndex = new BinaryReader(_fsShapeIndex, Encoding.Unicode);
 
             _brShapeIndex.BaseStream.Seek(0, 0);
@@ -674,6 +678,7 @@ namespace Mapsui.Providers.Shapefile
             //Only load the tree if we haven't already loaded it, or if we want to force a rebuild
             if (_tree == null || forceRebuild)
             {
+                _tree?.Dispose();
                 _tree = !loadFromFile ? CreateSpatialIndex() : CreateSpatialIndexFromFile(_filename);
             }
         }
@@ -688,10 +693,16 @@ namespace Mapsui.Providers.Shapefile
             {
                 if (File.Exists(_filename + ".sidx"))
                     File.Delete(_filename + ".sidx");
-                _tree = CreateSpatialIndexFromFile(_filename);
+                {
+                    _tree?.Dispose();
+                    _tree = CreateSpatialIndexFromFile(_filename);
+                }
             }
             else
+            {
+                _tree?.Dispose();
                 _tree = CreateSpatialIndex();
+            }
         }
 
         /// <summary>

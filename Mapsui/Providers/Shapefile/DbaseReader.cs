@@ -368,7 +368,6 @@ namespace Mapsui.Providers.Shapefile
         {
             var tab = new DataTable();
             // all of common, non "base-table" fields implemented
-#pragma warning disable IDISP004
             tab.Columns.Add("ColumnName", typeof(string));
             tab.Columns.Add("ColumnSize", typeof(int));
             tab.Columns.Add("ColumnOrdinal", typeof(int));
@@ -382,14 +381,11 @@ namespace Mapsui.Providers.Shapefile
             tab.Columns.Add("IsKey", typeof(bool));
             tab.Columns.Add("IsAutoIncrement", typeof(bool));
             tab.Columns.Add("IsLong", typeof(bool));
-#pragma warning restore IDISP004
 
             if (_dbaseColumns != null)
             {
                 foreach (var dbf in _dbaseColumns)
-#pragma warning disable IDISP004
                     tab.Columns.Add(dbf.ColumnName, dbf.DataType);
-#pragma warning restore IDISP004
 
                 for (var i = 0; i < _dbaseColumns.Length; i++)
                 {

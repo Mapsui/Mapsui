@@ -406,7 +406,6 @@ namespace Mapsui.Providers.Wfs
 
             try
             {
-#pragma warning disable IDISP003                
                 switch (geometryTypeString)
                 {
                     /* Primitive geometry elements */
@@ -485,7 +484,6 @@ namespace Mapsui.Providers.Wfs
                                                                                    _multiGeometries, _quickGeometries);
                         break;
                 }
-#pragma warning restore IDISP003                
 
                 geomFactory.AxisOrder = AxisOrder;
                 geomFactory.CreateGeometries(features);
