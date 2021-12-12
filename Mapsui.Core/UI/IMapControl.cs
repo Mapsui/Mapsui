@@ -66,5 +66,7 @@ namespace Mapsui.UI
         INavigator? Navigator { get; }
 
         Performance? Performance { get; set; }
+
+        IReadOnlyViewport Viewport { get; }
     }
 }

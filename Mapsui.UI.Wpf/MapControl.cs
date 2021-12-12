@@ -184,15 +184,6 @@ namespace Mapsui.UI.Wpf
             _flingTracker.Clear();
             CaptureMouse();
 
-            if (!IsInBoxZoomMode() && _currentMousePosition != null)
-            {
-                if (IsClick(_currentMousePosition, _downMousePosition))
-                {
-                    HandleFeatureInfo(e);
-                    var mapInfoEventArgs = InvokeInfo(touchPosition, _downMousePosition, e.ClickCount);
-                    OnInfo(mapInfoEventArgs);
-                }
-            }
         }
 
         private static bool IsInBoxZoomMode()
@@ -204,11 +195,20 @@ namespace Mapsui.UI.Wpf
         {
             var mousePosition = e.GetPosition(this).ToMapsui();
 
-            if (IsInBoxZoomMode() && _previousMousePosition != null)
+            if (_previousMousePosition != null)
             {
-                var previous = Viewport.ScreenToWorld(_previousMousePosition.X, _previousMousePosition.Y);
-                var current = Viewport.ScreenToWorld(mousePosition.X, mousePosition.Y);
-                ZoomToBox(previous, current);
+                if (IsInBoxZoomMode())
+                {
+                    var previous = Viewport.ScreenToWorld(_previousMousePosition.X, _previousMousePosition.Y);
+                    var current = Viewport.ScreenToWorld(mousePosition.X, mousePosition.Y);
+                    ZoomToBox(previous, current);
+                }
+                else if (_downMousePosition != null && IsClick(mousePosition, _downMousePosition))
+                {
+                    HandleFeatureInfo(e);
+                    var mapInfoEventArgs = InvokeInfo(mousePosition, _downMousePosition, e.ClickCount);
+                    OnInfo(mapInfoEventArgs);
+                }
             }
 
             RefreshData();

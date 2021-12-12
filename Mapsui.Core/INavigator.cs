@@ -121,5 +121,7 @@ namespace Mapsui
         /// Stop any current animation if it is running
         /// </summary>
         void StopRunningAnimation();
+
+        void FlyTo(MPoint center, double maxResolution, long duration = 2000);
     }
 }
