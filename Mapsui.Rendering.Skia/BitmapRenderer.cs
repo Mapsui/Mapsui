@@ -82,6 +82,7 @@ namespace Mapsui.Rendering.Skia
                     Color = new SKColor(255, 255, 255, (byte)(255 * layerOpacity))
                 };
             }
+            dispose = false;
             return DefaultPaint;
         }
     }
