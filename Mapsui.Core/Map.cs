@@ -326,10 +326,8 @@ namespace Mapsui
         {
             foreach (var layer in this.Layers)
             {
-                if (layer is IDisposable disposable)
-                {
-                    disposable.Dispose();
-                }
+                // remove Event so that no memory leaks occour
+                layer.DataChanged -= OnDataChanged;
             }
         }
     }
