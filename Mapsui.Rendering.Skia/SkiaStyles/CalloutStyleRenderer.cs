@@ -354,7 +354,7 @@ namespace Mapsui.Rendering.Skia
             }
 
             // Create path
-            using var path = new SKPath();
+            var path = new SKPath();
 
             // Move to start point at left/top
             path.MoveTo(left + callout.RectRadius, top);
