@@ -49,7 +49,9 @@ namespace Mapsui.Tests.Common.Maps
         {
             return new MemoryLayer("Center of Amsterdam")
             {
+#pragma warning disable IDISP004 // Don't ignore created IDisposable
                 DataSource = new MemoryProvider<IFeature>(new PointFeature(new MPoint(545465.50488704059, 6866697.0250906311))),
+#pragma warning restore IDISP004 // Don't ignore created IDisposable
                 Style = new SymbolStyle { Fill = new Brush { Color = Color.Black }, SymbolScale = 0.5 }
             };
         }

@@ -83,7 +83,9 @@ namespace Mapsui.Tests.Common.Maps
 
         private static int LoadBitmap(string bitmapPath)
         {
+#pragma warning disable IDISP001 // Dispose Created
             var bitmapStream = typeof(Utilities).GetTypeInfo().Assembly.GetManifestResourceStream(bitmapPath)!;
+#pragma warning restore IDISP001 // Dispose Created
             return BitmapRegistry.Instance.Register(bitmapStream);
         }
     }

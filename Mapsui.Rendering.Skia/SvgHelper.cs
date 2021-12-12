@@ -3,6 +3,8 @@ using System.IO;
 using SkiaSharp;
 using Svg.Skia;
 
+#pragma warning disable IDISP004 // Don't ignore created IDisposable
+
 namespace Mapsui.Utilities
 {
     public static class SvgHelper
