@@ -304,9 +304,7 @@ namespace Mapsui.UI.Uwp
                 _map?.Dispose();
             }
 
-#pragma warning disable IDISP023 // Don't use reference types in finalizer context.
             CommonDispose(disposing);
-#pragma warning restore IDISP023 // Don't use reference types in finalizer context.
 
 #if __ANDROID__ || __IOS__ || __MACOS__
             base.Dispose(disposing);

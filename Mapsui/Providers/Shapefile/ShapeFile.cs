@@ -461,9 +461,7 @@ namespace Mapsui.Providers.Shapefile
         {
             if (FilterDelegate != null) //Apply filtering
             {
-#pragma warning disable IDISP001
                 var fdr = GetFeature(oid);
-#pragma warning restore IDISP001
                 return fdr?.Geometry;
             }
 
@@ -878,9 +876,7 @@ namespace Mapsui.Providers.Shapefile
         {
             if (_dbaseFile != null)
             {
-#pragma warning disable IDISP001
                 var dr = _dbaseFile.GetFeature(rowId, dt ?? new List<GeometryFeature>());
-#pragma warning restore IDISP001
                 if (dr != null)
                 {
                     dr.Geometry = ReadGeometry(rowId);
@@ -906,9 +902,7 @@ namespace Mapsui.Providers.Shapefile
 
                     foreach (var index in objectList)
                     {
-#pragma warning disable IDISP001
                         var feature = _dbaseFile?.GetFeature(index, features);
-#pragma warning restore IDISP001
                         if (feature != null)
                         {
                             feature.Geometry = ReadGeometry(index);

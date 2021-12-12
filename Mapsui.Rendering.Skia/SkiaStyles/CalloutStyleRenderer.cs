@@ -107,9 +107,7 @@ namespace Mapsui.Rendering.Skia
                 DrawContent(callout, canvas);
 
                 // Create SKPicture from canvas
-#pragma warning disable IDISP001 
                 var picture = rec.EndRecording();
-#pragma warning restore IDISP001                
 
                 if (callout.BitmapId < 0)
                     callout.BitmapId = BitmapRegistry.Instance.Register(picture);
@@ -229,9 +227,7 @@ namespace Mapsui.Rendering.Skia
                 if (callout.Type == CalloutType.Detail)
                     textBlockSubtitle.Paint(canvas, new SKPoint(0, textBlockTitle.MeasuredHeight + (float)callout.Spacing), new TextPaintOptions() { IsAntialias = true });
                 // Create a SKPicture from canvas
-#pragma warning disable IDISP001                
                 var picture = rec.EndRecording();
-#pragma warning restore IDISP001                
                 if (callout.InternalContent >= 0)
                 {
                     BitmapRegistry.Instance.Set(callout.InternalContent, picture);

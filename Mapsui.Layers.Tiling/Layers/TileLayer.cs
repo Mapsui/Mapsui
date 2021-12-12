@@ -159,9 +159,7 @@ namespace Mapsui.Layers
         private RasterFeature? ToFeature(TileInfo tileInfo)
         {
             var tileData = _tileSource.GetTile(tileInfo);
-#pragma warning disable IDISP001
             var mRaster = ToRaster(tileInfo, tileData);
-#pragma warning restore IDISP001
             if (mRaster != null)
                 return new RasterFeature(mRaster);
 
@@ -179,9 +177,7 @@ namespace Mapsui.Layers
             // TileLayer.GetFeatureInView will have to return only the non null geometries.
 
             if (tileData == null) return null;
-#pragma warning disable IDISP004
             return new MRaster(new MemoryStream(tileData), tileInfo.Extent.ToMRect());
-#pragma warning restore IDISP004           
         }
     }
 }

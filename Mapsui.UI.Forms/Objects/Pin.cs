@@ -265,9 +265,7 @@ namespace Mapsui.UI.Forms
         /// <value>Mapsui feature</value>
         public GeometryFeature? Feature { get; private set; }
 
-#pragma warning disable IDISP008
         private Callout? _callout;
-#pragma warning restore IDISP008
 
         /// <summary>
         /// Gets the callout
@@ -507,17 +505,13 @@ namespace Mapsui.UI.Forms
                         }
                         // First we have to create a bitmap from Svg code
                         // Create a new SVG object
-#pragma warning disable IDISP001
                         var svg = new SKSvg();
                         // Load the SVG document
                         var stream = Utilities.EmbeddedResourceLoader.Load("Images.Pin.svg", typeof(Pin));
-#pragma warning restore IDISP001
                         if (stream == null)
                             return;
 
-#pragma warning disable IDISP004
                         svg.Load(stream);
-#pragma warning restore IDISP004
                         if (svg.Picture == null)
                             return;
 
@@ -542,9 +536,7 @@ namespace Mapsui.UI.Forms
                             {
                                 _bitmapData = data.ToArray();
                             }
-#pragma warning disable IDISP004 
                             _bitmapId = BitmapRegistry.Instance.Register(new MemoryStream(_bitmapData));
-#pragma warning restore IDISP004                          
                             _bitmapIdKey = colorInHex;
                             _bitmapIds.Add(colorInHex, _bitmapId);
                         }
@@ -557,9 +549,7 @@ namespace Mapsui.UI.Forms
                             {
                                 Width = image.Width * Scale;
                                 Height = image.Height * Scale;
-#pragma warning disable IDISP004
                                 _bitmapId = BitmapRegistry.Instance.Register(new MemoryStream(Icon));
-#pragma warning restore IDISP004                                
                             }
                         }
                         break;

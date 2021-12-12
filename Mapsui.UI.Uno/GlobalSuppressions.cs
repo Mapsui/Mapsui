@@ -8,3 +8,8 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP002:Dispose member.", Justification = "<Pending>", Scope = "member", Target = "~F:Mapsui.UI.Uwp.MapControl._selectRectangle")]
 [assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP002:Dispose member.", Justification = "<Pending>", Scope = "member", Target = "~F:Mapsui.UI.Uwp.MapControl._canvas")]
 [assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP002:Dispose member.", Justification = "<Pending>", Scope = "member", Target = "~F:Mapsui.UI.Uwp.MapControl._invalidateTimer")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP007:Don't dispose injected.", Justification = "<Pending>", Scope = "member", Target = "~P:Mapsui.UI.Uwp.MapControl.Navigator")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP007:Don't dispose injected.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.UI.Uwp.MapControl.CommonDispose(System.Boolean)")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP023:Don't use reference types in finalizer context.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.UI.Uwp.MapControl.Dispose(System.Boolean)")]
+[assembly: SuppressMessage("Compatibility", "Uno0001:Uno type or member is not implemented", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.UI.Uwp.MapControl.MapControl_PointerWheelChanged(System.Object,Windows.UI.Xaml.Input.PointerRoutedEventArgs)")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP008:Don't assign member with injected and created disposables.", Justification = "<Pending>", Scope = "member", Target = "~F:Mapsui.UI.Uwp.MapControl._map")]

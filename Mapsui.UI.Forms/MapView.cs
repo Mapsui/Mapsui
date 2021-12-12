@@ -99,14 +99,12 @@ namespace Mapsui.UI.Forms
             // Add some events to _mapControl.Map.Layers
             Map!.Layers.Changed += HandleLayersChanged;
 
-#pragma warning disable IDISP004
             _pictMyLocationNoCenter = new SKSvg().Load(Utilities.EmbeddedResourceLoader.Load("Images.LocationNoCenter.svg", typeof(MapView))) ?? throw new MissingManifestResourceException("Images.LocationNoCenter.svg");
             _pictMyLocationCenter = new SKSvg().Load(Utilities.EmbeddedResourceLoader.Load("Images.LocationCenter.svg", typeof(MapView))) ?? throw new MissingManifestResourceException("Images.LocationCenter.svg"); ;
 
             _pictZoomIn = new SKSvg().Load(Utilities.EmbeddedResourceLoader.Load("Images.ZoomIn.svg", typeof(MapView))) ?? throw new MissingManifestResourceException("Images.ZoomIn.svg"); ;
             _pictZoomOut = new SKSvg().Load(Utilities.EmbeddedResourceLoader.Load("Images.ZoomOut.svg", typeof(MapView))) ?? throw new MissingManifestResourceException("Images.ZoomOut.svg"); ;
             _pictNorthing = new SKSvg().Load(Utilities.EmbeddedResourceLoader.Load("Images.RotationZero.svg", typeof(MapView))) ?? throw new MissingManifestResourceException("Images.RotationZero.svg"); ;
-#pragma warning restore IDISP004
             CreateButtons();
 
             _pins.CollectionChanged += HandlerPinsOnCollectionChanged;

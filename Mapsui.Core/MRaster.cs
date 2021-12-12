@@ -30,9 +30,7 @@ namespace Mapsui
         {
             if (disposing)
             {
-#pragma warning disable IDISP007
                 Data.Dispose();
-#pragma warning restore IDISP007
             }
         }
     }

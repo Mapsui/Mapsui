@@ -14,9 +14,7 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
             if (button.Picture == null && string.IsNullOrEmpty(button.SvgImage))
                 return;
 
-#pragma warning disable IDISP004
             button.Picture ??= button.SvgImage == null ? null : new SKSvg().FromSvg(button.SvgImage);
-#pragma warning restore IDISP004
 
             var picture = button.Picture as SKPicture;
 

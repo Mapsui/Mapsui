@@ -841,9 +841,7 @@ namespace Mapsui.UI.Forms
             {
                 _map?.Dispose();
             }
-#pragma warning disable IDISP023 // Don't use reference types in finalizer context.
             CommonDispose(disposing);
-#pragma warning restore IDISP023 // Don't use reference types in finalizer context.
         }
 
         ~MapControl()
