@@ -12,8 +12,12 @@ namespace Mapsui.Rendering.Skia
 
         public static void Draw(SKCanvas canvas, SKImage bitmap, SKRect rect, float layerOpacity = 1f)
         {
-            using var skPaint = GetPaint(layerOpacity);
+            var skPaint = GetPaint(layerOpacity, out var dispose);
             canvas.DrawImage(bitmap, rect, skPaint);
+            if (dispose)
+            {
+                skPaint.Dispose();
+            }
         }
 
         public static void Draw(SKCanvas canvas, SKImage? bitmap, float x, float y, float rotation = 0,
@@ -64,20 +68,21 @@ namespace Mapsui.Rendering.Skia
             return 0; // center
         }
 
-        private static SKPaint GetPaint(float layerOpacity)
+        private static SKPaint GetPaint(float layerOpacity, out bool dispose)
         {
             if (Math.Abs(layerOpacity - 1) > Utilities.Constants.Epsilon)
             {
                 // Unfortunately for opacity we need to set the Color and the Color
                 // is part of the Paint object. So we need to recreate the paint on
                 // every draw. 
+                dispose = true;
                 return new SKPaint
                 {
                     FilterQuality = SKFilterQuality.Low,
                     Color = new SKColor(255, 255, 255, (byte)(255 * layerOpacity))
                 };
             }
-            return DefaultPaint.Clone();
+            return DefaultPaint;
         }
     }
 }
