@@ -7,6 +7,9 @@ using Mapsui.Samples.Common;
 using Mapsui.UI;
 using Mapsui.Utilities;
 
+#pragma warning disable IDISP004 // Don't ignore created IDisposable
+#pragma warning disable IDISP004 // Don't ignore created IDisposable
+
 namespace Mapsui.Tests.Common.Maps
 {
     public class WritableLayerSample : ISample

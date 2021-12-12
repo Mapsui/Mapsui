@@ -10,6 +10,8 @@ using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Utilities;
 
+#pragma warning disable IDISP004 // Don't ignore created IDisposable
+
 namespace Mapsui.Samples.Common.Maps
 {
     public class LineStringSample : ISample

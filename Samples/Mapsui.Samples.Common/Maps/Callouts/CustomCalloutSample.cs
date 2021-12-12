@@ -15,6 +15,7 @@ using SkiaSharp;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Local
 // ReSharper disable once ClassNeverInstantiated.Local
+#pragma warning disable IDISP001 // Dispose created
 
 namespace Mapsui.Samples.Common.Maps.Callouts
 {

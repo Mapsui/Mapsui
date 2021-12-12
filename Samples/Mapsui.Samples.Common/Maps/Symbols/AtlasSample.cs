@@ -9,6 +9,8 @@ using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
 using Mapsui.UI;
 
+#pragma warning disable IDISP004 // Don't ignore created IDisposable
+
 namespace Mapsui.Samples.Common.Maps
 {
     public class AtlasSample : ISample

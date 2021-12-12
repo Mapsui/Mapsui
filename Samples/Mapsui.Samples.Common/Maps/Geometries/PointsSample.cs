@@ -12,6 +12,7 @@ using Mapsui.UI;
 using Newtonsoft.Json;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Local
+#pragma warning disable IDISP001 // Dispose created
 
 namespace Mapsui.Samples.Common.Maps
 {

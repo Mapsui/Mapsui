@@ -202,7 +202,7 @@ namespace Mapsui.Tests.Fetcher
             // Note, the fact that we have to define this complex method on the outside
             // indicates a design flaw.
             if (tile == null) return new RasterFeature((MRaster?)null);
-            return new RasterFeature(new MRaster(new MemoryStream(tile), tileInfo.Extent.ToMRect()));
+            return new RasterFeature(new MRaster(tile, tileInfo.Extent.ToMRect()));
         }
     }
 }

@@ -9,6 +9,8 @@ using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
 using Mapsui.UI;
 
+#pragma warning disable IDISP001 // Dispose created
+
 namespace Mapsui.Samples.Common.Maps
 {
     public class VariousSample : ISample

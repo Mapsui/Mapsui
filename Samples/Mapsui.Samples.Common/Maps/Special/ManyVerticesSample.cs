@@ -10,6 +10,7 @@ using Mapsui.UI;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Local
 #pragma warning disable CS8670 // Object or collection initializer implicitly dereferences possibly null member.
+#pragma warning disable IDISP004 // Don't ignore created IDisposable
 
 namespace Mapsui.Samples.Common.Maps
 {

@@ -8,6 +8,8 @@ using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.UI;
 
+#pragma warning disable IDISP001 // Dispose created
+
 namespace Mapsui.Tests.Common.Maps
 {
     public class BitmapSymbolInCollectionSample : ISample
