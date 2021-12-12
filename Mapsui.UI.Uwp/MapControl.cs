@@ -297,6 +297,10 @@ namespace Mapsui.UI.Uwp
         {
             if (disposing)
             {
+                (_canvas as IDisposable)?.Dispose();
+#if __IOS__ || __MACOS__ || __ANDROID__ || NETSTANDARD
+                (_selectRectangle as IDisposable)?.Dispose();
+#endif
                 _map?.Dispose();
             }
 
