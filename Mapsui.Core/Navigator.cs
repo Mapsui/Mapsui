@@ -403,7 +403,7 @@ namespace Mapsui
 
                 entry = new AnimationEntry(
                     start: _viewport.Resolution,
-                    end: maxResolution,
+                    end: Math.Min(maxResolution, _viewport.Resolution * 2),
                     animationStart: 0,
                     animationEnd: 0.5,
                     easing: Easing.SinIn,
@@ -413,7 +413,7 @@ namespace Mapsui
                 animations.Add(entry);
 
                 entry = new AnimationEntry(
-                    start: maxResolution,
+                    start: Math.Min(maxResolution, _viewport.Resolution * 2),
                     end: _viewport.Resolution,
                     animationStart: 0.5,
                     animationEnd: 1,

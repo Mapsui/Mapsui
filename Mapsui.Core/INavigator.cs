@@ -122,6 +122,8 @@ namespace Mapsui
         /// </summary>
         void StopRunningAnimation();
 
+        void FlyTo(MPoint center, double maxResolution, long duration = 2000);
+
         bool UpdateAnimations();
     }
 }
