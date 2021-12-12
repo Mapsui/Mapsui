@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using Mapsui.GeometryLayer;
 using Mapsui.Styles;
 using Mapsui.UI.Objects;
+using Mapsui.Utilities;
 using SkiaSharp;
 using Svg.Skia;
 #if __MAUI__
@@ -503,15 +504,14 @@ namespace Mapsui.UI.Forms
                             _bitmapIdKey = colorInHex;
                             break;
                         }
-                        // First we have to create a bitmap from Svg code
-                        // Create a new SVG object
-                        var svg = new SKSvg();
+                        
                         // Load the SVG document
                         var stream = Utilities.EmbeddedResourceLoader.Load("Images.Pin.svg", typeof(Pin));
                         if (stream == null)
                             return;
 
-                        svg.Load(stream);
+                        // Create a new SVG object
+                        var svg = stream.LoadSvg();
                         if (svg.Picture == null)
                             return;
 

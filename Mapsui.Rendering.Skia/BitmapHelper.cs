@@ -1,6 +1,7 @@
 using System.IO;
 using Mapsui.Extensions;
 using Mapsui.Styles;
+using Mapsui.Utilities;
 using SkiaSharp;
 using Svg.Skia;
 
@@ -19,10 +20,7 @@ namespace Mapsui.Rendering.Skia
             {
                 if (str.ToLower().Contains("<svg"))
                 {
-                    var svg = new SKSvg();
-                    svg.FromSvg(str);
-
-                    return new BitmapInfo { Svg = svg };
+                    return new BitmapInfo { Svg = str.LoadSvg() };
                 }
             }
 
@@ -33,10 +31,7 @@ namespace Mapsui.Rendering.Skia
                     using var tempStream = new MemoryStream(data);
                     if (tempStream.IsSvg())
                     {
-                        var svg = new SKSvg();
-                        svg.Load(tempStream);
-
-                        return new BitmapInfo { Svg = svg };
+                        return new BitmapInfo { Svg = tempStream.LoadSvg() };
                     }
                 }
 
@@ -49,10 +44,7 @@ namespace Mapsui.Rendering.Skia
             {
                 if (stream.IsSvg())
                 {
-                    var svg = new SKSvg();
-                    svg.Load(stream);
-
-                    return new BitmapInfo { Svg = svg };
+                    return new BitmapInfo { Svg = stream.LoadSvg() };
                 }
 
                 using var skData = SKData.CreateCopy(stream.ToBytes());

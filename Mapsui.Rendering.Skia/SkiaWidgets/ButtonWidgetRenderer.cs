@@ -1,4 +1,5 @@
-﻿using Mapsui.Widgets;
+﻿using Mapsui.Utilities;
+using Mapsui.Widgets;
 using Mapsui.Widgets.ButtonWidget;
 using SkiaSharp;
 using Svg.Skia;
@@ -14,7 +15,7 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
             if (button.Picture == null && string.IsNullOrEmpty(button.SvgImage))
                 return;
 
-            button.Picture ??= button.SvgImage == null ? null : new SKSvg().FromSvg(button.SvgImage);
+            button.Picture ??= button.SvgImage?.LoadSvg();
 
             var picture = button.Picture as SKPicture;
 
