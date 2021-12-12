@@ -109,7 +109,7 @@ namespace Mapsui.Layers
                     {
                         _cache.Clear();
                         var features = new RasterFeature[1];
-                        features[0] = new RasterFeature(new MRaster(bitmapStream.ToBytes(), viewport.Extent));
+                        features[0] = new RasterFeature(new MRaster(bitmapStream.ToArray(), viewport.Extent));
                         _cache.PushRange(features);
 #if DEBUG
                         Logger.Log(LogLevel.Debug, $"Memory after rasterizing layer {GC.GetTotalMemory(true):N0}");

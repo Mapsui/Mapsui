@@ -8,6 +8,7 @@ namespace Mapsui.Extensions
         public static byte[] ToBytes(this Stream input)
         {
             using var ms = new MemoryStream();
+            input.Position = 0;
             input.CopyTo(ms);
             return ms.ToArray();
         }

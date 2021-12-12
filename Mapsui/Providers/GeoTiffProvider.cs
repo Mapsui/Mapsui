@@ -62,7 +62,7 @@ namespace Mapsui.Providers
 
             using var data = ReadImageAsStream(tiffPath, noDataColors);
 
-            _mRaster = new MRaster(data.ToBytes(), _extent);
+            _mRaster = new MRaster(data.ToArray(), _extent);
             _feature = new RasterFeature(_mRaster);
             _feature.Styles.Add(new VectorStyle());
         }
