@@ -327,8 +327,11 @@ namespace Mapsui
             foreach (var layer in this.Layers)
             {
                 // remove Event so that no memory leaks occour
-                layer.DataChanged -= OnDataChanged;
+                LayerRemoved(layer);
             }
+
+            // clear the layers
+            this.Layers.Clear();
         }
     }
 }
