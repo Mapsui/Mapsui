@@ -76,9 +76,9 @@ namespace Mapsui.Extensions
                 return false;
             }
 
-            if (!Encoding.UTF8.GetString(buffer, 0, 1).ToLowerInvariant().Equals("<"))
+            if (Encoding.UTF8.GetString(buffer, 0, 1).ToLowerInvariant().Equals("<"))
             {
-                return false;
+                return true;
             }
 
             return false;

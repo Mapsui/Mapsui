@@ -504,7 +504,7 @@ namespace Mapsui.UI.Forms
                             _bitmapIdKey = colorInHex;
                             break;
                         }
-                        
+
                         // Load the SVG document
                         var stream = Utilities.EmbeddedResourceLoader.Load("Images.Pin.svg", typeof(Pin));
                         if (stream == null)
@@ -536,7 +536,7 @@ namespace Mapsui.UI.Forms
                             {
                                 _bitmapData = data.ToArray();
                             }
-                            _bitmapId = BitmapRegistry.Instance.Register(new MemoryStream(_bitmapData));
+                            _bitmapId = BitmapRegistry.Instance.Register(_bitmapData);
                             _bitmapIdKey = colorInHex;
                             _bitmapIds.Add(colorInHex, _bitmapId);
                         }
@@ -549,7 +549,7 @@ namespace Mapsui.UI.Forms
                             {
                                 Width = image.Width * Scale;
                                 Height = image.Height * Scale;
-                                _bitmapId = BitmapRegistry.Instance.Register(new MemoryStream(Icon));
+                                _bitmapId = BitmapRegistry.Instance.Register(Icon);
                             }
                         }
                         break;
