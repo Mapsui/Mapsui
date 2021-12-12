@@ -34,7 +34,7 @@ namespace Mapsui.Layers
     /// <summary>
     /// Layer, which displays a map consisting of individual tiles
     /// </summary>
-    public sealed class TileLayer : BaseLayer, IAsyncDataFetcher, IDisposable
+    public class TileLayer : BaseLayer, IAsyncDataFetcher, IDisposable
     {
         private readonly ITileSource _tileSource;
         private readonly IRenderFetchStrategy _renderFetchStrategy;

@@ -331,8 +331,7 @@ namespace Mapsui.UI.Android
         /// <returns></returns>
         private static MPoint GetScreenPositionInPixels(MotionEvent motionEvent, View view)
         {
-            using var pointF = new PointF(motionEvent.GetX(0) - view.Left, motionEvent.GetY(0) - view.Top);
-            return pointF.ToMapsui();
+            return new MPoint(motionEvent.GetX(0) - view.Left, motionEvent.GetY(0) - view.Top);
         }
 
         private void RefreshGraphicsWithTryCatch()
