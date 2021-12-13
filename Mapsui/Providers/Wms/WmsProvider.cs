@@ -328,8 +328,7 @@ namespace Mapsui.Providers.Wms
                     raster = null;
                     return false;
                 }
-
-                raster = new MRaster(new MemoryStream(bytes), viewport.Extent);	// This can throw exception
+                raster = new MRaster(bytes, viewport.Extent);	// This can throw exception
                 return true;
             }
             catch (WebException webEx)
@@ -440,7 +439,7 @@ namespace Mapsui.Providers.Wms
                     using var task = _getStreamAsync(url);
                     var bytes = StreamHelper.ReadFully(task.Result);
                     images.Add(new MemoryStream(bytes));
-                    task.Result.Close();
+                    task.Result.Dispose();
                 }
                 catch (WebException e)
                 {
@@ -478,12 +477,6 @@ namespace Mapsui.Providers.Wms
         {
             if (_wmsClient == null) return null;
             return _wmsClient.Layer.CRS.FirstOrDefault(item => string.Equals(item.Trim(), crs.Trim(), StringComparison.CurrentCultureIgnoreCase)) != null;
-        }
-
-
-        public void Dispose()
-        {
-            //nothing to dispose
         }
 
         public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)

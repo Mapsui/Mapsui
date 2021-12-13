@@ -71,7 +71,7 @@ namespace Mapsui.Providers.Wms
                     }
 
                     var featureInfo = parser.ParseWMSResult(_layerName, task.Result);
-                    task.Result.Close();
+                    task.Result.Dispose();
                     OnIdentifyFinished(featureInfo);
                 }
                 catch (Exception)

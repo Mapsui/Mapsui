@@ -7,7 +7,7 @@ using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia.SkiaWidgets
 {
-    public class ScaleBarWidgetRenderer : ISkiaWidgetRenderer
+    public class ScaleBarWidgetRenderer : ISkiaWidgetRenderer, IDisposable
     {
         private SKPaint? _paintScaleBar;
         private SKPaint? _paintScaleBarStroke;
@@ -149,6 +149,14 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
                 Style = style,
                 IsAntialias = true
             };
+        }
+
+        public virtual void Dispose()
+        {
+            _paintScaleBar?.Dispose();
+            _paintScaleBarStroke?.Dispose();
+            _paintScaleText?.Dispose();
+            _paintScaleTextStroke?.Dispose();
         }
     }
 }

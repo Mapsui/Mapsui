@@ -14,6 +14,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Resources;
 using System.Runtime.CompilerServices;
+using Mapsui.Utilities;
 #if __MAUI__
 using Mapsui.UI.Maui.Extensions;
 using Microsoft.Maui;
@@ -99,13 +100,12 @@ namespace Mapsui.UI.Forms
             // Add some events to _mapControl.Map.Layers
             Map!.Layers.Changed += HandleLayersChanged;
 
-            _pictMyLocationNoCenter = new SKSvg().Load(Utilities.EmbeddedResourceLoader.Load("Images.LocationNoCenter.svg", typeof(MapView))) ?? throw new MissingManifestResourceException("Images.LocationNoCenter.svg");
-            _pictMyLocationCenter = new SKSvg().Load(Utilities.EmbeddedResourceLoader.Load("Images.LocationCenter.svg", typeof(MapView))) ?? throw new MissingManifestResourceException("Images.LocationCenter.svg"); ;
+            _pictMyLocationNoCenter = EmbeddedResourceLoader.Load("Images.LocationNoCenter.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.LocationNoCenter.svg");
+            _pictMyLocationCenter = EmbeddedResourceLoader.Load("Images.LocationCenter.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.LocationCenter.svg"); ;
 
-            _pictZoomIn = new SKSvg().Load(Utilities.EmbeddedResourceLoader.Load("Images.ZoomIn.svg", typeof(MapView))) ?? throw new MissingManifestResourceException("Images.ZoomIn.svg"); ;
-            _pictZoomOut = new SKSvg().Load(Utilities.EmbeddedResourceLoader.Load("Images.ZoomOut.svg", typeof(MapView))) ?? throw new MissingManifestResourceException("Images.ZoomOut.svg"); ;
-            _pictNorthing = new SKSvg().Load(Utilities.EmbeddedResourceLoader.Load("Images.RotationZero.svg", typeof(MapView))) ?? throw new MissingManifestResourceException("Images.RotationZero.svg"); ;
-
+            _pictZoomIn = EmbeddedResourceLoader.Load("Images.ZoomIn.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.ZoomIn.svg"); ;
+            _pictZoomOut = EmbeddedResourceLoader.Load("Images.ZoomOut.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.ZoomOut.svg"); ;
+            _pictNorthing = EmbeddedResourceLoader.Load("Images.RotationZero.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.RotationZero.svg"); ;
             CreateButtons();
 
             _pins.CollectionChanged += HandlerPinsOnCollectionChanged;
@@ -842,6 +842,23 @@ namespace Mapsui.UI.Forms
             result.PropertyChanged += (s, e) => RefreshGraphics();
 
             return result;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            if (disposing)
+            {
+                _mapCalloutLayer?.Dispose();
+                _mapPinLayer?.Dispose();
+                _mapDrawableLayer?.Dispose();
+                _pictMyLocationNoCenter?.Dispose();
+                _pictMyLocationCenter?.Dispose();
+                _pictZoomIn?.Dispose();
+                _pictZoomOut?.Dispose();
+                _pictNorthing?.Dispose();
+                MyLocationLayer?.Dispose();
+            }
         }
     }
 }

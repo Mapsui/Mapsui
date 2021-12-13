@@ -219,7 +219,7 @@ namespace Mapsui.Rendering.Skia
                     surface.Canvas.ClipRect(new SKRect((float)(x - 1), (float)(y - 1), (float)(x + 1), (float)(y + 1)));
                     surface.Canvas.Clear(SKColors.Transparent);
 
-                    var pixmap = surface.PeekPixels();
+                    using var pixmap = surface.PeekPixels();
                     var color = pixmap.GetPixelColor(intX, intY);
 
 

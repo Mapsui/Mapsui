@@ -15,8 +15,6 @@
 // along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-#pragma warning disable IDISP025
-
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -324,15 +322,16 @@ namespace Mapsui
             Info?.Invoke(this, mapInfoEventArgs);
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             foreach (var layer in this.Layers)
             {
-                if (layer is IDisposable disposable)
-                {
-                    disposable.Dispose();
-                }
+                // remove Event so that no memory leaks occour
+                LayerRemoved(layer);
             }
+
+            // clear the layers
+            this.Layers.Clear();
         }
     }
 }

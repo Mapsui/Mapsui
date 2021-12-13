@@ -82,7 +82,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <summary>
         /// Performs a HTTP-GET or HTTP-POST request and returns a datastream for reading.
         /// </summary>
-        public Stream GetDataStream()
+        public Stream? GetDataStream()
         {
             if (string.IsNullOrEmpty(_url))
                 throw new Exception($"Property {nameof(Url)} was not set");
@@ -135,6 +135,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                 else
                     _webRequest.Method = WebRequestMethods.Http.Get;
 
+                _webResponse?.Dispose();
                 _webResponse = (HttpWebResponse)_webRequest.GetResponse();
                 return _webResponse.GetResponseStream();
             }
@@ -173,7 +174,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             }
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             _webResponse?.Dispose();
         }

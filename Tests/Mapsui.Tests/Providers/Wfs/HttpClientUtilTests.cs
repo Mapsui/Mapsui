@@ -10,7 +10,7 @@ namespace Mapsui.Tests.Providers.Wfs
         public void CloseDoesNotThrowException()
         {
             // Arrange
-            var httpClientUtil = new HttpClientUtil
+            using var httpClientUtil = new HttpClientUtil
             {
                 Url = "https://www.google.com"
             };
@@ -26,7 +26,7 @@ namespace Mapsui.Tests.Providers.Wfs
         public void TwoCloseDoesNotThrowException()
         {
             // Arrange
-            var httpClientUtil = new HttpClientUtil
+            using var httpClientUtil = new HttpClientUtil
             {
                 Url = "https://www.google.com"
             };

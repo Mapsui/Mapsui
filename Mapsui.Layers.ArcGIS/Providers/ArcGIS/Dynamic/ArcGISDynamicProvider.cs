@@ -99,9 +99,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             var features = new List<RasterFeature>();
 
             IViewport? viewport = fetchInfo.ToViewport();
-#pragma warning disable IDISP001
             if (viewport != null && TryGetMap(viewport, out var raster))
-#pragma warning restore IDISP001                
             {
                 features.Add(new RasterFeature(raster));
             }
@@ -161,9 +159,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
                 var bytes = BruTile.Utilities.ReadFully(readAsStreamAsync.Result);
                 if (viewport.Extent != null)
                 {
-#pragma warning disable IDISP004                    
-                    raster = new MRaster(new MemoryStream(bytes), viewport.Extent);
-#pragma warning restore IDISP004                    
+                    raster = new MRaster(bytes, viewport.Extent);
                     response.Dispose();
                     return true;
                 }

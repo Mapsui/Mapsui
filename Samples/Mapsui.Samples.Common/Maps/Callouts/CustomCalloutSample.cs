@@ -15,6 +15,7 @@ using SkiaSharp;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Local
 // ReSharper disable once ClassNeverInstantiated.Local
+#pragma warning disable IDISP001 // Dispose created
 
 namespace Mapsui.Samples.Common.Maps.Callouts
 {
@@ -36,7 +37,7 @@ namespace Mapsui.Samples.Common.Maps.Callouts
 
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(CreatePointLayer());
-            map.Home = n => n.NavigateTo(map.Layers[1].Extent?.Centroid, map.Resolutions[5]);
+            map.Home = n => n.NavigateTo(map.Layers[1].Extent!.Centroid, map.Resolutions[5]);
             return map;
         }
 
@@ -62,9 +63,7 @@ namespace Mapsui.Samples.Common.Maps.Callouts
                 var feature = new PointFeature(SphericalMercator.FromLonLat(c.Lng, c.Lat).ToMPoint());
                 feature["name"] = c.Name;
                 feature["country"] = c.Country;
-#pragma warning disable IDISP001                
                 var callbackImage = CreateCallbackImage(c);
-#pragma warning restore IDISP001                
                 var bitmapId = BitmapRegistry.Instance.Register(callbackImage);
                 var calloutStyle = CreateCalloutStyle(bitmapId);
                 feature.Styles.Add(calloutStyle);

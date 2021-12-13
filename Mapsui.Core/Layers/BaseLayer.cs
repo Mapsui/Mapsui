@@ -215,7 +215,7 @@ namespace Mapsui.Layers
             }
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);

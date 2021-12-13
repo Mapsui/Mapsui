@@ -12,7 +12,7 @@ namespace Mapsui.Tests.Styles
         public static void AddAndRemoveEntry()
         {
             // Arrange
-            var stream = new MemoryStream();
+            using var stream = new MemoryStream();
             var bitmapId = BitmapRegistry.Instance.Register(stream);
 
             // Act

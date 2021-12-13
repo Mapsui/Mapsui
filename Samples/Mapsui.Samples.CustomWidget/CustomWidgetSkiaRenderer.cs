@@ -16,7 +16,8 @@ namespace Mapsui.Samples.CustomWidget
             widget.Envelope = ToEnvelope(customWidget);
 
             // Use the envelope to draw
-            canvas.DrawRect(widget.Envelope.ToSkia(), new SKPaint { Color = customWidget.Color.ToSkia(0.5f) });
+            using var skPaint = new SKPaint { Color = customWidget.Color.ToSkia(0.5f) };
+            canvas.DrawRect(widget.Envelope.ToSkia(), skPaint);
         }
 
         private static MRect ToEnvelope(CustomWidget customWidget)

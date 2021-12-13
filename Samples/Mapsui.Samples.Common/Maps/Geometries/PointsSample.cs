@@ -12,6 +12,7 @@ using Mapsui.UI;
 using Newtonsoft.Json;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Local
+#pragma warning disable IDISP001 // Dispose created
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -31,7 +32,7 @@ namespace Mapsui.Samples.Common.Maps
 
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(CreatePointLayer());
-            map.Home = n => n.NavigateTo(map.Layers[1].Extent?.Centroid, map.Resolutions[5]);
+            map.Home = n => n.NavigateTo(map.Layers[1].Extent!.Centroid, map.Resolutions[5]);
             return map;
         }
 
@@ -50,7 +51,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             var path = "Mapsui.Samples.Common.EmbeddedResources.congo.json";
             var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
-            var stream = assembly.GetManifestResourceStream(path);
+            using var stream = assembly.GetManifestResourceStream(path);
             var cities = DeserializeFromStream<City>(stream);
 
             return cities.Select(c => {

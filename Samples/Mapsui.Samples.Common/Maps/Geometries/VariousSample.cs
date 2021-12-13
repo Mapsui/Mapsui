@@ -9,6 +9,8 @@ using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
 using Mapsui.UI;
 
+#pragma warning disable IDISP001 // Dispose created
+
 namespace Mapsui.Samples.Common.Maps
 {
     public class VariousSample : ISample
@@ -69,9 +71,7 @@ namespace Mapsui.Samples.Common.Maps
         private static int GetBitmapIdForEmbeddedResource(string imagePath)
         {
             var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
-#pragma warning disable IDISP001            
             var image = assembly.GetManifestResourceStream(imagePath);
-#pragma warning restore IDISP001            
             var bitmapId = BitmapRegistry.Instance.Register(image);
             return bitmapId;
         }

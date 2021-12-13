@@ -6,7 +6,7 @@ namespace Mapsui
 {
     public delegate void CoordinateSetter(double x, double y);
 
-    public interface IFeature
+    public interface IFeature : IDisposable
     {
         ICollection<IStyle> Styles { get; }
         object? this[string key] { get; set; }
