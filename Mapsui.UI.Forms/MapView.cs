@@ -66,7 +66,6 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public MapView()
         {
-            MyLocationEnabled = false;
             MyLocationFollow = false;
 
             IsClippedToBounds = true;

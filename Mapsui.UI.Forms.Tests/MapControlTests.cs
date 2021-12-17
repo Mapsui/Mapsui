@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace Mapsui.Tests.Memory;
 
 [TestFixture]
-public class MemoryLeakTests
+public class MapControlTests
 {
     [Test]
     [Ignore("This Test produced a Memory Leak because Dispose is not called")]
@@ -24,31 +24,6 @@ public class MemoryLeakTests
         Assert.IsTrue(weak.IsAlive);
     }
 
-    [Test]
-    public void MapIsNotAliveAfterUsage()
-    {
-        var weak = CreateMap();
-        Dispose(weak);
-
-        GC.Collect();
-        GC.WaitForPendingFinalizers();
-        GC.Collect();
-
-        Assert.IsFalse(weak.IsAlive);
-    }
-
-    [Test]
-    public void MapViewIsNotAliveAfterUsage()
-    {
-        var weak = CreateMap();
-        Dispose(weak);
-
-        GC.Collect();
-        GC.WaitForPendingFinalizers();
-        GC.Collect();
-
-        Assert.IsFalse(weak.IsAlive);
-    }
 
     [Test]
     public void MapControlIsNotAliveAfterUsage()
@@ -69,23 +44,9 @@ public class MemoryLeakTests
         (weak.Target as IDisposable)?.Dispose();
     }
 
-    private static WeakReference CreateMap()
-    {
-        var map = new Map();
-        var weak = new WeakReference(map);
-        return weak;
-    }
-
     private static WeakReference CreateMapControl()
     {
         var map = new MapControl();
-        var weak = new WeakReference(map);
-        return weak;
-    }
-
-    private static WeakReference CreateMapView()
-    {
-        var map = new MapView();
         var weak = new WeakReference(map);
         return weak;
     }
