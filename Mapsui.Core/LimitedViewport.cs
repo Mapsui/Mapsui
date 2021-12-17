@@ -50,6 +50,13 @@ namespace Mapsui
             Limiter?.LimitExtent(_viewport, Map?.Extent);
         }
 
+        public virtual void SetCenterAndResolution(double x, double y, double resolution)
+        {
+            if (Map?.PanLock ?? false) return;
+            _viewport.SetCenterAndResolution(x, y, resolution);
+            Limiter?.LimitExtent(_viewport, Map?.Extent);
+        }
+
         public void SetCenter(MReadOnlyPoint center)
         {
             if (Map?.PanLock ?? false) return;

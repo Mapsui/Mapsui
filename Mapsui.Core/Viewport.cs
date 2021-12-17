@@ -304,6 +304,13 @@ namespace Mapsui
             OnViewportChanged();
         }
 
+        public void SetCenterAndResolution(double x, double y, double resolution)
+        {
+            Center = new MPoint(x, y);
+            Resolution = resolution;
+            OnViewportChanged();
+        }
+
         public void SetCenter(MReadOnlyPoint center)
         {
             Center = center;

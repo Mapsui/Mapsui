@@ -22,6 +22,7 @@ namespace Mapsui
     public interface IViewport : IReadOnlyViewport
     {
         void SetCenter(double x, double y);
+        void SetCenterAndResolution(double x, double y, double resolution);
         void SetCenter(MReadOnlyPoint center);
         void SetResolution(double resolution);
         void SetRotation(double rotation);
