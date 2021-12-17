@@ -32,13 +32,9 @@ namespace Mapsui.Samples.Uno.Droid
         private void ConfigureUniversalImageLoader()
         {
             // Create global configuration and initialize ImageLoader with this config
-#pragma warning disable IDISP001
-#pragma warning disable IDISP004
             ImageLoaderConfiguration config = new ImageLoaderConfiguration
                 .Builder(Context)
                 .Build();
-#pragma warning restore IDISP001
-#pragma warning restore IDISP001
 
             ImageLoader.Instance.Init(config);
 

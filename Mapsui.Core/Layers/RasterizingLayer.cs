@@ -2,6 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Logging;
 using Mapsui.Rendering;
@@ -101,14 +102,14 @@ namespace Mapsui.Layers
 
                     _currentViewport = viewport;
 
-                    var bitmapStream = _rasterizer.RenderToBitmapStream(viewport, new[] { _layer }, pixelDensity: _pixelDensity);
+                    using var bitmapStream = _rasterizer.RenderToBitmapStream(viewport, new[] { _layer }, pixelDensity: _pixelDensity);
                     RemoveExistingFeatures();
 
                     if (bitmapStream != null)
                     {
                         _cache.Clear();
                         var features = new RasterFeature[1];
-                        features[0] = new RasterFeature(new MRaster(bitmapStream, viewport.Extent));
+                        features[0] = new RasterFeature(new MRaster(bitmapStream.ToArray(), viewport.Extent));
                         _cache.PushRange(features);
 #if DEBUG
                         Logger.Log(LogLevel.Debug, $"Memory after rasterizing layer {GC.GetTotalMemory(true):N0}");
@@ -140,15 +141,10 @@ namespace Mapsui.Layers
         {
             foreach (var feature in features.Cast<RasterFeature>())
             {
-                var raster = feature.Raster;
-                raster?.Data.Dispose();
-
                 foreach (var key in feature.RenderedGeometry.Keys)
                 {
                     var disposable = feature.RenderedGeometry[key] as IDisposable;
-#pragma warning disable IDISP007
                     disposable?.Dispose();
-#pragma warning restore IDISP007
                 }
             }
         }

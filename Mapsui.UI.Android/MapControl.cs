@@ -82,9 +82,7 @@ namespace Mapsui.UI.Android
 
             Touch += MapView_Touch;
 
-#pragma warning disable IDISP001 // Dispose created.
             var listener = new MapControlGestureListener();
-#pragma warning restore IDISP001 // Dispose created.
 
             listener.Fling += OnFling;
             _gestureDetector?.Dispose();
@@ -368,12 +366,10 @@ namespace Mapsui.UI.Android
         public void OpenBrowser(string url)
         {
             var uri = global::Android.Net.Uri.Parse(url);
-#pragma warning disable IDISP001
             var intent = new Intent(Intent.ActionView);
             intent.SetData(uri);
 
             var chooser = Intent.CreateChooser(intent, "Open with");
-#pragma warning restore IDISP001
             Context?.StartActivity(chooser);
         }
 
@@ -386,9 +382,7 @@ namespace Mapsui.UI.Android
                 _canvas?.Dispose();
                 _gestureDetector?.Dispose();
             }
-#pragma warning disable IDISP023 // Don't use reference types in finalizer context.
             CommonDispose(disposing);
-#pragma warning restore IDISP023 // Don't use reference types in finalizer context.
 
             base.Dispose(disposing);
         }

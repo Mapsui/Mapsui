@@ -11,7 +11,6 @@ using Mapsui.Rendering.Skia;
 using Mapsui.Utilities;
 using Mapsui.Widgets;
 
-#pragma warning disable IDISP008
 #nullable enable
 
 #if __MAUI__
@@ -34,7 +33,9 @@ namespace Mapsui.UI.Wpf
 {
     public partial class MapControl : INotifyPropertyChanged, IDisposable
     {
+#pragma warning disable IDISP008 // Don't assign member with injected and created disposables
         private Map? _map;
+#pragma warning restore IDISP008 // Don't assign member with injected and created disposables
         private double _unSnapRotationDegrees;
         // Flag indicating if a drawing process is running
         private bool _drawing;
@@ -260,9 +261,9 @@ namespace Mapsui.UI.Wpf
                 if (_navigator != null)
                 {
                     _navigator.Navigated -= Navigated;
-#pragma warning disable IDISP007 // Don't dispose injected.
+#pragma warning disable IDISP007 // Don't dispose injected
                     _navigator.Dispose();
-#pragma warning restore IDISP007 // Don't dispose injected.
+#pragma warning restore IDISP007 // Don't dispose injected
                 }
                 _navigator = value ?? throw new ArgumentException($"{nameof(Navigator)} can not be null");
                 _navigator.Navigated += Navigated;
@@ -632,9 +633,9 @@ namespace Mapsui.UI.Wpf
             if (disposing)
             {
                 Unsubscribe();
-#pragma warning disable IDISP007 // Don't dispose injected.
+#pragma warning disable IDISP007 // Don't dispose injected
                 Navigator?.Dispose();
-#pragma warning restore IDISP007 // Don't dispose injected.
+#pragma warning restore IDISP007 // Don't dispose injected
                 StopUpdates();
                 _invalidateTimer?.Dispose();
             }

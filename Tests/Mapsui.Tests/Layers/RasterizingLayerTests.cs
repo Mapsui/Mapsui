@@ -22,11 +22,12 @@ namespace Mapsui.Tests.Layers
         {
             // arrange
             DefaultRendererFactory.Create = () => new MapRenderer();
-            var layer = new RasterizingLayer(CreatePointLayer());
+            using var memoryLayer = CreatePointLayer();
+            using var layer = new RasterizingLayer(memoryLayer);
             var schema = new GlobalSphericalMercator();
             var box = schema.Extent.ToMRect();
             var resolution = schema.Resolutions.First().Value.UnitsPerPixel;
-            var waitHandle = new AutoResetEvent(false);
+            using var waitHandle = new AutoResetEvent(false);
 
             Assert.AreEqual(0, layer.GetFeatures(box, resolution).Count());
             layer.DataChanged += (_, _) => {

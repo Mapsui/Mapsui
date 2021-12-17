@@ -285,7 +285,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <summary>
         /// This method closes the XmlReader member and the used <see cref="HttpClientUtil"/> instance.
         /// </summary>
-        public void Dispose()
+        public virtual void Dispose()
         {
             XmlReader?.Close();
             _httpClientUtil?.Close();
@@ -565,7 +565,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                         null)
                     {
                         var multiPoint = new MultiPoint();
-                        GeometryFactory geomFactory = new PointFactory(GeomReader, FeatureTypeInfo) { AxisOrder = AxisOrder }; ;
+                        using GeometryFactory geomFactory = new PointFactory(GeomReader, FeatureTypeInfo) { AxisOrder = AxisOrder }; ;
                         var points = geomFactory.CreateGeometries(features);
 
                         foreach (var geometry in points)
@@ -647,7 +647,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                         null)
                     {
                         var multiLineString = new MultiLineString();
-                        GeometryFactory geomFactory = new LineStringFactory(GeomReader, FeatureTypeInfo) { AxisOrder = AxisOrder };
+                        using GeometryFactory geomFactory = new LineStringFactory(GeomReader, FeatureTypeInfo) { AxisOrder = AxisOrder };
                         var lineStrings = geomFactory.CreateGeometries(features);
 
                         foreach (var geometry in lineStrings)
@@ -727,7 +727,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                          GetSubReaderOf(FeatureReader, labelValues, multiPolygonNodeAlt, polygonMemberNodeAlt)) != null)
                     {
                         var multiPolygon = new MultiPolygon();
-                        GeometryFactory geomFactory = new PolygonFactory(GeomReader, FeatureTypeInfo) { AxisOrder = AxisOrder };
+                        using GeometryFactory geomFactory = new PolygonFactory(GeomReader, FeatureTypeInfo) { AxisOrder = AxisOrder };
                         var polygons = geomFactory.CreateGeometries(features);
 
                         foreach (var geometry in polygons)
@@ -819,18 +819,21 @@ namespace Mapsui.Providers.Wfs.Utilities
                     {
                         if (multiPointNode.Matches(XmlReader))
                         {
+                            geomFactory?.Dispose();
                             geomFactory = new MultiPointFactory(_httpClientUtil, FeatureTypeInfo);
                             geometryTypeString = "MultiPointPropertyType";
                             break;
                         }
                         if (multiLineStringNodeAlt.Matches(XmlReader))
                         {
+                            geomFactory?.Dispose();
                             geomFactory = new MultiLineStringFactory(_httpClientUtil, FeatureTypeInfo);
                             geometryTypeString = "MultiLineStringPropertyType";
                             break;
                         }
                         if (multiPolygonNodeAlt.Matches(XmlReader))
                         {
+                            geomFactory?.Dispose();
                             geomFactory = new MultiPolygonFactory(_httpClientUtil, FeatureTypeInfo);
                             geometryTypeString = "MultiPolygonPropertyType";
                             break;
@@ -839,18 +842,21 @@ namespace Mapsui.Providers.Wfs.Utilities
 
                     if (pointNode.Matches(XmlReader))
                     {
+                        geomFactory?.Dispose();
                         geomFactory = new PointFactory(_httpClientUtil, FeatureTypeInfo);
                         geometryTypeString = "PointPropertyType";
                         break;
                     }
                     if (lineStringNode.Matches(XmlReader))
                     {
+                        geomFactory?.Dispose();
                         geomFactory = new LineStringFactory(_httpClientUtil, FeatureTypeInfo);
                         geometryTypeString = "LineStringPropertyType";
                         break;
                     }
                     if (polygonNode.Matches(XmlReader))
                     {
+                        geomFactory?.Dispose();
                         geomFactory = new PolygonFactory(_httpClientUtil, FeatureTypeInfo);
                         geometryTypeString = "PolygonPropertyType";
                         break;

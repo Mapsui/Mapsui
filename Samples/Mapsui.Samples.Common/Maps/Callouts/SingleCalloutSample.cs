@@ -32,7 +32,7 @@ namespace Mapsui.Samples.Common.Maps.Callouts
 
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(CreatePointLayer());
-            map.Home = n => n.NavigateTo(map.Layers[1].Extent?.Centroid, map.Resolutions[5]);
+            map.Home = n => n.NavigateTo(map.Layers[1].Extent!.Centroid, map.Resolutions[5]);
             map.Info += MapOnInfo;
 
             return map;
@@ -63,8 +63,8 @@ namespace Mapsui.Samples.Common.Maps.Callouts
         {
             var path = "Mapsui.Samples.Common.EmbeddedResources.congo.json";
             var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
-            var stream = assembly.GetManifestResourceStream(path);
-            var cities = DeserializeFromStream<City>(stream);
+            using var stream = assembly.GetManifestResourceStream(path);
+            var cities = DeserializeFromStream<City>(stream!);
 
             return cities.Select(c => {
                 var feature = new PointFeature(SphericalMercator.FromLonLat(c.Lng, c.Lat).ToMPoint());

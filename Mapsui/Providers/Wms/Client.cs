@@ -270,9 +270,9 @@ namespace Mapsui.Providers.Wms
                 {
                     using (var stReader = new StreamReader(task.Result))
                     {
-                        var r = new XmlTextReader(url, stReader) { XmlResolver = null };
+                        using var r = new XmlTextReader(url, stReader) { XmlResolver = null };
                         doc.Load(r);
-                        task.Result.Close();
+                        task.Result.Dispose();
                     }
                 }
 
@@ -337,7 +337,7 @@ namespace Mapsui.Providers.Wms
             node = xnlServiceDescription.SelectSingleNode("sm:AccessConstraints", _nsmgr);
             _serviceDescription.AccessConstraints = node?.InnerText;
 
-            var xnlKeywords = xnlServiceDescription.SelectNodes("sm:KeywordList/sm:Keyword", _nsmgr);
+            using var xnlKeywords = xnlServiceDescription.SelectNodes("sm:KeywordList/sm:Keyword", _nsmgr);
             if (xnlKeywords != null)
             {
                 _serviceDescription.Keywords = new string[xnlKeywords.Count];
@@ -387,7 +387,7 @@ namespace Mapsui.Providers.Wms
             ParseRequest(xnRequest);
 
             // Workaround for some WMS servers that have returning more than one root layer
-            var layerNodes = xnCapability.SelectNodes("sm:Layer", _nsmgr);
+            using var layerNodes = xnCapability.SelectNodes("sm:Layer", _nsmgr);
             if (layerNodes != null && layerNodes.Count > 1)
             {
                 var layers = new List<WmsServerLayer>();
@@ -423,7 +423,7 @@ namespace Mapsui.Providers.Wms
         /// <param name="xnlExceptionNode"></param>
         private void ParseExceptions(XmlNode xnlExceptionNode)
         {
-            var xnlFormats = xnlExceptionNode.SelectNodes("sm:Format", _nsmgr);
+            using var xnlFormats = xnlExceptionNode.SelectNodes("sm:Format", _nsmgr);
             if (xnlFormats != null)
             {
                 _exceptionFormats = new string[xnlFormats.Count];
@@ -467,7 +467,7 @@ namespace Mapsui.Providers.Wms
                     GetFeatureInfoRequests[i] = wor;
                 }
             }
-            var xnlFormats = getFeatureInfoRequestNodes.SelectNodes("sm:Format", _nsmgr);
+            using var xnlFormats = getFeatureInfoRequestNodes.SelectNodes("sm:Format", _nsmgr);
             if (xnlFormats != null)
             {
                 GetFeatureInfoOutputFormats = new Collection<string>();
@@ -498,7 +498,7 @@ namespace Mapsui.Providers.Wms
                 }
             }
 
-            var xnlFormats = getMapRequestNodes.SelectNodes("sm:Format", _nsmgr);
+            using var xnlFormats = getMapRequestNodes.SelectNodes("sm:Format", _nsmgr);
             if (xnlFormats != null)
             {
                 GetMapOutputFormats = new Collection<string>();
@@ -529,7 +529,7 @@ namespace Mapsui.Providers.Wms
                 wmsServerLayer.Queryable = attr != null && attr.InnerText == "1";
             }
 
-            var xnlKeywords = xmlLayer.SelectNodes("sm:KeywordList/sm:Keyword", _nsmgr);
+            using var xnlKeywords = xmlLayer.SelectNodes("sm:KeywordList/sm:Keyword", _nsmgr);
             if (xnlKeywords != null)
             {
                 wmsServerLayer.Keywords = new string[xnlKeywords.Count];
@@ -539,7 +539,7 @@ namespace Mapsui.Providers.Wms
 
             wmsServerLayer.CRS = ParseCrses(xmlLayer);
 
-            var xnlBoundingBox = xmlLayer.SelectNodes("sm:BoundingBox", _nsmgr);
+            using var xnlBoundingBox = xmlLayer.SelectNodes("sm:BoundingBox", _nsmgr);
             if (xnlBoundingBox != null)
             {
                 wmsServerLayer.BoundingBoxes = new Dictionary<string, MRect>();
@@ -558,7 +558,7 @@ namespace Mapsui.Providers.Wms
                 }
             }
 
-            var xnlStyle = xmlLayer.SelectNodes("sm:Style", _nsmgr);
+            using var xnlStyle = xmlLayer.SelectNodes("sm:Style", _nsmgr);
             if (xnlStyle != null)
             {
                 wmsServerLayer.Style = new WmsLayerStyle[xnlStyle.Count];
@@ -596,7 +596,7 @@ namespace Mapsui.Providers.Wms
                     }
                 }
             }
-            var xnlLayers = xmlLayer.SelectNodes("sm:Layer", _nsmgr);
+            using var xnlLayers = xmlLayer.SelectNodes("sm:Layer", _nsmgr);
             if (xnlLayers != null)
             {
                 wmsServerLayer.ChildLayers = new WmsServerLayer[xnlLayers.Count];
@@ -620,14 +620,14 @@ namespace Mapsui.Providers.Wms
         {
             var crses = new List<string>();
 
-            var xnlSrs = xmlLayer.SelectNodes("sm:SRS", _nsmgr);
+            using var xnlSrs = xmlLayer.SelectNodes("sm:SRS", _nsmgr);
             if (xnlSrs != null)
             {
                 for (var i = 0; i < xnlSrs.Count; i++)
                     crses.Add(xnlSrs[i].InnerText);
             }
 
-            var xnlCrs = xmlLayer.SelectNodes("sm:CRS", _nsmgr);
+            using var xnlCrs = xmlLayer.SelectNodes("sm:CRS", _nsmgr);
             if (xnlCrs != null)
             {
                 for (var i = 0; i < xnlCrs.Count; i++)

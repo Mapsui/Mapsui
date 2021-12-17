@@ -6,6 +6,8 @@ using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Utilities;
 
+#pragma warning disable IDISP001 // Dispose created
+
 namespace Mapsui.Samples.Common.Maps.Projection
 {
     public class PointProjectionSample : ISample

@@ -487,7 +487,6 @@ namespace Mapsui.Providers.Wfs
 
                 geomFactory.AxisOrder = AxisOrder;
                 geomFactory.CreateGeometries(features);
-                geomFactory.Dispose();
                 return features;
             }
             // Free resources (net connection of geometry factory)

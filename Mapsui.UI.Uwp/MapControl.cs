@@ -297,12 +297,15 @@ namespace Mapsui.UI.Uwp
         {
             if (disposing)
             {
+                (_canvas as IDisposable)?.Dispose();
+#if __IOS__ || __MACOS__ || __ANDROID__ || NETSTANDARD
+                (_selectRectangle as IDisposable)?.Dispose();
+#endif
                 _map?.Dispose();
             }
-
-#pragma warning disable IDISP023 // Don't use reference types in finalizer context.
+#pragma warning disable IDISP023 // Don't use reference types in finalizer context
             CommonDispose(disposing);
-#pragma warning restore IDISP023 // Don't use reference types in finalizer context.
+#pragma warning restore IDISP023 // Don't use reference types in finalizer context
 
 #if __ANDROID__ || __IOS__ || __MACOS__
             base.Dispose(disposing);

@@ -21,7 +21,8 @@ namespace Mapsui.Tests.Common
 
         private void AddTile(TileIndex tileIndex)
         {
-            _dictionary[tileIndex] = ReadFully(GetTileStream(tileIndex));
+            using var tileStream = GetTileStream(tileIndex);
+            _dictionary[tileIndex] = ReadFully(tileStream);
         }
 
         public byte[] GetTile(TileInfo tileInfo)

@@ -105,6 +105,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Extensions\PointExtensions.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="MapControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Mapsui.UI.Uwp.rd.xml" />

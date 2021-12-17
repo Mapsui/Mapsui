@@ -30,9 +30,7 @@ namespace Mapsui.Samples.Common.Maps.Data
                 const string serviceUri = "https://geoservices.buergernetz.bz.it/geoserver/ows";
 
                 var map = new Map() { CRS = "EPSG:25832" };
-#pragma warning disable IDISP001                
                 var provider = CreateWfsProvider(serviceUri);
-#pragma warning restore IDISP001                
                 map.Layers.Add(CreateTileLayer(CreateTileSource()));
                 map.Layers.Add(CreateWfsLayer(provider));
                 map.Layers.Add(CreateLabelLayer(provider));

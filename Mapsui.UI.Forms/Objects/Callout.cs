@@ -651,7 +651,7 @@ namespace Mapsui.UI.Forms
             CalloutClosed?.Invoke(this, new EventArgs());
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             Feature.Dispose();
         }

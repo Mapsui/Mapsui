@@ -45,9 +45,8 @@ namespace Mapsui.Rendering.Skia
             var halfWidth = width / 2;
             var halfHeight = (float)SymbolStyle.DefaultHeight / 2;
 
-            var fillPaint = CreateFillPaint(vectorStyle.Fill, opacity);
-
-            var linePaint = CreateLinePaint(vectorStyle.Outline, opacity);
+            using var fillPaint = CreateFillPaint(vectorStyle.Fill, opacity);
+            using var linePaint = CreateLinePaint(vectorStyle.Outline, opacity);
 
             switch (symbolType)
             {
@@ -119,7 +118,7 @@ namespace Mapsui.Rendering.Skia
             var left = new Point(x + sideLength * -0.5, y + inradius);
             var right = new Point(x + sideLength * 0.5, y + inradius);
 
-            var path = new SKPath();
+            using var path = new SKPath();
             path.MoveTo((float)top.X, (float)top.Y);
             path.LineTo((float)left.X, (float)left.Y);
             path.LineTo((float)right.X, (float)right.Y);

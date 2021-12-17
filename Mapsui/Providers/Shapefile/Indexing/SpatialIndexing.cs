@@ -146,7 +146,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
         /// <returns></returns>
         public static QuadTree FromFile(string filename)
         {
-            var fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            using var fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
             var br = new BinaryReader(fs);
             // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (br.ReadDouble() != Indexfileversion) //Check fileindex version
@@ -158,6 +158,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
             }
             var node = ReadNode(0, ref br);
             br.Close();
+            br.Dispose();
             fs.Close();
             return node;
         }
@@ -206,11 +207,11 @@ namespace Mapsui.Providers.Shapefile.Indexing
         /// <param name="filename"></param>
         public void SaveIndex(string filename)
         {
-            var fs = new FileStream(filename, FileMode.Create);
+            using var fs = new FileStream(filename, FileMode.Create);
             var bw = new BinaryWriter(fs);
             bw.Write(Indexfileversion); //Save index version
             SaveNode(this, ref bw);
-            bw.Close();
+            bw.Dispose();
             fs.Close();
         }
 
@@ -301,10 +302,12 @@ namespace Mapsui.Providers.Shapefile.Indexing
         /// <summary>
         /// Disposes the node
         /// </summary>
-        public void Dispose()
+        public virtual void Dispose()
         {
             //this._box = null;
+            _child0?.Dispose();
             _child0 = null;
+            _child1?.Dispose();
             _child1 = null;
             _objList = null;
         }

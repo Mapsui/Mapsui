@@ -15,7 +15,7 @@ namespace Mapsui.Tests.Fetcher
         {
             // arrange
             var extent = new MRect(0, 0, 10, 10);
-            var layer = new Layer
+            using var layer = new Layer
             {
                 DataSource = new MemoryProvider<IFeature>(GenerateRandomPoints(extent, 25))
             };

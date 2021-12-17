@@ -11,7 +11,7 @@ namespace Mapsui.Tests.Utilities
         public void StreamIsSvgPin()
         {
             // act
-            var stream = File.ReadFromOriginalFolder("Pin.svg");
+            using var stream = File.ReadFromOriginalFolder("Pin.svg");
 
             // assert
             Assert.True(stream.IsSvg());
@@ -21,7 +21,7 @@ namespace Mapsui.Tests.Utilities
         public void StreamIsSvgPinXml()
         {
             // act
-            var stream = File.ReadFromOriginalFolder("PinXml.svg");
+            using var stream = File.ReadFromOriginalFolder("PinXml.svg");
 
             // assert
             Assert.True(stream.IsSvg());
@@ -31,7 +31,7 @@ namespace Mapsui.Tests.Utilities
         public void StreamIsSvgVectorSymbolUnittype()
         {
             // act
-            var stream = File.ReadFromOriginalFolder("vector_symbol_unittype.png");
+            using var stream = File.ReadFromOriginalFolder("vector_symbol_unittype.png");
 
             // assert
             Assert.IsFalse(stream.IsSvg());

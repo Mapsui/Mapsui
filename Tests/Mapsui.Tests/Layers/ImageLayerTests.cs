@@ -32,10 +32,10 @@ namespace Mapsui.Tests.Layers
         {
             // arrange
             var provider = new FakeProvider();
-            var imageLayer = new ImageLayer("imageLayer") { DataSource = provider };
-            var map = new Map();
+            using var imageLayer = new ImageLayer("imageLayer") { DataSource = provider };
+            using var map = new Map();
             map.Layers.Add(imageLayer);
-            var waitHandle = new AutoResetEvent(false);
+            using var waitHandle = new AutoResetEvent(false);
             Exception? exception = null;
 
             imageLayer.DataChanged += (_, args) => {

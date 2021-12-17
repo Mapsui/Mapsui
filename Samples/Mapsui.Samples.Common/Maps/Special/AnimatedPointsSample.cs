@@ -48,6 +48,15 @@ namespace Mapsui.Samples.Common.Maps.Special
             Style = new SymbolStyle { Fill = { Color = new Color(255, 215, 0, 200) }, SymbolScale = 0.9 };
             _timer = new Timer(_ => UpdateData(), this, 0, 2000);
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            if (disposing)
+            {
+                _timer.Dispose();
+            }
+        }
     }
 
     internal class DynamicMemoryProvider : MemoryProvider<PointFeature>

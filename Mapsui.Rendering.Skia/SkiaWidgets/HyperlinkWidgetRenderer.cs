@@ -11,8 +11,8 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
         {
             var hyperlink = (Hyperlink)widget;
             if (string.IsNullOrEmpty(hyperlink.Text)) return;
-            var textPaint = new SKPaint { Color = hyperlink.TextColor.ToSkia(layerOpacity), IsAntialias = true };
-            var backPaint = new SKPaint { Color = hyperlink.BackColor.ToSkia(layerOpacity) };
+            using var textPaint = new SKPaint { Color = hyperlink.TextColor.ToSkia(layerOpacity), IsAntialias = true };
+            using var backPaint = new SKPaint { Color = hyperlink.BackColor.ToSkia(layerOpacity) };
             // The textRect has an offset which can be confusing. 
             // This is because DrawText's origin is the baseline of the text, not the bottom.
             // Read more here: https://developer.xamarin.com/guides/xamarin-forms/advanced/skiasharp/basics/text/

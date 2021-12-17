@@ -69,7 +69,9 @@ namespace Mapsui.Providers.Shapefile
 
         public void Open()
         {
+            _fs?.Dispose();
             _fs = new FileStream(_filename, FileMode.Open, FileAccess.Read);
+            _br?.Dispose();
             _br = new BinaryReader(_fs);
             _isOpen = true;
             if (!_headerIsParsed) ParseDbfHeader(); // Don't read the header if it's already parsed
@@ -86,7 +88,9 @@ namespace Mapsui.Providers.Shapefile
         {
             if (_isOpen)
                 Close();
+            _br?.Dispose();
             _br = null;
+            _fs?.Dispose();
             _fs = null;
         }
 

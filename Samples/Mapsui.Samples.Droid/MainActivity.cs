@@ -64,13 +64,9 @@ namespace Mapsui.Samples.Droid
             if (menu == null)
                 return false;
 
-#pragma warning disable IDISP001 // Dispose created.
             var rendererMenu = menu.AddSubMenu(nameof(SkiaRenderMode));
-#pragma warning restore IDISP001 // Dispose created.
-#pragma warning disable IDISP004 // Don't ignore created IDisposable.
             rendererMenu?.Add(SkiaRenderMode.Software.ToString());
             rendererMenu?.Add(SkiaRenderMode.Hardware.ToString());
-#pragma warning restore IDISP004 // Don't ignore created IDisposable.
 
             var categories = AllSamples.GetSamples()?.Select(s => s.Category).Distinct().OrderBy(c => c);
             if (categories == null)
@@ -78,9 +74,7 @@ namespace Mapsui.Samples.Droid
 
             foreach (var category in categories)
             {
-#pragma warning disable IDISP001 // Dispose created.
                 var submenu = menu.AddSubMenu(category);
-#pragma warning restore IDISP001 // Dispose created.
 
                 var allSamples = AllSamples.GetSamples()?.Where(s => s.Category == category);
                 if (allSamples == null)
@@ -88,9 +82,7 @@ namespace Mapsui.Samples.Droid
 
                 foreach (var sample in allSamples)
                 {
-#pragma warning disable IDISP004 // Don't ignore created IDisposable.
                     submenu?.Add(sample.Name);
-#pragma warning restore IDISP004 // Don't ignore created IDisposable.
                 }
             }
             return true;

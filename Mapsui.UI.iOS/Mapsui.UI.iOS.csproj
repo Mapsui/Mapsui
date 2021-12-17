@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\CGPointExtensions.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="MapControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
