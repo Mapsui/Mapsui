@@ -67,7 +67,10 @@ namespace Mapsui.Utilities
                 return;
 
             if (callFinal)
+            {
+                entry.Done = true;
                 entry.Final();
+            }
         }
 
         /// <summary>

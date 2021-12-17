@@ -95,6 +95,11 @@ namespace Mapsui.Utilities
         }
 
         /// <summary>
+        /// When Done is true the AnimationEntry can removed. The Animation class will set this to true.
+        /// </summary>
+        internal bool Done { get; set; }
+
+        /// <summary>
         /// Called when the animation cycle is at the end
         /// </summary>
         internal void Final()
