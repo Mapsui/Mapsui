@@ -38,8 +38,8 @@ jobs:
       with:
          dotnet-version: '5.0.x'
          include-prerelease: true
-    - name: install maui-check
-      run: dotnet tool install -g Redth.Net.Maui.Check
+    - name: install maui
+      run: dotnet workload install maui
     - name: Restore dependencies
       run: nuget restore Mapsui.Mac.sln
     - name: Build Mapsui.Core
@@ -92,10 +92,8 @@ jobs:
       uses: microsoft/setup-msbuild@v1.1
       with:
         vs-prerelease: true
-    - name: install maui-check
-      run: dotnet tool install -g Redth.Net.Maui.Check
-    - name: run maui-check
-      run: maui-check --fix --non-interactive --skip vswin --skip edgewebview2 --skip androidemulator
+    - name: install maui
+      run: dotnet workload install maui
     - name: Restore dependencies
       run: nuget restore Mapsui.sln
     - name: Build Mapsui.Core
@@ -170,10 +168,8 @@ jobs:
       uses: microsoft/setup-msbuild@v1.1
       with:
         vs-prerelease: true
-    - name: install maui-check
-      run: dotnet tool install -g Redth.Net.Maui.Check
-    - name: run maui-check
-      run: maui-check --fix --non-interactive --skip vswin --skip edgewebview2 --skip androidemulator
+    - name: install maui
+      run: dotnet workload install maui
     - name: Restore dependencies
       run: nuget restore Mapsui.Maui.sln
     - name: Build Mapsui.Core
