@@ -35,35 +35,22 @@
 
     <ItemGroup>
       <!-- App Icon -->
-      <AndroidResource Include="Resources\appicon.svg" ForegroundFile="Resources\appiconfg.svg" Color="#512BD4" />
+      <MauiIcon Include="Resources\appicon.svg" ForegroundFile="Resources\appiconfg.svg" Color="#512BD4" />
 
-        <!-- Splash Screen -->
-        <AndroidResource Include="Resources\appiconfg.svg" Color="#512BD4" />
+      <!-- Splash Screen -->
+      <MauiSplashScreen Include="Resources\appiconfg.svg" Color="#512BD4" />
 
-        <!-- Images -->
+      <!-- Images -->
         <MauiImage Include="Resources\Images\*" />
 
-        <!-- Custom Fonts -->
-        <MauiFont Include="Resources\Fonts\*" />
+      <!-- Custom Fonts -->
+      <MauiFont Include="Resources\Fonts\*" />
     </ItemGroup>
 
 	<ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
 		<!-- Required - WinUI does not yet have buildTransitive for everything -->
         <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0" />
 		<PackageReference Include="Microsoft.Graphics.Win2D" Version="1.0.0.30" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiFont Remove="Resources\Fonts\OpenSansRegular.ttf" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiImage Remove="Resources\Images\dotnet_bot.svg" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <AndroidResource Include="Resources\Fonts\OpenSansRegular.ttf" />
-	  <AndroidResource Include="Resources\Images\dotnet_bot.svg" />
 	</ItemGroup>
 
   <ItemGroup>
@@ -96,7 +83,7 @@
 	<!-- Required - WinUI can't deploy in a multi-targeting environment -->
 	<PropertyGroup Condition="$(TargetFramework.Contains('-windows'))">
 		<OutputType>WinExe</OutputType>
-		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+        <RuntimeIdentifier>win10-x64</RuntimeIdentifier>
 	</PropertyGroup>
 
 </Project>
