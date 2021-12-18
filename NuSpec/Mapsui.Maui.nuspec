@@ -59,9 +59,9 @@
   </metadata>
   <files>
     <file src="../Mapsui.UI.Maui/bin/Release/net6.0/Mapsui.UI.Maui.dll" target="lib/net6.0/" />    
-    <file src="../Mapsui.UI.Maui/bin/Release/net6.0-android/Mapsui.UI.Maui.dll" target="lib/net6.0-android/" />   
-    <file src="../Mapsui.UI.Maui/bin/Release/net6.0-ios/Mapsui.UI.Maui.dll" target="lib/net6.0-ios/" />   
-    <file src="../Mapsui.UI.Maui/bin/Release/net6.0-maccatalyst/Mapsui.UI.Maui.dll" target="lib/net6.0-maccatalyst/" />   
+    <file src="../Mapsui.UI.Maui/bin/Release/net6.0-android/Mapsui.UI.Maui.dll" target="lib/net6.0-android30.0/" />   
+    <file src="../Mapsui.UI.Maui/bin/Release/net6.0-ios/Mapsui.UI.Maui.dll" target="lib/net6.0-ios13.6/" />   
+    <file src="../Mapsui.UI.Maui/bin/Release/net6.0-maccatalyst/Mapsui.UI.Maui.dll" target="lib/net6.0-maccatalyst13.5/" />   
     <file src="../Mapsui.UI.Maui/bin/Release/net6.0-windows10.0.19041/Mapsui.UI.Maui.dll" target="lib/net6.0-windows10.0.19041/" />   
   </files>
 </package>
