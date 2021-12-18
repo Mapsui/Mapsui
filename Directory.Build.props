@@ -23,7 +23,6 @@
   <ItemGroup>
 	  <Compile Include="$(MSBuildThisFileDirectory)/Nullable.cs" />
 	  <Compile Include="$(MSBuildThisFileDirectory)/InitProperty.cs" />
-      <Compile Include="$(MSBuildThisFileDirectory)/OwnershipAttributes.cs" />
   </ItemGroup>
 
   <ItemGroup>
