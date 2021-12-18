@@ -35,10 +35,7 @@
 
     <ItemGroup>
       <!-- App Icon -->
-      <MauiIcon
-        Include="Resources\appicon.svg"
-        ForegroundFile="Resources\appiconfg.svg"
-        Color="#512BD4" />
+      <MauiIcon Include="Resources\appicon.svg" ForegroundFile="Resources\appiconfg.svg" Color="#512BD4" />
 
         <!-- Splash Screen -->
         <MauiSplashScreen Include="Resources\appiconfg.svg" Color="#512BD4" />
@@ -52,19 +49,18 @@
 
 	<ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
 		<!-- Required - WinUI does not yet have buildTransitive for everything -->
-        <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0-preview3" />
-		<PackageReference Include="Microsoft.Graphics.Win2D" Version="1.0.0.29-preview3" />
+        <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0" />
+		<PackageReference Include="Microsoft.Graphics.Win2D" Version="1.0.0.30" />
 	</ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="SkiaSharp" Version="2.88.0-preview.155" />
-    <PackageReference Include="SkiaSharp.HarfBuzz" Version="2.88.0-preview.155" />
-    <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.0-preview.155" />
-    <PackageReference Include="SkiaSharp.Views.Maui.Controls.Compatibility" Version="2.88.0-preview.155" />
+    <PackageReference Include="SkiaSharp" Version="2.88.0-preview.179" />
+    <PackageReference Include="SkiaSharp.HarfBuzz" Version="2.88.0-preview.179" />
+    <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.0-preview.179" />
+    <PackageReference Include="SkiaSharp.Views.Maui.Controls.Compatibility" Version="2.88.0-preview.179" />
   </ItemGroup>
 
 	<ItemGroup>
-	  <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\AnimationSample.cs" Link="AnimationSample.cs" />
 	  <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\CircleSample.cs" Link="CircleSample.cs" />
 	  <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\IFormsSample.cs" Link="IFormsSample.cs" />
 	  <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\ManyPinsSample.cs" Link="ManyPinsSample.cs" />
