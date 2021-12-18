@@ -23,6 +23,7 @@
   <ItemGroup>
 	  <Compile Include="$(MSBuildThisFileDirectory)/Nullable.cs" />
 	  <Compile Include="$(MSBuildThisFileDirectory)/InitProperty.cs" />
+      <Compile Include="$(MSBuildThisFileDirectory)/OwnershipAttributes.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,11 +38,5 @@
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
-
-  <ItemGroup>
-    <!--Ownership Attributes for IDisposable Analyzer-->
-    <Compile Include="$(SolutionDir)\OwnershipAttributes.cs" Link="OwnershipAttributes.cs" />
-  </ItemGroup>
-
 
 </Project>
