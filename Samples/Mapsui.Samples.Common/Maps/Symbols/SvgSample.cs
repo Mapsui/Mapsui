@@ -11,8 +11,6 @@ using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
 using Mapsui.UI;
 
-#pragma warning disable IDISP001 // Dispose created
-
 namespace Mapsui.Samples.Common.Maps
 {
     public class SvgSample : ISample
@@ -77,8 +75,7 @@ namespace Mapsui.Samples.Common.Maps
                 try
                 {
                     var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
-                    var image = assembly.GetManifestResourceStream(imagePath)!;
-                    id = BitmapRegistry.Instance.Register(image);
+                    id = BitmapRegistry.Instance.Register(assembly.GetManifestResourceStream(imagePath)!);
                     ImageCache[imagePath] = id;
                 }
                 catch (Exception exception)
