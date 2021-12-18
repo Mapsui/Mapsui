@@ -40,8 +40,7 @@ public class RasterizingTileProvider : ITileSource
     public byte[]? GetTile(TileInfo tileInfo)
     {
         var rasterizerLayer = GetRasterizerLayer();
-        rasterizerLayer.RefreshData(new FetchInfo(tileInfo.Extent.ToMRect(), _pixelDensity));
-        var result = rasterizerLayer.CreateMRaster();
+        var result = rasterizerLayer.Rasterize(new FetchInfo(tileInfo.Extent.ToMRect(), _pixelDensity));
         _rasterizingLayers.Push(rasterizerLayer);
         return result?.Data;
     }

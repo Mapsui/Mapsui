@@ -96,7 +96,7 @@ namespace Mapsui.Layers
             {
                 try
                 {
-                    var raster = CreateMRaster();
+                    var raster = Rasterize(_fetchInfo);
                     if (raster != null)
                     {
                         RemoveExistingFeatures();
@@ -120,13 +120,13 @@ namespace Mapsui.Layers
             }
         }
 
-        public MRaster? CreateMRaster()
+        public MRaster? Rasterize(FetchInfo? fetchInfo)
         {
-            if (_fetchInfo == null) return null;
-            if (double.IsNaN(_fetchInfo.Resolution) || _fetchInfo.Resolution <= 0) return null;
-            if (_fetchInfo.Extent == null || _fetchInfo.Extent?.Width <= 0 || _fetchInfo.Extent?.Height <= 0) return null;
+            if (fetchInfo == null) return null;
+            if (double.IsNaN(fetchInfo.Resolution) || fetchInfo.Resolution <= 0) return null;
+            if (fetchInfo.Extent == null || fetchInfo.Extent?.Width <= 0 || fetchInfo.Extent?.Height <= 0) return null;
 
-            var viewport = CreateViewport(_fetchInfo.Extent!, _fetchInfo.Resolution, _renderResolutionMultiplier, _overscan);
+            var viewport = CreateViewport(fetchInfo.Extent!, fetchInfo.Resolution, _renderResolutionMultiplier, _overscan);
 
             _currentViewport = viewport;
 
