@@ -33,9 +33,7 @@ namespace Mapsui.Samples.Uwp
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {
-#pragma warning disable Uno0001 // Uno type or member is not implemented
                 DebugSettings.EnableFrameRateCounter = true;
-#pragma warning restore Uno0001 // Uno type or member is not implemented
             }
 #endif
             var rootFrame = Window.Current.Content as Frame;
