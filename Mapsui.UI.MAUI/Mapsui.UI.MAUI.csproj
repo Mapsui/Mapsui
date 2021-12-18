@@ -5,12 +5,7 @@
       <UseMaui>true</UseMaui>
 	  <SingleProject>true</SingleProject>
       <DefineConstants>__MAUI__</DefineConstants>
-	  <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-ios'">14.2</SupportedOSPlatformVersion>
-	  <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-maccatalyst'">14.0</SupportedOSPlatformVersion>
-	  <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-android'">21.0</SupportedOSPlatformVersion>
-	  <SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('-windows'))">10.0.17763.0</SupportedOSPlatformVersion>
-	  <TargetPlatformMinVersion Condition="$(TargetFramework.Contains('-windows'))">10.0.17763.0</TargetPlatformMinVersion>
-	</PropertyGroup>
+    </PropertyGroup>
 
   <ItemGroup>
 	  <Compile Include="..\Mapsui.UI.Forms\EventArgs\CalloutClickedEventArgs.cs" Link="EventArgs\CalloutClickedEventArgs.cs" />
