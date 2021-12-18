@@ -826,7 +826,11 @@ namespace Mapsui.UI.Forms
 
         protected void RunOnUIThread(Action action)
         {
+#if __MAUI__ // WORKAROUND for Preview 11 will be fixed in Preview 12
+            Application.Current?.Dispatcher.Dispatch(action);
+#else
             Device.BeginInvokeOnMainThread(action);
+#endif
         }
 
         public void Dispose()
