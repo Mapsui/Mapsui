@@ -192,7 +192,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Layers.ArcGIS", "Map
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Layers.Tiling", "Mapsui.Layers.Tiling\Mapsui.Layers.Tiling.csproj", "{08072ECA-528C-47D5-82A3-85E54300C22A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.UI.Forms.Tests", "Mapsui.UI.Forms.Tests\Mapsui.UI.Forms.Tests.csproj", "{A1FFEB6C-BE22-4659-83D2-F80333A6E7FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.UI.Forms.Tests", "Mapsui.UI.Forms.Tests\Mapsui.UI.Forms.Tests.csproj", "{A1FFEB6C-BE22-4659-83D2-F80333A6E7FB}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution

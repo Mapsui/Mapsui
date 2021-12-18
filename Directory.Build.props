@@ -32,10 +32,16 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <!--Disposable Analyzer-->
-    <PackageReference Include="IDisposableAnalyzers" Version="3.4.15">
+    <PackageReference Include="IDisposableAnalyzers" Version="4.0.1">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
+
+  <ItemGroup>
+    <!--Ownership Attributes for IDisposable Analyzer-->
+    <Compile Include="$(SolutionDir)\OwnershipAttributes.cs" Link="OwnershipAttributes.cs" />
+  </ItemGroup>
+
 
 </Project>
