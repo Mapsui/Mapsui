@@ -6,6 +6,7 @@
       <UseMaui>true</UseMaui>
 	  <SingleProject>true</SingleProject>
       <DefineConstants>__MAUI__</DefineConstants>
+	  <NoWarn>NU1703</NoWarn>
     </PropertyGroup>
 
   <ItemGroup>
