@@ -59,5 +59,5 @@ public class RasterizingTileProvider : ITileSource
 
     public ITileSchema Schema => _tileSchema ??= new GlobalSphericalMercator();
     public string Name => _layer.Name;
-    public Attribution Attribution => _attribution ??= new Attribution(_layer.Attribution.Text ,_layer.Attribution.Url);
+    public Attribution Attribution => _attribution ??= new Attribution(_layer.Attribution.Text, _layer.Attribution.Url);
 }
