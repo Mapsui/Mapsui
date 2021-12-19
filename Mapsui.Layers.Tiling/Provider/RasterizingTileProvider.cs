@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Concurrent;
 using BruTile;
 using BruTile.Cache;
@@ -47,7 +48,7 @@ public class RasterizingTileProvider : ITileSource
             using var stream = renderer.RenderToBitmapStream(viewPort, new[] { _layer }, pixelDensity: _pixelDensity);
             _rasterizingLayers.Push(renderer);
             result = stream?.ToArray();
-            PersistentCache?.Add(tileInfo.Index, result);
+            PersistentCache?.Add(tileInfo.Index, result ?? Array.Empty<byte>());
         }
 
         return result;
