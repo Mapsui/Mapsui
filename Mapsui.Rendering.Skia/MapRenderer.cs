@@ -186,7 +186,7 @@ namespace Mapsui.Rendering.Skia
             // todo: We will need to select on style instead of layer
 
             layers = layers
-                .Select(l => (l is IChildLayer rl) ? rl.ChildLayer : l)
+                .Select(l => (l is IChildLayer cl) ? cl.ChildLayer : l)
                 .Where(l => l.IsMapInfoLayer);
 
             var list = new List<MapInfoRecord>();
