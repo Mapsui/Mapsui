@@ -10,7 +10,7 @@ using Mapsui.Rendering;
 
 namespace Mapsui.Layers
 {
-    public class RasterizingLayer : BaseLayer, IAsyncDataFetcher
+    public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, IChildLayer
     {
         private readonly ConcurrentStack<RasterFeature> _cache;
         private readonly ILayer _layer;

@@ -1,20 +1,13 @@
 using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
 using BruTile;
 using BruTile.Cache;
-using Mapsui.Extensions;
 using Mapsui.Fetcher;
-using Mapsui.Logging;
 using Mapsui.Rendering;
 
 namespace Mapsui.Layers
 {
-    public class RasterizingTileLayer : TileLayer
+    public class RasterizingTileLayer : TileLayer, IChildLayer
     {
-        private readonly ILayer _layer;
-
         /// <summary>
         ///     Creates a RasterizingTileLayer which rasterizes a layer for performance
         /// </summary>
@@ -52,13 +45,9 @@ namespace Mapsui.Layers
             maxExtraTiles,
             fetchTileAsFeature)
         {
-            _layer = layer;
+            ChildLayer = layer;
         }
 
-        public override void RefreshData(FetchInfo fetchInfo)
-        {
-            _layer.RefreshData(fetchInfo);
-            base.RefreshData(fetchInfo);
-        }
+        public ILayer ChildLayer { get; }
     }
 }
