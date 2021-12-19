@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using BruTile;
+using BruTile.Cache;
 using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Logging;
@@ -28,6 +29,7 @@ namespace Mapsui.Layers
         /// <param name="minExtraTiles">Number of minimum extra tiles for memory cache</param>
         /// <param name="maxExtraTiles">Number of maximum extra tiles for memory cache</param>
         /// <param name="fetchTileAsFeature">Fetch tile as feature</param>
+        /// <param name="persistentCache">Persistent Cache</param>
         public RasterizingTileLayer(
             ILayer layer,
             double renderResolutionMultiplier = 1,
@@ -39,8 +41,9 @@ namespace Mapsui.Layers
             IRenderFetchStrategy? renderFetchStrategy = null,
             int minExtraTiles = -1,
             int maxExtraTiles = -1,
-            Func<TileInfo, RasterFeature?>? fetchTileAsFeature = null)
-            : base(new RasterizingTileProvider(layer, renderResolutionMultiplier, rasterizer, pixelDensity),
+            Func<TileInfo, RasterFeature?>? fetchTileAsFeature = null,
+            IPersistentCache<byte[]>? persistentCache = null)
+            : base(new RasterizingTileProvider(layer, renderResolutionMultiplier, rasterizer, pixelDensity, persistentCache),
             minTiles,
             maxTiles,
             dataFetchStrategy,
