@@ -8,7 +8,7 @@ namespace Mapsui.Layers;
 
 public class RasterizingTileProvider : ITileSource
 {
-    private readonly Stack<RasterizingLayer> _rasterizingLayers = new();
+    private readonly Stack<IRenderer> _rasterizingLayers = new();
     private readonly int _delayBeforeRasterize;
     private readonly double _renderResolutionMultiplier;
     private readonly IRenderer? _rasterizer;
@@ -18,6 +18,7 @@ public class RasterizingTileProvider : ITileSource
     private readonly ILayer _layer;
     private ITileSchema? _tileSchema;
     private Attribution? _attribution;
+    private FetchInfo? _fetchInfo;
 
     public RasterizingTileProvider(
         ILayer layer,
@@ -39,19 +40,19 @@ public class RasterizingTileProvider : ITileSource
 
     public byte[]? GetTile(TileInfo tileInfo)
     {
-        var rasterizerLayer = GetRasterizerLayer();
-        var result = rasterizerLayer.Rasterize(new FetchInfo(tileInfo.Extent.ToMRect(), _pixelDensity));
-        _rasterizingLayers.Push(rasterizerLayer);
-        return result?.Data;
+        var renderer = GetRasterizerLayer();
+        var viewPort = RasterizingLayer.CreateViewport(tileInfo.Extent.ToMRect(), _fetchInfo?.Resolution ?? 1,  _renderResolutionMultiplier, _overscanRatio);
+        using var result = renderer.RenderToBitmapStream(viewPort,new []{ _layer }, pixelDensity: _pixelDensity);
+        _rasterizingLayers.Push(renderer);
+        return result?.ToArray();
     }
 
-    private RasterizingLayer GetRasterizerLayer()
+    private IRenderer GetRasterizerLayer()
     {
         var rasterizer = _rasterizingLayers.Pop();
         if (rasterizer == null)
         {
-            rasterizer = new RasterizingLayer(_layer, _delayBeforeRasterize, _renderResolutionMultiplier, _rasterizer, _overscanRatio,
-                _onlyRerasterizeIfOutsideOverscan, _pixelDensity);
+            rasterizer = _rasterizer ?? DefaultRendererFactory.Create();
         }
 
         return rasterizer;
@@ -60,4 +61,9 @@ public class RasterizingTileProvider : ITileSource
     public ITileSchema Schema => _tileSchema ??= new GlobalSphericalMercator();
     public string Name => _layer.Name;
     public Attribution Attribution => _attribution ??= new Attribution(_layer.Attribution.Text, _layer.Attribution.Url);
+
+    public void RefreshData(FetchInfo fetchInfo)
+    {
+        _fetchInfo = fetchInfo;
+    }
 }

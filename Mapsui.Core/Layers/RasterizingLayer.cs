@@ -96,13 +96,21 @@ namespace Mapsui.Layers
             {
                 try
                 {
-                    var raster = Rasterize(_fetchInfo);
-                    if (raster != null)
+                    if (_fetchInfo == null) return;
+                    if (double.IsNaN(_fetchInfo.Resolution) || _fetchInfo.Resolution <= 0) return;
+                    if (_fetchInfo.Extent == null || _fetchInfo.Extent?.Width <= 0 || _fetchInfo.Extent?.Height <= 0) return;
+                    var viewport = CreateViewport(_fetchInfo.Extent!, _fetchInfo.Resolution, _renderResolutionMultiplier, _overscan);
+
+                    _currentViewport = viewport;
+
+                    using var bitmapStream = _rasterizer.RenderToBitmapStream(viewport, new[] { _layer }, pixelDensity: _pixelDensity);
+                    RemoveExistingFeatures();
+
+                    if (bitmapStream != null)
                     {
-                        RemoveExistingFeatures();
                         _cache.Clear();
                         var features = new RasterFeature[1];
-                        features[0] = new RasterFeature(new MRaster(raster));
+                        features[0] = new RasterFeature(new MRaster(bitmapStream.ToArray(), viewport.Extent));
                         _cache.PushRange(features);
 #if DEBUG
                         Logger.Log(LogLevel.Debug, $"Memory after rasterizing layer {GC.GetTotalMemory(true):N0}");
@@ -118,24 +126,6 @@ namespace Mapsui.Layers
                     _busy = false;
                 }
             }
-        }
-
-        public MRaster? Rasterize(FetchInfo? fetchInfo)
-        {
-            if (fetchInfo == null) return null;
-            if (double.IsNaN(fetchInfo.Resolution) || fetchInfo.Resolution <= 0) return null;
-            if (fetchInfo.Extent == null || fetchInfo.Extent?.Width <= 0 || fetchInfo.Extent?.Height <= 0) return null;
-
-            var viewport = CreateViewport(fetchInfo.Extent!, fetchInfo.Resolution, _renderResolutionMultiplier, _overscan);
-
-            _currentViewport = viewport;
-
-            using var bitmapStream = _rasterizer.RenderToBitmapStream(viewport, new[] { _layer }, pixelDensity: _pixelDensity);
-            if (bitmapStream == null)
-            {
-                return null;
-            }
-            return new MRaster(bitmapStream.ToArray(), viewport.Extent);
         }
 
         private void RemoveExistingFeatures()
@@ -209,7 +199,7 @@ namespace Mapsui.Layers
             if (_layer is IAsyncDataFetcher asyncLayer) asyncLayer.ClearCache();
         }
 
-        private static Viewport CreateViewport(MRect extent, double resolution, double renderResolutionMultiplier,
+        public static Viewport CreateViewport(MRect extent, double resolution, double renderResolutionMultiplier,
             double overscan)
         {
             var renderResolution = resolution / renderResolutionMultiplier;

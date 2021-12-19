@@ -12,6 +12,8 @@ namespace Mapsui.Layers
 {
     public class RasterizingTileLayer : TileLayer
     {
+        private readonly ILayer _layer;
+
         /// <summary>
         ///     Creates a RasterizingTileLayer which rasterizes a layer for performance
         /// </summary>
@@ -57,6 +59,14 @@ namespace Mapsui.Layers
             maxExtraTiles,
             fetchTileAsFeature)
         {
+            _layer = layer;
+        }
+
+        public override void RefreshData(FetchInfo fetchInfo)
+        {
+            ((RasterizingTileProvider)base.TileSource).RefreshData(fetchInfo);
+            _layer.RefreshData(fetchInfo);
+            base.RefreshData(fetchInfo);
         }
     }
 }
