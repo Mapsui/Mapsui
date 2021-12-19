@@ -1,6 +1,4 @@
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
 using BruTile;
 using BruTile.Cache;
 using BruTile.Predefined;
@@ -18,7 +16,6 @@ public class RasterizingTileProvider : ITileSource
     private readonly ILayer _layer;
     private ITileSchema? _tileSchema;
     private Attribution? _attribution;
-    private FetchInfo? _fetchInfo;
 
     public RasterizingTileProvider(
         ILayer layer,
@@ -42,14 +39,18 @@ public class RasterizingTileProvider : ITileSource
         if (result == null)
         {
             var renderer = GetRenderer();
-            var viewPort = RasterizingLayer.CreateViewport(tileInfo.Extent.ToMRect(), _fetchInfo?.Resolution ?? 1,
+            Schema.Resolutions.TryGetValue(tileInfo.Index.Level, out var tileResolution);
+
+            var resolution = tileResolution.UnitsPerPixel;
+            var viewPort = RasterizingLayer.CreateViewport(tileInfo.Extent.ToMRect(), resolution,
                 _renderResolutionMultiplier, 1);
             using var stream = renderer.RenderToBitmapStream(viewPort, new[] { _layer }, pixelDensity: _pixelDensity);
             _rasterizingLayers.Push(renderer);
             result = stream?.ToArray();
             PersistentCache?.Add(tileInfo.Index, result);
-            return result;
         }
+
+        return result;
     }
 
     private IRenderer GetRenderer()
@@ -65,9 +66,4 @@ public class RasterizingTileProvider : ITileSource
     public ITileSchema Schema => _tileSchema ??= new GlobalSphericalMercator();
     public string Name => _layer.Name;
     public Attribution Attribution => _attribution ??= new Attribution(_layer.Attribution.Text, _layer.Attribution.Url);
-
-    public void RefreshData(FetchInfo fetchInfo)
-    {
-        _fetchInfo = fetchInfo;
-    }
 }

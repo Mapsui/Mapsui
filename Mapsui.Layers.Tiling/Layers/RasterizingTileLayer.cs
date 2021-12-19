@@ -57,7 +57,6 @@ namespace Mapsui.Layers
 
         public override void RefreshData(FetchInfo fetchInfo)
         {
-            ((RasterizingTileProvider)TileSource).RefreshData(fetchInfo);
             _layer.RefreshData(fetchInfo);
             base.RefreshData(fetchInfo);
         }
