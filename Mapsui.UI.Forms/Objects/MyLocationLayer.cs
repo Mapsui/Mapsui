@@ -14,9 +14,11 @@ using Mapsui.GeometryLayer;
 using Mapsui.UI.Maui;
 using Microsoft.Maui;
 using Microsoft.Maui.Controls;
+using Animation = Microsoft.Maui.Controls.Animation;
 #else
 using Mapsui.UI.Forms;
 using Xamarin.Forms;
+using Animation = Xamarin.Forms.Animation;
 #endif
 
 namespace Mapsui.UI.Objects
