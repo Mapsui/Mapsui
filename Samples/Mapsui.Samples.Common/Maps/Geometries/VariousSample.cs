@@ -8,8 +8,8 @@ using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
 using Mapsui.UI;
+using Mapsui.Utilities;
 
-#pragma warning disable IDISP001 // Dispose created
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -41,13 +41,13 @@ namespace Mapsui.Samples.Common.Maps
             return new Layer("Style on Layer")
             {
                 DataSource = new MemoryProvider<PointFeature>(RandomPointGenerator.GenerateRandomPoints(envelope, count).ToFeatures()),
-                Style = CreateBitmapStyle("Mapsui.Samples.Common.Images.ic_place_black_24dp.png")
+                Style = CreateBitmapStyle("Images.ic_place_black_24dp.png")
             };
         }
 
         private static ILayer CreateLayerWithStyleOnFeature(MRect? envelope, int count = 25)
         {
-            var style = CreateBitmapStyle("Mapsui.Samples.Common.Images.loc.png");
+            var style = CreateBitmapStyle("Images.loc.png");
 
             return new Layer("Style on feature")
             {
@@ -64,16 +64,8 @@ namespace Mapsui.Samples.Common.Maps
 
         private static SymbolStyle CreateBitmapStyle(string embeddedResourcePath)
         {
-            var bitmapId = GetBitmapIdForEmbeddedResource(embeddedResourcePath);
+            var bitmapId = typeof(VariousSample).LoadBitmapId(embeddedResourcePath);
             return new SymbolStyle { BitmapId = bitmapId, SymbolScale = 0.75 };
-        }
-
-        private static int GetBitmapIdForEmbeddedResource(string imagePath)
-        {
-            var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
-            var image = assembly.GetManifestResourceStream(imagePath);
-            var bitmapId = BitmapRegistry.Instance.Register(image);
-            return bitmapId;
         }
     }
 }

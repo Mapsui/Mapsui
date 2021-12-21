@@ -7,8 +7,7 @@ using Mapsui.Providers.Shapefile;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.UI;
-
-#pragma warning disable IDISP001 // Dispose created
+using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Desktop
 {
@@ -84,9 +83,7 @@ namespace Mapsui.Samples.Common.Desktop
             // Scaling city icons based on city population.
             // Cities below 1.000.000 gets the smallest symbol.
             // Cities with more than 5.000.000 the largest symbol.
-            var localAssembly = Assembly.GetAssembly(typeof(ShapefileSample));
-            var bitmapStream = localAssembly?.GetManifestResourceStream("Mapsui.Samples.Common.Desktop.Images.icon.png");
-            var bitmapId = BitmapRegistry.Instance.Register(bitmapStream ?? throw new InvalidOperationException());
+            var bitmapId = typeof(ShapefileSample).LoadBitmapId(@"Images.icon.png");
             var citymin = new SymbolStyle { BitmapId = bitmapId, SymbolScale = 0.5f };
             var citymax = new SymbolStyle { BitmapId = bitmapId, SymbolScale = 1f };
             return new GradientTheme("Population", 1000000, 5000000, citymin, citymax);

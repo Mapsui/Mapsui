@@ -6,7 +6,6 @@ using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Utilities;
 
-#pragma warning disable IDISP001 // Dispose created
 
 namespace Mapsui.Samples.Common.Maps.Projection
 {
@@ -68,11 +67,11 @@ namespace Mapsui.Samples.Common.Maps.Projection
 
         private static SymbolStyle CreateCityStyle()
         {
-            var imageStream = EmbeddedResourceLoader.Load("Images.location.png", typeof(GeodanOfficesSample));
+            var location = typeof(GeodanOfficesSample).LoadBitmapId("Images.location.png");
 
             return new SymbolStyle
             {
-                BitmapId = BitmapRegistry.Instance.Register(imageStream),
+                BitmapId = location,
                 SymbolOffset = new Offset { Y = 64 },
                 SymbolScale = 0.25,
                 Opacity = 0.5f

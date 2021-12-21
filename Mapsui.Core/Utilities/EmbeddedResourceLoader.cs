@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Mapsui.Styles;
 
 namespace Mapsui.Utilities
 {
@@ -20,10 +21,30 @@ namespace Mapsui.Utilities
         public static Stream Load(string relativePathToEmbeddedResource, Type typeInAssemblyOfEmbeddedResource)
         {
             var assembly = typeInAssemblyOfEmbeddedResource.GetTypeInfo().Assembly;
-            var fullName = GetAssemblyName(assembly) + "." + relativePathToEmbeddedResource;
+            var fullName = assembly.GetFullName(relativePathToEmbeddedResource);
             var result = assembly.GetManifestResourceStream(fullName);
             if (result == null) throw new Exception(ConstructExceptionMessage(relativePathToEmbeddedResource, assembly));
             return result;
+        }
+
+        public static int LoadBitmapId(this Type typeInAssemblyOfEmbeddedResource, string relativePathToEmbeddedResource)
+        {
+            var assembly = typeInAssemblyOfEmbeddedResource.GetTypeInfo().Assembly;
+            var fullName = assembly.GetFullName(relativePathToEmbeddedResource);
+            if (!BitmapRegistry.Instance.TryGetBitmapId(fullName, out var bitmapId))
+            {
+                var result = Load(relativePathToEmbeddedResource, typeInAssemblyOfEmbeddedResource);
+                bitmapId = BitmapRegistry.Instance.Register(result, fullName);
+                return bitmapId;
+            }
+
+            return bitmapId;
+        }
+
+        public static string GetFullName(this Assembly assembly, string relativePathToEmbeddedResource)
+        {
+            var fullName = GetAssemblyName(assembly) + "." + relativePathToEmbeddedResource;
+            return fullName;
         }
 
         private static string ConstructExceptionMessage(string path, Assembly assembly)

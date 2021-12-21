@@ -25,9 +25,7 @@ namespace Mapsui.Tests.Common.Maps
 
         public static Map CreateMap()
         {
-            var assembly = typeof(PolygonSample).GetTypeInfo().Assembly;
-            var image = assembly.GetManifestResourceStream("Mapsui.Tests.Common.Resources.Images.avion_silhouette.png")!;
-            _bitmapId = BitmapRegistry.Instance.Register(image);
+            _bitmapId = typeof(PolygonSample).LoadBitmapId("Resources.Images.avion_silhouette.png");
 
             var layer = CreateLayer();
 

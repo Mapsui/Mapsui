@@ -78,9 +78,9 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
         {
             if (EditMode == EditMode.AddPoint)
             {
-#pragma warning disable IDSIP004 // Don't ignore created IDisposable
+#pragma warning disable IDISP004 // Don't ignore created IDisposable
                 Layer?.Add(new GeometryFeature { Geometry = worldPosition });
-#pragma warning restore IDSIP004 // Don't ignore created IDisposable
+#pragma warning restore IDISP004 // Don't ignore created IDisposable
             }
             else if (EditMode == EditMode.AddLine)
             {

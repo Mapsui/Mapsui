@@ -5,8 +5,7 @@ using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.UI;
-
-#pragma warning disable IDISP001 // Dispose created
+using Mapsui.Utilities;
 
 namespace Mapsui.Tests.Common.Maps
 {
@@ -42,8 +41,8 @@ namespace Mapsui.Tests.Common.Maps
 
         public static IEnumerable<IFeature> CreateFeatures()
         {
-            var circleIconId = LoadBitmap("Mapsui.Tests.Common.Resources.Images.circle.png");
-            var checkeredIconId = LoadBitmap("Mapsui.Tests.Common.Resources.Images.checkered.png");
+            var circleIconId = typeof(BitmapSymbolSample).LoadBitmapId("Resources.Images.circle.png");
+            var checkeredIconId = typeof(BitmapSymbolSample).LoadBitmapId("Resources.Images.checkered.png");
 
             return new List<IFeature>
             {
@@ -64,12 +63,6 @@ namespace Mapsui.Tests.Common.Maps
                     Styles = new[] {new VectorStyle {Fill = new Brush(Color.Green), Outline = null}}
                 }
             };
-        }
-
-        private static int LoadBitmap(string bitmapPath)
-        {
-            var bitmapStream = typeof(Utilities).GetTypeInfo().Assembly.GetManifestResourceStream(bitmapPath)!;
-            return BitmapRegistry.Instance.Register(bitmapStream);
         }
     }
 }

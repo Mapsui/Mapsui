@@ -7,8 +7,7 @@ using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.UI;
-
-#pragma warning disable IDISP001 // Dispose created
+using Mapsui.Utilities;
 
 namespace Mapsui.Tests.Common.Maps
 {
@@ -60,9 +59,7 @@ namespace Mapsui.Tests.Common.Maps
 
         private static GeometryFeature CreateFeatureWithRotatedBitmapSymbol(double x, double y, double rotation)
         {
-            const string bitmapPath = @"Mapsui.Tests.Common.Resources.Images.iconthatneedsoffset.png";
-            var bitmapStream = typeof(Utilities).GetTypeInfo().Assembly.GetManifestResourceStream(bitmapPath)!;
-            var bitmapId = BitmapRegistry.Instance.Register(bitmapStream);
+            var bitmapId = typeof(BitmapSymbolWithRotationAndOffsetSample).LoadBitmapId("Resources.Images.iconthatneedsoffset.png");
 
             var feature = new GeometryFeature { Geometry = new Point(x, y) };
 

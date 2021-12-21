@@ -10,6 +10,7 @@ namespace Mapsui.Styles
     {
         private static BitmapRegistry? _instance;
         private readonly IDictionary<int, object> _register = new Dictionary<int, object>();
+        private readonly IDictionary<object, int> _lookup = new Dictionary<object, int>();
         private BitmapRegistry() { }
         private int _counter;
 
@@ -22,14 +23,19 @@ namespace Mapsui.Styles
         /// Register a new bitmap
         /// </summary>
         /// <param name="bitmapData">Bitmap data to register</param>
+        /// <param name="key">key for accessing bitmap</param>
         /// <returns>Id of registered bitmap data</returns>
-        public int Register(object bitmapData)
+        public int Register(object bitmapData, object? key = null)
         {
             CheckBitmapData(bitmapData);
 
             var id = _counter;
             _counter++;
             _register[id] = bitmapData;
+            if (key != null)
+            {
+                _lookup[key] = id;
+            }
             return id;
         }
 
@@ -87,6 +93,15 @@ namespace Mapsui.Styles
                     throw new ArgumentException("Sprite has no corresponding atlas bitmap.");
                 }
             }
+        }
+
+        /// <summary> Try Get Bitmap Id </summary>
+        /// <param name="key">key</param>
+        /// <param name="bitmapId">bitmap id</param>
+        /// <returns>true if found</returns>
+        public bool TryGetBitmapId(object key, out int bitmapId)
+        {
+            return _lookup.TryGetValue(key, out bitmapId);
         }
     }
 }
