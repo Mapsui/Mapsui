@@ -46,12 +46,12 @@ namespace Mapsui.Tests.Common.Maps
 
         public static List<IFeature> CreateFeatures()
         {
-            var atlas = typeof(BitmapAtlasSample).LoadBitmapId("Images.osm-liberty.png");
+            var atlas = typeof(BitmapAtlasSample).LoadBitmapId("Resources.Images.osm-liberty.png");
             var spriteAmusementPark15 = new Sprite(atlas, 106, 0, 21, 21, 1);
             var spriteClothingStore15 = new Sprite(atlas, 84, 106, 21, 21, 1);
             var spriteDentist15 = new Sprite(atlas, 147, 64, 21, 21, 1);
             var spritePedestrianPolygon = new Sprite(atlas, 0, 0, 64, 64, 1);
-            var svgTigerBitmapId = typeof(BitmapAtlasSample).LoadSvgId("Images.Ghostscript_Tiger.svg");
+            var svgTigerBitmapId = typeof(BitmapAtlasSample).LoadSvgId("Resources.Images.Ghostscript_Tiger.svg");
 
             return new List<IFeature>
             {
