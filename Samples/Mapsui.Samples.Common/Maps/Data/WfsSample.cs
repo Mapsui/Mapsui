@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using BruTile;
 using BruTile.Web;
 using BruTile.Wmts;
@@ -18,12 +20,19 @@ namespace Mapsui.Samples.Common.Maps.Data
         public string Name => "7. WFS";
         public string Category => "Data";
 
-        public void Setup(IMapControl mapControl)
+        public async void Setup(IMapControl mapControl)
         {
-            mapControl.Map = CreateMap();
+            try
+            {
+                mapControl.Map = await CreateMap();
+            }
+            catch (Exception e)
+            {
+                Logger.Log(LogLevel.Error, e.Message, e);
+            }
         }
 
-        public static Map CreateMap()
+        public static async Task<Map> CreateMap()
         {
             try
             {
@@ -31,7 +40,7 @@ namespace Mapsui.Samples.Common.Maps.Data
 
                 var map = new Map() { CRS = "EPSG:25832" };
                 var provider = CreateWfsProvider(serviceUri);
-                map.Layers.Add(CreateTileLayer(CreateTileSource()));
+                map.Layers.Add(CreateTileLayer(await CreateTileSource()));
                 map.Layers.Add(CreateWfsLayer(provider));
                 map.Layers.Add(CreateLabelLayer(provider));
 
@@ -101,10 +110,10 @@ namespace Mapsui.Samples.Common.Maps.Data
 
 
 
-        public static HttpTileSource CreateTileSource()
+        public static async Task<HttpTileSource> CreateTileSource()
         {
             using (var httpClient = new HttpClient())
-            using (var response = httpClient.GetStreamAsync("https://geoservices.buergernetz.bz.it/mapproxy/service/ows?SERVICE=WMTS&REQUEST=GetCapabilities").Result)
+            using (var response = await httpClient.GetStreamAsync("https://geoservices.buergernetz.bz.it/mapproxy/service/ows?SERVICE=WMTS&REQUEST=GetCapabilities"))
             {
                 var tileSources = WmtsParser.Parse(response);
                 return tileSources.First(t =>

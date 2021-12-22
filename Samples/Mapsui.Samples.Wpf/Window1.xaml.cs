@@ -106,7 +106,7 @@ namespace Mapsui.Samples.Wpf
         private void LogMethod(LogLevel logLevel, string? message, Exception? exception)
         {
             _logMessage.Enqueue(new LogModel { Exception = exception, LogLevel = logLevel, Message = message });
-            Dispatcher.Invoke(() => LogTextBox.Text = ToMultiLineString(_logMessage));
+            Dispatcher.BeginInvoke(() => LogTextBox.Text = ToMultiLineString(_logMessage));
         }
 
         private string ToMultiLineString(LimitedQueue<LogModel> logMessages)

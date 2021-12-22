@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Fetcher;
 using Mapsui.Providers;
@@ -24,7 +25,10 @@ namespace Mapsui.Layers
             Task.Factory.StartNew(() => {
                 _animatedFeatures.AddFeatures(_dataSource.GetFeatures(_fetchInfo) ?? new List<PointFeature>());
                 OnDataChanged(new DataChangedEventArgs());
-            });
+            },
+            CancellationToken.None,
+            TaskCreationOptions.DenyChildAttach,
+            TaskScheduler.Default);
         }
 
         public override MRect? Extent => _dataSource.GetExtent();

@@ -1,7 +1,10 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Net.Http;
+using System.Threading.Tasks;
 using BruTile.Wmts;
 using Mapsui.Layers;
+using Mapsui.Logging;
 using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps.Data
@@ -11,28 +14,35 @@ namespace Mapsui.Samples.Common.Maps.Data
         public string Name => "3 WMTS";
         public string Category => "Data";
 
-        public void Setup(IMapControl mapControl)
+        public async void Setup(IMapControl mapControl)
         {
-            mapControl.Map = CreateMap();
+            try
+            {
+                mapControl.Map = await CreateMap();
+            }
+            catch (Exception e)
+            {
+                Logger.Log(LogLevel.Error, e.Message, e);
+            }
         }
 
-        public static Map CreateMap()
+        public static async Task<Map> CreateMap()
         {
             var map = new Map
             {
                 CRS = "EPSG:28992"
             };
-            map.Layers.Add(CreateLayer());
+            map.Layers.Add(await CreateLayer());
             map.Layers.Add(GeodanOfficesSample.CreateLayer());
             return map;
         }
 
-        public static ILayer CreateLayer()
+        public static async Task<ILayer> CreateLayer()
         {
             var url = "http://geodata.nationaalgeoregister.nl/wmts/top10nl?VERSION=1.0.0&request=GetCapabilities";
 
             using (var httpClient = new HttpClient())
-            using (var response = httpClient.GetStreamAsync(url).Result)
+            using (var response = await httpClient.GetStreamAsync(url))
             {
                 var tileSources = WmtsParser.Parse(response);
                 var nature2000TileSource = tileSources.First(t => t.Name == "natura2000");
