@@ -31,7 +31,7 @@ namespace Mapsui.Providers
 
         private readonly Pen _rectangleLine;
 
-        public async Task<IEnumerable<IFeature>> GetFeatures(FetchInfo fetchInfo)
+        public async IAsyncEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {
             var features = await _provider.GetFeatures(fetchInfo);
             return GetFeaturesInView(fetchInfo.Resolution, _labelStyle, features, _rectangleLine, _rectangleFill);

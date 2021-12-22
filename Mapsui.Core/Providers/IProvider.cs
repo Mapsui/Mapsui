@@ -24,14 +24,14 @@ namespace Mapsui.Providers
     /// <summary>
     /// Interface for data providers
     /// </summary>
-    public interface IProvider<T> where T : IFeature
+    public interface IProvider<out T> where T : IFeature
     {
         /// <summary>
         /// The spatial reference ID (CRS)
         /// </summary>
         string? CRS { get; set; }
 
-        Task<IEnumerable<T>> GetFeatures(FetchInfo fetchInfo);
+        IAsyncEnumerable<T> GetFeatures(FetchInfo fetchInfo);
 
         /// <summary>
         /// <see cref="Mapsui.Geometries.BoundingBox"/> of data set

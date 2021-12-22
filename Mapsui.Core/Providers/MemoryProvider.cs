@@ -49,7 +49,7 @@ namespace Mapsui.Providers
             _boundingBox = GetExtent(Features);
         }
 
-        public virtual Task<IEnumerable<T>> GetFeatures(FetchInfo fetchInfo)
+        public virtual IAsyncEnumerable<T> GetFeatures(FetchInfo fetchInfo)
         {
             if (fetchInfo == null) throw new ArgumentNullException(nameof(fetchInfo));
             if (fetchInfo.Extent == null) throw new ArgumentNullException(nameof(fetchInfo.Extent));
@@ -61,7 +61,7 @@ namespace Mapsui.Providers
             var biggerBox = fetchInfo.Extent?.Grow(fetchInfo.Resolution * SymbolSize * 0.5);
             var grownFeatures = features.Where(f => f != null && (f.Extent?.Intersects(biggerBox) ?? false));
 
-            return Task.FromResult((IEnumerable<T>)grownFeatures.ToList());
+            return grownFeatures.ToList().ToAsyncEnumerable();
         }
 
         /// <summary>

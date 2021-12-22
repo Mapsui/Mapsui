@@ -152,7 +152,7 @@ namespace Mapsui.Layers
 
         public static double SymbolSize { get; set; } = 64;
 
-        public override Task<IEnumerable<IFeature>> GetFeatures(MRect box, double resolution)
+        public override IAsyncEnumerable<IFeature> GetFeatures(MRect box, double resolution)
         {
             if (box == null) throw new ArgumentNullException(nameof(box));
 
@@ -162,7 +162,7 @@ namespace Mapsui.Layers
             var biggerBox = box.Grow(resolution * SymbolSize * 0.5);
 
             var result = features.Where(f => f.Raster != null && f.Raster.Intersects(biggerBox)).ToList();
-            return Task.FromResult((IEnumerable<IFeature>)result);
+            return result.ToAsyncEnumerable();
         }
 
         public void AbortFetch()

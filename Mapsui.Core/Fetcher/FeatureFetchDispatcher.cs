@@ -37,7 +37,10 @@ namespace Mapsui.Fetcher
         {
             try
             {
-                var features = (await DataSource?.GetFeatures(fetchInfo)).ToList();
+                if (DataSource == null)
+                    return;
+
+                var features = await DataSource.GetFeatures(fetchInfo).ToListAsync();
                 FetchCompleted(features, null);
             }
             catch (Exception exception)

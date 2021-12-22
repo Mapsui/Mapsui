@@ -120,9 +120,9 @@ namespace Mapsui.Layers
         }
 
         /// <inheritdoc />
-        public override Task<IEnumerable<IFeature>> GetFeatures(MRect extent, double resolution)
+        public override IAsyncEnumerable<IFeature> GetFeatures(MRect extent, double resolution)
         {
-            return Task.FromResult((IEnumerable<IFeature>)_cache.ToList());
+            return _cache.ToList().ToAsyncEnumerable();
         }
 
         /// <inheritdoc />

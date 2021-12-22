@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Fetcher;
@@ -25,16 +26,16 @@ namespace Mapsui.Layers
             if (_fetchInfo == null) return;
 
             Task.Run(async () => {
-                _animatedFeatures.AddFeatures(await _dataSource.GetFeatures(_fetchInfo) ?? new List<PointFeature>());
+                _animatedFeatures.AddFeatures(await _dataSource.GetFeatures(_fetchInfo).ToListAsync());
                 OnDataChanged(new DataChangedEventArgs());
             });
         }
 
         public override MRect? Extent => _dataSource.GetExtent();
 
-        public override Task<IEnumerable<IFeature>> GetFeatures(MRect extent, double resolution)
+        public override IAsyncEnumerable<IFeature> GetFeatures(MRect extent, double resolution)
         {
-            return Task.FromResult(_animatedFeatures.GetFeatures());
+            return _animatedFeatures.GetFeatures().ToAsyncEnumerable();
         }
 
         public override void RefreshData(FetchInfo fetchInfo)

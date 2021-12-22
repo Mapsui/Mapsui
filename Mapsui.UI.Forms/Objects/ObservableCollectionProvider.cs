@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Mapsui.Layers;
 using Mapsui.Providers;
 
@@ -18,12 +19,12 @@ namespace Mapsui.UI.Objects
             Collection = collection;
         }
 
-        public IEnumerable<TU> GetFeatures(FetchInfo fetchInfo)
+        public IAsyncEnumerable<TU> GetFeatures(FetchInfo fetchInfo)
         {
             var list = new List<TU>();
 
             if (Collection == null || Collection.Count == 0)
-                return list;
+                return list.ToAsyncEnumerable();
 
             lock (_syncRoot)
             {
@@ -37,7 +38,7 @@ namespace Mapsui.UI.Objects
                 }
             }
 
-            return list;
+            return list.ToAsyncEnumerable();
         }
 
         public MRect? GetExtent()

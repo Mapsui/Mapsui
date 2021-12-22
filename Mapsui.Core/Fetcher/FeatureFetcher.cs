@@ -35,7 +35,7 @@ namespace Mapsui.Fetcher
             try
             {
                 Monitor.Enter(_provider);
-                var features = (await _provider.GetFeatures(_fetchInfo))?.ToList() ?? new List<IFeature>();
+                var features = await _provider.GetFeatures(_fetchInfo).ToListAsync();
                 _dataArrived.Invoke(features, _timeOfRequest);
             }
             catch (Exception e)

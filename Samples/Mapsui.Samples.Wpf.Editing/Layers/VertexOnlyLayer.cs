@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.GeometryLayer;
@@ -22,9 +24,9 @@ namespace Mapsui.Samples.Wpf.Editing.Layers
             Style = new SymbolStyle { SymbolScale = 0.5 };
         }
 
-        public override IEnumerable<IFeature> GetFeatures(MRect box, double resolution)
+        public override async IAsyncEnumerable<GeometryFeature> GetFeatures(MRect box, double resolution)
         {
-            var features = _source.GetFeatures(box, resolution).Cast<GeometryFeature>().ToList();
+            var features = (await _source.GetFeatures(box, resolution)).Cast<GeometryFeature>().ToList();
             foreach (var feature in features)
             {
                 if (feature.Geometry is Point || feature.Geometry is MultiPoint) continue; // Points with a vertex on top confuse me

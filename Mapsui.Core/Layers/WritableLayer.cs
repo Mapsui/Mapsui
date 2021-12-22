@@ -12,14 +12,14 @@ namespace Mapsui.Layers
     {
         private readonly ConcurrentHashSet<IFeature> _cache = new();
 
-        public override Task<IEnumerable<IFeature>> GetFeatures(MRect? box, double resolution)
+        public override IAsyncEnumerable<IFeature> GetFeatures(MRect? box, double resolution)
         {
             // Safeguard in case MRect is null, most likely due to no features in layer
-            if (box == null) return Task.FromResult((IEnumerable<IFeature>)new List<IFeature>());
+            if (box == null) return new List<IFeature>().ToAsyncEnumerable();
             var cache = _cache;
             var biggerBox = box.Grow(SymbolStyle.DefaultWidth * 2 * resolution, SymbolStyle.DefaultHeight * 2 * resolution);
             var result = cache.Where(f => biggerBox.Intersects(f.Extent));
-            return Task.FromResult((IEnumerable<IFeature>)result.ToList());
+            return result.ToList().ToAsyncEnumerable();
         }
 
         private MRect? GetExtent()
