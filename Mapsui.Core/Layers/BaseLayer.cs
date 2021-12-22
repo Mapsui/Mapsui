@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using Mapsui.Fetcher;
 using Mapsui.Styles;
 using Mapsui.Widgets;
@@ -183,7 +184,7 @@ namespace Mapsui.Layers
         public bool IsMapInfoLayer { get; set; }
 
         /// <inheritdoc />
-        public abstract IEnumerable<IFeature> GetFeatures(MRect box, double resolution);
+        public abstract Task<IEnumerable<IFeature>> GetFeatures(MRect box, double resolution);
 
         /// <inheritdoc />
         public abstract void RefreshData(FetchInfo fetchInfo);

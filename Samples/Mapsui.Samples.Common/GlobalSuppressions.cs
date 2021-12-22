@@ -14,3 +14,4 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Usage", "VSTHRD110:Observe result of async calls", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Common.Maps.MutatingTriangleSample.CreateMutatingTriangleLayer(Mapsui.MRect)~Mapsui.Layers.ILayer")]
 [assembly: SuppressMessage("Usage", "VSTHRD100:Avoid async void methods", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Common.Maps.Data.WfsSample.Setup(Mapsui.UI.IMapControl)")]
 [assembly: SuppressMessage("Usage", "VSTHRD100:Avoid async void methods", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Common.Maps.Data.WmtsSample.Setup(Mapsui.UI.IMapControl)")]
+[assembly: SuppressMessage("Usage", "VSTHRD100:Avoid async void methods", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Common.Maps.WmtsMichelinSample.Setup(Mapsui.UI.IMapControl)")]

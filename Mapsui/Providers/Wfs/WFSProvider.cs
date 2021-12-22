@@ -955,9 +955,9 @@ namespace Mapsui.Providers.Wfs
         /// <param name="box"></param>
         /// <param name="resolution">unused parameter (for backwards compatibility)</param>
         /// <returns>Features within the specified <see cref="Mapsui.Geometries.BoundingBox"/></returns>
-        public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
+        public Task<IEnumerable<IFeature>> GetFeatures(FetchInfo fetchInfo)
         {
-            return ExecuteIntersectionQuery(fetchInfo.Extent.ToBoundingBox());
+            return TaskFromResult((IEnumerable<IFeatureInfo>) ExecuteIntersectionQuery(fetchInfo.Extent.ToBoundingBox()));
         }
 
     }

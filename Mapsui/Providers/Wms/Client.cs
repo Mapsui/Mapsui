@@ -219,8 +219,10 @@ namespace Mapsui.Providers.Wms
             if (!url.ToLower().Contains("version=") && !string.IsNullOrEmpty(wmsVersion))
                 strReq.AppendFormat("VERSION={0}&", wmsVersion);
 
-            var xml = GetRemoteXml(strReq.ToString().TrimEnd('&'));
-            ParseCapabilities(xml);
+            Task.Run(async () => {
+                var xml = await GetRemoteXml(strReq.ToString().TrimEnd('&'));
+                ParseCapabilities(xml);
+            });
         }
 
         public Client(XmlDocument capabilitiesXmlDocument, Func<string, Task<Stream>>? getStreamAsync = null)
@@ -260,19 +262,18 @@ namespace Mapsui.Providers.Wms
         /// Downloads service description from WMS service
         /// </summary>
         /// <returns>XmlDocument from Url. Null if Url is empty or improper XmlDocument</returns>
-        private XmlDocument GetRemoteXml(string url)
+        private async Task<XmlDocument> GetRemoteXml(string url)
         {
             try
             {
                 var doc = new XmlDocument { XmlResolver = null };
 
-                using (var task = _getStreamAsync(url))
+                using (var task = await _getStreamAsync(url))
                 {
-                    using (var stReader = new StreamReader(task.Result))
+                    using (var stReader = new StreamReader(task))
                     {
                         using var r = new XmlTextReader(url, stReader) { XmlResolver = null };
                         doc.Load(r);
-                        task.Result.Dispose();
                     }
                 }
 

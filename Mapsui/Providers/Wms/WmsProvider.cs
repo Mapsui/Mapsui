@@ -291,9 +291,8 @@ namespace Mapsui.Providers.Wms
             _mimeType = mimeType;
         }
 
-        public bool TryGetMap(IViewport viewport, [NotNullWhen(true)] out MRaster? raster)
+        public async Task<MRaster?> TryGetMap(IViewport viewport)
         {
-
             int width;
             int height;
 
@@ -305,8 +304,7 @@ namespace Mapsui.Providers.Wms
             catch (OverflowException)
             {
                 Trace.Write("Could not convert double to int (ExportMap size)");
-                raster = null;
-                return false;
+                return null;
             }
 
             var url = GetRequestUrl(viewport.Extent, width, height);
@@ -315,21 +313,17 @@ namespace Mapsui.Providers.Wms
             {
                 if (_getStreamAsync == null)
                 {
-                    raster = null;
-                    return false;
+                    return null;
                 }
 
-                using var task = _getStreamAsync(url);
-                using var result = task.Result;
+                using var result = await _getStreamAsync(url);
                 // PDD: This could be more efficient
                 var bytes = StreamHelper.ReadFully(result);
                 if (viewport.Extent == null)
                 {
-                    raster = null;
-                    return false;
+                    return null;
                 }
-                raster = new MRaster(bytes, viewport.Extent);	// This can throw exception
-                return true;
+                return new MRaster(bytes, viewport.Extent);	// This can throw exception
             }
             catch (WebException webEx)
             {
@@ -346,8 +340,7 @@ namespace Mapsui.Providers.Wms
                 Trace.Write("There was a problem while attempting to request the WMS" + ex.Message);
             }
 
-            raster = null;
-            return false;
+            return null;
         }
 
         /// <summary>
@@ -425,7 +418,7 @@ namespace Mapsui.Providers.Wms
             return legendUrls;
         }
 
-        public IEnumerable<MemoryStream> GetLegends()
+        public async Task<IEnumerable<MemoryStream>> GetLegends()
         {
             var urls = GetLegendRequestUrls();
             var images = new List<MemoryStream>();
@@ -436,10 +429,9 @@ namespace Mapsui.Providers.Wms
                 {
                     if (_getStreamAsync == null)
                         return images;
-                    using var task = _getStreamAsync(url);
-                    var bytes = StreamHelper.ReadFully(task.Result);
+                    using var task = await _getStreamAsync(url);
+                    var bytes = StreamHelper.ReadFully(task);
                     images.Add(new MemoryStream(bytes));
-                    task.Result.Dispose();
                 }
                 catch (WebException e)
                 {
@@ -479,7 +471,7 @@ namespace Mapsui.Providers.Wms
             return _wmsClient.Layer.CRS.FirstOrDefault(item => string.Equals(item.Trim(), crs.Trim(), StringComparison.CurrentCultureIgnoreCase)) != null;
         }
 
-        public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
+        public async Task<IEnumerable<IFeature>> GetFeatures(FetchInfo fetchInfo)
         {
             var features = new List<RasterFeature>();
 
@@ -490,7 +482,8 @@ namespace Mapsui.Providers.Wms
                 Width = (fetchInfo.Extent.Width / fetchInfo.Resolution),
                 Height = (fetchInfo.Extent.Height / fetchInfo.Resolution)
             };
-            if (TryGetMap(view, out var raster))
+            var raster = await TryGetMap(view);
+            if (raster != null)
             {
                 features.Add(new RasterFeature(raster));
             }

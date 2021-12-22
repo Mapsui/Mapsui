@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
@@ -30,9 +31,9 @@ namespace Mapsui.Providers
 
         private readonly Pen _rectangleLine;
 
-        public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
+        public async Task<IEnumerable<IFeature>> GetFeatures(FetchInfo fetchInfo)
         {
-            var features = _provider.GetFeatures(fetchInfo);
+            var features = await _provider.GetFeatures(fetchInfo);
             return GetFeaturesInView(fetchInfo.Resolution, _labelStyle, features, _rectangleLine, _rectangleFill);
         }
 

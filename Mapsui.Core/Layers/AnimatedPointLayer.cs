@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Fetcher;
+using Mapsui.Logging;
 using Mapsui.Providers;
 
 namespace Mapsui.Layers
@@ -22,20 +24,17 @@ namespace Mapsui.Layers
         {
             if (_fetchInfo == null) return;
 
-            Task.Factory.StartNew(() => {
-                _animatedFeatures.AddFeatures(_dataSource.GetFeatures(_fetchInfo) ?? new List<PointFeature>());
+            Task.Run(async () => {
+                _animatedFeatures.AddFeatures(await _dataSource.GetFeatures(_fetchInfo) ?? new List<PointFeature>());
                 OnDataChanged(new DataChangedEventArgs());
-            },
-            CancellationToken.None,
-            TaskCreationOptions.DenyChildAttach,
-            TaskScheduler.Default);
+            });
         }
 
         public override MRect? Extent => _dataSource.GetExtent();
 
-        public override IEnumerable<IFeature> GetFeatures(MRect extent, double resolution)
+        public override Task<IEnumerable<IFeature>> GetFeatures(MRect extent, double resolution)
         {
-            return _animatedFeatures.GetFeatures();
+            return Task.FromResult(_animatedFeatures.GetFeatures());
         }
 
         public override void RefreshData(FetchInfo fetchInfo)

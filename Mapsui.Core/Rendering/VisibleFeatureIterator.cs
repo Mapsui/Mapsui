@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Layers;
+using Mapsui.Logging;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 
@@ -22,53 +23,60 @@ namespace Mapsui.Rendering
             }
         }
 
-        private static void IterateLayer(IReadOnlyViewport viewport, ILayer layer,
+        private static async void IterateLayer(IReadOnlyViewport viewport, ILayer layer,
             Action<IReadOnlyViewport, ILayer, IStyle, IFeature, float> callback)
         {
-            if (viewport.Extent == null) return;
-            var features = layer.GetFeatures(viewport.Extent, viewport.Resolution).ToList();
-
-            var layerStyles = ToArray(layer);
-            foreach (var layerStyle in layerStyles)
+            try
             {
-                var style = layerStyle; // This is the default that could be overridden by an IThemeStyle
+                if (viewport.Extent == null) return;
+                var features = (await layer.GetFeatures(viewport.Extent, viewport.Resolution)).ToList();
+
+                var layerStyles = ToArray(layer);
+                foreach (var layerStyle in layerStyles)
+                {
+                    var style = layerStyle; // This is the default that could be overridden by an IThemeStyle
+
+                    foreach (var feature in features)
+                    {
+                        if (layerStyle is IThemeStyle themeStyle)
+                        {
+                            var styleForFeature = themeStyle.GetStyle(feature);
+                            if (styleForFeature == null) continue;
+                            style = styleForFeature;
+                        }
+
+                        if (ShouldNotBeApplied(style, viewport)) continue;
+
+                        if (style is StyleCollection styles) // The ThemeStyle can again return a StyleCollection
+                        {
+                            foreach (var s in styles)
+                            {
+                                if (ShouldNotBeApplied(s, viewport)) continue;
+                                callback(viewport, layer, s, feature, (float)layer.Opacity);
+                            }
+                        }
+                        else
+                        {
+                            callback(viewport, layer, style, feature, (float)layer.Opacity);
+                        }
+                    }
+                }
 
                 foreach (var feature in features)
                 {
-                    if (layerStyle is IThemeStyle themeStyle)
+                    var featureStyles = feature.Styles ?? Enumerable.Empty<IStyle>(); // null check
+                    foreach (var featureStyle in featureStyles)
                     {
-                        var styleForFeature = themeStyle.GetStyle(feature);
-                        if (styleForFeature == null) continue;
-                        style = styleForFeature;
-                    }
+                        if (ShouldNotBeApplied(featureStyle, viewport)) continue;
 
-                    if (ShouldNotBeApplied(style, viewport)) continue;
+                        callback(viewport, layer, featureStyle, feature, (float)layer.Opacity);
 
-                    if (style is StyleCollection styles) // The ThemeStyle can again return a StyleCollection
-                    {
-                        foreach (var s in styles)
-                        {
-                            if (ShouldNotBeApplied(s, viewport)) continue;
-                            callback(viewport, layer, s, feature, (float)layer.Opacity);
-                        }
-                    }
-                    else
-                    {
-                        callback(viewport, layer, style, feature, (float)layer.Opacity);
                     }
                 }
             }
-
-            foreach (var feature in features)
+            catch (Exception e)
             {
-                var featureStyles = feature.Styles ?? Enumerable.Empty<IStyle>(); // null check
-                foreach (var featureStyle in featureStyles)
-                {
-                    if (ShouldNotBeApplied(featureStyle, viewport)) continue;
-
-                    callback(viewport, layer, featureStyle, feature, (float)layer.Opacity);
-
-                }
+                Logger.Log(LogLevel.Error, e.Message, e);
             }
         }
 

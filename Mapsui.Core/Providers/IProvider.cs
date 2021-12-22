@@ -16,6 +16,7 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Mapsui.Layers;
 
 namespace Mapsui.Providers
@@ -23,14 +24,14 @@ namespace Mapsui.Providers
     /// <summary>
     /// Interface for data providers
     /// </summary>
-    public interface IProvider<out T> where T : IFeature
+    public interface IProvider<T> where T : IFeature
     {
         /// <summary>
         /// The spatial reference ID (CRS)
         /// </summary>
         string? CRS { get; set; }
 
-        IEnumerable<T> GetFeatures(FetchInfo fetchInfo);
+        Task<IEnumerable<T>> GetFeatures(FetchInfo fetchInfo);
 
         /// <summary>
         /// <see cref="Mapsui.Geometries.BoundingBox"/> of data set

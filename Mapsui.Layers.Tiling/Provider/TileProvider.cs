@@ -47,26 +47,24 @@ namespace Mapsui.Providers
             _source = tileSource;
         }
 
-        public IEnumerable<IFeature> FetchTiles(FetchInfo fetchInfo)
+        public async Task<IEnumerable<IFeature>> FetchTiles(FetchInfo fetchInfo)
         {
             var box = fetchInfo.Extent;
             var extent = new Extent(box.Min.X, box.Min.Y, box.Max.X, box.Max.Y);
             var levelId = BruTile.Utilities.GetNearestLevel(_source.Schema.Resolutions, fetchInfo.Resolution);
             var infos = _source.Schema.GetTileInfos(extent, levelId).ToList();
 
-            ICollection<WaitHandle> waitHandles = new List<WaitHandle>();
+            var tasks = new List<Task>();
 
             foreach (var info in infos)
             {
                 if (_bitmaps.Find(info.Index) != null) continue;
                 if (_queue.Contains(info.Index)) continue;
-                var waitHandle = new AutoResetEvent(false);
-                waitHandles.Add(waitHandle);
                 _queue.Add(info.Index);
-                Task.Run(() => GetTileOnThread(new object[] { _source, info, _bitmaps, waitHandle }));
+                tasks.Add(Task.Run(() => GetTileOnThread(new object[] { _source, info, _bitmaps})));
             }
 
-            WaitHandle.WaitAll(waitHandles.ToArray());
+            await Task.WhenAll(tasks.ToArray());
 
             var features = new List<IFeature>();
             foreach (var info in infos)
@@ -86,7 +84,6 @@ namespace Mapsui.Providers
             var tileProvider = (ITileProvider)parameters[0];
             var tileInfo = (TileInfo)parameters[1];
             var bitmap = (MemoryCache<byte[]>)parameters[2];
-            var autoResetEvent = (AutoResetEvent)parameters[3];
 
             try
             {
@@ -100,11 +97,10 @@ namespace Mapsui.Providers
             finally
             {
                 _queue.Remove(tileInfo.Index);
-                autoResetEvent.Set();
             }
         }
 
-        public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
+        public Task<IEnumerable<IFeature>> GetFeatures(FetchInfo fetchInfo)
         {
             return FetchTiles(fetchInfo);
         }

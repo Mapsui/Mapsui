@@ -19,6 +19,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using Mapsui.Fetcher;
 using Mapsui.Providers;
 
@@ -119,9 +120,9 @@ namespace Mapsui.Layers
         }
 
         /// <inheritdoc />
-        public override IEnumerable<IFeature> GetFeatures(MRect extent, double resolution)
+        public override Task<IEnumerable<IFeature>> GetFeatures(MRect extent, double resolution)
         {
-            return _cache.ToList();
+            return Task.FromResult((IEnumerable<IFeature>)_cache.ToList());
         }
 
         /// <inheritdoc />

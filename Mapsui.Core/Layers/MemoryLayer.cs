@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Mapsui.Providers;
 using Mapsui.Styles;
 
@@ -29,7 +30,7 @@ namespace Mapsui.Layers
         // This field allows a workaround for when projection is needed.
         public string? CRS { get; set; }
 
-        public override IEnumerable<IFeature> GetFeatures(MRect? box, double resolution)
+        public override async Task<IEnumerable<IFeature>> GetFeatures(MRect? box, double resolution)
         {
             // Safeguard in case BoundingBox is null, most likely due to no features in layer
             if (box == null) { return new List<IFeature>(); }
@@ -39,7 +40,7 @@ namespace Mapsui.Layers
                     SymbolStyle.DefaultHeight * 2 * resolution);
             var fetchInfo = new FetchInfo(biggerBox, resolution, CRS);
 
-            return DataSource?.GetFeatures(fetchInfo) ?? Array.Empty<IFeature>();
+            return (await DataSource?.GetFeatures(fetchInfo)) ?? Array.Empty<IFeature>();
         }
 
         public override void RefreshData(FetchInfo fetchInfo)

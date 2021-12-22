@@ -21,6 +21,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.GeometryLayer;
@@ -889,7 +890,7 @@ namespace Mapsui.Providers.Shapefile
         }
 
 
-        public IEnumerable<GeometryFeature> GetFeatures(FetchInfo fetchInfo)
+        public Task<IEnumerable<GeometryFeature>> GetFeatures(FetchInfo fetchInfo)
         {
             lock (_syncRoot)
             {
@@ -912,7 +913,7 @@ namespace Mapsui.Providers.Shapefile
                             features.Add(feature);
                         }
                     }
-                    return features;
+                    return Task.FromResult((IEnumerable<GeometryFeature>)features);
                 }
                 finally
                 {

@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
+#pragma warning disable VSTHRD110 // Observe the awaitable result of this method call by awaiting it, assigning to a variable, or passing it to another method.
 #pragma warning disable 1587
 /// <remark>
 /// Found at https://gist.github.com/YARG/681f426b78af6d77baab

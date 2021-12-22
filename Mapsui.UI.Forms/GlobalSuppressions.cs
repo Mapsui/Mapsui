@@ -16,3 +16,4 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP008:Don't assign member with injected and created disposables.", Justification = "<Pending>", Scope = "member", Target = "~F:Mapsui.UI.Forms.MapControl._map")]
 [assembly: SuppressMessage("Usage", "VSTHRD110:Observe result of async calls", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.UI.Forms.MapControl.OpenBrowser(System.String)")]
 [assembly: SuppressMessage("Usage", "VSTHRD100:Avoid async void methods", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.UI.Forms.MapControl.OnTouch(System.Object,SkiaSharp.Views.Forms.SKTouchEventArgs)")]
+[assembly: SuppressMessage("Usage", "VSTHRD110:Observe result of async calls", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.UI.Timer.#ctor(Mapsui.UI.TimerCallback,System.Object,System.Int32,System.Int32)")]

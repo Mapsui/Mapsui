@@ -96,14 +96,14 @@ namespace Mapsui.Layers
             StartNewFetch(_fetchInfo);
         }
 
-        public override IEnumerable<IFeature> GetFeatures(MRect box, double resolution)
+        public override Task<IEnumerable<IFeature>> GetFeatures(MRect box, double resolution)
         {
             var result = new List<IFeature>();
             foreach (var featureSet in _sets.OrderBy(c => c.TimeRequested))
             {
                 result.AddRange(GetFeaturesInView(box, featureSet.Features));
             }
-            return result;
+            return Task.FromResult((IEnumerable<IFeature>)result);
         }
 
         private static IEnumerable<IFeature> GetFeaturesInView(MRect box, IEnumerable<RasterFeature> features)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Projections;
@@ -24,7 +25,7 @@ namespace Mapsui.Providers
         /// </summary>
         public string? CRS { get; set; }
 
-        public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
+        public async Task<IEnumerable<IFeature>> GetFeatures(FetchInfo fetchInfo)
         {
             // Note that the FetchInfo.CRS is ignored in this method. A better solution
             // would be to use the fetchInfo.CRS everywhere, but that would only make 
@@ -37,7 +38,7 @@ namespace Mapsui.Providers
             _projection.Project(CRS!, _provider.CRS!, copiedExtent);
             fetchInfo = new FetchInfo(copiedExtent, fetchInfo.Resolution, CRS, fetchInfo.ChangeType);
 
-            var features = _provider.GetFeatures(fetchInfo) ?? new List<IFeature>();
+            var features = await _provider.GetFeatures(fetchInfo) ?? new List<IFeature>();
             if (!CrsHelper.IsProjectionNeeded(_provider.CRS, CRS)) return features;
 
             if (!CrsHelper.IsCrsProvided(_provider.CRS, CRS))

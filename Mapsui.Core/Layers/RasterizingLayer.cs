@@ -2,6 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Logging;
@@ -151,7 +152,7 @@ namespace Mapsui.Layers
 
         public static double SymbolSize { get; set; } = 64;
 
-        public override IEnumerable<IFeature> GetFeatures(MRect box, double resolution)
+        public override Task<IEnumerable<IFeature>> GetFeatures(MRect box, double resolution)
         {
             if (box == null) throw new ArgumentNullException(nameof(box));
 
@@ -160,7 +161,8 @@ namespace Mapsui.Layers
             // Use a larger extent so that symbols partially outside of the extent are included
             var biggerBox = box.Grow(resolution * SymbolSize * 0.5);
 
-            return features.Where(f => f.Raster != null && f.Raster.Intersects(biggerBox)).ToList();
+            var result = features.Where(f => f.Raster != null && f.Raster.Intersects(biggerBox)).ToList();
+            return Task.FromResult((IEnumerable<IFeature>)result);
         }
 
         public void AbortFetch()

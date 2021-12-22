@@ -6,6 +6,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Styles;
@@ -189,13 +190,13 @@ namespace Mapsui.Providers
 
         public string? CRS { get; set; } = "";
 
-        public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
+        public Task<IEnumerable<IFeature>> GetFeatures(FetchInfo fetchInfo)
         {
             if (_extent.Intersects(fetchInfo.Extent))
             {
-                return new[] { _feature };
+                return Task.FromResult((IEnumerable<IFeature>)new[] { _feature });
             }
-            return new List<IFeature>();
+            return Task.FromResult((IEnumerable<IFeature>)new List<IFeature>());
         }
 
         public MRect? GetExtent()

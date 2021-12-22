@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
 using Mapsui.Extensions;
@@ -91,11 +92,11 @@ namespace Mapsui.Layers
         public override MRect? Extent => _extent;
 
         /// <inheritdoc />
-        public override IEnumerable<IFeature> GetFeatures(MRect extent, double resolution)
+        public override Task<IEnumerable<IFeature>> GetFeatures(MRect extent, double resolution)
         {
-            if (_tileSource.Schema == null) return Enumerable.Empty<IFeature>();
+            if (_tileSource.Schema == null) return Task.FromResult(Enumerable.Empty<IFeature>());
             UpdateMemoryCacheMinAndMax();
-            return _renderFetchStrategy.Get(extent, resolution, _tileSource.Schema, MemoryCache);
+            return Task.FromResult((IEnumerable<IFeature>)_renderFetchStrategy.Get(extent, resolution, _tileSource.Schema, MemoryCache));
         }
 
         /// <inheritdoc />

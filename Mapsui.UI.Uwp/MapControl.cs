@@ -272,7 +272,9 @@ namespace Mapsui.UI.Uwp
 
         public void OpenBrowser(string url)
         {
+#pragma warning disable VSTHRD110 // Observe the awaitable result of this method call by awaiting it, assigning to a variable, or passing it to another method.
             Task.Run(() => Launcher.LaunchUriAsync(new Uri(url)));
+#pragma warning restore VSTHRD110
         }
 
         private float ViewportWidth => (float)ActualWidth;

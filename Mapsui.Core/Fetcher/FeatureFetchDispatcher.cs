@@ -33,11 +33,11 @@ namespace Mapsui.Fetcher
             return true;
         }
 
-        public void FetchOnThread(FetchInfo fetchInfo)
+        public async void FetchOnThread(FetchInfo fetchInfo)
         {
             try
             {
-                var features = DataSource?.GetFeatures(fetchInfo).ToList();
+                var features = (await DataSource?.GetFeatures(fetchInfo)).ToList();
                 FetchCompleted(features, null);
             }
             catch (Exception exception)

@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Mapsui.Layers;
+using Mapsui.Logging;
 using Mapsui.Providers;
 using Mapsui.Styles;
 
@@ -27,12 +30,21 @@ namespace Mapsui.Fetcher
             _timeOfRequest = timeOfRequest;
         }
 
-        public void FetchOnThread()
+        public async void FetchOnThread()
         {
-            lock (_provider)
+            try
             {
-                var features = _provider.GetFeatures(_fetchInfo)?.ToList() ?? new List<IFeature>();
+                Monitor.Enter(_provider);
+                var features = (await _provider.GetFeatures(_fetchInfo))?.ToList() ?? new List<IFeature>();
                 _dataArrived.Invoke(features, _timeOfRequest);
+            }
+            catch (Exception e)
+            {
+                Logger.Log(LogLevel.Error, e.Message, e);
+            }
+            finally
+            {
+                Monitor.Exit(_provider);
             }
         }
     }

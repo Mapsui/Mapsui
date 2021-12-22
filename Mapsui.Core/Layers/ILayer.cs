@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using Mapsui.Fetcher;
 using Mapsui.Styles;
 using Mapsui.Widgets;
@@ -85,7 +86,7 @@ namespace Mapsui.Layers
         /// <param name="extent">Bounding box</param>
         /// <param name="resolution">Resolution of viewport</param>
         /// <returns></returns>
-        IEnumerable<IFeature> GetFeatures(MRect extent, double resolution);
+        Task<IEnumerable<IFeature>> GetFeatures(MRect extent, double resolution);
 
         /// <summary>
         /// Attribution for layer
