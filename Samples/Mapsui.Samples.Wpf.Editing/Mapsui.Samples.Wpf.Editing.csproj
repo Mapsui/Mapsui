@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Linq.Async" Version="5.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.Core\Mapsui.Core.csproj" />
     <ProjectReference Include="..\..\Mapsui.Layers.Tiling\Mapsui.Layers.Tiling.csproj" />
     <ProjectReference Include="..\..\Mapsui.UI.Wpf\Mapsui.UI.Wpf.csproj" />

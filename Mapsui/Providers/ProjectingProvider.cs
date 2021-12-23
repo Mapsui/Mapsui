@@ -25,12 +25,13 @@ namespace Mapsui.Providers
         /// </summary>
         public string? CRS { get; set; }
 
-        public async Task<IEnumerable<IFeature>> GetFeatures(FetchInfo fetchInfo)
+        public IAsyncEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {
             // Note that the FetchInfo.CRS is ignored in this method. A better solution
             // would be to use the fetchInfo.CRS everywhere, but that would only make 
             // sense if GetExtent would also get a CRS argument. Room for improvement.
-            if (fetchInfo.Extent == null) return new List<IFeature>();
+            if (fetchInfo.Extent == null)
+                return Enumerable.Empty<IFeature>().ToAsyncEnumerable();
 
             var copiedExtent = new MRect(fetchInfo.Extent);
 
@@ -38,15 +39,16 @@ namespace Mapsui.Providers
             _projection.Project(CRS!, _provider.CRS!, copiedExtent);
             fetchInfo = new FetchInfo(copiedExtent, fetchInfo.Resolution, CRS, fetchInfo.ChangeType);
 
-            var features = await _provider.GetFeatures(fetchInfo) ?? new List<IFeature>();
+            var features = _provider.GetFeatures(fetchInfo) ?? new List<IFeature>().ToAsyncEnumerable();
             if (!CrsHelper.IsProjectionNeeded(_provider.CRS, CRS)) return features;
 
             if (!CrsHelper.IsCrsProvided(_provider.CRS, CRS))
                 throw new NotSupportedException($"CRS is not provided. From CRS: {_provider.CRS}. To CRS {CRS}");
 
-            var copiedFeatures = features.Copy().ToList();
+            var copiedFeatures = features.CopyAsync();
             _projection.Project(_provider.CRS, CRS, copiedFeatures);
             return copiedFeatures;
+
         }
 
         public MRect? GetExtent()

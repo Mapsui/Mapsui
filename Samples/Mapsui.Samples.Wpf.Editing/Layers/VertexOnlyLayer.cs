@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Mapsui.Fetcher;
 using Mapsui.Geometries;
 using Mapsui.GeometryLayer;
 using Mapsui.Layers;
-using Mapsui.Providers;
 using Mapsui.Styles;
 
 namespace Mapsui.Samples.Wpf.Editing.Layers
@@ -26,8 +22,8 @@ namespace Mapsui.Samples.Wpf.Editing.Layers
 
         public override async IAsyncEnumerable<GeometryFeature> GetFeatures(MRect box, double resolution)
         {
-            var features = (await _source.GetFeatures(box, resolution)).Cast<GeometryFeature>().ToList();
-            foreach (var feature in features)
+            var features = _source.GetFeatures(box, resolution);
+            await foreach (GeometryFeature feature in features)
             {
                 if (feature.Geometry is Point || feature.Geometry is MultiPoint) continue; // Points with a vertex on top confuse me
                 if (feature.Geometry != null)

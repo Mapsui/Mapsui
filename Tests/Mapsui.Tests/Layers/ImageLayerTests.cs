@@ -16,7 +16,7 @@ namespace Mapsui.Tests.Layers
         private class FakeProvider : IProvider<IFeature>
         {
             public string? CRS { get; set; }
-            public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
+            public IAsyncEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
             {
                 throw new Exception(ExceptionMessage);
             }

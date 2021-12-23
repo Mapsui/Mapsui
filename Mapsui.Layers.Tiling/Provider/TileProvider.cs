@@ -47,7 +47,7 @@ namespace Mapsui.Providers
             _source = tileSource;
         }
 
-        public async Task<IEnumerable<IFeature>> FetchTiles(FetchInfo fetchInfo)
+        public async IAsyncEnumerable<IFeature> FetchTiles(FetchInfo fetchInfo)
         {
             var box = fetchInfo.Extent;
             var extent = new Extent(box.Min.X, box.Min.Y, box.Max.X, box.Max.Y);
@@ -66,15 +66,13 @@ namespace Mapsui.Providers
 
             await Task.WhenAll(tasks.ToArray());
 
-            var features = new List<IFeature>();
             foreach (var info in infos)
             {
                 var bitmap = _bitmaps.Find(info.Index);
                 if (bitmap == null) continue;
                 var raster = new MRaster(bitmap, new MRect(info.Extent.MinX, info.Extent.MinY, info.Extent.MaxX, info.Extent.MaxY));
-                features.Add(new RasterFeature(raster));
+                yield return new RasterFeature(raster);
             }
-            return features;
         }
 
         private void GetTileOnThread(object parameter) // This could accept normal parameters now we use PCL Profile111
@@ -100,7 +98,7 @@ namespace Mapsui.Providers
             }
         }
 
-        public Task<IEnumerable<IFeature>> GetFeatures(FetchInfo fetchInfo)
+        public IAsyncEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {
             return FetchTiles(fetchInfo);
         }

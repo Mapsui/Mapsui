@@ -29,7 +29,7 @@ namespace Mapsui.Rendering
             try
             {
                 if (viewport.Extent == null) return;
-                var features = (await layer.GetFeatures(viewport.Extent, viewport.Resolution)).ToList();
+                var features = await layer.GetFeatures(viewport.Extent, viewport.Resolution).ToListAsync();
 
                 var layerStyles = ToArray(layer);
                 foreach (var layerStyle in layerStyles)

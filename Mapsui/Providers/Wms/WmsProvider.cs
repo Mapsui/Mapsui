@@ -471,10 +471,8 @@ namespace Mapsui.Providers.Wms
             return _wmsClient.Layer.CRS.FirstOrDefault(item => string.Equals(item.Trim(), crs.Trim(), StringComparison.CurrentCultureIgnoreCase)) != null;
         }
 
-        public async Task<IEnumerable<IFeature>> GetFeatures(FetchInfo fetchInfo)
+        public async IAsyncEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {
-            var features = new List<RasterFeature>();
-
             var view = new Viewport
             {
                 Resolution = fetchInfo.Resolution,
@@ -485,9 +483,8 @@ namespace Mapsui.Providers.Wms
             var raster = await TryGetMap(view);
             if (raster != null)
             {
-                features.Add(new RasterFeature(raster));
+                yield return new RasterFeature(raster);
             }
-            return features;
         }
 
         private async Task<Stream> GetStreamAsync(string url)

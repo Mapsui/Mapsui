@@ -92,11 +92,11 @@ namespace Mapsui.Layers
         public override MRect? Extent => _extent;
 
         /// <inheritdoc />
-        public override Task<IEnumerable<IFeature>> GetFeatures(MRect extent, double resolution)
+        public override IAsyncEnumerable<IFeature> GetFeatures(MRect extent, double resolution)
         {
-            if (_tileSource.Schema == null) return Task.FromResult(Enumerable.Empty<IFeature>());
+            if (_tileSource.Schema == null) return Enumerable.Empty<IFeature>().ToAsyncEnumerable();
             UpdateMemoryCacheMinAndMax();
-            return Task.FromResult((IEnumerable<IFeature>)_renderFetchStrategy.Get(extent, resolution, _tileSource.Schema, MemoryCache));
+            return _renderFetchStrategy.Get(extent, resolution, _tileSource.Schema, MemoryCache).ToAsyncEnumerable();
         }
 
         /// <inheritdoc />

@@ -63,7 +63,7 @@ namespace Mapsui.Samples.Common.Maps.Special
     {
         private readonly Random _random = new(0);
 
-        public override IEnumerable<PointFeature> GetFeatures(FetchInfo fetchInfo)
+        public override IAsyncEnumerable<PointFeature> GetFeatures(FetchInfo fetchInfo)
         {
             var features = new List<PointFeature>();
             var geometries = RandomPointGenerator.GenerateRandomPoints(fetchInfo.Extent, 10, _random.Next()).ToList();
@@ -82,7 +82,7 @@ namespace Mapsui.Samples.Common.Maps.Special
                 }
                 count++;
             }
-            return features;
+            return features.ToAsyncEnumerable();
         }
     }
 }

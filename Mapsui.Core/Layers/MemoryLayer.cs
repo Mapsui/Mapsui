@@ -31,7 +31,7 @@ namespace Mapsui.Layers
         // This field allows a workaround for when projection is needed.
         public string? CRS { get; set; }
 
-        public override async IAsyncEnumerable<IFeature> GetFeatures(MRect? box, double resolution)
+        public override IAsyncEnumerable<IFeature> GetFeatures(MRect? box, double resolution)
         {
             // Safeguard in case BoundingBox is null, most likely due to no features in layer
             if (box == null) { return new List<IFeature>().ToAsyncEnumerable(); }
@@ -41,8 +41,8 @@ namespace Mapsui.Layers
                     SymbolStyle.DefaultHeight * 2 * resolution);
             var fetchInfo = new FetchInfo(biggerBox, resolution, CRS);
 
-            var features = (await DataSource?.GetFeatures(fetchInfo)) ?? Array.Empty<IFeature>();
-            return features.ToAsyncEnumerable();
+            var features = (DataSource?.GetFeatures(fetchInfo)) ?? Array.Empty<IFeature>().ToAsyncEnumerable();
+            return features;
         }
 
         public override void RefreshData(FetchInfo fetchInfo)

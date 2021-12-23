@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Mapsui.Extensions;
@@ -890,7 +891,7 @@ namespace Mapsui.Providers.Shapefile
         }
 
 
-        public Task<IEnumerable<GeometryFeature>> GetFeatures(FetchInfo fetchInfo)
+        public IAsyncEnumerable<GeometryFeature> GetFeatures(FetchInfo fetchInfo)
         {
             lock (_syncRoot)
             {
@@ -913,7 +914,7 @@ namespace Mapsui.Providers.Shapefile
                             features.Add(feature);
                         }
                     }
-                    return Task.FromResult((IEnumerable<GeometryFeature>)features);
+                    return features.ToAsyncEnumerable();
                 }
                 finally
                 {

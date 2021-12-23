@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -96,7 +97,7 @@ namespace Mapsui.Providers.ArcGIS.Image
             set => _timeOut = value;
         }
 
-        public Task<IEnumerable<IFeature>> GetFeatures(FetchInfo fetchInfo)
+        public IAsyncEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {
             var features = new List<RasterFeature>();
 
@@ -105,7 +106,7 @@ namespace Mapsui.Providers.ArcGIS.Image
             {
                 features.Add(new RasterFeature(raster));
             }
-            return Task.FromResult((IEnumerable<IFeature>)features);
+            return features.ToAsyncEnumerable();
         }
 
         public bool TryGetMap(IViewport viewport, [NotNullWhen(true)] out MRaster? raster)

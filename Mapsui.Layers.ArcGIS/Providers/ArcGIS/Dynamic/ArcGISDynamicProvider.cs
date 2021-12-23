@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -91,13 +92,11 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             set => _crs = value;
         }
 
-        public async Task<IEnumerable<IFeature>> GetFeatures(FetchInfo fetchInfo)
+        public async IAsyncEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {
             //If there are no layers (probably not initialised) return nothing
             if (ArcGisDynamicCapabilities.layers == null)
-                return new List<IFeature>();
-
-            var features = new List<RasterFeature>();
+                yield break;
 
             IViewport? viewport = fetchInfo.ToViewport();
             if (viewport != null)
@@ -105,10 +104,9 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
                 var raster = await TryGetMap(viewport);
                 if (raster != null)
                 {
-                    features.Add(new RasterFeature(raster));
+                    yield return new RasterFeature(raster);
                 }
             }
-            return features;
         }
 
         public MRect? GetExtent()

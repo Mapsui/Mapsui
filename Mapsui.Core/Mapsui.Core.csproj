@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="System.Linq.Async" Version="5.1.0" />
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="1.1.1" />
   </ItemGroup>
 

@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Linq;
 using System.Net;
 using System.Xml.XPath;
 using Mapsui.Extensions;
@@ -956,9 +957,9 @@ namespace Mapsui.Providers.Wfs
         /// <param name="box"></param>
         /// <param name="resolution">unused parameter (for backwards compatibility)</param>
         /// <returns>Features within the specified <see cref="Mapsui.Geometries.BoundingBox"/></returns>
-        public Task<IEnumerable<IFeature>> GetFeatures(FetchInfo fetchInfo)
+        public IAsyncEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {
-            return TaskFromResult((IEnumerable<IFeatureInfo>) ExecuteIntersectionQuery(fetchInfo.Extent.ToBoundingBox()));
+            return ExecuteIntersectionQuery(fetchInfo.Extent.ToBoundingBox()).ToAsyncEnumerable();
         }
 
     }
