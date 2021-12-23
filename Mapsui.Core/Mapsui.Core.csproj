@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Mapsui</RootNamespace>
-	<RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64;android-x64;android-arm64</RuntimeIdentifiers>
   </PropertyGroup>
 
   <ItemGroup>
