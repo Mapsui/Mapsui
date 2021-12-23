@@ -20,7 +20,7 @@ namespace Mapsui.Samples.Wpf.Editing.Layers
             Style = new SymbolStyle { SymbolScale = 0.5 };
         }
 
-        public override async IAsyncEnumerable<GeometryFeature> GetFeatures(MRect box, double resolution)
+        public override async IAsyncEnumerable<IFeature> GetFeatures(MRect box, double resolution)
         {
             var features = _source.GetFeatures(box, resolution);
             await foreach (GeometryFeature feature in features)

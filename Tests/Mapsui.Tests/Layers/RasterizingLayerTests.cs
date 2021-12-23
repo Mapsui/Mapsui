@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using BruTile.Predefined;
 using Mapsui.Extensions;
 using Mapsui.Geometries;
@@ -18,7 +19,7 @@ namespace Mapsui.Tests.Layers
     public class RasterizingLayerTests
     {
         [Test]
-        public void TestTimer()
+        public async Task TestTimer()
         {
             // arrange
             DefaultRendererFactory.Create = () => new MapRenderer();
@@ -29,7 +30,7 @@ namespace Mapsui.Tests.Layers
             var resolution = schema.Resolutions.First().Value.UnitsPerPixel;
             using var waitHandle = new AutoResetEvent(false);
 
-            Assert.AreEqual(0, layer.GetFeatures(box, resolution).Count());
+            Assert.AreEqual(0, await layer.GetFeatures(box, resolution).CountAsync());
             layer.DataChanged += (_, _) => {
                 // assert
                 waitHandle.Set();
@@ -42,7 +43,7 @@ namespace Mapsui.Tests.Layers
 
             // assert
             waitHandle.WaitOne();
-            Assert.AreEqual(layer.GetFeatures(box, resolution).Count(), 1);
+            Assert.AreEqual(await layer.GetFeatures(box, resolution).CountAsync(), 1);
         }
 
         private static MemoryLayer CreatePointLayer()
