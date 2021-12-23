@@ -15,7 +15,9 @@
 // along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using Mapsui.Extensions;
 using Mapsui.Geometries;
@@ -42,6 +44,8 @@ namespace Mapsui
         private double _rotation;
         private MPoint _center = new(0, 0);
         private bool _modified = true;
+        private List<AnimationEntry> _animations = new();
+
 
         /// <summary>
         /// Create a new viewport
@@ -298,35 +302,218 @@ namespace Mapsui
             OnViewportChanged();
         }
 
-        public void SetCenter(double x, double y)
+        public void SetCenter(double x, double y, long duration = 0, Easing? easing = default)
         {
             Center = new MPoint(x, y);
             OnViewportChanged();
         }
 
-        public void SetCenterAndResolution(double x, double y, double resolution)
+        public void SetCenterAndResolution(double x, double y, double resolution, long duration = 0, Easing? easing = default)
         {
-            Center = new MPoint(x, y);
-            Resolution = resolution;
+            if (duration == 0)
+            {
+                Center = new MPoint(x, y);
+                Resolution = resolution;
+            }
+            else
+            {
+                _animations = CreateSetCenterAndResolutionsAnimation(x, y, resolution, easing);
+                //!!!_animations = CreateZoomToAnimation(resolution, new MReadOnlyPoint(x, y), duration);
+                Animation.Start(_animations, duration);
+            }
+
             OnViewportChanged();
         }
 
-        public void SetCenter(MReadOnlyPoint center)
+        private List<AnimationEntry> CreateSetCenterAndResolutionsAnimation(double x, double y, double resolution, Easing? easing)
         {
-            Center = center;
+            var animations = new List<AnimationEntry>();
+            var entry = new AnimationEntry(
+                start: Center,
+                end: (MReadOnlyPoint)new MPoint(x, y),
+                animationStart: 0,
+                animationEnd: 1,
+                easing: easing ?? Easing.SinInOut,
+                tick: CenterTick,
+                final: CenterFinal
+            );
+            animations.Add(entry);
+
+            var entry2 = new AnimationEntry(
+                 start: Resolution,
+                 end: resolution,
+                 animationStart: 0,
+                 animationEnd: 1,
+                 easing: easing ?? Easing.SinInOut,
+                 tick: ResolutionTick,
+                 final: ResolutionFinal
+             );
+            animations.Add(entry2);
+            return animations;
+        }
+
+        private List<AnimationEntry> CreateZoomToAnimation(double resolution, MReadOnlyPoint centerOfZoom, long duration)
+        {
+            var animations = new List<AnimationEntry>();
+
+            var entry = new AnimationEntry(
+                start: (Center, Resolution),
+                end: (centerOfZoom, resolution),
+                animationStart: 0,
+                animationEnd: 1,
+                easing: Easing.SinInOut,
+                tick: CenterAndResolutionTick,
+                final: CenterAndResolutionFinal
+            );
+            animations.Add(entry);
+
+            Animation.Start(animations, duration);
+
+            return animations;
+        }
+
+        private void CenterAndResolutionTick(AnimationEntry entry, double value)
+        {
+            var start = ((MReadOnlyPoint Center, double Resolution))entry.Start;
+            var end = ((MReadOnlyPoint Center, double Resolution))entry.End;
+
+            var x = start.Center.X + end.Center.X - (start.Center.X * entry.Easing.Ease(value));
+            var y = start.Center.Y + end.Center.Y - (start.Center.Y * entry.Easing.Ease(value));
+            var r = start.Resolution + end.Resolution - start.Resolution * entry.Easing.Ease(value);
+
+            Center = new MReadOnlyPoint(x, y);
+            Resolution = r;
+        }
+
+        private void CenterAndResolutionFinal(AnimationEntry entry)
+        {
+            var end = ((MReadOnlyPoint Center, double Resolution))entry.End;
+            Center = end.Center;
+            Resolution = end.Resolution;
+        }
+
+        public void SetCenter(MReadOnlyPoint center, long duration = 0, Easing? easing = default)
+        {
+            if (center.Equals(Center))
+                return;
+
+            if (duration == 0)
+            {
+                Center = center;
+            }
+            else
+            {
+                _animations = CreateSetCenterAnimation(center, easing);
+                Animation.Start(_animations, duration);
+            }
             OnViewportChanged();
         }
 
-        public void SetResolution(double resolution)
+        private List<AnimationEntry> CreateSetCenterAnimation(MReadOnlyPoint center, Easing? easing)
         {
-            Resolution = resolution;
+            return new List<AnimationEntry> { new AnimationEntry(
+                                start: Center,
+                                end: center,
+                                animationStart: 0,
+                                animationEnd: 1,
+                                easing: easing ?? Easing.SinOut,
+                                tick: CenterTick,
+                                final: CenterFinal
+                            ) };
+        }
+
+        private void CenterTick(AnimationEntry entry, double value)
+        {
+            var x = ((MReadOnlyPoint)entry.Start).X + (((MReadOnlyPoint)entry.End).X - ((MReadOnlyPoint)entry.Start).X) * entry.Easing.Ease(value);
+            var y = ((MReadOnlyPoint)entry.Start).Y + (((MReadOnlyPoint)entry.End).Y - ((MReadOnlyPoint)entry.Start).Y) * entry.Easing.Ease(value);
+            Center = new MReadOnlyPoint(x, y);
+        }
+
+        private void CenterFinal(AnimationEntry entry)
+        {
+            Center = (MReadOnlyPoint)entry.End;
+        }
+
+        private void ResolutionFinal(AnimationEntry entry)
+        {
+            Resolution = (double)entry.End;
+        }
+
+        private void ResolutionTick(AnimationEntry entry, double value)
+        {
+            Resolution = (double)entry.Start + ((double)entry.End - (double)entry.Start) * entry.Easing.Ease(value);
+        }
+
+        public void SetResolution(double resolution, long duration = 0, Easing? easing = default)
+        {
+            if (Resolution == resolution)
+                return;
+
+            if (duration == 0)
+                Resolution = resolution;
+            else
+            {
+                _animations = CreateSetResolutionAnimation(resolution, Resolution, duration, easing);
+            }
+
             OnViewportChanged();
         }
 
-        public void SetRotation(double rotation)
+        private List<AnimationEntry> CreateSetResolutionAnimation(double resolution, double currentResolution, long duration, Easing? easing)
         {
-            Rotation = rotation;
+            var animations = new List<AnimationEntry>();
+
+            var entry = new AnimationEntry(
+                start: currentResolution,
+                end: resolution,
+                animationStart: 0,
+                animationEnd: 1,
+                easing: easing ?? Easing.SinInOut,
+                tick: ResolutionTick,
+                final: ResolutionFinal
+            );
+            animations.Add(entry);
+
+            Animation.Start(animations, duration);
+            return animations;
+        }
+
+        public void SetRotation(double rotation, long duration = 0, Easing? easing = default)
+        {
+            if (Rotation == rotation) return;
+
+            if (duration == 0)
+                Rotation = rotation;
+            else
+            {
+                var rotationDelta = rotation - Rotation;
+
+                if (rotationDelta < -180.0)
+                    rotationDelta += 360.0;
+
+                if (rotationDelta > 180.0)
+                    rotationDelta -= 360.0;
+
+                var newRotation = Rotation + rotationDelta;
+
+                _animations = CreateRotationAnimationEntry(newRotation, easing);
+                Animation.Start(_animations, duration);
+
+            }
             OnViewportChanged();
+        }
+
+        private List<AnimationEntry> CreateRotationAnimationEntry(double rotation, Easing? easing)
+        {
+            return new List<AnimationEntry> { new AnimationEntry(
+                start: Rotation,
+                end: rotation,
+                animationStart: 0,
+                animationEnd: 1,
+                easing: easing ?? Easing.SinInOut,
+                tick: (e, v) => Rotation = (double)e.Start + ((double)e.End * e.Easing.Ease(v)),
+                final: (e) => Rotation = (double)e.End
+            ) };
         }
 
         /// <summary>
@@ -348,6 +535,17 @@ namespace Mapsui
                 Width = extent.Width / resolution,
                 Height = extent.Height / resolution
             };
+        }
+
+        public bool UpdateAnimations()
+        {
+            if (_animations.All(a => a.Done)) _animations.Clear();
+            return Animation.UpdateAnimations(_animations);
+        }
+
+        public void SetAnimations(List<AnimationEntry> animations)
+        {
+            _animations = animations;
         }
     }
 }

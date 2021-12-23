@@ -1,6 +1,8 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using Mapsui.Geometries;
 using Mapsui.UI;
+using Mapsui.Utilities;
 
 namespace Mapsui
 {
@@ -43,28 +45,28 @@ namespace Mapsui
             if (_viewport.HasSize) Limiter?.LimitExtent(_viewport, Map?.Extent);
         }
 
-        public virtual void SetCenter(double x, double y)
+        public virtual void SetCenter(double x, double y, long duration = 0, Easing? easing = default)
         {
             if (Map?.PanLock ?? false) return;
-            _viewport.SetCenter(x, y);
+            _viewport.SetCenter(x, y, duration, easing);
             Limiter?.LimitExtent(_viewport, Map?.Extent);
         }
 
-        public virtual void SetCenterAndResolution(double x, double y, double resolution)
+        public virtual void SetCenterAndResolution(double x, double y, double resolution, long duration = 0, Easing? easing = default)
         {
             if (Map?.PanLock ?? false) return;
-            _viewport.SetCenterAndResolution(x, y, resolution);
+            _viewport.SetCenterAndResolution(x, y, resolution, duration, easing);
             Limiter?.LimitExtent(_viewport, Map?.Extent);
         }
 
-        public void SetCenter(MReadOnlyPoint center)
+        public void SetCenter(MReadOnlyPoint center, long duration = 0, Easing? easing = default)
         {
             if (Map?.PanLock ?? false) return;
-            _viewport.SetCenter(center);
+            _viewport.SetCenter(center, duration, easing);
             Limiter?.LimitExtent(_viewport, Map?.Extent);
         }
 
-        public void SetResolution(double resolution)
+        public void SetResolution(double resolution, long duration = 0, Easing? easing = default)
         {
             if (Map?.ZoomLock ?? true) return;
             if (Limiter != null)
@@ -72,13 +74,13 @@ namespace Mapsui
                 resolution = Limiter.LimitResolution(resolution, _viewport.Width, _viewport.Height, Map.Resolutions, Map.Extent);
             }
 
-            _viewport.SetResolution(resolution);
+            _viewport.SetResolution(resolution, duration, easing);
         }
 
-        public void SetRotation(double rotation)
+        public void SetRotation(double rotation, long duration = 0, Easing? easing = default)
         {
             if (Map?.RotationLock ?? false) return;
-            _viewport.SetRotation(rotation);
+            _viewport.SetRotation(rotation, duration, easing);
             Limiter?.LimitExtent(_viewport, Map?.Extent);
         }
 
@@ -110,6 +112,16 @@ namespace Mapsui
         public MPoint WorldToScreenUnrotated(MPoint worldPosition)
         {
             return _viewport.WorldToScreenUnrotated(worldPosition);
+        }
+
+        public bool UpdateAnimations()
+        {
+            return _viewport.UpdateAnimations();
+        }
+
+        public void SetAnimations(List<AnimationEntry> animations)
+        {
+            _viewport.SetAnimations(animations);
         }
     }
 }

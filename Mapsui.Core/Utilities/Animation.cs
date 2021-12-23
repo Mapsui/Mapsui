@@ -49,7 +49,7 @@ namespace Mapsui.Utilities
         {
             lock (_syncObject)
             {
-                 Stop(entry, false);
+                Stop(entry, false);
                 entry.StartTicks = ticks;
                 entry.DurationTicks = duration * TimeSpan.TicksPerMillisecond;
                 entry.EndTicks = entry.StartTicks + entry.DurationTicks;
@@ -87,46 +87,46 @@ namespace Mapsui.Utilities
         /// <summary>
         /// Update all AnimationEntrys and check, if a redraw is needed
         /// </summary>
-        /// <returns>True, if a redraw of the screen ist needed</returns>
-        public static bool UpdateAnimations(IEnumerable<AnimationEntry> entries1)
+        /// <returns>True, if a redraw of the screen is needed</returns>
+        public static bool UpdateAnimations(IEnumerable<AnimationEntry> entries)
         {
             var ticks = DateTime.Now.Ticks;
 
-            AnimationEntry[] entries;
+            AnimationEntry[] entriesArray;
 
-            entries = entries1.ToArray();
+            entriesArray = entries.ToArray();
 
-            if (entries.Length == 0)
+            if (entriesArray.Length == 0)
                 return false;
 
             var isRunning = false;
 
-            for (int i = 0; i < entries.Length; i++)
+            for (int i = 0; i < entriesArray.Length; i++)
             {
-                if (ticks > entries[i].EndTicks)
+                if (ticks > entriesArray[i].EndTicks)
                 {
                     // Animation is at the end of duration
                     isRunning = true;
-                    if (!entries[i].Repeat)
+                    if (!entriesArray[i].Repeat)
                     {
                         // Animation shouldn't be repeated, so remove it
-                        Stop(entries[i], true);
+                        Stop(entriesArray[i], true);
                         continue;
                     }
                     // Set new values for repeating this animation
-                    entries[i].StartTicks = entries[i].EndTicks;
-                    entries[i].EndTicks = entries[i].StartTicks + entries[i].DurationTicks;
+                    entriesArray[i].StartTicks = entriesArray[i].EndTicks;
+                    entriesArray[i].EndTicks = entriesArray[i].StartTicks + entriesArray[i].DurationTicks;
                 }
 
-                var value = (ticks - entries[i].StartTicks) / (double)entries[i].DurationTicks;
+                var value = (ticks - entriesArray[i].StartTicks) / (double)entriesArray[i].DurationTicks;
 
-                if (value < entries[i].AnimationStart || value > entries[i].AnimationEnd)
+                if (value < entriesArray[i].AnimationStart || value > entriesArray[i].AnimationEnd)
                 {
                     // Nothing to do before the animation starts or after animation ended
                     continue;
                 }
 
-                isRunning |= entries[i].Tick(value);
+                isRunning |= entriesArray[i].Tick(value);
             }
 
             return isRunning;

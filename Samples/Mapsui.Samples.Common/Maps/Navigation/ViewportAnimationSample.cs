@@ -2,6 +2,7 @@
 using Mapsui.Extensions;
 using Mapsui.Layers.Tiling;
 using Mapsui.UI;
+using Mapsui.Utilities;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ScaleBar;
 using Mapsui.Widgets.Zoom;
@@ -10,15 +11,35 @@ namespace Mapsui.Samples.Common.Maps
 {
     public class ViewportAnimationSample : ISample
     {
-        public string Name => "Viewport animation";
-        public string Category => "Navigation";
+        public string Name => "0. Viewport animation";
+        public string Category => "Demo";
+
+        public static int animationMode = 1;
 
         public void Setup(IMapControl mapControl)
         {
             mapControl.Map = CreateMap();
             mapControl.Map.Info += (s, a) => {
                 if (a.MapInfo?.WorldPosition != null)
-                    mapControl.Navigator?.FlyTo(a.MapInfo.WorldPosition, mapControl.Viewport.Resolution * 8, 5000);
+                {
+                    if (animationMode == 0)
+                        mapControl.Navigator?.FlyTo(a.MapInfo.WorldPosition, mapControl.Viewport.Resolution * 8, 500);
+                    else if (animationMode == 1)
+                        mapControl.Navigator?.RotateTo(mapControl.Viewport.Rotation - 45, 500, Easing.CubicIn);
+                    else if (animationMode == 2)
+                        mapControl.Navigator?.CenterOn(a.MapInfo.WorldPosition, 500, Easing.CubicOut);
+                    else if (animationMode == 3)
+                        mapControl.Navigator?.NavigateTo(a.MapInfo.WorldPosition, mapControl.Map.Resolutions[5], 500, Easing.CubicOut);
+                    else if (animationMode == 4)
+                        mapControl.Navigator?.ZoomTo(mapControl.Map.Resolutions[8], a.MapInfo.ScreenPosition!, 500, Easing.CubicOut);
+                    else if (animationMode == 5)
+                        mapControl.Navigator?.ZoomTo(mapControl.Map.Resolutions[8], 500, Easing.CubicOut);
+
+                    // todo: Somehow select between modes
+                    //animationMode++;
+                    //if (animationMode > 2) animationMode = 0;
+
+                }
             };
         }
 
