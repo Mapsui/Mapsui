@@ -9,8 +9,6 @@ using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
 using Mapsui.UI;
 
-#pragma warning disable IDISP004 // Don't ignore created IDisposable
-
 namespace Mapsui.Samples.Common.Maps
 {
     public class AtlasSample : ISample
@@ -30,7 +28,8 @@ namespace Mapsui.Samples.Common.Maps
 
         public static Map CreateMap()
         {
-            _atlasBitmapId = BitmapRegistry.Instance.Register(typeof(AtlasSample).GetTypeInfo().Assembly.GetManifestResourceStream("Mapsui.Samples.Common.Images.osm-liberty.png"));
+            var assembly = typeof(AtlasSample).GetTypeInfo().Assembly;
+            _atlasBitmapId = BitmapRegistry.Instance.Register(assembly.GetManifestResourceStream("Mapsui.Samples.Common.Images.osm-liberty.png")!);
 
             var map = new Map();
 
