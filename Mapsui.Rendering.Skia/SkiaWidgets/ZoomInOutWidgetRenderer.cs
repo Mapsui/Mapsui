@@ -22,12 +22,14 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
             if (_paintStroke == null || _paintBackground == null || _paintText == null)
             {
                 // ... than create the paints
+#pragma warning disable IDISP007 // Don't dispose injected
                 _paintStroke?.Dispose();
                 _paintStroke = CreatePaint(zoomInOut.StrokeColor.ToSkia(layerOpacity), Stroke, SKPaintStyle.Stroke);
                 _paintBackground?.Dispose();
                 _paintBackground = CreatePaint(zoomInOut.BackColor.ToSkia(layerOpacity), Stroke, SKPaintStyle.Fill);
                 _paintText?.Dispose();
                 _paintText = CreatePaint(zoomInOut.TextColor.ToSkia(layerOpacity), Stroke, SKPaintStyle.Fill);
+#pragma warning restore IDISP007
             }
             else
             {

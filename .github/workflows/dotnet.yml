@@ -29,17 +29,14 @@ jobs:
     #     echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV
     #     sudo xcode-select -s $XCODE_ROOT
     - name: Setup .NET Core SDK
-      uses: actions/setup-dotnet@v1.8.2
+      uses: actions/setup-dotnet@v1
       with:
-         dotnet-version: '6.0.x'
-         include-prerelease: true
-    - name: Setup .NET Core SDK
-      uses: actions/setup-dotnet@v1.8.2
-      with:
-         dotnet-version: '5.0.x'
-         include-prerelease: true
-    - name: install maui-check
-      run: dotnet tool install -g Redth.Net.Maui.Check
+         dotnet-version: | 
+           5.0.x
+           6.0.x
+         include-prerelease: true    
+    - name: install maui
+      run: dotnet workload install maui
     - name: Restore dependencies
       run: nuget restore Mapsui.Mac.sln
     - name: Build Mapsui.Core
@@ -75,15 +72,12 @@ jobs:
       with:
         fetch-depth: 0
     - name: Setup .NET Core SDK
-      uses: actions/setup-dotnet@v1.8.2
+      uses: actions/setup-dotnet@v1
       with:
-         dotnet-version: '6.0.x'
+         dotnet-version: | 
+           5.0.x
+           6.0.x
          include-prerelease: true    
-    - name: Setup .NET Core SDK
-      uses: actions/setup-dotnet@v1.8.2
-      with:
-         dotnet-version: '5.0.x'
-         include-prerelease: true
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.0.5
       with:
@@ -92,10 +86,8 @@ jobs:
       uses: microsoft/setup-msbuild@v1.1
       with:
         vs-prerelease: true
-    - name: install maui-check
-      run: dotnet tool install -g Redth.Net.Maui.Check
-    - name: run maui-check
-      run: maui-check --fix --non-interactive --skip vswin --skip edgewebview2 --skip androidemulator
+    - name: install maui
+      run: dotnet workload install maui
     - name: Restore dependencies
       run: nuget restore Mapsui.sln
     - name: Build Mapsui.Core
@@ -153,15 +145,12 @@ jobs:
       with:
         fetch-depth: 0
     - name: Setup .NET Core SDK
-      uses: actions/setup-dotnet@v1.8.2
+      uses: actions/setup-dotnet@v1
       with:
-         dotnet-version: '6.0.x'
+         dotnet-version: | 
+           5.0.x
+           6.0.x
          include-prerelease: true    
-    - name: Setup .NET Core SDK
-      uses: actions/setup-dotnet@v1.8.2
-      with:
-         dotnet-version: '5.0.x'
-         include-prerelease: true
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.0.5
       with:
@@ -170,10 +159,12 @@ jobs:
       uses: microsoft/setup-msbuild@v1.1
       with:
         vs-prerelease: true
+    - name: install maui
+      run: dotnet workload install maui
     - name: install maui-check
       run: dotnet tool install -g Redth.Net.Maui.Check
     - name: run maui-check
-      run: maui-check --fix --non-interactive --skip vswin --skip edgewebview2 --skip androidemulator
+      run: maui-check --fix --non-interactive --skip vswin --skip edgewebview2 --skip androidemulator --skip dotnetworkloads-6.0.100 --skip dotnet --skip dotnet-workload-dedup --skip dotnetsentinel
     - name: Restore dependencies
       run: nuget restore Mapsui.Maui.sln
     - name: Build Mapsui.Core

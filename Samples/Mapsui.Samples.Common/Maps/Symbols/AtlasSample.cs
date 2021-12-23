@@ -30,7 +30,6 @@ namespace Mapsui.Samples.Common.Maps
         public static Map CreateMap()
         {
             _atlasBitmapId = typeof(AtlasSample).LoadBitmapId("Images.osm-liberty.png");
-
             var map = new Map();
 
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
