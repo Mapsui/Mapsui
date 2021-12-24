@@ -36,16 +36,19 @@ namespace Mapsui
     {
         public event PropertyChangedEventHandler? ViewportChanged;
 
-        private readonly MRect _extent;
-        private MQuad _windowExtent;
-        private double _height;
+        // State
+        private MPoint _center = new(0, 0);
         private double _resolution = Constants.DefaultResolution;
         private double _width;
+        private double _height;
         private double _rotation;
-        private MPoint _center = new(0, 0);
-        private bool _modified = true;
-        private List<AnimationEntry> _animations = new();
 
+        // For derived state
+        private bool _modified = true;
+        private readonly MRect _extent;
+        private MQuad _windowExtent;
+
+        private List<AnimationEntry> _animations = new();
 
         /// <summary>
         /// Create a new viewport
@@ -62,11 +65,12 @@ namespace Mapsui
         /// <param name="viewport">Viewport from which to copy all values</param>
         public Viewport(IReadOnlyViewport viewport) : this()
         {
+            _center = new MReadOnlyPoint(viewport.Center);
             _resolution = viewport.Resolution;
             _width = viewport.Width;
             _height = viewport.Height;
             _rotation = viewport.Rotation;
-            _center = new MReadOnlyPoint(viewport.Center);
+
             if (viewport.Extent != null) _extent = new MRect(viewport.Extent);
             if (viewport.WindowExtent != null) _windowExtent = new MQuad(viewport.WindowExtent);
 
