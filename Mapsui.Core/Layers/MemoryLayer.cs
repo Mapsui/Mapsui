@@ -34,7 +34,7 @@ namespace Mapsui.Layers
         public override IAsyncEnumerable<IFeature> GetFeatures(MRect? box, double resolution)
         {
             // Safeguard in case BoundingBox is null, most likely due to no features in layer
-            if (box == null) { return new List<IFeature>().ToAsyncEnumerable(); }
+            if (box == null) { return Enumerable.Empty<IFeature>().ToAsyncEnumerable(); }
 
             var biggerBox = box.Grow(
                     SymbolStyle.DefaultWidth * 2 * resolution,

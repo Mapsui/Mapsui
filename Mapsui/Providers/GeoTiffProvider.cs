@@ -196,7 +196,7 @@ namespace Mapsui.Providers
             {
                 return new[] { _feature }.ToAsyncEnumerable();
             }
-            return new List<IFeature>().ToAsyncEnumerable();
+            return Enumerable.Empty<IFeature>().ToAsyncEnumerable();
         }
 
         public MRect? GetExtent()
