@@ -10,7 +10,10 @@ namespace Mapsui
         /// <summary>
         /// Coordinate of center of viewport in map coordinates
         /// </summary>
-        MReadOnlyPoint Center { get; } // todo: the point itself has X and Y values that can be set. 
+        MReadOnlyPoint Center { get; }
+
+        double CenterX { get; }
+        double CenterY { get; } 
 
         /// <summary>
         /// Resolution of the viewport in units per pixel

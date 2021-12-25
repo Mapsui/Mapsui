@@ -19,6 +19,8 @@ namespace Mapsui
 
         public event PropertyChangedEventHandler? ViewportChanged;
         public MReadOnlyPoint Center => _viewport.Center;
+        public double CenterX => _viewport.CenterX;
+        public double CenterY => _viewport.CenterY;
         public double Resolution => _viewport.Resolution;
         public MRect? Extent => _viewport.Extent;
         public double Width => _viewport.Width;

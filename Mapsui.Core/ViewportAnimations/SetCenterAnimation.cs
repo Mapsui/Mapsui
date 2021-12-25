@@ -1,16 +1,15 @@
 ﻿using System.Collections.Generic;
-using Mapsui.Geometries;
 using Mapsui.Utilities;
 
 namespace Mapsui.ViewportAnimations
 {
     public class SetCenterAnimation
     {
-        public static List<AnimationEntry> Create(IViewport viewport, MReadOnlyPoint center, Easing? easing)
+        public static List<AnimationEntry> Create(IViewport viewport, double centerX, double centerY, Easing? easing)
         {
             return new List<AnimationEntry> { new AnimationEntry(
-                start: viewport.Center,
-                end: center,
+                start: (viewport.CenterX, viewport.CenterY),
+                end: (centerX, centerY),
                 animationStart: 0,
                 animationEnd: 1,
                 easing: easing ?? Easing.SinOut,
@@ -21,15 +20,16 @@ namespace Mapsui.ViewportAnimations
 
         private static void CenterTick(IViewport viewport, AnimationEntry entry, double value)
         {
-            var centerX = ((MReadOnlyPoint)entry.Start).X + (((MReadOnlyPoint)entry.End).X - ((MReadOnlyPoint)entry.Start).X) * entry.Easing.Ease(value);
-            var centerY = ((MReadOnlyPoint)entry.Start).Y + (((MReadOnlyPoint)entry.End).Y - ((MReadOnlyPoint)entry.Start).Y) * entry.Easing.Ease(value);
+            var (startX, startY) = ((double, double))entry.Start;
+            var (endX, endY) = ((double, double))entry.End;
+            var centerX = startX + (endX - startX) * entry.Easing.Ease(value);
+            var centerY = startY + (endY - startY) * entry.Easing.Ease(value);
             viewport.SetCenter(centerX, centerY);
         }
 
         private static void CenterFinal(IViewport viewport, AnimationEntry entry)
         {
-            var centerX = ((MReadOnlyPoint)entry.End).X;
-            var centerY = ((MReadOnlyPoint)entry.End).Y;
+            var (centerX, centerY) = ((double, double))entry.End;
             viewport.SetCenter(centerX, centerY);
         }
     }

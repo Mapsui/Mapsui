@@ -444,7 +444,7 @@ namespace Mapsui
             }
             else
             {
-                _animations = SetCenterAnimation.Create(this, center, easing);
+                _animations = SetCenterAnimation.Create(this, center.X, center.Y, easing);
                 Animation.Start(_animations, duration);
             }
             OnViewportChanged();
