@@ -34,7 +34,7 @@ namespace Mapsui.Providers
         public IAsyncEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {
             var features = _provider.GetFeatures(fetchInfo);
-            return GetFeaturesInViewAsync(fetchInfo.Resolution, _labelStyle, features, _rectangleLine, _rectangleFill);
+            return GetFeaturesInView(fetchInfo.Resolution, _labelStyle, features, _rectangleLine, _rectangleFill);
         }
 
         public MRect? GetExtent()
@@ -42,7 +42,7 @@ namespace Mapsui.Providers
             return _provider.GetExtent();
         }
 
-        private static async IAsyncEnumerable<IFeature> GetFeaturesInViewAsync(double resolution, LabelStyle labelStyle,
+        private static async IAsyncEnumerable<IFeature> GetFeaturesInView(double resolution, LabelStyle labelStyle,
             IAsyncEnumerable<IFeature>? features, Pen line, Brush? fill)
         {
             if (features == null)
