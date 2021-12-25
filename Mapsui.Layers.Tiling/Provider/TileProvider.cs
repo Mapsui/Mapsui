@@ -61,7 +61,7 @@ namespace Mapsui.Providers
                 if (_bitmaps.Find(info.Index) != null) continue;
                 if (_queue.Contains(info.Index)) continue;
                 _queue.Add(info.Index);
-                tasks.Add(Task.Run(() => GetTileOnThread(new object[] { _source, info, _bitmaps})));
+                tasks.Add(Task.Run(() => GetTileOnThread(_source, info, _bitmaps)));
             }
 
             await Task.WhenAll(tasks.ToArray());
@@ -75,14 +75,8 @@ namespace Mapsui.Providers
             }
         }
 
-        private void GetTileOnThread(object parameter) // This could accept normal parameters now we use PCL Profile111
+        private void GetTileOnThread(ITileProvider tileProvider, TileInfo tileInfo, MemoryCache<byte[]> bitmap)
         {
-            var parameters = (object[])parameter;
-            if (parameters.Length != 4) throw new ArgumentException("Four parameters expected");
-            var tileProvider = (ITileProvider)parameters[0];
-            var tileInfo = (TileInfo)parameters[1];
-            var bitmap = (MemoryCache<byte[]>)parameters[2];
-
             try
             {
                 bitmap.Add(tileInfo.Index, tileProvider.GetTile(tileInfo));
