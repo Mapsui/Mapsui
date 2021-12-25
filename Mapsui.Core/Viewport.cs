@@ -343,51 +343,11 @@ namespace Mapsui
             }
             else
             {
-                _animations = CreateSetCenterAndResolutionsAnimation(x, y, resolution, easing);
-                //!!!_animations = CreateZoomToAnimation(resolution, new MReadOnlyPoint(x, y), duration);
+                _animations = CreateZoomToAnimation(resolution, new MReadOnlyPoint(x, y), duration);
                 Animation.Start(_animations, duration);
             }
 
             OnViewportChanged();
-        }
-
-        private List<AnimationEntry> CreateSetCenterAndResolutionsAnimation(double x, double y, double resolution, Easing? easing)
-        {
-            var animations = new List<AnimationEntry>();
-            var entry = new AnimationEntry(
-                start: Center,
-                end: (MReadOnlyPoint)new MPoint(x, y),
-                animationStart: 0,
-                animationEnd: 1,
-                easing: easing ?? Easing.SinInOut,
-                tick: CenterTick,
-                final: CenterFinal
-            );
-            animations.Add(entry);
-
-            var entry2 = new AnimationEntry(
-                 start: Resolution,
-                 end: resolution,
-                 animationStart: 0,
-                 animationEnd: 1,
-                 easing: easing ?? Easing.SinInOut,
-                 tick: ResolutionTick,
-                 final: ResolutionFinal
-             );
-            animations.Add(entry2);
-            return animations;
-        }
-
-        private void CenterTick(AnimationEntry entry, double value)
-        {
-            _centerX = ((MReadOnlyPoint)entry.Start).X + (((MReadOnlyPoint)entry.End).X - ((MReadOnlyPoint)entry.Start).X) * entry.Easing.Ease(value);
-            _centerY = ((MReadOnlyPoint)entry.Start).Y + (((MReadOnlyPoint)entry.End).Y - ((MReadOnlyPoint)entry.Start).Y) * entry.Easing.Ease(value);
-        }
-
-        private void CenterFinal(AnimationEntry entry)
-        {
-            _centerX = ((MReadOnlyPoint)entry.End).X;
-            _centerY = ((MReadOnlyPoint)entry.End).Y;
         }
 
         private List<AnimationEntry> CreateZoomToAnimation(double resolution, MReadOnlyPoint centerOfZoom, long duration)
@@ -415,9 +375,9 @@ namespace Mapsui
             var start = ((MReadOnlyPoint Center, double Resolution))entry.Start;
             var end = ((MReadOnlyPoint Center, double Resolution))entry.End;
 
-            var x = start.Center.X + end.Center.X - (start.Center.X * entry.Easing.Ease(value));
-            var y = start.Center.Y + end.Center.Y - (start.Center.Y * entry.Easing.Ease(value));
-            var r = start.Resolution + end.Resolution - start.Resolution * entry.Easing.Ease(value);
+            var x = start.Center.X + (end.Center.X - start.Center.X) * entry.Easing.Ease(value);
+            var y = start.Center.Y + (end.Center.Y - start.Center.Y) * entry.Easing.Ease(value);
+            var r = start.Resolution + (end.Resolution - start.Resolution) * entry.Easing.Ease(value);
 
             _centerX = x;
             _centerY = y;
