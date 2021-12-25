@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Mapsui.Geometries;
 using Mapsui.Utilities;
 
-namespace Mapsui.Navigation
+namespace Mapsui.ViewportAnimations
 {
     public class FlyToAnimation
     {

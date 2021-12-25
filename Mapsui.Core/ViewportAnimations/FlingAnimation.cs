@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Mapsui.Extensions;
 using Mapsui.Utilities;
 
-namespace Mapsui.Navigation
+namespace Mapsui.ViewportAnimations
 {
     public static class FlingAnimation
     {
@@ -17,7 +17,7 @@ namespace Mapsui.Navigation
             velocityX = -velocityX; // reverse as it finger direction is opposite to map movement
             velocityY = -velocityY; // reverse as it finger direction is opposite to map movement
 
-            var magnitudeOfV = Math.Sqrt((velocityX * velocityX) + (velocityY * velocityY));
+            var magnitudeOfV = Math.Sqrt(velocityX * velocityX + velocityY * velocityY);
 
             var animateMillis = magnitudeOfV / 10;
 

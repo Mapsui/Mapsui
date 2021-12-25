@@ -1,7 +1,7 @@
 ﻿using System;
 using Mapsui.Geometries;
 using Mapsui.Utilities;
-using Mapsui.Navigation;
+using Mapsui.ViewportAnimations;
 
 namespace Mapsui
 {
