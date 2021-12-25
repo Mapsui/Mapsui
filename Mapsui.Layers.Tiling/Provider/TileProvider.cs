@@ -54,20 +54,20 @@ namespace Mapsui.Providers
             var levelId = BruTile.Utilities.GetNearestLevel(_source.Schema.Resolutions, fetchInfo.Resolution);
             var infos = _source.Schema.GetTileInfos(extent, levelId).ToList();
 
-            var tasks = new List<Task>();
+            var tasks = new Dictionary<TileIndex, Task>();
 
             foreach (var info in infos)
             {
                 if (_bitmaps.Find(info.Index) != null) continue;
                 if (_queue.Contains(info.Index)) continue;
                 _queue.Add(info.Index);
-                tasks.Add(Task.Run(() => GetTileOnThread(_source, info, _bitmaps)));
+                tasks.Add(info.Index, Task.Run(() => GetTileOnThread(_source, info, _bitmaps)));
             }
-
-            await Task.WhenAll(tasks.ToArray());
 
             foreach (var info in infos)
             {
+                if (tasks.TryGetValue(info.Index, out var task))
+                    await task; // wait for task to finish before loading bitmap
                 var bitmap = _bitmaps.Find(info.Index);
                 if (bitmap == null) continue;
                 var raster = new MRaster(bitmap, new MRect(info.Extent.MinX, info.Extent.MinY, info.Extent.MaxX, info.Extent.MaxY));
