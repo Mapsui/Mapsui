@@ -205,7 +205,8 @@ namespace Mapsui.Layers
             return new Viewport
             {
                 Resolution = renderResolution,
-                Center = extent.Centroid,
+                CenterX = extent.Centroid.X,
+                CenterY = extent.Centroid.Y,
                 Width = extent.Width * overscan / renderResolution,
                 Height = extent.Height * overscan / renderResolution
             };

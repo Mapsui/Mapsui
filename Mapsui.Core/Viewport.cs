@@ -37,7 +37,8 @@ namespace Mapsui
         public event PropertyChangedEventHandler? ViewportChanged;
 
         // State
-        private MPoint _center = new(0, 0);
+        private double _centerX;
+        private double _centerY;
         private double _resolution = Constants.DefaultResolution;
         private double _width;
         private double _height;
@@ -65,7 +66,8 @@ namespace Mapsui
         /// <param name="viewport">Viewport from which to copy all values</param>
         public Viewport(IReadOnlyViewport viewport) : this()
         {
-            _center = new MReadOnlyPoint(viewport.Center);
+            _centerX = viewport.Center.X;
+            _centerY = viewport.Center.Y;
             _resolution = viewport.Resolution;
             _width = viewport.Width;
             _height = viewport.Height;
@@ -82,14 +84,31 @@ namespace Mapsui
         /// <inheritdoc />
         public MReadOnlyPoint Center
         {
-            get => _center;
+            get => new MReadOnlyPoint(_centerX, _centerY);
+        }
+
+        /// <inheritdoc />
+        public double CenterX
+        {
+            get => _centerX;
             set
             {
-                // todo: Consider making setters private or removing Set methods
-                _center = value;
+                _centerX = value;
                 OnViewportChanged();
             }
         }
+
+        /// <inheritdoc />
+        public double CenterY
+        {
+            get => _centerY;
+            set
+            {
+                _centerY = value;
+                OnViewportChanged();
+            }
+        }
+
 
         /// <inheritdoc />
         public double Resolution
@@ -230,8 +249,8 @@ namespace Mapsui
             var previous = ScreenToWorld(previousPositionScreen.X, previousPositionScreen.Y);
             var current = ScreenToWorld(positionScreen.X, positionScreen.Y);
 
-            var newX = _center.X + previous.X - current.X;
-            var newY = _center.Y + previous.Y - current.Y;
+            var newX = _centerX + previous.X - current.X;
+            var newY = _centerY + previous.Y - current.Y;
 
             if (deltaResolution != 1)
             {
@@ -255,7 +274,7 @@ namespace Mapsui
                 Rotation += deltaRotation;
                 var postRotation = ScreenToWorld(positionScreen.X, positionScreen.Y); // calculate current position again with adjusted resolution
 
-                SetCenter(_center.X - (postRotation.X - current.X), _center.Y - (postRotation.Y - current.Y));
+                SetCenter(_centerX - (postRotation.X - current.X), _centerY - (postRotation.Y - current.Y));
             }
         }
 
@@ -308,7 +327,8 @@ namespace Mapsui
 
         public void SetCenter(double x, double y, long duration = 0, Easing? easing = default)
         {
-            Center = new MPoint(x, y);
+            _centerX = x;
+            _centerY = y;
             OnViewportChanged();
         }
 
@@ -316,7 +336,8 @@ namespace Mapsui
         {
             if (duration == 0)
             {
-                Center = new MPoint(x, y);
+                _centerX = x;
+                _centerY = y;
                 Resolution = resolution;
             }
             else
@@ -385,14 +406,16 @@ namespace Mapsui
             var y = start.Center.Y + end.Center.Y - (start.Center.Y * entry.Easing.Ease(value));
             var r = start.Resolution + end.Resolution - start.Resolution * entry.Easing.Ease(value);
 
-            Center = new MReadOnlyPoint(x, y);
+            _centerX = x;
+            _centerY = y;
             Resolution = r;
         }
 
         private void CenterAndResolutionFinal(AnimationEntry entry)
         {
             var end = ((MReadOnlyPoint Center, double Resolution))entry.End;
-            Center = end.Center;
+            _centerX = end.Center.X;
+            _centerY = end.Center.Y;
             Resolution = end.Resolution;
         }
 
@@ -403,7 +426,8 @@ namespace Mapsui
 
             if (duration == 0)
             {
-                Center = center;
+                _centerX = center.X;
+                _centerY = center.Y;
             }
             else
             {
@@ -428,14 +452,14 @@ namespace Mapsui
 
         private void CenterTick(AnimationEntry entry, double value)
         {
-            var x = ((MReadOnlyPoint)entry.Start).X + (((MReadOnlyPoint)entry.End).X - ((MReadOnlyPoint)entry.Start).X) * entry.Easing.Ease(value);
-            var y = ((MReadOnlyPoint)entry.Start).Y + (((MReadOnlyPoint)entry.End).Y - ((MReadOnlyPoint)entry.Start).Y) * entry.Easing.Ease(value);
-            Center = new MReadOnlyPoint(x, y);
+            _centerX = ((MReadOnlyPoint)entry.Start).X + (((MReadOnlyPoint)entry.End).X - ((MReadOnlyPoint)entry.Start).X) * entry.Easing.Ease(value);
+            _centerY = ((MReadOnlyPoint)entry.Start).Y + (((MReadOnlyPoint)entry.End).Y - ((MReadOnlyPoint)entry.Start).Y) * entry.Easing.Ease(value);
         }
 
         private void CenterFinal(AnimationEntry entry)
         {
-            Center = (MReadOnlyPoint)entry.End;
+            _centerX = ((MReadOnlyPoint)entry.End).X;
+            _centerY = ((MReadOnlyPoint)entry.End).Y;
         }
 
         private void ResolutionFinal(AnimationEntry entry)
@@ -535,7 +559,8 @@ namespace Mapsui
             return new Viewport
             {
                 Resolution = resolution,
-                Center = extent.Centroid,
+                _centerX = extent.Centroid.X,
+                _centerY = extent.Centroid.Y,
                 Width = extent.Width / resolution,
                 Height = extent.Height / resolution
             };

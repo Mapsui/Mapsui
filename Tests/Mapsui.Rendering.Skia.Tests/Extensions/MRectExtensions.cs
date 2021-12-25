@@ -7,7 +7,8 @@
             return new Viewport
             {
                 Resolution = rect.Width / width,
-                Center = rect.Centroid,
+                CenterX = rect.Centroid.X,
+                CenterY = rect.Centroid.Y,
                 Width = width,
                 Height = width * (rect.Height / rect.Width)
             };

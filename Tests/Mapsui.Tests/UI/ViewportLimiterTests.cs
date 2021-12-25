@@ -10,7 +10,7 @@ namespace Mapsui.Tests.UI
         public void TestRestrictZoom()
         {
             // arrange
-            var viewport = new Viewport { Center = new MPoint(0, 0), Width = 100, Height = 100, Resolution = 1 };
+            var viewport = new Viewport { CenterX = 0, CenterY = 0, Width = 100, Height = 100, Resolution = 1 };
             // viewport.Center is (0, 0) at this point
             var limiter = new ViewportLimiter
             {
