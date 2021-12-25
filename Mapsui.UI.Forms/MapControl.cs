@@ -9,9 +9,8 @@ using System.Threading.Tasks;
 using Mapsui.Geometries.Utilities;
 using Mapsui.Layers;
 using Mapsui.Logging;
+using Logger = Mapsui.Logging.Logger;
 #if __MAUI__
-using Mapsui.UI.Maui.Extensions;
-using Microsoft.Maui;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Essentials;
 using Microsoft.Maui.Graphics;
