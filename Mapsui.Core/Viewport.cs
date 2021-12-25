@@ -343,53 +343,11 @@ namespace Mapsui
             }
             else
             {
-                _animations = CreateZoomToAnimation(resolution, new MReadOnlyPoint(x, y), duration);
+                _animations = SetCenterAndResolutionAnimation.Create(this, resolution, new MReadOnlyPoint(x, y), duration);
                 Animation.Start(_animations, duration);
             }
 
             OnViewportChanged();
-        }
-
-        private List<AnimationEntry> CreateZoomToAnimation(double resolution, MReadOnlyPoint centerOfZoom, long duration)
-        {
-            var animations = new List<AnimationEntry>();
-
-            var entry = new AnimationEntry(
-                start: (Center, Resolution),
-                end: (centerOfZoom, resolution),
-                animationStart: 0,
-                animationEnd: 1,
-                easing: Easing.SinInOut,
-                tick: CenterAndResolutionTick,
-                final: CenterAndResolutionFinal
-            );
-            animations.Add(entry);
-
-            Animation.Start(animations, duration);
-
-            return animations;
-        }
-
-        private void CenterAndResolutionTick(AnimationEntry entry, double value)
-        {
-            var start = ((MReadOnlyPoint Center, double Resolution))entry.Start;
-            var end = ((MReadOnlyPoint Center, double Resolution))entry.End;
-
-            var x = start.Center.X + (end.Center.X - start.Center.X) * entry.Easing.Ease(value);
-            var y = start.Center.Y + (end.Center.Y - start.Center.Y) * entry.Easing.Ease(value);
-            var r = start.Resolution + (end.Resolution - start.Resolution) * entry.Easing.Ease(value);
-
-            _centerX = x;
-            _centerY = y;
-            Resolution = r;
-        }
-
-        private void CenterAndResolutionFinal(AnimationEntry entry)
-        {
-            var end = ((MReadOnlyPoint Center, double Resolution))entry.End;
-            _centerX = end.Center.X;
-            _centerY = end.Center.Y;
-            Resolution = end.Resolution;
         }
 
         public void SetCenter(MReadOnlyPoint center, long duration = 0, Easing? easing = default)
