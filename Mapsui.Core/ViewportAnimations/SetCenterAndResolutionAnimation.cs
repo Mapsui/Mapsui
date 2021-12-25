@@ -6,13 +6,13 @@ namespace Mapsui.ViewportAnimations
 {
     internal class SetCenterAndResolutionAnimation
     {
-        public static List<AnimationEntry> Create(Viewport viewport, double resolution, MReadOnlyPoint centerOfZoom, long duration)
+        public static List<AnimationEntry> Create(Viewport viewport, double centerX, double centerY, double resolution, long duration)
         {
             var animations = new List<AnimationEntry>();
 
             var entry = new AnimationEntry(
-                start: (viewport.Center, viewport.Resolution),
-                end: (centerOfZoom, resolution),
+                start: (viewport.CenterX, viewport.CenterY, viewport.Resolution),
+                end: (centerX, centerY, resolution),
                 animationStart: 0,
                 animationEnd: 1,
                 easing: Easing.SinInOut,
@@ -28,11 +28,11 @@ namespace Mapsui.ViewportAnimations
 
         private static void CenterAndResolutionTick(Viewport viewport, AnimationEntry entry, double value)
         {
-            var start = ((MReadOnlyPoint Center, double Resolution))entry.Start;
-            var end = ((MReadOnlyPoint Center, double Resolution))entry.End;
+            var start = ((double CenterX, double CenterY, double Resolution))entry.Start;
+            var end = ((double CenterX, double CenterY,double Resolution))entry.End;
 
-            var x = start.Center.X + (end.Center.X - start.Center.X) * entry.Easing.Ease(value);
-            var y = start.Center.Y + (end.Center.Y - start.Center.Y) * entry.Easing.Ease(value);
+            var x = start.CenterX + (end.CenterX - start.CenterX) * entry.Easing.Ease(value);
+            var y = start.CenterY + (end.CenterY - start.CenterY) * entry.Easing.Ease(value);
             var r = start.Resolution + (end.Resolution - start.Resolution) * entry.Easing.Ease(value);
 
             viewport.CenterX = x;
@@ -42,9 +42,9 @@ namespace Mapsui.ViewportAnimations
 
         private static void CenterAndResolutionFinal(Viewport viewport, AnimationEntry entry)
         {
-            var end = ((MReadOnlyPoint Center, double Resolution))entry.End;
-            viewport.CenterX = end.Center.X;
-            viewport.CenterY = end.Center.Y;
+            var end = ((double CenterX, double CenterY, double Resolution))entry.End;
+            viewport.CenterX = end.CenterX;
+            viewport.CenterY = end.CenterY;
             viewport.Resolution = end.Resolution;
         }
     }

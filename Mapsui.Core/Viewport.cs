@@ -343,7 +343,7 @@ namespace Mapsui
             }
             else
             {
-                _animations = SetCenterAndResolutionAnimation.Create(this, resolution, new MReadOnlyPoint(x, y), duration);
+                _animations = SetCenterAndResolutionAnimation.Create(this, x, y, resolution, duration);
                 Animation.Start(_animations, duration);
             }
 
