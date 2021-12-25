@@ -22,6 +22,7 @@ using System.Runtime.CompilerServices;
 using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.Utilities;
+using Mapsui.ViewportAnimations;
 
 namespace Mapsui
 {
@@ -377,6 +378,18 @@ namespace Mapsui
             return animations;
         }
 
+        private void CenterTick(AnimationEntry entry, double value)
+        {
+            _centerX = ((MReadOnlyPoint)entry.Start).X + (((MReadOnlyPoint)entry.End).X - ((MReadOnlyPoint)entry.Start).X) * entry.Easing.Ease(value);
+            _centerY = ((MReadOnlyPoint)entry.Start).Y + (((MReadOnlyPoint)entry.End).Y - ((MReadOnlyPoint)entry.Start).Y) * entry.Easing.Ease(value);
+        }
+
+        private void CenterFinal(AnimationEntry entry)
+        {
+            _centerX = ((MReadOnlyPoint)entry.End).X;
+            _centerY = ((MReadOnlyPoint)entry.End).Y;
+        }
+
         private List<AnimationEntry> CreateZoomToAnimation(double resolution, MReadOnlyPoint centerOfZoom, long duration)
         {
             var animations = new List<AnimationEntry>();
@@ -431,35 +444,10 @@ namespace Mapsui
             }
             else
             {
-                _animations = CreateSetCenterAnimation(center, easing);
+                _animations = SetCenterAnimation.Create(this, center, easing);
                 Animation.Start(_animations, duration);
             }
             OnViewportChanged();
-        }
-
-        private List<AnimationEntry> CreateSetCenterAnimation(MReadOnlyPoint center, Easing? easing)
-        {
-            return new List<AnimationEntry> { new AnimationEntry(
-                                start: Center,
-                                end: center,
-                                animationStart: 0,
-                                animationEnd: 1,
-                                easing: easing ?? Easing.SinOut,
-                                tick: CenterTick,
-                                final: CenterFinal
-                            ) };
-        }
-
-        private void CenterTick(AnimationEntry entry, double value)
-        {
-            _centerX = ((MReadOnlyPoint)entry.Start).X + (((MReadOnlyPoint)entry.End).X - ((MReadOnlyPoint)entry.Start).X) * entry.Easing.Ease(value);
-            _centerY = ((MReadOnlyPoint)entry.Start).Y + (((MReadOnlyPoint)entry.End).Y - ((MReadOnlyPoint)entry.Start).Y) * entry.Easing.Ease(value);
-        }
-
-        private void CenterFinal(AnimationEntry entry)
-        {
-            _centerX = ((MReadOnlyPoint)entry.End).X;
-            _centerY = ((MReadOnlyPoint)entry.End).Y;
         }
 
         private void ResolutionFinal(AnimationEntry entry)
