@@ -45,7 +45,7 @@ namespace Mapsui
         private double _height;
         private double _rotation;
 
-        // For derived state
+        // Derived from state
         private bool _modified = true;
         private readonly MRect _extent;
         private MQuad _windowExtent;
