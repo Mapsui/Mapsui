@@ -8,7 +8,7 @@ namespace Mapsui.ViewportAnimations
     {
         public static List<AnimationEntry> Create(Viewport viewport, double rotation, Easing? easing)
         {
-            rotation = GetRotationForShortedDistance(viewport, rotation);
+            rotation = GetNearestRotation(viewport, rotation);
 
             return new List<AnimationEntry> { new AnimationEntry(
                 start: viewport.Rotation,
@@ -21,20 +21,14 @@ namespace Mapsui.ViewportAnimations
             ) };
         }
 
-        private static double GetRotationForShortedDistance(Viewport viewport, double rotation)
+        private static double GetNearestRotation(Viewport viewport, double rotation)
         {
-            double alternativeRotation;
-            if (0 > (rotation - viewport.Rotation))
-                alternativeRotation = rotation + 360;
-            else
-                alternativeRotation = rotation - 360;
+            var rotationInTheOtherDirection = rotation + (0 > (rotation - viewport.Rotation) ? 360 : -360);
 
-            if (Math.Abs(rotation - viewport.Rotation) > Math.Abs(alternativeRotation - viewport.Rotation))
-            {
-                rotation = alternativeRotation;
-            }
-
-            return rotation;
+            // Which rotation is closest to the current rotation?
+            return Math.Abs(rotation - viewport.Rotation) > Math.Abs(rotationInTheOtherDirection - viewport.Rotation)
+                ? rotationInTheOtherDirection
+                : rotation;
         }
     }
 }
