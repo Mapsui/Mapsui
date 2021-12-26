@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Mapsui.Geometries;
 using Mapsui.GeometryLayer;
 using Mapsui.Layers;
@@ -102,13 +103,13 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        private void Render(SKCanvas canvas, IReadOnlyViewport viewport, IEnumerable<ILayer> layers)
+        private async void Render(SKCanvas canvas, IReadOnlyViewport viewport, IEnumerable<ILayer> layers)
         {
             try
             {
                 layers = layers.ToList();
 
-                VisibleFeatureIterator.IterateLayers(viewport, layers, (v, l, s, f, o) => { RenderFeature(canvas, v, l, s, f, o); });
+                await VisibleFeatureIterator.IterateLayersAsync(viewport, layers, (v, l, s, f, o) => { RenderFeature(canvas, v, l, s, f, o); });
 
                 RemovedUnusedBitmapsFromCache();
 
@@ -182,6 +183,11 @@ namespace Mapsui.Rendering.Skia
 
         public MapInfo? GetMapInfo(double x, double y, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, int margin = 0)
         {
+            return GetMapInfoAsync(x, y, viewport, layers, margin).Result;
+        }
+
+        public async Task<MapInfo?> GetMapInfoAsync(double x, double y, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, int margin = 0)
+        {
             // todo: use margin to increase the pixel area
             // todo: We will need to select on style instead of layer
 
@@ -223,7 +229,7 @@ namespace Mapsui.Rendering.Skia
                     var color = pixmap.GetPixelColor(intX, intY);
 
 
-                    VisibleFeatureIterator.IterateLayers(viewport, layers, (v, layer, style, feature, opacity) => {
+                    await VisibleFeatureIterator.IterateLayersAsync(viewport, layers, (v, layer, style, feature, opacity) => {
                         // ReSharper disable AccessToDisposedClosure // There is no delayed fetch. After IterateLayers returns all is done. I do not see a problem.
                         surface.Canvas.Save();
                         // 1) Clear the entire bitmap

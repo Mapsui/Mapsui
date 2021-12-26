@@ -97,21 +97,21 @@ namespace Mapsui.Providers.ArcGIS.Image
             set => _timeOut = value;
         }
 
-        public IAsyncEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
+        public async IAsyncEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {
-            var features = new List<RasterFeature>();
-
             var viewport = fetchInfo.ToViewport();
-            if (viewport != null && TryGetMap(viewport, out var raster))
+            if (viewport != null)
             {
-                features.Add(new RasterFeature(raster));
+                var raster = await TryGetMap(viewport);
+                if (raster != null)
+                {
+                    yield return new RasterFeature(raster);
+                }
             }
-            return features.ToAsyncEnumerable();
         }
 
-        public bool TryGetMap(IViewport viewport, [NotNullWhen(true)] out MRaster? raster)
+        public async Task<MRaster?> TryGetMap(IViewport viewport)
         {
-            raster = null;
             int width;
             int height;
 
@@ -123,8 +123,7 @@ namespace Mapsui.Providers.ArcGIS.Image
             catch (OverflowException ex)
             {
                 Logger.Log(LogLevel.Error, "Could not convert double to int (ExportMap size)", ex);
-                raster = null;
-                return false;
+                return null;
             }
 
             var uri = new Uri(GetRequestUrl(viewport.Extent, width, height));
@@ -133,31 +132,24 @@ namespace Mapsui.Providers.ArcGIS.Image
 
             try
             {
-                using var task = client.GetAsync(uri);
-                using var response = task.Result;
-                using (var dataStream = response.Content.ReadAsStreamAsync().Result)
+                using var response = await client.GetAsync(uri);
+                using var dataStream = await response.Content.ReadAsStreamAsync();
+                try
                 {
-                    try
+                    var bytes = BruTile.Utilities.ReadFully(dataStream);
+                    if (viewport.Extent != null)
                     {
-                        var bytes = BruTile.Utilities.ReadFully(dataStream);
-                        if (viewport.Extent != null)
-                        {
-                            raster = new MRaster(bytes, viewport.Extent);
-                        }
-                        else
-                        {
-                            raster = null;
-                            return false;
-                        }
+                        var raster = new MRaster(bytes, viewport.Extent);
+                        return raster;
                     }
-                    catch (Exception ex)
-                    {
-                        Logger.Log(LogLevel.Error, ex.Message, ex);
-                        raster = null;
-                        return false;
-                    }
+
+                    return null;
                 }
-                return true;
+                catch (Exception ex)
+                {
+                    Logger.Log(LogLevel.Error, ex.Message, ex);
+                    return null;
+                }
             }
             catch (WebException ex)
             {
@@ -175,8 +167,7 @@ namespace Mapsui.Providers.ArcGIS.Image
                 Debug.WriteLine("There was a problem while attempting to request the WMS" + ex.Message);
             }
 
-            raster = null;
-            return false;
+            return null;
         }
 
         private string GetRequestUrl(MRect? boundingBox, int width, int height)

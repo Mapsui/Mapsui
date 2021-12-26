@@ -11,27 +11,20 @@ namespace Mapsui.Rendering
 {
     public static class VisibleFeatureIterator
     {
-        public static async void IterateLayers(IReadOnlyViewport viewport, IEnumerable<ILayer> layers,
+        public static async Task IterateLayersAsync(IReadOnlyViewport viewport, IEnumerable<ILayer> layers,
             Action<IReadOnlyViewport, ILayer, IStyle, IFeature, float> callback)
         {
-            try
+            foreach (var layer in layers)
             {
-                foreach (var layer in layers)
-                {
-                    if (layer.Enabled == false) continue;
-                    if (layer.MinVisible > viewport.Resolution) continue;
-                    if (layer.MaxVisible < viewport.Resolution) continue;
+                if (layer.Enabled == false) continue;
+                if (layer.MinVisible > viewport.Resolution) continue;
+                if (layer.MaxVisible < viewport.Resolution) continue;
 
-                    await IterateLayer(viewport, layer, callback);
-                }
-            }
-            catch (Exception e)
-            {
-                Logger.Log(LogLevel.Error, e.Message, e);
+                await IterateLayerAsync(viewport, layer, callback);
             }
         }
 
-        private static async Task IterateLayer(IReadOnlyViewport viewport, ILayer layer,
+        private static async Task IterateLayerAsync(IReadOnlyViewport viewport, ILayer layer,
             Action<IReadOnlyViewport, ILayer, IStyle, IFeature, float> callback)
         {
             if (viewport.Extent == null) return;
