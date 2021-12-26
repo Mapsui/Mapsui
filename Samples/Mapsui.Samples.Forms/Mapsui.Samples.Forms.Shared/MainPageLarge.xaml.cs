@@ -6,6 +6,7 @@ using Plugin.Geolocator.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Styles;
 using Xamarin.Forms;
@@ -43,7 +44,7 @@ namespace Mapsui.Samples.Forms
             mapView.Info += MapView_Info;
             mapView.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
 
-            StartGPS();
+            Task.Run(StartGPS);
         }
 
         protected override void OnAppearing()
@@ -133,34 +134,27 @@ namespace Mapsui.Samples.Forms
             e.Handled = true;
         }
 
-        public async void StartGPS()
+        public async Task StartGPS()
         {
-            try
-            {
-                if (Device.RuntimePlatform == Device.WPF)
-                    return;
-                // Start GPS
-                await CrossGeolocator.Current.StartListeningAsync(TimeSpan.FromSeconds(1),
-                        1,
-                        true,
-                        new ListenerSettings
-                        {
-                            ActivityType = ActivityType.Fitness,
-                            AllowBackgroundUpdates = false,
-                            DeferLocationUpdates = true,
-                            DeferralDistanceMeters = 1,
-                            DeferralTime = TimeSpan.FromSeconds(0.2),
-                            ListenForSignificantChanges = false,
-                            PauseLocationUpdatesAutomatically = true
-                        });
+            if (Device.RuntimePlatform == Device.WPF)
+                return;
+            // Start GPS
+            await CrossGeolocator.Current.StartListeningAsync(TimeSpan.FromSeconds(1),
+                    1,
+                    true,
+                    new ListenerSettings
+                    {
+                        ActivityType = ActivityType.Fitness,
+                        AllowBackgroundUpdates = false,
+                        DeferLocationUpdates = true,
+                        DeferralDistanceMeters = 1,
+                        DeferralTime = TimeSpan.FromSeconds(0.2),
+                        ListenForSignificantChanges = false,
+                        PauseLocationUpdatesAutomatically = true
+                    });
 
-                CrossGeolocator.Current.PositionChanged += MyLocationPositionChanged;
-                CrossGeolocator.Current.PositionError += MyLocationPositionError;
-            }
-            catch (Exception ex)
-            {
-                Logger.Log(LogLevel.Error, ex.Message, ex);
-            }
+            CrossGeolocator.Current.PositionChanged += MyLocationPositionChanged;
+            CrossGeolocator.Current.PositionError += MyLocationPositionError;
         }
 
         public async void StopGPS()

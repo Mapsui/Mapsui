@@ -40,7 +40,7 @@ namespace Mapsui.Samples.Forms
             mapView.Info += MapView_Info;
             mapView.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
 
-            Task.Run(() => StartGPS());
+            Task.Run(StartGPS);
 
             try
             {
