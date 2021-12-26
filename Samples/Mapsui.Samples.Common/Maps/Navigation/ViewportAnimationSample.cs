@@ -14,7 +14,7 @@ namespace Mapsui.Samples.Common.Maps
         public string Name => "0. Viewport animation";
         public string Category => "Demo";
 
-        public static int animationMode = 5;
+        public static int animationMode = 1;
 
         public void Setup(IMapControl mapControl)
         {
@@ -25,7 +25,7 @@ namespace Mapsui.Samples.Common.Maps
                     if (animationMode == 0)
                         mapControl.Navigator?.FlyTo(a.MapInfo.WorldPosition, mapControl.Viewport.Resolution * 8, 500);
                     else if (animationMode == 1)
-                        mapControl.Navigator?.RotateTo(mapControl.Viewport.Rotation - 45, 500, Easing.CubicIn);
+                        mapControl.Navigator?.RotateTo(mapControl.Viewport.Rotation + 56, 500, Easing.CubicIn);
                     else if (animationMode == 2)
                         mapControl.Navigator?.CenterOn(a.MapInfo.WorldPosition, 500, Easing.CubicOut);
                     else if (animationMode == 3)

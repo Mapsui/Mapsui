@@ -391,34 +391,11 @@ namespace Mapsui
                 Rotation = rotation;
             else
             {
-                var rotationDelta = rotation - Rotation;
-
-                if (rotationDelta < -180.0)
-                    rotationDelta += 360.0;
-
-                if (rotationDelta > 180.0)
-                    rotationDelta -= 360.0;
-
-                var newRotation = Rotation + rotationDelta;
-
-                _animations = CreateRotationAnimationEntry(newRotation, easing);
+                _animations = SetRotationAnimation.Create(this, rotation, easing);
                 Animation.Start(_animations, duration);
 
             }
             OnViewportChanged();
-        }
-
-        private List<AnimationEntry> CreateRotationAnimationEntry(double rotation, Easing? easing)
-        {
-            return new List<AnimationEntry> { new AnimationEntry(
-                start: Rotation,
-                end: rotation,
-                animationStart: 0,
-                animationEnd: 1,
-                easing: easing ?? Easing.SinInOut,
-                tick: (e, v) => Rotation = (double)e.Start + ((double)e.End * e.Easing.Ease(v)),
-                final: (e) => Rotation = (double)e.End
-            ) };
         }
 
         /// <summary>
