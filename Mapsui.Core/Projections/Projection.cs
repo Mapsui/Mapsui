@@ -84,12 +84,6 @@ namespace Mapsui.Projections
             Project(features, _fromLonLat[toCRS]);
         }
 
-        public void Project(string fromCRS, string toCRS, IAsyncEnumerable<IFeature> features)
-        {
-            Project(features, _toLonLat[fromCRS]);
-            Project(features, _fromLonLat[toCRS]);
-        }
-
         private static void Project(IFeature feature, Func<double, double, (double, double)> transformFunc)
         {
 
@@ -102,15 +96,6 @@ namespace Mapsui.Projections
         private static void Project(IEnumerable<IFeature> features, Func<double, double, (double, double)> transformFunc)
         {
             foreach (var feature in features)
-                feature.CoordinateVisitor((x, y, setter) => {
-                    var (xOut, yOut) = transformFunc(x, y);
-                    setter(xOut, yOut);
-                });
-        }
-
-        private static async void Project(IAsyncEnumerable<IFeature> features, Func<double, double, (double, double)> transformFunc)
-        {
-            await foreach (var feature in features)
                 feature.CoordinateVisitor((x, y, setter) => {
                     var (xOut, yOut) = transformFunc(x, y);
                     setter(xOut, yOut);

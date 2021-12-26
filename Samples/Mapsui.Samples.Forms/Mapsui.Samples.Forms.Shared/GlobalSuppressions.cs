@@ -9,3 +9,4 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Usage", "VSTHRD110:Observe result of async calls", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Forms.MapPage.#ctor(System.Action{Mapsui.UI.IMapControl},System.Func{Mapsui.UI.Forms.MapView,Mapsui.UI.Forms.MapClickedEventArgs,System.Boolean})")]
 [assembly: SuppressMessage("Usage", "VSTHRD100:Avoid async void methods", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Forms.MainPageLarge.StartGPS")]
 [assembly: SuppressMessage("Usage", "VSTHRD100:Avoid async void methods", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Forms.MainPageLarge.StopGPS")]
+[assembly: SuppressMessage("Usage", "VSTHRD110:Observe result of async calls", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Forms.MainPageLarge.#ctor")]

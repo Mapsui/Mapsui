@@ -45,10 +45,20 @@ namespace Mapsui.Providers
             if (!CrsHelper.IsCrsProvided(_provider.CRS, CRS))
                 throw new NotSupportedException($"CRS is not provided. From CRS: {_provider.CRS}. To CRS {CRS}");
 
-            var copiedFeatures = features.CopyAsync();
-            _projection.Project(_provider.CRS, CRS, copiedFeatures);
-            return copiedFeatures;
+            return Project(features);
+        }
 
+        /// <summary> Project and copy </summary>
+        /// <param name="features">features</param>
+        /// <returns>return Async Enumerable</returns>
+        private async IAsyncEnumerable<IFeature> Project(IAsyncEnumerable<IFeature> features)
+        {
+            await foreach (var it in features)
+            {
+                var copied = it.Copy();
+                _projection.Project(_provider.CRS, CRS, copied);
+                yield return copied;
+            }
         }
 
         public MRect? GetExtent()

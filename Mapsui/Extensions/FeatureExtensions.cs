@@ -20,13 +20,5 @@ namespace Mapsui.Extensions
         {
             return original.Select(f => f.Copy()).ToList();
         }
-
-        public static async IAsyncEnumerable<IFeature> CopyAsync(this IAsyncEnumerable<IFeature> original)
-        {
-            await foreach (var it in original)
-            {
-                yield return it.Copy();
-            }
-        }
     }
 }

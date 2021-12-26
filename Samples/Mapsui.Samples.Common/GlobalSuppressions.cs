@@ -15,3 +15,4 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Usage", "VSTHRD100:Avoid async void methods", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Common.Maps.Data.WfsSample.Setup(Mapsui.UI.IMapControl)")]
 [assembly: SuppressMessage("Usage", "VSTHRD100:Avoid async void methods", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Common.Maps.Data.WmtsSample.Setup(Mapsui.UI.IMapControl)")]
 [assembly: SuppressMessage("Usage", "VSTHRD100:Avoid async void methods", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Common.Maps.WmtsMichelinSample.Setup(Mapsui.UI.IMapControl)")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Common.Maps.Data.WfsSample.CreateMap~System.Threading.Tasks.Task{Mapsui.Map}")]
