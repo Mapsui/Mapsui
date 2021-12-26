@@ -9,6 +9,6 @@ namespace Mapsui.Rendering
     {
         MapInfo? GetMapInfo(double screenX, double screenY, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, int margin = 0);
         MapInfo? GetMapInfo(MPoint screenPosition, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, int margin = 0);
-        Task<MapInfo?> GetMapInfoAsync(MPoint screenPosition, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, int margin = 0);
+        Task<MapInfo?> GetMapInfoAsync(double x, double y, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, int margin = 0);
     }
 }
