@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Providers;
@@ -30,17 +31,13 @@ namespace Mapsui.Fetcher
             _timeOfRequest = timeOfRequest;
         }
 
-        public async void FetchOnThread()
+        public async Task FetchOnThread()
         {
             try
             {
                 Monitor.Enter(_provider);
                 var features = await _provider.GetFeatures(_fetchInfo).ToListAsync();
                 _dataArrived.Invoke(features, _timeOfRequest);
-            }
-            catch (Exception e)
-            {
-                Logger.Log(LogLevel.Error, e.Message, e);
             }
             finally
             {
