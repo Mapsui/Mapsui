@@ -368,16 +368,6 @@ namespace Mapsui
             OnViewportChanged();
         }
 
-        private void ResolutionFinal(AnimationEntry entry)
-        {
-            Resolution = (double)entry.End;
-        }
-
-        private void ResolutionTick(AnimationEntry entry, double value)
-        {
-            Resolution = (double)entry.Start + ((double)entry.End - (double)entry.Start) * entry.Easing.Ease(value);
-        }
-
         public void SetResolution(double resolution, long duration = 0, Easing? easing = default)
         {
             if (Resolution == resolution)
@@ -387,29 +377,10 @@ namespace Mapsui
                 Resolution = resolution;
             else
             {
-                _animations = CreateSetResolutionAnimation(resolution, Resolution, duration, easing);
+                _animations = SetResolutionAnimation.Create(this, resolution, duration, easing);
             }
 
             OnViewportChanged();
-        }
-
-        private List<AnimationEntry> CreateSetResolutionAnimation(double resolution, double currentResolution, long duration, Easing? easing)
-        {
-            var animations = new List<AnimationEntry>();
-
-            var entry = new AnimationEntry(
-                start: currentResolution,
-                end: resolution,
-                animationStart: 0,
-                animationEnd: 1,
-                easing: easing ?? Easing.SinInOut,
-                tick: ResolutionTick,
-                final: ResolutionFinal
-            );
-            animations.Add(entry);
-
-            Animation.Start(animations, duration);
-            return animations;
         }
 
         public void SetRotation(double rotation, long duration = 0, Easing? easing = default)

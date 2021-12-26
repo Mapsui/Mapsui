@@ -1,6 +1,5 @@
 ﻿using Mapsui.Layers.Tiling;
 using Mapsui.UI;
-using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps.Navigation
 {
