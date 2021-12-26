@@ -46,7 +46,7 @@ namespace Mapsui.Providers
             IAsyncEnumerable<IFeature>? features, Pen line, Brush? fill)
         {
             if (features == null)
-                yield break; 
+                yield break;
             var margin = resolution * 50;
             var clusters = new List<Cluster>();
             // todo: repeat until there are no more merges
