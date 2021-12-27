@@ -18,7 +18,7 @@ namespace Mapsui.Utilities
         /// </summary>
         /// <param name="entry">AnimationEntry to start</param>
         /// <param name="duration">Duration im ms for the given AnimationEntry</param>
-        public static void Start(AnimationEntry entry, long duration)
+        public static void Start<T>(AnimationEntry<T> entry, long duration)
         {
             Start(entry, duration, DateTime.Now.Ticks);
         }
@@ -29,7 +29,7 @@ namespace Mapsui.Utilities
         /// <remarks>All AnimationEntries are started at the same time.</remarks>
         /// <param name="entries">List of AnimationEntry to start</param>
         /// <param name="duration">Duration im ms for the given AnimationEntry</param>
-        public static void Start(IEnumerable<AnimationEntry> entries, long duration)
+        public static void Start<T>(IEnumerable<AnimationEntry<T>> entries, long duration)
         {
             // Start all animations in entries with the same ticks
             var ticks = DateTime.Now.Ticks;
@@ -45,11 +45,10 @@ namespace Mapsui.Utilities
         /// <param name="entry">AnimationEntry to start</param>
         /// <param name="duration">Duration im ms for the given AnimationEntry</param>
         /// <param name="ticks">StartTicks for this AnimationEntry</param>
-        private static void Start(AnimationEntry entry, long duration, long ticks)
+        private static void Start<T>(AnimationEntry<T> entry, long duration, long ticks)
         {
             lock (_syncObject)
             {
-                Stop(entry, false);
                 entry.StartTicks = ticks;
                 entry.DurationTicks = duration * TimeSpan.TicksPerMillisecond;
                 entry.EndTicks = entry.StartTicks + entry.DurationTicks;
@@ -61,7 +60,7 @@ namespace Mapsui.Utilities
         /// </summary>
         /// <param name="entry">AnimationEntry to stop</param>
         /// <param name="callFinal">Final function is called, if callFinal is true</param>
-        public static void Stop(AnimationEntry entry, bool callFinal = true)
+        public static void Stop<T>(T target, AnimationEntry<T> entry, bool callFinal = true)
         {
             if (entry == null)
                 return;
@@ -69,7 +68,7 @@ namespace Mapsui.Utilities
             if (callFinal)
             {
                 entry.Done = true;
-                entry.Final();
+                entry.Final(target);
             }
         }
 
@@ -78,21 +77,21 @@ namespace Mapsui.Utilities
         /// </summary>
         /// <param name="entry">AnimationEntry to stop</param>
         /// <param name="callFinal">Final function is called, if callFinal is true</param>
-        public static void Stop(IEnumerable<AnimationEntry> entries, bool callFinal = true)
+        public static void Stop<T>(T target, IEnumerable<AnimationEntry<T>> entries, bool callFinal = true)
         {
             foreach (var entry in entries)
-                Stop(entry, callFinal);
+                Stop(target,entry, callFinal);
         }
 
         /// <summary>
         /// Update all AnimationEntrys and check, if a redraw is needed
         /// </summary>
         /// <returns>True, if a redraw of the screen is needed</returns>
-        public static bool UpdateAnimations(IEnumerable<AnimationEntry> entries)
+        public static bool UpdateAnimations<T>(T target, IEnumerable<AnimationEntry<T>> entries)
         {
             var ticks = DateTime.Now.Ticks;
 
-            AnimationEntry[] entriesArray;
+            AnimationEntry<T>[] entriesArray;
 
             entriesArray = entries.ToArray();
 
@@ -110,7 +109,7 @@ namespace Mapsui.Utilities
                     if (!entriesArray[i].Repeat)
                     {
                         // Animation shouldn't be repeated, so remove it
-                        Stop(entriesArray[i], true);
+                        Stop(target, entriesArray[i], true);
                         continue;
                     }
                     // Set new values for repeating this animation
@@ -126,7 +125,7 @@ namespace Mapsui.Utilities
                     continue;
                 }
 
-                isRunning |= entriesArray[i].Tick(value);
+                isRunning |= entriesArray[i].Tick(target, value);
             }
 
             return isRunning;

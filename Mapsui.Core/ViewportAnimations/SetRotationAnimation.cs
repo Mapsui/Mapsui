@@ -6,18 +6,18 @@ namespace Mapsui.ViewportAnimations
 {
     public class SetRotationAnimation
     {
-        public static List<AnimationEntry> Create(Viewport viewport, double rotation, Easing? easing)
+        public static List<AnimationEntry<Viewport>> Create(Viewport viewport, double rotation, Easing? easing)
         {
             rotation = GetNearestRotation(viewport, rotation);
 
-            return new List<AnimationEntry> { new AnimationEntry(
+            return new List<AnimationEntry<Viewport>> { new AnimationEntry<Viewport>(
                 start: viewport.Rotation,
                 end: rotation,
                 animationStart: 0,
                 animationEnd: 1,
                 easing: easing ?? Easing.SinInOut,
-                tick: (e, v) => viewport.Rotation = (double)e.Start + (((double)e.End - (double)e.Start) * e.Easing.Ease(v)),
-                final: (e) => viewport.Rotation = (double)e.End
+                tick: (viewport,e, v) => viewport.Rotation = (double)e.Start + (((double)e.End - (double)e.Start) * e.Easing.Ease(v)),
+                final: (viewport, e) => viewport.Rotation = (double)e.End
             ) };
         }
 

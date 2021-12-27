@@ -21,6 +21,7 @@ using System.ComponentModel;
 using System.Linq;
 using Mapsui.Fetcher;
 using Mapsui.Providers;
+using Mapsui.Styles;
 using Mapsui.Utilities;
 
 namespace Mapsui.Layers
@@ -33,7 +34,8 @@ namespace Mapsui.Layers
         private readonly FeatureFetchDispatcher<IFeature> _fetchDispatcher;
         private readonly FetchMachine _fetchMachine;
 
-        public List<AnimationEntry> Animations { get; } = new List<AnimationEntry>();
+        public SymbolStyle SymbolStyle { get; set; }
+        public List<AnimationEntry<SymbolStyle>> Animations { get; } = new List<AnimationEntry<SymbolStyle>>();
         public Delayer Delayer { get; } = new();
 
         /// <summary>
@@ -123,7 +125,7 @@ namespace Mapsui.Layers
         /// <inheritdoc />
         public override IEnumerable<IFeature> GetFeatures(MRect extent, double resolution)
         {
-            Animation.UpdateAnimations(Animations);
+            //!!!Animation.UpdateAnimations(Animations);
             return _cache.ToList();
         }
 

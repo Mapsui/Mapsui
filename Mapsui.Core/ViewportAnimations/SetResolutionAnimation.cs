@@ -5,18 +5,18 @@ namespace Mapsui.ViewportAnimations
 {
     public class SetResolutionAnimation
     {
-        public static List<AnimationEntry> Create(Viewport viewport, double resolution, long duration, Easing? easing)
+        public static List<AnimationEntry<Viewport>> Create(Viewport viewport, double resolution, long duration, Easing? easing)
         {
-            var animations = new List<AnimationEntry>();
+            var animations = new List<AnimationEntry<Viewport>>();
 
-            var entry = new AnimationEntry(
+            var entry = new AnimationEntry<Viewport>(
                 start: viewport.Resolution,
                 end: resolution,
                 animationStart: 0,
                 animationEnd: 1,
                 easing: easing ?? Easing.SinInOut,
-                tick: (e, v) => ResolutionTick(viewport, e, v),
-                final: (e) => ResolutionFinal(viewport, e)
+                tick: ResolutionTick,
+                final: ResolutionFinal
             );
             animations.Add(entry);
 
@@ -24,12 +24,12 @@ namespace Mapsui.ViewportAnimations
             return animations;
         }
 
-        private static void ResolutionFinal(Viewport viewport, AnimationEntry entry)
+        private static void ResolutionFinal(Viewport viewport, AnimationEntry<Viewport> entry)
         {
             viewport.Resolution = (double)entry.End;
         }
 
-        private static void ResolutionTick(Viewport viewport, AnimationEntry entry, double value)
+        private static void ResolutionTick(Viewport viewport, AnimationEntry<Viewport> entry, double value)
         {
             viewport.Resolution = (double)entry.Start + ((double)entry.End - (double)entry.Start) * entry.Easing.Ease(value);
         }

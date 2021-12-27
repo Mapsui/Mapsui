@@ -28,12 +28,16 @@ namespace Mapsui.Samples.Common.Maps
             map.Layers.Add(CreateLayer());
 
             // IMPORTANT:
-            // This is a temporary timer that is needed to show how passive animation works.
+            // This is a vary temporary timer that is needed to show how passive animation works.
             // In the eventual solution there render loop would be triggered a regular intervals.
             // On each interval it should check if a render update is needed. So, the state of the
             // animations should somehow be requestable at that point.
-            timer = new Timer((s) => mapControl.Refresh(), null, 16, 16);
-
+            timer = new Timer((s) => {
+                var layer = (Layer)map.Layers[1];
+                Animation.UpdateAnimations(layer.SymbolStyle, layer.Animations);
+                mapControl.Refresh();
+            }, null,16, 16);
+            
             return map;
         }
 
@@ -45,6 +49,7 @@ namespace Mapsui.Samples.Common.Maps
             {
                 DataSource = new MemoryProvider<IFeature>(CreatePoints(style)),
             };
+            layer.SymbolStyle = style;
 
             layer.Animations.AddRange(CreateAnimationsForSymbolStyle(style));
 
@@ -67,48 +72,48 @@ namespace Mapsui.Samples.Common.Maps
             return result;
         }
 
-        private static List<AnimationEntry> CreateAnimationsForSymbolStyle(SymbolStyle style)
+        private static List<AnimationEntry<SymbolStyle>> CreateAnimationsForSymbolStyle(SymbolStyle style)
         {
-            var animations = new List<AnimationEntry>();
+            var animations = new List<AnimationEntry<SymbolStyle>>();
 
-            var entry1 = new AnimationEntry(
+            var entry1 = new AnimationEntry<SymbolStyle>(
                 start: style.SymbolScale,
                 end: style.SymbolScale * 2,
                 animationStart: 0,
                 animationEnd: .5,
                 easing: Easing.SinInOut,
                 repeat: true,
-                tick: (entry, value) => { style.SymbolScale = (double)((double)entry.Start + ((double)entry.End - (double)entry.Start) * entry.Easing.Ease(value)); },
-                final: (entry) => { style.SymbolScale = (double)entry.End; }
+                tick: (symbolStyle, e, v) => { style.SymbolScale = (double)((double)e.Start + ((double)e.End - (double)e.Start) * e.Easing.Ease(v)); },
+                final: (symbolStyle, e) => { style.SymbolScale = (double)e.End; }
             );
             animations.Add(entry1);
 
-            var entry2 = new AnimationEntry(
+            var entry2 = new AnimationEntry<SymbolStyle>(
                 start: style.SymbolScale * 2,
                 end: style.SymbolScale,
                 animationStart: .5,
                 animationEnd: 1,
                 easing: Easing.SinInOut,
                 repeat: true,
-                tick: (entry, value) => { style.SymbolScale = (double)((double)entry.Start + ((double)entry.End - (double)entry.Start) * entry.Easing.Ease(value)); },
-                final: (entry) => { style.SymbolScale = (double)entry.End; }
+                tick: (symbolStyle, e, v) => { style.SymbolScale = (double)((double)e.Start + ((double)e.End - (double)e.Start) * e.Easing.Ease(v)); },
+                final: (symbolStyle, e) => { style.SymbolScale = (double)e.End; }
             );
             animations.Add(entry2);
 
-            var entry3 = new AnimationEntry(
+            var entry3 = new AnimationEntry<SymbolStyle>(
                 start: style.Outline?.Color ?? Color.Gray,
                 end: style.Outline?.Color ?? Color.Gray,
                 animationStart: 0,
                 animationEnd: 1,
                 easing: Easing.Linear,
-                tick: (entry, value) => {
-                    var color = (Color)entry.Start;
+                tick: (symbolStyle, e, v) => {
+                    var color = (Color)e.Start;
                     style.Fill ??= new Brush();
-                    style.Fill.Color = new Color(color.R, color.G, (int)(value < 0.5 ? (1.0 - 2.0 * value) * 255 : ((value - 0.5) * 2.0) * 255));
+                    style.Fill.Color = new Color(color.R, color.G, (int)(v < 0.5 ? (1.0 - 2.0 * v) * 255 : ((v - 0.5) * 2.0) * 255));
                 },
-                final: (entry) => {
+                final: (symbolStyle, e) => {
                     style.Fill ??= new Brush();
-                    style.Fill.Color = entry.End as Color;
+                    style.Fill.Color = e.End as Color;
                 }
             );
             animations.Add(entry3);

@@ -50,7 +50,7 @@ namespace Mapsui
         private readonly MRect _extent;
         private MQuad _windowExtent;
 
-        private List<AnimationEntry> _animations = new();
+        private List<AnimationEntry<Viewport>> _animations = new();
 
         /// <summary>
         /// Create a new viewport
@@ -423,10 +423,10 @@ namespace Mapsui
         public bool UpdateAnimations()
         {
             if (_animations.All(a => a.Done)) _animations.Clear();
-            return Animation.UpdateAnimations(_animations);
+            return Animation.UpdateAnimations(this, _animations);
         }
 
-        public void SetAnimations(List<AnimationEntry> animations)
+        public void SetAnimations(List<AnimationEntry<Viewport>> animations)
         {
             _animations = animations;
         }

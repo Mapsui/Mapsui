@@ -7,9 +7,9 @@ namespace Mapsui.ViewportAnimations
 {
     public static class FlingAnimation
     {
-        public static List<AnimationEntry> Create(IViewport viewport, double velocityX, double velocityY, long maxDuration)
+        public static List<AnimationEntry<Viewport>> Create(double velocityX, double velocityY, long maxDuration)
         {
-            var animations = new List<AnimationEntry>();
+            var animations = new List<AnimationEntry<Viewport>>();
 
             if (maxDuration < 16)
                 return animations;
@@ -27,13 +27,13 @@ namespace Mapsui.ViewportAnimations
             if (animateMillis > maxDuration)
                 animateMillis = maxDuration;
 
-            var entry = new AnimationEntry(
+            var entry = new AnimationEntry<Viewport>(
                 start: (velocityX, velocityY),
                 end: (0d, 0d),
                 animationStart: 0,
                 animationEnd: 1,
                 easing: Easing.SinIn,
-                tick: (e, v) => FlingTick(e, v, viewport)
+                tick: FlingTick
             );
             animations.Add(entry);
 
@@ -42,7 +42,7 @@ namespace Mapsui.ViewportAnimations
             return animations;
         }
 
-        private static void FlingTick(AnimationEntry entry, double value, IViewport viewport)
+        private static void FlingTick(Viewport viewport, AnimationEntry<Viewport> entry, double value)
         {
             var timeAmount = 16 / 1000d; // 16 milliseconds 
 

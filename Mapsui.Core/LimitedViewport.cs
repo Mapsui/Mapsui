@@ -121,7 +121,7 @@ namespace Mapsui
             return _viewport.UpdateAnimations();
         }
 
-        public void SetAnimations(List<AnimationEntry> animations)
+        public void SetAnimations(List<AnimationEntry<Viewport>> animations)
         {
             _viewport.SetAnimations(animations);
         }

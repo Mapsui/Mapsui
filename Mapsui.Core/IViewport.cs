@@ -29,7 +29,7 @@ namespace Mapsui
         void SetResolution(double resolution, long duration = 0, Easing? easing = default);
         void SetRotation(double rotation, long duration = 0, Easing? easing = default);
         void SetSize(double width, double height);
-        void SetAnimations(List<AnimationEntry> animations);
+        void SetAnimations(List<AnimationEntry<Viewport>> animations);
 
         /// <summary>
         /// Moving the position of viewport to a new one

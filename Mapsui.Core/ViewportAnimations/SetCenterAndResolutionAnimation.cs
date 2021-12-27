@@ -5,18 +5,18 @@ namespace Mapsui.ViewportAnimations
 {
     internal class SetCenterAndResolutionAnimation
     {
-        public static List<AnimationEntry> Create(Viewport viewport, double centerX, double centerY, double resolution, long duration)
+        public static List<AnimationEntry<Viewport>> Create(IViewport viewport, double centerX, double centerY, double resolution, long duration)
         {
-            var animations = new List<AnimationEntry>();
+            var animations = new List<AnimationEntry<Viewport>>();
 
-            var entry = new AnimationEntry(
+            var entry = new AnimationEntry<Viewport>(
                 start: (viewport.CenterX, viewport.CenterY, viewport.Resolution),
                 end: (centerX, centerY, resolution),
                 animationStart: 0,
                 animationEnd: 1,
                 easing: Easing.SinInOut,
-                tick: (e, v) => CenterAndResolutionTick(viewport, e, v),
-                final: (e) => CenterAndResolutionFinal(viewport, e)
+                tick: CenterAndResolutionTick,
+                final: CenterAndResolutionFinal
             );
             animations.Add(entry);
 
@@ -25,7 +25,7 @@ namespace Mapsui.ViewportAnimations
             return animations;
         }
 
-        private static void CenterAndResolutionTick(Viewport viewport, AnimationEntry entry, double value)
+        private static void CenterAndResolutionTick(Viewport viewport, AnimationEntry<Viewport> entry, double value)
         {
             var start = ((double CenterX, double CenterY, double Resolution))entry.Start;
             var end = ((double CenterX, double CenterY,double Resolution))entry.End;
@@ -39,7 +39,7 @@ namespace Mapsui.ViewportAnimations
             viewport.Resolution = r;
         }
 
-        private static void CenterAndResolutionFinal(Viewport viewport, AnimationEntry entry)
+        private static void CenterAndResolutionFinal(Viewport viewport, AnimationEntry<Viewport> entry)
         {
             var end = ((double CenterX, double CenterY, double Resolution))entry.End;
             viewport.CenterX = end.CenterX;

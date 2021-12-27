@@ -5,20 +5,20 @@ namespace Mapsui.ViewportAnimations
 {
     public class SetCenterAnimation
     {
-        public static List<AnimationEntry> Create(IViewport viewport, double centerX, double centerY, Easing? easing)
+        public static List<AnimationEntry<Viewport>> Create(IViewport viewport, double centerX, double centerY, Easing? easing)
         {
-            return new List<AnimationEntry> { new AnimationEntry(
+            return new List<AnimationEntry<Viewport>> { new AnimationEntry<Viewport>(
                 start: (viewport.CenterX, viewport.CenterY),
                 end: (centerX, centerY),
                 animationStart: 0,
                 animationEnd: 1,
                 easing: easing ?? Easing.SinOut,
-                tick: (e, v) => CenterTick(viewport, e, v),
-                final: (e) => CenterFinal(viewport, e)
+                tick: CenterTick,
+                final: CenterFinal
             )};
         }
 
-        private static void CenterTick(IViewport viewport, AnimationEntry entry, double value)
+        private static void CenterTick(Viewport viewport, AnimationEntry<Viewport> entry, double value)
         {
             var (startX, startY) = ((double, double))entry.Start;
             var (endX, endY) = ((double, double))entry.End;
@@ -27,10 +27,11 @@ namespace Mapsui.ViewportAnimations
             viewport.SetCenter(centerX, centerY);
         }
 
-        private static void CenterFinal(IViewport viewport, AnimationEntry entry)
+        private static void CenterFinal(Viewport viewport, AnimationEntry<Viewport> entry)
         {
             var (centerX, centerY) = ((double, double))entry.End;
-            viewport.SetCenter(centerX, centerY);
+            viewport.CenterX = centerX;
+            viewport.CenterY = centerY;
         }
     }
 }
