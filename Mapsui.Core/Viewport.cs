@@ -249,8 +249,7 @@ namespace Mapsui
         /// <inheritdoc />
         public void Transform(MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution = 1, double deltaRotation = 0)
         {
-            return;
-            //!!!_animations = new();
+            _animations = new();
 
             var previous = ScreenToWorld(previousPositionScreen.X, previousPositionScreen.Y);
             var current = ScreenToWorld(positionScreen.X, positionScreen.Y);

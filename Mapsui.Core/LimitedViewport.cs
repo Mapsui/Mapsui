@@ -13,7 +13,7 @@ namespace Mapsui
             _viewport.ViewportChanged += (sender, args) => ViewportChanged?.Invoke(sender, args);
         }
 
-        private readonly IViewport _viewport = new Viewport();
+        private readonly Viewport _viewport = new Viewport();
         public IViewportLimiter? Limiter { get; set; }
         public Map? Map { get; set; }
 

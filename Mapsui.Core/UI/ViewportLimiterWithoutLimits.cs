@@ -7,7 +7,7 @@ namespace Mapsui.UI
         public MRect? PanLimits { get; set; }
         public MinMax? ZoomLimits { get; set; }
 
-        public void Limit(IViewport viewport, IReadOnlyList<double> mapResolutions, MRect? mapEnvelope)
+        public void Limit(Viewport viewport, IReadOnlyList<double> mapResolutions, MRect? mapEnvelope)
         {
         }
 
@@ -17,7 +17,7 @@ namespace Mapsui.UI
             return resolution;
         }
 
-        public void LimitExtent(IViewport viewport, MRect? mapEnvelope)
+        public void LimitExtent(Viewport viewport, MRect? mapEnvelope)
         {
         }
     }
