@@ -80,7 +80,7 @@ namespace Mapsui.Utilities
         public static void Stop<T>(T target, IEnumerable<AnimationEntry<T>> entries, bool callFinal = true)
         {
             foreach (var entry in entries)
-                Stop(target,entry, callFinal);
+                Stop(target, entry, callFinal);
         }
 
         /// <summary>
