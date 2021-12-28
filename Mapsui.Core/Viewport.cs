@@ -249,6 +249,9 @@ namespace Mapsui
         /// <inheritdoc />
         public void Transform(MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution = 1, double deltaRotation = 0)
         {
+            return;
+            //!!!_animations = new();
+
             var previous = ScreenToWorld(previousPositionScreen.X, previousPositionScreen.Y);
             var current = ScreenToWorld(positionScreen.X, positionScreen.Y);
 
@@ -269,7 +272,8 @@ namespace Mapsui
                 newY -= scaleCorrectionY;
             }
 
-            SetCenter(newX, newY);
+            CenterX = newX;
+            CenterY = newY;
 
             if (deltaRotation != 0)
             {
@@ -277,7 +281,8 @@ namespace Mapsui
                 Rotation += deltaRotation;
                 var postRotation = ScreenToWorld(positionScreen.X, positionScreen.Y); // calculate current position again with adjusted resolution
 
-                SetCenter(_centerX - (postRotation.X - current.X), _centerY - (postRotation.Y - current.Y));
+                CenterX = _centerX - (postRotation.X - current.X);
+                CenterY = _centerY - (postRotation.Y - current.Y);
             }
         }
 
@@ -323,30 +328,37 @@ namespace Mapsui
 
         public void SetSize(double width, double height)
         {
+            _animations = new();
+
             _width = width;
             _height = height;
+
             OnViewportChanged();
         }
 
         public void SetCenter(double x, double y, long duration = 0, Easing? easing = default)
         {
+            _animations = new();
+
             _centerX = x;
             _centerY = y;
+
             OnViewportChanged();
         }
 
         public void SetCenterAndResolution(double x, double y, double resolution, long duration = 0, Easing? easing = default)
         {
+            _animations = new();
+      
             if (duration == 0)
             {
                 _centerX = x;
                 _centerY = y;
-                Resolution = resolution;
+                _resolution = resolution;
             }
             else
             {
                 _animations = SetCenterAndResolutionAnimation.Create(this, x, y, resolution, duration);
-                Animation.Start(_animations, duration);
             }
 
             OnViewportChanged();
@@ -354,6 +366,8 @@ namespace Mapsui
 
         public void SetCenter(MReadOnlyPoint center, long duration = 0, Easing? easing = default)
         {
+            _animations = new();
+
             if (center.Equals(Center))
                 return;
 
@@ -364,14 +378,15 @@ namespace Mapsui
             }
             else
             {
-                _animations = SetCenterAnimation.Create(this, center.X, center.Y, easing);
-                Animation.Start(_animations, duration);
+                _animations = SetCenterAnimation.Create(this, center.X, center.Y, duration, easing);
             }
             OnViewportChanged();
         }
 
         public void SetResolution(double resolution, long duration = 0, Easing? easing = default)
         {
+            _animations = new();
+
             if (Resolution == resolution)
                 return;
 
@@ -387,15 +402,15 @@ namespace Mapsui
 
         public void SetRotation(double rotation, long duration = 0, Easing? easing = default)
         {
+            _animations = new();
+
             if (Rotation == rotation) return;
 
             if (duration == 0)
                 Rotation = rotation;
             else
             {
-                _animations = SetRotationAnimation.Create(this, rotation, easing);
-                Animation.Start(_animations, duration);
-
+                _animations = SetRotationAnimation.Create(this, rotation, duration, easing);
             }
             OnViewportChanged();
         }
