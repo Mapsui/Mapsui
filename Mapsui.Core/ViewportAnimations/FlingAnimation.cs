@@ -65,10 +65,8 @@ namespace Mapsui.ViewportAnimations
             var xDiff = current.X - previous.X;
             var yDiff = current.Y - previous.Y;
 
-            var newX = viewport.CenterX + xDiff;
-            var newY = viewport.CenterY + yDiff;
-
-            viewport.SetCenter(newX, newY);
+            viewport.CenterX = viewport.CenterX + xDiff;
+            viewport.CenterY = viewport.CenterY + yDiff;
         }
     }
 }

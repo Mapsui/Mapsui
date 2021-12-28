@@ -48,33 +48,30 @@ namespace Mapsui.ViewportAnimations
             );
             animations.Add(entry);
 
-            Animation.Start<Viewport>(animations, duration);
+            Animation.Start(animations, duration);
             return animations;
         }
 
         private static void CenterTick(Viewport viewport, AnimationEntry<Viewport> entry, double value)
         {
-            var x = ((MReadOnlyPoint)entry.Start).X + (((MReadOnlyPoint)entry.End).X - ((MReadOnlyPoint)entry.Start).X) * entry.Easing.Ease(value);
-            var y = ((MReadOnlyPoint)entry.Start).Y + (((MReadOnlyPoint)entry.End).Y - ((MReadOnlyPoint)entry.Start).Y) * entry.Easing.Ease(value);
-
-            viewport.SetCenter(x, y);
+            viewport.CenterX = ((MReadOnlyPoint)entry.Start).X + (((MReadOnlyPoint)entry.End).X - ((MReadOnlyPoint)entry.Start).X) * entry.Easing.Ease(value);
+            viewport.CenterY = ((MReadOnlyPoint)entry.Start).Y + (((MReadOnlyPoint)entry.End).Y - ((MReadOnlyPoint)entry.Start).Y) * entry.Easing.Ease(value);
         }
 
         private static void CenterFinal(Viewport viewport, AnimationEntry<Viewport> entry)
         {
-            viewport.SetCenter((MReadOnlyPoint)entry.End);
+            viewport.CenterX = ((MReadOnlyPoint)entry.End).X;
+            viewport.CenterY = ((MReadOnlyPoint)entry.End).Y;
         }
 
         private static void ResolutionTick(Viewport viewport, AnimationEntry<Viewport> entry, double value)
         {
-            var r = (double)entry.Start + ((double)entry.End - (double)entry.Start) * entry.Easing.Ease(value);
-
-            viewport.SetResolution(r);
+            viewport.Resolution = (double)entry.Start + ((double)entry.End - (double)entry.Start) * entry.Easing.Ease(value);
         }
 
-        private static void ResolutionFinal(IViewport viewport, AnimationEntry<Viewport> entry)
+        private static void ResolutionFinal(Viewport viewport, AnimationEntry<Viewport> entry)
         {
-            viewport.SetResolution((double)entry.End);
+            viewport.Resolution = (double)entry.End;
         }
     }
 }

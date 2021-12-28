@@ -30,13 +30,9 @@ namespace Mapsui.ViewportAnimations
             var start = ((double CenterX, double CenterY, double Resolution))entry.Start;
             var end = ((double CenterX, double CenterY,double Resolution))entry.End;
 
-            var x = start.CenterX + (end.CenterX - start.CenterX) * entry.Easing.Ease(value);
-            var y = start.CenterY + (end.CenterY - start.CenterY) * entry.Easing.Ease(value);
-            var r = start.Resolution + (end.Resolution - start.Resolution) * entry.Easing.Ease(value);
-
-            viewport.CenterX = x;
-            viewport.CenterY = y;
-            viewport.Resolution = r;
+            viewport.CenterX = start.CenterX + (end.CenterX - start.CenterX) * entry.Easing.Ease(value);
+            viewport.CenterY = start.CenterY + (end.CenterY - start.CenterY) * entry.Easing.Ease(value);
+            viewport.Resolution = start.Resolution + (end.Resolution - start.Resolution) * entry.Easing.Ease(value);
         }
 
         private static void CenterAndResolutionFinal(Viewport viewport, AnimationEntry<Viewport> entry)

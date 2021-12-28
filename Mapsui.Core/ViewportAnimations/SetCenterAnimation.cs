@@ -22,9 +22,8 @@ namespace Mapsui.ViewportAnimations
         {
             var (startX, startY) = ((double, double))entry.Start;
             var (endX, endY) = ((double, double))entry.End;
-            var centerX = startX + (endX - startX) * entry.Easing.Ease(value);
-            var centerY = startY + (endY - startY) * entry.Easing.Ease(value);
-            viewport.SetCenter(centerX, centerY);
+            viewport.CenterX = startX + (endX - startX) * entry.Easing.Ease(value);
+            viewport.CenterY = startY + (endY - startY) * entry.Easing.Ease(value);
         }
 
         private static void CenterFinal(Viewport viewport, AnimationEntry<Viewport> entry)
