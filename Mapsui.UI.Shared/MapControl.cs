@@ -99,7 +99,7 @@ namespace Mapsui.UI.Wpf
         {
             // Check, if we have to redraw the screen, because a animation is running or a refresh is wished
 
-            if (!_viewport.UpdateAnimations() && !_refresh) 
+            if (!_viewport.UpdateAnimations() && !_refresh)
                 return; // Todo: Remove UpdateAnimations fully from viewport and do updates inside viewport
 
             if (_drawing)
@@ -640,7 +640,7 @@ namespace Mapsui.UI.Wpf
                 _invalidateTimer?.Dispose();
             }
             _invalidateTimer = null;
-        }        
+        }
     }
 }
 
