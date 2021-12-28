@@ -28,7 +28,7 @@ namespace Mapsui.ViewportAnimations
         private static void CenterAndResolutionTick(Viewport viewport, AnimationEntry<Viewport> entry, double value)
         {
             var start = ((double CenterX, double CenterY, double Resolution))entry.Start;
-            var end = ((double CenterX, double CenterY,double Resolution))entry.End;
+            var end = ((double CenterX, double CenterY, double Resolution))entry.End;
 
             viewport.CenterX = start.CenterX + (end.CenterX - start.CenterX) * entry.Easing.Ease(value);
             viewport.CenterY = start.CenterY + (end.CenterY - start.CenterY) * entry.Easing.Ease(value);
