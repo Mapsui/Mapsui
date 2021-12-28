@@ -154,13 +154,15 @@ namespace Mapsui
                 _rotation = value % 360.0;
                 if (_rotation < 0)
                     _rotation += 360.0;
+
+                IsRotated = !double.IsNaN(_rotation) && _rotation > Constants.Epsilon && _rotation < 360 - Constants.Epsilon;
+                if (!IsRotated) _rotation = 0; // If not rotated set _rotation explicitly to exactly 0
                 OnViewportChanged();
             }
         }
 
         /// <inheritdoc />
-        public bool IsRotated =>
-            !double.IsNaN(_rotation) && _rotation > Constants.Epsilon && _rotation < 360 - Constants.Epsilon;
+        public bool IsRotated { get; private set; }
 
         /// <inheritdoc />
         public MRect Extent
