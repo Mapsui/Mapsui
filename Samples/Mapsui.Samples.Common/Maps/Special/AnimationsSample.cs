@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Threading;
 using Mapsui.Layers;
 using Mapsui.Layers.Tiling;
 using Mapsui.Providers;
@@ -16,34 +15,20 @@ namespace Mapsui.Samples.Common.Maps
 
         public void Setup(IMapControl mapControl)
         {
-            mapControl.Map = CreateMap(mapControl);
+            mapControl.Map = CreateMap();
         }
 
-        private static Timer? timer;
-
-        public static Map CreateMap(IMapControl mapControl)
+        public static Map CreateMap()
         {
             var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(CreateLayer());
-
-            // IMPORTANT:
-            // This is a vary temporary timer that is needed to show how passive animation works.
-            // In the eventual solution there render loop would be triggered a regular intervals.
-            // On each interval it should check if a render update is needed. So, the state of the
-            // animations should somehow be requestable at that point.
-            timer = new Timer((s) => {
-                var layer = (Layer)map.Layers[1];
-                Animation.UpdateAnimations(layer.SymbolStyle, layer.Animations);
-                mapControl.Refresh();
-            }, null,16, 16);
-            
             return map;
         }
 
         public static ILayer CreateLayer()
         {
-            var style = new SymbolStyle() { Fill = new Brush(Color.Red), SymbolScale = 1, };
+            var style = new SymbolStyle() { Fill = new Brush(Color.Red), SymbolScale = 1 };
 
             var layer = new Layer("Points")
             {
@@ -51,9 +36,8 @@ namespace Mapsui.Samples.Common.Maps
             };
             layer.SymbolStyle = style;
 
-            layer.Animations.AddRange(CreateAnimationsForSymbolStyle(style));
-
-            Animation.Start(layer.Animations, 10000); // This should not be necessary
+            var animations = CreateAnimationsForSymbolStyle(style);
+            layer.Animations.Add(() => Animation.UpdateAnimations(style, animations));
 
             return layer;
 
@@ -117,6 +101,8 @@ namespace Mapsui.Samples.Common.Maps
                 }
             );
             animations.Add(entry3);
+
+            Animation.Start(animations, 1000); // This should not be necessary
 
             return animations;
         }

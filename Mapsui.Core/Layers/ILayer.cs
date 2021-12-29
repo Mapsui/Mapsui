@@ -123,5 +123,9 @@ namespace Mapsui.Layers
         /// as in the case of editing of a geometry.
         /// </summary>
         void DataHasChanged();
+
+        /// <returns>Returns true if animations are running and a graphics update is needed.</returns>
+        bool UpdateAnimations();
+
     }
 }

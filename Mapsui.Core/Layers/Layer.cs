@@ -15,6 +15,7 @@
 // along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -35,7 +36,7 @@ namespace Mapsui.Layers
         private readonly FetchMachine _fetchMachine;
 
         public SymbolStyle SymbolStyle { get; set; }
-        public List<AnimationEntry<SymbolStyle>> Animations { get; } = new List<AnimationEntry<SymbolStyle>>();
+        public List<Func<bool>> Animations { get; } = new List<Func<bool>>();
         public Delayer Delayer { get; } = new();
 
         /// <summary>
@@ -125,7 +126,6 @@ namespace Mapsui.Layers
         /// <inheritdoc />
         public override IEnumerable<IFeature> GetFeatures(MRect extent, double resolution)
         {
-            //!!!Animation.UpdateAnimations(Animations);
             return _cache.ToList();
         }
 
@@ -151,6 +151,17 @@ namespace Mapsui.Layers
             if (fetchInfo.ChangeType == ChangeType.Continuous) return;
 
             Delayer.ExecuteDelayed(() => DelayedFetch(fetchInfo));
+        }
+
+        override public bool UpdateAnimations()
+        {
+            bool areAnimationRuning = false;
+            foreach (var animation in Animations)
+            {
+                if (animation())
+                    areAnimationRuning = true;
+            }
+            return areAnimationRuning;
         }
     }
 }
