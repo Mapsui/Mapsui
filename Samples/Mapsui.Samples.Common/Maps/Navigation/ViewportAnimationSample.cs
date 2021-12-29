@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using Mapsui.Extensions;
 using Mapsui.Layers.Tiling;
+using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Utilities;
 using Mapsui.Widgets;
@@ -14,32 +16,58 @@ namespace Mapsui.Samples.Common.Maps
         public string Name => "0. Viewport animation";
         public string Category => "Demo";
 
-        public static int animationMode = 3;
-
+        public static int mode = 3;
+        public static List<Action<MapInfo>> actions;
         public void Setup(IMapControl mapControl)
         {
             mapControl.Map = CreateMap();
+            actions = CreateListOfActions(mapControl);
+
+            var button = CreateButton("Next Mode");
+            button.Touched += Button_Touched;
+            mapControl.Map.Widgets.Add(button);
+
             mapControl.Map.Info += (s, a) => {
                 if (a.MapInfo?.WorldPosition != null)
                 {
-                    if (animationMode == 0)
-                        mapControl.Navigator?.FlyTo(a.MapInfo.WorldPosition, mapControl.Viewport.Resolution * 8, 500);
-                    else if (animationMode == 1)
-                        mapControl.Navigator?.RotateTo(mapControl.Viewport.Rotation + 56, 500, Easing.CubicIn);
-                    else if (animationMode == 2)
-                        mapControl.Navigator?.CenterOn(a.MapInfo.WorldPosition, 500, Easing.CubicOut);
-                    else if (animationMode == 3)
-                        mapControl.Navigator?.NavigateTo(a.MapInfo.WorldPosition, mapControl.Map.Resolutions[5], 500, Easing.CubicOut);
-                    else if (animationMode == 4)
-                        mapControl.Navigator?.ZoomTo(mapControl.Map.Resolutions[8], a.MapInfo.ScreenPosition!, 500, Easing.CubicOut);
-                    else if (animationMode == 5)
-                        mapControl.Navigator?.ZoomTo(mapControl.Map.Resolutions[8], 500, Easing.CubicOut);
-
-                    // todo: Somehow select between modes
-                    //animationMode++;
-                    //if (animationMode > 2) animationMode = 0;
-
+                    actions[mode](a.MapInfo);
                 }
+            };
+        }
+
+        private List<Action<MapInfo>> CreateListOfActions(IMapControl mapControl)
+        {
+            return new List<Action<MapInfo>> {
+                (mapInfo) => mapControl.Navigator?.FlyTo(mapInfo.WorldPosition, mapControl.Viewport.Resolution * 8, 500),
+                (mapInfo) => mapControl.Navigator?.RotateTo(mapControl.Viewport.Rotation + 56, 500, Easing.CubicIn),
+                (mapInfo) => mapControl.Navigator?.CenterOn(mapInfo.WorldPosition, 500, Easing.CubicOut),
+                (mapInfo) => mapControl.Navigator?.NavigateTo(mapInfo.WorldPosition, mapControl.Map.Resolutions[5], 500, Easing.CubicOut),
+                (mapInfo) => mapControl.Navigator?.ZoomTo(mapControl.Map.Resolutions[8], mapInfo.ScreenPosition!, 500, Easing.CubicOut),
+                (mapInfo) => mapControl.Navigator?.ZoomTo(mapControl.Map.Resolutions[8], 500, Easing.CubicOut)
+            };
+        }
+
+        private void Button_Touched(object sender, HyperlinkWidgetArguments e)
+        {
+            mode++;
+            if (mode >= actions.Count) mode = 0;
+            e.Handled = true;
+        }
+
+        private static Hyperlink CreateButton(string text)
+        {
+            // Todo: Replace this with a TextButton which diplays the current mode
+            return new Hyperlink()
+            {
+                Text = text,
+                CornerRadius = 2,
+                VerticalAlignment = VerticalAlignment.Top,
+                HorizontalAlignment = HorizontalAlignment.Left,
+                MarginX = 10,
+                MarginY = 10,
+                PaddingX = 4,
+                PaddingY = 4,
+                BackColor = new Color(192, 192, 192),
             };
         }
 

@@ -515,11 +515,9 @@ namespace Mapsui.UI.Wpf
             if (!result && widget is Hyperlink hyperlink && !string.IsNullOrWhiteSpace(hyperlink.Url))
             {
                 OpenBrowser(hyperlink.Url!);
-
-                return true;
             }
 
-            return false;
+            return result;
         }
 
         /// <inheritdoc />

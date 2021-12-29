@@ -204,7 +204,8 @@ namespace Mapsui.UI.Wpf
                 {
                     HandleFeatureInfo(e);
                     var mapInfoEventArgs = InvokeInfo(mousePosition, _downMousePosition, e.ClickCount);
-                    OnInfo(mapInfoEventArgs);
+                    if (mapInfoEventArgs?.Handled == false)
+                        OnInfo(mapInfoEventArgs);
                 }
             }
 

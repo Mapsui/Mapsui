@@ -20,7 +20,6 @@ namespace Mapsui.ViewportAnimations
             Animation.Start(animations, duration);
 
             return animations;
-
         }
 
         private static void CenterTick(Viewport viewport, AnimationEntry<Viewport> entry, double value)
