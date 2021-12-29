@@ -13,7 +13,7 @@ namespace Mapsui
         MReadOnlyPoint Center { get; }
 
         double CenterX { get; }
-        double CenterY { get; } 
+        double CenterY { get; }
 
         /// <summary>
         /// Resolution of the viewport in units per pixel

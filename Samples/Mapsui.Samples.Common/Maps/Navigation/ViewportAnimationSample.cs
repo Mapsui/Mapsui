@@ -16,38 +16,38 @@ namespace Mapsui.Samples.Common.Maps
         public string Name => "0. Viewport animation";
         public string Category => "Demo";
 
-        public static int mode = 3;
-        public static List<Action<MapInfo>> actions;
+        public static int mode = 1;
         public void Setup(IMapControl mapControl)
         {
             mapControl.Map = CreateMap();
-            actions = CreateListOfActions(mapControl);
-
+            var actions = CreateListOfActions(mapControl);
             var button = CreateButton("Next Mode");
-            button.Touched += Button_Touched;
+            button.Touched += (s, e) => Button_Touched(s, e, actions);
             mapControl.Map.Widgets.Add(button);
 
             mapControl.Map.Info += (s, a) => {
+
+                
                 if (a.MapInfo?.WorldPosition != null)
                 {
-                    actions[mode](a.MapInfo);
+                    actions[mode](a.MapInfo, mapControl.Viewport);
                 }
             };
         }
 
-        private List<Action<MapInfo>> CreateListOfActions(IMapControl mapControl)
+        private static List<Action<MapInfo, IReadOnlyViewport>> CreateListOfActions(IMapControl mapControl)
         {
-            return new List<Action<MapInfo>> {
-                (mapInfo) => mapControl.Navigator?.FlyTo(mapInfo.WorldPosition, mapControl.Viewport.Resolution * 8, 500),
-                (mapInfo) => mapControl.Navigator?.RotateTo(mapControl.Viewport.Rotation + 56, 500, Easing.CubicIn),
-                (mapInfo) => mapControl.Navigator?.CenterOn(mapInfo.WorldPosition, 500, Easing.CubicOut),
-                (mapInfo) => mapControl.Navigator?.NavigateTo(mapInfo.WorldPosition, mapControl.Map.Resolutions[5], 500, Easing.CubicOut),
-                (mapInfo) => mapControl.Navigator?.ZoomTo(mapControl.Map.Resolutions[8], mapInfo.ScreenPosition!, 500, Easing.CubicOut),
-                (mapInfo) => mapControl.Navigator?.ZoomTo(mapControl.Map.Resolutions[8], 500, Easing.CubicOut)
+            return new List<Action<MapInfo, IReadOnlyViewport>> {
+                (mapInfo, viewport) => mapControl.Navigator?.FlyTo(mapInfo.WorldPosition, viewport.Resolution * 8, 500),
+                (mapInfo, viewport) => mapControl.Navigator?.RotateTo(viewport.Rotation + 56, 500, Easing.CubicIn),
+                (mapInfo, viewport) => mapControl.Navigator?.CenterOn(mapInfo.WorldPosition, 500, Easing.CubicOut),
+                (mapInfo, viewport) => mapControl.Navigator?.NavigateTo(mapInfo.WorldPosition, 4891.9698102512211, 500, Easing.CubicOut),
+                (mapInfo, viewport) => mapControl.Navigator?.ZoomTo(611.49622628140264, mapInfo.ScreenPosition!, 500, Easing.CubicOut),
+                (mapInfo, viewport) => mapControl.Navigator?.ZoomTo(611.49622628140264, 500, Easing.CubicOut)
             };
         }
 
-        private void Button_Touched(object sender, HyperlinkWidgetArguments e)
+        private void Button_Touched(object _, HyperlinkWidgetArguments e, List<Action<MapInfo, IReadOnlyViewport>> actions)
         {
             mode++;
             if (mode >= actions.Count) mode = 0;

@@ -74,6 +74,7 @@ namespace Mapsui
             _height = viewport.Height;
             _rotation = viewport.Rotation;
 
+            IsRotated = viewport.IsRotated;
             if (viewport.Extent != null) _extent = new MRect(viewport.Extent);
             if (viewport.WindowExtent != null) _windowExtent = new MQuad(viewport.WindowExtent);
 
