@@ -8,9 +8,9 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class AnimationsSample : ISample
+    public class SymbolAnimationSample : ISample
     {
-        public string Name => "Animated symbols";
+        public string Name => "Symbol Animation";
         public string Category => "Special";
 
         public void Setup(IMapControl mapControl)
