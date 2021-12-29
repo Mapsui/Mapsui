@@ -26,8 +26,6 @@ namespace Mapsui.Samples.Common.Maps
             mapControl.Map.Widgets.Add(button);
 
             mapControl.Map.Info += (s, a) => {
-
-                
                 if (a.MapInfo?.WorldPosition != null)
                 {
                     actions[mode](a.MapInfo, mapControl.Viewport);
