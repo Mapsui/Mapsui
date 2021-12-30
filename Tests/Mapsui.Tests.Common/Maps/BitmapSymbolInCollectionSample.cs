@@ -8,8 +8,6 @@ using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.UI;
 
-#pragma warning disable IDISP001 // Dispose created
-
 namespace Mapsui.Tests.Common.Maps
 {
     public class BitmapSymbolInCollectionSample : ISample
@@ -77,8 +75,8 @@ namespace Mapsui.Tests.Common.Maps
 
         private static int LoadBitmap(string bitmapPath)
         {
-            var bitmapStream = typeof(Utilities).GetTypeInfo().Assembly.GetManifestResourceStream(bitmapPath)!;
-            return BitmapRegistry.Instance.Register(bitmapStream);
+            var assembly = typeof(Utilities).GetTypeInfo().Assembly;
+            return BitmapRegistry.Instance.Register(assembly.GetManifestResourceStream(bitmapPath)!);
         }
     }
 }

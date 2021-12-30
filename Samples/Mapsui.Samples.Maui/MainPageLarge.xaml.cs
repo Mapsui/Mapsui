@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Mapsui.Styles;
 using Mapsui.UI.Maui;
 using Microsoft.Maui.Controls;
+using Microsoft.Maui.Dispatching;
 using Microsoft.Maui.Essentials;
 
 namespace Mapsui.Samples.Maui
@@ -146,7 +147,11 @@ namespace Mapsui.Samples.Maui
                 while (!gpsCancelation.IsCancellationRequested)
                 {
                     var request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
+#if __MAUI__ // WORKAROUND for Preview 11 will be fixed in Preview 12 https://github.com/dotnet/maui/issues/3597
+                    Application.Current?.Dispatcher.DispatchAsync(async () => {
+#else
                     await Device.InvokeOnMainThreadAsync(async () => {
+#endif
                         var location = await Geolocation.GetLocationAsync(request, this.gpsCancelation.Token).ConfigureAwait(false);
                         if (location != null)
                         {
