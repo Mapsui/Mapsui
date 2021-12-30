@@ -147,18 +147,16 @@ namespace Mapsui.Providers.Shapefile.Indexing
         public static QuadTree FromFile(string filename)
         {
             using var fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
-            var br = new BinaryReader(fs);
+            using var br = new BinaryReader(fs);
             // ReSharper disable once CompareOfFloatsByEqualityOperator
             if (br.ReadDouble() != Indexfileversion) //Check fileindex version
             {
                 fs.Close();
-                fs.Dispose();
                 throw new ObsoleteFileFormatException(
                     "Invalid index file version. Please rebuild the spatial index by either deleting the index");
             }
-            var node = ReadNode(0, ref br);
+            var node = ReadNode(0, in br);
             br.Close();
-            br.Dispose();
             fs.Close();
             return node;
         }
@@ -169,7 +167,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
         /// <param name="depth">Current depth</param>
         /// <param name="br">Binary reader reference</param>
         /// <returns></returns>
-        private static QuadTree ReadNode(uint depth, ref BinaryReader br)
+        private static QuadTree ReadNode(uint depth, in BinaryReader br)
         {
             var node = new QuadTree
             {
@@ -195,8 +193,8 @@ namespace Mapsui.Providers.Shapefile.Indexing
             }
             else
             {
-                node.Child0 = ReadNode(node._depth + 1, ref br);
-                node.Child1 = ReadNode(node._depth + 1, ref br);
+                node.Child0 = ReadNode(node._depth + 1, in br);
+                node.Child1 = ReadNode(node._depth + 1, in br);
             }
             return node;
         }
@@ -208,10 +206,10 @@ namespace Mapsui.Providers.Shapefile.Indexing
         public void SaveIndex(string filename)
         {
             using var fs = new FileStream(filename, FileMode.Create);
-            var bw = new BinaryWriter(fs);
+            using var bw = new BinaryWriter(fs);
             bw.Write(Indexfileversion); //Save index version
-            SaveNode(this, ref bw);
-            bw.Dispose();
+            SaveNode(this, in bw);
+            bw.Close();
             fs.Close();
         }
 
@@ -220,7 +218,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
         /// </summary>
         /// <param name="node">Node to save</param>
         /// <param name="sw">Reference to BinaryWriter</param>
-        private void SaveNode(QuadTree? node, ref BinaryWriter sw)
+        private void SaveNode(QuadTree? node, in BinaryWriter sw)
         {
             if (node == null)
                 return;
@@ -244,8 +242,8 @@ namespace Mapsui.Providers.Shapefile.Indexing
             }
             else if (!node.IsLeaf) //Save next node
             {
-                SaveNode(node.Child0, ref sw);
-                SaveNode(node.Child1, ref sw);
+                SaveNode(node.Child0, in sw);
+                SaveNode(node.Child1, in sw);
             }
         }
 
@@ -330,7 +328,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
         public Collection<uint> Search(MRect box)
         {
             var objectlist = new Collection<uint>();
-            IntersectTreeRecursive(box, this, ref objectlist);
+            IntersectTreeRecursive(box, this, in objectlist);
             return objectlist;
         }
 
@@ -340,7 +338,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
         /// <param name="box">BoundingBox to intersect with</param>
         /// <param name="node">Node to search from</param>
         /// <param name="list">List of found intersections</param>
-        private void IntersectTreeRecursive(MRect box, QuadTree? node, ref Collection<uint> list)
+        private void IntersectTreeRecursive(MRect box, QuadTree? node, in Collection<uint> list)
         {
             if (node == null)
                 return;
@@ -360,8 +358,8 @@ namespace Mapsui.Providers.Shapefile.Indexing
             {
                 if (node.Box.Intersects(box))
                 {
-                    IntersectTreeRecursive(box, node.Child0, ref list);
-                    IntersectTreeRecursive(box, node.Child1, ref list);
+                    IntersectTreeRecursive(box, node.Child0, in list);
+                    IntersectTreeRecursive(box, node.Child1, in list);
                 }
             }
         }

@@ -2,8 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Configurations>Release;Debug</Configurations>
-    <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64;android-x64;android-arm64;android-arm;android-x86</RuntimeIdentifiers>
+    <Configurations>Release;Debug</Configurations>    
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

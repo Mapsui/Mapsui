@@ -75,3 +75,4 @@ AppPackages/
 .idea
 .DS_Store
 
+/Output-Build.txt
