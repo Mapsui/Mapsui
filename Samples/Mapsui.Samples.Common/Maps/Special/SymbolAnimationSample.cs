@@ -11,7 +11,7 @@ namespace Mapsui.Samples.Common.Maps
     public class SymbolAnimationSample : ISample
     {
         public string Name => "Symbol Animation";
-        public string Category => "Special";
+        public string Category => "Animation";
 
         public void Setup(IMapControl mapControl)
         {

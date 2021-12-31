@@ -18,9 +18,9 @@ namespace Mapsui.Samples.Common.Maps.Special
 {
     public class AnimatedPointsSample : ISample
     {
-        public string Name => "Animated point movement";
+        public string Name => "Point Feature Animation";
 
-        public string Category => "Special";
+        public string Category => "Animation";
 
         public void Setup(IMapControl mapControl)
         {
