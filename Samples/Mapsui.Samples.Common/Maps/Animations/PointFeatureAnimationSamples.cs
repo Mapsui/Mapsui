@@ -16,11 +16,11 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps.Special
 {
-    public class AnimatedPointsSample : ISample
+    public class PointFeatureAnimationSamples : ISample
     {
         public string Name => "Point Feature Animation";
 
-        public string Category => "Animation";
+        public string Category => "Animations";
 
         public void Setup(IMapControl mapControl)
         {

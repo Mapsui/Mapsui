@@ -14,7 +14,7 @@ namespace Mapsui.Samples.Common.Maps
     public class ViewportAnimationSample : ISample
     {
         public string Name => "Viewport Animation";
-        public string Category => "Animation";
+        public string Category => "Animations";
 
         public static int mode = 1;
         public void Setup(IMapControl mapControl)
