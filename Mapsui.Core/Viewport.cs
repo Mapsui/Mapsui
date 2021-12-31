@@ -41,9 +41,9 @@ namespace Mapsui
         private double _centerX;
         private double _centerY;
         private double _resolution = Constants.DefaultResolution;
+        private double _rotation;
         private double _width;
         private double _height;
-        private double _rotation;
 
         // Derived from state
         private bool _modified = true;
