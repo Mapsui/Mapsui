@@ -2,15 +2,16 @@
 using Mapsui.Extensions;
 using Mapsui.Layers.Tiling;
 using Mapsui.UI;
+using Mapsui.Utilities;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ScaleBar;
 using Mapsui.Widgets.Zoom;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class ViewportAnimationSample : ISample
+    public class ViewportZoomAroundLocationAnimationSample : ISample
     {
-        public string Name => "FlyTo Viewport Animation";
+        public string Name => "Zoom Around Location Viewport Animation";
         public string Category => "Animations";
 
         public static int mode = 1;
@@ -21,16 +22,10 @@ namespace Mapsui.Samples.Common.Maps
             mapControl.Map.Info += (s, a) => {
                 if (a.MapInfo?.WorldPosition != null)
                 {
-                    mapControl.Navigator?.FlyTo(a.MapInfo.WorldPosition, a.MapInfo.Resolution * 1.5, 500);
+                    mapControl.Navigator?.ZoomTo(a.MapInfo.Resolution * 0.5, a.MapInfo.ScreenPosition!, 500, Easing.CubicOut);
                 }
             };
         }
-
-        //        (mapInfo, viewport) => mapControl.Navigator?.RotateTo(viewport.Rotation + 56, 500, Easing.CubicIn),
-        //        (mapInfo, viewport) => mapControl.Navigator?.CenterOn(mapInfo.WorldPosition, 500, Easing.CubicOut),
-        //        (mapInfo, viewport) => mapControl.Navigator?.NavigateTo(mapInfo.WorldPosition, 4891.9698102512211, 500, Easing.CubicOut),
-        //        (mapInfo, viewport) => mapControl.Navigator?.ZoomTo(611.49622628140264, mapInfo.ScreenPosition!, 500, Easing.CubicOut),
-        //        (mapInfo, viewport) => mapControl.Navigator?.ZoomTo(611.49622628140264, 500, Easing.CubicOut)
 
         public static Map CreateMap()
         {

@@ -10,7 +10,6 @@ using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
 using Mapsui.UI;
-using Mapsui.Utilities;
 
 #pragma warning disable CS8670 // Object or collection initializer implicitly dereferences possibly null member.
 
