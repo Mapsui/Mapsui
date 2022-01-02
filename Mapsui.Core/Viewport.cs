@@ -48,7 +48,6 @@ namespace Mapsui
         // Derived from state
         private bool _modified = true;
         private readonly MRect _extent;
-        private MQuad _windowExtent;
 
         private List<AnimationEntry<Viewport>> _animations = new();
 
@@ -58,7 +57,6 @@ namespace Mapsui
         public Viewport()
         {
             _extent = new MRect(0, 0, 0, 0);
-            _windowExtent = new MQuad();
         }
 
         /// <summary>
@@ -76,7 +74,6 @@ namespace Mapsui
 
             IsRotated = viewport.IsRotated;
             if (viewport.Extent != null) _extent = new MRect(viewport.Extent);
-            if (viewport.WindowExtent != null) _windowExtent = new MQuad(viewport.WindowExtent);
 
             UpdateExtent();
         }
@@ -172,16 +169,6 @@ namespace Mapsui
             {
                 if (_modified) UpdateExtent();
                 return _extent;
-            }
-        }
-
-        /// <inheritdoc />
-        public MQuad WindowExtent
-        {
-            get
-            {
-                if (_modified) UpdateExtent();
-                return _windowExtent;
             }
         }
 
@@ -322,10 +309,12 @@ namespace Mapsui
             var bottom = Center.Y - halfSpanY;
             var right = Center.X + halfSpanX;
             var top = Center.Y + halfSpanY;
-            _windowExtent.BottomLeft = new MPoint(left, bottom);
-            _windowExtent.TopLeft = new MPoint(left, top);
-            _windowExtent.TopRight = new MPoint(right, top);
-            _windowExtent.BottomRight = new MPoint(right, bottom);
+            var windowExtent = new MQuad();
+
+            windowExtent.BottomLeft = new MPoint(left, bottom);
+            windowExtent.TopLeft = new MPoint(left, top);
+            windowExtent.TopRight = new MPoint(right, top);
+            windowExtent.BottomRight = new MPoint(right, bottom);
 
             if (!IsRotated)
             {
@@ -338,8 +327,8 @@ namespace Mapsui
             {
                 // Calculate the extent that will encompass a rotated viewport (slightly larger - used for tiles).
                 // Perform rotations on corner offsets and then add them to the Center point.
-                _windowExtent = _windowExtent.Rotate(-_rotation, Center.X, Center.Y);
-                var rotatedBoundingBox = _windowExtent.ToBoundingBox();
+                windowExtent = windowExtent.Rotate(-_rotation, Center.X, Center.Y);
+                var rotatedBoundingBox = windowExtent.ToBoundingBox();
                 _extent.Min.X = rotatedBoundingBox.MinX;
                 _extent.Min.Y = rotatedBoundingBox.MinY;
                 _extent.Max.X = rotatedBoundingBox.MaxX;

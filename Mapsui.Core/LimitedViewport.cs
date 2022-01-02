@@ -28,7 +28,6 @@ namespace Mapsui
         public double Rotation => _viewport.Rotation;
         public bool HasSize => _viewport.HasSize;
         public bool IsRotated => _viewport.IsRotated;
-        public MQuad? WindowExtent => _viewport.WindowExtent;
 
         public void Transform(MPoint position, MPoint previousPosition, double deltaResolution = 1, double deltaRotation = 0)
         {

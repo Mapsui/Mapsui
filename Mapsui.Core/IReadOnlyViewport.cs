@@ -115,14 +115,5 @@ namespace Mapsui
         /// <param name="worldY">Y coordinate in map units</param>
         /// <returns>The x and y in screen pixels</returns>
         (double screenX, double screenY) WorldToScreenUnrotated(double worldX, double worldY); // todo: Get rid of this method
-
-        /// <summary>
-        /// WindowExtend gives the four corner points of viewport in map coordinates
-        /// </summary>
-        /// <remarks>
-        /// If viewport is rotated, this corner points are not horizontally or vertically
-        /// aligned.
-        /// </remarks>
-        MQuad? WindowExtent { get; }
     }
 }
