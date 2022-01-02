@@ -20,7 +20,7 @@ namespace Mapsui.Tests.Rendering
             var box = schema.Extent.ToMRect();
             const int level = 3;
             var resolution = schema.Resolutions[level];
-            var memoryCache = PopulateMemoryCache(schema, new MemoryCache<RasterFeature?>(), level);
+            var memoryCache = PopulateMemoryCache(schema, new MemoryCache<IFeature?>(), level);
             var renderFetchStrategy = new RenderFetchStrategy();
 
             // act
@@ -30,7 +30,7 @@ namespace Mapsui.Tests.Rendering
             Assert.True(tiles.Count == 43);
         }
 
-        private static ITileCache<RasterFeature?> PopulateMemoryCache(GlobalSphericalMercator schema, MemoryCache<RasterFeature?> cache, int levelId)
+        private static ITileCache<IFeature?> PopulateMemoryCache(GlobalSphericalMercator schema, MemoryCache<IFeature?> cache, int levelId)
         {
             for (var i = levelId; i >= 0; i--)
             {
