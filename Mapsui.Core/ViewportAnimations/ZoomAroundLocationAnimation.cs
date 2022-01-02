@@ -3,7 +3,7 @@ using Mapsui.Utilities;
 
 namespace Mapsui.ViewportAnimations
 {
-    internal class ZoomAroundCenterAnimation : ZoomOnCenterAnimation
+    internal class ZoomAroundLocationAnimation : ZoomOnCenterAnimation
     {
         public static List<AnimationEntry<Viewport>> Create(IViewport viewport, double centerOfZoomX, double centerOfZoomY, double newResolution,
             double currentCenterOfMapX, double currentCenterOfMapY, double currentResolution, long duration)

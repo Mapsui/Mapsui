@@ -11,7 +11,7 @@ namespace Mapsui.Samples.Common.Maps
 {
     public class ViewportZoomAroundLocationAnimationSample : ISample
     {
-        public string Name => "Zoom Around Location Viewport Animation";
+        public string Name => "Viewport Zoom Around Location Animation";
         public string Category => "Animations";
 
         public static int mode = 1;

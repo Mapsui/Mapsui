@@ -11,7 +11,7 @@ namespace Mapsui.Samples.Common.Maps
 {
     public class ViewportZoomToResolutionAnimationSample : ISample
     {
-        public string Name => "Viewport Zoom To Resolution Animation";
+        public string Name => "Viewport Zoom Animation";
         public string Category => "Animations";
 
         public static int mode = 1;

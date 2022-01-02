@@ -430,7 +430,7 @@ namespace Mapsui
                 Rotation = rotation;
             else
             {
-                _animations = RotationAnimation.Create(this, rotation, duration, easing);
+                _animations = RotateAnimation.Create(this, rotation, duration, easing);
             }
 
             UpdateExtent();

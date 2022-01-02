@@ -88,7 +88,7 @@ namespace Mapsui
         public void ZoomTo(double resolution, MPoint centerOfZoom, long duration = 0, Easing? easing = default)
         {
             var (worldCenterOfZoomX, worldCenterOfZoomY) = _viewport.ScreenToWorldXY(centerOfZoom.X, centerOfZoom.Y);
-            _viewport.SetAnimations(ZoomAroundCenterAnimation.Create(_viewport, worldCenterOfZoomX, worldCenterOfZoomY, resolution,
+            _viewport.SetAnimations(ZoomAroundLocationAnimation.Create(_viewport, worldCenterOfZoomX, worldCenterOfZoomY, resolution,
                 _viewport.CenterX, _viewport.CenterY, _viewport.Resolution, duration));
             Navigated?.Invoke(this, ChangeType.Discrete);
 
