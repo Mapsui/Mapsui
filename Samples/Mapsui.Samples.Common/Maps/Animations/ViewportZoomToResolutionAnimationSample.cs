@@ -22,6 +22,7 @@ namespace Mapsui.Samples.Common.Maps
             mapControl.Map.Info += (s, a) => {
                 if (a.MapInfo?.WorldPosition != null)
                 {
+                    // Zoom to the a new resolution
                     mapControl.Navigator?.ZoomTo(a.MapInfo.Resolution * 0.5, 500, Easing.CubicOut);
                 }
             };

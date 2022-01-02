@@ -22,6 +22,7 @@ namespace Mapsui.Samples.Common.Maps
             mapControl.Map.Info += (s, a) => {
                 if (a.MapInfo?.WorldPosition != null)
                 {
+                    // Animate towards a new rotation, choosing the most adjacent angle.
                     mapControl.Navigator?.RotateTo(mapControl.Viewport.Rotation + 45, 500, Easing.CubicIn);
                 }
             };

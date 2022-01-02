@@ -22,6 +22,7 @@ namespace Mapsui.Samples.Common.Maps
             mapControl.Map.Info += (s, a) => {
                 if (a.MapInfo?.WorldPosition != null)
                 {
+                    // Animate to the new center and new resultion
                     mapControl.Navigator?.NavigateTo(a.MapInfo.WorldPosition, a.MapInfo.Resolution * 0.5, 500, Easing.CubicOut);
                 }
             };
