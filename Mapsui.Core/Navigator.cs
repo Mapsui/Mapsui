@@ -88,8 +88,8 @@ namespace Mapsui
         /// <param name="easing">The easing of the animation when duration is > 0</param>
         public void ZoomTo(double resolution, MPoint centerOfZoom, long duration = 0, Easing? easing = default)
         {
-            var centerOfMap = CalculateCenterOfMap(centerOfZoom, resolution);
-            _viewport.SetCenterAndResolution(centerOfMap.X, centerOfMap.Y, resolution, duration, easing);
+            var (centerOfMapX, centerOfMapY) = CalculateCenterOfMap(centerOfZoom.X, centerOfZoom.Y, resolution);
+            _viewport.SetCenterAndResolution(centerOfMapX, centerOfMapY, resolution, duration, easing);
             Navigated?.Invoke(this, ChangeType.Discrete);
 
         }
@@ -104,14 +104,14 @@ namespace Mapsui
         /// <param name="centerOfZoom"></param>
         /// <param name="newResolution"></param>
         /// <returns></returns>
-        private MReadOnlyPoint CalculateCenterOfMap(MPoint centerOfZoom, double newResolution)
+        private (double x, double y) CalculateCenterOfMap(double screenCenterOfZoomX, double screenCenterOfZoomY, double newResolution)
         {
-            centerOfZoom = _viewport.ScreenToWorld(centerOfZoom);
+            var (centerOfZoomX, centerOfZoomY) = _viewport.ScreenToWorldXY(screenCenterOfZoomX, screenCenterOfZoomY);
             var ratio = newResolution / _viewport.Resolution;
 
-            return new MReadOnlyPoint(
-                centerOfZoom.X - (centerOfZoom.X - _viewport.Center.X) * ratio,
-                centerOfZoom.Y - (centerOfZoom.Y - _viewport.Center.Y) * ratio);
+            return
+                (centerOfZoomX - (centerOfZoomX - _viewport.Center.X) * ratio,
+                centerOfZoomY - (centerOfZoomY - _viewport.Center.Y) * ratio);
         }
 
         /// <summary>

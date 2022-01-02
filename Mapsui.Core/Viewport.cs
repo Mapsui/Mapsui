@@ -192,45 +192,68 @@ namespace Mapsui
         }
 
         /// <inheritdoc />
-        public MPoint WorldToScreenUnrotated(MPoint worldPosition)
-        {
-            return WorldToScreenUnrotated(worldPosition.X, worldPosition.Y);
-        }
-
-        /// <inheritdoc />
         public MPoint ScreenToWorld(MPoint position)
         {
             return ScreenToWorld(position.X, position.Y);
         }
 
         /// <inheritdoc />
+        public MPoint ScreenToWorld(double positionX, double positionY)
+        {
+            var (x, y) = ScreenToWorldXY(positionX, positionY);
+            return new MPoint(x, y);
+        }
+
+        /// <inheritdoc />
         public MPoint WorldToScreen(double worldX, double worldY)
         {
-            var p = WorldToScreenUnrotated(worldX, worldY);
+            var (x, y) = WorldToScreenXY(worldX, worldY);
+            return new MPoint(x, y);
+        }
+
+        /// <inheritdoc />
+        public (double screenX, double screenY) WorldToScreenXY(double worldX, double worldY)
+        {
+            var (screenX, screenY) = WorldToScreenUnrotated(worldX, worldY);
 
             if (IsRotated)
             {
                 var screenCenterX = Width / 2.0;
                 var screenCenterY = Height / 2.0;
-                p = p.Rotate(-_rotation, screenCenterX, screenCenterY);
+                return Rotate(-_rotation, screenX, screenY, screenCenterX, screenCenterY);
             }
 
-            return p;
+            return (screenX, screenY);
+        }
+
+        public (double x, double y) Rotate(double degrees, double x, double y, double centerX, double centerY)
+        {
+            // translate this point back to the center
+            var newX = x - centerX;
+            var newY = y - centerY;
+
+            // rotate the values
+            var p = Algorithms.RotateClockwiseDegrees(newX, newY, degrees);
+
+            // translate back to original reference frame
+            newX = p.X + centerX;
+            newY = p.Y + centerY;
+
+            return (newX, newY);
         }
 
         /// <inheritdoc />
-        public MPoint WorldToScreenUnrotated(double worldX, double worldY)
+        public (double screenX, double screenY) WorldToScreenUnrotated(double worldX, double worldY)
         {
             var screenCenterX = Width / 2.0;
             var screenCenterY = Height / 2.0;
             var screenX = (worldX - Center.X) / _resolution + screenCenterX;
             var screenY = (Center.Y - worldY) / _resolution + screenCenterY;
-
-            return new MPoint(screenX, screenY);
+            return (screenX, screenY);
         }
 
         /// <inheritdoc />
-        public MPoint ScreenToWorld(double screenX, double screenY)
+        public (double worldX, double worldY) ScreenToWorldXY(double screenX, double screenY)
         {
             var screenCenterX = Width / 2.0;
             var screenCenterY = Height / 2.0;
@@ -244,7 +267,7 @@ namespace Mapsui
 
             var worldX = Center.X + (screenX - screenCenterX) * _resolution;
             var worldY = Center.Y - (screenY - screenCenterY) * _resolution;
-            return new MPoint(worldX, worldY);
+            return (worldX, worldY);
         }
 
         /// <inheritdoc />
@@ -349,7 +372,7 @@ namespace Mapsui
         public void SetCenterAndResolution(double x, double y, double resolution, long duration = 0, Easing? easing = default)
         {
             _animations = new();
-      
+
             if (duration == 0)
             {
                 _centerX = x;

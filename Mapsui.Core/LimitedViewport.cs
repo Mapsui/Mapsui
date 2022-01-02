@@ -106,16 +106,6 @@ namespace Mapsui
             return _viewport.WorldToScreen(worldX, worldY);
         }
 
-        public MPoint WorldToScreenUnrotated(double worldX, double worldY)
-        {
-            return _viewport.WorldToScreenUnrotated(worldX, worldY);
-        }
-
-        public MPoint WorldToScreenUnrotated(MPoint worldPosition)
-        {
-            return _viewport.WorldToScreenUnrotated(worldPosition);
-        }
-
         public bool UpdateAnimations()
         {
             return _viewport.UpdateAnimations();
@@ -124,6 +114,21 @@ namespace Mapsui
         public void SetAnimations(List<AnimationEntry<Viewport>> animations)
         {
             _viewport.SetAnimations(animations);
+        }
+
+        public (double worldX, double worldY) ScreenToWorldXY(double x, double y)
+        {
+            return _viewport.ScreenToWorldXY(x, y);
+        }
+
+        public (double screenX, double screenY) WorldToScreenXY(double worldX, double worldY)
+        {
+            return _viewport.WorldToScreenXY(worldX, worldY);
+        }
+
+        public (double screenX, double screenY) WorldToScreenUnrotated(double worldX, double worldY)
+        {
+            return _viewport.WorldToScreenUnrotated(worldX, worldY);
         }
     }
 }
