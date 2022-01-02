@@ -3,7 +3,7 @@ using Mapsui.Utilities;
 
 namespace Mapsui.ViewportAnimations
 {
-    public class SetCenterAnimation
+    public class CenterAnimation
     {
         public static List<AnimationEntry<Viewport>> Create(IViewport viewport, double centerX, double centerY, long duration, Easing? easing)
         {

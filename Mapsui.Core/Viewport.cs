@@ -358,7 +358,7 @@ namespace Mapsui
             }
             else
             {
-                _animations = SetCenterAndResolutionAnimation.Create(this, x, y, resolution, duration);
+                _animations = CenterAndResolutionAnimation.Create(this, x, y, resolution, duration);
             }
 
             OnViewportChanged();
@@ -378,7 +378,7 @@ namespace Mapsui
             }
             else
             {
-                _animations = SetCenterAnimation.Create(this, center.X, center.Y, duration, easing);
+                _animations = CenterAnimation.Create(this, center.X, center.Y, duration, easing);
             }
             OnViewportChanged();
         }
@@ -394,7 +394,7 @@ namespace Mapsui
                 Resolution = resolution;
             else
             {
-                _animations = SetResolutionAnimation.Create(this, resolution, duration, easing);
+                _animations = ResolutionAnimation.Create(this, resolution, duration, easing);
             }
 
             OnViewportChanged();
@@ -410,7 +410,7 @@ namespace Mapsui
                 Rotation = rotation;
             else
             {
-                _animations = SetRotationAnimation.Create(this, rotation, duration, easing);
+                _animations = RotationAnimation.Create(this, rotation, duration, easing);
             }
             OnViewportChanged();
         }

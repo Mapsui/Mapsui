@@ -4,7 +4,7 @@ using Mapsui.Utilities;
 
 namespace Mapsui.ViewportAnimations
 {
-    public class SetRotationAnimation
+    public class RotationAnimation
     {
         public static List<AnimationEntry<Viewport>> Create(Viewport viewport, double rotation, long duration, Easing? easing)
         {
