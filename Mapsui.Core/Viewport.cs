@@ -381,7 +381,7 @@ namespace Mapsui
             }
             else
             {
-                _animations = CenterAndResolutionAnimation.Create(this, x, y, resolution, duration);
+                _animations = ZoomOnCenterAnimation.Create(this, x, y, resolution, duration);
             }
 
             OnViewportChanged();
@@ -417,7 +417,7 @@ namespace Mapsui
                 Resolution = resolution;
             else
             {
-                _animations = ResolutionAnimation.Create(this, resolution, duration, easing);
+                _animations = ZoomAnimation.Create(this, resolution, duration, easing);
             }
 
             OnViewportChanged();

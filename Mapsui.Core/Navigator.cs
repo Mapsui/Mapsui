@@ -1,5 +1,4 @@
 ﻿using System;
-using Mapsui.Geometries;
 using Mapsui.Utilities;
 using Mapsui.ViewportAnimations;
 
@@ -88,31 +87,31 @@ namespace Mapsui
         /// <param name="easing">The easing of the animation when duration is > 0</param>
         public void ZoomTo(double resolution, MPoint centerOfZoom, long duration = 0, Easing? easing = default)
         {
-            var (centerOfMapX, centerOfMapY) = CalculateCenterOfMap(centerOfZoom.X, centerOfZoom.Y, resolution);
-            _viewport.SetCenterAndResolution(centerOfMapX, centerOfMapY, resolution, duration, easing);
+            var (worldCenterOfZoomX, worldCenterOfZoomY) = _viewport.ScreenToWorldXY(centerOfZoom.X, centerOfZoom.Y);
+            _viewport.SetAnimations(ZoomAroundCenterAnimation.Create(_viewport, worldCenterOfZoomX, worldCenterOfZoomY, resolution,
+                _viewport.CenterX, _viewport.CenterY, _viewport.Resolution, duration));
             Navigated?.Invoke(this, ChangeType.Discrete);
 
         }
 
-        /// <summary>
-        /// Calculates the new CenterOfMap based on the CenterOfZoom and the new resolution.
-        /// The CenterOfZoom is not the same as the CenterOfMap. CenterOfZoom is the one place in
-        /// the map that stays on the same location when zooming. In Mapsui is can be equal to the 
-        /// CenterOfMap, for instance when using the +/- buttons. When using mouse wheel zoom the
-        /// CenterOfZoom is the location of the mouse. 
-        /// </summary>
-        /// <param name="centerOfZoom"></param>
-        /// <param name="newResolution"></param>
-        /// <returns></returns>
-        private (double x, double y) CalculateCenterOfMap(double screenCenterOfZoomX, double screenCenterOfZoomY, double newResolution)
-        {
-            var (centerOfZoomX, centerOfZoomY) = _viewport.ScreenToWorldXY(screenCenterOfZoomX, screenCenterOfZoomY);
-            var ratio = newResolution / _viewport.Resolution;
+        ///// <summary>
+        ///// Calculates the new CenterOfMap based on the CenterOfZoom and the new resolution.
+        ///// The CenterOfZoom is not the same as the CenterOfMap. CenterOfZoom is the one place in
+        ///// the map that stays on the same location when zooming. In Mapsui is can be equal to the 
+        ///// CenterOfMap, for instance when using the +/- buttons. When using mouse wheel zoom the
+        ///// CenterOfZoom is the location of the mouse. 
+        ///// </summary>
+        ///// <param name="centerOfZoom"></param>
+        ///// <param name="newResolution"></param>
+        ///// <returns></returns>
+        //private (double x, double y) CalculateCenterOfMap(double centerOfZoomX, double centerOfZoomY, double newResolution)
+        //{
+        //    var ratio = newResolution / _viewport.Resolution;
 
-            return
-                (centerOfZoomX - (centerOfZoomX - _viewport.Center.X) * ratio,
-                centerOfZoomY - (centerOfZoomY - _viewport.Center.Y) * ratio);
-        }
+        //    return
+        //        (centerOfZoomX - (centerOfZoomX - _viewport.Center.X) * ratio,
+        //        centerOfZoomY - (centerOfZoomY - _viewport.Center.Y) * ratio);
+        //}
 
         /// <summary>
         /// Zoom in to the next resolution

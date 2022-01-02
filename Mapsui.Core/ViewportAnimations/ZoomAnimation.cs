@@ -3,7 +3,7 @@ using Mapsui.Utilities;
 
 namespace Mapsui.ViewportAnimations
 {
-    public class ResolutionAnimation
+    public class ZoomAnimation
     {
         public static List<AnimationEntry<Viewport>> Create(Viewport viewport, double resolution, long duration, Easing? easing)
         {
