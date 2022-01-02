@@ -46,7 +46,6 @@ namespace Mapsui
         private double _height;
 
         // Derived from state
-        private bool _modified = true;
         private readonly MRect _extent;
 
         private List<AnimationEntry<Viewport>> _animations = new();
@@ -93,6 +92,7 @@ namespace Mapsui
             set
             {
                 _centerX = value;
+                UpdateExtent();
                 OnViewportChanged();
             }
         }
@@ -104,6 +104,7 @@ namespace Mapsui
             set
             {
                 _centerY = value;
+                UpdateExtent();
                 OnViewportChanged();
             }
         }
@@ -116,6 +117,7 @@ namespace Mapsui
             set
             {
                 _resolution = value;
+                UpdateExtent();
                 OnViewportChanged();
             }
         }
@@ -127,6 +129,7 @@ namespace Mapsui
             set
             {
                 _width = value;
+                UpdateExtent();
                 OnViewportChanged();
             }
         }
@@ -138,6 +141,7 @@ namespace Mapsui
             set
             {
                 _height = value;
+                UpdateExtent();
                 OnViewportChanged();
             }
         }
@@ -155,6 +159,7 @@ namespace Mapsui
 
                 IsRotated = !double.IsNaN(_rotation) && _rotation > Constants.Epsilon && _rotation < 360 - Constants.Epsilon;
                 if (!IsRotated) _rotation = 0; // If not rotated set _rotation explicitly to exactly 0
+                UpdateExtent();
                 OnViewportChanged();
             }
         }
@@ -167,7 +172,6 @@ namespace Mapsui
         {
             get
             {
-                if (_modified) UpdateExtent();
                 return _extent;
             }
         }
@@ -334,8 +338,6 @@ namespace Mapsui
                 _extent.Max.X = rotatedBoundingBox.MaxX;
                 _extent.Max.Y = rotatedBoundingBox.MaxY;
             }
-
-            _modified = false;
         }
 
         public void SetSize(double width, double height)
@@ -345,6 +347,7 @@ namespace Mapsui
             _width = width;
             _height = height;
 
+            UpdateExtent();
             OnViewportChanged();
         }
 
@@ -355,6 +358,7 @@ namespace Mapsui
             _centerX = x;
             _centerY = y;
 
+            UpdateExtent();
             OnViewportChanged();
         }
 
@@ -373,6 +377,7 @@ namespace Mapsui
                 _animations = ZoomOnCenterAnimation.Create(this, x, y, resolution, duration);
             }
 
+            UpdateExtent();
             OnViewportChanged();
         }
 
@@ -392,6 +397,8 @@ namespace Mapsui
             {
                 _animations = CenterAnimation.Create(this, center.X, center.Y, duration, easing);
             }
+
+            UpdateExtent();
             OnViewportChanged();
         }
 
@@ -409,6 +416,7 @@ namespace Mapsui
                 _animations = ZoomAnimation.Create(this, resolution, duration, easing);
             }
 
+            UpdateExtent();
             OnViewportChanged();
         }
 
@@ -424,6 +432,8 @@ namespace Mapsui
             {
                 _animations = RotationAnimation.Create(this, rotation, duration, easing);
             }
+
+            UpdateExtent();
             OnViewportChanged();
         }
 
@@ -433,7 +443,6 @@ namespace Mapsui
         /// <param name="propertyName">Name of property that changed</param>
         private void OnViewportChanged([CallerMemberName] string? propertyName = null)
         {
-            _modified = true;
             ViewportChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
