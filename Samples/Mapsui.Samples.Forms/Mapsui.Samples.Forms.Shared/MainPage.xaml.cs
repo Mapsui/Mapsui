@@ -16,24 +16,52 @@ namespace Mapsui.Samples.Forms
         public MainPage()
         {
             InitializeComponent();
+            SetupToolbar();
 
             allSamples = AllSamples.GetSamples();
 
-            var categories = allSamples.Select(s => s.Category).Distinct().OrderBy(c => c);
-            picker.ItemsSource = categories.ToList<string>();
+            var categories = allSamples.Select(s => s.Category).Distinct().OrderBy(c => c).ToList();
+            categories.Insert(0, "All");
+            picker.ItemsSource = categories;
             picker.SelectedIndexChanged += PickerSelectedIndexChanged;
-            picker.SelectedItem = "Forms";
+            picker.SelectedItem = "All";
         }
 
         private void FillListWithSamples()
         {
             var selectedCategory = picker.SelectedItem?.ToString() ?? "";
-            listView.ItemsSource = allSamples.Where(s => s.Category == selectedCategory).Select(x => x.Name);
+            if (selectedCategory == "All")
+            {
+                listView.ItemsSource = allSamples.Select(x => x.Name);
+            }
+            else
+            {
+                listView.ItemsSource = allSamples
+                    .Where(s => s.Category == selectedCategory)
+                    .Select(x => x.Name);
+            }
         }
 
         private void PickerSelectedIndexChanged(object sender, EventArgs e)
         {
             FillListWithSamples();
+        }
+
+        private void LeakAction_Clicked(object sender, EventArgs e)
+        {
+            string report = Refs.Inspect();
+            NavigateToPage(new LeaksPage(report));
+        }
+
+        private void SetupToolbar()
+        {
+            var leakButton = new ToolbarItem
+            {
+                Text = "Leaks",
+                Order = ToolbarItemOrder.Secondary
+            };
+            leakButton.Clicked += LeakAction_Clicked;
+            ToolbarItems.Add(leakButton);
         }
 
         void OnSelection(object sender, SelectedItemChangedEventArgs e)
@@ -47,12 +75,24 @@ namespace Mapsui.Samples.Forms
             var sample = allSamples.Where(x => x.Name == sampleName).FirstOrDefault<ISample>();
 
             clicker = null;
-            if (sample is IFormsSample)
-                clicker = ((IFormsSample)sample).OnClick;
+            if (sample is IFormsSample fsample)
+                clicker = fsample.OnClick;
 
-            ((NavigationPage)Application.Current.MainPage).PushAsync(new MapPage(sample.Setup, clicker));
+            NavigateToPage(new MapPage(sample, clicker));
 
             listView.SelectedItem = null;
+        }
+
+        public static async void NavigateToPage(Page page)
+        {
+            try
+            {
+                await ((NavigationPage)Application.Current.MainPage).PushAsync(page);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error when navigating to page={page} exception={e}");
+            }
         }
     }
 }

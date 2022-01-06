@@ -15,9 +15,9 @@ namespace Mapsui.Samples.Forms
             Logger.LogDelegate += LogMethod;
 
             if (Device.Idiom == TargetIdiom.Phone)
-                MainPage = new NavigationPage(new Mapsui.Samples.Forms.MainPage());
+                MainPage = new NavigationPage(new MainPage());
             else
-                MainPage = new Mapsui.Samples.Forms.MainPageLarge();
+                MainPage = new MainPageLarge();
         }
 
         protected override void OnStart()

@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.Styles;
 using Xamarin.Essentials;
+using Mapsui.Samples.Common;
+using System.Diagnostics;
 
 namespace Mapsui.Samples.Forms
 {
@@ -22,9 +24,13 @@ namespace Mapsui.Samples.Forms
             InitializeComponent();
         }
 
-        public MapPage(Action<IMapControl> setup, Func<MapView?, MapClickedEventArgs, bool>? c = null)
+        public MapPage(ISample sample, Func<MapView?, MapClickedEventArgs, bool>? c = null)
         {
             InitializeComponent();
+            Refs.AddRef(this);
+            Refs.AddRef(mapView);
+
+            Title = sample.Name;
 
             mapView.RotationLock = false;
             mapView.UnSnapRotationDegrees = 30;
@@ -49,7 +55,7 @@ namespace Mapsui.Samples.Forms
             }
             catch (Exception) { }
 
-            setup(mapView);
+            sample.Setup(mapView);
 
             Clicker = c;
         }
@@ -58,6 +64,24 @@ namespace Mapsui.Samples.Forms
         {
             mapView.IsVisible = true;
             mapView.Refresh();
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            mapView.PinClicked -= OnPinClicked;
+            mapView.MapClicked -= OnMapClicked;
+            mapView.Info -= MapView_Info;
+
+            Compass.ReadingChanged -= Compass_ReadingChanged;
+            CrossGeolocator.Current.PositionChanged -= MyLocationPositionChanged;
+            CrossGeolocator.Current.PositionError -= MyLocationPositionError;
+
+            if (LeaksPage.DisposeMapView)
+            {
+                mapView.Dispose();
+            }
         }
 
         private void MapView_Info(object sender, UI.MapInfoEventArgs? e)

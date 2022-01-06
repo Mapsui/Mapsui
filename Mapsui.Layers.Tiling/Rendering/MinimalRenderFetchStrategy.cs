@@ -2,13 +2,12 @@ using System.Collections.Generic;
 using BruTile;
 using BruTile.Cache;
 using Mapsui.Extensions;
-using Mapsui.Layers;
 
 namespace Mapsui.Rendering
 {
     public class MinimalRenderFetchStrategy : IRenderFetchStrategy
     {
-        public IList<IFeature> Get(MRect? extent, double resolution, ITileSchema schema, ITileCache<RasterFeature?> memoryCache)
+        public IList<IFeature> Get(MRect? extent, double resolution, ITileSchema schema, ITileCache<IFeature?> memoryCache)
         {
             var result = new List<IFeature>();
             if (extent == null)
