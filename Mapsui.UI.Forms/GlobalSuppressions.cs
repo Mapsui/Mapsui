@@ -14,3 +14,4 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP007:Don't dispose injected.", Justification = "<Pending>", Scope = "member", Target = "~P:Mapsui.UI.Forms.MapControl.Navigator")]
 [assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP007:Don't dispose injected.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.UI.Forms.MapControl.CommonDispose(System.Boolean)")]
 [assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP008:Don't assign member with injected and created disposables.", Justification = "<Pending>", Scope = "member", Target = "~F:Mapsui.UI.Forms.MapControl._map")]
+[assembly: SuppressMessage("Usage", "VSTHRD100:Avoid async void methods", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.UI.Forms.MapControl.OnTouch(System.Object,SkiaSharp.Views.Forms.SKTouchEventArgs)")]
