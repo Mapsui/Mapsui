@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Mapsui.Utilities;
 using Mapsui.ViewportAnimations;
 
@@ -58,7 +59,7 @@ namespace Mapsui
             if (center == null) throw new ArgumentNullException(nameof(center));
 
             _viewport.SetCenterAndResolution(center.X, center.Y, resolution, duration, easing);
-            Navigated?.Invoke(this, ChangeType.Discrete);
+            OnNavigated(duration, ChangeType.Discrete);
 
         }
 
@@ -71,7 +72,7 @@ namespace Mapsui
         public void ZoomTo(double resolution, long duration = 0, Easing? easing = default)
         {
             _viewport.SetResolution(resolution, duration, easing);
-            Navigated?.Invoke(this, ChangeType.Discrete);
+            OnNavigated(duration, ChangeType.Discrete);
         }
 
         /// <summary>
@@ -90,28 +91,9 @@ namespace Mapsui
             var (worldCenterOfZoomX, worldCenterOfZoomY) = _viewport.ScreenToWorldXY(centerOfZoom.X, centerOfZoom.Y);
             _viewport.SetAnimations(ZoomAroundLocationAnimation.Create(_viewport, worldCenterOfZoomX, worldCenterOfZoomY, resolution,
                 _viewport.CenterX, _viewport.CenterY, _viewport.Resolution, duration));
-            Navigated?.Invoke(this, ChangeType.Discrete);
+            OnNavigated(duration, ChangeType.Discrete);
 
         }
-
-        ///// <summary>
-        ///// Calculates the new CenterOfMap based on the CenterOfZoom and the new resolution.
-        ///// The CenterOfZoom is not the same as the CenterOfMap. CenterOfZoom is the one place in
-        ///// the map that stays on the same location when zooming. In Mapsui is can be equal to the 
-        ///// CenterOfMap, for instance when using the +/- buttons. When using mouse wheel zoom the
-        ///// CenterOfZoom is the location of the mouse. 
-        ///// </summary>
-        ///// <param name="centerOfZoom"></param>
-        ///// <param name="newResolution"></param>
-        ///// <returns></returns>
-        //private (double x, double y) CalculateCenterOfMap(double centerOfZoomX, double centerOfZoomY, double newResolution)
-        //{
-        //    var ratio = newResolution / _viewport.Resolution;
-
-        //    return
-        //        (centerOfZoomX - (centerOfZoomX - _viewport.Center.X) * ratio,
-        //        centerOfZoomY - (centerOfZoomY - _viewport.Center.Y) * ratio);
-        //}
 
         /// <summary>
         /// Zoom in to the next resolution
@@ -185,7 +167,7 @@ namespace Mapsui
         public void CenterOn(MPoint center, long duration = 0, Easing? easing = default)
         {
             _viewport.SetCenter(center, duration, easing);
-            Navigated?.Invoke(this, ChangeType.Discrete);
+            OnNavigated(duration, ChangeType.Discrete);
         }
 
         /// <summary>
@@ -197,7 +179,7 @@ namespace Mapsui
         public void FlyTo(MPoint center, double maxResolution, long duration = 500)
         {
             _viewport.SetAnimations(FlyToAnimation.Create(_viewport, center, maxResolution, duration));
-            Navigated?.Invoke(this, ChangeType.Discrete);
+            OnNavigated(duration, ChangeType.Discrete);
         }
 
         /// <summary>
@@ -210,8 +192,7 @@ namespace Mapsui
         {
             _viewport.SetRotation(rotation, duration, easing);
 
-            // Todo: call Navigated with the end rotation
-            Navigated?.Invoke(this, ChangeType.Discrete);
+            OnNavigated(duration, ChangeType.Discrete);
         }
 
         /// <summary>
@@ -241,6 +222,13 @@ namespace Mapsui
         ~Navigator()
         {
             Dispose(false);
+        }
+
+        private void OnNavigated(long duration, ChangeType changeType)
+        {
+            // Note. Instead of a delay it may also be possible to call Navigated immediately with the viewport state
+            // that is the result of the animation.
+            Task.Delay((int)duration).ContinueWith(t => Navigated?.Invoke(this, changeType));
         }
     }
 }

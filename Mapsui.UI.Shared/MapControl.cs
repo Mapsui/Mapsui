@@ -98,7 +98,13 @@ namespace Mapsui.UI.Wpf
         {
             // Check, if we have to redraw the screen
 
-            if (_map?.UpdateAnimations() == false && !_viewport.UpdateAnimations() && !_refresh)
+            if (_map?.UpdateAnimations() == true)
+                _refresh = true;
+
+            if (_viewport.UpdateAnimations())
+                _refresh = true;
+
+            if (!_refresh)
                 return;
 
             if (_drawing)
