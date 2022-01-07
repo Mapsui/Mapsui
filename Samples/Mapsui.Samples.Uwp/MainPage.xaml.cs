@@ -86,7 +86,8 @@ namespace Mapsui.Samples.Uwp
                 Margin = new Thickness(4)
             };
 
-            radioButton.Click += (_, _) => {
+            radioButton.Click += (_, _) =>
+            {
                 MapControl.Map?.Layers.Clear();
                 MapControl.Info -= MapOnInfo;
                 sample.Setup(MapControl);

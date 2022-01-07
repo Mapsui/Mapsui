@@ -84,7 +84,7 @@ namespace Mapsui.Rendering.Skia
 
                 var pictureRecorder = new SKPictureRecorder();
 
-                using var skCanvas = pictureRecorder.BeginRecording(new SKRect(0,0,width, height));
+                using var skCanvas = pictureRecorder.BeginRecording(new SKRect(0, 0, width, height));
                 // because skia is a Vector format I don't have to scale pixels
                 if (Render(viewport, layers, background, 1, skCanvas)) return null;
                 return pictureRecorder.EndRecording();

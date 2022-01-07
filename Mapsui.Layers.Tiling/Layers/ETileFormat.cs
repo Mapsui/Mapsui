@@ -1,6 +1,6 @@
 namespace Mapsui.Layers;
 
-public enum ETileFormat 
+public enum ETileFormat
 {
     Png,
     Skp,

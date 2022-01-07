@@ -429,7 +429,8 @@ namespace Mapsui.UI.Wpf
 
         private void MapDataChanged(object? sender, DataChangedEventArgs? e)
         {
-            RunOnUIThread(() => {
+            RunOnUIThread(() =>
+            {
                 try
                 {
                     if (e == null)

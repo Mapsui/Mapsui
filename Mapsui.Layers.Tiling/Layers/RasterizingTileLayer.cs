@@ -8,11 +8,11 @@ using Mapsui.Rendering;
 
 namespace Mapsui.Layers
 {
-    public class RasterizingTileLayer : BaseLayer, IChildLayer,  IAsyncDataFetcher
+    public class RasterizingTileLayer : BaseLayer, IChildLayer, IAsyncDataFetcher
     {
         private readonly RasterizingTileProvider _tileProvider;
         private readonly TileLayer _tileLayer;
-        
+
         /// <summary>
         ///     Creates a RasterizingTileLayer which rasterizes a layer for performance
         /// </summary>
@@ -52,7 +52,7 @@ namespace Mapsui.Layers
                 maxExtraTiles,
                 tileFormat == ETileFormat.Picture ? FetchTile : null);
             ChildLayer = layer;
-            
+
         }
 
         /// <inheritdoc />
