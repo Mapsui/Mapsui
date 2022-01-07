@@ -19,8 +19,7 @@ public class RasterizingTileProvider : ITileSource
     private Attribution? _attribution;
     private readonly EStreamFormat _streamFormat;
 
-    public RasterizingTileProvider(
-        ILayer layer,
+    public RasterizingTileProvider(ILayer layer,
         double renderResolutionMultiplier = 1,
         IRenderer? rasterizer = null,
         float pixelDensity = 1,
@@ -70,4 +69,16 @@ public class RasterizingTileProvider : ITileSource
     public ITileSchema Schema => _tileSchema ??= new GlobalSphericalMercator();
     public string Name => _layer.Name;
     public Attribution Attribution => _attribution ??= new Attribution(_layer.Attribution.Text, _layer.Attribution.Url);
+
+    public object? GetPictureTile(TileInfo tileInfo)
+    {
+        var renderer = GetRenderer();
+        Schema.Resolutions.TryGetValue(tileInfo.Index.Level, out var tileResolution);
+
+        var resolution = tileResolution.UnitsPerPixel;
+        var viewPort = RasterizingLayer.CreateViewport(tileInfo.Extent.ToMRect(), resolution, _renderResolutionMultiplier, 1);
+        var result = renderer.RenderToPicture(viewPort, new[] { _layer });
+        _rasterizingLayers.Push(renderer);
+        return result;
+    }
 }

@@ -1,13 +1,18 @@
 using System;
+using System.Collections.Generic;
 using BruTile;
 using BruTile.Cache;
+using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Rendering;
 
 namespace Mapsui.Layers
 {
-    public class RasterizingTileLayer : TileLayer, IChildLayer
+    public class RasterizingTileLayer : BaseLayer, IChildLayer,  IAsyncDataFetcher
     {
+        private readonly RasterizingTileProvider _tileProvider;
+        private readonly TileLayer _tileLayer;
+        
         /// <summary>
         ///     Creates a RasterizingTileLayer which rasterizes a layer for performance
         /// </summary>
@@ -21,9 +26,8 @@ namespace Mapsui.Layers
         /// <param name="renderFetchStrategy"></param>
         /// <param name="minExtraTiles">Number of minimum extra tiles for memory cache</param>
         /// <param name="maxExtraTiles">Number of maximum extra tiles for memory cache</param>
-        /// <param name="fetchTileAsFeature">Fetch tile as feature</param>
         /// <param name="persistentCache">Persistent Cache</param>
-        /// <param name="streamFormat">Stream Format</param>
+        /// <param name="tileFormat">Stream Format</param>
         public RasterizingTileLayer(
             ILayer layer,
             double renderResolutionMultiplier = 1,
@@ -35,21 +39,68 @@ namespace Mapsui.Layers
             IRenderFetchStrategy? renderFetchStrategy = null,
             int minExtraTiles = -1,
             int maxExtraTiles = -1,
-            Func<TileInfo, RasterFeature?>? fetchTileAsFeature = null,
             IPersistentCache<byte[]>? persistentCache = null,
-            EStreamFormat streamFormat = EStreamFormat.Png)
-            : base(new RasterizingTileProvider(layer, renderResolutionMultiplier, rasterizer, pixelDensity, persistentCache, streamFormat),
-            minTiles,
-            maxTiles,
-            dataFetchStrategy,
-            renderFetchStrategy,
-            minExtraTiles,
-            maxExtraTiles,
-            fetchTileAsFeature)
+            ETileFormat tileFormat = ETileFormat.Png)
         {
+            _tileProvider = new RasterizingTileProvider(layer, renderResolutionMultiplier, rasterizer, pixelDensity, persistentCache, ToStreamFormat(tileFormat));
+            _tileLayer = new TileLayer(_tileProvider,
+                minTiles,
+                maxTiles,
+                dataFetchStrategy,
+                renderFetchStrategy,
+                minExtraTiles,
+                maxExtraTiles,
+                tileFormat == ETileFormat.Picture ? FetchTile : null);
             ChildLayer = layer;
+            
+        }
+
+        /// <inheritdoc />
+        public override IReadOnlyList<double> Resolutions => _tileLayer.Resolutions;
+
+        /// <inheritdoc />
+        public override MRect? Extent => _tileLayer.Extent;
+
+        /// <inheritdoc />
+        public override IEnumerable<IFeature> GetFeatures(MRect extent, double resolution)
+        {
+            return _tileLayer.GetFeatures(extent, resolution);
+        }
+
+        /// <inheritdoc />
+        public override void RefreshData(FetchInfo fetchInfo)
+        {
+            _tileLayer.RefreshData(fetchInfo);
+        }
+
+        private IFeature? FetchTile(TileInfo arg)
+        {
+            return new PictureFeature(_tileProvider.GetPictureTile(arg), arg.Extent.ToMRect());
+        }
+
+        private static EStreamFormat ToStreamFormat(ETileFormat streamFormat)
+        {
+            switch (streamFormat)
+            {
+                case ETileFormat.Png:
+                    return EStreamFormat.Png;
+                case ETileFormat.Picture:
+                case ETileFormat.Skp:
+                default:
+                    return EStreamFormat.Skp;
+            }
         }
 
         public ILayer ChildLayer { get; }
+
+        public void AbortFetch()
+        {
+            _tileLayer.AbortFetch();
+        }
+
+        public void ClearCache()
+        {
+            _tileLayer.ClearCache();
+        }
     }
 }

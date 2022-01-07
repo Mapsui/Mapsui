@@ -1,4 +1,8 @@
 ﻿using System;
+using Mapsui.Extensions;
+using Mapsui.Geometries;
+using Mapsui.Layers;
+using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using SkiaSharp;
 
@@ -90,6 +94,35 @@ namespace Mapsui.Rendering.Skia
             }
             dispose = false;
             return DefaultPaint;
+        }
+
+        public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, PictureFeature pictureFeature, float layerOpacity)
+        {
+            var opacity = layerOpacity * style.Opacity;
+            if (pictureFeature.Picture != null && pictureFeature.Extent != null)
+            {
+                var picture = (SKPicture)pictureFeature.Picture;
+                var extent = pictureFeature.Extent!;
+                if (viewport.IsRotated)
+                {
+                    var priorMatrix = canvas.TotalMatrix;
+
+                    var matrix = RasterRenderer.CreateRotationMatrix(viewport, extent, priorMatrix);
+
+                    canvas.SetMatrix(matrix);
+
+                    var destination = new BoundingBox(0.0, 0.0, extent.Width, extent.Height);
+
+                    PictureRenderer.Draw(canvas, picture, RasterRenderer.RoundToPixel(destination).ToSkia(), opacity);
+
+                    canvas.SetMatrix(priorMatrix);
+                }
+                else
+                {
+                    var destination = RasterRenderer.WorldToScreen(viewport, extent);
+                    PictureRenderer.Draw(canvas, picture, RasterRenderer.RoundToPixel(destination).ToSkia(), opacity);
+                }
+            }
         }
     }
 }

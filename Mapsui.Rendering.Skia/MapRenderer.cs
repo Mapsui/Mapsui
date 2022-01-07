@@ -72,7 +72,7 @@ namespace Mapsui.Rendering.Skia
             Render(canvas, viewport, widgets, 1);
         }
 
-        public SKPicture? RenderToPicture(IReadOnlyViewport? viewport, IEnumerable<ILayer> layers, Color? background = null)
+        public object? RenderToPicture(IReadOnlyViewport? viewport, IEnumerable<ILayer> layers, Color? background = null)
         {
             if (viewport == null)
                 return null;
@@ -123,7 +123,7 @@ namespace Mapsui.Rendering.Skia
 
                         break;
                     case EStreamFormat.Skp:
-                        var picture = RenderToPicture(viewport, layers, background);
+                        var picture = (SKPicture?)RenderToPicture(viewport, layers, background);
                         picture?.Serialize(memoryStream);
                         break;
                 }
@@ -220,6 +220,8 @@ namespace Mapsui.Rendering.Skia
                 RectRenderer.Draw(canvas, viewport, style, rectFeature, layerOpacity * style.Opacity);
             else if (feature is RasterFeature rasterFeature)
                 RasterRenderer.Draw(canvas, viewport, style, rasterFeature, rasterFeature.Raster, layerOpacity * style.Opacity, _tileCache, _currentIteration);
+            else if (feature is PictureFeature pictureFeature)
+                PictureRenderer.Draw(canvas, viewport, style, pictureFeature, layerOpacity * style.Opacity);
         }
 
         private void Render(object canvas, IReadOnlyViewport viewport, IEnumerable<IWidget> widgets, float layerOpacity)

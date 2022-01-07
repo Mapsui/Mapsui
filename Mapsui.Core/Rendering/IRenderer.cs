@@ -11,6 +11,7 @@ namespace Mapsui.Rendering
     {
         void Render(object target, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, IEnumerable<IWidget> widgets, Color? background = null);
         MemoryStream? RenderToBitmapStream(IReadOnlyViewport viewport, IEnumerable<ILayer> layers, Color? background = null, float pixelDensity = 1, EStreamFormat streamFormat = EStreamFormat.Png);
+        object? RenderToPicture(IReadOnlyViewport viewport, IEnumerable<ILayer> layers, Color? background = null);
         ISymbolCache SymbolCache { get; }
         IDictionary<Type, IWidgetRenderer> WidgetRenders { get; }
         IDictionary<Type, IStyleRenderer> StyleRenderers { get; }
