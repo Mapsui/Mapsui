@@ -21,7 +21,7 @@ namespace Mapsui.Layers
         {
             if (_fetchInfo == null) return;
 
-            Task.Factory.StartNew(() => {
+            Task.Run(() => {
                 _animatedFeatures.AddFeatures(_dataSource.GetFeatures(_fetchInfo) ?? new List<PointFeature>());
                 OnDataChanged(new DataChangedEventArgs());
             });

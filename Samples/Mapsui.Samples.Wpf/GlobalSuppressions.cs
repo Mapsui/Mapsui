@@ -6,3 +6,4 @@
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Usage", "VSTHRD001:Avoid legacy thread switching APIs", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Wpf.Window1.LogMethod(Mapsui.Logging.LogLevel,System.String,System.Exception)")]
+[assembly: SuppressMessage("Usage", "VSTHRD110:Observe result of async calls", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Wpf.Window1.LogMethod(Mapsui.Logging.LogLevel,System.String,System.Exception)")]
