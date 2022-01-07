@@ -106,7 +106,6 @@ namespace Mapsui.Rendering.Skia
                 var height = (int)viewport.Height;
 
                 var memoryStream = new MemoryStream();
-                var memoryStream2 = new MemoryStream();
 
                 switch (streamFormat)
                 {
@@ -119,7 +118,7 @@ namespace Mapsui.Rendering.Skia
                             if (Render(viewport, layers, background, pixelDensity, surface?.Canvas)) return null;
                             using var image = surface!.Snapshot();
                             using var data = image.Encode(); // Default format is Png
-                            data.SaveTo(memoryStream2);
+                            data.SaveTo(memoryStream);
                         }
 
                         break;

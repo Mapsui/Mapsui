@@ -40,7 +40,7 @@ namespace Mapsui.Rendering.Skia
                 if (extent == null)
                     return;
 
-                if (bitmapInfo.Bitmap == null)
+                if (bitmapInfo.Bitmap == null && bitmapInfo.Picture == null)
                     return;
 
                 if (viewport.IsRotated)
@@ -53,14 +53,30 @@ namespace Mapsui.Rendering.Skia
 
                     var destination = new BoundingBox(0.0, 0.0, extent.Width, extent.Height);
 
-                    BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap, destination.ToSkia(), opacity);
+                    switch (bitmapInfo.Type)
+                    {
+                        case BitmapType.Bitmap:
+                            BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap, RoundToPixel(destination).ToSkia(), opacity);
+                            break;
+                        case BitmapType.Picture:
+                            PictureRenderer.Draw(canvas, bitmapInfo.Picture, RoundToPixel(destination).ToSkia(), opacity);
+                            break;
+                    }
 
                     canvas.SetMatrix(priorMatrix);
                 }
                 else
                 {
                     var destination = WorldToScreen(viewport, extent);
-                    BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap, RoundToPixel(destination).ToSkia(), opacity);
+                    switch (bitmapInfo.Type)
+                    {
+                        case BitmapType.Bitmap:
+                            BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap, RoundToPixel(destination).ToSkia(), opacity);
+                            break;
+                        case BitmapType.Picture:
+                            PictureRenderer.Draw(canvas, bitmapInfo.Picture, RoundToPixel(destination).ToSkia(), opacity);
+                            break;
+                    }
                 }
             }
             catch (Exception ex)

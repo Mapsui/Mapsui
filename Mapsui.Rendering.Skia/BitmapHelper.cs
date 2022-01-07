@@ -16,6 +16,16 @@ namespace Mapsui.Rendering.Skia
             // which has all information. So we should have a SymbolImageRegistry in which we store a
             // SymbolImage. Which holds the type, data and other parameters.
 
+            if (bitmapStream is SKImage skBitmap)
+            {
+                return new BitmapInfo { Bitmap = skBitmap, };
+            }
+
+            if (bitmapStream is SKPicture skPicture)
+            {
+                return new BitmapInfo { Picture = skPicture };
+            }
+
             if (bitmapStream is string str)
             {
                 if (str.ToLower().Contains("<svg"))
@@ -36,8 +46,7 @@ namespace Mapsui.Rendering.Skia
                 }
                 else if (data.IsSkp())
                 {
-                    var skPicture = SKPicture.Deserialize(data);
-                    return null;
+                    return new BitmapInfo { Picture = SKPicture.Deserialize(data) };
                 }
 
                 using var skData = SKData.CreateCopy(data);
