@@ -72,7 +72,7 @@ namespace Mapsui.Rendering.Skia
             Render(canvas, viewport, widgets, 1);
         }
 
-        public SKPicture? RenderToPicture(IReadOnlyViewport? viewport, IEnumerable<ILayer> layers, Color? background = null, float pixelDensity = 1)
+        public SKPicture? RenderToPicture(IReadOnlyViewport? viewport, IEnumerable<ILayer> layers, Color? background = null)
         {
             if (viewport == null)
                 return null;
@@ -85,7 +85,8 @@ namespace Mapsui.Rendering.Skia
                 var pictureRecorder = new SKPictureRecorder();
 
                 using var skCanvas = pictureRecorder.BeginRecording(new SKRect(0,0,width, height));
-                if (Render(viewport, layers, background, pixelDensity, skCanvas)) return null;
+                // because skia is a Vector format I don't have to scale pixels
+                if (Render(viewport, layers, background, 1, skCanvas)) return null;
                 return pictureRecorder.EndRecording();
             }
             catch (Exception ex)
@@ -102,14 +103,13 @@ namespace Mapsui.Rendering.Skia
 
             try
             {
-                var width = (int)viewport.Width;
-                var height = (int)viewport.Height;
-
                 var memoryStream = new MemoryStream();
 
                 switch (streamFormat)
                 {
                     case EStreamFormat.Png:
+                        var width = (int)viewport.Width;
+                        var height = (int)viewport.Height;
                         var imageInfo = new SKImageInfo((int)Math.Round(width * pixelDensity), (int)Math.Round(height * pixelDensity),
                             SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
 
@@ -123,7 +123,7 @@ namespace Mapsui.Rendering.Skia
 
                         break;
                     case EStreamFormat.Skp:
-                        var picture = RenderToPicture(viewport, layers, background, pixelDensity);
+                        var picture = RenderToPicture(viewport, layers, background);
                         picture?.Serialize(memoryStream);
                         break;
                 }
