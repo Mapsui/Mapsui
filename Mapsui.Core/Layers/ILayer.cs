@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Mapsui.Animations;
 using Mapsui.Fetcher;
 using Mapsui.Styles;
 using Mapsui.Widgets;
@@ -27,7 +28,7 @@ namespace Mapsui.Layers
     /// <summary>
     /// Interface for map layers
     /// </summary>
-    public interface ILayer : INotifyPropertyChanged, IDisposable
+    public interface ILayer : IAnimatable, INotifyPropertyChanged, IDisposable
     {
         /// <summary>
         /// Numerical Id of layer
@@ -123,9 +124,5 @@ namespace Mapsui.Layers
         /// as in the case of editing of a geometry.
         /// </summary>
         void DataHasChanged();
-
-        /// <returns>Returns true if animations are running and a graphics update is needed.</returns>
-        bool UpdateAnimations();
-
     }
 }

@@ -96,17 +96,10 @@ namespace Mapsui.UI.Wpf
 
         private void InvalidateTimerCallback(object? state)
         {
-            // Check, if we have to redraw the screen, because a animation is running or a refresh is wished
+            // Check, if we have to redraw the screen
 
-            var layerAnimationsRunning = false;
-            foreach (var layer in _map.Layers)
-            {
-                if (layer.UpdateAnimations())
-                    layerAnimationsRunning = true;
-            }
-
-            if (!_viewport.UpdateAnimations() && !_refresh && !layerAnimationsRunning)
-                return; // Todo: Remove UpdateAnimations fully from viewport and do updates inside viewport
+            if (_map?.UpdateAnimations() == false && !_viewport.UpdateAnimations() && !_refresh)
+                return;
 
             if (_drawing)
             {

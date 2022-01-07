@@ -221,7 +221,7 @@ namespace Mapsui.Layers
             GC.SuppressFinalize(this);
         }
 
-        virtual public bool UpdateAnimations()
+        public virtual bool UpdateAnimations()
         {
             return false; // By default there are no animation and nothing to update
         }
