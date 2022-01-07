@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
+using System.Text;
 using Mapsui.Geometries;
 using Mapsui.GeometryLayer;
 using Mapsui.Layers;
@@ -70,7 +72,7 @@ namespace Mapsui.Rendering.Skia
             Render(canvas, viewport, widgets, 1);
         }
 
-        public object? RenderToPicture(IReadOnlyViewport? viewport, IEnumerable<ILayer> layers, Color? background = null, float pixelDensity = 1)
+        public SKPicture? RenderToPicture(IReadOnlyViewport? viewport, IEnumerable<ILayer> layers, Color? background = null, float pixelDensity = 1)
         {
             if (viewport == null)
                 return null;
@@ -93,7 +95,7 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        public MemoryStream? RenderToBitmapStream(IReadOnlyViewport? viewport, IEnumerable<ILayer> layers, Color? background = null, float pixelDensity = 1)
+        public MemoryStream? RenderToBitmapStream(IReadOnlyViewport? viewport, IEnumerable<ILayer> layers, Color? background = null, float pixelDensity = 1, EStreamFormat streamFormat = EStreamFormat.Png)
         {
             if (viewport == null)
                 return null;
@@ -103,16 +105,32 @@ namespace Mapsui.Rendering.Skia
                 var width = (int)viewport.Width;
                 var height = (int)viewport.Height;
 
-                var imageInfo = new SKImageInfo((int)Math.Round(width * pixelDensity), (int)Math.Round(height * pixelDensity),
-                    SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
-
-                using var surface = SKSurface.Create(imageInfo);
-                if (Render(viewport, layers, background, pixelDensity, surface?.Canvas)) return null;
-                using var image = surface!.Snapshot();
-                using var data = image.Encode();
                 var memoryStream = new MemoryStream();
-                data.SaveTo(memoryStream);
+                var memoryStream2 = new MemoryStream();
+
+                switch (streamFormat)
+                {
+                    case EStreamFormat.Png:
+                        var imageInfo = new SKImageInfo((int)Math.Round(width * pixelDensity), (int)Math.Round(height * pixelDensity),
+                            SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
+
+                        using (var surface = SKSurface.Create(imageInfo))
+                        {
+                            if (Render(viewport, layers, background, pixelDensity, surface?.Canvas)) return null;
+                            using var image = surface!.Snapshot();
+                            using var data = image.Encode(); // Default format is Png
+                            data.SaveTo(memoryStream2);
+                        }
+
+                        break;
+                    case EStreamFormat.Skp:
+                        var picture = RenderToPicture(viewport, layers, background, pixelDensity);
+                        picture?.Serialize(memoryStream);
+                        break;
+                }
+
                 return memoryStream;
+
             }
             catch (Exception ex)
             {

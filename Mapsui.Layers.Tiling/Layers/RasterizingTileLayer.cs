@@ -23,6 +23,7 @@ namespace Mapsui.Layers
         /// <param name="maxExtraTiles">Number of maximum extra tiles for memory cache</param>
         /// <param name="fetchTileAsFeature">Fetch tile as feature</param>
         /// <param name="persistentCache">Persistent Cache</param>
+        /// <param name="streamFormat">Stream Format</param>
         public RasterizingTileLayer(
             ILayer layer,
             double renderResolutionMultiplier = 1,
@@ -35,8 +36,9 @@ namespace Mapsui.Layers
             int minExtraTiles = -1,
             int maxExtraTiles = -1,
             Func<TileInfo, RasterFeature?>? fetchTileAsFeature = null,
-            IPersistentCache<byte[]>? persistentCache = null)
-            : base(new RasterizingTileProvider(layer, renderResolutionMultiplier, rasterizer, pixelDensity, persistentCache),
+            IPersistentCache<byte[]>? persistentCache = null,
+            EStreamFormat streamFormat = EStreamFormat.Png)
+            : base(new RasterizingTileProvider(layer, renderResolutionMultiplier, rasterizer, pixelDensity, persistentCache, streamFormat),
             minTiles,
             maxTiles,
             dataFetchStrategy,

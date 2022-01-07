@@ -17,18 +17,21 @@ public class RasterizingTileProvider : ITileSource
     private readonly ILayer _layer;
     private ITileSchema? _tileSchema;
     private Attribution? _attribution;
+    private readonly EStreamFormat _streamFormat;
 
     public RasterizingTileProvider(
         ILayer layer,
         double renderResolutionMultiplier = 1,
         IRenderer? rasterizer = null,
         float pixelDensity = 1,
-        IPersistentCache<byte[]>? persistentCache = null)
+        IPersistentCache<byte[]>? persistentCache = null,
+        EStreamFormat streamFormat = EStreamFormat.Png)
     {
         _layer = layer;
         _renderResolutionMultiplier = renderResolutionMultiplier;
         _rasterizer = rasterizer;
         _pixelDensity = pixelDensity;
+        _streamFormat = streamFormat;
         PersistentCache = persistentCache ?? new NullCache();
     }
 
@@ -45,7 +48,7 @@ public class RasterizingTileProvider : ITileSource
             var resolution = tileResolution.UnitsPerPixel;
             var viewPort = RasterizingLayer.CreateViewport(tileInfo.Extent.ToMRect(), resolution,
                 _renderResolutionMultiplier, 1);
-            using var stream = renderer.RenderToBitmapStream(viewPort, new[] { _layer }, pixelDensity: _pixelDensity);
+            using var stream = renderer.RenderToBitmapStream(viewPort, new[] { _layer }, pixelDensity: _pixelDensity, streamFormat: _streamFormat);
             _rasterizingLayers.Push(renderer);
             result = stream?.ToArray();
             PersistentCache?.Add(tileInfo.Index, result ?? Array.Empty<byte>());

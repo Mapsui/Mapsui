@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Mapsui.Layers;
 using Mapsui.Layers.Tiling;
 using Mapsui.Providers;
+using Mapsui.Rendering;
 using Mapsui.Styles;
 using Mapsui.UI;
 
@@ -24,7 +25,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            map.Layers.Add(new RasterizingTileLayer(CreateRandomPointLayer(), pixelDensity: pixelDensity));
+            map.Layers.Add(new RasterizingTileLayer(CreateRandomPointLayer(), pixelDensity: pixelDensity, streamFormat: EStreamFormat.Skp));
             var extent = map.Layers[1].Extent!.Grow(map.Layers[1].Extent!.Width * 0.1);
             map.Home = n => n.NavigateTo(extent);
             return map;
