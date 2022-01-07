@@ -79,8 +79,8 @@ namespace Mapsui.Rendering.Skia
 
             try
             {
-                var width = (int)viewport.Width;
-                var height = (int)viewport.Height;
+                var width = (float)viewport.Width;
+                var height = (float)viewport.Height;
 
                 var pictureRecorder = new SKPictureRecorder();
 
