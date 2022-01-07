@@ -203,9 +203,7 @@ namespace Mapsui.UI.Wpf
                 else if (_downMousePosition != null && IsClick(mousePosition, _downMousePosition))
                 {
                     HandleFeatureInfo(e);
-                    var mapInfoEventArgs = InvokeInfo(mousePosition, _downMousePosition, e.ClickCount);
-                    if (mapInfoEventArgs?.Handled == false)
-                        OnInfo(mapInfoEventArgs);
+                    OnInfo(InvokeInfo(mousePosition, _downMousePosition, e.ClickCount));
                 }
             }
 
