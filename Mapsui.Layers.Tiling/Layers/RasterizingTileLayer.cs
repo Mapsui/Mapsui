@@ -51,6 +51,7 @@ namespace Mapsui.Layers
                 minExtraTiles,
                 maxExtraTiles,
                 tileFormat == ETileFormat.Picture ? FetchTile : null);
+            _tileLayer.DataChanged += tileLayer_DataChanged;
             ChildLayer = layer;
 
         }
@@ -71,6 +72,11 @@ namespace Mapsui.Layers
         public override void RefreshData(FetchInfo fetchInfo)
         {
             _tileLayer.RefreshData(fetchInfo);
+        }
+
+        private void tileLayer_DataChanged(object sender, DataChangedEventArgs e)
+        {
+            OnDataChanged(e);
         }
 
         private IFeature? FetchTile(TileInfo arg)
