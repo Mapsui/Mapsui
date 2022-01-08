@@ -155,13 +155,13 @@ namespace Mapsui.Layers
 
         override public bool UpdateAnimations()
         {
-            bool areAnimationsRuning = false;
+            bool areAnimationsRunning = false;
             foreach (var animation in Animations)
             {
                 if (animation())
-                    areAnimationsRuning = true;
+                    areAnimationsRunning = true;
             }
-            return areAnimationsRuning;
+            return areAnimationsRunning;
         }
     }
 }

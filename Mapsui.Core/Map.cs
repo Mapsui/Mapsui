@@ -336,15 +336,15 @@ namespace Mapsui
 
         public bool UpdateAnimations()
         {
-            var areAnimationsRuning = false;
+            var areAnimationsRunning = false;
 
             foreach (var layer in Layers)
             {
                 if (layer.UpdateAnimations())
-                    areAnimationsRuning = true;
+                    areAnimationsRunning = true;
             }
 
-            return areAnimationsRuning;
+            return areAnimationsRunning;
         }
     }
 }
