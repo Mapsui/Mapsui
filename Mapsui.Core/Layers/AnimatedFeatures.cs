@@ -12,7 +12,7 @@ namespace Mapsui.Layers
         Linear
     }
 
-    public class AnimatedFeatures: IAnimatable
+    public class AnimatedFeatures : IAnimatable
     {
         private List<AnimatedFeature> _cache = new();
         private long _startTimeAnimation;
@@ -50,10 +50,6 @@ namespace Mapsui.Layers
         public IEnumerable<IFeature> GetFeatures()
         {
             LogAllFeatures(_cache);
-
-            var progress = CalculateProgress(_startTimeAnimation, AnimationDuration, Function);
-            if (!Completed(progress)) InterpolateAnimatedPosition(_cache, progress, DistanceThreshold);
-            else _animating = false; ;
             return _cache.Select(i => i.Feature);
         }
 
@@ -61,7 +57,7 @@ namespace Mapsui.Layers
         {
             return progress >= 1;
         }
-  
+
         private static void LogAllFeatures(IEnumerable<AnimatedFeature> animatedFeatures)
         {
             if (!_first) return;
@@ -126,7 +122,10 @@ namespace Mapsui.Layers
 
         public bool UpdateAnimations()
         {
-            // Todo: Do the interpolation in here.
+            var progress = CalculateProgress(_startTimeAnimation, AnimationDuration, Function);
+            if (!Completed(progress)) InterpolateAnimatedPosition(_cache, progress, DistanceThreshold);
+            else _animating = false;
+
             return _animating;
         }
 
