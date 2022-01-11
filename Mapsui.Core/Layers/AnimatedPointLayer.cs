@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Mapsui.Fetcher;
 using Mapsui.Providers;
 
@@ -14,7 +13,6 @@ namespace Mapsui.Layers
         public AnimatedPointLayer(IProvider<PointFeature> dataSource)
         {
             _dataSource = dataSource;
-            _animatedFeatures.AnimatedPositionChanged += (_, _) => OnDataChanged(new DataChangedEventArgs());
         }
 
         public void UpdateData()
@@ -35,6 +33,11 @@ namespace Mapsui.Layers
         public override void RefreshData(FetchInfo fetchInfo)
         {
             _fetchInfo = fetchInfo;
+        }
+
+        public override bool UpdateAnimations()
+        {
+            return _animatedFeatures.UpdateAnimations();
         }
     }
 }

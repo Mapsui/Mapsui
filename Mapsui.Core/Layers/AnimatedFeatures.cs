@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
+using Mapsui.Animations;
 
 namespace Mapsui.Layers
 {
@@ -12,12 +12,11 @@ namespace Mapsui.Layers
         Linear
     }
 
-    public class AnimatedFeatures : IDisposable
+    public class AnimatedFeatures: IAnimatable
     {
-        private readonly Timer _animationTimer;
         private List<AnimatedFeature> _cache = new();
         private long _startTimeAnimation;
-        private readonly int _millisecondsBetweenUpdates;
+        private bool _animating = false;
 
         /// <summary>
         /// When the distance between the current and the previous position is larger
@@ -26,21 +25,17 @@ namespace Mapsui.Layers
         /// </summary>
         public double DistanceThreshold { get; set; }
 
-        public AnimatedFeatures(int millisecondsBetweenUpdates = 8)
+        public AnimatedFeatures()
         {
             AnimationDuration = 1000;
             IdField = "ID";
             Function = EasingFunction.CubicEaseOut;
             DistanceThreshold = double.MaxValue;
-            _millisecondsBetweenUpdates = millisecondsBetweenUpdates;
-            _animationTimer = new Timer(AnimationCallback, this, Timeout.Infinite, Timeout.Infinite);
         }
 
         public string IdField { get; set; }
         public int AnimationDuration { get; set; }
         public EasingFunction Function { get; set; }
-
-        public event EventHandler? AnimatedPositionChanged;
 
         public void AddFeatures(IEnumerable<PointFeature> features)
         {
@@ -48,7 +43,7 @@ namespace Mapsui.Layers
 
             _cache = ConvertToAnimatedFeatures(features.ToList(), previousCache, IdField);
             _startTimeAnimation = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
-            _animationTimer.Change(_millisecondsBetweenUpdates, _millisecondsBetweenUpdates);
+            _animating = true;
             _first = true;
         }
 
@@ -58,45 +53,19 @@ namespace Mapsui.Layers
 
             var progress = CalculateProgress(_startTimeAnimation, AnimationDuration, Function);
             if (!Completed(progress)) InterpolateAnimatedPosition(_cache, progress, DistanceThreshold);
-            else _animationTimer.Change(Timeout.Infinite, Timeout.Infinite);
+            else _animating = false; ;
             return _cache.Select(i => i.Feature);
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                this._animationTimer.Dispose();
-            }
         }
 
         private static bool Completed(double progress)
         {
             return progress >= 1;
         }
-
-        private void OnAnimatedPositionChanged()
-        {
-            AnimatedPositionChanged?.Invoke(this, EventArgs.Empty);
-        }
-
-        private static void AnimationCallback(object state)
-        {
-            var animatedPointLayer = (AnimatedFeatures)state;
-            animatedPointLayer.OnAnimatedPositionChanged();
-        }
-
+  
         private static void LogAllFeatures(IEnumerable<AnimatedFeature> animatedFeatures)
         {
             if (!_first) return;
             _first = false;
-            _counter++;
 
             foreach (var animatedFeature in animatedFeatures)
             {
@@ -112,7 +81,6 @@ namespace Mapsui.Layers
             return features.Select(f => new AnimatedFeature(f, FindPreviousPoint(previousItems, f, idField))).ToList();
         }
 
-        private static int _counter;
         private static bool _first = true;
 
         private static void InterpolateAnimatedPosition(IEnumerable<AnimatedFeature> items, double progress, double threshold)
@@ -154,6 +122,12 @@ namespace Mapsui.Layers
         private static double CubicEaseOut(double d, double t)
         {
             return ((t = (t / d) - 1) * t * t) + 1;
+        }
+
+        public bool UpdateAnimations()
+        {
+            // Todo: Do the interpolation in here.
+            return _animating;
         }
 
         private class AnimatedFeature
