@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using Mapsui.Fetcher;
 using Mapsui.Providers;
 
-namespace Mapsui.Layers.AnimatedLayers
-{
+namespace Mapsui.Layers.AnimatedLayers;
+
     public class AnimatedPointLayer : BaseLayer
     {
         private readonly IProvider<PointFeature> _dataSource;
@@ -40,4 +40,4 @@ namespace Mapsui.Layers.AnimatedLayers
             return _animatedFeatures.UpdateAnimations();
         }
     }
-}
+
