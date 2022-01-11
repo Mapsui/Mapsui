@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Layers.AnimatedLayers;
 using Mapsui.Layers.Tiling;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;

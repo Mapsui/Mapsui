@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Mapsui.Fetcher;
 using Mapsui.Providers;
 
-namespace Mapsui.Layers
+namespace Mapsui.Layers.AnimatedLayers
 {
     public class AnimatedPointLayer : BaseLayer
     {

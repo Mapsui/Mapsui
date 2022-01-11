@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Mapsui.Animations;
 using Mapsui.Layers.AnimationLayers;
 
-namespace Mapsui.Layers
+namespace Mapsui.Layers.AnimatedLayers
 {
     public enum EasingFunction
     {
@@ -118,7 +117,7 @@ namespace Mapsui.Layers
 
         private static double CubicEaseOut(double d, double t)
         {
-            return ((t = (t / d) - 1) * t * t) + 1;
+            return (t = t / d - 1) * t * t + 1;
         }
 
         public bool UpdateAnimations()
