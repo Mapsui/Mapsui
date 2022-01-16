@@ -61,17 +61,17 @@ namespace Mapsui.Utilities
         public bool Repeat { get; }
 
         /// <summary>
-        /// Time, where this AnimationEntry<Viewport> has started
+        /// Time, where this AnimationEntry has started
         /// </summary>
         internal long StartTicks { get; set; }
 
         /// <summary>
-        /// Time, where this AnimationEntry<Viewport> should end
+        /// Time, where this AnimationEntry should end
         /// </summary>
         internal long EndTicks { get; set; }
 
         /// <summary>
-        /// Lengths of this AnimationEntry<Viewport> in ticks
+        /// Lengths of this AnimationEntry in ticks
         /// </summary>
         internal long DurationTicks { get; set; }
 
@@ -95,7 +95,7 @@ namespace Mapsui.Utilities
         }
 
         /// <summary>
-        /// When Done is true the AnimationEntry<Viewport> can removed. The Animation class will set this to true.
+        /// When Done is true the AnimationEntry can removed. The Animation class will set this to true.
         /// </summary>
         internal bool Done { get; set; }
 
