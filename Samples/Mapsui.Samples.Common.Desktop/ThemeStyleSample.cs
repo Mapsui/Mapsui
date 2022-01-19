@@ -10,8 +10,7 @@ using Mapsui.Samples.Common.Maps;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.UI;
-using Mapsui.Utilities;
-
+using Mapsui.Extensions;
 
 namespace Mapsui.Samples.Common.Desktop
 {

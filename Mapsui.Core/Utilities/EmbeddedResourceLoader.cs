@@ -3,8 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Mapsui.Styles;
-
+using Mapsui.Extensions;
 namespace Mapsui.Utilities
 {
     public static class EmbeddedResourceLoader
@@ -27,30 +26,10 @@ namespace Mapsui.Utilities
             return result;
         }
 
-        public static int LoadBitmapId(this Type typeInAssemblyOfEmbeddedResource, string relativePathToEmbeddedResource)
-        {
-            var assembly = typeInAssemblyOfEmbeddedResource.GetTypeInfo().Assembly;
-            var fullName = assembly.GetFullName(relativePathToEmbeddedResource);
-            if (!BitmapRegistry.Instance.TryGetBitmapId(fullName, out var bitmapId))
-            {
-                var result = Load(relativePathToEmbeddedResource, typeInAssemblyOfEmbeddedResource);
-                bitmapId = BitmapRegistry.Instance.Register(result, fullName);
-                return bitmapId;
-            }
-
-            return bitmapId;
-        }
-
-        public static string GetFullName(this Assembly assembly, string relativePathToEmbeddedResource)
-        {
-            var fullName = GetAssemblyName(assembly) + "." + relativePathToEmbeddedResource;
-            return fullName;
-        }
-
         private static string ConstructExceptionMessage(string path, Assembly assembly)
         {
             const string format = "The resource name '{0}' was not found in assembly '{1}'.";
-            var message = string.Format(format, path, GetAssemblyName(assembly));
+            var message = string.Format(format, path, assembly.GetAssemblyName());
 
             var resourceNames = assembly.GetManifestResourceNames();
             if (resourceNames.Length == 0)
@@ -65,16 +44,11 @@ namespace Mapsui.Utilities
 
             if (similarNames.Length <= 0) return message;
 
-            var nameLength = GetAssemblyName(assembly).Length;
+            var nameLength = assembly.GetAssemblyName().Length;
             similarNames = similarNames.Select(fullName => fullName.Remove(0, nameLength + 1)).ToArray();
             message += " Did you mean: " + string.Join("\n ", similarNames.ToArray()) + ".";
             Debug.WriteLine(message);
             return message;
-        }
-
-        private static string GetAssemblyName(Assembly assembly)
-        {
-            return new AssemblyName(assembly.FullName).Name;
         }
     }
 }

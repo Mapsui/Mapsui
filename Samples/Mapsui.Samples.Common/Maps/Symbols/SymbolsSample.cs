@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Mapsui.Layers;
 using Mapsui.Layers.Tiling;
 using Mapsui.Providers;
@@ -8,6 +7,7 @@ using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Utilities;
+using Mapsui.Extensions;
 
 namespace Mapsui.Samples.Common.Maps
 {

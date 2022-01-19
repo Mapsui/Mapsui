@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Reflection;
+using Mapsui.Extensions;
 using Mapsui.Styles;
 using SkiaSharp;
 using Svg.Skia;
