@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Reflection;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -7,7 +6,7 @@ using Mapsui.Providers.Shapefile;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.UI;
-using Mapsui.Utilities;
+using Mapsui.Extensions;
 
 namespace Mapsui.Samples.Common.Desktop
 {

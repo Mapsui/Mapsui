@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Layers.Tiling;
 using Mapsui.Providers;
