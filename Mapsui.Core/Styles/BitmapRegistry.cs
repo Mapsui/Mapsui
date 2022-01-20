@@ -10,7 +10,7 @@ namespace Mapsui.Styles
     {
         private static BitmapRegistry? _instance;
         private readonly IDictionary<int, object> _register = new Dictionary<int, object>();
-        private readonly IDictionary<object, int> _lookup = new Dictionary<object, int>();
+        private readonly IDictionary<string, int> _lookup = new Dictionary<string, int>();
         private BitmapRegistry() { }
         private int _counter;
 
@@ -25,7 +25,7 @@ namespace Mapsui.Styles
         /// <param name="bitmapData">Bitmap data to register</param>
         /// <param name="key">key for accessing bitmap</param>
         /// <returns>Id of registered bitmap data</returns>
-        public int Register(object bitmapData, object? key = null)
+        public int Register(object bitmapData, string? key = null)
         {
             CheckBitmapData(bitmapData);
 
@@ -99,7 +99,7 @@ namespace Mapsui.Styles
         /// <param name="key">key</param>
         /// <param name="bitmapId">bitmap id</param>
         /// <returns>true if found</returns>
-        public bool TryGetBitmapId(object key, out int bitmapId)
+        public bool TryGetBitmapId(string key, out int bitmapId)
         {
             return _lookup.TryGetValue(key, out bitmapId);
         }
