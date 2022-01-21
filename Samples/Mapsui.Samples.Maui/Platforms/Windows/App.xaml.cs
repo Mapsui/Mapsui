@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Versioning;
+using Mapsui.UI.Maui;
 using Microsoft.Maui;
 using Microsoft.UI.Xaml;
 using Microsoft.Maui.Hosting;
@@ -21,6 +22,10 @@ namespace Mapsui.Samples.Maui.WinUI
         /// </summary>
         public App()
         {
+            // GPU does not work currently on MAUI
+            // See https://github.com/mono/SkiaSharp/issues/1893
+            MapControl.UseGPU = false;
+
             this.InitializeComponent();
         }
 

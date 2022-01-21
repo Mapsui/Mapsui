@@ -10,9 +10,9 @@
                 <ColumnDefinition Width="5*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="75"/>
             </Grid.RowDefinitions>
             <Picker x:Name="picker" 
                     Grid.Row="0" Grid.Column="0" />
