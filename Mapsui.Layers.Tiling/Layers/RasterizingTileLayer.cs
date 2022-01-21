@@ -8,7 +8,7 @@ using Mapsui.Rendering;
 
 namespace Mapsui.Layers
 {
-    public class RasterizingTileLayer : BaseLayer, IChildLayer, IAsyncDataFetcher
+    public class RasterizingTileLayer : BaseLayer, ISourceLayer, IAsyncDataFetcher
     {
         private readonly RasterizingTileProvider _tileProvider;
         private readonly TileLayer _tileLayer;
@@ -52,7 +52,7 @@ namespace Mapsui.Layers
                 maxExtraTiles,
                 tileFormat == ETileFormat.Picture ? FetchTile : null);
             _tileLayer.DataChanged += TileLayerDataChanged;
-            ChildLayer = layer;
+            SourceLayer = layer;
 
         }
 
@@ -97,7 +97,7 @@ namespace Mapsui.Layers
             }
         }
 
-        public ILayer ChildLayer { get; }
+        public ILayer SourceLayer { get; }
 
         public void AbortFetch()
         {

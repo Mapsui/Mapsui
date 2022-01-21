@@ -1,6 +1,6 @@
 namespace Mapsui.Layers;
 
-public interface IChildLayer
+public interface ISourceLayer
 {
-    ILayer ChildLayer { get; }
+    ILayer SourceLayer { get; }
 }
