@@ -9,3 +9,7 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP007:Don't dispose injected.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Layers.RasterizingLayer.DisposeRenderedGeometries(System.Collections.Generic.IEnumerable{Mapsui.IFeature})")]
 [assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP007:Don't dispose injected.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Layers.RasterizingLayer.Dispose")]
 [assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP007:Don't dispose injected.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.MRaster.Dispose(System.Boolean)")]
+[assembly: SuppressMessage("Usage", "VSTHRD110:Observe result of async calls", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Fetcher.FetchWorker.Start")]
+[assembly: SuppressMessage("Usage", "VSTHRD110:Observe result of async calls", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Layers.AnimatedPointLayer.UpdateData")]
+[assembly: SuppressMessage("Usage", "VSTHRD110:Observe result of async calls", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Layers.ImageLayer.OnPropertyChanged(System.Object,System.ComponentModel.PropertyChangedEventArgs)")]
+[assembly: SuppressMessage("Usage", "VSTHRD110:Observe result of async calls", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Layers.ImageLayer.StartNewFetch(Mapsui.Layers.FetchInfo)")]

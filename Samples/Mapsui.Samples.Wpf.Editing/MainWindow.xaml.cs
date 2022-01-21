@@ -122,7 +122,7 @@ namespace Mapsui.Samples.Wpf.Editing
 
         private void LogMethod(LogLevel logLevel, string? message, Exception? exception)
         {
-            Dispatcher.Invoke(() => {
+            Dispatcher.BeginInvoke(() => {
                 _logMessage.Enqueue(new LogModel { Exception = exception, LogLevel = logLevel, Message = message });
                 return LogTextBox.Text = ToMultiLineString(_logMessage);
             });
