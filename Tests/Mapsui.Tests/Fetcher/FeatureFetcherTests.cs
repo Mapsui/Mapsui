@@ -11,7 +11,7 @@ namespace Mapsui.Tests.Fetcher
     public class FeatureFetcherTests
     {
         [Test]
-        public void TestFeatureFetcherDelay()
+        public async Task TestFeatureFetcherDelay()
         {
             // arrange
             var extent = new MRect(0, 0, 10, 10);
@@ -34,12 +34,12 @@ namespace Mapsui.Tests.Fetcher
             layer.RefreshData(fetchInfo);
 
             // assert
-            Task.Run(() => {
+            await Task.Run(() => {
                 while (notifications.Count < 2)
                 {
                     // just wait until we have two
                 }
-            }).GetAwaiter().GetResult();
+            });
             Assert.IsTrue(notifications[0]);
             Assert.IsFalse(notifications[1]);
         }

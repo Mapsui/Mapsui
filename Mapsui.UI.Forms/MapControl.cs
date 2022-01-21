@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Mapsui.Geometries.Utilities;
 using Mapsui.Layers;
+using Mapsui.Logging;
 #if __MAUI__
 using Mapsui.UI.Maui.Extensions;
 using Microsoft.Maui;
@@ -18,6 +19,7 @@ using SkiaSharp.Views.Maui;
 using SkiaSharp.Views.Maui.Controls;
 
 using Color = Microsoft.Maui.Graphics.Color;
+using Logger = Mapsui.Logging.Logger;
 using KnownColor = Mapsui.UI.Maui.KnownColor;
 #else
 using SkiaSharp.Views.Forms;
@@ -189,144 +191,151 @@ namespace Mapsui.UI.Forms
 
         private async void OnTouch(object? sender, SKTouchEventArgs e)
         {
-            // Save time, when the event occurs
-            var ticks = DateTime.Now.Ticks;
+            try 
+            { 
+                // Save time, when the event occurs
+                var ticks = DateTime.Now.Ticks;
 
-            var location = GetScreenPosition(e.Location);
+                var location = GetScreenPosition(e.Location);
 
-            // if user handles action by his own return
-            TouchAction?.Invoke(sender, e);
-            if (e.Handled) return;
+                // if user handles action by his own return
+                TouchAction?.Invoke(sender, e);
+                if (e.Handled) return;
 
-            if (e.ActionType == SKTouchAction.Pressed)
-            {
-                _firstTouch = location;
-
-                _touches[e.Id] = new TouchEvent(e.Id, location, ticks);
-
-                _flingTracker.Clear();
-
-                // Do we have a doubleTapTestTimer running?
-                // If yes, stop it and increment _numOfTaps
-                if (_waitingForDoubleTap)
+                if (e.ActionType == SKTouchAction.Pressed)
                 {
-                    _waitingForDoubleTap = false;
-                    _numOfTaps++;
-                }
-                else
-                    _numOfTaps = 1;
+                    _firstTouch = location;
 
-                e.Handled = OnTouchStart(_touches.Select(t => t.Value.Location).ToList());
-            }
-            // Delete e.Id from _touches, because finger is released
-            else if (e.ActionType == SKTouchAction.Released && _touches.TryRemove(e.Id, out var releasedTouch))
-            {
-                // Is this a fling or swipe?
-                if (_touches.Count == 0)
-                {
-                    double velocityX;
-                    double velocityY;
+                    _touches[e.Id] = new TouchEvent(e.Id, location, ticks);
 
-                    if (UseFling)
+                    _flingTracker.Clear();
+
+                    // Do we have a doubleTapTestTimer running?
+                    // If yes, stop it and increment _numOfTaps
+                    if (_waitingForDoubleTap)
                     {
-                        (velocityX, velocityY) = _flingTracker.CalcVelocity(e.Id, ticks);
-
-                        if (Math.Abs(velocityX) > 200 || Math.Abs(velocityY) > 200)
-                        {
-                            // This was the last finger on screen, so this is a fling
-                            e.Handled = OnFlinged(velocityX, velocityY);
-                        }
+                        _waitingForDoubleTap = false;
+                        _numOfTaps++;
                     }
-
-                    // Do we have a tap event
-                    if (releasedTouch == null)
-                    {
-                        e.Handled = false;
-                        return;
-                    }
-
-                    // While tapping on screen, there could be a small movement of the finger
-                    // (especially on Samsung). So check, if touch start location isn't more 
-                    // than a number of pixels away from touch end location.
-                    var isAround = IsAround(releasedTouch);
-
-                    // If touch start and end is in the same area and the touch time is shorter
-                    // than longTap, than we have a tap.
-                    if (isAround && (ticks - releasedTouch.Tick) < (e.DeviceType == SKTouchDeviceType.Mouse ? shortClick : longTap) * 10000)
-                    {
-                        _waitingForDoubleTap = true;
-                        if (UseDoubleTap) { await Task.Delay(delayTap); }
-
-                        if (_numOfTaps > 1)
-                        {
-                            if (!e.Handled)
-                                e.Handled = OnDoubleTapped(location, _numOfTaps);
-                        }
-                        else
-                        {
-                            if (!e.Handled)
-                            {
-                                e.Handled = OnSingleTapped(location);
-                            }
-                        }
+                    else
                         _numOfTaps = 1;
-                        if (_waitingForDoubleTap)
-                        {
-                            _waitingForDoubleTap = false; ;
-                        }
-                    }
-                    else if (isAround && (ticks - releasedTouch.Tick) >= longTap * 10000)
-                    {
-                        if (!e.Handled)
-                            e.Handled = OnLongTapped(location);
-                    }
-                }
 
-                _flingTracker.RemoveId(e.Id);
-
-                if (_touches.Count == 1)
-                {
                     e.Handled = OnTouchStart(_touches.Select(t => t.Value.Location).ToList());
                 }
-
-                if (!e.Handled)
-                    e.Handled = OnTouchEnd(_touches.Select(t => t.Value.Location).ToList(), releasedTouch.Location);
-            }
-            else if (e.ActionType == SKTouchAction.Moved)
-            {
-                _touches[e.Id] = new TouchEvent(e.Id, location, ticks);
-
-                if (e.InContact)
-                    _flingTracker.AddEvent(e.Id, location, ticks);
-
-                if (e.InContact && !e.Handled)
-                    e.Handled = OnTouchMove(_touches.Select(t => t.Value.Location).ToList());
-                else
-                    e.Handled = OnHovered(_touches.Select(t => t.Value.Location).FirstOrDefault());
-            }
-            else if (e.ActionType == SKTouchAction.Cancelled)
-            {
-                // This gesture is cancelled, so clear all touches
-                _touches.Clear();
-            }
-            else if (e.ActionType == SKTouchAction.Exited && _touches.TryRemove(e.Id, out var exitedTouch))
-            {
-                e.Handled = OnTouchExited(_touches.Select(t => t.Value.Location).ToList(), exitedTouch.Location);
-            }
-            else if (e.ActionType == SKTouchAction.Entered)
-            {
-                e.Handled = OnTouchEntered(_touches.Select(t => t.Value.Location).ToList());
-            }
-            else if (e.ActionType == SKTouchAction.WheelChanged)
-            {
-                if (e.WheelDelta > 0)
+                // Delete e.Id from _touches, because finger is released
+                else if (e.ActionType == SKTouchAction.Released && _touches.TryRemove(e.Id, out var releasedTouch))
                 {
-                    OnZoomIn(location);
+                    // Is this a fling or swipe?
+                    if (_touches.Count == 0)
+                    {
+                        double velocityX;
+                        double velocityY;
+
+                        if (UseFling)
+                        {
+                            (velocityX, velocityY) = _flingTracker.CalcVelocity(e.Id, ticks);
+
+                            if (Math.Abs(velocityX) > 200 || Math.Abs(velocityY) > 200)
+                            {
+                                // This was the last finger on screen, so this is a fling
+                                e.Handled = OnFlinged(velocityX, velocityY);
+                            }
+                        }
+
+                        // Do we have a tap event
+                        if (releasedTouch == null)
+                        {
+                            e.Handled = false;
+                            return;
+                        }
+
+                        // While tapping on screen, there could be a small movement of the finger
+                        // (especially on Samsung). So check, if touch start location isn't more 
+                        // than a number of pixels away from touch end location.
+                        var isAround = IsAround(releasedTouch);
+
+                        // If touch start and end is in the same area and the touch time is shorter
+                        // than longTap, than we have a tap.
+                        if (isAround && (ticks - releasedTouch.Tick) < (e.DeviceType == SKTouchDeviceType.Mouse ? shortClick : longTap) * 10000)
+                        {
+                            _waitingForDoubleTap = true;
+                            if (UseDoubleTap) { await Task.Delay(delayTap); }
+
+                            if (_numOfTaps > 1)
+                            {
+                                if (!e.Handled)
+                                    e.Handled = OnDoubleTapped(location, _numOfTaps);
+                            }
+                            else
+                            {
+                                if (!e.Handled)
+                                {
+                                    e.Handled = OnSingleTapped(location);
+                                }
+                            }
+                            _numOfTaps = 1;
+                            if (_waitingForDoubleTap)
+                            {
+                                _waitingForDoubleTap = false; ;
+                            }
+                        }
+                        else if (isAround && (ticks - releasedTouch.Tick) >= longTap * 10000)
+                        {
+                            if (!e.Handled)
+                                e.Handled = OnLongTapped(location);
+                        }
+                    }
+
+                    _flingTracker.RemoveId(e.Id);
+
+                    if (_touches.Count == 1)
+                    {
+                        e.Handled = OnTouchStart(_touches.Select(t => t.Value.Location).ToList());
+                    }
+
+                    if (!e.Handled)
+                        e.Handled = OnTouchEnd(_touches.Select(t => t.Value.Location).ToList(), releasedTouch.Location);
                 }
-                else
+                else if (e.ActionType == SKTouchAction.Moved)
                 {
-                    OnZoomOut(location);
+                    _touches[e.Id] = new TouchEvent(e.Id, location, ticks);
+
+                    if (e.InContact)
+                        _flingTracker.AddEvent(e.Id, location, ticks);
+
+                    if (e.InContact && !e.Handled)
+                        e.Handled = OnTouchMove(_touches.Select(t => t.Value.Location).ToList());
+                    else
+                        e.Handled = OnHovered(_touches.Select(t => t.Value.Location).FirstOrDefault());
                 }
+                else if (e.ActionType == SKTouchAction.Cancelled)
+                {
+                    // This gesture is cancelled, so clear all touches
+                    _touches.Clear();
+                }
+                else if (e.ActionType == SKTouchAction.Exited && _touches.TryRemove(e.Id, out var exitedTouch))
+                {
+                    e.Handled = OnTouchExited(_touches.Select(t => t.Value.Location).ToList(), exitedTouch.Location);
+                }
+                else if (e.ActionType == SKTouchAction.Entered)
+                {
+                    e.Handled = OnTouchEntered(_touches.Select(t => t.Value.Location).ToList());
+                }
+                else if (e.ActionType == SKTouchAction.WheelChanged)
+                {
+                    if (e.WheelDelta > 0)
+                    {
+                        OnZoomIn(location);
+                    }
+                    else
+                    {
+                        OnZoomOut(location);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(LogLevel.Error, ex.Message, ex);
             }
         }
 
@@ -556,9 +565,6 @@ namespace Mapsui.UI.Forms
             if (touchPoints.Count == 0)
                 return false;
 
-            // We have a new interaction with the screen, so stop all navigator animations
-            Navigator.StopRunningAnimation();
-
             var args = new TouchedEventArgs(touchPoints);
 
             TouchStarted?.Invoke(this, args);
@@ -622,9 +628,6 @@ namespace Mapsui.UI.Forms
 
             if (args.Handled)
                 return true;
-
-            // We have an interaction with the screen, so stop all animations
-            Navigator.StopRunningAnimation();
 
             return true;
         }
@@ -826,7 +829,7 @@ namespace Mapsui.UI.Forms
 
         protected void RunOnUIThread(Action action)
         {
-#if __MAUI__ // WORKAROUND for Preview 11 will be fixed in Preview 12 https://github.com/dotnet/maui/issues/3597
+#if __MAUI__ // WORKAROUND for Preview 11 will be fixed in Preview 13 https://github.com/dotnet/maui/issues/3597
             Application.Current?.Dispatcher.Dispatch(action);
 #else
             Device.BeginInvokeOnMainThread(action);

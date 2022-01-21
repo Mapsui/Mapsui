@@ -15,12 +15,14 @@
 // along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using Mapsui.Fetcher;
 using Mapsui.Providers;
+using Mapsui.Styles;
 
 namespace Mapsui.Layers
 {
@@ -32,6 +34,8 @@ namespace Mapsui.Layers
         private readonly FeatureFetchDispatcher<IFeature> _fetchDispatcher;
         private readonly FetchMachine _fetchMachine;
 
+        public SymbolStyle? SymbolStyle { get; set; }
+        public List<Func<bool>> Animations { get; } = new List<Func<bool>>();
         public Delayer Delayer { get; } = new();
 
         /// <summary>
@@ -146,6 +150,17 @@ namespace Mapsui.Layers
             if (fetchInfo.ChangeType == ChangeType.Continuous) return;
 
             Delayer.ExecuteDelayed(() => DelayedFetch(fetchInfo));
+        }
+
+        public override bool UpdateAnimations()
+        {
+            var areAnimationsRunning = false;
+            foreach (var animation in Animations)
+            {
+                if (animation())
+                    areAnimationsRunning = true;
+            }
+            return areAnimationsRunning;
         }
     }
 }

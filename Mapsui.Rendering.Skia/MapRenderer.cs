@@ -308,11 +308,6 @@ namespace Mapsui.Rendering.Skia
             return result;
         }
 
-        public MapInfo? GetMapInfo(MPoint screenPosition, IReadOnlyViewport viewport, IEnumerable<ILayer> layers, int margin = 0)
-        {
-            return GetMapInfo(screenPosition.X, screenPosition.Y, viewport, layers, margin);
-        }
-
         public class IdentityComparer<T> : IEqualityComparer<T> where T : class
         {
             public bool Equals(T obj, T otherObj)

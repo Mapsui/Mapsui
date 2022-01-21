@@ -3,7 +3,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Logging;
 using Mapsui.Rendering;
@@ -206,7 +205,8 @@ namespace Mapsui.Layers
             return new Viewport
             {
                 Resolution = renderResolution,
-                Center = extent.Centroid,
+                CenterX = extent.Centroid.X,
+                CenterY = extent.Centroid.Y,
                 Width = extent.Width * overscan / renderResolution,
                 Height = extent.Height * overscan / renderResolution
             };

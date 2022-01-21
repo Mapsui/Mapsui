@@ -10,6 +10,7 @@ using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
 using Mapsui.UI;
+using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -56,7 +57,7 @@ namespace Mapsui.Samples.Common.Maps
 
             return randomPoints.Select(p => {
                 var feature = new PointFeature(p) { ["Label"] = counter.ToString() };
-                feature.Styles.Add(CreateSvgStyle("Mapsui.Samples.Common.Images.Pin.svg", 0.5));
+                feature.Styles.Add(CreateSvgStyle(@"Images.Pin.svg", 0.5));
                 counter++;
                 return feature;
             });
@@ -64,28 +65,8 @@ namespace Mapsui.Samples.Common.Maps
 
         private static SymbolStyle CreateSvgStyle(string embeddedResourcePath, double scale)
         {
-            var bitmapId = GetBitmapIdForEmbeddedResource(embeddedResourcePath);
+            var bitmapId = typeof(SvgSample).LoadSvgId(embeddedResourcePath);
             return new SymbolStyle { BitmapId = bitmapId, SymbolScale = scale, SymbolOffset = new Offset(0.0, 0.5, true) };
-        }
-
-        private static int GetBitmapIdForEmbeddedResource(string imagePath)
-        {
-            if (!ImageCache.TryGetValue(imagePath, out var id))
-            {
-                try
-                {
-                    var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
-                    id = BitmapRegistry.Instance.Register(assembly.GetManifestResourceStream(imagePath)!);
-                    ImageCache[imagePath] = id;
-                }
-                catch (Exception exception)
-                {
-                    Logger.Log(LogLevel.Error, $"Failed registering Image {imagePath}", exception);
-                    throw;
-                }
-            }
-
-            return id;
         }
     }
 }

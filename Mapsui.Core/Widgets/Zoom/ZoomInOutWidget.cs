@@ -153,11 +153,11 @@ namespace Mapsui.Widgets.Zoom
             if (Orientation == Orientation.Vertical && position.Y < Envelope.MinY + Envelope.Height * 0.5 ||
                 Orientation == Orientation.Horizontal && position.X < Envelope.MinX + Envelope.Width * 0.5)
             {
-                navigator.ZoomIn();
+                navigator.ZoomIn(500);
             }
             else
             {
-                navigator.ZoomOut();
+                navigator.ZoomOut(500);
             }
 
             return true;

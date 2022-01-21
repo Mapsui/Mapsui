@@ -62,7 +62,7 @@ namespace Mapsui.Fetcher
         {
             if (disposing)
             {
-                this._waitTimer.Dispose();
+                _waitTimer.Dispose();
             }
         }
 

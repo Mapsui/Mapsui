@@ -33,7 +33,7 @@ namespace Mapsui.Layers
         {
             if (disposing)
             {
-                this._startFetchTimer.Dispose();
+                _startFetchTimer.Dispose();
             }
 
             base.Dispose(disposing);

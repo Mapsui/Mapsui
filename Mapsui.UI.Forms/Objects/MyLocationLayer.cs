@@ -1,6 +1,7 @@
 ﻿using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using Mapsui.Utilities;
 
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,11 @@ using Mapsui.GeometryLayer;
 using Mapsui.UI.Maui;
 using Microsoft.Maui;
 using Microsoft.Maui.Controls;
+using Animation = Microsoft.Maui.Controls.Animation;
 #else
 using Mapsui.UI.Forms;
 using Xamarin.Forms;
+using Animation = Xamarin.Forms.Animation;
 #endif
 
 namespace Mapsui.UI.Objects
@@ -109,35 +112,23 @@ namespace Mapsui.UI.Objects
 
             if (bitmapMovingId == -1)
             {
-                var bitmapMoving = Utilities.EmbeddedResourceLoader.Load($"Images.MyLocationMoving.svg", typeof(MyLocationLayer));
-
-                if (bitmapMoving != null)
-                {
-                    // Register bitmap
-                    bitmapMovingId = BitmapRegistry.Instance.Register(bitmapMoving);
-                }
+                var bitmapMoving = typeof(MyLocationLayer).LoadBitmapId(@"Images.MyLocationMoving.svg");
+                // Register bitmap
+                bitmapMovingId = bitmapMoving;
             }
 
             if (bitmapStillId == -1)
             {
-                var bitmapStill = Utilities.EmbeddedResourceLoader.Load($"Images.MyLocationStill.svg", typeof(MyLocationLayer));
-
-                if (bitmapStill != null)
-                {
-                    // Register bitmap
-                    bitmapStillId = BitmapRegistry.Instance.Register(bitmapStill);
-                }
+                var bitmapStill = typeof(MyLocationLayer).LoadBitmapId(@"Images.MyLocationStill.svg");
+                // Register bitmap
+                bitmapStillId = bitmapStill;
             }
 
             if (bitmapDirId == -1)
             {
-                var bitmapDir = Utilities.EmbeddedResourceLoader.Load($"Images.MyLocationDir.svg", typeof(MyLocationLayer));
-
-                if (bitmapDir != null)
-                {
-                    // Register bitmap
-                    bitmapDirId = BitmapRegistry.Instance.Register(bitmapDir);
-                }
+                var bitmapDir = typeof(MyLocationLayer).LoadBitmapId(@"Images.MyLocationDir.svg");
+                // Register bitmap
+                bitmapDirId = bitmapDir;
             }
 
             feature = new GeometryFeature

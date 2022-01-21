@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Mapsui.Animations;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Styles;
@@ -9,7 +10,7 @@ using Mapsui.Widgets;
 
 namespace Mapsui
 {
-    public interface IMap
+    public interface IMap : IAnimatable
     {
         /// <summary>
         /// List of Widgets belonging to map

@@ -96,78 +96,15 @@ namespace Mapsui.UI.Wpf
 
         private void InvalidateTimerCallback(object? state)
         {
-            // Check, if we have to redraw the screen, because a animation is running or a refresh is wished
+            // Check, if we have to redraw the screen
 
-            /* Unmerged change from project 'Mapsui.UI.Uwp'
-            Before:
-                        if (!Animations.UpdateAnimations() && !_refresh)
-            After:
-                        if (!Animation.UpdateAnimations() && !_refresh)
-            */
+            if (_map?.UpdateAnimations() == true)
+                _refresh = true;
 
-            /* Unmerged change from project 'Mapsui.UI.iOS'
-            Before:
-                        if (!Animations.UpdateAnimations() && !_refresh)
-            After:
-                        if (!Animation.UpdateAnimations() && !_refresh)
-            */
+            if (_viewport.UpdateAnimations())
+                _refresh = true;
 
-            /* Unmerged change from project 'Mapsui.UI.Wpf (netcoreapp3.1)'
-            Before:
-                        if (!Animations.UpdateAnimations() && !_refresh)
-            After:
-                        if (!Animation.UpdateAnimations() && !_refresh)
-            */
-
-            /* Unmerged change from project 'Mapsui.UI.Forms'
-            Before:
-                        if (!Animations.UpdateAnimations() && !_refresh)
-            After:
-                        if (!Animation.UpdateAnimations() && !_refresh)
-            */
-
-            /* Unmerged change from project 'Mapsui.UI.Uno (uap10.0.18362)'
-            Before:
-                        if (!Animations.UpdateAnimations() && !_refresh)
-            After:
-                        if (!Animation.UpdateAnimations() && !_refresh)
-            */
-
-            /* Unmerged change from project 'Mapsui.UI.WinUI'
-            Before:
-                        if (!Animations.UpdateAnimations() && !_refresh)
-            After:
-                        if (!Animation.UpdateAnimations() && !_refresh)
-            */
-
-            /* Unmerged change from project 'Mapsui.UI.Avalonia'
-            Before:
-                        if (!Animations.UpdateAnimations() && !_refresh)
-            After:
-                        if (!Animation.UpdateAnimations() && !_refresh)
-            */
-
-            /* Unmerged change from project 'Mapsui.UI.Wpf (net48)'
-            Before:
-                        if (!Animations.UpdateAnimations() && !_refresh)
-            After:
-                        if (!Animation.UpdateAnimations() && !_refresh)
-            */
-
-            /* Unmerged change from project 'Mapsui.UI.Uno (xamarinios10)'
-            Before:
-                        if (!Animations.UpdateAnimations() && !_refresh)
-            After:
-                        if (!Animation.UpdateAnimations() && !_refresh)
-            */
-
-            /* Unmerged change from project 'Mapsui.UI.Uno (netstandard2.0)'
-            Before:
-                        if (!Animations.UpdateAnimations() && !_refresh)
-            After:
-                        if (!Animation.UpdateAnimations() && !_refresh)
-            */
-            if (!Utilities.Animation.UpdateAnimations() && !_refresh)
+            if (!_refresh)
                 return;
 
             if (_drawing)
@@ -584,11 +521,9 @@ namespace Mapsui.UI.Wpf
             if (!result && widget is Hyperlink hyperlink && !string.IsNullOrWhiteSpace(hyperlink.Url))
             {
                 OpenBrowser(hyperlink.Url!);
-
-                return true;
             }
 
-            return false;
+            return result;
         }
 
         /// <inheritdoc />

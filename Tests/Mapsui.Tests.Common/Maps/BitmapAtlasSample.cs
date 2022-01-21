@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.UI;
+using Mapsui.Utilities;
 
 namespace Mapsui.Tests.Common.Maps
 {
@@ -45,12 +47,12 @@ namespace Mapsui.Tests.Common.Maps
 
         public static List<IFeature> CreateFeatures()
         {
-            var atlas = LoadBitmap("Mapsui.Tests.Common.Resources.Images.osm-liberty.png");
+            var atlas = typeof(BitmapAtlasSample).LoadBitmapId("Resources.Images.osm-liberty.png");
             var spriteAmusementPark15 = new Sprite(atlas, 106, 0, 21, 21, 1);
             var spriteClothingStore15 = new Sprite(atlas, 84, 106, 21, 21, 1);
             var spriteDentist15 = new Sprite(atlas, 147, 64, 21, 21, 1);
             var spritePedestrianPolygon = new Sprite(atlas, 0, 0, 64, 64, 1);
-            var svgTigerBitmapId = LoadBitmap("Mapsui.Tests.Common.Resources.Images.Ghostscript_Tiger.svg");
+            var svgTigerBitmapId = typeof(BitmapAtlasSample).LoadSvgId("Resources.Images.Ghostscript_Tiger.svg");
 
             return new List<IFeature>
             {
@@ -79,14 +81,6 @@ namespace Mapsui.Tests.Common.Maps
                     Styles = new[] {new SymbolStyle {BitmapId = svgTigerBitmapId, SymbolScale = 0.1} }
                 }
             };
-        }
-
-        private static int LoadBitmap(string bitmapPath)
-        {
-#pragma warning disable IDISP001 // Dispose Created
-            var bitmapStream = typeof(Utilities).GetTypeInfo().Assembly.GetManifestResourceStream(bitmapPath)!;
-#pragma warning restore IDISP001 // Dispose Created
-            return BitmapRegistry.Instance.Register(bitmapStream);
         }
     }
 }

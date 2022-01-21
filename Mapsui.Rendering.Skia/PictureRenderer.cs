@@ -66,7 +66,7 @@ namespace Mapsui.Rendering.Skia
             LabelStyle.HorizontalAlignmentEnum horizontalAlignment, float width)
         {
             if (horizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Left) return width / 2;
-            if (horizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Right) return -(width / 2);
+            if (horizontalAlignment == LabelStyle.HorizontalAlignmentEnum.Right) return - (width / 2);
             return 0; // center
         }
 

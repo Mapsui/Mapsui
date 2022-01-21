@@ -5,6 +5,7 @@ using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.UI;
+using Mapsui.Utilities;
 
 #pragma warning disable IDISP001 // Dispose created
 
@@ -42,7 +43,7 @@ namespace Mapsui.Tests.Common.Maps
 
         public static IEnumerable<IFeature> CreateFeatures()
         {
-            var pinId = LoadSvg("Mapsui.Tests.Common.Resources.Images.Pin.svg");
+            var pinId = typeof(SvgSymbolSample).LoadSvgId("Resources.Images.Pin.svg");
 
             return new List<IFeature>
             {
@@ -59,12 +60,6 @@ namespace Mapsui.Tests.Common.Maps
                     Styles = new[] {new SymbolStyle {BitmapId = pinId}}
                 }
             };
-        }
-
-        private static int LoadSvg(string bitmapPath)
-        {
-            var bitmapStream = typeof(Utilities).GetTypeInfo().Assembly.GetManifestResourceStream(bitmapPath)!;
-            return BitmapRegistry.Instance.Register(bitmapStream);
         }
     }
 }

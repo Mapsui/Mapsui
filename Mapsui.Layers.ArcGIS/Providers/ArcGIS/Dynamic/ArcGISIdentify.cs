@@ -85,7 +85,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
                     if (dataStream != null)
                     {
                         using var sReader = new System.IO.StreamReader(dataStream);
-                        var jsonString = sReader.ReadToEnd();
+                        var jsonString = await sReader.ReadToEndAsync();
 
                         var serializer = new JsonSerializer();
                         var jToken = JObject.Parse(jsonString);
@@ -96,7 +96,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
 
                         using (var reader = new System.IO.StreamReader(dataStream))
                         {
-                            var contentString = reader.ReadToEnd();
+                            var contentString = await reader.ReadToEndAsync();
                             if (contentString.Contains("{\"error\":{\""))
                             {
                                 OnIdentifyFailed();
