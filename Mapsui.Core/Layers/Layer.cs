@@ -23,7 +23,6 @@ using System.Linq;
 using Mapsui.Fetcher;
 using Mapsui.Providers;
 using Mapsui.Styles;
-using Mapsui.Utilities;
 
 namespace Mapsui.Layers
 {
@@ -35,7 +34,7 @@ namespace Mapsui.Layers
         private readonly FeatureFetchDispatcher<IFeature> _fetchDispatcher;
         private readonly FetchMachine _fetchMachine;
 
-        public SymbolStyle SymbolStyle { get; set; }
+        public SymbolStyle? SymbolStyle { get; set; }
         public List<Func<bool>> Animations { get; } = new List<Func<bool>>();
         public Delayer Delayer { get; } = new();
 

@@ -228,7 +228,7 @@ namespace Mapsui
         {
             // Note. Instead of a delay it may also be possible to call Navigated immediately with the viewport state
             // that is the result of the animation.
-            Task.Delay((int)duration).ContinueWith(t => Navigated?.Invoke(this, changeType));
+            _ = Task.Delay((int)duration).ContinueWith(t => Navigated?.Invoke(this, changeType), TaskScheduler.FromCurrentSynchronizationContext());
         }
     }
 }
