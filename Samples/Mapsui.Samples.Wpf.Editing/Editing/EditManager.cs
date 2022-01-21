@@ -5,7 +5,6 @@ using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.GeometryLayer;
 using Mapsui.Layers;
-using Mapsui.Providers;
 using Mapsui.UI;
 using Point = Mapsui.Geometries.Point;
 
@@ -84,9 +83,9 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
             }
             else if (EditMode == EditMode.AddLine)
             {
-                var firstPoint = worldPosition.Clone();
+                var firstPoint = (Point)worldPosition.Clone();
                 // Add a second point right away. The second one will be the 'hover' vertex
-                var secondPoint = worldPosition.Clone();
+                var secondPoint = (Point)worldPosition.Clone();
                 _addInfo.Vertex = secondPoint;
                 _addInfo.Feature = new GeometryFeature { Geometry = new LineString(new[] { firstPoint, secondPoint }) };
                 _addInfo.Vertices = _addInfo.Feature.Geometry.MainVertices();
@@ -98,17 +97,17 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
             {
                 var lineString = _addInfo.Feature?.Geometry as LineString;
                 // Set the final position of the 'hover' vertex (that was already part of the geometry)
-                SetPointXY(_addInfo.Vertex, worldPosition.Clone());
-                _addInfo.Vertex = worldPosition.Clone(); // and create a new hover vertex
+                SetPointXY(_addInfo.Vertex, (Point)worldPosition.Clone());
+                _addInfo.Vertex = (Point)worldPosition.Clone(); // and create a new hover vertex
                 lineString?.Vertices.Add(_addInfo.Vertex); // and add it to the geometry
                 _addInfo.Feature?.RenderedGeometry?.Clear();
                 Layer?.DataHasChanged();
             }
             else if (EditMode == EditMode.AddPolygon)
             {
-                var firstPoint = worldPosition.Clone();
+                var firstPoint = (Point)worldPosition.Clone();
                 // Add a second point right away. The second one will be the 'hover' vertex
-                var secondPoint = worldPosition.Clone();
+                var secondPoint = (Point)worldPosition.Clone();
                 _addInfo.Vertex = secondPoint;
                 _addInfo.Feature = new GeometryFeature
                 {
@@ -126,8 +125,8 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
             {
                 var polygon = _addInfo.Feature?.Geometry as Polygon;
                 // Set the final position of the 'hover' vertex (that was already part of the geometry)
-                SetPointXY(_addInfo.Vertex, worldPosition.Clone());
-                _addInfo.Vertex = worldPosition.Clone(); // and create a new hover vertex
+                SetPointXY(_addInfo.Vertex, (Point)worldPosition.Clone());
+                _addInfo.Vertex = (Point)worldPosition.Clone(); // and create a new hover vertex
                 polygon?.ExteriorRing?.Vertices.Add(_addInfo.Vertex); // and add it to the geometry
                 _addInfo.Feature?.RenderedGeometry?.Clear();
                 Layer?.DataHasChanged();
