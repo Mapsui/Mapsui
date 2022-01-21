@@ -28,6 +28,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Rendering;
 using Mapsui.Utilities;
@@ -483,14 +484,7 @@ namespace Mapsui.Providers.Wms
         {
             var features = new List<RasterFeature>();
 
-            var view = new Viewport
-            {
-                Resolution = fetchInfo.Resolution,
-                Center = fetchInfo.Extent.Centroid,
-                Width = (fetchInfo.Extent.Width / fetchInfo.Resolution),
-                Height = (fetchInfo.Extent.Height / fetchInfo.Resolution)
-            };
-            if (TryGetMap(view, out var raster))
+            if (TryGetMap(fetchInfo.ToViewport(), out var raster))
             {
                 features.Add(new RasterFeature(raster));
             }

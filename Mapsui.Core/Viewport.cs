@@ -15,11 +15,14 @@
 // along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.Utilities;
+using Mapsui.ViewportAnimations;
 
 namespace Mapsui
 {
@@ -34,14 +37,18 @@ namespace Mapsui
     {
         public event PropertyChangedEventHandler? ViewportChanged;
 
-        private readonly MRect _extent;
-        private MQuad _windowExtent;
-        private double _height;
+        // State
+        private double _centerX;
+        private double _centerY;
         private double _resolution = Constants.DefaultResolution;
-        private double _width;
         private double _rotation;
-        private MPoint _center = new(0, 0);
-        private bool _modified = true;
+        private double _width;
+        private double _height;
+
+        // Derived from state
+        private readonly MRect _extent;
+
+        private List<AnimationEntry<Viewport>> _animations = new();
 
         /// <summary>
         /// Create a new viewport
@@ -49,7 +56,6 @@ namespace Mapsui
         public Viewport()
         {
             _extent = new MRect(0, 0, 0, 0);
-            _windowExtent = new MQuad();
         }
 
         /// <summary>
@@ -58,13 +64,15 @@ namespace Mapsui
         /// <param name="viewport">Viewport from which to copy all values</param>
         public Viewport(IReadOnlyViewport viewport) : this()
         {
+            _centerX = viewport.Center.X;
+            _centerY = viewport.Center.Y;
             _resolution = viewport.Resolution;
             _width = viewport.Width;
             _height = viewport.Height;
             _rotation = viewport.Rotation;
-            _center = new MReadOnlyPoint(viewport.Center);
+
+            IsRotated = viewport.IsRotated;
             if (viewport.Extent != null) _extent = new MRect(viewport.Extent);
-            if (viewport.WindowExtent != null) _windowExtent = new MQuad(viewport.WindowExtent);
 
             UpdateExtent();
         }
@@ -72,16 +80,32 @@ namespace Mapsui
         public bool HasSize => !_width.IsNanOrInfOrZero() && !_height.IsNanOrInfOrZero();
 
         /// <inheritdoc />
-        public MReadOnlyPoint Center
+        public MReadOnlyPoint Center => new MReadOnlyPoint(_centerX, _centerY);
+
+        /// <inheritdoc />
+        public double CenterX
         {
-            get => _center;
+            get => _centerX;
             set
             {
-                // todo: Consider making setters private or removing Set methods
-                _center = value;
+                _centerX = value;
+                UpdateExtent();
                 OnViewportChanged();
             }
         }
+
+        /// <inheritdoc />
+        public double CenterY
+        {
+            get => _centerY;
+            set
+            {
+                _centerY = value;
+                UpdateExtent();
+                OnViewportChanged();
+            }
+        }
+
 
         /// <inheritdoc />
         public double Resolution
@@ -90,6 +114,7 @@ namespace Mapsui
             set
             {
                 _resolution = value;
+                UpdateExtent();
                 OnViewportChanged();
             }
         }
@@ -101,6 +126,7 @@ namespace Mapsui
             set
             {
                 _width = value;
+                UpdateExtent();
                 OnViewportChanged();
             }
         }
@@ -112,6 +138,7 @@ namespace Mapsui
             set
             {
                 _height = value;
+                UpdateExtent();
                 OnViewportChanged();
             }
         }
@@ -126,44 +153,24 @@ namespace Mapsui
                 _rotation = value % 360.0;
                 if (_rotation < 0)
                     _rotation += 360.0;
+
+                IsRotated = !double.IsNaN(_rotation) && _rotation > Constants.Epsilon && _rotation < 360 - Constants.Epsilon;
+                if (!IsRotated) _rotation = 0; // If not rotated set _rotation explicitly to exactly 0
+                UpdateExtent();
                 OnViewportChanged();
             }
         }
 
         /// <inheritdoc />
-        public bool IsRotated =>
-            !double.IsNaN(_rotation) && _rotation > Constants.Epsilon && _rotation < 360 - Constants.Epsilon;
+        public bool IsRotated { get; private set; }
 
         /// <inheritdoc />
-        public MRect Extent
-        {
-            get
-            {
-                if (_modified) UpdateExtent();
-                return _extent;
-            }
-        }
-
-        /// <inheritdoc />
-        public MQuad WindowExtent
-        {
-            get
-            {
-                if (_modified) UpdateExtent();
-                return _windowExtent;
-            }
-        }
+        public MRect Extent => _extent;
 
         /// <inheritdoc />
         public MPoint WorldToScreen(MPoint worldPosition)
         {
             return WorldToScreen(worldPosition.X, worldPosition.Y);
-        }
-
-        /// <inheritdoc />
-        public MPoint WorldToScreenUnrotated(MPoint worldPosition)
-        {
-            return WorldToScreenUnrotated(worldPosition.X, worldPosition.Y);
         }
 
         /// <inheritdoc />
@@ -173,33 +180,62 @@ namespace Mapsui
         }
 
         /// <inheritdoc />
+        public MPoint ScreenToWorld(double positionX, double positionY)
+        {
+            var (x, y) = ScreenToWorldXY(positionX, positionY);
+            return new MPoint(x, y);
+        }
+
+        /// <inheritdoc />
         public MPoint WorldToScreen(double worldX, double worldY)
         {
-            var p = WorldToScreenUnrotated(worldX, worldY);
+            var (x, y) = WorldToScreenXY(worldX, worldY);
+            return new MPoint(x, y);
+        }
+
+        /// <inheritdoc />
+        public (double screenX, double screenY) WorldToScreenXY(double worldX, double worldY)
+        {
+            var (screenX, screenY) = WorldToScreenUnrotated(worldX, worldY);
 
             if (IsRotated)
             {
                 var screenCenterX = Width / 2.0;
                 var screenCenterY = Height / 2.0;
-                p = p.Rotate(-_rotation, screenCenterX, screenCenterY);
+                return Rotate(-_rotation, screenX, screenY, screenCenterX, screenCenterY);
             }
 
-            return p;
+            return (screenX, screenY);
+        }
+
+        public (double x, double y) Rotate(double degrees, double x, double y, double centerX, double centerY)
+        {
+            // translate this point back to the center
+            var newX = x - centerX;
+            var newY = y - centerY;
+
+            // rotate the values
+            var p = Algorithms.RotateClockwiseDegrees(newX, newY, degrees);
+
+            // translate back to original reference frame
+            newX = p.X + centerX;
+            newY = p.Y + centerY;
+
+            return (newX, newY);
         }
 
         /// <inheritdoc />
-        public MPoint WorldToScreenUnrotated(double worldX, double worldY)
+        public (double screenX, double screenY) WorldToScreenUnrotated(double worldX, double worldY)
         {
             var screenCenterX = Width / 2.0;
             var screenCenterY = Height / 2.0;
             var screenX = (worldX - Center.X) / _resolution + screenCenterX;
             var screenY = (Center.Y - worldY) / _resolution + screenCenterY;
-
-            return new MPoint(screenX, screenY);
+            return (screenX, screenY);
         }
 
         /// <inheritdoc />
-        public MPoint ScreenToWorld(double screenX, double screenY)
+        public (double worldX, double worldY) ScreenToWorldXY(double screenX, double screenY)
         {
             var screenCenterX = Width / 2.0;
             var screenCenterY = Height / 2.0;
@@ -213,17 +249,19 @@ namespace Mapsui
 
             var worldX = Center.X + (screenX - screenCenterX) * _resolution;
             var worldY = Center.Y - (screenY - screenCenterY) * _resolution;
-            return new MPoint(worldX, worldY);
+            return (worldX, worldY);
         }
 
         /// <inheritdoc />
         public void Transform(MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution = 1, double deltaRotation = 0)
         {
+            _animations = new();
+
             var previous = ScreenToWorld(previousPositionScreen.X, previousPositionScreen.Y);
             var current = ScreenToWorld(positionScreen.X, positionScreen.Y);
 
-            var newX = _center.X + previous.X - current.X;
-            var newY = _center.Y + previous.Y - current.Y;
+            var newX = _centerX + previous.X - current.X;
+            var newY = _centerY + previous.Y - current.Y;
 
             if (deltaResolution != 1)
             {
@@ -239,7 +277,8 @@ namespace Mapsui
                 newY -= scaleCorrectionY;
             }
 
-            SetCenter(newX, newY);
+            CenterX = newX;
+            CenterY = newY;
 
             if (deltaRotation != 0)
             {
@@ -247,7 +286,8 @@ namespace Mapsui
                 Rotation += deltaRotation;
                 var postRotation = ScreenToWorld(positionScreen.X, positionScreen.Y); // calculate current position again with adjusted resolution
 
-                SetCenter(_center.X - (postRotation.X - current.X), _center.Y - (postRotation.Y - current.Y));
+                CenterX = _centerX - (postRotation.X - current.X);
+                CenterY = _centerY - (postRotation.Y - current.Y);
             }
         }
 
@@ -264,10 +304,13 @@ namespace Mapsui
             var bottom = Center.Y - halfSpanY;
             var right = Center.X + halfSpanX;
             var top = Center.Y + halfSpanY;
-            _windowExtent.BottomLeft = new MPoint(left, bottom);
-            _windowExtent.TopLeft = new MPoint(left, top);
-            _windowExtent.TopRight = new MPoint(right, top);
-            _windowExtent.BottomRight = new MPoint(right, bottom);
+            var windowExtent = new MQuad
+            {
+                BottomLeft = new MPoint(left, bottom),
+                TopLeft = new MPoint(left, top),
+                TopRight = new MPoint(right, top),
+                BottomRight = new MPoint(right, bottom)
+            };
 
             if (!IsRotated)
             {
@@ -280,45 +323,109 @@ namespace Mapsui
             {
                 // Calculate the extent that will encompass a rotated viewport (slightly larger - used for tiles).
                 // Perform rotations on corner offsets and then add them to the Center point.
-                _windowExtent = _windowExtent.Rotate(-_rotation, Center.X, Center.Y);
-                var rotatedBoundingBox = _windowExtent.ToBoundingBox();
+                windowExtent = windowExtent.Rotate(-_rotation, Center.X, Center.Y);
+                var rotatedBoundingBox = windowExtent.ToBoundingBox();
                 _extent.Min.X = rotatedBoundingBox.MinX;
                 _extent.Min.Y = rotatedBoundingBox.MinY;
                 _extent.Max.X = rotatedBoundingBox.MaxX;
                 _extent.Max.Y = rotatedBoundingBox.MaxY;
             }
-
-            _modified = false;
         }
 
         public void SetSize(double width, double height)
         {
+            _animations = new();
+
             _width = width;
             _height = height;
+
+            UpdateExtent();
             OnViewportChanged();
         }
 
-        public void SetCenter(double x, double y)
+        public void SetCenter(double x, double y, long duration = 0, Easing? easing = default)
         {
-            Center = new MPoint(x, y);
+            _animations = new();
+
+            _centerX = x;
+            _centerY = y;
+
+            UpdateExtent();
             OnViewportChanged();
         }
 
-        public void SetCenter(MReadOnlyPoint center)
+        public void SetCenterAndResolution(double x, double y, double resolution, long duration = 0, Easing? easing = default)
         {
-            Center = center;
+            _animations = new();
+
+            if (duration == 0)
+            {
+                _centerX = x;
+                _centerY = y;
+                _resolution = resolution;
+            }
+            else
+            {
+                _animations = ZoomOnCenterAnimation.Create(this, x, y, resolution, duration);
+            }
+
+            UpdateExtent();
             OnViewportChanged();
         }
 
-        public void SetResolution(double resolution)
+        public void SetCenter(MReadOnlyPoint center, long duration = 0, Easing? easing = default)
         {
-            Resolution = resolution;
+            _animations = new();
+
+            if (center.Equals(Center))
+                return;
+
+            if (duration == 0)
+            {
+                _centerX = center.X;
+                _centerY = center.Y;
+            }
+            else
+            {
+                _animations = CenterAnimation.Create(this, center.X, center.Y, duration, easing);
+            }
+
+            UpdateExtent();
             OnViewportChanged();
         }
 
-        public void SetRotation(double rotation)
+        public void SetResolution(double resolution, long duration = 0, Easing? easing = default)
         {
-            Rotation = rotation;
+            _animations = new();
+
+            if (Resolution == resolution)
+                return;
+
+            if (duration == 0)
+                Resolution = resolution;
+            else
+            {
+                _animations = ZoomAnimation.Create(this, resolution, duration, easing);
+            }
+
+            UpdateExtent();
+            OnViewportChanged();
+        }
+
+        public void SetRotation(double rotation, long duration = 0, Easing? easing = default)
+        {
+            _animations = new();
+
+            if (Rotation == rotation) return;
+
+            if (duration == 0)
+                Rotation = rotation;
+            else
+            {
+                _animations = RotateAnimation.Create(this, rotation, duration, easing);
+            }
+
+            UpdateExtent();
             OnViewportChanged();
         }
 
@@ -328,7 +435,6 @@ namespace Mapsui
         /// <param name="propertyName">Name of property that changed</param>
         private void OnViewportChanged([CallerMemberName] string? propertyName = null)
         {
-            _modified = true;
             ViewportChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
@@ -337,10 +443,22 @@ namespace Mapsui
             return new Viewport
             {
                 Resolution = resolution,
-                Center = extent.Centroid,
+                _centerX = extent.Centroid.X,
+                _centerY = extent.Centroid.Y,
                 Width = extent.Width / resolution,
                 Height = extent.Height / resolution
             };
+        }
+
+        public bool UpdateAnimations()
+        {
+            if (_animations.All(a => a.Done)) _animations.Clear();
+            return Animation.UpdateAnimations(this, _animations);
+        }
+
+        public void SetAnimations(List<AnimationEntry<Viewport>> animations)
+        {
+            _animations = animations;
         }
     }
 }

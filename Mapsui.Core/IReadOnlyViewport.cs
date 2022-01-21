@@ -10,7 +10,10 @@ namespace Mapsui
         /// <summary>
         /// Coordinate of center of viewport in map coordinates
         /// </summary>
-        MReadOnlyPoint Center { get; } // todo: the point itself has X and Y values that can be set. 
+        MReadOnlyPoint Center { get; }
+
+        double CenterX { get; }
+        double CenterY { get; }
 
         /// <summary>
         /// Resolution of the viewport in units per pixel
@@ -71,6 +74,14 @@ namespace Mapsui
         MPoint ScreenToWorld(double x, double y);
 
         /// <summary>
+        /// Converts X/Y in screen pixels to a point in map units, respecting rotation
+        /// </summary>
+        /// <param name="x">Screen position x coordinate</param>
+        /// <param name="y">Screen position y coordinate</param>
+        /// <returns>Tuple of x and y in world coordintes</returns>
+        (double worldX, double worldY) ScreenToWorldXY(double x, double y);
+
+        /// <summary>
         /// Converts X/Y in map units to a point in device independent unit (or DIP or DP),
         /// respecting rotation
         /// </summary>
@@ -93,24 +104,16 @@ namespace Mapsui
         /// </summary>
         /// <param name="worldX">X coordinate in map units</param>
         /// <param name="worldY">Y coordinate in map units</param>
-        /// <returns>MPoint in screen pixels</returns>
-        MPoint WorldToScreenUnrotated(double worldX, double worldY); // todo: Get rid of this method
+        /// <returns>Tuple of x and y in screen coordintes</returns>
+        (double screenX, double screenY) WorldToScreenXY(double worldX, double worldY);
 
         /// <summary>
         /// Converts X/Y in map units to a point in device independent units (or DIP or DP),
         /// respecting rotation
         /// </summary>
-        /// <param name="worldPosition">Coordinate in map units</param>
-        /// <returns>MPoint in screen pixels</returns>
-        MPoint WorldToScreenUnrotated(MPoint worldPosition); // todo: Get rid of this method
-
-        /// <summary>
-        /// WindowExtend gives the four corner points of viewport in map coordinates
-        /// </summary>
-        /// <remarks>
-        /// If viewport is rotated, this corner points are not horizontally or vertically
-        /// aligned.
-        /// </remarks>
-        MQuad? WindowExtent { get; }
+        /// <param name="worldX">X coordinate in map units</param>
+        /// <param name="worldY">Y coordinate in map units</param>
+        /// <returns>The x and y in screen pixels</returns>
+        (double screenX, double screenY) WorldToScreenUnrotated(double worldX, double worldY); // todo: Get rid of this method
     }
 }

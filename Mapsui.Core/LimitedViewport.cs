@@ -1,6 +1,8 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using Mapsui.Geometries;
 using Mapsui.UI;
+using Mapsui.Utilities;
 
 namespace Mapsui
 {
@@ -11,12 +13,14 @@ namespace Mapsui
             _viewport.ViewportChanged += (sender, args) => ViewportChanged?.Invoke(sender, args);
         }
 
-        private readonly IViewport _viewport = new Viewport();
+        private readonly Viewport _viewport = new Viewport();
         public IViewportLimiter? Limiter { get; set; }
         public Map? Map { get; set; }
 
         public event PropertyChangedEventHandler? ViewportChanged;
         public MReadOnlyPoint Center => _viewport.Center;
+        public double CenterX => _viewport.CenterX;
+        public double CenterY => _viewport.CenterY;
         public double Resolution => _viewport.Resolution;
         public MRect? Extent => _viewport.Extent;
         public double Width => _viewport.Width;
@@ -24,7 +28,6 @@ namespace Mapsui
         public double Rotation => _viewport.Rotation;
         public bool HasSize => _viewport.HasSize;
         public bool IsRotated => _viewport.IsRotated;
-        public MQuad? WindowExtent => _viewport.WindowExtent;
 
         public void Transform(MPoint position, MPoint previousPosition, double deltaResolution = 1, double deltaRotation = 0)
         {
@@ -43,21 +46,28 @@ namespace Mapsui
             if (_viewport.HasSize) Limiter?.LimitExtent(_viewport, Map?.Extent);
         }
 
-        public virtual void SetCenter(double x, double y)
+        public virtual void SetCenter(double x, double y, long duration = 0, Easing? easing = default)
         {
             if (Map?.PanLock ?? false) return;
-            _viewport.SetCenter(x, y);
+            _viewport.SetCenter(x, y, duration, easing);
             Limiter?.LimitExtent(_viewport, Map?.Extent);
         }
 
-        public void SetCenter(MReadOnlyPoint center)
+        public virtual void SetCenterAndResolution(double x, double y, double resolution, long duration = 0, Easing? easing = default)
         {
             if (Map?.PanLock ?? false) return;
-            _viewport.SetCenter(center);
+            _viewport.SetCenterAndResolution(x, y, resolution, duration, easing);
             Limiter?.LimitExtent(_viewport, Map?.Extent);
         }
 
-        public void SetResolution(double resolution)
+        public void SetCenter(MReadOnlyPoint center, long duration = 0, Easing? easing = default)
+        {
+            if (Map?.PanLock ?? false) return;
+            _viewport.SetCenter(center, duration, easing);
+            Limiter?.LimitExtent(_viewport, Map?.Extent);
+        }
+
+        public void SetResolution(double resolution, long duration = 0, Easing? easing = default)
         {
             if (Map?.ZoomLock ?? true) return;
             if (Limiter != null)
@@ -65,13 +75,13 @@ namespace Mapsui
                 resolution = Limiter.LimitResolution(resolution, _viewport.Width, _viewport.Height, Map.Resolutions, Map.Extent);
             }
 
-            _viewport.SetResolution(resolution);
+            _viewport.SetResolution(resolution, duration, easing);
         }
 
-        public void SetRotation(double rotation)
+        public void SetRotation(double rotation, long duration = 0, Easing? easing = default)
         {
             if (Map?.RotationLock ?? false) return;
-            _viewport.SetRotation(rotation);
+            _viewport.SetRotation(rotation, duration, easing);
             Limiter?.LimitExtent(_viewport, Map?.Extent);
         }
 
@@ -95,14 +105,29 @@ namespace Mapsui
             return _viewport.WorldToScreen(worldX, worldY);
         }
 
-        public MPoint WorldToScreenUnrotated(double worldX, double worldY)
+        public bool UpdateAnimations()
         {
-            return _viewport.WorldToScreenUnrotated(worldX, worldY);
+            return _viewport.UpdateAnimations();
         }
 
-        public MPoint WorldToScreenUnrotated(MPoint worldPosition)
+        public void SetAnimations(List<AnimationEntry<Viewport>> animations)
         {
-            return _viewport.WorldToScreenUnrotated(worldPosition);
+            _viewport.SetAnimations(animations);
+        }
+
+        public (double worldX, double worldY) ScreenToWorldXY(double x, double y)
+        {
+            return _viewport.ScreenToWorldXY(x, y);
+        }
+
+        public (double screenX, double screenY) WorldToScreenXY(double worldX, double worldY)
+        {
+            return _viewport.WorldToScreenXY(worldX, worldY);
+        }
+
+        public (double screenX, double screenY) WorldToScreenUnrotated(double worldX, double worldY)
+        {
+            return _viewport.WorldToScreenUnrotated(worldX, worldY);
         }
     }
 }

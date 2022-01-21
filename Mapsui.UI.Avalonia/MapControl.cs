@@ -51,7 +51,6 @@ namespace Mapsui.UI.Avalonia
 
             PointerWheelChanged += MapControlMouseWheel;
 
-            Tapped += OnSingleTapped;
             DoubleTapped += OnDoubleTapped;
         }
 
@@ -107,14 +106,9 @@ namespace Mapsui.UI.Avalonia
             _downMousePosition = touchPosition;
             _mouseDown = true;
             e.Pointer.Capture(this);
-
-            if (IsClick(_currentMousePosition, _downMousePosition))
-            {
-                HandleFeatureInfo(e);
-            }
         }
 
-        private void HandleFeatureInfo(PointerPressedEventArgs e)
+        private void HandleFeatureInfo(PointerReleasedEventArgs e)
         {
             if (FeatureInfo == null) return; // don't fetch if you the call back is not set.
 
@@ -171,6 +165,12 @@ namespace Mapsui.UI.Avalonia
             _mouseDown = false;
             _previousMousePosition = null;
             e.Pointer.Capture(null);
+
+            if (IsClick(_currentMousePosition, _downMousePosition))
+            {
+                HandleFeatureInfo(e);
+                OnInfo(InvokeInfo(_mousePosition, _mousePosition, 1));
+            }
         }
 
         private static bool IsClick(MPoint? currentPosition, MPoint? previousPosition)
@@ -192,18 +192,8 @@ namespace Mapsui.UI.Avalonia
         private void OnDoubleTapped(object? sender, RoutedEventArgs e)
         {
             // We have a new interaction with the screen, so stop all navigator animations
-            Navigator.StopRunningAnimation();
             var tapPosition = _mousePosition;
             OnInfo(InvokeInfo(tapPosition, tapPosition, 2));
-        }
-
-        private void OnSingleTapped(object? sender, RoutedEventArgs e)
-        {
-            // We have a new interaction with the screen, so stop all navigator animations
-            Navigator.StopRunningAnimation();
-
-            var tapPosition = _mousePosition;
-            OnInfo(InvokeInfo(tapPosition, tapPosition, 1));
         }
 
         public override void Render(DrawingContext context)

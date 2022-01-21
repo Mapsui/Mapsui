@@ -2,23 +2,29 @@
 using Mapsui.Extensions;
 using Mapsui.Layers.Tiling;
 using Mapsui.UI;
+using Mapsui.Utilities;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ScaleBar;
 using Mapsui.Widgets.Zoom;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class ViewportAnimationSample : ISample
+    public class ViewportZoomToResolutionAnimationSample : ISample
     {
-        public string Name => "Viewport animation";
-        public string Category => "Navigation";
+        public string Name => "Viewport Zoom Animation";
+        public string Category => "Animations";
 
+        public static int mode = 1;
         public void Setup(IMapControl mapControl)
         {
             mapControl.Map = CreateMap();
+
             mapControl.Map.Info += (s, a) => {
                 if (a.MapInfo?.WorldPosition != null)
-                    mapControl.Navigator?.FlyTo(a.MapInfo.WorldPosition, mapControl.Viewport.Resolution * 8, 5000);
+                {
+                    // Zoom to the a new resolution
+                    mapControl.Navigator?.ZoomTo(a.MapInfo.Resolution * 0.5, 500, Easing.CubicOut);
+                }
             };
         }
 

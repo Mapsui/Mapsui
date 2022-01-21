@@ -39,8 +39,6 @@ namespace Mapsui.Samples.Wpf
             FillListWithSamples();
         }
 
-
-
         private void MapControlOnMouseMove(object sender, MouseEventArgs e)
         {
             var screenPosition = e.GetPosition(MapControl);
@@ -77,7 +75,7 @@ namespace Mapsui.Samples.Wpf
                 CategoryComboBox.Items.Add(category);
             }
 
-            CategoryComboBox.SelectedIndex = 1;
+            CategoryComboBox.SelectedIndex = 0;
         }
 
         private UIElement CreateRadioButton(ISample sample)

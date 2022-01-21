@@ -15,17 +15,22 @@
 // along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+using System.Collections.Generic;
+using Mapsui.Animations;
 using Mapsui.Geometries;
+using Mapsui.Utilities;
 
 namespace Mapsui
 {
-    public interface IViewport : IReadOnlyViewport
+    public interface IViewport : IReadOnlyViewport, IAnimatable
     {
-        void SetCenter(double x, double y);
-        void SetCenter(MReadOnlyPoint center);
-        void SetResolution(double resolution);
-        void SetRotation(double rotation);
+        void SetCenter(double x, double y, long duration = 0, Easing? easing = default);
+        void SetCenterAndResolution(double x, double y, double resolution, long duration = 0, Easing? easing = default);
+        void SetCenter(MReadOnlyPoint center, long duration = 0, Easing? easing = default);
+        void SetResolution(double resolution, long duration = 0, Easing? easing = default);
+        void SetRotation(double rotation, long duration = 0, Easing? easing = default);
         void SetSize(double width, double height);
+        void SetAnimations(List<AnimationEntry<Viewport>> animations);
 
         /// <summary>
         /// Moving the position of viewport to a new one

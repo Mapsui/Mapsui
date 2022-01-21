@@ -117,11 +117,6 @@ namespace Mapsui
         /// <param name="maxDuration">Max duration of fling deceleration, changes based on total velocity></param>
         void FlingWith(double velocityX, double velocityY, long maxDuration);
 
-        /// <summary>
-        /// Stop any current animation if it is running
-        /// </summary>
-        void StopRunningAnimation();
-
         void FlyTo(MPoint center, double maxResolution, long duration = 2000);
     }
 }

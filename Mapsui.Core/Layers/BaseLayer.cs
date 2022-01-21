@@ -220,5 +220,10 @@ namespace Mapsui.Layers
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+        public virtual bool UpdateAnimations()
+        {
+            return false; // By default there are no animation and nothing to update
+        }
     }
 }

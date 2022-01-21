@@ -2,18 +2,18 @@
 
 namespace Mapsui.Utilities
 {
-    public class AnimationEntry
+    public class AnimationEntry<T>
     {
         private readonly double _animationDelta;
-        private readonly Action<AnimationEntry, double>? _tick;
-        private readonly Action<AnimationEntry>? _final;
+        private readonly Action<T, AnimationEntry<T>, double>? _tick;
+        private readonly Action<T, AnimationEntry<T>>? _final;
 
         public AnimationEntry(object start, object end,
             double animationStart = 0, double animationEnd = 1,
             Easing? easing = null,
             bool repeat = false,
-            Action<AnimationEntry, double>? tick = null,
-            Action<AnimationEntry>? final = null)
+            Action<T, AnimationEntry<T>, double>? tick = null,
+            Action<T, AnimationEntry<T>>? final = null)
         {
             AnimationStart = animationStart;
             AnimationEnd = animationEnd;
@@ -79,7 +79,7 @@ namespace Mapsui.Utilities
         /// Called when a value should changed
         /// </summary>
         /// <param name="value">Position in animation cycle between 0 and 1</param>
-        internal bool Tick(double value)
+        internal bool Tick(T target, double value)
         {
             // Each tick gets a value between 0 and 1 for its own cycle
             // Its independent from the global animation cycle
@@ -87,7 +87,7 @@ namespace Mapsui.Utilities
 
             if (_tick != null)
             {
-                _tick(this, v);
+                _tick(target, this, v);
                 return true;
             }
 
@@ -95,13 +95,18 @@ namespace Mapsui.Utilities
         }
 
         /// <summary>
+        /// When Done is true the AnimationEntry can removed. The Animation class will set this to true.
+        /// </summary>
+        internal bool Done { get; set; }
+
+        /// <summary>
         /// Called when the animation cycle is at the end
         /// </summary>
-        internal void Final()
+        internal void Final(T target)
         {
             if (_final != null)
             {
-                _final(this);
+                _final(target, this);
             }
         }
     }

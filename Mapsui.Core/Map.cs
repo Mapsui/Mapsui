@@ -324,14 +324,27 @@ namespace Mapsui
 
         public virtual void Dispose()
         {
-            foreach (var layer in this.Layers)
+            foreach (var layer in Layers)
             {
                 // remove Event so that no memory leaks occour
                 LayerRemoved(layer);
             }
 
             // clear the layers
-            this.Layers.Clear();
+            Layers.Clear();
+        }
+
+        public bool UpdateAnimations()
+        {
+            var areAnimationsRunning = false;
+
+            foreach (var layer in Layers)
+            {
+                if (layer.UpdateAnimations())
+                    areAnimationsRunning = true;
+            }
+
+            return areAnimationsRunning;
         }
     }
 }

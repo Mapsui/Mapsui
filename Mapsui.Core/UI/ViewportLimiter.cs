@@ -64,7 +64,7 @@ namespace Mapsui.UI
             return new MinMax(mostZoomedOut, mostZoomedIn);
         }
 
-        public void Limit(IViewport viewport, IReadOnlyList<double> mapResolutions, MRect? mapEnvelope)
+        public void Limit(Viewport viewport, IReadOnlyList<double> mapResolutions, MRect? mapEnvelope)
         {
             viewport.SetResolution(LimitResolution(viewport.Resolution, viewport.Width, viewport.Height, mapResolutions, mapEnvelope));
             LimitExtent(viewport, mapEnvelope);
@@ -87,7 +87,7 @@ namespace Mapsui.UI
             return resolution;
         }
 
-        public void LimitExtent(IViewport viewport, MRect? mapEnvelope)
+        public void LimitExtent(Viewport viewport, MRect? mapEnvelope)
         {
             var maxExtent = PanLimits ?? mapEnvelope;
             if (maxExtent == null)
@@ -105,7 +105,8 @@ namespace Mapsui.UI
             if (viewport.Center.Y > maxExtent.Top) y = maxExtent.Top;
             if (viewport.Center.Y < maxExtent.Bottom) y = maxExtent.Bottom;
 
-            viewport.SetCenter(x, y);
+            viewport.CenterX = x;
+            viewport.CenterY = y;
         }
     }
 }
