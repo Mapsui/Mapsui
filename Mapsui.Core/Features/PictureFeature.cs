@@ -14,9 +14,9 @@ namespace Mapsui.Layers
             Extent = rasterFeature.Extent;
         }
 
-        public PictureFeature(object? raster, MRect? extent = null)
+        public PictureFeature(object? picture, MRect? extent = null)
         {
-            Picture = raster;
+            Picture = picture;
             Extent = extent;
         }
 
@@ -32,7 +32,9 @@ namespace Mapsui.Layers
 
         public override void Dispose()
         {
+#pragma warning disable IDISP007 // Don't dispose injected
             (this.Picture as IDisposable)?.Dispose();
+#pragma warning restore IDISP007 // Don't dispose injected
             this.Picture = null;
         }
     }
