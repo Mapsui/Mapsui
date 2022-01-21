@@ -36,10 +36,8 @@ namespace Mapsui.UI.iOS
 
         private void Initialize()
         {
-            _invalidate = () =>
-            {
-                RunOnUIThread(() =>
-                {
+            _invalidate = () => {
+                RunOnUIThread(() => {
                     SetNeedsDisplay();
                     _canvas?.SetNeedsDisplay();
                 });

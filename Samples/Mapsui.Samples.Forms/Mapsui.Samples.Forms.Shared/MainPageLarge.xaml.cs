@@ -136,7 +136,7 @@ namespace Mapsui.Samples.Forms
 
         public async void StartGPS()
         {
-            try 
+            try
             {
                 if (Device.RuntimePlatform == Device.WPF)
                     return;

@@ -191,8 +191,8 @@ namespace Mapsui.UI.Forms
 
         private async void OnTouch(object? sender, SKTouchEventArgs e)
         {
-            try 
-            { 
+            try
+            {
                 // Save time, when the event occurs
                 var ticks = DateTime.Now.Ticks;
 

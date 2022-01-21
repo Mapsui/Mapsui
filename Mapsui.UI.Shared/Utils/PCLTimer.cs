@@ -16,8 +16,7 @@ namespace Mapsui.UI
     {
         public Timer(TimerCallback callback, object state, int dueTime, int period)
         {
-            Task.Delay(dueTime, Token).ContinueWith(async (t, s) =>
-            {
+            Task.Delay(dueTime, Token).ContinueWith(async (t, s) => {
                 var tuple = (Tuple<TimerCallback, object>?)s;
 
                 while (true)
