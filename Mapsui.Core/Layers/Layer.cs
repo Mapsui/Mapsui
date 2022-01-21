@@ -152,9 +152,9 @@ namespace Mapsui.Layers
             Delayer.ExecuteDelayed(() => DelayedFetch(fetchInfo));
         }
 
-        override public bool UpdateAnimations()
+        public override bool UpdateAnimations()
         {
-            bool areAnimationsRunning = false;
+            var areAnimationsRunning = false;
             foreach (var animation in Animations)
             {
                 if (animation())

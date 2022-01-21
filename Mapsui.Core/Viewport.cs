@@ -80,10 +80,7 @@ namespace Mapsui
         public bool HasSize => !_width.IsNanOrInfOrZero() && !_height.IsNanOrInfOrZero();
 
         /// <inheritdoc />
-        public MReadOnlyPoint Center
-        {
-            get => new MReadOnlyPoint(_centerX, _centerY);
-        }
+        public MReadOnlyPoint Center => new MReadOnlyPoint(_centerX, _centerY);
 
         /// <inheritdoc />
         public double CenterX
@@ -168,13 +165,7 @@ namespace Mapsui
         public bool IsRotated { get; private set; }
 
         /// <inheritdoc />
-        public MRect Extent
-        {
-            get
-            {
-                return _extent;
-            }
-        }
+        public MRect Extent => _extent;
 
         /// <inheritdoc />
         public MPoint WorldToScreen(MPoint worldPosition)
@@ -313,12 +304,13 @@ namespace Mapsui
             var bottom = Center.Y - halfSpanY;
             var right = Center.X + halfSpanX;
             var top = Center.Y + halfSpanY;
-            var windowExtent = new MQuad();
-
-            windowExtent.BottomLeft = new MPoint(left, bottom);
-            windowExtent.TopLeft = new MPoint(left, top);
-            windowExtent.TopRight = new MPoint(right, top);
-            windowExtent.BottomRight = new MPoint(right, bottom);
+            var windowExtent = new MQuad
+            {
+                BottomLeft = new MPoint(left, bottom),
+                TopLeft = new MPoint(left, top),
+                TopRight = new MPoint(right, top),
+                BottomRight = new MPoint(right, bottom)
+            };
 
             if (!IsRotated)
             {

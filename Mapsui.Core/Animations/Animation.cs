@@ -100,7 +100,7 @@ namespace Mapsui.Utilities
 
             var isRunning = false;
 
-            for (int i = 0; i < entriesArray.Length; i++)
+            for (var i = 0; i < entriesArray.Length; i++)
             {
                 if (ticks > entriesArray[i].EndTicks)
                 {
