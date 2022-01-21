@@ -158,12 +158,12 @@ namespace Mapsui.Geometries
         ///     Return a copy of this geometry
         /// </summary>
         /// <returns>Copy of Geometry</returns>
-        public new LineString Clone()
+        public override IGeometry Clone()
         {
             var l = new LineString();
             foreach (var vertex in Vertices)
             {
-                l.Vertices.Add(vertex.Clone());
+                l.Vertices.Add((Point)vertex.Clone());
             }
             return l;
         }

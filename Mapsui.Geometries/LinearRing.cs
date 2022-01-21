@@ -75,12 +75,12 @@ namespace Mapsui.Geometries
         ///     Return a copy of this geometry
         /// </summary>
         /// <returns>Copy of Geometry</returns>
-        public new LinearRing Clone()
+        public override IGeometry Clone()
         {
             var linearRing = new LinearRing();
             for (var i = 0; i < Vertices.Count; i++)
             {
-                linearRing.Vertices.Add(Vertices[i].Clone());
+                linearRing.Vertices.Add((Point)Vertices[i].Clone());
             }
             return linearRing;
         }
@@ -169,7 +169,7 @@ namespace Mapsui.Geometries
         public LineString GetLineString()
         {
             // Make deep copy
-            var tmpLineString = Clone();
+            var tmpLineString = (LinearRing)Clone();
 
             // Check if first vertex is approximately equal to last vertex
             if (Math.Abs(tmpLineString.StartPoint.X - tmpLineString.EndPoint.X) > double.Epsilon ||
@@ -185,7 +185,7 @@ namespace Mapsui.Geometries
 
         public LinearRing Rotate(double degrees, Point center)
         {
-            var rotatedLinearRing = Clone();
+            var rotatedLinearRing = (LinearRing)Clone();
             for (var i = 0; i < Vertices.Count; i++)
             {
                 rotatedLinearRing.Vertices[i] = Vertices[i].Rotate(degrees, center);

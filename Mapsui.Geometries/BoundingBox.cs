@@ -84,8 +84,8 @@ namespace Mapsui.Geometries
                     continue;
                 }
 
-                min ??= boundingBox.Min.Clone();
-                max ??= boundingBox.Max.Clone();
+                min ??= (Point)boundingBox.Min.Clone();
+                max ??= (Point)boundingBox.Max.Clone();
 
                 min.X = Math.Min(boundingBox.Min.X, min.X);
                 min.Y = Math.Min(boundingBox.Min.Y, min.Y);

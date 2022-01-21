@@ -111,10 +111,7 @@ namespace Mapsui.Geometries
         ///     This method must be overridden using 'public new [derived_data_type] Clone()'
         /// </summary>
         /// <returns>Copy of Geometry</returns>
-        public Geometry Clone()
-        {
-            throw new Exception("Clone() has not been implemented on derived datatype");
-        }
+        public abstract IGeometry Clone();
 
         /// <summary>
         ///     Creates a <see cref="Geometry" /> based on a WellKnownText string

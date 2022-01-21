@@ -131,12 +131,12 @@ namespace Mapsui.Geometries
         ///     Return a copy of this geometry
         /// </summary>
         /// <returns>Copy of Geometry</returns>
-        public new Polygon Clone()
+        public override IGeometry Clone()
         {
-            var polygon = new Polygon { ExteriorRing = ExteriorRing?.Clone() };
+            var polygon = new Polygon { ExteriorRing = ExteriorRing?.Clone() as LinearRing };
             foreach (var interiorRing in InteriorRings)
             {
-                polygon.InteriorRings.Add(interiorRing.Clone());
+                polygon.InteriorRings.Add((LinearRing)interiorRing.Clone());
             }
             return polygon;
         }
@@ -213,7 +213,7 @@ namespace Mapsui.Geometries
 
         public Polygon Rotate(double degrees, Point center)
         {
-            var rotatedPolygon = Clone();
+            var rotatedPolygon = (Polygon)Clone();
             rotatedPolygon.ExteriorRing = ExteriorRing?.Rotate(degrees, center);
             for (var i = 0; i < InteriorRings.Count; i++)
             {

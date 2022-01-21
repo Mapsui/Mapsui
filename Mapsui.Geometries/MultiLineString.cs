@@ -159,12 +159,12 @@ namespace Mapsui.Geometries
         ///     Return a copy of this geometry
         /// </summary>
         /// <returns>Copy of Geometry</returns>
-        public new MultiLineString Clone()
+        public override IGeometry Clone()
         {
             var geoms = new MultiLineString();
             foreach (var lineString in LineStrings)
             {
-                geoms.LineStrings.Add(lineString.Clone());
+                geoms.LineStrings.Add((LineString)lineString.Clone());
             }
             return geoms;
         }

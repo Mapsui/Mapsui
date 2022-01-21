@@ -15,8 +15,6 @@
 // along with SharpMap; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
-using System;
-
 namespace Mapsui.Geometries
 {
     /// <summary>
@@ -63,7 +61,7 @@ namespace Mapsui.Geometries
         ///     This method must be overridden using 'public new [derived_data_type] Clone()'
         /// </summary>
         /// <returns>Copy of Geometry</returns>
-        Geometry Clone();
+        IGeometry Clone();
 
         /// <summary>
         ///     Returns 'true' if this <see cref="Geometry" /> is 'spatially equal' to another <see cref="Geometry" />

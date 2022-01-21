@@ -125,12 +125,12 @@ namespace Mapsui.Geometries
         ///     Return a copy of this geometry
         /// </summary>
         /// <returns>Copy of Geometry</returns>
-        public new MultiPoint Clone()
+        public override IGeometry Clone()
         {
             var geoms = new MultiPoint();
             foreach (var point in Points)
             {
-                geoms.Points.Add(point.Clone());
+                geoms.Points.Add((Point)point.Clone());
             }
             return geoms;
         }

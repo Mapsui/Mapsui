@@ -133,12 +133,12 @@ namespace Mapsui.Geometries
         ///     Return a copy of this geometry
         /// </summary>
         /// <returns>Copy of Geometry</returns>
-        public new MultiPolygon Clone()
+        public override IGeometry Clone()
         {
             var geoms = new MultiPolygon();
             foreach (var polygon in Polygons)
             {
-                geoms.Polygons.Add(polygon.Clone());
+                geoms.Polygons.Add((Polygon)polygon.Clone());
             }
             return geoms;
         }

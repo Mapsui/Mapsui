@@ -16,7 +16,6 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using Mapsui.Geometries.Utilities;
 
 // ReSharper disable NonReadonlyMemberInGetHashCode // todo: Fix this real issue
@@ -204,7 +203,7 @@ namespace Mapsui.Geometries
         ///     This method must be overridden using 'public new [derived_data_type] Clone()'
         /// </summary>
         /// <returns>Clone</returns>
-        public new Point Clone()
+        public override IGeometry Clone()
         {
             return new Point(X, Y);
         }

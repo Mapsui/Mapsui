@@ -181,13 +181,13 @@ namespace Mapsui.Geometries
             return hash;
         }
 
-        public new GeometryCollection Clone()
+        public override IGeometry Clone()
         {
             var geometryCollection = new GeometryCollection();
 
             foreach (var geometry in this)
             {
-                geometryCollection.Collection.Add(geometry.Clone());
+                geometryCollection.Collection.Add((Geometry)geometry.Clone());
             }
 
             return geometryCollection;
