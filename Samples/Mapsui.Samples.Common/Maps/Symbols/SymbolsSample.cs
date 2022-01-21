@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Mapsui.Layers;
 using Mapsui.Layers.Tiling;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
 using Mapsui.UI;
-
-#pragma warning disable IDISP001 // Dispose created
+using Mapsui.Utilities;
+using Mapsui.Extensions;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -90,35 +89,27 @@ namespace Mapsui.Samples.Common.Maps
                 new SymbolStyle {SymbolScale = 1.2, SymbolOffset = new Offset(diameter, 0)},
                 new SymbolStyle {SymbolScale = 1, SymbolOffset = new Offset(0, diameter)},
                 new SymbolStyle {SymbolScale = 1, SymbolOffset = new Offset(diameter, diameter)},
-                CreateBitmapStyle("Mapsui.Samples.Common.Images.ic_place_black_24dp.png", 0.7),
-                CreateBitmapStyle("Mapsui.Samples.Common.Images.ic_place_black_24dp.png", 0.8),
-                CreateBitmapStyle("Mapsui.Samples.Common.Images.ic_place_black_24dp.png", 0.9),
-                CreateBitmapStyle("Mapsui.Samples.Common.Images.ic_place_black_24dp.png", 1.0),
-                CreateSvgStyle("Mapsui.Samples.Common.Images.Pin.svg", 0.7),
-                CreateSvgStyle("Mapsui.Samples.Common.Images.Pin.svg", 0.8),
-                CreateSvgStyle("Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg", 0.05),
-                CreateSvgStyle("Mapsui.Samples.Common.Images.Ghostscript_Tiger.svg", 0.1),
+                CreateBitmapStyle("Images.ic_place_black_24dp.png", 0.7),
+                CreateBitmapStyle("Images.ic_place_black_24dp.png", 0.8),
+                CreateBitmapStyle("Images.ic_place_black_24dp.png", 0.9),
+                CreateBitmapStyle("Images.ic_place_black_24dp.png", 1.0),
+                CreateSvgStyle("Images.Pin.svg", 0.7),
+                CreateSvgStyle("Images.Pin.svg", 0.8),
+                CreateSvgStyle("Images.Ghostscript_Tiger.svg", 0.05),
+                CreateSvgStyle("Images.Ghostscript_Tiger.svg", 0.1),
             };
         }
 
         private static SymbolStyle CreateBitmapStyle(string embeddedResourcePath, double scale)
         {
-            var bitmapId = GetBitmapIdForEmbeddedResource(embeddedResourcePath);
+            var bitmapId = typeof(SymbolsSample).LoadBitmapId(embeddedResourcePath);
             return new SymbolStyle { BitmapId = bitmapId, SymbolScale = scale, SymbolOffset = new Offset(0, 32) };
         }
 
         private static SymbolStyle CreateSvgStyle(string embeddedResourcePath, double scale)
         {
-            var bitmapId = GetBitmapIdForEmbeddedResource(embeddedResourcePath);
+            var bitmapId = typeof(SymbolsSample).LoadSvgId(embeddedResourcePath);
             return new SymbolStyle { BitmapId = bitmapId, SymbolScale = scale, SymbolOffset = new Offset(0.0, 0.5, true) };
-        }
-
-        private static int GetBitmapIdForEmbeddedResource(string imagePath)
-        {
-            var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
-            var image = assembly.GetManifestResourceStream(imagePath);
-            var bitmapId = BitmapRegistry.Instance.Register(image);
-            return bitmapId;
         }
 
         private static IFeature CreatePointWithStackedStyles()

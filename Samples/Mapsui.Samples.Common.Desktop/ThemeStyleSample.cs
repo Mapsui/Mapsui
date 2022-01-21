@@ -10,9 +10,7 @@ using Mapsui.Samples.Common.Maps;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.UI;
-using Mapsui.Utilities;
-
-#pragma warning disable IDISP001 // Dispose created
+using Mapsui.Extensions;
 
 namespace Mapsui.Samples.Common.Desktop
 {
@@ -101,11 +99,11 @@ namespace Mapsui.Samples.Common.Desktop
 
         private static SymbolStyle CreateCityStyle()
         {
-            var imageStream = EmbeddedResourceLoader.Load("Images.location.png", typeof(GeodanOfficesSample));
+            var location = typeof(GeodanOfficesSample).LoadBitmapId("Images.location.png");
 
             return new SymbolStyle
             {
-                BitmapId = BitmapRegistry.Instance.Register(imageStream),
+                BitmapId = location,
                 SymbolOffset = new Offset { Y = 64 },
                 SymbolScale = 0.25
             };

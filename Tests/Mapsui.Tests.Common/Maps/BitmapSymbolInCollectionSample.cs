@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
+using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.GeometryLayer;
 using Mapsui.Layers;
@@ -7,6 +8,7 @@ using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.UI;
+using Mapsui.Utilities;
 
 namespace Mapsui.Tests.Common.Maps
 {
@@ -42,8 +44,8 @@ namespace Mapsui.Tests.Common.Maps
 
         public static IEnumerable<IFeature> CreateFeatures()
         {
-            var circleIconId = LoadBitmap("Mapsui.Tests.Common.Resources.Images.circle.png");
-            var checkeredIconId = LoadBitmap("Mapsui.Tests.Common.Resources.Images.checkered.png");
+            var circleIconId = typeof(BitmapSymbolInCollectionSample).LoadBitmapId("Resources.Images.circle.png");
+            var checkeredIconId = typeof(BitmapSymbolInCollectionSample).LoadBitmapId("Resources.Images.checkered.png");
 
             // This test was created the easy way, by copying BitmapSymbol and the GeometryCollection. A test 
             // written specifically for GeometryCollection would probably look different.
@@ -71,12 +73,6 @@ namespace Mapsui.Tests.Common.Maps
                     Styles = new[] {new VectorStyle {Fill = new Brush(Color.Green), Outline = null}}
                 }
             };
-        }
-
-        private static int LoadBitmap(string bitmapPath)
-        {
-            var assembly = typeof(Utilities).GetTypeInfo().Assembly;
-            return BitmapRegistry.Instance.Register(assembly.GetManifestResourceStream(bitmapPath)!);
         }
     }
 }

@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Layers.Tiling;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
 using Mapsui.UI;
+using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -28,9 +30,7 @@ namespace Mapsui.Samples.Common.Maps
 
         public static Map CreateMap()
         {
-            var assembly = typeof(AtlasSample).GetTypeInfo().Assembly;
-            _atlasBitmapId = BitmapRegistry.Instance.Register(assembly.GetManifestResourceStream("Mapsui.Samples.Common.Images.osm-liberty.png")!);
-
+            _atlasBitmapId = typeof(AtlasSample).LoadBitmapId("Images.osm-liberty.png");
             var map = new Map();
 
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
