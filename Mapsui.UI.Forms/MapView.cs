@@ -182,7 +182,7 @@ namespace Mapsui.UI.Forms
         public bool MyLocationEnabled
         {
             get => (bool)GetValue(MyLocationEnabledProperty);
-#if __MAUI__ // WORKAROUND for Preview 11 will be fixed in Preview 12 https://github.com/dotnet/maui/issues/3597
+#if __MAUI__ // WORKAROUND for Preview 11 will be fixed in Preview 13 https://github.com/dotnet/maui/issues/3597
             set => Application.Current?.Dispatcher.Dispatch(() => SetValue(MyLocationEnabledProperty, value));
 #else
             set => Device.BeginInvokeOnMainThread(() => SetValue(MyLocationEnabledProperty, value));
@@ -862,6 +862,13 @@ namespace Mapsui.UI.Forms
                 _pictNorthing?.Dispose();
                 MyLocationLayer?.Dispose();
             }
+        }
+
+        public void Reset()
+        {
+            Pins.Clear();
+            Drawables.Clear();
+            HideCallouts();
         }
     }
 }

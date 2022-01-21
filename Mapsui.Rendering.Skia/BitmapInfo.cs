@@ -8,7 +8,8 @@ namespace Mapsui.Rendering.Skia
     {
         Bitmap,
         Svg,
-        Sprite
+        Sprite,
+        Picture
     }
 
     public class BitmapInfo
@@ -30,6 +31,22 @@ namespace Mapsui.Rendering.Skia
             {
                 _data = value;
                 Type = BitmapType.Bitmap;
+            }
+        }
+
+        public SKPicture? Picture
+        {
+            get
+            {
+                if (Type == BitmapType.Picture)
+                    return _data as SKPicture;
+                else
+                    return null;
+            }
+            set
+            {
+                _data = value;
+                Type = BitmapType.Picture;
             }
         }
 

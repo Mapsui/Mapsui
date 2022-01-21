@@ -3,13 +3,12 @@ using System.Linq;
 using BruTile;
 using BruTile.Cache;
 using Mapsui.Extensions;
-using Mapsui.Layers;
 
 namespace Mapsui.Rendering
 {
     public class RenderFetchStrategy : IRenderFetchStrategy
     {
-        public IList<IFeature> Get(MRect extent, double resolution, ITileSchema schema, ITileCache<RasterFeature?> memoryCache)
+        public IList<IFeature> Get(MRect extent, double resolution, ITileSchema schema, ITileCache<IFeature?> memoryCache)
         {
             var dictionary = new Dictionary<TileIndex, IFeature>();
             var level = BruTile.Utilities.GetNearestLevel(schema.Resolutions, resolution);
@@ -19,7 +18,7 @@ namespace Mapsui.Rendering
         }
 
         public static void GetRecursive(IDictionary<TileIndex, IFeature> resultTiles, ITileSchema schema,
-            ITileCache<RasterFeature?> cache, Extent extent, int level)
+            ITileCache<IFeature?> cache, Extent extent, int level)
         {
             // to improve performance, convert the resolutions to a list so they can be walked up by
             // simply decrementing an index when the level index needs to change
@@ -35,7 +34,7 @@ namespace Mapsui.Rendering
         }
 
         private static void GetRecursive(IDictionary<TileIndex, IFeature> resultTiles, ITileSchema schema,
-            ITileCache<RasterFeature?> cache, Extent extent, IList<KeyValuePair<int, Resolution>> resolutions, int resolutionIndex)
+            ITileCache<IFeature?> cache, Extent extent, IList<KeyValuePair<int, Resolution>> resolutions, int resolutionIndex)
         {
             if (resolutionIndex < 0 || resolutionIndex >= resolutions.Count)
                 return;
@@ -49,7 +48,7 @@ namespace Mapsui.Rendering
                 // Geometry can be null for some tile sources to indicate the tile is not present.
                 // It is stored in the tile cache to prevent retries. It should not be returned to the 
                 // renderer.
-                if (feature?.Raster == null)
+                if (feature == null)
                 {
                     // only continue the recursive search if this tile is within the extent
                     if (tileInfo.Extent.Intersects(extent))
