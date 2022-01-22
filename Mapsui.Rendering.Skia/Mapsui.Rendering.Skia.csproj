@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Mapsui.Geometries\Mapsui.Geometries.csproj" />
+    <ProjectReference Include="..\Mapsui.GeometryLayers\Mapsui.GeometryLayers.csproj" />
     <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
   </ItemGroup>
 
