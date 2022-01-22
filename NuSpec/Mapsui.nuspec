@@ -26,7 +26,7 @@
   </metadata>
   <files>
 
-    <file src="..\Mapsui\bin\Release\netstandard2.0\Mapsui.Geometries.dll" target="lib\netstandard2.0\Mapsui.Geometries.dll" />
+    <file src="..\Mapsui.Geometries\bin\Release\netstandard2.0\Mapsui.Geometries.dll" target="lib\netstandard2.0\Mapsui.Geometries.dll" />
     <file src="..\Mapsui\bin\Release\netstandard2.0\Mapsui.dll" target="lib\netstandard2.0\Mapsui.dll" />
     <file src="..\Mapsui.Rendering.Skia\bin\Release\netstandard2.0\Mapsui.Rendering.Skia.dll" target="lib\netstandard2.0\Mapsui.Rendering.Skia.dll" />
     <file src="..\Mapsui.Core\bin\Release\netstandard2.0\Mapsui.Core.dll" target="lib\netstandard2.0\Mapsui.Core.dll" />
