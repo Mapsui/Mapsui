@@ -126,7 +126,7 @@ public static Map CreateMap()
     // the Map CRS.
 
     var geometryLayer = CreateWorldCitiesLayer();
-    var extent = geometryLayer.Extent?.Grow(10000);
+    var extent = geometryLayer.Extent!.Grow(10000);
     var map = new Map
     {
         CRS = &quot;EPSG:3857&quot;, // The Map CRS needs to be set
@@ -164,11 +164,11 @@ public static Layer CreateWorldCitiesLayer()
 
 private static SymbolStyle CreateCityStyle()
 {
-    var imageStream = EmbeddedResourceLoader.Load(&quot;Images.location.png&quot;, typeof(GeodanOfficesSample));
+    var location = typeof(GeodanOfficesSample).LoadBitmapId(&quot;Images.location.png&quot;);
 
     return new SymbolStyle
     {
-        BitmapId = BitmapRegistry.Instance.Register(imageStream),
+        BitmapId = location,
         SymbolOffset = new Offset { Y = 64 },
         SymbolScale = 0.25,
         Opacity = 0.5f

@@ -96,7 +96,9 @@
   <div classs="implements">
     <h5>Implements</h5>
     <div><span class="xref">Mapsui.Layers.ILayer</span></div>
+    <div><span class="xref">Mapsui.Animations.IAnimatable</span></div>
     <div><span class="xref">System.ComponentModel.INotifyPropertyChanged</span></div>
+    <div><span class="xref">System.IDisposable</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -173,6 +175,12 @@
       <span class="xref">Mapsui.Layers.BaseLayer.OnDataChanged(Mapsui.Fetcher.DataChangedEventArgs)</span>
     </div>
     <div>
+      <span class="xref">Mapsui.Layers.BaseLayer.Dispose()</span>
+    </div>
+    <div>
+      <span class="xref">Mapsui.Layers.BaseLayer.UpdateAnimations()</span>
+    </div>
+    <div>
       <span class="xref">System.Object.Equals(System.Object)</span>
     </div>
     <div>
@@ -195,7 +203,7 @@
   <h6><strong>Assembly</strong>: Mapsui.UI.Forms.dll</h6>
   <h5 id="Mapsui_UI_Objects_MyLocationLayer_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class MyLocationLayer : MemoryLayer, ILayer, INotifyPropertyChanged</code></pre>
+    <pre><code class="lang-csharp hljs">public class MyLocationLayer : MemoryLayer, ILayer, IAnimatable, INotifyPropertyChanged, IDisposable</code></pre>
   </div>
   <h5 id="Mapsui_UI_Objects_MyLocationLayer_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>There are two different symbols for own loaction: one is used when there isn&apos;t a change in position (still),
@@ -208,7 +216,7 @@ and one is used, if the position changes (moving).</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Objects_MyLocationLayer__ctor_Mapsui_UI_Forms_MapView_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Objects.MyLocationLayer.%23ctor(Mapsui.UI.Forms.MapView)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/Objects/MyLocationLayer.cs/#L104">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/Objects/MyLocationLayer.cs/#L107">View Source</a>
   </span>
   <a id="Mapsui_UI_Objects_MyLocationLayer__ctor_" data-uid="Mapsui.UI.Objects.MyLocationLayer.#ctor*"></a>
   <h4 id="Mapsui_UI_Objects_MyLocationLayer__ctor_Mapsui_UI_Forms_MapView_" data-uid="Mapsui.UI.Objects.MyLocationLayer.#ctor(Mapsui.UI.Forms.MapView)">MyLocationLayer(MapView)</h4>
@@ -242,7 +250,7 @@ and one is used, if the position changes (moving).</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Objects_MyLocationLayer__ctor_Mapsui_UI_Forms_MapView_Mapsui_UI_Forms_Position_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Objects.MyLocationLayer.%23ctor(Mapsui.UI.Forms.MapView%2CMapsui.UI.Forms.Position)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/Objects/MyLocationLayer.cs/#L95">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/Objects/MyLocationLayer.cs/#L98">View Source</a>
   </span>
   <a id="Mapsui_UI_Objects_MyLocationLayer__ctor_" data-uid="Mapsui.UI.Objects.MyLocationLayer.#ctor*"></a>
   <h4 id="Mapsui_UI_Objects_MyLocationLayer__ctor_Mapsui_UI_Forms_MapView_Mapsui_UI_Forms_Position_" data-uid="Mapsui.UI.Objects.MyLocationLayer.#ctor(Mapsui.UI.Forms.MapView,Mapsui.UI.Forms.Position)">MyLocationLayer(MapView, Position)</h4>
@@ -285,7 +293,7 @@ with a starting location.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Objects_MyLocationLayer_Direction.md&amp;value=---%0Auid%3A%20Mapsui.UI.Objects.MyLocationLayer.Direction%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/Objects/MyLocationLayer.cs/#L75">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/Objects/MyLocationLayer.cs/#L78">View Source</a>
   </span>
   <a id="Mapsui_UI_Objects_MyLocationLayer_Direction_" data-uid="Mapsui.UI.Objects.MyLocationLayer.Direction*"></a>
   <h4 id="Mapsui_UI_Objects_MyLocationLayer_Direction" data-uid="Mapsui.UI.Objects.MyLocationLayer.Direction">Direction</h4>
@@ -317,7 +325,7 @@ with a starting location.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Objects_MyLocationLayer_IsMoving.md&amp;value=---%0Auid%3A%20Mapsui.UI.Objects.MyLocationLayer.IsMoving%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/Objects/MyLocationLayer.cs/#L50">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/Objects/MyLocationLayer.cs/#L53">View Source</a>
   </span>
   <a id="Mapsui_UI_Objects_MyLocationLayer_IsMoving_" data-uid="Mapsui.UI.Objects.MyLocationLayer.IsMoving*"></a>
   <h4 id="Mapsui_UI_Objects_MyLocationLayer_IsMoving" data-uid="Mapsui.UI.Objects.MyLocationLayer.IsMoving">IsMoving</h4>
@@ -348,7 +356,7 @@ with a starting location.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Objects_MyLocationLayer_MyLocation.md&amp;value=---%0Auid%3A%20Mapsui.UI.Objects.MyLocationLayer.MyLocation%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/Objects/MyLocationLayer.cs/#L69">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/Objects/MyLocationLayer.cs/#L72">View Source</a>
   </span>
   <a id="Mapsui_UI_Objects_MyLocationLayer_MyLocation_" data-uid="Mapsui.UI.Objects.MyLocationLayer.MyLocation*"></a>
   <h4 id="Mapsui_UI_Objects_MyLocationLayer_MyLocation" data-uid="Mapsui.UI.Objects.MyLocationLayer.MyLocation">MyLocation</h4>
@@ -380,7 +388,7 @@ with a starting location.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Objects_MyLocationLayer_Scale.md&amp;value=---%0Auid%3A%20Mapsui.UI.Objects.MyLocationLayer.Scale%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/Objects/MyLocationLayer.cs/#L87">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/Objects/MyLocationLayer.cs/#L90">View Source</a>
   </span>
   <a id="Mapsui_UI_Objects_MyLocationLayer_Scale_" data-uid="Mapsui.UI.Objects.MyLocationLayer.Scale*"></a>
   <h4 id="Mapsui_UI_Objects_MyLocationLayer_Scale" data-uid="Mapsui.UI.Objects.MyLocationLayer.Scale">Scale</h4>
@@ -412,7 +420,7 @@ with a starting location.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Objects_MyLocationLayer_ViewingDirection.md&amp;value=---%0Auid%3A%20Mapsui.UI.Objects.MyLocationLayer.ViewingDirection%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/Objects/MyLocationLayer.cs/#L81">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/Objects/MyLocationLayer.cs/#L84">View Source</a>
   </span>
   <a id="Mapsui_UI_Objects_MyLocationLayer_ViewingDirection_" data-uid="Mapsui.UI.Objects.MyLocationLayer.ViewingDirection*"></a>
   <h4 id="Mapsui_UI_Objects_MyLocationLayer_ViewingDirection" data-uid="Mapsui.UI.Objects.MyLocationLayer.ViewingDirection">ViewingDirection</h4>
@@ -443,10 +451,44 @@ with a starting location.</p>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Objects_MyLocationLayer_Dispose_System_Boolean_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Objects.MyLocationLayer.Dispose(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/Objects/MyLocationLayer.cs/#L346">View Source</a>
+  </span>
+  <a id="Mapsui_UI_Objects_MyLocationLayer_Dispose_" data-uid="Mapsui.UI.Objects.MyLocationLayer.Dispose*"></a>
+  <h4 id="Mapsui_UI_Objects_MyLocationLayer_Dispose_System_Boolean_" data-uid="Mapsui.UI.Objects.MyLocationLayer.Dispose(System.Boolean)">Dispose(Boolean)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void Dispose(bool disposing)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">disposing</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">Mapsui.Layers.BaseLayer.Dispose(System.Boolean)</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Objects_MyLocationLayer_UpdateMyDirection_System_Double_System_Double_System_Boolean_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Objects.MyLocationLayer.UpdateMyDirection(System.Double%2CSystem.Double%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/Objects/MyLocationLayer.cs/#L236">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/Objects/MyLocationLayer.cs/#L227">View Source</a>
   </span>
   <a id="Mapsui_UI_Objects_MyLocationLayer_UpdateMyDirection_" data-uid="Mapsui.UI.Objects.MyLocationLayer.UpdateMyDirection*"></a>
   <h4 id="Mapsui_UI_Objects_MyLocationLayer_UpdateMyDirection_System_Double_System_Double_System_Boolean_" data-uid="Mapsui.UI.Objects.MyLocationLayer.UpdateMyDirection(System.Double,System.Double,System.Boolean)">UpdateMyDirection(Double, Double, Boolean)</h4>
@@ -491,7 +533,7 @@ with a starting location.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Objects_MyLocationLayer_UpdateMyLocation_Mapsui_UI_Forms_Position_System_Boolean_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Objects.MyLocationLayer.UpdateMyLocation(Mapsui.UI.Forms.Position%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/Objects/MyLocationLayer.cs/#L185">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/Objects/MyLocationLayer.cs/#L176">View Source</a>
   </span>
   <a id="Mapsui_UI_Objects_MyLocationLayer_UpdateMyLocation_" data-uid="Mapsui.UI.Objects.MyLocationLayer.UpdateMyLocation*"></a>
   <h4 id="Mapsui_UI_Objects_MyLocationLayer_UpdateMyLocation_Mapsui_UI_Forms_Position_System_Boolean_" data-uid="Mapsui.UI.Objects.MyLocationLayer.UpdateMyLocation(Mapsui.UI.Forms.Position,System.Boolean)">UpdateMyLocation(Position, Boolean)</h4>
@@ -530,7 +572,7 @@ with a starting location.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Objects_MyLocationLayer_UpdateMySpeed_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Objects.MyLocationLayer.UpdateMySpeed(System.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/Objects/MyLocationLayer.cs/#L282">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/Objects/MyLocationLayer.cs/#L273">View Source</a>
   </span>
   <a id="Mapsui_UI_Objects_MyLocationLayer_UpdateMySpeed_" data-uid="Mapsui.UI.Objects.MyLocationLayer.UpdateMySpeed*"></a>
   <h4 id="Mapsui_UI_Objects_MyLocationLayer_UpdateMySpeed_System_Double_" data-uid="Mapsui.UI.Objects.MyLocationLayer.UpdateMySpeed(System.Double)">UpdateMySpeed(Double)</h4>
@@ -564,7 +606,7 @@ with a starting location.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Objects_MyLocationLayer_UpdateMyViewDirection_System_Double_System_Double_System_Boolean_.md&amp;value=---%0Auid%3A%20Mapsui.UI.Objects.MyLocationLayer.UpdateMyViewDirection(System.Double%2CSystem.Double%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/Objects/MyLocationLayer.cs/#L307">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/Objects/MyLocationLayer.cs/#L298">View Source</a>
   </span>
   <a id="Mapsui_UI_Objects_MyLocationLayer_UpdateMyViewDirection_" data-uid="Mapsui.UI.Objects.MyLocationLayer.UpdateMyViewDirection*"></a>
   <h4 id="Mapsui_UI_Objects_MyLocationLayer_UpdateMyViewDirection_System_Double_System_Double_System_Boolean_" data-uid="Mapsui.UI.Objects.MyLocationLayer.UpdateMyViewDirection(System.Double,System.Double,System.Boolean)">UpdateMyViewDirection(Double, Double, Boolean)</h4>
@@ -609,7 +651,13 @@ with a starting location.</p>
       <span class="xref">Mapsui.Layers.ILayer</span>
   </div>
   <div>
+      <span class="xref">Mapsui.Animations.IAnimatable</span>
+  </div>
+  <div>
       <span class="xref">System.ComponentModel.INotifyPropertyChanged</span>
+  </div>
+  <div>
+      <span class="xref">System.IDisposable</span>
   </div>
 </article>
           </div>
@@ -622,7 +670,7 @@ with a starting location.</p>
                     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_Objects_MyLocationLayer.md&amp;value=---%0Auid%3A%20Mapsui.UI.Objects.MyLocationLayer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/Objects/MyLocationLayer.cs/#L30" class="contribution-link">View Source</a>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.UI.Forms/Objects/MyLocationLayer.cs/#L33" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

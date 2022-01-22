@@ -3348,12 +3348,6 @@ references:
   commentId: M:Mapsui.GeometryLayer.GeometryFeature.Dispose
   fullName: Mapsui.GeometryLayer.GeometryFeature.Dispose()
   nameWithType: GeometryFeature.Dispose()
-- uid: Mapsui.GeometryLayer.GeometryFeature.Dispose(System.Boolean)
-  name: Dispose(Boolean)
-  href: api/Mapsui.GeometryLayer.GeometryFeature.html#Mapsui_GeometryLayer_GeometryFeature_Dispose_System_Boolean_
-  commentId: M:Mapsui.GeometryLayer.GeometryFeature.Dispose(System.Boolean)
-  fullName: Mapsui.GeometryLayer.GeometryFeature.Dispose(System.Boolean)
-  nameWithType: GeometryFeature.Dispose(Boolean)
 - uid: Mapsui.GeometryLayer.GeometryFeature.Dispose*
   name: Dispose
   href: api/Mapsui.GeometryLayer.GeometryFeature.html#Mapsui_GeometryLayer_GeometryFeature_Dispose_
@@ -3374,19 +3368,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.GeometryLayer.GeometryFeature.Extent
   nameWithType: GeometryFeature.Extent
-- uid: Mapsui.GeometryLayer.GeometryFeature.Finalize
-  name: Finalize()
-  href: api/Mapsui.GeometryLayer.GeometryFeature.html#Mapsui_GeometryLayer_GeometryFeature_Finalize
-  commentId: M:Mapsui.GeometryLayer.GeometryFeature.Finalize
-  fullName: Mapsui.GeometryLayer.GeometryFeature.Finalize()
-  nameWithType: GeometryFeature.Finalize()
-- uid: Mapsui.GeometryLayer.GeometryFeature.Finalize*
-  name: Finalize
-  href: api/Mapsui.GeometryLayer.GeometryFeature.html#Mapsui_GeometryLayer_GeometryFeature_Finalize_
-  commentId: Overload:Mapsui.GeometryLayer.GeometryFeature.Finalize
-  isSpec: "True"
-  fullName: Mapsui.GeometryLayer.GeometryFeature.Finalize
-  nameWithType: GeometryFeature.Finalize
 - uid: Mapsui.GeometryLayer.GeometryFeature.Geometry
   name: Geometry
   href: api/Mapsui.GeometryLayer.GeometryFeature.html#Mapsui_GeometryLayer_GeometryFeature_Geometry
@@ -3485,6 +3466,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Providers.GeoTiffProvider.CRS
   nameWithType: GeoTiffProvider.CRS
+- uid: Mapsui.Providers.GeoTiffProvider.Dispose
+  name: Dispose()
+  href: api/Mapsui.Providers.GeoTiffProvider.html#Mapsui_Providers_GeoTiffProvider_Dispose
+  commentId: M:Mapsui.Providers.GeoTiffProvider.Dispose
+  fullName: Mapsui.Providers.GeoTiffProvider.Dispose()
+  nameWithType: GeoTiffProvider.Dispose()
+- uid: Mapsui.Providers.GeoTiffProvider.Dispose*
+  name: Dispose
+  href: api/Mapsui.Providers.GeoTiffProvider.html#Mapsui_Providers_GeoTiffProvider_Dispose_
+  commentId: Overload:Mapsui.Providers.GeoTiffProvider.Dispose
+  isSpec: "True"
+  fullName: Mapsui.Providers.GeoTiffProvider.Dispose
+  nameWithType: GeoTiffProvider.Dispose
 - uid: Mapsui.Providers.GeoTiffProvider.GetExtent
   name: GetExtent()
   href: api/Mapsui.Providers.GeoTiffProvider.html#Mapsui_Providers_GeoTiffProvider_GetExtent
@@ -4505,6 +4499,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Providers.Wfs.Utilities.HttpClientUtil.Credentials
   nameWithType: HttpClientUtil.Credentials
+- uid: Mapsui.Providers.Wfs.Utilities.HttpClientUtil.Dispose
+  name: Dispose()
+  href: api/Mapsui.Providers.Wfs.Utilities.HttpClientUtil.html#Mapsui_Providers_Wfs_Utilities_HttpClientUtil_Dispose
+  commentId: M:Mapsui.Providers.Wfs.Utilities.HttpClientUtil.Dispose
+  fullName: Mapsui.Providers.Wfs.Utilities.HttpClientUtil.Dispose()
+  nameWithType: HttpClientUtil.Dispose()
+- uid: Mapsui.Providers.Wfs.Utilities.HttpClientUtil.Dispose*
+  name: Dispose
+  href: api/Mapsui.Providers.Wfs.Utilities.HttpClientUtil.html#Mapsui_Providers_Wfs_Utilities_HttpClientUtil_Dispose_
+  commentId: Overload:Mapsui.Providers.Wfs.Utilities.HttpClientUtil.Dispose
+  isSpec: "True"
+  fullName: Mapsui.Providers.Wfs.Utilities.HttpClientUtil.Dispose
+  nameWithType: HttpClientUtil.Dispose
 - uid: Mapsui.Providers.Wfs.Utilities.HttpClientUtil.GetDataStream
   name: GetDataStream()
   href: api/Mapsui.Providers.Wfs.Utilities.HttpClientUtil.html#Mapsui_Providers_Wfs_Utilities_HttpClientUtil_GetDataStream
@@ -8312,19 +8319,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Providers.Wms.WmsProvider.CRS
   nameWithType: WmsProvider.CRS
-- uid: Mapsui.Providers.Wms.WmsProvider.Dispose
-  name: Dispose()
-  href: api/Mapsui.Providers.Wms.WmsProvider.html#Mapsui_Providers_Wms_WmsProvider_Dispose
-  commentId: M:Mapsui.Providers.Wms.WmsProvider.Dispose
-  fullName: Mapsui.Providers.Wms.WmsProvider.Dispose()
-  nameWithType: WmsProvider.Dispose()
-- uid: Mapsui.Providers.Wms.WmsProvider.Dispose*
-  name: Dispose
-  href: api/Mapsui.Providers.Wms.WmsProvider.html#Mapsui_Providers_Wms_WmsProvider_Dispose_
-  commentId: Overload:Mapsui.Providers.Wms.WmsProvider.Dispose
-  isSpec: "True"
-  fullName: Mapsui.Providers.Wms.WmsProvider.Dispose
-  nameWithType: WmsProvider.Dispose
 - uid: Mapsui.Providers.Wms.WmsProvider.ExtraParams
   name: ExtraParams
   href: api/Mapsui.Providers.Wms.WmsProvider.html#Mapsui_Providers_Wms_WmsProvider_ExtraParams
@@ -8729,6 +8723,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Skia.BitmapInfo.IterationUsed
   nameWithType: BitmapInfo.IterationUsed
+- uid: Mapsui.Rendering.Skia.BitmapInfo.Picture
+  name: Picture
+  href: api/Mapsui.Rendering.Skia.BitmapInfo.html#Mapsui_Rendering_Skia_BitmapInfo_Picture
+  commentId: P:Mapsui.Rendering.Skia.BitmapInfo.Picture
+  fullName: Mapsui.Rendering.Skia.BitmapInfo.Picture
+  nameWithType: BitmapInfo.Picture
+- uid: Mapsui.Rendering.Skia.BitmapInfo.Picture*
+  name: Picture
+  href: api/Mapsui.Rendering.Skia.BitmapInfo.html#Mapsui_Rendering_Skia_BitmapInfo_Picture_
+  commentId: Overload:Mapsui.Rendering.Skia.BitmapInfo.Picture
+  isSpec: "True"
+  fullName: Mapsui.Rendering.Skia.BitmapInfo.Picture
+  nameWithType: BitmapInfo.Picture
 - uid: Mapsui.Rendering.Skia.BitmapInfo.Sprite
   name: Sprite
   href: api/Mapsui.Rendering.Skia.BitmapInfo.html#Mapsui_Rendering_Skia_BitmapInfo_Sprite
@@ -8793,6 +8800,12 @@ references:
   commentId: F:Mapsui.Rendering.Skia.BitmapType.Bitmap
   fullName: Mapsui.Rendering.Skia.BitmapType.Bitmap
   nameWithType: BitmapType.Bitmap
+- uid: Mapsui.Rendering.Skia.BitmapType.Picture
+  name: Picture
+  href: api/Mapsui.Rendering.Skia.BitmapType.html#Mapsui_Rendering_Skia_BitmapType_Picture
+  commentId: F:Mapsui.Rendering.Skia.BitmapType.Picture
+  fullName: Mapsui.Rendering.Skia.BitmapType.Picture
+  nameWithType: BitmapType.Picture
 - uid: Mapsui.Rendering.Skia.BitmapType.Sprite
   name: Sprite
   href: api/Mapsui.Rendering.Skia.BitmapType.html#Mapsui_Rendering_Skia_BitmapType_Sprite
@@ -9221,15 +9234,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Skia.MapRenderer.MapRenderer
   nameWithType: MapRenderer.MapRenderer
-- uid: Mapsui.Rendering.Skia.MapRenderer.GetMapInfo(Mapsui.MPoint,Mapsui.IReadOnlyViewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Int32)
-  name: GetMapInfo(MPoint, IReadOnlyViewport, IEnumerable<ILayer>, Int32)
-  href: api/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_GetMapInfo_Mapsui_MPoint_Mapsui_IReadOnlyViewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Int32_
-  commentId: M:Mapsui.Rendering.Skia.MapRenderer.GetMapInfo(Mapsui.MPoint,Mapsui.IReadOnlyViewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Int32)
-  name.vb: GetMapInfo(MPoint, IReadOnlyViewport, IEnumerable(Of ILayer), Int32)
-  fullName: Mapsui.Rendering.Skia.MapRenderer.GetMapInfo(Mapsui.MPoint, Mapsui.IReadOnlyViewport, System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>, System.Int32)
-  fullName.vb: Mapsui.Rendering.Skia.MapRenderer.GetMapInfo(Mapsui.MPoint, Mapsui.IReadOnlyViewport, System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer), System.Int32)
-  nameWithType: MapRenderer.GetMapInfo(MPoint, IReadOnlyViewport, IEnumerable<ILayer>, Int32)
-  nameWithType.vb: MapRenderer.GetMapInfo(MPoint, IReadOnlyViewport, IEnumerable(Of ILayer), Int32)
 - uid: Mapsui.Rendering.Skia.MapRenderer.GetMapInfo(System.Double,System.Double,Mapsui.IReadOnlyViewport,System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Int32)
   name: GetMapInfo(Double, Double, IReadOnlyViewport, IEnumerable<ILayer>, Int32)
   href: api/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_GetMapInfo_System_Double_System_Double_Mapsui_IReadOnlyViewport_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Int32_
@@ -9565,6 +9569,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer.PerformanceWidgetRenderer
   nameWithType: PerformanceWidgetRenderer.PerformanceWidgetRenderer
+- uid: Mapsui.Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer.Dispose
+  name: Dispose()
+  href: api/Mapsui.Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_PerformanceWidgetRenderer_Dispose
+  commentId: M:Mapsui.Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer.Dispose
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer.Dispose()
+  nameWithType: PerformanceWidgetRenderer.Dispose()
+- uid: Mapsui.Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer.Dispose*
+  name: Dispose
+  href: api/Mapsui.Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_PerformanceWidgetRenderer_Dispose_
+  commentId: Overload:Mapsui.Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer.Dispose
+  isSpec: "True"
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer.Dispose
+  nameWithType: PerformanceWidgetRenderer.Dispose
 - uid: Mapsui.Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer.Draw(SkiaSharp.SKCanvas,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget,System.Single)
   name: Draw(SKCanvas, IReadOnlyViewport, IWidget, Single)
   href: api/Mapsui.Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_PerformanceWidgetRenderer_Draw_SkiaSharp_SKCanvas_Mapsui_IReadOnlyViewport_Mapsui_Widgets_IWidget_System_Single_
@@ -9584,6 +9601,19 @@ references:
   commentId: T:Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer
   fullName: Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer
   nameWithType: ScaleBarWidgetRenderer
+- uid: Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.Dispose
+  name: Dispose()
+  href: api/Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_ScaleBarWidgetRenderer_Dispose
+  commentId: M:Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.Dispose
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.Dispose()
+  nameWithType: ScaleBarWidgetRenderer.Dispose()
+- uid: Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.Dispose*
+  name: Dispose
+  href: api/Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_ScaleBarWidgetRenderer_Dispose_
+  commentId: Overload:Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.Dispose
+  isSpec: "True"
+  fullName: Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.Dispose
+  nameWithType: ScaleBarWidgetRenderer.Dispose
 - uid: Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.Draw(SkiaSharp.SKCanvas,Mapsui.IReadOnlyViewport,Mapsui.Widgets.IWidget,System.Single)
   name: Draw(SKCanvas, IReadOnlyViewport, IWidget, Single)
   href: api/Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.html#Mapsui_Rendering_Skia_SkiaWidgets_ScaleBarWidgetRenderer_Draw_SkiaSharp_SKCanvas_Mapsui_IReadOnlyViewport_Mapsui_Widgets_IWidget_System_Single_
@@ -10514,6 +10544,19 @@ references:
   commentId: F:Mapsui.UI.Forms.Callout.DefaultTitleTextAlignment
   fullName: Mapsui.UI.Forms.Callout.DefaultTitleTextAlignment
   nameWithType: Callout.DefaultTitleTextAlignment
+- uid: Mapsui.UI.Forms.Callout.Dispose
+  name: Dispose()
+  href: api/Mapsui.UI.Forms.Callout.html#Mapsui_UI_Forms_Callout_Dispose
+  commentId: M:Mapsui.UI.Forms.Callout.Dispose
+  fullName: Mapsui.UI.Forms.Callout.Dispose()
+  nameWithType: Callout.Dispose()
+- uid: Mapsui.UI.Forms.Callout.Dispose*
+  name: Dispose
+  href: api/Mapsui.UI.Forms.Callout.html#Mapsui_UI_Forms_Callout_Dispose_
+  commentId: Overload:Mapsui.UI.Forms.Callout.Dispose
+  isSpec: "True"
+  fullName: Mapsui.UI.Forms.Callout.Dispose
+  nameWithType: Callout.Dispose
 - uid: Mapsui.UI.Forms.Callout.Feature
   name: Feature
   href: api/Mapsui.UI.Forms.Callout.html#Mapsui_UI_Forms_Callout_Feature
@@ -12392,6 +12435,19 @@ references:
   commentId: F:Mapsui.UI.Forms.MapView.ButtonSpacingProperty
   fullName: Mapsui.UI.Forms.MapView.ButtonSpacingProperty
   nameWithType: MapView.ButtonSpacingProperty
+- uid: Mapsui.UI.Forms.MapView.Dispose(System.Boolean)
+  name: Dispose(Boolean)
+  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Dispose_System_Boolean_
+  commentId: M:Mapsui.UI.Forms.MapView.Dispose(System.Boolean)
+  fullName: Mapsui.UI.Forms.MapView.Dispose(System.Boolean)
+  nameWithType: MapView.Dispose(Boolean)
+- uid: Mapsui.UI.Forms.MapView.Dispose*
+  name: Dispose
+  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Dispose_
+  commentId: Overload:Mapsui.UI.Forms.MapView.Dispose
+  isSpec: "True"
+  fullName: Mapsui.UI.Forms.MapView.Dispose
+  nameWithType: MapView.Dispose
 - uid: Mapsui.UI.Forms.MapView.Drawables
   name: Drawables
   href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Drawables
@@ -12602,6 +12658,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapView.Pins
   nameWithType: MapView.Pins
+- uid: Mapsui.UI.Forms.MapView.Reset
+  name: Reset()
+  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Reset
+  commentId: M:Mapsui.UI.Forms.MapView.Reset
+  fullName: Mapsui.UI.Forms.MapView.Reset()
+  nameWithType: MapView.Reset()
+- uid: Mapsui.UI.Forms.MapView.Reset*
+  name: Reset
+  href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_Reset_
+  commentId: Overload:Mapsui.UI.Forms.MapView.Reset
+  isSpec: "True"
+  fullName: Mapsui.UI.Forms.MapView.Reset
+  nameWithType: MapView.Reset
 - uid: Mapsui.UI.Forms.MapView.ReSnapRotationDegreesProperty
   name: ReSnapRotationDegreesProperty
   href: api/Mapsui.UI.Forms.MapView.html#Mapsui_UI_Forms_MapView_ReSnapRotationDegreesProperty
@@ -12820,6 +12889,19 @@ references:
   commentId: F:Mapsui.UI.Forms.Pin.ColorProperty
   fullName: Mapsui.UI.Forms.Pin.ColorProperty
   nameWithType: Pin.ColorProperty
+- uid: Mapsui.UI.Forms.Pin.Dispose
+  name: Dispose()
+  href: api/Mapsui.UI.Forms.Pin.html#Mapsui_UI_Forms_Pin_Dispose
+  commentId: M:Mapsui.UI.Forms.Pin.Dispose
+  fullName: Mapsui.UI.Forms.Pin.Dispose()
+  nameWithType: Pin.Dispose()
+- uid: Mapsui.UI.Forms.Pin.Dispose*
+  name: Dispose
+  href: api/Mapsui.UI.Forms.Pin.html#Mapsui_UI_Forms_Pin_Dispose_
+  commentId: Overload:Mapsui.UI.Forms.Pin.Dispose
+  isSpec: "True"
+  fullName: Mapsui.UI.Forms.Pin.Dispose
+  nameWithType: Pin.Dispose
 - uid: Mapsui.UI.Forms.Pin.Equals(System.Object)
   name: Equals(Object)
   href: api/Mapsui.UI.Forms.Pin.html#Mapsui_UI_Forms_Pin_Equals_System_Object_
@@ -14376,6 +14458,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Objects.MyLocationLayer.Direction
   nameWithType: MyLocationLayer.Direction
+- uid: Mapsui.UI.Objects.MyLocationLayer.Dispose(System.Boolean)
+  name: Dispose(Boolean)
+  href: api/Mapsui.UI.Objects.MyLocationLayer.html#Mapsui_UI_Objects_MyLocationLayer_Dispose_System_Boolean_
+  commentId: M:Mapsui.UI.Objects.MyLocationLayer.Dispose(System.Boolean)
+  fullName: Mapsui.UI.Objects.MyLocationLayer.Dispose(System.Boolean)
+  nameWithType: MyLocationLayer.Dispose(Boolean)
+- uid: Mapsui.UI.Objects.MyLocationLayer.Dispose*
+  name: Dispose
+  href: api/Mapsui.UI.Objects.MyLocationLayer.html#Mapsui_UI_Objects_MyLocationLayer_Dispose_
+  commentId: Overload:Mapsui.UI.Objects.MyLocationLayer.Dispose
+  isSpec: "True"
+  fullName: Mapsui.UI.Objects.MyLocationLayer.Dispose
+  nameWithType: MyLocationLayer.Dispose
 - uid: Mapsui.UI.Objects.MyLocationLayer.IsMoving
   name: IsMoving
   href: api/Mapsui.UI.Objects.MyLocationLayer.html#Mapsui_UI_Objects_MyLocationLayer_IsMoving
@@ -14916,6 +15011,25 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Uwp.MapControl.Clear
   nameWithType: MapControl.Clear
+- uid: Mapsui.UI.Uwp.MapControl.Dispose
+  name: Dispose()
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_Dispose
+  commentId: M:Mapsui.UI.Uwp.MapControl.Dispose
+  fullName: Mapsui.UI.Uwp.MapControl.Dispose()
+  nameWithType: MapControl.Dispose()
+- uid: Mapsui.UI.Uwp.MapControl.Dispose(System.Boolean)
+  name: Dispose(Boolean)
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_Dispose_System_Boolean_
+  commentId: M:Mapsui.UI.Uwp.MapControl.Dispose(System.Boolean)
+  fullName: Mapsui.UI.Uwp.MapControl.Dispose(System.Boolean)
+  nameWithType: MapControl.Dispose(Boolean)
+- uid: Mapsui.UI.Uwp.MapControl.Dispose*
+  name: Dispose
+  href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_Dispose_
+  commentId: Overload:Mapsui.UI.Uwp.MapControl.Dispose
+  isSpec: "True"
+  fullName: Mapsui.UI.Uwp.MapControl.Dispose
+  nameWithType: MapControl.Dispose
 - uid: Mapsui.UI.Uwp.MapControl.ForceUpdate
   name: ForceUpdate()
   href: api/Mapsui.UI.Uwp.MapControl.html#Mapsui_UI_Uwp_MapControl_ForceUpdate
@@ -15325,6 +15439,25 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.Clear
   nameWithType: MapControl.Clear
+- uid: Mapsui.UI.Wpf.MapControl.Dispose
+  name: Dispose()
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_Dispose
+  commentId: M:Mapsui.UI.Wpf.MapControl.Dispose
+  fullName: Mapsui.UI.Wpf.MapControl.Dispose()
+  nameWithType: MapControl.Dispose()
+- uid: Mapsui.UI.Wpf.MapControl.Dispose(System.Boolean)
+  name: Dispose(Boolean)
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_Dispose_System_Boolean_
+  commentId: M:Mapsui.UI.Wpf.MapControl.Dispose(System.Boolean)
+  fullName: Mapsui.UI.Wpf.MapControl.Dispose(System.Boolean)
+  nameWithType: MapControl.Dispose(Boolean)
+- uid: Mapsui.UI.Wpf.MapControl.Dispose*
+  name: Dispose
+  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_Dispose_
+  commentId: Overload:Mapsui.UI.Wpf.MapControl.Dispose
+  isSpec: "True"
+  fullName: Mapsui.UI.Wpf.MapControl.Dispose
+  nameWithType: MapControl.Dispose
 - uid: Mapsui.UI.Wpf.MapControl.FeatureInfo
   name: FeatureInfo
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_FeatureInfo
@@ -15762,6 +15895,69 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.ZoomedEventArgs.ScreenPosition
   nameWithType: ZoomedEventArgs.ScreenPosition
+- uid: Mapsui.Utilities
+  name: Mapsui.Utilities
+  href: api/Mapsui.Utilities.html
+  commentId: N:Mapsui.Utilities
+  fullName: Mapsui.Utilities
+  nameWithType: Mapsui.Utilities
+- uid: Mapsui.Utilities.SvgHelper
+  name: SvgHelper
+  href: api/Mapsui.Utilities.SvgHelper.html
+  commentId: T:Mapsui.Utilities.SvgHelper
+  fullName: Mapsui.Utilities.SvgHelper
+  nameWithType: SvgHelper
+- uid: Mapsui.Utilities.SvgHelper.LoadSvg(System.IO.Stream)
+  name: LoadSvg(Stream)
+  href: api/Mapsui.Utilities.SvgHelper.html#Mapsui_Utilities_SvgHelper_LoadSvg_System_IO_Stream_
+  commentId: M:Mapsui.Utilities.SvgHelper.LoadSvg(System.IO.Stream)
+  fullName: Mapsui.Utilities.SvgHelper.LoadSvg(System.IO.Stream)
+  nameWithType: SvgHelper.LoadSvg(Stream)
+- uid: Mapsui.Utilities.SvgHelper.LoadSvg(System.String)
+  name: LoadSvg(String)
+  href: api/Mapsui.Utilities.SvgHelper.html#Mapsui_Utilities_SvgHelper_LoadSvg_System_String_
+  commentId: M:Mapsui.Utilities.SvgHelper.LoadSvg(System.String)
+  fullName: Mapsui.Utilities.SvgHelper.LoadSvg(System.String)
+  nameWithType: SvgHelper.LoadSvg(String)
+- uid: Mapsui.Utilities.SvgHelper.LoadSvg*
+  name: LoadSvg
+  href: api/Mapsui.Utilities.SvgHelper.html#Mapsui_Utilities_SvgHelper_LoadSvg_
+  commentId: Overload:Mapsui.Utilities.SvgHelper.LoadSvg
+  isSpec: "True"
+  fullName: Mapsui.Utilities.SvgHelper.LoadSvg
+  nameWithType: SvgHelper.LoadSvg
+- uid: Mapsui.Utilities.SvgHelper.LoadSvgId(System.Type,System.String)
+  name: LoadSvgId(Type, String)
+  href: api/Mapsui.Utilities.SvgHelper.html#Mapsui_Utilities_SvgHelper_LoadSvgId_System_Type_System_String_
+  commentId: M:Mapsui.Utilities.SvgHelper.LoadSvgId(System.Type,System.String)
+  fullName: Mapsui.Utilities.SvgHelper.LoadSvgId(System.Type, System.String)
+  nameWithType: SvgHelper.LoadSvgId(Type, String)
+- uid: Mapsui.Utilities.SvgHelper.LoadSvgId*
+  name: LoadSvgId
+  href: api/Mapsui.Utilities.SvgHelper.html#Mapsui_Utilities_SvgHelper_LoadSvgId_
+  commentId: Overload:Mapsui.Utilities.SvgHelper.LoadSvgId
+  isSpec: "True"
+  fullName: Mapsui.Utilities.SvgHelper.LoadSvgId
+  nameWithType: SvgHelper.LoadSvgId
+- uid: Mapsui.Utilities.SvgHelper.LoadSvgPicture(System.IO.Stream)
+  name: LoadSvgPicture(Stream)
+  href: api/Mapsui.Utilities.SvgHelper.html#Mapsui_Utilities_SvgHelper_LoadSvgPicture_System_IO_Stream_
+  commentId: M:Mapsui.Utilities.SvgHelper.LoadSvgPicture(System.IO.Stream)
+  fullName: Mapsui.Utilities.SvgHelper.LoadSvgPicture(System.IO.Stream)
+  nameWithType: SvgHelper.LoadSvgPicture(Stream)
+- uid: Mapsui.Utilities.SvgHelper.LoadSvgPicture(System.String)
+  name: LoadSvgPicture(String)
+  href: api/Mapsui.Utilities.SvgHelper.html#Mapsui_Utilities_SvgHelper_LoadSvgPicture_System_String_
+  commentId: M:Mapsui.Utilities.SvgHelper.LoadSvgPicture(System.String)
+  fullName: Mapsui.Utilities.SvgHelper.LoadSvgPicture(System.String)
+  nameWithType: SvgHelper.LoadSvgPicture(String)
+- uid: Mapsui.Utilities.SvgHelper.LoadSvgPicture*
+  name: LoadSvgPicture
+  href: api/Mapsui.Utilities.SvgHelper.html#Mapsui_Utilities_SvgHelper_LoadSvgPicture_
+  commentId: Overload:Mapsui.Utilities.SvgHelper.LoadSvgPicture
+  isSpec: "True"
+  fullName: Mapsui.Utilities.SvgHelper.LoadSvgPicture
+  nameWithType: SvgHelper.LoadSvgPicture
 - uid: System.Collections.ObjectModel
   name: System.Collections.ObjectModel
   href: api/System.Collections.ObjectModel.html
