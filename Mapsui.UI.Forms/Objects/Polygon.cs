@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using Mapsui.GeometryLayer;
+using Mapsui.GeometryLayers;
 
 #if __MAUI__
 using Microsoft.Maui;

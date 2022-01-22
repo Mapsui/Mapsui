@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Mapsui.Extensions;
-using Mapsui.GeometryLayer;
+using Mapsui.GeometryLayers;
 
 #if __MAUI__
 using Mapsui.UI.Maui;

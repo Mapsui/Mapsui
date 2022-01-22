@@ -5,7 +5,7 @@ using System.Text;
 using Mapsui.UI.iOS;
 using UIKit;
 using CoreGraphics;
-using Mapsui.GeometryLayer;
+using Mapsui.GeometryLayers;
 using Mapsui.UI;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;

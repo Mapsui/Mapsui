@@ -1,4 +1,4 @@
-﻿using Mapsui.GeometryLayer;
+﻿using Mapsui.GeometryLayers;
 
 namespace Mapsui.UI.Objects
 {
