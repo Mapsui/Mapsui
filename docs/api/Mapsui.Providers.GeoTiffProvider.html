@@ -93,6 +93,7 @@
   <div classs="implements">
     <h5>Implements</h5>
     <div><span class="xref">Mapsui.Providers.IProvider</span>&lt;<span class="xref">Mapsui.IFeature</span>&gt;</div>
+    <div><span class="xref">System.IDisposable</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -122,7 +123,7 @@
   <h6><strong>Assembly</strong>: Mapsui.dll</h6>
   <h5 id="Mapsui_Providers_GeoTiffProvider_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class GeoTiffProvider : IProvider&lt;IFeature&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public class GeoTiffProvider : IProvider&lt;IFeature&gt;, IDisposable</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -131,7 +132,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_GeoTiffProvider__ctor_System_String_System_Collections_Generic_List_System_Drawing_Color__.md&amp;value=---%0Auid%3A%20Mapsui.Providers.GeoTiffProvider.%23ctor(System.String%2CSystem.Collections.Generic.List%7BSystem.Drawing.Color%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/GeoTiffProvider.cs/#L44">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/GeoTiffProvider.cs/#L46">View Source</a>
   </span>
   <a id="Mapsui_Providers_GeoTiffProvider__ctor_" data-uid="Mapsui.Providers.GeoTiffProvider.#ctor*"></a>
   <h4 id="Mapsui_Providers_GeoTiffProvider__ctor_System_String_System_Collections_Generic_List_System_Drawing_Color__" data-uid="Mapsui.Providers.GeoTiffProvider.#ctor(System.String,System.Collections.Generic.List{System.Drawing.Color})">GeoTiffProvider(String, List&lt;Color&gt;)</h4>
@@ -170,7 +171,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_GeoTiffProvider_CRS.md&amp;value=---%0Auid%3A%20Mapsui.Providers.GeoTiffProvider.CRS%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/GeoTiffProvider.cs/#L187">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/GeoTiffProvider.cs/#L190">View Source</a>
   </span>
   <a id="Mapsui_Providers_GeoTiffProvider_CRS_" data-uid="Mapsui.Providers.GeoTiffProvider.CRS*"></a>
   <h4 id="Mapsui_Providers_GeoTiffProvider_CRS" data-uid="Mapsui.Providers.GeoTiffProvider.CRS">CRS</h4>
@@ -199,10 +200,25 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_GeoTiffProvider_Dispose.md&amp;value=---%0Auid%3A%20Mapsui.Providers.GeoTiffProvider.Dispose%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/GeoTiffProvider.cs/#L219">View Source</a>
+  </span>
+  <a id="Mapsui_Providers_GeoTiffProvider_Dispose_" data-uid="Mapsui.Providers.GeoTiffProvider.Dispose*"></a>
+  <h4 id="Mapsui_Providers_GeoTiffProvider_Dispose" data-uid="Mapsui.Providers.GeoTiffProvider.Dispose">Dispose()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void Dispose()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_GeoTiffProvider_GetExtent.md&amp;value=---%0Auid%3A%20Mapsui.Providers.GeoTiffProvider.GetExtent%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/GeoTiffProvider.cs/#L198">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/GeoTiffProvider.cs/#L201">View Source</a>
   </span>
   <a id="Mapsui_Providers_GeoTiffProvider_GetExtent_" data-uid="Mapsui.Providers.GeoTiffProvider.GetExtent*"></a>
   <h4 id="Mapsui_Providers_GeoTiffProvider_GetExtent" data-uid="Mapsui.Providers.GeoTiffProvider.GetExtent">GetExtent()</h4>
@@ -232,7 +248,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_GeoTiffProvider_GetFeatures_Mapsui_Layers_FetchInfo_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.GeoTiffProvider.GetFeatures(Mapsui.Layers.FetchInfo)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/GeoTiffProvider.cs/#L189">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/GeoTiffProvider.cs/#L192">View Source</a>
   </span>
   <a id="Mapsui_Providers_GeoTiffProvider_GetFeatures_" data-uid="Mapsui.Providers.GeoTiffProvider.GetFeatures*"></a>
   <h4 id="Mapsui_Providers_GeoTiffProvider_GetFeatures_Mapsui_Layers_FetchInfo_" data-uid="Mapsui.Providers.GeoTiffProvider.GetFeatures(Mapsui.Layers.FetchInfo)">GetFeatures(FetchInfo)</h4>
@@ -279,7 +295,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_GeoTiffProvider_IsCrsSupported_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.GeoTiffProvider.IsCrsSupported(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/GeoTiffProvider.cs/#L211">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/GeoTiffProvider.cs/#L214">View Source</a>
   </span>
   <a id="Mapsui_Providers_GeoTiffProvider_IsCrsSupported_" data-uid="Mapsui.Providers.GeoTiffProvider.IsCrsSupported*"></a>
   <h4 id="Mapsui_Providers_GeoTiffProvider_IsCrsSupported_System_String_" data-uid="Mapsui.Providers.GeoTiffProvider.IsCrsSupported(System.String)">IsCrsSupported(String)</h4>
@@ -325,6 +341,9 @@
   <div>
       <span class="xref">Mapsui.Providers.IProvider&lt;T&gt;</span>
   </div>
+  <div>
+      <span class="xref">System.IDisposable</span>
+  </div>
 </article>
           </div>
           
@@ -336,7 +355,7 @@
                     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_GeoTiffProvider.md&amp;value=---%0Auid%3A%20Mapsui.Providers.GeoTiffProvider%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/GeoTiffProvider.cs/#L16" class="contribution-link">View Source</a>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/GeoTiffProvider.cs/#L17" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
