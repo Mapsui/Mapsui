@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Mapsui.Core\Mapsui.Core.csproj" />
     <ProjectReference Include="..\Mapsui.Geometries\Mapsui.Geometries.csproj" />
   </ItemGroup>
 
