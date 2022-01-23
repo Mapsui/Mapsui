@@ -9,11 +9,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Mapsui.Core\Mapsui.Core.csproj" />
+    <Folder Include="Utilities\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Utilities\" />
+    <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
   </ItemGroup>
 
 </Project>
