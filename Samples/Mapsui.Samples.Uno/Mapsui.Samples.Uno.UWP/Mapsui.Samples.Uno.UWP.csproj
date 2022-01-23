@@ -128,10 +128,6 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <ProjectReference Include="..\..\..\Mapsui.Core\Mapsui.Core.csproj">
-      <Project>{7F15A600-A0C7-400E-BFBE-83105FADBC63}</Project>
-      <Name>Mapsui.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Mapsui.Geometries\Mapsui.Geometries.csproj">
       <Project>{ee55b62d-ffa2-4c24-a4ad-7a47ace55ce5}</Project>
       <Name>Mapsui.Geometries</Name>
