@@ -12,4 +12,8 @@
     <Folder Include="Utilities\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
+  </ItemGroup>
+
 </Project>
