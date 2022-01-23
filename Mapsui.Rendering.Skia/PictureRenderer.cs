@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Mapsui.Extensions;
 using Mapsui.Geometries;
 using Mapsui.Layers;
@@ -26,8 +27,12 @@ namespace Mapsui.Rendering.Skia
 
             var scaleX = rect.Width / picture.CullRect.Width;
             var scaleY = rect.Height / picture.CullRect.Height;
-            var matrix = SKMatrix.CreateTranslation(rect.Left, rect.Top);
-            matrix.PostConcat(SKMatrix.CreateScale(scaleX, scaleY));
+            var matrix = SKMatrix.CreateTranslation(rect.Left / scaleX, rect.Top / scaleY);
+            matrix = matrix.PostConcat(SKMatrix.CreateScale(scaleX, scaleY));
+            if (scaleX > 1)
+            {
+                Debug.WriteLine("test");
+            }
 
             canvas.DrawPicture(picture, ref matrix, skPaint);
             if (dispose)
