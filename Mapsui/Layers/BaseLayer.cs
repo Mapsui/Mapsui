@@ -138,7 +138,7 @@ namespace Mapsui.Layers
         }
 
         /// <inheritdoc />
-        public bool Busy
+        public virtual bool Busy
         {
             get => _busy;
             set

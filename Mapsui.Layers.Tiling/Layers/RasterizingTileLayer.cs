@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using BruTile;
 using BruTile.Cache;
 using Mapsui.Extensions;
@@ -52,8 +53,8 @@ namespace Mapsui.Layers
                 maxExtraTiles,
                 tileFormat == ETileFormat.Picture ? FetchTile : null);
             _tileLayer.DataChanged += TileLayerDataChanged;
+            _tileLayer.PropertyChanged += TileLayerPropertyChanged;
             SourceLayer = layer;
-
         }
 
         /// <inheritdoc />
@@ -61,6 +62,9 @@ namespace Mapsui.Layers
 
         /// <inheritdoc />
         public override MRect? Extent => _tileLayer.Extent;
+
+        /// <inheritdoc />
+        public override bool Busy => _tileLayer.Busy;
 
         /// <inheritdoc />
         public override IEnumerable<IFeature> GetFeatures(MRect extent, double resolution)
@@ -77,6 +81,11 @@ namespace Mapsui.Layers
         private void TileLayerDataChanged(object sender, DataChangedEventArgs e)
         {
             OnDataChanged(e);
+        }
+
+        private void TileLayerPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            OnPropertyChanged(e.PropertyName);
         }
 
         private IFeature? FetchTile(TileInfo arg)
