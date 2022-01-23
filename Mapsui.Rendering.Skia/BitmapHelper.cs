@@ -44,6 +44,10 @@ namespace Mapsui.Rendering.Skia
                         return new BitmapInfo { Svg = tempStream.LoadSvg() };
                     }
                 }
+                else if (data.IsSkp())
+                {
+                    return new BitmapInfo { Picture = SKPicture.Deserialize(data) };
+                }
 
                 using var skData = SKData.CreateCopy(data);
                 var image = SKImage.FromEncodedData(skData);

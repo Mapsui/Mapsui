@@ -40,7 +40,7 @@ namespace Mapsui.Rendering.Skia
                 if (extent == null)
                     return;
 
-                if (bitmapInfo.Bitmap == null)
+                if (bitmapInfo.Bitmap == null && bitmapInfo.Picture == null)
                     return;
 
                 if (viewport.IsRotated)
@@ -53,14 +53,30 @@ namespace Mapsui.Rendering.Skia
 
                     var destination = new BoundingBox(0.0, 0.0, extent.Width, extent.Height);
 
-                    BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap, destination.ToSkia(), opacity);
+                    switch (bitmapInfo.Type)
+                    {
+                        case BitmapType.Bitmap:
+                            BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap, RoundToPixel(destination).ToSkia(), opacity);
+                            break;
+                        case BitmapType.Picture:
+                            PictureRenderer.Draw(canvas, bitmapInfo.Picture, RoundToPixel(destination).ToSkia(), opacity);
+                            break;
+                    }
 
                     canvas.SetMatrix(priorMatrix);
                 }
                 else
                 {
                     var destination = WorldToScreen(viewport, extent);
-                    BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap, RoundToPixel(destination).ToSkia(), opacity);
+                    switch (bitmapInfo.Type)
+                    {
+                        case BitmapType.Bitmap:
+                            BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap, RoundToPixel(destination).ToSkia(), opacity);
+                            break;
+                        case BitmapType.Picture:
+                            PictureRenderer.Draw(canvas, bitmapInfo.Picture, RoundToPixel(destination).ToSkia(), opacity);
+                            break;
+                    }
                 }
             }
             catch (Exception ex)
@@ -69,7 +85,7 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        public static SKMatrix CreateRotationMatrix(IReadOnlyViewport viewport, MRect rect, SKMatrix priorMatrix)
+        internal static SKMatrix CreateRotationMatrix(IReadOnlyViewport viewport, MRect rect, SKMatrix priorMatrix)
         {
             // The front-end sets up the canvas with a matrix based on screen scaling (e.g. retina).
             // We need to retain that effect by combining our matrix with the incoming matrix.
@@ -94,7 +110,7 @@ namespace Mapsui.Rendering.Skia
             return matrix;
         }
 
-        public static BoundingBox WorldToScreen(IReadOnlyViewport viewport, MRect rect)
+        internal static BoundingBox WorldToScreen(IReadOnlyViewport viewport, MRect rect)
         {
             var first = viewport.WorldToScreen(rect.Min.X, rect.Min.Y);
             var second = viewport.WorldToScreen(rect.Max.X, rect.Max.Y);
@@ -107,7 +123,7 @@ namespace Mapsui.Rendering.Skia
             );
         }
 
-        public static BoundingBox RoundToPixel(BoundingBox boundingBox)
+        internal static BoundingBox RoundToPixel(BoundingBox boundingBox)
         {
             return new BoundingBox(
                 (float)Math.Round(boundingBox.Left),
