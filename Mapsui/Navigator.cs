@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Mapsui.Utilities;
 using Mapsui.ViewportAnimations;
@@ -90,8 +91,8 @@ namespace Mapsui
         {
             var (worldCenterOfZoomX, worldCenterOfZoomY) = _viewport.ScreenToWorldXY(centerOfZoom.X, centerOfZoom.Y);
             _viewport.SetAnimations(ZoomAroundLocationAnimation.Create(_viewport, worldCenterOfZoomX, worldCenterOfZoomY, resolution,
-                _viewport.CenterX, _viewport.CenterY, _viewport.Resolution, duration));
-            OnNavigated(duration, ChangeType.Discrete);
+                _viewport.CenterX, _viewport.CenterY, _viewport.Resolution, duration,
+                () => OnNavigated(ChangeType.Discrete)));
 
         }
 
@@ -178,8 +179,7 @@ namespace Mapsui
         /// <param name="duration">Duration for animation in milliseconds.</param>
         public void FlyTo(MPoint center, double maxResolution, long duration = 500)
         {
-            _viewport.SetAnimations(FlyToAnimation.Create(_viewport, center, maxResolution, duration));
-            OnNavigated(duration, ChangeType.Discrete);
+            _viewport.SetAnimations(FlyToAnimation.Create(_viewport, center, maxResolution, duration, () => OnNavigated(ChangeType.Discrete)));
         }
 
         /// <summary>
@@ -228,7 +228,12 @@ namespace Mapsui
         {
             // Note. Instead of a delay it may also be possible to call Navigated immediately with the viewport state
             // that is the result of the animation.
-            _ = Task.Delay((int)duration).ContinueWith(t => Navigated?.Invoke(this, changeType), TaskScheduler.FromCurrentSynchronizationContext());
+            _ = Task.Delay((int)duration).ContinueWith(t => OnNavigated(changeType), TaskScheduler.FromCurrentSynchronizationContext());
+        }
+
+        private void OnNavigated(ChangeType changeType)
+        {
+            Navigated?.Invoke(this, changeType);
         }
     }
 }

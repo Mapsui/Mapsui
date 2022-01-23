@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Mapsui.Utilities;
 
 namespace Mapsui.ViewportAnimations
 {
     internal class ZoomOnCenterAnimation
     {
-        public static List<AnimationEntry<Viewport>> Create(IViewport viewport, double centerX, double centerY, double resolution, long duration)
+        public static List<AnimationEntry<Viewport>> Create(IViewport viewport, double centerX, double centerY, double resolution, long duration, Action? action = null)
         {
             var animations = new List<AnimationEntry<Viewport>>();
 
@@ -16,7 +17,8 @@ namespace Mapsui.ViewportAnimations
                 animationEnd: 1,
                 easing: Easing.SinInOut,
                 tick: CenterAndResolutionTick,
-                final: CenterAndResolutionFinal
+                final: CenterAndResolutionFinal,
+                action: action
             );
             animations.Add(entry);
 
