@@ -1,0 +1,112 @@
+using System;
+using System.Collections.Generic;
+using BruTile;
+using BruTile.Cache;
+using Mapsui.Extensions;
+using Mapsui.Fetcher;
+using Mapsui.Rendering;
+
+namespace Mapsui.Layers
+{
+    public class RasterizingTileLayer : BaseLayer, ISourceLayer, IAsyncDataFetcher
+    {
+        private readonly RasterizingTileProvider _tileProvider;
+        private readonly TileLayer _tileLayer;
+
+        /// <summary>
+        ///     Creates a RasterizingTileLayer which rasterizes a layer for performance
+        /// </summary>
+        /// <param name="layer">The Layer to be rasterized</param>
+        /// <param name="renderResolutionMultiplier"></param>
+        /// <param name="rasterizer">Rasterizer to use. null will use the default</param>
+        /// <param name="pixelDensity"></param>
+        /// <param name="minTiles">Minimum number of tiles to cache</param>
+        /// <param name="maxTiles">Maximum number of tiles to cache</param>
+        /// <param name="dataFetchStrategy">Strategy to get list of tiles for given extent</param>
+        /// <param name="renderFetchStrategy"></param>
+        /// <param name="minExtraTiles">Number of minimum extra tiles for memory cache</param>
+        /// <param name="maxExtraTiles">Number of maximum extra tiles for memory cache</param>
+        /// <param name="persistentCache">Persistent Cache</param>
+        /// <param name="tileFormat">Stream Format</param>
+        public RasterizingTileLayer(
+            ILayer layer,
+            double renderResolutionMultiplier = 1,
+            IRenderer? rasterizer = null,
+            float pixelDensity = 1,
+            int minTiles = 200,
+            int maxTiles = 300,
+            IDataFetchStrategy? dataFetchStrategy = null,
+            IRenderFetchStrategy? renderFetchStrategy = null,
+            int minExtraTiles = -1,
+            int maxExtraTiles = -1,
+            IPersistentCache<byte[]>? persistentCache = null,
+            ETileFormat tileFormat = ETileFormat.Png)
+        {
+            _tileProvider = new RasterizingTileProvider(layer, renderResolutionMultiplier, rasterizer, pixelDensity, persistentCache, ToStreamFormat(tileFormat));
+            _tileLayer = new TileLayer(_tileProvider,
+                minTiles,
+                maxTiles,
+                dataFetchStrategy,
+                renderFetchStrategy,
+                minExtraTiles,
+                maxExtraTiles,
+                tileFormat == ETileFormat.Picture ? FetchTile : null);
+            _tileLayer.DataChanged += TileLayerDataChanged;
+            SourceLayer = layer;
+
+        }
+
+        /// <inheritdoc />
+        public override IReadOnlyList<double> Resolutions => _tileLayer.Resolutions;
+
+        /// <inheritdoc />
+        public override MRect? Extent => _tileLayer.Extent;
+
+        /// <inheritdoc />
+        public override IEnumerable<IFeature> GetFeatures(MRect extent, double resolution)
+        {
+            return _tileLayer.GetFeatures(extent, resolution);
+        }
+
+        /// <inheritdoc />
+        public override void RefreshData(FetchInfo fetchInfo)
+        {
+            _tileLayer.RefreshData(fetchInfo);
+        }
+
+        private void TileLayerDataChanged(object sender, DataChangedEventArgs e)
+        {
+            OnDataChanged(e);
+        }
+
+        private IFeature? FetchTile(TileInfo arg)
+        {
+            return new PictureFeature(_tileProvider.GetPictureTile(arg), arg.Extent.ToMRect());
+        }
+
+        private static EStreamFormat ToStreamFormat(ETileFormat streamFormat)
+        {
+            switch (streamFormat)
+            {
+                case ETileFormat.Png:
+                    return EStreamFormat.Png;
+                case ETileFormat.Picture:
+                case ETileFormat.Skp:
+                default:
+                    return EStreamFormat.Skp;
+            }
+        }
+
+        public ILayer SourceLayer { get; }
+
+        public void AbortFetch()
+        {
+            _tileLayer.AbortFetch();
+        }
+
+        public void ClearCache()
+        {
+            _tileLayer.ClearCache();
+        }
+    }
+}

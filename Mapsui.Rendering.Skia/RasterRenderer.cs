@@ -69,7 +69,7 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        private static SKMatrix CreateRotationMatrix(IReadOnlyViewport viewport, MRect rect, SKMatrix priorMatrix)
+        public static SKMatrix CreateRotationMatrix(IReadOnlyViewport viewport, MRect rect, SKMatrix priorMatrix)
         {
             // The front-end sets up the canvas with a matrix based on screen scaling (e.g. retina).
             // We need to retain that effect by combining our matrix with the incoming matrix.
@@ -94,7 +94,7 @@ namespace Mapsui.Rendering.Skia
             return matrix;
         }
 
-        private static BoundingBox WorldToScreen(IReadOnlyViewport viewport, MRect rect)
+        public static BoundingBox WorldToScreen(IReadOnlyViewport viewport, MRect rect)
         {
             var first = viewport.WorldToScreen(rect.Min.X, rect.Min.Y);
             var second = viewport.WorldToScreen(rect.Max.X, rect.Max.Y);
@@ -107,7 +107,7 @@ namespace Mapsui.Rendering.Skia
             );
         }
 
-        private static BoundingBox RoundToPixel(BoundingBox boundingBox)
+        public static BoundingBox RoundToPixel(BoundingBox boundingBox)
         {
             return new BoundingBox(
                 (float)Math.Round(boundingBox.Left),

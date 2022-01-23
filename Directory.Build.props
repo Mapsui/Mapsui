@@ -26,8 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <!--Specify Compiler for Mac Builds-->
-    <PackageReference Include="Microsoft.Net.Compilers.Toolset" Version="4.0.1">
+    <!--Specify Compiler for Mac Builds is 4.1.0 Because lower versions give a compilation error-->
+    <PackageReference Include="Microsoft.Net.Compilers" Version="4.1.0-1.final">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
