@@ -6,6 +6,7 @@ using BruTile.Cache;
 using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Rendering;
+using Mapsui.Widgets;
 
 namespace Mapsui.Layers
 {
@@ -65,6 +66,9 @@ namespace Mapsui.Layers
 
         /// <inheritdoc />
         public override bool Busy => _tileLayer.Busy;
+
+        /// <inheritdoc />
+        public override Hyperlink Attribution => _tileLayer.Attribution;
 
         /// <inheritdoc />
         public override IEnumerable<IFeature> GetFeatures(MRect extent, double resolution)

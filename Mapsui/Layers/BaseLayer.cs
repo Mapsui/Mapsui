@@ -174,7 +174,7 @@ namespace Mapsui.Layers
         }
 
         /// <inheritdoc />
-        public Hyperlink Attribution { get; set; } = new();
+        public virtual Hyperlink Attribution { get; set; } = new();
 
         /// <inheritdoc />
         public virtual IReadOnlyList<double> Resolutions { get; } = new List<double>();
