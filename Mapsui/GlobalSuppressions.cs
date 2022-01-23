@@ -28,3 +28,13 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Usage", "VSTHRD104:Offer async methods", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Providers.Wms.WmsProvider.GetLegends~System.Collections.Generic.IEnumerable{System.IO.MemoryStream}")]
 [assembly: SuppressMessage("Usage", "VSTHRD002:Avoid problematic synchronous waits", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Providers.Wms.WmsProvider.TryGetMap(Mapsui.IViewport,Mapsui.MRaster@)~System.Boolean")]
 [assembly: SuppressMessage("Usage", "VSTHRD002:Avoid problematic synchronous waits", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Providers.Wms.WmsProvider.GetLegends~System.Collections.Generic.IEnumerable{System.IO.MemoryStream}")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP008:Don't assign member with injected and created disposables.", Justification = "<Pending>", Scope = "member", Target = "~P:Mapsui.Layers.RasterFeature.Raster")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP007:Don't dispose injected.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Layers.RasterizingLayer.DisposeRenderedGeometries(System.Collections.Generic.IEnumerable{Mapsui.IFeature})")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP007:Don't dispose injected.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Layers.RasterizingLayer.Dispose")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP007:Don't dispose injected.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.MRaster.Dispose(System.Boolean)")]
+[assembly: SuppressMessage("Usage", "VSTHRD110:Observe result of async calls", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Fetcher.FetchWorker.Start")]
+[assembly: SuppressMessage("Usage", "VSTHRD110:Observe result of async calls", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Layers.AnimatedPointLayer.UpdateData")]
+[assembly: SuppressMessage("Usage", "VSTHRD110:Observe result of async calls", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Layers.ImageLayer.OnPropertyChanged(System.Object,System.ComponentModel.PropertyChangedEventArgs)")]
+[assembly: SuppressMessage("Usage", "VSTHRD110:Observe result of async calls", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Layers.ImageLayer.StartNewFetch(Mapsui.Layers.FetchInfo)")]
+
+
