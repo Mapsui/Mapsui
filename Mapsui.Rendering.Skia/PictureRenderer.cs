@@ -16,6 +16,12 @@ namespace Mapsui.Rendering.Skia
 
         public static void Draw(SKCanvas canvas, SKPicture picture, SKRect rect, float layerOpacity = 1f)
         {
+            if (picture.CullRect.Width == 0 && picture.CullRect.Height == 0)
+            {
+                // is an empty picture
+                return;
+            }
+
             var skPaint = GetPaint(layerOpacity, out var dispose);
 
             var scaleX = rect.Width / picture.CullRect.Width;
