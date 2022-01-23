@@ -1,5 +1,5 @@
 ﻿using Mapsui.Geometries;
-using Mapsui.GeometryLayer;
+using Mapsui.GeometryLayers;
 
 namespace Mapsui.Samples.Wpf.Editing.Editing
 {

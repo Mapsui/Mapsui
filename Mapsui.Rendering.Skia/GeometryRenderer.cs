@@ -1,5 +1,5 @@
 ﻿using Mapsui.Geometries;
-using Mapsui.GeometryLayer;
+using Mapsui.GeometryLayers;
 using Mapsui.Logging;
 using Mapsui.Styles;
 using SkiaSharp;

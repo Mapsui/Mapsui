@@ -4,7 +4,7 @@ using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Projections;
 
-namespace Mapsui.GeometryLayer
+namespace Mapsui.GeometryLayers
 {
     public class GeometryFeature : BaseFeature, IFeature, IDisposable
     {
