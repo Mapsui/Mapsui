@@ -18,7 +18,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
 using System.Linq;
 using BruTile;
 using BruTile.Cache;
@@ -36,13 +35,13 @@ namespace Mapsui.Layers
     /// </summary>
     public class TileLayer : BaseLayer, IAsyncDataFetcher, IDisposable
     {
-        private readonly ITileSource _tileSource;
-        private readonly IRenderFetchStrategy _renderFetchStrategy;
-        private readonly int _minExtraTiles;
-        private readonly int _maxExtraTiles;
-        private int _numberTilesNeeded;
-        private readonly TileFetchDispatcher _tileFetchDispatcher;
-        private readonly MRect? _extent;
+        protected readonly ITileSource _tileSource;
+        protected readonly IRenderFetchStrategy _renderFetchStrategy;
+        protected readonly int _minExtraTiles;
+        protected readonly int _maxExtraTiles;
+        protected int _numberTilesNeeded;
+        protected readonly TileFetchDispatcher _tileFetchDispatcher;
+        protected readonly MRect? _extent;
 
         /// <summary>
         /// Create tile layer for given tile source
@@ -76,13 +75,14 @@ namespace Mapsui.Layers
         }
 
         /// <summary>
-        /// TileSource</summary>
+        /// TileSource
+        /// </summary>
         public ITileSource TileSource => _tileSource;
 
         /// <summary>
         /// Memory cache for this layer
         /// </summary>
-        private MemoryCache<IFeature?> MemoryCache { get; }
+        protected MemoryCache<IFeature?> MemoryCache { get; }
 
         /// <inheritdoc />
         public override IReadOnlyList<double> Resolutions => _tileSource.Schema.Resolutions.Select(r => r.Value.UnitsPerPixel).ToList();
@@ -133,7 +133,7 @@ namespace Mapsui.Layers
             base.Dispose(disposing);
         }
 
-        private void TileFetchDispatcherOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        protected void TileFetchDispatcherOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             if (propertyChangedEventArgs.PropertyName == nameof(Busy))
             {
@@ -141,7 +141,7 @@ namespace Mapsui.Layers
             }
         }
 
-        private void UpdateMemoryCacheMinAndMax()
+        protected void UpdateMemoryCacheMinAndMax()
         {
             if (_minExtraTiles < 0 || _maxExtraTiles < 0) return;
             if (_numberTilesNeeded == _tileFetchDispatcher.NumberTilesNeeded) return;
@@ -151,7 +151,7 @@ namespace Mapsui.Layers
             MemoryCache.MaxTiles = _numberTilesNeeded + _maxExtraTiles;
         }
 
-        private void TileFetchDispatcherOnDataChanged(object sender, DataChangedEventArgs e)
+        protected void TileFetchDispatcherOnDataChanged(object sender, DataChangedEventArgs e)
         {
             OnDataChanged(e);
         }
