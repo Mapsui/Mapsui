@@ -1,118 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <TargetFramework>net6.0-ios</TargetFramework>
     <OutputType>Exe</OutputType>
-    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFramework>net60-ios</TargetFramework>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
-    <ConsolePause>false</ConsolePause>
-    <MtouchArch>x86_64</MtouchArch>
-    <MtouchLink>None</MtouchLink>
-    <MtouchDebug>true</MtouchDebug>
-    <MtouchFloat32>true</MtouchFloat32>
-    <CodesignKey>iPhone Developer</CodesignKey>
-    <CodesignProvision />
-    <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
-    <MtouchLink>None</MtouchLink>
-    <MtouchArch>x86_64</MtouchArch>
-    <ConsolePause>false</ConsolePause>
-    <CodesignKey>iPhone Developer</CodesignKey>
-    <CodesignProvision />
-    <MtouchDebug>true</MtouchDebug>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
-    <ConsolePause>false</ConsolePause>
-    <MtouchArch>ARM64</MtouchArch>
-    <CodesignEntitlements></CodesignEntitlements>
-    <CodesignKey>iPhone Developer</CodesignKey>
-    <MtouchDebug>true</MtouchDebug>
-    <CodesignProvision />
-    <CodesignExtraArgs />
-    <CodesignResourceRules />
-    <MtouchLink>SdkOnly</MtouchLink>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
-    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <MtouchArch>ARMv7, ARM64</MtouchArch>
-    <ConsolePause>false</ConsolePause>
-    <CodesignKey>iPhone Developer</CodesignKey>
-    <CodesignProvision />
-    <MtouchDebug>true</MtouchDebug>
-    <MtouchLink>SdkOnly</MtouchLink>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
-    <ConsolePause>False</ConsolePause>
-    <MtouchArch>ARMv7, ARM64</MtouchArch>
-    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <BuildIpa>True</BuildIpa>
-    <CodesignProvision></CodesignProvision>
-    <CodesignKey>iPhone Developer</CodesignKey>
-    <MtouchLink>SdkOnly</MtouchLink>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
-    <ConsolePause>False</ConsolePause>
-    <MtouchArch>ARMv7, ARM64</MtouchArch>
-    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <CodesignProvision>Automatic:AppStore</CodesignProvision>
-    <CodesignKey>iPhone Distribution</CodesignKey>
-    <MtouchLink>SdkOnly</MtouchLink>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <UseVSHostingProcess>false</UseVSHostingProcess>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <MtouchArch>ARM64</MtouchArch>
-    <CodesignKey>iPhone Developer</CodesignKey>
-    <CodesignProvision />
-    <CodesignExtraArgs />
-    <CodesignResourceRules />
-    <CodesignEntitlements />
-    <MtouchNoSymbolStrip>false</MtouchNoSymbolStrip>
-    <MtouchDebug>true</MtouchDebug>
-    <MtouchLink>SdkOnly</MtouchLink>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <UseVSHostingProcess>false</UseVSHostingProcess>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <CodesignKey>iPhone Developer</CodesignKey>
-    <CodesignProvision />
-    <MtouchDebug>false</MtouchDebug>
-    <MtouchArch>ARM64</MtouchArch>
-    <MtouchLink>SdkOnly</MtouchLink>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Ad-Hoc|AnyCPU'">
-    <UseVSHostingProcess>false</UseVSHostingProcess>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <CodesignKey>iPhone Developer</CodesignKey>
-    <CodesignProvision />
-    <MtouchLink>SdkOnly</MtouchLink>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AppStore|AnyCPU'">
-    <UseVSHostingProcess>false</UseVSHostingProcess>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <MtouchLink>SdkOnly</MtouchLink>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
-    <AppExtensionDebugBundleId />
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject></StartupObject>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>true</ImplicitUsings>
+    <SupportedOSPlatformVersion>11.2</SupportedOSPlatformVersion>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="Entitlements.plist" />
@@ -124,13 +16,6 @@
     <ProjectReference Include="..\..\Mapsui.UI.iOS\Mapsui.UI.iOS.csproj" />
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />
     <ProjectReference Include="..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BruTile.MbTiles">
@@ -149,10 +34,10 @@
       <Version>2.0.3</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp">
-      <Version>2.88.0-preview.179</Version>
+      <Version>2.88.0-preview.187</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp.Views">
-      <Version>2.88.0-preview.179</Version>
+      <Version>2.88.0-preview.187</Version>
     </PackageReference>
     <PackageReference Include="Svg.Skia">
       <Version>0.5.7.1</Version>
