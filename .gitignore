@@ -76,3 +76,4 @@ AppPackages/
 .DS_Store
 
 /Output-Build.txt
+/upgrade-assistant.clef
