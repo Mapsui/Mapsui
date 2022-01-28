@@ -1,5 +1,4 @@
-﻿using Mapsui.Geometries;
-using NetTopologySuite.Geometries;
+﻿using NetTopologySuite.Geometries;
 
 namespace Mapsui.Extensions
 {
