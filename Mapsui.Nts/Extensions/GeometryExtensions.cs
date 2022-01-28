@@ -26,7 +26,7 @@ namespace Mapsui.Nts.Extensions
                     yield return point;
         }
 
-        //!!! todo: Rename to GetBoundingBox
+        //!!! todo: Rename to ToEnvelope after everything compiles
         public static Envelope BoundingBox(this Geometry geometry)
         {
             return geometry.EnvelopeInternal;
