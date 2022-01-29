@@ -23,7 +23,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Mapsui.Layers;
-using Mapsui.Nts;
 using Mapsui.Nts.Extensions;
 using Mapsui.Nts.Providers.Shapefile.Indexing;
 using Mapsui.Providers;
@@ -810,8 +809,10 @@ namespace Mapsui.Nts.Providers.Shapefile
                     else
                     {
                         var polygons = new List<Polygon>();
-                        var linearRings = new List<LinearRing>();
-                        linearRings.Add(rings[0]);
+                        var linearRings = new List<LinearRing>
+                        {
+                            rings[0]
+                        };
 
                         for (var i = 1; i < rings.Count; i++)
                             if (!isCounterClockWise[i])
