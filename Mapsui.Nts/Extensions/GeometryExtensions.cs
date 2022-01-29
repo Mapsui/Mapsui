@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Mapsui.GeometryLayers;
 using NetTopologySuite.Geometries;
 
 namespace Mapsui.Nts.Extensions

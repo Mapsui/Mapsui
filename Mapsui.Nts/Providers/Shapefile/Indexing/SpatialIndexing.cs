@@ -21,7 +21,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using Mapsui.Geometries;
 
-namespace Mapsui.Providers.Shapefile.Indexing
+namespace Mapsui.Nts.Providers.Shapefile.Indexing
 {
     /// <summary>
     /// Heuristics used for tree generation
@@ -263,7 +263,7 @@ namespace Mapsui.Providers.Shapefile.Indexing
         /// <summary>
         /// Determines whether the node is a leaf (if data is stored at the node, we assume the node is a leaf)
         /// </summary>
-        public bool IsLeaf => (_objList != null);
+        public bool IsLeaf => _objList != null;
 
         /// <summary>
         /// Gets/sets the Axis Aligned Bounding Box
@@ -343,24 +343,15 @@ namespace Mapsui.Providers.Shapefile.Indexing
             if (node == null)
                 return;
             if (node.IsLeaf) //Leaf has been reached
-            {
                 if (node._objList != null)
-                {
                     foreach (var boxObject in node._objList)
-                    {
                         if (box.Intersects(boxObject.Box))
                             list.Add(boxObject.Id);
-
-                    }
-                }
-            }
             else
-            {
                 if (node.Box.Intersects(box))
-                {
-                    IntersectTreeRecursive(box, node.Child0, in list);
-                    IntersectTreeRecursive(box, node.Child1, in list);
-                }
+            {
+                IntersectTreeRecursive(box, node.Child0, in list);
+                IntersectTreeRecursive(box, node.Child1, in list);
             }
         }
 

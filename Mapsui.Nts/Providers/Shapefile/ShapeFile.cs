@@ -22,14 +22,14 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Mapsui.Extensions;
-using Mapsui.GeometryLayers;
 using Mapsui.Layers;
+using Mapsui.Nts;
 using Mapsui.Nts.Extensions;
-using Mapsui.Providers.Shapefile.Indexing;
+using Mapsui.Nts.Providers.Shapefile.Indexing;
+using Mapsui.Providers;
 using NetTopologySuite.Geometries;
 
-namespace Mapsui.Providers.Shapefile
+namespace Mapsui.Nts.Providers.Shapefile
 {
     /// <summary>
     /// Shapefile geometry type.
@@ -42,14 +42,14 @@ namespace Mapsui.Providers.Shapefile
         Null = 0,
         /// <summary>
         /// A point consists of a pair of double-precision coordinates.
-        /// Mapsui interprets this as <see cref="Mapsui.Geometries.Point"/>
+        /// Mapsui interprets this as <see cref="Geometries.Point"/>
         /// </summary>
         Point = 1,
         /// <summary>
         /// PolyLine is an ordered set of vertices that consists of one or more parts. A part is a
         /// connected sequence of two or more points. Parts may or may not be connected to one
         ///	another. Parts may or may not intersect one another.
-        /// Mapsui interprets this as either <see cref="Mapsui.Geometries.LineString"/> or <see cref="Mapsui.Geometries.MultiLineString"/>
+        /// Mapsui interprets this as either <see cref="Geometries.LineString"/> or <see cref="Geometries.MultiLineString"/>
         /// </summary>
         PolyLine = 3,
         /// <summary>
@@ -61,58 +61,58 @@ namespace Mapsui.Providers.Shapefile
         /// holes in polygons are in a counterclockwise direction. Vertices for a single, ringed
         /// polygon are, therefore, always in clockwise order. The rings of a polygon are referred to
         /// as its parts.
-        /// Mapsui interprets this as either <see cref="Mapsui.Geometries.Polygon"/> or <see cref="Mapsui.Geometries.MultiPolygon"/>
+        /// Mapsui interprets this as either <see cref="Geometries.Polygon"/> or <see cref="Geometries.MultiPolygon"/>
         /// </summary>
         Polygon = 5,
         /// <summary>
         /// A MultiPoint represents a set of points.
-        /// Mapsui interprets this as <see cref="Mapsui.Geometries.MultiPoint"/>
+        /// Mapsui interprets this as <see cref="Geometries.MultiPoint"/>
         /// </summary>
         Multipoint = 8,
         /// <summary>
         /// A PointZ consists of a triplet of double-precision coordinates plus a measure.
-        /// Mapsui interprets this as <see cref="Mapsui.Geometries.Point"/>
+        /// Mapsui interprets this as <see cref="Geometries.Point"/>
         /// </summary>
         PointZ = 11,
         /// <summary>
         /// A PolyLineZ consists of one or more parts. A part is a connected sequence of two or
         /// more points. Parts may or may not be connected to one another. Parts may or may not
         /// intersect one another.
-        /// Mapsui interprets this as <see cref="Mapsui.Geometries.LineString"/> or <see cref="Mapsui.Geometries.MultiLineString"/>
+        /// Mapsui interprets this as <see cref="Geometries.LineString"/> or <see cref="Geometries.MultiLineString"/>
         /// </summary>
         PolyLineZ = 13,
         /// <summary>
         /// A PolygonZ consists of a number of rings. A ring is a closed, non-self-intersecting loop.
         /// A PolygonZ may contain multiple outer rings. The rings of a PolygonZ are referred to as
         /// its parts.
-        /// Mapsui interprets this as either <see cref="Mapsui.Geometries.Polygon"/> or <see cref="Mapsui.Geometries.MultiPolygon"/>
+        /// Mapsui interprets this as either <see cref="Geometries.Polygon"/> or <see cref="Geometries.MultiPolygon"/>
         /// </summary>
         PolygonZ = 15,
         /// <summary>
         /// A MultiPointZ represents a set of <see cref="PointZ"/>s.
-        /// Mapsui interprets this as <see cref="Mapsui.Geometries.MultiPoint"/>
+        /// Mapsui interprets this as <see cref="Geometries.MultiPoint"/>
         /// </summary>
         MultiPointZ = 18,
         /// <summary>
         /// A PointM consists of a pair of double-precision coordinates in the order X, Y, plus a measure M.
-        /// Mapsui interprets this as <see cref="Mapsui.Geometries.Point"/>
+        /// Mapsui interprets this as <see cref="Geometries.Point"/>
         /// </summary>
         PointM = 21,
         /// <summary>
         /// A shapefile PolyLineM consists of one or more parts. A part is a connected sequence of
         /// two or more points. Parts may or may not be connected to one another. Parts may or may
         /// not intersect one another.
-        /// Mapsui interprets this as <see cref="Mapsui.Geometries.LineString"/> or <see cref="Mapsui.Geometries.MultiLineString"/>
+        /// Mapsui interprets this as <see cref="Geometries.LineString"/> or <see cref="Geometries.MultiLineString"/>
         /// </summary>
         PolyLineM = 23,
         /// <summary>
         /// A PolygonM consists of a number of rings. A ring is a closed, non-self-intersecting loop.
-        /// Mapsui interprets this as either <see cref="Mapsui.Geometries.Polygon"/> or <see cref="Mapsui.Geometries.MultiPolygon"/>
+        /// Mapsui interprets this as either <see cref="Geometries.Polygon"/> or <see cref="Geometries.MultiPolygon"/>
         /// </summary>
         PolygonM = 25,
         /// <summary>
         /// A MultiPointM represents a set of <see cref="PointM"/>s.
-        /// Mapsui interprets this as <see cref="Mapsui.Geometries.MultiPoint"/>
+        /// Mapsui interprets this as <see cref="Geometries.MultiPoint"/>
         /// </summary>
         MultiPointM = 28,
         /// <summary>
@@ -184,7 +184,7 @@ namespace Mapsui.Providers.Shapefile
         public ShapeFile(string filename, bool fileBasedIndex = false)
         {
             _filename = filename;
-            _fileBasedIndex = (fileBasedIndex) && File.Exists(Path.ChangeExtension(filename, ".shx"));
+            _fileBasedIndex = fileBasedIndex && File.Exists(Path.ChangeExtension(filename, ".shx"));
 
             //Initialize DBF
             var dbfFile = Path.ChangeExtension(filename, ".dbf");
@@ -219,9 +219,7 @@ namespace Mapsui.Providers.Shapefile
                 if (value != _filename)
                 {
                     lock (_syncRoot)
-                    {
                         _filename = value;
-                    }
                     if (_isOpen)
                         throw new ApplicationException("Cannot change filename while data source is open");
 
@@ -237,7 +235,7 @@ namespace Mapsui.Providers.Shapefile
         /// Gets or sets the encoding used for parsing strings from the DBase DBF file.
         /// </summary>
         /// <remarks>
-        /// The DBase default encoding is <see cref="System.Text.Encoding.UTF7"/>.
+        /// The DBase default encoding is <see cref="Encoding.UTF7"/>.
         /// </remarks>
         public Encoding? Encoding
         {
@@ -245,9 +243,7 @@ namespace Mapsui.Providers.Shapefile
             set
             {
                 if (_dbaseFile != null)
-                {
                     _dbaseFile.Encoding = value;
-                }
             }
         }
 
@@ -348,7 +344,6 @@ namespace Mapsui.Providers.Shapefile
         private void Close()
         {
             if (!_disposed)
-            {
                 if (_isOpen)
                 {
                     _brShapeIndex.Dispose();
@@ -359,7 +354,6 @@ namespace Mapsui.Providers.Shapefile
                     _dbaseFile?.Dispose();
                     _isOpen = false;
                 }
-            }
         }
 
         /// <summary>
@@ -512,7 +506,7 @@ namespace Mapsui.Providers.Shapefile
             if (!File.Exists(filename))
                 throw new FileNotFoundException($"Could not find file \"{filename}\"");
             if (!filename.ToLower().EndsWith(".shp"))
-                throw (new Exception("Invalid shapefile filename: " + filename));
+                throw new Exception("Invalid shapefile filename: " + filename);
 
             LoadSpatialIndex(fileBasedIndex); //Load spatial index			
         }
@@ -532,7 +526,7 @@ namespace Mapsui.Providers.Shapefile
             //Check file header
             if (_brShapeIndex.ReadInt32() != 170328064)
                 //File Code is actually 9994, but in Little Endian Byte Order this is '170328064'
-                throw (new ApplicationException("Invalid Shapefile Index (.shx)"));
+                throw new ApplicationException("Invalid Shapefile Index (.shx)");
 
             _brShapeIndex.BaseStream.Seek(24, 0); //seek to File Length
             var indexFileSize = SwapByteOrder(_brShapeIndex.ReadInt32());
@@ -560,7 +554,6 @@ namespace Mapsui.Providers.Shapefile
             var projFile = Path.GetDirectoryName(Filename) + "\\" + Path.GetFileNameWithoutExtension(Filename) +
                               ".prj";
             if (File.Exists(projFile))
-            {
                 try
                 {
                     // todo: Automatically parse coordinate system: 
@@ -574,7 +567,6 @@ namespace Mapsui.Providers.Shapefile
                                        "' found, but could not be parsed. WKT parser returned:" + ex.Message);
                     throw;
                 }
-            }
         }
 
         /// <summary>
@@ -624,7 +616,6 @@ namespace Mapsui.Providers.Shapefile
         private QuadTree CreateSpatialIndexFromFile(string filename)
         {
             if (File.Exists(filename + ".sidx"))
-            {
                 try
                 {
                     return QuadTree.FromFile(filename + ".sidx");
@@ -634,7 +625,6 @@ namespace Mapsui.Providers.Shapefile
                     File.Delete(filename + ".sidx");
                     return CreateSpatialIndexFromFile(filename);
                 }
-            }
 
             var tree = CreateSpatialIndex();
             tree.SaveIndex(filename + ".sidx");
@@ -650,7 +640,6 @@ namespace Mapsui.Providers.Shapefile
             // Convert all the geometries to BoundingBoxes 
             uint i = 0;
             foreach (var box in GetAllFeatureBoundingBoxes())
-            {
                 if (!double.IsNaN(box.Left) && !double.IsNaN(box.Right) && !double.IsNaN(box.Bottom) &&
                     !double.IsNaN(box.Top))
                 {
@@ -658,7 +647,6 @@ namespace Mapsui.Providers.Shapefile
                     objList.Add(g);
                     i++;
                 }
-            }
 
             Heuristic heuristic;
             heuristic.Maxdepth = (int)Math.Ceiling(Math.Log(GetFeatureCount(), 2));
@@ -714,7 +702,6 @@ namespace Mapsui.Providers.Shapefile
             var offsetOfRecord = ReadIndex(); //Read the whole .idx file
 
             if (_shapeType == ShapeType.Point)
-            {
                 for (var a = 0; a < _featureCount; ++a)
                 {
                     _fsShapeFile.Seek(offsetOfRecord[a] + 8, 0); // Skip record number and content length
@@ -725,9 +712,7 @@ namespace Mapsui.Providers.Shapefile
                         yield return new MRect(x, y, x, y);
                     }
                 }
-            }
             else
-            {
                 for (var a = 0; a < _featureCount; ++a)
                 {
                     _fsShapeFile.Seek(offsetOfRecord[a] + 8, 0); // Skip record number and content length
@@ -735,7 +720,6 @@ namespace Mapsui.Providers.Shapefile
                         yield return new MRect(_brShapeFile.ReadDouble(), _brShapeFile.ReadDouble(),
                                                      _brShapeFile.ReadDouble(), _brShapeFile.ReadDouble());
                 }
-            }
         }
 
         /// <summary>
@@ -752,9 +736,7 @@ namespace Mapsui.Providers.Shapefile
             if (type == ShapeType.Null)
                 return null;
             if (_shapeType == ShapeType.Point || _shapeType == ShapeType.PointM || _shapeType == ShapeType.PointZ)
-            {
                 return new Point(_brShapeFile.ReadDouble(), _brShapeFile.ReadDouble());
-            }
             if (_shapeType == ShapeType.Multipoint || _shapeType == ShapeType.MultiPointM ||
                 _shapeType == ShapeType.MultiPointZ)
             {
@@ -832,7 +814,6 @@ namespace Mapsui.Providers.Shapefile
                         linearRings.Add(rings[0]);
 
                         for (var i = 1; i < rings.Count; i++)
-                        {
                             if (!isCounterClockWise[i])
                             {
                                 // The !isCCW indicates this is an outerRing (or shell in NTS)
@@ -843,7 +824,6 @@ namespace Mapsui.Providers.Shapefile
                             }
                             else
                                 linearRings.Add(rings[i]);
-                        }
                         var p = CreatePolygon(linearRings);
                         if (p is not null) polygons.Add(p);
 
@@ -901,7 +881,7 @@ namespace Mapsui.Providers.Shapefile
                 }
                 return null;
             }
-            throw (new ApplicationException("An attempt was made to read DBase data from a shapefile without a valid .DBF file"));
+            throw new ApplicationException("An attempt was made to read DBase data from a shapefile without a valid .DBF file");
         }
 
 

@@ -24,10 +24,9 @@ using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Text;
-using Mapsui.GeometryLayers;
-using Mapsui.Providers.Shapefile.Indexing;
+using Mapsui.Nts.Providers.Shapefile.Indexing;
 
-namespace Mapsui.Providers.Shapefile
+namespace Mapsui.Nts.Providers.Shapefile
 {
     internal sealed class DbaseReader : IDisposable
     {
@@ -103,7 +102,7 @@ namespace Mapsui.Providers.Shapefile
         public BinaryTree<T, uint> CreateDbfIndex<T>(int columnId) where T : IComparable<T?>
         {
             var tree = new BinaryTree<T, uint>();
-            for (uint i = 0; i < ((_numberOfRecords > 10000) ? 10000 : _numberOfRecords); i++)
+            for (uint i = 0; i < (_numberOfRecords > 10000 ? 10000 : _numberOfRecords); i++)
                 tree.Add(new BinaryTree<T, uint>.ItemValue((T)GetValue(i, columnId), i));
             return tree;
         }
@@ -170,7 +169,7 @@ namespace Mapsui.Providers.Shapefile
             {
                 _dbaseColumns[i] = new DbaseField
                 {
-                    ColumnName = Encoding.UTF7.GetString((_br.ReadBytes(11))).Replace("\0", "").Trim()
+                    ColumnName = Encoding.UTF7.GetString(_br.ReadBytes(11)).Replace("\0", "").Trim()
                 };
                 var fieldtype = _br.ReadChar();
                 switch (fieldtype)
@@ -194,8 +193,8 @@ namespace Mapsui.Providers.Shapefile
                         _dbaseColumns[i].DataType = typeof(byte[]);
                         break;
                     default:
-                        throw (new NotSupportedException("Invalid or unknown DBase field type '" + fieldtype +
-                                                         "' in column '" + _dbaseColumns[i].ColumnName + "'"));
+                        throw new NotSupportedException("Invalid or unknown DBase field type '" + fieldtype +
+                                                         "' in column '" + _dbaseColumns[i].ColumnName + "'");
                 }
                 _dbaseColumns[i].Address = _br.ReadInt32();
 
@@ -418,11 +417,11 @@ namespace Mapsui.Providers.Shapefile
         internal object GetValue(uint oid, int colid)
         {
             if (!_isOpen)
-                throw (new ApplicationException("An attempt was made to read from a closed DBF file"));
+                throw new ApplicationException("An attempt was made to read from a closed DBF file");
             if (oid >= _numberOfRecords)
-                throw (new ArgumentException("Invalid DataRow requested at index " + oid.ToString(CultureInfo.InvariantCulture)));
+                throw new ArgumentException("Invalid DataRow requested at index " + oid.ToString(CultureInfo.InvariantCulture));
             if (colid >= _dbaseColumns!.Length || colid < 0)
-                throw ((new ArgumentException("Column index out of range")));
+                throw new ArgumentException("Column index out of range");
 
             _fs!.Seek(_headerLength + oid * _recordLength, 0);
             for (var i = 0; i < colid; i++)
@@ -455,7 +454,7 @@ namespace Mapsui.Providers.Shapefile
         internal GeometryFeature? GetFeature(uint oid, IEnumerable<GeometryFeature> table)
         {
             if (oid >= _numberOfRecords)
-                throw (new ArgumentException("Invalid DataRow requested at index " + oid.ToString(CultureInfo.InvariantCulture)));
+                throw new ArgumentException("Invalid DataRow requested at index " + oid.ToString(CultureInfo.InvariantCulture));
             _fs!.Seek(_headerLength + oid * _recordLength, 0);
 
             var dr = new GeometryFeature();
@@ -464,9 +463,7 @@ namespace Mapsui.Providers.Shapefile
 
 
             foreach (var dbf in _dbaseColumns!)
-            {
                 dr[dbf.ColumnName] = ReadDbfValue(dbf);
-            }
             return dr;
         }
 
@@ -484,37 +481,37 @@ namespace Mapsui.Providers.Shapefile
                         return dbl;
                     return DBNull.Value;
                 case "System.Int16":
-                    var temp16 = Encoding.UTF7.GetString((_br!.ReadBytes(dbf.Length))).Replace("\0", "").Trim();
+                    var temp16 = Encoding.UTF7.GetString(_br!.ReadBytes(dbf.Length)).Replace("\0", "").Trim();
                     if (short.TryParse(temp16, NumberStyles.Float, CultureInfo.InvariantCulture, out var i16))
                         return i16;
                     return DBNull.Value;
                 case "System.Int32":
-                    var temp32 = Encoding.UTF7.GetString((_br!.ReadBytes(dbf.Length))).Replace("\0", "").Trim();
+                    var temp32 = Encoding.UTF7.GetString(_br!.ReadBytes(dbf.Length)).Replace("\0", "").Trim();
                     if (int.TryParse(temp32, NumberStyles.Float, CultureInfo.InvariantCulture, out var i32))
                         return i32;
                     return DBNull.Value;
                 case "System.Int64":
-                    var temp64 = Encoding.UTF7.GetString((_br!.ReadBytes(dbf.Length))).Replace("\0", "").Trim();
+                    var temp64 = Encoding.UTF7.GetString(_br!.ReadBytes(dbf.Length)).Replace("\0", "").Trim();
                     if (long.TryParse(temp64, NumberStyles.Float, CultureInfo.InvariantCulture, out var i64))
                         return i64;
                     return DBNull.Value;
                 case "System.Single":
-                    var temp4 = Encoding.UTF8.GetString((_br!.ReadBytes(dbf.Length)));
+                    var temp4 = Encoding.UTF8.GetString(_br!.ReadBytes(dbf.Length));
                     if (float.TryParse(temp4, NumberStyles.Float, CultureInfo.InvariantCulture, out var f))
                         return f;
                     return DBNull.Value;
                 case "System.Boolean":
                     var tempChar = _br!.ReadChar();
-                    return (tempChar == 'T') || (tempChar == 't') || (tempChar == 'Y') || (tempChar == 'y');
+                    return tempChar == 'T' || tempChar == 't' || tempChar == 'Y' || tempChar == 'y';
                 case "System.DateTime":
                     // Mono has not yet implemented DateTime.TryParseExact
-                    if (DateTime.TryParseExact(Encoding.UTF7.GetString((_br!.ReadBytes(8))),
+                    if (DateTime.TryParseExact(Encoding.UTF7.GetString(_br!.ReadBytes(8)),
                                                "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var date))
                         return date;
                     return DBNull.Value;
                 default:
-                    throw (new NotSupportedException("Cannot parse DBase field '" + dbf.ColumnName + "' of type '" +
-                                                     dbf.DataType + "'"));
+                    throw new NotSupportedException("Cannot parse DBase field '" + dbf.ColumnName + "' of type '" +
+                                                     dbf.DataType + "'");
             }
         }
     }

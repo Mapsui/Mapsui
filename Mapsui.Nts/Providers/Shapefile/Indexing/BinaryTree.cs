@@ -19,7 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace Mapsui.Providers.Shapefile.Indexing
+namespace Mapsui.Nts.Providers.Shapefile.Indexing
 {
     [Serializable]
     internal class Node<T, TU> where T : IComparable<T?>
@@ -191,31 +191,19 @@ namespace Mapsui.Providers.Shapefile.Indexing
             if (root == null)
                 yield break;
             if (root.Item.Value?.CompareTo(value) > 0)
-            {
                 if (root.LeftNode != null)
-                {
                     if (root.LeftNode.Item.Value?.CompareTo(value) > 0)
                         foreach (var item in ScanFind(value, root.LeftNode))
-                        {
                             yield return item;
-                        }
-                }
-            }
 
             if (root.Item.Value?.CompareTo(value) == 0)
                 yield return root.Item;
 
             if (root.Item.Value?.CompareTo(value) < 0)
-            {
                 if (root.RightNode != null)
-                {
                     if (root.RightNode.Item.Value?.CompareTo(value) > 0)
                         foreach (var item in ScanFind(value, root.RightNode))
-                        {
                             yield return item;
-                        }
-                }
-            }
         }
 
         private IEnumerable<ItemValue> ScanString(string val, Node<T, TU>? root)
@@ -224,31 +212,19 @@ namespace Mapsui.Providers.Shapefile.Indexing
                 yield break;
             if (string.Compare(root.Item.Value?.ToString().Substring(0, val.Length).ToUpper(),
                     val, StringComparison.Ordinal) > 0)
-            {
                 if (root.LeftNode != null)
-                {
                     if (root.LeftNode.Item.Value?.ToString().ToUpper().StartsWith(val) ?? false)
                         foreach (var item in ScanString(val, root.LeftNode))
-                        {
                             yield return item;
-                        }
-                }
-            }
 
             if (root.Item.Value?.ToString().ToUpper().StartsWith(val) ?? false)
                 yield return root.Item;
 
             if (string.Compare(root.Item.Value?.ToString(), val, StringComparison.Ordinal) < 0)
-            {
                 if (root.RightNode != null)
-                {
                     if (string.Compare(root.RightNode.Item.Value?.ToString().Substring(0, val.Length).ToUpper(), val, StringComparison.Ordinal) > 0)
                         foreach (var item in ScanString(val, root.RightNode))
-                        {
                             yield return item;
-                        }
-                }
-            }
         }
 
         private IEnumerable<ItemValue> ScanBetween(T min, T max, Node<T, TU>? root)
@@ -256,31 +232,19 @@ namespace Mapsui.Providers.Shapefile.Indexing
             if (root == null)
                 yield break;
             if (root.Item.Value?.CompareTo(min) > 0)
-            {
                 if (root.LeftNode != null)
-                {
                     if (root.LeftNode.Item.Value?.CompareTo(min) > 0)
                         foreach (var item in ScanBetween(min, max, root.LeftNode))
-                        {
                             yield return item;
-                        }
-                }
-            }
 
             if (root.Item.Value?.CompareTo(min) > 0 && root.Item.Value.CompareTo(max) < 0)
                 yield return root.Item;
 
             if (root.Item.Value?.CompareTo(max) < 0)
-            {
                 if (root.RightNode != null)
-                {
                     if (root.RightNode.Item.Value?.CompareTo(min) > 0)
                         foreach (var item in ScanBetween(min, max, root.RightNode))
-                        {
                             yield return item;
-                        }
-                }
-            }
         }
 
         private IEnumerable<ItemValue> ScanInOrder(Node<T, TU>? root)
@@ -288,22 +252,14 @@ namespace Mapsui.Providers.Shapefile.Indexing
             if (root == null)
                 yield break;
             if (root.LeftNode != null)
-            {
                 foreach (var item in ScanInOrder(root.LeftNode))
-                {
                     yield return item;
-                }
-            }
 
             yield return root.Item;
 
             if (root.RightNode != null)
-            {
                 foreach (var item in ScanInOrder(root.RightNode))
-                {
                     yield return item;
-                }
-            }
         }
 
         /// <summary>

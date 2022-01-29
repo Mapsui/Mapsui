@@ -1,6 +1,6 @@
 ﻿using NetTopologySuite.Geometries;
 
-namespace Mapsui.Extensions
+namespace Mapsui.Nts.Extensions
 {
     public static class MRectExtensions
     {

@@ -3,7 +3,7 @@ using Mapsui.Layers;
 using Mapsui.Nts.Extensions;
 using NetTopologySuite.Geometries;
 
-namespace Mapsui.GeometryLayers
+namespace Mapsui.Nts
 {
     public class GeometryFeature : BaseFeature, IFeature, IDisposable
     {
@@ -46,12 +46,10 @@ namespace Mapsui.GeometryLayers
         {
             var vertices = Geometry.AllVertices();
             foreach (var vertex in vertices)
-            {
                 visit(vertex.X, vertex.Y, (x, y) => {
                     vertex.X = x;
                     vertex.Y = y;
                 });
-            }
         }
     }
 }
