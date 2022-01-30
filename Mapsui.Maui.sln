@@ -18,7 +18,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Tests", "Tests\Mapsu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Tests.Common", "Tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj", "{81BB36D2-4D01-44E3-9024-E7CBD10DA316}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.UI.Android", "Mapsui.UI.Android\Mapsui.UI.Android.csproj", "{A9ED0AA7-B6F0-4946-8A08-7C531E5CFA9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.UI.Android", "Mapsui.UI.Android\Mapsui.UI.Android.csproj", "{A9ED0AA7-B6F0-4946-8A08-7C531E5CFA9B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Geometries", "Mapsui.Geometries\Mapsui.Geometries.csproj", "{EE55B62D-FFA2-4C24-A4AD-7A47ACE55CE5}"
 EndProject
@@ -131,7 +131,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{52C84C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{5BB9C8BA-0FF4-40E7-BC36-8D671A951C82}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.Droid", "Samples\Mapsui.Samples.Droid\Mapsui.Samples.Droid.csproj", "{3BC0AC7E-3B3B-4D3F-9CC0-B2BDECC460A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.Droid", "Samples\Mapsui.Samples.Droid\Mapsui.Samples.Droid.csproj", "{3BC0AC7E-3B3B-4D3F-9CC0-B2BDECC460A6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.UI.Forms", "Mapsui.UI.Forms\Mapsui.UI.Forms.csproj", "{217BCF74-1DA0-4FE5-A907-4A44F1B046FF}"
 EndProject
@@ -210,7 +210,7 @@ Global
 		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{502c3fd3-b775-40f5-8760-0fe7071126f0}*SharedItemsImports = 5
 		Samples\Mapsui.Samples.Uwp\Mapsui.Samples.Uno.Shared.projitems*{6279c845-92f8-4333-ab99-3d213163593c}*SharedItemsImports = 13
 		Samples\Mapsui.Samples.Uwp\Mapsui.Samples.Uno.Shared.projitems*{a1f42e2b-6e17-4c29-80fa-837f98079604}*SharedItemsImports = 5
-		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{a9ed0aa7-b6f0-4946-8a08-7c531e5cfa9b}*SharedItemsImports = 4
+		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{a9ed0aa7-b6f0-4946-8a08-7c531e5cfa9b}*SharedItemsImports = 5
 		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{ae693902-feda-4034-a7c5-9aa9872f7878}*SharedItemsImports = 5
 		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{b4b22fa1-b052-48ea-b4bb-1eaaa22a5c74}*SharedItemsImports = 5
 		Mapsui.UI.Shared\Mapsui.UI.Shared.projitems*{b78cde0f-568f-4064-8b74-fcd920e22351}*SharedItemsImports = 5
