@@ -15,7 +15,7 @@
     <language>en-US</language>
     <dependencies>
       <!-- [ or ] is including, ( or ) is excluding -->
-      <group targetFramework="MonoAndroid">
+      <group targetFramework="net60-android">
         <dependency id="Mapsui" version="$version$"/>
         <dependency id="SkiaSharp.Views" version="[2.88.0-preview.179,3.0.0)"/>
         <dependency id="System.Memory" version="[4.5.4,5.0.0]"/>
@@ -23,6 +23,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\Mapsui.UI.Android\bin\Release\Mapsui.UI.Android.dll" target="lib\MonoAndroid\Mapsui.UI.Android.dll" />
+    <file src="..\Mapsui.UI.Android\bin\Release\net60-android\Mapsui.UI.Android.dll" target="lib\net60-android\Mapsui.UI.Android.dll" />
   </files>
 </package>
