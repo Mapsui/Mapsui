@@ -4,7 +4,9 @@
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <TargetFramework>net60-android</TargetFramework>
+    <TargetFramework>net60-android30.0</TargetFramework>
+    <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <AndroidLinkMode>None</AndroidLinkMode>
