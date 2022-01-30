@@ -29,7 +29,7 @@ namespace Mapsui.Samples.Droid
         {
             base.OnCreate(savedInstanceState);
 
-            SetContentView(Resource.Layout.content_main);
+            SetContentView(Resource.Layout.activity_main);
 
             var toolbar = FindViewById<AndroidX.AppCompat.Widget.Toolbar>(Resource.Id.toolbar);
             SetSupportActionBar(toolbar);
