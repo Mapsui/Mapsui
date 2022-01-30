@@ -53,7 +53,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.iOS", "Samples\Mapsui.Samples.iOS\Mapsui.Samples.iOS.csproj", "{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.iOS", "Samples\Mapsui.Samples.iOS\Mapsui.Samples.iOS.csproj", "{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.UI.Wpf", "Mapsui.UI.Wpf\Mapsui.UI.Wpf.csproj", "{AE693902-FEDA-4034-A7C5-9AA9872F7878}"
 EndProject
@@ -786,10 +786,11 @@ Global
 		{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C}.Debug|ARM.Build.0 = Debug|Any CPU
 		{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C}.Debug|ARM64.ActiveCfg = Debug|Any CPU
 		{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C}.Debug|ARM64.Build.0 = Debug|Any CPU
-		{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C}.Debug|iPhone.ActiveCfg = Debug|iPhone
-		{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C}.Debug|iPhone.Build.0 = Debug|iPhone
-		{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
-		{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C}.Debug|iPhone.Deploy.0 = Debug|Any CPU
+		{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
 		{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C}.Debug|x64.Build.0 = Debug|Any CPU
 		{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C}.Debug|x86.ActiveCfg = Debug|Any CPU
