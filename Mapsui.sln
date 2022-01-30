@@ -2134,7 +2134,6 @@ Global
 		{333F557C-52A4-417F-93A7-FB24A07984DD}.Debug|x64.ActiveCfg = Debug|iPhoneSimulator
 		{333F557C-52A4-417F-93A7-FB24A07984DD}.Debug|x86.ActiveCfg = Debug|iPhoneSimulator
 		{333F557C-52A4-417F-93A7-FB24A07984DD}.Release|AnyCPU.ActiveCfg = Release|iPhoneSimulator
-		{333F557C-52A4-417F-93A7-FB24A07984DD}.Release|AnyCPU.Build.0 = Release|iPhoneSimulator
 		{333F557C-52A4-417F-93A7-FB24A07984DD}.Release|ARM.ActiveCfg = Release|iPhoneSimulator
 		{333F557C-52A4-417F-93A7-FB24A07984DD}.Release|ARM64.ActiveCfg = Release|iPhoneSimulator
 		{333F557C-52A4-417F-93A7-FB24A07984DD}.Release|iPhone.ActiveCfg = Release|iPhoneSimulator
