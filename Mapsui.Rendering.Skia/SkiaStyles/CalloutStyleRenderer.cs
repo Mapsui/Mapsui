@@ -1,5 +1,4 @@
 ﻿using System;
-using Mapsui.Geometries;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using SkiaSharp;
@@ -10,7 +9,7 @@ namespace Mapsui.Rendering.Skia
     public class CalloutStyleRenderer : SymbolStyle
     {
         public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport,
-            float opacity, Point destination, CalloutStyle calloutStyle)
+            float opacity, double x, double y, CalloutStyle calloutStyle)
         {
             if (calloutStyle.BitmapId < 0 || calloutStyle.Invalidated)
             {
@@ -43,17 +42,15 @@ namespace Mapsui.Rendering.Skia
             if (viewport.Rotation != 0 && calloutStyle.SymbolOffsetRotatesWithMap)
             {
                 var mapRotation = viewport.Rotation / 180.0 * Math.PI;
-                var x = Math.Cos(mapRotation) * symbolOffsetX - Math.Sin(mapRotation) * symbolOffsetY;
-                var y = Math.Sin(mapRotation) * symbolOffsetX + Math.Cos(mapRotation) * symbolOffsetY;
-                symbolOffsetX = (float)x;
-                symbolOffsetY = (float)y;
+                symbolOffsetX = (float)(Math.Cos(mapRotation) * symbolOffsetX - Math.Sin(mapRotation) * symbolOffsetY);
+                symbolOffsetY = (float)(Math.Sin(mapRotation) * symbolOffsetX + Math.Cos(mapRotation) * symbolOffsetY);
             }
 
             // Save state of the canvas, so we could move and rotate the canvas
             canvas.Save();
 
             // Move 0/0 to the Anchor point of Callout
-            canvas.Translate((float)destination.X - symbolOffsetX, (float)destination.Y - symbolOffsetY);
+            canvas.Translate((float)x - symbolOffsetX, (float)y - symbolOffsetY);
             canvas.Scale((float)calloutStyle.SymbolScale, (float)calloutStyle.SymbolScale);
 
             // 0/0 are assumed at center of image, but Picture has 0/0 at left top position
@@ -395,6 +392,7 @@ namespace Mapsui.Rendering.Skia
         /// <summary>
         /// Draw arrow to path
         /// </summary>
+        /// <param name="path">The arrow path</param>
         /// <param name="start">Start of arrow at bubble</param>
         /// <param name="center">Center of arrow</param>
         /// <param name="end">End of arrow at bubble</param>
@@ -410,7 +408,7 @@ namespace Mapsui.Rendering.Skia
         /// </summary>
         /// <param name="color">Color in Mapsui format</param>
         /// <returns>Color in Skia format</returns>
-        public SKColor ToSkia(Color color)
+        public SKColor ToSkia(Color? color)
         {
             if (color == null) return new SKColor(128, 128, 128, 0);
             return new SKColor((byte)color.R, (byte)color.G, (byte)color.B, (byte)color.A);

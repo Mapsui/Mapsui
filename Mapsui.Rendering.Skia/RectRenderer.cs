@@ -1,7 +1,7 @@
 using System;
-using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
+using Mapsui.Nts.Extensions;
 using Mapsui.Styles;
 using SkiaSharp;
 

@@ -1,136 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Mapsui.Geometries;
+using NetTopologySuite.Geometries;
 using SkiaSharp;
 
-namespace Mapsui.Rendering.Skia.Extensions
+namespace Mapsui.Rendering.Skia.Functions
 {
-    public static class ClippingExtension
+    public static class ClippingFunctions
     {
-        /// <summary>
-        /// Converts a LineString (list of Mapsui points) in world coordinates to a Skia path
-        /// </summary>
-        /// <param name="lineString">List of points in Mapsui world coordinates</param>
-        /// <param name="viewport">Viewport implementation</param>
-        /// <param name="clipRect">Rectangle to clip to. All lines outside aren't drawn.</param>
-        /// <returns></returns>
-        public static SKPath ToSkiaPath(this IEnumerable<Point> lineString, IReadOnlyViewport viewport, SKRect clipRect)
-        {
-            // First convert List<Points> to screen coordinates
-            var vertices = WorldToScreen(viewport, lineString);
-
-            var path = new SKPath();
-            var lastPoint = SKPoint.Empty;
-
-            for (var i = 1; i < vertices.Count; i++)
-            {
-                // Check each part of LineString, if it is inside or intersects the clipping rectangle
-                var intersect = LiangBarskyClip(vertices[i - 1], vertices[i], clipRect, out var intersectionPoint1, out var intersectionPoint2);
-
-                if (intersect != Intersection.CompleteOutside)
-                {
-                    // If the last point isn't the same as actual starting point ...
-                    if (lastPoint.IsEmpty || !lastPoint.Equals(intersectionPoint1))
-                    {
-                        // ... than move to this point
-                        path.MoveTo(intersectionPoint1);
-                    }
-                    // Draw line
-                    path.LineTo(intersectionPoint2);
-
-                    // Save last end point for later use
-                    lastPoint = intersectionPoint2;
-                }
-            }
-            return path;
-        }
-
-        /// <summary>
-        /// Converts a Polygon into a SKPath, that is clipped to clipRect, where exterior is bigger than interior
-        /// </summary>
-        /// <param name="polygon">Polygon to convert</param>
-        /// <param name="viewport">Viewport implementation</param>
-        /// <param name="clipRect">Rectangle to clip to. All lines outside aren't drawn.</param>
-        /// <param name="strokeWidth">StrokeWidth for inflating clipRect</param>
-        /// <returns></returns>
-        public static SKPath ToSkiaPath(this Polygon polygon, IReadOnlyViewport viewport, SKRect clipRect, float strokeWidth)
-        {
-            // Reduce exterior ring to parts, that are visible in clipping rectangle
-            // Inflate clipRect, so that we could be sure, nothing of stroke is visible on screen
-            var exterior = ReducePointsToClipRect(polygon.ExteriorRing?.Vertices, viewport, SKRect.Inflate(clipRect, strokeWidth * 2, strokeWidth * 2));
-
-            // Create path for exterior and interior parts
-            var path = new SKPath();
-
-            if (exterior.Count == 0)
-                return path;
-
-            // Draw exterior path
-            path.MoveTo(exterior[0]);
-
-            for (var i = 1; i < exterior.Count; i++)
-            {
-                path.LineTo(exterior[i]);
-            }
-
-            // Close exterior path
-            path.Close();
-
-            foreach (var interiorRing in polygon.InteriorRings)
-            {
-                // note: For Skia inner rings need to be clockwise and outer rings
-                // need to be counter clockwise (if this is the other way around it also
-                // seems to work)
-                // this is not a requirement of the OGC polygon.
-
-                // Reduce interior ring to parts, that are visible in clipping rectangle
-                var interior = ReducePointsToClipRect(interiorRing.Vertices, viewport, SKRect.Inflate(clipRect, strokeWidth, strokeWidth));
-
-                if (interior.Count == 0)
-                    continue;
-
-                // Draw interior pathes
-                path.MoveTo(interior[0]);
-
-                for (var i = 1; i < interior.Count; i++)
-                {
-                    path.LineTo(interior[i]);
-                }
-            }
-
-            // Close interior pathes
-            path.Close();
-
-            return path;
-        }
-
-        /// <summary>
-        /// Comparer for each side of the clipping rectangle to check, if a point 
-        /// is inside or outside of this edge.
-        /// There are 4 edges (left, top, right, bottom).
-        /// </summary>
-        private static readonly Func<SKPoint, SKRect, bool>[] Comparer = new Func<SKPoint, SKRect, bool>[]
-        {
-            (point, rect) => point.X > rect.Left, // Left edge of rect
-            (point, rect) => point.Y > rect.Top, // Top edge of rect
-            (point, rect) => point.X < rect.Right, // Right edge of rect
-            (point, rect) => point.Y < rect.Bottom, // Bottom edge of rect
-        };
-
-        /// <summary>
-        /// Calculates the intersection point of line between pointStart and pointEnd 
-        /// and the edge.
-        /// There are 4 edges (left, top, right, bottom).
-        /// </summary>
-        private static readonly Func<SKPoint, SKPoint, SKRect, SKPoint>[] Intersecter = new Func<SKPoint, SKPoint, SKRect, SKPoint>[]
-        {
-            (pointStart, pointEnd, rect) => new SKPoint(rect.Left, pointStart.Y + (rect.Left-pointStart.X)/(pointEnd.X-pointStart.X)*(pointEnd.Y-pointStart.Y)), // Left edge of rect
-            (pointStart, pointEnd, rect) => new SKPoint(pointStart.X + (rect.Top-pointStart.Y)/(pointEnd.Y-pointStart.Y)*(pointEnd.X-pointStart.X), rect.Top),   // Top edge of rect
-            (pointStart, pointEnd, rect) => new SKPoint(rect.Right, pointEnd.Y + (rect.Right-pointEnd.X)/(pointStart.X-pointEnd.X)*(pointStart.Y-pointEnd.Y)),   // Right edge of rect
-            (pointStart, pointEnd, rect) => new SKPoint(pointEnd.X + (rect.Bottom-pointEnd.Y)/(pointStart.Y-pointEnd.Y)*(pointStart.X-pointEnd.X), rect.Bottom), // Bottom edge of rect
-        };
-
         /// <summary>
         /// Reduce list of points, so that all are inside of cliptRect
         /// See https://en.wikipedia.org/wiki/Sutherland%E2%80%93Hodgman_algorithm
@@ -139,7 +16,7 @@ namespace Mapsui.Rendering.Skia.Extensions
         /// <param name="viewport">Viewport implementation</param>
         /// <param name="clipRect">Rectangle to clip to. All points outside aren't drawn.</param>
         /// <returns></returns>
-        private static List<SKPoint> ReducePointsToClipRect(IEnumerable<Point>? points, IReadOnlyViewport viewport, SKRect clipRect)
+        public static List<SKPoint> ReducePointsToClipRect(IEnumerable<Coordinate>? points, IReadOnlyViewport viewport, SKRect clipRect)
         {
             var output = WorldToScreen(viewport, points);
 
@@ -187,12 +64,25 @@ namespace Mapsui.Rendering.Skia.Extensions
         }
 
         /// <summary>
+        /// Calculates the intersection point of line between pointStart and pointEnd 
+        /// and the edge.
+        /// There are 4 edges (left, top, right, bottom).
+        /// </summary>
+        private static readonly Func<SKPoint, SKPoint, SKRect, SKPoint>[] Intersecter = new Func<SKPoint, SKPoint, SKRect, SKPoint>[]
+        {
+            (pointStart, pointEnd, rect) => new SKPoint(rect.Left, pointStart.Y + (rect.Left-pointStart.X)/(pointEnd.X-pointStart.X)*(pointEnd.Y-pointStart.Y)), // Left edge of rect
+            (pointStart, pointEnd, rect) => new SKPoint(pointStart.X + (rect.Top-pointStart.Y)/(pointEnd.Y-pointStart.Y)*(pointEnd.X-pointStart.X), rect.Top),   // Top edge of rect
+            (pointStart, pointEnd, rect) => new SKPoint(rect.Right, pointEnd.Y + (rect.Right-pointEnd.X)/(pointStart.X-pointEnd.X)*(pointStart.Y-pointEnd.Y)),   // Right edge of rect
+            (pointStart, pointEnd, rect) => new SKPoint(pointEnd.X + (rect.Bottom-pointEnd.Y)/(pointStart.Y-pointEnd.Y)*(pointStart.X-pointEnd.X), rect.Bottom), // Bottom edge of rect
+        };
+
+        /// <summary>
         /// Convert a list of Mapsui points in world coordinates to SKPoint in screen coordinates
         /// </summary>
         /// <param name="viewport">Viewport implementation</param>
         /// <param name="points">List of points in Mapsui world coordinates</param>
         /// <returns>List of screen coordinates in SKPoint</returns>
-        private static List<SKPoint> WorldToScreen(IReadOnlyViewport viewport, IEnumerable<Point>? points)
+        public static List<SKPoint> WorldToScreen(IReadOnlyViewport viewport, IEnumerable<Coordinate>? points)
         {
             var result = new List<SKPoint>();
             if (points == null)
@@ -240,7 +130,7 @@ namespace Mapsui.Rendering.Skia.Extensions
         /// <param name="intersectionPoint1">First intersection point </param>
         /// <param name="intersectionPoint2">Second intersection point</param>
         /// <returns></returns>
-        private static Intersection LiangBarskyClip(SKPoint point1, SKPoint point2, SKRect clipRect, out SKPoint intersectionPoint1, out SKPoint intersectionPoint2)
+        public static Intersection LiangBarskyClip(SKPoint point1, SKPoint point2, SKRect clipRect, out SKPoint intersectionPoint1, out SKPoint intersectionPoint2)
         {
             var vx = point2.X - point1.X;
             var vy = point2.Y - point1.Y;
@@ -314,18 +204,31 @@ namespace Mapsui.Rendering.Skia.Extensions
 
             return Intersection.Unknown;
         }
-    }
 
-    /// <summary>
-    /// Type of intersection
-    /// </summary>
-    public enum Intersection
-    {
-        CompleteInside,
-        CompleteOutside,
-        Both,
-        FirstInside,
-        SecondInside,
-        Unknown
+        /// <summary>
+        /// Type of intersection
+        /// </summary>
+        public enum Intersection
+        {
+            CompleteInside,
+            CompleteOutside,
+            Both,
+            FirstInside,
+            SecondInside,
+            Unknown
+        }
+
+        /// <summary>
+        /// Comparer for each side of the clipping rectangle to check, if a point 
+        /// is inside or outside of this edge.
+        /// There are 4 edges (left, top, right, bottom).
+        /// </summary>
+        private static readonly Func<SKPoint, SKRect, bool>[] Comparer = new Func<SKPoint, SKRect, bool>[]
+        {
+            (point, rect) => point.X > rect.Left, // Left edge of rect
+            (point, rect) => point.Y > rect.Top, // Top edge of rect
+            (point, rect) => point.X < rect.Right, // Right edge of rect
+            (point, rect) => point.Y < rect.Bottom, // Bottom edge of rect
+        };
     }
 }

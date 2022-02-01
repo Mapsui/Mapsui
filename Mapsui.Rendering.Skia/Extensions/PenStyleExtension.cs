@@ -17,9 +17,7 @@ namespace Mapsui.Rendering.Skia.Extensions
                     // Multiply each dash entry with line width
                     var dash = new float[dashArray.Length];
                     for (var i = 0; i < dashArray.Length; i++)
-                    {
                         dash[i] = dashArray[i] * width;
-                    }
                     return SKPathEffect.CreateDash(dash, dashOffset);
                 case PenStyle.Dash:
                     return SKPathEffect.CreateDash(new[] { width * 4f, width * 3f }, dashOffset);
