@@ -40,7 +40,7 @@ jobs:
     - name: Restore dependencies
       run: nuget restore Mapsui.Mac.sln
     - name: Build Mapsui.Nts
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Nts/Mapsui.Nts.csproj
+      run: msbuild /p:RestorePackages=true /p:Configuration=Release Mapsui.Nts/Mapsui.Nts.csproj
     - name: Build Mapsui.Layers.Tiling
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Layers.Tiling/Mapsui.Layers.Tiling.csproj
     - name: Build Mapsui.Layers.ArcGIS
@@ -168,7 +168,7 @@ jobs:
     - name: Restore dependencies
       run: nuget restore Mapsui.Maui.sln
     - name: Build Mapsui.Nts
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Nts/Mapsui.Nts.csproj
+      run: msbuild /p:RestorePackages=true /p:Configuration=Release Mapsui.Nts/Mapsui.Nts.csproj
     - name: Build Mapsui.Layers.Tiling
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Layers.Tiling/Mapsui.Layers.Tiling.csproj
     - name: Build Mapsui.Layers.ArcGIS
