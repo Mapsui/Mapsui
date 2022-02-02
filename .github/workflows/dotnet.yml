@@ -39,16 +39,16 @@ jobs:
       run: dotnet workload install maui
     - name: Restore dependencies
       run: nuget restore Mapsui.Mac.sln
-    - name: Build Mapsui.Nts
-      run: msbuild /p:RestorePackages=true /p:Configuration=Release Mapsui.Nts/Mapsui.Nts.csproj
-    - name: Build Mapsui.Layers.Tiling
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Layers.Tiling/Mapsui.Layers.Tiling.csproj
-    - name: Build Mapsui.Layers.ArcGIS
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Layers.ArcGIS/Mapsui.Layers.ArcGIS.csproj
     - name: Build Mapsui
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui/Mapsui.csproj
     - name: Build Mapsui.Rendering.Skia
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Rendering.Skia/Mapsui.Rendering.Skia.csproj
+    - name: Build Mapsui.Layers.Tiling
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Layers.Tiling/Mapsui.Layers.Tiling.csproj
+    - name: Build Mapsui.Layers.ArcGIS
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Layers.ArcGIS/Mapsui.Layers.ArcGIS.csproj
+    - name: Build Mapsui.Nts
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Nts/Mapsui.Nts.csproj
     - name: Build Mapsui.UI.Android
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Android/Mapsui.UI.Android.csproj
     - name: Build Mapsui.UI.iOS
@@ -168,7 +168,7 @@ jobs:
     - name: Restore dependencies
       run: nuget restore Mapsui.Maui.sln
     - name: Build Mapsui.Nts
-      run: msbuild /p:RestorePackages=true /p:Configuration=Release Mapsui.Nts/Mapsui.Nts.csproj
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Nts/Mapsui.Nts.csproj
     - name: Build Mapsui.Layers.Tiling
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Layers.Tiling/Mapsui.Layers.Tiling.csproj
     - name: Build Mapsui.Layers.ArcGIS
