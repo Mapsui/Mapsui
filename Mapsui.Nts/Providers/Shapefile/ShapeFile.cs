@@ -249,30 +249,6 @@ namespace Mapsui.Nts.Providers.Shapefile
         /// <summary>
         /// Filter Delegate Method for limiting the data source
         /// </summary>
-        /// <remarks>
-        /// <example>
-        /// Using an anonymous method for filtering all features where the NAME column starts with S:
-        /// <code lang="C#">
-        /// myShapeDataSource.FilterDelegate = new Mapsui.Data.Providers.ShapeFile.FilterMethod(delegate(Mapsui.Data.FeatureDataRow row) { return (!row["NAME"].ToString().StartsWith("S")); });
-        /// </code>
-        /// </example>
-        /// <example>
-        /// Declaring a delegate method for filtering (multi)polygon-features whose area is larger than 5.
-        /// <code>
-        /// myShapeDataSource.FilterDelegate = CountryFilter;
-        /// [...]
-        /// public static bool CountryFilter(Mapsui.Data.FeatureDataRow row)
-        /// {
-        ///		if(row.Geometry.GetType()==typeof(Mapsui.Geometries.Polygon))
-        ///			return ((row.Geometry as Mapsui.Geometries.Polygon).Area>5);
-        ///		if (row.Geometry.GetType() == typeof(Mapsui.Geometries.MultiPolygon))
-        ///			return ((row.Geometry as Mapsui.Geometries.MultiPolygon).Area > 5);
-        ///		else return true;
-        /// }
-        /// </code>
-        /// </example>
-        /// </remarks>
-        /// <seealso cref="FilterMethod"/>
         public FilterMethod? FilterDelegate { get; set; }
 
 
