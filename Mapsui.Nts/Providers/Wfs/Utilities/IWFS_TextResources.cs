@@ -2,7 +2,6 @@
 // This file can be redistributed and/or modified under the terms of the GNU Lesser General Public License.
 
 using System.Collections.Generic;
-using Mapsui.Geometries;
 // ReSharper disable InconsistentNaming // Not going to fix these unless there is work done on WFS
 
 namespace Mapsui.Providers.Wfs.Utilities

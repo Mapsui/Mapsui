@@ -7,9 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Xml;
-using Mapsui.Geometries;
 using Mapsui.Projections;
-using Mapsui.Utilities;
 
 // ReSharper disable InconsistentNaming
 
