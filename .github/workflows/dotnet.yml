@@ -33,6 +33,7 @@ jobs:
       with:
          dotnet-version: | 
            5.0.x
+           6.0.x
          include-prerelease: true    
     - name: Restore dependencies
       run: nuget restore Mapsui.Mac.sln
