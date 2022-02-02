@@ -1,4 +1,4 @@
-﻿namespace Mapsui.Geometries
+﻿namespace Mapsui
 {
     /// <summary>
     /// The X and Y fields of the ReadyOnlyPoint can not be set. This was introduced
