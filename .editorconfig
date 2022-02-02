@@ -146,3 +146,4 @@ dotnet_diagnostic.IDE0055.severity = warning
 # Category settings
 dotnet_analyzer_diagnostic.category-Style.severity = suggestion
 dotnet_analyzer_diagnostic.category-CodeQuality.severity = suggestion
+csharp_style_namespace_declarations=file_scoped:silent

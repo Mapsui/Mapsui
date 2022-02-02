@@ -1,14 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.Reflection;
 using Mapsui.Extensions;
-using Mapsui.Geometries;
-using Mapsui.GeometryLayers;
 using Mapsui.Layers;
+using Mapsui.Nts;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.UI;
-using Mapsui.Utilities;
+using NetTopologySuite.Geometries;
 
 namespace Mapsui.Tests.Common.Maps
 {

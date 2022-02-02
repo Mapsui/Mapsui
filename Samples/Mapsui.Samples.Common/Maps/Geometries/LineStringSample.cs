@@ -1,14 +1,14 @@
 ﻿using System.Linq;
-using Mapsui.Extensions;
-using Mapsui.Geometries;
-using Mapsui.GeometryLayers;
 using Mapsui.Layers;
 using Mapsui.Layers.Tiling;
+using Mapsui.Nts;
+using Mapsui.Nts.Extensions;
 using Mapsui.Projections;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.UI;
-using Mapsui.Utilities;
+using NetTopologySuite.Geometries;
+using NetTopologySuite.IO;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
@@ -36,14 +36,15 @@ namespace Mapsui.Samples.Common.Maps
 
         public static ILayer CreateLineStringLayer(IStyle? style = null)
         {
-            var lineString = (LineString)Geometry.GeomFromText(WKTGr5);
-            lineString = new LineString(lineString.Vertices.Select(v => SphericalMercator.FromLonLat(v.Y, v.X).ToMPoint().ToPoint()));
+            var lineString = (LineString)new WKTReader().Read(WKTGr5);
+            lineString = new LineString(lineString.Coordinates.Select(v => SphericalMercator.FromLonLat(v.Y, v.X).ToCoordinate()).ToArray());
 
             return new MemoryLayer
             {
                 DataSource = new MemoryProvider<IFeature>(new GeometryFeature { Geometry = lineString }),
                 Name = "LineStringLayer",
                 Style = style
+
             };
         }
 

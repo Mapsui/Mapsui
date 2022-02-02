@@ -41,14 +41,14 @@ namespace Mapsui.Nts.Providers.Shapefile
         Null = 0,
         /// <summary>
         /// A point consists of a pair of double-precision coordinates.
-        /// Mapsui interprets this as <see cref="Geometries.Point"/>
+        /// Mapsui interprets this as <see cref="Point"/>
         /// </summary>
         Point = 1,
         /// <summary>
         /// PolyLine is an ordered set of vertices that consists of one or more parts. A part is a
         /// connected sequence of two or more points. Parts may or may not be connected to one
         ///	another. Parts may or may not intersect one another.
-        /// Mapsui interprets this as either <see cref="Geometries.LineString"/> or <see cref="Geometries.MultiLineString"/>
+        /// Mapsui interprets this as either <see cref="LineString"/> or <see cref="MultiLineString"/>
         /// </summary>
         PolyLine = 3,
         /// <summary>
@@ -60,58 +60,58 @@ namespace Mapsui.Nts.Providers.Shapefile
         /// holes in polygons are in a counterclockwise direction. Vertices for a single, ringed
         /// polygon are, therefore, always in clockwise order. The rings of a polygon are referred to
         /// as its parts.
-        /// Mapsui interprets this as either <see cref="Geometries.Polygon"/> or <see cref="Geometries.MultiPolygon"/>
+        /// Mapsui interprets this as either <see cref="Polygon"/> or <see cref="MultiPolygon"/>
         /// </summary>
         Polygon = 5,
         /// <summary>
         /// A MultiPoint represents a set of points.
-        /// Mapsui interprets this as <see cref="Geometries.MultiPoint"/>
+        /// Mapsui interprets this as <see cref="MultiPoint"/>
         /// </summary>
         Multipoint = 8,
         /// <summary>
         /// A PointZ consists of a triplet of double-precision coordinates plus a measure.
-        /// Mapsui interprets this as <see cref="Geometries.Point"/>
+        /// Mapsui interprets this as <see cref="Point"/>
         /// </summary>
         PointZ = 11,
         /// <summary>
         /// A PolyLineZ consists of one or more parts. A part is a connected sequence of two or
         /// more points. Parts may or may not be connected to one another. Parts may or may not
         /// intersect one another.
-        /// Mapsui interprets this as <see cref="Geometries.LineString"/> or <see cref="Geometries.MultiLineString"/>
+        /// Mapsui interprets this as <see cref="LineString"/> or <see cref="MultiLineString"/>
         /// </summary>
         PolyLineZ = 13,
         /// <summary>
         /// A PolygonZ consists of a number of rings. A ring is a closed, non-self-intersecting loop.
         /// A PolygonZ may contain multiple outer rings. The rings of a PolygonZ are referred to as
         /// its parts.
-        /// Mapsui interprets this as either <see cref="Geometries.Polygon"/> or <see cref="Geometries.MultiPolygon"/>
+        /// Mapsui interprets this as either <see cref="Polygon"/> or <see cref="MultiPolygon"/>
         /// </summary>
         PolygonZ = 15,
         /// <summary>
         /// A MultiPointZ represents a set of <see cref="PointZ"/>s.
-        /// Mapsui interprets this as <see cref="Geometries.MultiPoint"/>
+        /// Mapsui interprets this as <see cref="MultiPoint"/>
         /// </summary>
         MultiPointZ = 18,
         /// <summary>
         /// A PointM consists of a pair of double-precision coordinates in the order X, Y, plus a measure M.
-        /// Mapsui interprets this as <see cref="Geometries.Point"/>
+        /// Mapsui interprets this as <see cref="Point"/>
         /// </summary>
         PointM = 21,
         /// <summary>
         /// A shapefile PolyLineM consists of one or more parts. A part is a connected sequence of
         /// two or more points. Parts may or may not be connected to one another. Parts may or may
         /// not intersect one another.
-        /// Mapsui interprets this as <see cref="Geometries.LineString"/> or <see cref="Geometries.MultiLineString"/>
+        /// Mapsui interprets this as <see cref="LineString"/> or <see cref="MultiLineString"/>
         /// </summary>
         PolyLineM = 23,
         /// <summary>
         /// A PolygonM consists of a number of rings. A ring is a closed, non-self-intersecting loop.
-        /// Mapsui interprets this as either <see cref="Geometries.Polygon"/> or <see cref="Geometries.MultiPolygon"/>
+        /// Mapsui interprets this as either <see cref="Polygon"/> or <see cref="MultiPolygon"/>
         /// </summary>
         PolygonM = 25,
         /// <summary>
         /// A MultiPointM represents a set of <see cref="PointM"/>s.
-        /// Mapsui interprets this as <see cref="Geometries.MultiPoint"/>
+        /// Mapsui interprets this as <see cref="MultiPoint"/>
         /// </summary>
         MultiPointM = 28,
         /// <summary>
@@ -156,11 +156,11 @@ namespace Mapsui.Nts.Providers.Shapefile
         private string _filename;
         private bool _isOpen;
         private ShapeType _shapeType;
-        private BinaryReader _brShapeFile = default!;
-        private BinaryReader _brShapeIndex = default!;
+        private BinaryReader? _brShapeFile;
+        private BinaryReader? _brShapeIndex;
         private readonly DbaseReader? _dbaseFile;
-        private FileStream _fsShapeFile = default!;
-        private FileStream _fsShapeIndex = default!;
+        private FileStream? _fsShapeFile;
+        private FileStream? _fsShapeIndex;
         private readonly object _syncRoot = new();
 
         /// <summary>
@@ -234,7 +234,7 @@ namespace Mapsui.Nts.Providers.Shapefile
         /// Gets or sets the encoding used for parsing strings from the DBase DBF file.
         /// </summary>
         /// <remarks>
-        /// The DBase default encoding is <see cref="Encoding.UTF7"/>.
+        /// The DBase default encoding is UTF7"/>.
         /// </remarks>
         public Encoding? Encoding
         {
@@ -345,11 +345,10 @@ namespace Mapsui.Nts.Providers.Shapefile
             if (!_disposed)
                 if (_isOpen)
                 {
-                    _brShapeIndex.Dispose();
-                    _brShapeFile.Dispose();
-                    _fsShapeFile.Dispose();
-                    _brShapeFile.Dispose();
-                    _fsShapeIndex.Dispose();
+                    _brShapeIndex?.Dispose();
+                    _brShapeFile?.Dispose();
+                    _fsShapeFile?.Dispose();
+                    _fsShapeIndex?.Dispose();
                     _dbaseFile?.Dispose();
                     _isOpen = false;
                 }
@@ -573,6 +572,9 @@ namespace Mapsui.Nts.Providers.Shapefile
         /// </summary>
         private int[] ReadIndex()
         {
+            if (_brShapeIndex is null)
+                return Array.Empty<int>();
+
             var offsetOfRecord = new int[_featureCount];
             _brShapeIndex.BaseStream.Seek(100, 0); // Skip the header
 
@@ -591,6 +593,8 @@ namespace Mapsui.Nts.Providers.Shapefile
         /// <returns></returns>
         private int GetShapeIndex(uint n)
         {
+            if (_brShapeIndex is null)
+                throw new Exception("_brShapeIndex can not be null");
             _brShapeIndex.BaseStream.Seek(100 + n * 8, 0); //seek to the position of the index
             return 2 * SwapByteOrder(_brShapeIndex.ReadInt32()); //Read shape data position
         }
@@ -698,6 +702,11 @@ namespace Mapsui.Nts.Providers.Shapefile
         /// <returns></returns>
         private IEnumerable<MRect> GetAllFeatureBoundingBoxes()
         {
+            if (_fsShapeFile is null)
+                yield break;
+            if (_brShapeFile is null)
+                yield break;
+
             var offsetOfRecord = ReadIndex(); //Read the whole .idx file
 
             if (_shapeType == ShapeType.Point)
@@ -730,6 +739,7 @@ namespace Mapsui.Nts.Providers.Shapefile
         // ReSharper disable once CyclomaticComplexity // Fix when changes need to be made here
         private Geometry? ReadGeometry(uint oid)
         {
+            if (_brShapeFile is null) return null;
             _brShapeFile.BaseStream.Seek(GetShapeIndex(oid) + 8, 0); // Skip record number and content length
             var type = (ShapeType)_brShapeFile.ReadInt32(); //Shape type
             if (type == ShapeType.Null)
@@ -809,10 +819,7 @@ namespace Mapsui.Nts.Providers.Shapefile
                     else
                     {
                         var polygons = new List<Polygon>();
-                        var linearRings = new List<LinearRing>
-                        {
-                            rings[0]
-                        };
+                        var linearRings = new List<LinearRing> { rings[0] };
 
                         for (var i = 1; i < rings.Count; i++)
                             if (!isCounterClockWise[i])
@@ -821,7 +828,7 @@ namespace Mapsui.Nts.Providers.Shapefile
                                 // So the previous one is done and is added to the list. A new list of linear rings is created for the next polygon.
                                 var p1 = CreatePolygon(linearRings);
                                 if (p1 is not null) polygons.Add(p1);
-                                linearRings = new List<LinearRing>();
+                                linearRings = new List<LinearRing>{ rings[i] };
                             }
                             else
                                 linearRings.Add(rings[i]);
@@ -903,8 +910,8 @@ namespace Mapsui.Nts.Providers.Shapefile
                         if (feature != null)
                         {
                             feature.Geometry = ReadGeometry(index);
-                            if (feature.Geometry?.BoundingBox() == null) continue;
-                            if (!feature.Geometry.BoundingBox().Intersects(fetchInfo.Extent.ToBoundingBox())) continue;
+                            if (feature.Geometry?.EnvelopeInternal == null) continue;
+                            if (!feature.Geometry.EnvelopeInternal.Intersects(fetchInfo.Extent.ToEnvelope())) continue;
                             if (FilterDelegate != null && !FilterDelegate(feature)) continue;
                             features.Add(feature);
                         }

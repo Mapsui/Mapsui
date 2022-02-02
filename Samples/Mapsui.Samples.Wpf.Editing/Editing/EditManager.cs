@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Mapsui.Extensions;
-using Mapsui.Geometries;
-using Mapsui.GeometryLayers;
 using Mapsui.Layers;
-using Mapsui.Providers;
+using Mapsui.Nts;
+using Mapsui.Nts.Extensions;
+using Mapsui.Samples.Wpf.Editing.Extensions;
 using Mapsui.UI;
-using Point = Mapsui.Geometries.Point;
+using NetTopologySuite.Geometries;
 
 namespace Mapsui.Samples.Wpf.Editing.Editing
 {
@@ -28,10 +27,10 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
     {
         public WritableLayer? Layer { get; set; }
 
-        readonly DragInfo _dragInfo = new DragInfo();
-        readonly AddInfo _addInfo = new AddInfo();
-        readonly RotateInfo _rotateInfo = new RotateInfo();
-        readonly ScaleInfo _scaleInfo = new ScaleInfo();
+        private readonly DragInfo _dragInfo = new ();
+        private readonly AddInfo _addInfo = new ();
+        private readonly RotateInfo _rotateInfo = new ();
+        private readonly ScaleInfo _scaleInfo = new ();
 
         public EditMode EditMode { get; set; }
 
@@ -39,22 +38,29 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
 
         public bool EndEdit()
         {
-            if (_addInfo.Feature == null) return false;
+            if (_addInfo.Feature is null) return false;
+            if (_addInfo.Vertices is null) return false;
 
             if (EditMode == EditMode.DrawingLine)
             {
-                _addInfo.Vertices?.RemoveAt(_addInfo.Vertices.Count - 1); // correct for double click
+                _addInfo.Vertices.RemoveAt(_addInfo.Vertices.Count - 1); // Remove duplicate last element added by the final double click
+                _addInfo.Feature.Geometry = new LineString(_addInfo.Vertices.ToArray());
+                
                 _addInfo.Feature = null;
                 _addInfo.Vertex = null;
                 EditMode = EditMode.AddLine;
             }
-            if (EditMode == EditMode.DrawingPolygon)
+            else if (EditMode == EditMode.DrawingPolygon)
             {
-                _addInfo.Vertices?.RemoveAt(_addInfo.Vertices.Count - 1); // correct for double click
-                var polygon = _addInfo.Feature?.Geometry as Polygon;
+                _addInfo.Vertices.RemoveAt(_addInfo.Vertices.Count - 1); // correct for double click
+                var polygon = _addInfo.Feature.Geometry as Polygon;
                 if (polygon == null) return false;
-                polygon.ExteriorRing?.Vertices.Add(polygon.ExteriorRing.Vertices.First());
-                _addInfo.Feature?.RenderedGeometry?.Clear(); // You need to clear the cache to see changes.
+
+                var linearRing = _addInfo.Vertices.ToList();
+                linearRing.Add(linearRing[0].Copy()); // Add first coordinate at end to close the ring.
+                _addInfo.Feature.Geometry = new Polygon(new LinearRing(linearRing.ToArray()));
+                
+                _addInfo.Feature?.RenderedGeometry.Clear(); // You need to clear the cache to see changes.
                 _addInfo.Feature = null;
                 _addInfo.Vertex = null;
                 EditMode = EditMode.AddPolygon;
@@ -67,26 +73,26 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
         internal void HoveringVertex(MapInfo? mapInfo)
         {
             if (_addInfo.Vertex != null)
-            {
-                SetPointXY(_addInfo.Vertex, mapInfo?.WorldPosition?.ToPoint());
-                _addInfo.Feature?.RenderedGeometry?.Clear();
+            { 
+                _addInfo.Vertex.SetXY(mapInfo?.WorldPosition);
+                _addInfo.Feature?.RenderedGeometry.Clear();
                 Layer?.DataHasChanged();
             }
         }
 
-        public bool AddVertex(Point worldPosition)
+        public bool AddVertex(Coordinate worldPosition)
         {
             if (EditMode == EditMode.AddPoint)
             {
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
-                Layer?.Add(new GeometryFeature { Geometry = worldPosition });
+                Layer?.Add(new GeometryFeature { Geometry = worldPosition.ToMPoint().ToPoint() });
 #pragma warning restore IDISP004 // Don't ignore created IDisposable
             }
             else if (EditMode == EditMode.AddLine)
             {
-                var firstPoint = worldPosition.Clone();
+                var firstPoint = worldPosition.Copy();
                 // Add a second point right away. The second one will be the 'hover' vertex
-                var secondPoint = worldPosition.Clone();
+                var secondPoint = worldPosition.Copy();
                 _addInfo.Vertex = secondPoint;
                 _addInfo.Feature = new GeometryFeature { Geometry = new LineString(new[] { firstPoint, secondPoint }) };
                 _addInfo.Vertices = _addInfo.Feature.Geometry.MainVertices();
@@ -96,61 +102,60 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
             }
             else if (EditMode == EditMode.DrawingLine)
             {
-                var lineString = _addInfo.Feature?.Geometry as LineString;
+                if (_addInfo.Feature is null) return false;
+                if (_addInfo.Vertices is null) return false;
+
                 // Set the final position of the 'hover' vertex (that was already part of the geometry)
-                SetPointXY(_addInfo.Vertex, worldPosition.Clone());
-                _addInfo.Vertex = worldPosition.Clone(); // and create a new hover vertex
-                lineString?.Vertices.Add(_addInfo.Vertex); // and add it to the geometry
-                _addInfo.Feature?.RenderedGeometry?.Clear();
+                _addInfo.Vertex.SetXY(worldPosition);
+                _addInfo.Vertex = worldPosition.Copy(); // and create a new hover vertex
+                _addInfo.Vertices.Add(_addInfo.Vertex);
+                _addInfo.Feature.Geometry = new LineString(_addInfo.Vertices.ToArray());
+                _addInfo.Feature?.RenderedGeometry.Clear();
                 Layer?.DataHasChanged();
             }
             else if (EditMode == EditMode.AddPolygon)
             {
-                var firstPoint = worldPosition.Clone();
+                var firstPoint = worldPosition.Copy();
                 // Add a second point right away. The second one will be the 'hover' vertex
-                var secondPoint = worldPosition.Clone();
+                var secondPoint = worldPosition.Copy();
                 _addInfo.Vertex = secondPoint;
+                _addInfo.Vertices = new List<Coordinate>(new[] { firstPoint, secondPoint });
+
                 _addInfo.Feature = new GeometryFeature
                 {
-                    Geometry = new Polygon
-                    {
-                        ExteriorRing = new LinearRing(new[] { firstPoint, secondPoint })
-                    }
+                    Geometry = new Polygon(new LinearRing(new[] { firstPoint, secondPoint, firstPoint })) // A LinearRing needs at least three coordinates
                 };
-                _addInfo.Vertices = _addInfo.Feature.Geometry.MainVertices();
                 Layer?.Add(_addInfo.Feature);
                 Layer?.DataHasChanged();
                 EditMode = EditMode.DrawingPolygon;
             }
             else if (EditMode == EditMode.DrawingPolygon)
             {
-                var polygon = _addInfo.Feature?.Geometry as Polygon;
+                if (_addInfo.Feature is null) return false;
+                if (_addInfo.Vertices is null) return false;
+
                 // Set the final position of the 'hover' vertex (that was already part of the geometry)
-                SetPointXY(_addInfo.Vertex, worldPosition.Clone());
-                _addInfo.Vertex = worldPosition.Clone(); // and create a new hover vertex
-                polygon?.ExteriorRing?.Vertices.Add(_addInfo.Vertex); // and add it to the geometry
-                _addInfo.Feature?.RenderedGeometry?.Clear();
+                _addInfo.Vertex.SetXY(worldPosition);
+                _addInfo.Vertex = worldPosition.Copy(); // and create a new hover vertex
+                _addInfo.Vertices.Add(_addInfo.Vertex);
+
+                var linearRing = _addInfo.Vertices.ToList();
+                linearRing.Add(linearRing[0]); // Add first coordinate at end to close the ring.
+                _addInfo.Feature.Geometry = new Polygon(new LinearRing(linearRing.ToArray()));
+
+                _addInfo.Feature?.RenderedGeometry.Clear();
                 Layer?.DataHasChanged();
             }
             return false;
         }
 
-        private static Point? FindVertexTouched(MapInfo mapInfo, IEnumerable<Point> vertices, double screenDistance)
+        private static Coordinate? FindVertexTouched(MapInfo mapInfo, IEnumerable<Coordinate> vertices, double screenDistance)
         {
             if (mapInfo.WorldPosition == null)
                 return null;
 
-            return vertices.OrderBy(v => v.Distance(mapInfo.WorldPosition.ToPoint()))
-                .FirstOrDefault(v => v.Distance(mapInfo.WorldPosition.ToPoint()) < mapInfo.Resolution * screenDistance);
-        }
-
-        private void SetPointXY(Point? target, Point? position)
-        {
-            if (target != null && position != null)
-            {
-                target.X = position.X;
-                target.Y = position.Y;
-            }
+            return vertices.OrderBy(v => v.Distance(mapInfo.WorldPosition.ToCoordinate()))
+                .FirstOrDefault(v => v.Distance(mapInfo.WorldPosition.ToCoordinate()) < mapInfo.Resolution * screenDistance);
         }
 
         public bool StartDragging(MapInfo mapInfo, double screenDistance)
@@ -161,14 +166,14 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
                 {
                     if (mapInfo.Feature is GeometryFeature geometryFeature)
                     {
-                        var vertexTouched = FindVertexTouched(mapInfo, geometryFeature.Geometry?.MainVertices() ?? new List<Point>(), screenDistance);
+                        var vertexTouched = FindVertexTouched(mapInfo, geometryFeature.Geometry?.MainVertices() ?? new List<Coordinate>(), screenDistance);
                         if (vertexTouched != null)
                         {
                             _dragInfo.Feature = geometryFeature;
                             _dragInfo.Vertex = vertexTouched;
                             if (mapInfo.WorldPosition != null && _dragInfo.Vertex != null)
                             {
-                                _dragInfo.StartOffsetToVertex = mapInfo.WorldPosition.ToPoint() - _dragInfo.Vertex;
+                                _dragInfo.StartOffsetToVertex = mapInfo.WorldPosition - _dragInfo.Vertex.ToMPoint();
                             }
 
                             return true; // to indicate start of drag
@@ -183,19 +188,19 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
         {
             if (EditMode != EditMode.Modify || _dragInfo.Feature == null || worldPosition == null || _dragInfo.StartOffsetToVertex == null) return false;
 
-            SetPointXY(_dragInfo.Vertex, worldPosition - _dragInfo.StartOffsetToVertex);
+            _dragInfo.Vertex.SetXY(worldPosition.ToMPoint() - _dragInfo.StartOffsetToVertex);
 
-            if (_dragInfo.Feature.Geometry is Polygon polygon) // Not this only works correctly it the feature is in the outerring.
+            if (_dragInfo.Feature.Geometry is Polygon polygon) // Not this only works correctly it the feature is in the outer ring.
             {
-                var count = polygon.ExteriorRing?.Vertices.Count ?? 0;
-                var vertices = polygon.ExteriorRing?.Vertices ?? new List<Point>();
-                var index = vertices.IndexOf(_dragInfo.Vertex!);
+                var count = polygon.ExteriorRing?.Coordinates.Length ?? 0;
+                var vertices = polygon.ExteriorRing?.Coordinates ?? Array.Empty<Coordinate>();
+                var index = vertices.ToList().IndexOf(_dragInfo.Vertex!); 
                 if (index >= 0)
                     // It is a ring where the first should be the same as the last.
                     // So if the first was removed than set the last to the value of the new first
-                    if (index == 0) SetPointXY(vertices[count - 1], vertices[0]);
+                    if (index == 0) vertices[count - 1].SetXY(vertices[0]);
                     // If the last was removed then set the first to the value of the new last
-                    else if (index == vertices.Count) SetPointXY(vertices[0], vertices[count - 1]);
+                    else if (index == vertices.Length) vertices[0].SetXY(vertices[count - 1]);
             }
 
             _dragInfo.Feature.RenderedGeometry.Clear();
@@ -215,10 +220,10 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
         {
             if (mapInfo?.Feature is GeometryFeature geometryFeature)
             {
-                var vertexTouched = FindVertexTouched(mapInfo, geometryFeature.Geometry?.MainVertices() ?? new List<Point>(), screenDistance);
+                var vertexTouched = FindVertexTouched(mapInfo, geometryFeature.Geometry?.MainVertices() ?? new List<Coordinate>(), screenDistance);
                 if (vertexTouched != null)
                 {
-                    var vertices = geometryFeature.Geometry?.MainVertices() ?? new List<Point>();
+                    var vertices = geometryFeature.Geometry?.MainVertices() ?? new List<Coordinate>();
                     var index = vertices.IndexOf(vertexTouched);
                     if (index >= 0)
                     {
@@ -227,14 +232,13 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
 
                         // It is a ring where the first should be the same as the last.
                         // So if the first was removed than set the last to the value of the new first
-                        if (index == 0) SetPointXY(vertices[count - 1], vertices[0]);
+                        if (index == 0) vertices[count - 1].SetXY(vertices[0]);
                         // If the last was removed then set the first to the value of the new last
-                        else if (index == vertices.Count) SetPointXY(vertices[0], vertices[count - 1]);
+                        else if (index == vertices.Count) vertices[0].SetXY(vertices[count - 1]);
 
                         geometryFeature.RenderedGeometry.Clear();
                         Layer?.DataHasChanged();
                     }
-
                 }
             }
 
@@ -245,7 +249,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
         {
             if (mapInfo?.Feature is GeometryFeature geometryFeature)
             {
-                var vertices = geometryFeature.Geometry?.MainVertices() ?? new List<Point>();
+                var vertices = geometryFeature.Geometry ?.MainVertices() ?? new List<Coordinate>();
 
                 if (EditHelper.TryInsertVertex(mapInfo, vertices, VertexRadius))
                 {
@@ -265,7 +269,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
 
                 _rotateInfo.Feature = geometryFeature;
                 _rotateInfo.PreviousPosition = mapInfo.WorldPosition.ToPoint();
-                _rotateInfo.Center = geometryFeature.Geometry?.BoundingBox?.Centroid;
+                _rotateInfo.Center = geometryFeature.Geometry?.Centroid;
             }
             return true; // to signal pan lock
         }
@@ -274,8 +278,12 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
         {
             if (EditMode != EditMode.Rotate || _rotateInfo.Feature == null || worldPosition == null || _rotateInfo.Center == null || _rotateInfo.PreviousPosition == null) return false;
 
-            var previousVector = _rotateInfo.Center - _rotateInfo.PreviousPosition;
-            var currentVector = _rotateInfo.Center - worldPosition;
+            var previousVector = new Point(
+                _rotateInfo.Center.X - _rotateInfo.PreviousPosition.X,
+                _rotateInfo.Center.Y - _rotateInfo.PreviousPosition.Y);
+            var currentVector = new Point(
+                _rotateInfo.Center.X - worldPosition.X,
+                _rotateInfo.Center.Y - worldPosition.Y);
             var degrees = AngleBetween(currentVector, previousVector);
 
             if (_rotateInfo.Feature.Geometry != null)
@@ -313,7 +321,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
 
                 _scaleInfo.Feature = geometryFeature;
                 _scaleInfo.PreviousPosition = mapInfo.WorldPosition.ToPoint();
-                _scaleInfo.Center = geometryFeature.Geometry?.BoundingBox?.Centroid;
+                _scaleInfo.Center = geometryFeature.Geometry?.Centroid;
             }
 
             return true; // to signal pan lock

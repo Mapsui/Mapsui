@@ -14,6 +14,7 @@ namespace Mapsui.Nts.Extensions
             return new Point(point.X, point.Y);
         }
 
+        [return: NotNullIfNotNull("point")]
         public static Coordinate? ToCoordinate(this MPoint? point)
         {
             if (point == null)

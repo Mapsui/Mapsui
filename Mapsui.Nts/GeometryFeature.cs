@@ -25,7 +25,7 @@ namespace Mapsui.Nts
 
         public Geometry? Geometry { get; set; }
 
-        public MRect? Extent => Geometry?.BoundingBox().ToMRect(); // Todo: Make not-nullable
+        public MRect? Extent => Geometry?.EnvelopeInternal.ToMRect(); // Todo: Make not-nullable
 
         public override void Dispose()
         {
@@ -44,7 +44,8 @@ namespace Mapsui.Nts
 
         public void CoordinateVisitor(Action<double, double, CoordinateSetter> visit)
         {
-            var vertices = Geometry.AllVertices();
+            if (Geometry is null) return;
+            var vertices = Geometry.Coordinates;
             foreach (var vertex in vertices)
                 visit(vertex.X, vertex.Y, (x, y) => {
                     vertex.X = x;

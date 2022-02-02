@@ -342,16 +342,25 @@ namespace Mapsui.Nts.Providers.Shapefile.Indexing
             if (node == null)
                 return;
             if (node.IsLeaf) //Leaf has been reached
+            {
                 if (node._objList != null)
+                {
                     foreach (var boxObject in node._objList)
+                    {
                         if (box.Intersects(boxObject.Box))
                             list.Add(boxObject.Id);
-                        else
+
+                    }
+                }
+            }
+            else
+            {
                 if (node.Box.Intersects(box))
-                        {
-                            IntersectTreeRecursive(box, node.Child0, in list);
-                            IntersectTreeRecursive(box, node.Child1, in list);
-                        }
+                {
+                    IntersectTreeRecursive(box, node.Child0, in list);
+                    IntersectTreeRecursive(box, node.Child1, in list);
+                }
+            }
         }
 
 

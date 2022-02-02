@@ -1,10 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Threading;
-using Mapsui.Geometries;
-using Mapsui.GeometryLayers;
-using Mapsui.Layers;
-using Mapsui.Providers;
 using Mapsui.Rendering.Skia.Tests.Extensions;
 using Mapsui.Tests.Common.Maps;
 using NUnit.Framework;

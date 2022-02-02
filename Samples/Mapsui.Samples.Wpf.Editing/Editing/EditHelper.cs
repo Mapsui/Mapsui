@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Mapsui.Extensions;
-using Mapsui.Geometries;
-using Mapsui.Geometries.Utilities;
+using Mapsui.Nts.Extensions;
+using NetTopologySuite.Geometries;
 using Mapsui.UI;
+using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Wpf.Editing.Editing
 {
@@ -10,18 +10,21 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
     {
         /// <summary>
         /// Inserts a vertex into a list of vertices at the location of the MapInfo location.
-        /// It fails if the distance of the location to the line is larger thatn the screenDistance.
+        /// It fails if the distance of the location to the line is larger than the screenDistance.
         /// </summary>
         /// <param name="mapInfo">The MapInfo object that contains the location</param>
         /// <param name="vertices">The list of vertices to insert into</param>
         /// <param name="screenDistance"></param>
         /// <returns></returns>
-        public static bool TryInsertVertex(MapInfo mapInfo, IList<Point> vertices, double screenDistance)
+        public static bool TryInsertVertex(MapInfo mapInfo, IList<Coordinate> vertices, double screenDistance)
         {
-            var (distance, segment) = GetDistanceAndSegment(mapInfo.WorldPosition?.ToPoint(), vertices);
+            if (mapInfo.WorldPosition is null)
+                return false;
+
+            var (distance, segment) = GetDistanceAndSegment(mapInfo.WorldPosition, vertices);
             if (IsCloseEnough(distance, mapInfo.Resolution, screenDistance))
             {
-                vertices.Insert(segment + 1, mapInfo.WorldPosition!.Clone().ToPoint());
+                vertices.Insert(segment + 1, mapInfo.WorldPosition.ToCoordinate());
                 return true;
             }
             return false;
@@ -32,23 +35,20 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
             return distance <= resolution * screenDistance;
         }
 
-        private static (double Distance, int segment) GetDistanceAndSegment(Point? point, IList<Point> points)
+        private static (double Distance, int segment) GetDistanceAndSegment(MPoint point, IList<Coordinate> points)
         {
             // Move this to Mapsui
 
             var minDist = double.MaxValue;
             var segment = 0;
 
-            if (point != null)
+            for (var i = 0; i < points.Count - 1; i++)
             {
-                for (var i = 0; i < points.Count - 1; i++)
+                var dist = Algorithms.DistancePointLine(point, points[i].ToMPoint(), points[i + 1].ToMPoint());
+                if (dist < minDist)
                 {
-                    var dist = CGAlgorithms.DistancePointLine(point, points[i], points[i + 1]);
-                    if (dist < minDist)
-                    {
-                        minDist = dist;
-                        segment = i;
-                    }
+                    minDist = dist;
+                    segment = i;
                 }
             }
 
