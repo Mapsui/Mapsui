@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
-using Mapsui.Geometries;
-using Mapsui.GeometryLayers;
 using Mapsui.Layers;
 using Mapsui.Layers.Tiling;
+using Mapsui.Nts;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
 using Mapsui.UI;
-using Mapsui.Utilities;
+using NetTopologySuite.Geometries;
 
 #pragma warning disable CS8670 // Object or collection initializer implicitly dereferences possibly null member.
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
@@ -101,40 +100,34 @@ namespace Mapsui.Samples.Common.Maps
 
         private static MultiPolygon CreateMultiPolygon()
         {
-            return new MultiPolygon
-            {
-                Polygons = new List<Polygon>
-                {
-                    new (new LinearRing(new[]
-                    {
-                        new Point(4000000, 3000000),
-                        new Point(4000000, 2000000),
-                        new Point(3000000, 2000000),
-                        new Point(3000000, 3000000),
-                        new Point(4000000, 3000000)
-                    })),
+            return new MultiPolygon(new[] {
+                new Polygon(new LinearRing(new[] {
+                    new Coordinate(4000000, 3000000),
+                    new Coordinate(4000000, 2000000),
+                    new Coordinate(3000000, 2000000),
+                    new Coordinate(3000000, 3000000),
+                    new Coordinate(4000000, 3000000)
+                })),
 
-                    new (new LinearRing(new[]
-                    {
-                        new Point(4000000, 5000000),
-                        new Point(4000000, 4000000),
-                        new Point(3000000, 4000000),
-                        new Point(3000000, 5000000),
-                        new Point(4000000, 5000000)
-                    }))
-                }
-            };
+                new(new LinearRing(new[] {
+                    new Coordinate(4000000, 5000000),
+                    new Coordinate(4000000, 4000000),
+                    new Coordinate(3000000, 4000000),
+                    new Coordinate(3000000, 5000000),
+                    new Coordinate(4000000, 5000000)
+                }))
+            });
         }
 
         private static Polygon CreatePolygon()
         {
             return new Polygon(new LinearRing(new[]
             {
-                new Point(1000000, 1000000),
-                new Point(1000000, -1000000),
-                new Point(-1000000, -1000000),
-                new Point(-1000000, 1000000),
-                new Point(1000000, 1000000)
+                new Coordinate(1000000, 1000000),
+                new Coordinate(1000000, -1000000),
+                new Coordinate(-1000000, -1000000),
+                new Coordinate(-1000000, 1000000),
+                new Coordinate(1000000, 1000000)
             }));
         }
 
@@ -146,11 +139,11 @@ namespace Mapsui.Samples.Common.Maps
 
             return new LineString(new[]
             {
-                new Point(offsetX + stepSize,      offsetY + stepSize),
-                new Point(offsetX + stepSize * 2,  offsetY + stepSize),
-                new Point(offsetX + stepSize * 2,  offsetY + stepSize * 2),
-                new Point(offsetX + stepSize * 3,  offsetY + stepSize * 2),
-                new Point(offsetX + stepSize * 3,  offsetY + stepSize * 3)
+                new Coordinate(offsetX + stepSize,      offsetY + stepSize),
+                new Coordinate(offsetX + stepSize * 2,  offsetY + stepSize),
+                new Coordinate(offsetX + stepSize * 2,  offsetY + stepSize * 2),
+                new Coordinate(offsetX + stepSize * 3,  offsetY + stepSize * 2),
+                new Coordinate(offsetX + stepSize * 3,  offsetY + stepSize * 3)
             });
         }
 

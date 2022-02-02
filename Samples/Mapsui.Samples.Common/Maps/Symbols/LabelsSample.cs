@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using Mapsui.Geometries;
-using Mapsui.GeometryLayers;
 using Mapsui.Layers;
 using Mapsui.Layers.Tiling;
+using Mapsui.Nts;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.UI;
+using NetTopologySuite.IO;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -93,7 +93,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             var polygon = new GeometryFeature
             {
-                Geometry = Geometry.GeomFromText(
+                Geometry = new WKTReader().Read(
                     "POLYGON((-1000000 -10000000, 1000000 -10000000, 1000000 -8000000, -1000000 -8000000, -1000000 -10000000))")
             };
             polygon.Styles.Add(new LabelStyle

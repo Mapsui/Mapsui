@@ -66,15 +66,15 @@ namespace Mapsui.Samples.Common.Maps.Special
         public override IEnumerable<PointFeature> GetFeatures(FetchInfo fetchInfo)
         {
             var features = new List<PointFeature>();
-            var geometries = RandomPointGenerator.GenerateRandomPoints(fetchInfo.Extent, 10, _random.Next()).ToList();
+            var points = RandomPointGenerator.GenerateRandomPoints(fetchInfo.Extent, 10, _random.Next()).ToList();
             var count = 0;
-            var random = _random.Next(geometries.Count);
+            var random = _random.Next(points.Count);
 
-            foreach (var geometry in geometries)
+            foreach (var point in points)
             {
                 if (count != random) // skip a random element to test robustness
                 {
-                    var feature = new PointFeature(new MPoint(geometry.ToPoint().X, geometry.ToPoint().Y))
+                    var feature = new PointFeature(point)
                     {
                         ["ID"] = count.ToString(CultureInfo.InvariantCulture)
                     };

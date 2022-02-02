@@ -8,5 +8,10 @@ namespace Mapsui.Nts.Extensions
         {
             return new MPoint(point.X, point.Y);
         }
+        
+        public static Point ToPoint(this Coordinate point)
+        {
+            return new Point(point.X, point.Y);
+        }
     }
 }

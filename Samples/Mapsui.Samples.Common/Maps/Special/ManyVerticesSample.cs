@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using Mapsui.Geometries;
-using Mapsui.GeometryLayers;
 using Mapsui.Layers;
 using Mapsui.Layers.Tiling;
+using Mapsui.Nts;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.UI;
+using NetTopologySuite.Geometries;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Local
 #pragma warning disable CS8670 // Object or collection initializer implicitly dereferences possibly null member.
@@ -52,22 +51,22 @@ namespace Mapsui.Samples.Common.Maps
             var feature = new GeometryFeature();
             AddStyles(feature);
             feature.Geometry = lineString;
-            feature["Name"] = $"LineString with {lineString.Vertices.Count()} vertices";
+            feature["Name"] = $"LineString with {lineString.Coordinates.Length} vertices";
             return feature;
         }
 
         private static LineString CreateLineStringWithManyVertices()
         {
-            var startPoint = new Point(1623484, 7652571);
+            var startPoint = new Coordinate(1623484, 7652571);
 
-            var points = new List<Point>();
+            var points = new List<Coordinate>();
 
             for (var i = 0; i < 10000; i++)
             {
-                points.Add(new Point(startPoint.X + i, startPoint.Y + i));
+                points.Add(new Coordinate(startPoint.X + i, startPoint.Y + i));
             }
 
-            return new LineString(points);
+            return new LineString(points.ToArray());
         }
 
         private static void AddStyles(IFeature feature)

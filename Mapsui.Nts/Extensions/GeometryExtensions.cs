@@ -10,5 +10,10 @@ namespace Mapsui.Nts.Extensions
         {
             return geometries.Select(g => new GeometryFeature(g)).ToList();
         }
+
+        public static GeometryFeature ToFeature(this Geometry geometry)
+        {
+            return new GeometryFeature(geometry);
+        }
     }
 }
