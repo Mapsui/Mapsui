@@ -4,9 +4,9 @@ namespace Mapsui.Nts.Extensions
 {
     public static class MRectExtensions
     {
-        public static Envelope ToEnvelope(this MRect boundingBox)
+        public static Envelope ToEnvelope(this MRect rect)
         {
-            return new Envelope(boundingBox.MinX, boundingBox.MaxX, boundingBox.MinY, boundingBox.MaxY);
+            return new Envelope(rect.MinX, rect.MaxX, rect.MinY, rect.MaxY);
         }
 
         public static Polygon ToPolygon(this MRect rect)
