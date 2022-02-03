@@ -33,7 +33,7 @@ jobs:
       with:
          dotnet-version: | 
            5.0.x
-           6.0.1
+      # Disabled in attempt to fix build     6.0.x
       # Disabled in attempt to fix build server error: include-prerelease: true
     - name: Restore dependencies
       run: nuget restore Mapsui.Mac.sln
