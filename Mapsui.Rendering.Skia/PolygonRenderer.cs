@@ -13,7 +13,7 @@ namespace Mapsui.Rendering.Skia
         {
             if (style is LabelStyle labelStyle)
             {
-                if (polygon.EnvelopeInternal is not null)
+                if (polygon.Envelope is not null)
                 {
                     var worldCenter = polygon.Envelope.Centroid;
                     var center = viewport.WorldToScreen(worldCenter.X, worldCenter.Y).ToPoint();
