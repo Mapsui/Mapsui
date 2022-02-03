@@ -210,10 +210,6 @@
     <Content Include="Entitlements.plist" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Mapsui.Nts\Mapsui.Nts.csproj">
-      <Project>{A95DC7A8-4798-495C-B589-1C6F1333C370}</Project>
-      <Name>Mapsui.Nts</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj">
       <Project>{DEA6E9AE-2B6A-4E83-83B7-E9DF0E492301}</Project>
       <Name>Mapsui.Rendering.Skia</Name>
