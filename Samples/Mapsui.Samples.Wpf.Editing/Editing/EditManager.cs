@@ -212,6 +212,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
         {
             if (EditMode == EditMode.Modify && _dragInfo.Feature != null)
             {
+                _dragInfo.Feature.Geometry?.GeometryChanged();
                 _dragInfo.Feature = null;
             }
         }
