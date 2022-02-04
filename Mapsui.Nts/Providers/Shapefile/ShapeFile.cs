@@ -45,7 +45,7 @@ namespace Mapsui.Nts.Providers.Shapefile
         /// </summary>
         Point = 1,
         /// <summary>
-        /// PolyLine is an ordered set of vertices that consists of one or more parts. A part is a
+        /// PolyLine is an ordered set of coordinates that consists of one or more parts. A part is a
         /// connected sequence of two or more points. Parts may or may not be connected to one
         ///	another. Parts may or may not intersect one another.
         /// Mapsui interprets this as either <see cref="LineString"/> or <see cref="MultiLineString"/>
@@ -54,9 +54,9 @@ namespace Mapsui.Nts.Providers.Shapefile
         /// <summary>
         /// A polygon consists of one or more rings. A ring is a connected sequence of four or more
         /// points that form a closed, non-self-intersecting loop. A polygon may contain multiple
-        /// outer rings. The order of vertices or orientation for a ring indicates which side of the ring
+        /// outer rings. The order of coordinates or orientation for a ring indicates which side of the ring
         /// is the interior of the polygon. The neighborhood to the right of an observer walking along
-        /// the ring in vertex order is the neighborhood inside the polygon. Vertices of rings defining
+        /// the ring in vertex order is the neighborhood inside the polygon. Coordinates of rings defining
         /// holes in polygons are in a counterclockwise direction. Vertices for a single, ringed
         /// polygon are, therefore, always in clockwise order. The rings of a polygon are referred to
         /// as its parts.
@@ -117,7 +117,7 @@ namespace Mapsui.Nts.Providers.Shapefile
         /// <summary>
         /// A MultiPatch consists of a number of surface patches. Each surface patch describes a
         /// surface. The surface patches of a MultiPatch are referred to as its parts, and the type of
-        /// part controls how the order of vertices of an MultiPatch part is interpreted.
+        /// part controls how the order of coordinates of an MultiPatch part is interpreted.
         /// Mapsui doesn't support this feature type.
         /// </summary>
         MultiPatch = 31
@@ -759,10 +759,10 @@ namespace Mapsui.Nts.Providers.Shapefile
                     var lineStrings = new List<LineString>();
                     for (var lineId = 0; lineId < nParts; lineId++)
                     {
-                        var vertices = new List<Coordinate>();
+                        var coordinates = new List<Coordinate>();
                         for (var i = segments[lineId]; i < segments[lineId + 1]; i++)
-                            vertices.Add(new Coordinate(_brShapeFile.ReadDouble(), _brShapeFile.ReadDouble()));
-                        lineStrings.Add(new LineString(vertices.ToArray()));
+                            coordinates.Add(new Coordinate(_brShapeFile.ReadDouble(), _brShapeFile.ReadDouble()));
+                        lineStrings.Add(new LineString(coordinates.ToArray()));
                     }
                     if (lineStrings.Count == 1)
                         return lineStrings[0];
