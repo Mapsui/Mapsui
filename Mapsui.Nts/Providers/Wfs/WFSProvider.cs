@@ -947,7 +947,7 @@ namespace Mapsui.Providers.Wfs
         }
 
         /// <summary>
-        /// Gets the features within the specified FetchInfo"/>
+        /// Gets the features within the specified <see cref="FetchInfo"/>."/>
         /// </summary>
         public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {
