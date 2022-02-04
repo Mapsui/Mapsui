@@ -7,6 +7,7 @@ using Mapsui.Nts;
 using Mapsui.Styles;
 using Mapsui.UI.Objects;
 using NetTopologySuite.Geometries;
+using Mapsui.Nts.Extensions;
 #if __MAUI__
 using Mapsui.UI.Maui.Extensions;
 using Mapsui.UI.Maui.Utils;
@@ -23,6 +24,8 @@ namespace Mapsui.UI.Forms
 {
     public class Polyline : Drawable
     {
+        // Todo: Rename, Polyline indicates a MultiLineString but it is a single LineString.
+
         private readonly ObservableRangeCollection<Position> _positions = new ObservableRangeCollection<Position>();
 
         /// <summary>
@@ -63,13 +66,7 @@ namespace Mapsui.UI.Forms
                     if (Feature == null)
                         CreateFeature();
                     else
-                    {
-
-                        var coordinates = Positions.Select(p => p.ToCoordinate()).ToList();
-                        if (coordinates.Count == 1)
-                            coordinates.Add(coordinates[0].Copy());
-                        Feature.Geometry = new LineString(coordinates.ToArray());
-                    }
+                        Feature.Geometry = Positions.Select(p => p.ToCoordinate()).ToLineString();
                     break;
             }
         }

@@ -17,6 +17,17 @@ namespace Mapsui.Nts.Extensions
             return new Point(coordinate.X, coordinate.Y);
         }
 
+        public static LineString ToLineString(this IEnumerable<Coordinate> coordinates)
+        {
+            if (coordinates.Count() == 0)
+                throw new Exception("coordinates can not be lenght 0");
+
+            var list = coordinates.ToList();
+            if (list.Count == 1)
+                list.Add(list[0].Copy());
+            return new LineString(list.ToArray());
+        }
+
         public static LinearRing ToLinearRing(this IEnumerable<Coordinate> coordinates)
         {
             if (coordinates.Count() == 0)
