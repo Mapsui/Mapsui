@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using Mapsui.Nts;
 using NetTopologySuite.Geometries;
+using Mapsui.Nts.Extensions;
 
 #if __MAUI__
 using Microsoft.Maui;
@@ -80,25 +81,11 @@ namespace Mapsui.UI.Forms
             switch (propertyName)
             {
                 case nameof(Positions):
-                    var coordinates = Positions.Select(p => p.ToCoordinate()).ToList();
-                    if (coordinates.Count == 1)
-                        coordinates.Add(coordinates[0].Copy()); // LineString needs at least two coordinates
-                    if (coordinates.Count == 2)
-                        coordinates.Add(coordinates[0].Copy()); // LinearRing needs at least three coordinates
-                    if (!coordinates.First().Equals2D(coordinates.Last()))
-                        coordinates.Add(coordinates[0].Copy()); // LinearRing needs to be 'closed' (first should equal last)
-                    Feature.Geometry = new NetTopologySuite.Geometries.Polygon(new LinearRing(coordinates.ToArray()));
-                    break;
                 case nameof(Holes):
-                    if (Feature.Geometry is null)
-                        throw new Exception("Geometry can not be null when adding holes");
-                    var polygon = (NetTopologySuite.Geometries.Polygon)Feature.Geometry;
-                    var holes = Holes.Select(h => h.Select(p => p.ToCoordinate()).ToList()).ToList();
-                    foreach (var hole in holes)
-                        if (!hole.First().Equals2D(hole.Last()))
-                            hole.Add(hole[0].Copy()); // LinearRing needs to be 'closed' (first should equal last)
-                    var holesAsLinearRings = holes.Select(h => new LinearRing(h.ToArray())).ToArray();
-                    Feature.Geometry = new NetTopologySuite.Geometries.Polygon(new LinearRing(polygon.ExteriorRing.Coordinates), holesAsLinearRings);
+                    // Treat changes to Positions and Holes the same way. In both scenarios we need to create everything from scratch.
+                    var shell = Positions.Select(p => p.ToCoordinate());
+                    var holes = Holes.Select(h => h.Select(p => p.ToCoordinate()));
+                    Feature.Geometry = shell.ToPolygon(holes);
                     break;
                 case nameof(FillColor):
                     ((VectorStyle)Feature.Styles.First()).Fill = new Styles.Brush(FillColor.ToMapsui());
