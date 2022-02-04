@@ -47,10 +47,10 @@ namespace Mapsui.Samples.Wpf.Editing
                         {
                             if (IsShiftDown())
                             {
-                                return editManager.TryDeleteVertex(
+                                return editManager.TryDeleteCoordinate(
                                     mapControl.GetMapInfo(screenPosition, editManager.VertexRadius), editManager.VertexRadius);
                             }
-                            return editManager.TryInsertVertex(
+                            return editManager.TryInsertCoordinate(
                                 mapControl.GetMapInfo(screenPosition, editManager.VertexRadius));
                         }
                         return editManager.AddVertex(mapControl.Viewport.ScreenToWorld(screenPosition).ToCoordinate());

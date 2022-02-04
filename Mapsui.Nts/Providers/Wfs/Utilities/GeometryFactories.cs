@@ -106,7 +106,7 @@ namespace Mapsui.Providers.Wfs.Utilities
 
             var name = reader.LocalName;
             var coordinateString = reader.ReadElementString();
-            var vertices = new Collection<Coordinate>();
+            var coordinates = new Collection<Coordinate>();
             string[][] coordinateValues;
             var i = 0;
 
@@ -134,10 +134,10 @@ namespace Mapsui.Providers.Wfs.Utilities
 
                 var coordinate = new Coordinate(c[0], c[1]);
 
-                vertices.Add(coordinate);
+                coordinates.Add(coordinate);
             }
 
-            return vertices;
+            return coordinates;
         }
 
         /// <summary>

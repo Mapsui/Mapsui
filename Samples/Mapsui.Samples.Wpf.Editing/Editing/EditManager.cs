@@ -45,7 +45,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
             {
                 _addInfo.Vertices.RemoveAt(_addInfo.Vertices.Count - 1); // Remove duplicate last element added by the final double click
                 _addInfo.Feature.Geometry = new LineString(_addInfo.Vertices.ToArray());
-                
+
                 _addInfo.Feature = null;
                 _addInfo.Vertex = null;
                 EditMode = EditMode.AddLine;
@@ -59,7 +59,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
                 var linearRing = _addInfo.Vertices.ToList();
                 linearRing.Add(linearRing[0].Copy()); // Add first coordinate at end to close the ring.
                 _addInfo.Feature.Geometry = new Polygon(new LinearRing(linearRing.ToArray()));
-                
+
                 _addInfo.Feature?.RenderedGeometry.Clear(); // You need to clear the cache to see changes.
                 _addInfo.Feature = null;
                 _addInfo.Vertex = null;
@@ -95,7 +95,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
                 var secondPoint = worldPosition.Copy();
                 _addInfo.Vertex = secondPoint;
                 _addInfo.Feature = new GeometryFeature { Geometry = new LineString(new[] { firstPoint, secondPoint }) };
-                _addInfo.Vertices = _addInfo.Feature.Geometry.MainVertices();
+                _addInfo.Vertices = _addInfo.Feature.Geometry.MainCoordinates();
                 Layer?.Add(_addInfo.Feature);
                 Layer?.DataHasChanged();
                 EditMode = EditMode.DrawingLine;
@@ -166,7 +166,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
                 {
                     if (mapInfo.Feature is GeometryFeature geometryFeature)
                     {
-                        var vertexTouched = FindVertexTouched(mapInfo, geometryFeature.Geometry?.MainVertices() ?? new List<Coordinate>(), screenDistance);
+                        var vertexTouched = FindVertexTouched(mapInfo, geometryFeature.Geometry?.MainCoordinates() ?? new List<Coordinate>(), screenDistance);
                         if (vertexTouched != null)
                         {
                             _dragInfo.Feature = geometryFeature;
@@ -216,26 +216,18 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
             }
         }
 
-        public bool TryDeleteVertex(MapInfo? mapInfo, double screenDistance)
+        public bool TryDeleteCoordinate(MapInfo? mapInfo, double screenDistance)
         {
             if (mapInfo?.Feature is GeometryFeature geometryFeature)
             {
-                var vertexTouched = FindVertexTouched(mapInfo, geometryFeature.Geometry?.MainVertices() ?? new List<Coordinate>(), screenDistance);
+                var vertexTouched = FindVertexTouched(mapInfo, geometryFeature.Geometry?.MainCoordinates() ?? new List<Coordinate>(), screenDistance);
                 if (vertexTouched != null)
                 {
-                    var vertices = geometryFeature.Geometry?.MainVertices() ?? new List<Coordinate>();
+                    var vertices = geometryFeature.Geometry?.MainCoordinates() ?? new List<Coordinate>();
                     var index = vertices.IndexOf(vertexTouched);
                     if (index >= 0)
                     {
-                        vertices.RemoveAt(index);
-                        var count = vertices.Count;
-
-                        // It is a ring where the first should be the same as the last.
-                        // So if the first was removed than set the last to the value of the new first
-                        if (index == 0) vertices[count - 1].SetXY(vertices[0]);
-                        // If the last was removed then set the first to the value of the new last
-                        else if (index == vertices.Count) vertices[0].SetXY(vertices[count - 1]);
-
+                        geometryFeature.Geometry = geometryFeature.Geometry.DeleteCoordinate(index);
                         geometryFeature.RenderedGeometry.Clear();
                         Layer?.DataHasChanged();
                     }
@@ -245,19 +237,22 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
             return false;
         }
 
-        public bool TryInsertVertex(MapInfo? mapInfo)
+        public bool TryInsertCoordinate(MapInfo? mapInfo)
         {
-            if (mapInfo?.Feature is GeometryFeature geometryFeature)
-            {
-                var vertices = geometryFeature.Geometry ?.MainVertices() ?? new List<Coordinate>();
+            if (mapInfo?.WorldPosition is null) return false;
 
-                if (EditHelper.TryInsertVertex(mapInfo, vertices, VertexRadius))
+            if (mapInfo.Feature is GeometryFeature geometryFeature)
+            {
+                if (geometryFeature.Geometry is null) return false;
+
+                var vertices = geometryFeature.Geometry.MainCoordinates();
+                if (EditHelper.ShouldInsert(mapInfo.WorldPosition, mapInfo.Resolution, vertices, VertexRadius, out var segment))
                 {
+                    geometryFeature.Geometry = geometryFeature.Geometry.InsertCoordinate(mapInfo.WorldPosition.ToCoordinate(), segment);
                     geometryFeature.RenderedGeometry.Clear();
                     Layer?.DataHasChanged();
                 }
             }
-
             return false;
         }
 

@@ -28,7 +28,7 @@ namespace Mapsui.Samples.Wpf.Editing.Layers
             {
                 if (feature.Geometry is Point || feature.Geometry is MultiPoint) continue; // Points with a vertex on top confuse me
                 if (feature.Geometry != null)
-                    foreach (var vertex in feature.Geometry.MainVertices())
+                    foreach (var vertex in feature.Geometry.MainCoordinates())
                     {
                         yield return new GeometryFeature { Geometry = new Point(vertex) };
                     }

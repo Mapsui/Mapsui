@@ -35,7 +35,7 @@ namespace Mapsui.Samples.Wpf.Editing
             throw new NotImplementedException();
         }
 
-        public static List<Coordinate> MainVertices(this Geometry geometry)
+        public static List<Coordinate> MainCoordinates(this Geometry geometry)
         {
             if (geometry is LineString lineString)
                 return lineString.Coordinates.ToList();
