@@ -296,6 +296,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
         {
             if (EditMode == EditMode.Rotate && _rotateInfo.Feature != null)
             {
+                _rotateInfo.Feature.Geometry?.GeometryChanged();
                 _rotateInfo.Feature = null;
             }
         }
@@ -346,6 +347,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
         {
             if (EditMode == EditMode.Scale && _scaleInfo.Feature != null)
             {
+                _scaleInfo.Feature.Geometry?.GeometryChanged();
                 _scaleInfo.Feature = null;
             }
         }
