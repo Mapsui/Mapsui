@@ -1,24 +1,24 @@
-﻿using System.Collections.Generic;
-using Mapsui.Rendering.Skia.Functions;
+﻿using Mapsui.Rendering.Skia.Functions;
 using NetTopologySuite.Geometries;
 using SkiaSharp;
-
 
 namespace Mapsui.Rendering.Skia.Extensions
 {
     internal static class LineStringExtensions
     {
         /// <summary>
-        /// Converts a LineString (list of Mapsui points) in world coordinates to a Skia path
+        /// Converts a LineString in world coordinates to a Skia path
         /// </summary>
-        /// <param name="lineString">List of points in Mapsui world coordinates</param>
+        /// <param name="coordinates">List of points in Mapsui world coordinates</param>
         /// <param name="viewport">Viewport implementation</param>
         /// <param name="clipRect">Rectangle to clip to. All lines outside aren't drawn.</param>
         /// <returns></returns>
-        public static SKPath ToSkiaPath(this IEnumerable<Coordinate> lineString, IReadOnlyViewport viewport, SKRect clipRect)
+        public static SKPath ToSkiaPath(this LineString lineString, IReadOnlyViewport viewport, SKRect clipRect)
         {
+            var coordinates = lineString.Coordinates;
+
             // First convert List<Points> to screen coordinates
-            var vertices = ClippingFunctions.WorldToScreen(viewport, lineString);
+            var vertices = ClippingFunctions.WorldToScreen(viewport, coordinates);
 
             var path = new SKPath();
             var lastPoint = SKPoint.Empty;

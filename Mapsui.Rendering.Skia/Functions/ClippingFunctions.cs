@@ -82,7 +82,7 @@ namespace Mapsui.Rendering.Skia.Functions
         /// <param name="viewport">Viewport implementation</param>
         /// <param name="points">List of points in Mapsui world coordinates</param>
         /// <returns>List of screen coordinates in SKPoint</returns>
-        public static List<SKPoint> WorldToScreen(IReadOnlyViewport viewport, IEnumerable<Coordinate>? points)
+        internal static List<SKPoint> WorldToScreen(IReadOnlyViewport viewport, IEnumerable<Coordinate>? points)
         {
             var result = new List<SKPoint>();
             if (points == null)

@@ -43,7 +43,7 @@ namespace Mapsui.Rendering.Skia
                     dashOffset = vectorStyle.Line.DashOffset;
                 }
 
-                using var path = lineString.Coordinates.ToSkiaPath(viewport, canvas.LocalClipBounds);
+                using var path = lineString.ToSkiaPath(viewport, canvas.LocalClipBounds);
                 using var paint = new SKPaint { IsAntialias = true };
                 paint.IsStroke = true;
                 paint.StrokeWidth = lineWidth;
