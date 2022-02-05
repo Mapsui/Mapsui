@@ -24,14 +24,18 @@ namespace Mapsui.Samples.Common.Maps.Data
             mapControl.Map = CreateMap();
         }
 
+        private const string wfsUri = "https://geoservices.buergernetz.bz.it/geoserver/ows";
+        private const string crs = "EPSG:25832";
+        private const string layerName = "MAPS_DISTRICTS_VW";
+        private const string nsPrefix = "gvcc_maps";
+        private const string labelField = "CAMM_NOME_DE";
+
         public static Map CreateMap()
         {
             try
             {
-                const string serviceUri = "https://geoservices.buergernetz.bz.it/geoserver/ows";
-
-                var map = new Map() {CRS = "EPSG:25832"};
-                var provider = CreateWfsProvider(serviceUri);
+                var map = new Map() {CRS = crs};
+                var provider = CreateWfsProvider(wfsUri);
                 map.Layers.Add(CreateTileLayer(CreateTileSource()));
                 map.Layers.Add(CreateWfsLayer(provider));
                 map.Layers.Add(CreateLabelLayer(provider));
@@ -54,7 +58,7 @@ namespace Mapsui.Samples.Common.Maps.Data
 
         private static ILayer CreateWfsLayer(WFSProvider provider)
         {
-            return new Layer("COMUNI_AMMINISTRATIVI")
+            return new Layer(layerName)
             {
                 Style = new VectorStyle {Fill = new Brush {Color = Color.Red}},
                 DataSource = provider,
@@ -64,13 +68,13 @@ namespace Mapsui.Samples.Common.Maps.Data
 
         private static WFSProvider CreateWfsProvider(string getCapabilitiesUri)
         {
-            var provider = new WFSProvider(getCapabilitiesUri, "p_bz-cadastre", "COMUNI_AMMINISTRATIVI",
+            var provider = new WFSProvider(getCapabilitiesUri, nsPrefix, layerName,
                 WFSProvider.WFSVersionEnum.WFS_1_1_0)
             {
                 QuickGeometries = false,
                 GetFeatureGetRequest = true,
-                CRS = "EPSG:25832",
-                Labels = new List<string> {"CAMM_NOME_DE"}
+                CRS = crs,
+                Labels = new List<string> { labelField }
             };
             return provider;
         }
@@ -81,7 +85,6 @@ namespace Mapsui.Samples.Common.Maps.Data
             // Labels are collected when parsing the geometry. So there's just one 'GetFeature' call necessary.
             // Otherwise (when calling twice for retrieving labels) there may be an inconsistent read...
             // If a label property is set, the quick geometry option is automatically set to 'false'.
-            const string labelField = "CAMM_NOME_DE";
             provider.Labels.Add(labelField);
 
             return new Layer("labels")
