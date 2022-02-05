@@ -1,7 +1,7 @@
-﻿using Mapsui.Geometries;
-using Mapsui.GeometryLayers;
-using Mapsui.Logging;
+﻿using Mapsui.Logging;
+using Mapsui.Nts;
 using Mapsui.Styles;
+using NetTopologySuite.Geometries;
 using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia
@@ -15,7 +15,7 @@ namespace Mapsui.Rendering.Skia
         }
 
         private static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, float layerOpacity,
-            IFeature feature, IGeometry? geometry, SymbolCache symbolCache)
+            IFeature feature, Geometry? geometry, SymbolCache symbolCache)
         {
             if (geometry is Point point)
                 PointRenderer.Draw(canvas, viewport, style, feature, point.X, point.Y, symbolCache,
@@ -35,9 +35,9 @@ namespace Mapsui.Rendering.Skia
             else if (geometry is MultiPolygon multiPolygon)
                 MultiPolygonRenderer.Draw(canvas, viewport, style, feature, multiPolygon,
                     layerOpacity * style.Opacity, symbolCache);
-            else if (geometry is IGeometryCollection collection)
+            else if (geometry is GeometryCollection collection)
                 for (var i = 0; i < collection.NumGeometries; i++)
-                    Draw(canvas, viewport, style, layerOpacity, feature, collection.Geometry(i), symbolCache);
+                    Draw(canvas, viewport, style, layerOpacity, feature, collection.GetGeometryN(i), symbolCache);
             else
                 Logger.Log(LogLevel.Warning,
                     $"Failed to find renderer for geometry feature of type {geometry?.GetType()}");

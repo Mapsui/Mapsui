@@ -212,9 +212,6 @@ namespace Mapsui.UI.Uwp
             CommonDrawControl(canvas);
         }
 
-        [Obsolete("Use MapControl.Navigate.NavigateTo instead", true)]
-        public void ZoomToBox(Geometries.Point beginPoint, Geometries.Point endPoint) { }
-
         private static void OnManipulationInertiaStarting(object sender, ManipulationInertiaStartingRoutedEventArgs e)
         {
             e.TranslationBehavior.DesiredDeceleration = 25 * 96.0 / (1000.0 * 1000.0);

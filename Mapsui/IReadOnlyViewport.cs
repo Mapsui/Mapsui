@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using Mapsui.Geometries;
 
 namespace Mapsui
 {
@@ -104,7 +103,7 @@ namespace Mapsui
         /// </summary>
         /// <param name="worldX">X coordinate in map units</param>
         /// <param name="worldY">Y coordinate in map units</param>
-        /// <returns>Tuple of x and y in screen coordintes</returns>
+        /// <returns>Tuple of x and y in screen coordinates</returns>
         (double screenX, double screenY) WorldToScreenXY(double worldX, double worldY);
 
         /// <summary>

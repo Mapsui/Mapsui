@@ -3,8 +3,6 @@ using Mapsui.Extensions;
 using Mapsui.Styles;
 using Mapsui.Utilities;
 using SkiaSharp;
-using Svg.Skia;
-
 
 namespace Mapsui.Rendering.Skia
 {

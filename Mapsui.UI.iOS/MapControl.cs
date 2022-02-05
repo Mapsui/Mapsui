@@ -5,8 +5,8 @@ using System.Linq;
 using CoreFoundation;
 using CoreGraphics;
 using Foundation;
-using Mapsui.Geometries.Utilities;
 using Mapsui.UI.iOS.Extensions;
+using Mapsui.Utilities;
 using SkiaSharp.Views.iOS;
 using UIKit;
 

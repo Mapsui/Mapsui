@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using Mapsui.Geometries;
-using Mapsui.GeometryLayers;
-using Mapsui.Layers;
+﻿using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Helpers;

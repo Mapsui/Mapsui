@@ -2,7 +2,7 @@
 using System.Reflection;
 using Mapsui.Layers;
 using Mapsui.Providers;
-using Mapsui.Providers.Shapefile;
+using Mapsui.Nts.Providers.Shapefile;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.UI;
@@ -83,22 +83,22 @@ namespace Mapsui.Samples.Common.Desktop
             // Cities below 1.000.000 gets the smallest symbol.
             // Cities with more than 5.000.000 the largest symbol.
             var bitmapId = typeof(ShapefileSample).LoadBitmapId(@"Images.icon.png");
-            var citymin = new SymbolStyle { BitmapId = bitmapId, SymbolScale = 0.5f };
-            var citymax = new SymbolStyle { BitmapId = bitmapId, SymbolScale = 1f };
-            return new GradientTheme("Population", 1000000, 5000000, citymin, citymax);
+            var cityMin = new SymbolStyle { BitmapId = bitmapId, SymbolScale = 0.5f };
+            var cityMax = new SymbolStyle { BitmapId = bitmapId, SymbolScale = 1f };
+            return new GradientTheme("Population", 1000000, 5000000, cityMin, cityMax);
         }
 
         private static IThemeStyle CreateCountryTheme()
         {
-            //Set a gradient theme on the countries layer, based on Population density
-            //First create two styles that specify min and max styles
-            //In this case we will just use the default values and override the fill-colors
-            //using a colorblender. If different line-widths, line- and fill-colors where used
-            //in the min and max styles, these would automatically get linearly interpolated.
+            // Set a gradient theme on the countries layer, based on Population density
+            // First create two styles that specify min and max styles
+            // In this case we will just use the default values and override the fill-colors
+            // using a color blender. If different line-widths, line- and fill-colors where used
+            // in the min and max styles, these would automatically get linearly interpolated.
             var min = new VectorStyle { Outline = new Pen { Color = Color.Black } };
             var max = new VectorStyle { Outline = new Pen { Color = Color.Black } };
 
-            //Create theme using a density from 0 (min) to 400 (max)
+            // Create theme using a density from 0 (min) to 400 (max)
             return new GradientTheme("PopDens", 0, 400, min, max) { FillColorBlend = ColorBlend.Rainbow5 };
         }
 
@@ -120,7 +120,7 @@ namespace Mapsui.Samples.Common.Desktop
 
         private static GradientTheme CreateCountryLabelTheme()
         {
-            //Lets scale the labels so that big countries have larger texts as well
+            // Lets scale the labels so that big countries have larger texts as well
             var backColor = new Brush { Color = new Color(255, 255, 255, 128) };
 
             var lblMin = new LabelStyle

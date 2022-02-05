@@ -1,11 +1,9 @@
-﻿using Mapsui.Geometries;
-using Mapsui.GeometryLayers;
-using Mapsui.Layers;
+﻿using Mapsui.Layers;
 using Mapsui.Layers.Tiling;
-using Mapsui.Providers;
+using Mapsui.Nts;
 using Mapsui.Samples.Common;
 using Mapsui.UI;
-using Mapsui.Utilities;
+using NetTopologySuite.Geometries;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
@@ -33,8 +31,7 @@ namespace Mapsui.Tests.Common.Maps
 
             _writableLayer?.Add(new GeometryFeature
             {
-                Geometry =
-                new Point(e.MapInfo.WorldPosition.X, e.MapInfo.WorldPosition.Y)
+                Geometry = new Point(e.MapInfo.WorldPosition.X, e.MapInfo.WorldPosition.Y)
             });
             _writableLayer?.DataHasChanged();
         }
@@ -47,9 +44,6 @@ namespace Mapsui.Tests.Common.Maps
             var writableLayer = new WritableLayer();
 
             writableLayer.Add(new GeometryFeature());
-            writableLayer.Add(new GeometryFeature { Geometry = new Point() });
-            writableLayer.Add(new GeometryFeature { Geometry = new LineString() });
-            writableLayer.Add(new GeometryFeature { Geometry = new Polygon() });
             map.Layers.Add(writableLayer);
 
             return map;

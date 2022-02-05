@@ -7,17 +7,13 @@ namespace Mapsui.Rendering.Skia.Extensions
     {
         public static SKStrokeCap ToSkia(this PenStrokeCap penStrokeCap)
         {
-            switch (penStrokeCap)
+            return penStrokeCap switch
             {
-                case PenStrokeCap.Butt:
-                    return SKStrokeCap.Butt;
-                case PenStrokeCap.Round:
-                    return SKStrokeCap.Round;
-                case PenStrokeCap.Square:
-                    return SKStrokeCap.Square;
-                default:
-                    return SKStrokeCap.Butt;
-            }
+                PenStrokeCap.Butt => SKStrokeCap.Butt,
+                PenStrokeCap.Round => SKStrokeCap.Round,
+                PenStrokeCap.Square => SKStrokeCap.Square,
+                _ => SKStrokeCap.Butt,
+            };
         }
     }
 }

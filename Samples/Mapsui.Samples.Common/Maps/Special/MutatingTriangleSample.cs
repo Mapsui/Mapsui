@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Mapsui.Geometries;
-using Mapsui.GeometryLayers;
 using Mapsui.Layers;
 using Mapsui.Layers.Tiling;
+using Mapsui.Nts;
 using Mapsui.Providers;
 using Mapsui.UI;
+using NetTopologySuite.Geometries;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -35,7 +36,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             var layer = new MemoryLayer();
 
-            var polygon = new Polygon(new LinearRing(GenerateRandomPoints(envelope, 3)));
+            var polygon = new Polygon(new LinearRing(GenerateRandomPoints(envelope, 3).ToArray()));
             var feature = new GeometryFeature(polygon);
             var features = new List<IFeature>
             {
@@ -45,7 +46,7 @@ namespace Mapsui.Samples.Common.Maps
             layer.DataSource = new MemoryProvider<IFeature>(features);
 
             PeriodicTask.Run(() => {
-                polygon.ExteriorRing = new LinearRing(GenerateRandomPoints(envelope, 3));
+                feature.Geometry = new Polygon(new LinearRing(GenerateRandomPoints(envelope, 3).ToArray()));
                 // Clear cache for change to show
                 feature.RenderedGeometry.Clear();
                 // Trigger DataChanged notification
@@ -56,20 +57,20 @@ namespace Mapsui.Samples.Common.Maps
             return layer;
         }
 
-        public static IEnumerable<Point> GenerateRandomPoints(MRect? envelope, int count = 25)
+        public static IEnumerable<Coordinate> GenerateRandomPoints(MRect? envelope, int count = 25)
         {
-            var result = new List<Point>();
+            var result = new List<Coordinate>();
             if (envelope == null)
                 return result;
 
             for (var i = 0; i < count; i++)
             {
-                result.Add(new Point(
+                result.Add(new Coordinate(
                     Random.NextDouble() * envelope.Width + envelope.Left,
                     Random.NextDouble() * envelope.Height + envelope.Bottom));
             }
 
-            result.Add(result[0]); // close polygon by adding start point.
+            result.Add(result[0].Copy()); // close polygon by adding start point.
 
             return result;
         }

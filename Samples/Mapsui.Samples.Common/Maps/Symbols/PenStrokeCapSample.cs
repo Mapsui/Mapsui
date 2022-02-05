@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using Mapsui.Geometries;
-using Mapsui.GeometryLayers;
 using Mapsui.Layers;
 using Mapsui.Layers.Tiling;
+using Mapsui.Nts;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.UI;
-using Mapsui.Utilities;
+using NetTopologySuite.Geometries;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -48,10 +47,10 @@ namespace Mapsui.Samples.Common.Maps
                 {
                     Geometry = new LineString(new[]
                     {
-                        new Point(1 * PolygonSize, 1 * PolygonSize),
-                        new Point(1 * PolygonSize, 2 * PolygonSize),
-                        new Point(2 * PolygonSize, 2 * PolygonSize),
-                        new Point(2 * PolygonSize, 1 * PolygonSize)
+                        new Coordinate(1 * PolygonSize, 1 * PolygonSize),
+                        new Coordinate(1 * PolygonSize, 2 * PolygonSize),
+                        new Coordinate(2 * PolygonSize, 2 * PolygonSize),
+                        new Coordinate(2 * PolygonSize, 1 * PolygonSize)
                     }),
                     Styles = new[]
                     {
@@ -65,10 +64,10 @@ namespace Mapsui.Samples.Common.Maps
                 {
                     Geometry = new LineString(new[]
                     {
-                        new Point(1 * PolygonSize, 1 * PolygonSize),
-                        new Point(1 * PolygonSize, 2 * PolygonSize),
-                        new Point(2 * PolygonSize, 2 * PolygonSize),
-                        new Point(2 * PolygonSize, 1 * PolygonSize)
+                        new Coordinate(1 * PolygonSize, 1 * PolygonSize),
+                        new Coordinate(1 * PolygonSize, 2 * PolygonSize),
+                        new Coordinate(2 * PolygonSize, 2 * PolygonSize),
+                        new Coordinate(2 * PolygonSize, 1 * PolygonSize)
                     }),
                     Styles = new[]
                     {
@@ -82,10 +81,10 @@ namespace Mapsui.Samples.Common.Maps
                 {
                     Geometry = new LineString(new[]
                     {
-                        new Point(1 * PolygonSize, -1 * PolygonSize),
-                        new Point(1 * PolygonSize, -2 * PolygonSize),
-                        new Point(2 * PolygonSize, -2 * PolygonSize),
-                        new Point(2 * PolygonSize, -1 * PolygonSize)
+                        new Coordinate(1 * PolygonSize, -1 * PolygonSize),
+                        new Coordinate(1 * PolygonSize, -2 * PolygonSize),
+                        new Coordinate(2 * PolygonSize, -2 * PolygonSize),
+                        new Coordinate(2 * PolygonSize, -1 * PolygonSize)
                     }),
                     Styles = new[]
                     {
@@ -99,10 +98,10 @@ namespace Mapsui.Samples.Common.Maps
                 {
                     Geometry = new LineString(new[]
                     {
-                        new Point(1 * PolygonSize, -1 * PolygonSize),
-                        new Point(1 * PolygonSize, -2 * PolygonSize),
-                        new Point(2 * PolygonSize, -2 * PolygonSize),
-                        new Point(2 * PolygonSize, -1 * PolygonSize)
+                        new Coordinate(1 * PolygonSize, -1 * PolygonSize),
+                        new Coordinate(1 * PolygonSize, -2 * PolygonSize),
+                        new Coordinate(2 * PolygonSize, -2 * PolygonSize),
+                        new Coordinate(2 * PolygonSize, -1 * PolygonSize)
                     }),
                     Styles = new[]
                     {
@@ -116,10 +115,10 @@ namespace Mapsui.Samples.Common.Maps
                 {
                     Geometry = new LineString(new[]
                     {
-                        new Point(-1 * PolygonSize, 1 * PolygonSize),
-                        new Point(-1 * PolygonSize, 2 * PolygonSize),
-                        new Point(-2 * PolygonSize, 2 * PolygonSize),
-                        new Point(-2 * PolygonSize, 1 * PolygonSize)
+                        new Coordinate(-1 * PolygonSize, 1 * PolygonSize),
+                        new Coordinate(-1 * PolygonSize, 2 * PolygonSize),
+                        new Coordinate(-2 * PolygonSize, 2 * PolygonSize),
+                        new Coordinate(-2 * PolygonSize, 1 * PolygonSize)
                     }),
                     Styles = new[]
                     {
@@ -133,10 +132,10 @@ namespace Mapsui.Samples.Common.Maps
                 {
                     Geometry = new LineString(new[]
                     {
-                        new Point(-1 * PolygonSize, 1 * PolygonSize),
-                        new Point(-1 * PolygonSize, 2 * PolygonSize),
-                        new Point(-2 * PolygonSize, 2 * PolygonSize),
-                        new Point(-2 * PolygonSize, 1 * PolygonSize)
+                        new Coordinate(-1 * PolygonSize, 1 * PolygonSize),
+                        new Coordinate(-1 * PolygonSize, 2 * PolygonSize),
+                        new Coordinate(-2 * PolygonSize, 2 * PolygonSize),
+                        new Coordinate(-2 * PolygonSize, 1 * PolygonSize)
                     }),
                     Styles = new[]
                     {

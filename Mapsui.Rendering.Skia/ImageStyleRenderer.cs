@@ -1,12 +1,11 @@
-﻿using Mapsui.Geometries;
-using Mapsui.Styles;
+﻿using Mapsui.Styles;
 using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia
 {
     internal class ImageStyleRenderer
     {
-        public static void Draw(SKCanvas canvas, ImageStyle symbolStyle, Point destination,
+        public static void Draw(SKCanvas canvas, ImageStyle symbolStyle, double x, double y,
                 SymbolCache symbolCache, float opacity, double mapRotation)
         {
             if (symbolStyle.BitmapId < 0)
@@ -30,7 +29,7 @@ namespace Mapsui.Rendering.Skia
                         return;
 
                     BitmapRenderer.Draw(canvas, bitmap.Bitmap,
-                        (float)destination.X, (float)destination.Y,
+                        (float)x, (float)y,
                         rotation,
                         (float)offsetX, (float)offsetY,
                         opacity: opacity, scale: (float)symbolStyle.SymbolScale);
@@ -40,7 +39,7 @@ namespace Mapsui.Rendering.Skia
                         return;
 
                     PictureRenderer.Draw(canvas, bitmap.Picture,
-                        (float)destination.X, (float)destination.Y,
+                        (float)x, (float)y,
                         rotation,
                         (float)offsetX, (float)offsetY,
                         opacity: opacity, scale: (float)symbolStyle.SymbolScale);
@@ -50,7 +49,7 @@ namespace Mapsui.Rendering.Skia
                         return;
 
                     SvgRenderer.Draw(canvas, bitmap.Svg,
-                        (float)destination.X, (float)destination.Y,
+                        (float)x, (float)y,
                         rotation,
                         (float)offsetX, (float)offsetY,
                         opacity: opacity, scale: (float)symbolStyle.SymbolScale);
@@ -68,7 +67,7 @@ namespace Mapsui.Rendering.Skia
                     }
                     if (sprite.Data is SKImage skImage)
                         BitmapRenderer.Draw(canvas, skImage,
-                            (float)destination.X, (float)destination.Y,
+                            (float)x, (float)y,
                             rotation,
                             (float)offsetX, (float)offsetY,
                             opacity: opacity, scale: (float)symbolStyle.SymbolScale);

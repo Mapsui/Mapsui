@@ -6,9 +6,9 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Mapsui.Geometries.Utilities;
 using Mapsui.Layers;
 using Mapsui.Logging;
+using Mapsui.Utilities;
 #if __MAUI__
 using Mapsui.UI.Maui.Extensions;
 using Microsoft.Maui;
@@ -59,9 +59,9 @@ namespace Mapsui.UI.Forms
         private SKCanvasView? _canvasView;
 
         // See http://grepcode.com/file/repository.grepcode.com/java/ext/com.google.android/android/4.0.4_r2.1/android/view/ViewConfiguration.java#ViewConfiguration.0PRESSED_STATE_DURATION for values
-        private const int shortTap = 125;
-        private const int shortClick = 250;
-        private const int delayTap = 200;
+        private const int ShortTap = 125;
+        private const int ShortClick = 250;
+        private const int DelayTap = 200;
         private const int longTap = 500;
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Mapsui.UI.Forms
         /// The slob is initialized at 8. How did we get to 8? Well you could read the discussion here: https://github.com/Mapsui/Mapsui/issues/602
         /// We basically copied it from the Java source code: https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/view/ViewConfiguration.java#162
         /// </summary>
-        private const int touchSlop = 8;
+        private const int TouchSlop = 8;
 
         protected readonly bool _initialized;
 
@@ -256,10 +256,10 @@ namespace Mapsui.UI.Forms
 
                         // If touch start and end is in the same area and the touch time is shorter
                         // than longTap, than we have a tap.
-                        if (isAround && (ticks - releasedTouch.Tick) < (e.DeviceType == SKTouchDeviceType.Mouse ? shortClick : longTap) * 10000)
+                        if (isAround && (ticks - releasedTouch.Tick) < (e.DeviceType == SKTouchDeviceType.Mouse ? ShortClick : longTap) * 10000)
                         {
                             _waitingForDoubleTap = true;
-                            if (UseDoubleTap) { await Task.Delay(delayTap); }
+                            if (UseDoubleTap) { await Task.Delay(DelayTap); }
 
                             if (_numOfTaps > 1)
                             {
@@ -343,7 +343,7 @@ namespace Mapsui.UI.Forms
         {
             if (_firstTouch == null) { return false; }
             if (releasedTouch.Location == null) { return false; }
-            return _firstTouch != null && Utilities.Algorithms.Distance(releasedTouch.Location, _firstTouch) < touchSlop;
+            return _firstTouch != null && Utilities.Algorithms.Distance(releasedTouch.Location, _firstTouch) < TouchSlop;
         }
 
         private void OnGLPaintSurface(object? sender, SKPaintGLSurfaceEventArgs args)
@@ -351,7 +351,7 @@ namespace Mapsui.UI.Forms
             if (!_initialized && _glView?.GRContext == null)
             {
                 // Could this be null before Home is called? If so we should change the logic.
-                Logging.Logger.Log(Logging.LogLevel.Warning, "Refresh can not be called because GRContext is null");
+                Logger.Log(LogLevel.Warning, "Refresh can not be called because GRContext is null");
                 return;
             }
 

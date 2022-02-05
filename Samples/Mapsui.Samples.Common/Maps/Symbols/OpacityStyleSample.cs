@@ -1,11 +1,10 @@
-﻿using Mapsui.Extensions;
-using Mapsui.Geometries;
-using Mapsui.GeometryLayers;
-using Mapsui.Layers;
+﻿using Mapsui.Layers;
 using Mapsui.Layers.Tiling;
+using Mapsui.Nts.Extensions;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.UI;
+using NetTopologySuite.Geometries;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
@@ -70,31 +69,33 @@ namespace Mapsui.Samples.Common.Maps
 
         private static Polygon CreatePolygon()
         {
-            var polygon = new Polygon();
-            polygon.ExteriorRing!.Vertices.Add(new Point(0, 0));
-            polygon.ExteriorRing.Vertices.Add(new Point(0, 10000000));
-            polygon.ExteriorRing.Vertices.Add(new Point(10000000, 10000000));
-            polygon.ExteriorRing.Vertices.Add(new Point(10000000, 0));
-            polygon.ExteriorRing.Vertices.Add(new Point(0, 0));
-            var linearRing = new LinearRing();
-            linearRing.Vertices.Add(new Point(1000000, 1000000));
-            linearRing.Vertices.Add(new Point(9000000, 1000000));
-            linearRing.Vertices.Add(new Point(9000000, 9000000));
-            linearRing.Vertices.Add(new Point(1000000, 9000000));
-            linearRing.Vertices.Add(new Point(1000000, 1000000));
-            polygon.InteriorRings.Add(linearRing);
-            return polygon;
+            return new Polygon(
+                new LinearRing(new[] {
+                    new Coordinate(0, 0),
+                    new Coordinate(0, 10000000),
+                    new Coordinate(10000000, 10000000),
+                    new Coordinate(10000000, 0),
+                    new Coordinate(0, 0)
+                }),
+                new[] { new LinearRing(new [] {
+                    new Coordinate(1000000, 1000000),
+                    new Coordinate(9000000, 1000000),
+                    new Coordinate(9000000, 9000000),
+                    new Coordinate(1000000, 9000000),
+                    new Coordinate(1000000, 1000000) 
+                })}
+            );
         }
 
         private static LineString CreateLineString()
         {
-            var lineString = new LineString();
-            lineString.Vertices.Add(new Point(1000000, 1000000));
-            lineString.Vertices.Add(new Point(9000000, 1000000));
-            lineString.Vertices.Add(new Point(9000000, 9000000));
-            lineString.Vertices.Add(new Point(1000000, 9000000));
-            lineString.Vertices.Add(new Point(1000000, 1000000));
-            return lineString;
+            return new LineString(new[] {
+                new Coordinate(1000000, 1000000),
+                new Coordinate(9000000, 1000000),
+                new Coordinate(9000000, 9000000),
+                new Coordinate(1000000, 9000000),
+                new Coordinate(1000000, 1000000)
+            });
         }
     }
 }
