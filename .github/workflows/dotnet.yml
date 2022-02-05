@@ -176,7 +176,7 @@ jobs:
     - name: Build Mapsui.Layers.ArcGIS
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Layers.ArcGIS/Mapsui.Layers.ArcGIS.csproj
     - name: Build Mapsui.UI.Maui
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Maui/Mapsui.UI.Maui.csproj    
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Maui/Mapsui.UI.Maui.csproj
     - name: Generate nuget package (Mapsui.Maui)
       run: nuget pack NuSpec/Mapsui.Maui.nuspec -Version $(git describe --tags) -outputdirectory Artifacts    
     - name: Upload packages
@@ -184,3 +184,8 @@ jobs:
       with:
         name: nupkg.win
         path: Artifacts/*.nupkg
+    - name: Add Mapsui Nuget Repository
+      run: nuget source Add -Name "GitHub" -Source "https://nuget.pkg.github.com/mapsui/mapsui/index.json" -UserName mapsui
+    - name: Upload Mapsui Nuget
+      run: nuget push Artifacts/*.nupkg -Source "GitHub"
+      
