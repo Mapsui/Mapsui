@@ -62,6 +62,10 @@ jobs:
       with:
         name: nupkg.mac
         path: Artifacts/*.nupkg
+    - name: Add Mapsui Nuget Repository
+      run: nuget source Add -Name "GitHub" -Source "https://nuget.pkg.github.com/mapsui/mapsui/index.json" -UserName mapsui
+    - name: Upload Mapsui Nuget
+      run: nuget push Artifacts/*.nupkg -Source "GitHub"        
 
   winBuild:
     runs-on: windows-latest
@@ -134,7 +138,11 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: nupkg.win
-        path: Artifacts/*.nupkg  
+        path: Artifacts/*.nupkg
+    - name: Add Mapsui Nuget Repository
+      run: nuget source Add -Name "GitHub" -Source "https://nuget.pkg.github.com/mapsui/mapsui/index.json" -UserName mapsui
+    - name: Upload Mapsui Nuget
+      run: nuget push Artifacts/*.nupkg -Source "GitHub"
 
   mauiBuild:
     runs-on: windows-latest
