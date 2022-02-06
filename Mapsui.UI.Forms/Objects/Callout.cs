@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Mapsui.Extensions;
-using Mapsui.GeometryLayers;
+using Mapsui.Nts;
 using Mapsui.Styles;
 using Mapsui.UI.Objects;
 #if __MAUI__
@@ -33,7 +33,6 @@ namespace Mapsui.UI.Forms
     {
         private readonly Pin _pin;
 
-        public event EventHandler<EventArgs>? CalloutClosed;
         public event EventHandler<CalloutClickedEventArgs>? CalloutClicked;
 
         public static double DefaultTitleFontSize = Device.GetNamedSize(NamedSize.Title, typeof(Label));
@@ -147,7 +146,7 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Bindable property for the <see cref="Title"/> property
         /// </summary>
-        public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(MapView), default(string));
+        public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(MapView));
 
         /// <summary>
         /// Bindable property for the <see cref="TitleFontName"/> property
@@ -177,7 +176,7 @@ namespace Mapsui.UI.Forms
         /// <summary>
         /// Bindable property for the <see cref="Subtitle"/> property
         /// </summary>
-        public static readonly BindableProperty SubtitleProperty = BindableProperty.Create(nameof(Subtitle), typeof(string), typeof(MapView), default(string));
+        public static readonly BindableProperty SubtitleProperty = BindableProperty.Create(nameof(Subtitle), typeof(string), typeof(MapView));
 
         /// <summary>
         /// Bindable property for the <see cref="SubtitleFontName"/> property
@@ -208,7 +207,7 @@ namespace Mapsui.UI.Forms
 
         public Callout(Pin pin)
         {
-            _pin = pin ?? throw new ArgumentNullException("Pin shouldn't be null"); ;
+            _pin = pin ?? throw new ArgumentNullException(nameof(pin), "Pin shouldn't be null");
             if (_pin.Feature != null)
                 Feature = _pin.Feature.Copy();
             else
@@ -238,8 +237,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public Point Anchor
         {
-            get { return (Point)GetValue(AnchorProperty); }
-            set { SetValue(AnchorProperty, value); }
+            get => (Point)GetValue(AnchorProperty);
+            set => SetValue(AnchorProperty, value);
         }
 
         /// <summary>
@@ -283,8 +282,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public Color Color
         {
-            get { return (Color)GetValue(ColorProperty); }
-            set { SetValue(ColorProperty, value); }
+            get => (Color)GetValue(ColorProperty);
+            set => SetValue(ColorProperty, value);
         }
 
         /// <summary>
@@ -292,8 +291,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public Color BackgroundColor
         {
-            get { return (Color)GetValue(BackgroundColorProperty); }
-            set { SetValue(BackgroundColorProperty, value); }
+            get => (Color)GetValue(BackgroundColorProperty);
+            set => SetValue(BackgroundColorProperty, value);
         }
 
         /// <summary>
@@ -351,7 +350,7 @@ namespace Mapsui.UI.Forms
         }
 
         /// <summary>
-        /// Space between Title and Subtitel of Callout
+        /// Space between Title and Subtitle of Callout
         /// </summary>
         public double Spacing
         {
@@ -360,7 +359,7 @@ namespace Mapsui.UI.Forms
         }
 
         /// <summary>
-        /// MaxWidth for Title and Subtitel of Callout
+        /// MaxWidth for Title and Subtitle of Callout
         /// </summary>
         public double MaxWidth
         {
@@ -432,8 +431,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public Color TitleFontColor
         {
-            get { return (Color)GetValue(TitleFontColorProperty); }
-            set { SetValue(TitleFontColorProperty, value); }
+            get => (Color)GetValue(TitleFontColorProperty);
+            set => SetValue(TitleFontColorProperty, value);
         }
 
         /// <summary>
@@ -441,8 +440,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public TextAlignment TitleTextAlignment
         {
-            get { return (TextAlignment)GetValue(TitleTextAlignmentProperty); }
-            set { SetValue(TitleTextAlignmentProperty, value); }
+            get => (TextAlignment)GetValue(TitleTextAlignmentProperty);
+            set => SetValue(TitleTextAlignmentProperty, value);
         }
 
         /// <summary>
@@ -486,8 +485,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public Color SubtitleFontColor
         {
-            get { return (Color)GetValue(SubtitleFontColorProperty); }
-            set { SetValue(SubtitleFontColorProperty, value); }
+            get => (Color)GetValue(SubtitleFontColorProperty);
+            set => SetValue(SubtitleFontColorProperty, value);
         }
 
         /// <summary>
@@ -495,8 +494,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public TextAlignment SubtitleTextAlignment
         {
-            get { return (TextAlignment)GetValue(SubtitleTextAlignmentProperty); }
-            set { SetValue(SubtitleTextAlignmentProperty, value); }
+            get => (TextAlignment)GetValue(SubtitleTextAlignmentProperty);
+            set => SetValue(SubtitleTextAlignmentProperty, value);
         }
 
         /// <summary>
@@ -504,14 +503,17 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public GeometryFeature Feature { get; }
 
-        protected override void OnPropertyChanged([CallerMemberName] string propertyName = "")
+
+
+        protected override void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
+            if (propertyName is null)
+                return;
+
             base.OnPropertyChanged(propertyName);
 
             if (Type != CalloutType.Custom && propertyName.Equals(nameof(Content)))
-            {
                 Type = CalloutType.Custom;
-            }
 
             if (IsVisible && (propertyName.Equals(nameof(Title))
                 || propertyName.Equals(nameof(Subtitle))
@@ -530,9 +532,7 @@ namespace Mapsui.UI.Forms
                 || propertyName.Equals(nameof(Spacing))
                 || propertyName.Equals(nameof(MaxWidth)))
                 )
-            {
                 UpdateContent();
-            }
             else if (IsVisible && propertyName.Equals(nameof(ArrowAlignment))
                 || propertyName.Equals(nameof(ArrowWidth))
                 || propertyName.Equals(nameof(ArrowHeight))
@@ -543,11 +543,9 @@ namespace Mapsui.UI.Forms
                 || propertyName.Equals(nameof(Color))
                 || propertyName.Equals(nameof(BackgroundColor))
                 || propertyName.Equals(nameof(RectRadius)))
-            {
                 UpdateCalloutStyle();
-            }
 
-            _pin?.MapView?.Refresh();
+            _pin.MapView?.Refresh();
         }
 
         /// <summary>
@@ -608,7 +606,7 @@ namespace Mapsui.UI.Forms
         /// </summary>
         private void UpdateCalloutStyle()
         {
-            var style = Feature.Styles.Where((s) => s is CalloutStyle).FirstOrDefault() as CalloutStyle;
+            var style = Feature.Styles.FirstOrDefault(s => s is CalloutStyle) as CalloutStyle;
 
             if (style is null)
             {
@@ -619,7 +617,7 @@ namespace Mapsui.UI.Forms
             style.ArrowAlignment = ArrowAlignment;
             style.ArrowHeight = (float)ArrowHeight;
             style.ArrowPosition = (float)ArrowPosition;
-            style.BackgroundColor = BackgroundColor.ToMapsui(); ;
+            style.BackgroundColor = BackgroundColor.ToMapsui();
             style.Color = Color.ToMapsui();
             style.SymbolOffset = new Offset(Anchor.X, Anchor.Y);
             style.SymbolOffsetRotatesWithMap = _pin.RotateWithMap;
@@ -639,16 +637,6 @@ namespace Mapsui.UI.Forms
         {
             UpdateContent();
             UpdateCalloutStyle();
-        }
-
-        /// <summary>
-        /// Called, when Callout close button is pressed
-        /// </summary>
-        /// <param name="sender">Sender</param>
-        /// <param name="e">Event arguments</param>
-        private void CloseCalloutClicked(object? sender, EventArgs e)
-        {
-            CalloutClosed?.Invoke(this, new EventArgs());
         }
 
         public virtual void Dispose()

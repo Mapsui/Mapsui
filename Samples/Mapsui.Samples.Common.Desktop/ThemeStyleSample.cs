@@ -1,16 +1,16 @@
 ﻿using System.IO;
 using System.Reflection;
-using Mapsui.Geometries;
-using Mapsui.GeometryLayers;
 using Mapsui.Layers;
-using Mapsui.Providers;
-using Mapsui.Providers.Shapefile;
 using Mapsui.Samples.Common.Desktop.GeoData;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.UI;
 using Mapsui.Extensions;
+using Mapsui.Nts;
+using Mapsui.Nts.Providers.Shapefile;
+using Mapsui.Providers;
+using NetTopologySuite.Geometries;
 
 namespace Mapsui.Samples.Common.Desktop
 {
@@ -47,7 +47,7 @@ namespace Mapsui.Samples.Common.Desktop
             };
         }
 
-        private static ThemeStyle? CreateThemeStyle()
+        private static ThemeStyle CreateThemeStyle()
         {
             return new ThemeStyle(f => {
                 if (f is GeometryFeature geometryFeature)
@@ -56,7 +56,7 @@ namespace Mapsui.Samples.Common.Desktop
 
                 var style = new VectorStyle();
 
-                switch (f["NAME"]?.ToString()?.ToLower())
+                switch (f["NAME"]?.ToString().ToLower())
                 {
                     case "brazil": //If country name is Denmark, fill it with green
                         style.Fill = new Brush(Color.Green);

@@ -1,6 +1,6 @@
 ﻿using System;
-using Mapsui.Geometries;
 using Mapsui.Projections;
+using NetTopologySuite.Geometries;
 
 #if __MAUI__
 namespace Mapsui.UI.Maui
@@ -58,6 +58,12 @@ namespace Mapsui.UI.Forms
         {
             var (x, y) = SphericalMercator.FromLonLat(Longitude, Latitude);
             return new Point(x, y);
+        }
+
+        public Coordinate ToCoordinate()
+        {
+            var (x, y) = SphericalMercator.FromLonLat(Longitude, Latitude);
+            return new Coordinate(x, y);
         }
 
         public override bool Equals(object? obj)
@@ -120,7 +126,7 @@ namespace Mapsui.UI.Forms
         /// <param name="format">Format string</param>
         public string ToString(string format)
         {
-            var formats = format.Split(new char[] { '|' }, StringSplitOptions.None);
+            var formats = format.Split(new [] { '|' }, StringSplitOptions.None);
 
             var formatLatitude = formats.Length > 0 && !string.IsNullOrEmpty(formats[0]) ? formats[0] : "P DD° MM.MMM'";
             var formatLongitude = formats.Length > 1 && !string.IsNullOrEmpty(formats[1]) ? formats[1] : "P DDD° MM.MMM'";

@@ -1,7 +1,7 @@
-﻿using Mapsui.Extensions;
-using Mapsui.Geometries;
-using Mapsui.Rendering.Skia.Extensions;
+﻿using Mapsui.Rendering.Skia.Extensions;
+using Mapsui.Nts.Extensions;
 using Mapsui.Styles;
+using NetTopologySuite.Geometries;
 using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia
@@ -13,11 +13,11 @@ namespace Mapsui.Rendering.Skia
         {
             if (style is LabelStyle labelStyle)
             {
-                if (polygon.BoundingBox != null)
+                if (polygon.Envelope is not null)
                 {
-                    var worldCenter = polygon.BoundingBox.Centroid;
+                    var worldCenter = polygon.Envelope.Centroid;
                     var center = viewport.WorldToScreen(worldCenter.X, worldCenter.Y).ToPoint();
-                    LabelRenderer.Draw(canvas, labelStyle, feature, center, opacity);
+                    LabelRenderer.Draw(canvas, labelStyle, feature, center.X, center.Y, opacity);
                 }
             }
             else if (style is StyleCollection styleCollection)

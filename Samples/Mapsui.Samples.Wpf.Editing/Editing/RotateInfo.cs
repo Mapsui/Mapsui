@@ -1,6 +1,5 @@
-﻿using Mapsui.Geometries;
-using Mapsui.GeometryLayers;
-using Mapsui.Providers;
+﻿using Mapsui.Nts;
+using NetTopologySuite.Geometries;
 
 namespace Mapsui.Samples.Wpf.Editing.Editing
 {

@@ -3,10 +3,11 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using Mapsui.Geometries;
-using Mapsui.GeometryLayers;
+using Mapsui.Nts;
 using Mapsui.Styles;
 using Mapsui.UI.Objects;
+using NetTopologySuite.Geometries;
+using Mapsui.Nts.Extensions;
 #if __MAUI__
 using Mapsui.UI.Maui.Extensions;
 using Mapsui.UI.Maui.Utils;
@@ -23,6 +24,8 @@ namespace Mapsui.UI.Forms
 {
     public class Polyline : Drawable
     {
+        // Todo: Rename, Polyline indicates a MultiLineString but it is a single LineString.
+
         private readonly ObservableRangeCollection<Position> _positions = new ObservableRangeCollection<Position>();
 
         /// <summary>
@@ -61,14 +64,9 @@ namespace Mapsui.UI.Forms
             {
                 case nameof(Positions):
                     if (Feature == null)
-                    {
-                        this.CreateFeature();
-                    }
+                        CreateFeature();
                     else
-                    {
-                        Feature.Geometry = new LineString(Positions.Select(p => p.ToPoint()).ToList());
-                    }
-
+                        Feature.Geometry = Positions.Select(p => p.ToCoordinate()).ToLineString();
                     break;
             }
         }
@@ -78,21 +76,21 @@ namespace Mapsui.UI.Forms
             OnPropertyChanged(nameof(Positions));
         }
 
-        private readonly object sync = new object();
+        private readonly object _sync = new ();
 
         /// <summary>
         /// Create feature
         /// </summary>
         private void CreateFeature()
         {
-            lock (sync)
+            lock (_sync)
             {
                 if (Feature == null)
                 {
                     // Create a new one
                     Feature = new GeometryFeature
                     {
-                        Geometry = new LineString(Positions.Select(p => p.ToPoint()).ToList()),
+                        Geometry = new LineString(Positions.Select(p => p.ToCoordinate()).ToArray()),
                         ["Label"] = Label,
                     };
                     Feature.Styles.Clear();

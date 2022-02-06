@@ -7,7 +7,6 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using Mapsui.Extensions;
-using Mapsui.GeometryLayers;
 using Mapsui.Layers;
 using Mapsui.Samples.Wpf.Editing.Editing;
 using Mapsui.Samples.Wpf.Editing.Utilities;
@@ -94,7 +93,7 @@ namespace Mapsui.Samples.Wpf.Editing
                 Margin = new Thickness(4)
             };
 
-            radioButton.Click += (s, a) => {
+            radioButton.Click += (_, _) => {
                 MapControl!.Map?.Layers.Clear();
                 MapControl.Map = sample.Value();
 
@@ -165,7 +164,7 @@ namespace Mapsui.Samples.Wpf.Editing
             _targetLayer.Clear();
 
             _editManager.EditMode = EditMode.Modify;
-            Loaded += (sender, args) => {
+            Loaded += (_, _) => {
                 var extent = _editManager.Layer.Extent!.Grow(_editManager.Layer.Extent.Width * 0.2);
                 MapControl.Navigator.NavigateTo(extent);
             };

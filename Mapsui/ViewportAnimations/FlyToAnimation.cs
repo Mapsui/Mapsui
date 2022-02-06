@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Mapsui.Geometries;
 using Mapsui.Utilities;
 
 namespace Mapsui.ViewportAnimations

@@ -17,7 +17,6 @@
 
 using System.Collections.Generic;
 using Mapsui.Animations;
-using Mapsui.Geometries;
 using Mapsui.Utilities;
 
 namespace Mapsui

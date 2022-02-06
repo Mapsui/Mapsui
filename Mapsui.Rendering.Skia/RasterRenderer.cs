@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Mapsui.Geometries;
 using Mapsui.Logging;
-using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using SkiaSharp;
 
@@ -51,7 +49,7 @@ namespace Mapsui.Rendering.Skia
 
                     canvas.SetMatrix(matrix);
 
-                    var destination = new BoundingBox(0.0, 0.0, extent.Width, extent.Height);
+                    var destination = new SKRect(0.0f, 0.0f, (float)extent.Width, (float)extent.Height);
 
                     switch (bitmapInfo.Type)
                     {
@@ -67,7 +65,6 @@ namespace Mapsui.Rendering.Skia
                 }
                 else
                 {
-                    var destination = WorldToScreen(viewport, extent);
                     switch (bitmapInfo.Type)
                     {
                         case BitmapType.Bitmap:
@@ -110,22 +107,22 @@ namespace Mapsui.Rendering.Skia
             return matrix;
         }
 
-        internal static BoundingBox WorldToScreen(IReadOnlyViewport viewport, MRect rect)
+        private static SKRect WorldToScreen(IReadOnlyViewport viewport, MRect rect)
         {
             var first = viewport.WorldToScreen(rect.Min.X, rect.Min.Y);
             var second = viewport.WorldToScreen(rect.Max.X, rect.Max.Y);
-            return new BoundingBox
+            return new SKRect
             (
-                Math.Min(first.X, second.X),
-                Math.Min(first.Y, second.Y),
-                Math.Max(first.X, second.X),
-                Math.Max(first.Y, second.Y)
+                (float)Math.Min(first.X, second.X),
+                (float)Math.Min(first.Y, second.Y),
+                (float)Math.Max(first.X, second.X),
+                (float)Math.Max(first.Y, second.Y)
             );
         }
 
-        internal static BoundingBox RoundToPixel(BoundingBox boundingBox)
+        private static SKRect RoundToPixel(SKRect boundingBox)
         {
-            return new BoundingBox(
+            return new SKRect(
                 (float)Math.Round(boundingBox.Left),
                 (float)Math.Round(Math.Min(boundingBox.Top, boundingBox.Bottom)),
                 (float)Math.Round(boundingBox.Right),

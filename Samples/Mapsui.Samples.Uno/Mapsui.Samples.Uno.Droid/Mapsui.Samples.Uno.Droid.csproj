@@ -96,10 +96,6 @@
     <AndroidResource Include="Resources\values\Styles.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Mapsui.Geometries\Mapsui.Geometries.csproj">
-      <Project>{ee55b62d-ffa2-4c24-a4ad-7a47ace55ce5}</Project>
-      <Name>Mapsui.Geometries</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\Mapsui.Layers.Tiling\Mapsui.Layers.Tiling.csproj">
       <Project>{08072eca-528c-47d5-82a3-85e54300c22a}</Project>
       <Name>Mapsui.Layers.Tiling</Name>

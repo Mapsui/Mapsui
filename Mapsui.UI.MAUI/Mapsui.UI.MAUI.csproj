@@ -47,7 +47,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Mapsui.Geometries\Mapsui.Geometries.csproj" />
+	  <ProjectReference Include="..\Mapsui.Nts\Mapsui.Nts.csproj" />
 	  <ProjectReference Include="..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
 	  <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
 	</ItemGroup>

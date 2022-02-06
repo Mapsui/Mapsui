@@ -1,5 +1,4 @@
 ﻿using System;
-using Mapsui.Geometries;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using SkiaSharp;
@@ -9,19 +8,19 @@ namespace Mapsui.Rendering.Skia
     public class SymbolStyleRenderer
     {
         public static void Draw(SKCanvas canvas, VectorStyle vectorStyle,
-            Point destination, float opacity, SymbolType symbolType)
+            double x, double y, float opacity, SymbolType symbolType)
         {
             canvas.Save();
-            canvas.Translate((float)destination.X, (float)destination.Y);
+            canvas.Translate((float)x, (float)y);
             Draw(canvas, vectorStyle, opacity, symbolType);
             canvas.Restore();
         }
 
         public static void Draw(SKCanvas canvas, SymbolStyle style,
-            Point destination, float opacity, SymbolType symbolType, double mapRotation)
+            double x, double y, float opacity, SymbolType symbolType, double mapRotation)
         {
             canvas.Save();
-            canvas.Translate((float)destination.X, (float)destination.Y);
+            canvas.Translate((float)x, (float)y);
             canvas.Scale((float)style.SymbolScale, (float)style.SymbolScale);
             if (style.SymbolOffset.IsRelative)
                 canvas.Translate((float)(SymbolStyle.DefaultWidth * style.SymbolOffset.X), (float)(-SymbolStyle.DefaultWidth * style.SymbolOffset.Y));
@@ -114,14 +113,17 @@ namespace Mapsui.Rendering.Skia
             var inradius = altitude / 3.0;
             var circumradius = 2.0 * inradius;
 
-            var top = new Point(x, y - circumradius);
-            var left = new Point(x + sideLength * -0.5, y + inradius);
-            var right = new Point(x + sideLength * 0.5, y + inradius);
+            var topX = x; 
+            var topY = y - circumradius;
+            var leftX = x + sideLength * -0.5;
+            var leftY = y + inradius;
+            var rightX = x + sideLength * 0.5;
+            var rightY = y + inradius;
 
             using var path = new SKPath();
-            path.MoveTo((float)top.X, (float)top.Y);
-            path.LineTo((float)left.X, (float)left.Y);
-            path.LineTo((float)right.X, (float)right.Y);
+            path.MoveTo(topX, (float)topY);
+            path.LineTo((float)leftX, (float)leftY);
+            path.LineTo((float)rightX, (float)rightY);
             path.Close();
 
             if ((fillColor != null) && fillColor.Color.Alpha != 0) canvas.DrawPath(path, fillColor);
