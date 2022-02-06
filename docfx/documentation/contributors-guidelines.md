@@ -51,3 +51,13 @@ When we have direct and indirect dependecies on a nuget package those should all
 
 ## No rendering in the draw/paint loop
 Mapsui strives for optiomal performance, so in the rendering loop the objects should be ready to be painted to canvas directly without any need for preparation. This is currently (4.0.0-beta.1) not the case. For instance in the case of tiles they are rendered on the first iteration, after that the cached version is used. This needs to be improved.
+### About the terminology
+**Rendering**: Create a platform specific resource.
+```csharp
+SKPath path = ToSKPath(feature, style);
+```
+
+**Drawing or Painting**: Draw the platform specific resource to the canvas.
+```csharp
+canvas.DrawPath(path, paint);
+```
