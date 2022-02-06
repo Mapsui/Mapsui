@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using Mapsui.Extensions;
-using Mapsui.Geometries;
 using Mapsui.Layers;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
@@ -122,16 +121,16 @@ namespace Mapsui.Rendering.Skia
 
                     canvas.SetMatrix(matrix);
 
-                    var destination = new BoundingBox(0.0, 0.0, extent.Width, extent.Height);
+                    var destination = new SKRect(0.0f, 0.0f, Convert.ToSingle(extent.Width), Convert.ToSingle(extent.Height));
 
-                    PictureRenderer.Draw(canvas, picture, RasterRenderer.RoundToPixel(destination).ToSkia(), opacity);
+                    PictureRenderer.Draw(canvas, picture, RasterRenderer.RoundToPixel(destination), opacity);
 
                     canvas.SetMatrix(priorMatrix);
                 }
                 else
                 {
                     var destination = RasterRenderer.WorldToScreen(viewport, extent);
-                    PictureRenderer.Draw(canvas, picture, RasterRenderer.RoundToPixel(destination).ToSkia(), opacity);
+                    PictureRenderer.Draw(canvas, picture, RasterRenderer.RoundToPixel(destination), opacity);
                 }
             }
         }

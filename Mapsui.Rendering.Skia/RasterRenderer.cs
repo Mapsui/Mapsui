@@ -54,10 +54,10 @@ namespace Mapsui.Rendering.Skia
                     switch (bitmapInfo.Type)
                     {
                         case BitmapType.Bitmap:
-                            BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap, RoundToPixel(destination).ToSkia(), opacity);
+                            BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap, RoundToPixel(destination), opacity);
                             break;
                         case BitmapType.Picture:
-                            PictureRenderer.Draw(canvas, bitmapInfo.Picture, RoundToPixel(destination).ToSkia(), opacity);
+                            PictureRenderer.Draw(canvas, bitmapInfo.Picture, RoundToPixel(destination), opacity);
                             break;
                     }
 
@@ -65,13 +65,14 @@ namespace Mapsui.Rendering.Skia
                 }
                 else
                 {
+                    var destination = WorldToScreen(viewport, extent);
                     switch (bitmapInfo.Type)
                     {
                         case BitmapType.Bitmap:
-                            BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap, RoundToPixel(destination).ToSkia(), opacity);
+                            BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap, RoundToPixel(destination), opacity);
                             break;
                         case BitmapType.Picture:
-                            PictureRenderer.Draw(canvas, bitmapInfo.Picture, RoundToPixel(destination).ToSkia(), opacity);
+                            PictureRenderer.Draw(canvas, bitmapInfo.Picture, RoundToPixel(destination), opacity);
                             break;
                     }
                 }
@@ -107,7 +108,7 @@ namespace Mapsui.Rendering.Skia
             return matrix;
         }
 
-        private static SKRect WorldToScreen(IReadOnlyViewport viewport, MRect rect)
+        internal static SKRect WorldToScreen(IReadOnlyViewport viewport, MRect rect)
         {
             var first = viewport.WorldToScreen(rect.Min.X, rect.Min.Y);
             var second = viewport.WorldToScreen(rect.Max.X, rect.Max.Y);
@@ -120,7 +121,7 @@ namespace Mapsui.Rendering.Skia
             );
         }
 
-        private static SKRect RoundToPixel(SKRect boundingBox)
+        internal static SKRect RoundToPixel(SKRect boundingBox)
         {
             return new SKRect(
                 (float)Math.Round(boundingBox.Left),
