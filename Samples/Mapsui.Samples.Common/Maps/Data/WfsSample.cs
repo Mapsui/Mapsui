@@ -21,10 +21,12 @@ namespace Mapsui.Samples.Common.Maps.Data
         public void Setup(IMapControl mapControl)
         {
             mapControl.Map = CreateMap();
+            var bb = new MRect(1100000.0, 5800000.0, 1400000.0, 6000000.0);
+            mapControl.Navigator.NavigateTo(bb);
         }
 
         private const string wfsUri = "https://geoservices.buergernetz.bz.it/geoserver/ows";
-        private const string crs = "EPSG:25832";
+        private const string crs = "EPSG:3857";  // originally: "EPSG:25832"
         private const string layerName = "MAPS_DISTRICTS_VW";
         private const string nsPrefix = "gvcc_maps";
         private const string labelField = "CAMM_NOME_DE";
@@ -38,12 +40,6 @@ namespace Mapsui.Samples.Common.Maps.Data
                 map.Layers.Add(CreateTileLayer(CreateTileSource()));
                 map.Layers.Add(CreateWfsLayer(provider));
                 map.Layers.Add(CreateLabelLayer(provider));
-
-                var bb = new MRect(550000, 5050000, 800000, 5400000);
-                map.Limiter = new ViewportLimiterKeepWithin
-                {
-                    PanLimits = bb
-                };
 
                 return map;
 
@@ -101,18 +97,20 @@ namespace Mapsui.Samples.Common.Maps.Data
             };
         }
 
-
-
+        //public static HttpTileSource CreateTileSource()
+        //{
+        //    using (var httpClient = new HttpClient())
+        //    using (var response = httpClient.GetStreamAsync("https://geoservices.buergernetz.bz.it/mapproxy/service/ows?SERVICE=WMTS&REQUEST=GetCapabilities").Result)
+        //    {
+        //        var tileSources = WmtsParser.Parse(response);
+        //        return tileSources.First(t =>
+        //            ((WmtsTileSchema) t.Schema).Layer == "P_BZ_OF_2014_2015_2017" && t.Schema.Srs == "EPSG:25832");
+        //    }
+        //}
 
         public static HttpTileSource CreateTileSource()
         {
-            using (var httpClient = new HttpClient())
-            using (var response = httpClient.GetStreamAsync("https://geoservices.buergernetz.bz.it/mapproxy/service/ows?SERVICE=WMTS&REQUEST=GetCapabilities").Result)
-            {
-                var tileSources = WmtsParser.Parse(response);
-                return tileSources.First(t =>
-                    ((WmtsTileSchema)t.Schema).Layer == "P_BZ_OF_2014_2015_2017" && t.Schema.Srs == "EPSG:25832");
-            }
+            return BruTile.Predefined.KnownTileSources.Create(BruTile.Predefined.KnownTileSource.OpenStreetMap);
         }
 
         public static ILayer CreateTileLayer(ITileSource tileSource, string? name = null)
