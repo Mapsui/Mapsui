@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading;
 using BruTile.Predefined;
 using Mapsui.Extensions;
-using Mapsui.GeometryLayers;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Rendering;
