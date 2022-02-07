@@ -55,7 +55,7 @@ namespace Mapsui.Samples.Common.Maps.Data
         {
             return new Layer(layerName)
             {
-                Style = new VectorStyle { Fill = new Brush { Color = Color.Red } },
+                Style = new VectorStyle { Fill = new Brush { Color = Color.FromArgb(192, 255, 0, 0) } },
                 DataSource = provider,
                 IsMapInfoLayer = true
             };
