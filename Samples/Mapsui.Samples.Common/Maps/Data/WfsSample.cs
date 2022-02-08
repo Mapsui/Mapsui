@@ -29,7 +29,7 @@ namespace Mapsui.Samples.Common.Maps.Data
         private const string crs = "EPSG:3857";  // originally: "EPSG:25832"
         private const string layerName = "MAPS_DISTRICTS_VW";
         private const string nsPrefix = "gvcc_maps";
-        private const string labelField = "CAMM_NOME_DE";
+        private const string labelField = "DIST_DESCR_DE";
 
         public static Map CreateMap()
         {
