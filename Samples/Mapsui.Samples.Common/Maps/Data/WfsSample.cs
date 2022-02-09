@@ -21,8 +21,6 @@ namespace Mapsui.Samples.Common.Maps.Data
         public void Setup(IMapControl mapControl)
         {
             mapControl.Map = CreateMap();
-            var bb = new MRect(1100000.0, 5800000.0, 1400000.0, 6000000.0);
-            mapControl.Navigator.NavigateTo(bb);
         }
 
         private const string wfsUri = "https://geoservices.buergernetz.bz.it/geoserver/ows";
@@ -40,6 +38,8 @@ namespace Mapsui.Samples.Common.Maps.Data
                 map.Layers.Add(CreateTileLayer(CreateTileSource()));
                 map.Layers.Add(CreateWfsLayer(provider));
                 map.Layers.Add(CreateLabelLayer(provider));
+
+                map.Home = n => n.NavigateTo(new MPoint(1250000.0, 5900000.0), map.Resolutions[10]);
 
                 return map;
 
