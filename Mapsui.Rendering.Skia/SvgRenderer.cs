@@ -1,5 +1,4 @@
 ﻿using System;
-using Mapsui.Styles;
 using SkiaSharp;
 using Svg.Skia;
 
@@ -8,15 +7,8 @@ namespace Mapsui.Rendering.Skia
     public class SvgRenderer
     {
         public static void Draw(SKCanvas canvas, SKSvg svg, float x, float y, float orientation = 0,
-            float offsetX = 0, float offsetY = 0,
-            LabelStyle.HorizontalAlignmentEnum horizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left,
-            LabelStyle.VerticalAlignmentEnum verticalAlignment = LabelStyle.VerticalAlignmentEnum.Top,
-            float opacity = 1f,
-            float scale = 1f)
+            float offsetX = 0, float offsetY = 0, float opacity = 1f, float scale = 1f)
         {
-            // todo: I assume we also need to apply opacity.
-            // todo: It seems horizontalAlignment and verticalAlignment would make sense too. Is this similar to Anchor?
-
             if (svg.Picture == null)
                 return;
 

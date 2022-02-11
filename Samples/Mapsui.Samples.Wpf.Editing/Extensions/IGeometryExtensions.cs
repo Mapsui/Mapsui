@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Mapsui.Geometries;
+using NetTopologySuite.Geometries;
 
 namespace Mapsui.Samples.Wpf.Editing
 {
@@ -13,42 +13,36 @@ namespace Mapsui.Samples.Wpf.Editing
         /// </summary>
         /// <param name="geometry"></param>
         /// <returns></returns>
-        public static IList<IList<Point>> GetVertexLists(this IGeometry geometry)
+        public static IList<IList<Coordinate>> GetVertexLists(this Geometry geometry)
         {
             if (geometry is Point point)
             {
-                return new List<IList<Point>> { new List<Point> { point } };
+                return new List<IList<Coordinate>> { new List<Coordinate> { point.Coordinate } };
             }
             if (geometry is LineString lineString)
             {
-                return new List<IList<Point>> { new List<Point>(lineString.Vertices) };
+                return new List<IList<Coordinate>> { new List<Coordinate>(lineString.Coordinates) };
             }
             if (geometry is Polygon polygon)
             {
-                var lists = new List<IList<Point>>
+                var lists = new List<IList<Coordinate>>
                 {
-                    polygon.ExteriorRing?.Vertices ?? new List<Point>()
+                    polygon.ExteriorRing?.Coordinates.ToList() ?? new List<Coordinate>()
                 };
-                lists.AddRange(polygon.InteriorRings.Select(i => i.Vertices));
+                lists.AddRange(polygon.InteriorRings.Select(i => i.Coordinates));
                 return lists;
             }
             throw new NotImplementedException();
         }
 
-        public static IList<Point> MainVertices(this IGeometry geometry)
+        public static List<Coordinate> MainCoordinates(this Geometry geometry)
         {
             if (geometry is LineString lineString)
-            {
-                return lineString.Vertices;
-            }
+                return lineString.Coordinates.ToList();
             if (geometry is Polygon polygon)
-            {
-                return polygon.ExteriorRing?.Vertices ?? new List<Point>();
-            }
+                return polygon.ExteriorRing?.Coordinates.ToList() ?? new List<Coordinate>();
             if (geometry is Point point)
-            {
-                return new List<Point> { point };
-            }
+                return new List<Coordinate> { point.Coordinate };
             throw new NotImplementedException();
         }
     }

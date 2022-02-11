@@ -8,16 +8,14 @@ namespace Mapsui.Rendering.Skia
     {
         // The field below is static for performance. Effect has not been measured.
         // Note that the default FilterQuality is None. Setting it explicitly to Low increases the quality.
-        private static readonly SKPaint DefaultPaint = new SKPaint { FilterQuality = SKFilterQuality.Low };
+        private static readonly SKPaint DefaultPaint = new() { FilterQuality = SKFilterQuality.Low };
 
         public static void Draw(SKCanvas canvas, SKImage bitmap, SKRect rect, float layerOpacity = 1f)
         {
             var skPaint = GetPaint(layerOpacity, out var dispose);
             canvas.DrawImage(bitmap, rect, skPaint);
             if (dispose)
-            {
                 skPaint.Dispose();
-            }
         }
 
         public static void Draw(SKCanvas canvas, SKImage? bitmap, float x, float y, float rotation = 0,

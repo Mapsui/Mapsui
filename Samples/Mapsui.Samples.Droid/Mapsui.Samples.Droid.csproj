@@ -66,5 +66,25 @@
   </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Remove="C:\Users\ts\.nuget\packages\microsoft.visualstudio.threading.analyzers\17.0.64\build\AdditionalFiles\vs-threading.MembersRequiringMainThread.txt" />
+    <ProjectReference Include="..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj">
+      <Project>{DEA6E9AE-2B6A-4E83-83B7-E9DF0E492301}</Project>
+      <Name>Mapsui.Rendering.Skia</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Mapsui.UI.Android\Mapsui.UI.Android.csproj">
+      <Project>{a9ed0aa7-b6f0-4946-8a08-7c531e5cfa9b}</Project>
+      <Name>Mapsui.UI.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Mapsui\Mapsui.csproj">
+      <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>
+      <Name>Mapsui</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj">
+      <Project>{508ae811-a03a-4138-8ccc-abde03c67010}</Project>
+      <Name>Mapsui.Samples.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj">
+      <Project>{AB12E84B-E58B-4DFA-8050-C9E69DE707B4}</Project>
+      <Name>Mapsui.Samples.CustomWidget</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

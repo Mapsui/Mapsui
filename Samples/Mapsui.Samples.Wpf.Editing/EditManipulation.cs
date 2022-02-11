@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
-using Mapsui.Extensions;
+using Mapsui.Nts.Extensions;
 using Mapsui.Samples.Wpf.Editing.Editing;
 using Mapsui.UI.Wpf;
 
@@ -11,7 +11,7 @@ namespace Mapsui.Samples.Wpf.Editing
         Down,
         Up,
         Dragging, // moving with mouse down
-        Moving, // movind with mouse up
+        Moving, // moving with mouse up
         DoubleClick
     }
 
@@ -47,20 +47,20 @@ namespace Mapsui.Samples.Wpf.Editing
                         {
                             if (IsShiftDown())
                             {
-                                return editManager.TryDeleteVertex(
+                                return editManager.TryDeleteCoordinate(
                                     mapControl.GetMapInfo(screenPosition, editManager.VertexRadius), editManager.VertexRadius);
                             }
-                            return editManager.TryInsertVertex(
+                            return editManager.TryInsertCoordinate(
                                 mapControl.GetMapInfo(screenPosition, editManager.VertexRadius));
                         }
-                        return editManager.AddVertex(mapControl.Viewport.ScreenToWorld(screenPosition).ToPoint());
+                        return editManager.AddVertex(mapControl.Viewport.ScreenToWorld(screenPosition).ToCoordinate());
                     }
                     return false;
                 case MouseState.Down:
                     {
                         _mouseDownPosition = screenPosition;
                         // Take into account VertexRadius in feature select, because the objective
-                        // is vertext select.
+                        // is to select the vertex.
                         var mapInfo = mapControl.GetMapInfo(screenPosition, editManager.VertexRadius);
                         if (editManager.EditMode == EditMode.Modify && mapInfo?.Feature != null)
                         {
@@ -89,7 +89,7 @@ namespace Mapsui.Samples.Wpf.Editing
                         return false;
                     }
                 case MouseState.Moving:
-                    editManager.HoveringVertex(mapControl?.GetMapInfo(screenPosition));
+                    editManager.HoveringVertex(mapControl.GetMapInfo(screenPosition));
                     return false;
                 case MouseState.DoubleClick:
                     _inDoubleClick = true;
@@ -101,7 +101,7 @@ namespace Mapsui.Samples.Wpf.Editing
             }
         }
 
-        private bool IsShiftDown()
+        private static bool IsShiftDown()
         {
             return Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift);
         }

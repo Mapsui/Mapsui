@@ -7,9 +7,9 @@ using Android.Graphics;
 using Android.OS;
 using Android.Util;
 using Android.Views;
-using Mapsui.Geometries.Utilities;
 using Mapsui.Logging;
 using Mapsui.UI.Android.Extensions;
+using Mapsui.Utilities;
 using SkiaSharp.Views.Android;
 using Math = System.Math;
 

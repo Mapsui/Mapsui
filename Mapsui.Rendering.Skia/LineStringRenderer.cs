@@ -1,7 +1,6 @@
-using Mapsui.Extensions;
-using Mapsui.Geometries;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
+using NetTopologySuite.Geometries;
 using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia
@@ -17,7 +16,7 @@ namespace Mapsui.Rendering.Skia
                     return;
 
                 var center = viewport.WorldToScreen(feature.Extent.Centroid);
-                LabelRenderer.Draw(canvas, labelStyle, feature, center.ToPoint(), opacity);
+                LabelRenderer.Draw(canvas, labelStyle, feature, center.X, center.Y, opacity);
             }
             else
             {
@@ -44,7 +43,7 @@ namespace Mapsui.Rendering.Skia
                     dashOffset = vectorStyle.Line.DashOffset;
                 }
 
-                using var path = lineString.Vertices.ToSkiaPath(viewport, canvas.LocalClipBounds);
+                using var path = lineString.ToSkiaPath(viewport, canvas.LocalClipBounds);
                 using var paint = new SKPaint { IsAntialias = true };
                 paint.IsStroke = true;
                 paint.StrokeWidth = lineWidth;

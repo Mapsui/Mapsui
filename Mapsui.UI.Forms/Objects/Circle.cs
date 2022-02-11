@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using Mapsui.GeometryLayers;
+using Mapsui.Nts;
 using Mapsui.Styles;
 using Mapsui.UI.Objects;
+using NetTopologySuite.Geometries;
+
 #if __MAUI__
 using Mapsui.UI.Maui.Extensions;
 using Microsoft.Maui;
@@ -37,6 +40,8 @@ namespace Mapsui.UI.Forms
         {
             CreateFeature();
         }
+
+        private readonly object _sync = new();
 
         /// <summary>
         /// Center of circle
@@ -114,8 +119,6 @@ namespace Mapsui.UI.Forms
             }
         }
 
-        private readonly object _sync = new object();
-
         private void CreateFeature()
         {
             lock (_sync)
@@ -125,8 +128,7 @@ namespace Mapsui.UI.Forms
                     // Create a new one
                     Feature = new GeometryFeature
                     {
-                        Geometry = new Geometries.Polygon(),
-                        ["Label"] = Label,
+                        ["Label"] = Label
                     };
                     Feature.Styles.Clear();
                     Feature.Styles.Add(new VectorStyle
@@ -151,15 +153,17 @@ namespace Mapsui.UI.Forms
             var centerY = Center.ToMapsui().Y;
             var radius = Radius.Meters / Math.Cos(Center.Latitude / 180.0 * Math.PI);
             var increment = 360.0 / (Quality < 3.0 ? 3.0 : (Quality > 360.0 ? 360.0 : Quality));
-            var exteriorRing = new Geometries.LinearRing();
+            var exteriorRing = new List<Coordinate>();
 
             for (double angle = 0; angle < 360; angle += increment)
             {
                 var angleRad = angle / 180.0 * Math.PI;
-                exteriorRing.Vertices.Add(new Geometries.Point(radius * Math.Sin(angleRad) + centerX, radius * Math.Cos(angleRad) + centerY));
+                exteriorRing.Add(new Coordinate(radius * Math.Sin(angleRad) + centerX, radius * Math.Cos(angleRad) + centerY));
             }
 
-            Feature!.Geometry = new Geometries.Polygon(exteriorRing);
+            exteriorRing.Add(exteriorRing[0].Copy());
+
+            Feature!.Geometry = new NetTopologySuite.Geometries.Polygon(new LinearRing(exteriorRing.ToArray()));
         }
     }
 }

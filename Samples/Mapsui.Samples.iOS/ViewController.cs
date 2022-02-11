@@ -5,11 +5,9 @@ using System.Text;
 using Mapsui.UI.iOS;
 using UIKit;
 using CoreGraphics;
-using Mapsui.GeometryLayers;
 using Mapsui.UI;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
-
 namespace Mapsui.Samples.iOS
 {
     public partial class ViewController : UIViewController
@@ -46,8 +44,6 @@ namespace Mapsui.Samples.iOS
                 result.Append($"{field}={feature[field]}, ");
             }
 
-            if (feature is GeometryFeature geometryFeature)
-                result.Append($"Geometry={geometryFeature.Geometry}");
             return result.ToString();
         }
 

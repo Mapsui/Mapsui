@@ -33,22 +33,20 @@ jobs:
       with:
          dotnet-version: | 
            5.0.x
-           6.0.x
-         include-prerelease: true    
-    - name: install maui
-      run: dotnet workload install maui
+      # Disabled in attempt to fix build     6.0.x
+      # Disabled in attempt to fix build server error: include-prerelease: true
     - name: Restore dependencies
       run: nuget restore Mapsui.Mac.sln
-    - name: Build Mapsui.GeometryLayers
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.GeometryLayers/Mapsui.GeometryLayers.csproj
-    - name: Build Mapsui.Layers.Tiling
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Layers.Tiling/Mapsui.Layers.Tiling.csproj
-    - name: Build Mapsui.Layers.ArcGIS
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Layers.ArcGIS/Mapsui.Layers.ArcGIS.csproj
     - name: Build Mapsui
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui/Mapsui.csproj
     - name: Build Mapsui.Rendering.Skia
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Rendering.Skia/Mapsui.Rendering.Skia.csproj
+    - name: Build Mapsui.Layers.Tiling
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Layers.Tiling/Mapsui.Layers.Tiling.csproj
+    - name: Build Mapsui.Nts
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Nts/Mapsui.Nts.csproj
+    - name: Build Mapsui.Layers.ArcGIS
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Layers.ArcGIS/Mapsui.Layers.ArcGIS.csproj
     - name: Build Mapsui.UI.Android
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Android/Mapsui.UI.Android.csproj
     - name: Build Mapsui.UI.iOS
@@ -77,7 +75,7 @@ jobs:
          dotnet-version: | 
            5.0.x
            6.0.x
-         include-prerelease: true    
+         include-prerelease: true
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.0.5
       with:
@@ -94,16 +92,16 @@ jobs:
       run: maui-check --fix --non-interactive --skip vswin --skip edgewebview2 --skip androidemulator --skip dotnetworkloads-6.0.100 --skip dotnet --skip dotnet-workload-dedup --skip dotnetsentinel
     - name: Restore dependencies
       run: nuget restore Mapsui.sln
-    - name: Build Mapsui.GeometryLayers
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.GeometryLayers/Mapsui.GeometryLayers.csproj
-    - name: Build Mapsui.Layers.Tiling
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Layers.Tiling/Mapsui.Layers.Tiling.csproj
-    - name: Build Mapsui.Layers.ArcGIS
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Layers.ArcGIS/Mapsui.Layers.ArcGIS.csproj
     - name: Build Mapsui
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui/Mapsui.csproj
     - name: Build Mapsui.Rendering.Skia
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Rendering.Skia/Mapsui.Rendering.Skia.csproj
+    - name: Build Mapsui.Layers.Tiling
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Layers.Tiling/Mapsui.Layers.Tiling.csproj
+    - name: Build Mapsui.Nts
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Nts/Mapsui.Nts.csproj
+    - name: Build Mapsui.Layers.ArcGIS
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Layers.ArcGIS/Mapsui.Layers.ArcGIS.csproj
     - name: Build Mapsui.UI.Wpf
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Wpf/Mapsui.UI.Wpf.csproj
     - name: Build Mapsui.UI.Uwp
@@ -154,7 +152,7 @@ jobs:
          dotnet-version: | 
            5.0.x
            6.0.x
-         include-prerelease: true    
+         include-prerelease: true
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.0.5
       with:
@@ -171,16 +169,16 @@ jobs:
       run: maui-check --fix --non-interactive --skip vswin --skip edgewebview2 --skip androidemulator --skip dotnetworkloads-6.0.100 --skip dotnet --skip dotnet-workload-dedup --skip dotnetsentinel
     - name: Restore dependencies
       run: nuget restore Mapsui.Maui.sln
-    - name: Build Mapsui.GeometryLayers
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.GeometryLayers/Mapsui.GeometryLayers.csproj
-    - name: Build Mapsui.Layers.Tiling
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Layers.Tiling/Mapsui.Layers.Tiling.csproj
-    - name: Build Mapsui.Layers.ArcGIS
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Layers.ArcGIS/Mapsui.Layers.ArcGIS.csproj
     - name: Build Mapsui
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui/Mapsui.csproj
     - name: Build Mapsui.Rendering.Skia
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Rendering.Skia/Mapsui.Rendering.Skia.csproj    
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Rendering.Skia/Mapsui.Rendering.Skia.csproj
+    - name: Build Mapsui.Layers.Tiling
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Layers.Tiling/Mapsui.Layers.Tiling.csproj
+    - name: Build Mapsui.Nts
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Nts/Mapsui.Nts.csproj
+    - name: Build Mapsui.Layers.ArcGIS
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Layers.ArcGIS/Mapsui.Layers.ArcGIS.csproj
     - name: Build Mapsui.UI.Maui
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Maui/Mapsui.UI.Maui.csproj    
     - name: Generate nuget package (Mapsui.Maui)
@@ -189,4 +187,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: nupkg.win
-        path: Artifacts/*.nupkg  
+        path: Artifacts/*.nupkg

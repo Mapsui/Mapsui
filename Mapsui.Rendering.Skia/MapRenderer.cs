@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Mapsui.GeometryLayers;
 using Mapsui.Layers;
 using Mapsui.Logging;
+using Mapsui.Nts;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Rendering.Skia.SkiaWidgets;
@@ -163,15 +163,15 @@ namespace Mapsui.Rendering.Skia
             }
 
             // No special style renderer handled this up to now, than try standard renderers
-
-            if (feature is GeometryFeature geometryFeature)
-                GeometryRenderer.Draw(canvas, viewport, style, layerOpacity, geometryFeature, _symbolCache);
-            else if (feature is PointFeature pointFeature)
+            if (feature is GeometryFeature geometryFeatureNts)
+                GeometryRenderer.Draw(canvas, viewport, style, layerOpacity, geometryFeatureNts, _symbolCache);
+            if (feature is PointFeature pointFeature)
                 PointRenderer.Draw(canvas, viewport, style, pointFeature, pointFeature.Point.X, pointFeature.Point.Y, _symbolCache, layerOpacity * style.Opacity);
             else if (feature is RectFeature rectFeature)
                 RectRenderer.Draw(canvas, viewport, style, rectFeature, layerOpacity * style.Opacity);
             else if (feature is RasterFeature rasterFeature)
                 RasterRenderer.Draw(canvas, viewport, style, rasterFeature, rasterFeature.Raster, layerOpacity * style.Opacity, _tileCache, _currentIteration);
+
         }
 
         private void Render(object canvas, IReadOnlyViewport viewport, IEnumerable<IWidget> widgets, float layerOpacity)

@@ -7,17 +7,13 @@ namespace Mapsui.Rendering.Skia.Extensions
     {
         public static SKStrokeJoin ToSkia(this StrokeJoin penStrokeJoin)
         {
-            switch (penStrokeJoin)
+            return penStrokeJoin switch
             {
-                case StrokeJoin.Miter:
-                    return SKStrokeJoin.Miter;
-                case StrokeJoin.Round:
-                    return SKStrokeJoin.Round;
-                case StrokeJoin.Bevel:
-                    return SKStrokeJoin.Bevel;
-                default:
-                    return SKStrokeJoin.Miter;
-            }
+                StrokeJoin.Miter => SKStrokeJoin.Miter,
+                StrokeJoin.Round => SKStrokeJoin.Round,
+                StrokeJoin.Bevel => SKStrokeJoin.Bevel,
+                _ => SKStrokeJoin.Miter,
+            };
         }
     }
 }

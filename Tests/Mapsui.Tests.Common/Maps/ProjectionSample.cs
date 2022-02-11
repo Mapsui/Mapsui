@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
-using Mapsui.Geometries;
-using Mapsui.Geometries.WellKnownText;
-using Mapsui.GeometryLayers;
 using Mapsui.Layers;
+using Mapsui.Nts;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Utilities;
+using NetTopologySuite.IO;
 
 #pragma warning disable IDISP001 // Dispose created
 
@@ -33,7 +32,6 @@ namespace Mapsui.Tests.Common.Maps
             // 3) The projection to project from the DataSource CRS to the Map CRS.
 
             var geometryLayer = CreateAmsterdamLayer();
-            var extent = geometryLayer.Extent?.Grow(geometryLayer.Extent.Width * 0.1);
             var map = new Map
             {
                 CRS = "EPSG:3857", // The Map CRS needs to be set
@@ -60,7 +58,7 @@ namespace Mapsui.Tests.Common.Maps
         {
             var features = new List<GeometryFeature>
             {
-                new GeometryFeature {Geometry = GeometryFromWKT.Parse(WktOfAmsterdam)}
+                new() {Geometry = new WKTReader().Read(WktOfAmsterdam)}
             };
 
             var memoryProvider = new MemoryProvider<GeometryFeature>(features)
