@@ -17,7 +17,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 
 // ReSharper disable NonReadonlyMemberInGetHashCode // todo: Fix this real issue
 namespace Mapsui
@@ -53,14 +52,6 @@ namespace Mapsui
             Max = new MPoint(maxX, maxY);
             CheckMinMax();
         }
-
-        /// <summary>
-        ///     Initializes a bounding box
-        /// </summary>
-        /// <param name="minPoint">Lower left corner</param>
-        /// <param name="maxPoint">Upper right corner</param>
-        public MRect(MPoint minPoint, MPoint maxPoint)
-            : this(minPoint.X, minPoint.Y, maxPoint.X, maxPoint.Y) { }
 
         /// <summary>
         ///     Initializes a new Bounding Box based on the bounds from a set of bounding boxes
@@ -180,24 +171,6 @@ namespace Mapsui
         }
 
         /// <summary>
-        ///     Moves/translates the <see cref="MRect" /> along the the specified vector
-        /// </summary>
-        /// <param name="vector">Offset vector</param>
-        public void Offset(MPoint vector)
-        {
-            Min += vector;
-            Max += vector;
-        }
-
-        public void Offset(double x, double y)
-        {
-            Min.X += x;
-            Min.Y += y;
-            Max.X += x;
-            Max.Y += y;
-        }
-
-        /// <summary>
         ///     Checks whether min values are actually smaller than max values and in that case swaps them.
         /// </summary>
         /// <returns>true if the rect was changed</returns>
@@ -232,24 +205,6 @@ namespace Mapsui
         }
 
         /// <summary>
-        ///     Returns true if this instance touches the <see cref="MRect" />
-        /// </summary>
-        /// <param name="r">
-        ///     <see cref="MRect" />
-        /// </param>
-        /// <returns>True it touches</returns>
-        public bool Touches(MRect r)
-        {
-            for (uint cIndex = 0; cIndex < 2; cIndex++)
-            {
-                if (Min[cIndex] >= r.Min[cIndex] && Min[cIndex] <= r.Min[cIndex] ||
-                    Max[cIndex] >= r.Max[cIndex] && Max[cIndex] <= r.Max[cIndex])
-                    return true;
-            }
-            return false;
-        }
-
-        /// <summary>
         ///     Returns true if this instance contains the <see cref="MRect" />
         /// </summary>
         /// <param name="r">
@@ -267,52 +222,12 @@ namespace Mapsui
         }
 
         /// <summary>
-        ///     Returns true if this instance touches the <see cref="MPoint" />
-        /// </summary>
-        /// <param name="p">Geometry</param>
-        /// <returns>True if touches</returns>
-        public bool Touches(MPoint p)
-        {
-            for (uint cIndex = 0; cIndex < 2; cIndex++)
-            {
-                if (((Min[cIndex] > p[cIndex]) && (Min[cIndex] < p[cIndex])) ||
-                    ((Max[cIndex] > p[cIndex]) && (Max[cIndex] < p[cIndex])))
-                    return true;
-            }
-            return false;
-        }
-
-        /// <summary>
         ///     Returns the area of the MRect
         /// </summary>
         /// <returns>Area of box</returns>
         public double GetArea()
         {
             return Width * Height;
-        }
-
-        /// <summary>
-        ///     Gets the intersecting area between two rects
-        /// </summary>
-        /// <param name="r">MRect</param>
-        /// <returns>Area</returns>
-        public double GetIntersectingArea(MRect r)
-        {
-            uint cIndex;
-            for (cIndex = 0; cIndex < 2; cIndex++)
-            {
-                if ((Min[cIndex] > r.Max[cIndex]) || (Max[cIndex] < r.Min[cIndex])) return 0.0;
-            }
-
-            var ret = 1.0;
-
-            for (cIndex = 0; cIndex < 2; cIndex++)
-            {
-                var f1 = Math.Max(Min[cIndex], r.Min[cIndex]);
-                var f2 = Math.Min(Max[cIndex], r.Max[cIndex]);
-                ret *= f2 - f1;
-            }
-            return ret;
         }
 
         /// <summary>
@@ -326,38 +241,6 @@ namespace Mapsui
                 return Clone();
             return new MRect(Math.Min(Min.X, box.Min.X), Math.Min(Min.Y, box.Min.Y),
                 Math.Max(Max.X, box.Max.X), Math.Max(Max.Y, box.Max.Y));
-        }
-
-        /// <summary>
-        ///     Computes the joined rect of two rects
-        /// </summary>
-        /// <param name="box1"></param>
-        /// <param name="box2"></param>
-        /// <returns></returns>
-        public static MRect? Join(MRect? box1, MRect? box2)
-        {
-            if ((box1 == null) && (box2 == null))
-                return null;
-            if (box1 == null)
-                return box2!.Clone();
-            return box1.Join(box2);
-        }
-
-        /// <summary>
-        ///     Computes the joined <see cref="MRect" /> of an array of rects.
-        /// </summary>
-        /// <param name="boxes">Boxes to join</param>
-        /// <returns>Combined MRect</returns>
-        public static MRect? Join(MRect[]? boxes)
-        {
-            if (boxes == null) return null;
-            if (boxes.Length == 1) return boxes[0];
-            var box = boxes[0].Clone();
-            for (var i = 1; i < boxes.Length; i++)
-            {
-                box = box.Join(boxes[i]);
-            }
-            return box;
         }
 
         /// <summary>
@@ -451,38 +334,6 @@ namespace Mapsui
             return true;
         }
 
-        public virtual double Distance(MRect box)
-        {
-            var ret = 0.0;
-            for (uint cIndex = 0; cIndex < 2; cIndex++)
-            {
-                var x = 0.0;
-
-                if (box.Max[cIndex] < Min[cIndex]) x = Math.Abs(box.Max[cIndex] - Min[cIndex]);
-                else if (Max[cIndex] < box.Min[cIndex]) x = Math.Abs(box.Min[cIndex] - Max[cIndex]);
-                ret += x * x;
-            }
-            return Math.Sqrt(ret);
-        }
-
-        /// <summary>
-        ///     Computes the minimum distance between this MRect and a <see cref="MPoint" />
-        /// </summary>
-        /// <param name="p"><see cref="MPoint" /> to calculate distance to.</param>
-        /// <returns>Minimum distance.</returns>
-        public double Distance(MPoint p)
-        {
-            var ret = 0.0;
-
-            for (uint cIndex = 0; cIndex < 2; cIndex++)
-            {
-                if (p[cIndex] < Min[cIndex]) ret += Math.Pow(Min[cIndex] - p[cIndex], 2.0);
-                else if (p[cIndex] > Max[cIndex]) ret += Math.Pow(p[cIndex] - Max[cIndex], 2.0);
-            }
-
-            return Math.Sqrt(ret);
-        }
-
         /// <summary>
         ///     Returns the center of the rect
         /// </summary>
@@ -498,33 +349,17 @@ namespace Mapsui
         }
 
         /// <summary>
-        ///     Returns a string representation of the rect as LowerLeft + UpperRight formatted as "MinX, MinY, MaxX, MaxY"
+        ///     Returns the vertices in clockwise order from bottom left around to bottom right
         /// </summary>
-        /// <returns>MinX,MinY MaxX,MaxY</returns>
-        public override string ToString()
+        public IEnumerable<MPoint> Vertices
         {
-            return string.Format(CultureInfo.InvariantCulture, "MinX: {0}, MinY: {1}, MaxX: {2}, MaxY: {3}", Min.X, Min.Y, Max.X, Max.Y);
-        }
-
-        /// <summary>
-        ///     Indicates whether the current object is equal to another object of the same type.
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public override bool Equals(object? obj)
-        {
-            var box = obj as MRect;
-            if (obj == null) return false;
-            return Equals(box);
-        }
-
-        /// <summary>
-        ///     Returns a hash code for the specified object
-        /// </summary>
-        /// <returns>A hash code for the specified object</returns>
-        public override int GetHashCode()
-        {
-            return Min.GetHashCode() ^ Max.GetHashCode();
+            get
+            {
+                yield return BottomLeft;
+                yield return TopLeft;
+                yield return TopRight;
+                yield return BottomRight;
+            }
         }
     }
 }

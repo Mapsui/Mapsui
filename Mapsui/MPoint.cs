@@ -53,19 +53,6 @@ namespace Mapsui
         }
 
         /// <summary>
-        ///     Create a new point by a double[] array
-        /// </summary>
-        /// <param name="point"></param>
-        public MPoint(double[] point)
-        {
-            if (point.Length != 2)
-                throw new Exception("Only 2 dimensions are supported for points");
-
-            X = point[0];
-            Y = point[1];
-        }
-
-        /// <summary>
         ///     Gets or sets the X coordinate of the point
         /// </summary>
         public double X { get; set; }
@@ -125,43 +112,6 @@ namespace Mapsui
             return 0;
         }
 
-        /// <summary>
-        ///     exports a point into a 2-dimensional double array
-        /// </summary>
-        /// <returns></returns>
-        public double[] ToDoubleArray()
-        {
-            return new[] { X, Y };
-        }
-
-        /// <summary>
-        ///     Returns a point based on degrees, minutes and seconds notation.
-        ///     For western or southern coordinates, add minus '-' in front of all longitude and/or latitude values
-        /// </summary>
-        /// <param name="longDegrees">Longitude degrees</param>
-        /// <param name="longMinutes">Longitude minutes</param>
-        /// <param name="longSeconds">Longitude seconds</param>
-        /// <param name="latDegrees">Latitude degrees</param>
-        /// <param name="latMinutes">Latitude minutes</param>
-        /// <param name="latSeconds">Latitude seconds</param>
-        /// <returns>MPoint</returns>
-        public static MPoint FromDMS(double longDegrees, double longMinutes, double longSeconds,
-            double latDegrees, double latMinutes, double latSeconds)
-        {
-            return new MPoint(longDegrees + longMinutes / 60 + longSeconds / 3600,
-                latDegrees + latMinutes / 60 + latSeconds / 3600);
-        }
-
-        /// <summary>
-        ///     Returns a 2D <see cref="MPoint" /> instance from this
-        /// </summary>
-        /// <returns>
-        ///     <see cref="MPoint" />
-        /// </returns>
-        public MPoint AsPoint()
-        {
-            return new MPoint(X, Y);
-        }
 
         /// <summary>
         ///     This method must be overridden using 'public new [derived_data_type] Clone()'
@@ -238,15 +188,6 @@ namespace Mapsui
             return Math.Sqrt(Math.Pow(X - point.X, 2) + Math.Pow(Y - point.Y, 2));
         }
 
-        /// <summary>
-        ///     Returns the distance between this point and a <see cref="Mapsui.MRect" />
-        /// </summary>
-        /// <param name="box"></param>
-        /// <returns></returns>
-        public double Distance(MRect box)
-        {
-            return box.Distance(this);
-        }
 
         /// <summary>
         ///     The minimum bounding box for this Geometry.
@@ -297,11 +238,6 @@ namespace Mapsui
         public MPoint Offset(double offsetX, double offsetY)
         {
             return new MPoint(X + offsetX, Y + offsetY);
-        }
-
-        public bool Contains(MPoint point)
-        {
-            return false;
         }
     }
 }
