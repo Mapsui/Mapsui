@@ -27,8 +27,6 @@ public class MRect2
     public MPoint BottomLeft => new MPoint(Left, Bottom);
     public MPoint BottomRight => new MPoint(Right, Bottom);
 
-
-
     /// <summary>
     ///     Returns the vertices in clockwise order from bottom left around to bottom right
     /// </summary>
@@ -42,8 +40,24 @@ public class MRect2
             yield return BottomRight;
         }
     }
-    //MRect Clone();
-    //bool Contains(MPoint? p);
+
+    public MRect Copy()
+    {
+        return new MRect(Min.X, Min.Y, Max.X, Max.Y);
+    }
+
+    public bool Contains(MPoint? point)
+    {
+        if (point == null) return false;
+
+        if (point.X < Min.X) return false;
+        if (point.Y < Min.Y) return false;
+        if (point.X > Max.X) return false;
+        if (point.Y > Max.Y) return false;
+
+        return true;
+    }
+
     //bool Contains(MRect r);
     //bool Equals(MRect? other);
     //double GetArea();
