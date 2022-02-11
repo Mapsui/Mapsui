@@ -126,7 +126,7 @@ public class MRect2
 
         var size = (Width + Height) * 0.5;
         var change = (size * 0.5 * factor) - (size * 0.5);
-        var box = Clone();
+        var box = Copy();
         box.Min.X -= change;
         box.Min.Y -= change;
         box.Max.X += change;
@@ -134,5 +134,21 @@ public class MRect2
         return box;
     }
 
-    //MQuad Rotate(double degrees);
+    /// <summary>
+    ///     Calculates a new quad by rotating this rect about its center by the
+    ///     specified angle clockwise
+    /// </summary>
+    /// <param name="degrees">Angle about which to rotate (degrees)</param>
+    /// <returns>Returns the calculated quad</returns>
+    public MQuad Rotate(double degrees)
+    {
+        var bottomLeft = new MPoint(MinX, MinY);
+        var topLeft = new MPoint(MinX, MaxY);
+        var topRight = new MPoint(MaxX, MaxY);
+        var bottomRight = new MPoint(MaxX, MinY);
+        var quad = new MQuad(bottomLeft, topLeft, topRight, bottomRight);
+        var center = Centroid;
+
+        return quad.Rotate(degrees, center.X, center.Y);
+    }
 }
