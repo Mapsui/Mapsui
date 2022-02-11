@@ -4,6 +4,8 @@ namespace Mapsui;
 
 public class MPoint2
 {
+    public MPoint2() : this(0, 0) { }
+
     public MPoint2(double x, double y)
     {
         X = x;
@@ -15,6 +17,7 @@ public class MPoint2
         X = point.X;
         Y = point.Y;
     }
+
     public double X { get; set; }
     public double Y { get; set; }
     public MRect MRect => new MRect(X, Y, X, Y);
