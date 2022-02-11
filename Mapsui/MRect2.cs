@@ -58,7 +58,11 @@ public class MRect2
         return true;
     }
 
-    //bool Contains(MRect r);
+    public bool Contains(MRect r)
+    {
+        return Min.X <= r.Min.X && Min.Y <= r.Min.Y && Max.X >= r.Max.X && Max.Y >= r.Max.Y;
+    }
+
     //bool Equals(MRect? other);
     //double GetArea();
     //MRect Grow(double amount);
