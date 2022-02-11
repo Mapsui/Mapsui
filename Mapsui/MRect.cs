@@ -132,31 +132,6 @@ namespace Mapsui
         public double Height => Math.Abs(Max.Y - Min.Y);
 
         /// <summary>
-        ///     Intersection scalar (used for weighting in building the tree)
-        /// </summary>
-        public uint LongestAxis
-        {
-            get
-            {
-                var boxdim = Max - Min;
-                uint la = 0; // longest axis
-                double lav = 0; // longest axis length
-                // for each dimension  
-                for (uint ii = 0; ii < 2; ii++)
-                {
-                    // check if its longer
-                    if (boxdim[ii] > lav)
-                    {
-                        // store it if it is
-                        la = ii;
-                        lav = boxdim[ii];
-                    }
-                }
-                return la;
-            }
-        }
-
-        /// <summary>
         ///     Checks whether the values of this instance is equal to the values of another instance.
         /// </summary>
         /// <param name="other"><see cref="MRect" /> to compare to.</param>
@@ -211,14 +186,19 @@ namespace Mapsui
         ///     <see cref="MRect" />
         /// </param>
         /// <returns>True it contains</returns>
+        //public bool Contains(MRect r)
+        //{
+        //    for (uint cIndex = 0; cIndex < 2; cIndex++)
+        //    {
+        //        if ((Min[cIndex] > r.Min[cIndex]) || (Max[cIndex] < r.Max[cIndex])) return false;
+        //    }
+
+        //    return true;
+        //}
+
         public bool Contains(MRect r)
         {
-            for (uint cIndex = 0; cIndex < 2; cIndex++)
-            {
-                if ((Min[cIndex] > r.Min[cIndex]) || (Max[cIndex] < r.Max[cIndex])) return false;
-            }
-
-            return true;
+            return Min.X <= r.Min.X && Min.Y <= r.Min.Y && Max.X >= r.Max.X && Max.Y >= r.Max.Y;
         }
 
         /// <summary>

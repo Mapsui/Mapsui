@@ -88,17 +88,23 @@ namespace Mapsui.Nts.Providers.Shapefile.Indexing
                 objBuckets[0] = new List<BoxObjects>();
                 objBuckets[1] = new List<BoxObjects>();
 
-                var longAxis = _box.LongestAxis; // longest axis
+                var useXAxis = _box.Width > _box.Height; // longest axis
                 double geoAverage = 0; // geometric average - midpoint of ALL the objects
 
                 // go through all bbox and calculate the average of the midpoints
                 double fraction = 1.0f / objList.Count;
                 for (var i = 0; i < objList.Count; i++)
-                    geoAverage += objList[i].Box.Centroid[longAxis] * fraction;
+                {
+                    var centroid = useXAxis ? objList[i].Box.Centroid.X : objList[i].Box.Centroid.Y;
+                    geoAverage += centroid * fraction;
+                }
 
                 // bucket bbox based on their midpoint's side of the geo average in the longest axis
                 for (var i = 0; i < objList.Count; i++)
-                    objBuckets[geoAverage > objList[i].Box.Centroid[longAxis] ? 1 : 0].Add(objList[i]);
+                {
+                    var centroid = useXAxis ? objList[i].Box.Centroid.X : objList[i].Box.Centroid.Y;
+                    objBuckets[geoAverage > centroid ? 1 : 0].Add(objList[i]);
+                }
 
                 //If objects couldn't be split, just store them at the leaf
                 //TODO: Try splitting on another axis

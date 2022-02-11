@@ -63,57 +63,6 @@ namespace Mapsui
         public double Y { get; set; }
 
         /// <summary>
-        ///     Returns part of coordinate. Index 0 = X, Index 1 = Y
-        /// </summary>
-        /// <param name="index"></param>
-        /// <returns></returns>
-        public virtual double this[uint index]
-        {
-            get
-            {
-                if (index == 0)
-                    return X;
-                if
-                    (index == 1)
-                    return Y;
-                throw new Exception("MPoint index out of bounds");
-            }
-            set
-            {
-                if (index == 0)
-                    X = value;
-                else if (index == 1)
-                    Y = value;
-                else
-                    throw new Exception("MPoint index out of bounds");
-            }
-        }
-
-        /// <summary>
-        ///     Returns the number of ordinates for this point
-        /// </summary>
-        public virtual int NumOrdinates => 2;
-
-        /// <summary>
-        ///     Comparator used for ordering point first by ascending X, then by ascending Y.
-        /// </summary>
-        /// <param name="other"></param>
-        /// <returns></returns>
-        public virtual int CompareTo(MPoint other)
-        {
-            // ReSharper disable once CompareOfFloatsByEqualityOperator
-            if ((X < other.X) || ((X == other.X) && (Y < other.Y)))
-                return -1;
-
-            // ReSharper disable once CompareOfFloatsByEqualityOperator
-            if ((X > other.X) || ((X == other.X) && (Y > other.Y)))
-                return 1;
-
-            return 0;
-        }
-
-
-        /// <summary>
         ///     This method must be overridden using 'public new [derived_data_type] Clone()'
         /// </summary>
         /// <returns>Clone</returns>
