@@ -112,8 +112,27 @@ public class MRect2
             Math.Max(Max.Y, rect.Max.Y));
     }
 
-    //public MRect Multiply(double factor)
+    /// <summary>
+    /// Adjusts the size by increasing Width and Heigh with (Width * Height) / 2 * factor.
+    /// </summary>
+    /// <param name="factor"></param>
+    /// <returns></returns>
+    public MRect Multiply(double factor)
+    {
+        if (factor < 0)
+        {
+            throw new ArgumentException($"{nameof(factor)} can not be smaller than zero");
+        }
 
+        var size = (Width + Height) * 0.5;
+        var change = (size * 0.5 * factor) - (size * 0.5);
+        var box = Clone();
+        box.Min.X -= change;
+        box.Min.Y -= change;
+        box.Max.X += change;
+        box.Max.Y += change;
+        return box;
+    }
 
     //MQuad Rotate(double degrees);
 }
