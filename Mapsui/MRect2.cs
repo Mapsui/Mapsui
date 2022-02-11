@@ -39,10 +39,10 @@ public class MRect
     public double MinX => Min.X;
     public double MinY => Min.Y;
 
-    public MPoint Centroid => new MPoint(Max.X - Min.X, Max.Y - Min.Y);
+    public MPoint Centroid => new MPoint(Min.X + Width * 0.5, Min.Y + Height * 0.5);
 
-    public double Width => Max.X - MinX;
-    public double Height => Max.Y - MinY;
+    public double Width => Max.X - Min.X;
+    public double Height => Max.Y - Min.Y;
 
     public double Bottom => Min.Y;
     public double Left => Min.X;
