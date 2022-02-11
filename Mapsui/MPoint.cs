@@ -34,7 +34,7 @@ public class MPoint
 
     public bool Equals(MPoint? point)
     {
-        if (point == null) return false;
+        if (point is null) return false;
         return X == point.X && Y == point.Y;
     }
 
