@@ -1,4 +1,6 @@
-﻿namespace Mapsui;
+﻿using System.Collections.Generic;
+
+namespace Mapsui;
 
 public class MRect2
 {
@@ -26,8 +28,20 @@ public class MRect2
     public MPoint BottomRight => new MPoint(Right, Bottom);
 
 
-    //IEnumerable<MPoint> Vertices { get; }
 
+    /// <summary>
+    ///     Returns the vertices in clockwise order from bottom left around to bottom right
+    /// </summary>
+    public IEnumerable<MPoint> Vertices
+    {
+        get
+        {
+            yield return BottomLeft;
+            yield return TopLeft;
+            yield return TopRight;
+            yield return BottomRight;
+        }
+    }
     //MRect Clone();
     //bool Contains(MPoint? p);
     //bool Contains(MRect r);
