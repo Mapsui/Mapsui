@@ -5,6 +5,18 @@ namespace Mapsui;
 
 public class MRect2
 {
+    public MRect2(MRect2 rect)
+    {
+        Min = rect.Min.Copy();
+        Max = rect.Max.Copy();
+    }
+
+    public MRect2(double minX, double minY, double maxX, double maxY)
+    {
+        Min = new MPoint(minX, minY);
+        Max = new MPoint(maxX, maxY);
+    }
+
     public MPoint Max { get; }
     public MPoint Min { get; }
 
