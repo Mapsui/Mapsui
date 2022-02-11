@@ -48,7 +48,7 @@ public class MRect2
 
     public bool Contains(MPoint? point)
     {
-        if (point == null) return false;
+        if (point is null) return false;
 
         if (point.X < Min.X) return false;
         if (point.Y < Min.Y) return false;
@@ -63,7 +63,12 @@ public class MRect2
         return Min.X <= r.Min.X && Min.Y <= r.Min.Y && Max.X >= r.Max.X && Max.Y >= r.Max.Y;
     }
 
-    //bool Equals(MRect? other);
+    public bool Equals(MRect? other)
+    {
+        if (other is null) return false;
+
+        return Min.Equals(other.Min) && Max.Equals(other.Max);
+    }
     //double GetArea();
     //MRect Grow(double amount);
     //MRect Grow(double amountInX, double amountInY);
