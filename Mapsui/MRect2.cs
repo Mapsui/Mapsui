@@ -2,7 +2,6 @@
 
 public class MRect2
 {
-
     public MPoint Max { get; }
     public MPoint Min { get; }
 
@@ -11,20 +10,20 @@ public class MRect2
     public double MinX => Min.X;
     public double MinY => Min.Y;
 
-    MPoint Centroid => new MPoint(Max.X - Min.X, Max.Y - Min.Y);
+    public MPoint Centroid => new MPoint(Max.X - Min.X, Max.Y - Min.Y);
 
-    double Width => Max.X - MinX;
-    double Height => Max.Y - MinY;
+    public double Width => Max.X - MinX;
+    public double Height => Max.Y - MinY;
 
-    double Bottom => Min.Y;
-    double Left => Min.X;
-    double Top => Max.Y;
-    double Right => Max.X;
+    public double Bottom => Min.Y;
+    public double Left => Min.X;
+    public double Top => Max.Y;
+    public double Right => Max.X;
 
-    MPoint TopLeft => new MPoint(Left, Top);
-    MPoint TopRight => new MPoint(Right, Top);
-    MPoint BottomLeft => new MPoint(Left, Bottom);
-    MPoint BottomRight => new MPoint(Right, Bottom);
+    public MPoint TopLeft => new MPoint(Left, Top);
+    public MPoint TopRight => new MPoint(Right, Top);
+    public MPoint BottomLeft => new MPoint(Left, Bottom);
+    public MPoint BottomRight => new MPoint(Right, Bottom);
 
 
     //IEnumerable<MPoint> Vertices { get; }
