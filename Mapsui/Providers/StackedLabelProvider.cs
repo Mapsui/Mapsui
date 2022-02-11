@@ -167,7 +167,7 @@ namespace Mapsui.Providers
                 if (found) continue;
 
                 if (feature.Extent != null)
-                    clusters.Add(new Cluster(feature.Extent.Clone(), new List<IFeature> { feature }));
+                    clusters.Add(new Cluster(feature.Extent.Copy(), new List<IFeature> { feature }));
             }
         }
 

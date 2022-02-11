@@ -68,7 +68,7 @@ public class MRect
         }
     }
 
-    public MRect Clone()
+    public MRect Copy()
     {
         return new MRect(Min.X, Min.Y, Max.X, Max.Y);
     }
@@ -129,7 +129,7 @@ public class MRect
 
     public MRect Join(MRect? rect)
     {
-        if (rect is null) return Clone();
+        if (rect is null) return Copy();
 
         return new MRect(
             Math.Min(Min.X, rect.Min.X),
@@ -152,7 +152,7 @@ public class MRect
 
         var size = (Width + Height) * 0.5;
         var change = (size * 0.5 * factor) - (size * 0.5);
-        var box = Clone();
+        var box = Copy();
         box.Min.X -= change;
         box.Min.Y -= change;
         box.Max.X += change;
