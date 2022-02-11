@@ -7,6 +7,13 @@ public class MPoint2
     public double X { get; set; }
     public double Y { get; set; }
 
+    MRect MRect { get; }
+    MPoint Copy();
+    double Distance(MPoint point);
+    bool Equals(MPoint? p);
+    int GetHashCode();
+    MPoint Offset(double offsetX, double offsetY);
+
     /// <summary>
     ///     Calculates a new point by rotating this point clockwise about the specified center point
     /// </summary>
