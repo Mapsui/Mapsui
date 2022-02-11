@@ -69,7 +69,11 @@ public class MRect2
 
         return Min.Equals(other.Min) && Max.Equals(other.Max);
     }
-    //double GetArea();
+
+    public double GetArea()
+    {
+        return Width * Height;
+    }
     //MRect Grow(double amount);
     //MRect Grow(double amountInX, double amountInY);
     //bool Intersects(MRect? box);
