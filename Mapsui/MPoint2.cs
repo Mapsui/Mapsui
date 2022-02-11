@@ -6,13 +6,33 @@ public class MPoint2
 {
     public double X { get; set; }
     public double Y { get; set; }
+    public MRect MRect => new MRect(X, Y, X, Y);
 
-    MRect MRect { get; }
-    MPoint Copy();
-    double Distance(MPoint point);
-    bool Equals(MPoint? p);
-    int GetHashCode();
-    MPoint Offset(double offsetX, double offsetY);
+    public MPoint Copy()
+    {
+        return new MPoint(X, Y);
+    }
+
+    public double Distance(MPoint point)
+    {
+        return Algorithms.Distance(X, Y, point.X, point.Y);
+    }
+
+    public bool Equals(MPoint? point)
+    {
+        if (point == null) return false;
+        return X == point.X && Y == point.Y;
+    }
+
+    public int GetHashCode()
+    {
+        return X.GetHashCode() ^ Y.GetHashCode();
+    }
+
+    public MPoint Offset(double offsetX, double offsetY)
+    {
+        return new MPoint(X + offsetX, Y + offsetY);
+    }
 
     /// <summary>
     ///     Calculates a new point by rotating this point clockwise about the specified center point
