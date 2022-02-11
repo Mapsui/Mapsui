@@ -66,7 +66,7 @@ namespace Mapsui
         ///     This method must be overridden using 'public new [derived_data_type] Clone()'
         /// </summary>
         /// <returns>Clone</returns>
-        public MPoint Clone()
+        public MPoint Copy()
         {
             return new MPoint(X, Y);
         }

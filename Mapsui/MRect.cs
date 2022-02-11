@@ -60,8 +60,8 @@ namespace Mapsui
         {
             foreach (var rect in rects)
             {
-                Min ??= rect.Min.Clone();
-                Max ??= rect.Max.Clone();
+                Min ??= rect.Min.Copy();
+                Max ??= rect.Max.Copy();
 
                 Min.X = Math.Min(rect.Min.X, Min.X);
                 Min.Y = Math.Min(rect.Min.Y, Min.Y);
