@@ -23,11 +23,11 @@ namespace Mapsui.Samples.Common.Maps.Data
             mapControl.Map = CreateMap();
         }
 
-        private const string wfsUri = "https://geoservices.buergernetz.bz.it/geoserver/ows";
+        private const string wfsUri = "https://geoservices1.civis.bz.it/geoserver/p_bz-AdministrativeUnits/ows";
         private const string crs = "EPSG:3857";  // originally: "EPSG:25832"
-        private const string layerName = "MAPS_DISTRICTS_VW";
-        private const string nsPrefix = "gvcc_maps";
-        private const string labelField = "DIST_DESCR_DE";
+        private const string layerName = "Districts";
+        private const string nsPrefix = "p_bz-AdministrativeUnits";
+        private const string labelField = "NAME_DE";
 
         public static Map CreateMap()
         {
@@ -39,7 +39,7 @@ namespace Mapsui.Samples.Common.Maps.Data
                 map.Layers.Add(CreateWfsLayer(provider));
                 map.Layers.Add(CreateLabelLayer(provider));
 
-                map.Home = n => n.NavigateTo(new MPoint(1250000.0, 5900000.0), map.Resolutions[10]);
+                map.Home = n => n.NavigateTo(new MPoint(1270000.0, 5880000.0), map.Resolutions[9]);
 
                 return map;
 
