@@ -5,16 +5,13 @@ namespace Mapsui;
 
 public class MRect2
 {
-    public MRect2(MRect2 rect)
-    {
-        Min = rect.Min.Copy();
-        Max = rect.Max.Copy();
-    }
+    public MRect2(MRect2 rect) : this(rect.Min.X, rect.Min.Y, rect.Max.X, rect.Max.Y) { }
 
     public MRect2(double minX, double minY, double maxX, double maxY)
     {
         Min = new MPoint(minX, minY);
         Max = new MPoint(maxX, maxY);
+        EnforceMinMax();
     }
 
     public MPoint Max { get; }
@@ -96,7 +93,7 @@ public class MRect2
     public MRect Grow(double amountInX, double amountInY)
     {
         var grownBox = new MRect(Min.X - amountInX, Min.Y - amountInY, Max.X + amountInX, MaxY + amountInY);
-        // Todo: Check min max
+        EnforceMinMax();
         return grownBox;
     }
 
@@ -162,5 +159,17 @@ public class MRect2
         var center = Centroid;
 
         return quad.Rotate(degrees, center.X, center.Y);
+    }
+
+    private void EnforceMinMax()
+    {
+        if (Min.X > Max.X)
+        {
+            (Min.X, Max.X) = (Max.X, Min.X);
+        }
+        if (Min.Y > Max.Y)
+        {
+            (Min.Y, Max.Y) = (Max.Y, Min.Y);
+        }
     }
 }
