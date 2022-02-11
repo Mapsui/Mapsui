@@ -3,15 +3,32 @@ using System.Collections.Generic;
 
 namespace Mapsui;
 
-public class MRect2
+public class MRect
 {
-    public MRect2(MRect2 rect) : this(rect.Min.X, rect.Min.Y, rect.Max.X, rect.Max.Y) { }
-
-    public MRect2(double minX, double minY, double maxX, double maxY)
+    public MRect(double minX, double minY, double maxX, double maxY)
     {
         Min = new MPoint(minX, minY);
         Max = new MPoint(maxX, maxY);
         EnforceMinMax();
+    }
+
+    public MRect(MRect rect) : this(rect.Min.X, rect.Min.Y, rect.Max.X, rect.Max.Y) { }
+
+    public MRect(IEnumerable<MRect> rects)
+    {
+        foreach (var rect in rects)
+        {
+            if (Min is null) Min = rect.Min.Copy();
+            if (Max is null) Max = rect.Max.Copy();
+
+            Min.X = Math.Min(Min.X, rect.Min.X);
+            Min.Y = Math.Min(Min.Y, rect.Min.Y);
+            Max.X = Math.Max(Max.X, rect.Max.X);
+            Max.Y = Math.Max(Max.Y, rect.Max.Y);
+        }
+
+        if (Min == null) throw new ArgumentException("Empty Collection", nameof(rects));
+        if (Max == null) throw new ArgumentException("Empty Collection", nameof(rects));
     }
 
     public MPoint Max { get; }
@@ -51,7 +68,7 @@ public class MRect2
         }
     }
 
-    public MRect Copy()
+    public MRect Clone()
     {
         return new MRect(Min.X, Min.Y, Max.X, Max.Y);
     }
@@ -112,7 +129,7 @@ public class MRect2
 
     public MRect Join(MRect? rect)
     {
-        if (rect is null) return Copy();
+        if (rect is null) return Clone();
 
         return new MRect(
             Math.Min(Min.X, rect.Min.X),
@@ -135,7 +152,7 @@ public class MRect2
 
         var size = (Width + Height) * 0.5;
         var change = (size * 0.5 * factor) - (size * 0.5);
-        var box = Copy();
+        var box = Clone();
         box.Min.X -= change;
         box.Min.Y -= change;
         box.Max.X += change;
