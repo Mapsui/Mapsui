@@ -149,7 +149,7 @@ namespace Mapsui
         ///     Checks whether min values are actually smaller than max values and in that case swaps them.
         /// </summary>
         /// <returns>true if the rect was changed</returns>
-        public bool CheckMinMax()
+        private bool CheckMinMax()
         {
             var wasSwapped = false;
             if (Min.X > Max.X)
@@ -178,23 +178,6 @@ namespace Mapsui
                      (box.Min.Y > Max.Y) ||
                      (box.Max.Y < Min.Y));
         }
-
-        /// <summary>
-        ///     Returns true if this instance contains the <see cref="MRect" />
-        /// </summary>
-        /// <param name="r">
-        ///     <see cref="MRect" />
-        /// </param>
-        /// <returns>True it contains</returns>
-        //public bool Contains(MRect r)
-        //{
-        //    for (uint cIndex = 0; cIndex < 2; cIndex++)
-        //    {
-        //        if ((Min[cIndex] > r.Min[cIndex]) || (Max[cIndex] < r.Max[cIndex])) return false;
-        //    }
-
-        //    return true;
-        //}
 
         public bool Contains(MRect r)
         {
