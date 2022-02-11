@@ -2,24 +2,32 @@
 
 public class MRect2
 {
-    //double Bottom { get; }
-    //MPoint BottomLeft { get; }
-    //MPoint BottomRight { get; }
-    //MPoint Centroid { get; }
-    //double Height { get; }
-    //double Left { get; }
-    //MPoint Max { get; set; }
-    //double MaxX { get; }
-    //double MaxY { get; }
-    //MPoint Min { get; set; }
-    //double MinX { get; }
-    //double MinY { get; }
-    //double Right { get; }
-    //double Top { get; }
-    //MPoint TopLeft { get; }
-    //MPoint TopRight { get; }
+
+    public MPoint Max { get; }
+    public MPoint Min { get; }
+
+    public double MaxX => Max.X;
+    public double MaxY => Max.Y;
+    public double MinX => Min.X;
+    public double MinY => Min.Y;
+
+    MPoint Centroid => new MPoint(Max.X - Min.X, Max.Y - Min.Y);
+
+    double Width => Max.X - MinX;
+    double Height => Max.Y - MinY;
+
+    double Bottom => Min.Y;
+    double Left => Min.X;
+    double Top => Max.Y;
+    double Right => Max.X;
+
+    MPoint TopLeft => new MPoint(Left, Top);
+    MPoint TopRight => new MPoint(Right, Top);
+    MPoint BottomLeft => new MPoint(Left, Bottom);
+    MPoint BottomRight => new MPoint(Right, Bottom);
+
+
     //IEnumerable<MPoint> Vertices { get; }
-    //double Width { get; }
 
     //MRect Clone();
     //bool Contains(MPoint? p);
