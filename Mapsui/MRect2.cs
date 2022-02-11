@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Mapsui;
 
@@ -74,10 +75,45 @@ public class MRect2
     {
         return Width * Height;
     }
-    //MRect Grow(double amount);
-    //MRect Grow(double amountInX, double amountInY);
-    //bool Intersects(MRect? box);
-    //MRect Join(MRect? box);
-    //MRect Multiply(double factor);
+
+    public MRect Grow(double amount)
+    {
+        return Grow(amount, amount);
+    }
+
+    public MRect Grow(double amountInX, double amountInY)
+    {
+        var grownBox = new MRect(Min.X - amountInX, Min.Y - amountInY, Max.X + amountInX, MaxY + amountInY);
+        // Todo: Check min max
+        return grownBox;
+    }
+
+
+    public bool Intersects(MRect? rect)
+    {
+        if (rect is null) return false;
+
+        if (rect.Max.X < Min.X) return false;
+        if (rect.Max.Y < Min.Y) return false;
+        if (rect.Min.X > Max.X) return false;
+        if (rect.Min.Y > Max.Y) return false;
+
+        return true;
+    }
+
+    public MRect Join(MRect? rect)
+    {
+        if (rect is null) return Copy();
+
+        return new MRect(
+            Math.Min(Min.X, rect.Min.X),
+            Math.Min(Min.Y, rect.Min.Y),
+            Math.Max(Max.X, rect.Max.X),
+            Math.Max(Max.Y, rect.Max.Y));
+    }
+
+    //public MRect Multiply(double factor)
+
+
     //MQuad Rotate(double degrees);
 }
