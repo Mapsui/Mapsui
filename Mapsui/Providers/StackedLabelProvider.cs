@@ -91,7 +91,8 @@ namespace Mapsui.Providers
 
         private static MPoint CalculatePosition(Cluster cluster)
         {
-            return new MPoint(cluster.Box.Centroid.X, cluster.Box.Centroid.Y);
+            var minY = cluster.Box.Vertices.Select(v => v.Y).Min();
+            return new MPoint(cluster.Box.Centroid.X, minY);
         }
 
         private static IFeature CreateLabelFeature(MPoint position, LabelStyle labelStyle, double offsetY,
