@@ -89,43 +89,6 @@ namespace Mapsui.Nts.Providers.Shapefile
             return tree;
         }
 
-        /*
-		/// <summary>
-		/// Creates an index on the columns for faster searching [EXPERIMENTAL - Requires Lucene dependencies]
-		/// </summary>
-		/// <returns></returns>
-		public string CreateLuceneIndex()
-		{
-			string dir = this._filename + ".idx";
-			if (!System.IO.Directory.Exists(dir))
-				System.IO.Directory.CreateDirectory(dir);
-			Lucene.Net.Index.IndexWriter iw = new Lucene.Net.Index.IndexWriter(dir,new Lucene.Net.Analysis.Standard.StandardAnalyzer(),true);
-
-			for (uint i = 0; i < this._NumberOfRecords; i++)
-			{
-				FeatureDataRow dr = GetFeature(i,this.NewTable);
-				Lucene.Net.Documents.Document doc = new Lucene.Net.Documents.Document();
-				// Add the object-id as a field, so that index can be maintained.
-				// This field is not stored with document, it is indexed, but it is not
-	            // tokenized prior to indexing.
-				//doc.Add(Lucene.Net.Documents.Field.UnIndexed("SharpMap_oid", i.ToString())); //Add OID index
-
-				foreach(System.Data.DataColumn col in dr.Table.Columns) //Add and index values from DBF
-				{
-					if(col.DataType.Equals(typeof(string)))
-						// Add the contents as a valued Text field so it will get tokenized and indexed.
-						doc.Add(Lucene.Net.Documents.Field.UnStored(col.ColumnName,(string)dr[col]));
-					else
-						doc.Add(Lucene.Net.Documents.Field.UnStored(col.ColumnName, dr[col].ToString()));
-				}
-				iw.AddDocument(doc);
-			}
-			iw.Optimize();
-			iw.Close();
-			return this._filename + ".idx";
-		}
-		*/
-
         /// <summary>
         /// Gets the date this file was last updated.
         /// </summary>
