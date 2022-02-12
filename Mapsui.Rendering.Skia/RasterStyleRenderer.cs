@@ -1,45 +1,63 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Mapsui.Layers;
 using Mapsui.Logging;
+using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Styles;
 using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia
 {
-    public static class RasterRenderer
+    public class RasterStyleRenderer : ISkiaStyleRenderer
     {
-        public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, IFeature feature, MRaster? raster, float opacity, IDictionary<object, BitmapInfo?> tileCache, long currentIteration)
+        private const int _tilesToKeepMultiplier = 3;
+        private const int _minimumTilesToKeep = 32;
+        private long _lastIteration;
+        private readonly IDictionary<object, BitmapInfo?> _tileCache =
+            new Dictionary<object, BitmapInfo?>(new IdentityComparer<object>());
+
+        public bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, IStyle style, ISymbolCache symbolCache, long currentIteration)
         {
             try
             {
+                var rasterFeature = feature as RasterFeature;
+                var raster = rasterFeature?.Raster;
+
                 if (raster == null)
-                    return;
+                    return false;
+
+                if (currentIteration > 0 && _lastIteration != currentIteration)
+                {
+                    _lastIteration = currentIteration;
+                    RemovedUnusedBitmapsFromCache();
+                }
 
                 BitmapInfo? bitmapInfo;
 
-                if (!tileCache.Keys.Contains(raster))
+                if (!_tileCache.Keys.Contains(raster))
                 {
                     bitmapInfo = BitmapHelper.LoadBitmap(raster.Data);
-                    tileCache[raster] = bitmapInfo;
+                    _tileCache[raster] = bitmapInfo;
                 }
                 else
                 {
-                    bitmapInfo = tileCache[raster];
+                    bitmapInfo = _tileCache[raster];
                 }
 
                 if (bitmapInfo == null)
-                    return;
+                    return false;
 
                 bitmapInfo.IterationUsed = currentIteration;
-                tileCache[raster] = bitmapInfo;
+                _tileCache[raster] = bitmapInfo;
 
                 var extent = feature.Extent;
 
                 if (extent == null)
-                    return;
+                    return false;
 
                 if (bitmapInfo.Bitmap == null)
-                    return;
+                    return false;
 
                 if (viewport.IsRotated)
                 {
@@ -51,20 +69,22 @@ namespace Mapsui.Rendering.Skia
 
                     var destination = new SKRect(0.0f, 0.0f, (float)extent.Width, (float)extent.Height);
 
-                    BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap, destination, opacity);
+                    BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap, destination, (float)(layer.Opacity * style.Opacity));
 
                     canvas.SetMatrix(priorMatrix);
                 }
                 else
                 {
                     var destination = WorldToScreen(viewport, extent);
-                    BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap, RoundToPixel(destination), opacity);
+                    BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap, RoundToPixel(destination), (float)(layer.Opacity * style.Opacity));
                 }
             }
             catch (Exception ex)
             {
                 Logger.Log(LogLevel.Error, ex.Message, ex);
             }
+
+            return true;
         }
 
         private static SKMatrix CreateRotationMatrix(IReadOnlyViewport viewport, MRect rect, SKMatrix priorMatrix)
@@ -112,6 +132,44 @@ namespace Mapsui.Rendering.Skia
                 (float)Math.Round(Math.Min(boundingBox.Top, boundingBox.Bottom)),
                 (float)Math.Round(boundingBox.Right),
                 (float)Math.Round(Math.Max(boundingBox.Top, boundingBox.Bottom)));
+        }
+
+        private void RemovedUnusedBitmapsFromCache()
+        {
+            var tilesUsedInCurrentIteration =
+                _tileCache.Values.Count(i => i?.IterationUsed == _lastIteration);
+            var tilesToKeep = tilesUsedInCurrentIteration * _tilesToKeepMultiplier;
+            tilesToKeep = Math.Max(tilesToKeep, _minimumTilesToKeep);
+            var tilesToRemove = _tileCache.Keys.Count - tilesToKeep;
+
+            if (tilesToRemove > 0) RemoveOldBitmaps(_tileCache, tilesToRemove);
+        }
+
+        private static void RemoveOldBitmaps(IDictionary<object, BitmapInfo?> tileCache, int numberToRemove)
+        {
+            var counter = 0;
+            var orderedKeys = tileCache.OrderBy(kvp => kvp.Value?.IterationUsed).Select(kvp => kvp.Key).ToList();
+            foreach (var key in orderedKeys)
+            {
+                if (counter >= numberToRemove) break;
+                var textureInfo = tileCache[key];
+                tileCache.Remove(key);
+                textureInfo?.Bitmap?.Dispose();
+                counter++;
+            }
+        }
+    }
+
+    public class IdentityComparer<T> : IEqualityComparer<T> where T : class
+    {
+        public bool Equals(T obj, T otherObj)
+        {
+            return obj == otherObj;
+        }
+
+        public int GetHashCode(T obj)
+        {
+            return obj.GetHashCode();
         }
     }
 }

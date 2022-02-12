@@ -24,7 +24,7 @@ namespace Mapsui.Samples.Common.Maps
     public class SkiaCustomStyleRenderer : ISkiaStyleRenderer
     {
         public static Random Random = new();
-        public bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, IStyle style, ISymbolCache symbolCache)
+        public bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, IStyle style, ISymbolCache symbolCache, long iteration)
         {
             if (!(feature is PointFeature pointFeature)) return false;
             var worldPoint = pointFeature.Point;

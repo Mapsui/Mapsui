@@ -20,11 +20,7 @@ namespace Mapsui.Rendering.Skia
 {
     public class MapRenderer : IRenderer
     {
-        private const int TilesToKeepMultiplier = 3;
-        private const int MinimumTilesToKeep = 32;
         private readonly SymbolCache _symbolCache = new SymbolCache();
-        private readonly IDictionary<object, BitmapInfo?> _tileCache =
-            new Dictionary<object, BitmapInfo?>(new IdentityComparer<object>());
         private long _currentIteration;
 
         public ISymbolCache SymbolCache => _symbolCache;
@@ -43,6 +39,8 @@ namespace Mapsui.Rendering.Skia
 
         public MapRenderer()
         {
+            StyleRenderers[typeof(RasterStyle)] = new RasterStyleRenderer();
+
             WidgetRenders[typeof(Hyperlink)] = new HyperlinkWidgetRenderer();
             WidgetRenders[typeof(ScaleBarWidget)] = new ScaleBarWidgetRenderer();
             WidgetRenders[typeof(ZoomInOutWidget)] = new ZoomInOutWidgetRenderer();
@@ -107,9 +105,7 @@ namespace Mapsui.Rendering.Skia
             {
                 layers = layers.ToList();
 
-                VisibleFeatureIterator.IterateLayers(viewport, layers, (v, l, s, f, o) => { RenderFeature(canvas, v, l, s, f, o); });
-
-                RemovedUnusedBitmapsFromCache();
+                VisibleFeatureIterator.IterateLayers(viewport, layers, _currentIteration, (v, l, s, f, o, i) => { RenderFeature(canvas, v, l, s, f, o, i); });
 
                 _currentIteration++;
             }
@@ -119,32 +115,7 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        private void RemovedUnusedBitmapsFromCache()
-        {
-            var tilesUsedInCurrentIteration =
-                _tileCache.Values.Count(i => i?.IterationUsed == _currentIteration);
-            var tilesToKeep = tilesUsedInCurrentIteration * TilesToKeepMultiplier;
-            tilesToKeep = Math.Max(tilesToKeep, MinimumTilesToKeep);
-            var tilesToRemove = _tileCache.Keys.Count - tilesToKeep;
-
-            if (tilesToRemove > 0) RemoveOldBitmaps(_tileCache, tilesToRemove);
-        }
-
-        private static void RemoveOldBitmaps(IDictionary<object, BitmapInfo?> tileCache, int numberToRemove)
-        {
-            var counter = 0;
-            var orderedKeys = tileCache.OrderBy(kvp => kvp.Value?.IterationUsed).Select(kvp => kvp.Key).ToList();
-            foreach (var key in orderedKeys)
-            {
-                if (counter >= numberToRemove) break;
-                var textureInfo = tileCache[key];
-                tileCache.Remove(key);
-                textureInfo?.Bitmap?.Dispose();
-                counter++;
-            }
-        }
-
-        private void RenderFeature(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IStyle style, IFeature feature, float layerOpacity)
+        private void RenderFeature(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IStyle style, IFeature feature, float layerOpacity, long iteration)
         {
             // Check, if we have a special renderer for this style
             if (StyleRenderers.ContainsKey(style.GetType()))
@@ -153,7 +124,7 @@ namespace Mapsui.Rendering.Skia
                 canvas.Save();
                 // We have a special renderer, so try, if it could draw this
                 var styleRenderer = (ISkiaStyleRenderer)StyleRenderers[style.GetType()];
-                var result = styleRenderer.Draw(canvas, viewport, layer, feature, style, _symbolCache);
+                var result = styleRenderer.Draw(canvas, viewport, layer, feature, style, _symbolCache, iteration);
                 // Restore old canvas
                 canvas.Restore();
                 // Was it drawn?
@@ -169,9 +140,6 @@ namespace Mapsui.Rendering.Skia
                 PointRenderer.Draw(canvas, viewport, style, pointFeature, pointFeature.Point.X, pointFeature.Point.Y, _symbolCache, layerOpacity * style.Opacity);
             else if (feature is RectFeature rectFeature)
                 RectRenderer.Draw(canvas, viewport, style, rectFeature, layerOpacity * style.Opacity);
-            else if (feature is RasterFeature rasterFeature)
-                RasterRenderer.Draw(canvas, viewport, style, rasterFeature, rasterFeature.Raster, layerOpacity * style.Opacity, _tileCache, _currentIteration);
-
         }
 
         private void Render(object canvas, IReadOnlyViewport viewport, IEnumerable<IWidget> widgets, float layerOpacity)
@@ -222,13 +190,13 @@ namespace Mapsui.Rendering.Skia
                     var color = pixmap.GetPixelColor(intX, intY);
 
 
-                    VisibleFeatureIterator.IterateLayers(viewport, layers, (v, layer, style, feature, opacity) => {
+                    VisibleFeatureIterator.IterateLayers(viewport, layers, 0, (v, layer, style, feature, opacity, iteration) => {
                         // ReSharper disable AccessToDisposedClosure // There is no delayed fetch. After IterateLayers returns all is done. I do not see a problem.
                         surface.Canvas.Save();
                         // 1) Clear the entire bitmap
                         surface.Canvas.Clear(SKColors.Transparent);
                         // 2) Render the feature to the clean canvas
-                        RenderFeature(surface.Canvas, v, layer, style, feature, opacity);
+                        RenderFeature(surface.Canvas, v, layer, style, feature, opacity, 0);
                         // 3) Check if the pixel has changed.
                         if (color != pixmap.GetPixelColor(intX, intY))
                             // 4) Add feature and style to result
@@ -256,19 +224,6 @@ namespace Mapsui.Rendering.Skia
             }
 
             return result;
-        }
-
-        public class IdentityComparer<T> : IEqualityComparer<T> where T : class
-        {
-            public bool Equals(T obj, T otherObj)
-            {
-                return obj == otherObj;
-            }
-
-            public int GetHashCode(T obj)
-            {
-                return obj.GetHashCode();
-            }
         }
     }
 }
