@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Concurrent;
+using System.IO;
 using BruTile;
 using BruTile.Cache;
 using BruTile.Predefined;
@@ -17,20 +18,20 @@ public class RasterizingTileProvider : ITileSource
     private readonly ILayer _layer;
     private ITileSchema? _tileSchema;
     private Attribution? _attribution;
-    private readonly EStreamFormat _streamFormat;
+    private readonly ETileFormat _tileFormat;
 
     public RasterizingTileProvider(ILayer layer,
         double renderResolutionMultiplier = 1,
         IRenderer? rasterizer = null,
         float pixelDensity = 1,
         IPersistentCache<byte[]>? persistentCache = null,
-        EStreamFormat streamFormat = EStreamFormat.Png)
+        ETileFormat tileFormat = ETileFormat.Png)
     {
         _layer = layer;
         _renderResolutionMultiplier = renderResolutionMultiplier;
         _rasterizer = rasterizer;
         _pixelDensity = pixelDensity;
-        _streamFormat = streamFormat;
+        _tileFormat = tileFormat;
         PersistentCache = persistentCache ?? new NullCache();
     }
 
@@ -47,10 +48,32 @@ public class RasterizingTileProvider : ITileSource
             var resolution = tileResolution.UnitsPerPixel;
             var viewPort = RasterizingLayer.CreateViewport(tileInfo.Extent.ToMRect(), resolution,
                 _renderResolutionMultiplier, 1);
-            using var stream = renderer.RenderToBitmapStream(viewPort, new[] { _layer }, pixelDensity: _pixelDensity, streamFormat: _streamFormat);
-            _rasterizingLayers.Push(renderer);
-            result = stream?.ToArray();
-            PersistentCache?.Add(tileInfo.Index, result ?? Array.Empty<byte>());
+
+            MemoryStream? stream = null;
+            try
+            {
+                switch (_tileFormat)
+                {
+                    case ETileFormat.Png:
+                        stream = renderer.RenderToBitmapStream(viewPort, new[] { _layer }, pixelDensity: _pixelDensity);
+                        break;
+                    case ETileFormat.Skp:
+                        if (renderer is IPictureRenderer pictureRenderer)
+                        {
+                            stream = pictureRenderer.RenderToPictureStream(viewPort, new[] { _layer });
+                        }
+                        
+                        break;
+                }
+
+                _rasterizingLayers.Push(renderer);
+                result = stream?.ToArray();
+                PersistentCache?.Add(tileInfo.Index, result ?? Array.Empty<byte>());
+            }
+            finally
+            {
+                stream?.Dispose();
+            }
         }
 
         return result;
@@ -60,7 +83,7 @@ public class RasterizingTileProvider : ITileSource
     {
         if (!_rasterizingLayers.TryPop(out var rasterizer))
         {
-            rasterizer = _rasterizer ?? DefaultRendererFactory.Create();
+            rasterizer = (_rasterizer as IPictureRenderer) ?? (IPictureRenderer)DefaultRendererFactory.Create();
         }
 
         return rasterizer;
@@ -72,7 +95,13 @@ public class RasterizingTileProvider : ITileSource
 
     public object? GetPictureTile(TileInfo tileInfo)
     {
-        var renderer = GetRenderer();
+        var renderer = GetRenderer() as IPictureRenderer;
+
+        if (renderer == null)
+        {
+            return null;
+        }
+
         Schema.Resolutions.TryGetValue(tileInfo.Index.Level, out var tileResolution);
 
         var resolution = tileResolution.UnitsPerPixel;

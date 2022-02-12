@@ -44,7 +44,7 @@ namespace Mapsui.Layers
             IPersistentCache<byte[]>? persistentCache = null,
             ETileFormat tileFormat = ETileFormat.Png)
         {
-            _tileProvider = new RasterizingTileProvider(layer, renderResolutionMultiplier, rasterizer, pixelDensity, persistentCache, ToStreamFormat(tileFormat));
+            _tileProvider = new RasterizingTileProvider(layer, renderResolutionMultiplier, rasterizer, pixelDensity, persistentCache, tileFormat);
             _tileLayer = new TileLayer(_tileProvider,
                 minTiles,
                 maxTiles,
@@ -95,19 +95,6 @@ namespace Mapsui.Layers
         private IFeature? FetchTile(TileInfo arg)
         {
             return new PictureFeature(_tileProvider.GetPictureTile(arg), arg.Extent.ToMRect());
-        }
-
-        private static EStreamFormat ToStreamFormat(ETileFormat streamFormat)
-        {
-            switch (streamFormat)
-            {
-                case ETileFormat.Png:
-                    return EStreamFormat.Png;
-                case ETileFormat.Picture:
-                case ETileFormat.Skp:
-                default:
-                    return EStreamFormat.Skp;
-            }
         }
 
         public ILayer SourceLayer { get; }

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
 using Mapsui.Layers;
 using Mapsui.Logging;
@@ -19,7 +18,7 @@ using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia
 {
-    public class MapRenderer : IRenderer
+    public class MapRenderer : IRenderer, IPictureRenderer
     {
         private const int TilesToKeepMultiplier = 3;
         private const int MinimumTilesToKeep = 32;
@@ -70,7 +69,7 @@ namespace Mapsui.Rendering.Skia
             Render(canvas, viewport, widgets, 1);
         }
 
-        public MemoryStream? RenderToBitmapStream(IReadOnlyViewport? viewport, IEnumerable<ILayer> layers, Color? background = null, float pixelDensity = 1, EStreamFormat streamFormat = EStreamFormat.Png)
+        public MemoryStream? RenderToBitmapStream(IReadOnlyViewport? viewport, IEnumerable<ILayer> layers, Color? background = null, float pixelDensity = 1)
         {
             if (viewport == null)
                 return null;
@@ -79,28 +78,16 @@ namespace Mapsui.Rendering.Skia
             {
                 var memoryStream = new MemoryStream();
 
-                switch (streamFormat)
-                {
-                    case EStreamFormat.Png:
-                        var width = viewport.Width;
-                        var height = viewport.Height;
-                        var imageInfo = new SKImageInfo((int)Math.Round(width * pixelDensity), (int)Math.Round(height * pixelDensity),
-                            SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
+                var width = viewport.Width;
+                var height = viewport.Height;
+                var imageInfo = new SKImageInfo((int)Math.Round(width * pixelDensity), (int)Math.Round(height * pixelDensity),
+                    SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
 
-                        using (var surface = SKSurface.Create(imageInfo))
-                        {
-                            if (Render(viewport, layers, background, pixelDensity, surface?.Canvas)) return null;
-                            using var image = surface!.Snapshot();
-                            using var data = image.Encode(); // Default format is Png
-                            data.SaveTo(memoryStream);
-                        }
-
-                        break;
-                    case EStreamFormat.Skp:
-                        var picture = (SKPicture?)RenderToPicture(viewport, layers, background);
-                        picture?.Serialize(memoryStream);
-                        break;
-                }
+                using var surface = SKSurface.Create(imageInfo);
+                if (Render(viewport, layers, background, pixelDensity, surface?.Canvas)) return null;
+                using var image = surface!.Snapshot();
+                using var data = image.Encode(); // Default format is Png
+                data.SaveTo(memoryStream);
 
                 return memoryStream;
 
@@ -134,6 +121,14 @@ namespace Mapsui.Rendering.Skia
                 Logger.Log(LogLevel.Error, ex.Message);
                 return null;
             }
+        }
+
+        public MemoryStream? RenderToPictureStream(IReadOnlyViewport viewport, IEnumerable<ILayer> layers, Color? background = null)
+        {
+            var memoryStream = new MemoryStream();
+            var picture = (SKPicture?)RenderToPicture(viewport, layers, background);
+            picture?.Serialize(memoryStream);
+            return memoryStream;
         }
 
         private bool Render(IReadOnlyViewport viewport, IEnumerable<ILayer> layers, Color? background, float pixelDensity,
