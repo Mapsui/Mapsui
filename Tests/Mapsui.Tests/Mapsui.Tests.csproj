@@ -1,11 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net60</TargetFramework>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
 		<OutputType>Library</OutputType>
 		<RestorePackages>true</RestorePackages>
-		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-		<UseWPF>true</UseWPF>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>		
 	</PropertyGroup>
 
 	<ItemGroup>
