@@ -1,9 +1,8 @@
 ﻿using System.Linq;
-using Mapsui.Extensions;
-using Mapsui.Geometries;
-using Mapsui.Geometries.WellKnownText;
-using Mapsui.GeometryLayers;
+using Mapsui.Nts;
 using Mapsui.Projections;
+using NetTopologySuite.Geometries;
+using NetTopologySuite.IO;
 using NUnit.Framework;
 
 namespace Mapsui.Tests.Projections
@@ -11,53 +10,56 @@ namespace Mapsui.Tests.Projections
     [TestFixture]
     public class ProjectionTests
     {
+        private WKTReader _wktReader = new WKTReader();
+
         [Test]
-        public void MultiPolygonAllVerticesTest()
+        public void MultiPolygonCoordinatesTest()
         {
             // arrange
-            var geomety = GeometryFromWKT.Parse("MULTIPOLYGON (((40 40, 20 45, 45 30, 40 40)), ((20 35, 10 30, 10 10, 30 5, 45 20, 20 35), (30 20, 20 15, 20 25, 30 20)))");
-            const int numberOfVectices = 14;
+            var geomety = _wktReader.Read("MULTIPOLYGON (((40 40, 20 45, 45 30, 40 40)), ((20 35, 10 30, 10 10, 30 5, 45 20, 20 35), (30 20, 20 15, 20 25, 30 20)))");
+            const int expectedCoordinateCount = 14;
 
             // act
-            var enumeration = geomety.AllVertices();
+            var enumeration = geomety.Coordinates;
 
             // assert
-            Assert.AreEqual(numberOfVectices, enumeration.Count());
+            Assert.AreEqual(expectedCoordinateCount, enumeration.Count());
         }
 
         [Test]
-        public void MultiLineStringAllVerticesTest()
+        public void MultiLineStringCoordinatesTest()
         {
             // arrange
-            var geomety = GeometryFromWKT.Parse("MULTILINESTRING ((10 10, 20 20, 10 40), (40 40, 30 30, 40 20, 30 10))");
-            const int numberOfVectices = 7;
+            var geomety = _wktReader.Read("MULTILINESTRING ((10 10, 20 20, 10 40), (40 40, 30 30, 40 20, 30 10))");
+            const int expectedCoordinateCount = 7;
 
             // act
-            var enumeration = geomety.AllVertices();
+            var enumeration = geomety.Coordinates;
 
             // assert
-            Assert.AreEqual(numberOfVectices, enumeration.Count());
+            Assert.AreEqual(expectedCoordinateCount, enumeration.Count());
         }
 
         [Test]
-        public void AllVerticesTransformTest()
+        public void CoordinateProjectionTest()
         {
             // arrange
-            var multiPolygon = (MultiPolygon)GeometryFromWKT.Parse("MULTIPOLYGON (((40 40, 20 45, 45 30, 40 40)), ((20 35, 10 30, 10 10, 30 5, 45 20, 20 35), (30 20, 20 15, 20 25, 30 20)))");
-            var copiedMultiPolygon = multiPolygon.Copy();
-            using var feature = new GeometryFeature(copiedMultiPolygon);
+            var multiPolygon = (MultiPolygon)_wktReader.Read("MULTIPOLYGON (((40 40, 20 45, 45 30, 40 40)), ((20 35, 10 30, 10 10, 30 5, 45 20, 20 35), (30 20, 20 15, 20 25, 30 20)))");
+            var projectedMultiPolygon = multiPolygon.Copy();
+            using var feature = new GeometryFeature(projectedMultiPolygon);
             var projection = new Projection();
 
             // act
             projection.Project("EPSG:4326", "EPSG:3857", feature);
 
             // assert
-            var vertices = multiPolygon.AllVertices().ToList();
-            var copiedVertices = copiedMultiPolygon.AllVertices().ToList();
-            for (var i = 0; i < vertices.Count; i++)
+            var coordinates = multiPolygon.Coordinates.ToList();
+            var projectedCoordinates = projectedMultiPolygon.Coordinates.ToList();
+
+            for (var i = 0; i < coordinates.Count; i++)
             {
-                Assert.AreNotEqual(vertices[i].X, copiedVertices[i].X);
-                Assert.AreNotEqual(vertices[i].Y, copiedVertices[i].Y);
+                Assert.AreNotEqual(coordinates[i].X, projectedCoordinates[i].X);
+                Assert.AreNotEqual(coordinates[i].Y, projectedCoordinates[i].Y);
             }
         }
     }

@@ -1,20 +1,20 @@
-﻿using Mapsui.Geometries;
-using Mapsui.Geometries.Utilities;
-using Mapsui.Projections;
+﻿
+using Mapsui.Utilities;
+using NetTopologySuite.Geometries;
 
 namespace Mapsui.Samples.Wpf.Editing.Editing
 {
     public static class Geomorpher
     {
-        public static void Rotate(IGeometry geometry, double degrees, Point center)
+        public static void Rotate(Geometry geometry, double degrees, Point center)
         {
-            foreach (var vertex in geometry.AllVertices())
+            foreach (var vertex in geometry.Coordinates)
             {
                 Rotate(vertex, degrees, center);
             }
         }
 
-        private static void Rotate(Point vertex, double degrees, Point center)
+        private static void Rotate(Coordinate vertex, double degrees, Point center)
         {
             // translate this point back to the center
             var newX = vertex.X - center.X;
@@ -28,15 +28,15 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
             vertex.Y = p.Y + center.Y;
         }
 
-        public static void Scale(IGeometry geometry, double scale, Point center)
+        public static void Scale(Geometry geometry, double scale, Point center)
         {
-            foreach (var vertex in geometry.AllVertices())
+            foreach (var vertex in geometry.Coordinates)
             {
                 Scale(vertex, scale, center);
             }
         }
 
-        private static void Scale(Point vertex, double scale, Point center)
+        private static void Scale(Coordinate vertex, double scale, Point center)
         {
             vertex.X = center.X + (vertex.X - center.X) * scale;
             vertex.Y = center.Y + (vertex.Y - center.Y) * scale;

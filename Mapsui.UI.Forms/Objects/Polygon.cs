@@ -1,4 +1,4 @@
-﻿using Mapsui.Geometries;
+﻿using System;
 using Mapsui.Styles;
 using Mapsui.UI.Objects;
 using System.Collections.Generic;
@@ -6,7 +6,9 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using Mapsui.GeometryLayers;
+using Mapsui.Nts;
+using NetTopologySuite.Geometries;
+using Mapsui.Nts.Extensions;
 
 #if __MAUI__
 using Microsoft.Maui;
@@ -67,6 +69,8 @@ namespace Mapsui.UI.Forms
         /// </summary>
         public IList<Position[]> Holes => _holes;
 
+        private readonly object _sync = new object();
+
         protected override void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             base.OnPropertyChanged(propertyName);
@@ -77,12 +81,11 @@ namespace Mapsui.UI.Forms
             switch (propertyName)
             {
                 case nameof(Positions):
-                    if (Feature.Geometry != null)
-                        ((Geometries.Polygon)Feature.Geometry).ExteriorRing = new LinearRing(Positions.Select(p => p.ToPoint()).ToList());
-                    break;
                 case nameof(Holes):
-                    if (Feature.Geometry != null)
-                        ((Geometries.Polygon)Feature.Geometry).InteriorRings = Holes.Select(h => new LinearRing(h.Select(p => p.ToPoint()).ToList())).ToList();
+                    // Treat changes to Positions and Holes the same way. In both scenarios we need to create everything from scratch.
+                    var shell = Positions.Select(p => p.ToCoordinate());
+                    var holes = Holes.Select(h => h.Select(p => p.ToCoordinate()));
+                    Feature.Geometry = shell.ToPolygon(holes);
                     break;
                 case nameof(FillColor):
                     ((VectorStyle)Feature.Styles.First()).Fill = new Styles.Brush(FillColor.ToMapsui());
@@ -110,19 +113,16 @@ namespace Mapsui.UI.Forms
             OnPropertyChanged(nameof(Holes));
         }
 
-        private readonly object sync = new object();
-
         private void CreateFeature()
         {
-            lock (sync)
+            lock (_sync)
             {
                 if (Feature == null)
                 {
                     // Create a new one
                     Feature = new GeometryFeature
                     {
-                        Geometry = new Mapsui.Geometries.Polygon(),
-                        ["Label"] = Label,
+                        ["Label"] = Label
                     };
                     Feature.Styles.Clear();
                     Feature.Styles.Add(new VectorStyle

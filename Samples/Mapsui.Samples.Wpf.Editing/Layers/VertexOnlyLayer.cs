@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Fetcher;
-using Mapsui.Geometries;
-using Mapsui.GeometryLayers;
 using Mapsui.Layers;
-using Mapsui.Providers;
+using Mapsui.Nts;
 using Mapsui.Styles;
+using NetTopologySuite.Geometries;
 
 namespace Mapsui.Samples.Wpf.Editing.Layers
 {
@@ -29,9 +28,9 @@ namespace Mapsui.Samples.Wpf.Editing.Layers
             {
                 if (feature.Geometry is Point || feature.Geometry is MultiPoint) continue; // Points with a vertex on top confuse me
                 if (feature.Geometry != null)
-                    foreach (var vertices in feature.Geometry.MainVertices())
+                    foreach (var vertex in feature.Geometry.MainCoordinates())
                     {
-                        yield return new GeometryFeature { Geometry = vertices };
+                        yield return new GeometryFeature { Geometry = new Point(vertex) };
                     }
             }
         }

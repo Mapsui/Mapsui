@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
-using Mapsui.Geometries;
-using Mapsui.Geometries.WellKnownText;
-using Mapsui.GeometryLayers;
 using Mapsui.Layers;
 using Mapsui.Layers.Tiling;
+using Mapsui.Nts;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.UI;
-using Mapsui.Utilities;
+using NetTopologySuite.Geometries;
+using NetTopologySuite.IO;
 
 namespace Mapsui.Samples.Common.Maps.Projection
 {
@@ -49,8 +48,8 @@ namespace Mapsui.Samples.Common.Maps.Projection
         {
             var features = new List<GeometryFeature>
             {
-                new GeometryFeature {Geometry = SomeWhereNearHaarlem},
-                new GeometryFeature {Geometry = GeometryFromWKT.Parse(WktOfAmsterdam)}
+                new() {Geometry = SomeWhereNearHaarlem},
+                new() {Geometry = new WKTReader().Read(WktOfAmsterdam)}
             };
 
             var memoryProvider = new MemoryProvider<GeometryFeature>(features)

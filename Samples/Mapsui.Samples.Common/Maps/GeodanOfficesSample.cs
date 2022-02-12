@@ -2,7 +2,6 @@
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
-using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -10,8 +9,8 @@ namespace Mapsui.Samples.Common.Maps
     {
         public static MemoryLayer CreateLayer()
         {
-            var geodanAmsterdam = new Geometries.Point(122698, 483922);
-            var geodanDenBosch = new Geometries.Point(148949, 411446);
+            var geodanAmsterdam = new MPoint(122698, 483922);
+            var geodanDenBosch = new MPoint(148949, 411446);
             var location = typeof(GeodanOfficesSample).LoadBitmapId("Images.location.png");
 
             var layer = new MemoryLayer

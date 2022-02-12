@@ -20,7 +20,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Mapsui.Extensions;
-using Mapsui.Geometries;
 using Mapsui.Utilities;
 using Mapsui.ViewportAnimations;
 

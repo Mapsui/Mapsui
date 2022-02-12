@@ -79,5 +79,54 @@ namespace Mapsui.Utilities
 
             return new MPoint(newX, newY);
         }
+
+        /// <summary>
+        ///     Computes the distance from a point p to a line segment AB.
+        ///     Note: NON-ROBUST!
+        /// </summary>
+        /// <param name="p">The point to compute the distance for.</param>
+        /// <param name="a">One point of the line.</param>
+        /// <param name="b">Another point of the line (must be different to A).</param>
+        /// <returns> The distance from p to line segment AB.</returns>
+        public static double DistancePointLine(MPoint p, MPoint a, MPoint b)
+        {
+            // if start == end, then use pt distance
+            if (a.Equals(b))
+                return p.Distance(a);
+
+            // otherwise use comp.graphics.algorithms Frequently Asked Questions method
+            /*(1)     	      AC dot AB
+                        r =   ---------
+                              ||AB||^2
+             
+                        r has the following meaning:
+                        r=0 Point = A
+                        r=1 Point = B
+                        r<0 Point is on the backward extension of AB
+                        r>1 Point is on the forward extension of AB
+                        0<r<1 Point is interior to AB
+            */
+
+            var r = ((p.X - a.X) * (b.X - a.X) + (p.Y - a.Y) * (b.Y - a.Y))
+                    /
+                    ((b.X - a.X) * (b.X - a.X) + (b.Y - a.Y) * (b.Y - a.Y));
+
+            if (r <= 0.0) return p.Distance(a);
+            if (r >= 1.0) return p.Distance(b);
+
+            /*(2)
+                                                                            (Ay-Cy)(Bx-Ax)-(Ax-Cx)(By-Ay)
+                                                                        s = -----------------------------
+                                                                                        Curve^2
+
+                                                                        Then the distance from C to Point = |s|*Curve.
+                                                            */
+
+            var s = ((a.Y - p.Y) * (b.X - a.X) - (a.X - p.X) * (b.Y - a.Y))
+                    /
+                    ((b.X - a.X) * (b.X - a.X) + (b.Y - a.Y) * (b.Y - a.Y));
+
+            return Math.Abs(s) * Math.Sqrt((b.X - a.X) * (b.X - a.X) + (b.Y - a.Y) * (b.Y - a.Y));
+        }
     }
 }

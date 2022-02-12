@@ -1,14 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.Reflection;
 using Mapsui.Extensions;
-using Mapsui.Geometries;
-using Mapsui.GeometryLayers;
 using Mapsui.Layers;
+using Mapsui.Nts;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.UI;
-using Mapsui.Utilities;
+using NetTopologySuite.Geometries;
 
 namespace Mapsui.Tests.Common.Maps
 {
@@ -54,22 +52,22 @@ namespace Mapsui.Tests.Common.Maps
             {
                 new GeometryFeature
                 {
-                    Geometry = new  GeometryCollection() { Collection =  new List<Geometry>() { new Point(50, 50) } },
+                    Geometry = new  GeometryCollection(new Geometry[]  { new Point(50, 50) } ),
                     Styles = new[] {new VectorStyle {Fill = new Brush(Color.Red)}}
                 },
                 new GeometryFeature
                 {
-                    Geometry = new  GeometryCollection() { Collection =  new List<Geometry>() { new Point(50, 100) } },
+                    Geometry = new  GeometryCollection(new Geometry[]  {  new Point(50, 100) } ),
                     Styles = new[] {new SymbolStyle {BitmapId = circleIconId}}
                 },
                 new GeometryFeature
                 {
-                    Geometry = new GeometryCollection() { Collection =  new List<Geometry>() { new Point(100, 50) } },
+                    Geometry = new GeometryCollection(new Geometry[]  {  new Point(100, 50) } ),
                     Styles = new[] {new SymbolStyle {BitmapId = checkeredIconId}}
                 },
                 new GeometryFeature
                 {
-                    Geometry = new GeometryCollection() { Collection =  new List<Geometry>() { new Point(100, 100) } },
+                    Geometry = new GeometryCollection(new Geometry[]  {  new Point(100, 100) } ),
                     Styles = new[] {new VectorStyle {Fill = new Brush(Color.Green), Outline = null}}
                 }
             };

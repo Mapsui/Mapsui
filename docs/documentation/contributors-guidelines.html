@@ -108,8 +108,9 @@
 <h2 id="extension-methods">Extension methods</h2>
 <ul>
 <li>Extension methods should always be in a Extensions folder. </li>
-<li>They should be in a class that has the name &#39;{ClassItExtents}Extensions&#39;. </li>
-<li>It should be in a namespace that follows the folder name (so not in the namespace of the class it extents).</li>
+<li>They should be in a class that has the name &#39;{ClassItExtends}Extensions&#39;. </li>
+<li>It should be in a namespace that follows the folder name (so not in the namespace of the class it extends).</li>
+<li>Extensions of a collection (IEnumerable, List, Array etc) of a type should also be in the class that extends the individual type.</li>
 </ul>
 <h2 id="ordering-of-lon-lat">Ordering of lon lat</h2>
 <ul>
@@ -117,7 +118,14 @@
 <li>Some background: The order of lon and lat always causes a lot of confusion. The official notation is lat, lon, but in map projections the lat corresponds to the y-axis and the lon to the x-axis. This is confusing because in math the ordering is the other way around: x, y. In our code we need to translate the lat/lon to an X/Y coordinate to draw it on the map. In the constructor of such a point the x (lon) will be the first parameter. There is no way that this problem can be fundamentally solved, there will always be some confusion. To mitigate it we choose one way of ordering which is lon, lat (consistent with x, y). </li>
 <li>Also there are many ways in which we can avoid ordering altogher. For instance if we work with Longitude and Latitude properties. In the case of SphericalMercator.FromLonLat we use lon/lat in the method name to avoid confusion.</li>
 </ul>
-</article>
+<h2 id="no-rendering-in-the-drawpaint-loop">No rendering in the draw/paint loop</h2>
+<p>Mapsui strives for optiomal performance, so in the rendering loop the objects should be ready to be painted to canvas directly without any need for preparation. This is currently (4.0.0-beta.1) not the case. For instance in the case of tiles they are rendered on the first iteration, after that the cached version is used. This needs to be improved.</p>
+<h3 id="about-the-terminology">About the terminology</h3>
+<p><strong>Rendering</strong>: Create a platform specific resource.</p>
+<pre><code class="lang-csharp">SKPath path = ToSKPath(feature, style);
+</code></pre><p><strong>Drawing or Painting</strong>: Draw the platform specific resource to the canvas.</p>
+<pre><code class="lang-csharp">canvas.DrawPath(path, paint);
+</code></pre></article>
           </div>
           
           <div class="hidden-sm col-md-2" role="complementary">

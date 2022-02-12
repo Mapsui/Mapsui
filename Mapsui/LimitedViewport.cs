@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
-using Mapsui.Geometries;
 using Mapsui.UI;
 using Mapsui.Utilities;
 

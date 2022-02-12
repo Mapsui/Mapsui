@@ -4,12 +4,12 @@ using System.Linq;
 using System.Threading;
 using BruTile.Predefined;
 using Mapsui.Extensions;
-using Mapsui.Geometries;
-using Mapsui.GeometryLayers;
 using Mapsui.Layers;
+using Mapsui.Nts;
 using Mapsui.Providers;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
+using NetTopologySuite.Geometries;
 using NUnit.Framework;
 
 namespace Mapsui.Tests.Layers

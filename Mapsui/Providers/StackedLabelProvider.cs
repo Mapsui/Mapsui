@@ -91,11 +91,8 @@ namespace Mapsui.Providers
 
         private static MPoint CalculatePosition(Cluster cluster)
         {
-            // Since the box can be rotated, find the minimal Y value of all 4 corners
-            var rotatedBox = cluster.Box.Rotate(0); // todo: Add rotation '-viewport.Rotation'
-            var minY = rotatedBox.Vertices.Select(v => v.Y).Min();
-            var position = new MPoint(cluster.Box.Centroid.X, minY);
-            return position;
+            var minY = cluster.Box.Vertices.Select(v => v.Y).Min();
+            return new MPoint(cluster.Box.Centroid.X, minY);
         }
 
         private static IFeature CreateLabelFeature(MPoint position, LabelStyle labelStyle, double offsetY,
@@ -170,7 +167,7 @@ namespace Mapsui.Providers
                 if (found) continue;
 
                 if (feature.Extent != null)
-                    clusters.Add(new Cluster(feature.Extent.Clone(), new List<IFeature> { feature }));
+                    clusters.Add(new Cluster(feature.Extent.Copy(), new List<IFeature> { feature }));
             }
         }
 
