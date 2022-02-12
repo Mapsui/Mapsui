@@ -29,7 +29,6 @@ namespace Mapsui.Layers
         /// <param name="minExtraTiles">Number of minimum extra tiles for memory cache</param>
         /// <param name="maxExtraTiles">Number of maximum extra tiles for memory cache</param>
         /// <param name="persistentCache">Persistent Cache</param>
-        /// <param name="tileFormat">Stream Format</param>
         public RasterizingTileLayer(
             ILayer layer,
             double renderResolutionMultiplier = 1,
@@ -41,18 +40,16 @@ namespace Mapsui.Layers
             IRenderFetchStrategy? renderFetchStrategy = null,
             int minExtraTiles = -1,
             int maxExtraTiles = -1,
-            IPersistentCache<byte[]>? persistentCache = null,
-            ETileFormat tileFormat = ETileFormat.Png)
+            IPersistentCache<byte[]>? persistentCache = null)
         {
-            _tileProvider = new RasterizingTileProvider(layer, renderResolutionMultiplier, rasterizer, pixelDensity, persistentCache, tileFormat);
+            _tileProvider = new RasterizingTileProvider(layer, renderResolutionMultiplier, rasterizer, pixelDensity, persistentCache);
             _tileLayer = new TileLayer(_tileProvider,
                 minTiles,
                 maxTiles,
                 dataFetchStrategy,
                 renderFetchStrategy,
                 minExtraTiles,
-                maxExtraTiles,
-                tileFormat == ETileFormat.Picture ? FetchTile : null);
+                maxExtraTiles);
             _tileLayer.DataChanged += TileLayerDataChanged;
             _tileLayer.PropertyChanged += TileLayerPropertyChanged;
             SourceLayer = layer;
@@ -90,11 +87,6 @@ namespace Mapsui.Layers
         private void TileLayerPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             OnPropertyChanged(e.PropertyName);
-        }
-
-        private IFeature? FetchTile(TileInfo arg)
-        {
-            return new PictureFeature(_tileProvider.GetPictureTile(arg), arg.Extent.ToMRect());
         }
 
         public ILayer SourceLayer { get; }

@@ -18,20 +18,17 @@ public class RasterizingTileProvider : ITileSource
     private readonly ILayer _layer;
     private ITileSchema? _tileSchema;
     private Attribution? _attribution;
-    private readonly ETileFormat _tileFormat;
 
     public RasterizingTileProvider(ILayer layer,
         double renderResolutionMultiplier = 1,
         IRenderer? rasterizer = null,
         float pixelDensity = 1,
-        IPersistentCache<byte[]>? persistentCache = null,
-        ETileFormat tileFormat = ETileFormat.Png)
+        IPersistentCache<byte[]>? persistentCache = null)
     {
         _layer = layer;
         _renderResolutionMultiplier = renderResolutionMultiplier;
         _rasterizer = rasterizer;
         _pixelDensity = pixelDensity;
-        _tileFormat = tileFormat;
         PersistentCache = persistentCache ?? new NullCache();
     }
 
@@ -49,31 +46,10 @@ public class RasterizingTileProvider : ITileSource
             var viewPort = RasterizingLayer.CreateViewport(tileInfo.Extent.ToMRect(), resolution,
                 _renderResolutionMultiplier, 1);
 
-            MemoryStream? stream = null;
-            try
-            {
-                switch (_tileFormat)
-                {
-                    case ETileFormat.Png:
-                        stream = renderer.RenderToBitmapStream(viewPort, new[] { _layer }, pixelDensity: _pixelDensity);
-                        break;
-                    case ETileFormat.Skp:
-                        if (renderer is IPictureRenderer pictureRenderer)
-                        {
-                            stream = pictureRenderer.RenderToPictureStream(viewPort, new[] { _layer });
-                        }
-                        
-                        break;
-                }
-
-                _rasterizingLayers.Push(renderer);
-                result = stream?.ToArray();
-                PersistentCache?.Add(tileInfo.Index, result ?? Array.Empty<byte>());
-            }
-            finally
-            {
-                stream?.Dispose();
-            }
+            using var stream = renderer.RenderToBitmapStream(viewPort, new[] { _layer }, pixelDensity: _pixelDensity);
+            _rasterizingLayers.Push(renderer);
+            result = stream?.ToArray();
+            PersistentCache?.Add(tileInfo.Index, result ?? Array.Empty<byte>());
         }
 
         return result;

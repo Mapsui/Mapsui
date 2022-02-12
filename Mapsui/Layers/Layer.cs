@@ -26,7 +26,7 @@ using Mapsui.Styles;
 
 namespace Mapsui.Layers
 {
-    public class Layer : BaseLayer, IAsyncDataFetcher
+    public class Layer : BaseLayer, IAsyncDataFetcher, IDataSourceLayer
     {
         private IProvider<IFeature>? _dataSource;
         private readonly object _syncRoot = new();
