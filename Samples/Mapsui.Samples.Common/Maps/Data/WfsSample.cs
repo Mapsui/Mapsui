@@ -22,15 +22,13 @@ namespace Mapsui.Samples.Common.Maps.Data
         public void Setup(IMapControl mapControl)
         {
             mapControl.Map = CreateMap();
-            var bb = new BoundingBox(1100000.0, 5800000.0, 1400000.0, 6000000.0);
-            mapControl.Navigator.NavigateTo(bb);
         }
 
-        private const string wfsUri = "https://geoservices.buergernetz.bz.it/geoserver/ows";
+        private const string wfsUri = "https://geoservices1.civis.bz.it/geoserver/p_bz-AdministrativeUnits/ows";
         private const string crs = "EPSG:3857";  // originally: "EPSG:25832"
-        private const string layerName = "MAPS_DISTRICTS_VW";
-        private const string nsPrefix = "gvcc_maps";
-        private const string labelField = "CAMM_NOME_DE";
+        private const string layerName = "Districts";
+        private const string nsPrefix = "p_bz-AdministrativeUnits";
+        private const string labelField = "NAME_DE";
 
         public static Map CreateMap()
         {
@@ -41,6 +39,8 @@ namespace Mapsui.Samples.Common.Maps.Data
                 map.Layers.Add(CreateTileLayer(CreateTileSource()));
                 map.Layers.Add(CreateWfsLayer(provider));
                 map.Layers.Add(CreateLabelLayer(provider));
+
+                map.Home = n => n.NavigateTo(new Point(1270000.0, 5880000.0), map.Resolutions[9]);
 
                 return map;
                 
@@ -56,7 +56,7 @@ namespace Mapsui.Samples.Common.Maps.Data
         {
             return new Layer(layerName)
             {
-                Style = new VectorStyle {Fill = new Brush {Color = Color.Red}},
+                Style = new VectorStyle { Fill = new Brush { Color = Color.FromArgb(192, 255, 0, 0) } },
                 DataSource = provider,
                 IsMapInfoLayer = true
             };
