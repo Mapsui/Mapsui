@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Mapsui.Utilities;
@@ -90,9 +91,10 @@ namespace Mapsui
         public void ZoomTo(double resolution, MPoint centerOfZoom, long duration = 0, Easing? easing = default)
         {
             var (worldCenterOfZoomX, worldCenterOfZoomY) = _viewport.ScreenToWorldXY(centerOfZoom.X, centerOfZoom.Y);
-            _viewport.SetAnimations(ZoomAroundLocationAnimation.Create(_viewport, worldCenterOfZoomX, worldCenterOfZoomY, resolution,
-                _viewport.CenterX, _viewport.CenterY, _viewport.Resolution, duration,
-                () => OnNavigated(ChangeType.Discrete)));
+            var animationEntries = ZoomAroundLocationAnimation.Create(_viewport, worldCenterOfZoomX, worldCenterOfZoomY, resolution,
+                _viewport.CenterX, _viewport.CenterY, _viewport.Resolution, duration);
+            AddFinalAction(animationEntries, () => OnNavigated(ChangeType.Discrete));
+            _viewport.SetAnimations(animationEntries);
 
         }
 
@@ -179,7 +181,9 @@ namespace Mapsui
         /// <param name="duration">Duration for animation in milliseconds.</param>
         public void FlyTo(MPoint center, double maxResolution, long duration = 500)
         {
-            _viewport.SetAnimations(FlyToAnimation.Create(_viewport, center, maxResolution, duration, () => OnNavigated(ChangeType.Discrete)));
+            var animationEntries = FlyToAnimation.Create(_viewport, center, maxResolution, duration);
+            AddFinalAction(animationEntries, () => OnNavigated(ChangeType.Discrete));
+            _viewport.SetAnimations(animationEntries);
         }
 
         /// <summary>
@@ -222,6 +226,18 @@ namespace Mapsui
         ~Navigator()
         {
             Dispose(false);
+        }
+
+        /// <summary> Adds the final action. </summary>
+        /// <param name="animationEntries">The animation entries.</param>
+        /// <param name="action">The action.</param>
+        private void AddFinalAction(List<AnimationEntry<Viewport>> animationEntries, Action action)
+        {
+            var entry = animationEntries.FirstOrDefault();
+            if (entry != null)
+            {
+                animationEntries.Add(new AnimationEntry<Viewport>(entry.Start, entry.End, final: (v, a) => action()));
+            }
         }
 
         private void OnNavigated(long duration, ChangeType changeType)

@@ -6,7 +6,7 @@ namespace Mapsui.ViewportAnimations
 {
     public class FlyToAnimation
     {
-        public static List<AnimationEntry<Viewport>> Create(IViewport viewport, MPoint center, double maxResolution, long duration, Action? action = null)
+        public static List<AnimationEntry<Viewport>> Create(IViewport viewport, MPoint center, double maxResolution, long duration)
         {
             var animations = new List<AnimationEntry<Viewport>>();
             AnimationEntry<Viewport> entry;
@@ -20,8 +20,7 @@ namespace Mapsui.ViewportAnimations
                     animationEnd: 1,
                     easing: Easing.SinInOut,
                     tick: CenterTick,
-                    final: CenterFinal,
-                    action: action
+                    final: CenterFinal
                 );
                 animations.Add(entry);
             }

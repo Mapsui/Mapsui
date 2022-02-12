@@ -7,15 +7,13 @@ namespace Mapsui.Utilities
         private readonly double _animationDelta;
         private readonly Action<T, AnimationEntry<T>, double>? _tick;
         private readonly Action<T, AnimationEntry<T>>? _final;
-        private readonly Action? _action;
 
         public AnimationEntry(object start, object end,
             double animationStart = 0, double animationEnd = 1,
             Easing? easing = null,
             bool repeat = false,
             Action<T, AnimationEntry<T>, double>? tick = null,
-            Action<T, AnimationEntry<T>>? final = null,
-            Action? action = null)
+            Action<T, AnimationEntry<T>>? final = null)
         {
             AnimationStart = animationStart;
             AnimationEnd = animationEnd;
@@ -30,7 +28,6 @@ namespace Mapsui.Utilities
 
             _tick = tick;
             _final = final;
-            _action = action;
         }
 
         /// <summary>
@@ -110,10 +107,6 @@ namespace Mapsui.Utilities
             if (_final != null)
             {
                 _final(target, this);
-                if (_action != null)
-                {
-                    _action();
-                }
             }
         }
     }
