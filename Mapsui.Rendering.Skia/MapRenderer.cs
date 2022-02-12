@@ -18,7 +18,7 @@ using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia
 {
-    public class MapRenderer : IRenderer, IPictureRenderer
+    public class MapRenderer : IRenderer
     {
         private const int TilesToKeepMultiplier = 3;
         private const int MinimumTilesToKeep = 32;
