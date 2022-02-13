@@ -17,19 +17,15 @@ namespace Mapsui.Rendering.Skia
             }
             else if (style is SymbolStyle symbolStyle)
             {
-                if (symbolStyle.BitmapId >= 0)
-                {
-                    // todo: Remove this call. ImageStyle should be used instead of SymbolStyle with BitmapId
-                    ImageStyleRenderer.Draw(canvas, symbolStyle, destX, destY, symbolCache, opacity, viewport.Rotation);
-                }
-                else
+                //if (symbolStyle.BitmapId >= 0)
+                //{
+                //    // todo: Remove this call. ImageStyle should be used instead of SymbolStyle with BitmapId
+                //    ImageStyleRenderer.Draw(canvas, symbolStyle, destX, destY, symbolCache, opacity, viewport.Rotation);
+                //}
+                //else
                 {
                     SymbolStyleRenderer.Draw(canvas, symbolStyle, destX, destY, opacity, symbolStyle.SymbolType, viewport.Rotation);
                 }
-            }
-            else if (style is ImageStyle imageStyle)
-            {
-                ImageStyleRenderer.Draw(canvas, imageStyle, destX, destY, symbolCache, opacity, viewport.Rotation);
             }
             else
             {

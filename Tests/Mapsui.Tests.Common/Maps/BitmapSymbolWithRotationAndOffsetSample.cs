@@ -62,13 +62,12 @@ namespace Mapsui.Tests.Common.Maps
 
             var feature = new GeometryFeature { Geometry = new Point(x, y) };
 
-            feature.Styles.Add(new SymbolStyle
+            feature.Styles.Add(new ImageStyle
             {
                 BitmapId = bitmapId,
                 SymbolOffset = new Offset { Y = -24 },
                 SymbolRotation = rotation,
                 RotateWithMap = true,
-                SymbolType = SymbolType.Triangle
             });
             return feature;
         }
