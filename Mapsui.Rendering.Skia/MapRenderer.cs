@@ -41,6 +41,7 @@ namespace Mapsui.Rendering.Skia
         {
             StyleRenderers[typeof(RasterStyle)] = new RasterStyleRenderer();
             StyleRenderers[typeof(VectorStyle)] = new VectorStyleRenderer();
+            StyleRenderers[typeof(LabelStyle)] = new LabelStyleRenderer();
 
             WidgetRenders[typeof(Hyperlink)] = new HyperlinkWidgetRenderer();
             WidgetRenders[typeof(ScaleBarWidget)] = new ScaleBarWidgetRenderer();

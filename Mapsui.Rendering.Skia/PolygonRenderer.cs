@@ -11,16 +11,7 @@ namespace Mapsui.Rendering.Skia
         public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IStyle? style, IFeature feature,
             Polygon polygon, float opacity, ISymbolCache? symbolCache = null)
         {
-            if (style is LabelStyle labelStyle)
-            {
-                if (polygon.Envelope is not null)
-                {
-                    var worldCenter = polygon.Envelope.Centroid;
-                    var center = viewport.WorldToScreen(worldCenter.X, worldCenter.Y).ToPoint();
-                    LabelRenderer.Draw(canvas, labelStyle, feature, center.X, center.Y, opacity);
-                }
-            }
-            else if (style is StyleCollection styleCollection)
+            if (style is StyleCollection styleCollection)
             {
                 foreach (var s in styleCollection)
                 {

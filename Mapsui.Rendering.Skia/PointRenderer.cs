@@ -15,10 +15,6 @@ namespace Mapsui.Rendering.Skia
             {
                 CalloutStyleRenderer.Draw(canvas, viewport, opacity, destX, destY, calloutStyle);
             }
-            else if (style is LabelStyle labelStyle)
-            {
-                LabelRenderer.Draw(canvas, labelStyle, feature, destX, destY, opacity);
-            }
             else if (style is SymbolStyle symbolStyle)
             {
                 if (symbolStyle.BitmapId >= 0)
@@ -37,7 +33,7 @@ namespace Mapsui.Rendering.Skia
             }
             else
             {
-                throw new Exception($"Style of type '{style.GetType()}' is not supported for points");
+                //throw new Exception($"Style of type '{style.GetType()}' is not supported for points");
             }
         }
     }
