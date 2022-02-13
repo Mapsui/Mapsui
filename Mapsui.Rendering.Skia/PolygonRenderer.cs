@@ -11,14 +11,7 @@ namespace Mapsui.Rendering.Skia
         public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IStyle? style, IFeature feature,
             Polygon polygon, float opacity, ISymbolCache? symbolCache = null)
         {
-            if (style is StyleCollection styleCollection)
-            {
-                foreach (var s in styleCollection)
-                {
-                    Draw(canvas, viewport, s, feature, polygon, opacity, symbolCache);
-                }
-            }
-            else if (style is VectorStyle vectorStyle)
+            if (style is VectorStyle vectorStyle)
             {
                 float lineWidth = 1;
                 var lineColor = Color.Black; // default
