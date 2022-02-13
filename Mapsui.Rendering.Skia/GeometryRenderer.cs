@@ -9,13 +9,13 @@ namespace Mapsui.Rendering.Skia
     public class GeometryRenderer
     {
         public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, float layerOpacity,
-            GeometryFeature geometryFeature, SymbolCache symbolCache)
+            GeometryFeature geometryFeature, ISymbolCache symbolCache)
         {
             Draw(canvas, viewport, style, layerOpacity, geometryFeature, geometryFeature.Geometry, symbolCache);
         }
 
         private static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, float layerOpacity,
-            IFeature feature, Geometry? geometry, SymbolCache symbolCache)
+            IFeature feature, Geometry? geometry, ISymbolCache symbolCache)
         {
             if (geometry is Point point)
                 PointRenderer.Draw(canvas, viewport, style, feature, point.X, point.Y, symbolCache,

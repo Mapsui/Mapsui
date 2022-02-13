@@ -6,12 +6,12 @@ namespace Mapsui.Rendering.Skia
     internal class ImageStyleRenderer
     {
         public static void Draw(SKCanvas canvas, ImageStyle symbolStyle, double x, double y,
-                SymbolCache symbolCache, float opacity, double mapRotation)
+                ISymbolCache symbolCache, float opacity, double mapRotation)
         {
             if (symbolStyle.BitmapId < 0)
                 return;
 
-            var bitmap = symbolCache.GetOrCreate(symbolStyle.BitmapId);
+            var bitmap = (BitmapInfo)symbolCache.GetOrCreate(symbolStyle.BitmapId);
             if (bitmap == null)
                 return;
 
@@ -61,7 +61,7 @@ namespace Mapsui.Rendering.Skia
                     var sprite = bitmap.Sprite;
                     if (sprite.Data == null)
                     {
-                        var bitmapAtlas = symbolCache.GetOrCreate(sprite.Atlas);
+                        var bitmapAtlas = (BitmapInfo)symbolCache.GetOrCreate(sprite.Atlas);
                         sprite.Data = bitmapAtlas?.Bitmap?.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width,
                             sprite.Y + sprite.Height));
                     }

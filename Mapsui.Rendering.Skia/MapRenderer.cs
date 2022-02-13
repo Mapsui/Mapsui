@@ -40,6 +40,7 @@ namespace Mapsui.Rendering.Skia
         public MapRenderer()
         {
             StyleRenderers[typeof(RasterStyle)] = new RasterStyleRenderer();
+            StyleRenderers[typeof(VectorStyle)] = new VectorStyleRenderer();
 
             WidgetRenders[typeof(Hyperlink)] = new HyperlinkWidgetRenderer();
             WidgetRenders[typeof(ScaleBarWidget)] = new ScaleBarWidgetRenderer();
@@ -138,8 +139,6 @@ namespace Mapsui.Rendering.Skia
                 GeometryRenderer.Draw(canvas, viewport, style, layerOpacity, geometryFeatureNts, _symbolCache);
             if (feature is PointFeature pointFeature)
                 PointRenderer.Draw(canvas, viewport, style, pointFeature, pointFeature.Point.X, pointFeature.Point.Y, _symbolCache, layerOpacity * style.Opacity);
-            else if (feature is RectFeature rectFeature)
-                RectRenderer.Draw(canvas, viewport, style, rectFeature, layerOpacity * style.Opacity);
         }
 
         private void Render(object canvas, IReadOnlyViewport viewport, IEnumerable<IWidget> widgets, float layerOpacity)

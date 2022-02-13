@@ -9,7 +9,7 @@ namespace Mapsui.Rendering.Skia
     internal static class PolygonRenderer
     {
         public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IStyle? style, IFeature feature,
-            Polygon polygon, float opacity, SymbolCache? symbolCache = null)
+            Polygon polygon, float opacity, ISymbolCache? symbolCache = null)
         {
             if (style is LabelStyle labelStyle)
             {
@@ -173,11 +173,11 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        private static SKImage? GetImage(SymbolCache? symbolCache, int bitmapId)
+        private static SKImage? GetImage(ISymbolCache? symbolCache, int bitmapId)
         {
             if (symbolCache == null)
                 return null;
-            var bitmapInfo = symbolCache.GetOrCreate(bitmapId);
+            var bitmapInfo = (BitmapInfo)symbolCache.GetOrCreate(bitmapId);
             if (bitmapInfo == null)
                 return null;
             if (bitmapInfo.Type == BitmapType.Bitmap)
@@ -190,7 +190,7 @@ namespace Mapsui.Rendering.Skia
 
                 if (sprite.Data == null)
                 {
-                    var bitmapAtlas = symbolCache.GetOrCreate(sprite.Atlas);
+                    var bitmapAtlas = (BitmapInfo)symbolCache.GetOrCreate(sprite.Atlas);
                     sprite.Data = bitmapAtlas?.Bitmap?.Subset(new SKRectI(sprite.X, sprite.Y, sprite.X + sprite.Width,
                         sprite.Y + sprite.Height));
                 }
