@@ -35,11 +35,6 @@ namespace Mapsui.Rendering.Skia
             {
                 ImageStyleRenderer.Draw(canvas, imageStyle, destX, destY, symbolCache, opacity, viewport.Rotation);
             }
-            else if (style is VectorStyle vectorStyle)
-            {
-                // Use the SymbolStyleRenderer and specify Ellipse
-                SymbolStyleRenderer.Draw(canvas, vectorStyle, destX, destY, opacity, SymbolType.Ellipse);
-            }
             else
             {
                 throw new Exception($"Style of type '{style.GetType()}' is not supported for points");
