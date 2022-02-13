@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Rendering.Skia.SkiaStyles;
@@ -11,12 +9,6 @@ namespace Mapsui.Rendering.Skia
 {
     public class RasterStyleRenderer : ISkiaStyleRenderer
     {
-        private const int _tilesToKeepMultiplier = 3;
-        private const int _minimumTilesToKeep = 32;
-        private long _lastIteration;
-        private readonly IDictionary<object, BitmapInfo?> _tileCache =
-            new Dictionary<object, BitmapInfo?>(new IdentityComparer<object>());
-
         public bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, IStyle style, ISymbolCache symbolCache, long currentIteration)
         {
             try
@@ -27,29 +19,28 @@ namespace Mapsui.Rendering.Skia
                 if (raster == null)
                     return false;
 
-                if (currentIteration > 0 && _lastIteration != currentIteration)
-                {
-                    _lastIteration = currentIteration;
-                    RemovedUnusedBitmapsFromCache();
-                }
+                if (!(style is RasterStyle rasterStyle))
+                    return false;
+
+                rasterStyle.UpdateCache(currentIteration);
 
                 BitmapInfo? bitmapInfo;
 
-                if (!_tileCache.Keys.Contains(raster))
+                if (!rasterStyle.TileCache.Keys.Contains(raster))
                 {
                     bitmapInfo = BitmapHelper.LoadBitmap(raster.Data);
-                    _tileCache[raster] = bitmapInfo;
+                    rasterStyle.TileCache[raster] = bitmapInfo;
                 }
                 else
                 {
-                    bitmapInfo = _tileCache[raster];
+                    bitmapInfo = (BitmapInfo?)rasterStyle.TileCache[raster];
                 }
 
                 if (bitmapInfo == null)
                     return false;
 
                 bitmapInfo.IterationUsed = currentIteration;
-                _tileCache[raster] = bitmapInfo;
+                rasterStyle.TileCache[raster] = bitmapInfo;
 
                 var extent = feature.Extent;
 
@@ -132,44 +123,6 @@ namespace Mapsui.Rendering.Skia
                 (float)Math.Round(Math.Min(boundingBox.Top, boundingBox.Bottom)),
                 (float)Math.Round(boundingBox.Right),
                 (float)Math.Round(Math.Max(boundingBox.Top, boundingBox.Bottom)));
-        }
-
-        private void RemovedUnusedBitmapsFromCache()
-        {
-            var tilesUsedInCurrentIteration =
-                _tileCache.Values.Count(i => i?.IterationUsed == _lastIteration);
-            var tilesToKeep = tilesUsedInCurrentIteration * _tilesToKeepMultiplier;
-            tilesToKeep = Math.Max(tilesToKeep, _minimumTilesToKeep);
-            var tilesToRemove = _tileCache.Keys.Count - tilesToKeep;
-
-            if (tilesToRemove > 0) RemoveOldBitmaps(_tileCache, tilesToRemove);
-        }
-
-        private static void RemoveOldBitmaps(IDictionary<object, BitmapInfo?> tileCache, int numberToRemove)
-        {
-            var counter = 0;
-            var orderedKeys = tileCache.OrderBy(kvp => kvp.Value?.IterationUsed).Select(kvp => kvp.Key).ToList();
-            foreach (var key in orderedKeys)
-            {
-                if (counter >= numberToRemove) break;
-                var textureInfo = tileCache[key];
-                tileCache.Remove(key);
-                textureInfo?.Bitmap?.Dispose();
-                counter++;
-            }
-        }
-    }
-
-    public class IdentityComparer<T> : IEqualityComparer<T> where T : class
-    {
-        public bool Equals(T obj, T otherObj)
-        {
-            return obj == otherObj;
-        }
-
-        public int GetHashCode(T obj)
-        {
-            return obj.GetHashCode();
         }
     }
 }
