@@ -103,9 +103,11 @@ namespace Mapsui.Providers.Wfs.Utilities
                     xWriter.WriteAttributeString("typeName", qualification + featureTypeInfo.Name);
                     xWriter.WriteAttributeString("srsName", ProjectionHelper.EpsgPrefix + featureTypeInfo.SRID);
                     xWriter.WriteElementString("PropertyName", qualification + featureTypeInfo.Geometry.GeometryName);
-                    if (!labelProperties.All(string.IsNullOrWhiteSpace))
-                        xWriter.WriteElementString("PropertyName", string.Join(",", 
-                            labelProperties.Where(x => !string.IsNullOrWhiteSpace(x)).Select(lbl => qualification + lbl)));
+                    foreach (var labelProperty in labelProperties.Where(labelProperty =>
+                                 !string.IsNullOrWhiteSpace(labelProperty)))
+                    {
+                        xWriter.WriteElementString("PropertyName", qualification + labelProperty);
+                    }
 
                     AppendGml2Filter(xWriter, featureTypeInfo, boundingBox, filter, qualification);
                     
