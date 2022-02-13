@@ -47,6 +47,7 @@ namespace Mapsui.Tests.Common.Maps
 
             var features = TileIndexToFeatures(tileIndexes, new SampleTileSource());
             var layer = new MemoryLayer { DataSource = new MemoryProvider<RasterFeature>(features), Name = "Tiles" };
+            layer.Style = new RasterStyle();
             return layer;
         }
 
