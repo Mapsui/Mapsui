@@ -1,20 +1,28 @@
 ﻿using System;
+using Mapsui.Layers;
 using Mapsui.Rendering.Skia.Extensions;
+using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Styles;
 using SkiaSharp;
 using Topten.RichTextKit;
 
 namespace Mapsui.Rendering.Skia
 {
-    public class CalloutStyleRenderer : SymbolStyle
+    public class CalloutStyleRenderer : ISkiaStyleRenderer
     {
-        public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport,
-            float opacity, double x, double y, CalloutStyle calloutStyle)
+        public bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, Styles.IStyle style, ISymbolCache symbolCache, long iteration)
         {
+            var pointFeature = (PointFeature)feature;
+            var calloutStyle = (CalloutStyle)style;
+
+            var opacity = (float)(layer.Opacity * style.Opacity);
+
+            var (x, y) = viewport.WorldToScreenXY(pointFeature.Point.X, pointFeature.Point.Y);
+
             if (calloutStyle.BitmapId < 0 || calloutStyle.Invalidated)
             {
                 if (calloutStyle.Content < 0 && calloutStyle.Type == CalloutType.Custom)
-                    return;
+                    return false;
 
                 if (calloutStyle.Invalidated)
                 {
@@ -26,7 +34,7 @@ namespace Mapsui.Rendering.Skia
 
             // Now we have the complete callout rendered, so we could draw it
             if (calloutStyle.BitmapId < 0)
-                return;
+                return false;
 
             var picture = (SKPicture)BitmapRegistry.Instance.Get(calloutStyle.BitmapId);
 
@@ -61,6 +69,8 @@ namespace Mapsui.Rendering.Skia
             canvas.DrawPicture(picture, skPaint);
 
             canvas.Restore();
+
+            return true;
         }
 
         public static void RenderCallout(CalloutStyle callout)

@@ -11,14 +11,6 @@ namespace Mapsui.Rendering.Skia
         {
             var (destX, destY) = viewport.WorldToScreenXY(x, y);
 
-            if (style is CalloutStyle calloutStyle)
-            {
-                CalloutStyleRenderer.Draw(canvas, viewport, opacity, destX, destY, calloutStyle);
-            }
-            else
-            {
-                //throw new Exception($"Style of type '{style.GetType()}' is not supported for points");
-            }
         }
     }
 }

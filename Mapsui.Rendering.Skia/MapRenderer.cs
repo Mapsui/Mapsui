@@ -43,6 +43,7 @@ namespace Mapsui.Rendering.Skia
             StyleRenderers[typeof(VectorStyle)] = new VectorStyleRenderer();
             StyleRenderers[typeof(LabelStyle)] = new LabelStyleRenderer();
             StyleRenderers[typeof(SymbolStyle)] = new SymbolStyleRenderer();
+            StyleRenderers[typeof(CalloutStyle)] = new CalloutStyleRenderer();
 
             WidgetRenders[typeof(Hyperlink)] = new HyperlinkWidgetRenderer();
             WidgetRenders[typeof(ScaleBarWidget)] = new ScaleBarWidgetRenderer();
@@ -139,8 +140,6 @@ namespace Mapsui.Rendering.Skia
             // No special style renderer handled this up to now, than try standard renderers
             if (feature is GeometryFeature geometryFeatureNts)
                 GeometryRenderer.Draw(canvas, viewport, style, layerOpacity, geometryFeatureNts, _symbolCache);
-            if (feature is PointFeature pointFeature)
-                PointRenderer.Draw(canvas, viewport, style, pointFeature, pointFeature.Point.X, pointFeature.Point.Y, _symbolCache, layerOpacity * style.Opacity);
         }
 
         private void Render(object canvas, IReadOnlyViewport viewport, IEnumerable<IWidget> widgets, float layerOpacity)
