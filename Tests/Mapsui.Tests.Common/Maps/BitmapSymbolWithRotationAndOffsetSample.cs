@@ -62,7 +62,7 @@ namespace Mapsui.Tests.Common.Maps
 
             var feature = new GeometryFeature { Geometry = new Point(x, y) };
 
-            feature.Styles.Add(new ImageStyle
+            feature.Styles.Add(new SymbolStyle
             {
                 BitmapId = bitmapId,
                 SymbolOffset = new Offset { Y = -24 },

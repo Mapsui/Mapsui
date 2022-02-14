@@ -48,16 +48,16 @@ namespace Mapsui.Tests.Common.Maps
             return new List<IFeature>
             {
                 new PointFeature(new MPoint(50, 50)) {
-                    Styles = new[] {new ImageStyle {BitmapId = pinId}}
+                    Styles = new[] {new SymbolStyle { BitmapId = pinId}}
                 },
                 new PointFeature(new MPoint(50, 100)) {
-                    Styles = new[] {new ImageStyle {BitmapId = pinId}}
+                    Styles = new[] {new SymbolStyle { BitmapId = pinId}}
                 },
                 new PointFeature(new MPoint(100, 50)) {
-                    Styles = new[] {new ImageStyle {BitmapId = pinId}}
+                    Styles = new[] {new SymbolStyle { BitmapId = pinId}}
                 },
                 new PointFeature(new MPoint(100, 100)) {
-                    Styles = new[] {new ImageStyle {BitmapId = pinId}}
+                    Styles = new[] {new SymbolStyle { BitmapId = pinId}}
                 }
             };
         }

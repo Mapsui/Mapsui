@@ -27,7 +27,7 @@ namespace Mapsui.Rendering.Skia
                     case (PointFeature pointFeature):
                         // Use the SymbolStyleRenderer and specify Ellipse
                         var (destX, destY) = viewport.WorldToScreenXY(pointFeature.Point.X, pointFeature.Point.Y);
-                        SymbolStyleRenderer.Draw(canvas, vectorStyle, destX, destY, opacity, SymbolType.Ellipse);
+                        SymbolStyleRenderer.DrawSymbol(canvas, viewport, layer, pointFeature, new SymbolStyle { Outline = vectorStyle.Outline, Fill = vectorStyle.Fill, Line = vectorStyle.Line }, symbolCache, iteration);
                         break;
                     case (GeometryFeature geometryFeatureNts):
                         switch (geometryFeatureNts.Geometry)
