@@ -39,9 +39,14 @@ namespace Mapsui.Rendering.Skia
                             case Point point:
                                 Draw(canvas, viewport, layer, new PointFeature(point.X, point.Y), style, symbolCache, iteration);
                                 break;
-                            default:
-                                GeometryRenderer.Draw(canvas, viewport, style, opacity, geometryFeatureNts, symbolCache);
+                            case Polygon polygon:
+                                PolygonRenderer.Draw(canvas, viewport, style, feature, polygon, opacity, symbolCache);
                                 break;
+                            case LineString lineString:
+                                LineStringRenderer.Draw(canvas, viewport, style, feature, lineString, opacity);
+                                break;
+                            default:
+                                throw new ArgumentException("Unknown geometry of Feature");
                         }
                         break;
                     case (GeometryCollection geometryFeatureCollection):

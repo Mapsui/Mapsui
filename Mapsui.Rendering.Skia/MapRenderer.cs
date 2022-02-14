@@ -136,10 +136,6 @@ namespace Mapsui.Rendering.Skia
                     // Yes, special style renderer drawn correct
                     return;
             }
-
-            // No special style renderer handled this up to now, than try standard renderers
-            if (feature is GeometryFeature geometryFeatureNts)
-                GeometryRenderer.Draw(canvas, viewport, style, layerOpacity, geometryFeatureNts, _symbolCache);
         }
 
         private void Render(object canvas, IReadOnlyViewport viewport, IEnumerable<IWidget> widgets, float layerOpacity)
