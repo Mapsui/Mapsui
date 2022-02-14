@@ -702,7 +702,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.MPoint.html",
-          "hash": "v0TgAjuWXtFtr1vjuOd+8gJkbJglWmgqnL3miYGTJG0="
+          "hash": "LmFj3xpeXer391iQACi55oUcN+ZSXPVUOsGcNVXjZuk="
         }
       },
       "is_incremental": false,
@@ -726,7 +726,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.MRaster.html",
-          "hash": "TuQ6D2uT6330rTy7pxdkMGgf9kxOY6dW6cpJo6h/l08="
+          "hash": "w3y7XdrjZudLAfG84lzaKtDQefKmy1mcwotVVP4+rrk="
         }
       },
       "is_incremental": false,
@@ -750,7 +750,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.MRect.html",
-          "hash": "my2lUTPuayGj4HhTu3rxVWzXjPkzxvx/9qPctFGm8QU="
+          "hash": "hzUvgcA58SKLK0jaqXAn5U0RSRjtr7c3MYB8AOWXbcw="
         }
       },
       "is_incremental": false,
@@ -3606,7 +3606,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.html",
-          "hash": "WfhNODFxCFDVgIiguuFXhKJW/RmkShd3y+7J9MOhmgw="
+          "hash": "469HcwIrLb8zicSmhOuuiJ7gGVCI9wBDBt0mKiAxA+g="
         }
       },
       "is_incremental": false,
@@ -3976,7 +3976,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/toc.html",
-          "hash": "FObQvYL6IX4FetTnhvU+YSvumxgKl7Yl6FNK1lXtaB4="
+          "hash": "maaceERRoXUstHZbAicd4BUKrLYf3tgIRzRfetcGwbM="
         }
       },
       "is_incremental": false,
@@ -4001,6 +4001,18 @@
         ".html": {
           "relative_path": "documentation/v2.0-upgrade-guide.html",
           "hash": "AhAbU/LJ8WWwx9iBOenCoOVQwxLQXti/YW8V4G+y3cA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/v4.0-upgrade-guide.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/v4.0-upgrade-guide.html",
+          "hash": "dTdkkUl8rqmyS5qWfsnpMGRXViltkS4cGLcGkPCHWQg="
         }
       },
       "is_incremental": false,
@@ -4100,7 +4112,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 28,
+          "total_file_count": 29,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
