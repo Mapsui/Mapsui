@@ -645,6 +645,22 @@ namespace Mapsui.UI.Forms
 
                 return;
             }
+            // Check for clicked mylocation
+            else if (e.MapInfo?.Layer == MyLocationLayer)
+            {
+                if (e.MapInfo!.ScreenPosition == null)
+                    return;
+
+                var args = new DrawableClickedEventArgs(
+                    Viewport.ScreenToWorld(e.MapInfo!.ScreenPosition).ToNative(),
+                    new Point(e.MapInfo.ScreenPosition.X, e.MapInfo.ScreenPosition.Y), e.NumTaps);
+
+                MyLocationLayer?.HandleClicked(args);
+
+                e.Handled = args.Handled;
+
+                return;
+            }
         }
 
         private void HandlerLongTap(object? sender, TappedEventArgs e)

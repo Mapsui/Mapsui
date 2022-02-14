@@ -35,6 +35,7 @@ namespace Mapsui.UI.Objects
         private readonly MapView _mapView;
         private readonly GeometryFeature _feature;
         private readonly GeometryFeature _featureDir;
+        private readonly GeometryFeature _featureLabel;
 
         private static int _bitmapMovingId = -1;
         private static int _bitmapStillId = -1;
@@ -89,6 +90,47 @@ namespace Mapsui.UI.Objects
         /// <value>Scale of symbol</value>
         public double Scale { get; set; } = 1.0;
 
+        private string _labelText;
+
+        /// <summary>
+        /// The text that is displayed in the MyLocation label
+        /// (can contains line breaks).
+        /// </summary>
+        public string LabelText
+        {
+            get
+            {
+                return _labelText;
+            }
+            set
+            {
+                _labelText = value;
+                ((LabelStyle)_featureLabel.Styles.First()).Text = value;
+                _mapView.Refresh();
+            }
+        }
+
+        /// <summary>
+        /// Show or hide the a label with further infos next to the MyLocation symbol.
+        /// </summary>
+        public bool ShowLabel
+        {
+            get
+            {
+                return ((LabelStyle)_featureLabel.Styles.First()).Enabled;
+            }
+            set
+            {
+                ((LabelStyle)_featureLabel.Styles.First()).Enabled = value;
+                _mapView.Refresh();
+            }
+        }
+
+        /// <summary>
+        /// This event is triggered whenever the MyLocation symbol or label is clicked.
+        /// </summary>
+        public event EventHandler<DrawableClickedEventArgs>? Clicked;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="T:Mapsui.UI.Objects.MyLocationLayer"/> class
         /// with a starting location.
@@ -109,6 +151,7 @@ namespace Mapsui.UI.Objects
             _mapView = view ?? throw new ArgumentNullException("MapView shouldn't be null");
 
             Enabled = false;
+            IsMapInfoLayer = true;
 
             if (_bitmapMovingId == -1)
             {
@@ -165,7 +208,26 @@ namespace Mapsui.UI.Objects
                 Opacity = 1,
             });
 
-            DataSource = new MemoryProvider<IFeature>(new List<IFeature> { _featureDir, _feature });
+            _labelText = "";
+
+            _featureLabel = new GeometryFeature
+            {
+                Geometry = myLocation.ToMapsui().ToPoint()
+            };
+
+            _featureLabel.Styles.Clear();
+            _featureLabel.Styles.Add(new LabelStyle
+            {
+                Enabled = false,
+                Text = _labelText,
+                BackColor = new Mapsui.Styles.Brush(Mapsui.Styles.Color.White),
+                Opacity = 0.75F,
+                HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left,
+                VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Top,
+                Offset = new Offset(8, 8)
+            });
+
+            DataSource = new MemoryProvider<IFeature>(new List<IFeature> { _featureLabel, _featureDir, _feature });
             Style = null;
         }
 
@@ -349,6 +411,7 @@ namespace Mapsui.UI.Objects
             {
                 _feature.Dispose();
                 _featureDir.Dispose();
+                _featureLabel.Dispose();
             }
 
             base.Dispose(disposing);
@@ -363,10 +426,16 @@ namespace Mapsui.UI.Objects
                 myLocation = newLocation;
                 _feature.Geometry = myLocation.ToPoint();
                 _featureDir.Geometry = myLocation.ToPoint();
+                _featureLabel.Geometry = myLocation.ToPoint();
                 modified = true;
             }
 
             return modified;
+        }
+
+        internal void HandleClicked(DrawableClickedEventArgs e)
+        {
+            Clicked?.Invoke(this, e);
         }
     }
 }
