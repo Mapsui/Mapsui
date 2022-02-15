@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO;
 using BruTile;
 using BruTile.Cache;
 using BruTile.Predefined;
@@ -22,14 +23,18 @@ public class RasterizingTileProvider : ITileSource
     private ITileSchema? _tileSchema;
     private Attribution? _attribution;
     private readonly IProvider<IFeature>? _dataSource;
+    private readonly ETileFormat _tileFormat;
 
-    public RasterizingTileProvider(ILayer layer,
+    public RasterizingTileProvider(
+        ILayer layer,
         double renderResolutionMultiplier = 1,
         IRenderer? rasterizer = null,
         float pixelDensity = 1,
         IPersistentCache<byte[]>? persistentCache = null,
-        IProjection? projection = null)
+        IProjection? projection = null,
+        ETileFormat tileFormat = ETileFormat.Png)
     {
+        _tileFormat = tileFormat;
         _layer = layer;
         _renderResolutionMultiplier = renderResolutionMultiplier;
         _rasterizer = rasterizer;
@@ -73,10 +78,31 @@ public class RasterizingTileProvider : ITileSource
                 Opacity = _layer.Opacity,
             };
 
-            using var stream = renderer.RenderToBitmapStream(viewPort, new[] { renderLayer }, pixelDensity: _pixelDensity);
-            _rasterizingLayers.Push(renderer);
-            result = stream?.ToArray();
-            PersistentCache?.Add(tileInfo.Index, result ?? Array.Empty<byte>());
+            MemoryStream? stream = null;
+            try
+            {
+                switch (_tileFormat)
+                {
+                    case ETileFormat.Png:
+                        stream = renderer.RenderToBitmapStream(viewPort, new[] { renderLayer }, pixelDensity: _pixelDensity);
+                        break;
+                    case ETileFormat.Skp:
+                        if (renderer is IPictureRenderer pictureRenderer)
+                        {
+                            stream = pictureRenderer.RenderToPictureStream(viewPort, new[] { renderLayer });
+                        }
+                        
+                        break;
+                }
+
+                _rasterizingLayers.Push(renderer);
+                result = stream?.ToArray();
+                PersistentCache?.Add(tileInfo.Index, result ?? Array.Empty<byte>());
+            }
+            finally
+            {
+                stream?.Dispose();
+            }
         }
 
         return result;
@@ -105,4 +131,22 @@ public class RasterizingTileProvider : ITileSource
     public ITileSchema Schema => _tileSchema ??= new GlobalSphericalMercator();
     public string Name => _layer.Name;
     public Attribution Attribution => _attribution ??= new Attribution(_layer.Attribution.Text, _layer.Attribution.Url);
+
+    public object? GetPictureTile(TileInfo tileInfo)
+    {
+        var renderer = GetRenderer() as IPictureRenderer;
+
+        if (renderer == null)
+        {
+            return null;
+        }
+
+        Schema.Resolutions.TryGetValue(tileInfo.Index.Level, out var tileResolution);
+
+        var resolution = tileResolution.UnitsPerPixel;
+        var viewPort = RasterizingLayer.CreateViewport(tileInfo.Extent.ToMRect(), resolution, _renderResolutionMultiplier, 1);
+        var result = renderer.RenderToPicture(viewPort, new[] { _layer });
+        _rasterizingLayers.Push(renderer);
+        return result;
+    }
 }

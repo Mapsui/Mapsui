@@ -30,6 +30,8 @@ namespace Mapsui.Layers
         /// <param name="minExtraTiles">Number of minimum extra tiles for memory cache</param>
         /// <param name="maxExtraTiles">Number of maximum extra tiles for memory cache</param>
         /// <param name="persistentCache">Persistent Cache</param>
+        /// <param name="projection">Projection</param>
+        /// <param name="tileFormat">Tile Format to Render</param>
         public RasterizingTileLayer(
             ILayer layer,
             double renderResolutionMultiplier = 1,
@@ -42,16 +44,18 @@ namespace Mapsui.Layers
             int minExtraTiles = -1,
             int maxExtraTiles = -1,
             IPersistentCache<byte[]>? persistentCache = null,
-            IProjection? projection = null)
+            IProjection? projection = null,
+            ETileFormat tileFormat = ETileFormat.Png)
         {
-            _tileProvider = new RasterizingTileProvider(layer, renderResolutionMultiplier, rasterizer, pixelDensity, persistentCache, projection);
+            _tileProvider = new RasterizingTileProvider(layer, renderResolutionMultiplier, rasterizer, pixelDensity, persistentCache, projection, tileFormat);
             _tileLayer = new TileLayer(_tileProvider,
                 minTiles,
                 maxTiles,
                 dataFetchStrategy,
                 renderFetchStrategy,
                 minExtraTiles,
-                maxExtraTiles);
+                maxExtraTiles,
+                tileFormat == ETileFormat.Picture ? FetchTile : null);
             _tileLayer.DataChanged += TileLayerDataChanged;
             _tileLayer.PropertyChanged += TileLayerPropertyChanged;
             SourceLayer = layer;
@@ -101,6 +105,11 @@ namespace Mapsui.Layers
         public void ClearCache()
         {
             _tileLayer.ClearCache();
+        }
+
+        private IFeature? FetchTile(TileInfo arg)
+        {
+            return new PictureFeature(_tileProvider.GetPictureTile(arg), arg.Extent.ToMRect());
         }
     }
 }
