@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using BruTile;
 using BruTile.Cache;
@@ -45,13 +46,11 @@ public class RasterizingTileProvider : ITileSource
         {
             _dataSource = dataSourceLayer.DataSource;
             if (!string.IsNullOrEmpty(_dataSource.CRS) && _dataSource.CRS != this.Schema.Srs)
-            {
-                // The TileSchema and the _dataSource.CRS are different Project it.
+            // The TileSchema and the _dataSource.CRS are different Project it.
                 _dataSource = new ProjectingProvider(_dataSource, projection ?? new Projection())
                 {
                     CRS = this.Schema.Srs // The Schema SRS
                 };
-            }
         }
     }
 
@@ -59,40 +58,46 @@ public class RasterizingTileProvider : ITileSource
 
     public byte[]? GetTile(TileInfo tileInfo)
     {
-        var result = PersistentCache.Find(tileInfo.Index);
-        if (result == null)
+        lock(this)
         {
-            var renderer = GetRenderer();
-            var viewPort = CreateRenderLayer(tileInfo, out var renderLayer);
-
-            MemoryStream? stream = null;
-            try
+            var index = tileInfo.Index;
+            if (index.Level == 2 && index.Col == 0 && index.Row == 0)
             {
-                switch (_tileFormat)
+                Debug.WriteLine("test");
+            }
+
+            var result = PersistentCache.Find(index);
+            if (result == null)
+            {
+                var renderer = GetRenderer();
+                var viewPort = CreateRenderLayer(tileInfo, out var renderLayer);
+
+                MemoryStream? stream = null;
+                try
                 {
-                    case ETileFormat.Png:
-                        stream = renderer.RenderToBitmapStream(viewPort, new[] { renderLayer }, pixelDensity: _pixelDensity);
-                        break;
-                    case ETileFormat.Skp:
-                        if (renderer is IPictureRenderer pictureRenderer)
-                        {
-                            stream = pictureRenderer.RenderToPictureStream(viewPort, new[] { renderLayer });
-                        }
-                        
-                        break;
+                    switch (_tileFormat)
+                    {
+                        case ETileFormat.Png:
+                            stream = renderer.RenderToBitmapStream(viewPort, new[] { renderLayer }, pixelDensity: _pixelDensity);
+                            break;
+                        case ETileFormat.Skp:
+                            if (renderer is IPictureRenderer pictureRenderer)
+                                stream = pictureRenderer.RenderToPictureStream(viewPort, new[] { renderLayer });
+                            break;
+                    }
+
+                    _rasterizingLayers.Push(renderer);
+                    result = stream?.ToArray();
+                    PersistentCache?.Add(index, result ?? Array.Empty<byte>());
                 }
+                finally
+                {
+                    stream?.Dispose();
+                }
+            }
 
-                _rasterizingLayers.Push(renderer);
-                result = stream?.ToArray();
-                PersistentCache?.Add(tileInfo.Index, result ?? Array.Empty<byte>());
-            }
-            finally
-            {
-                stream?.Dispose();
-            }
+            return result;
         }
-
-        return result;
     }
 
     private Viewport CreateRenderLayer(TileInfo tileInfo, out ILayer renderLayer)
@@ -103,33 +108,20 @@ public class RasterizingTileProvider : ITileSource
         var viewPort = RasterizingLayer.CreateViewport(tileInfo.Extent.ToMRect(), resolution, _renderResolutionMultiplier, 1);
         var fetchInfo = new FetchInfo(viewPort.Extent, resolution);
         var features = GetFeatures(fetchInfo);
-        renderLayer = new MemoryLayer(_layer.Name)
-        {
-            Style = _layer.Style,
-            DataSource = new MemoryProvider<IFeature>(features),
-            Attribution = _layer.Attribution,
-            Opacity = _layer.Opacity,
-        };
+        renderLayer = new RenderLayer(_layer, features);
         return viewPort;
     }
 
     private IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
     {
-        if (_dataSource != null)
-        {
-            return _dataSource.GetFeatures(fetchInfo);
-        }
+        if (_dataSource != null) return _dataSource.GetFeatures(fetchInfo);
 
         return _layer.GetFeatures(fetchInfo.Extent, fetchInfo.Resolution);
     }
 
     private IRenderer GetRenderer()
     {
-        if (!_rasterizingLayers.TryPop(out var rasterizer))
-        {
-            rasterizer = _rasterizer ?? DefaultRendererFactory.Create();
-        }
-
+        if (!_rasterizingLayers.TryPop(out var rasterizer)) rasterizer = _rasterizer ?? DefaultRendererFactory.Create();
         return rasterizer;
     }
 
@@ -141,10 +133,7 @@ public class RasterizingTileProvider : ITileSource
     {
         var renderer = GetRenderer() as IPictureRenderer;
 
-        if (renderer == null)
-        {
-            return null;
-        }
+        if (renderer == null) return null;
         var viewPort = CreateRenderLayer(tileInfo, out var renderLayer);
         var result = renderer.RenderToPicture(viewPort, new[] { renderLayer });
         _rasterizingLayers.Push(renderer);
