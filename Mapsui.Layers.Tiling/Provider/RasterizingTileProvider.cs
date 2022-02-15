@@ -63,20 +63,7 @@ public class RasterizingTileProvider : ITileSource
         if (result == null)
         {
             var renderer = GetRenderer();
-            Schema.Resolutions.TryGetValue(tileInfo.Index.Level, out var tileResolution);
-
-            var resolution = tileResolution.UnitsPerPixel;
-            var viewPort = RasterizingLayer.CreateViewport(tileInfo.Extent.ToMRect(), resolution,
-                _renderResolutionMultiplier, 1);
-            var fetchInfo = new FetchInfo(viewPort.Extent, resolution);
-            var features = GetFeatures(fetchInfo);
-
-            ILayer renderLayer = new MemoryLayer(_layer.Name) {
-                Style = _layer.Style,
-                DataSource = new MemoryProvider<IFeature>(features),
-                Attribution = _layer.Attribution,
-                Opacity = _layer.Opacity,
-            };
+            var viewPort = CreateRenderLayer(tileInfo, out var renderLayer);
 
             MemoryStream? stream = null;
             try
@@ -106,6 +93,24 @@ public class RasterizingTileProvider : ITileSource
         }
 
         return result;
+    }
+
+    private Viewport CreateRenderLayer(TileInfo tileInfo, out ILayer renderLayer)
+    {
+        Schema.Resolutions.TryGetValue(tileInfo.Index.Level, out var tileResolution);
+
+        var resolution = tileResolution.UnitsPerPixel;
+        var viewPort = RasterizingLayer.CreateViewport(tileInfo.Extent.ToMRect(), resolution, _renderResolutionMultiplier, 1);
+        var fetchInfo = new FetchInfo(viewPort.Extent, resolution);
+        var features = GetFeatures(fetchInfo);
+        renderLayer = new MemoryLayer(_layer.Name)
+        {
+            Style = _layer.Style,
+            DataSource = new MemoryProvider<IFeature>(features),
+            Attribution = _layer.Attribution,
+            Opacity = _layer.Opacity,
+        };
+        return viewPort;
     }
 
     private IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
@@ -140,12 +145,8 @@ public class RasterizingTileProvider : ITileSource
         {
             return null;
         }
-
-        Schema.Resolutions.TryGetValue(tileInfo.Index.Level, out var tileResolution);
-
-        var resolution = tileResolution.UnitsPerPixel;
-        var viewPort = RasterizingLayer.CreateViewport(tileInfo.Extent.ToMRect(), resolution, _renderResolutionMultiplier, 1);
-        var result = renderer.RenderToPicture(viewPort, new[] { _layer });
+        var viewPort = CreateRenderLayer(tileInfo, out var renderLayer);
+        var result = renderer.RenderToPicture(viewPort, new[] { renderLayer });
         _rasterizingLayers.Push(renderer);
         return result;
     }

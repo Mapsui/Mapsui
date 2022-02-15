@@ -13,7 +13,7 @@ namespace Mapsui.Samples.Common.Desktop
 {
     public class ShapefileTileSample : ISample
     {
-        public string Name => "4 Shapefile Rasterizing Tiling";
+        public string Name => "4 Shapefile Rasterizing Tailing";
         public string Category => "Desktop";
 
         public void Setup(IMapControl mapControl)
