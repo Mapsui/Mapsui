@@ -5,6 +5,7 @@ using BruTile;
 using BruTile.Cache;
 using Mapsui.Extensions;
 using Mapsui.Fetcher;
+using Mapsui.Projections;
 using Mapsui.Rendering;
 using Mapsui.Widgets;
 
@@ -40,9 +41,10 @@ namespace Mapsui.Layers
             IRenderFetchStrategy? renderFetchStrategy = null,
             int minExtraTiles = -1,
             int maxExtraTiles = -1,
-            IPersistentCache<byte[]>? persistentCache = null)
+            IPersistentCache<byte[]>? persistentCache = null,
+            IProjection? projection = null)
         {
-            _tileProvider = new RasterizingTileProvider(layer, renderResolutionMultiplier, rasterizer, pixelDensity, persistentCache);
+            _tileProvider = new RasterizingTileProvider(layer, renderResolutionMultiplier, rasterizer, pixelDensity, persistentCache, projection);
             _tileLayer = new TileLayer(_tileProvider,
                 minTiles,
                 maxTiles,

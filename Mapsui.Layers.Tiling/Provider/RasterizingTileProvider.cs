@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using BruTile;
 using BruTile.Cache;
 using BruTile.Predefined;
 using Mapsui.Extensions;
+using Mapsui.Fetcher;
+using Mapsui.Projections;
 using Mapsui.Providers;
 using Mapsui.Rendering;
 
@@ -21,19 +21,33 @@ public class RasterizingTileProvider : ITileSource
     private readonly ILayer _layer;
     private ITileSchema? _tileSchema;
     private Attribution? _attribution;
-    private readonly object renderLock = new object();
+    private readonly IProvider<IFeature>? _dataSource;
 
     public RasterizingTileProvider(ILayer layer,
         double renderResolutionMultiplier = 1,
         IRenderer? rasterizer = null,
         float pixelDensity = 1,
-        IPersistentCache<byte[]>? persistentCache = null)
+        IPersistentCache<byte[]>? persistentCache = null,
+        IProjection? projection = null)
     {
         _layer = layer;
         _renderResolutionMultiplier = renderResolutionMultiplier;
         _rasterizer = rasterizer;
         _pixelDensity = pixelDensity;
         PersistentCache = persistentCache ?? new NullCache();
+
+        if (_layer is IDataSourceLayer { DataSource: { } } dataSourceLayer)
+        {
+            _dataSource = dataSourceLayer.DataSource;
+            if (!string.IsNullOrEmpty(_dataSource.CRS) && _dataSource.CRS != this.Schema.Srs)
+            {
+                // The TileSchema and the _dataSource.CRS are different Project it.
+                _dataSource = new ProjectingProvider(_dataSource, projection ?? new Projection())
+                {
+                    CRS = this.Schema.Srs // The Schema SRS
+                };
+            }
+        }
     }
 
     public IPersistentCache<byte[]> PersistentCache { get; set; }
@@ -49,17 +63,15 @@ public class RasterizingTileProvider : ITileSource
             var resolution = tileResolution.UnitsPerPixel;
             var viewPort = RasterizingLayer.CreateViewport(tileInfo.Extent.ToMRect(), resolution,
                 _renderResolutionMultiplier, 1);
-            ILayer renderLayer;
-            lock (renderLock)
-            {
-                var fetchInfo = new FetchInfo(viewPort.Extent, resolution);
-                var features = GetFeatures(fetchInfo);
-                renderLayer = new MemoryLayer(_layer.Name) 
-                {
-                    Style = _layer.Style,
-                    DataSource = new MemoryProvider<IFeature>(features),
-                };
-            }
+            var fetchInfo = new FetchInfo(viewPort.Extent, resolution);
+            var features = GetFeatures(fetchInfo);
+
+            ILayer renderLayer = new MemoryLayer(_layer.Name) {
+                Style = _layer.Style,
+                DataSource = new MemoryProvider<IFeature>(features),
+                Attribution = _layer.Attribution,
+                Opacity = _layer.Opacity,
+            };
 
             using var stream = renderer.RenderToBitmapStream(viewPort, new[] { renderLayer }, pixelDensity: _pixelDensity);
             _rasterizingLayers.Push(renderer);
@@ -72,9 +84,9 @@ public class RasterizingTileProvider : ITileSource
 
     private IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
     {
-        if (_layer is IDataSourceLayer { DataSource: { } } dataSourceLayer)
+        if (_dataSource != null)
         {
-            return dataSourceLayer.DataSource.GetFeatures(fetchInfo);
+            return _dataSource.GetFeatures(fetchInfo);
         }
 
         return _layer.GetFeatures(fetchInfo.Extent, fetchInfo.Resolution);
