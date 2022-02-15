@@ -18,7 +18,7 @@ using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia
 {
-    public class MapRenderer : IRenderer
+    public class MapRenderer : IRenderer, IPictureRenderer
     {
         private const int TilesToKeepMultiplier = 3;
         private const int MinimumTilesToKeep = 32;
@@ -76,29 +76,70 @@ namespace Mapsui.Rendering.Skia
 
             try
             {
+                var memoryStream = new MemoryStream();
+
                 var width = viewport.Width;
                 var height = viewport.Height;
-
                 var imageInfo = new SKImageInfo((int)Math.Round(width * pixelDensity), (int)Math.Round(height * pixelDensity),
                     SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
 
                 using var surface = SKSurface.Create(imageInfo);
-                if (surface == null) return null;
-                // Not sure if this is needed here:
-                if (background is not null) surface.Canvas.Clear(background.ToSkia());
-                surface.Canvas.Scale(pixelDensity, pixelDensity);
-                Render(surface.Canvas, viewport, layers);
-                using var image = surface.Snapshot();
-                using var data = image.Encode();
-                var memoryStream = new MemoryStream();
+                if (Render(viewport, layers, background, pixelDensity, surface?.Canvas)) return null;
+                using var image = surface!.Snapshot();
+                using var data = image.Encode(); // Default format is Png
                 data.SaveTo(memoryStream);
+
                 return memoryStream;
+
             }
             catch (Exception ex)
             {
                 Logger.Log(LogLevel.Error, ex.Message);
                 return null;
             }
+        }
+
+        public object? RenderToPicture(IReadOnlyViewport? viewport, IEnumerable<ILayer> layers, Color? background = null)
+        {
+            if (viewport == null)
+                return null;
+
+            try
+            {
+                var width = (float)viewport.Width;
+                var height = (float)viewport.Height;
+
+                var pictureRecorder = new SKPictureRecorder();
+
+                using var skCanvas = pictureRecorder.BeginRecording(new SKRect(0, 0, width, height));
+                // because skia is a Vector format I don't have to scale pixels
+                if (Render(viewport, layers, background, 1, skCanvas)) return null;
+                return pictureRecorder.EndRecording();
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(LogLevel.Error, ex.Message);
+                return null;
+            }
+        }
+
+        public MemoryStream? RenderToPictureStream(IReadOnlyViewport viewport, IEnumerable<ILayer> layers, Color? background = null)
+        {
+            var memoryStream = new MemoryStream();
+            var picture = (SKPicture?)RenderToPicture(viewport, layers, background);
+            picture?.Serialize(memoryStream);
+            return memoryStream;
+        }
+
+        private bool Render(IReadOnlyViewport viewport, IEnumerable<ILayer> layers, Color? background, float pixelDensity,
+            SKCanvas? skCanvas)
+        {
+            if (skCanvas == null) return true;
+            // Not sure if this is needed here:
+            if (background is not null) skCanvas.Clear(background.ToSkia());
+            skCanvas.Scale(pixelDensity, pixelDensity);
+            Render(skCanvas, viewport, layers);
+            return false;
         }
 
         private void Render(SKCanvas canvas, IReadOnlyViewport viewport, IEnumerable<ILayer> layers)
@@ -171,7 +212,8 @@ namespace Mapsui.Rendering.Skia
                 RectRenderer.Draw(canvas, viewport, style, rectFeature, layerOpacity * style.Opacity);
             else if (feature is RasterFeature rasterFeature)
                 RasterRenderer.Draw(canvas, viewport, style, rasterFeature, rasterFeature.Raster, layerOpacity * style.Opacity, _tileCache, _currentIteration);
-
+            else if (feature is PictureFeature pictureFeature)
+                PictureRenderer.Draw(canvas, viewport, style, pictureFeature, layerOpacity * style.Opacity);
         }
 
         private void Render(object canvas, IReadOnlyViewport viewport, IEnumerable<IWidget> widgets, float layerOpacity)
@@ -185,7 +227,7 @@ namespace Mapsui.Rendering.Skia
             // todo: We will need to select on style instead of layer
 
             layers = layers
-                .Select(l => (l is ISourceLayer rl) ? rl.SourceLayer : l)
+                .Select(l => (l is ISourceLayer sl) ? sl.SourceLayer : l)
                 .Where(l => l.IsMapInfoLayer);
 
             var list = new List<MapInfoRecord>();
