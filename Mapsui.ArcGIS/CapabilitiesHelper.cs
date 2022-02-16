@@ -4,12 +4,12 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using BruTile;
-using Mapsui.ArcGIS.Providers.ArcGIS.Dynamic;
-using Mapsui.ArcGIS.Providers.ArcGIS.Image;
+using Mapsui.ArcGIS.DynamicProvider;
+using Mapsui.ArcGIS.ImageServiceProvider;
 using Mapsui.Logging;
 using Newtonsoft.Json;
 
-namespace Mapsui.ArcGIS.Providers.ArcGIS
+namespace Mapsui.ArcGIS
 {
     public enum CapabilitiesType
     {

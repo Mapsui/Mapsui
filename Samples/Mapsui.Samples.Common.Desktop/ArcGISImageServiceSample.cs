@@ -1,5 +1,5 @@
-﻿using Mapsui.ArcGIS.Providers.ArcGIS;
-using Mapsui.ArcGIS.Providers.ArcGIS.Image;
+﻿using Mapsui.ArcGIS;
+using Mapsui.ArcGIS.ImageServiceProvider;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.UI;

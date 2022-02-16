@@ -7,14 +7,13 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
-using Mapsui.ArcGIS.Providers.ArcGIS;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Providers;
 using Mapsui.Rendering;
 
-namespace Mapsui.ArcGIS.Providers.ArcGIS.Image
+namespace Mapsui.ArcGIS.ImageServiceProvider
 {
     public class ArcGISImageServiceProvider : IProjectingProvider
     {
@@ -199,15 +198,15 @@ namespace Mapsui.ArcGIS.Providers.ArcGIS.Image
                     url.AppendFormat("&time={0}, null", ArcGisImageCapabilities.timeInfo.timeExtent[0]);
                 else if (ArcGisImageCapabilities.timeInfo.timeExtent.Length > 1)
                     url.AppendFormat("&time={0}, {1}", ArcGisImageCapabilities.timeInfo.timeExtent[0], ArcGisImageCapabilities.timeInfo.timeExtent[ArcGisImageCapabilities.timeInfo.timeExtent.Length - 1]);
-            else
-            {
-                if (ArcGisImageCapabilities.StartTime != -1 && ArcGisImageCapabilities.EndTime != -1)
-                    url.AppendFormat("&time={0}, {1}", ArcGisImageCapabilities.StartTime, ArcGisImageCapabilities.EndTime);
-                if (ArcGisImageCapabilities.StartTime != -1 && ArcGisImageCapabilities.EndTime == -1)
-                    url.AppendFormat("&time={0}, null", ArcGisImageCapabilities.StartTime);
-                if (ArcGisImageCapabilities.StartTime == -1 && ArcGisImageCapabilities.EndTime != -1)
-                    url.AppendFormat("&time=null, {0}", ArcGisImageCapabilities.EndTime);
-            }
+                else
+                {
+                    if (ArcGisImageCapabilities.StartTime != -1 && ArcGisImageCapabilities.EndTime != -1)
+                        url.AppendFormat("&time={0}, {1}", ArcGisImageCapabilities.StartTime, ArcGisImageCapabilities.EndTime);
+                    if (ArcGisImageCapabilities.StartTime != -1 && ArcGisImageCapabilities.EndTime == -1)
+                        url.AppendFormat("&time={0}, null", ArcGisImageCapabilities.StartTime);
+                    if (ArcGisImageCapabilities.StartTime == -1 && ArcGisImageCapabilities.EndTime != -1)
+                        url.AppendFormat("&time=null, {0}", ArcGisImageCapabilities.EndTime);
+                }
 
             if (!string.IsNullOrEmpty(Token))
                 url.AppendFormat("&token={0}", Token);

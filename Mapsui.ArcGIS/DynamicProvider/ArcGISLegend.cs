@@ -6,7 +6,7 @@ using Mapsui.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Mapsui.ArcGIS.Providers.ArcGIS.Dynamic
+namespace Mapsui.ArcGIS.DynamicProvider
 {
     public delegate void ArcGISLegendEventHandler(object sender, ArcGISLegendResponse? legendInfo);
 

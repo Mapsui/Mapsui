@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Mapsui.ArcGIS.Providers.ArcGIS.Dynamic
+namespace Mapsui.ArcGIS.DynamicProvider
 {
     public class ArcGISDynamicCapabilities : IArcGISCapabilities
     {

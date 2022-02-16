@@ -1,4 +1,4 @@
-namespace Mapsui.ArcGIS.Providers.ArcGIS
+namespace Mapsui.ArcGIS
 {
     public class SpatialReference
     {

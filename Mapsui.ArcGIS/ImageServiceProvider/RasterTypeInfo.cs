@@ -1,6 +1,6 @@
-namespace Mapsui.ArcGIS.Providers.ArcGIS.Image
+namespace Mapsui.ArcGIS.ImageServiceProvider
 {
-    public class RasterFunctionInfo
+    public class RasterTypeInfo
     {
         public string? name { get; set; }
         public string? description { get; set; }

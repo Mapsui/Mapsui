@@ -12,7 +12,7 @@ using Mapsui.Logging;
 using Mapsui.Projections;
 using Mapsui.Providers;
 
-namespace Mapsui.ArcGIS.Providers.ArcGIS.Dynamic
+namespace Mapsui.ArcGIS.DynamicProvider
 {
     public class ArcGISDynamicProvider : IProjectingProvider
     {

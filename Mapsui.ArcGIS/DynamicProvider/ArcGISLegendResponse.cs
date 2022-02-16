@@ -1,4 +1,4 @@
-namespace Mapsui.ArcGIS.Providers.ArcGIS.Dynamic
+namespace Mapsui.ArcGIS.DynamicProvider
 {
     public class ArcGISLegendResponse
     {
