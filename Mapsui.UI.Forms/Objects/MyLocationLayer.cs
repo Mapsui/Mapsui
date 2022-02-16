@@ -99,7 +99,7 @@ namespace Mapsui.UI.Objects
         {
             get
             {
-                return _coStyle.Title;
+                return _coStyle.Title ?? "";
             }
             set
             {
