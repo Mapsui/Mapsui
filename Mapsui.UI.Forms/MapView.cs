@@ -474,9 +474,11 @@ namespace Mapsui.UI.Forms
         {
             var localRemovedLayers = args.RemovedLayers?.ToList() ?? new List<ILayer>();
             var localAddedLayers = args.AddedLayers?.ToList() ?? new List<ILayer>();
+            var movedLayers = args.MovedLayers?.ToList() ?? new List<ILayer>();
 
             if (localRemovedLayers.Contains(MyLocationLayer) || localRemovedLayers.Contains(_mapDrawableLayer) || localRemovedLayers.Contains(_mapPinLayer) || localRemovedLayers.Contains(_mapCalloutLayer) ||
-                localAddedLayers.Contains(MyLocationLayer) || localAddedLayers.Contains(_mapDrawableLayer) || localAddedLayers.Contains(_mapPinLayer) || localAddedLayers.Contains(_mapCalloutLayer))
+                localAddedLayers.Contains(MyLocationLayer) || localAddedLayers.Contains(_mapDrawableLayer) || localAddedLayers.Contains(_mapPinLayer) || localAddedLayers.Contains(_mapCalloutLayer) ||
+                movedLayers.Contains(MyLocationLayer) || movedLayers.Contains(_mapDrawableLayer) || movedLayers.Contains(_mapPinLayer) || movedLayers.Contains(_mapCalloutLayer))
                 return;
 
             // Remove MapView layers

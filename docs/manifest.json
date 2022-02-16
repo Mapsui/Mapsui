@@ -14,11 +14,107 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Extensions.BoundingBoxExtensions.yml",
+      "source_relative_path": "api/ConcurrentCollections.ConcurrentHashSet-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.Extensions.BoundingBoxExtensions.html",
-          "hash": "WUSNLmLBb43gzRJuDBSxeIVTNvKnjBi3fE41alwIUAQ="
+          "relative_path": "api/ConcurrentCollections.ConcurrentHashSet-1.html",
+          "hash": "MBBuUOdfVGfUIq5H+GXkMSHc4dRrYhdWhnc4fJzZ+xQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ConcurrentCollections.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ConcurrentCollections.html",
+          "hash": "VnWimxjsg/qtEswd1geSP2iCj+0E4WXLpWNp3YxuFuo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Animations.IAnimatable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Animations.IAnimatable.html",
+          "hash": "MAPRKXFpuGIs9Sq8OVXVGUdghbG7Hau46AY+MvwE7kU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Animations.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Animations.html",
+          "hash": "4H8BxcbBjEwxVB2P/OBW4V2w9AUEJh38yMcyfQz1/Ho="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.ChangeType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.ChangeType.html",
+          "hash": "G0N5QGD4ygbI0TEaRwohaffFGZCx6tPpXoxbjWeVong="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.CoordinateSetter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.CoordinateSetter.html",
+          "hash": "CUYYPcbIFWNtvg5YJUwcrgQwSMov9MXPI32v0ylrybA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Extensions.AssemblyExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Extensions.AssemblyExtensions.html",
+          "hash": "nW2QlSwelSQyUZNq23p15grNLYMtrz8Uy168u2/+Ilo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Extensions.ConcurrentQueueExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Extensions.ConcurrentQueueExtensions.html",
+          "hash": "kyI3ThEMEJ46/yoHH7FvHGo0sMTKK9Ky8PyVO84RmUQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Extensions.DoubleExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Extensions.DoubleExtensions.html",
+          "hash": "HVdzY6C0y3ty4+OsUJGQzi+U+FlhtWmSNNPBSzFyn5k="
         }
       },
       "is_incremental": false,
@@ -30,7 +126,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Extensions.FeatureExtensions.html",
-          "hash": "3OXW8SyINezdFhNNys+Tk81F625vPCrFUHQGdb46WBI="
+          "hash": "YSQa7PJ0WRE7kNTcMnQQqI9DavfP0QBGrBu1tT8VHJg="
         }
       },
       "is_incremental": false,
@@ -38,11 +134,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Extensions.GeometryExtensions.yml",
+      "source_relative_path": "api/Mapsui.Extensions.FetchInfoExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.Extensions.GeometryExtensions.html",
-          "hash": "8QSF0vASrvR11fIITUeaEkY2fE6DYSd8b1Apv85J6ME="
+          "relative_path": "api/Mapsui.Extensions.FetchInfoExtensions.html",
+          "hash": "TLLOKR/D4c8tX6CTCzCR/fsJ3yNNG+N9yOXKNnIiRSg="
         }
       },
       "is_incremental": false,
@@ -54,7 +150,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Extensions.MPointExtensions.html",
-          "hash": "5AG2UD61G/2sMhWBJHHSAhkjABu2KcMt/a1sT22u7Vg="
+          "hash": "yUJduZgHnhdl6VaKpS7qtgQ8+HGLfWHRbkKsA/ILNew="
         }
       },
       "is_incremental": false,
@@ -62,11 +158,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Extensions.MRectExtensions.yml",
+      "source_relative_path": "api/Mapsui.Extensions.StreamExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.Extensions.MRectExtensions.html",
-          "hash": "5T7m8ej62tqeMA8XAY+ANcshc92u89g/LhFN7JXAboc="
+          "relative_path": "api/Mapsui.Extensions.StreamExtensions.html",
+          "hash": "E1nj13NdOID/E7daeAu+go+a7VX2GYiHcih4vKy8dX0="
         }
       },
       "is_incremental": false,
@@ -74,11 +170,23 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Extensions.PointExtensions.yml",
+      "source_relative_path": "api/Mapsui.Extensions.TupleExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.Extensions.PointExtensions.html",
-          "hash": "AXOBU8T76jHuR9IPV5hmq95jjC1MqgLHoFCv1Etwoms="
+          "relative_path": "api/Mapsui.Extensions.TupleExtensions.html",
+          "hash": "3+tNs4oTm0a+aWr5bTL6cTiNvAHxxuKF5FU417Do6SY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Extensions.TypeExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Extensions.TypeExtensions.html",
+          "hash": "bBt4hE/mNePM2BvJ2JFF/JqjBqXebRb0WeNjf2RkCVA="
         }
       },
       "is_incremental": false,
@@ -90,7 +198,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Extensions.html",
-          "hash": "g0L1BMTxDAq747+FqYIqnhqZJ5xNAE7JuxNbi4eJV0k="
+          "hash": "PVdn//ELgC/bKbsuDylqDhI2h3Lti/7IAudrnGfd1No="
         }
       },
       "is_incremental": false,
@@ -98,11 +206,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Geometries.BoundingBox.yml",
+      "source_relative_path": "api/Mapsui.Fetcher.DataChangedEventArgs.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.Geometries.BoundingBox.html",
-          "hash": "yYI+6oVwpEbRHLEQh2aPt3QcwVPSzEI0fmhUPo+uwKw="
+          "relative_path": "api/Mapsui.Fetcher.DataChangedEventArgs.html",
+          "hash": "hSmf4WidgJNYt5vDX80eLBd0Jcjh0U+zr9bMDWSVyc4="
         }
       },
       "is_incremental": false,
@@ -110,11 +218,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Geometries.Geometry.yml",
+      "source_relative_path": "api/Mapsui.Fetcher.DataChangedEventHandler.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.Geometries.Geometry.html",
-          "hash": "BTfKT9B23CHbAY5tqObnCNWsw879e7X+VwGFKQQeS2E="
+          "relative_path": "api/Mapsui.Fetcher.DataChangedEventHandler.html",
+          "hash": "epQ/nphke8IMaCYAqsxN/8aWgocZCOSUBwX3EdmAB7U="
         }
       },
       "is_incremental": false,
@@ -122,11 +230,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Geometries.GeometryCollection.yml",
+      "source_relative_path": "api/Mapsui.Fetcher.Delayer.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.Geometries.GeometryCollection.html",
-          "hash": "re2TGS0nIG7MW+jPZLz4tUZ89MafTgPo5ipXD9VV9Ck="
+          "relative_path": "api/Mapsui.Fetcher.Delayer.html",
+          "hash": "OE+UdztdzlXYvigE/k9uGlBCalGpVmf4a86HwTj1DaU="
         }
       },
       "is_incremental": false,
@@ -134,11 +242,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Geometries.IGeometry.yml",
+      "source_relative_path": "api/Mapsui.Fetcher.FetchMachine.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.Geometries.IGeometry.html",
-          "hash": "+I6sZWsznL1ugAnCL+J3IHiPvMI57ogjGGyvBkf7bHM="
+          "relative_path": "api/Mapsui.Fetcher.FetchMachine.html",
+          "hash": "IVscK+1t9d7MxF82TbItV7/2zWBzmKWkE0GdiGxMD6c="
         }
       },
       "is_incremental": false,
@@ -146,11 +254,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Geometries.IGeometryCollection.yml",
+      "source_relative_path": "api/Mapsui.Fetcher.FetchWorker.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.Geometries.IGeometryCollection.html",
-          "hash": "G2wHzd7Cx/UywE2MVL1ShT4YdRWGYpxrjRboKkFupk0="
+          "relative_path": "api/Mapsui.Fetcher.FetchWorker.html",
+          "hash": "jMgZNSY9JgFaMWfMkq5mWAQDuJ/No8ZgHBMSx0VhZ78="
         }
       },
       "is_incremental": false,
@@ -158,11 +266,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Geometries.LineString.yml",
+      "source_relative_path": "api/Mapsui.Fetcher.IAsyncDataFetcher.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.Geometries.LineString.html",
-          "hash": "vsF25Yu/fjzyN9GGly+iSQtpPdwyZgzB3ApoZNCxKcg="
+          "relative_path": "api/Mapsui.Fetcher.IAsyncDataFetcher.html",
+          "hash": "RC0F3ifV2xDqTCb3wS+OXTvQiuxBXaiG0Uf9trPj8eA="
         }
       },
       "is_incremental": false,
@@ -170,11 +278,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Geometries.LinearRing.yml",
+      "source_relative_path": "api/Mapsui.Fetcher.IFetchDispatcher.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.Geometries.LinearRing.html",
-          "hash": "lqob9eCYy131B6NvQnKccLlQkcdaqkVY6BbrOa5Be1w="
+          "relative_path": "api/Mapsui.Fetcher.IFetchDispatcher.html",
+          "hash": "7Nf3HpIuCRZ0vEVH5MdwWavAGzkJn2pE1LfHwJuAFK8="
         }
       },
       "is_incremental": false,
@@ -182,11 +290,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Geometries.MultiLineString.yml",
+      "source_relative_path": "api/Mapsui.Fetcher.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.Geometries.MultiLineString.html",
-          "hash": "e51JJxx44qIAxwSMbw4e1Gaa7mE+m2FDeIjSvs0bc5A="
+          "relative_path": "api/Mapsui.Fetcher.html",
+          "hash": "J8kawiIFM8h9P+AXeR571l121KkKKy0p+b8NVChMVIo="
         }
       },
       "is_incremental": false,
@@ -194,11 +302,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Geometries.MultiPoint.yml",
+      "source_relative_path": "api/Mapsui.IFeature.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.Geometries.MultiPoint.html",
-          "hash": "nSod08ub+4fPZx6AAhjmRFlvdXeJXOWkNKZq1ldOJ1g="
+          "relative_path": "api/Mapsui.IFeature.html",
+          "hash": "dhVrtCeGilkXjelcOFir02QJp5RF2hMoe5Aao0pwhhQ="
         }
       },
       "is_incremental": false,
@@ -206,11 +314,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Geometries.MultiPolygon.yml",
+      "source_relative_path": "api/Mapsui.IMap.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.Geometries.MultiPolygon.html",
-          "hash": "sJ56xRtSu3SQIJPzsfqkQmdjPGZgFMlWWAYUFXavcMA="
+          "relative_path": "api/Mapsui.IMap.html",
+          "hash": "Kpt1qJnU4/Ej8+BS96B3H6QoJpvjDATbB+ySG/3ALbE="
         }
       },
       "is_incremental": false,
@@ -218,11 +326,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Geometries.Point.yml",
+      "source_relative_path": "api/Mapsui.INavigator.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.Geometries.Point.html",
-          "hash": "JSxO3ocIn8j9RoWs0SjdAhlCVt4J/YHFed91wi+SriA="
+          "relative_path": "api/Mapsui.INavigator.html",
+          "hash": "UrdQNpG0mHh9EXS4uor5PVsYqS7c7xRfTFiRP7zyOVM="
         }
       },
       "is_incremental": false,
@@ -230,11 +338,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Geometries.Polygon.yml",
+      "source_relative_path": "api/Mapsui.IReadOnlyViewport.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.Geometries.Polygon.html",
-          "hash": "b2AEQgDxA6BvC12snM8KsBooi7wAuX/CjyM2R1zWrZc="
+          "relative_path": "api/Mapsui.IReadOnlyViewport.html",
+          "hash": "tdiy/QyNSjGlA0b49o74uL+GWC3/qNMC0jBFEpR0D0E="
         }
       },
       "is_incremental": false,
@@ -242,11 +350,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Geometries.Quad.yml",
+      "source_relative_path": "api/Mapsui.IViewport.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.Geometries.Quad.html",
-          "hash": "NwQ35QBf8LT1+oXpn37riQnysU/fbKUTHeqCxMg1wx4="
+          "relative_path": "api/Mapsui.IViewport.html",
+          "hash": "+aG0fkE3ophF9eT/5u9hJBAFj2QYDZbAUKU3ORtYCg8="
         }
       },
       "is_incremental": false,
@@ -254,11 +362,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Geometries.Utilities.Algorithms.yml",
+      "source_relative_path": "api/Mapsui.Layers.AnimatedLayers.AnimatedFeatures.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.Geometries.Utilities.Algorithms.html",
-          "hash": "YQ3GTk7gPidww0AZ4gg5yHve1lH0TabvAsP+WHf7Qjg="
+          "relative_path": "api/Mapsui.Layers.AnimatedLayers.AnimatedFeatures.html",
+          "hash": "Mj9aXCF+flMBU3WtjtysQdK0Mef3TajR45MULOKq/ME="
         }
       },
       "is_incremental": false,
@@ -266,11 +374,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Geometries.Utilities.CGAlgorithms.yml",
+      "source_relative_path": "api/Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.Geometries.Utilities.CGAlgorithms.html",
-          "hash": "80MMCkf+vme8jjlNJcArV+BRYVc00a4tJ0OfywG2QzU="
+          "relative_path": "api/Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.html",
+          "hash": "KsFka9OOI9qrHYR/LKLZN8LBo13JbYPsS+ozc+tk+n4="
         }
       },
       "is_incremental": false,
@@ -278,11 +386,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Geometries.Utilities.yml",
+      "source_relative_path": "api/Mapsui.Layers.AnimatedLayers.EasingFunction.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.Geometries.Utilities.html",
-          "hash": "hrmqQIuSCW8Vga1oJi76T49NVFiZCWeye9bxYTx+feQ="
+          "relative_path": "api/Mapsui.Layers.AnimatedLayers.EasingFunction.html",
+          "hash": "jXdNC6jvIctuAK/JCieeM+QErdnELJdaITSkJSfHxcc="
         }
       },
       "is_incremental": false,
@@ -290,11 +398,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Geometries.WellKnownBinary.GeometryFromWKB.yml",
+      "source_relative_path": "api/Mapsui.Layers.AnimatedLayers.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.Geometries.WellKnownBinary.GeometryFromWKB.html",
-          "hash": "q9f/TwI4a48s4zeErQagQMi0GbPmeJty046iMZvDwww="
+          "relative_path": "api/Mapsui.Layers.AnimatedLayers.html",
+          "hash": "NJvcewTxugMnFEoC+IwWiC/I9hI2vVkutTw5emjZlUk="
         }
       },
       "is_incremental": false,
@@ -302,11 +410,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Geometries.WellKnownBinary.GeometryToWKB.yml",
+      "source_relative_path": "api/Mapsui.Layers.BaseFeature.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.Geometries.WellKnownBinary.GeometryToWKB.html",
-          "hash": "1fH6ghBx1HSbev7dlC8LAo/75jfYvrLphBOuJ1YQNo0="
+          "relative_path": "api/Mapsui.Layers.BaseFeature.html",
+          "hash": "3eUlj78xJnOlQr/JBDIkYyRJK3kZf9m4oo26eM4bvuM="
         }
       },
       "is_incremental": false,
@@ -314,11 +422,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Geometries.WellKnownBinary.WkbByteOrder.yml",
+      "source_relative_path": "api/Mapsui.Layers.BaseLayer.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.Geometries.WellKnownBinary.WkbByteOrder.html",
-          "hash": "N7bx9SH14OGB8z/eT/5RV5yfLooS5+WDumTJ2fqsBwo="
+          "relative_path": "api/Mapsui.Layers.BaseLayer.html",
+          "hash": "eDYWpk1ziisXJ2D4FdiLVtXdT2ZdRY5xJle24WpJgd0="
         }
       },
       "is_incremental": false,
@@ -326,11 +434,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Geometries.WellKnownBinary.yml",
+      "source_relative_path": "api/Mapsui.Layers.FetchInfo.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.Geometries.WellKnownBinary.html",
-          "hash": "dFH8q5FCxjq6O0BQTLI8goHB0xSFgisXDbOrC9ZBQOM="
+          "relative_path": "api/Mapsui.Layers.FetchInfo.html",
+          "hash": "4p44lObhkXIy/Zf0lYR3GfJemg9z3NWP6lQRlWPrgV0="
         }
       },
       "is_incremental": false,
@@ -338,11 +446,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Geometries.WellKnownText.GeometryFromWKT.yml",
+      "source_relative_path": "api/Mapsui.Layers.IFeatureInfo.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.Geometries.WellKnownText.GeometryFromWKT.html",
-          "hash": "TbfM+U5T/c6aeGJG6U/JShZxwxbH4GzfpRi8/ZIcuRA="
+          "relative_path": "api/Mapsui.Layers.IFeatureInfo.html",
+          "hash": "CV/fIvIhWPtLzrJYF2Z5rU8uDDElvAFDrknuXyUAG6s="
         }
       },
       "is_incremental": false,
@@ -350,11 +458,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Geometries.WellKnownText.GeometryToWKT.yml",
+      "source_relative_path": "api/Mapsui.Layers.ILayer.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.Geometries.WellKnownText.GeometryToWKT.html",
-          "hash": "1CuhVXFbCb6CWdEw3VqWy5pYQgTyxZ3El8rMB9HpFV4="
+          "relative_path": "api/Mapsui.Layers.ILayer.html",
+          "hash": "8ptxxf4cRDwFi6P35+DQjZ7cETlx2ssIuCVtkmb6fvs="
         }
       },
       "is_incremental": false,
@@ -362,11 +470,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Geometries.WellKnownText.yml",
+      "source_relative_path": "api/Mapsui.Layers.ImageLayer.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.Geometries.WellKnownText.html",
-          "hash": "3cMdGg59i6aL+wlVxercXM2Jez9yK84xPGsoeWdyuIc="
+          "relative_path": "api/Mapsui.Layers.ImageLayer.html",
+          "hash": "nWu8dQKUdbQ93EtgBr3B5WDnIA1MkgqRPR/RStrnfCc="
         }
       },
       "is_incremental": false,
@@ -374,11 +482,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Geometries.yml",
+      "source_relative_path": "api/Mapsui.Layers.Layer.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.Geometries.html",
-          "hash": "B+ZbLvCPsqfljCFEqSIug68kcR9dsRfDGqD1qhBHcT0="
+          "relative_path": "api/Mapsui.Layers.Layer.html",
+          "hash": "VdO5x1HV7tyXPZWYzNo1WRmn1kQqCCRC1EYwNqLCfsE="
         }
       },
       "is_incremental": false,
@@ -386,11 +494,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.GeometryLayer.GeometryFeature.yml",
+      "source_relative_path": "api/Mapsui.Layers.LayerCollection.LayerAddedEventHandler.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.GeometryLayer.GeometryFeature.html",
-          "hash": "KK2AyG/EM37JhBZxoO794rmXz5akvdKtXh1M4M1OGg0="
+          "relative_path": "api/Mapsui.Layers.LayerCollection.LayerAddedEventHandler.html",
+          "hash": "DIB4EDqF4O/1SDA+3UzdLvSpNMf/IDoTKu4rn+6vRrA="
         }
       },
       "is_incremental": false,
@@ -398,11 +506,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.GeometryLayer.yml",
+      "source_relative_path": "api/Mapsui.Layers.LayerCollection.LayerCollectionChangedEventHandler.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.GeometryLayer.html",
-          "hash": "x2zOhsyzvWg2Oe/klVbtJko3Swpg92S+PNKN7Ur4aSY="
+          "relative_path": "api/Mapsui.Layers.LayerCollection.LayerCollectionChangedEventHandler.html",
+          "hash": "8o9OzCkEpanxZ//8L+a/RH4hYp067CCuifWUVc0oQaM="
         }
       },
       "is_incremental": false,
@@ -410,11 +518,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Projections.BoundingBoxIterator.yml",
+      "source_relative_path": "api/Mapsui.Layers.LayerCollection.LayerMovedEventHandler.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.Projections.BoundingBoxIterator.html",
-          "hash": "91q2keKt2o7NEWlNIIvqgZZkfv1XlClFWzmtxsk3Rnw="
+          "relative_path": "api/Mapsui.Layers.LayerCollection.LayerMovedEventHandler.html",
+          "hash": "nLnfM7IckmOmE8YDHgxsRJAQ2jQBUpGAwiATlXYVeE8="
         }
       },
       "is_incremental": false,
@@ -422,11 +530,335 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Projections.GeometryIterator.yml",
+      "source_relative_path": "api/Mapsui.Layers.LayerCollection.LayerRemovedEventHandler.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.Projections.GeometryIterator.html",
-          "hash": "HdgSQqJIcC7U9hv0aCid3f4Pzx817GqzwV/at+klkAk="
+          "relative_path": "api/Mapsui.Layers.LayerCollection.LayerRemovedEventHandler.html",
+          "hash": "91GqppGq91oS+DwRhNC8Z78kVaD7TaTg987bPLNbuIg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Layers.LayerCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Layers.LayerCollection.html",
+          "hash": "13r8u667D/hnXIrJ5ArknFgIxd20o9YvyALmauXmEnU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Layers.LayerCollectionChangedEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Layers.LayerCollectionChangedEventArgs.html",
+          "hash": "M/WUVus4Vq+bw6MDENxZ6+Aupx/OQz2EOOJDPNh89mU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Layers.MemoryLayer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Layers.MemoryLayer.html",
+          "hash": "erbXeyRwarp6C+ZcsAESppWFAePLvtu8iIFBapBiaLc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Layers.PointFeature.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Layers.PointFeature.html",
+          "hash": "yBqCzLtDhS29EXEtNjLp4XZvKMhuw1bWhe/kFilsFLY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Layers.RasterFeature.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Layers.RasterFeature.html",
+          "hash": "ExwYGxfVT8lFQjCBCGzA9hVyGf/rALc4jdtdWS7MkVA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Layers.RasterizingLayer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Layers.RasterizingLayer.html",
+          "hash": "lICKMdnp/Gt3emAVPWfRrtENsbFI8yghuPVGR8IdsxA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Layers.RectFeature.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Layers.RectFeature.html",
+          "hash": "/7/ZMwZ5PtO0djloccEbJxya7L80DBrQ2AFLMAnn5iQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Layers.WritableLayer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Layers.WritableLayer.html",
+          "hash": "Jn+is9cX2PKKVzjeFfSi+OoGHihZn+J0Rq2t+l02tJU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Layers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Layers.html",
+          "hash": "2ZRSY6aIy1+O4BNKy4F21qLDdGKt+mPJbqI3+LiWa5E="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.LimitedViewport.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.LimitedViewport.html",
+          "hash": "d8YVhKwW3GwswLS6VFSG6/k+gaE5tJrUpIzx70/GfeA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Logging.LogLevel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Logging.LogLevel.html",
+          "hash": "vu8Yc3kHlqsuyaoBguKsn8QhyJttGX9WjfCxGMeJJb4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Logging.Logger.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Logging.Logger.html",
+          "hash": "8Luj+z96iUSKLbMHv4qamybKmtTGefuFTRXks8k+3iM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Logging.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Logging.html",
+          "hash": "os7hcScbKp9DkHU9+wXkyI2JG7xP2XyHyuC67Y/coKE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.MPoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.MPoint.html",
+          "hash": "LmFj3xpeXer391iQACi55oUcN+ZSXPVUOsGcNVXjZuk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.MQuad.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.MQuad.html",
+          "hash": "1iLDZGNfkSI/gaaXS+BPiGnaogTfpAGDMUmIrdXo1kE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.MRaster.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.MRaster.html",
+          "hash": "w3y7XdrjZudLAfG84lzaKtDQefKmy1mcwotVVP4+rrk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.MReadOnlyPoint.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.MReadOnlyPoint.html",
+          "hash": "dMj4WYTri9QI6QQkKVwc1LabxuPUqC64iD2HGg9aigY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.MRect.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.MRect.html",
+          "hash": "hzUvgcA58SKLK0jaqXAn5U0RSRjtr7c3MYB8AOWXbcw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Map.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Map.html",
+          "hash": "Q/qbqBT4r5tNaAfTpwKzv1sFQEgZZ31RSzCrLIl/jxI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Navigator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Navigator.html",
+          "hash": "aD671Ks0FRJgGfqA5SoJqD/GXKZuaDUtJiLLuAFR/NE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Projections.CrsHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Projections.CrsHelper.html",
+          "hash": "p2hYpwMtarfXgh95k98D2LslN/P8leRotv+58hm+d5k="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Projections.CrsType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Projections.CrsType.html",
+          "hash": "PXfyeUa+lFfw90teti0Fo/r5jEfxs/1FvMa8LQNhg7c="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Projections.IProjection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Projections.IProjection.html",
+          "hash": "JxNlhFaMa607CBGaJkhOo3btwtKTLkuOQ8d0uYsOgv8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Projections.Mercator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Projections.Mercator.html",
+          "hash": "9d4gmExu6Wh351maHaVn3zVpO1sAjI2e9a8qM4BTd80="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Projections.Projection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Projections.Projection.html",
+          "hash": "PZOTByhgT58Gt/NWgLXpBbwrezcjW8QmjBXyUlTVqOk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Projections.ProjectionDefaults.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Projections.ProjectionDefaults.html",
+          "hash": "NXH3SGPtpFvtt9pZaivNOzMdzQtaQjAi9cvze/YQ7ak="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Projections.SphericalMercator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Projections.SphericalMercator.html",
+          "hash": "C3KISA4wdZmV1uHINVf8a/DDyC9436RuAD5EddLrwhw="
         }
       },
       "is_incremental": false,
@@ -438,7 +870,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Projections.html",
-          "hash": "kd7S4BIhiSxPWb3IDtHzbgiQLa83EulKP2kYBAe7Cr0="
+          "hash": "jnhf4VvRR8xMsMPpzxBs/8x9KXKOEAGRcAuiipJIT8w="
         }
       },
       "is_incremental": false,
@@ -450,7 +882,43 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Providers.GeoTiffProvider.html",
-          "hash": "FI+cN2rFC50ZMT0divO7uSUecjpj1ggmRmgHVRgdQwA="
+          "hash": "A6kORqBKB8wfYgJfachia/Yg+BDd1BHfPrnlpmQSamw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Providers.IProjectingProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Providers.IProjectingProvider.html",
+          "hash": "JS4MosmlNQ47kCTsL+2Z9+lnTLV7vTkL+IYk60WnUcY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Providers.IProvider-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Providers.IProvider-1.html",
+          "hash": "CWRaFCgISTQde1xznF35peTV0i71LnTXDknkgAF6fHo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Providers.MemoryProvider-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Providers.MemoryProvider-1.html",
+          "hash": "VRPX/Hneak6ri9+BrG9aNcpi6aRhAFFArUl05dGCWMw="
         }
       },
       "is_incremental": false,
@@ -462,7 +930,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Providers.ProjectingProvider.html",
-          "hash": "K2/yGa9dMy3UfmzFgIkaj7QwyjuY4qIJnPqY/7LdS34="
+          "hash": "m/3lAVEPxo83MGJCocAebBUvrH6/ClTPipCnoYFOb3w="
         }
       },
       "is_incremental": false,
@@ -470,623 +938,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Shapefile.Indexing.BinaryTree-2.ItemValue.yml",
+      "source_relative_path": "api/Mapsui.Providers.StackedLabelProvider.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.Providers.Shapefile.Indexing.BinaryTree-2.ItemValue.html",
-          "hash": "9Vh9sOPiJ1pm8v6umJ8g7C/d+UMif7zUmOjLySNaP6I="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Shapefile.Indexing.BinaryTree-2.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Shapefile.Indexing.BinaryTree-2.html",
-          "hash": "1GYE7dN6QXn9RRUb7uvcDOjgHzdGgkPX6JM1/7G+2J8="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Shapefile.Indexing.Heuristic.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Shapefile.Indexing.Heuristic.html",
-          "hash": "SWC9ClI13xyFIqfyhKxnRUivMjfe256w5Pk0xO+Sc2U="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Shapefile.Indexing.QuadTree.BoxObjects.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Shapefile.Indexing.QuadTree.BoxObjects.html",
-          "hash": "6FhhqMgg466yCM0V3oV6IMcq2RFj9xGTz7dNiB4uKPU="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Shapefile.Indexing.QuadTree.ObsoleteFileFormatException.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Shapefile.Indexing.QuadTree.ObsoleteFileFormatException.html",
-          "hash": "TOgCcVyWWdMRSi0ObJmVOFFo2mu3t1zrqLD7MGaajAc="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Shapefile.Indexing.QuadTree.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Shapefile.Indexing.QuadTree.html",
-          "hash": "Qnhi2YsvhrjEmXGo6VSrM0JetBtEsrTbEUJEZI5G9RA="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Shapefile.Indexing.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Shapefile.Indexing.html",
-          "hash": "ZmYu9WvqIjPKnp1r5uqFcZIRiDiCATpHoaxc1CGBrOQ="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Shapefile.ShapeFile.FilterMethod.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Shapefile.ShapeFile.FilterMethod.html",
-          "hash": "CX9DqmtZ41/C5aQozdeV943x9UbFpw0N5vXnJz2HN1s="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Shapefile.ShapeFile.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Shapefile.ShapeFile.html",
-          "hash": "/Klc+DPgLeTh9U7NyxJameK9QmZXGKhJl0oAjeoR15Y="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Shapefile.ShapeType.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Shapefile.ShapeType.html",
-          "hash": "PDg1ZnzVu8K85Lh6NrGP2a0lxg3PNZ3ljLkskUlJo3Q="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Shapefile.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Shapefile.html",
-          "hash": "9I5+HXlNxNe5hWh6S+TbYOqqfz5r/RWlsiUFqN/kt4U="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.AxisOrderRegistry.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.AxisOrderRegistry.html",
-          "hash": "p8tBABf6jNXVuDNSX1XEpYh1jOgt6VzIMUYx3p/IVNg="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Utilities.FeatureIdFilter_FE1_1_0.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Utilities.FeatureIdFilter_FE1_1_0.html",
-          "hash": "rTSkEd69721dhYeKaCyqZdO4R23tA1/eSPGBrEHt7Ng="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Utilities.GeometryTypeEnum.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Utilities.GeometryTypeEnum.html",
-          "hash": "GZHdxBf5PR9RTPl4WZ1zJAgLa63sZWw5pb2ob/kABRM="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Utilities.HttpClientUtil.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Utilities.HttpClientUtil.html",
-          "hash": "ODBnKj/Oj5zSkdqhdmCvZRe37NtEonzGNC2Jn4po9xM="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Utilities.IFilter.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Utilities.IFilter.html",
-          "hash": "nPAjyJE1qhS+KaiMpHhsysfw8WIxv/FOzgg56jViCUM="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Utilities.IWFS_TextResources.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Utilities.IWFS_TextResources.html",
-          "hash": "U0RvasC81lfe9OsEYst/CxLhXvwZ683yc9mD5GFUihA="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.JunctorEnum.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.JunctorEnum.html",
-          "hash": "3i2MOV94eFg06xewlNPwtmwGprOj2NFR5OIyU7W9Fg4="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Utilities.OGCFilterCollection.html",
-          "hash": "p4ntEFPQBr1NZKgGZ+rq03SQ++hgjBaitEScQG5ie9w="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Utilities.OgcFilterBase.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Utilities.OgcFilterBase.html",
-          "hash": "sEfK+Sv1PvRPJ4sm43+YYAVAkiXaTrDjEGeACK9Olus="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Utilities.PropertyIsBetweenFilter_FE1_1_0.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Utilities.PropertyIsBetweenFilter_FE1_1_0.html",
-          "hash": "i5dVSld+HnKy1OIcWQf5p36K821xA12zixtKTlXjpVU="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Utilities.PropertyIsEqualToFilter_FE1_1_0.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Utilities.PropertyIsEqualToFilter_FE1_1_0.html",
-          "hash": "wNwZO3elXCIQKpQCOJF4G/HY6YOAP6AyDKQd+3PkohA="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Utilities.PropertyIsGreaterThanFilter_FE1_1_0.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Utilities.PropertyIsGreaterThanFilter_FE1_1_0.html",
-          "hash": "5joAjx/HI8TdrtO0s0TY3ABionp706tfz+lf8ggaiSo="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Utilities.PropertyIsGreaterThanOrEqualToFilter_FE1_1_0.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Utilities.PropertyIsGreaterThanOrEqualToFilter_FE1_1_0.html",
-          "hash": "aDBKjDnSV6bCm+hMkdORwenmXKIUDizwxgPNxlPVW9A="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Utilities.PropertyIsLessThanFilter_FE1_1_0.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Utilities.PropertyIsLessThanFilter_FE1_1_0.html",
-          "hash": "bG9kYUTOFA7XRZwN3mrKATUQM3WKqg9ktlwDGNUMFqA="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Utilities.PropertyIsLessThanOrEqualToFilter_FE1_1_0.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Utilities.PropertyIsLessThanOrEqualToFilter_FE1_1_0.html",
-          "hash": "CWV8Dp9OErtOE5qtixdTzJiA9t5ctkGL8S5ul0HRSKw="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Utilities.PropertyIsLikeFilter_FE1_1_0.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Utilities.PropertyIsLikeFilter_FE1_1_0.html",
-          "hash": "FA7H2tkOxx+9zKVxtzKragmOf5CCpLMEXILupbFZ60I="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Utilities.PropertyIsNotEqualToFilter_FE1_1_0.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Utilities.PropertyIsNotEqualToFilter_FE1_1_0.html",
-          "hash": "lomRQLLdMN7P5UL/PkMF1FlgLN+a9fxUIjQE/X90p5M="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Utilities.UrlQueryHelper.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Utilities.UrlQueryHelper.html",
-          "hash": "opjY/Blz+FxsJeK20QxZNcHB1f5L45BPCNts4JV3HGw="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Utilities.WFS_1_0_0_TextResources.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Utilities.WFS_1_0_0_TextResources.html",
-          "hash": "Vq8i8BS5y3FiuXq3C7Q0/bcl2jPKBcT3pQtQc19QRpQ="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Utilities.WFS_1_0_0_XPathTextResources.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Utilities.WFS_1_0_0_XPathTextResources.html",
-          "hash": "BIcQjDckpX9bVWh/s9UbQ7+5GbAfDHxrgBLgH6T16Uo="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Utilities.WFS_1_1_0_TextResources.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Utilities.WFS_1_1_0_TextResources.html",
-          "hash": "IzxJymTzAaZXbE95qzacmFT7k1Vkvhr7d9QyntN2DMw="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Utilities.WFS_1_1_0_XPathTextResources.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Utilities.WFS_1_1_0_XPathTextResources.html",
-          "hash": "A5fbWkoEUTP26xpt8Vt6ynQ6GPxwJ6GtQKYHbhXBJIw="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Utilities.WFS_XPathTextResourcesBase.html",
-          "hash": "Rn8W4Wxv85gTymr0QWc++I1vt4ATvWI01rmRCnekoM8="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.BoundingBox.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.BoundingBox.html",
-          "hash": "9LONI9K6l/NmuNvIbXHQpg61lI900w1i2o/Gc1FgeEM="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.ElementInfo.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.ElementInfo.html",
-          "hash": "agxffMPqoVvc1voMl2G43xssUcS4iUt8vQ5yRj1eJvc="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.GeometryInfo.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.GeometryInfo.html",
-          "hash": "nYOOalB4Q/60pa+IZYF8VY2MEsucUc2u4X+Y6ouMt9U="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Utilities.WfsFeatureTypeInfo.html",
-          "hash": "NIqNYJrb+BE3lDmaTP3UOg2vgoWb9G5UIGAM30Oegu8="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Utilities.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Utilities.html",
-          "hash": "ULliA09xRghKzHrQLU1Xqu4FodxAPvw+MF8HtKWVJ4w="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.WFSProvider.WFSVersionEnum.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.WFSProvider.WFSVersionEnum.html",
-          "hash": "0e35uQblMQSSbsnWP+DukMxFlgcA5z+TGpN8WNJ7iCk="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.WFSProvider.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.WFSProvider.html",
-          "hash": "lDbXayig9AiSWn83w6jlfEDXUGshpJMVRoIff7IfB3o="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Xml.IXPathQueryManager.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html",
-          "hash": "TrCpxAOH4NBvD6aJbPeZwNUbi+ZSaQFrZOOHpXDwtdM="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Xml.XPathQueryManager.CustomQueryContext.html",
-          "hash": "l80ZqGM0IZbfG5H5ToRFaJT5Qt60boSRF1yaUJslnzk="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.html",
-          "hash": "MhoPU1CUzbyHk9Kgg7J+pqccRQ7d2fuMCZON+PLYoi8="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompare.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompare.html",
-          "hash": "HgDZ3LbG4mKLJmBAf8bZG/3nt8l34xzKhZen0/NC2VI="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompareWithTargetNs.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamCompareWithTargetNs.html",
-          "hash": "11KTWww0J0WFnm4gfWIzzrCdvq46f4VIfZCT/qag+ho="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamFunctionVar.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamFunctionVar.html",
-          "hash": "hUUihVHLDGAuizu6pdYJ69rBFi7uN0ZgTLwml7KPlKY="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Xml.XPathQueryManager.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Xml.XPathQueryManager.html",
-          "hash": "IySkKxgzmlke7iGTHu/p4lnHpJoar4HdAzHUovAwJR0="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Xml.XPathQueryManagerCompiledExpressionsDecorator.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Xml.XPathQueryManagerCompiledExpressionsDecorator.html",
-          "hash": "dljfjnLj0hQB2zDWI3akVtSv2FXn6RAGTagwtqGMJHE="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Xml.XPathQueryManagerDecoratorBase.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Xml.XPathQueryManagerDecoratorBase.html",
-          "hash": "xFiLP+juoDsV4QySdKvpSxcfV3CHUDWaCIqQVnQO7tg="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.Xml.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.Xml.html",
-          "hash": "7Z98QKM7hs9dqkB3jNRh4I212W+iS96w8Rtki6JlrxE="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.Wfs.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.Wfs.html",
-          "hash": "Y9jhqKMmJ4hpQpCIoCDX5UmCqCGfvjc08uyLXSQF1h0="
+          "relative_path": "api/Mapsui.Providers.StackedLabelProvider.html",
+          "hash": "7YgJW6ne0wrNql1Yagxe5ewNdjORBezLb/QbbPanaII="
         }
       },
       "is_incremental": false,
@@ -1182,7 +1038,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Providers.Wms.Client.WmsServerLayer.html",
-          "hash": "IMbxM0hRDiOyPONrd0WV4sbPqPNHU0vvj9IJ2soyu3g="
+          "hash": "H4JiIsvWG+BGTnGtCMpCJXwICNXrSaCb56OlfMPvTeU="
         }
       },
       "is_incremental": false,
@@ -1194,7 +1050,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Providers.Wms.Client.WmsStyleLegend.html",
-          "hash": "KIX43Rz7KUhaDw0Y2WdvPZx0CRTwxmy9NY88uo6QQUM="
+          "hash": "3prC9iJw2MGcj+Xc6j/UZe75QVAKQKUVjzX0Ws9fx1k="
         }
       },
       "is_incremental": false,
@@ -1278,7 +1134,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Providers.Wms.WmsProvider.html",
-          "hash": "eECsvu1d/dbDZdCGlkG3NQg9twHEfdYb34nPKTguCl0="
+          "hash": "gSHFzhre+kPKWAjagsU/pEGsQPamFkLCkW7YOhI6epo="
         }
       },
       "is_incremental": false,
@@ -1314,7 +1170,79 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Providers.html",
-          "hash": "3pLFY4rA7uqHZgMU6r6gmA8+UAMuar+fEP79dPvfO+Q="
+          "hash": "t0hJ8vPQWOm5JFgUD8MwFwW66AXyXV2wIef4vuhDxG0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Rendering.DefaultRendererFactory.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Rendering.DefaultRendererFactory.html",
+          "hash": "KppwjLioRFXnPB07GguYFV2oIAKh3ab5L8yE4m1skhg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Rendering.IRenderInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Rendering.IRenderInfo.html",
+          "hash": "NbWfMJ8a3ATuqi+AZ1iSLN1mHHZs/L5rS+YdpNi9d00="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Rendering.IRenderer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Rendering.IRenderer.html",
+          "hash": "JmwmxvIWUBjys8NzXlry0OfNgh+e/sxZiaq4hmIxg+o="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Rendering.ISymbolCache.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Rendering.ISymbolCache.html",
+          "hash": "18JTkFDFA1tsCkpkbnqnkkS7IzBpt4LkQCVKkOLcqEc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Rendering.MapInfoRecord.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Rendering.MapInfoRecord.html",
+          "hash": "t62ojhU+yP7Wba8aK5ERFtOm7IH22FWkPsqR62A4Ihs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Rendering.RenderException.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Rendering.RenderException.html",
+          "hash": "6tYWlXDIa/hWa2FFu0x1GtMowmXfIs+nYClpbbI1IlE="
         }
       },
       "is_incremental": false,
@@ -1326,7 +1254,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.BitmapHelper.html",
-          "hash": "GmBv5qBc8eYA/NUSp2Q/dEBPpO+Qmo2xtb/wyYQtE14="
+          "hash": "hyLKmE7Q7FCbnEN/+w6x/QC0WtDAKcW716/8QFrl/wA="
         }
       },
       "is_incremental": false,
@@ -1338,7 +1266,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.BitmapInfo.html",
-          "hash": "u0LwOdjnsCFiO1Six1Fyd11OkPpHA9pXJC4PycWYd0k="
+          "hash": "0OZ/01XkAiwRuZEtoSxkrLxf/H73BO7yS0DA9V1A4xw="
         }
       },
       "is_incremental": false,
@@ -1362,7 +1290,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.CalloutStyleRenderer.html",
-          "hash": "4g47doMYvyt4I0Ns5oX5vOQ7mYQ5WVOaIlbQuVC8Y2g="
+          "hash": "sDFYSo1LDkl3ek91rYDF7kqE8vckdfpepUky3pkgFK0="
         }
       },
       "is_incremental": false,
@@ -1374,31 +1302,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.Extensions.AlignmentExtensions.html",
-          "hash": "ns1Q6RfeN1mRpqHpcpNOr/5g1WWR2hP8QwQ1bHXnIxI="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Rendering.Skia.Extensions.BoundingBoxExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Rendering.Skia.Extensions.BoundingBoxExtensions.html",
-          "hash": "TBrT5yEeMKfxlC/NSWl5DnsntGBaPtOK0dK4Vp8nUao="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Rendering.Skia.Extensions.ClippingExtension.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Rendering.Skia.Extensions.ClippingExtension.html",
-          "hash": "NuTUUv7c+VfKDtbAM2HU0GwPp7Gv+5qkEqB5jvuZr08="
+          "hash": "mrEc9IiQi68On7KbN687S3g+ggJ1IieMOTfxVSO47O0="
         }
       },
       "is_incremental": false,
@@ -1410,19 +1314,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.Extensions.ColorExtensions.html",
-          "hash": "SIuYeO5Nlva/au/Nd0F0oQ/DnBIwsrBOqAN528FyaEs="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Rendering.Skia.Extensions.Intersection.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Rendering.Skia.Extensions.Intersection.html",
-          "hash": "ZHGYx6Ve2TtNSDF0qW+uRQfA6dH6b10MphwXPbIADnQ="
+          "hash": "xIBOOEwZa8chxjf53ifpIuYm7DnZBzBJhqzW96Z1dk0="
         }
       },
       "is_incremental": false,
@@ -1434,7 +1326,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.Extensions.MRectExtensions.html",
-          "hash": "foJfdvdouHvRlLB/Uj2QH0goe8vvjCnhy85mZn8KhJA="
+          "hash": "x+4/xztetDUNW3ip8T2uVj5hvVjisotoQnDILoscYz0="
         }
       },
       "is_incremental": false,
@@ -1446,7 +1338,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.Extensions.PenStrokeCapExtensions.html",
-          "hash": "aq0fPaemQlhe6yptG8ejca7Hmn0m0Y5ZKa1iUcTe0Mg="
+          "hash": "5Np5Ns6JncAr6rnlDCSFUvZ+6QhEoJfSogwKe0QnZ+c="
         }
       },
       "is_incremental": false,
@@ -1458,7 +1350,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.Extensions.PenStrokeJoinExtensions.html",
-          "hash": "NIgy9txYiVI0H/X7kZQMbAPogAUwUVMy4TCbZQcotYs="
+          "hash": "0nu9XlwJymE9s850InBn1qNRgrBiwrnQGU8wbWmGyJg="
         }
       },
       "is_incremental": false,
@@ -1470,19 +1362,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.Extensions.PenStyleExtension.html",
-          "hash": "fE/29SeD3+GWQljtkGeOSVoPzJ8Hxn2U4ra3y5ZoEMo="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Rendering.Skia.Extensions.PointExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Rendering.Skia.Extensions.PointExtensions.html",
-          "hash": "7avm6wAwPMFY8ai/WdRAjekTly2Yul3I7eNWXR2avyU="
+          "hash": "dUe0jrlEeMbBqUwK9RXRWNzU8PQHeqHnm7HAJKjSyLI="
         }
       },
       "is_incremental": false,
@@ -1494,7 +1374,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.Extensions.SKColorExtensions.html",
-          "hash": "Vbt1snZghn+RkUZR57XMGksIgCkkZNRFpPuLXiVoFac="
+          "hash": "40kgz3XZ3MopNqet+MAvhWOKYxqHl4oELgIP6aL+/q8="
         }
       },
       "is_incremental": false,
@@ -1506,7 +1386,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.Extensions.ViewportExtensions.html",
-          "hash": "2HWdnO354NeG74XhyW1w5yUPKct9OoMnNt6I9NMaWug="
+          "hash": "f3Cwlaq34Rvy4w5ule9Lf7TFHN+lJyUt9Fcf7r5QZXY="
         }
       },
       "is_incremental": false,
@@ -1518,7 +1398,43 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.Extensions.html",
-          "hash": "YzsZ5a0br+zUW26WpF5TFd7BHk71A6TzUzxb/4V8254="
+          "hash": "jke2G9KaEFDepM/XaJ74Rh9JdG3XonwUchuLrYatXZg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Rendering.Skia.Functions.ClippingFunctions.Intersection.html",
+          "hash": "ZUw2/WH1xw3rKzt5xsIvRiMOHzAZj1HOTX3ak9daIzg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Rendering.Skia.Functions.ClippingFunctions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Rendering.Skia.Functions.ClippingFunctions.html",
+          "hash": "JJKNEdAkP6reRMSPfP8aS6QW2FA7URp3NE3BRbbSCSw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Rendering.Skia.Functions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Rendering.Skia.Functions.html",
+          "hash": "Pt3MG7lfHaSZXB8DMYDXj3v9u0cfiLSgdZEe1F6ztlw="
         }
       },
       "is_incremental": false,
@@ -1530,7 +1446,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.GeometryRenderer.html",
-          "hash": "W35eSALthTDIRAIYKKFk29w6oKms5SymQI6Ka9k88VE="
+          "hash": "6dwfVT19ToFjrR8dTc7eLr0jWzZ9BS4lWJWKCSRBTM0="
         }
       },
       "is_incremental": false,
@@ -1542,7 +1458,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.LabelRenderer.html",
-          "hash": "sJwZbxWLJdPMkTyUV92oYuHzA32Fcwdy+j+KjEsfBMM="
+          "hash": "EQammEffwpxlt3R+KS94gESRq2CAt4016kBav2FB/pY="
         }
       },
       "is_incremental": false,
@@ -1554,7 +1470,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.LineStringRenderer.html",
-          "hash": "Y1G0zkflylapUSeJxllHMI7MSpJ1R8D9FicvU9MVoAA="
+          "hash": "RY6+tODvmaXGlnEhmp+xdLpK/9dz1ds7J3fdjtRrZns="
         }
       },
       "is_incremental": false,
@@ -1566,7 +1482,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.MapRenderer.IdentityComparer-1.html",
-          "hash": "ddA3GxL1dYH8POr7FFQ7AKYrGTzv41QF2zb0x/Jv8F0="
+          "hash": "tIZErRR+Ij+CABuvgUTuXW9cZEVKmNDTybdjLPzLWCU="
         }
       },
       "is_incremental": false,
@@ -1578,7 +1494,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.MapRenderer.html",
-          "hash": "TJFhLDxwIrNMBUjr5f7M+vdGHDGtYhGPaZAT7O/oEtg="
+          "hash": "iBukq57EKSTJsghZAngfCFPnMcIhmkWRJ70YrivZxYI="
         }
       },
       "is_incremental": false,
@@ -1590,7 +1506,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.MultiLineStringRenderer.html",
-          "hash": "bptCWQptpsNhSz5z+y6Ocz2n8coEG8jBjVgieS1ivOU="
+          "hash": "7RIBWoP+QcBbh7BfxDDYXWpX+F9OYxw9iI304rQqQTg="
         }
       },
       "is_incremental": false,
@@ -1602,7 +1518,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.MultiPointRenderer.html",
-          "hash": "WG2+IeYIO/eh+jccXvyhoE0XcrYQ6xWK7TtQ0zr29pA="
+          "hash": "QGTpVjXYV1TCvrNkjv8+3iKsTo0wWPxLnN+r//+/Ltg="
         }
       },
       "is_incremental": false,
@@ -1614,7 +1530,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.MultiPolygonRenderer.html",
-          "hash": "VrWtFCem261lQmBwFH+xGPQZM1jyr/40lX9nM8fh7+E="
+          "hash": "GtOuT5x5Tr/Sthu3OWCqP/QwJKlf354Lu0aCoilDXwg="
         }
       },
       "is_incremental": false,
@@ -1626,7 +1542,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.RasterRenderer.html",
-          "hash": "7hDZF2FvjzdgcPT1dYv07smUaUA9mMba+Dhu9bUB9SE="
+          "hash": "nwxQxo5S40o8azUbo9rf3guSkZRnDwAgjhEdRQUq3yQ="
         }
       },
       "is_incremental": false,
@@ -1638,7 +1554,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.RectRenderer.html",
-          "hash": "f690BECCusLr+JVo5E9eLcKSH//87pvZOdoiohw8NMc="
+          "hash": "EMEWuwrkqh4sN303L/f8ERjvQDFxLJwKB2faPyMXiBg="
         }
       },
       "is_incremental": false,
@@ -1650,7 +1566,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer.html",
-          "hash": "vEd+DkNphxdcpaewYUaQcz4ohWqOqQ2w+G5YLE49PjY="
+          "hash": "KbyxWaj0LpLj5Dbykh/x+dNMGpx7R1ySp4o6BUdcSBo="
         }
       },
       "is_incremental": false,
@@ -1674,7 +1590,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.SkiaWidgets.ButtonWidgetRenderer.html",
-          "hash": "xlSkJREb5tZMhvqOI0qPVG+5s84E1U1pwbpLznQjJI4="
+          "hash": "RiJ6QggjNgeKfJfUlF/I1/UwNP6DNl1KmSDjhX3P4O4="
         }
       },
       "is_incremental": false,
@@ -1686,7 +1602,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.SkiaWidgets.HyperlinkWidgetRenderer.html",
-          "hash": "CxrnD+wyuPBWOHz+Hcf9urT+EcYHZjhW/22PfhAbNwg="
+          "hash": "Osda3aLM2ZkWSFMwPnrl0tdoU1ADcPqw9ETs5T4MCVA="
         }
       },
       "is_incremental": false,
@@ -1698,7 +1614,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.SkiaWidgets.ISkiaWidgetRenderer.html",
-          "hash": "uyXj5TEuBBOss40q9FtOEl5YBBHa5k9NrYJ8mpaAWPo="
+          "hash": "ir6PHZ+uLxL/jRwOvedz7eh/5eUZoaWi/kbhMZQ7rMo="
         }
       },
       "is_incremental": false,
@@ -1710,7 +1626,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer.html",
-          "hash": "K1WfSxouFDH8IU4iMIxDs0rzgSNHbyPo8cqcB5h9jKM="
+          "hash": "aEbeYvEFpAoq1VyshcBh9hYqWM4knzY3E3RcSL4ZnTw="
         }
       },
       "is_incremental": false,
@@ -1722,7 +1638,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.SkiaWidgets.ScaleBarWidgetRenderer.html",
-          "hash": "n6iIlNDPAja1WV/efmEOjNfwqc6azU/xvLqAapViie4="
+          "hash": "tinS0lksVXCNIBBE+QnFzSc7SVv8mvrg1LgVMdRsVKI="
         }
       },
       "is_incremental": false,
@@ -1734,7 +1650,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.SkiaWidgets.WidgetRenderer.html",
-          "hash": "QzYEQfsFyvXxkCexMuhppNJmllYaxy7zQj/NzMj5TnA="
+          "hash": "N/tXMEatXqcyauLKLKwteyOWxcDiMZ3Bx0g3YyqIDuc="
         }
       },
       "is_incremental": false,
@@ -1746,7 +1662,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.SkiaWidgets.ZoomInOutWidgetRenderer.html",
-          "hash": "dZHDaBb+WpSP38Cw2EYLW+DVUrzyXcMrs827IpXqA9M="
+          "hash": "3ZSQhSg7q0g08ZQZDgJOSk1ej0+3kyf2ZBwsO4APWzU="
         }
       },
       "is_incremental": false,
@@ -1770,7 +1686,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.SvgRenderer.html",
-          "hash": "JFSuhesqtyz8wSMlofyjAoBhnYCaLR2cpTn5vPkaSks="
+          "hash": "egVzchCp95dN2pTiYJIIhUTe2SgRqnObDHzBk/cUhjo="
         }
       },
       "is_incremental": false,
@@ -1782,7 +1698,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.SymbolCache.html",
-          "hash": "s0S/ptOq3lE8ndYUqkIpelScDAZYDckG+XxdSZkXWqs="
+          "hash": "NwAxdJu0O4wouCaXGaLPVxAnf/zoZPbyH+2maf0uacw="
         }
       },
       "is_incremental": false,
@@ -1794,7 +1710,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Rendering.Skia.SymbolStyleRenderer.html",
-          "hash": "8VUCYzK/LpcT3xZnR9UHCB4UQ+sjWHOkFTcNP70T6U8="
+          "hash": "MRP7K10KfWjHCISIPg+TN5r6P5/FRm7wgFoGRLX58gk="
         }
       },
       "is_incremental": false,
@@ -1814,11 +1730,467 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Rendering.VisibleFeatureIterator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Rendering.VisibleFeatureIterator.html",
+          "hash": "gkH5+7r0uGuNh2bmrVIMUexOUESbrFQI/EYW/nbhqKA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Rendering.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Rendering.html",
+          "hash": "WYz3DVC5IGu4bjGqlWqToHKOCAwZRlDHOEopVcmr6BI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.ArrowAlignment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.ArrowAlignment.html",
+          "hash": "y1R3F3KMzTQFPf++TT5ys0s8U9kBGSB8mSEcmla2HM4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.BitmapRegistry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.BitmapRegistry.html",
+          "hash": "bgUiD9sL44WF018OiE2Spa0hlQ9qODD7gpvH5UkNFgk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.Brush.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.Brush.html",
+          "hash": "K+8H0N2MRQlIZa0KGI/zHLxREw8vOi93tlbzby3WbUc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.CalloutStyle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.CalloutStyle.html",
+          "hash": "/cbNXKUJFyDnT4YSBWQ89+brErn+3Q+ahno1KN6KEVA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.CalloutType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.CalloutType.html",
+          "hash": "YSFCnGRNAK0viOyj6Fu/KHY/FQUQB1OO/SKmDQwCU04="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.Color.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.Color.html",
+          "hash": "JBe5NWbUPrABIOFZIL1oJunvjMQ57KyEF7Sk9612NA4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.FillStyle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.FillStyle.html",
+          "hash": "7tSjzJT0hk2xkKSa+ISiQ3Ea9Hr28wjrNcxdWS0zw0c="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.Font.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.Font.html",
+          "hash": "4+7GdV+3UzCl/0DcnTAjuqyLDkaUk4EN2P8ofGuDQPo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.IStyle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.IStyle.html",
+          "hash": "Oz0G4LS+RoAf20lQvJcr4SYxjtwhk2e5EfQofrDNV4c="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.IStyleRenderer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.IStyleRenderer.html",
+          "hash": "Cg+jfoW18WygtRtTAGysOPtwlGAZvXLc+y3+jXezlp0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.ImageStyle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.ImageStyle.html",
+          "hash": "/rLNAWOmi1rVlcqRA3Ym2DhNgci5lmHJjrPmzzE/UIY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.LabelStyle.HorizontalAlignmentEnum.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.LabelStyle.HorizontalAlignmentEnum.html",
+          "hash": "Haf6KgQkKVIrmVlmL1/8coCAU8qBqgkXhFTpXABHcww="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.LabelStyle.LineBreakMode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.LabelStyle.LineBreakMode.html",
+          "hash": "ohK455RYIuHhLR5Olpiefivj0vlpZ6W2XC5baFp5IEc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.LabelStyle.VerticalAlignmentEnum.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.LabelStyle.VerticalAlignmentEnum.html",
+          "hash": "pyEdJrFVozUVCKo3/M0+EwJLNNYBx2Ge5toEGDbeNB0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.LabelStyle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.LabelStyle.html",
+          "hash": "tqhV8gxYEdnFw0e/kJCKbSxzrjJAaR2vH74MnaJuO2E="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.Offset.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.Offset.html",
+          "hash": "d/oEz49Jn02HZ5U31mXxrBOtysTY89IRxzsDfU5RAnY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.Pen.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.Pen.html",
+          "hash": "2kGnKHJwJMszu1fIS2Xg3575Qot37jVTZAe2JHREL/o="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.PenStrokeCap.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.PenStrokeCap.html",
+          "hash": "96Nmljboh+1ZZosCJ/UIZQmmkejsTmbFZueuiwMy64s="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.PenStyle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.PenStyle.html",
+          "hash": "y146d3kSgUbXMqGk1zfu5mICq/iYBDilowCGw6cIJWU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.Size.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.Size.html",
+          "hash": "9g0dUKUAJE5dHRpxLJvb54bwCajaibJCu43Rmatpemo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.Sprite.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.Sprite.html",
+          "hash": "AX8BZKxRcjV1k2RzN0l4uPbmPw4U8wElHNJlPg+l+qM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.StrokeJoin.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.StrokeJoin.html",
+          "hash": "RsmKrRFyv0nqA6u9Kuo9Z6SyTCtnUdM+vpGfT1mTbOY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.Style.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.Style.html",
+          "hash": "j4KMgdrz3wlttnXfZmDGzSpljfWe6e1NYy97WZ7R4+E="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.StyleCollection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.StyleCollection.html",
+          "hash": "5lXkdgV4GkdSa1ZZ64qtRZdS1qWwKW7GaYGW8RQrKVw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.SymbolStyle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.SymbolStyle.html",
+          "hash": "htZAXFpMAfdr3RUAM+9A2rdsg4cXlnT6AyZAFf+x+jY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.SymbolType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.SymbolType.html",
+          "hash": "BAsw55yKZYrAgA+QUYHV/dVEdxVVdx/myM2xYYU/TIQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.Thematics.ColorBlend.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.Thematics.ColorBlend.html",
+          "hash": "9ITdb7hnXUHhSNV8FmBjblFmnv/1PsLxNkPh6IILRgI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.Thematics.CustomTheme.GetStyleMethod.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.Thematics.CustomTheme.GetStyleMethod.html",
+          "hash": "9LOtHW+ZniytfGKmxzPBKpiGIa32VCQOFGtv/Dtczt4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.Thematics.CustomTheme.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.Thematics.CustomTheme.html",
+          "hash": "h8xCqLfhJhqt9drDZHCMD6gKVNIPnL4B9feaosGFijg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.Thematics.GradientTheme.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.Thematics.GradientTheme.html",
+          "hash": "NEcDyWTokRFoI/TGkdDtoL0L71liQkwblnb9+G6PGck="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.Thematics.IThemeStyle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.Thematics.IThemeStyle.html",
+          "hash": "RuTTzZkr8A1g50lgCQHcuMkZBzme3rZT8s+3OdPdhF4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.Thematics.ThemeStyle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.Thematics.ThemeStyle.html",
+          "hash": "yK2DPvmUIChZRfzLhBJkdomrH2AMgypOgQzZ8KeLwUA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.Thematics.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.Thematics.html",
+          "hash": "M9FG2x+WzNMyhAia8AQ3WNTRHsYu7Q8IDTcqIX0+ogQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.UnitType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.UnitType.html",
+          "hash": "AF7zHSj0LoFl+lxp+nDsaV+dTljl1S4I3Ck9CL/yUJw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.VectorStyle.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.VectorStyle.html",
+          "hash": "XuaG+oxKc8BxejivMtzSBk71vCgj6cbEDf8V/+kfKPk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Styles.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Styles.html",
+          "hash": "/Vr5Za3OURSKBLp70rr8Uj+PKfRWKDxb7vz5DjtQF80="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Mapsui.UI.Android.Extensions.PointExtensions.yml",
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Android.Extensions.PointExtensions.html",
-          "hash": "/jlHrSyF2cQHSqfxc6lRwd7IhBQRgS7qSRolqK5CidA="
+          "hash": "LZRYjMp5926psFD1vj2CxglOpNNvcYe1Iq8JfCr6bxc="
         }
       },
       "is_incremental": false,
@@ -1842,7 +2214,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Android.MapControl.html",
-          "hash": "Q+E4rY5MPYOELI+BuE4a+N6sVRdFpNA9qbEQSZuxc7I="
+          "hash": "2bl7vw69RtEzIP6wFvcZHIy/vz7A2e62gnVK8qTXolU="
         }
       },
       "is_incremental": false,
@@ -1922,11 +2294,23 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.UI.FeatureInfoEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.UI.FeatureInfoEventArgs.html",
+          "hash": "+KLLjajOzc8UH8OJCf6sk1tn2wD3VyIaSnyfTv5YN/c="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Mapsui.UI.Forms.Callout.yml",
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.Callout.html",
-          "hash": "nz/J+NorXlZyC6iNfPKEqILCzI3vpgzCWb+SqDZRkbQ="
+          "hash": "o64PKfUWhFb0f7wKLK/sm9Uya1uiS7lKFcN9QqzdXlQ="
         }
       },
       "is_incremental": false,
@@ -1950,7 +2334,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.Circle.html",
-          "hash": "cBywN+nwdwQ42wssTnDL4yAmmti+HYzsS4rcWKcwDhU="
+          "hash": "q2Ctr6Pn7c/Yx44RfssqgXcdo5HQYse3xbQivZdAMfE="
         }
       },
       "is_incremental": false,
@@ -1986,7 +2370,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.Extensions.ColorExtensions.html",
-          "hash": "akfUHv0iruOqehecwvU6/xSLwmDspA76XsYlf74QPD8="
+          "hash": "SVKdBptp1/JkCAyelbJ922EBHUpQO0xh+uyfi+Cu6Ww="
         }
       },
       "is_incremental": false,
@@ -1998,7 +2382,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.Extensions.PositionExtensions.html",
-          "hash": "pYh02rBWK1b5k9bnwEyBn6Kp9It6IiW5HzzgcDiGOOk="
+          "hash": "vHyF/XlFCY657wTggE0AibNKTuLV3XdH7PgCsSh0KPM="
         }
       },
       "is_incremental": false,
@@ -2010,7 +2394,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.Extensions.TextAlignmentExtensions.html",
-          "hash": "DLDtKCxqf9SnjQZfV1xan/j6gAmIQuNOs/1dI2u4Y1o="
+          "hash": "ZofpXNGVz4NLZH4vnfUt9vHLvqLpSEwZSqMaFtIPvwo="
         }
       },
       "is_incremental": false,
@@ -2058,7 +2442,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.MapControl.html",
-          "hash": "B1qmufdgh9nWSVieUyhiLFg3shjA3ktvEqtt5etIuoY="
+          "hash": "AKYchXoWpMpS9LKxA6wkjI0DdAYmhLBvwtZEhBstmjk="
         }
       },
       "is_incremental": false,
@@ -2094,7 +2478,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.MapView.html",
-          "hash": "bsdAjbPhmdmov71AF0aTODLI4ApjY/Yg9PSyQZTT35g="
+          "hash": "t4XWYAVEMdvSAYL2kkNTa8LTivWmHb3fbwI9NaBlOeE="
         }
       },
       "is_incremental": false,
@@ -2106,7 +2490,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.Pin.html",
-          "hash": "z2suM4potirltO7//nauz4fk+CdiVJcMrPRYBwoxF5c="
+          "hash": "p3kbmIH4E5yr8cFOZbE4VvIA+Teu0wVymhT2M6X8Xu4="
         }
       },
       "is_incremental": false,
@@ -2142,7 +2526,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.Polygon.html",
-          "hash": "1MXo0lMaUPRejpBXFV06xun/i3jOIcGTkS8ddzYPDTo="
+          "hash": "ZU6qo3tnQRTMU5fT1lnhQ5mKUBwxVZ7PdlXDYsChGEU="
         }
       },
       "is_incremental": false,
@@ -2154,7 +2538,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.Polyline.html",
-          "hash": "gekuuyJLH00hgQB2eigqkkKUSGK0VEeBK9P7uI3+FLc="
+          "hash": "5rWSxX+HII86u4DdiLs99o3wy3UJ3za/5+MgbIWe6Zo="
         }
       },
       "is_incremental": false,
@@ -2166,7 +2550,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.Position.html",
-          "hash": "AOhCIapGbMQNXcAlszMIKmsT1BdwkTwZ5ueFa9vqwH4="
+          "hash": "ssH9p7dIo+Fi9dWldnXIrLhiWm5kchH/8z/aJ5UX0q4="
         }
       },
       "is_incremental": false,
@@ -2226,7 +2610,79 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.HoveredEventArgs.html",
-          "hash": "opMJLZ4SP2UAKufq5jelTfEmuzonCpqfa1KSBEzRgfk="
+          "hash": "Sl4Om2k7u+UUmThTKv4iNTVaw+FwQhYHUm1tPvp8fEk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.UI.IMapControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.UI.IMapControl.html",
+          "hash": "WuoLGVPmru1J+vsy89R8/jYnJBsCB6pk3wlM8oZzAn8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.UI.IViewportLimiter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.UI.IViewportLimiter.html",
+          "hash": "dWYMKYBWmjBg1lTblZlqFDcQxIBLKFc++HT9wxUczEU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.UI.MapInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.UI.MapInfo.html",
+          "hash": "vJSUJ8y7yiztl2aWmzy7uft1IhX78wNBcCXErseb7ic="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.UI.MapInfoEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.UI.MapInfoEventArgs.html",
+          "hash": "gGk9LdmFSaiVaDlWAlDRG2ZBuL2LeETZ5ssjdCteIxo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.UI.MinMax.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.UI.MinMax.html",
+          "hash": "YUlWrh2sV++l8JVH82Q/yPe5WDQNgxnt/HkKc1hZ78Q="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.UI.MouseWheelAnimation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.UI.MouseWheelAnimation.html",
+          "hash": "IhQYdiwHk00d4ftksHcjvXcfEYyD7/CM7ez6Gznbjmg="
         }
       },
       "is_incremental": false,
@@ -2238,7 +2694,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Objects.Drawable.html",
-          "hash": "c3bGAJs2cRwj3AjKkB6nkRwpY+XipTFL3cQwcaWXjOo="
+          "hash": "U4SnUz9eXD0K15RVt1xeskuAQxFMBk2ZdtFeAyFsktM="
         }
       },
       "is_incremental": false,
@@ -2250,7 +2706,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Objects.IFeatureProvider.html",
-          "hash": "ClgZWNnxW9Z9GkLefgRmhYAu7RGXWQxRuhkso1GgWHY="
+          "hash": "yFxdqoYfjQTh1mdfhwX37LVO20ENNscBOcp/25LYod8="
         }
       },
       "is_incremental": false,
@@ -2262,7 +2718,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Objects.MyLocationLayer.html",
-          "hash": "rumv3onSJMKjJmraSW1WbQRHtfIknJsaU9ru8oEtd+4="
+          "hash": "fgk4Wppm/9N2x6cZiSsNXQZl/b65+6QhZBr+Y2a8Na4="
         }
       },
       "is_incremental": false,
@@ -2274,7 +2730,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html",
-          "hash": "itu9Fgthslky1BjYur1b007zQGv8lj2vmBYLwo8LjAM="
+          "hash": "lhoeCwazazLixOaSdSwXwSSLQF35vgHREPse2f2ZAXk="
         }
       },
       "is_incremental": false,
@@ -2310,7 +2766,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.TappedEventArgs.html",
-          "hash": "uo5v6op+pqQ23h4v2OS7DN68pCOIBPzAHSHtay7MUlY="
+          "hash": "IZDE5m+1PZtY5Uy/9EGSROdsv2cSMzOfcMvkYeXQH2A="
         }
       },
       "is_incremental": false,
@@ -2334,7 +2790,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.TouchedEventArgs.html",
-          "hash": "pw8rkn6uW7NcFpnqmovs7g3KfB2MnCmw7G+skpU/0zE="
+          "hash": "eBgf5jPVcWia6vUTBvO5/mgiM50cW5N6xLgnJibaji8="
         }
       },
       "is_incremental": false,
@@ -2346,7 +2802,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Utils.FlingTracker.html",
-          "hash": "pejRJF5xFL8pPTj4KzOOv1RzQtHtZ4YqxO1v1871Udw="
+          "hash": "u1xiTV5UwOEG4qMZWC51Po8Z1HLENs1mFyFsGKMonqQ="
         }
       },
       "is_incremental": false,
@@ -2370,7 +2826,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Uwp.Extensions.PointExtensions.html",
-          "hash": "LdMi81vynUvB2JW+/s67btC5AZUe07MLNGqcRHqk5hM="
+          "hash": "ByTRMdZu2k5FXNpssKjZf+1hDhUkv4StBEXRQi/rHI0="
         }
       },
       "is_incremental": false,
@@ -2394,7 +2850,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Uwp.MapControl.html",
-          "hash": "5QJiA8SMLQ6TkKQRoubwJCjsCMHuspfWM4V5TxvTx8g="
+          "hash": "eSDyXF6lEksboZBH+kQdAwKs56fP96/wK707hpv1+h0="
         }
       },
       "is_incremental": false,
@@ -2414,11 +2870,47 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.UI.ViewportLimiter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.UI.ViewportLimiter.html",
+          "hash": "47tYcP8PDr+qk7fGZmM1pE9AjS0StJyfJowdNhMqZn4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.UI.ViewportLimiterKeepWithin.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.UI.ViewportLimiterKeepWithin.html",
+          "hash": "VN2wkF1FXYQlClQw964OgDS/wa7GUiqcFq48g6XVCuk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.UI.ViewportLimiterWithoutLimits.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.UI.ViewportLimiterWithoutLimits.html",
+          "hash": "1kcB+6wUqW1XpgpkvJ1wmE4M0AS4duuDNU2KK+P/OB0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Mapsui.UI.Wpf.Extensions.WindowsPointExtensions.yml",
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Wpf.Extensions.WindowsPointExtensions.html",
-          "hash": "qeRd4DNMmKB4zv32x/BCtCs4GB+vYijt3Dvf0fO4waM="
+          "hash": "iqMwH0Cb0Vj4sINFX4baAvKBOE2AOQZXMdZLSTNZ8s8="
         }
       },
       "is_incremental": false,
@@ -2442,7 +2934,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Wpf.MapControl.html",
-          "hash": "kLVGxb74BKAo+zV09ELH8awIe18WzZuQRFPkxzTIzTg="
+          "hash": "y+d6AGrc8kiPTYNHm/rBgTDIG+VhjKeYrFKRt6s4BhY="
         }
       },
       "is_incremental": false,
@@ -2474,11 +2966,23 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.UI.ZoomMode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.UI.ZoomMode.html",
+          "hash": "jh+uEOQgdNNUHo0+jzX/YQPh1iUqcj8iH+WaC9RTA4U="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Mapsui.UI.ZoomedEventArgs.yml",
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.ZoomedEventArgs.html",
-          "hash": "O9VgfaMUlErgxVl3mknr2K1REpwtOGXO5z6DQog4FDQ="
+          "hash": "Cf+ptNQSuGBLnCGvFH91LZ2x2ZqOjvx2C/l0Z1RnCT0="
         }
       },
       "is_incremental": false,
@@ -2490,7 +2994,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.iOS.MapControl.html",
-          "hash": "UOEnvfMZBpn3LXXzfQRH0BXzoZVnsHKp7vKseXv8aRw="
+          "hash": "K5dexhlxn9w2/VpTtMJxgxUaHS/AVdStfKuOQRlxpTk="
         }
       },
       "is_incremental": false,
@@ -2514,7 +3018,127 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.html",
-          "hash": "8QfQl1sqIn4ddoXcGAeMmmTCDK6svAr5cU4dQe2+XnM="
+          "hash": "PMgGgqEQMqNTKbCNt/XZX7NqA5Wc60pl//12Gtxx+HY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Utilities.Algorithms.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Utilities.Algorithms.html",
+          "hash": "Ovxb6bEVHQrklobBt5ZuvsCXeers2COwkFq7R+8w1ns="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Utilities.Animation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Utilities.Animation.html",
+          "hash": "KTDLjiFRdz3/LVgMzGOXksdqndTzUXIQWjL/bzWeM9k="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Utilities.AnimationEntry-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Utilities.AnimationEntry-1.html",
+          "hash": "qZE8E55VD5o4smgKkrRzv188Y/b9L2OZJtSznlgktYg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Utilities.AnimationEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Utilities.AnimationEventArgs.html",
+          "hash": "IA8K3U5d0qvTTXeOpt8GszGkjxZ/6GpqIzK0q0nei68="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Utilities.Constants.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Utilities.Constants.html",
+          "hash": "ihRxBk2J/y5Jn/Xi49i9y1AC+LPXMZIjYXjNpFf4S6Q="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Utilities.Easing.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Utilities.Easing.html",
+          "hash": "FTEBS+XVkesU3fdY20sqxPRhSrkupaieg912RxsGYJ8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Utilities.EmbeddedResourceLoader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Utilities.EmbeddedResourceLoader.html",
+          "hash": "a7JSdJpB6H8xxiZcNWGKVokHe7+m2iA0L4pI5r2Xghs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Utilities.Performance.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Utilities.Performance.html",
+          "hash": "lDlggk6n5WlxcinKIIDqEKgJAh/M7WTkv9t46tJK2Jc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Utilities.ScaleMethod.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Utilities.ScaleMethod.html",
+          "hash": "W6/Yr6FEKkBBI1Qh7gkWTgSRTqDBYuFZ2XQsrM/EzJw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Utilities.StreamHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Utilities.StreamHelper.html",
+          "hash": "W9L2cUAd2SfMt2wicARv65epHbtAh2nwwSCeC3MJOAQ="
         }
       },
       "is_incremental": false,
@@ -2534,11 +3158,455 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Utilities.TransformationAlgorithms.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Utilities.TransformationAlgorithms.html",
+          "hash": "JYgqSf4PWiMQW36TQ0AYVO4FOoiwHxpuowTSvgdEfFc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Utilities.Version.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Utilities.Version.html",
+          "hash": "rD7WjDTIHaDHIuP+cV5w2XORzv+i/3qwGMnY3QNnpIM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Utilities.ZoomHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Utilities.ZoomHelper.html",
+          "hash": "LuVTRPbPET+4hXIMtuDqzki0rXXkaNH3AAjbNQU2iEU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Mapsui.Utilities.yml",
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Utilities.html",
-          "hash": "/Xucs+awvIWScBLkN20ndpAEqkHl7B0wpZ4b0N2WRvo="
+          "hash": "K05L76/8YXDS9lOaYnxL1KMR3TY8dnTOMYr6sO8usZ8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Viewport.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Viewport.html",
+          "hash": "/sDcwvcY8wpTBAMf4KzWnSb7kiHY74FOASpo7SkN1hY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.ViewportAnimations.CenterAnimation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.ViewportAnimations.CenterAnimation.html",
+          "hash": "bEynH/fLApNKX9CiqL/09CpFMooEO36Dt+4EUL6bmgw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.ViewportAnimations.FlingAnimation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.ViewportAnimations.FlingAnimation.html",
+          "hash": "JdgTuMf8WfxtQaq2AKdif+JwvXcSUYbYyzCYxh/+1PA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.ViewportAnimations.FlyToAnimation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.ViewportAnimations.FlyToAnimation.html",
+          "hash": "//T1Jvhn7d5flpwmuTJGylDc9o1McvUT5w4k7zHsdqs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.ViewportAnimations.RotateAnimation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.ViewportAnimations.RotateAnimation.html",
+          "hash": "iSYy+UqH0Z0xQIxPxQMne/v+09T+LVgmXr3v3M54xjU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.ViewportAnimations.ZoomAnimation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.ViewportAnimations.ZoomAnimation.html",
+          "hash": "P5C+K5+DGSc+LrstTqMo4ngWPn+Ii2nJFn8pLClvoVU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.ViewportAnimations.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.ViewportAnimations.html",
+          "hash": "TENgpWG8ON0o2C3NUwIz4m8sRP6OGhLumNlYmuCrmzQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Widgets.Alignment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Widgets.Alignment.html",
+          "hash": "5IoMCc9a5BwAsKjNDlt6wqvM7P/KDRMvFDbzTz7W50s="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Widgets.ButtonWidget.ButtonWidget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Widgets.ButtonWidget.ButtonWidget.html",
+          "hash": "LpBVndmL9m0+PWxzlix0AWIGDteK/fCrtkRZl+uslHo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Widgets.ButtonWidget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Widgets.ButtonWidget.html",
+          "hash": "zdHC4Cm9T42XE+4WYTOQt9mguJzpOdN02CZaAi12VMI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Widgets.HorizontalAlignment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Widgets.HorizontalAlignment.html",
+          "hash": "z3CekZF1HIltPID/GYu7F5EhQ53fYLf6fcSxKKopJY0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Widgets.Hyperlink.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Widgets.Hyperlink.html",
+          "hash": "L/xtmvuBO4JcenThesqFCak8kqJFySdFtLj6NeI0Rlg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Widgets.HyperlinkWidgetArguments.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Widgets.HyperlinkWidgetArguments.html",
+          "hash": "luIfIGd9eW1hUWmmc3Yggk/J2UQLyualnRpeTFJ58dw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Widgets.IWidget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Widgets.IWidget.html",
+          "hash": "avRYnubRriJzxIpMW//aMSBuLzfJzBSIPs4fWzdCoYM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Widgets.IWidgetRenderer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Widgets.IWidgetRenderer.html",
+          "hash": "Yv8RYeYYips0isRQnTRnwFqSrxIkcyRWiQsYQO64Fk0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Widgets.PerformanceWidget.PerformanceWidget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Widgets.PerformanceWidget.PerformanceWidget.html",
+          "hash": "+4sE7hmt2IrY7QUD1rYpdvY6Sg8X9uQJzSlz1Qd0JeA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Widgets.PerformanceWidget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Widgets.PerformanceWidget.html",
+          "hash": "11fkh0ADfH3Uo2vwC4TyEKr8Ya7izDZpd0KcvXS5Q6c="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Widgets.ScaleBar.IUnitConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Widgets.ScaleBar.IUnitConverter.html",
+          "hash": "fPE6044OMwNKP8LDT3tp8qR5xjaaK2GSDMlu45r4zdA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Widgets.ScaleBar.ImperialUnitConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Widgets.ScaleBar.ImperialUnitConverter.html",
+          "hash": "j3CwfQE8somAn0V87ov7X/OgT7/iuJz0E3e8obS0mak="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Widgets.ScaleBar.MetricUnitConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Widgets.ScaleBar.MetricUnitConverter.html",
+          "hash": "iCkF/ZGaKDJ63lc/4mMfaGzfb2GitpKpmHOZi+UYgsw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Widgets.ScaleBar.NauticalUnitConverter.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Widgets.ScaleBar.NauticalUnitConverter.html",
+          "hash": "6zsgLlzp2VjBQHtdbAhwLg6OkuLfLN4xBCEhc1TYwSQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Widgets.ScaleBar.ScaleBarMode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Widgets.ScaleBar.ScaleBarMode.html",
+          "hash": "F3DvVxvXVNfG1fKUhC2RbEOc73oNEZSUwhanvAT6WqY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Widgets.ScaleBar.ScaleBarWidget.html",
+          "hash": "0rgMsQn7bnF9TNXD75NE5/7QXTfAxdohaimbLJZRZd0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Widgets.ScaleBar.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Widgets.ScaleBar.html",
+          "hash": "sPV7lE+p7Hzjs3+PjoXCNzxUB+BmEjxLIvkTPxQZNgM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Widgets.TextBox.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Widgets.TextBox.html",
+          "hash": "QVd9zqCaQAqCKXQSgIg07MstQH+0/l9wyaHn68VYkps="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Widgets.VerticalAlignment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Widgets.VerticalAlignment.html",
+          "hash": "0sqx5+RI/fl1RDQKgorkxsChVdMqCTgG6TuG3PFPYow="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Widgets.Widget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Widgets.Widget.html",
+          "hash": "sPzsOvzFw4gnP0KWXhI6aBFKo7GGw03P68lAw5at+qs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Widgets.WidgetTouch.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Widgets.WidgetTouch.html",
+          "hash": "bAPRjE0KoLJcppiFLuCjvhDPne5r59XB6tkHX7BzDNE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Widgets.WidgetTouchedEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Widgets.WidgetTouchedEventArgs.html",
+          "hash": "Ju+lSjduXoiWCcq6aXTICjq8t1f2aTV57C35D/qaJhc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Widgets.Zoom.Orientation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Widgets.Zoom.Orientation.html",
+          "hash": "oohJ83oAvvwu/zemXSWfwcWT1buJy6ajtZq1LO8kygY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Widgets.Zoom.ZoomInOutWidget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Widgets.Zoom.ZoomInOutWidget.html",
+          "hash": "or7+f+LKtHYDznO+co5Y4OAA1D3jVtjEbpsZSJ4iVuc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Widgets.Zoom.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Widgets.Zoom.html",
+          "hash": "Ug4gTDyl6q0l4h1jF5g9HhYTHbWTSnYaLkoKiilnkEA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.Widgets.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.Widgets.html",
+          "hash": "sdSt+0jZqGhp0OWeX8Cgkzoy1JUV5HM+0AwRbqNIS8g="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Mapsui.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Mapsui.html",
+          "hash": "469HcwIrLb8zicSmhOuuiJ7gGVCI9wBDBt0mKiAxA+g="
         }
       },
       "is_incremental": false,
@@ -2586,7 +3654,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "FXuKE2+5X0JMa6gndWi7ow/7hmJo0vW3BSUhJdL50+U="
+          "hash": "/yudSNBfkcxxJhPZlGk3jpf5/ojVYTGAk8F8h4pKhBg="
         }
       },
       "is_incremental": false,
@@ -2610,7 +3678,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/contributors-guidelines.html",
-          "hash": "54Rewmu+0D92u0LICCxv3ztzLZF5HxX+5aPnC/rLEKU="
+          "hash": "ALAdBNzGfRqjTICf1OqU10QL1esoXpz3zIsRS29neHs="
         }
       },
       "is_incremental": false,
@@ -2908,7 +3976,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/toc.html",
-          "hash": "FObQvYL6IX4FetTnhvU+YSvumxgKl7Yl6FNK1lXtaB4="
+          "hash": "maaceERRoXUstHZbAicd4BUKrLYf3tgIRzRfetcGwbM="
         }
       },
       "is_incremental": false,
@@ -2933,6 +4001,18 @@
         ".html": {
           "relative_path": "documentation/v2.0-upgrade-guide.html",
           "hash": "AhAbU/LJ8WWwx9iBOenCoOVQwxLQXti/YW8V4G+y3cA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "documentation/v4.0-upgrade-guide.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/v4.0-upgrade-guide.html",
+          "hash": "AbtAoB6C3r+agrLzdQK+kQW8thLPlRG71AOAgnXqWSA="
         }
       },
       "is_incremental": false,
@@ -3032,13 +4112,13 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 28,
+          "total_file_count": 29,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 213,
+          "total_file_count": 302,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
