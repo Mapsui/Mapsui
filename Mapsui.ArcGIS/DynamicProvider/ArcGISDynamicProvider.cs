@@ -37,7 +37,6 @@ namespace Mapsui.ArcGIS.DynamicProvider
             ArcGisDynamicCapabilities = arcGisDynamicCapabilities;
         }
 
-
         /// <summary>
         /// Create ArcGisDynamicProvider, capabilities will be parsed automatically
         /// </summary>
