@@ -451,7 +451,7 @@ namespace Mapsui
 
         public bool UpdateAnimations()
         {
-            if (_animations.All(a => a.Done)) _animations.Clear();
+            if (_animations.All(a => a.Done)) _animations = new List<AnimationEntry<Viewport>>();
             return Animation.UpdateAnimations(this, _animations);
         }
 

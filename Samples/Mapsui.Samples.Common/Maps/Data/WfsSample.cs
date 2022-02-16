@@ -23,23 +23,23 @@ namespace Mapsui.Samples.Common.Maps.Data
             mapControl.Map = CreateMap();
         }
 
+        private const string wfsUri = "https://geoservices1.civis.bz.it/geoserver/p_bz-AdministrativeUnits/ows";
+        private const string crs = "EPSG:3857";  // originally: "EPSG:25832"
+        private const string layerName = "Districts";
+        private const string nsPrefix = "p_bz-AdministrativeUnits";
+        private const string labelField = "NAME_DE";
+
         public static Map CreateMap()
         {
             try
             {
-                const string serviceUri = "https://geoservices.buergernetz.bz.it/geoserver/ows";
-
-                var map = new Map() { CRS = "EPSG:25832" };
-                var provider = CreateWfsProvider(serviceUri);
+                var map = new Map() { CRS = crs };
+                var provider = CreateWfsProvider(wfsUri);
                 map.Layers.Add(CreateTileLayer(CreateTileSource()));
                 map.Layers.Add(CreateWfsLayer(provider));
                 map.Layers.Add(CreateLabelLayer(provider));
 
-                var bb = new MRect(550000, 5050000, 800000, 5400000);
-                map.Limiter = new ViewportLimiterKeepWithin
-                {
-                    PanLimits = bb
-                };
+                map.Home = n => n.NavigateTo(new MPoint(1270000.0, 5880000.0), map.Resolutions[9]);
 
                 return map;
 
@@ -53,9 +53,9 @@ namespace Mapsui.Samples.Common.Maps.Data
 
         private static ILayer CreateWfsLayer(WFSProvider provider)
         {
-            return new Layer("COMUNI_AMMINISTRATIVI")
+            return new Layer(layerName)
             {
-                Style = new VectorStyle { Fill = new Brush { Color = Color.Red } },
+                Style = new VectorStyle { Fill = new Brush { Color = Color.FromArgb(192, 255, 0, 0) } },
                 DataSource = provider,
                 IsMapInfoLayer = true
             };
@@ -63,13 +63,13 @@ namespace Mapsui.Samples.Common.Maps.Data
 
         private static WFSProvider CreateWfsProvider(string getCapabilitiesUri)
         {
-            var provider = new WFSProvider(getCapabilitiesUri, "p_bz-cadastre", "COMUNI_AMMINISTRATIVI",
+            var provider = new WFSProvider(getCapabilitiesUri, nsPrefix, layerName,
                 WFSProvider.WFSVersionEnum.WFS_1_1_0)
             {
                 QuickGeometries = false,
                 GetFeatureGetRequest = true,
-                CRS = "EPSG:25832",
-                Labels = new List<string> { "CAMM_NOME_DE" }
+                CRS = crs,
+                Labels = new List<string> { labelField }
             };
             return provider;
         }
@@ -80,7 +80,6 @@ namespace Mapsui.Samples.Common.Maps.Data
             // Labels are collected when parsing the geometry. So there's just one 'GetFeature' call necessary.
             // Otherwise (when calling twice for retrieving labels) there may be an inconsistent read...
             // If a label property is set, the quick geometry option is automatically set to 'false'.
-            const string labelField = "CAMM_NOME_DE";
             provider.Labels.Add(labelField);
 
             return new Layer("labels")
@@ -98,18 +97,20 @@ namespace Mapsui.Samples.Common.Maps.Data
             };
         }
 
-
-
+        //public static HttpTileSource CreateTileSource()
+        //{
+        //    using (var httpClient = new HttpClient())
+        //    using (var response = httpClient.GetStreamAsync("https://geoservices.buergernetz.bz.it/mapproxy/service/ows?SERVICE=WMTS&REQUEST=GetCapabilities").Result)
+        //    {
+        //        var tileSources = WmtsParser.Parse(response);
+        //        return tileSources.First(t =>
+        //            ((WmtsTileSchema) t.Schema).Layer == "P_BZ_OF_2014_2015_2017" && t.Schema.Srs == "EPSG:25832");
+        //    }
+        //}
 
         public static HttpTileSource CreateTileSource()
         {
-            using (var httpClient = new HttpClient())
-            using (var response = httpClient.GetStreamAsync("https://geoservices.buergernetz.bz.it/mapproxy/service/ows?SERVICE=WMTS&REQUEST=GetCapabilities").Result)
-            {
-                var tileSources = WmtsParser.Parse(response);
-                return tileSources.First(t =>
-                    ((WmtsTileSchema)t.Schema).Layer == "P_BZ_OF_2014_2015_2017" && t.Schema.Srs == "EPSG:25832");
-            }
+            return BruTile.Predefined.KnownTileSources.Create(BruTile.Predefined.KnownTileSource.OpenStreetMap);
         }
 
         public static ILayer CreateTileLayer(ITileSource tileSource, string? name = null)
