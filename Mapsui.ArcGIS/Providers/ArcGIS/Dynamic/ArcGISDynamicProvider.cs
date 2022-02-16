@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -11,8 +10,9 @@ using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Projections;
+using Mapsui.Providers;
 
-namespace Mapsui.Providers.ArcGIS.Dynamic
+namespace Mapsui.ArcGIS.Providers.ArcGIS.Dynamic
 {
     public class ArcGISDynamicProvider : IProjectingProvider
     {
@@ -100,9 +100,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
 
             IViewport? viewport = fetchInfo.ToViewport();
             if (viewport != null && TryGetMap(viewport, out var raster))
-            {
                 features.Add(new RasterFeature(raster));
-            }
             return features;
         }
 
@@ -196,9 +194,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             strReq.Append("&layers=show:");
 
             if (!string.IsNullOrEmpty(Token))
-            {
                 strReq.Append($"&token={Token}");
-            }
             /* 
              * Add all layers to the request that have defaultVisibility to true, the normal request to ArcGIS allready does this already
              * without specifying "layers=show", but this adds the opportunity for the user to set the defaultVisibility of layers
@@ -207,7 +203,6 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
             var oneAdded = false;
 
             if (ArcGisDynamicCapabilities.layers != null)
-            {
                 foreach (var t in ArcGisDynamicCapabilities.layers)
                 {
                     if (t.defaultVisibility == false)
@@ -219,7 +214,6 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
                     strReq.AppendFormat("{0}", t.id);
                     oneAdded = true;
                 }
-            }
 
             strReq.AppendFormat("&format={0}", GetFormat(ArcGisDynamicCapabilities));
             strReq.Append("&transparent=true");

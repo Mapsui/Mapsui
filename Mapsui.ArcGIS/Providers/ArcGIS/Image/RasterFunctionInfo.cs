@@ -1,4 +1,4 @@
-namespace Mapsui.Providers.ArcGIS.Image
+namespace Mapsui.ArcGIS.Providers.ArcGIS.Image
 {
     public class RasterFunctionInfo
     {

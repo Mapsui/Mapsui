@@ -7,12 +7,14 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using Mapsui.ArcGIS.Providers.ArcGIS;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
+using Mapsui.Providers;
 using Mapsui.Rendering;
 
-namespace Mapsui.Providers.ArcGIS.Image
+namespace Mapsui.ArcGIS.Providers.ArcGIS.Image
 {
     public class ArcGISImageServiceProvider : IProjectingProvider
     {
@@ -62,9 +64,7 @@ namespace Mapsui.Providers.ArcGIS.Image
                     _url = value.Remove(value.Length - 1);
 
                 if (!_url.ToLower().Contains("exportimage"))
-                {
                     _url += @"/ExportImage";
-                }
             }
         }
 
@@ -101,9 +101,7 @@ namespace Mapsui.Providers.ArcGIS.Image
 
             var viewport = fetchInfo.ToViewport();
             if (viewport != null && TryGetMap(viewport, out var raster))
-            {
                 features.Add(new RasterFeature(raster));
-            }
             return features;
         }
 
@@ -134,14 +132,11 @@ namespace Mapsui.Providers.ArcGIS.Image
                 using var task = client.GetAsync(uri);
                 using var response = task.Result;
                 using (var dataStream = response.Content.ReadAsStreamAsync().Result)
-                {
                     try
                     {
                         var bytes = BruTile.Utilities.ReadFully(dataStream);
                         if (viewport.Extent != null)
-                        {
                             raster = new MRaster(bytes, viewport.Extent);
-                        }
                         else
                         {
                             raster = null;
@@ -154,22 +149,21 @@ namespace Mapsui.Providers.ArcGIS.Image
                         raster = null;
                         return false;
                     }
-                }
                 return true;
             }
             catch (WebException ex)
             {
                 Logger.Log(LogLevel.Warning, ex.Message, ex);
                 if (!ContinueOnError)
-                    throw (new RenderException(
+                    throw new RenderException(
                         "There was a problem connecting to the ArcGISImage server",
-                        ex));
+                        ex);
                 Debug.WriteLine("There was a problem connecting to the WMS server: " + ex.Message);
             }
             catch (Exception ex)
             {
                 if (!ContinueOnError)
-                    throw (new RenderException("There was a problem while attempting to request the WMS", ex));
+                    throw new RenderException("There was a problem while attempting to request the WMS", ex);
                 Debug.WriteLine("There was a problem while attempting to request the WMS" + ex.Message);
             }
 
@@ -185,10 +179,8 @@ namespace Mapsui.Providers.ArcGIS.Image
             if (!url.ToString().EndsWith("&") && !url.ToString().EndsWith("?")) url.Append("&");
 
             if (boundingBox != null)
-            {
                 url.AppendFormat(CultureInfo.InvariantCulture, "bbox={0},{1},{2},{3}",
                     boundingBox.Min.X, boundingBox.Min.Y, boundingBox.Max.X, boundingBox.Max.Y);
-            }
 
             url.AppendFormat("&size={0},{1}", width, height);
             url.AppendFormat("&interpolation={0}", ArcGisImageCapabilities.Interpolation);
@@ -201,14 +193,12 @@ namespace Mapsui.Providers.ArcGIS.Image
             url.AppendFormat("&bboxSR={0}", CRS);
 
             if (ArcGisImageCapabilities.StartTime == -1 && ArcGisImageCapabilities.EndTime == -1)
-            {
                 if (ArcGisImageCapabilities.timeInfo == null || ArcGisImageCapabilities.timeInfo.timeExtent == null || ArcGisImageCapabilities.timeInfo.timeExtent.Length == 0)
                     url.Append("&time=null, null");
                 else if (ArcGisImageCapabilities.timeInfo.timeExtent.Length == 1)
                     url.AppendFormat("&time={0}, null", ArcGisImageCapabilities.timeInfo.timeExtent[0]);
                 else if (ArcGisImageCapabilities.timeInfo.timeExtent.Length > 1)
                     url.AppendFormat("&time={0}, {1}", ArcGisImageCapabilities.timeInfo.timeExtent[0], ArcGisImageCapabilities.timeInfo.timeExtent[ArcGisImageCapabilities.timeInfo.timeExtent.Length - 1]);
-            }
             else
             {
                 if (ArcGisImageCapabilities.StartTime != -1 && ArcGisImageCapabilities.EndTime != -1)
@@ -220,9 +210,7 @@ namespace Mapsui.Providers.ArcGIS.Image
             }
 
             if (!string.IsNullOrEmpty(Token))
-            {
                 url.AppendFormat("&token={0}", Token);
-            }
 
             return url.ToString();
         }

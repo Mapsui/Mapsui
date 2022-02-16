@@ -1,4 +1,4 @@
-namespace Mapsui.Providers.ArcGIS
+namespace Mapsui.ArcGIS.Providers.ArcGIS
 {
     public class TileInfo
     {
