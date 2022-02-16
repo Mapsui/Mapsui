@@ -41,7 +41,7 @@ namespace Mapsui.Samples.Forms
             Compass.ReadingChanged += Compass_ReadingChanged;
 
             mapView.MyLocationLayer.UpdateMyLocation(new UI.Forms.Position());
-            mapView.MyLocationLayer.LabelText = "My location!\n";
+            mapView.MyLocationLayer.CalloutText = "My location!\n";
             mapView.MyLocationLayer.Clicked += MyLocationClicked;
 
             mapView.Info += MapView_Info;
@@ -185,7 +185,7 @@ namespace Mapsui.Samples.Forms
                 mapView.MyLocationLayer.UpdateMyLocation(new UI.Forms.Position(e.Position.Latitude, e.Position.Longitude));
                 mapView.MyLocationLayer.UpdateMyDirection(e.Position.Heading, mapView.Viewport.Rotation);
                 mapView.MyLocationLayer.UpdateMySpeed(e.Position.Speed);
-                mapView.MyLocationLayer.LabelText = $"My location:\nlat={e.Position.Latitude:F6}, lon={e.Position.Longitude:F6}";
+                mapView.MyLocationLayer.CalloutText = $"My location:\nlat={e.Position.Latitude:F6}°\nlon={e.Position.Longitude:F6}°";
             });
         }
 
@@ -201,7 +201,7 @@ namespace Mapsui.Samples.Forms
             if (myLocLayer == null)
                 return;
             // toggle label
-            myLocLayer.ShowLabel = !myLocLayer.ShowLabel;
+            myLocLayer.ShowCallout = !myLocLayer.ShowCallout;
         }
     }
 }

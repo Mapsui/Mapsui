@@ -36,7 +36,7 @@ namespace Mapsui.UI.Objects
         private readonly GeometryFeature _feature;
         private SymbolStyle _locStyle;  // style for the location indicator
         private SymbolStyle _dirStyle;  // style for the view-direction indicator
-        private LabelStyle _labStyle;   // style for the label
+        private CalloutStyle _coStyle;  // style for the callout
 
         private static int _bitmapMovingId = -1;
         private static int _bitmapStillId = -1;
@@ -91,38 +91,35 @@ namespace Mapsui.UI.Objects
         /// <value>Scale of symbol</value>
         public double Scale { get; set; } = 1.0;
 
-        private string _labelText;
-
         /// <summary>
-        /// The text that is displayed in the MyLocation label
+        /// The text that is displayed in the MyLocation callout.
         /// (can contains line breaks).
         /// </summary>
-        public string LabelText
+        public string CalloutText
         {
             get
             {
-                return _labelText;
+                return _coStyle.Title;
             }
             set
             {
-                _labelText = value;
-                _labStyle.Text = value;
+                _coStyle.Title = value;
                 _mapView.Refresh();
             }
         }
 
         /// <summary>
-        /// Show or hide the a label with further infos next to the MyLocation symbol.
+        /// Show or hide a callout with further infos next to the MyLocation symbol.
         /// </summary>
-        public bool ShowLabel
+        public bool ShowCallout
         {
             get
             {
-                return _labStyle.Enabled;
+                return _coStyle.Enabled;
             }
             set
             {
-                _labStyle.Enabled = value;
+                _coStyle.Enabled = value;
                 _mapView.Refresh();
             }
         }
@@ -199,20 +196,21 @@ namespace Mapsui.UI.Objects
                 SymbolOffset = new Offset(0, 0),
                 Opacity = 1,
             };
-            _labelText = "";
-            _labStyle = new LabelStyle
+            _coStyle = new CalloutStyle
             {
                 Enabled = false,
-                Text = _labelText,
-                BackColor = new Mapsui.Styles.Brush(Mapsui.Styles.Color.White),
-                Opacity = 0.75F,
-                HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left,
-                VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Top,
-                Offset = new Offset(8, 8)
+                Type = CalloutType.Single,
+                Title = "",
+                TitleFontColor = Styles.Color.Black,
+                ArrowAlignment = ArrowAlignment.Top,
+                ArrowPosition = 0,
+                SymbolOffset = new Offset(0, -SymbolStyle.DefaultHeight * 0.4f),
+                MaxWidth = 300,
+                RotateWithMap = true
             };
 
             _feature.Styles.Clear();
-            _feature.Styles.Add(_labStyle);
+            _feature.Styles.Add(_coStyle);
             _feature.Styles.Add(_dirStyle);
             _feature.Styles.Add(_locStyle);
 
