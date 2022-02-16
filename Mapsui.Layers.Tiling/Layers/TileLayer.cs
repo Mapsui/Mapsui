@@ -1,7 +1,8 @@
+// This file was originally created by Paul den Dulk (Geodan) as part of SharpMap
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
 using System.Linq;
 using BruTile;
 using BruTile.Cache;

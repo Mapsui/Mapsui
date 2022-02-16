@@ -1,3 +1,5 @@
+// This file was originally created by Morten Nielsen (www.iter.dk) as part of SharpMap
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

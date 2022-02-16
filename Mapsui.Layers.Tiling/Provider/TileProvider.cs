@@ -1,6 +1,7 @@
+// This file was originally created by Paul den Dulk (Geodan) as part of SharpMap
+
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;

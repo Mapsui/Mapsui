@@ -1,3 +1,5 @@
+// This file was originally created by Morten Nielsen (www.iter.dk) as part of SharpMap
+
 // ReSharper disable NonReadonlyMemberInGetHashCode // todo: Fix this real issue
 namespace Mapsui.Styles
 {

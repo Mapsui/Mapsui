@@ -1,3 +1,5 @@
+// This file was originally created by Paul den Dulk (Geodan) as part of SharpMap
+
 using System.Collections.Generic;
 using Mapsui.Animations;
 using Mapsui.Utilities;

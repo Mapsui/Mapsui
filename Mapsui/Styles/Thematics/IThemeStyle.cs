@@ -1,3 +1,5 @@
+// This file was originally created by Morten Nielsen (www.iter.dk) as part of SharpMap
+
 namespace Mapsui.Styles.Thematics
 {
     /// <summary>
