@@ -1,13 +1,11 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using BruTile;
 using BruTile.Cache;
 using BruTile.Predefined;
 using Mapsui.Extensions;
-using Mapsui.Fetcher;
 using Mapsui.Projections;
 using Mapsui.Providers;
 using Mapsui.Rendering;
@@ -47,7 +45,7 @@ public class RasterizingTileProvider : ITileSource
             _dataSource = dataSourceLayer.DataSource;
             if (!string.IsNullOrEmpty(_dataSource.CRS) && _dataSource.CRS != this.Schema.Srs)
             // The TileSchema and the _dataSource.CRS are different Project it.
-                _dataSource = new ProjectingProvider(_dataSource, projection ?? new Projection())
+                _dataSource = new ProjectingProvider(_dataSource, projection)
                 {
                     CRS = this.Schema.Srs // The Schema SRS
                 };
