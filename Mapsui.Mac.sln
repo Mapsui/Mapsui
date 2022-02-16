@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{08
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
 		Directory.Build.props = Directory.Build.props
-		LICENSE.md = LICENSE.md
+		LICENSE = LICENSE
 		Mapsui.sln.DotSettings = Mapsui.sln.DotSettings
 		README.md = README.md
 	EndProjectSection
