@@ -13,7 +13,7 @@ namespace Mapsui.Samples.Common.Desktop
 {
     public class ShapefileTileSample : ISample
     {
-        public string Name => "4 Shapefile Rasterizing Tailing";
+        public string Name => "4 Shapefile Rasterizing Tiling";
         public string Category => "Desktop";
 
         public void Setup(IMapControl mapControl)
@@ -27,7 +27,12 @@ namespace Mapsui.Samples.Common.Desktop
 
             var countrySource = new ShapeFile(GetAppDir() + "\\GeoData\\World\\countries.shp", true);
             countrySource.CRS = "EPSG:4326";
-            map.Layers.Add(new RasterizingTileLayer(CreateCountryLayer(countrySource)));
+            var projectedCountrySource = new ProjectingProvider(countrySource) {
+                CRS = "EPSG:3857",
+            };
+
+            var simplifyCountrySource = new GeometrySimplifyProvider(projectedCountrySource);
+            map.Layers.Add(new RasterizingTileLayer(CreateCountryLayer(simplifyCountrySource), tileFormat: ETileFormat.Skp));
 
             return map;
         }

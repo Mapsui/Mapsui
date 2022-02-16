@@ -58,46 +58,38 @@ public class RasterizingTileProvider : ITileSource
 
     public byte[]? GetTile(TileInfo tileInfo)
     {
-        lock(this)
+        var index = tileInfo.Index;
+        var result = PersistentCache.Find(index);
+        if (result == null)
         {
-            var index = tileInfo.Index;
-            if (index.Level == 2 && index.Col == 0 && index.Row == 0)
+            var renderer = GetRenderer();
+            var viewPort = CreateRenderLayer(tileInfo, out var renderLayer);
+
+            MemoryStream? stream = null;
+            try
             {
-                Debug.WriteLine("test");
-            }
+                switch (_tileFormat)
+                {
+                    case ETileFormat.Png:
+                        stream = renderer.RenderToBitmapStream(viewPort, new[] { renderLayer }, pixelDensity: _pixelDensity);
+                        break;
+                    case ETileFormat.Skp:
+                        if (renderer is IPictureRenderer pictureRenderer)
+                            stream = pictureRenderer.RenderToPictureStream(viewPort, new[] { renderLayer });
+                        break;
+                }
 
-            var result = PersistentCache.Find(index);
-            if (result == null)
+                _rasterizingLayers.Push(renderer);
+                result = stream?.ToArray();
+                PersistentCache?.Add(index, result ?? Array.Empty<byte>());
+            }
+            finally
             {
-                var renderer = GetRenderer();
-                var viewPort = CreateRenderLayer(tileInfo, out var renderLayer);
-
-                MemoryStream? stream = null;
-                try
-                {
-                    switch (_tileFormat)
-                    {
-                        case ETileFormat.Png:
-                            stream = renderer.RenderToBitmapStream(viewPort, new[] { renderLayer }, pixelDensity: _pixelDensity);
-                            break;
-                        case ETileFormat.Skp:
-                            if (renderer is IPictureRenderer pictureRenderer)
-                                stream = pictureRenderer.RenderToPictureStream(viewPort, new[] { renderLayer });
-                            break;
-                    }
-
-                    _rasterizingLayers.Push(renderer);
-                    result = stream?.ToArray();
-                    PersistentCache?.Add(index, result ?? Array.Empty<byte>());
-                }
-                finally
-                {
-                    stream?.Dispose();
-                }
+                stream?.Dispose();
             }
-
-            return result;
         }
+
+        return result;
     }
 
     private Viewport CreateRenderLayer(TileInfo tileInfo, out ILayer renderLayer)
