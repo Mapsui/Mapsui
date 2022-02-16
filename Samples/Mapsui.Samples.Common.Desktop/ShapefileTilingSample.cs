@@ -32,7 +32,7 @@ namespace Mapsui.Samples.Common.Desktop
             };
 
             var simplifyCountrySource = new GeometrySimplifyProvider(projectedCountrySource);
-            map.Layers.Add(new RasterizingTileLayer(CreateCountryLayer(simplifyCountrySource), tileFormat: ETileFormat.Skp));
+            map.Layers.Add(new RasterizingTileLayer(CreateCountryLayer(simplifyCountrySource), tileFormat: ETileFormat.Skp, persistentCache: new SqlitePersistentCache("countries")));
 
             return map;
         }
