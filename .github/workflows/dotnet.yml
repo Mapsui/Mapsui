@@ -45,8 +45,8 @@ jobs:
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Layers.Tiling/Mapsui.Layers.Tiling.csproj
     - name: Build Mapsui.Nts
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Nts/Mapsui.Nts.csproj
-    - name: Build Mapsui.Layers.ArcGIS
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Layers.ArcGIS/Mapsui.Layers.ArcGIS.csproj
+    - name: Build Mapsui.ArcGIS
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.ArcGIS/Mapsui.ArcGIS.csproj
     - name: Build Mapsui.UI.Android
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Android/Mapsui.UI.Android.csproj
     - name: Build Mapsui.UI.iOS
@@ -96,8 +96,8 @@ jobs:
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Layers.Tiling/Mapsui.Layers.Tiling.csproj
     - name: Build Mapsui.Nts
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Nts/Mapsui.Nts.csproj
-    - name: Build Mapsui.Layers.ArcGIS
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Layers.ArcGIS/Mapsui.Layers.ArcGIS.csproj
+    - name: Build Mapsui.ArcGIS
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.ArcGIS/Mapsui.ArcGIS.csproj
     - name: Build Mapsui.UI.Wpf
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Wpf/Mapsui.UI.Wpf.csproj
     - name: Build Mapsui.UI.Uwp
@@ -173,8 +173,8 @@ jobs:
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Layers.Tiling/Mapsui.Layers.Tiling.csproj
     - name: Build Mapsui.Nts
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Nts/Mapsui.Nts.csproj
-    - name: Build Mapsui.Layers.ArcGIS
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Layers.ArcGIS/Mapsui.Layers.ArcGIS.csproj
+    - name: Build Mapsui.ArcGIS
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.ArcGIS/Mapsui.ArcGIS.csproj
     - name: Build Mapsui.UI.Maui
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Maui/Mapsui.UI.Maui.csproj    
     - name: Generate nuget package (Mapsui.Maui)
