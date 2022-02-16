@@ -1,7 +1,10 @@
+// Copyright (c) The Mapsui authors.
+// The Mapsui authors licened this file under the MIT license.
+// See the LICENSE file in the project root for full license information.
+
 // WFS provider by Peter Robineau (peter.robineau@gmx.at)
 
 using System.Collections;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Xml.XPath;
 using Mapsui.Providers.Wfs.Utilities;

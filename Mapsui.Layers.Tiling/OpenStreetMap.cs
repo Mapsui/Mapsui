@@ -1,4 +1,8 @@
-﻿using System.IO;
+﻿// Copyright (c) The Mapsui authors.
+// The Mapsui authors licened this file under the MIT license.
+// See the LICENSE file in the project root for full license information.
+
+using System.IO;
 using BruTile.Predefined;
 using BruTile.Web;
 

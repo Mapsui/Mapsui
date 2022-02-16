@@ -1,3 +1,7 @@
+// Copyright (c) The Mapsui authors.
+// The Mapsui authors licened this file under the MIT license.
+// See the LICENSE file in the project root for full license information.
+
 // This file was originally created by Morten Nielsen (www.iter.dk) as part of SharpMap
 
 // ReSharper disable NonReadonlyMemberInGetHashCode // todo: Fix this real issue
