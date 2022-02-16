@@ -34,8 +34,9 @@ namespace Mapsui.UI.Objects
     {
         private readonly MapView _mapView;
         private readonly GeometryFeature _feature;
-        private readonly GeometryFeature _featureDir;
-        private readonly GeometryFeature _featureLabel;
+        private SymbolStyle _locStyle;  // style for the location indicator
+        private SymbolStyle _dirStyle;  // style for the view-direction indicator
+        private LabelStyle _labStyle;   // style for the label
 
         private static int _bitmapMovingId = -1;
         private static int _bitmapStillId = -1;
@@ -59,7 +60,7 @@ namespace Mapsui.UI.Objects
                 if (_isMoving != value)
                 {
                     _isMoving = value;
-                    ((SymbolStyle)_feature.Styles.First()).BitmapId = _isMoving ? _bitmapMovingId : _bitmapStillId;
+                    _locStyle.BitmapId = _isMoving ? _bitmapMovingId : _bitmapStillId;
                 }
             }
         }
@@ -105,7 +106,7 @@ namespace Mapsui.UI.Objects
             set
             {
                 _labelText = value;
-                ((LabelStyle)_featureLabel.Styles.First()).Text = value;
+                _labStyle.Text = value;
                 _mapView.Refresh();
             }
         }
@@ -117,11 +118,11 @@ namespace Mapsui.UI.Objects
         {
             get
             {
-                return ((LabelStyle)_featureLabel.Styles.First()).Enabled;
+                return _labStyle.Enabled;
             }
             set
             {
-                ((LabelStyle)_featureLabel.Styles.First()).Enabled = value;
+                _labStyle.Enabled = value;
                 _mapView.Refresh();
             }
         }
@@ -180,8 +181,7 @@ namespace Mapsui.UI.Objects
                 ["Label"] = "MyLocation moving",
             };
 
-            _feature.Styles.Clear();
-            _feature.Styles.Add(new SymbolStyle
+            _locStyle = new SymbolStyle
             {
                 Enabled = true,
                 BitmapId = _bitmapStillId,
@@ -189,16 +189,8 @@ namespace Mapsui.UI.Objects
                 SymbolRotation = Direction,
                 SymbolOffset = new Offset(0, 0),
                 Opacity = 1,
-            });
-
-            _featureDir = new GeometryFeature
-            {
-                Geometry = myLocation.ToMapsui().ToPoint(),
-                ["Label"] = "My view direction",
             };
-
-            _featureDir.Styles.Clear();
-            _featureDir.Styles.Add(new SymbolStyle
+            _dirStyle = new SymbolStyle
             {
                 Enabled = false,
                 BitmapId = _bitmapDirId,
@@ -206,17 +198,9 @@ namespace Mapsui.UI.Objects
                 SymbolRotation = 0,
                 SymbolOffset = new Offset(0, 0),
                 Opacity = 1,
-            });
-
-            _labelText = "";
-
-            _featureLabel = new GeometryFeature
-            {
-                Geometry = myLocation.ToMapsui().ToPoint()
             };
-
-            _featureLabel.Styles.Clear();
-            _featureLabel.Styles.Add(new LabelStyle
+            _labelText = "";
+            _labStyle = new LabelStyle
             {
                 Enabled = false,
                 Text = _labelText,
@@ -225,9 +209,14 @@ namespace Mapsui.UI.Objects
                 HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Left,
                 VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Top,
                 Offset = new Offset(8, 8)
-            });
+            };
 
-            DataSource = new MemoryProvider<IFeature>(new List<IFeature> { _featureLabel, _featureDir, _feature });
+            _feature.Styles.Clear();
+            _feature.Styles.Add(_labStyle);
+            _feature.Styles.Add(_dirStyle);
+            _feature.Styles.Add(_locStyle);
+
+            DataSource = new MemoryProvider<IFeature>(new List<IFeature> { _feature });
             Style = null;
         }
 
@@ -289,7 +278,7 @@ namespace Mapsui.UI.Objects
         public void UpdateMyDirection(double newDirection, double newViewportRotation, bool animated = false)
         {
             var newRotation = (int)(newDirection - newViewportRotation);
-            var oldRotation = (int)((SymbolStyle)_feature.Styles.First()).SymbolRotation;
+            var oldRotation = (int)_locStyle.SymbolRotation;
 
             if (newRotation != oldRotation)
             {
@@ -311,9 +300,9 @@ namespace Mapsui.UI.Objects
                 if (animated)
                 {
                     var animation = new Animation((v) => {
-                        if ((int)v != (int)((SymbolStyle)_feature.Styles.First()).SymbolRotation)
+                        if ((int)v != (int)_locStyle.SymbolRotation)
                         {
-                            ((SymbolStyle)_feature.Styles.First()).SymbolRotation = (int)v % 360;
+                            _locStyle.SymbolRotation = (int)v % 360;
                             _mapView.Refresh();
                         }
                     }, oldRotation, newRotation);
@@ -322,7 +311,7 @@ namespace Mapsui.UI.Objects
                 }
                 else
                 {
-                    ((SymbolStyle)_feature.Styles.First()).SymbolRotation = newRotation % 360;
+                    _locStyle.SymbolRotation = newRotation % 360;
                     _mapView.Refresh();
                 }
             }
@@ -360,16 +349,16 @@ namespace Mapsui.UI.Objects
         public void UpdateMyViewDirection(double newDirection, double newViewportRotation, bool animated = false)
         {
             var newRotation = (int)(newDirection - newViewportRotation);
-            var oldRotation = (int)((SymbolStyle)_featureDir.Styles.First()).SymbolRotation;
+            var oldRotation = (int)_dirStyle.SymbolRotation;
 
             if (newRotation == -1.0)
             {
                 // disable bitmap
-                ((SymbolStyle)_featureDir.Styles.First()).Enabled = false;
+                _dirStyle.Enabled = false;
             }
             else if (newRotation != oldRotation)
             {
-                ((SymbolStyle)_featureDir.Styles.First()).Enabled = true;
+                _dirStyle.Enabled = true;
                 ViewingDirection = newDirection;
 
                 // We have a direction update, so abort last animation
@@ -388,9 +377,9 @@ namespace Mapsui.UI.Objects
                 if (animated)
                 {
                     var animation = new Animation((v) => {
-                        if ((int)v != (int)((SymbolStyle)_featureDir.Styles.First()).SymbolRotation)
+                        if ((int)v != (int)_dirStyle.SymbolRotation)
                         {
-                            ((SymbolStyle)_featureDir.Styles.First()).SymbolRotation = (int)v % 360;
+                            _dirStyle.SymbolRotation = (int)v % 360;
                             _mapView.Refresh();
                         }
                     }, oldRotation, newRotation);
@@ -399,7 +388,7 @@ namespace Mapsui.UI.Objects
                 }
                 else
                 {
-                    ((SymbolStyle)_featureDir.Styles.First()).SymbolRotation = newRotation % 360;
+                    _dirStyle.SymbolRotation = newRotation % 360;
                     _mapView.Refresh();
                 }
             }
@@ -410,8 +399,6 @@ namespace Mapsui.UI.Objects
             if (disposing)
             {
                 _feature.Dispose();
-                _featureDir.Dispose();
-                _featureLabel.Dispose();
             }
 
             base.Dispose(disposing);
@@ -425,8 +412,6 @@ namespace Mapsui.UI.Objects
             {
                 myLocation = newLocation;
                 _feature.Geometry = myLocation.ToPoint();
-                _featureDir.Geometry = myLocation.ToPoint();
-                _featureLabel.Geometry = myLocation.ToPoint();
                 modified = true;
             }
 
