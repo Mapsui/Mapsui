@@ -23,6 +23,6 @@
     </dependencies>
   </metadata>
   <files>
-	  <file src="..\Mapsui.Layers.ArcGIS\bin\Release\netstandard2.0\Mapsui.Layers.ArcGIS.dll" target="lib\netstandard2.0\Mapsui.Layers.ArcGIS.dll" />
+	  <file src="..\Mapsui.ArcGIS\bin\Release\netstandard2.0\Mapsui.ArcGIS.dll" target="lib\netstandard2.0\Mapsui.ArcGIS.dll" />
   </files>
 </package>
