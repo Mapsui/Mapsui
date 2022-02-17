@@ -2,7 +2,7 @@
 // The Mapsui authors licensed this file under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
-// WFS provider by Peter Robineau (peter.robineau@gmx.at)
+// WFS provider by Peter Robineau (www.geoimpact.ch)
 
 using System.Collections;
 using System.Collections.Generic;
