@@ -2,9 +2,9 @@
 using Mapsui.Layers;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
-using Mapsui.Layers.Tiling;
 using Mapsui.Nts;
 using NetTopologySuite.IO;
+using Mapsui.Tiling;
 
 namespace Mapsui.Samples.Wpf.Editing.Samples
 {

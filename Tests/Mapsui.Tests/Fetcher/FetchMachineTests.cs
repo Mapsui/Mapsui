@@ -1,13 +1,13 @@
-﻿using System.IO;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading;
 using BruTile;
 using BruTile.Cache;
 using BruTile.Predefined;
-using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Tests.Fetcher.Providers;
+using Mapsui.Tiling.Extensions;
+using Mapsui.Tiling.Fetcher;
 using NUnit.Framework;
 
 namespace Mapsui.Tests.Fetcher

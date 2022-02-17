@@ -2,6 +2,7 @@
 using System.Net.Http;
 using BruTile.Wmts;
 using Mapsui.Layers;
+using Mapsui.Tiling.Layers;
 using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps

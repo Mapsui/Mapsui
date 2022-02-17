@@ -1,7 +1,7 @@
 ﻿using Mapsui.Layers;
-using Mapsui.Layers.Tiling;
 using Mapsui.Nts;
 using Mapsui.Samples.Common;
+using Mapsui.Tiling;
 using Mapsui.UI;
 using NetTopologySuite.Geometries;
 

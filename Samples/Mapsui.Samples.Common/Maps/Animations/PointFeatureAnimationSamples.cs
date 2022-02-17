@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
-using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Layers.AnimatedLayers;
-using Mapsui.Layers.Tiling;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
+using Mapsui.Tiling;
 using Mapsui.UI;
 
 #pragma warning disable CS8670 // Object or collection initializer implicitly dereferences possibly null member.

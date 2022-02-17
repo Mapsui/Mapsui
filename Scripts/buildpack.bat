@@ -18,3 +18,4 @@ nuget pack NuSpec\Mapsui.Android.nuspec -Version %VERSION% -outputdirectory Arti
 REM nuget pack NuSpec\Mapsui.Uno.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1
 REM nuget pack NuSpec\Mapsui.Uwp.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1
 nuget pack NuSpec\Mapsui.WinUI.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1
+nuget pack NuSpec\Mapsui.ArcGIS.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1
