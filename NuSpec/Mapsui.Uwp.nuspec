@@ -16,7 +16,7 @@
 		<language>en-US</language>
 		<dependencies>
 			<!-- [ or ] is including, ( or ) is excluding -->
-			<group targetFramework="uap10.0.18362">
+			<group targetFramework="uap10.0.19041">
 				<dependency id="Mapsui" version="$version$"/>
 				<dependency id="SkiaSharp.Views" version="[2.80.3,3.0.0)"/>
 			</group>
@@ -24,6 +24,6 @@
 	</metadata>
 	<files>
 		<file src="..\LICENSE" target="LICENSE" />
-		<file src="..\Mapsui.UI.Uwp\bin\Release\Mapsui.UI.Uwp.dll" target="lib\uap10.0.18362\Mapsui.UI.Uwp.dll" />
+		<file src="..\Mapsui.UI.Uwp\bin\Release\Mapsui.UI.Uwp.dll" target="lib\uap10.0.19041\Mapsui.UI.Uwp.dll" />
 	</files>
 </package>
