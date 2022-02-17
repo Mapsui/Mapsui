@@ -11,11 +11,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
-using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
+using Mapsui.Providers;
+using Mapsui.Tiling.Extensions;
 
-namespace Mapsui.Providers
+namespace Mapsui.Tiling.Provider
 {
     public class TileProvider : IProvider<IFeature>
     {

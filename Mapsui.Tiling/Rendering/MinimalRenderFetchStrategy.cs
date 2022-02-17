@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using BruTile;
 using BruTile.Cache;
-using Mapsui.Extensions;
+using Mapsui.Tiling.Extensions;
 
-namespace Mapsui.Rendering
+namespace Mapsui.Tiling.Rendering
 {
     public class MinimalRenderFetchStrategy : IRenderFetchStrategy
     {
@@ -19,9 +19,7 @@ namespace Mapsui.Rendering
                 var feature = memoryCache.Find(tileInfo.Index);
 
                 if (feature != null)
-                {
                     result.Add(feature);
-                }
             }
             return result;
         }

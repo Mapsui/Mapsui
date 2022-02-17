@@ -7,9 +7,11 @@ using BruTile;
 using BruTile.Cache;
 using ConcurrentCollections;
 using Mapsui.Extensions;
+using Mapsui.Fetcher;
 using Mapsui.Layers;
+using Mapsui.Tiling.Extensions;
 
-namespace Mapsui.Fetcher
+namespace Mapsui.Tiling.Fetcher
 {
     public class TileFetchDispatcher : IFetchDispatcher, INotifyPropertyChanged
     {
@@ -100,9 +102,7 @@ namespace Mapsui.Fetcher
             lock (_lockRoot)
             {
                 if (exception == null)
-                {
                     _tileCache.Add(tileInfo.Index, feature);
-                }
                 _tilesInProgress.TryRemove(tileInfo.Index);
 
                 Busy = _tilesInProgress.Count > 0 || _tilesToFetch.Count > 0;

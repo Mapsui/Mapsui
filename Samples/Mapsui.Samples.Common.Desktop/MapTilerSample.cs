@@ -3,6 +3,7 @@ using BruTile.Cache;
 using BruTile.FileSystem;
 using BruTile.Predefined;
 using Mapsui.Layers;
+using Mapsui.Tiling.Layers;
 using Mapsui.UI;
 using Attribution = BruTile.Attribution;
 

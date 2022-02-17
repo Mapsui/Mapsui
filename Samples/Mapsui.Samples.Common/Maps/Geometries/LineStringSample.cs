@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using Mapsui.Layers;
-using Mapsui.Layers.Tiling;
 using Mapsui.Nts;
 using Mapsui.Nts.Extensions;
 using Mapsui.Projections;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using Mapsui.Tiling;
 using Mapsui.UI;
 using NetTopologySuite.Geometries;
 using NetTopologySuite.IO;

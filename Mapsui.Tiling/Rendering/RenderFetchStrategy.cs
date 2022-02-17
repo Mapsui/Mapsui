@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using BruTile;
 using BruTile.Cache;
-using Mapsui.Extensions;
+using Mapsui.Tiling.Extensions;
 
-namespace Mapsui.Rendering
+namespace Mapsui.Tiling.Rendering
 {
     public class RenderFetchStrategy : IRenderFetchStrategy
     {
@@ -24,13 +24,11 @@ namespace Mapsui.Rendering
             // simply decrementing an index when the level index needs to change
             var resolutions = schema.Resolutions.OrderByDescending(pair => pair.Value.UnitsPerPixel).ToList();
             for (var i = 0; i < resolutions.Count; i++)
-            {
                 if (level == resolutions[i].Key)
                 {
                     GetRecursive(resultTiles, schema, cache, extent, resolutions, i);
                     break;
                 }
-            }
         }
 
         private static void GetRecursive(IDictionary<TileIndex, IFeature> resultTiles, ITileSchema schema,

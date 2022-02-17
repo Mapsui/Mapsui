@@ -1,7 +1,6 @@
-﻿using Mapsui.Layers.Tiling;
-using Mapsui.Projections;
+﻿using Mapsui.Projections;
+using Mapsui.Tiling;
 using Mapsui.UI;
-using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps.Navigation
 {

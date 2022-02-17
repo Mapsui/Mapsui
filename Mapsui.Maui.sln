@@ -187,7 +187,7 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mapsui.Samples.Uno.Shared",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.ArcGIS", "Mapsui.ArcGIS\Mapsui.ArcGIS.csproj", "{9233883A-BA3F-4682-BEB5-0A531807CB54}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Layers.Tiling", "Mapsui.Layers.Tiling\Mapsui.Layers.Tiling.csproj", "{08072ECA-528C-47D5-82A3-85E54300C22A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Tiling", "Mapsui.Tiling\Mapsui.Tiling.csproj", "{08072ECA-528C-47D5-82A3-85E54300C22A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Nts", "Mapsui.Nts\Mapsui.Nts.csproj", "{22FE45C0-B8C2-43B2-BE24-9096AD52D52E}"
 EndProject

@@ -6,7 +6,7 @@
 
 using System;
 
-namespace Mapsui.Rendering
+namespace Mapsui.Tiling.Rendering
 {
     /// <summary>
     /// Exception thrown when a layer rendering fails

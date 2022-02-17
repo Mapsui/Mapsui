@@ -6,15 +6,12 @@ using System.IO;
 using System.Linq;
 using Windows.Storage;
 using Mapsui.Extensions;
-using Mapsui.Layers.Tiling;
-using Mapsui.Providers;
-using Mapsui.Providers.Wms;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.UI;
-using Mapsui.Utilities;
+using Mapsui.Tiling;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.

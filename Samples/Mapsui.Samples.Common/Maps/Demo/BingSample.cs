@@ -2,6 +2,8 @@
 using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Styles;
+using Mapsui.Tiling.Fetcher;
+using Mapsui.Tiling.Layers;
 using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps
