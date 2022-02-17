@@ -1,6 +1,6 @@
 using System;
 
-namespace Mapsui.Providers.ArcGIS.Image
+namespace Mapsui.ArcGIS.ImageServiceProvider
 {
     public class TimeInfo
     {

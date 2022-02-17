@@ -1,4 +1,4 @@
-namespace Mapsui.Providers.ArcGIS
+namespace Mapsui.ArcGIS
 {
     public interface IArcGISCapabilities
     {

@@ -4,12 +4,12 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using BruTile;
+using Mapsui.ArcGIS.DynamicProvider;
+using Mapsui.ArcGIS.ImageServiceProvider;
 using Mapsui.Logging;
-using Mapsui.Providers.ArcGIS.Dynamic;
-using Mapsui.Providers.ArcGIS.Image;
 using Newtonsoft.Json;
 
-namespace Mapsui.Providers.ArcGIS
+namespace Mapsui.ArcGIS
 {
     public enum CapabilitiesType
     {
@@ -191,7 +191,6 @@ namespace Mapsui.Providers.ArcGIS
             var count = 0;
 
             if (arcGisDynamicCapabilities.tileInfo.lods != null)
-            {
                 foreach (var lod in arcGisDynamicCapabilities.tileInfo.lods)
                 {
                     var level = count;
@@ -200,14 +199,11 @@ namespace Mapsui.Providers.ArcGIS
                         arcGisDynamicCapabilities.tileInfo.rows);
                     count++;
                 }
-            }
 
             if (arcGisDynamicCapabilities.fullExtent != null)
-            {
                 schema.Extent = new BruTile.Extent(arcGisDynamicCapabilities.fullExtent.xmin,
                     arcGisDynamicCapabilities.fullExtent.ymin, arcGisDynamicCapabilities.fullExtent.xmax,
                     arcGisDynamicCapabilities.fullExtent.ymax);
-            }
 
             if (arcGisDynamicCapabilities.tileInfo.origin != null)
             {
@@ -219,9 +215,7 @@ namespace Mapsui.Providers.ArcGIS
             schema.Format = arcGisDynamicCapabilities.tileInfo.format;
             schema.YAxis = YAxis.OSM;
             if (arcGisDynamicCapabilities.tileInfo.spatialReference != null)
-            {
                 schema.Srs = $"EPSG:{arcGisDynamicCapabilities.tileInfo.spatialReference.wkid}";
-            }
 
             return schema;
         }

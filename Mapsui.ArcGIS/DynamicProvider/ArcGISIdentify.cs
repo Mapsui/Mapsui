@@ -9,7 +9,7 @@ using Mapsui.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Mapsui.Providers.ArcGIS.Dynamic
+namespace Mapsui.ArcGIS.DynamicProvider
 {
     //Documentation 9.3: http://resources.esri.com/help/9.3/arcgisserver/apis/rest/
     //Documentation 10.0: http://help.arcgis.com/EN/arcgisserver/10.0/apis/rest/index.html
@@ -84,7 +84,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
 
                     if (dataStream != null)
                     {
-                        using var sReader = new System.IO.StreamReader(dataStream);
+                        using var sReader = new StreamReader(dataStream);
                         var jsonString = await sReader.ReadToEndAsync();
 
                         var serializer = new JsonSerializer();
@@ -94,7 +94,7 @@ namespace Mapsui.Providers.ArcGIS.Dynamic
 
                         dataStream.Position = 0;
 
-                        using (var reader = new System.IO.StreamReader(dataStream))
+                        using (var reader = new StreamReader(dataStream))
                         {
                             var contentString = await reader.ReadToEndAsync();
                             if (contentString.Contains("{\"error\":{\""))

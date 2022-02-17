@@ -178,7 +178,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.Avalonia", "
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mapsui.Samples.Uno.Shared", "Samples\Mapsui.Samples.Uwp\Mapsui.Samples.Uno.Shared.shproj", "{6279C845-92F8-4333-AB99-3D213163593C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Layers.ArcGIS", "Mapsui.Layers.ArcGIS\Mapsui.Layers.ArcGIS.csproj", "{9233883A-BA3F-4682-BEB5-0A531807CB54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.ArcGIS", "Mapsui.ArcGIS\Mapsui.ArcGIS.csproj", "{9233883A-BA3F-4682-BEB5-0A531807CB54}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Layers.Tiling", "Mapsui.Layers.Tiling\Mapsui.Layers.Tiling.csproj", "{08072ECA-528C-47D5-82A3-85E54300C22A}"
 EndProject
