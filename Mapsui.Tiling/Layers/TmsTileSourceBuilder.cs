@@ -5,7 +5,7 @@ using BruTile;
 using BruTile.Tms;
 using Mapsui.Logging;
 
-namespace Mapsui.Layers
+namespace Mapsui.Tiling.Layers
 {
     public static class TmsTileSourceBuilder
     {

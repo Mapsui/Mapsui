@@ -1,6 +1,6 @@
 ﻿using BruTile;
 
-namespace Mapsui.Extensions
+namespace Mapsui.Tiling.Extensions
 {
     public static class ExtentExtensions
     {

@@ -3,7 +3,7 @@ using System.Linq;
 using BruTile;
 using Mapsui.Utilities;
 
-namespace Mapsui.Fetcher
+namespace Mapsui.Tiling.Fetcher
 {
     public class MinimalDataFetchStrategy : IDataFetchStrategy
     {

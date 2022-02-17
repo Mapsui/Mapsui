@@ -18,18 +18,19 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
 using System.Linq;
 using BruTile;
 using BruTile.Cache;
-using Mapsui.Extensions;
 using Mapsui.Fetcher;
-using Mapsui.Rendering;
+using Mapsui.Layers;
 using Mapsui.Styles;
+using Mapsui.Tiling.Extensions;
+using Mapsui.Tiling.Fetcher;
+using Mapsui.Tiling.Rendering;
 
 #pragma warning disable CS8670 // Object or collection initializer implicitly dereferences possibly null member.
 
-namespace Mapsui.Layers
+namespace Mapsui.Tiling.Layers
 {
     /// <summary>
     /// Layer, which displays a map consisting of individual tiles
@@ -126,9 +127,7 @@ namespace Mapsui.Layers
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-            {
                 MemoryCache.Dispose();
-            }
 
             base.Dispose(disposing);
         }
@@ -136,9 +135,7 @@ namespace Mapsui.Layers
         private void TileFetchDispatcherOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             if (propertyChangedEventArgs.PropertyName == nameof(Busy))
-            {
                 Busy = _tileFetchDispatcher.Busy;
-            }
         }
 
         private void UpdateMemoryCacheMinAndMax()
