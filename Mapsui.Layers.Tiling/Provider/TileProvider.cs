@@ -1,23 +1,11 @@
-// Copyright 2010 - Paul den Dulk (Geodan)
-// 
-// This file is part of SharpMap.
-// Mapsui is free software; you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
-// the Free Software Foundation; either version 2 of the License, or
-// (at your option) any later version.
-// 
-// SharpMap is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU Lesser General Public License for more details.
+// Copyright (c) The Mapsui authors.
+// The Mapsui authors licensed this file under the MIT license.
+// See the LICENSE file in the project root for full license information.
 
-// You should have received a copy of the GNU Lesser General Public License
-// along with SharpMap; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
+// This file was originally created by Paul den Dulk (Geodan) as part of SharpMap
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;

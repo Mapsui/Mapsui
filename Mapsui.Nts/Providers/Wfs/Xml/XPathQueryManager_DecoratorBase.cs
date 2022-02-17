@@ -1,5 +1,8 @@
-// WFS provider by Peter Robineau (peter.robineau@gmx.at)
-// This file can be redistributed and/or modified under the terms of the GNU Lesser General Public License.
+// Copyright (c) The Mapsui authors.
+// The Mapsui authors licensed this file under the MIT license.
+// See the LICENSE file in the project root for full license information.
+
+// WFS provider by Peter Robineau (www.geoimpact.ch)
 
 using System.Collections;
 using System.IO;
