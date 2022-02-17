@@ -1,16 +1,15 @@
 ﻿using System;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Mapsui.UI.Forms;
 using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
-using Mapsui.UI;
 using System.Threading.Tasks;
+using Mapsui.Samples.Common;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.Styles;
-using Xamarin.Essentials;
-using Mapsui.Samples.Common;
-using System.Diagnostics;
+using Mapsui.UI.Forms;
+using Mapsui.UI.Objects;
 
 namespace Mapsui.Samples.Forms
 {
@@ -42,6 +41,8 @@ namespace Mapsui.Samples.Forms
             Compass.ReadingChanged += Compass_ReadingChanged;
 
             mapView.MyLocationLayer.UpdateMyLocation(new UI.Forms.Position());
+            mapView.MyLocationLayer.CalloutText = "My location!\n";
+            mapView.MyLocationLayer.Clicked += MyLocationClicked;
 
             mapView.Info += MapView_Info;
             mapView.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
@@ -184,12 +185,23 @@ namespace Mapsui.Samples.Forms
                 mapView.MyLocationLayer.UpdateMyLocation(new UI.Forms.Position(e.Position.Latitude, e.Position.Longitude));
                 mapView.MyLocationLayer.UpdateMyDirection(e.Position.Heading, mapView.Viewport.Rotation);
                 mapView.MyLocationLayer.UpdateMySpeed(e.Position.Speed);
+                mapView.MyLocationLayer.CalloutText = $"My location:\nlat={e.Position.Latitude:F6}°\nlon={e.Position.Longitude:F6}°";
             });
         }
 
         private void Compass_ReadingChanged(object sender, CompassChangedEventArgs e)
         {
             mapView.MyLocationLayer.UpdateMyViewDirection(e.Reading.HeadingMagneticNorth, mapView.Viewport.Rotation, false);
+        }
+
+        public void MyLocationClicked(object sender, DrawableClickedEventArgs args)
+        {
+            var myLocLayer = sender as MyLocationLayer;
+            args.Handled = true;
+            if (myLocLayer == null)
+                return;
+            // toggle label
+            myLocLayer.ShowCallout = !myLocLayer.ShowCallout;
         }
     }
 }
