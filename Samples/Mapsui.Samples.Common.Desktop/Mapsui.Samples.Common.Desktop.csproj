@@ -82,7 +82,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.ArcGIS\Mapsui.ArcGIS.csproj" />
-    <ProjectReference Include="..\..\Mapsui.Layers.ArcGIS\Mapsui.ArcGIS.csproj" />
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />
     <ProjectReference Include="..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
   </ItemGroup>
