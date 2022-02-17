@@ -29,7 +29,7 @@
     <file src="..\Mapsui\bin\Release\netstandard2.0\Mapsui.dll" target="lib\netstandard2.0\Mapsui.dll" />
     <file src="..\Mapsui.Rendering.Skia\bin\Release\netstandard2.0\Mapsui.Rendering.Skia.dll" target="lib\netstandard2.0\Mapsui.Rendering.Skia.dll" />
     <file src="..\Mapsui.Nts\bin\Release\netstandard2.0\Mapsui.Nts.dll" target="lib\netstandard2.0\Mapsui.Nts.dll" />
-	<file src="..\Mapsui.Layers.Tiling\bin\Release\netstandard2.0\Mapsui.Layers.Tiling.dll" target="lib\netstandard2.0\Mapsui.Layers.Tiling.dll" />
+	<file src="..\Mapsui.Tiling\bin\Release\netstandard2.0\Mapsui.Tiling.dll" target="lib\netstandard2.0\Mapsui.Tiling.dll" />
     
   </files>
 </package>
