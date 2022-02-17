@@ -147,3 +147,5 @@ dotnet_diagnostic.IDE0055.severity = warning
 dotnet_analyzer_diagnostic.category-Style.severity = suggestion
 dotnet_analyzer_diagnostic.category-CodeQuality.severity = suggestion
 csharp_style_namespace_declarations=file_scoped:silent
+
+file_header_template = Copyright (c) The Mapsui authors.\nThe Mapsui authors licensed this file under the MIT license.\nSee the LICENSE file in the project root for full license information.
