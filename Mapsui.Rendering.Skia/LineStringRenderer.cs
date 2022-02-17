@@ -7,13 +7,15 @@ namespace Mapsui.Rendering.Skia
 {
     public static class LineStringRenderer
     {
-        public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, IFeature feature,
+        public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, VectorStyle vectorStyle, IFeature feature,
             LineString lineString, float opacity)
         {
+            if (vectorStyle == null)
+                return;
+
             float lineWidth = 1;
             var lineColor = new Color();
 
-            var vectorStyle = style as VectorStyle;
             var strokeCap = PenStrokeCap.Butt;
             var strokeJoin = StrokeJoin.Miter;
             var strokeMiterLimit = 4f;
@@ -21,7 +23,7 @@ namespace Mapsui.Rendering.Skia
             float[]? dashArray = null;
             float dashOffset = 0;
 
-            if (vectorStyle is not null && vectorStyle.Line != null)
+            if (vectorStyle.Line != null)
             {
                 lineWidth = (float)vectorStyle.Line.Width;
                 lineColor = vectorStyle.Line.Color;

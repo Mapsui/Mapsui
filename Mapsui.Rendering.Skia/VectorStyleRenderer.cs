@@ -43,7 +43,7 @@ namespace Mapsui.Rendering.Skia
                                 PolygonRenderer.Draw(canvas, viewport, style, feature, polygon, opacity, symbolCache);
                                 break;
                             case LineString lineString:
-                                LineStringRenderer.Draw(canvas, viewport, style, feature, lineString, opacity);
+                                LineStringRenderer.Draw(canvas, viewport, vectorStyle, feature, lineString, opacity);
                                 break;
                             default:
                                 throw new ArgumentException("Unknown geometry of Feature");
