@@ -92,15 +92,12 @@ namespace Mapsui.UI.Objects
         public double Scale { get; set; } = 1.0;
 
         /// <summary>
-        /// The text that is displayed in the MyLocation callout.
-        /// (can contains line breaks).
+        /// The text that is displayed in the MyLocation callout
+        /// (can contain line breaks).
         /// </summary>
         public string CalloutText
         {
-            get
-            {
-                return _coStyle.Title ?? "";
-            }
+            get => _coStyle.Title ?? "";
             set
             {
                 _coStyle.Title = value;
@@ -113,10 +110,7 @@ namespace Mapsui.UI.Objects
         /// </summary>
         public bool ShowCallout
         {
-            get
-            {
-                return _coStyle.Enabled;
-            }
+            get => _coStyle.Enabled;
             set
             {
                 _coStyle.Enabled = value;
@@ -206,13 +200,16 @@ namespace Mapsui.UI.Objects
                 ArrowPosition = 0,
                 SymbolOffset = new Offset(0, -SymbolStyle.DefaultHeight * 0.4f),
                 MaxWidth = 300,
-                RotateWithMap = true
+                RotateWithMap = true,
+                Color = Styles.Color.White,
+                StrokeWidth = 0,
+                ShadowWidth = 0
             };
 
             _feature.Styles.Clear();
-            _feature.Styles.Add(_coStyle);
             _feature.Styles.Add(_dirStyle);
             _feature.Styles.Add(_locStyle);
+            _feature.Styles.Add(_coStyle);
 
             DataSource = new MemoryProvider<IFeature>(new List<IFeature> { _feature });
             Style = null;
