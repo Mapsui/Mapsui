@@ -1,16 +1,17 @@
-﻿using Mapsui.Samples.Common;
-using Mapsui.Samples.CustomWidget;
-using Mapsui.UI.Forms;
-using Plugin.Geolocator;
+﻿using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Mapsui.Extensions;
-using Mapsui.Logging;
-using Mapsui.Styles;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Mapsui.Extensions;
+using Mapsui.Logging;
+using Mapsui.Samples.Common;
+using Mapsui.Samples.CustomWidget;
+using Mapsui.Styles;
+using Mapsui.UI.Forms;
+using Mapsui.UI.Objects;
 
 namespace Mapsui.Samples.Forms
 {
@@ -39,6 +40,8 @@ namespace Mapsui.Samples.Forms
             mapView.MapClicked += OnMapClicked;
 
             mapView.MyLocationLayer.UpdateMyLocation(new UI.Forms.Position());
+            mapView.MyLocationLayer.CalloutText = "My location!\n";
+            mapView.MyLocationLayer.Clicked += MyLocationClicked;
 
             mapView.Info += MapView_Info;
             mapView.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
@@ -204,8 +207,19 @@ namespace Mapsui.Samples.Forms
                 mapView.MyLocationLayer.UpdateMyLocation(new UI.Forms.Position(e.Position.Latitude, e.Position.Longitude));
                 mapView.MyLocationLayer.UpdateMyDirection(e.Position.Heading, mapView.Viewport.Rotation);
                 mapView.MyLocationLayer.UpdateMySpeed(e.Position.Speed);
+                mapView.MyLocationLayer.CalloutText = $"My location:\nlat={e.Position.Latitude:F6}°\nlon={e.Position.Longitude:F6}°";
             });
         }
 
+
+        public void MyLocationClicked(object sender, DrawableClickedEventArgs args)
+        {
+            var myLocLayer = sender as MyLocationLayer;
+            args.Handled = true;
+            if (myLocLayer == null)
+                return;
+            // toggle label
+            myLocLayer.ShowCallout = !myLocLayer.ShowCallout;
+        }
     }
 }

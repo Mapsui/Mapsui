@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using BruTile.MbTiles;
-using Mapsui.Layers;
+using Mapsui.Tiling.Layers;
 using Mapsui.UI;
 using SQLite;
 

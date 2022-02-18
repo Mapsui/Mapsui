@@ -6,13 +6,12 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Mapsui.Extensions;
-using Mapsui.Layers.Tiling;
-using Mapsui.Providers.Wms;
 using Mapsui.UI;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.CustomWidget;
+using Mapsui.Tiling;
 
 namespace Mapsui.Samples.Uwp
 {

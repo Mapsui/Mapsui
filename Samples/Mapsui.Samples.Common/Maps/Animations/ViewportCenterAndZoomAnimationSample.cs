@@ -1,6 +1,6 @@
 ﻿using System;
 using Mapsui.Extensions;
-using Mapsui.Layers.Tiling;
+using Mapsui.Tiling;
 using Mapsui.UI;
 using Mapsui.Utilities;
 using Mapsui.Widgets;

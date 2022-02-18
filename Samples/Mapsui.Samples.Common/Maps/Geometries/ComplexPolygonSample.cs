@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Mapsui.Layers;
-using Mapsui.Layers.Tiling;
 using Mapsui.Nts.Extensions;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using Mapsui.Tiling;
 using Mapsui.UI;
 using NetTopologySuite.Geometries;
 using NetTopologySuite.IO;

@@ -34,7 +34,9 @@ namespace Mapsui.UI.Objects
     {
         private readonly MapView _mapView;
         private readonly GeometryFeature _feature;
-        private readonly GeometryFeature _featureDir;
+        private SymbolStyle _locStyle;  // style for the location indicator
+        private SymbolStyle _dirStyle;  // style for the view-direction indicator
+        private CalloutStyle _coStyle;  // style for the callout
 
         private static int _bitmapMovingId = -1;
         private static int _bitmapStillId = -1;
@@ -58,7 +60,7 @@ namespace Mapsui.UI.Objects
                 if (_isMoving != value)
                 {
                     _isMoving = value;
-                    ((SymbolStyle)_feature.Styles.First()).BitmapId = _isMoving ? _bitmapMovingId : _bitmapStillId;
+                    _locStyle.BitmapId = _isMoving ? _bitmapMovingId : _bitmapStillId;
                 }
             }
         }
@@ -90,6 +92,38 @@ namespace Mapsui.UI.Objects
         public double Scale { get; set; } = 1.0;
 
         /// <summary>
+        /// The text that is displayed in the MyLocation callout
+        /// (can contain line breaks).
+        /// </summary>
+        public string CalloutText
+        {
+            get => _coStyle.Title ?? "";
+            set
+            {
+                _coStyle.Title = value;
+                _mapView.Refresh();
+            }
+        }
+
+        /// <summary>
+        /// Show or hide a callout with further infos next to the MyLocation symbol.
+        /// </summary>
+        public bool ShowCallout
+        {
+            get => _coStyle.Enabled;
+            set
+            {
+                _coStyle.Enabled = value;
+                _mapView.Refresh();
+            }
+        }
+
+        /// <summary>
+        /// This event is triggered whenever the MyLocation symbol or label is clicked.
+        /// </summary>
+        public event EventHandler<DrawableClickedEventArgs>? Clicked;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="T:Mapsui.UI.Objects.MyLocationLayer"/> class
         /// with a starting location.
         /// </summary>
@@ -109,6 +143,7 @@ namespace Mapsui.UI.Objects
             _mapView = view ?? throw new ArgumentNullException("MapView shouldn't be null");
 
             Enabled = false;
+            IsMapInfoLayer = true;
 
             if (_bitmapMovingId == -1)
             {
@@ -137,8 +172,7 @@ namespace Mapsui.UI.Objects
                 ["Label"] = "MyLocation moving",
             };
 
-            _feature.Styles.Clear();
-            _feature.Styles.Add(new SymbolStyle
+            _locStyle = new SymbolStyle
             {
                 Enabled = true,
                 BitmapId = _bitmapStillId,
@@ -146,16 +180,8 @@ namespace Mapsui.UI.Objects
                 SymbolRotation = Direction,
                 SymbolOffset = new Offset(0, 0),
                 Opacity = 1,
-            });
-
-            _featureDir = new GeometryFeature
-            {
-                Geometry = myLocation.ToMapsui().ToPoint(),
-                ["Label"] = "My view direction",
             };
-
-            _featureDir.Styles.Clear();
-            _featureDir.Styles.Add(new SymbolStyle
+            _dirStyle = new SymbolStyle
             {
                 Enabled = false,
                 BitmapId = _bitmapDirId,
@@ -163,9 +189,29 @@ namespace Mapsui.UI.Objects
                 SymbolRotation = 0,
                 SymbolOffset = new Offset(0, 0),
                 Opacity = 1,
-            });
+            };
+            _coStyle = new CalloutStyle
+            {
+                Enabled = false,
+                Type = CalloutType.Single,
+                Title = "",
+                TitleFontColor = Styles.Color.Black,
+                ArrowAlignment = ArrowAlignment.Top,
+                ArrowPosition = 0,
+                SymbolOffset = new Offset(0, -SymbolStyle.DefaultHeight * 0.4f),
+                MaxWidth = 300,
+                RotateWithMap = true,
+                Color = Styles.Color.White,
+                StrokeWidth = 0,
+                ShadowWidth = 0
+            };
 
-            DataSource = new MemoryProvider<IFeature>(new List<IFeature> { _featureDir, _feature });
+            _feature.Styles.Clear();
+            _feature.Styles.Add(_dirStyle);
+            _feature.Styles.Add(_locStyle);
+            _feature.Styles.Add(_coStyle);
+
+            DataSource = new MemoryProvider<IFeature>(new List<IFeature> { _feature });
             Style = null;
         }
 
@@ -227,7 +273,7 @@ namespace Mapsui.UI.Objects
         public void UpdateMyDirection(double newDirection, double newViewportRotation, bool animated = false)
         {
             var newRotation = (int)(newDirection - newViewportRotation);
-            var oldRotation = (int)((SymbolStyle)_feature.Styles.First()).SymbolRotation;
+            var oldRotation = (int)_locStyle.SymbolRotation;
 
             if (newRotation != oldRotation)
             {
@@ -249,9 +295,9 @@ namespace Mapsui.UI.Objects
                 if (animated)
                 {
                     var animation = new Animation((v) => {
-                        if ((int)v != (int)((SymbolStyle)_feature.Styles.First()).SymbolRotation)
+                        if ((int)v != (int)_locStyle.SymbolRotation)
                         {
-                            ((SymbolStyle)_feature.Styles.First()).SymbolRotation = (int)v % 360;
+                            _locStyle.SymbolRotation = (int)v % 360;
                             _mapView.Refresh();
                         }
                     }, oldRotation, newRotation);
@@ -260,7 +306,7 @@ namespace Mapsui.UI.Objects
                 }
                 else
                 {
-                    ((SymbolStyle)_feature.Styles.First()).SymbolRotation = newRotation % 360;
+                    _locStyle.SymbolRotation = newRotation % 360;
                     _mapView.Refresh();
                 }
             }
@@ -298,16 +344,16 @@ namespace Mapsui.UI.Objects
         public void UpdateMyViewDirection(double newDirection, double newViewportRotation, bool animated = false)
         {
             var newRotation = (int)(newDirection - newViewportRotation);
-            var oldRotation = (int)((SymbolStyle)_featureDir.Styles.First()).SymbolRotation;
+            var oldRotation = (int)_dirStyle.SymbolRotation;
 
             if (newRotation == -1.0)
             {
                 // disable bitmap
-                ((SymbolStyle)_featureDir.Styles.First()).Enabled = false;
+                _dirStyle.Enabled = false;
             }
             else if (newRotation != oldRotation)
             {
-                ((SymbolStyle)_featureDir.Styles.First()).Enabled = true;
+                _dirStyle.Enabled = true;
                 ViewingDirection = newDirection;
 
                 // We have a direction update, so abort last animation
@@ -326,9 +372,9 @@ namespace Mapsui.UI.Objects
                 if (animated)
                 {
                     var animation = new Animation((v) => {
-                        if ((int)v != (int)((SymbolStyle)_featureDir.Styles.First()).SymbolRotation)
+                        if ((int)v != (int)_dirStyle.SymbolRotation)
                         {
-                            ((SymbolStyle)_featureDir.Styles.First()).SymbolRotation = (int)v % 360;
+                            _dirStyle.SymbolRotation = (int)v % 360;
                             _mapView.Refresh();
                         }
                     }, oldRotation, newRotation);
@@ -337,7 +383,7 @@ namespace Mapsui.UI.Objects
                 }
                 else
                 {
-                    ((SymbolStyle)_featureDir.Styles.First()).SymbolRotation = newRotation % 360;
+                    _dirStyle.SymbolRotation = newRotation % 360;
                     _mapView.Refresh();
                 }
             }
@@ -348,7 +394,6 @@ namespace Mapsui.UI.Objects
             if (disposing)
             {
                 _feature.Dispose();
-                _featureDir.Dispose();
             }
 
             base.Dispose(disposing);
@@ -362,11 +407,15 @@ namespace Mapsui.UI.Objects
             {
                 myLocation = newLocation;
                 _feature.Geometry = myLocation.ToPoint();
-                _featureDir.Geometry = myLocation.ToPoint();
                 modified = true;
             }
 
             return modified;
+        }
+
+        internal void HandleClicked(DrawableClickedEventArgs e)
+        {
+            Clicked?.Invoke(this, e);
         }
     }
 }
