@@ -22,6 +22,8 @@
 
         public double Y { get; }
 
+        public override string ToString() => $"(X={X},Y={Y})";
+
         /// <summary>
         /// Implicit conversion from MPoint to ReadOnlyPoint
         /// </summary>

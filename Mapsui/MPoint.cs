@@ -87,6 +87,8 @@ public class MPoint
         return new MPoint(point1.X + point2.X, point1 .Y + point2.Y);
     }
 
+    public override string ToString() => $"(X={X},Y={Y})";
+
     public static MPoint operator -(MPoint point1, MPoint point2)
     {
         return new MPoint(point1.X - point2.X, point1.Y - point2.Y);
