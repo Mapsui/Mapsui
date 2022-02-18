@@ -31,26 +31,28 @@ namespace Mapsui.Rendering.Skia
             var picture = (SKPicture)BitmapRegistry.Instance.Get(calloutStyle.BitmapId);
 
             // Calc offset (relative or absolute)
-            var symbolOffsetX = calloutStyle.SymbolOffset.IsRelative ? picture.CullRect.Width * (float)calloutStyle.SymbolOffset.X : (float)calloutStyle.SymbolOffset.X;
-            var symbolOffsetY = calloutStyle.SymbolOffset.IsRelative ? picture.CullRect.Height * (float)calloutStyle.SymbolOffset.Y : (float)calloutStyle.SymbolOffset.Y;
+            MPoint symbolOffset = calloutStyle.SymbolOffset.ToPoint();
+            if (calloutStyle.SymbolOffset.IsRelative)
+            {
+                symbolOffset.X *= picture.CullRect.Width;
+                symbolOffset.Y *= picture.CullRect.Height;
+            }
 
             var rotation = (float)calloutStyle.SymbolRotation;
 
-            if (viewport.Rotation != 0 && calloutStyle.RotateWithMap)
-                rotation += (float)viewport.Rotation;
-
-            if (viewport.Rotation != 0 && calloutStyle.SymbolOffsetRotatesWithMap)
+            if (viewport.Rotation != 0)
             {
-                var mapRotation = viewport.Rotation / 180.0 * Math.PI;
-                symbolOffsetX = (float)(Math.Cos(mapRotation) * symbolOffsetX - Math.Sin(mapRotation) * symbolOffsetY);
-                symbolOffsetY = (float)(Math.Sin(mapRotation) * symbolOffsetX + Math.Cos(mapRotation) * symbolOffsetY);
+                if (calloutStyle.RotateWithMap)
+                    rotation += (float)viewport.Rotation;
+                if (calloutStyle.SymbolOffsetRotatesWithMap)
+                    symbolOffset = symbolOffset.Rotate(-viewport.Rotation);
             }
 
             // Save state of the canvas, so we could move and rotate the canvas
             canvas.Save();
 
             // Move 0/0 to the Anchor point of Callout
-            canvas.Translate((float)x - symbolOffsetX, (float)y - symbolOffsetY);
+            canvas.Translate((float)(x - symbolOffset.X), (float)(y - symbolOffset.Y));
             canvas.Scale((float)calloutStyle.SymbolScale, (float)calloutStyle.SymbolScale);
 
             // 0/0 are assumed at center of image, but Picture has 0/0 at left top position
