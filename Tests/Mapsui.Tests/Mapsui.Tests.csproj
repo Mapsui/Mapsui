@@ -5,8 +5,7 @@
 		<OutputType>Library</OutputType>
 		<RestorePackages>true</RestorePackages>
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-		<UseWPF>true</UseWPF>
-	</PropertyGroup>
+  </PropertyGroup>
 
 	<ItemGroup>
 		<None Remove="Resources\capabilities_1_1_1.xml" />
