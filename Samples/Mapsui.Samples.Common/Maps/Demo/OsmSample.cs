@@ -1,5 +1,5 @@
 ﻿using Mapsui.Extensions;
-using Mapsui.Layers.Tiling;
+using Mapsui.Tiling;
 using Mapsui.UI;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ScaleBar;

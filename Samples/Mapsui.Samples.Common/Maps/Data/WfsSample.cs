@@ -1,14 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
 using BruTile;
 using BruTile.Web;
-using BruTile.Wmts;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Providers.Wfs;
 using Mapsui.Styles;
+using Mapsui.Tiling.Layers;
 using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps.Data

@@ -1,22 +1,8 @@
-// Copyright 2005, 2006 - Morten Nielsen (www.iter.dk)
-//
-// This file is part of SharpMap.
-// Mapsui is free software; you can redistribute it and/or modify
-// it under the terms of the GNU Lesser General Public License as published by
-// the Free Software Foundation; either version 2 of the License, or
-// (at your option) any later version.
-// 
-// SharpMap is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU Lesser General Public License for more details.
+// Copyright (c) The Mapsui authors.
+// The Mapsui authors licensed this file under the MIT license.
+// See the LICENSE file in the project root for full license information.
 
-// You should have received a copy of the GNU Lesser General Public License
-// along with SharpMap; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA 
-
-// Note:
-// Good stuff on DBase format: http://www.clicketyclick.dk/databases/xbase/format/
+// This file was originally created by Morten Nielsen (www.iter.dk) as part of SharpMap
 
 using System;
 using System.Collections.Generic;
@@ -30,6 +16,8 @@ namespace Mapsui.Nts.Providers.Shapefile
 {
     internal sealed class DbaseReader : IDisposable
     {
+        // Note: Good stuff on DBase format: http://www.clicketyclick.dk/databases/xbase/format/
+
         private struct DbaseField
         {
             public string ColumnName;
@@ -106,43 +94,6 @@ namespace Mapsui.Nts.Providers.Shapefile
                 tree.Add(new BinaryTree<T, uint>.ItemValue((T)GetValue(i, columnId), i));
             return tree;
         }
-
-        /*
-		/// <summary>
-		/// Creates an index on the columns for faster searching [EXPERIMENTAL - Requires Lucene dependencies]
-		/// </summary>
-		/// <returns></returns>
-		public string CreateLuceneIndex()
-		{
-			string dir = this._filename + ".idx";
-			if (!System.IO.Directory.Exists(dir))
-				System.IO.Directory.CreateDirectory(dir);
-			Lucene.Net.Index.IndexWriter iw = new Lucene.Net.Index.IndexWriter(dir,new Lucene.Net.Analysis.Standard.StandardAnalyzer(),true);
-
-			for (uint i = 0; i < this._NumberOfRecords; i++)
-			{
-				FeatureDataRow dr = GetFeature(i,this.NewTable);
-				Lucene.Net.Documents.Document doc = new Lucene.Net.Documents.Document();
-				// Add the object-id as a field, so that index can be maintained.
-				// This field is not stored with document, it is indexed, but it is not
-	            // tokenized prior to indexing.
-				//doc.Add(Lucene.Net.Documents.Field.UnIndexed("SharpMap_oid", i.ToString())); //Add OID index
-
-				foreach(System.Data.DataColumn col in dr.Table.Columns) //Add and index values from DBF
-				{
-					if(col.DataType.Equals(typeof(string)))
-						// Add the contents as a valued Text field so it will get tokenized and indexed.
-						doc.Add(Lucene.Net.Documents.Field.UnStored(col.ColumnName,(string)dr[col]));
-					else
-						doc.Add(Lucene.Net.Documents.Field.UnStored(col.ColumnName, dr[col].ToString()));
-				}
-				iw.AddDocument(doc);
-			}
-			iw.Optimize();
-			iw.Close();
-			return this._filename + ".idx";
-		}
-		*/
 
         /// <summary>
         /// Gets the date this file was last updated.
