@@ -22,7 +22,7 @@ namespace Mapsui.Rendering.Skia
                 switch (feature)
                 {
                     case (RectFeature rectFeature):
-                        PolygonRenderer.Draw(canvas, viewport, style, rectFeature, rectFeature.Rect.ToPolygon(), opacity);
+                        PolygonRenderer.Draw(canvas, viewport, vectorStyle, rectFeature, rectFeature.Rect.ToPolygon(), opacity);
                         break;
                     case (PointFeature pointFeature):
                         // Use the SymbolStyleRenderer and specify Ellipse
@@ -40,7 +40,7 @@ namespace Mapsui.Rendering.Skia
                                 Draw(canvas, viewport, layer, new PointFeature(point.X, point.Y), style, symbolCache, iteration);
                                 break;
                             case Polygon polygon:
-                                PolygonRenderer.Draw(canvas, viewport, style, feature, polygon, opacity, symbolCache);
+                                PolygonRenderer.Draw(canvas, viewport, vectorStyle, feature, polygon, opacity, symbolCache);
                                 break;
                             case LineString lineString:
                                 LineStringRenderer.Draw(canvas, viewport, vectorStyle, feature, lineString, opacity);
