@@ -27,6 +27,11 @@ namespace Mapsui.Styles
         public double Y { get; set; }
         public bool IsRelative { get; set; }
 
+        public MPoint ToPoint()
+        {
+            return new MPoint(X, Y);
+        }
+
         public override bool Equals(object obj)
         {
             if (!(obj is Offset offset))
