@@ -58,6 +58,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuSpec", "NuSpec", "{D90027
 		NuSpec\Mapsui.Avalonia.nuspec = NuSpec\Mapsui.Avalonia.nuspec
 		NuSpec\Mapsui.Forms.nuspec = NuSpec\Mapsui.Forms.nuspec
 		NuSpec\Mapsui.iOS.nuspec = NuSpec\Mapsui.iOS.nuspec
+		NuSpec\Mapsui.Maui.nuspec = NuSpec\Mapsui.Maui.nuspec
 		NuSpec\Mapsui.nuspec = NuSpec\Mapsui.nuspec
 		NuSpec\Mapsui.Uno.nuspec = NuSpec\Mapsui.Uno.nuspec
 		NuSpec\Mapsui.Uwp.nuspec = NuSpec\Mapsui.Uwp.nuspec
@@ -2072,7 +2073,7 @@ Global
 		{4B4088E0-67FB-4A9C-8CB9-34E9BF2BCCAE}.Debug|x64.Build.0 = Debug|Any CPU
 		{4B4088E0-67FB-4A9C-8CB9-34E9BF2BCCAE}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{4B4088E0-67FB-4A9C-8CB9-34E9BF2BCCAE}.Debug|x86.Build.0 = Debug|Any CPU
-		{4B4088E0-67FB-4A9C-8CB9-34E9BF2BCCAE}.Release|AnyCPU.ActiveCfg = Release|Any CPU		
+		{4B4088E0-67FB-4A9C-8CB9-34E9BF2BCCAE}.Release|AnyCPU.ActiveCfg = Release|Any CPU
 		{4B4088E0-67FB-4A9C-8CB9-34E9BF2BCCAE}.Release|ARM.ActiveCfg = Release|Any CPU
 		{4B4088E0-67FB-4A9C-8CB9-34E9BF2BCCAE}.Release|ARM.Build.0 = Release|Any CPU
 		{4B4088E0-67FB-4A9C-8CB9-34E9BF2BCCAE}.Release|ARM64.ActiveCfg = Release|Any CPU
@@ -2127,7 +2128,7 @@ Global
 		{A1F42E2B-6E17-4C29-80FA-837F98079604}.Debug|x64.Build.0 = Debug|Any CPU
 		{A1F42E2B-6E17-4C29-80FA-837F98079604}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{A1F42E2B-6E17-4C29-80FA-837F98079604}.Debug|x86.Build.0 = Debug|Any CPU
-		{A1F42E2B-6E17-4C29-80FA-837F98079604}.Release|AnyCPU.ActiveCfg = Release|Any CPU		
+		{A1F42E2B-6E17-4C29-80FA-837F98079604}.Release|AnyCPU.ActiveCfg = Release|Any CPU
 		{A1F42E2B-6E17-4C29-80FA-837F98079604}.Release|ARM.ActiveCfg = Release|Any CPU
 		{A1F42E2B-6E17-4C29-80FA-837F98079604}.Release|ARM.Build.0 = Release|Any CPU
 		{A1F42E2B-6E17-4C29-80FA-837F98079604}.Release|ARM64.ActiveCfg = Release|Any CPU
@@ -2757,8 +2758,6 @@ Global
 		{D991D377-2AA4-4FC8-A451-E19624E56EF8}.Debug|x86.Build.0 = Debug|Any CPU
 		{D991D377-2AA4-4FC8-A451-E19624E56EF8}.Debug|x86.Deploy.0 = Debug|Any CPU
 		{D991D377-2AA4-4FC8-A451-E19624E56EF8}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{D991D377-2AA4-4FC8-A451-E19624E56EF8}.Release|AnyCPU.Build.0 = Release|Any CPU
-		{D991D377-2AA4-4FC8-A451-E19624E56EF8}.Release|AnyCPU.Deploy.0 = Release|Any CPU
 		{D991D377-2AA4-4FC8-A451-E19624E56EF8}.Release|ARM.ActiveCfg = Release|Any CPU
 		{D991D377-2AA4-4FC8-A451-E19624E56EF8}.Release|ARM.Build.0 = Release|Any CPU
 		{D991D377-2AA4-4FC8-A451-E19624E56EF8}.Release|ARM.Deploy.0 = Release|Any CPU
