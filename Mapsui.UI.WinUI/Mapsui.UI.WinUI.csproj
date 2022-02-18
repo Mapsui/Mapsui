@@ -23,7 +23,7 @@
   <ItemGroup>
 	<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0" GeneratePathProperty="true" />
 	<PackageReference Include="Microsoft.Graphics.Win2D" Version="1.0.0.30" />
-    <PackageReference Include="SkiaSharp.Views.WinUI" Version="2.88.0-preview.187" />
+    <PackageReference Include="SkiaSharp.Views.WinUI" Version="2.88.0-preview.209" />
   </ItemGroup>
 
   <ItemGroup>
