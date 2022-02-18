@@ -1,7 +1,7 @@
-﻿using Mapsui.Layers;
+﻿using Mapsui.ArcGIS;
+using Mapsui.ArcGIS.ImageServiceProvider;
+using Mapsui.Layers;
 using Mapsui.Logging;
-using Mapsui.Providers.ArcGIS;
-using Mapsui.Providers.ArcGIS.Image;
 using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Desktop

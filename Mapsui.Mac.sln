@@ -19,7 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{08
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
 		Directory.Build.props = Directory.Build.props
-		LICENSE.md = LICENSE.md
+		LICENSE = LICENSE
 		Mapsui.sln.DotSettings = Mapsui.sln.DotSettings
 		README.md = README.md
 	EndProjectSection
@@ -69,7 +69,7 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mapsui.UI.Shared", "Mapsui.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Layers.Tiling", "Mapsui.Layers.Tiling\Mapsui.Layers.Tiling.csproj", "{B3A6822E-1EBE-4E2D-9381-9302817DF252}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Layers.ArcGIS", "Mapsui.Layers.ArcGIS\Mapsui.Layers.ArcGIS.csproj", "{4C470FE2-F79C-45AE-B86F-3445A737F38A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.ArcGIS", "Mapsui.ArcGIS\Mapsui.ArcGIS.csproj", "{4C470FE2-F79C-45AE-B86F-3445A737F38A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Tests", "Tests\Mapsui.Tests\Mapsui.Tests.csproj", "{747B2FF1-C82A-42B9-B78E-914170C51393}"
 EndProject

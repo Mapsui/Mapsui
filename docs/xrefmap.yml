@@ -4678,15 +4678,6 @@ references:
   commentId: M:Mapsui.MPoint.#ctor(System.Double,System.Double)
   fullName: Mapsui.MPoint.MPoint(System.Double, System.Double)
   nameWithType: MPoint.MPoint(Double, Double)
-- uid: Mapsui.MPoint.#ctor(System.Double[])
-  name: MPoint(Double[])
-  href: api/Mapsui.MPoint.html#Mapsui_MPoint__ctor_System_Double___
-  commentId: M:Mapsui.MPoint.#ctor(System.Double[])
-  name.vb: MPoint(Double())
-  fullName: Mapsui.MPoint.MPoint(System.Double[])
-  fullName.vb: Mapsui.MPoint.MPoint(System.Double())
-  nameWithType: MPoint.MPoint(Double[])
-  nameWithType.vb: MPoint.MPoint(Double())
 - uid: Mapsui.MPoint.#ctor*
   name: MPoint
   href: api/Mapsui.MPoint.html#Mapsui_MPoint__ctor_
@@ -4694,70 +4685,25 @@ references:
   isSpec: "True"
   fullName: Mapsui.MPoint.MPoint
   nameWithType: MPoint.MPoint
-- uid: Mapsui.MPoint.AsPoint
-  name: AsPoint()
-  href: api/Mapsui.MPoint.html#Mapsui_MPoint_AsPoint
-  commentId: M:Mapsui.MPoint.AsPoint
-  fullName: Mapsui.MPoint.AsPoint()
-  nameWithType: MPoint.AsPoint()
-- uid: Mapsui.MPoint.AsPoint*
-  name: AsPoint
-  href: api/Mapsui.MPoint.html#Mapsui_MPoint_AsPoint_
-  commentId: Overload:Mapsui.MPoint.AsPoint
+- uid: Mapsui.MPoint.Copy
+  name: Copy()
+  href: api/Mapsui.MPoint.html#Mapsui_MPoint_Copy
+  commentId: M:Mapsui.MPoint.Copy
+  fullName: Mapsui.MPoint.Copy()
+  nameWithType: MPoint.Copy()
+- uid: Mapsui.MPoint.Copy*
+  name: Copy
+  href: api/Mapsui.MPoint.html#Mapsui_MPoint_Copy_
+  commentId: Overload:Mapsui.MPoint.Copy
   isSpec: "True"
-  fullName: Mapsui.MPoint.AsPoint
-  nameWithType: MPoint.AsPoint
-- uid: Mapsui.MPoint.Clone
-  name: Clone()
-  href: api/Mapsui.MPoint.html#Mapsui_MPoint_Clone
-  commentId: M:Mapsui.MPoint.Clone
-  fullName: Mapsui.MPoint.Clone()
-  nameWithType: MPoint.Clone()
-- uid: Mapsui.MPoint.Clone*
-  name: Clone
-  href: api/Mapsui.MPoint.html#Mapsui_MPoint_Clone_
-  commentId: Overload:Mapsui.MPoint.Clone
-  isSpec: "True"
-  fullName: Mapsui.MPoint.Clone
-  nameWithType: MPoint.Clone
-- uid: Mapsui.MPoint.CompareTo(Mapsui.MPoint)
-  name: CompareTo(MPoint)
-  href: api/Mapsui.MPoint.html#Mapsui_MPoint_CompareTo_Mapsui_MPoint_
-  commentId: M:Mapsui.MPoint.CompareTo(Mapsui.MPoint)
-  fullName: Mapsui.MPoint.CompareTo(Mapsui.MPoint)
-  nameWithType: MPoint.CompareTo(MPoint)
-- uid: Mapsui.MPoint.CompareTo*
-  name: CompareTo
-  href: api/Mapsui.MPoint.html#Mapsui_MPoint_CompareTo_
-  commentId: Overload:Mapsui.MPoint.CompareTo
-  isSpec: "True"
-  fullName: Mapsui.MPoint.CompareTo
-  nameWithType: MPoint.CompareTo
-- uid: Mapsui.MPoint.Contains(Mapsui.MPoint)
-  name: Contains(MPoint)
-  href: api/Mapsui.MPoint.html#Mapsui_MPoint_Contains_Mapsui_MPoint_
-  commentId: M:Mapsui.MPoint.Contains(Mapsui.MPoint)
-  fullName: Mapsui.MPoint.Contains(Mapsui.MPoint)
-  nameWithType: MPoint.Contains(MPoint)
-- uid: Mapsui.MPoint.Contains*
-  name: Contains
-  href: api/Mapsui.MPoint.html#Mapsui_MPoint_Contains_
-  commentId: Overload:Mapsui.MPoint.Contains
-  isSpec: "True"
-  fullName: Mapsui.MPoint.Contains
-  nameWithType: MPoint.Contains
+  fullName: Mapsui.MPoint.Copy
+  nameWithType: MPoint.Copy
 - uid: Mapsui.MPoint.Distance(Mapsui.MPoint)
   name: Distance(MPoint)
   href: api/Mapsui.MPoint.html#Mapsui_MPoint_Distance_Mapsui_MPoint_
   commentId: M:Mapsui.MPoint.Distance(Mapsui.MPoint)
   fullName: Mapsui.MPoint.Distance(Mapsui.MPoint)
   nameWithType: MPoint.Distance(MPoint)
-- uid: Mapsui.MPoint.Distance(Mapsui.MRect)
-  name: Distance(MRect)
-  href: api/Mapsui.MPoint.html#Mapsui_MPoint_Distance_Mapsui_MRect_
-  commentId: M:Mapsui.MPoint.Distance(Mapsui.MRect)
-  fullName: Mapsui.MPoint.Distance(Mapsui.MRect)
-  nameWithType: MPoint.Distance(MRect)
 - uid: Mapsui.MPoint.Distance*
   name: Distance
   href: api/Mapsui.MPoint.html#Mapsui_MPoint_Distance_
@@ -4778,19 +4724,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.MPoint.Equals
   nameWithType: MPoint.Equals
-- uid: Mapsui.MPoint.FromDMS(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)
-  name: FromDMS(Double, Double, Double, Double, Double, Double)
-  href: api/Mapsui.MPoint.html#Mapsui_MPoint_FromDMS_System_Double_System_Double_System_Double_System_Double_System_Double_System_Double_
-  commentId: M:Mapsui.MPoint.FromDMS(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)
-  fullName: Mapsui.MPoint.FromDMS(System.Double, System.Double, System.Double, System.Double, System.Double, System.Double)
-  nameWithType: MPoint.FromDMS(Double, Double, Double, Double, Double, Double)
-- uid: Mapsui.MPoint.FromDMS*
-  name: FromDMS
-  href: api/Mapsui.MPoint.html#Mapsui_MPoint_FromDMS_
-  commentId: Overload:Mapsui.MPoint.FromDMS
-  isSpec: "True"
-  fullName: Mapsui.MPoint.FromDMS
-  nameWithType: MPoint.FromDMS
 - uid: Mapsui.MPoint.GetHashCode
   name: GetHashCode()
   href: api/Mapsui.MPoint.html#Mapsui_MPoint_GetHashCode
@@ -4804,22 +4737,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.MPoint.GetHashCode
   nameWithType: MPoint.GetHashCode
-- uid: Mapsui.MPoint.Item(System.UInt32)
-  name: Item[UInt32]
-  href: api/Mapsui.MPoint.html#Mapsui_MPoint_Item_System_UInt32_
-  commentId: P:Mapsui.MPoint.Item(System.UInt32)
-  name.vb: Item(UInt32)
-  fullName: Mapsui.MPoint.Item[System.UInt32]
-  fullName.vb: Mapsui.MPoint.Item(System.UInt32)
-  nameWithType: MPoint.Item[UInt32]
-  nameWithType.vb: MPoint.Item(UInt32)
-- uid: Mapsui.MPoint.Item*
-  name: Item
-  href: api/Mapsui.MPoint.html#Mapsui_MPoint_Item_
-  commentId: Overload:Mapsui.MPoint.Item
-  isSpec: "True"
-  fullName: Mapsui.MPoint.Item
-  nameWithType: MPoint.Item
 - uid: Mapsui.MPoint.MRect
   name: MRect
   href: api/Mapsui.MPoint.html#Mapsui_MPoint_MRect
@@ -4833,19 +4750,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.MPoint.MRect
   nameWithType: MPoint.MRect
-- uid: Mapsui.MPoint.NumOrdinates
-  name: NumOrdinates
-  href: api/Mapsui.MPoint.html#Mapsui_MPoint_NumOrdinates
-  commentId: P:Mapsui.MPoint.NumOrdinates
-  fullName: Mapsui.MPoint.NumOrdinates
-  nameWithType: MPoint.NumOrdinates
-- uid: Mapsui.MPoint.NumOrdinates*
-  name: NumOrdinates
-  href: api/Mapsui.MPoint.html#Mapsui_MPoint_NumOrdinates_
-  commentId: Overload:Mapsui.MPoint.NumOrdinates
-  isSpec: "True"
-  fullName: Mapsui.MPoint.NumOrdinates
-  nameWithType: MPoint.NumOrdinates
 - uid: Mapsui.MPoint.Offset(System.Double,System.Double)
   name: Offset(Double, Double)
   href: api/Mapsui.MPoint.html#Mapsui_MPoint_Offset_System_Double_System_Double_
@@ -4917,19 +4821,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.MPoint.Rotate
   nameWithType: MPoint.Rotate
-- uid: Mapsui.MPoint.ToDoubleArray
-  name: ToDoubleArray()
-  href: api/Mapsui.MPoint.html#Mapsui_MPoint_ToDoubleArray
-  commentId: M:Mapsui.MPoint.ToDoubleArray
-  fullName: Mapsui.MPoint.ToDoubleArray()
-  nameWithType: MPoint.ToDoubleArray()
-- uid: Mapsui.MPoint.ToDoubleArray*
-  name: ToDoubleArray
-  href: api/Mapsui.MPoint.html#Mapsui_MPoint_ToDoubleArray_
-  commentId: Overload:Mapsui.MPoint.ToDoubleArray
-  isSpec: "True"
-  fullName: Mapsui.MPoint.ToDoubleArray
-  nameWithType: MPoint.ToDoubleArray
 - uid: Mapsui.MPoint.X
   name: X
   href: api/Mapsui.MPoint.html#Mapsui_MPoint_X
@@ -5262,12 +5153,6 @@ references:
   commentId: T:Mapsui.MRect
   fullName: Mapsui.MRect
   nameWithType: MRect
-- uid: Mapsui.MRect.#ctor(Mapsui.MPoint,Mapsui.MPoint)
-  name: MRect(MPoint, MPoint)
-  href: api/Mapsui.MRect.html#Mapsui_MRect__ctor_Mapsui_MPoint_Mapsui_MPoint_
-  commentId: M:Mapsui.MRect.#ctor(Mapsui.MPoint,Mapsui.MPoint)
-  fullName: Mapsui.MRect.MRect(Mapsui.MPoint, Mapsui.MPoint)
-  nameWithType: MRect.MRect(MPoint, MPoint)
 - uid: Mapsui.MRect.#ctor(Mapsui.MRect)
   name: MRect(MRect)
   href: api/Mapsui.MRect.html#Mapsui_MRect__ctor_Mapsui_MRect_
@@ -5348,32 +5233,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.MRect.Centroid
   nameWithType: MRect.Centroid
-- uid: Mapsui.MRect.CheckMinMax
-  name: CheckMinMax()
-  href: api/Mapsui.MRect.html#Mapsui_MRect_CheckMinMax
-  commentId: M:Mapsui.MRect.CheckMinMax
-  fullName: Mapsui.MRect.CheckMinMax()
-  nameWithType: MRect.CheckMinMax()
-- uid: Mapsui.MRect.CheckMinMax*
-  name: CheckMinMax
-  href: api/Mapsui.MRect.html#Mapsui_MRect_CheckMinMax_
-  commentId: Overload:Mapsui.MRect.CheckMinMax
-  isSpec: "True"
-  fullName: Mapsui.MRect.CheckMinMax
-  nameWithType: MRect.CheckMinMax
-- uid: Mapsui.MRect.Clone
-  name: Clone()
-  href: api/Mapsui.MRect.html#Mapsui_MRect_Clone
-  commentId: M:Mapsui.MRect.Clone
-  fullName: Mapsui.MRect.Clone()
-  nameWithType: MRect.Clone()
-- uid: Mapsui.MRect.Clone*
-  name: Clone
-  href: api/Mapsui.MRect.html#Mapsui_MRect_Clone_
-  commentId: Overload:Mapsui.MRect.Clone
-  isSpec: "True"
-  fullName: Mapsui.MRect.Clone
-  nameWithType: MRect.Clone
 - uid: Mapsui.MRect.Contains(Mapsui.MPoint)
   name: Contains(MPoint)
   href: api/Mapsui.MRect.html#Mapsui_MRect_Contains_Mapsui_MPoint_
@@ -5393,37 +5252,25 @@ references:
   isSpec: "True"
   fullName: Mapsui.MRect.Contains
   nameWithType: MRect.Contains
-- uid: Mapsui.MRect.Distance(Mapsui.MPoint)
-  name: Distance(MPoint)
-  href: api/Mapsui.MRect.html#Mapsui_MRect_Distance_Mapsui_MPoint_
-  commentId: M:Mapsui.MRect.Distance(Mapsui.MPoint)
-  fullName: Mapsui.MRect.Distance(Mapsui.MPoint)
-  nameWithType: MRect.Distance(MPoint)
-- uid: Mapsui.MRect.Distance(Mapsui.MRect)
-  name: Distance(MRect)
-  href: api/Mapsui.MRect.html#Mapsui_MRect_Distance_Mapsui_MRect_
-  commentId: M:Mapsui.MRect.Distance(Mapsui.MRect)
-  fullName: Mapsui.MRect.Distance(Mapsui.MRect)
-  nameWithType: MRect.Distance(MRect)
-- uid: Mapsui.MRect.Distance*
-  name: Distance
-  href: api/Mapsui.MRect.html#Mapsui_MRect_Distance_
-  commentId: Overload:Mapsui.MRect.Distance
+- uid: Mapsui.MRect.Copy
+  name: Copy()
+  href: api/Mapsui.MRect.html#Mapsui_MRect_Copy
+  commentId: M:Mapsui.MRect.Copy
+  fullName: Mapsui.MRect.Copy()
+  nameWithType: MRect.Copy()
+- uid: Mapsui.MRect.Copy*
+  name: Copy
+  href: api/Mapsui.MRect.html#Mapsui_MRect_Copy_
+  commentId: Overload:Mapsui.MRect.Copy
   isSpec: "True"
-  fullName: Mapsui.MRect.Distance
-  nameWithType: MRect.Distance
+  fullName: Mapsui.MRect.Copy
+  nameWithType: MRect.Copy
 - uid: Mapsui.MRect.Equals(Mapsui.MRect)
   name: Equals(MRect)
   href: api/Mapsui.MRect.html#Mapsui_MRect_Equals_Mapsui_MRect_
   commentId: M:Mapsui.MRect.Equals(Mapsui.MRect)
   fullName: Mapsui.MRect.Equals(Mapsui.MRect)
   nameWithType: MRect.Equals(MRect)
-- uid: Mapsui.MRect.Equals(System.Object)
-  name: Equals(Object)
-  href: api/Mapsui.MRect.html#Mapsui_MRect_Equals_System_Object_
-  commentId: M:Mapsui.MRect.Equals(System.Object)
-  fullName: Mapsui.MRect.Equals(System.Object)
-  nameWithType: MRect.Equals(Object)
 - uid: Mapsui.MRect.Equals*
   name: Equals
   href: api/Mapsui.MRect.html#Mapsui_MRect_Equals_
@@ -5444,32 +5291,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.MRect.GetArea
   nameWithType: MRect.GetArea
-- uid: Mapsui.MRect.GetHashCode
-  name: GetHashCode()
-  href: api/Mapsui.MRect.html#Mapsui_MRect_GetHashCode
-  commentId: M:Mapsui.MRect.GetHashCode
-  fullName: Mapsui.MRect.GetHashCode()
-  nameWithType: MRect.GetHashCode()
-- uid: Mapsui.MRect.GetHashCode*
-  name: GetHashCode
-  href: api/Mapsui.MRect.html#Mapsui_MRect_GetHashCode_
-  commentId: Overload:Mapsui.MRect.GetHashCode
-  isSpec: "True"
-  fullName: Mapsui.MRect.GetHashCode
-  nameWithType: MRect.GetHashCode
-- uid: Mapsui.MRect.GetIntersectingArea(Mapsui.MRect)
-  name: GetIntersectingArea(MRect)
-  href: api/Mapsui.MRect.html#Mapsui_MRect_GetIntersectingArea_Mapsui_MRect_
-  commentId: M:Mapsui.MRect.GetIntersectingArea(Mapsui.MRect)
-  fullName: Mapsui.MRect.GetIntersectingArea(Mapsui.MRect)
-  nameWithType: MRect.GetIntersectingArea(MRect)
-- uid: Mapsui.MRect.GetIntersectingArea*
-  name: GetIntersectingArea
-  href: api/Mapsui.MRect.html#Mapsui_MRect_GetIntersectingArea_
-  commentId: Overload:Mapsui.MRect.GetIntersectingArea
-  isSpec: "True"
-  fullName: Mapsui.MRect.GetIntersectingArea
-  nameWithType: MRect.GetIntersectingArea
 - uid: Mapsui.MRect.Grow(System.Double)
   name: Grow(Double)
   href: api/Mapsui.MRect.html#Mapsui_MRect_Grow_System_Double_
@@ -5521,21 +5342,6 @@ references:
   commentId: M:Mapsui.MRect.Join(Mapsui.MRect)
   fullName: Mapsui.MRect.Join(Mapsui.MRect)
   nameWithType: MRect.Join(MRect)
-- uid: Mapsui.MRect.Join(Mapsui.MRect,Mapsui.MRect)
-  name: Join(MRect, MRect)
-  href: api/Mapsui.MRect.html#Mapsui_MRect_Join_Mapsui_MRect_Mapsui_MRect_
-  commentId: M:Mapsui.MRect.Join(Mapsui.MRect,Mapsui.MRect)
-  fullName: Mapsui.MRect.Join(Mapsui.MRect, Mapsui.MRect)
-  nameWithType: MRect.Join(MRect, MRect)
-- uid: Mapsui.MRect.Join(Mapsui.MRect[])
-  name: Join(MRect[])
-  href: api/Mapsui.MRect.html#Mapsui_MRect_Join_Mapsui_MRect___
-  commentId: M:Mapsui.MRect.Join(Mapsui.MRect[])
-  name.vb: Join(MRect())
-  fullName: Mapsui.MRect.Join(Mapsui.MRect[])
-  fullName.vb: Mapsui.MRect.Join(Mapsui.MRect())
-  nameWithType: MRect.Join(MRect[])
-  nameWithType.vb: MRect.Join(MRect())
 - uid: Mapsui.MRect.Join*
   name: Join
   href: api/Mapsui.MRect.html#Mapsui_MRect_Join_
@@ -5556,19 +5362,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.MRect.Left
   nameWithType: MRect.Left
-- uid: Mapsui.MRect.LongestAxis
-  name: LongestAxis
-  href: api/Mapsui.MRect.html#Mapsui_MRect_LongestAxis
-  commentId: P:Mapsui.MRect.LongestAxis
-  fullName: Mapsui.MRect.LongestAxis
-  nameWithType: MRect.LongestAxis
-- uid: Mapsui.MRect.LongestAxis*
-  name: LongestAxis
-  href: api/Mapsui.MRect.html#Mapsui_MRect_LongestAxis_
-  commentId: Overload:Mapsui.MRect.LongestAxis
-  isSpec: "True"
-  fullName: Mapsui.MRect.LongestAxis
-  nameWithType: MRect.LongestAxis
 - uid: Mapsui.MRect.Max
   name: Max
   href: api/Mapsui.MRect.html#Mapsui_MRect_Max
@@ -5660,25 +5453,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.MRect.Multiply
   nameWithType: MRect.Multiply
-- uid: Mapsui.MRect.Offset(Mapsui.MPoint)
-  name: Offset(MPoint)
-  href: api/Mapsui.MRect.html#Mapsui_MRect_Offset_Mapsui_MPoint_
-  commentId: M:Mapsui.MRect.Offset(Mapsui.MPoint)
-  fullName: Mapsui.MRect.Offset(Mapsui.MPoint)
-  nameWithType: MRect.Offset(MPoint)
-- uid: Mapsui.MRect.Offset(System.Double,System.Double)
-  name: Offset(Double, Double)
-  href: api/Mapsui.MRect.html#Mapsui_MRect_Offset_System_Double_System_Double_
-  commentId: M:Mapsui.MRect.Offset(System.Double,System.Double)
-  fullName: Mapsui.MRect.Offset(System.Double, System.Double)
-  nameWithType: MRect.Offset(Double, Double)
-- uid: Mapsui.MRect.Offset*
-  name: Offset
-  href: api/Mapsui.MRect.html#Mapsui_MRect_Offset_
-  commentId: Overload:Mapsui.MRect.Offset
-  isSpec: "True"
-  fullName: Mapsui.MRect.Offset
-  nameWithType: MRect.Offset
 - uid: Mapsui.MRect.Right
   name: Right
   href: api/Mapsui.MRect.html#Mapsui_MRect_Right
@@ -5744,38 +5518,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.MRect.TopRight
   nameWithType: MRect.TopRight
-- uid: Mapsui.MRect.ToString
-  name: ToString()
-  href: api/Mapsui.MRect.html#Mapsui_MRect_ToString
-  commentId: M:Mapsui.MRect.ToString
-  fullName: Mapsui.MRect.ToString()
-  nameWithType: MRect.ToString()
-- uid: Mapsui.MRect.ToString*
-  name: ToString
-  href: api/Mapsui.MRect.html#Mapsui_MRect_ToString_
-  commentId: Overload:Mapsui.MRect.ToString
+- uid: Mapsui.MRect.Vertices
+  name: Vertices
+  href: api/Mapsui.MRect.html#Mapsui_MRect_Vertices
+  commentId: P:Mapsui.MRect.Vertices
+  fullName: Mapsui.MRect.Vertices
+  nameWithType: MRect.Vertices
+- uid: Mapsui.MRect.Vertices*
+  name: Vertices
+  href: api/Mapsui.MRect.html#Mapsui_MRect_Vertices_
+  commentId: Overload:Mapsui.MRect.Vertices
   isSpec: "True"
-  fullName: Mapsui.MRect.ToString
-  nameWithType: MRect.ToString
-- uid: Mapsui.MRect.Touches(Mapsui.MPoint)
-  name: Touches(MPoint)
-  href: api/Mapsui.MRect.html#Mapsui_MRect_Touches_Mapsui_MPoint_
-  commentId: M:Mapsui.MRect.Touches(Mapsui.MPoint)
-  fullName: Mapsui.MRect.Touches(Mapsui.MPoint)
-  nameWithType: MRect.Touches(MPoint)
-- uid: Mapsui.MRect.Touches(Mapsui.MRect)
-  name: Touches(MRect)
-  href: api/Mapsui.MRect.html#Mapsui_MRect_Touches_Mapsui_MRect_
-  commentId: M:Mapsui.MRect.Touches(Mapsui.MRect)
-  fullName: Mapsui.MRect.Touches(Mapsui.MRect)
-  nameWithType: MRect.Touches(MRect)
-- uid: Mapsui.MRect.Touches*
-  name: Touches
-  href: api/Mapsui.MRect.html#Mapsui_MRect_Touches_
-  commentId: Overload:Mapsui.MRect.Touches
-  isSpec: "True"
-  fullName: Mapsui.MRect.Touches
-  nameWithType: MRect.Touches
+  fullName: Mapsui.MRect.Vertices
+  nameWithType: MRect.Vertices
 - uid: Mapsui.MRect.Width
   name: Width
   href: api/Mapsui.MRect.html#Mapsui_MRect_Width
