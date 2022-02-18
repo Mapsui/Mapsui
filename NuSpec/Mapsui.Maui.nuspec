@@ -21,47 +21,15 @@
     <dependencies>
       <group targetFramework="net6.0">
         <dependency id="Mapsui" version="$version$"/>
-        <dependency id="Microsoft.Maui.Dependencies" version="[6.0.101-preview.11.2349,7.0)" />
-        <dependency id="SkiaSharp" version="[2.88.0-preview.179,3.0.0)"/>
-        <dependency id="SkiaSharp.Views.Maui.Controls" version="[2.88.0-preview.179,3.0.0)"/>
-        <dependency id="SkiaSharp.Views.Maui.Controls.Compatibility" version="[2.88.0-preview.179,3.0.0)"/>
-      </group>     
-      <group targetFramework="net6.0-android30.0">
-        <dependency id="Mapsui" version="$version$"/>
-        <dependency id="Microsoft.Maui.Dependencies" version="[6.0.101-preview.11.2349,7.0)" />
-        <dependency id="SkiaSharp" version="[2.88.0-preview.179,3.0.0)"/>
-        <dependency id="SkiaSharp.Views.Maui.Controls" version="[2.88.0-preview.179,3.0.0)"/>
-        <dependency id="SkiaSharp.Views.Maui.Controls.Compatibility" version="[2.88.0-preview.179,3.0.0)"/>
-      </group>     
-      <group targetFramework="net6.0-ios13.6">
-        <dependency id="Mapsui" version="$version$"/>
-        <dependency id="Microsoft.Maui.Dependencies" version="[6.0.101-preview.11.2349,7.0)" />
-        <dependency id="SkiaSharp" version="[2.88.0-preview.179,3.0.0)"/>
-        <dependency id="SkiaSharp.Views.Maui.Controls" version="[2.88.0-preview.179,3.0.0)"/>
-        <dependency id="SkiaSharp.Views.Maui.Controls.Compatibility" version="[2.88.0-preview.179,3.0.0)"/>
-      </group>     
-      <group targetFramework="net6.0-maccatalyst13.5">
-        <dependency id="Mapsui" version="$version$"/>
-        <dependency id="Microsoft.Maui.Dependencies" version="[6.0.101-preview.11.2349,7.0)" />
-        <dependency id="SkiaSharp" version="[2.88.0-preview.179,3.0.0)"/>
-        <dependency id="SkiaSharp.Views.Maui.Controls" version="[2.88.0-preview.179,3.0.0)"/>
-        <dependency id="SkiaSharp.Views.Maui.Controls.Compatibility" version="[2.88.0-preview.179,3.0.0)"/>
-      </group>     
-      <group targetFramework="net6.0-windows10.0.19041">
-        <dependency id="Mapsui" version="$version$"/>
-        <dependency id="Microsoft.Maui.Dependencies" version="[6.0.101-preview.11.2349,7.0)" />
-        <dependency id="SkiaSharp" version="[2.88.0-preview.179,3.0.0)"/>
-        <dependency id="SkiaSharp.Views.Maui.Controls" version="[2.88.0-preview.179,3.0.0)"/>
-        <dependency id="SkiaSharp.Views.Maui.Controls.Compatibility" version="[2.88.0-preview.179,3.0.0)"/>
+        <dependency id="Microsoft.Maui.Dependencies" version="[6.0.200-preview.13.2865,7.0)" />
+        <dependency id="SkiaSharp" version="[2.88.0-preview.187,3.0.0)"/>
+        <dependency id="SkiaSharp.Views.Maui.Controls" version="[2.88.0-preview.187,3.0.0)"/>
+        <dependency id="SkiaSharp.Views.Maui.Controls.Compatibility" version="[2.88.0-preview.187,3.0.0)"/>
       </group>     
     </dependencies>
 
   </metadata>
   <files>
     <file src="../Mapsui.UI.Maui/bin/Release/net6.0/Mapsui.UI.Maui.dll" target="lib/net6.0/" />    
-    <file src="../Mapsui.UI.Maui/bin/Release/net6.0-android/Mapsui.UI.Maui.dll" target="lib/net6.0-android30.0/" />   
-    <file src="../Mapsui.UI.Maui/bin/Release/net6.0-ios/Mapsui.UI.Maui.dll" target="lib/net6.0-ios13.6/" />   
-    <file src="../Mapsui.UI.Maui/bin/Release/net6.0-maccatalyst/Mapsui.UI.Maui.dll" target="lib/net6.0-maccatalyst13.5/" />   
-    <file src="../Mapsui.UI.Maui/bin/Release/net6.0-windows10.0.19041/Mapsui.UI.Maui.dll" target="lib/net6.0-windows10.0.19041/" />   
   </files>
 </package>
