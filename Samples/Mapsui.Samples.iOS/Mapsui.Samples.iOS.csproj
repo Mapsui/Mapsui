@@ -13,17 +13,13 @@
     <ProjectReference Include="..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="BruTile.MbTiles">
-      <Version>4.0.0</Version>
+    <PackageReference Include="BruTile.MbTiles" Version="4.0.0">
     </PackageReference>
-    <PackageReference Include="Itinero">
-      <Version>1.5.0</Version>
+    <PackageReference Include="Itinero" Version="1.5.0">
     </PackageReference>
-    <PackageReference Include="SkiaSharp">
-      <Version> 2.88.0-preview.209</Version>
+    <PackageReference Include="SkiaSharp" Version="2.88.0-preview.209">
     </PackageReference>
-    <PackageReference Include="SkiaSharp.Views">
-      <Version> 2.88.0-preview.209</Version>
+    <PackageReference Include="SkiaSharp.Views" Version="2.88.0-preview.209">
     </PackageReference>
     <PackageReference Include="SkiaSharp.HarfBuzz" Version=" 2.88.0-preview.209" />
     <PackageReference Include="SkiaSharp.NativeAssets.iOS" Version=" 2.88.0-preview.209" />
