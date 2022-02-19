@@ -4802,6 +4802,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.MPoint.Subtraction
   nameWithType: MPoint.Subtraction
+- uid: Mapsui.MPoint.Rotate(System.Double)
+  name: Rotate(Double)
+  href: api/Mapsui.MPoint.html#Mapsui_MPoint_Rotate_System_Double_
+  commentId: M:Mapsui.MPoint.Rotate(System.Double)
+  fullName: Mapsui.MPoint.Rotate(System.Double)
+  nameWithType: MPoint.Rotate(Double)
 - uid: Mapsui.MPoint.Rotate(System.Double,Mapsui.MPoint)
   name: Rotate(Double, MPoint)
   href: api/Mapsui.MPoint.html#Mapsui_MPoint_Rotate_System_Double_Mapsui_MPoint_
@@ -10772,6 +10778,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Styles.Offset.Inequality
   nameWithType: Offset.Inequality
+- uid: Mapsui.Styles.Offset.ToPoint
+  name: ToPoint()
+  href: api/Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_ToPoint
+  commentId: M:Mapsui.Styles.Offset.ToPoint
+  fullName: Mapsui.Styles.Offset.ToPoint()
+  nameWithType: Offset.ToPoint()
+- uid: Mapsui.Styles.Offset.ToPoint*
+  name: ToPoint
+  href: api/Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_ToPoint_
+  commentId: Overload:Mapsui.Styles.Offset.ToPoint
+  isSpec: "True"
+  fullName: Mapsui.Styles.Offset.ToPoint
+  nameWithType: Offset.ToPoint
 - uid: Mapsui.Styles.Offset.X
   name: X
   href: api/Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_X
@@ -17494,6 +17513,25 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Objects.MyLocationLayer.MyLocationLayer
   nameWithType: MyLocationLayer.MyLocationLayer
+- uid: Mapsui.UI.Objects.MyLocationLayer.CalloutText
+  name: CalloutText
+  href: api/Mapsui.UI.Objects.MyLocationLayer.html#Mapsui_UI_Objects_MyLocationLayer_CalloutText
+  commentId: P:Mapsui.UI.Objects.MyLocationLayer.CalloutText
+  fullName: Mapsui.UI.Objects.MyLocationLayer.CalloutText
+  nameWithType: MyLocationLayer.CalloutText
+- uid: Mapsui.UI.Objects.MyLocationLayer.CalloutText*
+  name: CalloutText
+  href: api/Mapsui.UI.Objects.MyLocationLayer.html#Mapsui_UI_Objects_MyLocationLayer_CalloutText_
+  commentId: Overload:Mapsui.UI.Objects.MyLocationLayer.CalloutText
+  isSpec: "True"
+  fullName: Mapsui.UI.Objects.MyLocationLayer.CalloutText
+  nameWithType: MyLocationLayer.CalloutText
+- uid: Mapsui.UI.Objects.MyLocationLayer.Clicked
+  name: Clicked
+  href: api/Mapsui.UI.Objects.MyLocationLayer.html#Mapsui_UI_Objects_MyLocationLayer_Clicked
+  commentId: E:Mapsui.UI.Objects.MyLocationLayer.Clicked
+  fullName: Mapsui.UI.Objects.MyLocationLayer.Clicked
+  nameWithType: MyLocationLayer.Clicked
 - uid: Mapsui.UI.Objects.MyLocationLayer.Direction
   name: Direction
   href: api/Mapsui.UI.Objects.MyLocationLayer.html#Mapsui_UI_Objects_MyLocationLayer_Direction
@@ -17559,6 +17597,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Objects.MyLocationLayer.Scale
   nameWithType: MyLocationLayer.Scale
+- uid: Mapsui.UI.Objects.MyLocationLayer.ShowCallout
+  name: ShowCallout
+  href: api/Mapsui.UI.Objects.MyLocationLayer.html#Mapsui_UI_Objects_MyLocationLayer_ShowCallout
+  commentId: P:Mapsui.UI.Objects.MyLocationLayer.ShowCallout
+  fullName: Mapsui.UI.Objects.MyLocationLayer.ShowCallout
+  nameWithType: MyLocationLayer.ShowCallout
+- uid: Mapsui.UI.Objects.MyLocationLayer.ShowCallout*
+  name: ShowCallout
+  href: api/Mapsui.UI.Objects.MyLocationLayer.html#Mapsui_UI_Objects_MyLocationLayer_ShowCallout_
+  commentId: Overload:Mapsui.UI.Objects.MyLocationLayer.ShowCallout
+  isSpec: "True"
+  fullName: Mapsui.UI.Objects.MyLocationLayer.ShowCallout
+  nameWithType: MyLocationLayer.ShowCallout
 - uid: Mapsui.UI.Objects.MyLocationLayer.UpdateMyDirection(System.Double,System.Double,System.Boolean)
   name: UpdateMyDirection(Double, Double, Boolean)
   href: api/Mapsui.UI.Objects.MyLocationLayer.html#Mapsui_UI_Objects_MyLocationLayer_UpdateMyDirection_System_Double_System_Double_System_Boolean_
