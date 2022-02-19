@@ -1,10 +1,9 @@
 ﻿using System;
-using System.IO;
 using BruTile.Cache;
 using BruTile.Predefined;
-using Mapsui.Extensions;
 using Mapsui.Layers;
-using Mapsui.Rendering;
+using Mapsui.Tiling.Extensions;
+using Mapsui.Tiling.Rendering;
 using NUnit.Framework;
 
 namespace Mapsui.Tests.Rendering

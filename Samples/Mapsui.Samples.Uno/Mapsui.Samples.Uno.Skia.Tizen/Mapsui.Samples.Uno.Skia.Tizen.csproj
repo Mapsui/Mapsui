@@ -23,14 +23,14 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="5.0.0" />
-    <PackageReference Include="SkiaSharp.Views" Version="2.88.0-preview.179" />
+    <PackageReference Include="SkiaSharp.Views" Version="2.88.0-preview.209" />
     <PackageReference Include="Uno.UI.Skia.Tizen" Version="4.0.11" />
     <PackageReference Include="Uno.UI.RemoteControl" Version="4.0.11" Condition="'$(Configuration)'=='Debug'" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Mapsui.Nts\Mapsui.Nts.csproj" />
-    <ProjectReference Include="..\..\..\Mapsui.Layers.Tiling\Mapsui.Layers.Tiling.csproj" />
+    <ProjectReference Include="..\..\..\Mapsui.Tiling\Mapsui.Tiling.csproj" />
     <ProjectReference Include="..\..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
     <ProjectReference Include="..\..\..\Mapsui.UI.Uno\Mapsui.UI.Uno.csproj" />
     <ProjectReference Include="..\..\..\Mapsui\Mapsui.csproj" />

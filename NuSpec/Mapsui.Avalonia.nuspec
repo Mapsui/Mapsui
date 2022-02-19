@@ -1,31 +1,33 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
-  <metadata>
-    <id>Mapsui.Avalonia</id>
-    <version>$version$</version>
-    <title>Mapsui</title>
-    <authors>Paul den Dulk</authors>
-    <owners>Paul den Dulk</owners>
-    <projectUrl>https://github.com/Mapsui/Mapsui</projectUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>
-      Avalonia map components based on the Mapsui library
-    </description>
-    <tags>map maps mapping geo gis osm</tags>
-    <copyright>© Mapsui Contributors</copyright>
-    <language>en-US</language>
-    <dependencies>
-      <group targetFramework="netcoreapp3.1">
-        <dependency id="Mapsui" version="$version$"/>
-        <dependency id="BruTile" version="[4.0.0,5.0.0)"/>
-        <dependency id="SkiaSharp.Views.Avalonia" version="[2.88.0-preview.179,3.0.0)"/>
-        <dependency id="Avalonia" version="[0.10.11,0.11.0)" />
-        <dependency id="Avalonia.Desktop" version="[0.10.11,0.11.0)" />
-        <dependency id="Avalonia.ReactiveUI" version="[0.10.11,0.11.0)" />
-      </group>
-    </dependencies>
-  </metadata>
-  <files>
-    <file src="..\Mapsui.UI.Avalonia\bin\Release\netcoreapp3.1\Mapsui.UI.Avalonia.dll" target="lib\netcoreapp3.1\Mapsui.UI.Avalonia.dll" />
-  </files>
+	<metadata>
+		<id>Mapsui.Avalonia</id>
+		<version>$version$</version>
+		<title>Mapsui</title>
+		<authors>Paul den Dulk</authors>
+		<owners>Paul den Dulk</owners>
+		<projectUrl>https://github.com/Mapsui/Mapsui</projectUrl>
+		<licenseUrl>https://github.com/Mapsui/Mapsui/blob/master/LICENSE</licenseUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>
+			Avalonia map components based on the Mapsui library
+		</description>
+		<tags>map maps mapping geo gis osm</tags>
+		<copyright>© Mapsui Contributors</copyright>
+		<language>en-US</language>
+		<dependencies>
+			<group targetFramework="netcoreapp3.1">
+				<dependency id="Mapsui" version="$version$"/>
+				<dependency id="BruTile" version="[4.0.0,5.0.0)"/>
+				<dependency id="SkiaSharp.Views.Avalonia" version="[2.88.0-preview.209,3.0.0)"/>
+				<dependency id="Avalonia" version="[0.10.11,0.11.0)" />
+				<dependency id="Avalonia.Desktop" version="[0.10.11,0.11.0)" />
+				<dependency id="Avalonia.ReactiveUI" version="[0.10.11,0.11.0)" />
+			</group>
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="..\LICENSE" target="LICENSE" />
+		<file src="..\Mapsui.UI.Avalonia\bin\Release\netcoreapp3.1\Mapsui.UI.Avalonia.dll" target="lib\netcoreapp3.1\Mapsui.UI.Avalonia.dll" />
+	</files>
 </package>

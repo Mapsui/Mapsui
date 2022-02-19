@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Mapsui.Extensions;
 using Mapsui.Layers;
-using Mapsui.Layers.Tiling;
 using Mapsui.Providers;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
+using Mapsui.Tiling;
 using Mapsui.UI;
 using SkiaSharp;
 

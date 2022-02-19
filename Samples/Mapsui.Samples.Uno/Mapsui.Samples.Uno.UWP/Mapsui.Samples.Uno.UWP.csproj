@@ -8,7 +8,7 @@
 			you need to make sure that the version provided here matches https://github.com/novotnyllc/MSBuildSdkExtras/blob/main/Source/MSBuild.Sdk.Extras/DefaultItems/ImplicitPackages.targets#L11.
 			This is not an issue when libraries are referenced through nuget packages. See https://github.com/unoplatform/uno/issues/446 for more details.
 			-->
-      <Version>6.2.11</Version>
+      <Version>6.2.12</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml" Version="2.6.2" />
     <PackageReference Include="Uno.Core" Version="4.0.1" />
@@ -26,8 +26,8 @@
     <AssemblyName>Mapsui.Samples.Uno</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.18362.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.18362.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.19041.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -128,9 +128,9 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <ProjectReference Include="..\..\..\Mapsui.Layers.Tiling\Mapsui.Layers.Tiling.csproj">
+    <ProjectReference Include="..\..\..\Mapsui.Tiling\Mapsui.Tiling.csproj">
       <Project>{08072eca-528c-47d5-82a3-85e54300c22a}</Project>
-      <Name>Mapsui.Layers.Tiling</Name>
+      <Name>Mapsui.Tiling</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj">
       <Project>{ae632270-38ca-4203-93a5-8612629cd944}</Project>

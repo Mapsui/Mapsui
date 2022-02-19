@@ -4,10 +4,10 @@ using System.Linq;
 using System.Reflection;
 using Mapsui.Extensions;
 using Mapsui.Layers;
-using Mapsui.Layers.Tiling;
 using Mapsui.Projections;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using Mapsui.Tiling;
 using Mapsui.UI;
 using Newtonsoft.Json;
 

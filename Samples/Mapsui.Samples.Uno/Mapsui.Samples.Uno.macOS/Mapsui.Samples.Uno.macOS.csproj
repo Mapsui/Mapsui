@@ -69,8 +69,8 @@
     <Reference Include="System.Memory" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Uno.UI" Version="3.10.11" />
-    <PackageReference Include="Uno.UI.RemoteControl" Version="3.10.11" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI" Version="4.0.11" />
+    <PackageReference Include="Uno.UI.RemoteControl" Version="4.0.11" Condition="'$(Configuration)'=='Debug'" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="5.0.0" />
   </ItemGroup>
@@ -105,9 +105,9 @@
     </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Mapsui.Layers.Tiling\Mapsui.Layers.Tiling.csproj">
+    <ProjectReference Include="..\..\..\Mapsui.Tiling\Mapsui.Tiling.csproj">
       <Project>{08072eca-528c-47d5-82a3-85e54300c22a}</Project>
-      <Name>Mapsui.Layers.Tiling</Name>
+      <Name>Mapsui.Tiling</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj">
       <Project>{ae632270-38ca-4203-93a5-8612629cd944}</Project>

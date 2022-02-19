@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using BruTile;
 using BruTile.Cache;
 
-namespace Mapsui.Rendering
+namespace Mapsui.Tiling.Rendering
 {
     public interface IRenderFetchStrategy
     {

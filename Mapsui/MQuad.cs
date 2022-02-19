@@ -144,16 +144,8 @@ namespace Mapsui
         /// <returns>Returns the string</returns>
         public override string ToString()
         {
-            return $"BL: {ToString(BottomLeft)}  TL: {ToString(TopLeft)}  " +
-                   $"TR: {ToString(TopRight)}  BR: {ToString(BottomRight)}";
-        }
-
-        private static string ToString(MPoint? p)
-        {
-            if (p == null)
-                return "";
-
-            return $"({p.X}, {p.Y})";
+            return $"BL: {BottomLeft}  TL: {TopLeft}  " +
+                   $"TR: {TopRight}  BR: {BottomRight}";
         }
     }
 }

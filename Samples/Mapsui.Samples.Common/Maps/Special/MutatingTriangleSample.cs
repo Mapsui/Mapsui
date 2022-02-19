@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Layers;
-using Mapsui.Layers.Tiling;
 using Mapsui.Nts;
 using Mapsui.Providers;
+using Mapsui.Tiling;
 using Mapsui.UI;
 using NetTopologySuite.Geometries;
 

@@ -67,7 +67,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VersionUpdater", "Tools\Ver
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mapsui.UI.Shared", "Mapsui.UI.Shared\Mapsui.UI.Shared.shproj", "{239F2B0D-13CB-4BCF-83BF-F52D696A47B7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Layers.Tiling", "Mapsui.Layers.Tiling\Mapsui.Layers.Tiling.csproj", "{B3A6822E-1EBE-4E2D-9381-9302817DF252}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Tiling", "Mapsui.Tiling\Mapsui.Tiling.csproj", "{B3A6822E-1EBE-4E2D-9381-9302817DF252}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.ArcGIS", "Mapsui.ArcGIS\Mapsui.ArcGIS.csproj", "{4C470FE2-F79C-45AE-B86F-3445A737F38A}"
 EndProject

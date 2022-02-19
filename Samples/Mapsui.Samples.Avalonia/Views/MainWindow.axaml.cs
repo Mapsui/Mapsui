@@ -6,14 +6,13 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Mapsui.Extensions;
-using Mapsui.Layers.Tiling;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.CustomWidget;
+using Mapsui.Tiling;
 using Mapsui.UI;
 using Mapsui.UI.Avalonia;
-using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Avalonia.Views
 {

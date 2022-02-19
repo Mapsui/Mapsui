@@ -7,7 +7,7 @@
 using System.Collections.Generic;
 using BruTile;
 
-namespace Mapsui.Fetcher
+namespace Mapsui.Tiling.Fetcher
 {
     public interface IDataFetchStrategy
     {

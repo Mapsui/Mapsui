@@ -1,4 +1,4 @@
-﻿using Mapsui.Layers.Tiling;
+﻿using Mapsui.Tiling;
 using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps.Navigation
