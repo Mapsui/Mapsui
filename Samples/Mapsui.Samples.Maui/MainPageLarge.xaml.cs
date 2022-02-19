@@ -16,7 +16,7 @@ using Microsoft.Maui.Essentials;
 
 namespace Mapsui.Samples.Maui
 {
-    public partial class MainPageLarge : ContentPage, IDisposable
+    public sealed partial class MainPageLarge : ContentPage, IDisposable
     {
         IEnumerable<ISample> allSamples;
         Func<object?, EventArgs, bool>? clicker;
@@ -201,7 +201,7 @@ namespace Mapsui.Samples.Maui
 
         public void Dispose()
         {
-            ((IDisposable)gpsCancelation).Dispose();
+            ((IDisposable?)gpsCancelation)?.Dispose();
         }
     }
 }

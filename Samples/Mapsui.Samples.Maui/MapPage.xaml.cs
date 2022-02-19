@@ -14,7 +14,7 @@ using Compass = Microsoft.Maui.Essentials.Compass;
 
 namespace Mapsui.Samples.Maui
 {
-    public partial class MapPage : ContentPage, IDisposable
+    public sealed partial class MapPage : ContentPage, IDisposable
     {
         private CancellationTokenSource? gpsCancelation;
         public Func<MapView?, MapClickedEventArgs, bool>? Clicker { get; set; }
@@ -175,7 +175,7 @@ namespace Mapsui.Samples.Maui
 
         public void Dispose()
         {
-            ((IDisposable)gpsCancelation).Dispose();
+            ((IDisposable?)gpsCancelation)?.Dispose();
         }
     }
 }
