@@ -393,19 +393,19 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_IMapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__.md&amp;value=---%0Auid%3A%20Mapsui.UI.IMapControl.GetSnapshot(System.Collections.Generic.IEnumerable%7BMapsui.Layers.ILayer%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_UI_IMapControl_GetSnapshot_System_Nullable_IEnumerable_Mapsui_Layers_ILayer___.md&amp;value=---%0Auid%3A%20Mapsui.UI.IMapControl.GetSnapshot(System.Nullable%7BIEnumerable%7BMapsui.Layers.ILayer%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/UI/IMapControl.cs/#L64">View Source</a>
   </span>
   <a id="Mapsui_UI_IMapControl_GetSnapshot_" data-uid="Mapsui.UI.IMapControl.GetSnapshot*"></a>
-  <h4 id="Mapsui_UI_IMapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__" data-uid="Mapsui.UI.IMapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})">GetSnapshot(IEnumerable&lt;ILayer&gt;)</h4>
+  <h4 id="Mapsui_UI_IMapControl_GetSnapshot_System_Nullable_IEnumerable_Mapsui_Layers_ILayer___" data-uid="Mapsui.UI.IMapControl.GetSnapshot(System.Nullable{IEnumerable{Mapsui.Layers.ILayer}})">GetSnapshot(Nullable&lt;IEnumerable&lt;ILayer&gt;&gt;)</h4>
   <div class="markdown level1 summary"><p>Create a snapshot form map as PNG image</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">byte[] GetSnapshot(IEnumerable&lt;ILayer&gt; layers = null)</code></pre>
+    <pre><code class="lang-csharp hljs">byte[] GetSnapshot(IEnumerable&lt;ILayer&gt;? layers = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -418,7 +418,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">IEnumerable</span>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;&gt;</td>
         <td><span class="parametername">layers</span></td>
         <td><p>Layers that should be included in snapshot</p>
 </td>
@@ -693,7 +693,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="Mapsui.UI.MapInfoEventArgs.html">MapInfoEventArgs</a>&gt;</td>
+        <td><span class="xref">EventHandler</span>&lt;<a class="xref" href="Mapsui.UI.MapInfoEventArgs.html">MapInfoEventArgs</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -710,7 +710,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">event EventHandler ViewportInitialized</code></pre>
+    <pre><code class="lang-csharp hljs">event EventHandler? ViewportInitialized</code></pre>
   </div>
   <h5 class="eventType">Event Type</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -722,7 +722,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.EventHandler</span></td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">EventHandler</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
