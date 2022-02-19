@@ -80,8 +80,7 @@
 	  <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\PolylineSample.cs" Link="PolylineSample.cs" />
 	  <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\SnapshotSample.cs" Link="SnapshotSample.cs" />
 	</ItemGroup>
-
-  <ItemGroup>	  	  
+  
   <ItemGroup>	  
 	  <ProjectReference Include="..\..\Mapsui.Geometries\Mapsui.Geometries.csproj" />
 	  <ProjectReference Include="..\..\Mapsui.Nts\Mapsui.Nts.csproj" />
