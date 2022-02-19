@@ -82,7 +82,7 @@ namespace Mapsui.Samples.Common.Maps
                     new Coordinate(9000000, 1000000),
                     new Coordinate(9000000, 9000000),
                     new Coordinate(1000000, 9000000),
-                    new Coordinate(1000000, 1000000) 
+                    new Coordinate(1000000, 1000000)
                 })}
             );
         }
