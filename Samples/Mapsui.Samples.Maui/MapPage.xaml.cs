@@ -115,6 +115,7 @@ namespace Mapsui.Samples.Maui
 
         public async void StartGPS()
         {
+            this.gpsCancelation?.Dispose();
             this.gpsCancelation = new CancellationTokenSource();
 
             await Task.Run(async () => {

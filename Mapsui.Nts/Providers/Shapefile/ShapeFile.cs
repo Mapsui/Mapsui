@@ -290,7 +290,7 @@ namespace Mapsui.Nts.Providers.Shapefile
             {
                 _fsShapeIndex?.Dispose();
                 _fsShapeIndex = new FileStream(_filename.Remove(_filename.Length - 4, 4) + ".shx", FileMode.Open, FileAccess.Read);
-                _brShapeFile?.Dispose();
+                _brShapeIndex?.Dispose();
                 _brShapeIndex = new BinaryReader(_fsShapeIndex, Encoding.Unicode);
                 _fsShapeFile?.Dispose();
                 _fsShapeFile = new FileStream(_filename, FileMode.Open, FileAccess.Read);
