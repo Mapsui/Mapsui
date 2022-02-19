@@ -12,6 +12,7 @@ using Mapsui.Tiling.Extensions;
 
 namespace Mapsui.Tiling.Provider;
 
+/// <summary> The rasterizing tile provider. Tiles the Layer for faster Rasterizing on Zoom and Move. </summary>
 public class RasterizingTileProvider : ITileSource
 {
     private readonly ConcurrentStack<IRenderer> _rasterizingLayers = new();
