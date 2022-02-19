@@ -126,7 +126,7 @@ namespace Mapsui.UI.Forms
         /// <param name="format">Format string</param>
         public string ToString(string format)
         {
-            var formats = format.Split(new [] { '|' }, StringSplitOptions.None);
+            var formats = format.Split(new[] { '|' }, StringSplitOptions.None);
 
             var formatLatitude = formats.Length > 0 && !string.IsNullOrEmpty(formats[0]) ? formats[0] : "P DD° MM.MMM'";
             var formatLongitude = formats.Length > 1 && !string.IsNullOrEmpty(formats[1]) ? formats[1] : "P DDD° MM.MMM'";

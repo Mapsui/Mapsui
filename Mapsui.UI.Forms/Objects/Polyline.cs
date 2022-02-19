@@ -76,7 +76,7 @@ namespace Mapsui.UI.Forms
             OnPropertyChanged(nameof(Positions));
         }
 
-        private readonly object _sync = new ();
+        private readonly object _sync = new();
 
         /// <summary>
         /// Create feature

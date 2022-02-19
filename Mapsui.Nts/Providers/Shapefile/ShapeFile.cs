@@ -793,7 +793,7 @@ namespace Mapsui.Nts.Providers.Shapefile
                                 // So the previous one is done and is added to the list. A new list of linear rings is created for the next polygon.
                                 var p1 = CreatePolygon(linearRings);
                                 if (p1 is not null) polygons.Add(p1);
-                                linearRings = new List<LinearRing>{ rings[i] };
+                                linearRings = new List<LinearRing> { rings[i] };
                             }
                             else
                                 linearRings.Add(rings[i]);
