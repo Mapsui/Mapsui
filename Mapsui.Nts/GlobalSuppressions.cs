@@ -6,3 +6,5 @@
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP007:Don't dispose injected", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.InitializeXPathObjects(System.IO.Stream)")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don't ignore created IDisposable", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Nts.Providers.Shapefile.DbaseReader.GetSchemaTable~System.Data.DataTable")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don't ignore created IDisposable", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Providers.Wfs.Utilities.GeometryFactory.CreateReader(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)")]
