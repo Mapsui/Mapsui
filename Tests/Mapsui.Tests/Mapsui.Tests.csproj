@@ -4,8 +4,7 @@
 		<TargetFramework>netcoreapp3.1</TargetFramework>
 		<OutputType>Library</OutputType>
 		<RestorePackages>true</RestorePackages>
-		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-		<UseWPF>true</UseWPF>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>		
 	</PropertyGroup>
 
 	<ItemGroup>
