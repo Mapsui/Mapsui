@@ -16,9 +16,9 @@ namespace Mapsui.Tests.Layers
             // arrange
             using var writableLayer = new WritableLayer();
             writableLayer.Add(new GeometryFeature());
-            writableLayer.Add(new GeometryFeature((Point)null));
-            writableLayer.Add(new GeometryFeature((LineString)null));
-            writableLayer.Add(new GeometryFeature((Polygon)null));
+            writableLayer.Add(new GeometryFeature((Point?)null));
+            writableLayer.Add(new GeometryFeature((LineString?)null));
+            writableLayer.Add(new GeometryFeature((Polygon?)null));
             // act
             var extent = writableLayer.Extent;
 
