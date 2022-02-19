@@ -16,6 +16,11 @@ namespace Mapsui.Projections
         private readonly IDictionary<string, Func<double, double, (double, double)>> _fromLonLat =
             new Dictionary<string, Func<double, double, (double, double)>>();
 
+        static Projection()
+        {
+            DefaultProjectionFactory.Create = () => new Projection();
+        }
+
         public Projection()
         {
             _toLonLat["EPSG:4326"] = (x, y) => (x, y);
