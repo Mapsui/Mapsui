@@ -76,7 +76,7 @@ namespace Mapsui.UI.Android
             _canvas?.Dispose();
             _canvas = RenderMode == SkiaRenderMode.Software ? StartSoftwareRenderMode() : StartHardwareRenderMode();
             _mainLooperHandler?.Dispose();
-            _mainLooperHandler = new Handler(Looper.MainLooper);
+            _mainLooperHandler = new Handler(Looper.MainLooper!);
 
             SetViewportSize(); // todo: check if size is available, perhaps we need a load event
 

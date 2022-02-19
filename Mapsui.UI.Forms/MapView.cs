@@ -99,12 +99,14 @@ namespace Mapsui.UI.Forms
             // Add some events to _mapControl.Map.Layers
             Map!.Layers.Changed += HandleLayersChanged;
 
+#pragma warning disable IDISP004 // Don't ignore created IDisposable
             _pictMyLocationNoCenter = EmbeddedResourceLoader.Load("Images.LocationNoCenter.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.LocationNoCenter.svg");
-            _pictMyLocationCenter = EmbeddedResourceLoader.Load("Images.LocationCenter.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.LocationCenter.svg"); ;
+            _pictMyLocationCenter = EmbeddedResourceLoader.Load("Images.LocationCenter.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.LocationCenter.svg");
 
-            _pictZoomIn = EmbeddedResourceLoader.Load("Images.ZoomIn.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.ZoomIn.svg"); ;
-            _pictZoomOut = EmbeddedResourceLoader.Load("Images.ZoomOut.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.ZoomOut.svg"); ;
-            _pictNorthing = EmbeddedResourceLoader.Load("Images.RotationZero.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.RotationZero.svg"); ;
+            _pictZoomIn = EmbeddedResourceLoader.Load("Images.ZoomIn.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.ZoomIn.svg");
+            _pictZoomOut = EmbeddedResourceLoader.Load("Images.ZoomOut.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.ZoomOut.svg");
+            _pictNorthing = EmbeddedResourceLoader.Load("Images.RotationZero.svg", typeof(MapView)).LoadSvgPicture() ?? throw new MissingManifestResourceException("Images.RotationZero.svg");
+#pragma warning restore IDISP001
             CreateButtons();
 
             _pins.CollectionChanged += HandlerPinsOnCollectionChanged;
