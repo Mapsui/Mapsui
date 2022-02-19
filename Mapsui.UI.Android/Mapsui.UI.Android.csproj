@@ -1,93 +1,25 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A9ED0AA7-B6F0-4946-8A08-7C531E5CFA9B}</ProjectGuid>
-    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Mapsui.UI.Android</RootNamespace>
-    <AssemblyName>Mapsui.UI.Android</AssemblyName>
-    <FileAlignment>512</FileAlignment>
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
-    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-    <TargetFrameworkVersion>v8.1</TargetFrameworkVersion>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <TargetFramework>net60-android30.0</TargetFramework>
+    <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>portable</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;__ANDROID__</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>portable</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE;__ANDROID__</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="Java.Interop" />
-    <Reference Include="Mono.Android" />
-    <Reference Include="mscorlib" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Xml" />
+  <ItemGroup>    
+    <ProjectReference Include="..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
+    <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\PointExtensions.cs" />
-    <Compile Include="Extensions\PointFExtensions.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Resources\Resource.Designer.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MapControl.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\AboutResources.txt" />
-    <AndroidResource Include="Resources\Values\attrs.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\Values\Strings.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj">
-      <Project>{DEA6E9AE-2B6A-4E83-83B7-E9DF0E492301}</Project>
-      <Name>Mapsui.Rendering.Skia</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Mapsui\Mapsui.csproj">
-      <Project>{D74C052A-C07E-4B37-A898-134218ACA5C9}</Project>
-      <Name>Mapsui</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="SkiaSharp.Views">
-      <Version>2.80.3</Version>
-    </PackageReference>
-    <PackageReference Include="System.Memory">
-      <Version>4.5.4</Version>
-    </PackageReference>
+    <PackageReference Include="SkiaSharp.Views" Version="2.88.0-preview.209"/>
   </ItemGroup>
   <Import Project="..\Mapsui.UI.Shared\Mapsui.UI.Shared.projitems" Label="Shared" />
-  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
