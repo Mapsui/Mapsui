@@ -28,7 +28,6 @@ namespace Mapsui.UI
 #pragma warning restore CS4014 // Missing await #pragma directive
                     await Task.Delay(period);
                 }
-
             }, Tuple.Create(callback, state), CancellationToken.None,
                 TaskContinuationOptions.ExecuteSynchronously | TaskContinuationOptions.OnlyOnRanToCompletion,
                 TaskScheduler.Default);

@@ -56,7 +56,7 @@ namespace Mapsui.Samples.Common.Desktop
 
                 var style = new VectorStyle();
 
-                switch (f["NAME"]?.ToString().ToLower())
+                switch (f["NAME"]?.ToString()?.ToLower())
                 {
                     case "brazil": //If country name is Denmark, fill it with green
                         style.Fill = new Brush(Color.Green);

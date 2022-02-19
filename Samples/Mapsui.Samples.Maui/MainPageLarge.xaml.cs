@@ -16,7 +16,7 @@ using Microsoft.Maui.Essentials;
 
 namespace Mapsui.Samples.Maui
 {
-    public partial class MainPageLarge : ContentPage
+    public partial class MainPageLarge : ContentPage, IDisposable
     {
         IEnumerable<ISample> allSamples;
         Func<object?, EventArgs, bool>? clicker;
@@ -181,8 +181,7 @@ namespace Mapsui.Samples.Maui
 
         /// <summary>
         /// New informations from Geolocator arrived
-        /// </summary>
-        /// <param name="sender">Geolocator</param>
+        /// </summary>        
         /// <param name="e">Event arguments for new position</param>
         private void MyLocationPositionChanged(Location e)
         {
@@ -200,5 +199,9 @@ namespace Mapsui.Samples.Maui
             });
         }
 
+        public void Dispose()
+        {
+            ((IDisposable)gpsCancelation).Dispose();
+        }
     }
 }

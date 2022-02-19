@@ -6,7 +6,7 @@ namespace Mapsui.Samples.WinUI
 {
     public partial class App : Application
     {
-        private Window mainWindow;
+        private Window? mainWindow;
 
         public App()
         {
