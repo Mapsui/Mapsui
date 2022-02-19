@@ -22,6 +22,7 @@ dotnet build /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Forms/M
 REM dotnet build /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Avalonia/Mapsui.UI.Avalonia.csproj
 REM dotnet build /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Uno/Mapsui.UI.Uno.csproj
 REM dotnet build /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.WinUI/Mapsui.UI.WinUI.csproj
+REM dotnet build /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.MAUI/Mapsui.UI.MAUI.csproj
 
 
 nuget pack NuSpec\Mapsui.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1
@@ -34,4 +35,5 @@ REM nuget pack NuSpec\Mapsui.Android.nuspec -Version %VERSION% -outputdirectory 
 REM nuget pack NuSpec\Mapsui.Uno.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1
 REM nuget pack NuSpec\Mapsui.Uwp.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1
 REM nuget pack NuSpec\Mapsui.WinUI.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1
+REM nuget pack NuSpec\Mapsui.MAUI.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1
 nuget pack NuSpec\Mapsui.ArcGIS.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1

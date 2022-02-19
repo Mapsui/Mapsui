@@ -114,7 +114,7 @@ TickLength: Length of the ticks at scalebar</p>
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Mapsui.Widgets.IWidget.html">IWidget</a></div>
-    <div><span class="xref">System.ComponentModel.INotifyPropertyChanged</span></div>
+    <div><span class="xref">INotifyPropertyChanged</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -141,27 +141,6 @@ TickLength: Length of the ticks at scalebar</p>
     </div>
     <div>
       <a class="xref" href="Mapsui.Widgets.Widget.html#Mapsui_Widgets_Widget_CalculatePositionY_System_Single_System_Single_System_Single_">Widget.CalculatePositionY(Single, Single, Single)</a>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.Widgets.ScaleBar.html">Mapsui.Widgets.ScaleBar</a></h6>
@@ -723,7 +702,7 @@ want only integers as text.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public (float scaleBarLength1, string scaleBarText1, float scaleBarLength2, string scaleBarText2) GetScaleBarLengthAndText(IReadOnlyViewport viewport)</code></pre>
+    <pre><code class="lang-csharp hljs">public (float scaleBarLength1, string? scaleBarText1, float scaleBarLength2, string? scaleBarText2) GetScaleBarLengthAndText(IReadOnlyViewport viewport)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -752,7 +731,7 @@ want only integers as text.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.ValueTuple</span>&lt;<span class="xref">System.Single</span>, <span class="xref">System.String</span>, <span class="xref">System.Single</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">System.ValueTuple</span>&lt;<span class="xref">System.Single</span>, <span class="xref">System.Nullable</span>&lt;<span class="xref">System.String</span>&gt;, <span class="xref">System.Single</span>, <span class="xref">System.Nullable</span>&lt;<span class="xref">System.String</span>&gt;&gt;</td>
         <td><p>Length of upper scalebar
 Text of upper scalebar
 Length of lower scalebar
@@ -823,7 +802,7 @@ Text of lower scalebar</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IReadOnlyList</span>&lt;<a class="xref" href="Mapsui.MPoint.html">MPoint</a>&gt;</td>
+        <td><span class="xref">IReadOnlyList</span>&lt;<a class="xref" href="Mapsui.MPoint.html">MPoint</a>&gt;</td>
         <td><p>Array with pairs of Points. First is always the start point, the second is the end point.</p>
 </td>
       </tr>
@@ -974,7 +953,7 @@ posY2 as top position of lower scalebar text</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public event PropertyChangedEventHandler PropertyChanged</code></pre>
+    <pre><code class="lang-csharp hljs">public event PropertyChangedEventHandler? PropertyChanged</code></pre>
   </div>
   <h5 class="eventType">Event Type</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -986,7 +965,7 @@ posY2 as top position of lower scalebar text</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.ComponentModel.PropertyChangedEventHandler</span></td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">PropertyChangedEventHandler</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -996,7 +975,7 @@ posY2 as top position of lower scalebar text</p>
       <a class="xref" href="Mapsui.Widgets.IWidget.html">IWidget</a>
   </div>
   <div>
-      <span class="xref">System.ComponentModel.INotifyPropertyChanged</span>
+      <span class="xref">INotifyPropertyChanged</span>
   </div>
 </article>
           </div>

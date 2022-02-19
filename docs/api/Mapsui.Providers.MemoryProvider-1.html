@@ -94,35 +94,11 @@
     <h5>Implements</h5>
     <div><a class="xref" href="Mapsui.Providers.IProvider-1.html">IProvider</a>&lt;T&gt;</div>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.Providers.html">Mapsui.Providers</a></h6>
   <h6><strong>Assembly</strong>: Mapsui.dll</h6>
   <h5 id="Mapsui_Providers_MemoryProvider_1_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class MemoryProvider&lt;T&gt; : IProvider&lt;T&gt; where T : IFeature</code></pre>
+    <pre><code class="lang-csharp hljs">public class MemoryProvider&lt;T&gt; : object, IProvider&lt;T&gt; where T : IFeature</code></pre>
   </div>
   <h5 class="typeParameters">Type Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -192,13 +168,13 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_MemoryProvider_1__ctor_System_Collections_Generic_IEnumerable__0__.md&amp;value=---%0Auid%3A%20Mapsui.Providers.MemoryProvider%601.%23ctor(System.Collections.Generic.IEnumerable%7B%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_MemoryProvider_1__ctor_IEnumerable__0__.md&amp;value=---%0Auid%3A%20Mapsui.Providers.MemoryProvider%601.%23ctor(IEnumerable%7B%600%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/MemoryProvider.cs/#L45">View Source</a>
   </span>
   <a id="Mapsui_Providers_MemoryProvider_1__ctor_" data-uid="Mapsui.Providers.MemoryProvider`1.#ctor*"></a>
-  <h4 id="Mapsui_Providers_MemoryProvider_1__ctor_System_Collections_Generic_IEnumerable__0__" data-uid="Mapsui.Providers.MemoryProvider`1.#ctor(System.Collections.Generic.IEnumerable{`0})">MemoryProvider(IEnumerable&lt;T&gt;)</h4>
+  <h4 id="Mapsui_Providers_MemoryProvider_1__ctor_IEnumerable__0__" data-uid="Mapsui.Providers.MemoryProvider`1.#ctor(IEnumerable{`0})">MemoryProvider(IEnumerable&lt;T&gt;)</h4>
   <div class="markdown level1 summary"><p>Initializes a new instance of the MemoryProvider</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -217,7 +193,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;T&gt;</td>
+        <td><span class="xref">IEnumerable</span>&lt;T&gt;</td>
         <td><span class="parametername">features</span></td>
         <td><p>Features to be included in this dataSource</p>
 </td>
@@ -240,7 +216,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string CRS { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string? CRS { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -252,7 +228,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.String</span></td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -283,7 +259,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IReadOnlyList</span>&lt;T&gt;</td>
+        <td><span class="xref">IReadOnlyList</span>&lt;T&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -337,19 +313,19 @@
   </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_MemoryProvider_1_Find_System_Object_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.MemoryProvider%601.Find(System.Object%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_MemoryProvider_1_Find_System_Nullable_System_Object__System_String_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.MemoryProvider%601.Find(System.Nullable%7BSystem.Object%7D%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/MemoryProvider.cs/#L72">View Source</a>
   </span>
   <a id="Mapsui_Providers_MemoryProvider_1_Find_" data-uid="Mapsui.Providers.MemoryProvider`1.Find*"></a>
-  <h4 id="Mapsui_Providers_MemoryProvider_1_Find_System_Object_System_String_" data-uid="Mapsui.Providers.MemoryProvider`1.Find(System.Object,System.String)">Find(Object, String)</h4>
+  <h4 id="Mapsui_Providers_MemoryProvider_1_Find_System_Nullable_System_Object__System_String_" data-uid="Mapsui.Providers.MemoryProvider`1.Find(System.Nullable{System.Object},System.String)">Find(Nullable&lt;Object&gt;, String)</h4>
   <div class="markdown level1 summary"><p>Search for a feature</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public T Find(object value, string fieldName)</code></pre>
+    <pre><code class="lang-csharp hljs">public T Find(object? value, string fieldName)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -362,7 +338,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Object</span></td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.Object</span>&gt;</td>
         <td><span class="parametername">value</span></td>
         <td><p>Value to search for</p>
 </td>
@@ -464,7 +440,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;T&gt;</td>
+        <td><span class="xref">IEnumerable</span>&lt;T&gt;</td>
         <td></td>
       </tr>
     </tbody>
