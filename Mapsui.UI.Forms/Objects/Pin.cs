@@ -504,14 +504,17 @@ namespace Mapsui.UI.Forms
                         }
 
                         // Load the SVG document
-                        var stream = Utilities.EmbeddedResourceLoader.Load("Images.Pin.svg", typeof(Pin));
-                        if (stream == null)
-                            return;
+                        Svg.Skia.SKSvg svg;
+                        using (var stream = Utilities.EmbeddedResourceLoader.Load("Images.Pin.svg", typeof(Pin)))
+                        {
+                            if (stream == null)
+                                return;
 
-                        // Create a new SVG object
-                        var svg = stream.LoadSvg();
-                        if (svg.Picture == null)
-                            return;
+                            // Create a new SVG object
+                            svg = stream.LoadSvg();
+                            if (svg.Picture == null)
+                                return;
+                        }
 
                         Width = svg.Picture.CullRect.Width * Scale;
                         Height = svg.Picture.CullRect.Height * Scale;
