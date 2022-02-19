@@ -14,7 +14,7 @@ using Compass = Microsoft.Maui.Essentials.Compass;
 
 namespace Mapsui.Samples.Maui
 {
-    public partial class MapPage : ContentPage
+    public partial class MapPage : ContentPage, IDisposable
     {
         private CancellationTokenSource? gpsCancelation;
         public Func<MapView?, MapClickedEventArgs, bool>? Clicker { get; set; }
@@ -150,8 +150,7 @@ namespace Mapsui.Samples.Maui
 
         /// <summary>
         /// New informations from Geolocator arrived
-        /// </summary>
-        /// <param name="sender">Geolocator</param>
+        /// </summary>        
         /// <param name="e">Event arguments for new position</param>
         private void MyLocationPositionChanged(Location e)
         {
@@ -172,6 +171,11 @@ namespace Mapsui.Samples.Maui
         private void Compass_ReadingChanged(object? sender, CompassChangedEventArgs e)
         {
             mapView.MyLocationLayer.UpdateMyViewDirection(e.Reading.HeadingMagneticNorth, mapView.Viewport.Rotation, false);
+        }
+
+        public void Dispose()
+        {
+            ((IDisposable)gpsCancelation).Dispose();
         }
     }
 }

@@ -17,7 +17,6 @@ namespace Mapsui.Samples.Maui
         {
         }
 
-        [SupportedOSPlatform("android21.0")]
         protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
     }
 }
