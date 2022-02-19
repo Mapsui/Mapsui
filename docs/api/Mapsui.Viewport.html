@@ -97,35 +97,11 @@
     <div><a class="xref" href="Mapsui.IReadOnlyViewport.html">IReadOnlyViewport</a></div>
     <div><a class="xref" href="Mapsui.Animations.IAnimatable.html">IAnimatable</a></div>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.html">Mapsui</a></h6>
   <h6><strong>Assembly</strong>: Mapsui.dll</h6>
   <h5 id="Mapsui_Viewport_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class Viewport : IViewport, IReadOnlyViewport, IAnimatable</code></pre>
+    <pre><code class="lang-csharp hljs">public class Viewport : object, IViewport, IReadOnlyViewport, IAnimatable</code></pre>
   </div>
   <h5 id="Mapsui_Viewport_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>Viewport is the connection between Map and MapControl. It tells MapControl,
@@ -138,7 +114,7 @@ which part of Map should be displayed on screen.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport__ctor.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L55">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L44">View Source</a>
   </span>
   <a id="Mapsui_Viewport__ctor_" data-uid="Mapsui.Viewport.#ctor*"></a>
   <h4 id="Mapsui_Viewport__ctor" data-uid="Mapsui.Viewport.#ctor">Viewport()</h4>
@@ -154,7 +130,7 @@ which part of Map should be displayed on screen.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport__ctor_Mapsui_IReadOnlyViewport_.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.%23ctor(Mapsui.IReadOnlyViewport)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L64">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L53">View Source</a>
   </span>
   <a id="Mapsui_Viewport__ctor_" data-uid="Mapsui.Viewport.#ctor*"></a>
   <h4 id="Mapsui_Viewport__ctor_Mapsui_IReadOnlyViewport_" data-uid="Mapsui.Viewport.#ctor(Mapsui.IReadOnlyViewport)">Viewport(IReadOnlyViewport)</h4>
@@ -190,7 +166,7 @@ which part of Map should be displayed on screen.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport_Center.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.Center%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L82">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L71">View Source</a>
   </span>
   <a id="Mapsui_Viewport_Center_" data-uid="Mapsui.Viewport.Center*"></a>
   <h4 id="Mapsui_Viewport_Center" data-uid="Mapsui.Viewport.Center">Center</h4>
@@ -221,7 +197,7 @@ which part of Map should be displayed on screen.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport_CenterX.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.CenterX%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L85">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L74">View Source</a>
   </span>
   <a id="Mapsui_Viewport_CenterX_" data-uid="Mapsui.Viewport.CenterX*"></a>
   <h4 id="Mapsui_Viewport_CenterX" data-uid="Mapsui.Viewport.CenterX">CenterX</h4>
@@ -251,7 +227,7 @@ which part of Map should be displayed on screen.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport_CenterY.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.CenterY%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L97">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L86">View Source</a>
   </span>
   <a id="Mapsui_Viewport_CenterY_" data-uid="Mapsui.Viewport.CenterY*"></a>
   <h4 id="Mapsui_Viewport_CenterY" data-uid="Mapsui.Viewport.CenterY">CenterY</h4>
@@ -281,7 +257,7 @@ which part of Map should be displayed on screen.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport_Extent.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.Extent%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L167">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L156">View Source</a>
   </span>
   <a id="Mapsui_Viewport_Extent_" data-uid="Mapsui.Viewport.Extent*"></a>
   <h4 id="Mapsui_Viewport_Extent" data-uid="Mapsui.Viewport.Extent">Extent</h4>
@@ -316,7 +292,7 @@ is rotated. So this MRect perhaps contain parts, that are not visible.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport_HasSize.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.HasSize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L79">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L68">View Source</a>
   </span>
   <a id="Mapsui_Viewport_HasSize_" data-uid="Mapsui.Viewport.HasSize*"></a>
   <h4 id="Mapsui_Viewport_HasSize" data-uid="Mapsui.Viewport.HasSize">HasSize</h4>
@@ -346,7 +322,7 @@ is rotated. So this MRect perhaps contain parts, that are not visible.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport_Height.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.Height%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L134">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L123">View Source</a>
   </span>
   <a id="Mapsui_Viewport_Height_" data-uid="Mapsui.Viewport.Height*"></a>
   <h4 id="Mapsui_Viewport_Height" data-uid="Mapsui.Viewport.Height">Height</h4>
@@ -377,7 +353,7 @@ is rotated. So this MRect perhaps contain parts, that are not visible.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport_IsRotated.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.IsRotated%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L164">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L153">View Source</a>
   </span>
   <a id="Mapsui_Viewport_IsRotated_" data-uid="Mapsui.Viewport.IsRotated*"></a>
   <h4 id="Mapsui_Viewport_IsRotated" data-uid="Mapsui.Viewport.IsRotated">IsRotated</h4>
@@ -408,7 +384,7 @@ is rotated. So this MRect perhaps contain parts, that are not visible.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport_Resolution.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.Resolution%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L110">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L99">View Source</a>
   </span>
   <a id="Mapsui_Viewport_Resolution_" data-uid="Mapsui.Viewport.Resolution*"></a>
   <h4 id="Mapsui_Viewport_Resolution" data-uid="Mapsui.Viewport.Resolution">Resolution</h4>
@@ -445,7 +421,7 @@ and you want to calculate the zoom, you should use the following equation</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport_Rotation.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.Rotation%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L146">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L135">View Source</a>
   </span>
   <a id="Mapsui_Viewport_Rotation_" data-uid="Mapsui.Viewport.Rotation*"></a>
   <h4 id="Mapsui_Viewport_Rotation" data-uid="Mapsui.Viewport.Rotation">Rotation</h4>
@@ -476,7 +452,7 @@ and you want to calculate the zoom, you should use the following equation</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport_Width.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.Width%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L122">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L111">View Source</a>
   </span>
   <a id="Mapsui_Viewport_Width_" data-uid="Mapsui.Viewport.Width*"></a>
   <h4 id="Mapsui_Viewport_Width" data-uid="Mapsui.Viewport.Width">Width</h4>
@@ -509,7 +485,7 @@ and you want to calculate the zoom, you should use the following equation</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport_Create_Mapsui_MRect_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.Create(Mapsui.MRect%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L440">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L429">View Source</a>
   </span>
   <a id="Mapsui_Viewport_Create_" data-uid="Mapsui.Viewport.Create*"></a>
   <h4 id="Mapsui_Viewport_Create_Mapsui_MRect_System_Double_" data-uid="Mapsui.Viewport.Create(Mapsui.MRect,System.Double)">Create(MRect, Double)</h4>
@@ -561,7 +537,7 @@ and you want to calculate the zoom, you should use the following equation</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport_Rotate_System_Double_System_Double_System_Double_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.Rotate(System.Double%2CSystem.Double%2CSystem.Double%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L210">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L199">View Source</a>
   </span>
   <a id="Mapsui_Viewport_Rotate_" data-uid="Mapsui.Viewport.Rotate*"></a>
   <h4 id="Mapsui_Viewport_Rotate_System_Double_System_Double_System_Double_System_Double_System_Double_" data-uid="Mapsui.Viewport.Rotate(System.Double,System.Double,System.Double,System.Double,System.Double)">Rotate(Double, Double, Double, Double, Double)</h4>
@@ -628,7 +604,7 @@ and you want to calculate the zoom, you should use the following equation</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport_ScreenToWorld_Mapsui_MPoint_.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.ScreenToWorld(Mapsui.MPoint)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L176">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L165">View Source</a>
   </span>
   <a id="Mapsui_Viewport_ScreenToWorld_" data-uid="Mapsui.Viewport.ScreenToWorld*"></a>
   <h4 id="Mapsui_Viewport_ScreenToWorld_Mapsui_MPoint_" data-uid="Mapsui.Viewport.ScreenToWorld(Mapsui.MPoint)">ScreenToWorld(MPoint)</h4>
@@ -678,7 +654,7 @@ and you want to calculate the zoom, you should use the following equation</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport_ScreenToWorld_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.ScreenToWorld(System.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L182">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L171">View Source</a>
   </span>
   <a id="Mapsui_Viewport_ScreenToWorld_" data-uid="Mapsui.Viewport.ScreenToWorld*"></a>
   <h4 id="Mapsui_Viewport_ScreenToWorld_System_Double_System_Double_" data-uid="Mapsui.Viewport.ScreenToWorld(System.Double,System.Double)">ScreenToWorld(Double, Double)</h4>
@@ -732,7 +708,7 @@ and you want to calculate the zoom, you should use the following equation</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport_ScreenToWorldXY_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.ScreenToWorldXY(System.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L237">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L226">View Source</a>
   </span>
   <a id="Mapsui_Viewport_ScreenToWorldXY_" data-uid="Mapsui.Viewport.ScreenToWorldXY*"></a>
   <h4 id="Mapsui_Viewport_ScreenToWorldXY_System_Double_System_Double_" data-uid="Mapsui.Viewport.ScreenToWorldXY(System.Double,System.Double)">ScreenToWorldXY(Double, Double)</h4>
@@ -783,13 +759,13 @@ and you want to calculate the zoom, you should use the following equation</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport_SetAnimations_System_Collections_Generic_List_Mapsui_Utilities_AnimationEntry_Mapsui_Viewport___.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.SetAnimations(System.Collections.Generic.List%7BMapsui.Utilities.AnimationEntry%7BMapsui.Viewport%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport_SetAnimations_List_Mapsui_Utilities_AnimationEntry_Mapsui_Viewport___.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.SetAnimations(List%7BMapsui.Utilities.AnimationEntry%7BMapsui.Viewport%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L458">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L447">View Source</a>
   </span>
   <a id="Mapsui_Viewport_SetAnimations_" data-uid="Mapsui.Viewport.SetAnimations*"></a>
-  <h4 id="Mapsui_Viewport_SetAnimations_System_Collections_Generic_List_Mapsui_Utilities_AnimationEntry_Mapsui_Viewport___" data-uid="Mapsui.Viewport.SetAnimations(System.Collections.Generic.List{Mapsui.Utilities.AnimationEntry{Mapsui.Viewport}})">SetAnimations(List&lt;AnimationEntry&lt;Viewport&gt;&gt;)</h4>
+  <h4 id="Mapsui_Viewport_SetAnimations_List_Mapsui_Utilities_AnimationEntry_Mapsui_Viewport___" data-uid="Mapsui.Viewport.SetAnimations(List{Mapsui.Utilities.AnimationEntry{Mapsui.Viewport}})">SetAnimations(List&lt;AnimationEntry&lt;Viewport&gt;&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -807,7 +783,7 @@ and you want to calculate the zoom, you should use the following equation</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="Mapsui.Utilities.AnimationEntry-1.html">AnimationEntry</a>&lt;<a class="xref" href="Mapsui.Viewport.html">Viewport</a>&gt;&gt;</td>
+        <td><span class="xref">List</span>&lt;<a class="xref" href="Mapsui.Utilities.AnimationEntry-1.html">AnimationEntry</a>&lt;<a class="xref" href="Mapsui.Viewport.html">Viewport</a>&gt;&gt;</td>
         <td><span class="parametername">animations</span></td>
         <td></td>
       </tr>
@@ -818,7 +794,7 @@ and you want to calculate the zoom, you should use the following equation</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport_SetCenter_Mapsui_MReadOnlyPoint_System_Int64_Mapsui_Utilities_Easing_.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.SetCenter(Mapsui.MReadOnlyPoint%2CSystem.Int64%2CMapsui.Utilities.Easing)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L375">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L364">View Source</a>
   </span>
   <a id="Mapsui_Viewport_SetCenter_" data-uid="Mapsui.Viewport.SetCenter*"></a>
   <h4 id="Mapsui_Viewport_SetCenter_Mapsui_MReadOnlyPoint_System_Int64_Mapsui_Utilities_Easing_" data-uid="Mapsui.Viewport.SetCenter(Mapsui.MReadOnlyPoint,System.Int64,Mapsui.Utilities.Easing)">SetCenter(MReadOnlyPoint, Int64, Easing)</h4>
@@ -826,7 +802,7 @@ and you want to calculate the zoom, you should use the following equation</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void SetCenter(MReadOnlyPoint center, long duration = 0L, Easing easing = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public void SetCenter(MReadOnlyPoint center, long duration = null, Easing easing = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -860,7 +836,7 @@ and you want to calculate the zoom, you should use the following equation</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport_SetCenter_System_Double_System_Double_System_Int64_Mapsui_Utilities_Easing_.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.SetCenter(System.Double%2CSystem.Double%2CSystem.Int64%2CMapsui.Utilities.Easing)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L345">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L334">View Source</a>
   </span>
   <a id="Mapsui_Viewport_SetCenter_" data-uid="Mapsui.Viewport.SetCenter*"></a>
   <h4 id="Mapsui_Viewport_SetCenter_System_Double_System_Double_System_Int64_Mapsui_Utilities_Easing_" data-uid="Mapsui.Viewport.SetCenter(System.Double,System.Double,System.Int64,Mapsui.Utilities.Easing)">SetCenter(Double, Double, Int64, Easing)</h4>
@@ -868,7 +844,7 @@ and you want to calculate the zoom, you should use the following equation</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void SetCenter(double x, double y, long duration = 0L, Easing easing = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public void SetCenter(double x, double y, long duration = null, Easing easing = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -907,7 +883,7 @@ and you want to calculate the zoom, you should use the following equation</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport_SetCenterAndResolution_System_Double_System_Double_System_Double_System_Int64_Mapsui_Utilities_Easing_.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.SetCenterAndResolution(System.Double%2CSystem.Double%2CSystem.Double%2CSystem.Int64%2CMapsui.Utilities.Easing)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L356">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L345">View Source</a>
   </span>
   <a id="Mapsui_Viewport_SetCenterAndResolution_" data-uid="Mapsui.Viewport.SetCenterAndResolution*"></a>
   <h4 id="Mapsui_Viewport_SetCenterAndResolution_System_Double_System_Double_System_Double_System_Int64_Mapsui_Utilities_Easing_" data-uid="Mapsui.Viewport.SetCenterAndResolution(System.Double,System.Double,System.Double,System.Int64,Mapsui.Utilities.Easing)">SetCenterAndResolution(Double, Double, Double, Int64, Easing)</h4>
@@ -915,7 +891,7 @@ and you want to calculate the zoom, you should use the following equation</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void SetCenterAndResolution(double x, double y, double resolution, long duration = 0L, Easing easing = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public void SetCenterAndResolution(double x, double y, double resolution, long duration = null, Easing easing = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -959,7 +935,7 @@ and you want to calculate the zoom, you should use the following equation</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport_SetResolution_System_Double_System_Int64_Mapsui_Utilities_Easing_.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.SetResolution(System.Double%2CSystem.Int64%2CMapsui.Utilities.Easing)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L396">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L385">View Source</a>
   </span>
   <a id="Mapsui_Viewport_SetResolution_" data-uid="Mapsui.Viewport.SetResolution*"></a>
   <h4 id="Mapsui_Viewport_SetResolution_System_Double_System_Int64_Mapsui_Utilities_Easing_" data-uid="Mapsui.Viewport.SetResolution(System.Double,System.Int64,Mapsui.Utilities.Easing)">SetResolution(Double, Int64, Easing)</h4>
@@ -967,7 +943,7 @@ and you want to calculate the zoom, you should use the following equation</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void SetResolution(double resolution, long duration = 0L, Easing easing = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public void SetResolution(double resolution, long duration = null, Easing easing = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1001,7 +977,7 @@ and you want to calculate the zoom, you should use the following equation</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport_SetRotation_System_Double_System_Int64_Mapsui_Utilities_Easing_.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.SetRotation(System.Double%2CSystem.Int64%2CMapsui.Utilities.Easing)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L414">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L403">View Source</a>
   </span>
   <a id="Mapsui_Viewport_SetRotation_" data-uid="Mapsui.Viewport.SetRotation*"></a>
   <h4 id="Mapsui_Viewport_SetRotation_System_Double_System_Int64_Mapsui_Utilities_Easing_" data-uid="Mapsui.Viewport.SetRotation(System.Double,System.Int64,Mapsui.Utilities.Easing)">SetRotation(Double, Int64, Easing)</h4>
@@ -1009,7 +985,7 @@ and you want to calculate the zoom, you should use the following equation</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void SetRotation(double rotation, long duration = 0L, Easing easing = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public void SetRotation(double rotation, long duration = null, Easing easing = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1043,7 +1019,7 @@ and you want to calculate the zoom, you should use the following equation</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport_SetSize_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.SetSize(System.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L334">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L323">View Source</a>
   </span>
   <a id="Mapsui_Viewport_SetSize_" data-uid="Mapsui.Viewport.SetSize*"></a>
   <h4 id="Mapsui_Viewport_SetSize_System_Double_System_Double_" data-uid="Mapsui.Viewport.SetSize(System.Double,System.Double)">SetSize(Double, Double)</h4>
@@ -1080,7 +1056,7 @@ and you want to calculate the zoom, you should use the following equation</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport_Transform_Mapsui_MPoint_Mapsui_MPoint_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.Transform(Mapsui.MPoint%2CMapsui.MPoint%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L255">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L244">View Source</a>
   </span>
   <a id="Mapsui_Viewport_Transform_" data-uid="Mapsui.Viewport.Transform*"></a>
   <h4 id="Mapsui_Viewport_Transform_Mapsui_MPoint_Mapsui_MPoint_System_Double_System_Double_" data-uid="Mapsui.Viewport.Transform(Mapsui.MPoint,Mapsui.MPoint,System.Double,System.Double)">Transform(MPoint, MPoint, Double, Double)</h4>
@@ -1089,7 +1065,7 @@ and you want to calculate the zoom, you should use the following equation</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Transform(MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution = 1, double deltaRotation = 0)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Transform(MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution = null, double deltaRotation = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1130,7 +1106,7 @@ and you want to calculate the zoom, you should use the following equation</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport_UpdateAnimations.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.UpdateAnimations%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L452">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L441">View Source</a>
   </span>
   <a id="Mapsui_Viewport_UpdateAnimations_" data-uid="Mapsui.Viewport.UpdateAnimations*"></a>
   <h4 id="Mapsui_Viewport_UpdateAnimations" data-uid="Mapsui.Viewport.UpdateAnimations">UpdateAnimations()</h4>
@@ -1160,7 +1136,7 @@ and you want to calculate the zoom, you should use the following equation</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport_WorldToScreen_Mapsui_MPoint_.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.WorldToScreen(Mapsui.MPoint)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L170">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L159">View Source</a>
   </span>
   <a id="Mapsui_Viewport_WorldToScreen_" data-uid="Mapsui.Viewport.WorldToScreen*"></a>
   <h4 id="Mapsui_Viewport_WorldToScreen_Mapsui_MPoint_" data-uid="Mapsui.Viewport.WorldToScreen(Mapsui.MPoint)">WorldToScreen(MPoint)</h4>
@@ -1211,7 +1187,7 @@ respecting rotation</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport_WorldToScreen_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.WorldToScreen(System.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L189">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L178">View Source</a>
   </span>
   <a id="Mapsui_Viewport_WorldToScreen_" data-uid="Mapsui.Viewport.WorldToScreen*"></a>
   <h4 id="Mapsui_Viewport_WorldToScreen_System_Double_System_Double_" data-uid="Mapsui.Viewport.WorldToScreen(System.Double,System.Double)">WorldToScreen(Double, Double)</h4>
@@ -1268,7 +1244,7 @@ respecting rotation</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport_WorldToScreenUnrotated_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.WorldToScreenUnrotated(System.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L227">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L216">View Source</a>
   </span>
   <a id="Mapsui_Viewport_WorldToScreenUnrotated_" data-uid="Mapsui.Viewport.WorldToScreenUnrotated*"></a>
   <h4 id="Mapsui_Viewport_WorldToScreenUnrotated_System_Double_System_Double_" data-uid="Mapsui.Viewport.WorldToScreenUnrotated(System.Double,System.Double)">WorldToScreenUnrotated(Double, Double)</h4>
@@ -1325,7 +1301,7 @@ respecting rotation</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport_WorldToScreenXY_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.WorldToScreenXY(System.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L196">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L185">View Source</a>
   </span>
   <a id="Mapsui_Viewport_WorldToScreenXY_" data-uid="Mapsui.Viewport.WorldToScreenXY*"></a>
   <h4 id="Mapsui_Viewport_WorldToScreenXY_System_Double_System_Double_" data-uid="Mapsui.Viewport.WorldToScreenXY(System.Double,System.Double)">WorldToScreenXY(Double, Double)</h4>
@@ -1384,14 +1360,14 @@ respecting rotation</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport_ViewportChanged.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.ViewportChanged%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L37">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L26">View Source</a>
   </span>
   <h4 id="Mapsui_Viewport_ViewportChanged" data-uid="Mapsui.Viewport.ViewportChanged">ViewportChanged</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public event PropertyChangedEventHandler ViewportChanged</code></pre>
+    <pre><code class="lang-csharp hljs">public event PropertyChangedEventHandler? ViewportChanged</code></pre>
   </div>
   <h5 class="eventType">Event Type</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1403,7 +1379,7 @@ respecting rotation</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.ComponentModel.PropertyChangedEventHandler</span></td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">PropertyChangedEventHandler</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -1418,10 +1394,6 @@ respecting rotation</p>
   <div>
       <a class="xref" href="Mapsui.Animations.IAnimatable.html">IAnimatable</a>
   </div>
-  <h3 id="extensionmethods">Extension Methods</h3>
-  <div>
-      <a class="xref" href="Mapsui.Rendering.Skia.Extensions.ViewportExtensions.html#Mapsui_Rendering_Skia_Extensions_ViewportExtensions_ToSKMatrix_Mapsui_IViewport_">ViewportExtensions.ToSKMatrix(IViewport)</a>
-  </div>
 </article>
           </div>
           
@@ -1433,7 +1405,7 @@ respecting rotation</p>
                     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport.md&amp;value=---%0Auid%3A%20Mapsui.Viewport%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L35" class="contribution-link">View Source</a>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L24" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

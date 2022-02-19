@@ -96,35 +96,11 @@
     <div><a class="xref" href="Mapsui.Providers.IProjectingProvider.html">IProjectingProvider</a></div>
     <div><a class="xref" href="Mapsui.Providers.IProvider-1.html">IProvider</a>&lt;<a class="xref" href="Mapsui.IFeature.html">IFeature</a>&gt;</div>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.Providers.Wms.html">Mapsui.Providers.Wms</a></h6>
   <h6><strong>Assembly</strong>: Mapsui.dll</h6>
   <h5 id="Mapsui_Providers_Wms_WmsProvider_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class WmsProvider : IProjectingProvider, IProvider&lt;IFeature&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public class WmsProvider : object, IProjectingProvider, IProvider&lt;IFeature&gt;</code></pre>
   </div>
   <h5 id="Mapsui_Providers_Wms_WmsProvider_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>The WmsLayer is currently very basic and doesn&apos;t support automatic fetching of the WMS Service Description.
@@ -136,19 +112,19 @@ See the example below.</p>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_WmsProvider__ctor_System_String_System_String_System_Func_System_String_System_Threading_Tasks_Task_System_IO_Stream___.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.WmsProvider.%23ctor(System.String%2CSystem.String%2CSystem.Func%7BSystem.String%2CSystem.Threading.Tasks.Task%7BSystem.IO.Stream%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_WmsProvider__ctor_System_String_System_Nullable_System_String__System_Nullable_Func_System_String_Task_Stream____.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.WmsProvider.%23ctor(System.String%2CSystem.Nullable%7BSystem.String%7D%2CSystem.Nullable%7BFunc%7BSystem.String%2CTask%7BStream%7D%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L65">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L54">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wms_WmsProvider__ctor_" data-uid="Mapsui.Providers.Wms.WmsProvider.#ctor*"></a>
-  <h4 id="Mapsui_Providers_Wms_WmsProvider__ctor_System_String_System_String_System_Func_System_String_System_Threading_Tasks_Task_System_IO_Stream___" data-uid="Mapsui.Providers.Wms.WmsProvider.#ctor(System.String,System.String,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}})">WmsProvider(String, String, Func&lt;String, Task&lt;Stream&gt;&gt;)</h4>
+  <h4 id="Mapsui_Providers_Wms_WmsProvider__ctor_System_String_System_Nullable_System_String__System_Nullable_Func_System_String_Task_Stream____" data-uid="Mapsui.Providers.Wms.WmsProvider.#ctor(System.String,System.Nullable{System.String},System.Nullable{Func{System.String,Task{Stream}}})">WmsProvider(String, Nullable&lt;String&gt;, Nullable&lt;Func&lt;String, Task&lt;Stream&gt;&gt;&gt;)</h4>
   <div class="markdown level1 summary"><p>Initializes a new layer, and downloads and parses the service description</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public WmsProvider(string url, string wmsVersion = null, Func&lt;string, Task&lt;Stream&gt;&gt; getStreamAsync = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public WmsProvider(string url, string? wmsVersion = null, Func&lt;string, Task&lt;Stream&gt;&gt;? getStreamAsync = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -167,13 +143,13 @@ See the example below.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">System.String</span></td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">wmsVersion</span></td>
         <td><p>Version number of wms leave null to get the default service version</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.IO.Stream</span>&gt;&gt;</td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">Func</span>&lt;<span class="xref">System.String</span>, <span class="xref">Task</span>&lt;<span class="xref">Stream</span>&gt;&gt;&gt;</td>
         <td><span class="parametername">getStreamAsync</span></td>
         <td><p>Download method, leave null for default</p>
 </td>
@@ -182,18 +158,18 @@ See the example below.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_WmsProvider__ctor_System_Xml_XmlDocument_System_Func_System_String_System_Threading_Tasks_Task_System_IO_Stream___.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.WmsProvider.%23ctor(System.Xml.XmlDocument%2CSystem.Func%7BSystem.String%2CSystem.Threading.Tasks.Task%7BSystem.IO.Stream%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_WmsProvider__ctor_XmlDocument_System_Nullable_Func_System_String_Task_Stream____.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.WmsProvider.%23ctor(XmlDocument%2CSystem.Nullable%7BFunc%7BSystem.String%2CTask%7BStream%7D%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L53">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L42">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wms_WmsProvider__ctor_" data-uid="Mapsui.Providers.Wms.WmsProvider.#ctor*"></a>
-  <h4 id="Mapsui_Providers_Wms_WmsProvider__ctor_System_Xml_XmlDocument_System_Func_System_String_System_Threading_Tasks_Task_System_IO_Stream___" data-uid="Mapsui.Providers.Wms.WmsProvider.#ctor(System.Xml.XmlDocument,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}})">WmsProvider(XmlDocument, Func&lt;String, Task&lt;Stream&gt;&gt;)</h4>
+  <h4 id="Mapsui_Providers_Wms_WmsProvider__ctor_XmlDocument_System_Nullable_Func_System_String_Task_Stream____" data-uid="Mapsui.Providers.Wms.WmsProvider.#ctor(XmlDocument,System.Nullable{Func{System.String,Task{Stream}}})">WmsProvider(XmlDocument, Nullable&lt;Func&lt;String, Task&lt;Stream&gt;&gt;&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public WmsProvider(XmlDocument capabilities, Func&lt;string, Task&lt;Stream&gt;&gt; getStreamAsync = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public WmsProvider(XmlDocument capabilities, Func&lt;string, Task&lt;Stream&gt;&gt;? getStreamAsync = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -206,12 +182,12 @@ See the example below.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Xml.XmlDocument</span></td>
+        <td><span class="xref">XmlDocument</span></td>
         <td><span class="parametername">capabilities</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.IO.Stream</span>&gt;&gt;</td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">Func</span>&lt;<span class="xref">System.String</span>, <span class="xref">Task</span>&lt;<span class="xref">Stream</span>&gt;&gt;&gt;</td>
         <td><span class="parametername">getStreamAsync</span></td>
         <td></td>
       </tr>
@@ -224,7 +200,7 @@ See the example below.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_WmsProvider_ContinueOnError.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.WmsProvider.ContinueOnError%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L133">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L122">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wms_WmsProvider_ContinueOnError_" data-uid="Mapsui.Providers.Wms.WmsProvider.ContinueOnError*"></a>
   <h4 id="Mapsui_Providers_Wms_WmsProvider_ContinueOnError" data-uid="Mapsui.Providers.Wms.WmsProvider.ContinueOnError">ContinueOnError</h4>
@@ -255,7 +231,7 @@ See the example below.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_WmsProvider_Credentials.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.WmsProvider.Credentials%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L138">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L127">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wms_WmsProvider_Credentials_" data-uid="Mapsui.Providers.Wms.WmsProvider.Credentials*"></a>
   <h4 id="Mapsui_Providers_Wms_WmsProvider_Credentials" data-uid="Mapsui.Providers.Wms.WmsProvider.Credentials">Credentials</h4>
@@ -264,7 +240,7 @@ See the example below.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ICredentials Credentials { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public ICredentials? Credentials { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -276,7 +252,7 @@ See the example below.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Net.ICredentials</span></td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">ICredentials</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -286,7 +262,7 @@ See the example below.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_WmsProvider_CRS.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.WmsProvider.CRS%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L468">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L457">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wms_WmsProvider_CRS_" data-uid="Mapsui.Providers.Wms.WmsProvider.CRS*"></a>
   <h4 id="Mapsui_Providers_Wms_WmsProvider_CRS" data-uid="Mapsui.Providers.Wms.WmsProvider.CRS">CRS</h4>
@@ -294,7 +270,7 @@ See the example below.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string CRS { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string? CRS { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -306,7 +282,7 @@ See the example below.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.String</span></td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -316,7 +292,7 @@ See the example below.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_WmsProvider_ExtraParams.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.WmsProvider.ExtraParams%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L470">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L459">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wms_WmsProvider_ExtraParams_" data-uid="Mapsui.Providers.Wms.WmsProvider.ExtraParams*"></a>
   <h4 id="Mapsui_Providers_Wms_WmsProvider_ExtraParams" data-uid="Mapsui.Providers.Wms.WmsProvider.ExtraParams">ExtraParams</h4>
@@ -324,7 +300,7 @@ See the example below.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Dictionary&lt;string, string&gt; ExtraParams { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public Dictionary&lt;string, string&gt;? ExtraParams { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -336,7 +312,7 @@ See the example below.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -346,7 +322,7 @@ See the example below.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_WmsProvider_GetFeatureInfoFormats.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.WmsProvider.GetFeatureInfoFormats%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L118">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L107">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wms_WmsProvider_GetFeatureInfoFormats_" data-uid="Mapsui.Providers.Wms.WmsProvider.GetFeatureInfoFormats*"></a>
   <h4 id="Mapsui_Providers_Wms_WmsProvider_GetFeatureInfoFormats" data-uid="Mapsui.Providers.Wms.WmsProvider.GetFeatureInfoFormats">GetFeatureInfoFormats</h4>
@@ -367,7 +343,7 @@ See the example below.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">Collection</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -377,7 +353,7 @@ See the example below.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_WmsProvider_LayerList.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.WmsProvider.LayerList%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L98">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L87">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wms_WmsProvider_LayerList_" data-uid="Mapsui.Providers.Wms.WmsProvider.LayerList*"></a>
   <h4 id="Mapsui_Providers_Wms_WmsProvider_LayerList" data-uid="Mapsui.Providers.Wms.WmsProvider.LayerList">LayerList</h4>
@@ -386,7 +362,7 @@ See the example below.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Collection&lt;string&gt; LayerList { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public Collection&lt;string&gt;? LayerList { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -398,7 +374,7 @@ See the example below.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">Collection</span>&lt;<span class="xref">System.String</span>&gt;&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -408,7 +384,7 @@ See the example below.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_WmsProvider_OutputFormats.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.WmsProvider.OutputFormats%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L113">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L102">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wms_WmsProvider_OutputFormats_" data-uid="Mapsui.Providers.Wms.WmsProvider.OutputFormats*"></a>
   <h4 id="Mapsui_Providers_Wms_WmsProvider_OutputFormats" data-uid="Mapsui.Providers.Wms.WmsProvider.OutputFormats">OutputFormats</h4>
@@ -429,7 +405,7 @@ See the example below.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">Collection</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -439,7 +415,7 @@ See the example below.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_WmsProvider_RootLayer.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.WmsProvider.RootLayer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L108">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L97">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wms_WmsProvider_RootLayer_" data-uid="Mapsui.Providers.Wms.WmsProvider.RootLayer*"></a>
   <h4 id="Mapsui_Providers_Wms_WmsProvider_RootLayer" data-uid="Mapsui.Providers.Wms.WmsProvider.RootLayer">RootLayer</h4>
@@ -470,7 +446,7 @@ See the example below.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_WmsProvider_ServiceDescription.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.WmsProvider.ServiceDescription%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L123">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L112">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wms_WmsProvider_ServiceDescription_" data-uid="Mapsui.Providers.Wms.WmsProvider.ServiceDescription*"></a>
   <h4 id="Mapsui_Providers_Wms_WmsProvider_ServiceDescription" data-uid="Mapsui.Providers.Wms.WmsProvider.ServiceDescription">ServiceDescription</h4>
@@ -501,7 +477,7 @@ See the example below.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_WmsProvider_StylesList.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.WmsProvider.StylesList%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L103">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L92">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wms_WmsProvider_StylesList_" data-uid="Mapsui.Providers.Wms.WmsProvider.StylesList*"></a>
   <h4 id="Mapsui_Providers_Wms_WmsProvider_StylesList" data-uid="Mapsui.Providers.Wms.WmsProvider.StylesList">StylesList</h4>
@@ -510,7 +486,7 @@ See the example below.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Collection&lt;string&gt; StylesList { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public Collection&lt;string&gt;? StylesList { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -522,7 +498,7 @@ See the example below.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">Collection</span>&lt;<span class="xref">System.String</span>&gt;&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -532,7 +508,7 @@ See the example below.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_WmsProvider_TimeOut.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.WmsProvider.TimeOut%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L143">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L132">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wms_WmsProvider_TimeOut_" data-uid="Mapsui.Providers.Wms.WmsProvider.TimeOut*"></a>
   <h4 id="Mapsui_Providers_Wms_WmsProvider_TimeOut" data-uid="Mapsui.Providers.Wms.WmsProvider.TimeOut">TimeOut</h4>
@@ -563,7 +539,7 @@ See the example below.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_WmsProvider_Version.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.WmsProvider.Version%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L128">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L117">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wms_WmsProvider_Version_" data-uid="Mapsui.Providers.Wms.WmsProvider.Version*"></a>
   <h4 id="Mapsui_Providers_Wms_WmsProvider_Version" data-uid="Mapsui.Providers.Wms.WmsProvider.Version">Version</h4>
@@ -572,7 +548,7 @@ See the example below.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string Version { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string? Version { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -584,7 +560,7 @@ See the example below.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.String</span></td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -596,7 +572,7 @@ See the example below.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_WmsProvider_AddLayer_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.WmsProvider.AddLayer(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L151">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L140">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wms_WmsProvider_AddLayer_" data-uid="Mapsui.Providers.Wms.WmsProvider.AddLayer*"></a>
   <h4 id="Mapsui_Providers_Wms_WmsProvider_AddLayer_System_String_" data-uid="Mapsui.Providers.Wms.WmsProvider.AddLayer(System.String)">AddLayer(String)</h4>
@@ -628,28 +604,12 @@ See the example below.</p>
   <h5 id="Mapsui_Providers_Wms_WmsProvider_AddLayer_System_String__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>Layer names are case sensitive.</p>
 </div>
-  <h5 class="exceptions">Exceptions</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Condition</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.ArgumentException</span></td>
-        <td><p>Throws an exception is an unknown layer is added</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_WmsProvider_AddStyle_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.WmsProvider.AddStyle(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L234">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L223">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wms_WmsProvider_AddStyle_" data-uid="Mapsui.Providers.Wms.WmsProvider.AddStyle*"></a>
   <h4 id="Mapsui_Providers_Wms_WmsProvider_AddStyle_System_String_" data-uid="Mapsui.Providers.Wms.WmsProvider.AddStyle(System.String)">AddStyle(String)</h4>
@@ -678,28 +638,12 @@ See the example below.</p>
       </tr>
     </tbody>
   </table>
-  <h5 class="exceptions">Exceptions</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Condition</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.ArgumentException</span></td>
-        <td><p>Throws an exception is an unknown layer is added</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_WmsProvider_GetExtent.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.WmsProvider.GetExtent%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L472">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L461">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wms_WmsProvider_GetExtent_" data-uid="Mapsui.Providers.Wms.WmsProvider.GetExtent*"></a>
   <h4 id="Mapsui_Providers_Wms_WmsProvider_GetExtent" data-uid="Mapsui.Providers.Wms.WmsProvider.GetExtent">GetExtent()</h4>
@@ -729,7 +673,7 @@ See the example below.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_WmsProvider_GetFeatures_Mapsui_Layers_FetchInfo_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.WmsProvider.GetFeatures(Mapsui.Layers.FetchInfo)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L483">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L472">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wms_WmsProvider_GetFeatures_" data-uid="Mapsui.Providers.Wms.WmsProvider.GetFeatures*"></a>
   <h4 id="Mapsui_Providers_Wms_WmsProvider_GetFeatures_Mapsui_Layers_FetchInfo_" data-uid="Mapsui.Providers.Wms.WmsProvider.GetFeatures(Mapsui.Layers.FetchInfo)">GetFeatures(FetchInfo)</h4>
@@ -766,7 +710,7 @@ See the example below.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Mapsui.IFeature.html">IFeature</a>&gt;</td>
+        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Mapsui.IFeature.html">IFeature</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -776,7 +720,7 @@ See the example below.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_WmsProvider_GetLayer_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.WmsProvider.GetLayer(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L165">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L154">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wms_WmsProvider_GetLayer_" data-uid="Mapsui.Providers.Wms.WmsProvider.GetLayer*"></a>
   <h4 id="Mapsui_Providers_Wms_WmsProvider_GetLayer_System_String_" data-uid="Mapsui.Providers.Wms.WmsProvider.GetLayer(System.String)">GetLayer(String)</h4>
@@ -823,28 +767,12 @@ See the example below.</p>
   <h5 id="Mapsui_Providers_Wms_WmsProvider_GetLayer_System_String__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>Layer names are case sensitive.</p>
 </div>
-  <h5 class="exceptions">Exceptions</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Condition</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.ArgumentException</span></td>
-        <td><p>Throws an exception if the layer is not found</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_WmsProvider_GetLegendRequestUrls.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.WmsProvider.GetLegendRequestUrls%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L409">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L398">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wms_WmsProvider_GetLegendRequestUrls_" data-uid="Mapsui.Providers.Wms.WmsProvider.GetLegendRequestUrls*"></a>
   <h4 id="Mapsui_Providers_Wms_WmsProvider_GetLegendRequestUrls" data-uid="Mapsui.Providers.Wms.WmsProvider.GetLegendRequestUrls">GetLegendRequestUrls()</h4>
@@ -865,7 +793,7 @@ See the example below.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">IEnumerable</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td><p>URL for WMS request</p>
 </td>
       </tr>
@@ -876,7 +804,7 @@ See the example below.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_WmsProvider_GetLegends.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.WmsProvider.GetLegends%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L429">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L418">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wms_WmsProvider_GetLegends_" data-uid="Mapsui.Providers.Wms.WmsProvider.GetLegends*"></a>
   <h4 id="Mapsui_Providers_Wms_WmsProvider_GetLegends" data-uid="Mapsui.Providers.Wms.WmsProvider.GetLegends">GetLegends()</h4>
@@ -896,7 +824,7 @@ See the example below.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">System.IO.MemoryStream</span>&gt;</td>
+        <td><span class="xref">IEnumerable</span>&lt;<span class="xref">MemoryStream</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -906,7 +834,7 @@ See the example below.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_WmsProvider_GetRequestUrl_Mapsui_MRect_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.WmsProvider.GetRequestUrl(Mapsui.MRect%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L358">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L347">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wms_WmsProvider_GetRequestUrl_" data-uid="Mapsui.Providers.Wms.WmsProvider.GetRequestUrl*"></a>
   <h4 id="Mapsui_Providers_Wms_WmsProvider_GetRequestUrl_Mapsui_MRect_System_Int32_System_Int32_" data-uid="Mapsui.Providers.Wms.WmsProvider.GetRequestUrl(Mapsui.MRect,System.Int32,System.Int32)">GetRequestUrl(MRect, Int32, Int32)</h4>
@@ -965,7 +893,7 @@ See the example below.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_WmsProvider_IsCrsSupported_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.WmsProvider.IsCrsSupported(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L477">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L466">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wms_WmsProvider_IsCrsSupported_" data-uid="Mapsui.Providers.Wms.WmsProvider.IsCrsSupported*"></a>
   <h4 id="Mapsui_Providers_Wms_WmsProvider_IsCrsSupported_System_String_" data-uid="Mapsui.Providers.Wms.WmsProvider.IsCrsSupported(System.String)">IsCrsSupported(String)</h4>
@@ -1012,7 +940,7 @@ See the example below.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_WmsProvider_RemoveAllLayers.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.WmsProvider.RemoveAllLayers%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L224">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L213">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wms_WmsProvider_RemoveAllLayers_" data-uid="Mapsui.Providers.Wms.WmsProvider.RemoveAllLayers*"></a>
   <h4 id="Mapsui_Providers_Wms_WmsProvider_RemoveAllLayers" data-uid="Mapsui.Providers.Wms.WmsProvider.RemoveAllLayers">RemoveAllLayers()</h4>
@@ -1028,7 +956,7 @@ See the example below.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_WmsProvider_RemoveAllStyles.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.WmsProvider.RemoveAllStyles%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L274">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L263">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wms_WmsProvider_RemoveAllStyles_" data-uid="Mapsui.Providers.Wms.WmsProvider.RemoveAllStyles*"></a>
   <h4 id="Mapsui_Providers_Wms_WmsProvider_RemoveAllStyles" data-uid="Mapsui.Providers.Wms.WmsProvider.RemoveAllStyles">RemoveAllStyles()</h4>
@@ -1044,7 +972,7 @@ See the example below.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_WmsProvider_RemoveLayer_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.WmsProvider.RemoveLayer(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L207">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L196">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wms_WmsProvider_RemoveLayer_" data-uid="Mapsui.Providers.Wms.WmsProvider.RemoveLayer*"></a>
   <h4 id="Mapsui_Providers_Wms_WmsProvider_RemoveLayer_System_String_" data-uid="Mapsui.Providers.Wms.WmsProvider.RemoveLayer(System.String)">RemoveLayer(String)</h4>
@@ -1078,7 +1006,7 @@ See the example below.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_WmsProvider_RemoveLayerAt_System_Int32_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.WmsProvider.RemoveLayerAt(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L216">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L205">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wms_WmsProvider_RemoveLayerAt_" data-uid="Mapsui.Providers.Wms.WmsProvider.RemoveLayerAt*"></a>
   <h4 id="Mapsui_Providers_Wms_WmsProvider_RemoveLayerAt_System_Int32_" data-uid="Mapsui.Providers.Wms.WmsProvider.RemoveLayerAt(System.Int32)">RemoveLayerAt(Int32)</h4>
@@ -1111,7 +1039,7 @@ See the example below.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_WmsProvider_RemoveStyle_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.WmsProvider.RemoveStyle(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L257">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L246">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wms_WmsProvider_RemoveStyle_" data-uid="Mapsui.Providers.Wms.WmsProvider.RemoveStyle*"></a>
   <h4 id="Mapsui_Providers_Wms_WmsProvider_RemoveStyle_System_String_" data-uid="Mapsui.Providers.Wms.WmsProvider.RemoveStyle(System.String)">RemoveStyle(String)</h4>
@@ -1145,7 +1073,7 @@ See the example below.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_WmsProvider_RemoveStyleAt_System_Int32_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.WmsProvider.RemoveStyleAt(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L266">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L255">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wms_WmsProvider_RemoveStyleAt_" data-uid="Mapsui.Providers.Wms.WmsProvider.RemoveStyleAt*"></a>
   <h4 id="Mapsui_Providers_Wms_WmsProvider_RemoveStyleAt_System_Int32_" data-uid="Mapsui.Providers.Wms.WmsProvider.RemoveStyleAt(System.Int32)">RemoveStyleAt(Int32)</h4>
@@ -1179,7 +1107,7 @@ See the example below.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_WmsProvider_SetImageFormat_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.WmsProvider.SetImageFormat(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L288">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L277">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wms_WmsProvider_SetImageFormat_" data-uid="Mapsui.Providers.Wms.WmsProvider.SetImageFormat*"></a>
   <h4 id="Mapsui_Providers_Wms_WmsProvider_SetImageFormat_System_String_" data-uid="Mapsui.Providers.Wms.WmsProvider.SetImageFormat(System.String)">SetImageFormat(String)</h4>
@@ -1211,29 +1139,12 @@ See the example below.</p>
   <h5 id="Mapsui_Providers_Wms_WmsProvider_SetImageFormat_System_String__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>See the <a class="xref" href="Mapsui.Providers.Wms.WmsProvider.html#Mapsui_Providers_Wms_WmsProvider_OutputFormats">OutputFormats</a> property for a list of available mime types supported by the WMS server</p>
 </div>
-  <h5 class="exceptions">Exceptions</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Condition</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.ArgumentException</span></td>
-        <td><p>Throws an exception if either the mime type isn&apos;t offered by the WMS
-or GDI+ doesn&apos;t support this mime type.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_WmsProvider_TryGetMap_Mapsui_IViewport_Mapsui_MRaster__.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.WmsProvider.TryGetMap(Mapsui.IViewport%2CMapsui.MRaster%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L295">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L284">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wms_WmsProvider_TryGetMap_" data-uid="Mapsui.Providers.Wms.WmsProvider.TryGetMap*"></a>
   <h4 id="Mapsui_Providers_Wms_WmsProvider_TryGetMap_Mapsui_IViewport_Mapsui_MRaster__" data-uid="Mapsui.Providers.Wms.WmsProvider.TryGetMap(Mapsui.IViewport,Mapsui.MRaster@)">TryGetMap(IViewport, out MRaster)</h4>
@@ -1298,7 +1209,7 @@ or GDI+ doesn&apos;t support this mime type.</p>
                     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_WmsProvider.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.WmsProvider%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L47" class="contribution-link">View Source</a>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/WmsProvider.cs/#L36" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
