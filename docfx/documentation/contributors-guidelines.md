@@ -61,3 +61,7 @@ SKPath path = ToSKPath(feature, style);
 ```csharp
 canvas.DrawPath(path, paint);
 ```
+
+## Formatting
+
+We use .editorconfig and we should follow these settings. To apply it in Visual Studio you can select your file and run:: sln explorer menu | Analyze and Code Cleanup | Run Code Cleanup (Profile 1 of 2). You can configure which rules to apply in your profile. For xml (not supported by .editorconfig) two spaces indentation is used.
