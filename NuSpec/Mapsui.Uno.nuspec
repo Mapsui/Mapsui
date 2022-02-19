@@ -19,37 +19,37 @@
 			<group targetFramework="monoandroid10.0">
 				<dependency id="Mapsui" version="$version$"/>
 				<dependency id="SkiaSharp.Views" version="[2.88.0-preview.209,3.0.0)"/>
-				<dependency id="Uno.UI" version="[4.0.11, 5.0.0)" />
+				<dependency id="Uno.UI" version="[4.0.13, 5.0.0)" />
 				<dependency id="SkiaSharp.Views.Uno" version="[2.88.0-preview.209,3.0.0)" />
 			</group>
 			<group targetFramework="monoandroid11.0">
 				<dependency id="Mapsui" version="$version$"/>
 				<dependency id="SkiaSharp.Views" version="[2.88.0-preview.209,3.0.0)"/>
-				<dependency id="Uno.UI" version="[4.0.11, 5.0.0)" />
+				<dependency id="Uno.UI" version="[4.0.13, 5.0.0)" />
 				<dependency id="SkiaSharp.Views.Uno" version="[2.88.0-preview.209,3.0.0)" />
 			</group>
 			<group targetFramework="netstandard2.0">
 				<dependency id="Mapsui" version="$version$"/>
 				<dependency id="SkiaSharp.Views" version="[2.88.0-preview.209,3.0.0)"/>
-				<dependency id="Uno.UI" version="[4.0.11, 5.0.0)" />
+				<dependency id="Uno.UI" version="[4.0.13, 5.0.0)" />
 				<dependency id="SkiaSharp.Views.Uno" version="[2.88.0-preview.209,3.0.0)" />
 			</group>
 			<group targetFramework="uap10.0.19041">
 				<dependency id="Mapsui" version="$version$"/>
 				<dependency id="SkiaSharp.Views" version="[2.88.0-preview.209,3.0.0)"/>
-				<dependency id="Uno.UI" version="[4.0.11, 5.0.0)" />
+				<dependency id="Uno.UI" version="[4.0.13, 5.0.0)" />
 				<dependency id="SkiaSharp.Views.Uno" version="[2.88.0-preview.209,3.0.0)" />
 			</group>
 			<group targetFramework="xamarinios10">
 				<dependency id="Mapsui" version="$version$"/>
 				<dependency id="SkiaSharp.Views" version="[2.88.0-preview.209,3.0.0)"/>
-				<dependency id="Uno.UI" version="[4.0.11, 5.0.0)" />
+				<dependency id="Uno.UI" version="[4.0.13, 5.0.0)" />
 				<dependency id="SkiaSharp.Views.Uno" version="[2.88.0-preview.209,3.0.0)" />
 			</group>
 			<group targetFramework="xamarinmac20">
 				<dependency id="Mapsui" version="$version$"/>
 				<dependency id="SkiaSharp.Views" version="[2.88.0-preview.209,3.0.0)"/>
-				<dependency id="Uno.UI" version="[4.0.11, 5.0.0)" />
+				<dependency id="Uno.UI" version="[4.0.13, 5.0.0)" />
 				<dependency id="SkiaSharp.Views.Uno" version="[2.88.0-preview.209,3.0.0)" />
 			</group>
 		</dependencies>
