@@ -420,7 +420,7 @@ namespace Mapsui.Nts.Providers.Shapefile
         {
             if (FilterDelegate != null) //Apply filtering
             {
-                var fdr = GetFeature(oid);
+                using var fdr = GetFeature(oid);
                 return fdr?.Geometry;
             }
 
