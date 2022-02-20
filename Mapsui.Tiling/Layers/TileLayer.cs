@@ -17,6 +17,7 @@ using Mapsui.Tiling.Extensions;
 using Mapsui.Tiling.Fetcher;
 using Mapsui.Tiling.Rendering;
 
+// ReSharper disable once VirtualMemberCallInConstructor
 #pragma warning disable CS8670 // Object or collection initializer implicitly dereferences possibly null member.
 
 namespace Mapsui.Tiling.Layers
@@ -26,14 +27,6 @@ namespace Mapsui.Tiling.Layers
     /// </summary>
     public class TileLayer : BaseLayer, IAsyncDataFetcher, IDisposable
     {
-        private readonly ITileSource _tileSource;
-        private readonly IRenderFetchStrategy _renderFetchStrategy;
-        private readonly int _minExtraTiles;
-        private readonly int _maxExtraTiles;
-        private int _numberTilesNeeded;
-        private readonly TileFetchDispatcher _tileFetchDispatcher;
-        private readonly MRect? _extent;
-
         /// <summary>
         /// Create tile layer for given tile source
         /// </summary>
@@ -50,48 +43,74 @@ namespace Mapsui.Tiling.Layers
             IDataFetchStrategy? dataFetchStrategy = null, IRenderFetchStrategy? renderFetchStrategy = null,
             int minExtraTiles = -1, int maxExtraTiles = -1, Func<TileInfo, IFeature?>? fetchTileAsFeature = null)
         {
-            _tileSource = tileSource ?? throw new ArgumentException($"{tileSource} can not null");
+            TileSource = tileSource ?? throw new ArgumentException($"{tileSource} can not null");
             MemoryCache = new MemoryCache<IFeature?>(minTiles, maxTiles);
             Style = new VectorStyle { Outline = { Color = Color.FromArgb(0, 0, 0, 0) } }; // initialize with transparent outline
-            Attribution.Text = _tileSource.Attribution?.Text;
-            Attribution.Url = _tileSource.Attribution?.Url;
-            _extent = _tileSource.Schema?.Extent.ToMRect();
+            Attribution.Text = TileSource.Attribution?.Text;
+            Attribution.Url = TileSource.Attribution?.Url;
+            Extent = TileSource.Schema?.Extent.ToMRect();
             dataFetchStrategy ??= new DataFetchStrategy(3);
-            _renderFetchStrategy = renderFetchStrategy ?? new RenderFetchStrategy();
-            _minExtraTiles = minExtraTiles;
-            _maxExtraTiles = maxExtraTiles;
-            _tileFetchDispatcher = new TileFetchDispatcher(MemoryCache, _tileSource.Schema, fetchTileAsFeature ?? ToFeature, dataFetchStrategy);
-            _tileFetchDispatcher.DataChanged += TileFetchDispatcherOnDataChanged;
-            _tileFetchDispatcher.PropertyChanged += TileFetchDispatcherOnPropertyChanged;
+            RenderFetchStrategy = renderFetchStrategy ?? new RenderFetchStrategy();
+            MinExtraTiles = minExtraTiles;
+            MaxExtraTiles = maxExtraTiles;
+            TileFetchDispatcher = new TileFetchDispatcher(MemoryCache, TileSource.Schema, fetchTileAsFeature ?? ToFeature, dataFetchStrategy);
+            TileFetchDispatcher.DataChanged += TileFetchDispatcherOnDataChanged;
+            TileFetchDispatcher.PropertyChanged += TileFetchDispatcherOnPropertyChanged;
         }
 
         /// <summary>
-        /// TileSource</summary>
-        public ITileSource TileSource => _tileSource;
+        /// Max Extra Tiles
+        /// </summary>
+        public int MaxExtraTiles { get; protected set; }
+
+        /// <summary>
+        /// Min Extra Tiles
+        /// </summary>
+        public int MinExtraTiles { get; protected set; }
+
+        /// <summary>
+        /// Render Fetch Strategy
+        /// </summary>
+        public IRenderFetchStrategy RenderFetchStrategy { get; protected set; }
+
+        /// <summary>
+        /// TileSource
+        /// </summary>
+        public ITileSource TileSource { get; protected set; }
+
+        /// <summary>
+        /// Tile Fetch Dispatcher
+        /// </summary>
+        protected TileFetchDispatcher TileFetchDispatcher { get; set; }
+
+        /// <summary>
+        /// Number Tiles Needed
+        /// </summary>
+        protected int NumberTilesNeeded { get; set; }
 
         /// <summary>
         /// Memory cache for this layer
         /// </summary>
-        private MemoryCache<IFeature?> MemoryCache { get; }
+        protected MemoryCache<IFeature?> MemoryCache { get; }
 
         /// <inheritdoc />
-        public override IReadOnlyList<double> Resolutions => _tileSource.Schema.Resolutions.Select(r => r.Value.UnitsPerPixel).ToList();
+        public override IReadOnlyList<double> Resolutions => TileSource.Schema.Resolutions.Select(r => r.Value.UnitsPerPixel).ToList();
 
         /// <inheritdoc />
-        public override MRect? Extent => _extent;
+        public override MRect? Extent { get; protected set; }
 
         /// <inheritdoc />
         public override IEnumerable<IFeature> GetFeatures(MRect extent, double resolution)
         {
-            if (_tileSource.Schema == null) return Enumerable.Empty<IFeature>();
+            if (TileSource.Schema == null) return Enumerable.Empty<IFeature>();
             UpdateMemoryCacheMinAndMax();
-            return _renderFetchStrategy.Get(extent, resolution, _tileSource.Schema, MemoryCache);
+            return RenderFetchStrategy.Get(extent, resolution, TileSource.Schema, MemoryCache);
         }
 
         /// <inheritdoc />
         public void AbortFetch()
         {
-            _tileFetchDispatcher.StopFetching();
+            TileFetchDispatcher.StopFetching();
         }
 
         /// <inheritdoc />
@@ -108,8 +127,8 @@ namespace Mapsui.Tiling.Layers
                 && MaxVisible >= fetchInfo.Resolution
                 && MinVisible <= fetchInfo.Resolution)
             {
-                _tileFetchDispatcher.SetViewport(fetchInfo);
-                _tileFetchDispatcher.StartFetching();
+                TileFetchDispatcher.SetViewport(fetchInfo);
+                TileFetchDispatcher.StartFetching();
             }
         }
 
@@ -121,30 +140,30 @@ namespace Mapsui.Tiling.Layers
             base.Dispose(disposing);
         }
 
-        private void TileFetchDispatcherOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        protected virtual void TileFetchDispatcherOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             if (propertyChangedEventArgs.PropertyName == nameof(Busy))
-                Busy = _tileFetchDispatcher.Busy;
+                Busy = TileFetchDispatcher.Busy;
         }
 
-        private void UpdateMemoryCacheMinAndMax()
+        protected virtual void UpdateMemoryCacheMinAndMax()
         {
-            if (_minExtraTiles < 0 || _maxExtraTiles < 0) return;
-            if (_numberTilesNeeded == _tileFetchDispatcher.NumberTilesNeeded) return;
+            if (MinExtraTiles < 0 || MaxExtraTiles < 0) return;
+            if (NumberTilesNeeded == TileFetchDispatcher.NumberTilesNeeded) return;
 
-            _numberTilesNeeded = _tileFetchDispatcher.NumberTilesNeeded;
-            MemoryCache.MinTiles = _numberTilesNeeded + _minExtraTiles;
-            MemoryCache.MaxTiles = _numberTilesNeeded + _maxExtraTiles;
+            NumberTilesNeeded = TileFetchDispatcher.NumberTilesNeeded;
+            MemoryCache.MinTiles = NumberTilesNeeded + MinExtraTiles;
+            MemoryCache.MaxTiles = NumberTilesNeeded + MaxExtraTiles;
         }
 
-        private void TileFetchDispatcherOnDataChanged(object sender, DataChangedEventArgs e)
+        protected virtual void TileFetchDispatcherOnDataChanged(object sender, DataChangedEventArgs e)
         {
             OnDataChanged(e);
         }
 
         private RasterFeature? ToFeature(TileInfo tileInfo)
         {
-            var tileData = _tileSource.GetTile(tileInfo);
+            var tileData = TileSource.GetTile(tileInfo);
             var mRaster = ToRaster(tileInfo, tileData);
             if (mRaster != null)
                 return new RasterFeature(mRaster);
