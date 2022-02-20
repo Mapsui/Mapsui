@@ -41,11 +41,12 @@ public class RasterizingTileProvider : ITileSource
         if (_layer is ILayerDataSource { DataSource: { } } dataSourceLayer)
         {
             _dataSource = dataSourceLayer.DataSource;
-            if (!string.IsNullOrEmpty(_dataSource.CRS) && _dataSource.CRS != this.Schema.Srs)
+
             // The TileSchema and the _dataSource.CRS are different Project it.
+            if (!string.IsNullOrEmpty(_dataSource.CRS) && _dataSource.CRS != Schema.Srs)
                 _dataSource = new ProjectingProvider(_dataSource, projection)
                 {
-                    CRS = this.Schema.Srs // The Schema SRS
+                    CRS = Schema.Srs // The Schema SRS
                 };
         }
     }
