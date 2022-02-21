@@ -1,4 +1,4 @@
-﻿This currently only works on MacOS.
+﻿This currently only works on Windows Visual Studio 2022 17.1.
 
 Following things need to be installed.
 
