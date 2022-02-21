@@ -57,12 +57,6 @@ See the [guidelines](http://mapsui.com/documentation/contributors-guidelines.htm
 - Our users. Do not underestimate the value of good bug reports and tests.
 - [realinfo](https://github.com/reallinfo) for providing the logo
 
-## Sponsors
-
-We are delighted with our first gold sponsor Sebastian Kruse, who has also contributed to Mapsui with informed test reports and expert advice.
-
-[Sebastian Kruse](https://github.com/Sebastian1989101)
-
 ## License
 
 [MIT](LICENSE)
