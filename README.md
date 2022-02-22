@@ -1,6 +1,7 @@
 ## News
 
-- 2021 October 1: Released Mapsui 3.0.0 https://github.com/Mapsui/Mapsui/releases/tag/3.0.0
+- 2022 Februari 12: Switched license to MIT (from LGPL)  
+- 2022 Februari 18: Released Mapsui 4.0.0-beta.1 https://github.com/Mapsui/Mapsui/releases/tag/4.0.0-beta.1
 
 ## Mapsui (pronounced map-su-wii)
 
