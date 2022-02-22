@@ -38,7 +38,6 @@ The best way to get going with Mapsui is by using the Samples. If you clone the 
 ## Community
 - If you have an issue please submit it [here on github](https://github.com/mapsui/Mapsui/issues).
 - If you have a question post is [here](https://github.com/Mapsui/Mapsui/discussions).
-- We have a [gitter channel](https://gitter.im/Mapsui/Lobby) (but it has not been very active lately).
 - Follow us on [twitter](https://twitter.com/mapsui).
 
 ## How can I help as a user
