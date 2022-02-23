@@ -4727,6 +4727,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.MPoint.Rotate
   nameWithType: MPoint.Rotate
+- uid: Mapsui.MPoint.ToString
+  name: ToString()
+  href: api/Mapsui.MPoint.html#Mapsui_MPoint_ToString
+  commentId: M:Mapsui.MPoint.ToString
+  fullName: Mapsui.MPoint.ToString()
+  nameWithType: MPoint.ToString()
+- uid: Mapsui.MPoint.ToString*
+  name: ToString
+  href: api/Mapsui.MPoint.html#Mapsui_MPoint_ToString_
+  commentId: Overload:Mapsui.MPoint.ToString
+  isSpec: "True"
+  fullName: Mapsui.MPoint.ToString
+  nameWithType: MPoint.ToString
 - uid: Mapsui.MPoint.X
   name: X
   href: api/Mapsui.MPoint.html#Mapsui_MPoint_X
@@ -5027,6 +5040,19 @@ references:
   fullName.vb: Mapsui.MReadOnlyPoint.Widening
   nameWithType: MReadOnlyPoint.Implicit
   nameWithType.vb: MReadOnlyPoint.Widening
+- uid: Mapsui.MReadOnlyPoint.ToString
+  name: ToString()
+  href: api/Mapsui.MReadOnlyPoint.html#Mapsui_MReadOnlyPoint_ToString
+  commentId: M:Mapsui.MReadOnlyPoint.ToString
+  fullName: Mapsui.MReadOnlyPoint.ToString()
+  nameWithType: MReadOnlyPoint.ToString()
+- uid: Mapsui.MReadOnlyPoint.ToString*
+  name: ToString
+  href: api/Mapsui.MReadOnlyPoint.html#Mapsui_MReadOnlyPoint_ToString_
+  commentId: Overload:Mapsui.MReadOnlyPoint.ToString
+  isSpec: "True"
+  fullName: Mapsui.MReadOnlyPoint.ToString
+  nameWithType: MReadOnlyPoint.ToString
 - uid: Mapsui.MReadOnlyPoint.X
   name: X
   href: api/Mapsui.MReadOnlyPoint.html#Mapsui_MReadOnlyPoint_X
@@ -5424,6 +5450,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.MRect.TopRight
   nameWithType: MRect.TopRight
+- uid: Mapsui.MRect.ToString
+  name: ToString()
+  href: api/Mapsui.MRect.html#Mapsui_MRect_ToString
+  commentId: M:Mapsui.MRect.ToString
+  fullName: Mapsui.MRect.ToString()
+  nameWithType: MRect.ToString()
+- uid: Mapsui.MRect.ToString*
+  name: ToString
+  href: api/Mapsui.MRect.html#Mapsui_MRect_ToString_
+  commentId: Overload:Mapsui.MRect.ToString
+  isSpec: "True"
+  fullName: Mapsui.MRect.ToString
+  nameWithType: MRect.ToString
 - uid: Mapsui.MRect.Vertices
   name: Vertices
   href: api/Mapsui.MRect.html#Mapsui_MRect_Vertices
@@ -12220,17 +12259,17 @@ references:
   commentId: T:Mapsui.UI.Android.MapControl
   fullName: Mapsui.UI.Android.MapControl
   nameWithType: MapControl
-- uid: Mapsui.UI.Android.MapControl.#ctor(Android.Content.Context,Android.Util.IAttributeSet)
+- uid: Mapsui.UI.Android.MapControl.#ctor(Context,IAttributeSet)
   name: MapControl(Context, IAttributeSet)
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl__ctor_Android_Content_Context_Android_Util_IAttributeSet_
-  commentId: M:Mapsui.UI.Android.MapControl.#ctor(Android.Content.Context,Android.Util.IAttributeSet)
-  fullName: Mapsui.UI.Android.MapControl.MapControl(Android.Content.Context, Android.Util.IAttributeSet)
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl__ctor_Context_IAttributeSet_
+  commentId: M:Mapsui.UI.Android.MapControl.#ctor(Context,IAttributeSet)
+  fullName: Mapsui.UI.Android.MapControl.MapControl(Context, IAttributeSet)
   nameWithType: MapControl.MapControl(Context, IAttributeSet)
-- uid: Mapsui.UI.Android.MapControl.#ctor(Android.Content.Context,Android.Util.IAttributeSet,System.Int32)
+- uid: Mapsui.UI.Android.MapControl.#ctor(Context,IAttributeSet,System.Int32)
   name: MapControl(Context, IAttributeSet, Int32)
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl__ctor_Android_Content_Context_Android_Util_IAttributeSet_System_Int32_
-  commentId: M:Mapsui.UI.Android.MapControl.#ctor(Android.Content.Context,Android.Util.IAttributeSet,System.Int32)
-  fullName: Mapsui.UI.Android.MapControl.MapControl(Android.Content.Context, Android.Util.IAttributeSet, System.Int32)
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl__ctor_Context_IAttributeSet_System_Int32_
+  commentId: M:Mapsui.UI.Android.MapControl.#ctor(Context,IAttributeSet,System.Int32)
+  fullName: Mapsui.UI.Android.MapControl.MapControl(Context, IAttributeSet, System.Int32)
   nameWithType: MapControl.MapControl(Context, IAttributeSet, Int32)
 - uid: Mapsui.UI.Android.MapControl.#ctor*
   name: MapControl
@@ -12239,32 +12278,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.MapControl
   nameWithType: MapControl.MapControl
-- uid: Mapsui.UI.Android.MapControl.CallHomeIfNeeded
-  name: CallHomeIfNeeded()
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_CallHomeIfNeeded
-  commentId: M:Mapsui.UI.Android.MapControl.CallHomeIfNeeded
-  fullName: Mapsui.UI.Android.MapControl.CallHomeIfNeeded()
-  nameWithType: MapControl.CallHomeIfNeeded()
-- uid: Mapsui.UI.Android.MapControl.CallHomeIfNeeded*
-  name: CallHomeIfNeeded
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_CallHomeIfNeeded_
-  commentId: Overload:Mapsui.UI.Android.MapControl.CallHomeIfNeeded
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.CallHomeIfNeeded
-  nameWithType: MapControl.CallHomeIfNeeded
-- uid: Mapsui.UI.Android.MapControl.Clear
-  name: Clear()
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Clear
-  commentId: M:Mapsui.UI.Android.MapControl.Clear
-  fullName: Mapsui.UI.Android.MapControl.Clear()
-  nameWithType: MapControl.Clear()
-- uid: Mapsui.UI.Android.MapControl.Clear*
-  name: Clear
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Clear_
-  commentId: Overload:Mapsui.UI.Android.MapControl.Clear
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.Clear
-  nameWithType: MapControl.Clear
 - uid: Mapsui.UI.Android.MapControl.Dispose(System.Boolean)
   name: Dispose(Boolean)
   href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Dispose_System_Boolean_
@@ -12278,73 +12291,12 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.Dispose
   nameWithType: MapControl.Dispose
-- uid: Mapsui.UI.Android.MapControl.ForceUpdate
-  name: ForceUpdate()
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ForceUpdate
-  commentId: M:Mapsui.UI.Android.MapControl.ForceUpdate
-  fullName: Mapsui.UI.Android.MapControl.ForceUpdate()
-  nameWithType: MapControl.ForceUpdate()
-- uid: Mapsui.UI.Android.MapControl.ForceUpdate*
-  name: ForceUpdate
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ForceUpdate_
-  commentId: Overload:Mapsui.UI.Android.MapControl.ForceUpdate
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.ForceUpdate
-  nameWithType: MapControl.ForceUpdate
-- uid: Mapsui.UI.Android.MapControl.GetMapInfo(Mapsui.MPoint,System.Int32)
-  name: GetMapInfo(MPoint, Int32)
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_GetMapInfo_Mapsui_MPoint_System_Int32_
-  commentId: M:Mapsui.UI.Android.MapControl.GetMapInfo(Mapsui.MPoint,System.Int32)
-  fullName: Mapsui.UI.Android.MapControl.GetMapInfo(Mapsui.MPoint, System.Int32)
-  nameWithType: MapControl.GetMapInfo(MPoint, Int32)
-- uid: Mapsui.UI.Android.MapControl.GetMapInfo*
-  name: GetMapInfo
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_GetMapInfo_
-  commentId: Overload:Mapsui.UI.Android.MapControl.GetMapInfo
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.GetMapInfo
-  nameWithType: MapControl.GetMapInfo
-- uid: Mapsui.UI.Android.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
-  name: GetSnapshot(IEnumerable<ILayer>)
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_GetSnapshot_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__
-  commentId: M:Mapsui.UI.Android.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})
-  name.vb: GetSnapshot(IEnumerable(Of ILayer))
-  fullName: Mapsui.UI.Android.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable<Mapsui.Layers.ILayer>)
-  fullName.vb: Mapsui.UI.Android.MapControl.GetSnapshot(System.Collections.Generic.IEnumerable(Of Mapsui.Layers.ILayer))
-  nameWithType: MapControl.GetSnapshot(IEnumerable<ILayer>)
-  nameWithType.vb: MapControl.GetSnapshot(IEnumerable(Of ILayer))
-- uid: Mapsui.UI.Android.MapControl.GetSnapshot*
-  name: GetSnapshot
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_GetSnapshot_
-  commentId: Overload:Mapsui.UI.Android.MapControl.GetSnapshot
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.GetSnapshot
-  nameWithType: MapControl.GetSnapshot
-- uid: Mapsui.UI.Android.MapControl.Info
-  name: Info
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Info
-  commentId: E:Mapsui.UI.Android.MapControl.Info
-  fullName: Mapsui.UI.Android.MapControl.Info
-  nameWithType: MapControl.Info
-- uid: Mapsui.UI.Android.MapControl.Map
-  name: Map
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Map
-  commentId: P:Mapsui.UI.Android.MapControl.Map
-  fullName: Mapsui.UI.Android.MapControl.Map
-  nameWithType: MapControl.Map
-- uid: Mapsui.UI.Android.MapControl.Map*
-  name: Map
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Map_
-  commentId: Overload:Mapsui.UI.Android.MapControl.Map
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.Map
-  nameWithType: MapControl.Map
-- uid: Mapsui.UI.Android.MapControl.MapView_Touch(System.Object,Android.Views.View.TouchEventArgs)
-  name: MapView_Touch(Object, View.TouchEventArgs)
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_MapView_Touch_System_Object_Android_Views_View_TouchEventArgs_
-  commentId: M:Mapsui.UI.Android.MapControl.MapView_Touch(System.Object,Android.Views.View.TouchEventArgs)
-  fullName: Mapsui.UI.Android.MapControl.MapView_Touch(System.Object, Android.Views.View.TouchEventArgs)
-  nameWithType: MapControl.MapView_Touch(Object, View.TouchEventArgs)
+- uid: Mapsui.UI.Android.MapControl.MapView_Touch(System.Object,TouchEventArgs)
+  name: MapView_Touch(Object, TouchEventArgs)
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_MapView_Touch_System_Object_TouchEventArgs_
+  commentId: M:Mapsui.UI.Android.MapControl.MapView_Touch(System.Object,TouchEventArgs)
+  fullName: Mapsui.UI.Android.MapControl.MapView_Touch(System.Object, TouchEventArgs)
+  nameWithType: MapControl.MapView_Touch(Object, TouchEventArgs)
 - uid: Mapsui.UI.Android.MapControl.MapView_Touch*
   name: MapView_Touch
   href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_MapView_Touch_
@@ -12352,24 +12304,11 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.MapView_Touch
   nameWithType: MapControl.MapView_Touch
-- uid: Mapsui.UI.Android.MapControl.Navigator
-  name: Navigator
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Navigator
-  commentId: P:Mapsui.UI.Android.MapControl.Navigator
-  fullName: Mapsui.UI.Android.MapControl.Navigator
-  nameWithType: MapControl.Navigator
-- uid: Mapsui.UI.Android.MapControl.Navigator*
-  name: Navigator
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Navigator_
-  commentId: Overload:Mapsui.UI.Android.MapControl.Navigator
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.Navigator
-  nameWithType: MapControl.Navigator
-- uid: Mapsui.UI.Android.MapControl.OnFling(System.Object,Android.Views.GestureDetector.FlingEventArgs)
+- uid: Mapsui.UI.Android.MapControl.OnFling(System.Object,GestureDetector.FlingEventArgs)
   name: OnFling(Object, GestureDetector.FlingEventArgs)
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_OnFling_System_Object_Android_Views_GestureDetector_FlingEventArgs_
-  commentId: M:Mapsui.UI.Android.MapControl.OnFling(System.Object,Android.Views.GestureDetector.FlingEventArgs)
-  fullName: Mapsui.UI.Android.MapControl.OnFling(System.Object, Android.Views.GestureDetector.FlingEventArgs)
+  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_OnFling_System_Object_GestureDetector_FlingEventArgs_
+  commentId: M:Mapsui.UI.Android.MapControl.OnFling(System.Object,GestureDetector.FlingEventArgs)
+  fullName: Mapsui.UI.Android.MapControl.OnFling(System.Object, GestureDetector.FlingEventArgs)
   nameWithType: MapControl.OnFling(Object, GestureDetector.FlingEventArgs)
 - uid: Mapsui.UI.Android.MapControl.OnFling*
   name: OnFling
@@ -12391,19 +12330,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.OnLayout
   nameWithType: MapControl.OnLayout
-- uid: Mapsui.UI.Android.MapControl.OnPropertyChanged(System.String)
-  name: OnPropertyChanged(String)
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_OnPropertyChanged_System_String_
-  commentId: M:Mapsui.UI.Android.MapControl.OnPropertyChanged(System.String)
-  fullName: Mapsui.UI.Android.MapControl.OnPropertyChanged(System.String)
-  nameWithType: MapControl.OnPropertyChanged(String)
-- uid: Mapsui.UI.Android.MapControl.OnPropertyChanged*
-  name: OnPropertyChanged
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_OnPropertyChanged_
-  commentId: Overload:Mapsui.UI.Android.MapControl.OnPropertyChanged
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.OnPropertyChanged
-  nameWithType: MapControl.OnPropertyChanged
 - uid: Mapsui.UI.Android.MapControl.OnSizeChanged(System.Int32,System.Int32,System.Int32,System.Int32)
   name: OnSizeChanged(Int32, Int32, Int32, Int32)
   href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_OnSizeChanged_System_Int32_System_Int32_System_Int32_System_Int32_
@@ -12430,90 +12356,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.OpenBrowser
   nameWithType: MapControl.OpenBrowser
-- uid: Mapsui.UI.Android.MapControl.Performance
-  name: Performance
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Performance
-  commentId: P:Mapsui.UI.Android.MapControl.Performance
-  fullName: Mapsui.UI.Android.MapControl.Performance
-  nameWithType: MapControl.Performance
-- uid: Mapsui.UI.Android.MapControl.Performance*
-  name: Performance
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Performance_
-  commentId: Overload:Mapsui.UI.Android.MapControl.Performance
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.Performance
-  nameWithType: MapControl.Performance
-- uid: Mapsui.UI.Android.MapControl.PixelDensity
-  name: PixelDensity
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_PixelDensity
-  commentId: P:Mapsui.UI.Android.MapControl.PixelDensity
-  fullName: Mapsui.UI.Android.MapControl.PixelDensity
-  nameWithType: MapControl.PixelDensity
-- uid: Mapsui.UI.Android.MapControl.PixelDensity*
-  name: PixelDensity
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_PixelDensity_
-  commentId: Overload:Mapsui.UI.Android.MapControl.PixelDensity
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.PixelDensity
-  nameWithType: MapControl.PixelDensity
-- uid: Mapsui.UI.Android.MapControl.PropertyChanged
-  name: PropertyChanged
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_PropertyChanged
-  commentId: E:Mapsui.UI.Android.MapControl.PropertyChanged
-  fullName: Mapsui.UI.Android.MapControl.PropertyChanged
-  nameWithType: MapControl.PropertyChanged
-- uid: Mapsui.UI.Android.MapControl.Refresh(Mapsui.ChangeType)
-  name: Refresh(ChangeType)
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Refresh_Mapsui_ChangeType_
-  commentId: M:Mapsui.UI.Android.MapControl.Refresh(Mapsui.ChangeType)
-  fullName: Mapsui.UI.Android.MapControl.Refresh(Mapsui.ChangeType)
-  nameWithType: MapControl.Refresh(ChangeType)
-- uid: Mapsui.UI.Android.MapControl.Refresh*
-  name: Refresh
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Refresh_
-  commentId: Overload:Mapsui.UI.Android.MapControl.Refresh
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.Refresh
-  nameWithType: MapControl.Refresh
-- uid: Mapsui.UI.Android.MapControl.RefreshData(Mapsui.ChangeType)
-  name: RefreshData(ChangeType)
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_RefreshData_Mapsui_ChangeType_
-  commentId: M:Mapsui.UI.Android.MapControl.RefreshData(Mapsui.ChangeType)
-  fullName: Mapsui.UI.Android.MapControl.RefreshData(Mapsui.ChangeType)
-  nameWithType: MapControl.RefreshData(ChangeType)
-- uid: Mapsui.UI.Android.MapControl.RefreshData*
-  name: RefreshData
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_RefreshData_
-  commentId: Overload:Mapsui.UI.Android.MapControl.RefreshData
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.RefreshData
-  nameWithType: MapControl.RefreshData
-- uid: Mapsui.UI.Android.MapControl.RefreshGraphics
-  name: RefreshGraphics()
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_RefreshGraphics
-  commentId: M:Mapsui.UI.Android.MapControl.RefreshGraphics
-  fullName: Mapsui.UI.Android.MapControl.RefreshGraphics()
-  nameWithType: MapControl.RefreshGraphics()
-- uid: Mapsui.UI.Android.MapControl.RefreshGraphics*
-  name: RefreshGraphics
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_RefreshGraphics_
-  commentId: Overload:Mapsui.UI.Android.MapControl.RefreshGraphics
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.RefreshGraphics
-  nameWithType: MapControl.RefreshGraphics
-- uid: Mapsui.UI.Android.MapControl.Renderer
-  name: Renderer
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Renderer
-  commentId: P:Mapsui.UI.Android.MapControl.Renderer
-  fullName: Mapsui.UI.Android.MapControl.Renderer
-  nameWithType: MapControl.Renderer
-- uid: Mapsui.UI.Android.MapControl.Renderer*
-  name: Renderer
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Renderer_
-  commentId: Overload:Mapsui.UI.Android.MapControl.Renderer
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.Renderer
-  nameWithType: MapControl.Renderer
 - uid: Mapsui.UI.Android.MapControl.RenderMode
   name: RenderMode
   href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_RenderMode
@@ -12527,183 +12369,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Android.MapControl.RenderMode
   nameWithType: MapControl.RenderMode
-- uid: Mapsui.UI.Android.MapControl.ReSnapRotationDegrees
-  name: ReSnapRotationDegrees
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ReSnapRotationDegrees
-  commentId: P:Mapsui.UI.Android.MapControl.ReSnapRotationDegrees
-  fullName: Mapsui.UI.Android.MapControl.ReSnapRotationDegrees
-  nameWithType: MapControl.ReSnapRotationDegrees
-- uid: Mapsui.UI.Android.MapControl.ReSnapRotationDegrees*
-  name: ReSnapRotationDegrees
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ReSnapRotationDegrees_
-  commentId: Overload:Mapsui.UI.Android.MapControl.ReSnapRotationDegrees
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.ReSnapRotationDegrees
-  nameWithType: MapControl.ReSnapRotationDegrees
-- uid: Mapsui.UI.Android.MapControl.StartUpdates(System.Boolean)
-  name: StartUpdates(Boolean)
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_StartUpdates_System_Boolean_
-  commentId: M:Mapsui.UI.Android.MapControl.StartUpdates(System.Boolean)
-  fullName: Mapsui.UI.Android.MapControl.StartUpdates(System.Boolean)
-  nameWithType: MapControl.StartUpdates(Boolean)
-- uid: Mapsui.UI.Android.MapControl.StartUpdates*
-  name: StartUpdates
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_StartUpdates_
-  commentId: Overload:Mapsui.UI.Android.MapControl.StartUpdates
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.StartUpdates
-  nameWithType: MapControl.StartUpdates
-- uid: Mapsui.UI.Android.MapControl.StopUpdates
-  name: StopUpdates()
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_StopUpdates
-  commentId: M:Mapsui.UI.Android.MapControl.StopUpdates
-  fullName: Mapsui.UI.Android.MapControl.StopUpdates()
-  nameWithType: MapControl.StopUpdates()
-- uid: Mapsui.UI.Android.MapControl.StopUpdates*
-  name: StopUpdates
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_StopUpdates_
-  commentId: Overload:Mapsui.UI.Android.MapControl.StopUpdates
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.StopUpdates
-  nameWithType: MapControl.StopUpdates
-- uid: Mapsui.UI.Android.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
-  name: ToDeviceIndependentUnits(MPoint)
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ToDeviceIndependentUnits_Mapsui_MPoint_
-  commentId: M:Mapsui.UI.Android.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
-  fullName: Mapsui.UI.Android.MapControl.ToDeviceIndependentUnits(Mapsui.MPoint)
-  nameWithType: MapControl.ToDeviceIndependentUnits(MPoint)
-- uid: Mapsui.UI.Android.MapControl.ToDeviceIndependentUnits*
-  name: ToDeviceIndependentUnits
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ToDeviceIndependentUnits_
-  commentId: Overload:Mapsui.UI.Android.MapControl.ToDeviceIndependentUnits
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.ToDeviceIndependentUnits
-  nameWithType: MapControl.ToDeviceIndependentUnits
-- uid: Mapsui.UI.Android.MapControl.ToPixels(Mapsui.MPoint)
-  name: ToPixels(MPoint)
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ToPixels_Mapsui_MPoint_
-  commentId: M:Mapsui.UI.Android.MapControl.ToPixels(Mapsui.MPoint)
-  fullName: Mapsui.UI.Android.MapControl.ToPixels(Mapsui.MPoint)
-  nameWithType: MapControl.ToPixels(MPoint)
-- uid: Mapsui.UI.Android.MapControl.ToPixels*
-  name: ToPixels
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ToPixels_
-  commentId: Overload:Mapsui.UI.Android.MapControl.ToPixels
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.ToPixels
-  nameWithType: MapControl.ToPixels
-- uid: Mapsui.UI.Android.MapControl.UnSnapRotationDegrees
-  name: UnSnapRotationDegrees
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_UnSnapRotationDegrees
-  commentId: P:Mapsui.UI.Android.MapControl.UnSnapRotationDegrees
-  fullName: Mapsui.UI.Android.MapControl.UnSnapRotationDegrees
-  nameWithType: MapControl.UnSnapRotationDegrees
-- uid: Mapsui.UI.Android.MapControl.UnSnapRotationDegrees*
-  name: UnSnapRotationDegrees
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_UnSnapRotationDegrees_
-  commentId: Overload:Mapsui.UI.Android.MapControl.UnSnapRotationDegrees
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.UnSnapRotationDegrees
-  nameWithType: MapControl.UnSnapRotationDegrees
-- uid: Mapsui.UI.Android.MapControl.Unsubscribe
-  name: Unsubscribe()
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Unsubscribe
-  commentId: M:Mapsui.UI.Android.MapControl.Unsubscribe
-  fullName: Mapsui.UI.Android.MapControl.Unsubscribe()
-  nameWithType: MapControl.Unsubscribe()
-- uid: Mapsui.UI.Android.MapControl.Unsubscribe*
-  name: Unsubscribe
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Unsubscribe_
-  commentId: Overload:Mapsui.UI.Android.MapControl.Unsubscribe
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.Unsubscribe
-  nameWithType: MapControl.Unsubscribe
-- uid: Mapsui.UI.Android.MapControl.UpdateInterval
-  name: UpdateInterval
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_UpdateInterval
-  commentId: P:Mapsui.UI.Android.MapControl.UpdateInterval
-  fullName: Mapsui.UI.Android.MapControl.UpdateInterval
-  nameWithType: MapControl.UpdateInterval
-- uid: Mapsui.UI.Android.MapControl.UpdateInterval*
-  name: UpdateInterval
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_UpdateInterval_
-  commentId: Overload:Mapsui.UI.Android.MapControl.UpdateInterval
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.UpdateInterval
-  nameWithType: MapControl.UpdateInterval
-- uid: Mapsui.UI.Android.MapControl.Viewport
-  name: Viewport
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Viewport
-  commentId: P:Mapsui.UI.Android.MapControl.Viewport
-  fullName: Mapsui.UI.Android.MapControl.Viewport
-  nameWithType: MapControl.Viewport
-- uid: Mapsui.UI.Android.MapControl.Viewport*
-  name: Viewport
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_Viewport_
-  commentId: Overload:Mapsui.UI.Android.MapControl.Viewport
-  isSpec: "True"
-  fullName: Mapsui.UI.Android.MapControl.Viewport
-  nameWithType: MapControl.Viewport
-- uid: Mapsui.UI.Android.MapControl.ViewportInitialized
-  name: ViewportInitialized
-  href: api/Mapsui.UI.Android.MapControl.html#Mapsui_UI_Android_MapControl_ViewportInitialized
-  commentId: E:Mapsui.UI.Android.MapControl.ViewportInitialized
-  fullName: Mapsui.UI.Android.MapControl.ViewportInitialized
-  nameWithType: MapControl.ViewportInitialized
-- uid: Mapsui.UI.Android.Resource
-  name: Resource
-  href: api/Mapsui.UI.Android.Resource.html
-  commentId: T:Mapsui.UI.Android.Resource
-  fullName: Mapsui.UI.Android.Resource
-  nameWithType: Resource
-- uid: Mapsui.UI.Android.Resource.Attribute
-  name: Resource.Attribute
-  href: api/Mapsui.UI.Android.Resource.Attribute.html
-  commentId: T:Mapsui.UI.Android.Resource.Attribute
-  fullName: Mapsui.UI.Android.Resource.Attribute
-  nameWithType: Resource.Attribute
-- uid: Mapsui.UI.Android.Resource.Attribute.start_with_openstreetmap
-  name: start_with_openstreetmap
-  href: api/Mapsui.UI.Android.Resource.Attribute.html#Mapsui_UI_Android_Resource_Attribute_start_with_openstreetmap
-  commentId: F:Mapsui.UI.Android.Resource.Attribute.start_with_openstreetmap
-  fullName: Mapsui.UI.Android.Resource.Attribute.start_with_openstreetmap
-  nameWithType: Resource.Attribute.start_with_openstreetmap
-- uid: Mapsui.UI.Android.Resource.String
-  name: Resource.String
-  href: api/Mapsui.UI.Android.Resource.String.html
-  commentId: T:Mapsui.UI.Android.Resource.String
-  fullName: Mapsui.UI.Android.Resource.String
-  nameWithType: Resource.String
-- uid: Mapsui.UI.Android.Resource.String.ApplicationName
-  name: ApplicationName
-  href: api/Mapsui.UI.Android.Resource.String.html#Mapsui_UI_Android_Resource_String_ApplicationName
-  commentId: F:Mapsui.UI.Android.Resource.String.ApplicationName
-  fullName: Mapsui.UI.Android.Resource.String.ApplicationName
-  nameWithType: Resource.String.ApplicationName
-- uid: Mapsui.UI.Android.Resource.String.Hello
-  name: Hello
-  href: api/Mapsui.UI.Android.Resource.String.html#Mapsui_UI_Android_Resource_String_Hello
-  commentId: F:Mapsui.UI.Android.Resource.String.Hello
-  fullName: Mapsui.UI.Android.Resource.String.Hello
-  nameWithType: Resource.String.Hello
-- uid: Mapsui.UI.Android.Resource.Styleable
-  name: Resource.Styleable
-  href: api/Mapsui.UI.Android.Resource.Styleable.html
-  commentId: T:Mapsui.UI.Android.Resource.Styleable
-  fullName: Mapsui.UI.Android.Resource.Styleable
-  nameWithType: Resource.Styleable
-- uid: Mapsui.UI.Android.Resource.Styleable.start_with_openstreetmap_style
-  name: start_with_openstreetmap_style
-  href: api/Mapsui.UI.Android.Resource.Styleable.html#Mapsui_UI_Android_Resource_Styleable_start_with_openstreetmap_style
-  commentId: F:Mapsui.UI.Android.Resource.Styleable.start_with_openstreetmap_style
-  fullName: Mapsui.UI.Android.Resource.Styleable.start_with_openstreetmap_style
-  nameWithType: Resource.Styleable.start_with_openstreetmap_style
-- uid: Mapsui.UI.Android.Resource.Styleable.start_with_openstreetmap_style_start_with_openstreetmap
-  name: start_with_openstreetmap_style_start_with_openstreetmap
-  href: api/Mapsui.UI.Android.Resource.Styleable.html#Mapsui_UI_Android_Resource_Styleable_start_with_openstreetmap_style_start_with_openstreetmap
-  commentId: F:Mapsui.UI.Android.Resource.Styleable.start_with_openstreetmap_style_start_with_openstreetmap
-  fullName: Mapsui.UI.Android.Resource.Styleable.start_with_openstreetmap_style_start_with_openstreetmap
-  nameWithType: Resource.Styleable.start_with_openstreetmap_style_start_with_openstreetmap
 - uid: Mapsui.UI.Android.SkiaRenderMode
   name: SkiaRenderMode
   href: api/Mapsui.UI.Android.SkiaRenderMode.html
