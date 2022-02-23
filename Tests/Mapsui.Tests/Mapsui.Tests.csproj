@@ -4,8 +4,8 @@
 		<TargetFramework>netcoreapp3.1</TargetFramework>
 		<OutputType>Library</OutputType>
 		<RestorePackages>true</RestorePackages>
-		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>		
-	</PropertyGroup>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>		
 
 	<ItemGroup>
 		<None Remove="Resources\capabilities_1_1_1.xml" />
