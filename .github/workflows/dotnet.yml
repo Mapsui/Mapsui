@@ -34,6 +34,7 @@ jobs:
          dotnet-version: | 
            5.0.x
            6.0.x
+         include-prerelease: true    
     - name: install maui
       run: dotnet workload install maui
     - name: install maui-check

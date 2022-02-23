@@ -18,6 +18,8 @@ environment:
 nuget:
   disable_publish_on_pr: true
 install:
+- ps: Invoke-WebRequest 'https://dot.net/v1/dotnet-install.ps1' -OutFile 'dotnet-install.ps1';
+- ps: ./dotnet-install.ps1 -Version 6.0.200 -InstallDir "dotnetcli"
 - cmd: dotnet workload install maui
 - cmd: '"C:/Program Files (x86)/Android/android-sdk/tools/bin/sdkmanager.bat" "platforms;android-30"'
 - cmd: dotnet tool install -g Redth.Net.Maui.Check
