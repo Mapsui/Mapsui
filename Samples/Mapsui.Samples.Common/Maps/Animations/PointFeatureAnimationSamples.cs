@@ -8,8 +8,10 @@ using Mapsui.Layers.AnimatedLayers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
+using Mapsui.Styles.Thematics;
 using Mapsui.Tiling;
 using Mapsui.UI;
+using Mapsui.Utilities;
 
 #pragma warning disable CS8670 // Object or collection initializer implicitly dereferences possibly null member.
 
@@ -44,8 +46,28 @@ namespace Mapsui.Samples.Common.Maps.Special
         public AnimatedPointsWithAutoUpdateLayer()
             : base(new DynamicMemoryProvider())
         {
-            Style = new SymbolStyle { Fill = { Color = new Color(255, 215, 0, 200) }, SymbolScale = 0.9 };
+            Style = CreatePointStyle();
             _timer = new Timer(_ => UpdateData(), this, 0, 2000);
+        }
+
+        private static IStyle CreatePointStyle()
+        {
+            return new ThemeStyle(f => {
+                return CreateSvgArrowStyle("Images.arrow.svg", 0.5, f);
+            });
+        }
+
+        private static IStyle CreateSvgArrowStyle(string embeddedResourcePath, double scale, IFeature feature)
+        {
+            var bitmapId = typeof(SvgSample).LoadSvgId(embeddedResourcePath);
+            return new SymbolStyle
+            {
+                BitmapId = bitmapId,
+                SymbolScale = scale,
+                SymbolOffset = new Offset(0.0, 0.5, true),
+                Opacity = 0.5f,
+                SymbolRotation = (double)feature["rotation"]!
+            };
         }
 
         protected override void Dispose(bool disposing)
@@ -61,6 +83,7 @@ namespace Mapsui.Samples.Common.Maps.Special
     internal class DynamicMemoryProvider : MemoryProvider<PointFeature>
     {
         private readonly Random _random = new(0);
+        private IEnumerable<PointFeature> _previousFeatures = new List<PointFeature>();
 
         public override IEnumerable<PointFeature> GetFeatures(FetchInfo fetchInfo)
         {
@@ -71,17 +94,31 @@ namespace Mapsui.Samples.Common.Maps.Special
 
             foreach (var point in points)
             {
-                if (count != random) // skip a random element to test robustness
-                {
-                    var feature = new PointFeature(point)
-                    {
-                        ["ID"] = count.ToString(CultureInfo.InvariantCulture)
-                    };
-                    features.Add(feature);
-                }
                 count++;
+                if (count == random) continue; // skip a random element to test robustness
+
+                var countAsString = count.ToString(CultureInfo.InvariantCulture);
+                features.Add(new PointFeature(point)
+                {
+                    ["ID"] = countAsString,
+                    ["rotation"] = AngleOf(point, FindPreviousPosition(countAsString)) - 90
+                });
             }
+
+            _previousFeatures = features;
             return features;
+        }
+
+        private MPoint? FindPreviousPosition(string countAsString)
+        {
+            return _previousFeatures.FirstOrDefault(f => f["ID"]?.ToString() == countAsString)?.Point;
+        }
+
+        public static double AngleOf(MPoint point1, MPoint? point2)
+        {
+            if (point2 == null) return 0;
+            double result = Algorithms.RadiansToDegrees(Math.Atan2(point1.Y - point2.Y, point2.X - point1.X));
+            return (result < 0) ? (360.0 + result) : result;
         }
     }
 }

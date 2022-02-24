@@ -10,6 +10,9 @@ namespace Mapsui.Utilities
 {
     public static class Algorithms
     {
+        const double TO_RADIANS = Math.PI / 180.0;
+        const double TO_DEGREES = 180.0 / Math.PI;
+
         /// <summary>
         ///     Gets the euclidean distance between two points.
         /// </summary>
@@ -35,7 +38,12 @@ namespace Mapsui.Utilities
         /// <returns>Returns the angle in radians</returns>
         public static double DegreesToRadians(double degrees)
         {
-            return degrees * Math.PI / 180.0;
+            return degrees * TO_RADIANS;
+        }
+
+        public static double RadiansToDegrees(double radians)
+        {
+            return radians * TO_DEGREES;
         }
 
         /// <summary>
