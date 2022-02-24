@@ -8,11 +8,12 @@ namespace Mapsui.Samples.Common.Helpers
 {
     public static class RandomPointGenerator
     {
-        private static Random _random = new Random(0);
-
-        public static MemoryProvider<PointFeature> CreateProviderWithRandomPoints(MRect? envelope, int count = 25, int seed = 123)
+        public static MemoryProvider<PointFeature> CreateProviderWithRandomPoints(MRect? envelope, int count, Random? random = null)
         {
-            return new MemoryProvider<PointFeature>(CreateFeatures(GenerateRandomPoints(envelope, count, seed)));
+            if (random == null)
+                random = new Random(123);
+
+            return new MemoryProvider<PointFeature>(CreateFeatures(GenerateRandomPoints(envelope, count, random)));
         }
 
         private static IEnumerable<PointFeature> CreateFeatures(IEnumerable<MPoint> randomPoints)
@@ -21,9 +22,10 @@ namespace Mapsui.Samples.Common.Helpers
             return randomPoints.Select(p => new PointFeature(p) { ["Label"] = counter++.ToString() });
         }
 
-        public static IEnumerable<MPoint> GenerateRandomPoints(MRect? envelope, int count = 25, int seed = 192)
+        public static IEnumerable<MPoint> GenerateRandomPoints(MRect? envelope, int count, Random random = null)
         {
-            _random = new Random(seed);
+            if (random == null)
+                random = new Random(192);
 
             var result = new List<MPoint>();
             if (envelope == null)
@@ -32,8 +34,8 @@ namespace Mapsui.Samples.Common.Helpers
             for (var i = 0; i < count; i++)
             {
                 result.Add(new MPoint(
-                    _random.NextDouble() * envelope.Width + envelope.Left,
-                    _random.NextDouble() * envelope.Height + envelope.Bottom));
+                    random.NextDouble() * envelope.Width + envelope.Left,
+                    random.NextDouble() * envelope.Height + envelope.Bottom));
             }
 
             return result;

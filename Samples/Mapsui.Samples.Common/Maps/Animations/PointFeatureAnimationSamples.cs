@@ -88,7 +88,8 @@ namespace Mapsui.Samples.Common.Maps.Special
         public override IEnumerable<PointFeature> GetFeatures(FetchInfo fetchInfo)
         {
             var features = new List<PointFeature>();
-            var points = RandomPointGenerator.GenerateRandomPoints(fetchInfo.Extent, 10, _random.Next()).ToList();
+            _random.Next();
+            var points = RandomPointGenerator.GenerateRandomPoints(fetchInfo.Extent, 10, _random).ToList();
             var count = 0;
             var random = _random.Next(points.Count);
 
