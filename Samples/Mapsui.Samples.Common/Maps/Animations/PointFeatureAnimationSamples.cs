@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
+using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Layers.AnimatedLayers;
 using Mapsui.Providers;
@@ -80,15 +81,16 @@ namespace Mapsui.Samples.Common.Maps.Special
         }
     }
 
-    internal class DynamicMemoryProvider : MemoryProvider<PointFeature>
+    internal class DynamicMemoryProvider : MemoryProvider<PointFeature>, IDynamic
     {
         private readonly Random _random = new(0);
         private IEnumerable<PointFeature> _previousFeatures = new List<PointFeature>();
 
+        public event DataChangedEventHandler? DataChanged;
+
         public override IEnumerable<PointFeature> GetFeatures(FetchInfo fetchInfo)
         {
             var features = new List<PointFeature>();
-            _random.Next();
             var points = RandomPointGenerator.GenerateRandomPoints(fetchInfo.Extent, 10, _random).ToList();
             var count = 0;
             var random = _random.Next(points.Count);
@@ -120,6 +122,16 @@ namespace Mapsui.Samples.Common.Maps.Special
             if (point2 == null) return 0;
             double result = Algorithms.RadiansToDegrees(Math.Atan2(point1.Y - point2.Y, point2.X - point1.X));
             return (result < 0) ? (360.0 + result) : result;
+        }
+
+        public void DataHasChanged()
+        {
+            OnDataChanged();
+        }
+
+        private void OnDataChanged()
+        {
+            DataChanged?.Invoke(this, new DataChangedEventArgs(null, false, null));
         }
     }
 }

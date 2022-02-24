@@ -62,9 +62,7 @@ namespace Mapsui.Layers
         /// </summary>
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        /// <summary>
-        /// DataChanged should be triggered by any data changes
-        /// </summary>
+        /// <inheritdoc />
         public event DataChangedEventHandler? DataChanged;
 
         /// <inheritdoc />

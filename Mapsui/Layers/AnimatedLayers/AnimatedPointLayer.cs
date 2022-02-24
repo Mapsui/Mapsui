@@ -13,6 +13,8 @@ public class AnimatedPointLayer : BaseLayer
     public AnimatedPointLayer(IProvider<PointFeature> dataSource)
     {
         _dataSource = dataSource;
+        if (_dataSource is IDynamic dynamic)
+            dynamic.DataChanged += (s, e) => new DataChangedEventArgs();
     }
 
     public void UpdateData()
