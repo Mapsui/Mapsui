@@ -165,7 +165,7 @@ namespace Mapsui.Samples.Droid
             return _textView;
         }
 
-        private void MapOnInfo(object sender, MapInfoEventArgs args)
+        private void MapOnInfo(object? sender, MapInfoEventArgs args)
         {
             if (args.MapInfo?.Feature != null)
             {

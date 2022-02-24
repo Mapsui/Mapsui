@@ -14,7 +14,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Uno.UI" Version="4.0.11" />
+    <PackageReference Include="Uno.UI" Version="4.0.13" />
     <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.0-preview.209" />    
   </ItemGroup>
 
