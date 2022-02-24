@@ -22,7 +22,7 @@ namespace Mapsui.Samples.Common.Helpers
             return randomPoints.Select(p => new PointFeature(p) { ["Label"] = counter++.ToString() });
         }
 
-        public static IEnumerable<MPoint> GenerateRandomPoints(MRect? envelope, int count, Random random = null)
+        public static IEnumerable<MPoint> GenerateRandomPoints(MRect? envelope, int count, Random? random = null)
         {
             if (random == null)
                 random = new Random(192);
