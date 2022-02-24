@@ -2,6 +2,7 @@
 using System.Threading;
 using Mapsui.UI;
 using System.Threading.Tasks;
+using Mapsui.Logging;
 using Mapsui.Rendering.Skia;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.Styles;
@@ -13,7 +14,7 @@ using Compass = Microsoft.Maui.Essentials.Compass;
 
 namespace Mapsui.Samples.Maui
 {
-    public partial class MapPage : ContentPage
+    public sealed partial class MapPage : ContentPage, IDisposable
     {
         private CancellationTokenSource? gpsCancelation;
         public Func<MapView?, MapClickedEventArgs, bool>? Clicker { get; set; }
@@ -115,23 +116,31 @@ namespace Mapsui.Samples.Maui
 
         public async void StartGPS()
         {
-            this.gpsCancelation = new CancellationTokenSource();
+            try
+            {
+                this.gpsCancelation?.Dispose();
+                this.gpsCancelation = new CancellationTokenSource();
 
-            await Task.Run(async () => {
-                while (!gpsCancelation.IsCancellationRequested)
-                {
-                    var request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
-                    await Device.InvokeOnMainThreadAsync(async () => {
-                        var location = await Geolocation.GetLocationAsync(request, this.gpsCancelation.Token).ConfigureAwait(false);
-                        if (location != null)
-                        {
-                            MyLocationPositionChanged(location);
-                        }
-                    }).ConfigureAwait(false);
+                await Task.Run(async () => {
+                    while (!gpsCancelation.IsCancellationRequested)
+                    {
+                        var request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
+                        await Device.InvokeOnMainThreadAsync(async () => {
+                            var location = await Geolocation.GetLocationAsync(request, this.gpsCancelation.Token).ConfigureAwait(false);
+                            if (location != null)
+                            {
+                                MyLocationPositionChanged(location);
+                            }
+                        }).ConfigureAwait(false);
 
-                    await Task.Delay(200).ConfigureAwait(false);
-                }
-            }, gpsCancelation.Token).ConfigureAwait(false);
+                        await Task.Delay(200).ConfigureAwait(false);
+                    }
+                }, gpsCancelation.Token).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                Logging.Logger.Log(LogLevel.Error, e.Message, e);
+            }
         }
 
         public void StopGPS()
@@ -141,8 +150,7 @@ namespace Mapsui.Samples.Maui
 
         /// <summary>
         /// New informations from Geolocator arrived
-        /// </summary>
-        /// <param name="sender">Geolocator</param>
+        /// </summary>        
         /// <param name="e">Event arguments for new position</param>
         private void MyLocationPositionChanged(Location e)
         {
@@ -163,6 +171,11 @@ namespace Mapsui.Samples.Maui
         private void Compass_ReadingChanged(object? sender, CompassChangedEventArgs e)
         {
             mapView.MyLocationLayer.UpdateMyViewDirection(e.Reading.HeadingMagneticNorth, mapView.Viewport.Rotation, false);
+        }
+
+        public void Dispose()
+        {
+            ((IDisposable?)gpsCancelation)?.Dispose();
         }
     }
 }

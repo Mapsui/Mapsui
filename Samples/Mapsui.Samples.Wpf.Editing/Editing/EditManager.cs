@@ -27,10 +27,10 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
     {
         public WritableLayer? Layer { get; set; }
 
-        private readonly DragInfo _dragInfo = new ();
-        private readonly AddInfo _addInfo = new ();
-        private readonly RotateInfo _rotateInfo = new ();
-        private readonly ScaleInfo _scaleInfo = new ();
+        private readonly DragInfo _dragInfo = new();
+        private readonly AddInfo _addInfo = new();
+        private readonly RotateInfo _rotateInfo = new();
+        private readonly ScaleInfo _scaleInfo = new();
 
         public EditMode EditMode { get; set; }
 
@@ -73,7 +73,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
         internal void HoveringVertex(MapInfo? mapInfo)
         {
             if (_addInfo.Vertex != null)
-            { 
+            {
                 _addInfo.Vertex.SetXY(mapInfo?.WorldPosition);
                 _addInfo.Feature?.RenderedGeometry.Clear();
                 Layer?.DataHasChanged();
@@ -194,7 +194,7 @@ namespace Mapsui.Samples.Wpf.Editing.Editing
             {
                 var count = polygon.ExteriorRing?.Coordinates.Length ?? 0;
                 var vertices = polygon.ExteriorRing?.Coordinates ?? Array.Empty<Coordinate>();
-                var index = vertices.ToList().IndexOf(_dragInfo.Vertex!); 
+                var index = vertices.ToList().IndexOf(_dragInfo.Vertex!);
                 if (index >= 0)
                     // It is a ring where the first should be the same as the last.
                     // So if the first was removed than set the last to the value of the new first

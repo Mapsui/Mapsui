@@ -76,7 +76,7 @@ namespace Mapsui.UI.Android
             _canvas?.Dispose();
             _canvas = RenderMode == SkiaRenderMode.Software ? StartSoftwareRenderMode() : StartHardwareRenderMode();
             _mainLooperHandler?.Dispose();
-            _mainLooperHandler = new Handler(Looper.MainLooper);
+            _mainLooperHandler = new Handler(Looper.MainLooper!);
 
             SetViewportSize(); // todo: check if size is available, perhaps we need a load event
 
@@ -91,7 +91,7 @@ namespace Mapsui.UI.Android
             _gestureDetector.DoubleTap += OnDoubleTapped;
         }
 
-        private void CanvasOnPaintSurface(object sender, SKPaintSurfaceEventArgs args)
+        private void CanvasOnPaintSurface(object? sender, SKPaintSurfaceEventArgs args)
         {
             if (PixelDensity <= 0)
                 return;
@@ -128,7 +128,7 @@ namespace Mapsui.UI.Android
             }
         }
 
-        private void OnDoubleTapped(object sender, GestureDetector.DoubleTapEventArgs e)
+        private void OnDoubleTapped(object? sender, GestureDetector.DoubleTapEventArgs e)
         {
             if (e.Event == null)
                 return;
@@ -137,7 +137,7 @@ namespace Mapsui.UI.Android
             OnInfo(InvokeInfo(position, position, 2));
         }
 
-        private void OnSingleTapped(object sender, GestureDetector.SingleTapConfirmedEventArgs e)
+        private void OnSingleTapped(object? sender, GestureDetector.SingleTapConfirmedEventArgs e)
         {
             if (e.Event == null)
                 return;
@@ -160,7 +160,7 @@ namespace Mapsui.UI.Android
                 action();
         }
 
-        private void CanvasOnPaintSurfaceGL(object sender, SKPaintGLSurfaceEventArgs args)
+        private void CanvasOnPaintSurfaceGL(object? sender, SKPaintGLSurfaceEventArgs args)
         {
             if (PixelDensity <= 0)
                 return;
@@ -172,12 +172,12 @@ namespace Mapsui.UI.Android
             CommonDrawControl(canvas);
         }
 
-        public void OnFling(object sender, GestureDetector.FlingEventArgs args)
+        public void OnFling(object? sender, GestureDetector.FlingEventArgs args)
         {
             Navigator?.FlingWith(args.VelocityX / 10, args.VelocityY / 10, 1000);
         }
 
-        public void MapView_Touch(object sender, TouchEventArgs args)
+        public void MapView_Touch(object? sender, TouchEventArgs args)
         {
             if (_gestureDetector.OnTouchEvent(args.Event))
                 return;

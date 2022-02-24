@@ -113,7 +113,7 @@ namespace Mapsui.Rendering.Skia
             var inradius = altitude / 3.0;
             var circumradius = 2.0 * inradius;
 
-            var topX = x; 
+            var topX = x;
             var topY = y - circumradius;
             var leftX = x + sideLength * -0.5;
             var leftY = y + inradius;
