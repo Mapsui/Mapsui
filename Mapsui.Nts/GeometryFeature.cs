@@ -18,7 +18,7 @@ namespace Mapsui.Nts
             Geometry = geometryFeature.Geometry?.Copy();
         }
 
-        public GeometryFeature(Geometry geometry)
+        public GeometryFeature(Geometry? geometry)
         {
             Geometry = geometry;
         }

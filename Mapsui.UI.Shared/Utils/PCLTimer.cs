@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
+#pragma warning disable VSTHRD110 // Observe the awaitable result of this method call by awaiting it
 #pragma warning disable 1587
 /// <remark>
 /// Found at https://gist.github.com/YARG/681f426b78af6d77baab
@@ -28,7 +29,6 @@ namespace Mapsui.UI
 #pragma warning restore CS4014 // Missing await #pragma directive
                     await Task.Delay(period);
                 }
-
             }, Tuple.Create(callback, state), CancellationToken.None,
                 TaskContinuationOptions.ExecuteSynchronously | TaskContinuationOptions.OnlyOnRanToCompletion,
                 TaskScheduler.Default);

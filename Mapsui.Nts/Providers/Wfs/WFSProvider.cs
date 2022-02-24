@@ -417,21 +417,25 @@ namespace Mapsui.Providers.Wfs
 
                     // GML2
                     case "LineStringPropertyType":
+                        geomFactory?.Dispose();
                         geomFactory = new LineStringFactory(_httpClientUtil, _featureTypeInfo);
                         break;
 
                     // GML2
                     case "PolygonPropertyType":
+                        geomFactory?.Dispose();
                         geomFactory = new PolygonFactory(_httpClientUtil, _featureTypeInfo);
                         break;
 
                     // GML3
                     case "CurvePropertyType":
+                        geomFactory?.Dispose();
                         geomFactory = new LineStringFactory(_httpClientUtil, _featureTypeInfo);
                         break;
 
                     // GML3
                     case "SurfacePropertyType":
+                        geomFactory?.Dispose();
                         geomFactory = new PolygonFactory(_httpClientUtil, _featureTypeInfo);
                         break;
 
@@ -439,6 +443,7 @@ namespace Mapsui.Providers.Wfs
 
                     // GML2
                     case "MultiPointPropertyType":
+                        geomFactory?.Dispose();
                         if (_multiGeometries)
                             geomFactory = new MultiPointFactory(_httpClientUtil, _featureTypeInfo);
                         else
@@ -447,6 +452,7 @@ namespace Mapsui.Providers.Wfs
 
                     // GML2
                     case "MultiLineStringPropertyType":
+                        geomFactory?.Dispose();
                         if (_multiGeometries)
                             geomFactory = new MultiLineStringFactory(_httpClientUtil, _featureTypeInfo);
                         else
@@ -455,6 +461,7 @@ namespace Mapsui.Providers.Wfs
 
                     // GML2
                     case "MultiPolygonPropertyType":
+                        geomFactory?.Dispose();
                         if (_multiGeometries)
                             geomFactory = new MultiPolygonFactory(_httpClientUtil, _featureTypeInfo);
                         else
@@ -463,6 +470,7 @@ namespace Mapsui.Providers.Wfs
 
                     // GML3
                     case "MultiCurvePropertyType":
+                        geomFactory?.Dispose();
                         if (_multiGeometries)
                             geomFactory = new MultiLineStringFactory(_httpClientUtil, _featureTypeInfo);
                         else
@@ -471,6 +479,7 @@ namespace Mapsui.Providers.Wfs
 
                     // GML3
                     case "MultiSurfacePropertyType":
+                        geomFactory?.Dispose();
                         if (_multiGeometries)
                             geomFactory = new MultiPolygonFactory(_httpClientUtil, _featureTypeInfo);
                         else
@@ -480,6 +489,7 @@ namespace Mapsui.Providers.Wfs
                     // .e.g. 'gml:GeometryAssociationType' or 'GeometryPropertyType'
                     //It's better to set the geometry type manually, if it is known...
                     default:
+                        geomFactory?.Dispose();
                         geomFactory = new UnspecifiedGeometryFactoryWfs100Gml2(_httpClientUtil, _featureTypeInfo,
                                                                                    _multiGeometries, _quickGeometries);
                         break;

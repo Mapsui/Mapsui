@@ -17,7 +17,11 @@
 		<PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
 		<PackageReference Include="SkiaSharp.Views.Forms.WPF" Version="2.88.0-preview.209" />
 		<PackageReference Include="Xamarin.Forms.Platform.WPF" Version="5.0.0.1905" />
+		<PackageReference Include="SkiaSharp.Views.Forms.WPF" Version="2.80.3"  NoWarn="NU1701"/>
+		<PackageReference Include="Xamarin.Forms.Platform.WPF" Version="5.0.0.1905" NoWarn="NU1701" />
 		<PackageReference Include="Xamarin.Forms" Version="5.0.0.2083" />
+    <PackageReference Include="OpenTK.GLControl" Version="3.0.1" NoWarn="NU1701"/>
+    <PackageReference Include="OpenTK" Version="3.0.1" NoWarn="NU1701"/>
 	</ItemGroup>
 	
 </Project>
