@@ -12,7 +12,6 @@ namespace Mapsui.Tests.Common.Maps
     {
         private const string LabelColumn = "Label";
         public string Category => "Tests";
-
         public string Name => "Stacked Labels";
 
         public void Setup(IMapControl mapControl)
