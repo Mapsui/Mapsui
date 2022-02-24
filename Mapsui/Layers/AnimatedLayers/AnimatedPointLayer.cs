@@ -14,7 +14,10 @@ public class AnimatedPointLayer : BaseLayer
     {
         _dataSource = dataSource;
         if (_dataSource is IDynamic dynamic)
-            dynamic.DataChanged += (s, e) => new DataChangedEventArgs();
+            dynamic.DataChanged += (s, e) => {
+                UpdateData();
+                DataHasChanged();
+            };
     }
 
     public void UpdateData()

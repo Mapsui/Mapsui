@@ -16,75 +16,68 @@ using Mapsui.Utilities;
 
 #pragma warning disable CS8670 // Object or collection initializer implicitly dereferences possibly null member.
 
-namespace Mapsui.Samples.Common.Maps.Special
+namespace Mapsui.Samples.Common.Maps.Special;
+
+public class PointFeatureAnimationSamples : ISample
 {
-    public class PointFeatureAnimationSamples : ISample
+    public string Name => "Point Feature Animation";
+
+    public string Category => "Animations";
+
+    public void Setup(IMapControl mapControl)
     {
-        public string Name => "Point Feature Animation";
-
-        public string Category => "Animations";
-
-        public void Setup(IMapControl mapControl)
-        {
-            mapControl.Map = CreateMap();
-        }
-
-        public static Map CreateMap()
-        {
-            var map = new Map();
-            map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            map.Layers.Add(new AnimatedPointsWithAutoUpdateLayer { Name = "Animated Points" });
-            return map;
-        }
+        mapControl.Map = CreateMap();
     }
 
-    public class AnimatedPointsWithAutoUpdateLayer : AnimatedPointLayer
+    public static Map CreateMap()
+    {
+        var map = new Map();
+        map.Layers.Add(OpenStreetMap.CreateTileLayer());
+        map.Layers.Add(CreateAnimatedPointLayer());
+        return map;
+    }
+
+    private static ILayer CreateAnimatedPointLayer()
+    {
+        return new AnimatedPointLayer(new DynamicMemoryProvider())
+        {
+            Name = "Animated Points",
+            Style = CreatePointStyle()
+        };
+    }
+
+    private static IStyle CreatePointStyle()
+    {
+        return new ThemeStyle(f => {
+            return CreateSvgArrowStyle("Images.arrow.svg", 0.5, f);
+        });
+    }
+
+    private static IStyle CreateSvgArrowStyle(string embeddedResourcePath, double scale, IFeature feature)
+    {
+        var bitmapId = typeof(SvgSample).LoadSvgId(embeddedResourcePath);
+        return new SymbolStyle
+        {
+            BitmapId = bitmapId,
+            SymbolScale = scale,
+            SymbolOffset = new Offset(0.0, 0.5, true),
+            Opacity = 0.5f,
+            SymbolRotation = (double)feature["rotation"]!
+        };
+    }
+
+    internal class DynamicMemoryProvider : MemoryProvider<PointFeature>, IDynamic, IDisposable
     {
         // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
         // ReSharper disable once NotAccessedField.Local
         private readonly Timer _timer;
-
-        public AnimatedPointsWithAutoUpdateLayer()
-            : base(new DynamicMemoryProvider())
-        {
-            Style = CreatePointStyle();
-            _timer = new Timer(_ => UpdateData(), this, 0, 2000);
-        }
-
-        private static IStyle CreatePointStyle()
-        {
-            return new ThemeStyle(f => {
-                return CreateSvgArrowStyle("Images.arrow.svg", 0.5, f);
-            });
-        }
-
-        private static IStyle CreateSvgArrowStyle(string embeddedResourcePath, double scale, IFeature feature)
-        {
-            var bitmapId = typeof(SvgSample).LoadSvgId(embeddedResourcePath);
-            return new SymbolStyle
-            {
-                BitmapId = bitmapId,
-                SymbolScale = scale,
-                SymbolOffset = new Offset(0.0, 0.5, true),
-                Opacity = 0.5f,
-                SymbolRotation = (double)feature["rotation"]!
-            };
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-            if (disposing)
-            {
-                _timer.Dispose();
-            }
-        }
-    }
-
-    internal class DynamicMemoryProvider : MemoryProvider<PointFeature>, IDynamic
-    {
         private readonly Random _random = new(0);
         private IEnumerable<PointFeature> _previousFeatures = new List<PointFeature>();
+
+        public DynamicMemoryProvider()
+        {
+            _timer = new Timer(_ => DataHasChanged(), this, 0, 2000);
+        }
 
         public event DataChangedEventHandler? DataChanged;
 
@@ -132,6 +125,20 @@ namespace Mapsui.Samples.Common.Maps.Special
         private void OnDataChanged()
         {
             DataChanged?.Invoke(this, new DataChangedEventArgs(null, false, null));
+        }
+
+        public virtual void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        public virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _timer.Dispose();
+            }
         }
     }
 }
