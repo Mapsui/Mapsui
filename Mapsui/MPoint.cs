@@ -82,10 +82,23 @@ public class MPoint
         return Rotate(degrees, center.X, center.Y);
     }
 
+    /// <summary>
+    ///     Calculates a new point by rotating this point clockwise about the origin (0,0)
+    /// </summary>
+    /// <param name="degrees">Angle to rotate clockwise (degrees)</param>
+    /// <returns>Returns the rotated point</returns>
+    public MPoint Rotate(double degrees)
+    {
+        // rotate the values
+        return Algorithms.RotateClockwiseDegrees(X, Y, degrees);
+    }
+
     public static MPoint operator +(MPoint point1, MPoint point2)
     {
-        return new MPoint(point1.X + point2.X, point1 .Y + point2.Y);
+        return new MPoint(point1.X + point2.X, point1.Y + point2.Y);
     }
+
+    public override string ToString() => $"(X={X},Y={Y})";
 
     public static MPoint operator -(MPoint point1, MPoint point2)
     {

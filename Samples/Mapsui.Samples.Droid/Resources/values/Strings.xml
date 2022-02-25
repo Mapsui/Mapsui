@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Mapsui.Samples.Droid</string>
+    <string name="app_text">Hello, Android!</string>
     <string name="action_settings">Settings</string>
+    <!-- The class name to the ScrollingChildBehavior required for AppBarLayout -->
+    <string name="appbar_scrolling_view_behavior" translatable="false">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
 </resources>

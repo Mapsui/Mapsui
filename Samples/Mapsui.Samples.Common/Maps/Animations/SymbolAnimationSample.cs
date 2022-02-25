@@ -93,13 +93,19 @@ namespace Mapsui.Samples.Common.Maps
                 tick: (symbolStyle, e, v) => {
                     var start = (Color)e.Start;
                     var end = (Color)e.End;
-                    symbolStyle.Fill.Color = new Color(
-                        (int)(start.R * (1.0 - v) + end.R * v),
-                        (int)(start.G * (1.0 - v) + end.G * v),
-                        (int)(start.B * (1.0 - v) + end.B * v));
+                    if (symbolStyle.Fill != null)
+                    {
+                        symbolStyle.Fill.Color = new Color(
+                            (int)(start.R * (1.0 - v) + end.R * v),
+                            (int)(start.G * (1.0 - v) + end.G * v),
+                            (int)(start.B * (1.0 - v) + end.B * v));
+                    }
                 },
                 final: (symbolStyle, e) => {
-                    symbolStyle.Fill.Color = (Color)e.End;
+                    if (symbolStyle.Fill != null)
+                    {
+                        symbolStyle.Fill.Color = (Color)e.End;
+                    }
                 }
             );
             animations.Add(entry3);

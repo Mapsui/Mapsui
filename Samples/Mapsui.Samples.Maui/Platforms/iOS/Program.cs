@@ -1,7 +1,7 @@
 ﻿using System.Runtime.Versioning;
 using UIKit;
 
-[assembly:SupportedOSPlatform("iOS15.0")]
+[assembly: SupportedOSPlatform("iOS15.0")]
 
 namespace Mapsui.Samples.Maui
 {

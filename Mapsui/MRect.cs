@@ -189,4 +189,13 @@ public class MRect
             (Min.Y, Max.Y) = (Max.Y, Min.Y);
         }
     }
+
+    /// <summary>
+    ///     Returns a string representation of the vertices from bottom-left and top-right
+    /// </summary>
+    /// <returns>Returns the string</returns>
+    public override string ToString()
+    {
+        return $"BL: {BottomLeft}  TR: {TopRight}";
+    }
 }

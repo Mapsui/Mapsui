@@ -1,74 +1,25 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E71F3053-056C-4381-9638-048ED73BDFF6}</ProjectGuid>
-    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <TemplateGuid>{a52b8a63-bc84-4b47-910d-692533484892}</TemplateGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Mapsui.UI.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>Mapsui.UI.iOS</AssemblyName>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <TargetFramework>net60-ios13.6</TargetFramework>
+    <ImplicitUsings>true</ImplicitUsings>
+    <!--<RuntimeIdentifiers>iossimulator-x64</RuntimeIdentifiers>-->
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>portable</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchLink>SdkOnly</MtouchLink>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>portable</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release</OutputPath>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
-    <LangVersion>latest</LangVersion>
     <MtouchLink>SdkOnly</MtouchLink>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Core" />
-    <Reference Include="Xamarin.iOS" />
+    <ProjectReference Include="..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
+    <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Extensions\CGPointExtensions.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="MapControl.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj">
-      <Project>{DEA6E9AE-2B6A-4E83-83B7-E9DF0E492301}</Project>
-      <Name>Mapsui.Rendering.Skia</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Mapsui\Mapsui.csproj">
-      <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>
-      <Name>Mapsui</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="SkiaSharp.Views">
-      <Version>2.80.2</Version>
-    </PackageReference>
-    <PackageReference Include="System.Memory">
-      <Version>4.5.4</Version>
-    </PackageReference>
+    <PackageReference Include="SkiaSharp.Views" Version="2.88.0-preview.209" />
   </ItemGroup>
   <Import Project="..\Mapsui.UI.Shared\Mapsui.UI.Shared.projitems" Label="Shared" />
-  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

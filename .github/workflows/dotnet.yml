@@ -33,8 +33,14 @@ jobs:
       with:
          dotnet-version: | 
            5.0.x
-      # Disabled in attempt to fix build     6.0.x
-      # Disabled in attempt to fix build server error: include-prerelease: true
+           6.0.x
+         include-prerelease: true    
+    - name: install maui
+      run: dotnet workload install maui
+    - name: install maui-check
+      run: dotnet tool install -g Redth.Net.Maui.Check
+    - name: run maui-check
+      run: maui-check --fix --non-interactive --skip vswin --skip edgewebview2 --skip androidemulator --skip dotnetworkloads-6.0.100 --skip dotnet --skip dotnet-workload-dedup --skip dotnetsentinel --skip xcode     
     - name: Restore dependencies
       run: nuget restore Mapsui.Mac.sln
     - name: Build Mapsui
@@ -86,6 +92,10 @@ jobs:
         vs-prerelease: true
     - name: install maui
       run: dotnet workload install maui
+    - name: install maui-check
+      run: dotnet tool install -g Redth.Net.Maui.Check
+    - name: run maui-check
+      run: maui-check --fix --non-interactive --skip vswin --skip edgewebview2 --skip androidemulator --skip dotnetworkloads-6.0.100 --skip dotnet --skip dotnet-workload-dedup --skip dotnetsentinel
     - name: Restore dependencies
       run: nuget restore Mapsui.sln
     - name: Build Mapsui
@@ -114,6 +124,8 @@ jobs:
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Uno/Mapsui.UI.Uno.csproj
     - name: Build Mapsui.UI.WinUI
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.WinUI/Mapsui.UI.WinUI.csproj
+    - name: Build Mapsui.UI.Maui
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Maui/Mapsui.UI.Maui.csproj        
     - name: Generate nuget package (Mapsui)
       run: nuget pack NuSpec/Mapsui.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
     - name: Generate nuget package (Mapsui.Forms)
@@ -130,57 +142,10 @@ jobs:
       run: nuget pack NuSpec/Mapsui.Uno.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
     - name: Generate nuget package (Mapsui.WinUI)
       run: nuget pack NuSpec/Mapsui.WinUI.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
-    - name: Upload packages
-      uses: actions/upload-artifact@v2
-      with:
-        name: nupkg.win
-        path: Artifacts/*.nupkg  
-
-  mauiBuild:
-    runs-on: windows-latest
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-    - name: Setup .NET Core SDK
-      uses: actions/setup-dotnet@v1
-      with:
-         dotnet-version: | 
-           5.0.x
-           6.0.x
-         include-prerelease: true
-    - name: Setup NuGet.exe for use with actions
-      uses: NuGet/setup-nuget@v1.0.5
-      with:
-        nuget-version: latest
-    - name: setup-msbuild
-      uses: microsoft/setup-msbuild@v1.1
-      with:
-        vs-prerelease: true
-    - name: install maui
-      run: dotnet workload install maui
-    - name: install maui-check
-      run: dotnet tool install -g Redth.Net.Maui.Check
-    - name: run maui-check
-      run: maui-check --fix --non-interactive --skip vswin --skip edgewebview2 --skip androidemulator --skip dotnetworkloads-6.0.100 --skip dotnet --skip dotnet-workload-dedup --skip dotnetsentinel
-    - name: Restore dependencies
-      run: nuget restore Mapsui.Maui.sln
-    - name: Build Mapsui
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui/Mapsui.csproj
-    - name: Build Mapsui.Rendering.Skia
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Rendering.Skia/Mapsui.Rendering.Skia.csproj
-    - name: Build Mapsui.Tiling
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Tiling/Mapsui.Tiling.csproj
-    - name: Build Mapsui.Nts
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Nts/Mapsui.Nts.csproj
-    - name: Build Mapsui.ArcGIS
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.ArcGIS/Mapsui.ArcGIS.csproj
-    - name: Build Mapsui.UI.Maui
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Maui/Mapsui.UI.Maui.csproj    
     - name: Generate nuget package (Mapsui.Maui)
       run: nuget pack NuSpec/Mapsui.Maui.nuspec -Version $(git describe --tags) -outputdirectory Artifacts    
     - name: Upload packages
       uses: actions/upload-artifact@v2
       with:
         name: nupkg.win
-        path: Artifacts/*.nupkg
+        path: Artifacts/*.nupkg  

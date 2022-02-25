@@ -91,54 +91,29 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">Client</span></div>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.Providers.Wms.html">Mapsui.Providers.Wms</a></h6>
   <h6><strong>Assembly</strong>: Mapsui.dll</h6>
   <h5 id="Mapsui_Providers_Wms_Client_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[Serializable]
-public class Client</code></pre>
+    <pre><code class="lang-csharp hljs">public class Client : object</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_Client__ctor_System_String_System_String_System_Func_System_String_System_Threading_Tasks_Task_System_IO_Stream___.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.Client.%23ctor(System.String%2CSystem.String%2CSystem.Func%7BSystem.String%2CSystem.Threading.Tasks.Task%7BSystem.IO.Stream%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_Client__ctor_System_String_System_Nullable_System_String__System_Nullable_Func_System_String_Task_Stream____.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.Client.%23ctor(System.String%2CSystem.Nullable%7BSystem.String%7D%2CSystem.Nullable%7BFunc%7BSystem.String%2CTask%7BStream%7D%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/Client.cs/#L204">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wms_Client__ctor_" data-uid="Mapsui.Providers.Wms.Client.#ctor*"></a>
-  <h4 id="Mapsui_Providers_Wms_Client__ctor_System_String_System_String_System_Func_System_String_System_Threading_Tasks_Task_System_IO_Stream___" data-uid="Mapsui.Providers.Wms.Client.#ctor(System.String,System.String,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}})">Client(String, String, Func&lt;String, Task&lt;Stream&gt;&gt;)</h4>
+  <h4 id="Mapsui_Providers_Wms_Client__ctor_System_String_System_Nullable_System_String__System_Nullable_Func_System_String_Task_Stream____" data-uid="Mapsui.Providers.Wms.Client.#ctor(System.String,System.Nullable{System.String},System.Nullable{Func{System.String,Task{Stream}}})">Client(String, Nullable&lt;String&gt;, Nullable&lt;Func&lt;String, Task&lt;Stream&gt;&gt;&gt;)</h4>
   <div class="markdown level1 summary"><p>Initializes WMS server and parses the Capabilities request</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Client(string url, string wmsVersion = null, Func&lt;string, Task&lt;Stream&gt;&gt; getStreamAsync = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public Client(string url, string? wmsVersion = null, Func&lt;string, Task&lt;Stream&gt;&gt;? getStreamAsync = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -157,13 +132,13 @@ public class Client</code></pre>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">System.String</span></td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">wmsVersion</span></td>
         <td><p>WMS version number, null to get the default from service</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.IO.Stream</span>&gt;&gt;</td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">Func</span>&lt;<span class="xref">System.String</span>, <span class="xref">Task</span>&lt;<span class="xref">Stream</span>&gt;&gt;&gt;</td>
         <td><span class="parametername">getStreamAsync</span></td>
         <td><p>Download method, leave null for default</p>
 </td>
@@ -172,18 +147,18 @@ public class Client</code></pre>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_Client__ctor_System_Xml_XmlDocument_System_Func_System_String_System_Threading_Tasks_Task_System_IO_Stream___.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.Client.%23ctor(System.Xml.XmlDocument%2CSystem.Func%7BSystem.String%2CSystem.Threading.Tasks.Task%7BSystem.IO.Stream%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_Wms_Client__ctor_XmlDocument_System_Nullable_Func_System_String_Task_Stream____.md&amp;value=---%0Auid%3A%20Mapsui.Providers.Wms.Client.%23ctor(XmlDocument%2CSystem.Nullable%7BFunc%7BSystem.String%2CTask%7BStream%7D%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/Wms/Client.cs/#L226">View Source</a>
   </span>
   <a id="Mapsui_Providers_Wms_Client__ctor_" data-uid="Mapsui.Providers.Wms.Client.#ctor*"></a>
-  <h4 id="Mapsui_Providers_Wms_Client__ctor_System_Xml_XmlDocument_System_Func_System_String_System_Threading_Tasks_Task_System_IO_Stream___" data-uid="Mapsui.Providers.Wms.Client.#ctor(System.Xml.XmlDocument,System.Func{System.String,System.Threading.Tasks.Task{System.IO.Stream}})">Client(XmlDocument, Func&lt;String, Task&lt;Stream&gt;&gt;)</h4>
+  <h4 id="Mapsui_Providers_Wms_Client__ctor_XmlDocument_System_Nullable_Func_System_String_Task_Stream____" data-uid="Mapsui.Providers.Wms.Client.#ctor(XmlDocument,System.Nullable{Func{System.String,Task{Stream}}})">Client(XmlDocument, Nullable&lt;Func&lt;String, Task&lt;Stream&gt;&gt;&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Client(XmlDocument capabilitiesXmlDocument, Func&lt;string, Task&lt;Stream&gt;&gt; getStreamAsync = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public Client(XmlDocument capabilitiesXmlDocument, Func&lt;string, Task&lt;Stream&gt;&gt;? getStreamAsync = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -196,12 +171,12 @@ public class Client</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Xml.XmlDocument</span></td>
+        <td><span class="xref">XmlDocument</span></td>
         <td><span class="parametername">capabilitiesXmlDocument</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Func</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.Threading.Tasks.Task</span>&lt;<span class="xref">System.IO.Stream</span>&gt;&gt;</td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">Func</span>&lt;<span class="xref">System.String</span>, <span class="xref">Task</span>&lt;<span class="xref">Stream</span>&gt;&gt;&gt;</td>
         <td><span class="parametername">getStreamAsync</span></td>
         <td></td>
       </tr>
@@ -254,7 +229,7 @@ public class Client</code></pre>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Collection&lt;string&gt; GetFeatureInfoOutputFormats { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public Collection&lt;string&gt;? GetFeatureInfoOutputFormats { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -266,7 +241,7 @@ public class Client</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">Collection</span>&lt;<span class="xref">System.String</span>&gt;&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -316,7 +291,7 @@ public class Client</code></pre>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Collection&lt;string&gt; GetMapOutputFormats { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public Collection&lt;string&gt;? GetMapOutputFormats { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -328,7 +303,7 @@ public class Client</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">Collection</span>&lt;<span class="xref">System.String</span>&gt;&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -441,7 +416,7 @@ could use this to parse the vendor specific capabilities for their specific purp
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public XmlNode VendorSpecificCapabilities { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public XmlNode? VendorSpecificCapabilities { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -453,7 +428,7 @@ could use this to parse the vendor specific capabilities for their specific purp
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Xml.XmlNode</span></td>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">XmlNode</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>

@@ -51,13 +51,13 @@
     <PackageReference Include="Microsoft.Windows.Compatibility" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="Uno.Extensions.Logging.WebAssembly.Console" Version="1.1.0" />
-    <PackageReference Include="Uno.UI.WebAssembly" Version="4.0.11" />
-    <PackageReference Include="Uno.UI.RemoteControl" Version="4.0.11" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.Wasm.Bootstrap" Version="3.0.0" />
-    <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="3.0.0" />
+    <PackageReference Include="Uno.UI.WebAssembly" Version="4.0.13" />
+    <PackageReference Include="Uno.UI.RemoteControl" Version="4.0.13" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.Wasm.Bootstrap" Version="3.2.0" />
+    <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="3.2.0" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup>    
     <ProjectReference Include="..\..\..\Mapsui.Nts\Mapsui.Nts.csproj" />
     <ProjectReference Include="..\..\..\Mapsui.Tiling\Mapsui.Tiling.csproj" />
     <ProjectReference Include="..\..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />

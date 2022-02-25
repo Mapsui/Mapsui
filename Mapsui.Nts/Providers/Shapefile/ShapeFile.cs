@@ -290,7 +290,7 @@ namespace Mapsui.Nts.Providers.Shapefile
             {
                 _fsShapeIndex?.Dispose();
                 _fsShapeIndex = new FileStream(_filename.Remove(_filename.Length - 4, 4) + ".shx", FileMode.Open, FileAccess.Read);
-                _brShapeFile?.Dispose();
+                _brShapeIndex?.Dispose();
                 _brShapeIndex = new BinaryReader(_fsShapeIndex, Encoding.Unicode);
                 _fsShapeFile?.Dispose();
                 _fsShapeFile = new FileStream(_filename, FileMode.Open, FileAccess.Read);
@@ -420,7 +420,7 @@ namespace Mapsui.Nts.Providers.Shapefile
         {
             if (FilterDelegate != null) //Apply filtering
             {
-                var fdr = GetFeature(oid);
+                using var fdr = GetFeature(oid);
                 return fdr?.Geometry;
             }
 
@@ -793,7 +793,7 @@ namespace Mapsui.Nts.Providers.Shapefile
                                 // So the previous one is done and is added to the list. A new list of linear rings is created for the next polygon.
                                 var p1 = CreatePolygon(linearRings);
                                 if (p1 is not null) polygons.Add(p1);
-                                linearRings = new List<LinearRing>{ rings[i] };
+                                linearRings = new List<LinearRing> { rings[i] };
                             }
                             else
                                 linearRings.Add(rings[i]);
