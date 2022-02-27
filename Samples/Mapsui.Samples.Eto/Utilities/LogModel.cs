@@ -1,8 +1,8 @@
-﻿using System;
-using Mapsui.Logging;
-
+﻿
 namespace Mapsui.Samples.Eto
 {
+    using System;
+    using Mapsui.Logging;
     class LogModel
     {
         public Exception? Exception { get; set; }

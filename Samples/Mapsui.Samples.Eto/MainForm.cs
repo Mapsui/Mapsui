@@ -16,10 +16,10 @@ namespace Mapsui.Samples.Eto
 
     public partial class MainForm : Form
     {
-        DropDown CategoryComboBox = new () { Width = 200 };
-        StackLayout SampleList = new ();
-        MapControl MapControl = new ();
-        Label FeatureInfo = new (); // 'click info'
+        DropDown CategoryComboBox = new() { Width = 200 };
+        StackLayout SampleList = new();
+        MapControl MapControl = new();
+        Label FeatureInfo = new(); // 'click info'
         Label LogTextBox = new(); // 'information time'
         Label MouseCoordinates = new();
         StackLayout LayerList = new() { HorizontalContentAlignment = HorizontalAlignment.Right };
@@ -59,7 +59,7 @@ namespace Mapsui.Samples.Eto
             map_layout.Add(FeatureInfo, Point.Empty);
             map_layout.Add(MouseCoordinates, Point.Empty);
 
-            this.Content = new DynamicLayout(new DynamicRow(sample_layout, map_layout)) { Spacing = new Size(4,4) };
+            this.Content = new DynamicLayout(new DynamicRow(sample_layout, map_layout)) { Spacing = new Size(4, 4) };
         }
         private void MapLayoutSizeChanged(object? sender, EventArgs e)
         {
@@ -152,7 +152,7 @@ namespace Mapsui.Samples.Eto
         }
         private void RotationSliderChanged(object? sender, EventArgs e)
         {
-            var percent = (double) RotationSlider.Value / (RotationSlider.MaxValue - RotationSlider.MinValue);
+            var percent = (double)RotationSlider.Value / (RotationSlider.MaxValue - RotationSlider.MinValue);
             MapControl.Navigator.RotateTo(percent * 360);
             MapControl.Refresh();
         }

@@ -1,7 +1,7 @@
-﻿using System.Collections.Concurrent;
-
+﻿
 namespace Mapsui.Samples.Eto
 {
+    using System.Collections.Concurrent;
     public class LimitedQueue<T> : ConcurrentQueue<T>
     {
         public int Limit { get; set; }

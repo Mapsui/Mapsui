@@ -8,7 +8,7 @@ namespace Mapsui.Samples.Eto
         public LayerListItem(ILayer layer)
         {
             var checkBox = new CheckBox { Checked = layer.Enabled };
-            checkBox.CheckedChanged += (o,e) => layer.Enabled = checkBox.Checked.Value;
+            checkBox.CheckedChanged += (o, e) => layer.Enabled = checkBox.Checked.Value;
 
             var opacity = new Slider { SnapToTick = true };
             double range = opacity.MaxValue - opacity.MinValue;
