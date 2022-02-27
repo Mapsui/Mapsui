@@ -22,12 +22,17 @@ namespace Mapsui.Samples.Eto
         Label FeatureInfo = new (); // 'click info'
         Label LogTextBox = new(); // 'information time'
         Label MouseCoordinates = new();
+        StackLayout LayerList = new() { HorizontalContentAlignment = HorizontalAlignment.Right };
         Slider RotationSlider = new() { Width = 200 };
         public MainForm()
         {
             this.InitializeComponent();
 
             this.Size = new Size(3, 2) * 340;
+
+            var eto_platform = global::Eto.Platform.Instance.ToString();
+            var os_platform = System.Environment.OSVersion.ToString();
+            this.Title = $"Mapsui SampleApp - {eto_platform} - {os_platform}";
 
             MapControl.MouseMove += MapControlOnMouseMove;
             MapControl.Map!.RotationLock = false;
@@ -49,7 +54,7 @@ namespace Mapsui.Samples.Eto
             var map_layout = new PixelLayout();
             map_layout.SizeChanged += MapLayoutSizeChanged;
             map_layout.Add(MapControl, Point.Empty);
-            map_layout.Add(RotationSlider, Point.Empty);
+            map_layout.Add(LayerList, Point.Empty);
             map_layout.Add(LogTextBox, Point.Empty);
             map_layout.Add(FeatureInfo, Point.Empty);
             map_layout.Add(MouseCoordinates, Point.Empty);
@@ -61,7 +66,7 @@ namespace Mapsui.Samples.Eto
             if (sender is PixelLayout layout)
             {
                 MapControl.Size = layout.Size;
-                layout.Move(RotationSlider, layout.Width - RotationSlider.Width, 0);
+                layout.Move(LayerList, layout.Width - LayerList.Width, 0);
                 var feature_info_height = MouseCoordinates.Height * 2;
                 var logtext_box_height = MouseCoordinates.Height * _logMessage.Limit;
                 layout.Move(LogTextBox, 0, layout.Height - feature_info_height - logtext_box_height);
@@ -116,8 +121,12 @@ namespace Mapsui.Samples.Eto
                 sample.Setup(MapControl);
 
                 MapControl.Info += MapControlOnInfo;
-                if (MapControl.Map != null) // tftf todo control øverst til høyre
-                    ; // LayerList.Initialize(MapControl.Map.Layers);
+
+                LayerList.Items.Clear();
+                if (MapControl.Map != null)
+                    foreach (var layer in MapControl.Map.Layers)
+                        LayerList.Items.Add(new LayerListItem(layer));
+                LayerList.Items.Add(RotationSlider);
             };
             return radioButton;
         }
