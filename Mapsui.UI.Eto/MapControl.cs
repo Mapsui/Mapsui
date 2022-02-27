@@ -11,10 +11,7 @@ namespace Mapsui.UI.Eto
     public partial class MapControl : SkiaDrawable, IMapControl
     {
         private RectangleF _selectRectangle = new();
-        private MPoint? _currentMousePosition;
-        private MPoint? _downMousePosition;
-        private bool _mouseDown;
-        private MPoint? _previousMousePosition;
+        private PointF? _downMousePosition;
         public MouseWheelAnimation MouseWheelAnimation { get; } = new();
         public MapControl()
         {
@@ -30,13 +27,29 @@ namespace Mapsui.UI.Eto
             MouseUp += MapControlMouseLeftButtonUp;
 
             MouseMove += MapControlMouseMove;
-            MouseLeave += MapControlMouseLeave;
             MouseWheel += MapControlMouseWheel;
 
             SizeChanged += MapControlSizeChanged;
 
             Renderer = new MapRenderer();
             RefreshGraphics();
+
+            Content = CreateBoundingBoxDrawable();
+        }
+        private Drawable CreateBoundingBoxDrawable()
+        {
+            var drawable = new Drawable { Visible = false };
+
+            drawable.Paint += (o, e) => {
+                var fill = new Color(Colors.Yellow, 0.4f);
+
+                using var border = Pens.Cached(Colors.Black, 1.4f, DashStyles.Dash);
+
+                e.Graphics.FillRectangle(fill, _selectRectangle);
+                e.Graphics.DrawRectangle(border, _selectRectangle);
+            };
+
+            return drawable;
         }
         private void MapControlLoaded(object sender, EventArgs e)
         {
@@ -49,20 +62,14 @@ namespace Mapsui.UI.Eto
             if (_map?.ZoomLock ?? true) return;
             if (!Viewport.HasSize) return;
 
-            _currentMousePosition = e.Location.ToMapsui();
-
             var resolution = MouseWheelAnimation.GetResolution((int)e.Delta.Height, _viewport, _map);
             // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
             resolution = _map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, _map.Resolutions, _map.Extent);
-            Navigator.ZoomTo(resolution, _currentMousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
+            Navigator.ZoomTo(resolution, e.Location.ToMapsui(), MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
         }
         private void MapControlSizeChanged(object sender, EventArgs e)
         {
             SetViewportSize();
-        }
-        private void MapControlMouseLeave(object sender, MouseEventArgs e)
-        {
-            _previousMousePosition = null;
         }
         private void RunOnUIThread(Action action)
         {
@@ -73,47 +80,43 @@ namespace Mapsui.UI.Eto
             if (e.Buttons != MouseButtons.Primary)
                 return;
 
-            var touchPosition = e.Location.ToMapsui();
-            _previousMousePosition = touchPosition;
-            _downMousePosition = touchPosition;
-            _mouseDown = true;
+            IsInBoxZoomMode = e.Modifiers == Keys.Control || e.Modifiers == Keys.LeftControl || e.Modifiers == Keys.RightControl;
+
+            _downMousePosition = e.Location;
         }
-        private static bool IsInBoxZoomMode(Keys key)
+        private bool IsInBoxZoomMode
         {
-            return key == Keys.Control || 
-                key == Keys.LeftControl || key == Keys.RightControl;
+            get => Content.Visible;
+            set
+            {
+                _selectRectangle = RectangleF.Empty;
+                Content.Visible = value;
+            }
         }
         private void MapControlMouseLeftButtonUp(object sender, MouseEventArgs e)
         {
             if (e.Buttons != MouseButtons.Primary)
                 return;
 
-            var mousePosition = e.Location.ToMapsui();
-
-            if (_previousMousePosition != null)
+            if (IsInBoxZoomMode)
             {
-                if (IsInBoxZoomMode(e.Modifiers))
-                {
-                    var previous = Viewport.ScreenToWorld(_previousMousePosition.X, _previousMousePosition.Y);
-                    var current = Viewport.ScreenToWorld(mousePosition.X, mousePosition.Y);
-                    ZoomToBox(previous, current);
-                }
-                else if (_downMousePosition != null && IsClick(mousePosition, _downMousePosition))
-                {
-                    OnInfo(InvokeInfo(mousePosition, _downMousePosition, 1));
-                }
+                var previous = Viewport.ScreenToWorld(_selectRectangle.TopLeft.X, _selectRectangle.TopLeft.Y);
+                var current = Viewport.ScreenToWorld(_selectRectangle.BottomRight.X, _selectRectangle.BottomRight.Y);
+                ZoomToBox(previous, current);
+            }
+            else if (_downMousePosition.HasValue)
+            {
+                if (IsClick(e.Location, _downMousePosition.Value))
+                    OnInfo(InvokeInfo(e.Location.ToMapsui(), _downMousePosition.Value.ToMapsui(), 1));
             }
 
-            RefreshData();
-            _mouseDown = false;
+            _downMousePosition = null;
 
-            _previousMousePosition = new MPoint();
+            RefreshData();
         }
-        private static bool IsClick(MPoint currentPosition, MPoint previousPosition)
+        private static bool IsClick(PointF currentPosition, PointF previousPosition)
         {
-            return
-                Math.Abs(currentPosition.X - previousPosition.X) < 5 &&
-                Math.Abs(currentPosition.Y - previousPosition.Y) < 5;
+            return Math.Abs(PointF.Distance(currentPosition, previousPosition)) < 5;
         }
         public void OpenBrowser(string url)
         {
@@ -121,36 +124,22 @@ namespace Mapsui.UI.Eto
         }
         private void MapControlMouseMove(object sender, MouseEventArgs e)
         {
-            if (IsInBoxZoomMode(e.Modifiers))
+            if (_downMousePosition.HasValue)
             {
-                DrawBbox(e.Location);
-                return;
-            }
-
-            _currentMousePosition = e.Location.ToMapsui(); //Needed for both MouseMove and MouseWheel event
-
-            if (_mouseDown)
-            {
-                if (_previousMousePosition == null)
+                if (IsInBoxZoomMode)
                 {
-                    // Usually MapControlMouseLeftButton down initializes _previousMousePosition but in some
-                    // situations it can be null. So far I could only reproduce this in debug mode when putting
-                    // a breakpoint and continuing.
-                    return;
+                    _selectRectangle.TopLeft = PointF.Min(e.Location, _downMousePosition.Value);
+                    _selectRectangle.BottomRight = PointF.Max(e.Location, _downMousePosition.Value);
+                    Content.Invalidate();
                 }
-
-                _viewport.Transform(_currentMousePosition, _previousMousePosition);
-                RefreshGraphics();
-                _previousMousePosition = _currentMousePosition;
-            }
-            else
-            {
-                if (MouseWheelAnimation.IsAnimating())
+                else // drag/pan - mode
                 {
-                    // Disabled because not performing:
-                    // Navigator.ZoomTo(_toResolution, _currentMousePosition, _mouseWheelAnimationDuration, Easing.QuarticOut);
-                }
+                    _viewport.Transform(e.Location.ToMapsui(), _downMousePosition.Value.ToMapsui());
 
+                    RefreshGraphics();
+
+                    _downMousePosition = e.Location;
+                }
             }
         }
         public void ZoomToBox(MPoint beginPoint, MPoint endPoint)
@@ -171,55 +160,7 @@ namespace Mapsui.UI.Eto
         }
         private void ClearBBoxDrawing()
         {
-            RunOnUIThread(() => Content = null);
-        }
-        private void DrawBbox(PointF newPos)
-        {
-            if (_mouseDown)
-            {
-                if (_previousMousePosition == null) return; // can happen during debug
-
-                var from = _previousMousePosition;
-                var to = newPos;
-
-                if (from.X > to.X)
-                {
-                    var temp = from;
-                    from.X = to.X;
-                    to.X = (float)temp.X;
-                }
-
-                if (from.Y > to.Y)
-                {
-                    var temp = from;
-                    from.Y = to.Y;
-                    to.Y = (float)temp.Y;
-                }
-
-                _selectRectangle.TopLeft = from.ToEto();
-                _selectRectangle.BottomRight = to;
-
-                if (Content is null)
-                {
-                    var drawable = new Drawable();
-
-                    drawable.Paint += (o, e) =>
-                    {
-                        var fill = new Color(Colors.Yellow, 0.4f);
-
-                        using var border = Pens.Cached(Colors.Black, 1.5f, DashStyles.Dash);
-
-                        e.Graphics.FillRectangle(fill, _selectRectangle);
-                        e.Graphics.DrawRectangle(border, _selectRectangle);
-                    };
-
-                    Content = drawable;
-                }
-                else
-                {
-                    Content.Invalidate();
-                }
-            }
+            RunOnUIThread(() => IsInBoxZoomMode = false);
         }
         private float ViewportWidth => Width;
         private float ViewportHeight => Height;
