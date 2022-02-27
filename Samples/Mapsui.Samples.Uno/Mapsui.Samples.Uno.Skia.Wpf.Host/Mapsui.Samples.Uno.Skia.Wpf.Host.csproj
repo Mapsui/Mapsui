@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType Condition="'$(Configuration)'=='Release'">WinExe</OutputType>
     <OutputType Condition="'$(Configuration)'=='Debug'">Exe</OutputType>
@@ -6,9 +6,9 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Uno.UI.Skia.Wpf" Version="4.0.13" />
-    <PackageReference Include="Uno.UI.RemoteControl" Version="4.0.13" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.0.13" />
+    <PackageReference Include="Uno.UI.Skia.Wpf" Version="4.2.0-dev.145" />
+    <PackageReference Include="Uno.UI.RemoteControl" Version="4.2.0-dev.145" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.2.0-dev.145" />
     <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.0-preview.209" />
   </ItemGroup>
   <ItemGroup>
