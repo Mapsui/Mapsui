@@ -3,17 +3,23 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <NoWarn>NU1701</NoWarn>
+    <WasmShellILLinkerEnabled>true</WasmShellILLinkerEnabled>
+    <WasmShellForceDisableWSL Condition="'$(OS)' != 'Unix' and ('$(CI)' == 'true' or '$(BUILD_BUILDID)' != '')">true</WasmShellForceDisableWSL>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
-    <MonoRuntimeDebuggerEnabled>true</MonoRuntimeDebuggerEnabled>
     <DefineConstants>$(DefineConstants);TRACE;DEBUG</DefineConstants>
-    <DebugType>portable</DebugType>
-    <DebugSymbols>true</DebugSymbols>
     <!--
 		IL Linking is disabled in Debug configuration.
 		When building in Release, see https://platform.uno/docs/articles/features/using-il-linker-webassembly.html
 		-->
     <WasmShellILLinkerEnabled>false</WasmShellILLinkerEnabled>
+    <MonoRuntimeDebuggerEnabled>true</MonoRuntimeDebuggerEnabled>
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <WasmShellMonoRuntimeExecutionMode>Interpreter</WasmShellMonoRuntimeExecutionMode>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <WasmShellMonoRuntimeExecutionMode>FullAOT</WasmShellMonoRuntimeExecutionMode>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="Assets\SplashScreen.png" />
@@ -54,6 +60,13 @@
     <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="3.2.0" />
     <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.0-preview.209" />
     <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" Version="2.88.0-preview.209" />
+  </ItemGroup>
+
+  <!--Harfbuzz Sharp references-->
+  <ItemGroup>
+    <PackageReference Include="HarfBuzzSharp" Version="2.8.2-preview.209" />
+    <PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" Version="2.8.2-preview.209" />
+    <NativeFileReference Include="$(HarfBuzzSharpStaticLibraryPath)\2.8.2-preview.209\*.a" />
   </ItemGroup>
 
   <ItemGroup>    
