@@ -201,6 +201,7 @@ namespace Mapsui.UI.Objects
                 SymbolOffset = new Offset(0, -SymbolStyle.DefaultHeight * 0.4f),
                 MaxWidth = 300,
                 RotateWithMap = true,
+                SymbolOffsetRotatesWithMap = true,
                 Color = Styles.Color.White,
                 StrokeWidth = 0,
                 ShadowWidth = 0

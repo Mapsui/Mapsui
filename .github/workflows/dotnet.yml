@@ -33,8 +33,14 @@ jobs:
       with:
          dotnet-version: | 
            5.0.x
-      # Disabled in attempt to fix build     6.0.x
-      # Disabled in attempt to fix build server error: include-prerelease: true
+           6.0.x
+         include-prerelease: true    
+    - name: install maui
+      run: dotnet workload install maui
+    - name: install maui-check
+      run: dotnet tool install -g Redth.Net.Maui.Check
+    - name: run maui-check
+      run: maui-check --fix --non-interactive --skip vswin --skip edgewebview2 --skip androidemulator --skip dotnetworkloads-6.0.100 --skip dotnet --skip dotnet-workload-dedup --skip dotnetsentinel --skip xcode     
     - name: Restore dependencies
       run: nuget restore Mapsui.Mac.sln
     - name: Build Mapsui
