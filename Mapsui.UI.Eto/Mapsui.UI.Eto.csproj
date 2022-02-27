@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
+        <EnableNETAnalyzers>True</EnableNETAnalyzers>
+        <DefineConstants>__ETO_FORMS__</DefineConstants>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Eto.SkiaDraw" Version="0.2.0" />
+        <PackageReference Include="Eto.Forms" Version="2.6.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
+        <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
+    </ItemGroup>
+
+    <Import Project="..\Mapsui.UI.Shared\Mapsui.UI.Shared.projitems" Label="Shared" />
+
+</Project>
