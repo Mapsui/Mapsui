@@ -1,4 +1,4 @@
-﻿<Project Sdk="Tizen.NET.Sdk/1.1.6">
+﻿<Project Sdk="Tizen.NET.Sdk/1.1.7">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -26,6 +26,7 @@
     <PackageReference Include="SkiaSharp.Views" Version="2.88.0-preview.209" />
     <PackageReference Include="Uno.UI.Skia.Tizen" Version="4.0.13" />
     <PackageReference Include="Uno.UI.RemoteControl" Version="4.0.13" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.0-preview.209" />
   </ItemGroup>
 
   <ItemGroup>

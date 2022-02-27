@@ -11,15 +11,17 @@
       <Version>6.2.12</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml" Version="2.6.2" />
-    <PackageReference Include="Uno.Core" Version="4.0.1" />
+    <PackageReference Include="Uno.Core" Version="4.0.13" />
     <PackageReference Include="Uno.UI" Version="4.0.13" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="5.0.0" />
+    <PackageReference Include="Uno.Core.Extensions.Logging.Singleton" Version="4.0.0-dev.7" />
+    <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.0-preview.209" />
   </ItemGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{014E6E67-7465-4A61-879C-3A80B849D7BA}</ProjectGuid>
+    <ProjectGuid>{08ACB538-5B84-40BA-9653-A74EE6C2B18D}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Mapsui.Samples.Uno</RootNamespace>
@@ -167,6 +169,7 @@
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\Square150x150Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Properties\Default.rd.xml" />
   </ItemGroup>
