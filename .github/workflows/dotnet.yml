@@ -35,8 +35,8 @@ jobs:
            5.0.x
            6.0.x
          include-prerelease: true    
-    - name: install maui
-      run: dotnet workload install maui
+    - name: install maui macos
+      run: dotnet workload install maui macos
     - name: install maui-check
       run: dotnet tool install -g Redth.Net.Maui.Check
     - name: run maui-check
