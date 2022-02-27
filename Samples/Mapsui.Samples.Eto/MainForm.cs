@@ -44,36 +44,8 @@ namespace Mapsui.Samples.Eto
 
             //
 
-            var left = new StackLayout(
-                CategoryComboBox,
-                SampleList);
+            var sample_layout = new StackLayout(CategoryComboBox, SampleList);
 
-#if false
-            var right = new DynamicLayout(
-                new DynamicRow(new DynamicControl() { Control = MapControl, XScale=true, YScale=true }),
-                LogTextBox,
-                FeatureInfo);
-#elif false
-            var right = new LayeredLayout();
-            right.Add(MapControl);
-
-#if false
-            var layout = new DynamicLayout(
-                new DynamicRow(null, null, RotationSlider),
-                null,
-                new DynamicRow(LogTextBox, null, null), 
-                new DynamicRow(FeatureInfo, MouseCoordinates, null));
-#elif true
-            var layout = new StackLayout();
-            layout.Items.Add(new StackLayoutItem(RotationSlider, HorizontalAlignment.Right));
-            layout.Items.Add(null);
-            layout.Items.Add(new StackLayoutItem(LogTextBox));
-            var lower_row = new StackLayout(FeatureInfo, null, MouseCoordinates, null) { Orientation = Orientation.Horizontal };
-            layout.Items.Add(new StackLayoutItem(lower_row, HorizontalAlignment.Stretch));
-#endif
-            right.Add(layout);
-            right.MouseMove += MapControlOnMouseMove;
-#elif true
             var map_layout = new PixelLayout();
             map_layout.SizeChanged += MapLayoutSizeChanged;
             map_layout.Add(MapControl, Point.Empty);
@@ -81,11 +53,8 @@ namespace Mapsui.Samples.Eto
             map_layout.Add(LogTextBox, Point.Empty);
             map_layout.Add(FeatureInfo, Point.Empty);
             map_layout.Add(MouseCoordinates, Point.Empty);
-//            LogTextBox.SizeChanged += (o, e) => map_layout.Move(LogTextBox, 0, map_layout.Height - FeatureInfo.Height - LogTextBox.Height);
-#endif
-            // FeatureInfo -> demo/map info -> klikk sirkel
 
-            this.Content = new DynamicLayout(new DynamicRow(left, map_layout)) { Spacing = new Size(4,4) };
+            this.Content = new DynamicLayout(new DynamicRow(sample_layout, map_layout)) { Spacing = new Size(4,4) };
         }
         private void MapLayoutSizeChanged(object? sender, EventArgs e)
         {
@@ -103,9 +72,7 @@ namespace Mapsui.Samples.Eto
 
         private void MapControlOnMouseMove(object? sender, MouseEventArgs e)
         {
-//            var screenPosition = e.GetPosition(MapControl);
-            var screenPosition = e.Location;
-            var worldPosition = MapControl.Viewport.ScreenToWorld(screenPosition.X, screenPosition.Y);
+            var worldPosition = MapControl.Viewport.ScreenToWorld(e.Location.X, e.Location.Y);
             MouseCoordinates.Text = $"{worldPosition.X:F0}, {worldPosition.Y:F0}";
         }
         private void FillListWithSamples()
