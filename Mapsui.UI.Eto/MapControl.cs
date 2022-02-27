@@ -22,6 +22,9 @@ namespace Mapsui.UI.Eto
         {
             _invalidate = () => RunOnUIThread(Invalidate);
 
+            // Mapsui.Rendering.Skia use Mapsui.Nts where GetDbaseLanguageDriver need encoding providers
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+
             LoadComplete += MapControlLoaded;
             MouseDown += MapControlMouseLeftButtonDown;
             MouseUp += MapControlMouseLeftButtonUp;
