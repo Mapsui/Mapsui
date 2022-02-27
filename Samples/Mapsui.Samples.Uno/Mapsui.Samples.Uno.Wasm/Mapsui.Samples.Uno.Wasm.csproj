@@ -63,7 +63,8 @@
     <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" Version="2.88.0-preview.209" />
   </ItemGroup>
 
-  <!--Harfbuzz Sharp references-->
+  <!--Harfbuzz Sharp references Workaround for this issue-->
+  <!--https://github.com/mono/SkiaSharp/issues/1725-->
   <ItemGroup>
     <PackageReference Include="HarfBuzzSharp" Version="2.8.2-preview.209" />
     <PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" Version="2.8.2-preview.209" />
