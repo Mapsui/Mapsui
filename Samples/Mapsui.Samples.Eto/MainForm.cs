@@ -14,7 +14,7 @@ namespace Mapsui.Samples.Eto
     using global::Eto.Forms;
     using global::Eto.Drawing;
 
-    public partial class MainForm : Form
+    public class MainForm : Form
     {
         DropDown CategoryComboBox = new() { Width = 200 };
         StackLayout SampleList = new();
@@ -26,9 +26,9 @@ namespace Mapsui.Samples.Eto
         Slider RotationSlider = new() { Width = 200 };
         public MainForm()
         {
-            this.InitializeComponent();
-
-            this.Size = new Size(3, 2) * 340;
+            this.MinimumSize = new Size(3, 2) * 100;
+            this.Size = this.MinimumSize * 4;
+            this.Padding = 10;
 
             var eto_platform = global::Eto.Platform.Instance.ToString();
             var os_platform = System.Environment.OSVersion.ToString();
