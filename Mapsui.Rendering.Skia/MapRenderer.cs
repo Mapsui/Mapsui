@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using Mapsui.Layers;
 using Mapsui.Logging;
-using Mapsui.Nts;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Rendering.Skia.SkiaWidgets;
