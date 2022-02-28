@@ -15,7 +15,7 @@ namespace Mapsui.Providers
         public ProjectingProvider(IProvider<IFeature> provider, IProjection? projection = null)
         {
             _provider = provider;
-            _projection = projection ?? new Projection();
+            _projection = projection ?? ProjectionDefaults.Projection;
         }
 
         /// <summary>
