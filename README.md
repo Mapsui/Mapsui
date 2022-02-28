@@ -1,6 +1,7 @@
 ## News
 
-- 2021 October 1: Released Mapsui 3.0.0 https://github.com/Mapsui/Mapsui/releases/tag/3.0.0
+- 2022 Februari 12: Switched license to MIT (from LGPL)  
+- 2022 Februari 18: Released Mapsui 4.0.0-beta.1 https://github.com/Mapsui/Mapsui/releases/tag/4.0.0-beta.1
 
 ## Mapsui (pronounced map-su-wii)
 
@@ -37,7 +38,6 @@ The best way to get going with Mapsui is by using the Samples. If you clone the 
 ## Community
 - If you have an issue please submit it [here on github](https://github.com/mapsui/Mapsui/issues).
 - If you have a question post is [here](https://github.com/Mapsui/Mapsui/discussions).
-- We have a [gitter channel](https://gitter.im/Mapsui/Lobby) (but it has not been very active lately).
 - Follow us on [twitter](https://twitter.com/mapsui).
 
 ## How can I help as a user
@@ -56,12 +56,6 @@ See the [guidelines](http://mapsui.com/documentation/contributors-guidelines.htm
 - The developers of SharpMap from which this project was born.
 - Our users. Do not underestimate the value of good bug reports and tests.
 - [realinfo](https://github.com/reallinfo) for providing the logo
-
-## Sponsors
-
-We are delighted with our first gold sponsor Sebastian Kruse, who has also contributed to Mapsui with informed test reports and expert advice.
-
-[Sebastian Kruse](https://github.com/Sebastian1989101)
 
 ## License
 

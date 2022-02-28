@@ -11,7 +11,7 @@ namespace Mapsui.Samples.Forms
             InitializeComponent();
             label.Text = report;
             enableDisposeCheckbox.IsChecked = DisposeMapView;
-            enableDisposeCheckbox.CheckedChanged += (s,e) => DisposeMapView = e.Value;
+            enableDisposeCheckbox.CheckedChanged += (s, e) => DisposeMapView = e.Value;
         }
     }
 }

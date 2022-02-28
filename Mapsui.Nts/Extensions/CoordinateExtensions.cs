@@ -19,9 +19,6 @@ namespace Mapsui.Nts.Extensions
 
         public static LineString ToLineString(this IEnumerable<Coordinate> coordinates)
         {
-            if (coordinates.Count() == 0)
-                throw new Exception("coordinates can not be length 0");
-
             var list = coordinates.ToList();
             if (list.Count == 1)
                 list.Add(list[0].Copy());
