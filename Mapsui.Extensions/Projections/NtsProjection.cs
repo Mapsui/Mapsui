@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Text;
-using Mapsui.Extensions;
 using Mapsui.Projections;
+using ProjNet.CoordinateSystems;
+using ProjNet.CoordinateSystems.Transformations;
+using IProjection = Mapsui.Projections.IProjection;
 
-namespace Mapsui.Nts.Projections;
+namespace Mapsui.Extensions.Projections;
+
 public class NtsProjection : IProjection
 {
     static NtsProjection()
@@ -15,6 +18,8 @@ public class NtsProjection : IProjection
     }
 
     private readonly Dictionary<string, string> Projections = new();
+    private readonly CoordinateSystemFactory coordinateSystemFactory;
+    private readonly CoordinateTransformationFactory coordinateTransformationFactory;
 
     public NtsProjection()
     {

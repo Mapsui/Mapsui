@@ -5,23 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Projections\SRID.csv.gz" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Projections\SRID.csv.gz" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="NetTopologySuite" Version="2.4.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Projections\SRID.csv" />
   </ItemGroup>
 
 </Project>

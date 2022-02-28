@@ -13,6 +13,7 @@ dotnet build /p:RestorePackages=false /p:Configuration=Release Mapsui/Mapsui.csp
 dotnet build /p:RestorePackages=false /p:Configuration=Release Mapsui.Rendering.Skia/Mapsui.Rendering.Skia.csproj
 dotnet build /p:RestorePackages=false /p:Configuration=Release Mapsui.Tiling/Mapsui.Tiling.csproj
 dotnet build /p:RestorePackages=false /p:Configuration=Release Mapsui.Nts/Mapsui.Nts.csproj
+dotnet build /p:RestorePackages=false /p:Configuration=Release Mapsui.Extensions/Mapsui.Extensions.csproj
 dotnet build /p:RestorePackages=false /p:Configuration=Release Mapsui.ArcGIS/Mapsui.ArcGIS.csproj
 dotnet build /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Wpf/Mapsui.UI.Wpf.csproj
 REM dotnet build /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Uwp/Mapsui.UI.Uwp.csproj
@@ -26,6 +27,7 @@ REM dotnet build /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.MAU
 
 
 nuget pack NuSpec\Mapsui.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1
+nuget pack NuSpec\Mapsui.Extensions.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1
 nuget pack NuSpec\Mapsui.Forms.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1
 REM nuget pack NuSpec\Mapsui.Maui.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1
 nuget pack NuSpec\Mapsui.Wpf.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1

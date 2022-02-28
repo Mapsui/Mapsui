@@ -50,6 +50,8 @@ jobs:
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Tiling/Mapsui.Tiling.csproj
     - name: Build Mapsui.Nts
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Nts/Mapsui.Nts.csproj
+    - name: Build Mapsui.Extensions
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Extensions/Mapsui.Extensions.csproj
     - name: Build Mapsui.ArcGIS
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.ArcGIS/Mapsui.ArcGIS.csproj
     - name: Build Mapsui.UI.Android
@@ -105,6 +107,8 @@ jobs:
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Tiling/Mapsui.Tiling.csproj
     - name: Build Mapsui.Nts
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Nts/Mapsui.Nts.csproj
+    - name: Build Mapsui.Extensions
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Extensions/Mapsui.Extensions.csproj
     - name: Build Mapsui.ArcGIS
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.ArcGIS/Mapsui.ArcGIS.csproj
     - name: Build Mapsui.UI.Wpf
@@ -127,6 +131,8 @@ jobs:
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Maui/Mapsui.UI.Maui.csproj        
     - name: Generate nuget package (Mapsui)
       run: nuget pack NuSpec/Mapsui.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
+    - name: Generate nuget package (Mapsui.Extensions)
+      run: nuget pack NuSpec/Mapsui.Extensions.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
     - name: Generate nuget package (Mapsui.Forms)
       run: nuget pack NuSpec/Mapsui.Forms.nuspec -Version $(git describe --tags) -outputdirectory Artifacts    
     - name: Generate nuget package (Mapsui.Wpf)
