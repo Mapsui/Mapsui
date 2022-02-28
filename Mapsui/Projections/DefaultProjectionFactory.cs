@@ -6,7 +6,7 @@ namespace Mapsui.Projections
     {
         static DefaultProjectionFactory()
         {
-            Create = () => throw new Exception("No method to create a renderer was registered");
+            Create = () => throw new Exception("No method to create a projection was registered");
         }
 
         public static Func<IProjection> Create { get; set; }
