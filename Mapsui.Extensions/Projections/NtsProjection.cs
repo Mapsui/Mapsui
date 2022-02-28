@@ -76,6 +76,26 @@ public class NtsProjection : IProjection
         sr.Close();
     }
 
+    private static string CleanUp(WKTstring wkt)
+    {
+        var result = wkt.WKT;
+        // replace duplicate "" with "
+        result = result.Replace("\"\"", "\"");
+        if (result.StartsWith("\""))
+        {
+            // remove leading "
+            result = result.Substring(1);
+        }
+
+        if (result.EndsWith("\""))
+        {
+            // remove trailing "
+            result = result.Substring(0,result.Length -1);
+        }
+
+        return result;
+    }
+
     /// <summary>Gets a coordinate system from the SRID.csv file</summary>
     /// <param name="id">EPSG ID</param>
     /// <returns>Coordinate system, or null if SRID was not found.</returns>
@@ -85,7 +105,8 @@ public class NtsProjection : IProjection
             foreach (var wkt in GetSRIDs())
                 if (wkt.WKID == id) //We found it!
                 {
-                    result = CoordinateSystemFactory.CreateFromWkt(wkt.WKT);
+                    var cleanupWkt = CleanUp(wkt);
+                    result = CoordinateSystemFactory.CreateFromWkt(cleanupWkt);
                     Projections[id] = result;
                     break;
                 }
