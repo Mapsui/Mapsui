@@ -125,7 +125,9 @@ jobs:
     - name: Build Mapsui.UI.WinUI
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.WinUI/Mapsui.UI.WinUI.csproj
     - name: Build Mapsui.UI.Maui
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Maui/Mapsui.UI.Maui.csproj        
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Maui/Mapsui.UI.Maui.csproj 
+    - name: Build Mapsui.UI.Eto
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Eto/Mapsui.UI.Eto.csproj        
     - name: Generate nuget package (Mapsui)
       run: nuget pack NuSpec/Mapsui.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
     - name: Generate nuget package (Mapsui.Forms)
@@ -144,6 +146,8 @@ jobs:
       run: nuget pack NuSpec/Mapsui.WinUI.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
     - name: Generate nuget package (Mapsui.Maui)
       run: nuget pack NuSpec/Mapsui.Maui.nuspec -Version $(git describe --tags) -outputdirectory Artifacts    
+    - name: Generate nuget package (Mapsui.Eto)
+      run: nuget pack NuSpec/Mapsui.Eto.nuspec -Version $(git describe --tags) -outputdirectory Artifacts    
     - name: Upload packages
       uses: actions/upload-artifact@v2
       with:
