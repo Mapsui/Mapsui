@@ -98,10 +98,10 @@ namespace Mapsui.Tests.Projections
             var directory = Path.GetDirectoryName(typeof(ShapefileSample).Assembly.Location);
             var countriesPath = Path.Combine(directory, @"GeoData\World\countries.shp");
             // act
-            var shapeFile = new ShapeFile(countriesPath, false, true);
+            using var shapeFile = new ShapeFile(countriesPath, false, true);
 
             // assert
-            Assert.AreEqual(shapeFile.CRS , "EPSG:4326");
+            Assert.AreEqual(shapeFile.CRS, "EPSG:4326");
         }
     }
 }

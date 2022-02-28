@@ -16,8 +16,8 @@ namespace Mapsui.Nts.Projections;
 public class DotSpatialProjection : IProjection
 {
     private static readonly ConcurrentDictionary<int, ProjectionInfo> Projections = new();
-    private static readonly ConcurrentDictionary<(int From, int To),GeometryTransform> GeometryTransformations = new();
-    private static readonly ConcurrentDictionary<string,string> CrsFromEsriLookup = new();
+    private static readonly ConcurrentDictionary<(int From, int To), GeometryTransform> GeometryTransformations = new();
+    private static readonly ConcurrentDictionary<string, string> CrsFromEsriLookup = new();
 
     public static void Init()
     {
@@ -78,7 +78,7 @@ public class DotSpatialProjection : IProjection
         var fromId = GetIdFromCrs(fromCRS);
         var toId = GetIdFromCrs(toCRS);
         if (fromId == toId)
-        // no transformation needed
+            // no transformation needed
             return;
 
         var transform = GetTransformation(fromId, toId);
@@ -93,7 +93,7 @@ public class DotSpatialProjection : IProjection
         var fromId = GetIdFromCrs(fromCRS);
         var toId = GetIdFromCrs(toCRS);
         if (fromId == toId)
-        // no transformation needed
+            // no transformation needed
             return true;
 
         if (fromId == null) return false;
@@ -114,7 +114,7 @@ public class DotSpatialProjection : IProjection
         var fromId = GetIdFromCrs(fromCRS);
         var toId = GetIdFromCrs(toCRS);
         if (fromId == toId)
-        // no transformation needed
+            // no transformation needed
             return;
 
         var transform = GetGeometryTransformation(fromId, toId);
@@ -133,7 +133,7 @@ public class DotSpatialProjection : IProjection
         var fromId = GetIdFromCrs(fromCRS);
         var toId = GetIdFromCrs(toCRS);
         if (fromId == toId)
-        // no transformation needed
+            // no transformation needed
             return;
 
         var transform = GetGeometryTransformation(fromId, toId);

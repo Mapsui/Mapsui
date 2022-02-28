@@ -21,8 +21,8 @@ namespace Mapsui.Nts.Projections
             var x = seq.GetX(i);
             var y = seq.GetY(i);
             var z = seq.GetZ(i);
-            var pointsXy = new []{x, y};
-            var pointsZ = new []{ z };
+            var pointsXy = new[] { x, y };
+            var pointsZ = new[] { z };
             Reproject.ReprojectPoints(pointsXy, pointsZ, _transform.From, _transform.To, 0, 1);
             seq.SetX(i, pointsXy[0]);
             seq.SetY(i, pointsXy[1]);
