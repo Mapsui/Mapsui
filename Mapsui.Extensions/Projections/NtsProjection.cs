@@ -35,8 +35,8 @@ public class NtsProjection : IProjection
     {
         var assembly = typeof(NtsProjection).Assembly;
         var fullName = assembly.GetFullName("Projections.SRID.csv.gz");
-        using var stream = assembly.GetManifestResourceStream(fullName);
-        using var gzipStream = new GZipStream(stream!, CompressionMode.Decompress);
+        var stream = assembly.GetManifestResourceStream(fullName);
+        var gzipStream = new GZipStream(stream!, CompressionMode.Decompress);
         var reader = new StreamReader(gzipStream!, Encoding.UTF8);
         return reader;
     }
@@ -81,7 +81,7 @@ public class NtsProjection : IProjection
     /// <returns>Coordinate system, or null if SRID was not found.</returns>
     public static CoordinateSystem? GetCoordinateSystemById(int id)
     {
-        if (Projections.TryGetValue(id, out var result))
+        if (!Projections.TryGetValue(id, out var result))
             foreach (var wkt in GetSRIDs())
                 if (wkt.WKID == id) //We found it!
                 {
