@@ -24,6 +24,7 @@
 		<ProjectReference Include="..\..\Mapsui.Tiling\Mapsui.Tiling.csproj" />
 		<ProjectReference Include="..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
 		<ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />
+		<ProjectReference Include="..\..\Samples\Mapsui.Samples.Common.Desktop\Mapsui.Samples.Common.Desktop.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

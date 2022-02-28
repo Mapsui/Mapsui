@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using DotSpatial.Projections;
 using Mapsui.Layers;
 using Mapsui.Nts.Extensions;
 using Mapsui.Nts.Providers.Shapefile.Indexing;
@@ -169,7 +170,8 @@ namespace Mapsui.Nts.Providers.Shapefile
         /// </remarks>
         /// <param name="filename">Path to shape file</param>
         /// <param name="fileBasedIndex">Use file-based spatial index</param>
-        public ShapeFile(string filename, bool fileBasedIndex = false)
+        /// <param name="readPrjFile">Read the proj File and set the correct CRS</param>
+        public ShapeFile(string filename, bool fileBasedIndex = false, bool readPrjFile = false)
         {
             _filename = filename;
             _fileBasedIndex = fileBasedIndex && File.Exists(Path.ChangeExtension(filename, ".shx"));
@@ -182,6 +184,16 @@ namespace Mapsui.Nts.Providers.Shapefile
             ParseHeader();
             //Read projection file
             ParseProjection();
+            //Read Projection
+            if (readPrjFile)
+            {
+                var prjFile = Path.ChangeExtension(filename, ".prj");
+                if (File.Exists(prjFile))
+                {
+                    var esriString = File.ReadAllText(prjFile);
+                    var info = ProjectionInfo.FromEsriString(esriString);
+                }
+            }
         }
 
         /// <summary>
