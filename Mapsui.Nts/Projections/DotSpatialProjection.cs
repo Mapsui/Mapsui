@@ -6,7 +6,9 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 using DotSpatial.Projections;
+using DotSpatial.Projections.AuthorityCodes;
 using Mapsui.Projections;
 using NetTopologySuite.Geometries;
 
@@ -15,6 +17,7 @@ public class DotSpatialProjection : IProjection
 {
     private static readonly ConcurrentDictionary<int, ProjectionInfo> Projections = new();
     private static readonly ConcurrentDictionary<(int From, int To),GeometryTransform> GeometryTransformations = new();
+    private static readonly ConcurrentDictionary<string,string> CrsFromEsriLookup = new();
 
     public static void Init()
     {
@@ -197,5 +200,31 @@ public class DotSpatialProjection : IProjection
         }
 
         return (fromCoordinateSystem, toCoordinateSystem);
+    }
+
+    public static string CrsFromEsri(string esriString)
+    {
+        if (!CrsFromEsriLookup.TryGetValue(esriString, out var result))
+        {
+            var projection = ProjectionInfo.FromEsriString(esriString);
+            if (!CrsFromEsriLookup.TryGetValue(projection.ToEsriString(), out result))
+            {
+                // Initialize Authority Code Handler
+                var instance = AuthorityCodeHandler.Instance;
+                var field = typeof(AuthorityCodeHandler).GetField("_authorityCodeToProjectionInfo", BindingFlags.Instance | BindingFlags.NonPublic);
+                var dictionary = (IDictionary<string, ProjectionInfo>)field.GetValue(instance);
+                foreach (var it in dictionary)
+                {
+                    CrsFromEsriLookup[it.Value.ToEsriString()] = it.Key;
+                    if (projection.Equals(it.Value))
+                    {
+                        CrsFromEsriLookup[esriString] = it.Key;
+                        return it.Key;
+                    }
+                }
+            }
+        }
+
+        return result;
     }
 }
