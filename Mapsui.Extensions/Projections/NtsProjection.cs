@@ -41,6 +41,11 @@ public class NtsProjection : IProjection
         return reader;
     }
 
+    /// <summary> Pseudo Init Function to let the Static Constructor run </summary>
+    public static void Init()
+    {
+    }
+
     public int? GetIdFromCrs(string? crs)
     {
         if (crs == null) return null;
