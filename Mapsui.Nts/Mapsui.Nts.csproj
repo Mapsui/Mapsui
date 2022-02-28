@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -6,7 +6,16 @@
 
   <ItemGroup>
     <PackageReference Include="NetTopologySuite" Version="2.4.0" />
+    <!--<PackageReference Include="DotSpatial.Projections" Version="2.0.1.2" IncludeAssets="None" ExcludeAssets="All" PrivateAssets="None" GeneratePathProperty="true" NoWarn="NU1202;NU1701"/>-->
+    <PackageReference Include="DotSpatial.Projections.NetStandard" Version="1.0.0" />
   </ItemGroup>
+
+  <!--Ignore nuget errors and reference the assembly directly --><!--
+  <ItemGroup>
+    <Reference Include="DotSpatial.Projections, Version=2.0.0.0, Culture=neutral, PublicKeyToken=272632bddd08a38b">
+      <HintPath>$(PkgDotSpatial_Projections)\lib\net452\net452\DotSpatial.Projections.dll</HintPath>
+    </Reference>
+  </ItemGroup>-->
 
   <ItemGroup>
     <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
