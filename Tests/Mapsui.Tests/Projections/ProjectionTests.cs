@@ -1,6 +1,6 @@
 ﻿using System.Linq;
+using Mapsui.Extensions.Projections;
 using Mapsui.Nts;
-using Mapsui.Nts.Projections;
 using Mapsui.Projections;
 using NetTopologySuite.Geometries;
 using NetTopologySuite.IO;
