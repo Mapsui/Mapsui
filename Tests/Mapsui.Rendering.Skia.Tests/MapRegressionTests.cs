@@ -47,8 +47,7 @@ public class MapRegressionTests
     public async Task TestSample(ISample sample)
     {
         var fileName = sample.GetType().Name + ".Regression.png";
-        var mapControl = new RegressionMapControl();
-        sample.Setup(mapControl);
+        var mapControl = InitMap(sample);
         var map = mapControl.Map;
         await DisplayMap(mapControl).ConfigureAwait(false);
 
@@ -63,6 +62,14 @@ public class MapRegressionTests
             // assert
             Assert.IsTrue(MapRendererTests.CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
         }
+    }
+
+    private static RegressionMapControl InitMap(ISample sample)
+    {
+        var mapControl = new RegressionMapControl();
+        sample.Setup(mapControl);
+        mapControl.SetSize(800, 600);
+        return mapControl;
     }
 
     private async Task DisplayMap(IMapControl mapControl)

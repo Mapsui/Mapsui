@@ -12,10 +12,12 @@ namespace Mapsui.Rendering.Skia.Tests;
 
 public class RegressionMapControl : IMapControl
 {
+    private readonly IViewport _limitedViewport;
+
     public RegressionMapControl()
     {
         Renderer = new MapRenderer();
-        Viewport = new LimitedViewport();
+        Viewport = _limitedViewport = new LimitedViewport();
     }
 
     public event EventHandler<MapInfoEventArgs>? Info;
@@ -73,4 +75,9 @@ public class RegressionMapControl : IMapControl
     public INavigator? Navigator { get; }
     public Performance? Performance { get; set; }
     public IReadOnlyViewport Viewport { get; }
+
+    public void SetSize(int width, int height)
+    {
+        _limitedViewport.SetSize(width, height);
+    }
 }
