@@ -6,8 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
+using System.Threading.Tasks;
+using Mapsui.Layers;
 using Mapsui.Rendering.Skia.Tests.Extensions;
 using Mapsui.Samples.Common;
+using Mapsui.UI;
 using NUnit.Framework;
 
 namespace Mapsui.Rendering.Skia.Tests;
@@ -16,7 +19,7 @@ namespace Mapsui.Rendering.Skia.Tests;
 public class MapRegressionTests
 {
     [Test]
-    public void TestAllSamples()
+    public async Task TestAllSamples()
     {
         var exceptions = new List<Exception>();
 
@@ -24,7 +27,7 @@ public class MapRegressionTests
         {
             try
             {
-                TestSample(sample);
+                await TestSample(sample).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -36,24 +39,50 @@ public class MapRegressionTests
         Assert.AreEqual(exceptions.Count, 0, "No exceptions should happen");
     }
 
-    private void TestSample(ISample sample)
+    private async Task TestSample(ISample sample)
     {
         var fileName = sample.GetType().Name + ".Regression.png";
         var mapControl = new RegressionMapControl();
         sample.Setup(mapControl);
         var map = mapControl.Map;
+        await DisplayMap(mapControl).ConfigureAwait(false);
+
         if (map != null)
         {
-            var viewport = map.Extent?.Multiply(3).ToViewport(200) ?? mapControl.Viewport;
-
             // act
-            using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
+            using var bitmap = new MapRenderer().RenderToBitmapStream(mapControl.Viewport, map.Layers, map.BackColor, 2);
 
             // aside
             File.WriteToGeneratedFolder(fileName, bitmap);
 
             // assert
             Assert.IsTrue(MapRendererTests.CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        }
+    }
+
+    private async Task DisplayMap(IMapControl mapControl)
+    {
+        var fetchInfo = new FetchInfo(mapControl.Viewport.Extent, mapControl.Viewport.Resolution, mapControl.Map?.CRS);
+        mapControl.Map?.RefreshData(fetchInfo);
+        await WaitForLoading(mapControl).ConfigureAwait(false);
+    }
+
+    private async Task WaitForLoading(IMapControl mapControl)
+    {
+        if (mapControl.Map?.Layers != null)
+        {
+            foreach (var layer in mapControl.Map.Layers)
+            {
+                await WaitForLoading(layer).ConfigureAwait(false);
+            }
+        }
+    }
+
+    private async Task WaitForLoading(ILayer layer)
+    {
+        while (layer.Busy)
+        {
+            await Task.Delay(100).ConfigureAwait(false);
         }
     }
 }
