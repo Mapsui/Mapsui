@@ -57,7 +57,15 @@ public class MapRegressionTests
             using var bitmap = new MapRenderer().RenderToBitmapStream(mapControl.Viewport, map.Layers, map.BackColor, 2);
 
             // aside
-            File.WriteToGeneratedFolder(fileName, bitmap);
+            if (bitmap is { Length: > 0 })
+            {
+                File.WriteToGeneratedFolder(fileName, bitmap);
+            }
+            else
+            {
+                Assert.Fail("Should generate Image");
+            }
+            
 
             // assert
             Assert.IsTrue(MapRendererTests.CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));

@@ -21,6 +21,11 @@ namespace Mapsui.Rendering.Skia.Tests
             if (folder == null) throw new Exception("Images folder was not found");
             if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
 
+            if (System.IO.File.Exists(filePath))
+            {
+                System.IO.File.Delete(filePath);
+            }
+
             using var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write);
             stream?.WriteTo(fileStream);
         }
