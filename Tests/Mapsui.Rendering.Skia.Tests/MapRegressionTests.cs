@@ -67,8 +67,8 @@ public class MapRegressionTests
     private static RegressionMapControl InitMap(ISample sample)
     {
         var mapControl = new RegressionMapControl();
-        sample.Setup(mapControl);
         mapControl.SetSize(800, 600);
+        sample.Setup(mapControl);
         return mapControl;
     }
 
