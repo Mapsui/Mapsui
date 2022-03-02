@@ -5,7 +5,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Threading;
 using Mapsui.Rendering.Skia.Tests.Extensions;
 using Mapsui.Samples.Common;
@@ -40,12 +39,12 @@ public class MapRegressionTests
     private void TestSample(ISample sample)
     {
         var fileName = sample.GetType().Name + ".Regression.png";
-        var mapControl = new TestMapControl();
+        var mapControl = new RegressionMapControl();
         sample.Setup(mapControl);
         var map = mapControl.Map;
         if (map != null)
         {
-            var viewport = map.Extent!.Multiply(3).ToViewport(200);
+            var viewport = map.Extent?.Multiply(3).ToViewport(200) ?? mapControl.Viewport;
 
             // act
             using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);

@@ -10,8 +10,14 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Rendering.Skia.Tests;
 
-public class TestMapControl : IMapControl
+public class RegressionMapControl : IMapControl
 {
+    public RegressionMapControl()
+    {
+        Renderer = new MapRenderer();
+        Viewport = new LimitedViewport();
+    }
+
     public event EventHandler<MapInfoEventArgs>? Info;
     public Map? Map { get; set; }
     public event EventHandler? ViewportInitialized;
