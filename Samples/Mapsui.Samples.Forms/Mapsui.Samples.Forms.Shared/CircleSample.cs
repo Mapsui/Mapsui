@@ -20,7 +20,7 @@ namespace Mapsui.Samples.Forms
 {
     public class CircleSample : IFormsSample
     {
-        private static Random rnd = new Random();
+        private static Random rnd = new Random(1);
 
         public string Name => "Add Circle Sample";
 

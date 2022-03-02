@@ -15,7 +15,7 @@ namespace Mapsui.Samples.Common.Maps
     {
         private const string AtlasLayerName = "Atlas Layer";
         private static int _atlasBitmapId;
-        private static readonly Random Random = new Random();
+        private static readonly Random Random = new Random(1);
 
         public string Name => "Atlas";
 
