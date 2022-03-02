@@ -6,7 +6,7 @@ using BruTile.Cache;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public static class Michelin
+    public static class BingHybrid
     {
         public static IPersistentCache<byte[]>? DefaultCache = null;
     }

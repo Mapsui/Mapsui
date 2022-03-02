@@ -7,7 +7,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Samples.Common;
-using Mapsui.Samples.Common.Desktop.Cache;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Tiling;
 using Mapsui.UI;
@@ -23,6 +22,7 @@ public class MapRegressionTests
         OpenStreetMap.DefaultCache ??= File.ReadFromCacheFolder("OpenStreetMap");
         BingArial.DefaultCache ??= File.ReadFromCacheFolder("BingArial");
         BingHybrid.DefaultCache ??= File.ReadFromCacheFolder("BingHybrid");
+        Michelin.DefaultCache ??= File.ReadFromCacheFolder("Michelin");
     }
 
     public static object[] RegressionSamples => AllSamples.GetSamples().ToArray();

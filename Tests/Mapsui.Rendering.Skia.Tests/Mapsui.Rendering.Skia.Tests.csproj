@@ -81,6 +81,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Resources\Cache\BingArial.sqlite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Cache\BingHybrid.sqlite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Cache\Michelin.sqlite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\Cache\OpenStreetMap.sqlite">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
