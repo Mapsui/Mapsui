@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Layers;
@@ -18,28 +19,32 @@ namespace Mapsui.Rendering.Skia.Tests;
 [TestFixture, Apartment(ApartmentState.STA)]
 public class MapRegressionTests
 {
+    //[Test]
+    //public async Task TestAllSamples()
+    //{
+    //    var exceptions = new List<Exception>();
+
+    //    foreach (var sample in AllSamples.GetSamples())
+    //    {
+    //        try
+    //        {
+    //            await TestSample(sample).ConfigureAwait(false);
+    //        }
+    //        catch (Exception e)
+    //        {
+    //            Debug.WriteLine(e);
+    //            exceptions.Add(e);
+    //        }
+    //    }
+
+    //    Assert.AreEqual(exceptions.Count, 0, "No exceptions should happen");
+    //}
+
+    public static object[] RegressionSamples => AllSamples.GetSamples().ToArray();
+
     [Test]
-    public async Task TestAllSamples()
-    {
-        var exceptions = new List<Exception>();
-
-        foreach (var sample in AllSamples.GetSamples())
-        {
-            try
-            {
-                await TestSample(sample).ConfigureAwait(false);
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e);
-                exceptions.Add(e);
-            }
-        }
-
-        Assert.AreEqual(exceptions.Count, 0, "No exceptions should happen");
-    }
-
-    private async Task TestSample(ISample sample)
+    [TestCaseSource(nameof(RegressionSamples))]
+    public async Task TestSample(ISample sample)
     {
         var fileName = sample.GetType().Name + ".Regression.png";
         var mapControl = new RegressionMapControl();
