@@ -2,15 +2,14 @@
 // The Mapsui authors licensed this file under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Layers;
-using Mapsui.Rendering.Skia.Tests.Extensions;
 using Mapsui.Samples.Common;
+using Mapsui.Samples.Common.Desktop.Cache;
+using Mapsui.Samples.Common.Maps;
+using Mapsui.Tiling;
 using Mapsui.UI;
 using NUnit.Framework;
 
@@ -19,26 +18,12 @@ namespace Mapsui.Rendering.Skia.Tests;
 [TestFixture, Apartment(ApartmentState.STA)]
 public class MapRegressionTests
 {
-    //[Test]
-    //public async Task TestAllSamples()
-    //{
-    //    var exceptions = new List<Exception>();
-
-    //    foreach (var sample in AllSamples.GetSamples())
-    //    {
-    //        try
-    //        {
-    //            await TestSample(sample).ConfigureAwait(false);
-    //        }
-    //        catch (Exception e)
-    //        {
-    //            Debug.WriteLine(e);
-    //            exceptions.Add(e);
-    //        }
-    //    }
-
-    //    Assert.AreEqual(exceptions.Count, 0, "No exceptions should happen");
-    //}
+    public MapRegressionTests()
+    {
+        OpenStreetMap.DefaultCache ??= File.ReadFromCacheFolder("OpenStreetMap");
+        BingArial.DefaultCache ??= File.ReadFromCacheFolder("BingArial");
+        BingHybrid.DefaultCache ??= File.ReadFromCacheFolder("BingHybrid");
+    }
 
     public static object[] RegressionSamples => AllSamples.GetSamples().ToArray();
 
@@ -68,7 +53,7 @@ public class MapRegressionTests
             
 
             // assert
-            Assert.IsTrue(MapRendererTests.CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+            Assert.IsTrue(MapRendererTests.CompareBitmaps(File.ReadFromRegressionFolder(fileName), bitmap, 1, 0.99));
         }
     }
 

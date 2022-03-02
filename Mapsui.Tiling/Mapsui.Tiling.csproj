@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="BruTile" Version="4.0.0" />
+    <PackageReference Include="BruTile.MbTiles" Version="4.0.0" />
   </ItemGroup>
 
   <ItemGroup>
