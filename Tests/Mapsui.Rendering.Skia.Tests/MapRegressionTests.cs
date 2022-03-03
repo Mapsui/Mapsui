@@ -3,7 +3,6 @@
 // See the LICENSE file in the project root for full license information.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,15 +10,12 @@ using Mapsui.Layers;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.Common.Maps.Data;
-using Mapsui.Samples.Common.Maps.Navigation;
 using Mapsui.Samples.Common.Maps.Projection;
-using Mapsui.Samples.Common.Maps.Special;
 using Mapsui.Samples.Forms;
 using Mapsui.Tiling;
 using Mapsui.UI;
 using Mapsui.UI.Forms;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 using PolygonSample = Mapsui.Samples.Common.Maps.PolygonSample;
 
 namespace Mapsui.Rendering.Skia.Tests;
@@ -58,8 +54,8 @@ public class MapRegressionTests
 
     public async Task TestSample(ISample sample, bool compareImages)
     {
-        try 
-        { 
+        try
+        {
             var fileName = sample.GetType().Name + ".Regression.png";
             var mapControl = InitMap(sample);
             var map = mapControl.Map;
@@ -79,12 +75,11 @@ public class MapRegressionTests
                 {
                     Assert.Fail("Should generate Image");
                 }
-                
 
                 // assert
                 if (compareImages)
                 {
-                    var originalStream = File.ReadFromRegressionFolder(fileName);
+                    using var originalStream = File.ReadFromRegressionFolder(fileName);
                     if (originalStream == null)
                     {
                         Assert.Inconclusive($"No Regression Test Data for {sample.Name}");
@@ -97,7 +92,7 @@ public class MapRegressionTests
                 else
                 {
                     // Don't compare images here because to unreliable
-                    Assert.True(true); 
+                    Assert.True(true);
                 }
             }
         }
@@ -105,7 +100,9 @@ public class MapRegressionTests
         {
             if (sample is IDisposable disposable)
             {
+#pragma warning disable IDISP007 // Don't dispose injected
                 disposable.Dispose();
+#pragma warning restore IDISP007 // Don't dispose injected
             }
         }
     }
@@ -127,7 +124,7 @@ public class MapRegressionTests
             sampleTest.InitializeTest();
         }
 
-        var fetchInfo = new FetchInfo(mapControl.Viewport.Extent, mapControl.Viewport.Resolution, mapControl.Map?.CRS);
+        var fetchInfo = new FetchInfo(mapControl.Viewport.Extent!, mapControl.Viewport.Resolution, mapControl.Map?.CRS);
         mapControl.Map?.RefreshData(fetchInfo);
 
         if (sample is IFormsSample formsSample)
@@ -135,7 +132,7 @@ public class MapRegressionTests
             var mReadOnlyPoint = mapControl.Viewport.Center;
             var position = new Position(mReadOnlyPoint.X, mReadOnlyPoint.Y);
             var eventArgs = new MapClickedEventArgs(position, 1);
-            formsSample.OnClick(mapControl, eventArgs); 
+            formsSample.OnClick(mapControl, eventArgs);
         }
 
         return mapControl;

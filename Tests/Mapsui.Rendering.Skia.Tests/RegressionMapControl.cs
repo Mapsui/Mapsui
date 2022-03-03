@@ -8,6 +8,9 @@ using Mapsui.Layers;
 using Mapsui.UI;
 using Mapsui.Utilities;
 
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
+#pragma warning disable IDISP008 // Don't assign member with injected and created disposables
+
 namespace Mapsui.Rendering.Skia.Tests;
 
 public class RegressionMapControl : IMapControl
@@ -29,6 +32,7 @@ public class RegressionMapControl : IMapControl
         set
         {
             _map = value ?? throw new ArgumentNullException();
+            ((IDisposable)Navigator)?.Dispose();
             Navigator = new Navigator(_map, _limitedViewport);
             _limitedViewport.Map = _map;
             _limitedViewport.Limiter = _map.Limiter;
