@@ -6,13 +6,13 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Providers;
 using Mapsui.Styles;
-using Bitmap = System.Drawing.Bitmap;
-using Color = System.Drawing.Color;
+using SkiaSharp;
+using Color = Mapsui.Styles.Color;
 
-namespace Mapsui.Providers
+namespace Mapsui.Rendering.Skia.Provider
 {
     public class GeoTiffProvider : IProvider<IFeature>, IDisposable
     {
@@ -78,15 +78,15 @@ namespace Mapsui.Providers
 
         private static MemoryStream ReadImageAsStream(string tiffPath, List<Color>? noDataColors)
         {
-            var img = Image.FromFile(tiffPath);
+            var img = SKBitmap.Decode(File.OpenRead(tiffPath));
             var imageStream = new MemoryStream();
 
             if (noDataColors != null)
             {
-                img = ApplyColorFilter((Bitmap)img, noDataColors);
+                img = ApplyColorFilter(img, noDataColors);
             }
 
-            img.Save(imageStream, ImageFormat.Png);
+            img.Encode(imageStream, SKEncodedImageFormat.Png, 100);
 
             return imageStream;
         }
@@ -105,12 +105,12 @@ namespace Mapsui.Providers
             return tiffFileProperties;
         }
 
-        private static Bitmap ApplyColorFilter(Bitmap bitmapImage, ICollection<Color> colors)
+        private static SKBitmap ApplyColorFilter(SKBitmap bitmapImage, ICollection<Color> colors)
         {
             return bitmapImage.PixelFormat == PixelFormat.Indexed ? ApplyAlphaOnIndexedBitmap(bitmapImage, colors) : ApplyAlphaOnNonIndexedBitmap(bitmapImage, colors);
         }
 
-        private static Bitmap ApplyAlphaOnIndexedBitmap(Bitmap bitmapImage, ICollection<Color> colors)
+        private static SKBitmap ApplyAlphaOnIndexedBitmap(SKBitmap bitmapImage, ICollection<Color> colors)
         {
             var newPalette = bitmapImage.Palette;
             for (var index = 0; index < bitmapImage.Palette.Entries.Length; ++index)
@@ -125,11 +125,11 @@ namespace Mapsui.Providers
             return bitmapImage;
         }
 
-        private static Bitmap ApplyAlphaOnNonIndexedBitmap(Bitmap bitmapImage, IEnumerable<Color> colors)
+        private static SKBitmap ApplyAlphaOnNonIndexedBitmap(SKBitmap bitmapImage, IEnumerable<Color> colors)
         {
             const int bytesPerPixel = 4;
 
-            var bmp = (Bitmap)bitmapImage.Clone();
+            var bmp = bitmapImage.Copy();
             var bmpData = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
             var numBytes = bmp.Width * bmp.Height * bytesPerPixel;
             var argbValues = new byte[numBytes];

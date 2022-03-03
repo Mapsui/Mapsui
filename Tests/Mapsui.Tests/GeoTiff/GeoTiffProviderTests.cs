@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.IO;
 using Mapsui.Providers;
+using Mapsui.Rendering.Skia.Provider;
 using Mapsui.Tests.Utilities;
 using NUnit.Framework;
 

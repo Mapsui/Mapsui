@@ -2,6 +2,7 @@
 using System.Reflection;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Rendering.Skia.Provider;
 using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Desktop
