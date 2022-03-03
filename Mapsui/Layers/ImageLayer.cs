@@ -16,7 +16,7 @@ using Mapsui.Providers;
 
 namespace Mapsui.Layers
 {
-    public class ImageLayer : BaseLayer, IAsyncDataFetcher, IDisposable
+    public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource, IDisposable
     {
         protected override void Dispose(bool disposing)
         {

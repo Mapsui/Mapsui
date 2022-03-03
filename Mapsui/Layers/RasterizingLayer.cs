@@ -8,7 +8,7 @@ using Mapsui.Rendering;
 
 namespace Mapsui.Layers
 {
-    public class RasterizingLayer : BaseLayer, IAsyncDataFetcher
+    public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
     {
         private readonly ConcurrentStack<RasterFeature> _cache;
         private readonly ILayer _layer;
@@ -67,7 +67,7 @@ namespace Mapsui.Layers
 
         public override MRect? Extent => _layer.Extent;
 
-        public ILayer ChildLayer => _layer;
+        public ILayer SourceLayer => _layer;
 
         private void LayerOnDataChanged(object sender, DataChangedEventArgs dataChangedEventArgs)
         {
@@ -196,7 +196,7 @@ namespace Mapsui.Layers
             if (_layer is IAsyncDataFetcher asyncLayer) asyncLayer.ClearCache();
         }
 
-        private static Viewport CreateViewport(MRect extent, double resolution, double renderResolutionMultiplier,
+        public static Viewport CreateViewport(MRect extent, double resolution, double renderResolutionMultiplier,
             double overscan)
         {
             var renderResolution = resolution / renderResolutionMultiplier;
