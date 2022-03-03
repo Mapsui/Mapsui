@@ -11,10 +11,8 @@ using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.Common.Maps.Data;
 using Mapsui.Samples.Common.Maps.Projection;
-using Mapsui.Samples.Forms;
 using Mapsui.Tiling;
 using Mapsui.UI;
-using Mapsui.UI.Forms;
 using NUnit.Framework;
 using PolygonSample = Mapsui.Samples.Common.Maps.PolygonSample;
 
@@ -127,13 +125,14 @@ public class MapRegressionTests
         var fetchInfo = new FetchInfo(mapControl.Viewport.Extent!, mapControl.Viewport.Resolution, mapControl.Map?.CRS);
         mapControl.Map?.RefreshData(fetchInfo);
 
-        if (sample is IFormsSample formsSample)
-        {
-            var mReadOnlyPoint = mapControl.Viewport.Center;
-            var position = new Position(mReadOnlyPoint.X, mReadOnlyPoint.Y);
-            var eventArgs = new MapClickedEventArgs(position, 1);
-            formsSample.OnClick(mapControl, eventArgs);
-        }
+        // TODO: MapView should be available for all Targets
+        ////if (sample is IFormsSample formsSample)
+        ////{
+        ////    var mReadOnlyPoint = mapControl.Viewport.Center;
+        ////    var position = new Position(mReadOnlyPoint.X, mReadOnlyPoint.Y);
+        ////    var eventArgs = new MapClickedEventArgs(position, 1);
+        ////    formsSample.OnClick(mapControl, eventArgs);
+        ////}
 
         return mapControl;
     }
