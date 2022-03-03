@@ -71,6 +71,15 @@
     <PackageReference Include="SkiaSharp.Views.Maui.Controls.Compatibility" Version="2.88.0-preview.209" />
   </ItemGroup>
 
+  <ItemGroup>	  	  
+	  <ProjectReference Include="..\..\Mapsui.Nts\Mapsui.Nts.csproj" />
+	  <ProjectReference Include="..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
+	  <ProjectReference Include="..\..\Mapsui.UI.MAUI\Mapsui.UI.Maui.csproj" />
+	  <ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />
+	  <ProjectReference Include="..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
+	  <ProjectReference Include="..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
+	</ItemGroup>
+
   <ItemGroup>
     <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\CircleSample.cs" Link="CircleSample.cs" />
     <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\IFormsSample.cs" Link="IFormsSample.cs" />
@@ -81,19 +90,10 @@
     <Compile Include="..\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\SnapshotSample.cs" Link="SnapshotSample.cs" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Mapsui.Nts\Mapsui.Nts.csproj" />
-    <ProjectReference Include="..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
-    <ProjectReference Include="..\..\Mapsui.UI.MAUI\Mapsui.UI.Maui.csproj" />
-    <ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />
-    <ProjectReference Include="..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
-    <ProjectReference Include="..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
-  </ItemGroup>
-
-  <!-- Required - WinUI can't deploy in a multi-targeting environment -->
-  <PropertyGroup Condition="$(TargetFramework.Contains('-windows'))">
-    <OutputType>WinExe</OutputType>
-    <RuntimeIdentifier>win10-x64</RuntimeIdentifier>
-  </PropertyGroup>
+	<!-- Required - WinUI can't deploy in a multi-targeting environment -->
+	<PropertyGroup Condition="$(TargetFramework.Contains('-windows'))">
+		<OutputType>WinExe</OutputType>
+        <RuntimeIdentifier>win10-x64</RuntimeIdentifier>
+	</PropertyGroup>
 
 </Project>
