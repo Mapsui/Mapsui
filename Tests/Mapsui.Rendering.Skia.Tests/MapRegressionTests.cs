@@ -14,10 +14,13 @@ using Mapsui.Samples.Common.Maps.Data;
 using Mapsui.Samples.Common.Maps.Navigation;
 using Mapsui.Samples.Common.Maps.Projection;
 using Mapsui.Samples.Common.Maps.Special;
+using Mapsui.Samples.Forms;
 using Mapsui.Tiling;
 using Mapsui.UI;
+using Mapsui.UI.Forms;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
+using PolygonSample = Mapsui.Samples.Common.Maps.PolygonSample;
 
 namespace Mapsui.Rendering.Skia.Tests;
 
@@ -46,7 +49,6 @@ public class MapRegressionTests
         new RasterizingTileLayerSample(),
         new PointFeatureAnimationSamples(),
         new StackedLabelsSample(),
-        new MutatingTriangleSample(), // Causes Synchronization Context Errors
         new OpacityStyleSample(),
         new VariousSample(),
     };
@@ -55,36 +57,46 @@ public class MapRegressionTests
     [TestCaseSource(nameof(RegressionSamples))]
     public async Task TestSample(ISample sample)
     {
-        var fileName = sample.GetType().Name + ".Regression.png";
-        var mapControl = InitMap(sample);
-        var map = mapControl.Map;
-        await DisplayMap(mapControl).ConfigureAwait(false);
+        try 
+        { 
+            var fileName = sample.GetType().Name + ".Regression.png";
+            var mapControl = InitMap(sample);
+            var map = mapControl.Map;
+            await DisplayMap(mapControl).ConfigureAwait(false);
 
-        if (map != null)
+            if (map != null)
+            {
+                // act
+                using var bitmap = new MapRenderer().RenderToBitmapStream(mapControl.Viewport, map.Layers, map.BackColor, 2);
+
+                // aside
+                if (bitmap is { Length: > 0 })
+                {
+                    File.WriteToGeneratedFolder(fileName, bitmap);
+                }
+                else
+                {
+                    Assert.Fail("Should generate Image");
+                }
+                
+
+                // assert
+                var originalStream = File.ReadFromRegressionFolder(fileName);
+                if (originalStream == null)
+                {
+                    Assert.Inconclusive($"No Regression Test Data for { sample.Name }");
+                }
+                else
+                {
+                    Assert.IsTrue(MapRendererTests.CompareBitmaps(originalStream, bitmap, 1, 0.99));    
+                }
+            }
+        }
+        finally
         {
-            // act
-            using var bitmap = new MapRenderer().RenderToBitmapStream(mapControl.Viewport, map.Layers, map.BackColor, 2);
-
-            // aside
-            if (bitmap is { Length: > 0 })
+            if (sample is IDisposable disposable)
             {
-                File.WriteToGeneratedFolder(fileName, bitmap);
-            }
-            else
-            {
-                Assert.Fail("Should generate Image");
-            }
-            
-
-            // assert
-            var originalStream = File.ReadFromRegressionFolder(fileName);
-            if (originalStream == null)
-            {
-                Assert.Inconclusive($"No Regression Test Data for { sample.Name }");
-            }
-            else
-            {
-                Assert.IsTrue(MapRendererTests.CompareBitmaps(originalStream, bitmap, 1, 0.99));    
+                disposable.Dispose();
             }
         }
     }
@@ -106,13 +118,23 @@ public class MapRegressionTests
         {
             sampleTest.InitializeTest();
         }
+
+        var fetchInfo = new FetchInfo(mapControl.Viewport.Extent, mapControl.Viewport.Resolution, mapControl.Map?.CRS);
+        mapControl.Map?.RefreshData(fetchInfo);
+
+        if (sample is IFormsSample formsSample)
+        {
+            var mReadOnlyPoint = mapControl.Viewport.Center;
+            var position = new Position(mReadOnlyPoint.X, mReadOnlyPoint.Y);
+            var eventArgs = new MapClickedEventArgs(position, 1);
+            formsSample.OnClick(mapControl, eventArgs); 
+        }
+
         return mapControl;
     }
 
     private async Task DisplayMap(IMapControl mapControl)
     {
-        var fetchInfo = new FetchInfo(mapControl.Viewport.Extent, mapControl.Viewport.Resolution, mapControl.Map?.CRS);
-        mapControl.Map?.RefreshData(fetchInfo);
         await WaitForLoading(mapControl).ConfigureAwait(false);
     }
 

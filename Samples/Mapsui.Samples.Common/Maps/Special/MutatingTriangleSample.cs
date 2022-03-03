@@ -12,7 +12,7 @@ using NetTopologySuite.Geometries;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class MutatingTriangleSample : ISample
+    public class MutatingTriangleSample : ISample, ISampleTest, IDisposable
     {
         public string Name => "Mutating triangle";
         public string Category => "Special";
@@ -23,9 +23,11 @@ namespace Mapsui.Samples.Common.Maps
         }
 
         private static readonly Random Random = new Random(0);
+        private static CancellationTokenSource cancelationTokenSource;
 
         public static Map CreateMap()
         {
+            cancelationTokenSource = new CancellationTokenSource();
             var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(CreateMutatingTriangleLayer(map.Extent));
@@ -90,8 +92,19 @@ namespace Mapsui.Samples.Common.Maps
 
             public static Task Run(Action action, TimeSpan period)
             {
-                return Run(action, period, CancellationToken.None);
+                return Run(action, period, cancelationTokenSource.Token);
             }
+        }
+
+        public void InitializeTest()
+        {
+            cancelationTokenSource.Cancel();
+        }
+
+        public void Dispose()
+        {
+            cancelationTokenSource.Cancel();
+            cancelationTokenSource.Dispose();
         }
     }
 }
