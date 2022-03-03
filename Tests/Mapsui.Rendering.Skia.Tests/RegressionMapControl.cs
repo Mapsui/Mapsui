@@ -10,6 +10,7 @@ using Mapsui.Utilities;
 
 #pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
 #pragma warning disable IDISP008 // Don't assign member with injected and created disposables
+#pragma warning disable CS0067 // The event is never used
 
 namespace Mapsui.Rendering.Skia.Tests;
 
@@ -104,7 +105,7 @@ public class RegressionMapControl : IMapControl
     {
         if (Map != null && !Map.Initialized && Viewport.HasSize && Map?.Extent != null)
         {
-            Map.Home?.Invoke(Navigator);
+            Map.Home?.Invoke(Navigator!);
             Map.Initialized = true;
         }
     }
