@@ -1,8 +1,10 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Rendering.Skia.Provider;
+using Mapsui.Styles;
 using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Desktop
@@ -20,7 +22,7 @@ namespace Mapsui.Samples.Common.Desktop
         public static Map CreateMap()
         {
             var map = new Map();
-            var gif = new GeoTiffProvider(GetAppDir() + "\\Images\\example.tif");
+            var gif = new GeoTiffProvider(GetAppDir() + "\\Images\\example.tif", new List<Color>() { Color.Red });
             map.Layers.Add(CreateGifLayer(gif));
 
             return map;

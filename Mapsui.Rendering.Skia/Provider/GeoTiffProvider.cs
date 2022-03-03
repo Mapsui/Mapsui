@@ -80,16 +80,24 @@ namespace Mapsui.Rendering.Skia.Provider
         private static MemoryStream ReadImageAsStream(string tiffPath, List<Color>? noDataColors)
         {
             var img = ConvertTiffToSKBitmap(new MemoryStream(File.ReadAllBytes(tiffPath)));
-            var imageStream = new MemoryStream();
+            try {
+                var imageStream = new MemoryStream();
 
-            if (noDataColors != null)
-            {
-                img = ApplyColorFilter(img, noDataColors);
+                if (noDataColors != null)
+                {
+                    var temp = ApplyColorFilter(img, noDataColors);
+                    img.Dispose();
+                    img = temp;
+                }
+
+                img.Encode(imageStream, SKEncodedImageFormat.Png, 100);
+
+                return imageStream;
             }
-
-            img.Encode(imageStream, SKEncodedImageFormat.Png, 100);
-
-            return imageStream;
+            finally
+            {
+                img.Dispose();
+            }
         }
 
         private static TiffProperties LoadTiff(string location)
@@ -139,7 +147,8 @@ namespace Mapsui.Rendering.Skia.Provider
                 }
             }
 
-            var bitmap = new SKBitmap(width, height) {
+            var bitmap = new SKBitmap(width, height)
+            {
                 Pixels = pixels,
             };
 
@@ -172,11 +181,12 @@ namespace Mapsui.Rendering.Skia.Provider
                 if (found)
                 {
                     var color = pixels[counter];
-                    pixels[counter] = new SKColor(color.Red,color.Green,color.Blue, 0);
+                    pixels[counter] = new SKColor(color.Red, color.Green, color.Blue, 0);
                 }
             }
 
-            return new SKBitmap(bitmapImage.Info) {
+            return new SKBitmap(bitmapImage.Info)
+            {
                 Pixels = pixels,
             };
         }

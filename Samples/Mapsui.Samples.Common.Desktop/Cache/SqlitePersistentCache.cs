@@ -39,7 +39,8 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>
     public void Add(TileIndex index, byte[] tile)
     {
         using var connection = CreateConnection();
-        var data = new Tile {
+        var data = new Tile
+        {
             Level = index.Level,
             Col = index.Col,
             Row = index.Row,

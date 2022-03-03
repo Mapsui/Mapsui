@@ -30,7 +30,8 @@ namespace Mapsui.Samples.Common.Desktop
 
             var countrySource = new ShapeFile(GetAppDir() + "\\GeoData\\World\\countries.shp", true);
             countrySource.CRS = "EPSG:4326";
-            var projectedCountrySource = new ProjectingProvider(countrySource) {
+            var projectedCountrySource = new ProjectingProvider(countrySource)
+            {
                 CRS = "EPSG:3857",
             };
 
