@@ -10,7 +10,7 @@ namespace Mapsui.Tiling.Cache;
 public class SqlitePersistentCache : IPersistentCache<byte[]>
 {
     private readonly string _file;
-    private readonly TimeSpan? _cacheExpireTime;
+    private readonly TimeSpan _cacheExpireTime;
 
     public SqlitePersistentCache(string name, TimeSpan? cacheExpireTime = null, string? folder = null)
     {
@@ -21,7 +21,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>
         }
 
         _file = Path.Combine(folder, name + ".sqlite");
-        _cacheExpireTime = cacheExpireTime;
+        _cacheExpireTime = cacheExpireTime ?? TimeSpan.Zero;
         InitDb();
     }
 
@@ -31,6 +31,13 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>
         try
         {
             var test = connection.Table<Tile>().FirstOrDefault();
+            if (test.Created == DateTime.MinValue)
+            {
+                var today = DateTime.Today;
+                var command = connection.CreateCommand(@$"Alter TABLE Tile 
+                Add Created DateTime NOT NULL Default ('{today.Year}{today.Month:00}{today.Date:00}');");
+                command.ExecuteNonQuery();
+            }
         }
         catch (SQLiteException)
         {
@@ -70,9 +77,9 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>
     {
         using var connection = CreateConnection();
         var tile = connection.Table<Tile>().FirstOrDefault(f => f.Level == index.Level && f.Col == index.Col && f.Row == index.Row);
-        if (_cacheExpireTime != null)
+        if (_cacheExpireTime != TimeSpan.Zero)
         {
-            if (tile.Created.Add(_cacheExpireTime.Value) < DateTime.Now)
+            if (tile.Created.Add(_cacheExpireTime) < DateTime.Now)
             {
                 // expired
                 Remove(index);

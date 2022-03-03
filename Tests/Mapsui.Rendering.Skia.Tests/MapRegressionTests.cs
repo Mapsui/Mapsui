@@ -47,6 +47,8 @@ public class MapRegressionTests
         new PointFeatureAnimationSamples(),
         new StackedLabelsSample(),
         new MutatingTriangleSample(), // Causes Synchronization Context Errors
+        new OpacityStyleSample(),
+        new VariousSample(),
     };
 
     [Test]
@@ -75,7 +77,15 @@ public class MapRegressionTests
             
 
             // assert
-            Assert.IsTrue(MapRendererTests.CompareBitmaps(File.ReadFromRegressionFolder(fileName), bitmap, 1, 0.99));
+            var originalStream = File.ReadFromRegressionFolder(fileName);
+            if (originalStream == null)
+            {
+                Assert.Inconclusive($"No Regression Test Data for { sample.Name }");
+            }
+            else
+            {
+                Assert.IsTrue(MapRendererTests.CompareBitmaps(originalStream, bitmap, 1, 0.99));    
+            }
         }
     }
 
@@ -92,6 +102,10 @@ public class MapRegressionTests
         var mapControl = new RegressionMapControl();
         mapControl.SetSize(800, 600);
         sample.Setup(mapControl);
+        if (sample is ISampleTest sampleTest)
+        {
+            sampleTest.InitializeTest();
+        }
         return mapControl;
     }
 

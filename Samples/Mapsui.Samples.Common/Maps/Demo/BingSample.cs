@@ -19,7 +19,7 @@ namespace Mapsui.Samples.Common.Maps
             mapControl.Map = CreateMap(BingArial.DefaultCache);
         }
 
-        public static Map CreateMap(IPersistentCache<byte[]> persistentCache, KnownTileSource source = KnownTileSource.BingAerial)
+        public static Map CreateMap(IPersistentCache<byte[]>? persistentCache, KnownTileSource source = KnownTileSource.BingAerial)
         {
             var map = new Map();
 

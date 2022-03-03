@@ -474,6 +474,9 @@
     <None Update="Resources\Images\Regression\RasterizingLayerSample.Regression.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Resources\Images\Regression\RasterizingTileLayerSample.Regression.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\Images\Regression\ScaleBarSample.Regression.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

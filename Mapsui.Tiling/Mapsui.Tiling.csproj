@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="BruTile" Version="4.0.0" />
-    <PackageReference Include="BruTile.MbTiles" Version="4.0.0" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.6.292"/>
   </ItemGroup>
 
   <ItemGroup>
