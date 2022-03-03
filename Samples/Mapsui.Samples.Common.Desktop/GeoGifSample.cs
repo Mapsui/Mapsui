@@ -6,9 +6,9 @@ using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Desktop
 {
-    public class GeoGifSample : ISample
+    public class GeoTiffSample : ISample
     {
-        public string Name => "6 Geo Gif";
+        public string Name => "6 Geo Tiff";
         public string Category => "Desktop";
 
         public void Setup(IMapControl mapControl)
