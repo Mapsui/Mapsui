@@ -7,6 +7,8 @@ using Mapsui.Rendering.Skia.Provider;
 using Mapsui.Styles;
 using Mapsui.UI;
 
+#pragma warning disable IDISP001 // Dispose created
+
 namespace Mapsui.Samples.Common.Desktop
 {
     public class GeoTiffSample : ISample

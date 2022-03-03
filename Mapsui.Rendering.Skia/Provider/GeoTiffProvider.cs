@@ -80,14 +80,17 @@ namespace Mapsui.Rendering.Skia.Provider
         private static MemoryStream ReadImageAsStream(string tiffPath, List<Color>? noDataColors)
         {
             var img = ConvertTiffToSKBitmap(new MemoryStream(File.ReadAllBytes(tiffPath)));
-            try {
+            try
+            {
                 var imageStream = new MemoryStream();
 
                 if (noDataColors != null)
                 {
+#pragma warning disable IDISP001 // dispose created
                     var temp = ApplyColorFilter(img, noDataColors);
                     img.Dispose();
                     img = temp;
+#pragma warning restore IDISP001
                 }
 
                 img.Encode(imageStream, SKEncodedImageFormat.Png, 100);

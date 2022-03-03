@@ -1,3 +1,4 @@
+#pragma warning disable IDISP001 // Dispose created
 
 namespace Mapsui.Samples.Eto
 {
@@ -87,7 +88,10 @@ namespace Mapsui.Samples.Eto
             foreach (var sample in AllSamples.GetSamples().Where(s => s.Category == selectedCategory))
                 SampleList.Items.Add(CreateRadioButton(sample));
 
-            (SampleList.Items.First().Control as RadioButton).Checked = true;
+            if (SampleList.Items.First().Control is RadioButton radioButton)
+            {
+                radioButton.Checked = true;
+            }
         }
         private void CategoryComboBox_SelectedValueChanged(object? sender, EventArgs e)
         {
