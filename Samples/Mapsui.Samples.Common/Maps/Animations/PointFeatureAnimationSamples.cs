@@ -15,8 +15,9 @@ using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps.Special
 {
-    public class PointFeatureAnimationSamples : ISample
+    public class PointFeatureAnimationSamples : ISample, ISampleTest
     {
+        private static AnimatedPointsWithAutoUpdateLayer _animatedPointsWithAutoUpdateLayer;
         public string Name => "Point Feature Animation";
 
         public string Category => "Animations";
@@ -30,8 +31,14 @@ namespace Mapsui.Samples.Common.Maps.Special
         {
             var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            map.Layers.Add(new AnimatedPointsWithAutoUpdateLayer { Name = "Animated Points" });
+            _animatedPointsWithAutoUpdateLayer = new AnimatedPointsWithAutoUpdateLayer { Name = "Animated Points" };
+            map.Layers.Add(_animatedPointsWithAutoUpdateLayer);
             return map;
+        }
+
+        public void InitializeTest()
+        {
+            _animatedPointsWithAutoUpdateLayer.Stop();
         }
     }
 
@@ -55,6 +62,11 @@ namespace Mapsui.Samples.Common.Maps.Special
             {
                 _timer.Dispose();
             }
+        }
+
+        public void Stop()
+        {
+            _timer.Dispose();
         }
     }
 

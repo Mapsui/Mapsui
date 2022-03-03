@@ -41,21 +41,22 @@ public class MapRegressionTests
     public static object[] RegressionSamples => _regressionSamples ??= AllSamples.GetSamples().Where(f => ExcludedSamples.All(e => e.GetType() != f.GetType())).OrderBy(f => f.GetType().FullName).ToArray();
 
     public static object[] ExcludedSamples => _excludedSamples ??= new ISample[] {
-        new PanLockSample(), 
-        new PenStrokeCapSample(), 
         new WfsSample(),
-        new PolygonSample(),
-        new PointProjectionSample(),
-        new RasterizingTileLayerSample(),
-        new PointFeatureAnimationSamples(),
-        new StackedLabelsSample(),
         new OpacityStyleSample(),
         new VariousSample(),
+        new PointProjectionSample(),
+        new PolygonSample(),
+        new StackedLabelsSample(),
     };
 
     [Test]
     [TestCaseSource(nameof(RegressionSamples))]
     public async Task TestSample(ISample sample)
+    {
+        await TestSample(sample, true).ConfigureAwait(false);
+    }
+
+    public async Task TestSample(ISample sample, bool compareImages)
     {
         try 
         { 
@@ -81,14 +82,22 @@ public class MapRegressionTests
                 
 
                 // assert
-                var originalStream = File.ReadFromRegressionFolder(fileName);
-                if (originalStream == null)
+                if (compareImages)
                 {
-                    Assert.Inconclusive($"No Regression Test Data for { sample.Name }");
+                    var originalStream = File.ReadFromRegressionFolder(fileName);
+                    if (originalStream == null)
+                    {
+                        Assert.Inconclusive($"No Regression Test Data for {sample.Name}");
+                    }
+                    else
+                    {
+                        Assert.IsTrue(MapRendererTests.CompareBitmaps(originalStream, bitmap, 1, 0.99));
+                    }
                 }
                 else
                 {
-                    Assert.IsTrue(MapRendererTests.CompareBitmaps(originalStream, bitmap, 1, 0.99));    
+                    // Don't compare images here because to unreliable
+                    Assert.True(true); 
                 }
             }
         }
@@ -102,11 +111,10 @@ public class MapRegressionTests
     }
 
     [Test]
-    [Ignore("Don't work currently")]
     [TestCaseSource(nameof(ExcludedSamples))]
-    public async Task ExcludedTestSample(Type sample)
+    public async Task ExcludedTestSample(ISample sample)
     {
-        await TestSample((ISample)Activator.CreateInstance(sample));
+        await TestSample(sample, false);
     }
 
     private static RegressionMapControl InitMap(ISample sample)
