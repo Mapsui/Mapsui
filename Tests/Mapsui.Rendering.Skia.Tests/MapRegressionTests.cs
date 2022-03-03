@@ -14,7 +14,6 @@ using Mapsui.Samples.Common.Maps.Projection;
 using Mapsui.Tiling;
 using Mapsui.UI;
 using NUnit.Framework;
-using PolygonSample = Mapsui.Samples.Common.Maps.PolygonSample;
 
 namespace Mapsui.Rendering.Skia.Tests;
 
