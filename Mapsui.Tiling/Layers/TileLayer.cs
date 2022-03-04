@@ -52,7 +52,7 @@ namespace Mapsui.Tiling.Layers
         {
             _tileSource = tileSource ?? throw new ArgumentException($"{tileSource} can not null");
             MemoryCache = new MemoryCache<IFeature?>(minTiles, maxTiles);
-            Style = new VectorStyle { Outline = { Color = Color.FromArgb(0, 0, 0, 0) } }; // initialize with transparent outline
+            Style = new RasterStyle();
             Attribution.Text = _tileSource.Attribution?.Text;
             Attribution.Url = _tileSource.Attribution?.Url;
             _extent = _tileSource.Schema?.Extent.ToMRect();
