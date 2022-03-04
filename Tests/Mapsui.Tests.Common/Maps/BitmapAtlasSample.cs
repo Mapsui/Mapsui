@@ -58,27 +58,27 @@ namespace Mapsui.Tests.Common.Maps
             {
                 new PointFeature(new MPoint(256, 124))
                 {
-                    Styles = new[] {new SymbolStyle {BitmapId = atlas} }
+                    Styles = new[] {new SymbolStyle { BitmapId = atlas} }
                 },
                 new PointFeature(new MPoint(20, 280))
                 {
-                    Styles = new[] {new SymbolStyle {BitmapId = BitmapRegistry.Instance.Register(spriteAmusementPark15)} }
+                    Styles = new[] {new SymbolStyle { BitmapId = BitmapRegistry.Instance.Register(spriteAmusementPark15)} }
                 },
                 new PointFeature(new MPoint(60, 280))
                 {
-                    Styles = new[] {new SymbolStyle {BitmapId = BitmapRegistry.Instance.Register(spriteClothingStore15)} }
+                    Styles = new[] {new SymbolStyle { BitmapId = BitmapRegistry.Instance.Register(spriteClothingStore15)} }
                 },
                 new PointFeature(new MPoint(100, 280))
                 {
-                    Styles = new[] {new SymbolStyle {BitmapId = BitmapRegistry.Instance.Register(spriteDentist15)} }
+                    Styles = new[] {new SymbolStyle { BitmapId = BitmapRegistry.Instance.Register(spriteDentist15)} }
                 },
                 new PointFeature(new MPoint(180, 300))
                 {
-                    Styles = new[] {new SymbolStyle {BitmapId = BitmapRegistry.Instance.Register(spritePedestrianPolygon)} }
+                    Styles = new[] {new SymbolStyle { BitmapId = BitmapRegistry.Instance.Register(spritePedestrianPolygon)} }
                 },
                 new PointFeature(new MPoint(380, 280))
                 {
-                    Styles = new[] {new SymbolStyle {BitmapId = svgTigerBitmapId, SymbolScale = 0.1} }
+                    Styles = new[] {new SymbolStyle { BitmapId = svgTigerBitmapId, SymbolScale = 0.1} }
                 }
             };
         }

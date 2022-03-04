@@ -12,7 +12,7 @@ namespace Mapsui.Rendering.Skia
         Picture
     }
 
-    public class BitmapInfo
+    public class BitmapInfo : IBitmapInfo
     {
         private object? _data;
 
