@@ -28,6 +28,8 @@ namespace Mapsui.UI.WinUI
 namespace Mapsui.UI.Forms
 #elif __AVALONIA__
 namespace Mapsui.UI.Avalonia
+#elif __ETO_FORMS__
+namespace Mapsui.UI.Eto
 #else
 namespace Mapsui.UI.Wpf
 #endif

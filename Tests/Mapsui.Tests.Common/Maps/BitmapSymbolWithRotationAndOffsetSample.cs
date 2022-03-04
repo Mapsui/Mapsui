@@ -68,7 +68,6 @@ namespace Mapsui.Tests.Common.Maps
                 SymbolOffset = new Offset { Y = -24 },
                 SymbolRotation = rotation,
                 RotateWithMap = true,
-                SymbolType = SymbolType.Triangle
             });
             return feature;
         }
