@@ -53,11 +53,11 @@ namespace Mapsui.Tests.Common.Maps
                 },
                 new PointFeature(new MPoint(50, 100))
                 {
-                    Styles = new[] {new SymbolStyle {BitmapId = circleIconId}}
+                    Styles = new[] {new SymbolStyle { BitmapId = circleIconId}}
                 },
                 new PointFeature(new MPoint(100, 50))
                 {
-                    Styles = new[] {new SymbolStyle {BitmapId = checkeredIconId}}
+                    Styles = new[] {new SymbolStyle { BitmapId = checkeredIconId}}
                 },
                 new PointFeature(new MPoint(100, 100))
                 {

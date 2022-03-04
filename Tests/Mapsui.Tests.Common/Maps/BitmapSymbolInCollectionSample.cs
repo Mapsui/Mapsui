@@ -58,12 +58,12 @@ namespace Mapsui.Tests.Common.Maps
                 new GeometryFeature
                 {
                     Geometry = new  GeometryCollection(new Geometry[]  {  new Point(50, 100) } ),
-                    Styles = new[] {new SymbolStyle {BitmapId = circleIconId}}
+                    Styles = new[] {new SymbolStyle { BitmapId = circleIconId}}
                 },
                 new GeometryFeature
                 {
                     Geometry = new GeometryCollection(new Geometry[]  {  new Point(100, 50) } ),
-                    Styles = new[] {new SymbolStyle {BitmapId = checkeredIconId}}
+                    Styles = new[] {new SymbolStyle { BitmapId = checkeredIconId}}
                 },
                 new GeometryFeature
                 {

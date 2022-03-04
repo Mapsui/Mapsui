@@ -16,6 +16,6 @@ namespace Mapsui.Rendering.Skia.SkiaStyles
         /// <param name="style">Style to draw</param>
         /// <param name="symbolCache">SymbolCache for ready rendered bitmaps</param>
         /// <returns></returns>
-        bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, IStyle style, ISymbolCache symbolCache);
+        bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, IStyle style, ISymbolCache symbolCache, long iteration);
     }
 }
