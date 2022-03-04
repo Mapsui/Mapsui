@@ -2,13 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Mapsui.Layers;
+using Mapsui.Logging;
+using Mapsui.Nts.Extensions;
 using Mapsui.Rendering.Skia.Extensions;
+using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Styles;
+using NetTopologySuite.Geometries;
 using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia
 {
-    public static class LabelRenderer
+    public class LabelStyleRenderer : ISkiaStyleRenderer
     {
         private static readonly IDictionary<string, BitmapInfo> LabelCache =
             new Dictionary<string, BitmapInfo>();
@@ -42,12 +47,44 @@ namespace Mapsui.Rendering.Skia
                 horizontalAlignment: style.HorizontalAlignment, verticalAlignment: style.VerticalAlignment);
         }
 
-        public static void Draw(SKCanvas canvas, LabelStyle style, IFeature feature, double x, double y,
-            float layerOpacity)
+
+        public bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, IStyle style, ISymbolCache symbolCache, long iteration)
         {
-            var text = style.GetLabelText(feature);
-            if (string.IsNullOrEmpty(text)) return;
-            DrawLabel(canvas, (float)x, (float)y, style, text, layerOpacity);
+            try
+            {
+                var labelStyle = (LabelStyle)style;
+                var text = labelStyle.GetLabelText(feature);
+
+                if (string.IsNullOrEmpty(text))
+                    return false;
+
+                switch (feature)
+                {
+                    case (PointFeature pointFeature):
+                        var (pointX, pointY) = viewport.WorldToScreenXY(pointFeature.Point.X, pointFeature.Point.Y);
+                        DrawLabel(canvas, (float)pointX, (float)pointY, labelStyle, text, (float)layer.Opacity);
+                        break;
+                    case (LineString lineStringFeature):
+                        if (feature.Extent == null)
+                            return false;
+                        var (lineStringCenterX, lineStringCenterY) = viewport.WorldToScreenXY(feature.Extent.Centroid.X, feature.Extent.Centroid.Y);
+                        DrawLabel(canvas, (float)lineStringCenterX, (float)lineStringCenterY, labelStyle, text, (float)layer.Opacity);
+                        break;
+                    case (Polygon polygonFeature):
+                        if (polygonFeature.Envelope is null)
+                            return false;
+                        var worldCenter = polygonFeature.Envelope.Centroid;
+                        var (polygonCenterX, polygonCenterY) = viewport.WorldToScreenXY(worldCenter.X, worldCenter.Y);
+                        DrawLabel(canvas, (float)polygonCenterX, (float)polygonCenterY, labelStyle, text, (float)layer.Opacity);
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(LogLevel.Error, ex.Message, ex);
+            }
+
+            return true;
         }
 
         private static SKImage CreateLabelAsBitmap(LabelStyle style, string? text, float layerOpacity)
