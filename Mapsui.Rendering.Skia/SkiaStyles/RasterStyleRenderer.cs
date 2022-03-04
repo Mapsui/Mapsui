@@ -1,45 +1,55 @@
 using System;
-using System.Collections.Generic;
+using Mapsui.Layers;
 using Mapsui.Logging;
+using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Styles;
 using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia
 {
-    public static class RasterRenderer
+    public class RasterStyleRenderer : ISkiaStyleRenderer
     {
-        public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, IStyle style, IFeature feature, MRaster? raster, float opacity, IDictionary<object, BitmapInfo?> tileCache, long currentIteration)
+        public bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, IStyle style, ISymbolCache symbolCache, long currentIteration)
         {
             try
             {
+                var rasterFeature = feature as RasterFeature;
+                var raster = rasterFeature?.Raster;
+
+                var opacity = (float)(layer.Opacity * style.Opacity);
+
                 if (raster == null)
-                    return;
+                    return false;
+
+                if (!(style is RasterStyle rasterStyle))
+                    return false;
+
+                rasterStyle.UpdateCache(currentIteration);
 
                 BitmapInfo? bitmapInfo;
 
-                if (!tileCache.Keys.Contains(raster))
+                if (!rasterStyle.TileCache.Keys.Contains(raster))
                 {
                     bitmapInfo = BitmapHelper.LoadBitmap(raster.Data);
-                    tileCache[raster] = bitmapInfo;
+                    rasterStyle.TileCache[raster] = bitmapInfo;
                 }
                 else
                 {
-                    bitmapInfo = tileCache[raster];
+                    bitmapInfo = (BitmapInfo?)rasterStyle.TileCache[raster];
                 }
 
-                if (bitmapInfo == null)
-                    return;
+                if (bitmapInfo == null || bitmapInfo.Bitmap == null)
+                    return false;
 
                 bitmapInfo.IterationUsed = currentIteration;
-                tileCache[raster] = bitmapInfo;
+                rasterStyle.TileCache[raster] = bitmapInfo;
 
                 var extent = feature.Extent;
 
                 if (extent == null)
-                    return;
+                    return false;
 
-                if (bitmapInfo.Bitmap == null)
-                    return;
+                canvas.Save();
 
                 if (viewport.IsRotated)
                 {
@@ -60,11 +70,15 @@ namespace Mapsui.Rendering.Skia
                     var destination = WorldToScreen(viewport, extent);
                     BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap, RoundToPixel(destination), opacity);
                 }
+
+                canvas.Restore();
             }
             catch (Exception ex)
             {
                 Logger.Log(LogLevel.Error, ex.Message, ex);
             }
+
+            return true;
         }
 
         private static SKMatrix CreateRotationMatrix(IReadOnlyViewport viewport, MRect rect, SKMatrix priorMatrix)
