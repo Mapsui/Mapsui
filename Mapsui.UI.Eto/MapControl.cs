@@ -12,6 +12,8 @@ namespace Mapsui.UI.Eto
     {
         private RectangleF _selectRectangle = new();
         private PointF? _downMousePosition;
+        private Cursor _defaultCursor = Cursors.Default;
+        public Cursor MoveCursor { get; set; } = Cursors.Move;
         public MouseWheelAnimation MouseWheelAnimation { get; } = new();
         public MapControl()
         {
@@ -86,7 +88,10 @@ namespace Mapsui.UI.Eto
             IsInBoxZoomMode = e.Modifiers == Keys.Control || e.Modifiers == Keys.LeftControl || e.Modifiers == Keys.RightControl;
 
             if (!IsInBoxZoomMode)
-                Cursor = Cursors.Move;
+            {
+                _defaultCursor = Cursor;
+                Cursor = MoveCursor;
+            }
 
             _downMousePosition = e.Location;
         }
@@ -118,7 +123,7 @@ namespace Mapsui.UI.Eto
 
             _downMousePosition = null;
 
-            Cursor = Cursors.Default;
+            Cursor = _defaultCursor;
 
             RefreshData();
         }
