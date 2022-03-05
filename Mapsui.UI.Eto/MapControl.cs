@@ -85,6 +85,9 @@ namespace Mapsui.UI.Eto
 
             IsInBoxZoomMode = e.Modifiers == Keys.Control || e.Modifiers == Keys.LeftControl || e.Modifiers == Keys.RightControl;
 
+            if (!IsInBoxZoomMode)
+                Cursor = Cursors.Move;
+
             _downMousePosition = e.Location;
         }
         private bool IsInBoxZoomMode
@@ -114,6 +117,8 @@ namespace Mapsui.UI.Eto
             }
 
             _downMousePosition = null;
+
+            Cursor = Cursors.Default;
 
             RefreshData();
         }
