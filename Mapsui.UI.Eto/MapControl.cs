@@ -14,6 +14,10 @@ namespace Mapsui.UI.Eto
         private PointF? _downMousePosition;
         private Cursor _defaultCursor = Cursors.Default;
         public Cursor MoveCursor { get; set; } = Cursors.Move;
+        public MouseButtons MoveButton { get; set; } = MouseButtons.Primary;
+        public Keys MoveModifier { get; set; } = Keys.None;
+        public MouseButtons ZoomButton { get; set; } = MouseButtons.Primary;
+        public Keys ZoomModifier { get; set; } = Keys.Control;
         public MouseWheelAnimation MouseWheelAnimation { get; } = new();
         public MapControl()
         {
@@ -81,18 +85,18 @@ namespace Mapsui.UI.Eto
         {
             base.OnMouseDown(e);
 
-            if (e.Buttons != MouseButtons.Primary)
-                return;
+            IsInBoxZoomMode = e.Buttons == ZoomButton && (ZoomModifier == Keys.None || e.Modifiers == ZoomModifier);
 
-            IsInBoxZoomMode = e.Modifiers == Keys.Control || e.Modifiers == Keys.LeftControl || e.Modifiers == Keys.RightControl;
+            bool move_mode = e.Buttons == MoveButton && (MoveModifier == Keys.None || e.Modifiers == MoveModifier);
 
-            if (!IsInBoxZoomMode)
+            if (move_mode)
             {
                 _defaultCursor = Cursor;
                 Cursor = MoveCursor;
             }
 
-            _downMousePosition = e.Location;
+            if (move_mode || IsInBoxZoomMode)
+                _downMousePosition = e.Location;
         }
         private bool IsInBoxZoomMode
         {
@@ -106,9 +110,6 @@ namespace Mapsui.UI.Eto
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
-
-            if (e.Buttons != MouseButtons.Primary)
-                return;
 
             if (IsInBoxZoomMode)
             {
