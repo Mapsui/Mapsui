@@ -41,6 +41,9 @@ namespace Mapsui.Samples.Eto
             MapControl.ReSnapRotationDegrees = 5;
             RotationSlider.ValueChanged += RotationSliderChanged;
 
+            MapControl.ZoomButton = MouseButtons.Alternate;
+            MapControl.ZoomModifier = Keys.None;
+
             Logger.LogDelegate += LogMethod;
 
             CategoryComboBox.SelectedValueChanged += CategoryComboBox_SelectedValueChanged;
