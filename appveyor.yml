@@ -18,8 +18,7 @@ environment:
 nuget:
   disable_publish_on_pr: true
 cache:
-- packages -> **\*.csproj
-- '%USERPROFILE%\.nuget\packages'
+- '%USERPROFILE%.nuget\packages -> **.sln, **.csproj'  # preserve nuget folder (packages) unless the solution or projects change
 install:
 - ps: Invoke-WebRequest 'https://dot.net/v1/dotnet-install.ps1' -OutFile 'dotnet-install.ps1';
 - ps: ./dotnet-install.ps1 -Version 6.0.200 -InstallDir "dotnetcli"
