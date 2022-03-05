@@ -27,7 +27,7 @@ namespace Mapsui.Styles
 
         public UnitType UnitType { get; set; }
 
-        private int _bitmapId;
+        private int _bitmapId = -1;
 
         /// <summary>
         /// Id of the image in the BitmapRegistry, if SymbolType is Image
