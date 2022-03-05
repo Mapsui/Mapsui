@@ -4,7 +4,7 @@ using Mapsui.Providers;
 
 namespace Mapsui.Layers.AnimatedLayers;
 
-public class AnimatedPointLayer : BaseLayer
+public class AnimatedPointLayer : BaseLayer, ILayerDataSource
 {
     private readonly IProvider<PointFeature> _dataSource;
     private FetchInfo? _fetchInfo;
@@ -39,4 +39,6 @@ public class AnimatedPointLayer : BaseLayer
     {
         return _animatedFeatures.UpdateAnimations();
     }
+
+    public IProvider<IFeature>? DataSource => _dataSource;
 }

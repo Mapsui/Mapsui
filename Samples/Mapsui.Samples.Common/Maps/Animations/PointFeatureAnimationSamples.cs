@@ -64,6 +64,17 @@ namespace Mapsui.Samples.Common.Maps.Special
             }
         }
 
+        public void Test()
+        {
+            this.Stop();
+            if (this.DataSource is DynamicMemoryProvider dynamicMemoryProvider)
+            {
+                dynamicMemoryProvider.Test();
+            }
+
+            this.UpdateData();
+        }
+
         public void Stop()
         {
             _timer.Dispose();
@@ -72,7 +83,7 @@ namespace Mapsui.Samples.Common.Maps.Special
 
     internal class DynamicMemoryProvider : MemoryProvider<PointFeature>
     {
-        private readonly Random _random = new(0);
+        private Random _random = new(0);
 
         public override IEnumerable<PointFeature> GetFeatures(FetchInfo fetchInfo)
         {
@@ -94,6 +105,11 @@ namespace Mapsui.Samples.Common.Maps.Special
                 count++;
             }
             return features;
+        }
+
+        public void Test()
+        {
+            _random = new(0);
         }
     }
 }
