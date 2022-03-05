@@ -16,6 +16,12 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
+    - uses: actions/cache@v2
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+        restore-keys: |
+            ${{ runner.os }}-nuget-
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.0.5      
       with:
@@ -75,6 +81,12 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
+    - uses: actions/cache@v2
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+        restore-keys: |
+            ${{ runner.os }}-nuget-
     - name: Setup .NET Core SDK
       uses: actions/setup-dotnet@v1
       with:

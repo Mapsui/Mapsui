@@ -17,6 +17,8 @@ environment:
   version-short: 4.0.0  
 nuget:
   disable_publish_on_pr: true
+cache:
+  - packages -> **\*.csproj
 install:
 - ps: Invoke-WebRequest 'https://dot.net/v1/dotnet-install.ps1' -OutFile 'dotnet-install.ps1';
 - ps: ./dotnet-install.ps1 -Version 6.0.200 -InstallDir "dotnetcli"
