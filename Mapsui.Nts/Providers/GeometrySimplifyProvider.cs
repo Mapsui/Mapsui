@@ -31,7 +31,6 @@ public class GeometrySimplifyProvider : IProvider<IFeature>
         var features = _provider.GetFeatures(fetchInfo);
         var result = new List<IFeature>();
         foreach (var feature in features)
-        {
             if (feature is GeometryFeature geometryFeature)
             {
                 var copied = new GeometryFeature(geometryFeature);
@@ -39,10 +38,7 @@ public class GeometrySimplifyProvider : IProvider<IFeature>
                 result.Add(copied);
             }
             else
-            {
                 result.Add(feature);
-            }
-        }
 
         return result;
     }
