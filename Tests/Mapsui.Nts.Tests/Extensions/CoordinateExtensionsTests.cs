@@ -10,13 +10,13 @@ namespace Mapsui.Nts.Tests;
 public class CoordinateExtensionsTests
 {
     [Test]
-    public void CoordinateExtensionsShouldThrow()
+    public void ToLineStringShouldNotThrowWhenCoordinatesIsEmpty()
     {
         // Arrange
         IEnumerable<Coordinate> coordinates = new List<Coordinate>();
 
         // Act & Assert
-        var lineString = Assert.Throws<Exception>(() => coordinates.ToLineString());
+        Assert.DoesNotThrow(() => coordinates.ToLineString());
     }
 }
 
