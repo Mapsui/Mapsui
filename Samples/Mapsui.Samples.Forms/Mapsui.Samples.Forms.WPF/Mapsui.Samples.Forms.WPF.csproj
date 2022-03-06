@@ -19,11 +19,11 @@
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="OpenTK.GLControl" Version="3.1.0">
     </PackageReference>
-    <PackageReference Include="SkiaSharp.Views.Forms.WPF" Version="2.80.3">
+    <PackageReference Include="SkiaSharp.Views.Forms.WPF" Version="2.88.0-preview.209">
     </PackageReference>
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292">
     </PackageReference>
-    <PackageReference Include="Svg.Skia" Version="0.5.7.1">
+    <PackageReference Include="Svg.Skia" Version="0.5.12">
     </PackageReference>
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
     <PackageReference Include="System.Memory" Version="4.5.4">
@@ -40,7 +40,7 @@
     </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2083">
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms.Platform.WPF" Version="5.0.0.1905">
+    <PackageReference Include="Xamarin.Forms.Platform.WPF" Version="5.0.0.2083">
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

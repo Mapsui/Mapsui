@@ -56,7 +56,7 @@ namespace Mapsui.Samples.Common.Maps
 
         private static IEnumerable<IFeature> GenerateRandomFeatures(MRect? envelope, int count, IStyle style)
         {
-            return RandomPointGenerator.GenerateRandomPoints(envelope, count, 123)
+            return RandomPointGenerator.GenerateRandomPoints(envelope, count, new System.Random(123))
                 .Select(p => new PointFeature(p) { Styles = new List<IStyle> { style } }).ToList();
         }
 

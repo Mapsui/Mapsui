@@ -498,13 +498,13 @@ namespace Mapsui.UI.Wpf
         /// </summary>
         public void RefreshData(ChangeType changeType = ChangeType.Discrete)
         {
-            if (Viewport.Extent != null)
-            {
-                if (Viewport.Extent == null)
-                    return;
-                var fetchInfo = new FetchInfo(Viewport.Extent, Viewport.Resolution, Map?.CRS, changeType);
-                _map?.RefreshData(fetchInfo);
-            }
+            if (Viewport.Extent == null)
+                return;
+            if (Viewport.Extent.GetArea() <= 0)
+                return;
+
+            var fetchInfo = new FetchInfo(Viewport.Extent, Viewport.Resolution, Map?.CRS, changeType);
+            _map?.RefreshData(fetchInfo);
         }
 
         private void OnInfo(MapInfoEventArgs? mapInfoEventArgs)

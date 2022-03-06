@@ -1,4 +1,5 @@
-﻿using Mapsui.Layers;
+﻿using System;
+using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Helpers;
@@ -11,7 +12,6 @@ namespace Mapsui.Tests.Common.Maps
     {
         private const string LabelColumn = "Label";
         public string Category => "Tests";
-
         public string Name => "Stacked Labels";
 
         public void Setup(IMapControl mapControl)
@@ -21,7 +21,8 @@ namespace Mapsui.Tests.Common.Maps
 
         public static Map CreateMap()
         {
-            var provider = RandomPointGenerator.CreateProviderWithRandomPoints(new MRect(-100, -100, 100, 100), 20, 0);
+            var random = new Random(0);
+            var provider = RandomPointGenerator.CreateProviderWithRandomPoints(new MRect(-100, -100, 100, 100), 20, random);
             var layer = CreateLayer(provider);
             var stackedLabelLayer = CreateStackedLabelLayer(provider, LabelColumn);
 
