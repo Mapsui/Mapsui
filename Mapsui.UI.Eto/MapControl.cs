@@ -12,6 +12,12 @@ namespace Mapsui.UI.Eto
     {
         private RectangleF _selectRectangle = new();
         private PointF? _downMousePosition;
+        private Cursor _defaultCursor = Cursors.Default;
+        public Cursor MoveCursor { get; set; } = Cursors.Move;
+        public MouseButtons MoveButton { get; set; } = MouseButtons.Primary;
+        public Keys MoveModifier { get; set; } = Keys.None;
+        public MouseButtons ZoomButton { get; set; } = MouseButtons.Primary;
+        public Keys ZoomModifier { get; set; } = Keys.Control;
         public MouseWheelAnimation MouseWheelAnimation { get; } = new();
         public MapControl()
         {
@@ -24,15 +30,6 @@ namespace Mapsui.UI.Eto
 
             // Mapsui.Rendering.Skia use Mapsui.Nts where GetDbaseLanguageDriver need encoding providers
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-
-            LoadComplete += MapControlLoaded;
-            MouseDown += MapControlMouseLeftButtonDown;
-            MouseUp += MapControlMouseLeftButtonUp;
-
-            MouseMove += MapControlMouseMove;
-            MouseWheel += MapControlMouseWheel;
-
-            SizeChanged += MapControlSizeChanged;
 
             Renderer = new MapRenderer();
             RefreshGraphics();
@@ -54,14 +51,18 @@ namespace Mapsui.UI.Eto
 
             return drawable;
         }
-        private void MapControlLoaded(object sender, EventArgs e)
+        protected override void OnLoadComplete(EventArgs e)
         {
+            base.OnLoadComplete(e);
+
             SetViewportSize();
 
             CanFocus = true;
         }
-        private void MapControlMouseWheel(object sender, MouseEventArgs e)
+        protected override void OnMouseWheel(MouseEventArgs e)
         {
+            base.OnMouseWheel(e);
+
             if (_map?.ZoomLock ?? true) return;
             if (!Viewport.HasSize) return;
 
@@ -70,22 +71,29 @@ namespace Mapsui.UI.Eto
             resolution = _map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, _map.Resolutions, _map.Extent);
             Navigator.ZoomTo(resolution, e.Location.ToMapsui(), MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
         }
-        private void MapControlSizeChanged(object sender, EventArgs e)
+        protected override void OnSizeChanged(EventArgs e)
         {
+            base.OnSizeChanged(e);
+
             SetViewportSize();
         }
         private void RunOnUIThread(Action action)
         {
             Application.Instance.AsyncInvoke(action);
         }
-        private void MapControlMouseLeftButtonDown(object sender, MouseEventArgs e)
+        protected override void OnMouseDown(MouseEventArgs e)
         {
-            if (e.Buttons != MouseButtons.Primary)
-                return;
+            base.OnMouseDown(e);
 
-            IsInBoxZoomMode = e.Modifiers == Keys.Control || e.Modifiers == Keys.LeftControl || e.Modifiers == Keys.RightControl;
+            IsInBoxZoomMode = e.Buttons == ZoomButton && (ZoomModifier == Keys.None || e.Modifiers == ZoomModifier);
 
-            _downMousePosition = e.Location;
+            bool move_mode = e.Buttons == MoveButton && (MoveModifier == Keys.None || e.Modifiers == MoveModifier);
+
+            if (move_mode)
+                _defaultCursor = Cursor;
+
+            if (move_mode || IsInBoxZoomMode)
+                _downMousePosition = e.Location;
         }
         private bool IsInBoxZoomMode
         {
@@ -96,10 +104,9 @@ namespace Mapsui.UI.Eto
                 Content.Visible = value;
             }
         }
-        private void MapControlMouseLeftButtonUp(object sender, MouseEventArgs e)
+        protected override void OnMouseUp(MouseEventArgs e)
         {
-            if (e.Buttons != MouseButtons.Primary)
-                return;
+            base.OnMouseUp(e);
 
             if (IsInBoxZoomMode)
             {
@@ -115,6 +122,8 @@ namespace Mapsui.UI.Eto
 
             _downMousePosition = null;
 
+            Cursor = _defaultCursor;
+
             RefreshData();
         }
         private static bool IsClick(PointF currentPosition, PointF previousPosition)
@@ -125,8 +134,10 @@ namespace Mapsui.UI.Eto
         {
             System.Diagnostics.Process.Start(url);
         }
-        private void MapControlMouseMove(object sender, MouseEventArgs e)
+        protected override void OnMouseMove(MouseEventArgs e)
         {
+            base.OnMouseMove(e);
+
             if (_downMousePosition.HasValue)
             {
                 if (IsInBoxZoomMode)
@@ -137,6 +148,8 @@ namespace Mapsui.UI.Eto
                 }
                 else // drag/pan - mode
                 {
+                    Cursor = MoveCursor;
+
                     _viewport.Transform(e.Location.ToMapsui(), _downMousePosition.Value.ToMapsui());
 
                     RefreshGraphics();
