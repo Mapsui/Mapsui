@@ -9,7 +9,7 @@ namespace Mapsui.Samples.Common.Maps
 {
     public class ViewportFlyToAnimationSample : ISample
     {
-        public string Name => "Viewport Fly To Animation";
+        public string Name => "Animated Viewport - Fly To";
         public string Category => "Animations";
 
         public static int mode = 1;

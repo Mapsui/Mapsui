@@ -10,7 +10,7 @@ namespace Mapsui.Samples.Common.Maps
 {
     public class ViewportCenterOnAnimationSample : ISample
     {
-        public string Name => "Viewport Center Animation";
+        public string Name => "Animated Viewport - Center";
         public string Category => "Animations";
 
         public static int mode = 1;

@@ -90,10 +90,7 @@ namespace Mapsui.UI.Eto
             bool move_mode = e.Buttons == MoveButton && (MoveModifier == Keys.None || e.Modifiers == MoveModifier);
 
             if (move_mode)
-            {
                 _defaultCursor = Cursor;
-                Cursor = MoveCursor;
-            }
 
             if (move_mode || IsInBoxZoomMode)
                 _downMousePosition = e.Location;
@@ -151,6 +148,8 @@ namespace Mapsui.UI.Eto
                 }
                 else // drag/pan - mode
                 {
+                    Cursor = MoveCursor;
+
                     _viewport.Transform(e.Location.ToMapsui(), _downMousePosition.Value.ToMapsui());
 
                     RefreshGraphics();
