@@ -14,6 +14,7 @@
     <None Remove="EmbeddedResources\torrejon-de-ardoz.mbtiles" />
     <None Remove="EmbeddedResources\world.mbtiles" />
     <None Remove="Images\arrow.png" />
+    <None Remove="Images\arrow.svg" />
     <None Remove="Images\Ghostscript_Tiger.png" />
     <None Remove="Images\Ghostscript_Tiger.svg" />
     <None Remove="Images\home.png" />
@@ -41,6 +42,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Images\arrow.png" />
+    <EmbeddedResource Include="Images\arrow.svg" />
     <EmbeddedResource Include="Images\Ghostscript_Tiger.png" />
     <EmbeddedResource Include="Images\Ghostscript_Tiger.svg" />
     <EmbeddedResource Include="Images\home.png" />

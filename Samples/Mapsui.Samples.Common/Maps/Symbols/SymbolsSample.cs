@@ -44,7 +44,6 @@ namespace Mapsui.Samples.Common.Maps
 
         public static MemoryProvider<IFeature> CreateMemoryProviderWithDiverseSymbols(MRect? envelope, int count = 100)
         {
-
             return new MemoryProvider<IFeature>(CreateDiverseFeatures(RandomPointGenerator.GenerateRandomPoints(envelope, count)));
         }
 
@@ -143,7 +142,5 @@ namespace Mapsui.Samples.Common.Maps
 
             return feature;
         }
-
-
     }
 }
