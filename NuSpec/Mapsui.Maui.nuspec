@@ -30,6 +30,7 @@
 
   </metadata>
   <files>
+    <file src="..\LICENSE" target="LICENSE" />
     <file src="../Mapsui.UI.Maui/bin/Release/net6.0/Mapsui.UI.Maui.dll" target="lib/net6.0/" />        
   </files>
 </package>
