@@ -1,8 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
-using Mapsui.Samples.Common.Desktop.Cache;
-using Mapsui.Tiling.Cache;
+using Mapsui.Extensions.Cache;
 
 namespace Mapsui.Rendering.Skia.Tests
 {

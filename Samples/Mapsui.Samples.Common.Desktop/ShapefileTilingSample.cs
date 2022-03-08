@@ -1,12 +1,12 @@
 ﻿using System.IO;
 using System.Reflection;
+using Mapsui.Extensions.Cache;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Nts.Providers.Shapefile;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.UI;
-using Mapsui.Tiling.Cache;
 using Mapsui.Tiling.Layers;
 
 namespace Mapsui.Samples.Common.Desktop

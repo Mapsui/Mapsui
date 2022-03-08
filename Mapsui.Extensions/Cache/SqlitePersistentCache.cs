@@ -5,7 +5,7 @@ using BruTile.Cache;
 using Mapsui.Samples.Common.Desktop.Cache;
 using SQLite;
 
-namespace Mapsui.Tiling.Cache;
+namespace Mapsui.Extensions.Cache;
 
 public class SqlitePersistentCache : IPersistentCache<byte[]>
 {
