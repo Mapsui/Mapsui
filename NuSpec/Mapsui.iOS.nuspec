@@ -24,6 +24,7 @@
     </dependencies>
   </metadata>
   <files>
+    <file src="..\LICENSE" target="LICENSE" />
     <file src="..\Mapsui.UI.iOS\bin\Release\net60-ios13.6\Mapsui.UI.iOS.dll" target="lib\Xamarin.iOS\net60-ios13.6\Mapsui.UI.iOS.dll" />
   </files>
 </package>
