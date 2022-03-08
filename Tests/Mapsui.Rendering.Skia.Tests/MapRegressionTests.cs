@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Maps;
+using Mapsui.Samples.Common.Maps.Callouts;
 using Mapsui.Samples.Common.Maps.Data;
 using Mapsui.Samples.Common.Maps.Projection;
 using Mapsui.Tiling;
@@ -40,6 +41,7 @@ public class MapRegressionTests
         new PointProjectionSample(),
         new PolygonSample(),
         new StackedLabelsSample(),
+        new CustomCalloutSample(),
     };
 
     [Test]
