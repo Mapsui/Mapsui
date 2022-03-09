@@ -1,11 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using BitMiracle.LibTiff.Classic;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -13,7 +10,7 @@ using Mapsui.Styles;
 using SkiaSharp;
 using Color = Mapsui.Styles.Color;
 
-namespace Mapsui.Rendering.Skia.Provider
+namespace Mapsui.Extensions.Provider
 {
     public class GeoTiffProvider : IProvider<IFeature>, IDisposable
     {
@@ -108,11 +105,19 @@ namespace Mapsui.Rendering.Skia.Provider
             TiffProperties tiffFileProperties;
 
             using var stream = new FileStream(location, FileMode.Open, FileAccess.Read);
-            using var tif = Image.FromStream(stream, false, false);
-            tiffFileProperties.Width = tif.PhysicalDimension.Width;
-            tiffFileProperties.Height = tif.PhysicalDimension.Height;
-            tiffFileProperties.HResolution = tif.HorizontalResolution;
-            tiffFileProperties.VResolution = tif.VerticalResolution;
+            using var tif = Tiff.Open(location,"r");
+
+            FieldValue[] value = tif.GetField(TiffTag.IMAGEWIDTH);
+            tiffFileProperties.Width = value[0].ToInt();
+
+            value = tif.GetField(TiffTag.IMAGELENGTH);
+            tiffFileProperties.Height = value[0].ToInt();
+
+            value = tif.GetField(TiffTag.XRESOLUTION);
+            tiffFileProperties.HResolution = value[0].ToFloat();
+
+            value = tif.GetField(TiffTag.YRESOLUTION);
+            tiffFileProperties.VResolution = value[0].ToFloat();
 
             return tiffFileProperties;
         }

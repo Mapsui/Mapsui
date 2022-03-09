@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using Mapsui.Extensions.Provider;
 using Mapsui.Layers;
 using Mapsui.Providers;
-using Mapsui.Rendering.Skia.Provider;
 using Mapsui.Styles;
 using Mapsui.UI;
 
