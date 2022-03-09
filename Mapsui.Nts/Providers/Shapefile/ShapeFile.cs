@@ -11,12 +11,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
-using DotSpatial.Projections;
-using DotSpatial.Projections.AuthorityCodes;
 using Mapsui.Layers;
 using Mapsui.Nts.Extensions;
-using Mapsui.Nts.Projections;
 using Mapsui.Nts.Providers.Shapefile.Indexing;
+using Mapsui.Projections;
 using Mapsui.Providers;
 using NetTopologySuite.Geometries;
 
@@ -193,7 +191,10 @@ namespace Mapsui.Nts.Providers.Shapefile
                 if (File.Exists(prjFile))
                 {
                     var esriString = File.ReadAllText(prjFile);
-                    CRS = DotSpatialProjection.CrsFromEsri(esriString);
+                    if (ProjectionDefaults.CrsFromEsri != null)
+                    {
+                        CRS = ProjectionDefaults.CrsFromEsri(esriString);
+                    }
                 }
             }
         }

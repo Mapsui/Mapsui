@@ -22,6 +22,7 @@ public class DotSpatialProjection : IProjection
     public static void Init()
     {
         ProjectionDefaults.Projection = new DotSpatialProjection();
+        ProjectionDefaults.CrsFromEsri = CrsFromEsri;
     }
 
     public int? GetIdFromCrs(string? crs)

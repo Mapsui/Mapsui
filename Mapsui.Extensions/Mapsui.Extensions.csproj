@@ -5,12 +5,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Mapsui.Nts\Mapsui.Nts.csproj" />
     <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="BruTile" Version="4.0.0" />
-    <PackageReference Include="sqlite-net-pcl" Version="1.6.292"/>
+    <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
+    <PackageReference Include="DotSpatial.Projections.NetStandard" Version="1.0.0" />
+    <!--<PackageReference Include="DotSpatial.Projections" Version="3.0.0" IncludeAssets="None" ExcludeAssets="All" PrivateAssets="None" GeneratePathProperty="true" NoWarn="NU1202;NU1701" />-->
   </ItemGroup>
+
+  <!--Ignore nuget errors and reference the assembly directly -->
+  <!--<ItemGroup>
+    <Reference Include="DotSpatial.Projections, Version=3.0.0.0, Culture=neutral, PublicKeyToken=272632bddd08a38b">
+      <HintPath>$(PkgDotSpatial_Projections)\lib\net472\DotSpatial.Projections.dll</HintPath>
+    </Reference>
+  </ItemGroup>-->
 
 </Project>
