@@ -18,7 +18,7 @@ namespace Mapsui.Samples.Forms
 {
     public class PolygonSample : IFormsSample
     {
-        static readonly Random random = new Random();
+        static readonly Random random = new Random(1);
 
         public string Name => "Add Polygon Sample";
 

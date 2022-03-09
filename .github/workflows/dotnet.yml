@@ -42,8 +42,8 @@ jobs:
            5.0.x
            6.0.x
          include-prerelease: true    
-    - name: install maui
-      run: dotnet workload install maui
+    - name: install maui macos android ios maccatalyst
+      run: dotnet workload install maui macos android ios maccatalyst
     - name: install maui-check
       run: dotnet tool install -g Redth.Net.Maui.Check
     - name: run maui-check
@@ -60,6 +60,8 @@ jobs:
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Nts/Mapsui.Nts.csproj
     - name: Build Mapsui.ArcGIS
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.ArcGIS/Mapsui.ArcGIS.csproj
+    - name: Build Mapsui.Extensions
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Extensions/Mapsui.Extensions.csproj
     - name: Build Mapsui.UI.Android
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Android/Mapsui.UI.Android.csproj
     - name: Build Mapsui.UI.iOS
@@ -68,6 +70,10 @@ jobs:
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Forms/Mapsui.UI.Forms.csproj
     - name: Generate nuget package (Mapsui)
       run: nuget pack NuSpec/Mapsui.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
+    - name: Generate nuget package (Mapsui.ArcGis)
+      run: nuget pack NuSpec/Mapsui.ArcGis.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
+    - name: Generate nuget package (Mapsui.Extensions)
+      run: nuget pack NuSpec/Mapsui.Extensions.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
     - name: Generate nuget package (Mapsui.Forms)
       run: nuget pack NuSpec/Mapsui.Forms.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
     - name: Upload packages
@@ -104,8 +110,8 @@ jobs:
       uses: microsoft/setup-msbuild@v1.1
       with:
         vs-prerelease: true
-    - name: install maui
-      run: dotnet workload install maui
+    - name: install maui macos android ios maccatalyst
+      run: dotnet workload install maui macos android ios maccatalyst
     - name: install maui-check
       run: dotnet tool install -g Redth.Net.Maui.Check
     - name: run maui-check
@@ -122,6 +128,8 @@ jobs:
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Nts/Mapsui.Nts.csproj
     - name: Build Mapsui.ArcGIS
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.ArcGIS/Mapsui.ArcGIS.csproj
+    - name: Build Mapsui.Extensions
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Extensions/Mapsui.Extensions.csproj
     - name: Build Mapsui.UI.Wpf
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Wpf/Mapsui.UI.Wpf.csproj
     - name: Build Mapsui.UI.Uwp
@@ -144,6 +152,10 @@ jobs:
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Eto/Mapsui.UI.Eto.csproj        
     - name: Generate nuget package (Mapsui)
       run: nuget pack NuSpec/Mapsui.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
+    - name: Generate nuget package (Mapsui.ArcGis)
+      run: nuget pack NuSpec/Mapsui.ArcGis.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
+    - name: Generate nuget package (Mapsui.Extensions)
+      run: nuget pack NuSpec/Mapsui.Extensions.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
     - name: Generate nuget package (Mapsui.Forms)
       run: nuget pack NuSpec/Mapsui.Forms.nuspec -Version $(git describe --tags) -outputdirectory Artifacts    
     - name: Generate nuget package (Mapsui.Wpf)

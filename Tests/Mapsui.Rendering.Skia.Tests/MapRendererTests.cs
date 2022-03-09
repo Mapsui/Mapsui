@@ -282,7 +282,7 @@ namespace Mapsui.Rendering.Skia.Tests
             return true;
         }
 
-        private bool CompareBitmaps(Stream? bitmapStream1, Stream? bitmapStream2, int allowedColorDistance = 0, double proportionCorrect = 1)
+        public static bool CompareBitmaps(Stream? bitmapStream1, Stream? bitmapStream2, int allowedColorDistance = 0, double proportionCorrect = 1)
         {
             // The bitmaps in WPF can slightly differ from test to test. No idea why. So introduced proportion correct.
 

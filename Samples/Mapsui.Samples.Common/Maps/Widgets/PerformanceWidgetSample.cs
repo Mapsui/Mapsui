@@ -30,7 +30,7 @@ namespace Mapsui.Samples.Common.Maps
             _mapControl = mapControl;
 
             //I like bing Hybrid
-            mapControl.Map = BingSample.CreateMap(BruTile.Predefined.KnownTileSource.BingHybrid);
+            mapControl.Map = BingSample.CreateMap(BingHybrid.DefaultCache, BruTile.Predefined.KnownTileSource.BingHybrid);
 
             var widget = new PerformanceWidget(_performance);
 

@@ -1,40 +1,40 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
+    <DefineConstants>$(DefineConstants);__WASM__</DefineConstants>
     <NoWarn>NU1701</NoWarn>
+    <WasmShellILLinkerEnabled>true</WasmShellILLinkerEnabled>
+    <WasmShellForceDisableWSL Condition="'$(OS)' != 'Unix' and ('$(CI)' == 'true' or '$(BUILD_BUILDID)' != '')">true</WasmShellForceDisableWSL>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
-    <MonoRuntimeDebuggerEnabled>true</MonoRuntimeDebuggerEnabled>
     <DefineConstants>$(DefineConstants);TRACE;DEBUG</DefineConstants>
-    <DebugType>portable</DebugType>
-    <DebugSymbols>true</DebugSymbols>
     <!--
 		IL Linking is disabled in Debug configuration.
 		When building in Release, see https://platform.uno/docs/articles/features/using-il-linker-webassembly.html
 		-->
     <WasmShellILLinkerEnabled>false</WasmShellILLinkerEnabled>
+    <MonoRuntimeDebuggerEnabled>true</MonoRuntimeDebuggerEnabled>
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <WasmShellMonoRuntimeExecutionMode>Interpreter</WasmShellMonoRuntimeExecutionMode>
   </PropertyGroup>
-
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <WasmShellMonoRuntimeExecutionMode>FullAOT</WasmShellMonoRuntimeExecutionMode>
+  </PropertyGroup>
   <ItemGroup>
     <Content Include="Assets\SplashScreen.png" />
   </ItemGroup>
-
   <ItemGroup>
     <UpToDateCheckInput Include="..\Mapsui.Samples.Uno.Shared\**\*.xaml" />
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Include="WasmCSS\Fonts.css" />
     <EmbeddedResource Include="WasmScripts\AppManifest.js" />
   </ItemGroup>
-
   <ItemGroup>
     <LinkerDescriptor Include="LinkerConfig.xml" />
   </ItemGroup>
-
   <ItemGroup>
     <!--
 		This item group is required by the project template because of the
@@ -46,15 +46,29 @@
     <None Include="LinkerConfig.xml" />
     <None Include="wwwroot\web.config" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.Windows.Compatibility" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Filter" Version="1.1.1" />
+    <PackageReference Include="Uno.Core.Extensions.Logging.Singleton" Version="4.0.1" />
+    <PackageReference Include="Uno.Core.Extensions.Logging" Version="4.0.1" />
     <PackageReference Include="Uno.Extensions.Logging.WebAssembly.Console" Version="1.1.0" />
-    <PackageReference Include="Uno.UI.WebAssembly" Version="4.0.13" />
-    <PackageReference Include="Uno.UI.RemoteControl" Version="4.0.13" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI.WebAssembly" Version="4.2.0-dev.145" />
+    <PackageReference Include="Uno.UI.RemoteControl" Version="4.2.0-dev.145" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.2.0-dev.145" />
     <PackageReference Include="Uno.Wasm.Bootstrap" Version="3.2.0" />
     <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="3.2.0" />
+    <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.0-preview.209" />
+    <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" Version="2.88.0-preview.209" />
+  </ItemGroup>
+
+  <!--Harfbuzz Sharp references Workaround for this issue-->
+  <!--https://github.com/mono/SkiaSharp/issues/1725-->
+  <ItemGroup>
+    <PackageReference Include="HarfBuzzSharp" Version="2.8.2-preview.209" />
+    <PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" Version="2.8.2-preview.209" />
+    <NativeFileReference Include="$(HarfBuzzSharpStaticLibraryPath)\2.8.2-preview.209\*.a" />
   </ItemGroup>
 
   <ItemGroup>    
