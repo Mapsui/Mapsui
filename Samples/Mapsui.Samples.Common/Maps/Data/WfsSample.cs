@@ -6,6 +6,7 @@ using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Providers.Wfs;
 using Mapsui.Styles;
+using Mapsui.Tiling;
 using Mapsui.Tiling.Layers;
 using Mapsui.UI;
 
@@ -33,7 +34,7 @@ namespace Mapsui.Samples.Common.Maps.Data
             {
                 var map = new Map() { CRS = crs };
                 var provider = CreateWfsProvider(wfsUri);
-                map.Layers.Add(CreateTileLayer(CreateTileSource()));
+                map.Layers.Add(OpenStreetMap.CreateTileLayer());
                 map.Layers.Add(CreateWfsLayer(provider));
                 map.Layers.Add(CreateLabelLayer(provider));
 
@@ -105,16 +106,6 @@ namespace Mapsui.Samples.Common.Maps.Data
         //            ((WmtsTileSchema) t.Schema).Layer == "P_BZ_OF_2014_2015_2017" && t.Schema.Srs == "EPSG:25832");
         //    }
         //}
-
-        public static HttpTileSource CreateTileSource()
-        {
-            return BruTile.Predefined.KnownTileSources.Create(BruTile.Predefined.KnownTileSource.OpenStreetMap);
-        }
-
-        public static ILayer CreateTileLayer(ITileSource tileSource, string? name = null)
-        {
-            return new TileLayer(tileSource) { Name = name ?? tileSource.Name };
-        }
 
     }
 }

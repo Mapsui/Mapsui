@@ -1,17 +1,27 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using BruTile;
 using BruTile.Cache;
+using Mapsui.Samples.Common.Desktop.Cache;
 using SQLite;
 
-namespace Mapsui.Samples.Common.Desktop.Cache;
+namespace Mapsui.Extensions.Cache;
 
 public class SqlitePersistentCache : IPersistentCache<byte[]>
 {
     private readonly string _file;
+    private readonly TimeSpan _cacheExpireTime;
 
-    public SqlitePersistentCache(string name)
+    public SqlitePersistentCache(string name, TimeSpan? cacheExpireTime = null, string? folder = null)
     {
-        _file = Path.Combine(Path.GetTempPath(), name + ".sqlite");
+        folder ??= Path.GetTempPath();
+        if (!Directory.Exists(folder))
+        {
+            Directory.CreateDirectory(folder);
+        }
+
+        _file = Path.Combine(folder, name + ".sqlite");
+        _cacheExpireTime = cacheExpireTime ?? TimeSpan.Zero;
         InitDb();
     }
 
@@ -21,6 +31,13 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>
         try
         {
             var test = connection.Table<Tile>().FirstOrDefault();
+            if (test.Created == DateTime.MinValue)
+            {
+                var today = DateTime.Today;
+                var command = connection.CreateCommand(@$"Alter TABLE Tile 
+                Add Created DateTime NOT NULL Default ('{today.Year}{today.Month:00}{today.Date:00}');");
+                command.ExecuteNonQuery();
+            }
         }
         catch (SQLiteException)
         {
@@ -29,6 +46,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>
                 Level INTEGER NOT NULL,
                 Col INTEGER NOT NULL,
                 Row INTEGER NOT NULL,
+                Created DateTime NOT NULL,
                 Data BLOB,
                 PRIMARY KEY (Level, Col, Row)
                 );");
@@ -43,6 +61,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>
             Level = index.Level,
             Col = index.Col,
             Row = index.Row,
+            Created = DateTime.Now,
             Data = tile,
         };
         connection.Insert(data);
@@ -58,6 +77,15 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>
     {
         using var connection = CreateConnection();
         var tile = connection.Table<Tile>().FirstOrDefault(f => f.Level == index.Level && f.Col == index.Col && f.Row == index.Row);
+        if (_cacheExpireTime != TimeSpan.Zero)
+        {
+            if (tile.Created.Add(_cacheExpireTime) < DateTime.Now)
+            {
+                // expired
+                Remove(index);
+                return null;
+            }
+        }
         return tile?.Data;
     }
 

@@ -31,7 +31,7 @@ namespace Mapsui.Samples.Forms
     public class ManyPinsSample : IFormsSample
     {
         static int markerNum = 1;
-        static Random rnd = new Random();
+        static Random rnd = new Random(1);
 
         public string Name => "Add many Pins Sample";
 
