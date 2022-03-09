@@ -1,4 +1,4 @@
-﻿<Project Sdk="MSBuild.Sdk.Extras/3.0.38">
+﻿<Project Sdk="MSBuild.Sdk.Extras/3.0.44">
 
   <!--
 	Adding project references to this project requires some manual adjustments.
@@ -6,7 +6,7 @@
 	-->
 
   <PropertyGroup>
-    <TargetFrameworks>uap10.0.19041;netstandard2.0;xamarinios10;xamarinmac20;MonoAndroid11.0;monoandroid10.0</TargetFrameworks>
+    <TargetFrameworks>uap10.0.19041;netstandard2.0;net6.0;net6.0-android31.0;net6.0-ios13.6;net6.0-maccatalyst13.5;net6.0-macos10.10</TargetFrameworks>
     <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
     <RootNamespace>Mapsui.UI.Uwp</RootNamespace>
@@ -16,6 +16,8 @@
   <ItemGroup>
     <PackageReference Include="Uno.UI" Version="4.0.13" />
     <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.0-preview.209" />        
+    <PackageReference Include="Uno.UI" Version="4.2.0-dev.145" />
+    <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.0-preview.209" />    
   </ItemGroup>
 
   <ItemGroup>

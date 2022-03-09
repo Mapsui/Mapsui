@@ -18,8 +18,8 @@
 			<!-- [ or ] is including, ( or ) is excluding -->
 			<group targetFramework="netstandard2.0">
 				<dependency id="BruTile" version="[4.0.0,5.0.0)"/>
-				<dependency id="SkiaSharp" version="[2.80.3,3.0.0)"/>
-				<dependency id="Svg.Skia" version="[0.5.7.1,0.6)"/>
+				<dependency id="SkiaSharp" version="[2.88.0-preview.209,3.0.0)"/>
+				<dependency id="Svg.Skia" version="[0.5.12,0.6)"/>
 				<dependency id="Topten.RichTextKit" version="[0.4.145,0.5)"/>
 				<dependency id="NetTopologySuite" version="[2.4.0,3.0.0)"/>
         <dependency id="BitMiracle.LibTiff.NET" version="[2.4.649, 3.0.0)" />

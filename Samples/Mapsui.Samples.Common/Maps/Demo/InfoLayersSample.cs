@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Mapsui.Layers;
 using Mapsui.Nts;
 using Mapsui.Providers;
@@ -149,9 +150,11 @@ namespace Mapsui.Samples.Common.Maps
 
         private static ILayer CreateInfoLayer(MRect? envelope)
         {
+            var random = new Random(7);
+
             return new Layer(InfoLayerName)
             {
-                DataSource = RandomPointGenerator.CreateProviderWithRandomPoints(envelope, 25, 7),
+                DataSource = RandomPointGenerator.CreateProviderWithRandomPoints(envelope, 25, random),
                 Style = CreateSymbolStyle(),
                 IsMapInfoLayer = true
             };

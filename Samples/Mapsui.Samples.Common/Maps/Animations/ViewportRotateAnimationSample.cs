@@ -10,7 +10,7 @@ namespace Mapsui.Samples.Common.Maps
 {
     public class ViewportRotateAnimationSample : ISample
     {
-        public string Name => "Viewport Rotate Animation";
+        public string Name => "Animated Viewport - Rotate";
         public string Category => "Animations";
 
         public static int mode = 1;
