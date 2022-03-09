@@ -14,6 +14,7 @@ dotnet build /p:RestorePackages=false /p:Configuration=Release Mapsui.Rendering.
 dotnet build /p:RestorePackages=false /p:Configuration=Release Mapsui.Tiling/Mapsui.Tiling.csproj
 dotnet build /p:RestorePackages=false /p:Configuration=Release Mapsui.Nts/Mapsui.Nts.csproj
 dotnet build /p:RestorePackages=false /p:Configuration=Release Mapsui.ArcGIS/Mapsui.ArcGIS.csproj
+dotnet build /p:RestorePackages=false /p:Configuration=Release Mapsui.Extensions/Mapsui.Extensions.csproj
 dotnet build /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Wpf/Mapsui.UI.Wpf.csproj
 REM dotnet build /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Uwp/Mapsui.UI.Uwp.csproj
 REM dotnet build /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Android/Mapsui.UI.Android.csproj
@@ -39,3 +40,4 @@ REM nuget pack NuSpec\Mapsui.WinUI.nuspec -Version %VERSION% -outputdirectory Ar
 REM nuget pack NuSpec\Mapsui.MAUI.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1
 REM nuget pack NuSpec\Mapsui.Eto.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1
 nuget pack NuSpec\Mapsui.ArcGIS.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1
+nuget pack NuSpec\Mapsui.Extensions.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1

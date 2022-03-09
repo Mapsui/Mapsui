@@ -12,7 +12,7 @@ namespace Mapsui.Styles
         private readonly IDictionary<int, object> _register = new Dictionary<int, object>();
         private readonly IDictionary<string, int> _lookup = new Dictionary<string, int>();
         private BitmapRegistry() { }
-        private int _counter;
+        private int _counter = 1;
 
         /// <summary>
         /// Singleton of BitmapRegistry class

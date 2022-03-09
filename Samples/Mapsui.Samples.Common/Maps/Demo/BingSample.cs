@@ -1,4 +1,6 @@
-﻿using BruTile.Predefined;
+﻿using System.IO;
+using BruTile.Cache;
+using BruTile.Predefined;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Styles;
@@ -14,15 +16,15 @@ namespace Mapsui.Samples.Common.Maps
         public string Category => "Demo";
         public void Setup(IMapControl mapControl)
         {
-            mapControl.Map = CreateMap();
+            mapControl.Map = CreateMap(BingArial.DefaultCache);
         }
 
-        public static Map CreateMap(KnownTileSource source = KnownTileSource.BingAerial)
+        public static Map CreateMap(IPersistentCache<byte[]>? persistentCache, KnownTileSource source = KnownTileSource.BingAerial)
         {
             var map = new Map();
 
             var apiKey = "Enter your api key here"; // Contact Microsoft about how to use this
-            map.Layers.Add(new TileLayer(KnownTileSources.Create(source, apiKey),
+            map.Layers.Add(new TileLayer(KnownTileSources.Create(source, apiKey, persistentCache),
                 dataFetchStrategy: new DataFetchStrategy()) // DataFetchStrategy prefetches tiles from higher levels
             {
                 Name = "Bing Aerial",
