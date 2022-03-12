@@ -120,7 +120,7 @@ namespace Mapsui.Extensions.Provider
             }
             else
             {
-                tiffFileProperties.HResolution = 72;
+                tiffFileProperties.HResolution = 96;
             }
             
             value = tif.GetField(TiffTag.YRESOLUTION);
@@ -130,7 +130,7 @@ namespace Mapsui.Extensions.Provider
             }
             else
             {
-                tiffFileProperties.VResolution = 72;
+                tiffFileProperties.VResolution = 96;
             }
 
             return tiffFileProperties;
