@@ -22,7 +22,7 @@ namespace Mapsui.Layers
             foreach (var point in new[] { Rect.Min, Rect.Max })
                 visit(point.X, point.Y, (x, y) => {
                     point.X = x;
-                    point.Y = x;
+                    point.Y = y;
                 });
         }
     }
