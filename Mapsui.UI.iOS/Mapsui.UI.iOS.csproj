@@ -4,7 +4,7 @@
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <TargetFramework>net60-ios13.6</TargetFramework>
     <ImplicitUsings>true</ImplicitUsings>
-    <SupportedOSPlatformVersion>11.2</SupportedOSPlatformVersion>
+    <!--<RuntimeIdentifiers>iossimulator-x64</RuntimeIdentifiers>-->
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <ConsolePause>false</ConsolePause>
