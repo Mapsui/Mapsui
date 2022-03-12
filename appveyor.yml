@@ -27,10 +27,10 @@ install:
 - cmd: dotnet tool install -g Redth.Net.Maui.Check
 - cmd: maui-check --fix --non-interactive --skip vswin --skip edgewebview2 --skip androidemulator --skip dotnetworkloads-6.0.100 --skip dotnet --skip dotnet-workload-dedup --skip dotnetsentinel
 before_build:
-- cmd: nuget restore mapsui.sln
+- cmd: nuget restore mapsui.sln -Verbosity detailed
 build:
   project: Mapsui.sln
-  verbosity: minimal
+  verbosity: diagnostic
 before_package:
 - cmd: ''
 after_build:
