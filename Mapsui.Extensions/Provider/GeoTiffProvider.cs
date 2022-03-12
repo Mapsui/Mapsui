@@ -104,7 +104,6 @@ namespace Mapsui.Extensions.Provider
         {
             TiffProperties tiffFileProperties;
 
-            using var stream = new FileStream(location, FileMode.Open, FileAccess.Read);
             using var tif = Tiff.Open(location,"r");
 
             FieldValue[] value = tif.GetField(TiffTag.IMAGEWIDTH);
