@@ -24,7 +24,7 @@ namespace Mapsui.Layers
                 foreach (var point in new[] { Raster.Min, Raster.Max })
                     visit(point.X, point.Y, (x, y) => {
                         point.X = x;
-                        point.Y = x;
+                        point.Y = y;
                     });
         }
     }
