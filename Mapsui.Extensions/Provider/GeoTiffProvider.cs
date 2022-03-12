@@ -112,12 +112,26 @@ namespace Mapsui.Extensions.Provider
 
             value = tif.GetField(TiffTag.IMAGELENGTH);
             tiffFileProperties.Height = value[0].ToInt();
-
+            
             value = tif.GetField(TiffTag.XRESOLUTION);
-            tiffFileProperties.HResolution = value[0].ToFloat();
-
+            if (value != null)
+            {       
+               tiffFileProperties.HResolution = value[0].ToFloat();
+            }
+            else
+            {
+                tiffFileProperties.HResolution = 72;
+            }
+            
             value = tif.GetField(TiffTag.YRESOLUTION);
-            tiffFileProperties.VResolution = value[0].ToFloat();
+            if (value != null)
+            {
+                tiffFileProperties.VResolution  = value[0].ToFloat();
+            }
+            else
+            {
+                tiffFileProperties.VResolution = 72;
+            }
 
             return tiffFileProperties;
         }
