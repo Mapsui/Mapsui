@@ -8,13 +8,6 @@
     <PackageReference Include="NetTopologySuite" Version="2.4.0" />
   </ItemGroup>
 
-  <!--Ignore nuget errors and reference the assembly directly -->
-  <ItemGroup>
-    <Reference Include="DotSpatial.Projections, Version=3.0.0.0, Culture=neutral, PublicKeyToken=272632bddd08a38b">
-      <HintPath>$(PkgDotSpatial_Projections)\lib\net472\DotSpatial.Projections.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
   </ItemGroup>
