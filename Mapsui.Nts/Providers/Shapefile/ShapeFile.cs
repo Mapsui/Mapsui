@@ -183,19 +183,9 @@ namespace Mapsui.Nts.Providers.Shapefile
             //Parse shape header
             ParseHeader();
             //Read projection file
-            ParseProjection();
-            //Read Projection
             if (readPrjFile)
             {
-                var prjFile = Path.ChangeExtension(filename, ".prj");
-                if (File.Exists(prjFile))
-                {
-                    var esriString = File.ReadAllText(prjFile);
-                    if (ProjectionDefaults.CrsFromEsri != null)
-                    {
-                        CRS = ProjectionDefaults.CrsFromEsri(esriString);
-                    }
-                }
+                ParseProjection();
             }
         }
 
@@ -534,9 +524,12 @@ namespace Mapsui.Nts.Providers.Shapefile
             if (File.Exists(projFile))
                 try
                 {
-                    // todo: Automatically parse coordinate system: 
-                    // var wkt = File.ReadAllText(projFile);
-                    // CoordinateSystemWktReader.Parse(wkt);
+                    //Read Projection
+                    var esriString = File.ReadAllText(projFile);
+                    if (ProjectionDefaults.CrsFromEsri != null)
+                    {
+                        CRS = ProjectionDefaults.CrsFromEsri(esriString);
+                    }
 
                 }
                 catch (Exception ex)
