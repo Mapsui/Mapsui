@@ -5,6 +5,7 @@ using System.Linq;
 using Mapsui.Fetcher;
 using Mapsui.Logging;
 using Mapsui.Rendering;
+using Mapsui.Styles;
 
 namespace Mapsui.Layers
 {
@@ -63,6 +64,7 @@ namespace Mapsui.Layers
             _layer.DataChanged += LayerOnDataChanged;
             Delayer.StartWithDelay = true;
             Delayer.MillisecondsToWait = delayBeforeRasterize;
+            Style = new RasterStyle(); // default raster style
         }
 
         public override MRect? Extent => _layer.Extent;
