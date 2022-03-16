@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using BruTile;
+using BruTile.Cache;
 using BruTile.Predefined;
 using BruTile.Web;
 using BruTile.Wmsc;
@@ -17,6 +18,7 @@ namespace Mapsui.Samples.Common.Maps
     {
         public string Name => "4 WMS called tiled";
         public string Category => "Data";
+        public static IPersistentCache<byte[]>? DefaultCache { get; set; }
 
         public void Setup(IMapControl mapControl)
         {
@@ -41,7 +43,7 @@ namespace Mapsui.Samples.Common.Maps
             // You need to know the schema. This can be a problem. Usally it is GlobalSphericalMercator
             var schema = new WkstNederlandSchema { Format = "image/png", Srs = "EPSG:28992" };
             var request = new WmscRequest(new Uri(url), schema, new[] { "koudegeslotenwkobuurt" }.ToList(), Array.Empty<string>().ToList());
-            var provider = new HttpTileProvider(request);
+            var provider = new HttpTileProvider(request, DefaultCache);
             return new TileSource(provider, schema) { Name = "Omgevingswarmte (PDOK)" };
         }
     }

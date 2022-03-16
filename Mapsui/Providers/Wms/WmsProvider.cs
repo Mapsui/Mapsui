@@ -17,6 +17,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using Mapsui.Cache;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Rendering;
@@ -38,6 +39,7 @@ namespace Mapsui.Providers.Wms
         private string _mimeType;
         private readonly Client? _wmsClient;
         private Func<string, Task<Stream>>? _getStreamAsync;
+        private readonly IUrlPersistentCache? _persistentCache;
 
         public WmsProvider(XmlDocument capabilities, Func<string, Task<Stream>>? getStreamAsync = null)
             : this(new Client(capabilities, getStreamAsync))
@@ -49,11 +51,13 @@ namespace Mapsui.Providers.Wms
         /// Initializes a new layer, and downloads and parses the service description
         /// </summary>
         /// <param name="url">Url of WMS server</param>
+        /// <param name="persistentCache"></param>
         /// <param name="wmsVersion">Version number of wms leave null to get the default service version</param>
         /// <param name="getStreamAsync">Download method, leave null for default</param>
-        public WmsProvider(string url, string? wmsVersion = null, Func<string, Task<Stream>>? getStreamAsync = null)
+        public WmsProvider(string url, string? wmsVersion = null, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
             : this(new Client(url, wmsVersion, getStreamAsync))
         {
+            _persistentCache = persistentCache;
             InitialiseGetStreamAsyncMethod(getStreamAsync);
         }
 
@@ -303,16 +307,22 @@ namespace Mapsui.Providers.Wms
 
             try
             {
-                if (_getStreamAsync == null)
+                var bytes = _persistentCache?.Find(url);
+                if (bytes == null)
                 {
-                    raster = null;
-                    return false;
+                    if (_getStreamAsync == null)
+                    {
+                        raster = null;
+                        return false;
+                    }
+
+                    using var task = _getStreamAsync(url);
+                    using var result = task.Result;
+                    // PDD: This could be more efficient
+                    bytes = StreamHelper.ReadFully(result);
+                    _persistentCache?.Add(url, bytes);
                 }
 
-                using var task = _getStreamAsync(url);
-                using var result = task.Result;
-                // PDD: This could be more efficient
-                var bytes = StreamHelper.ReadFully(result);
                 if (viewport.Extent == null)
                 {
                     raster = null;
@@ -482,6 +492,7 @@ namespace Mapsui.Providers.Wms
 
         private async Task<Stream> GetStreamAsync(string url)
         {
+            
             var handler = new HttpClientHandler { Credentials = Credentials };
             var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
             var req = new HttpRequestMessage(new HttpMethod(GetPreferredMethod().Type), url);

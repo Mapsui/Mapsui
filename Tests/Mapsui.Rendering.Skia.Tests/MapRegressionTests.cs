@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Samples.Common;
+using Mapsui.Samples.Common.Desktop;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.Common.Maps.Callouts;
 using Mapsui.Samples.Common.Maps.Data;
@@ -21,15 +22,28 @@ namespace Mapsui.Rendering.Skia.Tests;
 [TestFixture, Apartment(ApartmentState.STA)]
 public class MapRegressionTests
 {
+    static MapRegressionTests()
+    {
+        // Load Desktop Samples
+        Console.WriteLine(typeof(ShapefileSample));
+    }
+
     private static ISample[]? _excludedSamples;
     private static ISample[]? _regressionSamples;
 
     public MapRegressionTests()
     {
+        // Tile Cache
         OpenStreetMap.DefaultCache ??= File.ReadFromCacheFolder("OpenStreetMap");
         BingArial.DefaultCache ??= File.ReadFromCacheFolder("BingArial");
         BingHybrid.DefaultCache ??= File.ReadFromCacheFolder("BingHybrid");
         Michelin.DefaultCache ??= File.ReadFromCacheFolder("Michelin");
+        TiledWmsSample.DefaultCache ??= File.ReadFromCacheFolder("TiledWmsSample");
+        TmsSample.DefaultCache ??= File.ReadFromCacheFolder("TmsSample");
+        WmtsSample.DefaultCache ??= File.ReadFromCacheFolder("WmtsSample");
+
+        // Url Cache
+        WmsSample.DefaultCache ??= File.ReadFromCacheFolder("WmsSample");
     }
 
     public static object[] RegressionSamples => _regressionSamples ??= AllSamples.GetSamples().Where(f => ExcludedSamples.All(e => e.GetType() != f.GetType())).OrderBy(f => f.GetType().FullName).ToArray();

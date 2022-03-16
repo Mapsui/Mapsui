@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
 using Mapsui.Extensions.Cache;
 
 namespace Mapsui.Rendering.Skia.Tests

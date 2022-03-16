@@ -12,6 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Mapsui.Layers;
+using Mapsui.Logging;
 using Mapsui.Nts.Extensions;
 using Mapsui.Nts.Providers.Shapefile.Indexing;
 using Mapsui.Providers;
@@ -129,6 +130,20 @@ namespace Mapsui.Nts.Providers.Shapefile
     /// </remarks>
     public class ShapeFile : IProvider<GeometryFeature>, IDisposable
     {
+
+        static ShapeFile()
+        {
+            try
+            {
+                // Workaround for Bug in Shapefile
+                Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            }
+            catch (Exception e)
+            {
+                Logger.Log(LogLevel.Error, e.Message, e);
+            }
+        }
+
         /// <summary>
         /// Filter Delegate Method
         /// </summary>

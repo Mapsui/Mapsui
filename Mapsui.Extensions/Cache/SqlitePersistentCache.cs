@@ -2,12 +2,12 @@
 using System.IO;
 using BruTile;
 using BruTile.Cache;
-using Mapsui.Samples.Common.Desktop.Cache;
+using Mapsui.Cache;
 using SQLite;
 
 namespace Mapsui.Extensions.Cache;
 
-public class SqlitePersistentCache : IPersistentCache<byte[]>
+public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCache
 {
     private readonly string _file;
     private readonly TimeSpan _cacheExpireTime;
@@ -31,7 +31,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>
         try
         {
             var test = connection.Table<Tile>().FirstOrDefault();
-            if (test.Created == DateTime.MinValue)
+            if (test != null && test.Created == DateTime.MinValue)
             {
                 var today = DateTime.Today;
                 var command = connection.CreateCommand(@$"Alter TABLE Tile 
@@ -49,6 +49,22 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>
                 Created DateTime NOT NULL,
                 Data BLOB,
                 PRIMARY KEY (Level, Col, Row)
+                );");
+            command.ExecuteNonQuery();
+        }
+
+        try
+        {
+            var test = connection.Table<UrlCache>().FirstOrDefault();
+        }
+        catch (SQLiteException)
+        {
+            // Table does not exist so i initialize it
+            var command = connection.CreateCommand(@"CREATE TABLE UrlCache (
+                Url TEXT NOT NULL,                
+                Created DateTime NOT NULL,
+                Data BLOB,
+                PRIMARY KEY (Url)
                 );");
             command.ExecuteNonQuery();
         }
@@ -83,6 +99,39 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>
             {
                 // expired
                 Remove(index);
+                return null;
+            }
+        }
+        return tile?.Data;
+    }
+
+    public void Add(string url, byte[] tile)
+    {
+        using var connection = CreateConnection();
+        var data = new UrlCache() {
+            Url = url,
+            Created = DateTime.Now,
+            Data = tile,
+        };
+        connection.Insert(data);
+    }
+
+    public void Remove(string url)
+    {
+        using var connection = CreateConnection();
+        connection.Table<UrlCache>().Delete(f => f.Url == url);
+    }
+
+    public byte[]? Find(string url)
+    {
+        using var connection = CreateConnection();
+        var tile = connection.Table<UrlCache>().FirstOrDefault(f => f.Url == url);
+        if (_cacheExpireTime != TimeSpan.Zero)
+        {
+            if (tile.Created.Add(_cacheExpireTime) < DateTime.Now)
+            {
+                // expired
+                Remove(url);
                 return null;
             }
         }
