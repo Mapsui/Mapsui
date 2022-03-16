@@ -94,6 +94,18 @@
     <None Update="Resources\Cache\OpenStreetMap.sqlite">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Resources\Cache\TiledWmsSample.sqlite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Cache\TmsSample.sqlite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Cache\WmsSample.sqlite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Cache\WmtsSample.sqlite">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\Images\Original\AsyncFetchSample.Regression.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -388,9 +400,6 @@
     <None Update="Resources\Images\Original\ZoomLockSample.Regression.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\Images\Regression\AnimatedPointsSamples.Regression.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="Resources\Images\Regression\AsyncFetchSample.Regression.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -418,9 +427,6 @@
     <None Update="Resources\Images\Regression\EmptyMapSample.Regression.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\Images\Regression\GeometrySimplifySample.Regression.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="Resources\Images\Regression\InfoLayersSample.Regression.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -437,9 +443,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Resources\Images\Regression\ManyVerticesSample.Regression.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Resources\Images\Regression\MapTilerSample.Regression.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Resources\Images\Regression\MbTilesOverlaySample.Regression.png">
@@ -490,12 +493,6 @@
     <None Update="Resources\Images\Regression\ScaleBarSample.Regression.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\Images\Regression\ShapefileSample.Regression.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Resources\Images\Regression\ShapefileTileSample.Regression.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="Resources\Images\Regression\SingleCalloutSample.Regression.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -509,9 +506,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Resources\Images\Regression\SymbolsSample.Regression.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Resources\Images\Regression\ThemeStyleSample.Regression.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Resources\Images\Regression\TiledWmsSample.Regression.png">
@@ -562,6 +556,10 @@
     <None Update="Resources\Images\Regression\ZoomLockSample.Regression.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\Images\Regression\" />
   </ItemGroup>
 
   <ItemGroup>
