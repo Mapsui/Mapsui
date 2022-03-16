@@ -198,7 +198,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.Eto", "Sampl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.UI.Eto", "Mapsui.UI.Eto\Mapsui.UI.Eto.csproj", "{B59E114D-6886-41A3-82F2-4BEC36822D0C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Extensions", "Mapsui.Extensions\Mapsui.Extensions.csproj", "{8AE2F608-C562-4097-A4FD-E5E24C2E81E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Extensions", "Mapsui.Extensions\Mapsui.Extensions.csproj", "{8AE2F608-C562-4097-A4FD-E5E24C2E81E1}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
