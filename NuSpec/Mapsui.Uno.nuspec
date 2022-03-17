@@ -33,17 +33,7 @@
 	</metadata>
 	<files>
 		<file src="..\LICENSE" target="LICENSE" />
-		<file src="..\Mapsui.UI.Uno\bin\Release\netstandard2.0\Mapsui.UI.Uno.dll"
-		      target="lib\netstandard2.0\Mapsui.UI.Uno.dll" />
+		<file src="..\Mapsui.UI.Uno\bin\Release\netstandard2.0\Mapsui.UI.Uno.dll" target="lib\netstandard2.0\Mapsui.UI.Uno.dll" />
 		<file src="..\Mapsui.UI.Uno\bin\Release\net6.0\Mapsui.UI.Uno.dll" target="lib\net6.0\Mapsui.UI.Uno.dll" />
-		<file src="..\Mapsui.UI.Uno\bin\Release\net6.0-android31.0\Mapsui.UI.Uno.dll"
-		      target="lib\net6.0-android31.0\Mapsui.UI.Uno.dll" />
-		<file src="..\Mapsui.UI.Uno\bin\Release\net6.0-ios13.6\Mapsui.UI.Uno.dll"
-		      target="lib\net6.0-ios13.6\Mapsui.UI.Uno.dll" />
-		<file src="..\Mapsui.UI.Uno\bin\Release\net6.0-maccatalyst13.5\Mapsui.UI.Uno.dll"
-		      target="lib\net6.0-maccatalyst13.5\Mapsui.UI.Uno.dll" />
-		<file src="..\Mapsui.UI.Uno\bin\Release\net6.0-macos10.10\Mapsui.UI.Uno.dll"
-		      target="lib\net6.0-macos10.10\Mapsui.UI.Uno.dll" />
-		<file src="..\Mapsui.UI.Uno\bin\Release\uap10.0.19041\Mapsui.UI.Uno.dll" target="lib\uap10.0.19041\Mapsui.UI.Uno.dll" />
 	</files>
 </package>
