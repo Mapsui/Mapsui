@@ -63,7 +63,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuSpec", "NuSpec", "{D90027
 		NuSpec\Mapsui.Maui.nuspec = NuSpec\Mapsui.Maui.nuspec
 		NuSpec\Mapsui.nuspec = NuSpec\Mapsui.nuspec
 		NuSpec\Mapsui.Uno.nuspec = NuSpec\Mapsui.Uno.nuspec
-		NuSpec\Mapsui.Uwp.nuspec = NuSpec\Mapsui.Uwp.nuspec
 		NuSpec\Mapsui.WinUI.nuspec = NuSpec\Mapsui.WinUI.nuspec
 		NuSpec\Mapsui.Wpf.nuspec = NuSpec\Mapsui.Wpf.nuspec
 	EndProjectSection
