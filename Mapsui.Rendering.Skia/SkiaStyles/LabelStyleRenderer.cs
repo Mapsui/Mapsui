@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Mapsui.Layers;
 using Mapsui.Logging;
-using Mapsui.Nts.Extensions;
+using Mapsui.Nts;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Styles;
@@ -70,10 +70,10 @@ namespace Mapsui.Rendering.Skia
                         var (lineStringCenterX, lineStringCenterY) = viewport.WorldToScreenXY(feature.Extent.Centroid.X, feature.Extent.Centroid.Y);
                         DrawLabel(canvas, (float)lineStringCenterX, (float)lineStringCenterY, labelStyle, text, (float)layer.Opacity);
                         break;
-                    case (Polygon polygonFeature):
-                        if (polygonFeature.Envelope is null)
+                    case (GeometryFeature polygonFeature):
+                        if (polygonFeature.Extent is null)
                             return false;
-                        var worldCenter = polygonFeature.Envelope.Centroid;
+                        var worldCenter = polygonFeature.Extent.Centroid;
                         var (polygonCenterX, polygonCenterY) = viewport.WorldToScreenXY(worldCenter.X, worldCenter.Y);
                         DrawLabel(canvas, (float)polygonCenterX, (float)polygonCenterY, labelStyle, text, (float)layer.Opacity);
                         break;
