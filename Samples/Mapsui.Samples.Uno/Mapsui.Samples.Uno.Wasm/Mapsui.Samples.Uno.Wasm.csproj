@@ -59,8 +59,8 @@
     <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.2.0-dev.145" />
     <PackageReference Include="Uno.Wasm.Bootstrap" Version="3.2.0" />
     <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="3.2.0" />
-    <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.0-preview.209" />
-    <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" Version="2.88.0-preview.209" />
+    <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.0-preview.232" />
+    <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" Version="2.88.0-preview.232" />
   </ItemGroup>
 
   <!--Harfbuzz Sharp references Workaround for this issue-->

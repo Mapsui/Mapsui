@@ -23,10 +23,10 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="5.0.0" />
-    <PackageReference Include="SkiaSharp.Views" Version="2.88.0-preview.209" />
+    <PackageReference Include="SkiaSharp.Views" Version="2.88.0-preview.232" />
     <PackageReference Include="Uno.UI.Skia.Tizen" Version="4.2.0-dev.145" />
     <PackageReference Include="Uno.UI.RemoteControl" Version="4.2.0-dev.145" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.0-preview.209" />
+    <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.0-preview.232" />
   </ItemGroup>
 
   <ItemGroup>
