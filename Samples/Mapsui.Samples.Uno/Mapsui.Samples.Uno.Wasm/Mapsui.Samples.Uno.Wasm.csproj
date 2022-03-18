@@ -68,7 +68,7 @@
   <ItemGroup>
     <PackageReference Include="HarfBuzzSharp" Version="2.8.2-preview.232" />
     <PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" Version="2.8.2-preview.232" />
-    <NativeFileReference Include="$(HarfBuzzSharpStaticLibraryPath)\2.8.2-preview.209\*.a" />
+    <NativeFileReference Include="$(HarfBuzzSharpStaticLibraryPath)\2.8.2-preview.232\*.a" />
   </ItemGroup>
 
   <ItemGroup>    
