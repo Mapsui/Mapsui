@@ -68,7 +68,7 @@ public class MapRegressionTests
                 // aside
                 if (bitmap is { Length: > 0 })
                 {
-                    File.WriteToGeneratedFolder(fileName, bitmap);
+                    File.WriteToGeneratedRegressionFolder(fileName, bitmap);
                 }
                 else
                 {
