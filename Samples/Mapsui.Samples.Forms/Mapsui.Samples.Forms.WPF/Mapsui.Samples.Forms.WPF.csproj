@@ -14,7 +14,7 @@
     <ProjectReference Include="..\Mapsui.Samples.Forms.Shared\Mapsui.Samples.Forms.Shared.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="BruTile.MbTiles" Version="4.0.0">
+    <PackageReference Include="BruTile.MbTiles" Version="5.0.0">
     </PackageReference>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="OpenTK.GLControl" Version="3.1.0">

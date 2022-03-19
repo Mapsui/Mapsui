@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BruTile" Version="4.0.0" />
+    <PackageReference Include="BruTile" Version="5.0.0" />
     <PackageReference Include="SkiaSharp" Version="2.88.0-preview.232" />
     <PackageReference Include="SkiaSharp.Views.WPF" Version="2.88.0-preview.232" />
     <PackageReference Include="SkiaSharp" Version="2.88.0-preview.232" />
