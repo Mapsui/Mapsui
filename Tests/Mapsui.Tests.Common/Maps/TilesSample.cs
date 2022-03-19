@@ -62,7 +62,7 @@ namespace Mapsui.Tests.Common.Maps
                         new TileRange(tileIndex.Col, tileIndex.Row), tileIndex.Level, tileSource.Schema)
                 };
 
-                var raster = new MRaster(tileSource.GetTile(tileInfo), tileInfo.Extent.ToMRect());
+                var raster = new MRaster(tileSource.GetTileAsync(tileInfo).Result, tileInfo.Extent.ToMRect());
                 features.Add(new RasterFeature(raster));
             }
             return features;
