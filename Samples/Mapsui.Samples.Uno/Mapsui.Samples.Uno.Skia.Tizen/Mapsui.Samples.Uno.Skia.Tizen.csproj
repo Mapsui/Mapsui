@@ -12,8 +12,8 @@
     <Folder Include="res\" />
   </ItemGroup>
 
-  <ItemGroup Condition="exists('..\Mapsui.Samples.Uno.UWP')">
-    <EmbeddedResource Include="..\Mapsui.Samples.Uno.UWP\Package.appxmanifest" LogicalName="Package.appxmanifest" />
+  <ItemGroup>
+    <EmbeddedResource Include="..\Mapsui.Samples.Uno.Shared\Package.appxmanifest" LogicalName="Package.appxmanifest" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,6 +39,6 @@
     <ProjectReference Include="..\..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
   </ItemGroup>
 
-  <Import Project="..\..\Mapsui.Samples.Uwp\Mapsui.Samples.Uno.Shared.projitems" Label="Shared" />
+  <Import Project="..\Mapsui.Samples.Uno.Shared\Mapsui.Samples.Uno.Shared.projitems" Label="Shared" />
 
 </Project>

@@ -9,10 +9,6 @@
     <DefineConstants>__WINUI__</DefineConstants>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Include="..\Mapsui.UI.Uwp\MapControl.cs" Link="MapControl.cs" />
-  </ItemGroup>
-
 	<!-- Workaround for https://github.com/microsoft/WindowsAppSDK/issues/1217 -->
 	<Target Name="FixBinPlaceBootstrapDll" BeforeTargets="BinPlaceBootstrapDll">
 		<PropertyGroup>

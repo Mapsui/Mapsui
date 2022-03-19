@@ -24,7 +24,7 @@ using SkiaSharp.Views.Windows;
 using HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment;
 using VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment;
 #else
-using Mapsui.UI.Uwp.Extensions;
+using Mapsui.UI.WinUI.Extensions;
 using Windows.Graphics.Display;
 using Windows.UI;
 using Windows.UI.Core;
