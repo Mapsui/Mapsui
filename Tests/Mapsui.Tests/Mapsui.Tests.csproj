@@ -58,13 +58,13 @@
 		<Content Include="Resources\example.tif">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Resources\Images\Original\Pin.svg">
+		<Content Include="Resources\Images\Pin.svg">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Resources\Images\Original\PinXml.svg">
+		<Content Include="Resources\Images\PinXml.svg">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Resources\Images\Original\vector_symbol_unittype.png">
+		<Content Include="Resources\Images\vector_symbol_unittype.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>

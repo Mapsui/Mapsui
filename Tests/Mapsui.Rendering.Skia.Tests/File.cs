@@ -7,6 +7,7 @@ namespace Mapsui.Rendering.Skia.Tests
 {
     internal static class File
     {
+        private static readonly string ImagesFolder = Path.Combine(AssemblyDirectory, "Resources", "Images");
         private static readonly string OriginalTestImagesFolder = Path.Combine(AssemblyDirectory, "Resources", "Images", "OriginalTest");
         private static readonly string GeneratedTestImagesFolder = Path.Combine(AssemblyDirectory, "Resources", "Images", "GeneratedTest");
         private static readonly string OriginalRegressionImagesFolder = Path.Combine(AssemblyDirectory, "Resources", "Images", "OriginalRegression");
@@ -55,6 +56,12 @@ namespace Mapsui.Rendering.Skia.Tests
                 var path = Uri.UnescapeDataString(uri.Path);
                 return Path.GetDirectoryName(path)!;
             }
+        }
+
+        public static Stream ReadFromImagesFolder(string fileName)
+        {
+            var filePath = Path.Combine(ImagesFolder, fileName);
+            return new FileStream(filePath, FileMode.Open, FileAccess.Read);
         }
 
         public static Stream ReadFromOriginalFolder(string fileName)
