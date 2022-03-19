@@ -1,12 +1,13 @@
 ﻿using BruTile;
+using System.Threading.Tasks;
 
 namespace Mapsui.Tests.Fetcher.Providers
 {
     internal class NullTileProvider : CountingTileProvider
     {
-        public override byte[]? GetTile(TileInfo tileInfo)
+        public override async Task<byte[]>? GetTileAsync(TileInfo tileInfo)
         {
-            base.GetTile(tileInfo); // Just for counting
+            await base.GetTileAsync(tileInfo); // Just for counting
 
             return null;
         }

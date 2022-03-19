@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
 using BruTile.Predefined;
@@ -53,7 +54,7 @@ public class RasterizingTileProvider : ITileSource
 
     public IPersistentCache<byte[]> PersistentCache { get; set; }
 
-    public byte[]? GetTile(TileInfo tileInfo)
+    public async Task<byte[]> GetTileAsync(TileInfo tileInfo)
     {
         var index = tileInfo.Index;
         var result = PersistentCache.Find(index);

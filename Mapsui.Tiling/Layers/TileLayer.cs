@@ -144,7 +144,7 @@ namespace Mapsui.Tiling.Layers
 
         private RasterFeature? ToFeature(TileInfo tileInfo)
         {
-            var tileData = _tileSource.GetTile(tileInfo);
+            var tileData = _tileSource.GetTileAsync(tileInfo).Result;
             var mRaster = ToRaster(tileInfo, tileData);
             if (mRaster != null)
                 return new RasterFeature(mRaster);
