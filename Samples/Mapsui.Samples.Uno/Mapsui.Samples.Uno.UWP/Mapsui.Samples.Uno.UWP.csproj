@@ -16,7 +16,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="5.0.0" />
     <PackageReference Include="Uno.Core.Extensions.Logging.Singleton" Version="4.0.0-dev.7" />
-    <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.0-preview.209" />
+    <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.0-preview.232" />
   </ItemGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
