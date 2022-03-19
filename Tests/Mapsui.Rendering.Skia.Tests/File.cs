@@ -8,10 +8,10 @@ namespace Mapsui.Rendering.Skia.Tests
     internal static class File
     {
         private static readonly string ImagesFolder = Path.Combine(AssemblyDirectory, "Resources", "Images");
-        private static readonly string OriginalTestImagesFolder = Path.Combine(AssemblyDirectory, "Resources", "Images", "OriginalTest");
-        private static readonly string GeneratedTestImagesFolder = Path.Combine(AssemblyDirectory, "Resources", "Images", "GeneratedTest");
-        private static readonly string OriginalRegressionImagesFolder = Path.Combine(AssemblyDirectory, "Resources", "Images", "OriginalRegression");
-        private static readonly string GeneratedRegressionImagesFolder = Path.Combine(AssemblyDirectory, "Resources", "Images", "GeneratedRegression");
+        private static readonly string ImagesOriginalTestFolder = Path.Combine(AssemblyDirectory, "Resources", "Images", "OriginalTest");
+        private static readonly string ImagesGeneratedTestFolder = Path.Combine(AssemblyDirectory, "Resources", "Images", "GeneratedTest");
+        private static readonly string ImagesOriginalRegressionFolder = Path.Combine(AssemblyDirectory, "Resources", "Images", "OriginalRegression");
+        private static readonly string ImagesGeneratedRegressionFolder = Path.Combine(AssemblyDirectory, "Resources", "Images", "GeneratedRegression");
         private static readonly string CacheFolder = Path.Combine(AssemblyDirectory, "Resources", "Cache");
 
         static File()
@@ -21,11 +21,11 @@ namespace Mapsui.Rendering.Skia.Tests
 
         public static void WriteToGeneratedTestImagesFolder(string fileName, MemoryStream? stream)
         {
-            WriteToGeneratedImagesFolder(GeneratedTestImagesFolder, fileName, stream);
+            WriteToGeneratedImagesFolder(ImagesGeneratedTestFolder, fileName, stream);
         }
         public static void WriteToGeneratedRegressionFolder(string fileName, MemoryStream? stream)
         {
-            WriteToGeneratedImagesFolder(GeneratedRegressionImagesFolder, fileName, stream);
+            WriteToGeneratedImagesFolder(ImagesGeneratedRegressionFolder, fileName, stream);
         }
 
         private static void WriteToGeneratedImagesFolder(string folderName, string fileName, MemoryStream? stream)
@@ -66,13 +66,13 @@ namespace Mapsui.Rendering.Skia.Tests
 
         public static Stream ReadFromOriginalFolder(string fileName)
         {
-            var filePath = Path.Combine(OriginalTestImagesFolder, fileName);
+            var filePath = Path.Combine(ImagesOriginalTestFolder, fileName);
             return new FileStream(filePath, FileMode.Open, FileAccess.Read);
         }
 
-        public static Stream? ReadFromRegressionFolder(string fileName)
+        public static Stream? ReadFromOriginalRegressionFolder(string fileName)
         {
-            var filePath = Path.Combine(OriginalRegressionImagesFolder, fileName);
+            var filePath = Path.Combine(ImagesOriginalRegressionFolder, fileName);
             if (!System.IO.File.Exists(filePath))
             {
                 return null;
