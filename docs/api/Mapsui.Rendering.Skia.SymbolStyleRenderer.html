@@ -90,28 +90,33 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">SymbolStyleRenderer</span></div>
   </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer.html">ISkiaStyleRenderer</a></div>
+    <div><a class="xref" href="Mapsui.Styles.IStyleRenderer.html">IStyleRenderer</a></div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.Rendering.Skia.html">Mapsui.Rendering.Skia</a></h6>
   <h6><strong>Assembly</strong>: Mapsui.Rendering.Skia.dll</h6>
   <h5 id="Mapsui_Rendering_Skia_SymbolStyleRenderer_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class SymbolStyleRenderer : object</code></pre>
+    <pre><code class="lang-csharp hljs">public class SymbolStyleRenderer : object, ISkiaStyleRenderer, IStyleRenderer</code></pre>
   </div>
   <h3 id="methods">Methods
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Rendering_Skia_SymbolStyleRenderer_Draw_SKCanvas_Mapsui_Styles_SymbolStyle_System_Double_System_Double_System_Single_Mapsui_Styles_SymbolType_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Rendering.Skia.SymbolStyleRenderer.Draw(SKCanvas%2CMapsui.Styles.SymbolStyle%2CSystem.Double%2CSystem.Double%2CSystem.Single%2CMapsui.Styles.SymbolType%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Rendering_Skia_SymbolStyleRenderer_Draw_SKCanvas_Mapsui_IReadOnlyViewport_Mapsui_Layers_ILayer_Mapsui_IFeature_Mapsui_Styles_IStyle_Mapsui_Rendering_ISymbolCache_System_Int64_.md&amp;value=---%0Auid%3A%20Mapsui.Rendering.Skia.SymbolStyleRenderer.Draw(SKCanvas%2CMapsui.IReadOnlyViewport%2CMapsui.Layers.ILayer%2CMapsui.IFeature%2CMapsui.Styles.IStyle%2CMapsui.Rendering.ISymbolCache%2CSystem.Int64)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Rendering.Skia/SymbolStyleRenderer.cs/#L19">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Rendering.Skia/SkiaStyles/SymbolStyleRenderer.cs/#L14">View Source</a>
   </span>
   <a id="Mapsui_Rendering_Skia_SymbolStyleRenderer_Draw_" data-uid="Mapsui.Rendering.Skia.SymbolStyleRenderer.Draw*"></a>
-  <h4 id="Mapsui_Rendering_Skia_SymbolStyleRenderer_Draw_SKCanvas_Mapsui_Styles_SymbolStyle_System_Double_System_Double_System_Single_Mapsui_Styles_SymbolType_System_Double_" data-uid="Mapsui.Rendering.Skia.SymbolStyleRenderer.Draw(SKCanvas,Mapsui.Styles.SymbolStyle,System.Double,System.Double,System.Single,Mapsui.Styles.SymbolType,System.Double)">Draw(SKCanvas, SymbolStyle, Double, Double, Single, SymbolType, Double)</h4>
+  <h4 id="Mapsui_Rendering_Skia_SymbolStyleRenderer_Draw_SKCanvas_Mapsui_IReadOnlyViewport_Mapsui_Layers_ILayer_Mapsui_IFeature_Mapsui_Styles_IStyle_Mapsui_Rendering_ISymbolCache_System_Int64_" data-uid="Mapsui.Rendering.Skia.SymbolStyleRenderer.Draw(SKCanvas,Mapsui.IReadOnlyViewport,Mapsui.Layers.ILayer,Mapsui.IFeature,Mapsui.Styles.IStyle,Mapsui.Rendering.ISymbolCache,System.Int64)">Draw(SKCanvas, IReadOnlyViewport, ILayer, IFeature, IStyle, ISymbolCache, Int64)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static void Draw(SKCanvas canvas, SymbolStyle style, double x, double y, float opacity, SymbolType symbolType, double mapRotation)</code></pre>
+    <pre><code class="lang-csharp hljs">public bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, IStyle style, ISymbolCache symbolCache, long iteration)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -129,51 +134,66 @@
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="Mapsui.Styles.SymbolStyle.html">SymbolStyle</a></td>
+        <td><a class="xref" href="Mapsui.IReadOnlyViewport.html">IReadOnlyViewport</a></td>
+        <td><span class="parametername">viewport</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a></td>
+        <td><span class="parametername">layer</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.IFeature.html">IFeature</a></td>
+        <td><span class="parametername">feature</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Styles.IStyle.html">IStyle</a></td>
         <td><span class="parametername">style</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">x</span></td>
+        <td><a class="xref" href="Mapsui.Rendering.ISymbolCache.html">ISymbolCache</a></td>
+        <td><span class="parametername">symbolCache</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">y</span></td>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">iteration</span></td>
         <td></td>
       </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
       <tr>
-        <td><span class="xref">System.Single</span></td>
-        <td><span class="parametername">opacity</span></td>
-        <td></td>
+        <th>Type</th>
+        <th>Description</th>
       </tr>
+    </thead>
+    <tbody>
       <tr>
-        <td><a class="xref" href="Mapsui.Styles.SymbolType.html">SymbolType</a></td>
-        <td><span class="parametername">symbolType</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">mapRotation</span></td>
+        <td><span class="xref">System.Boolean</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Rendering_Skia_SymbolStyleRenderer_Draw_SKCanvas_Mapsui_Styles_VectorStyle_System_Double_System_Double_System_Single_Mapsui_Styles_SymbolType_.md&amp;value=---%0Auid%3A%20Mapsui.Rendering.Skia.SymbolStyleRenderer.Draw(SKCanvas%2CMapsui.Styles.VectorStyle%2CSystem.Double%2CSystem.Double%2CSystem.Single%2CMapsui.Styles.SymbolType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Rendering_Skia_SymbolStyleRenderer_DrawImage_SKCanvas_Mapsui_IReadOnlyViewport_Mapsui_Layers_ILayer_Mapsui_Layers_PointFeature_Mapsui_Styles_SymbolStyle_Mapsui_Rendering_ISymbolCache_System_Int64_.md&amp;value=---%0Auid%3A%20Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawImage(SKCanvas%2CMapsui.IReadOnlyViewport%2CMapsui.Layers.ILayer%2CMapsui.Layers.PointFeature%2CMapsui.Styles.SymbolStyle%2CMapsui.Rendering.ISymbolCache%2CSystem.Int64)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Rendering.Skia/SymbolStyleRenderer.cs/#L10">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Rendering.Skia/SkiaStyles/SymbolStyleRenderer.cs/#L54">View Source</a>
   </span>
-  <a id="Mapsui_Rendering_Skia_SymbolStyleRenderer_Draw_" data-uid="Mapsui.Rendering.Skia.SymbolStyleRenderer.Draw*"></a>
-  <h4 id="Mapsui_Rendering_Skia_SymbolStyleRenderer_Draw_SKCanvas_Mapsui_Styles_VectorStyle_System_Double_System_Double_System_Single_Mapsui_Styles_SymbolType_" data-uid="Mapsui.Rendering.Skia.SymbolStyleRenderer.Draw(SKCanvas,Mapsui.Styles.VectorStyle,System.Double,System.Double,System.Single,Mapsui.Styles.SymbolType)">Draw(SKCanvas, VectorStyle, Double, Double, Single, SymbolType)</h4>
+  <a id="Mapsui_Rendering_Skia_SymbolStyleRenderer_DrawImage_" data-uid="Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawImage*"></a>
+  <h4 id="Mapsui_Rendering_Skia_SymbolStyleRenderer_DrawImage_SKCanvas_Mapsui_IReadOnlyViewport_Mapsui_Layers_ILayer_Mapsui_Layers_PointFeature_Mapsui_Styles_SymbolStyle_Mapsui_Rendering_ISymbolCache_System_Int64_" data-uid="Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawImage(SKCanvas,Mapsui.IReadOnlyViewport,Mapsui.Layers.ILayer,Mapsui.Layers.PointFeature,Mapsui.Styles.SymbolStyle,Mapsui.Rendering.ISymbolCache,System.Int64)">DrawImage(SKCanvas, IReadOnlyViewport, ILayer, PointFeature, SymbolStyle, ISymbolCache, Int64)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static void Draw(SKCanvas canvas, VectorStyle vectorStyle, double x, double y, float opacity, SymbolType symbolType)</code></pre>
+    <pre><code class="lang-csharp hljs">public static bool DrawImage(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, PointFeature pointFeature, SymbolStyle symbolStyle, ISymbolCache symbolCache, long iteration)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -191,46 +211,66 @@
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="Mapsui.Styles.VectorStyle.html">VectorStyle</a></td>
-        <td><span class="parametername">vectorStyle</span></td>
+        <td><a class="xref" href="Mapsui.IReadOnlyViewport.html">IReadOnlyViewport</a></td>
+        <td><span class="parametername">viewport</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">x</span></td>
+        <td><a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a></td>
+        <td><span class="parametername">layer</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Double</span></td>
-        <td><span class="parametername">y</span></td>
+        <td><a class="xref" href="Mapsui.Layers.PointFeature.html">PointFeature</a></td>
+        <td><span class="parametername">pointFeature</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Single</span></td>
-        <td><span class="parametername">opacity</span></td>
+        <td><a class="xref" href="Mapsui.Styles.SymbolStyle.html">SymbolStyle</a></td>
+        <td><span class="parametername">symbolStyle</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="Mapsui.Styles.SymbolType.html">SymbolType</a></td>
-        <td><span class="parametername">symbolType</span></td>
+        <td><a class="xref" href="Mapsui.Rendering.ISymbolCache.html">ISymbolCache</a></td>
+        <td><span class="parametername">symbolCache</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">iteration</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Rendering_Skia_SymbolStyleRenderer_Draw_SKCanvas_Mapsui_Styles_VectorStyle_System_Single_Mapsui_Styles_SymbolType_.md&amp;value=---%0Auid%3A%20Mapsui.Rendering.Skia.SymbolStyleRenderer.Draw(SKCanvas%2CMapsui.Styles.VectorStyle%2CSystem.Single%2CMapsui.Styles.SymbolType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Rendering_Skia_SymbolStyleRenderer_DrawPointFeature_SKCanvas_Mapsui_IReadOnlyViewport_Mapsui_Layers_ILayer_Mapsui_Layers_PointFeature_Mapsui_Styles_SymbolStyle_Mapsui_Rendering_ISymbolCache_System_Int64_.md&amp;value=---%0Auid%3A%20Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawPointFeature(SKCanvas%2CMapsui.IReadOnlyViewport%2CMapsui.Layers.ILayer%2CMapsui.Layers.PointFeature%2CMapsui.Styles.SymbolStyle%2CMapsui.Rendering.ISymbolCache%2CSystem.Int64)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Rendering.Skia/SymbolStyleRenderer.cs/#L40">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Rendering.Skia/SkiaStyles/SymbolStyleRenderer.cs/#L42">View Source</a>
   </span>
-  <a id="Mapsui_Rendering_Skia_SymbolStyleRenderer_Draw_" data-uid="Mapsui.Rendering.Skia.SymbolStyleRenderer.Draw*"></a>
-  <h4 id="Mapsui_Rendering_Skia_SymbolStyleRenderer_Draw_SKCanvas_Mapsui_Styles_VectorStyle_System_Single_Mapsui_Styles_SymbolType_" data-uid="Mapsui.Rendering.Skia.SymbolStyleRenderer.Draw(SKCanvas,Mapsui.Styles.VectorStyle,System.Single,Mapsui.Styles.SymbolType)">Draw(SKCanvas, VectorStyle, Single, SymbolType)</h4>
+  <a id="Mapsui_Rendering_Skia_SymbolStyleRenderer_DrawPointFeature_" data-uid="Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawPointFeature*"></a>
+  <h4 id="Mapsui_Rendering_Skia_SymbolStyleRenderer_DrawPointFeature_SKCanvas_Mapsui_IReadOnlyViewport_Mapsui_Layers_ILayer_Mapsui_Layers_PointFeature_Mapsui_Styles_SymbolStyle_Mapsui_Rendering_ISymbolCache_System_Int64_" data-uid="Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawPointFeature(SKCanvas,Mapsui.IReadOnlyViewport,Mapsui.Layers.ILayer,Mapsui.Layers.PointFeature,Mapsui.Styles.SymbolStyle,Mapsui.Rendering.ISymbolCache,System.Int64)">DrawPointFeature(SKCanvas, IReadOnlyViewport, ILayer, PointFeature, SymbolStyle, ISymbolCache, Int64)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static void Draw(SKCanvas canvas, VectorStyle vectorStyle, float opacity, SymbolType symbolType = SymbolType.Ellipse)</code></pre>
+    <pre><code class="lang-csharp hljs">public bool DrawPointFeature(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, PointFeature pointFeature, SymbolStyle symbolStyle, ISymbolCache symbolCache, long iteration)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -248,22 +288,136 @@
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="Mapsui.Styles.VectorStyle.html">VectorStyle</a></td>
-        <td><span class="parametername">vectorStyle</span></td>
+        <td><a class="xref" href="Mapsui.IReadOnlyViewport.html">IReadOnlyViewport</a></td>
+        <td><span class="parametername">viewport</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">System.Single</span></td>
-        <td><span class="parametername">opacity</span></td>
+        <td><a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a></td>
+        <td><span class="parametername">layer</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="Mapsui.Styles.SymbolType.html">SymbolType</a></td>
-        <td><span class="parametername">symbolType</span></td>
+        <td><a class="xref" href="Mapsui.Layers.PointFeature.html">PointFeature</a></td>
+        <td><span class="parametername">pointFeature</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Styles.SymbolStyle.html">SymbolStyle</a></td>
+        <td><span class="parametername">symbolStyle</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Rendering.ISymbolCache.html">ISymbolCache</a></td>
+        <td><span class="parametername">symbolCache</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">iteration</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Rendering_Skia_SymbolStyleRenderer_DrawSymbol_SKCanvas_Mapsui_IReadOnlyViewport_Mapsui_Layers_ILayer_Mapsui_Layers_PointFeature_Mapsui_Styles_SymbolStyle_Mapsui_Rendering_ISymbolCache_System_Int64_.md&amp;value=---%0Auid%3A%20Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawSymbol(SKCanvas%2CMapsui.IReadOnlyViewport%2CMapsui.Layers.ILayer%2CMapsui.Layers.PointFeature%2CMapsui.Styles.SymbolStyle%2CMapsui.Rendering.ISymbolCache%2CSystem.Int64)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Rendering.Skia/SkiaStyles/SymbolStyleRenderer.cs/#L129">View Source</a>
+  </span>
+  <a id="Mapsui_Rendering_Skia_SymbolStyleRenderer_DrawSymbol_" data-uid="Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawSymbol*"></a>
+  <h4 id="Mapsui_Rendering_Skia_SymbolStyleRenderer_DrawSymbol_SKCanvas_Mapsui_IReadOnlyViewport_Mapsui_Layers_ILayer_Mapsui_Layers_PointFeature_Mapsui_Styles_SymbolStyle_Mapsui_Rendering_ISymbolCache_System_Int64_" data-uid="Mapsui.Rendering.Skia.SymbolStyleRenderer.DrawSymbol(SKCanvas,Mapsui.IReadOnlyViewport,Mapsui.Layers.ILayer,Mapsui.Layers.PointFeature,Mapsui.Styles.SymbolStyle,Mapsui.Rendering.ISymbolCache,System.Int64)">DrawSymbol(SKCanvas, IReadOnlyViewport, ILayer, PointFeature, SymbolStyle, ISymbolCache, Int64)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool DrawSymbol(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, PointFeature pointFeature, SymbolStyle symbolStyle, ISymbolCache symbolCache, long iteration)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">SKCanvas</span></td>
+        <td><span class="parametername">canvas</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.IReadOnlyViewport.html">IReadOnlyViewport</a></td>
+        <td><span class="parametername">viewport</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a></td>
+        <td><span class="parametername">layer</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Layers.PointFeature.html">PointFeature</a></td>
+        <td><span class="parametername">pointFeature</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Styles.SymbolStyle.html">SymbolStyle</a></td>
+        <td><span class="parametername">symbolStyle</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Rendering.ISymbolCache.html">ISymbolCache</a></td>
+        <td><span class="parametername">symbolCache</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int64</span></td>
+        <td><span class="parametername">iteration</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Mapsui.Rendering.Skia.SkiaStyles.ISkiaStyleRenderer.html">ISkiaStyleRenderer</a>
+  </div>
+  <div>
+      <a class="xref" href="Mapsui.Styles.IStyleRenderer.html">IStyleRenderer</a>
+  </div>
 </article>
           </div>
           
@@ -275,7 +429,7 @@
                     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Rendering_Skia_SymbolStyleRenderer.md&amp;value=---%0Auid%3A%20Mapsui.Rendering.Skia.SymbolStyleRenderer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Rendering.Skia/SymbolStyleRenderer.cs/#L8" class="contribution-link">View Source</a>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Rendering.Skia/SkiaStyles/SymbolStyleRenderer.cs/#L12" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
