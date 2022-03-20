@@ -21,6 +21,9 @@ Mapsui is a C# map component for apps
 | Mapsui.Wpf     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Wpf.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Wpf/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Wpf.svg)](https://www.nuget.org/packages/Mapsui.Wpf) | [WPF](https://mapsui.com/documentation/getting-started-wpf.html) |
 | Mapsui.Android | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Android.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Android/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Android.svg)](https://www.nuget.org/packages/Mapsui.Android) | [Xamarin.Android](https://mapsui.com/documentation/getting-started-android.html) |
 | Mapsui.iOS     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.iOS.svg?style=flat)](https://www.nuget.org/packages/Mapsui.iOS/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.iOS.svg)](https://www.nuget.org/packages/Mapsui.iOS) | [Xamarin.iOS](https://mapsui.com/documentation/getting-started-ios.html) |
+| Mapsui.Avalonia     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Avalonia.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Avalonia/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Avalonia.svg)](https://www.nuget.org/packages/Mapsui.Avalonia) | [Xamarin.Avalonia](https://mapsui.com/documentation/getting-started-avalonia.html) |
+| Mapsui.Eto     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Eto.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Eto/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Eto.svg)](https://www.nuget.org/packages/Mapsui.Eto) | [Xamarin.Eto](https://mapsui.com/documentation/getting-started-eto.html) |
+
 
 ## Build Status
 | platform | status |
