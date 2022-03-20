@@ -43,7 +43,6 @@ namespace Mapsui.Samples.Forms
             mapView.MyLocationLayer.CalloutText = "My location!\n";
             mapView.MyLocationLayer.Clicked += MyLocationClicked;
 
-            mapView.Info += MapView_Info;
             mapView.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
 
             StartGPS();
@@ -52,30 +51,6 @@ namespace Mapsui.Samples.Forms
         protected override void OnAppearing()
         {
             mapView.Refresh();
-        }
-
-        private void MapView_Info(object sender, UI.MapInfoEventArgs e)
-        {
-            if (e.MapInfo?.Feature is IFeature feature)
-            {
-                featureInfo.Text = $"Click Info:";
-
-                if (e?.MapInfo?.Feature != null)
-                {
-                    featureInfo.Text = $"Click Info:{Environment.NewLine}{feature.ToDisplayText()}";
-
-                    foreach (var style in e.MapInfo.Feature.Styles)
-                    {
-                        if (style is CalloutStyle)
-                        {
-                            style.Enabled = !style.Enabled;
-                            e.Handled = true;
-                        }
-                    }
-
-                    mapView.Refresh();
-                }
-            }
         }
 
         private void FillListWithSamples()
