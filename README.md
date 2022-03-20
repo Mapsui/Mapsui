@@ -64,4 +64,4 @@ See the [guidelines](http://mapsui.com/documentation/contributors-guidelines.htm
 
 [MIT](LICENSE)
 
-[<p align="left"><img src="logo/png/icon.png" alt="Mapsui" height="180px"></p>](https://mapsui.com).
+[<p align="left"><img src="logo/png/icon.png" alt="Mapsui" height="180px"></p>](https://mapsui.com)
