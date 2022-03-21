@@ -19,9 +19,9 @@
   <ItemGroup>
     <PackageReference Include="BruTile" Version="5.0.0" />
     <PackageReference Include="SkiaSharp" Version="2.88.0-preview.232" />
-    <PackageReference Include="Avalonia" Version="0.10.11" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.10.11" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.11" />
+    <PackageReference Include="Avalonia" Version="0.10.13" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.10.13" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.13" />
   </ItemGroup>
 
   <ItemGroup>
