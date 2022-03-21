@@ -5,9 +5,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title> </title>
+    <title>Mapsui Avalonia getting started </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content=" ">
+    <meta name="title" content="Mapsui Avalonia getting started ">
     <meta name="generator" content="docfx 2.58.9.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
@@ -77,7 +77,22 @@
         <div class="article row grid-right">
           <div class="col-md-10">
             <article class="content wrap" id="_content" data-uid="">
+<h1 id="mapsui-avalonia-getting-started">Mapsui Avalonia getting started</h1>
 
+<h3 id="step-1">Step 1</h3>
+<p>Create a new Avalonia application in your IDE. You may need to <a href="https://docs.avaloniaui.net/docs/getting-started/ide-support">install the templaces</a>.</p>
+<h3 id="step-2">Step 2</h3>
+<p>In the package manager console type:</p>
+<pre><code class="lang-console">PM&gt; Install-Package Mapsui.Avalonia -pre
+</code></pre><h3 id="step-3">Step 3</h3>
+<p>In MainWindow.xaml.cs add this to the class constructor:</p>
+<pre><code class="lang-csharp">   var mapControl = new Mapsui.UI.Avalonia.MapControl();
+
+   mapControl.Map.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
+
+   Content = mapControl;
+</code></pre><h3 id="step-4">Step 4</h3>
+<p>Run it and you should see a map of the world.</p>
 </article>
           </div>
           
