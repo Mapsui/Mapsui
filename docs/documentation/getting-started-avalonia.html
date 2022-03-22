@@ -80,15 +80,15 @@
 <h1 id="mapsui-avalonia-getting-started">Mapsui Avalonia getting started</h1>
 
 <h3 id="step-1">Step 1</h3>
-<p>Create a new Avalonia application in your IDE. You may need to <a href="https://docs.avaloniaui.net/docs/getting-started/ide-support">install the templaces</a>.</p>
+<p>Create a new Avalonia application in your IDE. You may need to <a href="https://docs.avaloniaui.net/docs/getting-started/ide-support">install Avalonia IDE support</a>.</p>
 <h3 id="step-2">Step 2</h3>
 <p>In the package manager console type:</p>
 <pre><code class="lang-console">PM&gt; Install-Package Mapsui.Avalonia -pre
 </code></pre><h3 id="step-3">Step 3</h3>
-<p>In MainWindow.xaml.cs add this to the class constructor:</p>
+<p>In MainWindow.axaml.cs add this to the class constructor:</p>
 <pre><code class="lang-csharp">   var mapControl = new Mapsui.UI.Avalonia.MapControl();
 
-   mapControl.Map.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
+   mapControl.Map?.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
 
    Content = mapControl;
 </code></pre><h3 id="step-4">Step 4</h3>
