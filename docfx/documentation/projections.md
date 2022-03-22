@@ -28,7 +28,7 @@ will be drawn on top of each other and things go wrong.
 ## The most common scenario
 
 If you use OpenStreetMap the map is in SphericalMercator. Often you have geodata in lat/lon, say a GPS track.
-1. The Map.CRS has to be set. If you use SpehricalMercator set it to "EPSG:3857".
+1. The Map.CRS has to be set. If you use SphericalMercator set it to "EPSG:3857".
 2. The Provider.CRS has to be set. If the data is in lat/lon set it to "EPSG:4326".
 3. Wrap the Provider om the ProjectingProvider. Search the code samples for ProjectingProvider.
 
