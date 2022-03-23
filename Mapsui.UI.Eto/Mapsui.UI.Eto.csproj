@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <PackageReference Include="Eto.SkiaDraw" Version="0.2.0" />
-    <PackageReference Include="System.Text.Encoding.CodePages" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
