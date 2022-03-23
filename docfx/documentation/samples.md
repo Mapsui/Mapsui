@@ -1,5 +1,5 @@
 # Samples
-The best way to get started with mapsui is to download the source and run a samples app. There are sample apps for each supported platform. On Windows you could run [Mapsui.Samples.Wpf](https://github.com/Mapsui/Mapsui/tree/master/Samples/Mapsui.Samples.Wpf). In the dropdown at the top left you can select between different categories. With the option buttons you can select between specific samples.All these samples correspond to a specific sample classes that is derived from ISample.
+The best way to get started with mapsui is to download the source and run a samples app. There are sample apps for each supported platform. On Windows you could run [Mapsui.Samples.Wpf](https://github.com/Mapsui/Mapsui/tree/master/Samples/Mapsui.Samples.Wpf). In the dropdown at the top left you can select between different categories. With the option buttons you can select between specific samples. All these samples correspond to a specific sample class that is derived from ISample.
 
 ## Where can I find the code for the samples?
 The samples can be found in this folder: Samples\Mapsui\Mapsui.Samples.Common\Maps. The most easy way to find them is to search for the name of the sample. For instance "1 Points"
