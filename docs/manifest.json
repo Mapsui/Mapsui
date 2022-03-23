@@ -3686,18 +3686,6 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "documentation/getting-started-uwp.md",
-      "output": {
-        ".html": {
-          "relative_path": "documentation/getting-started-uwp.html",
-          "hash": "SZfLZWqUFwYoi4bePNZsLSDXlX8iiMK67+VFCdLk0jg="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
       "source_relative_path": "documentation/getting-started-winui.md",
       "output": {
         ".html": {
@@ -3808,7 +3796,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/nuget-of-latest-build.html",
-          "hash": "HWY0b9UsdCIHfULbIv8uyxdXWcuXx72A1GYFn4BuVZE="
+          "hash": "GWe2rC2L7t7LI8Zj7f6VZU3gPG6hSHJ+1GGCYBkMR7I="
         }
       },
       "is_incremental": false,
@@ -4043,7 +4031,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 31,
+          "total_file_count": 30,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
