@@ -44,7 +44,6 @@ namespace Mapsui.Samples.Forms
             mapView.MyLocationLayer.CalloutText = "My location!\n";
             mapView.MyLocationLayer.Clicked += MyLocationClicked;
 
-            mapView.Info += MapView_Info;
             mapView.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
 
             Task.Run(() => StartGPS());
@@ -73,7 +72,6 @@ namespace Mapsui.Samples.Forms
 
             mapView.PinClicked -= OnPinClicked;
             mapView.MapClicked -= OnMapClicked;
-            mapView.Info -= MapView_Info;
 
             Compass.ReadingChanged -= Compass_ReadingChanged;
             CrossGeolocator.Current.PositionChanged -= MyLocationPositionChanged;
@@ -82,23 +80,6 @@ namespace Mapsui.Samples.Forms
             if (LeaksPage.DisposeMapView)
             {
                 mapView.Dispose();
-            }
-        }
-
-        private void MapView_Info(object sender, UI.MapInfoEventArgs? e)
-        {
-            if (e?.MapInfo?.Feature != null)
-            {
-                foreach (var style in e.MapInfo.Feature.Styles)
-                {
-                    if (style is CalloutStyle)
-                    {
-                        style.Enabled = !style.Enabled;
-                        e.Handled = true;
-                    }
-                }
-
-                mapView.Refresh();
             }
         }
 

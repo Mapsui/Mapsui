@@ -64,8 +64,8 @@ jobs:
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Extensions/Mapsui.Extensions.csproj
     - name: Build Mapsui.UI.Android
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Android/Mapsui.UI.Android.csproj
-    - name: Build Mapsui.UI.iOS
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.iOS/Mapsui.UI.iOS.csproj
+#    - name: Build Mapsui.UI.iOS
+#      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.iOS/Mapsui.UI.iOS.csproj
     - name: Build Mapsui.UI.Forms
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Forms/Mapsui.UI.Forms.csproj
     - name: Generate nuget package (Mapsui)
@@ -132,12 +132,10 @@ jobs:
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Extensions/Mapsui.Extensions.csproj
     - name: Build Mapsui.UI.Wpf
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Wpf/Mapsui.UI.Wpf.csproj
-    - name: Build Mapsui.UI.Uwp
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Uwp/Mapsui.UI.Uwp.csproj
     - name: Build Mapsui.UI.Android
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Android/Mapsui.UI.Android.csproj
-    - name: Build Mapsui.UI.iOS
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.iOS/Mapsui.UI.iOS.csproj
+#    - name: Build Mapsui.UI.iOS
+#      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.iOS/Mapsui.UI.iOS.csproj
     - name: Build Mapsui.UI.Forms
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Forms/Mapsui.UI.Forms.csproj    
     - name: Build Mapsui.UI.Avalonia
@@ -160,8 +158,6 @@ jobs:
       run: nuget pack NuSpec/Mapsui.Forms.nuspec -Version $(git describe --tags) -outputdirectory Artifacts    
     - name: Generate nuget package (Mapsui.Wpf)
       run: nuget pack NuSpec/Mapsui.Wpf.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
-    - name: Generate nuget package (Mapsui.Uwp)
-      run: nuget pack NuSpec/Mapsui.Uwp.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
     - name: Generate nuget package (Mapsui.Android)
       run: nuget pack NuSpec/Mapsui.Android.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
     - name: Generate nuget package (Mapsui.Avalonia)

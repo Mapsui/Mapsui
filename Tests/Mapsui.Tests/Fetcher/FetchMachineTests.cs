@@ -191,7 +191,7 @@ namespace Mapsui.Tests.Fetcher
 
         private RasterFeature TileToFeature(ITileSource tileProvider, TileInfo tileInfo)
         {
-            var tile = tileProvider.GetTile(tileInfo);
+            var tile = tileProvider.GetTileAsync(tileInfo).Result;
             // A tile layer can return a null value. This indicates the tile is not
             // present in the source, permanently. If this is the case no further 
             // requests should be done. To avoid further fetches a feature should

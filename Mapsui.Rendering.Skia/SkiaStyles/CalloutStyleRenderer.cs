@@ -12,12 +12,17 @@ namespace Mapsui.Rendering.Skia
     {
         public bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, Styles.IStyle style, ISymbolCache symbolCache, long iteration)
         {
-            var pointFeature = (PointFeature)feature;
+            var centroid = feature.Extent?.Centroid;
+
+            if (centroid is null) 
+                return false;
+
             var calloutStyle = (CalloutStyle)style;
 
+            // Todo: Use opacity
             var opacity = (float)(layer.Opacity * style.Opacity);
 
-            var (x, y) = viewport.WorldToScreenXY(pointFeature.Point.X, pointFeature.Point.Y);
+            var (x, y) = viewport.WorldToScreenXY(centroid.X, centroid.Y);
 
             if (calloutStyle.BitmapId < 0 || calloutStyle.Invalidated)
             {

@@ -23,7 +23,7 @@ namespace Mapsui.Rendering.Skia.Tests
             using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
             // aside
-            File.WriteToGeneratedFolder(fileName, bitmap);
+            File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
             // assert
             Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
@@ -41,7 +41,7 @@ namespace Mapsui.Rendering.Skia.Tests
             using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
             // aside
-            File.WriteToGeneratedFolder(fileName, bitmap);
+            File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
             // assert
             Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
@@ -59,7 +59,7 @@ namespace Mapsui.Rendering.Skia.Tests
             using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
             // aside
-            File.WriteToGeneratedFolder(fileName, bitmap);
+            File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
             // assert
             Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
@@ -77,7 +77,7 @@ namespace Mapsui.Rendering.Skia.Tests
             using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
             // aside
-            File.WriteToGeneratedFolder(fileName, bitmap);
+            File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
             // assert
             Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
@@ -104,7 +104,7 @@ namespace Mapsui.Rendering.Skia.Tests
             using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
 
             // aside
-            File.WriteToGeneratedFolder(fileName, bitmap);
+            File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
             // assert
             Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
@@ -122,7 +122,7 @@ namespace Mapsui.Rendering.Skia.Tests
             using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
             // aside
-            File.WriteToGeneratedFolder(fileName, bitmap);
+            File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
             // assert
             Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
@@ -140,7 +140,7 @@ namespace Mapsui.Rendering.Skia.Tests
             using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
             // aside
-            File.WriteToGeneratedFolder(fileName, bitmap);
+            File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
             // assert
             Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
@@ -158,7 +158,7 @@ namespace Mapsui.Rendering.Skia.Tests
             using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
             // aside
-            File.WriteToGeneratedFolder(fileName, bitmap);
+            File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
             // assert
             Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
@@ -176,7 +176,7 @@ namespace Mapsui.Rendering.Skia.Tests
             using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
 
             // aside
-            File.WriteToGeneratedFolder(fileName, bitmap);
+            File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
             // assert
             Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
@@ -194,7 +194,7 @@ namespace Mapsui.Rendering.Skia.Tests
             using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
 
             // aside
-            File.WriteToGeneratedFolder(fileName, bitmap);
+            File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
             // assert
             Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap));
@@ -212,7 +212,7 @@ namespace Mapsui.Rendering.Skia.Tests
             using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
 
             // aside
-            File.WriteToGeneratedFolder(fileName, bitmap);
+            File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
             // assert
             Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
@@ -230,7 +230,7 @@ namespace Mapsui.Rendering.Skia.Tests
             using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2);
 
             // aside
-            File.WriteToGeneratedFolder(fileName, bitmap);
+            File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
             // assert
             Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
@@ -248,7 +248,7 @@ namespace Mapsui.Rendering.Skia.Tests
             using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
 
             // aside
-            File.WriteToGeneratedFolder(fileName, bitmap);
+            File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
             // assert
             Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
@@ -266,7 +266,7 @@ namespace Mapsui.Rendering.Skia.Tests
             using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor);
 
             // aside
-            File.WriteToGeneratedFolder(fileName, bitmap);
+            File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
 
             // assert
             Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.995));
