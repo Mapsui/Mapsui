@@ -11,7 +11,7 @@ PM> Install-Package Mapsui.Avalonia -pre
 ```
 
 ### Step 3
-In MainWindow.axaml.cs add this to the class constructor:
+In MainWindow.axaml.cs add this to the constructor **after** InitializeComponent()::
 ```csharp
    var mapControl = new Mapsui.UI.Avalonia.MapControl();
 
