@@ -165,6 +165,9 @@ public class MapRegressionTests
     private async Task DisplayMap(IMapControl mapControl)
     {
         await WaitForLoading(mapControl).ConfigureAwait(false);
+
+        // wait for rendering to finish to make the Tests more reliable
+        await Task.Delay(300).ConfigureAwait(false);
     }
 
     private async Task WaitForLoading(IMapControl mapControl)
