@@ -330,7 +330,7 @@ namespace Mapsui.Rendering.Skia.Tests
                 }
             }
 
-            var proportion = (double)(trueCount - falseCount) / trueCount;
+            var proportion = (double)(trueCount - falseCount) / (trueCount + falseCount);
             return proportionCorrect <= proportion;
         }
     }
