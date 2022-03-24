@@ -45,20 +45,12 @@ public class MapRegressionTests
 
         // Url Cache
         WmsSample.DefaultCache ??= File.ReadFromCacheFolder("WmsSample");
+        WfsSample.DefaultCache ??= File.ReadFromCacheFolder("WfsSample");
     }
 
     public static object[] RegressionSamples => _regressionSamples ??= AllSamples.GetSamples().Where(f => ExcludedSamples.All(e => e.GetType() != f.GetType())).OrderBy(f => f.GetType().FullName).ToArray();
 
     public static object[] ExcludedSamples => _excludedSamples ??= new ISample[] {
-        new WfsSample(),
-        new OpacityStyleSample(),
-        new VariousSample(),
-        new PointProjectionSample(),
-        new PolygonSample(),
-        new StackedLabelsSample(),
-        new CustomCalloutSample(),
-        new InfoLayersSample(),
-        new ComplexPolygonSample(),
     };
 
     [Test]

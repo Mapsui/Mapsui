@@ -41,8 +41,8 @@ namespace Mapsui.Providers.Wms
         private Func<string, Task<Stream>>? _getStreamAsync;
         private readonly IUrlPersistentCache? _persistentCache;
 
-        public WmsProvider(XmlDocument capabilities, Func<string, Task<Stream>>? getStreamAsync = null)
-            : this(new Client(capabilities, getStreamAsync))
+        public WmsProvider(XmlDocument capabilities, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
+            : this(new Client(capabilities, getStreamAsync), persistentCache: persistentCache)
         {
             InitialiseGetStreamAsyncMethod(getStreamAsync);
         }
@@ -55,14 +55,14 @@ namespace Mapsui.Providers.Wms
         /// <param name="wmsVersion">Version number of wms leave null to get the default service version</param>
         /// <param name="getStreamAsync">Download method, leave null for default</param>
         public WmsProvider(string url, string? wmsVersion = null, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
-            : this(new Client(url, wmsVersion, getStreamAsync))
+            : this(new Client(url, wmsVersion, getStreamAsync), persistentCache: persistentCache)
         {
-            _persistentCache = persistentCache;
             InitialiseGetStreamAsyncMethod(getStreamAsync);
         }
 
-        private WmsProvider(Client wmsClient, Func<string, Task<Stream>>? getStreamAsync = null)
+        private WmsProvider(Client wmsClient, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
         {
+            _persistentCache = persistentCache;
             InitialiseGetStreamAsyncMethod(getStreamAsync);
             _wmsClient = wmsClient;
             TimeOut = 10000;
