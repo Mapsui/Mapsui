@@ -1,12 +1,9 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using Mapsui.Extensions.Projections;
 using Mapsui.Nts;
-using Mapsui.Nts.Projections;
 using Mapsui.Nts.Providers.Shapefile;
 using Mapsui.Projections;
-using Mapsui.Samples.Common.Desktop;
 using NetTopologySuite.Geometries;
 using NetTopologySuite.IO;
 using NUnit.Framework;
