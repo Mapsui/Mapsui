@@ -96,7 +96,7 @@ namespace Mapsui.Tests.Projections
         public void ShapeFileReadTest()
         {
             // arrange
-            var directory = Path.GetDirectoryName(typeof(ShapefileSample).Assembly.Location);
+            var directory = Path.GetDirectoryName(typeof(ProjectionTests).Assembly.Location);
             var countriesPath = Path.Combine(directory, @"GeoData\World\countries.shp");
 
             // act
