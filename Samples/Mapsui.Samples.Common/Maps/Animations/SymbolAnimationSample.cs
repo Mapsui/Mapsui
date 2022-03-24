@@ -128,10 +128,11 @@ namespace Mapsui.Samples.Common.Maps
             return result;
         }
 
-        public void InitializeTest()
+        public async Task InitializeTest()
         {
             while (animationLayer.UpdateAnimations())
             {
+                await Task.Delay(10).ConfigureAwait(true);
             }
         }
 

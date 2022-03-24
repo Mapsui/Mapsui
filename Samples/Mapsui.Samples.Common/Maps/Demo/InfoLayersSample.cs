@@ -171,9 +171,9 @@ namespace Mapsui.Samples.Common.Maps
             };
         }
 
-        public void InitializeTest()
+        public async Task InitializeTest()
         {
-            Task.Delay(1000).Wait();
+            await Task.Delay(1000).ConfigureAwait(true);
         }
     }
 }

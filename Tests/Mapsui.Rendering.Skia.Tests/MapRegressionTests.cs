@@ -66,7 +66,7 @@ public class MapRegressionTests
         try
         {
             var fileName = sample.GetType().Name + ".Regression.png";
-            var mapControl = InitMap(sample);
+            var mapControl = await InitMap(sample).ConfigureAwait(true);
             var map = mapControl.Map;
             await DisplayMap(mapControl).ConfigureAwait(false);
 
@@ -123,7 +123,7 @@ public class MapRegressionTests
         await TestSample(sample, false);
     }
 
-    private static RegressionMapControl InitMap(ISample sample)
+    private static async Task<RegressionMapControl> InitMap(ISample sample)
     {
         var mapControl = new RegressionMapControl();
         mapControl.SetSize(800, 600);
@@ -136,7 +136,7 @@ public class MapRegressionTests
         sample.Setup(mapControl);
         if (sample is ISampleTest sampleTest)
         {
-            sampleTest.InitializeTest();
+            await sampleTest.InitializeTest().ConfigureAwait(true);
         }
 
         var fetchInfo = new FetchInfo(mapControl.Viewport.Extent!, mapControl.Viewport.Resolution, mapControl.Map?.CRS);
