@@ -59,10 +59,11 @@ public class MapRegressionTests
         new CustomCalloutSample(),
         new InfoLayersSample(),
         new ComplexPolygonSample(),
+        new SymbolAnimationSample(),
+        new MultiPolygonProjectionSample(),
     };
 
     [Test]
-    [Retry(5)]
     [TestCaseSource(nameof(RegressionSamples))]
     public async Task TestSample(ISample sample)
     {
