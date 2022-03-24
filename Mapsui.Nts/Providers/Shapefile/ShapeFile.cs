@@ -135,6 +135,11 @@ namespace Mapsui.Nts.Providers.Shapefile
         {
             try
             {
+                // Without this Fix this method throws an exception:
+                // Encoding.GetEncoding(...)
+                // System.NotSupportedException: 'No data is available for encoding 1252. For information on defining a custom encoding, see the documentation for the Encoding.RegisterProvider method.'
+                // StackOverflow
+                // https://stackoverflow.com/questions/50858209/system-notsupportedexception-no-data-is-available-for-encoding-1252
                 // Workaround for Bug in Shapefile
                 Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             }
