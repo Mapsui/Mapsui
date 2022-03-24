@@ -104,7 +104,7 @@ namespace Mapsui.Extensions.Provider
         {
             TiffProperties tiffFileProperties;
 
-            using var tif = Tiff.Open(location,"r");
+            using var tif = Tiff.Open(location,"r4") ?? Tiff.Open(location,"r8"); // read big tiff if normal tiff fails.
 
             FieldValue[] value = tif.GetField(TiffTag.IMAGEWIDTH);
             tiffFileProperties.Width = value[0].ToInt();
