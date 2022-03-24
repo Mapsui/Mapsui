@@ -57,6 +57,8 @@ public class MapRegressionTests
         new PolygonSample(),
         new StackedLabelsSample(),
         new CustomCalloutSample(),
+        new InfoLayersSample(),
+        new ComplexPolygonSample(),
     };
 
     [Test]
