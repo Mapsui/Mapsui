@@ -10,6 +10,7 @@ using Mapsui.Layers;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Desktop;
 using Mapsui.Samples.Common.Maps;
+using Mapsui.Samples.Common.Maps.Animations;
 using Mapsui.Samples.Common.Maps.Callouts;
 using Mapsui.Samples.Common.Maps.Data;
 using Mapsui.Samples.Common.Maps.Projection;
@@ -56,6 +57,10 @@ public class MapRegressionTests
         new PolygonSample(),
         new StackedLabelsSample(),
         new CustomCalloutSample(),
+        new InfoLayersSample(),
+        new ComplexPolygonSample(),
+        new SymbolAnimationSample(),
+        new MultiPolygonProjectionSample(),
     };
 
     [Test]
@@ -131,6 +136,12 @@ public class MapRegressionTests
     {
         var mapControl = new RegressionMapControl();
         mapControl.SetSize(800, 600);
+
+        if (sample is IPrepareSampleTest prepareTest)
+        {
+            prepareTest.PrepareTest();
+        }
+
         sample.Setup(mapControl);
         if (sample is ISampleTest sampleTest)
         {

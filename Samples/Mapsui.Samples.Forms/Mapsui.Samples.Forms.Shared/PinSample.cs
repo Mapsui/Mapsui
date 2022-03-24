@@ -15,7 +15,7 @@ namespace Mapsui.Samples.Forms.Shared
     public class PinSample : IFormsSample
     {
         int _markerNum = 1;
-        readonly Random _random = new Random();
+        readonly Random _random = new Random(4);
 
         public string Name => "Add Pin Sample";
 

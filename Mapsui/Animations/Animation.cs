@@ -105,13 +105,14 @@ namespace Mapsui.Utilities
                 if (ticks > entriesArray[i].EndTicks)
                 {
                     // Animation is at the end of duration
-                    isRunning = true;
                     if (!entriesArray[i].Repeat)
                     {
                         // Animation shouldn't be repeated, so remove it
                         Stop(target, entriesArray[i], true);
                         continue;
                     }
+
+                    isRunning = true;
                     // Set new values for repeating this animation
                     entriesArray[i].StartTicks = entriesArray[i].EndTicks;
                     entriesArray[i].EndTicks = entriesArray[i].StartTicks + entriesArray[i].DurationTicks;
