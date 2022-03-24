@@ -8,7 +8,7 @@
     <PackageReference Include="Uno.UI.Skia.Wpf" Version="4.2.0-dev.145" />
     <PackageReference Include="Uno.UI.RemoteControl" Version="4.2.0-dev.145" Condition="'$(Configuration)'=='Debug'" />
     <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.2.0-dev.145" />
-    <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.0-preview.209" />
+    <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.0-preview.232" />
   </ItemGroup>
   <ItemGroup>
     <UpToDateCheckInput Include="..\Mapsui.Samples.Uno.Shared\**\*.xaml" />
@@ -22,5 +22,5 @@
     <ProjectReference Include="..\..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
     <ProjectReference Include="..\..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
   </ItemGroup>
-  <Import Project="..\..\Mapsui.Samples.Uwp\Mapsui.Samples.Uno.Shared.projitems" Label="Shared" />
+  <Import Project="..\Mapsui.Samples.Uno.Shared\Mapsui.Samples.Uno.Shared.projitems" Label="Shared" />
 </Project>

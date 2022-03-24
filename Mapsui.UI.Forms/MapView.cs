@@ -25,7 +25,7 @@ using SkiaSharp.Views;
 using SkiaSharp.Views.Maui;
 using SkiaSharp.Views.Maui.Controls;
 
-using Rectangle = Microsoft.Maui.Graphics.Rectangle;
+using Rectangle = Microsoft.Maui.Graphics.Rect;
 #else
 using Mapsui.UI.Forms.Extensions;
 using Xamarin.Forms;

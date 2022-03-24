@@ -16,7 +16,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="5.0.0" />
     <PackageReference Include="Uno.Core.Extensions.Logging.Singleton" Version="4.0.0-dev.7" />
-    <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.0-preview.209" />
+    <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.0-preview.232" />
   </ItemGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -173,7 +173,7 @@
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Properties\Default.rd.xml" />
   </ItemGroup>
-  <Import Project="..\..\Mapsui.Samples.Uwp\Mapsui.Samples.Uno.Shared.projitems" Label="Shared" />
+  <Import Project="..\Mapsui.Samples.Uno.Shared\Mapsui.Samples.Uno.Shared.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Threading.Tasks;
 using BruTile;
 
 namespace Mapsui.Tests.Fetcher.Providers
 {
     internal class FailingTileProvider : CountingTileProvider
     {
-        public override byte[] GetTile(TileInfo tileInfo)
+        public override async Task<byte[]> GetTileAsync(TileInfo tileInfo)
         {
-            base.GetTile(tileInfo); // Just for counting
+            await base.GetTileAsync(tileInfo); // Just for counting
             throw new Exception("this provider always fails");
         }
     }

@@ -14,6 +14,8 @@
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
     <PackageReference Include="DotSpatial.Projections.NetStandard" Version="1.0.0" />
     <!--<PackageReference Include="DotSpatial.Projections" Version="3.0.0" IncludeAssets="None" ExcludeAssets="All" PrivateAssets="None" GeneratePathProperty="true" NoWarn="NU1202;NU1701" />-->
+    <PackageReference Include="BruTile" Version="5.0.0" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.6.292"/>
   </ItemGroup>
 
   <!--Ignore nuget errors and reference the assembly directly -->

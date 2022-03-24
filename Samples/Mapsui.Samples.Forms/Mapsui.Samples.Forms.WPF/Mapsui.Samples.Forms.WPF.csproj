@@ -14,12 +14,12 @@
     <ProjectReference Include="..\Mapsui.Samples.Forms.Shared\Mapsui.Samples.Forms.Shared.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="BruTile.MbTiles" Version="4.0.0">
+    <PackageReference Include="BruTile.MbTiles" Version="5.0.0">
     </PackageReference>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="OpenTK.GLControl" Version="3.1.0">
     </PackageReference>
-    <PackageReference Include="SkiaSharp.Views.Forms.WPF" Version="2.88.0-preview.209">
+    <PackageReference Include="SkiaSharp.Views.Forms.WPF" Version="2.88.0-preview.232">
     </PackageReference>
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292">
     </PackageReference>

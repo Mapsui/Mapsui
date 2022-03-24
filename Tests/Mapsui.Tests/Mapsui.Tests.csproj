@@ -31,7 +31,7 @@
 	<ItemGroup>
 		<Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
 		<PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
-		<PackageReference Include="BruTile" Version="4.0.0" />
+		<PackageReference Include="BruTile" Version="5.0.0" />
 		<PackageReference Include="System.Diagnostics.Debug" Version="4.3.0" />
 		<PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.1" />
 		<PackageReference Include="System.Security.Cryptography.X509Certificates" Version="4.3.2" />
@@ -59,13 +59,13 @@
 		<Content Include="Resources\example.tif">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Resources\Images\Original\Pin.svg">
+		<Content Include="Resources\Images\Pin.svg">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Resources\Images\Original\PinXml.svg">
+		<Content Include="Resources\Images\PinXml.svg">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Resources\Images\Original\vector_symbol_unittype.png">
+		<Content Include="Resources\Images\vector_symbol_unittype.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>

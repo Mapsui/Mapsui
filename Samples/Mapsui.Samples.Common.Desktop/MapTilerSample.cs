@@ -5,6 +5,7 @@ using BruTile.Predefined;
 using Mapsui.Layers;
 using Mapsui.Tiling.Layers;
 using Mapsui.UI;
+using System.Threading.Tasks;
 using Attribution = BruTile.Attribution;
 
 namespace Mapsui.Samples.Common.Desktop
@@ -46,9 +47,9 @@ namespace Mapsui.Samples.Common.Desktop
         public Attribution Attribution { get; } = new Attribution();
         public ITileProvider Provider { get; }
 
-        public byte[] GetTile(TileInfo tileInfo)
+        public async Task<byte[]> GetTileAsync(TileInfo tileInfo)
         {
-            return Provider.GetTile(tileInfo);
+            return await Provider.GetTileAsync(tileInfo);
         }
 
         public static ITileProvider GetTileProvider()

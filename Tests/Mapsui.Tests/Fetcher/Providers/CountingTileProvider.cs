@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Threading;
+using System.Threading.Tasks;
 using BruTile;
 
 namespace Mapsui.Tests.Fetcher.Providers
@@ -11,14 +12,14 @@ namespace Mapsui.Tests.Fetcher.Providers
         public ConcurrentDictionary<TileIndex, long> CountByTile { get; } = new ConcurrentDictionary<TileIndex, long>();
         public long TotalCount;
 
-        public virtual byte[]? GetTile(TileInfo tileInfo)
+        public virtual async Task<byte[]> GetTileAsync(TileInfo tileInfo)
         {
             Thread.Sleep((int)(_random.NextDouble() * 10));
 
             CountByTile.AddOrUpdate(tileInfo.Index, 1, (index, count) => ++count);
             Interlocked.Increment(ref TotalCount);
 
-            return Array.Empty<byte>();
+            return await Task.FromResult(Array.Empty<byte>());
         }
     }
 }

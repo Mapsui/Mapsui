@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
 using BruTile;
 
 namespace Mapsui.Tests.Common
@@ -25,7 +26,7 @@ namespace Mapsui.Tests.Common
             _dictionary[tileIndex] = ReadFully(tileStream);
         }
 
-        public byte[] GetTile(TileInfo tileInfo)
+        public async Task<byte[]> GetTileAsync(TileInfo tileInfo)
         {
             return _dictionary[tileInfo.Index];
         }

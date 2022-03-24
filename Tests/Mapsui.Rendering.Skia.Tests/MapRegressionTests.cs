@@ -68,7 +68,7 @@ public class MapRegressionTests
                 // aside
                 if (bitmap is { Length: > 0 })
                 {
-                    File.WriteToGeneratedFolder(fileName, bitmap);
+                    File.WriteToGeneratedRegressionFolder(fileName, bitmap);
                 }
                 else
                 {
@@ -78,7 +78,7 @@ public class MapRegressionTests
                 // assert
                 if (compareImages)
                 {
-                    using var originalStream = File.ReadFromRegressionFolder(fileName);
+                    using var originalStream = File.ReadFromOriginalRegressionFolder(fileName);
                     if (originalStream == null)
                     {
                         Assert.Inconclusive($"No Regression Test Data for {sample.Name}");
