@@ -171,10 +171,12 @@ namespace Mapsui.Nts.Providers.Shapefile
         /// <param name="filename">Path to shape file</param>
         /// <param name="fileBasedIndex">Use file-based spatial index</param>
         /// <param name="readPrjFile">Read the proj File and set the correct CRS</param>
-        public ShapeFile(string filename, bool fileBasedIndex = false, bool readPrjFile = false)
+        /// <param name="projectionCrs">Projection Crs</param>
+        public ShapeFile(string filename, bool fileBasedIndex = false, bool readPrjFile = false, IProjectionCrs? projectionCrs = null)
         {
             _filename = filename;
             _fileBasedIndex = fileBasedIndex && File.Exists(Path.ChangeExtension(filename, ".shx"));
+            _projectionCrs = projectionCrs ?? ProjectionDefaults.Projection as IProjectionCrs;
 
             //Initialize DBF
             var dbfFile = Path.ChangeExtension(filename, ".dbf");
@@ -247,6 +249,7 @@ namespace Mapsui.Nts.Providers.Shapefile
 
 
         private bool _disposed;
+        private readonly IProjectionCrs? _projectionCrs;
 
         /// <summary>
         /// Disposes the object
@@ -526,9 +529,9 @@ namespace Mapsui.Nts.Providers.Shapefile
                 {
                     //Read Projection
                     var esriString = File.ReadAllText(projFile);
-                    if (ProjectionDefaults.CrsFromEsri != null)
+                    if (_projectionCrs != null)
                     {
-                        CRS = ProjectionDefaults.CrsFromEsri(esriString);
+                        CRS = _projectionCrs.CrsFromEsri(esriString);
                     }
 
                 }

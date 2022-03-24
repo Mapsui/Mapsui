@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="BruTile" Version="5.0.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
     <PackageReference Include="DotSpatial.Projections.NetStandard" Version="1.0.0" />
   </ItemGroup>

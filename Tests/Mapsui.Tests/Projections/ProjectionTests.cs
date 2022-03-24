@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using Mapsui.Extensions.Projections;
 using Mapsui.Nts;
 using Mapsui.Nts.Projections;
 using Mapsui.Nts.Providers.Shapefile;
@@ -95,12 +96,11 @@ namespace Mapsui.Tests.Projections
         public void ShapeFileReadTest()
         {
             // arrange
-            DotSpatialProjection.Init();
             var directory = Path.GetDirectoryName(typeof(ShapefileSample).Assembly.Location);
             var countriesPath = Path.Combine(directory, @"GeoData\World\countries.shp");
 
             // act
-            using var shapeFile = new ShapeFile(countriesPath, false, true);
+            using var shapeFile = new ShapeFile(countriesPath, false, true, new DotSpatialProjection());
 
             // assert
             Assert.AreEqual(shapeFile.CRS, "EPSG:4326");

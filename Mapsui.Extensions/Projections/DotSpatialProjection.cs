@@ -9,11 +9,14 @@ using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using DotSpatial.Projections;
 using DotSpatial.Projections.AuthorityCodes;
+using Mapsui.Nts;
+using Mapsui.Nts.Projections;
 using Mapsui.Projections;
 using NetTopologySuite.Geometries;
 
-namespace Mapsui.Nts.Projections;
-public class DotSpatialProjection : IProjection
+namespace Mapsui.Extensions.Projections;
+
+public class DotSpatialProjection : IProjection, IProjectionCrs
 {
     private static readonly ConcurrentDictionary<int, ProjectionInfo> Projections = new();
     private static readonly ConcurrentDictionary<(int From, int To), GeometryTransform> GeometryTransformations = new();
@@ -22,7 +25,6 @@ public class DotSpatialProjection : IProjection
     public static void Init()
     {
         ProjectionDefaults.Projection = new DotSpatialProjection();
-        ProjectionDefaults.CrsFromEsri = CrsFromEsri;
     }
 
     public int? GetIdFromCrs(string? crs)
@@ -203,7 +205,7 @@ public class DotSpatialProjection : IProjection
         return (fromCoordinateSystem, toCoordinateSystem);
     }
 
-    public static string CrsFromEsri(string esriString)
+    public string? CrsFromEsri(string esriString)
     {
         if (!CrsFromEsriLookup.TryGetValue(esriString, out var result))
         {
