@@ -102,7 +102,7 @@ will be drawn on top of each other and things go wrong. </li>
 <h2 id="the-most-common-scenario">The most common scenario</h2>
 <p>If you use OpenStreetMap the map is in SphericalMercator. Often you have geodata in lat/lon, say a GPS track.</p>
 <ol>
-<li>The Map.CRS has to be set. If you use SpehricalMercator set it to &quot;EPSG:3857&quot;.</li>
+<li>The Map.CRS has to be set. If you use SphericalMercator set it to &quot;EPSG:3857&quot;.</li>
 <li>The Provider.CRS has to be set. If the data is in lat/lon set it to &quot;EPSG:4326&quot;.</li>
 <li>Wrap the Provider om the ProjectingProvider. Search the code samples for ProjectingProvider.</li>
 </ol>
@@ -112,67 +112,86 @@ will be drawn on top of each other and things go wrong. </li>
 <li>Mapsui is not capable of projecting images. So no projection of tiles as rasters. No attempt will be made to project and the CRS fields will be ignored.</li>
 </ul>
 <h2 id="sample">Sample</h2>
-<pre><code class="lang-csharp" name="Main" title="Projection Sample">public void Setup(IMapControl mapControl)
+<!-- Tag name projectionsample is not found -->
+<pre><code class="lang-csharp" name="Main" title="Projection Sample">using Mapsui.Extensions;
+using Mapsui.Layers;
+using Mapsui.Providers;
+using Mapsui.Samples.Common.Desktop.GeoData;
+using Mapsui.Styles;
+using Mapsui.Tiling;
+using Mapsui.UI;
+
+
+namespace Mapsui.Samples.Common.Maps.Projection
 {
-    mapControl.Map = CreateMap();
-}
-
-public static Map CreateMap()
-{
-    // For Projections to work three things need to be set:
-    // 1) The CRS on the Map to know what to project to.
-    // 2) The CRS on the DataSource to know what to project from.
-    // 3) The projection to project from the DataSource CRS to
-    // the Map CRS.
-
-    var geometryLayer = CreateWorldCitiesLayer();
-    var extent = geometryLayer.Extent!.Grow(10000);
-    var map = new Map
+    public class PointProjectionSample : ISample
     {
-        CRS = &quot;EPSG:3857&quot;, // The Map CRS needs to be set
-        BackColor = Color.Gray
-    };
-    map.Layers.Add(OpenStreetMap.CreateTileLayer());
-    map.Layers.Add(geometryLayer);
-    map.Home = n =&gt; n.NavigateTo(extent);
-    return map;
-}
+        public string Name =&gt; &quot;Point projection&quot;;
+        public string Category =&gt; &quot;Projection&quot;;
 
-public static Layer CreateWorldCitiesLayer()
-{
-    var features = WorldCities.GenerateTop100();
+        public void Setup(IMapControl mapControl)
+        {
+            mapControl.Map = CreateMap();
+        }
 
-    var memoryProvider = new MemoryProvider&lt;IFeature&gt;(features)
-    {
-        CRS = &quot;EPSG:4326&quot; // The DataSource CRS needs to be set
-    };
+        public static Map CreateMap()
+        {
+            // For Projections to work three things need to be set:
+            // 1) The CRS on the Map to know what to project to.
+            // 2) The CRS on the DataSource to know what to project from.
+            // 3) The projection to project from the DataSource CRS to
+            // the Map CRS.
 
-    var dataSource = new ProjectingProvider(memoryProvider)
-    {
-        CRS = &quot;EPSG:3857&quot;
-    };
+            var geometryLayer = CreateWorldCitiesLayer();
+            var extent = geometryLayer.Extent!.Grow(10000);
+            var map = new Map
+            {
+                CRS = &quot;EPSG:3857&quot;, // The Map CRS needs to be set
+                BackColor = Color.Gray
+            };
+            map.Layers.Add(OpenStreetMap.CreateTileLayer());
+            map.Layers.Add(geometryLayer);
+            map.Home = n =&gt; n.NavigateTo(extent);
+            return map;
+        }
 
-    return new Layer
-    {
-        DataSource = dataSource,
-        Name = &quot;Cities&quot;,
-        Style = CreateCityStyle(),
-        IsMapInfoLayer = true
-    };
-}
+        public static Layer CreateWorldCitiesLayer()
+        {
+            var features = WorldCities.GenerateTop100();
+
+            var memoryProvider = new MemoryProvider&lt;IFeature&gt;(features)
+            {
+                CRS = &quot;EPSG:4326&quot; // The DataSource CRS needs to be set
+            };
+
+            var dataSource = new ProjectingProvider(memoryProvider)
+            {
+                CRS = &quot;EPSG:3857&quot;
+            };
+
+            return new Layer
+            {
+                DataSource = dataSource,
+                Name = &quot;Cities&quot;,
+                Style = CreateCityStyle(),
+                IsMapInfoLayer = true
+            };
+        }
 
 
-private static SymbolStyle CreateCityStyle()
-{
-    var location = typeof(GeodanOfficesSample).LoadBitmapId(&quot;Images.location.png&quot;);
+        private static SymbolStyle CreateCityStyle()
+        {
+            var location = typeof(GeodanOfficesSample).LoadBitmapId(&quot;Images.location.png&quot;);
 
-    return new SymbolStyle
-    {
-        BitmapId = location,
-        SymbolOffset = new Offset { Y = 64 },
-        SymbolScale = 0.25,
-        Opacity = 0.5f
-    };
+            return new SymbolStyle
+            {
+                BitmapId = location,
+                SymbolOffset = new Offset { Y = 64 },
+                SymbolScale = 0.25,
+                Opacity = 0.5f
+            };
+        }
+    }
 }
 </code></pre></article>
           </div>

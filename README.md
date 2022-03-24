@@ -7,7 +7,8 @@
 
 Mapsui is a C# map component for apps
 
-- Supported platforms: Xamarin.Forms (including Android, iOS, MacOS, UWP and WPF), WPF, UWP, Xamarin.Android, Xamarin.iOS.
+- Supported platforms: Xamarin.Forms (including Android, iOS, MacOS, UWP and WPF), WPF, Xamarin.Android, Xamarin.iOS.
+- Platforms in beta: Avalonia and Eto.
 - The Mapsui core assemblies are .NET Standard 2.0
 - Designed to be fast and responsive
 
@@ -18,9 +19,11 @@ Mapsui is a C# map component for apps
 | Mapsui         | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.svg?style=flat)](https://www.nuget.org/packages/Mapsui/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.svg)](https://www.nuget.org/packages/Mapsui) | |
 | Mapsui.Forms   | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Forms.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Forms/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.Forms.svg)](https://www.nuget.org/packages/Mapsui.Forms) | [Xamarin.Forms](https://mapsui.com/documentation/getting-started-xamarin-forms.html) |
 | Mapsui.Wpf     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Wpf.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Wpf/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Wpf.svg)](https://www.nuget.org/packages/Mapsui.Wpf) | [WPF](https://mapsui.com/documentation/getting-started-wpf.html) |
-| Mapsui.Uwp     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Uwp.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Uwp/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Uwp.svg)](https://www.nuget.org/packages/Mapsui.Uwp) | [UWP](https://mapsui.com/documentation/getting-started-uwp.html) |
 | Mapsui.Android | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Android.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Android/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Android.svg)](https://www.nuget.org/packages/Mapsui.Android) | [Xamarin.Android](https://mapsui.com/documentation/getting-started-android.html) |
 | Mapsui.iOS     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.iOS.svg?style=flat)](https://www.nuget.org/packages/Mapsui.iOS/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.iOS.svg)](https://www.nuget.org/packages/Mapsui.iOS) | [Xamarin.iOS](https://mapsui.com/documentation/getting-started-ios.html) |
+| Mapsui.Avalonia     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Avalonia.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Avalonia/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Avalonia.svg)](https://www.nuget.org/packages/Mapsui.Avalonia) | [Xamarin.Avalonia](https://mapsui.com/documentation/getting-started-avalonia.html) |
+| Mapsui.Eto     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Eto.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Eto/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Eto.svg)](https://www.nuget.org/packages/Mapsui.Eto) | [Xamarin.Eto](https://mapsui.com/documentation/getting-started-eto.html) |
+
 
 ## Build Status
 | platform | status |
@@ -61,4 +64,4 @@ See the [guidelines](http://mapsui.com/documentation/contributors-guidelines.htm
 
 [MIT](LICENSE)
 
-[<p align="left"><img src="logo/png/icon.png" alt="Mapsui" height="180px"></p>](https://mapsui.com).
+[<p align="left"><img src="logo/png/icon.png" alt="Mapsui" height="180px"></p>](https://mapsui.com)

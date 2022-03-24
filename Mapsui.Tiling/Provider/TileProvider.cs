@@ -79,7 +79,7 @@ namespace Mapsui.Tiling.Provider
 
             try
             {
-                bitmap.Add(tileInfo.Index, tileProvider.GetTile(tileInfo));
+                bitmap.Add(tileInfo.Index, tileProvider.GetTileAsync(tileInfo).Result);
             }
             catch (Exception ex)
             {

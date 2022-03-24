@@ -65,10 +65,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="SkiaSharp" Version="2.88.0-preview.209" />
-    <PackageReference Include="SkiaSharp.HarfBuzz" Version="2.88.0-preview.209" />
-    <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.0-preview.209" />
-    <PackageReference Include="SkiaSharp.Views.Maui.Controls.Compatibility" Version="2.88.0-preview.209" />
+    <PackageReference Include="SkiaSharp" Version="2.88.0-preview.232" />
+    <PackageReference Include="SkiaSharp.HarfBuzz" Version="2.88.0-preview.232" />
+    <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.0-preview.232" />
+    <PackageReference Include="SkiaSharp.Views.Maui.Controls.Compatibility" Version="2.88.0-preview.232" />
   </ItemGroup>
 
   <ItemGroup>	  	  
