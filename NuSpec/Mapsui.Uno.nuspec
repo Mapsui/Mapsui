@@ -20,13 +20,13 @@
 			<group targetFramework="netstandard2.0">
 				<dependency id="Mapsui" version="$version$" />
 				<dependency id="SkiaSharp.Views" version="[2.88.0-preview.232,3.0.0)" />
-				<dependency id="Uno.UI" version="[4.2.0-dev.145, 5.0.0)" />
+				<dependency id="Uno.UI" version="[4.1.9, 5.0.0)" />
 				<dependency id="SkiaSharp.Views.Uno" version="[2.88.0-preview.232,3.0.0)" />
 			</group>
 			<group targetFramework="net6.0">
 				<dependency id="Mapsui" version="$version$" />
 				<dependency id="SkiaSharp.Views" version="[2.88.0-preview.232,3.0.0)" />
-				<dependency id="Uno.UI" version="[4.2.0-dev.145, 5.0.0)" />
+				<dependency id="Uno.UI" version="[4.1.9, 5.0.0)" />
 				<dependency id="SkiaSharp.Views.Uno" version="[2.88.0-preview.232,3.0.0)" />
 			</group>
 			<group targetFramework="uap10.0.19041">
@@ -35,6 +35,30 @@
 				<dependency id="Uno.UI" version="[4.0.13, 5.0.0)" />
 				<dependency id="SkiaSharp.Views.Uno" version="[2.88.0-preview.232,3.0.0)" />
 			</group>
+      <group targetFramework="net6.0-android31.0">
+        <dependency id="Mapsui" version="$version$"/>
+        <dependency id="SkiaSharp.Views" version="[2.88.0-preview.232,3.0.0)"/>
+        <dependency id="Uno.UI" version="[4.2.0-dev.145, 5.0.0)" />
+        <dependency id="SkiaSharp.Views.Uno" version="[2.88.0-preview.232,3.0.0)" />
+      </group>
+      <group targetFramework="net6.0-ios13.6">
+        <dependency id="Mapsui" version="$version$"/>
+        <dependency id="SkiaSharp.Views" version="[2.88.0-preview.232,3.0.0)"/>
+        <dependency id="Uno.UI" version="[4.2.0-dev.145, 5.0.0)" />
+        <dependency id="SkiaSharp.Views.Uno" version="[2.88.0-preview.232,3.0.0)" />
+      </group>
+      <group targetFramework="net6.0-maccatalyst13.5">
+        <dependency id="Mapsui" version="$version$"/>
+        <dependency id="SkiaSharp.Views" version="[2.88.0-preview.232,3.0.0)"/>
+        <dependency id="Uno.UI" version="[4.2.0-dev.145, 5.0.0)" />
+        <dependency id="SkiaSharp.Views.Uno" version="[2.88.0-preview.232,3.0.0)" />
+      </group>
+      <group targetFramework="net6.0-macos10.10">
+        <dependency id="Mapsui" version="$version$"/>
+        <dependency id="SkiaSharp.Views" version="[2.88.0-preview.232,3.0.0)"/>
+        <dependency id="Uno.UI" version="[4.2.0-dev.145, 5.0.0)" />
+        <dependency id="SkiaSharp.Views.Uno" version="[2.88.0-preview.232,3.0.0)" />
+      </group>
 		</dependencies>
 	</metadata>
 	<files>
@@ -42,5 +66,9 @@
 		<file src="..\Mapsui.UI.Uno\bin\Release\netstandard2.0\Mapsui.UI.Uno.dll" target="lib\netstandard2.0\Mapsui.UI.Uno.dll" />
 		<file src="..\Mapsui.UI.Uno\bin\Release\net6.0\Mapsui.UI.Uno.dll" target="lib\net6.0\Mapsui.UI.Uno.dll" />
 		<file src="..\Mapsui.UI.Uno\bin\Release\uap10.0.19041\Mapsui.UI.Uno.dll" target="lib\uap10.0.19041\Mapsui.UI.Uno.dll" />
+    <file src="..\Mapsui.UI.Uno\bin\Release\net6.0-android31.0\Mapsui.UI.Uno.dll" target="lib\net6.0-android31.0\Mapsui.UI.Uno.dll" />
+    <file src="..\Mapsui.UI.Uno\bin\Release\net6.0-ios13.6\Mapsui.UI.Uno.dll" target="lib\net6.0-ios13.6\Mapsui.UI.Uno.dll" />
+    <file src="..\Mapsui.UI.Uno\bin\Release\net6.0-maccatalyst13.5\Mapsui.UI.Uno.dll" target="lib\net6.0-maccatalyst13.5\Mapsui.UI.Uno.dll" />
+    <file src="..\Mapsui.UI.Uno\bin\Release\net6.0-macos10.10\Mapsui.UI.Uno.dll" target="lib\net6.0-macos10.10\Mapsui.UI.Uno.dll" />
 	</files>
 </package>
