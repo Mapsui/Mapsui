@@ -55,10 +55,15 @@ The best way to get going with Mapsui is by using the Samples. If you clone the 
 See the [guidelines](http://mapsui.com/documentation/contributors-guidelines.html)
 
 ## Thanks go to
-- Our fantastic [contributors](https://github.com/Mapsui/Mapsui/graphs/contributors)!
 - The developers of SharpMap from which this project was born.
 - Our users. Do not underestimate the value of good bug reports and tests.
 - [realinfo](https://github.com/reallinfo) for providing the logo
+- Our fantastic [contributors](https://github.com/Mapsui/Mapsui/graphs/contributors)!
+<a href="https://github.com/mapsui/mapsui/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=mapsui/mapsui" />
+</a>
+
+Made with [contrib.rocks](https://contrib.rocks).
 
 ## License
 
