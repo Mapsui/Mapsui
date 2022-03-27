@@ -21,7 +21,7 @@ namespace Mapsui.Tests.Common.Maps
 
         public static Map CreateMap()
         {
-            var random = new Random(0);
+            var random = new Random(6);
             var provider = RandomPointGenerator.CreateProviderWithRandomPoints(new MRect(-100, -100, 100, 100), 20, random);
             var layer = CreateLayer(provider);
             var stackedLabelLayer = CreateStackedLabelLayer(provider, LabelColumn);

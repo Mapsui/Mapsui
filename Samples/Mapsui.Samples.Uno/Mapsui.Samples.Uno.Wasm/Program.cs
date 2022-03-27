@@ -24,7 +24,7 @@ namespace Mapsui.Samples.Uno.Wasm
 
         static void ConfigureFilters(ILoggerFactory factory)
 		{
-			factory.WithFilter(new FilterLoggerSettings
+            factory.WithFilter(new FilterLoggerSettings
 				{
 					{ "Uno", LogLevel.Warning },
 					{ "Windows", LogLevel.Warning },
@@ -73,7 +73,7 @@ namespace Mapsui.Samples.Uno.Wasm
 					// ApplicationViewState
 					// { "nVentive.Umbrella.Views.Services.ApplicationViewState.ApplicationViewStateService", LogLevel.Debug },
 				})
-				.AddConsole(LogLevel.Debug);
+                .AddConsole(LogLevel.Debug);
 		}
 	}
 }

@@ -70,6 +70,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Mapsui.Extensions\Mapsui.Extensions.csproj" />
     <ProjectReference Include="..\..\Mapsui.Tiling\Mapsui.Tiling.csproj" />
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />
     <ProjectReference Include="..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />

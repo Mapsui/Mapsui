@@ -2,6 +2,7 @@
 using System.Net;
 using BruTile;
 using BruTile.Web;
+using Mapsui.Cache;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Providers.Wfs;
@@ -16,6 +17,7 @@ namespace Mapsui.Samples.Common.Maps.Data
     {
         public string Name => "7. WFS";
         public string Category => "Data";
+        public static IUrlPersistentCache? DefaultCache { get; set; }
 
         public void Setup(IMapControl mapControl)
         {
@@ -62,8 +64,12 @@ namespace Mapsui.Samples.Common.Maps.Data
 
         private static WFSProvider CreateWfsProvider(string getCapabilitiesUri)
         {
-            var provider = new WFSProvider(getCapabilitiesUri, nsPrefix, layerName,
-                WFSProvider.WFSVersionEnum.WFS_1_1_0)
+            var provider = new WFSProvider(
+                getCapabilitiesUri, 
+                nsPrefix,
+                layerName,
+                WFSProvider.WFSVersionEnum.WFS_1_1_0,
+                persistentCache: DefaultCache)
             {
                 QuickGeometries = false,
                 GetFeatureGetRequest = true,

@@ -53,6 +53,16 @@
     <PackageReference Include="Uno.UI.WebAssembly" Version="4.1.9" />
     <PackageReference Include="Uno.UI.RemoteControl" Version="4.1.9" Condition="'$(Configuration)'=='Debug'" />
     <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.1.9" />
+    <!--Don't upgrade to a later Version of Console it is not Compatibly with Wasm only 1.1.1 is-->
+    <!--https://stackoverflow.com/questions/65672437/uno-iloggerfactory-does-not-contain-definition-addconsole-->
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Filter" Version="1.1.1" />
+    <PackageReference Include="Uno.Core.Extensions.Logging.Singleton" Version="4.0.0-dev.7" />
+    <PackageReference Include="Uno.Core.Extensions.Logging" Version="4.0.1" />
+    <PackageReference Include="Uno.Extensions.Logging.WebAssembly.Console" Version="1.1.0" />
+    <PackageReference Include="Uno.UI.WebAssembly" Version="4.2.0-dev.145" />
+    <PackageReference Include="Uno.UI.RemoteControl" Version="4.2.0-dev.145" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.2.0-dev.145" />
     <PackageReference Include="Uno.Wasm.Bootstrap" Version="3.2.0" />
     <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="3.2.0" />
     <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.0-preview.232" />

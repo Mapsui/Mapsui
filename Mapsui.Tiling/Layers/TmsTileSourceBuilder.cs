@@ -1,43 +1,55 @@
 using System;
+using System.IO;
 using System.Net;
 using System.Threading;
 using BruTile;
+using BruTile.Cache;
 using BruTile.Tms;
+using Mapsui.Cache;
+using Mapsui.Extensions;
 using Mapsui.Logging;
 
 namespace Mapsui.Tiling.Layers
 {
     public static class TmsTileSourceBuilder
     {
-        public static ITileSource Build(
-            string urlToTileMapXml,
-            bool overrideTmsUrlWithUrlToTileMapXml)
+        public static ITileSource Build(string urlToTileMapXml,
+            bool overrideTmsUrlWithUrlToTileMapXml, 
+            IPersistentCache<byte[]>? persistentCache = null)
         {
-            var webRequest = (HttpWebRequest)WebRequest.Create(urlToTileMapXml);
-            using var waitHandle = new AutoResetEvent(false);
-            ITileSource? tileSource = null;
             Exception? error = null;
-
-            var state = new object[]
+            var bytes = (persistentCache as IUrlPersistentCache)?.Find(urlToTileMapXml);
+            if (bytes == null)
             {
-                new Action<Exception>(ex =>
-                {
-                    error = ex;
-                    waitHandle.Set();
-                }),
-                new Action<ITileSource>(ts =>
-                {
-                    tileSource = ts;
-                    waitHandle.Set();
-                }),
-                webRequest,
-                urlToTileMapXml,
-                overrideTmsUrlWithUrlToTileMapXml
-            };
-            webRequest.BeginGetResponse(LoadTmsLayer, state);
+                var webRequest = (HttpWebRequest)WebRequest.Create(urlToTileMapXml);
+                using var waitHandle = new AutoResetEvent(false);
 
-            waitHandle.WaitOne();
+                var state = new object[]
+                {
+                    new Action<Exception>(ex =>
+                    {
+                        error = ex;
+                        waitHandle.Set();
+                    }),
+                    new Action<byte[]?>(ts =>
+                    {
+                        bytes = ts;
+                        waitHandle.Set();
+                    }),
+                    webRequest
+                };
+                webRequest.BeginGetResponse(LoadTmsLayer, state);
+
+                waitHandle.WaitOne();
+            }
+
             if (error != null) throw error;
+
+            var stream = new MemoryStream(bytes);
+            var tileSource = overrideTmsUrlWithUrlToTileMapXml
+                ? TileMapParser.CreateTileSource(stream, urlToTileMapXml, persistentCache: persistentCache)
+                : TileMapParser.CreateTileSource(stream, persistentCache: persistentCache);
+
             return tileSource!;
         }
 
@@ -48,17 +60,12 @@ namespace Mapsui.Tiling.Layers
 
             try
             {
-                var callback = (Action<ITileSource>)state[1];
+                var callback = (Action<byte[]>)state[1];
                 var request = (HttpWebRequest)state[2];
-                var urlToTileMapXml = (string)state[3];
-                var overrideTmsUrlWithUrlToTileMapXml = (bool)state[4];
 
                 using var response = request.EndGetResponse(result);
                 using var stream = response.GetResponseStream();
-                var tileSource = overrideTmsUrlWithUrlToTileMapXml
-                    ? TileMapParser.CreateTileSource(stream, urlToTileMapXml)
-                    : TileMapParser.CreateTileSource(stream);
-                callback(tileSource);
+                callback(stream.ToBytes());
             }
             catch (Exception ex)
             {

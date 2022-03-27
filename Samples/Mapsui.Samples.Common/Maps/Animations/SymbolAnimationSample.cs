@@ -1,21 +1,27 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.UI;
 using Mapsui.Utilities;
+using NetTopologySuite.Operation.Valid;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class SymbolAnimationSample : ISample
+    public class SymbolAnimationSample : ISample, IPrepareSampleTest, ISampleTest
     {
+        private Layer animationLayer;
+        private static bool repeat = true;
         public string Name => "Animated Symbols";
         public string Category => "Animations";
 
         public void Setup(IMapControl mapControl)
         {
             mapControl.Map = CreateMap();
+            this.animationLayer = (Layer)mapControl.Map.Layers.Last();
         }
 
         public static Map CreateMap()
@@ -66,7 +72,7 @@ namespace Mapsui.Samples.Common.Maps
                 animationStart: 0,
                 animationEnd: .5,
                 easing: Easing.SinInOut,
-                repeat: true,
+                repeat: repeat,
                 tick: (symbolStyle, e, v) => { style.SymbolScale = (double)((double)e.Start + ((double)e.End - (double)e.Start) * e.Easing.Ease(v)); },
                 final: (symbolStyle, e) => { style.SymbolScale = (double)e.End; }
             );
@@ -78,7 +84,7 @@ namespace Mapsui.Samples.Common.Maps
                 animationStart: .5,
                 animationEnd: 1,
                 easing: Easing.SinInOut,
-                repeat: true,
+                repeat: repeat,
                 tick: (symbolStyle, e, v) => { style.SymbolScale = (double)((double)e.Start + ((double)e.End - (double)e.Start) * e.Easing.Ease(v)); },
                 final: (symbolStyle, e) => { style.SymbolScale = (double)e.End; }
             );
@@ -120,6 +126,19 @@ namespace Mapsui.Samples.Common.Maps
             var result = new PointFeature(new MPoint(x, y));
             result.Styles.Add(style);
             return result;
+        }
+
+        public async Task InitializeTest()
+        {
+            while (animationLayer.UpdateAnimations())
+            {
+                await Task.Delay(10).ConfigureAwait(true);
+            }
+        }
+
+        public void PrepareTest()
+        {
+            repeat = false;
         }
     }
 }
