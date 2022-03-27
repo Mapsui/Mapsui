@@ -27,6 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{B2DB
 		Scripts\buildpack.bat = Scripts\buildpack.bat
 		Scripts\buildpackpush.bat = Scripts\buildpackpush.bat
 		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
+		NugetRestore.cmd = NugetRestore.cmd
 		Scripts\readme.txt = Scripts\readme.txt
 		Scripts\rename.ps1 = Scripts\rename.ps1
 		Scripts\test-image-copier.cmd = Scripts\test-image-copier.cmd
