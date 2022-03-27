@@ -11,6 +11,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Net;
 using System.Xml.XPath;
+using Mapsui.Cache;
 using Mapsui.Layers;
 using Mapsui.Projections;
 using Mapsui.Providers.Wfs.Utilities;
@@ -56,7 +57,7 @@ namespace Mapsui.Providers.Wfs
 
         private readonly GeometryTypeEnum _geometryType = GeometryTypeEnum.Unknown;
         private readonly string? _getCapabilitiesUri;
-        private readonly HttpClientUtil _httpClientUtil = new HttpClientUtil();
+        private readonly HttpClientUtil _httpClientUtil;
         private readonly IWFS_TextResources _textResources;
         private readonly WFSVersionEnum _wfsVersion;
         private bool _disposed;
@@ -70,6 +71,7 @@ namespace Mapsui.Providers.Wfs
         private IFilter? _ogcFilter;
         private bool _quickGeometries;
         private int[]? _axisOrder;
+        private readonly IUrlPersistentCache? _persistentCache;
 
         // The type of geometry can be specified in case of unprecise information (e.g. 'GeometryAssociationType').
         // It helps to accelerate the rendering process significantly.
@@ -206,9 +208,12 @@ namespace Mapsui.Providers.Wfs
         /// if the geometry type in 'DescribeFeatureType is unprecise.   
         /// </param>
         /// <param name="wfsVersion">The desired WFS Server version.</param>
+        /// <param name="persistentCache">persistent Cache</param>
         public WFSProvider(string getCapabilitiesUri, string nsPrefix, string featureType, GeometryTypeEnum geometryType,
-                   WFSVersionEnum wfsVersion)
+                   WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
         {
+            _httpClientUtil = new HttpClientUtil(persistentCache);
+            _persistentCache = persistentCache;
             _getCapabilitiesUri = getCapabilitiesUri;
             _featureType = featureType;
 
@@ -240,8 +245,9 @@ namespace Mapsui.Providers.Wfs
         /// </param>
         /// <param name="featureType">The name of the feature type</param>
         /// <param name="wfsVersion">The desired WFS Server version.</param>
-        public WFSProvider(string getCapabilitiesUri, string nsPrefix, string featureType, WFSVersionEnum wfsVersion)
-            : this(getCapabilitiesUri, nsPrefix, featureType, GeometryTypeEnum.Unknown, wfsVersion)
+        /// <param name="persistentCache">persistent Cache Interface</param>
+        public WFSProvider(string getCapabilitiesUri, string nsPrefix, string featureType, WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
+            : this(getCapabilitiesUri, nsPrefix, featureType, GeometryTypeEnum.Unknown, wfsVersion, persistentCache: persistentCache)
         {
         }
 
@@ -252,8 +258,11 @@ namespace Mapsui.Providers.Wfs
         /// </summary>
         /// <param name="featureTypeInfo">The featureTypeInfo Instance</param>
         /// <param name="wfsVersion">The desired WFS Server version.</param>
-        public WFSProvider(WfsFeatureTypeInfo featureTypeInfo, WFSVersionEnum wfsVersion)
+        /// <param name="persistentCache">Persistent Cache</param>
+        public WFSProvider(WfsFeatureTypeInfo featureTypeInfo, WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
         {
+            _httpClientUtil = new HttpClientUtil(persistentCache);
+            _persistentCache = persistentCache;
             _featureTypeInfo = featureTypeInfo;
 
             if (wfsVersion == WFSVersionEnum.WFS_1_0_0)
@@ -283,9 +292,12 @@ namespace Mapsui.Providers.Wfs
         /// </param>
         /// <param name="featureType">The name of the feature type</param>
         /// <param name="wfsVersion">The desired WFS Server version.</param>
+        /// <param name="persistentCache">Persistent Cache</param>
         public WFSProvider(string serviceUri, string nsPrefix, string featureTypeNamespace, string featureType,
-                   string geometryName, GeometryTypeEnum geometryType, WFSVersionEnum wfsVersion)
+                   string geometryName, GeometryTypeEnum geometryType, WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
         {
+            _httpClientUtil = new HttpClientUtil(persistentCache);
+            _persistentCache = persistentCache;
             _featureTypeInfo = new WfsFeatureTypeInfo(serviceUri, nsPrefix, featureTypeNamespace, featureType,
                                                       geometryName, geometryType);
 
@@ -311,11 +323,12 @@ namespace Mapsui.Providers.Wfs
         /// <param name="geometryName">The name of the geometry</param>
         /// <param name="featureType">The name of the feature type</param>
         /// <param name="wfsVersion">The desired WFS Server version.</param>
+        /// <param name="persistentCache">Persistent Cache</param>
         public WFSProvider(string serviceUri, string nsPrefix, string featureTypeNamespace, string featureType,
-                   string geometryName, WFSVersionEnum wfsVersion)
+                   string geometryName, WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
             : this(
                 serviceUri, nsPrefix, featureTypeNamespace, featureType, geometryName, GeometryTypeEnum.Unknown,
-                wfsVersion)
+                wfsVersion, persistentCache: persistentCache)
         {
         }
 
@@ -336,9 +349,12 @@ namespace Mapsui.Providers.Wfs
         /// </param>
         /// <param name="featureType">The name of the feature type</param>
         /// <param name="wfsVersion">The desired WFS Server version.</param>
+        /// <param name="persistentCache">persistent Cache</param>
         public WFSProvider(IXPathQueryManager getCapabilitiesCache, string nsPrefix, string featureType,
-                   GeometryTypeEnum geometryType, WFSVersionEnum wfsVersion)
+                   GeometryTypeEnum geometryType, WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
         {
+            _httpClientUtil = new HttpClientUtil(persistentCache);
+            _persistentCache = persistentCache;
             _featureTypeInfoQueryManager = getCapabilitiesCache;
 
             if (wfsVersion == WFSVersionEnum.WFS_1_0_0)
@@ -372,17 +388,18 @@ namespace Mapsui.Providers.Wfs
         /// </param>
         /// <param name="featureType">The name of the feature type</param>
         /// <param name="wfsVersion">The desired WFS Server version.</param>
+        /// <param name="persistentCache">persistent Cache</param>
         public WFSProvider(IXPathQueryManager getCapabilitiesCache, string nsPrefix, string featureType,
-                   WFSVersionEnum wfsVersion)
-            : this(getCapabilitiesCache, nsPrefix, featureType, GeometryTypeEnum.Unknown, wfsVersion)
+                   WFSVersionEnum wfsVersion,IUrlPersistentCache? persistentCache = null)
+            : this(getCapabilitiesCache, nsPrefix, featureType, GeometryTypeEnum.Unknown, wfsVersion, persistentCache: persistentCache)
         {
         }
 
         /// <summary>
-        /// Returns all features whose <see cref="Mapsui.Geometries.BoundingBox"/> intersects 'bbox'.
+        /// Returns all features whose <see cref="WfsFeatureTypeInfo.BoundingBox"/> intersects 'bbox'.
         /// </summary>
         /// <param name="bbox"></param>
-        /// <returns>Features within the specified <see cref="Mapsui.Geometries.BoundingBox"/></returns>
+        /// <returns>Features within the specified <see cref="WfsFeatureTypeInfo.BoundingBox"/></returns>
         public IEnumerable<IFeature> ExecuteIntersectionQuery(MRect bbox)
         {
             if (_featureTypeInfo == null) return new List<IFeature>();

@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Mapsui.Nts\Mapsui.Nts.csproj" />
     <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
   </ItemGroup>
 
@@ -13,6 +14,8 @@
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292"/>
     <PackageReference Include="BitMiracle.LibTiff.NET" Version="2.4.649" />
     <PackageReference Include="SkiaSharp" Version="2.88.0-preview.209" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
+    <PackageReference Include="DotSpatial.Projections.NetStandard" Version="1.0.0" />
   </ItemGroup>
 
 </Project>

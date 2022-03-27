@@ -96,9 +96,10 @@ namespace Mapsui.Samples.Common.Maps
             }
         }
 
-        public void InitializeTest()
+        public Task InitializeTest()
         {
             cancelationTokenSource.Cancel();
+            return Task.CompletedTask;
         }
 
         public void Dispose()

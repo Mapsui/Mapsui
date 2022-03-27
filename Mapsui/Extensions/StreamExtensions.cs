@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.Text;
 
 namespace Mapsui.Extensions
@@ -8,10 +10,20 @@ namespace Mapsui.Extensions
         public static byte[] ToBytes(this Stream input)
         {
             using var ms = new MemoryStream();
-            if (input.Position != 0)
+            
+            switch (input.GetType().Name)
             {
-                // set position to 0 so that i can copy all the data
-                input.Position = 0;
+                case "ContentLengthReadStream":
+                    // not implemented
+                    break;
+                default:
+                    if (input.Position != 0)
+                    {
+                        // set position to 0 so that i can copy all the data
+                        input.Position = 0;
+                    }
+
+                    break;
             }
 
             input.CopyTo(ms);

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Mapsui.Samples.Common.Desktop.Cache;
+namespace Mapsui.Extensions.Cache;
 
 public class Tile
 {

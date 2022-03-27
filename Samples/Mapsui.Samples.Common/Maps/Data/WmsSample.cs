@@ -1,4 +1,6 @@
-﻿using Mapsui.Layers;
+﻿using Mapsui.Cache;
+using Mapsui.Extensions.Cache;
+using Mapsui.Layers;
 using Mapsui.Providers.Wms;
 using Mapsui.UI;
 
@@ -8,6 +10,7 @@ namespace Mapsui.Samples.Common.Maps.Data
     {
         public string Name => "6. WMS";
         public string Category => "Data";
+        public static IUrlPersistentCache? DefaultCache { get; set; }
 
         public void Setup(IMapControl mapControl)
         {
@@ -31,7 +34,7 @@ namespace Mapsui.Samples.Common.Maps.Data
         {
             const string wmsUrl = "https://geodata.nationaalgeoregister.nl/windkaart/wms?request=GetCapabilities";
 
-            var provider = new WmsProvider(wmsUrl)
+            var provider = new WmsProvider(wmsUrl, persistentCache: DefaultCache)
             {
                 ContinueOnError = true,
                 TimeOut = 20000,

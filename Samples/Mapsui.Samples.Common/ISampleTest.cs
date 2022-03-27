@@ -5,9 +5,10 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common;
 public interface ISampleTest
 {
-    void InitializeTest();
+    Task InitializeTest();
 }

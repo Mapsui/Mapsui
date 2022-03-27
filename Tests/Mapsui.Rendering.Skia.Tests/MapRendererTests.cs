@@ -255,7 +255,7 @@ namespace Mapsui.Rendering.Skia.Tests
         }
 
         [Test]
-        public void RenderStackedLablesLayer()
+        public void RenderStackedLabelsLayer()
         {
             // arrange
             using var map = StackedLabelsSample.CreateMap();
@@ -307,6 +307,11 @@ namespace Mapsui.Rendering.Skia.Tests
             using var skData2 = SKData.Create(bitmapStream2);
             var bitmap2 = SKBitmap.FromImage(SKImage.FromEncodedData(skData2));
 
+            if (bitmap1.Width != bitmap2.Width || bitmap1.Height != bitmap2.Height)
+            {
+                return false;
+            }
+
             for (var x = 0; x < bitmap1.Width; x++)
             {
                 for (var y = 0; y < bitmap1.Height; y++)
@@ -325,7 +330,7 @@ namespace Mapsui.Rendering.Skia.Tests
                 }
             }
 
-            var proportion = (double)(trueCount - falseCount) / trueCount;
+            var proportion = (double)(trueCount) / (trueCount + falseCount);
             return proportionCorrect <= proportion;
         }
     }

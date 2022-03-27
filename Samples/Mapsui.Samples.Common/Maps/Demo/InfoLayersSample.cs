@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Nts;
 using Mapsui.Providers;
@@ -14,7 +15,7 @@ using NetTopologySuite.Geometries;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class InfoLayersSample : ISample
+    public class InfoLayersSample : ISample, ISampleTest
     {
         private const string InfoLayerName = "Info Layer";
         private const string PolygonLayerName = "Polygon Layer";
@@ -168,6 +169,11 @@ namespace Mapsui.Samples.Common.Maps
                 Fill = new Brush(new Color(213, 234, 194)),
                 Outline = { Color = Color.Gray, Width = 1 }
             };
+        }
+
+        public async Task InitializeTest()
+        {
+            await Task.Delay(1000).ConfigureAwait(true);
         }
     }
 }
