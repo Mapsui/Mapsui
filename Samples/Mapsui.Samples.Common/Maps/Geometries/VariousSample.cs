@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -11,7 +12,7 @@ using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class VariousSample : ISample
+    public class VariousSample : ISample, ISampleTest
     {
         public string Name => "5 Various geometries";
         public string Category => "Geometries";
@@ -64,6 +65,11 @@ namespace Mapsui.Samples.Common.Maps
         {
             var bitmapId = typeof(VariousSample).LoadBitmapId(embeddedResourcePath);
             return new SymbolStyle { BitmapId = bitmapId, SymbolScale = 0.75 };
+        }
+
+        public async Task InitializeTest()
+        {
+            await Task.Delay(1000);
         }
     }
 }

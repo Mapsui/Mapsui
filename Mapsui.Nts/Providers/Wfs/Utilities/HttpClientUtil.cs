@@ -10,6 +10,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Security;
+using Mapsui.Cache;
+using Mapsui.Utilities;
 
 namespace Mapsui.Providers.Wfs.Utilities
 {
@@ -26,6 +28,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         private HttpWebRequest? _webRequest;
         private HttpWebResponse? _webResponse;
         private ICredentials? _credentials;
+        private readonly IUrlPersistentCache? _persistentCache;
 
         /// <summary>
         /// Gets ans sets the Url of the request.
@@ -65,8 +68,9 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpClientUtil"/> class.
         /// </summary>
-        public HttpClientUtil()
+        public HttpClientUtil(IUrlPersistentCache? persistentCache = null)
         {
+            _persistentCache = persistentCache;
             _requestHeaders = new NameValueCollection();
         }
 
@@ -90,6 +94,12 @@ namespace Mapsui.Providers.Wfs.Utilities
             if (string.IsNullOrEmpty(_url))
                 throw new Exception($"Property {nameof(Url)} was not set");
 
+            var bytes = _persistentCache?.Find(_url!);
+            if (bytes != null)
+            {
+                return new MemoryStream(bytes);
+            }
+
             // Free all resources of the previous request, if it hasn't been done yet...
             Close();
 
@@ -99,13 +109,13 @@ namespace Mapsui.Providers.Wfs.Utilities
             }
             catch (SecurityException ex)
             {
-                Trace.TraceError("An exception occured due to security reasons while initializing a request to " + _url +
+                Trace.TraceError("An exception occurred due to security reasons while initializing a request to " + _url +
                                  ": " + ex.Message);
                 throw;
             }
             catch (NotSupportedException ex)
             {
-                Trace.TraceError("An exception occured while initializing a request to " + _url + ": " + ex.Message);
+                Trace.TraceError("An exception occurred while initializing a request to " + _url + ": " + ex.Message);
                 throw;
             }
 
@@ -140,11 +150,19 @@ namespace Mapsui.Providers.Wfs.Utilities
 
                 _webResponse?.Dispose();
                 _webResponse = (HttpWebResponse)_webRequest.GetResponse();
+                if (_persistentCache != null)
+                {
+                    bytes = StreamHelper.ReadFully(_webResponse.GetResponseStream());
+                    _persistentCache?.Add(_url, bytes);
+                    return new MemoryStream(bytes);
+                }
+
                 return _webResponse.GetResponseStream();
+
             }
             catch (Exception ex)
             {
-                Trace.TraceError("An exception occured during a HTTP request to " + _url + ": " + ex.Message);
+                Trace.TraceError("An exception occurred during a HTTP request to " + _url + ": " + ex.Message);
                 throw;
             }
         }

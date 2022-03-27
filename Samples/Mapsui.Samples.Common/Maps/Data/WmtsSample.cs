@@ -1,6 +1,8 @@
 ﻿using System.Linq;
-using System.Net.Http;
+using BruTile.Cache;
 using BruTile.Wmts;
+using Mapsui.Cache;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Tiling.Layers;
 using Mapsui.UI;
@@ -11,6 +13,7 @@ namespace Mapsui.Samples.Common.Maps.Data
     {
         public string Name => "3 WMTS";
         public string Category => "Data";
+        public static IPersistentCache<byte[]>? DefaultCache { get; set; }
 
         public void Setup(IMapControl mapControl)
         {
@@ -32,13 +35,12 @@ namespace Mapsui.Samples.Common.Maps.Data
         {
             var url = "http://geodata.nationaalgeoregister.nl/wmts/top10nl?VERSION=1.0.0&request=GetCapabilities";
 
-            using (var httpClient = new HttpClient())
-            using (var response = httpClient.GetStreamAsync(url).Result)
-            {
-                var tileSources = WmtsParser.Parse(response);
-                var nature2000TileSource = tileSources.First(t => t.Name == "natura2000");
-                return new TileLayer(nature2000TileSource) { Name = nature2000TileSource.Name };
-            }
+            using var response = (DefaultCache as IUrlPersistentCache).UrlCachedStream(url);
+            var tileSources = WmtsParser.Parse(response);
+            var nature2000TileSource = tileSources.First(t => t.Name == "natura2000");
+            nature2000TileSource.PersistentCache = DefaultCache;
+            return new TileLayer(nature2000TileSource) { Name = nature2000TileSource.Name };
+            
         }
     }
 }

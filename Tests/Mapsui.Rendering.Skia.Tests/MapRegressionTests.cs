@@ -8,7 +8,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Samples.Common;
+using Mapsui.Samples.Common.Desktop;
 using Mapsui.Samples.Common.Maps;
+using Mapsui.Samples.Common.Maps.Animations;
 using Mapsui.Samples.Common.Maps.Callouts;
 using Mapsui.Samples.Common.Maps.Data;
 using Mapsui.Samples.Common.Maps.Projection;
@@ -21,30 +23,38 @@ namespace Mapsui.Rendering.Skia.Tests;
 [TestFixture, Apartment(ApartmentState.STA)]
 public class MapRegressionTests
 {
+    static MapRegressionTests()
+    {
+        // Load Desktop Samples
+        Console.WriteLine(typeof(ShapefileSample));
+    }
+
     private static ISample[]? _excludedSamples;
     private static ISample[]? _regressionSamples;
 
     public MapRegressionTests()
     {
+        // Tile Cache
         OpenStreetMap.DefaultCache ??= File.ReadFromCacheFolder("OpenStreetMap");
         BingArial.DefaultCache ??= File.ReadFromCacheFolder("BingArial");
         BingHybrid.DefaultCache ??= File.ReadFromCacheFolder("BingHybrid");
         Michelin.DefaultCache ??= File.ReadFromCacheFolder("Michelin");
+        TiledWmsSample.DefaultCache ??= File.ReadFromCacheFolder("TiledWmsSample");
+        TmsSample.DefaultCache ??= File.ReadFromCacheFolder("TmsSample");
+        WmtsSample.DefaultCache ??= File.ReadFromCacheFolder("WmtsSample");
+
+        // Url Cache
+        WmsSample.DefaultCache ??= File.ReadFromCacheFolder("WmsSample");
+        WfsSample.DefaultCache ??= File.ReadFromCacheFolder("WfsSample");
     }
 
     public static object[] RegressionSamples => _regressionSamples ??= AllSamples.GetSamples().Where(f => ExcludedSamples.All(e => e.GetType() != f.GetType())).OrderBy(f => f.GetType().FullName).ToArray();
 
     public static object[] ExcludedSamples => _excludedSamples ??= new ISample[] {
-        new WfsSample(),
-        new OpacityStyleSample(),
-        new VariousSample(),
-        new PointProjectionSample(),
-        new PolygonSample(),
-        new StackedLabelsSample(),
-        new CustomCalloutSample(),
     };
 
     [Test]
+    [Retry(5)]
     [TestCaseSource(nameof(RegressionSamples))]
     public async Task TestSample(ISample sample)
     {
@@ -56,7 +66,7 @@ public class MapRegressionTests
         try
         {
             var fileName = sample.GetType().Name + ".Regression.png";
-            var mapControl = InitMap(sample);
+            var mapControl = await InitMap(sample).ConfigureAwait(true);
             var map = mapControl.Map;
             await DisplayMap(mapControl).ConfigureAwait(false);
 
@@ -113,14 +123,20 @@ public class MapRegressionTests
         await TestSample(sample, false);
     }
 
-    private static RegressionMapControl InitMap(ISample sample)
+    private static async Task<RegressionMapControl> InitMap(ISample sample)
     {
         var mapControl = new RegressionMapControl();
         mapControl.SetSize(800, 600);
+
+        if (sample is IPrepareSampleTest prepareTest)
+        {
+            prepareTest.PrepareTest();
+        }
+
         sample.Setup(mapControl);
         if (sample is ISampleTest sampleTest)
         {
-            sampleTest.InitializeTest();
+            await sampleTest.InitializeTest().ConfigureAwait(true);
         }
 
         var fetchInfo = new FetchInfo(mapControl.Viewport.Extent!, mapControl.Viewport.Resolution, mapControl.Map?.CRS);
@@ -141,6 +157,9 @@ public class MapRegressionTests
     private async Task DisplayMap(IMapControl mapControl)
     {
         await WaitForLoading(mapControl).ConfigureAwait(false);
+
+        // wait for rendering to finish to make the Tests more reliable
+        await Task.Delay(300).ConfigureAwait(false);
     }
 
     private async Task WaitForLoading(IMapControl mapControl)

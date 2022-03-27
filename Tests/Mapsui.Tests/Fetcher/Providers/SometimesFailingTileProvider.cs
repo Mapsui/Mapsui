@@ -6,7 +6,7 @@ namespace Mapsui.Tests.Fetcher.Providers
 {
     internal class SometimesFailingTileProvider : CountingTileProvider
     {
-        private readonly Random _random = new Random(DateTime.Now.Millisecond);
+        private readonly Random _random = new Random(1000);
 
         public override async Task<byte[]>? GetTileAsync(TileInfo tileInfo)
         {

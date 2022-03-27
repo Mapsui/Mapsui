@@ -47,7 +47,7 @@ namespace Mapsui.Tests.Layers
 
         private static MemoryLayer CreatePointLayer()
         {
-            var random = new Random();
+            var random = new Random(3);
             var features = new List<IFeature>();
             for (var i = 0; i < 100; i++)
             {

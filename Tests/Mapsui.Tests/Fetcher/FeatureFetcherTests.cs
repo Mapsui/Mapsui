@@ -46,7 +46,7 @@ namespace Mapsui.Tests.Fetcher
 
         private static IEnumerable<IFeature> GenerateRandomPoints(MRect envelope, int count)
         {
-            var random = new Random();
+            var random = new Random(0);
             var result = new List<PointFeature>();
 
             for (var i = 0; i < count; i++)

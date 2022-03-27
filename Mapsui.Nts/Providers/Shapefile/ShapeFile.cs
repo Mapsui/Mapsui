@@ -12,6 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Mapsui.Layers;
+using Mapsui.Logging;
 using Mapsui.Nts.Extensions;
 using Mapsui.Nts.Providers.Shapefile.Indexing;
 using Mapsui.Projections;
@@ -130,6 +131,25 @@ namespace Mapsui.Nts.Providers.Shapefile
     /// </remarks>
     public class ShapeFile : IProvider<GeometryFeature>, IDisposable
     {
+
+        static ShapeFile()
+        {
+            try
+            {
+                // Without this Fix this method throws an exception:
+                // Encoding.GetEncoding(...)
+                // System.NotSupportedException: 'No data is available for encoding 1252. For information on defining a custom encoding, see the documentation for the Encoding.RegisterProvider method.'
+                // StackOverflow
+                // https://stackoverflow.com/questions/50858209/system-notsupportedexception-no-data-is-available-for-encoding-1252
+                // Workaround for Bug in Shapefile
+                Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            }
+            catch (Exception e)
+            {
+                Logger.Log(LogLevel.Error, e.Message, e);
+            }
+        }
+
         /// <summary>
         /// Filter Delegate Method
         /// </summary>
