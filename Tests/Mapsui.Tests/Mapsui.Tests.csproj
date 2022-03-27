@@ -25,7 +25,7 @@
 		<ProjectReference Include="..\..\Mapsui.Tiling\Mapsui.Tiling.csproj" />
 		<ProjectReference Include="..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
 		<ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />
-	</ItemGroup>
+  </ItemGroup>
 
 	<ItemGroup>
 		<Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
@@ -67,6 +67,28 @@
 		<Content Include="Resources\Images\vector_symbol_unittype.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="GeoData\World\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="..\..\Samples\Mapsui.Samples.Common.Desktop\GeoData\World\countries.dbf" Link="GeoData\World\countries.dbf">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Include="..\..\Samples\Mapsui.Samples.Common.Desktop\GeoData\World\countries.prj" Link="GeoData\World\countries.prj">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Include="..\..\Samples\Mapsui.Samples.Common.Desktop\GeoData\World\countries.shp" Link="GeoData\World\countries.shp">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Include="..\..\Samples\Mapsui.Samples.Common.Desktop\GeoData\World\countries.shp.sidx" Link="GeoData\World\countries.shp.sidx">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Include="..\..\Samples\Mapsui.Samples.Common.Desktop\GeoData\World\countries.shx" Link="GeoData\World\countries.shx">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 
 </Project>

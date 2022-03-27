@@ -29,9 +29,9 @@ namespace Mapsui.Tests.Projections
         /// Returns the distance in miles or kilometers of any two
         /// latitude / longitude points.
         /// </summary>
-        /// <param name=”pos1″></param>
-        /// <param name=”pos2″></param>
-        /// <param name=”type”></param>
+        /// <param name="pos1"></param>
+        /// <param name="pos2"></param>
+        /// <param name="type"></param>
         /// <returns></returns>
         public static double Distance(Position pos1, Position pos2, DistanceType type = DistanceType.Kilometers)
         {
@@ -52,7 +52,7 @@ namespace Mapsui.Tests.Projections
         /// <summary>
         /// Convert to Radians.
         /// </summary>
-        /// <param name=”val”></param>
+        /// <param name="val"></param>
         /// <returns></returns>
         private static double ToRadian(double val)
         {
