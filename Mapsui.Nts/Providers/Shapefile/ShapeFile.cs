@@ -15,6 +15,7 @@ using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Nts.Extensions;
 using Mapsui.Nts.Providers.Shapefile.Indexing;
+using Mapsui.Projections;
 using Mapsui.Providers;
 using NetTopologySuite.Geometries;
 
@@ -189,10 +190,13 @@ namespace Mapsui.Nts.Providers.Shapefile
         /// </remarks>
         /// <param name="filename">Path to shape file</param>
         /// <param name="fileBasedIndex">Use file-based spatial index</param>
-        public ShapeFile(string filename, bool fileBasedIndex = false)
+        /// <param name="readPrjFile">Read the proj File and set the correct CRS</param>
+        /// <param name="projectionCrs">Projection Crs</param>
+        public ShapeFile(string filename, bool fileBasedIndex = false, bool readPrjFile = false, IProjectionCrs? projectionCrs = null)
         {
             _filename = filename;
             _fileBasedIndex = fileBasedIndex && File.Exists(Path.ChangeExtension(filename, ".shx"));
+            _projectionCrs = projectionCrs ?? ProjectionDefaults.Projection as IProjectionCrs;
 
             //Initialize DBF
             var dbfFile = Path.ChangeExtension(filename, ".dbf");
@@ -201,7 +205,10 @@ namespace Mapsui.Nts.Providers.Shapefile
             //Parse shape header
             ParseHeader();
             //Read projection file
-            ParseProjection();
+            if (readPrjFile)
+            {
+                ParseProjection();
+            }
         }
 
         /// <summary>
@@ -262,6 +269,7 @@ namespace Mapsui.Nts.Providers.Shapefile
 
 
         private bool _disposed;
+        private readonly IProjectionCrs? _projectionCrs;
 
         /// <summary>
         /// Disposes the object
@@ -539,9 +547,12 @@ namespace Mapsui.Nts.Providers.Shapefile
             if (File.Exists(projFile))
                 try
                 {
-                    // todo: Automatically parse coordinate system: 
-                    // var wkt = File.ReadAllText(projFile);
-                    // CoordinateSystemWktReader.Parse(wkt);
+                    //Read Projection
+                    var esriString = File.ReadAllText(projFile);
+                    if (_projectionCrs != null)
+                    {
+                        CRS = _projectionCrs.CrsFromEsri(esriString);
+                    }
 
                 }
                 catch (Exception ex)
