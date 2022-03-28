@@ -1,10 +1,6 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
+﻿using System.Diagnostics;
 using System.Text;
 using Mapsui.UI.iOS;
-using UIKit;
-using CoreGraphics;
 using Mapsui.UI;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
@@ -30,7 +26,7 @@ namespace Mapsui.Samples.iOS
             View = mapControl;
         }
 
-        private void MapOnInfo(object sender, MapInfoEventArgs e)
+        private void MapOnInfo(object? sender, MapInfoEventArgs e)
         {
             if (e.MapInfo?.Feature == null) return;
             Debug.WriteLine(ToString(e.MapInfo.Feature));

@@ -1,3 +1,4 @@
+#pragma warning disable IDISP004 // Don't ignore IDisposable
 
 namespace Mapsui.Samples.Eto
 {

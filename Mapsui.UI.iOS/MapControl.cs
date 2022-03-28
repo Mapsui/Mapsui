@@ -97,7 +97,7 @@ namespace Mapsui.UI.iOS
             OnInfo(InvokeInfo(position, position, 1));
         }
 
-        private void OnPaintSurface(object sender, SKPaintGLSurfaceEventArgs args)
+        private void OnPaintSurface(object? sender, SKPaintGLSurfaceEventArgs args)
         {
             if (PixelDensity <= 0)
                 return;

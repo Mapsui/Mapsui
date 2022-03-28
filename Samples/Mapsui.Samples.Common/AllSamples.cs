@@ -10,7 +10,7 @@ namespace Mapsui.Samples.Common
 {
     public static class AllSamples
     {
-        public static IEnumerable<ISample>? GetSamples()
+        public static IEnumerable<ISample> GetSamples()
         {
             var type = typeof(ISample);
             var assemblies = AppDomain.CurrentDomain.GetAssemblies()
@@ -45,7 +45,7 @@ namespace Mapsui.Samples.Common
                 Logger.Log(LogLevel.Error, sb.ToString(), ex);
             }
 
-            return null;
+            return new List<ISample>();
         }
     }
 }

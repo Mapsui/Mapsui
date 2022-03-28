@@ -6,10 +6,7 @@
 		<!--Revert TreatWarningsAsErrors to false because of vague build error on server -->
 		<TreatWarningsAsErrors>false</TreatWarningsAsErrors>
 	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-	</PropertyGroup>
-
+  
 	<ItemGroup>
     <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
 	</ItemGroup>

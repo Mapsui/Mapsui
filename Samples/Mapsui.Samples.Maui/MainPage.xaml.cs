@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Samples.Common;
 
+#pragma warning disable IDISP004 // Don't ignore created IDisposable
+
 namespace Mapsui.Samples.Maui
 {
     public partial class MainPage : ContentPage
