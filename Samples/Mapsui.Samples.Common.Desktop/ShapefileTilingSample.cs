@@ -9,6 +9,9 @@ using Mapsui.Styles.Thematics;
 using Mapsui.UI;
 using Mapsui.Tiling.Layers;
 
+#pragma warning disable IDISP001 // Dispose created
+#pragma warning disable IDISP004 // Don't ignore created IDisposable
+
 namespace Mapsui.Samples.Common.Desktop
 {
     public class ShapefileTileSample : ISample
@@ -27,7 +30,8 @@ namespace Mapsui.Samples.Common.Desktop
 
             var countrySource = new ShapeFile(GetAppDir() + "\\GeoData\\World\\countries.shp", true);
             countrySource.CRS = "EPSG:4326";
-            var projectedCountrySource = new ProjectingProvider(countrySource) {
+            var projectedCountrySource = new ProjectingProvider(countrySource)
+            {
                 CRS = "EPSG:3857",
             };
 

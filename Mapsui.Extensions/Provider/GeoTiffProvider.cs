@@ -1,18 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
-using Mapsui.Extensions;
+using BitMiracle.LibTiff.Classic;
 using Mapsui.Layers;
+using Mapsui.Providers;
 using Mapsui.Styles;
-using Bitmap = System.Drawing.Bitmap;
-using Color = System.Drawing.Color;
+using SkiaSharp;
+using Color = Mapsui.Styles.Color;
 
-namespace Mapsui.Providers
+namespace Mapsui.Extensions.Provider
 {
     public class GeoTiffProvider : IProvider<IFeature>, IDisposable
     {
@@ -78,100 +76,140 @@ namespace Mapsui.Providers
 
         private static MemoryStream ReadImageAsStream(string tiffPath, List<Color>? noDataColors)
         {
-            var img = Image.FromFile(tiffPath);
-            var imageStream = new MemoryStream();
-
-            if (noDataColors != null)
+            var img = ConvertTiffToSKBitmap(new MemoryStream(File.ReadAllBytes(tiffPath)));
+            try
             {
-                img = ApplyColorFilter((Bitmap)img, noDataColors);
+                var imageStream = new MemoryStream();
+
+                if (noDataColors != null)
+                {
+#pragma warning disable IDISP001 // dispose created
+                    var temp = ApplyColorFilter(img, noDataColors);
+                    img.Dispose();
+                    img = temp;
+#pragma warning restore IDISP001
+                }
+
+                img.Encode(imageStream, SKEncodedImageFormat.Png, 100);
+
+                return imageStream;
             }
-
-            img.Save(imageStream, ImageFormat.Png);
-
-            return imageStream;
+            finally
+            {
+                img.Dispose();
+            }
         }
 
         private static TiffProperties LoadTiff(string location)
         {
             TiffProperties tiffFileProperties;
 
-            using var stream = new FileStream(location, FileMode.Open, FileAccess.Read);
-            using var tif = Image.FromStream(stream, false, false);
-            tiffFileProperties.Width = tif.PhysicalDimension.Width;
-            tiffFileProperties.Height = tif.PhysicalDimension.Height;
-            tiffFileProperties.HResolution = tif.HorizontalResolution;
-            tiffFileProperties.VResolution = tif.VerticalResolution;
+            using var tif = Tiff.Open(location,"r4") ?? Tiff.Open(location,"r8"); // read big tiff if normal tiff fails.
+
+            FieldValue[] value = tif.GetField(TiffTag.IMAGEWIDTH);
+            tiffFileProperties.Width = value[0].ToInt();
+
+            value = tif.GetField(TiffTag.IMAGELENGTH);
+            tiffFileProperties.Height = value[0].ToInt();
+            
+            value = tif.GetField(TiffTag.XRESOLUTION);
+            if (value != null)
+            {       
+               tiffFileProperties.HResolution = value[0].ToFloat();
+            }
+            else
+            {
+                tiffFileProperties.HResolution = 96;
+            }
+            
+            value = tif.GetField(TiffTag.YRESOLUTION);
+            if (value != null)
+            {
+                tiffFileProperties.VResolution  = value[0].ToFloat();
+            }
+            else
+            {
+                tiffFileProperties.VResolution = 96;
+            }
 
             return tiffFileProperties;
         }
 
-        private static Bitmap ApplyColorFilter(Bitmap bitmapImage, ICollection<Color> colors)
+        public static SKBitmap ConvertTiffToSKBitmap(MemoryStream tifImage)
         {
-            return bitmapImage.PixelFormat == PixelFormat.Indexed ? ApplyAlphaOnIndexedBitmap(bitmapImage, colors) : ApplyAlphaOnNonIndexedBitmap(bitmapImage, colors);
-        }
-
-        private static Bitmap ApplyAlphaOnIndexedBitmap(Bitmap bitmapImage, ICollection<Color> colors)
-        {
-            var newPalette = bitmapImage.Palette;
-            for (var index = 0; index < bitmapImage.Palette.Entries.Length; ++index)
+            SKColor[] pixels;
+            int width, height;
+            // open a Tiff stored in the memory stream, and grab its pixels
+            using (var tifImg = Tiff.ClientOpen("in-memory", "r", tifImage, new TiffStream()))
             {
-                var entry = bitmapImage.Palette.Entries[index];
-                if (!colors.Contains(entry)) continue;
+                var value = tifImg.GetField(TiffTag.IMAGEWIDTH);
+                width = value[0].ToInt();
 
-                newPalette.Entries[index] = Color.FromArgb(0, entry.R, entry.G, entry.B);
+                value = tifImg.GetField(TiffTag.IMAGELENGTH);
+                height = value[0].ToInt();
+
+                // Read the image into the memory buffer 
+                var raster = new int[width * height];
+                if (!tifImg.ReadRGBAImageOriented(width, height, raster, Orientation.TOPLEFT))
+                {
+                    // Not a valid TIF image.
+                }
+
+                // store the pixels
+                pixels = new SKColor[width * height];
+                for (var y = 0; y < height; y++)
+                {
+                    for (var x = 0; x < width; x++)
+                    {
+                        var arrayOffset = y * width + x;
+                        var rgba = raster[arrayOffset];
+                        pixels[arrayOffset] = new SKColor((byte)Tiff.GetR(rgba), (byte)Tiff.GetG(rgba), (byte)Tiff.GetB(rgba), (byte)Tiff.GetA(rgba));
+                    }
+                }
             }
-            bitmapImage.Palette = newPalette;
 
-            return bitmapImage;
+            var bitmap = new SKBitmap(width, height)
+            {
+                Pixels = pixels,
+            };
+
+            return bitmap;
         }
 
-        private static Bitmap ApplyAlphaOnNonIndexedBitmap(Bitmap bitmapImage, IEnumerable<Color> colors)
+        private static SKBitmap ApplyColorFilter(SKBitmap bitmapImage, ICollection<Color> colors)
         {
-            const int bytesPerPixel = 4;
+            return ApplyAlphaOnNonIndexedBitmap(bitmapImage, colors);
+        }
 
-            var bmp = (Bitmap)bitmapImage.Clone();
-            var bmpData = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
-            var numBytes = bmp.Width * bmp.Height * bytesPerPixel;
-            var argbValues = new byte[numBytes];
-            var ptr = bmpData.Scan0;
+        private static SKBitmap ApplyAlphaOnNonIndexedBitmap(SKBitmap bitmapImage, IEnumerable<Color> colors)
+        {
+            var pixels = bitmapImage.Pixels;
 
-            Marshal.Copy(ptr, argbValues, 0, numBytes);
-
-            var filterValues = new List<byte[]>();
+            var filterValues = new List<SKColor>();
             foreach (var color in colors)
             {
-                var bt = new byte[4];
-                bt[0] = color.A;
-                bt[1] = color.R;
-                bt[2] = color.G;
-                bt[3] = color.B;
-                filterValues.Add(bt);
+                filterValues.Add(new SKColor((byte)color.R, (byte)color.B, (byte)color.B, (byte)color.A));
             }
 
-            for (var counter = 0; counter < argbValues.Length; counter += bytesPerPixel)
+            for (var counter = 0; counter < pixels.Length; counter++)
             {
                 // If 100% transparent, skip pixel
-                if (argbValues[counter + bytesPerPixel - 1] == 0)
+                if (pixels[counter].Alpha == 0)
                     continue;
 
-                var b = argbValues[counter];
-                var g = argbValues[counter + 1];
-                var r = argbValues[counter + 2];
-                var a = argbValues[counter + 3];
-
-                var found = filterValues.Any(
-                    filterValue => filterValue[0] == a &&
-                    filterValue[1] == r && filterValue[2] == g &&
-                    filterValue[3] == b);
+                var found = filterValues.Any(f => f == pixels[counter]);
 
                 if (found)
-                    argbValues[counter + 3] = 0;
+                {
+                    var color = pixels[counter];
+                    pixels[counter] = new SKColor(color.Red, color.Green, color.Blue, 0);
+                }
             }
 
-            Marshal.Copy(argbValues, 0, ptr, numBytes);
-            bmp.UnlockBits(bmpData);
-
-            return bmp;
+            return new SKBitmap(bitmapImage.Info)
+            {
+                Pixels = pixels,
+            };
         }
 
         private static WorldProperties LoadWorld(string location)
