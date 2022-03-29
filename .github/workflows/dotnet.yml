@@ -17,7 +17,7 @@ jobs:
       with:
         fetch-depth: 0
     # Cache Nugets
-    - uses: actions/cache@v3
+    - uses: actions/cache@v2
       with:
         path: ~/.nuget/packages
         key: ${{ runner.os }}-nuget1-${{ hashFiles('**/*.csproj') }}
@@ -89,7 +89,7 @@ jobs:
       with:
         fetch-depth: 0
     # Cache Nugets
-    - uses: actions/cache@v3
+    - uses: actions/cache@v2
       with:
         path: ~/.nuget/packages
         key: ${{ runner.os }}-nuget1-${{ hashFiles('**/*.csproj') }}
