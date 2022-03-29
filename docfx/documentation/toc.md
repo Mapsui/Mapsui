@@ -7,7 +7,6 @@
 ## [Quickstart Avalonia](getting-started-avalonia.md)
 ## [Quickstart Eto](getting-started-eto.md)
 ## [Samples](samples.md)
-## [Tutorials](tutorials.md)
 ## [Logging](logging.md)
 ## [Roadmap](roadmap.md)
 ## [Frequently Asked Questions](faq.md)
