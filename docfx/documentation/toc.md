@@ -17,14 +17,14 @@
 # How Things Work
 ## [Mapsui.Forms](mapsui-forms.md)
 ## [Mapsui Components](mapsui-components.md)
-## [Renderers](renderers.md)
 ## [Asynchronous Data Fetching](async-fetching.md)
 ## [Skia Scale](skia-scale.md)
 ## [Projections](projections.md)
 ## [Custom Style Renderers](custom-style-renders.md)
 ## [Performance Widget](performance-widget.md)
-# Developing Mapsui
+# Contributing to Mapsui
 ## [Contributors Guidelines](contributors-guidelines.md)
 ## [Development Constraints](development-constraints.md)
+## [Renderers](renderers.md)
 ## [Rendering Tests](rendering-tests.md)
 ## [Documentation](documentation.md)
