@@ -236,6 +236,60 @@ references:
   isSpec: "True"
   fullName: Mapsui.Animations.IAnimatable.UpdateAnimations
   nameWithType: IAnimatable.UpdateAnimations
+- uid: Mapsui.Cache
+  name: Mapsui.Cache
+  href: api/Mapsui.Cache.html
+  commentId: N:Mapsui.Cache
+  fullName: Mapsui.Cache
+  nameWithType: Mapsui.Cache
+- uid: Mapsui.Cache.IUrlPersistentCache
+  name: IUrlPersistentCache
+  href: api/Mapsui.Cache.IUrlPersistentCache.html
+  commentId: T:Mapsui.Cache.IUrlPersistentCache
+  fullName: Mapsui.Cache.IUrlPersistentCache
+  nameWithType: IUrlPersistentCache
+- uid: Mapsui.Cache.IUrlPersistentCache.Add(System.String,System.Byte[])
+  name: Add(String, Byte[])
+  href: api/Mapsui.Cache.IUrlPersistentCache.html#Mapsui_Cache_IUrlPersistentCache_Add_System_String_System_Byte___
+  commentId: M:Mapsui.Cache.IUrlPersistentCache.Add(System.String,System.Byte[])
+  name.vb: Add(String, Byte())
+  fullName: Mapsui.Cache.IUrlPersistentCache.Add(System.String, System.Byte[])
+  fullName.vb: Mapsui.Cache.IUrlPersistentCache.Add(System.String, System.Byte())
+  nameWithType: IUrlPersistentCache.Add(String, Byte[])
+  nameWithType.vb: IUrlPersistentCache.Add(String, Byte())
+- uid: Mapsui.Cache.IUrlPersistentCache.Add*
+  name: Add
+  href: api/Mapsui.Cache.IUrlPersistentCache.html#Mapsui_Cache_IUrlPersistentCache_Add_
+  commentId: Overload:Mapsui.Cache.IUrlPersistentCache.Add
+  isSpec: "True"
+  fullName: Mapsui.Cache.IUrlPersistentCache.Add
+  nameWithType: IUrlPersistentCache.Add
+- uid: Mapsui.Cache.IUrlPersistentCache.Find(System.String)
+  name: Find(String)
+  href: api/Mapsui.Cache.IUrlPersistentCache.html#Mapsui_Cache_IUrlPersistentCache_Find_System_String_
+  commentId: M:Mapsui.Cache.IUrlPersistentCache.Find(System.String)
+  fullName: Mapsui.Cache.IUrlPersistentCache.Find(System.String)
+  nameWithType: IUrlPersistentCache.Find(String)
+- uid: Mapsui.Cache.IUrlPersistentCache.Find*
+  name: Find
+  href: api/Mapsui.Cache.IUrlPersistentCache.html#Mapsui_Cache_IUrlPersistentCache_Find_
+  commentId: Overload:Mapsui.Cache.IUrlPersistentCache.Find
+  isSpec: "True"
+  fullName: Mapsui.Cache.IUrlPersistentCache.Find
+  nameWithType: IUrlPersistentCache.Find
+- uid: Mapsui.Cache.IUrlPersistentCache.Remove(System.String)
+  name: Remove(String)
+  href: api/Mapsui.Cache.IUrlPersistentCache.html#Mapsui_Cache_IUrlPersistentCache_Remove_System_String_
+  commentId: M:Mapsui.Cache.IUrlPersistentCache.Remove(System.String)
+  fullName: Mapsui.Cache.IUrlPersistentCache.Remove(System.String)
+  nameWithType: IUrlPersistentCache.Remove(String)
+- uid: Mapsui.Cache.IUrlPersistentCache.Remove*
+  name: Remove
+  href: api/Mapsui.Cache.IUrlPersistentCache.html#Mapsui_Cache_IUrlPersistentCache_Remove_
+  commentId: Overload:Mapsui.Cache.IUrlPersistentCache.Remove
+  isSpec: "True"
+  fullName: Mapsui.Cache.IUrlPersistentCache.Remove
+  nameWithType: IUrlPersistentCache.Remove
 - uid: Mapsui.ChangeType
   name: ChangeType
   href: api/Mapsui.ChangeType.html
@@ -298,6 +352,25 @@ references:
   isSpec: "True"
   fullName: Mapsui.Extensions.AssemblyExtensions.GetFullName
   nameWithType: AssemblyExtensions.GetFullName
+- uid: Mapsui.Extensions.CacheExtensions
+  name: CacheExtensions
+  href: api/Mapsui.Extensions.CacheExtensions.html
+  commentId: T:Mapsui.Extensions.CacheExtensions
+  fullName: Mapsui.Extensions.CacheExtensions
+  nameWithType: CacheExtensions
+- uid: Mapsui.Extensions.CacheExtensions.UrlCachedStream(Mapsui.Cache.IUrlPersistentCache,System.String)
+  name: UrlCachedStream(IUrlPersistentCache, String)
+  href: api/Mapsui.Extensions.CacheExtensions.html#Mapsui_Extensions_CacheExtensions_UrlCachedStream_Mapsui_Cache_IUrlPersistentCache_System_String_
+  commentId: M:Mapsui.Extensions.CacheExtensions.UrlCachedStream(Mapsui.Cache.IUrlPersistentCache,System.String)
+  fullName: Mapsui.Extensions.CacheExtensions.UrlCachedStream(Mapsui.Cache.IUrlPersistentCache, System.String)
+  nameWithType: CacheExtensions.UrlCachedStream(IUrlPersistentCache, String)
+- uid: Mapsui.Extensions.CacheExtensions.UrlCachedStream*
+  name: UrlCachedStream
+  href: api/Mapsui.Extensions.CacheExtensions.html#Mapsui_Extensions_CacheExtensions_UrlCachedStream_
+  commentId: Overload:Mapsui.Extensions.CacheExtensions.UrlCachedStream
+  isSpec: "True"
+  fullName: Mapsui.Extensions.CacheExtensions.UrlCachedStream
+  nameWithType: CacheExtensions.UrlCachedStream
 - uid: Mapsui.Extensions.ConcurrentQueueExtensions
   name: ConcurrentQueueExtensions
   href: api/Mapsui.Extensions.ConcurrentQueueExtensions.html
@@ -5979,6 +6052,25 @@ references:
   isSpec: "True"
   fullName: Mapsui.Projections.IProjection.Project
   nameWithType: IProjection.Project
+- uid: Mapsui.Projections.IProjectionCrs
+  name: IProjectionCrs
+  href: api/Mapsui.Projections.IProjectionCrs.html
+  commentId: T:Mapsui.Projections.IProjectionCrs
+  fullName: Mapsui.Projections.IProjectionCrs
+  nameWithType: IProjectionCrs
+- uid: Mapsui.Projections.IProjectionCrs.CrsFromEsri(System.String)
+  name: CrsFromEsri(String)
+  href: api/Mapsui.Projections.IProjectionCrs.html#Mapsui_Projections_IProjectionCrs_CrsFromEsri_System_String_
+  commentId: M:Mapsui.Projections.IProjectionCrs.CrsFromEsri(System.String)
+  fullName: Mapsui.Projections.IProjectionCrs.CrsFromEsri(System.String)
+  nameWithType: IProjectionCrs.CrsFromEsri(String)
+- uid: Mapsui.Projections.IProjectionCrs.CrsFromEsri*
+  name: CrsFromEsri
+  href: api/Mapsui.Projections.IProjectionCrs.html#Mapsui_Projections_IProjectionCrs_CrsFromEsri_
+  commentId: Overload:Mapsui.Projections.IProjectionCrs.CrsFromEsri
+  isSpec: "True"
+  fullName: Mapsui.Projections.IProjectionCrs.CrsFromEsri
+  nameWithType: IProjectionCrs.CrsFromEsri
 - uid: Mapsui.Projections.Mercator
   name: Mercator
   href: api/Mapsui.Projections.Mercator.html
@@ -6155,96 +6247,6 @@ references:
   commentId: N:Mapsui.Providers
   fullName: Mapsui.Providers
   nameWithType: Mapsui.Providers
-- uid: Mapsui.Providers.GeoTiffProvider
-  name: GeoTiffProvider
-  href: api/Mapsui.Providers.GeoTiffProvider.html
-  commentId: T:Mapsui.Providers.GeoTiffProvider
-  fullName: Mapsui.Providers.GeoTiffProvider
-  nameWithType: GeoTiffProvider
-- uid: Mapsui.Providers.GeoTiffProvider.#ctor(System.String,System.Nullable{List{System.Drawing.Color}})
-  name: GeoTiffProvider(String, Nullable<List<Drawing.Color>>)
-  href: api/Mapsui.Providers.GeoTiffProvider.html#Mapsui_Providers_GeoTiffProvider__ctor_System_String_System_Nullable_List_System_Drawing_Color___
-  commentId: M:Mapsui.Providers.GeoTiffProvider.#ctor(System.String,System.Nullable{List{System.Drawing.Color}})
-  name.vb: GeoTiffProvider(String, Nullable(Of List(Of Drawing.Color)))
-  fullName: Mapsui.Providers.GeoTiffProvider.GeoTiffProvider(System.String, System.Nullable<List<System.Drawing.Color>>)
-  fullName.vb: Mapsui.Providers.GeoTiffProvider.GeoTiffProvider(System.String, System.Nullable(Of List(Of System.Drawing.Color)))
-  nameWithType: GeoTiffProvider.GeoTiffProvider(String, Nullable<List<Drawing.Color>>)
-  nameWithType.vb: GeoTiffProvider.GeoTiffProvider(String, Nullable(Of List(Of Drawing.Color)))
-- uid: Mapsui.Providers.GeoTiffProvider.#ctor*
-  name: GeoTiffProvider
-  href: api/Mapsui.Providers.GeoTiffProvider.html#Mapsui_Providers_GeoTiffProvider__ctor_
-  commentId: Overload:Mapsui.Providers.GeoTiffProvider.#ctor
-  isSpec: "True"
-  fullName: Mapsui.Providers.GeoTiffProvider.GeoTiffProvider
-  nameWithType: GeoTiffProvider.GeoTiffProvider
-- uid: Mapsui.Providers.GeoTiffProvider.CRS
-  name: CRS
-  href: api/Mapsui.Providers.GeoTiffProvider.html#Mapsui_Providers_GeoTiffProvider_CRS
-  commentId: P:Mapsui.Providers.GeoTiffProvider.CRS
-  fullName: Mapsui.Providers.GeoTiffProvider.CRS
-  nameWithType: GeoTiffProvider.CRS
-- uid: Mapsui.Providers.GeoTiffProvider.CRS*
-  name: CRS
-  href: api/Mapsui.Providers.GeoTiffProvider.html#Mapsui_Providers_GeoTiffProvider_CRS_
-  commentId: Overload:Mapsui.Providers.GeoTiffProvider.CRS
-  isSpec: "True"
-  fullName: Mapsui.Providers.GeoTiffProvider.CRS
-  nameWithType: GeoTiffProvider.CRS
-- uid: Mapsui.Providers.GeoTiffProvider.Dispose
-  name: Dispose()
-  href: api/Mapsui.Providers.GeoTiffProvider.html#Mapsui_Providers_GeoTiffProvider_Dispose
-  commentId: M:Mapsui.Providers.GeoTiffProvider.Dispose
-  fullName: Mapsui.Providers.GeoTiffProvider.Dispose()
-  nameWithType: GeoTiffProvider.Dispose()
-- uid: Mapsui.Providers.GeoTiffProvider.Dispose*
-  name: Dispose
-  href: api/Mapsui.Providers.GeoTiffProvider.html#Mapsui_Providers_GeoTiffProvider_Dispose_
-  commentId: Overload:Mapsui.Providers.GeoTiffProvider.Dispose
-  isSpec: "True"
-  fullName: Mapsui.Providers.GeoTiffProvider.Dispose
-  nameWithType: GeoTiffProvider.Dispose
-- uid: Mapsui.Providers.GeoTiffProvider.GetExtent
-  name: GetExtent()
-  href: api/Mapsui.Providers.GeoTiffProvider.html#Mapsui_Providers_GeoTiffProvider_GetExtent
-  commentId: M:Mapsui.Providers.GeoTiffProvider.GetExtent
-  fullName: Mapsui.Providers.GeoTiffProvider.GetExtent()
-  nameWithType: GeoTiffProvider.GetExtent()
-- uid: Mapsui.Providers.GeoTiffProvider.GetExtent*
-  name: GetExtent
-  href: api/Mapsui.Providers.GeoTiffProvider.html#Mapsui_Providers_GeoTiffProvider_GetExtent_
-  commentId: Overload:Mapsui.Providers.GeoTiffProvider.GetExtent
-  isSpec: "True"
-  fullName: Mapsui.Providers.GeoTiffProvider.GetExtent
-  nameWithType: GeoTiffProvider.GetExtent
-- uid: Mapsui.Providers.GeoTiffProvider.GetFeatures(Mapsui.Layers.FetchInfo)
-  name: GetFeatures(FetchInfo)
-  href: api/Mapsui.Providers.GeoTiffProvider.html#Mapsui_Providers_GeoTiffProvider_GetFeatures_Mapsui_Layers_FetchInfo_
-  commentId: M:Mapsui.Providers.GeoTiffProvider.GetFeatures(Mapsui.Layers.FetchInfo)
-  fullName: Mapsui.Providers.GeoTiffProvider.GetFeatures(Mapsui.Layers.FetchInfo)
-  nameWithType: GeoTiffProvider.GetFeatures(FetchInfo)
-- uid: Mapsui.Providers.GeoTiffProvider.GetFeatures*
-  name: GetFeatures
-  href: api/Mapsui.Providers.GeoTiffProvider.html#Mapsui_Providers_GeoTiffProvider_GetFeatures_
-  commentId: Overload:Mapsui.Providers.GeoTiffProvider.GetFeatures
-  isSpec: "True"
-  fullName: Mapsui.Providers.GeoTiffProvider.GetFeatures
-  nameWithType: GeoTiffProvider.GetFeatures
-- uid: Mapsui.Providers.GeoTiffProvider.IsCrsSupported(System.Nullable{System.String})
-  name: IsCrsSupported(Nullable<String>)
-  href: api/Mapsui.Providers.GeoTiffProvider.html#Mapsui_Providers_GeoTiffProvider_IsCrsSupported_System_Nullable_System_String__
-  commentId: M:Mapsui.Providers.GeoTiffProvider.IsCrsSupported(System.Nullable{System.String})
-  name.vb: IsCrsSupported(Nullable(Of String))
-  fullName: Mapsui.Providers.GeoTiffProvider.IsCrsSupported(System.Nullable<System.String>)
-  fullName.vb: Mapsui.Providers.GeoTiffProvider.IsCrsSupported(System.Nullable(Of System.String))
-  nameWithType: GeoTiffProvider.IsCrsSupported(Nullable<String>)
-  nameWithType.vb: GeoTiffProvider.IsCrsSupported(Nullable(Of String))
-- uid: Mapsui.Providers.GeoTiffProvider.IsCrsSupported*
-  name: IsCrsSupported
-  href: api/Mapsui.Providers.GeoTiffProvider.html#Mapsui_Providers_GeoTiffProvider_IsCrsSupported_
-  commentId: Overload:Mapsui.Providers.GeoTiffProvider.IsCrsSupported
-  isSpec: "True"
-  fullName: Mapsui.Providers.GeoTiffProvider.IsCrsSupported
-  nameWithType: GeoTiffProvider.IsCrsSupported
 - uid: Mapsui.Providers.IProjectingProvider
   name: IProjectingProvider
   href: api/Mapsui.Providers.IProjectingProvider.html
@@ -7249,24 +7251,24 @@ references:
   commentId: T:Mapsui.Providers.Wms.WmsProvider
   fullName: Mapsui.Providers.Wms.WmsProvider
   nameWithType: WmsProvider
-- uid: Mapsui.Providers.Wms.WmsProvider.#ctor(System.String,System.Nullable{System.String},System.Nullable{Func{System.String,Task{Stream}}})
-  name: WmsProvider(String, Nullable<String>, Nullable<Func<String, Task<Stream>>>)
-  href: api/Mapsui.Providers.Wms.WmsProvider.html#Mapsui_Providers_Wms_WmsProvider__ctor_System_String_System_Nullable_System_String__System_Nullable_Func_System_String_Task_Stream____
-  commentId: M:Mapsui.Providers.Wms.WmsProvider.#ctor(System.String,System.Nullable{System.String},System.Nullable{Func{System.String,Task{Stream}}})
-  name.vb: WmsProvider(String, Nullable(Of String), Nullable(Of Func(Of String, Task(Of Stream))))
-  fullName: Mapsui.Providers.Wms.WmsProvider.WmsProvider(System.String, System.Nullable<System.String>, System.Nullable<Func<System.String, Task<Stream>>>)
-  fullName.vb: Mapsui.Providers.Wms.WmsProvider.WmsProvider(System.String, System.Nullable(Of System.String), System.Nullable(Of Func(Of System.String, Task(Of Stream))))
-  nameWithType: WmsProvider.WmsProvider(String, Nullable<String>, Nullable<Func<String, Task<Stream>>>)
-  nameWithType.vb: WmsProvider.WmsProvider(String, Nullable(Of String), Nullable(Of Func(Of String, Task(Of Stream))))
-- uid: Mapsui.Providers.Wms.WmsProvider.#ctor(XmlDocument,System.Nullable{Func{System.String,Task{Stream}}})
-  name: WmsProvider(XmlDocument, Nullable<Func<String, Task<Stream>>>)
-  href: api/Mapsui.Providers.Wms.WmsProvider.html#Mapsui_Providers_Wms_WmsProvider__ctor_XmlDocument_System_Nullable_Func_System_String_Task_Stream____
-  commentId: M:Mapsui.Providers.Wms.WmsProvider.#ctor(XmlDocument,System.Nullable{Func{System.String,Task{Stream}}})
-  name.vb: WmsProvider(XmlDocument, Nullable(Of Func(Of String, Task(Of Stream))))
-  fullName: Mapsui.Providers.Wms.WmsProvider.WmsProvider(XmlDocument, System.Nullable<Func<System.String, Task<Stream>>>)
-  fullName.vb: Mapsui.Providers.Wms.WmsProvider.WmsProvider(XmlDocument, System.Nullable(Of Func(Of System.String, Task(Of Stream))))
-  nameWithType: WmsProvider.WmsProvider(XmlDocument, Nullable<Func<String, Task<Stream>>>)
-  nameWithType.vb: WmsProvider.WmsProvider(XmlDocument, Nullable(Of Func(Of String, Task(Of Stream))))
+- uid: Mapsui.Providers.Wms.WmsProvider.#ctor(System.String,System.Nullable{System.String},System.Nullable{Func{System.String,Task{Stream}}},Mapsui.Cache.IUrlPersistentCache)
+  name: WmsProvider(String, Nullable<String>, Nullable<Func<String, Task<Stream>>>, IUrlPersistentCache)
+  href: api/Mapsui.Providers.Wms.WmsProvider.html#Mapsui_Providers_Wms_WmsProvider__ctor_System_String_System_Nullable_System_String__System_Nullable_Func_System_String_Task_Stream____Mapsui_Cache_IUrlPersistentCache_
+  commentId: M:Mapsui.Providers.Wms.WmsProvider.#ctor(System.String,System.Nullable{System.String},System.Nullable{Func{System.String,Task{Stream}}},Mapsui.Cache.IUrlPersistentCache)
+  name.vb: WmsProvider(String, Nullable(Of String), Nullable(Of Func(Of String, Task(Of Stream))), IUrlPersistentCache)
+  fullName: Mapsui.Providers.Wms.WmsProvider.WmsProvider(System.String, System.Nullable<System.String>, System.Nullable<Func<System.String, Task<Stream>>>, Mapsui.Cache.IUrlPersistentCache)
+  fullName.vb: Mapsui.Providers.Wms.WmsProvider.WmsProvider(System.String, System.Nullable(Of System.String), System.Nullable(Of Func(Of System.String, Task(Of Stream))), Mapsui.Cache.IUrlPersistentCache)
+  nameWithType: WmsProvider.WmsProvider(String, Nullable<String>, Nullable<Func<String, Task<Stream>>>, IUrlPersistentCache)
+  nameWithType.vb: WmsProvider.WmsProvider(String, Nullable(Of String), Nullable(Of Func(Of String, Task(Of Stream))), IUrlPersistentCache)
+- uid: Mapsui.Providers.Wms.WmsProvider.#ctor(XmlDocument,System.Nullable{Func{System.String,Task{Stream}}},Mapsui.Cache.IUrlPersistentCache)
+  name: WmsProvider(XmlDocument, Nullable<Func<String, Task<Stream>>>, IUrlPersistentCache)
+  href: api/Mapsui.Providers.Wms.WmsProvider.html#Mapsui_Providers_Wms_WmsProvider__ctor_XmlDocument_System_Nullable_Func_System_String_Task_Stream____Mapsui_Cache_IUrlPersistentCache_
+  commentId: M:Mapsui.Providers.Wms.WmsProvider.#ctor(XmlDocument,System.Nullable{Func{System.String,Task{Stream}}},Mapsui.Cache.IUrlPersistentCache)
+  name.vb: WmsProvider(XmlDocument, Nullable(Of Func(Of String, Task(Of Stream))), IUrlPersistentCache)
+  fullName: Mapsui.Providers.Wms.WmsProvider.WmsProvider(XmlDocument, System.Nullable<Func<System.String, Task<Stream>>>, Mapsui.Cache.IUrlPersistentCache)
+  fullName.vb: Mapsui.Providers.Wms.WmsProvider.WmsProvider(XmlDocument, System.Nullable(Of Func(Of System.String, Task(Of Stream))), Mapsui.Cache.IUrlPersistentCache)
+  nameWithType: WmsProvider.WmsProvider(XmlDocument, Nullable<Func<String, Task<Stream>>>, IUrlPersistentCache)
+  nameWithType.vb: WmsProvider.WmsProvider(XmlDocument, Nullable(Of Func(Of String, Task(Of Stream))), IUrlPersistentCache)
 - uid: Mapsui.Providers.Wms.WmsProvider.#ctor*
   name: WmsProvider
   href: api/Mapsui.Providers.Wms.WmsProvider.html#Mapsui_Providers_Wms_WmsProvider__ctor_
