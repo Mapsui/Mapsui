@@ -7,25 +7,24 @@
 ## [Quickstart Avalonia](getting-started-avalonia.md)
 ## [Quickstart Eto](getting-started-eto.md)
 ## [Samples](samples.md)
-## [Tutorials](tutorials.md)
-## [How to work with Mapsui](how-to-work-with-mapsui.md)
+## [Logging](logging.md)
 ## [Roadmap](roadmap.md)
 ## [Frequently Asked Questions](faq.md)
+## [NuGet of Latest Build](nuget-of-latest-build.md)
+# Upgrade guides
 ## [v2.0 Upgrade Guide](v2.0-upgrade-guide.md)
 ## [v4.0 Upgrade Guide](v4.0-upgrade-guide.md)
 # How Things Work
 ## [Mapsui.Forms](mapsui-forms.md)
 ## [Mapsui Components](mapsui-components.md)
-## [Renderers](renderers.md)
 ## [Asynchronous Data Fetching](async-fetching.md)
 ## [Skia Scale](skia-scale.md)
 ## [Projections](projections.md)
 ## [Custom Style Renderers](custom-style-renders.md)
 ## [Performance Widget](performance-widget.md)
-# Developing Mapsui
+# Contributing to Mapsui
 ## [Contributors Guidelines](contributors-guidelines.md)
 ## [Development Constraints](development-constraints.md)
+## [Renderers](renderers.md)
 ## [Rendering Tests](rendering-tests.md)
 ## [Documentation](documentation.md)
-# Tips
-## [NuGet of Latest Build](nuget-of-latest-build.md)
