@@ -30,14 +30,14 @@
 				<dependency id="SkiaSharp.Views.Uno" version="[2.88.0-preview.232,3.0.0)" />
 			</group>
 			<group targetFramework="uap10.0.19041">
-				<dependency id="Mapsui" version="$version$"/>
-				<dependency id="SkiaSharp.Views" version="[2.88.0-preview.232,3.0.0)"/>
+				<dependency id="Mapsui" version="$version$" />
+				<dependency id="SkiaSharp.Views" version="[2.88.0-preview.232,3.0.0)" />
 				<dependency id="Uno.UI" version="[4.1.9, 5.0.0)" />
 				<dependency id="SkiaSharp.Views.Uno" version="[2.88.0-preview.232,3.0.0)" />
 			</group>
 			<group targetFramework="net6.0-android31">
-				<dependency id="Mapsui" version="$version$"/>
-				<dependency id="SkiaSharp.Views" version="[2.88.0-preview.232,3.0.0)"/>
+				<dependency id="Mapsui" version="$version$" />
+				<dependency id="SkiaSharp.Views" version="[2.88.0-preview.232,3.0.0)" />
 				<dependency id="Uno.UI" version="[4.1.9, 5.0.0)" />
 				<dependency id="SkiaSharp.Views.Uno" version="[2.88.0-preview.232,3.0.0)" />
 			</group>
