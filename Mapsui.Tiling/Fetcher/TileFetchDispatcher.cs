@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
 using ConcurrentCollections;
@@ -25,12 +26,12 @@ namespace Mapsui.Tiling.Fetcher
         private readonly ConcurrentHashSet<TileIndex> _tilesInProgress = new();
         private readonly ITileSchema? _tileSchema;
         private readonly FetchMachine _fetchMachine;
-        private readonly Func<TileInfo, IFeature?> _fetchTileAsFeature;
+        private readonly Func<TileInfo, Task<IFeature?>> _fetchTileAsFeature;
 
         public TileFetchDispatcher(
             ITileCache<IFeature?> tileCache,
             ITileSchema? tileSchema,
-            Func<TileInfo, IFeature?> fetchTileAsFeature,
+            Func<TileInfo, Task<IFeature?>> fetchTileAsFeature,
             IDataFetchStrategy? dataFetchStrategy = null)
         {
             _tileCache = tileCache;
@@ -54,7 +55,7 @@ namespace Mapsui.Tiling.Fetcher
             }
         }
 
-        public bool TryTake([NotNullWhen(true)] out Action? method)
+        public bool TryTake([NotNullWhen(true)] out Func<Task>? method)
         {
             lock (_lockRoot)
             {
@@ -64,7 +65,7 @@ namespace Mapsui.Tiling.Fetcher
                 if (success)
                 {
                     _tilesInProgress.Add(tileInfo.Index);
-                    method = () => FetchOnThread(tileInfo);
+                    method = async () => await FetchOnThread(tileInfo);
                     return true;
                 }
 
@@ -75,11 +76,11 @@ namespace Mapsui.Tiling.Fetcher
             }
         }
 
-        private void FetchOnThread(TileInfo tileInfo)
+        private async Task FetchOnThread(TileInfo tileInfo)
         {
             try
             {
-                var feature = _fetchTileAsFeature(tileInfo);
+                var feature = await _fetchTileAsFeature(tileInfo);
                 FetchCompleted(tileInfo, feature, null);
             }
             catch (Exception exception)

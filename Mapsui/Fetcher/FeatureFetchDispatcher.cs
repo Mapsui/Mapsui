@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
@@ -22,7 +23,7 @@ namespace Mapsui.Fetcher
             _cache = cache;
         }
 
-        public bool TryTake([NotNullWhen(true)] out Action? method)
+        public bool TryTake([NotNullWhen(true)] out Func<Task>? method)
         {
             method = null;
             if (!_modified) return false;
@@ -33,7 +34,7 @@ namespace Mapsui.Fetcher
             return true;
         }
 
-        public void FetchOnThread(FetchInfo fetchInfo)
+        public Task FetchOnThread(FetchInfo fetchInfo)
         {
             try
             {
@@ -44,6 +45,8 @@ namespace Mapsui.Fetcher
             {
                 FetchCompleted(null, exception);
             }
+
+            return Task.CompletedTask;
         }
 
         private void FetchCompleted(IEnumerable<T>? features, Exception? exception)
