@@ -8,9 +8,11 @@
 ## [Quickstart Eto](getting-started-eto.md)
 ## [Samples](samples.md)
 ## [Tutorials](tutorials.md)
-## [How to work with Mapsui](how-to-work-with-mapsui.md)
+## [Logging](logging.md)
 ## [Roadmap](roadmap.md)
 ## [Frequently Asked Questions](faq.md)
+## [NuGet of Latest Build](nuget-of-latest-build.md)
+# Upgrade guides
 ## [v2.0 Upgrade Guide](v2.0-upgrade-guide.md)
 ## [v4.0 Upgrade Guide](v4.0-upgrade-guide.md)
 # How Things Work
@@ -27,5 +29,3 @@
 ## [Development Constraints](development-constraints.md)
 ## [Rendering Tests](rendering-tests.md)
 ## [Documentation](documentation.md)
-# Tips
-## [NuGet of Latest Build](nuget-of-latest-build.md)
