@@ -96,6 +96,8 @@ namespace Mapsui.Rendering.Skia
                         return Svg?.Picture?.CullRect.Width ?? 0;
                     case BitmapType.Sprite:
                         return Sprite?.Width ?? 0;
+                    case BitmapType.Picture:
+                        return Picture?.CullRect.Width ?? 0;
                     default:
                         return 0;
                 }
@@ -114,6 +116,8 @@ namespace Mapsui.Rendering.Skia
                         return Svg?.Picture?.CullRect.Height ?? 0;
                     case BitmapType.Sprite:
                         return Sprite?.Height ?? 0;
+                    case BitmapType.Picture:
+                        return Picture?.CullRect.Height ?? 0;
                     default:
                         return 0;
                 }
