@@ -52,7 +52,7 @@ namespace Mapsui.Tiling.Provider
                 var waitHandle = new AutoResetEvent(false);
                 waitHandles.Add(waitHandle);
                 _queue.Add(info.Index);
-                Task.Run(() => GetTileOnThread(new object[] { _source, info, _bitmaps, waitHandle }));
+                Task.Run(async () => await GetTileOnThread(new object[] { _source, info, _bitmaps, waitHandle }));
             }
 
             WaitHandle.WaitAll(waitHandles.ToArray());
@@ -68,7 +68,7 @@ namespace Mapsui.Tiling.Provider
             return features;
         }
 
-        private void GetTileOnThread(object parameter) // This could accept normal parameters now we use PCL Profile111
+        private async Task GetTileOnThread(object parameter) // This could accept normal parameters now we use PCL Profile111
         {
             var parameters = (object[])parameter;
             if (parameters.Length != 4) throw new ArgumentException("Four parameters expected");
@@ -79,7 +79,7 @@ namespace Mapsui.Tiling.Provider
 
             try
             {
-                bitmap.Add(tileInfo.Index, tileProvider.GetTileAsync(tileInfo).Result);
+                bitmap.Add(tileInfo.Index, await tileProvider.GetTileAsync(tileInfo));
             }
             catch (Exception ex)
             {

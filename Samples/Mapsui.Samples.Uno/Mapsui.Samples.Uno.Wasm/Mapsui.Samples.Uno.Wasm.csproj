@@ -6,17 +6,18 @@
     <NoWarn>NU1701</NoWarn>
     <WasmShellILLinkerEnabled>true</WasmShellILLinkerEnabled>
     <WasmShellForceDisableWSL Condition="'$(OS)' != 'Unix' and ('$(CI)' == 'true' or '$(BUILD_BUILDID)' != '')">true</WasmShellForceDisableWSL>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <MonoRuntimeDebuggerEnabled>true</MonoRuntimeDebuggerEnabled>
     <DefineConstants>$(DefineConstants);TRACE;DEBUG</DefineConstants>
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
     <!--
 		IL Linking is disabled in Debug configuration.
 		When building in Release, see https://platform.uno/docs/articles/features/using-il-linker-webassembly.html
 		-->
-    <WasmShellILLinkerEnabled>false</WasmShellILLinkerEnabled>
-    <MonoRuntimeDebuggerEnabled>true</MonoRuntimeDebuggerEnabled>
-    <DebugType>portable</DebugType>
-    <DebugSymbols>true</DebugSymbols>
+    <WasmShellILLinkerEnabled>false</WasmShellILLinkerEnabled>    
     <WasmShellMonoRuntimeExecutionMode>Interpreter</WasmShellMonoRuntimeExecutionMode>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
@@ -49,16 +50,10 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Windows.Compatibility" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
-    <!--Don't upgrade to a later Version of Console it is not Compatibly with Wasm only 1.1.1 is-->
-    <!--https://stackoverflow.com/questions/65672437/uno-iloggerfactory-does-not-contain-definition-addconsole-->
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Filter" Version="1.1.1" />
-    <PackageReference Include="Uno.Core.Extensions.Logging.Singleton" Version="4.0.0-dev.7" />
-    <PackageReference Include="Uno.Core.Extensions.Logging" Version="4.0.1" />
-    <PackageReference Include="Uno.Extensions.Logging.WebAssembly.Console" Version="1.1.0" />
-    <PackageReference Include="Uno.UI.WebAssembly" Version="4.2.0-dev.145" />
-    <PackageReference Include="Uno.UI.RemoteControl" Version="4.2.0-dev.145" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.2.0-dev.145" />
+    <PackageReference Include="Uno.Extensions.Logging.WebAssembly.Console" Version="1.0.1" />
+    <PackageReference Include="Uno.UI.WebAssembly" Version="4.1.9" />
+    <PackageReference Include="Uno.UI.RemoteControl" Version="4.1.9" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.1.9" />
     <PackageReference Include="Uno.Wasm.Bootstrap" Version="3.2.0" />
     <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="3.2.0" />
     <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.0-preview.232" />

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
 using BruTile.Predefined;
@@ -26,7 +27,7 @@ namespace Mapsui.Tests.Fetcher
             var tileSchema = new GlobalSphericalMercator();
             var tileSource = new TileSource(tileProvider, tileSchema);
             using var cache = new MemoryCache<IFeature?>();
-            var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, tileInfo => TileToFeature(tileSource, tileInfo));
+            var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async tileInfo => await TileToFeature(tileSource, tileInfo));
             var tileMachine = new FetchMachine(fetchDispatcher);
             var level = 3;
             var expectedTiles = 64;
@@ -53,7 +54,7 @@ namespace Mapsui.Tests.Fetcher
             var tileSchema = new GlobalSphericalMercator();
             var tileSource = new TileSource(tileProvider, tileSchema);
             using var cache = new MemoryCache<IFeature?>();
-            var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, tileInfo => TileToFeature(tileSource, tileInfo));
+            var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async tileInfo => await TileToFeature(tileSource, tileInfo));
             var tileMachine = new FetchMachine(fetchDispatcher);
             var level = 3;
             var expectedTiles = 64;
@@ -85,7 +86,7 @@ namespace Mapsui.Tests.Fetcher
             var tileSchema = new GlobalSphericalMercator();
             var tileSource = new TileSource(tileProvider, tileSchema);
             using var cache = new MemoryCache<IFeature?>();
-            var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, tileInfo => TileToFeature(tileSource, tileInfo));
+            var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async tileInfo => await TileToFeature(tileSource, tileInfo));
             var tileMachine = new FetchMachine(fetchDispatcher);
             var level = 3;
             var tilesInLevel = 64;
@@ -111,7 +112,7 @@ namespace Mapsui.Tests.Fetcher
             var tileSchema = new GlobalSphericalMercator();
             var tileSource = new TileSource(tileProvider, tileSchema);
             using var cache = new MemoryCache<IFeature?>();
-            var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, tileInfo => TileToFeature(tileSource, tileInfo));
+            var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async tileInfo => await TileToFeature(tileSource, tileInfo));
             var tileMachine = new FetchMachine(fetchDispatcher);
             var level = 3;
             var tilesInLevel = 64;
@@ -139,7 +140,7 @@ namespace Mapsui.Tests.Fetcher
             var tileSchema = new GlobalSphericalMercator();
             var tileSource = new TileSource(tileProvider, tileSchema);
             using var cache = new MemoryCache<IFeature?>();
-            var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, tileInfo => TileToFeature(tileSource, tileInfo));
+            var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async tileInfo => await TileToFeature(tileSource, tileInfo));
             var tileMachine = new FetchMachine(fetchDispatcher);
             var level = 3;
             var tilesInLevel = 64;
@@ -171,7 +172,7 @@ namespace Mapsui.Tests.Fetcher
             var tileSchema = new GlobalSphericalMercator();
             var tileSource = new TileSource(tileProvider, tileSchema);
             using var cache = new MemoryCache<IFeature?>();
-            var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, tileInfo => TileToFeature(tileSource, tileInfo));
+            var fetchDispatcher = new TileFetchDispatcher(cache, tileSource.Schema, async tileInfo => await TileToFeature(tileSource, tileInfo));
             var tileMachine = new FetchMachine(fetchDispatcher);
             var numberOfWorkers = 8;
             var numberOfRestarts = 3;
@@ -189,9 +190,9 @@ namespace Mapsui.Tests.Fetcher
             Assert.Greater(numberOfWorkers * numberOfRestarts, FetchWorker.RestartCounter);
         }
 
-        private RasterFeature TileToFeature(ITileSource tileProvider, TileInfo tileInfo)
+        private async Task<RasterFeature> TileToFeature(ITileSource tileProvider, TileInfo tileInfo)
         {
-            var tile = tileProvider.GetTileAsync(tileInfo).Result;
+            var tile = await tileProvider.GetTileAsync(tileInfo);
             // A tile layer can return a null value. This indicates the tile is not
             // present in the source, permanently. If this is the case no further 
             // requests should be done. To avoid further fetches a feature should

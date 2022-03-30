@@ -24,12 +24,12 @@ namespace Mapsui.Samples.Uno.Wasm
 
         static void ConfigureFilters(ILoggerFactory factory)
 		{
-            factory.WithFilter(new FilterLoggerSettings
-				{
-					{ "Uno", LogLevel.Warning },
-					{ "Windows", LogLevel.Warning },
-					{ "nVentive.Umbrella", LogLevel.Warning },
-					{ "SkiaSharp", LogLevel.Warning },
+    //        factory.WithFilter(new FilterLoggerSettings
+				//{
+				//	{ "Uno", LogLevel.Warning },
+				//	{ "Windows", LogLevel.Warning },
+				//	{ "nVentive.Umbrella", LogLevel.Warning },
+				//	{ "SkiaSharp", LogLevel.Warning },
 
 					// View Navigation related messages
 					// { "nVentive.Umbrella.Views.Navigation", LogLevel.Debug },
@@ -72,8 +72,8 @@ namespace Mapsui.Samples.Uno.Wasm
 
 					// ApplicationViewState
 					// { "nVentive.Umbrella.Views.Services.ApplicationViewState.ApplicationViewStateService", LogLevel.Debug },
-				})
-                .AddConsole(LogLevel.Debug);
+				//})
+    //            .AddConsole(LogLevel.Debug);
 		}
 	}
 }

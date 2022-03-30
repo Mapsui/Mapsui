@@ -6,7 +6,9 @@
 	-->
 
   <PropertyGroup>
-    <TargetFrameworks>uap10.0.19041;netstandard2.0;net6.0</TargetFrameworks>
+    <!--Reenable for Maui RC 1-->
+    <!--<TargetFrameworks>uap10.0.19041;netstandard2.0;net6.0;net6.0-android31;net6.0-ios;net6.0-maccatalyst;net6.0-macos</TargetFrameworks>-->
+    <TargetFrameworks>uap10.0.19041;netstandard2.0;net6.0;net6.0-android31</TargetFrameworks>
     <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
     <RootNamespace>Mapsui.UI.Uwp</RootNamespace>
@@ -14,8 +16,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Uno.UI" Version="4.2.0-dev.145" />
+    <PackageReference Include="Uno.UI" Version="4.1.9" />
     <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.0-preview.232" />    
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'=='uap10.0.19041'">
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.13" />
   </ItemGroup>
 
   <ItemGroup>

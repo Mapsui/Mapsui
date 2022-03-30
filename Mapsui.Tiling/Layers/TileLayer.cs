@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
 using Mapsui.Fetcher;
@@ -48,7 +49,7 @@ namespace Mapsui.Tiling.Layers
         // ReSharper disable once UnusedParameter.Local // Is public and won't break this now
         public TileLayer(ITileSource tileSource, int minTiles = 200, int maxTiles = 300,
             IDataFetchStrategy? dataFetchStrategy = null, IRenderFetchStrategy? renderFetchStrategy = null,
-            int minExtraTiles = -1, int maxExtraTiles = -1, Func<TileInfo, IFeature?>? fetchTileAsFeature = null)
+            int minExtraTiles = -1, int maxExtraTiles = -1, Func<TileInfo, Task<IFeature?>>? fetchTileAsFeature = null)
         {
             _tileSource = tileSource ?? throw new ArgumentException($"{tileSource} can not null");
             MemoryCache = new MemoryCache<IFeature?>(minTiles, maxTiles);
@@ -142,9 +143,9 @@ namespace Mapsui.Tiling.Layers
             OnDataChanged(e);
         }
 
-        private RasterFeature? ToFeature(TileInfo tileInfo)
+        private async Task<IFeature?> ToFeature(TileInfo tileInfo)
         {
-            var tileData = _tileSource.GetTileAsync(tileInfo).Result;
+            var tileData = await _tileSource.GetTileAsync(tileInfo);
             var mRaster = ToRaster(tileInfo, tileData);
             if (mRaster != null)
                 return new RasterFeature(mRaster);
