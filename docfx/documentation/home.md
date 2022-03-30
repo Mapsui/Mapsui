@@ -1,20 +1,25 @@
 # Introduction
 Mapsui is a .NET component to show a map in your app.
 
-## Supported platforms
+## Supported platforms in v3
+- Xamarin.Forms
 - WPF
 - UWP
 - Xamarin.Android
 - Xamarin.iOS
-- Xamarin.Forms
+
+### Upcoming in v4
+- Avalonia
+- Eto.Forms
+- MAUI
+- Uno platform
+- Win UI
 
 ## Supported data
-Mapsui uses the BruTile library to display tile layers such as:
-- OpenStreetMap tiles
-- Open standards for tiles
+- Points, Lines and Polygons.
+- Mapsui uses the BruTile library to display tile layers such as:
+  - OpenStreetMap tiles
   - WMTS
   - TMS
-  - WMS called tilewise
-- Custom data providers
-- MBTiles. An offline format to store tile data in sqlite file.
-- Mapsui renders and can style vector data (polygons, lines, points)
+  - WMS
+  - MBTiles. An offline format to store tile data in sqlite file.
