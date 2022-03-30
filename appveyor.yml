@@ -24,8 +24,6 @@ install:
 - ps: ./dotnet-install.ps1 -Version 6.0.201 -InstallDir "dotnetcli"
 - cmd: dotnet workload install maui macos android ios maccatalyst
 - cmd: '"C:/Program Files (x86)/Android/android-sdk/tools/bin/sdkmanager.bat" "platforms;android-31"'
-#- cmd: dotnet tool install -g Redth.Net.Maui.Check
-#- cmd: maui-check --fix --non-interactive --skip vswin --skip edgewebview2 --skip androidemulator --skip dotnetworkloads-6.0.100 --skip dotnet --skip dotnet-workload-dedup --skip dotnetsentinel
 before_build:
 - cmd: nuget restore mapsui.sln -Verbosity quiet
 build:
