@@ -6,6 +6,10 @@
 		<!--Revert TreatWarningsAsErrors to false because of vague build error on server -->
 		<TreatWarningsAsErrors>false</TreatWarningsAsErrors>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Resources\Images\Pin.svg" />
+	</ItemGroup>
   
 	<ItemGroup>
     <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
