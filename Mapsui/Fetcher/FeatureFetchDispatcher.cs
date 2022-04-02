@@ -34,19 +34,26 @@ namespace Mapsui.Fetcher
             return true;
         }
 
-        public Task FetchOnThread(FetchInfo fetchInfo)
+        public async Task FetchOnThread(FetchInfo fetchInfo)
         {
             try
             {
-                var features = DataSource?.GetFeatures(fetchInfo).ToList();
+                List<T> features;
+                if (DataSource is IAsyncProvider<T> asyncProvider)
+                {
+                    features = await asyncProvider.GetFeaturesAsync(fetchInfo).ToListAsync();
+                }
+                else
+                {
+                    features = DataSource?.GetFeatures(fetchInfo).ToList();   
+                }
+                 
                 FetchCompleted(features, null);
             }
             catch (Exception exception)
             {
                 FetchCompleted(null, exception);
             }
-
-            return Task.CompletedTask;
         }
 
         private void FetchCompleted(IEnumerable<T>? features, Exception? exception)
