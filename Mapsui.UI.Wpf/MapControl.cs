@@ -266,7 +266,12 @@ namespace Mapsui.UI.Wpf
 
         public void OpenBrowser(string url)
         {
-            Process.Start(url);
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = url,
+                // The default for this has changed in .net core, you have to explicitly set if to true for it to work.
+                UseShellExecute = true
+            });
         }
 
         private void HandleFeatureInfo(MouseButtonEventArgs e)

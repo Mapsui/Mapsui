@@ -8,6 +8,8 @@ namespace Mapsui.UI.Eto
     using global::Eto.SkiaDraw;
     using global::Eto.Drawing;
     using global::Eto.Forms;
+    using System.Diagnostics;
+
     public partial class MapControl : SkiaDrawable, IMapControl
     {
         private RectangleF _selectRectangle = new();
@@ -132,7 +134,12 @@ namespace Mapsui.UI.Eto
         }
         public void OpenBrowser(string url)
         {
-            System.Diagnostics.Process.Start(url);
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = url,
+                // The default for this has changed in .net core, you have to explicitly set if to true for it to work.
+                UseShellExecute = true
+            });
         }
         protected override void OnMouseMove(MouseEventArgs e)
         {
