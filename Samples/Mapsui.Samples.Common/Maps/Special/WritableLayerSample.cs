@@ -1,12 +1,11 @@
 ﻿using Mapsui.Layers;
 using Mapsui.Nts;
 using Mapsui.Samples.Common;
+using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.UI;
+using Mapsui.Utilities;
 using NetTopologySuite.Geometries;
-
-#pragma warning disable IDISP004 // Don't ignore created IDisposable
-#pragma warning disable IDISP004 // Don't ignore created IDisposable
 
 namespace Mapsui.Tests.Common.Maps
 {
@@ -15,25 +14,9 @@ namespace Mapsui.Tests.Common.Maps
         public string Name => "WritableLayer";
         public string Category => "Special";
 
-        private WritableLayer? _writableLayer;
-
         public void Setup(IMapControl mapControl)
         {
             mapControl.Map = CreateMap();
-            _writableLayer = (WritableLayer)mapControl.Map.Layers[1];
-            mapControl.Info += MapControlOnInfo;
-        }
-
-        private void MapControlOnInfo(object sender, MapInfoEventArgs e)
-        {
-            if (e.MapInfo?.WorldPosition == null)
-                return;
-
-            _writableLayer?.Add(new GeometryFeature
-            {
-                Geometry = new Point(e.MapInfo.WorldPosition.X, e.MapInfo.WorldPosition.Y)
-            });
-            _writableLayer?.DataHasChanged();
         }
 
         private Map CreateMap()
@@ -41,10 +24,24 @@ namespace Mapsui.Tests.Common.Maps
             var map = new Map();
 
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            var writableLayer = new WritableLayer();
 
-            writableLayer.Add(new GeometryFeature());
+            var writableLayer = new WritableLayer();
+            var pinId = typeof(Map).LoadSvgId("Resources.Images.Pin.svg");
+            writableLayer.Style = new SymbolStyle { BitmapId = pinId, SymbolOffset = new Offset(0.0, 0.5, true) };
+
             map.Layers.Add(writableLayer);
+
+            map.Info += (s, e) =>
+            {
+                if (e.MapInfo?.WorldPosition == null) return;
+                writableLayer?.Add(new GeometryFeature
+                {
+                    Geometry = new Point(e.MapInfo.WorldPosition.X, e.MapInfo.WorldPosition.Y)
+                });
+                // To notify the map that a redraw is needed.
+                writableLayer?.DataHasChanged();
+                return;
+            };
 
             return map;
         }

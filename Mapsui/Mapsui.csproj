@@ -6,6 +6,10 @@
 		<!--Revert TreatWarningsAsErrors to false because of vague build error on server -->
 		<TreatWarningsAsErrors>false</TreatWarningsAsErrors>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Resources\Images\Pin.svg" />
+	</ItemGroup>
   
 	<ItemGroup>
     <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="6.0.0" />
