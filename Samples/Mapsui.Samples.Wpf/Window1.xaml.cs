@@ -53,7 +53,7 @@ namespace Mapsui.Samples.Wpf
             foreach (var sample in AllSamples.GetSamples().Where(s => s.Category == selectedCategory))
                 SampleList.Children.Add(CreateRadioButton(sample));
 
-            var firstRadioButton = (RadioButton)SampleList.Children[0];
+            var firstRadioButton = (RadioButton)SampleList.Children[2];
             firstRadioButton.IsChecked = true;
             firstRadioButton.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
         }
@@ -75,7 +75,7 @@ namespace Mapsui.Samples.Wpf
                 CategoryComboBox.Items.Add(category);
             }
 
-            CategoryComboBox.SelectedIndex = 0;
+            CategoryComboBox.SelectedIndex = 8;
         }
 
         private UIElement CreateRadioButton(ISample sample)

@@ -70,6 +70,16 @@ namespace Mapsui.Layers
                 if (_dataSource != null)
                 {
                     _fetchDispatcher.DataSource = _dataSource;
+                    
+                    if (_dataSource is IDynamic dynamic)
+                        dynamic.DataChanged += (s, e) => {
+                            // Todo: Make this work.
+                            // The Problem: DataHasChanged signals the Map that the data has
+                            // changed within the layer and triggers a RefreshGraphics. But that
+                            // is not what is needed here. The data has changed in the provider
+                            // and a RefreshData call is needed.
+                            //!!!DataHasChanged();
+                        };
                 }
 
                 OnPropertyChanged(nameof(DataSource));

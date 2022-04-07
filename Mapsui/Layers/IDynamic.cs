@@ -12,7 +12,7 @@ public interface IDynamic
     /// Event called when the data within the layer has changed allowing
     /// listeners to react to this.
     /// </summary>
-    event DataChangedEventHandler DataChanged;
+    event DataChangedEventHandler? DataChanged;
 
     /// <summary>
     /// To indicate the data withing the class has changed. This triggers a DataChanged event.

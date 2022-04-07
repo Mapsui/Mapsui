@@ -10,7 +10,7 @@ namespace Mapsui.Providers
         /// <summary>
         /// Gets or sets the geometries this data source contains
         /// </summary>
-        public IReadOnlyList<T> Features { get; private set; }
+        public IReadOnlyList<T> Features { get; protected set; }
 
         public double SymbolSize { get; set; } = 64;
 

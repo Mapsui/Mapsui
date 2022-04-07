@@ -192,6 +192,7 @@ namespace Mapsui.UI.Wpf
         {
             var mousePosition = e.GetPosition(this).ToMapsui();
 
+
             if (_previousMousePosition != null)
             {
                 if (IsInBoxZoomMode())
@@ -204,6 +205,10 @@ namespace Mapsui.UI.Wpf
                 {
                     HandleFeatureInfo(e);
                     OnInfo(InvokeInfo(mousePosition, _downMousePosition, e.ClickCount));
+                    _mouseDown = false;
+                    _previousMousePosition = new MPoint();
+                    ReleaseMouseCapture();
+                    return;
                 }
             }
 
