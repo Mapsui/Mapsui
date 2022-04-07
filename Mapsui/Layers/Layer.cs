@@ -78,7 +78,7 @@ namespace Mapsui.Layers
                             // changed within the layer and triggers a RefreshGraphics. But that
                             // is not what is needed here. The data has changed in the provider
                             // and a RefreshData call is needed.
-                            //!!!DataHasChanged();
+                            DataHasChanged();
                         };
                 }
 
