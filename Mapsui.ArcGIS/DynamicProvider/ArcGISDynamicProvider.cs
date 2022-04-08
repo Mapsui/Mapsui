@@ -19,7 +19,6 @@ namespace Mapsui.ArcGIS.DynamicProvider
     {
         private int _timeOut;
         private string _url = default!;
-        private string? _crs;
 
         public string? Token { get; set; }
 
@@ -82,12 +81,6 @@ namespace Mapsui.ArcGIS.DynamicProvider
         {
             get => _timeOut;
             set => _timeOut = value;
-        }
-
-        public string? CRS
-        {
-            get => _crs;
-            set => _crs = value;
         }
 
         public override async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)

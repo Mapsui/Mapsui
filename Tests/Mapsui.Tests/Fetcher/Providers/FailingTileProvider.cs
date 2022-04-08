@@ -6,7 +6,7 @@ namespace Mapsui.Tests.Fetcher.Providers
 {
     internal class FailingTileProvider : CountingTileProvider
     {
-        public override async Task<byte[]> GetTileAsync(TileInfo tileInfo)
+        public override async Task<byte[]?>? GetTileAsync(TileInfo tileInfo)
         {
             await base.GetTileAsync(tileInfo); // Just for counting
             throw new Exception("this provider always fails");

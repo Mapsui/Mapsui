@@ -96,14 +96,14 @@ namespace Mapsui.ArcGIS.ImageServiceProvider
         public override async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
         {
             var viewport = fetchInfo.ToViewport();
-            var (success, raster) = await TryGetMap(viewport);
+            var (success, raster) = await TryGetMapAsync(viewport);
             if (success)
             {
                 yield return new RasterFeature(raster);
             }
         }
 
-        public async Task<(bool Success, MRaster? Raster)> TryGetMap(IViewport viewport)
+        public async Task<(bool Success, MRaster? Raster)> TryGetMapAsync(IViewport viewport)
         {
             int width;
             int height;

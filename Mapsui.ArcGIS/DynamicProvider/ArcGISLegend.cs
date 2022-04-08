@@ -42,7 +42,7 @@ namespace Mapsui.ArcGIS.DynamicProvider
         /// </summary>
         /// <param name="serviceUrl">Url to the mapserver</param>
         /// <param name="credentials">Credentials</param>
-        public void GetLegendInfoAsync(string serviceUrl, ICredentials? credentials = null)
+        public void GetLegendInfoRequest(string serviceUrl, ICredentials? credentials = null)
         {
             _webRequest = CreateRequest(serviceUrl, credentials);
             _webRequest.BeginGetResponse(FinishWebRequest, null);

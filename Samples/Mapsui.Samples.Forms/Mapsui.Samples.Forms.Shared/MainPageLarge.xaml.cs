@@ -70,7 +70,7 @@ namespace Mapsui.Samples.Forms
             e.Handled = clicker != null && (clicker?.Invoke(sender as MapView, e) ?? false);
         }
 
-        async void OnSelection(object sender, SelectedItemChangedEventArgs e)
+        void OnSelection(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem == null)
             {
@@ -83,14 +83,10 @@ namespace Mapsui.Samples.Forms
             if (sample != null)
             {
                 mapView.Reset();
-                try
+                Catch.Exceptions(async () =>
                 {
                     await sample.SetupAsync(mapView);
-                }
-                catch (Exception exception)
-                {
-                    Logger.Log(LogLevel.Error, exception.Message, exception);   
-                }
+                });            
             }
 
             clicker = null;

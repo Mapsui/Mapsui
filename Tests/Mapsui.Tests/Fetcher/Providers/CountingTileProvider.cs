@@ -12,7 +12,7 @@ namespace Mapsui.Tests.Fetcher.Providers
         public ConcurrentDictionary<TileIndex, long> CountByTile { get; } = new ConcurrentDictionary<TileIndex, long>();
         public long TotalCount;
 
-        public virtual async Task<byte[]> GetTileAsync(TileInfo tileInfo)
+        public virtual async Task<byte[]?>? GetTileAsync(TileInfo tileInfo)
         {
             Thread.Sleep((int)(_random.NextDouble() * 10));
 

@@ -15,7 +15,7 @@ namespace Mapsui.Rendering.Skia
 
         public Size? GetSize(int bitmapId)
         {
-            var bitmap = (BitmapInfo)GetOrCreate(bitmapId);
+            var bitmap = (BitmapInfo?)GetOrCreate(bitmapId);
             if (bitmap == null)
                 return null;
 

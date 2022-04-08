@@ -48,7 +48,7 @@ namespace Mapsui.Samples.Forms
 
             mapView.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
 
-            Task.Run(() => StartGPS());
+            Task.Run(() => StartGPSAsync());
 
             try
             {
@@ -122,7 +122,7 @@ namespace Mapsui.Samples.Forms
             e.Handled = true;
         }
 
-        public async Task StartGPS()
+        public async Task StartGPSAsync()
         {
             if (CrossGeolocator.Current.IsListening)
                 return;
@@ -146,7 +146,7 @@ namespace Mapsui.Samples.Forms
             CrossGeolocator.Current.PositionError += MyLocationPositionError;
         }
 
-        public async Task StopGPS()
+        public async Task StopGPSAsync()
         {
             // Stop GPS
             if (CrossGeolocator.Current.IsListening)

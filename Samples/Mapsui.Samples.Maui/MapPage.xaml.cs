@@ -53,7 +53,7 @@ namespace Mapsui.Samples.Maui
             mapView.Info += MapView_Info;
             mapView.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
 
-            Task.Run(StartGPS);
+            _ = Task.Run(StartGPS);
 
             try
             {

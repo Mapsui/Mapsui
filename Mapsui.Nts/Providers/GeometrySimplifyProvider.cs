@@ -34,7 +34,11 @@ public class GeometrySimplifyProvider : IProvider<IFeature>
             if (feature is GeometryFeature geometryFeature)
             {
                 var copied = new GeometryFeature(geometryFeature);
-                copied.Geometry = _simplify(geometryFeature.Geometry, _distanceTolerance ?? fetchInfo.Resolution);
+                if (geometryFeature.Geometry != null)
+                {
+                    copied.Geometry = _simplify(geometryFeature.Geometry, _distanceTolerance ?? fetchInfo.Resolution);
+                }
+                
                 result.Add(copied);
             }
             else

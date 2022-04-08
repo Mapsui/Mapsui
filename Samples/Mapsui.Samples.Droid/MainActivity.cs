@@ -29,7 +29,7 @@ namespace Mapsui.Samples.Droid
         private MapControl? _mapControl;
         private TextView? _textView;
 
-        protected override async void OnCreate(Android.OS.Bundle? savedInstanceState)
+        protected override void OnCreate(Android.OS.Bundle? savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
