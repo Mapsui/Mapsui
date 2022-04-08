@@ -34,7 +34,7 @@ namespace Mapsui.Providers.Wms
     /// and the WmsLayer will set the remaining BoundingBox property and proper requests that changes between the requests.
     /// See the example below.
     /// </remarks>
-    public class WmsProvider : IProjectingProvider
+    public class WmsProvider : AsyncProviderBase<IFeature>, IProjectingProvider
     {
         private string _mimeType;
         private readonly Client? _wmsClient;
@@ -285,7 +285,7 @@ namespace Mapsui.Providers.Wms
             _mimeType = mimeType;
         }
 
-        public bool TryGetMap(IViewport viewport, [NotNullWhen(true)] out MRaster? raster)
+        public async Task<(bool Success, MRaster?)> TryGetMapAsync(IViewport viewport)
         {
 
             int width;
@@ -299,8 +299,7 @@ namespace Mapsui.Providers.Wms
             catch (OverflowException)
             {
                 Trace.Write("Could not convert double to int (ExportMap size)");
-                raster = null;
-                return false;
+                return (false, null);
             }
 
             var url = GetRequestUrl(viewport.Extent, width, height);
@@ -312,12 +311,10 @@ namespace Mapsui.Providers.Wms
                 {
                     if (_getStreamAsync == null)
                     {
-                        raster = null;
-                        return false;
+                        return (false, null);
                     }
 
-                    using var task = _getStreamAsync(url);
-                    using var result = task.Result;
+                    using var result = await _getStreamAsync(url);
                     // PDD: This could be more efficient
                     bytes = StreamHelper.ReadFully(result);
                     _persistentCache?.Add(url, bytes);
@@ -325,11 +322,10 @@ namespace Mapsui.Providers.Wms
 
                 if (viewport.Extent == null)
                 {
-                    raster = null;
-                    return false;
+                    return (false, null);
                 }
-                raster = new MRaster(bytes, viewport.Extent);	// This can throw exception
-                return true;
+                var raster = new MRaster(bytes, viewport.Extent);	// This can throw exception
+                return (true, raster);
             }
             catch (WebException webEx)
             {
@@ -345,9 +341,8 @@ namespace Mapsui.Providers.Wms
                     throw new RenderException("There was a problem while attempting to request the WMS", ex);
                 Trace.Write("There was a problem while attempting to request the WMS" + ex.Message);
             }
-
-            raster = null;
-            return false;
+            
+            return (false, null);
         }
 
         /// <summary>
@@ -425,28 +420,19 @@ namespace Mapsui.Providers.Wms
             return legendUrls;
         }
 
-        public IEnumerable<MemoryStream> GetLegends()
+        public async IAsyncEnumerable<MemoryStream> GetLegends()
         {
             var urls = GetLegendRequestUrls();
-            var images = new List<MemoryStream>();
 
             foreach (var url in urls)
             {
-                try
-                {
-                    if (_getStreamAsync == null)
-                        return images;
-                    using var task = _getStreamAsync(url);
-                    var bytes = StreamHelper.ReadFully(task.Result);
-                    images.Add(new MemoryStream(bytes));
-                    task.Result.Dispose();
-                }
-                catch (WebException e)
-                {
-                    throw new Exception("Error adding legend image", e);
-                }
+                if (_getStreamAsync == null)
+                    yield break;
+                
+                using var task = await _getStreamAsync(url);
+                var bytes = StreamHelper.ReadFully(task);
+                yield return new MemoryStream(bytes);
             }
-            return images;
         }
 
         private Client.WmsOnlineResource GetPreferredMethod()
@@ -468,7 +454,7 @@ namespace Mapsui.Providers.Wms
 
         public Dictionary<string, string>? ExtraParams { get; set; }
 
-        public MRect? GetExtent()
+        public override MRect? GetExtent()
         {
             return CRS != null && _wmsClient != null && _wmsClient.Layer.BoundingBoxes.ContainsKey(CRS) ? _wmsClient.Layer.BoundingBoxes[CRS] : null;
         }
@@ -479,20 +465,15 @@ namespace Mapsui.Providers.Wms
             return _wmsClient.Layer.CRS.FirstOrDefault(item => string.Equals(item.Trim(), crs.Trim(), StringComparison.CurrentCultureIgnoreCase)) != null;
         }
 
-        public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
+        public override async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
         {
-            var features = new List<RasterFeature>();
-
-            if (TryGetMap(fetchInfo.ToViewport(), out var raster))
-            {
-                features.Add(new RasterFeature(raster));
-            }
-            return features;
+            var (success, raster) = await TryGetMapAsync(fetchInfo.ToViewport());
+            if (success)
+                yield return new RasterFeature(raster);
         }
 
         private async Task<Stream> GetStreamAsync(string url)
         {
-            
             var handler = new HttpClientHandler { Credentials = Credentials };
             var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
             var req = new HttpRequestMessage(new HttpMethod(GetPreferredMethod().Type), url);

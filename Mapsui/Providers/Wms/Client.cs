@@ -153,6 +153,7 @@ namespace Mapsui.Providers.Wms
         private Func<string, Task<Stream>> _getStreamAsync;
         private string[]? _exceptionFormats;
         private Capabilities.WmsServiceDescription _serviceDescription;
+        private readonly Task _initTask;
 
         /// <summary>
         /// Gets the service description
@@ -218,9 +219,19 @@ namespace Mapsui.Providers.Wms
                 strReq.AppendFormat("REQUEST=GetCapabilities&");
             if (!url.ToLower().Contains("version=") && !string.IsNullOrEmpty(wmsVersion))
                 strReq.AppendFormat("VERSION={0}&", wmsVersion);
-
-            var xml = GetRemoteXml(strReq.ToString().TrimEnd('&'));
-            ParseCapabilities(xml);
+            
+            _initTask = Task.Run(async () =>
+            {
+                try
+                {
+                    var xml = await GetRemoteXml(strReq.ToString().TrimEnd('&'));
+                    ParseCapabilities(xml);
+                }
+                catch (Exception e)
+                {
+                    Logger.Log(LogLevel.Error, e.Message, e);   
+                }
+            });
         }
 
         public Client(XmlDocument capabilitiesXmlDocument, Func<string, Task<Stream>>? getStreamAsync = null)
@@ -260,19 +271,18 @@ namespace Mapsui.Providers.Wms
         /// Downloads service description from WMS service
         /// </summary>
         /// <returns>XmlDocument from Url. Null if Url is empty or improper XmlDocument</returns>
-        private XmlDocument GetRemoteXml(string url)
+        private async Task<XmlDocument> GetRemoteXml(string url)
         {
             try
             {
                 var doc = new XmlDocument { XmlResolver = null };
 
-                using (var task = _getStreamAsync(url))
+                using (var task = await _getStreamAsync(url))
                 {
-                    using (var stReader = new StreamReader(task.Result))
+                    using (var stReader = new StreamReader(task))
                     {
                         using var r = new XmlTextReader(url, stReader) { XmlResolver = null };
                         doc.Load(r);
-                        task.Result.Dispose();
                     }
                 }
 
