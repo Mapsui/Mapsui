@@ -6,19 +6,16 @@ namespace Mapsui.Extensions
 {
     public static class Catch
     {
-        public static void Exceptions(Func<Task> func)
+        public static async void Exceptions(Func<Task> func)
         {
-            _ = Task.Run(async () =>
+            try
             {
-                try
-                {
-                    await func();
-                }
-                catch (Exception e)
-                {
-                    Logging.Logger.Log(LogLevel.Error, e.Message, e);
-                }
-            });
+                await func();
+            }
+            catch (Exception e)
+            {
+                Logging.Logger.Log(LogLevel.Error, e.Message, e);
+            }
         }
     }
 }
