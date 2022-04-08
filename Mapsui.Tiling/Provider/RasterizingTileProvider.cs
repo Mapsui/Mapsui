@@ -98,7 +98,7 @@ public class RasterizingTileProvider : ITileSource
             return _dataSource.GetFeatures(fetchInfo);
         }
 
-        return _layer.GetFeatures(fetchInfo.Extent, fetchInfo.Resolution));
+        return _layer.GetFeatures(fetchInfo.Extent, fetchInfo.Resolution);
     }
 
     private IRenderer GetRenderer()
