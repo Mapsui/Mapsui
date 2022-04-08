@@ -1,3 +1,5 @@
+using Mapsui.Samples.Common.Extensions;
+
 #pragma warning disable IDISP001 // Dispose created
 
 namespace Mapsui.Samples.Eto
@@ -123,17 +125,20 @@ namespace Mapsui.Samples.Eto
             };
 
             radioButton.CheckedChanged += (s, a) => {
-                MapControl.Map?.Layers.Clear();
+                Catch.Exceptions(async () =>
+                {
+                    MapControl.Map?.Layers.Clear();
 
-                sample.Setup(MapControl);
+                    await sample.SetupAsync(MapControl);
 
-                MapControl.Info += MapControlOnInfo;
+                    MapControl.Info += MapControlOnInfo;
 
-                LayerList.Items.Clear();
-                if (MapControl.Map != null)
-                    foreach (var layer in MapControl.Map.Layers)
-                        LayerList.Items.Add(new LayerListItem(layer));
-                LayerList.Items.Add(RotationSlider);
+                    LayerList.Items.Clear();
+                    if (MapControl.Map != null)
+                        foreach (var layer in MapControl.Map.Layers)
+                            LayerList.Items.Add(new LayerListItem(layer));
+                    LayerList.Items.Add(RotationSlider);
+                });
             };
             return radioButton;
         }

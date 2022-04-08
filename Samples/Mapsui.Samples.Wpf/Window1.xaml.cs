@@ -13,6 +13,7 @@ using Mapsui.Samples.Wpf.Utilities;
 using Mapsui.UI;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Desktop;
+using Mapsui.Samples.Common.Extensions;
 
 namespace Mapsui.Samples.Wpf
 {
@@ -88,13 +89,16 @@ namespace Mapsui.Samples.Wpf
             };
 
             radioButton.Click += (s, a) => {
-                MapControl.Map?.Layers.Clear();
+                Catch.Exceptions(async () =>
+                {
+                    MapControl.Map?.Layers.Clear();
 
-                sample.Setup(MapControl);
+                    await sample.SetupAsync(MapControl);
 
-                MapControl.Info += MapControlOnInfo;
-                if (MapControl.Map != null)
-                    LayerList.Initialize(MapControl.Map.Layers);
+                    MapControl.Info += MapControlOnInfo;
+                    if (MapControl.Map != null)
+                        LayerList.Initialize(MapControl.Map.Layers);
+                });
             };
             return radioButton;
         }

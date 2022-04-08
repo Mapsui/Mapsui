@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
 using BruTile.Predefined;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Projections;
 using Mapsui.Providers;
@@ -90,12 +91,7 @@ public class RasterizingTileProvider : ITileSource
     {
         if (_dataSource != null)
         {
-            if (_dataSource is IAsyncProvider<IFeature> asyncProvider)
-            {
-                return await asyncProvider.GetFeaturesAsync(fetchInfo).ToArrayAsync();
-            }
-
-            return _dataSource.GetFeatures(fetchInfo);
+            return await _dataSource.GetFeaturesAsync(fetchInfo);
         }
 
         return _layer.GetFeatures(fetchInfo.Extent, fetchInfo.Resolution);

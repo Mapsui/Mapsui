@@ -55,7 +55,7 @@ namespace Mapsui.Samples.Maui
                 clicker = formsSample.OnClick;
 
             if (sample != null)
-                (Application.Current?.MainPage as NavigationPage)?.PushAsync(new MapPage(sample.Setup, clicker));
+                (Application.Current?.MainPage as NavigationPage)?.PushAsync(new MapPage(sample, clicker));
 
             listView.SelectedItem = null;
         }

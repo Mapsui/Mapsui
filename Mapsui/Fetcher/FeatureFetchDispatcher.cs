@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
@@ -38,16 +39,8 @@ namespace Mapsui.Fetcher
         {
             try
             {
-                List<T> features;
-                if (DataSource is IAsyncProvider<T> asyncProvider)
-                {
-                    features = await asyncProvider.GetFeaturesAsync(fetchInfo).ToListAsync();
-                }
-                else
-                {
-                    features = DataSource?.GetFeatures(fetchInfo).ToList();   
-                }
-                 
+                var features = await DataSource.GetFeaturesAsync(fetchInfo);
+
                 FetchCompleted(features, null);
             }
             catch (Exception exception)

@@ -55,14 +55,11 @@ namespace Mapsui.Samples.Droid
             relativeLayout.AddView(_popup = CreatePopup());
             _mapControl.Map.Layers.Clear();
             var sample = new MbTilesOverlaySample();
-            try
+            
+            Catch.Exceptions(async () => 
             {
                 await sample.SetupAsync(_mapControl);
-            }
-            catch (Exception e)
-            {
-                Logger.Log(LogLevel.Error, e.Message, e);
-            }
+            });
 
             //_mapControl.Info += MapControlOnInfo;
             //LayerList.Initialize(_mapControl.Map.Layers);
@@ -130,18 +127,12 @@ namespace Mapsui.Samples.Droid
                 if (sample != null)
                 {
                     _mapControl?.Map?.Layers.Clear();
-                    Task.Run(async () =>
+
+                    Catch.Exceptions(async () =>
                     {
-                        try
-                        {
-                            await sample.SetupAsync(_mapControl!);
-                        }
-                        catch (Exception e)
-                        {
-                            Logger.Log(LogLevel.Error, e.Message, e);
-                        }
+                        await sample.SetupAsync(_mapControl!);
                     });
-                    
+
                     return true;
                 }
             }

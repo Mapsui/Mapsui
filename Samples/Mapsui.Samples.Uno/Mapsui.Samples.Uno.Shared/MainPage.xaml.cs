@@ -6,8 +6,10 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Mapsui.Extensions;
+using Mapsui.Providers.Wms;
 using Mapsui.UI;
 using Mapsui.Samples.Common;
+using Mapsui.Samples.Common.Extensions;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.CustomWidget;
@@ -86,11 +88,14 @@ namespace Mapsui.Samples.Uwp
             };
 
             radioButton.Click += (_, _) => {
-                MapControl.Map?.Layers.Clear();
-                MapControl.Info -= MapOnInfo;
-                sample.Setup(MapControl);
-                MapControl.Info += MapOnInfo;
-                MapControl.Refresh();
+                Catch.Exceptions(async () =>
+                {
+                    MapControl.Map?.Layers.Clear();
+                    MapControl.Info -= MapOnInfo;
+                    await sample.SetupAsync(MapControl);
+                    MapControl.Info += MapOnInfo;
+                    MapControl.Refresh();
+                });
             };
 
             return radioButton;

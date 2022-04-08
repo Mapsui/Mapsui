@@ -2,8 +2,11 @@
 using System.Threading;
 using Mapsui.UI;
 using System.Threading.Tasks;
+using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Rendering.Skia;
+using Mapsui.Samples.Common;
+using Mapsui.Samples.Common.Extensions;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.Styles;
 using Mapsui.UI.Maui;
@@ -28,7 +31,7 @@ namespace Mapsui.Samples.Maui
             var test1 = this.info ?? throw new InvalidOperationException();
         }
 
-        public MapPage(Action<IMapControl> setup, Func<MapView?, MapClickedEventArgs, bool>? c = null)
+        public MapPage(ISample sample, Func<MapView?, MapClickedEventArgs, bool>? c = null)
         {
             InitializeComponent();
 
@@ -59,7 +62,10 @@ namespace Mapsui.Samples.Maui
             }
             catch (Exception) { }
 
-            setup(mapView);
+            Catch.Exceptions(async () =>
+            {
+                await sample.SetupAsync(mapView);
+            });
 
             Clicker = c;
         }

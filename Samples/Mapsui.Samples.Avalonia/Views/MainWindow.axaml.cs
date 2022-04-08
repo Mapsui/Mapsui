@@ -7,6 +7,7 @@ using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Mapsui.Extensions;
 using Mapsui.Samples.Common;
+using Mapsui.Samples.Common.Extensions;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.CustomWidget;
@@ -95,11 +96,14 @@ namespace Mapsui.Samples.Avalonia.Views
             };
 
             radioButton.Click += (s, a) => {
-                MapControl.Map?.Layers.Clear();
-                MapControl.Info -= MapOnInfo;
-                sample.Setup(MapControl);
-                MapControl.Info += MapOnInfo;
-                MapControl.Refresh();
+                Catch.Exceptions(async () =>
+                {
+                    MapControl.Map?.Layers.Clear();
+                    MapControl.Info -= MapOnInfo;
+                    await sample.SetupAsync(MapControl);
+                    MapControl.Info += MapOnInfo;
+                    MapControl.Refresh();
+                };
             };
 
             return radioButton;
