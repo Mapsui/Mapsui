@@ -8,6 +8,7 @@ using Xamarin.Forms.Xaml;
 using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Samples.Common;
+using Mapsui.Samples.Common.Extensions;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.Styles;
 using Mapsui.UI.Forms;
@@ -69,7 +70,7 @@ namespace Mapsui.Samples.Forms
             e.Handled = clicker != null && (clicker?.Invoke(sender as MapView, e) ?? false);
         }
 
-        void OnSelection(object sender, SelectedItemChangedEventArgs e)
+        async void OnSelection(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem == null)
             {
@@ -82,7 +83,14 @@ namespace Mapsui.Samples.Forms
             if (sample != null)
             {
                 mapView.Reset();
-                sample.Setup(mapView);
+                try
+                {
+                    await sample.SetupAsync(mapView);
+                }
+                catch (Exception exception)
+                {
+                    Logger.Log(LogLevel.Error, exception.Message, exception);   
+                }
             }
 
             clicker = null;

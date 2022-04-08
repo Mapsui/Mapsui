@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Desktop;
+using Mapsui.Samples.Common.Extensions;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.Common.Maps.Animations;
 using Mapsui.Samples.Common.Maps.Callouts;
@@ -56,19 +57,19 @@ public class MapRegressionTests
     [Test]
     [Retry(5)]
     [TestCaseSource(nameof(RegressionSamples))]
-    public async Task TestSample(ISample sample)
+    public async Task TestSampleAsync(ISample sample)
     {
-        await TestSample(sample, true).ConfigureAwait(false);
+        await TestSampleAsync(sample, true).ConfigureAwait(false);
     }
 
-    public async Task TestSample(ISample sample, bool compareImages)
+    public async Task TestSampleAsync(ISample sample, bool compareImages)
     {
         try
         {
             var fileName = sample.GetType().Name + ".Regression.png";
-            var mapControl = await InitMap(sample).ConfigureAwait(true);
+            var mapControl = await InitMapAsync(sample).ConfigureAwait(true);
             var map = mapControl.Map;
-            await DisplayMap(mapControl).ConfigureAwait(false);
+            await DisplayMapAsync(mapControl).ConfigureAwait(false);
 
             if (map != null)
             {
@@ -118,12 +119,12 @@ public class MapRegressionTests
 
     [Test]
     [TestCaseSource(nameof(ExcludedSamples))]
-    public async Task ExcludedTestSample(ISample sample)
+    public async Task ExcludedTestSampleAsync(ISample sample)
     {
-        await TestSample(sample, false);
+        await TestSampleAsync(sample, false);
     }
 
-    private static async Task<RegressionMapControl> InitMap(ISample sample)
+    private static async Task<RegressionMapControl> InitMapAsync(ISample sample)
     {
         var mapControl = new RegressionMapControl();
         mapControl.SetSize(800, 600);
@@ -133,7 +134,8 @@ public class MapRegressionTests
             prepareTest.PrepareTest();
         }
 
-        sample.Setup(mapControl);
+        await sample.SetupAsync(mapControl);
+
         if (sample is ISampleTest sampleTest)
         {
             await sampleTest.InitializeTest().ConfigureAwait(true);
@@ -154,26 +156,26 @@ public class MapRegressionTests
         return mapControl;
     }
 
-    private async Task DisplayMap(IMapControl mapControl)
+    private async Task DisplayMapAsync(IMapControl mapControl)
     {
-        await WaitForLoading(mapControl).ConfigureAwait(false);
+        await WaitForLoadingAsync(mapControl).ConfigureAwait(false);
 
         // wait for rendering to finish to make the Tests more reliable
         await Task.Delay(300).ConfigureAwait(false);
     }
 
-    private async Task WaitForLoading(IMapControl mapControl)
+    private async Task WaitForLoadingAsync(IMapControl mapControl)
     {
         if (mapControl.Map?.Layers != null)
         {
             foreach (var layer in mapControl.Map.Layers)
             {
-                await WaitForLoading(layer).ConfigureAwait(false);
+                await WaitForLoadingAsync(layer).ConfigureAwait(false);
             }
         }
     }
 
-    private async Task WaitForLoading(ILayer layer)
+    private async Task WaitForLoadingAsync(ILayer layer)
     {
         while (layer.Busy)
         {

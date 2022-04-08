@@ -1,21 +1,25 @@
+
+
+#nullable enable
+
 using System;
 using System.IO;
 using System.Linq;
 using Android.App;
 using Android.Graphics;
+using Android.Util;
 using Android.Widget;
 using Android.Views;
 using AndroidX.AppCompat.App;
 using Mapsui.Extensions;
+using Mapsui.Logging;
 using Mapsui.Samples.Common;
+using Mapsui.Samples.Common.Extensions;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.UI;
 using Mapsui.UI.Android;
-
-#nullable enable
-
 namespace Mapsui.Samples.Droid
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
@@ -25,7 +29,7 @@ namespace Mapsui.Samples.Droid
         private MapControl? _mapControl;
         private TextView? _textView;
 
-        protected override void OnCreate(Android.OS.Bundle? savedInstanceState)
+        protected override async void OnCreate(Android.OS.Bundle? savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
@@ -51,7 +55,14 @@ namespace Mapsui.Samples.Droid
             relativeLayout.AddView(_popup = CreatePopup());
             _mapControl.Map.Layers.Clear();
             var sample = new MbTilesOverlaySample();
-            sample.Setup(_mapControl);
+            try
+            {
+                await sample.SetupAsync(_mapControl);
+            }
+            catch (Exception e)
+            {
+                Logger.Log(LogLevel.Error, e.Message, e);
+            }
 
             //_mapControl.Info += MapControlOnInfo;
             //LayerList.Initialize(_mapControl.Map.Layers);
@@ -119,7 +130,18 @@ namespace Mapsui.Samples.Droid
                 if (sample != null)
                 {
                     _mapControl?.Map?.Layers.Clear();
-                    sample.Setup(_mapControl!);
+                    Task.Run(async () =>
+                    {
+                        try
+                        {
+                            await sample.SetupAsync(_mapControl!);
+                        }
+                        catch (Exception e)
+                        {
+                            Logger.Log(LogLevel.Error, e.Message, e);
+                        }
+                    });
+                    
                     return true;
                 }
             }
