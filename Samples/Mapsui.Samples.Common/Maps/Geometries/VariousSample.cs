@@ -67,7 +67,7 @@ namespace Mapsui.Samples.Common.Maps
             return new SymbolStyle { BitmapId = bitmapId, SymbolScale = 0.75 };
         }
 
-        public async Task InitializeTest()
+        public async Task InitializeTestAsync()
         {
             await Task.Delay(1000);
         }

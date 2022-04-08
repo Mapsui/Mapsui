@@ -6,3 +6,5 @@
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Usage", "VSTHRD110:Observe result of async calls", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Tiling.Provider.TileProvider.FetchTiles(Mapsui.Layers.FetchInfo)~System.Collections.Generic.IEnumerable{Mapsui.IFeature}")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Tiling.Fetcher.TileFetchDispatcher.FetchOnThread(BruTile.TileInfo)~System.Threading.Tasks.Task")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Tiling.Layers.TmsTileSourceBuilder.Build(System.String,System.Boolean,BruTile.Cache.IPersistentCache{System.Byte[]})~BruTile.ITileSource")]

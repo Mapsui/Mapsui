@@ -28,8 +28,6 @@ namespace Mapsui.Tiling.Provider
             return _source.Schema.Extent.ToMRect();
         }
 
-        public string? CRS { get; set; }
-
         public TileProvider(ITileSource tileSource)
         {
             _source = tileSource;
@@ -49,7 +47,7 @@ namespace Mapsui.Tiling.Provider
                 if (_bitmaps.Find(info.Index) != null) continue;
                 if (_queue.Contains(info.Index)) continue;
                 _queue.Add(info.Index);
-                tasks.Add(info.Index, Task.Run(async () => await GetTileOnThread(new object[] { _source, info, _bitmaps })));
+                tasks.Add(info.Index, Task.Run(async () => await GetTileOnThreadAsync(new object[] { _source, info, _bitmaps })));
             }
 
             foreach (var info in infos)
@@ -63,7 +61,7 @@ namespace Mapsui.Tiling.Provider
             }
         }
 
-        private async Task GetTileOnThread(object parameter) // This could accept normal parameters now we use PCL Profile111
+        private async Task GetTileOnThreadAsync(object parameter) // This could accept normal parameters now we use PCL Profile111
         {
             var parameters = (object[])parameter;
             if (parameters.Length != 3) throw new ArgumentException("Four parameters expected");

@@ -58,7 +58,7 @@ namespace Mapsui.Providers.Wms
             _infoFormat = infoFormat;
             var requestUrl = CreateRequestUrl(baseUrl, wmsVersion, infoFormat, srs, layer, extendXmin, extendYmin, extendXmax, extendYmax, x, y, mapWidth, mapHeight);
 
-            Task.Run(async () => {
+            _ =Task.Run(async () => {
                 using var task = await _getStreamAsync(requestUrl);
                 try
                 {

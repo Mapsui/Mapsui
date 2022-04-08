@@ -65,7 +65,7 @@ namespace Mapsui.Tiling.Fetcher
                 if (success)
                 {
                     _tilesInProgress.Add(tileInfo.Index);
-                    method = async () => await FetchOnThread(tileInfo);
+                    method = async () => await FetchOnThreadAsync(tileInfo);
                     return true;
                 }
 
@@ -76,7 +76,7 @@ namespace Mapsui.Tiling.Fetcher
             }
         }
 
-        private async Task FetchOnThread(TileInfo tileInfo)
+        private async Task FetchOnThreadAsync(TileInfo tileInfo)
         {
             try
             {

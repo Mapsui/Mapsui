@@ -17,10 +17,10 @@ namespace Mapsui.Tests.Common.Maps
 
         public override async Task SetupAsync(IMapControl mapControl)
         {
-            mapControl.Map = await CreateMap();
+            mapControl.Map = await CreateMapAsync();
         }
 
-        public static async Task<Map> CreateMap()
+        public static async Task<Map> CreateMapAsync()
         {
             var layer = await CreateLayerAsync();
 

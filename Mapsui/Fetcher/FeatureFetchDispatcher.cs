@@ -30,12 +30,12 @@ namespace Mapsui.Fetcher
             if (!_modified) return false;
             if (_fetchInfo == null) return false;
 
-            method = () => FetchOnThread(new FetchInfo(_fetchInfo));
+            method = () => FetchOnThreadAsync(new FetchInfo(_fetchInfo));
             _modified = false;
             return true;
         }
 
-        public async Task FetchOnThread(FetchInfo fetchInfo)
+        public async Task FetchOnThreadAsync(FetchInfo fetchInfo)
         {
             try
             {

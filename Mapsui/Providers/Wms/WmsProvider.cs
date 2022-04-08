@@ -36,7 +36,7 @@ namespace Mapsui.Providers.Wms
     /// </remarks>
     public class WmsProvider : AsyncProviderBase<IFeature>, IProjectingProvider
     {
-        private string _mimeType;
+        private string? _mimeType;
         private readonly Client? _wmsClient;
         private Func<string, Task<Stream>>? _getStreamAsync;
         private readonly IUrlPersistentCache? _persistentCache;
@@ -432,7 +432,7 @@ namespace Mapsui.Providers.Wms
             return legendUrls;
         }
 
-        public async IAsyncEnumerable<MemoryStream> GetLegends()
+        public async IAsyncEnumerable<MemoryStream> GetLegendsAsync()
         {
             var urls = GetLegendRequestUrls();
 
@@ -461,8 +461,6 @@ namespace Mapsui.Providers.Wms
                     return _wmsClient.GetMapRequests[i];
             return _wmsClient.GetMapRequests[0];
         }
-
-        public string? CRS { get; set; }
 
         public Dictionary<string, string>? ExtraParams { get; set; }
 

@@ -13,15 +13,15 @@ namespace Mapsui.Samples.Common.Maps
 {
     public class SymbolAnimationSample : ISample, IPrepareSampleTest, ISampleTest
     {
-        private Layer animationLayer;
-        private static bool repeat = true;
+        private Layer? _animationLayer;
+        private static bool _repeat = true;
         public string Name => "Animated Symbols";
         public string Category => "Animations";
 
         public void Setup(IMapControl mapControl)
         {
             mapControl.Map = CreateMap();
-            this.animationLayer = (Layer)mapControl.Map.Layers.Last();
+            this._animationLayer = (Layer)mapControl.Map.Layers.Last();
         }
 
         public static Map CreateMap()
@@ -72,7 +72,7 @@ namespace Mapsui.Samples.Common.Maps
                 animationStart: 0,
                 animationEnd: .5,
                 easing: Easing.SinInOut,
-                repeat: repeat,
+                repeat: _repeat,
                 tick: (symbolStyle, e, v) => { style.SymbolScale = (double)((double)e.Start + ((double)e.End - (double)e.Start) * e.Easing.Ease(v)); },
                 final: (symbolStyle, e) => { style.SymbolScale = (double)e.End; }
             );
@@ -84,7 +84,7 @@ namespace Mapsui.Samples.Common.Maps
                 animationStart: .5,
                 animationEnd: 1,
                 easing: Easing.SinInOut,
-                repeat: repeat,
+                repeat: _repeat,
                 tick: (symbolStyle, e, v) => { style.SymbolScale = (double)((double)e.Start + ((double)e.End - (double)e.Start) * e.Easing.Ease(v)); },
                 final: (symbolStyle, e) => { style.SymbolScale = (double)e.End; }
             );
@@ -128,9 +128,9 @@ namespace Mapsui.Samples.Common.Maps
             return result;
         }
 
-        public async Task InitializeTest()
+        public async Task InitializeTestAsync()
         {
-            while (animationLayer.UpdateAnimations())
+            while (_animationLayer.UpdateAnimations())
             {
                 await Task.Delay(10).ConfigureAwait(true);
             }
@@ -138,7 +138,7 @@ namespace Mapsui.Samples.Common.Maps
 
         public void PrepareTest()
         {
-            repeat = false;
+            _repeat = false;
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Mapsui.Tests.Fetcher.Providers
     {
         public override async Task<byte[]?>? GetTileAsync(TileInfo tileInfo)
         {
-            await base.GetTileAsync(tileInfo); // Just for counting
+            _ = await base.GetTileAsync(tileInfo); // Just for counting
             throw new Exception("this provider always fails");
         }
     }

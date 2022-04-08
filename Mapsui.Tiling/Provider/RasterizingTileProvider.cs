@@ -63,7 +63,7 @@ public class RasterizingTileProvider : ITileSource
         if (result == null)
         {
             var renderer = GetRenderer();
-            var (viewPort, renderLayer) = await CreateRenderLayer(tileInfo);
+            var (viewPort, renderLayer) = await CreateRenderLayerAsync(tileInfo);
 
             using var stream = renderer.RenderToBitmapStream(viewPort, new[] { renderLayer }, pixelDensity: _pixelDensity);
             _rasterizingLayers.Push(renderer);
@@ -75,19 +75,19 @@ public class RasterizingTileProvider : ITileSource
         return result;
     }
 
-    private async Task<(Viewport ViewPort, ILayer RenderLayer)> CreateRenderLayer(TileInfo tileInfo)
+    private async Task<(Viewport ViewPort, ILayer RenderLayer)> CreateRenderLayerAsync(TileInfo tileInfo)
     {
         Schema.Resolutions.TryGetValue(tileInfo.Index.Level, out var tileResolution);
 
         var resolution = tileResolution.UnitsPerPixel;
         var viewPort = RasterizingLayer.CreateViewport(tileInfo.Extent.ToMRect(), resolution, _renderResolutionMultiplier, 1);
         var fetchInfo = new FetchInfo(viewPort.Extent, resolution);
-        var features = await GetFeatures(fetchInfo);
+        var features = await GetFeaturesAsync(fetchInfo);
         var renderLayer = new RenderLayer(_layer, features);
         return (viewPort, renderLayer);
     }
 
-    private async Task<IEnumerable<IFeature>> GetFeatures(FetchInfo fetchInfo)
+    private async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
         if (_dataSource != null)
         {

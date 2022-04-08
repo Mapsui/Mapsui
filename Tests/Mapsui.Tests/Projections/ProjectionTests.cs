@@ -94,7 +94,7 @@ namespace Mapsui.Tests.Projections
         {
             // arrange
             var directory = Path.GetDirectoryName(typeof(ProjectionTests).Assembly.Location);
-            var countriesPath = Path.Combine(directory, @"GeoData\World\countries.shp");
+            var countriesPath = Path.Combine(directory!, @"GeoData\World\countries.shp");
 
             // act
             using var shapeFile = new ShapeFile(countriesPath, false, true, new DotSpatialProjection());

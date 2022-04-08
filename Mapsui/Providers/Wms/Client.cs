@@ -153,7 +153,7 @@ namespace Mapsui.Providers.Wms
         private Func<string, Task<Stream>> _getStreamAsync;
         private string[]? _exceptionFormats;
         private Capabilities.WmsServiceDescription _serviceDescription;
-        private readonly Task _initTask;
+        private readonly Task? _initTask;
         private readonly IUrlPersistentCache? _persistentCache;
 
         /// <summary>
@@ -226,7 +226,7 @@ namespace Mapsui.Providers.Wms
             {
                 try
                 {
-                    var xml = await GetRemoteXml(strReq.ToString().TrimEnd('&'));
+                    var xml = await GetRemoteXmlAsync(strReq.ToString().TrimEnd('&'));
                     ParseCapabilities(xml);
                 }
                 catch (Exception e)
@@ -282,7 +282,7 @@ namespace Mapsui.Providers.Wms
         /// Downloads service description from WMS service
         /// </summary>
         /// <returns>XmlDocument from Url. Null if Url is empty or improper XmlDocument</returns>
-        private async Task<XmlDocument> GetRemoteXml(string url)
+        private async Task<XmlDocument> GetRemoteXmlAsync(string url)
         {
             try
             {

@@ -138,7 +138,7 @@ public class MapRegressionTests
 
         if (sample is ISampleTest sampleTest)
         {
-            await sampleTest.InitializeTest().ConfigureAwait(true);
+            await sampleTest.InitializeTestAsync().ConfigureAwait(true);
         }
 
         var fetchInfo = new FetchInfo(mapControl.Viewport.Extent!, mapControl.Viewport.Resolution, mapControl.Map?.CRS);

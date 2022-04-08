@@ -23,7 +23,7 @@ namespace Mapsui.Fetcher
                 Interlocked.Increment(ref RestartCounter);
                 _fetchLoopCancellationTokenSource?.Dispose();
                 _fetchLoopCancellationTokenSource = new CancellationTokenSource();
-                Task.Run(async () => await Fetch(_fetchLoopCancellationTokenSource));
+                Task.Run(async () => await FetchAsync(_fetchLoopCancellationTokenSource));
             }
         }
 
@@ -49,7 +49,7 @@ namespace Mapsui.Fetcher
             }
         }
 
-        private async Task Fetch(CancellationTokenSource? cancellationTokenSource)
+        private async Task FetchAsync(CancellationTokenSource? cancellationTokenSource)
         {
             try
             {
