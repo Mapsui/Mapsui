@@ -40,6 +40,7 @@ namespace Mapsui.Providers.Wms
         private readonly Client? _wmsClient;
         private Func<string, Task<Stream>>? _getStreamAsync;
         private readonly IUrlPersistentCache? _persistentCache;
+        private readonly Task? _initTask;
 
         public WmsProvider(XmlDocument capabilities, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
             : this(new Client(capabilities, getStreamAsync), persistentCache: persistentCache)
@@ -55,7 +56,7 @@ namespace Mapsui.Providers.Wms
         /// <param name="wmsVersion">Version number of wms leave null to get the default service version</param>
         /// <param name="getStreamAsync">Download method, leave null for default</param>
         public WmsProvider(string url, string? wmsVersion = null, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
-            : this(new Client(url, wmsVersion, getStreamAsync), persistentCache: persistentCache)
+            : this(new Client(url, wmsVersion, getStreamAsync, persistentCache: persistentCache), persistentCache: persistentCache)
         {
             InitialiseGetStreamAsyncMethod(getStreamAsync);
         }
@@ -68,17 +69,28 @@ namespace Mapsui.Providers.Wms
             TimeOut = 10000;
             ContinueOnError = true;
 
-            if (OutputFormats.Contains("image/png")) _mimeType = "image/png";
-            else if (OutputFormats.Contains("image/gif")) _mimeType = "image/gif";
-            else if (OutputFormats.Contains("image/jpeg")) _mimeType = "image/jpeg";
-            else //None of the default formats supported - Look for the first supported output format
+            _initTask = Task.Run(async () =>
             {
-                throw new ArgumentException(
-                    "None of the formats provided by the WMS service are supported");
-            }
+                if (wmsClient.InitTask != null)
+                {
+                    await wmsClient.InitTask;
+                }
+
+                if (OutputFormats.Contains("image/png")) _mimeType = "image/png";
+                else if (OutputFormats.Contains("image/gif")) _mimeType = "image/gif";
+                else if (OutputFormats.Contains("image/jpeg")) _mimeType = "image/jpeg";
+                else //None of the default formats supported - Look for the first supported output format
+                {
+                    throw new ArgumentException(
+                        "None of the formats provided by the WMS service are supported");
+                }
+            });
+
             LayerList = new Collection<string>();
             StylesList = new Collection<string>();
         }
+
+        public Task? InitTask => _initTask;
 
         private void InitialiseGetStreamAsyncMethod(Func<string, Task<Stream>>? getStreamAsync)
         {
@@ -88,12 +100,12 @@ namespace Mapsui.Providers.Wms
         /// <summary>
         /// Gets the list of enabled layers
         /// </summary>
-        public Collection<string>? LayerList { get; }
+        public Collection<string>? LayerList { get; private set; }
 
         /// <summary>
         /// Gets the list of enabled styles
         /// </summary>
-        public Collection<string>? StylesList { get; }
+        public Collection<string>? StylesList { get; private set; }
 
         /// <summary>
         /// Gets the hierarchical list of available WMS layers from this service
@@ -474,6 +486,11 @@ namespace Mapsui.Providers.Wms
 
         private async Task<Stream> GetStreamAsync(string url)
         {
+            if (_initTask != null)
+            {
+                await _initTask;
+            }
+
             var handler = new HttpClientHandler { Credentials = Credentials };
             var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
             var req = new HttpRequestMessage(new HttpMethod(GetPreferredMethod().Type), url);

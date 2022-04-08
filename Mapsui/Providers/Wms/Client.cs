@@ -7,6 +7,8 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using Mapsui.Cache;
+using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Styles;
 
@@ -20,8 +22,6 @@ namespace Mapsui.Providers.Wms
     {
         private XmlNode? _vendorSpecificCapabilities;
         private XmlNamespaceManager? _nsmgr;
-
-
 
         /// <summary>
         /// Structure for storing information about a WMS Layer Style
@@ -154,6 +154,7 @@ namespace Mapsui.Providers.Wms
         private string[]? _exceptionFormats;
         private Capabilities.WmsServiceDescription _serviceDescription;
         private readonly Task _initTask;
+        private readonly IUrlPersistentCache? _persistentCache;
 
         /// <summary>
         /// Gets the service description
@@ -195,15 +196,16 @@ namespace Mapsui.Providers.Wms
         /// </summary>
         public WmsServerLayer Layer { get; private set; }
 
-
         /// <summary>
         /// Initializes WMS server and parses the Capabilities request
         /// </summary>
         /// <param name="url">URL of wms server</param>
         /// <param name="wmsVersion">WMS version number, null to get the default from service</param>
         /// <param name="getStreamAsync">Download method, leave null for default</param>
-        public Client(string url, string? wmsVersion = null, Func<string, Task<Stream>>? getStreamAsync = null)
+        /// <param name="persistentCache">persistent Cache</param>
+        public Client(string url, string? wmsVersion = null, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
         {
+            _persistentCache = persistentCache;
             _getStreamAsync = default!; // is later assigned 
             _nsmgr = default!; // is later assigned
             WmsVersion = default!; // is later assigned
@@ -243,6 +245,8 @@ namespace Mapsui.Providers.Wms
             ParseCapabilities(capabilitiesXmlDocument);
         }
 
+        public Task? InitTask => _initTask;
+
         private void InitialiseGetStreamAsyncMethod(Func<string, Task<Stream>>? getStreamAsync)
         {
             _getStreamAsync = getStreamAsync ?? GetStreamAsync;
@@ -250,15 +254,22 @@ namespace Mapsui.Providers.Wms
 
         private async Task<Stream> GetStreamAsync(string url)
         {
-            var client = new HttpClient();
-            var response = await client.GetAsync(url).ConfigureAwait(false);
-
-            if (!response.IsSuccessStatusCode)
+            var result = _persistentCache?.Find(url);
+            if (result == null)
             {
-                throw new Exception($"Unexpected response code: {response.StatusCode}");
+                var client = new HttpClient();
+                var response = await client.GetAsync(url).ConfigureAwait(false);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception($"Unexpected response code: {response.StatusCode}");
+                }
+
+                result = (await response.Content.ReadAsStreamAsync()).ToBytes();
+                _persistentCache?.Add(url, result);
             }
 
-            return await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            return new MemoryStream(result);
         }
 
         /// <summary>
