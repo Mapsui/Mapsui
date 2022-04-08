@@ -95,7 +95,8 @@ namespace Mapsui.Samples.Avalonia.Views
                 Margin = new Thickness(4)
             };
 
-            radioButton.Click += (s, a) => {
+            radioButton.Click += (s, a) =>
+            {
                 Catch.Exceptions(async () =>
                 {
                     MapControl.Map?.Layers.Clear();
@@ -103,7 +104,7 @@ namespace Mapsui.Samples.Avalonia.Views
                     await sample.SetupAsync(MapControl);
                     MapControl.Info += MapOnInfo;
                     MapControl.Refresh();
-                };
+                });
             };
 
             return radioButton;
