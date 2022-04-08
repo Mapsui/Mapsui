@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
@@ -14,7 +15,7 @@ using Mapsui.Providers;
 
 namespace Mapsui.ArcGIS.DynamicProvider
 {
-    public class ArcGISDynamicProvider : IProjectingProvider
+    public class ArcGISDynamicProvider : AsyncProviderBase<IFeature>, IProjectingProvider
     {
         private int _timeOut;
         private string _url = default!;
@@ -89,21 +90,21 @@ namespace Mapsui.ArcGIS.DynamicProvider
             set => _crs = value;
         }
 
-        public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
+        public override async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
         {
             //If there are no layers (probably not initialised) return nothing
             if (ArcGisDynamicCapabilities.layers == null)
-                return new List<IFeature>();
+                yield break;
 
-            var features = new List<RasterFeature>();
-
-            IViewport? viewport = fetchInfo.ToViewport();
-            if (viewport != null && TryGetMap(viewport, out var raster))
-                features.Add(new RasterFeature(raster));
-            return features;
+            IViewport viewport = fetchInfo.ToViewport();
+            var (success, raster) = await TryGetMapAsync(viewport);
+            if (success)
+            {
+                yield return new RasterFeature(raster);
+            }
         }
 
-        public MRect? GetExtent()
+        public override MRect? GetExtent()
         {
             if (ArcGisDynamicCapabilities.initialExtent == null)
                 return null;
@@ -128,7 +129,7 @@ namespace Mapsui.ArcGIS.DynamicProvider
         /// <summary>
         /// Retrieves the bitmap from ArcGIS Dynamic service
         /// </summary>
-        public bool TryGetMap(IViewport viewport, [NotNullWhen(true)] out MRaster? raster)
+        public async Task<(bool Success, MRaster? Raster)> TryGetMapAsync(IViewport viewport)
         {
             int width;
             int height;
@@ -140,9 +141,8 @@ namespace Mapsui.ArcGIS.DynamicProvider
             }
             catch (OverflowException ex)
             {
-                Logger.Log(LogLevel.Error, "Error: Could not conver double to int (ExportMap size)", ex);
-                raster = null;
-                return false;
+                Logger.Log(LogLevel.Error, "Error: Could not convert double to int (ExportMap size)", ex);
+                return (false, null);
             }
 
             var uri = new Uri(GetRequestUrl(viewport.Extent, width, height));
@@ -151,24 +151,22 @@ namespace Mapsui.ArcGIS.DynamicProvider
 
             try
             {
-                using var response = client.GetAsync(uri).Result;
-                using var readAsStreamAsync = response.Content.ReadAsStreamAsync();
-                var bytes = BruTile.Utilities.ReadFully(readAsStreamAsync.Result);
+                using var response = await client.GetAsync(uri);
+                using var readAsStreamAsync = await response.Content.ReadAsStreamAsync();
+                var bytes = BruTile.Utilities.ReadFully(readAsStreamAsync);
                 if (viewport.Extent != null)
                 {
-                    raster = new MRaster(bytes, viewport.Extent);
+                    var raster = new MRaster(bytes, viewport.Extent);
                     response.Dispose();
-                    return true;
+                    return (true, raster);
                 }
-
-                raster = null;
-                return false;
+                
+                return (false, null);
             }
             catch (Exception ex)
             {
                 Logger.Log(LogLevel.Error, ex.Message, ex);
-                raster = null;
-                return false;
+                return (false, null);
             }
         }
 
