@@ -173,9 +173,9 @@ namespace Mapsui.Providers.Wms
         /// <remarks>Layer names are case sensitive.</remarks>
         /// <param name="name">Name of layer</param>
         /// <exception cref="System.ArgumentException">Throws an exception is an unknown layer is added</exception>
-        public void AddLayer(string name)
+        public async Task AddLayerAsync(string name)
         {
-            if (_wmsClient == null || LayerList == null || !LayerExists(_wmsClient.Layer, name))
+            if (_wmsClient == null || LayerList == null || !LayerExists(await _wmsClient.LayerAsync(), name))
                 throw new ArgumentException("Cannot add WMS Layer - Unknown layer name");
 
             LayerList.Add(name);
@@ -187,11 +187,11 @@ namespace Mapsui.Providers.Wms
         /// <remarks>Layer names are case sensitive.</remarks>
         /// <param name="name">Name of layer</param>
         /// <exception cref="System.ArgumentException">Throws an exception if the layer is not found</exception>
-        public Client.WmsServerLayer GetLayer(string name)
+        public async Task<Client.WmsServerLayer> GetLayerAsync(string name)
         {
             if (_wmsClient == null)
                 throw new InvalidOperationException("WmsClient needs to be set");
-            if (FindLayer(_wmsClient.Layer, name, out var layer))
+            if (FindLayer(await _wmsClient.LayerAsync(), name, out var layer))
                 return layer;
 
             throw new ArgumentException("Layer not found");
@@ -256,9 +256,9 @@ namespace Mapsui.Providers.Wms
         /// </summary>
         /// <param name="name">Name of style</param>
         /// <exception cref="System.ArgumentException">Throws an exception is an unknown layer is added</exception>
-        public void AddStyle(string name)
+        public async Task AddStyleAsync(string name)
         {
-            if (_wmsClient == null || StylesList == null || !StyleExists(_wmsClient.Layer, name))
+            if (_wmsClient == null || StylesList == null || !StyleExists(await _wmsClient.LayerAsync(), name))
                 throw new ArgumentException("Cannot add WMS Layer - Unknown layer name");
             StylesList.Add(name);
         }
@@ -487,13 +487,13 @@ namespace Mapsui.Providers.Wms
 
         public override MRect? GetExtent()
         {
-            return CRS != null && _wmsClient != null && _wmsClient.Layer.BoundingBoxes.ContainsKey(CRS) ? _wmsClient.Layer.BoundingBoxes[CRS] : null;
+            return CRS != null && _wmsClient != null && _wmsClient.Layer != null && _wmsClient.Layer.Value.BoundingBoxes.ContainsKey(CRS) ? _wmsClient.Layer.Value.BoundingBoxes[CRS] : null;
         }
 
         public bool? IsCrsSupported(string crs)
         {
-            if (_wmsClient == null) return null;
-            return _wmsClient.Layer.CRS.FirstOrDefault(item => string.Equals(item.Trim(), crs.Trim(), StringComparison.CurrentCultureIgnoreCase)) != null;
+            if (_wmsClient == null || _wmsClient.Layer == null) return null;
+            return _wmsClient.Layer.Value.CRS.FirstOrDefault(item => string.Equals(item.Trim(), crs.Trim(), StringComparison.CurrentCultureIgnoreCase)) != null;
         }
 
         public override async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)

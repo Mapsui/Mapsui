@@ -161,6 +161,7 @@ namespace Mapsui.Providers.Wms
         private Collection<string>? _getMapOutputFormats;
         private WmsOnlineResource[]? _getFeatureInfoRequests;
         private string _wmsVersion;
+        private WmsServerLayer _layer;
 
         /// <summary>
         /// Gets the service description
@@ -220,7 +221,13 @@ namespace Mapsui.Providers.Wms
         /// <summary>
         /// Gets the hierarchical layer structure
         /// </summary>
-        public WmsServerLayer Layer { get; private set; }
+        public async Task<WmsServerLayer> LayerAsync()
+        {
+            await WaitForInitializationAsync();
+            return _layer;
+        }
+
+        public WmsServerLayer? Layer => _layer;
 
         /// <summary>
         /// Initializes WMS server and parses the Capabilities request
@@ -455,14 +462,14 @@ namespace Mapsui.Providers.Wms
                 rootLayer.Name = "__auto_generated_root_layer__";
                 rootLayer.Title = "";
                 rootLayer.ChildLayers = layers.ToArray();
-                Layer = rootLayer;
+                _layer = rootLayer;
             }
             else
             {
                 var xnLayer = xnCapability.SelectSingleNode("sm:Layer", _nsmgr);
                 if (xnLayer == null)
                     throw new Exception("No layer tag found in Service Description");
-                Layer = ParseLayer(xnLayer);
+                _layer = ParseLayer(xnLayer);
             }
 
             var xnException = xnCapability.SelectSingleNode("sm:Exception", _nsmgr);
