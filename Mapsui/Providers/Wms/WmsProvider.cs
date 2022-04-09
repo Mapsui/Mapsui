@@ -433,14 +433,14 @@ namespace Mapsui.Providers.Wms
         /// Gets the URL for a map request base on current settings, the image size and BoundingBox
         /// </summary>
         /// <returns>URL for WMS request</returns>
-        public IEnumerable<string> GetLegendRequestUrls()
+        public async Task<IEnumerable<string>> GetLegendRequestUrlsAsync()
         {
             var legendUrls = new List<string>();
             if (LayerList != null && LayerList.Count > 0)
             {
                 foreach (var layer in LayerList)
                 {
-                    if (_wmsClient != null && FindLayer(_wmsClient.Layer, layer, out var result))
+                    if (_wmsClient != null && FindLayer(await _wmsClient.LayerAsync(), layer, out var result))
                     {
                         foreach (var style in result.Style)
                         {
@@ -455,7 +455,7 @@ namespace Mapsui.Providers.Wms
 
         public async IAsyncEnumerable<MemoryStream> GetLegendsAsync()
         {
-            var urls = GetLegendRequestUrls();
+            var urls = await GetLegendRequestUrlsAsync();
 
             foreach (var url in urls)
             {
