@@ -1,6 +1,6 @@
-﻿using System;
-using SkiaSharp;
+﻿using SkiaSharp;
 using Svg.Skia;
+using System;
 
 namespace Mapsui.Rendering.Skia
 {

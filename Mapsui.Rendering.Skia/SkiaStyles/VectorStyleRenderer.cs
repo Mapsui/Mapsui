@@ -1,4 +1,3 @@
-using System;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Nts;
@@ -7,6 +6,7 @@ using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
 using SkiaSharp;
+using System;
 
 namespace Mapsui.Rendering.Skia
 {

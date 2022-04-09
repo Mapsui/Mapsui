@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using Mapsui.Layers;
+﻿using Mapsui.Layers;
 using Mapsui.Nts;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
 using SkiaSharp;
+using System;
+using System.Collections.Generic;
 
 namespace Mapsui.Rendering.Skia
 {
@@ -40,7 +40,7 @@ namespace Mapsui.Rendering.Skia
         private IEnumerable<Point> GetPoints(GeometryCollection geometryCollection)
         {
             foreach (var geometry in geometryCollection)
-            { 
+            {
                 if (geometry is Point point)
                     yield return point;
                 if (geometry is GeometryCollection collection)
@@ -239,7 +239,7 @@ namespace Mapsui.Rendering.Skia
             var inradius = altitude / 3.0;
             var circumradius = 2.0 * inradius;
 
-            var topX = x; 
+            var topX = x;
             var topY = y - circumradius;
             var leftX = x + sideLength * -0.5;
             var leftY = y + inradius;

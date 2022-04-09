@@ -1,7 +1,7 @@
-﻿using System;
-using Mapsui.Rendering.Skia.Extensions;
+﻿using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using SkiaSharp;
+using System;
 
 namespace Mapsui.Rendering.Skia
 {
@@ -28,7 +28,7 @@ namespace Mapsui.Rendering.Skia
         }
 
         public static void Draw(SKCanvas canvas, SKPicture? picture, float x, float y, float rotation = 0,
-            float offsetX = 0, float offsetY = 0, 
+            float offsetX = 0, float offsetY = 0,
             LabelStyle.HorizontalAlignmentEnum horizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
             LabelStyle.VerticalAlignmentEnum verticalAlignment = LabelStyle.VerticalAlignmentEnum.Center,
             float opacity = 1f,
@@ -87,7 +87,7 @@ namespace Mapsui.Rendering.Skia
                 {
                     FilterQuality = SKFilterQuality.Low,
                     ColorFilter = SKColorFilter.CreateBlendMode(blendModeColor.ToSkia(layerOpacity), SKBlendMode.SrcIn)
-                };                  
+                };
             };
 
             if (Math.Abs(layerOpacity - 1) > Utilities.Constants.Epsilon)
