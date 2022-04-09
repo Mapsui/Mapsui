@@ -1,5 +1,4 @@
-﻿using System.Collections.Concurrent;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -13,7 +12,6 @@ namespace Mapsui.Samples.Common.Maps
 {
     public class SvgSample : ISample
     {
-        private static readonly ConcurrentDictionary<string, int> ImageCache = new ConcurrentDictionary<string, int>();
         public string Name => "Svg";
         public string Category => "Symbols";
 
@@ -63,7 +61,7 @@ namespace Mapsui.Samples.Common.Maps
         private static SymbolStyle CreateSvgStyle(string embeddedResourcePath, double scale)
         {
             var bitmapId = typeof(SvgSample).LoadSvgId(embeddedResourcePath);
-            return new SymbolStyle { BitmapId = bitmapId, SymbolScale = scale, SymbolOffset = new Offset(0.0, 0.5, true) };
+            return new SymbolStyle { BitmapId = bitmapId, SymbolScale = scale, SymbolOffset = new Offset(0.0, 0.5, true), Fill = null };
         }
     }
 }

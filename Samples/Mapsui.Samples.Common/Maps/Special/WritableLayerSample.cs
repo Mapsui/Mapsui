@@ -27,7 +27,7 @@ namespace Mapsui.Tests.Common.Maps
 
             var writableLayer = new WritableLayer();
             var pinId = typeof(Map).LoadSvgId("Resources.Images.Pin.svg");
-            writableLayer.Style = new SymbolStyle { BitmapId = pinId, SymbolOffset = new Offset(0.0, 0.5, true) };
+            writableLayer.Style = new SymbolStyle { BitmapId = pinId, SymbolOffset = new Offset(0.0, 0.5, true), Fill = null };
 
             map.Layers.Add(writableLayer);
 

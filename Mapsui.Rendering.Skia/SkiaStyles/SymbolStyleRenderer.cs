@@ -15,11 +15,11 @@ namespace Mapsui.Rendering.Skia
         {
             switch (feature)
             {
-                case (PointFeature pointFeature):
-                    DrawPointFeature(canvas, viewport, layer, (PointFeature)feature, (SymbolStyle)style, symbolCache, iteration);
+                case PointFeature pointFeature:
+                    DrawPointFeature(canvas, viewport, layer, pointFeature, (SymbolStyle)style, symbolCache, iteration);
                     break;
-                case (GeometryFeature geometryFeatureNts):
-                    switch (geometryFeatureNts.Geometry)
+                case GeometryFeature geometryFeature:
+                    switch (geometryFeature.Geometry)
                     {
                         case GeometryCollection collection:
                             for (var i = 0; i < collection.NumGeometries; i++)
@@ -30,7 +30,7 @@ namespace Mapsui.Rendering.Skia
                             break;
                     }
                     break;
-                case (GeometryCollection geometryFeatureCollection):
+                case GeometryCollection geometryFeatureCollection:
                     for (var i = 0; i < geometryFeatureCollection.NumGeometries; i++)
                         Draw(canvas, viewport, layer, new GeometryFeature(geometryFeatureCollection.GetGeometryN(i)), style, symbolCache, iteration);
                     break;
@@ -43,7 +43,7 @@ namespace Mapsui.Rendering.Skia
         {
             if (symbolStyle.SymbolType == SymbolType.Image)
             {
-                return DrawImage(canvas, viewport, layer, pointFeature, symbolStyle, symbolCache, iteration);
+                return DrawImage(canvas, viewport, layer, pointFeature, symbolStyle, symbolCache);
             }
             else
             {
@@ -51,7 +51,7 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        public static bool DrawImage(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, PointFeature pointFeature, SymbolStyle symbolStyle, ISymbolCache symbolCache, long iteration)
+        public static bool DrawImage(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, PointFeature pointFeature, SymbolStyle symbolStyle, ISymbolCache symbolCache)
         {
             var opacity = (float)(layer.Opacity * symbolStyle.Opacity);
 
@@ -91,9 +91,11 @@ namespace Mapsui.Rendering.Skia
                         (float)destX, (float)destY,
                         rotation,
                         (float)offsetX, (float)offsetY,
-                        opacity: opacity, scale: (float)symbolStyle.SymbolScale);
+                        opacity: opacity, scale: (float)symbolStyle.SymbolScale, color: symbolStyle.Fill?.Color);
                     break;
                 case BitmapType.Svg:
+                    // Todo: Perhaps remove BitmapType.Svg and SvgRenderer?
+                    // It looks like Bitmaptype.Svg is not use at all the the momement.
                     if (bitmap.Svg == null)
                         return false;
 

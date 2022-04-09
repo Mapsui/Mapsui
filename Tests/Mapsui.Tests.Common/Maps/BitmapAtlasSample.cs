@@ -78,7 +78,7 @@ namespace Mapsui.Tests.Common.Maps
                 },
                 new PointFeature(new MPoint(380, 280))
                 {
-                    Styles = new[] {new SymbolStyle { BitmapId = svgTigerBitmapId, SymbolScale = 0.1} }
+                    Styles = new[] {new SymbolStyle { BitmapId = svgTigerBitmapId, SymbolScale = 0.1, Fill = null} }
                 }
             };
         }
