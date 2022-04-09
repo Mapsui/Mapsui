@@ -21,16 +21,14 @@ namespace Mapsui.Rendering.Skia
 
                 switch (feature)
                 {
-                    case (RectFeature rectFeature):
+                    case RectFeature rectFeature:
                         PolygonRenderer.Draw(canvas, viewport, vectorStyle, rectFeature, rectFeature.Rect.ToPolygon(), opacity);
                         break;
-                    case (PointFeature pointFeature):
-                        // Use the SymbolStyleRenderer and specify Ellipse
-                        var (destX, destY) = viewport.WorldToScreenXY(pointFeature.Point.X, pointFeature.Point.Y);
-                        SymbolStyleRenderer.DrawSymbol(canvas, viewport, layer, pointFeature, new SymbolStyle { Outline = vectorStyle.Outline, Fill = vectorStyle.Fill, Line = vectorStyle.Line }, symbolCache, iteration);
+                    case PointFeature pointFeature:
+                        SymbolStyleRenderer.DrawSymbol(canvas, viewport, layer, pointFeature.Point.X, pointFeature.Point.Y, new SymbolStyle { Outline = vectorStyle.Outline, Fill = vectorStyle.Fill, Line = vectorStyle.Line });
                         break;
-                    case (GeometryFeature geometryFeatureNts):
-                        switch (geometryFeatureNts.Geometry)
+                    case GeometryFeature geometryFeature:
+                        switch (geometryFeature.Geometry)
                         {
                             case GeometryCollection collection:
                                 for (var i = 0; i < collection.NumGeometries; i++)
@@ -43,15 +41,11 @@ namespace Mapsui.Rendering.Skia
                                 PolygonRenderer.Draw(canvas, viewport, vectorStyle, feature, polygon, opacity, symbolCache);
                                 break;
                             case LineString lineString:
-                                LineStringRenderer.Draw(canvas, viewport, vectorStyle, feature, lineString, opacity);
+                                LineStringRenderer.Draw(canvas, viewport, vectorStyle, lineString, opacity);
                                 break;
                             default:
                                 throw new ArgumentException("Unknown geometry of Feature");
                         }
-                        break;
-                    case (GeometryCollection geometryFeatureCollection):
-                        for (var i = 0; i < geometryFeatureCollection.NumGeometries; i++)
-                            Draw(canvas, viewport, layer, new GeometryFeature(geometryFeatureCollection.GetGeometryN(i)), style, symbolCache, iteration);
                         break;
                 }
             }
