@@ -21,6 +21,7 @@ namespace Mapsui.Tests.Common.Maps
         }
 
         [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
+        [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don't ignore created IDisposable")]
         private Map CreateMap()
         {
             var map = new Map();

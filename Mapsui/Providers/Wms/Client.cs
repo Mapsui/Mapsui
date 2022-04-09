@@ -155,7 +155,6 @@ namespace Mapsui.Providers.Wms
         private Func<string, Task<Stream>> _getStreamAsync;
         private string[]? _exceptionFormats;
         private Capabilities.WmsServiceDescription _serviceDescription;
-        private readonly Task? _initTask;
         private readonly IUrlPersistentCache? _persistentCache;
         private Collection<string>? _getFeatureInfoOutputFormats;
         private Collection<string>? _getMapOutputFormats;
@@ -166,38 +165,22 @@ namespace Mapsui.Providers.Wms
         /// <summary>
         /// Gets the service description
         /// </summary>
-        public async Task<Capabilities.WmsServiceDescription> ServiceDescriptionAsync()
-        {
-            await WaitForInitializationAsync();
-            return _serviceDescription;
-        }
+        public Capabilities.WmsServiceDescription ServiceDescription => _serviceDescription;
 
         /// <summary>
         /// Gets the version of the WMS server (ex. "1.3.0")
         /// </summary>
-        public async Task<string> WmsVersionAsync()
-        {
-            await WaitForInitializationAsync();
-            return _wmsVersion;
-        }
+        public string WmsVersion => _wmsVersion;
 
         /// <summary>
         /// Gets a list of available image mime type formats
         /// </summary>
-        public async Task<Collection<string>?> GetMapOutputFormatsAsync()
-        {
-            await WaitForInitializationAsync();
-            return _getMapOutputFormats;
-        }
+        public Collection<string>? GetMapOutputFormats => _getMapOutputFormats;
 
         /// <summary>
         /// Gets a list of available feature info mime type formats
         /// </summary>
-        public async Task<Collection<string>?> GetFeatureInfoOutputFormatsAsync()
-        {
-            await WaitForInitializationAsync();
-            return _getFeatureInfoOutputFormats;
-    }
+        public Collection<string>? GetFeatureInfoOutputFormats => _getFeatureInfoOutputFormats;
 
         /// <summary>
         /// Gets a list of available exception mime type formats
@@ -212,22 +195,12 @@ namespace Mapsui.Providers.Wms
         /// <summary>
         /// Gets the available GetMap request methods and Online Resource URI
         /// </summary>
-        public async Task<WmsOnlineResource[]?> GetFeatureInfoRequestsAsync()
-        {
-            await WaitForInitializationAsync();
-            return _getFeatureInfoRequests;
-        }
+        public WmsOnlineResource[]? GetFeatureInfoRequests => _getFeatureInfoRequests;
 
         /// <summary>
         /// Gets the hierarchical layer structure
         /// </summary>
-        public async Task<WmsServerLayer> LayerAsync()
-        {
-            await WaitForInitializationAsync();
-            return _layer;
-        }
-
-        public WmsServerLayer? Layer => _layer;
+        public WmsServerLayer Layer => _layer;
 
         /// <summary>
         /// Initializes WMS server and parses the Capabilities request
@@ -236,13 +209,10 @@ namespace Mapsui.Providers.Wms
         /// <param name="wmsVersion">WMS version number, null to get the default from service</param>
         /// <param name="getStreamAsync">Download method, leave null for default</param>
         /// <param name="persistentCache">persistent Cache</param>
-        public Client(string url, string? wmsVersion = null, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
+        public static async Task<Client> CreateAsync(string url, string? wmsVersion = null, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
         {
-            _persistentCache = persistentCache;
-            _getStreamAsync = default!; // is later assigned 
-            _nsmgr = default!; // is later assigned
-            _wmsVersion = default!; // is later assigned
-            InitialiseGetStreamAsyncMethod(getStreamAsync);
+            var client = new Client(getStreamAsync, persistentCache);
+            
             var strReq = new StringBuilder(url);
             if (!url.Contains("?"))
                 strReq.Append("?");
@@ -254,19 +224,25 @@ namespace Mapsui.Providers.Wms
                 strReq.AppendFormat("REQUEST=GetCapabilities&");
             if (!url.ToLower().Contains("version=") && !string.IsNullOrEmpty(wmsVersion))
                 strReq.AppendFormat("VERSION={0}&", wmsVersion);
-            
-            _initTask = Task.Run(async () =>
-            {
-                try
-                {
-                    var xml = await GetRemoteXmlAsync(strReq.ToString().TrimEnd('&'));
-                    ParseCapabilities(xml);
-                }
-                catch (Exception e)
-                {
-                    Logger.Log(LogLevel.Error, e.Message, e);   
-                }
-            });
+            var xml = await client.GetRemoteXmlAsync(strReq.ToString().TrimEnd('&'));
+            client.ParseCapabilities(xml);
+            return client;
+        }
+        
+        /// <summary>
+        /// Initializes WMS server and parses the Capabilities request
+        /// </summary>
+        /// <param name="url">URL of wms server</param>
+        /// <param name="wmsVersion">WMS version number, null to get the default from service</param>
+        /// <param name="getStreamAsync">Download method, leave null for default</param>
+        /// <param name="persistentCache">persistent Cache</param>
+        private Client(Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
+        {
+            _persistentCache = persistentCache;
+            _getStreamAsync = default!; // is later assigned 
+            _nsmgr = default!; // is later assigned
+            _wmsVersion = default!; // is later assigned
+            InitialiseGetStreamAsyncMethod(getStreamAsync);
         }
 
         public Client(XmlDocument capabilitiesXmlDocument, Func<string, Task<Stream>>? getStreamAsync = null)
@@ -277,8 +253,6 @@ namespace Mapsui.Providers.Wms
             _nsmgr = new XmlNamespaceManager(capabilitiesXmlDocument.NameTable);
             ParseCapabilities(capabilitiesXmlDocument);
         }
-
-        public Task? InitTask => _initTask;
 
         private void InitialiseGetStreamAsyncMethod(Func<string, Task<Stream>>? getStreamAsync)
         {
@@ -338,14 +312,6 @@ namespace Mapsui.Providers.Wms
                 var message = "Could not download capabilities";
                 Logger.Log(LogLevel.Warning, message, ex);
                 throw new ApplicationException(message, ex);
-            }
-        }
-        
-        private async Task WaitForInitializationAsync()
-        {
-            if (_initTask != null)
-            {
-                await _initTask;
             }
         }
 

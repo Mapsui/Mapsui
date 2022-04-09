@@ -40,10 +40,9 @@ namespace Mapsui.Providers.Wms
         private readonly Client? _wmsClient;
         private Func<string, Task<Stream>>? _getStreamAsync;
         private readonly IUrlPersistentCache? _persistentCache;
-        private readonly Task? _initTask;
 
-        public WmsProvider(XmlDocument capabilities, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
-            : this(new Client(capabilities, getStreamAsync), persistentCache: persistentCache)
+        public WmsProvider(XmlDocument capabilities, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null) 
+            :this(new Client(capabilities, getStreamAsync), persistentCache: persistentCache)
         {
             InitialiseGetStreamAsyncMethod(getStreamAsync);
         }
@@ -55,10 +54,12 @@ namespace Mapsui.Providers.Wms
         /// <param name="persistentCache"></param>
         /// <param name="wmsVersion">Version number of wms leave null to get the default service version</param>
         /// <param name="getStreamAsync">Download method, leave null for default</param>
-        public WmsProvider(string url, string? wmsVersion = null, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
-            : this(new Client(url, wmsVersion, getStreamAsync, persistentCache: persistentCache), persistentCache: persistentCache)
+        public static async Task<WmsProvider> CreateAsync(string url, string? wmsVersion = null, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
         {
-            InitialiseGetStreamAsyncMethod(getStreamAsync);
+            var client = await Client.CreateAsync(url, wmsVersion, getStreamAsync, persistentCache: persistentCache);
+            var provider = new WmsProvider(client, persistentCache: persistentCache);
+            provider.InitialiseGetStreamAsyncMethod(getStreamAsync);
+            return provider;
         }
 
         private WmsProvider(Client wmsClient, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
@@ -68,25 +69,20 @@ namespace Mapsui.Providers.Wms
             _wmsClient = wmsClient;
             TimeOut = 10000;
             ContinueOnError = true;
-
-            _initTask = Task.Run(async () =>
+            
+            var outputFormats = OutputFormats;
+            if (outputFormats.Contains("image/png")) _mimeType = "image/png";
+            else if (outputFormats.Contains("image/gif")) _mimeType = "image/gif";
+            else if (outputFormats.Contains("image/jpeg")) _mimeType = "image/jpeg";
+            else //None of the default formats supported - Look for the first supported output format
             {
-                var outputFormats = await OutputFormatsAsync();
-                if (outputFormats.Contains("image/png")) _mimeType = "image/png";
-                else if (outputFormats.Contains("image/gif")) _mimeType = "image/gif";
-                else if (outputFormats.Contains("image/jpeg")) _mimeType = "image/jpeg";
-                else //None of the default formats supported - Look for the first supported output format
-                {
-                    throw new ArgumentException(
-                        "None of the formats provided by the WMS service are supported");
-                }
-            });
+                throw new ArgumentException(
+                    "None of the formats provided by the WMS service are supported");
+            }
 
             LayerList = new Collection<string>();
             StylesList = new Collection<string>();
         }
-
-        public Task? InitTask => _initTask;
 
         private void InitialiseGetStreamAsyncMethod(Func<string, Task<Stream>>? getStreamAsync)
         {
@@ -111,46 +107,22 @@ namespace Mapsui.Providers.Wms
         /// <summary>
         /// Gets the list of available formats
         /// </summary>
-        public async Task<Collection<string>> OutputFormatsAsync()
-        {
-            if (_wmsClient == null)
-                return new Collection<string>();
-            
-            return (await _wmsClient.GetMapOutputFormatsAsync()) ?? new Collection<string>();
-        }
+        public Collection<string> OutputFormats => _wmsClient?.GetMapOutputFormats ?? new Collection<string>();
 
         /// <summary>
         /// Gets the list of available FeatureInfo Output Format
         /// </summary>
-        public async Task<Collection<string>> GetFeatureInfoFormatsAsync()
-        {
-            if (_wmsClient == null)
-                return new Collection<string>();
-            
-            return await _wmsClient.GetFeatureInfoOutputFormatsAsync() ?? new Collection<string>();  
-        }
+        public Collection<string> GetFeatureInfoFormats => _wmsClient?.GetFeatureInfoOutputFormats ?? new Collection<string>();
 
         /// <summary>
         /// Gets the service description from this server
         /// </summary>
-        public async Task<Capabilities.WmsServiceDescription?> ServiceDescriptionAsync()
-        {
-            if (_wmsClient == null)
-                return null;
-            
-            return await _wmsClient.ServiceDescriptionAsync();  
-        }
+        public Capabilities.WmsServiceDescription? ServiceDescription => _wmsClient?.ServiceDescription;
 
         /// <summary>
         /// Gets the WMS Server version of this service
         /// </summary>
-        public async Task<string?> VersionAsync()
-        {
-            if (_wmsClient == null)
-                return null;
-            
-            return await _wmsClient.WmsVersionAsync();
-        } 
+        public string? Version => _wmsClient?.WmsVersion;
 
         /// <summary>
         /// Specifies whether to throw an exception if the Wms request failed, or to just skip rendering the layer
@@ -173,9 +145,9 @@ namespace Mapsui.Providers.Wms
         /// <remarks>Layer names are case sensitive.</remarks>
         /// <param name="name">Name of layer</param>
         /// <exception cref="System.ArgumentException">Throws an exception is an unknown layer is added</exception>
-        public async Task AddLayerAsync(string name)
+        public void AddLayer(string name)
         {
-            if (_wmsClient == null || LayerList == null || !LayerExists(await _wmsClient.LayerAsync(), name))
+            if (_wmsClient == null || LayerList == null || !LayerExists(_wmsClient.Layer, name))
                 throw new ArgumentException("Cannot add WMS Layer - Unknown layer name");
 
             LayerList.Add(name);
@@ -187,11 +159,11 @@ namespace Mapsui.Providers.Wms
         /// <remarks>Layer names are case sensitive.</remarks>
         /// <param name="name">Name of layer</param>
         /// <exception cref="System.ArgumentException">Throws an exception if the layer is not found</exception>
-        public async Task<Client.WmsServerLayer> GetLayerAsync(string name)
+        public Client.WmsServerLayer GetLayer(string name)
         {
             if (_wmsClient == null)
                 throw new InvalidOperationException("WmsClient needs to be set");
-            if (FindLayer(await _wmsClient.LayerAsync(), name, out var layer))
+            if (FindLayer(_wmsClient.Layer, name, out var layer))
                 return layer;
 
             throw new ArgumentException("Layer not found");
@@ -256,9 +228,9 @@ namespace Mapsui.Providers.Wms
         /// </summary>
         /// <param name="name">Name of style</param>
         /// <exception cref="System.ArgumentException">Throws an exception is an unknown layer is added</exception>
-        public async Task AddStyleAsync(string name)
+        public void AddStyle(string name)
         {
-            if (_wmsClient == null || StylesList == null || !StyleExists(await _wmsClient.LayerAsync(), name))
+            if (_wmsClient == null || StylesList == null || !StyleExists(_wmsClient.Layer, name))
                 throw new ArgumentException("Cannot add WMS Layer - Unknown layer name");
             StylesList.Add(name);
         }
@@ -310,9 +282,9 @@ namespace Mapsui.Providers.Wms
         /// <exception cref="ArgumentException">Throws an exception if either the mime type isn't offered by the WMS
         /// or GDI+ doesn't support this mime type.</exception>
         /// <param name="mimeType">Mime type of image format</param>
-        public async Task SetImageFormatAsync(string mimeType)
+        public void SetImageFormat(string mimeType)
         {
-            if (!(await OutputFormatsAsync()).Contains(mimeType))
+            if (!OutputFormats.Contains(mimeType))
                 throw new ArgumentException("WMS service doesn't not offer mimetype '" + mimeType + "'");
             _mimeType = mimeType;
         }
@@ -334,7 +306,7 @@ namespace Mapsui.Providers.Wms
                 return (false, null);
             }
 
-            var url = await GetRequestUrlAsync(viewport.Extent, width, height);
+            var url = GetRequestUrl(viewport.Extent, width, height);
 
             try
             {
@@ -381,7 +353,7 @@ namespace Mapsui.Providers.Wms
         /// Gets the URL for a map request base on current settings, the image size and BoundingBox
         /// </summary>
         /// <returns>URL for WMS request</returns>
-        public async Task<string> GetRequestUrlAsync(MRect? box, int width, int height)
+        public string GetRequestUrl(MRect? box, int width, int height)
         {
             var resource = GetPreferredMethod();
             var strReq = new StringBuilder(resource.OnlineResource);
@@ -406,7 +378,7 @@ namespace Mapsui.Providers.Wms
                 throw new ApplicationException("Spatial reference system not set");
             if (_wmsClient != null)
             {
-                var wmsVersion = await _wmsClient.WmsVersionAsync();
+                var wmsVersion = _wmsClient.WmsVersion;
                 strReq.AppendFormat(wmsVersion != "1.3.0" ? "&SRS={0}" : "&CRS={0}", CRS);
                 strReq.AppendFormat("&VERSION={0}", wmsVersion);
             }
@@ -433,14 +405,14 @@ namespace Mapsui.Providers.Wms
         /// Gets the URL for a map request base on current settings, the image size and BoundingBox
         /// </summary>
         /// <returns>URL for WMS request</returns>
-        public async Task<IEnumerable<string>> GetLegendRequestUrlsAsync()
+        public IEnumerable<string> GetLegendRequestUrls()
         {
             var legendUrls = new List<string>();
             if (LayerList != null && LayerList.Count > 0)
             {
                 foreach (var layer in LayerList)
                 {
-                    if (_wmsClient != null && FindLayer(await _wmsClient.LayerAsync(), layer, out var result))
+                    if (_wmsClient != null && FindLayer(_wmsClient.Layer, layer, out var result))
                     {
                         foreach (var style in result.Style)
                         {
@@ -455,7 +427,7 @@ namespace Mapsui.Providers.Wms
 
         public async IAsyncEnumerable<MemoryStream> GetLegendsAsync()
         {
-            var urls = await GetLegendRequestUrlsAsync();
+            var urls = GetLegendRequestUrls();
 
             foreach (var url in urls)
             {
@@ -487,13 +459,13 @@ namespace Mapsui.Providers.Wms
 
         public override MRect? GetExtent()
         {
-            return CRS != null && _wmsClient != null && _wmsClient.Layer != null && _wmsClient.Layer.Value.BoundingBoxes.ContainsKey(CRS) ? _wmsClient.Layer.Value.BoundingBoxes[CRS] : null;
+            return CRS != null && _wmsClient != null && _wmsClient.Layer.BoundingBoxes.ContainsKey(CRS) ? _wmsClient.Layer.BoundingBoxes[CRS] : null;
         }
 
         public bool? IsCrsSupported(string crs)
         {
-            if (_wmsClient == null || _wmsClient.Layer == null) return null;
-            return _wmsClient.Layer.Value.CRS.FirstOrDefault(item => string.Equals(item.Trim(), crs.Trim(), StringComparison.CurrentCultureIgnoreCase)) != null;
+            if (_wmsClient == null) return null;
+            return _wmsClient.Layer.CRS.FirstOrDefault(item => string.Equals(item.Trim(), crs.Trim(), StringComparison.CurrentCultureIgnoreCase)) != null;
         }
 
         public override async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
@@ -506,11 +478,6 @@ namespace Mapsui.Providers.Wms
         [SuppressMessage("Usage", "VSTHRD003:Avoid awaiting foreign Tasks")]
         private async Task<Stream> GetStreamAsync(string url)
         {
-            if (_initTask != null)
-            {
-                await _initTask;
-            }
-
             var handler = new HttpClientHandler { Credentials = Credentials };
             var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
             var req = new HttpRequestMessage(new HttpMethod(GetPreferredMethod().Type), url);

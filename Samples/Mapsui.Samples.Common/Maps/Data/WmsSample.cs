@@ -35,15 +35,13 @@ namespace Mapsui.Samples.Common.Maps.Data
         {
             const string wmsUrl = "https://geodata.nationaalgeoregister.nl/windkaart/wms?request=GetCapabilities";
 
-            var provider = new WmsProvider(wmsUrl, persistentCache: DefaultCache)
-            {
-                ContinueOnError = true,
-                TimeOut = 20000,
-                CRS = "EPSG:28992"
-            };
+            var provider = await WmsProvider.CreateAsync(wmsUrl, persistentCache: DefaultCache);
+            provider.ContinueOnError = true;
+            provider.TimeOut = 20000;
+            provider.CRS = "EPSG:28992";
 
-            await provider.AddLayerAsync("windsnelheden100m");
-            await provider.SetImageFormatAsync((await provider.OutputFormatsAsync())[0]);
+            provider.AddLayer("windsnelheden100m");
+            provider.SetImageFormat((provider.OutputFormats)[0]);
             return provider;
         }
     }

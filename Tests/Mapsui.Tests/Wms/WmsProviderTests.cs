@@ -14,16 +14,16 @@ namespace Mapsui.Tests.Wms
         public async Task GetLegendRequestUrls_WhenInitialized_ShouldReturnListOfUrlsAsync()
         {
             // arrange
-            var capabilties = new XmlDocument { XmlResolver = null };
-            capabilties.Load($"{AssemblyInfo.AssemblyDirectory}\\Resources\\capabilities_1_3_0.xml");
-            var provider = new WmsProvider(capabilties) { CRS = "EPSG:3857" };
-            await provider.AddLayerAsync("Maasluis complex - top");
-            await provider.AddLayerAsync("Kreftenheye z2 - top");
-            await provider.SetImageFormatAsync((await provider.OutputFormatsAsync())[0]);
+            var capabilities = new XmlDocument { XmlResolver = null };
+            capabilities.Load($"{AssemblyInfo.AssemblyDirectory}\\Resources\\capabilities_1_3_0.xml");
+            var provider = new WmsProvider(capabilities) { CRS = "EPSG:3857" };
+            provider.AddLayer("Maasluis complex - top");
+            provider.AddLayer("Kreftenheye z2 - top");
+            provider.SetImageFormat((provider.OutputFormats)[0]);
             provider.ContinueOnError = true;
 
             // act
-            var legendUrls = await provider.GetLegendRequestUrlsAsync();
+            var legendUrls = provider.GetLegendRequestUrls();
 
             // assert
             Assert.True(legendUrls.Count() == 2);
