@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Reflection;
-using Mapsui.Extensions;
+﻿using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Utilities;
+using System.Collections.Generic;
 
 namespace Mapsui.Tests.Common.Maps
 {
@@ -78,7 +77,7 @@ namespace Mapsui.Tests.Common.Maps
                 },
                 new PointFeature(new MPoint(380, 280))
                 {
-                    Styles = new[] {new SymbolStyle { BitmapId = svgTigerBitmapId, SymbolScale = 0.1, Fill = null} }
+                    Styles = new[] {new SymbolStyle { BitmapId = svgTigerBitmapId, SymbolScale = 0.1} }
                 }
             };
         }

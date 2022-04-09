@@ -54,7 +54,6 @@ public class AnimatedPointsSamples : ISample
             SymbolScale = scale,
             SymbolOffset = new Offset(0.0, 0.5, true),
             Opacity = 0.5f,
-            Fill = null, // If the Fill.Color is set this will override the color of the svg itself
             SymbolRotation = (double)feature["rotation"]!
         };
     }

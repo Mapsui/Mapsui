@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Reflection;
-using Mapsui.Layers;
+﻿using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Utilities;
+using System.Collections.Generic;
 
 #pragma warning disable IDISP001 // Dispose created
 
@@ -48,16 +47,16 @@ namespace Mapsui.Tests.Common.Maps
             return new List<IFeature>
             {
                 new PointFeature(new MPoint(50, 50)) {
-                    Styles = new[] {new SymbolStyle { BitmapId = pinId, Fill = null }}
+                    Styles = new[] {new SymbolStyle { BitmapId = pinId } }
                 },
                 new PointFeature(new MPoint(50, 100)) {
-                    Styles = new[] {new SymbolStyle { BitmapId = pinId, Fill = null } }
+                    Styles = new[] {new SymbolStyle { BitmapId = pinId } }
                 },
                 new PointFeature(new MPoint(100, 50)) {
-                    Styles = new[] {new SymbolStyle { BitmapId = pinId, Fill = null } }
+                    Styles = new[] {new SymbolStyle { BitmapId = pinId } }
                 },
                 new PointFeature(new MPoint(100, 100)) {
-                    Styles = new[] {new SymbolStyle { BitmapId = pinId, Fill = null } }
+                    Styles = new[] {new SymbolStyle { BitmapId = pinId } }
                 }
             };
         }

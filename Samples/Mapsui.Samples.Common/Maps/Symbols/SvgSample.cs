@@ -50,7 +50,8 @@ namespace Mapsui.Samples.Common.Maps
         {
             var counter = 0;
 
-            return randomPoints.Select(p => {
+            return randomPoints.Select(p =>
+            {
                 var feature = new PointFeature(p) { ["Label"] = counter.ToString() };
                 feature.Styles.Add(CreateSvgStyle(@"Images.Pin.svg", 0.5));
                 counter++;
@@ -61,7 +62,7 @@ namespace Mapsui.Samples.Common.Maps
         private static SymbolStyle CreateSvgStyle(string embeddedResourcePath, double scale)
         {
             var bitmapId = typeof(SvgSample).LoadSvgId(embeddedResourcePath);
-            return new SymbolStyle { BitmapId = bitmapId, SymbolScale = scale, SymbolOffset = new Offset(0.0, 0.5, true), Fill = null };
+            return new SymbolStyle { BitmapId = bitmapId, SymbolScale = scale, SymbolOffset = new Offset(0.0, 0.5, true) };
         }
     }
 }

@@ -80,6 +80,12 @@ namespace Mapsui.Styles
         /// </summary>
         public bool SymbolOffsetRotatesWithMap { get; set; }
 
+        /// <summary>
+        /// When BlendModeColor is set a BitmapType.Picture (e.g. used for SVG) will be 
+        /// drawn in the BlendModeColor ignoring the colors of the Picture itself.
+        /// </summary>
+        public Color? BlendModeColor { get; set; }
+
         public override bool Equals(object? obj)
         {
             if (!(obj is SymbolStyle style))
@@ -131,6 +137,7 @@ namespace Mapsui.Styles
                 SymbolRotation.GetHashCode() ^
                 UnitType.GetHashCode() ^
                 SymbolType.GetHashCode() ^
+                BlendModeColor?.GetHashCode() ?? 0 ^
                 base.GetHashCode();
         }
 

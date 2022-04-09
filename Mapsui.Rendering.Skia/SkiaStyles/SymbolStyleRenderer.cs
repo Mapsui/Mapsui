@@ -91,7 +91,7 @@ namespace Mapsui.Rendering.Skia
                         (float)destX, (float)destY,
                         rotation,
                         (float)offsetX, (float)offsetY,
-                        opacity: opacity, scale: (float)symbolStyle.SymbolScale, color: symbolStyle.Fill?.Color);
+                        opacity: opacity, scale: (float)symbolStyle.SymbolScale, color: symbolStyle.BlendModeColor);
                     break;
                 case BitmapType.Svg:
                     // Todo: Perhaps remove BitmapType.Svg and SvgRenderer?

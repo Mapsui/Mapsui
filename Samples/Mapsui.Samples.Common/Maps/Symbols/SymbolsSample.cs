@@ -108,7 +108,7 @@ namespace Mapsui.Samples.Common.Maps
         private static SymbolStyle CreateSvgStyle(string embeddedResourcePath, double scale)
         {
             var bitmapId = typeof(SymbolsSample).LoadSvgId(embeddedResourcePath);
-            return new SymbolStyle { BitmapId = bitmapId, SymbolScale = scale, SymbolOffset = new Offset(0.0, 0.5, true), Fill = null };
+            return new SymbolStyle { BitmapId = bitmapId, SymbolScale = scale, SymbolOffset = new Offset(0.0, 0.5, true) };
         }
 
         private static IFeature CreatePointWithStackedStyles()
