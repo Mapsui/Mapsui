@@ -7,7 +7,7 @@ using Mapsui.Projections;
 
 namespace Mapsui.Providers
 {
-    public class ProjectingProvider : IProvider<IFeature>
+    public class ProjectingProvider : AsyncProviderBase<IFeature>
     {
         private readonly IProvider<IFeature> _provider;
         private readonly IProjection _projection;
@@ -18,18 +18,12 @@ namespace Mapsui.Providers
             _projection = projection ?? new Projection();
         }
 
-        /// <summary>
-        /// The CRS of the target. The source CRS will be projected to this target CRS. This should be equal to the
-        /// CRS of the Map and the FetchInfo.CRS.
-        /// </summary>
-        public string? CRS { get; set; }
-
-        public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
+        public override async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
         {
             // Note that the FetchInfo.CRS is ignored in this method. A better solution
             // would be to use the fetchInfo.CRS everywhere, but that would only make 
             // sense if GetExtent would also get a CRS argument. Room for improvement.
-            if (fetchInfo.Extent == null) return new List<IFeature>();
+            if (fetchInfo.Extent == null) yield break;
 
             var copiedExtent = new MRect(fetchInfo.Extent);
 
@@ -37,18 +31,21 @@ namespace Mapsui.Providers
             _projection.Project(CRS!, _provider.CRS!, copiedExtent);
             fetchInfo = new FetchInfo(copiedExtent, fetchInfo.Resolution, CRS, fetchInfo.ChangeType);
 
-            var features = _provider.GetFeatures(fetchInfo) ?? new List<IFeature>();
-            if (!CrsHelper.IsProjectionNeeded(_provider.CRS, CRS)) return features;
+            var features = await _provider.GetFeaturesAsync(fetchInfo) ?? new List<IFeature>();
+            if (!CrsHelper.IsProjectionNeeded(_provider.CRS, CRS))
+                foreach (var it in features)
+                    yield return it;
 
             if (!CrsHelper.IsCrsProvided(_provider.CRS, CRS))
                 throw new NotSupportedException($"CRS is not provided. From CRS: {_provider.CRS}. To CRS {CRS}");
 
             var copiedFeatures = features.Copy().ToList();
             _projection.Project(_provider.CRS, CRS, copiedFeatures);
-            return copiedFeatures;
+            foreach (var it in copiedFeatures)
+                yield return it;
         }
 
-        public MRect? GetExtent()
+        public override MRect? GetExtent()
         {
             if (_provider.GetExtent() == null) return null;
             var extent = _provider.GetExtent()!;
