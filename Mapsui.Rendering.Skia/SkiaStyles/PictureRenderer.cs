@@ -8,7 +8,7 @@ namespace Mapsui.Rendering.Skia
     internal class PictureRenderer
     {
         // The field below is static for performance. Effect has not been measured.
-        // Note that the default FilterQuality is None. Setting it explicitly to Low increases the quality.
+        // Note that setting the FilterQuality to Low increases the quality because the default is None.
         private static readonly SKPaint DefaultPaint = new() { FilterQuality = SKFilterQuality.Low };
 
         public static void Draw(SKCanvas canvas, SKPicture picture, SKRect rect, float layerOpacity = 1f, Color? blendModeColor = null)
@@ -87,7 +87,7 @@ namespace Mapsui.Rendering.Skia
                 {
                     FilterQuality = SKFilterQuality.Low,
                     ColorFilter = SKColorFilter.CreateBlendMode(blendModeColor.ToSkia(layerOpacity), SKBlendMode.SrcIn)
-                };            
+                };                  
             };
 
             if (Math.Abs(layerOpacity - 1) > Utilities.Constants.Epsilon)
