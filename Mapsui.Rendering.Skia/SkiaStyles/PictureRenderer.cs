@@ -11,9 +11,9 @@ namespace Mapsui.Rendering.Skia
         // Note that the default FilterQuality is None. Setting it explicitly to Low increases the quality.
         private static readonly SKPaint DefaultPaint = new() { FilterQuality = SKFilterQuality.Low };
 
-        public static void Draw(SKCanvas canvas, SKPicture picture, SKRect rect, float layerOpacity = 1f, Color? color = null)
+        public static void Draw(SKCanvas canvas, SKPicture picture, SKRect rect, float layerOpacity = 1f, Color? blendModeColor = null)
         {
-            var skPaint = GetPaint(layerOpacity, color, out var dispose);
+            var skPaint = GetPaint(layerOpacity, blendModeColor, out var dispose);
 
             var scaleX = rect.Width / picture.CullRect.Width;
             var scaleY = rect.Height / picture.CullRect.Height;
@@ -33,7 +33,7 @@ namespace Mapsui.Rendering.Skia
             LabelStyle.VerticalAlignmentEnum verticalAlignment = LabelStyle.VerticalAlignmentEnum.Center,
             float opacity = 1f,
             float scale = 1f,
-            Color? color = null)
+            Color? blendModeColor = null)
         {
             if (picture == null)
                 return;
@@ -56,7 +56,7 @@ namespace Mapsui.Rendering.Skia
 
             var rect = new SKRect(x - halfWidth, y - halfHeight, x + halfWidth, y + halfHeight);
 
-            Draw(canvas, picture, rect, opacity, color);
+            Draw(canvas, picture, rect, opacity, blendModeColor);
 
             canvas.Restore();
         }
@@ -76,17 +76,17 @@ namespace Mapsui.Rendering.Skia
             return 0; // center
         }
 
-        private static SKPaint GetPaint(float layerOpacity, Color? color, out bool dispose)
+        private static SKPaint GetPaint(float layerOpacity, Color? blendModeColor, out bool dispose)
         {
-            if (color is not null)
+            if (blendModeColor is not null)
             {
-                // Unfortunately when color is set we need to create a new SKPaint for
+                // Unfortunately when blendModeColor is set we need to create a new SKPaint for
                 // possible individually different color arguments. 
                 dispose = true;
                 return new SKPaint
                 {
                     FilterQuality = SKFilterQuality.Low,
-                    ColorFilter = SKColorFilter.CreateBlendMode(color.ToSkia(layerOpacity), SKBlendMode.SrcIn)
+                    ColorFilter = SKColorFilter.CreateBlendMode(blendModeColor.ToSkia(layerOpacity), SKBlendMode.SrcIn)
                 };            
             };
 
