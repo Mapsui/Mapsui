@@ -42,13 +42,8 @@ namespace Mapsui.Samples.Common.Maps.Data
                 CRS = "EPSG:28992"
             };
 
-            if (provider.InitTask != null)
-            {
-                await provider.InitTask;
-            }
-
             provider.AddLayer("windsnelheden100m");
-            provider.SetImageFormat(provider.OutputFormats[0]);
+            await provider.SetImageFormatAsync((await provider.OutputFormatsAsync())[0]);
             return provider;
         }
     }

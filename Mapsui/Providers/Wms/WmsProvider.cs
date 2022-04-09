@@ -71,14 +71,10 @@ namespace Mapsui.Providers.Wms
 
             _initTask = Task.Run(async () =>
             {
-                if (wmsClient.InitTask != null)
-                {
-                    await wmsClient.InitTask;
-                }
-
-                if (OutputFormats.Contains("image/png")) _mimeType = "image/png";
-                else if (OutputFormats.Contains("image/gif")) _mimeType = "image/gif";
-                else if (OutputFormats.Contains("image/jpeg")) _mimeType = "image/jpeg";
+                var outputFormats = await OutputFormatsAsync();
+                if (outputFormats.Contains("image/png")) _mimeType = "image/png";
+                else if (outputFormats.Contains("image/gif")) _mimeType = "image/gif";
+                else if (outputFormats.Contains("image/jpeg")) _mimeType = "image/jpeg";
                 else //None of the default formats supported - Look for the first supported output format
                 {
                     throw new ArgumentException(
@@ -115,22 +111,54 @@ namespace Mapsui.Providers.Wms
         /// <summary>
         /// Gets the list of available formats
         /// </summary>
-        public Collection<string> OutputFormats => _wmsClient?.GetMapOutputFormats ?? new Collection<string>();
+        public async Task<Collection<string>> OutputFormatsAsync()
+        {
+            if (_wmsClient?.InitTask != null )
+            {
+                await _wmsClient.InitTask;    
+            }
+            
+            return _wmsClient?.GetMapOutputFormats ?? new Collection<string>();
+        }
 
         /// <summary>
         /// Gets the list of available FeatureInfo Output Format
         /// </summary>
-        public Collection<string> GetFeatureInfoFormats => _wmsClient?.GetFeatureInfoOutputFormats ?? new Collection<string>();
+        public async Task<Collection<string>> GetFeatureInfoFormatsAsync()
+        {
+            if (_wmsClient?.InitTask != null )
+            {
+                await _wmsClient.InitTask;    
+            }
+            
+            return _wmsClient?.GetFeatureInfoOutputFormats ?? new Collection<string>();  
+        }
 
         /// <summary>
         /// Gets the service description from this server
         /// </summary>
-        public Capabilities.WmsServiceDescription? ServiceDescription => _wmsClient?.ServiceDescription;
+        public async Task<Capabilities.WmsServiceDescription?> ServiceDescriptionAsync()
+        {
+            if (_wmsClient?.InitTask != null )
+            {
+                await _wmsClient.InitTask;    
+            }
+            
+            return _wmsClient?.ServiceDescription;  
+        }
 
         /// <summary>
         /// Gets the WMS Server version of this service
         /// </summary>
-        public string? Version => _wmsClient?.WmsVersion;
+        public async Task<string?> VersionAsync()
+        {
+            if (_wmsClient?.InitTask != null )
+            {
+                await _wmsClient.InitTask;    
+            }
+            
+            return _wmsClient?.WmsVersion;
+        } 
 
         /// <summary>
         /// Specifies whether to throw an exception if the Wms request failed, or to just skip rendering the layer
@@ -290,9 +318,9 @@ namespace Mapsui.Providers.Wms
         /// <exception cref="ArgumentException">Throws an exception if either the mime type isn't offered by the WMS
         /// or GDI+ doesn't support this mime type.</exception>
         /// <param name="mimeType">Mime type of image format</param>
-        public void SetImageFormat(string mimeType)
+        public async Task SetImageFormatAsync(string mimeType)
         {
-            if (!OutputFormats.Contains(mimeType))
+            if (!(await OutputFormatsAsync()).Contains(mimeType))
                 throw new ArgumentException("WMS service doesn't not offer mimetype '" + mimeType + "'");
             _mimeType = mimeType;
         }
