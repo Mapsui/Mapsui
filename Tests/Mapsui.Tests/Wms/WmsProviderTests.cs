@@ -11,7 +11,7 @@ namespace Mapsui.Tests.Wms
     internal class WmsProviderTests
     {
         [Test]
-        public async Task GetLegendRequestUrls_WhenInitialized_ShouldReturnListOfUrlsAsync()
+        public void GetLegendRequestUrls_WhenInitialized_ShouldReturnListOfUrls()
         {
             // arrange
             var capabilities = new XmlDocument { XmlResolver = null };
