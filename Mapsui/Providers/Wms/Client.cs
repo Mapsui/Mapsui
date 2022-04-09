@@ -12,6 +12,8 @@ using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Styles;
 
+#pragma warning disable VSTHRD003
+
 namespace Mapsui.Providers.Wms
 {
     /// <summary>
@@ -155,26 +157,46 @@ namespace Mapsui.Providers.Wms
         private Capabilities.WmsServiceDescription _serviceDescription;
         private readonly Task? _initTask;
         private readonly IUrlPersistentCache? _persistentCache;
+        private Collection<string>? _getFeatureInfoOutputFormats;
+        private Collection<string>? _getMapOutputFormats;
+        private WmsOnlineResource[]? _getFeatureInfoRequests;
+        private string _wmsVersion;
 
         /// <summary>
         /// Gets the service description
         /// </summary>
-        public Capabilities.WmsServiceDescription ServiceDescription => _serviceDescription;
+        public async Task<Capabilities.WmsServiceDescription> ServiceDescriptionAsync()
+        {
+            await WaitForInitializationAsync();
+            return _serviceDescription;
+        }
 
         /// <summary>
         /// Gets the version of the WMS server (ex. "1.3.0")
         /// </summary>
-        public string WmsVersion { get; private set; }
+        public async Task<string> WmsVersionAsync()
+        {
+            await WaitForInitializationAsync();
+            return _wmsVersion;
+        }
 
         /// <summary>
         /// Gets a list of available image mime type formats
         /// </summary>
-        public Collection<string>? GetMapOutputFormats { get; private set; }
+        public async Task<Collection<string>?> GetMapOutputFormatsAsync()
+        {
+            await WaitForInitializationAsync();
+            return _getMapOutputFormats;
+        }
 
         /// <summary>
         /// Gets a list of available feature info mime type formats
         /// </summary>
-        public Collection<string>? GetFeatureInfoOutputFormats { get; private set; }
+        public async Task<Collection<string>?> GetFeatureInfoOutputFormatsAsync()
+        {
+            await WaitForInitializationAsync();
+            return _getFeatureInfoOutputFormats;
+    }
 
         /// <summary>
         /// Gets a list of available exception mime type formats
@@ -189,7 +211,11 @@ namespace Mapsui.Providers.Wms
         /// <summary>
         /// Gets the available GetMap request methods and Online Resource URI
         /// </summary>
-        public WmsOnlineResource[]? GetFeatureInfoRequests { get; private set; }
+        public async Task<WmsOnlineResource[]?> GetFeatureInfoRequestsAsync()
+        {
+            await WaitForInitializationAsync();
+            return _getFeatureInfoRequests;
+        }
 
         /// <summary>
         /// Gets the hierarchical layer structure
@@ -208,7 +234,7 @@ namespace Mapsui.Providers.Wms
             _persistentCache = persistentCache;
             _getStreamAsync = default!; // is later assigned 
             _nsmgr = default!; // is later assigned
-            WmsVersion = default!; // is later assigned
+            _wmsVersion = default!; // is later assigned
             InitialiseGetStreamAsyncMethod(getStreamAsync);
             var strReq = new StringBuilder(url);
             if (!url.Contains("?"))
@@ -239,7 +265,7 @@ namespace Mapsui.Providers.Wms
         public Client(XmlDocument capabilitiesXmlDocument, Func<string, Task<Stream>>? getStreamAsync = null)
         {
             _getStreamAsync = default!; // is later assigned
-            WmsVersion = default!; // is later assigned
+            _wmsVersion = default!; // is later assigned
             InitialiseGetStreamAsyncMethod(getStreamAsync);
             _nsmgr = new XmlNamespaceManager(capabilitiesXmlDocument.NameTable);
             ParseCapabilities(capabilitiesXmlDocument);
@@ -307,6 +333,14 @@ namespace Mapsui.Providers.Wms
                 throw new ApplicationException(message, ex);
             }
         }
+        
+        private async Task WaitForInitializationAsync()
+        {
+            if (_initTask != null)
+            {
+                await _initTask;
+            }
+        }
 
         /// <summary>
         /// Parses a service description and stores the data in the ServiceDescription property
@@ -316,12 +350,12 @@ namespace Mapsui.Providers.Wms
         {
             if (doc.DocumentElement?.Attributes["version"] != null)
             {
-                WmsVersion = doc.DocumentElement.Attributes["version"].Value;
-                if (WmsVersion != "1.0.0" && WmsVersion != "1.1.0" && WmsVersion != "1.1.1" && WmsVersion != "1.3.0")
-                    throw new ApplicationException("WMS Version " + WmsVersion + " not supported");
+                _wmsVersion = doc.DocumentElement.Attributes["version"].Value;
+                if (_wmsVersion != "1.0.0" && _wmsVersion != "1.1.0" && _wmsVersion != "1.1.1" && _wmsVersion != "1.3.0")
+                    throw new ApplicationException("WMS Version " + _wmsVersion + " not supported");
 
                 _nsmgr!.AddNamespace(string.Empty, "http://www.opengis.net/wms");
-                _nsmgr.AddNamespace("sm", WmsVersion == "1.3.0" ? "http://www.opengis.net/wms" : "");
+                _nsmgr.AddNamespace("sm", _wmsVersion == "1.3.0" ? "http://www.opengis.net/wms" : "");
                 _nsmgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
                 _nsmgr.AddNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
             }
@@ -363,7 +397,7 @@ namespace Mapsui.Providers.Wms
             {
                 _serviceDescription.Keywords = new string[xnlKeywords.Count];
                 for (var i = 0; i < xnlKeywords.Count; i++)
-                    ServiceDescription.Keywords[i] = xnlKeywords[i].InnerText;
+                    _serviceDescription.Keywords[i] = xnlKeywords[i].InnerText;
             }
             //Contact information
             _serviceDescription.ContactInformation = new Capabilities.WmsContactInformation();
@@ -476,7 +510,7 @@ namespace Mapsui.Providers.Wms
             var xnlHttp = getFeatureInfoRequestNodes.SelectSingleNode("sm:DCPType/sm:HTTP", _nsmgr);
             if (xnlHttp != null && xnlHttp.HasChildNodes)
             {
-                GetFeatureInfoRequests = new WmsOnlineResource[xnlHttp.ChildNodes.Count];
+                _getFeatureInfoRequests = new WmsOnlineResource[xnlHttp.ChildNodes.Count];
                 for (var i = 0; i < xnlHttp.ChildNodes.Count; i++)
                 {
                     var wor = new WmsOnlineResource
@@ -485,15 +519,15 @@ namespace Mapsui.Providers.Wms
                         OnlineResource = xnlHttp.ChildNodes[i].SelectSingleNode("sm:OnlineResource", _nsmgr)?.
                             Attributes?["xlink:href"].InnerText
                     };
-                    GetFeatureInfoRequests[i] = wor;
+                    _getFeatureInfoRequests[i] = wor;
                 }
             }
             using var xnlFormats = getFeatureInfoRequestNodes.SelectNodes("sm:Format", _nsmgr);
             if (xnlFormats != null)
             {
-                GetFeatureInfoOutputFormats = new Collection<string>();
+                _getFeatureInfoOutputFormats = new Collection<string>();
                 for (var i = 0; i < xnlFormats.Count; i++)
-                    GetFeatureInfoOutputFormats.Add(xnlFormats[i].InnerText);
+                    _getFeatureInfoOutputFormats.Add(xnlFormats[i].InnerText);
             }
         }
 
@@ -522,9 +556,9 @@ namespace Mapsui.Providers.Wms
             using var xnlFormats = getMapRequestNodes.SelectNodes("sm:Format", _nsmgr);
             if (xnlFormats != null)
             {
-                GetMapOutputFormats = new Collection<string>();
+                _getMapOutputFormats = new Collection<string>();
                 for (var i = 0; i < xnlFormats.Count; i++)
-                    GetMapOutputFormats.Add(xnlFormats[i].InnerText);
+                    _getMapOutputFormats.Add(xnlFormats[i].InnerText);
             }
         }
 

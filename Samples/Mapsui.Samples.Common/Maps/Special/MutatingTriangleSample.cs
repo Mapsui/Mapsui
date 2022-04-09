@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -25,6 +26,7 @@ namespace Mapsui.Samples.Common.Maps
         private static readonly Random Random = new Random(0);
         private static CancellationTokenSource? _cancelationTokenSource;
 
+        [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP007:Don\'t dispose injected")]
         public static Map CreateMap()
         {
             _cancelationTokenSource?.Dispose();
@@ -80,20 +82,27 @@ namespace Mapsui.Samples.Common.Maps
 
         public class PeriodicTask
         {
-            public static async Task RunAsync(Action action, TimeSpan period, CancellationToken cancellationToken)
+            public static async Task RunAsync(Action action, TimeSpan period, CancellationToken? cancellationToken)
             {
-                while (!cancellationToken.IsCancellationRequested)
+                while (!(cancellationToken?.IsCancellationRequested ?? false))
                 {
-                    await Task.Delay(period, cancellationToken);
+                    if (cancellationToken == null)
+                    {
+                        await Task.Delay(period);
+                    }
+                    else
+                    {
+                        await Task.Delay(period, cancellationToken.Value);    
+                    }
 
-                    if (!cancellationToken.IsCancellationRequested)
+                    if (!(cancellationToken?.IsCancellationRequested ?? false))
                         action();
                 }
             }
 
             public static Task RunAsync(Action action, TimeSpan period)
             {
-                return RunAsync(action, period, _cancelationTokenSource.Token);
+                return RunAsync(action, period, _cancelationTokenSource?.Token);
             }
         }
 
@@ -103,6 +112,7 @@ namespace Mapsui.Samples.Common.Maps
             return Task.CompletedTask;
         }
 
+        [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP007:Don\'t dispose injected")]
         public void Dispose()
         {
             _cancelationTokenSource?.Cancel();

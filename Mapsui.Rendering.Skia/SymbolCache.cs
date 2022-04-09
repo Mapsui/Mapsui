@@ -6,7 +6,7 @@ namespace Mapsui.Rendering.Skia
 {
     public class SymbolCache : ISymbolCache
     {
-        private readonly IDictionary<int, BitmapInfo?> _cache = new Dictionary<int, BitmapInfo?>();
+        private readonly IDictionary<int, BitmapInfo> _cache = new Dictionary<int, BitmapInfo>();
 
         public IBitmapInfo GetOrCreate(int bitmapId)
         {

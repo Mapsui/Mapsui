@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using System.Xml;
 using Mapsui.Providers.Wms;
 using Mapsui.Tests.Utilities;
@@ -10,7 +11,7 @@ namespace Mapsui.Tests.Wms
     internal class WmsProviderTests
     {
         [Test]
-        public void GetLegendRequestUrls_WhenInitialized_ShouldReturnListOfUrls()
+        public async Task GetLegendRequestUrls_WhenInitialized_ShouldReturnListOfUrlsAsync()
         {
             // arrange
             var capabilties = new XmlDocument { XmlResolver = null };
@@ -18,7 +19,7 @@ namespace Mapsui.Tests.Wms
             var provider = new WmsProvider(capabilties) { CRS = "EPSG:3857" };
             provider.AddLayer("Maasluis complex - top");
             provider.AddLayer("Kreftenheye z2 - top");
-            provider.SetImageFormat(provider.OutputFormats[0]);
+            await provider.SetImageFormatAsync((await provider.OutputFormatsAsync())[0]);
             provider.ContinueOnError = true;
 
             // act

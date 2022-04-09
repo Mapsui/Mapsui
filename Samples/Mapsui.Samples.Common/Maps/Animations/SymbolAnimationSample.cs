@@ -130,6 +130,9 @@ namespace Mapsui.Samples.Common.Maps
 
         public async Task InitializeTestAsync()
         {
+            if (_animationLayer == null)
+                return;
+            
             while (_animationLayer.UpdateAnimations())
             {
                 await Task.Delay(10).ConfigureAwait(true);

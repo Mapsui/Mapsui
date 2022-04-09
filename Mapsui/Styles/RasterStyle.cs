@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Mapsui.Rendering;
 
@@ -40,6 +41,7 @@ namespace Mapsui.Styles
             if (tilesToRemove > 0) RemoveOldBitmaps(_tileCache, tilesToRemove);
         }
 
+        [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP007:Don\'t dispose injected")]
         private static void RemoveOldBitmaps(IDictionary<object, IBitmapInfo?> tileCache, int numberToRemove)
         {
             var counter = 0;

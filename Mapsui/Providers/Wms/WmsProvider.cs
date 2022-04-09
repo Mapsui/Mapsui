@@ -113,12 +113,10 @@ namespace Mapsui.Providers.Wms
         /// </summary>
         public async Task<Collection<string>> OutputFormatsAsync()
         {
-            if (_wmsClient?.InitTask != null )
-            {
-                await _wmsClient.InitTask;    
-            }
+            if (_wmsClient == null)
+                return new Collection<string>();
             
-            return _wmsClient?.GetMapOutputFormats ?? new Collection<string>();
+            return (await _wmsClient.GetMapOutputFormatsAsync()) ?? new Collection<string>();
         }
 
         /// <summary>
@@ -126,12 +124,10 @@ namespace Mapsui.Providers.Wms
         /// </summary>
         public async Task<Collection<string>> GetFeatureInfoFormatsAsync()
         {
-            if (_wmsClient?.InitTask != null )
-            {
-                await _wmsClient.InitTask;    
-            }
+            if (_wmsClient == null)
+                return new Collection<string>();
             
-            return _wmsClient?.GetFeatureInfoOutputFormats ?? new Collection<string>();  
+            return await _wmsClient.GetFeatureInfoOutputFormatsAsync() ?? new Collection<string>();  
         }
 
         /// <summary>
@@ -139,12 +135,10 @@ namespace Mapsui.Providers.Wms
         /// </summary>
         public async Task<Capabilities.WmsServiceDescription?> ServiceDescriptionAsync()
         {
-            if (_wmsClient?.InitTask != null )
-            {
-                await _wmsClient.InitTask;    
-            }
+            if (_wmsClient == null)
+                return null;
             
-            return _wmsClient?.ServiceDescription;  
+            return await _wmsClient.ServiceDescriptionAsync();  
         }
 
         /// <summary>
@@ -152,12 +146,10 @@ namespace Mapsui.Providers.Wms
         /// </summary>
         public async Task<string?> VersionAsync()
         {
-            if (_wmsClient?.InitTask != null )
-            {
-                await _wmsClient.InitTask;    
-            }
+            if (_wmsClient == null)
+                return null;
             
-            return _wmsClient?.WmsVersion;
+            return await _wmsClient.WmsVersionAsync();
         } 
 
         /// <summary>
@@ -342,7 +334,7 @@ namespace Mapsui.Providers.Wms
                 return (false, null);
             }
 
-            var url = GetRequestUrl(viewport.Extent, width, height);
+            var url = await GetRequestUrlAsync(viewport.Extent, width, height);
 
             try
             {
@@ -389,7 +381,7 @@ namespace Mapsui.Providers.Wms
         /// Gets the URL for a map request base on current settings, the image size and BoundingBox
         /// </summary>
         /// <returns>URL for WMS request</returns>
-        public string GetRequestUrl(MRect? box, int width, int height)
+        public async Task<string> GetRequestUrlAsync(MRect? box, int width, int height)
         {
             var resource = GetPreferredMethod();
             var strReq = new StringBuilder(resource.OnlineResource);
@@ -414,8 +406,9 @@ namespace Mapsui.Providers.Wms
                 throw new ApplicationException("Spatial reference system not set");
             if (_wmsClient != null)
             {
-                strReq.AppendFormat(_wmsClient.WmsVersion != "1.3.0" ? "&SRS={0}" : "&CRS={0}", CRS);
-                strReq.AppendFormat("&VERSION={0}", _wmsClient.WmsVersion);
+                var wmsVersion = await _wmsClient.WmsVersionAsync();
+                strReq.AppendFormat(wmsVersion != "1.3.0" ? "&SRS={0}" : "&CRS={0}", CRS);
+                strReq.AppendFormat("&VERSION={0}", wmsVersion);
             }
 
             strReq.Append("&TRANSPARENT=true");
@@ -510,6 +503,7 @@ namespace Mapsui.Providers.Wms
                 yield return new RasterFeature(raster);
         }
 
+        [SuppressMessage("Usage", "VSTHRD003:Avoid awaiting foreign Tasks")]
         private async Task<Stream> GetStreamAsync(string url)
         {
             if (_initTask != null)

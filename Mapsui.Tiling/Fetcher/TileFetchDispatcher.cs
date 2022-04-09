@@ -76,6 +76,7 @@ namespace Mapsui.Tiling.Fetcher
             }
         }
 
+        [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
         private async Task FetchOnThreadAsync(TileInfo tileInfo)
         {
             try
