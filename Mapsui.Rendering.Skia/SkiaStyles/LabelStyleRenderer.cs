@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Nts;
@@ -10,6 +6,10 @@ using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
 using SkiaSharp;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace Mapsui.Rendering.Skia
 {
@@ -342,7 +342,8 @@ namespace Mapsui.Rendering.Skia
             var spaceWidth = paint.MeasureText(" ");
             var lines = text.Split('\n');
 
-            return lines.SelectMany(line => {
+            return lines.SelectMany(line =>
+            {
                 var result = new List<Line>();
                 string[] words;
 

@@ -1,9 +1,9 @@
-using System;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Styles;
 using SkiaSharp;
+using System;
 
 namespace Mapsui.Rendering.Skia
 {

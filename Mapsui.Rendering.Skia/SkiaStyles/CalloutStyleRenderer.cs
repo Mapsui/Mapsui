@@ -1,9 +1,9 @@
-﻿using System;
-using Mapsui.Layers;
+﻿using Mapsui.Layers;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Styles;
 using SkiaSharp;
+using System;
 using Topten.RichTextKit;
 
 namespace Mapsui.Rendering.Skia
@@ -14,7 +14,7 @@ namespace Mapsui.Rendering.Skia
         {
             var centroid = feature.Extent?.Centroid;
 
-            if (centroid is null) 
+            if (centroid is null)
                 return false;
 
             var calloutStyle = (CalloutStyle)style;

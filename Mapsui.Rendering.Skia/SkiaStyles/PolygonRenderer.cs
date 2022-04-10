@@ -1,5 +1,4 @@
 ﻿using Mapsui.Rendering.Skia.Extensions;
-using Mapsui.Nts.Extensions;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
 using SkiaSharp;
