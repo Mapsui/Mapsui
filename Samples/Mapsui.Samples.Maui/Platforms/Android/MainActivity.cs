@@ -2,7 +2,7 @@
 using Android.Content.PM;
 using Android.OS;
 using Microsoft.Maui;
-using Microsoft.Maui.Essentials;
+using Microsoft.Maui.ApplicationModel;
 
 namespace Mapsui.Samples.Maui
 {

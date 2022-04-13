@@ -12,8 +12,8 @@ using Mapsui.Utilities;
 #if __MAUI__
 using Mapsui.UI.Maui.Extensions;
 using Microsoft.Maui;
+using Microsoft.Maui.ApplicationModel;
 using Microsoft.Maui.Controls;
-using Microsoft.Maui.Essentials;
 using Microsoft.Maui.Graphics;
 using SkiaSharp.Views.Maui;
 using SkiaSharp.Views.Maui.Controls;

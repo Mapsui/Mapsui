@@ -9,8 +9,8 @@ using Mapsui.Styles;
 using Mapsui.UI.Maui;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Xaml;
-using Microsoft.Maui.Essentials;
-using Compass = Microsoft.Maui.Essentials.Compass;
+using Microsoft.Maui.Devices.Sensors;
+using Compass = Microsoft.Maui.Devices.Sensors.Compass;
 
 namespace Mapsui.Samples.Maui
 {
