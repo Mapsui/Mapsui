@@ -40,7 +40,7 @@ jobs:
       with:
          dotnet-version: | 
            5.0.x
-           6.0.202
+           6.0.300-preview.22204.3
          include-prerelease: true    
     - name: install maui macos android ios maccatalyst
       run: dotnet workload install maui macos android ios maccatalyst
