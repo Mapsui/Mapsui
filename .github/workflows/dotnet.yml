@@ -24,7 +24,7 @@ jobs:
         restore-keys: |
             ${{ runner.os }}-nuget1-
     - name: Setup NuGet.exe for use with actions
-      uses: NuGet/setup-nuget@v1.0.5      
+      uses: NuGet/setup-nuget@v1.0.6      
       with:
         nuget-version: latest
     # - name: Set default Xamarin SDK versions
@@ -99,7 +99,7 @@ jobs:
            6.0.300-preview.22204.3
          include-prerelease: true
     - name: Setup NuGet.exe for use with actions
-      uses: NuGet/setup-nuget@v1.0.5
+      uses: NuGet/setup-nuget@v1.0.6
       with:
         nuget-version: latest
     - name: setup-msbuild
