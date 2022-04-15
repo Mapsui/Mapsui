@@ -9,7 +9,7 @@ using NetTopologySuite.Simplify;
 
 namespace Mapsui.Nts.Providers;
 
-public class GeometrySimplifyProvider : AsyncProviderBase<IFeature>
+public class GeometrySimplifyProvider : AsyncProviderBase<IFeature>, IProvider<IFeature>
 {
     private readonly IProvider<IFeature> _provider;
     private readonly Func<Geometry, double, Geometry> _simplify;
@@ -31,6 +31,23 @@ public class GeometrySimplifyProvider : AsyncProviderBase<IFeature>
     public override async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
     {
         var features = await _provider.GetFeaturesAsync(fetchInfo);
+        foreach (var p in IterateFeatures(fetchInfo, features))
+        {
+            yield return p;
+        }
+    }
+
+    public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
+    {
+        var features = _provider.GetFeatures(fetchInfo) ?? new List<IFeature>();
+        foreach (var p in IterateFeatures(fetchInfo, features))
+        {
+            yield return p;
+        }
+    }
+
+    private IEnumerable<IFeature> IterateFeatures(FetchInfo fetchInfo, IEnumerable<IFeature> features)
+    {
         foreach (var feature in features)
             if (feature is GeometryFeature geometryFeature)
             {
@@ -39,7 +56,7 @@ public class GeometrySimplifyProvider : AsyncProviderBase<IFeature>
                 {
                     copied.Geometry = _simplify(geometryFeature.Geometry, _distanceTolerance ?? fetchInfo.Resolution);
                 }
-                
+
                 yield return copied;
             }
             else

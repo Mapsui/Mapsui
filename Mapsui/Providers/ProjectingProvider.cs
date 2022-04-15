@@ -7,7 +7,7 @@ using Mapsui.Projections;
 
 namespace Mapsui.Providers
 {
-    public class ProjectingProvider : AsyncProviderBase<IFeature>
+    public class ProjectingProvider : AsyncProviderBase<IFeature>, IProvider<IFeature>
     {
         private readonly IProvider<IFeature> _provider;
         private readonly IProjection _projection;
@@ -20,22 +20,38 @@ namespace Mapsui.Providers
 
         public override async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
         {
-            // Note that the FetchInfo.CRS is ignored in this method. A better solution
-            // would be to use the fetchInfo.CRS everywhere, but that would only make 
-            // sense if GetExtent would also get a CRS argument. Room for improvement.
-            if (fetchInfo.Extent == null) yield break;
-
-            var copiedExtent = new MRect(fetchInfo.Extent);
-
-            // throws exception when CRS or _provider.CRS is null (so I don't have to check it here)
-            _projection.Project(CRS!, _provider.CRS!, copiedExtent);
-            fetchInfo = new FetchInfo(copiedExtent, fetchInfo.Resolution, CRS, fetchInfo.ChangeType);
+            if (GetFetchInfo(ref fetchInfo)) yield break;
 
             var features = await _provider.GetFeaturesAsync(fetchInfo) ?? new List<IFeature>();
+
+            foreach (var p in IterateFeatures(features))
+            {
+                yield return p;
+            }
+        }
+
+        public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
+        {
+            if (GetFetchInfo(ref fetchInfo)) yield break;
+
+            var features = _provider.GetFeatures(fetchInfo) ?? new List<IFeature>();
+
+            foreach (var p in IterateFeatures(features))
+            {
+                yield return p;
+            }
+        }
+
+        private IEnumerable<IFeature> IterateFeatures(IEnumerable<IFeature> features)
+        {
             if (!CrsHelper.IsProjectionNeeded(_provider.CRS, CRS))
+            {
                 foreach (var it in features)
                     yield return it;
-
+                
+                yield break;
+            }
+            
             if (!CrsHelper.IsCrsProvided(_provider.CRS, CRS))
                 throw new NotSupportedException($"CRS is not provided. From CRS: {_provider.CRS}. To CRS {CRS}");
 
@@ -43,6 +59,21 @@ namespace Mapsui.Providers
             _projection.Project(_provider.CRS, CRS, copiedFeatures);
             foreach (var it in copiedFeatures)
                 yield return it;
+        }
+
+        private bool GetFetchInfo(ref FetchInfo fetchInfo)
+        {
+            // Note that the FetchInfo.CRS is ignored in this method. A better solution
+            // would be to use the fetchInfo.CRS everywhere, but that would only make 
+            // sense if GetExtent would also get a CRS argument. Room for improvement.
+            if (fetchInfo.Extent == null) return true;
+
+            var copiedExtent = new MRect(fetchInfo.Extent);
+
+            // throws exception when CRS or _provider.CRS is null (so I don't have to check it here)
+            _projection.Project(CRS!, _provider.CRS!, copiedExtent);
+            fetchInfo = new FetchInfo(copiedExtent, fetchInfo.Resolution, CRS, fetchInfo.ChangeType);
+            return false;
         }
 
         public override MRect? GetExtent()
