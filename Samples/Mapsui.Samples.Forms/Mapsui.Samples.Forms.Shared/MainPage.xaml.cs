@@ -10,7 +10,7 @@ namespace Mapsui.Samples.Forms
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage
     {
-        IEnumerable<ISample>? allSamples;
+        IEnumerable<ISampleBase>? allSamples;
         Func<object?, EventArgs, bool>? clicker;
 
         public MainPage()
@@ -72,7 +72,7 @@ namespace Mapsui.Samples.Forms
             }
 
             var sampleName = e.SelectedItem.ToString();
-            var sample = allSamples.Where(x => x.Name == sampleName).FirstOrDefault<ISample>();
+            var sample = allSamples.Where(x => x.Name == sampleName).FirstOrDefault<ISampleBase>();
 
             clicker = null;
             if (sample is IFormsSample fsample)

@@ -25,7 +25,7 @@ namespace Mapsui.Samples.Forms
             InitializeComponent();
         }
 
-        public MapPage(ISample sample, Func<MapView?, MapClickedEventArgs, bool>? c = null)
+        public MapPage(ISampleBase sample, Func<MapView?, MapClickedEventArgs, bool>? c = null)
         {
             InitializeComponent();
             Refs.AddRef(this);

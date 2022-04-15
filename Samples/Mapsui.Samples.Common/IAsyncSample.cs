@@ -3,7 +3,7 @@ using Mapsui.UI;
 
 namespace Mapsui.Samples.Common;
 
-public interface IAsyncSample : ISample
+public interface IAsyncSample : ISampleBase
 {
     Task SetupAsync(IMapControl mapControl);
 }
