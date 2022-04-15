@@ -1,5 +1,4 @@
-﻿using System.Collections.Concurrent;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -13,7 +12,6 @@ namespace Mapsui.Samples.Common.Maps
 {
     public class SvgSample : ISample
     {
-        private static readonly ConcurrentDictionary<string, int> ImageCache = new ConcurrentDictionary<string, int>();
         public string Name => "Svg";
         public string Category => "Symbols";
 
@@ -52,7 +50,8 @@ namespace Mapsui.Samples.Common.Maps
         {
             var counter = 0;
 
-            return randomPoints.Select(p => {
+            return randomPoints.Select(p =>
+            {
                 var feature = new PointFeature(p) { ["Label"] = counter.ToString() };
                 feature.Styles.Add(CreateSvgStyle(@"Images.Pin.svg", 0.5));
                 counter++;

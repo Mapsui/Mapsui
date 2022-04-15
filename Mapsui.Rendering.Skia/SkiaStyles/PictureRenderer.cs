@@ -1,18 +1,19 @@
-﻿using System;
+﻿using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using SkiaSharp;
+using System;
 
 namespace Mapsui.Rendering.Skia
 {
     internal class PictureRenderer
     {
         // The field below is static for performance. Effect has not been measured.
-        // Note that the default FilterQuality is None. Setting it explicitly to Low increases the quality.
+        // Note that setting the FilterQuality to Low increases the quality because the default is None.
         private static readonly SKPaint DefaultPaint = new() { FilterQuality = SKFilterQuality.Low };
 
-        public static void Draw(SKCanvas canvas, SKPicture picture, SKRect rect, float layerOpacity = 1f)
+        public static void Draw(SKCanvas canvas, SKPicture picture, SKRect rect, float layerOpacity = 1f, Color? blendModeColor = null)
         {
-            var skPaint = GetPaint(layerOpacity, out var dispose);
+            var skPaint = GetPaint(layerOpacity, blendModeColor, out var dispose);
 
             var scaleX = rect.Width / picture.CullRect.Width;
             var scaleY = rect.Height / picture.CullRect.Height;
@@ -31,7 +32,8 @@ namespace Mapsui.Rendering.Skia
             LabelStyle.HorizontalAlignmentEnum horizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
             LabelStyle.VerticalAlignmentEnum verticalAlignment = LabelStyle.VerticalAlignmentEnum.Center,
             float opacity = 1f,
-            float scale = 1f)
+            float scale = 1f,
+            Color? blendModeColor = null)
         {
             if (picture == null)
                 return;
@@ -54,7 +56,7 @@ namespace Mapsui.Rendering.Skia
 
             var rect = new SKRect(x - halfWidth, y - halfHeight, x + halfWidth, y + halfHeight);
 
-            Draw(canvas, picture, rect, opacity);
+            Draw(canvas, picture, rect, opacity, blendModeColor);
 
             canvas.Restore();
         }
@@ -74,20 +76,32 @@ namespace Mapsui.Rendering.Skia
             return 0; // center
         }
 
-        private static SKPaint GetPaint(float layerOpacity, out bool dispose)
+        private static SKPaint GetPaint(float layerOpacity, Color? blendModeColor, out bool dispose)
         {
+            if (blendModeColor is not null)
+            {
+                // Unfortunately when blendModeColor is set we need to create a new SKPaint for
+                // possible individually different color arguments. 
+                dispose = true;
+                return new SKPaint
+                {
+                    FilterQuality = SKFilterQuality.Low,
+                    ColorFilter = SKColorFilter.CreateBlendMode(blendModeColor.ToSkia(layerOpacity), SKBlendMode.SrcIn)
+                };
+            };
+
             if (Math.Abs(layerOpacity - 1) > Utilities.Constants.Epsilon)
             {
-                // Unfortunately for opacity we need to set the Color and the Color
-                // is part of the Paint object. So we need to recreate the paint on
-                // every draw. 
+                // Unfortunately when opacity is set we need to create a new SKPaint for
+                // possible individually different opacity arguments. 
                 dispose = true;
                 return new SKPaint
                 {
                     FilterQuality = SKFilterQuality.Low,
                     Color = new SKColor(255, 255, 255, (byte)(255 * layerOpacity))
                 };
-            }
+            };
+
             dispose = false;
             return DefaultPaint;
         }

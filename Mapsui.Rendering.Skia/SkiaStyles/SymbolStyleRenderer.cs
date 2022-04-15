@@ -1,11 +1,12 @@
-﻿using System;
-using Mapsui.Layers;
+﻿using Mapsui.Layers;
 using Mapsui.Nts;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
 using SkiaSharp;
+using System;
+using System.Collections.Generic;
 
 namespace Mapsui.Rendering.Skia
 {
@@ -13,49 +14,61 @@ namespace Mapsui.Rendering.Skia
     {
         public bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, IStyle style, ISymbolCache symbolCache, long iteration)
         {
+            var symbolStyle = (SymbolStyle)style;
             switch (feature)
             {
-                case (PointFeature pointFeature):
-                    DrawPointFeature(canvas, viewport, layer, (PointFeature)feature, (SymbolStyle)style, symbolCache, iteration);
+                case PointFeature pointFeature:
+                    DrawXY(canvas, viewport, layer, pointFeature.Point.X, pointFeature.Point.Y, symbolStyle, symbolCache);
                     break;
-                case (GeometryFeature geometryFeatureNts):
-                    switch (geometryFeatureNts.Geometry)
+                case GeometryFeature geometryFeature:
+                    switch (geometryFeature.Geometry)
                     {
                         case GeometryCollection collection:
-                            for (var i = 0; i < collection.NumGeometries; i++)
-                                Draw(canvas, viewport, layer, new GeometryFeature(collection.GetGeometryN(i)), style, symbolCache, iteration);
+                            foreach (var point in GetPoints(collection))
+                                DrawXY(canvas, viewport, layer, point.X, point.Y, symbolStyle, symbolCache);
                             break;
                         case Point point:
-                            Draw(canvas, viewport, layer, new PointFeature(point.X, point.Y), style, symbolCache, iteration);
+                            DrawXY(canvas, viewport, layer, point.X, point.Y, symbolStyle, symbolCache);
                             break;
                     }
-                    break;
-                case (GeometryCollection geometryFeatureCollection):
-                    for (var i = 0; i < geometryFeatureCollection.NumGeometries; i++)
-                        Draw(canvas, viewport, layer, new GeometryFeature(geometryFeatureCollection.GetGeometryN(i)), style, symbolCache, iteration);
                     break;
             }
 
             return true;
         }
 
-        public bool DrawPointFeature(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, PointFeature pointFeature, SymbolStyle symbolStyle, ISymbolCache symbolCache, long iteration)
+        private IEnumerable<Point> GetPoints(GeometryCollection geometryCollection)
         {
-            if (symbolStyle.SymbolType == SymbolType.Image)
+            foreach (var geometry in geometryCollection)
             {
-                return DrawImage(canvas, viewport, layer, pointFeature, symbolStyle, symbolCache, iteration);
-            }
-            else
-            {
-                return DrawSymbol(canvas, viewport, layer, pointFeature, symbolStyle, symbolCache, iteration);
+                if (geometry is Point point)
+                    yield return point;
+                if (geometry is GeometryCollection collection)
+                {
+                    var points = GetPoints(collection);
+                    foreach (var p in points)
+                        yield return p;
+                }
             }
         }
 
-        public static bool DrawImage(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, PointFeature pointFeature, SymbolStyle symbolStyle, ISymbolCache symbolCache, long iteration)
+        private bool DrawXY(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, ISymbolCache symbolCache)
+        {
+            if (symbolStyle.SymbolType == SymbolType.Image)
+            {
+                return DrawImage(canvas, viewport, layer, x, y, symbolStyle, symbolCache);
+            }
+            else
+            {
+                return DrawSymbol(canvas, viewport, layer, x, y, symbolStyle);
+            }
+        }
+
+        private static bool DrawImage(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle, ISymbolCache symbolCache)
         {
             var opacity = (float)(layer.Opacity * symbolStyle.Opacity);
 
-            var (destX, destY) = viewport.WorldToScreenXY(pointFeature.Point.X, pointFeature.Point.Y);
+            var (destX, destY) = viewport.WorldToScreenXY(x, y);
 
             if (symbolStyle.BitmapId < 0)
                 return false;
@@ -91,9 +104,11 @@ namespace Mapsui.Rendering.Skia
                         (float)destX, (float)destY,
                         rotation,
                         (float)offsetX, (float)offsetY,
-                        opacity: opacity, scale: (float)symbolStyle.SymbolScale);
+                        opacity: opacity, scale: (float)symbolStyle.SymbolScale, blendModeColor: symbolStyle.BlendModeColor);
                     break;
                 case BitmapType.Svg:
+                    // Todo: Perhaps remove BitmapType.Svg and SvgRenderer?
+                    // It looks like Bitmaptype.Svg is not use at all the the momement.
                     if (bitmap.Svg == null)
                         return false;
 
@@ -126,11 +141,11 @@ namespace Mapsui.Rendering.Skia
             return true;
         }
 
-        public static bool DrawSymbol(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, PointFeature pointFeature, SymbolStyle symbolStyle, ISymbolCache symbolCache, long iteration)
+        public static bool DrawSymbol(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, double x, double y, SymbolStyle symbolStyle)
         {
             var opacity = (float)(layer.Opacity * symbolStyle.Opacity);
 
-            var (destX, destY) = viewport.WorldToScreenXY(pointFeature.Point.X, pointFeature.Point.Y);
+            var (destX, destY) = viewport.WorldToScreenXY(x, y);
 
             canvas.Save();
 
@@ -224,7 +239,7 @@ namespace Mapsui.Rendering.Skia
             var inradius = altitude / 3.0;
             var circumradius = 2.0 * inradius;
 
-            var topX = x; 
+            var topX = x;
             var topY = y - circumradius;
             var leftX = x + sideLength * -0.5;
             var leftY = y + inradius;
