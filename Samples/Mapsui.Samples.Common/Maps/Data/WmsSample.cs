@@ -7,13 +7,13 @@ using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps.Data
 {
-    public class WmsSample : AsyncSampleBase
+    public class WmsSample : IAsyncSample
     {
-        public override string Name => "6. WMS";
-        public override string Category => "Data";
+        public string Name => "6. WMS";
+        public string Category => "Data";
         public static IUrlPersistentCache? DefaultCache { get; set; }
 
-        public override async Task SetupAsync(IMapControl mapControl)
+        public async Task SetupAsync(IMapControl mapControl)
         {
             mapControl.Map = await CreateMapAsync();
         }

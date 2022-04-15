@@ -10,12 +10,12 @@ using Mapsui.UI;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public class TilesSample : AsyncSampleBase
+    public class TilesSample : IAsyncSample
     {
-        public override string Name => "Tiles";
-        public override string Category => "Tests";
+        public string Name => "Tiles";
+        public string Category => "Tests";
 
-        public override async Task SetupAsync(IMapControl mapControl)
+        public async Task SetupAsync(IMapControl mapControl)
         {
             mapControl.Map = await CreateMapAsync();
         }

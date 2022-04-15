@@ -8,12 +8,12 @@ using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class WmtsMichelinSample : AsyncSampleBase
+    public class WmtsMichelinSample : IAsyncSample
     {
-        public override string Name => "5 WMTS Michelin";
-        public override string Category => "Data";
+        public string Name => "5 WMTS Michelin";
+        public string Category => "Data";
 
-        public override async Task SetupAsync(IMapControl mapControl)
+        public async Task SetupAsync(IMapControl mapControl)
         {
             mapControl.Map = await CreateMapAsync();
         }
