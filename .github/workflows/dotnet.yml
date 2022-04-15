@@ -139,7 +139,7 @@ jobs:
     - name: Build Mapsui.UI.Uno
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Uno/Mapsui.UI.Uno.csproj
     - name: Build Mapsui.UI.WinUI
-      run: dotnet build --no-restore --configuration Release Mapsui.UI.WinUI/Mapsui.UI.WinUI.csproj
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.WinUI/Mapsui.UI.WinUI.csproj
     - name: Build Mapsui.UI.Maui
       run: dotnet build --no-restore --configuration Release Mapsui.UI.Maui/Mapsui.UI.Maui.csproj 
     - name: Build Mapsui.UI.Eto
