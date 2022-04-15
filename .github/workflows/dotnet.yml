@@ -42,8 +42,8 @@ jobs:
            5.0.x
            6.0.300-preview.22204.3
          include-prerelease: true    
-    - name: Install Visual Studio For Mac
-      run: brew install --cask visual-studio
+    - name: Install Mono Mdk
+      run: brew install --cask mono-mdk
     - name: install uno-check
       run: dotnet tool install -g Uno.Check --version 1.2.0-dev.34
     - name: run uno-check
