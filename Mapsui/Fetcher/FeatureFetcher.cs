@@ -14,7 +14,7 @@ namespace Mapsui.Fetcher
         private readonly FetchInfo _fetchInfo;
         private readonly DataArrivedDelegate _dataArrived;
         private readonly IProviderBase _provider;
-        private readonly SemaphoreSlim _providerLock = new(1);
+        private readonly SemaphoreSlim _providerLock = new(1, 1);
         private readonly long _timeOfRequest;
 
         public delegate void DataArrivedDelegate(IEnumerable<IFeature> features, object? state = null);
