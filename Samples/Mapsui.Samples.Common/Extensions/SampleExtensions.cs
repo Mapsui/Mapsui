@@ -11,6 +11,8 @@ public static class SampleExtensions
         if (sample is IAsyncSample asyncSample)
         {
             await asyncSample.SetupAsync(mapControl);
+
+            return;
         }
 
         Setup(sample, mapControl);
