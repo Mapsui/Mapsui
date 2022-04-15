@@ -5,7 +5,7 @@ namespace Mapsui.Providers;
 
 public abstract class AsyncProviderBase<T> : IAsyncProvider<T> where T : IFeature
 {
-    public string? CRS { get; set; }
+    public virtual string? CRS { get; set; }
     
     public IEnumerable<T> GetFeatures(FetchInfo fetchInfo)
     {

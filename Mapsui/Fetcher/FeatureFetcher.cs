@@ -1,5 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
@@ -11,6 +14,7 @@ namespace Mapsui.Fetcher
         private readonly FetchInfo _fetchInfo;
         private readonly DataArrivedDelegate _dataArrived;
         private readonly IProvider<IFeature> _provider;
+        private readonly SemaphoreSlim _providerLock = new SemaphoreSlim(0, 1);
         private readonly long _timeOfRequest;
 
         public delegate void DataArrivedDelegate(IEnumerable<IFeature> features, object? state = null);
@@ -27,12 +31,17 @@ namespace Mapsui.Fetcher
             _timeOfRequest = timeOfRequest;
         }
 
-        public void FetchOnThread()
+        public async Task FetchOnThreadAsync()
         {
-            lock (_provider)
+            await _providerLock.WaitAsync();
+            try
             {
-                var features = _provider.GetFeatures(_fetchInfo)?.ToList() ?? new List<IFeature>();
+                var features = await _provider.GetFeaturesAsync(_fetchInfo);
                 _dataArrived.Invoke(features, _timeOfRequest);
+            }
+            finally
+            {
+                _providerLock.Release();
             }
         }
     }

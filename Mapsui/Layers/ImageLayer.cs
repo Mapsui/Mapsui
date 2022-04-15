@@ -140,11 +140,11 @@ namespace Mapsui.Layers
 
             var fetcher = new FeatureFetcher(new FetchInfo(fetchInfo), _dataSource, DataArrived, DateTime.Now.Ticks);
 
-            Task.Run(() => {
+            Task.Run(async () => {
                 try
                 {
                     Logger.Log(LogLevel.Debug, $"Start image fetch at {DateTime.Now.TimeOfDay}");
-                    fetcher.FetchOnThread();
+                    await fetcher.FetchOnThreadAsync();
                     Logger.Log(LogLevel.Debug, $"Finished image fetch at {DateTime.Now.TimeOfDay}");
                 }
                 catch (Exception ex)
