@@ -8,7 +8,7 @@ namespace Mapsui.Layers
     /// <summary>
     /// A layer to use, when DataSource doesn't fetch anything because it is already in memory
     /// </summary>
-    public class MemoryLayer : BaseLayer, ILayerDataSource
+    public class MemoryLayer : BaseLayer, ILayerDataSource<IProvider<IFeature>>
     {
         /// <summary>
         /// Create a new layer

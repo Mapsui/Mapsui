@@ -9,10 +9,10 @@ namespace Mapsui.Providers
 {
     public class ProjectingProvider : AsyncProviderBase<IFeature>, IProvider<IFeature>
     {
-        private readonly IProvider<IFeature> _provider;
+        private readonly IProviderBase _provider;
         private readonly IProjection _projection;
 
-        public ProjectingProvider(IProvider<IFeature> provider, IProjection? projection = null)
+        public ProjectingProvider(IProviderBase provider, IProjection? projection = null)
         {
             _provider = provider;
             _projection = projection ?? new Projection();
@@ -22,7 +22,7 @@ namespace Mapsui.Providers
         {
             if (GetFetchInfo(ref fetchInfo)) yield break;
 
-            var features = await _provider.GetFeaturesAsync(fetchInfo) ?? new List<IFeature>();
+            var features = await _provider.GetFeaturesAsync<IFeature>(fetchInfo);
 
             foreach (var p in IterateFeatures(features))
             {
@@ -34,7 +34,7 @@ namespace Mapsui.Providers
         {
             if (GetFetchInfo(ref fetchInfo)) yield break;
 
-            var features = _provider.GetFeatures(fetchInfo) ?? new List<IFeature>();
+            var features = _provider.GetFeatures<IFeature>(fetchInfo);
 
             foreach (var p in IterateFeatures(features))
             {

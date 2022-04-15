@@ -11,11 +11,11 @@ namespace Mapsui.Nts.Providers;
 
 public class GeometrySimplifyProvider : AsyncProviderBase<IFeature>, IProvider<IFeature>
 {
-    private readonly IProvider<IFeature> _provider;
+    private readonly IProviderBase _provider;
     private readonly Func<Geometry, double, Geometry> _simplify;
     private readonly double? _distanceTolerance;
 
-    public GeometrySimplifyProvider(IProvider<IFeature> provider, Func<Geometry, double, Geometry>? simplify = null, double? distanceTolerance = null)
+    public GeometrySimplifyProvider(IProviderBase provider, Func<Geometry, double, Geometry>? simplify = null, double? distanceTolerance = null)
     {
         _provider = provider;
         _simplify = simplify ?? TopologyPreservingSimplifier.Simplify;
@@ -30,7 +30,7 @@ public class GeometrySimplifyProvider : AsyncProviderBase<IFeature>, IProvider<I
 
     public override async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
     {
-        var features = await _provider.GetFeaturesAsync(fetchInfo);
+        var features = await _provider.GetFeaturesAsync<IFeature>(fetchInfo);
         foreach (var p in IterateFeatures(fetchInfo, features))
         {
             yield return p;
@@ -39,7 +39,7 @@ public class GeometrySimplifyProvider : AsyncProviderBase<IFeature>, IProvider<I
 
     public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
     {
-        var features = _provider.GetFeatures(fetchInfo) ?? new List<IFeature>();
+        var features = _provider.GetFeatures<IFeature>(fetchInfo);
         foreach (var p in IterateFeatures(fetchInfo, features))
         {
             yield return p;

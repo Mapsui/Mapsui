@@ -39,7 +39,7 @@ namespace Mapsui.Fetcher
         {
             try
             {
-                var features = await DataSource.GetFeaturesAsync(fetchInfo);
+                var features = await DataSource.GetFeaturesAsync<T>(fetchInfo);
 
                 FetchCompleted(features, null);
             }
@@ -78,7 +78,7 @@ namespace Mapsui.Fetcher
             Busy = true;
         }
 
-        public IProvider<T>? DataSource { get; set; }
+        public IProviderBase? DataSource { get; set; }
 
         public bool Busy
         {
