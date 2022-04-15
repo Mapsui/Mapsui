@@ -42,10 +42,12 @@ jobs:
            5.0.x
            6.0.300-preview.22204.3
          include-prerelease: true    
+    - name: Install Visual Studio For Mac
+      run: brew install --cask visual-studio
     - name: install uno-check
       run: dotnet tool install -g Uno.Check --version 1.2.0-dev.34
     - name: run uno-check
-      run: uno-check --fix --non-interactive --skip androidemulator --skip dotnetworkloads-6.0.100 --skip dotnet --skip dotnet-workload-dedup --skip dotnetsentinel --skip xcode --skip gtk3 --preview
+      run: uno-check --fix --non-interactive --skip androidemulator --skip dotnetworkloads-6.0.100 --skip dotnet --skip dotnet-workload-dedup --skip dotnetsentinel --skip xcode --skip gtk3 --preview    
     - name: install maui macos android ios maccatalyst
       run: dotnet workload install maui macos android ios maccatalyst
     - name: Restore dependencies
