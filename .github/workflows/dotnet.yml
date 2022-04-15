@@ -72,6 +72,10 @@ jobs:
       run: nuget pack NuSpec/Mapsui.Extensions.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
     - name: Generate nuget package (Mapsui.Forms)
       run: nuget pack NuSpec/Mapsui.Forms.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
+    - name: Generate nuget package (Mapsui.Android)
+      run: nuget pack NuSpec/Mapsui.Android.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
+    - name: Generate nuget package (Mapsui.iOS)
+      run: nuget pack NuSpec/Mapsui.iOS.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
     - name: Upload packages
       uses: actions/upload-artifact@v2
       with:
@@ -133,7 +137,7 @@ jobs:
     - name: Build Mapsui.UI.Avalonia
       run: dotnet build --no-restore --configuration Release Mapsui.UI.Avalonia/Mapsui.UI.Avalonia.csproj
     - name: Build Mapsui.UI.Uno
-      run: dotnet build --no-restore --configuration Release Mapsui.UI.Uno/Mapsui.UI.Uno.csproj
+      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Uno/Mapsui.UI.Uno.csproj
     - name: Build Mapsui.UI.WinUI
       run: dotnet build --no-restore --configuration Release Mapsui.UI.WinUI/Mapsui.UI.WinUI.csproj
     - name: Build Mapsui.UI.Maui
@@ -152,6 +156,8 @@ jobs:
       run: nuget pack NuSpec/Mapsui.Wpf.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
     - name: Generate nuget package (Mapsui.Android)
       run: nuget pack NuSpec/Mapsui.Android.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
+    - name: Generate nuget package (Mapsui.iOS)
+      run: nuget pack NuSpec/Mapsui.iOS.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
     - name: Generate nuget package (Mapsui.Avalonia)
       run: nuget pack NuSpec/Mapsui.Avalonia.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
     - name: Generate nuget package (Mapsui.Uno)
