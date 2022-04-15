@@ -119,12 +119,12 @@ public class MapRegressionTests
 
     [Test]
     [TestCaseSource(nameof(ExcludedSamples))]
-    public async Task ExcludedTestSampleAsync(ISample sample)
+    public async Task ExcludedTestSampleAsync(ISampleBase sample)
     {
         await TestSampleAsync(sample, false);
     }
 
-    private static async Task<RegressionMapControl> InitMapAsync(ISample sample)
+    private static async Task<RegressionMapControl> InitMapAsync(ISampleBase sample)
     {
         var mapControl = new RegressionMapControl();
         mapControl.SetSize(800, 600);
