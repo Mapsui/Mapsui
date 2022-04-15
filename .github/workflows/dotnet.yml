@@ -17,12 +17,12 @@ jobs:
       with:
         fetch-depth: 0
     # Cache Nugets
-    - uses: actions/cache@v2
+    - uses: actions/cache@v3
       with:
         path: ~/.nuget/packages
-        key: ${{ runner.os }}-nuget1-${{ hashFiles('**/*.csproj') }}
+        key: ${{ runner.os }}-nuget2-${{ hashFiles('**/*.csproj') }}
         restore-keys: |
-            ${{ runner.os }}-nuget1-
+            ${{ runner.os }}-nuget2-
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.0.6      
       with:
@@ -89,12 +89,12 @@ jobs:
       with:
         fetch-depth: 0
     # Cache Nugets
-    - uses: actions/cache@v2
+    - uses: actions/cache@v3
       with:
         path: ~/.nuget/packages
-        key: ${{ runner.os }}-nuget1-${{ hashFiles('**/*.csproj') }}
+        key: ${{ runner.os }}-nuget2-${{ hashFiles('**/*.csproj') }}
         restore-keys: |
-            ${{ runner.os }}-nuget1-
+            ${{ runner.os }}-nuget2-
     - name: Setup .NET Core SDK
       uses: actions/setup-dotnet@v1
       with:
