@@ -16,7 +16,7 @@ using Mapsui.Rendering;
 
 namespace Mapsui.ArcGIS.ImageServiceProvider
 {
-    public class ArcGISImageServiceProvider : AsyncProviderBase<IFeature>, IProjectingProvider
+    public class ArcGISImageServiceProvider : IAsyncProvider<IFeature>, IProjectingProvider
     {
         private int _timeOut;
         private string _url = default!;
@@ -84,6 +84,8 @@ namespace Mapsui.ArcGIS.ImageServiceProvider
 
         public ICredentials? Credentials { get; set; }
 
+        public string? CRS { get; set; }
+
         /// <summary>
         /// Timeout of webrequest in milliseconds. Default is 10 seconds
         /// </summary>
@@ -93,7 +95,7 @@ namespace Mapsui.ArcGIS.ImageServiceProvider
             set => _timeOut = value;
         }
 
-        public override async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
+        public async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
         {
             var viewport = fetchInfo.ToViewport();
             var (success, raster) = await TryGetMapAsync(viewport);
@@ -207,7 +209,7 @@ namespace Mapsui.ArcGIS.ImageServiceProvider
             return url.ToString();
         }
 
-        public override MRect? GetExtent()
+        public MRect? GetExtent()
         {
             return null;
         }

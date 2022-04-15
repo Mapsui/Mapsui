@@ -7,7 +7,7 @@ using Mapsui.Projections;
 
 namespace Mapsui.Providers
 {
-    public class ProjectingProvider : AsyncProviderBase<IFeature>, IProvider<IFeature>
+    public class ProjectingProvider : IAsyncProvider<IFeature>, IProvider<IFeature>
     {
         private readonly IProviderBase _provider;
         private readonly IProjection _projection;
@@ -18,7 +18,13 @@ namespace Mapsui.Providers
             _projection = projection ?? new Projection();
         }
 
-        public override async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
+        /// <summary>
+        /// The CRS of the target. The source CRS will be projected to this target CRS. This should be equal to the
+        /// CRS of the Map and the FetchInfo.CRS.
+        /// </summary>
+        public string? CRS { get; set; }
+
+        public async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
         {
             if (GetFetchInfo(ref fetchInfo)) yield break;
 
@@ -76,7 +82,7 @@ namespace Mapsui.Providers
             return false;
         }
 
-        public override MRect? GetExtent()
+        public MRect? GetExtent()
         {
             if (_provider.GetExtent() == null) return null;
             var extent = _provider.GetExtent()!;

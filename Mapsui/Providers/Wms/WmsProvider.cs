@@ -34,7 +34,7 @@ namespace Mapsui.Providers.Wms
     /// and the WmsLayer will set the remaining BoundingBox property and proper requests that changes between the requests.
     /// See the example below.
     /// </remarks>
-    public class WmsProvider : AsyncProviderBase<IFeature>, IProjectingProvider
+    public class WmsProvider : IAsyncProvider<IFeature>, IProjectingProvider
     {
         private string? _mimeType;
         private readonly Client? _wmsClient;
@@ -457,7 +457,9 @@ namespace Mapsui.Providers.Wms
 
         public Dictionary<string, string>? ExtraParams { get; set; }
 
-        public override MRect? GetExtent()
+        public string? CRS { get; set; }
+
+        public MRect? GetExtent()
         {
             return CRS != null && _wmsClient != null && _wmsClient.Layer.BoundingBoxes.ContainsKey(CRS) ? _wmsClient.Layer.BoundingBoxes[CRS] : null;
         }
@@ -468,7 +470,7 @@ namespace Mapsui.Providers.Wms
             return _wmsClient.Layer.CRS.FirstOrDefault(item => string.Equals(item.Trim(), crs.Trim(), StringComparison.CurrentCultureIgnoreCase)) != null;
         }
 
-        public override async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
+        public async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
         {
             var (success, raster) = await TryGetMapAsync(fetchInfo.ToViewport());
             if (success)
