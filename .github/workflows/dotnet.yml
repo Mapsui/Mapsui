@@ -45,7 +45,7 @@ jobs:
     - name: install uno-check
       run: dotnet tool install -g Uno.Check
     - name: run uno-check
-      run: uno-check --fix --non-interactive --skip androidemulator --skip dotnetworkloads-6.0.100 --skip dotnet --skip dotnet-workload-dedup --skip dotnetsentinel --skip xcode --manifest https://github.com/unoplatform/uno.check/blob/main/manifests/uno.ui-preview.manifest.json
+      run: uno-check --fix --non-interactive --skip androidemulator --skip dotnetworkloads-6.0.100 --skip dotnet --skip dotnet-workload-dedup --skip dotnetsentinel --skip xcode --skip gtk3 --manifest https://github.com/unoplatform/uno.check/blob/main/manifests/uno.ui-preview.manifest.json
     - name: install maui macos android ios maccatalyst
       run: dotnet workload install maui macos android ios maccatalyst
     - name: Restore dependencies
