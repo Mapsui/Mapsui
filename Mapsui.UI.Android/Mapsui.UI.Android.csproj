@@ -4,7 +4,7 @@
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <TargetFramework>net6.0-android31.0</TargetFramework>
+    <TargetFramework>net60-android31.0</TargetFramework>
     <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
