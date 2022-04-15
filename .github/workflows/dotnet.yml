@@ -42,6 +42,10 @@ jobs:
            5.0.x
            6.0.300-preview.22204.3
          include-prerelease: true    
+    - name: install uno-check
+      run: dotnet tool install -g Uno.Check
+    - name: run uno-check
+      run: uno-check --fix --non-interactive --skip androidemulator --skip dotnetworkloads-6.0.100 --skip dotnet --skip dotnet-workload-dedup --skip dotnetsentinel --skip xcode --preview        
     - name: install maui macos android ios maccatalyst
       run: dotnet workload install maui macos android ios maccatalyst
     - name: Restore dependencies
