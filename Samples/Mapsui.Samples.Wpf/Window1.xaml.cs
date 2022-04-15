@@ -79,7 +79,7 @@ namespace Mapsui.Samples.Wpf
             CategoryComboBox.SelectedIndex = 0;
         }
 
-        private UIElement CreateRadioButton(ISample sample)
+        private UIElement CreateRadioButton(ISampleBase sample)
         {
             var radioButton = new RadioButton
             {

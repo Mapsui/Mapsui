@@ -86,7 +86,7 @@ namespace Mapsui.Samples.Avalonia.Views
             FillListWithSamples();
         }
 
-        private IControl CreateRadioButton(ISample sample)
+        private IControl CreateRadioButton(ISampleBase sample)
         {
             var radioButton = new RadioButton
             {

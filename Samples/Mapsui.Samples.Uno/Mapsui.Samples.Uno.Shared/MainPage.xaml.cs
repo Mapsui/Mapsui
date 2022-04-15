@@ -78,7 +78,7 @@ namespace Mapsui.Samples.Uwp
             FillListWithSamples();
         }
 
-        private UIElement CreateRadioButton(ISample sample)
+        private UIElement CreateRadioButton(ISampleBase sample)
         {
             var radioButton = new RadioButton
             {

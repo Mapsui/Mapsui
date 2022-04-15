@@ -30,8 +30,8 @@ public class MapRegressionTests
         Console.WriteLine(typeof(ShapefileSample));
     }
 
-    private static ISample[]? _excludedSamples;
-    private static ISample[]? _regressionSamples;
+    private static ISampleBase[]? _excludedSamples;
+    private static ISampleBase[]? _regressionSamples;
 
     public MapRegressionTests()
     {
@@ -51,18 +51,18 @@ public class MapRegressionTests
 
     public static object[] RegressionSamples => _regressionSamples ??= AllSamples.GetSamples().Where(f => ExcludedSamples.All(e => e.GetType() != f.GetType())).OrderBy(f => f.GetType().FullName).ToArray();
 
-    public static object[] ExcludedSamples => _excludedSamples ??= new ISample[] {
+    public static object[] ExcludedSamples => _excludedSamples ??= new ISampleBase[] {
     };
 
     [Test]
     [Retry(5)]
     [TestCaseSource(nameof(RegressionSamples))]
-    public async Task TestSampleAsync(ISample sample)
+    public async Task TestSampleAsync(ISampleBase sample)
     {
         await TestSampleAsync(sample, true).ConfigureAwait(false);
     }
 
-    public async Task TestSampleAsync(ISample sample, bool compareImages)
+    public async Task TestSampleAsync(ISampleBase sample, bool compareImages)
     {
         try
         {

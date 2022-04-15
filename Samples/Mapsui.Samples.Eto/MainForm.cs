@@ -116,7 +116,7 @@ namespace Mapsui.Samples.Eto
 
             CategoryComboBox.SelectedIndex = 0;
         }
-        private RadioButton CreateRadioButton(ISample sample)
+        private RadioButton CreateRadioButton(ISampleBase sample)
         {
             var radioButton = new RadioButton(SampleList.Items.FirstOrDefault()?.Control as RadioButton)
             {
