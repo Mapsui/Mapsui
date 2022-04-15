@@ -60,8 +60,8 @@ jobs:
       run: dotnet build --no-restore --configuration Release Mapsui.Extensions/Mapsui.Extensions.csproj
     - name: Build Mapsui.UI.Android
       run: dotnet build --no-restore --configuration Release Mapsui.UI.Android/Mapsui.UI.Android.csproj
-#    - name: Build Mapsui.UI.iOS
-#      run: dotnet build --no-restore --configuration Release Mapsui.UI.iOS/Mapsui.UI.iOS.csproj
+    - name: Build Mapsui.UI.iOS
+      run: dotnet build --no-restore --configuration Release Mapsui.UI.iOS/Mapsui.UI.iOS.csproj
     - name: Build Mapsui.UI.Forms
       run: dotnet build --no-restore --configuration Release Mapsui.UI.Forms/Mapsui.UI.Forms.csproj
     - name: Generate nuget package (Mapsui)
@@ -126,8 +126,8 @@ jobs:
       run: dotnet build --no-restore --configuration Release Mapsui.UI.Wpf/Mapsui.UI.Wpf.csproj
     - name: Build Mapsui.UI.Android
       run: dotnet build --no-restore --configuration Release Mapsui.UI.Android/Mapsui.UI.Android.csproj
-#    - name: Build Mapsui.UI.iOS
-#      run: dotnet build --no-restore --configuration Release Mapsui.UI.iOS/Mapsui.UI.iOS.csproj
+    - name: Build Mapsui.UI.iOS
+      run: dotnet build --no-restore --configuration Release Mapsui.UI.iOS/Mapsui.UI.iOS.csproj
     - name: Build Mapsui.UI.Forms
       run: dotnet build --no-restore --configuration Release Mapsui.UI.Forms/Mapsui.UI.Forms.csproj    
     - name: Build Mapsui.UI.Avalonia
