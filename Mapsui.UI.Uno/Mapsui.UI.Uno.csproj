@@ -5,10 +5,8 @@
 	Please see https://github.com/unoplatform/uno/issues/3909 for more details.
 	-->
 
-  <PropertyGroup>
-    <!--Reenable for Maui RC 1-->
-    <!--<TargetFrameworks>uap10.0.19041;netstandard2.0;net6.0;net6.0-android31;net6.0-ios;net6.0-maccatalyst;net6.0-macos</TargetFrameworks>-->
-    <TargetFrameworks>uap10.0.19041;netstandard2.0;net6.0;net6.0-android31</TargetFrameworks>
+  <PropertyGroup>        
+	<TargetFrameworks>uap10.0.19041;netstandard2.0;net6.0;net6.0-android31;net6.0-ios13.6;net6.0-maccatalyst13.5;net6.0-macos10.15</TargetFrameworks>
     <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
     <RootNamespace>Mapsui.UI.Uwp</RootNamespace>
