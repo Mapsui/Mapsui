@@ -20,9 +20,9 @@ jobs:
     - uses: actions/cache@v3
       with:
         path: ~/.nuget/packages
-        key: ${{ runner.os }}-nuget2-${{ hashFiles('**/*.csproj') }}
+        key: ${{ runner.os }}-nuget3-${{ hashFiles('**/*.csproj') }}
         restore-keys: |
-            ${{ runner.os }}-nuget2-
+            ${{ runner.os }}-nuget3-
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.0.6      
       with:
