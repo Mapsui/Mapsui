@@ -38,8 +38,7 @@ jobs:
     - name: Setup .NET Core SDK
       uses: actions/setup-dotnet@v1
       with:
-         dotnet-version: | 
-           5.0.x
+         dotnet-version: |            
            6.0.300-preview.22204.3
          include-prerelease: true    
     - name: install maui macos android ios maccatalyst
@@ -98,8 +97,7 @@ jobs:
     - name: Setup .NET Core SDK
       uses: actions/setup-dotnet@v1
       with:
-         dotnet-version: | 
-           5.0.x
+         dotnet-version: |            
            6.0.300-preview.22204.3
          include-prerelease: true
     - name: Setup NuGet.exe for use with actions
