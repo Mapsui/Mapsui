@@ -15,8 +15,8 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.3" />
     <PackageReference Include="Microsoft.Graphics.Win2D" Version="1.0.1" />
-    <PackageReference Include="SkiaSharp" Version="2.88.0-preview.232" />
-    <PackageReference Include="SkiaSharp.Views.WinUI" Version="2.88.0-preview.232" />
+    <PackageReference Include="SkiaSharp" Version="2.88.0-preview.254" />
+    <PackageReference Include="SkiaSharp.Views.WinUI" Version="2.88.0-preview.254" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.194" />
     <PackageReference Include="Microsoft.Windows.CsWin32" Version="0.1.588-beta" PrivateAssets="all" />
   </ItemGroup>

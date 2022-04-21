@@ -18,7 +18,7 @@
     <PackageReference Include="Uno.UI.Skia.Gtk" Version="4.1.9" />
     <PackageReference Include="Uno.UI.RemoteControl" Version="4.1.9" Condition="'$(Configuration)'=='Debug'" />
     <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.1.9" />
-    <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.0-preview.232" />
+    <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.0-preview.254" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Mapsui.Nts\Mapsui.Nts.csproj" />
