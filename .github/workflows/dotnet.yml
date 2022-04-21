@@ -40,7 +40,7 @@ jobs:
       with:
          dotnet-version: | 
            5.0.x
-           6.0.300
+           6.0.300-preview.22204.3
          include-prerelease: true    
     - name: install maui macos android ios maccatalyst
       run: dotnet workload install maui macos android ios maccatalyst
@@ -100,7 +100,7 @@ jobs:
       with:
          dotnet-version: | 
            5.0.x
-           6.0.300
+           6.0.300-preview.22204.3
          include-prerelease: true
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.0.6
