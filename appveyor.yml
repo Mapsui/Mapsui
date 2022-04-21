@@ -21,7 +21,7 @@ cache:
 - '%USERPROFILE%\.nuget\packages -> **.sln, **.csproj'  # preserve nuget folder (packages) unless the solution or projects change
 install:
 - ps: Invoke-WebRequest 'https://dot.net/v1/dotnet-install.ps1' -OutFile 'dotnet-install.ps1';
-- ps: ./dotnet-install.ps1 -Version 6.0.300-preview.22204.3 -InstallDir "dotnetcli"
+- ps: ./dotnet-install.ps1 -Version 6.0.300 -InstallDir "dotnetcli"
 - cmd: dotnet workload install maui macos android ios maccatalyst
 - cmd: '"C:/Program Files (x86)/Android/android-sdk/tools/bin/sdkmanager.bat" "platforms;android-31"'
 before_build:
