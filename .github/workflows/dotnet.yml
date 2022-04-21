@@ -92,9 +92,9 @@ jobs:
     - uses: actions/cache@v3
       with:
         path: ~/.nuget/packages
-        key: ${{ runner.os }}-nuget2-${{ hashFiles('**/*.csproj') }}
+        key: ${{ runner.os }}-nuget3-${{ hashFiles('**/*.csproj') }}
         restore-keys: |
-            ${{ runner.os }}-nuget2-
+            ${{ runner.os }}-nuget3-
     - name: Setup .NET Core SDK
       uses: actions/setup-dotnet@v1
       with:
