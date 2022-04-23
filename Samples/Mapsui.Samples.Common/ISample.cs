@@ -2,10 +2,8 @@
 
 namespace Mapsui.Samples.Common
 {
-    public interface ISample
+    public interface ISample : ISampleBase
     {
-        string Name { get; }
-        string Category { get; }
         void Setup(IMapControl mapControl);
     }
 }

@@ -7,8 +7,12 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using Mapsui.Cache;
+using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Styles;
+
+#pragma warning disable VSTHRD003
 
 namespace Mapsui.Providers.Wms
 {
@@ -20,8 +24,6 @@ namespace Mapsui.Providers.Wms
     {
         private XmlNode? _vendorSpecificCapabilities;
         private XmlNamespaceManager? _nsmgr;
-
-
 
         /// <summary>
         /// Structure for storing information about a WMS Layer Style
@@ -153,6 +155,12 @@ namespace Mapsui.Providers.Wms
         private Func<string, Task<Stream>> _getStreamAsync;
         private string[]? _exceptionFormats;
         private Capabilities.WmsServiceDescription _serviceDescription;
+        private readonly IUrlPersistentCache? _persistentCache;
+        private Collection<string>? _getFeatureInfoOutputFormats;
+        private Collection<string>? _getMapOutputFormats;
+        private WmsOnlineResource[]? _getFeatureInfoRequests;
+        private string _wmsVersion;
+        private WmsServerLayer _layer;
 
         /// <summary>
         /// Gets the service description
@@ -162,17 +170,17 @@ namespace Mapsui.Providers.Wms
         /// <summary>
         /// Gets the version of the WMS server (ex. "1.3.0")
         /// </summary>
-        public string WmsVersion { get; private set; }
+        public string WmsVersion => _wmsVersion;
 
         /// <summary>
         /// Gets a list of available image mime type formats
         /// </summary>
-        public Collection<string>? GetMapOutputFormats { get; private set; }
+        public Collection<string>? GetMapOutputFormats => _getMapOutputFormats;
 
         /// <summary>
         /// Gets a list of available feature info mime type formats
         /// </summary>
-        public Collection<string>? GetFeatureInfoOutputFormats { get; private set; }
+        public Collection<string>? GetFeatureInfoOutputFormats => _getFeatureInfoOutputFormats;
 
         /// <summary>
         /// Gets a list of available exception mime type formats
@@ -187,13 +195,12 @@ namespace Mapsui.Providers.Wms
         /// <summary>
         /// Gets the available GetMap request methods and Online Resource URI
         /// </summary>
-        public WmsOnlineResource[]? GetFeatureInfoRequests { get; private set; }
+        public WmsOnlineResource[]? GetFeatureInfoRequests => _getFeatureInfoRequests;
 
         /// <summary>
         /// Gets the hierarchical layer structure
         /// </summary>
-        public WmsServerLayer Layer { get; private set; }
-
+        public WmsServerLayer Layer => _layer;
 
         /// <summary>
         /// Initializes WMS server and parses the Capabilities request
@@ -201,12 +208,11 @@ namespace Mapsui.Providers.Wms
         /// <param name="url">URL of wms server</param>
         /// <param name="wmsVersion">WMS version number, null to get the default from service</param>
         /// <param name="getStreamAsync">Download method, leave null for default</param>
-        public Client(string url, string? wmsVersion = null, Func<string, Task<Stream>>? getStreamAsync = null)
+        /// <param name="persistentCache">persistent Cache</param>
+        public static async Task<Client> CreateAsync(string url, string? wmsVersion = null, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
         {
-            _getStreamAsync = default!; // is later assigned 
-            _nsmgr = default!; // is later assigned
-            WmsVersion = default!; // is later assigned
-            InitialiseGetStreamAsyncMethod(getStreamAsync);
+            var client = new Client(getStreamAsync, persistentCache);
+            
             var strReq = new StringBuilder(url);
             if (!url.Contains("?"))
                 strReq.Append("?");
@@ -218,15 +224,31 @@ namespace Mapsui.Providers.Wms
                 strReq.AppendFormat("REQUEST=GetCapabilities&");
             if (!url.ToLower().Contains("version=") && !string.IsNullOrEmpty(wmsVersion))
                 strReq.AppendFormat("VERSION={0}&", wmsVersion);
-
-            var xml = GetRemoteXml(strReq.ToString().TrimEnd('&'));
-            ParseCapabilities(xml);
+            var xml = await client.GetRemoteXmlAsync(strReq.ToString().TrimEnd('&'));
+            client.ParseCapabilities(xml);
+            return client;
+        }
+        
+        /// <summary>
+        /// Initializes WMS server and parses the Capabilities request
+        /// </summary>
+        /// <param name="url">URL of wms server</param>
+        /// <param name="wmsVersion">WMS version number, null to get the default from service</param>
+        /// <param name="getStreamAsync">Download method, leave null for default</param>
+        /// <param name="persistentCache">persistent Cache</param>
+        private Client(Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
+        {
+            _persistentCache = persistentCache;
+            _getStreamAsync = default!; // is later assigned 
+            _nsmgr = default!; // is later assigned
+            _wmsVersion = default!; // is later assigned
+            InitialiseGetStreamAsyncMethod(getStreamAsync);
         }
 
         public Client(XmlDocument capabilitiesXmlDocument, Func<string, Task<Stream>>? getStreamAsync = null)
         {
             _getStreamAsync = default!; // is later assigned
-            WmsVersion = default!; // is later assigned
+            _wmsVersion = default!; // is later assigned
             InitialiseGetStreamAsyncMethod(getStreamAsync);
             _nsmgr = new XmlNamespaceManager(capabilitiesXmlDocument.NameTable);
             ParseCapabilities(capabilitiesXmlDocument);
@@ -239,15 +261,22 @@ namespace Mapsui.Providers.Wms
 
         private async Task<Stream> GetStreamAsync(string url)
         {
-            var client = new HttpClient();
-            var response = await client.GetAsync(url).ConfigureAwait(false);
-
-            if (!response.IsSuccessStatusCode)
+            var result = _persistentCache?.Find(url);
+            if (result == null)
             {
-                throw new Exception($"Unexpected response code: {response.StatusCode}");
+                var client = new HttpClient();
+                var response = await client.GetAsync(url).ConfigureAwait(false);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new Exception($"Unexpected response code: {response.StatusCode}");
+                }
+
+                result = (await response.Content.ReadAsStreamAsync()).ToBytes();
+                _persistentCache?.Add(url, result);
             }
 
-            return await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            return new MemoryStream(result);
         }
 
         /// <summary>
@@ -260,19 +289,18 @@ namespace Mapsui.Providers.Wms
         /// Downloads service description from WMS service
         /// </summary>
         /// <returns>XmlDocument from Url. Null if Url is empty or improper XmlDocument</returns>
-        private XmlDocument GetRemoteXml(string url)
+        private async Task<XmlDocument> GetRemoteXmlAsync(string url)
         {
             try
             {
                 var doc = new XmlDocument { XmlResolver = null };
 
-                using (var task = _getStreamAsync(url))
+                using (var task = await _getStreamAsync(url))
                 {
-                    using (var stReader = new StreamReader(task.Result))
+                    using (var stReader = new StreamReader(task))
                     {
                         using var r = new XmlTextReader(url, stReader) { XmlResolver = null };
                         doc.Load(r);
-                        task.Result.Dispose();
                     }
                 }
 
@@ -295,12 +323,12 @@ namespace Mapsui.Providers.Wms
         {
             if (doc.DocumentElement?.Attributes["version"] != null)
             {
-                WmsVersion = doc.DocumentElement.Attributes["version"].Value;
-                if (WmsVersion != "1.0.0" && WmsVersion != "1.1.0" && WmsVersion != "1.1.1" && WmsVersion != "1.3.0")
-                    throw new ApplicationException("WMS Version " + WmsVersion + " not supported");
+                _wmsVersion = doc.DocumentElement.Attributes["version"].Value;
+                if (_wmsVersion != "1.0.0" && _wmsVersion != "1.1.0" && _wmsVersion != "1.1.1" && _wmsVersion != "1.3.0")
+                    throw new ApplicationException("WMS Version " + _wmsVersion + " not supported");
 
                 _nsmgr!.AddNamespace(string.Empty, "http://www.opengis.net/wms");
-                _nsmgr.AddNamespace("sm", WmsVersion == "1.3.0" ? "http://www.opengis.net/wms" : "");
+                _nsmgr.AddNamespace("sm", _wmsVersion == "1.3.0" ? "http://www.opengis.net/wms" : "");
                 _nsmgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
                 _nsmgr.AddNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
             }
@@ -342,7 +370,7 @@ namespace Mapsui.Providers.Wms
             {
                 _serviceDescription.Keywords = new string[xnlKeywords.Count];
                 for (var i = 0; i < xnlKeywords.Count; i++)
-                    ServiceDescription.Keywords[i] = xnlKeywords[i].InnerText;
+                    _serviceDescription.Keywords[i] = xnlKeywords[i].InnerText;
             }
             //Contact information
             _serviceDescription.ContactInformation = new Capabilities.WmsContactInformation();
@@ -400,14 +428,14 @@ namespace Mapsui.Providers.Wms
                 rootLayer.Name = "__auto_generated_root_layer__";
                 rootLayer.Title = "";
                 rootLayer.ChildLayers = layers.ToArray();
-                Layer = rootLayer;
+                _layer = rootLayer;
             }
             else
             {
                 var xnLayer = xnCapability.SelectSingleNode("sm:Layer", _nsmgr);
                 if (xnLayer == null)
                     throw new Exception("No layer tag found in Service Description");
-                Layer = ParseLayer(xnLayer);
+                _layer = ParseLayer(xnLayer);
             }
 
             var xnException = xnCapability.SelectSingleNode("sm:Exception", _nsmgr);
@@ -455,7 +483,7 @@ namespace Mapsui.Providers.Wms
             var xnlHttp = getFeatureInfoRequestNodes.SelectSingleNode("sm:DCPType/sm:HTTP", _nsmgr);
             if (xnlHttp != null && xnlHttp.HasChildNodes)
             {
-                GetFeatureInfoRequests = new WmsOnlineResource[xnlHttp.ChildNodes.Count];
+                _getFeatureInfoRequests = new WmsOnlineResource[xnlHttp.ChildNodes.Count];
                 for (var i = 0; i < xnlHttp.ChildNodes.Count; i++)
                 {
                     var wor = new WmsOnlineResource
@@ -464,15 +492,15 @@ namespace Mapsui.Providers.Wms
                         OnlineResource = xnlHttp.ChildNodes[i].SelectSingleNode("sm:OnlineResource", _nsmgr)?.
                             Attributes?["xlink:href"].InnerText
                     };
-                    GetFeatureInfoRequests[i] = wor;
+                    _getFeatureInfoRequests[i] = wor;
                 }
             }
             using var xnlFormats = getFeatureInfoRequestNodes.SelectNodes("sm:Format", _nsmgr);
             if (xnlFormats != null)
             {
-                GetFeatureInfoOutputFormats = new Collection<string>();
+                _getFeatureInfoOutputFormats = new Collection<string>();
                 for (var i = 0; i < xnlFormats.Count; i++)
-                    GetFeatureInfoOutputFormats.Add(xnlFormats[i].InnerText);
+                    _getFeatureInfoOutputFormats.Add(xnlFormats[i].InnerText);
             }
         }
 
@@ -501,9 +529,9 @@ namespace Mapsui.Providers.Wms
             using var xnlFormats = getMapRequestNodes.SelectNodes("sm:Format", _nsmgr);
             if (xnlFormats != null)
             {
-                GetMapOutputFormats = new Collection<string>();
+                _getMapOutputFormats = new Collection<string>();
                 for (var i = 0; i < xnlFormats.Count; i++)
-                    GetMapOutputFormats.Add(xnlFormats[i].InnerText);
+                    _getMapOutputFormats.Add(xnlFormats[i].InnerText);
             }
         }
 

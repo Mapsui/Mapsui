@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ using NetTopologySuite.Geometries;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class MutatingTriangleSample : ISample, ISampleTest, IDisposable
+    public sealed class MutatingTriangleSample : ISample, ISampleTest, IDisposable
     {
         public string Name => "Mutating triangle";
         public string Category => "Special";
@@ -23,11 +24,13 @@ namespace Mapsui.Samples.Common.Maps
         }
 
         private static readonly Random Random = new Random(0);
-        private static CancellationTokenSource cancelationTokenSource;
+        private static CancellationTokenSource? _cancelationTokenSource;
 
+        [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP007:Don\'t dispose injected")]
         public static Map CreateMap()
         {
-            cancelationTokenSource = new CancellationTokenSource();
+            _cancelationTokenSource?.Dispose();
+            _cancelationTokenSource = new CancellationTokenSource();
             var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(CreateMutatingTriangleLayer(map.Extent));
@@ -47,7 +50,7 @@ namespace Mapsui.Samples.Common.Maps
 
             layer.DataSource = new MemoryProvider<IFeature>(features);
 
-            PeriodicTask.Run(() => {
+            PeriodicTask.RunAsync(() => {
                 feature.Geometry = new Polygon(new LinearRing(GenerateRandomPoints(envelope, 3).ToArray()));
                 // Clear cache for change to show
                 feature.RenderedGeometry.Clear();
@@ -79,33 +82,41 @@ namespace Mapsui.Samples.Common.Maps
 
         public class PeriodicTask
         {
-            public static async Task Run(Action action, TimeSpan period, CancellationToken cancellationToken)
+            public static async Task RunAsync(Action action, TimeSpan period, CancellationToken? cancellationToken)
             {
-                while (!cancellationToken.IsCancellationRequested)
+                while (!(cancellationToken?.IsCancellationRequested ?? false))
                 {
-                    await Task.Delay(period, cancellationToken);
+                    if (cancellationToken == null)
+                    {
+                        await Task.Delay(period);
+                    }
+                    else
+                    {
+                        await Task.Delay(period, cancellationToken.Value);    
+                    }
 
-                    if (!cancellationToken.IsCancellationRequested)
+                    if (!(cancellationToken?.IsCancellationRequested ?? false))
                         action();
                 }
             }
 
-            public static Task Run(Action action, TimeSpan period)
+            public static Task RunAsync(Action action, TimeSpan period)
             {
-                return Run(action, period, cancelationTokenSource.Token);
+                return RunAsync(action, period, _cancelationTokenSource?.Token);
             }
         }
 
-        public Task InitializeTest()
+        public Task InitializeTestAsync()
         {
-            cancelationTokenSource.Cancel();
+            _cancelationTokenSource?.Cancel();
             return Task.CompletedTask;
         }
 
+        [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP007:Don\'t dispose injected")]
         public void Dispose()
         {
-            cancelationTokenSource.Cancel();
-            cancelationTokenSource.Dispose();
+            _cancelationTokenSource?.Cancel();
+            _cancelationTokenSource?.Dispose();
         }
     }
 }

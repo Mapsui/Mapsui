@@ -5,7 +5,9 @@ using Xamarin.Forms.Xaml;
 using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
 using System.Threading.Tasks;
+using Mapsui.Logging;
 using Mapsui.Samples.Common;
+using Mapsui.Samples.Common.Extensions;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.Styles;
 using Mapsui.UI.Forms;
@@ -23,7 +25,7 @@ namespace Mapsui.Samples.Forms
             InitializeComponent();
         }
 
-        public MapPage(ISample sample, Func<MapView?, MapClickedEventArgs, bool>? c = null)
+        public MapPage(ISampleBase sample, Func<MapView?, MapClickedEventArgs, bool>? c = null)
         {
             InitializeComponent();
             Refs.AddRef(this);
@@ -46,7 +48,7 @@ namespace Mapsui.Samples.Forms
 
             mapView.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
 
-            Task.Run(() => StartGPS());
+            Task.Run(() => StartGPSAsync());
 
             try
             {
@@ -55,7 +57,17 @@ namespace Mapsui.Samples.Forms
             }
             catch (Exception) { }
 
-            sample.Setup(mapView);
+            Task.Run(async () =>
+            {
+                try
+                {
+                    await sample.SetupAsync(mapView);
+                }
+                catch (Exception e)
+                {
+                    Logger.Log(LogLevel.Error, e.Message, e);   
+                }
+            });
 
             Clicker = c;
         }
@@ -110,7 +122,7 @@ namespace Mapsui.Samples.Forms
             e.Handled = true;
         }
 
-        public async Task StartGPS()
+        public async Task StartGPSAsync()
         {
             if (CrossGeolocator.Current.IsListening)
                 return;
@@ -134,7 +146,7 @@ namespace Mapsui.Samples.Forms
             CrossGeolocator.Current.PositionError += MyLocationPositionError;
         }
 
-        public async Task StopGPS()
+        public async Task StopGPSAsync()
         {
             // Stop GPS
             if (CrossGeolocator.Current.IsListening)

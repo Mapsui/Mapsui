@@ -12,8 +12,8 @@ namespace Mapsui.Providers
     /// <summary>
     /// Interface for data providers
     /// </summary>
-    public interface IProvider<out T> : IProviderBase where T : IFeature
+    public interface IAsyncProvider<out T> : IProviderBase where T : IFeature
     {
-        IEnumerable<T> GetFeatures(FetchInfo fetchInfo);
+        IAsyncEnumerable<T> GetFeaturesAsync(FetchInfo fetchInfo);
     }
 }

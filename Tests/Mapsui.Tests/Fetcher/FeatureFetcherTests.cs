@@ -11,7 +11,7 @@ namespace Mapsui.Tests.Fetcher
     public class FeatureFetcherTests
     {
         [Test]
-        public async Task TestFeatureFetcherDelay()
+        public async Task TestFeatureFetcherDelayAsync()
         {
             // arrange
             var extent = new MRect(0, 0, 10, 10);

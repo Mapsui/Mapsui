@@ -8,9 +8,9 @@ namespace Mapsui.Tests.Fetcher.Providers
     {
         private readonly Random _random = new Random(1000);
 
-        public override async Task<byte[]>? GetTileAsync(TileInfo tileInfo)
+        public override async Task<byte[]?> GetTileAsync(TileInfo tileInfo)
         {
-            await base.GetTileAsync(tileInfo); // Just for counting
+            _ = await base.GetTileAsync(tileInfo); // Just for counting
 
             if (_random.NextDouble() < 0.5)
             {

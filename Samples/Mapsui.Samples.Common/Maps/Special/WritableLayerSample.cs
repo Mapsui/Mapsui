@@ -1,4 +1,5 @@
-﻿using Mapsui.Layers;
+﻿using System.Diagnostics.CodeAnalysis;
+using Mapsui.Layers;
 using Mapsui.Nts;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
@@ -19,6 +20,8 @@ namespace Mapsui.Tests.Common.Maps
             mapControl.Map = CreateMap();
         }
 
+        [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
+        [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don't ignore created IDisposable")]
         private Map CreateMap()
         {
             var map = new Map();

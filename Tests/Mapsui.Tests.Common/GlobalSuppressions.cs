@@ -5,14 +5,14 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Tests.Common.Maps.BitmapAtlasSample.CreateMap~Mapsui.Map")]
-[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Tests.Common.Maps.BitmapSymbolInCollectionSample.CreateMap~Mapsui.Map")]
-[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Tests.Common.Maps.BitmapSymbolSample.CreateMap~Mapsui.Map")]
-[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Tests.Common.Maps.BitmapSymbolWithRotationAndOffsetSample.CreateMap~Mapsui.Map")]
-[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Tests.Common.Maps.LineSample.CreateMap~Mapsui.Map")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Tests.Common.Maps.BitmapAtlasSample.CreateMapAsync~Mapsui.Map")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Tests.Common.Maps.BitmapSymbolInCollectionSample.CreateMapAsync~Mapsui.Map")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Tests.Common.Maps.BitmapSymbolSample.CreateMapAsync~Mapsui.Map")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Tests.Common.Maps.BitmapSymbolWithRotationAndOffsetSample.CreateMapAsync~Mapsui.Map")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Tests.Common.Maps.LineSample.CreateMapAsync~Mapsui.Map")]
 [assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP003:Dispose previous before re-assigning.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Tests.Common.Maps.LineSample.CreateLineProvider~Mapsui.Providers.MemoryProvider{Mapsui.IFeature}")]
 [assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP003:Dispose previous before re-assigning.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Tests.Common.Maps.PolygonSample.CreatePolygonProvider~Mapsui.Providers.MemoryProvider{Mapsui.IFeature}")]
-[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Tests.Common.Maps.PolygonSample.CreateMap~Mapsui.Map")]
-[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Tests.Common.Maps.ProjectionSample.CreateMap~Mapsui.Map")]
-[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Tests.Common.Maps.SvgSymbolSample.CreateMap~Mapsui.Map")]
-[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Tests.Common.Maps.TilesSample.CreateMap~Mapsui.Map")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Tests.Common.Maps.PolygonSample.CreateMapAsync~Mapsui.Map")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Tests.Common.Maps.ProjectionSample.CreateMapAsync~Mapsui.Map")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Tests.Common.Maps.SvgSymbolSample.CreateMapAsync~Mapsui.Map")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created.", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Tests.Common.Maps.TilesSample.CreateMapAsync~Mapsui.Map")]
