@@ -10,9 +10,9 @@ namespace Mapsui.Samples.Common
 {
     public static class AllSamples
     {
-        public static IEnumerable<ISample> GetSamples()
+        public static IEnumerable<ISampleBase> GetSamples()
         {
-            var type = typeof(ISample);
+            var type = typeof(ISampleBase);
             var assemblies = AppDomain.CurrentDomain.GetAssemblies()
                 .Where(a => a.FullName.StartsWith("Mapsui"));
 
@@ -20,8 +20,8 @@ namespace Mapsui.Samples.Common
             {
                 return (assemblies?
                         .SelectMany(s => s.GetTypes())
-                        .Where(p => type.IsAssignableFrom(p) && !p.IsInterface)
-                        .Select(Activator.CreateInstance)).Where(f => f is not null).OfType<ISample>()
+                        .Where(p => type.IsAssignableFrom(p) && !p.IsInterface && !p.IsAbstract)
+                        .Select(Activator.CreateInstance)).Where(f => f is not null).OfType<ISampleBase>()
                         .OrderBy(s => s?.Name)
                         .ThenBy(s => s?.Category)
                         .ToList();
@@ -45,7 +45,7 @@ namespace Mapsui.Samples.Common
                 Logger.Log(LogLevel.Error, sb.ToString(), ex);
             }
 
-            return new List<ISample>();
+            return new List<ISampleBase>();
         }
     }
 }

@@ -58,8 +58,8 @@ namespace Mapsui.Providers.Wms
             _infoFormat = infoFormat;
             var requestUrl = CreateRequestUrl(baseUrl, wmsVersion, infoFormat, srs, layer, extendXmin, extendYmin, extendXmax, extendYmax, x, y, mapWidth, mapHeight);
 
-            var thread = new Thread(delegate () {
-                using var task = _getStreamAsync(requestUrl);
+            _ =Task.Run(async () => {
+                using var task = await _getStreamAsync(requestUrl);
                 try
                 {
                     var parser = GetParserFromFormat(_infoFormat);
@@ -70,8 +70,7 @@ namespace Mapsui.Providers.Wms
                         return;
                     }
 
-                    var featureInfo = parser.ParseWMSResult(_layerName, task.Result);
-                    task.Result.Dispose();
+                    var featureInfo = parser.ParseWMSResult(_layerName, task);
                     OnIdentifyFinished(featureInfo);
                 }
                 catch (Exception)
@@ -79,8 +78,6 @@ namespace Mapsui.Providers.Wms
                     OnIdentifyFailed();
                 }
             });
-
-            thread.Start();
         }
 
         private async Task<Stream> GetStreamAsync(string url)

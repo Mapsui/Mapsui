@@ -10,5 +10,5 @@ using System.Threading.Tasks;
 namespace Mapsui.Samples.Common;
 public interface ISampleTest
 {
-    Task InitializeTest();
+    Task InitializeTestAsync();
 }

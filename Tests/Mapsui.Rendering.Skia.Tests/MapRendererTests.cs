@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 using Mapsui.Rendering.Skia.Tests.Extensions;
 using Mapsui.Tests.Common.Maps;
 using NUnit.Framework;
@@ -201,10 +202,10 @@ namespace Mapsui.Rendering.Skia.Tests
         }
 
         [Test]
-        public void RenderTiles()
+        public async Task RenderTilesAsync()
         {
             // arrange
-            using var map = TilesSample.CreateMap();
+            using var map = await TilesSample.CreateMapAsync();
             var viewport = map.Extent!.Multiply(1.1).ToViewport(600);
             const string fileName = "tilelayer.png";
 

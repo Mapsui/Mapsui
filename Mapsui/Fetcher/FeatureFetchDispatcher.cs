@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
@@ -29,24 +30,23 @@ namespace Mapsui.Fetcher
             if (!_modified) return false;
             if (_fetchInfo == null) return false;
 
-            method = () => FetchOnThread(new FetchInfo(_fetchInfo));
+            method = () => FetchOnThreadAsync(new FetchInfo(_fetchInfo));
             _modified = false;
             return true;
         }
 
-        public Task FetchOnThread(FetchInfo fetchInfo)
+        public async Task FetchOnThreadAsync(FetchInfo fetchInfo)
         {
             try
             {
-                var features = DataSource?.GetFeatures(fetchInfo).ToList();
+                var features = await DataSource.GetFeaturesAsync<T>(fetchInfo);
+
                 FetchCompleted(features, null);
             }
             catch (Exception exception)
             {
                 FetchCompleted(null, exception);
             }
-
-            return Task.CompletedTask;
         }
 
         private void FetchCompleted(IEnumerable<T>? features, Exception? exception)
@@ -78,7 +78,7 @@ namespace Mapsui.Fetcher
             Busy = true;
         }
 
-        public IProvider<T>? DataSource { get; set; }
+        public IProviderBase? DataSource { get; set; }
 
         public bool Busy
         {

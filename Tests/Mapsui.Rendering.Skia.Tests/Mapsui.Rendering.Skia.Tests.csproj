@@ -366,8 +366,6 @@
   <ItemGroup>
     <Folder Include="Resources\Images\OriginalTest\">
     </Folder>
-    <Folder Include="Resources\Images\OriginalRegression\">
-    </Folder>
   </ItemGroup>
 
   <ItemGroup>
@@ -377,6 +375,10 @@
     <Content Include="Resources\Images\OriginalRegression\*.*">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Images\OriginalRegression\GeoTiffSample.Regression.png" />
   </ItemGroup>
 
   <ItemGroup>

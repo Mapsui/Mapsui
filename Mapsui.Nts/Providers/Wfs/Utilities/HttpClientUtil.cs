@@ -152,9 +152,15 @@ namespace Mapsui.Providers.Wfs.Utilities
                 _webResponse = (HttpWebResponse)_webRequest.GetResponse();
                 if (_persistentCache != null)
                 {
-                    bytes = StreamHelper.ReadFully(_webResponse.GetResponseStream());
-                    _persistentCache?.Add(_url, bytes);
-                    return new MemoryStream(bytes);
+                    using var stream = _webResponse.GetResponseStream();
+                    if (stream != null && _url != null)
+                    {
+                        bytes = StreamHelper.ReadFully(stream);
+                        _persistentCache?.Add(_url, bytes);
+                        return new MemoryStream(bytes);    
+                    }
+
+                    return null;
                 }
 
                 return _webResponse.GetResponseStream();

@@ -26,9 +26,9 @@ namespace Mapsui.Tests.Common
             _dictionary[tileIndex] = ReadFully(tileStream);
         }
 
-        public async Task<byte[]> GetTileAsync(TileInfo tileInfo)
+        public Task<byte[]> GetTileAsync(TileInfo tileInfo)
         {
-            return _dictionary[tileInfo.Index];
+            return Task.FromResult(_dictionary[tileInfo.Index]);
         }
 
         private static Stream GetTileStream(TileIndex index)

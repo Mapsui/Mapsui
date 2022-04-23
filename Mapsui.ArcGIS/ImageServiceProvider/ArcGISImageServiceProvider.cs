@@ -7,6 +7,7 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
@@ -15,7 +16,7 @@ using Mapsui.Rendering;
 
 namespace Mapsui.ArcGIS.ImageServiceProvider
 {
-    public class ArcGISImageServiceProvider : IProjectingProvider
+    public class ArcGISImageServiceProvider : IAsyncProvider<IFeature>, IProjectingProvider
     {
         private int _timeOut;
         private string _url = default!;
@@ -81,9 +82,9 @@ namespace Mapsui.ArcGIS.ImageServiceProvider
             ArcGisImageCapabilities = capabilities;
         }
 
-        public string? CRS { get; set; }
-
         public ICredentials? Credentials { get; set; }
+
+        public string? CRS { get; set; }
 
         /// <summary>
         /// Timeout of webrequest in milliseconds. Default is 10 seconds
@@ -94,19 +95,18 @@ namespace Mapsui.ArcGIS.ImageServiceProvider
             set => _timeOut = value;
         }
 
-        public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
+        public async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
         {
-            var features = new List<RasterFeature>();
-
             var viewport = fetchInfo.ToViewport();
-            if (viewport != null && TryGetMap(viewport, out var raster))
-                features.Add(new RasterFeature(raster));
-            return features;
+            var (success, raster) = await TryGetMapAsync(viewport);
+            if (success)
+            {
+                yield return new RasterFeature(raster);
+            }
         }
 
-        public bool TryGetMap(IViewport viewport, [NotNullWhen(true)] out MRaster? raster)
+        public async Task<(bool Success, MRaster? Raster)> TryGetMapAsync(IViewport viewport)
         {
-            raster = null;
             int width;
             int height;
 
@@ -118,8 +118,7 @@ namespace Mapsui.ArcGIS.ImageServiceProvider
             catch (OverflowException ex)
             {
                 Logger.Log(LogLevel.Error, "Could not convert double to int (ExportMap size)", ex);
-                raster = null;
-                return false;
+                return (false, null);
             }
 
             var uri = new Uri(GetRequestUrl(viewport.Extent, width, height));
@@ -128,27 +127,24 @@ namespace Mapsui.ArcGIS.ImageServiceProvider
 
             try
             {
-                using var task = client.GetAsync(uri);
-                using var response = task.Result;
-                using (var dataStream = response.Content.ReadAsStreamAsync().Result)
+                using var response = await client.GetAsync(uri);
+                using (var dataStream = await response.Content.ReadAsStreamAsync())
                     try
                     {
                         var bytes = BruTile.Utilities.ReadFully(dataStream);
                         if (viewport.Extent != null)
-                            raster = new MRaster(bytes, viewport.Extent);
-                        else
                         {
-                            raster = null;
-                            return false;
+                            var raster = new MRaster(bytes, viewport.Extent);
+                            return (true, raster);
                         }
+
+                        return (false, null);
                     }
                     catch (Exception ex)
                     {
                         Logger.Log(LogLevel.Error, ex.Message, ex);
-                        raster = null;
-                        return false;
+                        return (false, null);
                     }
-                return true;
             }
             catch (WebException ex)
             {
@@ -165,9 +161,8 @@ namespace Mapsui.ArcGIS.ImageServiceProvider
                     throw new RenderException("There was a problem while attempting to request the WMS", ex);
                 Debug.WriteLine("There was a problem while attempting to request the WMS" + ex.Message);
             }
-
-            raster = null;
-            return false;
+            
+            return (false, null);
         }
 
         private string GetRequestUrl(MRect? boundingBox, int width, int height)

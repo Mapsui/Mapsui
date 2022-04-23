@@ -61,7 +61,7 @@ namespace Mapsui.Tiling.Layers
             _renderFetchStrategy = renderFetchStrategy ?? new RenderFetchStrategy();
             _minExtraTiles = minExtraTiles;
             _maxExtraTiles = maxExtraTiles;
-            _tileFetchDispatcher = new TileFetchDispatcher(MemoryCache, _tileSource.Schema, fetchTileAsFeature ?? ToFeature, dataFetchStrategy);
+            _tileFetchDispatcher = new TileFetchDispatcher(MemoryCache, _tileSource.Schema, fetchTileAsFeature ?? ToFeatureAsync, dataFetchStrategy);
             _tileFetchDispatcher.DataChanged += TileFetchDispatcherOnDataChanged;
             _tileFetchDispatcher.PropertyChanged += TileFetchDispatcherOnPropertyChanged;
         }
@@ -143,7 +143,7 @@ namespace Mapsui.Tiling.Layers
             OnDataChanged(e);
         }
 
-        private async Task<IFeature?> ToFeature(TileInfo tileInfo)
+        private async Task<IFeature?> ToFeatureAsync(TileInfo tileInfo)
         {
             var tileData = await _tileSource.GetTileAsync(tileInfo);
             var mRaster = ToRaster(tileInfo, tileData);

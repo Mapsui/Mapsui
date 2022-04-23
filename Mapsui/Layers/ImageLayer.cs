@@ -16,7 +16,7 @@ using Mapsui.Providers;
 
 namespace Mapsui.Layers
 {
-    public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource, IDisposable
+    public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProviderBase>, IDisposable
     {
         protected override void Dispose(bool disposing)
         {
@@ -39,7 +39,7 @@ namespace Mapsui.Layers
         private FetchInfo? _fetchInfo;
         private List<FeatureSets> _sets = new();
         private readonly Timer _startFetchTimer;
-        private IProvider<IFeature>? _dataSource;
+        private IProviderBase? _dataSource;
         private readonly int _numberOfFeaturesReturned;
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Mapsui.Layers
         /// </summary>
         public int FetchDelay { get; set; } = 1000;
 
-        public IProvider<IFeature>? DataSource
+        public IProviderBase? DataSource
         {
             get => _dataSource;
             set
@@ -140,11 +140,11 @@ namespace Mapsui.Layers
 
             var fetcher = new FeatureFetcher(new FetchInfo(fetchInfo), _dataSource, DataArrived, DateTime.Now.Ticks);
 
-            Task.Run(() => {
+            Task.Run(async () => {
                 try
                 {
                     Logger.Log(LogLevel.Debug, $"Start image fetch at {DateTime.Now.TimeOfDay}");
-                    fetcher.FetchOnThread();
+                    await fetcher.FetchOnThreadAsync();
                     Logger.Log(LogLevel.Debug, $"Finished image fetch at {DateTime.Now.TimeOfDay}");
                 }
                 catch (Exception ex)

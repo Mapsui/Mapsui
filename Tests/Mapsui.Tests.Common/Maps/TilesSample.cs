@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using BruTile;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -9,19 +10,19 @@ using Mapsui.UI;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public class TilesSample : ISample
+    public class TilesSample : IAsyncSample
     {
         public string Name => "Tiles";
         public string Category => "Tests";
 
-        public void Setup(IMapControl mapControl)
+        public async Task SetupAsync(IMapControl mapControl)
         {
-            mapControl.Map = CreateMap();
+            mapControl.Map = await CreateMapAsync();
         }
 
-        public static Map CreateMap()
+        public static async Task<Map> CreateMapAsync()
         {
-            var layer = CreateLayer();
+            var layer = await CreateLayerAsync();
 
             var map = new Map
             {
@@ -34,7 +35,7 @@ namespace Mapsui.Tests.Common.Maps
             return map;
         }
 
-        private static MemoryLayer CreateLayer()
+        private static async Task<MemoryLayer> CreateLayerAsync()
         {
             var tileIndexes = new[]
             {
@@ -44,13 +45,13 @@ namespace Mapsui.Tests.Common.Maps
                 new TileIndex(1, 1, 1)
             };
 
-            var features = TileIndexToFeatures(tileIndexes, new SampleTileSource());
+            var features = await TileIndexToFeaturesAsync(tileIndexes, new SampleTileSource());
             var layer = new MemoryLayer { DataSource = new MemoryProvider<RasterFeature>(features), Name = "Tiles" };
             layer.Style = new RasterStyle();
             return layer;
         }
 
-        private static List<RasterFeature> TileIndexToFeatures(TileIndex[] tileIndexes, ITileSource tileSource)
+        private static async Task<List<RasterFeature>> TileIndexToFeaturesAsync(TileIndex[] tileIndexes, ITileSource tileSource)
         {
             var features = new List<RasterFeature>();
             foreach (var tileIndex in tileIndexes)
@@ -62,7 +63,7 @@ namespace Mapsui.Tests.Common.Maps
                         new TileRange(tileIndex.Col, tileIndex.Row), tileIndex.Level, tileSource.Schema)
                 };
 
-                var raster = new MRaster(tileSource.GetTileAsync(tileInfo).Result, tileInfo.Extent.ToMRect());
+                var raster = new MRaster(await tileSource.GetTileAsync(tileInfo), tileInfo.Extent.ToMRect());
                 features.Add(new RasterFeature(raster));
             }
             return features;

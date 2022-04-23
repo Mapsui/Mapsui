@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Logging;
+using Mapsui.Samples.Common.Extensions;
 using Mapsui.Styles;
 using Mapsui.UI.Maui;
 using Microsoft.Maui.Controls;
@@ -110,7 +111,11 @@ namespace Mapsui.Samples.Maui
 
             if (sample != null)
             {
-                sample.Setup(mapView);
+                Catch.Exceptions(async () =>
+                {
+                    await sample.SetupAsync(mapView);
+                });
+                
             }
 
             clicker = null;

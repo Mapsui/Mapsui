@@ -1,18 +1,19 @@
 ﻿using System.IO;
 using System.Net.Http;
+using System.Threading.Tasks;
 using Mapsui.Cache;
 
 namespace Mapsui.Extensions
 {
     public static class CacheExtensions
     {
-        public static Stream UrlCachedStream(this IUrlPersistentCache? persistentCache, string url)
+        public static async Task<Stream> UrlCachedStreamAsync(this IUrlPersistentCache? persistentCache, string url)
         {
             var bytes = persistentCache?.Find(url);
             if (bytes == null)
             {
                 using var httpClient = new HttpClient();
-                using var response = httpClient.GetStreamAsync(url).Result;
+                using var response = await httpClient.GetStreamAsync(url);
                 bytes = response.ToBytes();
                 persistentCache?.Add(url, bytes);
             }

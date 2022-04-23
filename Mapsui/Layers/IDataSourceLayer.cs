@@ -2,7 +2,8 @@
 
 namespace Mapsui.Layers;
 
-public interface ILayerDataSource
+public interface ILayerDataSource<out T> 
+    where T : IProviderBase
 {
-    public IProvider<IFeature>? DataSource { get; }
+    public T? DataSource { get; }
 }

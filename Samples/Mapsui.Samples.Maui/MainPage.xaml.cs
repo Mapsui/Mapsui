@@ -10,7 +10,7 @@ namespace Mapsui.Samples.Maui
 {
     public partial class MainPage : ContentPage
     {
-        readonly IEnumerable<ISample> allSamples;
+        readonly IEnumerable<ISampleBase> allSamples;
         Func<object?, EventArgs, bool>? clicker;
 
         public MainPage()
@@ -20,7 +20,7 @@ namespace Mapsui.Samples.Maui
             // nullable warning workaround"
             var test = this.listView ?? throw new InvalidOperationException();
 
-            allSamples = AllSamples.GetSamples() ?? new List<ISample>();
+            allSamples = AllSamples.GetSamples() ?? new List<ISampleBase>();
 
             var categories = allSamples.Select(s => s.Category).Distinct().OrderBy(c => c);
             picker!.ItemsSource = categories.ToList<string>();
@@ -54,7 +54,7 @@ namespace Mapsui.Samples.Maui
                 clicker = formsSample.OnClick;
 
             if (sample != null)
-                (Application.Current?.MainPage as NavigationPage)?.PushAsync(new MapPage(sample.Setup, clicker));
+                (Application.Current?.MainPage as NavigationPage)?.PushAsync(new MapPage(sample, clicker));
 
             listView.SelectedItem = null;
         }
