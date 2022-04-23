@@ -37,8 +37,8 @@ nuget pack NuSpec\Mapsui.Avalonia.nuspec -Version %VERSION% -outputdirectory Art
 dotnet build /p:RestorePackages=true /p:Configuration=Release Mapsui.UI.Eto/Mapsui.UI.Eto.csproj
 nuget pack NuSpec\Mapsui.Eto.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1
 
-REM dotnet build /p:RestorePackages=true /p:Configuration=Release Mapsui.UI.MAUI/Mapsui.UI.MAUI.csproj
-REM nuget pack NuSpec\Mapsui.MAUI.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1
+dotnet build /p:RestorePackages=true /p:Configuration=Release Mapsui.UI.MAUI/Mapsui.UI.MAUI.csproj
+nuget pack NuSpec\Mapsui.MAUI.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1
 
 REM dotnet build /p:RestorePackages=true /p:Configuration=Release Mapsui.UI.Uno/Mapsui.UI.Uno.csproj
 REM nuget pack NuSpec\Mapsui.Uno.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1

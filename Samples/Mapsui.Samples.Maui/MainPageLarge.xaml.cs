@@ -13,7 +13,7 @@ using Mapsui.Styles;
 using Mapsui.UI.Maui;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Dispatching;
-using Microsoft.Maui.Essentials;
+using Microsoft.Maui.Devices.Sensors;
 
 namespace Mapsui.Samples.Maui
 {

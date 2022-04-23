@@ -16,7 +16,7 @@
 		<language>en-US</language>
 		<dependencies>
 			<!-- [ or ] is including, ( or ) is excluding -->
-      <group targetFramework="net6.0-android30.0">
+      <group targetFramework="net6.0-android31.0">
 				<dependency id="Mapsui" version="$version$"/>
 				<dependency id="SkiaSharp.Views" version="[2.88.0-preview.232,3.0.0)"/>				
 			</group>
@@ -24,6 +24,6 @@
 	</metadata>
 	<files>
 		<file src="..\LICENSE" target="LICENSE" />
-		<file src="..\Mapsui.UI.Android\bin\Release\net60-android30.0\Mapsui.UI.Android.dll" target="lib\net6.0-android30.0\Mapsui.UI.Android.dll" />
+		<file src="..\Mapsui.UI.Android\bin\Release\net6.0-android31.0\Mapsui.UI.Android.dll" target="lib\net6.0-android31.0\Mapsui.UI.Android.dll" />
 	</files>
 </package>

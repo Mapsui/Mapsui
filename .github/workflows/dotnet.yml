@@ -17,14 +17,14 @@ jobs:
       with:
         fetch-depth: 0
     # Cache Nugets
-    - uses: actions/cache@v2
+    - uses: actions/cache@v3
       with:
         path: ~/.nuget/packages
-        key: ${{ runner.os }}-nuget1-${{ hashFiles('**/*.csproj') }}
+        key: ${{ runner.os }}-nuget3-${{ hashFiles('**/*.csproj') }}
         restore-keys: |
-            ${{ runner.os }}-nuget1-
+            ${{ runner.os }}-nuget3-
     - name: Setup NuGet.exe for use with actions
-      uses: NuGet/setup-nuget@v1.0.5      
+      uses: NuGet/setup-nuget@v1.0.6      
       with:
         nuget-version: latest
     # - name: Set default Xamarin SDK versions
@@ -38,32 +38,31 @@ jobs:
     - name: Setup .NET Core SDK
       uses: actions/setup-dotnet@v1
       with:
-         dotnet-version: | 
-           5.0.x
-           6.0.201
+         dotnet-version: |            
+           6.0.300-preview.22204.3
          include-prerelease: true    
     - name: install maui macos android ios maccatalyst
       run: dotnet workload install maui macos android ios maccatalyst
     - name: Restore dependencies
-      run: nuget restore Mapsui.Mac.sln
+      run: dotnet restore Mapsui.Mac.sln
     - name: Build Mapsui
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui/Mapsui.csproj
+      run: dotnet build --no-restore --configuration Release Mapsui/Mapsui.csproj
     - name: Build Mapsui.Rendering.Skia
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Rendering.Skia/Mapsui.Rendering.Skia.csproj
+      run: dotnet build --no-restore --configuration Release Mapsui.Rendering.Skia/Mapsui.Rendering.Skia.csproj
     - name: Build Mapsui.Tiling
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Tiling/Mapsui.Tiling.csproj
+      run: dotnet build --no-restore --configuration Release Mapsui.Tiling/Mapsui.Tiling.csproj
     - name: Build Mapsui.Nts
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Nts/Mapsui.Nts.csproj
+      run: dotnet build --no-restore --configuration Release Mapsui.Nts/Mapsui.Nts.csproj
     - name: Build Mapsui.ArcGIS
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.ArcGIS/Mapsui.ArcGIS.csproj
+      run: dotnet build --no-restore --configuration Release Mapsui.ArcGIS/Mapsui.ArcGIS.csproj
     - name: Build Mapsui.Extensions
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Extensions/Mapsui.Extensions.csproj
+      run: dotnet build --no-restore --configuration Release Mapsui.Extensions/Mapsui.Extensions.csproj
     - name: Build Mapsui.UI.Android
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Android/Mapsui.UI.Android.csproj
-#    - name: Build Mapsui.UI.iOS
-#      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.iOS/Mapsui.UI.iOS.csproj
+      run: dotnet build --no-restore --configuration Release Mapsui.UI.Android/Mapsui.UI.Android.csproj
+    - name: Build Mapsui.UI.iOS
+      run: dotnet build --no-restore --configuration Release Mapsui.UI.iOS/Mapsui.UI.iOS.csproj
     - name: Build Mapsui.UI.Forms
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Forms/Mapsui.UI.Forms.csproj
+      run: dotnet build --no-restore --configuration Release Mapsui.UI.Forms/Mapsui.UI.Forms.csproj
     - name: Generate nuget package (Mapsui)
       run: nuget pack NuSpec/Mapsui.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
     - name: Generate nuget package (Mapsui.ArcGis)
@@ -72,6 +71,10 @@ jobs:
       run: nuget pack NuSpec/Mapsui.Extensions.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
     - name: Generate nuget package (Mapsui.Forms)
       run: nuget pack NuSpec/Mapsui.Forms.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
+    - name: Generate nuget package (Mapsui.Android)
+      run: nuget pack NuSpec/Mapsui.Android.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
+    - name: Generate nuget package (Mapsui.iOS)
+      run: nuget pack NuSpec/Mapsui.iOS.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
     - name: Upload packages
       uses: actions/upload-artifact@v2
       with:
@@ -85,21 +88,20 @@ jobs:
       with:
         fetch-depth: 0
     # Cache Nugets
-    - uses: actions/cache@v2
+    - uses: actions/cache@v3
       with:
         path: ~/.nuget/packages
-        key: ${{ runner.os }}-nuget1-${{ hashFiles('**/*.csproj') }}
+        key: ${{ runner.os }}-nuget3-${{ hashFiles('**/*.csproj') }}
         restore-keys: |
-            ${{ runner.os }}-nuget1-
+            ${{ runner.os }}-nuget3-
     - name: Setup .NET Core SDK
       uses: actions/setup-dotnet@v1
       with:
-         dotnet-version: | 
-           5.0.x
-           6.0.201
+         dotnet-version: |            
+           6.0.300-preview.22204.3
          include-prerelease: true
     - name: Setup NuGet.exe for use with actions
-      uses: NuGet/setup-nuget@v1.0.5
+      uses: NuGet/setup-nuget@v1.0.6
       with:
         nuget-version: latest
     - name: setup-msbuild
@@ -111,35 +113,35 @@ jobs:
     - name: Restore dependencies
       run: nuget restore Mapsui.sln
     - name: Build Mapsui
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui/Mapsui.csproj
+      run: dotnet build --no-restore --configuration Release Mapsui/Mapsui.csproj
     - name: Build Mapsui.Rendering.Skia
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Rendering.Skia/Mapsui.Rendering.Skia.csproj
+      run: dotnet build --no-restore --configuration Release Mapsui.Rendering.Skia/Mapsui.Rendering.Skia.csproj
     - name: Build Mapsui.Tiling
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Tiling/Mapsui.Tiling.csproj
+      run: dotnet build --no-restore --configuration Release Mapsui.Tiling/Mapsui.Tiling.csproj
     - name: Build Mapsui.Nts
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Nts/Mapsui.Nts.csproj
+      run: dotnet build --no-restore --configuration Release Mapsui.Nts/Mapsui.Nts.csproj
     - name: Build Mapsui.ArcGIS
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.ArcGIS/Mapsui.ArcGIS.csproj
+      run: dotnet build --no-restore --configuration Release Mapsui.ArcGIS/Mapsui.ArcGIS.csproj
     - name: Build Mapsui.Extensions
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.Extensions/Mapsui.Extensions.csproj
+      run: dotnet build --no-restore --configuration Release Mapsui.Extensions/Mapsui.Extensions.csproj
     - name: Build Mapsui.UI.Wpf
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Wpf/Mapsui.UI.Wpf.csproj
+      run: dotnet build --no-restore --configuration Release Mapsui.UI.Wpf/Mapsui.UI.Wpf.csproj
     - name: Build Mapsui.UI.Android
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Android/Mapsui.UI.Android.csproj
-#    - name: Build Mapsui.UI.iOS
-#      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.iOS/Mapsui.UI.iOS.csproj
+      run: dotnet build --no-restore --configuration Release Mapsui.UI.Android/Mapsui.UI.Android.csproj
+    - name: Build Mapsui.UI.iOS
+      run: dotnet build --no-restore --configuration Release Mapsui.UI.iOS/Mapsui.UI.iOS.csproj
     - name: Build Mapsui.UI.Forms
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Forms/Mapsui.UI.Forms.csproj    
+      run: dotnet build --no-restore --configuration Release Mapsui.UI.Forms/Mapsui.UI.Forms.csproj    
     - name: Build Mapsui.UI.Avalonia
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Avalonia/Mapsui.UI.Avalonia.csproj
+      run: dotnet build --no-restore --configuration Release Mapsui.UI.Avalonia/Mapsui.UI.Avalonia.csproj
     - name: Build Mapsui.UI.Uno
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Uno/Mapsui.UI.Uno.csproj
     - name: Build Mapsui.UI.WinUI
       run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.WinUI/Mapsui.UI.WinUI.csproj
     - name: Build Mapsui.UI.Maui
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Maui/Mapsui.UI.Maui.csproj 
+      run: dotnet build --no-restore --configuration Release Mapsui.UI.Maui/Mapsui.UI.Maui.csproj 
     - name: Build Mapsui.UI.Eto
-      run: msbuild /p:RestorePackages=false /p:Configuration=Release Mapsui.UI.Eto/Mapsui.UI.Eto.csproj        
+      run: dotnet build --no-restore --configuration Release Mapsui.UI.Eto/Mapsui.UI.Eto.csproj        
     - name: Generate nuget package (Mapsui)
       run: nuget pack NuSpec/Mapsui.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
     - name: Generate nuget package (Mapsui.ArcGis)
@@ -152,6 +154,8 @@ jobs:
       run: nuget pack NuSpec/Mapsui.Wpf.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
     - name: Generate nuget package (Mapsui.Android)
       run: nuget pack NuSpec/Mapsui.Android.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
+    - name: Generate nuget package (Mapsui.iOS)
+      run: nuget pack NuSpec/Mapsui.iOS.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
     - name: Generate nuget package (Mapsui.Avalonia)
       run: nuget pack NuSpec/Mapsui.Avalonia.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
     - name: Generate nuget package (Mapsui.Uno)

@@ -1,3 +1,3 @@
-git clean -fx -d
+git clean -fx -d -e .vs
 mkdir Artifacts
 .\.nuget\nuget restore Mapsui.sln
