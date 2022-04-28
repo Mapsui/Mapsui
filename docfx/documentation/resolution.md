@@ -8,7 +8,7 @@ Mapsui's resolution concept is derived from the value for zoom levels used in op
 It happens to be so that the units in EPSG:3875 are equal to meters at the equator, so at the equator the resolution can be interpreted as meters / pixel, but note that other coordinate systems can have completely different unit sizes. 
 
 ### The resolution of the Mapsui viewport
-The Viewport is an important class in Mapsui. It has a Resolution field. Its value can be directly derived from the coordinate extent and the size in pixels. So Viewport.Resolution should will always be equal to:
+The Viewport is an important class in Mapsui. It has a Resolution field. Its value can be directly derived from the coordinate extent and the size in pixels. So Viewport.Resolution will always be equal to:
 ```csharp
 var resolution = viewport.Extent.Width / viewport.Width;
 ```
