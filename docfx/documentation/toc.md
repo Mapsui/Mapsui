@@ -19,7 +19,7 @@
 ## [Mapsui Components](mapsui-components.md)
 ## [Asynchronous Data Fetching](async-fetching.md)
 ## [Resolution](resolution.md)
-## [Skia Scale](skia-scale.md)
+## [Device Independent Units](device-independent-units.md)
 ## [Projections](projections.md)
 ## [Custom Style Renderers](custom-style-renders.md)
 ## [Performance Widget](performance-widget.md)
