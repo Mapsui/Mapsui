@@ -3951,6 +3951,18 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "documentation/resolution.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/resolution.html",
+          "hash": "i/jwEUJST1rItp8q8/hoD2shcGamFMCj0MGpnuGqaE4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "documentation/roadmap.md",
       "output": {
         ".html": {
@@ -3979,7 +3991,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/skia-scale.html",
-          "hash": "lI8QTq0oQ7KuiS2Qq1DHzfI6bLhe1VTvNOJhNHo0ja8="
+          "hash": "16nSsUeNl0Gn9+43Y4JElUUo1CHUxcsFbt0yNQSv3VU="
         }
       },
       "is_incremental": false,
@@ -3991,7 +4003,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/toc.html",
-          "hash": "gciPqPAx73j59LEtzTjxU4YyS5X72dh4y9OEtTyDyao="
+          "hash": "w0l7n9vJhjxjgj1M2yHnOwC4M6PYoQT8pScj0GcgGEs="
         }
       },
       "is_incremental": false,
@@ -4115,7 +4127,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 30,
+          "total_file_count": 31,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {

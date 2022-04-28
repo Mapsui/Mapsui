@@ -1624,6 +1624,11 @@
     "title": "Rendering Tests",
     "keywords": "Rendering Tests Mapsui has a way of testing rendering where a Map state is rendered to a bitmap. This bitmap is then compared to the original images which are stored as resource in the repository. This is thus a kind of regresssion test (1). If there are differences between these images the test will fail. If this is the case the developer needs to visually inspect the generated images (2). If the generated image is as expected and the original is not then the original needs to be overwritten. Regression tests Visual inspection. The regression tests are useful during refactoring when you expect no changes. When you are working on changes in the rendered output the regression tests will fail but the visual inspection of the output is still useful to check if this is as intended. 1. Regression tests The generated images are written to: {test project folder}\\bin\\Debug\\net6.0\\Resources\\Images\\Generated Those will be compared to the original images that were deployed in the build located here: {test project folder}\\bin\\Debug\\net6.0\\Resources\\Images\\Original\\ If after code changes there are expected changes in the generated files they should be committed to git so they need to be copied to: {test project folder}\\Resources\\Images\\Original\\ This can be done with a script: scripts\\test-image-copier.cmd . 2. Visual inspection There tests can be inspected in two ways. In the WPF sample there is a 'Tests' category, that shows an interactive version of the test sample. In the output folder (see above) the generated images can be viewed. Currently this folder looks like this:"
   },
+  "documentation/resolution.html": {
+    "href": "documentation/resolution.html",
+    "title": "Resolution",
+    "keywords": "Resolution"
+  },
   "documentation/roadmap.html": {
     "href": "documentation/roadmap.html",
     "title": "Roadmap",
@@ -1637,7 +1642,7 @@
   "documentation/skia-scale.html": {
     "href": "documentation/skia-scale.html",
     "title": "Skia Scale",
-    "keywords": "Skia Scale We have a separate page about this topic because skia scale has caused some confusion in the past and bugs as a consequence. Some context: Device Independent Units Modern devices have a very high resolution. If something is drawn onto the canvas using raw pixels as coordinates the fonts would become tiny and unreadable and lines would become very thin. To correct for this a scale factor is used. Those scaled-up coordinates are called device independent units. Most of the time you deal with the device independent units. Coordinates in SkiaSharp Most (all?) views in SkiaSharp use pixels as coordinates by default but for our purposes we need to use device independent units, so we need to correct for this. We do this by setting the scale of the SKCanvas. This needs to be done in the render loop because it is the only place where we have access. Also the size of the map needs to be adjusted otherwise we would draw outsize the screen."
+    "keywords": "Skia Scale We have a separate page about this topic because skia scale has caused some confusion in the past and bugs as a consequence. Some context: Device Independent Units Modern devices have a very high resolution. If something is drawn onto the canvas using raw pixels as coordinates the fonts would become tiny and unreadable and lines would become very thin. To correct for this a scale factor is used. Those scaled-up coordinates are called device independent units. Most of the time you deal with the device independent units. Coordinates in SkiaSharp Most (all?) views in SkiaSharp use pixels as coordinates by default but for our purposes we need to use device independent units, so we need to correct for this. We do this by setting the scale of skia's SKCanvas. This needs to be done in the render loop because it is the only place where we have access to the SKCanvas. Also the size of the map needs to be adjusted at that point, otherwise we would draw outsize the screen."
   },
   "documentation/v2.0-upgrade-guide.html": {
     "href": "documentation/v2.0-upgrade-guide.html",
