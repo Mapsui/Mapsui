@@ -18,6 +18,7 @@
 ## [Mapsui.Forms](mapsui-forms.md)
 ## [Mapsui Components](mapsui-components.md)
 ## [Asynchronous Data Fetching](async-fetching.md)
+## [Resolution](resolution.md)
 ## [Skia Scale](skia-scale.md)
 ## [Projections](projections.md)
 ## [Custom Style Renderers](custom-style-renders.md)
