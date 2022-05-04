@@ -19,7 +19,7 @@
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="OpenTK.GLControl" Version="3.1.0">
     </PackageReference>
-    <PackageReference Include="SkiaSharp.Views.Forms.WPF" Version="2.88.0-preview.254">
+    <PackageReference Include="SkiaSharp.Views.Forms.WPF" Version="2.88.0-preview.256">
     </PackageReference>
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292">
     </PackageReference>
