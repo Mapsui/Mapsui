@@ -20,9 +20,9 @@ jobs:
     - uses: actions/cache@v3
       with:
         path: ~/.nuget/packages
-        key: ${{ runner.os }}-nuget3-${{ hashFiles('**/*.csproj') }}
+        key: ${{ runner.os }}-nuget4-${{ hashFiles('**/*.csproj') }}
         restore-keys: |
-            ${{ runner.os }}-nuget3-
+            ${{ runner.os }}-nuget4-
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.0.6      
       with:
@@ -36,9 +36,9 @@ jobs:
     #     echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV
     #     sudo xcode-select -s $XCODE_ROOT
     - name: Setup .NET Core SDK
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v2
       with:
-         dotnet-version: |            
+         dotnet-version: |
            6.0.300-preview.22204.3
          include-prerelease: true    
     - name: install maui macos android ios maccatalyst
@@ -91,13 +91,13 @@ jobs:
     - uses: actions/cache@v3
       with:
         path: ~/.nuget/packages
-        key: ${{ runner.os }}-nuget3-${{ hashFiles('**/*.csproj') }}
+        key: ${{ runner.os }}-nuget4-${{ hashFiles('**/*.csproj') }}
         restore-keys: |
-            ${{ runner.os }}-nuget3-
+            ${{ runner.os }}-nuget4-
     - name: Setup .NET Core SDK
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v2
       with:
-         dotnet-version: |            
+         dotnet-version: |
            6.0.300-preview.22204.3
          include-prerelease: true
     - name: Setup NuGet.exe for use with actions
