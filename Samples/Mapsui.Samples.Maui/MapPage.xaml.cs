@@ -31,7 +31,7 @@ namespace Mapsui.Samples.Maui
             var test1 = this.info ?? throw new InvalidOperationException();
         }
 
-        public MapPage(ISample sample, Func<MapView?, MapClickedEventArgs, bool>? c = null)
+        public MapPage(ISampleBase sample, Func<MapView?, MapClickedEventArgs, bool>? c = null)
         {
             InitializeComponent();
 

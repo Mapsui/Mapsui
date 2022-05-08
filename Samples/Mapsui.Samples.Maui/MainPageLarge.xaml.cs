@@ -19,7 +19,7 @@ namespace Mapsui.Samples.Maui
 {
     public sealed partial class MainPageLarge : ContentPage, IDisposable
     {
-        IEnumerable<ISample> allSamples;
+        IEnumerable<ISampleBase> allSamples;
         Func<object?, EventArgs, bool>? clicker;
         private CancellationTokenSource? gpsCancelation;
 
@@ -31,7 +31,7 @@ namespace Mapsui.Samples.Maui
             var test = this.listView ?? throw new InvalidOperationException();
             var test2 = this.featureInfo ?? throw new InvalidOperationException();
 
-            allSamples = AllSamples.GetSamples() ?? new List<ISample>();
+            allSamples = AllSamples.GetSamples() ?? new List<ISampleBase>();
 
             var categories = allSamples.Select(s => s.Category).Distinct().OrderBy(c => c);
             picker!.ItemsSource = categories.ToList<string>();
