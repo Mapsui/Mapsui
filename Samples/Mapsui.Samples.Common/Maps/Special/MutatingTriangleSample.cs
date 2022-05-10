@@ -43,14 +43,10 @@ namespace Mapsui.Samples.Common.Maps
 
             var polygon = new Polygon(new LinearRing(GenerateRandomPoints(envelope, 3).ToArray()));
             var feature = new GeometryFeature(polygon);
-            var features = new List<IFeature>
+            layer.Features = new List<IFeature> { feature };
+
+            PeriodicTask.RunAsync(() =>
             {
-                feature
-            };
-
-            layer.DataSource = new MemoryProvider<IFeature>(features);
-
-            PeriodicTask.RunAsync(() => {
                 feature.Geometry = new Polygon(new LinearRing(GenerateRandomPoints(envelope, 3).ToArray()));
                 // Clear cache for change to show
                 feature.RenderedGeometry.Clear();
@@ -92,7 +88,7 @@ namespace Mapsui.Samples.Common.Maps
                     }
                     else
                     {
-                        await Task.Delay(period, cancellationToken.Value);    
+                        await Task.Delay(period, cancellationToken.Value);
                     }
 
                     if (!(cancellationToken?.IsCancellationRequested ?? false))

@@ -37,12 +37,12 @@ namespace Mapsui.Tests.Common.Maps
             return new MemoryLayer
             {
                 Style = null,
-                DataSource = CreateProviderWithLabels(),
+                Features = CreateFeaturesWithLabels(),
                 Name = "Labels"
             };
         }
 
-        private static MemoryProvider<IFeature> CreateProviderWithLabels()
+        private static IEnumerable<IFeature> CreateFeaturesWithLabels()
         {
             var features = new List<IFeature>
             {
@@ -135,8 +135,8 @@ namespace Mapsui.Tests.Common.Maps
                     }
                 }
             };
-            var provider = new MemoryProvider<IFeature>(features);
-            return provider;
+
+            return features;
         }
     }
 }

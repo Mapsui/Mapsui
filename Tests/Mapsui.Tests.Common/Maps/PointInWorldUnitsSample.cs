@@ -45,7 +45,7 @@ namespace Mapsui.Tests.Common.Maps
             var layer = new MemoryLayer
             {
                 Style = null,
-                DataSource = new MemoryProvider<IFeature>(features),
+                Features = features,
                 Name = "Points in world units"
             };
             return layer;

@@ -15,7 +15,7 @@ namespace Mapsui.Providers
         public ProjectingProvider(IProviderBase provider, IProjection? projection = null)
         {
             _provider = provider;
-            _projection = projection ?? new Projection();
+            _projection = projection ?? ProjectionDefaults.Projection;
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Mapsui.Providers
 
             var features = await _provider.GetFeaturesAsync<IFeature>(fetchInfo);
 
-            foreach (var p in IterateFeatures(features))
+            foreach (var p in features.Project(_provider.CRS, CRS, _projection))
             {
                 yield return p;
             }
@@ -38,33 +38,11 @@ namespace Mapsui.Providers
 
         public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
         {
-            if (GetFetchInfo(ref fetchInfo)) yield break;
+            if (GetFetchInfo(ref fetchInfo)) return new List<IFeature>();
 
             var features = _provider.GetFeatures<IFeature>(fetchInfo);
 
-            foreach (var p in IterateFeatures(features))
-            {
-                yield return p;
-            }
-        }
-
-        private IEnumerable<IFeature> IterateFeatures(IEnumerable<IFeature> features)
-        {
-            if (!CrsHelper.IsProjectionNeeded(_provider.CRS, CRS))
-            {
-                foreach (var it in features)
-                    yield return it;
-                
-                yield break;
-            }
-            
-            if (!CrsHelper.IsCrsProvided(_provider.CRS, CRS))
-                throw new NotSupportedException($"CRS is not provided. From CRS: {_provider.CRS}. To CRS {CRS}");
-
-            var copiedFeatures = features.Copy().ToList();
-            _projection.Project(_provider.CRS, CRS, copiedFeatures);
-            foreach (var it in copiedFeatures)
-                yield return it;
+            return features.Project(_provider.CRS, CRS, _projection);
         }
 
         private bool GetFetchInfo(ref FetchInfo fetchInfo)

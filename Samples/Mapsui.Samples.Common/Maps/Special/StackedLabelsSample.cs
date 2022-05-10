@@ -31,7 +31,7 @@ namespace Mapsui.Samples.Common.Maps
 
         private static ILayer CreateStackedLabelLayer(IProvider<PointFeature> provider, string labelColumn)
         {
-            return new MemoryLayer
+            return new Layer
             {
                 Name = "StackedLabelLayer",
                 Style = null,

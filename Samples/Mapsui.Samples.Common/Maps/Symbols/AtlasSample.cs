@@ -42,16 +42,10 @@ namespace Mapsui.Samples.Common.Maps
             return new MemoryLayer
             {
                 Name = AtlasLayerName,
-                DataSource = CreateMemoryProviderWithDiverseSymbols(envelope, 1000),
+                Features = CreateAtlasFeatures(RandomPointGenerator.GenerateRandomPoints(envelope, 1000)),
                 Style = null,
                 IsMapInfoLayer = true
             };
-        }
-
-        public static MemoryProvider<IFeature> CreateMemoryProviderWithDiverseSymbols(MRect? envelope, int count = 100)
-        {
-            var points = RandomPointGenerator.GenerateRandomPoints(envelope, count);
-            return new MemoryProvider<IFeature>(CreateAtlasFeatures(points));
         }
 
         private static IEnumerable<IFeature> CreateAtlasFeatures(IEnumerable<MPoint> randomPoints)

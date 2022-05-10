@@ -24,7 +24,7 @@ namespace Mapsui.Tests.Common.Maps
             var layer = new MemoryLayer
             {
                 Style = null,
-                DataSource = CreateProviderWithMPointsWithVectorStyle(),
+                Features = CreateFeaturesWithMPointsWithVectorStyle(),
                 Name = "MPoints with VectorStyle"
             };
 
@@ -37,7 +37,7 @@ namespace Mapsui.Tests.Common.Maps
             return map;
         }
 
-        public static MemoryProvider<IFeature> CreateProviderWithMPointsWithVectorStyle()
+        public static IEnumerable<IFeature> CreateFeaturesWithMPointsWithVectorStyle()
         {
             var features = new List<IFeature>
             {
@@ -54,7 +54,7 @@ namespace Mapsui.Tests.Common.Maps
                     Styles = new[] {new VectorStyle {Fill = new Brush(Color.Green), Outline = null}}
                 }
             };
-            return new MemoryProvider<IFeature>(features);
+            return features;
         }
     }
 }

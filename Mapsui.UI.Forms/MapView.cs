@@ -45,9 +45,9 @@ namespace Mapsui.UI.Forms
         private const string CalloutLayerName = "Callouts";
         private const string PinLayerName = "Pins";
         private const string DrawableLayerName = "Drawables";
-        private readonly MemoryLayer _mapCalloutLayer;
-        private readonly MemoryLayer _mapPinLayer;
-        private readonly MemoryLayer _mapDrawableLayer;
+        private readonly Layer _mapCalloutLayer;
+        private readonly Layer _mapPinLayer;
+        private readonly Layer _mapDrawableLayer;
         private ButtonWidget? _mapZoomInButton;
         private ButtonWidget? _mapZoomOutButton;
         private ButtonWidget? _mapMyLocationButton;
@@ -72,9 +72,9 @@ namespace Mapsui.UI.Forms
             UseDoubleTap = false;
 
             MyLocationLayer = new MyLocationLayer(this) { Enabled = true };
-            _mapCalloutLayer = new MemoryLayer() { Name = CalloutLayerName, IsMapInfoLayer = true };
-            _mapPinLayer = new MemoryLayer() { Name = PinLayerName, IsMapInfoLayer = true };
-            _mapDrawableLayer = new MemoryLayer() { Name = DrawableLayerName, IsMapInfoLayer = true };
+            _mapCalloutLayer = new Layer() { Name = CalloutLayerName, IsMapInfoLayer = true };
+            _mapPinLayer = new Layer() { Name = PinLayerName, IsMapInfoLayer = true };
+            _mapDrawableLayer = new Layer() { Name = DrawableLayerName, IsMapInfoLayer = true };
 
             // Get defaults from MapControl
             RotationLock = Map?.RotationLock ?? false;

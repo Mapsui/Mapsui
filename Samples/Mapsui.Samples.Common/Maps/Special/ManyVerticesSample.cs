@@ -41,7 +41,7 @@ namespace Mapsui.Samples.Common.Maps
             {
                 Name = "Points",
                 IsMapInfoLayer = true,
-                DataSource = new MemoryProvider<IFeature>(GetFeature())
+                Features = new List<IFeature>() { GetFeature() }
             };
         }
 

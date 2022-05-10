@@ -46,9 +46,7 @@ namespace Mapsui.Samples.Common.Maps
                 CreateFeatureWithCharacterWrap(),
             };
 
-            var memoryProvider = new MemoryProvider<IFeature>(features);
-
-            return new MemoryLayer { Name = "Points with labels", DataSource = memoryProvider };
+            return new MemoryLayer { Name = "Points with labels", Features = features };
         }
 
         private static IFeature CreateFeatureWithDefaultStyle()

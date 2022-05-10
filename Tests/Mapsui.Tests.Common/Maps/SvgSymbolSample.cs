@@ -25,7 +25,7 @@ namespace Mapsui.Tests.Common.Maps
             var layer = new MemoryLayer
             {
                 Style = null,
-                DataSource = new MemoryProvider<IFeature>(CreateFeatures()),
+                Features = CreateFeatures(),
                 Name = "Points with Svg"
             };
 

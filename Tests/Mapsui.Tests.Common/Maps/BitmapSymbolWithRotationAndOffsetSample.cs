@@ -24,7 +24,7 @@ namespace Mapsui.Tests.Common.Maps
         {
             var layer = new MemoryLayer
             {
-                DataSource = CreateProviderWithRotatedBitmapSymbols(),
+                Features = CreateProviderWithRotatedBitmapSymbols(),
                 Name = "Points with rotated bitmaps",
                 Style = null
             };
@@ -40,9 +40,9 @@ namespace Mapsui.Tests.Common.Maps
             return map;
         }
 
-        private static IProvider<IFeature> CreateProviderWithRotatedBitmapSymbols()
+        private static IEnumerable<IFeature> CreateProviderWithRotatedBitmapSymbols()
         {
-            var features = new List<IFeature>
+            return new List<IFeature>
             {
                 new GeometryFeature
                 {
@@ -53,7 +53,6 @@ namespace Mapsui.Tests.Common.Maps
                 CreateFeatureWithRotatedBitmapSymbol(125, 125, 180),
                 CreateFeatureWithRotatedBitmapSymbol(125, 75, 270)
             };
-            return new MemoryProvider<IFeature>(features);
         }
 
         private static GeometryFeature CreateFeatureWithRotatedBitmapSymbol(double x, double y, double rotation)

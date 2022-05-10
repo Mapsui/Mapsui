@@ -45,10 +45,12 @@ namespace Mapsui.Tests.Common.Maps
                 new TileIndex(1, 1, 1)
             };
 
-            var features = await TileIndexToFeaturesAsync(tileIndexes, new SampleTileSource());
-            var layer = new MemoryLayer { DataSource = new MemoryProvider<RasterFeature>(features), Name = "Tiles" };
-            layer.Style = new RasterStyle();
-            return layer;
+            return new MemoryLayer
+            {
+                Features = await TileIndexToFeaturesAsync(tileIndexes, new SampleTileSource()),
+                Name = "Tiles",
+                Style = new RasterStyle()
+            };
         }
 
         private static async Task<List<RasterFeature>> TileIndexToFeaturesAsync(TileIndex[] tileIndexes, ITileSource tileSource)

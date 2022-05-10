@@ -38,7 +38,7 @@ namespace Mapsui.Tests.Common.Maps
         {
             return new MemoryLayer
             {
-                DataSource = new MemoryProvider<IFeature>(CreateFeatures()),
+                Features = CreateFeatures(),
                 Name = "Symbol Types",
                 Style = null
             };
