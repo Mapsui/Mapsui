@@ -53,7 +53,7 @@
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
     <!-- Required - WinUI does not yet have buildTransitive for everything -->
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.3" />
-    <PackageReference Include="Microsoft.Graphics.Win2D" Version="1.0.1" />
+    <PackageReference Include="Microsoft.Graphics.Win2D" Version="1.0.3.1" />
   </ItemGroup>
 
   <ItemGroup>
