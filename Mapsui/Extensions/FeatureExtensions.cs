@@ -61,5 +61,16 @@ namespace Mapsui.Extensions
             (projection ?? ProjectionDefaults.Projection).Project(fromCRS, toCRS, result);
             return result;
         }
+
+        public static MRect? GetExtent(this IEnumerable<IFeature> features)
+        {
+            MRect? result = null;
+            foreach (var feature in features)
+            {
+                if (feature.Extent is null) continue;
+                result = result is null ? new MRect(feature.Extent): result.Join(feature.Extent);
+            }
+            return result;
+        }
     }
 }
