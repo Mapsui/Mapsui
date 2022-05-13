@@ -50,27 +50,27 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore Mapsui.Mac.sln
     # Debug Build
-    - name: Build Debug Mapsui
-      run: dotnet build --no-restore --configuration Debug Mapsui/Mapsui.csproj
-    - name: Build Debug Mapsui.Rendering.Skia
-      run: dotnet build --no-restore --configuration Debug Mapsui.Rendering.Skia/Mapsui.Rendering.Skia.csproj
-    - name: Build Debug Mapsui.Tiling
-      run: dotnet build --no-restore --configuration Debug Mapsui.Tiling/Mapsui.Tiling.csproj
-    - name: Build Debug Mapsui.Nts
-      run: dotnet build --no-restore --configuration Debug Mapsui.Nts/Mapsui.Nts.csproj
-    - name: Build Debug Mapsui.ArcGIS
-      run: dotnet build --no-restore --configuration Debug Mapsui.ArcGIS/Mapsui.ArcGIS.csproj
-    - name: Build Debug Mapsui.Extensions
-      run: dotnet build --no-restore --configuration Debug Mapsui.Extensions/Mapsui.Extensions.csproj
-    - name: Build Debug Mapsui.UI.Android
-      run: dotnet build --no-restore --configuration Debug Mapsui.UI.Android/Mapsui.UI.Android.csproj
-    - name: Build Debug Mapsui.UI.iOS
-      run: dotnet build --no-restore --configuration Debug Mapsui.UI.iOS/Mapsui.UI.iOS.csproj
-    - name: Build Debug Mapsui.UI.Forms
-      run: dotnet build --no-restore --configuration Debug Mapsui.UI.Forms/Mapsui.UI.Forms.csproj
+    #- name: Build Debug Mapsui
+    #  run: dotnet build --no-restore --configuration Debug Mapsui/Mapsui.csproj
+    #- name: Build Debug Mapsui.Rendering.Skia
+    #  run: dotnet build --no-restore --configuration Debug Mapsui.Rendering.Skia/Mapsui.Rendering.Skia.csproj
+    #- name: Build Debug Mapsui.Tiling
+    #  run: dotnet build --no-restore --configuration Debug Mapsui.Tiling/Mapsui.Tiling.csproj
+    #- name: Build Debug Mapsui.Nts
+    #  run: dotnet build --no-restore --configuration Debug Mapsui.Nts/Mapsui.Nts.csproj
+    #- name: Build Debug Mapsui.ArcGIS
+    #  run: dotnet build --no-restore --configuration Debug Mapsui.ArcGIS/Mapsui.ArcGIS.csproj
+    #- name: Build Debug Mapsui.Extensions
+    #  run: dotnet build --no-restore --configuration Debug Mapsui.Extensions/Mapsui.Extensions.csproj
+    #- name: Build Debug Mapsui.UI.Android
+    #  run: dotnet build --no-restore --configuration Debug Mapsui.UI.Android/Mapsui.UI.Android.csproj
+    #- name: Build Debug Mapsui.UI.iOS
+    #  run: dotnet build --no-restore --configuration Debug Mapsui.UI.iOS/Mapsui.UI.iOS.csproj
+    #- name: Build Debug Mapsui.UI.Forms
+    #  run: dotnet build --no-restore --configuration Debug Mapsui.UI.Forms/Mapsui.UI.Forms.csproj
     # Samples Build
-    - name: Build Mapsui.Samples.Common
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Common/Mapsui.Samples.Common.csproj
+    #- name: Build Mapsui.Samples.Common
+    #  run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Common/Mapsui.Samples.Common.csproj
     - name: Build Mapsui.Samples.Common.Desktop
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Common.Desktop/Mapsui.Samples.Common.Desktop.csproj
     - name: Build Mapsui.Samples.CustomWidget
@@ -78,17 +78,17 @@ jobs:
     - name: Build Mapsui.Samples.Droid
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Droid/Mapsui.Samples.Droid.csproj
     # Samples Forms
-    - name: Build Mapsui.Samples.Forms.Mac
+    - name: Build Mapsui.Samples.Forms.Shared
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Shared/Mapsui.Samples.Forms.Shared.csproj
     - name: Build Mapsui.Samples.Forms.Android
-      run: msbuild /p:RestorePackages=false" -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Android/Mapsui.Samples.Forms.Android.csproj
+      run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Android/Mapsui.Samples.Forms.Android.csproj
     - name: Build Mapsui.Samples.Forms.iOS
-      run: msbuild /p:RestorePackages=false" -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.iOS/Mapsui.Samples.Forms.iOS.csproj
+      run: msbuild -p:RestorePackages=false-p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.iOS/Mapsui.Samples.Forms.iOS.csproj
     - name: Build Mapsui.Samples.Forms.Mac
-      run: msbuild /p:RestorePackages=false" -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Mac/Mapsui.Samples.Forms.Mac.csproj
+      run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Mac/Mapsui.Samples.Forms.Mac.csproj
     # Test Build
-    - name: Build Mapsui.Tests.Common
-      run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Tests.Common/Mapsui.Tests.Common.csproj
+    #- name: Build Mapsui.Tests.Common
+    #  run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Tests.Common/Mapsui.Tests.Common.csproj
     - name: Build Mapsui.Rendering.Skia.Tests
       run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Rendering.Skia.Tests/Mapsui.Rendering.Skia.Tests.csproj
     - name: Build Mapsui.Tests
