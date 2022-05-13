@@ -28,9 +28,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{08
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{B2DB6CAC-1C30-42C9-B628-BACEBF790AB9}"
 	ProjectSection(SolutionItems) = preProject
+		appveyor.yml = appveyor.yml
 		Scripts\build.proj = Scripts\build.proj
 		Scripts\buildpack.bat = Scripts\buildpack.bat
 		Scripts\buildpackpush.bat = Scripts\buildpackpush.bat
+		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
 		Scripts\readme.txt = Scripts\readme.txt
 		Scripts\rename.ps1 = Scripts\rename.ps1
 	EndProjectSection
@@ -3658,6 +3660,8 @@ Global
 		{564E5990-8DF6-481C-8E1A-075ADBAF0793}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
 		{564E5990-8DF6-481C-8E1A-075ADBAF0793}.Debug|iPhoneSimulator.Deploy.0 = Debug|Any CPU
 		{564E5990-8DF6-481C-8E1A-075ADBAF0793}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{564E5990-8DF6-481C-8E1A-075ADBAF0793}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{564E5990-8DF6-481C-8E1A-075ADBAF0793}.Debug|Mixed Platforms.Deploy.0 = Debug|Any CPU
 		{564E5990-8DF6-481C-8E1A-075ADBAF0793}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{564E5990-8DF6-481C-8E1A-075ADBAF0793}.Debug|x64.Build.0 = Debug|Any CPU
 		{564E5990-8DF6-481C-8E1A-075ADBAF0793}.Debug|x86.ActiveCfg = Debug|Any CPU
