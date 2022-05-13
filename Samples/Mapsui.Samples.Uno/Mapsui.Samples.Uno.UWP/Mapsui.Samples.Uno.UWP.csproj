@@ -15,7 +15,7 @@
     <PackageReference Include="Uno.UI" Version="4.2.6" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="5.0.0" />
-    <PackageReference Include="Uno.Core.Extensions.Logging.Singleton" Version="4.0.0-dev.7" />
+    <PackageReference Include="Uno.Core.Extensions.Logging.Singleton" Version="4.0.1" />
     <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.0-preview.266" />
   </ItemGroup>
   <PropertyGroup>
