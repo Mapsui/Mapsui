@@ -161,7 +161,7 @@ jobs:
     - name: Maspui.Samples.Maui
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Maui/Mapsui.Samples.Maui.csproj
     - name: Maspui.Samples.WinUI
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.WinUI/Mapsui.Samples.WinUI.csproj
+      run: dotnet build --no-restore --configuration Debug Samples\Mapsui.Samples.WinUI\Mapsui.Samples.WinUI.csproj
     - name: Maspui.Samples.Wpf
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Wpf/Mapsui.Samples.Wpf.csproj
     - name: Maspui.Samples.Wpf.Editing
