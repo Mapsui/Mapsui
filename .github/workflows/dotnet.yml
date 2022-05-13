@@ -87,7 +87,12 @@ jobs:
     - name: Build Mapsui.Samples.Forms.Mac
       run: msbuild /p:RestorePackages=false" -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Mac/Mapsui.Samples.Forms.Mac.csproj
     # Test Build
-
+    - name: Build Mapsui.Tests.Common
+      run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Tests.Common/Mapsui.Tests.Common.csproj
+    - name: Build Mapsui.Rendering.Skia.Tests
+      run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Rendering.Skia.Tests/Mapsui.Rendering.Skia.Tests.csproj
+    - name: Build Mapsui.Tests
+      run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Tests/Mapsui.Tests.csproj    
     # Release Build
     - name: Build Mapsui
       run: dotnet build --no-restore --configuration Release Mapsui/Mapsui.csproj
