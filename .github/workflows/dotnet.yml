@@ -147,8 +147,33 @@ jobs:
       run: dotnet workload install maui macos android ios maccatalyst
     - name: Restore dependencies
       run: nuget restore Mapsui.sln
-    - name: Build Debug Projet for Tests and Samples
-      run: dotnet build --no-restore --configuration Debug Mapsui.sln
+    # Samples Build
+    # - name: Build Debug Projet for Tests and Samples
+    #  run: dotnet build --no-restore --configuration Debug Mapsui.sln
+    - name: Maspui.Samples.Avalonia
+      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Avalonia/Mapsui.Samples.Avalonia.csproj
+    - name: Maspui.Samples.Droid
+      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Droid/Mapsui.Samples.Droid.csproj
+    - name: Maspui.Samples.Eto
+      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Eto/Mapsui.Samples.Eto.csproj
+    - name: Maspui.Samples.iOS
+      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.iOS/Mapsui.Samples.iOS.csproj
+    - name: Maspui.Samples.Maui
+      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Maui/Mapsui.Samples.Maui.csproj
+    - name: Maspui.Samples.WinUI
+      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.WinUI/Mapsui.Samples.WinUI.csproj
+    - name: Maspui.Samples.Wpf
+      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Wpf/Mapsui.Samples.Wpf.csproj
+    - name: Maspui.Samples.Wpf.Editing
+      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Wpf.Editing/Mapsui.Samples.Wpf.Editing.csproj
+    # Samples Forms
+    - name: Mapsui.Samples.Forms.Android
+      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Android/Mapsui.Samples.Forms.Android.csproj
+    - name: Mapsui.Samples.Forms.Android
+      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Android/Mapsui.Samples.Forms.Android.csproj
+    # Samples Uno
+    
+    # Release Build
     - name: Build Mapsui
       run: dotnet build --no-restore --configuration Release Mapsui/Mapsui.csproj
     - name: Build Mapsui.Rendering.Skia
