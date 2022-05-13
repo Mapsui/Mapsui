@@ -76,9 +76,9 @@ jobs:
     - name: Install NUnit.ConsoleRunner
       run: nuget install NUnit.ConsoleRunner -Version 3.15.0 -DirectDownload -OutputDirectory .        
     - name: Run Mapsui.Rendering.Skia.Tests
-      run: mono ./NUnit.ConsoleRunner.3.15.0/tools/nunit3-console.exe  Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/Mapsui.Rendering.Skia.Tests.dll
+      run: mono ./NUnit.ConsoleRunner.3.15.0/tools/nunit3-console.exe  Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/net6.0/Mapsui.Rendering.Skia.Tests.dll
     - name: Run Mapsui.Tests
-      run: mono ./NUnit.ConsoleRunner.3.15.0/tools/nunit3-console.exe  Tests/Mapsui.Tests/bin/Debug/Mapsui.Tests.dll
+      run: mono ./NUnit.ConsoleRunner.3.15.0/tools/nunit3-console.exe  Tests/Mapsui.Tests/bin/Debug/net6.0/Mapsui.Tests.dll
     # Release Build
     - name: Build Mapsui
       run: dotnet build --no-restore --configuration Release Mapsui/Mapsui.csproj
