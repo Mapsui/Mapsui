@@ -45,6 +45,8 @@ jobs:
       run: dotnet workload install maui macos android ios maccatalyst
     - name: Restore dependencies
       run: dotnet restore Mapsui.Mac.sln
+    - name: Build Debug Projet for Tests and Samples
+      run: dotnet build --no-restore --configuration Debug Mapsui.Mac.sln
     - name: Build Mapsui
       run: dotnet build --no-restore --configuration Release Mapsui/Mapsui.csproj
     - name: Build Mapsui.Rendering.Skia
@@ -112,6 +114,8 @@ jobs:
       run: dotnet workload install maui macos android ios maccatalyst
     - name: Restore dependencies
       run: nuget restore Mapsui.sln
+    - name: Build Debug Projet for Tests and Samples
+      run: dotnet build --no-restore --configuration Debug Mapsui.sln
     - name: Build Mapsui
       run: dotnet build --no-restore --configuration Release Mapsui/Mapsui.csproj
     - name: Build Mapsui.Rendering.Skia
