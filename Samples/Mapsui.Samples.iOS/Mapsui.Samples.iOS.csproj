@@ -15,10 +15,10 @@
   <ItemGroup>
     <PackageReference Include="BruTile.MbTiles" Version="5.0.0" />
     <PackageReference Include="Itinero" Version="1.5.0" />
-    <PackageReference Include="SkiaSharp" Version="2.88.0-preview.256" />
-    <PackageReference Include="SkiaSharp.Views" Version="2.88.0-preview.256" />
-    <PackageReference Include="SkiaSharp.HarfBuzz" Version=" 2.88.0-preview.256" />
-    <PackageReference Include="SkiaSharp.NativeAssets.iOS" Version=" 2.88.0-preview.256" />
+    <PackageReference Include="SkiaSharp" Version="2.88.0-preview.266" />
+    <PackageReference Include="SkiaSharp.Views" Version="2.88.0-preview.266" />
+    <PackageReference Include="SkiaSharp.HarfBuzz" Version=" 2.88.0-preview.266" />
+    <PackageReference Include="SkiaSharp.NativeAssets.iOS" Version=" 2.88.0-preview.266" />
     <PackageReference Include="Svg.Skia" Version="0.5.12" />
   </ItemGroup>
 </Project>
