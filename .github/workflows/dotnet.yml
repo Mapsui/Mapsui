@@ -35,6 +35,10 @@ jobs:
     #     XCODE_ROOT=/Applications/Xcode_12.4.app
     #     echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV
     #     sudo xcode-select -s $XCODE_ROOT
+    - name: Setup Xcode version
+      uses: maxim-lobanov/setup-xcode@v1.4.1
+      with:
+        xcode-version: latest-stable
     - name: Setup .NET Core SDK
       uses: actions/setup-dotnet@v2
       with:
