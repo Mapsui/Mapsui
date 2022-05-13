@@ -31,12 +31,5 @@ namespace Mapsui.Samples.Maui.WinUI
 
         [SupportedOSPlatform("windows10.0.18362")]
         protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
-
-        protected override void OnLaunched(LaunchActivatedEventArgs args)
-        {
-            base.OnLaunched(args);
-
-            Microsoft.Maui.Essentials.Platform.OnLaunched(args);
-        }
     }
 }
