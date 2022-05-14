@@ -154,8 +154,8 @@ jobs:
     - name: Maspui.Samples.Eto
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Eto/Mapsui.Samples.Eto.csproj
     # does not work currently (bug in rc3)
-    #- name: Maspui.Samples.iOS
-    #  run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.iOS/Mapsui.Samples.iOS.csproj
+    - name: Maspui.Samples.iOS
+      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.iOS/Mapsui.Samples.iOS.csproj
     - name: Maspui.Samples.Maui
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Maui/Mapsui.Samples.Maui.csproj
     # win builds in the solution but not in seperate project

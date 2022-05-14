@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>true</ImplicitUsings>
     <SupportedOSPlatformVersion>11.2</SupportedOSPlatformVersion>
-    <PublishTrimmed>True</PublishTrimmed>
+    <PublishTrimmed>False</PublishTrimmed>
     <OptimizePNGs>False</OptimizePNGs>
     <MtouchUseLlvm>False</MtouchUseLlvm>
   </PropertyGroup>
