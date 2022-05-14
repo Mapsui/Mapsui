@@ -173,8 +173,8 @@ jobs:
     - name: Mapsui.Samples.Forms.Mac
       run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Mac/Mapsui.Samples.Forms.Mac.csproj
     # Works in the project but not on github action
-    #- name: Mapsui.Samples.Forms.UWP
-    #  run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.UWP/Mapsui.Samples.Forms.UWP.csproj
+    - name: Mapsui.Samples.Forms.UWP
+      run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.UWP/Mapsui.Samples.Forms.UWP.csproj
     - name: Mapsui.Samples.Forms.WPF
       run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.WPF/Mapsui.Samples.Forms.WPF.csproj
     # Samples Uno
