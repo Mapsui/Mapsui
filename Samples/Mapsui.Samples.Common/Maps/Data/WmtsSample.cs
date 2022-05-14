@@ -39,7 +39,11 @@ namespace Mapsui.Samples.Common.Maps.Data
             using var response = await (DefaultCache as IUrlPersistentCache).UrlCachedStreamAsync(url);
             var tileSources = WmtsParser.Parse(response);
             var nature2000TileSource = tileSources.First(t => t.Name == "natura2000");
-            nature2000TileSource.PersistentCache = DefaultCache;
+            if (DefaultCache != null)
+            {
+                nature2000TileSource.PersistentCache = DefaultCache;
+            }
+            
             return new TileLayer(nature2000TileSource) { Name = nature2000TileSource.Name };
             
         }
