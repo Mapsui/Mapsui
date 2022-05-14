@@ -1,4 +1,5 @@
-﻿using System.Xml;
+﻿using System;
+using System.Xml;
 using Mapsui.Providers.Wms;
 using Mapsui.Tests.Utilities;
 using NUnit.Framework;
@@ -14,7 +15,7 @@ namespace Mapsui.Tests.Wms
         {
             // arrange
             var capabilties = new XmlDocument { XmlResolver = null };
-            capabilties.Load($"{AssemblyInfo.AssemblyDirectory}{Path.PathSeparator}Resources{Path.PathSeparator}capabilities_1_1_1.xml");
+            capabilties.Load($"{AssemblyInfo.AssemblyDirectory}{Path.DirectorySeparatorChar}Resources{Path.DirectorySeparatorChar}capabilities_1_1_1.xml");
 
             // act
             var client = new Client(capabilties);
@@ -28,7 +29,7 @@ namespace Mapsui.Tests.Wms
         {
             // arrange
             var capabilties = new XmlDocument { XmlResolver = null };
-            capabilties.Load($"{AssemblyInfo.AssemblyDirectory}{Path.PathSeparator}Resources{Path.PathSeparator}capabilities_1_3_0.xml");
+            capabilties.Load($"{AssemblyInfo.AssemblyDirectory}{Path.DirectorySeparatorChar}Resources{Path.DirectorySeparatorChar}capabilities_1_3_0.xml");
 
             // act
             var client = new Client(capabilties);
