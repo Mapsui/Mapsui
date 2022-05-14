@@ -146,9 +146,7 @@ jobs:
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools
     - name: Restore dependencies
       run: nuget restore Mapsui.sln
-    # Samples Build
-    # - name: Build Debug Projet for Tests and Samples
-    #  run: dotnet build --no-restore --configuration Debug Mapsui.sln
+    # Samples Build    
     - name: Maspui.Samples.Avalonia
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Avalonia/Mapsui.Samples.Avalonia.csproj
     - name: Maspui.Samples.Droid
@@ -211,9 +209,7 @@ jobs:
       with:
         timeout_minutes: 10
         max_attempts: 3        
-        command: dotnet test Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/net6.0/Mapsui.Rendering.Skia.Tests.dll
-    #- name: Run Mapsui.Rendering.Skia.Tests
-    #  run: dotnet test Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/net6.0/Mapsui.Rendering.Skia.Tests.dll
+        command: dotnet test Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/net6.0/Mapsui.Rendering.Skia.Tests.dll    
     - name: Run Mapsui.Tests
       run: dotnet test Tests/Mapsui.Tests/bin/Debug/net6.0/Mapsui.Tests.dll
     - name: Run Mapsui.UI.Forms.Tests
