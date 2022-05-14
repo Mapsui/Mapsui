@@ -53,8 +53,8 @@ jobs:
     # Samples Build    
     - name: Build Mapsui.Samples.Droid
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Droid/Mapsui.Samples.Droid.csproj    
-    - name: Build Mapsui.Samples.iOS
-      run: dotnet build --no-restore --configuration Debug -r iossimulator-x64 Samples/Mapsui.Samples.iOS/Mapsui.Samples.iOS.csproj
+    #- name: Build Mapsui.Samples.iOS
+    #  run: dotnet build --no-restore --configuration Debug -r iossimulator-x64 --self-contained Samples/Mapsui.Samples.iOS/Mapsui.Samples.iOS.csproj
     # Samples Forms    
     #- name: Build Mapsui.Samples.Forms.Shared
     #  run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Shared/Mapsui.Samples.Forms.Shared.csproj    
