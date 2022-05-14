@@ -1,6 +1,0 @@
-MainPackage=C:\Github\Mapsui\Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.UWP\bin\x86\Debug\Mapsui.Samples.Forms.UWP_1.0.0.0_x86_Debug.msix
-SymbolPackage=C:\Github\Mapsui\Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.UWP\obj\x86\Debug\Symbols\Mapsui.Samples.Forms.UWP_1.0.0.0_x86_Debug.appxsym
-ResourcePack=C:\Github\Mapsui\Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.UWP\bin\x86\Debug\Mapsui.Samples.Forms.UWP_1.0.0.0_scale-100.msix
-ResourcePack=C:\Github\Mapsui\Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.UWP\bin\x86\Debug\Mapsui.Samples.Forms.UWP_1.0.0.0_scale-125.msix
-ResourcePack=C:\Github\Mapsui\Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.UWP\bin\x86\Debug\Mapsui.Samples.Forms.UWP_1.0.0.0_scale-150.msix
-ResourcePack=C:\Github\Mapsui\Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.UWP\bin\x86\Debug\Mapsui.Samples.Forms.UWP_1.0.0.0_scale-400.msix
