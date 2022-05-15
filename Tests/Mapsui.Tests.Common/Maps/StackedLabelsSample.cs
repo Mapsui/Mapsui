@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
+using Mapsui.Tests.Common.TestTools;
 using Mapsui.UI;
 
 namespace Mapsui.Tests.Common.Maps
@@ -22,9 +24,9 @@ namespace Mapsui.Tests.Common.Maps
         public static Map CreateMap()
         {
             var random = new Random(6);
-            var provider = RandomPointGenerator.CreateProviderWithRandomPoints(new MRect(-100, -100, 100, 100), 20, random);
-            var layer = CreateLayer(provider);
-            var stackedLabelLayer = CreateStackedLabelLayer(provider, LabelColumn);
+            var features = RandomPointGenerator.CreateRandomFeatures(new MRect(-100, -100, 100, 100), 20, random);
+            var layer = CreateLayer(features);
+            var stackedLabelLayer = CreateStackedLabelLayer(features, LabelColumn);
 
             var map = new Map
             {
@@ -38,20 +40,20 @@ namespace Mapsui.Tests.Common.Maps
             return map;
         }
 
-        private static MemoryLayer CreateStackedLabelLayer(IProvider<IFeature> provider, string labelColumn)
+        private static TestLayer CreateStackedLabelLayer(IEnumerable<IFeature> provider, string labelColumn)
         {
-            return new MemoryLayer
+            return new TestLayer
             {
-                DataSource = new StackedLabelProvider(provider, new LabelStyle { LabelColumn = labelColumn }),
+                DataSource = new StackedLabelProvider(new MemoryProvider<IFeature>(provider), new LabelStyle { LabelColumn = labelColumn }),
                 Style = null
             };
         }
 
-        private static MemoryLayer CreateLayer(IProvider<IFeature> dataSource)
+        private static MemoryLayer CreateLayer(IEnumerable<IFeature> features)
         {
             return new MemoryLayer
             {
-                DataSource = dataSource,
+                Features = features,
                 Style = new SymbolStyle { SymbolScale = 1, Fill = new Brush(new Color { A = 128, R = 8, G = 20, B = 192 }) }
             };
         }

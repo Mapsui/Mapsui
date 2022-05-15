@@ -36,15 +36,10 @@ namespace Mapsui.Samples.Common.Maps
             return new MemoryLayer
             {
                 Name = "Styles Layer",
-                DataSource = CreateMemoryProviderWithDiverseSymbols(envelope, 25),
+                Features = CreateDiverseFeatures(RandomPointGenerator.GenerateRandomPoints(envelope, 25)),
                 Style = null,
                 IsMapInfoLayer = true
             };
-        }
-
-        public static MemoryProvider<IFeature> CreateMemoryProviderWithDiverseSymbols(MRect? envelope, int count = 100)
-        {
-            return new MemoryProvider<IFeature>(CreateDiverseFeatures(RandomPointGenerator.GenerateRandomPoints(envelope, count)));
         }
 
         private static IEnumerable<IFeature> CreateDiverseFeatures(IEnumerable<MPoint> randomPoints)

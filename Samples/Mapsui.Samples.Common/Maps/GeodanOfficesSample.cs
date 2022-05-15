@@ -15,7 +15,7 @@ namespace Mapsui.Samples.Common.Maps
 
             var layer = new MemoryLayer
             {
-                DataSource = new MemoryProvider<IFeature>(new[] { geodanAmsterdam, geodanDenBosch }.ToFeatures()),
+                Features = new[] { geodanAmsterdam, geodanDenBosch }.ToFeatures(),
                 Style = new SymbolStyle
                 {
                     BitmapId = location,

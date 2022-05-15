@@ -40,12 +40,12 @@ namespace Mapsui.Tests.Common.Maps
             return new MemoryLayer
             {
                 Style = null,
-                DataSource = CreateLineProvider(),
+                Features = CreateLineFeatures(),
                 Name = "Line"
             };
         }
 
-        private static MemoryProvider<IFeature> CreateLineProvider()
+        private static IEnumerable<IFeature> CreateLineFeatures()
         {
             var features = new List<IFeature>();
             var wktReader = new WKTReader();
@@ -127,9 +127,7 @@ namespace Mapsui.Tests.Common.Maps
             feature.Styles.Add(new VectorStyle { Line = new Pen(Color.Red) { PenStyle = PenStyle.Solid, PenStrokeCap = PenStrokeCap.Butt } });
             features.Add(feature);
 
-            var provider = new MemoryProvider<IFeature>(features);
-
-            return provider;
+            return features;
         }
     }
 }

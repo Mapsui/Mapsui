@@ -35,15 +35,10 @@ namespace Mapsui.Samples.Common.Maps
             return new MemoryLayer
             {
                 Name = "Svg Layer",
-                DataSource = CreateMemoryProviderWithDiverseSymbols(envelope, 2000),
+                Features = CreateSvgFeatures(RandomPointGenerator.GenerateRandomPoints(envelope, 2000)),
                 Style = null,
                 IsMapInfoLayer = true
             };
-        }
-
-        public static MemoryProvider<IFeature> CreateMemoryProviderWithDiverseSymbols(MRect? envelope, int count = 100)
-        {
-            return new MemoryProvider<IFeature>(CreateSvgFeatures(RandomPointGenerator.GenerateRandomPoints(envelope, count)));
         }
 
         private static IEnumerable<IFeature> CreateSvgFeatures(IEnumerable<MPoint> randomPoints)

@@ -41,14 +41,13 @@ namespace Mapsui.Samples.Common.Maps.Callouts
             return map;
         }
 
-        private static MemoryLayer CreatePointLayer()
+        private static Layer CreatePointLayer()
         {
-            return new MemoryLayer
+            return new Layer
             {
-                Name = "Points",
-                IsMapInfoLayer = true,
+                Name = "Point",
                 DataSource = new MemoryProvider<IFeature>(GetCitiesFromEmbeddedResource()),
-                Style = new VectorStyle()
+                IsMapInfoLayer = true
             };
         }
 
@@ -59,7 +58,8 @@ namespace Mapsui.Samples.Common.Maps.Callouts
             using var stream = assembly.GetManifestResourceStream(path) ?? throw new NullReferenceException();
             var cities = DeserializeFromStream<City>(stream);
 
-            return cities.Select(c => {
+            return cities.Select(c =>
+            {
                 var feature = new PointFeature(SphericalMercator.FromLonLat(c.Lng, c.Lat).ToMPoint());
                 feature["name"] = c.Name;
                 feature["country"] = c.Country;

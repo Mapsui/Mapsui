@@ -44,12 +44,11 @@ namespace Mapsui.Samples.Common.Maps
         private static ILayer CreatePolygonLayer()
         {
             var features = new List<IFeature> { CreatePolygonFeature(), CreateMultiPolygonFeature() };
-            var provider = new MemoryProvider<IFeature>(features);
 
             var layer = new MemoryLayer
             {
                 Name = PolygonLayerName,
-                DataSource = provider,
+                Features = features,
                 Style = null,
                 IsMapInfoLayer = true
             };
@@ -62,7 +61,7 @@ namespace Mapsui.Samples.Common.Maps
             return new MemoryLayer
             {
                 Name = LineLayerName,
-                DataSource = new MemoryProvider<IFeature>(CreateLineFeature()),
+                Features = new[] { CreateLineFeature() },
                 Style = null,
                 IsMapInfoLayer = true
             };

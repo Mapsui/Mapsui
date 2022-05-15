@@ -39,7 +39,7 @@ namespace Mapsui.Tests.Common.Maps
             return new MemoryLayer
             {
                 Style = null,
-                DataSource = new MemoryProvider<IFeature>(CreateFeatures()),
+                Features = CreateFeatures(),
                 Name = "Points with bitmaps"
             };
         }

@@ -38,11 +38,10 @@ namespace Mapsui.Samples.Common.Maps
             {
                 features.Add(new PointFeature(new MPoint(rnd.Next(0, 5000000), rnd.Next(0, 5000000))));
             }
-            var provider = new MemoryProvider<IFeature>(features);
 
             return new MemoryLayer
             {
-                DataSource = provider,
+                Features = features,
                 Style = new SymbolStyle
                 {
                     SymbolType = SymbolType.Triangle,

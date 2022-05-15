@@ -90,7 +90,7 @@ namespace Mapsui.Samples.Common.Desktop
 
             return new MemoryLayer
             {
-                DataSource = new MemoryProvider<IFeature>(features),
+                Features = features,
                 Style = CreateCityStyle(),
                 Name = "Points",
                 IsMapInfoLayer = true

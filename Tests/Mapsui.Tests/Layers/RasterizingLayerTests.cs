@@ -8,6 +8,7 @@ using Mapsui.Nts;
 using Mapsui.Providers;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
+using Mapsui.Tests.Common.TestTools;
 using Mapsui.Tiling.Extensions;
 using NetTopologySuite.Geometries;
 using NUnit.Framework;
@@ -30,7 +31,8 @@ namespace Mapsui.Tests.Layers
             using var waitHandle = new AutoResetEvent(false);
 
             Assert.AreEqual(0, layer.GetFeatures(box, resolution).Count());
-            layer.DataChanged += (_, _) => {
+            layer.DataChanged += (_, _) =>
+            {
                 // assert
                 waitHandle.Set();
             };
@@ -45,7 +47,7 @@ namespace Mapsui.Tests.Layers
             Assert.AreEqual(layer.GetFeatures(box, resolution).Count(), 1);
         }
 
-        private static MemoryLayer CreatePointLayer()
+        private static TestLayer CreatePointLayer()
         {
             var random = new Random(3);
             var features = new List<IFeature>();
@@ -54,9 +56,7 @@ namespace Mapsui.Tests.Layers
                 features.Add(new GeometryFeature(
                     new Point(random.Next(100000, 5000000), random.Next(100000, 5000000))));
             }
-            var provider = new MemoryProvider<IFeature>(features);
-
-            return new MemoryLayer { DataSource = provider };
+            return new TestLayer() { DataSource = new MemoryProvider<IFeature>(features) };
         }
     }
 }

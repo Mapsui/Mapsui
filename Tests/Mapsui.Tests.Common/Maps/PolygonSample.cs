@@ -44,12 +44,12 @@ namespace Mapsui.Tests.Common.Maps
         {
             return new MemoryLayer
             {
-                DataSource = CreatePolygonProvider(),
+                Features = CreatePolygonProvider(),
                 Name = "Polygon"
             };
         }
 
-        public static MemoryProvider<IFeature> CreatePolygonProvider()
+        public static IEnumerable<IFeature> CreatePolygonProvider()
         {
             var wktReader = new WKTReader();
             var features = new List<IFeature>();
@@ -187,7 +187,7 @@ namespace Mapsui.Tests.Common.Maps
             });
             features.Add(feature);
 
-            return new MemoryProvider<IFeature>(features);
+            return features;
         }
 
         private static Brush CreateBrush(Color color, FillStyle fillStyle, int? imageId = null)

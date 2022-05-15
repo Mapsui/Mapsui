@@ -1,3 +1,4 @@
+using Mapsui.Projections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,6 +46,31 @@ namespace Mapsui.Extensions
                 result.Append(Environment.NewLine);
             }
             return result.ToString();
+        }
+
+        public static IEnumerable<IFeature> Project(this IEnumerable<IFeature> features, string? fromCRS,
+            string? toCRS, IProjection? projection = null)
+        {
+            if (!CrsHelper.IsProjectionNeeded(fromCRS, toCRS))
+                return features;
+
+            if (!CrsHelper.IsCrsProvided(fromCRS, toCRS))
+                throw new NotSupportedException($"CRS is not provided. From CRS: {fromCRS}. To CRS {toCRS}");
+
+            var result = features.Copy().ToList();
+            (projection ?? ProjectionDefaults.Projection).Project(fromCRS, toCRS, result);
+            return result;
+        }
+
+        public static MRect? GetExtent(this IEnumerable<IFeature> features)
+        {
+            MRect? result = null;
+            foreach (var feature in features)
+            {
+                if (feature.Extent is null) continue;
+                result = result is null ? new MRect(feature.Extent): result.Join(feature.Extent);
+            }
+            return result;
         }
     }
 }

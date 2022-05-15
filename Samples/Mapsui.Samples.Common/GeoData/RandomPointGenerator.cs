@@ -8,6 +8,14 @@ namespace Mapsui.Samples.Common.Helpers
 {
     public static class RandomPointGenerator
     {
+        public static IEnumerable<PointFeature> CreateRandomFeatures(MRect? envelope, int count, Random? random = null)
+        {
+            if (random == null)
+                random = new Random(123);
+
+            return CreateFeatures(GenerateRandomPoints(envelope, count, random));
+        }
+
         public static MemoryProvider<PointFeature> CreateProviderWithRandomPoints(MRect? envelope, int count, Random? random = null)
         {
             if (random == null)

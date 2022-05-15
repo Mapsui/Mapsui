@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Nts;
 using Mapsui.Providers;
@@ -47,9 +48,7 @@ namespace Mapsui.Tests.Common.Maps
         {
             return new MemoryLayer("Center of Amsterdam")
             {
-#pragma warning disable IDISP004 // Don't ignore created IDisposable
-                DataSource = new MemoryProvider<IFeature>(new PointFeature(new MPoint(545465.50488704059, 6866697.0250906311))),
-#pragma warning restore IDISP004 // Don't ignore created IDisposable
+                Features = new List<IFeature> { new PointFeature(new MPoint(545465.50488704059, 6866697.0250906311)) },
                 Style = new SymbolStyle { Fill = new Brush { Color = Color.Black }, SymbolScale = 0.5 }
             };
         }
@@ -61,19 +60,9 @@ namespace Mapsui.Tests.Common.Maps
                 new() {Geometry = new WKTReader().Read(WktOfAmsterdam)}
             };
 
-            var memoryProvider = new MemoryProvider<GeometryFeature>(features)
-            {
-                CRS = "EPSG:4326" // The DataSource CRS needs to be set
-            };
-
-            var dataSource = new ProjectingProvider(memoryProvider)
-            {
-                CRS = "EPSG:3857"
-            };
-
             return new MemoryLayer
             {
-                DataSource = dataSource,
+                Features = features.Project("EPSG:4326", "EPSG:3857"),
                 Name = "WGS84 Geometries",
                 Opacity = 0.5
             };

@@ -212,7 +212,7 @@ namespace Mapsui.UI.Objects
             _feature.Styles.Add(_locStyle);
             _feature.Styles.Add(_coStyle);
 
-            DataSource = new MemoryProvider<IFeature>(new List<IFeature> { _feature });
+            Features = new List<IFeature> { _feature };
             Style = null;
         }
 
