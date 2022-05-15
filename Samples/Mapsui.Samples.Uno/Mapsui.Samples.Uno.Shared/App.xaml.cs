@@ -38,7 +38,7 @@ namespace Mapsui.Samples.Uwp
 #pragma warning restore Uno0001 // Uno type or member is not implemented
             }
 #endif
-            var rootFrame = Window.Current.Content as Frame;
+            var rootFrame = Windows.UI.Xaml.Window.Current.Content as Frame;
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
@@ -55,7 +55,7 @@ namespace Mapsui.Samples.Uwp
                 }
 
                 // Place the frame in the current Window
-                Window.Current.Content = rootFrame;
+                Windows.UI.Xaml.Window.Current.Content = rootFrame;
             }
 
             if (e.PrelaunchActivated == false)
@@ -68,7 +68,7 @@ namespace Mapsui.Samples.Uwp
                     rootFrame.Navigate(typeof(MainPage), e.Arguments);
                 }
                 // Ensure the current window is active
-                Window.Current.Activate();
+                Windows.UI.Xaml.Window.Current.Activate();
             }
         }
 
