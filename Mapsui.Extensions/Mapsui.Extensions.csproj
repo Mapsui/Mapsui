@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,9 +11,9 @@
 
   <ItemGroup>
     <PackageReference Include="BruTile" Version="5.0.0" />
-    <PackageReference Include="sqlite-net-pcl" Version="1.6.292"/>
+    <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
     <PackageReference Include="BitMiracle.LibTiff.NET" Version="2.4.649" />
-    <PackageReference Include="SkiaSharp" Version="2.88.0-preview.256" />
+    <PackageReference Include="SkiaSharp" Version="2.88.0-preview.266" />
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
     <PackageReference Include="DotSpatial.Projections.NetStandard" Version="1.0.0" />
   </ItemGroup>

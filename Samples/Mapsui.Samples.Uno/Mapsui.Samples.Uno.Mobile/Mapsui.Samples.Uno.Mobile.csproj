@@ -1,13 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <!--Reenable for Maui RC 1-->    
-    <TargetFrameworks>net6.0-android31.0;net6.0-ios13.6;net6.0-maccatalyst13.5;net6.0-macos10.15</TargetFrameworks>
+    <TargetFrameworks>net6.0-android;net6.0-ios;net6.0-maccatalyst;net6.0-macos</TargetFrameworks>
     <SingleProject>true</SingleProject>
     <OutputType>Exe</OutputType>
-    <RuntimeIdentifier Condition="'$(TargetFramework)' == 'net6.0-ios'">iossimulator-x64</RuntimeIdentifier>
+	<RuntimeIdentifier Condition="'$(TargetFramework)' == 'net6.0-ios'">iossimulator-x64</RuntimeIdentifier>
     <RuntimeIdentifier Condition="'$(TargetFramework)' == 'net6.0-maccatalyst'">maccatalyst-x64</RuntimeIdentifier>
     <RuntimeIdentifier Condition="'$(TargetFramework)' == 'net6.0-macos'">osx-x64</RuntimeIdentifier>
-    <InvariantGlobalization Condition="'$(TargetFramework)' == 'net6.0-maccatalyst'">true</InvariantGlobalization>
     <!-- Debugger workaround https://github.com/dotnet/maui-samples/blob/8aa6b8780b12e97b157514c3bdc54bb4a13001cd/HelloMacCatalyst/HelloMacCatalyst.csproj#L7 -->
     <!-- <MtouchExtraArgs Condition="'$(TargetFramework)' == 'net6.0-maccatalyst'">$(MtouchExtraArgs) -setenv:MONO_THREADS_SUSPEND=preemptive</MtouchExtraArgs> -->
     <!-- Required for C# Hot Reload -->
@@ -19,21 +18,21 @@
     <SupportedOSPlatformVersion Condition="'$(TargetFramework)'=='net6.0-macos'">10.14</SupportedOSPlatformVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Uno.UI" Version="4.1.9" />
-    <PackageReference Include="Uno.UI.RemoteControl" Version="4.1.9" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.1.9" />
+    <PackageReference Include="Uno.UI" Version="4.2.6" />
+    <PackageReference Include="Uno.UI.RemoteControl" Version="4.2.6" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.2.6" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="5.0.0" />
-    <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.0-preview.256" />
+    <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.0-preview.266" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)'=='net6.0-android31.0'">
+  <ItemGroup Condition="'$(TargetFramework)'=='net6.0-android'">
     <PackageReference Include="Xamarin.Google.Android.Material" Version="1.4.0.4" />
     <PackageReference Include="Uno.UniversalImageLoader" Version="1.9.35" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)'=='net6.0-ios13.6' or '$(TargetFramework)'=='net6.0-maccatalyst'">
-    <PackageReference Include="Uno.Extensions.Logging.OSLog" Version="1.2.0-dev.2" />
+  <ItemGroup Condition="'$(TargetFramework)'=='net6.0-ios' or '$(TargetFramework)'=='net6.0-maccatalyst'">
+    <PackageReference Include="Uno.Extensions.Logging.OSLog" Version="1.3.0" />
   </ItemGroup>
-  <PropertyGroup Condition="'$(TargetFramework)'=='net6.0-maccatalyst13.5'">
+  <PropertyGroup Condition="'$(TargetFramework)'=='net6.0-maccatalyst'">
     <!-- Required for unknown crash as of .NET 6 Mobile Preview 13 -->
     <MtouchExtraArgs>--registrar:static</MtouchExtraArgs>
     <!-- Full globalization is required for Uno -->
@@ -49,4 +48,109 @@
     <ProjectReference Include="..\..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
   </ItemGroup>
   <Import Project="..\Mapsui.Samples.Uno.Shared\Mapsui.Samples.Uno.Shared.projitems" Label="Shared" />
+  <ItemGroup>
+    <AndroidResource Remove="obj\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\Debug\net6.0-macos\osx-x64\uno.reload.cookie.g.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\Debug\net6.0-macos\osx-x64\Mapsui.Samples.Uno.Mobile.GlobalUsings.g.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\Debug\net6.0-macos\osx-x64\Mapsui.Samples.Uno.Mobile.AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\Debug\net6.0-macos\osx-x64\.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\Debug\net6.0-macos10.15\osx-x64\uno.reload.cookie.g.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\Debug\net6.0-macos10.15\osx-x64\Mapsui.Samples.Uno.Mobile.GlobalUsings.g.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\Debug\net6.0-macos10.15\osx-x64\Mapsui.Samples.Uno.Mobile.AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\Debug\net6.0-macos10.15\osx-x64\.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\Debug\net6.0-maccatalyst\maccatalyst-x64\uno.reload.cookie.g.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\Debug\net6.0-maccatalyst\maccatalyst-x64\Mapsui.Samples.Uno.Mobile.GlobalUsings.g.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\Debug\net6.0-maccatalyst\maccatalyst-x64\Mapsui.Samples.Uno.Mobile.AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\Debug\net6.0-maccatalyst\maccatalyst-x64\.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\Debug\net6.0-maccatalyst13.5\maccatalyst-x64\uno.reload.cookie.g.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\Debug\net6.0-maccatalyst13.5\maccatalyst-x64\Mapsui.Samples.Uno.Mobile.GlobalUsings.g.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\Debug\net6.0-maccatalyst13.5\maccatalyst-x64\Mapsui.Samples.Uno.Mobile.AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\Debug\net6.0-maccatalyst13.5\maccatalyst-x64\.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\Debug\net6.0-ios\iossimulator-x64\uno.reload.cookie.g.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\Debug\net6.0-ios\iossimulator-x64\Mapsui.Samples.Uno.Mobile.GlobalUsings.g.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\Debug\net6.0-ios\iossimulator-x64\Mapsui.Samples.Uno.Mobile.AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\Debug\net6.0-ios\iossimulator-x64\.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\Debug\net6.0-ios13.6\iossimulator-x64\uno.reload.cookie.g.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\Debug\net6.0-ios13.6\iossimulator-x64\Mapsui.Samples.Uno.Mobile.GlobalUsings.g.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\Debug\net6.0-ios13.6\iossimulator-x64\Mapsui.Samples.Uno.Mobile.AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\Debug\net6.0-ios13.6\iossimulator-x64\.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\Debug\net6.0-android\uno.reload.cookie.g.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\Debug\net6.0-android\Resource.designer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\Debug\net6.0-android\Mapsui.Samples.Uno.Mobile.AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\Debug\net6.0-android\designtime\Resource.designer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\Debug\net6.0-android\.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\Debug\net6.0-android31.0\uno.reload.cookie.g.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\Debug\net6.0-android31.0\Resource.designer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\Debug\net6.0-android31.0\Mapsui.Samples.Uno.Mobile.AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\Debug\net6.0-android31.0\designtime\Resource.designer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\Debug\net6.0-android31.0\.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" />
+  </ItemGroup>
 </Project>

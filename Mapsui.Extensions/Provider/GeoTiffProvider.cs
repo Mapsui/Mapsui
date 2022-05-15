@@ -62,7 +62,7 @@ namespace Mapsui.Extensions.Provider
 
             _mRaster = new MRaster(data.ToArray(), _extent);
             _feature = new RasterFeature(_mRaster);
-            _feature.Styles.Add(new VectorStyle());
+            _feature.Styles.Add(new RasterStyle());
         }
 
         private static MRect CalculateExtent(TiffProperties tiffProperties, WorldProperties worldProperties)

@@ -6,7 +6,7 @@
 	-->
 
   <PropertyGroup>        
-	<TargetFrameworks>uap10.0.19041;netstandard2.0;net6.0;net6.0-android31;net6.0-ios13.6;net6.0-maccatalyst13.5;net6.0-macos10.15</TargetFrameworks>
+	<TargetFrameworks>uap10.0.19041;netstandard2.0;net6.0</TargetFrameworks>
     <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
     <RootNamespace>Mapsui.UI.Uwp</RootNamespace>
@@ -14,8 +14,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Uno.UI" Version="4.1.9" />
-    <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.0-preview.256" />    
+    <PackageReference Include="Uno.UI" Version="4.2.6" />
+    <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.0-preview.266" />    
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'=='uap10.0.19041'">

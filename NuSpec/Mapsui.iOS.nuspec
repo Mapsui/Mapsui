@@ -19,7 +19,7 @@
       <!-- [ or ] is including, ( or ) is excluding -->
       <group targetFramework="net60-ios13.6">
         <dependency id="Mapsui" version="$version$"/>
-        <dependency id="SkiaSharp.Views" version="[2.88.0-preview.256,3.0.0)"/>
+        <dependency id="SkiaSharp.Views" version="[2.88.0-preview.266,3.0.0)"/>
       </group>
     </dependencies>
   </metadata>
