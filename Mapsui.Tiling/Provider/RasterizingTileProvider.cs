@@ -25,7 +25,7 @@ public class RasterizingTileProvider : ITileSource
     private readonly ILayer _layer;
     private ITileSchema? _tileSchema;
     private Attribution? _attribution;
-    private readonly IProviderBase? _dataSource;
+    private readonly IProvider<IFeature>? _dataSource;
 
     public RasterizingTileProvider(
         ILayer layer,
@@ -41,7 +41,7 @@ public class RasterizingTileProvider : ITileSource
         _pixelDensity = pixelDensity;
         PersistentCache = persistentCache ?? new NullCache();
 
-        if (_layer is ILayerDataSource<IProviderBase> { DataSource: { } } dataSourceLayer)
+        if (_layer is ILayerDataSource<IProvider<IFeature>> { DataSource: { } } dataSourceLayer)
         {
             _dataSource = dataSourceLayer.DataSource;
 
@@ -82,19 +82,22 @@ public class RasterizingTileProvider : ITileSource
         var resolution = tileResolution.UnitsPerPixel;
         var viewPort = RasterizingLayer.CreateViewport(tileInfo.Extent.ToMRect(), resolution, _renderResolutionMultiplier, 1);
         var fetchInfo = new FetchInfo(viewPort.Extent, resolution);
-        var features = await GetFeaturesAsync(fetchInfo);
+        var features = await GetFeaturesAsync(fetchInfo).ToListAsync();
         var renderLayer = new RenderLayer(_layer, features);
         return (viewPort, renderLayer);
     }
 
-    private async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+    private async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
     {
         if (_dataSource != null)
         {
-            return await _dataSource.GetFeaturesAsync<IFeature>(fetchInfo);
+            await foreach (var feature in _dataSource.GetFeaturesAsync(fetchInfo))
+                yield return feature;
         }
 
-        return _layer.GetFeatures(fetchInfo.Extent, fetchInfo.Resolution);
+        foreach (var layerFeature in _layer.GetFeatures(fetchInfo.Extent, fetchInfo.Resolution))
+            yield return layerFeature;
+
     }
 
     private IRenderer GetRenderer()

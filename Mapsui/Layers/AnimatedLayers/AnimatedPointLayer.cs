@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Mapsui.Fetcher;
 using Mapsui.Providers;
 
@@ -14,17 +16,19 @@ public class AnimatedPointLayer : BaseLayer, ILayerDataSource<IProvider<IFeature
     {
         _dataSource = dataSource;
         if (_dataSource is IDynamic dynamic)
-            dynamic.DataChanged += (s, e) => {
-                UpdateData();
+            dynamic.DataChanged += async (s, e) =>
+            {
+                await UpdateDataAsync();
                 DataHasChanged();
             };
     }
 
-    public void UpdateData()
+    public async Task UpdateDataAsync()
     {
-        if (_fetchInfo == null) return;
-
-        _animatedFeatures.AddFeatures(_dataSource.GetFeatures(_fetchInfo) ?? new List<PointFeature>());
+        if (_fetchInfo is null) return;
+        if (_dataSource is null) return;
+        var features = await _dataSource.GetFeaturesAsync(_fetchInfo).ToListAsync();
+        _animatedFeatures.AddFeatures(features);
         OnDataChanged(new DataChangedEventArgs());
     }
 

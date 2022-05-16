@@ -18,13 +18,12 @@ namespace Mapsui.UI.Objects
             Collection = collection;
         }
 
-        public IEnumerable<TU> GetFeatures(FetchInfo fetchInfo)
+        public async IAsyncEnumerable<TU> GetFeaturesAsync(FetchInfo fetchInfo)
         {
-            var list = new List<TU>();
-
             if (Collection == null || Collection.Count == 0)
-                return list;
+                yield break;
 
+            var list = new List<TU>();
             lock (_syncRoot)
             {
                 foreach (var item in Collection)
@@ -37,7 +36,8 @@ namespace Mapsui.UI.Objects
                 }
             }
 
-            return list;
+            foreach (var item in list)
+                yield return item;
         }
 
         public MRect? GetExtent()

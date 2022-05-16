@@ -7,19 +7,13 @@ namespace Mapsui.Providers
 {
     public class MemoryProvider<T> : IProvider<T> where T : IFeature
     {
+        private readonly MRect? _boundingBox;
         /// <summary>
         /// Gets or sets the geometries this data source contains
         /// </summary>
-        public IReadOnlyList<T> Features { get; private set; }
+        public IReadOnlyList<T> Features { get; set; }
 
         public double SymbolSize { get; set; } = 64;
-
-        /// <summary>
-        /// The spatial reference ID (CRS)
-        /// </summary>
-        public string? CRS { get; set; }
-
-        private readonly MRect? _boundingBox;
 
         public MemoryProvider()
         {
@@ -37,6 +31,11 @@ namespace Mapsui.Providers
             _boundingBox = GetExtent(Features);
         }
 
+        /// <summary>
+        /// The spatial reference ID (CRS)
+        /// </summary>
+        public string? CRS { get; set; }
+
 
         /// <summary>
         /// Initializes a new instance of the MemoryProvider
@@ -48,7 +47,8 @@ namespace Mapsui.Providers
             _boundingBox = GetExtent(Features);
         }
 
-        public virtual IEnumerable<T> GetFeatures(FetchInfo fetchInfo)
+
+        public virtual async IAsyncEnumerable<T> GetFeaturesAsync(FetchInfo fetchInfo)
         {
             if (fetchInfo == null) throw new ArgumentNullException(nameof(fetchInfo));
             if (fetchInfo.Extent == null) throw new ArgumentNullException(nameof(fetchInfo.Extent));
@@ -60,7 +60,8 @@ namespace Mapsui.Providers
             var biggerBox = fetchInfo.Extent?.Grow(fetchInfo.Resolution * SymbolSize * 0.5);
             var grownFeatures = features.Where(f => f != null && (f.Extent?.Intersects(biggerBox) ?? false));
 
-            return grownFeatures.ToList();
+            foreach (var feature in grownFeatures)
+                yield return feature;
         }
 
         /// <summary>

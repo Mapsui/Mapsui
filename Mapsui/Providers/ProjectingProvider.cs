@@ -7,12 +7,12 @@ using Mapsui.Projections;
 
 namespace Mapsui.Providers
 {
-    public class ProjectingProvider : IAsyncProvider<IFeature>, IProvider<IFeature>
+    public class ProjectingProvider : IProvider<IFeature>
     {
-        private readonly IProviderBase _provider;
+        private readonly IProvider<IFeature> _provider;
         private readonly IProjection _projection;
 
-        public ProjectingProvider(IProviderBase provider, IProjection? projection = null)
+        public ProjectingProvider(IProvider<IFeature> provider, IProjection? projection = null)
         {
             _provider = provider;
             _projection = projection ?? ProjectionDefaults.Projection;
@@ -28,21 +28,12 @@ namespace Mapsui.Providers
         {
             if (GetFetchInfo(ref fetchInfo)) yield break;
 
-            var features = await _provider.GetFeaturesAsync<IFeature>(fetchInfo);
+            var features = await _provider.GetFeaturesAsync(fetchInfo).ToListAsync();
 
             foreach (var p in features.Project(_provider.CRS, CRS, _projection))
             {
                 yield return p;
             }
-        }
-
-        public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
-        {
-            if (GetFetchInfo(ref fetchInfo)) return new List<IFeature>();
-
-            var features = _provider.GetFeatures<IFeature>(fetchInfo);
-
-            return features.Project(_provider.CRS, CRS, _projection);
         }
 
         private bool GetFetchInfo(ref FetchInfo fetchInfo)
