@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
@@ -29,9 +30,9 @@ namespace Mapsui.Providers
 
         private readonly Pen _rectangleLine;
 
-        public IEnumerable<IFeature> GetFeatures(FetchInfo fetchInfo)
+        public IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
         {
-            var features = _provider.GetFeatures(fetchInfo);
+            var features = _provider.GetFeaturesAsync(fetchInfo);
             return GetFeaturesInView(fetchInfo.Resolution, _labelStyle, features, _rectangleLine, _rectangleFill);
         }
 
@@ -40,11 +41,11 @@ namespace Mapsui.Providers
             return _provider.GetExtent();
         }
 
-        private static List<IFeature> GetFeaturesInView(double resolution, LabelStyle labelStyle,
-            IEnumerable<IFeature>? features, Pen line, Brush? fill)
+        private static async IAsyncEnumerable<IFeature> GetFeaturesInView(double resolution, LabelStyle labelStyle,
+            IAsyncEnumerable<IFeature>? features, Pen line, Brush? fill)
         {
             if (features == null)
-                return new List<IFeature>();
+                yield break;
             var margin = resolution * 50;
             var clusters = new List<Cluster>();
             // todo: repeat until there are no more merges
@@ -52,11 +53,12 @@ namespace Mapsui.Providers
 
             const int textHeight = 18;
 
-            var results = new List<IFeature>();
-
             foreach (var cluster in clusters)
             {
-                if (cluster.Features?.Count > 1) results.Add(CreateBoxFeature(resolution, cluster, line, fill));
+                if (cluster.Features?.Count > 1)
+                {
+                    yield return CreateBoxFeature(resolution, cluster, line, fill);
+                }
 
                 var offsetY = double.NaN;
 
@@ -73,11 +75,10 @@ namespace Mapsui.Providers
                         var labelText = labelStyle.GetLabelText(pointFeature);
                         var labelFeature = CreateLabelFeature(position, labelStyle, offsetY, labelText);
 
-                        results.Add(labelFeature);
+                        yield return labelFeature;
                     }
                 }
             }
-            return results;
         }
 
         private static double CalculateOffsetY(double offsetY, int textHeight)
@@ -134,9 +135,9 @@ namespace Mapsui.Providers
             return box.Grow(boxMargin * resolution);
         }
 
-        private static void ClusterFeatures(
+        private static async void ClusterFeatures(
             ICollection<Cluster> clusters,
-            IEnumerable<IFeature> features,
+            IAsyncEnumerable<IFeature> features,
             double minDistance,
             IStyle layerStyle,
             double resolution)
@@ -144,7 +145,7 @@ namespace Mapsui.Providers
             var style = layerStyle;
 
             // todo: This method should repeated several times until there are no more merges
-            foreach (var feature in features.OrderBy(f => f.Extent?.Centroid.Y))
+            await foreach (var feature in features.OrderBy(f => f.Extent?.Centroid.Y))
             {
                 if (layerStyle is IThemeStyle themeStyle)
                     style = themeStyle.GetStyle(feature);

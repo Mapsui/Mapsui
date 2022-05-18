@@ -16,10 +16,10 @@ namespace Mapsui.Fetcher
     {
         private FetchInfo? _fetchInfo;
         private bool _busy;
-        private readonly ConcurrentStack<T> _cache;
+        private readonly ConcurrentStack<IFeature> _cache;
         private bool _modified;
 
-        public FeatureFetchDispatcher(ConcurrentStack<T> cache)
+        public FeatureFetchDispatcher(ConcurrentStack<IFeature> cache)
         {
             _cache = cache;
         }
@@ -39,7 +39,7 @@ namespace Mapsui.Fetcher
         {
             try
             {
-                var features = await DataSource.GetFeaturesAsync<T>(fetchInfo);
+                var features = await DataSource.GetFeaturesAsync(fetchInfo).ToListAsync();
 
                 FetchCompleted(features, null);
             }
@@ -49,7 +49,7 @@ namespace Mapsui.Fetcher
             }
         }
 
-        private void FetchCompleted(IEnumerable<T>? features, Exception? exception)
+        private void FetchCompleted(IEnumerable<IFeature>? features, Exception? exception)
         {
             if (exception == null)
             {
@@ -78,7 +78,7 @@ namespace Mapsui.Fetcher
             Busy = true;
         }
 
-        public IProviderBase? DataSource { get; set; }
+        public IProvider<IFeature>? DataSource { get; set; }
 
         public bool Busy
         {

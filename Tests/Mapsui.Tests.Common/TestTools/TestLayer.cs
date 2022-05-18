@@ -22,14 +22,21 @@ namespace Mapsui.Tests.Common.TestTools
         public string? CRS { get; set; }
         public override IEnumerable<IFeature> GetFeatures(MRect box, double resolution)
         {
-            if (box == null) { return new List<IFeature>(); }
+            if (box == null)
+                yield break;
 
             var biggerBox = box.Grow(
                     SymbolStyle.DefaultWidth * 2 * resolution,
                     SymbolStyle.DefaultHeight * 2 * resolution);
             var fetchInfo = new FetchInfo(biggerBox, resolution, CRS);
 
-            return DataSource?.GetFeatures(fetchInfo) ?? Array.Empty<IFeature>();
+            if (DataSource is null)
+                yield break;
+
+#pragma warning disable VSTHRD002 // Allow use of .Result for test purposes
+            foreach (var feature in DataSource.GetFeaturesAsync(fetchInfo).ToListAsync().Result)
+                yield return feature;
+#pragma warning restore VSTHRD002 // 
         }
 
         public override MRect? Extent => DataSource?.GetExtent();

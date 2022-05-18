@@ -17,7 +17,7 @@ using Mapsui.Tiling.Extensions;
 
 namespace Mapsui.Tiling.Provider
 {
-    public class TileProvider : IAsyncProvider<IFeature>
+    public class TileProvider : IProvider<IFeature>
     {
         private readonly ITileSource _source;
         private readonly MemoryCache<byte[]> _bitmaps = new(100, 200);

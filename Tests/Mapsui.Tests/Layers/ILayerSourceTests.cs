@@ -16,7 +16,7 @@ namespace Mapsui.Tests.Layers
         {
             var memoryLayer = new TestLayer() { DataSource = new MemoryProvider<IFeature>() };
 
-            if (memoryLayer is ILayerDataSource<IProviderBase> source)
+            if (memoryLayer is ILayerDataSource<IProvider<IFeature>> source)
             {
                 Assert.IsTrue(true, "should be true");
             }

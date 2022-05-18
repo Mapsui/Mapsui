@@ -30,7 +30,7 @@ internal class AnimatedPointsSampleProvider : MemoryProvider<PointFeature>, IDyn
 
     public event DataChangedEventHandler? DataChanged;
 
-    public override IEnumerable<PointFeature> GetFeatures(FetchInfo fetchInfo)
+    public override async IAsyncEnumerable<PointFeature> GetFeaturesAsync(FetchInfo fetchInfo)
     {
         var features = new List<PointFeature>();
         var points = RandomPointGenerator.GenerateRandomPoints(fetchInfo.Extent, 10, _random).ToList();
@@ -51,7 +51,8 @@ internal class AnimatedPointsSampleProvider : MemoryProvider<PointFeature>, IDyn
         }
 
         _previousFeatures = features;
-        return features;
+        foreach (var feature in features)
+            yield return feature;
     }
 
     private MPoint? FindPreviousPosition(string countAsString)

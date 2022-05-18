@@ -129,7 +129,7 @@ namespace Mapsui.Nts.Providers.Shapefile
     /// M and Z values in a shapefile is ignored by Mapsui.
     /// </para>
     /// </remarks>
-    public class ShapeFile : IProvider<GeometryFeature>, IDisposable
+    public class ShapeFile : IProvider<IFeature>, IDisposable
     {
 
         static ShapeFile()
@@ -889,7 +889,7 @@ namespace Mapsui.Nts.Providers.Shapefile
         }
 
 
-        public IEnumerable<GeometryFeature> GetFeatures(FetchInfo fetchInfo)
+        public async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
         {
             lock (_syncRoot)
             {
@@ -912,7 +912,8 @@ namespace Mapsui.Nts.Providers.Shapefile
                             features.Add(feature);
                         }
                     }
-                    return features;
+                    foreach (var feature in features)
+                        yield return feature;
                 }
                 finally
                 {

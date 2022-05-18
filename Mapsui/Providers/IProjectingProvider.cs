@@ -1,6 +1,6 @@
 namespace Mapsui.Providers
 {
-    public interface IProjectingProvider : IAsyncProvider<IFeature>
+    public interface IProjectingProvider : IProvider<IFeature>
     {
         /// <summary>
         /// Queries whether a provider supports projection to a certain CRS.
