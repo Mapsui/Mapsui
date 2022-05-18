@@ -34,10 +34,5 @@ namespace Mapsui.Samples.Wpf.Editing.Layers
                     }
             }
         }
-
-        public override void RefreshData(FetchInfo fetchInfo)
-        {
-            OnDataChanged(new DataChangedEventArgs());
-        }
     }
 }

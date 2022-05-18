@@ -18,8 +18,4 @@ internal class RenderLayer : BaseLayer
     {
         return _features;
     }
-
-    public override void RefreshData(FetchInfo fetchInfo)
-    {
-    }
 }

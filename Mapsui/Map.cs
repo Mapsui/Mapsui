@@ -197,7 +197,8 @@ namespace Mapsui
         {
             foreach (var layer in _layers.ToList())
             {
-                layer.RefreshData(fetchInfo);
+                if (layer is IAsyncDataFetcher asyncDataFetcher)
+                    asyncDataFetcher.RefreshData(fetchInfo);
             }
         }
 

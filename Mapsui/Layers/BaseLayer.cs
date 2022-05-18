@@ -183,9 +183,6 @@ namespace Mapsui.Layers
         /// <inheritdoc />
         public abstract IEnumerable<IFeature> GetFeatures(MRect box, double resolution);
 
-        /// <inheritdoc />
-        public abstract void RefreshData(FetchInfo fetchInfo);
-
         public void DataHasChanged()
         {
             DataChanged?.Invoke(this, new DataChangedEventArgs());

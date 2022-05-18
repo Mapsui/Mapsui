@@ -6,7 +6,7 @@ using Mapsui.Providers;
 
 namespace Mapsui.Layers.AnimatedLayers;
 
-public class AnimatedPointLayer : BaseLayer, ILayerDataSource<IProvider>
+public class AnimatedPointLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
 {
     private readonly IProvider _dataSource;
     private FetchInfo? _fetchInfo;
@@ -39,7 +39,7 @@ public class AnimatedPointLayer : BaseLayer, ILayerDataSource<IProvider>
         return _animatedFeatures.GetFeatures();
     }
 
-    public override void RefreshData(FetchInfo fetchInfo)
+    public void RefreshData(FetchInfo fetchInfo)
     {
         _fetchInfo = fetchInfo;
     }
@@ -47,6 +47,14 @@ public class AnimatedPointLayer : BaseLayer, ILayerDataSource<IProvider>
     public override bool UpdateAnimations()
     {
         return _animatedFeatures.UpdateAnimations();
+    }
+
+    public void AbortFetch()
+    {
+    }
+
+    public void ClearCache()
+    {
     }
 
     public IProvider? DataSource => _dataSource;
