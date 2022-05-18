@@ -11,9 +11,6 @@ namespace Mapsui.Providers
         /// <summary>
         /// Gets or sets the geometries this data source contains
         /// </summary>
-        public IReadOnlyList<T> Features { get; set; }
-
-        public double SymbolSize { get; set; } = 64;
 
         public MemoryProvider()
         {
@@ -30,6 +27,9 @@ namespace Mapsui.Providers
             Features = new List<T> { feature };
             _boundingBox = GetExtent(Features);
         }
+
+        public IReadOnlyList<T> Features { get; private set; }
+        public double SymbolSize { get; set; } = 64;
 
         /// <summary>
         /// The spatial reference ID (CRS)
