@@ -36,7 +36,7 @@ namespace Mapsui.Samples.Common.Desktop
             return map;
         }
 
-        private static ILayer CreateCountryLayer(IProvider<IFeature> countrySource)
+        private static ILayer CreateCountryLayer(IProvider countrySource)
         {
             return new Layer
             {

@@ -16,12 +16,12 @@ namespace Mapsui.Samples.Common.Helpers
             return CreateFeatures(GenerateRandomPoints(envelope, count, random));
         }
 
-        public static MemoryProvider<PointFeature> CreateProviderWithRandomPoints(MRect? envelope, int count, Random? random = null)
+        public static MemoryProvider CreateProviderWithRandomPoints(MRect? envelope, int count, Random? random = null)
         {
             if (random == null)
                 random = new Random(123);
 
-            return new MemoryProvider<PointFeature>(CreateFeatures(GenerateRandomPoints(envelope, count, random)));
+            return new MemoryProvider(CreateFeatures(GenerateRandomPoints(envelope, count, random)));
         }
 
         private static IEnumerable<PointFeature> CreateFeatures(IEnumerable<MPoint> randomPoints)

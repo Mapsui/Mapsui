@@ -3,7 +3,7 @@
 namespace Mapsui.Layers;
 
 public interface ILayerDataSource<out T> 
-    where T : IProvider<IFeature>
+    where T : IProvider
 {
     public T? DataSource { get; }
 }

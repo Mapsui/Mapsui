@@ -25,7 +25,7 @@ public class RasterizingTileProvider : ITileSource
     private readonly ILayer _layer;
     private ITileSchema? _tileSchema;
     private Attribution? _attribution;
-    private readonly IProvider<IFeature>? _dataSource;
+    private readonly IProvider? _dataSource;
 
     public RasterizingTileProvider(
         ILayer layer,
@@ -41,7 +41,7 @@ public class RasterizingTileProvider : ITileSource
         _pixelDensity = pixelDensity;
         PersistentCache = persistentCache ?? new NullCache();
 
-        if (_layer is ILayerDataSource<IProvider<IFeature>> { DataSource: { } } dataSourceLayer)
+        if (_layer is ILayerDataSource<IProvider> { DataSource: { } } dataSourceLayer)
         {
             _dataSource = dataSourceLayer.DataSource;
 

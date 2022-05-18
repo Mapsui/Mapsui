@@ -36,7 +36,7 @@ namespace Mapsui.Providers.Wfs
     /// - MultiCurvePropertyType
     /// - MultiSurfacePropertyType
     /// </summary>
-    public class WFSProvider : IProvider<IFeature>, IDisposable
+    public class WFSProvider : IProvider, IDisposable
     {
 
         /// <summary>

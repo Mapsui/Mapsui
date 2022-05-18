@@ -17,7 +17,7 @@ namespace Mapsui.Tests.Fetcher
             var extent = new MRect(0, 0, 10, 10);
             using var layer = new Layer
             {
-                DataSource = new MemoryProvider<IFeature>(GenerateRandomPoints(extent, 25))
+                DataSource = new MemoryProvider(GenerateRandomPoints(extent, 25))
             };
             layer.Delayer.MillisecondsToWait = 0;
 

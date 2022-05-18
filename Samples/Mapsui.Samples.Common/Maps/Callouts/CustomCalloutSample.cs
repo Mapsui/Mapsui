@@ -46,7 +46,7 @@ namespace Mapsui.Samples.Common.Maps.Callouts
             return new Layer
             {
                 Name = "Point",
-                DataSource = new MemoryProvider<IFeature>(GetCitiesFromEmbeddedResource()),
+                DataSource = new MemoryProvider(GetCitiesFromEmbeddedResource()),
                 IsMapInfoLayer = true
             };
         }

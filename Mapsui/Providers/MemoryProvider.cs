@@ -5,7 +5,7 @@ using Mapsui.Layers;
 
 namespace Mapsui.Providers
 {
-    public class MemoryProvider<T> : IProvider<T> where T : IFeature
+    public class MemoryProvider : IProvider
     {
         private readonly MRect? _boundingBox;
         /// <summary>
@@ -14,7 +14,7 @@ namespace Mapsui.Providers
 
         public MemoryProvider()
         {
-            Features = new List<T>();
+            Features = new List<IFeature>();
             _boundingBox = GetExtent(Features);
         }
 
@@ -22,13 +22,13 @@ namespace Mapsui.Providers
         /// Initializes a new instance of the MemoryProvider
         /// </summary>
         /// <param name="feature">Feature to be in this dataSource</param>
-        public MemoryProvider(T feature)
+        public MemoryProvider(IFeature feature)
         {
-            Features = new List<T> { feature };
+            Features = new List<IFeature> { feature };
             _boundingBox = GetExtent(Features);
         }
 
-        public IReadOnlyList<T> Features { get; private set; }
+        public IReadOnlyList<IFeature> Features { get; private set; }
         public double SymbolSize { get; set; } = 64;
 
         /// <summary>
@@ -41,14 +41,14 @@ namespace Mapsui.Providers
         /// Initializes a new instance of the MemoryProvider
         /// </summary>
         /// <param name="features">Features to be included in this dataSource</param>
-        public MemoryProvider(IEnumerable<T> features)
+        public MemoryProvider(IEnumerable<IFeature> features)
         {
             Features = features.ToList();
             _boundingBox = GetExtent(Features);
         }
 
 
-        public virtual async IAsyncEnumerable<T> GetFeaturesAsync(FetchInfo fetchInfo)
+        public virtual async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
         {
             if (fetchInfo == null) throw new ArgumentNullException(nameof(fetchInfo));
             if (fetchInfo.Extent == null) throw new ArgumentNullException(nameof(fetchInfo.Extent));
@@ -70,7 +70,7 @@ namespace Mapsui.Providers
         /// <param name="value">Value to search for</param>
         /// <param name="fieldName">Name of the field to search in. This is the key of the T dictionary</param>
         /// <returns></returns>
-        public T? Find(object? value, string fieldName)
+        public IFeature? Find(object? value, string fieldName)
         {
             return Features.FirstOrDefault(f => value != null && f[fieldName] == value);
         }
@@ -84,7 +84,7 @@ namespace Mapsui.Providers
             return _boundingBox;
         }
 
-        private static MRect? GetExtent(IReadOnlyList<T> features)
+        private static MRect? GetExtent(IReadOnlyList<IFeature> features)
         {
             MRect? box = null;
             foreach (var feature in features)
@@ -99,7 +99,7 @@ namespace Mapsui.Providers
 
         public void Clear()
         {
-            Features = new List<T>();
+            Features = new List<IFeature>();
         }
     }
 }

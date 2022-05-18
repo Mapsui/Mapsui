@@ -34,7 +34,7 @@ namespace Mapsui.Providers.Wms
     /// and the WmsLayer will set the remaining BoundingBox property and proper requests that changes between the requests.
     /// See the example below.
     /// </remarks>
-    public class WmsProvider : IProvider<IFeature>, IProjectingProvider
+    public class WmsProvider : IProvider, IProjectingProvider
     {
         private string? _mimeType;
         private readonly Client? _wmsClient;

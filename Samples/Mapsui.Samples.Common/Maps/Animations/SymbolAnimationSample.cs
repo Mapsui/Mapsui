@@ -38,7 +38,7 @@ namespace Mapsui.Samples.Common.Maps
 
             var layer = new Layer("Points")
             {
-                DataSource = new MemoryProvider<IFeature>(CreatePoints(style)),
+                DataSource = new MemoryProvider(CreatePoints(style)),
             };
             layer.SymbolStyle = style;
 

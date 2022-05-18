@@ -11,7 +11,7 @@ namespace Mapsui.Providers
     /// <summary>
     /// Interface for data providers
     /// </summary>
-    public interface IProvider<out T> where T : IFeature
+    public interface IProvider
     {
         /// <summary>
         /// The spatial reference ID (CRS)
@@ -24,6 +24,6 @@ namespace Mapsui.Providers
         /// <returns>BoundingBox</returns>
         MRect? GetExtent();
 
-        IAsyncEnumerable<T> GetFeaturesAsync(FetchInfo fetchInfo);
+        IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo);
     }
 }

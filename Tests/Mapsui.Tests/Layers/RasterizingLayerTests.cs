@@ -56,7 +56,7 @@ namespace Mapsui.Tests.Layers
                 features.Add(new GeometryFeature(
                     new Point(random.Next(100000, 5000000), random.Next(100000, 5000000))));
             }
-            return new TestLayer() { DataSource = new MemoryProvider<IFeature>(features) };
+            return new TestLayer() { DataSource = new MemoryProvider(features) };
         }
     }
 }

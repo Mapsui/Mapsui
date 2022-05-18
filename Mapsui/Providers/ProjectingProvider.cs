@@ -7,12 +7,12 @@ using Mapsui.Projections;
 
 namespace Mapsui.Providers
 {
-    public class ProjectingProvider : IProvider<IFeature>
+    public class ProjectingProvider : IProvider
     {
-        private readonly IProvider<IFeature> _provider;
+        private readonly IProvider _provider;
         private readonly IProjection _projection;
 
-        public ProjectingProvider(IProvider<IFeature> provider, IProjection? projection = null)
+        public ProjectingProvider(IProvider provider, IProjection? projection = null)
         {
             _provider = provider;
             _projection = projection ?? ProjectionDefaults.Projection;

@@ -30,7 +30,7 @@ namespace Mapsui.Samples.Common.Desktop
             return map;
         }
 
-        private static ILayer CreateGifLayer(IProvider<IFeature> gifSource)
+        private static ILayer CreateGifLayer(IProvider gifSource)
         {
             return new Layer
             {
