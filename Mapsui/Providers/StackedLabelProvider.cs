@@ -7,15 +7,15 @@ using Mapsui.Styles.Thematics;
 
 namespace Mapsui.Providers
 {
-    public class StackedLabelProvider : IProvider<IFeature>
+    public class StackedLabelProvider : IProvider
     {
         private const int SymbolSize = 32; // todo: determine margin by symbol size
         private const int BoxMargin = SymbolSize / 2;
 
-        private readonly IProvider<IFeature> _provider;
+        private readonly IProvider _provider;
         private readonly LabelStyle _labelStyle;
 
-        public StackedLabelProvider(IProvider<IFeature> provider, LabelStyle labelStyle, Pen? rectangleLine = null,
+        public StackedLabelProvider(IProvider provider, LabelStyle labelStyle, Pen? rectangleLine = null,
             Brush? rectangleFill = null)
         {
             _provider = provider;

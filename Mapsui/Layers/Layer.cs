@@ -15,9 +15,9 @@ using Mapsui.Styles;
 
 namespace Mapsui.Layers
 {
-    public class Layer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider<IFeature>>
+    public class Layer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
     {
-        private IProvider<IFeature>? _dataSource;
+        private IProvider? _dataSource;
         private readonly object _syncRoot = new();
         private readonly ConcurrentStack<IFeature> _cache = new();
         private readonly FeatureFetchDispatcher<IFeature> _fetchDispatcher;
@@ -57,7 +57,7 @@ namespace Mapsui.Layers
         /// <summary>
         /// Data source for this layer
         /// </summary>
-        public IProvider<IFeature>? DataSource
+        public IProvider? DataSource
         {
             get => _dataSource;
             set

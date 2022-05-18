@@ -16,9 +16,9 @@ namespace Mapsui.Tests.Common.TestTools
     /// testing this can be useful when wnat to generate an image from the data source without 
     /// having to wait for the asynchronous data fetch call.
     /// </summary>
-    public class TestLayer : BaseLayer, ILayerDataSource<IProvider<IFeature>>
+    public class TestLayer : BaseLayer, ILayerDataSource<IProvider>
     {
-        public IProvider<IFeature>? DataSource { get; set; }
+        public IProvider? DataSource { get; set; }
         public string? CRS { get; set; }
         public override IEnumerable<IFeature> GetFeatures(MRect box, double resolution)
         {
@@ -41,7 +41,7 @@ namespace Mapsui.Tests.Common.TestTools
 
         public override MRect? Extent => DataSource?.GetExtent();
 
-        IProvider<IFeature>? ILayerDataSource<IProvider<IFeature>>.DataSource => throw new NotImplementedException();
+        IProvider? ILayerDataSource<IProvider>.DataSource => throw new NotImplementedException();
 
         public override void RefreshData(FetchInfo fetchInfo)
         {

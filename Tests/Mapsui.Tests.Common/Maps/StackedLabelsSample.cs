@@ -44,7 +44,7 @@ namespace Mapsui.Tests.Common.Maps
         {
             return new TestLayer
             {
-                DataSource = new StackedLabelProvider(new MemoryProvider<IFeature>(provider), new LabelStyle { LabelColumn = labelColumn }),
+                DataSource = new StackedLabelProvider(new MemoryProvider(provider), new LabelStyle { LabelColumn = labelColumn }),
                 Style = null
             };
         }

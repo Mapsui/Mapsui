@@ -34,7 +34,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new Layer("Polygons")
             {
-                DataSource = new MemoryProvider<IFeature>(CreatePolygon()),
+                DataSource = new MemoryProvider(CreatePolygon()),
                 Style = null
             };
         }

@@ -13,7 +13,7 @@ namespace Mapsui.Tests.Layers
     {
         private const string ExceptionMessage = "This exception should return on OnDataChange";
 
-        private class FakeProvider : IProvider<IFeature>
+        private class FakeProvider : IProvider
         {
             public string? CRS { get; set; }
             public IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)

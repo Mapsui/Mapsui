@@ -10,13 +10,13 @@ using NetTopologySuite.Simplify;
 
 namespace Mapsui.Nts.Providers;
 
-public class GeometrySimplifyProvider : IProvider<IFeature>
+public class GeometrySimplifyProvider : IProvider
 {
-    private readonly IProvider<IFeature> _provider;
+    private readonly IProvider _provider;
     private readonly Func<Geometry, double, Geometry> _simplify;
     private readonly double? _distanceTolerance;
 
-    public GeometrySimplifyProvider(IProvider<IFeature> provider, Func<Geometry, double, Geometry>? simplify = null, double? distanceTolerance = null)
+    public GeometrySimplifyProvider(IProvider provider, Func<Geometry, double, Geometry>? simplify = null, double? distanceTolerance = null)
     {
         _provider = provider;
         _simplify = simplify ?? TopologyPreservingSimplifier.Simplify;

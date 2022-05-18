@@ -129,7 +129,7 @@ namespace Mapsui.Nts.Providers.Shapefile
     /// M and Z values in a shapefile is ignored by Mapsui.
     /// </para>
     /// </remarks>
-    public class ShapeFile : IProvider<IFeature>, IDisposable
+    public class ShapeFile : IProvider, IDisposable
     {
 
         static ShapeFile()

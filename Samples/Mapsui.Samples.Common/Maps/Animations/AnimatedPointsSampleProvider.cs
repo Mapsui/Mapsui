@@ -15,7 +15,7 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps.Animations;
 
-internal class AnimatedPointsSampleProvider : MemoryProvider<PointFeature>, IDynamic, IDisposable
+internal class AnimatedPointsSampleProvider : MemoryProvider, IDynamic, IDisposable
 {
     // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
     // ReSharper disable once NotAccessedField.Local
@@ -30,7 +30,7 @@ internal class AnimatedPointsSampleProvider : MemoryProvider<PointFeature>, IDyn
 
     public event DataChangedEventHandler? DataChanged;
 
-    public override async IAsyncEnumerable<PointFeature> GetFeaturesAsync(FetchInfo fetchInfo)
+    public override async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
     {
         var features = new List<PointFeature>();
         var points = RandomPointGenerator.GenerateRandomPoints(fetchInfo.Extent, 10, _random).ToList();

@@ -13,13 +13,13 @@ namespace Mapsui.Fetcher
     {
         private readonly FetchInfo _fetchInfo;
         private readonly DataArrivedDelegate _dataArrived;
-        private readonly IProvider<IFeature> _provider;
+        private readonly IProvider _provider;
         private readonly SemaphoreSlim _providerLock = new(1, 1);
         private readonly long _timeOfRequest;
 
         public delegate void DataArrivedDelegate(IEnumerable<IFeature> features, object? state = null);
 
-        public FeatureFetcher(FetchInfo fetchInfo, IProvider<IFeature> provider, DataArrivedDelegate dataArrived, long timeOfRequest = default)
+        public FeatureFetcher(FetchInfo fetchInfo, IProvider provider, DataArrivedDelegate dataArrived, long timeOfRequest = default)
         {
             _dataArrived = dataArrived;
             var biggerBox = fetchInfo.Extent.Grow(

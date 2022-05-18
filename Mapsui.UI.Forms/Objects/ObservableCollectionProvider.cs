@@ -5,7 +5,7 @@ using Mapsui.Providers;
 
 namespace Mapsui.UI.Objects
 {
-    public class ObservableCollectionProvider<T, TU> : IProvider<TU> where T : IFeatureProvider where TU : IFeature
+    public class ObservableCollectionProvider<T> : IProvider where T : IFeatureProvider
     {
         private readonly object _syncRoot = new();
 
@@ -18,12 +18,12 @@ namespace Mapsui.UI.Objects
             Collection = collection;
         }
 
-        public async IAsyncEnumerable<TU> GetFeaturesAsync(FetchInfo fetchInfo)
+        public async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
         {
             if (Collection == null || Collection.Count == 0)
                 yield break;
 
-            var list = new List<TU>();
+            var list = new List<IFeature>();
             lock (_syncRoot)
             {
                 foreach (var item in Collection)
@@ -31,7 +31,7 @@ namespace Mapsui.UI.Objects
                     if (fetchInfo.Extent?.Intersects(item.Feature?.Extent) ?? false)
                     {
                         IFeature feature = item.Feature!;
-                        list.Add((TU)feature);
+                        list.Add(feature);
                     }
                 }
             }

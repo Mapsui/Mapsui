@@ -78,7 +78,7 @@ namespace Mapsui.Fetcher
             Busy = true;
         }
 
-        public IProvider<IFeature>? DataSource { get; set; }
+        public IProvider? DataSource { get; set; }
 
         public bool Busy
         {

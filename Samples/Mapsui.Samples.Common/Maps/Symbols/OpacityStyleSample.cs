@@ -33,7 +33,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new Layer("Polygons")
             {
-                DataSource = new MemoryProvider<IFeature>(CreatePolygon().ToFeature()),
+                DataSource = new MemoryProvider(CreatePolygon().ToFeature()),
                 Style = new VectorStyle
                 {
                     Fill = new Brush(new Color(150, 150, 30)),
@@ -52,7 +52,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new Layer("Polygons")
             {
-                DataSource = new MemoryProvider<IFeature>(CreateLineString().ToFeature()),
+                DataSource = new MemoryProvider(CreateLineString().ToFeature()),
                 Style = new VectorStyle
                 {
                     Line = new Pen
