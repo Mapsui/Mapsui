@@ -85,7 +85,7 @@ namespace Mapsui.Samples.Wpf.Editing.Samples
         {
             return new WritableLayer
             {
-                Name = "PointLayer",
+                Name = "Layer 1",
                 Style = CreatePointStyle()
             };
         }
@@ -94,7 +94,7 @@ namespace Mapsui.Samples.Wpf.Editing.Samples
         {
             var lineLayer = new WritableLayer
             {
-                Name = "LineLayer",
+                Name = "Layer 2",
                 Style = CreateLineStyle()
             };
 
@@ -107,7 +107,7 @@ namespace Mapsui.Samples.Wpf.Editing.Samples
         {
             var polygonLayer = new WritableLayer
             {
-                Name = "PolygonLayer",
+                Name = "Layer 3",
                 Style = CreatePolygonStyle()
             };
 

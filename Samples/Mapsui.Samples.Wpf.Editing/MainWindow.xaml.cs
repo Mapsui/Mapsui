@@ -45,7 +45,6 @@ namespace Mapsui.Samples.Wpf.Editing
 
             FillComboBoxWithDemoSamples();
 
-            RenderMode.SelectionChanged += RenderModeOnSelectionChanged;
             TargetLayer.SelectionChanged += TargetLayerOnSelectionChanged;
             var firstRadioButton = (RadioButton)SampleList.Children[0];
             firstRadioButton.IsChecked = true;
@@ -55,19 +54,14 @@ namespace Mapsui.Samples.Wpf.Editing
         {
             var selectedValue = ((ComboBoxItem)((ComboBox)sender).SelectedItem).Content.ToString();
 
-            if (selectedValue?.ToLower().Contains("point") ?? false)
-                _targetLayer = MapControl.Map?.Layers.First(l => l.Name == "PointLayer") as WritableLayer;
-            else if (selectedValue?.ToLower().Contains("line") ?? false)
-                _targetLayer = MapControl.Map?.Layers.First(l => l.Name == "LineLayer") as WritableLayer;
-            else if (selectedValue?.ToLower().Contains("polygon") ?? false)
-                _targetLayer = MapControl.Map?.Layers.First(l => l.Name == "PolygonLayer") as WritableLayer;
+            if (selectedValue == "Layer 1")
+                _targetLayer = MapControl.Map?.Layers.First(l => l.Name == "Layer 1") as WritableLayer;
+            else if (selectedValue == "Layer 2")
+                _targetLayer = MapControl.Map?.Layers.First(l => l.Name == "Layer 2") as WritableLayer;
+            else if (selectedValue == "Layer 3")
+                _targetLayer = MapControl.Map?.Layers.First(l => l.Name == "Layer 3") as WritableLayer;
             else
                 throw new Exception("Unknown ComboBox item");
-        }
-
-        private void RenderModeOnSelectionChanged(object sender, SelectionChangedEventArgs selectionChangedEventArgs)
-        {
-            // todo: remove entire dropdown
         }
 
         private void FillComboBoxWithDemoSamples()
@@ -157,7 +151,7 @@ namespace Mapsui.Samples.Wpf.Editing
         private void InitializeEditSetup()
         {
             _editManager.Layer = (WritableLayer)MapControl.Map!.Layers.First(l => l.Name == "EditLayer");
-            _targetLayer = (WritableLayer)MapControl.Map.Layers.First(l => l.Name == "PolygonLayer");
+            _targetLayer = (WritableLayer)MapControl.Map.Layers.First(l => l.Name == "Layer 3");
 
             // Load the polygon layer on startup so you can start modifying right away
             _editManager.Layer.AddRange(_targetLayer.GetFeatures().Copy());

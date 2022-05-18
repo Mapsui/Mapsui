@@ -18,16 +18,12 @@
                                 MinHeight="30" VerticalAlignment="Top" HorizontalAlignment="Left">
                 <DockPanel>
                     <StackPanel DockPanel.Dock="Top">
-                        <ComboBox Name="RenderMode" Margin="0,0, 0, 10">
-                            <ComboBoxItem IsSelected="True">Wpf renderer</ComboBoxItem>
-                            <ComboBoxItem>Skia renderer</ComboBoxItem>
-                        </ComboBox>
                         <StackPanel Orientation="Vertical" Margin="4" >
                             <TextBlock >Select Layer To Edit:</TextBlock>
                             <ComboBox Name="TargetLayer">
-                                <ComboBoxItem>Point Layer</ComboBoxItem>
-                                <ComboBoxItem>Line Layer</ComboBoxItem>
-                                <ComboBoxItem IsSelected="True">Polygon Layer</ComboBoxItem>
+                                <ComboBoxItem>Layer 1</ComboBoxItem>
+                                <ComboBoxItem>Layer 2</ComboBoxItem>
+                                <ComboBoxItem IsSelected="True">Layer 3</ComboBoxItem>
                             </ComboBox>
 
                             <Button Name="Save" Click="Save_OnClick" Width="Auto">Save</Button>
