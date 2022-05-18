@@ -114,7 +114,7 @@ namespace Mapsui.Layers
             // not implemented for ImageLayer
         }
 
-        public override void RefreshData(FetchInfo fetchInfo)
+        public void RefreshData(FetchInfo fetchInfo)
         {
             if (!Enabled) return;
             // Fetching an image, that often covers the whole map, is expensive. Only do it on Discrete changes.

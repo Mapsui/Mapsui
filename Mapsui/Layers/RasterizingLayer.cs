@@ -119,7 +119,8 @@ namespace Mapsui.Layers
                         OnDataChanged(new DataChangedEventArgs());
                     }
 
-                    if (_modified) Delayer.ExecuteDelayed(() => _layer.RefreshData(_fetchInfo));
+                    if (_modified && _layer is IAsyncDataFetcher asyncDataFetcher) 
+                            Delayer.ExecuteDelayed(() => asyncDataFetcher.RefreshData(_fetchInfo));
                 }
                 finally
                 {
@@ -169,7 +170,7 @@ namespace Mapsui.Layers
             if (_layer is IAsyncDataFetcher asyncLayer) asyncLayer.AbortFetch();
         }
 
-        public override void RefreshData(FetchInfo fetchInfo)
+        public void RefreshData(FetchInfo fetchInfo)
         {
             if (fetchInfo.Extent == null)
                 return;
@@ -186,8 +187,8 @@ namespace Mapsui.Layers
             {
                 // Explicitly set the change type to discrete for rasterization
                 _fetchInfo = new FetchInfo(fetchInfo.Extent, fetchInfo.Resolution, fetchInfo.CRS);
-                if (_layer is IAsyncDataFetcher)
-                    Delayer.ExecuteDelayed(() => _layer.RefreshData(_fetchInfo));
+                if (_layer is IAsyncDataFetcher asyncDataFetcher)
+                    Delayer.ExecuteDelayed(() => asyncDataFetcher.RefreshData(_fetchInfo));
                 else
                     Delayer.ExecuteDelayed(Rasterize);
             }

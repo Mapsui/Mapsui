@@ -130,7 +130,7 @@ namespace Mapsui.Layers
         }
 
         /// <inheritdoc />
-        public override void RefreshData(FetchInfo fetchInfo)
+        public void RefreshData(FetchInfo fetchInfo)
         {
             if (!Enabled) return;
             if (MinVisible > fetchInfo.Resolution) return;

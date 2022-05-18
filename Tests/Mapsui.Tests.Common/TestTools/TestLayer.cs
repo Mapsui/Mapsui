@@ -42,10 +42,5 @@ namespace Mapsui.Tests.Common.TestTools
         public override MRect? Extent => DataSource?.GetExtent();
 
         IProvider? ILayerDataSource<IProvider>.DataSource => throw new NotImplementedException();
-
-        public override void RefreshData(FetchInfo fetchInfo)
-        {
-
-        }
     }
 }

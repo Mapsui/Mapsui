@@ -102,7 +102,7 @@ namespace Mapsui.Tiling.Layers
         }
 
         /// <inheritdoc />
-        public override void RefreshData(FetchInfo fetchInfo)
+        public void RefreshData(FetchInfo fetchInfo)
         {
             if (Enabled
                 && fetchInfo.Extent?.GetArea() > 0

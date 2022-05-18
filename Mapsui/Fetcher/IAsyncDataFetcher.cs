@@ -4,6 +4,7 @@
 
 // This file was originally created by Paul den Dulk (Geodan) as part of SharpMap
 
+using Mapsui.Layers;
 using System;
 
 namespace Mapsui.Fetcher
@@ -20,6 +21,15 @@ namespace Mapsui.Fetcher
         /// Clear cache of layer
         /// </summary>
         void ClearCache();
+
+        /// <summary>
+        /// Indicates that there has been a change in the view of the map
+        /// </summary>
+        /// If Discrete an implementation should always refresh it's data. If Continuous the
+        /// implementation could ignore it. Example: During dragging a map a WMS layer would not want
+        /// to fetch data, only on the drag end.
+        /// <param name="fetchInfo">FetchInfo</param>
+        void RefreshData(FetchInfo fetchInfo);
     }
 
     public delegate void DataChangedEventHandler(object sender, DataChangedEventArgs e);

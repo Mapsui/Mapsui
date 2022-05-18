@@ -39,14 +39,6 @@ namespace Mapsui.Layers
             return Features.Where(f => f.Extent?.Intersects(biggerRect) == true);
         }
 
-        public override void RefreshData(FetchInfo fetchInfo)
-        {
-            // RefreshData needs no implementation for the MemoryLayer. Calling OnDataChanged here
-            // would trigger an extra needless render iteration.
-            // If a user changed the data in the provider and needs to update the graphics
-            // DataHasChanged should be called.
-        }
-
         public override MRect? Extent => Features.GetExtent();
     }
 }

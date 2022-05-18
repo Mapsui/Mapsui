@@ -623,16 +623,6 @@ namespace Mapsui.UI.Wpf
             Refresh();
         }
 
-        /// <summary>
-        /// Clear cache and repaint map
-        /// </summary>
-        public void Clear()
-        {
-            // not sure if we need this method
-            _map?.ClearCache();
-            RefreshGraphics();
-        }
-
         private void CommonDispose(bool disposing)
         {
             if (disposing)
