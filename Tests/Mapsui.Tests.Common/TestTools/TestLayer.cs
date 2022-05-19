@@ -13,10 +13,10 @@ namespace Mapsui.Tests.Common.TestTools
     /// <summary>
     /// This layer calls the DataSource directly from the GetFeatures method. This should be avoided
     /// in a real application because the GetFeatures methods is called in the rendering loop. For 
-    /// testing this can be useful when wnat to generate an image from the data source without 
-    /// having to wait for the asynchronous data fetch call.
+    /// testing this layer is used to generate an image from the data source without having to wait for 
+    /// the asynchronous data fetch call to finish.
     /// </summary>
-    public class TestLayer : BaseLayer, ILayerDataSource<IProvider>
+    public class TestLayer : BaseLayer
     {
         public IProvider? DataSource { get; set; }
         public string? CRS { get; set; }
@@ -40,7 +40,5 @@ namespace Mapsui.Tests.Common.TestTools
         }
 
         public override MRect? Extent => DataSource?.GetExtent();
-
-        IProvider? ILayerDataSource<IProvider>.DataSource => throw new NotImplementedException();
     }
 }
