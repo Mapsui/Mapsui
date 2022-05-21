@@ -82,22 +82,19 @@ public class RasterizingTileProvider : ITileSource
         var resolution = tileResolution.UnitsPerPixel;
         var viewPort = RasterizingLayer.CreateViewport(tileInfo.Extent.ToMRect(), resolution, _renderResolutionMultiplier, 1);
         var fetchInfo = new FetchInfo(viewPort.Extent, resolution);
-        var features = await GetFeaturesAsync(fetchInfo).ToListAsync();
+        var features = await GetFeaturesAsync(fetchInfo);
         var renderLayer = new RenderLayer(_layer, features);
         return (viewPort, renderLayer);
     }
 
-    private async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
+    private async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
         if (_dataSource != null)
         {
-            await foreach (var feature in _dataSource.GetFeaturesAsync(fetchInfo))
-                yield return feature;
+            return await _dataSource.GetFeaturesAsync(fetchInfo);
         }
 
-        foreach (var layerFeature in _layer.GetFeatures(fetchInfo.Extent, fetchInfo.Resolution))
-            yield return layerFeature;
-
+        return _layer.GetFeatures(fetchInfo.Extent, fetchInfo.Resolution);
     }
 
     private IRenderer GetRenderer()

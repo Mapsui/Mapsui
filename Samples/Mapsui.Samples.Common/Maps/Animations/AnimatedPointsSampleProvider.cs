@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -30,7 +31,7 @@ internal class AnimatedPointsSampleProvider : MemoryProvider, IDynamic, IDisposa
 
     public event DataChangedEventHandler? DataChanged;
 
-    public override async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
+    public override async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
         var features = new List<PointFeature>();
         var points = RandomPointGenerator.GenerateRandomPoints(fetchInfo.Extent, 10, _random).ToList();
@@ -51,8 +52,7 @@ internal class AnimatedPointsSampleProvider : MemoryProvider, IDynamic, IDisposa
         }
 
         _previousFeatures = features;
-        foreach (var feature in features)
-            yield return feature;
+        return features;
     }
 
     private MPoint? FindPreviousPosition(string countAsString)

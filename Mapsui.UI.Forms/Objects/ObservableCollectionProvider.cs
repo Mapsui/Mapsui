@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Providers;
 
@@ -18,10 +20,10 @@ namespace Mapsui.UI.Objects
             Collection = collection;
         }
 
-        public async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
+        public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
         {
             if (Collection == null || Collection.Count == 0)
-                yield break;
+                return Enumerable.Empty<IFeature>();
 
             var list = new List<IFeature>();
             lock (_syncRoot)
@@ -36,8 +38,7 @@ namespace Mapsui.UI.Objects
                 }
             }
 
-            foreach (var item in list)
-                yield return item;
+            return list;
         }
 
         public MRect? GetExtent()

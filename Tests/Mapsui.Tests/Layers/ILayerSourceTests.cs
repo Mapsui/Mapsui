@@ -4,6 +4,7 @@ using System.Text;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Tests.Common.TestTools;
+using Mapsui.Tiling.Layers;
 using NUnit.Framework;
 
 namespace Mapsui.Tests.Layers
@@ -14,7 +15,7 @@ namespace Mapsui.Tests.Layers
         [Test]
         public void TestTypes()
         {
-            var memoryLayer = new TestLayer() { DataSource = new MemoryProvider() };
+            var memoryLayer = new Layer() { DataSource = new MemoryProvider() };
 
             if (memoryLayer is ILayerDataSource<IProvider> source)
             {

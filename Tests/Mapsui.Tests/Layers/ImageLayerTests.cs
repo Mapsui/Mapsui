@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -16,7 +17,7 @@ namespace Mapsui.Tests.Layers
         private class FakeProvider : IProvider
         {
             public string? CRS { get; set; }
-            public IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
+            public Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
             {
                 throw new Exception(ExceptionMessage);
             }

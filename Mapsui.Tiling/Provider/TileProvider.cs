@@ -35,7 +35,7 @@ namespace Mapsui.Tiling.Provider
             _source = tileSource;
         }
 
-        public async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
+        public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
         {
             var box = fetchInfo.Extent;
             var extent = new Extent(box.Min.X, box.Min.Y, box.Max.X, box.Max.Y);
@@ -59,8 +59,9 @@ namespace Mapsui.Tiling.Provider
                 var bitmap = _bitmaps.Find(info.Index);
                 if (bitmap == null) continue;
                 var raster = new MRaster(bitmap, new MRect(info.Extent.MinX, info.Extent.MinY, info.Extent.MaxX, info.Extent.MaxY));
-                yield return new RasterFeature(raster);
+                return new[] { new RasterFeature(raster) };
             }
+            return Enumerable.Empty<IFeature>();
         }
 
         private async Task GetTileOnThreadAsync(object parameter) // This could accept normal parameters now we use PCL Profile111

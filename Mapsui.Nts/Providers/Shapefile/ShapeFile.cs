@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Nts.Extensions;
@@ -889,7 +890,7 @@ namespace Mapsui.Nts.Providers.Shapefile
         }
 
 
-        public async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
+        public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
         {
             lock (_syncRoot)
             {
@@ -912,8 +913,7 @@ namespace Mapsui.Nts.Providers.Shapefile
                             features.Add(feature);
                         }
                     }
-                    foreach (var feature in features)
-                        yield return feature;
+                    return features;
                 }
                 finally
                 {
@@ -921,6 +921,5 @@ namespace Mapsui.Nts.Providers.Shapefile
                 }
             }
         }
-
     }
 }

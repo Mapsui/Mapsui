@@ -470,14 +470,14 @@ namespace Mapsui.Providers.Wms
             return _wmsClient.Layer.CRS.FirstOrDefault(item => string.Equals(item.Trim(), crs.Trim(), StringComparison.CurrentCultureIgnoreCase)) != null;
         }
 
-        public async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
+        public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
         {
             var (success, raster) = await TryGetMapAsync(fetchInfo.ToViewport());
             if (success)
-                yield return new RasterFeature(raster);
+                return new[] { new RasterFeature(raster) };
+            return Enumerable.Empty<IFeature>();
         }
 
-        [SuppressMessage("Usage", "VSTHRD003:Avoid awaiting foreign Tasks")]
         private async Task<Stream> GetStreamAsync(string url)
         {
             var handler = new HttpClientHandler { Credentials = Credentials };

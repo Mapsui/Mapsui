@@ -23,7 +23,7 @@ namespace Mapsui.Tests.Common.TestTools
         public override IEnumerable<IFeature> GetFeatures(MRect box, double resolution)
         {
             if (box == null)
-                yield break;
+                return Enumerable.Empty<IFeature>();
 
             var biggerBox = box.Grow(
                     SymbolStyle.DefaultWidth * 2 * resolution,
@@ -31,11 +31,10 @@ namespace Mapsui.Tests.Common.TestTools
             var fetchInfo = new FetchInfo(biggerBox, resolution, CRS);
 
             if (DataSource is null)
-                yield break;
+                return Enumerable.Empty<IFeature>();
 
 #pragma warning disable VSTHRD002 // Allow use of .Result for test purposes
-            foreach (var feature in DataSource.GetFeaturesAsync(fetchInfo).ToListAsync().Result)
-                yield return feature;
+            return DataSource.GetFeaturesAsync(fetchInfo).Result;
 #pragma warning restore VSTHRD002 // 
         }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -90,18 +91,19 @@ namespace Mapsui.ArcGIS.DynamicProvider
             set => _crs = value;
         }
 
-        public async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
+        public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
         {
             //If there are no layers (probably not initialised) return nothing
             if (ArcGisDynamicCapabilities.layers == null)
-                yield break;
+                return Enumerable.Empty<IFeature>();
 
             IViewport viewport = fetchInfo.ToViewport();
             var (success, raster) = await TryGetMapAsync(viewport);
             if (success)
             {
-                yield return new RasterFeature(raster);
+                return new IFeature[] { new RasterFeature(raster) };
             }
+            return Enumerable.Empty<IFeature>();
         }
 
         public MRect? GetExtent()

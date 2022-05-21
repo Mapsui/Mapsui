@@ -37,7 +37,7 @@ namespace Mapsui.Fetcher
             try
             {
                 var features = _provider.GetFeaturesAsync(_fetchInfo);
-                _dataArrived.Invoke(await features.ToListAsync(), _timeOfRequest);
+                _dataArrived.Invoke(await features, _timeOfRequest);
             }
             finally
             {

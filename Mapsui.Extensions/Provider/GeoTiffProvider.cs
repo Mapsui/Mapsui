@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using BitMiracle.LibTiff.Classic;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -227,13 +228,13 @@ namespace Mapsui.Extensions.Provider
 
         public string? CRS { get; set; } = "";
 
-        public async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
+        public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
         {
             if (_extent.Intersects(fetchInfo.Extent))
             {
-                yield return _feature;
+                return new[] { _feature };
             }
-            yield break;
+            return Enumerable.Empty<IFeature>();
         }
 
         public MRect? GetExtent()

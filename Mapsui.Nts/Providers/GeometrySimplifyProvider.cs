@@ -29,16 +29,14 @@ public class GeometrySimplifyProvider : IProvider
         set => _provider.CRS = value;
     }
 
-    public async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
+    public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
-        var features = IterateFeaturesAsync(fetchInfo, _provider.GetFeaturesAsync(fetchInfo));
-        await foreach (var feature in features)
-            yield return feature;
+        return IterateFeatures(fetchInfo, await _provider.GetFeaturesAsync(fetchInfo));
     }
 
-    private async IAsyncEnumerable<IFeature> IterateFeaturesAsync(FetchInfo fetchInfo, IAsyncEnumerable<IFeature> features)
+    private IEnumerable<IFeature> IterateFeatures(FetchInfo fetchInfo, IEnumerable<IFeature> features)
     {
-        await foreach (var feature in features)
+        foreach (var feature in features)
             if (feature is GeometryFeature geometryFeature)
             {
                 var copied = new GeometryFeature(geometryFeature);
