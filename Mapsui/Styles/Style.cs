@@ -40,7 +40,7 @@ namespace Mapsui.Styles
         /// </summary>
         public float Opacity { get; set; }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (!(obj is Style style))
                 return false;
