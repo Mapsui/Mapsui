@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SkiaSharp" Version="2.88.0-preview.266" />
+    <PackageReference Include="SkiaSharp" Version="2.88.0" />
     <PackageReference Include="Svg.Skia" Version="0.5.12" />
     <PackageReference Include="Topten.RichTextKit" Version="0.4.145" />
   </ItemGroup>
