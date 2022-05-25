@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Projections;
@@ -24,16 +25,13 @@ namespace Mapsui.Providers
         /// </summary>
         public string? CRS { get; set; }
 
-        public async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
+        public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
         {
-            if (GetFetchInfo(ref fetchInfo)) yield break;
+            if (GetFetchInfo(ref fetchInfo))
+                return Enumerable.Empty<IFeature>();
 
-            var features = await _provider.GetFeaturesAsync(fetchInfo).ToListAsync();
-
-            foreach (var p in features.Project(_provider.CRS, CRS, _projection))
-            {
-                yield return p;
-            }
+            var features = await _provider.GetFeaturesAsync(fetchInfo);
+            return features.Project(_provider.CRS, CRS, _projection);
         }
 
         private bool GetFetchInfo(ref FetchInfo fetchInfo)

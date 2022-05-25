@@ -4,6 +4,7 @@
 
 // This file was originally created by Morten Nielsen (www.iter.dk) as part of SharpMap
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Mapsui.Layers;
 
 namespace Mapsui.Providers
@@ -24,6 +25,6 @@ namespace Mapsui.Providers
         /// <returns>BoundingBox</returns>
         MRect? GetExtent();
 
-        IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo);
+        Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo);
     }
 }

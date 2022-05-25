@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Mapsui.Layers;
 
 namespace Mapsui.Providers
@@ -48,7 +49,7 @@ namespace Mapsui.Providers
         }
 
 
-        public virtual async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
+        public virtual async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
         {
             if (fetchInfo == null) throw new ArgumentNullException(nameof(fetchInfo));
             if (fetchInfo.Extent == null) throw new ArgumentNullException(nameof(fetchInfo.Extent));
@@ -58,10 +59,7 @@ namespace Mapsui.Providers
             fetchInfo = new FetchInfo(fetchInfo);
             // Use a larger extent so that symbols partially outside of the extent are included
             var biggerBox = fetchInfo.Extent?.Grow(fetchInfo.Resolution * SymbolSize * 0.5);
-            var grownFeatures = features.Where(f => f != null && (f.Extent?.Intersects(biggerBox) ?? false));
-
-            foreach (var feature in grownFeatures)
-                yield return feature;
+            return features.Where(f => f != null && (f.Extent?.Intersects(biggerBox) ?? false)).ToList();
         }
 
         /// <summary>

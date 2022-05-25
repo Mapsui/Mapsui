@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -95,14 +96,15 @@ namespace Mapsui.ArcGIS.ImageServiceProvider
             set => _timeOut = value;
         }
 
-        public async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
+        public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
         {
             var viewport = fetchInfo.ToViewport();
             var (success, raster) = await TryGetMapAsync(viewport);
             if (success)
             {
-                yield return new RasterFeature(raster);
+                return new [] { new RasterFeature(raster) };
             }
+            return Enumerable.Empty<IFeature>();
         }
 
         public async Task<(bool Success, MRaster? Raster)> TryGetMapAsync(IViewport viewport)

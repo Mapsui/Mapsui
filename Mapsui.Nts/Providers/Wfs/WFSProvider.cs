@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Net;
+using System.Threading.Tasks;
 using System.Xml.XPath;
 using Mapsui.Cache;
 using Mapsui.Layers;
@@ -979,11 +980,9 @@ namespace Mapsui.Providers.Wfs
         /// <summary>
         /// Gets the features within the specified <see cref="FetchInfo"/>."/>
         /// </summary>
-        public async IAsyncEnumerable<IFeature> GetFeaturesAsync(FetchInfo fetchInfo)
+        public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
         {
-            foreach (var feature in ExecuteIntersectionQuery(fetchInfo.Extent))
-                yield return feature;
+            return ExecuteIntersectionQuery(fetchInfo.Extent);
         }
-
     }
 }
