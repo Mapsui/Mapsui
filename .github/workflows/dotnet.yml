@@ -155,7 +155,9 @@ jobs:
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.iOS/Mapsui.Samples.iOS.csproj
     - name: Maspui.Samples.Maui
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Maui/Mapsui.Samples.Maui.csproj
-    # win builds in the solution but not in seperate project
+    - name: Maspui.Samples.Maui.MapView
+      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Maui.MapView/Mapsui.Samples.Maui.MapView.csproj
+      # win builds in the solution but not in seperate project
     - name: Maspui.Samples.WinUI
       run: msbuild -p:RestorePackages=false -p:Configuration=Debug -p:Platform=x86 Samples\Mapsui.Samples.WinUI\Mapsui.Samples.WinUI\Mapsui.Samples.WinUI.csproj
     - name: Maspui.Samples.Wpf
