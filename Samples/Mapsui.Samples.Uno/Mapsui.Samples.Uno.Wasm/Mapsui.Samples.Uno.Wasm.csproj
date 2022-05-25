@@ -56,16 +56,16 @@
     <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.2.6" />
     <PackageReference Include="Uno.Wasm.Bootstrap" Version="3.3.1" />
     <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="3.3.1" />
-    <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.0-preview.266" />
-    <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" Version="2.88.0-preview.266" />
+    <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.0" />
+    <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" Version="2.88.0" />
   </ItemGroup>
 
   <!--Harfbuzz Sharp references Workaround for this issue-->
   <!--https://github.com/mono/SkiaSharp/issues/1725-->
   <ItemGroup>
-    <PackageReference Include="HarfBuzzSharp" Version="2.8.2-preview.266" />
-    <PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" Version="2.8.2-preview.266" />
-    <NativeFileReference Include="$(HarfBuzzSharpStaticLibraryPath)\2.8.2-preview.266\*.a" />
+    <PackageReference Include="HarfBuzzSharp" Version="2.8.2" />
+    <PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" Version="2.8.2" />
+    <NativeFileReference Include="$(HarfBuzzSharpStaticLibraryPath)\2.8.2\*.a" />
   </ItemGroup>
 
   <ItemGroup>    
