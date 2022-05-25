@@ -18,10 +18,6 @@
     <ApplicationId>com.companyname.Mapsui.Samples.Maui</ApplicationId>
     <ApplicationIdGuid>d53f7693-f872-4a4b-b90a-387a5eeea531</ApplicationIdGuid>
 
-    <!-- Versions -->
-    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
-    <ApplicationVersion>1</ApplicationVersion>
-
     <!-- Required for C# Hot Reload -->
     <UseInterpreter Condition="'$(Configuration)' == 'Debug'">True</UseInterpreter>
 
