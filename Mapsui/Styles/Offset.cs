@@ -32,7 +32,7 @@ namespace Mapsui.Styles
             return new MPoint(X, Y);
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (!(obj is Offset offset))
                 return false;

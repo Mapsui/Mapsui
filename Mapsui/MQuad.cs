@@ -117,7 +117,7 @@ namespace Mapsui
         /// </summary>
         /// <param name="obj">Other object to compare</param>
         /// <returns>Returns true if they are equal</returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             return Equals(obj as MQuad);
         }
