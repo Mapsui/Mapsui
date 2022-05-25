@@ -1,10 +1,10 @@
 {
   "sdk": {
     "allowPrerelease": true,
-    "version": "6.0.300-preview.22204.3",
+    "version": "6.0.300",
     "rollForward": "latestPatch"
   },
   "tools": {
-    "dotnet": "6.0.300-preview.22204.3"
+    "dotnet": "6.0.300"
   }
 }
