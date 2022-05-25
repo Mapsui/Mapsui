@@ -3,6 +3,7 @@ using Mapsui.UI.Maui;
 using Microsoft.Maui;
 using Microsoft.UI.Xaml;
 using Microsoft.Maui.Hosting;
+using Microsoft.Maui.ApplicationModel;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -36,7 +37,7 @@ namespace Mapsui.Samples.Maui.WinUI
         {
             base.OnLaunched(args);
 
-            Microsoft.Maui.Essentials.Platform.OnLaunched(args);
+            Platform.OnLaunched(args);
         }
     }
 }
