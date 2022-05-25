@@ -181,7 +181,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Nts", "Mapsui.Nts\Ma
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Rendering.Skia.Tests", "Tests\Mapsui.Rendering.Skia.Tests\Mapsui.Rendering.Skia.Tests.csproj", "{4EA85C26-FD2A-41A2-910A-23057CAF6616}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.Maui", "Samples\Mapsui.Samples.Maui\Mapsui.Samples.Maui.csproj", "{D991D377-2AA4-4FC8-A451-E19624E56EF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.Maui.MapView", "Samples\Mapsui.Samples.Maui.MapView\Mapsui.Samples.Maui.MapView.csproj", "{D991D377-2AA4-4FC8-A451-E19624E56EF8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.UI.MAUI", "Mapsui.UI.MAUI\Mapsui.UI.MAUI.csproj", "{4E6DDCEC-E178-41A8-B2D4-2E74E93F58EC}"
 EndProject
