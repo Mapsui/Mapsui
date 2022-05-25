@@ -8,8 +8,8 @@ namespace Mapsui.Styles
 {
     public class RasterStyle : IStyle
     {
-        private const int _tilesToKeepMultiplier = 3;
-        private const int _minimumTilesToKeep = 32;
+        private const int TilesToKeepMultiplier = 3;
+        private const int MinimumTilesToKeep = 32;
         private long _lastIteration;
         private readonly IDictionary<object, IBitmapInfo?> _tileCache =
             new Dictionary<object, IBitmapInfo?>(new IdentityComparer<object>());
@@ -34,8 +34,8 @@ namespace Mapsui.Styles
         {
             var tilesUsedInCurrentIteration =
                 _tileCache.Values.Count(i => i?.IterationUsed == _lastIteration);
-            var tilesToKeep = tilesUsedInCurrentIteration * _tilesToKeepMultiplier;
-            tilesToKeep = Math.Max(tilesToKeep, _minimumTilesToKeep);
+            var tilesToKeep = tilesUsedInCurrentIteration * TilesToKeepMultiplier;
+            tilesToKeep = Math.Max(tilesToKeep, MinimumTilesToKeep);
             var tilesToRemove = _tileCache.Keys.Count - tilesToKeep;
 
             if (tilesToRemove > 0) RemoveOldBitmaps(_tileCache, tilesToRemove);
@@ -52,7 +52,7 @@ namespace Mapsui.Styles
                 var textureInfo = tileCache[key];
                 tileCache.Remove(key);
                 if (textureInfo is IDisposable textureInfoDisposable)
-                    textureInfoDisposable?.Dispose();
+                    textureInfoDisposable.Dispose();
                 counter++;
             }
         }
