@@ -3746,6 +3746,18 @@
     },
     {
       "type": "Conceptual",
+      "source_relative_path": "documentation/getting-started-maui.md",
+      "output": {
+        ".html": {
+          "relative_path": "documentation/getting-started-maui.html",
+          "hash": "X14BX9djxeyvVWugMCooieP5uFHrVWkiSi2kAiC7zjc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
       "source_relative_path": "documentation/getting-started-winui.md",
       "output": {
         ".html": {
@@ -3962,15 +3974,12 @@
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Toc",
       "source_relative_path": "documentation/toc.md",
       "output": {
         ".html": {
           "relative_path": "documentation/toc.html",
-          "hash": "XyowbuBLDIxdhV9DRhAXQvEM7k6aj4LrD4lA9dy2wkY="
+          "hash": "akcGu2yTj17N4I4tOz4FQdwEITTGcdH51UwNvw3q1qs="
         }
       },
       "is_incremental": false,
@@ -4094,7 +4103,7 @@
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 31,
+          "total_file_count": 32,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
