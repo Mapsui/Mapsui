@@ -94,14 +94,13 @@
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Mapsui.Providers.IProjectingProvider.html">IProjectingProvider</a></div>
-    <div><a class="xref" href="Mapsui.Providers.IAsyncProvider-1.html">IAsyncProvider</a>&lt;<a class="xref" href="Mapsui.IFeature.html">IFeature</a>&gt;</div>
-    <div><a class="xref" href="Mapsui.Providers.IProviderBase.html">IProviderBase</a></div>
+    <div><a class="xref" href="Mapsui.Providers.IProvider.html">IProvider</a></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.Providers.Wms.html">Mapsui.Providers.Wms</a></h6>
   <h6><strong>Assembly</strong>: Mapsui.dll</h6>
   <h5 id="Mapsui_Providers_Wms_WmsProvider_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class WmsProvider : object, IProjectingProvider, IAsyncProvider&lt;IFeature&gt;, IProviderBase</code></pre>
+    <pre><code class="lang-csharp hljs">public class WmsProvider : object, IProjectingProvider, IProvider</code></pre>
   </div>
   <h5 id="Mapsui_Providers_Wms_WmsProvider_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>The WmsLayer is currently very basic and doesn&apos;t support automatic fetching of the WMS Service Description.
@@ -707,7 +706,7 @@ See the example below.</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public async IAsyncEnumerable&lt;IFeature&gt; GetFeaturesAsync(FetchInfo fetchInfo)</code></pre>
+    <pre><code class="lang-csharp hljs">public async Task&lt;IEnumerable&lt;IFeature&gt;&gt; GetFeaturesAsync(FetchInfo fetchInfo)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -736,7 +735,7 @@ See the example below.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IAsyncEnumerable</span>&lt;<a class="xref" href="Mapsui.IFeature.html">IFeature</a>&gt;</td>
+        <td><span class="xref">Task</span>&lt;<span class="xref">IEnumerable</span>&lt;<a class="xref" href="Mapsui.IFeature.html">IFeature</a>&gt;&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -1217,10 +1216,7 @@ See the example below.</p>
       <a class="xref" href="Mapsui.Providers.IProjectingProvider.html">IProjectingProvider</a>
   </div>
   <div>
-      <a class="xref" href="Mapsui.Providers.IAsyncProvider-1.html">IAsyncProvider&lt;T&gt;</a>
-  </div>
-  <div>
-      <a class="xref" href="Mapsui.Providers.IProviderBase.html">IProviderBase</a>
+      <a class="xref" href="Mapsui.Providers.IProvider.html">IProvider</a>
   </div>
 </article>
           </div>

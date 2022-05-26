@@ -99,21 +99,14 @@
     <div><a class="xref" href="Mapsui.Animations.IAnimatable.html">IAnimatable</a></div>
     <div><span class="xref">INotifyPropertyChanged</span></div>
     <div><span class="xref">IDisposable</span></div>
-    <div><a class="xref" href="Mapsui.Layers.ILayerDataSource-1.html">ILayerDataSource</a>&lt;<a class="xref" href="Mapsui.Providers.IProvider-1.html">IProvider</a>&lt;<a class="xref" href="Mapsui.IFeature.html">IFeature</a>&gt;&gt;</div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_DataSource">MemoryLayer.DataSource</a>
-    </div>
-    <div>
-      <a class="xref" href="Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_CRS">MemoryLayer.CRS</a>
+      <a class="xref" href="Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_Features">MemoryLayer.Features</a>
     </div>
     <div>
       <a class="xref" href="Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_GetFeatures_Mapsui_MRect_System_Double_">MemoryLayer.GetFeatures(MRect, Double)</a>
-    </div>
-    <div>
-      <a class="xref" href="Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_RefreshData_Mapsui_Layers_FetchInfo_">MemoryLayer.RefreshData(FetchInfo)</a>
     </div>
     <div>
       <a class="xref" href="Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_Extent">MemoryLayer.Extent</a>
@@ -186,7 +179,7 @@
   <h6><strong>Assembly</strong>: Mapsui.UI.Forms.dll</h6>
   <h5 id="Mapsui_UI_Objects_MyLocationLayer_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class MyLocationLayer : MemoryLayer, ILayer, IAnimatable, INotifyPropertyChanged, IDisposable, ILayerDataSource&lt;IProvider&lt;IFeature&gt;&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public class MyLocationLayer : MemoryLayer, ILayer, IAnimatable, INotifyPropertyChanged, IDisposable</code></pre>
   </div>
   <h5 id="Mapsui_UI_Objects_MyLocationLayer_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>There are two different symbols for own loaction: one is used when there isn&apos;t a change in position (still),
@@ -734,9 +727,6 @@ with a starting location.</p>
   </div>
   <div>
       <span class="xref">IDisposable</span>
-  </div>
-  <div>
-      <a class="xref" href="Mapsui.Layers.ILayerDataSource-1.html">ILayerDataSource&lt;T&gt;</a>
   </div>
 </article>
           </div>

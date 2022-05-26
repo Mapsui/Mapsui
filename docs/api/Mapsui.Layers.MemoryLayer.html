@@ -83,7 +83,7 @@
   
   <h1 id="Mapsui_Layers_MemoryLayer" data-uid="Mapsui.Layers.MemoryLayer" class="text-break">Class MemoryLayer
   </h1>
-  <div class="markdown level0 summary"><p>A layer to use, when DataSource doesn&apos;t fetch anything because it is already in memory</p>
+  <div class="markdown level0 summary"><p>The MemoryLayer has all features in memory.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -99,7 +99,6 @@
     <div><a class="xref" href="Mapsui.Animations.IAnimatable.html">IAnimatable</a></div>
     <div><span class="xref">INotifyPropertyChanged</span></div>
     <div><span class="xref">IDisposable</span></div>
-    <div><a class="xref" href="Mapsui.Layers.ILayerDataSource-1.html">ILayerDataSource</a>&lt;<a class="xref" href="Mapsui.Providers.IProvider-1.html">IProvider</a>&lt;<a class="xref" href="Mapsui.IFeature.html">IFeature</a>&gt;&gt;</div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -174,7 +173,7 @@
   <h6><strong>Assembly</strong>: Mapsui.dll</h6>
   <h5 id="Mapsui_Layers_MemoryLayer_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class MemoryLayer : BaseLayer, ILayer, IAnimatable, INotifyPropertyChanged, IDisposable, ILayerDataSource&lt;IProvider&lt;IFeature&gt;&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public class MemoryLayer : BaseLayer, ILayer, IAnimatable, INotifyPropertyChanged, IDisposable</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -183,7 +182,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_MemoryLayer__ctor.md&amp;value=---%0Auid%3A%20Mapsui.Layers.MemoryLayer.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/MemoryLayer.cs/#L16">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/MemoryLayer.cs/#L18">View Source</a>
   </span>
   <a id="Mapsui_Layers_MemoryLayer__ctor_" data-uid="Mapsui.Layers.MemoryLayer.#ctor*"></a>
   <h4 id="Mapsui_Layers_MemoryLayer__ctor" data-uid="Mapsui.Layers.MemoryLayer.#ctor">MemoryLayer()</h4>
@@ -199,7 +198,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_MemoryLayer__ctor_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.Layers.MemoryLayer.%23ctor(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/MemoryLayer.cs/#L22">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/MemoryLayer.cs/#L24">View Source</a>
   </span>
   <a id="Mapsui_Layers_MemoryLayer__ctor_" data-uid="Mapsui.Layers.MemoryLayer.#ctor*"></a>
   <h4 id="Mapsui_Layers_MemoryLayer__ctor_System_String_" data-uid="Mapsui.Layers.MemoryLayer.#ctor(System.String)">MemoryLayer(String)</h4>
@@ -232,70 +231,10 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_MemoryLayer_CRS.md&amp;value=---%0Auid%3A%20Mapsui.Layers.MemoryLayer.CRS%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/MemoryLayer.cs/#L30">View Source</a>
-  </span>
-  <a id="Mapsui_Layers_MemoryLayer_CRS_" data-uid="Mapsui.Layers.MemoryLayer.CRS*"></a>
-  <h4 id="Mapsui_Layers_MemoryLayer_CRS" data-uid="Mapsui.Layers.MemoryLayer.CRS">CRS</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string? CRS { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">System.String</span>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_MemoryLayer_DataSource.md&amp;value=---%0Auid%3A%20Mapsui.Layers.MemoryLayer.DataSource%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/MemoryLayer.cs/#L24">View Source</a>
-  </span>
-  <a id="Mapsui_Layers_MemoryLayer_DataSource_" data-uid="Mapsui.Layers.MemoryLayer.DataSource*"></a>
-  <h4 id="Mapsui_Layers_MemoryLayer_DataSource" data-uid="Mapsui.Layers.MemoryLayer.DataSource">DataSource</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IProvider&lt;IFeature&gt; DataSource { get; set; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Mapsui.Providers.IProvider-1.html">IProvider</a>&lt;<a class="xref" href="Mapsui.IFeature.html">IFeature</a>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_MemoryLayer_Extent.md&amp;value=---%0Auid%3A%20Mapsui.Layers.MemoryLayer.Extent%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/MemoryLayer.cs/#L53">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/MemoryLayer.cs/#L42">View Source</a>
   </span>
   <a id="Mapsui_Layers_MemoryLayer_Extent_" data-uid="Mapsui.Layers.MemoryLayer.Extent*"></a>
   <h4 id="Mapsui_Layers_MemoryLayer_Extent" data-uid="Mapsui.Layers.MemoryLayer.Extent">Extent</h4>
@@ -322,6 +261,36 @@
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Extent">BaseLayer.Extent</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_MemoryLayer_Features.md&amp;value=---%0Auid%3A%20Mapsui.Layers.MemoryLayer.Features%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/MemoryLayer.cs/#L26">View Source</a>
+  </span>
+  <a id="Mapsui_Layers_MemoryLayer_Features_" data-uid="Mapsui.Layers.MemoryLayer.Features*"></a>
+  <h4 id="Mapsui_Layers_MemoryLayer_Features" data-uid="Mapsui.Layers.MemoryLayer.Features">Features</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;IFeature&gt; Features { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Mapsui.IFeature.html">IFeature</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="methods">Methods
   </h3>
   <span class="small pull-right mobile-hide">
@@ -329,7 +298,7 @@
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_MemoryLayer_GetFeatures_Mapsui_MRect_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Layers.MemoryLayer.GetFeatures(Mapsui.MRect%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/MemoryLayer.cs/#L32">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/MemoryLayer.cs/#L30">View Source</a>
   </span>
   <a id="Mapsui_Layers_MemoryLayer_GetFeatures_" data-uid="Mapsui.Layers.MemoryLayer.GetFeatures*"></a>
   <h4 id="Mapsui_Layers_MemoryLayer_GetFeatures_Mapsui_MRect_System_Double_" data-uid="Mapsui.Layers.MemoryLayer.GetFeatures(Mapsui.MRect,System.Double)">GetFeatures(MRect, Double)</h4>
@@ -337,7 +306,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override IEnumerable&lt;IFeature&gt; GetFeatures(MRect box, double resolution)</code></pre>
+    <pre><code class="lang-csharp hljs">public override IEnumerable&lt;IFeature&gt; GetFeatures(MRect rect, double resolution)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -351,7 +320,7 @@
     <tbody>
       <tr>
         <td><a class="xref" href="Mapsui.MRect.html">MRect</a></td>
-        <td><span class="parametername">box</span></td>
+        <td><span class="parametername">rect</span></td>
         <td></td>
       </tr>
       <tr>
@@ -378,40 +347,6 @@
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_GetFeatures_Mapsui_MRect_System_Double_">BaseLayer.GetFeatures(MRect, Double)</a></div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_MemoryLayer_RefreshData_Mapsui_Layers_FetchInfo_.md&amp;value=---%0Auid%3A%20Mapsui.Layers.MemoryLayer.RefreshData(Mapsui.Layers.FetchInfo)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/MemoryLayer.cs/#L45">View Source</a>
-  </span>
-  <a id="Mapsui_Layers_MemoryLayer_RefreshData_" data-uid="Mapsui.Layers.MemoryLayer.RefreshData*"></a>
-  <h4 id="Mapsui_Layers_MemoryLayer_RefreshData_Mapsui_Layers_FetchInfo_" data-uid="Mapsui.Layers.MemoryLayer.RefreshData(Mapsui.Layers.FetchInfo)">RefreshData(FetchInfo)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void RefreshData(FetchInfo fetchInfo)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Mapsui.Layers.FetchInfo.html">FetchInfo</a></td>
-        <td><span class="parametername">fetchInfo</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_RefreshData_Mapsui_Layers_FetchInfo_">BaseLayer.RefreshData(FetchInfo)</a></div>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>
@@ -425,9 +360,6 @@
   <div>
       <span class="xref">IDisposable</span>
   </div>
-  <div>
-      <a class="xref" href="Mapsui.Layers.ILayerDataSource-1.html">ILayerDataSource&lt;T&gt;</a>
-  </div>
 </article>
           </div>
           
@@ -439,7 +371,7 @@
                     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_MemoryLayer.md&amp;value=---%0Auid%3A%20Mapsui.Layers.MemoryLayer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/MemoryLayer.cs/#L11" class="contribution-link">View Source</a>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/MemoryLayer.cs/#L13" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

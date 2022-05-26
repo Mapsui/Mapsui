@@ -352,44 +352,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Extensions.AssemblyExtensions.GetFullName
   nameWithType: AssemblyExtensions.GetFullName
-- uid: Mapsui.Extensions.AsyncProviderExtensions
-  name: AsyncProviderExtensions
-  href: api/Mapsui.Extensions.AsyncProviderExtensions.html
-  commentId: T:Mapsui.Extensions.AsyncProviderExtensions
-  fullName: Mapsui.Extensions.AsyncProviderExtensions
-  nameWithType: AsyncProviderExtensions
-- uid: Mapsui.Extensions.AsyncProviderExtensions.GetFeatures*
-  name: GetFeatures
-  href: api/Mapsui.Extensions.AsyncProviderExtensions.html#Mapsui_Extensions_AsyncProviderExtensions_GetFeatures_
-  commentId: Overload:Mapsui.Extensions.AsyncProviderExtensions.GetFeatures
-  isSpec: "True"
-  fullName: Mapsui.Extensions.AsyncProviderExtensions.GetFeatures
-  nameWithType: AsyncProviderExtensions.GetFeatures
-- uid: Mapsui.Extensions.AsyncProviderExtensions.GetFeatures``1(Mapsui.Providers.IProviderBase,Mapsui.Layers.FetchInfo)
-  name: GetFeatures<T>(IProviderBase, FetchInfo)
-  href: api/Mapsui.Extensions.AsyncProviderExtensions.html#Mapsui_Extensions_AsyncProviderExtensions_GetFeatures__1_Mapsui_Providers_IProviderBase_Mapsui_Layers_FetchInfo_
-  commentId: M:Mapsui.Extensions.AsyncProviderExtensions.GetFeatures``1(Mapsui.Providers.IProviderBase,Mapsui.Layers.FetchInfo)
-  name.vb: GetFeatures(Of T)(IProviderBase, FetchInfo)
-  fullName: Mapsui.Extensions.AsyncProviderExtensions.GetFeatures<T>(Mapsui.Providers.IProviderBase, Mapsui.Layers.FetchInfo)
-  fullName.vb: Mapsui.Extensions.AsyncProviderExtensions.GetFeatures(Of T)(Mapsui.Providers.IProviderBase, Mapsui.Layers.FetchInfo)
-  nameWithType: AsyncProviderExtensions.GetFeatures<T>(IProviderBase, FetchInfo)
-  nameWithType.vb: AsyncProviderExtensions.GetFeatures(Of T)(IProviderBase, FetchInfo)
-- uid: Mapsui.Extensions.AsyncProviderExtensions.GetFeaturesAsync*
-  name: GetFeaturesAsync
-  href: api/Mapsui.Extensions.AsyncProviderExtensions.html#Mapsui_Extensions_AsyncProviderExtensions_GetFeaturesAsync_
-  commentId: Overload:Mapsui.Extensions.AsyncProviderExtensions.GetFeaturesAsync
-  isSpec: "True"
-  fullName: Mapsui.Extensions.AsyncProviderExtensions.GetFeaturesAsync
-  nameWithType: AsyncProviderExtensions.GetFeaturesAsync
-- uid: Mapsui.Extensions.AsyncProviderExtensions.GetFeaturesAsync``1(Mapsui.Providers.IProviderBase,Mapsui.Layers.FetchInfo)
-  name: GetFeaturesAsync<T>(IProviderBase, FetchInfo)
-  href: api/Mapsui.Extensions.AsyncProviderExtensions.html#Mapsui_Extensions_AsyncProviderExtensions_GetFeaturesAsync__1_Mapsui_Providers_IProviderBase_Mapsui_Layers_FetchInfo_
-  commentId: M:Mapsui.Extensions.AsyncProviderExtensions.GetFeaturesAsync``1(Mapsui.Providers.IProviderBase,Mapsui.Layers.FetchInfo)
-  name.vb: GetFeaturesAsync(Of T)(IProviderBase, FetchInfo)
-  fullName: Mapsui.Extensions.AsyncProviderExtensions.GetFeaturesAsync<T>(Mapsui.Providers.IProviderBase, Mapsui.Layers.FetchInfo)
-  fullName.vb: Mapsui.Extensions.AsyncProviderExtensions.GetFeaturesAsync(Of T)(Mapsui.Providers.IProviderBase, Mapsui.Layers.FetchInfo)
-  nameWithType: AsyncProviderExtensions.GetFeaturesAsync<T>(IProviderBase, FetchInfo)
-  nameWithType.vb: AsyncProviderExtensions.GetFeaturesAsync(Of T)(IProviderBase, FetchInfo)
 - uid: Mapsui.Extensions.CacheExtensions
   name: CacheExtensions
   href: api/Mapsui.Extensions.CacheExtensions.html
@@ -541,6 +503,38 @@ references:
   fullName.vb: Mapsui.Extensions.FeatureExtensions.Copy(Of T)(T)
   nameWithType: FeatureExtensions.Copy<T>(T)
   nameWithType.vb: FeatureExtensions.Copy(Of T)(T)
+- uid: Mapsui.Extensions.FeatureExtensions.GetExtent(IEnumerable{Mapsui.IFeature})
+  name: GetExtent(IEnumerable<IFeature>)
+  href: api/Mapsui.Extensions.FeatureExtensions.html#Mapsui_Extensions_FeatureExtensions_GetExtent_IEnumerable_Mapsui_IFeature__
+  commentId: M:Mapsui.Extensions.FeatureExtensions.GetExtent(IEnumerable{Mapsui.IFeature})
+  name.vb: GetExtent(IEnumerable(Of IFeature))
+  fullName: Mapsui.Extensions.FeatureExtensions.GetExtent(IEnumerable<Mapsui.IFeature>)
+  fullName.vb: Mapsui.Extensions.FeatureExtensions.GetExtent(IEnumerable(Of Mapsui.IFeature))
+  nameWithType: FeatureExtensions.GetExtent(IEnumerable<IFeature>)
+  nameWithType.vb: FeatureExtensions.GetExtent(IEnumerable(Of IFeature))
+- uid: Mapsui.Extensions.FeatureExtensions.GetExtent*
+  name: GetExtent
+  href: api/Mapsui.Extensions.FeatureExtensions.html#Mapsui_Extensions_FeatureExtensions_GetExtent_
+  commentId: Overload:Mapsui.Extensions.FeatureExtensions.GetExtent
+  isSpec: "True"
+  fullName: Mapsui.Extensions.FeatureExtensions.GetExtent
+  nameWithType: FeatureExtensions.GetExtent
+- uid: Mapsui.Extensions.FeatureExtensions.Project(IEnumerable{Mapsui.IFeature},System.Nullable{System.String},System.Nullable{System.String},Mapsui.Projections.IProjection)
+  name: Project(IEnumerable<IFeature>, Nullable<String>, Nullable<String>, IProjection)
+  href: api/Mapsui.Extensions.FeatureExtensions.html#Mapsui_Extensions_FeatureExtensions_Project_IEnumerable_Mapsui_IFeature__System_Nullable_System_String__System_Nullable_System_String__Mapsui_Projections_IProjection_
+  commentId: M:Mapsui.Extensions.FeatureExtensions.Project(IEnumerable{Mapsui.IFeature},System.Nullable{System.String},System.Nullable{System.String},Mapsui.Projections.IProjection)
+  name.vb: Project(IEnumerable(Of IFeature), Nullable(Of String), Nullable(Of String), IProjection)
+  fullName: Mapsui.Extensions.FeatureExtensions.Project(IEnumerable<Mapsui.IFeature>, System.Nullable<System.String>, System.Nullable<System.String>, Mapsui.Projections.IProjection)
+  fullName.vb: Mapsui.Extensions.FeatureExtensions.Project(IEnumerable(Of Mapsui.IFeature), System.Nullable(Of System.String), System.Nullable(Of System.String), Mapsui.Projections.IProjection)
+  nameWithType: FeatureExtensions.Project(IEnumerable<IFeature>, Nullable<String>, Nullable<String>, IProjection)
+  nameWithType.vb: FeatureExtensions.Project(IEnumerable(Of IFeature), Nullable(Of String), Nullable(Of String), IProjection)
+- uid: Mapsui.Extensions.FeatureExtensions.Project*
+  name: Project
+  href: api/Mapsui.Extensions.FeatureExtensions.html#Mapsui_Extensions_FeatureExtensions_Project_
+  commentId: Overload:Mapsui.Extensions.FeatureExtensions.Project
+  isSpec: "True"
+  fullName: Mapsui.Extensions.FeatureExtensions.Project
+  nameWithType: FeatureExtensions.Project
 - uid: Mapsui.Extensions.FeatureExtensions.ToDisplayText(IEnumerable{KeyValuePair{System.String,IEnumerable{Mapsui.IFeature}}})
   name: ToDisplayText(IEnumerable<KeyValuePair<String, IEnumerable<IFeature>>>)
   href: api/Mapsui.Extensions.FeatureExtensions.html#Mapsui_Extensions_FeatureExtensions_ToDisplayText_IEnumerable_KeyValuePair_System_String_IEnumerable_Mapsui_IFeature____
@@ -1046,6 +1040,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Fetcher.IAsyncDataFetcher.ClearCache
   nameWithType: IAsyncDataFetcher.ClearCache
+- uid: Mapsui.Fetcher.IAsyncDataFetcher.RefreshData(Mapsui.Layers.FetchInfo)
+  name: RefreshData(FetchInfo)
+  href: api/Mapsui.Fetcher.IAsyncDataFetcher.html#Mapsui_Fetcher_IAsyncDataFetcher_RefreshData_Mapsui_Layers_FetchInfo_
+  commentId: M:Mapsui.Fetcher.IAsyncDataFetcher.RefreshData(Mapsui.Layers.FetchInfo)
+  fullName: Mapsui.Fetcher.IAsyncDataFetcher.RefreshData(Mapsui.Layers.FetchInfo)
+  nameWithType: IAsyncDataFetcher.RefreshData(FetchInfo)
+- uid: Mapsui.Fetcher.IAsyncDataFetcher.RefreshData*
+  name: RefreshData
+  href: api/Mapsui.Fetcher.IAsyncDataFetcher.html#Mapsui_Fetcher_IAsyncDataFetcher_RefreshData_
+  commentId: Overload:Mapsui.Fetcher.IAsyncDataFetcher.RefreshData
+  isSpec: "True"
+  fullName: Mapsui.Fetcher.IAsyncDataFetcher.RefreshData
+  nameWithType: IAsyncDataFetcher.RefreshData
 - uid: Mapsui.Fetcher.IFetchDispatcher
   name: IFetchDispatcher
   href: api/Mapsui.Fetcher.IFetchDispatcher.html
@@ -1934,15 +1941,12 @@ references:
   commentId: T:Mapsui.Layers.AnimatedLayers.AnimatedPointLayer
   fullName: Mapsui.Layers.AnimatedLayers.AnimatedPointLayer
   nameWithType: AnimatedPointLayer
-- uid: Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.#ctor(Mapsui.Providers.IProvider{Mapsui.Layers.PointFeature})
-  name: AnimatedPointLayer(IProvider<PointFeature>)
-  href: api/Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.html#Mapsui_Layers_AnimatedLayers_AnimatedPointLayer__ctor_Mapsui_Providers_IProvider_Mapsui_Layers_PointFeature__
-  commentId: M:Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.#ctor(Mapsui.Providers.IProvider{Mapsui.Layers.PointFeature})
-  name.vb: AnimatedPointLayer(IProvider(Of PointFeature))
-  fullName: Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.AnimatedPointLayer(Mapsui.Providers.IProvider<Mapsui.Layers.PointFeature>)
-  fullName.vb: Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.AnimatedPointLayer(Mapsui.Providers.IProvider(Of Mapsui.Layers.PointFeature))
-  nameWithType: AnimatedPointLayer.AnimatedPointLayer(IProvider<PointFeature>)
-  nameWithType.vb: AnimatedPointLayer.AnimatedPointLayer(IProvider(Of PointFeature))
+- uid: Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.#ctor(Mapsui.Providers.IProvider)
+  name: AnimatedPointLayer(IProvider)
+  href: api/Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.html#Mapsui_Layers_AnimatedLayers_AnimatedPointLayer__ctor_Mapsui_Providers_IProvider_
+  commentId: M:Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.#ctor(Mapsui.Providers.IProvider)
+  fullName: Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.AnimatedPointLayer(Mapsui.Providers.IProvider)
+  nameWithType: AnimatedPointLayer.AnimatedPointLayer(IProvider)
 - uid: Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.#ctor*
   name: AnimatedPointLayer
   href: api/Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.html#Mapsui_Layers_AnimatedLayers_AnimatedPointLayer__ctor_
@@ -1950,6 +1954,32 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.AnimatedPointLayer
   nameWithType: AnimatedPointLayer.AnimatedPointLayer
+- uid: Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.AbortFetch
+  name: AbortFetch()
+  href: api/Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.html#Mapsui_Layers_AnimatedLayers_AnimatedPointLayer_AbortFetch
+  commentId: M:Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.AbortFetch
+  fullName: Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.AbortFetch()
+  nameWithType: AnimatedPointLayer.AbortFetch()
+- uid: Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.AbortFetch*
+  name: AbortFetch
+  href: api/Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.html#Mapsui_Layers_AnimatedLayers_AnimatedPointLayer_AbortFetch_
+  commentId: Overload:Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.AbortFetch
+  isSpec: "True"
+  fullName: Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.AbortFetch
+  nameWithType: AnimatedPointLayer.AbortFetch
+- uid: Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.ClearCache
+  name: ClearCache()
+  href: api/Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.html#Mapsui_Layers_AnimatedLayers_AnimatedPointLayer_ClearCache
+  commentId: M:Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.ClearCache
+  fullName: Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.ClearCache()
+  nameWithType: AnimatedPointLayer.ClearCache()
+- uid: Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.ClearCache*
+  name: ClearCache
+  href: api/Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.html#Mapsui_Layers_AnimatedLayers_AnimatedPointLayer_ClearCache_
+  commentId: Overload:Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.ClearCache
+  isSpec: "True"
+  fullName: Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.ClearCache
+  nameWithType: AnimatedPointLayer.ClearCache
 - uid: Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.DataSource
   name: DataSource
   href: api/Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.html#Mapsui_Layers_AnimatedLayers_AnimatedPointLayer_DataSource
@@ -2015,19 +2045,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.UpdateAnimations
   nameWithType: AnimatedPointLayer.UpdateAnimations
-- uid: Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.UpdateData
-  name: UpdateData()
-  href: api/Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.html#Mapsui_Layers_AnimatedLayers_AnimatedPointLayer_UpdateData
-  commentId: M:Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.UpdateData
-  fullName: Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.UpdateData()
-  nameWithType: AnimatedPointLayer.UpdateData()
-- uid: Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.UpdateData*
-  name: UpdateData
-  href: api/Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.html#Mapsui_Layers_AnimatedLayers_AnimatedPointLayer_UpdateData_
-  commentId: Overload:Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.UpdateData
+- uid: Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.UpdateDataAsync
+  name: UpdateDataAsync()
+  href: api/Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.html#Mapsui_Layers_AnimatedLayers_AnimatedPointLayer_UpdateDataAsync
+  commentId: M:Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.UpdateDataAsync
+  fullName: Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.UpdateDataAsync()
+  nameWithType: AnimatedPointLayer.UpdateDataAsync()
+- uid: Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.UpdateDataAsync*
+  name: UpdateDataAsync
+  href: api/Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.html#Mapsui_Layers_AnimatedLayers_AnimatedPointLayer_UpdateDataAsync_
+  commentId: Overload:Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.UpdateDataAsync
   isSpec: "True"
-  fullName: Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.UpdateData
-  nameWithType: AnimatedPointLayer.UpdateData
+  fullName: Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.UpdateDataAsync
+  nameWithType: AnimatedPointLayer.UpdateDataAsync
 - uid: Mapsui.Layers.AnimatedLayers.EasingFunction
   name: EasingFunction
   href: api/Mapsui.Layers.AnimatedLayers.EasingFunction.html
@@ -2390,19 +2420,6 @@ references:
   commentId: E:Mapsui.Layers.BaseLayer.PropertyChanged
   fullName: Mapsui.Layers.BaseLayer.PropertyChanged
   nameWithType: BaseLayer.PropertyChanged
-- uid: Mapsui.Layers.BaseLayer.RefreshData(Mapsui.Layers.FetchInfo)
-  name: RefreshData(FetchInfo)
-  href: api/Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_RefreshData_Mapsui_Layers_FetchInfo_
-  commentId: M:Mapsui.Layers.BaseLayer.RefreshData(Mapsui.Layers.FetchInfo)
-  fullName: Mapsui.Layers.BaseLayer.RefreshData(Mapsui.Layers.FetchInfo)
-  nameWithType: BaseLayer.RefreshData(FetchInfo)
-- uid: Mapsui.Layers.BaseLayer.RefreshData*
-  name: RefreshData
-  href: api/Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_RefreshData_
-  commentId: Overload:Mapsui.Layers.BaseLayer.RefreshData
-  isSpec: "True"
-  fullName: Mapsui.Layers.BaseLayer.RefreshData
-  nameWithType: BaseLayer.RefreshData
 - uid: Mapsui.Layers.BaseLayer.Resolutions
   name: Resolutions
   href: api/Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Resolutions
@@ -2763,19 +2780,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.ILayer.Opacity
   nameWithType: ILayer.Opacity
-- uid: Mapsui.Layers.ILayer.RefreshData(Mapsui.Layers.FetchInfo)
-  name: RefreshData(FetchInfo)
-  href: api/Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_RefreshData_Mapsui_Layers_FetchInfo_
-  commentId: M:Mapsui.Layers.ILayer.RefreshData(Mapsui.Layers.FetchInfo)
-  fullName: Mapsui.Layers.ILayer.RefreshData(Mapsui.Layers.FetchInfo)
-  nameWithType: ILayer.RefreshData(FetchInfo)
-- uid: Mapsui.Layers.ILayer.RefreshData*
-  name: RefreshData
-  href: api/Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_RefreshData_
-  commentId: Overload:Mapsui.Layers.ILayer.RefreshData
-  isSpec: "True"
-  fullName: Mapsui.Layers.ILayer.RefreshData
-  nameWithType: ILayer.RefreshData
 - uid: Mapsui.Layers.ILayer.Resolutions
   name: Resolutions
   href: api/Mapsui.Layers.ILayer.html#Mapsui_Layers_ILayer_Resolutions
@@ -3483,32 +3487,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.MemoryLayer.MemoryLayer
   nameWithType: MemoryLayer.MemoryLayer
-- uid: Mapsui.Layers.MemoryLayer.CRS
-  name: CRS
-  href: api/Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_CRS
-  commentId: P:Mapsui.Layers.MemoryLayer.CRS
-  fullName: Mapsui.Layers.MemoryLayer.CRS
-  nameWithType: MemoryLayer.CRS
-- uid: Mapsui.Layers.MemoryLayer.CRS*
-  name: CRS
-  href: api/Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_CRS_
-  commentId: Overload:Mapsui.Layers.MemoryLayer.CRS
-  isSpec: "True"
-  fullName: Mapsui.Layers.MemoryLayer.CRS
-  nameWithType: MemoryLayer.CRS
-- uid: Mapsui.Layers.MemoryLayer.DataSource
-  name: DataSource
-  href: api/Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_DataSource
-  commentId: P:Mapsui.Layers.MemoryLayer.DataSource
-  fullName: Mapsui.Layers.MemoryLayer.DataSource
-  nameWithType: MemoryLayer.DataSource
-- uid: Mapsui.Layers.MemoryLayer.DataSource*
-  name: DataSource
-  href: api/Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_DataSource_
-  commentId: Overload:Mapsui.Layers.MemoryLayer.DataSource
-  isSpec: "True"
-  fullName: Mapsui.Layers.MemoryLayer.DataSource
-  nameWithType: MemoryLayer.DataSource
 - uid: Mapsui.Layers.MemoryLayer.Extent
   name: Extent
   href: api/Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_Extent
@@ -3522,6 +3500,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.MemoryLayer.Extent
   nameWithType: MemoryLayer.Extent
+- uid: Mapsui.Layers.MemoryLayer.Features
+  name: Features
+  href: api/Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_Features
+  commentId: P:Mapsui.Layers.MemoryLayer.Features
+  fullName: Mapsui.Layers.MemoryLayer.Features
+  nameWithType: MemoryLayer.Features
+- uid: Mapsui.Layers.MemoryLayer.Features*
+  name: Features
+  href: api/Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_Features_
+  commentId: Overload:Mapsui.Layers.MemoryLayer.Features
+  isSpec: "True"
+  fullName: Mapsui.Layers.MemoryLayer.Features
+  nameWithType: MemoryLayer.Features
 - uid: Mapsui.Layers.MemoryLayer.GetFeatures(Mapsui.MRect,System.Double)
   name: GetFeatures(MRect, Double)
   href: api/Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_GetFeatures_Mapsui_MRect_System_Double_
@@ -3535,19 +3526,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.MemoryLayer.GetFeatures
   nameWithType: MemoryLayer.GetFeatures
-- uid: Mapsui.Layers.MemoryLayer.RefreshData(Mapsui.Layers.FetchInfo)
-  name: RefreshData(FetchInfo)
-  href: api/Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_RefreshData_Mapsui_Layers_FetchInfo_
-  commentId: M:Mapsui.Layers.MemoryLayer.RefreshData(Mapsui.Layers.FetchInfo)
-  fullName: Mapsui.Layers.MemoryLayer.RefreshData(Mapsui.Layers.FetchInfo)
-  nameWithType: MemoryLayer.RefreshData(FetchInfo)
-- uid: Mapsui.Layers.MemoryLayer.RefreshData*
-  name: RefreshData
-  href: api/Mapsui.Layers.MemoryLayer.html#Mapsui_Layers_MemoryLayer_RefreshData_
-  commentId: Overload:Mapsui.Layers.MemoryLayer.RefreshData
-  isSpec: "True"
-  fullName: Mapsui.Layers.MemoryLayer.RefreshData
-  nameWithType: MemoryLayer.RefreshData
 - uid: Mapsui.Layers.PointFeature
   name: PointFeature
   href: api/Mapsui.Layers.PointFeature.html
@@ -3984,19 +3962,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.WritableLayer.GetFeatures
   nameWithType: WritableLayer.GetFeatures
-- uid: Mapsui.Layers.WritableLayer.RefreshData(Mapsui.Layers.FetchInfo)
-  name: RefreshData(FetchInfo)
-  href: api/Mapsui.Layers.WritableLayer.html#Mapsui_Layers_WritableLayer_RefreshData_Mapsui_Layers_FetchInfo_
-  commentId: M:Mapsui.Layers.WritableLayer.RefreshData(Mapsui.Layers.FetchInfo)
-  fullName: Mapsui.Layers.WritableLayer.RefreshData(Mapsui.Layers.FetchInfo)
-  nameWithType: WritableLayer.RefreshData(FetchInfo)
-- uid: Mapsui.Layers.WritableLayer.RefreshData*
-  name: RefreshData
-  href: api/Mapsui.Layers.WritableLayer.html#Mapsui_Layers_WritableLayer_RefreshData_
-  commentId: Overload:Mapsui.Layers.WritableLayer.RefreshData
-  isSpec: "True"
-  fullName: Mapsui.Layers.WritableLayer.RefreshData
-  nameWithType: WritableLayer.RefreshData
 - uid: Mapsui.Layers.WritableLayer.TryRemove(Mapsui.IFeature,System.Nullable{Func{Mapsui.IFeature,Mapsui.IFeature,System.Boolean}})
   name: TryRemove(IFeature, Nullable<Func<IFeature, IFeature, Boolean>>)
   href: api/Mapsui.Layers.WritableLayer.html#Mapsui_Layers_WritableLayer_TryRemove_Mapsui_IFeature_System_Nullable_Func_Mapsui_IFeature_Mapsui_IFeature_System_Boolean___
@@ -5058,12 +5023,15 @@ references:
   commentId: M:Mapsui.MQuad.Equals(Mapsui.MQuad)
   fullName: Mapsui.MQuad.Equals(Mapsui.MQuad)
   nameWithType: MQuad.Equals(MQuad)
-- uid: Mapsui.MQuad.Equals(System.Object)
-  name: Equals(Object)
-  href: api/Mapsui.MQuad.html#Mapsui_MQuad_Equals_System_Object_
-  commentId: M:Mapsui.MQuad.Equals(System.Object)
-  fullName: Mapsui.MQuad.Equals(System.Object)
-  nameWithType: MQuad.Equals(Object)
+- uid: Mapsui.MQuad.Equals(System.Nullable{System.Object})
+  name: Equals(Nullable<Object>)
+  href: api/Mapsui.MQuad.html#Mapsui_MQuad_Equals_System_Nullable_System_Object__
+  commentId: M:Mapsui.MQuad.Equals(System.Nullable{System.Object})
+  name.vb: Equals(Nullable(Of Object))
+  fullName: Mapsui.MQuad.Equals(System.Nullable<System.Object>)
+  fullName.vb: Mapsui.MQuad.Equals(System.Nullable(Of System.Object))
+  nameWithType: MQuad.Equals(Nullable<Object>)
+  nameWithType.vb: MQuad.Equals(Nullable(Of Object))
 - uid: Mapsui.MQuad.Equals*
   name: Equals
   href: api/Mapsui.MQuad.html#Mapsui_MQuad_Equals_
@@ -6314,32 +6282,6 @@ references:
   commentId: N:Mapsui.Providers
   fullName: Mapsui.Providers
   nameWithType: Mapsui.Providers
-- uid: Mapsui.Providers.IAsyncProvider`1
-  name: IAsyncProvider<T>
-  href: api/Mapsui.Providers.IAsyncProvider-1.html
-  commentId: T:Mapsui.Providers.IAsyncProvider`1
-  name.vb: IAsyncProvider(Of T)
-  fullName: Mapsui.Providers.IAsyncProvider<T>
-  fullName.vb: Mapsui.Providers.IAsyncProvider(Of T)
-  nameWithType: IAsyncProvider<T>
-  nameWithType.vb: IAsyncProvider(Of T)
-- uid: Mapsui.Providers.IAsyncProvider`1.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
-  name: GetFeaturesAsync(FetchInfo)
-  href: api/Mapsui.Providers.IAsyncProvider-1.html#Mapsui_Providers_IAsyncProvider_1_GetFeaturesAsync_Mapsui_Layers_FetchInfo_
-  commentId: M:Mapsui.Providers.IAsyncProvider`1.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
-  fullName: Mapsui.Providers.IAsyncProvider<T>.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
-  fullName.vb: Mapsui.Providers.IAsyncProvider(Of T).GetFeaturesAsync(Mapsui.Layers.FetchInfo)
-  nameWithType: IAsyncProvider<T>.GetFeaturesAsync(FetchInfo)
-  nameWithType.vb: IAsyncProvider(Of T).GetFeaturesAsync(FetchInfo)
-- uid: Mapsui.Providers.IAsyncProvider`1.GetFeaturesAsync*
-  name: GetFeaturesAsync
-  href: api/Mapsui.Providers.IAsyncProvider-1.html#Mapsui_Providers_IAsyncProvider_1_GetFeaturesAsync_
-  commentId: Overload:Mapsui.Providers.IAsyncProvider`1.GetFeaturesAsync
-  isSpec: "True"
-  fullName: Mapsui.Providers.IAsyncProvider<T>.GetFeaturesAsync
-  fullName.vb: Mapsui.Providers.IAsyncProvider(Of T).GetFeaturesAsync
-  nameWithType: IAsyncProvider<T>.GetFeaturesAsync
-  nameWithType.vb: IAsyncProvider(Of T).GetFeaturesAsync
 - uid: Mapsui.Providers.IProjectingProvider
   name: IProjectingProvider
   href: api/Mapsui.Providers.IProjectingProvider.html
@@ -6359,239 +6301,191 @@ references:
   isSpec: "True"
   fullName: Mapsui.Providers.IProjectingProvider.IsCrsSupported
   nameWithType: IProjectingProvider.IsCrsSupported
-- uid: Mapsui.Providers.IProvider`1
-  name: IProvider<T>
-  href: api/Mapsui.Providers.IProvider-1.html
-  commentId: T:Mapsui.Providers.IProvider`1
-  name.vb: IProvider(Of T)
-  fullName: Mapsui.Providers.IProvider<T>
-  fullName.vb: Mapsui.Providers.IProvider(Of T)
-  nameWithType: IProvider<T>
-  nameWithType.vb: IProvider(Of T)
-- uid: Mapsui.Providers.IProvider`1.GetFeatures(Mapsui.Layers.FetchInfo)
-  name: GetFeatures(FetchInfo)
-  href: api/Mapsui.Providers.IProvider-1.html#Mapsui_Providers_IProvider_1_GetFeatures_Mapsui_Layers_FetchInfo_
-  commentId: M:Mapsui.Providers.IProvider`1.GetFeatures(Mapsui.Layers.FetchInfo)
-  fullName: Mapsui.Providers.IProvider<T>.GetFeatures(Mapsui.Layers.FetchInfo)
-  fullName.vb: Mapsui.Providers.IProvider(Of T).GetFeatures(Mapsui.Layers.FetchInfo)
-  nameWithType: IProvider<T>.GetFeatures(FetchInfo)
-  nameWithType.vb: IProvider(Of T).GetFeatures(FetchInfo)
-- uid: Mapsui.Providers.IProvider`1.GetFeatures*
-  name: GetFeatures
-  href: api/Mapsui.Providers.IProvider-1.html#Mapsui_Providers_IProvider_1_GetFeatures_
-  commentId: Overload:Mapsui.Providers.IProvider`1.GetFeatures
-  isSpec: "True"
-  fullName: Mapsui.Providers.IProvider<T>.GetFeatures
-  fullName.vb: Mapsui.Providers.IProvider(Of T).GetFeatures
-  nameWithType: IProvider<T>.GetFeatures
-  nameWithType.vb: IProvider(Of T).GetFeatures
-- uid: Mapsui.Providers.IProviderBase
-  name: IProviderBase
-  href: api/Mapsui.Providers.IProviderBase.html
-  commentId: T:Mapsui.Providers.IProviderBase
-  fullName: Mapsui.Providers.IProviderBase
-  nameWithType: IProviderBase
-- uid: Mapsui.Providers.IProviderBase.CRS
+- uid: Mapsui.Providers.IProvider
+  name: IProvider
+  href: api/Mapsui.Providers.IProvider.html
+  commentId: T:Mapsui.Providers.IProvider
+  fullName: Mapsui.Providers.IProvider
+  nameWithType: IProvider
+- uid: Mapsui.Providers.IProvider.CRS
   name: CRS
-  href: api/Mapsui.Providers.IProviderBase.html#Mapsui_Providers_IProviderBase_CRS
-  commentId: P:Mapsui.Providers.IProviderBase.CRS
-  fullName: Mapsui.Providers.IProviderBase.CRS
-  nameWithType: IProviderBase.CRS
-- uid: Mapsui.Providers.IProviderBase.CRS*
+  href: api/Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_CRS
+  commentId: P:Mapsui.Providers.IProvider.CRS
+  fullName: Mapsui.Providers.IProvider.CRS
+  nameWithType: IProvider.CRS
+- uid: Mapsui.Providers.IProvider.CRS*
   name: CRS
-  href: api/Mapsui.Providers.IProviderBase.html#Mapsui_Providers_IProviderBase_CRS_
-  commentId: Overload:Mapsui.Providers.IProviderBase.CRS
+  href: api/Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_CRS_
+  commentId: Overload:Mapsui.Providers.IProvider.CRS
   isSpec: "True"
-  fullName: Mapsui.Providers.IProviderBase.CRS
-  nameWithType: IProviderBase.CRS
-- uid: Mapsui.Providers.IProviderBase.GetExtent
+  fullName: Mapsui.Providers.IProvider.CRS
+  nameWithType: IProvider.CRS
+- uid: Mapsui.Providers.IProvider.GetExtent
   name: GetExtent()
-  href: api/Mapsui.Providers.IProviderBase.html#Mapsui_Providers_IProviderBase_GetExtent
-  commentId: M:Mapsui.Providers.IProviderBase.GetExtent
-  fullName: Mapsui.Providers.IProviderBase.GetExtent()
-  nameWithType: IProviderBase.GetExtent()
-- uid: Mapsui.Providers.IProviderBase.GetExtent*
+  href: api/Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetExtent
+  commentId: M:Mapsui.Providers.IProvider.GetExtent
+  fullName: Mapsui.Providers.IProvider.GetExtent()
+  nameWithType: IProvider.GetExtent()
+- uid: Mapsui.Providers.IProvider.GetExtent*
   name: GetExtent
-  href: api/Mapsui.Providers.IProviderBase.html#Mapsui_Providers_IProviderBase_GetExtent_
-  commentId: Overload:Mapsui.Providers.IProviderBase.GetExtent
+  href: api/Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetExtent_
+  commentId: Overload:Mapsui.Providers.IProvider.GetExtent
   isSpec: "True"
-  fullName: Mapsui.Providers.IProviderBase.GetExtent
-  nameWithType: IProviderBase.GetExtent
-- uid: Mapsui.Providers.MemoryProvider`1
-  name: MemoryProvider<T>
-  href: api/Mapsui.Providers.MemoryProvider-1.html
-  commentId: T:Mapsui.Providers.MemoryProvider`1
-  name.vb: MemoryProvider(Of T)
-  fullName: Mapsui.Providers.MemoryProvider<T>
-  fullName.vb: Mapsui.Providers.MemoryProvider(Of T)
-  nameWithType: MemoryProvider<T>
-  nameWithType.vb: MemoryProvider(Of T)
-- uid: Mapsui.Providers.MemoryProvider`1.#ctor
-  name: MemoryProvider()
-  href: api/Mapsui.Providers.MemoryProvider-1.html#Mapsui_Providers_MemoryProvider_1__ctor
-  commentId: M:Mapsui.Providers.MemoryProvider`1.#ctor
-  fullName: Mapsui.Providers.MemoryProvider<T>.MemoryProvider()
-  fullName.vb: Mapsui.Providers.MemoryProvider(Of T).MemoryProvider()
-  nameWithType: MemoryProvider<T>.MemoryProvider()
-  nameWithType.vb: MemoryProvider(Of T).MemoryProvider()
-- uid: Mapsui.Providers.MemoryProvider`1.#ctor(`0)
-  name: MemoryProvider(T)
-  href: api/Mapsui.Providers.MemoryProvider-1.html#Mapsui_Providers_MemoryProvider_1__ctor__0_
-  commentId: M:Mapsui.Providers.MemoryProvider`1.#ctor(`0)
-  fullName: Mapsui.Providers.MemoryProvider<T>.MemoryProvider(T)
-  fullName.vb: Mapsui.Providers.MemoryProvider(Of T).MemoryProvider(T)
-  nameWithType: MemoryProvider<T>.MemoryProvider(T)
-  nameWithType.vb: MemoryProvider(Of T).MemoryProvider(T)
-- uid: Mapsui.Providers.MemoryProvider`1.#ctor(IEnumerable{`0})
-  name: MemoryProvider(IEnumerable<T>)
-  href: api/Mapsui.Providers.MemoryProvider-1.html#Mapsui_Providers_MemoryProvider_1__ctor_IEnumerable__0__
-  commentId: M:Mapsui.Providers.MemoryProvider`1.#ctor(IEnumerable{`0})
-  name.vb: MemoryProvider(IEnumerable(Of T))
-  fullName: Mapsui.Providers.MemoryProvider<T>.MemoryProvider(IEnumerable<T>)
-  fullName.vb: Mapsui.Providers.MemoryProvider(Of T).MemoryProvider(IEnumerable(Of T))
-  nameWithType: MemoryProvider<T>.MemoryProvider(IEnumerable<T>)
-  nameWithType.vb: MemoryProvider(Of T).MemoryProvider(IEnumerable(Of T))
-- uid: Mapsui.Providers.MemoryProvider`1.#ctor*
+  fullName: Mapsui.Providers.IProvider.GetExtent
+  nameWithType: IProvider.GetExtent
+- uid: Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  name: GetFeaturesAsync(FetchInfo)
+  href: api/Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetFeaturesAsync_Mapsui_Layers_FetchInfo_
+  commentId: M:Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  fullName: Mapsui.Providers.IProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  nameWithType: IProvider.GetFeaturesAsync(FetchInfo)
+- uid: Mapsui.Providers.IProvider.GetFeaturesAsync*
+  name: GetFeaturesAsync
+  href: api/Mapsui.Providers.IProvider.html#Mapsui_Providers_IProvider_GetFeaturesAsync_
+  commentId: Overload:Mapsui.Providers.IProvider.GetFeaturesAsync
+  isSpec: "True"
+  fullName: Mapsui.Providers.IProvider.GetFeaturesAsync
+  nameWithType: IProvider.GetFeaturesAsync
+- uid: Mapsui.Providers.MemoryProvider
   name: MemoryProvider
-  href: api/Mapsui.Providers.MemoryProvider-1.html#Mapsui_Providers_MemoryProvider_1__ctor_
-  commentId: Overload:Mapsui.Providers.MemoryProvider`1.#ctor
+  href: api/Mapsui.Providers.MemoryProvider.html
+  commentId: T:Mapsui.Providers.MemoryProvider
+  fullName: Mapsui.Providers.MemoryProvider
+  nameWithType: MemoryProvider
+- uid: Mapsui.Providers.MemoryProvider.#ctor
+  name: MemoryProvider()
+  href: api/Mapsui.Providers.MemoryProvider.html#Mapsui_Providers_MemoryProvider__ctor
+  commentId: M:Mapsui.Providers.MemoryProvider.#ctor
+  fullName: Mapsui.Providers.MemoryProvider.MemoryProvider()
+  nameWithType: MemoryProvider.MemoryProvider()
+- uid: Mapsui.Providers.MemoryProvider.#ctor(IEnumerable{Mapsui.IFeature})
+  name: MemoryProvider(IEnumerable<IFeature>)
+  href: api/Mapsui.Providers.MemoryProvider.html#Mapsui_Providers_MemoryProvider__ctor_IEnumerable_Mapsui_IFeature__
+  commentId: M:Mapsui.Providers.MemoryProvider.#ctor(IEnumerable{Mapsui.IFeature})
+  name.vb: MemoryProvider(IEnumerable(Of IFeature))
+  fullName: Mapsui.Providers.MemoryProvider.MemoryProvider(IEnumerable<Mapsui.IFeature>)
+  fullName.vb: Mapsui.Providers.MemoryProvider.MemoryProvider(IEnumerable(Of Mapsui.IFeature))
+  nameWithType: MemoryProvider.MemoryProvider(IEnumerable<IFeature>)
+  nameWithType.vb: MemoryProvider.MemoryProvider(IEnumerable(Of IFeature))
+- uid: Mapsui.Providers.MemoryProvider.#ctor(Mapsui.IFeature)
+  name: MemoryProvider(IFeature)
+  href: api/Mapsui.Providers.MemoryProvider.html#Mapsui_Providers_MemoryProvider__ctor_Mapsui_IFeature_
+  commentId: M:Mapsui.Providers.MemoryProvider.#ctor(Mapsui.IFeature)
+  fullName: Mapsui.Providers.MemoryProvider.MemoryProvider(Mapsui.IFeature)
+  nameWithType: MemoryProvider.MemoryProvider(IFeature)
+- uid: Mapsui.Providers.MemoryProvider.#ctor*
+  name: MemoryProvider
+  href: api/Mapsui.Providers.MemoryProvider.html#Mapsui_Providers_MemoryProvider__ctor_
+  commentId: Overload:Mapsui.Providers.MemoryProvider.#ctor
   isSpec: "True"
-  fullName: Mapsui.Providers.MemoryProvider<T>.MemoryProvider
-  fullName.vb: Mapsui.Providers.MemoryProvider(Of T).MemoryProvider
-  nameWithType: MemoryProvider<T>.MemoryProvider
-  nameWithType.vb: MemoryProvider(Of T).MemoryProvider
-- uid: Mapsui.Providers.MemoryProvider`1.Clear
+  fullName: Mapsui.Providers.MemoryProvider.MemoryProvider
+  nameWithType: MemoryProvider.MemoryProvider
+- uid: Mapsui.Providers.MemoryProvider.Clear
   name: Clear()
-  href: api/Mapsui.Providers.MemoryProvider-1.html#Mapsui_Providers_MemoryProvider_1_Clear
-  commentId: M:Mapsui.Providers.MemoryProvider`1.Clear
-  fullName: Mapsui.Providers.MemoryProvider<T>.Clear()
-  fullName.vb: Mapsui.Providers.MemoryProvider(Of T).Clear()
-  nameWithType: MemoryProvider<T>.Clear()
-  nameWithType.vb: MemoryProvider(Of T).Clear()
-- uid: Mapsui.Providers.MemoryProvider`1.Clear*
+  href: api/Mapsui.Providers.MemoryProvider.html#Mapsui_Providers_MemoryProvider_Clear
+  commentId: M:Mapsui.Providers.MemoryProvider.Clear
+  fullName: Mapsui.Providers.MemoryProvider.Clear()
+  nameWithType: MemoryProvider.Clear()
+- uid: Mapsui.Providers.MemoryProvider.Clear*
   name: Clear
-  href: api/Mapsui.Providers.MemoryProvider-1.html#Mapsui_Providers_MemoryProvider_1_Clear_
-  commentId: Overload:Mapsui.Providers.MemoryProvider`1.Clear
+  href: api/Mapsui.Providers.MemoryProvider.html#Mapsui_Providers_MemoryProvider_Clear_
+  commentId: Overload:Mapsui.Providers.MemoryProvider.Clear
   isSpec: "True"
-  fullName: Mapsui.Providers.MemoryProvider<T>.Clear
-  fullName.vb: Mapsui.Providers.MemoryProvider(Of T).Clear
-  nameWithType: MemoryProvider<T>.Clear
-  nameWithType.vb: MemoryProvider(Of T).Clear
-- uid: Mapsui.Providers.MemoryProvider`1.CRS
+  fullName: Mapsui.Providers.MemoryProvider.Clear
+  nameWithType: MemoryProvider.Clear
+- uid: Mapsui.Providers.MemoryProvider.CRS
   name: CRS
-  href: api/Mapsui.Providers.MemoryProvider-1.html#Mapsui_Providers_MemoryProvider_1_CRS
-  commentId: P:Mapsui.Providers.MemoryProvider`1.CRS
-  fullName: Mapsui.Providers.MemoryProvider<T>.CRS
-  fullName.vb: Mapsui.Providers.MemoryProvider(Of T).CRS
-  nameWithType: MemoryProvider<T>.CRS
-  nameWithType.vb: MemoryProvider(Of T).CRS
-- uid: Mapsui.Providers.MemoryProvider`1.CRS*
+  href: api/Mapsui.Providers.MemoryProvider.html#Mapsui_Providers_MemoryProvider_CRS
+  commentId: P:Mapsui.Providers.MemoryProvider.CRS
+  fullName: Mapsui.Providers.MemoryProvider.CRS
+  nameWithType: MemoryProvider.CRS
+- uid: Mapsui.Providers.MemoryProvider.CRS*
   name: CRS
-  href: api/Mapsui.Providers.MemoryProvider-1.html#Mapsui_Providers_MemoryProvider_1_CRS_
-  commentId: Overload:Mapsui.Providers.MemoryProvider`1.CRS
+  href: api/Mapsui.Providers.MemoryProvider.html#Mapsui_Providers_MemoryProvider_CRS_
+  commentId: Overload:Mapsui.Providers.MemoryProvider.CRS
   isSpec: "True"
-  fullName: Mapsui.Providers.MemoryProvider<T>.CRS
-  fullName.vb: Mapsui.Providers.MemoryProvider(Of T).CRS
-  nameWithType: MemoryProvider<T>.CRS
-  nameWithType.vb: MemoryProvider(Of T).CRS
-- uid: Mapsui.Providers.MemoryProvider`1.Features
+  fullName: Mapsui.Providers.MemoryProvider.CRS
+  nameWithType: MemoryProvider.CRS
+- uid: Mapsui.Providers.MemoryProvider.Features
   name: Features
-  href: api/Mapsui.Providers.MemoryProvider-1.html#Mapsui_Providers_MemoryProvider_1_Features
-  commentId: P:Mapsui.Providers.MemoryProvider`1.Features
-  fullName: Mapsui.Providers.MemoryProvider<T>.Features
-  fullName.vb: Mapsui.Providers.MemoryProvider(Of T).Features
-  nameWithType: MemoryProvider<T>.Features
-  nameWithType.vb: MemoryProvider(Of T).Features
-- uid: Mapsui.Providers.MemoryProvider`1.Features*
+  href: api/Mapsui.Providers.MemoryProvider.html#Mapsui_Providers_MemoryProvider_Features
+  commentId: P:Mapsui.Providers.MemoryProvider.Features
+  fullName: Mapsui.Providers.MemoryProvider.Features
+  nameWithType: MemoryProvider.Features
+- uid: Mapsui.Providers.MemoryProvider.Features*
   name: Features
-  href: api/Mapsui.Providers.MemoryProvider-1.html#Mapsui_Providers_MemoryProvider_1_Features_
-  commentId: Overload:Mapsui.Providers.MemoryProvider`1.Features
+  href: api/Mapsui.Providers.MemoryProvider.html#Mapsui_Providers_MemoryProvider_Features_
+  commentId: Overload:Mapsui.Providers.MemoryProvider.Features
   isSpec: "True"
-  fullName: Mapsui.Providers.MemoryProvider<T>.Features
-  fullName.vb: Mapsui.Providers.MemoryProvider(Of T).Features
-  nameWithType: MemoryProvider<T>.Features
-  nameWithType.vb: MemoryProvider(Of T).Features
-- uid: Mapsui.Providers.MemoryProvider`1.Find(System.Nullable{System.Object},System.String)
+  fullName: Mapsui.Providers.MemoryProvider.Features
+  nameWithType: MemoryProvider.Features
+- uid: Mapsui.Providers.MemoryProvider.Find(System.Nullable{System.Object},System.String)
   name: Find(Nullable<Object>, String)
-  href: api/Mapsui.Providers.MemoryProvider-1.html#Mapsui_Providers_MemoryProvider_1_Find_System_Nullable_System_Object__System_String_
-  commentId: M:Mapsui.Providers.MemoryProvider`1.Find(System.Nullable{System.Object},System.String)
+  href: api/Mapsui.Providers.MemoryProvider.html#Mapsui_Providers_MemoryProvider_Find_System_Nullable_System_Object__System_String_
+  commentId: M:Mapsui.Providers.MemoryProvider.Find(System.Nullable{System.Object},System.String)
   name.vb: Find(Nullable(Of Object), String)
-  fullName: Mapsui.Providers.MemoryProvider<T>.Find(System.Nullable<System.Object>, System.String)
-  fullName.vb: Mapsui.Providers.MemoryProvider(Of T).Find(System.Nullable(Of System.Object), System.String)
-  nameWithType: MemoryProvider<T>.Find(Nullable<Object>, String)
-  nameWithType.vb: MemoryProvider(Of T).Find(Nullable(Of Object), String)
-- uid: Mapsui.Providers.MemoryProvider`1.Find*
+  fullName: Mapsui.Providers.MemoryProvider.Find(System.Nullable<System.Object>, System.String)
+  fullName.vb: Mapsui.Providers.MemoryProvider.Find(System.Nullable(Of System.Object), System.String)
+  nameWithType: MemoryProvider.Find(Nullable<Object>, String)
+  nameWithType.vb: MemoryProvider.Find(Nullable(Of Object), String)
+- uid: Mapsui.Providers.MemoryProvider.Find*
   name: Find
-  href: api/Mapsui.Providers.MemoryProvider-1.html#Mapsui_Providers_MemoryProvider_1_Find_
-  commentId: Overload:Mapsui.Providers.MemoryProvider`1.Find
+  href: api/Mapsui.Providers.MemoryProvider.html#Mapsui_Providers_MemoryProvider_Find_
+  commentId: Overload:Mapsui.Providers.MemoryProvider.Find
   isSpec: "True"
-  fullName: Mapsui.Providers.MemoryProvider<T>.Find
-  fullName.vb: Mapsui.Providers.MemoryProvider(Of T).Find
-  nameWithType: MemoryProvider<T>.Find
-  nameWithType.vb: MemoryProvider(Of T).Find
-- uid: Mapsui.Providers.MemoryProvider`1.GetExtent
+  fullName: Mapsui.Providers.MemoryProvider.Find
+  nameWithType: MemoryProvider.Find
+- uid: Mapsui.Providers.MemoryProvider.GetExtent
   name: GetExtent()
-  href: api/Mapsui.Providers.MemoryProvider-1.html#Mapsui_Providers_MemoryProvider_1_GetExtent
-  commentId: M:Mapsui.Providers.MemoryProvider`1.GetExtent
-  fullName: Mapsui.Providers.MemoryProvider<T>.GetExtent()
-  fullName.vb: Mapsui.Providers.MemoryProvider(Of T).GetExtent()
-  nameWithType: MemoryProvider<T>.GetExtent()
-  nameWithType.vb: MemoryProvider(Of T).GetExtent()
-- uid: Mapsui.Providers.MemoryProvider`1.GetExtent*
+  href: api/Mapsui.Providers.MemoryProvider.html#Mapsui_Providers_MemoryProvider_GetExtent
+  commentId: M:Mapsui.Providers.MemoryProvider.GetExtent
+  fullName: Mapsui.Providers.MemoryProvider.GetExtent()
+  nameWithType: MemoryProvider.GetExtent()
+- uid: Mapsui.Providers.MemoryProvider.GetExtent*
   name: GetExtent
-  href: api/Mapsui.Providers.MemoryProvider-1.html#Mapsui_Providers_MemoryProvider_1_GetExtent_
-  commentId: Overload:Mapsui.Providers.MemoryProvider`1.GetExtent
+  href: api/Mapsui.Providers.MemoryProvider.html#Mapsui_Providers_MemoryProvider_GetExtent_
+  commentId: Overload:Mapsui.Providers.MemoryProvider.GetExtent
   isSpec: "True"
-  fullName: Mapsui.Providers.MemoryProvider<T>.GetExtent
-  fullName.vb: Mapsui.Providers.MemoryProvider(Of T).GetExtent
-  nameWithType: MemoryProvider<T>.GetExtent
-  nameWithType.vb: MemoryProvider(Of T).GetExtent
-- uid: Mapsui.Providers.MemoryProvider`1.GetFeatures(Mapsui.Layers.FetchInfo)
-  name: GetFeatures(FetchInfo)
-  href: api/Mapsui.Providers.MemoryProvider-1.html#Mapsui_Providers_MemoryProvider_1_GetFeatures_Mapsui_Layers_FetchInfo_
-  commentId: M:Mapsui.Providers.MemoryProvider`1.GetFeatures(Mapsui.Layers.FetchInfo)
-  fullName: Mapsui.Providers.MemoryProvider<T>.GetFeatures(Mapsui.Layers.FetchInfo)
-  fullName.vb: Mapsui.Providers.MemoryProvider(Of T).GetFeatures(Mapsui.Layers.FetchInfo)
-  nameWithType: MemoryProvider<T>.GetFeatures(FetchInfo)
-  nameWithType.vb: MemoryProvider(Of T).GetFeatures(FetchInfo)
-- uid: Mapsui.Providers.MemoryProvider`1.GetFeatures*
-  name: GetFeatures
-  href: api/Mapsui.Providers.MemoryProvider-1.html#Mapsui_Providers_MemoryProvider_1_GetFeatures_
-  commentId: Overload:Mapsui.Providers.MemoryProvider`1.GetFeatures
+  fullName: Mapsui.Providers.MemoryProvider.GetExtent
+  nameWithType: MemoryProvider.GetExtent
+- uid: Mapsui.Providers.MemoryProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  name: GetFeaturesAsync(FetchInfo)
+  href: api/Mapsui.Providers.MemoryProvider.html#Mapsui_Providers_MemoryProvider_GetFeaturesAsync_Mapsui_Layers_FetchInfo_
+  commentId: M:Mapsui.Providers.MemoryProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  fullName: Mapsui.Providers.MemoryProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  nameWithType: MemoryProvider.GetFeaturesAsync(FetchInfo)
+- uid: Mapsui.Providers.MemoryProvider.GetFeaturesAsync*
+  name: GetFeaturesAsync
+  href: api/Mapsui.Providers.MemoryProvider.html#Mapsui_Providers_MemoryProvider_GetFeaturesAsync_
+  commentId: Overload:Mapsui.Providers.MemoryProvider.GetFeaturesAsync
   isSpec: "True"
-  fullName: Mapsui.Providers.MemoryProvider<T>.GetFeatures
-  fullName.vb: Mapsui.Providers.MemoryProvider(Of T).GetFeatures
-  nameWithType: MemoryProvider<T>.GetFeatures
-  nameWithType.vb: MemoryProvider(Of T).GetFeatures
-- uid: Mapsui.Providers.MemoryProvider`1.SymbolSize
+  fullName: Mapsui.Providers.MemoryProvider.GetFeaturesAsync
+  nameWithType: MemoryProvider.GetFeaturesAsync
+- uid: Mapsui.Providers.MemoryProvider.SymbolSize
   name: SymbolSize
-  href: api/Mapsui.Providers.MemoryProvider-1.html#Mapsui_Providers_MemoryProvider_1_SymbolSize
-  commentId: P:Mapsui.Providers.MemoryProvider`1.SymbolSize
-  fullName: Mapsui.Providers.MemoryProvider<T>.SymbolSize
-  fullName.vb: Mapsui.Providers.MemoryProvider(Of T).SymbolSize
-  nameWithType: MemoryProvider<T>.SymbolSize
-  nameWithType.vb: MemoryProvider(Of T).SymbolSize
-- uid: Mapsui.Providers.MemoryProvider`1.SymbolSize*
+  href: api/Mapsui.Providers.MemoryProvider.html#Mapsui_Providers_MemoryProvider_SymbolSize
+  commentId: P:Mapsui.Providers.MemoryProvider.SymbolSize
+  fullName: Mapsui.Providers.MemoryProvider.SymbolSize
+  nameWithType: MemoryProvider.SymbolSize
+- uid: Mapsui.Providers.MemoryProvider.SymbolSize*
   name: SymbolSize
-  href: api/Mapsui.Providers.MemoryProvider-1.html#Mapsui_Providers_MemoryProvider_1_SymbolSize_
-  commentId: Overload:Mapsui.Providers.MemoryProvider`1.SymbolSize
+  href: api/Mapsui.Providers.MemoryProvider.html#Mapsui_Providers_MemoryProvider_SymbolSize_
+  commentId: Overload:Mapsui.Providers.MemoryProvider.SymbolSize
   isSpec: "True"
-  fullName: Mapsui.Providers.MemoryProvider<T>.SymbolSize
-  fullName.vb: Mapsui.Providers.MemoryProvider(Of T).SymbolSize
-  nameWithType: MemoryProvider<T>.SymbolSize
-  nameWithType.vb: MemoryProvider(Of T).SymbolSize
+  fullName: Mapsui.Providers.MemoryProvider.SymbolSize
+  nameWithType: MemoryProvider.SymbolSize
 - uid: Mapsui.Providers.ProjectingProvider
   name: ProjectingProvider
   href: api/Mapsui.Providers.ProjectingProvider.html
   commentId: T:Mapsui.Providers.ProjectingProvider
   fullName: Mapsui.Providers.ProjectingProvider
   nameWithType: ProjectingProvider
-- uid: Mapsui.Providers.ProjectingProvider.#ctor(Mapsui.Providers.IProviderBase,Mapsui.Projections.IProjection)
-  name: ProjectingProvider(IProviderBase, IProjection)
-  href: api/Mapsui.Providers.ProjectingProvider.html#Mapsui_Providers_ProjectingProvider__ctor_Mapsui_Providers_IProviderBase_Mapsui_Projections_IProjection_
-  commentId: M:Mapsui.Providers.ProjectingProvider.#ctor(Mapsui.Providers.IProviderBase,Mapsui.Projections.IProjection)
-  fullName: Mapsui.Providers.ProjectingProvider.ProjectingProvider(Mapsui.Providers.IProviderBase, Mapsui.Projections.IProjection)
-  nameWithType: ProjectingProvider.ProjectingProvider(IProviderBase, IProjection)
+- uid: Mapsui.Providers.ProjectingProvider.#ctor(Mapsui.Providers.IProvider,Mapsui.Projections.IProjection)
+  name: ProjectingProvider(IProvider, IProjection)
+  href: api/Mapsui.Providers.ProjectingProvider.html#Mapsui_Providers_ProjectingProvider__ctor_Mapsui_Providers_IProvider_Mapsui_Projections_IProjection_
+  commentId: M:Mapsui.Providers.ProjectingProvider.#ctor(Mapsui.Providers.IProvider,Mapsui.Projections.IProjection)
+  fullName: Mapsui.Providers.ProjectingProvider.ProjectingProvider(Mapsui.Providers.IProvider, Mapsui.Projections.IProjection)
+  nameWithType: ProjectingProvider.ProjectingProvider(IProvider, IProjection)
 - uid: Mapsui.Providers.ProjectingProvider.#ctor*
   name: ProjectingProvider
   href: api/Mapsui.Providers.ProjectingProvider.html#Mapsui_Providers_ProjectingProvider__ctor_
@@ -6625,19 +6519,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Providers.ProjectingProvider.GetExtent
   nameWithType: ProjectingProvider.GetExtent
-- uid: Mapsui.Providers.ProjectingProvider.GetFeatures(Mapsui.Layers.FetchInfo)
-  name: GetFeatures(FetchInfo)
-  href: api/Mapsui.Providers.ProjectingProvider.html#Mapsui_Providers_ProjectingProvider_GetFeatures_Mapsui_Layers_FetchInfo_
-  commentId: M:Mapsui.Providers.ProjectingProvider.GetFeatures(Mapsui.Layers.FetchInfo)
-  fullName: Mapsui.Providers.ProjectingProvider.GetFeatures(Mapsui.Layers.FetchInfo)
-  nameWithType: ProjectingProvider.GetFeatures(FetchInfo)
-- uid: Mapsui.Providers.ProjectingProvider.GetFeatures*
-  name: GetFeatures
-  href: api/Mapsui.Providers.ProjectingProvider.html#Mapsui_Providers_ProjectingProvider_GetFeatures_
-  commentId: Overload:Mapsui.Providers.ProjectingProvider.GetFeatures
-  isSpec: "True"
-  fullName: Mapsui.Providers.ProjectingProvider.GetFeatures
-  nameWithType: ProjectingProvider.GetFeatures
 - uid: Mapsui.Providers.ProjectingProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
   name: GetFeaturesAsync(FetchInfo)
   href: api/Mapsui.Providers.ProjectingProvider.html#Mapsui_Providers_ProjectingProvider_GetFeaturesAsync_Mapsui_Layers_FetchInfo_
@@ -6657,15 +6538,12 @@ references:
   commentId: T:Mapsui.Providers.StackedLabelProvider
   fullName: Mapsui.Providers.StackedLabelProvider
   nameWithType: StackedLabelProvider
-- uid: Mapsui.Providers.StackedLabelProvider.#ctor(Mapsui.Providers.IProvider{Mapsui.IFeature},Mapsui.Styles.LabelStyle,Mapsui.Styles.Pen,Mapsui.Styles.Brush)
-  name: StackedLabelProvider(IProvider<IFeature>, LabelStyle, Pen, Brush)
-  href: api/Mapsui.Providers.StackedLabelProvider.html#Mapsui_Providers_StackedLabelProvider__ctor_Mapsui_Providers_IProvider_Mapsui_IFeature__Mapsui_Styles_LabelStyle_Mapsui_Styles_Pen_Mapsui_Styles_Brush_
-  commentId: M:Mapsui.Providers.StackedLabelProvider.#ctor(Mapsui.Providers.IProvider{Mapsui.IFeature},Mapsui.Styles.LabelStyle,Mapsui.Styles.Pen,Mapsui.Styles.Brush)
-  name.vb: StackedLabelProvider(IProvider(Of IFeature), LabelStyle, Pen, Brush)
-  fullName: Mapsui.Providers.StackedLabelProvider.StackedLabelProvider(Mapsui.Providers.IProvider<Mapsui.IFeature>, Mapsui.Styles.LabelStyle, Mapsui.Styles.Pen, Mapsui.Styles.Brush)
-  fullName.vb: Mapsui.Providers.StackedLabelProvider.StackedLabelProvider(Mapsui.Providers.IProvider(Of Mapsui.IFeature), Mapsui.Styles.LabelStyle, Mapsui.Styles.Pen, Mapsui.Styles.Brush)
-  nameWithType: StackedLabelProvider.StackedLabelProvider(IProvider<IFeature>, LabelStyle, Pen, Brush)
-  nameWithType.vb: StackedLabelProvider.StackedLabelProvider(IProvider(Of IFeature), LabelStyle, Pen, Brush)
+- uid: Mapsui.Providers.StackedLabelProvider.#ctor(Mapsui.Providers.IProvider,Mapsui.Styles.LabelStyle,Mapsui.Styles.Pen,Mapsui.Styles.Brush)
+  name: StackedLabelProvider(IProvider, LabelStyle, Pen, Brush)
+  href: api/Mapsui.Providers.StackedLabelProvider.html#Mapsui_Providers_StackedLabelProvider__ctor_Mapsui_Providers_IProvider_Mapsui_Styles_LabelStyle_Mapsui_Styles_Pen_Mapsui_Styles_Brush_
+  commentId: M:Mapsui.Providers.StackedLabelProvider.#ctor(Mapsui.Providers.IProvider,Mapsui.Styles.LabelStyle,Mapsui.Styles.Pen,Mapsui.Styles.Brush)
+  fullName: Mapsui.Providers.StackedLabelProvider.StackedLabelProvider(Mapsui.Providers.IProvider, Mapsui.Styles.LabelStyle, Mapsui.Styles.Pen, Mapsui.Styles.Brush)
+  nameWithType: StackedLabelProvider.StackedLabelProvider(IProvider, LabelStyle, Pen, Brush)
 - uid: Mapsui.Providers.StackedLabelProvider.#ctor*
   name: StackedLabelProvider
   href: api/Mapsui.Providers.StackedLabelProvider.html#Mapsui_Providers_StackedLabelProvider__ctor_
@@ -6699,19 +6577,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Providers.StackedLabelProvider.GetExtent
   nameWithType: StackedLabelProvider.GetExtent
-- uid: Mapsui.Providers.StackedLabelProvider.GetFeatures(Mapsui.Layers.FetchInfo)
-  name: GetFeatures(FetchInfo)
-  href: api/Mapsui.Providers.StackedLabelProvider.html#Mapsui_Providers_StackedLabelProvider_GetFeatures_Mapsui_Layers_FetchInfo_
-  commentId: M:Mapsui.Providers.StackedLabelProvider.GetFeatures(Mapsui.Layers.FetchInfo)
-  fullName: Mapsui.Providers.StackedLabelProvider.GetFeatures(Mapsui.Layers.FetchInfo)
-  nameWithType: StackedLabelProvider.GetFeatures(FetchInfo)
-- uid: Mapsui.Providers.StackedLabelProvider.GetFeatures*
-  name: GetFeatures
-  href: api/Mapsui.Providers.StackedLabelProvider.html#Mapsui_Providers_StackedLabelProvider_GetFeatures_
-  commentId: Overload:Mapsui.Providers.StackedLabelProvider.GetFeatures
+- uid: Mapsui.Providers.StackedLabelProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  name: GetFeaturesAsync(FetchInfo)
+  href: api/Mapsui.Providers.StackedLabelProvider.html#Mapsui_Providers_StackedLabelProvider_GetFeaturesAsync_Mapsui_Layers_FetchInfo_
+  commentId: M:Mapsui.Providers.StackedLabelProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  fullName: Mapsui.Providers.StackedLabelProvider.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  nameWithType: StackedLabelProvider.GetFeaturesAsync(FetchInfo)
+- uid: Mapsui.Providers.StackedLabelProvider.GetFeaturesAsync*
+  name: GetFeaturesAsync
+  href: api/Mapsui.Providers.StackedLabelProvider.html#Mapsui_Providers_StackedLabelProvider_GetFeaturesAsync_
+  commentId: Overload:Mapsui.Providers.StackedLabelProvider.GetFeaturesAsync
   isSpec: "True"
-  fullName: Mapsui.Providers.StackedLabelProvider.GetFeatures
-  nameWithType: StackedLabelProvider.GetFeatures
+  fullName: Mapsui.Providers.StackedLabelProvider.GetFeaturesAsync
+  nameWithType: StackedLabelProvider.GetFeaturesAsync
 - uid: Mapsui.Providers.Wms
   name: Mapsui.Providers.Wms
   href: api/Mapsui.Providers.Wms.html
@@ -10739,12 +10617,15 @@ references:
   commentId: M:Mapsui.Styles.Offset.Equals(Mapsui.Styles.Offset)
   fullName: Mapsui.Styles.Offset.Equals(Mapsui.Styles.Offset)
   nameWithType: Offset.Equals(Offset)
-- uid: Mapsui.Styles.Offset.Equals(System.Object)
-  name: Equals(Object)
-  href: api/Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_Equals_System_Object_
-  commentId: M:Mapsui.Styles.Offset.Equals(System.Object)
-  fullName: Mapsui.Styles.Offset.Equals(System.Object)
-  nameWithType: Offset.Equals(Object)
+- uid: Mapsui.Styles.Offset.Equals(System.Nullable{System.Object})
+  name: Equals(Nullable<Object>)
+  href: api/Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_Equals_System_Nullable_System_Object__
+  commentId: M:Mapsui.Styles.Offset.Equals(System.Nullable{System.Object})
+  name.vb: Equals(Nullable(Of Object))
+  fullName: Mapsui.Styles.Offset.Equals(System.Nullable<System.Object>)
+  fullName.vb: Mapsui.Styles.Offset.Equals(System.Nullable(Of System.Object))
+  nameWithType: Offset.Equals(Nullable<Object>)
+  nameWithType.vb: Offset.Equals(Nullable(Of Object))
 - uid: Mapsui.Styles.Offset.Equals*
   name: Equals
   href: api/Mapsui.Styles.Offset.html#Mapsui_Styles_Offset_Equals_
@@ -11454,12 +11335,15 @@ references:
   commentId: M:Mapsui.Styles.Style.Equals(Mapsui.Styles.Style)
   fullName: Mapsui.Styles.Style.Equals(Mapsui.Styles.Style)
   nameWithType: Style.Equals(Style)
-- uid: Mapsui.Styles.Style.Equals(System.Object)
-  name: Equals(Object)
-  href: api/Mapsui.Styles.Style.html#Mapsui_Styles_Style_Equals_System_Object_
-  commentId: M:Mapsui.Styles.Style.Equals(System.Object)
-  fullName: Mapsui.Styles.Style.Equals(System.Object)
-  nameWithType: Style.Equals(Object)
+- uid: Mapsui.Styles.Style.Equals(System.Nullable{System.Object})
+  name: Equals(Nullable<Object>)
+  href: api/Mapsui.Styles.Style.html#Mapsui_Styles_Style_Equals_System_Nullable_System_Object__
+  commentId: M:Mapsui.Styles.Style.Equals(System.Nullable{System.Object})
+  name.vb: Equals(Nullable(Of Object))
+  fullName: Mapsui.Styles.Style.Equals(System.Nullable<System.Object>)
+  fullName.vb: Mapsui.Styles.Style.Equals(System.Nullable(Of System.Object))
+  nameWithType: Style.Equals(Nullable<Object>)
+  nameWithType.vb: Style.Equals(Nullable(Of Object))
 - uid: Mapsui.Styles.Style.Equals*
   name: Equals
   href: api/Mapsui.Styles.Style.html#Mapsui_Styles_Style_Equals_
@@ -14023,19 +13907,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Forms.MapControl.CallHomeIfNeeded
   nameWithType: MapControl.CallHomeIfNeeded
-- uid: Mapsui.UI.Forms.MapControl.Clear
-  name: Clear()
-  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_Clear
-  commentId: M:Mapsui.UI.Forms.MapControl.Clear
-  fullName: Mapsui.UI.Forms.MapControl.Clear()
-  nameWithType: MapControl.Clear()
-- uid: Mapsui.UI.Forms.MapControl.Clear*
-  name: Clear
-  href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_Clear_
-  commentId: Overload:Mapsui.UI.Forms.MapControl.Clear
-  isSpec: "True"
-  fullName: Mapsui.UI.Forms.MapControl.Clear
-  nameWithType: MapControl.Clear
 - uid: Mapsui.UI.Forms.MapControl.Dispose
   name: Dispose()
   href: api/Mapsui.UI.Forms.MapControl.html#Mapsui_UI_Forms_MapControl_Dispose
@@ -17251,101 +17122,101 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Objects.MyLocationLayer.ViewingDirection
   nameWithType: MyLocationLayer.ViewingDirection
-- uid: Mapsui.UI.Objects.ObservableCollectionProvider`2
-  name: ObservableCollectionProvider<T, TU>
-  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html
-  commentId: T:Mapsui.UI.Objects.ObservableCollectionProvider`2
-  name.vb: ObservableCollectionProvider(Of T, TU)
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, TU>
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, TU)
-  nameWithType: ObservableCollectionProvider<T, TU>
-  nameWithType.vb: ObservableCollectionProvider(Of T, TU)
-- uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.#ctor(ObservableCollection{`0})
+- uid: Mapsui.UI.Objects.ObservableCollectionProvider`1
+  name: ObservableCollectionProvider<T>
+  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-1.html
+  commentId: T:Mapsui.UI.Objects.ObservableCollectionProvider`1
+  name.vb: ObservableCollectionProvider(Of T)
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T>
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T)
+  nameWithType: ObservableCollectionProvider<T>
+  nameWithType.vb: ObservableCollectionProvider(Of T)
+- uid: Mapsui.UI.Objects.ObservableCollectionProvider`1.#ctor(ObservableCollection{`0})
   name: ObservableCollectionProvider(ObservableCollection<T>)
-  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2__ctor_ObservableCollection__0__
-  commentId: M:Mapsui.UI.Objects.ObservableCollectionProvider`2.#ctor(ObservableCollection{`0})
+  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-1.html#Mapsui_UI_Objects_ObservableCollectionProvider_1__ctor_ObservableCollection__0__
+  commentId: M:Mapsui.UI.Objects.ObservableCollectionProvider`1.#ctor(ObservableCollection{`0})
   name.vb: ObservableCollectionProvider(ObservableCollection(Of T))
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, TU>.ObservableCollectionProvider(ObservableCollection<T>)
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, TU).ObservableCollectionProvider(ObservableCollection(Of T))
-  nameWithType: ObservableCollectionProvider<T, TU>.ObservableCollectionProvider(ObservableCollection<T>)
-  nameWithType.vb: ObservableCollectionProvider(Of T, TU).ObservableCollectionProvider(ObservableCollection(Of T))
-- uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.#ctor*
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T>.ObservableCollectionProvider(ObservableCollection<T>)
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T).ObservableCollectionProvider(ObservableCollection(Of T))
+  nameWithType: ObservableCollectionProvider<T>.ObservableCollectionProvider(ObservableCollection<T>)
+  nameWithType.vb: ObservableCollectionProvider(Of T).ObservableCollectionProvider(ObservableCollection(Of T))
+- uid: Mapsui.UI.Objects.ObservableCollectionProvider`1.#ctor*
   name: ObservableCollectionProvider
-  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2__ctor_
-  commentId: Overload:Mapsui.UI.Objects.ObservableCollectionProvider`2.#ctor
+  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-1.html#Mapsui_UI_Objects_ObservableCollectionProvider_1__ctor_
+  commentId: Overload:Mapsui.UI.Objects.ObservableCollectionProvider`1.#ctor
   isSpec: "True"
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, TU>.ObservableCollectionProvider
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, TU).ObservableCollectionProvider
-  nameWithType: ObservableCollectionProvider<T, TU>.ObservableCollectionProvider
-  nameWithType.vb: ObservableCollectionProvider(Of T, TU).ObservableCollectionProvider
-- uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.Collection
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T>.ObservableCollectionProvider
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T).ObservableCollectionProvider
+  nameWithType: ObservableCollectionProvider<T>.ObservableCollectionProvider
+  nameWithType.vb: ObservableCollectionProvider(Of T).ObservableCollectionProvider
+- uid: Mapsui.UI.Objects.ObservableCollectionProvider`1.Collection
   name: Collection
-  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2_Collection
-  commentId: P:Mapsui.UI.Objects.ObservableCollectionProvider`2.Collection
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, TU>.Collection
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, TU).Collection
-  nameWithType: ObservableCollectionProvider<T, TU>.Collection
-  nameWithType.vb: ObservableCollectionProvider(Of T, TU).Collection
-- uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.Collection*
+  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-1.html#Mapsui_UI_Objects_ObservableCollectionProvider_1_Collection
+  commentId: P:Mapsui.UI.Objects.ObservableCollectionProvider`1.Collection
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T>.Collection
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T).Collection
+  nameWithType: ObservableCollectionProvider<T>.Collection
+  nameWithType.vb: ObservableCollectionProvider(Of T).Collection
+- uid: Mapsui.UI.Objects.ObservableCollectionProvider`1.Collection*
   name: Collection
-  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2_Collection_
-  commentId: Overload:Mapsui.UI.Objects.ObservableCollectionProvider`2.Collection
+  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-1.html#Mapsui_UI_Objects_ObservableCollectionProvider_1_Collection_
+  commentId: Overload:Mapsui.UI.Objects.ObservableCollectionProvider`1.Collection
   isSpec: "True"
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, TU>.Collection
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, TU).Collection
-  nameWithType: ObservableCollectionProvider<T, TU>.Collection
-  nameWithType.vb: ObservableCollectionProvider(Of T, TU).Collection
-- uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.CRS
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T>.Collection
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T).Collection
+  nameWithType: ObservableCollectionProvider<T>.Collection
+  nameWithType.vb: ObservableCollectionProvider(Of T).Collection
+- uid: Mapsui.UI.Objects.ObservableCollectionProvider`1.CRS
   name: CRS
-  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2_CRS
-  commentId: P:Mapsui.UI.Objects.ObservableCollectionProvider`2.CRS
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, TU>.CRS
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, TU).CRS
-  nameWithType: ObservableCollectionProvider<T, TU>.CRS
-  nameWithType.vb: ObservableCollectionProvider(Of T, TU).CRS
-- uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.CRS*
+  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-1.html#Mapsui_UI_Objects_ObservableCollectionProvider_1_CRS
+  commentId: P:Mapsui.UI.Objects.ObservableCollectionProvider`1.CRS
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T>.CRS
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T).CRS
+  nameWithType: ObservableCollectionProvider<T>.CRS
+  nameWithType.vb: ObservableCollectionProvider(Of T).CRS
+- uid: Mapsui.UI.Objects.ObservableCollectionProvider`1.CRS*
   name: CRS
-  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2_CRS_
-  commentId: Overload:Mapsui.UI.Objects.ObservableCollectionProvider`2.CRS
+  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-1.html#Mapsui_UI_Objects_ObservableCollectionProvider_1_CRS_
+  commentId: Overload:Mapsui.UI.Objects.ObservableCollectionProvider`1.CRS
   isSpec: "True"
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, TU>.CRS
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, TU).CRS
-  nameWithType: ObservableCollectionProvider<T, TU>.CRS
-  nameWithType.vb: ObservableCollectionProvider(Of T, TU).CRS
-- uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.GetExtent
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T>.CRS
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T).CRS
+  nameWithType: ObservableCollectionProvider<T>.CRS
+  nameWithType.vb: ObservableCollectionProvider(Of T).CRS
+- uid: Mapsui.UI.Objects.ObservableCollectionProvider`1.GetExtent
   name: GetExtent()
-  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2_GetExtent
-  commentId: M:Mapsui.UI.Objects.ObservableCollectionProvider`2.GetExtent
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, TU>.GetExtent()
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, TU).GetExtent()
-  nameWithType: ObservableCollectionProvider<T, TU>.GetExtent()
-  nameWithType.vb: ObservableCollectionProvider(Of T, TU).GetExtent()
-- uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.GetExtent*
+  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-1.html#Mapsui_UI_Objects_ObservableCollectionProvider_1_GetExtent
+  commentId: M:Mapsui.UI.Objects.ObservableCollectionProvider`1.GetExtent
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T>.GetExtent()
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T).GetExtent()
+  nameWithType: ObservableCollectionProvider<T>.GetExtent()
+  nameWithType.vb: ObservableCollectionProvider(Of T).GetExtent()
+- uid: Mapsui.UI.Objects.ObservableCollectionProvider`1.GetExtent*
   name: GetExtent
-  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2_GetExtent_
-  commentId: Overload:Mapsui.UI.Objects.ObservableCollectionProvider`2.GetExtent
+  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-1.html#Mapsui_UI_Objects_ObservableCollectionProvider_1_GetExtent_
+  commentId: Overload:Mapsui.UI.Objects.ObservableCollectionProvider`1.GetExtent
   isSpec: "True"
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, TU>.GetExtent
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, TU).GetExtent
-  nameWithType: ObservableCollectionProvider<T, TU>.GetExtent
-  nameWithType.vb: ObservableCollectionProvider(Of T, TU).GetExtent
-- uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.GetFeatures(Mapsui.Layers.FetchInfo)
-  name: GetFeatures(FetchInfo)
-  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2_GetFeatures_Mapsui_Layers_FetchInfo_
-  commentId: M:Mapsui.UI.Objects.ObservableCollectionProvider`2.GetFeatures(Mapsui.Layers.FetchInfo)
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, TU>.GetFeatures(Mapsui.Layers.FetchInfo)
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, TU).GetFeatures(Mapsui.Layers.FetchInfo)
-  nameWithType: ObservableCollectionProvider<T, TU>.GetFeatures(FetchInfo)
-  nameWithType.vb: ObservableCollectionProvider(Of T, TU).GetFeatures(FetchInfo)
-- uid: Mapsui.UI.Objects.ObservableCollectionProvider`2.GetFeatures*
-  name: GetFeatures
-  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html#Mapsui_UI_Objects_ObservableCollectionProvider_2_GetFeatures_
-  commentId: Overload:Mapsui.UI.Objects.ObservableCollectionProvider`2.GetFeatures
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T>.GetExtent
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T).GetExtent
+  nameWithType: ObservableCollectionProvider<T>.GetExtent
+  nameWithType.vb: ObservableCollectionProvider(Of T).GetExtent
+- uid: Mapsui.UI.Objects.ObservableCollectionProvider`1.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  name: GetFeaturesAsync(FetchInfo)
+  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-1.html#Mapsui_UI_Objects_ObservableCollectionProvider_1_GetFeaturesAsync_Mapsui_Layers_FetchInfo_
+  commentId: M:Mapsui.UI.Objects.ObservableCollectionProvider`1.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T>.GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T).GetFeaturesAsync(Mapsui.Layers.FetchInfo)
+  nameWithType: ObservableCollectionProvider<T>.GetFeaturesAsync(FetchInfo)
+  nameWithType.vb: ObservableCollectionProvider(Of T).GetFeaturesAsync(FetchInfo)
+- uid: Mapsui.UI.Objects.ObservableCollectionProvider`1.GetFeaturesAsync*
+  name: GetFeaturesAsync
+  href: api/Mapsui.UI.Objects.ObservableCollectionProvider-1.html#Mapsui_UI_Objects_ObservableCollectionProvider_1_GetFeaturesAsync_
+  commentId: Overload:Mapsui.UI.Objects.ObservableCollectionProvider`1.GetFeaturesAsync
   isSpec: "True"
-  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T, TU>.GetFeatures
-  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T, TU).GetFeatures
-  nameWithType: ObservableCollectionProvider<T, TU>.GetFeatures
-  nameWithType.vb: ObservableCollectionProvider(Of T, TU).GetFeatures
+  fullName: Mapsui.UI.Objects.ObservableCollectionProvider<T>.GetFeaturesAsync
+  fullName.vb: Mapsui.UI.Objects.ObservableCollectionProvider(Of T).GetFeaturesAsync
+  nameWithType: ObservableCollectionProvider<T>.GetFeaturesAsync
+  nameWithType.vb: ObservableCollectionProvider(Of T).GetFeaturesAsync
 - uid: Mapsui.UI.SwipedEventArgs
   name: SwipedEventArgs
   href: api/Mapsui.UI.SwipedEventArgs.html
@@ -17918,19 +17789,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.UI.Wpf.MapControl.CallHomeIfNeeded
   nameWithType: MapControl.CallHomeIfNeeded
-- uid: Mapsui.UI.Wpf.MapControl.Clear
-  name: Clear()
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_Clear
-  commentId: M:Mapsui.UI.Wpf.MapControl.Clear
-  fullName: Mapsui.UI.Wpf.MapControl.Clear()
-  nameWithType: MapControl.Clear()
-- uid: Mapsui.UI.Wpf.MapControl.Clear*
-  name: Clear
-  href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_Clear_
-  commentId: Overload:Mapsui.UI.Wpf.MapControl.Clear
-  isSpec: "True"
-  fullName: Mapsui.UI.Wpf.MapControl.Clear
-  nameWithType: MapControl.Clear
 - uid: Mapsui.UI.Wpf.MapControl.Dispose
   name: Dispose()
   href: api/Mapsui.UI.Wpf.MapControl.html#Mapsui_UI_Wpf_MapControl_Dispose
