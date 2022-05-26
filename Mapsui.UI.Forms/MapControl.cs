@@ -39,7 +39,13 @@ namespace Mapsui.UI.Forms
     /// </summary>
     public partial class MapControl : ContentView, IMapControl, IDisposable
     {
+#if __MAUI__
+        // GPU does not work currently on MAUI
+        // See https://github.com/mono/SkiaSharp/issues/1893
+        public static bool UseGPU = false;
+#else
         public static bool UseGPU = true;
+#endif
 
         private class TouchEvent
         {
