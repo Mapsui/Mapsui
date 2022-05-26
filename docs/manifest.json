@@ -3962,12 +3962,15 @@
       "version": ""
     },
     {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
       "type": "Toc",
       "source_relative_path": "documentation/toc.md",
       "output": {
         ".html": {
           "relative_path": "documentation/toc.html",
-          "hash": "9CCUXayZTNWBs0pb2pEcotRONpV6Irg9HGn2zaXMf50="
+          "hash": "XyowbuBLDIxdhV9DRhAXQvEM7k6aj4LrD4lA9dy2wkY="
         }
       },
       "is_incremental": false,
