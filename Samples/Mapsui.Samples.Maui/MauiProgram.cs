@@ -9,6 +9,7 @@ namespace Mapsui.Samples.Maui
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                // Without the line below the app will crash with this exception: "Catastrophic failure (0x8000FFFF (E_UNEXPECTED))".
                 .UseSkiaSharp()
                 .ConfigureFonts(fonts =>
                 {
