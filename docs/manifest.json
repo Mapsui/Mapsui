@@ -122,18 +122,6 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Extensions.AsyncProviderExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Extensions.AsyncProviderExtensions.html",
-          "hash": "rhCCUpIjfVh5UhnXc9610Q3p+k2ZRaJiWORutjepFec="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/Mapsui.Extensions.CacheExtensions.yml",
       "output": {
         ".html": {
@@ -186,7 +174,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Extensions.FeatureExtensions.html",
-          "hash": "xWC9yqi2ChlUu5lEjAxZcHgnyTspHcZxllykjyAgkJw="
+          "hash": "CwoXRcCnVZyV0oNWX8PvVyctn/cOUAJ67nqlDUpzw8I="
         }
       },
       "is_incremental": false,
@@ -258,7 +246,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Extensions.html",
-          "hash": "bTJfW56xpKmK/Ehsxk17wrtmirvuMqozH2henk5MGB0="
+          "hash": "sP7YUJxlQPcMCR6DLoNuejcZx4ryoF1WTJUrOmLRlR0="
         }
       },
       "is_incremental": false,
@@ -270,7 +258,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Fetcher.DataChangedEventArgs.html",
-          "hash": "0ChfG7W4epzyY5ESYGbNSzQYWATEWd6V3fzwOCdbohw="
+          "hash": "TvIprvOh5jsY74ITwoD3dUe/0K4Ah2ggywRNVa2Lt4M="
         }
       },
       "is_incremental": false,
@@ -282,7 +270,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Fetcher.DataChangedEventHandler.html",
-          "hash": "00rt2URjk2jdgrnfH6uUbCcABQ6qDUKsSeazQox4K+s="
+          "hash": "A86eu8Xw8BPp3DNYHRXamOwIRAza51jU97k2P5nJeu8="
         }
       },
       "is_incremental": false,
@@ -330,7 +318,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Fetcher.IAsyncDataFetcher.html",
-          "hash": "M/REyXPjfdkbqzvCvJaCorsT+2xU6XrICR7/b4QeS6Q="
+          "hash": "L/LUDgda5M/HG0r8uYBrLr9NjNSavAs3L2jxFoTxf7M="
         }
       },
       "is_incremental": false,
@@ -426,7 +414,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Layers.AnimatedLayers.AnimatedFeatures.html",
-          "hash": "haAnXeOXLA0o1UcxJnV1tOEDFY4W1qPeGUi/G8n2K9A="
+          "hash": "Yl/ge2MXB1Y81cLv6adsB+Bia19PjPwoGVBhHLz+sgw="
         }
       },
       "is_incremental": false,
@@ -438,7 +426,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Layers.AnimatedLayers.AnimatedPointLayer.html",
-          "hash": "KmFUKIkqmVOytwABt6aVu8X7paRmq9jXPRnGwTqFkrc="
+          "hash": "zzHtGZ77K6IJ+8WXSIt4HDnGg6AnMdb+Px2f9Cfn1EA="
         }
       },
       "is_incremental": false,
@@ -450,7 +438,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Layers.AnimatedLayers.EasingFunction.html",
-          "hash": "jFS2v+EyJ/6zBaNKpmd/xZ240ilTLeTrXlhgMjYNc/0="
+          "hash": "BmIwPMOJTPD9NSjihcoo6Lhg6sqT8UhNjp03PSyDNuk="
         }
       },
       "is_incremental": false,
@@ -486,7 +474,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Layers.BaseLayer.html",
-          "hash": "K45xkbT9KprsqsG7M/MZB+vHBnOfgQRt+5bvBtUSqOY="
+          "hash": "LSjOOajrV5Sp4Ml2lw9TzfDXlW7JrnaFLjw/8exOPsE="
         }
       },
       "is_incremental": false,
@@ -534,7 +522,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Layers.ILayer.html",
-          "hash": "8VCvJCYZJaeawLwHDTLTs+11yGfN9Ea/Bq28TZY4f7c="
+          "hash": "N+J4Z2PgD//PWes4iSQkSanvrIBhq64lmq8Gn6YyJYY="
         }
       },
       "is_incremental": false,
@@ -546,7 +534,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Layers.ILayerDataSource-1.html",
-          "hash": "/q2MrUMH+LtMZriFFsvrrEZfJK6XAWtmtROG7KqiODo="
+          "hash": "k0hW4QV9+T1nwbFt1VRnMi9i4pVJe7zjR3C7qgS4Edo="
         }
       },
       "is_incremental": false,
@@ -570,7 +558,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Layers.ImageLayer.html",
-          "hash": "HZ2fgkbxrv9nj4ZXojH5K6oMG4gwOWlK9td49LJZOn8="
+          "hash": "JSzTMgm/xAxyxYU4eLplkhrfikQ5P4HdECVL96lvEyw="
         }
       },
       "is_incremental": false,
@@ -582,7 +570,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Layers.Layer.html",
-          "hash": "CcOBBFgtWiH+tOqXjzzrLHSsgkD1zbivmfMGfY4Rzas="
+          "hash": "NSmH5WxdvC4AVHT4nO7mLDi2kXMXirGa0Tq+mzSsDTQ="
         }
       },
       "is_incremental": false,
@@ -666,7 +654,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Layers.MemoryLayer.html",
-          "hash": "s9NnHr0628vUmGZz1XYFmSLOgCrDCs0tY4rFnMYRAaQ="
+          "hash": "mZZr8zQJCATKeCxExoKYHvbOAc1UetPXnzh/+nOciDw="
         }
       },
       "is_incremental": false,
@@ -702,7 +690,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Layers.RasterizingLayer.html",
-          "hash": "VuMzXTUKXc6MRrWtQ8lWgtZVw2ThvHhoqKoRaJP31Wc="
+          "hash": "rJOc7E8EisoUVwuLe1CBchCp5rkd0Bnh+ZdDWQrl3Uo="
         }
       },
       "is_incremental": false,
@@ -726,7 +714,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Layers.WritableLayer.html",
-          "hash": "uip2NqsI7XBPKEDCsRDWtOB2kZ541MClbcA4Kr9ZHOI="
+          "hash": "4K6K/59V7dPuZyt8ff7XYXiNTmzLtp5avB45yuAIQOI="
         }
       },
       "is_incremental": false,
@@ -738,7 +726,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Layers.html",
-          "hash": "iIVWdvc3aNu1MdGBt+wcGBjCKUqgyIzJfebvtXR+n6U="
+          "hash": "jdQXoCQBK440h+aE+e0ETv9m3ZJXMJffbYYmHVG/PQ0="
         }
       },
       "is_incremental": false,
@@ -810,7 +798,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.MQuad.html",
-          "hash": "XEWCXaCiidJ+96SWz78+T0vAG+dDtwqil8D1hhInUEE="
+          "hash": "DVED4v8K+g7HW/2axbnWvM65AbhpdNlKoB5ejMcx57s="
         }
       },
       "is_incremental": false,
@@ -858,7 +846,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Map.html",
-          "hash": "Xto0PtK8iN+0VXcNpOrwesV9zxgo6/70R36R5Eg5nms="
+          "hash": "pxeU9icjOK25s5/d3sCEp3JvA65+aWZKGoeeI5/Oosw="
         }
       },
       "is_incremental": false,
@@ -986,23 +974,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.IAsyncProvider-1.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.IAsyncProvider-1.html",
-          "hash": "Rw/m3x8GUmRWdn0e2uKLrNN1YYuen7ouEM3XaB4mBUM="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/Mapsui.Providers.IProjectingProvider.yml",
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Providers.IProjectingProvider.html",
-          "hash": "YyaS/33QE1inrFfc8MEx1Wq0nF/yx67S+2iDtzgk11c="
+          "hash": "Np4363aJ2o3sXJVEq6b+19Ped9rEMOv7iMU8s8nydHE="
         }
       },
       "is_incremental": false,
@@ -1010,11 +986,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.IProvider-1.yml",
+      "source_relative_path": "api/Mapsui.Providers.IProvider.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.Providers.IProvider-1.html",
-          "hash": "11TbegXALa+yXveGR6ysfMuaZvORfab7YSS+92OlRAw="
+          "relative_path": "api/Mapsui.Providers.IProvider.html",
+          "hash": "OMmDdFJg6rIsCT4H2jHu4BcuKs5yEJyXiZbOEp15Cxo="
         }
       },
       "is_incremental": false,
@@ -1022,23 +998,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.IProviderBase.yml",
+      "source_relative_path": "api/Mapsui.Providers.MemoryProvider.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.Providers.IProviderBase.html",
-          "hash": "PlEzZ306P1xVVQPLb2ZIpdAh2AcVHA6zsGgX6WJNON8="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.Providers.MemoryProvider-1.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Mapsui.Providers.MemoryProvider-1.html",
-          "hash": "JdlMjODFkvozczmSyXRTTfvI7hRwQ00UDxvKOAdYd8c="
+          "relative_path": "api/Mapsui.Providers.MemoryProvider.html",
+          "hash": "03u4e29yf3jZ+j5fLkyNrio9PLjT7cBhVup8rcfa28U="
         }
       },
       "is_incremental": false,
@@ -1050,7 +1014,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Providers.ProjectingProvider.html",
-          "hash": "6oYaGUEr6GcebnXxvjze6M7AeHLhuBaFPqPmemj0hfM="
+          "hash": "E5r5ruZEIISj2JJ7T29yWcRFtWKvsQ8uzwmbHLNFdoY="
         }
       },
       "is_incremental": false,
@@ -1062,7 +1026,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Providers.StackedLabelProvider.html",
-          "hash": "vpsnGMds5lQEcKYAF9CzgpUBhFYGw8I49cZepqrFXmo="
+          "hash": "wlUaDZKVPbkO2JJK6PdqJrJgUClB7DsIz4y3z5re4wY="
         }
       },
       "is_incremental": false,
@@ -1254,7 +1218,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Providers.Wms.WmsProvider.html",
-          "hash": "y97LM9RxOv6jmrd9NKhGvI1+Aq6vKz52Y5jpVcAqxVg="
+          "hash": "5SiHum+MbYydbKh6J0xhnOCIFqwsUcsmyTTuRaNIJWs="
         }
       },
       "is_incremental": false,
@@ -1290,7 +1254,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Providers.html",
-          "hash": "qA+BRAMmXhgj5VQIPiP7vtKnyDs0Cnnm2NoLRxQKRhw="
+          "hash": "L9Z1t4i0YB2tB9M8Ti7Bf104NnaNaghPHmtdvpC8ylU="
         }
       },
       "is_incremental": false,
@@ -1866,7 +1830,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Styles.CalloutStyle.html",
-          "hash": "8gGhJapjnUD6PUMtO2/WPCxWw6YComD5taWi4sLg/zU="
+          "hash": "T+V9HPoI9LCEI2E8rUR8i5eCioTBfBpI1t1s6IkSVaI="
         }
       },
       "is_incremental": false,
@@ -1998,7 +1962,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Styles.LabelStyle.html",
-          "hash": "unS6+cBJPjWeY1YpdYXa28p117+ONHLAOqjRFcHHA08="
+          "hash": "AQiJ3WnYjs45EibSTwvvMGyo8TO6Eg+cxLB6vlQtckM="
         }
       },
       "is_incremental": false,
@@ -2010,7 +1974,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Styles.Offset.html",
-          "hash": "CJCl4jrUMHZ1bY20WTvbYZi3F3zClf+G9b3BMCSkb6M="
+          "hash": "DPzwD4RRYdb2t4hYbcMMGtjCtB2Zfkz34YtX7bL+9nw="
         }
       },
       "is_incremental": false,
@@ -2106,7 +2070,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Styles.Style.html",
-          "hash": "KEWfTH3GV580KNf+/SkN0FnpAu19zYs/1EKALtLSWM8="
+          "hash": "uNSSUOOp75aTfTeI+ULMG/PlZm95ncHsCyaYXsYYayI="
         }
       },
       "is_incremental": false,
@@ -2130,7 +2094,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Styles.SymbolStyle.html",
-          "hash": "E8FIz+7fInyAPX1j5rDbwjrWO1DD6JHJpuO1yA7qqB0="
+          "hash": "cgXJmxqHvFbq8O8pGNhboIzRyQdKV0yb+p1Vqo9I/ds="
         }
       },
       "is_incremental": false,
@@ -2178,7 +2142,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Styles.Thematics.CustomTheme.html",
-          "hash": "hm6dpOQ+sv5WKtj3yQ/kkM3Vthx+QW4sFRHhbNF7ecE="
+          "hash": "TBv5p9gsGDO2Relob/HOHrskYzrJ0rFqY63DtkV71BQ="
         }
       },
       "is_incremental": false,
@@ -2190,7 +2154,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Styles.Thematics.GradientTheme.html",
-          "hash": "NBWoKAernB8HhdDYVztZGc+jCI+gSgqfotfTAUqfEKg="
+          "hash": "4P+47rVNzzllXutw5AA+MS1OzH2raPs/1Ukk6I14FSE="
         }
       },
       "is_incremental": false,
@@ -2214,7 +2178,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Styles.Thematics.ThemeStyle.html",
-          "hash": "qL+rgxuAuqI8B2/kRyZ3VHhefnA2m9qWDxZSOeNa0/Q="
+          "hash": "O4hLixOscpN8refI/fz+iGCJukcaFnfgMmCzIQvmLQ4="
         }
       },
       "is_incremental": false,
@@ -2250,7 +2214,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.Styles.VectorStyle.html",
-          "hash": "18yjrU/+nodGzq9sK4/b0c46mAmKMGWUte1nikGvJOI="
+          "hash": "WTa8BYEZSw2TTQxllrScSdv7ANvZEZisZeJCS+/zhtc="
         }
       },
       "is_incremental": false,
@@ -2478,7 +2442,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.MapControl.html",
-          "hash": "ugQbjhIsMsVLR5Djri5Ddxkq9/rDOBo/pS1zgz962tk="
+          "hash": "h7xa9RsBYHBe/zRPc3vOTF3SB22m7+l6FMPOyPCTkdg="
         }
       },
       "is_incremental": false,
@@ -2514,7 +2478,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Forms.MapView.html",
-          "hash": "fF9HttjrqyH9twfa1A3KLwv/SoR8ra18XZu6cM6/rOY="
+          "hash": "11ChG8wdJY0QDaisAq2V4J/QRJzVeQvCKMLRDzmcdRc="
         }
       },
       "is_incremental": false,
@@ -2754,7 +2718,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Objects.MyLocationLayer.html",
-          "hash": "fnNxJfzva56cEMXsvgcV2RKcpwpDt7uGk3/NnXCpDbU="
+          "hash": "xcQUkOKzyA1vS3s7EGWgO1goHTkVGfZthCqFLc3824E="
         }
       },
       "is_incremental": false,
@@ -2762,11 +2726,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Mapsui.UI.Objects.ObservableCollectionProvider-2.yml",
+      "source_relative_path": "api/Mapsui.UI.Objects.ObservableCollectionProvider-1.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Mapsui.UI.Objects.ObservableCollectionProvider-2.html",
-          "hash": "4RRotYxcd8uaj8F6F3ZTF3atZJ+VwgFr/JOtb2gvM2U="
+          "relative_path": "api/Mapsui.UI.Objects.ObservableCollectionProvider-1.html",
+          "hash": "S6RJ26y+bGaYujVQ2DZXJQ0uTXQI0App6CKj8Mngz8A="
         }
       },
       "is_incremental": false,
@@ -2778,7 +2742,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Objects.html",
-          "hash": "OvWO5x1e6mi+ViNYEQeCdEBhhjUBDIQnW1GXoYgbff4="
+          "hash": "/4vtCZ81mZSBuTrx9prFDc+sePy7fWjIvwuHqqUPuCM="
         }
       },
       "is_incremental": false,
@@ -2922,7 +2886,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Mapsui.UI.Wpf.MapControl.html",
-          "hash": "VqOYXn0I6ZTKvJhHJcUFXYkzDKPRk1jHxtHvSvguAyY="
+          "hash": "fonc5rlctOQz0f5CQw2ysANK3T9K2GWy5iTKiB/1ViE="
         }
       },
       "is_incremental": false,
@@ -3642,7 +3606,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "AdlyN+R7cDQCzctoiZKHwS9UZx+mQGqXpRFhgpnW+r4="
+          "hash": "yXzVx+4GkXDw2L6VSUQCT4xbThXuMWcgARlXe45EsLo="
         }
       },
       "is_incremental": false,
@@ -3931,7 +3895,7 @@
       "output": {
         ".html": {
           "relative_path": "documentation/projections.html",
-          "hash": "dnP1Z9cx6f4cOuv7D8FJQaHMMHnZb8EvCPAbPWJuQww="
+          "hash": "MQizMT+OoRv429OMRyQwL4ifxmdyP6BIaZ5vRG9gb30="
         }
       },
       "is_incremental": false,
@@ -4094,7 +4058,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "ix87xt+15S4w0ZMept5t0aYlImx8PvH/BO/SLEzik/E="
+          "hash": "WYjscUv06pKR6nm84ZrnsdsxZdYXIr70fuUVRx/W8Ik="
         }
       },
       "is_incremental": false,
@@ -4133,7 +4097,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 301,
+          "total_file_count": 298,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
