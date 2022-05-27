@@ -28,7 +28,6 @@ Mapsui is a C# map component for apps
 ## Build Status
 | platform | status |
 | ------------- |:-------------:|
-| Build on Windows    | [![Build status](https://ci.appveyor.com/api/projects/status/p20w43qv4ixkkftp?svg=true)](https://ci.appveyor.com/project/pauldendulk/mapsui) |
 | Build docs | [![Build status](https://ci.appveyor.com/api/projects/status/c8hcfeoafmf51gin/branch/master?svg=true)](https://ci.appveyor.com/project/pauldendulk/mapsui-373p1/branch/master) |
 | Github build action | [![Build status](https://github.com/mapsui/mapsui/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Mapsui/Mapsui/actions/workflows/dotnet.yml?query=branch%3Amaster) |
 
