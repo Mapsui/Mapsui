@@ -24,12 +24,11 @@ Mapsui is a C# map component for apps
 | Mapsui.Avalonia     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Avalonia.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Avalonia/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Avalonia.svg)](https://www.nuget.org/packages/Mapsui.Avalonia) | [Xamarin.Avalonia](https://mapsui.com/documentation/getting-started-avalonia.html) |
 | Mapsui.Eto     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Eto.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Eto/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Eto.svg)](https://www.nuget.org/packages/Mapsui.Eto) | [Xamarin.Eto](https://mapsui.com/documentation/getting-started-eto.html) |
 
-
 ## Build Status
 | platform | status |
 | ------------- |:-------------:|
-| Build docs | [![Build status](https://ci.appveyor.com/api/projects/status/c8hcfeoafmf51gin/branch/master?svg=true)](https://ci.appveyor.com/project/pauldendulk/mapsui-373p1/branch/master) |
 | Github build action | [![Build status](https://github.com/mapsui/mapsui/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Mapsui/Mapsui/actions/workflows/dotnet.yml?query=branch%3Amaster) |
+| Build docs | [![Build status](https://ci.appveyor.com/api/projects/status/c8hcfeoafmf51gin/branch/master?svg=true)](https://ci.appveyor.com/project/pauldendulk/mapsui-373p1/branch/master) |
 
 ## Documentation
 The documentation can be found at [mapsui.com](https://mapsui.com). Let us know what kind of information you are missing.
