@@ -6,9 +6,9 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Uno.UI.Skia.Wpf" Version="4.2.6" />
-    <PackageReference Include="Uno.UI.RemoteControl" Version="4.2.6" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.2.6" />
+    <PackageReference Include="Uno.UI.Skia.Wpf" Version="4.3.6" />
+    <PackageReference Include="Uno.UI.RemoteControl" Version="4.3.6" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.3.6" />
     <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.0" />
   </ItemGroup>
   <ItemGroup>
