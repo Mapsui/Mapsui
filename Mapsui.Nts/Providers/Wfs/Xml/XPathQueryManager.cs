@@ -584,8 +584,6 @@ namespace Mapsui.Providers.Wfs.Xml
                     ResolveNsPrefix(ResolveArgument(args[1]), xsltContext), StringComparison.Ordinal) ?? false;
             }
 
-
-
             /// <summary>
             /// This method creates a string from an object argument.
             /// In many cases the argument is an XPathNodeIterator that must be resolved.
