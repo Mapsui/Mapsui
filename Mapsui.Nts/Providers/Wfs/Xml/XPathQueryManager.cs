@@ -333,7 +333,7 @@ namespace Mapsui.Providers.Wfs.Xml
         /// <param name="xPath">A compiled XPath expression</param>
         private void FindXPath(XPathExpression? xPath)
         {
-            xPath?.SetContext(_paramContext);
+            xPath?.SetContext(_paramContext!);
             if (xPath != null)
                 _xIter = _xNav?.Select(xPath);
             InitializeCustomContext(_paramContext);
@@ -344,7 +344,7 @@ namespace Mapsui.Providers.Wfs.Xml
             if (paramContext == null)
                 return;
             var namespaces = paramContext.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
-            _paramContext = new CustomQueryContext((NameTable)paramContext.NameTable);
+            _paramContext = new CustomQueryContext((NameTable)(paramContext.NameTable ?? new NameTable()));
             if (namespaces != null)
             {
                 _paramContext.AddNamespace(namespaces);
@@ -422,7 +422,7 @@ namespace Mapsui.Providers.Wfs.Xml
                 if (name.Equals(ParamCompare.FunctionName)) return new ParamCompare(argTypes, 2, 2);
                 if (name.Equals(ParamCompareWithTargetNs.FunctionName))
                     return new ParamCompareWithTargetNs(argTypes, 3, 3);
-                return null;
+                return null!;
             }
 
             /// <summary>
@@ -435,7 +435,7 @@ namespace Mapsui.Providers.Wfs.Xml
                 var param = GetParam(name);
                 if (param != null)
                     return new ParamFunctionVar(param);
-                return null;
+                return null!;
             }
 
             /// <summary>
@@ -580,8 +580,8 @@ namespace Mapsui.Providers.Wfs.Xml
             /// <returns>A boolean value indicating whether the argument strings are identical</returns>
             public virtual object Invoke(XsltContext xsltContext, object[] args, XPathNavigator docContext)
             {
-                return ResolveNsPrefix(ResolveArgument(args[0]), xsltContext).Equals(
-                    ResolveNsPrefix(ResolveArgument(args[1]), xsltContext), StringComparison.Ordinal);
+                return ResolveNsPrefix(ResolveArgument(args[0]), xsltContext)?.Equals(
+                    ResolveNsPrefix(ResolveArgument(args[1]), xsltContext), StringComparison.Ordinal) ?? false;
             }
 
 
