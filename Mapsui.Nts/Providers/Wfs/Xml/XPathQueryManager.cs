@@ -613,9 +613,9 @@ namespace Mapsui.Providers.Wfs.Xml
             /// </summary>
             /// <param name="args">An argument of the function to be resolved</param>
             /// <param name="xsltContext">The Xslt context for namespace resolving</param>
-            private string ResolveNsPrefix(string args, XsltContext xsltContext)
+            private string? ResolveNsPrefix(string? args, XsltContext xsltContext)
             {
-                if (args.Contains(":"))
+                if (args?.Contains(":") ?? false)
                 {
                     var prefix = args.Substring(0, args.IndexOf(":", StringComparison.Ordinal));
                     string ns;
@@ -679,9 +679,9 @@ namespace Mapsui.Providers.Wfs.Xml
             /// <param name="args">An argument of the function to be resolved</param>
             /// <param name="targetNs"></param>
             /// <param name="docContext"></param>
-            private static string resolveNsPrefix(string args, string targetNs, XPathNavigator docContext)
+            private static string resolveNsPrefix(string? args, string targetNs, XPathNavigator docContext)
             {
-                if (args.Contains(":"))
+                if (args?.Contains(":") ?? false)
                 {
                     var prefix = args.Substring(0, args.IndexOf(":", StringComparison.Ordinal));
                     string ns;
