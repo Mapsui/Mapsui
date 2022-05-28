@@ -54,7 +54,7 @@ namespace Mapsui.Fetcher
             if (exception == null)
             {
                 _cache.Clear();
-                if (features.Any())
+                if (features?.Any() ?? false)
                     _cache.PushRange(features.ToArray());
             }
 

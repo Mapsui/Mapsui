@@ -66,8 +66,9 @@ namespace Mapsui.Fetcher
             }
         }
 
-        private void WaitTimerElapsed(object state)
+        private void WaitTimerElapsed(object? state)
         {
+            if (state == null) throw new ArgumentNullException(nameof(state));
             if (_action != null)
             {
                 // Waiting is done, we can call the action.

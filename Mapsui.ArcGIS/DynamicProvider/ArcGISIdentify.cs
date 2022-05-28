@@ -103,7 +103,7 @@ namespace Mapsui.ArcGIS.DynamicProvider
                                 return;
                             }
                         }
-                        dataStream.Dispose();
+                        await dataStream.DisposeAsync();
                     }
 
                     OnIdentifyFinished();

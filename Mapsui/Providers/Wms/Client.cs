@@ -23,7 +23,7 @@ namespace Mapsui.Providers.Wms
     public class Client
     {
         private XmlNode? _vendorSpecificCapabilities;
-        private XmlNamespaceManager? _nsmgr;
+        private XmlNamespaceManager _nsmgr;
 
         /// <summary>
         /// Structure for storing information about a WMS Layer Style
@@ -323,7 +323,7 @@ namespace Mapsui.Providers.Wms
         {
             if (doc.DocumentElement?.Attributes["version"] != null)
             {
-                _wmsVersion = doc.DocumentElement.Attributes["version"].Value;
+                _wmsVersion = doc.DocumentElement.Attributes?["version"]?.Value ?? string.Empty;
                 if (_wmsVersion != "1.0.0" && _wmsVersion != "1.1.0" && _wmsVersion != "1.1.1" && _wmsVersion != "1.3.0")
                     throw new ApplicationException("WMS Version " + _wmsVersion + " not supported");
 
@@ -370,7 +370,7 @@ namespace Mapsui.Providers.Wms
             {
                 _serviceDescription.Keywords = new string[xnlKeywords.Count];
                 for (var i = 0; i < xnlKeywords.Count; i++)
-                    _serviceDescription.Keywords[i] = xnlKeywords[i].InnerText;
+                    _serviceDescription.Keywords[i] = xnlKeywords[i]?.InnerText ?? string.Empty;
             }
             //Contact information
             _serviceDescription.ContactInformation = new Capabilities.WmsContactInformation();
@@ -457,7 +457,7 @@ namespace Mapsui.Providers.Wms
                 _exceptionFormats = new string[xnlFormats.Count];
                 for (var i = 0; i < xnlFormats.Count; i++)
                 {
-                    _exceptionFormats[i] = xnlFormats[i].InnerText;
+                    _exceptionFormats[i] = xnlFormats[i]?.InnerText ?? String.Empty;
                 }
             }
         }
@@ -488,9 +488,9 @@ namespace Mapsui.Providers.Wms
                 {
                     var wor = new WmsOnlineResource
                     {
-                        Type = xnlHttp.ChildNodes[i].Name,
-                        OnlineResource = xnlHttp.ChildNodes[i].SelectSingleNode("sm:OnlineResource", _nsmgr)?.
-                            Attributes?["xlink:href"].InnerText
+                        Type = xnlHttp.ChildNodes[i]?.Name,
+                        OnlineResource = xnlHttp.ChildNodes[i]?.SelectSingleNode("sm:OnlineResource", _nsmgr)?.
+                            Attributes?["xlink:href"]?.InnerText
                     };
                     _getFeatureInfoRequests[i] = wor;
                 }
@@ -500,7 +500,7 @@ namespace Mapsui.Providers.Wms
             {
                 _getFeatureInfoOutputFormats = new Collection<string>();
                 for (var i = 0; i < xnlFormats.Count; i++)
-                    _getFeatureInfoOutputFormats.Add(xnlFormats[i].InnerText);
+                    _getFeatureInfoOutputFormats.Add(xnlFormats[i]?.InnerText ?? string.Empty);
             }
         }
 
@@ -508,9 +508,9 @@ namespace Mapsui.Providers.Wms
         /// Parses GetMap request nodes
         /// </summary>
         /// <param name="getMapRequestNodes"></param>
-        private void ParseGetMapRequest(XmlNode getMapRequestNodes)
+        private void ParseGetMapRequest(XmlNode? getMapRequestNodes)
         {
-            var xnlHttp = getMapRequestNodes.SelectSingleNode("sm:DCPType/sm:HTTP", _nsmgr);
+            var xnlHttp = getMapRequestNodes?.SelectSingleNode("sm:DCPType/sm:HTTP", _nsmgr);
             if (xnlHttp != null && xnlHttp.HasChildNodes)
             {
                 GetMapRequests = new WmsOnlineResource[xnlHttp.ChildNodes.Count];
@@ -518,20 +518,20 @@ namespace Mapsui.Providers.Wms
                 {
                     var wor = new WmsOnlineResource
                     {
-                        Type = xnlHttp.ChildNodes[i].Name,
-                        OnlineResource = xnlHttp.ChildNodes[i].SelectSingleNode("sm:OnlineResource", _nsmgr)?
-                            .Attributes?["xlink:href"].InnerText
+                        Type = xnlHttp.ChildNodes[i]?.Name,
+                        OnlineResource = xnlHttp.ChildNodes[i]?.SelectSingleNode("sm:OnlineResource", _nsmgr)?
+                            .Attributes?["xlink:href"]?.InnerText
                     };
                     GetMapRequests[i] = wor;
                 }
             }
 
-            using var xnlFormats = getMapRequestNodes.SelectNodes("sm:Format", _nsmgr);
+            using var xnlFormats = getMapRequestNodes?.SelectNodes("sm:Format", _nsmgr);
             if (xnlFormats != null)
             {
                 _getMapOutputFormats = new Collection<string>();
                 for (var i = 0; i < xnlFormats.Count; i++)
-                    _getMapOutputFormats.Add(xnlFormats[i].InnerText);
+                    _getMapOutputFormats.Add(xnlFormats[i]?.InnerText ?? String.Empty);
             }
         }
 
@@ -542,9 +542,11 @@ namespace Mapsui.Providers.Wms
         /// <returns></returns>
         // ReSharper disable once FunctionComplexityOverflow 
         // ReSharper disable once CyclomaticComplexity
-        private WmsServerLayer ParseLayer(XmlNode xmlLayer)
+        private WmsServerLayer ParseLayer(XmlNode? xmlLayer)
         {
             var wmsServerLayer = new WmsServerLayer();
+            if (xmlLayer == null)
+                return wmsServerLayer;
             var node = xmlLayer.SelectSingleNode("sm:Name", _nsmgr);
             wmsServerLayer.Name = node?.InnerText;
             node = xmlLayer.SelectSingleNode("sm:Title", _nsmgr);
@@ -562,7 +564,7 @@ namespace Mapsui.Providers.Wms
             {
                 wmsServerLayer.Keywords = new string[xnlKeywords.Count];
                 for (var i = 0; i < xnlKeywords.Count; i++)
-                    wmsServerLayer.Keywords[i] = xnlKeywords[i].InnerText;
+                    wmsServerLayer.Keywords[i] = xnlKeywords[i]?.InnerText ?? string.Empty;
             }
 
             wmsServerLayer.CRS = ParseCrses(xmlLayer);
@@ -573,15 +575,18 @@ namespace Mapsui.Providers.Wms
                 wmsServerLayer.BoundingBoxes = new Dictionary<string, MRect>();
                 for (var i = 0; i < xnlBoundingBox.Count; i++)
                 {
-                    var xmlAttributeCollection = xnlBoundingBox[i].Attributes;
+                    var xmlAttributeCollection = xnlBoundingBox[i]?.Attributes;
                     if (xmlAttributeCollection != null)
                     {
-                        var crs = (xmlAttributeCollection["CRS"] ?? xmlAttributeCollection["SRS"]).Value;
-                        wmsServerLayer.BoundingBoxes[crs] = new MRect(
-                            double.Parse(xmlAttributeCollection["minx"].Value, NumberFormatInfo.InvariantInfo),
-                            double.Parse(xmlAttributeCollection["miny"].Value, NumberFormatInfo.InvariantInfo),
-                            double.Parse(xmlAttributeCollection["maxx"].Value, NumberFormatInfo.InvariantInfo),
-                            double.Parse(xmlAttributeCollection["maxy"].Value, NumberFormatInfo.InvariantInfo));
+                        var crs = (xmlAttributeCollection["CRS"] ?? xmlAttributeCollection["SRS"])?.Value;
+                        if (crs != null)
+                        {
+                            wmsServerLayer.BoundingBoxes[crs] = new MRect(
+                                double.Parse(xmlAttributeCollection["minx"]?.Value ?? "0", NumberFormatInfo.InvariantInfo),
+                                double.Parse(xmlAttributeCollection["miny"]?.Value ?? "0", NumberFormatInfo.InvariantInfo),
+                                double.Parse(xmlAttributeCollection["maxx"]?.Value ?? "0", NumberFormatInfo.InvariantInfo),
+                                double.Parse(xmlAttributeCollection["maxy"]?.Value ?? "0", NumberFormatInfo.InvariantInfo));
+                        }
                     }
                 }
             }
@@ -592,34 +597,34 @@ namespace Mapsui.Providers.Wms
                 wmsServerLayer.Style = new WmsLayerStyle[xnlStyle.Count];
                 for (var i = 0; i < xnlStyle.Count; i++)
                 {
-                    node = xnlStyle[i].SelectSingleNode("sm:Name", _nsmgr);
+                    node = xnlStyle[i]?.SelectSingleNode("sm:Name", _nsmgr);
                     wmsServerLayer.Style[i].Name = node?.InnerText;
-                    node = xnlStyle[i].SelectSingleNode("sm:Title", _nsmgr);
+                    node = xnlStyle[i]?.SelectSingleNode("sm:Title", _nsmgr);
                     wmsServerLayer.Style[i].Title = node?.InnerText;
-                    node = xnlStyle[i].SelectSingleNode("sm:Abstract", _nsmgr);
+                    node = xnlStyle[i]?.SelectSingleNode("sm:Abstract", _nsmgr);
                     wmsServerLayer.Style[i].Abstract = node?.InnerText;
-                    node = xnlStyle[i].SelectSingleNode("sm:LegendURL", _nsmgr) ??
-                           xnlStyle[i].SelectSingleNode("sm:LegendUrl", _nsmgr);
+                    node = xnlStyle[i]?.SelectSingleNode("sm:LegendURL", _nsmgr) ??
+                           xnlStyle[i]?.SelectSingleNode("sm:LegendUrl", _nsmgr);
                     if (node != null)
                     {
                         wmsServerLayer.Style[i].LegendUrl = new WmsStyleLegend();
 
                         if (node.Attributes?["width"]?.InnerText != null && node.Attributes["height"]?.InnerText != null)
                         {
-                            wmsServerLayer.Style[i].LegendUrl.Size = new Size { Width = int.Parse(node.Attributes["width"].InnerText), Height = int.Parse(node.Attributes["height"].InnerText) };
+                            wmsServerLayer.Style[i].LegendUrl.Size = new Size { Width = int.Parse(node.Attributes["width"]?.InnerText ?? "0"), Height = int.Parse(node.Attributes["height"]?.InnerText ?? "0") };
                         }
 
-                        wmsServerLayer.Style[i].LegendUrl.OnlineResource.OnlineResource = node.SelectSingleNode("sm:OnlineResource", _nsmgr)?.Attributes["xlink:href"].InnerText;
+                        wmsServerLayer.Style[i].LegendUrl.OnlineResource.OnlineResource = node.SelectSingleNode("sm:OnlineResource", _nsmgr)?.Attributes?["xlink:href"]?.InnerText;
                         wmsServerLayer.Style[i].LegendUrl.OnlineResource.Type =
                             node.SelectSingleNode("sm:Format", _nsmgr)?.InnerText;
                     }
-                    node = xnlStyle[i].SelectSingleNode("sm:StyleSheetURL", _nsmgr);
+                    node = xnlStyle[i]?.SelectSingleNode("sm:StyleSheetURL", _nsmgr);
                     if (node != null)
                     {
                         wmsServerLayer.Style[i].StyleSheetUrl = new WmsOnlineResource
                         {
                             OnlineResource =
-                            node.SelectSingleNode("sm:OnlineResource", _nsmgr)?.Attributes["xlink:href"].InnerText
+                            node.SelectSingleNode("sm:OnlineResource", _nsmgr)?.Attributes?["xlink:href"]?.InnerText
                         };
                     }
                 }
@@ -634,10 +639,10 @@ namespace Mapsui.Providers.Wms
             node = xmlLayer.SelectSingleNode("sm:LatLonBoundingBox", _nsmgr);
             if (node != null && node.Attributes != null)
             {
-                if (!double.TryParse(node.Attributes["minx"].Value, NumberStyles.Any, CultureInfo.InvariantCulture, out var minX) &
-                    !double.TryParse(node.Attributes["miny"].Value, NumberStyles.Any, CultureInfo.InvariantCulture, out var minY) &
-                    !double.TryParse(node.Attributes["maxx"].Value, NumberStyles.Any, CultureInfo.InvariantCulture, out var maxX) &
-                    !double.TryParse(node.Attributes["maxy"].Value, NumberStyles.Any, CultureInfo.InvariantCulture, out var maxY))
+                if (!double.TryParse(node.Attributes["minx"]?.Value, NumberStyles.Any, CultureInfo.InvariantCulture, out var minX) &
+                    !double.TryParse(node.Attributes["miny"]?.Value, NumberStyles.Any, CultureInfo.InvariantCulture, out var minY) &
+                    !double.TryParse(node.Attributes["maxx"]?.Value, NumberStyles.Any, CultureInfo.InvariantCulture, out var maxX) &
+                    !double.TryParse(node.Attributes["maxy"]?.Value, NumberStyles.Any, CultureInfo.InvariantCulture, out var maxY))
                     throw new ArgumentException("Invalid LatLonBoundingBox on layer '" + wmsServerLayer.Name + "'");
                 wmsServerLayer.LatLonBoundingBox = new MRect(minX, minY, maxX, maxY);
             }
@@ -652,14 +657,14 @@ namespace Mapsui.Providers.Wms
             if (xnlSrs != null)
             {
                 for (var i = 0; i < xnlSrs.Count; i++)
-                    crses.Add(xnlSrs[i].InnerText);
+                    crses.Add(xnlSrs[i]?.InnerText ?? string.Empty);
             }
 
             using var xnlCrs = xmlLayer.SelectNodes("sm:CRS", _nsmgr);
             if (xnlCrs != null)
             {
                 for (var i = 0; i < xnlCrs.Count; i++)
-                    crses.Add(xnlCrs[i].InnerText);
+                    crses.Add(xnlCrs[i]?.InnerText ?? string.Empty);
             }
 
             return crses.ToArray();

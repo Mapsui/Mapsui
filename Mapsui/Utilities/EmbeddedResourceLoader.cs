@@ -44,7 +44,7 @@ namespace Mapsui.Utilities
 
             if (similarNames.Length <= 0) return message;
 
-            var nameLength = assembly.GetAssemblyName().Length;
+            var nameLength = assembly.GetAssemblyName()?.Length ?? 0;
             similarNames = similarNames.Select(fullName => fullName.Remove(0, nameLength + 1)).ToArray();
             message += " Did you mean: " + string.Join("\n ", similarNames.ToArray()) + ".";
             Debug.WriteLine(message);

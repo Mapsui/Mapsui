@@ -30,7 +30,7 @@ namespace Mapsui.Providers.Wms
             return _featureInfo;
         }
 
-        private void ExtractFeatureInfo(XElement root)
+        private void ExtractFeatureInfo(XElement? root)
         {
             LookExtractMultipleElements(root);
 
@@ -38,9 +38,9 @@ namespace Mapsui.Providers.Wms
                 ExtractFeatures(root);
         }
 
-        private void LookExtractMultipleElements(XElement layer)
+        private void LookExtractMultipleElements(XElement? layer)
         {
-            if (!layer.HasElements) return;
+            if (layer==null || !layer.HasElements) return;
             var element = layer.Descendants().FirstOrDefault();
 
             if (element != null)
@@ -55,8 +55,11 @@ namespace Mapsui.Providers.Wms
             }
         }
 
-        private void ExtractFeatures(XContainer layer)
+        private void ExtractFeatures(XContainer? layer)
         {
+            if (layer == null)
+                return;
+            
             foreach (var feature in layer.Elements())
             {
                 _featureInfo?.FeatureInfos?.Add(ExtractFeatureElements(feature));
