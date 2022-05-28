@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Mapsui.Layers;
 using Mapsui.Nts;
 using Mapsui.Providers;
@@ -45,6 +46,7 @@ namespace Mapsui.Tests.Common.Maps
             };
         }
 
+        [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP003:Dispose previous before re-assigning")]
         private static IEnumerable<IFeature> CreateLineFeatures()
         {
             var features = new List<IFeature>();

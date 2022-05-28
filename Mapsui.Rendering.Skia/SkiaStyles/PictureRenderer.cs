@@ -77,7 +77,7 @@ namespace Mapsui.Rendering.Skia
             if (verticalAlignment == LabelStyle.VerticalAlignmentEnum.Bottom) return height / 2;
             return 0; // center
         }
-
+        
         [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP015:Member should not return created and cached instance")]
         private static SKPaint GetPaint(float layerOpacity, Color? blendModeColor, out bool dispose)
         {
