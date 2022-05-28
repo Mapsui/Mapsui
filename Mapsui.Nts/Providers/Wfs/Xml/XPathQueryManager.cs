@@ -417,7 +417,7 @@ namespace Mapsui.Providers.Wfs.Xml
             /// <param name="prefix">The prefix of the function</param>
             /// <param name="name">The name of the function</param>
             /// <param name="argTypes">A list of argument types of the function</param>
-            public override IXsltContextFunction? ResolveFunction(string prefix, string name, XPathResultType[] argTypes)
+            public override IXsltContextFunction ResolveFunction(string prefix, string name, XPathResultType[] argTypes)
             {
                 if (name.Equals(ParamCompare.FunctionName)) return new ParamCompare(argTypes, 2, 2);
                 if (name.Equals(ParamCompareWithTargetNs.FunctionName))
@@ -430,7 +430,7 @@ namespace Mapsui.Providers.Wfs.Xml
             /// </summary>
             /// <param name="prefix">The prefix of the variable</param>
             /// <param name="name">The name of the variable</param>
-            public override IXsltContextVariable? ResolveVariable(string prefix, string name)
+            public override IXsltContextVariable ResolveVariable(string prefix, string name)
             {
                 var param = GetParam(name);
                 if (param != null)
@@ -456,15 +456,15 @@ namespace Mapsui.Providers.Wfs.Xml
             {
                 var length = parameters.Length;
                 for (var i = 0; i < length; i++)
-                    _argumentList.AddParam(parameters[i].Key.ToString(),
-                                           string.Empty, parameters[i].Value.ToString());
+                    _argumentList.AddParam(parameters[i].Key.ToString()!,
+                                           string.Empty, parameters[i].Value?.ToString() ?? string.Empty);
             }
 
             /// <summary>
             /// This method gets a parameter by name.
             /// </summary>
             /// <param name="name">The name of the parameter</param>
-            public object GetParam(string name)
+            public object? GetParam(string name)
             {
                 return _argumentList.GetParam(name, string.Empty);
             }
@@ -473,7 +473,7 @@ namespace Mapsui.Providers.Wfs.Xml
             /// This method removes a parameter from the inherent parameter list.
             /// </summary>
             /// <param name="name">The name of the parameter</param>
-            public object RemoveParam(string name)
+            public object? RemoveParam(string name)
             {
                 return _argumentList.RemoveParam(name, string.Empty);
             }
@@ -591,7 +591,7 @@ namespace Mapsui.Providers.Wfs.Xml
             /// In many cases the argument is an XPathNodeIterator that must be resolved.
             /// </summary>
             /// <param name="arg">An argument of the function to be resolved</param>
-            protected string ResolveArgument(object arg)
+            protected string? ResolveArgument(object arg)
             {
                 if (arg is string)
                     return arg.ToString();
@@ -599,7 +599,7 @@ namespace Mapsui.Providers.Wfs.Xml
                 if (iterator != null)
                 {
                     if (iterator.MoveNext())
-                        return iterator.Current.Value;
+                        return iterator.Current?.Value;
                 }
                 return string.Empty;
             }
@@ -619,7 +619,7 @@ namespace Mapsui.Providers.Wfs.Xml
                 {
                     var prefix = args.Substring(0, args.IndexOf(":", StringComparison.Ordinal));
                     string ns;
-                    if (!string.IsNullOrEmpty((ns = xsltContext.LookupNamespace(prefix))))
+                    if (!string.IsNullOrEmpty((ns = xsltContext.LookupNamespace(prefix) ?? string.Empty)))
                         args = args.Replace(prefix + ":", ns);
                 }
                 return args;
@@ -685,7 +685,7 @@ namespace Mapsui.Providers.Wfs.Xml
                 {
                     var prefix = args.Substring(0, args.IndexOf(":", StringComparison.Ordinal));
                     string ns;
-                    if (!string.IsNullOrEmpty((ns = docContext.LookupNamespace(prefix))))
+                    if (!string.IsNullOrEmpty((ns = docContext.LookupNamespace(prefix) ?? string.Empty)))
                         return args.Replace(prefix + ":", ns);
                     return targetNs + args;
                 }

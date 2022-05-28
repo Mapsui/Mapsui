@@ -64,7 +64,7 @@ namespace Mapsui.Tiling.Fetcher
 
                 if (success)
                 {
-                    _tilesInProgress.Add(tileInfo.Index);
+                    _tilesInProgress.Add(tileInfo!.Index);
                     method = async () => await FetchOnThreadAsync(tileInfo);
                     return true;
                 }

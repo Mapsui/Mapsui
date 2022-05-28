@@ -115,11 +115,12 @@ namespace Mapsui.Providers.Wfs.Utilities
                     xWriter.WriteAttributeString("typeName", qualification + featureTypeInfo.Name);
                     xWriter.WriteAttributeString("srsName", CrsHelper.EpsgPrefix + featureTypeInfo.SRID);
                     xWriter.WriteElementString("PropertyName", qualification + featureTypeInfo.Geometry.GeometryName);
-                    foreach (var labelProperty in labelProperties.Where(labelProperty =>
-                                 !string.IsNullOrWhiteSpace(labelProperty)))
-                    {
-                        xWriter.WriteElementString("PropertyName", qualification + labelProperty);
-                    }
+                    if (labelProperties != null)
+                        foreach (var labelProperty in labelProperties.Where(labelProperty =>
+                                     !string.IsNullOrWhiteSpace(labelProperty)))
+                        {
+                            xWriter.WriteElementString("PropertyName", qualification + labelProperty);
+                        }
 
                     AppendGml3Filter(xWriter, featureTypeInfo, boundingBox, filter, qualification);
 
