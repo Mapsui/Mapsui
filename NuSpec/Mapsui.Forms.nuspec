@@ -21,13 +21,13 @@
 		<dependencies>
 			<group targetFramework="netstandard2.0">
 				<dependency id="Mapsui" version="$version$"/>
-				<dependency id="Xamarin.Forms" version="[5.0.0.2083,6.0)" />
+				<dependency id="Xamarin.Forms" version="[5.0.0.2401,6.0)" />
 				<dependency id="Xamarin.Essentials" version="[1.7.0,2.0)" />
 				<dependency id="SkiaSharp.Views.Forms" version="[2.88.0,3.0.0)" />
 			</group>
 			<group targetFramework="xamarinios1.0">
 				<dependency id="Mapsui" version="$version$"/>
-				<dependency id="Xamarin.Forms" version="[5.0.0.2083,6.0)" />
+				<dependency id="Xamarin.Forms" version="[5.0.0.2401,6.0)" />
 				<dependency id="Xamarin.Essentials" version="[1.7.0,2.0)" />
 				<dependency id="SkiaSharp.Views.Forms" version="[2.88.0,3.0.0)" />
 			</group>
