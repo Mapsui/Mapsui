@@ -21,7 +21,6 @@
     <PackageVersion Include="Microsoft.Win32.Primitives" Version="4.3.0" />
     <PackageVersion Include="NetTopologySuite" Version="2.4.0" />
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageVersion Include="NetStandard.Library" Version="2.0.3" />
     <PackageVersion Include="NUnit" Version="3.12.0" />
     <PackageVersion Include="NUnit3TestAdapter" Version="3.17.0" />
     <PackageVersion Include="SkiaSharp" Version="2.88.0" />
