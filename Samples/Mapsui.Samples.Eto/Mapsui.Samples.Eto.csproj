@@ -21,6 +21,11 @@
   <ItemGroup>
     <!-- Explicitly reference Linux native dlls to get them included -->
     <PackageReference Include="SkiaSharp.NativeAssets.Linux" />
+    <PackageReference Include="Eto.Forms" />
+  </ItemGroup>
+  
+  <ItemGroup Condition="'$(BuildPlatform)'=='Wpf'">
+    <PackageReference Include="Eto.Platform.Wpf" />
   </ItemGroup>
 
 </Project>
