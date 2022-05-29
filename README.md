@@ -1,5 +1,5 @@
 ## News
-
+- 2022 May 26: Release the first nuget of [Mapsui.Maui](https://www.nuget.org/packages/Mapsui.Maui)
 - 2022 Februari 12: Switched license to MIT (from LGPL)  
 - 2022 Februari 18: Released Mapsui 4.0.0-beta.1 https://github.com/Mapsui/Mapsui/releases/tag/4.0.0-beta.1
 
