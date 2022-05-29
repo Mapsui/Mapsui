@@ -30,6 +30,7 @@
     <PackageVersion Include="Microsoft.Graphics.Win2D" Version="1.0.3.1" />
     <PackageVersion Include="Microsoft.Net.Compilers.Toolset" Version="4.2.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
+    <PackageVersion Include="Microsoft.NETCore.Platforms" Version="3.1.0">
     <PackageVersion Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.13" />
     <PackageVersion Include="Microsoft.UI.Xaml" Version="2.6.2" />
     <PackageVersion Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.2.32"/>
@@ -43,6 +44,7 @@
     <PackageVersion Include="NUnit3TestAdapter" Version="3.17.0" />
     <PackageVersion Include="OpenTK" Version="3.1.0" />
     <PackageVersion Include="OpenTK.GLControl" Version="3.1.0" />
+    <PackageVersion Include="Plugin.CurrentActivity" Version="2.1.0.4" />
     <PackageVersion Include="SkiaSharp" Version="2.88.0" />
     <PackageVersion Include="SkiaSharp.HarfBuzz" Version=" 2.88.0" />
     <PackageVersion Include="SkiaSharp.NativeAssets.Linux" Version="2.88.0" />
@@ -57,16 +59,54 @@
     <PackageVersion Include="SkiaSharp.Views.WPF" Version="2.88.0" />
     <PackageVersion Include="sqlite-net-pcl" Version="1.6.292" />
     <PackageVersion Include="Svg.Skia" Version="0.5.12" />
+    <PackageVersion Include="System.AppContext" Version="4.3.0" />
+    <PackageVersion Include="System.Collections" Version="4.3.0" />
+    <PackageVersion Include="System.Collections.Concurrent" Version="4.3.0" />
+    <PackageVersion Include="System.Console" Version="4.3.1" />
     <PackageVersion Include="System.Data.DataSetExtensions" Version="4.5.0" />
     <PackageVersion Include="System.Diagnostics.Debug" Version="4.3.0" />
+    <PackageVersion Include="System.Diagnostics.Tools" Version="4.3.0" />
+    <PackageVersion Include="System.Diagnostics.Tracing"  Version="4.3.0" />
+    <PackageVersion Include="System.Globalization" Version="4.3.0" />
+    <PackageVersion Include="System.Globalization.Calendars" Version="4.3.0" />
+    <PackageVersion Include="System.IO" Version="4.3.0" />
+    <PackageVersion Include="System.IO.Compression" Version="4.3.0" />
+    <PackageVersion Include="System.IO.Compression.ZipFile" Version="4.3.0" />
+    <PackageVersion Include="System.IO.FileSystem" Version="4.3.0" />
+    <PackageVersion Include="System.IO.FileSystem.Primitives" Version="4.3.0" />
+    <PackageVersion Include="System.Linq" Version="4.3.0" />
     <PackageVersion Include="System.Linq.Async" Version="6.0.1" />
+    <PackageVersion Include="System.Linq.Expressions" Version="4.3.0" />
     <PackageVersion Include="System.Memory" Version="4.5.4" />
     <PackageVersion Include="System.Net.Http" Version="4.3.4" />
+    <PackageVersion Include="System.Net.Primitives" Version="4.3.1" />
+    <PackageVersion Include="System.Net.Sockets" Version="4.3.0" />
+    <PackageVersion Include="System.ObjectModel" Version="4.3.0"/>
+    <PackageVersion Include="System.Reflection" Version="4.3.0" />
+    <PackageVersion Include="System.Reflection.Extensions" Version="4.3.0" />
+    <PackageVersion Include="System.Reflection.Primitives" Version="4.3.0" />
+    <PackageVersion Include="System.Reflection.TypeExtensions" Version="4.7.0" />
+    <PackageVersion Include="System.Resources.ResourceManager" Version="4.3.0" />
+    <PackageVersion Include="System.Runtime" Version="4.3.1" />
+    <PackageVersion Include="System.Runtime.Extensions" Version="4.3.1" />
+    <PackageVersion Include="System.Runtime.Handles" Version="4.3.0" />
+    <PackageVersion Include="System.Runtime.InteropServices" Version="4.3.0" />
+    <PackageVersion Include="System.Runtime.InteropServices.RuntimeInformation" Version="4.3.0" />
+    <PackageVersion Include="System.Runtime.Numerics" Version="4.3.0">
     <PackageVersion Include="System.Security.Cryptography.Algorithms" Version="4.3.1" />
+    <PackageVersion Include="System.Security.Cryptography.Encoding" Version="4.3.0" />
+    <PackageVersion Include="System.Security.Cryptography.Primitives" Version="4.3.0" />
     <PackageVersion Include="System.Security.Cryptography.X509Certificates" Version="4.3.2" />
-    <PackageVersion Include="System.Threading" Version="4.3.0" />
-    <PackageVersion Include="Topten.RichTextKit" Version="0.4.145" />
+    <PackageVersion Include="System.Text.Encoding" Version="4.3.0" />
     <PackageVersion Include="System.Text.Encoding.CodePages" Version="6.0.0" />
+    <PackageVersion Include="System.Text.Encoding.Extensions" Version="4.3.0" />
+    <PackageVersion Include="System.Text.RegularExpressions" Version="4.3.0" />
+    <PackageVersion Include="System.Threading" Version="4.3.0" />
+    <PackageVersion Include="System.Threading.Tasks" Version="4.3.0" />
+    <PackageVersion Include="System.Threading.Timer" Version="4.3.0" />
+    <PackageVersion Include="System.Xml.ReaderWriter" Version="4.3.1" />
+    <PackageVersion Include="System.Xml.XDocument" Version="4.3.0" />
+    <PackageVersion Include="Topten.RichTextKit" Version="0.4.145" />
     <PackageVersion Include="Uno.Core" Version="4.0.1" />
     <PackageVersion Include="Uno.Extensions.Logging.OSLog" Version="1.3.0" />
     <PackageVersion Include="Uno.Extensions.Logging.WebAssembly.Console" Version="1.3.0" />
@@ -83,9 +123,12 @@
     <PackageVersion Include="Uno.Wasm.Bootstrap" Version="3.3.1" />
     <PackageVersion Include="Uno.Wasm.Bootstrap.DevServer" Version="3.3.1" />
     <PackageVersion Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
+    <PackageVersion Include="Xamarin.Android.Support.v7.MediaRouter" Version="28.0.0.3" />
     <PackageVersion Include="Xamarin.AndroidX.AppCompat" Version="1.3.1.3" />
     <PackageVersion Include="Xamarin.AndroidX.AppCompat.Resources" Version="1.1.0" />
     <PackageVersion Include="Xamarin.AndroidX.CoordinatorLayout" Version="1.1.0.10" />
+    <PackageVersion Include="Xamarin.AndroidX.MediaRouter" Version="1.2.0.1" />
+    <PackageVersion Include="Xamarin.AndroidX.Palette" Version="1.0.0.6" />
     <PackageVersion Include="Xamarin.Essentials" Version="1.7.0" />
     <PackageVersion Include="Xamarin.Forms" Version="5.0.0.2083" />
     <PackageVersion Include="Xamarin.Forms.Platform.WPF" Version="5.0.0.2083" />
