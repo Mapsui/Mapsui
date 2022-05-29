@@ -1,0 +1,14 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="BruTile" Version="5.0" />
+    <PackageVersion Include="BruTile.MbTiles" Version="5.0" />
+    <PackageVersion Include="IDisposableAnalyzers" Version="4.0.2" />
+    <PackageVersion Include="Microsoft.Net.Compilers.Toolset" Version="4.2.0" />
+    <PackageVersion Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.2.32"/>
+    <PackageVersion Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+</Project>
