@@ -14,12 +14,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Uno.UI" Version="4.2.6" />
-    <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.0" />    
+    <PackageReference Include="Uno.UI" />
+    <PackageReference Include="SkiaSharp.Views.Uno" />    
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'=='uap10.0.19041'">
-    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.13" />
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" />
   </ItemGroup>
 
   <ItemGroup>

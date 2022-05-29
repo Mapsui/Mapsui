@@ -5,41 +5,90 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Appveyor.TestLogger" Version="2.0.0" />
+    <PackageVersion Include="Avalonia" Version="0.10.12" />
+    <PackageVersion Include="Avalonia.Desktop" Version="0.10.12" />
+    <PackageVersion Include="Avalonia.Diagnostics" Version="0.10.12" />
+    <PackageVersion Include="Avalonia.ReactiveUI" Version="0.10.12" />
     <PackageVersion Include="BitMiracle.LibTiff.NET" Version="2.4.649" />
     <PackageVersion Include="BruTile" Version="5.0" />
     <PackageVersion Include="BruTile.MbTiles" Version="5.0" />
     <PackageVersion Include="coverlet.collector" Version="3.0.2" />
     <PackageVersion Include="DotSpatial.Projections.NetStandard" Version="1.0.0" />
     <PackageVersion Include="CommandLineParser" Version="2.8.0" />
+    <PackageVersion Include="CommunityToolkit.Maui.Markup" Version="1.0.0" />
+    <PackageVersion Include="Eto.SkiaDraw" Version="0.2.0" />
+    <PackageVersion Include="HarfBuzzSharp" Version="2.8.2" />
+    <PackageVersion Include="HarfBuzzSharp.NativeAssets.WebAssembly" Version="2.8.2" />
     <PackageVersion Include="IDisposableAnalyzers" Version="4.0.2" />
+    <PackageVersion Include="Itinero" Version="1.5.0" />
     <PackageVersion Include="Microsoft.Bcl.AsyncInterfaces" Version="6.0.0" />
     <PackageVersion Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageVersion Include="Microsoft.CodeCoverage" Version="16.11.0" />
+    <PackageVersion Include="Microsoft.Extensions.Logging" Version="5.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="5.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="5.0.0" />
+    <PackageVersion Include="Microsoft.Graphics.Win2D" Version="1.0.3.1" />
     <PackageVersion Include="Microsoft.Net.Compilers.Toolset" Version="4.2.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
+    <PackageVersion Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.13" />
+    <PackageVersion Include="Microsoft.UI.Xaml" Version="2.6.2" />
     <PackageVersion Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.2.32"/>
     <PackageVersion Include="Microsoft.Win32.Primitives" Version="4.3.0" />
+    <PackageVersion Include="Microsoft.Windows.CsWin32" Version="0.1.588-beta" />
+    <PackageVersion Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.194" />
+    <PackageVersion Include="Microsoft.WindowsAppSDK" Version="1.0.3" />
     <PackageVersion Include="NetTopologySuite" Version="2.4.0" />
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageVersion Include="NUnit" Version="3.12.0" />
     <PackageVersion Include="NUnit3TestAdapter" Version="3.17.0" />
+    <PackageVersion Include="OpenTK" Version="3.1.0" />
+    <PackageVersion Include="OpenTK.GLControl" Version="3.1.0" />
     <PackageVersion Include="SkiaSharp" Version="2.88.0" />
+    <PackageVersion Include="SkiaSharp.HarfBuzz" Version=" 2.88.0" />
+    <PackageVersion Include="SkiaSharp.NativeAssets.Linux" Version="2.88.0" />
+    <PackageVersion Include="SkiaSharp.NativeAssets.iOS" Version=" 2.88.0" />
+    <PackageVersion Include="SkiaSharp.NativeAssets.WebAssembly" Version="2.88.0" />
     <PackageVersion Include="SkiaSharp.Views" Version="2.88.0" />
     <PackageVersion Include="SkiaSharp.Views.Forms" Version="2.88.0" />
+    <PackageVersion Include="SkiaSharp.Views.Maui.Controls" Version="2.88.0" />
+    <PackageVersion Include="SkiaSharp.Views.Maui.Controls.Compatibility" Version="2.88.0" />
+    <PackageVersion Include="SkiaSharp.Views.Uno" Version="2.88.0" />
+    <PackageVersion Include="SkiaSharp.Views.WinUI" Version="2.88.0" />
+    <PackageVersion Include="SkiaSharp.Views.WPF" Version="2.88.0" />
     <PackageVersion Include="sqlite-net-pcl" Version="1.6.292" />
     <PackageVersion Include="Svg.Skia" Version="0.5.12" />
+    <PackageVersion Include="System.Data.DataSetExtensions" Version="4.5.0" />
     <PackageVersion Include="System.Diagnostics.Debug" Version="4.3.0" />
     <PackageVersion Include="System.Linq.Async" Version="6.0.1" />
+    <PackageVersion Include="System.Memory" Version="4.5.4" />
+    <PackageVersion Include="System.Net.Http" Version="4.3.4" />
     <PackageVersion Include="System.Security.Cryptography.Algorithms" Version="4.3.1" />
     <PackageVersion Include="System.Security.Cryptography.X509Certificates" Version="4.3.2" />
     <PackageVersion Include="System.Threading" Version="4.3.0" />
     <PackageVersion Include="Topten.RichTextKit" Version="0.4.145" />
     <PackageVersion Include="System.Text.Encoding.CodePages" Version="6.0.0" />
+    <PackageVersion Include="Uno.Core" Version="4.0.1" />
+    <PackageVersion Include="Uno.Extensions.Logging.OSLog" Version="1.3.0" />
+    <PackageVersion Include="Uno.Extensions.Logging.WebAssembly.Console" Version="1.3.0" />
+    <PackageVersion Include="Uno.Core.Extensions.Logging.Singleton" Version="4.0.1" />
+    <PackageVersion Include="Uno.UniversalImageLoader" Version="1.9.35" />
+    <PackageVersion Include="Uno.UI" Version="4.2.6" />
+    <PackageVersion Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.2.6" />
+    <PackageVersion Include="Uno.UI.RemoteControl" Version="4.2.6" Condition="'$(Configuration)'=='Debug'" />
+    <PackageVersion Include="Uno.UI.Skia.Gtk" Version="4.2.6" />
+    <PackageVersion Include="Uno.UI.Skia.Linux.FrameBuffer" Version="4.2.6" />
+    <PackageVersion Include="Uno.UI.Skia.Tizen" Version="4.2.6" />
+    <PackageVersion Include="Uno.UI.Skia.Wpf" Version="4.2.6" />
+    <PackageVersion Include="Uno.UI.WebAssembly" Version="4.2.6" />
+    <PackageVersion Include="Uno.Wasm.Bootstrap" Version="3.3.1" />
+    <PackageVersion Include="Uno.Wasm.Bootstrap.DevServer" Version="3.3.1" />
     <PackageVersion Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
     <PackageVersion Include="Xamarin.AndroidX.AppCompat" Version="1.3.1.3" />
+    <PackageVersion Include="Xamarin.AndroidX.AppCompat.Resources" Version="1.1.0" />
     <PackageVersion Include="Xamarin.AndroidX.CoordinatorLayout" Version="1.1.0.10" />
     <PackageVersion Include="Xamarin.Essentials" Version="1.7.0" />
     <PackageVersion Include="Xamarin.Forms" Version="5.0.0.2083" />
+    <PackageVersion Include="Xamarin.Forms.Platform.WPF" Version="5.0.0.2083" />
     <PackageVersion Include="Xamarin.Google.Android.Material" Version="1.4.0.4" />
   </ItemGroup>
 </Project>

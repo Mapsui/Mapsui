@@ -10,13 +10,13 @@
 			-->
       <Version>6.2.13</Version>
     </PackageReference>
-    <PackageReference Include="Microsoft.UI.Xaml" Version="2.6.2" />
-    <PackageReference Include="Uno.Core" Version="4.0.1" />
-    <PackageReference Include="Uno.UI" Version="4.2.6" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="5.0.0" />
-    <PackageReference Include="Uno.Core.Extensions.Logging.Singleton" Version="4.0.1" />
-    <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.0" />
+    <PackageReference Include="Microsoft.UI.Xaml" />
+    <PackageReference Include="Uno.Core" />
+    <PackageReference Include="Uno.UI" />
+    <PackageReference Include="Microsoft.Extensions.Logging" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" />
+    <PackageReference Include="Uno.Core.Extensions.Logging.Singleton" />
+    <PackageReference Include="SkiaSharp.Views.Uno" />
   </ItemGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
