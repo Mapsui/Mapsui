@@ -5,11 +5,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="NetTopologySuite" Version="2.4.0" />
+		<PackageReference Include="NetTopologySuite" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-		<PackageReference Include="System.Text.Encoding.CodePages" Version="6.0.0" />
+		<PackageReference Include="System.Text.Encoding.CodePages" />
 	</ItemGroup>
 
 	<ItemGroup>
