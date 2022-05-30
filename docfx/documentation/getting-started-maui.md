@@ -17,10 +17,11 @@ builder
   .UseMauiApp<App>()
   .UseSkiaSharp()
   .ConfigureFonts(fonts =>  
-```csharp
+```
+
 and add namespace 'SkiaSharp.Views.Maui.Controls.Hosting':
 
-```
+```csharp
 using SkiaSharp.Views.Maui.Controls.Hosting;
 ```
 
