@@ -1,4 +1,4 @@
-﻿<Project Sdk="Eto.Forms/2.6.0">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <!--
     Set the BuildPlatform property to the Eto platform you wish to build for.
@@ -23,9 +23,38 @@
     <PackageReference Include="SkiaSharp.NativeAssets.Linux" />
     <PackageReference Include="Eto.Forms" />
   </ItemGroup>
-  
+
+  <PropertyGroup Condition="'$(BuildPlatform)'=='' and $([MSBuild]::IsOSPlatform(Windows))">
+    <BuildPlatform>Wpf</BuildPlatform>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(BuildPlatform)'=='' and $([MSBuild]::IsOSPlatform(Linux))">
+    <BuildPlatform>Gtk</BuildPlatform>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(BuildPlatform)'=='' and $([MSBuild]::IsOSPlatform(OSX))">
+    <BuildPlatform>Mac64</BuildPlatform>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(BuildPlatform)'=='Mac64' or '$(BuildPlatform)'=='XamMac2'">
+    <RuntimeIdentifiers>osx-x64</RuntimeIdentifiers>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(BuildPlatform)'=='Wpf' or '$(BuildPlatform)'=='Windows'">
+    <TargetFramework>$(TargetFramework)-windows</TargetFramework>
+  </PropertyGroup>
+
   <ItemGroup Condition="'$(BuildPlatform)'=='Wpf'">
     <PackageReference Include="Eto.Platform.Wpf" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(BuildPlatform)'=='Windows'">
+    <PackageReference Include="Eto.Platform.Windows" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(BuildPlatform)'=='Mac64'">
+    <PackageReference Include="Eto.Platform.Mac64" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(BuildPlatform)'=='XamMac2'">
+    <PackageReference Include="Eto.Platform.XamMac2" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(BuildPlatform)'=='Gtk'">
+    <PackageReference Include="Eto.Platform.Gtk" />
   </ItemGroup>
 
 </Project>
