@@ -18,6 +18,13 @@ builder
   .UseSkiaSharp()
   .ConfigureFonts(fonts =>  
 ```
+
+and add namespace 'SkiaSharp.Views.Maui.Controls.Hosting':
+
+```csharp
+using SkiaSharp.Views.Maui.Controls.Hosting;
+```
+
 This is because Mapsui depends on SkiaSharp which needs this call. We hope that this will not be necessary in a future version of Mapsui.Maui. Without this line the app will crash with this exception: "Catastrophic failure (0x8000FFFF (E_UNEXPECTED))".
 
 ### Step 4
