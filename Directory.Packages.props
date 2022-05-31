@@ -18,6 +18,10 @@
     <PackageVersion Include="CommunityToolkit.Maui.Markup" Version="1.0.0" />
     <PackageVersion Include="Eto.Forms" Version="2.6.0" />
     <PackageVersion Include="Eto.Platform.Wpf" Version="2.6.0" />
+    <PackageVersion Include="Eto.Platform.Windows" Version="2.6.0" />
+    <PackageVersion Include="Eto.Platform.Mac64" Version="2.6.0" />
+    <PackageVersion Include="Eto.Platform.XamMac2" Version="2.6.0" />
+    <PackageVersion Include="Eto.Platform.Gtk" Version="2.6.0" />
     <PackageVersion Include="Eto.SkiaDraw" Version="0.2.0" />
     <PackageVersion Include="HarfBuzzSharp" Version="2.8.2" />
     <PackageVersion Include="HarfBuzzSharp.NativeAssets.WebAssembly" Version="2.8.2" />
