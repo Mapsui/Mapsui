@@ -42,7 +42,7 @@ namespace Mapsui.Styles
         /// <summary> Unregister an existing bitmap </summary>
         /// <param name="id">Id of registered bitmap data</param>
         /// <returns>The unregistered object</returns>
-        public object Unregister(int id)
+        public object? Unregister(int id)
         {
             _register.TryGetValue(id, out var val);
             _register.Remove(id);

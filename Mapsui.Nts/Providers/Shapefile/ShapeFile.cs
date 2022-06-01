@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -890,7 +891,8 @@ namespace Mapsui.Nts.Providers.Shapefile
         }
 
 
-        public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+        [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
+        public Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
         {
             lock (_syncRoot)
             {
@@ -913,7 +915,7 @@ namespace Mapsui.Nts.Providers.Shapefile
                             features.Add(feature);
                         }
                     }
-                    return features;
+                    return Task.FromResult((IEnumerable<IFeature>)features);
                 }
                 finally
                 {

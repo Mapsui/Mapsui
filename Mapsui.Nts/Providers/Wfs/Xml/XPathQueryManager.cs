@@ -333,7 +333,7 @@ namespace Mapsui.Providers.Wfs.Xml
         /// <param name="xPath">A compiled XPath expression</param>
         private void FindXPath(XPathExpression? xPath)
         {
-            xPath?.SetContext(_paramContext);
+            xPath?.SetContext(_paramContext!);
             if (xPath != null)
                 _xIter = _xNav?.Select(xPath);
             InitializeCustomContext(_paramContext);
@@ -344,7 +344,7 @@ namespace Mapsui.Providers.Wfs.Xml
             if (paramContext == null)
                 return;
             var namespaces = paramContext.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
-            _paramContext = new CustomQueryContext((NameTable)paramContext.NameTable);
+            _paramContext = new CustomQueryContext((NameTable)(paramContext.NameTable ?? new NameTable()));
             if (namespaces != null)
             {
                 _paramContext.AddNamespace(namespaces);
@@ -417,12 +417,12 @@ namespace Mapsui.Providers.Wfs.Xml
             /// <param name="prefix">The prefix of the function</param>
             /// <param name="name">The name of the function</param>
             /// <param name="argTypes">A list of argument types of the function</param>
-            public override IXsltContextFunction? ResolveFunction(string prefix, string name, XPathResultType[] argTypes)
+            public override IXsltContextFunction ResolveFunction(string prefix, string name, XPathResultType[] argTypes)
             {
                 if (name.Equals(ParamCompare.FunctionName)) return new ParamCompare(argTypes, 2, 2);
                 if (name.Equals(ParamCompareWithTargetNs.FunctionName))
                     return new ParamCompareWithTargetNs(argTypes, 3, 3);
-                return null;
+                return null!;
             }
 
             /// <summary>
@@ -430,12 +430,12 @@ namespace Mapsui.Providers.Wfs.Xml
             /// </summary>
             /// <param name="prefix">The prefix of the variable</param>
             /// <param name="name">The name of the variable</param>
-            public override IXsltContextVariable? ResolveVariable(string prefix, string name)
+            public override IXsltContextVariable ResolveVariable(string prefix, string name)
             {
                 var param = GetParam(name);
                 if (param != null)
                     return new ParamFunctionVar(param);
-                return null;
+                return null!;
             }
 
             /// <summary>
@@ -456,15 +456,15 @@ namespace Mapsui.Providers.Wfs.Xml
             {
                 var length = parameters.Length;
                 for (var i = 0; i < length; i++)
-                    _argumentList.AddParam(parameters[i].Key.ToString(),
-                                           string.Empty, parameters[i].Value.ToString());
+                    _argumentList.AddParam(parameters[i].Key.ToString()!,
+                                           string.Empty, parameters[i].Value?.ToString() ?? string.Empty);
             }
 
             /// <summary>
             /// This method gets a parameter by name.
             /// </summary>
             /// <param name="name">The name of the parameter</param>
-            public object GetParam(string name)
+            public object? GetParam(string name)
             {
                 return _argumentList.GetParam(name, string.Empty);
             }
@@ -473,7 +473,7 @@ namespace Mapsui.Providers.Wfs.Xml
             /// This method removes a parameter from the inherent parameter list.
             /// </summary>
             /// <param name="name">The name of the parameter</param>
-            public object RemoveParam(string name)
+            public object? RemoveParam(string name)
             {
                 return _argumentList.RemoveParam(name, string.Empty);
             }
@@ -580,18 +580,16 @@ namespace Mapsui.Providers.Wfs.Xml
             /// <returns>A boolean value indicating whether the argument strings are identical</returns>
             public virtual object Invoke(XsltContext xsltContext, object[] args, XPathNavigator docContext)
             {
-                return ResolveNsPrefix(ResolveArgument(args[0]), xsltContext).Equals(
-                    ResolveNsPrefix(ResolveArgument(args[1]), xsltContext), StringComparison.Ordinal);
+                return ResolveNsPrefix(ResolveArgument(args[0]), xsltContext)?.Equals(
+                    ResolveNsPrefix(ResolveArgument(args[1]), xsltContext), StringComparison.Ordinal) ?? false;
             }
-
-
 
             /// <summary>
             /// This method creates a string from an object argument.
             /// In many cases the argument is an XPathNodeIterator that must be resolved.
             /// </summary>
             /// <param name="arg">An argument of the function to be resolved</param>
-            protected string ResolveArgument(object arg)
+            protected string? ResolveArgument(object arg)
             {
                 if (arg is string)
                     return arg.ToString();
@@ -599,7 +597,7 @@ namespace Mapsui.Providers.Wfs.Xml
                 if (iterator != null)
                 {
                     if (iterator.MoveNext())
-                        return iterator.Current.Value;
+                        return iterator.Current?.Value;
                 }
                 return string.Empty;
             }
@@ -613,13 +611,13 @@ namespace Mapsui.Providers.Wfs.Xml
             /// </summary>
             /// <param name="args">An argument of the function to be resolved</param>
             /// <param name="xsltContext">The Xslt context for namespace resolving</param>
-            private string ResolveNsPrefix(string args, XsltContext xsltContext)
+            private string? ResolveNsPrefix(string? args, XsltContext xsltContext)
             {
-                if (args.Contains(":"))
+                if (args?.Contains(":") ?? false)
                 {
                     var prefix = args.Substring(0, args.IndexOf(":", StringComparison.Ordinal));
                     string ns;
-                    if (!string.IsNullOrEmpty((ns = xsltContext.LookupNamespace(prefix))))
+                    if (!string.IsNullOrEmpty((ns = xsltContext.LookupNamespace(prefix) ?? string.Empty)))
                         args = args.Replace(prefix + ":", ns);
                 }
                 return args;
@@ -679,13 +677,13 @@ namespace Mapsui.Providers.Wfs.Xml
             /// <param name="args">An argument of the function to be resolved</param>
             /// <param name="targetNs"></param>
             /// <param name="docContext"></param>
-            private static string resolveNsPrefix(string args, string targetNs, XPathNavigator docContext)
+            private static string resolveNsPrefix(string? args, string targetNs, XPathNavigator docContext)
             {
-                if (args.Contains(":"))
+                if (args?.Contains(":") ?? false)
                 {
                     var prefix = args.Substring(0, args.IndexOf(":", StringComparison.Ordinal));
                     string ns;
-                    if (!string.IsNullOrEmpty((ns = docContext.LookupNamespace(prefix))))
+                    if (!string.IsNullOrEmpty((ns = docContext.LookupNamespace(prefix) ?? string.Empty)))
                         return args.Replace(prefix + ":", ns);
                     return targetNs + args;
                 }

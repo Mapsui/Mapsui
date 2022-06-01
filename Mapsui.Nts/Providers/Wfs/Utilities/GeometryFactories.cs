@@ -243,7 +243,9 @@ namespace Mapsui.Providers.Wfs.Utilities
                 IgnoreWhitespace = true,
                 DtdProcessing = DtdProcessing.Prohibit
             };
-            XmlReader = XmlReader.Create(httpClientUtil.GetDataStream(), xmlReaderSettings);
+            XmlReader = XmlReader.Create(
+                httpClientUtil.GetDataStream() ?? throw new ArgumentException(nameof(httpClientUtil)), 
+                xmlReaderSettings);
         }
 
         /// <summary>

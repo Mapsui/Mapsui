@@ -48,7 +48,7 @@ namespace Mapsui.Samples.Forms
 
             mapView.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
 
-            Task.Run(() => StartGPSAsync());
+            _ = Task.Run(() => StartGPSAsync());
 
             try
             {
@@ -57,7 +57,7 @@ namespace Mapsui.Samples.Forms
             }
             catch (Exception) { }
 
-            Task.Run(async () =>
+            _ = Task.Run(async () =>
             {
                 try
                 {

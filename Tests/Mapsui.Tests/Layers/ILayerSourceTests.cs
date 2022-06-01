@@ -15,7 +15,7 @@ namespace Mapsui.Tests.Layers
         [Test]
         public void TestTypes()
         {
-            var memoryLayer = new Layer() { DataSource = new MemoryProvider() };
+            using var memoryLayer = new Layer() { DataSource = new MemoryProvider() };
 
             if (memoryLayer is ILayerDataSource<IProvider> source)
             {

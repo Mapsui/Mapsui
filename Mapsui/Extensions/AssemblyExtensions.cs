@@ -4,8 +4,11 @@ namespace Mapsui.Extensions
 {
     public static class AssemblyExtensions
     {
-        public static string GetAssemblyName(this Assembly assembly)
+        public static string? GetAssemblyName(this Assembly assembly)
         {
+            if (assembly.FullName == null)
+                return null;
+            
             return new AssemblyName(assembly.FullName).Name;
         }
 

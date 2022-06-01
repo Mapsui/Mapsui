@@ -199,19 +199,19 @@ namespace Mapsui.Nts.Providers.Shapefile.Indexing
         {
             if (root == null)
                 yield break;
-            if (string.Compare(root.Item.Value?.ToString().Substring(0, val.Length).ToUpper(),
+            if (string.Compare(root.Item.Value?.ToString()?.Substring(0, val.Length).ToUpper(),
                     val, StringComparison.Ordinal) > 0)
                 if (root.LeftNode != null)
-                    if (root.LeftNode.Item.Value?.ToString().ToUpper().StartsWith(val) ?? false)
+                    if (root.LeftNode.Item.Value?.ToString()?.ToUpper().StartsWith(val) ?? false)
                         foreach (var item in ScanString(val, root.LeftNode))
                             yield return item;
 
-            if (root.Item.Value?.ToString().ToUpper().StartsWith(val) ?? false)
+            if (root.Item.Value?.ToString()?.ToUpper().StartsWith(val) ?? false)
                 yield return root.Item;
 
             if (string.Compare(root.Item.Value?.ToString(), val, StringComparison.Ordinal) < 0)
                 if (root.RightNode != null)
-                    if (string.Compare(root.RightNode.Item.Value?.ToString().Substring(0, val.Length).ToUpper(), val, StringComparison.Ordinal) > 0)
+                    if (string.Compare(root.RightNode.Item.Value?.ToString()?.Substring(0, val.Length).ToUpper(), val, StringComparison.Ordinal) > 0)
                         foreach (var item in ScanString(val, root.RightNode))
                             yield return item;
         }
