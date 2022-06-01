@@ -207,7 +207,9 @@ namespace Mapsui
         /// <param name="maxDuration">Maximum duration of fling deceleration></param>
         public void FlingWith(double velocityX, double velocityY, long maxDuration)
         {
-            _viewport.SetAnimations(FlingAnimation.Create(velocityX, velocityY, maxDuration));
+            var response = FlingAnimation.Create(velocityX, velocityY, maxDuration);
+            _viewport.SetAnimations(response.Entries);
+            OnNavigated(response.Duration, ChangeType.Discrete);
         }
 
         public void Dispose()
