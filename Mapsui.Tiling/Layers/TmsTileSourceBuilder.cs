@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Threading;
 using BruTile;
 using BruTile.Cache;
@@ -8,6 +9,9 @@ using BruTile.Tms;
 using Mapsui.Cache;
 using Mapsui.Extensions;
 using Mapsui.Logging;
+
+#pragma warning disable IDE0079 // Justification: There is an error in the tool, removing the suppression below introduced a warning.
+#pragma warning disable SYSLIB0014 // Justification: This is old code that is hardly used. Only replace WebRequest with HttpClient if we have use case
 
 namespace Mapsui.Tiling.Layers
 {
@@ -43,7 +47,10 @@ namespace Mapsui.Tiling.Layers
                 waitHandle.WaitOne();
             }
 
-            if (error != null) throw error;
+            if (error is not null) throw error;
+
+            if (bytes is null) 
+                throw new HttpRequestException($"Could not retrieve data from {urlToTileMapXml}");
 
             var stream = new MemoryStream(bytes);
             var tileSource = overrideTmsUrlWithUrlToTileMapXml
@@ -53,7 +60,7 @@ namespace Mapsui.Tiling.Layers
             return tileSource!;
         }
 
-        public static void LoadTmsLayer(IAsyncResult result)
+        private static void LoadTmsLayer(IAsyncResult result)
         {
             var state = (object[]?)result.AsyncState;
             if (state == null)
