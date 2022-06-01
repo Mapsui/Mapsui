@@ -11,15 +11,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
-		<PackageReference Include="NUnit" Version="3.12.0" />
-		<PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
-    <PackageReference Include="SkiaSharp.Views.Forms.WPF" Version="2.88.0" NoWarn="NU1701"/>
-		<PackageReference Include="Xamarin.Forms.Platform.WPF" Version="5.0.0.2083" NoWarn="NU1701" />
-		<PackageReference Include="Xamarin.Forms" Version="5.0.0.2083" />
-    <PackageReference Include="OpenTK.GLControl" Version="3.1.0" NoWarn="NU1701"/>
-    <PackageReference Include="OpenTK" Version="3.1.0" NoWarn="NU1701"/>
+		<PackageReference Include="Appveyor.TestLogger" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" />
+		<PackageReference Include="NUnit" />
+		<PackageReference Include="NUnit3TestAdapter" />
+    <PackageReference Include="SkiaSharp.Views.Forms.WPF" NoWarn="NU1701"/>
+		<PackageReference Include="Xamarin.Forms.Platform.WPF" NoWarn="NU1701" />
+		<PackageReference Include="Xamarin.Forms" />
+    <PackageReference Include="OpenTK.GLControl" NoWarn="NU1701"/>
+    <PackageReference Include="OpenTK" NoWarn="NU1701"/>
 	</ItemGroup>
 	
 </Project>

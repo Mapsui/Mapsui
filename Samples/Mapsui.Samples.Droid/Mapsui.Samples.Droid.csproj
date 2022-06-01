@@ -36,11 +36,11 @@
     <None Remove="Resources\values\styles.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="BruTile.MbTiles" Version="5.0.0" />
-    <PackageReference Include="SkiaSharp" Version="2.88.0" />
-    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.3.1.3" />
-    <PackageReference Include="Xamarin.AndroidX.CoordinatorLayout" Version="1.1.0.10" />
-    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.4.0.4" />
+    <PackageReference Include="BruTile.MbTiles" />
+    <PackageReference Include="SkiaSharp" />
+    <PackageReference Include="Xamarin.AndroidX.AppCompat" />
+    <PackageReference Include="Xamarin.AndroidX.CoordinatorLayout" />
+    <PackageReference Include="Xamarin.Google.Android.Material" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
@@ -48,8 +48,5 @@
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />
     <ProjectReference Include="..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
     <ProjectReference Include="..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <AdditionalFiles Remove="C:\Users\ts\.nuget\packages\microsoft.visualstudio.threading.analyzers\17.0.64\build\AdditionalFiles\vs-threading.LegacyThreadSwitchingMembers.txt" />
   </ItemGroup>
 </Project>

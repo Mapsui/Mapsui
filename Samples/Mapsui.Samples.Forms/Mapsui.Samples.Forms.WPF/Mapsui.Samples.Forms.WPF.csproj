@@ -14,34 +14,21 @@
     <ProjectReference Include="..\Mapsui.Samples.Forms.Shared\Mapsui.Samples.Forms.Shared.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="BruTile.MbTiles" Version="5.0.0">
-    </PackageReference>
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="OpenTK.GLControl" Version="3.1.0">
-    </PackageReference>
-    <PackageReference Include="SkiaSharp.Views.Forms.WPF" Version="2.88.0">
-    </PackageReference>
-    <PackageReference Include="sqlite-net-pcl" Version="1.6.292">
-    </PackageReference>
-    <PackageReference Include="Svg.Skia" Version="0.5.12">
-    </PackageReference>
-    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
-    <PackageReference Include="System.Memory" Version="4.5.4">
-    </PackageReference>
-    <PackageReference Include="System.Net.Http" Version="4.3.4">
-    </PackageReference>
-    <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.1">
-    </PackageReference>
-    <PackageReference Include="System.Security.Cryptography.X509Certificates" Version="4.3.2">
-    </PackageReference>
-    <PackageReference Include="Topten.RichTextKit" Version="0.4.145">
-    </PackageReference>
-    <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6">
-    </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2083">
-    </PackageReference>
-    <PackageReference Include="Xamarin.Forms.Platform.WPF" Version="5.0.0.2083">
-    </PackageReference>
+    <PackageReference Include="BruTile.MbTiles" />
+    <PackageReference Include="Microsoft.CSharp" />
+    <PackageReference Include="OpenTK.GLControl" />
+    <PackageReference Include="SkiaSharp.Views.Forms.WPF" />
+    <PackageReference Include="sqlite-net-pcl" />
+    <PackageReference Include="Svg.Skia" />
+    <PackageReference Include="System.Data.DataSetExtensions" />
+    <PackageReference Include="System.Memory" />
+    <PackageReference Include="System.Net.Http" />
+    <PackageReference Include="System.Security.Cryptography.Algorithms" />
+    <PackageReference Include="System.Security.Cryptography.X509Certificates" />
+    <PackageReference Include="Topten.RichTextKit" />
+    <PackageReference Include="Xam.Plugin.Geolocator" />
+    <PackageReference Include="Xamarin.Forms" />
+    <PackageReference Include="Xamarin.Forms.Platform.WPF" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="App.xaml" />

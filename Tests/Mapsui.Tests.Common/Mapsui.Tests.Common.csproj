@@ -42,7 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BruTile" Version="5.0.0" />
+    <PackageReference Include="BruTile" />
   </ItemGroup>
 
 </Project>

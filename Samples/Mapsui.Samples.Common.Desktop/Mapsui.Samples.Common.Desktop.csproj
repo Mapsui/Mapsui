@@ -2,8 +2,6 @@
 
   <PropertyGroup>
     <TargetFrameworks>net48;netcoreapp3.1</TargetFrameworks>
-    <Version>2.0.0</Version>
-    <Authors>Mapsui Contributors</Authors>
   </PropertyGroup>
 
   <ItemGroup>
@@ -76,8 +74,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BruTile" Version="5.0.0" />
-    <PackageReference Include="BruTile.MbTiles" Version="5.0.0" />
+    <PackageReference Include="BruTile" />
+    <PackageReference Include="BruTile.MbTiles" />
   </ItemGroup>
 
   <ItemGroup>

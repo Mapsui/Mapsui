@@ -42,9 +42,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="SkiaSharp" Version="2.88.0" />
-    <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.0" />
-    <PackageReference Include="SkiaSharp.Views.Maui.Controls.Compatibility" Version="2.88.0" />
+    <PackageReference Include="SkiaSharp" />
+    <PackageReference Include="SkiaSharp.Views.Maui.Controls" />
+    <PackageReference Include="SkiaSharp.Views.Maui.Controls.Compatibility" />
   </ItemGroup>
 
   <ItemGroup>
