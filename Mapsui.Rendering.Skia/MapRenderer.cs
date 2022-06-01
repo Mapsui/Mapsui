@@ -70,7 +70,8 @@ namespace Mapsui.Rendering.Skia
             Render(canvas, viewport, widgets, 1);
         }
 
-        public MemoryStream? RenderToBitmapStream(IReadOnlyViewport? viewport, IEnumerable<ILayer> layers, Color? background = null, float pixelDensity = 1)
+        public MemoryStream? RenderToBitmapStream(IReadOnlyViewport? viewport, IEnumerable<ILayer> layers, 
+            Color? background = null, float pixelDensity = 1, IEnumerable<IWidget>? widgets = null)
         {
             if (viewport == null)
                 return null;
@@ -89,6 +90,8 @@ namespace Mapsui.Rendering.Skia
                 if (background is not null) surface.Canvas.Clear(background.ToSkia());
                 surface.Canvas.Scale(pixelDensity, pixelDensity);
                 Render(surface.Canvas, viewport, layers);
+                if (widgets is not null)
+                    Render(surface.Canvas, viewport, widgets, 1);
                 using var image = surface.Snapshot();
                 using var data = image.Encode();
                 var memoryStream = new MemoryStream();
