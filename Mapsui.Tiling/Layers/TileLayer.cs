@@ -18,8 +18,6 @@ using Mapsui.Tiling.Extensions;
 using Mapsui.Tiling.Fetcher;
 using Mapsui.Tiling.Rendering;
 
-#pragma warning disable CS8670 // Object or collection initializer implicitly dereferences possibly null member.
-
 namespace Mapsui.Tiling.Layers
 {
     /// <summary>
