@@ -128,6 +128,7 @@
 		<PackageVersion Include="Uno.UI.WebAssembly" Version="4.3.6" />
 		<PackageVersion Include="Uno.Wasm.Bootstrap" Version="3.3.1" />
 		<PackageVersion Include="Uno.Wasm.Bootstrap.DevServer" Version="3.3.1" />
+    <PackageVersion Include="Microsoft.Windows.Compatibility" Version="5.0.0" />
 		<PackageVersion Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
 		<PackageVersion Include="Xamarin.Android.Support.v7.MediaRouter" Version="28.0.0.3" />
 		<PackageVersion Include="Xamarin.AndroidX.AppCompat" Version="1.4.1.1" />
