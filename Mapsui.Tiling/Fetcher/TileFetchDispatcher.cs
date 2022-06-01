@@ -60,11 +60,9 @@ namespace Mapsui.Tiling.Fetcher
             lock (_lockRoot)
             {
                 UpdateIfViewportIsModified();
-                var success = _tilesToFetch.TryDequeue(out var tileInfo);
-
-                if (success)
+                if (_tilesToFetch.TryDequeue(out var tileInfo))
                 {
-                    _tilesInProgress.Add(tileInfo!.Index);
+                    _tilesInProgress.Add(tileInfo.Index);
                     method = async () => await FetchOnThreadAsync(tileInfo);
                     return true;
                 }
