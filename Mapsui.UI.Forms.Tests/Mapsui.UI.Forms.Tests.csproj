@@ -15,11 +15,11 @@
 		<PackageReference Include="Microsoft.NET.Test.Sdk" />
 		<PackageReference Include="NUnit" />
 		<PackageReference Include="NUnit3TestAdapter" />
-    <PackageReference Include="SkiaSharp.Views.Forms.WPF" NoWarn="NU1701"/>
+		<PackageReference Include="SkiaSharp.Views.Forms.WPF" NoWarn="NU1701"/>
 		<PackageReference Include="Xamarin.Forms.Platform.WPF" NoWarn="NU1701" />
 		<PackageReference Include="Xamarin.Forms" />
-    <PackageReference Include="OpenTK.GLControl" NoWarn="NU1701"/>
-    <PackageReference Include="OpenTK" NoWarn="NU1701"/>
+		<PackageReference Include="OpenTK.GLControl" NoWarn="NU1701"/>
+		<PackageReference Include="OpenTK" NoWarn="NU1701"/>
 	</ItemGroup>
-	
+
 </Project>
