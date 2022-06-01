@@ -103,6 +103,13 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
             scaleBarText1 ??= string.Empty;
             _paintScaleTextStroke.MeasureText(scaleBarText1, ref textSize1);
 
+            if (scaleBar.ScaleBarMode == ScaleBarMode.Both && scaleBar.SecondaryUnitConverter != null)
+            {
+                // If there is SecondaryUnitConverter we need to calculate the size before passing it into GetScaleBarTextPositions
+                scaleBarText2 ??= string.Empty;
+                _paintScaleTextStroke.MeasureText(scaleBarText2, ref textSize2);
+            }
+
             var (posX1, posY1, posX2, posY2) = scaleBar.GetScaleBarTextPositions(viewport, textSize.ToMRect(), textSize1.ToMRect(), textSize2.ToMRect(), scaleBar.StrokeWidthHalo);
 
             // Now draw text
@@ -114,9 +121,6 @@ namespace Mapsui.Rendering.Skia.SkiaWidgets
             if (scaleBar.ScaleBarMode == ScaleBarMode.Both && scaleBar.SecondaryUnitConverter != null)
             {
                 // Now draw second text
-                scaleBarText2 ??= string.Empty;
-                _paintScaleTextStroke.MeasureText(scaleBarText2, ref textSize2);
-
                 canvas.DrawText(scaleBarText2, posX2, posY2 - textSize2.Top, _paintScaleTextStroke);
                 canvas.DrawText(scaleBarText2, posX2, posY2 - textSize2.Top, _paintScaleText);
 

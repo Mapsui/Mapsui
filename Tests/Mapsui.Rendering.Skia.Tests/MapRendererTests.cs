@@ -273,6 +273,24 @@ namespace Mapsui.Rendering.Skia.Tests
             Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.995));
         }
 
+        [Test]
+        public void Widgets()
+        {
+            // arrange
+            using var map = WidgetsSample.CreateMap();
+            var viewport = new Viewport { Resolution = 1, Width = 600, Height = 600 };
+            const string fileName = "widgets.png";
+
+            // act
+            using var bitmap = new MapRenderer().RenderToBitmapStream(viewport, map.Layers, map.BackColor, 2, map.Widgets);
+
+            // aside
+            File.WriteToGeneratedTestImagesFolder(fileName, bitmap);
+
+            // assert
+            Assert.IsTrue(CompareBitmaps(File.ReadFromOriginalFolder(fileName), bitmap, 1, 0.99));
+        }
+
         private static bool CompareColors(SKColor color1, SKColor color2, int allowedColorDistance)
         {
             if (color1.Alpha == 0 && color2.Alpha == 0) return true; // If both are transparent all colors are ignored

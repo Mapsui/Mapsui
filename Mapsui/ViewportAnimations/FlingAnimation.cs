@@ -7,25 +7,25 @@ namespace Mapsui.ViewportAnimations
 {
     public static class FlingAnimation
     {
-        public static List<AnimationEntry<Viewport>> Create(double velocityX, double velocityY, long maxDuration)
+        public static (List<AnimationEntry<Viewport>> Entries, long Duration) Create(double velocityX, double velocityY, long maxDuration)
         {
             var animations = new List<AnimationEntry<Viewport>>();
 
             if (maxDuration < 16)
-                return animations;
+                return (animations, 0);
 
             velocityX = -velocityX; // reverse as it finger direction is opposite to map movement
             velocityY = -velocityY; // reverse as it finger direction is opposite to map movement
 
             var magnitudeOfV = Math.Sqrt(velocityX * velocityX + velocityY * velocityY);
 
-            var animateMillis = magnitudeOfV / 10;
+            var duration = magnitudeOfV / 10;
 
-            if (magnitudeOfV < 100 || animateMillis < 16)
-                return animations; ;
+            if (magnitudeOfV < 100 || duration < 16)
+                return (animations, 0); ;
 
-            if (animateMillis > maxDuration)
-                animateMillis = maxDuration;
+            if (duration > maxDuration)
+                duration = maxDuration;
 
             var entry = new AnimationEntry<Viewport>(
                 start: (velocityX, velocityY),
@@ -37,9 +37,9 @@ namespace Mapsui.ViewportAnimations
             );
             animations.Add(entry);
 
-            Animation.Start(animations, (long)animateMillis);
+            Animation.Start(animations, (long)duration);
 
-            return animations;
+            return (animations, (long)Math.Ceiling(duration));
         }
 
         private static void FlingTick(Viewport viewport, AnimationEntry<Viewport> entry, double value)
