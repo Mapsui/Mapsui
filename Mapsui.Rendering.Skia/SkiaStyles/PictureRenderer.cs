@@ -2,6 +2,7 @@
 using Mapsui.Styles;
 using SkiaSharp;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Mapsui.Rendering.Skia
 {
@@ -11,6 +12,7 @@ namespace Mapsui.Rendering.Skia
         // Note that setting the FilterQuality to Low increases the quality because the default is None.
         private static readonly SKPaint DefaultPaint = new() { FilterQuality = SKFilterQuality.Low };
 
+        [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
         public static void Draw(SKCanvas canvas, SKPicture picture, SKRect rect, float layerOpacity = 1f, Color? blendModeColor = null)
         {
             var skPaint = GetPaint(layerOpacity, blendModeColor, out var dispose);
@@ -75,7 +77,8 @@ namespace Mapsui.Rendering.Skia
             if (verticalAlignment == LabelStyle.VerticalAlignmentEnum.Bottom) return height / 2;
             return 0; // center
         }
-
+        
+        [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP015:Member should not return created and cached instance")]
         private static SKPaint GetPaint(float layerOpacity, Color? blendModeColor, out bool dispose)
         {
             if (blendModeColor is not null)

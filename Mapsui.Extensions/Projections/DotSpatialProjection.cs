@@ -215,16 +215,17 @@ public class DotSpatialProjection : IProjection, IProjectionCrs
                 // Initialize Authority Code Handler
                 var instance = AuthorityCodeHandler.Instance;
                 var field = typeof(AuthorityCodeHandler).GetField("_authorityCodeToProjectionInfo", BindingFlags.Instance | BindingFlags.NonPublic);
-                var dictionary = (IDictionary<string, ProjectionInfo>)field.GetValue(instance);
-                foreach (var it in dictionary)
-                {
-                    CrsFromEsriLookup[it.Value.ToEsriString()] = it.Key;
-                    if (projection.Equals(it.Value))
+                var dictionary = (IDictionary<string, ProjectionInfo>?)field?.GetValue(instance);
+                if (dictionary != null)
+                    foreach (var it in dictionary)
                     {
-                        CrsFromEsriLookup[esriString] = it.Key;
-                        return it.Key;
+                        CrsFromEsriLookup[it.Value.ToEsriString()] = it.Key;
+                        if (projection.Equals(it.Value))
+                        {
+                            CrsFromEsriLookup[esriString] = it.Key;
+                            return it.Key;
+                        }
                     }
-                }
             }
         }
 

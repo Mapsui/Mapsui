@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Nts;
@@ -49,6 +50,7 @@ namespace Mapsui.Tests.Common.Maps
             };
         }
 
+        [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP003:Dispose previous before re-assigning")]
         public static IEnumerable<IFeature> CreatePolygonProvider()
         {
             var wktReader = new WKTReader();

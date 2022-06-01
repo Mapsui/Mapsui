@@ -66,7 +66,7 @@ namespace Mapsui.Fetcher
             }
         }
 
-        private void WaitTimerElapsed(object state)
+        private void WaitTimerElapsed(object? state)
         {
             if (_action != null)
             {

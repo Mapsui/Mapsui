@@ -66,7 +66,7 @@ namespace Mapsui.Layers
             PropertyChanged += OnPropertyChanged;
         }
 
-        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(DataSource))
             {
@@ -78,7 +78,7 @@ namespace Mapsui.Layers
             }
         }
 
-        private void StartFetchTimerElapsed(object state)
+        private void StartFetchTimerElapsed(object? state)
         {
             if (_fetchInfo?.Extent == null) return;
             if (double.IsNaN(_fetchInfo.Resolution)) return;

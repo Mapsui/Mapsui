@@ -268,12 +268,12 @@ namespace Mapsui
             return items.Select(i => i.Value).OrderByDescending(i => i).ToList();
         }
 
-        private void LayerPropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void LayerPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             OnPropertyChanged(sender, e.PropertyName);
         }
 
-        private void OnPropertyChanged(object sender, string propertyName)
+        private void OnPropertyChanged(object? sender, string? propertyName)
         {
             PropertyChanged?.Invoke(sender, new PropertyChangedEventArgs(propertyName));
         }

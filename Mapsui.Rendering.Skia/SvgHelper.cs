@@ -71,8 +71,11 @@ namespace Mapsui.Utilities
             if (!BitmapRegistry.Instance.TryGetBitmapId(fullName, out var bitmapId))
             {
                 var result = assembly.GetManifestResourceStream(fullName).LoadSvgPicture();
-                bitmapId = BitmapRegistry.Instance.Register(result, fullName);
-                return bitmapId;
+                if (result != null)
+                {
+                    bitmapId = BitmapRegistry.Instance.Register(result, fullName);
+                    return bitmapId;    
+                }
             }
 
             return bitmapId;

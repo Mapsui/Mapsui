@@ -228,13 +228,13 @@ namespace Mapsui.Extensions.Provider
 
         public string? CRS { get; set; } = "";
 
-        public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+        public Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
         {
             if (_extent.Intersects(fetchInfo.Extent))
             {
-                return new[] { _feature };
+                return Task.FromResult((IEnumerable<IFeature>)new[] { _feature });
             }
-            return Enumerable.Empty<IFeature>();
+            return Task.FromResult(Enumerable.Empty<IFeature>());
         }
 
         public MRect? GetExtent()
