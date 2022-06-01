@@ -122,7 +122,7 @@ namespace Mapsui.Tiling.Layers
             base.Dispose(disposing);
         }
 
-        private void TileFetchDispatcherOnPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+        private void TileFetchDispatcherOnPropertyChanged(object? sender, PropertyChangedEventArgs propertyChangedEventArgs)
         {
             if (propertyChangedEventArgs.PropertyName == nameof(Busy))
                 Busy = _tileFetchDispatcher.Busy;

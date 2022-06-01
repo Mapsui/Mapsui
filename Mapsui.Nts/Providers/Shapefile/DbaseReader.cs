@@ -12,6 +12,8 @@ using System.IO;
 using System.Text;
 using Mapsui.Nts.Providers.Shapefile.Indexing;
 
+#pragma warning disable SYSLIB0001
+
 namespace Mapsui.Nts.Providers.Shapefile
 {
     internal sealed class DbaseReader : IDisposable
@@ -457,7 +459,7 @@ namespace Mapsui.Nts.Providers.Shapefile
                 case "System.DateTime":
                     // Mono has not yet implemented DateTime.TryParseExact
                     if (DateTime.TryParseExact(Encoding.UTF7.GetString(_br!.ReadBytes(8)),
-                                               "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var date))
+                            "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var date))
                         return date;
                     return DBNull.Value;
                 default:

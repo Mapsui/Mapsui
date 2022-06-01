@@ -49,7 +49,7 @@ namespace Mapsui.Providers
         }
 
 
-        public virtual async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+        public virtual Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
         {
             if (fetchInfo == null) throw new ArgumentNullException(nameof(fetchInfo));
             if (fetchInfo.Extent == null) throw new ArgumentNullException(nameof(fetchInfo.Extent));
@@ -59,7 +59,8 @@ namespace Mapsui.Providers
             fetchInfo = new FetchInfo(fetchInfo);
             // Use a larger extent so that symbols partially outside of the extent are included
             var biggerBox = fetchInfo.Extent?.Grow(fetchInfo.Resolution * SymbolSize * 0.5);
-            return features.Where(f => f != null && (f.Extent?.Intersects(biggerBox) ?? false)).ToList();
+            var result = features.Where(f => f != null && (f.Extent?.Intersects(biggerBox) ?? false)).ToList();
+            return Task.FromResult((IEnumerable<IFeature>)result);
         }
 
         /// <summary>

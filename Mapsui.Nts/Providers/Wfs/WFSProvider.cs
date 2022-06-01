@@ -980,9 +980,9 @@ namespace Mapsui.Providers.Wfs
         /// <summary>
         /// Gets the features within the specified <see cref="FetchInfo"/>."/>
         /// </summary>
-        public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+        public Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
         {
-            return ExecuteIntersectionQuery(fetchInfo.Extent);
+            return Task.FromResult(ExecuteIntersectionQuery(fetchInfo.Extent));
         }
     }
 }

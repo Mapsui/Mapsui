@@ -120,7 +120,7 @@ namespace Mapsui.Styles.Thematics
                 throw new ArgumentException("MinStyle and MaxStyle must be of the same type");
 
 
-            var style = (IStyle)Activator.CreateInstance(MinStyle.GetType());
+            var style = (IStyle)Activator.CreateInstance(MinStyle.GetType())!;
             if (MinStyle is LabelStyle && MaxStyle is LabelStyle)
                 CalculateLabelStyle(style as LabelStyle, MinStyle as LabelStyle, MaxStyle as LabelStyle, attr);
             if (MinStyle is VectorStyle && MaxStyle is VectorStyle)

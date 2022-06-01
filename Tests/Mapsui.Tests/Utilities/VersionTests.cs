@@ -13,7 +13,7 @@ namespace Mapsui.Tests.Utilities
             var version = Version.GetCurrentVersion();
 
             // assert
-            Assert.True(version.ToString().Length > 0);
+            Assert.True(version?.ToString().Length > 0);
         }
     }
 }

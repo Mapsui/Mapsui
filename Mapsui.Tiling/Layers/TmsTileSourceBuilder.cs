@@ -55,7 +55,10 @@ namespace Mapsui.Tiling.Layers
 
         public static void LoadTmsLayer(IAsyncResult result)
         {
-            var state = (object[])result.AsyncState;
+            var state = (object[]?)result.AsyncState;
+            if (state == null)
+                return;
+            
             var errorCallback = (Action<Exception>)state[0];
 
             try

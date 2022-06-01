@@ -416,8 +416,12 @@ namespace Mapsui.Providers.Wms
                     {
                         foreach (var style in result.Style)
                         {
-                            legendUrls.Add(WebUtility.HtmlDecode(style.LegendUrl.OnlineResource.OnlineResource));
-                            break; // just add first style. TODO: think about how to select a style
+                            var url = WebUtility.HtmlDecode(style.LegendUrl.OnlineResource.OnlineResource);
+                            if (url != null)
+                            {
+                                legendUrls.Add(url);
+                                break; // just add first style. TODO: think about how to select a style    
+                            }
                         }
                     }
                 }
@@ -482,7 +486,7 @@ namespace Mapsui.Providers.Wms
         {
             var handler = new HttpClientHandler { Credentials = Credentials };
             var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
-            var req = new HttpRequestMessage(new HttpMethod(GetPreferredMethod().Type), url);
+            var req = new HttpRequestMessage(new HttpMethod(GetPreferredMethod().Type ?? "GET"), url);
             var response = await client.SendAsync(req);
 
             if (!response.IsSuccessStatusCode)
@@ -490,9 +494,9 @@ namespace Mapsui.Providers.Wms
                 throw new Exception($"Unexpected WMS response code: {response.StatusCode}");
             }
 
-            if (response.Content.Headers.ContentType.MediaType.ToLower() != _mimeType)
+            if (response.Content.Headers.ContentType?.MediaType?.ToLower() != _mimeType)
             {
-                throw new Exception($"Unexpected WMS response content type. Expected - {_mimeType}, got - {response.Content.Headers.ContentType.MediaType}");
+                throw new Exception($"Unexpected WMS response content type. Expected - {_mimeType}, got - {response.Content.Headers.ContentType?.MediaType}");
             }
 
             return await response.Content.ReadAsStreamAsync();

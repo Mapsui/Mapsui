@@ -60,7 +60,7 @@ namespace Mapsui.Styles
 
     public class IdentityComparer<T> : IEqualityComparer<T> where T : class
     {
-        public bool Equals(T obj, T otherObj)
+        public bool Equals(T? obj, T? otherObj)
         {
             return obj == otherObj;
         }

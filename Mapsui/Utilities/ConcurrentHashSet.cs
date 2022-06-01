@@ -265,6 +265,9 @@ namespace ConcurrentCollections
         /// contains too many items.</exception>
         public bool Add(T item)
         {
+            if (item == null)
+                return false;
+            
             return AddInternal(item, _comparer.GetHashCode(item), true);
         }
 
@@ -296,6 +299,9 @@ namespace ConcurrentCollections
         /// <returns>true if the <see cref="ConcurrentHashSet{T}"/> contains the item; otherwise, false.</returns>
         public bool Contains(T item)
         {
+            if (item == null)
+                return false;
+            
             var hashcode = _comparer.GetHashCode(item);
 
             // We must capture the _buckets field in a local variable. It is set to a new table on each table resize.
@@ -326,6 +332,9 @@ namespace ConcurrentCollections
         /// <returns>true if an item was removed successfully; otherwise, false.</returns>
         public bool TryRemove(T item)
         {
+            if (item == null)
+                return false;
+            
             var hashcode = _comparer.GetHashCode(item);
             while (true)
             {
@@ -439,6 +448,9 @@ namespace ConcurrentCollections
 
         bool ICollection<T>.Remove(T item)
         {
+            if (item == null)
+                return false;
+            
             return TryRemove(item);
         }
 
@@ -446,6 +458,9 @@ namespace ConcurrentCollections
         {
             foreach (var item in collection)
             {
+                if (item == null)
+                    continue;
+                
                 AddInternal(item, _comparer.GetHashCode(item), false);
             }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,10 +21,10 @@ namespace Mapsui.UI.Objects
             Collection = collection;
         }
 
-        public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+        public Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
         {
             if (Collection == null || Collection.Count == 0)
-                return Enumerable.Empty<IFeature>();
+                return Task.FromResult(Enumerable.Empty<IFeature>());
 
             var list = new List<IFeature>();
             lock (_syncRoot)
@@ -38,7 +39,7 @@ namespace Mapsui.UI.Objects
                 }
             }
 
-            return list;
+            return Task.FromResult((IEnumerable<IFeature>)list);
         }
 
         public MRect? GetExtent()
