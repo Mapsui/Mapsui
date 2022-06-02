@@ -22,7 +22,7 @@ namespace Mapsui.Tests.Projections
     {
         public static double Distance(double lon1, double lat1, double lon2, double lat2, DistanceType type = DistanceType.Kilometers)
         {
-            return Distance(new Position { Longitude = lon1, Latitude = lat1 }, new Position { Longitude = lon2, Latitude = lat2 });
+            return Distance(new Position { Longitude = lon1, Latitude = lat1 }, new Position { Longitude = lon2, Latitude = lat2 }, type);
         }
 
         /// <summary>
