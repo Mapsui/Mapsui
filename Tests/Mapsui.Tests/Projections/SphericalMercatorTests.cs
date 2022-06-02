@@ -1,4 +1,5 @@
 ﻿using Mapsui.Projections;
+using Mapsui.Utilities;
 using NUnit.Framework;
 
 namespace Mapsui.Tests.Projections

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Mapsui.Tests.Projections
+namespace Mapsui.Utilities
 {
     public static class Haversine
     {
@@ -15,7 +15,7 @@ namespace Mapsui.Tests.Projections
             var dLat = ToRadian(lat2 - lat1);
             var dLon = ToRadian(lon2 - lon1);
 
-            var a = 
+            var a =
                 Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
                 Math.Cos(ToRadian(lat1)) * Math.Cos(ToRadian(lat2)) *
                 Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
