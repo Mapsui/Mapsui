@@ -1,19 +1,16 @@
-﻿// This code is copied from this location. Not sure what license it is.
-// https://gist.github.com/jammin77/033a332542aa24889452
-using System;
+﻿using System;
 
 namespace Mapsui.Tests.Projections
 {
     public static class Haversine
     {
-
         /// <summary>
-        /// Returns the distance in miles or kilometers of any two
+        /// Returns the distance in kilometers of any two
         /// latitude / longitude points.
         /// </summary>
-        public static double DistanceInKilometers(double lon1, double lat1, double lon2, double lat2)
+        public static double Distance(double lon1, double lat1, double lon2, double lat2)
         {
-            double R = 6371;
+            double R = 6371; // Mean radius of the earth
 
             var dLat = ToRadian(lat2 - lat1);
             var dLon = ToRadian(lon2 - lon1);
@@ -25,7 +22,7 @@ namespace Mapsui.Tests.Projections
             var c = 2 * Math.Asin(Math.Min(1, Math.Sqrt(a)));
             var d = R * c;
 
-            return d;
+            return d; // Distance in kilometers
         }
 
         private static double ToRadian(double val)
