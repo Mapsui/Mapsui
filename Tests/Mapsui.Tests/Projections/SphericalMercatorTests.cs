@@ -18,7 +18,7 @@ namespace Mapsui.Tests.Projections
             var (outLon, outLat) = SphericalMercator.ToLonLat(x, y);
 
             // Assert
-            var distanceInKilometer = Haversine.Distance(inLon, inLat, outLon, outLat);
+            var distanceInKilometer = Haversine.DistanceInKilometers(inLon, inLat, outLon, outLat);
             var distanceInCentimer = distanceInKilometer * 100000;
             Assert.Less(distanceInCentimer, 1);
         }
