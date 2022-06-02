@@ -134,7 +134,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BruTile" />     
-    <PackageReference Include="NETStandard.Library" />     
     <PackageReference Include="SkiaSharp" />     
     <PackageReference Include="SkiaSharp.Views" />     
     <PackageReference Include="SkiaSharp.Views.Forms" />     
