@@ -18,6 +18,7 @@
 	  <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 	  <LangVersion>10.0</LangVersion>
 	  <Nullable>enable</Nullable>
+    <NoWarn>$(NoWarn);NU1008</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
