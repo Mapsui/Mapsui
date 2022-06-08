@@ -7,11 +7,55 @@ namespace Mapsui.Samples.Maui;
 
 public class MainPage : ContentPage
 {
-    readonly IEnumerable<ISampleBase> allSamples;
+    IEnumerable<ISampleBase> allSamples;
+    CollectionView collectionView = CreateCollectionView();
+    Picker sampleCategoryPicker = new Picker();
+    MapControl mapControl = new MapControl();
+
+    private static CollectionView CreateCollectionView()
+    {
+        return new CollectionView
+        {
+            ItemTemplate = new DataTemplate(() => CreateCollectionViewTemplate()),
+            SelectionMode = SelectionMode.Single,
+        };
+    }
+
+    private static IView CreateCollectionViewTemplate()
+    {
+        return new Frame
+        {
+            BorderColor = Color.FromArgb("#DDDDDD"),
+            HasShadow = true,
+            CornerRadius = 4,
+            IsClippedToBounds = true,
+            Content = new HorizontalStackLayout
+            {
+                Margin = 0,
+                Padding = 0,
+                Children =
+                {
+                    new Label{ Style = CreateLabelStyle() }.Bind(Label.TextProperty, nameof(ISample.Name)),
+                }
+            }
+        };
+    }
+
+    private static Style CreateLabelStyle()
+    {
+        var style = new Style(typeof(Label));
+        style.Setters.Add(new Setter { Property = Label.VerticalOptionsProperty, Value = LayoutOptions.Center });
+        style.Setters.Add(new Setter { Property = Label.HorizontalOptionsProperty, Value = LayoutOptions.Start });
+        style.Setters.Add(new Setter { Property = Label.HorizontalTextAlignmentProperty, Value = TextAlignment.Start });
+        style.Setters.Add(new Setter { Property = Label.WidthRequestProperty, Value = 200 });
+        return style;
+    }
+
 
     public MainPage()
 	{
-        MapControl.Map?.Layers.Add(OpenStreetMap.CreateTileLayer());
+        collectionView.SelectionChanged += CollectionView_SelectionChanged;
+        mapControl.Map?.Layers.Add(OpenStreetMap.CreateTileLayer());
 
         Content = new Grid
         {
@@ -27,41 +71,31 @@ public class MainPage : ContentPage
                     Spacing = 20,
                     Children =
                     {
-                        SampleCategoryPicker,
-                        SampleList
+                        sampleCategoryPicker,
+                        collectionView
                     }
                 }.Column(0).Padding(20),
-                MapControl.Column(1)
+                mapControl.Column(1)
             }
         };
 
-        SampleList.ItemSelected += SampleList_ItemSelected;
-
         allSamples = AllSamples.GetSamples() ?? new List<ISampleBase>();
         var categories = allSamples.Select(s => s.Category).Distinct().OrderBy(c => c);
-        SampleCategoryPicker!.ItemsSource = categories.ToList<string>();
-        SampleCategoryPicker.SelectedIndexChanged += SampleCategoryPicker_SelectedIndexChanged; ;
-        SampleCategoryPicker.SelectedItem = "Info";
+        sampleCategoryPicker!.ItemsSource = categories.ToList();
+        sampleCategoryPicker.SelectedIndexChanged += SampleCategoryPicker_SelectedIndexChanged; ;
+        sampleCategoryPicker.SelectedItem = "Info";
     }
 
-    private void SampleList_ItemSelected(object? sender, SelectedItemChangedEventArgs e)
+    private void CollectionView_SelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
-        if (e.SelectedItem == null)
+        if (e.CurrentSelection == null)
         {
             return; //ItemSelected is called on deselection, which results in SelectedItem being set to null
         }
 
-        var sampleName = e.SelectedItem.ToString();
-        var baseSample = allSamples.FirstOrDefault(x => x.Name == sampleName);
-
-        if (baseSample is ISample sample)
-            sample.Setup(MapControl);
+        var sample = ((ISample)e.CurrentSelection[0]);
+        sample.Setup(mapControl);
     }
-
-    public ListView SampleList { get; set; } = new ListView();
-    public Picker SampleCategoryPicker { get; set; } = new Picker();
-
-    public MapControl MapControl = new MapControl();
 
     private void SampleCategoryPicker_SelectedIndexChanged(object? sender, EventArgs e)
     {
@@ -70,7 +104,7 @@ public class MainPage : ContentPage
 
     private void FillListWithSamples()
     {
-        var selectedCategory = SampleCategoryPicker.SelectedItem?.ToString() ?? "";
-        SampleList.ItemsSource = allSamples.Where(s => s.Category == selectedCategory).Select(x => x.Name);
+        var selectedCategory = sampleCategoryPicker.SelectedItem?.ToString() ?? "";
+        collectionView.ItemsSource = allSamples.Where(s => s.Category == selectedCategory);
     }
 }
