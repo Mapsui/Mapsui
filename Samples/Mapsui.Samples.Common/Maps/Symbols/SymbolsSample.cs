@@ -75,11 +75,11 @@ namespace Mapsui.Samples.Common.Maps
             const int diameter = 16;
             return new List<IStyle>
             {
-                new SymbolStyle {SymbolScale = 0.8, SymbolOffset = new Offset(0,0), SymbolType = SymbolType.Rectangle},
-                new SymbolStyle {SymbolScale = 0.6, SymbolOffset = new Offset(diameter,diameter), SymbolType = SymbolType.Rectangle, Fill = new Brush(Color.Red)},
-                new SymbolStyle {SymbolScale = 1, SymbolOffset = new Offset(diameter,-diameter), SymbolType = SymbolType.Rectangle},
-                new SymbolStyle {SymbolScale = 1, SymbolOffset = new Offset(-diameter,-diameter), SymbolType = SymbolType.Rectangle},
-                new SymbolStyle {SymbolScale = 0.8, SymbolOffset = new Offset(0,0)},
+                new SymbolStyle {SymbolScale = 0.8, SymbolOffset = new Offset(0, 0), SymbolType = SymbolType.Rectangle},
+                new SymbolStyle {SymbolScale = 0.6, SymbolOffset = new Offset(diameter, diameter), SymbolType = SymbolType.Rectangle, Fill = new Brush(Color.Red)},
+                new SymbolStyle {SymbolScale = 1, SymbolOffset = new Offset(diameter, -diameter), SymbolType = SymbolType.Rectangle},
+                new SymbolStyle {SymbolScale = 1, SymbolOffset = new Offset(-diameter, -diameter), SymbolType = SymbolType.Rectangle},
+                new SymbolStyle {SymbolScale = 0.8, SymbolOffset = new Offset(0, 0)},
                 new SymbolStyle {SymbolScale = 1.2, SymbolOffset = new Offset(diameter, 0)},
                 new SymbolStyle {SymbolScale = 1, SymbolOffset = new Offset(0, diameter)},
                 new SymbolStyle {SymbolScale = 1, SymbolOffset = new Offset(diameter, diameter)},
@@ -103,7 +103,7 @@ namespace Mapsui.Samples.Common.Maps
         private static SymbolStyle CreateSvgStyle(string embeddedResourcePath, double scale)
         {
             var bitmapId = typeof(SymbolsSample).LoadSvgId(embeddedResourcePath);
-            return new SymbolStyle { BitmapId = bitmapId, SymbolScale = scale, SymbolOffset = new Offset(0.0, 0.5, true) };
+            return new SymbolStyle { BitmapId = bitmapId, SymbolScale = scale, SymbolOffset = new RelativeOffset(0.0, 0.5) };
         }
 
         private static IFeature CreatePointWithStackedStyles()

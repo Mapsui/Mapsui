@@ -52,7 +52,7 @@ public class AnimatedPointsSamples : ISample
         {
             BitmapId = bitmapId,
             SymbolScale = scale,
-            SymbolOffset = new Offset(0.0, 0.5, true),
+            SymbolOffset = new RelativeOffset(0.0, 0.5),
             Opacity = 0.5f,
             SymbolRotation = (double)feature["rotation"]!
         };
