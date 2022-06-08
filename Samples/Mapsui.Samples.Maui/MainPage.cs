@@ -50,7 +50,7 @@ public class MainPage : ContentPage
     {
         return new Picker
         {
-            WidthRequest = 200,
+            WidthRequest = 220,
         };
     }
 
@@ -68,22 +68,17 @@ public class MainPage : ContentPage
         return new Frame
         {
             BorderColor = Color.FromArgb("#DDDDDD"),
+            //BackgroundColor = Colors.DarkRed,
             HasShadow = true,
             CornerRadius = 4,
-            IsClippedToBounds = true,
-            Content = new HorizontalStackLayout
+            Padding = 10,
+            Margin = new Thickness(0, 2),
+            Content = new Label
             {
-                Margin = 0,
-                Padding = 0,
-                Children =
-                {
-                    new Label
-                    {
-                        WidthRequest = 200
+                WidthRequest = 200,
+                //BackgroundColor = Colors.Pink
                         
-                    }.Bind(Label.TextProperty, nameof(ISample.Name)),
-                }
-            }
+            }.Bind(Label.TextProperty, nameof(ISample.Name))
         };
     }
 
