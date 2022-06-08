@@ -68,7 +68,6 @@ public class MainPage : ContentPage
         return new Frame
         {
             BorderColor = Color.FromArgb("#DDDDDD"),
-            //BackgroundColor = Colors.DarkRed,
             HasShadow = true,
             CornerRadius = 4,
             Padding = 10,
@@ -76,7 +75,6 @@ public class MainPage : ContentPage
             Content = new Label
             {
                 WidthRequest = 200,
-                //BackgroundColor = Colors.Pink
                         
             }.Bind(Label.TextProperty, nameof(ISample.Name))
         };
