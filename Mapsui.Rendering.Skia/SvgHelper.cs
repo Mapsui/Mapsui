@@ -63,7 +63,6 @@ namespace Mapsui.Utilities
             return str.LoadSvg()?.Picture;
         }
 
-
         public static int LoadSvgId(this Type typeInAssemblyOfEmbeddedResource, string relativePathToEmbeddedResource)
         {
             var assembly = typeInAssemblyOfEmbeddedResource.GetTypeInfo().Assembly;

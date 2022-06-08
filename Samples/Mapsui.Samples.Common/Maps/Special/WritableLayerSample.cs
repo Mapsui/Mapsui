@@ -28,20 +28,17 @@ namespace Mapsui.Tests.Common.Maps
 
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
 
-            var writableLayer = new WritableLayer();
-            var pinId = typeof(Map).LoadSvgId("Resources.Images.Pin.svg");
-            writableLayer.Style = new SymbolStyle
+            var writableLayer = new WritableLayer
             {
-                BitmapId = pinId,
-                SymbolOffset = new Offset(0.0, 0.5, true),
-                BlendModeColor = Color.FromArgb(255, 57, 115, 199) // Determines color of the pin
+                Style = SymbolStyles.CreatePinStyle()
             };
-
             map.Layers.Add(writableLayer);
 
             map.Info += (s, e) =>
             {
                 if (e.MapInfo?.WorldPosition == null) return;
+
+                // Add a point to the layer using the Info position
                 writableLayer?.Add(new GeometryFeature
                 {
                     Geometry = new Point(e.MapInfo.WorldPosition.X, e.MapInfo.WorldPosition.Y)
