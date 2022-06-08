@@ -11,9 +11,9 @@ using NetTopologySuite.Geometries;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public class WritingToLayerSample : ISample
+    public class WriteToLayerSample : ISample
     {
-        public string Name => "Writing to Layer";
+        public string Name => "Write to Layer";
         public string Category => "Special";
 
         public void Setup(IMapControl mapControl)
