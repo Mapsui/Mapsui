@@ -8,23 +8,13 @@ using Mapsui.Styles;
 namespace Mapsui.Layers
 {
     /// <summary>
-    /// The MemoryLayer has all features in memory.
+    /// The GenericCollectionLayer uses a T of IEnumerable<IFeature> 
     /// </summary>
-    public class MemoryLayer : BaseLayer
+    public class GenericCollectionLayer<T> : BaseLayer where T : IEnumerable<IFeature>, new()
     {
-        /// <summary>
-        /// Create a new layer
-        /// </summary>
-        public MemoryLayer() : this(nameof(MemoryLayer)) { }
+        public GenericCollectionLayer() : base(nameof(MemoryLayer)) { }
 
-        /// <summary>
-        /// Create layer with name
-        /// </summary>
-        /// <param name="layerName">Name to use for layer</param>
-        public MemoryLayer(string layerName) : base(layerName) { }
-
-        public IEnumerable<IFeature> Features { get; set; } = new List<IFeature>();
-
+        public T Features { get; set; } = new T();
 
         public override IEnumerable<IFeature> GetFeatures(MRect? rect, double resolution)
         {

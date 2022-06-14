@@ -7734,15 +7734,15 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.IRenderer.Render
   nameWithType: IRenderer.Render
-- uid: Mapsui.Rendering.IRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color,System.Single)
-  name: RenderToBitmapStream(IReadOnlyViewport, IEnumerable<ILayer>, Color, Single)
-  href: api/Mapsui.Rendering.IRenderer.html#Mapsui_Rendering_IRenderer_RenderToBitmapStream_Mapsui_IReadOnlyViewport_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Styles_Color_System_Single_
-  commentId: M:Mapsui.Rendering.IRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color,System.Single)
-  name.vb: RenderToBitmapStream(IReadOnlyViewport, IEnumerable(Of ILayer), Color, Single)
-  fullName: Mapsui.Rendering.IRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport, IEnumerable<Mapsui.Layers.ILayer>, Mapsui.Styles.Color, System.Single)
-  fullName.vb: Mapsui.Rendering.IRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport, IEnumerable(Of Mapsui.Layers.ILayer), Mapsui.Styles.Color, System.Single)
-  nameWithType: IRenderer.RenderToBitmapStream(IReadOnlyViewport, IEnumerable<ILayer>, Color, Single)
-  nameWithType.vb: IRenderer.RenderToBitmapStream(IReadOnlyViewport, IEnumerable(Of ILayer), Color, Single)
+- uid: Mapsui.Rendering.IRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color,System.Single,System.Nullable{IEnumerable{Mapsui.Widgets.IWidget}})
+  name: RenderToBitmapStream(IReadOnlyViewport, IEnumerable<ILayer>, Color, Single, Nullable<IEnumerable<IWidget>>)
+  href: api/Mapsui.Rendering.IRenderer.html#Mapsui_Rendering_IRenderer_RenderToBitmapStream_Mapsui_IReadOnlyViewport_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Styles_Color_System_Single_System_Nullable_IEnumerable_Mapsui_Widgets_IWidget___
+  commentId: M:Mapsui.Rendering.IRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color,System.Single,System.Nullable{IEnumerable{Mapsui.Widgets.IWidget}})
+  name.vb: RenderToBitmapStream(IReadOnlyViewport, IEnumerable(Of ILayer), Color, Single, Nullable(Of IEnumerable(Of IWidget)))
+  fullName: Mapsui.Rendering.IRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport, IEnumerable<Mapsui.Layers.ILayer>, Mapsui.Styles.Color, System.Single, System.Nullable<IEnumerable<Mapsui.Widgets.IWidget>>)
+  fullName.vb: Mapsui.Rendering.IRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport, IEnumerable(Of Mapsui.Layers.ILayer), Mapsui.Styles.Color, System.Single, System.Nullable(Of IEnumerable(Of Mapsui.Widgets.IWidget)))
+  nameWithType: IRenderer.RenderToBitmapStream(IReadOnlyViewport, IEnumerable<ILayer>, Color, Single, Nullable<IEnumerable<IWidget>>)
+  nameWithType.vb: IRenderer.RenderToBitmapStream(IReadOnlyViewport, IEnumerable(Of ILayer), Color, Single, Nullable(Of IEnumerable(Of IWidget)))
 - uid: Mapsui.Rendering.IRenderer.RenderToBitmapStream*
   name: RenderToBitmapStream
   href: api/Mapsui.Rendering.IRenderer.html#Mapsui_Rendering_IRenderer_RenderToBitmapStream_
@@ -8501,15 +8501,15 @@ references:
   isSpec: "True"
   fullName: Mapsui.Rendering.Skia.MapRenderer.Render
   nameWithType: MapRenderer.Render
-- uid: Mapsui.Rendering.Skia.MapRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color,System.Single)
-  name: RenderToBitmapStream(IReadOnlyViewport, IEnumerable<ILayer>, Color, Single)
-  href: api/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_RenderToBitmapStream_Mapsui_IReadOnlyViewport_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Styles_Color_System_Single_
-  commentId: M:Mapsui.Rendering.Skia.MapRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color,System.Single)
-  name.vb: RenderToBitmapStream(IReadOnlyViewport, IEnumerable(Of ILayer), Color, Single)
-  fullName: Mapsui.Rendering.Skia.MapRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport, IEnumerable<Mapsui.Layers.ILayer>, Mapsui.Styles.Color, System.Single)
-  fullName.vb: Mapsui.Rendering.Skia.MapRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport, IEnumerable(Of Mapsui.Layers.ILayer), Mapsui.Styles.Color, System.Single)
-  nameWithType: MapRenderer.RenderToBitmapStream(IReadOnlyViewport, IEnumerable<ILayer>, Color, Single)
-  nameWithType.vb: MapRenderer.RenderToBitmapStream(IReadOnlyViewport, IEnumerable(Of ILayer), Color, Single)
+- uid: Mapsui.Rendering.Skia.MapRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color,System.Single,System.Nullable{IEnumerable{Mapsui.Widgets.IWidget}})
+  name: RenderToBitmapStream(IReadOnlyViewport, IEnumerable<ILayer>, Color, Single, Nullable<IEnumerable<IWidget>>)
+  href: api/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_RenderToBitmapStream_Mapsui_IReadOnlyViewport_IEnumerable_Mapsui_Layers_ILayer__Mapsui_Styles_Color_System_Single_System_Nullable_IEnumerable_Mapsui_Widgets_IWidget___
+  commentId: M:Mapsui.Rendering.Skia.MapRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport,IEnumerable{Mapsui.Layers.ILayer},Mapsui.Styles.Color,System.Single,System.Nullable{IEnumerable{Mapsui.Widgets.IWidget}})
+  name.vb: RenderToBitmapStream(IReadOnlyViewport, IEnumerable(Of ILayer), Color, Single, Nullable(Of IEnumerable(Of IWidget)))
+  fullName: Mapsui.Rendering.Skia.MapRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport, IEnumerable<Mapsui.Layers.ILayer>, Mapsui.Styles.Color, System.Single, System.Nullable<IEnumerable<Mapsui.Widgets.IWidget>>)
+  fullName.vb: Mapsui.Rendering.Skia.MapRenderer.RenderToBitmapStream(Mapsui.IReadOnlyViewport, IEnumerable(Of Mapsui.Layers.ILayer), Mapsui.Styles.Color, System.Single, System.Nullable(Of IEnumerable(Of Mapsui.Widgets.IWidget)))
+  nameWithType: MapRenderer.RenderToBitmapStream(IReadOnlyViewport, IEnumerable<ILayer>, Color, Single, Nullable<IEnumerable<IWidget>>)
+  nameWithType.vb: MapRenderer.RenderToBitmapStream(IReadOnlyViewport, IEnumerable(Of ILayer), Color, Single, Nullable(Of IEnumerable(Of IWidget)))
 - uid: Mapsui.Rendering.Skia.MapRenderer.RenderToBitmapStream*
   name: RenderToBitmapStream
   href: api/Mapsui.Rendering.Skia.MapRenderer.html#Mapsui_Rendering_Skia_MapRenderer_RenderToBitmapStream_
@@ -18777,6 +18777,25 @@ references:
   isSpec: "True"
   fullName: Mapsui.Utilities.EmbeddedResourceLoader.Load
   nameWithType: EmbeddedResourceLoader.Load
+- uid: Mapsui.Utilities.Haversine
+  name: Haversine
+  href: api/Mapsui.Utilities.Haversine.html
+  commentId: T:Mapsui.Utilities.Haversine
+  fullName: Mapsui.Utilities.Haversine
+  nameWithType: Haversine
+- uid: Mapsui.Utilities.Haversine.Distance(System.Double,System.Double,System.Double,System.Double)
+  name: Distance(Double, Double, Double, Double)
+  href: api/Mapsui.Utilities.Haversine.html#Mapsui_Utilities_Haversine_Distance_System_Double_System_Double_System_Double_System_Double_
+  commentId: M:Mapsui.Utilities.Haversine.Distance(System.Double,System.Double,System.Double,System.Double)
+  fullName: Mapsui.Utilities.Haversine.Distance(System.Double, System.Double, System.Double, System.Double)
+  nameWithType: Haversine.Distance(Double, Double, Double, Double)
+- uid: Mapsui.Utilities.Haversine.Distance*
+  name: Distance
+  href: api/Mapsui.Utilities.Haversine.html#Mapsui_Utilities_Haversine_Distance_
+  commentId: Overload:Mapsui.Utilities.Haversine.Distance
+  isSpec: "True"
+  fullName: Mapsui.Utilities.Haversine.Distance
+  nameWithType: Haversine.Distance
 - uid: Mapsui.Utilities.Performance
   name: Performance
   href: api/Mapsui.Utilities.Performance.html
