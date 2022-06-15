@@ -58,16 +58,6 @@
     <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" />
     <PackageReference Include="SkiaSharp.Views.Uno" />
     <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" />
-    <PackageReference Include="Microsoft.Windows.Compatibility" />
-    <PackageReference Include="Microsoft.Extensions.Logging" />
-    <PackageReference Include="Uno.Extensions.Logging.WebAssembly.Console" />
-    <PackageReference Include="Uno.UI.WebAssembly" />
-    <PackageReference Include="Uno.UI.RemoteControl" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" />
-    <PackageReference Include="Uno.Wasm.Bootstrap" />
-    <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" />
-    <PackageReference Include="SkiaSharp.Views.Uno" />
-    <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" />
   </ItemGroup>
 
   <!--Harfbuzz Sharp references Workaround for this issue-->
