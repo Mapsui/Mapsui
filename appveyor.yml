@@ -25,7 +25,7 @@ install:
 - cmd: dotnet workload install maui macos android ios maccatalyst
 - cmd: '"C:/Program Files (x86)/Android/android-sdk/tools/bin/sdkmanager.bat" "platforms;android-31"'
 before_build:
-- cmd: nuget restore mapsui.sln -Verbosity quiet
+- cmd: .nuget/nuget restore mapsui.sln -Verbosity quiet
 build:
   project: Mapsui.sln
   verbosity: minimal
