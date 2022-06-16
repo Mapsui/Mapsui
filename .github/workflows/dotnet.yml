@@ -142,7 +142,7 @@ jobs:
     - name: install maui macos android ios maccatalyst wasm-tools
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools
     - name: Restore dependencies
-      run: .nuget/nuget restore Mapsui.sln
+      run: .nuget\nuget restore Mapsui.sln
     # Samples Build    
     - name: Maspui.Samples.Avalonia
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Avalonia/Mapsui.Samples.Avalonia.csproj
