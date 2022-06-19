@@ -90,7 +90,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
         connection.Table<Tile>().Delete(f => f.Level == index.Level && f.Col == index.Col && f.Row == index.Row);
     }
 
-    public byte[] Find(TileIndex index)
+    public byte[]? Find(TileIndex index)
     {
         using var connection = CreateConnection();
         var tile = connection.Table<Tile>().FirstOrDefault(f => f.Level == index.Level && f.Col == index.Col && f.Row == index.Row);
@@ -100,7 +100,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
             {
                 // expired
                 Remove(index);
-                return null!;
+                return null;
             }
         }
         return tile?.Data!;
