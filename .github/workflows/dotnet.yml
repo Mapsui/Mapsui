@@ -49,7 +49,7 @@ jobs:
     - name: install maui macos android ios maccatalyst wasm-tools
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools
     - name: Restore dependencies
-      run: dotnet restore Mapsui.Mac.sln   
+      run: dotnet restore Mapsui.Mac.slnf   
     # Samples Build    
     - name: Build Mapsui.Samples.Droid
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Droid/Mapsui.Samples.Droid.csproj    

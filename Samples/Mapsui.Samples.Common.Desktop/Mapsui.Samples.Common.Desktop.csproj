@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net48</TargetFrameworks>
-    <TargetFrameworks Condition="'$(SolutionName)' != 'Mapsui.Mac.Legacy'">$(TargetFrameworks);net6.0;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks Condition="'$(SolutionName)' != 'Mapsui.Mac'">$(TargetFrameworks);net6.0;netcoreapp3.1</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>

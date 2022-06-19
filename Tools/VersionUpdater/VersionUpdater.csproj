@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks Condition="'$(SolutionName)' == 'Mapsui.Mac.Legacy'">net48</TargetFrameworks>
-    <TargetFrameworks Condition="'$(SolutionName)' != 'Mapsui.Mac.Legacy'">net6.0</TargetFrameworks>
+    <TargetFrameworks Condition="'$(SolutionName)' == 'Mapsui.Mac'">net48</TargetFrameworks>
+    <TargetFrameworks Condition="'$(SolutionName)' != 'Mapsui.Mac'">net6.0</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
