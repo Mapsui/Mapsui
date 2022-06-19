@@ -4,7 +4,7 @@ namespace Mapsui.ArcGIS.DynamicProvider
 {
     public class ArcGISDynamicCapabilities : IArcGISCapabilities
     {
-        public string ServiceUrl { get; set; } = default!; //Not returned from service itself
+        public string ServiceUrl { get; set; } = string.Empty; //Not returned from service itself
         public string? currentVersion { get; set; }
         public string? serviceDescription { get; set; }
         public string? description { get; set; }

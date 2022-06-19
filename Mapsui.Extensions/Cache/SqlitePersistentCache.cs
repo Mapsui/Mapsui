@@ -103,6 +103,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
                 return null;
             }
         }
+
         return tile?.Data!;
     }
 

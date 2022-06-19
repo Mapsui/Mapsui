@@ -22,7 +22,8 @@ namespace Mapsui.Rendering.Skia
                 switch (feature)
                 {
                     case RectFeature rectFeature:
-                        PolygonRenderer.Draw(canvas, viewport, vectorStyle, rectFeature, rectFeature.Rect.ToPolygon(), opacity);
+                        if (rectFeature.Rect != null)
+                            PolygonRenderer.Draw(canvas, viewport, vectorStyle, rectFeature, rectFeature.Rect.ToPolygon(), opacity);
                         break;
                     case PointFeature pointFeature:
                         SymbolStyleRenderer.DrawSymbol(canvas, viewport, layer, pointFeature.Point.X, pointFeature.Point.Y, new SymbolStyle { Outline = vectorStyle.Outline, Fill = vectorStyle.Fill, Line = vectorStyle.Line });

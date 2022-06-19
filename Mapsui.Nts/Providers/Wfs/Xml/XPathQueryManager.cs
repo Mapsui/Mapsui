@@ -417,12 +417,14 @@ namespace Mapsui.Providers.Wfs.Xml
             /// <param name="prefix">The prefix of the function</param>
             /// <param name="name">The name of the function</param>
             /// <param name="argTypes">A list of argument types of the function</param>
-            public override IXsltContextFunction? ResolveFunction(string prefix, string name, XPathResultType[] argTypes)
+            public override IXsltContextFunction ResolveFunction(string prefix, string name, XPathResultType[] argTypes)
             {
                 if (name.Equals(ParamCompare.FunctionName)) return new ParamCompare(argTypes, 2, 2);
                 if (name.Equals(ParamCompareWithTargetNs.FunctionName))
                     return new ParamCompareWithTargetNs(argTypes, 3, 3);
-                return null;
+#pragma warning disable CS8603
+                return null; // seems to work
+#pragma warning restore CS8603
             }
 
             /// <summary>
@@ -430,12 +432,14 @@ namespace Mapsui.Providers.Wfs.Xml
             /// </summary>
             /// <param name="prefix">The prefix of the variable</param>
             /// <param name="name">The name of the variable</param>
-            public override IXsltContextVariable? ResolveVariable(string prefix, string name)
+            public override IXsltContextVariable ResolveVariable(string prefix, string name)
             {
                 var param = GetParam(name);
                 if (param != null)
                     return new ParamFunctionVar(param);
-                return null;
+#pragma warning disable CS8603
+                return null; // seems to work
+#pragma warning restore CS8603
             }
 
             /// <summary>

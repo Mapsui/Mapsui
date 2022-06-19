@@ -41,13 +41,13 @@ namespace Mapsui.UI.Android
 
     public partial class MapControl : ViewGroup, IMapControl
     {
-        private View _canvas = default!;
+        private View? _canvas;
         private double _innerRotation;
-        private GestureDetector _gestureDetector = default!;
+        private GestureDetector? _gestureDetector;
         private double _previousAngle;
         private double _previousRadius = 1f;
         private TouchMode _mode = TouchMode.None;
-        private Handler _mainLooperHandler = default!;
+        private Handler? _mainLooperHandler;
         /// <summary>
         /// Saver for center before last pinch movement
         /// </summary>
@@ -155,7 +155,7 @@ namespace Mapsui.UI.Android
         private void RunOnUIThread(Action action)
         {
             if (SynchronizationContext.Current == null)
-                _mainLooperHandler.Post(action);
+                _mainLooperHandler?.Post(action);
             else
                 action();
         }
@@ -179,7 +179,7 @@ namespace Mapsui.UI.Android
 
         public void MapView_Touch(object? sender, TouchEventArgs args)
         {
-            if (_gestureDetector.OnTouchEvent(args.Event))
+            if (_gestureDetector?.OnTouchEvent(args.Event) ?? false)
                 return;
 
             var touchPoints = GetScreenPositions(args.Event, this);
@@ -352,8 +352,11 @@ namespace Mapsui.UI.Android
             SetBounds(_canvas, l, t, r, b);
         }
 
-        private static void SetBounds(View view, int l, int t, int r, int b)
+        private static void SetBounds(View? view, int l, int t, int r, int b)
         {
+            if (view == null)
+                return;
+
             view.Top = t;
             view.Bottom = b;
             view.Left = l;
@@ -430,7 +433,7 @@ namespace Mapsui.UI.Android
             return canvas;
         }
 
-        private void StopSoftwareRenderMode(View canvas)
+        private void StopSoftwareRenderMode(View? canvas)
         {
             if (canvas is SKCanvasView canvasView)
             {
@@ -448,7 +451,7 @@ namespace Mapsui.UI.Android
             return canvas;
         }
 
-        private void StopHardwareRenderMode(View canvas)
+        private void StopHardwareRenderMode(View? canvas)
         {
             if (canvas is SKGLSurfaceView surfaceView)
             {
