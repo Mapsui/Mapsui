@@ -23,7 +23,7 @@ namespace Mapsui.Providers.Wms
     public class Client
     {
         private XmlNode? _vendorSpecificCapabilities;
-        private XmlNamespaceManager _nsmgr;
+        private XmlNamespaceManager? _nsmgr;
 
         /// <summary>
         /// Structure for storing information about a WMS Layer Style
@@ -159,7 +159,7 @@ namespace Mapsui.Providers.Wms
         private Collection<string>? _getFeatureInfoOutputFormats;
         private Collection<string>? _getMapOutputFormats;
         private WmsOnlineResource[]? _getFeatureInfoRequests;
-        private string _wmsVersion;
+        private string _wmsVersion = "1.0.0"; // set default value
         private WmsServerLayer _layer;
 
         /// <summary>
@@ -232,31 +232,24 @@ namespace Mapsui.Providers.Wms
         /// <summary>
         /// Initializes WMS server and parses the Capabilities request
         /// </summary>
-        /// <param name="url">URL of wms server</param>
-        /// <param name="wmsVersion">WMS version number, null to get the default from service</param>
         /// <param name="getStreamAsync">Download method, leave null for default</param>
         /// <param name="persistentCache">persistent Cache</param>
         private Client(Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
         {
             _persistentCache = persistentCache;
-            _getStreamAsync = default!; // is later assigned 
-            _nsmgr = default!; // is later assigned
-            _wmsVersion = default!; // is later assigned
-            InitialiseGetStreamAsyncMethod(getStreamAsync);
+            _getStreamAsync = InitialiseGetStreamAsyncMethod(getStreamAsync);
         }
 
         public Client(XmlDocument capabilitiesXmlDocument, Func<string, Task<Stream>>? getStreamAsync = null)
         {
-            _getStreamAsync = default!; // is later assigned
-            _wmsVersion = default!; // is later assigned
-            InitialiseGetStreamAsyncMethod(getStreamAsync);
+            _getStreamAsync = InitialiseGetStreamAsyncMethod(getStreamAsync);
             _nsmgr = new XmlNamespaceManager(capabilitiesXmlDocument.NameTable);
             ParseCapabilities(capabilitiesXmlDocument);
         }
 
-        private void InitialiseGetStreamAsyncMethod(Func<string, Task<Stream>>? getStreamAsync)
+        private Func<string, Task<Stream>> InitialiseGetStreamAsyncMethod(Func<string, Task<Stream>>? getStreamAsync)
         {
-            _getStreamAsync = getStreamAsync ?? GetStreamAsync;
+            return getStreamAsync ?? GetStreamAsync;
         }
 
         private async Task<Stream> GetStreamAsync(string url)
@@ -327,13 +320,19 @@ namespace Mapsui.Providers.Wms
                 if (_wmsVersion != "1.0.0" && _wmsVersion != "1.1.0" && _wmsVersion != "1.1.1" && _wmsVersion != "1.3.0")
                     throw new ApplicationException("WMS Version " + _wmsVersion + " not supported");
 
-                _nsmgr!.AddNamespace(string.Empty, "http://www.opengis.net/wms");
-                _nsmgr.AddNamespace("sm", _wmsVersion == "1.3.0" ? "http://www.opengis.net/wms" : "");
-                _nsmgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
-                _nsmgr.AddNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
+                if (_nsmgr != null)
+                {
+                    _nsmgr.AddNamespace(string.Empty, "http://www.opengis.net/wms");
+                    _nsmgr.AddNamespace("sm", _wmsVersion == "1.3.0" ? "http://www.opengis.net/wms" : "");
+                    _nsmgr.AddNamespace("xlink", "http://www.w3.org/1999/xlink");
+                    _nsmgr.AddNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
+                }
             }
             else
                 throw new ApplicationException("No service version number found!");
+
+            if (_nsmgr == null)
+                throw new ApplicationException("No service tag found!");
 
             var xnService = doc.DocumentElement.SelectSingleNode("sm:Service", _nsmgr);
             var xnCapability = doc.DocumentElement.SelectSingleNode("sm:Capability", _nsmgr);
@@ -468,6 +467,9 @@ namespace Mapsui.Providers.Wms
         /// <param name="xmlRequestNode"></param>
         private void ParseRequest(XmlNode xmlRequestNode)
         {
+            if (_nsmgr == null)
+                return;
+
             var xnGetMap = xmlRequestNode.SelectSingleNode("sm:GetMap", _nsmgr);
             ParseGetMapRequest(xnGetMap);
 
@@ -480,6 +482,9 @@ namespace Mapsui.Providers.Wms
 
         private void ParseGetFeatureInfo(XmlNode getFeatureInfoRequestNodes)
         {
+            if (_nsmgr == null)
+                return;
+
             var xnlHttp = getFeatureInfoRequestNodes.SelectSingleNode("sm:DCPType/sm:HTTP", _nsmgr);
             if (xnlHttp != null && xnlHttp.HasChildNodes)
             {
@@ -510,6 +515,9 @@ namespace Mapsui.Providers.Wms
         /// <param name="getMapRequestNodes"></param>
         private void ParseGetMapRequest(XmlNode? getMapRequestNodes)
         {
+            if (_nsmgr == null)
+                return;
+
             var xnlHttp = getMapRequestNodes?.SelectSingleNode("sm:DCPType/sm:HTTP", _nsmgr);
             if (xnlHttp != null && xnlHttp.HasChildNodes)
             {
@@ -545,8 +553,9 @@ namespace Mapsui.Providers.Wms
         private WmsServerLayer ParseLayer(XmlNode? xmlLayer)
         {
             var wmsServerLayer = new WmsServerLayer();
-            if (xmlLayer == null)
+            if (xmlLayer == null || _nsmgr == null)
                 return wmsServerLayer;
+
             var node = xmlLayer.SelectSingleNode("sm:Name", _nsmgr);
             wmsServerLayer.Name = node?.InnerText;
             node = xmlLayer.SelectSingleNode("sm:Title", _nsmgr);
@@ -652,6 +661,9 @@ namespace Mapsui.Providers.Wms
         private string[] ParseCrses(XmlNode xmlLayer)
         {
             var crses = new List<string>();
+
+            if (_nsmgr == null)
+                return crses.ToArray();
 
             using var xnlSrs = xmlLayer.SelectNodes("sm:SRS", _nsmgr);
             if (xnlSrs != null)

@@ -20,7 +20,7 @@ namespace Mapsui.ArcGIS.ImageServiceProvider
     public class ArcGISImageServiceProvider : IProvider, IProjectingProvider
     {
         private int _timeOut;
-        private string _url = default!;
+        private string _url = string.Empty;
 
         public string? Token { get; set; }
         public ArcGISImageCapabilities ArcGisImageCapabilities { get; private set; }

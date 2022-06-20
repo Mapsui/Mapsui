@@ -43,7 +43,7 @@ namespace Mapsui.Nts.Providers.Shapefile.Indexing
     /// </summary>
     public class QuadTree : IDisposable
     {
-        private MRect _box;
+        private MRect? _box;
         private QuadTree? _child0;
         private QuadTree? _child1;
 
@@ -127,7 +127,7 @@ namespace Mapsui.Nts.Providers.Shapefile.Indexing
         /// </summary>
         private QuadTree()
         {
-            _box = default!;
+            _box = null;
         }
 
 
@@ -214,7 +214,7 @@ namespace Mapsui.Nts.Providers.Shapefile.Indexing
         /// <param name="sw">Reference to BinaryWriter</param>
         private void SaveNode(QuadTree? node, in BinaryWriter sw)
         {
-            if (node == null)
+            if (node == null || node.Box == null)
                 return;
             //Write node BoundingBox
             sw.Write(node.Box.Min.X);
@@ -262,7 +262,7 @@ namespace Mapsui.Nts.Providers.Shapefile.Indexing
         /// <summary>
         /// Gets/sets the Axis Aligned Bounding Box
         /// </summary>
-        public MRect Box
+        public MRect? Box
         {
             get => _box;
             set => _box = value;
@@ -350,7 +350,7 @@ namespace Mapsui.Nts.Providers.Shapefile.Indexing
             }
             else
             {
-                if (node.Box.Intersects(box))
+                if (node.Box?.Intersects(box) ?? false)
                 {
                     IntersectTreeRecursive(box, node.Child0, in list);
                     IntersectTreeRecursive(box, node.Child1, in list);

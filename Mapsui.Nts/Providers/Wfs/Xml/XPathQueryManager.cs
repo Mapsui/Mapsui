@@ -422,7 +422,9 @@ namespace Mapsui.Providers.Wfs.Xml
                 if (name.Equals(ParamCompare.FunctionName)) return new ParamCompare(argTypes, 2, 2);
                 if (name.Equals(ParamCompareWithTargetNs.FunctionName))
                     return new ParamCompareWithTargetNs(argTypes, 3, 3);
-                return null!;
+#pragma warning disable CS8603
+                return null; // seems to work
+#pragma warning restore CS8603
             }
 
             /// <summary>
@@ -435,7 +437,9 @@ namespace Mapsui.Providers.Wfs.Xml
                 var param = GetParam(name);
                 if (param != null)
                     return new ParamFunctionVar(param);
-                return null!;
+#pragma warning disable CS8603
+                return null; // seems to work
+#pragma warning restore CS8603
             }
 
             /// <summary>
