@@ -16,8 +16,6 @@
   <ItemGroup>
     <PackageReference Include="Uno.UI" />
     <PackageReference Include="SkiaSharp.Views.Uno" />    
-    <PackageReference Include="Uno.UI" />
-    <PackageReference Include="SkiaSharp.Views.Uno" />    
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'=='uap10.0.19041'">
