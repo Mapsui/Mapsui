@@ -24,7 +24,8 @@ namespace Mapsui.Samples.Common.Desktop
         {
             var map = new Map();
 
-            var countrySource = new ShapeFile(GetAppDir() + $"{Path.DirectorySeparatorChar}GeoData{Path.DirectorySeparatorChar}World{Path.DirectorySeparatorChar}countries.shp", true);
+            var path = Path.Combine(GetAppDir(), "GeoData", "World", "countries.shp");
+            var countrySource = new ShapeFile(path, true);
             countrySource.CRS = "EPSG:4326";
             var projectedCountrySource = new ProjectingProvider(countrySource) {
                 CRS = "EPSG:3857",
