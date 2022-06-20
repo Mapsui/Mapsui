@@ -25,19 +25,46 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Console" />
     <PackageReference Include="SkiaSharp.Views.Uno" />
   </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)'=='net6.0-android'">
-    <PackageReference Include="Xamarin.Google.Android.Material" />
-    <PackageReference Include="Uno.UniversalImageLoader" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)'=='net6.0-ios' or '$(TargetFramework)'=='net6.0-maccatalyst'">
-    <PackageReference Include="Uno.Extensions.Logging.OSLog" />
-  </ItemGroup>
-  <PropertyGroup Condition="'$(TargetFramework)'=='net6.0-maccatalyst'">
-    <!-- Required for unknown crash as of .NET 6 Mobile Preview 13 -->
-    <MtouchExtraArgs>--registrar:static</MtouchExtraArgs>
-    <!-- Full globalization is required for Uno -->
-    <InvariantGlobalization>false</InvariantGlobalization>
-  </PropertyGroup>
+ <Choose>
+    <When Condition="'$(TargetFramework)'=='net6.0-android'">
+      <ItemGroup>
+        <PackageReference Include="Xamarin.Google.Android.Material" />
+        <PackageReference Include="Uno.UniversalImageLoader" />
+      </ItemGroup>
+      <ItemGroup>
+        <AndroidEnvironment Include="Android/environment.conf" />
+      </ItemGroup>
+    </When>
+    <When Condition="'$(TargetFramework)'=='net6.0-ios'">
+      <PropertyGroup Condition="'$(TargetFramework)'=='net6.0-ios'">
+        <MtouchExtraArgs>$(MtouchExtraArgs) --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
+        <!-- https://github.com/xamarin/xamarin-macios/issues/14812 -->
+        <MtouchExtraArgs>$(MtouchExtraArgs) --marshal-objectivec-exceptions:disable</MtouchExtraArgs>
+      </PropertyGroup>
+      <ItemGroup>
+        <PackageReference Include="Uno.Extensions.Logging.OSLog" />
+      </ItemGroup>
+    </When>
+    <When Condition="'$(TargetFramework)'=='net6.0-maccatalyst'">
+      <PropertyGroup>
+        <!-- Configure the GC -->
+        <MtouchExtraArgs>$(MtouchExtraArgs) --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
+        <!-- Required for unknown crash as of .NET 6 Mobile Preview 13 -->
+        <MtouchExtraArgs>$(MtouchExtraArgs) --registrar:static</MtouchExtraArgs>
+        <!-- https://github.com/xamarin/xamarin-macios/issues/14812 -->
+        <MtouchExtraArgs>$(MtouchExtraArgs) --marshal-objectivec-exceptions:disable</MtouchExtraArgs>
+        <!-- Full globalization is required for Uno -->
+        <InvariantGlobalization>false</InvariantGlobalization>
+      </PropertyGroup>
+      <ItemGroup>
+        <PackageReference Include="Uno.Extensions.Logging.OSLog" />
+      </ItemGroup>
+    </When>
+    <When Condition="'$(TargetFramework)'=='net6.0-macos'">
+      <PropertyGroup>
+      </PropertyGroup>
+    </When>
+  </Choose>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Mapsui.Nts\Mapsui.Nts.csproj" />
     <ProjectReference Include="..\..\..\Mapsui.Tiling\Mapsui.Tiling.csproj" />
@@ -48,8 +75,4 @@
     <ProjectReference Include="..\..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
   </ItemGroup>
   <Import Project="..\Mapsui.Samples.Uno.Shared\Mapsui.Samples.Uno.Shared.projitems" Label="Shared" />
-  <ItemGroup>
-    <AndroidResource Remove="obj\**" />
-    <None Remove="obj\**" />
-  </ItemGroup>
 </Project>

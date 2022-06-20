@@ -1,7 +1,7 @@
 # Mapsui Contributor Guidelines
 
 ## Issue first
-Submit an issue before a pull request co we can discuss the possible solutions to the problem.
+Submit an issue before a pull request so we can discuss the possible solutions to the problem.
 
 ## Sign the Contributor License Agreement (CLA)
 To contribute you need to sign our CLA 
