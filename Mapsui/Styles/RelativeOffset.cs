@@ -8,8 +8,10 @@ namespace Mapsui.Styles
     {
         /// <summary>
         /// Offset of an image to the center of the source. The unit of measure
-        /// is the width or height of an image. An offset of (0, 0.5) will be
-        /// horizontally centered and vertically above the location.
+        /// is the width or height of an image. So in case of an an offset of (0.5, 0.5) 
+        /// the symbol will be moved half the width of the image to the right and half the 
+        /// height of the image to the top. So the bottom left point of the image will be on
+        /// the location.
         /// </summary>
         public RelativeOffset() { }
 
