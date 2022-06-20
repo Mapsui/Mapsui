@@ -11,7 +11,7 @@ namespace VersionUpdater
     public class Options
     {
         [Option('v', Required = true, HelpText = "Specifies the version to set in semver format")]
-        public string Version { get; set; } = default!;
+        public string Version { get; set; } = "4.0.0"; // current version of mapsui is 4.0.0 set it as default
     }
 
     static class Program

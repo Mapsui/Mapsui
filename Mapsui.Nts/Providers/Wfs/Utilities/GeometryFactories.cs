@@ -52,10 +52,9 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <param name="featureTypeInfo">A <see cref="WfsFeatureTypeInfo"/> instance providing metadata of the featuretype to query</param>
         protected GeometryFactory(HttpClientUtil httpClientUtil, WfsFeatureTypeInfo featureTypeInfo)
         {
-            XmlReader = default!;
             FeatureTypeInfo = featureTypeInfo;
             _httpClientUtil = httpClientUtil;
-            CreateReader(httpClientUtil);
+            XmlReader = CreateReader(httpClientUtil);
 
             try
             {
@@ -234,7 +233,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// This method initializes the XmlReader member.
         /// </summary>
         /// <param name="httpClientUtil">A configured <see cref="HttpClientUtil"/> instance for performing web requests</param>
-        private void CreateReader(HttpClientUtil httpClientUtil)
+        private XmlReader CreateReader(HttpClientUtil httpClientUtil)
         {
             var xmlReaderSettings = new XmlReaderSettings
             {
@@ -243,7 +242,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                 IgnoreWhitespace = true,
                 DtdProcessing = DtdProcessing.Prohibit
             };
-            XmlReader = XmlReader.Create(
+            return XmlReader.Create(
                 httpClientUtil.GetDataStream() ?? throw new ArgumentException(nameof(httpClientUtil)), 
                 xmlReaderSettings);
         }

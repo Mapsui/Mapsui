@@ -45,7 +45,7 @@ namespace Mapsui.UI.Wpf
         // Action to call for a redraw of the control
         private Action? _invalidate;
         // Timer for loop to invalidating the control
-        private System.Threading.Timer? _invalidateTimer = default!;
+        private System.Threading.Timer? _invalidateTimer;
         // Interval between two calls of the invalidate function in ms
         private int _updateInterval = 16;
         // Stopwatch for measuring drawing times
@@ -250,7 +250,7 @@ namespace Mapsui.UI.Wpf
         }
 
         private readonly LimitedViewport _viewport = new LimitedViewport();
-        private INavigator _navigator = default!;
+        private INavigator? _navigator;
 
         /// <summary>
         /// Viewport holding information about visible part of the map. Viewport can never be null.
@@ -260,7 +260,7 @@ namespace Mapsui.UI.Wpf
         /// <summary>
         /// Handles all manipulations of the map viewport
         /// </summary>
-        public INavigator Navigator
+        public INavigator? Navigator
         {
             get => _navigator;
             set

@@ -7,11 +7,15 @@ namespace Mapsui.Samples.Maui;
 
 public class MainPage : ContentPage
 {
-    readonly IEnumerable<ISampleBase> allSamples;
+    IEnumerable<ISampleBase> allSamples;
+    CollectionView sampleCollectionView = CreateCollectionView();
+    Picker categoryPicker = CreatePicker();
+    MapControl mapControl = new MapControl();
 
     public MainPage()
 	{
-        MapControl.Map?.Layers.Add(OpenStreetMap.CreateTileLayer());
+        sampleCollectionView.SelectionChanged += CollectionView_SelectionChanged;
+        mapControl.Map?.Layers.Add(OpenStreetMap.CreateTileLayer());
 
         Content = new Grid
         {
@@ -27,50 +31,74 @@ public class MainPage : ContentPage
                     Spacing = 20,
                     Children =
                     {
-                        SampleCategoryPicker,
-                        SampleList
+                        categoryPicker,
+                        sampleCollectionView
                     }
                 }.Column(0).Padding(20),
-                MapControl.Column(1)
+                mapControl.Column(1)
             }
         };
 
-        SampleList.ItemSelected += SampleList_ItemSelected;
-
         allSamples = AllSamples.GetSamples() ?? new List<ISampleBase>();
         var categories = allSamples.Select(s => s.Category).Distinct().OrderBy(c => c);
-        SampleCategoryPicker!.ItemsSource = categories.ToList<string>();
-        SampleCategoryPicker.SelectedIndexChanged += SampleCategoryPicker_SelectedIndexChanged; ;
-        SampleCategoryPicker.SelectedItem = "Info";
+        categoryPicker!.ItemsSource = categories.ToList();
+        categoryPicker.SelectedIndexChanged += categoryPicker_SelectedIndexChanged;
+        categoryPicker.SelectedItem = "Info";
     }
 
-    private void SampleList_ItemSelected(object? sender, SelectedItemChangedEventArgs e)
+    private static Picker CreatePicker()
     {
-        if (e.SelectedItem == null)
+        return new Picker
         {
-            return; //ItemSelected is called on deselection, which results in SelectedItem being set to null
+            WidthRequest = 220,
+        };
+    }
+
+    private static CollectionView CreateCollectionView()
+    {
+        return new CollectionView
+        {
+            ItemTemplate = new DataTemplate(() => CreateCollectionViewTemplate()),
+            SelectionMode = SelectionMode.Single,
+        };
+    }
+
+    private static IView CreateCollectionViewTemplate()
+    {
+        return new Frame
+        {
+            BorderColor = Color.FromArgb("#DDDDDD"),
+            HasShadow = true,
+            CornerRadius = 4,
+            Padding = 10,
+            Margin = new Thickness(0, 2),
+            Content = new Label
+            {
+                WidthRequest = 200,
+                        
+            }.Bind(Label.TextProperty, nameof(ISample.Name))
+        };
+    }
+
+    private void CollectionView_SelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        if (e.CurrentSelection == null)
+        {
+            return;
         }
 
-        var sampleName = e.SelectedItem.ToString();
-        var baseSample = allSamples.FirstOrDefault(x => x.Name == sampleName);
-
-        if (baseSample is ISample sample)
-            sample.Setup(MapControl);
+        var sample = (ISample)e.CurrentSelection[0];
+        sample.Setup(mapControl);
     }
 
-    public ListView SampleList { get; set; } = new ListView();
-    public Picker SampleCategoryPicker { get; set; } = new Picker();
-
-    public MapControl MapControl = new MapControl();
-
-    private void SampleCategoryPicker_SelectedIndexChanged(object? sender, EventArgs e)
+    private void categoryPicker_SelectedIndexChanged(object? sender, EventArgs e)
     {
         FillListWithSamples();
     }
 
     private void FillListWithSamples()
     {
-        var selectedCategory = SampleCategoryPicker.SelectedItem?.ToString() ?? "";
-        SampleList.ItemsSource = allSamples.Where(s => s.Category == selectedCategory).Select(x => x.Name);
+        var selectedCategory = categoryPicker.SelectedItem?.ToString() ?? "";
+        sampleCollectionView.ItemsSource = allSamples.Where(s => s.Category == selectedCategory);
     }
 }

@@ -8,5 +8,5 @@ public class Tile
     public int Col { get; set; }
     public int Row { get; set; }
     public DateTime Created { get; set; }
-    public byte[] Data { get; set; } = default!;
+    public byte[]? Data { get; set; }
 }
