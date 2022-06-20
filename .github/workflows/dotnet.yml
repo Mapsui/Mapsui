@@ -48,8 +48,8 @@ jobs:
          include-prerelease: true    
     - name: install maui macos android ios maccatalyst wasm-tools
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools
-    - name: Restore dependencies Forms
-      run: nuget restore Mapsui.Mac.sln   
+    - name: Restore dependencies Legacy
+      run: nuget restore Mapsui.Mac.Legacy.sln   
     - name: Restore dependencies Mapsui
       run: dotnet restore Mapsui.Mac.slnf   
     # Samples Build    
