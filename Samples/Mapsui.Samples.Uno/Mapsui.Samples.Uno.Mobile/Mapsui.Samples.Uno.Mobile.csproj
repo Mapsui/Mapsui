@@ -77,6 +77,6 @@
   <Import Project="..\Mapsui.Samples.Uno.Shared\Mapsui.Samples.Uno.Shared.projitems" Label="Shared" />
   <PropertyGroup>
     <!-- Workaround for Error NU1008 Projects that use central package version management should not define the version on the PackageReference ..--> 
-    <PreBuildEvent>"$(SolutionDir).nuget\nuget" restore "$(SolutionDir)Samples\Mapsui.Samples.Uno\Mapsui.Samples.Uno.Mobile\Mapsui.Samples.Uno.Mobile.csproj"</PreBuildEvent>
+    <PreBuildEvent>"$(MSBuildProjectDirectory)\..\..\..\.nuget\nuget" restore $(MSBuildProjectDirectory)\Mapsui.Samples.Uno.Mobile.csproj</PreBuildEvent>
   </PropertyGroup>
 </Project>
