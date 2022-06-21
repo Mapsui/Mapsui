@@ -48,8 +48,10 @@ jobs:
          include-prerelease: true    
     - name: install maui macos android ios maccatalyst wasm-tools
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools
-    - name: Restore dependencies
-      run: dotnet restore Mapsui.Mac.sln   
+    - name: Restore dependencies Legacy
+      run: nuget restore Mapsui.Mac.Legacy.sln   
+    - name: Restore dependencies Mapsui
+      run: dotnet restore Mapsui.Mac.slnf   
     # Samples Build    
     - name: Build Mapsui.Samples.Droid
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Droid/Mapsui.Samples.Droid.csproj    
@@ -58,12 +60,12 @@ jobs:
     # Samples Forms    
     - name: Build Mapsui.Samples.Forms.Shared
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Shared/Mapsui.Samples.Forms.Shared.csproj    
-    #- name: Build Mapsui.Samples.Forms.Android
-    #  run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Android/Mapsui.Samples.Forms.Android.csproj     
-    #- name: Build Mapsui.Samples.Forms.iOS
-    #  run: msbuild -p:RestorePackages=false-p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.iOS/Mapsui.Samples.Forms.iOS.csproj     
-    #- name: Build Mapsui.Samples.Forms.Mac
-    #  run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Mac/Mapsui.Samples.Forms.Mac.csproj
+    - name: Build Mapsui.Samples.Forms.Android
+      run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Android/Mapsui.Samples.Forms.Android.csproj     
+    - name: Build Mapsui.Samples.Forms.iOS
+      run: msbuild -p:RestorePackages=false-p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.iOS/Mapsui.Samples.Forms.iOS.csproj     
+    - name: Build Mapsui.Samples.Forms.Mac
+      run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Mac/Mapsui.Samples.Forms.Mac.csproj
     # Test Build    
     - name: Build Mapsui.Rendering.Skia.Tests
       run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Rendering.Skia.Tests/Mapsui.Rendering.Skia.Tests.csproj
@@ -71,10 +73,9 @@ jobs:
       run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Tests/Mapsui.Tests.csproj    
     # Run Tests   
     - name: Run Mapsui.Rendering.Skia.Tests
-      run: dotnet test Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/net6.0/Mapsui.Rendering.Skia.Tests.dll
-    # does not work currently
-    #- name: Run Mapsui.Tests
-    #  run: dotnet test Tests/Mapsui.Tests/bin/Debug/net6.0/Mapsui.Tests.dll
+      run: dotnet test Tests/Mapsui.Rendering.Skia.Tests/bin/Debug/net6.0/Mapsui.Rendering.Skia.Tests.dll    
+    - name: Run Mapsui.Tests
+      run: dotnet test Tests/Mapsui.Tests/bin/Debug/net6.0/Mapsui.Tests.dll
     # Release Build
     - name: Build Mapsui
       run: dotnet build --no-restore --configuration Release Mapsui/Mapsui.csproj
@@ -142,7 +143,7 @@ jobs:
     - name: install maui macos android ios maccatalyst wasm-tools
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools
     - name: Restore dependencies
-      run: nuget restore Mapsui.sln
+      run: .nuget\nuget restore Mapsui.sln
     # Samples Build    
     - name: Mapsui.Samples.Avalonia
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Avalonia/Mapsui.Samples.Avalonia.csproj

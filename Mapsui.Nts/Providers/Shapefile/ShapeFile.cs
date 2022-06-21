@@ -544,8 +544,7 @@ namespace Mapsui.Nts.Providers.Shapefile
         /// </summary>
         private void ParseProjection()
         {
-            var projFile = Path.GetDirectoryName(Filename) + "\\" + Path.GetFileNameWithoutExtension(Filename) +
-                              ".prj";
+            var projFile = Path.ChangeExtension(Filename, ".prj");
             if (File.Exists(projFile))
                 try
                 {
