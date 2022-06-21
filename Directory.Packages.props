@@ -42,8 +42,8 @@
 		<PackageVersion Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.2.32"/>
 		<PackageVersion Include="Microsoft.Win32.Primitives" Version="4.3.0" />
 		<PackageVersion Include="Microsoft.Windows.CsWin32" Version="0.1.588-beta" />
-		<PackageVersion Include="Microsoft.WindowsAppSDK" Version="1.1.0" />
-		<PackageVersion Include="NetTopologySuite" Version="2.4.0" />
+        <PackageVersion Include="Microsoft.WindowsAppSDK" Version="1.1.0" />
+        <PackageVersion Include="NetTopologySuite" Version="2.4.0" />
 		<PackageVersion Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageVersion Include="NUnit" Version="3.12.0" />
 		<PackageVersion Include="NUnit3TestAdapter" Version="3.17.0" />
@@ -60,6 +60,7 @@
 		<PackageVersion Include="SkiaSharp.Views.Maui.Controls" Version="2.88.1-preview.63" />
 		<PackageVersion Include="SkiaSharp.Views.Maui.Controls.Compatibility" Version="2.88.1-preview.63" />
 		<PackageVersion Include="SkiaSharp.Views.Uno" Version="2.88.1-preview.63" />
+    <PackageVersion Include="SkiaSharp.Views.Uno.WinUI" Version="2.88.1-preview.63" />
 		<PackageVersion Include="SkiaSharp.Views.WinUI" Version="2.88.1-preview.63" />
 		<PackageVersion Include="SkiaSharp.Views.WPF" Version="2.88.1-preview.63" />
 		<PackageVersion Include="SkiaSharp.Views.Forms.WPF" Version="2.88.1-preview.63"/>
@@ -120,6 +121,7 @@
 		<PackageVersion Include="Uno.Core.Extensions.Logging.Singleton" Version="4.0.1" />
 		<PackageVersion Include="Uno.UniversalImageLoader" Version="1.9.36" />
 		<PackageVersion Include="Uno.UI" Version="4.3.8" />
+    <PackageVersion Include="Uno.WinUI" Version="4.3.8" />
 		<PackageVersion Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.3.8" />
 		<PackageVersion Include="Uno.UI.RemoteControl" Version="4.3.8" />
 		<PackageVersion Include="Uno.UI.Skia.Gtk" Version="4.3.8" />
