@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <TargetFrameworks Condition="'$(SolutionName)' != 'Mapsui.Mac.Legacy'">$(TargetFrameworks);net6.0</TargetFrameworks>
     <Authors>Mapsui Contributers</Authors>
   </PropertyGroup>
 

@@ -1,0 +1,37 @@
+{
+  "solution": {
+    "path": "Mapsui.sln",
+    "projects": [
+      "Mapsui.ArcGIS\\Mapsui.ArcGIS.csproj",
+      "Mapsui.Extensions\\Mapsui.Extensions.csproj",
+      "Mapsui.Nts\\Mapsui.Nts.csproj",
+      "Mapsui.Rendering.Skia\\Mapsui.Rendering.Skia.csproj",
+      "Mapsui.Tiling\\Mapsui.Tiling.csproj",
+      "Mapsui.UI.Android\\Mapsui.UI.Android.csproj",
+      "Mapsui.UI.Avalonia\\Mapsui.UI.Avalonia.csproj",
+      "Mapsui.UI.Eto\\Mapsui.UI.Eto.csproj",
+      "Mapsui.UI.Forms\\Mapsui.UI.Forms.csproj",
+      "Mapsui.UI.Maui\\Mapsui.UI.Maui.csproj",
+      "Mapsui.UI.Shared\\Mapsui.UI.Shared.shproj",
+      "Mapsui.UI.iOS\\Mapsui.UI.iOS.csproj",
+      "Mapsui\\Mapsui.csproj",
+      "Samples\\Mapsui.Samples.Common.Desktop\\Mapsui.Samples.Common.Desktop.csproj",
+      "Samples\\Mapsui.Samples.Common\\Mapsui.Samples.Common.csproj",
+      "Samples\\Mapsui.Samples.CustomWidget\\Mapsui.Samples.CustomWidget.csproj",
+      "Samples\\Mapsui.Samples.Droid\\Mapsui.Samples.Droid.csproj",
+      "Samples\\Mapsui.Samples.Eto\\Mapsui.Samples.Eto.csproj",
+      "Samples\\Mapsui.Samples.Forms\\Mapsui.Samples.Forms.Android\\Mapsui.Samples.Forms.Android.csproj",
+      "Samples\\Mapsui.Samples.Forms\\Mapsui.Samples.Forms.Mac\\Mapsui.Samples.Forms.Mac.csproj",
+      "Samples\\Mapsui.Samples.Forms\\Mapsui.Samples.Forms.Shared\\Mapsui.Samples.Forms.Shared.csproj",
+      "Samples\\Mapsui.Samples.Forms\\Mapsui.Samples.Forms.iOS\\Mapsui.Samples.Forms.iOS.csproj",
+      "Samples\\Mapsui.Samples.Maui.MapView\\Mapsui.Samples.Maui.MapView.csproj",
+      "Samples\\Mapsui.Samples.Maui\\Mapsui.Samples.Maui.csproj",
+      "Samples\\Mapsui.Samples.iOS\\Mapsui.Samples.iOS.csproj",
+      "Tests\\Mapsui.Nts.Tests\\Mapsui.Nts.Tests.csproj",
+      "Tests\\Mapsui.Rendering.Skia.Tests\\Mapsui.Rendering.Skia.Tests.csproj",
+      "Tests\\Mapsui.Tests.Common\\Mapsui.Tests.Common.csproj",
+      "Tests\\Mapsui.Tests\\Mapsui.Tests.csproj",
+      "Tools\\VersionUpdater\\VersionUpdater.csproj"
+    ]
+  }
+}
