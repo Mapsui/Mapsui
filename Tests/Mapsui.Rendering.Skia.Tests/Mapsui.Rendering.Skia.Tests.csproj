@@ -39,8 +39,8 @@
     </PackageReference>
     <PackageReference Include="coverlet.collector" />
     <PackageReference Include="Svg.Skia" />
-    <PackageReference Include="OpenTK" NoWarn="NU1701" />
-    <PackageReference Include="OpenTK.GLControl" NoWarn="NU1701" />
+    <PackageReference Include="OpenTK" />
+    <PackageReference Include="OpenTK.GLControl" />
   </ItemGroup>
 
   <ItemGroup>
