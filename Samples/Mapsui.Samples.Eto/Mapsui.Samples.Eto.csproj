@@ -9,7 +9,6 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
-    <NoWarn>NU1008</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

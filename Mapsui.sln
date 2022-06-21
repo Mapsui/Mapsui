@@ -148,6 +148,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.UI.Uno", "Mapsui.UI.Uno\Mapsui.UI.Uno.csproj", "{B78CDE0F-568F-4064-8B74-FCD920E22351}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mapsui.Samples.Uno", "Mapsui.Samples.Uno", "{BF8ED31D-4D1A-4BCF-9E61-561BD04FFDB9}"
+	ProjectSection(SolutionItems) = preProject
+		Samples\Mapsui.Samples.Uno\Directory.Build.props = Samples\Mapsui.Samples.Uno\Directory.Build.props
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platforms", "Platforms", "{754642CD-E3F3-4780-806F-F1863D8F7DDD}"
 EndProject

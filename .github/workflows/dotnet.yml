@@ -145,25 +145,25 @@ jobs:
     - name: Restore dependencies
       run: .nuget\nuget restore Mapsui.sln
     # Samples Build    
-    - name: Maspui.Samples.Avalonia
+    - name: Mapsui.Samples.Avalonia
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Avalonia/Mapsui.Samples.Avalonia.csproj
-    - name: Maspui.Samples.Droid
+    - name: Mapsui.Samples.Droid
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Droid/Mapsui.Samples.Droid.csproj
-    - name: Maspui.Samples.Eto
+    - name: Mapsui.Samples.Eto
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Eto/Mapsui.Samples.Eto.csproj
     # does not work currently (bug in rc3)
-    - name: Maspui.Samples.iOS
+    - name: Mapsui.Samples.iOS
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.iOS/Mapsui.Samples.iOS.csproj
-    - name: Maspui.Samples.Maui
+    - name: Mapsui.Samples.Maui
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Maui/Mapsui.Samples.Maui.csproj
-    - name: Maspui.Samples.Maui.MapView
+    - name: Mapsui.Samples.Maui.MapView
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Maui.MapView/Mapsui.Samples.Maui.MapView.csproj
       # win builds in the solution but not in seperate project
-    - name: Maspui.Samples.WinUI
+    - name: Mapsui.Samples.WinUI
       run: msbuild -p:RestorePackages=false -p:Configuration=Debug -p:Platform=x86 Samples\Mapsui.Samples.WinUI\Mapsui.Samples.WinUI\Mapsui.Samples.WinUI.csproj
-    - name: Maspui.Samples.Wpf
+    - name: Mapsui.Samples.Wpf
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Wpf/Mapsui.Samples.Wpf.csproj
-    - name: Maspui.Samples.Wpf.Editing
+    - name: Mapsui.Samples.Wpf.Editing
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Wpf.Editing/Mapsui.Samples.Wpf.Editing.csproj
     # Samples Forms
     - name: Mapsui.Samples.Forms.Android
