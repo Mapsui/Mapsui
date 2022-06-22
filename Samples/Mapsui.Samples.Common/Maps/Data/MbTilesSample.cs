@@ -15,11 +15,16 @@ namespace Mapsui.Samples.Common.Maps
         public string Name => "1 MbTiles";
         public string Category => "Data";
 
-        public Task<Map> CreateMapAsync()
+        public static Map CreateMap()
         {
             var map = new Map();
             map.Layers.Add(CreateMbTilesLayer(Path.GetFullPath(Path.Combine(MbTilesLocation, "world.mbtiles")), "regular"));
-            return Task.FromResult(map);
+            return map;
+        }
+    
+        public Task<Map> CreateMapAsync()
+        {
+            return Task.FromResult(CreateMap());
         }
 
         public static TileLayer CreateMbTilesLayer(string path, string name)
