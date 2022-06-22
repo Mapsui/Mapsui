@@ -75,6 +75,7 @@
 		<PackageVersion Include="System.Diagnostics.Debug" Version="4.3.0" />
 		<PackageVersion Include="System.Diagnostics.Tools" Version="4.3.0" />
 		<PackageVersion Include="System.Diagnostics.Tracing"  Version="4.3.0" />
+    <PackageVersion Include="System.Drawing.Common" Version="6.0.0" />
 		<PackageVersion Include="System.Globalization" Version="4.3.0" />
 		<PackageVersion Include="System.Globalization.Calendars" Version="4.3.0" />
 		<PackageVersion Include="System.IO" Version="4.3.0" />
