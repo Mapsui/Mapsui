@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Nts;
 using Mapsui.Providers;
@@ -18,12 +19,7 @@ namespace Mapsui.Samples.Common.Maps.Projection
         public string Name => "Multipolygon projection";
         public string Category => "Projection";
 
-        public void Setup(IMapControl mapControl)
-        {
-            mapControl.Map = CreateMap();
-        }
-
-        public static Map CreateMap()
+        public Task<Map> CreateMapAsync()
         {
             // For Projections to work three things need to be set:
             // 1) The CRS on the Map to know what to project to.
@@ -41,7 +37,7 @@ namespace Mapsui.Samples.Common.Maps.Projection
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(geometryLayer);
             map.Home = n => n.NavigateTo(extent);
-            return map;
+            return Task.FromResult(map);
         }
 
         public static Layer CreateWgs84Layer()

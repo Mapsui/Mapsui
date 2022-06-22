@@ -12,7 +12,7 @@ using NetTopologySuite.IO;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public class PolygonSample : ISample
+    public class PolygonSample : IMapControlSample
     {
         private static int _bitmapId;
 

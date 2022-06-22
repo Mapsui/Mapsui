@@ -11,7 +11,7 @@ using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Desktop
 {
-    public class GeoTiffSample : ISample
+    public class GeoTiffSample : IMapControlSample
     {
         public string Name => "6 Geo Tiff";
         public string Category => "Desktop";

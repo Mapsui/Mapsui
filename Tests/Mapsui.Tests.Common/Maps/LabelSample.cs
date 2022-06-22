@@ -7,7 +7,7 @@ using Mapsui.UI;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public class LabelSample : ISample
+    public class LabelSample : IMapControlSample
     {
         public string Name => "Label";
         public string Category => "Tests";

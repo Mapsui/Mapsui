@@ -205,7 +205,7 @@ namespace Mapsui.Rendering.Skia.Tests
         public async Task RenderTilesAsync()
         {
             // arrange
-            using var map = await TilesSample.CreateMapAsync();
+            using var map = await (new TilesSample()).CreateMapAsync();
             var viewport = map.Extent!.Multiply(1.1).ToViewport(600);
             const string fileName = "tilelayer.png";
 

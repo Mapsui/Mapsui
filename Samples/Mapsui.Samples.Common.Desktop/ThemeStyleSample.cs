@@ -14,7 +14,7 @@ using NetTopologySuite.Geometries;
 
 namespace Mapsui.Samples.Common.Desktop
 {
-    public class ThemeStyleSample : ISample
+    public class ThemeStyleSample : IMapControlSample
     {
         public string Name => "1 Shapefile Theme Style";
         public string Category => "Desktop";

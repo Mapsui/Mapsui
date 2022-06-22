@@ -10,7 +10,7 @@ using NetTopologySuite.Geometries;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public class BitmapSymbolWithRotationAndOffsetSample : ISample
+    public class BitmapSymbolWithRotationAndOffsetSample : IMapControlSample
     {
         public string Name => "Symbol rotation and offset";
         public string Category => "Tests";

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
@@ -15,19 +16,14 @@ namespace Mapsui.Samples.Common.Maps
         public string Name => "Svg";
         public string Category => "Symbols";
 
-        public void Setup(IMapControl mapControl)
-        {
-            mapControl.Map = CreateMap();
-        }
-
-        public static Map CreateMap()
+        public Task<Map> CreateMapAsync()
         {
             var map = new Map();
 
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(CreateSvgLayer(map.Extent));
 
-            return map;
+            return Task.FromResult(map);
         }
 
         private static ILayer CreateSvgLayer(MRect? envelope)

@@ -14,7 +14,7 @@ using Mapsui.Tiling.Layers;
 
 namespace Mapsui.Samples.Common.Desktop
 {
-    public class ShapefileTileSample : ISample
+    public class ShapefileTileSample : IMapControlSample
     {
         public string Name => "4 Shapefile Rasterizing Tiling";
         public string Category => "Desktop";

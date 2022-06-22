@@ -7,7 +7,7 @@ using Mapsui.Widgets.Zoom;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class ViewportFlyToAnimationSample : ISample
+    public class ViewportFlyToAnimationSample : IMapControlSample
     {
         public string Name => "Animated Viewport - Fly To";
         public string Category => "Animations";

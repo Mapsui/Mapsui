@@ -10,7 +10,7 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public class BitmapSymbolSample : ISample
+    public class BitmapSymbolSample : IMapControlSample
     {
         public string Name => "Bitmap Symbol";
         public string Category => "Tests";

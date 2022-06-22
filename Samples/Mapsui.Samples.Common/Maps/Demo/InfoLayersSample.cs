@@ -23,12 +23,8 @@ namespace Mapsui.Samples.Common.Maps
 
         public string Name => "2 Map Info";
         public string Category => "Demo";
-        public void Setup(IMapControl mapControl)
-        {
-            mapControl.Map = CreateMap();
-        }
 
-        public static Map CreateMap()
+        public Task<Map> CreateMapAsync()
         {
             var map = new Map();
 
@@ -38,7 +34,7 @@ namespace Mapsui.Samples.Common.Maps
             map.Layers.Add(new WritableLayer());
             map.Layers.Add(CreateLineLayer());
 
-            return map;
+            return Task.FromResult(map);
         }
 
         private static ILayer CreatePolygonLayer()

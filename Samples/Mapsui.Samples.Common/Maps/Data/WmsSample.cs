@@ -7,18 +7,13 @@ using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps.Data
 {
-    public class WmsSample : IAsyncSample
+    public class WmsSample : ISample
     {
         public string Name => "6. WMS";
         public string Category => "Data";
         public static IUrlPersistentCache? DefaultCache { get; set; }
 
-        public async Task SetupAsync(IMapControl mapControl)
-        {
-            mapControl.Map = await CreateMapAsync();
-        }
-
-        public static async Task<Map> CreateMapAsync()
+        public async Task<Map> CreateMapAsync()
         {
             var map = new Map { CRS = "EPSG:28992" };
             // The WMS request needs a CRS

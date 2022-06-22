@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading.Tasks;
 using BruTile.MbTiles;
 using Mapsui.Tiling.Layers;
 using Mapsui.UI;
@@ -14,16 +15,11 @@ namespace Mapsui.Samples.Common.Maps
         public string Name => "1 MbTiles";
         public string Category => "Data";
 
-        public void Setup(IMapControl mapControl)
-        {
-            mapControl.Map = CreateMap();
-        }
-
-        public static Map CreateMap()
+        public Task<Map> CreateMapAsync()
         {
             var map = new Map();
             map.Layers.Add(CreateMbTilesLayer(Path.GetFullPath(Path.Combine(MbTilesLocation, "world.mbtiles")), "regular"));
-            return map;
+            return Task.FromResult(map);
         }
 
         public static TileLayer CreateMbTilesLayer(string path, string name)

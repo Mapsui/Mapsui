@@ -3,6 +3,7 @@ using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.UI;
 using Mapsui.Widgets;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -12,12 +13,7 @@ namespace Mapsui.Samples.Common.Maps
 
         public string Category => "Widgets";
 
-        public void Setup(IMapControl mapControl)
-        {
-            mapControl.Map = CreateMap();
-        }
-
-        public static Map CreateMap()
+        public Task<Map> CreateMapAsync()
         {
             var map = new Map();
 
@@ -33,7 +29,7 @@ namespace Mapsui.Samples.Common.Maps
                 Color = Color.FromString(Color.KnownColors["goldenrod"])
             });
 
-            return map;
+            return Task.FromResult(map);
         }
     }
 }

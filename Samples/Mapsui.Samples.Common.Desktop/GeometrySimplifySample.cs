@@ -10,7 +10,7 @@ using Mapsui.Nts.Providers;
 
 namespace Mapsui.Samples.Common.Desktop
 {
-    public class GeometrySimplifySample : ISample
+    public class GeometrySimplifySample : IMapControlSample
     {
         public string Name => "5 Geometry Simplify Sample";
         public string Category => "Desktop";

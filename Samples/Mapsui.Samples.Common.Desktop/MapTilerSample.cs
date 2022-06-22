@@ -10,7 +10,7 @@ using Attribution = BruTile.Attribution;
 
 namespace Mapsui.Samples.Common.Desktop
 {
-    public class MapTilerSample : ISample
+    public class MapTilerSample : IMapControlSample
     {
         public string Name => "3 Map Tiler";
         public string Category => "Desktop";

@@ -1,5 +1,6 @@
 ﻿using Mapsui.Tiling;
 using Mapsui.UI;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Navigation
 {
@@ -7,17 +8,12 @@ namespace Mapsui.Samples.Common.Maps.Navigation
     {
         public string Name => "ZoomLock";
         public string Category => "Navigation";
-        public void Setup(IMapControl mapControl)
-        {
-            mapControl.Map = CreateMap();
-            mapControl.Map.ZoomLock = true;
-        }
 
-        public static Map CreateMap()
+        public Task<Map> CreateMapAsync()
         {
-            var map = new Map();
+            var map = new Map { ZoomLock = true};
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            return map;
+            return Task.FromResult(map);
         }
     }
 }

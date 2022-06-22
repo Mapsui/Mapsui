@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Nts;
 using Mapsui.Samples.Common;
@@ -16,14 +17,9 @@ namespace Mapsui.Tests.Common.Maps
         public string Name => "Write to Layer";
         public string Category => "Special";
 
-        public void Setup(IMapControl mapControl)
-        {
-            mapControl.Map = CreateMap();
-        }
-
         [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
         [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don't ignore created IDisposable")]
-        private Map CreateMap()
+        public Task<Map> CreateMapAsync()
         {
             var map = new Map();
 
@@ -49,7 +45,7 @@ namespace Mapsui.Tests.Common.Maps
                 return;
             };
 
-            return map;
+            return Task.FromResult(map);
         }
     }
 }
