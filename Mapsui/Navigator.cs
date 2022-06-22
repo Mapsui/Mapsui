@@ -212,24 +212,6 @@ namespace Mapsui
             OnNavigated(response.Duration, ChangeType.Discrete);
         }
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-            }
-        }
-
-        ~Navigator()
-        {
-            Dispose(false);
-        }
-
         /// <summary> Adds the final action. </summary>
         /// <param name="animationEntries">The animation entries.</param>
         /// <param name="action">The action.</param>
