@@ -10,7 +10,7 @@ using NetTopologySuite.Geometries;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public class BitmapSymbolInCollectionSample : ISample
+    public class BitmapSymbolInCollectionSample : IMapControlSample
     {
         public string Name => "Collection with Bitmap Symbol";
         public string Category => "Tests";

@@ -2,6 +2,7 @@
 using Mapsui.Projections;
 using Mapsui.Tiling;
 using Mapsui.UI;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Navigation
 {
@@ -11,12 +12,7 @@ namespace Mapsui.Samples.Common.Maps.Navigation
 
         public string Category => "Navigation";
 
-        public void Setup(IMapControl mapControl)
-        {
-            mapControl.Map = CreateMap();
-        }
-
-        public static Map CreateMap()
+        public Task<Map> CreateMapAsync()
         {
             var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
@@ -29,7 +25,7 @@ namespace Mapsui.Samples.Common.Maps.Navigation
             // Additionally you might want to set the resolution, this could depend on your specific purpose
             map.Home = n => n.NavigateTo(sphericalMercatorCoordinate, map.Resolutions[9]);
 
-            return map;
+            return Task.FromResult(map);
         }
     }
 }

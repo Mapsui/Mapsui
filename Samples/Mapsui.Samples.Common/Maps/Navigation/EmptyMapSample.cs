@@ -1,4 +1,5 @@
 ﻿using Mapsui.UI;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Navigation
 {
@@ -7,17 +8,12 @@ namespace Mapsui.Samples.Common.Maps.Navigation
         public string Name => "Empty Map";
         public string Category => "Navigation";
 
-        public void Setup(IMapControl mapControl)
+        public Task<Map> CreateMapAsync()
         {
-            mapControl.Map = CreateMap();
-        }
-
-        public static Map CreateMap()
-        {
-            return new Map
+            return Task.FromResult(new Map
             {
                 Home = n => n.NavigateTo(new MRect(-180, -90, 180, 90))
-            };
+            });
         }
     }
 }

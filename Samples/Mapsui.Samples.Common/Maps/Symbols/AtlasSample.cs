@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -21,12 +22,7 @@ namespace Mapsui.Samples.Common.Maps
 
         public string Category => "Symbols";
 
-        public void Setup(IMapControl mapControl)
-        {
-            mapControl.Map = CreateMap();
-        }
-
-        public static Map CreateMap()
+        public Task<Map> CreateMapAsync()
         {
             _atlasBitmapId = typeof(AtlasSample).LoadBitmapId("Images.osm-liberty.png");
             var map = new Map();
@@ -34,7 +30,7 @@ namespace Mapsui.Samples.Common.Maps
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(CreateAtlasLayer(map.Extent));
 
-            return map;
+            return Task.FromResult(map);
         }
 
         private static ILayer CreateAtlasLayer(MRect? envelope)

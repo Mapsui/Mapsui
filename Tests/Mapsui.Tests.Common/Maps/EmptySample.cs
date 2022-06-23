@@ -4,7 +4,7 @@ using Mapsui.UI;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public class EmptySample : ISample
+    public class EmptySample : IMapControlSample
     {
         public string Name => "Empty";
         public string Category => "Tests";

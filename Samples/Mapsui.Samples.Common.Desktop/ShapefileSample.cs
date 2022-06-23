@@ -10,7 +10,7 @@ using Mapsui.Extensions;
 
 namespace Mapsui.Samples.Common.Desktop
 {
-    public class ShapefileSample : ISample
+    public class ShapefileSample : IMapControlSample
     {
         public string Name => "2 Shapefile with labels";
         public string Category => "Desktop";

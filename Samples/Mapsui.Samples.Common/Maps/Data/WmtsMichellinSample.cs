@@ -8,17 +8,12 @@ using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class WmtsMichelinSample : IAsyncSample
+    public class WmtsMichelinSample : ISample
     {
         public string Name => "5 WMTS Michelin";
         public string Category => "Data";
 
-        public async Task SetupAsync(IMapControl mapControl)
-        {
-            mapControl.Map = await CreateMapAsync();
-        }
-
-        public static async Task<Map> CreateMapAsync()
+       public async Task<Map> CreateMapAsync()
         {
             var map = new Map();
             map.Layers.Add(await CreateLayerAsync());

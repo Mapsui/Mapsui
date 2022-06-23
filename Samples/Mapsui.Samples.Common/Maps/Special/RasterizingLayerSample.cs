@@ -10,7 +10,7 @@ using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class RasterizingLayerSample : ISample
+    public class RasterizingLayerSample : IMapControlSample
     {
         public string Name => "Rasterizing Layer";
         public string Category => "Special";

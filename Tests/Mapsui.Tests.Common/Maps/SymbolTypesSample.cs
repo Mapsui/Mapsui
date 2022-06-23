@@ -8,7 +8,7 @@ using Mapsui.UI;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public class SymbolTypesSample : ISample
+    public class SymbolTypesSample : IMapControlSample
     {
         public string Name => "Symbol Types";
         public string Category => "Tests";

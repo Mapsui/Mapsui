@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
 using BruTile.Predefined;
@@ -20,16 +21,11 @@ namespace Mapsui.Samples.Common.Maps
         public string Category => "Data";
         public static IPersistentCache<byte[]>? DefaultCache { get; set; }
 
-        public void Setup(IMapControl mapControl)
-        {
-            mapControl.Map = CreateMap();
-        }
-
-        public static Map CreateMap()
+        public Task<Map> CreateMapAsync()
         {
             var map = new Map();
             map.Layers.Add(CreateLayer());
-            return map;
+            return Task.FromResult(map);
         }
 
         public static ILayer CreateLayer()

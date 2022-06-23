@@ -13,7 +13,7 @@ using NetTopologySuite.Geometries;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class ManyVerticesSample : ISample
+    public class ManyVerticesSample : IMapControlSample
     {
         public string Name => "Many Vertices";
         public string Category => "Special";
@@ -28,7 +28,6 @@ namespace Mapsui.Samples.Common.Maps
             var map = new Map();
 
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            ////map.Layers.Add(new RasterizingLayer(CreatePointLayer(), pixelDensity: pixelDensity));
             map.Layers.Add(new RasterizingLayer(CreatePointLayer(), pixelDensity: pixelDensity));
             var extent = map.Layers[1].Extent!.Grow(map.Layers[1].Extent!.Width * 0.25);
             map.Home = n => n.NavigateTo(extent);

@@ -11,7 +11,7 @@ using NetTopologySuite.IO;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public class LineSample : ISample
+    public class LineSample : IMapControlSample
     {
         public string Name => "Line";
         public string Category => "Tests";

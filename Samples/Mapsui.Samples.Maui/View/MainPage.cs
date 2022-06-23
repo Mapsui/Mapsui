@@ -89,7 +89,7 @@ public class MainPage : ContentPage
             return;
         }
 
-        var sample = (ISample)e.CurrentSelection[0];
+        var sample = (IMapControlSample)e.CurrentSelection[0];
         sample.Setup(mapControl);
     }
 

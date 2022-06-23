@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading.Tasks;
 using BruTile.Cache;
 using BruTile.Predefined;
 using Mapsui.Fetcher;
@@ -14,9 +15,9 @@ namespace Mapsui.Samples.Common.Maps
     {
         public string Name => "3 Virtual Earth";
         public string Category => "Demo";
-        public void Setup(IMapControl mapControl)
+        public Task<Map> CreateMapAsync()
         {
-            mapControl.Map = CreateMap(BingArial.DefaultCache);
+            return Task.FromResult(CreateMap(BingArial.DefaultCache));
         }
 
         public static Map CreateMap(IPersistentCache<byte[]>? persistentCache, KnownTileSource source = KnownTileSource.BingAerial)

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Projections;
@@ -21,12 +22,7 @@ namespace Mapsui.Samples.Common.Maps.Callouts
         public string Name => "1 Single Callout";
         public string Category => "Info";
 
-        public void Setup(IMapControl mapControl)
-        {
-            mapControl.Map = CreateMap();
-        }
-
-        public static Map CreateMap()
+        public Task<Map> CreateMapAsync()
         {
             var map = new Map();
 
@@ -35,7 +31,7 @@ namespace Mapsui.Samples.Common.Maps.Callouts
             map.Home = n => n.NavigateTo(map.Layers[1].Extent!.Centroid, map.Resolutions[5]);
             map.Info += MapOnInfo;
 
-            return map;
+            return Task.FromResult(map);
         }
 
         private static void MapOnInfo(object sender, MapInfoEventArgs e)

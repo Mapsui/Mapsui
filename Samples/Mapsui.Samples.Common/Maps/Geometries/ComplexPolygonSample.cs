@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Nts.Extensions;
 using Mapsui.Providers;
@@ -16,19 +17,14 @@ namespace Mapsui.Samples.Common.Maps
 
         public string Category => "Geometries";
 
-        public void Setup(IMapControl mapControl)
-        {
-            mapControl.Map = CreateMap();
-        }
-
-        public static Map CreateMap()
+        public Task<Map> CreateMapAsync()
         {
             var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             var polygonLayer = CreateLayer();
             map.Layers.Add(polygonLayer);
             map.Home = n => n.NavigateTo(polygonLayer.Extent!.Centroid, map.Resolutions[15]);
-            return map;
+            return Task.FromResult(map);
         }
 
         public static ILayer CreateLayer()

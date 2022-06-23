@@ -4,6 +4,7 @@ using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.UI;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -14,19 +15,14 @@ namespace Mapsui.Samples.Common.Maps
         public string Name => "Stacked labels";
         public string Category => "Special";
 
-        public void Setup(IMapControl mapControl)
-        {
-            mapControl.Map = CreateMap();
-        }
-
-        public static Map CreateMap()
+        public Task<Map> CreateMapAsync()
         {
             var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             var provider = RandomPointGenerator.CreateProviderWithRandomPoints(map.Extent, 25);
             map.Layers.Add(CreateStackedLabelLayer(provider, LabelColumn));
             map.Layers.Add(CreateLayer(provider));
-            return map;
+            return Task.FromResult(map);
         }
 
         private static ILayer CreateStackedLabelLayer(IProvider provider, string labelColumn)

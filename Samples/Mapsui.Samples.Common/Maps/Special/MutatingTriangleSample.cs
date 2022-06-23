@@ -18,23 +18,18 @@ namespace Mapsui.Samples.Common.Maps
         public string Name => "Mutating triangle";
         public string Category => "Special";
 
-        public void Setup(IMapControl mapControl)
-        {
-            mapControl.Map = CreateMap();
-        }
-
         private static readonly Random Random = new Random(0);
         private static CancellationTokenSource? _cancelationTokenSource;
 
         [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP007:Don\'t dispose injected")]
-        public static Map CreateMap()
+        public Task<Map> CreateMapAsync()
         {
             _cancelationTokenSource?.Dispose();
             _cancelationTokenSource = new CancellationTokenSource();
             var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(CreateMutatingTriangleLayer(map.Extent));
-            return map;
+            return Task.FromResult(map);
         }
 
         private static ILayer CreateMutatingTriangleLayer(MRect? envelope)
