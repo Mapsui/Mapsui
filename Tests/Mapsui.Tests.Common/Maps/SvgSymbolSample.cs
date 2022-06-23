@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public class SvgSymbolSample : ISample
+    public class SvgSymbolSample : IMapControlSample
     {
         public string Name => "Svg Symbol";
         public string Category => "Tests";

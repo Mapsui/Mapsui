@@ -5,6 +5,7 @@ using Mapsui.Styles.Thematics;
 using Mapsui.Tiling;
 using Mapsui.UI;
 using Mapsui.Utilities;
+using System.Threading.Tasks;
 
 #pragma warning disable CS8670 // Object or collection initializer implicitly dereferences possibly null member.
 
@@ -16,17 +17,12 @@ public class AnimatedPointsSamples : ISample
 
     public string Category => "Animations";
 
-    public void Setup(IMapControl mapControl)
-    {
-        mapControl.Map = CreateMap();
-    }
-
-    public static Map CreateMap()
+    public Task<Map> CreateMapAsync()
     {
         var map = new Map();
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Layers.Add(CreateAnimatedPointLayer());
-        return map;
+        return Task.FromResult(map);
     }
 
     private static ILayer CreateAnimatedPointLayer()

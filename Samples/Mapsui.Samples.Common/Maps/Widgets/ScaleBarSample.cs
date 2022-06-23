@@ -3,6 +3,7 @@ using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.UI;
 using Mapsui.Widgets.ScaleBar;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Widgets
 {
@@ -11,12 +12,7 @@ namespace Mapsui.Samples.Common.Maps.Widgets
         public string Name => "1 ScaleBar";
         public string Category => "Widgets";
 
-        public void Setup(IMapControl mapControl)
-        {
-            mapControl.Map = CreateMap();
-        }
-
-        public static Map CreateMap()
+        public Task<Map> CreateMapAsync()
         {
             var map = new Map
             {
@@ -37,7 +33,7 @@ namespace Mapsui.Samples.Common.Maps.Widgets
             map.Widgets.Add(new ScaleBarWidget(map) { TextColor = Color.Gray, Font = null, Halo = Color.White, HorizontalAlignment = Mapsui.Widgets.HorizontalAlignment.Right, VerticalAlignment = Mapsui.Widgets.VerticalAlignment.Top, TextAlignment = Mapsui.Widgets.Alignment.Right });
             map.Widgets.Add(new ScaleBarWidget(map) { MaxWidth = 250, ShowEnvelop = true, Font = new Font { FontFamily = "sans serif", Size = 24 }, TickLength = 15, TextColor = new Color(240, 120, 24, 128), Halo = new Color(250, 168, 48, 128), HorizontalAlignment = Mapsui.Widgets.HorizontalAlignment.Left, VerticalAlignment = Mapsui.Widgets.VerticalAlignment.Top, TextAlignment = Mapsui.Widgets.Alignment.Left, ScaleBarMode = ScaleBarMode.Both, SecondaryUnitConverter = NauticalUnitConverter.Instance, MarginX = 100, MarginY = 100 });
 
-            return map;
+            return Task.FromResult(map);
         }
     }
 }

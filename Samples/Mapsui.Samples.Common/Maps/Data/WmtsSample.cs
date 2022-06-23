@@ -10,18 +10,13 @@ using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps.Data
 {
-    public class WmtsSample : IAsyncSample
+    public class WmtsSample : ISample
     {
         public string Name => "3 WMTS";
         public string Category => "Data";
         public static IPersistentCache<byte[]>? DefaultCache { get; set; }
 
-        public async Task SetupAsync(IMapControl mapControl)
-        {
-            mapControl.Map = await CreateMapAsync();
-        }
-
-        public static async Task<Map> CreateMapAsync()
+        public async Task<Map> CreateMapAsync()
         {
             var map = new Map
             {

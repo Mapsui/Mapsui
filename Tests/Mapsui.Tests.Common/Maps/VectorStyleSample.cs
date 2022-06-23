@@ -8,7 +8,7 @@ using Mapsui.UI;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public class VectorStyleSample : ISample
+    public class VectorStyleSample : IMapControlSample
     {
         public string Name => "Vector Style";
         public string Category => "Tests";

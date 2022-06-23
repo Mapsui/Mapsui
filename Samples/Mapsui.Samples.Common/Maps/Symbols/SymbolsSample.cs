@@ -8,6 +8,7 @@ using Mapsui.UI;
 using Mapsui.Utilities;
 using Mapsui.Extensions;
 using Mapsui.Tiling;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -16,19 +17,14 @@ namespace Mapsui.Samples.Common.Maps
         public string Name => "Symbols";
         public string Category => "Symbols";
 
-        public void Setup(IMapControl mapControl)
-        {
-            mapControl.Map = CreateMap();
-        }
-
-        public static Map CreateMap()
+        public Task<Map> CreateMapAsync()
         {
             var map = new Map();
 
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(CreateStylesLayer(map.Extent));
 
-            return map;
+            return Task.FromResult(map);
         }
 
         private static ILayer CreateStylesLayer(MRect? envelope)

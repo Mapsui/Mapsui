@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Nts;
 using Mapsui.Nts.Extensions;
@@ -19,19 +20,14 @@ namespace Mapsui.Samples.Common.Maps
         public string Name => "2 LineStrings";
         public string Category => "Geometries";
 
-        public void Setup(IMapControl mapControl)
-        {
-            mapControl.Map = CreateMap();
-        }
-
-        public static Map CreateMap()
+        public Task<Map> CreateMapAsync()
         {
             var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             var lineStringLayer = CreateLineStringLayer(CreateLineStringStyle());
             map.Layers.Add(lineStringLayer);
             map.Home = n => n.NavigateTo(lineStringLayer.Extent!.Centroid, 200);
-            return map;
+            return Task.FromResult(map);
         }
 
         public static ILayer CreateLineStringLayer(IStyle? style = null)

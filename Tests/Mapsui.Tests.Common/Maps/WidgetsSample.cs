@@ -11,7 +11,7 @@ using System.Text;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public class WidgetsSample : ISample
+    public class WidgetsSample : IMapControlSample
     {
         public string Name => "Widgets";
 

@@ -7,7 +7,7 @@ using Mapsui.UI;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public class PointInWorldUnitsSample : ISample
+    public class PointInWorldUnitsSample : IMapControlSample
     {
         public string Name => "Point in World Units";
         public string Category => "Tests";

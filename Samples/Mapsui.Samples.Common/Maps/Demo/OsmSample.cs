@@ -4,6 +4,7 @@ using Mapsui.UI;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ScaleBar;
 using Mapsui.Widgets.Zoom;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Demo
 {
@@ -12,13 +13,13 @@ namespace Mapsui.Samples.Common.Maps.Demo
         public string Name => "1 OpenStreetMap";
         public string Category => "Demo";
 
-        public void Setup(IMapControl mapControl)
+        public Task<Map> CreateMapAsync()
         {
-            mapControl.Map = CreateMap();
+            return Task.FromResult(CreateMap());
         }
 
         public static Map CreateMap()
-        {
+        { 
             var map = new Map
             {
                 CRS = "EPSG:3857"

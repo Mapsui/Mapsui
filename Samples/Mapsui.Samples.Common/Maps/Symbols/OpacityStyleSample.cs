@@ -5,6 +5,7 @@ using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.UI;
 using NetTopologySuite.Geometries;
+using System.Threading.Tasks;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
@@ -15,18 +16,13 @@ namespace Mapsui.Samples.Common.Maps
         public string Name => "OpacityStyle";
         public string Category => "Symbols";
 
-        public void Setup(IMapControl mapControl)
-        {
-            mapControl.Map = CreateMap();
-        }
-
-        public static Map CreateMap()
+        public Task<Map> CreateMapAsync()
         {
             var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(CreatePolygonLayer());
             map.Layers.Add(CreateLineStringLayer());
-            return map;
+            return Task.FromResult(map);
         }
 
         public static ILayer CreatePolygonLayer()
