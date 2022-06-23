@@ -15,6 +15,7 @@ using Mapsui.Widgets;
 #pragma warning disable IDISP008 // Don't assign member with injected and created disposables
 
 #if __MAUI__
+using Microsoft.Maui.Controls;
 namespace Mapsui.UI.Maui
 #elif __UWP__
 namespace Mapsui.UI.Uwp
@@ -36,7 +37,6 @@ namespace Mapsui.UI.Wpf
 {
     public partial class MapControl : INotifyPropertyChanged, IDisposable
     {
-        private Map? _map;
         private double _unSnapRotationDegrees;
         // Flag indicating if a drawing process is running
         private bool _drawing;
@@ -444,34 +444,61 @@ namespace Mapsui.UI.Wpf
             }
         }
 
+#if __MAUI__
+
+        public static readonly BindableProperty MapProperty = BindableProperty.Create(nameof(Map),
+            typeof(Map), typeof(MapControl), default(Map), defaultBindingMode: BindingMode.TwoWay, propertyChanged: MapPropertyChanged);
+
+        static void MapPropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var mapControl = (MapControl)bindable;
+            mapControl.SetMap(newValue as Map);
+        }
+
+        public Map? Map
+        {
+            get => (Map)GetValue(MapProperty);
+            set => SetValue(MapProperty, value);
+        }
+
+#else
+
+        private Map? _map;
+
         /// <summary>
         /// Map holding data for which is shown in this MapControl
         /// </summary>
         public Map? Map
         {
-            get => _map;
+            get => GetMap();
             set
             {
-                if (_map != null)
-                {
-                    UnsubscribeFromMapEvents(_map);
-                    _map = null;
-                }
-
-                _map = value;
-
-                if (_map != null)
-                {
-                    SubscribeToMapEvents(_map);
-                    Navigator = new Navigator(_map, _viewport);
-                    _viewport.Map = _map;
-                    _viewport.Limiter = _map.Limiter;
-                    CallHomeIfNeeded();
-                }
-
-                Refresh();
+                SetMap(value);
                 OnPropertyChanged();
             }
+        }
+#endif
+
+        private void SetMap(Map? value)
+        {
+            if (_map != null)
+            {
+                UnsubscribeFromMapEvents(_map);
+                _map = null;
+            }
+
+            _map = value;
+
+            if (_map != null)
+            {
+                SubscribeToMapEvents(_map);
+                Navigator = new Navigator(_map, _viewport);
+                _viewport.Map = _map;
+                _viewport.Limiter = _map.Limiter;
+                CallHomeIfNeeded();
+            }
+
+            Refresh();
         }
 
         /// <inheritdoc />
@@ -638,4 +665,3 @@ namespace Mapsui.UI.Wpf
         }
     }
 }
-

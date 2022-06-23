@@ -1,4 +1,6 @@
-﻿using SkiaSharp.Views.Maui.Controls.Hosting;
+﻿using Mapsui.Samples.Maui.View;
+using Mapsui.Samples.Maui.ViewModel;
+using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace Mapsui.Samples.Maui
 {
@@ -16,6 +18,10 @@ namespace Mapsui.Samples.Maui
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+
+            builder.Services.AddSingleton<MainViewModel>();
+            builder.Services.AddSingleton<MainPage>();
+
 
             return builder.Build();
         }

@@ -1,9 +1,10 @@
 using CommunityToolkit.Maui.Markup;
 using Mapsui.Samples.Common;
+using Mapsui.Samples.Maui.ViewModel;
 using Mapsui.Tiling;
 using Mapsui.UI.Maui;
 
-namespace Mapsui.Samples.Maui;
+namespace Mapsui.Samples.Maui.View;
 
 public class MainPage : ContentPage
 {
@@ -12,10 +13,11 @@ public class MainPage : ContentPage
     Picker categoryPicker = CreatePicker();
     MapControl mapControl = new MapControl();
 
-    public MainPage()
-	{
+    public MainPage(MainViewModel mainViewModel)
+    {
         sampleCollectionView.SelectionChanged += CollectionView_SelectionChanged;
-        mapControl.Map?.Layers.Add(OpenStreetMap.CreateTileLayer());
+        BindingContext = mainViewModel;
+        mapControl.SetBinding(MapControl.MapProperty, new Binding(nameof(MainViewModel.Map)));
 
         Content = new Grid
         {
@@ -75,7 +77,7 @@ public class MainPage : ContentPage
             Content = new Label
             {
                 WidthRequest = 200,
-                        
+
             }.Bind(Label.TextProperty, nameof(ISample.Name))
         };
     }
