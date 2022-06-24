@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Nts.Extensions;
 using Mapsui.Providers;
@@ -14,17 +15,12 @@ namespace Mapsui.Samples.Common.Maps
         public string Name => "3 Polygons";
         public string Category => "Geometries";
 
-        public void Setup(IMapControl mapControl)
-        {
-            mapControl.Map = CreateMap();
-        }
-
-        public static Map CreateMap()
+        public Task<Map> CreateMapAsync()
         {
             var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(CreateLayer());
-            return map;
+            return Task.FromResult(map);
         }
 
         public static ILayer CreateLayer()

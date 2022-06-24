@@ -49,7 +49,7 @@ namespace Mapsui.Samples.Common.Maps
         }
     }
 
-    public class CustomStyleSample : ISample
+    public class CustomStyleSample : IMapControlSample
     {
         public string Name => "Custom Style";
         public string Category => "Special";

@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public class BitmapAtlasSample : ISample
+    public class BitmapAtlasSample : IMapControlSample
     {
         public string Name => "Bitmap Atlas";
         public string Category => "Tests";

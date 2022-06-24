@@ -8,7 +8,7 @@ using SkiaSharp;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class PerformanceWidgetSample : ISample
+    public class PerformanceWidgetSample : IMapControlSample
     {
         private IMapControl? _mapControl;
         private readonly Performance _performance = new Performance(10);

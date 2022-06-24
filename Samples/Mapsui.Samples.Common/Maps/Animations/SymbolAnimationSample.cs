@@ -11,7 +11,7 @@ using NetTopologySuite.Operation.Valid;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class SymbolAnimationSample : ISample, IPrepareSampleTest, ISampleTest
+    public class SymbolAnimationSample : IMapControlSample, IPrepareSampleTest, ISampleTest
     {
         private Layer? _animationLayer;
         private static bool _repeat = true;
@@ -21,7 +21,7 @@ namespace Mapsui.Samples.Common.Maps
         public void Setup(IMapControl mapControl)
         {
             mapControl.Map = CreateMap();
-            this._animationLayer = (Layer)mapControl.Map.Layers.Last();
+            _animationLayer = (Layer)mapControl.Map.Layers.Last();
         }
 
         public static Map CreateMap()

@@ -8,9 +8,9 @@ public static class SampleExtensions
 {
     public static async Task SetupAsync(this ISampleBase sample, IMapControl mapControl)
     {
-        if (sample is IAsyncSample asyncSample)
+        if (sample is ISample asyncSample)
         {
-            await asyncSample.SetupAsync(mapControl);
+            mapControl.Map = await asyncSample.CreateMapAsync();
 
             return;
         }
@@ -18,11 +18,11 @@ public static class SampleExtensions
         Setup(sample, mapControl);
     }
 
-    public static void Setup(this ISampleBase sample, IMapControl mapControl)
+    private static void Setup(ISampleBase sample, IMapControl mapControl)
     {
-        if (sample is ISample syncSample)
+        if (sample is IMapControlSample mapControlSample)
         {
-            syncSample.Setup(mapControl);
+            mapControlSample.Setup(mapControl);
 
             return;
         }

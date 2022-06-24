@@ -1,6 +1,7 @@
 ﻿using Mapsui.Projections;
 using Mapsui.Tiling;
 using Mapsui.UI;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Navigation
 {
@@ -9,12 +10,7 @@ namespace Mapsui.Samples.Common.Maps.Navigation
         public string Name => "Keep Within Extent";
         public string Category => "Navigation";
 
-        public void Setup(IMapControl mapControl)
-        {
-            mapControl.Map = CreateMap();
-        }
-
-        public static Map CreateMap()
+        public Task<Map> CreateMapAsync()
         {
             var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
@@ -22,7 +18,7 @@ namespace Mapsui.Samples.Common.Maps.Navigation
             {
                 PanLimits = GetLimitsOfMadagaskar()
             };
-            return map;
+            return Task.FromResult(map);
         }
 
         private static MRect GetLimitsOfMadagaskar()

@@ -10,7 +10,7 @@ using Mapsui.UI;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public class StackedLabelsSample : ISample
+    public class StackedLabelsSample : IMapControlSample
     {
         private const string LabelColumn = "Label";
         public string Category => "Tests";

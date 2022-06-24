@@ -9,7 +9,7 @@ using Mapsui.Widgets.Zoom;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class ViewportCenterAndZoomAnimationSample : ISample
+    public class ViewportCenterAndZoomAnimationSample : IMapControlSample
     {
         public string Name => "Animated Viewport - Zoom On Center";
         public string Category => "Animations";

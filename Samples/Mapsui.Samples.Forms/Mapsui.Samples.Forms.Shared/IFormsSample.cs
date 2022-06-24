@@ -7,7 +7,7 @@ namespace Mapsui.Samples.Maui
 namespace Mapsui.Samples.Forms
 #endif
 {
-    public interface IFormsSample : ISample
+    public interface IFormsSample : IMapControlSample
     {
         bool OnClick(object? sender, EventArgs args);
     }

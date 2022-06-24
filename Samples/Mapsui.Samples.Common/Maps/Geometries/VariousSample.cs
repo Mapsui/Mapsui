@@ -17,12 +17,7 @@ namespace Mapsui.Samples.Common.Maps
         public string Name => "5 Various geometries";
         public string Category => "Geometries";
 
-        public void Setup(IMapControl mapControl)
-        {
-            mapControl.Map = CreateMap();
-        }
-
-        public static Map CreateMap()
+        public Task<Map> CreateMapAsync()
         {
             var map = new Map();
 
@@ -32,7 +27,7 @@ namespace Mapsui.Samples.Common.Maps
             map.Layers.Add(CreateLayerWithStyleOnLayer(map.Extent, 10));
             map.Layers.Add(CreateLayerWithStyleOnFeature(map.Extent, 10));
 
-            return map;
+            return Task.FromResult(map);
         }
 
         private static ILayer CreateLayerWithStyleOnLayer(MRect? envelope, int count = 25)

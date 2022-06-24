@@ -8,7 +8,7 @@ using Mapsui.Widgets.Zoom;
 
 namespace Mapsui.Samples.Common.Maps
 {
-    public class ViewportCenterOnAnimationSample : ISample
+    public class ViewportCenterOnAnimationSample : IMapControlSample
     {
         public string Name => "Animated Viewport - Center";
         public string Category => "Animations";

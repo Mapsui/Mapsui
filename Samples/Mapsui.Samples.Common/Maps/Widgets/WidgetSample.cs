@@ -3,6 +3,7 @@ using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Widgets;
 using Mapsui.Widgets.Zoom;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -11,12 +12,7 @@ namespace Mapsui.Samples.Common.Maps
         public string Name => "2 Widgets";
         public string Category => "Widgets";
 
-        public void Setup(IMapControl mapControl)
-        {
-            mapControl.Map = CreateMap();
-        }
-
-        public static Map CreateMap()
+        public Task<Map> CreateMapAsync()
         {
             var map = new Map();
 
@@ -33,7 +29,7 @@ namespace Mapsui.Samples.Common.Maps
             map.Widgets.Add(new ZoomInOutWidget { MarginX = 20, MarginY = 20 });
             map.Widgets.Add(new ZoomInOutWidget { Orientation = Orientation.Horizontal, VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center });
 
-            return map;
+            return Task.FromResult(map);
         }
 
         private static IWidget CreateHyperlink(string text, VerticalAlignment verticalAlignment,

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using BruTile.Web;
 using Mapsui.Layers;
 using Mapsui.Providers;
@@ -19,19 +20,14 @@ namespace Mapsui.Samples.Common.Maps
         public string Name => "Rasterizing Tile Layer";
         public string Category => "Special";
 
-        public void Setup(IMapControl mapControl)
-        {
-            mapControl.Map = CreateMap(mapControl.PixelDensity);
-        }
-
-        public static Map CreateMap(float pixelDensity)
+        public Task<Map> CreateMapAsync()
         {
             var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             map.Layers.Add(new RasterizingTileLayer(CreateRandomPointLayer()));
             var extent = map.Layers[1].Extent!.Grow(map.Layers[1].Extent!.Width * 0.1);
             map.Home = n => n.NavigateTo(extent);
-            return map;
+            return Task.FromResult(map);
         }
 
         private static MemoryLayer CreateRandomPointLayer()

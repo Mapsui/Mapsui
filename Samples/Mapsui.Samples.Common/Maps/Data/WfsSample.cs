@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Net;
+using System.Threading.Tasks;
 using BruTile;
 using BruTile.Web;
 using Mapsui.Cache;
@@ -19,18 +20,13 @@ namespace Mapsui.Samples.Common.Maps.Data
         public string Category => "Data";
         public static IUrlPersistentCache? DefaultCache { get; set; }
 
-        public void Setup(IMapControl mapControl)
-        {
-            mapControl.Map = CreateMap();
-        }
-
         private const string wfsUri = "https://geoservices1.civis.bz.it/geoserver/p_bz-AdministrativeUnits/ows";
         private const string crs = "EPSG:3857";  // originally: "EPSG:25832"
         private const string layerName = "Districts";
         private const string nsPrefix = "p_bz-AdministrativeUnits";
         private const string labelField = "NAME_DE";
 
-        public static Map CreateMap()
+        public Task<Map> CreateMapAsync()
         {
             try
             {
@@ -42,7 +38,7 @@ namespace Mapsui.Samples.Common.Maps.Data
 
                 map.Home = n => n.NavigateTo(new MPoint(1270000.0, 5880000.0), map.Resolutions[9]);
 
-                return map;
+                return Task.FromResult(map);
 
             }
             catch (WebException ex)

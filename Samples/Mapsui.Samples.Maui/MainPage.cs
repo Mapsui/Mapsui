@@ -76,7 +76,7 @@ public class MainPage : ContentPage
             {
                 WidthRequest = 200,
                         
-            }.Bind(Label.TextProperty, nameof(ISample.Name))
+            }.Bind(Label.TextProperty, nameof(IMapControlSample.Name))
         };
     }
 
@@ -87,7 +87,7 @@ public class MainPage : ContentPage
             return;
         }
 
-        var sample = (ISample)e.CurrentSelection[0];
+        var sample = (IMapControlSample)e.CurrentSelection[0];
         sample.Setup(mapControl);
     }
 

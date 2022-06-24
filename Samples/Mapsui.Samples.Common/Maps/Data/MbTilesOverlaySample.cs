@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading.Tasks;
 using BruTile.MbTiles;
 using BruTile.Predefined;
 using Mapsui.Tiling.Layers;
@@ -12,17 +13,12 @@ namespace Mapsui.Samples.Common.Maps
         public string Name => "2 MbTiles Overlay";
         public string Category => "Data";
 
-        public void Setup(IMapControl mapControl)
-        {
-            mapControl.Map = CreateMap();
-        }
-
-        public static Map CreateMap()
+        public Task<Map> CreateMapAsync()
         {
             var map = new Map();
             map.Layers.Add(new TileLayer(KnownTileSources.Create(KnownTileSource.BingAerial, persistentCache: BingArial.DefaultCache)) { Name = "Bing Aerial" });
             map.Layers.Add(CreateMbTilesLayer(Path.Combine(MbTilesSample.MbTilesLocation, "torrejon-de-ardoz.mbtiles")));
-            return map;
+            return Task.FromResult(map);
         }
         public static TileLayer CreateMbTilesLayer(string path)
         {
