@@ -76,19 +76,19 @@ public class MainPage : ContentPage
             {
                 WidthRequest = 200,
                         
-            }.Bind(Label.TextProperty, nameof(IMapControlSample.Name))
+            }.Bind(Label.TextProperty, nameof(ISample.Name))
         };
     }
 
-    private void CollectionView_SelectionChanged(object? sender, SelectionChangedEventArgs e)
+    private async void CollectionView_SelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
         if (e.CurrentSelection == null)
         {
             return;
         }
 
-        var sample = (IMapControlSample)e.CurrentSelection[0];
-        sample.Setup(mapControl);
+        var sample = (ISample)e.CurrentSelection[0];
+        mapControl.Map = await sample.CreateMapAsync();
     }
 
     private void categoryPicker_SelectedIndexChanged(object? sender, EventArgs e)
