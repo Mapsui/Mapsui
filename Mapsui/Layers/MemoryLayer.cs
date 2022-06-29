@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Extensions;
@@ -23,7 +24,7 @@ namespace Mapsui.Layers
         /// <param name="layerName">Name to use for layer</param>
         public MemoryLayer(string layerName) : base(layerName) { }
 
-        public IEnumerable<IFeature> Features { get; set; } = new List<IFeature>();
+        public IEnumerable<IFeature> Features { get; set; } = new ConcurrentBag<IFeature>();
 
 
         public override IEnumerable<IFeature> GetFeatures(MRect? rect, double resolution)
