@@ -36,11 +36,11 @@
     <None Remove="Resources\values\styles.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="BruTile.MbTiles" />
-    <PackageReference Include="SkiaSharp" />
-    <PackageReference Include="Xamarin.AndroidX.AppCompat" />
-    <PackageReference Include="Xamarin.AndroidX.CoordinatorLayout" />
-    <PackageReference Include="Xamarin.Google.Android.Material" />
+    <PackageReference Include="BruTile.MbTiles" Version="5.0" />
+    <PackageReference Include="SkiaSharp" Version="2.88.1-preview.63" />
+    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.4.1.1" />
+    <PackageReference Include="Xamarin.AndroidX.CoordinatorLayout" Version="1.2.0.1" />
+    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.6.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />

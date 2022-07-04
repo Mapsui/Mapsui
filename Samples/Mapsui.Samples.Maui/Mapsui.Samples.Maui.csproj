@@ -48,7 +48,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="CommunityToolkit.Maui.Markup" />
+	  <PackageReference Include="CommunityToolkit.Maui.Markup" Version="1.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>

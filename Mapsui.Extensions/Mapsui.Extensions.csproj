@@ -11,11 +11,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BruTile" />
-    <PackageReference Include="BitMiracle.LibTiff.NET" />
-    <PackageReference Include="SkiaSharp" />
-    <PackageReference Include="sqlite-net-pcl" />
-    <PackageReference Include="DotSpatial.Projections.NetStandard" />
+    <PackageReference Include="BruTile" Version="5.0" />
+    <PackageReference Include="BitMiracle.LibTiff.NET" Version="2.4.649" />
+    <PackageReference Include="SkiaSharp" Version="2.88.1-preview.63" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
+    <PackageReference Include="DotSpatial.Projections.NetStandard" Version="1.0.0" />
   </ItemGroup>
 
 </Project>

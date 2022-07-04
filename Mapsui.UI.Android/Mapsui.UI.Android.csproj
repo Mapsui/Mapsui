@@ -19,7 +19,7 @@
     <ProjectReference Include="..\Mapsui\Mapsui.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="SkiaSharp.Views" />
+    <PackageReference Include="SkiaSharp.Views" Version="2.88.1-preview.63" />
   </ItemGroup>
   <Import Project="..\Mapsui.UI.Shared\Mapsui.UI.Shared.projitems" Label="Shared" />
 </Project>

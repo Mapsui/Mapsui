@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BruTile" />
-    <PackageReference Include="Newtonsoft.Json" />
+    <PackageReference Include="BruTile" Version="5.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>

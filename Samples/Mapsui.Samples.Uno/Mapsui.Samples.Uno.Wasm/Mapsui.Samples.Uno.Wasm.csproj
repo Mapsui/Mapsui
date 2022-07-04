@@ -48,23 +48,23 @@
   </ItemGroup>
   <ItemGroup>
     <!--Don't remove this Reference it is a workaround for Central Package Management-->
-    <PackageReference Include="Microsoft.Windows.Compatibility" />
-    <PackageReference Include="Microsoft.Extensions.Logging" />
-    <PackageReference Include="Uno.Extensions.Logging.WebAssembly.Console" />
-    <PackageReference Include="Uno.UI.WebAssembly" />
-    <PackageReference Include="Uno.UI.RemoteControl" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" />
-    <PackageReference Include="Uno.Wasm.Bootstrap" />
-    <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" />
-    <PackageReference Include="SkiaSharp.Views.Uno" />
-    <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" />
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+    <PackageReference Include="Uno.Extensions.Logging.WebAssembly.Console" Version="1.4.0" />
+    <PackageReference Include="Uno.UI.WebAssembly" Version="4.3.8" />
+    <PackageReference Include="Uno.UI.RemoteControl" Version="4.3.8" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.3.8" />
+    <PackageReference Include="Uno.Wasm.Bootstrap" Version="3.3.1" />
+    <PackageReference Include="Uno.Wasm.Bootstrap.DevServer" Version="3.3.1" />
+    <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.1-preview.63" />
+    <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" Version="2.88.1-preview.63" />
   </ItemGroup>
 
   <!--Harfbuzz Sharp references Workaround for this issue-->
   <!--https://github.com/mono/SkiaSharp/issues/1725-->
   <ItemGroup>
-    <PackageReference Include="HarfBuzzSharp" />
-    <PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" />
+    <PackageReference Include="HarfBuzzSharp" Version="2.8.2.1-preview.63" />
+    <PackageReference Include="HarfBuzzSharp.NativeAssets.WebAssembly" Version="2.8.2.1-preview.63" />
     <NativeFileReference Include="$(HarfBuzzSharpStaticLibraryPath)\2.8.2\*.a" />
   </ItemGroup>
 

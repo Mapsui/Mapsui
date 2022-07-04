@@ -19,8 +19,8 @@
 
   <ItemGroup>
     <!-- Explicitly reference Linux native dlls to get them included -->
-    <PackageReference Include="SkiaSharp.NativeAssets.Linux" />
-    <PackageReference Include="Eto.Forms" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="2.88.1-preview.63" />
+    <PackageReference Include="Eto.Forms" Version="2.6.0" />
   </ItemGroup>
 
   <PropertyGroup Condition="'$(BuildPlatform)'=='' and $([MSBuild]::IsOSPlatform(Windows))">
@@ -41,19 +41,19 @@
   </PropertyGroup>
 
   <ItemGroup Condition="'$(BuildPlatform)'=='Wpf'">
-    <PackageReference Include="Eto.Platform.Wpf" />
+    <PackageReference Include="Eto.Platform.Wpf" Version="2.6.0" />
   </ItemGroup>
   <ItemGroup Condition="'$(BuildPlatform)'=='Windows'">
-    <PackageReference Include="Eto.Platform.Windows" />
+    <PackageReference Include="Eto.Platform.Windows" Version="2.6.0" />
   </ItemGroup>
   <ItemGroup Condition="'$(BuildPlatform)'=='Mac64'">
-    <PackageReference Include="Eto.Platform.Mac64" />
+    <PackageReference Include="Eto.Platform.Mac64" Version="2.6.0" />
   </ItemGroup>
   <ItemGroup Condition="'$(BuildPlatform)'=='XamMac2'">
-    <PackageReference Include="Eto.Platform.XamMac2" />
+    <PackageReference Include="Eto.Platform.XamMac2" Version="2.6.0" />
   </ItemGroup>
   <ItemGroup Condition="'$(BuildPlatform)'=='Gtk'">
-    <PackageReference Include="Eto.Platform.Gtk" />
+    <PackageReference Include="Eto.Platform.Gtk" Version="2.6.0" />
   </ItemGroup>
 
 </Project>

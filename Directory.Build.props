@@ -28,17 +28,17 @@
 
   <ItemGroup>
     <!--Specify Compiler for Mac Builds-->
-    <PackageReference Include="Microsoft.Net.Compilers.Toolset">
+    <PackageReference Include="Microsoft.Net.Compilers.Toolset" Version="4.3.0-1.final">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <!--Disposable Analyzer-->
-    <PackageReference Include="IDisposableAnalyzers">
+    <PackageReference Include="IDisposableAnalyzers" Version="4.0.2">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <!--Threading Analyzer mainly Async Code-->
-    <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers">
+    <PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.2.32">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>

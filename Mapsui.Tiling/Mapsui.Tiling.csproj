@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BruTile" />
+    <PackageReference Include="BruTile" Version="5.0" />
   </ItemGroup>
 
   <ItemGroup>

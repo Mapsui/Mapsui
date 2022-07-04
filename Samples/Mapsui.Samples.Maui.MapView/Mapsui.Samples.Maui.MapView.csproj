@@ -51,8 +51,8 @@
 
   <ItemGroup Condition="$(TargetFramework.Contains('-windows'))">
     <!-- Required - WinUI does not yet have buildTransitive for everything -->
-    <PackageReference Include="Microsoft.WindowsAppSDK" />
-    <PackageReference Include="Microsoft.Graphics.Win2D" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Graphics.Win2D" Version="1.0.3.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -64,10 +64,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="SkiaSharp" />
-    <PackageReference Include="SkiaSharp.HarfBuzz" />
-    <PackageReference Include="SkiaSharp.Views.Maui.Controls" />
-    <PackageReference Include="SkiaSharp.Views.Maui.Controls.Compatibility" />
+    <PackageReference Include="SkiaSharp" Version="2.88.1-preview.63" />
+    <PackageReference Include="SkiaSharp.HarfBuzz" Version=" 2.88.1-preview.63" />
+    <PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.1-preview.63" />
+    <PackageReference Include="SkiaSharp.Views.Maui.Controls.Compatibility" Version="2.88.1-preview.63" />
   </ItemGroup>
 
   <ItemGroup>	  	  

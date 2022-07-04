@@ -75,8 +75,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BruTile" />
-    <PackageReference Include="BruTile.MbTiles" />
+    <PackageReference Include="BruTile" Version="5.0" />
+    <PackageReference Include="BruTile.MbTiles" Version="5.0" />
   </ItemGroup>
 
   <ItemGroup>

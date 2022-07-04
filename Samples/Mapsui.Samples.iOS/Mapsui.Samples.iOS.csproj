@@ -27,12 +27,12 @@
     <ProjectReference Include="..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="BruTile.MbTiles" />
-    <PackageReference Include="Itinero" />
-    <PackageReference Include="SkiaSharp" />
-    <PackageReference Include="SkiaSharp.Views" />
-    <PackageReference Include="SkiaSharp.HarfBuzz" />
-    <PackageReference Include="SkiaSharp.NativeAssets.iOS" />
-    <PackageReference Include="Svg.Skia" />
+    <PackageReference Include="BruTile.MbTiles" Version="5.0" />
+    <PackageReference Include="Itinero" Version="1.5.0" />
+    <PackageReference Include="SkiaSharp" Version="2.88.1-preview.63" />
+    <PackageReference Include="SkiaSharp.Views" Version="2.88.1-preview.63" />
+    <PackageReference Include="SkiaSharp.HarfBuzz" Version=" 2.88.1-preview.63" />
+    <PackageReference Include="SkiaSharp.NativeAssets.iOS" Version=" 2.88.1-preview.63" />
+    <PackageReference Include="Svg.Skia" Version="0.5.12" />
   </ItemGroup>
 </Project>

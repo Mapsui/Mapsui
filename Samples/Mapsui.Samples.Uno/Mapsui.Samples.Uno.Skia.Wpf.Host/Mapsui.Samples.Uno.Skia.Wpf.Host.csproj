@@ -6,10 +6,10 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Uno.UI.Skia.Wpf" />
-    <PackageReference Include="Uno.UI.RemoteControl" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" />
-    <PackageReference Include="SkiaSharp.Views.Uno" />
+    <PackageReference Include="Uno.UI.Skia.Wpf" Version="4.3.8" />
+    <PackageReference Include="Uno.UI.RemoteControl" Version="4.3.8" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.3.8" />
+    <PackageReference Include="SkiaSharp.Views.Uno" Version="2.88.1-preview.63" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Fonts\uno-fluentui-assets.ttf" />

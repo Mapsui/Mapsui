@@ -133,16 +133,16 @@
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="BruTile" />     
-    <PackageReference Include="SkiaSharp" />     
-    <PackageReference Include="SkiaSharp.Views" />     
-    <PackageReference Include="SkiaSharp.Views.Forms" />     
-    <PackageReference Include="Topten.RichTextKit" />     
-    <PackageReference Include="Xam.Plugin.Geolocator" />     
-    <PackageReference Include="Xamarin.Forms" />     
-    <PackageReference Include="sqlite-net-pcl" />     
-    <PackageReference Include="BruTile.MbTiles" />
-    <PackageReference Include="System.Memory" IncludeAssets="None" />     
+    <PackageReference Include="BruTile" Version="5.0" />     
+    <PackageReference Include="SkiaSharp" Version="2.88.1-preview.63" />     
+    <PackageReference Include="SkiaSharp.Views" Version="2.88.1-preview.63" />     
+    <PackageReference Include="SkiaSharp.Views.Forms" Version="2.88.1-preview.63" />     
+    <PackageReference Include="Topten.RichTextKit" Version="0.4.145" />     
+    <PackageReference Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />     
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2125" />     
+    <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />     
+    <PackageReference Include="BruTile.MbTiles" Version="5.0" />
+    <PackageReference Include="System.Memory" Version="4.5.4" IncludeAssets="None" />     
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj">
