@@ -33,7 +33,7 @@
 		<PackageReference Include="Microsoft.WindowsAppSDK" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" />
 		<PackageReference Include="Uno.Core.Extensions.Logging.Singleton" />
-    <PackageReference Include="Uno.UI" />
+    <PackageReference Include="Uno.WinUI" />
 		<Manifest Include="$(ApplicationManifest)" />
 	</ItemGroup>
 
@@ -68,4 +68,8 @@
 	</ItemGroup>
 
 	<Import Project="..\Mapsui.Samples.Uno.WinUI.Shared\Mapsui.Samples.Uno.WinUI.Shared.projitems" Label="Shared" />
+  <PropertyGroup>
+    <!-- Workaround for Error NU1008 Projects that use central package version management should not define the version on the PackageReference ..-->
+    <PreBuildEvent>"$(MSBuildProjectDirectory)\..\..\..\.nuget\nuget" restore $(MSBuildProjectDirectory)\Mapsui.Samples.Uno.WinUI.Windows.csproj</PreBuildEvent>
+  </PropertyGroup>
 </Project>
