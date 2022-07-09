@@ -33,7 +33,7 @@
 		<PackageReference Include="Microsoft.WindowsAppSDK" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" />
 		<PackageReference Include="Uno.Core.Extensions.Logging.Singleton" />
-
+    <PackageReference Include="Uno.UI" />
 		<Manifest Include="$(ApplicationManifest)" />
 	</ItemGroup>
 
