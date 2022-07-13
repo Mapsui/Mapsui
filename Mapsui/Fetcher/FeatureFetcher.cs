@@ -6,6 +6,7 @@ using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
+using NeoSmart.AsyncLock;
 
 namespace Mapsui.Fetcher
 {
@@ -14,7 +15,7 @@ namespace Mapsui.Fetcher
         private readonly FetchInfo _fetchInfo;
         private readonly DataArrivedDelegate _dataArrived;
         private readonly IProvider _provider;
-        private readonly SemaphoreSlim _providerLock = new(1, 1);
+        private readonly AsyncLock _providerLock = new();
         private readonly long _timeOfRequest;
 
         public delegate void DataArrivedDelegate(IEnumerable<IFeature> features, object? state = null);
@@ -33,15 +34,10 @@ namespace Mapsui.Fetcher
 
         public async Task FetchOnThreadAsync()
         {
-            await _providerLock.WaitAsync();
-            try
+            using (await _providerLock.LockAsync())
             {
                 var features = _provider.GetFeaturesAsync(_fetchInfo);
                 _dataArrived.Invoke(await features, _timeOfRequest);
-            }
-            finally
-            {
-                _providerLock.Release();
             }
         }
     }
