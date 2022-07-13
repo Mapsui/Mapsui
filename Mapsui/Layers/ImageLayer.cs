@@ -149,6 +149,7 @@ namespace Mapsui.Layers
                 }
                 catch (Exception ex)
                 {
+                    Logger.Log(LogLevel.Error, ex.Message, ex);
                     OnDataChanged(new DataChangedEventArgs(ex, false, null));
                 }
             });

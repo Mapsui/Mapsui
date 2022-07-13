@@ -12,6 +12,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.XPath;
 using System.Xml.Xsl;
+using Mapsui.Logging;
 using Mapsui.Providers.Wfs.Utilities;
 
 namespace Mapsui.Providers.Wfs.Xml
@@ -276,7 +277,7 @@ namespace Mapsui.Providers.Wfs.Xml
             }
             catch (Exception ex)
             {
-                Trace.TraceError("An exception occured while reading the xml file: " + fileName + ". " + ex.Message);
+                Logger.Log(LogLevel.Error, "An exception occured while reading the xml file: " + fileName + ". " + ex.Message, ex);
                 throw;
             }
         }
@@ -309,16 +310,16 @@ namespace Mapsui.Providers.Wfs.Xml
             }
             catch (XmlException ex)
             {
-                Trace.TraceError("An XML specific exception occured " +
-                                 "while initializing XPathDocument and XPathNavigator in XPathQueryManager: " +
-                                 ex.Message);
+                Logger.Log(LogLevel.Error, "An XML specific exception occured " +
+                                           "while initializing XPathDocument and XPathNavigator in XPathQueryManager: " +
+                                           ex.Message, ex);
                 throw;
             }
             catch (Exception ex)
             {
-                Trace.TraceError("An exception occured " +
-                                 "while initializing XPathDocument and XPathNavigator in XPathQueryManager: " +
-                                 ex.Message);
+                Logger.Log(LogLevel.Error, "An exception occured " +
+                                           "while initializing XPathDocument and XPathNavigator in XPathQueryManager: " +
+                                           ex.Message, ex);
                 throw;
             }
             finally

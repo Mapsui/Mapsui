@@ -55,7 +55,10 @@ namespace Mapsui.Samples.Forms
                 if (!Compass.IsMonitoring)
                     Compass.Start(SensorSpeed.Default);
             }
-            catch (Exception) { }
+            catch (Exception ex) 
+            {
+                Logger.Log(LogLevel.Warning, ex.Message, ex);
+            }
 
             _ = Task.Run(async () =>
             {

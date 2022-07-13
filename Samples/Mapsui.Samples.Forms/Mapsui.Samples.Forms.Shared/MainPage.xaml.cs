@@ -1,4 +1,5 @@
-﻿using Mapsui.Samples.Common;
+﻿using Mapsui.Logging;
+using Mapsui.Samples.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -91,7 +92,7 @@ namespace Mapsui.Samples.Forms
             }
             catch (Exception e)
             {
-                System.Diagnostics.Debug.WriteLine($"Error when navigating to page={page} exception={e}");
+                Logger.Log(LogLevel.Error, $"Error when navigating to page={page} exception={e}", e);                
             }
         }
     }
