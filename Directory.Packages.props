@@ -1,4 +1,4 @@
-<Project>
+﻿<Project>
 	<PropertyGroup>
 		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
 		<CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
@@ -42,7 +42,7 @@
 		<PackageVersion Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.2.32"/>
 		<PackageVersion Include="Microsoft.Win32.Primitives" Version="4.3.0" />
 		<PackageVersion Include="Microsoft.Windows.CsWin32" Version="0.1.588-beta" />
-    <PackageVersion Include="Microsoft.WindowsAppSDK" Version="1.1.0" />
+    <PackageVersion Include="Microsoft.WindowsAppSDK" Version="1.1.1" />
     <PackageVersion Include="NetTopologySuite" Version="2.4.0" />
 		<PackageVersion Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageVersion Include="NUnit" Version="3.12.0" />
