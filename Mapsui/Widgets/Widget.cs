@@ -45,6 +45,6 @@ namespace Mapsui.Widgets
             throw new ArgumentException("Unknown vertical alignment: " + VerticalAlignment);
         }
 
-        public abstract bool HandleWidgetTouched(INavigator navigator, MPoint position);
+        public abstract bool HandleWidgetTouched(INavigator? navigator, MPoint position);
     }
 }

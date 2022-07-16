@@ -50,7 +50,7 @@ namespace Mapsui.Widgets.PerformanceWidget
             }
         }
 
-        public override bool HandleWidgetTouched(INavigator navigator, MPoint position)
+        public override bool HandleWidgetTouched(INavigator? navigator, MPoint position)
         {
             var args = new WidgetTouchedEventArgs(position);
 

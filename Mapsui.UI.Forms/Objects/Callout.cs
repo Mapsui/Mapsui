@@ -44,8 +44,8 @@ namespace Mapsui.UI.Forms
         public static Color DefaultSubtitleFontColor = KnownColor.Black;
         public static TextAlignment DefaultSubtitleTextAlignment = TextAlignment.Start; // Center;
 #if __MAUI__
-        public static string? DefaultTitleFontName = null; // TODO: default font per platform
-        public static string? DefaultSubtitleFontName = null; // TODO: default font per platform
+        public static string? DefaultTitleFontName = "OpenSans"; // Default Maui Font
+        public static string? DefaultSubtitleFontName = "OpenSans"; // Default Maui Font
 #else
         public static string DefaultTitleFontName = Xamarin.Forms.Font.Default.FontFamily;
         public static string DefaultSubtitleFontName = Xamarin.Forms.Font.Default.FontFamily;

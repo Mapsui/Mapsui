@@ -136,7 +136,7 @@ namespace Mapsui.Widgets.Zoom
             }
         }
 
-        public override bool HandleWidgetTouched(INavigator navigator, MPoint position)
+        public override bool HandleWidgetTouched(INavigator? navigator, MPoint position)
         {
             var handler = WidgetTouched;
 
