@@ -32,6 +32,5 @@
   <files>
     <file src="..\LICENSE" target="LICENSE" />
     <file src="../Mapsui.UI.Maui/bin/Release/net6.0/Mapsui.UI.Maui.dll" target="lib/net6.0/" />
-	  <file src="../Mapsui.UI.Maui/bin/Release/net6.0-windows10.0.19041.0/Mapsui.UI.Maui.dll" target="lib/net6.0-windows10.0.19041.0/" />
   </files>
 </package>
