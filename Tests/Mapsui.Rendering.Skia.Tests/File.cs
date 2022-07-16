@@ -49,7 +49,7 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             get
             {
-                var codeBase = Assembly.GetExecutingAssembly().CodeBase;
+                var codeBase = Assembly.GetExecutingAssembly().Location;
                 if (codeBase == null)
                     throw new Exception($"Assembly.GetExecutingAssembly().CodeBase was null") ;
 
