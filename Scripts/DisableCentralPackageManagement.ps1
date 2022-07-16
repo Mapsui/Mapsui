@@ -23,7 +23,7 @@ foreach ($file in $fileNames) {
     Set-Content -Path $file $fileContent -Encoding UTF8
 }
 
-$Packages = $Packages -replace 'false','true' 
+$Packages = $Packages -replace 'true','false' 
 # Normalize to one Cariage Return at the end
 $Packages = $Packages -replace "</Project>`r`n`r`n", "</Project>`r`n"
 
