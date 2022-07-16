@@ -4,7 +4,7 @@
 $fileNames = Get-ChildItem -Path $PSScriptRoot\.. -Recurse -Include *.csproj,Directory.Build.props
 
 foreach ($file in $fileNames) {
-    $fileContent = (Get-Content -path $file -Raw)
+    $fileContent = (Get-Content -path $file -Encoding UTF8BOM)
     # Set Version in files
     (Get-Content -path $PSScriptRoot\..\Directory.Packages.props -Raw) | Select-Xml -XPath "/Project/ItemGroup/PackageVersion" | foreach {  
         $include=$_.node.Include
@@ -18,5 +18,5 @@ foreach ($file in $fileNames) {
         $fileContent = $fileContent -replace "Include=""$include"" Version=""$version""", "Include=""$include"""
     }
 
-    Set-Content -Path $file $fileContent
+    Set-Content -Path $file $fileContent -Encoding UTF8BOM
 }
