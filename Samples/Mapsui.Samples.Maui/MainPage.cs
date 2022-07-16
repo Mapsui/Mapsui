@@ -6,7 +6,7 @@ using Mapsui.UI.Maui;
 
 namespace Mapsui.Samples.Maui;
 
-public class MainPage : ContentPage, IDisposable
+public sealed class MainPage : ContentPage, IDisposable
 {
     IEnumerable<ISampleBase> allSamples;
     CollectionView sampleCollectionView = CreateCollectionView();
