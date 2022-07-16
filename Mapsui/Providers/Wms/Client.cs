@@ -438,7 +438,7 @@ namespace Mapsui.Providers.Wms
 
             var xnException = xnCapability.SelectSingleNode("sm:Exception", nsmgr);
             if (xnException != null)
-                ParseExceptions(xnException);
+                ParseExceptions(xnException, nsmgr);
 
             _vendorSpecificCapabilities = xnCapability.SelectSingleNode("sm:VendorSpecificCapabilities", nsmgr);
         }
@@ -447,9 +447,10 @@ namespace Mapsui.Providers.Wms
         /// Parses valid exceptions
         /// </summary>
         /// <param name="xnlExceptionNode"></param>
-        private void ParseExceptions(XmlNode xnlExceptionNode)
+        /// <param name="nsmgr">Namespace Manager</param>
+        private void ParseExceptions(XmlNode xnlExceptionNode, XmlNamespaceManager nsmgr)
         {
-            using var xnlFormats = xnlExceptionNode.SelectNodes("sm:Format", _nsmgr);
+            using var xnlFormats = xnlExceptionNode.SelectNodes("sm:Format", nsmgr);
             if (xnlFormats != null)
             {
                 _exceptionFormats = new string[xnlFormats.Count];

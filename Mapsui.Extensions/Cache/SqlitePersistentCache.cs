@@ -90,7 +90,10 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
         connection.Table<Tile>().Delete(f => f.Level == index.Level && f.Col == index.Col && f.Row == index.Row);
     }
 
+// Interface Definition in ITileCache is wrong TODO Fix interface in Brutile
+#pragma warning disable CS8766 
     public byte[]? Find(TileIndex index)
+#pragma warning restore CS8766
     {
         using var connection = CreateConnection();
         var tile = connection.Table<Tile>().FirstOrDefault(f => f.Level == index.Level && f.Col == index.Col && f.Row == index.Row);
