@@ -106,7 +106,7 @@ namespace Mapsui.Samples.Uwp
         private void RotationSlider_OnValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
             var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
-            MapControl.Navigator.RotateTo(percent * 360);
+            MapControl.Navigator?.RotateTo(percent * 360);
             MapControl.Refresh();
         }
     }
