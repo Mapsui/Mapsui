@@ -1,12 +1,11 @@
 # Disable Central Package Management
-(Get-Content -path $PSScriptRoot\..\Directory.Packages.props -Raw) -replace 'true','false'  | Set-Content -Path $PSScriptRoot\..\Directory.Packages.props
-
+$Packages = (Get-Content -path $PSScriptRoot\..\Directory.Packages.props -Encoding UTF8)
 $fileNames = Get-ChildItem -Path $PSScriptRoot\.. -Recurse -Include *.csproj,Directory.Build.props
 
 foreach ($file in $fileNames) {
     $fileContent = (Get-Content -path $file -Encoding UTF8)
     # Set Version in files
-    (Get-Content -path $PSScriptRoot\..\Directory.Packages.props -Raw) | Select-Xml -XPath "/Project/ItemGroup/PackageVersion" | foreach {  
+    $Packages | Select-Xml -XPath "//PackageVersion" | foreach {  
         $include=$_.node.Include
         $version=$_.node.Version
 
@@ -18,5 +17,14 @@ foreach ($file in $fileNames) {
         $fileContent = $fileContent -replace "Include=""$include""" ,"Include=""$include"" Version=""$version"""
     }
 
+    # Normalize to one Cariage Return at the End
+    $fileContent = $fileContent -replace "</Project>`r`n`r`n", "</Project>`r`n"
+
     Set-Content -Path $file $fileContent -Encoding UTF8
 }
+
+$Packages = $Packages -replace 'false','true' 
+# Normalize to one Cariage Return at the end
+$Packages = $Packages -replace "</Project>`r`n`r`n", "</Project>`r`n"
+
+Set-Content -Path $PSScriptRoot\..\Directory.Packages.props $Packages -Encoding UTF8
