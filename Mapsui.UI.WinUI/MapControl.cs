@@ -286,7 +286,7 @@ namespace Mapsui.UI.Uwp
         }
 
 #if !(__ANDROID__ )
-#if __IOS__ || __MACOS__ || NETSTANDARD
+#if __IOS__ || __MACOS__ || NETSTANDARD || HAS_UNO
         public new void Dispose()
 #else 
         public void Dispose()
