@@ -49,12 +49,10 @@ namespace Mapsui.Rendering.Skia.Tests
         {
             get
             {
-                var codeBase = Assembly.GetExecutingAssembly().Location;
-                if (codeBase == null)
-                    throw new Exception($"Assembly.GetExecutingAssembly().CodeBase was null") ;
+                var path = Assembly.GetExecutingAssembly().Location;
+                if (path == null)
+                    throw new Exception($"Assembly.GetExecutingAssembly().Location was null") ;
 
-                var uri = new UriBuilder(codeBase);
-                var path = Uri.UnescapeDataString(uri.Path);
                 return Path.GetDirectoryName(path)!;
             }
         }
