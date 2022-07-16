@@ -372,7 +372,7 @@ namespace Mapsui.UI.Forms
                 if (MyLocationFollow)
                 {
                     _mapMyLocationButton!.Picture = _pictMyLocationCenter;
-                    Navigator.CenterOn(MyLocationLayer.MyLocation.ToMapsui());
+                    Navigator?.CenterOn(MyLocationLayer.MyLocation.ToMapsui());
                 }
                 else
                 {
@@ -691,7 +691,7 @@ namespace Mapsui.UI.Forms
                 {
                     if (widget.Enabled && (widget.Envelope?.Contains(e.ScreenPosition) ?? false))
                     {
-                        if (widget.HandleWidgetTouched(Navigator, e.ScreenPosition))
+                        if (Navigator != null && widget.HandleWidgetTouched(Navigator, e.ScreenPosition))
                         {
                             e.Handled = true;
                             return;
@@ -829,12 +829,12 @@ namespace Mapsui.UI.Forms
 
         private void CreateButtons()
         {
-            _mapZoomInButton = _mapZoomInButton ?? CreateButton(0, 0, _pictZoomIn, (s, e) => { Navigator.ZoomIn(); e.Handled = true; });
+            _mapZoomInButton = _mapZoomInButton ?? CreateButton(0, 0, _pictZoomIn, (s, e) => { Navigator?.ZoomIn(); e.Handled = true; });
             _mapZoomInButton.Picture = _pictZoomIn;
             _mapZoomInButton.Enabled = IsZoomButtonVisible;
             Map!.Widgets.Add(_mapZoomInButton);
 
-            _mapZoomOutButton = _mapZoomOutButton ?? CreateButton(0, 40, _pictZoomOut, (s, e) => { Navigator.ZoomOut(); e.Handled = true; });
+            _mapZoomOutButton = _mapZoomOutButton ?? CreateButton(0, 40, _pictZoomOut, (s, e) => { Navigator?.ZoomOut(); e.Handled = true; });
             _mapZoomOutButton.Picture = _pictZoomOut;
             _mapZoomOutButton.Enabled = IsZoomButtonVisible;
             Map!.Widgets.Add(_mapZoomOutButton);
@@ -844,7 +844,7 @@ namespace Mapsui.UI.Forms
             _mapMyLocationButton.Enabled = IsMyLocationButtonVisible;
             Map!.Widgets.Add(_mapMyLocationButton);
 
-            _mapNorthingButton = _mapNorthingButton ?? CreateButton(0, 136, _pictNorthing, (s, e) => { RunOnUIThread(() => Navigator.RotateTo(0)); e.Handled = true; });
+            _mapNorthingButton = _mapNorthingButton ?? CreateButton(0, 136, _pictNorthing, (s, e) => { RunOnUIThread(() => Navigator?.RotateTo(0)); e.Handled = true; });
             _mapNorthingButton.Picture = _pictNorthing;
             _mapNorthingButton.Enabled = IsNorthingButtonVisible;
             Map!.Widgets.Add(_mapNorthingButton);

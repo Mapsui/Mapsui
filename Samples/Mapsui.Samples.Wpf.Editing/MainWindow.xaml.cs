@@ -138,14 +138,14 @@ namespace Mapsui.Samples.Wpf.Editing
         private void RotationSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> args)
         {
             var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
-            MapControl.Navigator.RotateTo(percent * 360);
+            MapControl.Navigator?.RotateTo(percent * 360);
             MapControl.Refresh();
         }
 
         private void ZoomSliderChanged(object sender, RoutedPropertyChangedEventArgs<double> args)
         {
             if (MapControl.Map != null)
-                MapControl.Navigator.ZoomTo(MapControl.Map.Resolutions[(int)args.NewValue]);
+                MapControl.Navigator?.ZoomTo(MapControl.Map.Resolutions[(int)args.NewValue]);
         }
 
         private void InitializeEditSetup()
@@ -160,7 +160,7 @@ namespace Mapsui.Samples.Wpf.Editing
             _editManager.EditMode = EditMode.Modify;
             Loaded += (_, _) => {
                 var extent = _editManager.Layer.Extent!.Grow(_editManager.Layer.Extent.Width * 0.2);
-                MapControl.Navigator.NavigateTo(extent);
+                MapControl.Navigator?.NavigateTo(extent);
             };
         }
 

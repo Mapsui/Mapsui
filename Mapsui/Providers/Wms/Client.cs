@@ -337,12 +337,12 @@ namespace Mapsui.Providers.Wms
             var xnService = doc.DocumentElement.SelectSingleNode("sm:Service", _nsmgr);
             var xnCapability = doc.DocumentElement.SelectSingleNode("sm:Capability", _nsmgr);
             if (xnService != null)
-                ParseServiceDescription(xnService);
+                ParseServiceDescription(xnService, _nsmgr);
             else
                 throw new ApplicationException("No service tag found!");
 
             if (xnCapability != null)
-                ParseCapability(xnCapability);
+                ParseCapability(xnCapability, _nsmgr);
             else
                 throw new ApplicationException("No capability tag found!");
         }
@@ -351,20 +351,21 @@ namespace Mapsui.Providers.Wms
         /// Parses service description node
         /// </summary>
         /// <param name="xnlServiceDescription"></param>
-        private void ParseServiceDescription(XmlNode xnlServiceDescription)
+        /// <param name="nsmgr">Namespace Manager</param>
+        private void ParseServiceDescription(XmlNode xnlServiceDescription, XmlNamespaceManager nsmgr)
         {
-            var node = xnlServiceDescription.SelectSingleNode("sm:Title", _nsmgr);
+            var node = xnlServiceDescription.SelectSingleNode("sm:Title", nsmgr);
             _serviceDescription.Title = node?.InnerText;
-            node = xnlServiceDescription.SelectSingleNode("sm:OnlineResource/@xlink:href", _nsmgr);
+            node = xnlServiceDescription.SelectSingleNode("sm:OnlineResource/@xlink:href", nsmgr);
             _serviceDescription.OnlineResource = node?.InnerText;
-            node = xnlServiceDescription.SelectSingleNode("sm:Abstract", _nsmgr);
+            node = xnlServiceDescription.SelectSingleNode("sm:Abstract", nsmgr);
             _serviceDescription.Abstract = node?.InnerText;
-            node = xnlServiceDescription.SelectSingleNode("sm:Fees", _nsmgr);
+            node = xnlServiceDescription.SelectSingleNode("sm:Fees", nsmgr);
             _serviceDescription.Fees = node?.InnerText;
-            node = xnlServiceDescription.SelectSingleNode("sm:AccessConstraints", _nsmgr);
+            node = xnlServiceDescription.SelectSingleNode("sm:AccessConstraints", nsmgr);
             _serviceDescription.AccessConstraints = node?.InnerText;
 
-            using var xnlKeywords = xnlServiceDescription.SelectNodes("sm:KeywordList/sm:Keyword", _nsmgr);
+            using var xnlKeywords = xnlServiceDescription.SelectNodes("sm:KeywordList/sm:Keyword", nsmgr);
             if (xnlKeywords != null)
             {
                 _serviceDescription.Keywords = new string[xnlKeywords.Count];
@@ -373,32 +374,29 @@ namespace Mapsui.Providers.Wms
             }
             //Contact information
             _serviceDescription.ContactInformation = new Capabilities.WmsContactInformation();
-            node = xnlServiceDescription.SelectSingleNode("sm:ContactInformation/sm:ContactAddress/sm:Address", _nsmgr);
+            node = xnlServiceDescription.SelectSingleNode("sm:ContactInformation/sm:ContactAddress/sm:Address", nsmgr);
             _serviceDescription.ContactInformation.Address.Address = node?.InnerText;
-            node = xnlServiceDescription.SelectSingleNode("sm:ContactInformation/sm:ContactAddress/sm:AddressType",
-                                                          _nsmgr);
+            node = xnlServiceDescription.SelectSingleNode("sm:ContactInformation/sm:ContactAddress/sm:AddressType", nsmgr);
             _serviceDescription.ContactInformation.Address.AddressType = node?.InnerText;
-            node = xnlServiceDescription.SelectSingleNode("sm:ContactInformation/sm:ContactAddress/sm:City", _nsmgr);
+            node = xnlServiceDescription.SelectSingleNode("sm:ContactInformation/sm:ContactAddress/sm:City", nsmgr);
             _serviceDescription.ContactInformation.Address.City = node?.InnerText;
-            node = xnlServiceDescription.SelectSingleNode("sm:ContactInformation/sm:ContactAddress/sm:Country", _nsmgr);
+            node = xnlServiceDescription.SelectSingleNode("sm:ContactInformation/sm:ContactAddress/sm:Country", nsmgr);
             _serviceDescription.ContactInformation.Address.Country = node?.InnerText;
-            node = xnlServiceDescription.SelectSingleNode("sm:ContactInformation/sm:ContactAddress/sm:PostCode", _nsmgr);
+            node = xnlServiceDescription.SelectSingleNode("sm:ContactInformation/sm:ContactAddress/sm:PostCode", nsmgr);
             _serviceDescription.ContactInformation.Address.PostCode = node?.InnerText;
-            node = xnlServiceDescription.SelectSingleNode("sm:ContactInformation/sm:StateOrProvince", _nsmgr);
+            node = xnlServiceDescription.SelectSingleNode("sm:ContactInformation/sm:StateOrProvince", nsmgr);
             _serviceDescription.ContactInformation.Address.StateOrProvince = node?.InnerText;
-            node = xnlServiceDescription.SelectSingleNode("sm:ContactInformation/sm:ContactElectronicMailAddress", _nsmgr);
+            node = xnlServiceDescription.SelectSingleNode("sm:ContactInformation/sm:ContactElectronicMailAddress", nsmgr);
             _serviceDescription.ContactInformation.ElectronicMailAddress = node?.InnerText;
-            node = xnlServiceDescription.SelectSingleNode("sm:ContactInformation/sm:ContactFacsimileTelephone", _nsmgr);
+            node = xnlServiceDescription.SelectSingleNode("sm:ContactInformation/sm:ContactFacsimileTelephone", nsmgr);
             _serviceDescription.ContactInformation.FacsimileTelephone = node?.InnerText;
             node =
-                xnlServiceDescription.SelectSingleNode(
-                    "sm:ContactInformation/sm:ContactPersonPrimary/sm:ContactOrganization", _nsmgr);
+                xnlServiceDescription.SelectSingleNode("sm:ContactInformation/sm:ContactPersonPrimary/sm:ContactOrganization", nsmgr);
             _serviceDescription.ContactInformation.PersonPrimary.Organisation = node?.InnerText;
             node =
-                xnlServiceDescription.SelectSingleNode(
-                    "sm:ContactInformation/sm:ContactPersonPrimary/sm:ContactPerson", _nsmgr);
+                xnlServiceDescription.SelectSingleNode("sm:ContactInformation/sm:ContactPersonPrimary/sm:ContactPerson", nsmgr);
             _serviceDescription.ContactInformation.PersonPrimary.Person = node?.InnerText;
-            node = xnlServiceDescription.SelectSingleNode("sm:ContactInformation/sm:ContactVoiceTelephone", _nsmgr);
+            node = xnlServiceDescription.SelectSingleNode("sm:ContactInformation/sm:ContactVoiceTelephone", nsmgr);
             _serviceDescription.ContactInformation.VoiceTelephone = node?.InnerText;
         }
 
@@ -406,15 +404,16 @@ namespace Mapsui.Providers.Wms
         /// Parses capability node
         /// </summary>
         /// <param name="xnCapability"></param>
-        private void ParseCapability(XmlNode xnCapability)
+        /// <param name="nsmgr">NameSpace Manager</param>
+        private void ParseCapability(XmlNode xnCapability, XmlNamespaceManager nsmgr)
         {
-            var xnRequest = xnCapability.SelectSingleNode("sm:Request", _nsmgr);
+            var xnRequest = xnCapability.SelectSingleNode("sm:Request", nsmgr);
             if (xnRequest == null)
                 throw new Exception("Request parameter not specified in Service Description");
             ParseRequest(xnRequest);
 
             // Workaround for some WMS servers that have returning more than one root layer
-            using var layerNodes = xnCapability.SelectNodes("sm:Layer", _nsmgr);
+            using var layerNodes = xnCapability.SelectNodes("sm:Layer", nsmgr);
             if (layerNodes != null && layerNodes.Count > 1)
             {
                 var layers = new List<WmsServerLayer>();
@@ -431,17 +430,17 @@ namespace Mapsui.Providers.Wms
             }
             else
             {
-                var xnLayer = xnCapability.SelectSingleNode("sm:Layer", _nsmgr);
+                var xnLayer = xnCapability.SelectSingleNode("sm:Layer", nsmgr);
                 if (xnLayer == null)
                     throw new Exception("No layer tag found in Service Description");
                 _layer = ParseLayer(xnLayer);
             }
 
-            var xnException = xnCapability.SelectSingleNode("sm:Exception", _nsmgr);
+            var xnException = xnCapability.SelectSingleNode("sm:Exception", nsmgr);
             if (xnException != null)
                 ParseExceptions(xnException);
 
-            _vendorSpecificCapabilities = xnCapability.SelectSingleNode("sm:VendorSpecificCapabilities", _nsmgr);
+            _vendorSpecificCapabilities = xnCapability.SelectSingleNode("sm:VendorSpecificCapabilities", nsmgr);
         }
 
         /// <summary>

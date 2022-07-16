@@ -478,7 +478,7 @@ namespace Mapsui.UI.Forms
                 return true;
 
             // Perform standard behavior
-            Navigator.ZoomOut(screenPosition);
+            Navigator?.ZoomOut(screenPosition);
 
             return true;
         }
@@ -502,7 +502,7 @@ namespace Mapsui.UI.Forms
                 return true;
 
             // Perform standard behavior
-            Navigator.ZoomIn(screenPosition);
+            Navigator?.ZoomIn(screenPosition);
 
             return true;
         }
@@ -556,7 +556,7 @@ namespace Mapsui.UI.Forms
             if (args.Handled)
                 return true;
 
-            Navigator.FlingWith(velocityX, velocityY, 1000);
+            Navigator?.FlingWith(velocityX, velocityY, 1000);
 
             return true;
         }

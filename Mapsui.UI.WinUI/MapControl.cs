@@ -164,7 +164,7 @@ namespace Mapsui.UI.Uwp
                 return;
 
             resolution = Map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, Map.Resolutions, Map.Extent);
-            Navigator.ZoomTo(resolution, mousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
+            Navigator?.ZoomTo(resolution, mousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
 
             e.Handled = true;
         }

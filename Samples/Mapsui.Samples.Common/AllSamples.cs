@@ -14,11 +14,11 @@ namespace Mapsui.Samples.Common
         {
             var type = typeof(ISampleBase);
             var assemblies = AppDomain.CurrentDomain.GetAssemblies()
-                .Where(a => a.FullName.StartsWith("Mapsui"));
+                .Where(a => a.FullName?.StartsWith("Mapsui") ?? false) ?? Array.Empty<Assembly>();
 
             try
             {
-                return (assemblies?
+                return (assemblies
                         .SelectMany(s => s.GetTypes())
                         .Where(p => type.IsAssignableFrom(p) && !p.IsInterface && !p.IsAbstract)
                         .Select(Activator.CreateInstance)).Where(f => f is not null).OfType<ISampleBase>()
@@ -31,6 +31,9 @@ namespace Mapsui.Samples.Common
                 var sb = new StringBuilder();
                 foreach (var exSub in ex.LoaderExceptions)
                 {
+                    if (exSub == null)
+                        continue;
+
                     sb.AppendLine(exSub.Message);
                     if (exSub is FileNotFoundException exFileNotFound)
                     {

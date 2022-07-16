@@ -434,7 +434,7 @@ namespace Mapsui.UI.Wpf
 
         public void CallHomeIfNeeded()
         {
-            if (_map != null && !_map.Initialized && _viewport.HasSize && _map?.Extent != null)
+            if (_map != null && !_map.Initialized && _viewport.HasSize && _map?.Extent != null && Navigator != null)
             {
                 _map.Home?.Invoke(Navigator);
                 _map.Initialized = true;
