@@ -13,6 +13,7 @@
   </ItemGroup>
 	 
   <ItemGroup>
+    <PackageReference Include="NeoSmart.AsyncLock" />
     <PackageReference Include="System.Linq.Async" />
   </ItemGroup>
   
