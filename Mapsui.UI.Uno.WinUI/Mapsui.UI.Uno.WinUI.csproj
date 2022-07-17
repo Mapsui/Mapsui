@@ -6,15 +6,26 @@
 	-->
 
   <PropertyGroup>        
-	<TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
+	<TargetFrameworks>netstandard2.0;net6.0;net6.0-windows10.0.19041.0</TargetFrameworks>
     <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
     <RootNamespace>Mapsui.UI.WinUI</RootNamespace>
-    <DefineConstants>__WINUI__</DefineConstants>
+    <DefineConstants>__WINUI__</DefineConstants> 
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(TargetFramework)'=='net6.0-windows10.0.19041.0'">    
+    <TargetPlatformVersion>10.0.19041.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
+    <UseWinUI>true</UseWinUI>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'=='net6.0-windows10.0.19041.0'">
+    <PackageReference Include="Microsoft.WindowsAppSDK" />
+    <PackageReference Include="SkiaSharp.Views.WinUI" />
+  </ItemGroup>
+
   <ItemGroup>
-    <PackageReference Include="Uno.WinUI" />
+    <PackageReference Include="Uno.WinUI" />    
     <PackageReference Include="SkiaSharp.Views.Uno.WinUI" />    
   </ItemGroup>
 
