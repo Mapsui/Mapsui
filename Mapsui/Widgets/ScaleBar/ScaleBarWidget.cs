@@ -472,7 +472,7 @@ namespace Mapsui.Widgets.ScaleBar
             }
         }
 
-        public override bool HandleWidgetTouched(INavigator? navigator, MPoint position)
+        public override bool HandleWidgetTouched(INavigator navigator, MPoint position)
         {
             return false;
         }

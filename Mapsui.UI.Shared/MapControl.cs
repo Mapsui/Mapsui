@@ -514,7 +514,7 @@ namespace Mapsui.UI.Wpf
 
         private bool WidgetTouched(IWidget widget, MPoint screenPosition)
         {
-            var result = widget.HandleWidgetTouched(Navigator, screenPosition);
+            var result = Navigator != null && widget.HandleWidgetTouched(Navigator, screenPosition);
 
             if (!result && widget is Hyperlink hyperlink && !string.IsNullOrWhiteSpace(hyperlink.Url))
             {
