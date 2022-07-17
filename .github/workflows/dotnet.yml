@@ -195,6 +195,8 @@ jobs:
     # Samples Uno WinUI
     - name: Mapsui.Samples.Uno.WinUI.Windows
       run: dotnet build --no-restore --configuration Debug  /p:Platform=x64 Samples\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.Windows\Mapsui.Samples.Uno.WinUI.Windows.csproj
+    - name: Mapsui.Samples.Uno.WinUI.Mobile
+      run: dotnet build --no-restore --configuration Debug Samples\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.Mobile\Mapsui.Samples.Uno.WinUI.Mobile.csproj      
     # Test Build
     - name: Mapsui.Nts.Tests
       run: dotnet build --no-restore --configuration Debug Tests/Mapsui.Nts.Tests/Mapsui.Nts.Tests.csproj
