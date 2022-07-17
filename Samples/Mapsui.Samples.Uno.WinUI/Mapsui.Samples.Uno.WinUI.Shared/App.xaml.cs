@@ -44,7 +44,7 @@ namespace Mapsui.Samples.Uno.WinUI
             }
 #endif
 
-#if NET6_0_OR_GREATER && WINDOWS
+#if NET6_0_OR_GREATER && WINDOWS && !HAS_UNO
             _window = new Window();
             _window.Activate();
 #else
@@ -80,7 +80,7 @@ namespace Mapsui.Samples.Uno.WinUI
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    rootFrame.Navigate(typeof(MainWindow), args.Arguments);
+                    rootFrame.Navigate(typeof(MainPage), args.Arguments);
                 }
                 // Ensure the current window is active
                 _window.Activate();
