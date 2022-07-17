@@ -558,8 +558,8 @@ namespace Mapsui.Nts.Providers.Shapefile
                 }
                 catch (Exception ex)
                 {
-                    Trace.TraceWarning("Coordinate system file '" + projFile +
-                                       "' found, but could not be parsed. WKT parser returned:" + ex.Message);
+                    Logger.Log(LogLevel.Warning, "Coordinate system file '" + projFile +
+                                                 "' found, but could not be parsed. WKT parser returned:" + ex.Message, ex);
                     throw;
                 }
         }
@@ -620,9 +620,10 @@ namespace Mapsui.Nts.Providers.Shapefile
                 {
                     return QuadTree.FromFile(filename + ".sidx");
                 }
-                catch (QuadTree.ObsoleteFileFormatException)
+                catch (QuadTree.ObsoleteFileFormatException ex)
                 {
                     File.Delete(filename + ".sidx");
+                    Logger.Log(LogLevel.Warning, ex.Message, ex);
                     return CreateSpatialIndexFromFile(filename);
                 }
 

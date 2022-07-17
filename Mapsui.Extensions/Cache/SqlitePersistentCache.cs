@@ -3,6 +3,7 @@ using System.IO;
 using BruTile;
 using BruTile.Cache;
 using Mapsui.Cache;
+using Mapsui.Logging;
 using SQLite;
 
 namespace Mapsui.Extensions.Cache;
@@ -39,7 +40,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
                 command.ExecuteNonQuery();
             }
         }
-        catch (SQLiteException)
+        catch (SQLiteException ex)
         {
             // Table does not exist so i initialize it
             var command = connection.CreateCommand(@"CREATE TABLE Tile (
@@ -51,13 +52,14 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
                 PRIMARY KEY (Level, Col, Row)
                 );");
             command.ExecuteNonQuery();
+            Logger.Log(LogLevel.Warning, ex.Message, ex);
         }
 
         try
         {
             var test = connection.Table<UrlCache>().FirstOrDefault();
         }
-        catch (SQLiteException)
+        catch (SQLiteException ex)
         {
             // Table does not exist so i initialize it
             var command = connection.CreateCommand(@"CREATE TABLE UrlCache (
@@ -67,6 +69,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
                 PRIMARY KEY (Url)
                 );");
             command.ExecuteNonQuery();
+            Logger.Log(LogLevel.Warning, ex.Message, ex);
         }
     }
 

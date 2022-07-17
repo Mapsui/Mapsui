@@ -60,7 +60,10 @@ namespace Mapsui.Samples.Maui
                 if (!Compass.IsMonitoring)
                     Compass.Start(SensorSpeed.Default);
             }
-            catch (Exception) { }
+            catch (Exception ex)
+            {
+                Logger.Log(LogLevel.Warning, ex.Message, ex);
+            }
 
             Catch.Exceptions(async () =>
             {

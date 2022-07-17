@@ -2,6 +2,7 @@
 // https://github.com/i3arnon/ConcurrentHashSet
 // because with nuget package it resulted in an error on the build server
 
+using Mapsui.Logging;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -624,8 +625,9 @@ namespace ConcurrentCollections
                         }
                     }
                 }
-                catch (OverflowException)
+                catch (OverflowException ex)
                 {
+                    Logger.Log(LogLevel.Error, ex.Message, ex);
                     maximizeTableSize = true;
                 }
 
