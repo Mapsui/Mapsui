@@ -240,7 +240,7 @@ namespace Mapsui.UI.Objects
                         var modified = InternalUpdateMyLocation(new Position(_animationMyLocationStart.Latitude + deltaLat, _animationMyLocationStart.Longitude + deltaLon));
                         // Update viewport
                         if (modified && _mapView.MyLocationFollow && _mapView.MyLocationEnabled)
-                            _mapView.Navigator.CenterOn(MyLocation.ToMapsui());
+                            _mapView.Navigator?.CenterOn(MyLocation.ToMapsui());
                         // Refresh map
                         if (_mapView.MyLocationEnabled && modified)
                             _mapView.Refresh();
@@ -258,7 +258,7 @@ namespace Mapsui.UI.Objects
                     var modified = InternalUpdateMyLocation(newLocation);
                     // Update viewport
                     if (modified && _mapView.MyLocationFollow && _mapView.MyLocationEnabled)
-                        _mapView.Navigator.CenterOn(MyLocation.ToMapsui());
+                        _mapView.Navigator?.CenterOn(MyLocation.ToMapsui());
                     // Refresh map
                     if (_mapView.MyLocationEnabled && modified)
                         _mapView.Refresh();

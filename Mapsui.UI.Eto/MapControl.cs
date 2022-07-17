@@ -71,7 +71,7 @@ namespace Mapsui.UI.Eto
             var resolution = MouseWheelAnimation.GetResolution((int)e.Delta.Height, _viewport, _map);
             // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
             resolution = _map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, _map.Resolutions, _map.Extent);
-            Navigator.ZoomTo(resolution, e.Location.ToMapsui(), MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
+            Navigator?.ZoomTo(resolution, e.Location.ToMapsui(), MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
         }
         protected override void OnSizeChanged(EventArgs e)
         {
@@ -175,7 +175,7 @@ namespace Mapsui.UI.Eto
             ZoomHelper.ZoomToBoudingbox(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y,
                 Width, Height, out var x, out var y, out var resolution);
 
-            Navigator.NavigateTo(new MPoint(x, y), resolution, 384);
+            Navigator?.NavigateTo(new MPoint(x, y), resolution, 384);
 
             RefreshData();
             RefreshGraphics();
