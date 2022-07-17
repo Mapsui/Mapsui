@@ -22,6 +22,8 @@
     <TargetPlatformVersion>10.0.19041.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
     <UseWinUI>true</UseWinUI>
+    <EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
+    <GenerateLibraryLayout>true</GenerateLibraryLayout>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'=='net6.0-windows10.0.19041.0'">
