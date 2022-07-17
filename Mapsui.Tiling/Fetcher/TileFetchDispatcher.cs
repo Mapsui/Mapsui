@@ -10,6 +10,7 @@ using ConcurrentCollections;
 using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
+using Mapsui.Logging;
 using Mapsui.Tiling.Extensions;
 
 namespace Mapsui.Tiling.Fetcher
@@ -82,9 +83,10 @@ namespace Mapsui.Tiling.Fetcher
                 var feature = await _fetchTileAsFeature(tileInfo);
                 FetchCompleted(tileInfo, feature, null);
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
-                FetchCompleted(tileInfo, null, exception);
+                Logger.Log(LogLevel.Error, ex.Message, ex);
+                FetchCompleted(tileInfo, null, ex);
             }
         }
 

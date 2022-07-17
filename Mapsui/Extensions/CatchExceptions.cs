@@ -14,7 +14,7 @@ namespace Mapsui.Extensions
             }
             catch (Exception e)
             {
-                Logging.Logger.Log(LogLevel.Error, e.Message, e);
+                Logger.Log(LogLevel.Error, e.Message, e);
             }
         }
     }

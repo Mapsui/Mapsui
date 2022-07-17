@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Xml;
+using Mapsui.Logging;
 using Mapsui.Nts;
 using Mapsui.Nts.Extensions;
 using NetTopologySuite.Geometries;
@@ -70,7 +71,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             }
             catch (Exception ex)
             {
-                Trace.TraceError("An exception occured while initializing the label path node! " + ex.Message);
+                Logger.Log(LogLevel.Error, "An exception occured while initializing the label path node! " + ex.Message, ex);
                 throw;
             }
 
@@ -354,7 +355,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             }
             catch (Exception ex)
             {
-                Trace.TraceError("An exception occurred while parsing a point geometry string: " + ex.Message);
+                Logger.Log(LogLevel.Error, "An exception occurred while parsing a point geometry string: " + ex.Message, ex);
                 throw;
             }
 
@@ -422,7 +423,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             }
             catch (Exception ex)
             {
-                Trace.TraceError("An exception occured while parsing a line geometry string: " + ex.Message);
+                Logger.Log(LogLevel.Error, "An exception occured while parsing a line geometry string: " + ex.Message, ex);
                 throw;
             }
 
@@ -515,7 +516,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             }
             catch (Exception ex)
             {
-                Trace.TraceError("An exception occured while parsing a polygon geometry: " + ex.Message);
+                Logger.Log(LogLevel.Error, "An exception occured while parsing a polygon geometry: " + ex.Message, ex);
                 throw;
             }
 
@@ -584,7 +585,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             }
             catch (Exception ex)
             {
-                Trace.TraceError("An exception occured while parsing a multi-point geometry: " + ex.Message);
+                Logger.Log(LogLevel.Error, "An exception occured while parsing a multi-point geometry: " + ex.Message, ex);
                 throw;
             }
 
@@ -659,7 +660,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             }
             catch (Exception ex)
             {
-                Trace.TraceError("An exception occurred while parsing a multi-lineString geometry: " + ex.Message);
+                Logger.Log(LogLevel.Error, "An exception occurred while parsing a multi-lineString geometry: " + ex.Message, ex);
                 throw;
             }
 
@@ -731,7 +732,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             }
             catch (Exception ex)
             {
-                Trace.TraceError("An exception occurred while parsing a multi-polygon geometry: " + ex.Message);
+                Logger.Log(LogLevel.Error, "An exception occurred while parsing a multi-polygon geometry: " + ex.Message, ex);
                 throw;
             }
 
