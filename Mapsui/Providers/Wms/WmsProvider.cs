@@ -20,6 +20,7 @@ using System.Xml;
 using Mapsui.Cache;
 using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Logging;
 using Mapsui.Rendering;
 using Mapsui.Utilities;
 
@@ -300,9 +301,9 @@ namespace Mapsui.Providers.Wms
                 width = Convert.ToInt32(viewport.Width);
                 height = Convert.ToInt32(viewport.Height);
             }
-            catch (OverflowException)
+            catch (OverflowException ex)
             {
-                Trace.Write("Could not convert double to int (ExportMap size)");
+                Logger.Log(LogLevel.Error, "Could not convert double to int (ExportMap size)", ex);
                 return (false, null);
             }
 
@@ -337,13 +338,13 @@ namespace Mapsui.Providers.Wms
                     throw (new RenderException(
                         "There was a problem connecting to the WMS server",
                         webEx));
-                Trace.Write("There was a problem connecting to the WMS server: " + webEx.Message);
+                Logger.Log(LogLevel.Error, "There was a problem connecting to the WMS server: " + webEx.Message, webEx);
             }
             catch (Exception ex)
             {
                 if (!ContinueOnError)
                     throw new RenderException("There was a problem while attempting to request the WMS", ex);
-                Trace.Write("There was a problem while attempting to request the WMS" + ex.Message);
+                Logger.Log(LogLevel.Error, "There was a problem while attempting to request the WMS" + ex.Message, ex);
             }
             
             return (false, null);

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Logging;
 using Mapsui.Providers;
 using Mapsui.Styles;
 
@@ -43,9 +44,10 @@ namespace Mapsui.Fetcher
                 
                 FetchCompleted(features, null);
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
-                FetchCompleted(null, exception);
+                Logger.Log(LogLevel.Error, ex.Message, ex);
+                FetchCompleted(null, ex);
             }
         }
 
