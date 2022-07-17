@@ -23,8 +23,8 @@
     <PackageVersion Include="Eto.Platform.XamMac2" Version="2.6.0" />
     <PackageVersion Include="Eto.Platform.Gtk" Version="2.6.0" />
     <PackageVersion Include="Eto.SkiaDraw" Version="0.2.0" />
-    <PackageVersion Include="HarfBuzzSharp" Version="2.8.2.1-preview.79" />
-    <PackageVersion Include="HarfBuzzSharp.NativeAssets.WebAssembly" Version="2.8.2.1-preview.79" />
+    <PackageVersion Include="HarfBuzzSharp" Version="2.8.2.1-preview.91" />
+    <PackageVersion Include="HarfBuzzSharp.NativeAssets.WebAssembly" Version="2.8.2.1-preview.91" />
     <PackageVersion Include="IDisposableAnalyzers" Version="4.0.2" />
     <PackageVersion Include="Itinero" Version="1.5.0" />
     <PackageVersion Include="Microsoft.Bcl.AsyncInterfaces" Version="6.0.0" />
@@ -50,21 +50,21 @@
     <PackageVersion Include="OpenTK" Version="3.1.0" />
     <PackageVersion Include="OpenTK.GLControl" Version="3.1.0" />
     <PackageVersion Include="Plugin.CurrentActivity" Version="2.1.0.4" />
-    <PackageVersion Include="SkiaSharp" Version="2.88.1-preview.79" />
-    <PackageVersion Include="SkiaSharp.HarfBuzz" Version=" 2.88.1-preview.79" />
-    <PackageVersion Include="SkiaSharp.NativeAssets.Linux" Version="2.88.1-preview.79" />
-    <PackageVersion Include="SkiaSharp.NativeAssets.iOS" Version=" 2.88.1-preview.79" />
-    <PackageVersion Include="SkiaSharp.NativeAssets.WebAssembly" Version="2.88.1-preview.79" />
-    <PackageVersion Include="SkiaSharp.Views" Version="2.88.1-preview.79" />
-    <PackageVersion Include="SkiaSharp.Views.Forms" Version="2.88.1-preview.79" />
-    <PackageVersion Include="SkiaSharp.Views.Maui.Controls" Version="2.88.1-preview.79" />
-    <PackageVersion Include="SkiaSharp.Views.Maui.Controls.Compatibility" Version="2.88.1-preview.79" />
-    <PackageVersion Include="SkiaSharp.Views.Uno" Version="2.88.1-preview.79" />
-    <PackageVersion Include="SkiaSharp.Views.Uno.WinUI" Version="2.88.1-preview.79" />
-    <PackageVersion Include="SkiaSharp.Views.WinUI" Version="2.88.1-preview.79" />
-    <PackageVersion Include="SkiaSharp.Views.WPF" Version="2.88.1-preview.79" />
-    <PackageVersion Include="SkiaSharp.Views.Forms.WPF" Version="2.88.1-preview.79" />
-    <PackageVersion Include="SkiaSharp.Views.WindowsForms" Version="2.88.1-preview.79" />
+    <PackageVersion Include="SkiaSharp" Version="2.88.1-preview.91" />
+    <PackageVersion Include="SkiaSharp.HarfBuzz" Version=" 2.88.1-preview.91" />
+    <PackageVersion Include="SkiaSharp.NativeAssets.Linux" Version="2.88.1-preview.91" />
+    <PackageVersion Include="SkiaSharp.NativeAssets.iOS" Version=" 2.88.1-preview.91" />
+    <PackageVersion Include="SkiaSharp.NativeAssets.WebAssembly" Version="2.88.1-preview.91" />
+    <PackageVersion Include="SkiaSharp.Views" Version="2.88.1-preview.91" />
+    <PackageVersion Include="SkiaSharp.Views.Forms" Version="2.88.1-preview.91" />
+    <PackageVersion Include="SkiaSharp.Views.Maui.Controls" Version="2.88.1-preview.91" />
+    <PackageVersion Include="SkiaSharp.Views.Maui.Controls.Compatibility" Version="2.88.1-preview.91" />
+    <PackageVersion Include="SkiaSharp.Views.Uno" Version="2.88.1-preview.91" />
+    <PackageVersion Include="SkiaSharp.Views.Uno.WinUI" Version="2.88.1-preview.91" />
+    <PackageVersion Include="SkiaSharp.Views.WinUI" Version="2.88.1-preview.91" />
+    <PackageVersion Include="SkiaSharp.Views.WPF" Version="2.88.1-preview.91" />
+    <PackageVersion Include="SkiaSharp.Views.Forms.WPF" Version="2.88.1-preview.91" />
+    <PackageVersion Include="SkiaSharp.Views.WindowsForms" Version="2.88.1-preview.91" />
     <PackageVersion Include="sqlite-net-pcl" Version="1.6.292" />
     <PackageVersion Include="Svg.Skia" Version="0.5.12" />
     <PackageVersion Include="System.AppContext" Version="4.3.0" />
