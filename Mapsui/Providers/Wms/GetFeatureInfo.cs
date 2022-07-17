@@ -1,3 +1,4 @@
+using Mapsui.Logging;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -73,8 +74,9 @@ namespace Mapsui.Providers.Wms
                     var featureInfo = parser.ParseWMSResult(_layerName, task);
                     OnIdentifyFinished(featureInfo);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Logger.Log(LogLevel.Error, ex.Message, ex);
                     OnIdentifyFailed();
                 }
             });
