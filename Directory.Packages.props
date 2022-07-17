@@ -43,6 +43,7 @@
     <PackageVersion Include="Microsoft.Win32.Primitives" Version="4.3.0" />
     <PackageVersion Include="Microsoft.Windows.CsWin32" Version="0.1.588-beta" />
     <PackageVersion Include="Microsoft.WindowsAppSDK" Version="1.1.1" />
+    <PackageVersion Include="NeoSmart.AsyncLock" Version="3.2.1" />
     <PackageVersion Include="NetTopologySuite" Version="2.4.0" />
     <PackageVersion Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageVersion Include="NUnit" Version="3.12.0" />
