@@ -15,11 +15,12 @@
     <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-maccatalyst'">14.0</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-android'">21.0</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="'$(TargetFramework)'=='net6.0-macos'">10.14</SupportedOSPlatformVersion>
+    <NoWarn>$(NoWarn);NU1008</NoWarn>
   </PropertyGroup>
+
   <ItemGroup>
-    <PackageReference Include="Uno.WinUI"/>
-    <PackageReference Include="Uno.UIA"/>
-    <PackageReference Include="Uno.UniversalImageLoader"/>
+    <PackageReference Include="Uno.WinUI" />
+    <PackageReference Include="Uno.UniversalImageLoader" />
     <PackageReference Include="Uno.WinUI.RemoteControl" Condition="'$(Configuration)'=='Debug'" />
     <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" />
     <PackageReference Include="Microsoft.Extensions.Logging" />
@@ -38,8 +39,8 @@
   <Choose>
     <When Condition="'$(TargetFramework)'=='net6.0-android'">
       <ItemGroup>
-        <PackageReference Include="Xamarin.Google.Android.Material" Version="1.4.0.4" />
-        <PackageReference Include="Uno.UniversalImageLoader" Version="1.9.36" />
+        <PackageReference Include="Xamarin.Google.Android.Material" />
+        <PackageReference Include="Uno.UniversalImageLoader" />
       </ItemGroup>
       <ItemGroup>
         <AndroidEnvironment Include="Android/environment.conf" />
@@ -52,7 +53,7 @@
         <MtouchExtraArgs>$(MtouchExtraArgs) --marshal-objectivec-exceptions:disable</MtouchExtraArgs>
       </PropertyGroup>
       <ItemGroup>
-        <PackageReference Include="Uno.Extensions.Logging.OSLog" Version="1.4.0" />
+        <PackageReference Include="Uno.Extensions.Logging.OSLog" />
       </ItemGroup>
     </When>
     <When Condition="'$(TargetFramework)'=='net6.0-maccatalyst'">
@@ -67,7 +68,7 @@
         <InvariantGlobalization>false</InvariantGlobalization>
       </PropertyGroup>
       <ItemGroup>
-        <PackageReference Include="Uno.Extensions.Logging.OSLog" Version="1.4.0" />
+        <PackageReference Include="Uno.Extensions.Logging.OSLog" />
       </ItemGroup>
     </When>
     <When Condition="'$(TargetFramework)'=='net6.0-macos'">
