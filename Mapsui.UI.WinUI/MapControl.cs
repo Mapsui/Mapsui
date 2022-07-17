@@ -166,7 +166,7 @@ namespace Mapsui.UI.Uwp
                 return;
 
             resolution = Map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, Map.Resolutions, Map.Extent);
-            Navigator.ZoomTo(resolution, mousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
+            Navigator?.ZoomTo(resolution, mousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
 
             e.Handled = true;
         }
@@ -288,7 +288,7 @@ namespace Mapsui.UI.Uwp
         }
 
 #if !(__ANDROID__ )
-#if __IOS__ || __MACOS__ || NETSTANDARD
+#if __IOS__ || __MACOS__ || NETSTANDARD || HAS_UNO
         public new void Dispose()
 #else 
         public void Dispose()

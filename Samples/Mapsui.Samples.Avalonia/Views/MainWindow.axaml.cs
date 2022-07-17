@@ -116,7 +116,7 @@ namespace Mapsui.Samples.Avalonia.Views
         {
             // This is probably not the proper event handler for this but I don't know what is.
             var percent = RotationSlider.Value / (RotationSlider.Maximum - RotationSlider.Minimum);
-            MapControl.Navigator.RotateTo(percent * 360);
+            MapControl.Navigator?.RotateTo(percent * 360);
             MapControl.Refresh();
         }
 

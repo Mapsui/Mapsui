@@ -34,7 +34,7 @@ namespace Mapsui.Samples.Common.Maps.Callouts
             return Task.FromResult(map);
         }
 
-        private static void MapOnInfo(object sender, MapInfoEventArgs e)
+        private static void MapOnInfo(object? sender, MapInfoEventArgs e)
         {
             var calloutStyle = e.MapInfo?.Feature?.Styles.Where(s => s is CalloutStyle).Cast<CalloutStyle>().FirstOrDefault();
             if (calloutStyle != null)

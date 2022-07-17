@@ -434,7 +434,7 @@ namespace Mapsui.UI.Wpf
 
         public void CallHomeIfNeeded()
         {
-            if (_map != null && !_map.Initialized && _viewport.HasSize && _map?.Extent != null)
+            if (_map != null && !_map.Initialized && _viewport.HasSize && _map?.Extent != null && Navigator != null)
             {
                 _map.Home?.Invoke(Navigator);
                 _map.Initialized = true;
@@ -514,7 +514,7 @@ namespace Mapsui.UI.Wpf
 
         private bool WidgetTouched(IWidget widget, MPoint screenPosition)
         {
-            var result = widget.HandleWidgetTouched(Navigator, screenPosition);
+            var result = Navigator != null && widget.HandleWidgetTouched(Navigator, screenPosition);
 
             if (!result && widget is Hyperlink hyperlink && !string.IsNullOrWhiteSpace(hyperlink.Url))
             {

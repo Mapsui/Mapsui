@@ -26,19 +26,11 @@
         <dependency id="SkiaSharp.Views.Maui.Controls" version="[2.88.1-preview.91,3.0.0)"/>
         <dependency id="SkiaSharp.Views.Maui.Controls.Compatibility" version="[2.88.1-preview.91,3.0.0)"/>
       </group>
-	  <group targetFramework="net6.0-windows10.0.19041.0">
-		<dependency id="Mapsui" version="$version$"/>
-		<dependency id="Microsoft.Maui.Dependencies" version="[6.0.312,7.0)" />
-		<dependency id="SkiaSharp" version="[2.88.1-preview.91,3.0.0)"/>
-		<dependency id="SkiaSharp.Views.Maui.Controls" version="[2.88.1-preview.91,3.0.0)"/>
-		<dependency id="SkiaSharp.Views.Maui.Controls.Compatibility" version="[2.88.1-preview.91,3.0.0)"/>
-	  </group>
-	</dependencies>
+    </dependencies>
 
   </metadata>
   <files>
     <file src="..\LICENSE" target="LICENSE" />
     <file src="../Mapsui.UI.Maui/bin/Release/net6.0/Mapsui.UI.Maui.dll" target="lib/net6.0/" />
-	  <file src="../Mapsui.UI.Maui/bin/Release/net6.0-windows10.0.19041.0/Mapsui.UI.Maui.dll" target="lib/net6.0-windows10.0.19041.0/" />
   </files>
 </package>
