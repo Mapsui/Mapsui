@@ -23,8 +23,8 @@
     <PackageVersion Include="Eto.Platform.XamMac2" Version="2.6.0" />
     <PackageVersion Include="Eto.Platform.Gtk" Version="2.6.0" />
     <PackageVersion Include="Eto.SkiaDraw" Version="0.2.0" />
-    <PackageVersion Include="HarfBuzzSharp" Version="2.8.2.1-preview.63" />
-    <PackageVersion Include="HarfBuzzSharp.NativeAssets.WebAssembly" Version="2.8.2.1-preview.63" />
+    <PackageVersion Include="HarfBuzzSharp" Version="2.8.2.1-preview.79" />
+    <PackageVersion Include="HarfBuzzSharp.NativeAssets.WebAssembly" Version="2.8.2.1-preview.79" />
     <PackageVersion Include="IDisposableAnalyzers" Version="4.0.2" />
     <PackageVersion Include="Itinero" Version="1.5.0" />
     <PackageVersion Include="Microsoft.Bcl.AsyncInterfaces" Version="6.0.0" />
@@ -50,20 +50,20 @@
     <PackageVersion Include="OpenTK" Version="3.1.0" />
     <PackageVersion Include="OpenTK.GLControl" Version="3.1.0" />
     <PackageVersion Include="Plugin.CurrentActivity" Version="2.1.0.4" />
-    <PackageVersion Include="SkiaSharp" Version="2.88.1-preview.63" />
-    <PackageVersion Include="SkiaSharp.HarfBuzz" Version=" 2.88.1-preview.63" />
-    <PackageVersion Include="SkiaSharp.NativeAssets.Linux" Version="2.88.1-preview.63" />
-    <PackageVersion Include="SkiaSharp.NativeAssets.iOS" Version=" 2.88.1-preview.63" />
-    <PackageVersion Include="SkiaSharp.NativeAssets.WebAssembly" Version="2.88.1-preview.63" />
-    <PackageVersion Include="SkiaSharp.Views" Version="2.88.1-preview.63" />
-    <PackageVersion Include="SkiaSharp.Views.Forms" Version="2.88.1-preview.63" />
-    <PackageVersion Include="SkiaSharp.Views.Maui.Controls" Version="2.88.1-preview.63" />
-    <PackageVersion Include="SkiaSharp.Views.Maui.Controls.Compatibility" Version="2.88.1-preview.63" />
-    <PackageVersion Include="SkiaSharp.Views.Uno" Version="2.88.1-preview.63" />
-    <PackageVersion Include="SkiaSharp.Views.WinUI" Version="2.88.1-preview.63" />
-    <PackageVersion Include="SkiaSharp.Views.WPF" Version="2.88.1-preview.63" />
-    <PackageVersion Include="SkiaSharp.Views.Forms.WPF" Version="2.88.1-preview.63" />
-    <PackageVersion Include="SkiaSharp.Views.WindowsForms" Version="2.88.1-preview.63" />
+    <PackageVersion Include="SkiaSharp" Version="2.88.1-preview.79" />
+    <PackageVersion Include="SkiaSharp.HarfBuzz" Version=" 2.88.1-preview.79" />
+    <PackageVersion Include="SkiaSharp.NativeAssets.Linux" Version="2.88.1-preview.79" />
+    <PackageVersion Include="SkiaSharp.NativeAssets.iOS" Version=" 2.88.1-preview.79" />
+    <PackageVersion Include="SkiaSharp.NativeAssets.WebAssembly" Version="2.88.1-preview.79" />
+    <PackageVersion Include="SkiaSharp.Views" Version="2.88.1-preview.79" />
+    <PackageVersion Include="SkiaSharp.Views.Forms" Version="2.88.1-preview.79" />
+    <PackageVersion Include="SkiaSharp.Views.Maui.Controls" Version="2.88.1-preview.79" />
+    <PackageVersion Include="SkiaSharp.Views.Maui.Controls.Compatibility" Version="2.88.1-preview.79" />
+    <PackageVersion Include="SkiaSharp.Views.Uno" Version="2.88.1-preview.79" />
+    <PackageVersion Include="SkiaSharp.Views.WinUI" Version="2.88.1-preview.79" />
+    <PackageVersion Include="SkiaSharp.Views.WPF" Version="2.88.1-preview.79" />
+    <PackageVersion Include="SkiaSharp.Views.Forms.WPF" Version="2.88.1-preview.79" />
+    <PackageVersion Include="SkiaSharp.Views.WindowsForms" Version="2.88.1-preview.79" />
     <PackageVersion Include="sqlite-net-pcl" Version="1.6.292" />
     <PackageVersion Include="Svg.Skia" Version="0.5.12" />
     <PackageVersion Include="System.AppContext" Version="4.3.0" />
@@ -119,14 +119,14 @@
     <PackageVersion Include="Uno.Extensions.Logging.WebAssembly.Console" Version="1.4.0" />
     <PackageVersion Include="Uno.Core.Extensions.Logging.Singleton" Version="4.0.1" />
     <PackageVersion Include="Uno.UniversalImageLoader" Version="1.9.36" />
-    <PackageVersion Include="Uno.UI" Version="4.3.8" />
-    <PackageVersion Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.3.8" />
-    <PackageVersion Include="Uno.UI.RemoteControl" Version="4.3.8" />
-    <PackageVersion Include="Uno.UI.Skia.Gtk" Version="4.3.8" />
-    <PackageVersion Include="Uno.UI.Skia.Linux.FrameBuffer" Version="4.3.8" />
-    <PackageVersion Include="Uno.UI.Skia.Tizen" Version="4.3.8" />
-    <PackageVersion Include="Uno.UI.Skia.Wpf" Version="4.3.8" />
-    <PackageVersion Include="Uno.UI.WebAssembly" Version="4.3.8" />
+    <PackageVersion Include="Uno.UI" Version="4.4.13" />
+    <PackageVersion Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.4.13" />
+    <PackageVersion Include="Uno.UI.RemoteControl" Version="4.4.13" />
+    <PackageVersion Include="Uno.UI.Skia.Gtk" Version="4.4.13" />
+    <PackageVersion Include="Uno.UI.Skia.Linux.FrameBuffer" Version="4.4.13" />
+    <PackageVersion Include="Uno.UI.Skia.Tizen" Version="4.4.13" />
+    <PackageVersion Include="Uno.UI.Skia.Wpf" Version="4.4.13" />
+    <PackageVersion Include="Uno.UI.WebAssembly" Version="4.4.13" />
     <PackageVersion Include="Uno.Wasm.Bootstrap" Version="3.3.1" />
     <PackageVersion Include="Uno.Wasm.Bootstrap.DevServer" Version="3.3.1" />
     <PackageVersion Include="Microsoft.Windows.Compatibility" Version="5.0.0" />
