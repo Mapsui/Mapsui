@@ -26,7 +26,7 @@ Mapsui is a C# map component for apps
 | Mapsui.Eto     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Eto.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Eto/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Eto.svg)](https://www.nuget.org/packages/Mapsui.Eto) | [Xamarin.Eto](https://mapsui.com/documentation/getting-started-eto.html) |
 | Mapsui.Uno     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Uno.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Uno/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Uno.svg)](https://www.nuget.org/packages/Mapsui.Uno) | [Xamarin.Uno](https://mapsui.com/documentation/getting-started-uno.html) |
 | Mapsui.WinUI     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.WinUI.svg?style=flat)](https://www.nuget.org/packages/Mapsui.WinUI/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.WinUI.svg)](https://www.nuget.org/packages/Mapsui.WinUI) | [Xamarin.WinUI](https://mapsui.com/documentation/getting-started-winui.html) |
-| Mapsui.Uno.WinUI     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Uno.WinUI.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Uno.WinUI/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Uno.WinUI.svg)](https://www.nuget.org/packages/Mapsui.Uno.WinUI) | [Xamarin.Eto](https://mapsui.com/documentation/getting-started-uno-winui.html) |
+| Mapsui.Uno.WinUI     | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Uno.WinUI.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Uno.WinUI/) |[![NuGet](https://img.shields.io/nuget/dt/Mapsui.Uno.WinUI.svg)](https://www.nuget.org/packages/Mapsui.Uno.WinUI) | [Xamarin.Uno.WinUI](https://mapsui.com/documentation/getting-started-uno-winui.html) |
 
 ## Build Status
 | platform | status |
