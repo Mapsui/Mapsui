@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
@@ -11,14 +12,14 @@ namespace Mapsui.UI.Objects
 {
     public class ObservableCollectionProvider<T> : IProvider where T : IFeatureProvider
     {
-        public ObservableCollection<T>? Collection { get; }
+        public ObservableCollection<T> Collection { get; }
         private readonly ConcurrentHashSet<T> _shadowCollection = new(); 
 
         public string? CRS { get; set; } = "";
 
         public ObservableCollectionProvider(ObservableCollection<T> collection)
         {
-            Collection = collection;
+            Collection = collection ?? throw new ArgumentNullException(nameof(collection));
             collection.CollectionChanged += Collection_CollectionChanged;
         }
 
@@ -59,10 +60,10 @@ namespace Mapsui.UI.Objects
             }
         }
 
-        public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+        public Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
         {
             if (Collection == null || Collection.Count == 0)
-                return Enumerable.Empty<IFeature>();
+                return Task.FromResult(Enumerable.Empty<IFeature>());
 
             var list = new List<IFeature>();
             foreach (var item in _shadowCollection)
@@ -74,7 +75,7 @@ namespace Mapsui.UI.Objects
                 }
             }
 
-            return list;
+            return Task.FromResult((IEnumerable<IFeature>)list);
         }
 
         public MRect? GetExtent()
