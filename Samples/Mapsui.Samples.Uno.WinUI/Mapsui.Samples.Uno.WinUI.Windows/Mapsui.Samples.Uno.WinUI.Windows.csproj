@@ -13,8 +13,12 @@
 		<EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
     <!-- Workaround see https://github.com/dotnet/maui/issues/5886 -->
     <WinUISDKReferences>false</WinUISDKReferences>
-    <PublishReadyToRun>false</PublishReadyToRun>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
   </PropertyGroup>
+
+	<ItemGroup>
+    <PublishReadyToRunExclude Include="OpenTK.dll" />
+  </ItemGroup>
 	
 	<PropertyGroup>
 		<!-- Bundles the WinAppSDK binaries (Uncomment for unpackaged builds) -->
