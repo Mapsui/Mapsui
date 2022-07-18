@@ -21,6 +21,10 @@ namespace Mapsui.UI.Objects
         {
             Collection = collection ?? throw new ArgumentNullException(nameof(collection));
             collection.CollectionChanged += Collection_CollectionChanged;
+            foreach (var it in collection)
+            {
+                _shadowCollection.Add(it);
+            }
         }
 
         private void Collection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
