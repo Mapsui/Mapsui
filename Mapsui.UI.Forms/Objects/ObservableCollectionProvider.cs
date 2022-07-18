@@ -62,7 +62,7 @@ namespace Mapsui.UI.Objects
 
         public Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
         {
-            if (Collection == null || Collection.Count == 0)
+            if (_shadowCollection.Count == 0)
                 return Task.FromResult(Enumerable.Empty<IFeature>());
 
             var list = new List<IFeature>();
@@ -80,7 +80,7 @@ namespace Mapsui.UI.Objects
 
         public MRect? GetExtent()
         {
-            if (Collection == null || Collection.Count == 0)
+            if (_shadowCollection.Count == 0)
                 return null;
 
             MRect? extent = null;
