@@ -12,6 +12,7 @@ using Avalonia.Platform;
 using Avalonia.Rendering.SceneGraph;
 using Avalonia.Skia;
 using Avalonia.Threading;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.UI.Avalonia.Extensions;
 using Mapsui.Utilities;
@@ -215,7 +216,7 @@ namespace Mapsui.UI.Avalonia
 
         private void RunOnUIThread(Action action)
         {
-            Task.Run(() => Dispatcher.UIThread.InvokeAsync(action));
+            Catch.TaskRun(() => Dispatcher.UIThread.InvokeAsync(action));
         }
 
         public void OpenBrowser(string url)

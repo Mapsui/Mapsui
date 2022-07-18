@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Logging;
 using Mapsui.Providers;
@@ -70,7 +71,7 @@ namespace Mapsui.Layers
         {
             if (e.PropertyName == nameof(DataSource))
             {
-                Task.Run(() => {
+                Catch.TaskRun(() => {
                     // Run in background because it could take time because
                     // this could involve database access or a web request
                     Extent = DataSource?.GetExtent();
@@ -140,7 +141,7 @@ namespace Mapsui.Layers
 
             var fetcher = new FeatureFetcher(new FetchInfo(fetchInfo), _dataSource, DataArrived, DateTime.Now.Ticks);
 
-            Task.Run(async () => {
+            Catch.TaskRun(async () => {
                 try
                 {
                     Logger.Log(LogLevel.Debug, $"Start image fetch at {DateTime.Now.TimeOfDay}");

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Mapsui.Extensions;
 using Mapsui.Logging;
 
 namespace Mapsui.Fetcher
@@ -23,7 +24,7 @@ namespace Mapsui.Fetcher
                 Interlocked.Increment(ref RestartCounter);
                 _fetchLoopCancellationTokenSource?.Dispose();
                 _fetchLoopCancellationTokenSource = new CancellationTokenSource();
-                Task.Run(async () => await FetchAsync(_fetchLoopCancellationTokenSource));
+                Catch.TaskRun(async () => await FetchAsync(_fetchLoopCancellationTokenSource));
             }
         }
 
