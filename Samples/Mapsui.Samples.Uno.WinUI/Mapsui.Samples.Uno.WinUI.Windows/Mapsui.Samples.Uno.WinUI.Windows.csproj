@@ -13,6 +13,7 @@
 		<EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
     <!-- Workaround see https://github.com/dotnet/maui/issues/5886 -->
     <WinUISDKReferences>false</WinUISDKReferences>
+    <PublishReadyToRun>false</PublishReadyToRun>
   </PropertyGroup>
 	
 	<PropertyGroup>
