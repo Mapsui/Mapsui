@@ -13,6 +13,7 @@
 		<EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
     <!-- Workaround see https://github.com/dotnet/maui/issues/5886 -->
     <WinUISDKReferences>false</WinUISDKReferences>
+    <PublishReadyToRun>false</PublishReadyToRun>
   </PropertyGroup>
 
 	<ItemGroup>
@@ -78,5 +79,6 @@
   <PropertyGroup>
     <!-- Workaround for Error NU1008 Projects that use central package version management should not define the version on the PackageReference ..-->
     <PreBuildEvent>"$(MSBuildProjectDirectory)\..\..\..\.nuget\nuget" restore $(MSBuildProjectDirectory)\Mapsui.Samples.Uno.WinUI.Windows.csproj</PreBuildEvent>
+    <DefaultLanguage>en</DefaultLanguage>
   </PropertyGroup>
 </Project>

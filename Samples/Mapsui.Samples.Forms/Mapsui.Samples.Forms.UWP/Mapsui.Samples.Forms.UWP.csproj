@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Mapsui.Samples.Forms.UWP</RootNamespace>
     <AssemblyName>Mapsui.Samples.Forms.UWP</AssemblyName>
-    <DefaultLanguage>en-US</DefaultLanguage>
+    <DefaultLanguage>en</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.19041.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
@@ -114,11 +114,11 @@
   <ItemGroup>
     <PackageReference Include="BruTile" />
     <PackageReference Include="BruTile.MbTiles" />
-    <PackageReference Include="SkiaSharp" />     
-    <PackageReference Include="SkiaSharp.Views" />     
-    <PackageReference Include="SkiaSharp.Views.Forms" />     
-    <PackageReference Include="Topten.RichTextKit" />     
-    <PackageReference Include="Xam.Plugin.Geolocator" />     
+    <PackageReference Include="SkiaSharp" />
+    <PackageReference Include="SkiaSharp.Views" />
+    <PackageReference Include="SkiaSharp.Views.Forms" />
+    <PackageReference Include="Topten.RichTextKit" />
+    <PackageReference Include="Xam.Plugin.Geolocator" />
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" />
     <PackageReference Include="Xamarin.Forms" />
   </ItemGroup>
