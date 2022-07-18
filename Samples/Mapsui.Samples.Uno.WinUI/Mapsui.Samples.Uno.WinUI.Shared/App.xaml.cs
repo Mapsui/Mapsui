@@ -13,7 +13,7 @@ namespace Mapsui.Samples.Uno.WinUI
     /// </summary>
     public sealed partial class App : Application
     {
-        private Window _window;
+        private Window? _window;
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code

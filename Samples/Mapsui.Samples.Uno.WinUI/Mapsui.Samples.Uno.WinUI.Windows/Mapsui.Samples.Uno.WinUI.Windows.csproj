@@ -13,7 +13,6 @@
 		<EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
     <!-- Workaround see https://github.com/dotnet/maui/issues/5886 -->
     <WinUISDKReferences>false</WinUISDKReferences>
-    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
   </PropertyGroup>
 
 	<ItemGroup>
