@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Mapsui.Samples.Uno.WinUI.Wasm": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:57374;http://localhost:57375"
+    }
+  }
+}
