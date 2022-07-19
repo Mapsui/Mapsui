@@ -1,3 +1,4 @@
+using Mapsui.Extensions;
 using Mapsui.Logging;
 using System;
 using System.Collections.Generic;
@@ -59,7 +60,7 @@ namespace Mapsui.Providers.Wms
             _infoFormat = infoFormat;
             var requestUrl = CreateRequestUrl(baseUrl, wmsVersion, infoFormat, srs, layer, extendXmin, extendYmin, extendXmax, extendYmax, x, y, mapWidth, mapHeight);
 
-            _ =Task.Run(async () => {
+            Catch.TaskRun(async () => {
                 using var task = await _getStreamAsync(requestUrl);
                 try
                 {

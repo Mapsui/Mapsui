@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Windows.Devices.Sensors;
 using Windows.Foundation;
 using Windows.System;
+using Mapsui.Extensions;
 #if __WINUI__
 using System.Runtime.Versioning;
 using Mapsui.UI.WinUI.Extensions;
@@ -185,9 +186,9 @@ namespace Mapsui.UI.Uwp
         private void RunOnUIThread(Action action)
         {
 #if __WINUI__
-            Task.Run(() => DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Normal, () => action()));
+            Catch.TaskRun(() => DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Normal, () => action()));
 #else
-            Task.Run(() => Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => action()));
+            Catch.TaskRun(() => Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => action()));
 #endif
         }
 
@@ -248,7 +249,7 @@ namespace Mapsui.UI.Uwp
 
         public void OpenBrowser(string url)
         {
-            Task.Run(() => Launcher.LaunchUriAsync(new Uri(url)));
+            Catch.TaskRun(() => Launcher.LaunchUriAsync(new Uri(url)));
         }
 
         private float ViewportWidth => (float)ActualWidth;
