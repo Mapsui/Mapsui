@@ -1,0 +1,10 @@
+{
+	"profiles": {
+		"Mapsui.Samples.Uno.WinUI.Windows (Package)": {
+			"commandName": "MsixPackage"
+		},
+		"Mapsui.Samples.Uno.WinUI.Windows (Unpackaged)": {
+			"commandName": "Project"
+		}
+	}
+}

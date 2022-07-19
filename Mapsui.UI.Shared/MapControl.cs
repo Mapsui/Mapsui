@@ -18,9 +18,9 @@ using Mapsui.Widgets;
 namespace Mapsui.UI.Maui
 #elif __UWP__
 namespace Mapsui.UI.Uwp
-#elif __ANDROID__
+#elif __ANDROID__ && !HAS_UNO_WINUI
 namespace Mapsui.UI.Android
-#elif __IOS__
+#elif __IOS__ && !HAS_UNO_WINUI
 namespace Mapsui.UI.iOS
 #elif __WINUI__
 namespace Mapsui.UI.WinUI

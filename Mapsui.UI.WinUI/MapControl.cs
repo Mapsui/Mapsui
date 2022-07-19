@@ -39,7 +39,9 @@ using VerticalAlignment = Windows.UI.Xaml.VerticalAlignment;
 #endif
 
 #if __WINUI__
+#if !HAS_UNO_WINUI
 [assembly: SupportedOSPlatform("windows10.0.18362.0")]
+#endif
 namespace Mapsui.UI.WinUI
 #else
 namespace Mapsui.UI.Uwp

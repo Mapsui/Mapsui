@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="..\Mapsui.Samples.Uno.Shared\Package.appxmanifest" LogicalName="Package.appxmanifest" />
+    <EmbeddedResource Include="..\Mapsui.Samples.Uno.UWP\Package.appxmanifest" LogicalName="Package.appxmanifest" />
   </ItemGroup>
 
   <ItemGroup>
