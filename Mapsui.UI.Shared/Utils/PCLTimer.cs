@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Mapsui.Extensions;
 
 #pragma warning disable VSTHRD110 // Observe the awaitable result of this method call by awaiting it
 #pragma warning disable 1587
@@ -25,7 +26,7 @@ namespace Mapsui.UI
                     if (IsCancellationRequested)
                         break;
 #pragma warning disable CS4014 // Missing await #pragma directive
-                    Task.Run(() => tuple?.Item1(tuple.Item2));
+                    Catch.TaskRun(() => tuple?.Item1(tuple.Item2));
 #pragma warning restore CS4014 // Missing await #pragma directive
                     await Task.Delay(period);
                 }

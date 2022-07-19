@@ -14,6 +14,7 @@ using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Xaml;
 using Microsoft.Maui.Devices.Sensors;
 using Compass = Microsoft.Maui.Devices.Sensors.Compass;
+using Microsoft.Maui.Dispatching;
 
 namespace Mapsui.Samples.Maui
 {
@@ -53,7 +54,7 @@ namespace Mapsui.Samples.Maui
             mapView.Info += MapView_Info;
             mapView.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
 
-            _ = Task.Run(StartGPS);
+            Catch.TaskRun(StartGPS);
 
             try
             {
@@ -134,7 +135,7 @@ namespace Mapsui.Samples.Maui
                     while (!gpsCancelation.IsCancellationRequested)
                     {
                         var request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
-                        await Device.InvokeOnMainThreadAsync(async () => {
+                        Application.Current?.Dispatcher.DispatchAsync(async () => {
                             var location = await Geolocation.GetLocationAsync(request, this.gpsCancelation.Token).ConfigureAwait(false);
                             if (location != null)
                             {
@@ -163,7 +164,7 @@ namespace Mapsui.Samples.Maui
         /// <param name="e">Event arguments for new position</param>
         private void MyLocationPositionChanged(Location e)
         {
-            Device.BeginInvokeOnMainThread(() => {
+            Application.Current?.Dispatcher.DispatchAsync(() => {
                 mapView.MyLocationLayer.UpdateMyLocation(new UI.Maui.Position(e.Latitude, e.Longitude));
                 if (e.Course != null)
                 {

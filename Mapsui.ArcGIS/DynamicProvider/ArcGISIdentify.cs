@@ -5,6 +5,7 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Mapsui.Extensions;
 using Mapsui.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -56,7 +57,7 @@ namespace Mapsui.ArcGIS.DynamicProvider
         /// <param name="sr">sr code of input geometry</param>
         public void Request(string url, double x, double y, int tolerance, string[] layers, double extendXmin, double extendYmin, double extendXmax, double extendYmax, double mapWidth, double mapHeight, double mapDpi, bool returnGeometry, ICredentials? credentials = null, int sr = int.MinValue)
         {
-            Task.Run(async () => {
+            Catch.TaskRun(async () => {
                 //remove trailing slash from url
                 if (url.Length > 0 && url[url.Length - 1].Equals('/'))
                     url = url.Remove(url.Length - 1, 1);
