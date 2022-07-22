@@ -393,6 +393,28 @@ references:
   isSpec: "True"
   fullName: Mapsui.Extensions.Catch.Exceptions
   nameWithType: Catch.Exceptions
+- uid: Mapsui.Extensions.Catch.TaskRun(Action)
+  name: TaskRun(Action)
+  href: api/Mapsui.Extensions.Catch.html#Mapsui_Extensions_Catch_TaskRun_Action_
+  commentId: M:Mapsui.Extensions.Catch.TaskRun(Action)
+  fullName: Mapsui.Extensions.Catch.TaskRun(Action)
+  nameWithType: Catch.TaskRun(Action)
+- uid: Mapsui.Extensions.Catch.TaskRun(Func{Task})
+  name: TaskRun(Func<Task>)
+  href: api/Mapsui.Extensions.Catch.html#Mapsui_Extensions_Catch_TaskRun_Func_Task__
+  commentId: M:Mapsui.Extensions.Catch.TaskRun(Func{Task})
+  name.vb: TaskRun(Func(Of Task))
+  fullName: Mapsui.Extensions.Catch.TaskRun(Func<Task>)
+  fullName.vb: Mapsui.Extensions.Catch.TaskRun(Func(Of Task))
+  nameWithType: Catch.TaskRun(Func<Task>)
+  nameWithType.vb: Catch.TaskRun(Func(Of Task))
+- uid: Mapsui.Extensions.Catch.TaskRun*
+  name: TaskRun
+  href: api/Mapsui.Extensions.Catch.html#Mapsui_Extensions_Catch_TaskRun_
+  commentId: Overload:Mapsui.Extensions.Catch.TaskRun
+  isSpec: "True"
+  fullName: Mapsui.Extensions.Catch.TaskRun
+  nameWithType: Catch.TaskRun
 - uid: Mapsui.Extensions.ConcurrentQueueExtensions
   name: ConcurrentQueueExtensions
   href: api/Mapsui.Extensions.ConcurrentQueueExtensions.html
@@ -2565,6 +2587,83 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.FetchInfo.Resolution
   nameWithType: FetchInfo.Resolution
+- uid: Mapsui.Layers.GenericCollectionLayer`1
+  name: GenericCollectionLayer<T>
+  href: api/Mapsui.Layers.GenericCollectionLayer-1.html
+  commentId: T:Mapsui.Layers.GenericCollectionLayer`1
+  name.vb: GenericCollectionLayer(Of T)
+  fullName: Mapsui.Layers.GenericCollectionLayer<T>
+  fullName.vb: Mapsui.Layers.GenericCollectionLayer(Of T)
+  nameWithType: GenericCollectionLayer<T>
+  nameWithType.vb: GenericCollectionLayer(Of T)
+- uid: Mapsui.Layers.GenericCollectionLayer`1.#ctor
+  name: GenericCollectionLayer()
+  href: api/Mapsui.Layers.GenericCollectionLayer-1.html#Mapsui_Layers_GenericCollectionLayer_1__ctor
+  commentId: M:Mapsui.Layers.GenericCollectionLayer`1.#ctor
+  fullName: Mapsui.Layers.GenericCollectionLayer<T>.GenericCollectionLayer()
+  fullName.vb: Mapsui.Layers.GenericCollectionLayer(Of T).GenericCollectionLayer()
+  nameWithType: GenericCollectionLayer<T>.GenericCollectionLayer()
+  nameWithType.vb: GenericCollectionLayer(Of T).GenericCollectionLayer()
+- uid: Mapsui.Layers.GenericCollectionLayer`1.#ctor*
+  name: GenericCollectionLayer
+  href: api/Mapsui.Layers.GenericCollectionLayer-1.html#Mapsui_Layers_GenericCollectionLayer_1__ctor_
+  commentId: Overload:Mapsui.Layers.GenericCollectionLayer`1.#ctor
+  isSpec: "True"
+  fullName: Mapsui.Layers.GenericCollectionLayer<T>.GenericCollectionLayer
+  fullName.vb: Mapsui.Layers.GenericCollectionLayer(Of T).GenericCollectionLayer
+  nameWithType: GenericCollectionLayer<T>.GenericCollectionLayer
+  nameWithType.vb: GenericCollectionLayer(Of T).GenericCollectionLayer
+- uid: Mapsui.Layers.GenericCollectionLayer`1.Extent
+  name: Extent
+  href: api/Mapsui.Layers.GenericCollectionLayer-1.html#Mapsui_Layers_GenericCollectionLayer_1_Extent
+  commentId: P:Mapsui.Layers.GenericCollectionLayer`1.Extent
+  fullName: Mapsui.Layers.GenericCollectionLayer<T>.Extent
+  fullName.vb: Mapsui.Layers.GenericCollectionLayer(Of T).Extent
+  nameWithType: GenericCollectionLayer<T>.Extent
+  nameWithType.vb: GenericCollectionLayer(Of T).Extent
+- uid: Mapsui.Layers.GenericCollectionLayer`1.Extent*
+  name: Extent
+  href: api/Mapsui.Layers.GenericCollectionLayer-1.html#Mapsui_Layers_GenericCollectionLayer_1_Extent_
+  commentId: Overload:Mapsui.Layers.GenericCollectionLayer`1.Extent
+  isSpec: "True"
+  fullName: Mapsui.Layers.GenericCollectionLayer<T>.Extent
+  fullName.vb: Mapsui.Layers.GenericCollectionLayer(Of T).Extent
+  nameWithType: GenericCollectionLayer<T>.Extent
+  nameWithType.vb: GenericCollectionLayer(Of T).Extent
+- uid: Mapsui.Layers.GenericCollectionLayer`1.Features
+  name: Features
+  href: api/Mapsui.Layers.GenericCollectionLayer-1.html#Mapsui_Layers_GenericCollectionLayer_1_Features
+  commentId: P:Mapsui.Layers.GenericCollectionLayer`1.Features
+  fullName: Mapsui.Layers.GenericCollectionLayer<T>.Features
+  fullName.vb: Mapsui.Layers.GenericCollectionLayer(Of T).Features
+  nameWithType: GenericCollectionLayer<T>.Features
+  nameWithType.vb: GenericCollectionLayer(Of T).Features
+- uid: Mapsui.Layers.GenericCollectionLayer`1.Features*
+  name: Features
+  href: api/Mapsui.Layers.GenericCollectionLayer-1.html#Mapsui_Layers_GenericCollectionLayer_1_Features_
+  commentId: Overload:Mapsui.Layers.GenericCollectionLayer`1.Features
+  isSpec: "True"
+  fullName: Mapsui.Layers.GenericCollectionLayer<T>.Features
+  fullName.vb: Mapsui.Layers.GenericCollectionLayer(Of T).Features
+  nameWithType: GenericCollectionLayer<T>.Features
+  nameWithType.vb: GenericCollectionLayer(Of T).Features
+- uid: Mapsui.Layers.GenericCollectionLayer`1.GetFeatures(Mapsui.MRect,System.Double)
+  name: GetFeatures(MRect, Double)
+  href: api/Mapsui.Layers.GenericCollectionLayer-1.html#Mapsui_Layers_GenericCollectionLayer_1_GetFeatures_Mapsui_MRect_System_Double_
+  commentId: M:Mapsui.Layers.GenericCollectionLayer`1.GetFeatures(Mapsui.MRect,System.Double)
+  fullName: Mapsui.Layers.GenericCollectionLayer<T>.GetFeatures(Mapsui.MRect, System.Double)
+  fullName.vb: Mapsui.Layers.GenericCollectionLayer(Of T).GetFeatures(Mapsui.MRect, System.Double)
+  nameWithType: GenericCollectionLayer<T>.GetFeatures(MRect, Double)
+  nameWithType.vb: GenericCollectionLayer(Of T).GetFeatures(MRect, Double)
+- uid: Mapsui.Layers.GenericCollectionLayer`1.GetFeatures*
+  name: GetFeatures
+  href: api/Mapsui.Layers.GenericCollectionLayer-1.html#Mapsui_Layers_GenericCollectionLayer_1_GetFeatures_
+  commentId: Overload:Mapsui.Layers.GenericCollectionLayer`1.GetFeatures
+  isSpec: "True"
+  fullName: Mapsui.Layers.GenericCollectionLayer<T>.GetFeatures
+  fullName.vb: Mapsui.Layers.GenericCollectionLayer(Of T).GetFeatures
+  nameWithType: GenericCollectionLayer<T>.GetFeatures
+  nameWithType.vb: GenericCollectionLayer(Of T).GetFeatures
 - uid: Mapsui.Layers.IDynamic
   name: IDynamic
   href: api/Mapsui.Layers.IDynamic.html
@@ -5724,38 +5823,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Navigator.CenterOn
   nameWithType: Navigator.CenterOn
-- uid: Mapsui.Navigator.Dispose
-  name: Dispose()
-  href: api/Mapsui.Navigator.html#Mapsui_Navigator_Dispose
-  commentId: M:Mapsui.Navigator.Dispose
-  fullName: Mapsui.Navigator.Dispose()
-  nameWithType: Navigator.Dispose()
-- uid: Mapsui.Navigator.Dispose(System.Boolean)
-  name: Dispose(Boolean)
-  href: api/Mapsui.Navigator.html#Mapsui_Navigator_Dispose_System_Boolean_
-  commentId: M:Mapsui.Navigator.Dispose(System.Boolean)
-  fullName: Mapsui.Navigator.Dispose(System.Boolean)
-  nameWithType: Navigator.Dispose(Boolean)
-- uid: Mapsui.Navigator.Dispose*
-  name: Dispose
-  href: api/Mapsui.Navigator.html#Mapsui_Navigator_Dispose_
-  commentId: Overload:Mapsui.Navigator.Dispose
-  isSpec: "True"
-  fullName: Mapsui.Navigator.Dispose
-  nameWithType: Navigator.Dispose
-- uid: Mapsui.Navigator.Finalize
-  name: Finalize()
-  href: api/Mapsui.Navigator.html#Mapsui_Navigator_Finalize
-  commentId: M:Mapsui.Navigator.Finalize
-  fullName: Mapsui.Navigator.Finalize()
-  nameWithType: Navigator.Finalize()
-- uid: Mapsui.Navigator.Finalize*
-  name: Finalize
-  href: api/Mapsui.Navigator.html#Mapsui_Navigator_Finalize_
-  commentId: Overload:Mapsui.Navigator.Finalize
-  isSpec: "True"
-  fullName: Mapsui.Navigator.Finalize
-  nameWithType: Navigator.Finalize
 - uid: Mapsui.Navigator.FlingWith(System.Double,System.Double,System.Int64)
   name: FlingWith(Double, Double, Int64)
   href: api/Mapsui.Navigator.html#Mapsui_Navigator_FlingWith_System_Double_System_Double_System_Int64_
@@ -11100,6 +11167,37 @@ references:
   isSpec: "True"
   fullName: Mapsui.Styles.RasterStyle.UpdateCache
   nameWithType: RasterStyle.UpdateCache
+- uid: Mapsui.Styles.RelativeOffset
+  name: RelativeOffset
+  href: api/Mapsui.Styles.RelativeOffset.html
+  commentId: T:Mapsui.Styles.RelativeOffset
+  fullName: Mapsui.Styles.RelativeOffset
+  nameWithType: RelativeOffset
+- uid: Mapsui.Styles.RelativeOffset.#ctor
+  name: RelativeOffset()
+  href: api/Mapsui.Styles.RelativeOffset.html#Mapsui_Styles_RelativeOffset__ctor
+  commentId: M:Mapsui.Styles.RelativeOffset.#ctor
+  fullName: Mapsui.Styles.RelativeOffset.RelativeOffset()
+  nameWithType: RelativeOffset.RelativeOffset()
+- uid: Mapsui.Styles.RelativeOffset.#ctor(Mapsui.Styles.Offset)
+  name: RelativeOffset(Offset)
+  href: api/Mapsui.Styles.RelativeOffset.html#Mapsui_Styles_RelativeOffset__ctor_Mapsui_Styles_Offset_
+  commentId: M:Mapsui.Styles.RelativeOffset.#ctor(Mapsui.Styles.Offset)
+  fullName: Mapsui.Styles.RelativeOffset.RelativeOffset(Mapsui.Styles.Offset)
+  nameWithType: RelativeOffset.RelativeOffset(Offset)
+- uid: Mapsui.Styles.RelativeOffset.#ctor(System.Double,System.Double)
+  name: RelativeOffset(Double, Double)
+  href: api/Mapsui.Styles.RelativeOffset.html#Mapsui_Styles_RelativeOffset__ctor_System_Double_System_Double_
+  commentId: M:Mapsui.Styles.RelativeOffset.#ctor(System.Double,System.Double)
+  fullName: Mapsui.Styles.RelativeOffset.RelativeOffset(System.Double, System.Double)
+  nameWithType: RelativeOffset.RelativeOffset(Double, Double)
+- uid: Mapsui.Styles.RelativeOffset.#ctor*
+  name: RelativeOffset
+  href: api/Mapsui.Styles.RelativeOffset.html#Mapsui_Styles_RelativeOffset__ctor_
+  commentId: Overload:Mapsui.Styles.RelativeOffset.#ctor
+  isSpec: "True"
+  fullName: Mapsui.Styles.RelativeOffset.RelativeOffset
+  nameWithType: RelativeOffset.RelativeOffset
 - uid: Mapsui.Styles.Size
   name: Size
   href: api/Mapsui.Styles.Size.html
@@ -11697,6 +11795,25 @@ references:
   isSpec: "True"
   fullName: Mapsui.Styles.SymbolStyle.UnitType
   nameWithType: SymbolStyle.UnitType
+- uid: Mapsui.Styles.SymbolStyles
+  name: SymbolStyles
+  href: api/Mapsui.Styles.SymbolStyles.html
+  commentId: T:Mapsui.Styles.SymbolStyles
+  fullName: Mapsui.Styles.SymbolStyles
+  nameWithType: SymbolStyles
+- uid: Mapsui.Styles.SymbolStyles.CreatePinStyle(Mapsui.Styles.Color,System.Double)
+  name: CreatePinStyle(Color, Double)
+  href: api/Mapsui.Styles.SymbolStyles.html#Mapsui_Styles_SymbolStyles_CreatePinStyle_Mapsui_Styles_Color_System_Double_
+  commentId: M:Mapsui.Styles.SymbolStyles.CreatePinStyle(Mapsui.Styles.Color,System.Double)
+  fullName: Mapsui.Styles.SymbolStyles.CreatePinStyle(Mapsui.Styles.Color, System.Double)
+  nameWithType: SymbolStyles.CreatePinStyle(Color, Double)
+- uid: Mapsui.Styles.SymbolStyles.CreatePinStyle*
+  name: CreatePinStyle
+  href: api/Mapsui.Styles.SymbolStyles.html#Mapsui_Styles_SymbolStyles_CreatePinStyle_
+  commentId: Overload:Mapsui.Styles.SymbolStyles.CreatePinStyle
+  isSpec: "True"
+  fullName: Mapsui.Styles.SymbolStyles.CreatePinStyle
+  nameWithType: SymbolStyles.CreatePinStyle
 - uid: Mapsui.Styles.SymbolType
   name: SymbolType
   href: api/Mapsui.Styles.SymbolType.html
