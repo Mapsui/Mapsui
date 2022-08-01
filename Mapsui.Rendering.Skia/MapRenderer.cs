@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Mapsui.Layers;
@@ -24,12 +26,12 @@ namespace Mapsui.Rendering.Skia
 
         public ISymbolCache SymbolCache => _symbolCache;
 
-        public IDictionary<Type, IWidgetRenderer> WidgetRenders { get; } = new Dictionary<Type, IWidgetRenderer>();
+        public IDictionary<Type, IWidgetRenderer> WidgetRenders { get; } = new ConcurrentDictionary<Type, IWidgetRenderer>();
 
         /// <summary>
         /// Dictionary holding all special renderers for styles
         /// </summary>
-        public IDictionary<Type, IStyleRenderer> StyleRenderers { get; } = new Dictionary<Type, IStyleRenderer>();
+        public IDictionary<Type, IStyleRenderer> StyleRenderers { get; } = new ConcurrentDictionary<Type, IStyleRenderer>();
 
         static MapRenderer()
         {
