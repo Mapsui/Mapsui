@@ -17,7 +17,7 @@ namespace Mapsui.Rendering.Skia
     public class LabelStyleRenderer : ISkiaStyleRenderer
     {
         private static readonly IDictionary<string, BitmapInfo> LabelCache =
-            new Dictionary<string, BitmapInfo>();
+            new ConcurrentDictionary<string, BitmapInfo>();
 
         private static readonly SKPaint Paint = new()
         {
