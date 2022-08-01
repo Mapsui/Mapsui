@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using BruTile;
@@ -12,6 +13,7 @@ using Mapsui.Projections;
 using Mapsui.Providers;
 using Mapsui.Rendering;
 using Mapsui.Tiling.Extensions;
+using NeoSmart.AsyncLock;
 
 namespace Mapsui.Tiling.Provider;
 
@@ -26,6 +28,7 @@ public class RasterizingTileProvider : ITileSource
     private ITileSchema? _tileSchema;
     private Attribution? _attribution;
     private readonly IProvider? _dataSource;
+    private readonly AsyncLock _renderLock = new();
 
     public RasterizingTileProvider(
         ILayer layer,
@@ -62,12 +65,17 @@ public class RasterizingTileProvider : ITileSource
         var result = PersistentCache.Find(index);
         if (result == null)
         {
-            var renderer = GetRenderer();
             var (viewPort, renderLayer) = await CreateRenderLayerAsync(tileInfo);
+            MemoryStream stream;
+            using (await _renderLock.LockAsync())
+            {
+                var renderer = GetRenderer();
+                stream = renderer.RenderToBitmapStream(viewPort, new[] { renderLayer }, pixelDensity: _pixelDensity);
+                _rasterizingLayers.Push(renderer);
+            }
 
-            using var stream = renderer.RenderToBitmapStream(viewPort, new[] { renderLayer }, pixelDensity: _pixelDensity);
-            _rasterizingLayers.Push(renderer);
             result = stream?.ToArray();
+            stream?.Dispose();
             PersistentCache?.Add(index, result ?? Array.Empty<byte>());
             renderLayer.Dispose();
         }
@@ -80,8 +88,8 @@ public class RasterizingTileProvider : ITileSource
         Schema.Resolutions.TryGetValue(tileInfo.Index.Level, out var tileResolution);
 
         var resolution = tileResolution.UnitsPerPixel;
-        var viewPort = RasterizingLayer.CreateViewport(tileInfo.Extent.ToMRect(), resolution, _renderResolutionMultiplier, 1);
-        var fetchInfo = new FetchInfo(viewPort.Extent, resolution);
+        var viewPort = RasterizingLayer.CreateViewport(tileInfo.Extent.ToMRect(), resolution, _renderResolutionMultiplier, 1); 
+        var fetchInfo = new FetchInfo(viewPort.Extent.Grow(viewPort.Width * 0.25), resolution); // increase 25 % to catch symbols at the bounds
         var features = await GetFeaturesAsync(fetchInfo);
         var renderLayer = new RenderLayer(_layer, features);
         return (viewPort, renderLayer);
