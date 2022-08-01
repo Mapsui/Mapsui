@@ -7,6 +7,7 @@ using Mapsui.Styles;
 using NetTopologySuite.Geometries;
 using SkiaSharp;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,7 +27,7 @@ namespace Mapsui.Rendering.Skia
             IsEmbeddedBitmapText = true
         };
 
-        private static readonly Dictionary<string, SKTypeface> CacheTypeface = new();
+        private static readonly ConcurrentDictionary<string, SKTypeface> CacheTypeface = new();
 
         public static void DrawAsBitmap(SKCanvas canvas, LabelStyle style, IFeature feature, float x, float y, float layerOpacity)
         {
