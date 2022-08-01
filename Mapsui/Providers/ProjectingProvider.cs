@@ -31,7 +31,8 @@ namespace Mapsui.Providers
                 return Enumerable.Empty<IFeature>();
 
             var features = await _provider.GetFeaturesAsync(fetchInfo);
-            return features.Project(_provider.CRS, CRS, _projection);
+            var result = features.Project(_provider.CRS, CRS, _projection);
+            return result;
         }
 
         private bool GetFetchInfo(ref FetchInfo fetchInfo)

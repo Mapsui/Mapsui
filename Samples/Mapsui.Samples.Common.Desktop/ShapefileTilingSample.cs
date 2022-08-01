@@ -2,6 +2,7 @@
 using System.Reflection;
 using Mapsui.Extensions;
 using Mapsui.Extensions.Cache;
+using Mapsui.Extensions.Projections;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Nts.Providers.Shapefile;
@@ -27,6 +28,7 @@ namespace Mapsui.Samples.Common.Desktop
 
         public static Map CreateMap()
         {
+            DotSpatialProjection.Init();
             var map = new Map();
 
             var countrySource = new ShapeFile(GetAppDir() + "\\GeoData\\World\\countries.shp", true);
@@ -44,7 +46,7 @@ namespace Mapsui.Samples.Common.Desktop
 
             map.Layers.Add(new RasterizingTileLayer(CreateCountryLayer(projectedCountrySource), persistentCache: new SqlitePersistentCache("countries")));
             map.Layers.Add(new RasterizingTileLayer(CreateCityLayer(projectedCitySource)));
-            map.Layers.Add(new RasterizingTileLayer(CreateCountryLabelLayer(countrySource)));
+            map.Layers.Add(new RasterizingTileLayer(CreateCountryLabelLayer(projectedCountrySource)));
             map.Layers.Add(new RasterizingTileLayer(CreateCityLabelLayer(projectedCitySource)));
 
             return map;
