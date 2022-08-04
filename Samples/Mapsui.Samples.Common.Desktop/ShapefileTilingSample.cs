@@ -28,7 +28,6 @@ namespace Mapsui.Samples.Common.Desktop
 
         public static Map CreateMap()
         {
-            DotSpatialProjection.Init();
             var map = new Map();
 
             var countrySource = new ShapeFile(GetAppDir() + "\\GeoData\\World\\countries.shp", true);
