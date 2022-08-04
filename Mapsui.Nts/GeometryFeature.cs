@@ -47,7 +47,6 @@ namespace Mapsui.Nts
         {
             if (Geometry is null) return;
             var vertices = Geometry.Coordinates;
-            bool changed = false;
             foreach (var vertex in vertices)
                 visit(vertex.X, vertex.Y, (x, y) => {
                     vertex.X = x;
