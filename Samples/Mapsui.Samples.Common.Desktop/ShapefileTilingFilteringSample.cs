@@ -48,7 +48,10 @@ namespace Mapsui.Samples.Common.Desktop
             {
                 if (f is GeometryFeature geometryFeature)
                 {
-                    return true;
+                    if (Equals(geometryFeature["NAME"], "London"))
+                    {
+                        return true;
+                    }
                 }
 
                 return false;
