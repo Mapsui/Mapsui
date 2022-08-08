@@ -29,6 +29,7 @@ namespace Mapsui.Tiling.Layers
         /// <param name="maxExtraTiles">Number of maximum extra tiles for memory cache</param>
         /// <param name="persistentCache">Persistent Cache</param>
         /// <param name="projection">Projection</param>
+        /// <param name="featureSearchGrow">feature Search Grow. Sometimes Features like points are rendered on two tiles but are only fetched on one tile this parameter searches for more features so that a point feature is rendered on bot tiles where it is situated</param>
         public RasterizingTileLayer(
             ILayer layer,
             double renderResolutionMultiplier = 1,
@@ -41,8 +42,9 @@ namespace Mapsui.Tiling.Layers
             int minExtraTiles = -1,
             int maxExtraTiles = -1,
             IPersistentCache<byte[]>? persistentCache = null,
-            IProjection? projection = null) : base(
-            new RasterizingTileProvider(layer, renderResolutionMultiplier, rasterizer, pixelDensity, persistentCache, projection),
+            IProjection? projection = null,
+            double featureSearchGrow = 0.25) : base(
+            new RasterizingTileProvider(layer, renderResolutionMultiplier, rasterizer, pixelDensity, persistentCache, projection, featureSearchGrow),
             minTiles,
             maxTiles,
             dataFetchStrategy,

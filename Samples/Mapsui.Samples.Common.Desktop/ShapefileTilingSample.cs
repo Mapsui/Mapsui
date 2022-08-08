@@ -43,7 +43,8 @@ namespace Mapsui.Samples.Common.Desktop
                 CRS = "EPSG:3857",
             };
 
-            map.Layers.Add(new RasterizingTileLayer(CreateCountryLayer(projectedCountrySource), persistentCache: new SqlitePersistentCache("countries")));
+            // set the feature search grow to 0 because country shapes are always fetched on all tiles where they are rendered. so setting the feature search grow to 0 makes the rendering faster.
+            map.Layers.Add(new RasterizingTileLayer(CreateCountryLayer(projectedCountrySource), persistentCache: new SqlitePersistentCache("countries"), featureSearchGrow: 0));
             map.Layers.Add(new RasterizingTileLayer(CreateCityLayer(projectedCitySource)));
             map.Layers.Add(new RasterizingTileLayer(CreateCountryLabelLayer(projectedCountrySource)));
             map.Layers.Add(new RasterizingTileLayer(CreateCityLabelLayer(projectedCitySource)));

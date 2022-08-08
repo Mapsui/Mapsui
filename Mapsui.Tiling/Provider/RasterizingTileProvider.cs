@@ -29,6 +29,7 @@ public class RasterizingTileProvider : ITileSource
     private Attribution? _attribution;
     private readonly IProvider? _dataSource;
     private readonly AsyncLock _renderLock = new();
+    private readonly double _featureSearchGrow;
 
     public RasterizingTileProvider(
         ILayer layer,
@@ -36,8 +37,10 @@ public class RasterizingTileProvider : ITileSource
         IRenderer? rasterizer = null,
         float pixelDensity = 1,
         IPersistentCache<byte[]>? persistentCache = null,
-        IProjection? projection = null)
+        IProjection? projection = null,
+        double featureSearchGrow = 0.25)
     {
+        _featureSearchGrow = featureSearchGrow;
         _layer = layer;
         _renderResolutionMultiplier = renderResolutionMultiplier;
         _rasterizer = rasterizer;
@@ -55,6 +58,7 @@ public class RasterizingTileProvider : ITileSource
                     CRS = Schema.Srs // The Schema SRS
                 };
         }
+        _featureSearchGrow = featureSearchGrow;
     }
 
     public IPersistentCache<byte[]> PersistentCache { get; set; }
@@ -97,7 +101,7 @@ public class RasterizingTileProvider : ITileSource
 
         var resolution = tileResolution.UnitsPerPixel;
         var viewPort = RasterizingLayer.CreateViewport(tileInfo.Extent.ToMRect(), resolution, _renderResolutionMultiplier, 1);
-        var extentGrown = viewPort.Extent.Grow(viewPort.Extent.Width * 0.25); // increase 25 % to catch symbols at the bounds
+        var extentGrown = viewPort.Extent.Grow(viewPort.Extent.Width * _featureSearchGrow); // increase 25 % to catch symbols at the bounds
         var fetchInfo = new FetchInfo(extentGrown, resolution); 
         var features = await GetFeaturesAsync(fetchInfo);
         var renderLayer = new RenderLayer(_layer, features);
