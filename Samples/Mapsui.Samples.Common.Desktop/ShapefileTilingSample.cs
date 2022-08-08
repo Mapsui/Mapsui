@@ -47,7 +47,6 @@ namespace Mapsui.Samples.Common.Desktop
             map.Layers.Add(new RasterizingTileLayer(CreateCountryLayer(projectedCountrySource), persistentCache: new SqlitePersistentCache("countries"), featureSearchGrow: 0));
             map.Layers.Add(new RasterizingTileLayer(CreateCityLayer(projectedCitySource)));
             map.Layers.Add(new RasterizingTileLayer(CreateCountryLabelLayer(projectedCountrySource)));
-            map.Layers.Add(new RasterizingTileLayer(CreateCityLabelLayer(projectedCitySource)));
 
             return map;
         }
@@ -74,16 +73,6 @@ namespace Mapsui.Samples.Common.Desktop
             };
         }
 
-        private static ILayer CreateCityLabelLayer(IProvider citiesProvider)
-        {
-            return new Layer("City labels")
-            {
-                DataSource = citiesProvider,
-                Enabled = true,
-                Style = CreateCityLabelStyle()
-            };
-        }
-
         private static IThemeStyle CreateCityTheme()
         {
             // Scaling city icons based on city population.
@@ -107,22 +96,6 @@ namespace Mapsui.Samples.Common.Desktop
 
             // Create theme using a density from 0 (min) to 400 (max)
             return new GradientTheme("PopDens", 0, 400, min, max) { FillColorBlend = ColorBlend.Rainbow5 };
-        }
-
-        private static LabelStyle CreateCityLabelStyle()
-        {
-            return new LabelStyle
-            {
-                ForeColor = Color.Black,
-                BackColor = new Brush { Color = Color.Orange },
-                Font = new Font { FontFamily = "GenericSerif", Size = 11 },
-                HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
-                VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Center,
-                Offset = new Offset { X = 0, Y = 0 },
-                Halo = new Pen { Color = Color.Yellow, Width = 2 },
-                CollisionDetection = true,
-                LabelColumn = "NAME"
-            };
         }
 
         private static GradientTheme CreateCountryLabelTheme()

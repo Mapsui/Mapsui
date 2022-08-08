@@ -69,7 +69,6 @@ public class RasterizingTileProvider : ITileSource
         var result = PersistentCache.Find(index);
         if (result == null)
         {
-            var (viewPort, renderLayer) = await CreateRenderLayerAsync(tileInfo);
             MemoryStream? stream = null;
 
             try 
@@ -77,7 +76,16 @@ public class RasterizingTileProvider : ITileSource
                 using (await _renderLock.LockAsync())
                 {
                     var renderer = GetRenderer();
-                    stream = renderer.RenderToBitmapStream(viewPort, new[] { renderLayer }, pixelDensity: _pixelDensity);
+                    (Viewport viewPort, ILayer renderLayer) = await CreateRenderLayerAsync(tileInfo);
+                    try
+                    {
+                        stream = renderer.RenderToBitmapStream(viewPort, new[] { renderLayer }, pixelDensity: _pixelDensity);
+                    }
+                    finally
+                    {
+                        renderLayer.Dispose();
+                    }
+                    
                     _rasterizingLayers.Push(renderer);
                 }
 
@@ -89,7 +97,6 @@ public class RasterizingTileProvider : ITileSource
             }
 
             PersistentCache?.Add(index, result ?? Array.Empty<byte>());
-            renderLayer.Dispose();
         }
 
         return result;

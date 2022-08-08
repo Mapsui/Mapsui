@@ -53,6 +53,8 @@ namespace Mapsui.Nts
                     vertex.Y = y;
                 });
 
+            // Recalculate Geometry Values (for example in Polygons).
+            Geometry.GeometryChanged();
             // Recalculate the Envelope
             Geometry.GeometryChangedAction();
         }
