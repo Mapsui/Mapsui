@@ -19,7 +19,7 @@ namespace Mapsui.Samples.Common.Desktop
 {
     public class ShapefileTilingFilteringSample : IMapControlSample
     {
-        public string Name => "7 Shapefile Rasterizing Tiling Filtering";
+        public string Name => "7 Shapefile Filtering";
         public string Category => "Desktop";
 
         public void Setup(IMapControl mapControl)
@@ -48,19 +48,22 @@ namespace Mapsui.Samples.Common.Desktop
             {
                 if (f is GeometryFeature geometryFeature)
                 {
-                    if (Equals(geometryFeature["NAME"], "London"))
+                    if (geometryFeature["POPULATION"] is long population)
                     {
-                        return true;
+                        //Cities with more than 5'000'000 inhabitants
+                        if (population > 5000000)
+                        {
+                            return true;
+                        }
                     }
                 }
 
                 return false;
             });
 
-            ////map.Layers.Add(new RasterizingTileLayer(CreateCountryLayer(projectedCountrySource), persistentCache: new SqlitePersistentCache("countries")));
+            map.Layers.Add(new RasterizingTileLayer(CreateCountryLayer(projectedCountrySource)));
             map.Layers.Add(new RasterizingTileLayer(CreateCityLayer(filteredCitySource)));
-            ////map.Layers.Add(new RasterizingTileLayer(CreateCountryLabelLayer(projectedCountrySource)));
-            ////map.Layers.Add(new RasterizingTileLayer(CreateCityLabelLayer(projectedCitySource)));
+            map.Layers.Add(new RasterizingTileLayer(CreateCityLabelLayer(filteredCitySource)));
 
             return map;
         }
