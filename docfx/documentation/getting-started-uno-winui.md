@@ -59,10 +59,10 @@ Run it and you should see a map of the world.
 
 ### Troubleshooting
 
-## Unable to resolve the .NET SDK version as specified in the global.json.
+#### Unable to resolve the .NET SDK version as specified in the global.json.
 global.json (change the version to "6.0.400" or what is installed on the Computer)
 
-## Duplicate Attribute errors:
+#### Duplicate Attribute errors:
 Add following line to the ...Wpf.csproj.
 ```xml
     <!-- Work around https://github.com/dotnet/wpf/issues/6792 -->
