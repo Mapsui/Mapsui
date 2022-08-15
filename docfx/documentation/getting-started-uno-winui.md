@@ -23,14 +23,14 @@ repeat this for all the targets you are using (Change the default Project in the
 Open MainPage.xaml and add namespace:
 
 ```xml
-xmlns:uno="clr-namespace:Mapsui.UI.WinUI;assembly=Mapsui.UI.Uno.WinUI"
+xmlns:mapsui="clr-namespace:Mapsui.UI.WinUI;assembly=Mapsui.UI.Uno.WinUI"
 ```
 
 Add MapControl to the Grid:
 
 ```xml
 <Grid>
-  <uno:MapControl x:Name="MyMap" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
+  <mapsui:MapControl x:Name="MyMap" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
 </Grid>
 ```
 
@@ -73,3 +73,8 @@ Add following line to the ...Wpf.csproj.
     </ItemGroup>
   </Target>
  ```
+ #### System.MissingMethodException: Method not found:
+ See for solution here
+ https://github.com/unoplatform/uno/issues/9297
+ 
+ Upgrading to the latest Uno.UI Dev Version should help too.
