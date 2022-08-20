@@ -7,6 +7,7 @@ using CoreGraphics;
 using Foundation;
 using Mapsui.UI.iOS.Extensions;
 using Mapsui.Utilities;
+using PencilKit;
 using SkiaSharp.Views.iOS;
 using UIKit;
 
@@ -17,7 +18,9 @@ namespace Mapsui.UI.iOS
     [Register("MapControl"), DesignTimeVisible(true)]
     public partial class MapControl : UIView, IMapControl
     {
-        private readonly SKGLView _canvas = new SKGLView();
+        public static bool UseGPU = true;
+        private SKGLView? _glView;
+        private SKCanvasView? _canvas;
         private double _innerRotation;
 
         public MapControl(CGRect frame)
@@ -36,29 +39,47 @@ namespace Mapsui.UI.iOS
 
         private void Initialize()
         {
-            _invalidate = () => {
-                RunOnUIThread(() => {
+            UIView _canvasView;
+            if (UseGPU)
+            {
+                _glView = new SKGLView();
+                _canvasView = _glView;
+
+                _glView.PaintSurface += OnPaintSurface;
+            }
+            else
+            {
+                _canvas = new SKCanvasView();
+                _canvasView = _canvas;
+
+                _canvas.PaintSurface += OnPaintSurface;
+            }
+
+            _invalidate = () =>
+            {
+                RunOnUIThread(() =>
+                {
                     SetNeedsDisplay();
-                    _canvas?.SetNeedsDisplay();
+                    _canvasView?.SetNeedsDisplay();
                 });
             };
 
             BackgroundColor = UIColor.White;
 
-            _canvas.TranslatesAutoresizingMaskIntoConstraints = false;
-            _canvas.MultipleTouchEnabled = true;
-            _canvas.PaintSurface += OnPaintSurface;
-            AddSubview(_canvas);
+            _canvasView.TranslatesAutoresizingMaskIntoConstraints = false;
+            _canvasView.MultipleTouchEnabled = true;
+
+            AddSubview(_canvasView);
 
             AddConstraints(new[]
             {
-                NSLayoutConstraint.Create(this, NSLayoutAttribute.Leading, NSLayoutRelation.Equal, _canvas,
+                NSLayoutConstraint.Create(this, NSLayoutAttribute.Leading, NSLayoutRelation.Equal, _canvasView,
                     NSLayoutAttribute.Leading, 1.0f, 0.0f),
-                NSLayoutConstraint.Create(this, NSLayoutAttribute.Trailing, NSLayoutRelation.Equal, _canvas,
+                NSLayoutConstraint.Create(this, NSLayoutAttribute.Trailing, NSLayoutRelation.Equal, _canvasView,
                     NSLayoutAttribute.Trailing, 1.0f, 0.0f),
-                NSLayoutConstraint.Create(this, NSLayoutAttribute.Top, NSLayoutRelation.Equal, _canvas,
+                NSLayoutConstraint.Create(this, NSLayoutAttribute.Top, NSLayoutRelation.Equal, _canvasView,
                     NSLayoutAttribute.Top, 1.0f, 0.0f),
-                NSLayoutConstraint.Create(this, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, _canvas,
+                NSLayoutConstraint.Create(this, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, _canvasView,
                     NSLayoutAttribute.Bottom, 1.0f, 0.0f)
             });
 
@@ -95,6 +116,17 @@ namespace Mapsui.UI.iOS
         {
             var position = GetScreenPosition(gesture.LocationInView(this));
             OnInfo(InvokeInfo(position, position, 1));
+        }
+        private void OnPaintSurface(object? sender, SKPaintSurfaceEventArgs args)
+        {
+            if (PixelDensity <= 0)
+                return;
+
+            var canvas = args.Surface.Canvas;
+
+            canvas.Scale(PixelDensity, PixelDensity);
+
+            CommonDrawControl(canvas);
         }
 
         private void OnPaintSurface(object? sender, SKPaintGLSurfaceEventArgs args)
@@ -235,7 +267,19 @@ namespace Mapsui.UI.iOS
             {
                 _map?.Dispose();
                 Unsubscribe();
-                _canvas?.Dispose();
+                if (_canvas != null)
+                {
+                    _canvas.Dispose();
+                    _canvas.PaintSurface -= OnPaintSurface;
+                    _canvas = null;
+                }
+
+                if (_glView != null)
+                {
+                    _glView.Dispose();
+                    _glView.PaintSurface -= OnPaintSurface;
+                    _glView = null;
+                }
             }
 
             CommonDispose(disposing);
