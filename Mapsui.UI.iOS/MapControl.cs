@@ -21,6 +21,7 @@ namespace Mapsui.UI.iOS
         public static bool UseGPU = true;
         private SKGLView? _glView;
         private SKCanvasView? _canvas;
+        private UIView? _canvasView;
         private double _innerRotation;
 
         public MapControl(CGRect frame)
@@ -39,7 +40,6 @@ namespace Mapsui.UI.iOS
 
         private void Initialize()
         {
-            UIView _canvasView;
             if (UseGPU)
             {
                 _glView = new SKGLView();
@@ -272,6 +272,7 @@ namespace Mapsui.UI.iOS
                     _canvas.Dispose();
                     _canvas.PaintSurface -= OnPaintSurface;
                     _canvas = null;
+                    _canvasView = null;
                 }
 
                 if (_glView != null)
@@ -279,6 +280,7 @@ namespace Mapsui.UI.iOS
                     _glView.Dispose();
                     _glView.PaintSurface -= OnPaintSurface;
                     _glView = null;
+                    _canvasView = null;
                 }
             }
 
