@@ -2,10 +2,10 @@
 using System.Reflection;
 using Mapsui.Extensions;
 using Mapsui.Extensions.Cache;
-using Mapsui.Extensions.Projections;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Nts.Providers.Shapefile;
+using Mapsui.Projections;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.UI;
@@ -47,6 +47,9 @@ namespace Mapsui.Samples.Common.Desktop
             map.Layers.Add(new RasterizingTileLayer(CreateCountryLayer(projectedCountrySource), persistentCache: new SqlitePersistentCache("countries"), featureSearchGrow: 0));
             map.Layers.Add(new RasterizingTileLayer(CreateCityLayer(projectedCitySource)));
             map.Layers.Add(new RasterizingTileLayer(CreateCountryLabelLayer(projectedCountrySource)));
+            map.Layers.Add(new RasterizingTileLayer(CreateCityLabelLayer(projectedCitySource)));
+            var home =  Mercator.FromLonLat(15, 54);
+            map.Home = n => n.NavigateTo(home, map.Resolutions[5]);
 
             return map;
         }
@@ -129,6 +132,32 @@ namespace Mapsui.Samples.Common.Desktop
                 Name = "Countries",
                 DataSource = countrySource,
                 Style = CreateCountryTheme()
+            };
+        }
+
+        private static LabelStyle CreateCityLabelStyle()
+        {
+            return new LabelStyle
+            {
+                ForeColor = Color.Black,
+                BackColor = new Brush { Color = Color.Orange },
+                Font = new Font { FontFamily = "GenericSerif", Size = 11 },
+                HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
+                VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Center,
+                Offset = new Offset { X = 0, Y = 0 },
+                Halo = new Pen { Color = Color.Yellow, Width = 2 },
+                CollisionDetection = true,
+                LabelColumn = "NAME"
+            };
+        }
+
+        private static ILayer CreateCityLabelLayer(IProvider citiesProvider)
+        {
+            return new Layer("City labels")
+            {
+                DataSource = citiesProvider,
+                Enabled = true,
+                Style = CreateCityLabelStyle()
             };
         }
 
