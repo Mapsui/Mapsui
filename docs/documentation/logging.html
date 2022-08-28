@@ -81,6 +81,26 @@
 
 <p>Sooner or later there comes a time where you are struggling with a bug. You can save yourself some time by writing the Mapsui log events to your own log from the start of your project. In Mapsui errors and warnings are logged to a static class which has an event handler you can listen to. </p>
 <pre><code class="lang-csharp">Mapsui.Logging.Logger.LogDelegate += (level, message, ex) =&gt; // todo: Write to your own logger;
+</code></pre><p>This is an example of how to forward it to <code>Microsoft.Extensions.Logging.ILogger</code></p>
+<pre><code class="lang-csharp">    public static void AttachMapsuiLogging(this IServiceProvider serviceProvider)
+    {
+        var logger = serviceProvider.GetRequiredService&lt;ILogger&lt;MyLoggerCategory&gt;&gt;();
+
+        var mapsuiPrefix = &quot;[Mapsui]&quot;;
+
+        Mapsui.Logging.Logger.LogDelegate += (level, message, ex) =&gt; {
+            if (level == Mapsui.Logging.LogLevel.Error)
+                logger.LogError(ex, $&quot;{mapsuiPrefix} {message}&quot;);
+            else if (level == Mapsui.Logging.LogLevel.Warning)
+                logger.LogWarning(ex, $&quot;{mapsuiPrefix} {message}&quot;);
+            else if (level == Mapsui.Logging.LogLevel.Information)
+                logger.LogInformation(ex, $&quot;{mapsuiPrefix} {message}&quot;);
+            else if (level == Mapsui.Logging.LogLevel.Debug)
+                logger.LogDebug(ex, $&quot;{mapsuiPrefix} {message}&quot;);
+            else if (level == Mapsui.Logging.LogLevel.Trace)
+                logger.LogTrace(ex, $&quot;{mapsuiPrefix} {message}&quot;);
+        };
+    }
 </code></pre></article>
           </div>
           

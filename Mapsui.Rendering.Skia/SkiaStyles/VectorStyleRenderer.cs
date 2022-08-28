@@ -44,8 +44,10 @@ namespace Mapsui.Rendering.Skia
                             case LineString lineString:
                                 LineStringRenderer.Draw(canvas, viewport, vectorStyle, lineString, opacity);
                                 break;
+                            case null:
+                                throw new ArgumentException($"Geometry is null, Layer: {layer.Name}");
                             default:
-                                throw new ArgumentException("Unknown geometry of Feature");
+                                throw new ArgumentException($"Unknown geometry type: {geometryFeature.Geometry?.GetType()}, Layer: {layer.Name}");
                         }
                         break;
                 }

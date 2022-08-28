@@ -90,7 +90,7 @@ namespace Mapsui.UI.Wpf
             _performance?.Add(_stopwatch.Elapsed.TotalMilliseconds);
 
             // Log drawing time
-            Logger.Log(LogLevel.Information, $"Time for drawing control [ms]: {_stopwatch.Elapsed.TotalMilliseconds}");
+            Logger.Log(LogLevel.Debug, $"Time for drawing control [ms]: {_stopwatch.Elapsed.TotalMilliseconds}");
 
             // End drawing
             _drawing = false;
@@ -374,15 +374,15 @@ namespace Mapsui.UI.Wpf
                     }
                     else if (e.Cancelled)
                     {
-                        Logger.Log(LogLevel.Warning, "Fetching data was cancelled", e.Error);
+                        Logger.Log(LogLevel.Warning, "Fetching data was cancelled.");
                     }
                     else if (e.Error is WebException)
                     {
-                        Logger.Log(LogLevel.Warning, "A WebException occurred. Do you have internet?", e.Error);
+                        Logger.Log(LogLevel.Warning, $"A WebException occurred. Do you have internet? Exception: {e.Error?.Message}", e.Error);
                     }
                     else if (e.Error != null)
                     {
-                        Logger.Log(LogLevel.Warning, "An error occurred while fetching data", e.Error);
+                        Logger.Log(LogLevel.Warning, $"An error occurred while fetching data. Exception: {e.Error?.Message}", e.Error);
                     }
                     else // no problems
                     {
