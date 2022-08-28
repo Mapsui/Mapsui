@@ -251,6 +251,7 @@ namespace Mapsui
             var newX = _centerX + previous.X - current.X;
             var newY = _centerY + previous.Y - current.Y;
 
+            // TODO: deltaResolution is double and it is compared to an int maybe this is never true.
             if (deltaResolution != 1)
             {
                 Resolution = Resolution / deltaResolution;
