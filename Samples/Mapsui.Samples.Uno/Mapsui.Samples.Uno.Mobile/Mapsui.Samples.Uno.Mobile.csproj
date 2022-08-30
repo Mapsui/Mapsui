@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <!--Reenable for Maui RC 1-->    
-    <TargetFrameworks>net6.0-android31.0;net6.0-ios;net6.0-maccatalyst;net6.0-macos</TargetFrameworks>
+    <TargetFrameworks>net6.0-android;net6.0-ios;net6.0-maccatalyst;net6.0-macos</TargetFrameworks>
     <SingleProject>true</SingleProject>
     <OutputType>Exe</OutputType>
     <RuntimeIdentifier Condition="'$(TargetFramework)' == 'net6.0-ios'">iossimulator-x64</RuntimeIdentifier>
@@ -14,7 +14,7 @@
     <IsUnoHead>true</IsUnoHead>
     <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-ios'">14.4</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-maccatalyst'">14.0</SupportedOSPlatformVersion>
-    <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-android31.0'">21.0</SupportedOSPlatformVersion>
+    <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-android'">21.0</SupportedOSPlatformVersion>
     <SupportedOSPlatformVersion Condition="'$(TargetFramework)'=='net6.0-macos'">10.14</SupportedOSPlatformVersion>
   </PropertyGroup>
   <ItemGroup>
@@ -26,7 +26,7 @@
     <PackageReference Include="SkiaSharp.Views.Uno" />
   </ItemGroup>
  <Choose>
-    <When Condition="'$(TargetFramework)'=='net6.0-android31.0'">
+    <When Condition="'$(TargetFramework)'=='net6.0-android'">
       <ItemGroup>
         <PackageReference Include="Xamarin.Google.Android.Material" />
         <PackageReference Include="Uno.UniversalImageLoader" />
