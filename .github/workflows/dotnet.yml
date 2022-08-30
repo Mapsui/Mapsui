@@ -47,7 +47,7 @@ jobs:
            6.0.400
          include-prerelease: true    
     - name: install maui macos android ios maccatalyst wasm-tools
-      run: dotnet workload install maui macos android ios maccatalyst wasm-tools  
+      run: dotnet workload install maui macos android ios maccatalyst wasm-tools
     - name: Restore dependencies Legacy
       run: nuget restore Mapsui.Mac.Legacy.sln   
     - name: Restore dependencies Mapsui
@@ -142,10 +142,6 @@ jobs:
         vs-prerelease: true
     - name: install maui macos android ios maccatalyst wasm-tools
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools
-    - name: install uno-check
-      run: dotnet tool install -g uno.check
-    - name: run uno check
-      run: uno-check --fix --non-interactive
     - name: Restore dependencies
       run: .nuget\nuget restore Mapsui.sln
     # Samples Build    
