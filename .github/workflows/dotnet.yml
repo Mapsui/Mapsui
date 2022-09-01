@@ -179,7 +179,7 @@ jobs:
       run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.WPF/Mapsui.Samples.Forms.WPF.csproj
     # Samples Uno
     - name: Mapsui.Samples.Uno.Mobile
-      run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Uno/Mapsui.Samples.Uno.Mobile/Mapsui.Samples.Uno.Mobile.csproj
+      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno/Mapsui.Samples.Uno.Mobile/Mapsui.Samples.Uno.Mobile.csproj
     - name: Mapsui.Samples.Uno.Skia.Gtk
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno/Mapsui.Samples.Uno.Skia.Gtk/Mapsui.Samples.Uno.Skia.Gtk.csproj
     - name: Mapsui.Samples.Uno.Skia.Linux.FrameBuffer
