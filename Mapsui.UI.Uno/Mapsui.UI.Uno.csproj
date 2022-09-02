@@ -6,12 +6,17 @@
 	-->
 
   <PropertyGroup>        
-	  <TargetFrameworks>netstandard2.0;net6.0;net6.0-android31.0</TargetFrameworks>
+	<TargetFrameworks>netstandard2.0;net6.0;net6.0-android31.0</TargetFrameworks>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);uap10.0.19041</TargetFrameworks>
     <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
     <RootNamespace>Mapsui.UI.Uwp</RootNamespace>
     <DefineConstants>__UWP__</DefineConstants>
+	<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-ios'">14.2</SupportedOSPlatformVersion>
+	<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-maccatalyst'">14.0</SupportedOSPlatformVersion>
+	<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-android31.0'">21.0</SupportedOSPlatformVersion>
+	<_AndroidApiLevel Condition="'$(TargetFramework)' == 'net6.0-android'">31</_AndroidApiLevel>
+	<SupportedOSPlatformVersion Condition="'$(TargetFramework)'=='net6.0-macos'">10.14</SupportedOSPlatformVersion>		
   </PropertyGroup>
 
   <ItemGroup>
