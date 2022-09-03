@@ -41,8 +41,6 @@ namespace Mapsui.UI.Forms
             CreateFeature();
         }
 
-        private readonly object _sync = new();
-
         /// <summary>
         /// Center of circle
         /// </summary>
@@ -121,22 +119,21 @@ namespace Mapsui.UI.Forms
 
         private void CreateFeature()
         {
-            lock (_sync)
+            if (Feature == null)
             {
-                if (Feature == null)
+                // no lock is required because I assign it first to a variable and at the end I assign it to the Property
+                // Create a new one
+                var feature = new GeometryFeature
                 {
-                    // Create a new one
-                    Feature = new GeometryFeature
-                    {
-                        ["Label"] = Label
-                    };
-                    Feature.Styles.Clear();
-                    Feature.Styles.Add(new VectorStyle
-                    {
-                        Outline = new Pen { Width = StrokeWidth, Color = StrokeColor.ToMapsui() },
-                        Fill = new Styles.Brush { Color = FillColor.ToMapsui() }
-                    });
-                }
+                    ["Label"] = Label
+                };
+                feature.Styles.Clear();
+                feature.Styles.Add(new VectorStyle
+                {
+                    Outline = new Pen { Width = StrokeWidth, Color = StrokeColor.ToMapsui() },
+                    Fill = new Styles.Brush { Color = FillColor.ToMapsui() }
+                });
+                Feature = feature;
             }
         }
 

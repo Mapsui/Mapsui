@@ -76,30 +76,26 @@ namespace Mapsui.UI.Forms
             OnPropertyChanged(nameof(Positions));
         }
 
-        private readonly object _sync = new();
-
         /// <summary>
         /// Create feature
         /// </summary>
         private void CreateFeature()
         {
-            lock (_sync)
+            if (Feature == null)
             {
-                if (Feature == null)
+                // no lock is required because I assign it first to a variable and at the end I assign it to the Property
+                // Create a new one
+                var feature = new GeometryFeature
                 {
-                    // Create a new one
-                    Feature = new GeometryFeature
-                    {
-                        Geometry = new LineString(Positions.Select(p => p.ToCoordinate()).ToArray()),
-                        ["Label"] = Label,
-                    };
-                    Feature.Styles.Clear();
-                    Feature.Styles.Add(new VectorStyle
-                    {
-                        Line = new Pen { Width = StrokeWidth, Color = StrokeColor.ToMapsui() },
-
-                    });
-                }
+                    Geometry = new LineString(Positions.Select(p => p.ToCoordinate()).ToArray()),
+                    ["Label"] = Label,
+                };
+                feature.Styles.Clear();
+                feature.Styles.Add(new VectorStyle
+                {
+                    Line = new Pen { Width = StrokeWidth, Color = StrokeColor.ToMapsui() },
+                });
+                Feature = feature;
             }
         }
 
