@@ -48,31 +48,25 @@ namespace Mapsui.Tiling.Fetcher
 
         public void SetViewport(FetchInfo fetchInfo)
         {
-            lock (_lockRoot)
-            {
-                _fetchInfo = fetchInfo;
-                Busy = true;
-                _viewportIsModified = true;
-            }
+            _fetchInfo = fetchInfo;
+            Busy = true;
+            _viewportIsModified = true;
         }
-
+        
         public bool TryTake([NotNullWhen(true)] out Func<Task>? method)
         {
-            lock (_lockRoot)
+            UpdateIfViewportIsModified();
+            if (_tilesToFetch.TryDequeue(out var tileInfo))
             {
-                UpdateIfViewportIsModified();
-                if (_tilesToFetch.TryDequeue(out var tileInfo))
-                {
-                    _tilesInProgress.Add(tileInfo.Index);
-                    method = async () => await FetchOnThreadAsync(tileInfo);
-                    return true;
-                }
-
-                Busy = _tilesInProgress.Count > 0 || _tilesToFetch.Count > 0;
-                // else the queue is empty, we are done.
-                method = null;
-                return false;
+                _tilesInProgress.Add(tileInfo.Index);
+                method = async () => await FetchOnThreadAsync(tileInfo);
+                return true;
             }
+
+            Busy = _tilesInProgress.Count > 0 || _tilesToFetch.Count > 0;
+            // else the queue is empty, we are done.
+            method = null;
+            return false;
         }
 
         [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
@@ -94,23 +88,27 @@ namespace Mapsui.Tiling.Fetcher
         {
             if (_viewportIsModified)
             {
-                UpdateTilesToFetchForViewportChange();
-                _viewportIsModified = false;
+                lock (_lockRoot)
+                {
+                    // if already one update was run before I can exit now.
+                    if (!_viewportIsModified)
+                        return;
+                    
+                    UpdateTilesToFetchForViewportChange();
+                    _viewportIsModified = false;
+                }
             }
         }
 
         private void FetchCompleted(TileInfo tileInfo, IFeature? feature, Exception? exception)
         {
-            lock (_lockRoot)
-            {
-                if (exception == null)
-                    _tileCache.Add(tileInfo.Index, feature);
-                _tilesInProgress.TryRemove(tileInfo.Index);
+            if (exception == null)
+                _tileCache.Add(tileInfo.Index, feature);
+            _tilesInProgress.TryRemove(tileInfo.Index);
 
-                Busy = _tilesInProgress.Count > 0 || _tilesToFetch.Count > 0;
+            Busy = _tilesInProgress.Count > 0 || _tilesToFetch.Count > 0;
 
-                DataChanged?.Invoke(this, new DataChangedEventArgs(exception, false, tileInfo));
-            }
+            DataChanged?.Invoke(this, new DataChangedEventArgs(exception, false, tileInfo));
         }
 
         public bool Busy
