@@ -21,9 +21,9 @@ jobs:
     - uses: actions/cache@v3
       with:
         path: ~/.nuget/packages
-        key: ${{ runner.os }}-nuget8-${{ hashFiles('**/*.csproj') }}
+        key: ${{ runner.os }}-nuget9-${{ hashFiles('**/*.csproj') }}
         restore-keys: |
-            ${{ runner.os }}-nuget8-
+            ${{ runner.os }}-nuget9-
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.0.6      
       with:
@@ -123,9 +123,9 @@ jobs:
     - uses: actions/cache@v3
       with:
         path: ~/.nuget/packages
-        key: ${{ runner.os }}-nuget8-${{ hashFiles('**/*.csproj') }}
+        key: ${{ runner.os }}-nuget9-${{ hashFiles('**/*.csproj') }}
         restore-keys: |
-            ${{ runner.os }}-nuget8-
+            ${{ runner.os }}-nuget9-
     - name: Setup .NET Core SDK
       uses: actions/setup-dotnet@v2
       with:
