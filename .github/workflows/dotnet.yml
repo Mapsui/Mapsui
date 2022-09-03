@@ -198,8 +198,8 @@ jobs:
     # Disabled until new Skia Sharp Version is released with https://github.com/mono/SkiaSharp/pull/2231  
     # - name: Mapsui.Samples.Uno.WinUI.Skia.Gtk
     #  run: dotnet build --no-restore --configuration Debug Samples\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.Skia.Gtk\Mapsui.Samples.Uno.WinUI.Skia.Gtk.csproj
-    - name: Mapsui.Samples.Uno.WinUI.Skia.Linux.FrameBuffer
-      run: dotnet build --no-restore --configuration Debug Samples\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.Skia.Linux.FrameBuffer\Mapsui.Samples.Uno.WinUI.Skia.Linux.FrameBuffer.csproj
+    # - name: Mapsui.Samples.Uno.WinUI.Skia.Linux.FrameBuffer
+    #  run: dotnet build --no-restore --configuration Debug Samples\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.Skia.Linux.FrameBuffer\Mapsui.Samples.Uno.WinUI.Skia.Linux.FrameBuffer.csproj
     - name: Mapsui.Samples.Uno.WinUI.Skia.WPF
       run: dotnet build --no-restore --configuration Debug Samples\Mapsui.Samples.Uno.WinUI\Mapsui.Samples.Uno.WinUI.Skia.WPF\Mapsui.Samples.Uno.WinUI.Skia.WPF.csproj
     - name: Mapsui.Samples.Uno.WinUI.Wasm
