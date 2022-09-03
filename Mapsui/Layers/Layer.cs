@@ -18,7 +18,6 @@ namespace Mapsui.Layers
     public class Layer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>
     {
         private IProvider? _dataSource;
-        private readonly object _syncRoot = new();
         private readonly ConcurrentStack<IFeature> _cache = new();
         private readonly FeatureFetchDispatcher<IFeature> _fetchDispatcher;
         private readonly FetchMachine _fetchMachine;
@@ -104,10 +103,8 @@ namespace Mapsui.Layers
         {
             get
             {
-                lock (_syncRoot)
-                {
-                    return DataSource?.GetExtent();
-                }
+                // if lock is needed the lock is in the Datasource
+                return DataSource?.GetExtent();
             }
         }
 
