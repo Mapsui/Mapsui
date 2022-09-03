@@ -44,10 +44,10 @@ namespace Mapsui.Samples.Common.Desktop
             };
 
             // set the feature search grow to 0 because country shapes are always fetched on all tiles where they are rendered. so setting the feature search grow to 0 makes the rendering faster.
-            map.Layers.Add(new RasterizingTileLayer(CreateCountryLayer(projectedCountrySource), persistentCache: new SqlitePersistentCache("countries"), featureSearchGrow: 0));
-            map.Layers.Add(new RasterizingTileLayer(CreateCityLayer(projectedCitySource)));
-            map.Layers.Add(new RasterizingTileLayer(CreateCountryLabelLayer(projectedCountrySource)));
-            map.Layers.Add(new RasterizingTileLayer(CreateCityLabelLayer(projectedCitySource)));
+            map.Layers.Add(new RasterizingTileLayer(CreateCountryLayer(projectedCountrySource), persistentCache: new SqlitePersistentCache("countries")));
+            map.Layers.Add(new RasterizingTileLayer(CreateCityLayer(projectedCitySource), featureSearchGrow: 0.25));
+            map.Layers.Add(new RasterizingTileLayer(CreateCountryLabelLayer(projectedCountrySource), featureSearchGrow: 0.25));
+            map.Layers.Add(new RasterizingTileLayer(CreateCityLabelLayer(projectedCitySource), featureSearchGrow: 0.25));
             var home =  Mercator.FromLonLat(15, 54);
             map.Home = n => n.NavigateTo(home, map.Resolutions[5]);
 

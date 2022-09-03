@@ -38,7 +38,7 @@ public class RasterizingTileProvider : ITileSource
         float pixelDensity = 1,
         IPersistentCache<byte[]>? persistentCache = null,
         IProjection? projection = null,
-        double featureSearchGrow = 0.25)
+        double featureSearchGrow = 0)
     {
         _featureSearchGrow = featureSearchGrow;
         _layer = layer;
