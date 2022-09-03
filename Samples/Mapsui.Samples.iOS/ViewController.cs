@@ -8,9 +8,9 @@ namespace Mapsui.Samples.iOS
 {
     public partial class ViewController : UIViewController
     {
-        public ViewController(IntPtr handle) : base(handle)
+        public ViewController() : base()
         {
-            MapControl.UseGPU = false;
+            MapControl.UseGPU = true;
         }
 
         public override void ViewDidLoad()
