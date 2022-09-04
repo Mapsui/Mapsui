@@ -71,7 +71,7 @@ namespace Mapsui.Rendering.Skia
         }
 
         public MemoryStream? RenderToBitmapStream(IReadOnlyViewport? viewport, IEnumerable<ILayer> layers, 
-            Color? background = null, float pixelDensity = 1, IEnumerable<IWidget>? widgets = null)
+            Color? background = null, float pixelDensity = 1, IEnumerable<IWidget>? widgets = null, ERenderFormat renderFormat = ERenderFormat.Png)
         {
             if (viewport == null)
                 return null;
@@ -93,9 +93,32 @@ namespace Mapsui.Rendering.Skia
                 if (widgets is not null)
                     Render(surface.Canvas, viewport, widgets, 1);
                 using var image = surface.Snapshot();
-                using var data = image.Encode();
-                var memoryStream = new MemoryStream();
-                data.SaveTo(memoryStream);
+                SKData? data = null;
+                MemoryStream? memoryStream;
+                try { 
+                    if (renderFormat == ERenderFormat.Png)
+                    {
+                        data = image.Encode(SKEncodedImageFormat.Png, 100);
+                    }   
+                    else if (renderFormat == ERenderFormat.Wbp)
+                    {
+                        var options = new SKWebpEncoderOptions(SKWebpEncoderCompression.Lossless, 100);
+                        using var peekPixels = image.PeekPixels();
+                        data = peekPixels.Encode(options);
+                    }
+                    else
+                    {
+                        throw new NotImplementedException();
+                    }
+                    
+                    memoryStream = new MemoryStream();
+                    data.SaveTo(memoryStream);
+                }
+                finally
+                {
+                    data?.Dispose();
+                }
+                
                 return memoryStream;
             }
             catch (Exception ex)
