@@ -92,7 +92,7 @@ namespace Mapsui.Rendering.Skia
                     if (renderFormat == ERenderFormat.Skp)
                     {
                         pictureRecorder = new SKPictureRecorder();
-                        skCanvas = pictureRecorder.BeginRecording(new SKRect(0, 0, width, height));
+                        skCanvas = pictureRecorder.BeginRecording(new SKRect(0, 0, (float)width, (float)height));
                     }
                     else
                     {
