@@ -83,40 +83,63 @@ namespace Mapsui.Rendering.Skia
 
                 var imageInfo = new SKImageInfo((int)Math.Round(width * pixelDensity), (int)Math.Round(height * pixelDensity),
                     SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
-
-                using var surface = SKSurface.Create(imageInfo);
-                if (surface == null) return null;
-                // Not sure if this is needed here:
-                if (background is not null) surface.Canvas.Clear(background.ToSkia());
-                surface.Canvas.Scale(pixelDensity, pixelDensity);
-                Render(surface.Canvas, viewport, layers);
-                if (widgets is not null)
-                    Render(surface.Canvas, viewport, widgets, 1);
-                using var image = surface.Snapshot();
-                SKData? data = null;
+                
                 MemoryStream? memoryStream;
-                try { 
-                    if (renderFormat == ERenderFormat.Png)
+                SKSurface? surface = null;
+                SKCanvas? skCanvas = null;
+                SKPictureRecorder? pictureRecorder = null;
+                try {
+                    if (renderFormat == ERenderFormat.Skp)
                     {
-                        data = image.Encode(SKEncodedImageFormat.Png, 100);
-                    }   
-                    else if (renderFormat == ERenderFormat.Wbp)
-                    {
-                        var options = new SKWebpEncoderOptions(SKWebpEncoderCompression.Lossless, 100);
-                        using var peekPixels = image.PeekPixels();
-                        data = peekPixels.Encode(options);
+                        pictureRecorder = new SKPictureRecorder();
+                        skCanvas = pictureRecorder.BeginRecording(new SKRect(0, 0, width, height));
                     }
                     else
                     {
-                        throw new NotImplementedException();
+                        surface = SKSurface.Create(imageInfo);
+                        skCanvas = surface.Canvas;
                     }
                     
+                    if (skCanvas == null) return null;
+                    // Not sure if this is needed here:
+                    if (background is not null) skCanvas.Clear(background.ToSkia());
+                    skCanvas.Scale(pixelDensity, pixelDensity);
+                    Render(skCanvas, viewport, layers);
+                    if (widgets is not null)
+                        Render(skCanvas, viewport, widgets, 1);
                     memoryStream = new MemoryStream();
-                    data.SaveTo(memoryStream);
+                    if (renderFormat != ERenderFormat.Skp)
+                    {
+                        using var skPicture = pictureRecorder?.EndRecording();
+                        skPicture?.Serialize(memoryStream);
+                    }
+                    else
+                    {
+                        using var image = surface.Snapshot();
+                        switch (renderFormat)
+                        {
+                            case ERenderFormat.Png:
+                            {
+                                using var data = image.Encode(SKEncodedImageFormat.Png, 100);
+                                data.SaveTo(memoryStream);
+                                break;
+                            }
+                            case ERenderFormat.Wbp:
+                            {
+                                var options = new SKWebpEncoderOptions(SKWebpEncoderCompression.Lossless, 100);
+                                using var peekPixels = image.PeekPixels();
+                                using var data = peekPixels.Encode(options);
+                                data.SaveTo(memoryStream);
+                                break;
+                            }
+                        }
+                    }
                 }
                 finally
                 {
-                    data?.Dispose();
+                    surface?.Dispose();
+                    pictureRecorder?.Dispose();
+                    skCanvas?.Dispose();
                 }
                 
                 return memoryStream;
