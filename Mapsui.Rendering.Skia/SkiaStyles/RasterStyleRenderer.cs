@@ -38,7 +38,7 @@ namespace Mapsui.Rendering.Skia
                     bitmapInfo = (BitmapInfo?)rasterStyle.TileCache[raster];
                 }
 
-                if (bitmapInfo == null || bitmapInfo.Bitmap == null)
+                if (bitmapInfo == null || (bitmapInfo.Bitmap == null && bitmapInfo.Picture == null))
                     return false;
 
                 bitmapInfo.IterationUsed = currentIteration;
