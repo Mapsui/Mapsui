@@ -61,14 +61,30 @@ namespace Mapsui.Rendering.Skia
 
                     var destination = new SKRect(0.0f, 0.0f, (float)extent.Width, (float)extent.Height);
 
-                    BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap, destination, opacity);
+                    switch (bitmapInfo.Type)
+                    {
+                        case BitmapType.Bitmap:
+                            BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap, RoundToPixel(destination), opacity);
+                            break;
+                        case BitmapType.Picture:
+                            PictureRenderer.Draw(canvas, bitmapInfo.Picture!, RoundToPixel(destination), opacity);
+                            break;
+                    }
 
                     canvas.SetMatrix(priorMatrix);
                 }
                 else
                 {
                     var destination = WorldToScreen(viewport, extent);
-                    BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap, RoundToPixel(destination), opacity);
+                    switch (bitmapInfo.Type)
+                    {
+                        case BitmapType.Bitmap:
+                            BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap, RoundToPixel(destination), opacity);
+                            break;
+                        case BitmapType.Picture:
+                            PictureRenderer.Draw(canvas, bitmapInfo.Picture!, RoundToPixel(destination), opacity);
+                            break;
+                    }
                 }
 
                 canvas.Restore();
