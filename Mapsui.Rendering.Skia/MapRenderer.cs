@@ -92,7 +92,7 @@ namespace Mapsui.Rendering.Skia
                     if (renderFormat == ERenderFormat.Skp)
                     {
                         pictureRecorder = new SKPictureRecorder();
-                        skCanvas = pictureRecorder.BeginRecording(new SKRect(0, 0, (float)width, (float)height));
+                        skCanvas = pictureRecorder.BeginRecording(new SKRect(0, 0, Convert.ToSingle(width), Convert.ToSingle(height)));
                     }
                     else
                     {
@@ -108,30 +108,36 @@ namespace Mapsui.Rendering.Skia
                     if (widgets is not null)
                         Render(skCanvas, viewport, widgets, 1);
                     memoryStream = new MemoryStream();
-                    if (renderFormat != ERenderFormat.Skp)
+                    switch (renderFormat)
                     {
-                        using var skPicture = pictureRecorder?.EndRecording();
-                        skPicture?.Serialize(memoryStream);
-                    }
-                    else
-                    {
-                        using var image = surface.Snapshot();
-                        switch (renderFormat)
+                        case ERenderFormat.Skp:
                         {
-                            case ERenderFormat.Png:
+                            using var skPicture = pictureRecorder?.EndRecording();
+                            skPicture?.Serialize(memoryStream);
+                            break;
+                        }
+                        default:
+                        {
+                            using var image = surface.Snapshot();
+                            switch (renderFormat)
                             {
-                                using var data = image.Encode(SKEncodedImageFormat.Png, 100);
-                                data.SaveTo(memoryStream);
-                                break;
+                                case ERenderFormat.Png:
+                                {
+                                    using var data = image.Encode(SKEncodedImageFormat.Png, 100);
+                                    data.SaveTo(memoryStream);
+                                    break;
+                                }
+                                case ERenderFormat.Wbp:
+                                {
+                                    var options = new SKWebpEncoderOptions(SKWebpEncoderCompression.Lossless, 100);
+                                    using var peekPixels = image.PeekPixels();
+                                    using var data = peekPixels.Encode(options);
+                                    data.SaveTo(memoryStream);
+                                    break;
+                                }
                             }
-                            case ERenderFormat.Wbp:
-                            {
-                                var options = new SKWebpEncoderOptions(SKWebpEncoderCompression.Lossless, 100);
-                                using var peekPixels = image.PeekPixels();
-                                using var data = peekPixels.Encode(options);
-                                data.SaveTo(memoryStream);
-                                break;
-                            }
+
+                            break;
                         }
                     }
                 }
