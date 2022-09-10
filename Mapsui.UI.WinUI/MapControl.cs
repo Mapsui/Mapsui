@@ -12,6 +12,7 @@ using Windows.Devices.Sensors;
 using Windows.Foundation;
 using Windows.System;
 using Mapsui.Extensions;
+using Mapsui.Logging;
 #if __WINUI__
 using System.Runtime.Versioning;
 using Mapsui.UI.WinUI.Extensions;
@@ -186,9 +187,29 @@ namespace Mapsui.UI.Uwp
         private void RunOnUIThread(Action action)
         {
 #if __WINUI__
-            Catch.TaskRun(() => DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Normal, () => action()));
+            Catch.TaskRun(() => DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Normal, () =>
+            {
+                try
+                {
+                    action();
+                }
+                catch (Exception ex)
+                {
+                    Logger.Log(LogLevel.Error, ex.Message, ex);
+                }
+            }));
 #else
-            Catch.TaskRun(() => Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => action()));
+            Catch.TaskRun(async () => await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                try
+                {
+                    action();
+                }
+                catch (Exception ex)
+                {
+                    Logger.Log(LogLevel.Error, ex.Message, ex);
+                }
+            }));
 #endif
         }
 
