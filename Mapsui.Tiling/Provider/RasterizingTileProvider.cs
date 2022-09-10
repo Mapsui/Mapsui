@@ -108,7 +108,7 @@ public class RasterizingTileProvider : ITileSource
 
         var resolution = tileResolution.UnitsPerPixel;
         var viewPort = RasterizingLayer.CreateViewport(tileInfo.Extent.ToMRect(), resolution, _renderResolutionMultiplier, 1);
-        var extentGrown = viewPort.Extent.Grow(viewPort.Extent.Width * _featureSearchGrow); // increase 25 % to catch symbols at the bounds
+        var extentGrown = viewPort.Extent.Grow(viewPort.Extent.Width * _featureSearchGrow);
         var fetchInfo = new FetchInfo(extentGrown, resolution); 
         var features = await GetFeaturesAsync(fetchInfo);
         var renderLayer = new RenderLayer(_layer, features);
