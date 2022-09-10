@@ -14,6 +14,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Resources;
 using System.Runtime.CompilerServices;
+using Mapsui.Logging;
 using Mapsui.Utilities;
 #if __MAUI__
 using Mapsui.UI.Maui.Extensions;
@@ -185,9 +186,29 @@ namespace Mapsui.UI.Forms
         {
             get => (bool)GetValue(MyLocationEnabledProperty);
 #if __MAUI__ // WORKAROUND for Preview 11 will be fixed in Preview 13 https://github.com/dotnet/maui/issues/3597
-            set => Application.Current?.Dispatcher.Dispatch(() => SetValue(MyLocationEnabledProperty, value));
+            set => Application.Current?.Dispatcher.Dispatch(() =>
+            {
+                try
+                {
+                    SetValue(MyLocationEnabledProperty, value);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Log(LogLevel.Error, ex.Message, ex);
+                }
+            });
 #else
-            set => Device.BeginInvokeOnMainThread(() => SetValue(MyLocationEnabledProperty, value));
+            set => Device.BeginInvokeOnMainThread(() =>
+            {
+                try
+                {
+                    SetValue(MyLocationEnabledProperty, value);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Log(LogLevel.Error, ex.Message, ex);
+                }
+            });
 #endif
         }
 
