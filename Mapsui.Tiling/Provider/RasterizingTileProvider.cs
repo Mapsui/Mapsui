@@ -12,6 +12,7 @@ using Mapsui.Layers;
 using Mapsui.Projections;
 using Mapsui.Providers;
 using Mapsui.Rendering;
+using Mapsui.Styles;
 using Mapsui.Tiling.Extensions;
 using NeoSmart.AsyncLock;
 
@@ -29,7 +30,7 @@ public class RasterizingTileProvider : ITileSource
     private Attribution? _attribution;
     private readonly IProvider? _dataSource;
     private readonly AsyncLock _renderLock = new();
-    private readonly double _featureSearchGrow;
+    private Dictionary<TileIndex, double> _searchSizeCache = new ();
 
     public RasterizingTileProvider(
         ILayer layer,
@@ -37,10 +38,8 @@ public class RasterizingTileProvider : ITileSource
         IRenderer? rasterizer = null,
         float pixelDensity = 1,
         IPersistentCache<byte[]>? persistentCache = null,
-        IProjection? projection = null,
-        double featureSearchGrow = 0)
+        IProjection? projection = null)
     {
-        _featureSearchGrow = featureSearchGrow;
         _layer = layer;
         _renderResolutionMultiplier = renderResolutionMultiplier;
         _rasterizer = rasterizer;
@@ -58,7 +57,6 @@ public class RasterizingTileProvider : ITileSource
                     CRS = Schema.Srs // The Schema SRS
                 };
         }
-        _featureSearchGrow = featureSearchGrow;
     }
 
     public IPersistentCache<byte[]> PersistentCache { get; set; }
@@ -76,7 +74,7 @@ public class RasterizingTileProvider : ITileSource
                 using (await _renderLock.LockAsync())
                 {
                     var renderer = GetRenderer();
-                    (Viewport viewPort, ILayer renderLayer) = await CreateRenderLayerAsync(tileInfo);
+                    (Viewport viewPort, ILayer renderLayer) = await CreateRenderLayerAsync(tileInfo, renderer);
                     try
                     {
                         stream = renderer.RenderToBitmapStream(viewPort, new[] { renderLayer }, pixelDensity: _pixelDensity);
@@ -102,18 +100,97 @@ public class RasterizingTileProvider : ITileSource
         return result;
     }
 
-    private async Task<(Viewport ViewPort, ILayer RenderLayer)> CreateRenderLayerAsync(TileInfo tileInfo)
+    private async Task<(Viewport ViewPort, ILayer RenderLayer)> CreateRenderLayerAsync(TileInfo tileInfo, IRenderer renderer)
     {
         Schema.Resolutions.TryGetValue(tileInfo.Index.Level, out var tileResolution);
 
         var resolution = tileResolution.UnitsPerPixel;
         var viewPort = RasterizingLayer.CreateViewport(tileInfo.Extent.ToMRect(), resolution, _renderResolutionMultiplier, 1);
-        var extentGrown = viewPort.Extent.Grow(viewPort.Extent.Width * _featureSearchGrow);
+        var featureSearchGrowth = await GetAdditionalSearchSizeAround(tileInfo, renderer);
+        var extentGrown = viewPort.Extent.Grow(viewPort.Extent.Width + featureSearchGrowth);
         var fetchInfo = new FetchInfo(extentGrown, resolution); 
         var features = await GetFeaturesAsync(fetchInfo);
         var renderLayer = new RenderLayer(_layer, features);
         return (viewPort, renderLayer);
     }
+
+    private async Task<IEnumerable<IFeature>> GetFeaturesAsync(TileInfo tileInfo)
+    {
+        Schema.Resolutions.TryGetValue(tileInfo.Index.Level, out var tileResolution);
+
+        var resolution = tileResolution.UnitsPerPixel;
+        var viewPort = RasterizingLayer.CreateViewport(tileInfo.Extent.ToMRect(), resolution, _renderResolutionMultiplier, 1);
+        var fetchInfo = new FetchInfo(viewPort.Extent, resolution); 
+        var features = await GetFeaturesAsync(fetchInfo);
+        return features;
+    }
+
+    private async Task<double> GetAdditionalSearchSizeAround(TileInfo tileInfo, IRenderer renderer)
+    {
+        double additionalSearchSize = 0;
+        
+        for (int col = -1; col <= 1 ; col++)
+        {
+            for (int row = -1; row <= 1 ; row++)
+            {
+                var size = await GetAdditionalSearchSize(CreateTileInfo(tileInfo, col, row), renderer);
+                additionalSearchSize = Math.Max(additionalSearchSize, size);
+            }
+        }
+
+        return additionalSearchSize;
+    }
+
+    private TileInfo CreateTileInfo(TileInfo tileInfo, int col, int row)
+    {
+        var tileIndex = new TileIndex(tileInfo.Index.Col + col, tileInfo.Index.Row + row, tileInfo.Index.Level);
+        var tileExtent = new Extent(
+            tileInfo.Extent.MinX + tileInfo.Extent.Width * col,
+            tileInfo.Extent.MinY + tileInfo.Extent.Height * row,
+            tileInfo.Extent.MaxX + tileInfo.Extent.Width * col,
+            tileInfo.Extent.MaxY + tileInfo.Extent.Height * row);
+        return new TileInfo
+        {
+            Index = tileIndex,
+            Extent = tileExtent,
+        };
+    }
+
+    private async Task<double> GetAdditionalSearchSize(TileInfo tileInfo, IRenderer renderer)
+    {
+        if (!_searchSizeCache.TryGetValue(tileInfo.Index, out var result))
+        {
+            result = 0;
+            var features = await GetFeaturesAsync(tileInfo);
+            foreach (var feature in features)
+            {
+                var tempSize = GetFeatureSize(feature, renderer);
+                var coordinateTempSize = ConvertToCoordinates(tempSize, tileInfo);
+                result = Math.Max(coordinateTempSize, result);
+            }
+            
+            _searchSizeCache[tileInfo.Index] = result;
+        }
+
+        return result;
+    }
+
+    private double GetFeatureSize(IFeature feature, IRenderer renderer)
+    {
+        var size = 0;
+        foreach (var style in feature.Styles)
+        {
+            if (renderer.StyleRenderers.TryGetValue(style.GetType(), out var styleRenderer))
+            {
+                var featureSize = styleRenderer.FeatureSize(feature, style);
+                size = Math.Max(featureSize, size);
+            }
+        }
+        
+        return size;
+    }
+
+    public ISymbolCache SymbolCache { get; set; }
 
     private async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {

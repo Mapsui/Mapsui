@@ -44,7 +44,7 @@ namespace Mapsui.Tiling.Layers
             IPersistentCache<byte[]>? persistentCache = null,
             IProjection? projection = null,
             double featureSearchGrow = 0) : base(
-            new RasterizingTileProvider(layer, renderResolutionMultiplier, rasterizer, pixelDensity, persistentCache, projection, featureSearchGrow),
+            new RasterizingTileProvider(layer, renderResolutionMultiplier, rasterizer, pixelDensity, persistentCache, projection),
             minTiles,
             maxTiles,
             dataFetchStrategy,
