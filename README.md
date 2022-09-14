@@ -14,7 +14,6 @@ Mapsui is a C# map component for apps
 
 ## Nugets
 
-
 | package | version  | downloads | quickstart guide |
 | ---------------|:-------------:|:-------------:|:-------------:|
 | Mapsui         | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.svg?style=flat)](https://www.nuget.org/packages/Mapsui/) | [![NuGet](https://img.shields.io/nuget/dt/Mapsui.svg)](https://www.nuget.org/packages/Mapsui) | |
