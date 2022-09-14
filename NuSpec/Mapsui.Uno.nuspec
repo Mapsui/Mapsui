@@ -19,21 +19,27 @@
 			<!-- [ or ] is including, ( or ) is excluding -->
 			<group targetFramework="netstandard2.0">
 				<dependency id="Mapsui" version="$version$" />
-				<dependency id="SkiaSharp.Views" version="[2.88.1-preview.91,3.0.0)" />
+				<dependency id="SkiaSharp.Views" version="[2.88.2,3.0.0)" />
 				<dependency id="Uno.UI" version="[4.4.13, 5.0.0)" />
-				<dependency id="SkiaSharp.Views.Uno" version="[2.88.1-preview.91,3.0.0)" />
+				<dependency id="SkiaSharp.Views.Uno" version="[2.88.2,3.0.0)" />
 			</group>
 			<group targetFramework="net6.0">
 				<dependency id="Mapsui" version="$version$" />
-				<dependency id="SkiaSharp.Views" version="[2.88.1-preview.91,3.0.0)" />
+				<dependency id="SkiaSharp.Views" version="[2.88.2,3.0.0)" />
 				<dependency id="Uno.UI" version="[4.4.13, 5.0.0)" />
-				<dependency id="SkiaSharp.Views.Uno" version="[2.88.1-preview.91,3.0.0)" />
+				<dependency id="SkiaSharp.Views.Uno" version="[2.88.2,3.0.0)" />
 			</group>
 			<group targetFramework="uap10.0.19041">
 				<dependency id="Mapsui" version="$version$" />
-				<dependency id="SkiaSharp.Views" version="[2.88.1-preview.91,3.0.0)" />
+				<dependency id="SkiaSharp.Views" version="[2.88.2,3.0.0)" />
 				<dependency id="Uno.UI" version="[4.4.13, 5.0.0)" />
-				<dependency id="SkiaSharp.Views.Uno" version="[2.88.1-preview.91,3.0.0)" />
+				<dependency id="SkiaSharp.Views.Uno" version="[2.88.2,3.0.0)" />
+			</group>
+			<group targetFramework="net6.0-android31.0">
+				<dependency id="Mapsui" version="$version$" />
+				<dependency id="SkiaSharp.Views" version="[2.88.2-preview.91,3.0.0)" />
+				<dependency id="Uno.UI" version="[4.4.13, 5.0.0)" />
+				<dependency id="SkiaSharp.Views.Uno" version="[2.88.2,3.0.0)" />
 			</group>
 		</dependencies>
 	</metadata>
@@ -42,5 +48,6 @@
 		<file src="..\Mapsui.UI.Uno\bin\Release\netstandard2.0\Mapsui.UI.Uno.dll" target="lib\netstandard2.0\Mapsui.UI.Uno.dll" />
 		<file src="..\Mapsui.UI.Uno\bin\Release\net6.0\Mapsui.UI.Uno.dll" target="lib\net6.0\Mapsui.UI.Uno.dll" />
 		<file src="..\Mapsui.UI.Uno\bin\Release\uap10.0.19041\Mapsui.UI.Uno.dll" target="lib\uap10.0.19041\Mapsui.UI.Uno.dll" />
+		<file src="..\Mapsui.UI.Uno\bin\Release\net6.0-android31.0\Mapsui.UI.Uno.dll" target="lib\net6.0-android31.0\Mapsui.UI.Uno.dll" />
 	</files>
 </package>
