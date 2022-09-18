@@ -4,6 +4,7 @@ using Mapsui.Extensions.Cache;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Nts.Providers.Shapefile;
+using Mapsui.Rendering;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.UI;
@@ -35,7 +36,7 @@ namespace Mapsui.Samples.Common.Desktop
                 CRS = "EPSG:3857",
             };
 
-            map.Layers.Add(new RasterizingTileLayer(CreateCountryLayer(projectedCountrySource), persistentCache: new SqlitePersistentCache("countries")));
+            map.Layers.Add(new RasterizingTileLayer(CreateCountryLayer(projectedCountrySource), persistentCache: new SqlitePersistentCache("countries"), renderFormat: ERenderFormat.Skp));
 
             return map;
         }
