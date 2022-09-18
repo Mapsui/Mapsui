@@ -6,13 +6,14 @@ using ConcurrentCollections;
 namespace Mapsui.Layers
 {
     public class ObservableMemoryLayer<T> : MemoryLayer
-        where T: class
+        where T : class
     {
         private ObservableCollection<T>? _observableCollection;
         private readonly ConcurrentHashSet<IFeature> _shadowCollection;
-        private readonly Func<T,IFeature?> _getFeature;
-        
-        public ObservableMemoryLayer(Func<T, IFeature?> getFeature, string? name = null) : base(name ?? nameof(ObservableMemoryLayer<T>))
+        private readonly Func<T, IFeature?> _getFeature;
+
+        public ObservableMemoryLayer(Func<T, IFeature?> getFeature, string? name = null) : base(
+            name ?? nameof(ObservableMemoryLayer<T>))
         {
             _getFeature = getFeature;
             _shadowCollection = new ConcurrentHashSet<IFeature>();
@@ -24,12 +25,11 @@ namespace Mapsui.Layers
             get => _observableCollection;
             set
             {
-
                 if (_observableCollection != null)
                 {
-                    _observableCollection.CollectionChanged -= DataSource_CollectionChanged;    
+                    _observableCollection.CollectionChanged -= DataSource_CollectionChanged;
                 }
-                
+
                 _observableCollection = value;
                 if (_observableCollection != null)
                 {
@@ -42,7 +42,7 @@ namespace Mapsui.Layers
                             _shadowCollection.Add(feature);
                     }
                 }
-            } 
+            }
         }
 
         private void DataSource_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -82,6 +82,7 @@ namespace Mapsui.Layers
                             if (feature != null)
                                 _shadowCollection.Add(feature);
                         }
+
                     break;
                 case NotifyCollectionChangedAction.Move:
                     // do nothing
