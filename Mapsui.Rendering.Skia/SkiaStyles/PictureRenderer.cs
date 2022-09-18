@@ -19,8 +19,7 @@ namespace Mapsui.Rendering.Skia
 
             var scaleX = rect.Width / picture.CullRect.Width;
             var scaleY = rect.Height / picture.CullRect.Height;
-            var matrix = SKMatrix.CreateTranslation(rect.Left / scaleX, rect.Top / scaleY);
-            matrix.PostConcat(SKMatrix.CreateScale(scaleX, scaleY));
+            var matrix = SKMatrix.CreateScaleTranslation(scaleX, scaleY, rect.Left, rect.Top);
 
             canvas.DrawPicture(picture, ref matrix, skPaint);
             if (dispose)
