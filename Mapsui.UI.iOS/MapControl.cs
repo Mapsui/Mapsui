@@ -17,8 +17,12 @@ namespace Mapsui.UI.iOS
     [Register("MapControl"), DesignTimeVisible(true)]
     public partial class MapControl : UIView, IMapControl
     {
-        private readonly SKGLView _canvas = new SKGLView();
+        private SKGLView? _glCanvas;
+        private SKCanvasView? _canvas;
         private double _innerRotation;
+        private bool _init;
+
+        public static bool UseGPU { get; set; } = true;
 
         public MapControl(CGRect frame)
             : base(frame)
@@ -34,33 +38,73 @@ namespace Mapsui.UI.iOS
             Initialize();
         }
 
+        private void InitCanvas()
+        {
+            if (!_init)
+            {
+                _init = true;
+                if (UseGPU)
+                {
+                    _glCanvas = new SKGLView();
+                }
+                else
+                {
+                    _canvas = new SKCanvasView();
+                }
+            }
+        }
+
         private void Initialize()
         {
+            InitCanvas();
+            
             _invalidate = () => {
                 RunOnUIThread(() => {
                     SetNeedsDisplay();
-                    _canvas?.SetNeedsDisplay();
+                    _glCanvas?.SetNeedsDisplay();
                 });
             };
 
             BackgroundColor = UIColor.White;
 
-            _canvas.TranslatesAutoresizingMaskIntoConstraints = false;
-            _canvas.MultipleTouchEnabled = true;
-            _canvas.PaintSurface += OnPaintSurface;
-            AddSubview(_canvas);
-
-            AddConstraints(new[]
+            if (UseGPU)
             {
-                NSLayoutConstraint.Create(this, NSLayoutAttribute.Leading, NSLayoutRelation.Equal, _canvas,
-                    NSLayoutAttribute.Leading, 1.0f, 0.0f),
-                NSLayoutConstraint.Create(this, NSLayoutAttribute.Trailing, NSLayoutRelation.Equal, _canvas,
-                    NSLayoutAttribute.Trailing, 1.0f, 0.0f),
-                NSLayoutConstraint.Create(this, NSLayoutAttribute.Top, NSLayoutRelation.Equal, _canvas,
-                    NSLayoutAttribute.Top, 1.0f, 0.0f),
-                NSLayoutConstraint.Create(this, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, _canvas,
-                    NSLayoutAttribute.Bottom, 1.0f, 0.0f)
-            });
+                _glCanvas!.TranslatesAutoresizingMaskIntoConstraints = false;
+                _glCanvas.MultipleTouchEnabled = true;
+                _glCanvas.PaintSurface += OnPaintSurface;
+                AddSubview(_glCanvas);
+
+                AddConstraints(new[]
+                {
+                    NSLayoutConstraint.Create(this, NSLayoutAttribute.Leading, NSLayoutRelation.Equal, _glCanvas,
+                        NSLayoutAttribute.Leading, 1.0f, 0.0f),
+                    NSLayoutConstraint.Create(this, NSLayoutAttribute.Trailing, NSLayoutRelation.Equal, _glCanvas,
+                        NSLayoutAttribute.Trailing, 1.0f, 0.0f),
+                    NSLayoutConstraint.Create(this, NSLayoutAttribute.Top, NSLayoutRelation.Equal, _glCanvas,
+                        NSLayoutAttribute.Top, 1.0f, 0.0f),
+                    NSLayoutConstraint.Create(this, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, _glCanvas,
+                        NSLayoutAttribute.Bottom, 1.0f, 0.0f)
+                });
+            }
+            else
+            {
+                _canvas!.TranslatesAutoresizingMaskIntoConstraints = false;
+                _canvas.MultipleTouchEnabled = true;
+                _canvas.PaintSurface += OnPaintSurface;
+                AddSubview(_canvas);
+
+                AddConstraints(new[]
+                {
+                    NSLayoutConstraint.Create(this, NSLayoutAttribute.Leading, NSLayoutRelation.Equal, _canvas,
+                        NSLayoutAttribute.Leading, 1.0f, 0.0f),
+                    NSLayoutConstraint.Create(this, NSLayoutAttribute.Trailing, NSLayoutRelation.Equal, _canvas,
+                        NSLayoutAttribute.Trailing, 1.0f, 0.0f),
+                    NSLayoutConstraint.Create(this, NSLayoutAttribute.Top, NSLayoutRelation.Equal, _canvas,
+                        NSLayoutAttribute.Top, 1.0f, 0.0f),
+                    NSLayoutConstraint.Create(this, NSLayoutAttribute.Bottom, NSLayoutRelation.Equal, _canvas,
+                        NSLayoutAttribute.Bottom, 1.0f, 0.0f)
+                });
+            }
 
             ClipsToBounds = true;
             MultipleTouchEnabled = true;
@@ -98,6 +142,18 @@ namespace Mapsui.UI.iOS
         }
 
         private void OnPaintSurface(object? sender, SKPaintGLSurfaceEventArgs args)
+        {
+            if (PixelDensity <= 0)
+                return;
+
+            var canvas = args.Surface.Canvas;
+
+            canvas.Scale(PixelDensity, PixelDensity);
+
+            CommonDrawControl(canvas);
+        }
+        
+        private void OnPaintSurface(object? sender, SKPaintSurfaceEventArgs args)
         {
             if (PixelDensity <= 0)
                 return;
@@ -197,7 +253,16 @@ namespace Mapsui.UI.iOS
             get => base.Frame;
             set
             {
-                _canvas.Frame = value;
+                InitCanvas();
+                if (UseGPU)
+                {
+                    _glCanvas!.Frame = value;    
+                }
+                else
+                {
+                    _canvas!.Frame = value;
+                }
+                
                 base.Frame = value;
                 SetViewportSize();
                 OnPropertyChanged();
@@ -206,7 +271,8 @@ namespace Mapsui.UI.iOS
 
         public override void LayoutMarginsDidChange()
         {
-            if (_canvas == null) return;
+            InitCanvas();
+            if (_glCanvas == null || _canvas == null) return;
 
             base.LayoutMarginsDidChange();
             SetViewportSize();
@@ -235,6 +301,7 @@ namespace Mapsui.UI.iOS
             {
                 _map?.Dispose();
                 Unsubscribe();
+                _glCanvas?.Dispose();
                 _canvas?.Dispose();
             }
 
@@ -265,12 +332,45 @@ namespace Mapsui.UI.iOS
             return (new MPoint(centerX, centerY), radius, angle);
         }
 
-        private float ViewportWidth => (float)_canvas.Frame.Width; // todo: check if we need _canvas
-        private float ViewportHeight => (float)_canvas.Frame.Height; // todo: check if we need _canvas
+        private float ViewportWidth
+        {
+            get
+            {
+                InitCanvas();
+                if (UseGPU)
+                {
+                    return (float)_glCanvas!.Frame.Width;    
+                }
+
+                return (float)_canvas!.Frame.Width;
+                // todo: check if we need _canvas
+            }
+        }
+
+        private float ViewportHeight
+        {
+            get
+            {
+                InitCanvas();
+                if (UseGPU)
+                {
+                    return (float)_glCanvas!.Frame.Height;    
+                }
+
+                return (float)_canvas!.Frame.Height;
+                // todo: check if we need _canvas
+            }
+        }
 
         private float GetPixelDensity()
         {
-            return (float)_canvas.ContentScaleFactor; // todo: Check if I need canvas        
+            InitCanvas();
+            if (UseGPU)
+            {
+                return (float)_glCanvas!.ContentScaleFactor; // todo: Check if I need canvas    
+            }
+
+            return (float)_canvas!.ContentScaleFactor; // todo: Check if I need canvas
         }
     }
 }

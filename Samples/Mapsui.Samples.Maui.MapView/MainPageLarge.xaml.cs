@@ -157,7 +157,10 @@ namespace Mapsui.Samples.Maui
                     {
                         var request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
 #if __MAUI__ // WORKAROUND for Preview 11 will be fixed in Preview 13 https://github.com/dotnet/maui/issues/3597
-                        Application.Current?.Dispatcher.DispatchAsync(async () => {
+                        if (Application.Current == null)
+                            return;
+
+                        await Application.Current.Dispatcher.DispatchAsync(async () => {
 #else
                         await Device.InvokeOnMainThreadAsync(async () => {
 #endif

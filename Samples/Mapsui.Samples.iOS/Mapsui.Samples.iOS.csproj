@@ -8,16 +8,7 @@
     <OptimizePNGs>False</OptimizePNGs>
     <MtouchUseLlvm>False</MtouchUseLlvm>
     <UseInterpreter Condition="'$(Configuration)' == 'Debug'">True</UseInterpreter>
-  </PropertyGroup>
-  
-  <!--on macos-->
-  <PropertyGroup Condition="'$(OS)' == 'Unix'">
-     <PublishTrimmed>True</PublishTrimmed>
-  </PropertyGroup>
-    
-  <!-- on windows -->
-  <PropertyGroup Condition="'$(OS)' != 'Unix'">
-    <PublishTrimmed>False</PublishTrimmed>
+    <PublishTrimmed>true</PublishTrimmed>
   </PropertyGroup>
   
   <ItemGroup>
