@@ -2,12 +2,10 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
 using BruTile.Predefined;
-using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Projections;
 using Mapsui.Providers;
@@ -106,7 +104,7 @@ public class RasterizingTileProvider : ITileSource
 
         var resolution = tileResolution.UnitsPerPixel;
         var viewPort = RasterizingLayer.CreateViewport(tileInfo.Extent.ToMRect(), resolution, _renderResolutionMultiplier, 1);
-        var featureSearchGrowth = await GetAdditionalSearchSizeAround(tileInfo, renderer);
+        var featureSearchGrowth = await GetAdditionalSearchSizeAround(tileInfo, renderer, viewPort);
         var extentGrown = viewPort.Extent.Grow(viewPort.Extent.Width + featureSearchGrowth);
         var fetchInfo = new FetchInfo(extentGrown, resolution); 
         var features = await GetFeaturesAsync(fetchInfo);
@@ -125,7 +123,7 @@ public class RasterizingTileProvider : ITileSource
         return features;
     }
 
-    private async Task<double> GetAdditionalSearchSizeAround(TileInfo tileInfo, IRenderer renderer)
+    private async Task<double> GetAdditionalSearchSizeAround(TileInfo tileInfo, IRenderer renderer, IViewport viewport)
     {
         double additionalSearchSize = 0;
         
@@ -133,7 +131,7 @@ public class RasterizingTileProvider : ITileSource
         {
             for (int row = -1; row <= 1 ; row++)
             {
-                var size = await GetAdditionalSearchSize(CreateTileInfo(tileInfo, col, row), renderer);
+                var size = await GetAdditionalSearchSize(CreateTileInfo(tileInfo, col, row), renderer, viewport);
                 additionalSearchSize = Math.Max(additionalSearchSize, size);
             }
         }
@@ -156,7 +154,7 @@ public class RasterizingTileProvider : ITileSource
         };
     }
 
-    private async Task<double> GetAdditionalSearchSize(TileInfo tileInfo, IRenderer renderer)
+    private async Task<double> GetAdditionalSearchSize(TileInfo tileInfo, IRenderer renderer, IViewport viewport)
     {
         if (!_searchSizeCache.TryGetValue(tileInfo.Index, out var result))
         {
@@ -165,7 +163,7 @@ public class RasterizingTileProvider : ITileSource
             foreach (var feature in features)
             {
                 var tempSize = GetFeatureSize(feature, renderer);
-                var coordinateTempSize = ConvertToCoordinates(tempSize, tileInfo);
+                var coordinateTempSize = ConvertToCoordinates(tempSize, viewport);
                 result = Math.Max(coordinateTempSize, result);
             }
             
@@ -175,10 +173,9 @@ public class RasterizingTileProvider : ITileSource
         return result;
     }
 
-    private double ConvertToCoordinates(double tempSize, TileInfo tileInfo)
+    private double ConvertToCoordinates(double tempSize, IViewport viewport)
     {
-        // TODO: Calculate properly
-        return tempSize;
+        return tempSize * viewport.Resolution * 0.5; // I need to load half the Size more of the Features
     }
 
     private double GetFeatureSize(IFeature feature, IRenderer renderer)
@@ -190,7 +187,7 @@ public class RasterizingTileProvider : ITileSource
             {
                 if (styleRenderer is IFeatureSize featureSize)
                 {
-                    var tempSize = featureSize.FeatureSize(feature, style, SymbolCache);
+                    var tempSize = featureSize.FeatureSize(feature, style, renderer.SymbolCache);
                     size = Math.Max(tempSize, size);
                 }
             }
@@ -198,8 +195,6 @@ public class RasterizingTileProvider : ITileSource
         
         return size;
     }
-
-    public ISymbolCache SymbolCache { get; set; }
 
     private async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
