@@ -175,15 +175,24 @@ public class RasterizingTileProvider : ITileSource
         return result;
     }
 
+    private double ConvertToCoordinates(double tempSize, TileInfo tileInfo)
+    {
+        // TODO: Calculate properly
+        return tempSize;
+    }
+
     private double GetFeatureSize(IFeature feature, IRenderer renderer)
     {
-        var size = 0;
+        double size = 0;
         foreach (var style in feature.Styles)
         {
             if (renderer.StyleRenderers.TryGetValue(style.GetType(), out var styleRenderer))
             {
-                var featureSize = styleRenderer.FeatureSize(feature, style);
-                size = Math.Max(featureSize, size);
+                if (styleRenderer is IFeatureSize featureSize)
+                {
+                    var tempSize = featureSize.FeatureSize(feature, style, SymbolCache);
+                    size = Math.Max(tempSize, size);
+                }
             }
         }
         

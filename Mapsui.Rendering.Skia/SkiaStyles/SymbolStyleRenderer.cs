@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace Mapsui.Rendering.Skia
 {
-    public class SymbolStyleRenderer : ISkiaStyleRenderer
+    public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     {
         public bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, IStyle style, ISymbolCache symbolCache, long iteration)
         {
@@ -108,7 +108,7 @@ namespace Mapsui.Rendering.Skia
                     break;
                 case BitmapType.Svg:
                     // Todo: Perhaps remove BitmapType.Svg and SvgRenderer?
-                    // It looks like Bitmaptype.Svg is not use at all the the momement.
+                    // It looks like BitmapType.Svg is not use at all the the moment.
                     if (bitmap.Svg == null)
                         return false;
 
@@ -254,6 +254,27 @@ namespace Mapsui.Rendering.Skia
 
             if ((fillColor != null) && fillColor.Color.Alpha != 0) canvas.DrawPath(path, fillColor);
             if ((lineColor != null) && lineColor.Color.Alpha != 0) canvas.DrawPath(path, lineColor);
+        }
+
+        public double FeatureSize(IFeature feature, IStyle style, ISymbolCache symbolCache)
+        {
+            var symbolStyle = (SymbolStyle)style;
+            var bitmap = (BitmapInfo)symbolCache.GetOrCreate(symbolStyle.BitmapId);
+
+            double size = Math.Max(bitmap.Height, bitmap.Width) * symbolStyle.SymbolScale;
+            size = Math.Max(size, SymbolStyle.DefaultWidth); // if defaultWith is larger take this.
+
+            // Calc offset (relative or absolute)
+            var offsetX = symbolStyle.SymbolOffset.IsRelative ? bitmap.Width * symbolStyle.SymbolOffset.X : symbolStyle.SymbolOffset.X;
+            var offsetY = symbolStyle.SymbolOffset.IsRelative ? bitmap.Height * symbolStyle.SymbolOffset.Y : symbolStyle.SymbolOffset.Y;
+
+            // Pythagoras for maximal distance
+            var offset = Math.Sqrt(offsetX*offsetX + offsetY*offsetY);
+
+            // add offset to size multiplied by two because the total size increased by the offset
+            size += (offset * 2);
+
+            return size;
         }
     }
 }

@@ -14,7 +14,7 @@ using System.Text;
 
 namespace Mapsui.Rendering.Skia
 {
-    public class LabelStyleRenderer : ISkiaStyleRenderer
+    public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     {
         private static readonly IDictionary<string, BitmapInfo> LabelCache =
             new ConcurrentDictionary<string, BitmapInfo>();
@@ -383,6 +383,35 @@ namespace Mapsui.Rendering.Skia
 
                 return result.ToArray();
             }).ToArray();
+        }
+
+        public double FeatureSize(IFeature feature, IStyle style, ISymbolCache symbolCache)
+        {
+            var labelStyle = (LabelStyle)style;
+            var text = labelStyle.GetLabelText(feature);
+
+            if (string.IsNullOrEmpty(text))
+                return 0;
+
+            UpdatePaint(labelStyle, 1);
+
+            var rect = new SKRect();
+            Paint.MeasureText(text, ref rect);
+
+            double size = Math.Max(rect.Width, rect.Height);
+
+            var drawRect = new SKRect(0, 0, rect.Right - rect.Left, rect.Bottom - rect.Top);
+
+            var offsetX = labelStyle.Offset.IsRelative ? drawRect.Width * labelStyle.Offset.X : labelStyle.Offset.X;
+            var offsetY = labelStyle.Offset.IsRelative ? drawRect.Height * labelStyle.Offset.Y : labelStyle.Offset.Y;
+
+            // Pythagoras for maximal distance
+            var offset = Math.Sqrt(offsetX*offsetX + offsetY*offsetY);
+
+            // add offset to size multiplied by two because the total size increased by the offset
+            size += (offset * 2);
+
+            return size;
         }
     }
 }
