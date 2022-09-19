@@ -127,7 +127,7 @@ namespace Mapsui.Rendering.Skia
                                     data.SaveTo(memoryStream);
                                     break;
                                 }
-                                case ERenderFormat.Wbp:
+                                case ERenderFormat.WebP:
                                 {
                                     var options = new SKWebpEncoderOptions(SKWebpEncoderCompression.Lossless, 100);
                                     using var peekPixels = image.PeekPixels();

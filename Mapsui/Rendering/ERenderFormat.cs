@@ -6,7 +6,7 @@ namespace Mapsui.Rendering
         ///<summary>Default Format works everywhere</summary> 
         Png,
         ///<summary>20 - 30% smaller lossless Format</summary>
-        Wbp,
+        WebP,
         ///<summary>Skia Vector Format</summary>
         Skp
     }

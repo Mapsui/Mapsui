@@ -9,6 +9,7 @@
     <PackageVersion Include="Avalonia.Desktop" Version="0.10.12" />
     <PackageVersion Include="Avalonia.Diagnostics" Version="0.10.12" />
     <PackageVersion Include="Avalonia.ReactiveUI" Version="0.10.12" />
+    <PackageVersion Include="BenchmarkDotNet" Version="0.13.2" />
     <PackageVersion Include="BitMiracle.LibTiff.NET" Version="2.4.649" />
     <PackageVersion Include="BruTile" Version="5.0" />
     <PackageVersion Include="BruTile.MbTiles" Version="5.0" />
