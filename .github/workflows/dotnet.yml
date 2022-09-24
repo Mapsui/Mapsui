@@ -44,8 +44,8 @@ jobs:
       uses: actions/setup-dotnet@v2
       with:
          dotnet-version: |
-           6.0.400
-         include-prerelease: true    
+           6.0.401
+         include-prerelease: false    
     - name: install maui macos android ios maccatalyst wasm-tools
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools
     - name: Restore dependencies Legacy
@@ -130,8 +130,8 @@ jobs:
       uses: actions/setup-dotnet@v2
       with:
          dotnet-version: |
-           6.0.400
-         include-prerelease: true
+           6.0.401
+         include-prerelease: false
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.0.6
       with:
