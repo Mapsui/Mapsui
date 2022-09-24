@@ -10,6 +10,8 @@
     <UseInterpreter Condition="'$(Configuration)' == 'Debug'">True</UseInterpreter>
     <PublishTrimmed>true</PublishTrimmed>
     <ProvisioningType>automatic</ProvisioningType>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   
   <ItemGroup>
