@@ -259,14 +259,36 @@ namespace Mapsui.Rendering.Skia
         public double FeatureSize(IFeature feature, IStyle style, ISymbolCache symbolCache)
         {
             var symbolStyle = (SymbolStyle)style;
-            var bitmap = (BitmapInfo)symbolCache.GetOrCreate(symbolStyle.BitmapId);
 
-            double size = Math.Max(bitmap.Height, bitmap.Width) * symbolStyle.SymbolScale;
+            Size symbolSize = new Size(SymbolStyle.DefaultWidth, SymbolStyle.DefaultHeight);
+
+            switch (symbolStyle.SymbolType)
+            {
+                case SymbolType.Image:
+                    if (symbolStyle.BitmapId >= 0)
+                    {
+                        var bitmapSize = symbolCache.GetSize(symbolStyle.BitmapId);
+                        if (bitmapSize != null)
+                        {
+                            symbolSize = bitmapSize;
+                        }
+                    }
+
+                    break;
+                case SymbolType.Ellipse:
+                case SymbolType.Rectangle:
+                case SymbolType.Triangle:
+                    symbolSize = new Size(SymbolStyle.DefaultWidth, SymbolStyle.DefaultHeight);
+                    break;
+            }
+
+            var size = Math.Max(symbolSize.Height, symbolSize.Width);
+            size *= symbolStyle.SymbolScale; // Symbol Scale
             size = Math.Max(size, SymbolStyle.DefaultWidth); // if defaultWith is larger take this.
 
             // Calc offset (relative or absolute)
-            var offsetX = symbolStyle.SymbolOffset.IsRelative ? bitmap.Width * symbolStyle.SymbolOffset.X : symbolStyle.SymbolOffset.X;
-            var offsetY = symbolStyle.SymbolOffset.IsRelative ? bitmap.Height * symbolStyle.SymbolOffset.Y : symbolStyle.SymbolOffset.Y;
+            var offsetX = symbolStyle.SymbolOffset.IsRelative ? symbolSize.Width * symbolStyle.SymbolOffset.X : symbolStyle.SymbolOffset.X;
+            var offsetY = symbolStyle.SymbolOffset.IsRelative ? symbolSize.Height * symbolStyle.SymbolOffset.Y : symbolStyle.SymbolOffset.Y;
 
             // Pythagoras for maximal distance
             var offset = Math.Sqrt(offsetX*offsetX + offsetY*offsetY);
