@@ -54,7 +54,7 @@ jobs:
       run: dotnet restore Mapsui.Mac.slnf   
     # Samples Build        
     - name: Build Mapsui.Samples.iOS
-      run: dotnet msbuild -p:RestorePackages=false -p:Configuration=Debug -p:Platform=iPhoneSimulator Samples/Mapsui.Samples.iOS/Mapsui.Samples.iOS.csproj
+      run: dotnet msbuild -p:RestorePackages=false -p:Configuration=Debug -p:Platform=AnyCPU Samples/Mapsui.Samples.iOS/Mapsui.Samples.iOS.csproj
     - name: Build Mapsui.Samples.Droid
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Droid/Mapsui.Samples.Droid.csproj               
     # Samples Forms    
