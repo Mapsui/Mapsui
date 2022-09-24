@@ -9,6 +9,7 @@
     <MtouchUseLlvm>False</MtouchUseLlvm>
     <UseInterpreter Condition="'$(Configuration)' == 'Debug'">True</UseInterpreter>
     <PublishTrimmed>true</PublishTrimmed>
+    <ProvisioningType>automatic</ProvisioningType>
   </PropertyGroup>
   
   <ItemGroup>
