@@ -44,19 +44,20 @@ jobs:
       uses: actions/setup-dotnet@v2
       with:
          dotnet-version: |
-           6.0.400
-         include-prerelease: true    
+           6.0.401
+         include-prerelease: false    
     - name: install maui macos android ios maccatalyst wasm-tools
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools
     - name: Restore dependencies Legacy
       run: nuget restore Mapsui.Mac.Legacy.sln   
     - name: Restore dependencies Mapsui
       run: dotnet restore Mapsui.Mac.slnf   
-    # Samples Build    
+    # Samples Build           
     - name: Build Mapsui.Samples.Droid
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Droid/Mapsui.Samples.Droid.csproj    
-    - name: Build Mapsui.Samples.iOS
-      run: dotnet build --no-restore --configuration Debug -r iossimulator-x64 --self-contained Samples/Mapsui.Samples.iOS/Mapsui.Samples.iOS.csproj
+      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Droid/Mapsui.Samples.Droid.csproj                   
+    # This works on Real Mac Devices but not on Github Actions, disable it for now (this is run on the Windows build)
+    # - name: Build Mapsui.Samples.iOS
+    #  run: dotnet build --no-restore --configuration Debug -r iossimulator-x64 --self-contained Samples/Mapsui.Samples.iOS/Mapsui.Samples.iOS.csproj
     # Samples Forms    
     - name: Build Mapsui.Samples.Forms.Shared
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Shared/Mapsui.Samples.Forms.Shared.csproj    
@@ -130,8 +131,8 @@ jobs:
       uses: actions/setup-dotnet@v2
       with:
          dotnet-version: |
-           6.0.400
-         include-prerelease: true
+           6.0.401
+         include-prerelease: false
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.0.6
       with:
