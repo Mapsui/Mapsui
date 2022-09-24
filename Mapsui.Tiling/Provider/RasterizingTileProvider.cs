@@ -13,6 +13,7 @@ using Mapsui.Rendering;
 using Mapsui.Styles;
 using Mapsui.Tiling.Extensions;
 using NeoSmart.AsyncLock;
+using Attribution = BruTile.Attribution;
 
 namespace Mapsui.Tiling.Provider;
 
@@ -105,8 +106,13 @@ public class RasterizingTileProvider : ITileSource
         var resolution = tileResolution.UnitsPerPixel;
         var viewPort = RasterizingLayer.CreateViewport(tileInfo.Extent.ToMRect(), resolution, _renderResolutionMultiplier, 1);
         var featureSearchGrowth = await GetAdditionalSearchSizeAround(tileInfo, renderer, viewPort);
-        var extentGrown = viewPort.Extent.Grow(viewPort.Extent.Width + featureSearchGrowth);
-        var fetchInfo = new FetchInfo(extentGrown, resolution); 
+        var extent = viewPort.Extent;
+        if (featureSearchGrowth > 0)
+        {
+            extent = extent.Grow(featureSearchGrowth);
+        }
+        
+        var fetchInfo = new FetchInfo(extent, resolution); 
         var features = await GetFeaturesAsync(fetchInfo);
         var renderLayer = new RenderLayer(_layer, features);
         return (viewPort, renderLayer);
@@ -160,13 +166,20 @@ public class RasterizingTileProvider : ITileSource
         {
             result = 0;
             var features = await GetFeaturesAsync(tileInfo);
-            foreach (var feature in features)
+            var layers = new List<ILayer> { new RenderLayer(_layer, features) };
+
+            void MeasureFeature(IStyle style, IFeature feature)
             {
-                var tempSize = GetFeatureSize(feature, renderer);
+                var tempSize = GetFeatureSize(feature, style, renderer);
                 var coordinateTempSize = ConvertToCoordinates(tempSize, viewport);
                 result = Math.Max(coordinateTempSize, result);
             }
-            
+
+            VisibleFeatureIterator.IterateLayers(viewport, layers, 0, (v, l, s, f, o, i) =>
+            {
+                MeasureFeature(s, f);
+            });
+
             _searchSizeCache[tileInfo.Index] = result;
         }
 
@@ -178,21 +191,19 @@ public class RasterizingTileProvider : ITileSource
         return tempSize * viewport.Resolution * 0.5; // I need to load half the Size more of the Features
     }
 
-    private double GetFeatureSize(IFeature feature, IRenderer renderer)
+    private double GetFeatureSize(IFeature feature, IStyle style, IRenderer renderer)
     {
         double size = 0;
-        foreach (var style in feature.Styles)
+
+        if (renderer.StyleRenderers.TryGetValue(style.GetType(), out var styleRenderer))
         {
-            if (renderer.StyleRenderers.TryGetValue(style.GetType(), out var styleRenderer))
+            if (styleRenderer is IFeatureSize featureSize)
             {
-                if (styleRenderer is IFeatureSize featureSize)
-                {
-                    var tempSize = featureSize.FeatureSize(feature, style, renderer.SymbolCache);
-                    size = Math.Max(tempSize, size);
-                }
+                var tempSize = featureSize.FeatureSize(feature, style, renderer.SymbolCache);
+                size = Math.Max(tempSize, size);
             }
         }
-        
+
         return size;
     }
 
