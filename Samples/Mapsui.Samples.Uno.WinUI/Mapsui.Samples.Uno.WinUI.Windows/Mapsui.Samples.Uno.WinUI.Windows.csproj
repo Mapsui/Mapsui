@@ -11,9 +11,10 @@
 		<PublishProfile>win10-$(Platform).pubxml</PublishProfile>
 		<UseWinUI>true</UseWinUI>
 		<EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
-        <!-- Workaround see https://github.com/dotnet/maui/issues/5886 -->
-        <WinUISDKReferences>false</WinUISDKReferences>
-        <PublishReadyToRun>false</PublishReadyToRun>
+    <!-- Workaround see https://github.com/dotnet/maui/issues/5886 -->
+    <WinUISDKReferences>false</WinUISDKReferences>
+    <PublishReadyToRun>false</PublishReadyToRun>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
   </PropertyGroup>
 
 	<ItemGroup>
