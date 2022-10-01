@@ -13,10 +13,10 @@ namespace Mapsui.UI.Blazor
 {
     public partial class MapControl : SKGLView, IMapControl
     {
-        private RectangleF _selectRectangle = new();
+        private RectangleF? _selectRectangle;
         private PointF? _downMousePosition;
-        private Cursor _defaultCursor = Cursors.Default;
-        public Cursor MoveCursor { get; set; } = Cursors.Move;
+        private string _defaultCursor = Cursors.Default;
+        public string MoveCursor { get; set; } = Cursors.Move;
         public int MoveButton { get; set; } = MouseButtons.Primary;
         public int MoveModifier { get; set; } = Keys.None;
         public int ZoomButton { get; set; } = MouseButtons.Primary;
