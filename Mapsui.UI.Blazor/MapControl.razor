@@ -1,5 +1,5 @@
-﻿<div class="my-component">
-    <SKGLView OnPaintSurface="OnPaintSurface" IgnorePixelScaling="true" EnableRenderLoop="true" />
+﻿<div class="MapControl" onmouseup="OnMouseUp" onmousedown="OnMouseDown" onmousewheel="OnMouseWheel" onmousemove="OnMouseMove">
+    <SKGLView name="_map" OnPaintSurface="OnPaintSurface" IgnorePixelScaling="true" EnableRenderLoop="true" />
 </div>
 @code 
 {
@@ -195,18 +195,5 @@
         var center = PointToScreen(Location + Size / 2);
 
         return Screen.FromPoint(center).LogicalPixelSize;
-    }
-    protected override void Dispose(bool disposing)
-    {
-        if (disposing)
-        {
-            _map?.Dispose();
-        }
-
-#pragma warning disable IDISP023 // Don't use reference types in finalizer context
-        CommonDispose(disposing);
-#pragma warning restore IDISP023 // Don't use reference types in finalizer context
-
-        base.Dispose(disposing);
-    }
+    }   
 }

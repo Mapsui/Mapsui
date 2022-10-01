@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace Mapsui.UI.Blazor
 {
-    public partial class MapControl : IMapControl
+    public partial class MapControl : IMapControl, IDisposable
     {
         public void OpenBrowser(string url)
         {
@@ -14,6 +14,13 @@ namespace Mapsui.UI.Blazor
                 // The default for this has changed in .net core, you have to explicitly set if to true for it to work.
                 UseShellExecute = true
             });
+        }
+
+        public void Dispose()
+        {
+            _map?.Dispose();
+
+            CommonDispose(true);
         }
     }
 }
