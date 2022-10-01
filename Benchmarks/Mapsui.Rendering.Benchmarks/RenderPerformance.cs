@@ -30,10 +30,12 @@ namespace Mapsui.Rendering.Benchmarks
         private readonly RegressionMapControl pngMap;
         private readonly RegressionMapControl webpMap;
         private readonly RegressionMapControl map;
+        private readonly RegressionMapControl skpZMap;
 
         public RenderPerformance()
         {
             skpMap = CreateMapControl(ERenderFormat.Skp);
+            skpZMap = CreateMapControl(ERenderFormat.SkpZ);
             pngMap = CreateMapControl(ERenderFormat.Png);
             webpMap = CreateMapControl(ERenderFormat.WebP);
             map = CreateMapControl();
@@ -109,7 +111,7 @@ namespace Mapsui.Rendering.Benchmarks
         }
         
         [Benchmark]
-        public void RenderRasterizingTiling()
+        public void RenderDefault()
         {
             using var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Map!.Layers, Color.White);
         }
@@ -128,6 +130,12 @@ namespace Mapsui.Rendering.Benchmarks
         
         [Benchmark]
         public void RenderRasterizingTilingSkp()
+        {
+            using var bitmap = new MapRenderer().RenderToBitmapStream(skpMap.Viewport, skpMap.Map!.Layers, Color.White);
+        }
+        
+        [Benchmark]
+        public void RenderRasterizingTilingSkpZ()
         {
             using var bitmap = new MapRenderer().RenderToBitmapStream(skpMap.Viewport, skpMap.Map!.Layers, Color.White);
         }
