@@ -44,9 +44,9 @@ namespace Mapsui.UI.Blazor
             var drawable = new Drawable { Visible = false };
 
             drawable.Paint += (o, e) => {
-                var fill = new Color(Colors.Yellow, 0.4f);
+                var fill = Color.FromArgb(100, Color.Yellow);
 
-                using var border = Pens.Cached(Colors.Black, 1.4f, DashStyles.Dash);
+                using var border = Pens.Cached(Color.Black, 1.4f, DashStyles.Dash);
 
                 e.Graphics.FillRectangle(fill, _selectRectangle);
                 e.Graphics.DrawRectangle(border, _selectRectangle);
