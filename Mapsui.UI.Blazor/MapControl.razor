@@ -1,5 +1,5 @@
 ﻿<div class="MapControl" onmouseup="OnMouseUp" onmousedown="OnMouseDown" onmousewheel="OnMouseWheel" onmousemove="OnMouseMove">
-    <SKGLView name="_map" OnPaintSurface="OnPaintSurface" IgnorePixelScaling="true" EnableRenderLoop="true" />
+    <SKGLView name="_skglView" OnPaintSurface="OnPaintSurface" IgnorePixelScaling="true" EnableRenderLoop="true" />
 </div>
 @code 
 {
@@ -177,8 +177,7 @@
     {
         RunOnUIThread(() => IsInBoxZoomMode = false);
     }
-    private float ViewportWidth => Width;
-    private float ViewportHeight => Height;
+    
     protected override void OnPaint(SKPaintEventArgs e)
     {
         if (PixelDensity <= 0)
