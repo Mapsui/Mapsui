@@ -26,20 +26,20 @@ namespace Mapsui.Rendering.Skia
 
                 rasterStyle.UpdateCache(currentIteration);
 
-                BitmapInfo? bitmapInfo;
-
-                if (!rasterStyle.TileCache.Keys.Contains(raster))
+                rasterStyle.TileCache.TryGetValue(raster, out var cachedBitmapInfo);
+                BitmapInfo? bitmapInfo = cachedBitmapInfo as BitmapInfo;
+                if (BitmapHelper.InvalidBitmapInfo(bitmapInfo))
                 {
                     bitmapInfo = BitmapHelper.LoadBitmap(raster.Data);
                     rasterStyle.TileCache[raster] = bitmapInfo;
                 }
-                else
-                {
-                    bitmapInfo = (BitmapInfo?)rasterStyle.TileCache[raster];
-                }
 
-                if (bitmapInfo == null || (bitmapInfo.Bitmap == null && bitmapInfo.Picture == null))
+                if (BitmapHelper.InvalidBitmapInfo(bitmapInfo))
+                {
+                    // remove invalid image from cache
+                    rasterStyle.TileCache.Remove(raster);
                     return false;
+                }
 
                 bitmapInfo.IterationUsed = currentIteration;
                 rasterStyle.TileCache[raster] = bitmapInfo;
