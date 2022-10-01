@@ -39,4 +39,10 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Include="..\..\Tests\Mapsui.Rendering.Skia.Tests\RegressionMapControl.cs">
+      <Link>RegressionMapControl.cs</Link>
+    </Compile>
+  </ItemGroup>
+
 </Project>

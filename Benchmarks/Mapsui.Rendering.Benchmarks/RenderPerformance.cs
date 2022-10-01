@@ -14,7 +14,10 @@ using System.Reflection;
 using BenchmarkDotNet.Engines;
 using Mapsui.Extensions.Cache;
 using Mapsui.Layers;
+using Mapsui.Rendering.Skia.Tests;
 using Mapsui.Styles.Thematics;
+
+#pragma warning disable IDISP001
 
 namespace Mapsui.Rendering.Benchmarks
 {
@@ -22,31 +25,48 @@ namespace Mapsui.Rendering.Benchmarks
     [MinColumn, MaxColumn, MeanColumn, MedianColumn]
     public class RenderPerformance
     {
-        private readonly LimitedViewport limitedViewport;
-
-        private List<ILayer> skpLayers = new();
-        private List<ILayer> pngLayers = new();
-        private List<ILayer> webpLayers = new();
-        private List<ILayer> layers = new();
+        private readonly RegressionMapControl skpMap;
+        private readonly RegressionMapControl pngMap;
+        private readonly RegressionMapControl webpMap;
 
         public RenderPerformance()
         {
-            limitedViewport = new LimitedViewport();
-            limitedViewport.Map = new Map();
-            limitedViewport.SetSize(800, 800);
-            limitedViewport.SetResolution(52545.912084609292);
+            skpMap = CreateMapControl(ERenderFormat.Skp);
+            pngMap = CreateMapControl(ERenderFormat.Png);
+            webpMap = CreateMapControl(ERenderFormat.WebP);
+        }
+        
+        public static RegressionMapControl CreateMapControl(ERenderFormat renderFormat)
+        {
+            var mapControl = new RegressionMapControl();
+            mapControl.SetSize(800, 600);
+            
+            mapControl.Map = CreateMap(renderFormat);
 
-            var countrySource = new ShapeFile(GetAppDir() + "\\Data\\countries.shp", true);
+            // fetch data first time
+            var fetchInfo = new FetchInfo(mapControl.Viewport.Extent!, mapControl.Viewport.Resolution, mapControl.Map?.CRS);
+            mapControl.Map?.RefreshData(fetchInfo);
+            
+            return mapControl;
+        }
+
+        private static Map CreateMap(ERenderFormat renderFormat)
+        {
+            var map = new Map();
+
+            var countrySource = new ShapeFile(GetAppDir() + "\\GeoData\\World\\countries.shp", true);
             countrySource.CRS = "EPSG:4326";
             var projectedCountrySource = new ProjectingProvider(countrySource)
             {
                 CRS = "EPSG:3857",
             };
 
-            skpLayers.Add(new RasterizingTileLayer(CreateCountryLayer(projectedCountrySource), persistentCache: new SqlitePersistentCache("countriesSkp"), renderFormat: ERenderFormat.Skp));
-            pngLayers.Add(new RasterizingTileLayer(CreateCountryLayer(projectedCountrySource), persistentCache: new SqlitePersistentCache("countriesPng"), renderFormat: ERenderFormat.Png));
-            webpLayers.Add(new RasterizingTileLayer(CreateCountryLayer(projectedCountrySource), persistentCache: new SqlitePersistentCache("countriesWebP"), renderFormat: ERenderFormat.WebP));
-            layers.Add(CreateCountryLayer(projectedCountrySource));
+            map.Layers.Add(new RasterizingTileLayer(CreateCountryLayer(projectedCountrySource), persistentCache: new SqlitePersistentCache("countries"), renderFormat: renderFormat));
+
+            var extent = map.Layers[1].Extent!.Grow(map.Layers[1].Extent!.Width * 0.1);
+            map.Home = n => n.NavigateTo(extent);
+
+            return map;
         }
 
         private static string GetAppDir()
@@ -81,25 +101,19 @@ namespace Mapsui.Rendering.Benchmarks
         [Benchmark]
         public void RenderRasterizingTilingSkp()
         {
-            using var bitmap = new MapRenderer().RenderToBitmapStream(limitedViewport, skpLayers , Color.White, 2);
+            using var bitmap = new MapRenderer().RenderToBitmapStream(skpMap.Viewport, skpMap.Map.Layers, Color.White);
         }
 
         [Benchmark]
         public void RenderRasterizingTilingPng()
         {
-            using var bitmap = new MapRenderer().RenderToBitmapStream(limitedViewport, pngLayers , Color.White, 2);
+            using var bitmap = new MapRenderer().RenderToBitmapStream(pngMap.Viewport, pngMap.Map.Layers, Color.White);
         }
 
         [Benchmark]
         public void RenderRasterizingTilingWebP()
         {
-            using var bitmap = new MapRenderer().RenderToBitmapStream(limitedViewport, webpLayers , Color.White, 2);
-        }
-
-        [Benchmark]
-        public void RenderRasterizing()
-        {
-            using var bitmap = new MapRenderer().RenderToBitmapStream(limitedViewport, layers , Color.White, 2);
+            using var bitmap = new MapRenderer().RenderToBitmapStream(webpMap.Viewport, webpMap.Map.Layers, Color.White);
         }
     }
 }
