@@ -30,6 +30,8 @@ namespace Mapsui.UI.Forms
 namespace Mapsui.UI.Avalonia
 #elif __ETO_FORMS__
 namespace Mapsui.UI.Eto
+#elif __BLAZOR__
+namespace Mapsui.UI.Blazor
 #else
 namespace Mapsui.UI.Wpf
 #endif

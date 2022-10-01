@@ -57,6 +57,7 @@
     <PackageVersion Include="SkiaSharp.NativeAssets.iOS" Version=" 2.88.2" />
     <PackageVersion Include="SkiaSharp.NativeAssets.WebAssembly" Version="2.88.2" />
     <PackageVersion Include="SkiaSharp.Views" Version="2.88.2" />
+    <PackageVersion Include="SkiaSharp.Views.Blazor" Version="2.88.2" />
     <PackageVersion Include="SkiaSharp.Views.Forms" Version="2.88.2" />
     <PackageVersion Include="SkiaSharp.Views.Maui.Controls" Version="2.88.2" />
     <PackageVersion Include="SkiaSharp.Views.Maui.Controls.Compatibility" Version="2.88.2" />
