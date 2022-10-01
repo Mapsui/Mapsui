@@ -22,6 +22,7 @@ namespace Mapsui.UI.Blazor
         public int ZoomButton { get; set; } = MouseButtons.Primary;
         public int ZoomModifier { get; set; } = Keys.Control;
         public MouseWheelAnimation MouseWheelAnimation { get; } = new();
+
         public MapControl()
         {
             CommonInitialize();
@@ -39,6 +40,7 @@ namespace Mapsui.UI.Blazor
 
             Content = CreateBoundingBoxDrawable();
         }
+
         private Drawable CreateBoundingBoxDrawable()
         {
             var drawable = new Drawable { Visible = false };
@@ -107,6 +109,7 @@ namespace Mapsui.UI.Blazor
                 Content.Visible = value;
             }
         }
+
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
