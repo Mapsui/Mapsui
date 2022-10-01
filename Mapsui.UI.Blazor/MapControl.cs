@@ -4,6 +4,7 @@ using Mapsui.Rendering.Skia;
 using System.Diagnostics;
 using System.Drawing;
 using System.Net.Mime;
+using Mapsui.UI.Blazor.Extensions;
 using Microsoft.AspNetCore.Components.Web;
 using NetTopologySuite.Geometries;
 using SkiaSharp.Views.Blazor;
@@ -16,10 +17,10 @@ namespace Mapsui.UI.Blazor
         private PointF? _downMousePosition;
         private Cursor _defaultCursor = Cursors.Default;
         public Cursor MoveCursor { get; set; } = Cursors.Move;
-        public MouseButtons MoveButton { get; set; } = MouseButtons.Primary;
-        public int MoveModifier { get; set; } = Extensions.Extensions.Keys["None"];
-        public MouseButtons ZoomButton { get; set; } = MouseButtons.Primary;
-        public int ZoomModifier { get; set; } = Extensions.Extensions.Keys["Control"];
+        public int MoveButton { get; set; } = MouseButtons.Primary;
+        public int MoveModifier { get; set; } = Keys.None;
+        public int ZoomButton { get; set; } = MouseButtons.Primary;
+        public int ZoomModifier { get; set; } = Keys.Control;
         public MouseWheelAnimation MouseWheelAnimation { get; } = new();
         public MapControl()
         {
