@@ -10,7 +10,7 @@ public class Program
         renderPerformance.RenderRasterizingTilingSkp();
         renderPerformance.RenderRasterizingTilingPng();
         renderPerformance.RenderRasterizingTilingWebP();
-        renderPerformance.RenderRasterizingTiling();
+        renderPerformance.RenderDefault();
 #else
         var summary = BenchmarkRunner.Run(typeof(Program).Assembly);
 #endif
