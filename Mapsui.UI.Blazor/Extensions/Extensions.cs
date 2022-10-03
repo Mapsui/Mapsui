@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace Mapsui.UI.Blazor.Extensions
 {

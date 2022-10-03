@@ -7,6 +7,7 @@
 {
     private RectangleF? _selectRectangle;
     private PointF? _downMousePosition;
+    private double? _lastY;
     private string _defaultCursor = Cursors.Default;
     public string MoveCursor { get; set; } = Cursors.Move;
     public int MoveButton { get; set; } = MouseButtons.Primary;
@@ -22,7 +23,6 @@
         ControlInitialize();
     }
 
-    
     void OnPaintSurface(SKPaintGLSurfaceEventArgs e)
     {
         // the the canvas and properties
@@ -48,7 +48,7 @@
 
     private void ControlInitialize()
     {
-        _invalidate = () => RunOnUIThread(Invalidate);
+        _invalidate = () => { }; // Currently it is continuously invalided by Blazor (Render Loop)
 
         // Mapsui.Rendering.Skia use Mapsui.Nts where GetDbaseLanguageDriver need encoding providers
         System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
@@ -67,10 +67,17 @@
         if (_map?.ZoomLock ?? true) return;
         if (!Viewport.HasSize) return;
 
-        var resolution = MouseWheelAnimation.GetResolution((int)e.Delta.Height, _viewport, _map);
-        // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
-        resolution = _map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, _map.Resolutions, _map.Extent);
-        Navigator?.ZoomTo(resolution, e.Location.ToMapsui(), MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
+        if (_lastY != null)
+        {
+            var delta = e.PageY - _lastY.Value;
+            var resolution = MouseWheelAnimation.GetResolution((int)delta, _viewport, _map);
+            // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
+            resolution = _map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, _map.Resolutions, _map.Extent);
+            var location = new MPoint(e.PageX, e.PageY);
+            Navigator?.ZoomTo(resolution, location, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
+        }
+        
+        _lastY = e.PageY;
     }
     
     private void OnSizeChanged()
@@ -163,9 +170,9 @@
         if (height <= 0) return;
 
         ZoomHelper.ZoomToBoudingbox(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y,
-            Width, Height, out var x, out var y, out var resolution);
+            ViewportWidth, ViewportHeight, out var x, out var y, out var resolution);
 
-        Navigator?.NavigatBlazor(new MPoint(x, y), resolution, 384);
+        Navigator?.NavigateTo(new MPoint(x, y), resolution, 384);
 
         RefreshData();
         RefreshGraphics();
@@ -176,8 +183,7 @@
     {
         RunOnUIThread(() => IsInBoxZoomMode = false);
     }
-    
-    
+
     private float GetPixelDensity()
     {
         return 1;
