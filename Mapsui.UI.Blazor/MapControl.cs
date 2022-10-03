@@ -1,6 +1,7 @@
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
 using System.Diagnostics;
+using SkiaSharp;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
@@ -8,36 +9,23 @@ namespace Mapsui.UI.Blazor
 {
     public sealed partial class MapControl : IMapControl, IDisposable
     {
-
+        private SKImageInfo? _canvasSize;
         private IRenderer _renderer = new MapRenderer();
+        private bool _onloaded;
 
-        public void OpenBrowser(string url)
+        public async void OpenBrowser(string url)
         {
-            Process.Start(new ProcessStartInfo
-            {
-                FileName = url,
-                // The default for this has changed in .net core, you have to explicitly set if to true for it to work.
-                UseShellExecute = true
-            });
+            await JsRuntime.InvokeAsync<object>("open", new object?[]{ url, "_blank" });
         }
 
         public void Dispose()
         {
-            _map?.Dispose();
-            _map = null;
-
             CommonDispose(true);
         }
 
-        public void RunOnUIThread(Action action)
-        {
-            action();
-        }
-
-
         public float PixelDensity => GetPixelDensity();
 
-        public float ViewportWidth =>  Width;
-        public float ViewportHeight => Height;
+        public float ViewportWidth =>  _canvasSize?.Width ?? 0; 
+        public float ViewportHeight => _canvasSize?.Height ?? 0;
     }
 }
