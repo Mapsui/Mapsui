@@ -1,11 +1,9 @@
-﻿<div class="MapControl" onmouseup="OnMouseUp" onmousedown="OnMouseDown" onmousewheel="OnMouseWheel" onmousemove="OnMouseMove">
+﻿@namespace Mapsui.UI.Blazor;
+<div class="MapControl" onmouseup="OnMouseUp" onmousedown="OnMouseDown" onmousewheel="OnMouseWheel" onmousemove="OnMouseMove">
     <SKGLView name="_skglView" OnPaintSurface="OnPaintSurface" IgnorePixelScaling="true" EnableRenderLoop="true" />
 </div>
 @code 
 {
-    // Set correct namespace
-    @namespace Mapsui.UI.Blazor
-
     private RectangleF? _selectRectangle;
     private PointF? _downMousePosition;
     private string _defaultCursor = Cursors.Default;
@@ -60,7 +58,7 @@
 
         CanFocus = true;
     }
-    protected override void OnMouseWheel(MouseEventArgs e)
+    protected void OnMouseWheel(MouseEventArgs e)
     {
         base.OnMouseWheel(e);
 
@@ -82,10 +80,8 @@
     {
         MediaTypeNames.Application.Instance.AsyncInvoke(action);
     }
-    protected override void OnMouseDown(MouseEventArgs e)
+    protected void OnMouseDown(MouseEventArgs e)
     {
-        base.OnMouseDown(e);
-
         IsInBoxZoomMode = e.Buttons == ZoomButton && (ZoomModifier == Keys.None || e.Modifiers == ZoomModifier);
 
         bool move_mode = e.Buttons == MoveButton && (MoveModifier == Keys.None || e.Modifiers == MoveModifier);
@@ -106,10 +102,8 @@
         }
     }
 
-    protected override void OnMouseUp(MouseEventArgs e)
+    protected void OnMouseUp(MouseEventArgs e)
     {
-        base.OnMouseUp(e);
-
         if (IsInBoxZoomMode)
         {
             var previous = Viewport.ScreenToWorld(_selectRectangle.TopLeft.X, _selectRectangle.TopLeft.Y);
@@ -133,10 +127,8 @@
         return Math.Abs(PointF.Distance(currentPosition, previousPosition)) < 5;
     }
    
-    protected override void OnMouseMove(MouseEventArgs e)
+    protected void OnMouseMove(MouseEventArgs e)
     {
-        base.OnMouseMove(e);
-
         if (_downMousePosition.HasValue)
         {
             if (IsInBoxZoomMode)
