@@ -1,4 +1,7 @@
-﻿using Mapsui.Fetcher;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using BruTile.Cache;
+using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Projections;
 using Mapsui.Rendering;
