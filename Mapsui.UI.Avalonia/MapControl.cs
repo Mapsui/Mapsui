@@ -28,6 +28,7 @@ namespace Mapsui.UI.Avalonia
         private bool _mouseDown;
         private MPoint? _previousMousePosition;
         private double _toResolution = double.NaN;
+        private double _mouseWheelPos = 0.0;
 
         public event EventHandler<FeatureInfoEventArgs>? FeatureInfo;
         public MouseWheelAnimation MouseWheelAnimation { get; } = new() { Duration = 0 };
@@ -85,16 +86,24 @@ namespace Mapsui.UI.Avalonia
             if (double.IsNaN(_toResolution))
                 _toResolution = Viewport.Resolution;
 
-            if (e.Delta.Y > Constants.Epsilon)
+            _mouseWheelPos += e.Delta.Y;
+            int delta = (int)_mouseWheelPos;
+            bool navigate = false;
+            if (_mouseWheelPos >= 1.0)
             {
                 _toResolution = ZoomHelper.ZoomIn(_map.Resolutions, _toResolution);
+                _mouseWheelPos -= 1.0;
+                navigate = true;
             }
-            else if (e.Delta.Y < Constants.Epsilon)
+            else if (_mouseWheelPos <= -1.0)
             {
                 _toResolution = ZoomHelper.ZoomOut(_map.Resolutions, _toResolution);
+                _mouseWheelPos += 1.0;
+                navigate = true;
             }
+            if (!navigate) return;
 
-            var resolution = MouseWheelAnimation.GetResolution((int)e.Delta.Y, _viewport, _map);
+            var resolution = MouseWheelAnimation.GetResolution(delta, _viewport, _map);
             // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
             resolution = _map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, _map.Resolutions, _map.Extent);
             Navigator?.ZoomTo(resolution, _currentMousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
