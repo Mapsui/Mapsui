@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using BruTile.Web;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Rendering;
@@ -24,7 +21,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            map.Layers.Add(new RasterizingTileLayer(CreateRandomPointLayer(), featureSearchGrow: 0.25));
+            map.Layers.Add(new RasterizingTileLayer(CreateRandomPointLayer()));
             var extent = map.Layers[1].Extent!.Grow(map.Layers[1].Extent!.Width * 0.1);
             map.Home = n => n.NavigateTo(extent);
             return Task.FromResult(map);
