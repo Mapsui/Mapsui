@@ -72,8 +72,7 @@ namespace Mapsui.Rendering.Skia.Tests
                 LabelColumn = "test",
                 Offset = new Offset(0, 2),
             };
-                
-            
+
             using var feature = new PointFeature(new MPoint(0, 0));
             feature["test"] = "Mapsui";
 
@@ -91,8 +90,7 @@ namespace Mapsui.Rendering.Skia.Tests
                 LabelColumn = "test",
                 Offset = new Offset(2, 2),
             };
-                
-            
+
             using var feature = new PointFeature(new MPoint(0, 0));
             feature["test"] = "Mapsui";
 
