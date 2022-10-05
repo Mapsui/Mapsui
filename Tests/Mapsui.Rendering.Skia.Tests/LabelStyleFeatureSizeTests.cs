@@ -24,7 +24,7 @@ namespace Mapsui.Rendering.Skia.Tests
             using var skPaint = new SKPaint();
             var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint);
             
-            Assert.AreEqual(Math.Round(size, 0), 43);
+            Assert.AreEqual(Math.Round(size, 0), Math.Round(39.6, 0));
         }
         
         [Test]
@@ -43,7 +43,7 @@ namespace Mapsui.Rendering.Skia.Tests
             using var skPaint = new SKPaint();
             var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint);
             
-            Assert.AreEqual(Math.Round(size, 0), 82); // size is increased to 82 instead of 2*43
+            Assert.AreEqual(Math.Round(size, 0), Math.Round(39.6 * 2, 0));
         }
         
         [Test]
@@ -61,7 +61,7 @@ namespace Mapsui.Rendering.Skia.Tests
             using var skPaint = new SKPaint();
             var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint);
             
-            Assert.AreEqual(Math.Round(size, 0), 43 + 2 * 2);
+            Assert.AreEqual(Math.Round(size, 0), Math.Round(39.6 + 2 * 2, 0) );
         }
         
         [Test]
@@ -79,7 +79,7 @@ namespace Mapsui.Rendering.Skia.Tests
             using var skPaint = new SKPaint();
             var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint);
             
-            Assert.AreEqual(Math.Round(size, 0), 43 + 2 * 2);
+            Assert.AreEqual(Math.Round(size, 0), Math.Round(39.6 + 2 * 2, 0));
         }
         
         [Test]
@@ -97,8 +97,7 @@ namespace Mapsui.Rendering.Skia.Tests
             using var skPaint = new SKPaint();
             var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint);
             
-            // with rounding the size is 48
-            Assert.AreEqual(Math.Round(size, 0), Math.Round(42 + Math.Sqrt(2*2 + 2*2) * 2, 0));
+            Assert.AreEqual(Math.Round(size, 0), Math.Round(39.6 + Math.Sqrt(2*2 + 2*2) * 2, 0));
         }
     }
 }
