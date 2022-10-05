@@ -1,15 +1,22 @@
 using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using Mapsui.Layers;
 using Mapsui.Styles;
 using NUnit.Framework;
+using NUnit.Framework.Internal;
 using SkiaSharp;
+using Xamarin.Forms;
+using OSPlatform = System.Runtime.InteropServices.OSPlatform;
 
 namespace Mapsui.Rendering.Skia.Tests
 {
     [TestFixture]
     public class LabelStyleFeatureSizeTests
     {
+        // The Sizes are different on MacOs and Windows (windows it is 39.6 and macOS it is 42.6)
+        public readonly double LabelSize = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? 39.6 : 42.6;
+
         [Test]
         public void DefaultSizeFeatureSize()
         {
@@ -24,7 +31,7 @@ namespace Mapsui.Rendering.Skia.Tests
             using var skPaint = new SKPaint();
             var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint);
             
-            Assert.AreEqual(Math.Round(size, 0), Math.Round(39.6, 0));
+            Assert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize, 0));
         }
         
         [Test]
@@ -43,7 +50,7 @@ namespace Mapsui.Rendering.Skia.Tests
             using var skPaint = new SKPaint();
             var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint);
             
-            Assert.AreEqual(Math.Round(size, 0), Math.Round(39.6 * 2, 0));
+            Assert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize * 2, 0));
         }
         
         [Test]
@@ -61,7 +68,7 @@ namespace Mapsui.Rendering.Skia.Tests
             using var skPaint = new SKPaint();
             var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint);
             
-            Assert.AreEqual(Math.Round(size, 0), Math.Round(39.6 + 2 * 2, 0) );
+            Assert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize + 2 * 2, 0) );
         }
         
         [Test]
@@ -79,7 +86,7 @@ namespace Mapsui.Rendering.Skia.Tests
             using var skPaint = new SKPaint();
             var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint);
             
-            Assert.AreEqual(Math.Round(size, 0), Math.Round(39.6 + 2 * 2, 0));
+            Assert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize + 2 * 2, 0));
         }
         
         [Test]
@@ -97,7 +104,7 @@ namespace Mapsui.Rendering.Skia.Tests
             using var skPaint = new SKPaint();
             var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint);
             
-            Assert.AreEqual(Math.Round(size, 0), Math.Round(39.6 + Math.Sqrt(2*2 + 2*2) * 2, 0));
+            Assert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize + Math.Sqrt(2*2 + 2*2) * 2, 0));
         }
     }
 }
