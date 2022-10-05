@@ -62,8 +62,8 @@ namespace Mapsui.Samples.Common.Desktop
             });
 
             map.Layers.Add(new RasterizingTileLayer(CreateCountryLayer(projectedCountrySource)));
-            map.Layers.Add(new RasterizingTileLayer(CreateCityLayer(filteredCitySource), featureSearchGrow: 0.25));
-            map.Layers.Add(new RasterizingTileLayer(CreateCityLabelLayer(filteredCitySource), featureSearchGrow: 0.25));
+            map.Layers.Add(new RasterizingTileLayer(CreateCityLayer(filteredCitySource)));
+            map.Layers.Add(new RasterizingTileLayer(CreateCityLabelLayer(filteredCitySource)));
 
             return map;
         }
