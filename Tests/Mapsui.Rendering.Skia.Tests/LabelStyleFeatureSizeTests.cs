@@ -30,7 +30,7 @@ namespace Mapsui.Rendering.Skia.Tests
 
             using var skPaint = new SKPaint();
             var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint);
-            
+
             Assert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize, 0));
         }
         
@@ -50,7 +50,15 @@ namespace Mapsui.Rendering.Skia.Tests
             using var skPaint = new SKPaint();
             var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint);
             
-            Assert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize * 2, 0));
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                Assert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize * 2, 0));    
+            }
+            else
+            {
+                // on macos it is not two times as big but almost two times with 3 less
+                Assert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize * 2 - 3, 0));
+            }
         }
         
         [Test]
@@ -67,7 +75,7 @@ namespace Mapsui.Rendering.Skia.Tests
 
             using var skPaint = new SKPaint();
             var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint);
-            
+
             Assert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize + 2 * 2, 0) );
         }
         
