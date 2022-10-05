@@ -1,14 +1,16 @@
 ﻿@namespace Mapsui.UI.Blazor;
 @inject IJSRuntime JsRuntime
-<div class="MapControl" onmouseup=@OnMouseUp onmousedown=@OnMouseDown onmousewheel=@OnMouseWheel onmousemove=@OnMouseMove>
+<div class="MapControl" onmouseup=@OnMouseUp onmousedown=@OnMouseDown onmousewheel=@OnMouseWheel onmousemove=@OnMouseMove onkeydown=@OnKeyDown onkeyup=@OnKeyUp>
     <SKGLView name="_skglView" OnPaintSurface=@OnPaintSurface IgnorePixelScaling="true" EnableRenderLoop="true" />
 </div>
 @code 
 {
-    private RectangleF? _selectRectangle;
-    private PointF? _downMousePosition;
+    private MRect? _selectRectangle;
+    private MPoint? _downMousePosition;
     private double? _lastY;
     private string _defaultCursor = Cursors.Default;
+    private readonly HashSet<string> _pressedKeys = new();
+    private bool _isInBoxZoomMode;
     public string MoveCursor { get; set; } = Cursors.Move;
     public int MoveButton { get; set; } = MouseButtons.Primary;
     public int MoveModifier { get; set; } = Keys.None;
@@ -21,6 +23,22 @@
     {
         CommonInitialize();
         ControlInitialize();
+    }
+    
+    private async void OpenBrowserInternal(string url)
+    {
+        await JsRuntime.InvokeAsync<object>("open", new object?[]{ url, "_blank" });
+    }
+
+
+    private void OnKeyDown(KeyboardEventArgs e)
+    {
+        _pressedKeys.Add(e.Code);
+    }
+    
+    private void OnKeyUp(KeyboardEventArgs e)
+    {
+        _pressedKeys.Remove(e.Code);
     }
 
     void OnPaintSurface(SKPaintGLSurfaceEventArgs e)
@@ -73,8 +91,7 @@
             var resolution = MouseWheelAnimation.GetResolution((int)delta, _viewport, _map);
             // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
             resolution = _map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, _map.Resolutions, _map.Extent);
-            var location = new MPoint(e.PageX, e.PageY);
-            Navigator?.ZoomTo(resolution, location, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
+            Navigator?.ZoomTo(resolution, e.Location().ToMapsui(), MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
         }
         
         _lastY = e.PageY;
@@ -93,24 +110,37 @@
     
     private void OnMouseDown(MouseEventArgs e)
     {
-        IsInBoxZoomMode = e.Buttons == ZoomButton && (ZoomModifier == Keys.None || e.Modifiers == ZoomModifier);
+        IsInBoxZoomMode = e.Buttons == ZoomButton && (ZoomModifier == Keys.None || ModifierPressed(ZoomModifier));
 
-        bool move_mode = e.Buttons == MoveButton && (MoveModifier == Keys.None || e.Modifiers == MoveModifier);
+        bool move_mode = e.Buttons == MoveButton && (MoveModifier == Keys.None || ModifierPressed(MoveModifier));
 
         if (move_mode)
             _defaultCursor = Cursor;
 
         if (move_mode || IsInBoxZoomMode)
-            _downMousePosition = e.Location;
+            _downMousePosition = e.Location();
     }
-    
+
+    private bool ModifierPressed(int modifier)
+    {
+        switch (modifier)
+        {
+            case Keys.Alt:
+                return _pressedKeys.Contains("Alt");
+            case Keys.Control:
+                return _pressedKeys.Contains("Control");
+            case Keys.ShiftLeft:
+                return _pressedKeys.Contains("ShiftLeft") || _pressedKeys.Contains("ShiftRight") || _pressedKeys.Contains("Shift");
+        }
+    }
+
     private bool IsInBoxZoomMode
     {
-        get => Content.Visible;
+        get => _isInBoxZoomMode;
         set
         {
-            _selectRectangle = RectangleF.Empty;
-            Content.Visible = value;
+            _selectRectangle = null;
+            _isInBoxZoomMode = value;
         }
     }
 
@@ -118,14 +148,17 @@
     {
         if (IsInBoxZoomMode)
         {
-            var previous = Viewport.ScreenToWorld(_selectRectangle.TopLeft.X, _selectRectangle.TopLeft.Y);
-            var current = Viewport.ScreenToWorld(_selectRectangle.BottomRight.X, _selectRectangle.BottomRight.Y);
-            ZoomToBox(previous, current);
+            if (_selectRectangle != null)
+            {
+                var previous = Viewport.ScreenToWorld(_selectRectangle.TopLeft.X, _selectRectangle.TopLeft.Y);
+                var current = Viewport.ScreenToWorld(_selectRectangle.BottomRight.X, _selectRectangle.BottomRight.Y);
+                ZoomToBox(previous, current);
+            }
         }
-        else if (_downMousePosition.HasValue)
+        else if (_downMousePosition != null)
         {
-            if (IsClick(e.Location, _downMousePosition.Value))
-                OnInfo(InvokeInfo(e.Location.ToMapsui(), _downMousePosition.Value.ToMapsui(), 1));
+            if (IsClick(e.Location(), _downMousePosition))
+                OnInfo(InvokeInfo(e.Location().ToMapsui(), _downMousePosition.ToMapsui(), 1));
         }
 
         _downMousePosition = null;
@@ -134,30 +167,31 @@
 
         RefreshData();
     }
-    private static bool IsClick(PointF currentPosition, PointF previousPosition)
+    private static bool IsClick(MPoint currentPosition, MPoint previousPosition)
     {
-        return Math.Abs(PointF.Distance(currentPosition, previousPosition)) < 5;
+        return Math.Abs(currentPosition.Distance(previousPosition)) < 5;
     }
    
     private void OnMouseMove(MouseEventArgs e)
     {
-        if (_downMousePosition.HasValue)
+        if (_downMousePosition != null)
         {
             if (IsInBoxZoomMode)
             {
-                _selectRectangle.TopLeft = PointF.Min(e.Location, _downMousePosition.Value);
-                _selectRectangle.BottomRight = PointF.Max(e.Location, _downMousePosition.Value);
-                Content.Invalidate();
+                var x = e.Location();
+                var y = _downMousePosition;
+                _selectRectangle = new MRect(Math.Min(x.X, y.X), Math.Min(x.Y, y.Y), Math.Max(x.X, y.X), Math.Max(x.Y, y.Y));
+                ////Content.Invalidate();
             }
             else // drag/pan - mode
             {
                 Cursor = MoveCursor;
 
-                _viewport.Transform(e.Location.ToMapsui(), _downMousePosition.Value.ToMapsui());
+                _viewport.Transform(e.Location().ToMapsui(), _downMousePosition.ToMapsui());
 
                 RefreshGraphics();
 
-                _downMousePosition = e.Location;
+                _downMousePosition = e.Location();
             }
         }
     }

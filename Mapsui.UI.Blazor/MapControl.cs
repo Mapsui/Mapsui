@@ -15,7 +15,7 @@ namespace Mapsui.UI.Blazor
 
         public async void OpenBrowser(string url)
         {
-            await JsRuntime.InvokeAsync<object>("open", new object?[]{ url, "_blank" });
+            OpenBrowserInternal(url);
         }
 
         public void Dispose()
@@ -27,5 +27,8 @@ namespace Mapsui.UI.Blazor
 
         public float ViewportWidth =>  _canvasSize?.Width ?? 0; 
         public float ViewportHeight => _canvasSize?.Height ?? 0;
+        
+        // TODO: Implement Setting of Mouse
+        public string? Cursor { get; set; }
     }
 }
