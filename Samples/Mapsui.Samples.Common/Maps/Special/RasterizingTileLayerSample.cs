@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using BruTile.Web;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Rendering;
