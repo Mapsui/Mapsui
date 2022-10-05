@@ -29,7 +29,7 @@ public class RasterizingTileProvider : ITileSource
     private Attribution? _attribution;
     private readonly IProvider? _dataSource;
     private readonly AsyncLock _renderLock = new();
-    private Dictionary<TileIndex, double> _searchSizeCache = new ();
+    private IDictionary<TileIndex, double> _searchSizeCache = new ConcurrentDictionary<TileIndex, double>();
 
     public RasterizingTileProvider(
         ILayer layer,
@@ -69,22 +69,19 @@ public class RasterizingTileProvider : ITileSource
             MemoryStream? stream = null;
 
             try 
-            { 
-                using (await _renderLock.LockAsync())
+            {
+                var renderer = GetRenderer();
+                (Viewport viewPort, ILayer renderLayer) = await CreateRenderLayerAsync(tileInfo, renderer);
+                try
                 {
-                    var renderer = GetRenderer();
-                    (Viewport viewPort, ILayer renderLayer) = await CreateRenderLayerAsync(tileInfo, renderer);
-                    try
-                    {
-                        stream = renderer.RenderToBitmapStream(viewPort, new[] { renderLayer }, pixelDensity: _pixelDensity);
-                    }
-                    finally
-                    {
-                        renderLayer.Dispose();
-                    }
-                    
-                    _rasterizingLayers.Push(renderer);
+                    stream = renderer.RenderToBitmapStream(viewPort, new[] { renderLayer }, pixelDensity: _pixelDensity);
                 }
+                finally
+                {
+                    renderLayer.Dispose();
+                }
+                
+                _rasterizingLayers.Push(renderer);
 
                 result = stream?.ToArray();
             }

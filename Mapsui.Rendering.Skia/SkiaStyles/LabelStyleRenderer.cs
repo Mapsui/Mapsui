@@ -17,9 +17,9 @@ namespace Mapsui.Rendering.Skia
     public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     {
         private static readonly IDictionary<string, BitmapInfo> LabelCache =
-            new Dictionary<string, BitmapInfo>();
+            new ConcurrentDictionary<string, BitmapInfo>();
 
-        private static readonly SKPaint Paint = new()
+        private readonly SKPaint Paint = new()
         {
             IsAntialias = true,
             IsStroke = false,
@@ -29,7 +29,7 @@ namespace Mapsui.Rendering.Skia
 
         private static readonly ConcurrentDictionary<string, SKTypeface> CacheTypeface = new();
 
-        public static void DrawAsBitmap(SKCanvas canvas, LabelStyle style, IFeature feature, float x, float y, float layerOpacity)
+        public void DrawAsBitmap(SKCanvas canvas, LabelStyle style, IFeature feature, float x, float y, float layerOpacity)
         {
             var text = style.GetLabelText(feature);
 
@@ -88,9 +88,9 @@ namespace Mapsui.Rendering.Skia
             return true;
         }
 
-        private static SKImage CreateLabelAsBitmap(LabelStyle style, string? text, float layerOpacity)
+        private SKImage CreateLabelAsBitmap(LabelStyle style, string? text, float layerOpacity)
         {
-            UpdatePaint(style, layerOpacity);
+            UpdatePaint(style, layerOpacity, Paint);
 
             return CreateLabelAsBitmap(style, text, Paint, layerOpacity);
         }
@@ -115,9 +115,9 @@ namespace Mapsui.Rendering.Skia
             return bitmap;
         }
 
-        private static void DrawLabel(SKCanvas target, float x, float y, LabelStyle style, string? text, float layerOpacity)
+        private void DrawLabel(SKCanvas target, float x, float y, LabelStyle style, string? text, float layerOpacity)
         {
-            UpdatePaint(style, layerOpacity);
+            UpdatePaint(style, layerOpacity, Paint);
 
             var rect = new SKRect();
 
@@ -232,7 +232,7 @@ namespace Mapsui.Rendering.Skia
             // If style has a halo value, than draw halo text
             if (style.Halo != null)
             {
-                UpdatePaint(style, layerOpacity);
+                UpdatePaint(style, layerOpacity, Paint);
                 Paint.Style = SKPaintStyle.StrokeAndFill;
                 Paint.Color = style.Halo.Color.ToSkia(layerOpacity);
                 Paint.StrokeWidth = (float)style.Halo.Width * 2;
@@ -254,7 +254,7 @@ namespace Mapsui.Rendering.Skia
                     target.DrawText(text, drawRect.Left, drawRect.Top + baseline, Paint);
             }
 
-            UpdatePaint(style, layerOpacity);
+            UpdatePaint(style, layerOpacity, Paint);
 
             if (lines != null)
             {
@@ -311,7 +311,7 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        private static void UpdatePaint(LabelStyle style, float layerOpacity)
+        private static void UpdatePaint(LabelStyle style, float layerOpacity, SKPaint paint)
         {
             if (!CacheTypeface.TryGetValue(style.Font.ToString(), out var typeface))
             {
@@ -322,10 +322,10 @@ namespace Mapsui.Rendering.Skia
                 CacheTypeface[style.Font.ToString()] = typeface;
             }
 
-            Paint.Style = SKPaintStyle.Fill;
-            Paint.TextSize = (float)style.Font.Size;
-            Paint.Color = style.ForeColor.ToSkia(layerOpacity);
-            Paint.Typeface = typeface;
+            paint.Style = SKPaintStyle.Fill;
+            paint.TextSize = (float)style.Font.Size;
+            paint.Color = style.ForeColor.ToSkia(layerOpacity);
+            paint.Typeface = typeface;
         }
 
         private class Line
@@ -389,23 +389,23 @@ namespace Mapsui.Rendering.Skia
         {
             if (style is LabelStyle labelStyle)
             {
-                return FeatureSize(feature, labelStyle);
+                return FeatureSize(feature, labelStyle, Paint);
             }
 
             return 0;
         }
 
-        public static double FeatureSize(IFeature feature, LabelStyle labelStyle)
+        public static double FeatureSize(IFeature feature, LabelStyle labelStyle, SKPaint paint)
         {
             var text = labelStyle.GetLabelText(feature);
 
             if (string.IsNullOrEmpty(text))
                 return 0;
 
-            UpdatePaint(labelStyle, 1);
+            UpdatePaint(labelStyle, 1, paint);
 
             var rect = new SKRect();
-            Paint.MeasureText(text, ref rect);
+            paint.MeasureText(text, ref rect);
 
             double size = Math.Max(rect.Width, rect.Height);
 
