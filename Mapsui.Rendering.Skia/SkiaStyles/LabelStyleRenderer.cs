@@ -385,9 +385,18 @@ namespace Mapsui.Rendering.Skia
             }).ToArray();
         }
 
-        public double FeatureSize(IFeature feature, IStyle style, ISymbolCache symbolCache)
+        double IFeatureSize.FeatureSize(IFeature feature, IStyle style, ISymbolCache symbolCache)
         {
-            var labelStyle = (LabelStyle)style;
+            if (style is LabelStyle labelStyle)
+            {
+                return FeatureSize(feature, labelStyle);
+            }
+
+            return 0;
+        }
+
+        public static double FeatureSize(IFeature feature, LabelStyle labelStyle)
+        {
             var text = labelStyle.GetLabelText(feature);
 
             if (string.IsNullOrEmpty(text))
@@ -406,7 +415,7 @@ namespace Mapsui.Rendering.Skia
             var offsetY = labelStyle.Offset.IsRelative ? drawRect.Height * labelStyle.Offset.Y : labelStyle.Offset.Y;
 
             // Pythagoras for maximal distance
-            var offset = Math.Sqrt(offsetX*offsetX + offsetY*offsetY);
+            var offset = Math.Sqrt(offsetX * offsetX + offsetY * offsetY);
 
             // add offset to size multiplied by two because the total size increased by the offset
             size += (offset * 2);

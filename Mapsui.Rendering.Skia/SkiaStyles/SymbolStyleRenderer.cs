@@ -256,10 +256,18 @@ namespace Mapsui.Rendering.Skia
             if ((lineColor != null) && lineColor.Color.Alpha != 0) canvas.DrawPath(path, lineColor);
         }
 
-        public double FeatureSize(IFeature feature, IStyle style, ISymbolCache symbolCache)
+        double IFeatureSize.FeatureSize(IFeature feature, IStyle style, ISymbolCache symbolCache)
         {
-            var symbolStyle = (SymbolStyle)style;
+            if (style is SymbolStyle symbolStyle)
+            {
+                return FeatureSize(symbolStyle, symbolCache);
+            }
 
+            return 0;
+        }
+
+        public static double FeatureSize(SymbolStyle symbolStyle, ISymbolCache symbolCache)
+        {
             Size symbolSize = new Size(SymbolStyle.DefaultWidth, SymbolStyle.DefaultHeight);
 
             switch (symbolStyle.SymbolType)
@@ -287,11 +295,15 @@ namespace Mapsui.Rendering.Skia
             size = Math.Max(size, SymbolStyle.DefaultWidth); // if defaultWith is larger take this.
 
             // Calc offset (relative or absolute)
-            var offsetX = symbolStyle.SymbolOffset.IsRelative ? symbolSize.Width * symbolStyle.SymbolOffset.X : symbolStyle.SymbolOffset.X;
-            var offsetY = symbolStyle.SymbolOffset.IsRelative ? symbolSize.Height * symbolStyle.SymbolOffset.Y : symbolStyle.SymbolOffset.Y;
+            var offsetX = symbolStyle.SymbolOffset.IsRelative
+                ? symbolSize.Width * symbolStyle.SymbolOffset.X
+                : symbolStyle.SymbolOffset.X;
+            var offsetY = symbolStyle.SymbolOffset.IsRelative
+                ? symbolSize.Height * symbolStyle.SymbolOffset.Y
+                : symbolStyle.SymbolOffset.Y;
 
             // Pythagoras for maximal distance
-            var offset = Math.Sqrt(offsetX*offsetX + offsetY*offsetY);
+            var offset = Math.Sqrt(offsetX * offsetX + offsetY * offsetY);
 
             // add offset to size multiplied by two because the total size increased by the offset
             size += (offset * 2);
