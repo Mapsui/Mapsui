@@ -16,8 +16,8 @@ namespace Mapsui.Rendering.Skia
 {
     public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     {
-        private static readonly IDictionary<string, BitmapInfo> LabelCache =
-            new ConcurrentDictionary<string, BitmapInfo>();
+        private readonly IDictionary<string, BitmapInfo> LabelCache =
+            new Dictionary<string, BitmapInfo>();
 
         private readonly SKPaint Paint = new()
         {
