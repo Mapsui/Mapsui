@@ -240,10 +240,8 @@
         CommonDispose(true);
     }
 
-    public float PixelDensity => GetPixelDensity();
-
-    public float ViewportWidth => _canvasSize?.Width ?? 0;
-    public float ViewportHeight => _canvasSize?.Height ?? 0;
+    public override float ViewportWidth => _canvasSize?.Width ?? 0;
+    public override float ViewportHeight => _canvasSize?.Height ?? 0;
 
     // TODO: Implement Setting of Mouse
     public string? Cursor { get; set; }
