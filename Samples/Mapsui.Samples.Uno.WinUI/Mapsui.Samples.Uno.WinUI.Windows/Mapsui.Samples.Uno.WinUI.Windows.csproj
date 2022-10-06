@@ -14,7 +14,6 @@
     <!-- Workaround see https://github.com/dotnet/maui/issues/5886 -->
     <WinUISDKReferences>false</WinUISDKReferences>
     <PublishReadyToRun>false</PublishReadyToRun>
-    <EnableWindowsTargeting>true</EnableWindowsTargeting>
   </PropertyGroup>
 
 	<ItemGroup>
