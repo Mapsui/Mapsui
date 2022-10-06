@@ -71,7 +71,7 @@
 
     private void ControlInitialize()
     {
-        _invalidate = () => { }; // Currently it is continuously invalided by Blazor (Render Loop)
+        _invalidate = StateHasChanged;
 
         // Mapsui.Rendering.Skia use Mapsui.Nts where GetDbaseLanguageDriver need encoding providers
         System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
@@ -118,12 +118,12 @@
     {
         IsInBoxZoomMode = e.Buttons == ZoomButton && (ZoomModifier == Keys.None || ModifierPressed(ZoomModifier));
 
-        bool move_mode = e.Buttons == MoveButton && (MoveModifier == Keys.None || ModifierPressed(MoveModifier));
+        bool moveMode = e.Buttons == MoveButton && (MoveModifier == Keys.None || ModifierPressed(MoveModifier));
 
-        if (move_mode)
+        if (moveMode)
             _defaultCursor = Cursor;
 
-        if (move_mode || IsInBoxZoomMode)
+        if (moveMode || IsInBoxZoomMode)
             _downMousePosition = e.Location();
     }
 
@@ -190,7 +190,7 @@
                 var x = e.Location();
                 var y = _downMousePosition;
                 _selectRectangle = new MRect(Math.Min(x.X, y.X), Math.Min(x.Y, y.Y), Math.Max(x.X, y.X), Math.Max(x.Y, y.Y));
-                ////Content.Invalidate();
+                StateHasChanged();
             }
             else // drag/pan - mode
             {
