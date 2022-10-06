@@ -2,7 +2,7 @@
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
 		<TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
-    <TargetPlatformVersion>10.0.19041.0</TargetPlatformVersion>
+        <TargetPlatformVersion>10.0.19041.0</TargetPlatformVersion>
 		<TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
 		<RootNamespace>Mapsui.Samples.Uno.WinUI</RootNamespace>
 		<ApplicationManifest>app.manifest</ApplicationManifest>
@@ -39,6 +39,8 @@
 
 	<ItemGroup>
     <PackageReference Include="Uno.WinUI" />
+    <PackageReference Include="Microsoft.Windows.CsWinRT" />
+    <PackageReference Include="SkiaSharp.Views.WinUI" />
     <PackageReference Include="Microsoft.WindowsAppSDK" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" />
     <PackageReference Include="Uno.Core.Extensions.Logging.Singleton" />
