@@ -33,13 +33,13 @@ namespace Mapsui.Rendering.Benchmarks
 
         public RenderPerformance()
         {
-            skpMap = CreateMapControl(ERenderFormat.Skp);            
-            pngMap = CreateMapControl(ERenderFormat.Png);
-            webpMap = CreateMapControl(ERenderFormat.WebP);
+            skpMap = CreateMapControl(RenderFormat.Skp);            
+            pngMap = CreateMapControl(RenderFormat.Png);
+            webpMap = CreateMapControl(RenderFormat.WebP);
             map = CreateMapControl();
         }
         
-        public static RegressionMapControl CreateMapControl(ERenderFormat? renderFormat = null)
+        public static RegressionMapControl CreateMapControl(RenderFormat? renderFormat = null)
         {
             var mapControl = new RegressionMapControl();
             mapControl.SetSize(800, 600);
@@ -53,7 +53,7 @@ namespace Mapsui.Rendering.Benchmarks
             return mapControl;
         }
 
-        private static Map CreateMap(ERenderFormat? renderFormat = null)
+        private static Map CreateMap(RenderFormat? renderFormat = null)
         {
             var map = new Map();
 
