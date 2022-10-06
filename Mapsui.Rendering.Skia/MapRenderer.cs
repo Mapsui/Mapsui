@@ -91,8 +91,7 @@ namespace Mapsui.Rendering.Skia
                     case RenderFormat.Skp:
                     {
                         using var pictureRecorder = new SKPictureRecorder();
-                        using var skCanvas = pictureRecorder.BeginRecording(new SKRect(0, 0, Convert.ToSingle(width),
-                            Convert.ToSingle(height)));
+                        using var skCanvas = pictureRecorder.BeginRecording(new SKRect(0, 0, Convert.ToSingle(width), Convert.ToSingle(height)));
                         if (!RenderTo(viewport, layers, background, pixelDensity, widgets, skCanvas))
                             return null;
                         
