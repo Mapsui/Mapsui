@@ -15,6 +15,7 @@
 	<ItemGroup>
     <PackageReference Include="SkiaSharp.Views.Blazor" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" />
   </ItemGroup>
 
   <ItemGroup>

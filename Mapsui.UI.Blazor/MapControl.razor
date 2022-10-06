@@ -4,11 +4,21 @@
 @inherits MapControlBase
 @inject IJSRuntime JsRuntime
 <div class="MapControl" onmouseup=@OnMouseUp onmousedown=@OnMouseDown onmousewheel=@OnMouseWheel onmousemove=@OnMouseMove onkeydown=@OnKeyDown onkeyup=@OnKeyUp>
-    <SKGLView OnPaintSurface=@OnPaintSurface IgnorePixelScaling="true" EnableRenderLoop="true"/>
+@if (UseGPU)
+{
+    <SkiaSharp.Views.Blazor.SKGLView OnPaintSurface=@OnPaintSurface IgnorePixelScaling="true" EnableRenderLoop="true"/>
+}
+else
+{
+    <SkiaSharp.Views.Blazor.SKCanvasView OnPaintSurface=@OnPaintSurface IgnorePixelScaling="true" EnableRenderLoop="true"/>
+}
 </div>
 
 @code
 {
+    // ReSharper disable once InconsistentNaming
+    public static bool UseGPU { get; set; } = true;
+
     private SKImageInfo? _canvasSize;
     private bool _onLoaded;
     private MRect? _selectRectangle;
