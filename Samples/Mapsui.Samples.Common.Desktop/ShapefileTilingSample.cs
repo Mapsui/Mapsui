@@ -36,7 +36,7 @@ namespace Mapsui.Samples.Common.Desktop
                 CRS = "EPSG:3857",
             };
 
-            map.Layers.Add(new RasterizingTileLayer(CreateCountryLayer(projectedCountrySource), persistentCache: new SqlitePersistentCache("countries"), renderFormat: ERenderFormat.Png));
+            map.Layers.Add(new RasterizingTileLayer(CreateCountryLayer(projectedCountrySource), persistentCache: new SqlitePersistentCache("countries"), renderFormat: RenderFormat.Png));
 
             return map;
         }

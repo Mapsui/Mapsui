@@ -43,7 +43,7 @@ namespace Mapsui.Tiling.Layers
             int maxExtraTiles = -1,
             IPersistentCache<byte[]>? persistentCache = null,
             IProjection? projection = null,
-            ERenderFormat renderFormat = ERenderFormat.Png) : base(
+            RenderFormat renderFormat = RenderFormat.Png) : base(
             new RasterizingTileProvider(layer, renderResolutionMultiplier, rasterizer, pixelDensity, persistentCache, projection, renderFormat),
             minTiles,
             maxTiles,

@@ -71,7 +71,7 @@ namespace Mapsui.Rendering.Skia
         }
 
         public MemoryStream? RenderToBitmapStream(IReadOnlyViewport? viewport, IEnumerable<ILayer> layers, 
-            Color? background = null, float pixelDensity = 1, IEnumerable<IWidget>? widgets = null, ERenderFormat renderFormat = ERenderFormat.Png)
+            Color? background = null, float pixelDensity = 1, IEnumerable<IWidget>? widgets = null, RenderFormat renderFormat = RenderFormat.Png)
         {
             if (viewport == null)
                 return null;
@@ -89,7 +89,7 @@ namespace Mapsui.Rendering.Skia
                 SKCanvas? skCanvas = null;
                 SKPictureRecorder? pictureRecorder = null;
                 try {
-                    if (renderFormat == ERenderFormat.Skp)
+                    if (renderFormat == RenderFormat.Skp)
                     {
                         pictureRecorder = new SKPictureRecorder();
                         skCanvas = pictureRecorder.BeginRecording(new SKRect(0, 0, Convert.ToSingle(width), Convert.ToSingle(height)));
@@ -110,7 +110,7 @@ namespace Mapsui.Rendering.Skia
                     memoryStream = new MemoryStream();
                     switch (renderFormat)
                     {
-                        case ERenderFormat.Skp:
+                        case RenderFormat.Skp:
                         {
                             using var skPicture = pictureRecorder?.EndRecording();
                             skPicture?.Serialize(memoryStream);
@@ -121,13 +121,13 @@ namespace Mapsui.Rendering.Skia
                             using var image = surface.Snapshot();
                             switch (renderFormat)
                             {
-                                case ERenderFormat.Png:
+                                case RenderFormat.Png:
                                 {
                                     using var data = image.Encode(SKEncodedImageFormat.Png, 100);
                                     data.SaveTo(memoryStream);
                                     break;
                                 }
-                                case ERenderFormat.WebP:
+                                case RenderFormat.WebP:
                                 {
                                     var options = new SKWebpEncoderOptions(SKWebpEncoderCompression.Lossless, 100);
                                     using var peekPixels = image.PeekPixels();

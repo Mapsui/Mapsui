@@ -1,7 +1,7 @@
 namespace Mapsui.Rendering
 {
     /// <summary> Formats the MapRenderer should render to </summary>
-    public enum ERenderFormat
+    public enum RenderFormat
     {
         ///<summary>Default Format works everywhere</summary> 
         Png,

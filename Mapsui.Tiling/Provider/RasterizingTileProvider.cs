@@ -26,7 +26,7 @@ public class RasterizingTileProvider : ITileSource
     private ITileSchema? _tileSchema;
     private Attribution? _attribution;
     private readonly IProvider? _dataSource;
-    private readonly ERenderFormat _renderFormat;   
+    private readonly RenderFormat _renderFormat;   
 
     public RasterizingTileProvider(
         ILayer layer,
@@ -35,7 +35,7 @@ public class RasterizingTileProvider : ITileSource
         float pixelDensity = 1,
         IPersistentCache<byte[]>? persistentCache = null,
         IProjection? projection = null,
-        ERenderFormat renderFormat = ERenderFormat.Png)
+        RenderFormat renderFormat = RenderFormat.Png)
     {
         _renderFormat = renderFormat;
         _layer = layer;
