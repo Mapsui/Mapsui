@@ -3,6 +3,7 @@
 @using Mapsui.Samples.Common.Extensions
 @using Mapsui.Extensions
 @using Mapsui.Logging
+@using Mapsui.UI
 
 <PageTitle>Mapsui</PageTitle>
 <h1>Hello, Mapsui!</h1>
@@ -40,7 +41,7 @@
 
     public string Title { get; set; }
 
-    private Mapsui.UI.Blazor.MapControl? mapControl;
+    private IMapControl? mapControl;
 
     protected override void OnInitialized()
     {
