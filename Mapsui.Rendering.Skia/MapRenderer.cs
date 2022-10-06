@@ -84,7 +84,7 @@ namespace Mapsui.Rendering.Skia
                 var imageInfo = new SKImageInfo((int)Math.Round(width * pixelDensity), (int)Math.Round(height * pixelDensity),
                     SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
                 
-                using MemoryStream memoryStream = new MemoryStream();
+                MemoryStream memoryStream = new MemoryStream();
                 
                 switch (renderFormat)
                 {
