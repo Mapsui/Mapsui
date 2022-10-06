@@ -1,5 +1,7 @@
 using System.Text;
 
+namespace Mapsui.Extensions;
+
 /// <summary> Byte Array Extensions </summary>
 public static class ByteArrayExtensions
 {
