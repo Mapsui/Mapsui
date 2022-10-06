@@ -18,7 +18,9 @@
 	  <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 	  <LangVersion>10.0</LangVersion>
 	  <Nullable>enable</Nullable>
-    <NoWarn>$(NoWarn);NU1008;NU1701</NoWarn>
+      <NoWarn>$(NoWarn);NU1008;NU1701</NoWarn>
+      <!-- Enable Windows Targeting on non Windows platforms -->
+      <EnableWindowsTargeting Condition="'$(OS)' != 'Windows_NT'">true</EnableWindowsTargeting>
   </PropertyGroup>
 
   <ItemGroup>
