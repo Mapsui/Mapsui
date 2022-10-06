@@ -234,6 +234,10 @@ namespace Mapsui.UI.Wpf
                 }
             }
         }
+        
+        public float PixelDensity => GetPixelDensity();
+
+        private IRenderer _renderer = new MapRenderer();
 
         /// <summary>
         /// Renderer that is used from this MapControl

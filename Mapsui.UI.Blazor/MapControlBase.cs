@@ -13,13 +13,9 @@ namespace Mapsui.UI.Blazor
     /// </summary>
     public abstract partial class MapControlBase : IMapControl, IDisposable
     {
-        private protected IRenderer _renderer = new MapRenderer();
-
         public abstract float ViewportWidth { get; }
         public abstract float ViewportHeight { get; }
-
         public abstract void OpenBrowser(string url);
-        public abstract float PixelDensity { get; }
         public abstract void Dispose();
         private protected abstract float GetPixelDensity();
         private protected abstract void RunOnUIThread(Action action);
