@@ -62,3 +62,12 @@ a, .btn-link {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+    
+.canvas-container {
+    line-height: 1;
+}
+
+.canvas-container canvas {
+    width: 50%;
+    height: 300px;
+}

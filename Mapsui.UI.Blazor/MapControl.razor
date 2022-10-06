@@ -4,7 +4,7 @@
 @inherits MapControlBase
 @inject IJSRuntime JsRuntime
 <div class="MapControl" onmouseup=@OnMouseUp onmousedown=@OnMouseDown onmousewheel=@OnMouseWheel onmousemove=@OnMouseMove onkeydown=@OnKeyDown onkeyup=@OnKeyUp>
-    <SKGLView name="_skglView" OnPaintSurface=@OnPaintSurface IgnorePixelScaling="true" EnableRenderLoop="true"/>
+    <SKGLView OnPaintSurface=@OnPaintSurface IgnorePixelScaling="true" EnableRenderLoop="true"/>
 </div>
 
 @code
