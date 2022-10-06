@@ -1,10 +1,16 @@
 ﻿@namespace Mapsui.UI.Blazor;
+@using SkiaSharp
+@using Mapsui.Rendering
+@inherits MapControlBase
 @inject IJSRuntime JsRuntime
 <div class="MapControl" onmouseup=@OnMouseUp onmousedown=@OnMouseDown onmousewheel=@OnMouseWheel onmousemove=@OnMouseMove onkeydown=@OnKeyDown onkeyup=@OnKeyUp>
-    <SKGLView name="_skglView" OnPaintSurface=@OnPaintSurface IgnorePixelScaling="true" EnableRenderLoop="true" />
+    <SKGLView name="_skglView" OnPaintSurface=@OnPaintSurface IgnorePixelScaling="true" EnableRenderLoop="true"/>
 </div>
-@code 
+
+@code
 {
+    private SKImageInfo? _canvasSize;
+    private bool _onLoaded;
     private MRect? _selectRectangle;
     private MPoint? _downMousePosition;
     private double? _lastY;
@@ -24,18 +30,17 @@
         CommonInitialize();
         ControlInitialize();
     }
-    
-    private async void OpenBrowserInternal(string url)
-    {
-        await JsRuntime.InvokeAsync<object>("open", new object?[]{ url, "_blank" });
-    }
 
+    public override async void OpenBrowser(string url)
+    {
+        await JsRuntime.InvokeAsync<object>("open", new object?[] { url, "_blank" });
+    }
 
     private void OnKeyDown(KeyboardEventArgs e)
     {
         _pressedKeys.Add(e.Code);
     }
-    
+
     private void OnKeyUp(KeyboardEventArgs e)
     {
         _pressedKeys.Remove(e.Code);
@@ -48,19 +53,19 @@
         _canvasSize = e.Info;
 
         // On Loaded Workaround
-        if (!_onloaded)
+        if (!_onLoaded)
         {
-            _onloaded = true;
+            _onLoaded = true;
             OnLoadComplete();
         }
-        
+
         // Size changed Workaround
         if (_canvasSize?.Width != e.Info.Width || _canvasSize?.Height != e.Info.Height)
         {
             _canvasSize = e.Info;
-            OnSizeChanged();    
+            OnSizeChanged();
         }
-        
+
         CommonDrawControl(canvas);
     }
 
@@ -79,7 +84,7 @@
     {
         SetViewportSize();
     }
-    
+
     private void OnMouseWheel(MouseEventArgs e)
     {
         if (_map?.ZoomLock ?? true) return;
@@ -89,25 +94,26 @@
         {
             var delta = e.PageY - _lastY.Value;
             var resolution = MouseWheelAnimation.GetResolution((int)delta, _viewport, _map);
+
             // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
             resolution = _map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, _map.Resolutions, _map.Extent);
             Navigator?.ZoomTo(resolution, e.Location().ToMapsui(), MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
         }
-        
+
         _lastY = e.PageY;
     }
-    
+
     private void OnSizeChanged()
     {
         SetViewportSize();
     }
-    
-    private void RunOnUIThread(Action action)
+
+    private protected override void RunOnUIThread(Action action)
     {
         // Only one thread is active in WebAssembly.
         action();
     }
-    
+
     private void OnMouseDown(MouseEventArgs e)
     {
         IsInBoxZoomMode = e.Buttons == ZoomButton && (ZoomModifier == Keys.None || ModifierPressed(ZoomModifier));
@@ -132,6 +138,8 @@
             case Keys.ShiftLeft:
                 return _pressedKeys.Contains("ShiftLeft") || _pressedKeys.Contains("ShiftRight") || _pressedKeys.Contains("Shift");
         }
+
+        return false;
     }
 
     private bool IsInBoxZoomMode
@@ -167,11 +175,12 @@
 
         RefreshData();
     }
+
     private static bool IsClick(MPoint currentPosition, MPoint previousPosition)
     {
         return Math.Abs(currentPosition.Distance(previousPosition)) < 5;
     }
-   
+
     private void OnMouseMove(MouseEventArgs e)
     {
         if (_downMousePosition != null)
@@ -195,7 +204,7 @@
             }
         }
     }
-    
+
     public void ZoomToBox(MPoint beginPoint, MPoint endPoint)
     {
         var width = Math.Abs(endPoint.X - beginPoint.X);
@@ -212,17 +221,30 @@
         RefreshGraphics();
         ClearBBoxDrawing();
     }
-    
+
     private void ClearBBoxDrawing()
     {
         RunOnUIThread(() => IsInBoxZoomMode = false);
     }
 
-    private float GetPixelDensity()
+    private protected override float GetPixelDensity()
     {
         return 1;
         // TODO: Ask for the Real Pixel size.
         // var center = PointToScreen(Location + Size / 2);
         // return Screen.FromPoint(center).LogicalPixelSize;
-    }   
+    }
+
+    public override void Dispose()
+    {
+        CommonDispose(true);
+    }
+
+    public float PixelDensity => GetPixelDensity();
+
+    public float ViewportWidth => _canvasSize?.Width ?? 0;
+    public float ViewportHeight => _canvasSize?.Height ?? 0;
+
+    // TODO: Implement Setting of Mouse
+    public string? Cursor { get; set; }
 }
