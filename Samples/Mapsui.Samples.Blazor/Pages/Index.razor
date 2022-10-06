@@ -42,7 +42,7 @@
 
     public string Title { get; set; }
 
-    private MapControl? mapControl;
+    private Mapsui.UI.Blazor.MapControl? mapControl;
 
     protected override void OnInitialized()
     {
@@ -76,7 +76,7 @@
 
     private void FillMap()
     {
-        if (Sample != null)
+        if (Sample != null && mapControl != null)
         {
             var sample = Sample;
             Title = sample.Name;
@@ -85,7 +85,7 @@
             {
                 try
                 {
-                    await sample.SetupAsync(mapControl as Mapsui.UI.IMapControl);
+                    await sample.SetupAsync(mapControl);
                 }
                 catch (Exception e)
                 {
