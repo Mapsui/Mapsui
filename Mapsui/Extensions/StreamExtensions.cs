@@ -63,24 +63,6 @@ namespace Mapsui.Extensions
 
             return false;
         }
-        
-        /// <summary> true if is Xml </summary>
-        /// <param name="buffer">buffer</param>
-        /// <returns>true if is xml</returns>
-        public static bool IsSkp(this byte[] buffer)
-        {
-            if (buffer.Length == 0)
-            {
-                return false;
-            }
-
-            if (Encoding.UTF8.GetString(buffer, 0, 4).ToLowerInvariant().Equals("skia"))
-            {
-                return true;
-            }
-
-            return false;
-        }
 
         /// <summary> Is Xml </summary>
         /// <param name="stream">stream</param>
@@ -93,7 +75,7 @@ namespace Mapsui.Extensions
             stream.Read(buffer, 0, 5);
             stream.Position = 0;
 
-            return IsXml(buffer);
+            return buffer.IsXml();
         }
 
         public static long ReadOneSearch(this Stream haystack, string needle)
