@@ -89,17 +89,18 @@ namespace Mapsui.Rendering.Skia
                 SKCanvas? skCanvas = null;
                 SKPictureRecorder? pictureRecorder = null;
                 try {
-                    if (renderFormat == RenderFormat.Skp)
+                    switch (renderFormat)
                     {
-                        pictureRecorder = new SKPictureRecorder();
-                        skCanvas = pictureRecorder.BeginRecording(new SKRect(0, 0, Convert.ToSingle(width), Convert.ToSingle(height)));
+                        case RenderFormat.Skp:
+                            pictureRecorder = new SKPictureRecorder();
+                            skCanvas = pictureRecorder.BeginRecording(new SKRect(0, 0, Convert.ToSingle(width), Convert.ToSingle(height)));
+                            break;
+                        default:
+                            surface = SKSurface.Create(imageInfo);
+                            skCanvas = surface.Canvas;
+                            break;
                     }
-                    else
-                    {
-                        surface = SKSurface.Create(imageInfo);
-                        skCanvas = surface.Canvas;
-                    }
-                    
+
                     if (skCanvas == null) return null;
                     // Not sure if this is needed here:
                     if (background is not null) skCanvas.Clear(background.ToSkia());
@@ -108,6 +109,7 @@ namespace Mapsui.Rendering.Skia
                     if (widgets is not null)
                         Render(skCanvas, viewport, widgets, 1);
                     memoryStream = new MemoryStream();
+                    
                     switch (renderFormat)
                     {
                         case RenderFormat.Skp:
@@ -116,27 +118,20 @@ namespace Mapsui.Rendering.Skia
                             skPicture?.Serialize(memoryStream);
                             break;
                         }
-                        default:
+                        case RenderFormat.Png:
                         {
                             using var image = surface.Snapshot();
-                            switch (renderFormat)
-                            {
-                                case RenderFormat.Png:
-                                {
-                                    using var data = image.Encode(SKEncodedImageFormat.Png, 100);
-                                    data.SaveTo(memoryStream);
-                                    break;
-                                }
-                                case RenderFormat.WebP:
-                                {
-                                    var options = new SKWebpEncoderOptions(SKWebpEncoderCompression.Lossless, 100);
-                                    using var peekPixels = image.PeekPixels();
-                                    using var data = peekPixels.Encode(options);
-                                    data.SaveTo(memoryStream);
-                                    break;
-                                }
-                            }
-
+                            using var data = image.Encode(SKEncodedImageFormat.Png, 100);
+                            data.SaveTo(memoryStream);
+                            break;
+                        }
+                        case RenderFormat.WebP:
+                        {
+                            using var image = surface.Snapshot();
+                            var options = new SKWebpEncoderOptions(SKWebpEncoderCompression.Lossless, 100);
+                            using var peekPixels = image.PeekPixels();
+                            using var data = peekPixels.Encode(options);
+                            data.SaveTo(memoryStream);
                             break;
                         }
                     }
