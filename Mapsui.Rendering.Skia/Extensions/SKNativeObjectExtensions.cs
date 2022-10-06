@@ -3,7 +3,7 @@ using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia.Extensions
 {
-    public static class SkExtensions
+    public static class SKNativeObjectExtensions
     {
         private static PropertyInfo? _disposedProperty;
 

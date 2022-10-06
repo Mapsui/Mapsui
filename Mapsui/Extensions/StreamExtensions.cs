@@ -70,6 +70,10 @@ namespace Mapsui.Extensions
         public static bool IsSkp(this byte[] buffer)
         {
             if (buffer.Length == 0)
+
+        public static B {
+            (
+        })}
             {
                 return false;
             }
@@ -96,23 +100,7 @@ namespace Mapsui.Extensions
             return IsXml(buffer);
         }
 
-        /// <summary> true if is Xml </summary>
-        /// <param name="buffer">buffer</param>
-        /// <returns>true if is xml</returns>
-        public static bool IsXml(this byte[] buffer)
-        {
-            if (buffer.Length == 0)
-            {
-                return false;
-            }
-
-            if (Encoding.UTF8.GetString(buffer, 0, 1).ToLowerInvariant().Equals("<"))
-            {
-                return true;
-            }
-
-            return false;
-        }
+        
 
         public static long ReadOneSearch(this Stream haystack, string needle)
         {
