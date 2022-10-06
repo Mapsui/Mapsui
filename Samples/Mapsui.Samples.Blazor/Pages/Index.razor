@@ -1,11 +1,100 @@
 ﻿@page "/"
+@using Mapsui.Samples.Common.Desktop
+@using Mapsui.Samples.Common
+@using Mapsui.Samples.Common.Extensions
+@using Mapsui.Samples.CustomWidget
+@using Mapsui.Extensions
+@using Mapsui.Logging
+@using Mapsui.UI.Blazor;
 
 <PageTitle>Mapsui</PageTitle>
 <h1>Hello, Mapsui!</h1>
+@*    <div class="form-group row">
+        <label for="category" class="col-sm-2 col-form-label">
+            Category
+        </label>
+        <div class="col-sm-10">
+            <InputSelect id="category" @bind-Value="CategoryId" class="form-control">
+                @foreach (var cat in Categories)
+                {
+                    <option value="@cat">@cat</option>
+                }
+            </InputSelect>
+        </div>
+    </div>*@
+
 <div class="container">
     <div class="row">
-         <div class="col border rounded p-2 canvas-container">
-             <MapControl/>
-         </div>
+        <div class="col border rounded p-2 canvas-container">
+            <MapControl @name="mapControl" />
+        </div>
     </div>
 </div>
+
+@code
+{
+    public List<ISampleBase> Samples { get; set; } = new();
+
+    public List<string> Categories { get; set; } = new();
+
+    public string CategoryId { get; set; }
+    
+    public string SampleId { get; set; }
+
+    public string Title { get; set; }
+
+    private MapControl? mapControl;
+
+    protected override void OnInitialized()
+    {
+        FillComboBoxWithCategories();
+    }
+    
+    private void FillComboBoxWithCategories()
+    {
+        var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c);
+        foreach (var category in categories)
+        {
+            Categories.Add(category);
+        }
+
+        CategoryId = Categories[0];
+
+        FillSamples();
+    }
+
+    private void FillSamples()
+    {
+        var list = AllSamples.GetSamples().Where(s => s.Category == CategoryId).OrderBy(c => c.Name);
+        Samples.Clear();
+        Samples.AddRange(list);
+        SampleId = Samples[0].Name;
+
+        Sample = Samples.FirstOrDefault(f => f.Name == SampleId);
+
+        FillMap();
+    }
+
+    private void FillMap()
+    {
+        if (Sample != null)
+        {
+            var sample = Sample;
+            Title = sample.Name;
+
+            Catch.TaskRun(async () =>
+            {
+                try
+                {
+                    await sample.SetupAsync(mapControl as Mapsui.UI.IMapControl);
+                }
+                catch (Exception e)
+                {
+                    Logger.Log(LogLevel.Error, e.Message, e);
+                }
+            });
+        }
+    }
+
+    public ISampleBase? Sample { get; set; }
+}

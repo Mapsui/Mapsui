@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.UI.Blazor\Mapsui.UI.Blazor.csproj" />
+    <ProjectReference Include="..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
   </ItemGroup>
 
 </Project>
