@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using BenchmarkDotNet.Attributes;
 using Mapsui.Nts.Providers.Shapefile;
 using Mapsui.Providers;
+using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
 using Mapsui.Styles;
 using Mapsui.Tiling.Layers;
