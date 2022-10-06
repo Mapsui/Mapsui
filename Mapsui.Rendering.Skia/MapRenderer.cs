@@ -148,6 +148,8 @@ namespace Mapsui.Rendering.Skia
             Render(skCanvas, viewport, layers);
             if (widgets is not null)
                 Render(skCanvas, viewport, widgets, 1);
+
+            return true;
         }
 
         private void Render(SKCanvas canvas, IReadOnlyViewport viewport, IEnumerable<ILayer> layers)
