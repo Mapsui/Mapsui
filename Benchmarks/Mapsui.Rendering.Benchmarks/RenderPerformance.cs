@@ -113,24 +113,28 @@ namespace Mapsui.Rendering.Benchmarks
         public void RenderDefault()
         {
             using var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Map!.Layers, Color.White);
+            File.WriteAllBytes(@"C:\Temp\test.bmp", bitmap!.ToArray());
         }
 
         [Benchmark]
         public void RenderRasterizingTilingPng()
         {
             using var bitmap = new MapRenderer().RenderToBitmapStream(pngMap.Viewport, pngMap.Map!.Layers, Color.White);
+            File.WriteAllBytes(@"C:\Temp\test.png", bitmap!.ToArray());
         }
 
         [Benchmark]
         public void RenderRasterizingTilingWebP()
         {
             using var bitmap = new MapRenderer().RenderToBitmapStream(webpMap.Viewport, webpMap.Map!.Layers, Color.White);
+            File.WriteAllBytes(@"C:\Temp\test.webp", bitmap!.ToArray());
         }
         
         [Benchmark]
         public void RenderRasterizingTilingSkp()
         {
             using var bitmap = new MapRenderer().RenderToBitmapStream(skpMap.Viewport, skpMap.Map!.Layers, Color.White);
+            File.WriteAllBytes(@"C:\Temp\test.skp", bitmap!.ToArray());
         }              
     }
 }
