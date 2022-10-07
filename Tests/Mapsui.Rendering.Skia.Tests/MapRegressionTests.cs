@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Desktop;
@@ -168,18 +169,7 @@ public class MapRegressionTests
     {
         if (mapControl.Map?.Layers != null)
         {
-            foreach (var layer in mapControl.Map.Layers)
-            {
-                await WaitForLoadingAsync(layer).ConfigureAwait(false);
-            }
-        }
-    }
-
-    private async Task WaitForLoadingAsync(ILayer layer)
-    {
-        while (layer.Busy)
-        {
-            await Task.Delay(100).ConfigureAwait(false);
+            await mapControl.Map.Layers.WaitForLoadingAsync().ConfigureAwait(false);
         }
     }
 }
