@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Rendering.Skia.Extensions;
@@ -85,7 +86,9 @@ namespace Mapsui.Rendering.Skia
                     SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
                 
                 MemoryStream memoryStream = new MemoryStream();
-                
+
+                layers.WaitForLoadingAsync().Wait();
+
                 switch (renderFormat)
                 {
                     case RenderFormat.Skp:
