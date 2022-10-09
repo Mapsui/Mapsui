@@ -69,12 +69,7 @@ namespace Mapsui.Rendering.Benchmarks
             ILayer layer = CreateCountryLayer(source);
             if (renderFormat != null)
             {
-                var compression = false;
-                if (renderFormat == RenderFormat.Skp)
-                {
-                    compression = true;
-                }
-
+                bool compression = renderFormat == RenderFormat.Skp;
                 layer = new RasterizingTileLayer(layer, persistentCache: new SqlitePersistentCache("Performance" + renderFormat, compression: compression), renderFormat: renderFormat.Value);
             }
 
