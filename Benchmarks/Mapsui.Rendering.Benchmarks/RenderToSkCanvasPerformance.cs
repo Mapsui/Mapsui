@@ -12,13 +12,16 @@ using Mapsui.Rendering.Skia.Tests;
 using Mapsui.Styles.Thematics;
 using Mapsui.Nts.Providers;
 using SkiaSharp;
+using BenchmarkDotNet.Configs;
+using BenchmarkDotNet.Jobs;
+using BenchmarkDotNet.Toolchains.InProcess.Emit;
 
 #pragma warning disable IDISP001
 #pragma warning disable IDISP003
 
 namespace Mapsui.Rendering.Benchmarks
 {
-    [SimpleJob(RunStrategy.Throughput)]
+    [SimpleJob]
     [MinColumn, MaxColumn, MeanColumn, MedianColumn]
     public class RenderToSkCanvasPerformance
     {
@@ -28,6 +31,8 @@ namespace Mapsui.Rendering.Benchmarks
         private static readonly RegressionMapControl map;
         private static readonly MapRenderer mapRenderer;
         private readonly SKCanvas skCanvas;
+        private readonly SKImageInfo imageInfo;
+        private readonly SKSurface surface;
 
         static RenderToSkCanvasPerformance()
         {
@@ -40,10 +45,10 @@ namespace Mapsui.Rendering.Benchmarks
 
         public RenderToSkCanvasPerformance()
         {
-            var imageInfo = new SKImageInfo((int)Math.Round(800 * 1.0), (int)Math.Round(600 * 1.0),
+            imageInfo = new SKImageInfo((int)Math.Round(800 * 1.0), (int)Math.Round(600 * 1.0),
                 SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
 
-            var surface = SKSurface.Create(imageInfo);
+            surface = SKSurface.Create(imageInfo);
             skCanvas = surface.Canvas;
         }
         
