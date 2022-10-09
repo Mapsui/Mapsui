@@ -116,16 +116,16 @@ namespace Mapsui.Rendering.Benchmarks
         }
         
         [Benchmark]
-        public async Task RenderDefault()
+        public async Task RenderDefaultAsync()
         {
-            using var bitmap = mapRenderer.RenderToBitmapStreamAsync(map.Viewport, map.Map!.Layers, Color.White);
+            using var bitmap = await mapRenderer.RenderToBitmapStreamAsync(map.Viewport, map.Map!.Layers, Color.White);
 #if DEBUG
             File.WriteAllBytes(@$"{OutputFolder()}\Test.png", bitmap.ToArray());
 #endif
         }
 
         [Benchmark]
-        public async Task RenderRasterizingTilingPng()
+        public async Task RenderRasterizingTilingPngAsync()
         { 
             using var bitmap = await mapRenderer.RenderToBitmapStreamAsync(pngMap.Viewport, pngMap.Map!.Layers, Color.White);
 #if DEBUG
@@ -134,7 +134,7 @@ namespace Mapsui.Rendering.Benchmarks
         }
 
         [Benchmark]
-        public async Task RenderRasterizingTilingWebP()
+        public async Task RenderRasterizingTilingWebPAsync()
         {
             using var bitmap = await mapRenderer.RenderToBitmapStreamAsync(webpMap.Viewport, webpMap.Map!.Layers, Color.White);
 #if DEBUG
@@ -143,7 +143,7 @@ namespace Mapsui.Rendering.Benchmarks
         }
         
         [Benchmark]
-        public async Task RenderRasterizingTilingSkp()
+        public async Task RenderRasterizingTilingSkpAsync()
         {
             using var bitmap = await mapRenderer.RenderToBitmapStreamAsync(skpMap.Viewport, skpMap.Map!.Layers, Color.White);
 #if DEBUG
