@@ -14,6 +14,7 @@ using Mapsui.UI.Maui.Extensions;
 using Microsoft.Maui;
 using Microsoft.Maui.ApplicationModel;
 using Microsoft.Maui.Controls;
+using Microsoft.Maui.Devices;
 using Microsoft.Maui.Graphics;
 using SkiaSharp.Views.Maui;
 using SkiaSharp.Views.Maui.Controls;
@@ -42,7 +43,7 @@ namespace Mapsui.UI.Forms
 #if __MAUI__
         // GPU does not work currently on MAUI
         // See https://github.com/mono/SkiaSharp/issues/1893
-        public static bool UseGPU = false;
+        public static bool UseGPU = DeviceInfo.Platform != DevicePlatform.WinUI;
 #else
         public static bool UseGPU = true;
 #endif
