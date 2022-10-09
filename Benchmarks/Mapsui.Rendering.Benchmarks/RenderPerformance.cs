@@ -1,32 +1,22 @@
-﻿using BenchmarkDotNet.Disassemblers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BenchmarkDotNet.Attributes;
+﻿using BenchmarkDotNet.Attributes;
 using Mapsui.Nts.Providers.Shapefile;
 using Mapsui.Providers;
-using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
 using Mapsui.Styles;
 using Mapsui.Tiling.Layers;
-using System.Reflection;
 using BenchmarkDotNet.Engines;
 using Mapsui.Extensions.Cache;
 using Mapsui.Layers;
 using Mapsui.Rendering.Skia.Tests;
 using Mapsui.Styles.Thematics;
-using System.IO;
 using Mapsui.Nts.Providers;
-using NetTopologySuite.Geometries;
 
 #pragma warning disable IDISP001
 #pragma warning disable IDISP003
 
 namespace Mapsui.Rendering.Benchmarks
 {
-    [SimpleJob(RunStrategy.Throughput, targetCount: 1)]
+    [SimpleJob(RunStrategy.Throughput)]
     [MinColumn, MaxColumn, MeanColumn, MedianColumn]
     public class RenderPerformance
     {
@@ -79,7 +69,13 @@ namespace Mapsui.Rendering.Benchmarks
             ILayer layer = CreateCountryLayer(source);
             if (renderFormat != null)
             {
-                layer = new RasterizingTileLayer(layer, persistentCache: new SqlitePersistentCache("Performance" + renderFormat, compression: true), renderFormat: renderFormat.Value);
+                var compression = false;
+                if (renderFormat == RenderFormat.Skp)
+                {
+                    compression = true;
+                }
+
+                layer = new RasterizingTileLayer(layer, persistentCache: new SqlitePersistentCache("Performance" + renderFormat, compression: compression), renderFormat: renderFormat.Value);
             }
 
             map.Layers.Add(layer);
