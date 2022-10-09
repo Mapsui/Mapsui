@@ -1,10 +1,16 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.IO.Compression;
 using BruTile;
 using BruTile.Cache;
 using Mapsui.Cache;
 using Mapsui.Logging;
 using SQLite;
+
+#if NETSTANDARD2_0
+using BrotliSharpLib;
+#endif
 
 namespace Mapsui.Extensions.Cache;
 
@@ -12,8 +18,9 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
 {
     private readonly string _file;
     private readonly TimeSpan _cacheExpireTime;
+    private bool _compression;
 
-    public SqlitePersistentCache(string name, TimeSpan? cacheExpireTime = null, string? folder = null)
+    public SqlitePersistentCache(string name, TimeSpan? cacheExpireTime = null, string? folder = null, bool compression = false)
     {
         folder ??= Path.GetTempPath();
         if (!Directory.Exists(folder))
@@ -23,6 +30,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
 
         _file = Path.Combine(folder, name + ".sqlite");
         _cacheExpireTime = cacheExpireTime ?? TimeSpan.Zero;
+        _compression = compression;
         InitDb();
     }
 
@@ -75,6 +83,11 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
 
     public void Add(TileIndex index, byte[] tile)
     {
+        if (_compression)
+        {
+            tile = Compress(tile);
+        }
+
         using var connection = CreateConnection();
         var data = new Tile
         {
@@ -84,6 +97,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
             Created = DateTime.Now,
             Data = tile,
         };
+
         connection.Insert(data);
     }
 
@@ -110,11 +124,22 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
             }
         }
 
-        return tile?.Data!;
+        var result = tile?.Data!;
+        if (_compression)
+        {
+            result = Decompress(result);
+        }
+
+        return result;
     }
 
     public void Add(string url, byte[] tile)
     {
+        if (_compression)
+        {
+            tile = Compress(tile);
+        }
+
         using var connection = CreateConnection();
         var data = new UrlCache() {
             Url = url,
@@ -143,7 +168,47 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
                 return null;
             }
         }
-        return tile?.Data;
+
+        var result = tile?.Data;
+        if (_compression)
+        {
+            result = Decompress(result);
+        }
+
+        return result;
+    }
+
+    [return: NotNullIfNotNull("bytes")]
+    private static byte[]? Compress(byte[]? bytes)
+    {
+        if (bytes == null)
+            return null;
+
+        using var outputStream = new MemoryStream();
+#if NETSTANDARD2_0
+        using (var compressStream = new BrotliStream(outputStream, CompressionMode.Compress))
+#else
+        using (var compressStream = new BrotliStream(outputStream, CompressionLevel.Optimal))
+#endif
+        {
+            compressStream.Write(bytes, 0, bytes.Length);
+        }
+        return outputStream.ToArray();
+    }
+
+    [return: NotNullIfNotNull("bytes")]
+    private static byte[]? Decompress(byte[]? bytes)
+    {
+        if (bytes == null)
+            return null;
+
+        using var inputStream = new MemoryStream(bytes);
+        using var outputStream = new MemoryStream();
+        using (var decompressStream = new BrotliStream(inputStream, CompressionMode.Decompress))
+        {
+            decompressStream.CopyTo(outputStream);
+        }
+        return outputStream.ToArray();
     }
 
     private SQLiteConnection CreateConnection()

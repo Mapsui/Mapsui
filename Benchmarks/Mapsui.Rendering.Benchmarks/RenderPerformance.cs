@@ -18,6 +18,8 @@ using Mapsui.Layers;
 using Mapsui.Rendering.Skia.Tests;
 using Mapsui.Styles.Thematics;
 using System.IO;
+using Mapsui.Nts.Providers;
+using NetTopologySuite.Geometries;
 
 #pragma warning disable IDISP001
 #pragma warning disable IDISP003
@@ -28,12 +30,12 @@ namespace Mapsui.Rendering.Benchmarks
     [MinColumn, MaxColumn, MeanColumn, MedianColumn]
     public class RenderPerformance
     {
-        private readonly RegressionMapControl skpMap;
-        private readonly RegressionMapControl pngMap;
-        private readonly RegressionMapControl webpMap;
-        private readonly RegressionMapControl map;
+        private static readonly RegressionMapControl skpMap;
+        private static readonly RegressionMapControl pngMap;
+        private static readonly RegressionMapControl webpMap;
+        private static readonly RegressionMapControl map;
 
-        public RenderPerformance()
+        static RenderPerformance()
         {
             skpMap = CreateMapControl(RenderFormat.Skp);            
             pngMap = CreateMapControl(RenderFormat.Png);
@@ -66,10 +68,18 @@ namespace Mapsui.Rendering.Benchmarks
                 CRS = "EPSG:3857",
             };
 
-            ILayer layer = CreateCountryLayer(projectedCountrySource);
+            IProvider source = projectedCountrySource;
+
+            if (renderFormat == RenderFormat.Skp)
+            {
+                source = new GeometrySimplifyProvider(projectedCountrySource);
+                source = new GeometryIntersectionProvider(source);
+            }
+
+            ILayer layer = CreateCountryLayer(source);
             if (renderFormat != null)
             {
-                layer = new RasterizingTileLayer(layer, persistentCache: new MemoryPersistentCache(), renderFormat: renderFormat.Value);
+                layer = new RasterizingTileLayer(layer, persistentCache: new SqlitePersistentCache("Performance" + renderFormat, compression: true), renderFormat: renderFormat.Value);
             }
 
             map.Layers.Add(layer);
