@@ -104,7 +104,7 @@ namespace Mapsui.Layers
 
                 _currentViewport = viewport;
 
-                using var bitmapStream = await _rasterizer.RenderToBitmapStreamAsync(viewport, new[] { _layer }, pixelDensity: _pixelDensity);
+                using var bitmapStream = _rasterizer.RenderToBitmapStream(viewport, new[] { _layer }, pixelDensity: _pixelDensity);
                 RemoveExistingFeatures();
 
                 if (bitmapStream != null)

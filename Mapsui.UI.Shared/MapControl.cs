@@ -535,11 +535,11 @@ namespace Mapsui.UI.Wpf
         }
 
         /// <inheritdoc />
-        public async Task<byte[]?> GetSnapshotAsync(IEnumerable<ILayer>? layers = null)
+        public byte[]? GetSnapshot(IEnumerable<ILayer>? layers = null)
         {
             byte[]? result = null;
 
-            using (var stream = await Renderer?.RenderToBitmapStreamAsync(Viewport, layers ?? Map?.Layers ?? new LayerCollection(), pixelDensity: PixelDensity))
+            using (var stream = Renderer?.RenderToBitmapStream(Viewport, layers ?? Map?.Layers ?? new LayerCollection(), pixelDensity: PixelDensity))
             {
                 if (stream != null)
                     result = stream.ToArray();

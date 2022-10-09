@@ -118,7 +118,8 @@ namespace Mapsui.Rendering.Benchmarks
         [Benchmark]
         public async Task RenderDefaultAsync()
         {
-            using var bitmap = await mapRenderer.RenderToBitmapStreamAsync(map.Viewport, map.Map!.Layers, Color.White);
+            await map.Map!.Layers.WaitForLoadingAsync();
+            using var bitmap = mapRenderer.RenderToBitmapStream(map.Viewport, map.Map!.Layers, Color.White);
 #if DEBUG
             File.WriteAllBytes(@$"{OutputFolder()}\Test.png", bitmap.ToArray());
 #endif
@@ -127,7 +128,8 @@ namespace Mapsui.Rendering.Benchmarks
         [Benchmark]
         public async Task RenderRasterizingTilingPngAsync()
         { 
-            using var bitmap = await mapRenderer.RenderToBitmapStreamAsync(pngMap.Viewport, pngMap.Map!.Layers, Color.White);
+            await pngMap.Map!.Layers.WaitForLoadingAsync();
+            using var bitmap = mapRenderer.RenderToBitmapStream(pngMap.Viewport, pngMap.Map!.Layers, Color.White);
 #if DEBUG
             File.WriteAllBytes(@$"{OutputFolder()}\Testpng.png", bitmap.ToArray());
 #endif
@@ -136,7 +138,8 @@ namespace Mapsui.Rendering.Benchmarks
         [Benchmark]
         public async Task RenderRasterizingTilingWebPAsync()
         {
-            using var bitmap = await mapRenderer.RenderToBitmapStreamAsync(webpMap.Viewport, webpMap.Map!.Layers, Color.White);
+            await webpMap.Map!.Layers.WaitForLoadingAsync();
+            using var bitmap = mapRenderer.RenderToBitmapStream(webpMap.Viewport, webpMap.Map!.Layers, Color.White);
 #if DEBUG
             File.WriteAllBytes(@$"{OutputFolder()}\Testwebp.png", bitmap.ToArray());
 #endif
@@ -145,7 +148,8 @@ namespace Mapsui.Rendering.Benchmarks
         [Benchmark]
         public async Task RenderRasterizingTilingSkpAsync()
         {
-            using var bitmap = await mapRenderer.RenderToBitmapStreamAsync(skpMap.Viewport, skpMap.Map!.Layers, Color.White);
+            await skpMap.Map!.Layers.WaitForLoadingAsync();
+            using var bitmap = mapRenderer.RenderToBitmapStream(skpMap.Viewport, skpMap.Map!.Layers, Color.White);
 #if DEBUG
             File.WriteAllBytes(@$"{OutputFolder()}\Testskp.png", bitmap.ToArray());
 #endif
