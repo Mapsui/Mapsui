@@ -115,24 +115,44 @@ namespace Mapsui.Rendering.Benchmarks
         public void RenderDefault()
         {
             using var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Map!.Layers, Color.White);
+#if DEBUG
+            File.WriteAllBytes(@$"{OutputFolder()}\Test.png", bitmap.ToArray());
+#endif
         }
 
         [Benchmark]
         public void RenderRasterizingTilingPng()
         {
             using var bitmap = new MapRenderer().RenderToBitmapStream(pngMap.Viewport, pngMap.Map!.Layers, Color.White);
+#if DEBUG
+            File.WriteAllBytes(@$"{OutputFolder()}\Testpng.png", bitmap.ToArray());
+#endif
         }
 
         [Benchmark]
         public void RenderRasterizingTilingWebP()
         {
             using var bitmap = new MapRenderer().RenderToBitmapStream(webpMap.Viewport, webpMap.Map!.Layers, Color.White);
+#if DEBUG
+            File.WriteAllBytes(@$"{OutputFolder()}\Testwebp.png", bitmap.ToArray());
+#endif
         }
         
         [Benchmark]
         public void RenderRasterizingTilingSkp()
         {
             using var bitmap = new MapRenderer().RenderToBitmapStream(skpMap.Viewport, skpMap.Map!.Layers, Color.White);
+#if DEBUG
+            File.WriteAllBytes(@$"{OutputFolder()}\Testskp.png", bitmap.ToArray());
+#endif
         }              
+
+#if DEBUG
+        private string OutputFolder()
+        {
+            var path = Path.GetDirectoryName(typeof(RenderPerformance).Assembly.Location);
+            return path;
+        }
+#endif
     }
 }

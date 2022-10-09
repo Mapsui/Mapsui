@@ -34,7 +34,7 @@ public class GeometryIntersectionProvider : IProvider
 
     private IEnumerable<IFeature> IterateFeatures(FetchInfo fetchInfo, IEnumerable<IFeature> features)
     {
-        var rectangle = fetchInfo.Extent.Grow(1).ToPolygon();
+        var rectangle = fetchInfo.Extent.Grow(fetchInfo.Resolution).ToPolygon();
         
         foreach (var feature in features)
             if (feature is GeometryFeature geometryFeature)
