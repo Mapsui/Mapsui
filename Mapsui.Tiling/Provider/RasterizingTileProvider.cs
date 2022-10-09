@@ -68,7 +68,7 @@ public class RasterizingTileProvider : ITileSource
             var renderer = GetRenderer();
             var (viewPort, renderLayer) = await CreateRenderLayerAsync(tileInfo);
 
-            using var stream = renderer.RenderToBitmapStream(viewPort, new[] { renderLayer }, pixelDensity: _pixelDensity, renderFormat: _renderFormat);
+            using var stream = await renderer.RenderToBitmapStreamAsync(viewPort, new[] { renderLayer }, pixelDensity: _pixelDensity, renderFormat: _renderFormat);
             _rasterizingLayers.Push(renderer);
             result = stream?.ToArray();
             PersistentCache?.Add(index, result ?? Array.Empty<byte>());

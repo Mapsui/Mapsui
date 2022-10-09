@@ -5,6 +5,7 @@ using Mapsui.Rendering.Skia;
 using Mapsui.Styles;
 using Mapsui.Tiling.Layers;
 using BenchmarkDotNet.Engines;
+using Mapsui.Extensions;
 using Mapsui.Extensions.Cache;
 using Mapsui.Layers;
 using Mapsui.Rendering.Skia.Tests;
@@ -24,9 +25,11 @@ namespace Mapsui.Rendering.Benchmarks
         private static readonly RegressionMapControl pngMap;
         private static readonly RegressionMapControl webpMap;
         private static readonly RegressionMapControl map;
+        private static readonly MapRenderer mapRenderer;
 
         static RenderPerformance()
         {
+            mapRenderer = new MapRenderer();
             skpMap = CreateMapControl(RenderFormat.Skp);            
             pngMap = CreateMapControl(RenderFormat.Png);
             webpMap = CreateMapControl(RenderFormat.WebP);
@@ -43,6 +46,7 @@ namespace Mapsui.Rendering.Benchmarks
             // fetch data first time
             var fetchInfo = new FetchInfo(mapControl.Viewport.Extent!, mapControl.Viewport.Resolution, mapControl.Map?.CRS);
             mapControl.Map?.RefreshData(fetchInfo);
+            mapControl.Map?.Layers.WaitForLoadingAsync().Wait();
             
             return mapControl;
         }
@@ -112,36 +116,36 @@ namespace Mapsui.Rendering.Benchmarks
         }
         
         [Benchmark]
-        public void RenderDefault()
+        public async Task RenderDefault()
         {
-            using var bitmap = new MapRenderer().RenderToBitmapStream(map.Viewport, map.Map!.Layers, Color.White);
+            using var bitmap = mapRenderer.RenderToBitmapStreamAsync(map.Viewport, map.Map!.Layers, Color.White);
 #if DEBUG
             File.WriteAllBytes(@$"{OutputFolder()}\Test.png", bitmap.ToArray());
 #endif
         }
 
         [Benchmark]
-        public void RenderRasterizingTilingPng()
-        {
-            using var bitmap = new MapRenderer().RenderToBitmapStream(pngMap.Viewport, pngMap.Map!.Layers, Color.White);
+        public async Task RenderRasterizingTilingPng()
+        { 
+            using var bitmap = await mapRenderer.RenderToBitmapStreamAsync(pngMap.Viewport, pngMap.Map!.Layers, Color.White);
 #if DEBUG
             File.WriteAllBytes(@$"{OutputFolder()}\Testpng.png", bitmap.ToArray());
 #endif
         }
 
         [Benchmark]
-        public void RenderRasterizingTilingWebP()
+        public async Task RenderRasterizingTilingWebP()
         {
-            using var bitmap = new MapRenderer().RenderToBitmapStream(webpMap.Viewport, webpMap.Map!.Layers, Color.White);
+            using var bitmap = await mapRenderer.RenderToBitmapStreamAsync(webpMap.Viewport, webpMap.Map!.Layers, Color.White);
 #if DEBUG
             File.WriteAllBytes(@$"{OutputFolder()}\Testwebp.png", bitmap.ToArray());
 #endif
         }
         
         [Benchmark]
-        public void RenderRasterizingTilingSkp()
+        public async Task RenderRasterizingTilingSkp()
         {
-            using var bitmap = new MapRenderer().RenderToBitmapStream(skpMap.Viewport, skpMap.Map!.Layers, Color.White);
+            using var bitmap = await mapRenderer.RenderToBitmapStreamAsync(skpMap.Viewport, skpMap.Map!.Layers, Color.White);
 #if DEBUG
             File.WriteAllBytes(@$"{OutputFolder()}\Testskp.png", bitmap.ToArray());
 #endif

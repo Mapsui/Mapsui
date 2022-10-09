@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
@@ -71,7 +72,7 @@ namespace Mapsui.Rendering.Skia
             Render(canvas, viewport, widgets, 1);
         }
 
-        public MemoryStream? RenderToBitmapStream(IReadOnlyViewport? viewport, IEnumerable<ILayer> layers, 
+        public async Task<MemoryStream?> RenderToBitmapStreamAsync(IReadOnlyViewport? viewport, IEnumerable<ILayer> layers, 
             Color? background = null, float pixelDensity = 1, IEnumerable<IWidget>? widgets = null, RenderFormat renderFormat = RenderFormat.Png)
         {
             if (viewport == null)
@@ -87,7 +88,7 @@ namespace Mapsui.Rendering.Skia
                 
                 MemoryStream memoryStream = new MemoryStream();
 
-                layers.WaitForLoadingAsync().Wait();
+                await layers.WaitForLoadingAsync().ConfigureAwait(false);
 
                 switch (renderFormat)
                 {
