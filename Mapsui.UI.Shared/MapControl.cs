@@ -535,7 +535,7 @@ namespace Mapsui.UI.Wpf
         }
 
         /// <inheritdoc />
-        public async Task<byte[]?> GetSnapshot(IEnumerable<ILayer>? layers = null)
+        public async Task<byte[]?> GetSnapshotAsync(IEnumerable<ILayer>? layers = null)
         {
             byte[]? result = null;
 
