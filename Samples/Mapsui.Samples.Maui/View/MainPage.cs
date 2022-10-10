@@ -47,6 +47,8 @@ public sealed class MainPage : ContentPage, IDisposable
         categoryPicker!.ItemsSource = categories.ToList();
         categoryPicker.SelectedIndexChanged += categoryPicker_SelectedIndexChanged;
         categoryPicker.SelectedItem = "Info";
+
+        mapControl.Map = ((ISample)allSamples.First(s => s.Category == categoryPicker.SelectedItem.ToString())).CreateMapAsync().Result;
     }
 
     private static Picker CreatePicker()
