@@ -1,4 +1,6 @@
-﻿using BenchmarkDotNet.Attributes;
+﻿using System.IO;
+using System.Windows;
+using BenchmarkDotNet.Attributes;
 using Mapsui.Nts.Providers.Shapefile;
 using Mapsui.Providers;
 using Mapsui.Rendering.Skia;
@@ -15,6 +17,7 @@ using SkiaSharp;
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Toolchains.InProcess.Emit;
+using SkiaSharp.Views.Forms;
 
 #pragma warning disable IDISP001
 #pragma warning disable IDISP003
@@ -23,18 +26,17 @@ namespace Mapsui.Rendering.Benchmarks
 {
     [SimpleJob]
     [MinColumn, MaxColumn, MeanColumn, MedianColumn]
-    public class RenderToSkCanvasPerformance
+    public class RenderToGpuPerformance
     {
         private static readonly RegressionMapControl skpMap;
         private static readonly RegressionMapControl pngMap;
         private static readonly RegressionMapControl webpMap;
         private static readonly RegressionMapControl map;
         private static readonly MapRenderer mapRenderer;
-        private readonly SKCanvas skCanvas;
-        private readonly SKImageInfo imageInfo;
-        private readonly SKSurface surface;
+        private readonly SKGLView _glView;
+        private readonly Window window;
 
-        static RenderToSkCanvasPerformance()
+        static RenderToGpuPerformance()
         {
             mapRenderer = new MapRenderer();
             skpMap = CreateMapControl(RenderFormat.Skp);            
@@ -43,13 +45,24 @@ namespace Mapsui.Rendering.Benchmarks
             map = CreateMapControl();
         }
 
-        public RenderToSkCanvasPerformance()
+        public RenderToGpuPerformance()
         {
-            imageInfo = new SKImageInfo((int)Math.Round(800 * 1.0), (int)Math.Round(600 * 1.0),
-                SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
+            _glView = new SKGLView
+            {
+                HasRenderLoop = false,
+                EnableTouchEvents = true,
+                WidthRequest = 800,
+                HeightRequest = 600,
+            };
 
-            surface = SKSurface.Create(imageInfo);
-            skCanvas = surface.Canvas;
+            window = new Window
+            {
+                Width = 800,
+                Height = 600,
+                Content = _glView
+            };
+
+            window.Show();
         }
         
         public static RegressionMapControl CreateMapControl(RenderFormat? renderFormat = null)
@@ -103,7 +116,7 @@ namespace Mapsui.Rendering.Benchmarks
 
         private static string GetAppDir()
         {
-            var path = Path.GetDirectoryName(typeof(RenderToSkCanvasPerformance).Assembly.Location)!;
+            var path = Path.GetDirectoryName(typeof(RenderToGpuPerformance).Assembly.Location)!;
             return path;
         }
 
@@ -131,32 +144,67 @@ namespace Mapsui.Rendering.Benchmarks
             return new GradientTheme("PopDens", 0, 400, min, max) { FillColorBlend = ColorBlend.Rainbow5 };
         }
         
+        // Benchmark on Gpu don't work yet
+/*
         [Benchmark]
         public async Task RenderDefaultAsync()
         {
-            await map.Map!.Layers.WaitForLoadingAsync();
-            mapRenderer.Render(skCanvas, map.Viewport, map.Map!.Layers, map.Map!.Widgets, Color.White);
+            var wait = new TaskCompletionSource<bool>();
+            await map.WaitForLoadingAsync();
+            _glView.PaintSurface += (sender, args) =>
+            {
+                mapRenderer.Render(args.Surface.Canvas, map.Viewport, map.Map!.Layers, map.Map!.Widgets, Color.White);
+                wait.SetResult(true);
+            };
+
+            _glView.InvalidateSurface();
+            await wait.Task;
         }
 
         [Benchmark]
         public async Task RenderRasterizingTilingPngAsync()
         { 
-            await pngMap.Map!.Layers.WaitForLoadingAsync();
-            mapRenderer.Render(skCanvas, pngMap.Viewport, pngMap.Map!.Layers, pngMap.Map!.Widgets, Color.White);
+            var wait = new TaskCompletionSource<bool>();
+            await pngMap.WaitForLoadingAsync();
+            _glView.PaintSurface += (sender, args) =>
+            {
+                mapRenderer.Render(args.Surface.Canvas, pngMap.Viewport, pngMap.Map!.Layers, pngMap.Map!.Widgets, Color.White);
+                wait.SetResult(true);
+            };
+
+            _glView.InvalidateSurface();
+            await wait.Task;
         }
 
         [Benchmark]
         public async Task RenderRasterizingTilingWebPAsync()
         {
-            await webpMap.Map!.Layers.WaitForLoadingAsync();
-            mapRenderer.Render(skCanvas, webpMap.Viewport, webpMap.Map!.Layers, webpMap.Map!.Widgets, Color.White);
+            var wait = new TaskCompletionSource<bool>();
+            await webpMap.WaitForLoadingAsync();
+            _glView.PaintSurface += (sender, args) =>
+            {
+                mapRenderer.Render(args.Surface.Canvas, webpMap.Viewport, webpMap.Map!.Layers, webpMap.Map!.Widgets, Color.White);
+                wait.SetResult(true);
+            };
+
+            _glView.InvalidateSurface();
+            await wait.Task;
         }
         
         [Benchmark]
         public async Task RenderRasterizingTilingSkpAsync()
         {
-            await skpMap.Map!.Layers.WaitForLoadingAsync();
-            mapRenderer.Render(skCanvas, skpMap.Viewport, skpMap.Map!.Layers, skpMap.Map!.Widgets, Color.White);
+            var wait = new TaskCompletionSource<bool>();
+            await skpMap.WaitForLoadingAsync();
+            _glView.PaintSurface += (sender, args) =>
+            {
+                mapRenderer.Render(args.Surface.Canvas, skpMap.Viewport, skpMap.Map!.Layers, skpMap.Map!.Widgets, Color.White);
+                wait.SetResult(true);
+            };
+
+            _glView.InvalidateSurface();
+            await wait.Task;
         }
+*/
     }
 }

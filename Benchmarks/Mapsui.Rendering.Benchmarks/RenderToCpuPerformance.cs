@@ -12,29 +12,45 @@ using Mapsui.Layers;
 using Mapsui.Rendering.Skia.Tests;
 using Mapsui.Styles.Thematics;
 using Mapsui.Nts.Providers;
+using SkiaSharp;
+using BenchmarkDotNet.Configs;
+using BenchmarkDotNet.Jobs;
+using BenchmarkDotNet.Toolchains.InProcess.Emit;
 
 #pragma warning disable IDISP001
 #pragma warning disable IDISP003
 
 namespace Mapsui.Rendering.Benchmarks
 {
-    [SimpleJob(RunStrategy.Throughput)]
+    [SimpleJob]
     [MinColumn, MaxColumn, MeanColumn, MedianColumn]
-    public class RenderToBitmapPerformance
+    public class RenderToCpuPerformance
     {
         private static readonly RegressionMapControl skpMap;
         private static readonly RegressionMapControl pngMap;
         private static readonly RegressionMapControl webpMap;
         private static readonly RegressionMapControl map;
         private static readonly MapRenderer mapRenderer;
+        private readonly SKCanvas skCanvas;
+        private readonly SKImageInfo imageInfo;
+        private readonly SKSurface surface;
 
-        static RenderToBitmapPerformance()
+        static RenderToCpuPerformance()
         {
             mapRenderer = new MapRenderer();
             skpMap = CreateMapControl(RenderFormat.Skp);            
             pngMap = CreateMapControl(RenderFormat.Png);
             webpMap = CreateMapControl(RenderFormat.WebP);
             map = CreateMapControl();
+        }
+
+        public RenderToCpuPerformance()
+        {
+            imageInfo = new SKImageInfo((int)Math.Round(800 * 1.0), (int)Math.Round(600 * 1.0),
+                SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
+
+            surface = SKSurface.Create(imageInfo);
+            skCanvas = surface.Canvas;
         }
         
         public static RegressionMapControl CreateMapControl(RenderFormat? renderFormat = null)
@@ -88,7 +104,7 @@ namespace Mapsui.Rendering.Benchmarks
 
         private static string GetAppDir()
         {
-            var path = Path.GetDirectoryName(typeof(RenderToBitmapPerformance).Assembly.Location)!;
+            var path = Path.GetDirectoryName(typeof(RenderToCpuPerformance).Assembly.Location)!;
             return path;
         }
 
@@ -120,48 +136,28 @@ namespace Mapsui.Rendering.Benchmarks
         public async Task RenderDefaultAsync()
         {
             await map.Map!.Layers.WaitForLoadingAsync();
-            using var bitmap = mapRenderer.RenderToBitmapStream(map.Viewport, map.Map!.Layers, Color.White);
-#if DEBUG
-            File.WriteAllBytes(@$"{OutputFolder()}\Test.png", bitmap.ToArray());
-#endif
+            mapRenderer.Render(skCanvas, map.Viewport, map.Map!.Layers, map.Map!.Widgets, Color.White);
         }
 
         [Benchmark]
         public async Task RenderRasterizingTilingPngAsync()
         { 
             await pngMap.Map!.Layers.WaitForLoadingAsync();
-            using var bitmap = mapRenderer.RenderToBitmapStream(pngMap.Viewport, pngMap.Map!.Layers, Color.White);
-#if DEBUG
-            File.WriteAllBytes(@$"{OutputFolder()}\Testpng.png", bitmap.ToArray());
-#endif
+            mapRenderer.Render(skCanvas, pngMap.Viewport, pngMap.Map!.Layers, pngMap.Map!.Widgets, Color.White);
         }
 
         [Benchmark]
         public async Task RenderRasterizingTilingWebPAsync()
         {
             await webpMap.Map!.Layers.WaitForLoadingAsync();
-            using var bitmap = mapRenderer.RenderToBitmapStream(webpMap.Viewport, webpMap.Map!.Layers, Color.White);
-#if DEBUG
-            File.WriteAllBytes(@$"{OutputFolder()}\Testwebp.png", bitmap.ToArray());
-#endif
+            mapRenderer.Render(skCanvas, webpMap.Viewport, webpMap.Map!.Layers, webpMap.Map!.Widgets, Color.White);
         }
         
         [Benchmark]
         public async Task RenderRasterizingTilingSkpAsync()
         {
             await skpMap.Map!.Layers.WaitForLoadingAsync();
-            using var bitmap = mapRenderer.RenderToBitmapStream(skpMap.Viewport, skpMap.Map!.Layers, Color.White);
-#if DEBUG
-            File.WriteAllBytes(@$"{OutputFolder()}\Testskp.png", bitmap.ToArray());
-#endif
-        }              
-
-#if DEBUG
-        private string OutputFolder()
-        {
-            var path = Path.GetDirectoryName(typeof(RenderToBitmapPerformance).Assembly.Location);
-            return path;
+            mapRenderer.Render(skCanvas, skpMap.Viewport, skpMap.Map!.Layers, skpMap.Map!.Widgets, Color.White);
         }
-#endif
     }
 }
