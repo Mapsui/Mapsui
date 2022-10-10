@@ -11,6 +11,7 @@ using System.IO;
 using System.Net;
 using System.Security;
 using Mapsui.Cache;
+using Mapsui.Logging;
 using Mapsui.Utilities;
 
 namespace Mapsui.Providers.Wfs.Utilities
@@ -109,13 +110,13 @@ namespace Mapsui.Providers.Wfs.Utilities
             }
             catch (SecurityException ex)
             {
-                Trace.TraceError("An exception occurred due to security reasons while initializing a request to " + _url +
-                                 ": " + ex.Message);
+                Logger.Log(LogLevel.Error, "An exception occurred due to security reasons while initializing a request to " + _url +
+                                           ": " + ex.Message, ex);
                 throw;
             }
             catch (NotSupportedException ex)
             {
-                Trace.TraceError("An exception occurred while initializing a request to " + _url + ": " + ex.Message);
+                Logger.Log(LogLevel.Error, "An exception occurred while initializing a request to " + _url + ": " + ex.Message, ex);
                 throw;
             }
 
@@ -168,7 +169,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             }
             catch (Exception ex)
             {
-                Trace.TraceError("An exception occurred during a HTTP request to " + _url + ": " + ex.Message);
+                Logger.Log(LogLevel.Error, "An exception occurred during a HTTP request to " + _url + ": " + ex.Message, ex);
                 throw;
             }
         }

@@ -12,6 +12,7 @@ using Mapsui.Samples.CustomWidget;
 using Mapsui.Styles;
 using Mapsui.UI.Forms;
 using Mapsui.UI.Objects;
+using Mapsui.Extensions;
 
 namespace Mapsui.Samples.Forms
 {
@@ -48,16 +49,19 @@ namespace Mapsui.Samples.Forms
 
             mapView.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
 
-            _ = Task.Run(() => StartGPSAsync());
+            Catch.TaskRun(() => StartGPSAsync());
 
             try
             {
                 if (!Compass.IsMonitoring)
                     Compass.Start(SensorSpeed.Default);
             }
-            catch (Exception) { }
+            catch (Exception ex) 
+            {
+                Logger.Log(LogLevel.Warning, ex.Message, ex);
+            }
 
-            _ = Task.Run(async () =>
+            Catch.TaskRun(async () =>
             {
                 try
                 {

@@ -14,8 +14,38 @@ namespace Mapsui.Extensions
             }
             catch (Exception e)
             {
-                Logging.Logger.Log(LogLevel.Error, e.Message, e);
+                Logger.Log(LogLevel.Error, e.Message, e);
             }
+        }
+
+        public static void TaskRun(Action func)
+        {
+            Task.Run(() =>
+            {
+                try
+                {
+                    func();
+                }
+                catch (Exception e)
+                {
+                    Logger.Log(LogLevel.Error, e.Message, e);
+                }
+            });
+        }
+
+        public static void TaskRun(Func<Task> func)
+        {
+            Task.Run(async () =>
+            {
+                try
+                {
+                    await func();
+                }
+                catch (Exception e)
+                {
+                    Logger.Log(LogLevel.Error, e.Message, e);
+                }
+            });
         }
     }
 }

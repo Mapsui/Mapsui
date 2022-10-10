@@ -155,13 +155,13 @@ namespace Mapsui.ArcGIS.ImageServiceProvider
                     throw new RenderException(
                         "There was a problem connecting to the ArcGISImage server",
                         ex);
-                Debug.WriteLine("There was a problem connecting to the WMS server: " + ex.Message);
+                Logger.Log(LogLevel.Error, "There was a problem connecting to the WMS server: " + ex.Message, ex);
             }
             catch (Exception ex)
             {
                 if (!ContinueOnError)
                     throw new RenderException("There was a problem while attempting to request the WMS", ex);
-                Debug.WriteLine("There was a problem while attempting to request the WMS" + ex.Message);
+                Logger.Log(LogLevel.Error, "There was a problem while attempting to request the WMS" + ex.Message, ex);
             }
             
             return (false, null);

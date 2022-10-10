@@ -2,7 +2,9 @@
 using System.Diagnostics;
 using Mapsui.Logging;
 using Microsoft.Maui.Controls;
+using Microsoft.Maui.Devices;
 using Application = Microsoft.Maui.Controls.Application;
+using LogLevel = Mapsui.Logging.LogLevel;
 
 namespace Mapsui.Samples.Maui
 {
@@ -14,7 +16,7 @@ namespace Mapsui.Samples.Maui
 
             Logger.LogDelegate += LogMethod;
 
-            if (Device.Idiom == TargetIdiom.Phone)
+            if (DeviceInfo.Idiom == DeviceIdiom.Phone)
                 MainPage = new NavigationPage(new MainPage());
             else
                 MainPage = new MainPageLarge();

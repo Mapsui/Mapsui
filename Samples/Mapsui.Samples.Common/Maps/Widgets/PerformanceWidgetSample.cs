@@ -17,7 +17,7 @@ namespace Mapsui.Samples.Common.Maps
 
         public string Category => "Widgets";
 
-        public void OnClick(object sender, WidgetTouchedEventArgs args)
+        public void OnClick(object? sender, WidgetTouchedEventArgs args)
         {
             _mapControl?.Performance?.Clear();
             _mapControl?.RefreshGraphics();

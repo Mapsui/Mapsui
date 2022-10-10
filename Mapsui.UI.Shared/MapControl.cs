@@ -19,9 +19,9 @@ using Microsoft.Maui.Controls;
 namespace Mapsui.UI.Maui
 #elif __UWP__
 namespace Mapsui.UI.Uwp
-#elif __ANDROID__
+#elif __ANDROID__ && !HAS_UNO_WINUI
 namespace Mapsui.UI.Android
-#elif __IOS__
+#elif __IOS__ && !HAS_UNO_WINUI
 namespace Mapsui.UI.iOS
 #elif __WINUI__
 namespace Mapsui.UI.WinUI
@@ -90,7 +90,7 @@ namespace Mapsui.UI.Wpf
             _performance?.Add(_stopwatch.Elapsed.TotalMilliseconds);
 
             // Log drawing time
-            Logger.Log(LogLevel.Information, $"Time for drawing control [ms]: {_stopwatch.Elapsed.TotalMilliseconds}");
+            Logger.Log(LogLevel.Debug, $"Time for drawing control [ms]: {_stopwatch.Elapsed.TotalMilliseconds}");
 
             // End drawing
             _drawing = false;
@@ -374,15 +374,15 @@ namespace Mapsui.UI.Wpf
                     }
                     else if (e.Cancelled)
                     {
-                        Logger.Log(LogLevel.Warning, "Fetching data was cancelled", e.Error);
+                        Logger.Log(LogLevel.Warning, "Fetching data was cancelled.");
                     }
                     else if (e.Error is WebException)
                     {
-                        Logger.Log(LogLevel.Warning, "A WebException occurred. Do you have internet?", e.Error);
+                        Logger.Log(LogLevel.Warning, $"A WebException occurred. Do you have internet? Exception: {e.Error?.Message}", e.Error);
                     }
                     else if (e.Error != null)
                     {
-                        Logger.Log(LogLevel.Warning, "An error occurred while fetching data", e.Error);
+                        Logger.Log(LogLevel.Warning, $"An error occurred while fetching data. Exception: {e.Error?.Message}", e.Error);
                     }
                     else // no problems
                     {
@@ -434,7 +434,7 @@ namespace Mapsui.UI.Wpf
 
         public void CallHomeIfNeeded()
         {
-            if (_map != null && !_map.Initialized && _viewport.HasSize && _map?.Extent != null)
+            if (_map != null && !_map.Initialized && _viewport.HasSize && _map?.Extent != null && Navigator != null)
             {
                 _map.Home?.Invoke(Navigator);
                 _map.Initialized = true;
@@ -541,7 +541,7 @@ namespace Mapsui.UI.Wpf
 
         private bool WidgetTouched(IWidget widget, MPoint screenPosition)
         {
-            var result = widget.HandleWidgetTouched(Navigator, screenPosition);
+            var result = Navigator != null && widget.HandleWidgetTouched(Navigator, screenPosition);
 
             if (!result && widget is Hyperlink hyperlink && !string.IsNullOrWhiteSpace(hyperlink.Url))
             {

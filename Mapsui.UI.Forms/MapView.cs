@@ -14,6 +14,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Resources;
 using System.Runtime.CompilerServices;
+using Mapsui.Logging;
 using Mapsui.Utilities;
 #if __MAUI__
 using Mapsui.UI.Maui.Extensions;
@@ -185,9 +186,29 @@ namespace Mapsui.UI.Forms
         {
             get => (bool)GetValue(MyLocationEnabledProperty);
 #if __MAUI__ // WORKAROUND for Preview 11 will be fixed in Preview 13 https://github.com/dotnet/maui/issues/3597
-            set => Application.Current?.Dispatcher.Dispatch(() => SetValue(MyLocationEnabledProperty, value));
+            set => Application.Current?.Dispatcher.Dispatch(() =>
+            {
+                try
+                {
+                    SetValue(MyLocationEnabledProperty, value);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Log(LogLevel.Error, ex.Message, ex);
+                }
+            });
 #else
-            set => Device.BeginInvokeOnMainThread(() => SetValue(MyLocationEnabledProperty, value));
+            set => Device.BeginInvokeOnMainThread(() =>
+            {
+                try
+                {
+                    SetValue(MyLocationEnabledProperty, value);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Log(LogLevel.Error, ex.Message, ex);
+                }
+            });
 #endif
         }
 
@@ -372,7 +393,7 @@ namespace Mapsui.UI.Forms
                 if (MyLocationFollow)
                 {
                     _mapMyLocationButton!.Picture = _pictMyLocationCenter;
-                    Navigator.CenterOn(MyLocationLayer.MyLocation.ToMapsui());
+                    Navigator?.CenterOn(MyLocationLayer.MyLocation.ToMapsui());
                 }
                 else
                 {
@@ -691,7 +712,7 @@ namespace Mapsui.UI.Forms
                 {
                     if (widget.Enabled && (widget.Envelope?.Contains(e.ScreenPosition) ?? false))
                     {
-                        if (widget.HandleWidgetTouched(Navigator, e.ScreenPosition))
+                        if (Navigator != null && widget.HandleWidgetTouched(Navigator, e.ScreenPosition))
                         {
                             e.Handled = true;
                             return;
@@ -829,12 +850,12 @@ namespace Mapsui.UI.Forms
 
         private void CreateButtons()
         {
-            _mapZoomInButton = _mapZoomInButton ?? CreateButton(0, 0, _pictZoomIn, (s, e) => { Navigator.ZoomIn(); e.Handled = true; });
+            _mapZoomInButton = _mapZoomInButton ?? CreateButton(0, 0, _pictZoomIn, (s, e) => { Navigator?.ZoomIn(); e.Handled = true; });
             _mapZoomInButton.Picture = _pictZoomIn;
             _mapZoomInButton.Enabled = IsZoomButtonVisible;
             Map!.Widgets.Add(_mapZoomInButton);
 
-            _mapZoomOutButton = _mapZoomOutButton ?? CreateButton(0, 40, _pictZoomOut, (s, e) => { Navigator.ZoomOut(); e.Handled = true; });
+            _mapZoomOutButton = _mapZoomOutButton ?? CreateButton(0, 40, _pictZoomOut, (s, e) => { Navigator?.ZoomOut(); e.Handled = true; });
             _mapZoomOutButton.Picture = _pictZoomOut;
             _mapZoomOutButton.Enabled = IsZoomButtonVisible;
             Map!.Widgets.Add(_mapZoomOutButton);
@@ -844,7 +865,7 @@ namespace Mapsui.UI.Forms
             _mapMyLocationButton.Enabled = IsMyLocationButtonVisible;
             Map!.Widgets.Add(_mapMyLocationButton);
 
-            _mapNorthingButton = _mapNorthingButton ?? CreateButton(0, 136, _pictNorthing, (s, e) => { RunOnUIThread(() => Navigator.RotateTo(0)); e.Handled = true; });
+            _mapNorthingButton = _mapNorthingButton ?? CreateButton(0, 136, _pictNorthing, (s, e) => { RunOnUIThread(() => Navigator?.RotateTo(0)); e.Handled = true; });
             _mapNorthingButton.Picture = _pictNorthing;
             _mapNorthingButton.Enabled = IsNorthingButtonVisible;
             Map!.Widgets.Add(_mapNorthingButton);

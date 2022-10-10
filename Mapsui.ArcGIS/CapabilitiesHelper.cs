@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BruTile;
 using Mapsui.ArcGIS.DynamicProvider;
 using Mapsui.ArcGIS.ImageServiceProvider;
+using Mapsui.Extensions;
 using Mapsui.Logging;
 using Newtonsoft.Json;
 
@@ -88,7 +89,7 @@ namespace Mapsui.ArcGIS
 
         private void ExecuteRequest(string url, CapabilitiesType capabilitiesType, ICredentials? credentials = null, string? token = null)
         {
-            Task.Run(async () => {
+            Catch.TaskRun(async () => {
                 _capabilitiesType = capabilitiesType;
                 _url = RemoveTrailingSlash(url);
 

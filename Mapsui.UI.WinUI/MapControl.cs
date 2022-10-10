@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using Windows.Devices.Sensors;
 using Windows.Foundation;
 using Windows.System;
+using Mapsui.Extensions;
+using Mapsui.Logging;
 #if __WINUI__
 using System.Runtime.Versioning;
 using Mapsui.UI.WinUI.Extensions;
@@ -39,7 +41,9 @@ using VerticalAlignment = Windows.UI.Xaml.VerticalAlignment;
 #endif
 
 #if __WINUI__
+#if !HAS_UNO_WINUI
 [assembly: SupportedOSPlatform("windows10.0.18362.0")]
+#endif
 namespace Mapsui.UI.WinUI
 #else
 namespace Mapsui.UI.Uwp
@@ -164,7 +168,7 @@ namespace Mapsui.UI.Uwp
                 return;
 
             resolution = Map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, Map.Resolutions, Map.Extent);
-            Navigator.ZoomTo(resolution, mousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
+            Navigator?.ZoomTo(resolution, mousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
 
             e.Handled = true;
         }
@@ -183,9 +187,29 @@ namespace Mapsui.UI.Uwp
         private void RunOnUIThread(Action action)
         {
 #if __WINUI__
-            Task.Run(() => DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Normal, () => action()));
+            Catch.TaskRun(() => DispatcherQueue.TryEnqueue(Microsoft.UI.Dispatching.DispatcherQueuePriority.Normal, () =>
+            {
+                try
+                {
+                    action();
+                }
+                catch (Exception ex)
+                {
+                    Logger.Log(LogLevel.Error, ex.Message, ex);
+                }
+            }));
 #else
-            Task.Run(() => Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => action()));
+            Catch.TaskRun(async () => await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                try
+                {
+                    action();
+                }
+                catch (Exception ex)
+                {
+                    Logger.Log(LogLevel.Error, ex.Message, ex);
+                }
+            }));
 #endif
         }
 
@@ -246,7 +270,7 @@ namespace Mapsui.UI.Uwp
 
         public void OpenBrowser(string url)
         {
-            Task.Run(() => Launcher.LaunchUriAsync(new Uri(url)));
+            Catch.TaskRun(() => Launcher.LaunchUriAsync(new Uri(url)));
         }
 
         private float ViewportWidth => (float)ActualWidth;
@@ -286,7 +310,7 @@ namespace Mapsui.UI.Uwp
         }
 
 #if !(__ANDROID__ )
-#if __IOS__ || __MACOS__ || NETSTANDARD
+#if __IOS__ || __MACOS__ || NETSTANDARD || HAS_UNO
         public new void Dispose()
 #else 
         public void Dispose()

@@ -165,7 +165,7 @@ namespace Mapsui.Samples.Eto
         private void RotationSliderChanged(object? sender, EventArgs e)
         {
             var percent = (double)RotationSlider.Value / (RotationSlider.MaxValue - RotationSlider.MinValue);
-            MapControl.Navigator.RotateTo(percent * 360);
+            MapControl.Navigator?.RotateTo(percent * 360);
             MapControl.Refresh();
         }
 

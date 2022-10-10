@@ -157,9 +157,12 @@ namespace Mapsui.Samples.Maui
                     {
                         var request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
 #if __MAUI__ // WORKAROUND for Preview 11 will be fixed in Preview 13 https://github.com/dotnet/maui/issues/3597
-                        Application.Current?.Dispatcher.DispatchAsync(async () => {
+                        if (Application.Current == null)
+                            return;
+
+                        await Application.Current.Dispatcher.DispatchAsync(async () => {
 #else
-                    await Device.InvokeOnMainThreadAsync(async () => {
+                        await Device.InvokeOnMainThreadAsync(async () => {
 #endif
                             var location = await Geolocation.GetLocationAsync(request, this.gpsCancelation.Token)
                                 .ConfigureAwait(false);
@@ -190,7 +193,7 @@ namespace Mapsui.Samples.Maui
         /// <param name="e">Event arguments for new position</param>
         private void MyLocationPositionChanged(Location e)
         {
-            Device.BeginInvokeOnMainThread(() => {
+            Application.Current?.Dispatcher.DispatchAsync(() => {
                 mapView.MyLocationLayer.UpdateMyLocation(new UI.Maui.Position(e.Latitude, e.Longitude));
                 if (e.Course != null)
                 {

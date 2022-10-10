@@ -1,4 +1,5 @@
 using CommunityToolkit.Maui.Markup;
+using Mapsui.Extensions;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Maui.ViewModel;
 using Mapsui.Tiling;
@@ -6,7 +7,7 @@ using Mapsui.UI.Maui;
 
 namespace Mapsui.Samples.Maui.View;
 
-public class MainPage : ContentPage
+public sealed class MainPage : ContentPage, IDisposable
 {
     IEnumerable<ISampleBase> allSamples;
     CollectionView sampleCollectionView = CreateCollectionView();
@@ -84,13 +85,16 @@ public class MainPage : ContentPage
 
     private void CollectionView_SelectionChanged(object? sender, SelectionChangedEventArgs e)
     {
-        if (e.CurrentSelection == null)
+        Catch.Exceptions(async () =>
         {
-            return;
-        }
+            if (e.CurrentSelection == null)
+            {
+                return;
+            }
 
-        var sample = (IMapControlSample)e.CurrentSelection[0];
-        sample.Setup(mapControl);
+            var sample = (ISample)e.CurrentSelection[0];
+            mapControl.Map = await sample.CreateMapAsync();
+        });
     }
 
     private void categoryPicker_SelectedIndexChanged(object? sender, EventArgs e)
@@ -102,5 +106,10 @@ public class MainPage : ContentPage
     {
         var selectedCategory = categoryPicker.SelectedItem?.ToString() ?? "";
         sampleCollectionView.ItemsSource = allSamples.Where(s => s.Category == selectedCategory);
+    }
+
+    public void Dispose()
+    {
+        mapControl.Dispose();
     }
 }
