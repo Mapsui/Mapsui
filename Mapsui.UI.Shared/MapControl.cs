@@ -68,7 +68,7 @@ namespace Mapsui.UI.Wpf
                 return;
             if (Renderer == null)
                 return;
-            if (_map == null)
+            if (Map == null)
                 return;
             if (!Viewport.HasSize)
                 return;
@@ -81,7 +81,7 @@ namespace Mapsui.UI.Wpf
 
             // All requested updates up to this point will be handled by this redraw
             _refresh = false;
-            Renderer.Render(canvas, new Viewport(Viewport), _map.Layers, _map.Widgets, _map.BackColor);
+            Renderer.Render(canvas, new Viewport(Viewport), Map.Layers, Map.Widgets, Map.BackColor);
 
             // Stop stopwatch after drawing control
             _stopwatch.Stop();
@@ -100,7 +100,7 @@ namespace Mapsui.UI.Wpf
         {
             // Check, if we have to redraw the screen
 
-            if (_map?.UpdateAnimations() == true)
+            if (Map?.UpdateAnimations() == true)
                 _refresh = true;
 
             if (_viewport.UpdateAnimations())
@@ -276,9 +276,9 @@ namespace Mapsui.UI.Wpf
 
         private void Navigated(object? sender, ChangeType changeType)
         {
-            if (_map != null)
+            if (Map != null)
             {
-                _map.Initialized = true;
+                Map.Initialized = true;
             }
 
             Refresh(changeType);
@@ -321,7 +321,7 @@ namespace Mapsui.UI.Wpf
         /// </summary>
         public void Unsubscribe()
         {
-            UnsubscribeFromMapEvents(_map);
+            UnsubscribeFromMapEvents(Map);
         }
 
         /// <summary>
@@ -340,12 +340,12 @@ namespace Mapsui.UI.Wpf
         /// <param name="map">Map, to which events to unsubscribe</param>
         private void UnsubscribeFromMapEvents(Map? map)
         {
-            var temp = map;
-            if (temp != null)
+            var localMap = map;
+            if (localMap != null)
             {
-                temp.DataChanged -= MapDataChanged;
-                temp.PropertyChanged -= MapPropertyChanged;
-                temp.AbortFetch();
+                localMap.DataChanged -= MapDataChanged;
+                localMap.PropertyChanged -= MapPropertyChanged;
+                localMap.AbortFetch();
             }
         }
 
@@ -434,28 +434,27 @@ namespace Mapsui.UI.Wpf
 
         public void CallHomeIfNeeded()
         {
-            if (_map != null && !_map.Initialized && _viewport.HasSize && _map?.Extent != null && Navigator != null)
+            if (Map != null && !Map.Initialized && _viewport.HasSize && Map?.Extent != null && Navigator != null)
             {
-                _map.Home?.Invoke(Navigator);
-                _map.Initialized = true;
+                Map.Home?.Invoke(Navigator);
+                Map.Initialized = true;
             }
         }
 
 #if __MAUI__
 
         public static readonly BindableProperty MapProperty = BindableProperty.Create(nameof(Map),
-            typeof(Map), typeof(MapControl), default(Map), defaultBindingMode: BindingMode.TwoWay, propertyChanged: MapPropertyChanged);
-
-        static void MapPropertyChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            var mapControl = (MapControl)bindable;
-            mapControl.SetMap(newValue as Map);
-        }
+            typeof(Map), typeof(MapControl), default(Map), defaultBindingMode: BindingMode.TwoWay);
 
         public Map? Map
         {
             get => (Map)GetValue(MapProperty);
-            set => SetValue(MapProperty, value);
+            set
+            {
+                BeforeSetMap();
+                SetValue(MapProperty, value);
+                AfterSetMap(value);
+            }
         }
 
 #else
@@ -467,31 +466,30 @@ namespace Mapsui.UI.Wpf
         /// </summary>
         public Map? Map
         {
-            get => GetMap();
+            get => _map;
             set
             {
-                SetMap(value);
-                OnPropertyChanged();
+                BeforeSetMap();
+                _map = value;
+                AfterSetMap(_map);
+                OnPropertyChanged();                
             }
         }
 #endif
 
-        private void SetMap(Map? value)
+        private void BeforeSetMap()
         {
-            if (_map != null)
-            {
-                UnsubscribeFromMapEvents(_map);
-                _map = null;
-            }
+            UnsubscribeFromMapEvents(Map);
+        }
 
-            _map = value;
-
-            if (_map != null)
+        private void AfterSetMap(Map? map)
+        {
+            if (map != null)
             {
-                SubscribeToMapEvents(_map);
-                Navigator = new Navigator(_map, _viewport);
-                _viewport.Map = _map;
-                _viewport.Limiter = _map.Limiter;
+                SubscribeToMapEvents(map);
+                Navigator = new Navigator(map, _viewport);
+                _viewport.Map = map;
+                _viewport.Limiter = map.Limiter;
                 CallHomeIfNeeded();
             }
 
@@ -528,7 +526,7 @@ namespace Mapsui.UI.Wpf
                 return;
 
             var fetchInfo = new FetchInfo(Viewport.Extent, Viewport.Resolution, Map?.CRS, changeType);
-            _map?.RefreshData(fetchInfo);
+            Map?.RefreshData(fetchInfo);
         }
 
         private void OnInfo(MapInfoEventArgs? mapInfoEventArgs)
