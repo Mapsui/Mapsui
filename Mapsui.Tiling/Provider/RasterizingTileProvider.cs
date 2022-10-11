@@ -97,14 +97,7 @@ public class RasterizingTileProvider : ITileSource
             return await _dataSource.GetFeaturesAsync(fetchInfo);
         }
 
-        var result = _layer.GetFeatures(fetchInfo.Extent, fetchInfo.Resolution);
-        if (await _layer.WaitForLoadingAsync().ConfigureAwait(false))
-        {
-            // I have to call get features again because before processing wasn't finished
-            result = _layer.GetFeatures(fetchInfo.Extent, fetchInfo.Resolution);
-        }
-
-        return result;
+        return _layer.GetFeatures(fetchInfo.Extent, fetchInfo.Resolution);
     }
 
     private IRenderer GetRenderer()
