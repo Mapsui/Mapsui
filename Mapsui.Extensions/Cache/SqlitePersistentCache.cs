@@ -18,9 +18,10 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
 {
     private readonly string _file;
     private readonly TimeSpan _cacheExpireTime;
-    private bool _compression;
+    private const string NoCompression = "no";
+    private const string BrotliCompression = "br";
 
-    public SqlitePersistentCache(string name, TimeSpan? cacheExpireTime = null, string? folder = null, bool compression = false)
+    public SqlitePersistentCache(string name, TimeSpan? cacheExpireTime = null, string? folder = null)
     {
         folder ??= Path.GetTempPath();
         if (!Directory.Exists(folder))
@@ -30,7 +31,6 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
 
         _file = Path.Combine(folder, name + ".sqlite");
         _cacheExpireTime = cacheExpireTime ?? TimeSpan.Zero;
-        _compression = compression;
         InitDb();
     }
 
@@ -47,6 +47,13 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
                 Add Created DateTime NOT NULL Default ('{today.Year}{today.Month:00}{today.Date:00}');");
                 command.ExecuteNonQuery();
             }
+
+            if (test != null && string.IsNullOrEmpty(test.Compression))
+            {
+                var command = connection.CreateCommand(@$"Alter TABLE Tile 
+                Add Compression VARCHAR(2) NOT NULL Default ('{NoCompression}');");
+                command.ExecuteNonQuery();
+            }
         }
         catch (SQLiteException ex)
         {
@@ -56,6 +63,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
                 Col INTEGER NOT NULL,
                 Row INTEGER NOT NULL,
                 Created DateTime NOT NULL,
+                Compression VARCHAR(2) NOT NULL,
                 Data BLOB,
                 PRIMARY KEY (Level, Col, Row)
                 );");
@@ -66,6 +74,12 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
         try
         {
             var test = connection.Table<UrlCache>().FirstOrDefault();
+            if (test != null && string.IsNullOrEmpty(test.Compression))
+            {
+                var command = connection.CreateCommand(@$"Alter TABLE Tile 
+                Add Compression VARCHAR(2) NOT NULL Default ('{NoCompression}');");
+                command.ExecuteNonQuery();
+            }
         }
         catch (SQLiteException ex)
         {
@@ -73,6 +87,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
             var command = connection.CreateCommand(@"CREATE TABLE UrlCache (
                 Url TEXT NOT NULL,                
                 Created DateTime NOT NULL,
+                Compression VARCHAR(2) NOT NULL,
                 Data BLOB,
                 PRIMARY KEY (Url)
                 );");
@@ -83,10 +98,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
 
     public void Add(TileIndex index, byte[] tile)
     {
-        if (_compression)
-        {
-            tile = Compress(tile);
-        }
+        var compress = Compress(tile);
 
         using var connection = CreateConnection();
         var data = new Tile
@@ -95,7 +107,8 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
             Col = index.Col,
             Row = index.Row,
             Created = DateTime.Now,
-            Data = tile,
+            Data = compress.data,
+            Compression = compress.Compression,
         };
 
         connection.Insert(data);
@@ -124,27 +137,21 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
             }
         }
 
-        var result = tile?.Data!;
-        if (_compression)
-        {
-            result = Decompress(result);
-        }
-
+        var result = Decompress(tile?.Data, tile?.Compression);
+        
         return result;
     }
 
     public void Add(string url, byte[] tile)
     {
-        if (_compression)
-        {
-            tile = Compress(tile);
-        }
+        var compress = Compress(tile);
 
         using var connection = CreateConnection();
         var data = new UrlCache() {
             Url = url,
             Created = DateTime.Now,
-            Data = tile,
+            Data = compress.data,
+            Compression = compress.Compression,
         };
         connection.Insert(data);
     }
@@ -169,20 +176,14 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
             }
         }
 
-        var result = tile?.Data;
-        if (_compression)
-        {
-            result = Decompress(result);
-        }
-
-        return result;
+        return Decompress(tile?.Data, tile?.Compression);
     }
 
     [return: NotNullIfNotNull("bytes")]
-    private static byte[]? Compress(byte[]? bytes)
+    private static (byte[]? data, string Compression) Compress(byte[]? bytes)
     {
         if (bytes == null)
-            return null;
+            return (null, NoCompression);
 
         using var outputStream = new MemoryStream();
 #if NETSTANDARD2_0
@@ -193,22 +194,40 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
         {
             compressStream.Write(bytes, 0, bytes.Length);
         }
-        return outputStream.ToArray();
+
+        var result = outputStream.ToArray();
+
+        if (result.Length < bytes.Length)
+        {
+            return (bytes, BrotliCompression);
+        }
+
+        return (bytes, NoCompression);
     }
 
     [return: NotNullIfNotNull("bytes")]
-    private static byte[]? Decompress(byte[]? bytes)
+    private static byte[]? Decompress(byte[]? bytes, string? compression)
     {
-        if (bytes == null)
-            return null;
+        if (bytes == null || string.IsNullOrEmpty(compression) || string.Equals(compression, NoCompression, StringComparison.InvariantCultureIgnoreCase))
+            return bytes;
 
-        using var inputStream = new MemoryStream(bytes);
-        using var outputStream = new MemoryStream();
-        using (var decompressStream = new BrotliStream(inputStream, CompressionMode.Decompress))
+        switch (compression!.ToLower())
         {
-            decompressStream.CopyTo(outputStream);
+            case BrotliCompression:
+            {
+                using var inputStream = new MemoryStream(bytes);
+                using var outputStream = new MemoryStream();
+                using (var decompressStream = new BrotliStream(inputStream, CompressionMode.Decompress))
+                {
+                    decompressStream.CopyTo(outputStream);
+                }
+
+                return outputStream.ToArray();
+            }
+            default:
+                throw new NotImplementedException(compression);
+
         }
-        return outputStream.ToArray();
     }
 
     private SQLiteConnection CreateConnection()
