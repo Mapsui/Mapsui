@@ -134,28 +134,28 @@ namespace Mapsui.Rendering.Benchmarks
         [Benchmark]
         public async Task RenderDefaultAsync()
         {
-            await map.Map!.Layers.WaitForLoadingAsync();
+            await map.WaitForLoadingAsync();
             mapRenderer.Render(skCanvas, map.Viewport, map.Map!.Layers, map.Map!.Widgets, Color.White);
         }
 
         [Benchmark]
         public async Task RenderRasterizingTilingPngAsync()
         { 
-            await pngMap.Map!.Layers.WaitForLoadingAsync();
+            await pngMap.WaitForLoadingAsync();
             mapRenderer.Render(skCanvas, pngMap.Viewport, pngMap.Map!.Layers, pngMap.Map!.Widgets, Color.White);
         }
 
         [Benchmark]
         public async Task RenderRasterizingTilingWebPAsync()
         {
-            await webpMap.Map!.Layers.WaitForLoadingAsync();
+            await webpMap.WaitForLoadingAsync();
             mapRenderer.Render(skCanvas, webpMap.Viewport, webpMap.Map!.Layers, webpMap.Map!.Widgets, Color.White);
         }
         
         [Benchmark]
         public async Task RenderRasterizingTilingSkpAsync()
         {
-            await skpMap.Map!.Layers.WaitForLoadingAsync();
+            await skpMap.WaitForLoadingAsync();
             mapRenderer.Render(skCanvas, skpMap.Viewport, skpMap.Map!.Layers, skpMap.Map!.Widgets, Color.White);
         }
     }
