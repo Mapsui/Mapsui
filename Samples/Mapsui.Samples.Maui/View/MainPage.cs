@@ -11,11 +11,12 @@ public sealed class MainPage : ContentPage, IDisposable
 {
     IEnumerable<ISampleBase> allSamples;
     CollectionView sampleCollectionView = CreateCollectionView();
-    Picker categoryPicker = CreatePicker();
+    Picker categoryPicker;
     MapControl mapControl = new MapControl();
 
     public MainPage(MainViewModel mainViewModel)
     {
+        categoryPicker = CreatePicker(mainViewModel);
         sampleCollectionView.SelectionChanged += CollectionView_SelectionChanged;
         BindingContext = mainViewModel;
         mapControl.SetBinding(MapControl.MapProperty, new Binding(nameof(MainViewModel.Map)));
@@ -42,21 +43,27 @@ public sealed class MainPage : ContentPage, IDisposable
             }
         };
 
-        allSamples = AllSamples.GetSamples() ?? new List<ISampleBase>();
-        var categories = allSamples.Select(s => s.Category).Distinct().OrderBy(c => c);
-        categoryPicker!.ItemsSource = categories.ToList();
-        categoryPicker.SelectedIndexChanged += categoryPicker_SelectedIndexChanged;
-        categoryPicker.SelectedItem = "Info";
+        //allSamples = AllSamples.GetSamples() ?? new List<ISampleBase>();
+        //var categories = allSamples.Select(s => s.Category).Distinct().OrderBy(c => c);
+        //categoryPicker!.ItemsSource = categories.ToList();
+        //categoryPicker.SelectedIndexChanged += categoryPicker_SelectedIndexChanged;
+        //categoryPicker.SelectedItem = "Info";
 
-        mapControl.Map = ((ISample)allSamples.First(s => s.Category == categoryPicker.SelectedItem.ToString())).CreateMapAsync().Result;
+        //!!!mapControl.Map = ((ISample)allSamples.First(s => s.Category == categoryPicker.SelectedItem.ToString())).CreateMapAsync().Result;
     }
 
-    private static Picker CreatePicker()
+    private static Picker CreatePicker(MainViewModel mainViewModel)
     {
-        return new Picker
+        var picker = new Picker
         {
             WidthRequest = 220,
+            ItemsSource = mainViewModel.Categories,
+            SelectedIndex = 0            
         };
+
+        picker.SelectedIndexChanged += mainViewModel.Picker_SelectedIndexChanged;
+
+        return picker;
     }
 
     private static CollectionView CreateCollectionView()
