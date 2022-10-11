@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 
 namespace Mapsui.Extensions;
@@ -15,7 +16,7 @@ public static class ByteArrayExtensions
             return false;
         }
 
-        if (Encoding.UTF8.GetString(buffer, 0, 1).ToLowerInvariant().Equals("<"))
+        if (string.Equals(Encoding.UTF8.GetString(buffer, 0, 1), "<", StringComparison.InvariantCultureIgnoreCase))
         {
             return true;
         }
@@ -33,7 +34,7 @@ public static class ByteArrayExtensions
             return false;
         }
 
-        if (Encoding.UTF8.GetString(buffer, 0, 4).ToLowerInvariant().Equals("skia"))
+        if (string.Equals(Encoding.UTF8.GetString(buffer, 0, 4), "skia", StringComparison.InvariantCultureIgnoreCase))
         {
             return true;
         }
