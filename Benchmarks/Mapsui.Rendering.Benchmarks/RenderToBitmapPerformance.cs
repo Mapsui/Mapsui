@@ -19,6 +19,7 @@ using Mapsui.Nts.Providers;
 namespace Mapsui.Rendering.Benchmarks
 {
     [SimpleJob(RunStrategy.Throughput)]
+    [MemoryDiagnoser]
     [MinColumn, MaxColumn, MeanColumn, MedianColumn]
     public class RenderToBitmapPerformance
     {

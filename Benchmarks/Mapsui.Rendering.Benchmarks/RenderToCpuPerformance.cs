@@ -22,7 +22,8 @@ using BenchmarkDotNet.Toolchains.InProcess.Emit;
 
 namespace Mapsui.Rendering.Benchmarks
 {
-    [SimpleJob]
+    [SimpleJob(RunStrategy.Throughput)]
+    [MemoryDiagnoser]
     [MinColumn, MaxColumn, MeanColumn, MedianColumn]
     public class RenderToCpuPerformance
     {
