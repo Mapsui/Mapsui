@@ -76,7 +76,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
             var test = connection.Table<UrlCache>().FirstOrDefault();
             if (test != null && string.IsNullOrEmpty(test.Compression))
             {
-                var command = connection.CreateCommand(@$"Alter TABLE Tile 
+                var command = connection.CreateCommand(@$"Alter TABLE UrlCache 
                 Add Compression VARCHAR(2) NOT NULL Default ('{NoCompression}');");
                 command.ExecuteNonQuery();
             }
