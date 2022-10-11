@@ -199,7 +199,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
 
         if (result.Length < bytes.Length)
         {
-            return (bytes, BrotliCompression);
+            return (result, BrotliCompression);
         }
 
         return (bytes, NoCompression);
