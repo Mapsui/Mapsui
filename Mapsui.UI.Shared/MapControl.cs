@@ -90,9 +90,6 @@ namespace Mapsui.UI.Wpf
             // If we are interested in performance measurements, we save the new drawing time
             _performance?.Add(_stopwatch.Elapsed.TotalMilliseconds);
 
-            // Log drawing time
-            Logger.Log(LogLevel.Debug, $"Time for drawing control [ms]: {_stopwatch.Elapsed.TotalMilliseconds}");
-
             // End drawing
             _drawing = false;
         }
