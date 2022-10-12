@@ -8,8 +8,12 @@ branches:
 only_commits:
   files:
     - docfx/**/*
-
-build_script:
+    
+install:
+  - ps: Invoke-WebRequest 'https://dot.net/v1/dotnet-install.ps1' -OutFile 'dotnet-install.ps1';
+  - ps: ./dotnet-install.ps1 -Version 6.0.401 -InstallDir "dotnetcli"
+    
+build_script:  
 - cmd: git checkout master
 - cmd: docfx\build-site.cmd
 
