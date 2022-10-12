@@ -1,8 +1,8 @@
 using CommunityToolkit.Maui.Markup;
 using Mapsui.Extensions;
 using Mapsui.Samples.Common;
-using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
+using Mapsui.Samples.Common.Utilities;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.Samples.Maui.ViewModel;
 using Mapsui.Tiling;
@@ -15,13 +15,9 @@ public sealed class MainPage : ContentPage, IDisposable
     readonly CollectionView collectionView;
     readonly Picker categoryPicker;
     readonly MapControl mapControl = new MapControl();
-    private static string MbTilesLocationOnMaui => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
 
     public MainPage(MainViewModel mainViewModel)
     {
-        MbTilesSample.MbTilesLocation = MbTilesLocationOnMaui;
-        MbTilesHelper.DeployMbTilesFile(MbTilesLocationOnMaui);
-
         categoryPicker = CreatePicker(mainViewModel);
         collectionView = CreateCollectionView(mainViewModel);
         

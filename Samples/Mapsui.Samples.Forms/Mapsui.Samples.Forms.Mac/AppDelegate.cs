@@ -1,7 +1,7 @@
 ﻿using AppKit;
 using Foundation;
-using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
+using Mapsui.Samples.Common.Utilities;
 using System;
 using System.IO;
 using Xamarin.Forms;
@@ -29,10 +29,6 @@ namespace Mapsui.Samples.Forms.Mac
 
         public override void DidFinishLaunching(NSNotification notification)
         {
-            // Hack to tell the platform independent samples where the files can be found on iOS.
-            MbTilesSample.MbTilesLocation = MbTilesLocationOnMac;
-            MbTilesHelper.DeployMbTilesFile(MbTilesLocationOnMac);
-
             Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 
