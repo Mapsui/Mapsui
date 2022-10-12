@@ -4,18 +4,18 @@ using Mapsui.Layers;
 
 namespace Mapsui.Extensions
 {
-    public static class IEnumerableLayerExtensions
+    public static class LayerExtensions
     {
         /// <summary> Wait for Loading Async </summary>
-        /// <param name="layers">layers to wait for</param>
+        /// <param name="layer">layer to wait for</param>
         /// <returns>true if it has waited false otherwise</returns>
-        public static async Task<bool> WaitForLoadingAsync(this IEnumerable<ILayer> layers)
+        public static async Task<bool> WaitForLoadingAsync(this ILayer layer)
         {
             bool waited = false;
-            foreach (var layer in layers)
+            while (layer.Busy)
             {
-                if (await layer.WaitForLoadingAsync().ConfigureAwait(false))
-                    waited = true;
+                waited = true;
+                await Task.Delay(1).ConfigureAwait(false);
             }
 
             return waited;

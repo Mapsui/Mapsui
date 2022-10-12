@@ -6,7 +6,7 @@ namespace Mapsui.Extensions
     /// <summary>
     /// Map Control Extensions
     /// </summary>
-    public static class IMapControlExtensions
+    public static class MapControlExtensions
     {
         /// <summary> Wait for Loading Async </summary>
         /// <param name="mapControl">map control</param>
