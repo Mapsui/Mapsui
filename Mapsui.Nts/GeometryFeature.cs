@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using Mapsui.Layers;
 using Mapsui.Nts.Extensions;
 using NetTopologySuite.Geometries;
@@ -51,6 +52,11 @@ namespace Mapsui.Nts
                     vertex.X = x;
                     vertex.Y = y;
                 });
+
+            // Recalculate Geometry Values (for example in Polygons).
+            Geometry.GeometryChanged();
+            // Recalculate the Envelope
+            Geometry.GeometryChangedAction();
         }
     }
 }
