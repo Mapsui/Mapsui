@@ -6,7 +6,6 @@ using Mapsui.Fetcher;
 using Mapsui.Logging;
 using Mapsui.Rendering;
 using Mapsui.Styles;
-using NeoSmart.AsyncLock;
 
 namespace Mapsui.Layers
 {
@@ -18,7 +17,7 @@ namespace Mapsui.Layers
         private readonly double _overscan;
         private readonly double _renderResolutionMultiplier;
         private readonly float _pixelDensity;
-        private readonly AsyncLock _syncLock = new();
+        private readonly object _syncLock = new();
         private bool _busy;
         private Viewport? _currentViewport;
         private bool _modified;
@@ -86,46 +85,47 @@ namespace Mapsui.Layers
             _rasterizeDelayer.ExecuteDelayed(Rasterize);
         }
 
-        private async void Rasterize()
+        private void Rasterize()
         {
             if (!Enabled) return;
             if (_busy) return;
             _busy = true;
             _modified = false;
 
-            await _syncLock.LockAsync().ConfigureAwait(false);
-            
-            try
+            lock (_syncLock)
             {
-                if (_fetchInfo == null) return;
-                if (double.IsNaN(_fetchInfo.Resolution) || _fetchInfo.Resolution <= 0) return;
-                if (_fetchInfo.Extent == null || _fetchInfo.Extent?.Width <= 0 || _fetchInfo.Extent?.Height <= 0) return;
-                var viewport = CreateViewport(_fetchInfo.Extent!, _fetchInfo.Resolution, _renderResolutionMultiplier, _overscan);
-
-                _currentViewport = viewport;
-
-                using var bitmapStream = _rasterizer.RenderToBitmapStream(viewport, new[] { _layer }, pixelDensity: _pixelDensity);
-                RemoveExistingFeatures();
-
-                if (bitmapStream != null)
+                try
                 {
-                    _cache.Clear();
-                    var features = new RasterFeature[1];
-                    features[0] = new RasterFeature(new MRaster(bitmapStream.ToArray(), viewport.Extent));
-                    _cache.PushRange(features);
+                    if (_fetchInfo == null) return;
+                    if (double.IsNaN(_fetchInfo.Resolution) || _fetchInfo.Resolution <= 0) return;
+                    if (_fetchInfo.Extent == null || _fetchInfo.Extent?.Width <= 0 || _fetchInfo.Extent?.Height <= 0) return;
+                    var viewport = CreateViewport(_fetchInfo.Extent!, _fetchInfo.Resolution, _renderResolutionMultiplier, _overscan);
+
+                    _currentViewport = viewport;
+
+                    using var bitmapStream = _rasterizer.RenderToBitmapStream(viewport, new[] { _layer }, pixelDensity: _pixelDensity);
+                    RemoveExistingFeatures();
+
+                    if (bitmapStream != null)
+                    {
+                        _cache.Clear();
+                        var features = new RasterFeature[1];
+                        features[0] = new RasterFeature(new MRaster(bitmapStream.ToArray(), viewport.Extent));
+                        _cache.PushRange(features);
 #if DEBUG
-                    Logger.Log(LogLevel.Debug, $"Memory after rasterizing layer {GC.GetTotalMemory(true):N0}");
+                        Logger.Log(LogLevel.Debug, $"Memory after rasterizing layer {GC.GetTotalMemory(true):N0}");
 #endif
 
-                    OnDataChanged(new DataChangedEventArgs());
-                }
+                        OnDataChanged(new DataChangedEventArgs());
+                    }
 
-                if (_modified && _layer is IAsyncDataFetcher asyncDataFetcher) 
-                        Delayer.ExecuteDelayed(() => asyncDataFetcher.RefreshData(_fetchInfo));
-            }
-            finally
-            {
-                _busy = false;
+                    if (_modified && _layer is IAsyncDataFetcher asyncDataFetcher) 
+                            Delayer.ExecuteDelayed(() => asyncDataFetcher.RefreshData(_fetchInfo));
+                }
+                finally
+                {
+                    _busy = false;
+                }
             }
         }
 
