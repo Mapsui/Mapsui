@@ -15,7 +15,7 @@
     <PackageReference Include="BitMiracle.LibTiff.NET" />
     <PackageReference Include="SkiaSharp" />
     <PackageReference Include="sqlite-net-pcl" />
-    <PackageReference Include="DotSpatial.Projections.NetStandard" />
+    <PackageReference Include="DotSpatial.Projections" />
   </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework)=='netstandard2.0'">
