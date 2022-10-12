@@ -27,7 +27,7 @@ namespace Mapsui.Rendering.Skia
             IsEmbeddedBitmapText = true
         };
 
-        private static readonly ConcurrentDictionary<string, SKTypeface> CacheTypeface = new();
+        private readonly Dictionary<string, SKTypeface> CacheTypeface = new();
 
         public void DrawAsBitmap(SKCanvas canvas, LabelStyle style, IFeature feature, float x, float y, float layerOpacity)
         {
