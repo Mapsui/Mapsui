@@ -11,7 +11,6 @@ namespace Mapsui.Samples.Common.Helpers
         /// <summary>
         /// Copies a number of embedded resources to the local file system.
         /// </summary>
-        /// <param name="createFile"></param>
         public static void DeployMbTilesFile(string folder)
         {
             // So what is this all about?
@@ -24,12 +23,12 @@ namespace Mapsui.Samples.Common.Helpers
 
             foreach (var mbTileFile in mbTileFiles)
             {
-                CopyEmbeddedResourceToStorage(embeddedResourcesPath, mbTileFile, folder);
+                CopyEmbeddedResourceToStorage(embeddedResourcesPath, folder, mbTileFile);
             }
         }
 
-        private static void CopyEmbeddedResourceToStorage(string embeddedResourcesPath, string mbTilesFile,
-            string folder)
+        private static void CopyEmbeddedResourceToStorage(string embeddedResourcesPath, string folder,
+            string mbTilesFile)
         {
             var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
             using (var image = assembly.GetManifestResourceStream(embeddedResourcesPath + mbTilesFile))
