@@ -1,17 +1,19 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
 using BruTile.Predefined;
-using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Projections;
 using Mapsui.Providers;
 using Mapsui.Rendering;
+using Mapsui.Styles;
 using Mapsui.Tiling.Extensions;
+using NeoSmart.AsyncLock;
+using Attribution = BruTile.Attribution;
 
 namespace Mapsui.Tiling.Provider;
 
@@ -26,6 +28,8 @@ public class RasterizingTileProvider : ITileSource
     private ITileSchema? _tileSchema;
     private Attribution? _attribution;
     private readonly IProvider? _dataSource;
+    private readonly AsyncLock _renderLock = new();
+    private IDictionary<TileIndex, double> _searchSizeCache = new ConcurrentDictionary<TileIndex, double>();
 
     public RasterizingTileProvider(
         ILayer layer,
@@ -62,29 +66,142 @@ public class RasterizingTileProvider : ITileSource
         var result = PersistentCache.Find(index);
         if (result == null)
         {
-            var renderer = GetRenderer();
-            var (viewPort, renderLayer) = await CreateRenderLayerAsync(tileInfo);
+            MemoryStream? stream = null;
 
-            using var stream = renderer.RenderToBitmapStream(viewPort, new[] { renderLayer }, pixelDensity: _pixelDensity);
-            _rasterizingLayers.Push(renderer);
-            result = stream?.ToArray();
+            try 
+            {
+                var renderer = GetRenderer();
+                (Viewport viewPort, ILayer renderLayer) = await CreateRenderLayerAsync(tileInfo, renderer);
+                try
+                {
+                    stream = renderer.RenderToBitmapStream(viewPort, new[] { renderLayer }, pixelDensity: _pixelDensity);
+                }
+                finally
+                {
+                    renderLayer.Dispose();
+                }
+                
+                _rasterizingLayers.Push(renderer);
+
+                result = stream?.ToArray();
+            }
+            finally
+            {
+                stream?.Dispose();
+            }
+
             PersistentCache?.Add(index, result ?? Array.Empty<byte>());
-            renderLayer.Dispose();
         }
 
         return result;
     }
 
-    private async Task<(Viewport ViewPort, ILayer RenderLayer)> CreateRenderLayerAsync(TileInfo tileInfo)
+    private async Task<(Viewport ViewPort, ILayer RenderLayer)> CreateRenderLayerAsync(TileInfo tileInfo, IRenderer renderer)
     {
         Schema.Resolutions.TryGetValue(tileInfo.Index.Level, out var tileResolution);
 
         var resolution = tileResolution.UnitsPerPixel;
         var viewPort = RasterizingLayer.CreateViewport(tileInfo.Extent.ToMRect(), resolution, _renderResolutionMultiplier, 1);
-        var fetchInfo = new FetchInfo(viewPort.Extent, resolution);
+        var featureSearchGrowth = await GetAdditionalSearchSizeAround(tileInfo, renderer, viewPort);
+        var extent = viewPort.Extent;
+        if (featureSearchGrowth > 0)
+        {
+            extent = extent.Grow(featureSearchGrowth);
+        }
+        
+        var fetchInfo = new FetchInfo(extent, resolution); 
         var features = await GetFeaturesAsync(fetchInfo);
         var renderLayer = new RenderLayer(_layer, features);
         return (viewPort, renderLayer);
+    }
+
+    private async Task<IEnumerable<IFeature>> GetFeaturesAsync(TileInfo tileInfo)
+    {
+        Schema.Resolutions.TryGetValue(tileInfo.Index.Level, out var tileResolution);
+
+        var resolution = tileResolution.UnitsPerPixel;
+        var viewPort = RasterizingLayer.CreateViewport(tileInfo.Extent.ToMRect(), resolution, _renderResolutionMultiplier, 1);
+        var fetchInfo = new FetchInfo(viewPort.Extent, resolution); 
+        var features = await GetFeaturesAsync(fetchInfo);
+        return features;
+    }
+
+    private async Task<double> GetAdditionalSearchSizeAround(TileInfo tileInfo, IRenderer renderer, IViewport viewport)
+    {
+        double additionalSearchSize = 0;
+        
+        for (int col = -1; col <= 1 ; col++)
+        {
+            for (int row = -1; row <= 1 ; row++)
+            {
+                var size = await GetAdditionalSearchSize(CreateTileInfo(tileInfo, col, row), renderer, viewport);
+                additionalSearchSize = Math.Max(additionalSearchSize, size);
+            }
+        }
+
+        return additionalSearchSize;
+    }
+
+    private TileInfo CreateTileInfo(TileInfo tileInfo, int col, int row)
+    {
+        var tileIndex = new TileIndex(tileInfo.Index.Col + col, tileInfo.Index.Row + row, tileInfo.Index.Level);
+        var tileExtent = new Extent(
+            tileInfo.Extent.MinX + tileInfo.Extent.Width * col,
+            tileInfo.Extent.MinY + tileInfo.Extent.Height * row,
+            tileInfo.Extent.MaxX + tileInfo.Extent.Width * col,
+            tileInfo.Extent.MaxY + tileInfo.Extent.Height * row);
+        return new TileInfo
+        {
+            Index = tileIndex,
+            Extent = tileExtent,
+        };
+    }
+
+    private async Task<double> GetAdditionalSearchSize(TileInfo tileInfo, IRenderer renderer, IViewport viewport)
+    {
+        if (!_searchSizeCache.TryGetValue(tileInfo.Index, out var result))
+        {
+            result = 0;
+            var features = await GetFeaturesAsync(tileInfo);
+            var layers = new List<ILayer> { new RenderLayer(_layer, features) };
+
+            void MeasureFeature(IStyle style, IFeature feature)
+            {
+                var tempSize = GetFeatureSize(feature, style, renderer);
+                var coordinateTempSize = ConvertToCoordinates(tempSize, viewport);
+                result = Math.Max(coordinateTempSize, result);
+            }
+
+            VisibleFeatureIterator.IterateLayers(viewport, layers, 0, (v, l, s, f, o, i) =>
+            {
+                MeasureFeature(s, f);
+            });
+
+            _searchSizeCache[tileInfo.Index] = result;
+        }
+
+        return result;
+    }
+
+    private double ConvertToCoordinates(double tempSize, IViewport viewport)
+    {
+        return tempSize * viewport.Resolution * 0.5; // I need to load half the Size more of the Features
+    }
+
+    private double GetFeatureSize(IFeature feature, IStyle style, IRenderer renderer)
+    {
+        double size = 0;
+
+        if (renderer.StyleRenderers.TryGetValue(style.GetType(), out var styleRenderer))
+        {
+            if (styleRenderer is IFeatureSize featureSize)
+            {
+                var tempSize = featureSize.FeatureSize(feature, style, renderer.SymbolCache);
+                size = Math.Max(tempSize, size);
+            }
+        }
+
+        return size;
     }
 
     private async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
