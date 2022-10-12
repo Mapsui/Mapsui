@@ -2,11 +2,11 @@
 using System.Reflection;
 using Mapsui.Extensions;
 using Mapsui.Extensions.Cache;
+using Mapsui.Extensions.Projections;
 using Mapsui.Layers;
+using Mapsui.Nts;
 using Mapsui.Providers;
 using Mapsui.Nts.Providers.Shapefile;
-using Mapsui.Rendering;
-using Mapsui.Projections;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.UI;
@@ -17,9 +17,9 @@ using Mapsui.Tiling.Layers;
 
 namespace Mapsui.Samples.Common.Desktop
 {
-    public class ShapefileTileSample : IMapControlSample
+    public class ShapefileTilingFilteringSample : IMapControlSample
     {
-        public string Name => "4 Shapefile Rasterizing Tiling";
+        public string Name => "7 Shapefile Filtering";
         public string Category => "Desktop";
 
         public void Setup(IMapControl mapControl)
@@ -44,12 +44,26 @@ namespace Mapsui.Samples.Common.Desktop
                 CRS = "EPSG:3857",
             };
 
-            map.Layers.Add(new RasterizingTileLayer(CreateCountryLayer(projectedCountrySource), persistentCache: new SqlitePersistentCache("countries")));
-            map.Layers.Add(new RasterizingTileLayer(CreateCityLayer(projectedCitySource)));
-            map.Layers.Add(new RasterizingTileLayer(CreateCountryLabelLayer(projectedCountrySource)));
-            map.Layers.Add(new RasterizingTileLayer(CreateCityLabelLayer(projectedCitySource)));
-            var home =  Mercator.FromLonLat(15, 54);
-            map.Home = n => n.NavigateTo(home, map.Resolutions[5]);
+            var filteredCitySource = new FilteringProvider(projectedCitySource, f =>
+            {
+                if (f is GeometryFeature geometryFeature)
+                {
+                    if (geometryFeature["POPULATION"] is long population)
+                    {
+                        //Cities with more than 5'000'000 inhabitants
+                        if (population > 5000000)
+                        {
+                            return true;
+                        }
+                    }
+                }
+
+                return false;
+            });
+
+            map.Layers.Add(new RasterizingTileLayer(CreateCountryLayer(projectedCountrySource)));
+            map.Layers.Add(new RasterizingTileLayer(CreateCityLayer(filteredCitySource)));
+            map.Layers.Add(new RasterizingTileLayer(CreateCityLabelLayer(filteredCitySource)));
 
             return map;
         }
@@ -76,6 +90,16 @@ namespace Mapsui.Samples.Common.Desktop
             };
         }
 
+        private static ILayer CreateCityLabelLayer(IProvider citiesProvider)
+        {
+            return new Layer("City labels")
+            {
+                DataSource = citiesProvider,
+                Enabled = true,
+                Style = CreateCityLabelStyle()
+            };
+        }
+
         private static IThemeStyle CreateCityTheme()
         {
             // Scaling city icons based on city population.
@@ -99,6 +123,22 @@ namespace Mapsui.Samples.Common.Desktop
 
             // Create theme using a density from 0 (min) to 400 (max)
             return new GradientTheme("PopDens", 0, 400, min, max) { FillColorBlend = ColorBlend.Rainbow5 };
+        }
+
+        private static LabelStyle CreateCityLabelStyle()
+        {
+            return new LabelStyle
+            {
+                ForeColor = Color.Black,
+                BackColor = new Brush { Color = Color.Orange },
+                Font = new Font { FontFamily = "GenericSerif", Size = 11 },
+                HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
+                VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Center,
+                Offset = new Offset { X = 0, Y = 0 },
+                Halo = new Pen { Color = Color.Yellow, Width = 2 },
+                CollisionDetection = true,
+                LabelColumn = "NAME"
+            };
         }
 
         private static GradientTheme CreateCountryLabelTheme()
@@ -132,32 +172,6 @@ namespace Mapsui.Samples.Common.Desktop
                 Name = "Countries",
                 DataSource = countrySource,
                 Style = CreateCountryTheme()
-            };
-        }
-
-        private static LabelStyle CreateCityLabelStyle()
-        {
-            return new LabelStyle
-            {
-                ForeColor = Color.Black,
-                BackColor = new Brush { Color = Color.Orange },
-                Font = new Font { FontFamily = "GenericSerif", Size = 11 },
-                HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
-                VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Center,
-                Offset = new Offset { X = 0, Y = 0 },
-                Halo = new Pen { Color = Color.Yellow, Width = 2 },
-                CollisionDetection = true,
-                LabelColumn = "NAME"
-            };
-        }
-
-        private static ILayer CreateCityLabelLayer(IProvider citiesProvider)
-        {
-            return new Layer("City labels")
-            {
-                DataSource = citiesProvider,
-                Enabled = true,
-                Style = CreateCityLabelStyle()
             };
         }
 

@@ -34,7 +34,7 @@
     <PackageReference Include="Microsoft.Win32.Primitives" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="NUnit" />
-    <PackageReference Include="NUnit3TestAdapter" >
+    <PackageReference Include="NUnit3TestAdapter">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
@@ -384,6 +384,8 @@
 
   <ItemGroup>
     <None Remove="Resources\Images\OriginalRegression\GeoTiffSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\ShapefileTilingFilteringSample.Regression.png" />
+    <None Remove="Resources\Images\OriginalRegression\WriteToLayerSample.Regression.png" />
   </ItemGroup>
 
   <ItemGroup>
