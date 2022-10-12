@@ -19,8 +19,7 @@ namespace Mapsui.Samples.Forms.WPF
 
             // Hack to tell the platform independent samples where the files can be found on iOS.
             MbTilesSample.MbTilesLocation = MbTilesLocationOnWPF;
-            // Never tested this. PDD.
-            MbTilesHelper.DeployMbTilesFile(s => File.Create(System.IO.Path.Combine(MbTilesLocationOnWPF, s)));
+            MbTilesHelper.DeployMbTilesFile(MbTilesLocationOnWPF);
 
             LoadApplication(new Mapsui.Samples.Forms.App());
         }

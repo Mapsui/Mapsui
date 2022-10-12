@@ -20,7 +20,7 @@ public sealed class MainPage : ContentPage, IDisposable
     public MainPage(MainViewModel mainViewModel)
     {
         MbTilesSample.MbTilesLocation = MbTilesLocationOnMaui;
-        MbTilesHelper.DeployMbTilesFile(s => File.Create(Path.Combine(MbTilesLocationOnMaui, s)));
+        MbTilesHelper.DeployMbTilesFile(MbTilesLocationOnMaui);
 
         categoryPicker = CreatePicker(mainViewModel);
         collectionView = CreateCollectionView(mainViewModel);

@@ -30,7 +30,7 @@ namespace Mapsui.Samples.WinUI
 
             // Hack to tell the platform independent samples where the files can be found on Android.
             MbTilesSample.MbTilesLocation = MbTilesLocationOnWinUI;
-            MbTilesHelper.DeployMbTilesFile(s => File.Create(Path.Combine(MbTilesLocationOnWinUI, s)));
+            MbTilesHelper.DeployMbTilesFile(MbTilesLocationOnWinUI);
 
             MapControl.Map!.Layers.Add(OpenStreetMap.CreateTileLayer());
             MapControl.Map.RotationLock = false;

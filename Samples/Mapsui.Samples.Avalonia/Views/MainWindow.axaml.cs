@@ -33,7 +33,7 @@ namespace Mapsui.Samples.Avalonia.Views
 
             // Hack to tell the platform independent samples where the files can be found on Android.
             MbTilesSample.MbTilesLocation = MbTilesLocationOnAvalonia;
-            MbTilesHelper.DeployMbTilesFile(s => File.Create(Path.Combine(MbTilesLocationOnAvalonia, s)));
+            MbTilesHelper.DeployMbTilesFile(MbTilesLocationOnAvalonia);
 
             MapControl.Map!.Layers.Add(OpenStreetMap.CreateTileLayer());
             MapControl.Map.RotationLock = false;

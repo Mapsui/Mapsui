@@ -22,7 +22,7 @@ namespace Mapsui.Samples.Forms.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             MbTilesSample.MbTilesLocation = MbTilesLocationOnAndroid;
-            MbTilesHelper.DeployMbTilesFile(s => File.Create(System.IO.Path.Combine(MbTilesLocationOnAndroid, s)));
+            MbTilesHelper.DeployMbTilesFile(MbTilesLocationOnAndroid);
 
             base.OnCreate(bundle);
 

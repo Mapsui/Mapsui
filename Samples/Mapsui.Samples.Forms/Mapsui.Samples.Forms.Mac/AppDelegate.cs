@@ -31,8 +31,7 @@ namespace Mapsui.Samples.Forms.Mac
         {
             // Hack to tell the platform independent samples where the files can be found on iOS.
             MbTilesSample.MbTilesLocation = MbTilesLocationOnMac;
-            // Never tested this. PDD.
-            MbTilesHelper.DeployMbTilesFile(s => File.Create(Path.Combine(MbTilesLocationOnMac, s)));
+            MbTilesHelper.DeployMbTilesFile(MbTilesLocationOnMac);
 
             Xamarin.Forms.Forms.Init();
             LoadApplication(new App());

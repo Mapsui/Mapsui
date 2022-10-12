@@ -12,7 +12,7 @@ namespace Mapsui.Samples.Common.Helpers
         /// Copies a number of embedded resources to the local file system.
         /// </summary>
         /// <param name="createFile"></param>
-        public static void DeployMbTilesFile(Func<string, Stream> createFile)
+        public static void DeployMbTilesFile(string folder)
         {
             // So what is this all about?
             // I don't know how to access the file as part of the apk (let me know if there is a simple way)
@@ -24,18 +24,18 @@ namespace Mapsui.Samples.Common.Helpers
 
             foreach (var mbTileFile in mbTileFiles)
             {
-                CopyEmbeddedResourceToStorage(embeddedResourcesPath, mbTileFile, createFile);
+                CopyEmbeddedResourceToStorage(embeddedResourcesPath, mbTileFile, folder);
             }
         }
 
         private static void CopyEmbeddedResourceToStorage(string embeddedResourcesPath, string mbTilesFile,
-            Func<string, Stream> createFile)
+            string folder)
         {
             var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
             using (var image = assembly.GetManifestResourceStream(embeddedResourcesPath + mbTilesFile))
             {
                 if (image == null) throw new ArgumentException("EmbeddedResource not found");
-                using (var dest = createFile(mbTilesFile))
+                using (var dest = File.Create(Path.Combine(folder, mbTilesFile)))
                 {
                     image.CopyTo(dest);
                 }
