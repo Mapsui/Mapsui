@@ -8,6 +8,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Maps;
+using Mapsui.UI;
+using Mapsui.UI.Maui;
 
 namespace Mapsui.Samples.Maui.ViewModel
 {
@@ -15,33 +17,52 @@ namespace Mapsui.Samples.Maui.ViewModel
     {
         public MainViewModel()
         {
-            map = InfoLayersSample.CreateMap();
-
-
             var allSamples = AllSamples.GetSamples() ?? new List<ISampleBase>();
             Categories = new ObservableCollection<string>(allSamples.Select(s => s.Category).Distinct().OrderBy(c => c));
-
-            //categoryPicker!.ItemsSource = categories.ToList();
-            //categoryPicker.SelectedIndexChanged += categoryPicker_SelectedIndexChanged;
-            //categoryPicker.SelectedItem = "Info";
+            selectedCategory = Categories.First();
+            PopulateSamples(selectedCategory);
+            selectedSample = Samples.First();
         }
+
+        [ObservableProperty]
+        string selectedCategory;
+
+        [ObservableProperty]
+        ISampleBase selectedSample;
 
         [ObservableProperty]
         Map? map;
 
-        public ObservableCollection<ISample> Samples { get; } = new();
+        public ObservableCollection<ISampleBase> Samples { get; set; } = new();
         public ObservableCollection<string> Categories { get; } = new();
 
-        [ICommand]
-        private void CategoryChanged()
-        { 
-
-        }
-
+        // MapControl is needed in the samples. Mapsui's design should change so this is not needed anymore.
+        public MapControl MapControl { get; set; }
 
         public void Picker_SelectedIndexChanged(object? sender, EventArgs e)
         {
-            
+            PopulateSamples(SelectedCategory);
+        }
+
+        private void PopulateSamples(string selectedCategory)
+        {
+            var samples = AllSamples.GetSamples().OfType<ISampleBase>().Where(s => s.Category == selectedCategory);
+            Samples.Clear();
+            foreach (var sample in samples)
+            {
+                Samples.Add(sample);
+            }
+        }
+
+        public async void CollectionView_SelectionChanged(object? sender, SelectionChangedEventArgs e)
+        {
+            if (SelectedSample is null)
+                return;
+
+            if (SelectedSample is ISample sample)
+                Map = await sample.CreateMapAsync();
+            else if (SelectedSample is IMapControlSample mapControlSample)
+                mapControlSample.Setup(MapControl);
         }
     }
 }

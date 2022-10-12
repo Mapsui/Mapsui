@@ -1,6 +1,9 @@
 using CommunityToolkit.Maui.Markup;
 using Mapsui.Extensions;
 using Mapsui.Samples.Common;
+using Mapsui.Samples.Common.Helpers;
+using Mapsui.Samples.Common.Maps;
+using Mapsui.Samples.CustomWidget;
 using Mapsui.Samples.Maui.ViewModel;
 using Mapsui.Tiling;
 using Mapsui.UI.Maui;
@@ -9,17 +12,28 @@ namespace Mapsui.Samples.Maui.View;
 
 public sealed class MainPage : ContentPage, IDisposable
 {
-    IEnumerable<ISampleBase> allSamples;
-    CollectionView sampleCollectionView = CreateCollectionView();
-    Picker categoryPicker;
-    MapControl mapControl = new MapControl();
+    readonly CollectionView collectionView;
+    readonly Picker categoryPicker;
+    readonly MapControl mapControl = new MapControl();
+    private static string MbTilesLocationOnMaui => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
 
     public MainPage(MainViewModel mainViewModel)
     {
+        MbTilesSample.MbTilesLocation = MbTilesLocationOnMaui;
+        MbTilesHelper.DeployMbTilesFile(s => File.Create(Path.Combine(MbTilesLocationOnMaui, s)));
+
         categoryPicker = CreatePicker(mainViewModel);
-        sampleCollectionView.SelectionChanged += CollectionView_SelectionChanged;
+        collectionView = CreateCollectionView(mainViewModel);
+        
         BindingContext = mainViewModel;
         mapControl.SetBinding(MapControl.MapProperty, new Binding(nameof(MainViewModel.Map)));
+        
+        // Workaround. Samples need the MapControl in the current setup.
+        mainViewModel.MapControl = mapControl;
+
+        // The CustomWidgetSkiaRenderer needs to be registered to make the CustomWidget sample work.
+        // Perhaps it is possible to let the sample itself do this so we do not have to do this for each platform.
+        mapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
 
         Content = new Grid
         {
@@ -36,43 +50,35 @@ public sealed class MainPage : ContentPage, IDisposable
                     Children =
                     {
                         categoryPicker,
-                        sampleCollectionView
+                        collectionView
                     }
                 }.Column(0).Padding(20),
                 mapControl.Column(1)
             }
         };
-
-        //allSamples = AllSamples.GetSamples() ?? new List<ISampleBase>();
-        //var categories = allSamples.Select(s => s.Category).Distinct().OrderBy(c => c);
-        //categoryPicker!.ItemsSource = categories.ToList();
-        //categoryPicker.SelectedIndexChanged += categoryPicker_SelectedIndexChanged;
-        //categoryPicker.SelectedItem = "Info";
-
-        //!!!mapControl.Map = ((ISample)allSamples.First(s => s.Category == categoryPicker.SelectedItem.ToString())).CreateMapAsync().Result;
     }
 
     private static Picker CreatePicker(MainViewModel mainViewModel)
     {
-        var picker = new Picker
+        return new Picker
         {
             WidthRequest = 220,
-            ItemsSource = mainViewModel.Categories,
-            SelectedIndex = 0            
-        };
-
-        picker.SelectedIndexChanged += mainViewModel.Picker_SelectedIndexChanged;
-
-        return picker;
+            ItemsSource = mainViewModel.Categories
+        }
+        .Bind(Picker.SelectedItemProperty, nameof(mainViewModel.SelectedCategory))
+        .Invoke(picker => picker.SelectedIndexChanged += mainViewModel.Picker_SelectedIndexChanged);
     }
 
-    private static CollectionView CreateCollectionView()
+    private static CollectionView CreateCollectionView(MainViewModel mainViewModel)
     {
         return new CollectionView
         {
             ItemTemplate = new DataTemplate(() => CreateCollectionViewTemplate()),
             SelectionMode = SelectionMode.Single,
-        };
+            ItemsSource = mainViewModel.Samples
+        }
+        .Bind(SelectableItemsView.SelectedItemProperty, nameof(mainViewModel.SelectedSample))
+        .Invoke(collectionView => collectionView.SelectionChanged += mainViewModel.CollectionView_SelectionChanged);
     }
 
     private static IView CreateCollectionViewTemplate()
@@ -90,31 +96,6 @@ public sealed class MainPage : ContentPage, IDisposable
 
             }.Bind(Label.TextProperty, nameof(ISample.Name))
         };
-    }
-
-    private void CollectionView_SelectionChanged(object? sender, SelectionChangedEventArgs e)
-    {
-        Catch.Exceptions(async () =>
-        {
-            if (e.CurrentSelection == null)
-            {
-                return;
-            }
-
-            var sample = (ISample)e.CurrentSelection[0];
-            mapControl.Map = await sample.CreateMapAsync();
-        });
-    }
-
-    private void categoryPicker_SelectedIndexChanged(object? sender, EventArgs e)
-    {
-        FillListWithSamples();
-    }
-
-    private void FillListWithSamples()
-    {
-        var selectedCategory = categoryPicker.SelectedItem?.ToString() ?? "";
-        sampleCollectionView.ItemsSource = allSamples.Where(s => s.Category == selectedCategory);
     }
 
     public void Dispose()

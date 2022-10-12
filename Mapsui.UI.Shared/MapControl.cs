@@ -444,17 +444,28 @@ namespace Mapsui.UI.Wpf
 #if __MAUI__
 
         public static readonly BindableProperty MapProperty = BindableProperty.Create(nameof(Map),
-            typeof(Map), typeof(MapControl), default(Map), defaultBindingMode: BindingMode.TwoWay);
+            typeof(Map), typeof(MapControl), default(Map), defaultBindingMode: BindingMode.TwoWay,
+            propertyChanged: MapPropertyChanged, propertyChanging: MapPropertyChanging);
+
+        private static void MapPropertyChanging(BindableObject bindable,
+            object oldValue, object newValue)
+        {
+            var mapControl = (MapControl)bindable;
+            mapControl.BeforeSetMap();
+        }
+
+        private static void MapPropertyChanged(BindableObject bindable,
+            object oldValue, object newValue)
+        {
+            var mapControl = (MapControl)bindable;
+            mapControl.AfterSetMap(mapControl.Map);
+        }
+
 
         public Map? Map
         {
             get => (Map)GetValue(MapProperty);
-            set
-            {
-                BeforeSetMap();
-                SetValue(MapProperty, value);
-                AfterSetMap(value);
-            }
+            set => SetValue(MapProperty, value);
         }
 
 #else
