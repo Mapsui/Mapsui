@@ -85,7 +85,6 @@ namespace Mapsui.Projections
 
         private static void Project(IFeature feature, Func<double, double, (double, double)> transformFunc)
         {
-
             feature.CoordinateVisitor((x, y, setter) => {
                 var (xOut, yOut) = transformFunc(x, y);
                 setter(xOut, yOut);
