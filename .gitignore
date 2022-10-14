@@ -79,3 +79,5 @@ AppPackages/
 /Output-Build.txt
 /Samples/Mapsui.Samples.Uno/Mapsui.Samples.Uno.Wasm/emsdk
 *.binlog
+/dotnet-install.ps1
+/dotnetcli
