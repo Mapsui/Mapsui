@@ -1,0 +1,546 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>WindowsFormsIntegration</name>
+  </assembly>
+  <members>
+    <member name="T:System.Windows.Automation.Peers.WindowsFormsHostAutomationPeer">
+      <summary>Exposes <see cref="T:System.Windows.Forms.Integration.WindowsFormsHost" /> types to UI Automation.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.Peers.WindowsFormsHostAutomationPeer.#ctor(System.Windows.Forms.Integration.WindowsFormsHost)">
+      <summary>Initializes a new instance of the <see cref="T:System.Windows.Automation.Peers.WindowsFormsHostAutomationPeer" /> class.</summary>
+      <param name="owner">The <see cref="T:System.Windows.Forms.Integration.WindowsFormsHost" /> that is associated with this <see cref="T:System.Windows.Automation.Peers.WindowsFormsHostAutomationPeer" />.</param>
+    </member>
+    <member name="T:System.Windows.Forms.Integration.ChildChangedEventArgs">
+      <summary>Provides data for the <see cref="E:System.Windows.Forms.Integration.WindowsFormsHost.ChildChanged" /> and <see cref="E:System.Windows.Forms.Integration.ElementHost.ChildChanged" /> events.</summary>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.ChildChangedEventArgs.#ctor(System.Object)">
+      <summary>Initializes a new instance of the <see cref="T:System.Windows.Forms.Integration.ChildChangedEventArgs" /> class.</summary>
+      <param name="previousChild">The value of the <see cref="P:System.Windows.Forms.Integration.WindowsFormsHost.Child" /> property before the new value was assigned.</param>
+    </member>
+    <member name="P:System.Windows.Forms.Integration.ChildChangedEventArgs.PreviousChild">
+      <summary>Gets the value of the <see cref="P:System.Windows.Forms.Integration.WindowsFormsHost.Child" /> property before the new value was assigned.</summary>
+      <returns>The value of the <see cref="P:System.Windows.Forms.Integration.WindowsFormsHost.Child" /> property before the new value was assigned.</returns>
+    </member>
+    <member name="T:System.Windows.Forms.Integration.ElementHost">
+      <summary>A Windows Forms control that can be used to host a Windows Presentation Foundation (WPF) element.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.BindingContextChanged">
+      <summary>Occurs when the value of the <see cref="T:System.Windows.Forms.BindingContext" /> property changes.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.ChildChanged">
+      <summary>Occurs when the <see cref="P:System.Windows.Forms.Integration.WindowsFormsHost.Child" /> property is set.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.Click">
+      <summary>Occurs when the control is clicked.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.ClientSizeChanged">
+      <summary>Occurs when the value of the <see cref="P:System.Windows.Forms.Control.ClientSize" /> property changes.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.ControlAdded">
+      <summary>Occurs when a new control is added to the <see cref="T:System.Windows.Forms.Control.ControlCollection" />.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.ControlRemoved">
+      <summary>Occurs when a control is removed from the <see cref="T:System.Windows.Forms.Control.ControlCollection" />.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.CursorChanged">
+      <summary>Occurs when the value of the <see cref="P:System.Windows.Forms.Control.Cursor" /> property changes.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.DoubleClick">
+      <summary>Occurs when the control is double-clicked.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.DragDrop">
+      <summary>Occurs when a drag-and-drop operation is completed.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.DragEnter">
+      <summary>Occurs when an object is dragged into the control's bounds.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.DragLeave">
+      <summary>Occurs when an object is dragged out of the control's bounds.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.DragOver">
+      <summary>Occurs when an object is dragged over the control's bounds.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.Enter">
+      <summary>Occurs when the control is entered.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.FontChanged">
+      <summary>Occurs when the <see cref="P:System.Windows.Forms.Control.Font" /> property value changes.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.ForeColorChanged">
+      <summary>Occurs when the <see cref="P:System.Windows.Forms.Control.ForeColor" /> property value changes.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.GiveFeedback">
+      <summary>Occurs during a drag operation.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.GotFocus">
+      <summary>Occurs when the control receives focus.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.Invalidated">
+      <summary>Occurs when a control's display requires redrawing.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.KeyDown">
+      <summary>Occurs when a key is pressed while the control has focus.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.KeyPress">
+      <summary>Occurs when a key is pressed while the control has focus.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.KeyUp">
+      <summary>Occurs when a key is released while the control has focus.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.Layout">
+      <summary>Occurs when a control should reposition its child controls.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.Leave">
+      <summary>Occurs when the input focus leaves the control.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.LostFocus">
+      <summary>Occurs when the control loses focus.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.MouseCaptureChanged">
+      <summary>Occurs when the control loses or gains mouse capture.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.MouseClick">
+      <summary>Occurs when the control is clicked by the mouse.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.MouseDoubleClick">
+      <summary>Occurs when the control is double clicked by the mouse.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.MouseDown">
+      <summary>Occurs when the mouse pointer is over the control and a mouse button is pressed.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.MouseEnter">
+      <summary>Occurs when the mouse pointer enters the control.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.MouseHover">
+      <summary>Occurs when the mouse pointer rests on the control.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.MouseLeave">
+      <summary>Occurs when the mouse pointer leaves the control.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.MouseMove">
+      <summary>Occurs when the mouse pointer is moved over the control.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.MouseUp">
+      <summary>Occurs when the mouse pointer is over the control and a mouse button is released.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.MouseWheel">
+      <summary>Occurs when the mouse wheel moves while the control has focus.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.PaddingChanged">
+      <summary>Occurs when the control's padding changes.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.Paint">
+      <summary>Occurs when the <see cref="T:System.Windows.Forms.Integration.ElementHost" /> control is redrawn.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.PreviewKeyDown">
+      <summary>Occurs before the <see cref="E:System.Windows.Forms.Control.KeyDown" /> event when a key is pressed while focus is on this control.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.QueryContinueDrag">
+      <summary>Occurs during a drag-and-drop operation and enables the drag source to determine whether the drag-and-drop operation should be canceled.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.Resize">
+      <summary>Occurs when the control is resized.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.RightToLeftChanged">
+      <summary>Occurs when the <see cref="P:System.Windows.Forms.Control.RightToLeft" /> property value changes.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.SizeChanged">
+      <summary>Occurs when the <see cref="P:System.Windows.Forms.Control.Size" /> property value changes.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.ElementHost.TextChanged">
+      <summary>Occurs when the <see cref="P:System.Windows.Forms.Control.Text" /> property value changes.</summary>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.ElementHost.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:System.Windows.Forms.Integration.ElementHost" /> class.</summary>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.ElementHost.Dispose(System.Boolean)">
+      <summary>Immediately frees any system resources used by the <see cref="T:System.Windows.Forms.Integration.ElementHost" /> control.</summary>
+      <param name="disposing">
+        <see langword="true" /> to release both managed and unmanaged resources; <see langword="false" /> to release only unmanaged resources.</param>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.ElementHost.EnableModelessKeyboardInterop(System.Windows.Window)">
+      <summary>Enables a <see cref="T:System.Windows.Window" /> to receive keyboard messages correctly when it is opened modelessly from Windows Forms.</summary>
+      <param name="window">The Windows Presentation Foundation (WPF) window to be opened modelessly.</param>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.ElementHost.GetPreferredSize(System.Drawing.Size)">
+      <summary>Overrides the base class implementation <see cref="M:System.Windows.Forms.Control.GetPreferredSize(System.Drawing.Size)" /> to provide correct layout behavior for the hosted Windows Presentation Foundation (WPF) elements.</summary>
+      <param name="proposedSize">The custom-sized area for a WPF element.</param>
+      <returns>The <see cref="T:System.Drawing.Size" /> computed by the <see cref="T:System.Windows.Forms.Integration.ElementHost" /> control, given the constraints specified by <paramref name="proposedSize" />.</returns>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.ElementHost.IsInputChar(System.Char)">
+      <summary>Ensures that all WM_CHAR key messages are forwarded to the hosted element.</summary>
+      <param name="charCode">The character to forward.</param>
+      <returns>
+        <see langword="true" /> in all cases.</returns>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.ElementHost.OnEnabledChanged(System.EventArgs)">
+      <summary>Raises the <see cref="E:System.Windows.Forms.Control.EnabledChanged" /> event.</summary>
+      <param name="e">The data for the event.</param>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.ElementHost.OnGotFocus(System.EventArgs)">
+      <summary>Raises the <see cref="E:System.Windows.Forms.Integration.ElementHost.GotFocus" /> event.</summary>
+      <param name="e">An <see cref="T:System.EventArgs" /> that contains the event data.</param>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.ElementHost.OnHandleCreated(System.EventArgs)">
+      <summary>Raises the <see cref="E:System.Windows.Forms.Control.HandleCreated" /> event.</summary>
+      <param name="e">An <see cref="T:System.EventArgs" /> that contains the event data.</param>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.ElementHost.OnLeave(System.EventArgs)">
+      <summary>Raises the <see cref="E:System.Windows.Forms.Control.Leave" /> event.</summary>
+      <param name="e">An <see cref="T:System.EventArgs" /> that contains the event data.</param>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.ElementHost.OnPaint(System.Windows.Forms.PaintEventArgs)">
+      <summary>Raises the <see cref="E:System.Windows.Forms.Control.Paint" /> event.</summary>
+      <param name="e">A <see cref="T:System.Windows.Forms.PaintEventArgs" /> that contains the event data.</param>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.ElementHost.OnPaintBackground(System.Windows.Forms.PaintEventArgs)">
+      <summary>Paints the background of the control.</summary>
+      <param name="pevent">A <see cref="T:System.Windows.Forms.PaintEventArgs" /> that contains information about the control to paint.</param>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.ElementHost.OnPrint(System.Windows.Forms.PaintEventArgs)">
+      <summary>Renders the control using the provided <see cref="T:System.Drawing.Graphics" /> object.</summary>
+      <param name="e">A <see cref="T:System.Windows.Forms.PaintEventArgs" /> that contains the event data.</param>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.ElementHost.OnPropertyChanged(System.String,System.Object)">
+      <summary>Notifies the <see cref="P:System.Windows.Forms.Integration.ElementHost.PropertyMap" /> that a property has changed.</summary>
+      <param name="propertyName">The name of the property that has changed and requires translation.</param>
+      <param name="value">The new value of the property.</param>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.ElementHost.OnVisibleChanged(System.EventArgs)">
+      <summary>Raises the <see cref="E:System.Windows.Forms.Control.VisibleChanged" /> event.</summary>
+      <param name="e">An <see cref="T:System.EventArgs" /> that contains the event data.</param>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.ElementHost.ProcessCmdKey(System.Windows.Forms.Message@,System.Windows.Forms.Keys)">
+      <summary>Processes a command key, ensuring that the hosted element has an opportunity to handle the command before normal Windows Forms processing.</summary>
+      <param name="msg">A <see cref="T:System.Windows.Forms.Message" />, passed by reference, that represents the window message to process.</param>
+      <param name="keyData">One of the <see cref="T:System.Windows.Forms.Keys" /> values representing the key to process.</param>
+      <returns>
+        <see langword="true" /> if the character is a Windows Presentation Foundation (WPF) shortcut key; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.ElementHost.ProcessMnemonic(System.Char)">
+      <summary>Processes a mnemonic character, ensuring that the hosted element has an opportunity to handle the mnemonic before normal Windows Forms processing.</summary>
+      <param name="charCode">The character to process.</param>
+      <returns>
+        <see langword="true" /> if the character is a Windows Presentation Foundation (WPF) shortcut key; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.ElementHost.ScaleCore(System.Single,System.Single)">
+      <summary>Scales the parent container and the hosted Windows Forms control.</summary>
+      <param name="dx">The scaling factor for the x-axis.</param>
+      <param name="dy">The scaling factor for the y-axis.</param>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.ElementHost.Select(System.Boolean,System.Boolean)">
+      <summary>Activates the hosted element.</summary>
+      <param name="directed">
+        <see langword="true" /> to specify the direction of the control to select; otherwise, <see langword="false" />.</param>
+      <param name="forward">
+        <see langword="true" /> to move forward in the tab order; <see langword="false" /> to move backward in the tab order.</param>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.ElementHost.WndProc(System.Windows.Forms.Message@)">
+      <summary>Processes Windows messages.</summary>
+      <param name="m">A message to process.</param>
+    </member>
+    <member name="P:System.Windows.Forms.Integration.ElementHost.AutoSize">
+      <summary>Gets or sets a value indicating whether the control is automatically resized to display its entire contents.</summary>
+      <returns>
+        <see langword="true" /> if the control adjusts its size to closely fit its contents; otherwise, <see langword="false" />. The default is <see langword="true" />.</returns>
+    </member>
+    <member name="P:System.Windows.Forms.Integration.ElementHost.BackColorTransparent">
+      <summary>Gets or sets a value indicating whether the hosted element has a transparent background.</summary>
+      <returns>
+        <see langword="true" /> if the hosted element has a transparent background; otherwise, <see langword="false" />. The default is <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Windows.Forms.Integration.ElementHost.CanEnableIme">
+      <summary>Gets a value that indicates whether the <see cref="P:System.Windows.Forms.Control.ImeMode" /> property can be set to an active value to enable IME support.</summary>
+      <returns>
+        <see langword="true" /> if <see cref="T:System.Windows.Forms.Integration.ElementHost" /> has a <see cref="P:System.Windows.Forms.Integration.ElementHost.Child" /> element; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Windows.Forms.Integration.ElementHost.Child">
+      <summary>Gets or sets the <see cref="T:System.Windows.UIElement" /> hosted by the <see cref="T:System.Windows.Forms.Integration.ElementHost" /> control.</summary>
+      <returns>The hosted Windows Presentation Foundation (WPF) element.</returns>
+    </member>
+    <member name="P:System.Windows.Forms.Integration.ElementHost.DefaultSize">
+      <summary>Gets the default size of the control.</summary>
+      <returns>The default <see cref="T:System.Drawing.Size" /> of the control.</returns>
+    </member>
+    <member name="P:System.Windows.Forms.Integration.ElementHost.Focused">
+      <summary>Gets a value that indicates whether the control has input focus.</summary>
+      <returns>
+        <see langword="true" /> if the control has focus; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Windows.Forms.Integration.ElementHost.HostContainer">
+      <summary>Gets the parent container of the hosted Windows Presentation Foundation (WPF) element.</summary>
+      <returns>The parent container.</returns>
+    </member>
+    <member name="P:System.Windows.Forms.Integration.ElementHost.ImeModeBase">
+      <summary>Gets or sets the IME mode of a control.</summary>
+      <returns>The IME mode of the control.</returns>
+    </member>
+    <member name="P:System.Windows.Forms.Integration.ElementHost.PropertyMap">
+      <summary>Gets the property map, which determines how setting properties on the <see cref="T:System.Windows.Forms.Integration.ElementHost" /> control affects the hosted Windows Presentation Foundation (WPF) element.</summary>
+      <returns>A <see cref="T:System.Windows.Forms.Integration.PropertyMap" /> that maps <see cref="T:System.Windows.Forms.Integration.ElementHost" /> to properties on the hosted WPF element.</returns>
+    </member>
+    <member name="T:System.Windows.Forms.Integration.IntegrationExceptionEventArgs">
+      <summary>Provides a base class for <see cref="T:System.EventArgs" /> classes which support optionally raising exceptions.</summary>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.IntegrationExceptionEventArgs.#ctor(System.Boolean,System.Exception)">
+      <summary>Initializes a new instance of the <see cref="T:System.Windows.Forms.Integration.IntegrationExceptionEventArgs" /> class.</summary>
+      <param name="throwException">
+        <see langword="true" /> to raise the <see cref="T:System.Exception" /> specified by <paramref name="exception" />; otherwise, <see langword="false" />.</param>
+      <param name="exception">The <see cref="T:System.Exception" /> to raise.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="exception" /> is <see langword="null" />.</exception>
+    </member>
+    <member name="P:System.Windows.Forms.Integration.IntegrationExceptionEventArgs.Exception">
+      <summary>Gets the <see cref="T:System.Exception" /> associated with this <see cref="T:System.Windows.Forms.Integration.IntegrationExceptionEventArgs" />.</summary>
+      <returns>The <see cref="T:System.Exception" /> associated with this <see cref="T:System.Windows.Forms.Integration.IntegrationExceptionEventArgs" />.</returns>
+    </member>
+    <member name="P:System.Windows.Forms.Integration.IntegrationExceptionEventArgs.ThrowException">
+      <summary>Gets or sets a value indicating whether to raise the <see cref="T:System.Exception" /> specified by the <see cref="P:System.Windows.Forms.Integration.IntegrationExceptionEventArgs.Exception" /> property.</summary>
+      <returns>
+        <see langword="true" /> if <see cref="P:System.Windows.Forms.Integration.IntegrationExceptionEventArgs.Exception" /> will be raised; otherwise, <see langword="false" />. The default is <see langword="false" />.</returns>
+    </member>
+    <member name="T:System.Windows.Forms.Integration.LayoutExceptionEventArgs">
+      <summary>Provides data for the <see cref="E:System.Windows.Forms.Integration.WindowsFormsHost.LayoutError" /> event.</summary>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.LayoutExceptionEventArgs.#ctor(System.Exception)">
+      <summary>Initializes a new instance of the <see cref="T:System.Windows.Forms.Integration.LayoutExceptionEventArgs" /> class.</summary>
+      <param name="exception">The <see cref="T:System.Exception" /> to raise.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="exception" /> is <see langword="null" />.</exception>
+    </member>
+    <member name="T:System.Windows.Forms.Integration.PropertyMap">
+      <summary>Provides a way to translate property values between Windows Forms controls and Windows Presentation Foundation (WPF) elements.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.PropertyMap.PropertyMappingError">
+      <summary>Occurs when an exception is raised by a property translator.</summary>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.PropertyMap.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:System.Windows.Forms.Integration.PropertyMap" /> class.</summary>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.PropertyMap.#ctor(System.Object)">
+      <summary>Initializes a new instance of the <see cref="T:System.Windows.Forms.Integration.PropertyMap" /> class with the given source object.</summary>
+      <param name="source">The object which has the properties to be translated.</param>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.PropertyMap.Add(System.String,System.Windows.Forms.Integration.PropertyTranslator)">
+      <summary>Adds a <see cref="T:System.Windows.Forms.Integration.PropertyTranslator" /> delegate for the given property to the <see cref="T:System.Windows.Forms.Integration.PropertyMap" />.</summary>
+      <param name="propertyName">The name of the property to map.</param>
+      <param name="translator">The <see cref="T:System.Windows.Forms.Integration.PropertyTranslator" /> delegate which is called when <paramref name="propertyName" /> changes.</param>
+      <exception cref="T:System.InvalidOperationException">
+        <paramref name="propertyName" /> has an existing mapping.</exception>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.PropertyMap.Apply(System.String)">
+      <summary>Runs the property translator for the given property, based on the source object's current property value.</summary>
+      <param name="propertyName">The name of the property to translate.</param>
+      <exception cref="T:System.ArgumentException">The property given by <paramref name="propertyName" /> does not exist on <see cref="P:System.Windows.Forms.Integration.PropertyMap.SourceObject" />.</exception>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.PropertyMap.ApplyAll">
+      <summary>Runs the property translator for each mapped property, based on the source object's current property values.</summary>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.PropertyMap.Clear">
+      <summary>Removes all property mappings.</summary>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.PropertyMap.Contains(System.String)">
+      <summary>Gets a value indicating whether the given property is mapped.</summary>
+      <param name="propertyName">The name of the property to search for.</param>
+      <returns>
+        <see langword="true" /> if <paramref name="propertyName" /> exists in the property map; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.PropertyMap.Remove(System.String)">
+      <summary>Deletes the given property from the mapping.</summary>
+      <param name="propertyName">The name of the property to remove.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="propertyName" /> is <see langword="null" />.</exception>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.PropertyMap.Reset(System.String)">
+      <summary>Restores the default property mapping for the given property.</summary>
+      <param name="propertyName">The name of the property to restore.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="propertyName" /> is <see langword="null" />.</exception>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.PropertyMap.ResetAll">
+      <summary>Restores the default property mappings.</summary>
+    </member>
+    <member name="P:System.Windows.Forms.Integration.PropertyMap.DefaultTranslators">
+      <summary>Gets a collection of property mappings which are defined by default.</summary>
+      <returns>A <see cref="T:System.Collections.Generic.Dictionary`2" /> which maps property names to corresponding <see cref="T:System.Windows.Forms.Integration.PropertyTranslator" /> delegates.</returns>
+    </member>
+    <member name="P:System.Windows.Forms.Integration.PropertyMap.Item(System.String)">
+      <summary>Gets or sets the <see cref="T:System.Windows.Forms.Integration.PropertyTranslator" /> delegate for the given property.</summary>
+      <param name="propertyName">The name of the property to map.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="propertyName" /> is <see langword="null" /> or an empty string; the specified <see cref="T:System.Windows.Forms.Integration.PropertyTranslator" /> delegate is <see langword="null" />.</exception>
+      <exception cref="T:System.ArgumentException">The property given by <paramref name="propertyName" /> does not exist on <see cref="P:System.Windows.Forms.Integration.PropertyMap.SourceObject" />.</exception>
+      <returns>The <see cref="T:System.Windows.Forms.Integration.PropertyTranslator" /> delegate corresponding to the property specified by <paramref name="propertyName" />.</returns>
+    </member>
+    <member name="P:System.Windows.Forms.Integration.PropertyMap.Keys">
+      <summary>Gets an <see cref="T:System.Collections.ICollection" /> object containing the property names in the <see cref="T:System.Windows.Forms.Integration.PropertyMap" /> collection.</summary>
+      <returns>An <see cref="T:System.Collections.ICollection" /> object containing the property names of the <see cref="T:System.Windows.Forms.Integration.PropertyMap" /> collection.</returns>
+    </member>
+    <member name="P:System.Windows.Forms.Integration.PropertyMap.SourceObject">
+      <summary>Gets the object which has the properties to be translated.</summary>
+      <returns>The object which has the properties to be translated.</returns>
+    </member>
+    <member name="P:System.Windows.Forms.Integration.PropertyMap.Values">
+      <summary>Gets an <see cref="T:System.Collections.ICollection" /> containing the property translators in the <see cref="T:System.Windows.Forms.Integration.PropertyMap" /> collection.</summary>
+      <returns>An <see cref="T:System.Collections.ICollection" /> containing the property translators in the <see cref="T:System.Windows.Forms.Integration.PropertyMap" /> collection.</returns>
+    </member>
+    <member name="T:System.Windows.Forms.Integration.PropertyMappingExceptionEventArgs">
+      <summary>Provides data for the <see cref="E:System.Windows.Forms.Integration.PropertyMap.PropertyMappingError" /> event.</summary>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.PropertyMappingExceptionEventArgs.#ctor(System.Exception,System.String,System.Object)">
+      <summary>Initializes a new instance of the <see cref="T:System.Windows.Forms.Integration.PropertyMappingExceptionEventArgs" /> class.</summary>
+      <param name="exception">The <see cref="T:System.Exception" /> to raise.</param>
+      <param name="propertyName">The name of the property associated with the property-mapping error.</param>
+      <param name="propertyValue">The value of the property associated with the property-mapping error.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="exception" /> is <see langword="null" />; <paramref name="propertyName" /> is <see langword="null" /> or refers to an empty string.</exception>
+    </member>
+    <member name="P:System.Windows.Forms.Integration.PropertyMappingExceptionEventArgs.PropertyName">
+      <summary>Gets the name of the property associated with the property-mapping error.</summary>
+      <returns>A string representing the name of the property associated with the property-mapping error.</returns>
+    </member>
+    <member name="P:System.Windows.Forms.Integration.PropertyMappingExceptionEventArgs.PropertyValue">
+      <summary>Gets the value of the property associated with the property-mapping error.</summary>
+      <returns>An object representing the value of the property associated with the property-mapping error.</returns>
+    </member>
+    <member name="T:System.Windows.Forms.Integration.PropertyTranslator">
+      <summary>Provides a translation function for a mapped property of the host control.</summary>
+      <param name="host">The host control whose property is being mapped. The host control is either a <see cref="T:System.Windows.Forms.Integration.WindowsFormsHost" /> or an <see cref="T:System.Windows.Forms.Integration.ElementHost" />.</param>
+      <param name="propertyName">The name of the property being translated.</param>
+      <param name="value">The new value of the property.</param>
+    </member>
+    <member name="T:System.Windows.Forms.Integration.WindowsFormsHost">
+      <summary>An element that allows you to host a Windows Forms control on a WPF page.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.WindowsFormsHost.ChildChanged">
+      <summary>Occurs when the <see cref="P:System.Windows.Forms.Integration.WindowsFormsHost.Child" /> property is set.</summary>
+    </member>
+    <member name="E:System.Windows.Forms.Integration.WindowsFormsHost.LayoutError">
+      <summary>Occurs when a layout error, such as a skew or rotation that <see cref="T:System.Windows.Forms.Integration.WindowsFormsHost" /> does not support, is encountered.</summary>
+    </member>
+    <member name="F:System.Windows.Forms.Integration.WindowsFormsHost.BackgroundProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Forms.Integration.WindowsFormsHost.Background" /> dependency property.</summary>
+    </member>
+    <member name="F:System.Windows.Forms.Integration.WindowsFormsHost.FontFamilyProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Forms.Integration.WindowsFormsHost.FontFamily" /> dependency property.</summary>
+    </member>
+    <member name="F:System.Windows.Forms.Integration.WindowsFormsHost.FontSizeProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Forms.Integration.WindowsFormsHost.FontSize" /> dependency property.</summary>
+    </member>
+    <member name="F:System.Windows.Forms.Integration.WindowsFormsHost.FontStyleProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Forms.Integration.WindowsFormsHost.FontStyle" /> dependency property.</summary>
+    </member>
+    <member name="F:System.Windows.Forms.Integration.WindowsFormsHost.FontWeightProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Forms.Integration.WindowsFormsHost.FontWeight" /> dependency property.</summary>
+    </member>
+    <member name="F:System.Windows.Forms.Integration.WindowsFormsHost.ForegroundProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Forms.Integration.WindowsFormsHost.Foreground" /> dependency property.</summary>
+    </member>
+    <member name="F:System.Windows.Forms.Integration.WindowsFormsHost.PaddingProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Forms.Integration.WindowsFormsHost.Padding" /> dependency property.</summary>
+    </member>
+    <member name="F:System.Windows.Forms.Integration.WindowsFormsHost.TabIndexProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Forms.Integration.WindowsFormsHost.TabIndex" /> dependency property.</summary>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.WindowsFormsHost.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:System.Windows.Forms.Integration.WindowsFormsHost" /> class.</summary>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.WindowsFormsHost.ArrangeOverride(System.Windows.Size)">
+      <summary>When implemented in a derived class, positions child elements and determines a size for a <see cref="T:System.Windows.FrameworkElement" />-derived class.</summary>
+      <param name="finalSize">The final area within the parent that this element should use to arrange itself and its children.</param>
+      <returns>The actual size used.</returns>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.WindowsFormsHost.BuildWindowCore(System.Runtime.InteropServices.HandleRef)">
+      <summary>Overrides the base class implementation of <see cref="M:System.Windows.Interop.HwndHost.BuildWindowCore(System.Runtime.InteropServices.HandleRef)" /> to build the hosted Windows Forms control.</summary>
+      <param name="hwndParent">The parent window's handle (HWND).</param>
+      <returns>The window handle for this object.</returns>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.WindowsFormsHost.DestroyWindowCore(System.Runtime.InteropServices.HandleRef)">
+      <summary>Overrides <see cref="M:System.Windows.Interop.HwndHost.DestroyWindowCore(System.Runtime.InteropServices.HandleRef)" /> to delete the window containing this object.</summary>
+      <param name="hwnd">A window handle. This parameter is not used.</param>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.WindowsFormsHost.Dispose(System.Boolean)">
+      <summary>Releases the unmanaged resources used by the <see cref="T:System.Windows.Forms.Integration.WindowsFormsHost" />, and optionally releases the managed resources.</summary>
+      <param name="disposing">
+        <see langword="true" /> to release both managed and unmanaged resources; <see langword="false" /> to release only unmanaged resources.</param>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.WindowsFormsHost.EnableWindowsFormsInterop">
+      <summary>Enables a <see cref="T:System.Windows.Forms.Form" /> to function correctly when it is opened modelessly from WPF.</summary>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.WindowsFormsHost.MeasureOverride(System.Windows.Size)">
+      <summary>Overrides the base class implementation of <see cref="M:System.Windows.Interop.HwndHost.MeasureOverride(System.Windows.Size)" /> to measure the size of a <see cref="T:System.Windows.Forms.Integration.WindowsFormsHost" /> object and return proper sizes to the layout engine.</summary>
+      <param name="constraint">The available size for the <see cref="T:System.Windows.Forms.Integration.WindowsFormsHost" /> object.</param>
+      <returns>The desired size of the <see cref="T:System.Windows.Forms.Integration.WindowsFormsHost" /> object.</returns>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.WindowsFormsHost.OnCreateAutomationPeer">
+      <summary>Creates a <see cref="T:System.Windows.Automation.Peers.WindowsFormsHostAutomationPeer" /> for the <see cref="T:System.Windows.Forms.Integration.WindowsFormsHost" /> element.</summary>
+      <returns>A <see cref="T:System.Windows.Automation.Peers.WindowsFormsHostAutomationPeer" /> for the <see cref="T:System.Windows.Forms.Integration.WindowsFormsHost" /> element.</returns>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.WindowsFormsHost.OnPropertyChanged(System.Windows.DependencyPropertyChangedEventArgs)">
+      <summary>Forces the translation of a mapped property.</summary>
+      <param name="e">Arguments that identify the property that changed as well as providing that property's old and new values.</param>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.WindowsFormsHost.ScaleChild(System.Windows.Vector)">
+      <summary>Scales the hosted Windows Forms control, and tracks the scale factor.</summary>
+      <param name="newScale">The new scale factor.</param>
+      <returns>A <see cref="T:System.Windows.Vector" /> which represents the scale factor applied to the hosted Windows Forms control.</returns>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.WindowsFormsHost.TabInto(System.Windows.Input.TraversalRequest)">
+      <summary>Forwards focus from WPF to the hosted Windows Forms control.</summary>
+      <param name="request">A <see cref="T:System.Windows.Input.TraversalRequest" /> that specifies the focus behavior.</param>
+      <returns>
+        <see langword="true" /> if a control was activated; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Windows.Forms.Integration.WindowsFormsHost.WndProc(System.IntPtr,System.Int32,System.IntPtr,System.IntPtr,System.Boolean@)">
+      <summary>When implemented in a derived class, accesses the window process of the hosted child window.</summary>
+      <param name="hwnd">Window handle of the hosted window.</param>
+      <param name="msg">Message to act upon.</param>
+      <param name="wParam">Information that may be relevant to handling the message. This is typically used to store small pieces of information, such as flags.</param>
+      <param name="lParam">Information that may be relevant to handling the message. This is typically used to reference an object.</param>
+      <param name="handled">Whether events resulting should be marked handled.</param>
+      <returns>The window handle of the child window.</returns>
+    </member>
+    <member name="P:System.Windows.Forms.Integration.WindowsFormsHost.Background">
+      <summary>Gets or sets the hosted control's background as an ambient property.</summary>
+      <returns>A <see cref="T:System.Windows.Media.Brush" /> set to the background color.</returns>
+    </member>
+    <member name="P:System.Windows.Forms.Integration.WindowsFormsHost.Child">
+      <summary>Gets or sets the child control hosted by the <see cref="T:System.Windows.Forms.Integration.WindowsFormsHost" /> element.</summary>
+      <exception cref="T:System.ArgumentException">An attempt was made to assign a top-level form as the hosted control.</exception>
+      <returns>The hosted Windows Forms control.</returns>
+    </member>
+    <member name="P:System.Windows.Forms.Integration.WindowsFormsHost.FontFamily">
+      <summary>Gets or sets the hosted control's font family.</summary>
+      <returns>The font family used in the hosted control.</returns>
+    </member>
+    <member name="P:System.Windows.Forms.Integration.WindowsFormsHost.FontSize">
+      <summary>Gets or sets the hosted control's font size.</summary>
+      <returns>The font size used in the hosted control.</returns>
+    </member>
+    <member name="P:System.Windows.Forms.Integration.WindowsFormsHost.FontStyle">
+      <summary>Gets or sets the hosted control's font style.</summary>
+      <returns>The font style used in the hosted control.</returns>
+    </member>
+    <member name="P:System.Windows.Forms.Integration.WindowsFormsHost.FontWeight">
+      <summary>Gets or sets the hosted control's font weight.</summary>
+      <returns>The font weight used in the hosted control.</returns>
+    </member>
+    <member name="P:System.Windows.Forms.Integration.WindowsFormsHost.Foreground">
+      <summary>Gets or sets the hosted control's foreground color.</summary>
+      <returns>A <see cref="T:System.Windows.Media.Brush" /> used to set the foreground color for the hosted control.</returns>
+    </member>
+    <member name="P:System.Windows.Forms.Integration.WindowsFormsHost.Padding">
+      <summary>Specifies the size of the desired padding within the hosted Windows Forms control.</summary>
+      <returns>A <see cref="T:System.Windows.Thickness" /> structure representing the padding pf the hosted Windows Forms control.</returns>
+    </member>
+    <member name="P:System.Windows.Forms.Integration.WindowsFormsHost.PropertyMap">
+      <summary>Gets the property map that determines how setting properties on the <see cref="T:System.Windows.Forms.Integration.WindowsFormsHost" /> element affects the hosted Windows Forms control.</summary>
+      <returns>A <see cref="T:System.Windows.Forms.Integration.PropertyMap" /> that maps <see cref="T:System.Windows.Forms.Integration.WindowsFormsHost" /> properties to properties on the hosted Windows Forms control.</returns>
+    </member>
+    <member name="P:System.Windows.Forms.Integration.WindowsFormsHost.TabIndex">
+      <summary>Gets or sets the hosted control's tab index.</summary>
+      <returns>The tab index for tab navigation and focus.</returns>
+    </member>
+  </members>
+</doc>

@@ -1,0 +1,580 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>System.Security.Cryptography.Encoding</name>
+  </assembly>
+  <members>
+    <member name="T:System.Security.Cryptography.AsnEncodedData">
+      <summary>Represents Abstract Syntax Notation One (ASN.1)-encoded data.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.AsnEncodedData.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.AsnEncodedData" /> class.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.AsnEncodedData.#ctor(System.Byte[])">
+      <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.AsnEncodedData" /> class using a byte array.</summary>
+      <param name="rawData">A byte array that contains Abstract Syntax Notation One (ASN.1)-encoded data.</param>
+    </member>
+    <member name="M:System.Security.Cryptography.AsnEncodedData.#ctor(System.ReadOnlySpan{System.Byte})">
+      <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.AsnEncodedData" /> class from existing encoded data.</summary>
+      <param name="rawData">The Abstract Syntax Notation One (ASN.1)-encoded data.</param>
+    </member>
+    <member name="M:System.Security.Cryptography.AsnEncodedData.#ctor(System.Security.Cryptography.AsnEncodedData)">
+      <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.AsnEncodedData" /> class using an instance of the <see cref="T:System.Security.Cryptography.AsnEncodedData" /> class.</summary>
+      <param name="asnEncodedData">An instance of the <see cref="T:System.Security.Cryptography.AsnEncodedData" /> class.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="asnEncodedData" /> is <see langword="null" />.</exception>
+    </member>
+    <member name="M:System.Security.Cryptography.AsnEncodedData.#ctor(System.Security.Cryptography.Oid,System.Byte[])">
+      <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.AsnEncodedData" /> class using an <see cref="T:System.Security.Cryptography.Oid" /> object and a byte array.</summary>
+      <param name="oid">An <see cref="T:System.Security.Cryptography.Oid" /> object.</param>
+      <param name="rawData">A byte array that contains Abstract Syntax Notation One (ASN.1)-encoded data.</param>
+    </member>
+    <member name="M:System.Security.Cryptography.AsnEncodedData.#ctor(System.Security.Cryptography.Oid,System.ReadOnlySpan{System.Byte})">
+      <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.AsnEncodedData" /> class from an object identifier (OID) and existing encoded data.</summary>
+      <param name="oid">The object identifier for this data.</param>
+      <param name="rawData">The Abstract Syntax Notation One (ASN.1)-encoded data.</param>
+    </member>
+    <member name="M:System.Security.Cryptography.AsnEncodedData.#ctor(System.String,System.Byte[])">
+      <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.AsnEncodedData" /> class using a byte array.</summary>
+      <param name="oid">A string that represents <see cref="T:System.Security.Cryptography.Oid" /> information.</param>
+      <param name="rawData">A byte array that contains Abstract Syntax Notation One (ASN.1)-encoded data.</param>
+    </member>
+    <member name="M:System.Security.Cryptography.AsnEncodedData.#ctor(System.String,System.ReadOnlySpan{System.Byte})">
+      <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.AsnEncodedData" /> class from an object identifier (OID) and existing encoded data.</summary>
+      <param name="oid">The object identifier for this data.</param>
+      <param name="rawData">The Abstract Syntax Notation One (ASN.1)-encoded data.</param>
+    </member>
+    <member name="M:System.Security.Cryptography.AsnEncodedData.CopyFrom(System.Security.Cryptography.AsnEncodedData)">
+      <summary>Copies information from an <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object.</summary>
+      <param name="asnEncodedData">The <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object to base the new object on.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="asnEncodedData" /> is <see langword="null" />.</exception>
+    </member>
+    <member name="M:System.Security.Cryptography.AsnEncodedData.Format(System.Boolean)">
+      <summary>Returns a formatted version of the Abstract Syntax Notation One (ASN.1)-encoded data as a string.</summary>
+      <param name="multiLine">
+        <see langword="true" /> if the return string should contain carriage returns; otherwise, <see langword="false" />.</param>
+      <returns>A formatted string that represents the Abstract Syntax Notation One (ASN.1)-encoded data.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.AsnEncodedData.Oid">
+      <summary>Gets or sets the <see cref="T:System.Security.Cryptography.Oid" /> value for an <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object.</summary>
+      <returns>An <see cref="T:System.Security.Cryptography.Oid" /> object.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.AsnEncodedData.RawData">
+      <summary>Gets or sets the Abstract Syntax Notation One (ASN.1)-encoded data represented in a byte array.</summary>
+      <exception cref="T:System.ArgumentNullException">The value is <see langword="null" />.</exception>
+      <returns>A byte array that represents the Abstract Syntax Notation One (ASN.1)-encoded data.</returns>
+    </member>
+    <member name="T:System.Security.Cryptography.AsnEncodedDataCollection">
+      <summary>Represents a collection of <see cref="T:System.Security.Cryptography.AsnEncodedData" /> objects. This class cannot be inherited.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.AsnEncodedDataCollection.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.AsnEncodedDataCollection" /> class.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.AsnEncodedDataCollection.#ctor(System.Security.Cryptography.AsnEncodedData)">
+      <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.AsnEncodedDataCollection" /> class and adds an <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object to the collection.</summary>
+      <param name="asnEncodedData">The <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object to add to the collection.</param>
+    </member>
+    <member name="M:System.Security.Cryptography.AsnEncodedDataCollection.Add(System.Security.Cryptography.AsnEncodedData)">
+      <summary>Adds an <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object to the <see cref="T:System.Security.Cryptography.AsnEncodedDataCollection" /> object.</summary>
+      <param name="asnEncodedData">The <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object to add to the collection.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="asnEncodedData" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">Neither of the OIDs are <see langword="null" /> and the OIDs do not match.
+
+-or-
+
+One of the OIDs is <see langword="null" /> and the OIDs do not match.</exception>
+      <returns>The index of the added <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.AsnEncodedDataCollection.CopyTo(System.Security.Cryptography.AsnEncodedData[],System.Int32)">
+      <summary>Copies the <see cref="T:System.Security.Cryptography.AsnEncodedDataCollection" /> object into an array.</summary>
+      <param name="array">The array that the <see cref="T:System.Security.Cryptography.AsnEncodedDataCollection" /> object is to be copied into.</param>
+      <param name="index">The location where the copy operation starts.</param>
+    </member>
+    <member name="M:System.Security.Cryptography.AsnEncodedDataCollection.GetEnumerator">
+      <summary>Returns an <see cref="T:System.Security.Cryptography.AsnEncodedDataEnumerator" /> object that can be used to navigate the <see cref="T:System.Security.Cryptography.AsnEncodedDataCollection" /> object.</summary>
+      <returns>An <see cref="T:System.Security.Cryptography.AsnEncodedDataEnumerator" /> object.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.AsnEncodedDataCollection.Remove(System.Security.Cryptography.AsnEncodedData)">
+      <summary>Removes an <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object from the <see cref="T:System.Security.Cryptography.AsnEncodedDataCollection" /> object.</summary>
+      <param name="asnEncodedData">The <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object to remove.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="asnEncodedData" /> is <see langword="null" />.</exception>
+    </member>
+    <member name="M:System.Security.Cryptography.AsnEncodedDataCollection.System#Collections#ICollection#CopyTo(System.Array,System.Int32)">
+      <summary>Copies the <see cref="T:System.Security.Cryptography.AsnEncodedDataCollection" /> object into an array.</summary>
+      <param name="array">The array that the <see cref="T:System.Security.Cryptography.AsnEncodedDataCollection" /> object is to be copied into.</param>
+      <param name="index">The location where the copy operation starts.</param>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="array" /> is a multidimensional array, which is not supported by this method.
+
+-or-
+        
+The length for <paramref name="index" /> is invalid.</exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="array" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">The length for <paramref name="index" /> is out of range.</exception>
+    </member>
+    <member name="M:System.Security.Cryptography.AsnEncodedDataCollection.System#Collections#IEnumerable#GetEnumerator">
+      <summary>Returns an <see cref="T:System.Security.Cryptography.AsnEncodedDataEnumerator" /> object that can be used to navigate the <see cref="T:System.Security.Cryptography.AsnEncodedDataCollection" /> object.</summary>
+      <returns>An <see cref="T:System.Security.Cryptography.AsnEncodedDataEnumerator" /> object that can be used to navigate the collection.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.AsnEncodedDataCollection.Count">
+      <summary>Gets the number of <see cref="T:System.Security.Cryptography.AsnEncodedData" /> objects in a collection.</summary>
+      <returns>The number of <see cref="T:System.Security.Cryptography.AsnEncodedData" /> objects.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.AsnEncodedDataCollection.IsSynchronized">
+      <summary>Gets a value that indicates whether access to the <see cref="T:System.Security.Cryptography.AsnEncodedDataCollection" /> object is thread safe.</summary>
+      <returns>
+        <see langword="false" /> in all cases.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.AsnEncodedDataCollection.Item(System.Int32)">
+      <summary>Gets an <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object from the <see cref="T:System.Security.Cryptography.AsnEncodedDataCollection" /> object.</summary>
+      <param name="index">The location in the collection.</param>
+      <returns>An <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.AsnEncodedDataCollection.SyncRoot">
+      <summary>Gets an object that can be used to synchronize access to the <see cref="T:System.Security.Cryptography.AsnEncodedDataCollection" /> object.</summary>
+      <returns>An object used to synchronize access to the <see cref="T:System.Security.Cryptography.AsnEncodedDataCollection" /> object.</returns>
+    </member>
+    <member name="T:System.Security.Cryptography.AsnEncodedDataEnumerator">
+      <summary>Provides the ability to navigate through an <see cref="T:System.Security.Cryptography.AsnEncodedDataCollection" /> object. This class cannot be inherited.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.AsnEncodedDataEnumerator.MoveNext">
+      <summary>Advances to the next <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object in an <see cref="T:System.Security.Cryptography.AsnEncodedDataCollection" /> object.</summary>
+      <exception cref="T:System.InvalidOperationException">The collection was modified after the enumerator was created.</exception>
+      <returns>
+        <see langword="true" />, if the enumerator was successfully advanced to the next element; <see langword="false" />, if the enumerator has passed the end of the collection.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.AsnEncodedDataEnumerator.Reset">
+      <summary>Sets an enumerator to its initial position.</summary>
+      <exception cref="T:System.InvalidOperationException">The collection was modified after the enumerator was created.</exception>
+    </member>
+    <member name="P:System.Security.Cryptography.AsnEncodedDataEnumerator.Current">
+      <summary>Gets the current <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object in an <see cref="T:System.Security.Cryptography.AsnEncodedDataCollection" /> object.</summary>
+      <returns>The current <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object in the collection.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.AsnEncodedDataEnumerator.System#Collections#IEnumerator#Current">
+      <summary>Gets the current <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object in an <see cref="T:System.Security.Cryptography.AsnEncodedDataCollection" /> object.</summary>
+      <returns>The current <see cref="T:System.Security.Cryptography.AsnEncodedData" /> object.</returns>
+    </member>
+    <member name="T:System.Security.Cryptography.FromBase64Transform">
+      <summary>Converts a <see cref="T:System.Security.Cryptography.CryptoStream" /> from base 64.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.FromBase64Transform.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.FromBase64Transform" /> class.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.FromBase64Transform.#ctor(System.Security.Cryptography.FromBase64TransformMode)">
+      <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.FromBase64Transform" /> class with the specified transformation mode.</summary>
+      <param name="whitespaces">One of the <see cref="T:System.Security.Cryptography.FromBase64Transform" /> values.</param>
+    </member>
+    <member name="M:System.Security.Cryptography.FromBase64Transform.Clear">
+      <summary>Releases all resources used by the <see cref="T:System.Security.Cryptography.FromBase64Transform" />.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.FromBase64Transform.Dispose">
+      <summary>Releases all resources used by the current instance of the <see cref="T:System.Security.Cryptography.FromBase64Transform" /> class.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.FromBase64Transform.Dispose(System.Boolean)">
+      <summary>Releases the unmanaged resources used by the <see cref="T:System.Security.Cryptography.FromBase64Transform" /> and optionally releases the managed resources.</summary>
+      <param name="disposing">
+        <see langword="true" /> to release both managed and unmanaged resources; <see langword="false" /> to release only unmanaged resources.</param>
+    </member>
+    <member name="M:System.Security.Cryptography.FromBase64Transform.Finalize">
+      <summary>Releases the unmanaged resources used by the <see cref="T:System.Security.Cryptography.FromBase64Transform" />.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.FromBase64Transform.TransformBlock(System.Byte[],System.Int32,System.Int32,System.Byte[],System.Int32)">
+      <summary>Converts the specified region of the input byte array from base 64 and copies the result to the specified region of the output byte array.</summary>
+      <param name="inputBuffer">The input to compute from base 64.</param>
+      <param name="inputOffset">The offset into the input byte array from which to begin using data.</param>
+      <param name="inputCount">The number of bytes in the input byte array to use as data.</param>
+      <param name="outputBuffer">The output to which to write the result.</param>
+      <param name="outputOffset">The offset into the output byte array from which to begin writing data.</param>
+      <exception cref="T:System.ObjectDisposedException">The current <see cref="T:System.Security.Cryptography.FromBase64Transform" /> object has already been disposed.</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="inputCount" /> uses an invalid value.  
+  
+ -or-  
+  
+ <paramref name="inputBuffer" /> has an invalid offset length.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="inputOffset" /> is out of range. This parameter requires a non-negative number.</exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="inputBuffer" /> is <see langword="null" />.</exception>
+      <returns>The number of bytes written.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.FromBase64Transform.TransformFinalBlock(System.Byte[],System.Int32,System.Int32)">
+      <summary>Converts the specified region of the specified byte array from base 64.</summary>
+      <param name="inputBuffer">The input to convert from base 64.</param>
+      <param name="inputOffset">The offset into the byte array from which to begin using data.</param>
+      <param name="inputCount">The number of bytes in the byte array to use as data.</param>
+      <exception cref="T:System.ObjectDisposedException">The current <see cref="T:System.Security.Cryptography.FromBase64Transform" /> object has already been disposed.</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="inputBuffer" /> has an invalid offset length.  
+  
+ -or-  
+  
+ <paramref name="inputCount" /> has an invalid value.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="inputOffset" /> is out of range. This parameter requires a non-negative number.</exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="inputBuffer" /> is <see langword="null" />.</exception>
+      <returns>The computed conversion.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.FromBase64Transform.CanReuseTransform">
+      <summary>Gets a value indicating whether the current transform can be reused.</summary>
+      <returns>Always <see langword="true" />.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.FromBase64Transform.CanTransformMultipleBlocks">
+      <summary>Gets a value that indicates whether multiple blocks can be transformed.</summary>
+      <returns>Always <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.FromBase64Transform.InputBlockSize">
+      <summary>Gets the input block size.</summary>
+      <returns>The size of the input data blocks in bytes.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.FromBase64Transform.OutputBlockSize">
+      <summary>Gets the output block size.</summary>
+      <returns>The size of the output data blocks in bytes.</returns>
+    </member>
+    <member name="T:System.Security.Cryptography.FromBase64TransformMode">
+      <summary>Specifies whether white space should be ignored in the base 64 transformation.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.FromBase64TransformMode.DoNotIgnoreWhiteSpaces">
+      <summary>White space should not be ignored.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.FromBase64TransformMode.IgnoreWhiteSpaces">
+      <summary>White space should be ignored.</summary>
+    </member>
+    <member name="T:System.Security.Cryptography.Oid">
+      <summary>Represents a cryptographic object identifier. This class cannot be inherited.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.Oid.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.Oid" /> class.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.Oid.#ctor(System.Security.Cryptography.Oid)">
+      <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.Oid" /> class using the specified <see cref="T:System.Security.Cryptography.Oid" /> object.</summary>
+      <param name="oid">The object identifier information to use to create the new object identifier.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="oid" /> is <see langword="null" />.</exception>
+    </member>
+    <member name="M:System.Security.Cryptography.Oid.#ctor(System.String)">
+      <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.Oid" /> class using a string value of an <see cref="T:System.Security.Cryptography.Oid" /> object.</summary>
+      <param name="oid">An object identifier.</param>
+    </member>
+    <member name="M:System.Security.Cryptography.Oid.#ctor(System.String,System.String)">
+      <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.Oid" /> class using the specified value and friendly name.</summary>
+      <param name="value">The dotted number of the identifier.</param>
+      <param name="friendlyName">The friendly name of the identifier.</param>
+    </member>
+    <member name="M:System.Security.Cryptography.Oid.FromFriendlyName(System.String,System.Security.Cryptography.OidGroup)">
+      <summary>Creates an <see cref="T:System.Security.Cryptography.Oid" /> object from an OID friendly name by searching the specified group.</summary>
+      <param name="friendlyName">The friendly name of the identifier.</param>
+      <param name="group">The group to search in.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="friendlyName" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The OID was not found.</exception>
+      <returns>An object that represents the specified OID.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.Oid.FromOidValue(System.String,System.Security.Cryptography.OidGroup)">
+      <summary>Creates an <see cref="T:System.Security.Cryptography.Oid" /> object by using the specified OID value and group.</summary>
+      <param name="oidValue">The OID value.</param>
+      <param name="group">The group to search in.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="oidValue" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The friendly name for the OID value was not found.</exception>
+      <returns>A new instance of an <see cref="T:System.Security.Cryptography.Oid" /> object.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.Oid.FriendlyName">
+      <summary>Gets or sets the friendly name of the identifier.</summary>
+      <exception cref="T:System.PlatformNotSupportedException">.NET 5.0 and later: An attempt is made to set the value and the value has previously been set.</exception>
+      <returns>The friendly name of the identifier.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.Oid.Value">
+      <summary>Gets or sets the dotted number of the identifier.</summary>
+      <exception cref="T:System.PlatformNotSupportedException">.NET 5.0 and later: An attempt is made to set the value and the value has previously been set.</exception>
+      <returns>The dotted number of the identifier.</returns>
+    </member>
+    <member name="T:System.Security.Cryptography.OidCollection">
+      <summary>Represents a collection of <see cref="T:System.Security.Cryptography.Oid" /> objects. This class cannot be inherited.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.OidCollection.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.OidCollection" /> class.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.OidCollection.Add(System.Security.Cryptography.Oid)">
+      <summary>Adds an <see cref="T:System.Security.Cryptography.Oid" /> object to the <see cref="T:System.Security.Cryptography.OidCollection" /> object.</summary>
+      <param name="oid">The <see cref="T:System.Security.Cryptography.Oid" /> object to add to the collection.</param>
+      <returns>The index of the added <see cref="T:System.Security.Cryptography.Oid" /> object.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.OidCollection.CopyTo(System.Security.Cryptography.Oid[],System.Int32)">
+      <summary>Copies the <see cref="T:System.Security.Cryptography.OidCollection" /> object into an array.</summary>
+      <param name="array">The array to copy the <see cref="T:System.Security.Cryptography.OidCollection" /> object into.</param>
+      <param name="index">The location where the copy operation starts.</param>
+    </member>
+    <member name="M:System.Security.Cryptography.OidCollection.GetEnumerator">
+      <summary>Returns an <see cref="T:System.Security.Cryptography.OidEnumerator" /> object that can be used to navigate the <see cref="T:System.Security.Cryptography.OidCollection" /> object.</summary>
+      <returns>An <see cref="T:System.Security.Cryptography.OidEnumerator" /> object.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.OidCollection.System#Collections#ICollection#CopyTo(System.Array,System.Int32)">
+      <summary>Copies the <see cref="T:System.Security.Cryptography.OidCollection" /> object into an array.</summary>
+      <param name="array">The array to copy the <see cref="T:System.Security.Cryptography.OidCollection" /> object to.</param>
+      <param name="index">The location where the copy operation starts.</param>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="array" /> cannot be a multidimensional array.  
+  
+ -or-  
+  
+ The length of <paramref name="array" /> is an invalid offset length.</exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="array" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">The value of <paramref name="index" /> is out range.</exception>
+    </member>
+    <member name="M:System.Security.Cryptography.OidCollection.System#Collections#IEnumerable#GetEnumerator">
+      <summary>Returns an <see cref="T:System.Security.Cryptography.OidEnumerator" /> object that can be used to navigate the <see cref="T:System.Security.Cryptography.OidCollection" /> object.</summary>
+      <returns>An <see cref="T:System.Security.Cryptography.OidEnumerator" /> object that can be used to navigate the collection.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.OidCollection.Count">
+      <summary>Gets the number of <see cref="T:System.Security.Cryptography.Oid" /> objects in a collection.</summary>
+      <returns>The number of <see cref="T:System.Security.Cryptography.Oid" /> objects in a collection.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.OidCollection.IsSynchronized">
+      <summary>Gets a value that indicates whether access to the <see cref="T:System.Security.Cryptography.OidCollection" /> object is thread safe.</summary>
+      <returns>
+        <see langword="false" /> in all cases.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.OidCollection.Item(System.Int32)">
+      <summary>Gets an <see cref="T:System.Security.Cryptography.Oid" /> object from the <see cref="T:System.Security.Cryptography.OidCollection" /> object.</summary>
+      <param name="index">The location of the <see cref="T:System.Security.Cryptography.Oid" /> object in the collection.</param>
+      <returns>An <see cref="T:System.Security.Cryptography.Oid" /> object.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.OidCollection.Item(System.String)">
+      <summary>Gets the first <see cref="T:System.Security.Cryptography.Oid" /> object that contains a value of the <see cref="P:System.Security.Cryptography.Oid.Value" /> property or a value of the <see cref="P:System.Security.Cryptography.Oid.FriendlyName" /> property that matches the specified string value from the <see cref="T:System.Security.Cryptography.OidCollection" /> object.</summary>
+      <param name="oid">A string that represents a <see cref="P:System.Security.Cryptography.Oid.Value" /> property or a <see cref="P:System.Security.Cryptography.Oid.FriendlyName" /> property.</param>
+      <returns>An <see cref="T:System.Security.Cryptography.Oid" /> object.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.OidCollection.SyncRoot">
+      <summary>Gets an object that can be used to synchronize access to the <see cref="T:System.Security.Cryptography.OidCollection" /> object.</summary>
+      <returns>An object that can be used to synchronize access to the <see cref="T:System.Security.Cryptography.OidCollection" /> object.</returns>
+    </member>
+    <member name="T:System.Security.Cryptography.OidEnumerator">
+      <summary>Provides the ability to navigate through an <see cref="T:System.Security.Cryptography.OidCollection" /> object. This class cannot be inherited.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.OidEnumerator.MoveNext">
+      <summary>Advances to the next <see cref="T:System.Security.Cryptography.Oid" /> object in an <see cref="T:System.Security.Cryptography.OidCollection" /> object.</summary>
+      <exception cref="T:System.InvalidOperationException">The collection was modified after the enumerator was created.</exception>
+      <returns>
+        <see langword="true" />, if the enumerator was successfully advanced to the next element; <see langword="false" />, if the enumerator has passed the end of the collection.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.OidEnumerator.Reset">
+      <summary>Sets an enumerator to its initial position.</summary>
+      <exception cref="T:System.InvalidOperationException">The collection was modified after the enumerator was created.</exception>
+    </member>
+    <member name="P:System.Security.Cryptography.OidEnumerator.Current">
+      <summary>Gets the current <see cref="T:System.Security.Cryptography.Oid" /> object in an <see cref="T:System.Security.Cryptography.OidCollection" /> object.</summary>
+      <returns>The current <see cref="T:System.Security.Cryptography.Oid" /> object in the collection.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.OidEnumerator.System#Collections#IEnumerator#Current">
+      <summary>Gets the current <see cref="T:System.Security.Cryptography.Oid" /> object in an <see cref="T:System.Security.Cryptography.OidCollection" /> object.</summary>
+      <returns>The current <see cref="T:System.Security.Cryptography.Oid" /> object.</returns>
+    </member>
+    <member name="T:System.Security.Cryptography.OidGroup">
+      <summary>Identifies Windows cryptographic object identifier (OID) groups.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.OidGroup.All">
+      <summary>All the groups.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.OidGroup.Attribute">
+      <summary>The Windows group that is represented by CRYPT_RDN_ATTR_OID_GROUP_ID.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.OidGroup.EncryptionAlgorithm">
+      <summary>The Windows group that is represented by CRYPT_ENCRYPT_ALG_OID_GROUP_ID.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.OidGroup.EnhancedKeyUsage">
+      <summary>The Windows group that is represented by CRYPT_ENHKEY_USAGE_OID_GROUP_ID.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.OidGroup.ExtensionOrAttribute">
+      <summary>The Windows group that is represented by CRYPT_EXT_OR_ATTR_OID_GROUP_ID.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.OidGroup.HashAlgorithm">
+      <summary>The Windows group that is represented by CRYPT_HASH_ALG_OID_GROUP_ID.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.OidGroup.KeyDerivationFunction">
+      <summary>The Windows group that is represented by CRYPT_KDF_OID_GROUP_ID.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.OidGroup.Policy">
+      <summary>The Windows group that is represented by CRYPT_POLICY_OID_GROUP_ID.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.OidGroup.PublicKeyAlgorithm">
+      <summary>The Windows group that is represented by CRYPT_PUBKEY_ALG_OID_GROUP_ID.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.OidGroup.SignatureAlgorithm">
+      <summary>The Windows group that is represented by CRYPT_SIGN_ALG_OID_GROUP_ID.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.OidGroup.Template">
+      <summary>The Windows group that is represented by CRYPT_TEMPLATE_OID_GROUP_ID.</summary>
+    </member>
+    <member name="T:System.Security.Cryptography.PemEncoding">
+      <summary>Provides methods for reading and writing the IETF RFC 7468 subset of PEM (Privacy-Enhanced Mail) textual encodings.
+ This class cannot be inherited.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.PemEncoding.Find(System.ReadOnlySpan{System.Char})">
+      <summary>Finds the first PEM-encoded data.</summary>
+      <param name="pemData">The text containing the PEM-encoded data.</param>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="pemData" /> does not contain a well-formed PEM-encoded value.</exception>
+      <returns>A value that specifies the location, label, and data location of the encoded data.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.PemEncoding.GetEncodedSize(System.Int32,System.Int32)">
+      <summary>Determines the length of a PEM-encoded value, in characters, given the length of a label and binary data.</summary>
+      <param name="labelLength">The length of the label, in characters.</param>
+      <param name="dataLength">The length of the data, in bytes.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="labelLength" /> is a negative value.
+
+-or-
+
+<paramref name="dataLength" /> is a negative value.
+
+-or-
+
+<paramref name="labelLength" /> exceeds the maximum possible label length.
+
+-or-
+
+<paramref name="dataLength" /> exceeds the maximum possible encoded data length.</exception>
+      <exception cref="T:System.ArgumentException">The length of the PEM-encoded value is larger than <see cref="F:System.Int32.MaxValue" />.</exception>
+      <returns>The number of characters in the encoded PEM.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.PemEncoding.TryFind(System.ReadOnlySpan{System.Char},System.Security.Cryptography.PemFields@)">
+      <summary>Attempts to find the first PEM-encoded data.</summary>
+      <param name="pemData">The text containing the PEM-encoded data.</param>
+      <param name="fields">When this method returns, contains a value that specifies the location, label, and data location of the encoded data; or, if no PEM-encoded data is found, a value that specifies those locations as empty.
+
+          This parameter is treated as uninitialized.</param>
+      <returns>
+        <see langword="true" /> if PEM-encoded data was found; otherwise <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.PemEncoding.TryWrite(System.ReadOnlySpan{System.Char},System.ReadOnlySpan{System.Byte},System.Span{System.Char},System.Int32@)">
+      <summary>Tries to write the provided data and label as PEM-encoded data into a provided buffer.</summary>
+      <param name="label">The label to write.</param>
+      <param name="data">The data to write.</param>
+      <param name="destination">The buffer to receive the PEM-encoded text.</param>
+      <param name="charsWritten">When this method returns, this parameter contains the number of characters written to <paramref name="destination" />. This parameter is treated as uninitialized.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="label" /> exceeds the maximum possible label length.
+
+-or-
+
+<paramref name="data" /> exceeds the maximum possible encoded data length.</exception>
+      <exception cref="T:System.ArgumentException">The resulting PEM-encoded text is larger than <see cref="F:System.Int32.MaxValue" />.
+
+-or-
+
+<paramref name="label" /> contains invalid characters.</exception>
+      <returns>
+        <see langword="true" /> if <paramref name="destination" /> is large enough to contain the PEM-encoded text, otherwise <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.PemEncoding.Write(System.ReadOnlySpan{System.Char},System.ReadOnlySpan{System.Byte})">
+      <summary>Creates an encoded PEM with the given label and data.</summary>
+      <param name="label">The label to encode.</param>
+      <param name="data">The data to encode.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="label" /> exceeds the maximum possible label length.
+
+-or-
+
+<paramref name="data" /> exceeds the maximum possible encoded data length.</exception>
+      <exception cref="T:System.ArgumentException">The resulting PEM-encoded text is larger than <see cref="F:System.Int32.MaxValue" />.
+
+-or-
+
+<paramref name="label" /> contains invalid characters.</exception>
+      <returns>A character array of the encoded PEM.</returns>
+    </member>
+    <member name="T:System.Security.Cryptography.PemFields">
+      <summary>Contains information about the location of PEM data.</summary>
+    </member>
+    <member name="P:System.Security.Cryptography.PemFields.Base64Data">
+      <summary>Gets the location of the base-64 data inside of the PEM.</summary>
+    </member>
+    <member name="P:System.Security.Cryptography.PemFields.DecodedDataLength">
+      <summary>Gets the size of the decoded base-64 data, in bytes.</summary>
+    </member>
+    <member name="P:System.Security.Cryptography.PemFields.Label">
+      <summary>Gets the location of the label.</summary>
+    </member>
+    <member name="P:System.Security.Cryptography.PemFields.Location">
+      <summary>Gets the location of the PEM-encoded text, including the surrounding encapsulation boundaries.</summary>
+    </member>
+    <member name="T:System.Security.Cryptography.ToBase64Transform">
+      <summary>Converts a <see cref="T:System.Security.Cryptography.CryptoStream" /> to base 64.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.ToBase64Transform.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.ToBase64Transform" /> class.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.ToBase64Transform.Clear">
+      <summary>Releases all resources used by the <see cref="T:System.Security.Cryptography.ToBase64Transform" />.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.ToBase64Transform.Dispose">
+      <summary>Releases all resources used by the current instance of the <see cref="T:System.Security.Cryptography.ToBase64Transform" /> class.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.ToBase64Transform.Dispose(System.Boolean)">
+      <summary>Releases the unmanaged resources used by the <see cref="T:System.Security.Cryptography.ToBase64Transform" /> and optionally releases the managed resources.</summary>
+      <param name="disposing">
+        <see langword="true" /> to release both managed and unmanaged resources; <see langword="false" /> to release only unmanaged resources.</param>
+    </member>
+    <member name="M:System.Security.Cryptography.ToBase64Transform.Finalize">
+      <summary>Releases the unmanaged resources used by the <see cref="T:System.Security.Cryptography.ToBase64Transform" />.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.ToBase64Transform.TransformBlock(System.Byte[],System.Int32,System.Int32,System.Byte[],System.Int32)">
+      <summary>Converts the specified region of the input byte array to base 64 and copies the result to the specified region of the output byte array.</summary>
+      <param name="inputBuffer">The input to compute to base 64.</param>
+      <param name="inputOffset">The offset into the input byte array from which to begin using data.</param>
+      <param name="inputCount">The number of bytes in the input byte array to use as data.</param>
+      <param name="outputBuffer">The output to which to write the result.</param>
+      <param name="outputOffset">The offset into the output byte array from which to begin writing data.</param>
+      <exception cref="T:System.ObjectDisposedException">The current <see cref="T:System.Security.Cryptography.ToBase64Transform" /> object has already been disposed.</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The data size is not valid.</exception>
+      <exception cref="T:System.ArgumentException">The <paramref name="inputBuffer" /> parameter contains an invalid offset length.  
+  
+ -or-  
+  
+ The <paramref name="inputCount" /> parameter contains an invalid value.</exception>
+      <exception cref="T:System.ArgumentNullException">The <paramref name="inputBuffer" /> parameter is <see langword="null" />.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">The <paramref name="inputBuffer" /> parameter requires a non-negative number.</exception>
+      <returns>The number of bytes written.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.ToBase64Transform.TransformFinalBlock(System.Byte[],System.Int32,System.Int32)">
+      <summary>Converts the specified region of the specified byte array to base 64.</summary>
+      <param name="inputBuffer">The input to convert to base 64.</param>
+      <param name="inputOffset">The offset into the byte array from which to begin using data.</param>
+      <param name="inputCount">The number of bytes in the byte array to use as data.</param>
+      <exception cref="T:System.ObjectDisposedException">The current <see cref="T:System.Security.Cryptography.ToBase64Transform" /> object has already been disposed.</exception>
+      <exception cref="T:System.ArgumentException">The <paramref name="inputBuffer" /> parameter contains an invalid offset length.  
+  
+ -or-  
+  
+ The <paramref name="inputCount" /> parameter contains an invalid value.</exception>
+      <exception cref="T:System.ArgumentNullException">The <paramref name="inputBuffer" /> parameter is <see langword="null" />.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">The <paramref name="inputBuffer" /> parameter requires a non-negative number.</exception>
+      <returns>The computed base 64 conversion.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.ToBase64Transform.CanReuseTransform">
+      <summary>Gets a value indicating whether the current transform can be reused.</summary>
+      <returns>Always <see langword="true" />.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.ToBase64Transform.CanTransformMultipleBlocks">
+      <summary>Gets a value that indicates whether multiple blocks can be transformed.</summary>
+      <returns>
+        <see langword="true" /> if multiple blocks can be transformed; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.ToBase64Transform.InputBlockSize">
+      <summary>Gets the input block size.</summary>
+      <returns>The size of the input data blocks in bytes.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.ToBase64Transform.OutputBlockSize">
+      <summary>Gets the output block size.</summary>
+      <returns>The size of the output data blocks in bytes.</returns>
+    </member>
+  </members>
+</doc>

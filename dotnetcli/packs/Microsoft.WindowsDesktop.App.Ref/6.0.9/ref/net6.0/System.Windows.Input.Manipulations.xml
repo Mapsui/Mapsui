@@ -1,0 +1,384 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>System.Windows.Input.Manipulations</name>
+  </assembly>
+  <members>
+    <member name="T:System.Windows.Input.Manipulations.InertiaExpansionBehavior2D">
+      <summary>Describes desired expansion behavior of an inertia processor.</summary>
+    </member>
+    <member name="M:System.Windows.Input.Manipulations.InertiaExpansionBehavior2D.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:System.Windows.Input.Manipulations.InertiaExpansionBehavior2D" /> class.</summary>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.InertiaExpansionBehavior2D.DesiredDeceleration">
+      <summary>Gets or sets the desired expansion deceleration, in coordinate units per millisecond squared.</summary>
+      <returns>The desired expansion deceleration, in coordinate units per millisecond squared.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.InertiaExpansionBehavior2D.DesiredExpansionX">
+      <summary>Gets or sets the desired expansion along the x-axis, in coordinate units.</summary>
+      <returns>The desired expansion along the x-axis, in coordinate units.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.InertiaExpansionBehavior2D.DesiredExpansionY">
+      <summary>Gets or sets the desired expansion along the y-axis, in coordinate units.</summary>
+      <returns>The desired expansion along the y-axis, in coordinate units.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.InertiaExpansionBehavior2D.InitialRadius">
+      <summary>Gets or sets the initial average radius, in coordinate units.</summary>
+      <returns>The initial average radius, in coordinate units.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.InertiaExpansionBehavior2D.InitialVelocityX">
+      <summary>Gets or sets the initial expansion velocity along the x-axis, in coordinate units per millisecond.</summary>
+      <returns>The initial expansion velocity along the x-axis, in coordinate units per millisecond.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.InertiaExpansionBehavior2D.InitialVelocityY">
+      <summary>Gets or sets the initial expansion velocity along the y-axis, in coordinate units per millisecond.</summary>
+      <returns>The initial expansion velocity along the y-axis, in coordinate units per millisecond.</returns>
+    </member>
+    <member name="T:System.Windows.Input.Manipulations.InertiaParameters2D">
+      <summary>Base class from which all inertia parameter classes are derived.</summary>
+    </member>
+    <member name="T:System.Windows.Input.Manipulations.InertiaProcessor2D">
+      <summary>Implements the extrapolation of a manipulation's position, orientation, and average radius.</summary>
+    </member>
+    <member name="E:System.Windows.Input.Manipulations.InertiaProcessor2D.Completed">
+      <summary>Occurs when extrapolation has completed.</summary>
+    </member>
+    <member name="E:System.Windows.Input.Manipulations.InertiaProcessor2D.Delta">
+      <summary>Occurs when the extrapolation origin has changed or when translation, scaling, or rotation have occurred.</summary>
+    </member>
+    <member name="M:System.Windows.Input.Manipulations.InertiaProcessor2D.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:System.Windows.Input.Manipulations.InertiaProcessor2D" /> class.</summary>
+    </member>
+    <member name="M:System.Windows.Input.Manipulations.InertiaProcessor2D.Complete(System.Int64)">
+      <summary>Completes final extrapolation by using the specified timestamp and raises the <see cref="E:System.Windows.Input.Manipulations.InertiaProcessor2D.Completed" /> event.</summary>
+      <param name="timestamp">The timestamp to complete extrapolation, in 100-nanosecond ticks.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">The timestamp parameter is less than the initial or previous timestamp.</exception>
+    </member>
+    <member name="M:System.Windows.Input.Manipulations.InertiaProcessor2D.Process(System.Int64)">
+      <summary>Extrapolates the manipulation's position, orientation, and average radius at the specified time.</summary>
+      <param name="timestamp">The timestamp to perform extrapolation, in 100-nanosecond ticks.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">The timestamp parameter is less than the initial or previous timestamp.</exception>
+      <returns>The manipulation's position, orientation, and average radius at the specified time. <see langword="true" /> if extrapolation is in progress; otherwise, <see langword="false" /> if extrapolation has completed.</returns>
+    </member>
+    <member name="M:System.Windows.Input.Manipulations.InertiaProcessor2D.SetParameters(System.Windows.Input.Manipulations.InertiaParameters2D)">
+      <summary>Sets parameters on the inertia processor.</summary>
+      <param name="parameters">Parameters to set.</param>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.InertiaProcessor2D.ExpansionBehavior">
+      <summary>Gets or sets the expansion behavior of the inertia processor.</summary>
+      <returns>The expansion behavior of the inertia processor.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.InertiaProcessor2D.InitialOriginX">
+      <summary>Gets or sets the x-coordinate for the initial origin, in coordinate units.</summary>
+      <returns>The x-coordinate for the initial origin, in coordinate units.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.InertiaProcessor2D.InitialOriginY">
+      <summary>Gets or sets the y-coordinate for the initial origin, in coordinate units.</summary>
+      <returns>The y-coordinate for the initial origin, in coordinate units.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.InertiaProcessor2D.IsRunning">
+      <summary>Gets whether inertia is currently in progress.</summary>
+      <returns>A Boolean value indicating whether inertia is currently in progress.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.InertiaProcessor2D.RotationBehavior">
+      <summary>Gets or sets the rotation behavior of the inertia processor.</summary>
+      <returns>The rotation behavior of the inertia processor.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.InertiaProcessor2D.TranslationBehavior">
+      <summary>Gets or sets the translation behavior of the inertia processor.</summary>
+      <returns>The translation behavior of the inertia processor.</returns>
+    </member>
+    <member name="T:System.Windows.Input.Manipulations.InertiaRotationBehavior2D">
+      <summary>Describes desired rotation behavior of an inertia processor.</summary>
+    </member>
+    <member name="M:System.Windows.Input.Manipulations.InertiaRotationBehavior2D.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:System.Windows.Input.Manipulations.InertiaRotationBehavior2D" /> class.</summary>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.InertiaRotationBehavior2D.DesiredDeceleration">
+      <summary>Gets or sets the desired angular deceleration, in radians per millisecond squared.</summary>
+      <returns>The desired angular deceleration, in radians per millisecond squared.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.InertiaRotationBehavior2D.DesiredRotation">
+      <summary>Gets or sets the desired rotation, in radians.</summary>
+      <returns>The desired rotation, in radians.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.InertiaRotationBehavior2D.InitialVelocity">
+      <summary>Gets or sets the initial rotational velocity, in radians per millisecond.</summary>
+      <returns>The initial rotational velocity, in radians per millisecond.</returns>
+    </member>
+    <member name="T:System.Windows.Input.Manipulations.InertiaTranslationBehavior2D">
+      <summary>Describes desired translation behavior of an inertia processor.</summary>
+    </member>
+    <member name="M:System.Windows.Input.Manipulations.InertiaTranslationBehavior2D.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:System.Windows.Input.Manipulations.InertiaTranslationBehavior2D" /> class.</summary>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.InertiaTranslationBehavior2D.DesiredDeceleration">
+      <summary>Gets or sets the desired deceleration, in coordinate units per millisecond squared.</summary>
+      <returns>The desired deceleration, in coordinate units per millisecond squared.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.InertiaTranslationBehavior2D.DesiredDisplacement">
+      <summary>Gets or sets the absolute distance that the object needs to travel along the velocity vector, in coordinate units.</summary>
+      <returns>The absolute distance that the object needs to travel along the velocity vector, in coordinate units.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.InertiaTranslationBehavior2D.InitialVelocityX">
+      <summary>Gets or sets the initial velocity along the x-axis, in coordinate units per millisecond.</summary>
+      <returns>The initial velocity along the x-axis, in coordinate units per millisecond.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.InertiaTranslationBehavior2D.InitialVelocityY">
+      <summary>Gets or sets the initial velocity along the y-axis, in coordinate units per millisecond.</summary>
+      <returns>The initial velocity along the y-axis, in coordinate units per millisecond.</returns>
+    </member>
+    <member name="T:System.Windows.Input.Manipulations.Manipulation2DCompletedEventArgs">
+      <summary>Represents data that is sent with a ManipulationProcessor2D.Completed event or an InertiaProcessor2D.Completed event.</summary>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.Manipulation2DCompletedEventArgs.OriginX">
+      <summary>Gets the new x-coordinate of the composite position of the manipulation.</summary>
+      <returns>The new x-coordinate of the composite position of the manipulation.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.Manipulation2DCompletedEventArgs.OriginY">
+      <summary>Gets the new y-coordinate of the composite position of the manipulation.</summary>
+      <returns>The new y-coordinate of the composite position of the manipulation.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.Manipulation2DCompletedEventArgs.Total">
+      <summary>Gets the total amount of change since the manipulation started.</summary>
+      <returns>The total amount of change since the manipulation started.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.Manipulation2DCompletedEventArgs.Velocities">
+      <summary>Gets the current velocities of the manipulation.</summary>
+      <returns>The current velocities of the manipulation.</returns>
+    </member>
+    <member name="T:System.Windows.Input.Manipulations.Manipulation2DDeltaEventArgs">
+      <summary>Represents data that is sent with a <see cref="E:System.Windows.Input.Manipulations.ManipulationProcessor2D.Delta" /> event or an <see cref="E:System.Windows.Input.Manipulations.InertiaProcessor2D.Delta" /> event.</summary>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.Manipulation2DDeltaEventArgs.Cumulative">
+      <summary>Gets the total amount of change since the manipulation started.</summary>
+      <returns>The total amount of change since the manipulation started.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.Manipulation2DDeltaEventArgs.Delta">
+      <summary>Gets the amount of change since the last event.</summary>
+      <returns>The amount of change since the last event.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.Manipulation2DDeltaEventArgs.OriginX">
+      <summary>Gets the new x-coordinate of the composite position of the manipulation.</summary>
+      <returns>The new x-coordinate of the composite position of the manipulation.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.Manipulation2DDeltaEventArgs.OriginY">
+      <summary>Gets the new y-coordinate of the composite position of the manipulation.</summary>
+      <returns>The new y-coordinate of the composite position of the manipulation.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.Manipulation2DDeltaEventArgs.Velocities">
+      <summary>Gets the current velocities of the manipulation.</summary>
+      <returns>The current velocities of the manipulation.</returns>
+    </member>
+    <member name="T:System.Windows.Input.Manipulations.Manipulation2DStartedEventArgs">
+      <summary>Represents data that is sent with a <see cref="E:System.Windows.Input.Manipulations.ManipulationProcessor2D.Started" /> event.</summary>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.Manipulation2DStartedEventArgs.OriginX">
+      <summary>Gets the x-coordinate of the origin.</summary>
+      <returns>The x-coordinate of the origin.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.Manipulation2DStartedEventArgs.OriginY">
+      <summary>Gets the y-coordinate of the origin.</summary>
+      <returns>The y-coordinate of the origin.</returns>
+    </member>
+    <member name="T:System.Windows.Input.Manipulations.ManipulationDelta2D">
+      <summary>Represents the result of a 2D manipulation.</summary>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.ManipulationDelta2D.ExpansionX">
+      <summary>Gets the amount of expansion along the x-axis, in coordinate units.</summary>
+      <returns>The amount of expansion along the x-axis, in coordinate units.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.ManipulationDelta2D.ExpansionY">
+      <summary>Gets the amount of expansion along the y-axis, in coordinate units.</summary>
+      <returns>The amount of expansion along the y-axis, in coordinate units.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.ManipulationDelta2D.Rotation">
+      <summary>Gets the amount of rotation, in radians.</summary>
+      <returns>The amount of rotation, in radians.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.ManipulationDelta2D.ScaleX">
+      <summary>Gets the scale factor along the x-axis.</summary>
+      <returns>The scale factor along the x-axis.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.ManipulationDelta2D.ScaleY">
+      <summary>Gets the scale factor along the y-axis.</summary>
+      <returns>The scale factor along the y-axis.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.ManipulationDelta2D.TranslationX">
+      <summary>Gets the translation along the x-axis, in coordinate units.</summary>
+      <returns>The translation along the x-axis, in coordinate units.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.ManipulationDelta2D.TranslationY">
+      <summary>Gets the translation along the y-axis, in coordinate units.</summary>
+      <returns>The translation along the y-axis, in coordinate units.</returns>
+    </member>
+    <member name="T:System.Windows.Input.Manipulations.ManipulationParameters2D">
+      <summary>Base class from which all manipulation parameter classes are derived.</summary>
+    </member>
+    <member name="T:System.Windows.Input.Manipulations.ManipulationPivot2D">
+      <summary>Represents pivot information used by a manipulation processor for single-manipulator rotations.</summary>
+    </member>
+    <member name="M:System.Windows.Input.Manipulations.ManipulationPivot2D.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:System.Windows.Input.Manipulations.ManipulationPivot2D" /> class.</summary>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.ManipulationPivot2D.Radius">
+      <summary>Gets or sets the distance from the pivot point to the edge of the manipulatable region.</summary>
+      <returns>The distance from the pivot point to the edge of the manipulatable region.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.ManipulationPivot2D.X">
+      <summary>Gets or sets the X position of the pivot.</summary>
+      <returns>The X position of the pivot.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.ManipulationPivot2D.Y">
+      <summary>Gets or sets the Y position of the pivot.</summary>
+      <returns>The Y position of the pivot.</returns>
+    </member>
+    <member name="T:System.Windows.Input.Manipulations.ManipulationProcessor2D">
+      <summary>Implements a multiple-input, single-output compositor for two-dimensional (2-D) transformations in a shared coordinate space.</summary>
+    </member>
+    <member name="E:System.Windows.Input.Manipulations.ManipulationProcessor2D.Completed">
+      <summary>Occurs when a manipulation has competed.</summary>
+    </member>
+    <member name="E:System.Windows.Input.Manipulations.ManipulationProcessor2D.Delta">
+      <summary>Occurs when the manipulation origin has changed or when translation, scaling, or rotation have occurred.</summary>
+    </member>
+    <member name="E:System.Windows.Input.Manipulations.ManipulationProcessor2D.Started">
+      <summary>Occurs when a new manipulation has started.</summary>
+    </member>
+    <member name="M:System.Windows.Input.Manipulations.ManipulationProcessor2D.#ctor(System.Windows.Input.Manipulations.Manipulations2D)">
+      <summary>Creates a new <see cref="T:System.Windows.Input.Manipulations.ManipulationProcessor2D" /> object.</summary>
+      <param name="supportedManipulations">The initial set of supported manipulations.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">The <paramref name="supportedManipulations" /> parameter is not a valid combination of the <see cref="T:System.Windows.Input.Manipulations.Manipulations2D" /> enumeration values.</exception>
+    </member>
+    <member name="M:System.Windows.Input.Manipulations.ManipulationProcessor2D.#ctor(System.Windows.Input.Manipulations.Manipulations2D,System.Windows.Input.Manipulations.ManipulationPivot2D)">
+      <summary>Creates a new <see cref="T:System.Windows.Input.Manipulations.ManipulationProcessor2D" /> object.</summary>
+      <param name="supportedManipulations">The initial set of supported manipulations.</param>
+      <param name="pivot">Pivot information for single-manipulator rotations.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">The <paramref name="supportedManipulations" /> parameter is not a valid combination of the <see cref="T:System.Windows.Input.Manipulations.Manipulations2D" /> enumeration values.</exception>
+    </member>
+    <member name="M:System.Windows.Input.Manipulations.ManipulationProcessor2D.CompleteManipulation(System.Int64)">
+      <summary>Forces the current manipulation to complete and raises the <see cref="E:System.Windows.Input.Manipulations.ManipulationProcessor2D.Completed" /> event.</summary>
+      <param name="timestamp">The timestamp to complete the manipulation, in 100-nanosecond ticks.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">The timestamp is less than the previous timestamp for the current manipulation.</exception>
+    </member>
+    <member name="M:System.Windows.Input.Manipulations.ManipulationProcessor2D.ProcessManipulators(System.Int64,System.Collections.Generic.IEnumerable{System.Windows.Input.Manipulations.Manipulator2D})">
+      <summary>Processes the specified manipulators as a single batch action.</summary>
+      <param name="timestamp">The timestamp for the batch, in 100-nanosecond ticks.</param>
+      <param name="manipulators">The set of manipulators that are currently in scope.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">The timestamp is less than the previous timestamp for the current manipulation.</exception>
+    </member>
+    <member name="M:System.Windows.Input.Manipulations.ManipulationProcessor2D.SetParameters(System.Windows.Input.Manipulations.ManipulationParameters2D)">
+      <summary>Sets parameters on the manipulation processor.</summary>
+      <param name="parameters">Parameters to set.</param>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.ManipulationProcessor2D.MinimumScaleRotateRadius">
+      <summary>Gets or sets the minimum radius, in coordinate units, necessary for a manipulator to participate in scaling and rotation.</summary>
+      <returns>The minimum radius, in coordinate units, necessary for a manipulator to participate in scaling and rotation.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.ManipulationProcessor2D.Pivot">
+      <summary>Gets or sets the pivot information for the manipulation processor.</summary>
+      <returns>The pivot information for the manipulation processor.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.ManipulationProcessor2D.SupportedManipulations">
+      <summary>Gets or sets the current set of supported manipulations.</summary>
+      <exception cref="T:System.ArgumentOutOfRangeException">The property tries to set a value that is not a valid combination of the <see cref="T:System.Windows.Input.Manipulations.Manipulations2D" /> enumeration values.</exception>
+      <returns>The current set of supported manipulations.</returns>
+    </member>
+    <member name="T:System.Windows.Input.Manipulations.Manipulations2D">
+      <summary>Represents the possible affine two-dimensional (2-D) manipulations.</summary>
+    </member>
+    <member name="F:System.Windows.Input.Manipulations.Manipulations2D.All">
+      <summary>All available manipulations.</summary>
+    </member>
+    <member name="F:System.Windows.Input.Manipulations.Manipulations2D.None">
+      <summary>No manipulations.</summary>
+    </member>
+    <member name="F:System.Windows.Input.Manipulations.Manipulations2D.Rotate">
+      <summary>A rotation.</summary>
+    </member>
+    <member name="F:System.Windows.Input.Manipulations.Manipulations2D.Scale">
+      <summary>A scale in both directions.</summary>
+    </member>
+    <member name="F:System.Windows.Input.Manipulations.Manipulations2D.Translate">
+      <summary>A translation in the x and/or y axes.</summary>
+    </member>
+    <member name="F:System.Windows.Input.Manipulations.Manipulations2D.TranslateX">
+      <summary>A translation in the x-axis.</summary>
+    </member>
+    <member name="F:System.Windows.Input.Manipulations.Manipulations2D.TranslateY">
+      <summary>A translation in the y-axis.</summary>
+    </member>
+    <member name="T:System.Windows.Input.Manipulations.ManipulationVelocities2D">
+      <summary>Represents a set of velocities calculated by the manipulation and inertia processors.</summary>
+    </member>
+    <member name="F:System.Windows.Input.Manipulations.ManipulationVelocities2D.Zero">
+      <summary>Gets a <see cref="T:System.Windows.Input.Manipulations.ManipulationVelocities2D" /> with all velocities set to zero.</summary>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.ManipulationVelocities2D.AngularVelocity">
+      <summary>Gets the angular velocity, in radians per millisecond.</summary>
+      <returns>The angular velocity, in radians per millisecond.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.ManipulationVelocities2D.ExpansionVelocityX">
+      <summary>Gets the expansion velocity along the x-axis, in coordinate units per millisecond.</summary>
+      <returns>The expansion velocity along the x-axis, in coordinate units per millisecond.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.ManipulationVelocities2D.ExpansionVelocityY">
+      <summary>Gets the expansion velocity along the y-axis, in coordinate units per millisecond.</summary>
+      <returns>The expansion velocity along the y-axis, in coordinate units per millisecond.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.ManipulationVelocities2D.LinearVelocityX">
+      <summary>Gets the velocity along the x-axis, in coordinate units per millisecond.</summary>
+      <returns>The velocity along the x-axis, in coordinate units per millisecond.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.ManipulationVelocities2D.LinearVelocityY">
+      <summary>Gets the velocity along the y-axis, in coordinate units per millisecond.</summary>
+      <returns>The velocity along the y-axis, in coordinate units per millisecond.</returns>
+    </member>
+    <member name="T:System.Windows.Input.Manipulations.Manipulator2D">
+      <summary>Represents a 2D manipulator at an instant in time.</summary>
+    </member>
+    <member name="M:System.Windows.Input.Manipulations.Manipulator2D.#ctor(System.Int32,System.Single,System.Single)">
+      <summary>Creates a new <see cref="T:System.Windows.Input.Manipulations.Manipulator2D" /> object with the specified properties.</summary>
+      <param name="id">The unique ID for this manipulator.</param>
+      <param name="x">The x-coordinate of the manipulator.</param>
+      <param name="y">The y-coordinate of the manipulator.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">The <paramref name="x" />-coordinate or <paramref name="y" />-coordinate are <see langword="float.NaN" />, <see langword="float.PositiveInfinity" />, or <see langword="float.NegativeInfinity" />. These values are all invalid.</exception>
+    </member>
+    <member name="M:System.Windows.Input.Manipulations.Manipulator2D.Equals(System.Object)">
+      <summary>Determines whether this <see cref="T:System.Windows.Input.Manipulations.Manipulator2D" /> object has the same value as the specified <see cref="T:System.Windows.Input.Manipulations.Manipulator2D" /> object.</summary>
+      <param name="obj">The <see cref="T:System.Windows.Input.Manipulations.Manipulator2D" /> object to compare this object to.</param>
+      <returns>
+        <see langword="true" /> if the two <see cref="T:System.Windows.Input.Manipulations.Manipulator2D" /> objects are the same type and represent the same value; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Windows.Input.Manipulations.Manipulator2D.GetHashCode">
+      <summary>Returns the hash code for this instance.</summary>
+      <returns>The hash code for this instance.</returns>
+    </member>
+    <member name="M:System.Windows.Input.Manipulations.Manipulator2D.op_Equality(System.Windows.Input.Manipulations.Manipulator2D,System.Windows.Input.Manipulations.Manipulator2D)">
+      <summary>Determines whether two specified <see cref="T:System.Windows.Input.Manipulations.Manipulator2D" /> objects have the same value.</summary>
+      <param name="manipulator1">The first <see cref="T:System.Windows.Input.Manipulations.Manipulator2D" /> object to compare.</param>
+      <param name="manipulator2">The second <see cref="T:System.Windows.Input.Manipulations.Manipulator2D" /> object to compare.</param>
+      <returns>
+        <see langword="true" /> if the two <see cref="T:System.Windows.Input.Manipulations.Manipulator2D" /> objects have the same value; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Windows.Input.Manipulations.Manipulator2D.op_Inequality(System.Windows.Input.Manipulations.Manipulator2D,System.Windows.Input.Manipulations.Manipulator2D)">
+      <summary>Determines whether two specified <see cref="T:System.Windows.Input.Manipulations.Manipulator2D" /> objects have different values.</summary>
+      <param name="manipulator1">The first <see cref="T:System.Windows.Input.Manipulations.Manipulator2D" /> object to compare.</param>
+      <param name="manipulator2">The second <see cref="T:System.Windows.Input.Manipulations.Manipulator2D" /> object to compare.</param>
+      <returns>
+        <see langword="true" /> if the two <see cref="T:System.Windows.Input.Manipulations.Manipulator2D" /> objects have different values; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.Manipulator2D.Id">
+      <summary>Gets or sets the unique ID for this <see cref="T:System.Windows.Input.Manipulations.Manipulator2D" /> object.</summary>
+      <returns>The unique ID for this <see cref="T:System.Windows.Input.Manipulations.Manipulator2D" /> object.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.Manipulator2D.X">
+      <summary>Gets or sets the x-coordinate of this <see cref="T:System.Windows.Input.Manipulations.Manipulator2D" /> object.</summary>
+      <returns>The x-coordinate of this <see cref="T:System.Windows.Input.Manipulations.Manipulator2D" /> object.</returns>
+    </member>
+    <member name="P:System.Windows.Input.Manipulations.Manipulator2D.Y">
+      <summary>Gets or sets the y-coordinate of this <see cref="T:System.Windows.Input.Manipulations.Manipulator2D" /> object.</summary>
+      <returns>The y-coordinate of this <see cref="T:System.Windows.Input.Manipulations.Manipulator2D" /> object.</returns>
+    </member>
+  </members>
+</doc>

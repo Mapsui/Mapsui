@@ -1,0 +1,12 @@
+# NOTE: Requires **VS2019 16.7** or later
+
+# 'Maintainability' Rules from '6.0' release with 'None' analysis mode
+# Description: 'Maintainability' Rules with enabled-by-default state from '6.0' release with 'None' analysis mode. Rules that are first released in a version later than '6.0' are disabled.
+
+is_global = true
+
+global_level = -1
+
+
+# CA1507: Use nameof to express symbol names
+dotnet_diagnostic.CA1507.severity = none

@@ -1,0 +1,799 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>System.Diagnostics.PerformanceCounter</name>
+    </assembly>
+    <members>
+        <member name="T:System.Diagnostics.CounterCreationData">
+            <summary>
+                A class defining the counter type, name and help string for a custom counter.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CounterSample">
+            <summary>
+                A struct holding the raw data for a performance counter.
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.CounterSample.RawValue">
+            <summary>
+                 Raw value of the counter.
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.CounterSample.BaseValue">
+            <summary>
+                 Optional base raw value for the counter (only used if multiple counter based).
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.CounterSample.SystemFrequency">
+            <summary>
+                 Raw system frequency
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.CounterSample.CounterFrequency">
+            <summary>
+                 Raw counter frequency
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.CounterSample.CounterTimeStamp">
+            <summary>
+                 Raw counter frequency
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.CounterSample.TimeStamp">
+            <summary>
+                 Raw timestamp
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.CounterSample.TimeStamp100nSec">
+            <summary>
+                 Raw high fidelity timestamp
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.CounterSample.CounterType">
+            <summary>
+                 Counter type
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.CounterSample.Calculate(System.Diagnostics.CounterSample)">
+            <summary>
+               Static functions to calculate the performance value off the sample
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.CounterSample.Calculate(System.Diagnostics.CounterSample,System.Diagnostics.CounterSample)">
+            <summary>
+               Static functions to calculate the performance value off the samples
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CounterSampleCalculator">
+            <summary>
+                Set of utility functions for interpreting the counter data
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.CounterSampleCalculator.GetElapsedTime(System.Diagnostics.CounterSample,System.Diagnostics.CounterSample)">
+            <summary>
+               Converts 100NS elapsed time to fractional seconds
+            </summary>
+            <internalonly/>
+        </member>
+        <member name="M:System.Diagnostics.CounterSampleCalculator.ComputeCounterValue(System.Diagnostics.CounterSample)">
+            <summary>
+               Computes the calculated value given a raw counter sample.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.CounterSampleCalculator.ComputeCounterValue(System.Diagnostics.CounterSample,System.Diagnostics.CounterSample)">
+            <summary>
+               Computes the calculated value given a raw counter sample.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.ICollectData">
+            <internalonly/>
+        </member>
+        <member name="T:System.Diagnostics.InstanceData">
+            <summary>
+                A holder of instance data.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.InstanceDataCollection">
+            <summary>
+                A collection containing all the instance data for a counter.  This collection is contained in the
+                <see cref='T:System.Diagnostics.InstanceDataCollectionCollection'/> when using the
+                <see cref='M:System.Diagnostics.PerformanceCounterCategory.ReadCategory'/> method.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.InstanceDataCollectionCollection">
+            <summary>
+                The collection returned from  the <see cref='M:System.Diagnostics.PerformanceCounterCategory.ReadCategory'/> method.
+                that contains all the counter and instance data.
+                The collection contains an InstanceDataCollection object for each counter.  Each InstanceDataCollection
+                object contains the performance data for all counters for that instance.  In other words the data is
+                indexed by counter name and then by instance name.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.PerformanceCounter">
+            <summary>
+                Performance Counter component.
+                This class provides support for NT Performance counters.
+                It handles both the existing counters (accessible by Perf Registry Interface)
+                and user defined (extensible) counters.
+                This class is a part of a larger framework, that includes the perf dll object and
+                perf service.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounter.#ctor">
+            <summary>
+                The defaut constructor. Creates the perf counter object
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounter.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+                Creates the Performance Counter Object
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounter.#ctor(System.String,System.String,System.String)">
+            <summary>
+                Creates the Performance Counter Object on local machine.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounter.#ctor(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+                Creates the Performance Counter Object on local machine.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounter.#ctor(System.String,System.String)">
+            <summary>
+                Creates the Performance Counter Object, assumes that it's a single instance
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounter.#ctor(System.String,System.String,System.Boolean)">
+            <summary>
+                Creates the Performance Counter Object, assumes that it's a single instance
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.PerformanceCounter.CategoryName">
+            <summary>
+                Returns the performance category name for this performance counter
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.PerformanceCounter.CounterHelp">
+            <summary>
+                Returns the description message for this performance counter
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.PerformanceCounter.CounterName">
+            <summary>
+                Sets/returns the performance counter name for this performance counter
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.PerformanceCounter.CounterType">
+            <summary>
+                Sets/Returns the counter type for this performance counter
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.PerformanceCounter.InstanceName">
+            <summary>
+                Sets/returns an instance name for this performance counter
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.PerformanceCounter.ReadOnly">
+            <summary>
+                Returns true if counter is read only (system counter, foreign extensible counter or remote counter)
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.PerformanceCounter.MachineName">
+            <summary>
+                Set/returns the machine name for this performance counter
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.PerformanceCounter.RawValue">
+            <summary>
+                Directly accesses the raw value of this counter.  If counter type is of a 32-bit size, it will truncate
+                the value given to 32 bits.  This can be significantly more performant for scenarios where
+                the raw value is sufficient.   Note that this only works for custom counters created using
+                this component,  non-custom counters will throw an exception if this property is accessed.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounter.BeginInit">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounter.Close">
+            <summary>
+                Frees all the resources allocated by this counter
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounter.CloseSharedResources">
+            <summary>
+                Frees all the resources allocated for all performance
+                counters, frees File Mapping used by extensible counters,
+                unloads dll's used to read counters.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounter.Dispose(System.Boolean)">
+            <internalonly/>
+            <summary>
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounter.Decrement">
+            <summary>
+                Decrements counter by one using an efficient atomic operation.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounter.EndInit">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounter.IncrementBy(System.Int64)">
+            <summary>
+                Increments the value of this counter.  If counter type is of a 32-bit size, it'll truncate
+                the value given to 32 bits. This method uses a mutex to guarantee correctness of
+                the operation in case of multiple writers. This method should be used with caution because of the negative
+                impact on performance due to creation of the mutex.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounter.Increment">
+            <summary>
+                Increments counter by one using an efficient atomic operation.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounter.InitializeImpl">
+            <summary>
+                Intializes required resources
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounter.NextSample">
+            <summary>
+                Obtains a counter sample and returns the raw value for it.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounter.NextValue">
+            <summary>
+                Obtains a counter sample and returns the calculated value for it.
+                NOTE: For counters whose calculated value depend upon 2 counter reads,
+                      the very first read will return 0.0.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounter.RemoveInstance">
+            <summary>
+                Removes this counter instance from the shared memory
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.PerformanceCounterCategory">
+            <summary>
+                A Performance counter category object.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounterCategory.#ctor(System.String)">
+            <summary>
+                Creates a PerformanceCounterCategory object for given category.
+                Uses the local machine.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounterCategory.#ctor(System.String,System.String)">
+            <summary>
+                Creates a PerformanceCounterCategory object for given category.
+                Uses the given machine name.
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.PerformanceCounterCategory.CategoryName">
+            <summary>
+                Gets/sets the Category name
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.PerformanceCounterCategory.CategoryHelp">
+            <summary>
+                Gets/sets the Category help
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.PerformanceCounterCategory.MachineName">
+            <summary>
+                Gets/sets the Machine name
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounterCategory.CounterExists(System.String)">
+            <summary>
+                Returns true if the counter is registered for this category
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounterCategory.CounterExists(System.String,System.String)">
+            <summary>
+                Returns true if the counter is registered for this category on the current machine.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounterCategory.CounterExists(System.String,System.String,System.String)">
+            <summary>
+                Returns true if the counter is registered for this category on a particular machine.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounterCategory.Create(System.String,System.String,System.String,System.String)">
+            <summary>
+                Registers one extensible performance category of type NumberOfItems32 with the system
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounterCategory.Create(System.String,System.String,System.Diagnostics.CounterCreationDataCollection)">
+            <summary>
+                Registers the extensible performance category with the system on the local machine
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounterCategory.Delete(System.String)">
+            <summary>
+                Removes the counter (category) from the system
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounterCategory.Exists(System.String)">
+            <summary>
+                Returns true if the category is registered on the current machine.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounterCategory.Exists(System.String,System.String)">
+            <summary>
+                Returns true if the category is registered in the machine.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounterCategory.GetCounterInstances(System.String,System.String)">
+            <summary>
+                Returns the instance names for a given category
+            </summary>
+            <internalonly/>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounterCategory.GetCounters">
+            <summary>
+                Returns an array of counters in this category.  The counter must have only one instance.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounterCategory.GetCounters(System.String)">
+            <summary>
+                Returns an array of counters in this category for the given instance.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounterCategory.GetCategories">
+            <summary>
+                Returns an array of performance counter categories for the current machine.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounterCategory.GetCategories(System.String)">
+            <summary>
+                Returns an array of performance counter categories for a particular machine.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounterCategory.GetInstanceNames">
+            <summary>
+                Returns an array of instances for this category
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounterCategory.InstanceExists(System.String)">
+            <summary>
+                Returns true if the instance already exists for this category.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounterCategory.InstanceExists(System.String,System.String)">
+            <summary>
+                Returns true if the instance already exists for the category specified.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounterCategory.InstanceExists(System.String,System.String,System.String)">
+            <summary>
+                Returns true if the instance already exists for this category and machine specified.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceCounterCategory.ReadCategory">
+            <summary>
+                Reads all the counter and instance data of this performance category.  Note that reading the entire category
+                at once can be as efficient as reading a single counter because of the way the system provides the data.
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.PerformanceCounterLib.ComputerName">
+            <internalonly/>
+        </member>
+        <member name="T:System.Diagnostics.PerformanceCounterType">
+            <summary>
+                Enum of friendly names to counter types (maps directory to the native types)
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.PerformanceData.CounterSet">
+            <summary>
+            CounterSet is equivalent to "Counter Object" in native performance counter terminology,
+            or "Counter Category" in previous framework releases. It defines a abstract grouping of
+            counters, where each counter defines measurable matrix. In the new performance counter
+            infrastructure, CounterSet is defined by GUID called CounterSetGuid, and is hosted inside
+            provider application, which is also defined by another GUID called ProviderGuid.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceData.CounterSet.#ctor(System.Guid,System.Guid,System.Diagnostics.PerformanceData.CounterSetInstanceType)">
+            <summary>
+            CounterSet constructor.
+            </summary>
+            <param name="providerGuid">ProviderGuid identifies the provider application. A provider identified by ProviderGuid could publish several CounterSets defined by different CounterSetGuids</param>
+            <param name="counterSetGuid">CounterSetGuid identifies the specific CounterSet. CounterSetGuid should be unique.</param>
+            <param name="instanceType">One of defined CounterSetInstanceType values</param>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceData.CounterSet.AddCounter(System.Int32,System.Diagnostics.PerformanceData.CounterType)">
+            <summary>
+            Add non-displayable new counter to CounterSet; that is, perfmon would not display the counter.
+            </summary>
+            <param name="counterId">CounterId uniquely identifies the counter within CounterSet</param>
+            <param name="counterType">One of defined CounterType values</param>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceData.CounterSet.AddCounter(System.Int32,System.Diagnostics.PerformanceData.CounterType,System.String)">
+            <summary>
+            Add named new counter to CounterSet.
+            </summary>
+            <param name="counterId">CounterId uniquely identifies the counter within CounterSet</param>
+            <param name="counterType">One of defined CounterType values</param>
+            <param name="counterName">This is friendly name to help provider developers as indexer. and it might not match what is displayed in counter consumption applications lie perfmon.</param>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceData.CounterSet.CreateCounterSetInstance(System.String)">
+            <summary>
+            Create instances of the CounterSet. Created CounterSetInstance identifies active identity and tracks raw counter data for that identity.
+            </summary>
+            <param name="instanceName">Friendly name identifies the instance. InstanceName would be shown in counter consumption applications like perfmon.</param>
+            <returns>CounterSetInstance object</returns>
+        </member>
+        <member name="T:System.Diagnostics.PerformanceData.CounterSetInstance">
+            <summary>
+            CounterSetInstance class maps to "Instance" in native performance counter implementation.
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.PerformanceData.CounterSetInstance.Counters">
+            <summary>
+            Access CounterSetInstanceCounterDataSet property. Developers can then use defined indexer to access
+            specific CounterData object to query/update raw counter data.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.PerformanceData.CounterData">
+            <summary>
+            CounterData class is used to store actual raw counter data. It is the value element within
+            CounterSetInstanceCounterDataSet, which is part of CounterSetInstance.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.PerformanceData.CounterData.#ctor(System.Int64*)">
+            <summary>
+            CounterData constructor
+            </summary>
+            <param name="pCounterData"> The memory location to store raw counter data </param>
+        </member>
+        <member name="P:System.Diagnostics.PerformanceData.CounterData.Value">
+            <summary>
+            Value property it used to query/update actual raw counter data.
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.PerformanceData.CounterData.RawValue">
+            <summary>
+            RawValue property it used to query/update actual raw counter data.
+            This property is not thread-safe and should only be used
+            for performance-critical single-threaded access.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.PerformanceData.CounterSetInstanceCounterDataSet">
+            <summary>
+            CounterSetInstanceCounterDataSet is part of CounterSetInstance class, and is used to store raw counter data
+            for all counters added in CounterSet.
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.PerformanceData.CounterSetInstanceCounterDataSet.Item(System.Int32)">
+            <summary>
+            CounterId indexer to access specific CounterData object.
+            </summary>
+            <param name="counterId">CounterId that matches one CounterSet::AddCounter()call</param>
+            <returns>CounterData object with matched counterId</returns>
+        </member>
+        <member name="P:System.Diagnostics.PerformanceData.CounterSetInstanceCounterDataSet.Item(System.String)">
+            <summary>
+            CounterName indexer to access specific CounterData object.
+            </summary>
+            <param name="counterName">CounterName that matches one CounterSet::AddCounter() call</param>
+            <returns>CounterData object with matched counterName</returns>
+        </member>
+        <member name="T:System.Diagnostics.PerformanceData.CounterSetInstanceType">
+            <summary>
+            Enum of friendly names to CounterSet instance type (maps directory to the native types defined in perflib.h)
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.PerformanceData.CounterSetInstanceType.Single">
+            <summary>
+            Single means that at any time CounterSet should only have at most 1 active instance.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.PerformanceData.CounterSetInstanceType.Multiple">
+            <summary>
+            Multiple means that CounterSet could have multiple active instances.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.PerformanceData.CounterSetInstanceType.GlobalAggregate">
+            <summary>
+            GlobalAggregate means that CounterSet could have multiple active instances, but counter consumption
+            applications (for example, perfmon) would aggregate raw counter data from different instances.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.PerformanceData.CounterSetInstanceType.GlobalAggregateWithHistory">
+            <summary>
+            GlobalAggregateWithHistory is similar to GlobalAggregate, but counter consumption applications
+            (for example, permfon) would aggregate raw counter data not only from active instances, but also
+            from instances since consumption applications start.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.PerformanceData.CounterSetInstanceType.MultipleAggregate">
+            <summary>
+            MultipleInstancesWithAggregate acts similar to Multiple, but it also generate aggregated instace
+            "_Total" that hosts aggregated raw counter data from all other instances.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.PerformanceData.CounterSetInstanceType.InstanceAggregate">
+            <summary>
+            InstanceAggregate only exists in Longhonr Server. Counter consumption applications aggregate raw
+            counter data for active instances with the same instance name.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.PerformanceData.CounterType">
+            <summary>
+            Enum of friendly names to counter types (maps directory to the native types defined in winperf.h).
+            </summary>
+        </member>
+        <member name="P:System.SR.InvalidParameter">
+            <summary>Invalid value '{1}' for parameter '{0}'.</summary>
+        </member>
+        <member name="P:System.SR.CategoryHelpCorrupt">
+            <summary>Cannot load Category Help data because an invalid index '{0}' was read from the registry. Performance counters on the machine may need to be repaired.</summary>
+        </member>
+        <member name="P:System.SR.CounterNameCorrupt">
+            <summary>Cannot load Counter Name data because an invalid index '{0}' was read from the registry. Performance counters on the machine may need to be repaired.</summary>
+        </member>
+        <member name="P:System.SR.CounterDataCorrupt">
+            <summary>Cannot load Performance Counter data because an unexpected registry key value type was read from '{0}'. Performance counters on the machine may need to be repaired.</summary>
+        </member>
+        <member name="P:System.SR.InstanceNameTooLong">
+            <summary>Instance names used for writing to custom counters must be 127 characters or less.</summary>
+        </member>
+        <member name="P:System.SR.ProcessLifetimeNotValidInGlobal">
+            <summary>PerformanceCounterInstanceLifetime.Process is not valid in the global shared memory.  If your performance counter category was created with an older version of the Framework, it uses the global shared memory.  Either use PerformanceCounterInstanceLifetime. ...</summary>
+        </member>
+        <member name="P:System.SR.CountersOOM">
+            <summary>Custom counters file view is out of memory.</summary>
+        </member>
+        <member name="P:System.SR.MappingCorrupted">
+            <summary>Cannot continue the current operation, the performance counters memory mapping has been corrupted.</summary>
+        </member>
+        <member name="P:System.SR.SingleInstanceOnly">
+            <summary>Category '{0}' is marked as single-instance.  Performance counters in this category can only be created without instance names.</summary>
+        </member>
+        <member name="P:System.SR.MultiInstanceOnly">
+            <summary>Category '{0}' is marked as multi-instance.  Performance counters in this category can only be created with instance names.</summary>
+        </member>
+        <member name="P:System.SR.CantConvertProcessToGlobal">
+            <summary>An instance with a lifetime of Process can only be accessed from a PerformanceCounter with the InstanceLifetime set to PerformanceCounterInstanceLifetime.Process.</summary>
+        </member>
+        <member name="P:System.SR.CantConvertGlobalToProcess">
+            <summary>An instance with a lifetime of Global can only be accessed from a PerformanceCounter with the InstanceLifetime set to PerformanceCounterInstanceLifetime.Global.</summary>
+        </member>
+        <member name="P:System.SR.InstanceAlreadyExists">
+            <summary>Instance '{0}' already exists with a lifetime of Process.  It cannot be recreated or reused until it has been removed or until the process using it has exited.</summary>
+        </member>
+        <member name="P:System.SR.SharedMemoryGhosted">
+            <summary>Cannot access shared memory, AppDomain has been unloaded.</summary>
+        </member>
+        <member name="P:System.SR.SetSecurityDescriptionFailed">
+            <summary>Cannot initialize security descriptor initialized.</summary>
+        </member>
+        <member name="P:System.SR.CantCreateFileMapping">
+            <summary>Cannot create file mapping.</summary>
+        </member>
+        <member name="P:System.SR.CantMapFileView">
+            <summary>Cannot map view of file.</summary>
+        </member>
+        <member name="P:System.SR.MismatchedCounterTypes">
+            <summary>MismatchedCounterTypes=Mismatched counter types.</summary>
+        </member>
+        <member name="P:System.SR.PerfCounterPdhError">
+            <summary>There was an error calculating the PerformanceCounter value (0x{0}).</summary>
+        </member>
+        <member name="P:System.SR.MustAddCounterCreationData">
+            <summary>Only objects of type CounterCreationData can be added to a CounterCreationDataCollection.</summary>
+        </member>
+        <member name="P:System.SR.CantReadInstance">
+            <summary>Instance '{0}' does not exist in the specified Category.</summary>
+        </member>
+        <member name="P:System.SR.CantReadCategoryIndex">
+            <summary>Could not Read Category Index: {0}.</summary>
+        </member>
+        <member name="P:System.SR.MissingCategory">
+            <summary>Category does not exist.</summary>
+        </member>
+        <member name="P:System.SR.CounterLayout">
+            <summary>The Counter layout for the Category specified is invalid, a counter of the type:  AverageCount64, AverageTimer32, CounterMultiTimer, CounterMultiTimerInverse, CounterMultiTimer100Ns, CounterMultiTimer100NsInverse, RawFraction, or SampleFraction has to be i ...</summary>
+        </member>
+        <member name="P:System.SR.CantReadCounter">
+            <summary>Counter '{0}' does not exist in the specified Category.</summary>
+        </member>
+        <member name="P:System.SR.HelpNotAvailable">
+            <summary>Help Not Available</summary>
+        </member>
+        <member name="P:System.SR.MissingCategoryDetail">
+            <summary>Category {0} does not exist.</summary>
+        </member>
+        <member name="P:System.SR.MissingCounter">
+            <summary>Counter {0} does not exist.</summary>
+        </member>
+        <member name="P:System.SR.CantChangeCategoryRegistration">
+            <summary>Cannot create or delete the Performance Category '{0}' because access is denied.</summary>
+        </member>
+        <member name="P:System.SR.InvalidProperty">
+            <summary>Invalid value {1} for property {0}.</summary>
+        </member>
+        <member name="P:System.SR.CategoryNameNotSet">
+            <summary>Category name property has not been set.</summary>
+        </member>
+        <member name="P:System.SR.PerformanceCategoryExists">
+            <summary>Cannot create Performance Category '{0}' because it already exists.</summary>
+        </member>
+        <member name="P:System.SR.PerfInvalidCategoryName">
+            <summary>Invalid category name. Its length must be in the range between '{0}' and '{1}'. Double quotes, control characters and leading or trailing spaces are not allowed.</summary>
+        </member>
+        <member name="P:System.SR.CategoryNameTooLong">
+            <summary>Category names must be 1024 characters or less.</summary>
+        </member>
+        <member name="P:System.SR.PerfInvalidCounterName">
+            <summary>Invalid counter name. Its length must be in the range between '{0}' and '{1}'. Double quotes, control characters and leading or trailing spaces are not allowed.</summary>
+        </member>
+        <member name="P:System.SR.PerfInvalidHelp">
+            <summary>Invalid help string. Its length must be in the range between '{0}' and '{1}'.</summary>
+        </member>
+        <member name="P:System.SR.InvalidCounterName">
+            <summary>Invalid empty or null string for counter name.</summary>
+        </member>
+        <member name="P:System.SR.DuplicateCounterName">
+            <summary>Cannot create Performance Category with counter name {0} because the name is a duplicate.</summary>
+        </member>
+        <member name="P:System.SR.CantDeleteCategory">
+            <summary>Cannot delete Performance Category because this category is not registered or is a system category.</summary>
+        </member>
+        <member name="P:System.SR.InstanceNameRequired">
+            <summary>Counter is not single instance, an instance name needs to be specified.</summary>
+        </member>
+        <member name="P:System.SR.MissingInstance">
+            <summary>Instance {0} does not exist in category {1}.</summary>
+        </member>
+        <member name="P:System.SR.CantSetLifetimeAfterInitialized">
+            <summary>The InstanceLifetime cannot be set after the instance has been initialized.  You must use the default constructor and set the CategoryName, InstanceName, CounterName, InstanceLifetime and ReadOnly properties manually before setting the RawValue.</summary>
+        </member>
+        <member name="P:System.SR.ReadOnlyCounter">
+            <summary>Cannot update Performance Counter, this object has been initialized as ReadOnly.</summary>
+        </member>
+        <member name="P:System.SR.PCNotSupportedUnderAppContainer">
+            <summary>Writeable performance counters are not allowed when running in AppContainer.</summary>
+        </member>
+        <member name="P:System.SR.CategoryNameMissing">
+            <summary>Failed to initialize because CategoryName is missing.</summary>
+        </member>
+        <member name="P:System.SR.CounterNameMissing">
+            <summary>Failed to initialize because CounterName is missing.</summary>
+        </member>
+        <member name="P:System.SR.InstanceLifetimeProcessonReadOnly">
+            <summary>InstanceLifetime is unused by ReadOnly counters.</summary>
+        </member>
+        <member name="P:System.SR.RemoteWriting">
+            <summary>Cannot write to a Performance Counter in a remote machine.</summary>
+        </member>
+        <member name="P:System.SR.NotCustomCounter">
+            <summary>The requested Performance Counter is not a custom counter, it has to be initialized as ReadOnly.</summary>
+        </member>
+        <member name="P:System.SR.InstanceLifetimeProcessforSingleInstance">
+            <summary>Single instance categories are only valid with the Global lifetime.</summary>
+        </member>
+        <member name="P:System.SR.InstanceNameProhibited">
+            <summary>Counter is single instance, instance name '{0}' is not valid for this counter category.</summary>
+        </member>
+        <member name="P:System.SR.ReadOnlyRemoveInstance">
+            <summary>Cannot remove Performance Counter Instance, this object as been initialized as ReadOnly.</summary>
+        </member>
+        <member name="P:System.SR.CounterExists">
+            <summary>Could not locate Performance Counter with specified category name '{0}', counter name '{1}'.</summary>
+        </member>
+        <member name="P:System.SR.SetSecurityDescriptorFailed">
+            <summary>Cannot initialize security descriptor initialized.</summary>
+        </member>
+        <member name="P:System.SR.RegKeyMissingShort">
+            <summary>Cannot open registry key {0} on computer {1}.</summary>
+        </member>
+        <member name="P:System.SR.CantGetMappingSize">
+            <summary>Cannot calculate the size of the file view.</summary>
+        </member>
+        <member name="P:System.SR.CantReadCategory">
+            <summary>Cannot read Category {0}.</summary>
+        </member>
+        <member name="P:System.SR.PlatformNotSupported_PerfCounters">
+            <summary>Performance Counters are not supported on this platform.</summary>
+        </member>
+        <member name="P:System.SR.Perflib_Argument_InvalidCounterSetInstanceType">
+            <summary>CounterSetInstanceType '{0}' is not a valid CounterSetInstanceType.</summary>
+        </member>
+        <member name="P:System.SR.Perflib_InvalidOperation_NoActiveProvider">
+            <summary>CounterSet provider '{0}' not active.</summary>
+        </member>
+        <member name="P:System.SR.Perflib_Argument_InvalidCounterType">
+            <summary>CounterType '{0}' is not a valid CounterType.</summary>
+        </member>
+        <member name="P:System.SR.Perflib_InvalidOperation_AddCounterAfterInstance">
+            <summary>Cannot AddCounter to CounterSet '{0}' after CreateCounterSetInstance.</summary>
+        </member>
+        <member name="P:System.SR.Perflib_Argument_CounterAlreadyExists">
+            <summary>CounterId '{0}' already added to CounterSet '{1}'.</summary>
+        </member>
+        <member name="P:System.SR.Perflib_Argument_EmptyInstanceName">
+            <summary>Non-empty instanceName required.</summary>
+        </member>
+        <member name="P:System.SR.Perflib_InvalidOperation_CounterSetNotInstalled">
+            <summary>CounterSet '{0}' not installed yet.</summary>
+        </member>
+        <member name="P:System.SR.Perflib_Argument_InvalidInstance">
+            <summary>Single instance type CounterSet '{0}' can only have 1 CounterSetInstance.</summary>
+        </member>
+        <member name="P:System.SR.Perflib_Argument_EmptyCounterName">
+            <summary>Non-empty counterName required.</summary>
+        </member>
+        <member name="P:System.SR.Perflib_Argument_CounterNameAlreadyExists">
+            <summary>CounterName '{0}' already added to CounterSet '{1}'.</summary>
+        </member>
+        <member name="P:System.SR.Perflib_Argument_ProviderNotFound">
+            <summary>CounterSet provider '{0}' not found.</summary>
+        </member>
+        <member name="P:System.SR.Perflib_InvalidOperation_CounterSetContainsNoCounter">
+            <summary>CounterSet '{0}' does not include any counters.</summary>
+        </member>
+        <member name="P:System.SR.Perflib_Argument_CounterSetAlreadyRegister">
+            <summary>CounterSet '{0}' already registered.</summary>
+        </member>
+        <member name="P:System.SR.Perflib_Argument_InstanceAlreadyExists">
+            <summary>Instance '{0}' already exists in CounterSet '{1}'.</summary>
+        </member>
+        <member name="P:System.SR.Perflib_InsufficientMemory_InstanceCounterBlock">
+            <summary>Cannot allocate raw counter data for CounterSet '{0}' Instance '{1}'.</summary>
+        </member>
+        <member name="P:System.SR.Perflib_InvalidOperation_CounterRefValue">
+            <summary>Cannot locate raw counter data location for CounterSet '{0}', Counter '{1}, in Instance '{2}'.</summary>
+        </member>
+        <member name="P:System.SR.Arg_DllInitFailure">
+            <summary>One machine (either '{0}' or local) may not have remote administration enabled, or both machines may not be running the remote registry service.</summary>
+        </member>
+        <member name="P:System.SR.Arg_RegKeyNoRemoteConnect">
+            <summary>No remote connection to '{0}' while trying to read the registry.</summary>
+        </member>
+        <member name="P:System.SR.ObjectDisposed_CategorySampleClosed">
+            <summary>Cannot access a closed category sample.</summary>
+        </member>
+        <member name="P:System.SR.UnauthorizedAccess_RegistryKeyGeneric_Key">
+            <summary>Access to the registry key '{0}' is denied.</summary>
+        </member>
+        <member name="T:Interop.BOOL">
+            <summary>
+            Blittable version of Windows BOOL type. It is convenient in situations where
+            manual marshalling is required, or to avoid overhead of regular bool marshalling.
+            </summary>
+            <remarks>
+            Some Windows APIs return arbitrary integer values although the return type is defined
+            as BOOL. It is best to never compare BOOL to TRUE. Always use bResult != BOOL.FALSE
+            or bResult == BOOL.FALSE .
+            </remarks>
+        </member>
+        <member name="M:Interop.Kernel32.GetMessage(System.Int32)">
+            <summary>
+                Returns a string message for the specified Win32 error code.
+            </summary>
+        </member>
+        <member name="T:Interop.Advapi32.TOKEN_INFORMATION_CLASS">
+            <summary>
+            <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/aa379626.aspx">TOKEN_INFORMATION_CLASS</a> enumeration.
+            </summary>
+        </member>
+        <member name="M:Internal.Win32.SafeHandles.SafeRegistryHandle.#ctor">
+            <summary>
+            Creates a <see cref="T:Microsoft.Win32.SafeHandles.SafeRegistryHandle" />.
+            </summary>
+        </member>
+        <member name="M:Internal.Win32.SafeHandles.SafeRegistryHandle.#ctor(System.IntPtr,System.Boolean)">
+            <summary>
+            Creates a <see cref="T:Microsoft.Win32.SafeHandles.SafeRegistryHandle" /> around a registry handle.
+            </summary>
+            <param name="preexistingHandle">Handle to wrap</param>
+            <param name="ownsHandle">Whether to control the handle lifetime</param>
+        </member>
+    </members>
+</doc>

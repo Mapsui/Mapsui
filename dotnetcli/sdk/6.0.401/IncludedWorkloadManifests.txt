@@ -1,0 +1,8 @@
+microsoft.net.sdk.android
+microsoft.net.sdk.ios
+microsoft.net.sdk.maccatalyst
+microsoft.net.sdk.macos
+microsoft.net.sdk.maui
+microsoft.net.sdk.tvos
+microsoft.net.workload.mono.toolchain
+microsoft.net.workload.emscripten

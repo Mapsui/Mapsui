@@ -1,0 +1,1702 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>System.Security.Cryptography.Primitives</name>
+  </assembly>
+  <members>
+    <member name="T:System.Security.Cryptography.AsymmetricAlgorithm">
+      <summary>Represents the abstract base class from which all implementations of asymmetric algorithms must inherit.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.AsymmetricAlgorithm.KeySizeValue">
+      <summary>Represents the size, in bits, of the key modulus used by the asymmetric algorithm.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.AsymmetricAlgorithm.LegalKeySizesValue">
+      <summary>Specifies the key sizes that are supported by the asymmetric algorithm.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.AsymmetricAlgorithm.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> class.</summary>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The implementation of the derived class is not valid.</exception>
+    </member>
+    <member name="M:System.Security.Cryptography.AsymmetricAlgorithm.Clear">
+      <summary>Releases all resources used by the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> class.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.AsymmetricAlgorithm.Create">
+      <summary>Creates a default cryptographic object used to perform the asymmetric algorithm.</summary>
+      <exception cref="T:System.PlatformNotSupportedException">.NET Core 2.0 - 3.1 and .NET 5.0 and later: In all cases.</exception>
+      <returns>A new <see cref="T:System.Security.Cryptography.RSACryptoServiceProvider" /> instance, unless the default settings have been changed with the &lt;cryptoClass&gt; element.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.AsymmetricAlgorithm.Create(System.String)">
+      <summary>Creates an instance of the specified implementation of an asymmetric algorithm.</summary>
+      <param name="algName">The asymmetric algorithm implementation to use. The following table shows the valid values for the <paramref name="algName" /> parameter and the algorithms they map to.
+
+ <list type="table"><listheader><term> Parameter value</term><description> Implements</description></listheader><item><term> System.Security.Cryptography.AsymmetricAlgorithm</term><description><see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /></description></item><item><term> RSA</term><description><see cref="T:System.Security.Cryptography.RSA" /></description></item><item><term> System.Security.Cryptography.RSA</term><description><see cref="T:System.Security.Cryptography.RSA" /></description></item><item><term> DSA</term><description><see cref="T:System.Security.Cryptography.DSA" /></description></item><item><term> System.Security.Cryptography.DSA</term><description><see cref="T:System.Security.Cryptography.DSA" /></description></item><item><term> ECDsa</term><description><see cref="T:System.Security.Cryptography.ECDsa" /></description></item><item><term> ECDsaCng</term><description><see cref="T:System.Security.Cryptography.ECDsaCng" /></description></item><item><term> System.Security.Cryptography.ECDsaCng</term><description><see cref="T:System.Security.Cryptography.ECDsaCng" /></description></item><item><term> ECDH</term><description><see cref="T:System.Security.Cryptography.ECDiffieHellman" /></description></item><item><term> ECDiffieHellman</term><description><see cref="T:System.Security.Cryptography.ECDiffieHellman" /></description></item><item><term> ECDiffieHellmanCng</term><description><see cref="T:System.Security.Cryptography.ECDiffieHellmanCng" /></description></item><item><term> System.Security.Cryptography.ECDiffieHellmanCng</term><description><see cref="T:System.Security.Cryptography.ECDiffieHellmanCng" /></description></item></list></param>
+      <returns>A new instance of the specified asymmetric algorithm implementation.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.AsymmetricAlgorithm.Dispose">
+      <summary>Releases all resources used by the current instance of the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> class.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.AsymmetricAlgorithm.Dispose(System.Boolean)">
+      <summary>Releases the unmanaged resources used by the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> class and optionally releases the managed resources.</summary>
+      <param name="disposing">
+        <see langword="true" /> to release both managed and unmanaged resources; <see langword="false" /> to release only unmanaged resources.</param>
+    </member>
+    <member name="M:System.Security.Cryptography.AsymmetricAlgorithm.ExportEncryptedPkcs8PrivateKey(System.ReadOnlySpan{System.Byte},System.Security.Cryptography.PbeParameters)">
+      <summary>Exports the current key in the PKCS#8 EncryptedPrivateKeyInfo format with a byte-based password.</summary>
+      <param name="passwordBytes">The bytes to use as a password when encrypting the key material.</param>
+      <param name="pbeParameters">The password-based encryption (PBE) parameters to use when encrypting the key material.</param>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The key could not be exported.
+
+-or-
+
+<paramref name="pbeParameters" /> indicates that <see cref="F:System.Security.Cryptography.PbeEncryptionAlgorithm.TripleDes3KeyPkcs12" /> should be used, which requires <see cref="T:System.Char" />-based passwords.</exception>
+      <returns>A byte array containing the PKCS#8 EncryptedPrivateKeyInfo representation of this key.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.AsymmetricAlgorithm.ExportEncryptedPkcs8PrivateKey(System.ReadOnlySpan{System.Char},System.Security.Cryptography.PbeParameters)">
+      <summary>Exports the current key in the PKCS#8 EncryptedPrivateKeyInfo format with a char-based password.</summary>
+      <param name="password">The password to use when encrypting the key material.</param>
+      <param name="pbeParameters">The password-based encryption (PBE) parameters to use when encrypting the key material.</param>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The key could not be exported.</exception>
+      <returns>A byte array containing the PKCS#8 EncryptedPrivateKeyInfo representation of this key.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.AsymmetricAlgorithm.ExportPkcs8PrivateKey">
+      <summary>Exports the current key in the PKCS#8 PrivateKeyInfo format.</summary>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The key could not be exported.</exception>
+      <returns>A byte array containing the PKCS#8 PrivateKeyInfo representation of this key.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.AsymmetricAlgorithm.ExportSubjectPublicKeyInfo">
+      <summary>Exports the public-key portion of the current key in the X.509 SubjectPublicKeyInfo format.</summary>
+      <returns>A byte array containing the X.509 SubjectPublicKeyInfo representation of the public-key portion of this key.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.AsymmetricAlgorithm.FromXmlString(System.String)">
+      <summary>When overridden in a derived class, reconstructs an <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> object from an XML string. Otherwise, throws a <see cref="T:System.NotImplementedException" />.</summary>
+      <param name="xmlString">The XML string to use to reconstruct the <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> object.</param>
+    </member>
+    <member name="M:System.Security.Cryptography.AsymmetricAlgorithm.ImportEncryptedPkcs8PrivateKey(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte},System.Int32@)">
+      <summary>When overridden in a derived class, imports the public/private keypair from a PKCS#8 EncryptedPrivateKeyInfo structure after decrypting with a byte-based password, replacing the keys for this object.</summary>
+      <param name="passwordBytes">The bytes to use as a password when decrypting the key material.</param>
+      <param name="source">The bytes of a PKCS#8 EncryptedPrivateKeyInfo structure in the ASN.1-BER encoding.</param>
+      <param name="bytesRead">When this method returns, contains a value that indicates the number of bytes read from <paramref name="source" />. This parameter is treated as uninitialized.</param>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The password is incorrect.
+
+-or-
+
+The contents of <paramref name="source" /> indicate the Key Derivation Function (KDF) to apply is the legacy PKCS#12 KDF, which requires <see cref="T:System.Char" />-based passwords.
+
+-or-
+
+The contents of <paramref name="source" /> do not represent an ASN.1-BER-encoded PKCS#8 EncryptedPrivateKeyInfo structure.
+
+-or-
+
+The contents of <paramref name="source" /> indicate the key is for an algorithm other than the algorithm represented by this instance.
+
+-or-
+
+The contents of <paramref name="source" /> represent the key in a format that is not supported.
+
+-or-
+
+The algorithm-specific key import failed.</exception>
+      <exception cref="T:System.NotImplementedException">A derived type has not overriden this member.</exception>
+    </member>
+    <member name="M:System.Security.Cryptography.AsymmetricAlgorithm.ImportEncryptedPkcs8PrivateKey(System.ReadOnlySpan{System.Char},System.ReadOnlySpan{System.Byte},System.Int32@)">
+      <summary>When overridden in a derived class, imports the public/private keypair from a PKCS#8 EncryptedPrivateKeyInfo structure after decrypting with a char-based password, replacing the keys for this object.</summary>
+      <param name="password">The password to use for decrypting the key material.</param>
+      <param name="source">The bytes of a PKCS#8 EncryptedPrivateKeyInfo structure in the ASN.1-BER encoding.</param>
+      <param name="bytesRead">When this method returns, contains a value that indicates the number of bytes read from <paramref name="source" />. This parameter is treated as uninitialized.</param>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The password is incorrect.
+
+-or-
+
+The contents of <paramref name="source" /> do not represent an ASN.1-BER-encoded PKCS#8 EncryptedPrivateKeyInfo structure.
+
+-or-
+
+The contents of <paramref name="source" /> indicate the key is for an algorithm other than the algorithm represented by this instance.
+
+-or-
+
+The contents of <paramref name="source" /> represent the key in a format that is not supported.
+
+-or-
+
+The algorithm-specific key import failed.</exception>
+      <exception cref="T:System.NotImplementedException">A derived type has not overriden this member.</exception>
+    </member>
+    <member name="M:System.Security.Cryptography.AsymmetricAlgorithm.ImportFromEncryptedPem(System.ReadOnlySpan{System.Char},System.ReadOnlySpan{System.Byte})">
+      <summary>When overridden in a derived class, imports an encrypted RFC 7468 PEM-encoded key, replacing the keys for this object.</summary>
+      <param name="input">The PEM text of the encrypted key to import.</param>
+      <param name="passwordBytes">The bytes to use as a password when decrypting the key material.</param>
+      <exception cref="T:System.NotImplementedException">A derived type has not overridden this member.</exception>
+    </member>
+    <member name="M:System.Security.Cryptography.AsymmetricAlgorithm.ImportFromEncryptedPem(System.ReadOnlySpan{System.Char},System.ReadOnlySpan{System.Char})">
+      <summary>When overridden in a derived class, imports an encrypted RFC 7468 PEM-encoded key, replacing the keys for this object.</summary>
+      <param name="input">The PEM text of the encrypted key to import.</param>
+      <param name="password">The password to use for decrypting the key material.</param>
+      <exception cref="T:System.NotImplementedException">A derived type has not overridden this member.</exception>
+    </member>
+    <member name="M:System.Security.Cryptography.AsymmetricAlgorithm.ImportFromPem(System.ReadOnlySpan{System.Char})">
+      <summary>When overridden in a derived class, imports an RFC 7468 textually encoded key, replacing the keys for this object.</summary>
+      <param name="input">The text of the PEM key to import.</param>
+      <exception cref="T:System.NotImplementedException">A derived type has not overridden this member.</exception>
+    </member>
+    <member name="M:System.Security.Cryptography.AsymmetricAlgorithm.ImportPkcs8PrivateKey(System.ReadOnlySpan{System.Byte},System.Int32@)">
+      <summary>When overriden in a derived class, imports the public/private keypair from a PKCS#8 PrivateKeyInfo structure after decryption, replacing the keys for this object.</summary>
+      <param name="source">The bytes of a PKCS#8 PrivateKeyInfo structure in the ASN.1-BER encoding.</param>
+      <param name="bytesRead">When this method returns, contains a value that indicates the number of bytes read from <paramref name="source" />. This parameter is treated as uninitialized.</param>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The contents of <paramref name="source" /> do not represent an ASN.1-BER-encoded PKCS#8 PrivateKeyInfo structure.
+
+-or-
+
+The contents of <paramref name="source" /> indicate the key is for an algorithm other than the algorithm represented by this instance.
+
+-or-
+
+The contents of <paramref name="source" /> represent the key in a format that is not supported.
+
+-or-
+
+The algorithm-specific key import failed.</exception>
+      <exception cref="T:System.NotImplementedException">A derived type has not overriden this member.</exception>
+    </member>
+    <member name="M:System.Security.Cryptography.AsymmetricAlgorithm.ImportSubjectPublicKeyInfo(System.ReadOnlySpan{System.Byte},System.Int32@)">
+      <summary>When overriden in a derived class, imports the public key from an X.509 SubjectPublicKeyInfo structure after decryption, replacing the keys for this object.</summary>
+      <param name="source">The bytes of an X.509 SubjectPublicKeyInfo structure in the ASN.1-DER encoding.</param>
+      <param name="bytesRead">When this method returns, contains a value that indicates the number of bytes read from <paramref name="source" />. This parameter is treated as uninitialized.</param>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The contents of <paramref name="source" /> do not represent an ASN.1-DER-encoded X.509 SubjectPublicKeyInfo structure.
+
+-or-
+
+The contents of <paramref name="source" /> indicate the key is for an algorithm other than the algorithm represented by this instance.
+
+-or-
+
+The contents of <paramref name="source" /> represent the key in a format that is not supported.
+
+-or-
+
+The algorithm-specific key import failed.</exception>
+      <exception cref="T:System.NotImplementedException">A derived type has not overriden this member.</exception>
+    </member>
+    <member name="M:System.Security.Cryptography.AsymmetricAlgorithm.ToXmlString(System.Boolean)">
+      <summary>When overridden in a derived class, creates and returns an XML string representation of the current <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> object. Otherwise, throws a <see cref="T:System.NotImplementedException" />.</summary>
+      <param name="includePrivateParameters">
+        <see langword="true" /> to include private parameters; otherwise, <see langword="false" />.</param>
+      <returns>An XML string encoding of the current <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm" /> object.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.AsymmetricAlgorithm.TryExportEncryptedPkcs8PrivateKey(System.ReadOnlySpan{System.Byte},System.Security.Cryptography.PbeParameters,System.Span{System.Byte},System.Int32@)">
+      <summary>When overridden in a derived class, attempts to export the current key in the PKCS#8 EncryptedPrivateKeyInfo format into a provided buffer, using a byte-based password.</summary>
+      <param name="passwordBytes">The bytes to use as a password when encrypting the key material.</param>
+      <param name="pbeParameters">The password-based encryption (PBE) parameters to use when encrypting the key material.</param>
+      <param name="destination">The byte span to receive the PKCS#8 EncryptedPrivateKeyInfo data.</param>
+      <param name="bytesWritten">When this method returns, contains a value that indicates the number of bytes written to <paramref name="destination" />. This parameter is treated as uninitialized.</param>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The key could not be exported.
+
+-or-
+
+<paramref name="pbeParameters" /> indicates that <see cref="F:System.Security.Cryptography.PbeEncryptionAlgorithm.TripleDes3KeyPkcs12" /> should be used, which requires <see cref="T:System.Char" />-based passwords.</exception>
+      <exception cref="T:System.NotImplementedException">A derived type has not overriden this member.</exception>
+      <returns>
+        <see langword="true" /> if <paramref name="destination" /> is big enough to receive the output; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.AsymmetricAlgorithm.TryExportEncryptedPkcs8PrivateKey(System.ReadOnlySpan{System.Char},System.Security.Cryptography.PbeParameters,System.Span{System.Byte},System.Int32@)">
+      <summary>When overriden in a derived class, attempts to export the current key in the PKCS#8 EncryptedPrivateKeyInfo format into a provided buffer, using a char-based password.</summary>
+      <param name="password">The password to use when encrypting the key material.</param>
+      <param name="pbeParameters">The password-based encryption (PBE) parameters to use when encrypting the key material.</param>
+      <param name="destination">The byte span to receive the PKCS#8 EncryptedPrivateKeyInfo data.</param>
+      <param name="bytesWritten">When this method returns, contains a value that indicates the number of bytes written to <paramref name="destination" />. This parameter is treated as uninitialized.</param>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The key could not be exported.</exception>
+      <exception cref="T:System.NotImplementedException">A derived type has not overriden this member.</exception>
+      <returns>
+        <see langword="true" /> if <paramref name="destination" /> is big enough to receive the output; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.AsymmetricAlgorithm.TryExportPkcs8PrivateKey(System.Span{System.Byte},System.Int32@)">
+      <summary>When overridden in a derived class, attempts to export the current key in the PKCS#8 PrivateKeyInfo format into a provided buffer.</summary>
+      <param name="destination">The byte span to receive the PKCS#8 PrivateKeyInfo data.</param>
+      <param name="bytesWritten">When this method returns, contains a value that indicates the number of bytes written to <paramref name="destination" />. This parameter is treated as uninitialized.</param>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The key could not be exported.</exception>
+      <exception cref="T:System.NotImplementedException">A derived type has not overriden this member.</exception>
+      <returns>
+        <see langword="true" /> if <paramref name="destination" /> is big enough to receive the output; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.AsymmetricAlgorithm.TryExportSubjectPublicKeyInfo(System.Span{System.Byte},System.Int32@)">
+      <summary>When overridden in a derived class, attempts to export the current key in the X.509 SubjectPublicKeyInfo format into a provided buffer.</summary>
+      <param name="destination">The byte span to receive the X.509 SubjectPublicKeyInfo data.</param>
+      <param name="bytesWritten">When this method returns, contains a value that indicates the number of bytes written to <paramref name="destination" />. This parameter is treated as uninitialized.</param>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The key could not be exported.</exception>
+      <exception cref="T:System.NotImplementedException">A derived type has not overriden this member.</exception>
+      <returns>
+        <see langword="true" /> if <paramref name="destination" /> is big enough to receive the output; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.AsymmetricAlgorithm.KeyExchangeAlgorithm">
+      <summary>When overridden in a derived class, gets the name of the key exchange algorithm. Otherwise, throws an <see cref="T:System.NotImplementedException" />.</summary>
+      <returns>The name of the key exchange algorithm.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.AsymmetricAlgorithm.KeySize">
+      <summary>Gets or sets the size, in bits, of the key modulus used by the asymmetric algorithm.</summary>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The key modulus size is invalid.</exception>
+      <returns>The size, in bits, of the key modulus used by the asymmetric algorithm.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.AsymmetricAlgorithm.LegalKeySizes">
+      <summary>Gets the key sizes that are supported by the asymmetric algorithm.</summary>
+      <returns>An array that contains the key sizes supported by the asymmetric algorithm.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.AsymmetricAlgorithm.SignatureAlgorithm">
+      <summary>When implemented in a derived class, gets the name of the signature algorithm. Otherwise, always throws a <see cref="T:System.NotImplementedException" />.</summary>
+      <returns>The name of the signature algorithm.</returns>
+    </member>
+    <member name="T:System.Security.Cryptography.CipherMode">
+      <summary>Specifies the block cipher mode to use for encryption.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.CipherMode.CBC">
+      <summary>The Cipher Block Chaining (<see langword="CBC" />) mode introduces feedback. Before each plain text block is encrypted, it is combined with the cipher text of the previous block by a bitwise exclusive OR operation. This ensures that even if the plain text contains many identical blocks, they will each encrypt to a different cipher text block. The initialization vector is combined with the first plain text block by a bitwise exclusive OR operation before the block is encrypted. If a single bit of the cipher text block is mangled, the corresponding plain text block will also be mangled. In addition, a bit in the subsequent block, in the same position as the original mangled bit, will be mangled.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.CipherMode.CFB">
+      <summary>The Cipher Feedback (<see langword="CFB" />) mode processes small increments of plain text into cipher text, instead of processing an entire block at a time. This mode uses a shift register that is one block in length and is divided into sections. For example, if the block size is 8 bytes, with one byte processed at a time, the shift register is divided into eight sections. If a bit in the cipher text is mangled, one plain text bit is mangled and the shift register is corrupted. This results in the next several plain text increments being mangled until the bad bit is shifted out of the shift register. The default feedback size can vary by algorithm, but is typically either 8 bits or the number of bits of the block size. You can alter the number of feedback bits by using the <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.FeedbackSize" /> property. Algorithms that support CFB use this property to set the feedback.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.CipherMode.CTS">
+      <summary>The Cipher Text Stealing (<see langword="CTS" />) mode handles any length of plain text and produces cipher text whose length matches the plain text length. This mode behaves like the <see langword="CBC" /> mode for all but the last two blocks of the plain text.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.CipherMode.ECB">
+      <summary>The Electronic Codebook (<see langword="ECB" />) mode encrypts each block individually. Any blocks of plain text that are identical and in the same message, or that are in a different message encrypted with the same key, will be transformed into identical cipher text blocks. Important:  This mode is not recommended because it opens the door for multiple security exploits. If the plain text to be encrypted contains substantial repetition, it is feasible for the cipher text to be broken one block at a time. It is also possible to use block analysis to determine the encryption key. Also, an active adversary can substitute and exchange individual blocks without detection, which allows blocks to be saved and inserted into the stream at other points without detection.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.CipherMode.OFB">
+      <summary>The Output Feedback (<see langword="OFB" />) mode processes small increments of plain text into cipher text instead of processing an entire block at a time. This mode is similar to <see langword="CFB" />; the only difference between the two modes is the way that the shift register is filled. If a bit in the cipher text is mangled, the corresponding bit of plain text will be mangled. However, if there are extra or missing bits from the cipher text, the plain text will be mangled from that point on.</summary>
+    </member>
+    <member name="T:System.Security.Cryptography.CryptographicOperations">
+      <summary>Provides methods for use in working with cryptography to reduce the risk of side-channel information leakage.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.CryptographicOperations.FixedTimeEquals(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte})">
+      <summary>Determines the equality of two byte sequences in an amount of time that depends on the length of the sequences, but not their values.</summary>
+      <param name="left">The first buffer to compare.</param>
+      <param name="right">The second buffer to compare.</param>
+      <returns>
+        <see langword="true" /> if <paramref name="left" /> and <paramref name="right" /> have the same values for <see cref="P:System.ReadOnlySpan`1.Length" /> and the same contents; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.CryptographicOperations.ZeroMemory(System.Span{System.Byte})">
+      <summary>Fills the provided buffer with zeros.</summary>
+      <param name="buffer">The buffer to fill with zeros.</param>
+    </member>
+    <member name="T:System.Security.Cryptography.CryptographicUnexpectedOperationException">
+      <summary>The exception that is thrown when an unexpected operation occurs during a cryptographic operation.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.CryptographicUnexpectedOperationException.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.CryptographicUnexpectedOperationException" /> class with default properties.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.CryptographicUnexpectedOperationException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+      <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.CryptographicUnexpectedOperationException" /> class with serialized data.</summary>
+      <param name="info">The object that holds the serialized object data.</param>
+      <param name="context">The contextual information about the source or destination.</param>
+    </member>
+    <member name="M:System.Security.Cryptography.CryptographicUnexpectedOperationException.#ctor(System.String)">
+      <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.CryptographicUnexpectedOperationException" /> class with a specified error message.</summary>
+      <param name="message">The error message that explains the reason for the exception.</param>
+    </member>
+    <member name="M:System.Security.Cryptography.CryptographicUnexpectedOperationException.#ctor(System.String,System.Exception)">
+      <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.CryptographicUnexpectedOperationException" /> class with a specified error message and a reference to the inner exception that is the cause of this exception.</summary>
+      <param name="message">The error message that explains the reason for the exception.</param>
+      <param name="inner">The exception that is the cause of the current exception. If the <paramref name="inner" /> parameter is not <see langword="null" />, the current exception is raised in a <see langword="catch" /> block that handles the inner exception.</param>
+    </member>
+    <member name="M:System.Security.Cryptography.CryptographicUnexpectedOperationException.#ctor(System.String,System.String)">
+      <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.CryptographicUnexpectedOperationException" /> class with a specified error message in the specified format.</summary>
+      <param name="format">The format used to output the error message.</param>
+      <param name="insert">The error message that explains the reason for the exception.</param>
+    </member>
+    <member name="T:System.Security.Cryptography.CryptoStream">
+      <summary>Defines a stream that links data streams to cryptographic transformations.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.CryptoStream.#ctor(System.IO.Stream,System.Security.Cryptography.ICryptoTransform,System.Security.Cryptography.CryptoStreamMode)">
+      <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.CryptoStream" /> class with a target data stream, the transformation to use, and the mode of the stream.</summary>
+      <param name="stream">The stream on which to perform the cryptographic transformation.</param>
+      <param name="transform">The cryptographic transformation that is to be performed on the stream.</param>
+      <param name="mode">One of the <see cref="T:System.Security.Cryptography.CryptoStreamMode" /> values.</param>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="stream" /> is invalid.</exception>
+    </member>
+    <member name="M:System.Security.Cryptography.CryptoStream.#ctor(System.IO.Stream,System.Security.Cryptography.ICryptoTransform,System.Security.Cryptography.CryptoStreamMode,System.Boolean)">
+      <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.CryptoStream" /> class.</summary>
+      <param name="stream">The stream on which to perform the cryptographic transformation.</param>
+      <param name="transform">The cryptographic transformation that is to be performed on the stream.</param>
+      <param name="mode">The mode of the stream.</param>
+      <param name="leaveOpen">
+        <see langword="true" /> to not close the underlying stream when the <see cref="T:System.Security.Cryptography.CryptoStream" /> object is disposed; otherwise, <see langword="false" />.</param>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="mode" /> is invalid.</exception>
+    </member>
+    <member name="M:System.Security.Cryptography.CryptoStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)">
+      <summary>Begins an asynchronous read operation. (Consider using <see cref="Overload:System.Security.Cryptography.CryptoStream.ReadAsync" /> instead.)</summary>
+      <param name="buffer">The buffer to read the data into.</param>
+      <param name="offset">The byte offset in <paramref name="buffer" /> at which to begin writing data read from the stream.</param>
+      <param name="count">The maximum number of bytes to read.</param>
+      <param name="callback">An optional asynchronous callback, to be called when the read is complete.</param>
+      <param name="state">A user-provided object that distinguishes this particular asynchronous read request from other requests.</param>
+      <exception cref="T:System.IO.IOException">Attempted an asynchronous read past the end of the stream, or a disk error occurred.</exception>
+      <exception cref="T:System.ArgumentException">One or more of the arguments is invalid.</exception>
+      <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed.</exception>
+      <exception cref="T:System.NotSupportedException">The current <see langword="Stream" /> implementation does not support the read operation.</exception>
+      <returns>An <see cref="T:System.IAsyncResult" /> that represents the asynchronous read, which could still be pending.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.CryptoStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)">
+      <summary>Begins an asynchronous write operation. (Consider using <see cref="Overload:System.Security.Cryptography.CryptoStream.WriteAsync" /> instead.)</summary>
+      <param name="buffer">The buffer to write data from.</param>
+      <param name="offset">The byte offset in <paramref name="buffer" /> from which to begin writing.</param>
+      <param name="count">The maximum number of bytes to write.</param>
+      <param name="callback">An optional asynchronous callback, to be called when the write is complete.</param>
+      <param name="state">A user-provided object that distinguishes this particular asynchronous write request from other requests.</param>
+      <exception cref="T:System.IO.IOException">Attempted an asynchronous write past the end of the stream, or a disk error occurred.</exception>
+      <exception cref="T:System.ArgumentException">One or more of the arguments is invalid.</exception>
+      <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed.</exception>
+      <exception cref="T:System.NotSupportedException">The current <see langword="Stream" /> implementation does not support the write operation.</exception>
+      <returns>An <see langword="IAsyncResult" /> that represents the asynchronous write, which could still be pending.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.CryptoStream.Clear">
+      <summary>Releases all resources used by the <see cref="T:System.Security.Cryptography.CryptoStream" />.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.CryptoStream.CopyTo(System.IO.Stream,System.Int32)">
+      <summary>Reads the bytes from the underlying stream, applies the relevant cryptographic transforms, and writes the result to the destination stream.</summary>
+      <param name="destination">The stream to which the contents of the current stream will be copied.</param>
+      <param name="bufferSize">The size, in bytes, of the buffer to use for reading from the underlying stream. This value must be greater than zero. The default size is 81920 bytes.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="destination" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="bufferSize" /> is negative or zero.</exception>
+      <exception cref="T:System.NotSupportedException">The current stream does not support reading.  
+  
+ -or-  
+  
+ <paramref name="destination" /> does not support writing.</exception>
+      <exception cref="T:System.ObjectDisposedException">Either the current stream or <paramref name="destination" /> were closed before the <see cref="M:System.IO.Stream.CopyTo(System.IO.Stream)" /> method was called.</exception>
+      <exception cref="T:System.IO.IOException">An I/O error occurred.</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">An error occurred during a cryptographic operation.</exception>
+    </member>
+    <member name="M:System.Security.Cryptography.CryptoStream.CopyToAsync(System.IO.Stream,System.Int32,System.Threading.CancellationToken)">
+      <summary>Asynchronously reads the bytes from the underlying stream, applies the relevant cryptographic transforms, and writes the result to the destination stream.</summary>
+      <param name="destination">The stream to which the contents of the current stream will be copied.</param>
+      <param name="bufferSize">The size, in bytes, of the buffer. This value must be greater than zero. The default size is 81920.</param>
+      <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None" />.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="destination" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="buffersize" /> is negative or zero.</exception>
+      <exception cref="T:System.ObjectDisposedException">Either the current stream or the destination stream is disposed.</exception>
+      <exception cref="T:System.NotSupportedException">The current stream does not support reading, or the destination stream does not support writing.</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">An error occurred during a cryptographic operation.</exception>
+      <returns>A task that represents the asynchronous copy operation.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.CryptoStream.Dispose(System.Boolean)">
+      <summary>Releases the unmanaged resources used by the <see cref="T:System.Security.Cryptography.CryptoStream" /> and optionally releases the managed resources.</summary>
+      <param name="disposing">
+        <see langword="true" /> to release both managed and unmanaged resources; <see langword="false" /> to release only unmanaged resources.</param>
+    </member>
+    <member name="M:System.Security.Cryptography.CryptoStream.DisposeAsync">
+      <summary>Asynchronously releases the unmanaged resources used by the <see cref="T:System.Security.Cryptography.CryptoStream" />.</summary>
+      <returns>A task that represents the asynchronous dispose operation.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.CryptoStream.EndRead(System.IAsyncResult)">
+      <summary>Waits for the pending asynchronous read to complete. (Consider using <see cref="Overload:System.Security.Cryptography.CryptoStream.ReadAsync" /> instead.)</summary>
+      <param name="asyncResult">The reference to the pending asynchronous request to finish.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="asyncResult" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.ArgumentException">A handle to the pending read operation is not available.  
+  
+ -or-  
+  
+ The pending operation does not support reading.</exception>
+      <exception cref="T:System.InvalidOperationException">
+        <paramref name="asyncResult" /> did not originate from a <see cref="M:System.Security.Cryptography.CryptoStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" /> method on the current stream.</exception>
+      <exception cref="T:System.IO.IOException">The stream is closed or an internal error has occurred.</exception>
+      <returns>The number of bytes read from the stream, between zero (0) and the number of bytes you requested. Streams return zero (0) only at the end of the stream, otherwise, they should block until at least one byte is available.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.CryptoStream.EndWrite(System.IAsyncResult)">
+      <summary>Ends an asynchronous write operation. (Consider using <see cref="Overload:System.Security.Cryptography.CryptoStream.WriteAsync" /> instead.)</summary>
+      <param name="asyncResult">A reference to the outstanding asynchronous I/O request.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="asyncResult" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.ArgumentException">A handle to the pending write operation is not available.  
+  
+ -or-  
+  
+ The pending operation does not support writing.</exception>
+      <exception cref="T:System.InvalidOperationException">
+        <paramref name="asyncResult" /> did not originate from a <see cref="M:System.IO.Stream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" /> method on the current stream.</exception>
+      <exception cref="T:System.IO.IOException">The stream is closed or an internal error has occurred.</exception>
+    </member>
+    <member name="M:System.Security.Cryptography.CryptoStream.Flush">
+      <summary>Clears all buffers for the current stream and causes any buffered data to be written to the underlying device.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.CryptoStream.FlushAsync(System.Threading.CancellationToken)">
+      <summary>Clears all buffers for the current stream asynchronously, causes any buffered data to be written to the underlying device, and monitors cancellation requests.</summary>
+      <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None" />.</param>
+      <exception cref="T:System.ObjectDisposedException">The stream has been disposed.</exception>
+      <returns>A task that represents the asynchronous flush operation.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.CryptoStream.FlushFinalBlock">
+      <summary>Updates the underlying data source or repository with the current state of the buffer, then clears the buffer.</summary>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The key is corrupt which can cause invalid padding to the stream.</exception>
+      <exception cref="T:System.NotSupportedException">The current stream is not writable.  
+  
+ -or-  
+  
+ The final block has already been transformed.</exception>
+    </member>
+    <member name="M:System.Security.Cryptography.CryptoStream.FlushFinalBlockAsync(System.Threading.CancellationToken)">
+      <summary>Asynchronously updates the underlying data source or repository with the current state of the buffer, then clears the buffer.</summary>
+      <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None" />.</param>
+      <returns>A task that represents the asynchronous flush operation.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.CryptoStream.Read(System.Byte[],System.Int32,System.Int32)">
+      <summary>Reads a sequence of bytes from the current stream and advances the position within the stream by the number of bytes read.</summary>
+      <param name="buffer">An array of bytes. A maximum of <paramref name="count" /> bytes are read from the current stream and stored in <paramref name="buffer" />.</param>
+      <param name="offset">The byte offset in <paramref name="buffer" /> at which to begin storing the data read from the current stream.</param>
+      <param name="count">The maximum number of bytes to be read from the current stream.</param>
+      <exception cref="T:System.NotSupportedException">The <see cref="T:System.Security.Cryptography.CryptoStreamMode" /> associated with current <see cref="T:System.Security.Cryptography.CryptoStream" /> object does not match the underlying stream.  For example, this exception is thrown when using <see cref="F:System.Security.Cryptography.CryptoStreamMode.Read" /> with an underlying stream that is write only.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">The <paramref name="offset" /> parameter is less than zero.  
+  
+ -or-  
+  
+ The <paramref name="count" /> parameter is less than zero.</exception>
+      <exception cref="T:System.ArgumentException">The sum of the <paramref name="count" /> and <paramref name="offset" /> parameters is longer than the length of the buffer.</exception>
+      <returns>The total number of bytes read into the buffer. This can be less than the number of bytes requested if that many bytes are not currently available, or zero if the end of the stream has been reached.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.CryptoStream.ReadAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)">
+      <summary>Reads a sequence of bytes from the current stream asynchronously, advances the position within the stream by the number of bytes read, and monitors cancellation requests.</summary>
+      <param name="buffer">The buffer to write the data into.</param>
+      <param name="offset">The byte offset in <paramref name="buffer" /> at which to begin writing data from the stream.</param>
+      <param name="count">The maximum number of bytes to read.</param>
+      <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None" />.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="offset" /> or <paramref name="count" /> is negative.</exception>
+      <exception cref="T:System.ArgumentException">The sum of <paramref name="offset" /> and <paramref name="count" /> is larger than the buffer length.</exception>
+      <exception cref="T:System.NotSupportedException">The stream does not support reading.</exception>
+      <exception cref="T:System.ObjectDisposedException">The stream has been disposed.</exception>
+      <exception cref="T:System.InvalidOperationException">The stream is currently in use by a previous read operation.</exception>
+      <returns>A task that represents the asynchronous read operation. The value of the task object's <paramref name="TResult" /> parameter contains the total number of bytes read into the buffer. The result can be less than the number of bytes requested if the number of bytes currently available is less than the requested number, or it can be 0 (zero) if the end of the stream has been reached.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.CryptoStream.ReadAsync(System.Memory{System.Byte},System.Threading.CancellationToken)">
+      <summary>Asynchronously reads a sequence of bytes from the current stream, advances the position within the stream by the number of bytes read, and monitors cancellation requests.</summary>
+      <param name="buffer">The region of memory to write the data into.</param>
+      <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None" />.</param>
+      <exception cref="T:System.NotSupportedException">The <see cref="T:System.Security.Cryptography.CryptoStreamMode" /> associated with current <see cref="T:System.Security.Cryptography.CryptoStream" /> object does not match the underlying stream.  For example, this exception is thrown when using <see cref="F:System.Security.Cryptography.CryptoStreamMode.Read" /> with an underlying stream that is write only.</exception>
+      <returns>A task that represents the asynchronous read operation. The value of its <see cref="P:System.Threading.Tasks.ValueTask`1.Result" /> property contains the total number of bytes read into the buffer. The result value can be less than the number of bytes allocated in the buffer if that many bytes are not currently available, or it can be 0 (zero) if the end of the stream has been reached.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.CryptoStream.ReadByte">
+      <summary>Reads a byte from the stream and advances the position within the stream by one byte, or returns -1 if at the end of the stream.</summary>
+      <exception cref="T:System.NotSupportedException">The stream does not support reading.</exception>
+      <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed.</exception>
+      <returns>The unsigned byte cast to an <see cref="T:System.Int32" />, or -1 if at the end of the stream.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.CryptoStream.Seek(System.Int64,System.IO.SeekOrigin)">
+      <summary>Sets the position within the current stream.</summary>
+      <param name="offset">A byte offset relative to the <paramref name="origin" /> parameter.</param>
+      <param name="origin">A <see cref="T:System.IO.SeekOrigin" /> object indicating the reference point used to obtain the new position.</param>
+      <exception cref="T:System.NotSupportedException">This method is not supported.</exception>
+      <returns>This method is not supported.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.CryptoStream.SetLength(System.Int64)">
+      <summary>Sets the length of the current stream.</summary>
+      <param name="value">The desired length of the current stream in bytes.</param>
+      <exception cref="T:System.NotSupportedException">This property exists only to support inheritance from <see cref="T:System.IO.Stream" />, and cannot be used.</exception>
+    </member>
+    <member name="M:System.Security.Cryptography.CryptoStream.Write(System.Byte[],System.Int32,System.Int32)">
+      <summary>Writes a sequence of bytes to the current <see cref="T:System.Security.Cryptography.CryptoStream" /> and advances the current position within the stream by the number of bytes written.</summary>
+      <param name="buffer">An array of bytes. This method copies <paramref name="count" /> bytes from <paramref name="buffer" /> to the current stream.</param>
+      <param name="offset">The byte offset in <paramref name="buffer" /> at which to begin copying bytes to the current stream.</param>
+      <param name="count">The number of bytes to be written to the current stream.</param>
+      <exception cref="T:System.NotSupportedException">The <see cref="T:System.Security.Cryptography.CryptoStreamMode" /> associated with current <see cref="T:System.Security.Cryptography.CryptoStream" /> object does not match the underlying stream.  For example, this exception is thrown when using <see cref="F:System.Security.Cryptography.CryptoStreamMode.Write" /> with an underlying stream that is read only.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">The <paramref name="offset" /> parameter is less than zero.  
+  
+ -or-  
+  
+ The <paramref name="count" /> parameter is less than zero.</exception>
+      <exception cref="T:System.ArgumentException">The sum of the <paramref name="count" /> and <paramref name="offset" /> parameters is longer than the length of the buffer.</exception>
+    </member>
+    <member name="M:System.Security.Cryptography.CryptoStream.WriteAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)">
+      <summary>Writes a sequence of bytes to the current stream asynchronously, advances the current position within the stream by the number of bytes written, and monitors cancellation requests.</summary>
+      <param name="buffer">The buffer to write data from.</param>
+      <param name="offset">The zero-based byte offset in <paramref name="buffer" /> from which to begin writing bytes to the stream.</param>
+      <param name="count">The maximum number of bytes to write.</param>
+      <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None" />.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="offset" /> or <paramref name="count" /> is negative.</exception>
+      <exception cref="T:System.ArgumentException">The sum of <paramref name="offset" /> and <paramref name="count" /> is larger than the buffer length.</exception>
+      <exception cref="T:System.NotSupportedException">The stream does not support writing.</exception>
+      <exception cref="T:System.ObjectDisposedException">The stream has been disposed.</exception>
+      <exception cref="T:System.InvalidOperationException">The stream is currently in use by a previous write operation.</exception>
+      <returns>A task that represents the asynchronous write operation.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.CryptoStream.WriteAsync(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)">
+      <summary>Asynchronously writes a sequence of bytes to the current stream, advances the current position within this stream by the number of bytes written, and monitors cancellation requests.</summary>
+      <param name="buffer">The region of memory to write data from.</param>
+      <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None" />.</param>
+      <exception cref="T:System.NotSupportedException">The <see cref="T:System.Security.Cryptography.CryptoStreamMode" /> associated with current <see cref="T:System.Security.Cryptography.CryptoStream" /> object does not match the underlying stream.  For example, this exception is thrown when using <see cref="F:System.Security.Cryptography.CryptoStreamMode.Write" /> with an underlying stream that is read only.</exception>
+      <returns>A task that represents the asynchronous write operation.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.CryptoStream.WriteByte(System.Byte)">
+      <summary>Writes a byte to the current position in the stream and advances the position within the stream by one byte.</summary>
+      <param name="value">The byte to write to the stream.</param>
+      <exception cref="T:System.IO.IOException">An I/O error occurs.</exception>
+      <exception cref="T:System.NotSupportedException">The stream does not support writing, or the stream is already closed.</exception>
+      <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed.</exception>
+    </member>
+    <member name="P:System.Security.Cryptography.CryptoStream.CanRead">
+      <summary>Gets a value indicating whether the current <see cref="T:System.Security.Cryptography.CryptoStream" /> is readable.</summary>
+      <returns>
+        <see langword="true" /> if the current stream is readable; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.CryptoStream.CanSeek">
+      <summary>Gets a value indicating whether you can seek within the current <see cref="T:System.Security.Cryptography.CryptoStream" />.</summary>
+      <returns>Always <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.CryptoStream.CanWrite">
+      <summary>Gets a value indicating whether the current <see cref="T:System.Security.Cryptography.CryptoStream" /> is writable.</summary>
+      <returns>
+        <see langword="true" /> if the current stream is writable; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.CryptoStream.HasFlushedFinalBlock">
+      <summary>Gets a value indicating whether the final buffer block has been written to the underlying stream.</summary>
+      <returns>
+        <see langword="true" /> if the final block has been flushed; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.CryptoStream.Length">
+      <summary>Gets the length in bytes of the stream.</summary>
+      <exception cref="T:System.NotSupportedException">This property is not supported.</exception>
+      <returns>This property is not supported.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.CryptoStream.Position">
+      <summary>Gets or sets the position within the current stream.</summary>
+      <exception cref="T:System.NotSupportedException">This property is not supported.</exception>
+      <returns>This property is not supported.</returns>
+    </member>
+    <member name="T:System.Security.Cryptography.CryptoStreamMode">
+      <summary>Specifies the mode of a cryptographic stream.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.CryptoStreamMode.Read">
+      <summary>Read access to a cryptographic stream.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.CryptoStreamMode.Write">
+      <summary>Write access to a cryptographic stream.</summary>
+    </member>
+    <member name="T:System.Security.Cryptography.HashAlgorithm">
+      <summary>Represents the base class from which all implementations of cryptographic hash algorithms must derive.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.HashAlgorithm.HashSizeValue">
+      <summary>Represents the size, in bits, of the computed hash code.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.HashAlgorithm.HashValue">
+      <summary>Represents the value of the computed hash code.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.HashAlgorithm.State">
+      <summary>Represents the state of the hash computation.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.HashAlgorithm.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.HashAlgorithm" /> class.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.HashAlgorithm.Clear">
+      <summary>Releases all resources used by the <see cref="T:System.Security.Cryptography.HashAlgorithm" /> class.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.HashAlgorithm.ComputeHash(System.Byte[])">
+      <summary>Computes the hash value for the specified byte array.</summary>
+      <param name="buffer">The input to compute the hash code for.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.ObjectDisposedException">The object has already been disposed.</exception>
+      <returns>The computed hash code.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.HashAlgorithm.ComputeHash(System.Byte[],System.Int32,System.Int32)">
+      <summary>Computes the hash value for the specified region of the specified byte array.</summary>
+      <param name="buffer">The input to compute the hash code for.</param>
+      <param name="offset">The offset into the byte array from which to begin using data.</param>
+      <param name="count">The number of bytes in the array to use as data.</param>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="count" /> is an invalid value.
+
+ -or-
+
+ <paramref name="buffer" /> length is invalid.</exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="buffer" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="offset" /> is out of range. This parameter requires a non-negative number.</exception>
+      <exception cref="T:System.ObjectDisposedException">The object has already been disposed.</exception>
+      <returns>The computed hash code.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.HashAlgorithm.ComputeHash(System.IO.Stream)">
+      <summary>Computes the hash value for the specified <see cref="T:System.IO.Stream" /> object.</summary>
+      <param name="inputStream">The input to compute the hash code for.</param>
+      <exception cref="T:System.ObjectDisposedException">The object has already been disposed.</exception>
+      <returns>The computed hash code.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.HashAlgorithm.ComputeHashAsync(System.IO.Stream,System.Threading.CancellationToken)">
+      <summary>Asynchronously computes the hash value for the specified <see cref="T:System.IO.Stream" /> object.</summary>
+      <param name="inputStream">The input to compute the hash code for.</param>
+      <param name="cancellationToken">The token to monitor for cancellation requests.</param>
+      <returns>A task that represents the asynchronous compute hash operation and wraps the computed hash code.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.HashAlgorithm.Create">
+      <summary>Creates an instance of the default implementation of a hash algorithm.</summary>
+      <exception cref="T:System.PlatformNotSupportedException">.NET Core 2.0 - 3.1 and .NET 5.0 and later: In all cases.</exception>
+      <returns>A new <see cref="T:System.Security.Cryptography.SHA1CryptoServiceProvider" /> instance, unless the default settings have been changed using the .</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.HashAlgorithm.Create(System.String)">
+      <summary>Creates an instance of the specified implementation of a hash algorithm.</summary>
+      <param name="hashName">The hash algorithm implementation to use. The following table shows the valid values for the <paramref name="hashName" /> parameter and the algorithms they map to.
+
+ <list type="table"><listheader><term> Parameter value</term><description> Implements</description></listheader><item><term> SHA</term><description><see cref="T:System.Security.Cryptography.SHA1CryptoServiceProvider" /></description></item><item><term> SHA1</term><description><see cref="T:System.Security.Cryptography.SHA1CryptoServiceProvider" /></description></item><item><term> System.Security.Cryptography.SHA1</term><description><see cref="T:System.Security.Cryptography.SHA1CryptoServiceProvider" /></description></item><item><term> System.Security.Cryptography.HashAlgorithm</term><description><see cref="T:System.Security.Cryptography.SHA1CryptoServiceProvider" /></description></item><item><term> MD5</term><description><see cref="T:System.Security.Cryptography.MD5CryptoServiceProvider" /></description></item><item><term> System.Security.Cryptography.MD5</term><description><see cref="T:System.Security.Cryptography.MD5CryptoServiceProvider" /></description></item><item><term> SHA256</term><description><see cref="T:System.Security.Cryptography.SHA256Managed" /></description></item><item><term> SHA-256</term><description><see cref="T:System.Security.Cryptography.SHA256Managed" /></description></item><item><term> System.Security.Cryptography.SHA256</term><description><see cref="T:System.Security.Cryptography.SHA256Managed" /></description></item><item><term> SHA384</term><description><see cref="T:System.Security.Cryptography.SHA384Managed" /></description></item><item><term> SHA-384</term><description><see cref="T:System.Security.Cryptography.SHA384Managed" /></description></item><item><term> System.Security.Cryptography.SHA384</term><description><see cref="T:System.Security.Cryptography.SHA384Managed" /></description></item><item><term> SHA512</term><description><see cref="T:System.Security.Cryptography.SHA512Managed" /></description></item><item><term> SHA-512</term><description><see cref="T:System.Security.Cryptography.SHA512Managed" /></description></item><item><term> System.Security.Cryptography.SHA512</term><description><see cref="T:System.Security.Cryptography.SHA512Managed" /></description></item></list></param>
+      <returns>A new instance of the specified hash algorithm, or <see langword="null" /> if <paramref name="hashName" /> is not a valid hash algorithm.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.HashAlgorithm.Dispose">
+      <summary>Releases all resources used by the current instance of the <see cref="T:System.Security.Cryptography.HashAlgorithm" /> class.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.HashAlgorithm.Dispose(System.Boolean)">
+      <summary>Releases the unmanaged resources used by the <see cref="T:System.Security.Cryptography.HashAlgorithm" /> and optionally releases the managed resources.</summary>
+      <param name="disposing">
+        <see langword="true" /> to release both managed and unmanaged resources; <see langword="false" /> to release only unmanaged resources.</param>
+    </member>
+    <member name="M:System.Security.Cryptography.HashAlgorithm.HashCore(System.Byte[],System.Int32,System.Int32)">
+      <summary>When overridden in a derived class, routes data written to the object into the hash algorithm for computing the hash.</summary>
+      <param name="array">The input to compute the hash code for.</param>
+      <param name="ibStart">The offset into the byte array from which to begin using data.</param>
+      <param name="cbSize">The number of bytes in the byte array to use as data.</param>
+    </member>
+    <member name="M:System.Security.Cryptography.HashAlgorithm.HashCore(System.ReadOnlySpan{System.Byte})">
+      <summary>Routes data written to the object into the hash algorithm for computing the hash.</summary>
+      <param name="source">The input to compute the hash code for.</param>
+    </member>
+    <member name="M:System.Security.Cryptography.HashAlgorithm.HashFinal">
+      <summary>When overridden in a derived class, finalizes the hash computation after the last data is processed by the cryptographic hash algorithm.</summary>
+      <returns>The computed hash code.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.HashAlgorithm.Initialize">
+      <summary>Resets the hash algorithm to its initial state.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.HashAlgorithm.TransformBlock(System.Byte[],System.Int32,System.Int32,System.Byte[],System.Int32)">
+      <summary>Computes the hash value for the specified region of the input byte array and copies the specified region of the input byte array to the specified region of the output byte array.</summary>
+      <param name="inputBuffer">The input to compute the hash code for.</param>
+      <param name="inputOffset">The offset into the input byte array from which to begin using data.</param>
+      <param name="inputCount">The number of bytes in the input byte array to use as data.</param>
+      <param name="outputBuffer">A copy of the part of the input array used to compute the hash code.</param>
+      <param name="outputOffset">The offset into the output byte array from which to begin writing data.</param>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="inputCount" /> uses an invalid value.
+
+ -or-
+
+ <paramref name="inputBuffer" /> has an invalid length.</exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="inputBuffer" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="inputOffset" /> is out of range. This parameter requires a non-negative number.</exception>
+      <exception cref="T:System.ObjectDisposedException">The object has already been disposed.</exception>
+      <returns>The number of bytes written.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.HashAlgorithm.TransformFinalBlock(System.Byte[],System.Int32,System.Int32)">
+      <summary>Computes the hash value for the specified region of the specified byte array.</summary>
+      <param name="inputBuffer">The input to compute the hash code for.</param>
+      <param name="inputOffset">The offset into the byte array from which to begin using data.</param>
+      <param name="inputCount">The number of bytes in the byte array to use as data.</param>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="inputCount" /> uses an invalid value.
+
+ -or-
+
+ <paramref name="inputBuffer" /> has an invalid offset length.</exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="inputBuffer" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="inputOffset" /> is out of range. This parameter requires a non-negative number.</exception>
+      <exception cref="T:System.ObjectDisposedException">The object has already been disposed.</exception>
+      <returns>An array that is a copy of the part of the input that is hashed.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.HashAlgorithm.TryComputeHash(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32@)">
+      <summary>Attempts to compute the hash value for the specified byte array.</summary>
+      <param name="source">The input to compute the hash code for.</param>
+      <param name="destination">The buffer to receive the hash value.</param>
+      <param name="bytesWritten">When this method returns, the total number of bytes written into <paramref name="destination" />. This parameter is treated as uninitialized.</param>
+      <returns>
+        <see langword="true" /> if <paramref name="destination" /> is long enough to receive the hash value; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.HashAlgorithm.TryHashFinal(System.Span{System.Byte},System.Int32@)">
+      <summary>Attempts to finalize the hash computation after the last data is processed by the hash algorithm.</summary>
+      <param name="destination">The buffer to receive the hash value.</param>
+      <param name="bytesWritten">When this method returns, the total number of bytes written into <paramref name="destination" />. This parameter is treated as uninitialized.</param>
+      <returns>
+        <see langword="true" /> if <paramref name="destination" /> is long enough to receive the hash value; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.HashAlgorithm.CanReuseTransform">
+      <summary>Gets a value indicating whether the current transform can be reused.</summary>
+      <returns>Always <see langword="true" />.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.HashAlgorithm.CanTransformMultipleBlocks">
+      <summary>When overridden in a derived class, gets a value indicating whether multiple blocks can be transformed.</summary>
+      <returns>
+        <see langword="true" /> if multiple blocks can be transformed; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.HashAlgorithm.Hash">
+      <summary>Gets the value of the computed hash code.</summary>
+      <exception cref="T:System.Security.Cryptography.CryptographicUnexpectedOperationException">
+        <see cref="F:System.Security.Cryptography.HashAlgorithm.HashValue" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.ObjectDisposedException">The object has already been disposed.</exception>
+      <returns>The current value of the computed hash code.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.HashAlgorithm.HashSize">
+      <summary>Gets the size, in bits, of the computed hash code.</summary>
+      <returns>The size, in bits, of the computed hash code.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.HashAlgorithm.InputBlockSize">
+      <summary>When overridden in a derived class, gets the input block size.</summary>
+      <returns>The input block size.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.HashAlgorithm.OutputBlockSize">
+      <summary>When overridden in a derived class, gets the output block size.</summary>
+      <returns>The output block size.</returns>
+    </member>
+    <member name="T:System.Security.Cryptography.HashAlgorithmName">
+      <summary>Specifies the name of a cryptographic hash algorithm.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.HashAlgorithmName.#ctor(System.String)">
+      <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.HashAlgorithmName" /> structure with a custom name.</summary>
+      <param name="name">The custom hash algorithm name.</param>
+    </member>
+    <member name="M:System.Security.Cryptography.HashAlgorithmName.Equals(System.Object)">
+      <summary>Returns a value that indicates whether the current instance and a specified object are equal.</summary>
+      <param name="obj">The object to compare with the current instance.</param>
+      <returns>
+        <see langword="true" /> if <paramref name="obj" /> is a <see cref="T:System.Security.Cryptography.HashAlgorithmName" /> object and its <see cref="P:System.Security.Cryptography.HashAlgorithmName.Name" /> property is equal to that of the current instance. The comparison is ordinal and case-sensitive.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.HashAlgorithmName.Equals(System.Security.Cryptography.HashAlgorithmName)">
+      <summary>Returns a value that indicates whether two <see cref="T:System.Security.Cryptography.HashAlgorithmName" /> instances are equal.</summary>
+      <param name="other">The object to compare with the current instance.</param>
+      <returns>
+        <see langword="true" /> if the <see cref="P:System.Security.Cryptography.HashAlgorithmName.Name" /> property of <paramref name="other" /> is equal to that of the current instance. The comparison is ordinal and case-sensitive.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.HashAlgorithmName.FromOid(System.String)">
+      <summary>Converts the specified OID to a hash algorithm name.</summary>
+      <param name="oidValue">The OID of the hash algorithm.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="oidValue" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">
+        <paramref name="oidValue" /> does not represent a known hash algorithm.</exception>
+      <returns>The hash algorithm name identified by the OID.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.HashAlgorithmName.GetHashCode">
+      <summary>Returns the hash code for the current instance.</summary>
+      <returns>The hash code for the current instance, or 0 if no <paramref name="name" /> value was supplied to the <see cref="T:System.Security.Cryptography.HashAlgorithmName" /> constructor.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.HashAlgorithmName.op_Equality(System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.HashAlgorithmName)">
+      <summary>Determines whether two specified <see cref="T:System.Security.Cryptography.HashAlgorithmName" /> objects are equal.</summary>
+      <param name="left">The first object to compare.</param>
+      <param name="right">The second object to compare.</param>
+      <returns>
+        <see langword="true" /> if both <paramref name="left" /> and <paramref name="right" /> have the same <see cref="P:System.Security.Cryptography.HashAlgorithmName.Name" /> value; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.HashAlgorithmName.op_Inequality(System.Security.Cryptography.HashAlgorithmName,System.Security.Cryptography.HashAlgorithmName)">
+      <summary>Determines whether two specified <see cref="T:System.Security.Cryptography.HashAlgorithmName" /> objects are not equal.</summary>
+      <param name="left">The first object to compare.</param>
+      <param name="right">The second object to compare.</param>
+      <returns>
+        <see langword="true" /> if both <paramref name="left" /> and <paramref name="right" /> do not have the same <see cref="P:System.Security.Cryptography.HashAlgorithmName.Name" /> value; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.HashAlgorithmName.ToString">
+      <summary>Returns the string representation of the current <see cref="T:System.Security.Cryptography.HashAlgorithmName" /> instance.</summary>
+      <returns>The string representation of the current <see cref="T:System.Security.Cryptography.HashAlgorithmName" /> instance.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.HashAlgorithmName.TryFromOid(System.String,System.Security.Cryptography.HashAlgorithmName@)">
+      <summary>Tries to convert the specified OID to a hash algorithm name.</summary>
+      <param name="oidValue">The OID of the hash algorithm.</param>
+      <param name="value">When this method returns <see langword="true" />, the hash algorithm. When this method returns <see langword="false" />, contains <c>default</c>.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="oidValue" /> is <see langword="null" />.</exception>
+      <returns>
+        <see langword="true" /> if the OID was successfully mapped to a hash algorithm; otherwise <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.HashAlgorithmName.MD5">
+      <summary>Gets a hash algorithm name that represents "MD5".</summary>
+      <returns>A hash algorithm name that represents "MD5".</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.HashAlgorithmName.Name">
+      <summary>Gets the underlying string representation of the algorithm name.</summary>
+      <returns>The string representation of the algorithm name, or <see langword="default" /> if no hash algorithm is available.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.HashAlgorithmName.SHA1">
+      <summary>Gets a hash algorithm name that represents "SHA1".</summary>
+      <returns>A hash algorithm name that represents "SHA1".</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.HashAlgorithmName.SHA256">
+      <summary>Gets a hash algorithm name that represents "SHA256".</summary>
+      <returns>A hash algorithm name that represents "SHA256".</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.HashAlgorithmName.SHA384">
+      <summary>Gets a hash algorithm name that represents "SHA384".</summary>
+      <returns>A hash algorithm name that represents "SHA384".</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.HashAlgorithmName.SHA512">
+      <summary>Gets a hash algorithm name that represents "SHA512".</summary>
+      <returns>A hash algorithm name that represents "SHA512".</returns>
+    </member>
+    <member name="T:System.Security.Cryptography.HMAC">
+      <summary>Represents the abstract class from which all implementations of Hash-based Message Authentication Code (HMAC) must derive.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.HMAC.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.HMAC" /> class.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.HMAC.Create">
+      <summary>Creates an instance of the default implementation of a Hash-based Message Authentication Code (HMAC).</summary>
+      <exception cref="T:System.PlatformNotSupportedException">.NET Core 2.0 - 3.1 and .NET 5.0 and later: In all cases.</exception>
+      <returns>A new SHA-1 instance, unless the default settings have been changed by using the &lt;cryptoClass&gt; element.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.HMAC.Create(System.String)">
+      <summary>Creates an instance of the specified implementation of a Hash-based Message Authentication Code (HMAC).</summary>
+      <param name="algorithmName">The HMAC implementation to use. The following table shows the valid values for the <paramref name="algorithmName" /> parameter and the algorithms they map to.
+
+ <list type="table"><listheader><term> Parameter value</term><description> Implements</description></listheader><item><term> System.Security.Cryptography.HMAC</term><description><see cref="T:System.Security.Cryptography.HMACSHA1" /></description></item><item><term> System.Security.Cryptography.KeyedHashAlgorithm</term><description><see cref="T:System.Security.Cryptography.HMACSHA1" /></description></item><item><term> HMACMD5</term><description><see cref="T:System.Security.Cryptography.HMACMD5" /></description></item><item><term> System.Security.Cryptography.HMACMD5</term><description><see cref="T:System.Security.Cryptography.HMACMD5" /></description></item><item><term> HMACRIPEMD160</term><description><see cref="T:System.Security.Cryptography.HMACRIPEMD160" /></description></item><item><term> System.Security.Cryptography.HMACRIPEMD160</term><description><see cref="T:System.Security.Cryptography.HMACRIPEMD160" /></description></item><item><term> HMACSHA1</term><description><see cref="T:System.Security.Cryptography.HMACSHA1" /></description></item><item><term> System.Security.Cryptography.HMACSHA1</term><description><see cref="T:System.Security.Cryptography.HMACSHA1" /></description></item><item><term> HMACSHA256</term><description><see cref="T:System.Security.Cryptography.HMACSHA256" /></description></item><item><term> System.Security.Cryptography.HMACSHA256</term><description><see cref="T:System.Security.Cryptography.HMACSHA256" /></description></item><item><term> HMACSHA384</term><description><see cref="T:System.Security.Cryptography.HMACSHA384" /></description></item><item><term> System.Security.Cryptography.HMACSHA384</term><description><see cref="T:System.Security.Cryptography.HMACSHA384" /></description></item><item><term> HMACSHA512</term><description><see cref="T:System.Security.Cryptography.HMACSHA512" /></description></item><item><term> System.Security.Cryptography.HMACSHA512</term><description><see cref="T:System.Security.Cryptography.HMACSHA512" /></description></item><item><term> MACTripleDES</term><description><see cref="T:System.Security.Cryptography.MACTripleDES" /></description></item><item><term> System.Security.Cryptography.MACTripleDES</term><description><see cref="T:System.Security.Cryptography.MACTripleDES" /></description></item></list></param>
+      <returns>A new instance of the specified HMAC implementation.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.HMAC.Dispose(System.Boolean)">
+      <summary>Releases the unmanaged resources used by the <see cref="T:System.Security.Cryptography.HMAC" /> class when a key change is legitimate and optionally releases the managed resources.</summary>
+      <param name="disposing">
+        <see langword="true" /> to release both managed and unmanaged resources; <see langword="false" /> to release only unmanaged resources.</param>
+    </member>
+    <member name="M:System.Security.Cryptography.HMAC.HashCore(System.Byte[],System.Int32,System.Int32)">
+      <summary>When overridden in a derived class, routes data written to the object into the HMAC algorithm for computing the HMAC value.</summary>
+      <param name="rgb">The input data.</param>
+      <param name="ib">The offset into the byte array from which to begin using data.</param>
+      <param name="cb">The number of bytes in the array to use as data.</param>
+    </member>
+    <member name="M:System.Security.Cryptography.HMAC.HashCore(System.ReadOnlySpan{System.Byte})">
+      <summary>Routes data written to the object into the HMAC algorithm for computing the HMAC.</summary>
+      <param name="source">The input to compute the HMAC code for.</param>
+      <exception cref="T:System.PlatformNotSupportedException">In all cases.</exception>
+    </member>
+    <member name="M:System.Security.Cryptography.HMAC.HashFinal">
+      <summary>When overridden in a derived class, finalizes the HMAC computation after the last data is processed by the algorithm.</summary>
+      <returns>The computed HMAC value in a byte array.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.HMAC.Initialize">
+      <summary>Initializes an instance of the default implementation of <see cref="T:System.Security.Cryptography.HMAC" />.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.HMAC.TryHashFinal(System.Span{System.Byte},System.Int32@)">
+      <summary>Attempts to finalize the HMAC computation after the last data is processed by the HMAC algorithm.</summary>
+      <param name="destination">The buffer to receive the HMAC value.</param>
+      <param name="bytesWritten">When this method returns, the total number of bytes written into <paramref name="destination" />. This parameter is treated as uninitialized.</param>
+      <exception cref="T:System.PlatformNotSupportedException">The method is not overriden in the derived type.</exception>
+      <returns>
+        <see langword="true" /> if <paramref name="destination" /> is long enough to receive the HMAC value; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.HMAC.BlockSizeValue">
+      <summary>Gets or sets the block size to use in the hash value.</summary>
+      <returns>The block size to use in the hash value.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.HMAC.HashName">
+      <summary>Gets or sets the name of the hash algorithm to use for hashing.</summary>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The current hash algorithm cannot be changed.</exception>
+      <returns>The name of the hash algorithm.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.HMAC.Key">
+      <summary>Gets or sets the key to use in the HMAC calculation.</summary>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">An attempt is made to change the <see cref="P:System.Security.Cryptography.HMAC.Key" /> property after hashing has begun.</exception>
+      <returns>The key to use in the HMAC calculation.</returns>
+    </member>
+    <member name="T:System.Security.Cryptography.ICryptoTransform">
+      <summary>Defines the basic operations of cryptographic transformations.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.ICryptoTransform.TransformBlock(System.Byte[],System.Int32,System.Int32,System.Byte[],System.Int32)">
+      <summary>Transforms the specified region of the input byte array and copies the resulting transform to the specified region of the output byte array.</summary>
+      <param name="inputBuffer">The input for which to compute the transform.</param>
+      <param name="inputOffset">The offset into the input byte array from which to begin using data.</param>
+      <param name="inputCount">The number of bytes in the input byte array to use as data.</param>
+      <param name="outputBuffer">The output to which to write the transform.</param>
+      <param name="outputOffset">The offset into the output byte array from which to begin writing data.</param>
+      <returns>The number of bytes written.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.ICryptoTransform.TransformFinalBlock(System.Byte[],System.Int32,System.Int32)">
+      <summary>Transforms the specified region of the specified byte array.</summary>
+      <param name="inputBuffer">The input for which to compute the transform.</param>
+      <param name="inputOffset">The offset into the byte array from which to begin using data.</param>
+      <param name="inputCount">The number of bytes in the byte array to use as data.</param>
+      <returns>The computed transform.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.ICryptoTransform.CanReuseTransform">
+      <summary>Gets a value indicating whether the current transform can be reused.</summary>
+      <returns>
+        <see langword="true" /> if the current transform can be reused; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.ICryptoTransform.CanTransformMultipleBlocks">
+      <summary>Gets a value indicating whether multiple blocks can be transformed.</summary>
+      <returns>
+        <see langword="true" /> if multiple blocks can be transformed; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.ICryptoTransform.InputBlockSize">
+      <summary>Gets the input block size.</summary>
+      <returns>The size of the input data blocks in bytes.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.ICryptoTransform.OutputBlockSize">
+      <summary>Gets the output block size.</summary>
+      <returns>The size of the output data blocks in bytes.</returns>
+    </member>
+    <member name="T:System.Security.Cryptography.KeyedHashAlgorithm">
+      <summary>Represents the abstract class from which all implementations of keyed hash algorithms must derive.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.KeyedHashAlgorithm.KeyValue">
+      <summary>The key to use in the hash algorithm.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.KeyedHashAlgorithm.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.KeyedHashAlgorithm" /> class.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.KeyedHashAlgorithm.Create">
+      <summary>Creates an instance of the default implementation of a keyed hash algorithm.</summary>
+      <returns>A new <see cref="T:System.Security.Cryptography.HMACSHA1" /> instance, unless the default settings have been changed.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.KeyedHashAlgorithm.Create(System.String)">
+      <summary>Creates an instance of the specified implementation of a keyed hash algorithm.</summary>
+      <param name="algName">The keyed hash algorithm implementation to use. The following table shows the valid values for the <paramref name="algName" /> parameter and the algorithms they map to.
+
+ <list type="table"><listheader><term> Parameter value</term><description> Implements</description></listheader><item><term> System.Security.Cryptography.HMAC</term><description><see cref="T:System.Security.Cryptography.HMACSHA1" /></description></item><item><term> System.Security.Cryptography.KeyedHashAlgorithm</term><description><see cref="T:System.Security.Cryptography.HMACSHA1" /></description></item><item><term> HMACMD5</term><description><see cref="T:System.Security.Cryptography.HMACMD5" /></description></item><item><term> System.Security.Cryptography.HMACMD5</term><description><see cref="T:System.Security.Cryptography.HMACMD5" /></description></item><item><term> HMACRIPEMD160</term><description><see cref="T:System.Security.Cryptography.HMACRIPEMD160" /></description></item><item><term> System.Security.Cryptography.HMACRIPEMD160</term><description><see cref="T:System.Security.Cryptography.HMACRIPEMD160" /></description></item><item><term> HMACSHA1</term><description><see cref="T:System.Security.Cryptography.HMACSHA1" /></description></item><item><term> System.Security.Cryptography.HMACSHA1</term><description><see cref="T:System.Security.Cryptography.HMACSHA1" /></description></item><item><term> HMACSHA256</term><description><see cref="T:System.Security.Cryptography.HMACSHA256" /></description></item><item><term> System.Security.Cryptography.HMACSHA256</term><description><see cref="T:System.Security.Cryptography.HMACSHA256" /></description></item><item><term> HMACSHA384</term><description><see cref="T:System.Security.Cryptography.HMACSHA384" /></description></item><item><term> System.Security.Cryptography.HMACSHA384</term><description><see cref="T:System.Security.Cryptography.HMACSHA384" /></description></item><item><term> HMACSHA512</term><description><see cref="T:System.Security.Cryptography.HMACSHA512" /></description></item><item><term> System.Security.Cryptography.HMACSHA512</term><description><see cref="T:System.Security.Cryptography.HMACSHA512" /></description></item><item><term> MACTripleDES</term><description><see cref="T:System.Security.Cryptography.MACTripleDES" /></description></item><item><term> System.Security.Cryptography.MACTripleDES</term><description><see cref="T:System.Security.Cryptography.MACTripleDES" /></description></item></list></param>
+      <exception cref="T:System.PlatformNotSupportedException">.NET Core 2.0 - 3.1 and .NET 5.0 and later: In all cases.</exception>
+      <returns>A new instance of the specified keyed hash algorithm.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.KeyedHashAlgorithm.Dispose(System.Boolean)">
+      <summary>Releases the unmanaged resources used by the <see cref="T:System.Security.Cryptography.KeyedHashAlgorithm" /> and optionally releases the managed resources.</summary>
+      <param name="disposing">
+        <see langword="true" /> to release both managed and unmanaged resources; <see langword="false" /> to release only unmanaged resources.</param>
+    </member>
+    <member name="P:System.Security.Cryptography.KeyedHashAlgorithm.Key">
+      <summary>Gets or sets the key to use in the hash algorithm.</summary>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">An attempt was made to change the <see cref="P:System.Security.Cryptography.KeyedHashAlgorithm.Key" /> property after hashing has begun.</exception>
+      <returns>The key to use in the hash algorithm.</returns>
+    </member>
+    <member name="T:System.Security.Cryptography.KeySizes">
+      <summary>Determines the set of valid key sizes for the symmetric cryptographic algorithms.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.KeySizes.#ctor(System.Int32,System.Int32,System.Int32)">
+      <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.KeySizes" /> class with the specified key values.</summary>
+      <param name="minSize">The minimum valid key size.</param>
+      <param name="maxSize">The maximum valid key size.</param>
+      <param name="skipSize">The interval between valid key sizes.</param>
+    </member>
+    <member name="P:System.Security.Cryptography.KeySizes.MaxSize">
+      <summary>Specifies the maximum key size.</summary>
+      <returns>The maximum key size.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.KeySizes.MinSize">
+      <summary>Specifies the minimum key size.</summary>
+      <returns>The minimum key size.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.KeySizes.SkipSize">
+      <summary>Specifies the interval between valid key sizes.</summary>
+      <returns>The interval between valid key sizes.</returns>
+    </member>
+    <member name="T:System.Security.Cryptography.PaddingMode">
+      <summary>Specifies the type of padding to apply when the message data block is shorter than the full number of bytes needed for a cryptographic operation.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.PaddingMode.ANSIX923">
+      <summary>The ANSIX923 padding string consists of a sequence of bytes filled with zeros before the length.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.PaddingMode.ISO10126">
+      <summary>The ISO10126 padding string consists of random data before the length.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.PaddingMode.None">
+      <summary>No padding is done.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.PaddingMode.PKCS7">
+      <summary>The PKCS #7 padding string consists of a sequence of bytes, each of which is equal to the total number of padding bytes added.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.PaddingMode.Zeros">
+      <summary>The padding string consists of bytes set to zero.</summary>
+    </member>
+    <member name="T:System.Security.Cryptography.PbeEncryptionAlgorithm">
+      <summary>Specifies encryption algorithms to be used with Password-Based Encryption (PBE).</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.PbeEncryptionAlgorithm.Aes128Cbc">
+      <summary>Indicates the encryption should be performed with the AES-128 algorithm in CBC mode with PKCS#7 padding.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.PbeEncryptionAlgorithm.Aes192Cbc">
+      <summary>Indicates the encryption should be performed with the AES-192 algorithm in CBC mode with PKCS#7 padding.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.PbeEncryptionAlgorithm.Aes256Cbc">
+      <summary>Indicates that encryption be performed with the AES-256 algorithm in CBC mode with PKCS#7 padding.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.PbeEncryptionAlgorithm.TripleDes3KeyPkcs12">
+      <summary>Indicates the encryption should be performed with the TripleDES algorithm in CBC mode with a 192-bit key derived using the Key Derivation Function (KDF) from PKCS#12.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.PbeEncryptionAlgorithm.Unknown">
+      <summary>Indicates that no encryption algorithm has been selected.</summary>
+    </member>
+    <member name="T:System.Security.Cryptography.PbeParameters">
+      <summary>Represents parameters to be used for Password-Based Encryption (PBE).</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.PbeParameters.#ctor(System.Security.Cryptography.PbeEncryptionAlgorithm,System.Security.Cryptography.HashAlgorithmName,System.Int32)">
+      <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.PbeParameters" /> class.</summary>
+      <param name="encryptionAlgorithm">The algorithm to use when encrypting data.</param>
+      <param name="hashAlgorithm">The name of a hash algorithm to use with the Key Derivation Function (KDF) to turn a password into an encryption key.</param>
+      <param name="iterationCount">The iteration count to provide to the Key Derivation Function (KDF) to turn a password into an encryption key.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="iterationCount" /> is less than 1.</exception>
+    </member>
+    <member name="P:System.Security.Cryptography.PbeParameters.EncryptionAlgorithm">
+      <summary>Gets the algorithm to use when encrypting data.</summary>
+      <returns>The algorithm to use when encrypting data.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.PbeParameters.HashAlgorithm">
+      <summary>Gets the name of the hash algorithm to use with the Key Derivation Function (KDF) to turn a password into an encryption key.</summary>
+      <returns>The name of the hash algorithm to use with the Key Derivation Function (KDF) to turn a password into an encryption key.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.PbeParameters.IterationCount">
+      <summary>Gets the iteration count to provide to the Key Derivation Function (KDF) to turn a password into an encryption key.</summary>
+      <returns>The iteration count to provide to the Key Derivation Function (KDF) to turn a password into an encryption key.</returns>
+    </member>
+    <member name="T:System.Security.Cryptography.SymmetricAlgorithm">
+      <summary>Represents the abstract base class from which all implementations of symmetric algorithms must inherit.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.SymmetricAlgorithm.BlockSizeValue">
+      <summary>Represents the block size, in bits, of the cryptographic operation.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.SymmetricAlgorithm.FeedbackSizeValue">
+      <summary>Represents the feedback size, in bits, of the cryptographic operation.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.SymmetricAlgorithm.IVValue">
+      <summary>Represents the initialization vector (<see cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />) for the symmetric algorithm.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.SymmetricAlgorithm.KeySizeValue">
+      <summary>Represents the size, in bits, of the secret key used by the symmetric algorithm.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.SymmetricAlgorithm.KeyValue">
+      <summary>Represents the secret key for the symmetric algorithm.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.SymmetricAlgorithm.LegalBlockSizesValue">
+      <summary>Specifies the block sizes, in bits, that are supported by the symmetric algorithm.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.SymmetricAlgorithm.LegalKeySizesValue">
+      <summary>Specifies the key sizes, in bits, that are supported by the symmetric algorithm.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.SymmetricAlgorithm.ModeValue">
+      <summary>Represents the cipher mode used in the symmetric algorithm.</summary>
+    </member>
+    <member name="F:System.Security.Cryptography.SymmetricAlgorithm.PaddingValue">
+      <summary>Represents the padding mode used in the symmetric algorithm.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.SymmetricAlgorithm" /> class.</summary>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The implementation of the class derived from the symmetric algorithm is not valid.</exception>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.Clear">
+      <summary>Releases all resources used by the <see cref="T:System.Security.Cryptography.SymmetricAlgorithm" /> class.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.Create">
+      <summary>Creates a default cryptographic object used to perform the symmetric algorithm.</summary>
+      <exception cref="T:System.PlatformNotSupportedException">.NET Core 2.0 - 3.1 and .NET 5.0 and later: In all cases.</exception>
+      <returns>A default cryptographic object used to perform the symmetric algorithm.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.Create(System.String)">
+      <summary>Creates the specified cryptographic object used to perform the symmetric algorithm.</summary>
+      <param name="algName">The name of the specific implementation of the <see cref="T:System.Security.Cryptography.SymmetricAlgorithm" /> class to use.</param>
+      <returns>A cryptographic object used to perform the symmetric algorithm.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.CreateDecryptor">
+      <summary>Creates a symmetric decryptor object with the current <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.Key" /> property and initialization vector (<see cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />).</summary>
+      <returns>A symmetric decryptor object.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.CreateDecryptor(System.Byte[],System.Byte[])">
+      <summary>When overridden in a derived class, creates a symmetric decryptor object with the specified <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.Key" /> property and initialization vector (<see cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />).</summary>
+      <param name="rgbKey">The secret key to use for the symmetric algorithm.</param>
+      <param name="rgbIV">The initialization vector to use for the symmetric algorithm.</param>
+      <returns>A symmetric decryptor object.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.CreateEncryptor">
+      <summary>Creates a symmetric encryptor object with the current <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.Key" /> property and initialization vector (<see cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />).</summary>
+      <returns>A symmetric encryptor object.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.CreateEncryptor(System.Byte[],System.Byte[])">
+      <summary>When overridden in a derived class, creates a symmetric encryptor object with the specified <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.Key" /> property and initialization vector (<see cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />).</summary>
+      <param name="rgbKey">The secret key to use for the symmetric algorithm.</param>
+      <param name="rgbIV">The initialization vector to use for the symmetric algorithm.</param>
+      <returns>A symmetric encryptor object.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.DecryptCbc(System.Byte[],System.Byte[],System.Security.Cryptography.PaddingMode)">
+      <summary>Decrypts data using CBC mode with the specified padding mode.</summary>
+      <param name="ciphertext">The data to decrypt.</param>
+      <param name="iv">The initialization vector.</param>
+      <param name="paddingMode">The padding mode used to produce the ciphertext and remove during decryption.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="ciphertext" /> or <paramref name="iv" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="paddingMode" /> is not a valid padding mode.</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="iv" /> is the incorrect length. Callers are expected to pass an initialization vector that is exactly <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.BlockSize" /> in length, converted to bytes (<c>BlockSize / 8</c>).</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The ciphertext could not be decrypted successfully.</exception>
+      <returns>The decrypted plaintext data.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.DecryptCbc(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte},System.Security.Cryptography.PaddingMode)">
+      <summary>Decrypts data using CBC mode with the specified padding mode.</summary>
+      <param name="ciphertext">The data to decrypt.</param>
+      <param name="iv">The initialization vector.</param>
+      <param name="paddingMode">The padding mode used to produce the ciphertext and remove during decryption.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="paddingMode" /> is not a valid padding mode.</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="iv" /> is the incorrect length. Callers are expected to pass an initialization vector that is exactly <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.BlockSize" /> in length, converted to bytes (<c>BlockSize / 8</c>).</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The ciphertext could not be decrypted successfully.</exception>
+      <returns>The decrypted plaintext data.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.DecryptCbc(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Security.Cryptography.PaddingMode)">
+      <summary>Decrypts data into the specified buffer, using CBC mode with the specified padding mode.</summary>
+      <param name="ciphertext">The data to decrypt.</param>
+      <param name="iv">The initialization vector.</param>
+      <param name="destination">The buffer to receive the plaintext data.</param>
+      <param name="paddingMode">The padding mode used to produce the ciphertext and remove during decryption.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="paddingMode" /> is not a valid padding mode.</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="iv" /> is the incorrect length. Callers are expected to pass an initialization vector that is exactly <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.BlockSize" /> in length, converted to bytes (<c>BlockSize / 8</c>).</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The ciphertext could not be decrypted successfully.</exception>
+      <exception cref="T:System.ArgumentException">The buffer in <paramref name="destination" /> is too small to hold the plaintext data.</exception>
+      <returns>The total number of bytes written to <paramref name="destination" /></returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.DecryptCfb(System.Byte[],System.Byte[],System.Security.Cryptography.PaddingMode,System.Int32)">
+      <summary>Decrypts data using CFB mode with the specified padding mode and feedback size.</summary>
+      <param name="ciphertext">The data to decrypt.</param>
+      <param name="iv">The initialization vector.</param>
+      <param name="paddingMode">The padding mode used to produce the ciphertext and remove during decryption.</param>
+      <param name="feedbackSizeInBits">The feedback size, specified in bits.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="ciphertext" /> or <paramref name="iv" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="paddingMode" /> is not a valid padding mode.
+
+-or-
+
+<paramref name="feedbackSizeInBits" /> is not positive or represent a whole number of bytes.</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="iv" /> is the incorrect length. Callers are expected to pass an initialization vector that is exactly <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.BlockSize" /> in length, converted to bytes (<c>BlockSize / 8</c>).</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The ciphertext could not be decrypted successfully.
+
+-or-
+
+The feedback size is not valid for the algorithm.</exception>
+      <returns>The decrypted plaintext data.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.DecryptCfb(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte},System.Security.Cryptography.PaddingMode,System.Int32)">
+      <summary>Decrypts data using CFB mode with the specified padding mode and feedback size.</summary>
+      <param name="ciphertext">The data to decrypt.</param>
+      <param name="iv">The initialization vector.</param>
+      <param name="paddingMode">The padding mode used to produce the ciphertext and remove during decryption.</param>
+      <param name="feedbackSizeInBits">The feedback size, specified in bits.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="paddingMode" /> is not a valid padding mode.
+
+-or-
+
+<paramref name="feedbackSizeInBits" /> is not positive or represent a whole number of bytes.</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="iv" /> is the incorrect length. Callers are expected to pass an initialization vector that is exactly <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.BlockSize" /> in length, converted to bytes (<c>BlockSize / 8</c>).</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The ciphertext could not be decrypted successfully.
+
+-or-
+
+The feedback size is not valid for the algorithm.</exception>
+      <returns>The decrypted plaintext data.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.DecryptCfb(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Security.Cryptography.PaddingMode,System.Int32)">
+      <summary>Decrypts data into the specified buffer, using CFB mode with the specified padding mode and feedback size.</summary>
+      <param name="ciphertext">The data to decrypt.</param>
+      <param name="iv">The initialization vector.</param>
+      <param name="destination">The buffer to receive the plaintext data.</param>
+      <param name="paddingMode">The padding mode used to produce the ciphertext and remove during decryption.</param>
+      <param name="feedbackSizeInBits">The feedback size, specified in bits.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="paddingMode" /> is not a valid padding mode.
+
+-or-
+
+<paramref name="feedbackSizeInBits" /> is not positive or represent a whole number of bytes.</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="iv" /> is the incorrect length. Callers are expected to pass an initialization vector that is exactly <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.BlockSize" /> in length, converted to bytes (<c>BlockSize / 8</c>).
+
+-or-
+
+The buffer in <paramref name="destination" /> is too small to hold the plaintext data.</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The ciphertext could not be decrypted successfully.
+
+-or-
+
+<paramref name="feedbackSizeInBits" /> is not valid for the algorithm.</exception>
+      <returns>The total number of bytes written to <paramref name="destination" />.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.DecryptEcb(System.Byte[],System.Security.Cryptography.PaddingMode)">
+      <summary>Decrypts data using ECB mode with the specified padding mode.</summary>
+      <param name="ciphertext">The data to decrypt.</param>
+      <param name="paddingMode">The padding mode used to produce the ciphertext and remove during decryption.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="ciphertext" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="paddingMode" /> is not a valid padding mode.</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The ciphertext could not be decrypted successfully.</exception>
+      <returns>The decrypted plaintext data.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.DecryptEcb(System.ReadOnlySpan{System.Byte},System.Security.Cryptography.PaddingMode)">
+      <summary>Decrypts data using ECB mode with the specified padding mode.</summary>
+      <param name="ciphertext">The data to decrypt.</param>
+      <param name="paddingMode">The padding mode used to produce the ciphertext and remove during decryption.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="paddingMode" /> is not a valid padding mode.</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The ciphertext could not be decrypted successfully.</exception>
+      <returns>The decrypted plaintext data.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.DecryptEcb(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Security.Cryptography.PaddingMode)">
+      <summary>Decrypts data into the specified buffer, using ECB mode with the specified padding mode.</summary>
+      <param name="ciphertext">The data to decrypt.</param>
+      <param name="destination">The buffer to receive the plaintext data.</param>
+      <param name="paddingMode">The padding mode used to produce the ciphertext and remove during decryption.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="paddingMode" /> is not a valid padding mode.</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The ciphertext could not be decrypted successfully.</exception>
+      <exception cref="T:System.ArgumentException">The buffer in <paramref name="destination" /> is too small to hold the plaintext data.</exception>
+      <returns>The total number of bytes written to <paramref name="destination" /></returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.Dispose">
+      <summary>Releases all resources used by the current instance of the <see cref="T:System.Security.Cryptography.SymmetricAlgorithm" /> class.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.Dispose(System.Boolean)">
+      <summary>Releases the unmanaged resources used by the <see cref="T:System.Security.Cryptography.SymmetricAlgorithm" /> and optionally releases the managed resources.</summary>
+      <param name="disposing">
+        <see langword="true" /> to release both managed and unmanaged resources; <see langword="false" /> to release only unmanaged resources.</param>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.EncryptCbc(System.Byte[],System.Byte[],System.Security.Cryptography.PaddingMode)">
+      <summary>Encrypts data using CBC mode with the specified padding mode.</summary>
+      <param name="plaintext">The data to encrypt.</param>
+      <param name="iv">The initialization vector.</param>
+      <param name="paddingMode">The padding mode used to produce the ciphertext and remove during decryption.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="plaintext" /> or <paramref name="iv" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="paddingMode" /> is not a valid padding mode.</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="iv" /> is the incorrect length. Callers are expected to pass an initialization vector that is exactly <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.BlockSize" /> in length, converted to bytes (<c>BlockSize / 8</c>).</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The plaintext could not be encrypted successfully.</exception>
+      <returns>The encrypted ciphertext data.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.EncryptCbc(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte},System.Security.Cryptography.PaddingMode)">
+      <summary>Encrypts data using CBC mode with the specified padding mode.</summary>
+      <param name="plaintext">The data to encrypt.</param>
+      <param name="iv">The initialization vector.</param>
+      <param name="paddingMode">The padding mode used to produce the ciphertext and remove during decryption.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="paddingMode" /> is not a valid padding mode.</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="iv" /> is the incorrect length. Callers are expected to pass an initialization vector that is exactly <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.BlockSize" /> in length, converted to bytes (<c>BlockSize / 8</c>).</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The plaintext could not be encrypted successfully.</exception>
+      <returns>The encrypted ciphertext data.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.EncryptCbc(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Security.Cryptography.PaddingMode)">
+      <summary>Encrypts data into the specified buffer, using CBC mode with the specified padding mode.</summary>
+      <param name="plaintext">The data to encrypt.</param>
+      <param name="iv">The initialization vector.</param>
+      <param name="destination">The buffer to receive the ciphertext data.</param>
+      <param name="paddingMode">The padding mode used to produce the ciphertext and remove during decryption.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="paddingMode" /> is not a valid padding mode.</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="iv" /> is the incorrect length. Callers are expected to pass an initialization vector that is exactly <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.BlockSize" /> in length, converted to bytes (<c>BlockSize / 8</c>).</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The plaintext could not be encrypted successfully.</exception>
+      <exception cref="T:System.ArgumentException">The buffer in <paramref name="destination" /> is too small to hold the ciphertext data.</exception>
+      <returns>The total number of bytes written to <paramref name="destination" />.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.EncryptCfb(System.Byte[],System.Byte[],System.Security.Cryptography.PaddingMode,System.Int32)">
+      <summary>Encrypts data using CFB mode with the specified padding mode and feedback size.</summary>
+      <param name="plaintext">The data to encrypt.</param>
+      <param name="iv">The initialization vector.</param>
+      <param name="paddingMode">The padding mode used to produce the ciphertext and remove during decryption.</param>
+      <param name="feedbackSizeInBits">The feedback size, specified in bits.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="plaintext" /> or <paramref name="iv" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="paddingMode" /> is not a valid padding mode.
+
+-or-
+
+<paramref name="feedbackSizeInBits" /> is not positive or represent a whole number of bytes.</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="iv" /> is the incorrect length. Callers are expected to pass an initialization vector that is exactly <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.BlockSize" /> in length, converted to bytes (<c>BlockSize / 8</c>).</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The plaintext could not be encrypted successfully.
+
+-or-
+
+The feedback size is not valid for the algorithm.</exception>
+      <returns>The encrypted ciphertext data.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.EncryptCfb(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte},System.Security.Cryptography.PaddingMode,System.Int32)">
+      <summary>Encrypts data using CFB mode with the specified padding mode and feedback size.</summary>
+      <param name="plaintext">The data to encrypt.</param>
+      <param name="iv">The initialization vector.</param>
+      <param name="paddingMode">The padding mode used to produce the ciphertext and remove during decryption.</param>
+      <param name="feedbackSizeInBits">The feedback size, specified in bits.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="paddingMode" /> is not a valid padding mode.
+
+-or-
+
+<paramref name="feedbackSizeInBits" /> is not positive or represent a whole number of bytes.</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="iv" /> is the incorrect length. Callers are expected to pass an initialization vector that is exactly <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.BlockSize" /> in length, converted to bytes (<c>BlockSize / 8</c>).</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The plaintext could not be encrypted successfully.
+
+-or-
+
+The feedback size is not valid for the algorithm.</exception>
+      <returns>The encrypted ciphertext data.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.EncryptCfb(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Security.Cryptography.PaddingMode,System.Int32)">
+      <summary>Encrypts data into the specified buffer, using CFB mode with the specified padding mode and feedback size.</summary>
+      <param name="plaintext">The data to encrypt.</param>
+      <param name="iv">The initialization vector.</param>
+      <param name="destination">The buffer to receive the ciphertext data.</param>
+      <param name="paddingMode">The padding mode used to produce the ciphertext and remove during decryption.</param>
+      <param name="feedbackSizeInBits">The feedback size, specified in bits.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="paddingMode" /> is not a valid padding mode.
+
+-or-
+
+<paramref name="feedbackSizeInBits" /> is not positive or represent a whole number of bytes.</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="iv" /> is the incorrect length. Callers are expected to pass an initialization vector that is exactly <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.BlockSize" /> in length, converted to bytes (<c>BlockSize / 8</c>).</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The plaintext could not be encrypted successfully.
+
+-or-
+
+The feedback size is not valid for the algorithm.</exception>
+      <returns>The total number of bytes written to <paramref name="destination" />.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.EncryptEcb(System.Byte[],System.Security.Cryptography.PaddingMode)">
+      <summary>Encrypts data using ECB mode with the specified padding mode.</summary>
+      <param name="plaintext">The data to encrypt.</param>
+      <param name="paddingMode">The padding mode used to produce the ciphertext and remove during decryption.</param>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="plaintext" /> is <see langword="null" />.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="paddingMode" /> is not a valid padding mode.</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The plaintext could not be encrypted successfully.</exception>
+      <returns>The encrypted ciphertext data.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.EncryptEcb(System.ReadOnlySpan{System.Byte},System.Security.Cryptography.PaddingMode)">
+      <summary>Encrypts data using ECB mode with the specified padding mode.</summary>
+      <param name="plaintext">The data to encrypt.</param>
+      <param name="paddingMode">The padding mode used to produce the ciphertext and remove during decryption.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="paddingMode" /> is not a valid padding mode.</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The plaintext could not be encrypted successfully.</exception>
+      <returns>The encrypted ciphertext data.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.EncryptEcb(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Security.Cryptography.PaddingMode)">
+      <summary>Encrypts data into the specified buffer, using ECB mode with the specified padding mode.</summary>
+      <param name="plaintext">The data to encrypt.</param>
+      <param name="destination">The buffer to receive the ciphertext data.</param>
+      <param name="paddingMode">The padding mode used to produce the ciphertext and remove during decryption.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="paddingMode" /> is not a valid padding mode.</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The plaintext could not be encrypted successfully.</exception>
+      <exception cref="T:System.ArgumentException">The buffer in <paramref name="destination" /> is too small to hold the ciphertext data.</exception>
+      <returns>The total number of bytes written to <paramref name="destination" />.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.GenerateIV">
+      <summary>When overridden in a derived class, generates a random initialization vector (<see cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />) to use for the algorithm.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.GenerateKey">
+      <summary>When overridden in a derived class, generates a random key (<see cref="P:System.Security.Cryptography.SymmetricAlgorithm.Key" />) to use for the algorithm.</summary>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.GetCiphertextLengthCbc(System.Int32,System.Security.Cryptography.PaddingMode)">
+      <summary>Gets the length of a ciphertext with a given padding mode and plaintext length in CBC mode.</summary>
+      <param name="plaintextLength">The plaintext length, in bytes.</param>
+      <param name="paddingMode">The padding mode used to pad the plaintext to the algorithm's block size.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="plaintextLength" /> is a negative number.
+
+-or-
+
+<paramref name="plaintextLength" /> when padded is too large to represent as a signed 32-bit integer.
+
+-or-
+
+<paramref name="paddingMode" /> is not a valid padding mode.</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">
+        <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.BlockSize" /> is not a positive integer.
+
+-or-
+
+<see cref="P:System.Security.Cryptography.SymmetricAlgorithm.BlockSize" /> is not a whole number of bytes. It must be divisible by 8.</exception>
+      <exception cref="T:System.ArgumentException">The padding mode <see cref="F:System.Security.Cryptography.PaddingMode.None" /> was used, but <paramref name="plaintextLength" /> is not a whole number of blocks.</exception>
+      <returns>The length, in bytes, of the ciphertext with padding.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.GetCiphertextLengthCfb(System.Int32,System.Security.Cryptography.PaddingMode,System.Int32)">
+      <summary>Gets the length of a ciphertext with a given padding mode and plaintext length in CFB mode.</summary>
+      <param name="plaintextLength">The plaintext length, in bytes.</param>
+      <param name="paddingMode">The padding mode used to pad the plaintext to the feedback size.</param>
+      <param name="feedbackSizeInBits">The feedback size, in bits.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="feedbackSizeInBits" /> is not a positive number.
+
+-or-
+
+<paramref name="plaintextLength" /> is a negative number.
+
+-or-
+
+<paramref name="plaintextLength" /> when padded is too large to represent as a signed 32-bit integer.
+
+-or-
+
+<paramref name="paddingMode" /> is not a valid padding mode.</exception>
+      <exception cref="T:System.ArgumentException">The padding mode <see cref="F:System.Security.Cryptography.PaddingMode.None" /> was used, but <paramref name="plaintextLength" /> is not a whole number of blocks.
+
+-or-
+
+<paramref name="feedbackSizeInBits" /> is not a whole number of bytes. It must be divisible by 8.</exception>
+      <returns>The length, in bytes, of the ciphertext with padding.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.GetCiphertextLengthEcb(System.Int32,System.Security.Cryptography.PaddingMode)">
+      <summary>Gets the length of a ciphertext with a given padding mode and plaintext length in ECB mode.</summary>
+      <param name="plaintextLength">The plaintext length, in bytes.</param>
+      <param name="paddingMode">The padding mode used to pad the plaintext to the algorithm's block size.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="plaintextLength" /> is a negative number.
+
+-or-
+
+<paramref name="plaintextLength" /> when padded is too large to represent as a signed 32-bit integer.
+
+-or-
+
+<paramref name="paddingMode" /> is not a valid padding mode.</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">
+        <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.BlockSize" /> is not a positive integer.
+
+-or-
+
+<see cref="P:System.Security.Cryptography.SymmetricAlgorithm.BlockSize" /> is not a whole number of bytes. It must be divisible by 8.</exception>
+      <exception cref="T:System.ArgumentException">The padding mode <see cref="F:System.Security.Cryptography.PaddingMode.None" /> was used, but <paramref name="plaintextLength" /> is not a whole number of blocks.</exception>
+      <returns>The length, in bytes, of the ciphertext with padding.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.TryDecryptCbc(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32@,System.Security.Cryptography.PaddingMode)">
+      <summary>Attempts to decrypt data into the specified buffer, using CBC mode with the specified padding mode.</summary>
+      <param name="ciphertext">The data to decrypt.</param>
+      <param name="iv">The initialization vector.</param>
+      <param name="destination">The buffer to receive the plaintext data.</param>
+      <param name="bytesWritten">When this method returns, contains the total number of bytes written to <paramref name="destination" />.</param>
+      <param name="paddingMode">The padding mode used to produce the ciphertext and remove during decryption.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="paddingMode" /> is not a valid padding mode.</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="iv" /> is the incorrect length. Callers are expected to pass an initialization vector that is exactly <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.BlockSize" /> in length, converted to bytes (<c>BlockSize / 8</c>).</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The ciphertext could not be decrypted successfully.</exception>
+      <returns>
+        <see langword="true" /> if <paramref name="destination" /> was large enough to receive the decrypted data; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.TryDecryptCbcCore(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Security.Cryptography.PaddingMode,System.Int32@)">
+      <summary>When overridden in a derived class, attempts to decrypt data into the specified buffer, using CBC mode with the specified padding mode.</summary>
+      <param name="ciphertext">The data to decrypt.</param>
+      <param name="iv">The initialization vector.</param>
+      <param name="destination">The buffer to receive the plaintext data.</param>
+      <param name="paddingMode">The padding mode used to produce the ciphertext and remove during decryption.</param>
+      <param name="bytesWritten">When this method returns, contains the total number of bytes written to <paramref name="destination" />.</param>
+      <exception cref="T:System.NotSupportedException">A derived class has not provided an implementation.</exception>
+      <returns>
+        <see langword="true" /> if <paramref name="destination" /> was large enough to receive the decrypted data; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.TryDecryptCfb(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32@,System.Security.Cryptography.PaddingMode,System.Int32)">
+      <summary>Attempts to decrypt data into the specified buffer, using CFB mode with the specified padding mode and feedback size.</summary>
+      <param name="ciphertext">The data to decrypt.</param>
+      <param name="iv">The initialization vector.</param>
+      <param name="destination">The buffer to receive the plaintext data.</param>
+      <param name="bytesWritten">When this method returns, contains the total number of bytes written to <paramref name="destination" />.</param>
+      <param name="paddingMode">The padding mode used to produce the ciphertext and remove during decryption.</param>
+      <param name="feedbackSizeInBits">The feedback size, specified in bits.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="paddingMode" /> is not a valid padding mode.
+
+-or-
+
+<paramref name="feedbackSizeInBits" /> is not positive or represent a whole number of bytes.</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="iv" /> is the incorrect length. Callers are expected to pass an initialization vector that is exactly <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.BlockSize" /> in length, converted to bytes (<c>BlockSize / 8</c>).</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The ciphertext could not be decrypted successfully.
+
+-or-
+
+<paramref name="feedbackSizeInBits" /> is not valid for the algorithm.</exception>
+      <returns>
+        <see langword="true" /> if <paramref name="destination" /> was large enough to receive the decrypted data; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.TryDecryptCfbCore(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Security.Cryptography.PaddingMode,System.Int32,System.Int32@)">
+      <summary>When overridden in a derived class, attempts to decrypt data into the specified buffer, using CFB mode with the specified padding mode and feedback size.</summary>
+      <param name="ciphertext">The data to decrypt.</param>
+      <param name="iv">The initialization vector.</param>
+      <param name="destination">The buffer to receive the plaintext data.</param>
+      <param name="paddingMode">The padding mode used to produce the ciphertext and remove during decryption.</param>
+      <param name="feedbackSizeInBits">The feedback size, specified in bits.</param>
+      <param name="bytesWritten">When this method returns, contains the total number of bytes written to <paramref name="destination" />.</param>
+      <exception cref="T:System.NotSupportedException">A derived class has not provided an implementation.</exception>
+      <returns>
+        <see langword="true" /> if <paramref name="destination" /> was large enough to receive the decrypted data; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.TryDecryptEcb(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Security.Cryptography.PaddingMode,System.Int32@)">
+      <summary>Attempts to decrypt data into the specified buffer, using ECB mode with the specified padding mode.</summary>
+      <param name="ciphertext">The data to decrypt.</param>
+      <param name="destination">The buffer to receive the plaintext data.</param>
+      <param name="paddingMode">The padding mode used to produce the ciphertext and remove during decryption.</param>
+      <param name="bytesWritten">When this method returns, contains the total number of bytes written to <paramref name="destination" />.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="paddingMode" /> is not a valid padding mode.</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The ciphertext could not be decrypted successfully.</exception>
+      <returns>
+        <see langword="true" /> if <paramref name="destination" /> was large enough to receive the decrypted data; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.TryDecryptEcbCore(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Security.Cryptography.PaddingMode,System.Int32@)">
+      <summary>When overridden in a derived class, attempts to decrypt data into the specified buffer, using ECB mode with the specified padding mode.</summary>
+      <param name="ciphertext">The data to decrypt.</param>
+      <param name="destination">The buffer to receive the plaintext data.</param>
+      <param name="paddingMode">The padding mode used to produce the ciphertext and remove during decryption.</param>
+      <param name="bytesWritten">When this method returns, contains the total number of bytes written to <paramref name="destination" />.</param>
+      <exception cref="T:System.NotSupportedException">A derived class has not provided an implementation.</exception>
+      <returns>
+        <see langword="true" /> if <paramref name="destination" /> was large enough to receive the decrypted data; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.TryEncryptCbc(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32@,System.Security.Cryptography.PaddingMode)">
+      <summary>Attempts to encrypt data into the specified buffer, using CBC mode with the specified padding mode.</summary>
+      <param name="plaintext">The data to encrypt.</param>
+      <param name="iv">The initialization vector.</param>
+      <param name="destination">The buffer to receive the ciphertext data.</param>
+      <param name="bytesWritten">When this method returns, contains the total number of bytes written to <paramref name="destination" />.</param>
+      <param name="paddingMode">The padding mode used to produce the ciphertext and remove during decryption.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="paddingMode" /> is not a valid padding mode.</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="iv" /> is the incorrect length. Callers are expected to pass an initialization vector that is exactly <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.BlockSize" /> in length, converted to bytes (<c>BlockSize / 8</c>).</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The plaintext could not be encrypted successfully.</exception>
+      <returns>
+        <see langword="true" /> if <paramref name="destination" /> was large enough to receive the encrypted data; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.TryEncryptCbcCore(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Security.Cryptography.PaddingMode,System.Int32@)">
+      <summary>When overridden in a derived class, attempts to encrypt data into the specified buffer, using CBC mode with the specified padding mode.</summary>
+      <param name="plaintext">The data to encrypt.</param>
+      <param name="iv">The initialization vector.</param>
+      <param name="destination">The buffer to receive the ciphertext data.</param>
+      <param name="paddingMode">The padding mode used to produce the ciphertext and remove during decryption.</param>
+      <param name="bytesWritten">When this method returns, contains the total number of bytes written to <paramref name="destination" />.</param>
+      <exception cref="T:System.NotSupportedException">A derived class has not provided an implementation.</exception>
+      <returns>
+        <see langword="true" /> if <paramref name="destination" /> was large enough to receive the encrypted data; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.TryEncryptCfb(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Int32@,System.Security.Cryptography.PaddingMode,System.Int32)">
+      <summary>Attempts to encrypt data into the specified buffer, using CFB mode with the specified padding mode and feedback size.</summary>
+      <param name="plaintext">The data to encrypt.</param>
+      <param name="iv">The initialization vector.</param>
+      <param name="destination">The buffer to receive the ciphertext data.</param>
+      <param name="bytesWritten">When this method returns, contains the total number of bytes written to <paramref name="destination" />.</param>
+      <param name="paddingMode">The padding mode used to produce the ciphertext and remove during decryption.</param>
+      <param name="feedbackSizeInBits">The feedback size, specified in bits.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="paddingMode" /> is not a valid padding mode.
+
+-or-
+
+<paramref name="feedbackSizeInBits" /> is not positive or represent a whole number of bytes.</exception>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="iv" /> is the incorrect length. Callers are expected to pass an initialization vector that is exactly <see cref="P:System.Security.Cryptography.SymmetricAlgorithm.BlockSize" /> in length, converted to bytes (<c>BlockSize / 8</c>).</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The plaintext could not be encrypted successfully.
+
+-or-
+
+The feedback size is not valid for the algorithm.</exception>
+      <returns>
+        <see langword="true" /> if <paramref name="destination" /> was large enough to receive the encrypted data; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.TryEncryptCfbCore(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Security.Cryptography.PaddingMode,System.Int32,System.Int32@)">
+      <summary>When overridden in a derived class, attempts to encrypt data into the specified buffer, using CFB mode with the specified padding mode and feedback size.</summary>
+      <param name="plaintext">The data to encrypt.</param>
+      <param name="iv">The initialization vector.</param>
+      <param name="destination">The buffer to receive the ciphertext data.</param>
+      <param name="paddingMode">The padding mode used to produce the ciphertext and remove during decryption.</param>
+      <param name="feedbackSizeInBits">The feedback size, specified in bits.</param>
+      <param name="bytesWritten">When this method returns, contains the total number of bytes written to <paramref name="destination" />.</param>
+      <exception cref="T:System.NotSupportedException">A derived class has not provided an implementation.</exception>
+      <returns>
+        <see langword="true" /> if <paramref name="destination" /> was large enough to receive the encrypted data; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.TryEncryptEcb(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Security.Cryptography.PaddingMode,System.Int32@)">
+      <summary>Attempts to encrypt data into the specified buffer, using ECB mode with the specified padding mode.</summary>
+      <param name="plaintext">The data to encrypt.</param>
+      <param name="destination">The buffer to receive the ciphertext data.</param>
+      <param name="paddingMode">The padding mode used to produce the ciphertext and remove during decryption.</param>
+      <param name="bytesWritten">When this method returns, contains the total number of bytes written to <paramref name="destination" />.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="paddingMode" /> is not a valid padding mode.</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The plaintext could not be encrypted successfully.</exception>
+      <returns>
+        <see langword="true" /> if <paramref name="destination" /> was large enough to receive the encrypted data; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.TryEncryptEcbCore(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Security.Cryptography.PaddingMode,System.Int32@)">
+      <summary>When overridden in a derived class, attempts to encrypt data into the specified buffer, using ECB mode with the specified padding mode.</summary>
+      <param name="plaintext">The data to encrypt.</param>
+      <param name="destination">The buffer to receive the ciphertext data.</param>
+      <param name="paddingMode">The padding mode used to produce the ciphertext and remove during decryption.</param>
+      <param name="bytesWritten">When this method returns, contains the total number of bytes written to <paramref name="destination" />.</param>
+      <exception cref="T:System.NotSupportedException">A derived class has not provided an implementation.</exception>
+      <returns>
+        <see langword="true" /> if <paramref name="destination" /> was large enough to receive the encrypted data; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Security.Cryptography.SymmetricAlgorithm.ValidKeySize(System.Int32)">
+      <summary>Determines whether the specified key size is valid for the current algorithm.</summary>
+      <param name="bitLength">The length, in bits, to check for a valid key size.</param>
+      <returns>
+        <see langword="true" /> if the specified key size is valid for the current algorithm; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.SymmetricAlgorithm.BlockSize">
+      <summary>Gets or sets the block size, in bits, of the cryptographic operation.</summary>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The block size is invalid.</exception>
+      <returns>The block size, in bits.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.SymmetricAlgorithm.FeedbackSize">
+      <summary>Gets or sets the feedback size, in bits, of the cryptographic operation for the Cipher Feedback (CFB) and Output Feedback (OFB) cipher modes.</summary>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The feedback size is larger than the block size.</exception>
+      <returns>The feedback size in bits.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.SymmetricAlgorithm.IV">
+      <summary>Gets or sets the initialization vector (<see cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />) for the symmetric algorithm.</summary>
+      <exception cref="T:System.ArgumentNullException">An attempt was made to set the initialization vector to <see langword="null" />.</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">An attempt was made to set the initialization vector to an invalid size.</exception>
+      <returns>The initialization vector.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.SymmetricAlgorithm.Key">
+      <summary>Gets or sets the secret key for the symmetric algorithm.</summary>
+      <exception cref="T:System.ArgumentNullException">An attempt was made to set the key to <see langword="null" />.</exception>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The key size is invalid.</exception>
+      <returns>The secret key to use for the symmetric algorithm.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.SymmetricAlgorithm.KeySize">
+      <summary>Gets or sets the size, in bits, of the secret key used by the symmetric algorithm.</summary>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The key size is not valid.</exception>
+      <returns>The size, in bits, of the secret key used by the symmetric algorithm.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.SymmetricAlgorithm.LegalBlockSizes">
+      <summary>Gets the block sizes, in bits, that are supported by the symmetric algorithm.</summary>
+      <returns>An array that contains the block sizes supported by the algorithm.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.SymmetricAlgorithm.LegalKeySizes">
+      <summary>Gets the key sizes, in bits, that are supported by the symmetric algorithm.</summary>
+      <returns>An array that contains the key sizes supported by the algorithm.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.SymmetricAlgorithm.Mode">
+      <summary>Gets or sets the mode for operation of the symmetric algorithm.</summary>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The cipher mode is not one of the <see cref="T:System.Security.Cryptography.CipherMode" /> values.</exception>
+      <returns>The mode for operation of the symmetric algorithm. The default is <see cref="F:System.Security.Cryptography.CipherMode.CBC" />.</returns>
+    </member>
+    <member name="P:System.Security.Cryptography.SymmetricAlgorithm.Padding">
+      <summary>Gets or sets the padding mode used in the symmetric algorithm.</summary>
+      <exception cref="T:System.Security.Cryptography.CryptographicException">The padding mode is not one of the <see cref="T:System.Security.Cryptography.PaddingMode" /> values.</exception>
+      <returns>The padding mode used in the symmetric algorithm. The default is <see cref="F:System.Security.Cryptography.PaddingMode.PKCS7" />.</returns>
+    </member>
+  </members>
+</doc>

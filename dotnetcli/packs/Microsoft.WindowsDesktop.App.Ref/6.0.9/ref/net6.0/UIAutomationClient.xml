@@ -1,0 +1,2012 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>UIAutomationClient</name>
+  </assembly>
+  <members>
+    <member name="T:System.Windows.Automation.AndCondition">
+      <summary>Represents a combination of two or more <see cref="T:System.Windows.Automation.PropertyCondition" /> objects that must both be true for a match.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.AndCondition.#ctor(System.Windows.Automation.Condition[])">
+      <summary>Creates a <see cref="T:System.Windows.Automation.PropertyCondition" /> that is true if all the subconditions are true.</summary>
+      <param name="conditions">Two or more subconditions.</param>
+    </member>
+    <member name="M:System.Windows.Automation.AndCondition.GetConditions">
+      <summary>Retrieves an array of the subconditions for this condition.</summary>
+      <returns>An array of the subconditions for this condition.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.Automation">
+      <summary>Contains methods and fields for UI Automation client applications.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.Automation.ContentViewCondition">
+      <summary>Represents a predefined view of the UI Automation tree that includes only UI Automation elements that can contain content.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.Automation.ControlViewCondition">
+      <summary>Represents a predefined view of the UI Automation tree that includes only UI Automation elements that are controls.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.Automation.RawViewCondition">
+      <summary>Represents a predefined view of the UI Automation tree that includes all UI Automation elements.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.Automation.AddAutomationEventHandler(System.Windows.Automation.AutomationEvent,System.Windows.Automation.AutomationElement,System.Windows.Automation.TreeScope,System.Windows.Automation.AutomationEventHandler)">
+      <summary>Registers a method that handles UI Automation events.</summary>
+      <param name="eventId">The identifier for the event the method will handle.</param>
+      <param name="element">The UI Automation element to associate with the event handler.</param>
+      <param name="scope">The scope of events to be handled; that is, whether they are on the element itself, or on its ancestors and descendants.</param>
+      <param name="eventHandler">The method to call when the specified event occurs.</param>
+    </member>
+    <member name="M:System.Windows.Automation.Automation.AddAutomationFocusChangedEventHandler(System.Windows.Automation.AutomationFocusChangedEventHandler)">
+      <summary>Registers a method that will handle focus-changed events.</summary>
+      <param name="eventHandler">The method to call when the event occurs.</param>
+    </member>
+    <member name="M:System.Windows.Automation.Automation.AddAutomationPropertyChangedEventHandler(System.Windows.Automation.AutomationElement,System.Windows.Automation.TreeScope,System.Windows.Automation.AutomationPropertyChangedEventHandler,System.Windows.Automation.AutomationProperty[])">
+      <summary>Registers a method that will handle property-changed events.</summary>
+      <param name="element">The UI Automation element with which to associate the event handler.</param>
+      <param name="scope">The scope of events to be handled; that is, whether they are on the element itself, or on its ancestors and children.</param>
+      <param name="eventHandler">The method to call when the event occurs.</param>
+      <param name="properties">The UI Automation properties of interest.</param>
+    </member>
+    <member name="M:System.Windows.Automation.Automation.AddStructureChangedEventHandler(System.Windows.Automation.AutomationElement,System.Windows.Automation.TreeScope,System.Windows.Automation.StructureChangedEventHandler)">
+      <summary>Registers the method that will handle structure-changed events.</summary>
+      <param name="element">The UI Automation element with which to associate the event handler.</param>
+      <param name="scope">The scope of events to be handled; that is, whether they are on the element itself, or on its ancestors and descendants.</param>
+      <param name="eventHandler">The method to call when the structure-changed event occurs.</param>
+    </member>
+    <member name="M:System.Windows.Automation.Automation.Compare(System.Int32[],System.Int32[])">
+      <summary>Compares two integer arrays containing run-time identifiers (IDs) to determine whether their content is the same.</summary>
+      <param name="runtimeId1">The first run-time ID to compare.</param>
+      <param name="runtimeId2">The second run-time ID to compare.</param>
+      <returns>
+        <see langword="true" /> if the compared run-time IDs refer to the same user interface (UI) element; otherwise <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.Automation.Compare(System.Windows.Automation.AutomationElement,System.Windows.Automation.AutomationElement)">
+      <summary>Compares two UI Automation elements, returning <see langword="true" /> if both refer to the same UI element.</summary>
+      <param name="el1">The first UI Automation element to compare.</param>
+      <param name="el2">The second UI Automation element to compare.</param>
+      <returns>
+        <see langword="true" /> if the run time identifiers of the UI elements are the same; otherwise <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.Automation.PatternName(System.Windows.Automation.AutomationPattern)">
+      <summary>Retrieves the name of the specified control pattern.</summary>
+      <param name="pattern">The identifier of the control pattern.</param>
+      <returns>The friendly name of the control pattern, or a null reference (<see langword="Nothing" /> in Visual Basic) if the specified pattern is not found.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.Automation.PropertyName(System.Windows.Automation.AutomationProperty)">
+      <summary>Retrieves the name of the specified UI Automation property.</summary>
+      <param name="property">The UI Automation property identifier of the named property.</param>
+      <returns>The friendly name of the UI Automation property, or a null reference (<see langword="Nothing" /> in Visual Basic) if the specified UI Automation property is not found.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.Automation.RemoveAllEventHandlers">
+      <summary>Removes all registered UI Automation event handlers.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.Automation.RemoveAutomationEventHandler(System.Windows.Automation.AutomationEvent,System.Windows.Automation.AutomationElement,System.Windows.Automation.AutomationEventHandler)">
+      <summary>Removes the specified UI Automation event handler.</summary>
+      <param name="eventId">An event identifier.</param>
+      <param name="element">The UI Automation element on which to remove the event handler.</param>
+      <param name="eventHandler">The handler method that was passed to <see cref="M:System.Windows.Automation.Automation.AddAutomationEventHandler(System.Windows.Automation.AutomationEvent,System.Windows.Automation.AutomationElement,System.Windows.Automation.TreeScope,System.Windows.Automation.AutomationEventHandler)" /> for the specified event identifier and UI Automation element.</param>
+    </member>
+    <member name="M:System.Windows.Automation.Automation.RemoveAutomationFocusChangedEventHandler(System.Windows.Automation.AutomationFocusChangedEventHandler)">
+      <summary>Removes the specified focus-changed event handler.</summary>
+      <param name="eventHandler">A handler method that was passed to <see cref="M:System.Windows.Automation.Automation.AddAutomationFocusChangedEventHandler(System.Windows.Automation.AutomationFocusChangedEventHandler)" />.</param>
+    </member>
+    <member name="M:System.Windows.Automation.Automation.RemoveAutomationPropertyChangedEventHandler(System.Windows.Automation.AutomationElement,System.Windows.Automation.AutomationPropertyChangedEventHandler)">
+      <summary>Removes the specified property-changed event handler.</summary>
+      <param name="element">The UI Automation element from which to remove the event handler.</param>
+      <param name="eventHandler">A handler method that was passed to <see cref="M:System.Windows.Automation.Automation.AddAutomationPropertyChangedEventHandler(System.Windows.Automation.AutomationElement,System.Windows.Automation.TreeScope,System.Windows.Automation.AutomationPropertyChangedEventHandler,System.Windows.Automation.AutomationProperty[])" /> for the specified UI Automation element.</param>
+    </member>
+    <member name="M:System.Windows.Automation.Automation.RemoveStructureChangedEventHandler(System.Windows.Automation.AutomationElement,System.Windows.Automation.StructureChangedEventHandler)">
+      <summary>Removes the specified structure-changed event handler.</summary>
+      <param name="element">The UI Automation element from which to remove the event handler.</param>
+      <param name="eventHandler">A handler method that was passed to <see cref="M:System.Windows.Automation.Automation.AddStructureChangedEventHandler(System.Windows.Automation.AutomationElement,System.Windows.Automation.TreeScope,System.Windows.Automation.StructureChangedEventHandler)" /> for the specified UI Automation element.</param>
+    </member>
+    <member name="T:System.Windows.Automation.AutomationElement">
+      <summary>Represents a UI Automation element in the UI Automation tree, and contains values used as identifiers by UI Automation client applications.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.AcceleratorKeyProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.AcceleratorKey" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.AccessKeyProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.AccessKey" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.ActiveTextPositionChangedEvent">
+      <summary>Event ID: ActiveTextPositionChanged - Indicates that the active position within a text element has changed.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.AsyncContentLoadedEvent">
+      <summary>Identifies an event raised during asynchronous content-loading.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.AutomationFocusChangedEvent">
+      <summary>Identifies an event that is raised when the focus has changed.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.AutomationIdProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.AutomationId" /> property, which is used to identify elements.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.AutomationPropertyChangedEvent">
+      <summary>Identifies a property-changed event.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.BoundingRectangleProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.BoundingRectangle" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.ClassNameProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.ClassName" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.ClickablePointProperty">
+      <summary>Identifies the clickable point property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.ControlTypeProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.ControlType" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.CultureProperty">
+      <summary>Identifies the culture property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.FrameworkIdProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.FrameworkId" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.HasKeyboardFocusProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.HasKeyboardFocus" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.HeadingLevelProperty">
+      <summary>Property ID: HeadingLevel - Describes the heading level of an element.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.HelpTextProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.HelpText" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.IsContentElementProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.IsContentElement" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.IsControlElementProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.IsControlElement" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.IsDialogProperty">
+      <summary>Property ID: IsDialog - Identifies if the automation element is a dialog.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.IsDockPatternAvailableProperty">
+      <summary>Identifies the property that indicates whether the <see cref="T:System.Windows.Automation.DockPattern" /> control pattern is available on this <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.IsEnabledProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.IsEnabled" /> property, which specifies whether the user interface (UI) item referenced by the <see cref="T:System.Windows.Automation.AutomationElement" /> is enabled.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.IsExpandCollapsePatternAvailableProperty">
+      <summary>Identifies the property that indicates whether the <see cref="T:System.Windows.Automation.ExpandCollapsePattern" /> control pattern is available on this <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.IsGridItemPatternAvailableProperty">
+      <summary>Identifies the property that indicates whether the <see cref="T:System.Windows.Automation.GridItemPattern" /> control pattern is available on this <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.IsGridPatternAvailableProperty">
+      <summary>Identifies the property that indicates whether the <see cref="T:System.Windows.Automation.GridPattern" /> control pattern is available on this <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.IsInvokePatternAvailableProperty">
+      <summary>Identifies the property that indicates whether the <see cref="T:System.Windows.Automation.InvokePattern" /> control pattern is available on this <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.IsItemContainerPatternAvailableProperty">
+      <summary>Identifies the property that indicates whether the <see cref="T:System.Windows.Automation.ItemContainerPattern" /> control pattern is available on this <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.IsKeyboardFocusableProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.IsKeyboardFocusable" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.IsMultipleViewPatternAvailableProperty">
+      <summary>Identifies the property that indicates whether the <see cref="T:System.Windows.Automation.MultipleViewPattern" /> control pattern is available on this <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.IsOffscreenProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.IsOffscreen" /> property, which indicates whether the user interface (UI) item is visible on the screen.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.IsPasswordProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.IsPassword" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.IsRangeValuePatternAvailableProperty">
+      <summary>Identifies the property that indicates whether the <see cref="T:System.Windows.Automation.RangeValuePattern" /> control pattern is available on this <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.IsRequiredForFormProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.IsRequiredForForm" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.IsScrollItemPatternAvailableProperty">
+      <summary>Identifies the property that indicates whether the <see cref="T:System.Windows.Automation.ScrollItemPattern" /> control pattern is available for this <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.IsScrollPatternAvailableProperty">
+      <summary>Identifies the property that indicates whether the <see cref="T:System.Windows.Automation.ScrollPattern" /> control pattern is available on this <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.IsSelectionItemPatternAvailableProperty">
+      <summary>Identifies the property that indicates whether the <see cref="T:System.Windows.Automation.SelectionItemPattern" /> control pattern is available on this <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.IsSelectionPatternAvailableProperty">
+      <summary>Identifies the property that indicates whether the <see cref="T:System.Windows.Automation.SelectionPattern" /> control pattern is available on this <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.IsSynchronizedInputPatternAvailableProperty">
+      <summary>Identifies the property that indicates whether the <see cref="T:System.Windows.Automation.SynchronizedInputPattern" /> control pattern is available on this <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.IsTableItemPatternAvailableProperty">
+      <summary>Identifies the property that indicates whether the <see cref="T:System.Windows.Automation.TableItemPattern" /> control pattern is available on this <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.IsTablePatternAvailableProperty">
+      <summary>Identifies the property that indicates whether the <see cref="T:System.Windows.Automation.TablePattern" /> control pattern is available on this <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.IsTextPatternAvailableProperty">
+      <summary>Identifies the property that indicates whether the <see cref="T:System.Windows.Automation.TextPattern" /> control pattern is available on this <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.IsTogglePatternAvailableProperty">
+      <summary>Identifies the property that indicates whether the <see cref="T:System.Windows.Automation.TogglePattern" /> control pattern is available on this <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.IsTransformPatternAvailableProperty">
+      <summary>Identifies the property that indicates whether the <see cref="T:System.Windows.Automation.TransformPattern" /> control pattern is available on this <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.IsValuePatternAvailableProperty">
+      <summary>Identifies the property that indicates whether the <see cref="T:System.Windows.Automation.ValuePattern" /> control pattern is available on this <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.IsVirtualizedItemPatternAvailableProperty">
+      <summary>Identifies the property that indicates whether the <see cref="T:System.Windows.Automation.VirtualizedItemPattern" /> control pattern is available on this <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.IsWindowPatternAvailableProperty">
+      <summary>Identifies the property that indicates whether the <see cref="T:System.Windows.Automation.WindowPattern" /> control pattern is available on this <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.ItemStatusProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.ItemStatus" /> property, which specifies the status of the visual representation of a complex item.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.ItemTypeProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.ItemType" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.LabeledByProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.LabeledBy" /> property, which identifies the label associated with a control.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.LayoutInvalidatedEvent">
+      <summary>Identifies the event that is raised when the layout is invalidated.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.LocalizedControlTypeProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.LocalizedControlType" /> property in the local language.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.MenuClosedEvent">
+      <summary>Identifies the event that is raised when a menu is closed.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.MenuOpenedEvent">
+      <summary>Identifies the event that is raised when a menu is opened.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.NameProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.Name" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.NativeWindowHandleProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.NativeWindowHandle" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.NotificationEvent">
+      <summary>Event ID: Notification - used mainly by servers to raise a generic notification.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.NotSupported">
+      <summary>Indicates that a property is not supported.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.OrientationProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.Orientation" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.PositionInSetProperty">
+      <summary> Describes the ordinal location of an automation element within a set of elements that are considered to be siblings.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.ProcessIdProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.ProcessId" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.RuntimeIdProperty">
+      <summary>Identifies the property that contains the runtime identifier of the element.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.SizeOfSetProperty">
+      <summary>Describes the count of automation elements in a group or set that are considered to be siblings.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.StructureChangedEvent">
+      <summary>Identifies the event that is raised when the UI Automation tree structure is changed.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.ToolTipClosedEvent">
+      <summary>Identifies the event that is raised when a tooltip is closed.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElement.ToolTipOpenedEvent">
+      <summary>Identifies the event that is raised when a tooltip is opened.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.AutomationElement.Equals(System.Object)">
+      <summary>Determines whether the specified <see cref="T:System.Windows.Automation.AutomationElement" /> has the same value as this <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+      <param name="obj">An <see cref="T:System.Windows.Automation.AutomationElement" /> to compare.</param>
+      <returns>
+        <see langword="true" /> if the specified <see cref="T:System.Windows.Automation.AutomationElement" /> is equal to this <see cref="T:System.Windows.Automation.AutomationElement" />;otherwise <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.AutomationElement.Finalize">
+      <summary>Allows an object to try to free resources and perform other cleanup operations before it is reclaimed by garbage collection.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.AutomationElement.FindAll(System.Windows.Automation.TreeScope,System.Windows.Automation.Condition)">
+      <summary>Returns all <see cref="T:System.Windows.Automation.AutomationElement" /> objects that satisfy the specified condition.</summary>
+      <param name="scope">A bitwise combination of values that specifies the scope of the search.</param>
+      <param name="condition">The object containing the criteria to match.</param>
+      <returns>A collection of objects that satisfies the specified condition. If there are no matches, an empty collection is returned.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.AutomationElement.FindFirst(System.Windows.Automation.TreeScope,System.Windows.Automation.Condition)">
+      <summary>Returns the first child or descendant element that matches the specified condition.</summary>
+      <param name="scope">A bitwise combination of values that specifies the scope of the search.</param>
+      <param name="condition">The object containing the criteria to match.</param>
+      <returns>The first element that satisfies the condition, or <see langword="null" /> if no match is found.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.AutomationElement.FromHandle(System.IntPtr)">
+      <summary>Retrieves a new <see cref="T:System.Windows.Automation.AutomationElement" /> object for the user interface (UI) item referenced by the specified window handle.</summary>
+      <param name="hwnd">The handle of the UI element.</param>
+      <returns>An <see cref="T:System.Windows.Automation.AutomationElement" /> for the UI item identified by <paramref name="hwnd" />.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.AutomationElement.FromLocalProvider(System.Windows.Automation.Provider.IRawElementProviderSimple)">
+      <summary>Retrieves a new <see cref="T:System.Windows.Automation.AutomationElement" /> object from a local <see cref="T:System.Windows.Automation.Provider.IRawElementProviderSimple" /> implementation.</summary>
+      <param name="localImpl">The provider object.</param>
+      <returns>An <see cref="T:System.Windows.Automation.AutomationElement" /> that represents the element served by the provider object.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.AutomationElement.FromPoint(System.Windows.Point)">
+      <summary>Retrieves a new <see cref="T:System.Windows.Automation.AutomationElement" /> object for the user interface (UI) item at specified point on the desktop.</summary>
+      <param name="pt">The physical screen coordinates on the desktop at which to locate the UI element.</param>
+      <returns>The UI item at the specified point.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.AutomationElement.GetCachedPattern(System.Windows.Automation.AutomationPattern)">
+      <summary>Retrieves the specified pattern from the cache of this <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+      <param name="pattern">The identifier of the pattern to retrieve.</param>
+      <exception cref="T:System.InvalidOperationException">The requested pattern is not in the cache or is not supported by the element.</exception>
+      <exception cref="T:System.Windows.Automation.ElementNotAvailableException">The UI for the <see cref="T:System.Windows.Automation.AutomationElement" /> no longer exists.</exception>
+      <returns>An object representing the specified pattern. If there are no matching patterns, <see langword="null" /> is returned.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.AutomationElement.GetCachedPropertyValue(System.Windows.Automation.AutomationProperty)">
+      <summary>Retrieves the value of the specified property from the cache of this <see cref="T:System.Windows.Automation.AutomationElement" />. An appropriate default value for the property type is returned for properties not explicitly supported by the target user interface (UI) element.</summary>
+      <param name="property">The identifier of the property to retrieve.</param>
+      <exception cref="T:System.InvalidOperationException">The requested property is not in the cache.</exception>
+      <exception cref="T:System.Windows.Automation.ElementNotAvailableException">The user interface (UI) for the <see cref="T:System.Windows.Automation.AutomationElement" /> no longer exists.</exception>
+      <returns>An object containing the value of the specified property.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.AutomationElement.GetCachedPropertyValue(System.Windows.Automation.AutomationProperty,System.Boolean)">
+      <summary>Retrieves the value of the specified property from the cache of this <see cref="T:System.Windows.Automation.AutomationElement" />, optionally ignoring any default property.</summary>
+      <param name="property">The identifier of the property to retrieve.</param>
+      <param name="ignoreDefaultValue">A value that specifies whether a default value should be ignored if the specified property is not supported.</param>
+      <exception cref="T:System.InvalidOperationException">The requested property is not in the cache.</exception>
+      <exception cref="T:System.Windows.Automation.ElementNotAvailableException">The UI for the <see cref="T:System.Windows.Automation.AutomationElement" /> no longer exists.</exception>
+      <returns>An object containing the value of the specified property, or <see cref="F:System.Windows.Automation.AutomationElement.NotSupported" /> if the element does not supply a value and <paramref name="ignoreDefaultValue" /> is <see langword="true" />.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.AutomationElement.GetClickablePoint">
+      <summary>Retrieves a point on the <see cref="T:System.Windows.Automation.AutomationElement" /> that can be clicked.</summary>
+      <exception cref="T:System.Windows.Automation.NoClickablePointException">There is no clickable point.</exception>
+      <exception cref="T:System.Windows.Automation.ElementNotAvailableException">The UI for the <see cref="T:System.Windows.Automation.AutomationElement" /> no longer exists.</exception>
+      <returns>The physical screen coordinates of a point that can be used by a client to click on this element.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.AutomationElement.GetCurrentPattern(System.Windows.Automation.AutomationPattern)">
+      <summary>Retrieves the specified pattern object on this <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+      <param name="pattern">The identifier of the pattern to retrieve.</param>
+      <exception cref="T:System.InvalidOperationException">The pattern is not supported by the element.</exception>
+      <exception cref="T:System.Windows.Automation.ElementNotAvailableException">The UI for the <see cref="T:System.Windows.Automation.AutomationElement" /> no longer exists.</exception>
+      <returns>The pattern object, if the specified pattern is currently supported by the <see cref="T:System.Windows.Automation.AutomationElement" />.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.AutomationElement.GetCurrentPropertyValue(System.Windows.Automation.AutomationProperty)">
+      <summary>Retrieves the value of the specified property on this <see cref="T:System.Windows.Automation.AutomationElement" />. An appropriate default value for the property type is returned for properties not explicitly supported by the target user interface (UI) element.</summary>
+      <param name="property">The UI Automation property identifier specifying which property to retrieve.</param>
+      <exception cref="T:System.Windows.Automation.ElementNotAvailableException">The UI for the <see cref="T:System.Windows.Automation.AutomationElement" /> no longer exists.</exception>
+      <returns>An object containing the value of the specified property.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.AutomationElement.GetCurrentPropertyValue(System.Windows.Automation.AutomationProperty,System.Boolean)">
+      <summary>Retrieves the value of the specified property on this <see cref="T:System.Windows.Automation.AutomationElement" />, optionally ignoring any default property.</summary>
+      <param name="property">The UI Automation property identifier specifying which property to retrieve.</param>
+      <param name="ignoreDefaultValue">A value that specifies whether a default value should be ignored if the specified property is supported.</param>
+      <exception cref="T:System.Windows.Automation.ElementNotAvailableException">The UI for the <see cref="T:System.Windows.Automation.AutomationElement" /> no longer exists.</exception>
+      <returns>An object containing the value of the specified property, or <see cref="F:System.Windows.Automation.AutomationElement.NotSupported" /> if the element does not supply a value and <paramref name="ignoreDefaultValue" /> is <see langword="true" />.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.AutomationElement.GetHashCode">
+      <summary>Retrieves the hash code for this <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+      <returns>The 32-bit signed integer hash code.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.AutomationElement.GetRuntimeId">
+      <summary>Retrieves the unique identifier assigned to the user interface (UI) item.</summary>
+      <exception cref="T:System.Windows.Automation.ElementNotAvailableException">The UI for the <see cref="T:System.Windows.Automation.AutomationElement" /> no longer exists.</exception>
+      <returns>An array of integers representing the run-time identifier.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.AutomationElement.GetSupportedPatterns">
+      <summary>Retrieves the control patterns that this <see cref="T:System.Windows.Automation.AutomationElement" /> supports.</summary>
+      <returns>An array of <see cref="T:System.Windows.Automation.AutomationPattern" /> objects that represent the supported control patterns.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.AutomationElement.GetSupportedProperties">
+      <summary>Retrieves the identifiers of properties supported by the element.</summary>
+      <returns>An array of supported property identifiers.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.AutomationElement.GetUpdatedCache(System.Windows.Automation.CacheRequest)">
+      <summary>Retrieves a new <see cref="T:System.Windows.Automation.AutomationElement" /> with an updated cache.</summary>
+      <param name="request">The patterns and properties to include in the updated cache.</param>
+      <returns>A new <see cref="T:System.Windows.Automation.AutomationElement" /> that has an updated cache.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.AutomationElement.op_Equality(System.Windows.Automation.AutomationElement,System.Windows.Automation.AutomationElement)">
+      <summary>Returns a value indicating whether the specified <see cref="T:System.Windows.Automation.AutomationElement" /> objects refer to the same user interface (UI) element.</summary>
+      <param name="left">The first <see cref="T:System.Windows.Automation.AutomationElement" /> to compare.</param>
+      <param name="right">The second <see cref="T:System.Windows.Automation.AutomationElement" /> to compare.</param>
+      <returns>
+        <see langword="true" /> if the two <see cref="T:System.Windows.Automation.AutomationElement" /> objects refer to the same UI element; otherwise <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.AutomationElement.op_Inequality(System.Windows.Automation.AutomationElement,System.Windows.Automation.AutomationElement)">
+      <summary>Returns a value indicating whether the specified <see cref="T:System.Windows.Automation.AutomationElement" /> objects refer to different user interface (UI) elements.</summary>
+      <param name="left">The first <see cref="T:System.Windows.Automation.AutomationElement" /> to compare.</param>
+      <param name="right">The second <see cref="T:System.Windows.Automation.AutomationElement" /> to compare.</param>
+      <returns>
+        <see langword="true" /> if the two objects refer to different UI elements; otherwise <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.AutomationElement.SetFocus">
+      <summary>Sets focus on the <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+      <exception cref="T:System.Windows.Automation.ElementNotAvailableException">The UI for the <see cref="T:System.Windows.Automation.AutomationElement" /> no longer exists.</exception>
+    </member>
+    <member name="M:System.Windows.Automation.AutomationElement.TryGetCachedPattern(System.Windows.Automation.AutomationPattern,System.Object@)">
+      <summary>Retrieves a control pattern from the cache.</summary>
+      <param name="pattern">The identifier of the control pattern to retrieve.</param>
+      <param name="patternObject">On return, contains the pattern if it is in the cache; otherwise <see langword="null" />.</param>
+      <returns>
+        <see langword="true" /> if the pattern is in the cache; <see langword="false" /> if it is not in the cache or not supported.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.AutomationElement.TryGetClickablePoint(System.Windows.Point@)">
+      <summary>Retrieves a point within the element that can be clicked.</summary>
+      <param name="pt">When this method returns, contains the physical screen coordinates of a clickable point.</param>
+      <returns>
+        <see langword="true" /> if there is a point that is clickable; otherwise <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.AutomationElement.TryGetCurrentPattern(System.Windows.Automation.AutomationPattern,System.Object@)">
+      <summary>Retrieves an object that implements a control pattern.</summary>
+      <param name="pattern">The identifier of the control pattern to retrieve.</param>
+      <param name="patternObject">On return, the control pattern if it is supported; otherwise <see langword="null" />.</param>
+      <returns>
+        <see langword="true" /> if the pattern is supported; otherwise <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationElement.Cached">
+      <summary>Gets the cached UI Automation property values for this <see cref="T:System.Windows.Automation.AutomationElement" /> object.</summary>
+      <exception cref="T:System.InvalidOperationException">There are no cached properties.</exception>
+      <exception cref="T:System.Windows.Automation.ElementNotAvailableException">The UI for the <see cref="T:System.Windows.Automation.AutomationElement" /> no longer exists.</exception>
+      <returns>A structure containing the cached property values for the <see cref="T:System.Windows.Automation.AutomationElement" />.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationElement.CachedChildren">
+      <summary>Gets the cached child elements of this <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+      <exception cref="T:System.Windows.Automation.ElementNotAvailableException">The UI for the <see cref="T:System.Windows.Automation.AutomationElement" /> no longer exists.</exception>
+      <exception cref="T:System.InvalidOperationException">No request was made to cache the children of this element.</exception>
+      <returns>The collection of child elements. This collection can be empty if the element has no children.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationElement.CachedParent">
+      <summary>Gets the cached parent of this <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+      <exception cref="T:System.InvalidOperationException">No parent element is cached.</exception>
+      <exception cref="T:System.Windows.Automation.ElementNotAvailableException">The UI for the <see cref="T:System.Windows.Automation.AutomationElement" /> no longer exists.</exception>
+      <returns>The parent element. The return value can be <see langword="null" /> if the specified element has no parent - for example, if this element is the root node.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationElement.Current">
+      <summary>Gets the current property values of the <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+      <exception cref="T:System.Windows.Automation.ElementNotAvailableException">The UI for the <see cref="T:System.Windows.Automation.AutomationElement" /> no longer exists.</exception>
+      <returns>A structure containing the current property values.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationElement.FocusedElement">
+      <summary>Gets the <see cref="T:System.Windows.Automation.AutomationElement" /> that currently has focus.</summary>
+      <returns>The focused UI element.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationElement.RootElement">
+      <summary>Gets the root <see cref="T:System.Windows.Automation.AutomationElement" /> for the current desktop.</summary>
+      <returns>The root element.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.AutomationElement.AutomationElementInformation">
+      <summary>Contains the property accessors used by the <see cref="P:System.Windows.Automation.AutomationElement.Cached" /> or <see cref="P:System.Windows.Automation.AutomationElement.Current" /> properties.</summary>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.AcceleratorKey">
+      <summary>Gets a string containing the accelerator key combinations for the element.</summary>
+      <returns>The sequence of key combinations that invoke an action associated with the element.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.AccessKey">
+      <summary>Gets a string containing the access key character for the element.</summary>
+      <returns>The character, associated with an element, that is used to activate that element.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.AutomationId">
+      <summary>Gets a string containing the UI Automation identifier (ID) for the element.</summary>
+      <returns>An ID for an element that is unique among siblings within its container.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.BoundingRectangle">
+      <summary>Gets the coordinates of the rectangle that completely encloses the element.</summary>
+      <returns>The point coordinates of the enclosing rectangle.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.ClassName">
+      <summary>Gets a string containing the class name of the element as assigned by the control developer.</summary>
+      <returns>The class name assigned by the control developer.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.ControlType">
+      <summary>Gets the <see cref="T:System.Windows.Automation.ControlType" /> of the element.</summary>
+      <returns>The interaction model for this element. The default value is <see cref="F:System.Windows.Automation.ControlType.Custom" />.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.FrameworkId">
+      <summary>Gets the name of the underlying UI framework.</summary>
+      <returns>The name of the UI framework, such as "Win32", "WinForm", or "DirectUI". The default value is an empty string.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.HasKeyboardFocus">
+      <summary>Gets a value that indicates whether the element has keyboard focus.</summary>
+      <returns>
+        <see langword="true" /> if the element has keyboard focus; otherwise <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.HelpText">
+      <summary>Gets the help text associated with the element.</summary>
+      <returns>The tooltip help text for the element.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.IsContentElement">
+      <summary>Gets a value that specifies whether the element is a content element.</summary>
+      <returns>
+        <see langword="true" /> if the element is a content element; otherwise <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.IsControlElement">
+      <summary>Gets a value that indicates whether the element is viewed as a control.</summary>
+      <returns>
+        <see langword="true" /> if the element is viewed as a control; otherwise <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.IsEnabled">
+      <summary>Gets a value that indicates whether the user interface (UI) item referenced by the UI Automation element is enabled.</summary>
+      <returns>
+        <see langword="true" /> if the control is enabled; otherwise <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.IsKeyboardFocusable">
+      <summary>Gets a value that indicates whether the UI Automation element can accept keyboard focus.</summary>
+      <returns>
+        <see langword="true" /> if the control can receive keyboard focus; otherwise <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.IsOffscreen">
+      <summary>Gets a value that indicates whether the UI Automation element is visible on the screen.</summary>
+      <returns>
+        <see langword="true" /> if the control is not visible; otherwise <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.IsPassword">
+      <summary>Gets a value that indicates whether the UI Automation element contains protected content.</summary>
+      <returns>
+        <see langword="true" /> if the element contains protected content; otherwise <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.IsRequiredForForm">
+      <summary>Gets a value that indicates whether the UI Automation element is required to be filled out on a form.</summary>
+      <returns>
+        <see langword="true" /> if the element is required to be filled out; otherwise <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.ItemStatus">
+      <summary>Gets a description of the status of an item within an element.</summary>
+      <returns>The description of the status.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.ItemType">
+      <summary>Gets a description of the type of an item.</summary>
+      <returns>A localized string that describes the item.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.LabeledBy">
+      <summary>Gets the element that contains the text label for this element.</summary>
+      <returns>The element that is the label for this element.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.LocalizedControlType">
+      <summary>Gets a description of the control type.</summary>
+      <returns>A localized description of the control type, such as "button".</returns>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.Name">
+      <summary>Gets the name of the element.</summary>
+      <returns>The name of the user interface (UI) element.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.NativeWindowHandle">
+      <summary>Gets the handle of the element's window.</summary>
+      <returns>The handle of the window, if one exists; otherwise 0.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.Orientation">
+      <summary>Gets the orientation of the control.</summary>
+      <returns>The orientation.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.ProcessId">
+      <summary>Gets the process identifier (ID) of this element.</summary>
+      <returns>The ID of the process that hosts the element. The default value for the property is 0.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.AutomationElementCollection">
+      <summary>Represents a collection of <see cref="T:System.Windows.Automation.AutomationElement" /> objects.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.AutomationElementCollection.CopyTo(System.Array,System.Int32)">
+      <summary>Copies the collection's elements to an array, starting at the specified index in the target array.</summary>
+      <param name="array">The destination of the elements copied from the collection.</param>
+      <param name="index">The zero-based index in the target array where copying should begin.</param>
+    </member>
+    <member name="M:System.Windows.Automation.AutomationElementCollection.CopyTo(System.Windows.Automation.AutomationElement[],System.Int32)">
+      <summary>Copies the collection's elements to a specialized array instance, starting at the specified index in the target array.</summary>
+      <param name="array">The destination of the elements copied from the collection.</param>
+      <param name="index">The zero-based index in the target array where copying should begin.</param>
+      <exception cref="T:System.ArgumentException">The destination array is not large enough, or <paramref name="index" /> is outside the bounds of the array.</exception>
+    </member>
+    <member name="M:System.Windows.Automation.AutomationElementCollection.GetEnumerator">
+      <summary>Returns an enumerator that can be used to iterate through the items in the collection.</summary>
+      <returns>An enumerator that can be used to iterate through the <see cref="T:System.Windows.Automation.AutomationElementCollection" />.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationElementCollection.Count">
+      <summary>Gets the number of elements in this collection.</summary>
+      <returns>The number of elements.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationElementCollection.IsSynchronized">
+      <summary>Gets a value indicating whether the <see cref="T:System.Windows.Automation.AutomationElementCollection" /> object is synchronized (thread-safe).</summary>
+      <returns>Always returns <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationElementCollection.Item(System.Int32)">
+      <summary>Gets the <see cref="T:System.Windows.Automation.AutomationElement" /> at the specified index.</summary>
+      <param name="index">The zero-based index of the element in the collection.</param>
+      <exception cref="T:System.IndexOutOfRangeException">A negative integer was specified for <paramref name="index" />, or <paramref name="index" /> is greater than or equal to <see cref="P:System.Windows.Automation.AutomationElementCollection.Count" />.</exception>
+      <returns>The <see cref="T:System.Windows.Automation.AutomationElement" /> at the specified index.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationElementCollection.SyncRoot">
+      <summary>Gets an object that can be used to synchronize access to the <see cref="T:System.Windows.Automation.AutomationElementCollection" /> collection.</summary>
+      <returns>An object that can be used to synchronize access to the collection.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.AutomationElementMode">
+      <summary>Contains values that specify the type of reference to use when returning UI Automation elements. These values are used in the <see cref="P:System.Windows.Automation.CacheRequest.AutomationElementMode" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElementMode.Full">
+      <summary>Specifies that returned elements have a full reference to the underlying UI.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.AutomationElementMode.None">
+      <summary>Specifies that returned elements have no reference to the underlying UI and contain only cached information. This mode might be used, for example, to retrieve the names of items in a list box without obtaining references to the items themselves.</summary>
+    </member>
+    <member name="T:System.Windows.Automation.AutomationFocusChangedEventArgs">
+      <summary>Provides data for a focus-changed event.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.AutomationFocusChangedEventArgs.#ctor(System.Int32,System.Int32)">
+      <summary>Initializes a new instance of the <see cref="T:System.Windows.Automation.AutomationFocusChangedEventArgs" /> class.</summary>
+      <param name="idObject">The identifier (ID) of the object that received focus.</param>
+      <param name="idChild">The child ID of the object that received focus.</param>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationFocusChangedEventArgs.ChildId">
+      <summary>Gets the child Microsoft Active Accessibility identifier of the object receiving focus.</summary>
+      <returns>The identifier.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.AutomationFocusChangedEventArgs.ObjectId">
+      <summary>Gets the identifier (ID) of the Microsoft Active Accessibility object that generated the event.</summary>
+      <returns>The ID of the user interface (UI) element that is receiving focus. For possible values, see Object Identifiers.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.AutomationFocusChangedEventHandler">
+      <summary>Represents the method implemented by the UI Automation client application to handle the event raised by a UI Automation provider when the focus has changed.</summary>
+      <param name="sender">The object that raised the event.</param>
+      <param name="e">Information about the event.</param>
+    </member>
+    <member name="T:System.Windows.Automation.BasePattern">
+      <summary>Provides the base implementation for control pattern classes.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.BasePattern.Finalize">
+      <summary>Frees resources and performs other cleanup operations before the object is reclaimed by garbage collection.</summary>
+    </member>
+    <member name="T:System.Windows.Automation.CacheRequest">
+      <summary>Specifies properties and patterns that the UI Automation framework caches when an <see cref="T:System.Windows.Automation.AutomationElement" /> is obtained.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.CacheRequest.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:System.Windows.Automation.CacheRequest" /> class.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.CacheRequest.Activate">
+      <summary>Sets this <see cref="T:System.Windows.Automation.CacheRequest" /> as the active specification for the items that are returned when an <see cref="T:System.Windows.Automation.AutomationElement" /> is requested on the same thread.</summary>
+      <returns>The object that can be used to dispose the <see cref="T:System.Windows.Automation.CacheRequest" />.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.CacheRequest.Add(System.Windows.Automation.AutomationPattern)">
+      <summary>Adds the specified <see cref="T:System.Windows.Automation.AutomationPattern" /> identifier to this <see cref="T:System.Windows.Automation.CacheRequest" />.</summary>
+      <param name="pattern">An identifier specifying a pattern to cache.</param>
+      <exception cref="T:System.InvalidOperationException">The <see cref="T:System.Windows.Automation.CacheRequest" /> is active.</exception>
+    </member>
+    <member name="M:System.Windows.Automation.CacheRequest.Add(System.Windows.Automation.AutomationProperty)">
+      <summary>Adds the specified <see cref="T:System.Windows.Automation.AutomationProperty" /> identifier to this <see cref="T:System.Windows.Automation.CacheRequest" />.</summary>
+      <param name="property">An identifier specifying a property value to cache.</param>
+      <exception cref="T:System.InvalidOperationException">The <see cref="T:System.Windows.Automation.CacheRequest" /> is active.</exception>
+    </member>
+    <member name="M:System.Windows.Automation.CacheRequest.Clone">
+      <summary>Creates a copy of this <see cref="T:System.Windows.Automation.CacheRequest" />.</summary>
+      <returns>A modifiable copy of the current object.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.CacheRequest.Pop">
+      <summary>Removes the active <see cref="T:System.Windows.Automation.CacheRequest" /> from the internal stack for the current thread.</summary>
+      <exception cref="T:System.InvalidOperationException">An attempt was made to remove a cache request that was not the last one pushed onto the stack.</exception>
+    </member>
+    <member name="M:System.Windows.Automation.CacheRequest.Push">
+      <summary>Places the <see cref="T:System.Windows.Automation.CacheRequest" /> on the internal state stack, making it the active request on the current thread.</summary>
+    </member>
+    <member name="P:System.Windows.Automation.CacheRequest.AutomationElementMode">
+      <summary>Gets or sets a value that specifies whether returned elements should contain full references to the underlying user interface (UI), or only cached information.</summary>
+      <returns>
+        <see cref="F:System.Windows.Automation.AutomationElementMode.Full" /> if the returned elements have a full reference to the underlying user interface (UI); otherwise <see cref="F:System.Windows.Automation.AutomationElementMode.None" />.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.CacheRequest.Current">
+      <summary>Gets the <see cref="T:System.Windows.Automation.CacheRequest" /> that is active on the current thread.</summary>
+      <returns>The active <see cref="T:System.Windows.Automation.CacheRequest" />.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.CacheRequest.TreeFilter">
+      <summary>Gets or sets a value specifying the view of the UI Automation element tree to use when caching.</summary>
+      <returns>The view of the UI Automation element tree. The default view is <see cref="F:System.Windows.Automation.Automation.ControlViewCondition" />.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.CacheRequest.TreeScope">
+      <summary>Gets or sets a value that specifies whether caching is done only for the root of the subtree, or also for its children or descendants.</summary>
+      <exception cref="T:System.ArgumentException">An attempt was made to set the property to <see cref="F:System.Windows.Automation.TreeScope.Parent" /> or <see cref="F:System.Windows.Automation.TreeScope.Ancestors" />.</exception>
+      <returns>One or more of <see cref="F:System.Windows.Automation.TreeScope.Element" />, <see cref="F:System.Windows.Automation.TreeScope.Children" />, <see cref="F:System.Windows.Automation.TreeScope.Descendants" />, or <see cref="F:System.Windows.Automation.TreeScope.Subtree" />. The default value is <see cref="F:System.Windows.Automation.TreeScope.Element" />.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.ClientSettings">
+      <summary>Contains methods that make client-side providers available to the client.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.ClientSettings.RegisterClientSideProviderAssembly(System.Reflection.AssemblyName)">
+      <summary>Registers an assembly that contains client-side providers.</summary>
+      <param name="assemblyName">Name of the assembly.</param>
+      <exception cref="T:System.Windows.Automation.ProxyAssemblyNotLoadedException">The assembly could not be loaded.</exception>
+    </member>
+    <member name="M:System.Windows.Automation.ClientSettings.RegisterClientSideProviders(System.Windows.Automation.ClientSideProviderDescription[])">
+      <summary>Registers client-side providers.</summary>
+      <param name="clientSideProviderDescription">An array of provider descriptions.</param>
+      <exception cref="T:System.Windows.Automation.ProxyAssemblyNotLoadedException">The assembly could not be loaded.</exception>
+    </member>
+    <member name="T:System.Windows.Automation.ClientSideProviderDescription">
+      <summary>Describes the scope of a client-side UI Automation provider so that it can be registered with the UI Automation client application.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.ClientSideProviderDescription.#ctor(System.Windows.Automation.ClientSideProviderFactoryCallback,System.String)">
+      <summary>Initializes a new instance of the <see cref="T:System.Windows.Automation.ClientSideProviderDescription" /> class.</summary>
+      <param name="clientSideProviderFactoryCallback">The method that creates the client-side provider for a window.</param>
+      <param name="className">The class name of the windows that the provider is used for.</param>
+    </member>
+    <member name="M:System.Windows.Automation.ClientSideProviderDescription.#ctor(System.Windows.Automation.ClientSideProviderFactoryCallback,System.String,System.String,System.Windows.Automation.ClientSideProviderMatchIndicator)">
+      <summary>Initializes a new instance of the <see cref="T:System.Windows.Automation.ClientSideProviderDescription" /> class.</summary>
+      <param name="clientSideProviderFactoryCallback">The method that creates the client-side provider for a window.</param>
+      <param name="className">The class name of the window that the provider is used for.</param>
+      <param name="imageName">The name of the executable or DLL for the process where the window resides.</param>
+      <param name="flags">Flags that specify behavior when matching window class names.</param>
+    </member>
+    <member name="P:System.Windows.Automation.ClientSideProviderDescription.ClassName">
+      <summary>Gets the class name of the windows that the provider is used for.</summary>
+      <returns>The window class name.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.ClientSideProviderDescription.ClientSideProviderFactoryCallback">
+      <summary>Gets the method that creates the client-side provider.</summary>
+      <returns>The callback method.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.ClientSideProviderDescription.Flags">
+      <summary>Gets the flags that specify behavior when matching window class names.</summary>
+      <returns>A bitwise combination of values.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.ClientSideProviderDescription.ImageName">
+      <summary>Gets the name of the executable or dynamic-link library (DLL) for the process where the window resides.</summary>
+      <returns>The image name.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.ClientSideProviderFactoryCallback">
+      <summary>Represents the method that creates a client-side UI Automation provider for a window.</summary>
+      <param name="hwnd">The window for which the provider is created.</param>
+      <param name="idChild">The child ID of the object.</param>
+      <param name="idObject">The ID of the object.</param>
+    </member>
+    <member name="T:System.Windows.Automation.ClientSideProviderMatchIndicator">
+      <summary>Contains values that specify behavior when matching class names in a <see cref="T:System.Windows.Automation.ClientSideProviderDescription" />.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.ClientSideProviderMatchIndicator.AllowSubstringMatch">
+      <summary>Specifies that substring comparison is used for comparing class names.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.ClientSideProviderMatchIndicator.DisallowBaseClassNameMatch">
+      <summary>Specifies that the base class of the object is not used when matching window class names.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.ClientSideProviderMatchIndicator.None">
+      <summary>No special flags.</summary>
+    </member>
+    <member name="T:System.Windows.Automation.Condition">
+      <summary>Base type for conditions used in filtering when searching for elements in the UI Automation tree.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.Condition.FalseCondition">
+      <summary>Represents a <see cref="T:System.Windows.Automation.Condition" /> that always evaluates to <see langword="false" />.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.Condition.TrueCondition">
+      <summary>Represents a <see cref="T:System.Windows.Automation.Condition" /> that always evaluates to <see langword="true" />.</summary>
+    </member>
+    <member name="T:System.Windows.Automation.DockPattern">
+      <summary>Represents controls that expose their dock properties within a docking container.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.DockPattern.DockPositionProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.DockPattern.DockPatternInformation.DockPosition" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.DockPattern.Pattern">
+      <summary>Identifies the <see cref="T:System.Windows.Automation.DockPattern" /> control pattern.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.DockPattern.SetDockPosition(System.Windows.Automation.DockPosition)">
+      <summary>Docks the <see cref="T:System.Windows.Automation.AutomationElement" /> at the requested <see cref="T:System.Windows.Automation.DockPosition" /> within a docking container.</summary>
+      <param name="dockPosition">The dock position relative to the boundaries of the docking container and other elements within the container.</param>
+      <exception cref="T:System.InvalidOperationException">When a control is not able to execute the requested dock style.</exception>
+    </member>
+    <member name="P:System.Windows.Automation.DockPattern.Cached">
+      <summary>Gets the cached UI Automation property values for this <see cref="T:System.Windows.Automation.DockPattern" />.</summary>
+      <exception cref="T:System.InvalidOperationException">The requested property is not in the cache.</exception>
+      <returns>A structure containing the cached UI Automation property values for the control pattern.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.DockPattern.Current">
+      <summary>Gets the current UI Automation property values for this <see cref="T:System.Windows.Automation.DockPattern" />.</summary>
+      <returns>A structure containing the current UI Automation property values for the control pattern.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.DockPattern.DockPatternInformation">
+      <summary>Provides access to the property values of a <see cref="T:System.Windows.Automation.DockPattern" /> object using its <see cref="P:System.Windows.Automation.DockPattern.Current" /> or <see cref="P:System.Windows.Automation.DockPattern.Cached" /> accessors.</summary>
+    </member>
+    <member name="P:System.Windows.Automation.DockPattern.DockPatternInformation.DockPosition">
+      <summary>Retrieves the <see cref="T:System.Windows.Automation.DockPosition" /> of an <see cref="T:System.Windows.Automation.AutomationElement" /> within a docking container.</summary>
+      <returns>The <see cref="T:System.Windows.Automation.DockPosition" /> of the element, relative to the boundaries of the docking container and other elements within the container.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.ExpandCollapsePattern">
+      <summary>Represents controls that visually expand to display content and collapse to hide content.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.ExpandCollapsePattern.ExpandCollapseStateProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.ExpandCollapsePattern.ExpandCollapsePatternInformation.ExpandCollapseState" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.ExpandCollapsePattern.Pattern">
+      <summary>Identifies the <see cref="T:System.Windows.Automation.ExpandCollapsePattern" /> control pattern.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.ExpandCollapsePattern.Collapse">
+      <summary>Hides all descendant nodes, controls, or content of the <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+      <exception cref="T:System.InvalidOperationException">
+        <see cref="M:System.Windows.Automation.ExpandCollapsePattern.Collapse" /> is called when the <see cref="T:System.Windows.Automation.ExpandCollapseState" /> = <see cref="F:System.Windows.Automation.ExpandCollapseState.LeafNode" />.</exception>
+    </member>
+    <member name="M:System.Windows.Automation.ExpandCollapsePattern.Expand">
+      <summary>Displays all child nodes, controls, or content of the <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+      <exception cref="T:System.InvalidOperationException">
+        <see cref="M:System.Windows.Automation.ExpandCollapsePattern.Expand" /> is called when the <see cref="T:System.Windows.Automation.ExpandCollapseState" /> = <see cref="F:System.Windows.Automation.ExpandCollapseState.LeafNode" />.</exception>
+    </member>
+    <member name="P:System.Windows.Automation.ExpandCollapsePattern.Cached">
+      <summary>Gets the cached UI Automation property values for this <see cref="T:System.Windows.Automation.ExpandCollapsePattern" />.</summary>
+      <exception cref="T:System.InvalidOperationException">The requested property is not in the cache.</exception>
+      <returns>A structure containing the cached UI Automation property values for the control pattern.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.ExpandCollapsePattern.Current">
+      <summary>Gets the current UI Automation property values for this <see cref="T:System.Windows.Automation.ExpandCollapsePattern" />.</summary>
+      <returns>A structure containing the current UI Automation property values for the control pattern.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.ExpandCollapsePattern.ExpandCollapsePatternInformation">
+      <summary>Provides access to the property values of a <see cref="T:System.Windows.Automation.ExpandCollapsePattern" /> object using its <see cref="P:System.Windows.Automation.ExpandCollapsePattern.Current" /> or <see cref="P:System.Windows.Automation.ExpandCollapsePattern.Cached" /> accessors.</summary>
+    </member>
+    <member name="P:System.Windows.Automation.ExpandCollapsePattern.ExpandCollapsePatternInformation.ExpandCollapseState">
+      <summary>Gets the <see cref="T:System.Windows.Automation.ExpandCollapseState" /> of the <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+      <returns>The <see cref="T:System.Windows.Automation.ExpandCollapseState" /> of <see cref="T:System.Windows.Automation.AutomationElement" />.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.GridItemPattern">
+      <summary>Represents child controls of containers that support <see cref="T:System.Windows.Automation.GridPattern" />.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.GridItemPattern.ColumnProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.GridItemPattern.GridItemPatternInformation.Column" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.GridItemPattern.ColumnSpanProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.GridItemPattern.GridItemPatternInformation.ColumnSpan" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.GridItemPattern.ContainingGridProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.GridItemPattern.GridItemPatternInformation.ContainingGrid" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.GridItemPattern.Pattern">
+      <summary>Identifies the <see cref="T:System.Windows.Automation.GridItemPattern" /> control pattern.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.GridItemPattern.RowProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.GridItemPattern.GridItemPatternInformation.Row" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.GridItemPattern.RowSpanProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.GridItemPattern.GridItemPatternInformation.RowSpan" /> property.</summary>
+    </member>
+    <member name="P:System.Windows.Automation.GridItemPattern.Cached">
+      <summary>Gets the cached property values for this <see cref="T:System.Windows.Automation.GridItemPattern" />.</summary>
+      <exception cref="T:System.InvalidOperationException">The requested property is not in the cache.</exception>
+      <returns>The cached property values.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.GridItemPattern.Current">
+      <summary>Gets the current property values for this <see cref="T:System.Windows.Automation.GridItemPattern" />.</summary>
+      <returns>The current property values.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.GridItemPattern.GridItemPatternInformation">
+      <summary>Provides access to the property values of a <see cref="T:System.Windows.Automation.GridItemPattern" /> object using its <see cref="P:System.Windows.Automation.GridItemPattern.Current" /> or <see cref="P:System.Windows.Automation.GridItemPattern.Cached" /> accessors.</summary>
+    </member>
+    <member name="P:System.Windows.Automation.GridItemPattern.GridItemPatternInformation.Column">
+      <summary>Gets the ordinal number of the column that contains the cell or item.</summary>
+      <returns>A zero-based ordinal number that identifies the column containing the cell or item. The default value is 0.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.GridItemPattern.GridItemPatternInformation.ColumnSpan">
+      <summary>Gets the number of columns spanned by a cell or item.</summary>
+      <returns>The number of columns spanned. The default value is 1.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.GridItemPattern.GridItemPatternInformation.ContainingGrid">
+      <summary>Gets a UI Automation element that supports <see cref="T:System.Windows.Automation.GridPattern" /> and represents the container of the cell or item.</summary>
+      <returns>A UI Automation element that supports the GridPattern and represents the table cell or item container. The default is a null reference (<see langword="Nothing" /> in Microsoft Visual Basic .NET).</returns>
+    </member>
+    <member name="P:System.Windows.Automation.GridItemPattern.GridItemPatternInformation.Row">
+      <summary>Gets the ordinal number of the row that contains the cell or item.</summary>
+      <returns>A zero-based ordinal number that identifies the row containing the table cell or item. The default value is 0.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.GridItemPattern.GridItemPatternInformation.RowSpan">
+      <summary>Gets the number of rows spanned by a cell or item.</summary>
+      <returns>The number of rows spanned. The default value is 1.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.GridPattern">
+      <summary>Represents controls that act as containers for a collection of child elements. The children of this control support <see cref="T:System.Windows.Automation.GridItemPattern" /> and are organized in a two-dimensional logical coordinate system that can be traversed by row and column.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.GridPattern.ColumnCountProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.GridPattern.GridPatternInformation.ColumnCount" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.GridPattern.Pattern">
+      <summary>Identifies the <see cref="T:System.Windows.Automation.GridPattern" /> control pattern.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.GridPattern.RowCountProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.GridPattern.GridPatternInformation.RowCount" /> property.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.GridPattern.GetItem(System.Int32,System.Int32)">
+      <summary>Retrieves an <see cref="T:System.Windows.Automation.AutomationElement" /> that represents the specified cell.</summary>
+      <param name="row">The ordinal number of the row of interest.</param>
+      <param name="column">The ordinal number of the column of interest.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">Either the requested row or column coordinate is less than zero.
+
+-or-
+
+The requested row coordinate is larger than the <see cref="P:System.Windows.Automation.GridPattern.GridPatternInformation.RowCount" /> or the column coordinate is larger than the <see cref="P:System.Windows.Automation.GridPattern.GridPatternInformation.ColumnCount" />.</exception>
+      <returns>An <see cref="T:System.Windows.Automation.AutomationElement" /> that represents the retrieved cell.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.GridPattern.Cached">
+      <summary>Gets the cached UI Automation property values for this <see cref="T:System.Windows.Automation.GridPattern" />.</summary>
+      <exception cref="T:System.InvalidOperationException">The requested property is not in the cache.</exception>
+      <returns>A structure containing the cached UI Automation property values for the control pattern.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.GridPattern.Current">
+      <summary>Gets the current UI Automation property values for this <see cref="T:System.Windows.Automation.GridPattern" />.</summary>
+      <returns>A structure containing the current UI Automation property values for the control pattern.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.GridPattern.GridPatternInformation">
+      <summary>Provides access to the property values of a <see cref="T:System.Windows.Automation.GridPattern" /> object using its <see cref="P:System.Windows.Automation.GridPattern.Current" /> or <see cref="P:System.Windows.Automation.GridPattern.Cached" /> accessors.</summary>
+    </member>
+    <member name="P:System.Windows.Automation.GridPattern.GridPatternInformation.ColumnCount">
+      <summary>Gets the number of columns in a grid.</summary>
+      <returns>The total number of columns in a grid.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.GridPattern.GridPatternInformation.RowCount">
+      <summary>Gets the total number of rows in a grid.</summary>
+      <returns>The total number of rows in a grid.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.InvokePattern">
+      <summary>Represents controls that initiate or perform a single, unambiguous action and do not maintain state when activated.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.InvokePattern.InvokedEvent">
+      <summary>Identifies the event raised when a control is invoked or activated.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.InvokePattern.Pattern">
+      <summary>Identifies the <see cref="T:System.Windows.Automation.InvokePattern" /> control pattern.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.InvokePattern.Invoke">
+      <summary>Sends a request to activate a control and initiate its single, unambiguous action.</summary>
+      <exception cref="T:System.InvalidOperationException">The element does not support the <see cref="T:System.Windows.Automation.InvokePattern" /> control pattern or is hidden or blocked.</exception>
+      <exception cref="T:System.Windows.Automation.ElementNotEnabledException">The element is not enabled. Can be raised when a UI Automation provider has implemented its own handling of the <see cref="P:System.Windows.Automation.AutomationElement.AutomationElementInformation.IsEnabled" /> property.</exception>
+    </member>
+    <member name="T:System.Windows.Automation.ItemContainerPattern">
+      <summary>Represents an object that manages items and supports retrieving an item by property value.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.ItemContainerPattern.Pattern">
+      <summary>Identifies the <see cref="T:System.Windows.Automation.ItemContainerPattern" /> control pattern.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.ItemContainerPattern.FindItemByProperty(System.Windows.Automation.AutomationElement,System.Windows.Automation.AutomationProperty,System.Object)">
+      <summary>Retrieves an element by the specified property value.</summary>
+      <param name="startAfter">The item in the container after which to begin the search.</param>
+      <param name="property">The property that contains the value to retrieve.</param>
+      <param name="value">The value to retrieve.</param>
+      <returns>The first item that matches the search criterion; otherwise, <see langword="null" /> if no items match.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.MultipleViewPattern">
+      <summary>Represents controls that provide, and are able to switch between, multiple representations of the same set of information or child controls.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.MultipleViewPattern.CurrentViewProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.MultipleViewPattern.MultipleViewPatternInformation.CurrentView" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.MultipleViewPattern.Pattern">
+      <summary>Identifies the <see cref="T:System.Windows.Automation.MultipleViewPattern" /> control pattern.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.MultipleViewPattern.SupportedViewsProperty">
+      <summary>Identifies the property that gets the control-specific collection of views.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.MultipleViewPattern.GetViewName(System.Int32)">
+      <summary>Retrieves the name of a control-specific view.</summary>
+      <param name="viewId">The control-specific view identifier.</param>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="viewId" /> is not a member of the supported views collection.</exception>
+      <returns>A localized string representing the control-specific view name.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.MultipleViewPattern.SetCurrentView(System.Int32)">
+      <summary>Sets the current control-specific view.</summary>
+      <param name="viewId">A control-specific view identifier.</param>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="viewId" /> is not a member of the supported views collection.</exception>
+    </member>
+    <member name="P:System.Windows.Automation.MultipleViewPattern.Cached">
+      <summary>Gets the cached UI Automation property values for this <see cref="T:System.Windows.Automation.MultipleViewPattern" />.</summary>
+      <exception cref="T:System.InvalidOperationException">The requested property is not in the cache.</exception>
+      <returns>A structure containing the cached UI Automation property values for the control pattern.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.MultipleViewPattern.Current">
+      <summary>Gets the current UI Automation property values for this <see cref="T:System.Windows.Automation.MultipleViewPattern" />.</summary>
+      <returns>A structure containing the current UI Automation property values for the control pattern.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.MultipleViewPattern.MultipleViewPatternInformation">
+      <summary>Provides access to the property values of a <see cref="T:System.Windows.Automation.MultipleViewPattern" /> object using its <see cref="P:System.Windows.Automation.MultipleViewPattern.Current" /> or <see cref="P:System.Windows.Automation.MultipleViewPattern.Cached" /> accessors.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.MultipleViewPattern.MultipleViewPatternInformation.GetSupportedViews">
+      <summary>Retrieves a collection of control-specific view identifiers.</summary>
+      <returns>A collection of integer values that identify the views available for an <see cref="T:System.Windows.Automation.AutomationElement" />. The default is an empty integer array.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.MultipleViewPattern.MultipleViewPatternInformation.CurrentView">
+      <summary>Retrieves the current control-specific view.</summary>
+      <returns>The integer value for the current view of the <see cref="T:System.Windows.Automation.AutomationElement" />. The default value is 0.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.NotCondition">
+      <summary>Represents a <see cref="T:System.Windows.Automation.Condition" /> that is the negative of a specified <see cref="T:System.Windows.Automation.Condition" />.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.NotCondition.#ctor(System.Windows.Automation.Condition)">
+      <summary>Initializes a new instance of the <see cref="T:System.Windows.Automation.NotCondition" /> class.</summary>
+      <param name="condition">The condition to negate.</param>
+    </member>
+    <member name="P:System.Windows.Automation.NotCondition.Condition">
+      <summary>Gets the <see cref="T:System.Windows.Automation.Condition" /> that this <see cref="T:System.Windows.Automation.NotCondition" /> negates.</summary>
+      <returns>The <see cref="T:System.Windows.Automation.Condition" /> that this <see cref="T:System.Windows.Automation.NotCondition" /> negates.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.OrCondition">
+      <summary>Represents a combination of two or more conditions where a match exists if any one of the conditions is true.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.OrCondition.#ctor(System.Windows.Automation.Condition[])">
+      <summary>Initializes a new instance of the <see cref="T:System.Windows.Automation.OrCondition" /> class.</summary>
+      <param name="conditions">Two or more conditions, any one of which may be true for a match.</param>
+    </member>
+    <member name="M:System.Windows.Automation.OrCondition.GetConditions">
+      <summary>Retrieves the conditions that are combined in this condition.</summary>
+      <returns>The conditions combined in this condition.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.PropertyCondition">
+      <summary>Represents a <see cref="T:System.Windows.Automation.Condition" /> that tests whether a property has a specified value.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.PropertyCondition.#ctor(System.Windows.Automation.AutomationProperty,System.Object)">
+      <summary>Initializes a new instance of the <see cref="T:System.Windows.Automation.PropertyCondition" /> class.</summary>
+      <param name="property">The property to test.</param>
+      <param name="value">The value to test the property for.</param>
+    </member>
+    <member name="M:System.Windows.Automation.PropertyCondition.#ctor(System.Windows.Automation.AutomationProperty,System.Object,System.Windows.Automation.PropertyConditionFlags)">
+      <summary>Initializes a new instance of the <see cref="T:System.Windows.Automation.PropertyCondition" /> class, with flags.</summary>
+      <param name="property">The property to test.</param>
+      <param name="value">The value to test the property for.</param>
+      <param name="flags">Flags that affect the comparison.</param>
+    </member>
+    <member name="P:System.Windows.Automation.PropertyCondition.Flags">
+      <summary>Gets the flags used for testing the property value.</summary>
+    </member>
+    <member name="P:System.Windows.Automation.PropertyCondition.Property">
+      <summary>Gets the property that this condition is testing.</summary>
+    </member>
+    <member name="P:System.Windows.Automation.PropertyCondition.Value">
+      <summary>Gets the property value that this condition is testing.</summary>
+    </member>
+    <member name="T:System.Windows.Automation.PropertyConditionFlags">
+      <summary>Contains values that specify how a property value is tested in a <see cref="T:System.Windows.Automation.PropertyCondition" />.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.PropertyConditionFlags.IgnoreCase">
+      <summary>Specifies that comparison with a string property value is not case-sensitive.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.PropertyConditionFlags.None">
+      <summary>Specifies that the property value is tested using default behavior (case-sensitive comparison for strings).</summary>
+    </member>
+    <member name="T:System.Windows.Automation.RangeValuePattern">
+      <summary>Represents a control that can be set to a value within a range.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.RangeValuePattern.IsReadOnlyProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.RangeValuePattern.RangeValuePatternInformation.IsReadOnly" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.RangeValuePattern.LargeChangeProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.RangeValuePattern.RangeValuePatternInformation.LargeChange" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.RangeValuePattern.MaximumProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.RangeValuePattern.RangeValuePatternInformation.Maximum" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.RangeValuePattern.MinimumProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.RangeValuePattern.RangeValuePatternInformation.Minimum" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.RangeValuePattern.Pattern">
+      <summary>Identifies the <see cref="T:System.Windows.Automation.RangeValuePattern" /> control pattern.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.RangeValuePattern.SmallChangeProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.RangeValuePattern.RangeValuePatternInformation.SmallChange" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.RangeValuePattern.ValueProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.RangeValuePattern.RangeValuePatternInformation.Value" /> property.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.RangeValuePattern.SetValue(System.Double)">
+      <summary>Sets the value associated with the UI Automation element.</summary>
+      <param name="value">The new value of the element.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">
+        <paramref name="value" /> is less than the minimum or greater than the maximum value of the element.</exception>
+    </member>
+    <member name="P:System.Windows.Automation.RangeValuePattern.Cached">
+      <summary>Gets the cached property values for this <see cref="T:System.Windows.Automation.RangeValuePattern" />.</summary>
+      <exception cref="T:System.InvalidOperationException">The requested property is not in the cache.</exception>
+      <returns>The cached property values.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.RangeValuePattern.Current">
+      <summary>Gets the current property values for this <see cref="T:System.Windows.Automation.RangeValuePattern" />.</summary>
+      <returns>The current property values.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.RangeValuePattern.RangeValuePatternInformation">
+      <summary>Provides access to the property values of a <see cref="T:System.Windows.Automation.RangeValuePattern" /> object using its <see cref="P:System.Windows.Automation.TransformPattern.Current" /> or <see cref="P:System.Windows.Automation.TransformPattern.Cached" /> accessors.</summary>
+    </member>
+    <member name="P:System.Windows.Automation.RangeValuePattern.RangeValuePatternInformation.IsReadOnly">
+      <summary>Gets a value that specifies whether the value of a UI Automation element is read-only.</summary>
+      <returns>
+        <see langword="true" /> if the value is read-only; <see langword="false" /> if it can be modified. The default is <see langword="true" />.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.RangeValuePattern.RangeValuePatternInformation.LargeChange">
+      <summary>Gets the control-specific large-change value which is added to or subtracted from the <see cref="P:System.Windows.Automation.Provider.IRangeValueProvider.Value" /> property.</summary>
+      <returns>The large-change value or <see langword="null" /> if the element does not support <see cref="P:System.Windows.Automation.RangeValuePattern.RangeValuePatternInformation.LargeChange" />. The default value is 0.0.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.RangeValuePattern.RangeValuePatternInformation.Maximum">
+      <summary>Gets the maximum range value supported by the UI Automation element.</summary>
+      <returns>The maximum value supported by the UI Automation element or <see langword="null" /> if the element does not support <see cref="P:System.Windows.Automation.RangeValuePattern.RangeValuePatternInformation.Maximum" />. The default value is 0.0.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.RangeValuePattern.RangeValuePatternInformation.Minimum">
+      <summary>Gets the minimum range value supported by the UI Automation element.</summary>
+      <returns>The minimum value supported by the UI Automation element or <see langword="null" /> if the element does not support <see cref="P:System.Windows.Automation.RangeValuePattern.RangeValuePatternInformation.Minimum" />. The default value is 0.0.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.RangeValuePattern.RangeValuePatternInformation.SmallChange">
+      <summary>Gets the small-change value, unique to the UI Automation element, which is added to or subtracted from the elements <see cref="P:System.Windows.Automation.RangeValuePattern.RangeValuePatternInformation.Value" /> property.</summary>
+      <returns>The small-change value unique to the UI Automation element or <see langword="null" /> if the element does not support <see cref="P:System.Windows.Automation.RangeValuePattern.RangeValuePatternInformation.SmallChange" />. The default value is 0.0.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.RangeValuePattern.RangeValuePatternInformation.Value">
+      <summary>Gets the current value of the UI Automation element.</summary>
+      <returns>The current value of the UI Automation element or <see langword="null" /> if the element does not support <see cref="P:System.Windows.Automation.RangeValuePattern.RangeValuePatternInformation.Value" />. The default value is 0.0.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.ScrollItemPattern">
+      <summary>Represents child controls of containers that support the <see cref="T:System.Windows.Automation.ScrollPattern" /> control pattern.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.ScrollItemPattern.Pattern">
+      <summary>Identifies the <see cref="T:System.Windows.Automation.ScrollItemPattern" /> control pattern.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.ScrollItemPattern.ScrollIntoView">
+      <summary>Scrolls the content area of a container object in order to display the <see cref="T:System.Windows.Automation.AutomationElement" /> within the visible region (viewport) of the container.</summary>
+      <exception cref="T:System.InvalidOperationException">The item could not be scrolled into view.</exception>
+    </member>
+    <member name="T:System.Windows.Automation.ScrollPattern">
+      <summary>Represents controls that act as scrollable containers for a collection of child elements. The children of this element support <see cref="T:System.Windows.Automation.ScrollItemPattern" />.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.ScrollPattern.HorizontallyScrollableProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.ScrollPattern.ScrollPatternInformation.HorizontallyScrollable" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.ScrollPattern.HorizontalScrollPercentProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.ScrollPattern.ScrollPatternInformation.HorizontalScrollPercent" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.ScrollPattern.HorizontalViewSizeProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.ScrollPattern.ScrollPatternInformation.HorizontalViewSize" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.ScrollPattern.NoScroll">
+      <summary>Specifies that scrolling should not be performed.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.ScrollPattern.Pattern">
+      <summary>Identifies the <see cref="T:System.Windows.Automation.ScrollPattern" /> control pattern.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.ScrollPattern.VerticallyScrollableProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.ScrollPattern.ScrollPatternInformation.VerticallyScrollable" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.ScrollPattern.VerticalScrollPercentProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.ScrollPattern.ScrollPatternInformation.VerticalScrollPercent" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.ScrollPattern.VerticalViewSizeProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.ScrollPattern.ScrollPatternInformation.VerticalViewSize" /> property.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.ScrollPattern.Scroll(System.Windows.Automation.ScrollAmount,System.Windows.Automation.ScrollAmount)">
+      <summary>Scrolls the visible region of the content area horizontally and vertically.</summary>
+      <param name="horizontalAmount">The horizontal increment specific to the control. <see cref="F:System.Windows.Automation.ScrollPattern.NoScroll" /> should be passed in if the control cannot be scrolled in this direction.</param>
+      <param name="verticalAmount">The vertical increment specific to the control. <see cref="F:System.Windows.Automation.ScrollPattern.NoScroll" /> should be passed in if the control cannot be scrolled in this direction.</param>
+      <exception cref="T:System.ArgumentException">A control supports <see cref="F:System.Windows.Automation.ScrollAmount.SmallIncrement" /> values exclusively for horizontal or vertical scrolling but a <see cref="F:System.Windows.Automation.ScrollAmount.LargeIncrement" /> value is passed in.</exception>
+      <exception cref="T:System.InvalidOperationException">An attempt is made to scroll in an unsupported direction.</exception>
+    </member>
+    <member name="M:System.Windows.Automation.ScrollPattern.ScrollHorizontal(System.Windows.Automation.ScrollAmount)">
+      <summary>Scrolls the currently visible region of the content area, horizontally, the specified <see cref="T:System.Windows.Automation.ScrollAmount" />.</summary>
+      <param name="amount">The horizontal <see cref="T:System.Windows.Automation.ScrollAmount" /> increment specific to the control.</param>
+      <exception cref="T:System.ArgumentException">If a control supports <see cref="F:System.Windows.Automation.ScrollAmount.SmallIncrement" /> values exclusively for horizontal or vertical scrolling but a <see cref="F:System.Windows.Automation.ScrollAmount.LargeIncrement" /> value is passed in.</exception>
+      <exception cref="T:System.InvalidOperationException">An attempt is made to scroll in an unsupported direction.</exception>
+    </member>
+    <member name="M:System.Windows.Automation.ScrollPattern.ScrollVertical(System.Windows.Automation.ScrollAmount)">
+      <summary>Scrolls the currently visible region of the content area, vertically, the specified <see cref="T:System.Windows.Automation.ScrollAmount" />.</summary>
+      <param name="amount">The vertical <see cref="T:System.Windows.Automation.ScrollAmount" /> increment specific to the control.</param>
+      <exception cref="T:System.ArgumentException">If a control supports <see cref="F:System.Windows.Automation.ScrollAmount.SmallIncrement" /> values exclusively for horizontal or vertical scrolling but a <see cref="F:System.Windows.Automation.ScrollAmount.LargeIncrement" /> value is passed in.</exception>
+      <exception cref="T:System.InvalidOperationException">An attempt is made to scroll in an unsupported direction.</exception>
+    </member>
+    <member name="M:System.Windows.Automation.ScrollPattern.SetScrollPercent(System.Double,System.Double)">
+      <summary>Sets the horizontal and/or vertical scroll position as a percentage of the total content area within the <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+      <param name="horizontalPercent">The percentage of the total horizontal content area. <see cref="F:System.Windows.Automation.ScrollPattern.NoScroll" /> should be passed in if the control cannot be scrolled in this direction.</param>
+      <param name="verticalPercent">The percentage of the total vertical content area. <see cref="F:System.Windows.Automation.ScrollPattern.NoScroll" /> should be passed in if the control cannot be scrolled in this direction.</param>
+      <exception cref="T:System.ArgumentException">A value that cannot be converted to a double is passed in.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">A value greater than 100 or less than 0 is passed in (except -1, which is equivalent to <see cref="F:System.Windows.Automation.ScrollPattern.NoScroll" />). The <see cref="P:System.Windows.Automation.ScrollPattern.ScrollPatternInformation.HorizontalScrollPercent" /> and <see cref="P:System.Windows.Automation.ScrollPattern.ScrollPatternInformation.VerticalScrollPercent" /> values are normalized to either 0% or 100%.</exception>
+      <exception cref="T:System.InvalidOperationException">An attempt is made to scroll in an unsupported direction.</exception>
+    </member>
+    <member name="P:System.Windows.Automation.ScrollPattern.Cached">
+      <summary>Gets the cached UI Automation property values for this <see cref="T:System.Windows.Automation.ScrollPattern" />.</summary>
+      <exception cref="T:System.InvalidOperationException">The requested property is not in the cache.</exception>
+      <returns>A structure containing the cached UI Automation property values for the control pattern.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.ScrollPattern.Current">
+      <summary>Gets the current UI Automation property values for this <see cref="T:System.Windows.Automation.ScrollPattern" />.</summary>
+      <returns>A structure containing the current UI Automation property values for the control pattern.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.ScrollPattern.ScrollPatternInformation">
+      <summary>Provides access to the property values of a <see cref="T:System.Windows.Automation.ScrollPattern" /> object using its <see cref="P:System.Windows.Automation.ScrollPattern.Current" /> or <see cref="P:System.Windows.Automation.ScrollPattern.Cached" /> accessors.</summary>
+    </member>
+    <member name="P:System.Windows.Automation.ScrollPattern.ScrollPatternInformation.HorizontallyScrollable">
+      <summary>Gets a value that indicates whether the UI Automation element can scroll horizontally.</summary>
+      <returns>
+        <see langword="true" /> if the UI Automation element can scroll horizontally; otherwise <see langword="false" />. The default value is <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.ScrollPattern.ScrollPatternInformation.HorizontalScrollPercent">
+      <summary>Gets the current horizontal scroll position.</summary>
+      <returns>The horizontal scroll position as a percentage of the total content area within the UI Automation element. The default value is 0.0.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.ScrollPattern.ScrollPatternInformation.HorizontalViewSize">
+      <summary>Gets the current horizontal view size.</summary>
+      <returns>The horizontal size of the viewable region as a percentage of the total content area within the UI Automation element. The default value is 100.0.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.ScrollPattern.ScrollPatternInformation.VerticallyScrollable">
+      <summary>Retrieves a value that indicates whether the UI Automation element can scroll vertically.</summary>
+      <returns>
+        <see langword="true" /> if the UI Automation element can scroll horizontally; otherwise <see langword="false" />. The default value is <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.ScrollPattern.ScrollPatternInformation.VerticalScrollPercent">
+      <summary>Gets the current vertical scroll position.</summary>
+      <returns>The vertical scroll position as a percentage of the total content area within the UI Automation element. The default value is 0.0.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.ScrollPattern.ScrollPatternInformation.VerticalViewSize">
+      <summary>Gets the current vertical view size.</summary>
+      <returns>The vertical size of the viewable region as a percentage of the total content area within the UI Automation element. The default value is 100.0.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.SelectionItemPattern">
+      <summary>Represents selectable child items of container controls that support <see cref="T:System.Windows.Automation.SelectionPattern" />.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.SelectionItemPattern.ElementAddedToSelectionEvent">
+      <summary>Identifies the event raised when an item is added to a collection of selected items.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.SelectionItemPattern.ElementRemovedFromSelectionEvent">
+      <summary>Identifies the event raised when an item is removed from a collection of selected items.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.SelectionItemPattern.ElementSelectedEvent">
+      <summary>Identifies the event that is raised when a call to any of <see cref="M:System.Windows.Automation.SelectionItemPattern.Select" />, <see cref="M:System.Windows.Automation.SelectionItemPattern.AddToSelection" />, or <see cref="M:System.Windows.Automation.SelectionItemPattern.RemoveFromSelection" /> results in a single item being selected.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.SelectionItemPattern.IsSelectedProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.SelectionItemPattern.SelectionItemPatternInformation.IsSelected" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.SelectionItemPattern.Pattern">
+      <summary>Identifies the <see cref="T:System.Windows.Automation.SelectionItemPattern" /> control pattern.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.SelectionItemPattern.SelectionContainerProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.SelectionItemPattern.SelectionItemPatternInformation.SelectionContainer" /> property.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.SelectionItemPattern.AddToSelection">
+      <summary>Adds the current element to the collection of selected items.</summary>
+      <exception cref="T:System.InvalidOperationException">An attempt is made to add a selection to a single-selection container where <see cref="F:System.Windows.Automation.SelectionPattern.CanSelectMultipleProperty" /> = <see langword="false" /> and another element is already selected.</exception>
+    </member>
+    <member name="M:System.Windows.Automation.SelectionItemPattern.RemoveFromSelection">
+      <summary>Removes the current element from the collection of selected items.</summary>
+      <exception cref="T:System.InvalidOperationException">An attempt is made to remove a selection from a selection container where one item is selected and <see cref="F:System.Windows.Automation.SelectionPattern.IsSelectionRequiredProperty" /> = <see langword="true" />.</exception>
+    </member>
+    <member name="M:System.Windows.Automation.SelectionItemPattern.Select">
+      <summary>Deselects any selected items and then selects the current element.</summary>
+    </member>
+    <member name="P:System.Windows.Automation.SelectionItemPattern.Cached">
+      <summary>Gets the cached property values for this <see cref="T:System.Windows.Automation.SelectionItemPattern" />.</summary>
+      <exception cref="T:System.InvalidOperationException">The requested property is not in the cache.</exception>
+      <returns>The cached property values.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.SelectionItemPattern.Current">
+      <summary>Gets the current property values for this <see cref="T:System.Windows.Automation.SelectionItemPattern" />.</summary>
+      <returns>The current property values.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.SelectionItemPattern.SelectionItemPatternInformation">
+      <summary>Provides access to the property values of a <see cref="T:System.Windows.Automation.SelectionItemPattern" /> object using its <see cref="P:System.Windows.Automation.SelectionItemPattern.Current" /> or <see cref="P:System.Windows.Automation.SelectionItemPattern.Cached" /> accessors.</summary>
+    </member>
+    <member name="P:System.Windows.Automation.SelectionItemPattern.SelectionItemPatternInformation.IsSelected">
+      <summary>Gets a value that indicates whether an item is selected.</summary>
+      <returns>
+        <see langword="true" /> if the item is selected; otherwise <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.SelectionItemPattern.SelectionItemPatternInformation.SelectionContainer">
+      <summary>Gets the <see cref="T:System.Windows.Automation.AutomationElement" /> that supports the <see cref="T:System.Windows.Automation.SelectionPattern" /> control pattern and acts as the container for the calling object.</summary>
+      <returns>The container object. The default is a null reference (<see langword="Nothing" /> in Visual Basic).</returns>
+    </member>
+    <member name="T:System.Windows.Automation.SelectionPattern">
+      <summary>Represents a control that acts as a container for a collection of selectable child items. The children of this element support the <see cref="T:System.Windows.Automation.SelectionItemPattern" />.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.SelectionPattern.CanSelectMultipleProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.SelectionPattern.SelectionPatternInformation.CanSelectMultiple" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.SelectionPattern.InvalidatedEvent">
+      <summary>Identifies the event that is raised when a selection in a container has changed significantly and requires sending more addition and removal events than the <see cref="F:System.Windows.Automation.Provider.AutomationInteropProvider.InvalidateLimit" /> constant permits.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.SelectionPattern.IsSelectionRequiredProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.SelectionPattern.SelectionPatternInformation.IsSelectionRequired" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.SelectionPattern.Pattern">
+      <summary>Identifies the <see cref="T:System.Windows.Automation.SelectionPattern" /> control pattern.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.SelectionPattern.SelectionProperty">
+      <summary>Identifies the property that gets the selected items in a container.</summary>
+    </member>
+    <member name="P:System.Windows.Automation.SelectionPattern.Cached">
+      <summary>Gets the cached UI Automation property values for this <see cref="T:System.Windows.Automation.SelectionPattern" />.</summary>
+      <exception cref="T:System.InvalidOperationException">The requested property is not in the cache.</exception>
+      <returns>A structure containing the cached UI Automation property values for the control pattern.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.SelectionPattern.Current">
+      <summary>Gets the current UI Automation property values for this <see cref="T:System.Windows.Automation.SelectionPattern" />.</summary>
+      <returns>A structure containing the current UI Automation property values for the control pattern.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.SelectionPattern.SelectionPatternInformation">
+      <summary>Provides access to the property values of a <see cref="T:System.Windows.Automation.SelectionPattern" /> object using its <see cref="P:System.Windows.Automation.SelectionPattern.Current" /> or <see cref="P:System.Windows.Automation.SelectionPattern.Cached" /> accessors.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.SelectionPattern.SelectionPatternInformation.GetSelection">
+      <summary>Retrieves all items in the selection container that are selected.</summary>
+      <returns>The collection of selected items. The default is an empty array.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.SelectionPattern.SelectionPatternInformation.CanSelectMultiple">
+      <summary>Gets a value that specifies whether the container allows more than one child element to be selected concurrently.</summary>
+      <returns>
+        <see langword="true" /> if the control supports multiple selection; otherwise <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.SelectionPattern.SelectionPatternInformation.IsSelectionRequired">
+      <summary>Gets a value that specifies whether the container requires at least one child item to be selected.</summary>
+      <returns>
+        <see langword="true" /> if the control requires at least one item to be selected; otherwise <see langword="false" />.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.SynchronizedInputPattern">
+      <summary>Represents objects that support synchronized input events.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.SynchronizedInputPattern.InputDiscardedEvent">
+      <summary>Identifies the event raised when WPF discards input.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.SynchronizedInputPattern.InputReachedOtherElementEvent">
+      <summary>Identifies the event raised when the input was received by an element other than the one currently listening for the input.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.SynchronizedInputPattern.InputReachedTargetEvent">
+      <summary>Identifies the event raised when the input was received by the element currently listening for the input.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.SynchronizedInputPattern.Pattern">
+      <summary>Identifies the <see cref="T:System.Windows.Automation.SynchronizedInputPattern" /> control pattern.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.SynchronizedInputPattern.Cancel">
+      <summary>Stops listening for input.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.SynchronizedInputPattern.StartListening(System.Windows.Automation.SynchronizedInputType)">
+      <summary>Designates that the provider start listening for input of the specified type.</summary>
+      <param name="inputType">The type of input to listen for.</param>
+    </member>
+    <member name="T:System.Windows.Automation.TableItemPattern">
+      <summary>Represents the child controls of containers that support <see cref="T:System.Windows.Automation.TablePattern" />.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TableItemPattern.ColumnHeaderItemsProperty">
+      <summary>Identifies the property that retrieves all the column headers associated with a table item or cell.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TableItemPattern.Pattern">
+      <summary>Identifies the <see cref="T:System.Windows.Automation.TableItemPattern" /> control pattern.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TableItemPattern.RowHeaderItemsProperty">
+      <summary>Identifies the property that retrieves all the row headers associated with a table item or cell.</summary>
+    </member>
+    <member name="P:System.Windows.Automation.TableItemPattern.Cached">
+      <summary>Gets the cached property values for this <see cref="T:System.Windows.Automation.TableItemPattern" />.</summary>
+      <exception cref="T:System.InvalidOperationException">The requested property is not in the cache.</exception>
+      <returns>The cached property values.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.TableItemPattern.Current">
+      <summary>Gets the current property values for this <see cref="T:System.Windows.Automation.TableItemPattern" />.</summary>
+      <returns>The current property values.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.TableItemPattern.TableItemPatternInformation">
+      <summary>Provides access to the property values of a <see cref="T:System.Windows.Automation.TableItemPattern" /> object using its <see cref="P:System.Windows.Automation.TableItemPattern.Current" /> or <see cref="P:System.Windows.Automation.TableItemPattern.Cached" /> accessors.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.TableItemPattern.TableItemPatternInformation.GetColumnHeaderItems">
+      <summary>Retrieves all the column headers associated with a table item or cell.</summary>
+      <returns>A collection of column header elements. The default is an empty array.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.TableItemPattern.TableItemPatternInformation.GetRowHeaderItems">
+      <summary>Retrieves all the row headers associated with a table item or cell.</summary>
+      <returns>A collection of row header elements. The default is an empty array.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.TableItemPattern.TableItemPatternInformation.Column">
+      <summary>Gets the ordinal number of the column containing the table cell or item.</summary>
+      <returns>A zero-based ordinal number representing the column containing the table cell or item.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.TableItemPattern.TableItemPatternInformation.ColumnSpan">
+      <summary>Gets the number of columns spanned by a table cell or item.</summary>
+      <returns>The number of columns spanned. The default value is 1.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.TableItemPattern.TableItemPatternInformation.ContainingGrid">
+      <summary>Gets a UI Automation element that supports the GridPattern control pattern and represents the table cell or item container.</summary>
+      <returns>A UI Automation element that supports the GridPattern control pattern and represents the table cell or item container.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.TableItemPattern.TableItemPatternInformation.Row">
+      <summary>Gets the ordinal number of the row containing the table cell or item.</summary>
+      <returns>A zero-based ordinal number representing the column containing the table cell or item.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.TableItemPattern.TableItemPatternInformation.RowSpan">
+      <summary>Gets the number of rows spanned by a table cell or item.</summary>
+      <returns>The number of columns spanned. The default value is 1.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.TablePattern">
+      <summary>Represents controls that act as containers for a collection of child elements. The children of this element support <see cref="T:System.Windows.Automation.TableItemPattern" /> and are organized in a two-dimensional logical coordinate system that can be traversed by row and column.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TablePattern.ColumnHeadersProperty">
+      <summary>Identifies the property that gets the collection of column headers for a table.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TablePattern.Pattern">
+      <summary>Identifies the <see cref="T:System.Windows.Automation.TablePattern" /> control pattern.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TablePattern.RowHeadersProperty">
+      <summary>Identifies the property that gets the collection of row headers for a table.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TablePattern.RowOrColumnMajorProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.TablePattern.TablePatternInformation.RowOrColumnMajor" /> property.</summary>
+    </member>
+    <member name="P:System.Windows.Automation.TablePattern.Cached">
+      <summary>Gets the cached UI Automation property values for this <see cref="T:System.Windows.Automation.TablePattern" />.</summary>
+      <exception cref="T:System.InvalidOperationException">The requested property is not in the cache.</exception>
+      <returns>A structure containing the cached UI Automation property values for the control pattern.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.TablePattern.Current">
+      <summary>Gets the current UI Automation property values for this <see cref="T:System.Windows.Automation.TablePattern" />.</summary>
+    </member>
+    <member name="T:System.Windows.Automation.TablePattern.TablePatternInformation">
+      <summary>Provides access to the property values of a <see cref="T:System.Windows.Automation.TablePattern" /> object using its <see cref="P:System.Windows.Automation.TablePattern.Current" /> or <see cref="P:System.Windows.Automation.TablePattern.Cached" /> accessors.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.TablePattern.TablePatternInformation.GetColumnHeaders">
+      <summary>Retrieves a collection of <see cref="T:System.Windows.Automation.AutomationElement" />s representing all the column headers in a table.</summary>
+      <returns>A collection of <see cref="T:System.Windows.Automation.AutomationElement" />s. The default is an empty array.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.TablePattern.TablePatternInformation.GetRowHeaders">
+      <summary>Retrieves a collection of <see cref="T:System.Windows.Automation.AutomationElement" />s representing all the row headers in a table.</summary>
+      <returns>A collection of <see cref="T:System.Windows.Automation.AutomationElement" />s. The default is an empty array.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.TablePattern.TablePatternInformation.ColumnCount">
+      <summary>Gets the total number of columns in a table.</summary>
+      <returns>The total number of columns in a table. The default value is zero.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.TablePattern.TablePatternInformation.RowCount">
+      <summary>Gets the total number of rows in a table.</summary>
+      <returns>The total number of rows in a table. The default value is zero.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.TablePattern.TablePatternInformation.RowOrColumnMajor">
+      <summary>Retrieves the primary direction of traversal (<see cref="F:System.Windows.Automation.RowOrColumnMajor.ColumnMajor" />, <see cref="F:System.Windows.Automation.RowOrColumnMajor.RowMajor" />, <see cref="F:System.Windows.Automation.RowOrColumnMajor.Indeterminate" />) for the table.</summary>
+      <returns>The primary direction of traversal. The default is <see cref="F:System.Windows.Automation.RowOrColumnMajor.Indeterminate" />.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.Text.TextPatternRange">
+      <summary>Represents a span of continuous text in a <see cref="T:System.Windows.Automation.TextPattern" /> container.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.Text.TextPatternRange.AddToSelection">
+      <summary>Adds to the collection of highlighted text in a text container that supports multiple, disjoint selections.</summary>
+      <exception cref="T:System.InvalidOperationException">If text provider does not support multiple, disjoint selections (for example, <see cref="P:System.Windows.Automation.TextPattern.SupportedTextSelection" /> must have a value of <see langword="Multiple" />).</exception>
+    </member>
+    <member name="M:System.Windows.Automation.Text.TextPatternRange.Clone">
+      <summary>Retrieves a new <see cref="T:System.Windows.Automation.Text.TextPatternRange" /> identical to the original <see cref="T:System.Windows.Automation.Text.TextPatternRange" /> and inheriting all properties of the original.</summary>
+      <returns>The new text range. A null reference (<see langword="Nothing" /> in Visual Basic) is never returned.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.Text.TextPatternRange.Compare(System.Windows.Automation.Text.TextPatternRange)">
+      <summary>Returns a <see cref="T:System.Boolean" /> value indicating whether the span (the <see cref="F:System.Windows.Automation.Text.TextPatternRangeEndpoint.Start" /> endpoint to the <see cref="F:System.Windows.Automation.Text.TextPatternRangeEndpoint.End" /> endpoint) of a text range is the same as another text range.</summary>
+      <param name="range">A text range to compare.</param>
+      <exception cref="T:System.ArgumentException">If the range being compared does not come from the same text provider.</exception>
+      <returns>
+        <see langword="true" /> if the span of both text ranges is identical; otherwise <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.Text.TextPatternRange.CompareEndpoints(System.Windows.Automation.Text.TextPatternRangeEndpoint,System.Windows.Automation.Text.TextPatternRange,System.Windows.Automation.Text.TextPatternRangeEndpoint)">
+      <summary>Returns an <see cref="T:System.Int32" /> indicating whether two text ranges have identical endpoints.</summary>
+      <param name="endpoint">The <see cref="F:System.Windows.Automation.Text.TextPatternRangeEndpoint.Start" /> or <see cref="F:System.Windows.Automation.Text.TextPatternRangeEndpoint.End" /> endpoint of the caller.</param>
+      <param name="targetRange">The target range for comparison.</param>
+      <param name="targetEndpoint">The <see cref="F:System.Windows.Automation.Text.TextPatternRangeEndpoint.Start" /> or <see cref="F:System.Windows.Automation.Text.TextPatternRangeEndpoint.End" /> endpoint of the target.</param>
+      <exception cref="T:System.ArgumentNullException">If range is a null reference (<see langword="Nothing" /> in Visual Basic).</exception>
+      <exception cref="T:System.ArgumentException">If range is from another container.</exception>
+      <returns>Returns a negative value if the caller's endpoint occurs earlier in the text than the target endpoint.  
+  
+ Returns zero if the caller's endpoint is at the same location as the target endpoint.  
+  
+ Returns a positive value if the caller's endpoint occurs later in the text than the target endpoint.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.Text.TextPatternRange.ExpandToEnclosingUnit(System.Windows.Automation.Text.TextUnit)">
+      <summary>Expands the text range to the specified <see cref="T:System.Windows.Automation.Text.TextUnit" />.</summary>
+      <param name="unit">The textual unit.</param>
+    </member>
+    <member name="M:System.Windows.Automation.Text.TextPatternRange.FindAttribute(System.Windows.Automation.AutomationTextAttribute,System.Object,System.Boolean)">
+      <summary>Returns a text range subset that has the specified attribute value.</summary>
+      <param name="attribute">The attribute to search for.</param>
+      <param name="value">The attribute value to search for. This value must match the type specified for the attribute.</param>
+      <param name="backward">
+        <see langword="true" /> if the last occurring text range should be returned instead of the first; otherwise <see langword="false" />.</param>
+      <returns>A text range having a matching attribute and attribute value; otherwise null (<see langword="Nothing" /> in Visual Basic).</returns>
+    </member>
+    <member name="M:System.Windows.Automation.Text.TextPatternRange.FindText(System.String,System.Boolean,System.Boolean)">
+      <summary>Returns a text range subset that contains the specified text.</summary>
+      <param name="text">The text string to search for.</param>
+      <param name="backward">
+        <see langword="true" /> if the last occurring text range should be returned instead of the first; otherwise <see langword="false" />.</param>
+      <param name="ignoreCase">
+        <see langword="true" /> if case should be ignored; otherwise <see langword="false" />.</param>
+      <returns>A text range matching the specified text; otherwise null (<see langword="Nothing" /> in Visual Basic).</returns>
+    </member>
+    <member name="M:System.Windows.Automation.Text.TextPatternRange.GetAttributeValue(System.Windows.Automation.AutomationTextAttribute)">
+      <summary>Returns the value of the specified attribute across the entire text range.</summary>
+      <param name="attribute">The text attribute.</param>
+      <exception cref="T:System.ArgumentException">If the specified attribute is not valid.</exception>
+      <returns>Returns the value of the specified attribute. For example, GetAttributeValue(TextPattern.FontNameAttribute) would return a string that represents the font name, if unique, of the text range while GetAttributeValue(TextPattern.IsItalicAttribute) would return a boolean.  
+  
+ Returns <see cref="F:System.Windows.Automation.TextPattern.MixedAttributeValue" /> if the value of the specified attribute varies over the text range.  
+  
+ Returns <see cref="F:System.Windows.Automation.AutomationElement.NotSupported" /> if the specified attribute is not supported by the provider or the control.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.Text.TextPatternRange.GetBoundingRectangles">
+      <summary>Retrieves a collection of bounding rectangles for each fully or partially visible line of text in a text range.</summary>
+      <returns>An array of bounding rectangles for each full or partial line of text in a text range.  
+  
+ An empty array for a degenerate text range.  
+  
+ An empty array for a text range that has screen coordinates placing it completely off-screen, scrolled out of view, or obscured by an overlapping window.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.Text.TextPatternRange.GetChildren">
+      <summary>Retrieves a collection of all embedded objects that fall within the text range.</summary>
+      <returns>A collection of all child objects that fall within the range. Children that overlap with the range but are not entirely enclosed by it will also be included in the collection.  
+  
+ Returns an empty collection if there are no child objects.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.Text.TextPatternRange.GetEnclosingElement">
+      <summary>Returns the innermost <see cref="T:System.Windows.Automation.AutomationElement" /> that encloses the text range.</summary>
+      <returns>The innermost element enclosing the caller.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.Text.TextPatternRange.GetText(System.Int32)">
+      <summary>Returns the plain text of the text range.</summary>
+      <param name="maxLength">The maximum length of the string to return. Use <c>-1</c> if no limit is required.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">If <paramref name="maxLength" /> is less than -1.</exception>
+      <returns>The plain text of the text range, possibly truncated at the specified <paramref name="maxLength" />.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.Text.TextPatternRange.Move(System.Windows.Automation.Text.TextUnit,System.Int32)">
+      <summary>Moves the text range the specified number of text units.</summary>
+      <param name="unit">The text unit boundary.</param>
+      <param name="count">The number of text units to move. A positive value moves the text range forward, a negative value moves the text range backward, and 0 has no effect.</param>
+      <returns>The number of units actually moved. This can be less than the number requested if either of the new text range endpoints is greater than or less than the <see cref="P:System.Windows.Automation.TextPattern.DocumentRange" /> endpoints.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.Text.TextPatternRange.MoveEndpointByRange(System.Windows.Automation.Text.TextPatternRangeEndpoint,System.Windows.Automation.Text.TextPatternRange,System.Windows.Automation.Text.TextPatternRangeEndpoint)">
+      <summary>Moves one endpoint of a text range to the specified endpoint of a second text range.</summary>
+      <param name="endpoint">The endpoint to move.</param>
+      <param name="targetRange">Another range from the same text provider.</param>
+      <param name="targetEndpoint">An endpoint on the other range.</param>
+    </member>
+    <member name="M:System.Windows.Automation.Text.TextPatternRange.MoveEndpointByUnit(System.Windows.Automation.Text.TextPatternRangeEndpoint,System.Windows.Automation.Text.TextUnit,System.Int32)">
+      <summary>Moves one endpoint of the text range the specified number of <see cref="T:System.Windows.Automation.Text.TextUnit" />s within the document range.</summary>
+      <param name="endpoint">The endpoint to move.</param>
+      <param name="unit">The textual unit for moving.</param>
+      <param name="count">The number of units to move. A positive count moves the endpoint forward. A negative count moves backward. A count of 0 has no effect.</param>
+      <returns>The number of units actually moved, which can be less than the number requested if moving the endpoint runs into the beginning or end of the document.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.Text.TextPatternRange.RemoveFromSelection">
+      <summary>Removes a highlighted section of text, corresponding to the calling text range <see cref="F:System.Windows.Automation.Text.TextPatternRangeEndpoint.Start" /> and <see cref="F:System.Windows.Automation.Text.TextPatternRangeEndpoint.End" /> endpoints, from an existing collection of highlighted text in a text container that supports multiple, disjoint selections.</summary>
+      <exception cref="T:System.InvalidOperationException">If text provider does not support multiple, disjoint selections (for example, <see cref="P:System.Windows.Automation.TextPattern.SupportedTextSelection" /> must have a value of <see langword="Multiple" />).</exception>
+    </member>
+    <member name="M:System.Windows.Automation.Text.TextPatternRange.ScrollIntoView(System.Boolean)">
+      <summary>Causes the text control to scroll vertically until the text range is visible in the viewport.</summary>
+      <param name="alignToTop">
+        <see langword="true" /> if the text control should be scrolled so the text range is flush with the top of the viewport; <see langword="false" /> if it should be flush with the bottom of the viewport.</param>
+      <exception cref="T:System.InvalidOperationException">If scrolling is not supported by the control.</exception>
+    </member>
+    <member name="M:System.Windows.Automation.Text.TextPatternRange.Select">
+      <summary>Highlights text in the text control corresponding to the text range <see cref="F:System.Windows.Automation.Text.TextPatternRangeEndpoint.Start" /> and <see cref="F:System.Windows.Automation.Text.TextPatternRangeEndpoint.End" /> endpoints.</summary>
+      <exception cref="T:System.InvalidOperationException">Occurs when text selection is not supported by the text control.</exception>
+    </member>
+    <member name="P:System.Windows.Automation.Text.TextPatternRange.TextPattern">
+      <summary>Gets the <see cref="T:System.Windows.Automation.TextPattern" /> associated with the text range.</summary>
+      <returns>The text provider.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.TextPattern">
+      <summary>Represents controls that contain text.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.AnimationStyleAttribute">
+      <summary>Identifies the <see cref="T:System.Windows.Automation.Text.AnimationStyle" /> attribute of a text range.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.BackgroundColorAttribute">
+      <summary>Identifies the BackgroundColor attribute of a text range.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.BulletStyleAttribute">
+      <summary>Identifies the <see cref="T:System.Windows.Automation.Text.BulletStyle" /> attribute of a text range.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.CapStyleAttribute">
+      <summary>Identifies the <see cref="T:System.Windows.Automation.Text.CapStyle" /> attribute of a text range.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.CultureAttribute">
+      <summary>Identifies the <see langword="Culture" /> (<see cref="T:System.Globalization.CultureInfo" />) attribute of a text range down to the sub-language level; for example, French-Switzerland (fr-CH) instead of French (fr).</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.FontNameAttribute">
+      <summary>Identifies the <see langword="FontName" /> attribute of a text range.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.FontSizeAttribute">
+      <summary>Identifies the <see langword="FontSize" /> attribute of a text range.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.FontWeightAttribute">
+      <summary>Identifies the <see langword="FontWeight" /> attribute of a text range.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.ForegroundColorAttribute">
+      <summary>Identifies the <see langword="ForegroundColor" /> (COLORREF) attribute of a text range.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.HorizontalTextAlignmentAttribute">
+      <summary>Identifies the <see cref="T:System.Windows.Automation.Text.HorizontalTextAlignment" /> attribute of a text range.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.IndentationFirstLineAttribute">
+      <summary>Identifies the <see langword="IndentationFirstLine" /> (<see cref="P:System.Windows.Documents.Paragraph.TextIndent" />) attribute of a text range.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.IndentationLeadingAttribute">
+      <summary>Identifies the <see langword="IndentationLeading" />(<see cref="P:System.Windows.Documents.Paragraph.TextIndent" />) attribute of a text range.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.IndentationTrailingAttribute">
+      <summary>Identifies the <see langword="IndentationTrailing" />(<see cref="P:System.Windows.Documents.Paragraph.TextIndent" />) attribute of a text range.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.IsHiddenAttribute">
+      <summary>Identifies the <see langword="IsHidden" /> attribute of a text range.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.IsItalicAttribute">
+      <summary>Identifies the <see langword="IsItalic" /> (<see cref="T:System.Windows.FontStyle" />) attribute of a text range.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.IsReadOnlyAttribute">
+      <summary>Identifies the <see langword="IsReadOnly" /> attribute of a text range.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.IsSubscriptAttribute">
+      <summary>Identifies the <see langword="IsSubscript" /> (<see cref="T:System.Windows.FontVariants" />) attribute of a text range.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.IsSuperscriptAttribute">
+      <summary>Identifies the <see langword="IsSuperscript" /> (<see cref="T:System.Windows.FontVariants" />) attribute of a text range.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.MarginBottomAttribute">
+      <summary>Identifies the <see langword="MarginBottom" /> (<see cref="T:System.Drawing.Printing.PageSettings" />) attribute of a text range.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.MarginLeadingAttribute">
+      <summary>Identifies the <see langword="MarginLeading" /> (<see cref="T:System.Drawing.Printing.PageSettings" />) attribute of a text range.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.MarginTopAttribute">
+      <summary>Identifies the <see langword="MarginTop" /> (<see cref="T:System.Drawing.Printing.PageSettings" />) attribute of a text range.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.MarginTrailingAttribute">
+      <summary>Identifies the <see langword="MarginTrailing" /> (<see cref="T:System.Drawing.Printing.PageSettings" />) attribute of a text range.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.MixedAttributeValue">
+      <summary>Identifies whether the value of a given attribute varies over a text range in a rich edit control.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.OutlineStylesAttribute">
+      <summary>Identifies the <see langword="OutlineStyles" /> (<see cref="T:System.Windows.Automation.Text.OutlineStyles" />) attribute of a text range.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.OverlineColorAttribute">
+      <summary>Identifies the <see langword="OverlineColor" /> attribute of a text range.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.OverlineStyleAttribute">
+      <summary>Identifies the <see langword="OverlineStyle" /> (<see cref="T:System.Windows.Automation.Text.TextDecorationLineStyle" />) attribute of a text range.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.Pattern">
+      <summary>Identifies the <see cref="T:System.Windows.Automation.TextPattern" /> pattern.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.StrikethroughColorAttribute">
+      <summary>Identifies the <see langword="StrikethroughColor" /> attribute of a text range.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.StrikethroughStyleAttribute">
+      <summary>Identifies the <see langword="StrikethroughStyle" /> (<see cref="T:System.Windows.Automation.Text.TextDecorationLineStyle" />) attribute of a text range.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.TabsAttribute">
+      <summary>Identifies the <see langword="Tabs" /> attribute of a text range.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.TextChangedEvent">
+      <summary>Identifies the event raised whenever textual content is modified.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.TextFlowDirectionsAttribute">
+      <summary>Identifies the <see langword="TextFlowDirections" /> (<see cref="T:System.Windows.Automation.Text.FlowDirections" />) attribute of a text range.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.TextSelectionChangedEvent">
+      <summary>Identifies the event raised when the text selection is modified.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.UnderlineColorAttribute">
+      <summary>Identifies the <see langword="UnderlineColor" /> attribute of a text range.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TextPattern.UnderlineStyleAttribute">
+      <summary>Identifies the <see langword="UnderlineStyle" /> (<see cref="T:System.Windows.Automation.Text.TextDecorationLineStyle" />) attribute of a text range.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.TextPattern.GetSelection">
+      <summary>Retrieves a collection of disjoint text ranges associated with the current text selection or selections.</summary>
+      <exception cref="T:System.InvalidOperationException">The text container does not support text selection.</exception>
+      <returns>A collection of disjoint text ranges.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.TextPattern.GetVisibleRanges">
+      <summary>Retrieves an array of disjoint text ranges from a text container where each text range begins with the first partially visible line through to the end of the last partially visible line.</summary>
+      <returns>The collection of visible text ranges within the container or an empty array. <see langword="Null" /> is never returned.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.TextPattern.RangeFromChild(System.Windows.Automation.AutomationElement)">
+      <summary>Retrieves a text range enclosing a child element such as an image, hyperlink, Microsoft Excel spreadsheet, or other embedded object.</summary>
+      <param name="childElement">The enclosed object.</param>
+      <exception cref="T:System.ArgumentNullException">The child element is <see langword="null" />.</exception>
+      <exception cref="T:System.InvalidOperationException">The element is not a child of the text container.</exception>
+      <returns>A range that spans the child element.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.TextPattern.RangeFromPoint(System.Windows.Point)">
+      <summary>Returns the degenerate (empty) text range nearest to the specified screen coordinates.</summary>
+      <param name="screenLocation">The location in screen coordinates.</param>
+      <exception cref="T:System.ArgumentException">A given point is outside the <see cref="T:System.Windows.Automation.AutomationElement" /> associated with the text pattern.</exception>
+      <returns>A degenerate range nearest the specified location. <see langword="Null" /> is never returned.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.TextPattern.DocumentRange">
+      <summary>Gets a text range that encloses the main text of a document.</summary>
+    </member>
+    <member name="P:System.Windows.Automation.TextPattern.SupportedTextSelection">
+      <summary>Gets a value that specifies whether a text provider supports selection and, if so, the type of selection supported.</summary>
+      <returns>One of the <see cref="T:System.Windows.Automation.SupportedTextSelection" /> values.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.TogglePattern">
+      <summary>Represents a control that can cycle through a set of states and maintain a state once set.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TogglePattern.Pattern">
+      <summary>Identifies the <see cref="T:System.Windows.Automation.TogglePattern" /> control pattern.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TogglePattern.ToggleStateProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.TogglePattern.TogglePatternInformation.ToggleState" /> property.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.TogglePattern.Toggle">
+      <summary>Cycles through the toggle states of an <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+    </member>
+    <member name="P:System.Windows.Automation.TogglePattern.Cached">
+      <summary>Gets the cached UI Automation property values for this <see cref="T:System.Windows.Automation.TogglePattern" />.</summary>
+      <exception cref="T:System.InvalidOperationException">The requested property is not in the cache.</exception>
+      <returns>A structure containing the cached UI Automation property values for the control pattern.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.TogglePattern.Current">
+      <summary>Gets the current UI Automation property values for this <see cref="T:System.Windows.Automation.TogglePattern" />.</summary>
+      <returns>A structure containing the current UI Automation property values for the control pattern.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.TogglePattern.TogglePatternInformation">
+      <summary>Provides access to the property values of a <see cref="T:System.Windows.Automation.TogglePattern" /> object using its <see cref="P:System.Windows.Automation.TogglePattern.Current" /> or <see cref="P:System.Windows.Automation.TogglePattern.Cached" /> accessors.</summary>
+    </member>
+    <member name="P:System.Windows.Automation.TogglePattern.TogglePatternInformation.ToggleState">
+      <summary>Retrieves the toggle state of the <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+      <returns>The <see cref="T:System.Windows.Automation.ToggleState" /> of the <see cref="T:System.Windows.Automation.AutomationElement" />. The default value is <see cref="F:System.Windows.Automation.ToggleState.Indeterminate" />.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.TransformPattern">
+      <summary>Represents a control that can be moved, resized, or rotated within a two-dimensional space.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TransformPattern.CanMoveProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.TransformPattern.TransformPatternInformation.CanMove" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TransformPattern.CanResizeProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.TransformPattern.TransformPatternInformation.CanResize" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TransformPattern.CanRotateProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.TransformPattern.TransformPatternInformation.CanRotate" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TransformPattern.Pattern">
+      <summary>Identifies the <see cref="T:System.Windows.Automation.TransformPattern" /> control pattern.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.TransformPattern.Move(System.Double,System.Double)">
+      <summary>Moves the control.</summary>
+      <param name="x">Absolute screen coordinates of the left side of the control.</param>
+      <param name="y">Absolute screen coordinates of the top of the control.</param>
+      <exception cref="T:System.InvalidOperationException">The <see cref="P:System.Windows.Automation.TransformPattern.TransformPatternInformation.CanMove" /> property is false.</exception>
+    </member>
+    <member name="M:System.Windows.Automation.TransformPattern.Resize(System.Double,System.Double)">
+      <summary>Resizes the control.</summary>
+      <param name="width">The new width of the window, in pixels.</param>
+      <param name="height">The new height of the window, in pixels.</param>
+      <exception cref="T:System.InvalidOperationException">The <see cref="P:System.Windows.Automation.TransformPattern.TransformPatternInformation.CanResize" /> property is false.</exception>
+    </member>
+    <member name="M:System.Windows.Automation.TransformPattern.Rotate(System.Double)">
+      <summary>Rotates the control.</summary>
+      <param name="degrees">The number of degrees to rotate the element. A positive number rotates clockwise; a negative number rotates counterclockwise.</param>
+      <exception cref="T:System.InvalidOperationException">The <see cref="P:System.Windows.Automation.TransformPattern.TransformPatternInformation.CanRotate" /> property is false.</exception>
+    </member>
+    <member name="P:System.Windows.Automation.TransformPattern.Cached">
+      <summary>Gets the cached UI Automation property values for this <see cref="T:System.Windows.Automation.TransformPattern" />.</summary>
+      <exception cref="T:System.InvalidOperationException">The requested property is not in the cache.</exception>
+      <returns>A structure containing the cached UI Automation property values for the control pattern.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.TransformPattern.Current">
+      <summary>Gets the current UI Automation property values for this <see cref="T:System.Windows.Automation.TransformPattern" />.</summary>
+      <returns>A structure containing the current UI Automation property values for the control pattern.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.TransformPattern.TransformPatternInformation">
+      <summary>Provides access to the property values of a <see cref="T:System.Windows.Automation.TransformPattern" /> object using its <see cref="P:System.Windows.Automation.TransformPattern.Current" /> or <see cref="P:System.Windows.Automation.TransformPattern.Cached" /> accessors.</summary>
+    </member>
+    <member name="P:System.Windows.Automation.TransformPattern.TransformPatternInformation.CanMove">
+      <summary>Gets a value that specifies whether the UI Automation element can be moved.</summary>
+      <returns>
+        <see langword="true" /> if the element can be moved; otherwise <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.TransformPattern.TransformPatternInformation.CanResize">
+      <summary>Gets a value that specifies whether the UI Automation element can be resized.</summary>
+      <returns>
+        <see langword="true" /> if the element can be resized; otherwise <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.TransformPattern.TransformPatternInformation.CanRotate">
+      <summary>Gets a value that specifies whether the UI Automation element can be rotated.</summary>
+      <returns>
+        <see langword="true" /> if the element can be rotated; otherwise <see langword="false" />.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.TreeWalker">
+      <summary>Provides methods and properties used to navigate the UI Automation tree.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TreeWalker.ContentViewWalker">
+      <summary>Represents a predefined <see cref="T:System.Windows.Automation.TreeWalker" /> containing a view of elements in the tree that are marked as content controls.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TreeWalker.ControlViewWalker">
+      <summary>Represents a predefined <see cref="T:System.Windows.Automation.TreeWalker" /> containing a view of elements in the tree that are marked as controls.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.TreeWalker.RawViewWalker">
+      <summary>Represents a predefined <see cref="T:System.Windows.Automation.TreeWalker" /> containing a view of all the elements in the tree.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.TreeWalker.#ctor(System.Windows.Automation.Condition)">
+      <summary>Initializes a new instance of the <see cref="T:System.Windows.Automation.TreeWalker" /> class.</summary>
+      <param name="condition">The view of the UI Automation element tree that <see cref="T:System.Windows.Automation.TreeWalker" /> will navigate.</param>
+    </member>
+    <member name="M:System.Windows.Automation.TreeWalker.GetFirstChild(System.Windows.Automation.AutomationElement)">
+      <summary>Retrieves the first child element of the specified <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+      <param name="element">The element from which to retrieve the first child.</param>
+      <returns>The first child element, or a null reference (<see langword="Nothing" /> in Visual Basic) if there is no such element.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.TreeWalker.GetFirstChild(System.Windows.Automation.AutomationElement,System.Windows.Automation.CacheRequest)">
+      <summary>Retrieves the first child element of the specified <see cref="T:System.Windows.Automation.AutomationElement" /> and caches properties and patterns.</summary>
+      <param name="element">The element from which to retrieve the first child.</param>
+      <param name="request">A cache request object specifying properties and patterns on the returned <see cref="T:System.Windows.Automation.AutomationElement" /> to cache.</param>
+      <returns>The first child element, or a null reference (<see langword="Nothing" /> in Visual Basic) if there is no such element.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.TreeWalker.GetLastChild(System.Windows.Automation.AutomationElement)">
+      <summary>Retrieves the last child element of the specified <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+      <param name="element">The element from which to retrieve the last child.</param>
+      <returns>The <see cref="T:System.Windows.Automation.AutomationElement" /> that is the last child element, or a null reference (<see langword="Nothing" /> in Visual Basic) if there is no such element.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.TreeWalker.GetLastChild(System.Windows.Automation.AutomationElement,System.Windows.Automation.CacheRequest)">
+      <summary>Retrieves the last child element of the specified <see cref="T:System.Windows.Automation.AutomationElement" /> and caches properties and patterns.</summary>
+      <param name="element">The element from which to retrieve the last child.</param>
+      <param name="request">A cache request object specifying properties and patterns on the returned <see cref="T:System.Windows.Automation.AutomationElement" /> to cache.</param>
+      <returns>The last element, or a null reference (<see langword="Nothing" /> in Visual Basic) if there is no such element.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.TreeWalker.GetNextSibling(System.Windows.Automation.AutomationElement)">
+      <summary>Retrieves the next sibling element of the specified <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+      <param name="element">The <see cref="T:System.Windows.Automation.AutomationElement" /> from which to retrieve the next sibling.</param>
+      <returns>The next sibling element, or a null reference (<see langword="Nothing" /> in Visual Basic) if there is no such element.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.TreeWalker.GetNextSibling(System.Windows.Automation.AutomationElement,System.Windows.Automation.CacheRequest)">
+      <summary>Retrieves the next sibling element of the specified <see cref="T:System.Windows.Automation.AutomationElement" /> and caches properties and patterns.</summary>
+      <param name="element">The element from which to retrieve the next sibling.</param>
+      <param name="request">A cache request object specifying properties and patterns on the returned <see cref="T:System.Windows.Automation.AutomationElement" /> to cache.</param>
+      <returns>The next sibling element, or a null reference (<see langword="Nothing" /> in Visual Basic) if there is no such element.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.TreeWalker.GetParent(System.Windows.Automation.AutomationElement)">
+      <summary>Retrieves the parent element of the specified <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+      <param name="element">The element whose parent is to be returned.</param>
+      <returns>The parent element, or a null reference (<see langword="Nothing" /> in Visual Basic) if the specified element is the root element in the tree, or if the parent element is not visible in the current view.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.TreeWalker.GetParent(System.Windows.Automation.AutomationElement,System.Windows.Automation.CacheRequest)">
+      <summary>Retrieves the parent element of the specified <see cref="T:System.Windows.Automation.AutomationElement" /> and caches properties and patterns.</summary>
+      <param name="element">The element whose parent is to be returned.</param>
+      <param name="request">A cache request object specifying members on the returned <see cref="T:System.Windows.Automation.AutomationElement" /> to cache.</param>
+      <returns>The parent element, or a null reference (<see langword="Nothing" /> in Visual Basic) if the specified element is the root element in the tree, or the parent element is not visible in this view.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.TreeWalker.GetPreviousSibling(System.Windows.Automation.AutomationElement)">
+      <summary>Retrieves the previous sibling of the specified <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+      <param name="element">The element from which to retrieve the previous sibling.</param>
+      <returns>The previous sibling element, or a null reference (<see langword="Nothing" /> in Visual Basic) if there is no such element.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.TreeWalker.GetPreviousSibling(System.Windows.Automation.AutomationElement,System.Windows.Automation.CacheRequest)">
+      <summary>Retrieves the previous sibling of the specified <see cref="T:System.Windows.Automation.AutomationElement" /> and caches properties and patterns.</summary>
+      <param name="element">The element from which to retrieve the previous sibling.</param>
+      <param name="request">A cache request object specifying properties and patterns on the returned <see cref="T:System.Windows.Automation.AutomationElement" /> to cache.</param>
+      <returns>The previous sibling element, or a null reference (<see langword="Nothing" /> in Visual Basic) if there is no such element.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.TreeWalker.Normalize(System.Windows.Automation.AutomationElement)">
+      <summary>Retrieves the node itself, if it satisfies the <see cref="P:System.Windows.Automation.TreeWalker.Condition" />, or the nearest parent or ancestor node that satisfies the <see cref="P:System.Windows.Automation.TreeWalker.Condition" />.</summary>
+      <param name="element">The element from which to start the normalization.</param>
+      <returns>The nearest <see cref="T:System.Windows.Automation.AutomationElement" /> in the current view. If the navigation up the ancestor chain reaches the root element, the root element is returned.</returns>
+    </member>
+    <member name="M:System.Windows.Automation.TreeWalker.Normalize(System.Windows.Automation.AutomationElement,System.Windows.Automation.CacheRequest)">
+      <summary>Retrieves the node itself, if it satisfies the <see cref="P:System.Windows.Automation.TreeWalker.Condition" />, or the nearest parent or ancestor node that satisfies the <see cref="P:System.Windows.Automation.TreeWalker.Condition" />, and caches properties and patterns.</summary>
+      <param name="element">The element from which to start the normalization.</param>
+      <param name="request">A cache request object specifying properties and patterns on the returned <see cref="T:System.Windows.Automation.AutomationElement" /> to cache.</param>
+      <returns>The nearest <see cref="T:System.Windows.Automation.AutomationElement" /> in the current view. If the navigation up the ancestor chain reaches the root element, the root element is returned.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.TreeWalker.Condition">
+      <summary>Gets the object that defines the view for the <see cref="T:System.Windows.Automation.TreeWalker" /> object.</summary>
+      <returns>The condition that defines the view. This is the value that was passed to the constructor.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.ValuePattern">
+      <summary>Represents a control that has an intrinsic value that does not span a range and can be represented as a string. This string may or may not be editable depending on the control and its settings.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.ValuePattern.IsReadOnlyProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.ValuePattern.ValuePatternInformation.IsReadOnly" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.ValuePattern.Pattern">
+      <summary>Identifies the <see cref="T:System.Windows.Automation.ValuePattern" /> control pattern.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.ValuePattern.ValueProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.ValuePattern.ValuePatternInformation.Value" /> property.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.ValuePattern.SetValue(System.String)">
+      <summary>Sets the value of the control.</summary>
+      <param name="value">Value to set. The UI Automation provider is responsible for converting the value to the appropriate data type.</param>
+      <exception cref="T:System.InvalidOperationException">The control is read-only.</exception>
+      <exception cref="T:System.Windows.Automation.ElementNotEnabledException">The control is not enabled.</exception>
+    </member>
+    <member name="P:System.Windows.Automation.ValuePattern.Cached">
+      <summary>Gets the cached UI Automation property values for this <see cref="T:System.Windows.Automation.ValuePattern" />.</summary>
+      <exception cref="T:System.InvalidOperationException">The requested property is not in the cache.</exception>
+      <returns>The cached property values.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.ValuePattern.Current">
+      <summary>Gets the current UI Automation property values for this <see cref="T:System.Windows.Automation.ValuePattern" />.</summary>
+      <returns>The current property values.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.ValuePattern.ValuePatternInformation">
+      <summary>Provides access to the property values of a <see cref="T:System.Windows.Automation.ValuePattern" /> object using its <see cref="P:System.Windows.Automation.ValuePattern.Current" /> or <see cref="P:System.Windows.Automation.ValuePattern.Cached" /> accessors.</summary>
+    </member>
+    <member name="P:System.Windows.Automation.ValuePattern.ValuePatternInformation.IsReadOnly">
+      <summary>Gets a value that specifies whether the value of a UI Automation element is read-only.</summary>
+      <returns>
+        <see langword="true" /> if the value is read-only; <see langword="false" /> if it can be modified.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.ValuePattern.ValuePatternInformation.Value">
+      <summary>Gets the value of the UI Automation element.</summary>
+      <returns>The value of the UI Automation element as a string. The default is an empty string.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.VirtualizedItemPattern">
+      <summary>Represents items inside containers that are virtualized and need to be made fully accessible as UI Automation elements.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.VirtualizedItemPattern.Pattern">
+      <summary>Identifies the <see cref="T:System.Windows.Automation.VirtualizedItemPattern" /> control pattern.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.VirtualizedItemPattern.Realize">
+      <summary>Makes the virtual item fully accessible as a UI Automation element.</summary>
+    </member>
+    <member name="T:System.Windows.Automation.WindowPattern">
+      <summary>Represents a control that provides fundamental window-based functionality within a traditional graphical user interface (GUI).</summary>
+    </member>
+    <member name="F:System.Windows.Automation.WindowPattern.CanMaximizeProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.WindowPattern.WindowPatternInformation.CanMaximize" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.WindowPattern.CanMinimizeProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.WindowPattern.WindowPatternInformation.CanMinimize" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.WindowPattern.IsModalProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.WindowPattern.WindowPatternInformation.IsModal" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.WindowPattern.IsTopmostProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.WindowPattern.WindowPatternInformation.IsTopmost" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.WindowPattern.Pattern">
+      <summary>Identifies the <see cref="T:System.Windows.Automation.WindowPattern" /> control pattern.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.WindowPattern.WindowClosedEvent">
+      <summary>Identifies the event that is raised when a window is closed.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.WindowPattern.WindowInteractionStateProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.WindowPattern.WindowPatternInformation.WindowInteractionState" /> property.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.WindowPattern.WindowOpenedEvent">
+      <summary>Identifies the event that is raised when a window is opened.</summary>
+    </member>
+    <member name="F:System.Windows.Automation.WindowPattern.WindowVisualStateProperty">
+      <summary>Identifies the <see cref="P:System.Windows.Automation.WindowPattern.WindowPatternInformation.WindowVisualState" /> property.</summary>
+    </member>
+    <member name="M:System.Windows.Automation.WindowPattern.Close">
+      <summary>Attempts to close the current window.</summary>
+      <exception cref="T:System.InvalidOperationException">The control is unable to perform the requested action.</exception>
+      <exception cref="T:System.Windows.Automation.ElementNotAvailableException">When the control is no longer available.</exception>
+    </member>
+    <member name="M:System.Windows.Automation.WindowPattern.SetWindowVisualState(System.Windows.Automation.WindowVisualState)">
+      <summary>Changes the <see cref="T:System.Windows.Automation.WindowVisualState" /> of the window.</summary>
+      <param name="state">The requested <see cref="T:System.Windows.Automation.WindowVisualState" /> of the window.</param>
+      <exception cref="T:System.InvalidOperationException">A control does not support a requested behavior.</exception>
+    </member>
+    <member name="M:System.Windows.Automation.WindowPattern.WaitForInputIdle(System.Int32)">
+      <summary>Causes the calling code to block for the specified time or until the associated process enters an idle state, whichever completes first.</summary>
+      <param name="milliseconds">The amount of time, in milliseconds, to wait for the associated process to become idle. The maximum is <see cref="F:System.Int32.MaxValue" />.</param>
+      <exception cref="T:System.ArgumentOutOfRangeException">The parameter passed in is not a valid number.</exception>
+      <returns>
+        <see langword="true" /> if the window has entered the idle state; <see langword="false" /> if the timeout occurred.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.WindowPattern.Cached">
+      <summary>Gets the cached UI Automation property values for this <see cref="T:System.Windows.Automation.WindowPattern" />.</summary>
+      <exception cref="T:System.InvalidOperationException">The requested property is not in the cache.</exception>
+      <returns>A structure containing the cached UI Automation property values for the control pattern.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.WindowPattern.Current">
+      <summary>Gets the current UI Automation property values for this <see cref="T:System.Windows.Automation.WindowPattern" />.</summary>
+      <returns>A structure containing the current UI Automation property values for the control pattern.</returns>
+    </member>
+    <member name="T:System.Windows.Automation.WindowPattern.WindowPatternInformation">
+      <summary>Provides access to the property values of a <see cref="T:System.Windows.Automation.WindowPattern" /> object using its <see cref="P:System.Windows.Automation.WindowPattern.Current" /> or <see cref="P:System.Windows.Automation.WindowPattern.Cached" /> accessors.</summary>
+    </member>
+    <member name="P:System.Windows.Automation.WindowPattern.WindowPatternInformation.CanMaximize">
+      <summary>Gets a value that specifies whether the <see cref="T:System.Windows.Automation.AutomationElement" /> can be maximized.</summary>
+      <returns>
+        <see langword="true" /> if the <see cref="T:System.Windows.Automation.AutomationElement" /> can be maximized; otherwise <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.WindowPattern.WindowPatternInformation.CanMinimize">
+      <summary>Gets a value that specifies whether the current <see cref="T:System.Windows.Automation.AutomationElement" /> can be minimized.</summary>
+      <returns>
+        <see langword="true" /> if the <see cref="T:System.Windows.Automation.AutomationElement" /> can be minimized; otherwise <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.WindowPattern.WindowPatternInformation.IsModal">
+      <summary>Gets a value that specifies whether the <see cref="T:System.Windows.Automation.AutomationElement" /> is modal.</summary>
+      <returns>
+        <see langword="true" /> if the <see cref="T:System.Windows.Automation.AutomationElement" /> is modal; otherwise <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.WindowPattern.WindowPatternInformation.IsTopmost">
+      <summary>Gets a value that specifies whether the <see cref="T:System.Windows.Automation.AutomationElement" /> is the topmost element in the z-order.</summary>
+      <returns>
+        <see langword="true" /> if the <see cref="T:System.Windows.Automation.AutomationElement" /> is topmost; otherwise <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.WindowPattern.WindowPatternInformation.WindowInteractionState">
+      <summary>Gets the <see cref="T:System.Windows.Automation.WindowInteractionState" /> of the <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+      <returns>The <see cref="T:System.Windows.Automation.WindowInteractionState" /> of the <see cref="T:System.Windows.Automation.AutomationElement" />. The default value is <see cref="F:System.Windows.Automation.WindowInteractionState.Running" />.</returns>
+    </member>
+    <member name="P:System.Windows.Automation.WindowPattern.WindowPatternInformation.WindowVisualState">
+      <summary>Gets the <see cref="T:System.Windows.Automation.WindowVisualState" /> of the <see cref="T:System.Windows.Automation.AutomationElement" />.</summary>
+      <returns>The <see cref="T:System.Windows.Automation.WindowVisualState" /> of the <see cref="T:System.Windows.Automation.AutomationElement" />. The default value is <see cref="F:System.Windows.Automation.WindowVisualState.Normal" />.</returns>
+    </member>
+  </members>
+</doc>

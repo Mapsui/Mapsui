@@ -1,0 +1,36 @@
+# NOTE: Requires **VS2019 16.7** or later
+
+# 'Reliability' Rules from '5.0' release with 'None' analysis mode
+# Description: 'Reliability' Rules with enabled-by-default state from '5.0' release with 'None' analysis mode. Rules that are first released in a version later than '5.0' are disabled.
+
+is_global = true
+
+global_level = -1
+
+
+# CA2009: Do not call ToImmutableCollection on an ImmutableCollection value
+dotnet_diagnostic.CA2009.severity = none
+
+# CA2011: Avoid infinite recursion
+dotnet_diagnostic.CA2011.severity = none
+
+# CA2012: Use ValueTasks correctly
+dotnet_diagnostic.CA2012.severity = none
+
+# CA2013: Do not use ReferenceEquals with value types
+dotnet_diagnostic.CA2013.severity = none
+
+# CA2014: Do not use stackalloc in loops
+dotnet_diagnostic.CA2014.severity = none
+
+# CA2015: Do not define finalizers for types derived from MemoryManager<T>
+dotnet_diagnostic.CA2015.severity = none
+
+# CA2016: Forward the 'CancellationToken' parameter to methods
+dotnet_diagnostic.CA2016.severity = none
+
+# CA2017: Parameter count mismatch
+dotnet_diagnostic.CA2017.severity = none
+
+# CA2018: 'Buffer.BlockCopy' expects the number of bytes to be copied for the 'count' argument
+dotnet_diagnostic.CA2018.severity = none

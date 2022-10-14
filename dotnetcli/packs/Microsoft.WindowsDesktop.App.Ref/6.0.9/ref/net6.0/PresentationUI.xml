@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>PresentationUI</name>
+  </assembly>
+  <members>
+    <member name="T:System.Windows.Documents.PresentationUIStyleResources">
+      <summary>This class is used to create <see cref="T:System.Windows.ComponentResourceKey" /> objects, which require a public class.</summary>
+    </member>
+  </members>
+</doc>

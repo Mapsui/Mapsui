@@ -1,0 +1,15 @@
+# NOTE: Requires **VS2019 16.7** or later
+
+# 'Interoperability' Rules from '6.0' release with 'All' analysis mode
+# Description: 'Interoperability' Rules with enabled-by-default state from '6.0' release with 'All' analysis mode. Rules that are first released in a version later than '6.0' are disabled.
+
+is_global = true
+
+global_level = -1
+
+
+# CA1401: P/Invokes should not be visible
+dotnet_diagnostic.CA1401.severity = warning
+
+# CA1419: Provide a parameterless constructor that is as visible as the containing type for concrete types derived from 'System.Runtime.InteropServices.SafeHandle'
+dotnet_diagnostic.CA1419.severity = warning

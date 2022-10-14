@@ -1,0 +1,596 @@
+<Project>
+  <Target Name="AddGlobalAnalyzerConfigForPackage_MicrosoftCodeAnalysisNetAnalyzers" BeforeTargets="CoreCompile" Condition="'$(SkipGlobalAnalyzerConfigForPackage)' != 'true'">
+    <!-- PropertyGroup to compute global analyzer config file to be used -->
+    <PropertyGroup>
+      <!-- Default 'MicrosoftCodeAnalysisNetAnalyzersRulesVersion' to 'EffectiveAnalysisLevel' with trimmed trailing '.0' -->
+      <MicrosoftCodeAnalysisNetAnalyzersRulesVersion Condition="'$(MicrosoftCodeAnalysisNetAnalyzersRulesVersion)' == '' and $(EffectiveAnalysisLevel) != ''">$([System.Text.RegularExpressions.Regex]::Replace($(EffectiveAnalysisLevel), '(.0)*$', ''))</MicrosoftCodeAnalysisNetAnalyzersRulesVersion>
+
+      <!-- Set the default analysis mode, if not set by the user -->
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzers>$(AnalysisLevelSuffix)</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzers>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzers Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzers)' == ''">$(AnalysisMode)</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzers>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzers Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzers)' == 'AllEnabledByDefault'">All</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzers>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzers Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzers)' == 'AllDisabledByDefault'">None</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzers>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzers Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzers)' == ''">Default</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzers>
+
+      <!-- GlobalAnalyzerConfig file name based on user specified package version 'MicrosoftCodeAnalysisNetAnalyzersRulesVersion', if any. We replace '.' with '_' to map the version string to file name suffix. -->
+      <_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzers Condition="'$(MicrosoftCodeAnalysisNetAnalyzersRulesVersion)' != ''">AnalysisLevel_$(MicrosoftCodeAnalysisNetAnalyzersRulesVersion.Replace(".","_"))_$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzers).editorconfig</_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzers>
+      <_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzers>$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzers.ToLowerInvariant())</_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzers>
+
+      <_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzers Condition="'$(_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzers)' == ''">$(MSBuildThisFileDirectory)config</_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzers>
+      <_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzers Condition="'$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzers)' != ''">$(_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzers)\$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzers)</_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzers>
+    </PropertyGroup>
+
+    <ItemGroup Condition="Exists('$(_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzers)')">
+      <EditorConfigFiles Include="$(_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzers)" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="AddGlobalAnalyzerConfigForPackage_MicrosoftCodeAnalysisNetAnalyzersDesign" BeforeTargets="CoreCompile" AfterTargets="AddGlobalAnalyzerConfigForPackage_MicrosoftCodeAnalysisNetAnalyzers" Condition="'$(SkipGlobalAnalyzerConfigForPackage)' != 'true' and ('$(AnalysisLevelDesign)' != '' or '$(AnalysisModeDesign)' != '')">
+    <!-- PropertyGroup to compute global analyzer config file to be used -->
+    <PropertyGroup>
+      <!-- Default 'AnalysisLevelDesign' to the core 'AnalysisLevel' and compute 'AnalysisLevelPrefixDesign', 'AnalysisLevelSuffixDesign' and 'EffectiveAnalysisLevelDesign' -->
+      <AnalysisLevelDesign Condition="'$(AnalysisLevelDesign)' == ''">$(AnalysisLevel)</AnalysisLevelDesign>
+
+      <!-- AnalysisLevelDesign can also contain compound values with a prefix and suffix separated by a '-' character.
+           The prefix indicates the core AnalysisLevel for 'Design' rules and the suffix indicates the bucket of
+           rules to enable for 'Design' rules by default. For example, some valid compound values for AnalysisLevelDesign are:
+             1. '5-all' - Indicates core AnalysisLevelDesign = '5' with 'all' the 'Design' rules enabled by default.
+             2. 'latest-none' - Indicates core AnalysisLevelDesign = 'latest' with 'none' of the 'Design' rules enabled by default.
+           AnalysisLevelPrefixDesign is used to set the EffectiveAnalysisLevelDesign below.
+           AnalysisLevelSuffixDesign is used to map to the correct global config.
+      -->
+      <AnalysisLevelPrefixDesign Condition="$(AnalysisLevelDesign.Contains('-'))">$([System.Text.RegularExpressions.Regex]::Replace($(AnalysisLevelDesign), '-(.)*', ''))</AnalysisLevelPrefixDesign>
+      <AnalysisLevelSuffixDesign Condition="'$(AnalysisLevelPrefixDesign)' != ''">$([System.Text.RegularExpressions.Regex]::Replace($(AnalysisLevelDesign), '$(AnalysisLevelPrefixDesign)-', ''))</AnalysisLevelSuffixDesign>
+
+      <!-- EffectiveAnalysisLevelDesign is used to differentiate from user specified strings (such as 'none')
+           and an implied numerical option (such as '4') -->
+      <!-- TODO: Remove hard-coded constants such as 4.0, 5.0 and 6.0 used below once these are exposed as properties from the SDK -->
+      <EffectiveAnalysisLevelDesign Condition="'$(AnalysisLevelDesign)' == 'none' or '$(AnalysisLevelPrefixDesign)' == 'none'">4.0</EffectiveAnalysisLevelDesign>
+      <EffectiveAnalysisLevelDesign Condition="'$(AnalysisLevelDesign)' == 'latest' or '$(AnalysisLevelPrefixDesign)' == 'latest'">6.0</EffectiveAnalysisLevelDesign>
+      <EffectiveAnalysisLevelDesign Condition="'$(AnalysisLevelDesign)' == 'preview' or '$(AnalysisLevelPrefixDesign)' == 'preview'">7.0</EffectiveAnalysisLevelDesign>
+
+      <!-- Set EffectiveAnalysisLevelDesign to the value of AnalysisLevelDesign if it is a version number -->
+      <EffectiveAnalysisLevelDesign Condition="'$(EffectiveAnalysisLevelDesign)' == '' And
+                                         '$(AnalysisLevelPrefixDesign)' != ''">$(AnalysisLevelPrefixDesign)</EffectiveAnalysisLevelDesign>
+      <EffectiveAnalysisLevelDesign Condition="'$(EffectiveAnalysisLevelDesign)' == '' And
+                                         '$(AnalysisLevelDesign)' != ''">$(AnalysisLevelDesign)</EffectiveAnalysisLevelDesign>
+
+      <!-- Default 'MicrosoftCodeAnalysisNetAnalyzersDesignRulesVersion' to 'EffectiveAnalysisLevelDesign' with trimmed trailing '.0' -->
+      <MicrosoftCodeAnalysisNetAnalyzersDesignRulesVersion Condition="'$(MicrosoftCodeAnalysisNetAnalyzersDesignRulesVersion)' == '' and $(EffectiveAnalysisLevelDesign) != ''">$([System.Text.RegularExpressions.Regex]::Replace($(EffectiveAnalysisLevelDesign), '(.0)*$', ''))</MicrosoftCodeAnalysisNetAnalyzersDesignRulesVersion>
+
+      <!-- Set the default analysis mode, if not set by the user -->
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersDesign>$(AnalysisLevelSuffixDesign)</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersDesign>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersDesign Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersDesign)' == ''">$(AnalysisModeDesign)</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersDesign>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersDesign Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersDesign)' == 'AllEnabledByDefault'">All</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersDesign>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersDesign Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersDesign)' == 'AllDisabledByDefault'">None</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersDesign>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersDesign Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersDesign)' == ''">Default</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersDesign>
+
+      <!-- GlobalAnalyzerConfig file name based on user specified package version 'MicrosoftCodeAnalysisNetAnalyzersDesignRulesVersion', if any. We replace '.' with '_' to map the version string to file name suffix. -->
+      <_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersDesign Condition="'$(MicrosoftCodeAnalysisNetAnalyzersDesignRulesVersion)' != ''">AnalysisLevelDesign_$(MicrosoftCodeAnalysisNetAnalyzersDesignRulesVersion.Replace(".","_"))_$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersDesign).editorconfig</_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersDesign>
+      <_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersDesign>$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersDesign.ToLowerInvariant())</_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersDesign>
+
+      <_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersDesign Condition="'$(_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersDesign)' == ''">$(MSBuildThisFileDirectory)config</_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersDesign>
+      <_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersDesign Condition="'$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersDesign)' != ''">$(_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersDesign)\$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersDesign)</_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersDesign>
+    </PropertyGroup>
+
+    <ItemGroup Condition="Exists('$(_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersDesign)')">
+      <EditorConfigFiles Include="$(_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersDesign)" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="AddGlobalAnalyzerConfigForPackage_MicrosoftCodeAnalysisNetAnalyzersDocumentation" BeforeTargets="CoreCompile" AfterTargets="AddGlobalAnalyzerConfigForPackage_MicrosoftCodeAnalysisNetAnalyzers" Condition="'$(SkipGlobalAnalyzerConfigForPackage)' != 'true' and ('$(AnalysisLevelDocumentation)' != '' or '$(AnalysisModeDocumentation)' != '')">
+    <!-- PropertyGroup to compute global analyzer config file to be used -->
+    <PropertyGroup>
+      <!-- Default 'AnalysisLevelDocumentation' to the core 'AnalysisLevel' and compute 'AnalysisLevelPrefixDocumentation', 'AnalysisLevelSuffixDocumentation' and 'EffectiveAnalysisLevelDocumentation' -->
+      <AnalysisLevelDocumentation Condition="'$(AnalysisLevelDocumentation)' == ''">$(AnalysisLevel)</AnalysisLevelDocumentation>
+
+      <!-- AnalysisLevelDocumentation can also contain compound values with a prefix and suffix separated by a '-' character.
+           The prefix indicates the core AnalysisLevel for 'Documentation' rules and the suffix indicates the bucket of
+           rules to enable for 'Documentation' rules by default. For example, some valid compound values for AnalysisLevelDocumentation are:
+             1. '5-all' - Indicates core AnalysisLevelDocumentation = '5' with 'all' the 'Documentation' rules enabled by default.
+             2. 'latest-none' - Indicates core AnalysisLevelDocumentation = 'latest' with 'none' of the 'Documentation' rules enabled by default.
+           AnalysisLevelPrefixDocumentation is used to set the EffectiveAnalysisLevelDocumentation below.
+           AnalysisLevelSuffixDocumentation is used to map to the correct global config.
+      -->
+      <AnalysisLevelPrefixDocumentation Condition="$(AnalysisLevelDocumentation.Contains('-'))">$([System.Text.RegularExpressions.Regex]::Replace($(AnalysisLevelDocumentation), '-(.)*', ''))</AnalysisLevelPrefixDocumentation>
+      <AnalysisLevelSuffixDocumentation Condition="'$(AnalysisLevelPrefixDocumentation)' != ''">$([System.Text.RegularExpressions.Regex]::Replace($(AnalysisLevelDocumentation), '$(AnalysisLevelPrefixDocumentation)-', ''))</AnalysisLevelSuffixDocumentation>
+
+      <!-- EffectiveAnalysisLevelDocumentation is used to differentiate from user specified strings (such as 'none')
+           and an implied numerical option (such as '4') -->
+      <!-- TODO: Remove hard-coded constants such as 4.0, 5.0 and 6.0 used below once these are exposed as properties from the SDK -->
+      <EffectiveAnalysisLevelDocumentation Condition="'$(AnalysisLevelDocumentation)' == 'none' or '$(AnalysisLevelPrefixDocumentation)' == 'none'">4.0</EffectiveAnalysisLevelDocumentation>
+      <EffectiveAnalysisLevelDocumentation Condition="'$(AnalysisLevelDocumentation)' == 'latest' or '$(AnalysisLevelPrefixDocumentation)' == 'latest'">6.0</EffectiveAnalysisLevelDocumentation>
+      <EffectiveAnalysisLevelDocumentation Condition="'$(AnalysisLevelDocumentation)' == 'preview' or '$(AnalysisLevelPrefixDocumentation)' == 'preview'">7.0</EffectiveAnalysisLevelDocumentation>
+
+      <!-- Set EffectiveAnalysisLevelDocumentation to the value of AnalysisLevelDocumentation if it is a version number -->
+      <EffectiveAnalysisLevelDocumentation Condition="'$(EffectiveAnalysisLevelDocumentation)' == '' And
+                                         '$(AnalysisLevelPrefixDocumentation)' != ''">$(AnalysisLevelPrefixDocumentation)</EffectiveAnalysisLevelDocumentation>
+      <EffectiveAnalysisLevelDocumentation Condition="'$(EffectiveAnalysisLevelDocumentation)' == '' And
+                                         '$(AnalysisLevelDocumentation)' != ''">$(AnalysisLevelDocumentation)</EffectiveAnalysisLevelDocumentation>
+
+      <!-- Default 'MicrosoftCodeAnalysisNetAnalyzersDocumentationRulesVersion' to 'EffectiveAnalysisLevelDocumentation' with trimmed trailing '.0' -->
+      <MicrosoftCodeAnalysisNetAnalyzersDocumentationRulesVersion Condition="'$(MicrosoftCodeAnalysisNetAnalyzersDocumentationRulesVersion)' == '' and $(EffectiveAnalysisLevelDocumentation) != ''">$([System.Text.RegularExpressions.Regex]::Replace($(EffectiveAnalysisLevelDocumentation), '(.0)*$', ''))</MicrosoftCodeAnalysisNetAnalyzersDocumentationRulesVersion>
+
+      <!-- Set the default analysis mode, if not set by the user -->
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersDocumentation>$(AnalysisLevelSuffixDocumentation)</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersDocumentation>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersDocumentation Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersDocumentation)' == ''">$(AnalysisModeDocumentation)</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersDocumentation>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersDocumentation Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersDocumentation)' == 'AllEnabledByDefault'">All</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersDocumentation>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersDocumentation Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersDocumentation)' == 'AllDisabledByDefault'">None</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersDocumentation>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersDocumentation Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersDocumentation)' == ''">Default</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersDocumentation>
+
+      <!-- GlobalAnalyzerConfig file name based on user specified package version 'MicrosoftCodeAnalysisNetAnalyzersDocumentationRulesVersion', if any. We replace '.' with '_' to map the version string to file name suffix. -->
+      <_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersDocumentation Condition="'$(MicrosoftCodeAnalysisNetAnalyzersDocumentationRulesVersion)' != ''">AnalysisLevelDocumentation_$(MicrosoftCodeAnalysisNetAnalyzersDocumentationRulesVersion.Replace(".","_"))_$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersDocumentation).editorconfig</_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersDocumentation>
+      <_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersDocumentation>$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersDocumentation.ToLowerInvariant())</_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersDocumentation>
+
+      <_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersDocumentation Condition="'$(_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersDocumentation)' == ''">$(MSBuildThisFileDirectory)config</_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersDocumentation>
+      <_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersDocumentation Condition="'$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersDocumentation)' != ''">$(_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersDocumentation)\$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersDocumentation)</_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersDocumentation>
+    </PropertyGroup>
+
+    <ItemGroup Condition="Exists('$(_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersDocumentation)')">
+      <EditorConfigFiles Include="$(_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersDocumentation)" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="AddGlobalAnalyzerConfigForPackage_MicrosoftCodeAnalysisNetAnalyzersGlobalization" BeforeTargets="CoreCompile" AfterTargets="AddGlobalAnalyzerConfigForPackage_MicrosoftCodeAnalysisNetAnalyzers" Condition="'$(SkipGlobalAnalyzerConfigForPackage)' != 'true' and ('$(AnalysisLevelGlobalization)' != '' or '$(AnalysisModeGlobalization)' != '')">
+    <!-- PropertyGroup to compute global analyzer config file to be used -->
+    <PropertyGroup>
+      <!-- Default 'AnalysisLevelGlobalization' to the core 'AnalysisLevel' and compute 'AnalysisLevelPrefixGlobalization', 'AnalysisLevelSuffixGlobalization' and 'EffectiveAnalysisLevelGlobalization' -->
+      <AnalysisLevelGlobalization Condition="'$(AnalysisLevelGlobalization)' == ''">$(AnalysisLevel)</AnalysisLevelGlobalization>
+
+      <!-- AnalysisLevelGlobalization can also contain compound values with a prefix and suffix separated by a '-' character.
+           The prefix indicates the core AnalysisLevel for 'Globalization' rules and the suffix indicates the bucket of
+           rules to enable for 'Globalization' rules by default. For example, some valid compound values for AnalysisLevelGlobalization are:
+             1. '5-all' - Indicates core AnalysisLevelGlobalization = '5' with 'all' the 'Globalization' rules enabled by default.
+             2. 'latest-none' - Indicates core AnalysisLevelGlobalization = 'latest' with 'none' of the 'Globalization' rules enabled by default.
+           AnalysisLevelPrefixGlobalization is used to set the EffectiveAnalysisLevelGlobalization below.
+           AnalysisLevelSuffixGlobalization is used to map to the correct global config.
+      -->
+      <AnalysisLevelPrefixGlobalization Condition="$(AnalysisLevelGlobalization.Contains('-'))">$([System.Text.RegularExpressions.Regex]::Replace($(AnalysisLevelGlobalization), '-(.)*', ''))</AnalysisLevelPrefixGlobalization>
+      <AnalysisLevelSuffixGlobalization Condition="'$(AnalysisLevelPrefixGlobalization)' != ''">$([System.Text.RegularExpressions.Regex]::Replace($(AnalysisLevelGlobalization), '$(AnalysisLevelPrefixGlobalization)-', ''))</AnalysisLevelSuffixGlobalization>
+
+      <!-- EffectiveAnalysisLevelGlobalization is used to differentiate from user specified strings (such as 'none')
+           and an implied numerical option (such as '4') -->
+      <!-- TODO: Remove hard-coded constants such as 4.0, 5.0 and 6.0 used below once these are exposed as properties from the SDK -->
+      <EffectiveAnalysisLevelGlobalization Condition="'$(AnalysisLevelGlobalization)' == 'none' or '$(AnalysisLevelPrefixGlobalization)' == 'none'">4.0</EffectiveAnalysisLevelGlobalization>
+      <EffectiveAnalysisLevelGlobalization Condition="'$(AnalysisLevelGlobalization)' == 'latest' or '$(AnalysisLevelPrefixGlobalization)' == 'latest'">6.0</EffectiveAnalysisLevelGlobalization>
+      <EffectiveAnalysisLevelGlobalization Condition="'$(AnalysisLevelGlobalization)' == 'preview' or '$(AnalysisLevelPrefixGlobalization)' == 'preview'">7.0</EffectiveAnalysisLevelGlobalization>
+
+      <!-- Set EffectiveAnalysisLevelGlobalization to the value of AnalysisLevelGlobalization if it is a version number -->
+      <EffectiveAnalysisLevelGlobalization Condition="'$(EffectiveAnalysisLevelGlobalization)' == '' And
+                                         '$(AnalysisLevelPrefixGlobalization)' != ''">$(AnalysisLevelPrefixGlobalization)</EffectiveAnalysisLevelGlobalization>
+      <EffectiveAnalysisLevelGlobalization Condition="'$(EffectiveAnalysisLevelGlobalization)' == '' And
+                                         '$(AnalysisLevelGlobalization)' != ''">$(AnalysisLevelGlobalization)</EffectiveAnalysisLevelGlobalization>
+
+      <!-- Default 'MicrosoftCodeAnalysisNetAnalyzersGlobalizationRulesVersion' to 'EffectiveAnalysisLevelGlobalization' with trimmed trailing '.0' -->
+      <MicrosoftCodeAnalysisNetAnalyzersGlobalizationRulesVersion Condition="'$(MicrosoftCodeAnalysisNetAnalyzersGlobalizationRulesVersion)' == '' and $(EffectiveAnalysisLevelGlobalization) != ''">$([System.Text.RegularExpressions.Regex]::Replace($(EffectiveAnalysisLevelGlobalization), '(.0)*$', ''))</MicrosoftCodeAnalysisNetAnalyzersGlobalizationRulesVersion>
+
+      <!-- Set the default analysis mode, if not set by the user -->
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersGlobalization>$(AnalysisLevelSuffixGlobalization)</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersGlobalization>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersGlobalization Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersGlobalization)' == ''">$(AnalysisModeGlobalization)</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersGlobalization>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersGlobalization Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersGlobalization)' == 'AllEnabledByDefault'">All</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersGlobalization>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersGlobalization Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersGlobalization)' == 'AllDisabledByDefault'">None</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersGlobalization>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersGlobalization Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersGlobalization)' == ''">Default</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersGlobalization>
+
+      <!-- GlobalAnalyzerConfig file name based on user specified package version 'MicrosoftCodeAnalysisNetAnalyzersGlobalizationRulesVersion', if any. We replace '.' with '_' to map the version string to file name suffix. -->
+      <_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersGlobalization Condition="'$(MicrosoftCodeAnalysisNetAnalyzersGlobalizationRulesVersion)' != ''">AnalysisLevelGlobalization_$(MicrosoftCodeAnalysisNetAnalyzersGlobalizationRulesVersion.Replace(".","_"))_$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersGlobalization).editorconfig</_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersGlobalization>
+      <_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersGlobalization>$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersGlobalization.ToLowerInvariant())</_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersGlobalization>
+
+      <_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersGlobalization Condition="'$(_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersGlobalization)' == ''">$(MSBuildThisFileDirectory)config</_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersGlobalization>
+      <_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersGlobalization Condition="'$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersGlobalization)' != ''">$(_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersGlobalization)\$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersGlobalization)</_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersGlobalization>
+    </PropertyGroup>
+
+    <ItemGroup Condition="Exists('$(_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersGlobalization)')">
+      <EditorConfigFiles Include="$(_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersGlobalization)" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="AddGlobalAnalyzerConfigForPackage_MicrosoftCodeAnalysisNetAnalyzersInteroperability" BeforeTargets="CoreCompile" AfterTargets="AddGlobalAnalyzerConfigForPackage_MicrosoftCodeAnalysisNetAnalyzers" Condition="'$(SkipGlobalAnalyzerConfigForPackage)' != 'true' and ('$(AnalysisLevelInteroperability)' != '' or '$(AnalysisModeInteroperability)' != '')">
+    <!-- PropertyGroup to compute global analyzer config file to be used -->
+    <PropertyGroup>
+      <!-- Default 'AnalysisLevelInteroperability' to the core 'AnalysisLevel' and compute 'AnalysisLevelPrefixInteroperability', 'AnalysisLevelSuffixInteroperability' and 'EffectiveAnalysisLevelInteroperability' -->
+      <AnalysisLevelInteroperability Condition="'$(AnalysisLevelInteroperability)' == ''">$(AnalysisLevel)</AnalysisLevelInteroperability>
+
+      <!-- AnalysisLevelInteroperability can also contain compound values with a prefix and suffix separated by a '-' character.
+           The prefix indicates the core AnalysisLevel for 'Interoperability' rules and the suffix indicates the bucket of
+           rules to enable for 'Interoperability' rules by default. For example, some valid compound values for AnalysisLevelInteroperability are:
+             1. '5-all' - Indicates core AnalysisLevelInteroperability = '5' with 'all' the 'Interoperability' rules enabled by default.
+             2. 'latest-none' - Indicates core AnalysisLevelInteroperability = 'latest' with 'none' of the 'Interoperability' rules enabled by default.
+           AnalysisLevelPrefixInteroperability is used to set the EffectiveAnalysisLevelInteroperability below.
+           AnalysisLevelSuffixInteroperability is used to map to the correct global config.
+      -->
+      <AnalysisLevelPrefixInteroperability Condition="$(AnalysisLevelInteroperability.Contains('-'))">$([System.Text.RegularExpressions.Regex]::Replace($(AnalysisLevelInteroperability), '-(.)*', ''))</AnalysisLevelPrefixInteroperability>
+      <AnalysisLevelSuffixInteroperability Condition="'$(AnalysisLevelPrefixInteroperability)' != ''">$([System.Text.RegularExpressions.Regex]::Replace($(AnalysisLevelInteroperability), '$(AnalysisLevelPrefixInteroperability)-', ''))</AnalysisLevelSuffixInteroperability>
+
+      <!-- EffectiveAnalysisLevelInteroperability is used to differentiate from user specified strings (such as 'none')
+           and an implied numerical option (such as '4') -->
+      <!-- TODO: Remove hard-coded constants such as 4.0, 5.0 and 6.0 used below once these are exposed as properties from the SDK -->
+      <EffectiveAnalysisLevelInteroperability Condition="'$(AnalysisLevelInteroperability)' == 'none' or '$(AnalysisLevelPrefixInteroperability)' == 'none'">4.0</EffectiveAnalysisLevelInteroperability>
+      <EffectiveAnalysisLevelInteroperability Condition="'$(AnalysisLevelInteroperability)' == 'latest' or '$(AnalysisLevelPrefixInteroperability)' == 'latest'">6.0</EffectiveAnalysisLevelInteroperability>
+      <EffectiveAnalysisLevelInteroperability Condition="'$(AnalysisLevelInteroperability)' == 'preview' or '$(AnalysisLevelPrefixInteroperability)' == 'preview'">7.0</EffectiveAnalysisLevelInteroperability>
+
+      <!-- Set EffectiveAnalysisLevelInteroperability to the value of AnalysisLevelInteroperability if it is a version number -->
+      <EffectiveAnalysisLevelInteroperability Condition="'$(EffectiveAnalysisLevelInteroperability)' == '' And
+                                         '$(AnalysisLevelPrefixInteroperability)' != ''">$(AnalysisLevelPrefixInteroperability)</EffectiveAnalysisLevelInteroperability>
+      <EffectiveAnalysisLevelInteroperability Condition="'$(EffectiveAnalysisLevelInteroperability)' == '' And
+                                         '$(AnalysisLevelInteroperability)' != ''">$(AnalysisLevelInteroperability)</EffectiveAnalysisLevelInteroperability>
+
+      <!-- Default 'MicrosoftCodeAnalysisNetAnalyzersInteroperabilityRulesVersion' to 'EffectiveAnalysisLevelInteroperability' with trimmed trailing '.0' -->
+      <MicrosoftCodeAnalysisNetAnalyzersInteroperabilityRulesVersion Condition="'$(MicrosoftCodeAnalysisNetAnalyzersInteroperabilityRulesVersion)' == '' and $(EffectiveAnalysisLevelInteroperability) != ''">$([System.Text.RegularExpressions.Regex]::Replace($(EffectiveAnalysisLevelInteroperability), '(.0)*$', ''))</MicrosoftCodeAnalysisNetAnalyzersInteroperabilityRulesVersion>
+
+      <!-- Set the default analysis mode, if not set by the user -->
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersInteroperability>$(AnalysisLevelSuffixInteroperability)</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersInteroperability>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersInteroperability Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersInteroperability)' == ''">$(AnalysisModeInteroperability)</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersInteroperability>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersInteroperability Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersInteroperability)' == 'AllEnabledByDefault'">All</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersInteroperability>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersInteroperability Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersInteroperability)' == 'AllDisabledByDefault'">None</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersInteroperability>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersInteroperability Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersInteroperability)' == ''">Default</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersInteroperability>
+
+      <!-- GlobalAnalyzerConfig file name based on user specified package version 'MicrosoftCodeAnalysisNetAnalyzersInteroperabilityRulesVersion', if any. We replace '.' with '_' to map the version string to file name suffix. -->
+      <_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersInteroperability Condition="'$(MicrosoftCodeAnalysisNetAnalyzersInteroperabilityRulesVersion)' != ''">AnalysisLevelInteroperability_$(MicrosoftCodeAnalysisNetAnalyzersInteroperabilityRulesVersion.Replace(".","_"))_$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersInteroperability).editorconfig</_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersInteroperability>
+      <_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersInteroperability>$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersInteroperability.ToLowerInvariant())</_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersInteroperability>
+
+      <_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersInteroperability Condition="'$(_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersInteroperability)' == ''">$(MSBuildThisFileDirectory)config</_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersInteroperability>
+      <_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersInteroperability Condition="'$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersInteroperability)' != ''">$(_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersInteroperability)\$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersInteroperability)</_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersInteroperability>
+    </PropertyGroup>
+
+    <ItemGroup Condition="Exists('$(_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersInteroperability)')">
+      <EditorConfigFiles Include="$(_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersInteroperability)" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="AddGlobalAnalyzerConfigForPackage_MicrosoftCodeAnalysisNetAnalyzersMaintainability" BeforeTargets="CoreCompile" AfterTargets="AddGlobalAnalyzerConfigForPackage_MicrosoftCodeAnalysisNetAnalyzers" Condition="'$(SkipGlobalAnalyzerConfigForPackage)' != 'true' and ('$(AnalysisLevelMaintainability)' != '' or '$(AnalysisModeMaintainability)' != '')">
+    <!-- PropertyGroup to compute global analyzer config file to be used -->
+    <PropertyGroup>
+      <!-- Default 'AnalysisLevelMaintainability' to the core 'AnalysisLevel' and compute 'AnalysisLevelPrefixMaintainability', 'AnalysisLevelSuffixMaintainability' and 'EffectiveAnalysisLevelMaintainability' -->
+      <AnalysisLevelMaintainability Condition="'$(AnalysisLevelMaintainability)' == ''">$(AnalysisLevel)</AnalysisLevelMaintainability>
+
+      <!-- AnalysisLevelMaintainability can also contain compound values with a prefix and suffix separated by a '-' character.
+           The prefix indicates the core AnalysisLevel for 'Maintainability' rules and the suffix indicates the bucket of
+           rules to enable for 'Maintainability' rules by default. For example, some valid compound values for AnalysisLevelMaintainability are:
+             1. '5-all' - Indicates core AnalysisLevelMaintainability = '5' with 'all' the 'Maintainability' rules enabled by default.
+             2. 'latest-none' - Indicates core AnalysisLevelMaintainability = 'latest' with 'none' of the 'Maintainability' rules enabled by default.
+           AnalysisLevelPrefixMaintainability is used to set the EffectiveAnalysisLevelMaintainability below.
+           AnalysisLevelSuffixMaintainability is used to map to the correct global config.
+      -->
+      <AnalysisLevelPrefixMaintainability Condition="$(AnalysisLevelMaintainability.Contains('-'))">$([System.Text.RegularExpressions.Regex]::Replace($(AnalysisLevelMaintainability), '-(.)*', ''))</AnalysisLevelPrefixMaintainability>
+      <AnalysisLevelSuffixMaintainability Condition="'$(AnalysisLevelPrefixMaintainability)' != ''">$([System.Text.RegularExpressions.Regex]::Replace($(AnalysisLevelMaintainability), '$(AnalysisLevelPrefixMaintainability)-', ''))</AnalysisLevelSuffixMaintainability>
+
+      <!-- EffectiveAnalysisLevelMaintainability is used to differentiate from user specified strings (such as 'none')
+           and an implied numerical option (such as '4') -->
+      <!-- TODO: Remove hard-coded constants such as 4.0, 5.0 and 6.0 used below once these are exposed as properties from the SDK -->
+      <EffectiveAnalysisLevelMaintainability Condition="'$(AnalysisLevelMaintainability)' == 'none' or '$(AnalysisLevelPrefixMaintainability)' == 'none'">4.0</EffectiveAnalysisLevelMaintainability>
+      <EffectiveAnalysisLevelMaintainability Condition="'$(AnalysisLevelMaintainability)' == 'latest' or '$(AnalysisLevelPrefixMaintainability)' == 'latest'">6.0</EffectiveAnalysisLevelMaintainability>
+      <EffectiveAnalysisLevelMaintainability Condition="'$(AnalysisLevelMaintainability)' == 'preview' or '$(AnalysisLevelPrefixMaintainability)' == 'preview'">7.0</EffectiveAnalysisLevelMaintainability>
+
+      <!-- Set EffectiveAnalysisLevelMaintainability to the value of AnalysisLevelMaintainability if it is a version number -->
+      <EffectiveAnalysisLevelMaintainability Condition="'$(EffectiveAnalysisLevelMaintainability)' == '' And
+                                         '$(AnalysisLevelPrefixMaintainability)' != ''">$(AnalysisLevelPrefixMaintainability)</EffectiveAnalysisLevelMaintainability>
+      <EffectiveAnalysisLevelMaintainability Condition="'$(EffectiveAnalysisLevelMaintainability)' == '' And
+                                         '$(AnalysisLevelMaintainability)' != ''">$(AnalysisLevelMaintainability)</EffectiveAnalysisLevelMaintainability>
+
+      <!-- Default 'MicrosoftCodeAnalysisNetAnalyzersMaintainabilityRulesVersion' to 'EffectiveAnalysisLevelMaintainability' with trimmed trailing '.0' -->
+      <MicrosoftCodeAnalysisNetAnalyzersMaintainabilityRulesVersion Condition="'$(MicrosoftCodeAnalysisNetAnalyzersMaintainabilityRulesVersion)' == '' and $(EffectiveAnalysisLevelMaintainability) != ''">$([System.Text.RegularExpressions.Regex]::Replace($(EffectiveAnalysisLevelMaintainability), '(.0)*$', ''))</MicrosoftCodeAnalysisNetAnalyzersMaintainabilityRulesVersion>
+
+      <!-- Set the default analysis mode, if not set by the user -->
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersMaintainability>$(AnalysisLevelSuffixMaintainability)</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersMaintainability>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersMaintainability Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersMaintainability)' == ''">$(AnalysisModeMaintainability)</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersMaintainability>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersMaintainability Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersMaintainability)' == 'AllEnabledByDefault'">All</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersMaintainability>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersMaintainability Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersMaintainability)' == 'AllDisabledByDefault'">None</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersMaintainability>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersMaintainability Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersMaintainability)' == ''">Default</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersMaintainability>
+
+      <!-- GlobalAnalyzerConfig file name based on user specified package version 'MicrosoftCodeAnalysisNetAnalyzersMaintainabilityRulesVersion', if any. We replace '.' with '_' to map the version string to file name suffix. -->
+      <_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersMaintainability Condition="'$(MicrosoftCodeAnalysisNetAnalyzersMaintainabilityRulesVersion)' != ''">AnalysisLevelMaintainability_$(MicrosoftCodeAnalysisNetAnalyzersMaintainabilityRulesVersion.Replace(".","_"))_$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersMaintainability).editorconfig</_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersMaintainability>
+      <_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersMaintainability>$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersMaintainability.ToLowerInvariant())</_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersMaintainability>
+
+      <_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersMaintainability Condition="'$(_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersMaintainability)' == ''">$(MSBuildThisFileDirectory)config</_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersMaintainability>
+      <_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersMaintainability Condition="'$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersMaintainability)' != ''">$(_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersMaintainability)\$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersMaintainability)</_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersMaintainability>
+    </PropertyGroup>
+
+    <ItemGroup Condition="Exists('$(_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersMaintainability)')">
+      <EditorConfigFiles Include="$(_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersMaintainability)" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="AddGlobalAnalyzerConfigForPackage_MicrosoftCodeAnalysisNetAnalyzersNaming" BeforeTargets="CoreCompile" AfterTargets="AddGlobalAnalyzerConfigForPackage_MicrosoftCodeAnalysisNetAnalyzers" Condition="'$(SkipGlobalAnalyzerConfigForPackage)' != 'true' and ('$(AnalysisLevelNaming)' != '' or '$(AnalysisModeNaming)' != '')">
+    <!-- PropertyGroup to compute global analyzer config file to be used -->
+    <PropertyGroup>
+      <!-- Default 'AnalysisLevelNaming' to the core 'AnalysisLevel' and compute 'AnalysisLevelPrefixNaming', 'AnalysisLevelSuffixNaming' and 'EffectiveAnalysisLevelNaming' -->
+      <AnalysisLevelNaming Condition="'$(AnalysisLevelNaming)' == ''">$(AnalysisLevel)</AnalysisLevelNaming>
+
+      <!-- AnalysisLevelNaming can also contain compound values with a prefix and suffix separated by a '-' character.
+           The prefix indicates the core AnalysisLevel for 'Naming' rules and the suffix indicates the bucket of
+           rules to enable for 'Naming' rules by default. For example, some valid compound values for AnalysisLevelNaming are:
+             1. '5-all' - Indicates core AnalysisLevelNaming = '5' with 'all' the 'Naming' rules enabled by default.
+             2. 'latest-none' - Indicates core AnalysisLevelNaming = 'latest' with 'none' of the 'Naming' rules enabled by default.
+           AnalysisLevelPrefixNaming is used to set the EffectiveAnalysisLevelNaming below.
+           AnalysisLevelSuffixNaming is used to map to the correct global config.
+      -->
+      <AnalysisLevelPrefixNaming Condition="$(AnalysisLevelNaming.Contains('-'))">$([System.Text.RegularExpressions.Regex]::Replace($(AnalysisLevelNaming), '-(.)*', ''))</AnalysisLevelPrefixNaming>
+      <AnalysisLevelSuffixNaming Condition="'$(AnalysisLevelPrefixNaming)' != ''">$([System.Text.RegularExpressions.Regex]::Replace($(AnalysisLevelNaming), '$(AnalysisLevelPrefixNaming)-', ''))</AnalysisLevelSuffixNaming>
+
+      <!-- EffectiveAnalysisLevelNaming is used to differentiate from user specified strings (such as 'none')
+           and an implied numerical option (such as '4') -->
+      <!-- TODO: Remove hard-coded constants such as 4.0, 5.0 and 6.0 used below once these are exposed as properties from the SDK -->
+      <EffectiveAnalysisLevelNaming Condition="'$(AnalysisLevelNaming)' == 'none' or '$(AnalysisLevelPrefixNaming)' == 'none'">4.0</EffectiveAnalysisLevelNaming>
+      <EffectiveAnalysisLevelNaming Condition="'$(AnalysisLevelNaming)' == 'latest' or '$(AnalysisLevelPrefixNaming)' == 'latest'">6.0</EffectiveAnalysisLevelNaming>
+      <EffectiveAnalysisLevelNaming Condition="'$(AnalysisLevelNaming)' == 'preview' or '$(AnalysisLevelPrefixNaming)' == 'preview'">7.0</EffectiveAnalysisLevelNaming>
+
+      <!-- Set EffectiveAnalysisLevelNaming to the value of AnalysisLevelNaming if it is a version number -->
+      <EffectiveAnalysisLevelNaming Condition="'$(EffectiveAnalysisLevelNaming)' == '' And
+                                         '$(AnalysisLevelPrefixNaming)' != ''">$(AnalysisLevelPrefixNaming)</EffectiveAnalysisLevelNaming>
+      <EffectiveAnalysisLevelNaming Condition="'$(EffectiveAnalysisLevelNaming)' == '' And
+                                         '$(AnalysisLevelNaming)' != ''">$(AnalysisLevelNaming)</EffectiveAnalysisLevelNaming>
+
+      <!-- Default 'MicrosoftCodeAnalysisNetAnalyzersNamingRulesVersion' to 'EffectiveAnalysisLevelNaming' with trimmed trailing '.0' -->
+      <MicrosoftCodeAnalysisNetAnalyzersNamingRulesVersion Condition="'$(MicrosoftCodeAnalysisNetAnalyzersNamingRulesVersion)' == '' and $(EffectiveAnalysisLevelNaming) != ''">$([System.Text.RegularExpressions.Regex]::Replace($(EffectiveAnalysisLevelNaming), '(.0)*$', ''))</MicrosoftCodeAnalysisNetAnalyzersNamingRulesVersion>
+
+      <!-- Set the default analysis mode, if not set by the user -->
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersNaming>$(AnalysisLevelSuffixNaming)</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersNaming>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersNaming Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersNaming)' == ''">$(AnalysisModeNaming)</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersNaming>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersNaming Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersNaming)' == 'AllEnabledByDefault'">All</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersNaming>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersNaming Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersNaming)' == 'AllDisabledByDefault'">None</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersNaming>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersNaming Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersNaming)' == ''">Default</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersNaming>
+
+      <!-- GlobalAnalyzerConfig file name based on user specified package version 'MicrosoftCodeAnalysisNetAnalyzersNamingRulesVersion', if any. We replace '.' with '_' to map the version string to file name suffix. -->
+      <_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersNaming Condition="'$(MicrosoftCodeAnalysisNetAnalyzersNamingRulesVersion)' != ''">AnalysisLevelNaming_$(MicrosoftCodeAnalysisNetAnalyzersNamingRulesVersion.Replace(".","_"))_$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersNaming).editorconfig</_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersNaming>
+      <_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersNaming>$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersNaming.ToLowerInvariant())</_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersNaming>
+
+      <_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersNaming Condition="'$(_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersNaming)' == ''">$(MSBuildThisFileDirectory)config</_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersNaming>
+      <_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersNaming Condition="'$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersNaming)' != ''">$(_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersNaming)\$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersNaming)</_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersNaming>
+    </PropertyGroup>
+
+    <ItemGroup Condition="Exists('$(_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersNaming)')">
+      <EditorConfigFiles Include="$(_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersNaming)" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="AddGlobalAnalyzerConfigForPackage_MicrosoftCodeAnalysisNetAnalyzersPerformance" BeforeTargets="CoreCompile" AfterTargets="AddGlobalAnalyzerConfigForPackage_MicrosoftCodeAnalysisNetAnalyzers" Condition="'$(SkipGlobalAnalyzerConfigForPackage)' != 'true' and ('$(AnalysisLevelPerformance)' != '' or '$(AnalysisModePerformance)' != '')">
+    <!-- PropertyGroup to compute global analyzer config file to be used -->
+    <PropertyGroup>
+      <!-- Default 'AnalysisLevelPerformance' to the core 'AnalysisLevel' and compute 'AnalysisLevelPrefixPerformance', 'AnalysisLevelSuffixPerformance' and 'EffectiveAnalysisLevelPerformance' -->
+      <AnalysisLevelPerformance Condition="'$(AnalysisLevelPerformance)' == ''">$(AnalysisLevel)</AnalysisLevelPerformance>
+
+      <!-- AnalysisLevelPerformance can also contain compound values with a prefix and suffix separated by a '-' character.
+           The prefix indicates the core AnalysisLevel for 'Performance' rules and the suffix indicates the bucket of
+           rules to enable for 'Performance' rules by default. For example, some valid compound values for AnalysisLevelPerformance are:
+             1. '5-all' - Indicates core AnalysisLevelPerformance = '5' with 'all' the 'Performance' rules enabled by default.
+             2. 'latest-none' - Indicates core AnalysisLevelPerformance = 'latest' with 'none' of the 'Performance' rules enabled by default.
+           AnalysisLevelPrefixPerformance is used to set the EffectiveAnalysisLevelPerformance below.
+           AnalysisLevelSuffixPerformance is used to map to the correct global config.
+      -->
+      <AnalysisLevelPrefixPerformance Condition="$(AnalysisLevelPerformance.Contains('-'))">$([System.Text.RegularExpressions.Regex]::Replace($(AnalysisLevelPerformance), '-(.)*', ''))</AnalysisLevelPrefixPerformance>
+      <AnalysisLevelSuffixPerformance Condition="'$(AnalysisLevelPrefixPerformance)' != ''">$([System.Text.RegularExpressions.Regex]::Replace($(AnalysisLevelPerformance), '$(AnalysisLevelPrefixPerformance)-', ''))</AnalysisLevelSuffixPerformance>
+
+      <!-- EffectiveAnalysisLevelPerformance is used to differentiate from user specified strings (such as 'none')
+           and an implied numerical option (such as '4') -->
+      <!-- TODO: Remove hard-coded constants such as 4.0, 5.0 and 6.0 used below once these are exposed as properties from the SDK -->
+      <EffectiveAnalysisLevelPerformance Condition="'$(AnalysisLevelPerformance)' == 'none' or '$(AnalysisLevelPrefixPerformance)' == 'none'">4.0</EffectiveAnalysisLevelPerformance>
+      <EffectiveAnalysisLevelPerformance Condition="'$(AnalysisLevelPerformance)' == 'latest' or '$(AnalysisLevelPrefixPerformance)' == 'latest'">6.0</EffectiveAnalysisLevelPerformance>
+      <EffectiveAnalysisLevelPerformance Condition="'$(AnalysisLevelPerformance)' == 'preview' or '$(AnalysisLevelPrefixPerformance)' == 'preview'">7.0</EffectiveAnalysisLevelPerformance>
+
+      <!-- Set EffectiveAnalysisLevelPerformance to the value of AnalysisLevelPerformance if it is a version number -->
+      <EffectiveAnalysisLevelPerformance Condition="'$(EffectiveAnalysisLevelPerformance)' == '' And
+                                         '$(AnalysisLevelPrefixPerformance)' != ''">$(AnalysisLevelPrefixPerformance)</EffectiveAnalysisLevelPerformance>
+      <EffectiveAnalysisLevelPerformance Condition="'$(EffectiveAnalysisLevelPerformance)' == '' And
+                                         '$(AnalysisLevelPerformance)' != ''">$(AnalysisLevelPerformance)</EffectiveAnalysisLevelPerformance>
+
+      <!-- Default 'MicrosoftCodeAnalysisNetAnalyzersPerformanceRulesVersion' to 'EffectiveAnalysisLevelPerformance' with trimmed trailing '.0' -->
+      <MicrosoftCodeAnalysisNetAnalyzersPerformanceRulesVersion Condition="'$(MicrosoftCodeAnalysisNetAnalyzersPerformanceRulesVersion)' == '' and $(EffectiveAnalysisLevelPerformance) != ''">$([System.Text.RegularExpressions.Regex]::Replace($(EffectiveAnalysisLevelPerformance), '(.0)*$', ''))</MicrosoftCodeAnalysisNetAnalyzersPerformanceRulesVersion>
+
+      <!-- Set the default analysis mode, if not set by the user -->
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersPerformance>$(AnalysisLevelSuffixPerformance)</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersPerformance>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersPerformance Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersPerformance)' == ''">$(AnalysisModePerformance)</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersPerformance>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersPerformance Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersPerformance)' == 'AllEnabledByDefault'">All</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersPerformance>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersPerformance Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersPerformance)' == 'AllDisabledByDefault'">None</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersPerformance>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersPerformance Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersPerformance)' == ''">Default</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersPerformance>
+
+      <!-- GlobalAnalyzerConfig file name based on user specified package version 'MicrosoftCodeAnalysisNetAnalyzersPerformanceRulesVersion', if any. We replace '.' with '_' to map the version string to file name suffix. -->
+      <_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersPerformance Condition="'$(MicrosoftCodeAnalysisNetAnalyzersPerformanceRulesVersion)' != ''">AnalysisLevelPerformance_$(MicrosoftCodeAnalysisNetAnalyzersPerformanceRulesVersion.Replace(".","_"))_$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersPerformance).editorconfig</_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersPerformance>
+      <_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersPerformance>$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersPerformance.ToLowerInvariant())</_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersPerformance>
+
+      <_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersPerformance Condition="'$(_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersPerformance)' == ''">$(MSBuildThisFileDirectory)config</_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersPerformance>
+      <_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersPerformance Condition="'$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersPerformance)' != ''">$(_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersPerformance)\$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersPerformance)</_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersPerformance>
+    </PropertyGroup>
+
+    <ItemGroup Condition="Exists('$(_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersPerformance)')">
+      <EditorConfigFiles Include="$(_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersPerformance)" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="AddGlobalAnalyzerConfigForPackage_MicrosoftCodeAnalysisNetAnalyzersReliability" BeforeTargets="CoreCompile" AfterTargets="AddGlobalAnalyzerConfigForPackage_MicrosoftCodeAnalysisNetAnalyzers" Condition="'$(SkipGlobalAnalyzerConfigForPackage)' != 'true' and ('$(AnalysisLevelReliability)' != '' or '$(AnalysisModeReliability)' != '')">
+    <!-- PropertyGroup to compute global analyzer config file to be used -->
+    <PropertyGroup>
+      <!-- Default 'AnalysisLevelReliability' to the core 'AnalysisLevel' and compute 'AnalysisLevelPrefixReliability', 'AnalysisLevelSuffixReliability' and 'EffectiveAnalysisLevelReliability' -->
+      <AnalysisLevelReliability Condition="'$(AnalysisLevelReliability)' == ''">$(AnalysisLevel)</AnalysisLevelReliability>
+
+      <!-- AnalysisLevelReliability can also contain compound values with a prefix and suffix separated by a '-' character.
+           The prefix indicates the core AnalysisLevel for 'Reliability' rules and the suffix indicates the bucket of
+           rules to enable for 'Reliability' rules by default. For example, some valid compound values for AnalysisLevelReliability are:
+             1. '5-all' - Indicates core AnalysisLevelReliability = '5' with 'all' the 'Reliability' rules enabled by default.
+             2. 'latest-none' - Indicates core AnalysisLevelReliability = 'latest' with 'none' of the 'Reliability' rules enabled by default.
+           AnalysisLevelPrefixReliability is used to set the EffectiveAnalysisLevelReliability below.
+           AnalysisLevelSuffixReliability is used to map to the correct global config.
+      -->
+      <AnalysisLevelPrefixReliability Condition="$(AnalysisLevelReliability.Contains('-'))">$([System.Text.RegularExpressions.Regex]::Replace($(AnalysisLevelReliability), '-(.)*', ''))</AnalysisLevelPrefixReliability>
+      <AnalysisLevelSuffixReliability Condition="'$(AnalysisLevelPrefixReliability)' != ''">$([System.Text.RegularExpressions.Regex]::Replace($(AnalysisLevelReliability), '$(AnalysisLevelPrefixReliability)-', ''))</AnalysisLevelSuffixReliability>
+
+      <!-- EffectiveAnalysisLevelReliability is used to differentiate from user specified strings (such as 'none')
+           and an implied numerical option (such as '4') -->
+      <!-- TODO: Remove hard-coded constants such as 4.0, 5.0 and 6.0 used below once these are exposed as properties from the SDK -->
+      <EffectiveAnalysisLevelReliability Condition="'$(AnalysisLevelReliability)' == 'none' or '$(AnalysisLevelPrefixReliability)' == 'none'">4.0</EffectiveAnalysisLevelReliability>
+      <EffectiveAnalysisLevelReliability Condition="'$(AnalysisLevelReliability)' == 'latest' or '$(AnalysisLevelPrefixReliability)' == 'latest'">6.0</EffectiveAnalysisLevelReliability>
+      <EffectiveAnalysisLevelReliability Condition="'$(AnalysisLevelReliability)' == 'preview' or '$(AnalysisLevelPrefixReliability)' == 'preview'">7.0</EffectiveAnalysisLevelReliability>
+
+      <!-- Set EffectiveAnalysisLevelReliability to the value of AnalysisLevelReliability if it is a version number -->
+      <EffectiveAnalysisLevelReliability Condition="'$(EffectiveAnalysisLevelReliability)' == '' And
+                                         '$(AnalysisLevelPrefixReliability)' != ''">$(AnalysisLevelPrefixReliability)</EffectiveAnalysisLevelReliability>
+      <EffectiveAnalysisLevelReliability Condition="'$(EffectiveAnalysisLevelReliability)' == '' And
+                                         '$(AnalysisLevelReliability)' != ''">$(AnalysisLevelReliability)</EffectiveAnalysisLevelReliability>
+
+      <!-- Default 'MicrosoftCodeAnalysisNetAnalyzersReliabilityRulesVersion' to 'EffectiveAnalysisLevelReliability' with trimmed trailing '.0' -->
+      <MicrosoftCodeAnalysisNetAnalyzersReliabilityRulesVersion Condition="'$(MicrosoftCodeAnalysisNetAnalyzersReliabilityRulesVersion)' == '' and $(EffectiveAnalysisLevelReliability) != ''">$([System.Text.RegularExpressions.Regex]::Replace($(EffectiveAnalysisLevelReliability), '(.0)*$', ''))</MicrosoftCodeAnalysisNetAnalyzersReliabilityRulesVersion>
+
+      <!-- Set the default analysis mode, if not set by the user -->
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersReliability>$(AnalysisLevelSuffixReliability)</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersReliability>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersReliability Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersReliability)' == ''">$(AnalysisModeReliability)</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersReliability>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersReliability Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersReliability)' == 'AllEnabledByDefault'">All</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersReliability>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersReliability Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersReliability)' == 'AllDisabledByDefault'">None</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersReliability>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersReliability Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersReliability)' == ''">Default</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersReliability>
+
+      <!-- GlobalAnalyzerConfig file name based on user specified package version 'MicrosoftCodeAnalysisNetAnalyzersReliabilityRulesVersion', if any. We replace '.' with '_' to map the version string to file name suffix. -->
+      <_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersReliability Condition="'$(MicrosoftCodeAnalysisNetAnalyzersReliabilityRulesVersion)' != ''">AnalysisLevelReliability_$(MicrosoftCodeAnalysisNetAnalyzersReliabilityRulesVersion.Replace(".","_"))_$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersReliability).editorconfig</_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersReliability>
+      <_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersReliability>$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersReliability.ToLowerInvariant())</_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersReliability>
+
+      <_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersReliability Condition="'$(_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersReliability)' == ''">$(MSBuildThisFileDirectory)config</_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersReliability>
+      <_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersReliability Condition="'$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersReliability)' != ''">$(_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersReliability)\$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersReliability)</_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersReliability>
+    </PropertyGroup>
+
+    <ItemGroup Condition="Exists('$(_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersReliability)')">
+      <EditorConfigFiles Include="$(_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersReliability)" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="AddGlobalAnalyzerConfigForPackage_MicrosoftCodeAnalysisNetAnalyzersSecurity" BeforeTargets="CoreCompile" AfterTargets="AddGlobalAnalyzerConfigForPackage_MicrosoftCodeAnalysisNetAnalyzers" Condition="'$(SkipGlobalAnalyzerConfigForPackage)' != 'true' and ('$(AnalysisLevelSecurity)' != '' or '$(AnalysisModeSecurity)' != '')">
+    <!-- PropertyGroup to compute global analyzer config file to be used -->
+    <PropertyGroup>
+      <!-- Default 'AnalysisLevelSecurity' to the core 'AnalysisLevel' and compute 'AnalysisLevelPrefixSecurity', 'AnalysisLevelSuffixSecurity' and 'EffectiveAnalysisLevelSecurity' -->
+      <AnalysisLevelSecurity Condition="'$(AnalysisLevelSecurity)' == ''">$(AnalysisLevel)</AnalysisLevelSecurity>
+
+      <!-- AnalysisLevelSecurity can also contain compound values with a prefix and suffix separated by a '-' character.
+           The prefix indicates the core AnalysisLevel for 'Security' rules and the suffix indicates the bucket of
+           rules to enable for 'Security' rules by default. For example, some valid compound values for AnalysisLevelSecurity are:
+             1. '5-all' - Indicates core AnalysisLevelSecurity = '5' with 'all' the 'Security' rules enabled by default.
+             2. 'latest-none' - Indicates core AnalysisLevelSecurity = 'latest' with 'none' of the 'Security' rules enabled by default.
+           AnalysisLevelPrefixSecurity is used to set the EffectiveAnalysisLevelSecurity below.
+           AnalysisLevelSuffixSecurity is used to map to the correct global config.
+      -->
+      <AnalysisLevelPrefixSecurity Condition="$(AnalysisLevelSecurity.Contains('-'))">$([System.Text.RegularExpressions.Regex]::Replace($(AnalysisLevelSecurity), '-(.)*', ''))</AnalysisLevelPrefixSecurity>
+      <AnalysisLevelSuffixSecurity Condition="'$(AnalysisLevelPrefixSecurity)' != ''">$([System.Text.RegularExpressions.Regex]::Replace($(AnalysisLevelSecurity), '$(AnalysisLevelPrefixSecurity)-', ''))</AnalysisLevelSuffixSecurity>
+
+      <!-- EffectiveAnalysisLevelSecurity is used to differentiate from user specified strings (such as 'none')
+           and an implied numerical option (such as '4') -->
+      <!-- TODO: Remove hard-coded constants such as 4.0, 5.0 and 6.0 used below once these are exposed as properties from the SDK -->
+      <EffectiveAnalysisLevelSecurity Condition="'$(AnalysisLevelSecurity)' == 'none' or '$(AnalysisLevelPrefixSecurity)' == 'none'">4.0</EffectiveAnalysisLevelSecurity>
+      <EffectiveAnalysisLevelSecurity Condition="'$(AnalysisLevelSecurity)' == 'latest' or '$(AnalysisLevelPrefixSecurity)' == 'latest'">6.0</EffectiveAnalysisLevelSecurity>
+      <EffectiveAnalysisLevelSecurity Condition="'$(AnalysisLevelSecurity)' == 'preview' or '$(AnalysisLevelPrefixSecurity)' == 'preview'">7.0</EffectiveAnalysisLevelSecurity>
+
+      <!-- Set EffectiveAnalysisLevelSecurity to the value of AnalysisLevelSecurity if it is a version number -->
+      <EffectiveAnalysisLevelSecurity Condition="'$(EffectiveAnalysisLevelSecurity)' == '' And
+                                         '$(AnalysisLevelPrefixSecurity)' != ''">$(AnalysisLevelPrefixSecurity)</EffectiveAnalysisLevelSecurity>
+      <EffectiveAnalysisLevelSecurity Condition="'$(EffectiveAnalysisLevelSecurity)' == '' And
+                                         '$(AnalysisLevelSecurity)' != ''">$(AnalysisLevelSecurity)</EffectiveAnalysisLevelSecurity>
+
+      <!-- Default 'MicrosoftCodeAnalysisNetAnalyzersSecurityRulesVersion' to 'EffectiveAnalysisLevelSecurity' with trimmed trailing '.0' -->
+      <MicrosoftCodeAnalysisNetAnalyzersSecurityRulesVersion Condition="'$(MicrosoftCodeAnalysisNetAnalyzersSecurityRulesVersion)' == '' and $(EffectiveAnalysisLevelSecurity) != ''">$([System.Text.RegularExpressions.Regex]::Replace($(EffectiveAnalysisLevelSecurity), '(.0)*$', ''))</MicrosoftCodeAnalysisNetAnalyzersSecurityRulesVersion>
+
+      <!-- Set the default analysis mode, if not set by the user -->
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersSecurity>$(AnalysisLevelSuffixSecurity)</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersSecurity>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersSecurity Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersSecurity)' == ''">$(AnalysisModeSecurity)</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersSecurity>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersSecurity Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersSecurity)' == 'AllEnabledByDefault'">All</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersSecurity>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersSecurity Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersSecurity)' == 'AllDisabledByDefault'">None</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersSecurity>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersSecurity Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersSecurity)' == ''">Default</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersSecurity>
+
+      <!-- GlobalAnalyzerConfig file name based on user specified package version 'MicrosoftCodeAnalysisNetAnalyzersSecurityRulesVersion', if any. We replace '.' with '_' to map the version string to file name suffix. -->
+      <_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersSecurity Condition="'$(MicrosoftCodeAnalysisNetAnalyzersSecurityRulesVersion)' != ''">AnalysisLevelSecurity_$(MicrosoftCodeAnalysisNetAnalyzersSecurityRulesVersion.Replace(".","_"))_$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersSecurity).editorconfig</_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersSecurity>
+      <_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersSecurity>$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersSecurity.ToLowerInvariant())</_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersSecurity>
+
+      <_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersSecurity Condition="'$(_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersSecurity)' == ''">$(MSBuildThisFileDirectory)config</_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersSecurity>
+      <_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersSecurity Condition="'$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersSecurity)' != ''">$(_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersSecurity)\$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersSecurity)</_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersSecurity>
+    </PropertyGroup>
+
+    <ItemGroup Condition="Exists('$(_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersSecurity)')">
+      <EditorConfigFiles Include="$(_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersSecurity)" />
+    </ItemGroup>
+  </Target>
+
+  <Target Name="AddGlobalAnalyzerConfigForPackage_MicrosoftCodeAnalysisNetAnalyzersUsage" BeforeTargets="CoreCompile" AfterTargets="AddGlobalAnalyzerConfigForPackage_MicrosoftCodeAnalysisNetAnalyzers" Condition="'$(SkipGlobalAnalyzerConfigForPackage)' != 'true' and ('$(AnalysisLevelUsage)' != '' or '$(AnalysisModeUsage)' != '')">
+    <!-- PropertyGroup to compute global analyzer config file to be used -->
+    <PropertyGroup>
+      <!-- Default 'AnalysisLevelUsage' to the core 'AnalysisLevel' and compute 'AnalysisLevelPrefixUsage', 'AnalysisLevelSuffixUsage' and 'EffectiveAnalysisLevelUsage' -->
+      <AnalysisLevelUsage Condition="'$(AnalysisLevelUsage)' == ''">$(AnalysisLevel)</AnalysisLevelUsage>
+
+      <!-- AnalysisLevelUsage can also contain compound values with a prefix and suffix separated by a '-' character.
+           The prefix indicates the core AnalysisLevel for 'Usage' rules and the suffix indicates the bucket of
+           rules to enable for 'Usage' rules by default. For example, some valid compound values for AnalysisLevelUsage are:
+             1. '5-all' - Indicates core AnalysisLevelUsage = '5' with 'all' the 'Usage' rules enabled by default.
+             2. 'latest-none' - Indicates core AnalysisLevelUsage = 'latest' with 'none' of the 'Usage' rules enabled by default.
+           AnalysisLevelPrefixUsage is used to set the EffectiveAnalysisLevelUsage below.
+           AnalysisLevelSuffixUsage is used to map to the correct global config.
+      -->
+      <AnalysisLevelPrefixUsage Condition="$(AnalysisLevelUsage.Contains('-'))">$([System.Text.RegularExpressions.Regex]::Replace($(AnalysisLevelUsage), '-(.)*', ''))</AnalysisLevelPrefixUsage>
+      <AnalysisLevelSuffixUsage Condition="'$(AnalysisLevelPrefixUsage)' != ''">$([System.Text.RegularExpressions.Regex]::Replace($(AnalysisLevelUsage), '$(AnalysisLevelPrefixUsage)-', ''))</AnalysisLevelSuffixUsage>
+
+      <!-- EffectiveAnalysisLevelUsage is used to differentiate from user specified strings (such as 'none')
+           and an implied numerical option (such as '4') -->
+      <!-- TODO: Remove hard-coded constants such as 4.0, 5.0 and 6.0 used below once these are exposed as properties from the SDK -->
+      <EffectiveAnalysisLevelUsage Condition="'$(AnalysisLevelUsage)' == 'none' or '$(AnalysisLevelPrefixUsage)' == 'none'">4.0</EffectiveAnalysisLevelUsage>
+      <EffectiveAnalysisLevelUsage Condition="'$(AnalysisLevelUsage)' == 'latest' or '$(AnalysisLevelPrefixUsage)' == 'latest'">6.0</EffectiveAnalysisLevelUsage>
+      <EffectiveAnalysisLevelUsage Condition="'$(AnalysisLevelUsage)' == 'preview' or '$(AnalysisLevelPrefixUsage)' == 'preview'">7.0</EffectiveAnalysisLevelUsage>
+
+      <!-- Set EffectiveAnalysisLevelUsage to the value of AnalysisLevelUsage if it is a version number -->
+      <EffectiveAnalysisLevelUsage Condition="'$(EffectiveAnalysisLevelUsage)' == '' And
+                                         '$(AnalysisLevelPrefixUsage)' != ''">$(AnalysisLevelPrefixUsage)</EffectiveAnalysisLevelUsage>
+      <EffectiveAnalysisLevelUsage Condition="'$(EffectiveAnalysisLevelUsage)' == '' And
+                                         '$(AnalysisLevelUsage)' != ''">$(AnalysisLevelUsage)</EffectiveAnalysisLevelUsage>
+
+      <!-- Default 'MicrosoftCodeAnalysisNetAnalyzersUsageRulesVersion' to 'EffectiveAnalysisLevelUsage' with trimmed trailing '.0' -->
+      <MicrosoftCodeAnalysisNetAnalyzersUsageRulesVersion Condition="'$(MicrosoftCodeAnalysisNetAnalyzersUsageRulesVersion)' == '' and $(EffectiveAnalysisLevelUsage) != ''">$([System.Text.RegularExpressions.Regex]::Replace($(EffectiveAnalysisLevelUsage), '(.0)*$', ''))</MicrosoftCodeAnalysisNetAnalyzersUsageRulesVersion>
+
+      <!-- Set the default analysis mode, if not set by the user -->
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersUsage>$(AnalysisLevelSuffixUsage)</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersUsage>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersUsage Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersUsage)' == ''">$(AnalysisModeUsage)</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersUsage>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersUsage Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersUsage)' == 'AllEnabledByDefault'">All</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersUsage>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersUsage Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersUsage)' == 'AllDisabledByDefault'">None</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersUsage>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersUsage Condition="'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersUsage)' == ''">Default</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersUsage>
+
+      <!-- GlobalAnalyzerConfig file name based on user specified package version 'MicrosoftCodeAnalysisNetAnalyzersUsageRulesVersion', if any. We replace '.' with '_' to map the version string to file name suffix. -->
+      <_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersUsage Condition="'$(MicrosoftCodeAnalysisNetAnalyzersUsageRulesVersion)' != ''">AnalysisLevelUsage_$(MicrosoftCodeAnalysisNetAnalyzersUsageRulesVersion.Replace(".","_"))_$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysisNetAnalyzersUsage).editorconfig</_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersUsage>
+      <_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersUsage>$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersUsage.ToLowerInvariant())</_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersUsage>
+
+      <_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersUsage Condition="'$(_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersUsage)' == ''">$(MSBuildThisFileDirectory)config</_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersUsage>
+      <_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersUsage Condition="'$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersUsage)' != ''">$(_GlobalAnalyzerConfigDir_MicrosoftCodeAnalysisNetAnalyzersUsage)\$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysisNetAnalyzersUsage)</_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersUsage>
+    </PropertyGroup>
+
+    <ItemGroup Condition="Exists('$(_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersUsage)')">
+      <EditorConfigFiles Include="$(_GlobalAnalyzerConfigFile_MicrosoftCodeAnalysisNetAnalyzersUsage)" />
+    </ItemGroup>
+  </Target>
+
+  <!-- MSBuild properties to thread to the analyzers as options --> 
+  <ItemGroup>
+    <CompilerVisibleProperty Include="TargetFramework" />
+    <CompilerVisibleProperty Include="TargetPlatformMinVersion" />
+    <CompilerVisibleProperty Include="UsingMicrosoftNETSdkWeb" />
+    <CompilerVisibleProperty Include="ProjectTypeGuids" />
+    <CompilerVisibleProperty Include="InvariantGlobalization" />
+    <CompilerVisibleProperty Include="PlatformNeutralAssembly" />
+  </ItemGroup>
+
+  <!-- MSBuild item metadata to thread to the analyzers as options -->
+  <PropertyGroup>
+    <_SupportedPlatformList>@(SupportedPlatform, ',')</_SupportedPlatformList>
+  </PropertyGroup>
+
+  <!-- MSBuild properties to thread to the analyzers as options --> 
+  <ItemGroup>
+    <CompilerVisibleProperty Include="_SupportedPlatformList" />
+  </ItemGroup>
+
+  <!--
+    Design-time target to prevent the rule ids implemented in this package to be bumped to errors in the IDE
+    when 'CodeAnalysisTreatWarningsAsErrors' = 'false'. Note that a similar 'WarningsNotAsErrors'
+    property group is present in the generated props file to ensure this functionality on command line builds.
+  -->
+  <Target Name="_CodeAnalysisTreatWarningsNotAsErrors" BeforeTargets="CoreCompile" Condition="'$(CodeAnalysisTreatWarningsAsErrors)' == 'false' AND ('$(DesignTimeBuild)' == 'true' OR '$(BuildingProject)' != 'true')">
+    <PropertyGroup>
+      <WarningsNotAsErrors>$(WarningsNotAsErrors);$(CodeAnalysisRuleIds)</WarningsNotAsErrors>
+    </PropertyGroup>
+  </Target>
+
+  <!-- Target to report a warning when SDK NetAnalyzers version is higher than the referenced NuGet NetAnalyzers version -->
+  <Target Name="_ReportUpgradeNetAnalyzersNuGetWarning" BeforeTargets="CoreCompile" Condition="'$(_SkipUpgradeNetAnalyzersNuGetWarning)' != 'true' ">
+    <Warning Text ="The .NET SDK has newer analyzers with version '$(_NETAnalyzersSDKAssemblyVersion)' than what version '$(_NETAnalyzersNuGetAssemblyVersion)' of 'Microsoft.CodeAnalysis.NetAnalyzers' package provides. Update or remove this package reference."
+             Condition="'$(_NETAnalyzersNuGetAssemblyVersion)' != '' AND
+                         '$(_NETAnalyzersSDKAssemblyVersion)' != '' AND
+                          $(_NETAnalyzersNuGetAssemblyVersion) &lt; $(_NETAnalyzersSDKAssemblyVersion)"/>
+  </Target>
+</Project>

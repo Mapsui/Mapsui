@@ -1,0 +1,148 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "illink/6.0.200-1.22219.3": {
+        "dependencies": {
+          "Microsoft.CodeAnalysis.BannedApiAnalyzers": "3.3.2",
+          "Microsoft.CodeAnalysis.CSharp.CodeStyle": "3.10.0-2.final",
+          "Microsoft.DiaSymReader.Pdb2Pdb": "1.1.0-beta2-19575-01",
+          "Microsoft.DotNet.CodeAnalysis": "6.0.0-beta.21271.1",
+          "Microsoft.DotNet.XliffTasks": "1.0.0-beta.21431.1",
+          "Microsoft.Net.Compilers.Toolset": "4.0.0-4.21427.11",
+          "Microsoft.SourceLink.AzureRepos.Git": "1.1.0-beta-20206-02",
+          "Microsoft.SourceLink.GitHub": "1.1.0-beta-20206-02",
+          "Mono.Cecil": "0.11.4",
+          "Mono.Cecil.Pdb": "0.11.4"
+        },
+        "runtime": {
+          "illink.dll": {}
+        }
+      },
+      "Microsoft.Build.Tasks.Git/1.1.0-beta-20206-02": {},
+      "Microsoft.CodeAnalysis.BannedApiAnalyzers/3.3.2": {},
+      "Microsoft.CodeAnalysis.CSharp.CodeStyle/3.10.0-2.final": {},
+      "Microsoft.DiaSymReader.Pdb2Pdb/1.1.0-beta2-19575-01": {},
+      "Microsoft.DotNet.CodeAnalysis/6.0.0-beta.21271.1": {},
+      "Microsoft.DotNet.XliffTasks/1.0.0-beta.21431.1": {},
+      "Microsoft.Net.Compilers.Toolset/4.0.0-4.21427.11": {},
+      "Microsoft.SourceLink.AzureRepos.Git/1.1.0-beta-20206-02": {
+        "dependencies": {
+          "Microsoft.Build.Tasks.Git": "1.1.0-beta-20206-02",
+          "Microsoft.SourceLink.Common": "1.1.0-beta-20206-02"
+        }
+      },
+      "Microsoft.SourceLink.Common/1.1.0-beta-20206-02": {},
+      "Microsoft.SourceLink.GitHub/1.1.0-beta-20206-02": {
+        "dependencies": {
+          "Microsoft.Build.Tasks.Git": "1.1.0-beta-20206-02",
+          "Microsoft.SourceLink.Common": "1.1.0-beta-20206-02"
+        }
+      },
+      "Mono.Cecil/0.11.4": {
+        "runtime": {
+          "Mono.Cecil.dll": {}
+        }
+      },
+      "Mono.Cecil.Pdb/0.11.4": {
+        "dependencies": {
+          "Mono.Cecil": "0.11.4"
+        },
+        "runtime": {
+          "Mono.Cecil.Pdb.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "illink/6.0.200-1.22219.3": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Build.Tasks.Git/1.1.0-beta-20206-02": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-hZ9leS9Yd9MHpqvviMftSJFDcLYu2h1DrapW1TDm1s1fgOy71c8HvArNMd3fseVkXmp3VTfGnkgcw0FR+TI6xw==",
+      "path": "microsoft.build.tasks.git/1.1.0-beta-20206-02",
+      "hashPath": "microsoft.build.tasks.git.1.1.0-beta-20206-02.nupkg.sha512"
+    },
+    "Microsoft.CodeAnalysis.BannedApiAnalyzers/3.3.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-LlcsDRSYfkJFWOdDpysY/4Ph4llHc8DLOc3roFTz9+216vl+vwVGfbys2rcSmhZCTDv/0kxSs2oOdd9SX2NiVg==",
+      "path": "microsoft.codeanalysis.bannedapianalyzers/3.3.2",
+      "hashPath": "microsoft.codeanalysis.bannedapianalyzers.3.3.2.nupkg.sha512"
+    },
+    "Microsoft.CodeAnalysis.CSharp.CodeStyle/3.10.0-2.final": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-2S0R8skHbp0/Of2yo1P5F8rbs7ZD2BNwZB4O445VoqPK4iNyuEdcd0uos1u02ssFp0zYkQGx97Xd0N6NG197NQ==",
+      "path": "microsoft.codeanalysis.csharp.codestyle/3.10.0-2.final",
+      "hashPath": "microsoft.codeanalysis.csharp.codestyle.3.10.0-2.final.nupkg.sha512"
+    },
+    "Microsoft.DiaSymReader.Pdb2Pdb/1.1.0-beta2-19575-01": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kY6eTNkeWLHvfOjg97Q7tgQKrPpX+Y3fR6fS4nyfpgFLHBxHriLBR4v3e9t71it91gIMEeKUqOqrFJ7Pj48eHA==",
+      "path": "microsoft.diasymreader.pdb2pdb/1.1.0-beta2-19575-01",
+      "hashPath": "microsoft.diasymreader.pdb2pdb.1.1.0-beta2-19575-01.nupkg.sha512"
+    },
+    "Microsoft.DotNet.CodeAnalysis/6.0.0-beta.21271.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-2899a2xl1vrXL/T3pMvucqaMGgZfUl3rmYMbeARFNV3kjy8Ij/2QENeYRrCyl4sfyKZITngxZ/32PjqkPCKRHQ==",
+      "path": "microsoft.dotnet.codeanalysis/6.0.0-beta.21271.1",
+      "hashPath": "microsoft.dotnet.codeanalysis.6.0.0-beta.21271.1.nupkg.sha512"
+    },
+    "Microsoft.DotNet.XliffTasks/1.0.0-beta.21431.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-LwYNZU6cwNSy/cSkHnGU1Xzz6/37PEniWuaI7l8TLW5gB1UP+5WqAfRMOJgUpjW1umvda1MjQTYtbxbXjbpq9w==",
+      "path": "microsoft.dotnet.xlifftasks/1.0.0-beta.21431.1",
+      "hashPath": "microsoft.dotnet.xlifftasks.1.0.0-beta.21431.1.nupkg.sha512"
+    },
+    "Microsoft.Net.Compilers.Toolset/4.0.0-4.21427.11": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-vUWY3rHSA2ZmlklUxzfE0T7CH7d/Y1hzqdJoXVZghDRgprB0M3iF9WBm+Q/5g1YFqJVeYodsvNuR7L9QJsvQHQ==",
+      "path": "microsoft.net.compilers.toolset/4.0.0-4.21427.11",
+      "hashPath": "microsoft.net.compilers.toolset.4.0.0-4.21427.11.nupkg.sha512"
+    },
+    "Microsoft.SourceLink.AzureRepos.Git/1.1.0-beta-20206-02": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-vVYhSds9TfraTQkGHHMDMVWnr3kCkTZ7vmqUmrXQBDJFXiWTuMoP5RRa9s1M/KmgB4szi5TOb7sOaHWKDT9qDA==",
+      "path": "microsoft.sourcelink.azurerepos.git/1.1.0-beta-20206-02",
+      "hashPath": "microsoft.sourcelink.azurerepos.git.1.1.0-beta-20206-02.nupkg.sha512"
+    },
+    "Microsoft.SourceLink.Common/1.1.0-beta-20206-02": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-aek0RTQ+4Bf11WvqaXajwYoaBWkX2edBjAr5XJOvhAsHX6/9vPOb7IpHAiE/NyCse7IcpGWslJZHNkv4UBEFqw==",
+      "path": "microsoft.sourcelink.common/1.1.0-beta-20206-02",
+      "hashPath": "microsoft.sourcelink.common.1.1.0-beta-20206-02.nupkg.sha512"
+    },
+    "Microsoft.SourceLink.GitHub/1.1.0-beta-20206-02": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7A7P0EwL+lypaI/CEvG4IcpAlQeAt04uPPw1SO6Q9Jwz2nE9309pQXJ4TfP/RLL8IOObACidN66+gVR+bJDZHw==",
+      "path": "microsoft.sourcelink.github/1.1.0-beta-20206-02",
+      "hashPath": "microsoft.sourcelink.github.1.1.0-beta-20206-02.nupkg.sha512"
+    },
+    "Mono.Cecil/0.11.4": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Mono.Cecil.Pdb/0.11.4": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

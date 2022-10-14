@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>System.Runtime.InteropServices.RuntimeInformation</name>
+  </assembly>
+  <members>
+    <member name="T:System.Runtime.InteropServices.Architecture">
+      <summary>Indicates the processor architecture.</summary>
+    </member>
+    <member name="F:System.Runtime.InteropServices.Architecture.Arm">
+      <summary>A 32-bit ARM processor architecture.</summary>
+    </member>
+    <member name="F:System.Runtime.InteropServices.Architecture.Arm64">
+      <summary>A 64-bit ARM processor architecture.</summary>
+    </member>
+    <member name="F:System.Runtime.InteropServices.Architecture.S390x">
+      <summary>The S390x platform architecture.</summary>
+    </member>
+    <member name="F:System.Runtime.InteropServices.Architecture.Wasm">
+      <summary>The WebAssembly platform.</summary>
+    </member>
+    <member name="F:System.Runtime.InteropServices.Architecture.X64">
+      <summary>An Intel-based 64-bit processor architecture.</summary>
+    </member>
+    <member name="F:System.Runtime.InteropServices.Architecture.X86">
+      <summary>An Intel-based 32-bit processor architecture.</summary>
+    </member>
+    <member name="T:System.Runtime.InteropServices.OSPlatform">
+      <summary>Represents an operating system platform.</summary>
+    </member>
+    <member name="M:System.Runtime.InteropServices.OSPlatform.Create(System.String)">
+      <summary>Creates a new <see cref="T:System.Runtime.InteropServices.OSPlatform" /> instance.</summary>
+      <param name="osPlatform">The name of the platform that this instance represents.</param>
+      <exception cref="T:System.ArgumentException">
+        <paramref name="osPlatform" /> is an empty string.</exception>
+      <exception cref="T:System.ArgumentNullException">
+        <paramref name="osPlatform" /> is <see langword="null" />.</exception>
+      <returns>An object that represents the <paramref name="osPlatform" /> operating system.</returns>
+    </member>
+    <member name="M:System.Runtime.InteropServices.OSPlatform.Equals(System.Object)">
+      <summary>Determines whether the current <see cref="T:System.Runtime.InteropServices.OSPlatform" /> instance is equal to the specified object.</summary>
+      <param name="obj">
+        <see langword="true" /> if <paramref name="obj" /> is a <see cref="T:System.Runtime.InteropServices.OSPlatform" /> instance and its name is the same as the current object; otherwise, <see langword="false" />.</param>
+      <returns>
+        <see langword="true" /> if <paramref name="obj" /> is a <see cref="T:System.Runtime.InteropServices.OSPlatform" /> instance and its name is the same as the current object.</returns>
+    </member>
+    <member name="M:System.Runtime.InteropServices.OSPlatform.Equals(System.Runtime.InteropServices.OSPlatform)">
+      <summary>Determines whether the current instance and the specified <see cref="T:System.Runtime.InteropServices.OSPlatform" /> instance are equal.</summary>
+      <param name="other">The object to compare with the current instance.</param>
+      <returns>
+        <see langword="true" /> if the current instance and <paramref name="other" /> are equal; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Runtime.InteropServices.OSPlatform.GetHashCode">
+      <summary>Returns the hash code for this instance.</summary>
+      <returns>The hash code for this instance.</returns>
+    </member>
+    <member name="M:System.Runtime.InteropServices.OSPlatform.op_Equality(System.Runtime.InteropServices.OSPlatform,System.Runtime.InteropServices.OSPlatform)">
+      <summary>Determines whether two <see cref="T:System.Runtime.InteropServices.OSPlatform" /> objects are equal.</summary>
+      <param name="left">The first object to compare.</param>
+      <param name="right">The second object to compare.</param>
+      <returns>
+        <see langword="true" /> if <paramref name="left" /> and <paramref name="right" /> are equal; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Runtime.InteropServices.OSPlatform.op_Inequality(System.Runtime.InteropServices.OSPlatform,System.Runtime.InteropServices.OSPlatform)">
+      <summary>Determines whether two <see cref="T:System.Runtime.InteropServices.OSPlatform" /> instances are unequal.</summary>
+      <param name="left">The first object to compare.</param>
+      <param name="right">The second object to compare.</param>
+      <returns>
+        <see langword="true" /> if <paramref name="left" /> and <paramref name="right" /> are unequal; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="M:System.Runtime.InteropServices.OSPlatform.ToString">
+      <summary>Returns the string representation of this <see cref="T:System.Runtime.InteropServices.OSPlatform" /> instance.</summary>
+      <returns>A string that represents this <see cref="T:System.Runtime.InteropServices.OSPlatform" /> instance.</returns>
+    </member>
+    <member name="P:System.Runtime.InteropServices.OSPlatform.FreeBSD">
+      <summary>Gets an object that represents the FreeBSD operating system.</summary>
+      <returns>An object that represents the FreeBSD operating system.</returns>
+    </member>
+    <member name="P:System.Runtime.InteropServices.OSPlatform.Linux">
+      <summary>Gets an object that represents the Linux operating system.</summary>
+      <returns>An object that represents the Linux operating system.</returns>
+    </member>
+    <member name="P:System.Runtime.InteropServices.OSPlatform.OSX">
+      <summary>Gets an object that represents the OSX operating system.</summary>
+      <returns>An object that represents the OSX operating system.</returns>
+    </member>
+    <member name="P:System.Runtime.InteropServices.OSPlatform.Windows">
+      <summary>Gets an object that represents the Windows operating system.</summary>
+      <returns>An object that represents the Windows operating system.</returns>
+    </member>
+    <member name="T:System.Runtime.InteropServices.RuntimeInformation">
+      <summary>Provides information about the .NET runtime installation.</summary>
+    </member>
+    <member name="M:System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(System.Runtime.InteropServices.OSPlatform)">
+      <summary>Indicates whether the current application is running on the specified platform.</summary>
+      <param name="osPlatform">A platform.</param>
+      <returns>
+        <see langword="true" /> if the current app is running on the specified platform; otherwise, <see langword="false" />.</returns>
+    </member>
+    <member name="P:System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription">
+      <summary>Gets the name of the .NET installation on which an app is running.</summary>
+      <returns>The name of the .NET installation on which the app is running.</returns>
+    </member>
+    <member name="P:System.Runtime.InteropServices.RuntimeInformation.OSArchitecture">
+      <summary>Gets the platform architecture on which the current app is running.</summary>
+      <returns>The platform architecture on which the current app is running.</returns>
+    </member>
+    <member name="P:System.Runtime.InteropServices.RuntimeInformation.OSDescription">
+      <summary>Gets a string that describes the operating system on which the app is running.</summary>
+      <returns>The description of the operating system on which the app is running.</returns>
+    </member>
+    <member name="P:System.Runtime.InteropServices.RuntimeInformation.ProcessArchitecture">
+      <summary>Gets the process architecture of the currently running app.</summary>
+      <returns>The process architecture of the currently running app.</returns>
+    </member>
+    <member name="P:System.Runtime.InteropServices.RuntimeInformation.RuntimeIdentifier">
+      <summary>Gets the platform on which an app is running.</summary>
+      <returns>An opaque string that identifies the platform on which the app is running.</returns>
+    </member>
+  </members>
+</doc>

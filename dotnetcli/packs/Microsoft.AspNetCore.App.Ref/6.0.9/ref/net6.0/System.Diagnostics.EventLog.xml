@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>System.Diagnostics.EventLog</name>
+    </assembly>
+    <members>
+        <member name="P:System.SR.BadLogName">
+            <summary>Event log names must consist of printable characters and cannot contain \\, *, ?, or spaces</summary>
+        </member>
+        <member name="P:System.SR.CannotDeleteEqualSource">
+            <summary>The event log source '{0}' cannot be deleted, because it's equal to the log name.</summary>
+        </member>
+        <member name="P:System.SR.CantMonitorEventLog">
+            <summary>Cannot monitor EntryWritten events for this EventLog. This might be because the EventLog is on a remote machine which is not a supported scenario.</summary>
+        </member>
+        <member name="P:System.SR.CantOpenLog">
+            <summary>Cannot open log {0} on computer '{1}'. {2}</summary>
+        </member>
+        <member name="P:System.SR.CantOpenLogAccess">
+            <summary>Cannot open log for source '{0}'. You may not have write access.</summary>
+        </member>
+        <member name="P:System.SR.CantReadLogEntryAt">
+            <summary>Cannot read log entry number {0}.  The event log may be corrupt.</summary>
+        </member>
+        <member name="P:System.SR.CantRetrieveEntries">
+            <summary>Cannot retrieve all entries.</summary>
+        </member>
+        <member name="P:System.SR.DuplicateLogName">
+            <summary>Only the first eight characters of a custom log name are significant, and there is already another log on the system using the first eight characters of the name given. Name given: '{0}', name of existing log: '{1}'.</summary>
+        </member>
+        <member name="P:System.SR.EventID">
+            <summary>Invalid eventID value '{0}'. It must be in the range between '{1}' and '{2}'.</summary>
+        </member>
+        <member name="P:System.SR.IndexOutOfBounds">
+            <summary>Index {0} is out of bounds.</summary>
+        </member>
+        <member name="P:System.SR.InitTwice">
+            <summary>Cannot initialize the same object twice.</summary>
+        </member>
+        <member name="P:System.SR.InvalidCustomerLogName">
+            <summary>The log name: '{0}' is invalid for customer log creation.</summary>
+        </member>
+        <member name="P:System.SR.InvalidParameter">
+            <summary>Invalid value '{1}' for parameter '{0}'.</summary>
+        </member>
+        <member name="P:System.SR.InvalidParameterFormat">
+            <summary>Invalid format for argument {0}.</summary>
+        </member>
+        <member name="P:System.SR.LocalLogAlreadyExistsAsSource">
+            <summary>Log {0} has already been registered as a source on the local computer.</summary>
+        </member>
+        <member name="P:System.SR.LocalRegKeyMissing">
+            <summary>Cannot open registry key {0}\\{1}\\{2}.</summary>
+        </member>
+        <member name="P:System.SR.LocalSourceAlreadyExists">
+            <summary>Source {0} already exists on the local computer.</summary>
+        </member>
+        <member name="P:System.SR.LocalSourceNotRegistered">
+            <summary>Source {0} is not registered on the local computer.</summary>
+        </member>
+        <member name="P:System.SR.LogDoesNotExists">
+            <summary>The event log '{0}' on computer '{1}' does not exist.</summary>
+        </member>
+        <member name="P:System.SR.LogEntryTooLong">
+            <summary>Log entry string is too long. A string written to the event log cannot exceed 32766 characters.</summary>
+        </member>
+        <member name="P:System.SR.LogSourceMismatch">
+            <summary>The source '{0}' is not registered in log '{1}'. (It is registered in log '{2}'.) " The Source and Log properties must be matched, or you may set Log to the empty string, and it will automatically be matched to the Source property.NoAccountInfo=Cannot obta ...</summary>
+        </member>
+        <member name="P:System.SR.MaximumKilobytesOutOfRange">
+            <summary>MaximumKilobytes must be between 64 KB and 4 GB, and must be in 64K increments.</summary>
+        </member>
+        <member name="P:System.SR.MessageNotFormatted">
+            <summary>The description for Event ID '{0}' in Source '{1}' cannot be found.  The local computer may not have the necessary registry information or message DLL files to display the message, or you may not have permission to access them.  The following information i ...</summary>
+        </member>
+        <member name="P:System.SR.MissingLog">
+            <summary>Cannot find Log {0} on computer '{1}'.</summary>
+        </member>
+        <member name="P:System.SR.MissingLogProperty">
+            <summary>Log property value has not been specified.</summary>
+        </member>
+        <member name="P:System.SR.MissingParameter">
+            <summary>Must specify value for {0}.</summary>
+        </member>
+        <member name="P:System.SR.NeedSourceToOpen">
+            <summary>Source property was not set before opening the event log in write mode.</summary>
+        </member>
+        <member name="P:System.SR.NeedSourceToWrite">
+            <summary>Source property was not set before writing to the event log.</summary>
+        </member>
+        <member name="P:System.SR.NoCurrentEntry">
+            <summary>No current EventLog entry available, cursor is located before the first or after the last element of the enumeration.</summary>
+        </member>
+        <member name="P:System.SR.NoLogName">
+            <summary>Log to delete was not specified.</summary>
+        </member>
+        <member name="P:System.SR.ParameterTooLong">
+            <summary>The size of {0} is too big. It cannot be longer than {1} characters.</summary>
+        </member>
+        <member name="P:System.SR.PlatformNotSupported_EventLog">
+            <summary>EventLog access is not supported on this platform.</summary>
+        </member>
+        <member name="P:System.SR.RegKeyMissing">
+            <summary>Cannot open registry key {0}\\{1}\\{2} on computer '{3}'.</summary>
+        </member>
+        <member name="P:System.SR.RegKeyMissingShort">
+            <summary>Cannot open registry key {0} on computer {1}.</summary>
+        </member>
+        <member name="P:System.SR.RegKeyNoAccess">
+            <summary>Cannot open registry key {0} on computer {1}. You might not have access.</summary>
+        </member>
+        <member name="P:System.SR.RentionDaysOutOfRange">
+            <summary>'retentionDays' must be between 1 and 365 days.</summary>
+        </member>
+        <member name="P:System.SR.SomeLogsInaccessible">
+            <summary>The source was not found, but some or all event logs could not be searched.  Inaccessible logs: {0}.</summary>
+        </member>
+        <member name="P:System.SR.SomeLogsInaccessibleToCreate">
+            <summary>The source was not found, but some or all event logs could not be searched.  To create the source, you need permission to read all event logs to make sure that the new source name is unique.  Inaccessible logs: {0}.</summary>
+        </member>
+        <member name="P:System.SR.SourceAlreadyExists">
+            <summary>Source {0} already exists on the computer '{1}'.</summary>
+        </member>
+        <member name="P:System.SR.SourceNotRegistered">
+            <summary>The source '{0}' is not registered on machine '{1}', or you do not have write access to the {2} registry key.</summary>
+        </member>
+        <member name="P:System.SR.TooManyReplacementStrings">
+            <summary>The maximum allowed number of replacement strings is 255.</summary>
+        </member>
+        <member name="P:System.SR.LogAlreadyExistsAsSource">
+            <summary>Log {0} has already been registered as a source on the local computer.</summary>
+        </member>
+        <member name="P:System.SR.NotSupported_IONonFileDevices">
+            <summary>Opening Win32 devices other than file such as COM ports, printers, disk partitions and tape drives is not supported. Avoid use of "\\\\.\\" in the path.</summary>
+        </member>
+    </members>
+</doc>

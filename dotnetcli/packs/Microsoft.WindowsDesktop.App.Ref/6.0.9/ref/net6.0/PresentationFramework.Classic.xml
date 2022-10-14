@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>PresentationFramework.Classic</name>
+  </assembly>
+  <members>
+    <member name="T:Microsoft.Windows.Themes.ClassicBorderDecorator">
+      <summary>Creates the theme-specific look for <see cref="T:System.Windows.Controls.Decorator" /> types, for use with the Classic theme.</summary>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.ClassicBorderDecorator.BackgroundProperty">
+      <summary>Identifies the <see cref="P:Microsoft.Windows.Themes.ClassicBorderDecorator.Background" /> dependency property.</summary>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.ClassicBorderDecorator.BorderBrushProperty">
+      <summary>Identifies the <see cref="P:Microsoft.Windows.Themes.ClassicBorderDecorator.BorderBrush" /> dependency property.</summary>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.ClassicBorderDecorator.BorderStyleProperty">
+      <summary>Identifies the <see cref="P:Microsoft.Windows.Themes.ClassicBorderDecorator.BorderStyle" /> dependency property.</summary>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.ClassicBorderDecorator.BorderThicknessProperty">
+      <summary>Identifies the <see cref="P:Microsoft.Windows.Themes.ClassicBorderDecorator.BorderThickness" /> dependency property.</summary>
+    </member>
+    <member name="M:Microsoft.Windows.Themes.ClassicBorderDecorator.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Windows.Themes.ClassicBorderDecorator" /> class.</summary>
+    </member>
+    <member name="P:Microsoft.Windows.Themes.ClassicBorderDecorator.Background">
+      <summary>Gets or sets the brush used to fill the background of the element.</summary>
+      <returns>The brush used to fill the background of the element.</returns>
+    </member>
+    <member name="P:Microsoft.Windows.Themes.ClassicBorderDecorator.BorderBrush">
+      <summary>Gets or sets the brush used to draw the outer border of the element.</summary>
+      <returns>The brush used to draw the outer border of the element.</returns>
+    </member>
+    <member name="P:Microsoft.Windows.Themes.ClassicBorderDecorator.BorderStyle">
+      <summary>Gets or sets the <see cref="T:Microsoft.Windows.Themes.ClassicBorderStyle" /> used to draw the border of the element.</summary>
+      <returns>The <see cref="T:Microsoft.Windows.Themes.ClassicBorderStyle" /> used to draw the border of the element.</returns>
+    </member>
+    <member name="P:Microsoft.Windows.Themes.ClassicBorderDecorator.BorderThickness">
+      <summary>Gets or sets the width of the border.</summary>
+      <returns>The width of the border.</returns>
+    </member>
+    <member name="P:Microsoft.Windows.Themes.ClassicBorderDecorator.ClassicBorderBrush">
+      <summary>Gets the brush used to draw the border.</summary>
+      <returns>The brush used to draw the border.</returns>
+    </member>
+    <member name="T:Microsoft.Windows.Themes.ClassicBorderStyle">
+      <summary>Specifics the type of <see cref="T:System.Windows.Controls.Border" /> to draw.</summary>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.ClassicBorderStyle.AltPressed">
+      <summary>Used for the <see cref="T:System.Windows.Controls.Primitives.Thumb" /> on a <see cref="T:System.Windows.Controls.Primitives.ScrollBar" /> in their pressed state.</summary>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.ClassicBorderStyle.AltRaised">
+      <summary>Used for the <see cref="T:System.Windows.Controls.Primitives.Thumb" /> on a <see cref="T:System.Windows.Controls.Primitives.ScrollBar" /> in a normal state.</summary>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.ClassicBorderStyle.Etched">
+      <summary>Used for <see cref="T:System.Windows.Controls.GroupBox" />.</summary>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.ClassicBorderStyle.HorizontalLine">
+      <summary>Used for horizontal <see cref="T:System.Windows.Controls.Separator" />.</summary>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.ClassicBorderStyle.None">
+      <summary>No border.</summary>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.ClassicBorderStyle.RadioButton">
+      <summary>A <see cref="T:System.Windows.Controls.RadioButton" /> border.</summary>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.ClassicBorderStyle.Raised">
+      <summary>Used for <see cref="T:System.Windows.Controls.Button" /> elements in their normal state.</summary>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.ClassicBorderStyle.RaisedFocused">
+      <summary>Used for <see cref="T:System.Windows.Controls.Button" /> elements that have keyboard focus or are the default <see cref="T:System.Windows.Controls.Button" />.</summary>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.ClassicBorderStyle.RaisedPressed">
+      <summary>Used for <see cref="T:System.Windows.Controls.Button" /> elements in their pressed state.</summary>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.ClassicBorderStyle.Sunken">
+      <summary>Used for <see cref="T:System.Windows.Controls.ListBox" />, <see cref="T:System.Windows.Controls.TextBox" />, and <see cref="T:System.Windows.Controls.CheckBox" />.</summary>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.ClassicBorderStyle.TabBottom">
+      <summary>Used for <see cref="T:System.Windows.Controls.TabItem" />.</summary>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.ClassicBorderStyle.TabLeft">
+      <summary>Used for <see cref="T:System.Windows.Controls.TabItem" />.</summary>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.ClassicBorderStyle.TabRight">
+      <summary>Used for <see cref="T:System.Windows.Controls.TabItem" />.</summary>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.ClassicBorderStyle.TabTop">
+      <summary>Used for <see cref="T:System.Windows.Controls.TabItem" />.</summary>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.ClassicBorderStyle.ThinPressed">
+      <summary>Used for top level <see cref="T:System.Windows.Controls.MenuItem" /> in their pressed state.</summary>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.ClassicBorderStyle.ThinRaised">
+      <summary>Used for top level <see cref="T:System.Windows.Controls.MenuItem" /> when the mouse or other input device is hovering over them.</summary>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.ClassicBorderStyle.VerticalLine">
+      <summary>Used for vertical <see cref="T:System.Windows.Controls.Separator" />.</summary>
+    </member>
+    <member name="T:Microsoft.Windows.Themes.DataGridHeaderBorder">
+      <summary>Specifies the theme-specific look for headers in <see cref="T:System.Windows.Controls.DataGrid" /> controls.</summary>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.DataGridHeaderBorder.IsClickableProperty">
+      <summary>Identifies the <see cref="P:Microsoft.Windows.Themes.DataGridHeaderBorder.IsClickable" /> dependency property.</summary>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.DataGridHeaderBorder.IsHoveredProperty">
+      <summary>Identifies the <see cref="P:Microsoft.Windows.Themes.DataGridHeaderBorder.IsHovered" /> dependency property.</summary>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.DataGridHeaderBorder.IsPressedProperty">
+      <summary>Identifies the <see cref="P:Microsoft.Windows.Themes.DataGridHeaderBorder.IsPressed" /> dependency property.</summary>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.DataGridHeaderBorder.IsSelectedProperty">
+      <summary>Identifies the <see cref="P:Microsoft.Windows.Themes.DataGridHeaderBorder.IsSelected" /> dependency property.</summary>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.DataGridHeaderBorder.OrientationProperty">
+      <summary>Identifies the <see cref="P:Microsoft.Windows.Themes.DataGridHeaderBorder.Orientation" /> dependency property.</summary>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.DataGridHeaderBorder.SeparatorBrushProperty">
+      <summary>Identifies the <see cref="P:Microsoft.Windows.Themes.DataGridHeaderBorder.SeparatorBrush" /> dependency property.</summary>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.DataGridHeaderBorder.SeparatorVisibilityProperty">
+      <summary>Identifies the <see cref="P:Microsoft.Windows.Themes.DataGridHeaderBorder.SeparatorVisibility" /> dependency property.</summary>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.DataGridHeaderBorder.SortDirectionProperty">
+      <summary>Identifies the <see cref="P:Microsoft.Windows.Themes.DataGridHeaderBorder.SortDirection" /> dependency property.</summary>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.DataGridHeaderBorder.ThemeColorProperty">
+      <summary>Identifies the <see cref="P:Microsoft.Windows.Themes.DataGridHeaderBorder.ThemeColor" /> dependency property.</summary>
+    </member>
+    <member name="M:Microsoft.Windows.Themes.DataGridHeaderBorder.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Windows.Themes.DataGridHeaderBorder" /> class.</summary>
+    </member>
+    <member name="P:Microsoft.Windows.Themes.DataGridHeaderBorder.IsClickable">
+      <summary>Gets or sets a value that indicates whether the header is clickable.</summary>
+      <returns>
+        <see langword="true" /> if the header clickable; otherwise, <see langword="false" />. The registered default is <see langword="true" />. For more information about what can influence the value, see <see cref="T:System.Windows.DependencyProperty" />.</returns>
+    </member>
+    <member name="P:Microsoft.Windows.Themes.DataGridHeaderBorder.IsHovered">
+      <summary>Gets or sets a value that indicates whether the header appears as if the mouse pointer is moved over it.</summary>
+      <returns>
+        <see langword="true" /> if the header appears as if the mouse pointer is moved over it; otherwise, <see langword="false" />. The registered default is <see langword="false" />. For more information about what can influence the value, see <see cref="T:System.Windows.DependencyProperty" />.</returns>
+    </member>
+    <member name="P:Microsoft.Windows.Themes.DataGridHeaderBorder.IsPressed">
+      <summary>Gets or sets a value that indicates whether the header appears pressed.</summary>
+      <returns>
+        <see langword="true" /> if the header appears pressed; otherwise, <see langword="false" />. The registered default is <see langword="false" />. For more information about what can influence the value, see <see cref="T:System.Windows.DependencyProperty" />.</returns>
+    </member>
+    <member name="P:Microsoft.Windows.Themes.DataGridHeaderBorder.IsSelected">
+      <summary>Gets or sets a value that indicates whether the header appears selected.</summary>
+      <returns>
+        <see langword="true" /> if the header appears selected; otherwise, <see langword="false" />. The registered default is <see langword="false" />. For more information about what can influence the value, see <see cref="T:System.Windows.DependencyProperty" />.</returns>
+    </member>
+    <member name="P:Microsoft.Windows.Themes.DataGridHeaderBorder.Orientation">
+      <summary>Gets or sets whether the header renders in the vertical direction, as a column header, or horizontal direction, as a row header.</summary>
+      <returns>One of the enumeration values that indicates which direction the header renders. The registered default is <see cref="F:System.Windows.Controls.Orientation.Vertical" />. For more information about what can influence the value, see <see cref="T:System.Windows.DependencyProperty" />.</returns>
+    </member>
+    <member name="P:Microsoft.Windows.Themes.DataGridHeaderBorder.SeparatorBrush">
+      <summary>Gets or sets the brush that draws the separation between headers.</summary>
+      <returns>The brush that draws the separation between headers. The registered default is <see langword="null" />. For more information about what can influence the value, see <see cref="T:System.Windows.DependencyProperty" />.</returns>
+    </member>
+    <member name="P:Microsoft.Windows.Themes.DataGridHeaderBorder.SeparatorVisibility">
+      <summary>Gets or sets the value that indicates whether the separation between headers is visible.</summary>
+      <returns>One of the enumeration values that indicates whether the <see cref="P:Microsoft.Windows.Themes.DataGridHeaderBorder.SeparatorBrush" /> is visible. The registered default is <see cref="F:System.Windows.Visibility.Visible" />. For more information about what can influence the value, see <see cref="T:System.Windows.DependencyProperty" />.</returns>
+    </member>
+    <member name="P:Microsoft.Windows.Themes.DataGridHeaderBorder.SortDirection">
+      <summary>Gets or sets the header sort direction.</summary>
+      <returns>One of the enumeration values that indicates which direction the column is sorted. The registered default is <see langword="null" />. For more information about what can influence the value, see <see cref="T:System.Windows.DependencyProperty" />.</returns>
+    </member>
+    <member name="P:Microsoft.Windows.Themes.DataGridHeaderBorder.ThemeColor">
+      <summary>Gets or sets the header theme color.</summary>
+      <returns>Represents possible color variants for the Microsoft themes.</returns>
+    </member>
+    <member name="T:Microsoft.Windows.Themes.PlatformCulture">
+      <summary>Provides culture-specific information used by .NET system themes.</summary>
+    </member>
+    <member name="P:Microsoft.Windows.Themes.PlatformCulture.FlowDirection">
+      <summary>Gets a value that specifies whether the primary text advance direction shall be left-to-right, right-to-left, or top-to-bottom.</summary>
+      <returns>One of the enumeration values.</returns>
+    </member>
+    <member name="T:Microsoft.Windows.Themes.ProgressBarBrushConverter">
+      <summary>Creates the <see cref="T:System.Windows.Media.Brush" /> used to draw the <see cref="T:System.Windows.Controls.ProgressBar" />.</summary>
+    </member>
+    <member name="M:Microsoft.Windows.Themes.ProgressBarBrushConverter.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Windows.Themes.ProgressBarBrushConverter" /> class.</summary>
+    </member>
+    <member name="M:Microsoft.Windows.Themes.ProgressBarBrushConverter.Convert(System.Object[],System.Type,System.Object,System.Globalization.CultureInfo)">
+      <summary>Creates the <see cref="T:System.Windows.Media.DrawingBrush" /> for the <see cref="T:System.Windows.Controls.ProgressBar" />.</summary>
+      <param name="values">ForegroundBrush, IsIndeterminate, Indicator Width, Indicator Height, Track Width  
+  
+ The <see cref="T:System.Windows.Media.Brush" /> used for the <see cref="P:System.Windows.Controls.Control.Foreground" /> of the <see cref="T:System.Windows.Controls.ProgressBar" />, the Boolean indicating whether the <see cref="P:System.Windows.Controls.ProgressBar.IsIndeterminate" /> is <see langword="true" />, the <see cref="T:System.Double" /> defining the <see cref="P:System.Windows.FrameworkElement.Width" /> of the indicator, and the <see cref="T:System.Double" /> defining the <see cref="P:System.Windows.FrameworkElement.Height" /> of the indicator, and the <see cref="T:System.Double" /> defining the width of the <see cref="T:System.Windows.Controls.Primitives.Track" />.</param>
+      <param name="targetType">This parameter is not used.</param>
+      <param name="parameter">This parameter is not used.</param>
+      <param name="culture">This parameter is not used.</param>
+      <returns>The <see cref="T:System.Windows.Media.DrawingBrush" /> for the <see cref="T:System.Windows.Controls.ProgressBar" />.</returns>
+    </member>
+    <member name="M:Microsoft.Windows.Themes.ProgressBarBrushConverter.ConvertBack(System.Object,System.Type[],System.Object,System.Globalization.CultureInfo)">
+      <summary>Not implemented.</summary>
+      <param name="value">This parameter is not used.</param>
+      <param name="targetTypes">This parameter is not used.</param>
+      <param name="parameter">This parameter is not used.</param>
+      <param name="culture">This parameter is not used.</param>
+      <returns>
+        <see langword="null" />.</returns>
+    </member>
+    <member name="T:Microsoft.Windows.Themes.SystemDropShadowChrome">
+      <summary>Creates a theme specific look for drop shadow effects.</summary>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.SystemDropShadowChrome.ColorProperty">
+      <summary>Identifies the <see cref="P:Microsoft.Windows.Themes.SystemDropShadowChrome.Color" /> dependency property.</summary>
+    </member>
+    <member name="F:Microsoft.Windows.Themes.SystemDropShadowChrome.CornerRadiusProperty">
+      <summary>Identifies the <see cref="P:Microsoft.Windows.Themes.SystemDropShadowChrome.CornerRadius" /> dependency property.</summary>
+    </member>
+    <member name="M:Microsoft.Windows.Themes.SystemDropShadowChrome.#ctor">
+      <summary>Initializes a new instance of the <see cref="T:Microsoft.Windows.Themes.SystemDropShadowChrome" /> class.</summary>
+    </member>
+    <member name="P:Microsoft.Windows.Themes.SystemDropShadowChrome.Color">
+      <summary>Gets or sets the color used by the drop shadow.</summary>
+      <returns>The color.</returns>
+    </member>
+    <member name="P:Microsoft.Windows.Themes.SystemDropShadowChrome.CornerRadius">
+      <summary>Gets or sets the radii of a rectangle's corners.</summary>
+      <returns>The radii of a rectangle's corners.</returns>
+    </member>
+  </members>
+</doc>

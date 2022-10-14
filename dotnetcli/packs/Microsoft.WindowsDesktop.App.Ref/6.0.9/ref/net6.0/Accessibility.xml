@@ -1,0 +1,409 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <assembly>
+    <name>Accessibility</name>
+  </assembly>
+  <members>
+    <member name="T:Accessibility.__MIDL_IWinTypes_0009">
+      <summary>The <see cref="T:Accessibility.__MIDL_IWinTypes_0009" /> and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) accessibility interface.</summary>
+    </member>
+    <member name="F:Accessibility.__MIDL_IWinTypes_0009.hInproc">
+      <summary>The <see cref="T:Accessibility.__MIDL_IWinTypes_0009" /> and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) accessibility interface.</summary>
+    </member>
+    <member name="F:Accessibility.__MIDL_IWinTypes_0009.hRemote">
+      <summary>The <see cref="T:Accessibility.__MIDL_IWinTypes_0009" /> and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) accessibility interface.</summary>
+    </member>
+    <member name="T:Accessibility._RemotableHandle">
+      <summary>The <see cref="T:Accessibility.IAccessibleHandler" /> and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) accessibility interface.</summary>
+    </member>
+    <member name="F:Accessibility._RemotableHandle.fContext">
+      <summary>The <see cref="T:Accessibility.IAccessibleHandler" /> and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) accessibility interface.</summary>
+    </member>
+    <member name="F:Accessibility._RemotableHandle.u">
+      <summary>The <see cref="T:Accessibility.IAccessibleHandler" /> and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) accessibility interface.</summary>
+    </member>
+    <member name="T:Accessibility.AnnoScope">
+      <summary>The <see cref="T:Accessibility.AnnoScope" /> and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) accessibility interface.</summary>
+    </member>
+    <member name="F:Accessibility.AnnoScope.ANNO_CONTAINER">
+      <summary>Annotation is scoped to the container object.</summary>
+    </member>
+    <member name="F:Accessibility.AnnoScope.ANNO_THIS">
+      <summary>Annotation is scoped to the immediate object.</summary>
+    </member>
+    <member name="T:Accessibility.CAccPropServices">
+      <summary>The <see cref="T:Accessibility.CAccPropServices" /> and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServices" /> interface.</summary>
+    </member>
+    <member name="T:Accessibility.CAccPropServicesClass">
+      <summary>The <see cref="T:Accessibility.CAccPropServicesClass" /> and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServices" /> interface.</summary>
+    </member>
+    <member name="M:Accessibility.CAccPropServicesClass.#ctor">
+      <summary>The <see cref="T:Accessibility.CAccPropServicesClass" /> and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServices" /> interface.</summary>
+    </member>
+    <member name="M:Accessibility.CAccPropServicesClass.ClearHmenuProps(Accessibility._RemotableHandle@,System.UInt32,System.Guid@,System.Int32)">
+      <summary>The <see cref="T:Accessibility.CAccPropServicesClass" /> and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServices" /> interface.</summary>
+      <param name="hmenu">Identifies the HMENU-based accessible element to be annotated.</param>
+      <param name="idChild">Specifies the child ID of the accessible element.</param>
+      <param name="paProps">Specifies an array of properties to be reset. These properties will revert to the default behavior that they displayed before they were annotated.</param>
+      <param name="cProps">Specifies the number of properties in the <paramref name="paProps" /> array.</param>
+    </member>
+    <member name="M:Accessibility.CAccPropServicesClass.ClearHwndProps(Accessibility._RemotableHandle@,System.UInt32,System.UInt32,System.Guid@,System.Int32)">
+      <summary>The <see cref="T:Accessibility.CAccPropServicesClass" /> and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServices" /> interface.</summary>
+      <param name="hwnd">Identifies the accessible element that is to be annotated. This replaces the identity string.</param>
+      <param name="idObject">Identifies the accessible element that is to be annotated. This replaces the identity string.</param>
+      <param name="idChild">Identifies the accessible element that is to be annotated. This replaces the identity string.</param>
+      <param name="paProps">Specifies an array of properties that is to be reset. These properties will revert to the default behavior that they displayed before they were annotated.</param>
+      <param name="cProps">Specifies the number of properties in the <paramref name="paProps" /> array.</param>
+    </member>
+    <member name="M:Accessibility.CAccPropServicesClass.ClearProps(System.Byte@,System.UInt32,System.Guid@,System.Int32)">
+      <summary>The <see cref="T:Accessibility.CAccPropServicesClass" /> and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServices" /> interface.</summary>
+      <param name="pIDString">Identify the accessible element that is to be un-annotated.</param>
+      <param name="dwIDStringLen">Length of <paramref name="pIDString" />.</param>
+      <param name="paProps">Specify an array of properties that is to be reset. These properties will revert to the default behavior they displayed before they were annotated.</param>
+      <param name="cProps">Specifies the number of properties in the <paramref name="paProps" /> array.</param>
+    </member>
+    <member name="M:Accessibility.CAccPropServicesClass.ComposeHmenuIdentityString(Accessibility._RemotableHandle@,System.UInt32,System.IntPtr,System.UInt32@)">
+      <summary>The <see cref="T:Accessibility.CAccPropServicesClass" /> and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServices" /> interface.</summary>
+      <param name="hmenu">Identifies the HMENU-based accessible element.</param>
+      <param name="idChild">Specifies the child ID of the accessible element.</param>
+      <param name="ppIDString">Pointer to a buffer that receives the identity string. The callee allocates this buffer using <see langword="CoTaskMemAlloc" />. When finished, the caller must free the buffer by calling <see langword="CoTaskMemFree" />.</param>
+      <param name="pdwIDStringLen">Pointer to a buffer that receives the length of the identity string.</param>
+    </member>
+    <member name="M:Accessibility.CAccPropServicesClass.ComposeHwndIdentityString(Accessibility._RemotableHandle@,System.UInt32,System.UInt32,System.IntPtr,System.UInt32@)">
+      <summary>The <see cref="T:Accessibility.CAccPropServicesClass" /> and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServices" /> interface.</summary>
+      <param name="hwnd">Specifies the HWND of the accessible element that the caller wants to identify.</param>
+      <param name="idObject">Specifies the object ID of the accessible element.</param>
+      <param name="idChild">Specifies the child ID of the accessible element.</param>
+      <param name="ppIDString">Pointer to a buffer that receives the identity string. The callee allocates this buffer using <see langword="CoTaskMemAlloc" />. When finished, the caller must free the buffer by calling <see langword="CoTaskMemFree" />.</param>
+      <param name="pdwIDStringLen">Pointer to a buffer that receives the length of the identity string.</param>
+    </member>
+    <member name="M:Accessibility.CAccPropServicesClass.DecomposeHmenuIdentityString(System.Byte@,System.UInt32,System.IntPtr,System.UInt32@)">
+      <summary>The <see cref="T:Accessibility.CAccPropServicesClass" /> and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServices" /> interface.</summary>
+      <param name="pIDString">Pointer to a buffer containing identity string of an HMENU-based accessible element.</param>
+      <param name="dwIDStringLen">Specifies the length of the identity string specified by <paramref name="pIDString" />.</param>
+      <param name="phmenu">Pointer to a buffer that receives the HMENU of the accessible element.</param>
+      <param name="pidChild">Pointer to a buffer that receives the child ID of the accessible element.</param>
+    </member>
+    <member name="M:Accessibility.CAccPropServicesClass.DecomposeHwndIdentityString(System.Byte@,System.UInt32,System.IntPtr,System.UInt32@,System.UInt32@)">
+      <summary>The <see cref="T:Accessibility.CAccPropServicesClass" /> and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServices" /> interface.</summary>
+      <param name="pIDString">Pointer to a buffer containing identity string of an Hwnd-based accessible element.</param>
+      <param name="dwIDStringLen">Specifies the length of the identity string specified by <paramref name="pIDString" />.</param>
+      <param name="phwnd">Pointer to a buffer that receives the HWND of the accessible element.</param>
+      <param name="pidObject">Pointer to a buffer that receives the object ID of the accessible element.</param>
+      <param name="pidChild">Pointer to a buffer that receives the child ID of the accessible element.</param>
+    </member>
+    <member name="M:Accessibility.CAccPropServicesClass.SetHmenuProp(Accessibility._RemotableHandle@,System.UInt32,System.Guid,System.Object)">
+      <summary>The <see cref="T:Accessibility.CAccPropServicesClass" /> and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServices" /> interface.</summary>
+      <param name="hmenu">Identifies the HMENU-based accessible element to be annotated.</param>
+      <param name="idChild">Specifies the child ID of the accessible element.</param>
+      <param name="idProp">Specifies which property of the accessible element is to be annotated.</param>
+      <param name="var">Specifies a new value for the <paramref name="idProp" /> property.</param>
+    </member>
+    <member name="M:Accessibility.CAccPropServicesClass.SetHmenuPropServer(Accessibility._RemotableHandle@,System.UInt32,System.Guid@,System.Int32,Accessibility.IAccPropServer,Accessibility.AnnoScope)">
+      <summary>The <see cref="T:Accessibility.CAccPropServicesClass" /> and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServices" /> interface.</summary>
+      <param name="hmenu">Identifies the HMENU-accessible element to be annotated.</param>
+      <param name="idChild">Identifies the accessible element that is to be annotated. This replaces the identity string.</param>
+      <param name="paProps">Specifies an array of properties that is to be handled by the specified callback object.</param>
+      <param name="cProps">Specifies the number of properties in the <paramref name="paProps" /> array.</param>
+      <param name="pServer">Specifies the callback object, which will be invoked when a client requests one of the overridden properties.</param>
+      <param name="AnnoScope">May be ANNO_THIS, indicating that the annotation affects the indicated accessible element only; or ANNO_CONTAINER, indicating that it applies to the element and its immediate element children.</param>
+    </member>
+    <member name="M:Accessibility.CAccPropServicesClass.SetHmenuPropStr(Accessibility._RemotableHandle@,System.UInt32,System.Guid,System.String)">
+      <summary>The <see cref="T:Accessibility.CAccPropServicesClass" /> and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServices" /> interface.</summary>
+      <param name="hmenu">Identifies the HMENU-based accessible element to be annotated.</param>
+      <param name="idChild">Specifies the child ID of the accessible element.</param>
+      <param name="idProp">Specifies which property of the accessible element is to be annotated.</param>
+      <param name="str">Specifies a new value for the <paramref name="idProp" /> property.</param>
+    </member>
+    <member name="M:Accessibility.CAccPropServicesClass.SetHwndProp(Accessibility._RemotableHandle@,System.UInt32,System.UInt32,System.Guid,System.Object)">
+      <summary>The <see cref="T:Accessibility.CAccPropServicesClass" /> and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServices" /> interface.</summary>
+      <param name="hwnd">Identifies the accessible element that is to be annotated. This replaces the identity string.</param>
+      <param name="idObject">Identifies the accessible element that is to be annotated. This replaces the identity string.</param>
+      <param name="idChild">Identifies the accessible element that is to be annotated. This replaces the identity string.</param>
+      <param name="idProp">Specifies which property of that element is to be annotated.</param>
+      <param name="var">Specifies a new value for the <paramref name="idProp" /> property.</param>
+    </member>
+    <member name="M:Accessibility.CAccPropServicesClass.SetHwndPropServer(Accessibility._RemotableHandle@,System.UInt32,System.UInt32,System.Guid@,System.Int32,Accessibility.IAccPropServer,Accessibility.AnnoScope)">
+      <summary>The <see cref="T:Accessibility.CAccPropServicesClass" /> and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServices" /> interface.</summary>
+      <param name="hwnd">Identifies the accessible element that is to be annotated. This replaces the identity string.</param>
+      <param name="idObject">Identifies the accessible element that is to be annotated. This replaces the identity string.</param>
+      <param name="idChild">Identifies the accessible element that is to be annotated. This replaces the identity string.</param>
+      <param name="paProps">Specifies an array of properties that is to be handled by the specified callback object.</param>
+      <param name="cProps">Specifies the number of properties in the <paramref name="paProps" /> array.</param>
+      <param name="pServer">Specifies the callback object, which will be invoked when a client requests one of the overridden properties.</param>
+      <param name="AnnoScope">May be ANNO_THIS, indicating that the annotation affects the indicated accessible element only; or ANNO_CONTAINER, indicating that it applies to the element and its immediate element children.</param>
+    </member>
+    <member name="M:Accessibility.CAccPropServicesClass.SetHwndPropStr(Accessibility._RemotableHandle@,System.UInt32,System.UInt32,System.Guid,System.String)">
+      <summary>The <see cref="T:Accessibility.CAccPropServicesClass" /> and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServices" /> interface.</summary>
+      <param name="hwnd">Identifies the accessible element that is to be annotated. This replaces the identity string.</param>
+      <param name="idObject">Identifies the accessible element that is to be annotated. This replaces the identity string.</param>
+      <param name="idChild">Identifies the accessible element that is to be annotated. This replaces the identity string.</param>
+      <param name="idProp">Specifies which property of that element is to be annotated.</param>
+      <param name="str">Specifies a new value for the <paramref name="idProp" /> property.</param>
+    </member>
+    <member name="M:Accessibility.CAccPropServicesClass.SetPropServer(System.Byte@,System.UInt32,System.Guid@,System.Int32,Accessibility.IAccPropServer,Accessibility.AnnoScope)">
+      <summary>The <see cref="T:Accessibility.CAccPropServicesClass" /> and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServices" /> interface.</summary>
+      <param name="pIDString">Identifies the accessible element that is to be annotated.</param>
+      <param name="dwIDStringLen">Specifies the length of the string identified by the <paramref name="pIDString" /> parameter.</param>
+      <param name="paProps">Specifies an array of properties to be handled by the specified callback object.</param>
+      <param name="cProps">Specifies the number of properties in the <paramref name="paProps" /> array.</param>
+      <param name="pServer">Specifies the callback object that will be invoked when a client requests one of the overridden properties.</param>
+      <param name="AnnoScope">May be ANNO_THIS, indicating that the annotation affects the indicated accessible element only; or ANNO_CONTAINER, indicating that it applies to the element and its immediate element children.</param>
+    </member>
+    <member name="M:Accessibility.CAccPropServicesClass.SetPropValue(System.Byte@,System.UInt32,System.Guid,System.Object)">
+      <summary>The <see cref="T:Accessibility.CAccPropServicesClass" /> and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServices" /> interface.</summary>
+      <param name="pIDString">Identifies the accessible element that is to be annotated.</param>
+      <param name="dwIDStringLen">Specifies the length of the string identified by the <paramref name="pIDString" /> parameter.</param>
+      <param name="idProp">Specifies the property of the accessible element to be annotated.</param>
+      <param name="var">Specifies a new value for the property.</param>
+    </member>
+    <member name="T:Accessibility.IAccessible">
+      <summary>The <see cref="T:Accessibility.IAccessible" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccessible" /> interface.</summary>
+    </member>
+    <member name="M:Accessibility.IAccessible.accDoDefaultAction(System.Object)">
+      <summary>The <see cref="T:Accessibility.IAccessible" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccessible" /> interface.</summary>
+      <param name="varChild">This parameter is intended for internal use only.</param>
+    </member>
+    <member name="M:Accessibility.IAccessible.accHitTest(System.Int32,System.Int32)">
+      <summary>The <see cref="T:Accessibility.IAccessible" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccessible" /> interface.</summary>
+      <param name="xLeft">This parameter is intended for internal use only.</param>
+      <param name="yTop">This parameter is intended for internal use only.</param>
+      <returns>An object.</returns>
+    </member>
+    <member name="M:Accessibility.IAccessible.accLocation(System.Int32@,System.Int32@,System.Int32@,System.Int32@,System.Object)">
+      <summary>The <see cref="T:Accessibility.IAccessible" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccessible" /> interface.</summary>
+      <param name="pxLeft">This parameter is intended for internal use only.</param>
+      <param name="pyTop">This parameter is intended for internal use only.</param>
+      <param name="pcxWidth">This parameter is intended for internal use only.</param>
+      <param name="pcyHeight">This parameter is intended for internal use only.</param>
+      <param name="varChild">This parameter is intended for internal use only.</param>
+    </member>
+    <member name="M:Accessibility.IAccessible.accNavigate(System.Int32,System.Object)">
+      <summary>The <see cref="T:Accessibility.IAccessible" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccessible" /> interface.</summary>
+      <param name="navDir">This parameter is intended for internal use only.</param>
+      <param name="varStart">This parameter is intended for internal use only.</param>
+      <returns>If successful, returns S_OK. For other possible return values, see the documentation for <see langword="IAccessible::accNavigate" />.</returns>
+    </member>
+    <member name="M:Accessibility.IAccessible.accSelect(System.Int32,System.Object)">
+      <summary>The <see cref="T:Accessibility.IAccessible" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccessible" /> interface.</summary>
+      <param name="flagsSelect">This parameter is intended for internal use only.</param>
+      <param name="varChild">This parameter is intended for internal use only.</param>
+    </member>
+    <member name="P:Accessibility.IAccessible.accChild(System.Object)">
+      <summary>The <see cref="T:Accessibility.IAccessible" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccessible" /> interface.</summary>
+      <param name="varChild">This parameter is intended for internal use only.</param>
+      <returns>An object.</returns>
+    </member>
+    <member name="P:Accessibility.IAccessible.accChildCount">
+      <summary>The <see cref="T:Accessibility.IAccessible" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccessible" /> interface.</summary>
+      <returns>An integer representing the count.</returns>
+    </member>
+    <member name="P:Accessibility.IAccessible.accDefaultAction(System.Object)">
+      <summary>The <see cref="T:Accessibility.IAccessible" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccessible" /> interface.</summary>
+      <param name="varChild">This parameter is intended for internal use only.</param>
+      <returns>A string representing the action.</returns>
+    </member>
+    <member name="P:Accessibility.IAccessible.accDescription(System.Object)">
+      <summary>The <see cref="T:Accessibility.IAccessible" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccessible" /> interface.</summary>
+      <param name="varChild">This parameter is intended for internal use only.</param>
+      <returns>A string representing the description.</returns>
+    </member>
+    <member name="P:Accessibility.IAccessible.accFocus">
+      <summary>The <see cref="T:Accessibility.IAccessible" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccessible" /> interface.</summary>
+      <returns>If successful, returns S_OK. Otherwise, returns another standard COM error code.</returns>
+    </member>
+    <member name="P:Accessibility.IAccessible.accHelp(System.Object)">
+      <summary>The <see cref="T:Accessibility.IAccessible" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccessible" /> interface.</summary>
+      <param name="varChild">This parameter is intended for internal use only.</param>
+      <returns>A string.</returns>
+    </member>
+    <member name="P:Accessibility.IAccessible.accHelpTopic(System.String@,System.Object)">
+      <summary>The <see cref="T:Accessibility.IAccessible" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccessible" /> interface.</summary>
+      <param name="pszHelpFile">This parameter is intended for internal use only.</param>
+      <param name="varChild">This parameter is intended for internal use only.</param>
+      <returns>An integer.</returns>
+    </member>
+    <member name="P:Accessibility.IAccessible.accKeyboardShortcut(System.Object)">
+      <summary>The <see cref="T:Accessibility.IAccessible" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccessible" /> interface.</summary>
+      <param name="varChild">This parameter is intended for internal use only.</param>
+      <returns>A string.</returns>
+    </member>
+    <member name="P:Accessibility.IAccessible.accName(System.Object)">
+      <summary>The <see cref="T:Accessibility.IAccessible" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccessible" /> interface.</summary>
+      <param name="varChild">This parameter is intended for internal use only.</param>
+      <returns>A string.</returns>
+    </member>
+    <member name="P:Accessibility.IAccessible.accParent">
+      <summary>The <see cref="T:Accessibility.IAccessible" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccessible" /> interface.</summary>
+      <returns>An object.</returns>
+    </member>
+    <member name="P:Accessibility.IAccessible.accRole(System.Object)">
+      <summary>The <see cref="T:Accessibility.IAccessible" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccessible" /> interface.</summary>
+      <param name="varChild">This parameter is intended for internal use only.</param>
+      <returns>An object.</returns>
+    </member>
+    <member name="P:Accessibility.IAccessible.accSelection">
+      <summary>The <see cref="T:Accessibility.IAccessible" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccessible" /> interface.</summary>
+      <returns>An object.</returns>
+    </member>
+    <member name="P:Accessibility.IAccessible.accState(System.Object)">
+      <summary>The <see cref="T:Accessibility.IAccessible" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccessible" /> interface.</summary>
+      <param name="varChild">This parameter is intended for internal use only.</param>
+      <returns>An object.</returns>
+    </member>
+    <member name="P:Accessibility.IAccessible.accValue(System.Object)">
+      <summary>The <see cref="T:Accessibility.IAccessible" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccessible" /> interface.</summary>
+      <param name="varChild">This parameter is intended for internal use only.</param>
+      <returns>A string.</returns>
+    </member>
+    <member name="T:Accessibility.IAccessibleHandler">
+      <summary>The <see cref="T:Accessibility.IAccessibleHandler" /> and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccessibleHandler" /> interface.</summary>
+    </member>
+    <member name="M:Accessibility.IAccessibleHandler.AccessibleObjectFromID(System.Int32,System.Int32,Accessibility.IAccessible@)">
+      <summary>The <see cref="T:Accessibility.IAccessibleHandler" /> and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccessibleHandler" /> interface.</summary>
+      <param name="hwnd">Specifies the handle of a window for which an IAccessible interface pointer is to be retrieved.</param>
+      <param name="lObjectID">Specifies the object ID.</param>
+      <param name="pIAccessible">Specifies the address of a pointer variable that receives the address of the object's IAccessible interface.</param>
+    </member>
+    <member name="T:Accessibility.IAccIdentity">
+      <summary>The <see cref="T:Accessibility.IAccIdentity" /> and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccIdentity" /> interface.</summary>
+    </member>
+    <member name="M:Accessibility.IAccIdentity.GetIdentityString(System.UInt32,System.IntPtr,System.UInt32@)">
+      <summary>The <see cref="T:Accessibility.IAccIdentity" /> and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccIdentity" /> interface.</summary>
+      <param name="dwIDChild">Specifies which child of the IAccessible object the caller wants to identify.</param>
+      <param name="ppIDString">Address of a variable that receives a pointer to a callee-allocated identity string. The callee allocates the identity string using <see langword="CoTaskMemAlloc" />; the caller must release the identity string by using <see langword="CoTaskMemFree" /> when finished.</param>
+      <param name="pdwIDStringLen">Address of a variable that receives the length, in bytes, of the callee-allocated identity string.</param>
+    </member>
+    <member name="T:Accessibility.IAccPropServer">
+      <summary>The <see cref="T:Accessibility.IAccPropServer" /> and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServer" /> interface.</summary>
+    </member>
+    <member name="M:Accessibility.IAccPropServer.GetPropValue(System.Byte@,System.UInt32,System.Guid,System.Object@,System.Int32@)">
+      <summary>The <see cref="T:Accessibility.IAccPropServer" /> and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServer" /> interface.</summary>
+      <param name="pIDString">Contains a string that identifies the property being requested.</param>
+      <param name="dwIDStringLen">Specifies the length of the identity string specified by the <paramref name="pIDString" /> parameter.</param>
+      <param name="idProp">Specifies a GUID indicating the desired property.</param>
+      <param name="pvarValue">Specifies the value of the overridden property. This parameter is valid only if <paramref name="pfHasProp" /> is TRUE. The server must set this to VT_EMPTY if <paramref name="pfHasProp" /> is set to FALSE.</param>
+      <param name="pfHasProp">Indicates whether the server is supplying a value for the requested property. The server should set this to TRUE if it is returning an overriding property or to FALSE if it is not returning a property (in which case it should also set <paramref name="pvarValue" /> to VT_EMPTY).</param>
+    </member>
+    <member name="T:Accessibility.IAccPropServices">
+      <summary>The <see cref="T:Accessibility.IAccPropServices" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServices" /> interface.</summary>
+    </member>
+    <member name="M:Accessibility.IAccPropServices.ClearHmenuProps(Accessibility._RemotableHandle@,System.UInt32,System.Guid@,System.Int32)">
+      <summary>The <see cref="T:Accessibility.IAccPropServices" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServices" /> interface.</summary>
+      <param name="hmenu">Identifies the HMENU-based accessible element to be annotated.</param>
+      <param name="idChild">Specifies the child ID of the accessible element.</param>
+      <param name="paProps">Specifies an array of properties to be reset. These properties will revert to the default behavior that they displayed before they were annotated.</param>
+      <param name="cProps">Specifies the number of properties in the <paramref name="paProps" /> array.</param>
+    </member>
+    <member name="M:Accessibility.IAccPropServices.ClearHwndProps(Accessibility._RemotableHandle@,System.UInt32,System.UInt32,System.Guid@,System.Int32)">
+      <summary>The <see cref="T:Accessibility.IAccPropServices" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServices" /> interface.</summary>
+      <param name="hwnd">Identifies the accessible element that is to be annotated. This replaces the identity string.</param>
+      <param name="idObject">Identifies the accessible element that is to be annotated. This replaces the identity string.</param>
+      <param name="idChild">Identifies the accessible element that is to be annotated. This replaces the identity string.</param>
+      <param name="paProps">Specifies an array of properties that is to be reset. These properties will revert to the default behavior that they displayed before they were annotated.</param>
+      <param name="cProps">Specifies the number of properties in the <paramref name="paProps" /> array.</param>
+    </member>
+    <member name="M:Accessibility.IAccPropServices.ClearProps(System.Byte@,System.UInt32,System.Guid@,System.Int32)">
+      <summary>The <see cref="T:Accessibility.IAccPropServices" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServices" /> interface.</summary>
+      <param name="pIDString">Identifies the accessible element that is to be un-annotated.</param>
+      <param name="dwIDStringLen">Length of <paramref name="pIDString" />.</param>
+      <param name="paProps">Specifies an array of properties that is to be reset. These properties will revert to the default behavior they displayed before they were annotated.</param>
+      <param name="cProps">Specifies the number of properties in the <paramref name="paProps" /> array.</param>
+    </member>
+    <member name="M:Accessibility.IAccPropServices.ComposeHmenuIdentityString(Accessibility._RemotableHandle@,System.UInt32,System.IntPtr,System.UInt32@)">
+      <summary>The <see cref="T:Accessibility.IAccPropServices" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServices" /> interface.</summary>
+      <param name="hmenu">Identifies the HMENU-based accessible element.</param>
+      <param name="idChild">Specifies the child ID of the accessible element.</param>
+      <param name="ppIDString">Pointer to a buffer that receives the identity string. The callee allocates this buffer using <see langword="CoTaskMemAlloc" />. When finished, the caller must free the buffer by calling <see langword="CoTaskMemFree" />.</param>
+      <param name="pdwIDStringLen">Pointer to a buffer that receives the length of the identity string.</param>
+    </member>
+    <member name="M:Accessibility.IAccPropServices.ComposeHwndIdentityString(Accessibility._RemotableHandle@,System.UInt32,System.UInt32,System.IntPtr,System.UInt32@)">
+      <summary>The <see cref="T:Accessibility.IAccPropServices" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServices" /> interface.</summary>
+      <param name="hwnd">Specifies the HWND of the accessible element that the caller wants to identify.</param>
+      <param name="idObject">Specifies the object ID of the accessible element.</param>
+      <param name="idChild">Specifies the child ID of the accessible element.</param>
+      <param name="ppIDString">Pointer to a buffer that receives the identity string. The callee allocates this buffer using <see langword="CoTaskMemAlloc" />. When finished, the caller must free the buffer by calling <see langword="CoTaskMemFree" />.</param>
+      <param name="pdwIDStringLen">Pointer to a buffer that receives the length of the identity string.</param>
+    </member>
+    <member name="M:Accessibility.IAccPropServices.DecomposeHmenuIdentityString(System.Byte@,System.UInt32,System.IntPtr,System.UInt32@)">
+      <summary>The <see cref="T:Accessibility.IAccPropServices" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServices" /> interface.</summary>
+      <param name="pIDString">Pointer to a buffer containing identity string of an HMENU-based accessible element.</param>
+      <param name="dwIDStringLen">Specifies the length of the identity string specified by <paramref name="pIDString" />.</param>
+      <param name="phmenu">Pointer to a buffer that receives the HMENU of the accessible element.</param>
+      <param name="pidChild">Pointer to a buffer that receives the child ID of the accessible element.</param>
+    </member>
+    <member name="M:Accessibility.IAccPropServices.DecomposeHwndIdentityString(System.Byte@,System.UInt32,System.IntPtr,System.UInt32@,System.UInt32@)">
+      <summary>The <see cref="T:Accessibility.IAccPropServices" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServices" /> interface.</summary>
+      <param name="pIDString">Pointer to a buffer containing identity string of an Hwnd-based accessible element.</param>
+      <param name="dwIDStringLen">Specifies the length of the identity string specified by <paramref name="pIDString" />.</param>
+      <param name="phwnd">Pointer to a buffer that receives the HWND of the accessible element.</param>
+      <param name="pidObject">Pointer to a buffer that receives the object ID of the accessible element.</param>
+      <param name="pidChild">Pointer to a buffer that receives the child ID of the accessible element.</param>
+    </member>
+    <member name="M:Accessibility.IAccPropServices.SetHmenuProp(Accessibility._RemotableHandle@,System.UInt32,System.Guid,System.Object)">
+      <summary>The <see cref="T:Accessibility.IAccPropServices" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServices" /> interface.</summary>
+      <param name="hmenu">Identifies the HMENU-based accessible element to be annotated.</param>
+      <param name="idChild">Specifies the child ID of the accessible element.</param>
+      <param name="idProp">Specifies which property of the accessible element is to be annotated.</param>
+      <param name="var">Specifies a new value for the <paramref name="idProp" /> property.</param>
+    </member>
+    <member name="M:Accessibility.IAccPropServices.SetHmenuPropServer(Accessibility._RemotableHandle@,System.UInt32,System.Guid@,System.Int32,Accessibility.IAccPropServer,Accessibility.AnnoScope)">
+      <summary>The <see cref="T:Accessibility.IAccPropServices" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServices" /> interface.</summary>
+      <param name="hmenu">Identifies the HMENU-accessible element to be annotated.</param>
+      <param name="idChild">Identifies the accessible element that is to be annotated. This replaces the identity string.</param>
+      <param name="paProps">Specifies an array of properties that is to be handled by the specified callback object.</param>
+      <param name="cProps">Specifies the number of properties in the <paramref name="paProps" /> array.</param>
+      <param name="pServer">Specifies the callback object, which will be invoked when a client requests one of the overridden properties.</param>
+      <param name="AnnoScope">May be ANNO_THIS, indicating that the annotation affects the indicated accessible element only; or ANNO_CONTAINER, indicating that it applies to the element and its immediate element children.</param>
+    </member>
+    <member name="M:Accessibility.IAccPropServices.SetHmenuPropStr(Accessibility._RemotableHandle@,System.UInt32,System.Guid,System.String)">
+      <summary>The <see cref="T:Accessibility.IAccPropServices" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServices" /> interface.</summary>
+      <param name="hmenu">Identifies the HMENU-based accessible element to be annotated.</param>
+      <param name="idChild">Specifies the child ID of the accessible element.</param>
+      <param name="idProp">Specifies which property of the accessible element is to be annotated.</param>
+      <param name="str">Specifies a new value for the <paramref name="idProp" /> property.</param>
+    </member>
+    <member name="M:Accessibility.IAccPropServices.SetHwndProp(Accessibility._RemotableHandle@,System.UInt32,System.UInt32,System.Guid,System.Object)">
+      <summary>The <see cref="T:Accessibility.IAccPropServices" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServices" /> interface.</summary>
+      <param name="hwnd">Identifies the accessible element that is to be annotated. This replaces the identity string.</param>
+      <param name="idObject">Identifies the accessible element that is to be annotated. This replaces the identity string.</param>
+      <param name="idChild">Identifies the accessible element that is to be annotated. This replaces the identity string.</param>
+      <param name="idProp">Specifies which property of that element is to be annotated.</param>
+      <param name="var">Specifies a new value for that property.</param>
+    </member>
+    <member name="M:Accessibility.IAccPropServices.SetHwndPropServer(Accessibility._RemotableHandle@,System.UInt32,System.UInt32,System.Guid@,System.Int32,Accessibility.IAccPropServer,Accessibility.AnnoScope)">
+      <summary>The <see cref="T:Accessibility.IAccPropServices" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServices" /> interface.</summary>
+      <param name="hwnd">Identifies the accessible element that is to be annotated. This replaces the identity string.</param>
+      <param name="idObject">Identifies the accessible element that is to be annotated. This replaces the identity string.</param>
+      <param name="idChild">Identifies the accessible element that is to be annotated. This replaces the identity string.</param>
+      <param name="paProps">Specifies an array of properties that is to be handled by the specified callback object.</param>
+      <param name="cProps">Specifies the number of properties in the <paramref name="paProps" /> array.</param>
+      <param name="pServer">Specifies the callback object, which will be invoked when a client requests one of the overridden properties.</param>
+      <param name="AnnoScope">May be ANNO_THIS, indicating that the annotation affects the indicated accessible element only; or ANNO_CONTAINER, indicating that it applies to the element and its immediate element children.</param>
+    </member>
+    <member name="M:Accessibility.IAccPropServices.SetHwndPropStr(Accessibility._RemotableHandle@,System.UInt32,System.UInt32,System.Guid,System.String)">
+      <summary>The <see cref="T:Accessibility.IAccPropServices" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServices" /> interface.</summary>
+      <param name="hwnd">Identifies the accessible element that is to be annotated. This replaces the identity string.</param>
+      <param name="idObject">Identifies the accessible element that is to be annotated. This replaces the identity string.</param>
+      <param name="idChild">Identifies the accessible element that is to be annotated. This replaces the identity string.</param>
+      <param name="idProp">Specifies which property of that element is to be annotated.</param>
+      <param name="str">Specifies a new value for that property.</param>
+    </member>
+    <member name="M:Accessibility.IAccPropServices.SetPropServer(System.Byte@,System.UInt32,System.Guid@,System.Int32,Accessibility.IAccPropServer,Accessibility.AnnoScope)">
+      <summary>The <see cref="T:Accessibility.IAccPropServices" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServices" /> interface.</summary>
+      <param name="pIDString">Identifies the accessible element that is to be annotated.</param>
+      <param name="dwIDStringLen">Specifies the length of the string identified by the <paramref name="pIDString" /> parameter.</param>
+      <param name="paProps">Specifies an array of properties to be handled by the specified callback object.</param>
+      <param name="cProps">Specifies an array of properties to be handled by the specified callback object.</param>
+      <param name="pServer">Specifies the callback object that will be invoked when a client requests one of the overridden properties.</param>
+      <param name="AnnoScope">May be ANNO_THIS, indicating that the annotation affects the indicated accessible element only; or ANNO_CONTAINER, indicating that it applies to the element and its immediate element children.</param>
+    </member>
+    <member name="M:Accessibility.IAccPropServices.SetPropValue(System.Byte@,System.UInt32,System.Guid,System.Object)">
+      <summary>The <see cref="T:Accessibility.IAccPropServices" /> interface and all of its exposed members are part of a managed wrapper for the Component Object Model (COM) <see langword="IAccPropServices" /> interface.</summary>
+      <param name="pIDString">Identifies the accessible element that is to be annotated.</param>
+      <param name="dwIDStringLen">Specifies the length of the string identified by the <paramref name="pIDString" /> parameter.</param>
+      <param name="idProp">Specifies the property of the accessible element to be annotated.</param>
+      <param name="var">Specifies a new value for the property.</param>
+    </member>
+  </members>
+</doc>

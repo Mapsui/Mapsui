@@ -1,0 +1,284 @@
+# NOTE: Requires **VS2019 16.7** or later
+
+# Style rules with 'None' analysis mode
+
+is_global = true
+
+global_level = -99
+
+
+# IDE0004: Remove Unnecessary Cast
+dotnet_diagnostic.IDE0004.severity = none
+
+# IDE0005: Using directive is unnecessary.
+dotnet_diagnostic.IDE0005.severity = none
+
+# IDE0005_gen: Using directive is unnecessary.
+dotnet_diagnostic.IDE0005_gen.severity = none
+
+# IDE0007: Use implicit type
+dotnet_diagnostic.IDE0007.severity = none
+
+# IDE0008: Use explicit type
+dotnet_diagnostic.IDE0008.severity = none
+
+# IDE0009: Member access should be qualified.
+dotnet_diagnostic.IDE0009.severity = none
+
+# IDE0010: Add missing cases
+dotnet_diagnostic.IDE0010.severity = none
+
+# IDE0011: Add braces
+dotnet_diagnostic.IDE0011.severity = none
+
+# IDE0016: Use 'throw' expression
+dotnet_diagnostic.IDE0016.severity = none
+
+# IDE0017: Simplify object initialization
+dotnet_diagnostic.IDE0017.severity = none
+
+# IDE0018: Inline variable declaration
+dotnet_diagnostic.IDE0018.severity = none
+
+# IDE0019: Use pattern matching
+dotnet_diagnostic.IDE0019.severity = none
+
+# IDE0020: Use pattern matching
+dotnet_diagnostic.IDE0020.severity = none
+
+# IDE0021: Use expression body for constructors
+dotnet_diagnostic.IDE0021.severity = none
+
+# IDE0022: Use expression body for methods
+dotnet_diagnostic.IDE0022.severity = none
+
+# IDE0023: Use expression body for conversion operators
+dotnet_diagnostic.IDE0023.severity = none
+
+# IDE0024: Use expression body for operators
+dotnet_diagnostic.IDE0024.severity = none
+
+# IDE0025: Use expression body for properties
+dotnet_diagnostic.IDE0025.severity = none
+
+# IDE0026: Use expression body for indexers
+dotnet_diagnostic.IDE0026.severity = none
+
+# IDE0027: Use expression body for accessors
+dotnet_diagnostic.IDE0027.severity = none
+
+# IDE0028: Simplify collection initialization
+dotnet_diagnostic.IDE0028.severity = none
+
+# IDE0029: Use coalesce expression
+dotnet_diagnostic.IDE0029.severity = none
+
+# IDE0030: Use coalesce expression
+dotnet_diagnostic.IDE0030.severity = none
+
+# IDE0031: Use null propagation
+dotnet_diagnostic.IDE0031.severity = none
+
+# IDE0032: Use auto property
+dotnet_diagnostic.IDE0032.severity = none
+
+# IDE0033: Use explicitly provided tuple name
+dotnet_diagnostic.IDE0033.severity = none
+
+# IDE0034: Simplify 'default' expression
+dotnet_diagnostic.IDE0034.severity = none
+
+# IDE0035: Unreachable code detected
+dotnet_diagnostic.IDE0035.severity = none
+
+# IDE0036: Order modifiers
+dotnet_diagnostic.IDE0036.severity = none
+
+# IDE0037: Use inferred member name
+dotnet_diagnostic.IDE0037.severity = none
+
+# IDE0039: Use local function
+dotnet_diagnostic.IDE0039.severity = none
+
+# IDE0040: Add accessibility modifiers
+dotnet_diagnostic.IDE0040.severity = none
+
+# IDE0041: Use 'is null' check
+dotnet_diagnostic.IDE0041.severity = none
+
+# IDE0042: Deconstruct variable declaration
+dotnet_diagnostic.IDE0042.severity = none
+
+# IDE0043: Invalid format string
+dotnet_diagnostic.IDE0043.severity = none
+
+# IDE0044: Add readonly modifier
+dotnet_diagnostic.IDE0044.severity = none
+
+# IDE0045: Convert to conditional expression
+dotnet_diagnostic.IDE0045.severity = none
+
+# IDE0046: Convert to conditional expression
+dotnet_diagnostic.IDE0046.severity = none
+
+# IDE0047: Remove unnecessary parentheses
+dotnet_diagnostic.IDE0047.severity = none
+
+# IDE0048: Add parentheses for clarity
+dotnet_diagnostic.IDE0048.severity = none
+
+# IDE0051: Remove unused private members
+dotnet_diagnostic.IDE0051.severity = none
+
+# IDE0052: Remove unread private members
+dotnet_diagnostic.IDE0052.severity = none
+
+# IDE0054: Use compound assignment
+dotnet_diagnostic.IDE0054.severity = none
+
+# IDE0055: Fix formatting
+dotnet_diagnostic.IDE0055.severity = none
+
+# IDE0056: Use index operator
+dotnet_diagnostic.IDE0056.severity = none
+
+# IDE0057: Use range operator
+dotnet_diagnostic.IDE0057.severity = none
+
+# IDE0058: Expression value is never used
+dotnet_diagnostic.IDE0058.severity = none
+
+# IDE0059: Unnecessary assignment of a value
+dotnet_diagnostic.IDE0059.severity = none
+
+# IDE0060: Remove unused parameter
+dotnet_diagnostic.IDE0060.severity = none
+
+# IDE0061: Use expression body for local functions
+dotnet_diagnostic.IDE0061.severity = none
+
+# IDE0062: Make local function 'static'
+dotnet_diagnostic.IDE0062.severity = none
+
+# IDE0063: Use simple 'using' statement
+dotnet_diagnostic.IDE0063.severity = none
+
+# IDE0064: Make readonly fields writable
+dotnet_diagnostic.IDE0064.severity = none
+
+# IDE0065: Misplaced using directive
+dotnet_diagnostic.IDE0065.severity = none
+
+# IDE0066: Convert switch statement to expression
+dotnet_diagnostic.IDE0066.severity = none
+
+# IDE0070: Use 'System.HashCode'
+dotnet_diagnostic.IDE0070.severity = none
+
+# IDE0071: Simplify interpolation
+dotnet_diagnostic.IDE0071.severity = none
+
+# IDE0072: Add missing cases
+dotnet_diagnostic.IDE0072.severity = none
+
+# IDE0073: The file header is missing or not located at the top of the file
+dotnet_diagnostic.IDE0073.severity = none
+
+# IDE0074: Use compound assignment
+dotnet_diagnostic.IDE0074.severity = none
+
+# IDE0075: Simplify conditional expression
+dotnet_diagnostic.IDE0075.severity = none
+
+# IDE0076: Invalid global 'SuppressMessageAttribute'
+dotnet_diagnostic.IDE0076.severity = none
+
+# IDE0077: Avoid legacy format target in 'SuppressMessageAttribute'
+dotnet_diagnostic.IDE0077.severity = none
+
+# IDE0078: Use pattern matching
+dotnet_diagnostic.IDE0078.severity = none
+
+# IDE0080: Remove unnecessary suppression operator
+dotnet_diagnostic.IDE0080.severity = none
+
+# IDE0082: 'typeof' can be converted  to 'nameof'
+dotnet_diagnostic.IDE0082.severity = none
+
+# IDE0083: Use pattern matching
+dotnet_diagnostic.IDE0083.severity = none
+
+# IDE0090: Use 'new(...)'
+dotnet_diagnostic.IDE0090.severity = none
+
+# IDE0100: Remove redundant equality
+dotnet_diagnostic.IDE0100.severity = none
+
+# IDE0110: Remove unnecessary discard
+dotnet_diagnostic.IDE0110.severity = none
+
+# IDE0120: Simplify LINQ expression
+dotnet_diagnostic.IDE0120.severity = none
+
+# IDE0130: Namespace does not match folder structure
+dotnet_diagnostic.IDE0130.severity = none
+
+# IDE0150: Prefer 'null' check over type check
+dotnet_diagnostic.IDE0150.severity = none
+
+# IDE0160: Convert to block scoped namespace
+dotnet_diagnostic.IDE0160.severity = none
+
+# IDE0161: Convert to file-scoped namespace
+dotnet_diagnostic.IDE0161.severity = none
+
+# IDE0170: Property pattern can be simplified
+dotnet_diagnostic.IDE0170.severity = none
+
+# IDE0180: Use tuple to swap values
+dotnet_diagnostic.IDE0180.severity = none
+
+# IDE0200: Remove unnecessary lambda expression
+dotnet_diagnostic.IDE0200.severity = none
+
+# IDE0210: Convert to top-level statements
+dotnet_diagnostic.IDE0210.severity = none
+
+# IDE0211: Convert to 'Program.Main' style program
+dotnet_diagnostic.IDE0211.severity = none
+
+# IDE0220: Add explicit cast
+dotnet_diagnostic.IDE0220.severity = none
+
+# IDE0230: Use UTF-8 string literal
+dotnet_diagnostic.IDE0230.severity = none
+
+# IDE0240: Remove redundant nullable directive
+dotnet_diagnostic.IDE0240.severity = none
+
+# IDE0241: Remove unnecessary nullable directive
+dotnet_diagnostic.IDE0241.severity = none
+
+# IDE1005: Delegate invocation can be simplified.
+dotnet_diagnostic.IDE1005.severity = none
+
+# IDE1006: Naming Styles
+dotnet_diagnostic.IDE1006.severity = none
+
+# IDE2000: C#
+dotnet_diagnostic.IDE2000.severity = none
+
+# IDE2001: Embedded statements must be on their own line
+dotnet_diagnostic.IDE2001.severity = none
+
+# IDE2002: Consecutive braces must not have blank line between them
+dotnet_diagnostic.IDE2002.severity = none
+
+# IDE2003: C#
+dotnet_diagnostic.IDE2003.severity = none
+
+# IDE2004: Blank line not allowed after constructor initializer colon
+dotnet_diagnostic.IDE2004.severity = none
+
+# RemoveUnnecessaryImportsFixable: 
+dotnet_diagnostic.RemoveUnnecessaryImportsFixable.severity = none

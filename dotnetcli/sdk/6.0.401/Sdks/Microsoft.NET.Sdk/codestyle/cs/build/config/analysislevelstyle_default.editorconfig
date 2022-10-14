@@ -1,0 +1,8 @@
+# NOTE: Requires **VS2019 16.7** or later
+
+# Style rules with 'Default' analysis mode
+
+is_global = true
+
+global_level = -99
+

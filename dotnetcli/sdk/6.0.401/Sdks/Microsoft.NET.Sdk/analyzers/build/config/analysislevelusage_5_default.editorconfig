@@ -1,0 +1,36 @@
+# NOTE: Requires **VS2019 16.7** or later
+
+# 'Usage' Rules from '5.0' release with 'Default' analysis mode
+# Description: 'Usage' Rules with enabled-by-default state from '5.0' release with 'Default' analysis mode. Rules that are first released in a version later than '5.0' are disabled.
+
+is_global = true
+
+global_level = -1
+
+
+# CA2250: Use 'ThrowIfCancellationRequested'
+dotnet_diagnostic.CA2250.severity = none
+
+# CA2251: Use 'string.Equals'
+dotnet_diagnostic.CA2251.severity = none
+
+# CA2252: This API requires opting into preview features
+dotnet_diagnostic.CA2252.severity = none
+
+# CA2253: Named placeholders should not be numeric values
+dotnet_diagnostic.CA2253.severity = none
+
+# CA2254: Template should be a static expression
+dotnet_diagnostic.CA2254.severity = none
+
+# CA2255: The 'ModuleInitializer' attribute should not be used in libraries
+dotnet_diagnostic.CA2255.severity = none
+
+# CA2256: All members declared in parent interfaces must have an implementation in a DynamicInterfaceCastableImplementation-attributed interface
+dotnet_diagnostic.CA2256.severity = none
+
+# CA2257: Members defined on an interface with the 'DynamicInterfaceCastableImplementationAttribute' should be 'static'
+dotnet_diagnostic.CA2257.severity = none
+
+# CA2258: Providing a 'DynamicInterfaceCastableImplementation' interface in Visual Basic is unsupported
+dotnet_diagnostic.CA2258.severity = none

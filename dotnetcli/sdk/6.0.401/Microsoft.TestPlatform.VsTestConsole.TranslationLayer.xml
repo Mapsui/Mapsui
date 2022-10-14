@@ -1,0 +1,1624 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.TestPlatform.VsTestConsole.TranslationLayer</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.ConsoleParameters">
+            <summary>
+            Class which defines additional specifiable parameters for vstest.console.exe
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.ConsoleParameters.#ctor">
+            <summary>
+            Create instance of <see cref="T:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.ConsoleParameters"/>
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.ConsoleParameters.#ctor(Microsoft.VisualStudio.TestPlatform.Utilities.Helpers.Interfaces.IFileHelper)">
+            <summary>
+            Create instance of <see cref="T:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.ConsoleParameters"/>
+            </summary>
+            <param name="fileHelper"> Object of type <see cref="T:Microsoft.VisualStudio.TestPlatform.Utilities.Helpers.Interfaces.IFileHelper"/></param>
+        </member>
+        <member name="P:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.ConsoleParameters.EnvironmentVariables">
+            <summary>
+            Environment variables to be set for the process. This will merge the specified entries to the environment variables
+            inherited from the current process. If you wish to provide a full set of environment variables yourself set <see cref="P:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.ConsoleParameters.InheritEnvironmentVariables"/> to false.
+            </summary>
+        </member>
+        <member name="P:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.ConsoleParameters.InheritEnvironmentVariables">
+            <summary>
+            When set to true (default), all environment variables are inherited from the current process and the entries provided in <see cref="P:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.ConsoleParameters.EnvironmentVariables"/> are merged with that set.
+            When set to false, only the values you provide in <see cref="P:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.ConsoleParameters.EnvironmentVariables"/> are used. Giving you full control of the environment vstest.console is started with.
+            This is only rarely useful and can lead to vstest.console not being able to start at all.
+            You most likely want to use <see cref="M:System.Environment.GetEnvironmentVariables(System.EnvironmentVariableTarget)"/> and combine
+            <see cref="F:System.EnvironmentVariableTarget.Machine"/> and <see cref="F:System.EnvironmentVariableTarget.User"/> responses.
+            </summary>
+        </member>
+        <member name="P:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.ConsoleParameters.TraceLevel">
+            <summary>
+            Trace level for logs.
+            </summary>
+        </member>
+        <member name="P:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.ConsoleParameters.LogFilePath">
+            <summary>
+            Full path for the log file
+            </summary>
+        </member>
+        <member name="P:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.ConsoleParameters.PortNumber">
+            <summary>
+            Port Number for communication
+            vstest.console will need this port number to communicate with this component - translation layer
+            Currently Internal as we are not intentionally exposing this to consumers of translation layer
+            </summary>
+        </member>
+        <member name="P:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.ConsoleParameters.ParentProcessId">
+            <summary>
+            Parent Process ID of the process whose lifetime should dictate the life time of vstest.console.exe
+            vstest.console will need this process ID to know when the process exits.
+            If parent process dies/crashes without invoking EndSession, vstest.console should exit immediately
+            Currently Internal as we are not intentionally exposing this to consumers of translation layer
+            </summary>
+        </member>
+        <member name="T:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.DiscoveryEventsHandleConverter">
+            <summary>
+            The Discovery Events Handler Converter.
+            Converts the ITestDiscoveryEventsHandler to ITestDiscoveryEventsHandler2
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.DiscoveryEventsHandleConverter.#ctor(Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestDiscoveryEventsHandler)">
+            <summary>
+            The Discovery Complete Handler.
+            Converts the ITestDiscoveryEventsHandler to ITestDiscoveryEventsHandler2
+            </summary>
+            <param name="testDiscoveryEventsHandler"></param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.DiscoveryEventsHandleConverter.HandleRawMessage(System.String)">
+            <summary>
+            Handles Raw Message
+            </summary>
+            <param name="rawMessage"></param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.DiscoveryEventsHandleConverter.HandleLogMessage(Microsoft.VisualStudio.TestPlatform.ObjectModel.Logging.TestMessageLevel,System.String)">
+            <summary>
+            Handles Log Message
+            </summary>
+            <param name="level"></param>
+            <param name="message"></param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.DiscoveryEventsHandleConverter.HandleDiscoveryComplete(Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.DiscoveryCompleteEventArgs,System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase})">
+            <summary>
+            Handle Discovery Complete
+            </summary>
+            <param name="discoveryCompleteEventArgs"></param>
+            <param name="lastChunk"></param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.DiscoveryEventsHandleConverter.HandleDiscoveredTests(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase})">
+            <summary>
+            Handles Discovery Tests
+            </summary>
+            <param name="discoveredTestCases"></param>
+        </member>
+        <member name="T:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IProcessManager">
+            <summary>
+            Defines the interface that can manage a process
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IProcessManager.StartProcess(Microsoft.TestPlatform.VsTestConsole.TranslationLayer.ConsoleParameters)">
+            <summary>
+            Starts the Process
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IProcessManager.IsProcessInitialized">
+            <summary>
+            Is Process Initialized
+            </summary>
+            <returns>True, if process initialized</returns>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IProcessManager.ShutdownProcess">
+            <summary>
+            Shutdown Process
+            </summary>
+        </member>
+        <member name="E:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IProcessManager.ProcessExited">
+            <summary>
+            Raise event on process exit
+            </summary>
+        </member>
+        <member name="T:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSender">
+            <summary>
+            Defines contract to send test platform requests to test host
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSender.InitializeCommunication">
+             <summary>
+             Initializes communication with the vstest.console.exe process.
+             Hosts a communication channel and asynchronously connects to vstest.console.exe.
+             </summary>
+            
+             <returns>Port number of the hosted server on this side.</returns>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSender.WaitForRequestHandlerConnection(System.Int32)">
+             <summary>
+             Waits for the request handler to be connected.
+             </summary>
+            
+             <param name="connectionTimeout">Time to wait for connection.</param>
+            
+             <returns>True if the handler has connected, false otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSender.Close">
+            <summary>
+            Closes the sender.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSender.InitializeExtensions(System.Collections.Generic.IEnumerable{System.String})">
+             <summary>
+             Initializes the extensions while probing additional extension paths.
+             </summary>
+            
+             <param name="pathToAdditionalExtensions">Paths to check for additional extensions.</param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSender.DiscoverTests(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestDiscoveryEventsHandler2)">
+             <summary>
+             Discovers the tests
+             </summary>
+            
+             <param name="sources">Sources for discovering tests.</param>
+             <param name="runSettings">Run settings for discovering tests.</param>
+             <param name="options">Options to be passed into the platform.</param>
+             <param name="testSessionInfo">Test session info.</param>
+             <param name="discoveryEventsHandler">Event handler for discovery events.</param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSender.StartTestRun(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+             <summary>
+             Starts the test run with given sources and criteria.
+             </summary>
+            
+             <param name="sources">Sources for test run.</param>
+             <param name="runSettings">Run settings for test run.</param>
+             <param name="options">Options to be passed into the platform.</param>
+             <param name="testSessionInfo">Test session info.</param>
+             <param name="runEventsHandler">Event handler for test run events.</param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSender.StartTestRun(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+             <summary>
+             Starts the test run with given sources and criteria.
+             </summary>
+            
+             <param name="testCases">Test cases to run.</param>
+             <param name="runSettings">Run settings for test run.</param>
+             <param name="options">Options to be passed into the platform.</param>
+             <param name="testSessionInfo">Test session info.</param>
+             <param name="runEventsHandler">Event handler for test run events.</param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSender.StartTestRunWithCustomHost(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+             <summary>
+             Starts the test run with given sources and criteria and a custom launcher.
+             </summary>
+            
+             <param name="sources">Sources for test run.</param>
+             <param name="runSettings">Run settings for test run.</param>
+             <param name="options">Options to be passed into the platform.</param>
+             <param name="testSessionInfo">Test session info.</param>
+             <param name="runEventsHandler">Event handler for test run events.</param>
+             <param name="customTestHostLauncher">Custom test host launcher.</param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSender.StartTestRunWithCustomHost(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+             <summary>
+             Starts the test run with given sources and criteria and a custom launcher.
+             </summary>
+            
+             <param name="testCases">Test cases to run.</param>
+             <param name="runSettings">Run settings for test run.</param>
+             <param name="options">Options to be passed into the platform.</param>
+             <param name="testSessionInfo">Test session info.</param>
+             <param name="runEventsHandler">Event handler for test run events.</param>
+             <param name="customTestHostLauncher">Custom test host launcher.</param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSender.StartTestSession(System.Collections.Generic.IList{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+             <summary>
+             Starts a new test session.
+             </summary>
+            
+             <param name="sources">Sources for test run.</param>
+             <param name="runSettings">Run settings for test run.</param>
+             <param name="options">Options to be passed into the platform.</param>
+             <param name="eventsHandler">Event handler for test session events.</param>
+             <param name="testHostLauncher">Custom test host launcher.</param>
+             <returns></returns>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSender.StopTestSession(Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler)">
+             <summary>
+             Stops the test session.
+             </summary>
+            
+             <param name="testSessionInfo">Test session info.</param>
+             <param name="options">Test Platform options.</param>
+             <param name="eventsHandler">Event handler for test session events.</param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSender.EndSession">
+            <summary>
+            Ends the session.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSender.CancelTestRun">
+            <summary>
+            Cancels the test run.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSender.AbortTestRun">
+            <summary>
+            Aborts the test run.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSender.OnProcessExited">
+            <summary>
+            On process exit unblocks communication waiting calls.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSender.CancelDiscovery">
+            <summary>
+            Cancels the discovery of tests.
+            </summary>
+        </member>
+        <member name="T:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSenderAsync">
+            <summary>
+            Asynchronous equivalent of <see cref="T:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSender"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSenderAsync.InitializeCommunicationAsync(System.Int32)">
+            <summary>
+            Asynchronous equivalent of <see cref="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSender.InitializeCommunication"/>
+            and <see cref="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSender.WaitForRequestHandlerConnection(System.Int32)"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSenderAsync.DiscoverTestsAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestDiscoveryEventsHandler2)">
+            <summary>
+            Asynchronous equivalent of ITranslationLayerRequestSender.DiscoverTests/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSenderAsync.StartTestRunAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+            <summary>
+            Asynchronous equivalent of <see cref="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSender.StartTestRun(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSenderAsync.StartTestRunAsync(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+            <summary>
+            Asynchronous equivalent of <see cref="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSender.StartTestRun(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSenderAsync.StartTestRunWithCustomHostAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <summary>
+            Asynchronous equivalent of <see cref="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSender.StartTestRunWithCustomHost(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSenderAsync.StartTestRunWithCustomHostAsync(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <summary>
+            Asynchronous equivalent of <see cref="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSender.StartTestRunWithCustomHost(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSenderAsync.StartTestSessionAsync(System.Collections.Generic.IList{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <summary>
+            Asynchronous equivalent of <see cref="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSender.StartTestSession(System.Collections.Generic.IList{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSenderAsync.StopTestSessionAsync(Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler)">
+            <summary>
+            Asynchronous equivalent of <see cref="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSender.StopTestSession(Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler)"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSenderAsync.ProcessTestRunAttachmentsAsync(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.AttachmentSet},System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.InvokedDataCollector},System.String,System.Boolean,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunAttachmentsProcessingEventsHandler,System.Threading.CancellationToken)">
+             <summary>
+             Provides back all attachments to test platform for additional processing (for example
+             merging).
+             </summary>
+            
+             <param name="attachments">Collection of attachments.</param>
+             <param name="invokedDataCollectors">Collection of invoked data collectors.</param>
+             <param name="runSettings">RunSettings configuration</param>
+             <param name="collectMetrics">Enables metrics collection.</param>
+             <param name="testRunAttachmentsProcessingCompleteEventsHandler">Events handler.</param>
+             <param name="cancellationToken">Cancellation token.</param>
+        </member>
+        <member name="T:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper">
+            <summary>
+            Controller for various test operations on the test runner.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.StartSession">
+            <summary>
+            Starts the test runner process and readies for requests.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.StartTestSession(System.Collections.Generic.IList{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler)">
+             <summary>
+             Starts a new test session.
+             </summary>
+            
+             <param name="sources">The list of source assemblies for the test run.</param>
+             <param name="runSettings">The run settings for the run.</param>
+             <param name="eventsHandler">The session event handler.</param>
+            
+             <returns>A test session info object.</returns>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.StartTestSession(System.Collections.Generic.IList{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler)">
+             <summary>
+             Starts a new test session.
+             </summary>
+            
+             <param name="sources">The list of source assemblies for the test run.</param>
+             <param name="runSettings">The run settings for the run.</param>
+             <param name="options">The test platform options.</param>
+             <param name="eventsHandler">The session event handler.</param>
+            
+             <returns>A test session info object.</returns>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.StartTestSession(System.Collections.Generic.IList{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+             <summary>
+             Starts a new test session.
+             </summary>
+            
+             <param name="sources">The list of source assemblies for the test run.</param>
+             <param name="runSettings">The run settings for the run.</param>
+             <param name="options">The test platform options.</param>
+             <param name="eventsHandler">The session event handler.</param>
+             <param name="testHostLauncher">The custom host launcher.</param>
+            
+             <returns>A test session info object.</returns>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.StopTestSession(Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler)">
+             <summary>
+             Stops the test session.
+             </summary>
+            
+             <param name="testSessionInfo">The test session info object.</param>
+             <param name="eventsHandler">The session event handler.</param>
+            
+             <returns>True if the session was successfuly stopped, false otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.StopTestSession(Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler)">
+             <summary>
+             Stops the test session.
+             </summary>
+            
+             <param name="testSessionInfo">The test session info object.</param>
+             <param name="options">Test Platform options.</param>
+             <param name="eventsHandler">The session event handler.</param>
+            
+             <returns>True if the session was successfuly stopped, false otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.InitializeExtensions(System.Collections.Generic.IEnumerable{System.String})">
+             <summary>
+             Initializes the test platform with paths to extensions like adapters, loggers and any
+             other extensions.
+             </summary>
+            
+             <param name="pathToAdditionalExtensions">Full paths to extension DLLs.</param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.DiscoverTests(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestDiscoveryEventsHandler)">
+             <summary>
+             Starts test discovery.
+             </summary>
+            
+             <param name="sources">The list of source assemblies for the discovery.</param>
+             <param name="discoverySettings">The run settings for the discovery.</param>
+             <param name="discoveryEventsHandler">The discovery event handler.</param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.DiscoverTests(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestDiscoveryEventsHandler2)">
+             <summary>
+             Starts test discovery.
+             </summary>
+            
+             <param name="sources">The list of source assemblies for the discovery.</param>
+             <param name="discoverySettings">The run settings for the discovery.</param>
+             <param name="options">The test platform options.</param>
+             <param name="discoveryEventsHandler">The discovery event handler.</param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.DiscoverTests(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestDiscoveryEventsHandler2)">
+             <summary>
+             Starts test discovery.
+             </summary>
+            
+             <param name="sources">The list of source assemblies for the discovery.</param>
+             <param name="discoverySettings">The run settings for the discovery.</param>
+             <param name="options">The test platform options.</param>
+             <param name="testSessionInfo">The test session info object.</param>
+             <param name="discoveryEventsHandler">The discovery event handler.</param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.CancelDiscovery">
+            <summary>
+            Cancels the last discovery request.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.RunTests(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+             <summary>
+             Starts a test run.
+             </summary>
+            
+             <param name="sources">The list of source assemblies for the test run.</param>
+             <param name="runSettings">The run settings for the run.</param>
+             <param name="testRunEventsHandler">The run event handler.</param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.RunTests(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+             <summary>
+             Starts a test run.
+             </summary>
+            
+             <param name="sources">The list of source assemblies for the test run.</param>
+             <param name="runSettings">The run settings for the run.</param>
+             <param name="options">The test platform options.</param>
+             <param name="testRunEventsHandler">The run event handler.</param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.RunTests(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+             <summary>
+             Starts a test run.
+             </summary>
+            
+             <param name="sources">The list of source assemblies for the test run.</param>
+             <param name="runSettings">The run settings for the run.</param>
+             <param name="options">The test platform options.</param>
+             <param name="testSessionInfo">The test session info object.</param>
+             <param name="testRunEventsHandler">The run event handler.</param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.RunTests(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+             <summary>
+             Starts a test run.
+             </summary>
+            
+             <param name="testCases">The list of test cases for the test run.</param>
+             <param name="runSettings">The run settings for the run.</param>
+             <param name="testRunEventsHandler">The run event handler.</param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.RunTests(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+             <summary>
+             Starts a test run.
+             </summary>
+            
+             <param name="testCases">The list of test cases for the test run.</param>
+             <param name="runSettings">The run settings for the run.</param>
+             <param name="options">The test platform options.</param>
+             <param name="testRunEventsHandler">The run event handler.</param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.RunTests(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+             <summary>
+             Starts a test run.
+             </summary>
+            
+             <param name="testCases">The list of test cases for the test run.</param>
+             <param name="runSettings">The run settings for the run.</param>
+             <param name="options">The test platform options.</param>
+             <param name="testSessionInfo">The test session info object.</param>
+             <param name="testRunEventsHandler">The run event handler.</param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.RunTestsWithCustomTestHost(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+             <summary>
+             Starts a test run.
+             </summary>
+            
+             <param name="sources">The list of source assemblies for the test run.</param>
+             <param name="runSettings">The run settings for the run.</param>
+             <param name="testRunEventsHandler">The run event handler.</param>
+             <param name="customTestHostLauncher">The custom host launcher.</param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.RunTestsWithCustomTestHost(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+             <summary>
+             Starts a test run.
+             </summary>
+            
+             <param name="sources">The list of source assemblies for the test run.</param>
+             <param name="runSettings">The run settings for the run.</param>
+             <param name="options">The test platform options.</param>
+             <param name="testRunEventsHandler">The run event handler.</param>
+             <param name="customTestHostLauncher">The custom host launcher.</param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.RunTestsWithCustomTestHost(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+             <summary>
+             Starts a test run.
+             </summary>
+            
+             <param name="sources">The list of source assemblies for the test run.</param>
+             <param name="runSettings">The run settings for the run.</param>
+             <param name="options">The test platform options.</param>
+             <param name="testSessionInfo">The test session info object.</param>
+             <param name="testRunEventsHandler">The run event handler.</param>
+             <param name="customTestHostLauncher">The custom host launcher.</param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.RunTestsWithCustomTestHost(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+             <summary>
+             Starts a test run.
+             </summary>
+            
+             <param name="testCases">The list of test cases for the test run.</param>
+             <param name="runSettings">The run settings for the run.</param>
+             <param name="testRunEventsHandler">The run event handler.</param>
+             <param name="customTestHostLauncher">The custom host launcher.</param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.RunTestsWithCustomTestHost(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+             <summary>
+             Starts a test run.
+             </summary>
+            
+             <param name="testCases">The list of test cases for the test run.</param>
+             <param name="runSettings">The run settings for the run.</param>
+             <param name="options">The test platform options.</param>
+             <param name="testRunEventsHandler">The run event handler.</param>
+             <param name="customTestHostLauncher">The custom host launcher.</param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.RunTestsWithCustomTestHost(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+             <summary>
+             Starts a test run.
+             </summary>
+            
+             <param name="testCases">The list of test cases for the test run.</param>
+             <param name="runSettings">The run settings for the run.</param>
+             <param name="options">The test platform options.</param>
+             <param name="testSessionInfo">The test session info object.</param>
+             <param name="testRunEventsHandler">The run event handler.</param>
+             <param name="customTestHostLauncher">The custom host launcher.</param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.CancelTestRun">
+            <summary>
+            Cancels the last test run.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.AbortTestRun">
+            <summary>
+            Aborts the last test run.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.EndSession">
+            <summary>
+            Ends the test session and stops processing requests.
+            </summary>
+        </member>
+        <member name="T:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapperAsync">
+            <summary>
+            Asynchronous equivalent of <see cref="T:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapperAsync.StartSessionAsync">
+            <summary>
+            Asynchronous equivalent of <see cref="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.StartSession"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapperAsync.StartTestSessionAsync(System.Collections.Generic.IList{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler)">
+            <summary>
+            Asynchronous equivalent of <see cref="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.StartTestSession(System.Collections.Generic.IList{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler)"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapperAsync.StartTestSessionAsync(System.Collections.Generic.IList{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler)">
+            <summary>
+            Asynchronous equivalent of <see cref="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.StartTestSession(System.Collections.Generic.IList{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler)"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapperAsync.StartTestSessionAsync(System.Collections.Generic.IList{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <summary>
+            Asynchronous equivalent of <see cref="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.StartTestSession(System.Collections.Generic.IList{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapperAsync.StopTestSessionAsync(Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler)">
+            <summary>
+            Asynchronous equivalent of <see cref="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.StopTestSession(Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler)"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapperAsync.StopTestSessionAsync(Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler)">
+            <summary>
+            Asynchronous equivalent of <see cref="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.StopTestSession(Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler)"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapperAsync.InitializeExtensionsAsync(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Asynchronous equivalent of <see cref="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.InitializeExtensions(System.Collections.Generic.IEnumerable{System.String})"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapperAsync.DiscoverTestsAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestDiscoveryEventsHandler)">
+            <summary>
+            Asynchronous equivalent of <see cref="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.DiscoverTests(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestDiscoveryEventsHandler)"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapperAsync.DiscoverTestsAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestDiscoveryEventsHandler2)">
+            <summary>
+            Asynchronous equivalent of <see cref="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.DiscoverTests(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestDiscoveryEventsHandler2)"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapperAsync.DiscoverTestsAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestDiscoveryEventsHandler2)">
+            <summary>
+            Asynchronous equivalent of <see cref="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.DiscoverTests(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestDiscoveryEventsHandler2)"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapperAsync.CancelDiscovery">
+            <summary>
+            See <see cref="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.CancelDiscovery"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapperAsync.RunTestsAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+            <summary>
+            Asynchronous equivalent of <see cref="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.RunTests(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapperAsync.RunTestsAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+            <summary>
+            Asynchronous equivalent of <see cref="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.RunTests(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapperAsync.RunTestsAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+            <summary>
+            Asynchronous equivalent of <see cref="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.RunTests(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapperAsync.RunTestsAsync(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+            <summary>
+            Asynchronous equivalent of <see cref="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.RunTests(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapperAsync.RunTestsAsync(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+            <summary>
+            Asynchronous equivalent of <see cref="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.RunTests(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapperAsync.RunTestsAsync(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+            <summary>
+            Asynchronous equivalent of <see cref="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.RunTests(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapperAsync.RunTestsWithCustomTestHostAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <summary>
+            Asynchronous equivalent of <see cref="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.RunTestsWithCustomTestHost(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapperAsync.RunTestsWithCustomTestHostAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <summary>
+            Asynchronous equivalent of <see cref="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.RunTestsWithCustomTestHost(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapperAsync.RunTestsWithCustomTestHostAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <summary>
+            Asynchronous equivalent of <see cref="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.RunTestsWithCustomTestHost(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapperAsync.RunTestsWithCustomTestHostAsync(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <summary>
+            Asynchronous equivalent of <see cref="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.RunTestsWithCustomTestHost(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapperAsync.RunTestsWithCustomTestHostAsync(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <summary>
+            Asynchronous equivalent of <see cref="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.RunTestsWithCustomTestHost(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapperAsync.RunTestsWithCustomTestHostAsync(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <summary>
+            Asynchronous equivalent of <see cref="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.RunTestsWithCustomTestHost(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapperAsync.CancelTestRun">
+            <summary>
+            See <see cref="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.CancelTestRun"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapperAsync.AbortTestRun">
+            <summary>
+            See <see cref="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.AbortTestRun"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapperAsync.ProcessTestRunAttachmentsAsync(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.AttachmentSet},System.String,System.Boolean,System.Boolean,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunAttachmentsProcessingEventsHandler,System.Threading.CancellationToken)">
+             <summary>
+             Gets back all attachments to test platform for additional processing (for example merging).
+             </summary>
+            
+             <param name="attachments">Collection of attachments.</param>
+             <param name="processingSettings">XML processing settings.</param>
+             <param name="isLastBatch">
+             Indicates that all test executions are done and all data is provided.
+             </param>
+             <param name="collectMetrics">Enables metrics collection (used for telemetry).</param>
+             <param name="eventsHandler">Event handler to receive session complete event.</param>
+             <param name="cancellationToken">Cancellation token.</param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapperAsync.ProcessTestRunAttachmentsAsync(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.AttachmentSet},System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.InvokedDataCollector},System.String,System.Boolean,System.Boolean,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunAttachmentsProcessingEventsHandler,System.Threading.CancellationToken)">
+             <summary>
+             Gets back all attachments to test platform for additional processing (for example merging).
+             </summary>
+            
+             <param name="attachments">Collection of attachments.</param>
+             <param name="invokedDataCollectors">Collection of invoked data collectors.</param>
+             <param name="processingSettings">XML processing settings.</param>
+             <param name="isLastBatch">
+             Indicates that all test executions are done and all data is provided.
+             </param>
+             <param name="collectMetrics">Enables metrics collection (used for telemetry).</param>
+             <param name="eventsHandler">Event handler to receive session complete event.</param>
+             <param name="cancellationToken">Cancellation token.</param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapperAsync.EndSession">
+            <summary>
+            See <see cref="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper.EndSession"/>.
+            </summary>
+        </member>
+        <member name="T:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession">
+            <summary>
+            Defines a test session object that can be used to make calls to the vstest.console
+            process.
+            </summary>
+        </member>
+        <member name="P:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession.TestSessionInfo">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession.#ctor(Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler,Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper)">
+             <summary>
+             Initializes a new instance of the <see cref="T:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession"/> class.
+             </summary>
+            
+             <param name="testSessionInfo">The test session info object.</param>
+             <param name="eventsHandler">The session event handler.</param>
+             <param name="consoleWrapper">The encapsulated console wrapper.</param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession.Finalize">
+            <summary>
+            Destroys the current instance of the <see cref="T:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession.Dispose">
+            <summary>
+            Disposes of the current instance of the <see cref="T:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession.Dispose(System.Boolean)">
+             <summary>
+             Disposes of the current instance of the <see cref="T:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession"/> class.
+             </summary>
+            
+             <param name="disposing">Indicates if managed resources should be disposed.</param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession.AbortTestRun">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession.CancelDiscovery">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession.CancelTestRun">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession.DiscoverTests(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestDiscoveryEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession.DiscoverTests(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestDiscoveryEventsHandler2)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession.RunTests(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession.RunTests(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession.RunTests(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession.RunTests(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession.RunTestsWithCustomTestHost(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession.RunTestsWithCustomTestHost(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession.RunTestsWithCustomTestHost(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession.RunTestsWithCustomTestHost(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession.StopTestSession">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession.StopTestSession(Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession.StopTestSession(Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession.DiscoverTestsAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestDiscoveryEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession.DiscoverTestsAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestDiscoveryEventsHandler2)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession.RunTestsAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession.RunTestsAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession.RunTestsAsync(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession.RunTestsAsync(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession.RunTestsWithCustomTestHostAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession.RunTestsWithCustomTestHostAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession.RunTestsWithCustomTestHostAsync(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession.RunTestsWithCustomTestHostAsync(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession.StopTestSessionAsync">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession.StopTestSessionAsync(Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TestSession.StopTestSessionAsync(Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TransationLayerException">
+            <summary>
+            Specialized exception for TranslationLayer
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TransationLayerException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the TransationLayerException class.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.TransationLayerException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the TransationLayerException class.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception.</param>
+        </member>
+        <member name="T:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleProcessManager">
+            <summary>
+            Vstest.console process manager
+            </summary>
+        </member>
+        <member name="F:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleProcessManager.PortArgument">
+            <summary>
+            Port number for communicating with Vstest CLI
+            </summary>
+        </member>
+        <member name="F:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleProcessManager.ParentProcessidArgument">
+            <summary>
+            Process Id of the Current Process which is launching Vstest CLI
+            Helps Vstest CLI in auto-exit if current process dies without notifying it
+            </summary>
+        </member>
+        <member name="F:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleProcessManager.DiagArgument">
+            <summary>
+            Diagnostics argument for Vstest CLI
+            Enables Diagnostic logging for Vstest CLI and TestHost - Optional
+            </summary>
+        </member>
+        <member name="F:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleProcessManager.Endsessiontimeout">
+            <summary>
+            EndSession timeout
+            </summary>
+        </member>
+        <member name="E:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleProcessManager.ProcessExited">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleProcessManager.#ctor(System.String)">
+            <summary>
+            Creates an instance of VsTestConsoleProcessManager class.
+            </summary>
+            <param name="vstestConsolePath">The full path to vstest.console</param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleProcessManager.IsProcessInitialized">
+            <summary>
+            Checks if the process has been initialized.
+            </summary>
+            <returns>True if process is successfully initialized</returns>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleProcessManager.StartProcess(Microsoft.TestPlatform.VsTestConsole.TranslationLayer.ConsoleParameters)">
+            <summary>
+            Call vstest.console with the parameters previously specified
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleProcessManager.ShutdownProcess">
+            <summary>
+            Shutdown the vstest.console process
+            </summary>
+        </member>
+        <member name="T:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleRequestSender">
+            <summary>
+            Vstest console request sender for sending requests to vstest.console.exe
+            </summary>
+        </member>
+        <member name="F:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleRequestSender.MinimumProtocolVersionWithTestSessionSupport">
+            <summary>
+            The minimum protocol version that has test session support.
+            </summary>
+        </member>
+        <member name="F:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleRequestSender._processExitCancellationTokenSource">
+            <summary>
+            Used to cancel blocking tasks associated with the vstest.console process.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleRequestSender.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleRequestSender"/> class.
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleRequestSender.#ctor(Microsoft.VisualStudio.TestPlatform.CommunicationUtilities.Interfaces.ICommunicationManager,Microsoft.VisualStudio.TestPlatform.CommunicationUtilities.Interfaces.IDataSerializer,Microsoft.VisualStudio.TestPlatform.CoreUtilities.Tracing.Interfaces.ITestPlatformEventSource)">
+             <summary>
+             Initializes a new instance of the <see cref="T:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleRequestSender"/> class.
+             </summary>
+            
+             <param name="communicationManager">The communication manager.</param>
+             <param name="dataSerializer">The data serializer.</param>
+             <param name="testPlatformEventSource">The test platform event source.</param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleRequestSender.InitializeCommunication">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleRequestSender.WaitForRequestHandlerConnection(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleRequestSender.InitializeCommunicationAsync(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleRequestSender.InitializeExtensions(System.Collections.Generic.IEnumerable{System.String})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleRequestSender.DiscoverTests(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestDiscoveryEventsHandler2)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleRequestSender.DiscoverTestsAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestDiscoveryEventsHandler2)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleRequestSender.StartTestRun(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleRequestSender.StartTestRunAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleRequestSender.StartTestRun(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleRequestSender.StartTestRunAsync(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleRequestSender.StartTestRunWithCustomHost(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleRequestSender.StartTestRunWithCustomHostAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleRequestSender.StartTestRunWithCustomHost(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleRequestSender.StartTestRunWithCustomHostAsync(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleRequestSender.StartTestSession(System.Collections.Generic.IList{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleRequestSender.StartTestSessionAsync(System.Collections.Generic.IList{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleRequestSender.StopTestSession(Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleRequestSender.StopTestSessionAsync(Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleRequestSender.CancelTestRun">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleRequestSender.AbortTestRun">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleRequestSender.CancelDiscovery">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleRequestSender.OnProcessExited">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleRequestSender.Close">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleRequestSender.EndSession">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleRequestSender.ProcessTestRunAttachmentsAsync(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.AttachmentSet},System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.InvokedDataCollector},System.String,System.Boolean,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunAttachmentsProcessingEventsHandler,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleRequestSender.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper">
+            <summary>
+            An implementation of <see cref="T:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IVsTestConsoleWrapper"/> to invoke test operations
+            via the <c>vstest.console</c> test runner.
+            </summary>
+        </member>
+        <member name="F:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper._pathToAdditionalExtensions">
+            <summary>
+            Path to additional extensions to reinitialize vstest.console
+            </summary>
+        </member>
+        <member name="F:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper._consoleParameters">
+            <summary>
+            Additional parameters for vstest.console.exe
+            </summary>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.#ctor(System.String)">
+             <summary>
+             Initializes a new instance of the <see cref="T:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper"/> class.
+             </summary>
+            
+             <param name="vstestConsolePath">
+             Path to the test runner <c>vstest.console.exe</c>.
+             </param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.#ctor(System.String,Microsoft.TestPlatform.VsTestConsole.TranslationLayer.ConsoleParameters)">
+             <summary>
+             Initializes a new instance of the <see cref="T:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper"/> class.
+             </summary>
+            
+             <param name="vstestConsolePath">Path to the test runner <c>vstest.console.exe</c>.</param>
+             <param name="consoleParameters">The parameters to be passed onto the runner process.</param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.#ctor(System.String,System.String,Microsoft.TestPlatform.VsTestConsole.TranslationLayer.ConsoleParameters)">
+             <summary>
+             Initializes a new instance of the <see cref="T:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper"/> class.
+             </summary>
+            
+             <remarks>Defined for testing purposes.</remarks>
+            
+             <param name="vstestConsolePath">Path to the test runner <c>vstest.console.exe</c>.</param>
+             <param name="dotnetExePath">Path to dotnet exe, needed for CI builds.</param>
+             <param name="consoleParameters">The parameters to be passed onto the runner process.</param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.#ctor(Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITranslationLayerRequestSender,Microsoft.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.IProcessManager,Microsoft.TestPlatform.VsTestConsole.TranslationLayer.ConsoleParameters,Microsoft.VisualStudio.TestPlatform.CoreUtilities.Tracing.Interfaces.ITestPlatformEventSource,Microsoft.VisualStudio.TestPlatform.PlatformAbstractions.Interfaces.IProcessHelper)">
+             <summary>
+             Initializes a new instance of the <see cref="T:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper"/> class.
+             </summary>
+            
+             <param name="requestSender">Sender for test messages.</param>
+             <param name="processManager">Process manager.</param>
+             <param name="consoleParameters">The parameters to be passed onto the runner process.</param>
+             <param name="testPlatformEventSource">Performance event source.</param>
+             <param name="processHelper">Helper for process related utilities.</param>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.StartSession">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.StartTestSession(System.Collections.Generic.IList{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.StartTestSession(System.Collections.Generic.IList{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.StartTestSession(System.Collections.Generic.IList{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.StopTestSession(Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.StopTestSession(Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.InitializeExtensions(System.Collections.Generic.IEnumerable{System.String})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.DiscoverTests(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestDiscoveryEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.DiscoverTests(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestDiscoveryEventsHandler2)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.DiscoverTests(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestDiscoveryEventsHandler2)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.CancelDiscovery">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.RunTests(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.RunTests(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.RunTests(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.RunTests(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.RunTests(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.RunTests(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.RunTestsWithCustomTestHost(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.RunTestsWithCustomTestHost(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.RunTestsWithCustomTestHost(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.RunTestsWithCustomTestHost(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.RunTestsWithCustomTestHost(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.RunTestsWithCustomTestHost(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.CancelTestRun">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.AbortTestRun">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.EndSession">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.StartSessionAsync">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.StartTestSessionAsync(System.Collections.Generic.IList{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.StartTestSessionAsync(System.Collections.Generic.IList{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.StartTestSessionAsync(System.Collections.Generic.IList{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.StopTestSessionAsync(Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.StopTestSessionAsync(Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.InitializeExtensionsAsync(System.Collections.Generic.IEnumerable{System.String})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.DiscoverTestsAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestDiscoveryEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.DiscoverTestsAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestDiscoveryEventsHandler2)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.DiscoverTestsAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestDiscoveryEventsHandler2)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.RunTestsAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.RunTestsAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.RunTestsAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.RunTestsAsync(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.RunTestsAsync(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.RunTestsAsync(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.RunTestsWithCustomTestHostAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.RunTestsWithCustomTestHostAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.RunTestsWithCustomTestHostAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.RunTestsWithCustomTestHostAsync(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.RunTestsWithCustomTestHostAsync(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.RunTestsWithCustomTestHostAsync(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestSessionInfo,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.ProcessTestRunAttachmentsAsync(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.AttachmentSet},System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.InvokedDataCollector},System.String,System.Boolean,System.Boolean,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunAttachmentsProcessingEventsHandler,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Microsoft.TestPlatform.VsTestConsole.TranslationLayer.VsTestConsoleWrapper.ProcessTestRunAttachmentsAsync(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.AttachmentSet},System.String,System.Boolean,System.Boolean,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunAttachmentsProcessingEventsHandler,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSession">
+            <summary>
+            Defines a test session that can be used to make calls to the vstest.console
+            process.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSession.TestSessionInfo">
+            <summary>
+            Gets the underlying test session info object.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSession.DiscoverTests(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestDiscoveryEventsHandler)">
+             <summary>
+             Starts test discovery.
+             </summary>
+            
+             <param name="sources">The list of source assemblies for the discovery.</param>
+             <param name="discoverySettings">The run settings for the discovery.</param>
+             <param name="discoveryEventsHandler">The discovery event handler.</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSession.DiscoverTests(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestDiscoveryEventsHandler2)">
+             <summary>
+             Starts test discovery.
+             </summary>
+            
+             <param name="sources">The list of source assemblies for the discovery.</param>
+             <param name="discoverySettings">The run settings for the discovery.</param>
+             <param name="options">The test platform options.</param>
+             <param name="discoveryEventsHandler">The discovery event handler.</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSession.CancelDiscovery">
+            <summary>
+            Cancels the last discovery request.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSession.RunTests(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+             <summary>
+             Starts a test run.
+             </summary>
+            
+             <param name="sources">The list of source assemblies for the test run.</param>
+             <param name="runSettings">The run settings for the run.</param>
+             <param name="testRunEventsHandler">The run event handler.</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSession.RunTests(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+             <summary>
+             Starts a test run.
+             </summary>
+            
+             <param name="sources">The list of source assemblies for the test run.</param>
+             <param name="runSettings">The run settings for the run.</param>
+             <param name="options">The test platform options.</param>
+             <param name="testRunEventsHandler">The run event handler.</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSession.RunTests(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+             <summary>
+             Starts a test run.
+             </summary>
+            
+             <param name="testCases">The list of test cases for the test run.</param>
+             <param name="runSettings">The run settings for the run.</param>
+             <param name="testRunEventsHandler">The run event handler.</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSession.RunTests(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+             <summary>
+             Starts a test run.
+             </summary>
+            
+             <param name="testCases">The list of test cases for the test run.</param>
+             <param name="runSettings">The run settings for the run.</param>
+             <param name="options">The test platform options.</param>
+             <param name="testRunEventsHandler">The run event handler.</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSession.RunTestsWithCustomTestHost(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+             <summary>
+             Starts a test run.
+             </summary>
+            
+             <param name="sources">The list of source assemblies for the test run.</param>
+             <param name="runSettings">The run settings for the run.</param>
+             <param name="testRunEventsHandler">The run event handler.</param>
+             <param name="customTestHostLauncher">The custom host launcher.</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSession.RunTestsWithCustomTestHost(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+             <summary>
+             Starts a test run.
+             </summary>
+            
+             <param name="sources">The list of source assemblies for the test run.</param>
+             <param name="runSettings">The run settings for the run.</param>
+             <param name="options">The test platform options.</param>
+             <param name="testRunEventsHandler">The run event handler.</param>
+             <param name="customTestHostLauncher">The custom host launcher.</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSession.RunTestsWithCustomTestHost(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+             <summary>
+             Starts a test run.
+             </summary>
+            
+             <param name="testCases">The list of test cases for the test run.</param>
+             <param name="runSettings">The run settings for the run.</param>
+             <param name="testRunEventsHandler">The run event handler.</param>
+             <param name="customTestHostLauncher">The custom host launcher.</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSession.RunTestsWithCustomTestHost(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+             <summary>
+             Starts a test run.
+             </summary>
+            
+             <param name="testCases">The list of test cases for the test run.</param>
+             <param name="runSettings">The run settings for the run.</param>
+             <param name="options">The test platform options.</param>
+             <param name="testRunEventsHandler">The run event handler.</param>
+             <param name="customTestHostLauncher">The custom host launcher.</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSession.StopTestSession">
+             <summary>
+             Stops the test session.
+             </summary>
+            
+             <returns>True if the session was successfuly stopped, false otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSession.StopTestSession(Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler)">
+             <summary>
+             Stops the test session.
+             </summary>
+            
+             <param name="eventsHandler">The session event handler.</param>
+            
+             <returns>True if the session was successfuly stopped, false otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSession.StopTestSession(Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler)">
+             <summary>
+             Stops the test session.
+             </summary>
+            
+             <param name="options">Test Platform options.</param>
+             <param name="eventsHandler">The session event handler.</param>
+            
+             <returns>True if the session was successfuly stopped, false otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSession.CancelTestRun">
+            <summary>
+            Cancels the last test run.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSession.AbortTestRun">
+            <summary>
+            Aborts the last test run.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSessionAsync">
+            <summary>
+            Defines a test session that can be used to make async calls to the vstest.console
+            process.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSessionAsync.DiscoverTestsAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestDiscoveryEventsHandler)">
+             <summary>
+             Starts test discovery.
+             </summary>
+            
+             <param name="sources">The list of source assemblies for the discovery.</param>
+             <param name="discoverySettings">The run settings for the discovery.</param>
+             <param name="discoveryEventsHandler">The discovery event handler.</param>
+             <returns></returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSessionAsync.DiscoverTestsAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestDiscoveryEventsHandler2)">
+             <summary>
+             Starts test discovery.
+             </summary>
+            
+             <param name="sources">The list of source assemblies for the discovery.</param>
+             <param name="discoverySettings">The run settings for the discovery.</param>
+             <param name="options">The test platform options.</param>
+             <param name="discoveryEventsHandler">The discovery event handler.</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSessionAsync.CancelDiscovery">
+            <summary>
+            Cancels the last discovery request.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSessionAsync.RunTestsAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+             <summary>
+             Starts a test run.
+             </summary>
+            
+             <param name="sources">The list of source assemblies for the test run.</param>
+             <param name="runSettings">The run settings for the run.</param>
+             <param name="testRunEventsHandler">The run event handler.</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSessionAsync.RunTestsAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+             <summary>
+             Starts a test run.
+             </summary>
+            
+             <param name="sources">The list of source assemblies for the test run.</param>
+             <param name="runSettings">The run settings for the run.</param>
+             <param name="options">The test platform options.</param>
+             <param name="testRunEventsHandler">The run event handler.</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSessionAsync.RunTestsAsync(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+             <summary>
+             Starts a test run.
+             </summary>
+            
+             <param name="testCases">The list of test cases for the test run.</param>
+             <param name="runSettings">The run settings for the run.</param>
+             <param name="testRunEventsHandler">The run event handler.</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSessionAsync.RunTestsAsync(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler)">
+             <summary>
+             Starts a test run.
+             </summary>
+            
+             <param name="testCases">The list of test cases for the test run.</param>
+             <param name="runSettings">The run settings for the run.</param>
+             <param name="options">The test platform options.</param>
+             <param name="testRunEventsHandler">The run event handler.</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSessionAsync.RunTestsWithCustomTestHostAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+             <summary>
+             Starts a test run.
+             </summary>
+            
+             <param name="sources">The list of source assemblies for the test run.</param>
+             <param name="runSettings">The run settings for the run.</param>
+             <param name="testRunEventsHandler">The run event handler.</param>
+             <param name="customTestHostLauncher">The custom host launcher.</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSessionAsync.RunTestsWithCustomTestHostAsync(System.Collections.Generic.IEnumerable{System.String},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+             <summary>
+             Starts a test run.
+             </summary>
+            
+             <param name="sources">The list of source assemblies for the test run.</param>
+             <param name="runSettings">The run settings for the run.</param>
+             <param name="options">The test platform options.</param>
+             <param name="testRunEventsHandler">The run event handler.</param>
+             <param name="customTestHostLauncher">The custom host launcher.</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSessionAsync.RunTestsWithCustomTestHostAsync(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+             <summary>
+             Starts a test run.
+             </summary>
+            
+             <param name="testCases">The list of test cases for the test run.</param>
+             <param name="runSettings">The run settings for the run.</param>
+             <param name="testRunEventsHandler">The run event handler.</param>
+             <param name="customTestHostLauncher">The custom host launcher.</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSessionAsync.RunTestsWithCustomTestHostAsync(System.Collections.Generic.IEnumerable{Microsoft.VisualStudio.TestPlatform.ObjectModel.TestCase},System.String,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestRunEventsHandler,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.Interfaces.ITestHostLauncher)">
+             <summary>
+             Starts a test run.
+             </summary>
+            
+             <param name="testCases">The list of test cases for the test run.</param>
+             <param name="runSettings">The run settings for the run.</param>
+             <param name="options">The test platform options.</param>
+             <param name="testRunEventsHandler">The run event handler.</param>
+             <param name="customTestHostLauncher">The custom host launcher.</param>
+        </member>
+        <member name="M:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSessionAsync.StopTestSessionAsync">
+             <summary>
+             Stops the test session.
+             </summary>
+            
+             <returns>True if the session was successfuly stopped, false otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSessionAsync.StopTestSessionAsync(Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler)">
+             <summary>
+             Stops the test session.
+             </summary>
+            
+             <param name="eventsHandler">The session event handler.</param>
+            
+             <returns>True if the session was successfuly stopped, false otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSessionAsync.StopTestSessionAsync(Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.TestPlatformOptions,Microsoft.VisualStudio.TestPlatform.ObjectModel.Client.ITestSessionEventsHandler)">
+             <summary>
+             Stops the test session.
+             </summary>
+            
+             <param name="options">Test Platform options.</param>
+             <param name="eventsHandler">The session event handler.</param>
+            
+             <returns>True if the session was successfuly stopped, false otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSessionAsync.CancelTestRun">
+            <summary>
+            Cancels the last test run.
+            </summary>
+        </member>
+        <member name="M:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Interfaces.ITestSessionAsync.AbortTestRun">
+            <summary>
+            Aborts the last test run.
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Resources.InternalResources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Resources.InternalResources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Resources.InternalResources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Resources.InternalResources.CannotFindConsoleRunner">
+            <summary>
+              Looks up a localized string similar to Cannot find the console runner {0}..
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Resources.InternalResources.ProcessStartWin32Failure">
+            <summary>
+              Looks up a localized string similar to An error occurred when opening the file {0} with arguments {1}..
+            </summary>
+        </member>
+        <member name="T:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Resources.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Resources.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Resources.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Resources.Resources.AbortedStartTestSession">
+            <summary>
+              Looks up a localized string similar to The Start Test Session operation was aborted..
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Resources.Resources.AbortedStopTestSession">
+            <summary>
+              Looks up a localized string similar to The Stop Test Session operation was aborted..
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Resources.Resources.AbortedTestRunAttachmentsProcessing">
+            <summary>
+              Looks up a localized string similar to The active Test Run Attachments Processing was aborted..
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Resources.Resources.AbortedTestsDiscovery">
+            <summary>
+              Looks up a localized string similar to The active Tests Discovery was aborted..
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Resources.Resources.AbortedTestsRun">
+            <summary>
+              Looks up a localized string similar to The active Tests Run was aborted..
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Resources.Resources.FailedToReceiveMessage">
+            <summary>
+              Looks up a localized string similar to Failed to receive message from vstest.console process.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Resources.Resources.InvalidFilePath">
+            <summary>
+              Looks up a localized string similar to File {0} does not exists.
+            </summary>
+        </member>
+        <member name="P:Microsoft.VisualStudio.TestPlatform.VsTestConsole.TranslationLayer.Resources.Resources.VsTestProcessExitedAbnormally">
+            <summary>
+              Looks up a localized string similar to vstest.console process exited abnormally.
+            </summary>
+        </member>
+    </members>
+</doc>

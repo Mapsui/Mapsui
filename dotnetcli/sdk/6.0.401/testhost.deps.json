@@ -1,0 +1,161 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v2.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v2.1": {
+      "testhost/1.0.0": {
+        "dependencies": {
+          "Microsoft.TestPlatform.CommunicationUtilities": "15.0.0.0",
+          "Microsoft.TestPlatform.CoreUtilities": "15.0.0.0",
+          "Microsoft.TestPlatform.CrossPlatEngine": "15.0.0.0",
+          "Microsoft.TestPlatform.PlatformAbstractions": "15.0.0.0",
+          "Microsoft.TestPlatform.Utilities": "15.0.0.0",
+          "Microsoft.VisualStudio.TestPlatform.Common": "15.0.0.0",
+          "Microsoft.VisualStudio.TestPlatform.ObjectModel": "15.0.0.0",
+          "Newtonsoft.Json": "9.0.0.0",
+          "NuGet.Frameworks": "5.0.0.6"
+        },
+        "runtime": {
+          "testhost.dll": {}
+        }
+      },
+      "Microsoft.TestPlatform.CommunicationUtilities/15.0.0.0": {
+        "runtime": {
+          "Microsoft.TestPlatform.CommunicationUtilities.dll": {
+            "assemblyVersion": "15.0.0.0",
+            "fileVersion": "15.0.0.0"
+          }
+        }
+      },
+      "Microsoft.TestPlatform.CoreUtilities/15.0.0.0": {
+        "runtime": {
+          "Microsoft.TestPlatform.CoreUtilities.dll": {
+            "assemblyVersion": "15.0.0.0",
+            "fileVersion": "15.0.0.0"
+          }
+        }
+      },
+      "Microsoft.TestPlatform.CrossPlatEngine/15.0.0.0": {
+        "runtime": {
+          "Microsoft.TestPlatform.CrossPlatEngine.dll": {
+            "assemblyVersion": "15.0.0.0",
+            "fileVersion": "15.0.0.0"
+          }
+        }
+      },
+      "Microsoft.TestPlatform.PlatformAbstractions/15.0.0.0": {
+        "runtime": {
+          "Microsoft.TestPlatform.PlatformAbstractions.dll": {
+            "assemblyVersion": "15.0.0.0",
+            "fileVersion": "15.0.0.0"
+          }
+        }
+      },
+      "Microsoft.TestPlatform.Utilities/15.0.0.0": {
+        "runtime": {
+          "Microsoft.TestPlatform.Utilities.dll": {
+            "assemblyVersion": "15.0.0.0",
+            "fileVersion": "15.0.0.0"
+          }
+        }
+      },
+      "Microsoft.VisualStudio.TestPlatform.Common/15.0.0.0": {
+        "runtime": {
+          "Microsoft.VisualStudio.TestPlatform.Common.dll": {
+            "assemblyVersion": "15.0.0.0",
+            "fileVersion": "15.0.0.0"
+          }
+        }
+      },
+      "Microsoft.VisualStudio.TestPlatform.ObjectModel/15.0.0.0": {
+        "runtime": {
+          "Microsoft.VisualStudio.TestPlatform.ObjectModel.dll": {
+            "assemblyVersion": "15.0.0.0",
+            "fileVersion": "15.0.0.0"
+          }
+        }
+      },
+      "Newtonsoft.Json/9.0.0.0": {
+        "runtime": {
+          "Newtonsoft.Json.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "9.0.1.19813"
+          }
+        }
+      },
+      "NuGet.Frameworks/5.0.0.6": {
+        "runtime": {
+          "NuGet.Frameworks.dll": {
+            "assemblyVersion": "5.0.0.6",
+            "fileVersion": "5.0.0.5923"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "testhost/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": "",
+      "path": "/"
+    },
+    "Microsoft.TestPlatform.CommunicationUtilities/15.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": "",
+      "path": "/"
+    },
+    "Microsoft.TestPlatform.CoreUtilities/15.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": "",
+      "path": "/"
+    },
+    "Microsoft.TestPlatform.CrossPlatEngine/15.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": "",
+      "path": "/"
+    },
+    "Microsoft.TestPlatform.PlatformAbstractions/15.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": "",
+      "path": "/"
+    },
+    "Microsoft.TestPlatform.Utilities/15.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": "",
+      "path": "/"
+    },
+    "Microsoft.VisualStudio.TestPlatform.Common/15.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": "",
+      "path": "/"
+    },
+    "Microsoft.VisualStudio.TestPlatform.ObjectModel/15.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": "",
+      "path": "/"
+    },
+    "Newtonsoft.Json/9.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": "",
+      "path": "/"
+    },
+    "NuGet.Frameworks/5.0.0.6": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": "",
+      "path": "/"
+    }
+  }
+}

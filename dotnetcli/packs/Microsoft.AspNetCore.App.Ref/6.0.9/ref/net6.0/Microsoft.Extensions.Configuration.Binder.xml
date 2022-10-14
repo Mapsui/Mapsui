@@ -1,0 +1,308 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Extensions.Configuration.Binder</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Extensions.Configuration.BinderOptions">
+            <summary>
+            Options class used by the <see cref="T:Microsoft.Extensions.Configuration.ConfigurationBinder"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.BinderOptions.BindNonPublicProperties">
+            <summary>
+            When false (the default), the binder will only attempt to set public properties.
+            If true, the binder will attempt to set all non read-only properties.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Configuration.BinderOptions.ErrorOnUnknownConfiguration">
+            <summary>
+            When false (the default), no exceptions are thrown when a configuration key is found for which the
+            provided model object does not have an appropriate property which matches the key's name.
+            When true, an <see cref="T:System.InvalidOperationException"/> is thrown with a description
+            of the missing properties.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Extensions.Configuration.ConfigurationBinder">
+            <summary>
+            Static helper class that allows binding strongly typed objects to configuration values.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.ConfigurationBinder.Get``1(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Attempts to bind the configuration instance to a new instance of type T.
+            If this configuration section has a value, that will be used.
+            Otherwise binding by matching property names against configuration keys recursively.
+            </summary>
+            <typeparam name="T">The type of the new instance to bind.</typeparam>
+            <param name="configuration">The configuration instance to bind.</param>
+            <returns>The new instance of T if successful, default(T) otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.ConfigurationBinder.Get``1(Microsoft.Extensions.Configuration.IConfiguration,System.Action{Microsoft.Extensions.Configuration.BinderOptions})">
+            <summary>
+            Attempts to bind the configuration instance to a new instance of type T.
+            If this configuration section has a value, that will be used.
+            Otherwise binding by matching property names against configuration keys recursively.
+            </summary>
+            <typeparam name="T">The type of the new instance to bind.</typeparam>
+            <param name="configuration">The configuration instance to bind.</param>
+            <param name="configureOptions">Configures the binder options.</param>
+            <returns>The new instance of T if successful, default(T) otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.ConfigurationBinder.Get(Microsoft.Extensions.Configuration.IConfiguration,System.Type)">
+            <summary>
+            Attempts to bind the configuration instance to a new instance of type T.
+            If this configuration section has a value, that will be used.
+            Otherwise binding by matching property names against configuration keys recursively.
+            </summary>
+            <param name="configuration">The configuration instance to bind.</param>
+            <param name="type">The type of the new instance to bind.</param>
+            <returns>The new instance if successful, null otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.ConfigurationBinder.Get(Microsoft.Extensions.Configuration.IConfiguration,System.Type,System.Action{Microsoft.Extensions.Configuration.BinderOptions})">
+            <summary>
+            Attempts to bind the configuration instance to a new instance of type T.
+            If this configuration section has a value, that will be used.
+            Otherwise binding by matching property names against configuration keys recursively.
+            </summary>
+            <param name="configuration">The configuration instance to bind.</param>
+            <param name="type">The type of the new instance to bind.</param>
+            <param name="configureOptions">Configures the binder options.</param>
+            <returns>The new instance if successful, null otherwise.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind(Microsoft.Extensions.Configuration.IConfiguration,System.String,System.Object)">
+            <summary>
+            Attempts to bind the given object instance to the configuration section specified by the key by matching property names against configuration keys recursively.
+            </summary>
+            <param name="configuration">The configuration instance to bind.</param>
+            <param name="key">The key of the configuration section to bind.</param>
+            <param name="instance">The object to bind.</param>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind(Microsoft.Extensions.Configuration.IConfiguration,System.Object)">
+            <summary>
+            Attempts to bind the given object instance to configuration values by matching property names against configuration keys recursively.
+            </summary>
+            <param name="configuration">The configuration instance to bind.</param>
+            <param name="instance">The object to bind.</param>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind(Microsoft.Extensions.Configuration.IConfiguration,System.Object,System.Action{Microsoft.Extensions.Configuration.BinderOptions})">
+            <summary>
+            Attempts to bind the given object instance to configuration values by matching property names against configuration keys recursively.
+            </summary>
+            <param name="configuration">The configuration instance to bind.</param>
+            <param name="instance">The object to bind.</param>
+            <param name="configureOptions">Configures the binder options.</param>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue``1(Microsoft.Extensions.Configuration.IConfiguration,System.String)">
+            <summary>
+            Extracts the value with the specified key and converts it to type T.
+            </summary>
+            <typeparam name="T">The type to convert the value to.</typeparam>
+            <param name="configuration">The configuration.</param>
+            <param name="key">The key of the configuration section's value to convert.</param>
+            <returns>The converted value.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue``1(Microsoft.Extensions.Configuration.IConfiguration,System.String,``0)">
+            <summary>
+            Extracts the value with the specified key and converts it to type T.
+            </summary>
+            <typeparam name="T">The type to convert the value to.</typeparam>
+            <param name="configuration">The configuration.</param>
+            <param name="key">The key of the configuration section's value to convert.</param>
+            <param name="defaultValue">The default value to use if no value is found.</param>
+            <returns>The converted value.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Microsoft.Extensions.Configuration.IConfiguration,System.Type,System.String)">
+            <summary>
+            Extracts the value with the specified key and converts it to the specified type.
+            </summary>
+            <param name="configuration">The configuration.</param>
+            <param name="type">The type to convert the value to.</param>
+            <param name="key">The key of the configuration section's value to convert.</param>
+            <returns>The converted value.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Microsoft.Extensions.Configuration.IConfiguration,System.Type,System.String,System.Object)">
+            <summary>
+            Extracts the value with the specified key and converts it to the specified type.
+            </summary>
+            <param name="configuration">The configuration.</param>
+            <param name="type">The type to convert the value to.</param>
+            <param name="key">The key of the configuration section's value to convert.</param>
+            <param name="defaultValue">The default value to use if no value is found.</param>
+            <returns>The converted value.</returns>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute">
+             <summary>
+             Indicates that certain members on a specified <see cref="T:System.Type"/> are accessed dynamically,
+             for example through <see cref="N:System.Reflection"/>.
+             </summary>
+             <remarks>
+             This allows tools to understand which members are being accessed during the execution
+             of a program.
+            
+             This attribute is valid on members whose type is <see cref="T:System.Type"/> or <see cref="T:System.String"/>.
+            
+             When this attribute is applied to a location of type <see cref="T:System.String"/>, the assumption is
+             that the string represents a fully qualified type name.
+            
+             When this attribute is applied to a class, interface, or struct, the members specified
+             can be accessed dynamically on <see cref="T:System.Type"/> instances returned from calling
+             <see cref="M:System.Object.GetType"/> on instances of that class, interface, or struct.
+            
+             If the attribute is applied to a method it's treated as a special case and it implies
+             the attribute should be applied to the "this" parameter of the method. As such the attribute
+             should only be used on instance methods of types assignable to System.Type (or string, but no methods
+             will use it there).
+             </remarks>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute.#ctor(System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute"/> class
+            with the specified member types.
+            </summary>
+            <param name="memberTypes">The types of members dynamically accessed.</param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute.MemberTypes">
+            <summary>
+            Gets the <see cref="T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes"/> which specifies the type
+            of members dynamically accessed.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes">
+             <summary>
+             Specifies the types of members that are dynamically accessed.
+            
+             This enumeration has a <see cref="T:System.FlagsAttribute"/> attribute that allows a
+             bitwise combination of its member values.
+             </summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.None">
+            <summary>
+            Specifies no members.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicParameterlessConstructor">
+            <summary>
+            Specifies the default, parameterless public constructor.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors">
+            <summary>
+            Specifies all public constructors.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicConstructors">
+            <summary>
+            Specifies all non-public constructors.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicMethods">
+            <summary>
+            Specifies all public methods.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicMethods">
+            <summary>
+            Specifies all non-public methods.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields">
+            <summary>
+            Specifies all public fields.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicFields">
+            <summary>
+            Specifies all non-public fields.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicNestedTypes">
+            <summary>
+            Specifies all public nested types.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicNestedTypes">
+            <summary>
+            Specifies all non-public nested types.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicProperties">
+            <summary>
+            Specifies all public properties.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicProperties">
+            <summary>
+            Specifies all non-public properties.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicEvents">
+            <summary>
+            Specifies all public events.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicEvents">
+            <summary>
+            Specifies all non-public events.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.Interfaces">
+            <summary>
+            Specifies all interfaces implemented by the type.
+            </summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All">
+            <summary>
+            Specifies all members.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute">
+            <summary>
+            Indicates that the specified method requires dynamic access to code that is not referenced
+            statically, for example through <see cref="N:System.Reflection"/>.
+            </summary>
+            <remarks>
+            This allows tools to understand which methods are unsafe to call when removing unreferenced
+            code from an application.
+            </remarks>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute"/> class
+            with the specified message.
+            </summary>
+            <param name="message">
+            A message that contains information about the usage of unreferenced code.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute.Message">
+            <summary>
+            Gets a message that contains information about the usage of unreferenced code.
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute.Url">
+            <summary>
+            Gets or sets an optional URL that contains more information about the method,
+            why it requries unreferenced code, and what options a consumer has to deal with it.
+            </summary>
+        </member>
+        <member name="P:System.SR.Error_CannotActivateAbstractOrInterface">
+            <summary>Cannot create instance of type '{0}' because it is either abstract or an interface.</summary>
+        </member>
+        <member name="P:System.SR.Error_FailedBinding">
+            <summary>Failed to convert configuration value at '{0}' to type '{1}'.</summary>
+        </member>
+        <member name="P:System.SR.Error_FailedToActivate">
+            <summary>Failed to create instance of type '{0}'.</summary>
+        </member>
+        <member name="P:System.SR.Error_MissingConfig">
+            <summary>'{0}' was set on the provided {1}, but the following properties were not found on the instance of {2}: {3}</summary>
+        </member>
+        <member name="P:System.SR.Error_MissingParameterlessConstructor">
+            <summary>Cannot create instance of type '{0}' because it is missing a public parameterless constructor.</summary>
+        </member>
+        <member name="P:System.SR.Error_UnsupportedMultidimensionalArray">
+            <summary>Cannot create instance of type '{0}' because multidimensional arrays are not supported.</summary>
+        </member>
+    </members>
+</doc>
