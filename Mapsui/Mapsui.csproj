@@ -14,7 +14,6 @@
 	 
   <ItemGroup>
     <PackageReference Include="NeoSmart.AsyncLock" />
-    <PackageReference Include="System.Linq.Async" />
   </ItemGroup>
   
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
