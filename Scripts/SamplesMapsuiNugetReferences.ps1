@@ -9,8 +9,7 @@ foreach ($file in $fileNames) {
         $include=$_.node.Include
         $project = $include + ".csproj"
         $version=$_.node.Version
-      
-        #$fileContent = $fileContent -replace "Include=""$include"" Version=""$version""", "Include=""$include"""
+             
         $fileContent = $fileContent -replace "<ProjectReference Include=`"`[\.\\a-zA-Z]*$project`"` />", "<PackageReference Include=""$include"" />"
     }
        
