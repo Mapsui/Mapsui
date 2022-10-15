@@ -11,9 +11,10 @@ foreach ($file in $fileNames) {
         $includeui = $include -replace "Mapsui.", "Mapsui.UI."
         $projectui = $includeui + ".csproj"
         $version=$_.node.Version
-             
+        
+        # <ProjectReference .... />     
         $fileContent = $fileContent -replace "<ProjectReference Include=`"`[\.\\a-zA-Z]*$project`"` />", "<PackageReference Include=""$include"" />"
-        $fileContent = $fileContent -replace "<ProjectReference Include=`"`[\.\\a-zA-Z]*$projectui`"` />", "<PackageReference Include=""$include"" />"
+        $fileContent = $fileContent -replace "<ProjectReference Include=`"`[\.\\a-zA-Z]*$projectui`"` />", "<PackageReference Include=""$include"" />"       
     }
        
     # Normalize to no Cariage Return at the End

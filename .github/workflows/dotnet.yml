@@ -239,10 +239,11 @@ jobs:
     - name: Generate nuget package (Mapsui.Eto)
       run: nuget pack NuSpec/Mapsui.Eto.nuspec -Version $(git describe --tags) -outputdirectory Artifacts    
     # Change Project References to nuget package references in samples
-    - name: nuget ProjectReferences to PackageReferences
-      shell: pwsh
-      run: |
-        .\Scripts/SamplesMapsuiNugetReferences.ps1    
+    # script dos not work on Github actions yet
+    #- name: nuget ProjectReferences to PackageReferences
+    #  shell: pwsh
+    #  run: |
+    #    .\Scripts/SamplesMapsuiNugetReferences.ps1    
     # Samples Build    
     - name: Mapsui.Samples.Avalonia
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Avalonia/Mapsui.Samples.Avalonia.csproj
