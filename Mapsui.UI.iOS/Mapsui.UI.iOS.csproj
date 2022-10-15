@@ -2,7 +2,7 @@
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <TargetFramework>net60-ios</TargetFramework>
+    <TargetFramework>net6.0-ios16.0</TargetFramework>
     <ImplicitUsings>true</ImplicitUsings>
     <!--<RuntimeIdentifiers>iossimulator-x64</RuntimeIdentifiers>-->
   </PropertyGroup>
