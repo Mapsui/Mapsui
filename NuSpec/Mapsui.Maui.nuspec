@@ -21,6 +21,7 @@
     <dependencies>
       <group targetFramework="net6.0">
         <dependency id="Mapsui" version="$version$"/>
+        <dependency id="Mapsui.Tiling" version="$version$"/>
         <dependency id="Mapsui.Rendering.Skia" version="$version$"/>
         <dependency id="Microsoft.Maui.Dependencies" version="[6.0.312,7.0)" />
         <dependency id="SkiaSharp" version="[2.88.2,3.0.0)"/>

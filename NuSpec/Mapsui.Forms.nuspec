@@ -21,6 +21,7 @@
 		<dependencies>
 			<group targetFramework="netstandard2.0">
 				<dependency id="Mapsui" version="$version$"/>
+				<dependency id="Mapsui.Tiling" version="$version$"/>
 				<dependency id="Mapsui.Rendering.Skia" version="$version$"/>
 				<dependency id="Xamarin.Forms" version="[5.0.0.2125,6.0)" />
 				<dependency id="Xamarin.Essentials" version="[1.7.0,2.0)" />
@@ -28,6 +29,7 @@
 			</group>
 			<group targetFramework="xamarinios1.0">
 				<dependency id="Mapsui" version="$version$"/>
+				<dependency id="Mapsui.Tiling" version="$version$"/>
 				<dependency id="Mapsui.Rendering.Skia" version="$version$"/>
 				<dependency id="Xamarin.Forms" version="[5.0.0.2125,6.0)" />
 				<dependency id="Xamarin.Essentials" version="[1.7.0,2.0)" />

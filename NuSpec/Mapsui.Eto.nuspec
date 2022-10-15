@@ -19,6 +19,7 @@
 			<!-- [ or ] is including, ( or ) is excluding -->
 			<group targetFramework="netstandard2.0">
 				<dependency id="Mapsui" version="$version$"/>
+				<dependency id="Mapsui.Tiling" version="$version$"/>
 				<dependency id="Mapsui.Rendering.Skia" version="$version$"/>
 				<dependency id="Eto.SkiaDraw" version="[0.2.0,)"/>
 			</group>

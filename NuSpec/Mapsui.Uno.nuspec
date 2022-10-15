@@ -19,6 +19,7 @@
 			<!-- [ or ] is including, ( or ) is excluding -->
 			<group targetFramework="netstandard2.0">
 				<dependency id="Mapsui" version="$version$" />
+				<dependency id="Mapsui.Tiling" version="$version$"/>
 				<dependency id="Mapsui.Rendering.Skia" version="$version$"/>
 				<dependency id="SkiaSharp.Views" version="[2.88.2,3.0.0)" />
 				<dependency id="Uno.UI" version="[4.5.12, 5.0.0)" />
@@ -26,6 +27,7 @@
 			</group>
 			<group targetFramework="net6.0">
 				<dependency id="Mapsui" version="$version$" />
+				<dependency id="Mapsui.Tiling" version="$version$"/>
 				<dependency id="Mapsui.Rendering.Skia" version="$version$"/>
 				<dependency id="SkiaSharp.Views" version="[2.88.2,3.0.0)" />
 				<dependency id="Uno.UI" version="[4.5.12, 5.0.0)" />
@@ -33,6 +35,7 @@
 			</group>
 			<group targetFramework="uap10.0.19041">
 				<dependency id="Mapsui" version="$version$" />
+				<dependency id="Mapsui.Tiling" version="$version$"/>
 				<dependency id="Mapsui.Rendering.Skia" version="$version$"/>
 				<dependency id="SkiaSharp.Views" version="[2.88.2,3.0.0)" />
 				<dependency id="Uno.UI" version="[4.5.12, 5.0.0)" />
@@ -40,6 +43,7 @@
 			</group>
 			<group targetFramework="net6.0-android31.0">
 				<dependency id="Mapsui" version="$version$" />
+				<dependency id="Mapsui.Tiling" version="$version$"/>
 				<dependency id="Mapsui.Rendering.Skia" version="$version$"/>
 				<dependency id="SkiaSharp.Views" version="[2.88.2,3.0.0)" />
 				<dependency id="Uno.UI" version="[4.5.12, 5.0.0)" />

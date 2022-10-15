@@ -18,6 +18,7 @@
 			<!-- [ or ] is including, ( or ) is excluding -->
 			<group targetFramework="net6.0-windows10.0.19041.0">
 				<dependency id="Mapsui" version="$version$"/>
+				<dependency id="Mapsui.Tiling" version="$version$"/>
 				<dependency id="Mapsui.Rendering.Skia" version="$version$"/>
 				<dependency id="SkiaSharp.Views.WinUI" version="[2.88.2,3.0.0)"/>
 				<dependency id="Microsoft.WindowsAppSDK" version="[1.0.3,2.0.0)"/>
