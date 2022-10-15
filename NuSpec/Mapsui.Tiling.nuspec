@@ -15,19 +15,18 @@
     <dependencies>
       <!-- [ or ] is including, ( or ) is excluding -->
       <group targetFramework="netstandard2.0">
-	    <dependency id="NeoSmart.AsyncLock" version="[3.2.1,4.0.0)"/>
-	    <dependency id="Microsoft.Bcl.AsyncInterfaces" version="[6.0.0,7.0.0)" />
-        <dependency id="System.Linq.Async" version="[6.0.1,7.0.0)" />
+	      <dependency id="Mapsui" version="$version$"/>
+	      <dependency id="BruTile" version="[5.0.0,6.0.0)"/>
       </group>
       <group targetFramework="net6.0">
-	    <dependency id="NeoSmart.AsyncLock" version="[3.2.1,4.0.0)"/>
-	    <dependency id="System.Linq.Async" version="[6.0.1,7.0.0)" />
+	      <dependency id="Mapsui" version="$version$"/>
+	      <dependency id="BruTile" version="[5.0.0,6.0.0)"/>
       </group>
     </dependencies>
   </metadata>
   <files>
     <file src="..\LICENSE" target="LICENSE" />
-    <file src="..\Mapsui\bin\Release\netstandard2.0\Mapsui.dll" target="lib\netstandard2.0\Mapsui.dll" />
-    <file src="..\Mapsui\bin\Release\net6.0\Mapsui.dll" target="lib\net6.0\Mapsui.dll" />
+    <file src="..\Mapsui.Tiling\bin\Release\netstandard2.0\Mapsui.Tiling.dll" target="lib\netstandard2.0\Mapsui.Tiling.dll" />
+    <file src="..\Mapsui.Tiling\bin\Release\net6.0\Mapsui.Tiling.dll" target="lib\net6.0\Mapsui.Tiling.dll" />
   </files>
 </package>

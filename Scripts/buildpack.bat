@@ -8,10 +8,16 @@ dotnet build tools\versionupdater\versionupdater.csproj /p:Configuration=Release
 tools\bin\versionupdater -v %VERSION% || exit /B 1
 
 dotnet build /p:RestorePackages=true /p:Configuration=Release Mapsui/Mapsui.csproj
-dotnet build /p:RestorePackages=true /p:Configuration=Release Mapsui.Rendering.Skia/Mapsui.Rendering.Skia.csproj
-dotnet build /p:RestorePackages=true /p:Configuration=Release Mapsui.Tiling/Mapsui.Tiling.csproj
-dotnet build /p:RestorePackages=true /p:Configuration=Release Mapsui.Nts/Mapsui.Nts.csproj
 nuget pack NuSpec\Mapsui.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1
+
+dotnet build /p:RestorePackages=true /p:Configuration=Release Mapsui.Rendering.Skia/Mapsui.Rendering.Skia.csproj
+nuget pack NuSpec\Mapsui.Rendering.Skia.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1
+
+dotnet build /p:RestorePackages=true /p:Configuration=Release Mapsui.Tiling/Mapsui.Tiling.csproj
+nuget pack NuSpec\Mapsui.Tiling.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1
+
+dotnet build /p:RestorePackages=true /p:Configuration=Release Mapsui.Nts/Mapsui.Nts.csproj
+nuget pack NuSpec\Mapsui.Nts.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1
 
 dotnet build /p:RestorePackages=true /p:Configuration=Release Mapsui.ArcGIS/Mapsui.ArcGIS.csproj
 nuget pack NuSpec\Mapsui.ArcGIS.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1

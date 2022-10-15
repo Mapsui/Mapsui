@@ -18,10 +18,12 @@
       <!-- [ or ] is including, ( or ) is excluding -->
       <group targetFramework="netstandard2.0">
         <dependency id="Mapsui" version="$version$"/>
+        <dependency id="Mapsui.Rendering.Skia" version="$version$"/>
         <dependency id="Newtonsoft.json" version="[13.0.1,)"/>
       </group>
       <group targetFramework="net6.0">
 	    <dependency id="Mapsui" version="$version$"/>
+	    <dependency id="Mapsui.Rendering.Skia" version="$version$"/>
 	    <dependency id="Newtonsoft.json" version="[13.0.1,)"/>
       </group>
     </dependencies>

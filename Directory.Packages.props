@@ -29,6 +29,22 @@
     <PackageVersion Include="HarfBuzzSharp.NativeAssets.WebAssembly" Version="2.8.2.2" />
     <PackageVersion Include="IDisposableAnalyzers" Version="4.0.2" />
     <PackageVersion Include="Itinero" Version="1.5.0" />
+    <PackageVersion Include="Mapsui.Android" Version="0.0.0.0" />
+    <PackageVersion Include="Mapsui.ArcGIS" Version="0.0.0.0" />
+    <PackageVersion Include="Mapsui.Avalonia" Version="0.0.0.0" />
+    <PackageVersion Include="Mapsui.Eto" Version="0.0.0.0" />
+    <PackageVersion Include="Mapsui.Extensions" Version="0.0.0.0" />
+    <PackageVersion Include="Mapsui.Forms" Version="0.0.0.0" />
+    <PackageVersion Include="Mapsui.iOS" Version="0.0.0.0" />
+    <PackageVersion Include="Mapsui.Maui" Version="0.0.0.0" />
+    <PackageVersion Include="Mapsui.Nts" Version="0.0.0.0" />
+    <PackageVersion Include="Mapsui" Version="0.0.0.0" />
+    <PackageVersion Include="Mapsui.Rendering.Skia" Version="0.0.0.0" />
+    <PackageVersion Include="Mapsui.Tiling" Version="0.0.0.0" />
+    <PackageVersion Include="Mapsui.Uno" Version="0.0.0.0" />
+    <PackageVersion Include="Mapsui.Uno.WinUI" Version="0.0.0.0" />
+    <PackageVersion Include="Mapsui.WinUI" Version="0.0.0.0" />
+    <PackageVersion Include="Mapsui.Wpf" Version="0.0.0.0" />
     <PackageVersion Include="Microsoft.Bcl.AsyncInterfaces" Version="6.0.0" />
     <PackageVersion Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageVersion Include="Microsoft.CodeCoverage" Version="16.11.0" />

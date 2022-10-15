@@ -98,6 +98,12 @@ jobs:
       run: dotnet build --no-restore --configuration Release Mapsui.UI.Forms/Mapsui.UI.Forms.csproj
     - name: Generate nuget package (Mapsui)
       run: nuget pack NuSpec/Mapsui.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
+    - name: Generate nuget package (Mapsui.Nts)
+      run: nuget pack NuSpec/Mapsui.Nts.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
+    - name: Generate nuget package (Mapsui.Tiling)
+      run: nuget pack NuSpec/Mapsui.Tiling.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
+    - name: Generate nuget package (Mapsui.Rendering.Skia)
+      run: nuget pack NuSpec/Mapsui.Rendering.Skia.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
     - name: Generate nuget package (Mapsui.ArcGis)
       run: nuget pack NuSpec/Mapsui.ArcGis.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
     - name: Generate nuget package (Mapsui.Extensions)
@@ -264,6 +270,12 @@ jobs:
       run: dotnet build --no-restore --configuration Release Mapsui.UI.Eto/Mapsui.UI.Eto.csproj        
     - name: Generate nuget package (Mapsui)
       run: nuget pack NuSpec/Mapsui.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
+    - name: Generate nuget package (Mapsui.Nts)
+      run: nuget pack NuSpec/Mapsui.Nts.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
+    - name: Generate nuget package (Mapsui.Tiling)
+      run: nuget pack NuSpec/Mapsui.Tiling.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
+    - name: Generate nuget package (Mapsui.Rendering.Skia)
+      run: nuget pack NuSpec/Mapsui.Rendering.Skia.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
     - name: Generate nuget package (Mapsui.ArcGis)
       run: nuget pack NuSpec/Mapsui.ArcGis.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
     - name: Generate nuget package (Mapsui.Extensions)

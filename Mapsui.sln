@@ -64,7 +64,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuSpec", "NuSpec", "{D90027
 		NuSpec\Mapsui.Forms.nuspec = NuSpec\Mapsui.Forms.nuspec
 		NuSpec\Mapsui.iOS.nuspec = NuSpec\Mapsui.iOS.nuspec
 		NuSpec\Mapsui.Maui.nuspec = NuSpec\Mapsui.Maui.nuspec
+		NuSpec\Mapsui.Nts.nuspec = NuSpec\Mapsui.Nts.nuspec
 		NuSpec\Mapsui.nuspec = NuSpec\Mapsui.nuspec
+		NuSpec\Mapsui.Rendering.Skia.nuspec = NuSpec\Mapsui.Rendering.Skia.nuspec
+		NuSpec\Mapsui.Tiling.nuspec = NuSpec\Mapsui.Tiling.nuspec
 		NuSpec\Mapsui.Uno.nuspec = NuSpec\Mapsui.Uno.nuspec
 		NuSpec\Mapsui.Uno.WinUI.nuspec = NuSpec\Mapsui.Uno.WinUI.nuspec
 		NuSpec\Mapsui.WinUI.nuspec = NuSpec\Mapsui.WinUI.nuspec
@@ -234,7 +237,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.Uno.WinUI.Sk
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Benchmarks", "Benchmarks", "{671AF0DE-73BD-46C9-81F0-087703E010AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Rendering.Benchmarks", "Benchmarks\Mapsui.Rendering.Benchmarks\Mapsui.Rendering.Benchmarks.csproj", "{10B6CC78-FA95-4E28-8F74-FD278714B9AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Rendering.Benchmarks", "Benchmarks\Mapsui.Rendering.Benchmarks\Mapsui.Rendering.Benchmarks.csproj", "{10B6CC78-FA95-4E28-8F74-FD278714B9AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
