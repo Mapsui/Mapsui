@@ -8,6 +8,8 @@ foreach ($file in $fileNames) {
     $Packages | Select-Xml -XPath "//PackageVersion" | foreach {  
         $include=$_.node.Include
         $project = $include + ".csproj"
+        $includeui = $include -replace "Mapsui.", "Mapsui.UI."
+        $projectui = $includeui + ".csproj"
         $version=$_.node.Version
              
         $fileContent = $fileContent -replace "<ProjectReference Include=`"`[\.\\a-zA-Z]*$project`"` />", "<PackageReference Include=""$include"" />"
