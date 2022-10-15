@@ -5,6 +5,7 @@ using Mapsui.Extensions.Cache;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Nts.Providers.Shapefile;
+using Mapsui.Rendering;
 using Mapsui.Projections;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
