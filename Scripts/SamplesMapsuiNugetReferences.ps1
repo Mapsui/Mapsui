@@ -1,5 +1,5 @@
 # Disable Central Package Management
-$Packages = (Get-Content -path $PSScriptRoot\..\Directory.Packages.props -Encoding UTF8)
+$Packages = (Get-Content -raw -path $PSScriptRoot\..\Directory.Packages.props -Encoding UTF8)
 $fileNames = Get-ChildItem -Path $PSScriptRoot\..\Samples -Recurse -Include *.csproj
 
 foreach ($file in $fileNames) {
