@@ -28,6 +28,7 @@ public class RasterizingTileProvider : ITileSource
     private ITileSchema? _tileSchema;
     private Attribution? _attribution;
     private readonly IProvider? _dataSource;
+    private readonly RenderFormat _renderFormat;   
     private readonly AsyncLock _renderLock = new();
     private IDictionary<TileIndex, double> _searchSizeCache = new ConcurrentDictionary<TileIndex, double>();
 
@@ -37,8 +38,10 @@ public class RasterizingTileProvider : ITileSource
         IRenderer? rasterizer = null,
         float pixelDensity = 1,
         IPersistentCache<byte[]>? persistentCache = null,
-        IProjection? projection = null)
+        IProjection? projection = null,
+        RenderFormat renderFormat = RenderFormat.Png)
     {
+        _renderFormat = renderFormat;
         _layer = layer;
         _renderResolutionMultiplier = renderResolutionMultiplier;
         _rasterizer = rasterizer;

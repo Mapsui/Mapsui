@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Rendering.Skia.Extensions;
@@ -71,7 +73,7 @@ namespace Mapsui.Rendering.Skia
         }
 
         public MemoryStream? RenderToBitmapStream(IReadOnlyViewport? viewport, IEnumerable<ILayer> layers, 
-            Color? background = null, float pixelDensity = 1, IEnumerable<IWidget>? widgets = null)
+            Color? background = null, float pixelDensity = 1, IEnumerable<IWidget>? widgets = null, RenderFormat renderFormat = RenderFormat.Png)
         {
             if (viewport == null)
                 return null;
@@ -83,19 +85,50 @@ namespace Mapsui.Rendering.Skia
 
                 var imageInfo = new SKImageInfo((int)Math.Round(width * pixelDensity), (int)Math.Round(height * pixelDensity),
                     SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
+                
+                MemoryStream memoryStream = new MemoryStream();
 
-                using var surface = SKSurface.Create(imageInfo);
-                if (surface == null) return null;
-                // Not sure if this is needed here:
-                if (background is not null) surface.Canvas.Clear(background.ToSkia());
-                surface.Canvas.Scale(pixelDensity, pixelDensity);
-                Render(surface.Canvas, viewport, layers);
-                if (widgets is not null)
-                    Render(surface.Canvas, viewport, widgets, 1);
-                using var image = surface.Snapshot();
-                using var data = image.Encode();
-                var memoryStream = new MemoryStream();
-                data.SaveTo(memoryStream);
+                switch (renderFormat)
+                {
+                    case RenderFormat.Skp:
+                    {
+                        using var pictureRecorder = new SKPictureRecorder();
+                        using var skCanvas = pictureRecorder.BeginRecording(new SKRect(0, 0, Convert.ToSingle(width), Convert.ToSingle(height)));
+                        if (!RenderTo(viewport, layers, background, pixelDensity, widgets, skCanvas))
+                            return null;
+                        
+                        using var skPicture = pictureRecorder.EndRecording();
+                        skPicture?.Serialize(memoryStream);
+                        break;
+                    }
+                    case RenderFormat.Png:
+                    {
+                        using var surface = SKSurface.Create(imageInfo);
+                        using var skCanvas = surface.Canvas;
+                        if (!RenderTo(viewport, layers, background, pixelDensity, widgets, skCanvas))
+                            return null;
+                        
+                        using var image = surface.Snapshot();
+                        using var data = image.Encode(SKEncodedImageFormat.Png, 100);
+                        data.SaveTo(memoryStream);
+                        break;
+                    }
+                    case RenderFormat.WebP:
+                    {
+                        using var surface = SKSurface.Create(imageInfo);
+                        using var skCanvas = surface.Canvas;
+                        if (!RenderTo(viewport, layers, background, pixelDensity, widgets, skCanvas))
+                            return null;
+                        
+                        using var image = surface.Snapshot();
+                        var options = new SKWebpEncoderOptions(SKWebpEncoderCompression.Lossless, 100);
+                        using var peekPixels = image.PeekPixels();
+                        using var data = peekPixels.Encode(options);
+                        data.SaveTo(memoryStream);
+                        break;
+                    }
+                }
+                
                 return memoryStream;
             }
             catch (Exception ex)
@@ -103,6 +136,22 @@ namespace Mapsui.Rendering.Skia
                 Logger.Log(LogLevel.Error, ex.Message);
                 return null;
             }
+        }
+
+        private bool RenderTo(IReadOnlyViewport viewport, IEnumerable<ILayer> layers, Color? background, float pixelDensity,
+            IEnumerable<IWidget>? widgets, SKCanvas? skCanvas)
+        {
+            if (skCanvas == null) 
+                return false; // return null;
+            
+            // Not sure if this is needed here:
+            if (background is not null) skCanvas.Clear(background.ToSkia());
+            skCanvas.Scale(pixelDensity, pixelDensity);
+            Render(skCanvas, viewport, layers);
+            if (widgets is not null)
+                Render(skCanvas, viewport, widgets, 1);
+
+            return true;
         }
 
         private void Render(SKCanvas canvas, IReadOnlyViewport viewport, IEnumerable<ILayer> layers)

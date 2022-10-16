@@ -18,4 +18,8 @@
     <PackageReference Include="DotSpatial.Projections" />
   </ItemGroup>
 
+  <ItemGroup Condition="$(TargetFramework)=='netstandard2.0'">
+    <PackageReference Include="BrotliSharpLib" />
+  </ItemGroup>
+
 </Project>
