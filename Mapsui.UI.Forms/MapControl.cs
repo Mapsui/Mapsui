@@ -612,7 +612,7 @@ namespace Mapsui.UI.Forms
                 if (_viewport.Extent != null)
                 {
                     var fetchInfo = new FetchInfo(_viewport.Extent, _viewport.Resolution, Map?.CRS, ChangeType.Discrete);
-                    _map?.RefreshData(fetchInfo);
+                    Map?.RefreshData(fetchInfo);
                 }
             }
 
@@ -657,7 +657,7 @@ namespace Mapsui.UI.Forms
                 if (_viewport.Extent != null)
                 {
                     var fetchInfo = new FetchInfo(_viewport.Extent, _viewport.Resolution, Map?.CRS, ChangeType.Discrete);
-                    _map?.RefreshData(fetchInfo);
+                    Map?.RefreshData(fetchInfo);
                 }
             }
 
@@ -853,7 +853,7 @@ namespace Mapsui.UI.Forms
         {
             if (disposing)
             {
-                _map?.Dispose();
+                Map?.Dispose();
             }
             CommonDispose(disposing);
         }

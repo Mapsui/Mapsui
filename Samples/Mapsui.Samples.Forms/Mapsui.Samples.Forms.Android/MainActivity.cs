@@ -3,26 +3,21 @@ using Plugin.Permissions;
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
 using Environment = System.Environment;
+using Mapsui.Samples.Common.Utilities;
 
 namespace Mapsui.Samples.Forms.Droid
 {
     [Activity(Label = "Mapsui.Samples.Forms", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
-
-        private static string MbTilesLocationOnAndroid => Environment.GetFolderPath(Environment.SpecialFolder.Personal);
         protected override void OnCreate(Bundle bundle)
         {
             Plugin.CurrentActivity.CrossCurrentActivity.Current.Activity = this;
 
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
-
-            MbTilesSample.MbTilesLocation = MbTilesLocationOnAndroid;
-            MbTilesHelper.DeployMbTilesFile(s => File.Create(System.IO.Path.Combine(MbTilesLocationOnAndroid, s)));
 
             base.OnCreate(bundle);
 

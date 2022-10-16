@@ -15,6 +15,7 @@ using Mapsui.Samples.CustomWidget;
 using Mapsui.UI;
 using Mapsui.Tiling;
 using Mapsui.UI.WinUI;
+using Mapsui.Samples.Common.Utilities;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -29,10 +30,6 @@ namespace Mapsui.Samples.Uno.WinUI
         public MainPage()
         {
             InitializeComponent();
-
-            // Hack to tell the platform independent samples where the files can be found on Android.
-            MbTilesSample.MbTilesLocation = MbTilesLocationOnWinUI;
-            MbTilesHelper.DeployMbTilesFile(s => File.Create(Path.Combine(MbTilesLocationOnWinUI, s)));
 
             MapControl.Map!.Layers.Add(OpenStreetMap.CreateTileLayer());
             MapControl.Map.RotationLock = false;
@@ -104,8 +101,6 @@ namespace Mapsui.Samples.Uno.WinUI
 
             return radioButton;
         }
-
-        private static string MbTilesLocationOnWinUI => ApplicationData.Current.LocalFolder.Path;
 
         private void RotationSlider_OnValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {

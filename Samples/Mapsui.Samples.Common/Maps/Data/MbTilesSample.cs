@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
 using BruTile.MbTiles;
+using Mapsui.Samples.Common.Utilities;
 using Mapsui.Tiling.Layers;
 using Mapsui.UI;
 using SQLite;
@@ -9,8 +10,10 @@ namespace Mapsui.Samples.Common.Maps
 {
     public class MbTilesSample : ISample
     {
-        // This is a hack used for iOS/Android deployment
-        public static string MbTilesLocation { get; set; } = @"." + Path.DirectorySeparatorChar + "MbTiles";
+        static MbTilesSample()
+        {
+            MbTilesDeployer.CopyEmbeddedResourceToFile("world.mbtiles");
+        }
 
         public string Name => "1 MbTiles";
         public string Category => "Data";
@@ -18,7 +21,7 @@ namespace Mapsui.Samples.Common.Maps
         public static Map CreateMap()
         {
             var map = new Map();
-            map.Layers.Add(CreateMbTilesLayer(Path.GetFullPath(Path.Combine(MbTilesLocation, "world.mbtiles")), "regular"));
+            map.Layers.Add(CreateMbTilesLayer(Path.GetFullPath(Path.Combine(MbTilesDeployer.MbTilesLocation, "world.mbtiles")), "regular"));
             return map;
         }
     
