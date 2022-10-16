@@ -17,7 +17,7 @@
 		<language>en-US</language>
  	  <dependencies>
       <!-- [ or ] is including, ( or ) is excluding -->
-      <group targetFramework="net6.0-ios13.6">
+      <group targetFramework="net6.0-ios15.4">
         <dependency id="Mapsui" version="$version$"/>
         <dependency id="Mapsui.Tiling" version="$version$"/>
         <dependency id="Mapsui.Rendering.Skia" version="$version$"/>
