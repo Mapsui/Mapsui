@@ -38,10 +38,6 @@ namespace Mapsui.Samples.Droid
             var toolbar = FindViewById<AndroidX.AppCompat.Widget.Toolbar>(Resource.Id.toolbar);
             SetSupportActionBar(toolbar);
 
-            // Hack to tell the platform independent samples where the files can be found on Android.
-            MbTilesSample.MbTilesLocation = MbTilesLocationOnAndroid;
-            MbTilesHelper.DeployMbTilesFile(s => File.Create(System.IO.Path.Combine(MbTilesLocationOnAndroid, s)));
-
             _mapControl = FindViewById<MapControl>(Resource.Id.mapcontrol) ?? throw new NullReferenceException();
             _mapControl.Map = MbTilesSample.CreateMap();
             _mapControl.Info += MapOnInfo;
@@ -221,9 +217,5 @@ namespace Mapsui.Samples.Droid
                 }
             }
         }
-
-        private static string MbTilesLocationOnAndroid => Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-
     }
 }
-
