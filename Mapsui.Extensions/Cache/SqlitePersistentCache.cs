@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.IO.Compression;
+using System.Security.AccessControl;
 using BruTile;
 using BruTile.Cache;
 using Mapsui.Cache;
@@ -233,5 +234,13 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
     private SQLiteConnection CreateConnection()
     {
         return new SQLiteConnection(_file);
+    }
+
+    public void Clear()
+    {
+        File.Exists(_file);
+        {
+            File.Delete(_file);    
+        }
     }
 }

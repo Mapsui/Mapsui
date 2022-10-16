@@ -75,7 +75,9 @@ namespace Mapsui.Rendering.Benchmarks
             ILayer layer = CreateCountryLayer(source);
             if (renderFormat != null)
             {
-                layer = new RasterizingTileLayer(layer, persistentCache: new SqlitePersistentCache("Performance" + renderFormat), renderFormat: renderFormat.Value);
+                var sqlitePersistentCache = new SqlitePersistentCache("Performance" + renderFormat);
+                sqlitePersistentCache.Clear();
+                layer = new RasterizingTileLayer(layer, persistentCache: sqlitePersistentCache, renderFormat: renderFormat.Value);
             }
 
             map.Layers.Add(layer);
