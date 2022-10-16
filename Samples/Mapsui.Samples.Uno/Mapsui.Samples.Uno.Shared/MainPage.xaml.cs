@@ -24,10 +24,6 @@ namespace Mapsui.Samples.Uwp
         {
             InitializeComponent();
 
-            // Hack to tell the platform independent samples where the files can be found on Android.
-            MbTilesSample.MbTilesLocation = MbTilesLocationOnUwp;
-            MbTilesHelper.DeployMbTilesFile(s => File.Create(Path.Combine(MbTilesLocationOnUwp, s)));
-
             MapControl.Map!.Layers.Add(OpenStreetMap.CreateTileLayer());
             MapControl.Map!.RotationLock = false;
             MapControl.UnSnapRotationDegrees = 30;
@@ -100,8 +96,6 @@ namespace Mapsui.Samples.Uwp
 
             return radioButton;
         }
-
-        private static string MbTilesLocationOnUwp => ApplicationData.Current.LocalFolder.Path;
 
         private void RotationSlider_OnValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {

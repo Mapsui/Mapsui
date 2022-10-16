@@ -16,12 +16,6 @@ namespace Mapsui.Samples.iOS
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-
-            // Hack to tell the platform independent samples where the files can be found on iOS.
-            MbTilesSample.MbTilesLocation = MbTilesLocationOnIos;
-            // Never tested this. PDD.
-            MbTilesHelper.DeployMbTilesFile(s => File.Create(Path.Combine(MbTilesLocationOnIos, s)));
-
             var mapControl = CreateMap(View!.Bounds);
             mapControl.Info += MapOnInfo;
             View = mapControl;
@@ -53,8 +47,5 @@ namespace Mapsui.Samples.iOS
                 ReSnapRotationDegrees = 5
             };
         }
-
-        private static string MbTilesLocationOnIos => Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-
     }
 }

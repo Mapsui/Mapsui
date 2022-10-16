@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
 using Foundation;
-using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
+using Mapsui.Samples.Common.Utilities;
 using UIKit;
 
 namespace Mapsui.Samples.Forms.iOS
@@ -24,16 +24,9 @@ namespace Mapsui.Samples.Forms.iOS
         {
             global::Xamarin.Forms.Forms.Init();
 
-            // Hack to tell the platform independent samples where the files can be found on iOS.
-            MbTilesSample.MbTilesLocation = MbTilesLocationOnIos;
-            // Never tested this. PDD.
-            MbTilesHelper.DeployMbTilesFile(s => File.Create(Path.Combine(MbTilesLocationOnIos, s)));
-
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
         }
-
-        private static string MbTilesLocationOnIos => Environment.GetFolderPath(Environment.SpecialFolder.Personal);
     }
 }
