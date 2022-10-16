@@ -21,6 +21,7 @@
     <!-- Explicitly reference Linux native dlls to get them included -->
     <PackageReference Include="SkiaSharp.NativeAssets.Linux" />
     <PackageReference Include="Eto.Forms" />
+    <PackageReference Include="BruTile" />
   </ItemGroup>
 
   <PropertyGroup Condition="'$(BuildPlatform)'=='' and $([MSBuild]::IsOSPlatform(Windows))">
