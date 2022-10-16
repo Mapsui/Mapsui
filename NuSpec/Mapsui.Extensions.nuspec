@@ -17,6 +17,7 @@
       <group targetFramework="netstandard2.0">
         <dependency id="Mapsui" version="$version$"/>
         <dependency id="sqlite-net-pcl" version="[1.8.116, 2.0.0)" />
+        <dependency id="SQLitePCLRaw.bundle_green" version="[2.1.2, 3.0.0)" />
         <dependency id="BitMiracle.LibTiff.NET" version="[2.4.649, 3.0.0)" />
         <dependency id="DotSpatial.Projections" version="[4.0.656, 5.0.0)" />
         <dependency id="BrotliSharpLib" version="[0.3.3, 1.0.0)" />

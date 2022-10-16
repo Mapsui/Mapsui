@@ -71,6 +71,7 @@
     <PackageVersion Include="SkiaSharp.Views.Forms.WPF" Version="2.88.2" />
     <PackageVersion Include="SkiaSharp.Views.WindowsForms" Version="2.88.2" />
     <PackageVersion Include="sqlite-net-pcl" Version="1.8.116" />
+    <PackageVersion Include="SQLitePCLRaw.bundle_green" Version="2.1.2" />
     <PackageVersion Include="Svg.Skia" Version="0.5.12" />
     <PackageVersion Include="System.AppContext" Version="4.3.0" />
     <PackageVersion Include="System.Collections" Version="4.3.0" />
