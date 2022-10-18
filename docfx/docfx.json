@@ -5,16 +5,13 @@
         {
           "cwd": "../",
           "files": [
-            "Mapsui/*.csproj",
-            "Mapsui.Geometries/*.csproj",
+            "Mapsui/*.csproj",            
+			"Mapsui.ArcGis/*.csproj",
+			"Mapsui.Extensions/*.csproj",
+			"Mapsui.Nts/*.csproj",
             "Mapsui.Rendering.Skia/*.csproj",
-            "Mapsui.Rendering.Xaml/*.csproj",
-            "Mapsui.UI.Uwp/*.csproj",
-            "Mapsui.UI.Wpf/*.csproj",
-            "Mapsui.UI.iOS/*.csproj",
-            "Mapsui.UI.Android/*.csproj",
-            "Mapsui.UI.Forms/*.csproj",
-            "Mapsui.Desktop/*.csproj"
+			"Mapsui.Tiling/*.csproj",            
+            "Mapsui.UI.*/*.csproj",            
           ],
           "exclude": [
             "**/obj/**",
