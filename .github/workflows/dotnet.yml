@@ -22,7 +22,8 @@ jobs:
       with:
         path:  |
           ~/.nuget/packages/*
-          !~/.nuget/packages/runtime*        
+          !~/.nuget/packages/runtime*
+          !~/.nuget/packages/uno*
         key: ${{ runner.os }}-nuget11-${{ hashFiles('**/*.csproj') }}
         restore-keys: |
             ${{ runner.os }}-nuget11-
