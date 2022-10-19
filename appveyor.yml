@@ -18,7 +18,10 @@ environment:
 nuget:
   disable_publish_on_pr: true
 cache:
-- '%USERPROFILE%\.nuget\packages -> **.sln, **.csproj'  # preserve nuget folder (packages) unless the solution or projects change
+- '%USERPROFILE%\.nuget\packages\Microsoft** -> **.sln, **.csproj'  # preserve nuget folder (packages) unless the solution or projects change
+- '%USERPROFILE%\.nuget\packages\SkiaSharp** -> **.sln, **.csproj'  # preserve nuget folder (packages) unless the solution or projects change 
+- '%USERPROFILE%\.nuget\packages\System** -> **.sln, **.csproj'  # preserve nuget folder (packages) unless the solution or projects change
+- '%USERPROFILE%\.nuget\packages\Xamarin** -> **.sln, **.csproj'  # preserve nuget folder (packages) unless the solution or projects change 
 install:
 - ps: Invoke-WebRequest 'https://dot.net/v1/dotnet-install.ps1' -OutFile 'dotnet-install.ps1';
 - ps: ./dotnet-install.ps1 -Version 6.0.401 -InstallDir "dotnetcli"
