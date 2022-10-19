@@ -20,11 +20,7 @@ jobs:
     # Cache Nugets
     - uses: actions/cache@v3
       with:
-        path:  |
-          ~/.nuget/packages/Microsoft*
-          ~/.nuget/packages/SkiaSharp* 
-          ~/.nuget/packages/System*
-          ~/.nuget/packages/Xamarin*        
+        path: ~/.nuget/packages     
         key: ${{ runner.os }}-nuget11-${{ hashFiles('**/*.csproj') }}
         restore-keys: |
             ${{ runner.os }}-nuget11-
@@ -117,8 +113,7 @@ jobs:
       with:
         name: nupkg.mac
         path: Artifacts/*.nupkg
-  ~/:
-    nuget/packages/:
+  
   winBuild:
     runs-on: windows-latest
     steps:
@@ -128,7 +123,11 @@ jobs:
     # Cache Nugets
     - uses: actions/cache@v3
       with:
-        path: ~/.nuget/packages
+        path: |
+          ~/.nuget/packages/Microsoft*
+          ~/.nuget/packages/SkiaSharp* 
+          ~/.nuget/packages/System*
+          ~/.nuget/packages/Xamarin*
         key: ${{ runner.os }}-nuget10-${{ hashFiles('**/*.csproj') }}
         restore-keys: |
             ${{ runner.os }}-nuget10-
