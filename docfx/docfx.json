@@ -11,7 +11,7 @@
 			"Mapsui.Nts/*.csproj",
             "Mapsui.Rendering.Skia/*.csproj",
 			"Mapsui.Tiling/*.csproj",            
-            "Mapsui.UI.*/*.csproj",            
+            "Mapsui.UI.*/*.csproj",            			
           ],
           "exclude": [
             "**/obj/**",
@@ -68,13 +68,17 @@
         ]
       }
     ],
+	"xrefService": [
+      "https://xref.docs.microsoft.com/query?uid={uid}"
+    ],
     "dest": "_site",
     "globalMetadataFiles": [ "metadata.json" ],
     "fileMetadataFiles": [],
+	"markdownEngineName": "markdig",
     "template": [
       "default"
     ],
-    "postProcessors": [],
+    "postProcessors": [ "ExtractSearchIndex" ],
     "noLangKeyword": false,
     "keepFileLink": false,
     "cleanupCacheHistory": false,
