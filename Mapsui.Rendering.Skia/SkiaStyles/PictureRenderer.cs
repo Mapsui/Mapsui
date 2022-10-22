@@ -29,7 +29,6 @@ namespace Mapsui.Rendering.Skia
             {
                 matrix = SKMatrix.CreateScaleTranslation(scaleX, scaleY, rect.Left, rect.Top);
             }
-            
 
             canvas.DrawPicture(picture, ref matrix, skPaint);
             if (dispose)
