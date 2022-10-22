@@ -16,6 +16,7 @@ using SkiaSharp;
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Toolchains.InProcess.Emit;
+using Mapsui.Utilities;
 
 #pragma warning disable IDISP001
 #pragma warning disable IDISP003
@@ -63,11 +64,15 @@ namespace Mapsui.Rendering.Benchmarks
             
             mapControl.Map = CreateMap(renderFormat, tiling);
 
+            // zoom to correct Zoom level
+            var resolution = ZoomHelper.ZoomOut(mapControl.Map.Resolutions, mapControl.Viewport.Resolution);
+            mapControl.Navigator?.ZoomTo(resolution);
+
             // fetch data first time
             var fetchInfo = new FetchInfo(mapControl.Viewport.Extent!, mapControl.Viewport.Resolution, mapControl.Map?.CRS);
             mapControl.Map?.RefreshData(fetchInfo);
             mapControl.Map?.Layers.WaitForLoadingAsync().Wait();
-            
+
             return mapControl;
         }
 
@@ -149,10 +154,10 @@ namespace Mapsui.Rendering.Benchmarks
             await map.WaitForLoadingAsync();
             mapRenderer.Render(skCanvas, map.Viewport, map.Map!.Layers, map.Map!.Widgets, Color.White);
         }
-        
+
         [Benchmark]
         public async Task RenderRasterizingPngAsync()
-        { 
+        {
             await rasterizingMap.WaitForLoadingAsync();
             mapRenderer.Render(skCanvas, rasterizingMap.Viewport, rasterizingMap.Map!.Layers, rasterizingMap.Map!.Widgets, Color.White);
         }
