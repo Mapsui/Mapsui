@@ -241,6 +241,8 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
         File.Exists(_file);
         {
             File.Delete(_file);    
+            // initialize the database again
+            InitDb();
         }
     }
 }
