@@ -95,7 +95,9 @@ namespace Mapsui.Rendering.Benchmarks
             {
                 if (tiling)
                 {
-                    layer = new RasterizingTileLayer(layer, persistentCache: new SqlitePersistentCache("Performance" + renderFormat), renderFormat: renderFormat.Value);
+                    var sqliteCache = new SqlitePersistentCache("Performance" + renderFormat);
+                    sqliteCache.Clear();
+                    layer = new RasterizingTileLayer(layer, persistentCache: sqliteCache, renderFormat: renderFormat.Value);
                 }
                 else
                 {
