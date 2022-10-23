@@ -8,8 +8,8 @@ using Avalonia.Markup.Xaml;
 using Mapsui.Extensions;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
-using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
+using Mapsui.Samples.Common.Utilities;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.Tiling;
 using Mapsui.UI;
@@ -30,10 +30,6 @@ namespace Mapsui.Samples.Avalonia.Views
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-
-            // Hack to tell the platform independent samples where the files can be found on Android.
-            MbTilesSample.MbTilesLocation = MbTilesLocationOnAvalonia;
-            MbTilesHelper.DeployMbTilesFile(s => File.Create(Path.Combine(MbTilesLocationOnAvalonia, s)));
 
             MapControl.Map!.Layers.Add(OpenStreetMap.CreateTileLayer());
             MapControl.Map.RotationLock = false;
@@ -109,8 +105,6 @@ namespace Mapsui.Samples.Avalonia.Views
 
             return radioButton;
         }
-
-        private static string MbTilesLocationOnAvalonia => Environment.GetFolderPath(Environment.SpecialFolder.Personal);
 
         private void RotationSliderOnPointerMoved(object? sender, PointerEventArgs e)
         {

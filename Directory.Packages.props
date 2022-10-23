@@ -9,13 +9,16 @@
     <PackageVersion Include="Avalonia.Desktop" Version="0.10.12" />
     <PackageVersion Include="Avalonia.Diagnostics" Version="0.10.12" />
     <PackageVersion Include="Avalonia.ReactiveUI" Version="0.10.12" />
+    <PackageVersion Include="BenchmarkDotNet" Version="0.13.2" />
     <PackageVersion Include="BitMiracle.LibTiff.NET" Version="2.4.649" />
+    <PackageVersion Include="BrotliSharpLib" Version="0.3.3" />
     <PackageVersion Include="BruTile" Version="5.0" />
     <PackageVersion Include="BruTile.MbTiles" Version="5.0" />
     <PackageVersion Include="coverlet.collector" Version="3.0.2" />
     <PackageVersion Include="DotSpatial.Projections" Version="4.0.656" />
     <PackageVersion Include="CommandLineParser" Version="2.8.0" />
     <PackageVersion Include="CommunityToolkit.Maui.Markup" Version="1.0.0" />
+    <PackageVersion Include="CommunityToolkit.Mvvm" Version="7.1.2" />
     <PackageVersion Include="Eto.Forms" Version="2.6.0" />
     <PackageVersion Include="Eto.Platform.Wpf" Version="2.6.0" />
     <PackageVersion Include="Eto.Platform.Windows" Version="2.6.0" />
@@ -71,7 +74,7 @@
     <PackageVersion Include="SkiaSharp.Views.WPF" Version="2.88.2" />
     <PackageVersion Include="SkiaSharp.Views.Forms.WPF" Version="2.88.2" />
     <PackageVersion Include="SkiaSharp.Views.WindowsForms" Version="2.88.2" />
-    <PackageVersion Include="sqlite-net-pcl" Version="1.6.292" />
+    <PackageVersion Include="sqlite-net-pcl" Version="1.8.116" />
     <PackageVersion Include="Svg.Skia" Version="0.5.12" />
     <PackageVersion Include="System.AppContext" Version="4.3.0" />
     <PackageVersion Include="System.Collections" Version="4.3.0" />
