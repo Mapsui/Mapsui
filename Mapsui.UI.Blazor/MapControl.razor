@@ -94,16 +94,16 @@ else
 
     private void OnMouseWheel(MouseEventArgs e)
     {
-        if (_map?.ZoomLock ?? true) return;
+        if (Map?.ZoomLock ?? true) return;
         if (!Viewport.HasSize) return;
 
         if (_lastY != null)
         {
             var delta = e.PageY - _lastY.Value;
-            var resolution = MouseWheelAnimation.GetResolution((int)delta, _viewport, _map);
+            var resolution = MouseWheelAnimation.GetResolution((int)delta, _viewport, Map);
 
             // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
-            resolution = _map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, _map.Resolutions, _map.Extent);
+            resolution = Map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, Map.Resolutions, Map.Extent);
             Navigator?.ZoomTo(resolution, e.Location().ToMapsui(), MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
         }
 

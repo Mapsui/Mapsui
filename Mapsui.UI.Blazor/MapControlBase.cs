@@ -13,7 +13,7 @@ namespace Mapsui.UI.Blazor
     /// https://stackoverflow.com/questions/60551182/how-to-add-a-partial-class-to-a-component-in-blazor-in-visual-studio-2019
     /// </summary>
     public abstract partial class MapControlBase : ComponentBase, IMapControl, IDisposable
-    {
+    {       
         // ReSharper disable once InconsistentNaming
         public static bool UseGPU { get; set; } = true;
 
