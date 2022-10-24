@@ -46,7 +46,7 @@ namespace Mapsui.Rendering.Benchmarks
             tilingSkpMap = CreateMapControl(RenderFormat.Skp);            
             tilingPngMap = CreateMapControl(RenderFormat.Png);
             tilingWebpMap = CreateMapControl(RenderFormat.WebP);
-            rasterizingPngMap = CreateMapControl(RenderFormat.Png, false);
+            rasterizingPngMap = CreateMapControl(RenderFormat.Png, false, true);
             rasterizingSkpMap = CreateMapControl(RenderFormat.Skp, false, true);
             rasterizingTilingSkpMap = CreateMapControl(RenderFormat.Skp, true, true);
             map = CreateMapControl();
