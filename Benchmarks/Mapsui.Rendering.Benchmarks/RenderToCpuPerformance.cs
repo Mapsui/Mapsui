@@ -111,7 +111,7 @@ namespace Mapsui.Rendering.Benchmarks
                 
                 if (rasterizing)
                 {
-                    layer = new RasterizingLayer(layer);
+                    layer = new RasterizingLayer(layer, renderFormat: renderFormat.Value);
                 }
             }
 
