@@ -32,7 +32,9 @@ namespace Mapsui.Rendering.Benchmarks
         private static readonly RegressionMapControl tilingPngMap;
         private static readonly RegressionMapControl tilingWebpMap;
         private static readonly RegressionMapControl map;
-        private static readonly RegressionMapControl rasterizingMap;
+        private static readonly RegressionMapControl rasterizingPngMap;
+        private static readonly RegressionMapControl rasterizingSkpMap;
+        private static readonly RegressionMapControl rasterizingTilingSkpMap;
         private static readonly MapRenderer mapRenderer;
         private readonly SKCanvas skCanvas;
         private readonly SKImageInfo imageInfo;
@@ -44,7 +46,9 @@ namespace Mapsui.Rendering.Benchmarks
             tilingSkpMap = CreateMapControl(RenderFormat.Skp);            
             tilingPngMap = CreateMapControl(RenderFormat.Png);
             tilingWebpMap = CreateMapControl(RenderFormat.WebP);
-            rasterizingMap = CreateMapControl(RenderFormat.Png, false);
+            rasterizingPngMap = CreateMapControl(RenderFormat.Png, false);
+            rasterizingSkpMap = CreateMapControl(RenderFormat.Skp, false, true);
+            rasterizingTilingSkpMap = CreateMapControl(RenderFormat.Skp, true, true);
             map = CreateMapControl();
         }
 
@@ -57,12 +61,12 @@ namespace Mapsui.Rendering.Benchmarks
             skCanvas = surface.Canvas;
         }
         
-        public static RegressionMapControl CreateMapControl(RenderFormat? renderFormat = null, bool tiling = true)
+        public static RegressionMapControl CreateMapControl(RenderFormat? renderFormat = null, bool tiling = true, bool rasterizing = false)
         {
             var mapControl = new RegressionMapControl();
             mapControl.SetSize(800, 600);
             
-            mapControl.Map = CreateMap(renderFormat, tiling);
+            mapControl.Map = CreateMap(renderFormat, tiling, rasterizing);
 
             // zoom to correct Zoom level
             var resolution = ZoomHelper.ZoomOut(mapControl.Map.Resolutions, mapControl.Viewport.Resolution);
@@ -76,7 +80,7 @@ namespace Mapsui.Rendering.Benchmarks
             return mapControl;
         }
 
-        private static Map CreateMap(RenderFormat? renderFormat = null, bool tiling = true)
+        private static Map CreateMap(RenderFormat? renderFormat = null, bool tiling = true, bool rasterizing = false)
         {
             var map = new Map();
 
@@ -104,7 +108,8 @@ namespace Mapsui.Rendering.Benchmarks
                     sqliteCache.Clear();
                     layer = new RasterizingTileLayer(layer, persistentCache: sqliteCache, renderFormat: renderFormat.Value);
                 }
-                else
+                
+                if (rasterizing)
                 {
                     layer = new RasterizingLayer(layer);
                 }
@@ -158,26 +163,40 @@ namespace Mapsui.Rendering.Benchmarks
         [Benchmark]
         public async Task RenderRasterizingPngAsync()
         {
-            await rasterizingMap.WaitForLoadingAsync();
-            mapRenderer.Render(skCanvas, rasterizingMap.Viewport, rasterizingMap.Map!.Layers, rasterizingMap.Map!.Widgets, Color.White);
+            await rasterizingPngMap.WaitForLoadingAsync();
+            mapRenderer.Render(skCanvas, rasterizingPngMap.Viewport, rasterizingPngMap.Map!.Layers, rasterizingPngMap.Map!.Widgets, Color.White);
+        }
+        
+        [Benchmark]
+        public async Task RenderRasterizingSkpAsync()
+        {
+            await rasterizingSkpMap.WaitForLoadingAsync();
+            mapRenderer.Render(skCanvas, rasterizingSkpMap.Viewport, rasterizingSkpMap.Map!.Layers, rasterizingSkpMap.Map!.Widgets, Color.White);
+        }
+        
+        [Benchmark]
+        public async Task RenderRasterizingTilingSkpAsync()
+        {
+            await rasterizingTilingSkpMap.WaitForLoadingAsync();
+            mapRenderer.Render(skCanvas, rasterizingTilingSkpMap.Viewport, rasterizingTilingSkpMap.Map!.Layers, rasterizingTilingSkpMap.Map!.Widgets, Color.White);
         }
 
         [Benchmark]
-        public async Task RenderRasterizingTilingPngAsync()
+        public async Task RenderTilingPngAsync()
         { 
             await tilingPngMap.WaitForLoadingAsync();
             mapRenderer.Render(skCanvas, tilingPngMap.Viewport, tilingPngMap.Map!.Layers, tilingPngMap.Map!.Widgets, Color.White);
         }
 
         [Benchmark]
-        public async Task RenderRasterizingTilingWebPAsync()
+        public async Task RenderTilingWebPAsync()
         {
             await tilingWebpMap.WaitForLoadingAsync();
             mapRenderer.Render(skCanvas, tilingWebpMap.Viewport, tilingWebpMap.Map!.Layers, tilingWebpMap.Map!.Widgets, Color.White);
         }
         
         [Benchmark]
-        public async Task RenderRasterizingTilingSkpAsync()
+        public async Task RenderTilingSkpAsync()
         {
             await tilingSkpMap.WaitForLoadingAsync();
             mapRenderer.Render(skCanvas, tilingSkpMap.Viewport, tilingSkpMap.Map!.Layers, tilingSkpMap.Map!.Widgets, Color.White);
