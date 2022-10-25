@@ -90,7 +90,12 @@ public class RasterizingTileProvider : ITileSource
             }
             finally
             {
+#if NET6_0_OR_GREATER
+                if (stream != null)
+                    await stream.DisposeAsync();
+#else                
                 stream?.Dispose();
+#endif
             }
 
             PersistentCache?.Add(index, result ?? Array.Empty<byte>());
