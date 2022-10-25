@@ -1,4 +1,5 @@
-﻿using Mapsui.Styles;
+﻿using System;
+using Mapsui.Styles;
 
 namespace Mapsui.Rendering.Skia.Cache
 {
@@ -22,6 +23,11 @@ namespace Mapsui.Rendering.Skia.Cache
         public object GetOrCreateTypeface(Font font)
         {
             return _labelCache.GetOrCreateTypeface(font);
+        }
+
+        public IBitmapInfo GetOrCreateLabel(string? text, LabelStyle style, float opacity, Func<LabelStyle, string?, float, ILabelCache, object> createLabelAsBitmap)
+        {
+            return _labelCache.GetOrCreateLabel(text, style, opacity, createLabelAsBitmap);
         }
     }
 }
