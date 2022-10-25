@@ -64,7 +64,7 @@ namespace Mapsui.Rendering.Skia
                     switch (bitmapInfo.Type)
                     {
                         case BitmapType.Bitmap:
-                            BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap, RoundToPixel(destination), opacity);
+                            BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap!, RoundToPixel(destination), opacity);
                             break;
                         case BitmapType.Picture:
                             PictureRenderer.Draw(canvas, bitmapInfo.Picture!, RoundToPixel(destination), opacity);
@@ -79,7 +79,7 @@ namespace Mapsui.Rendering.Skia
                     switch (bitmapInfo.Type)
                     {
                         case BitmapType.Bitmap:
-                            BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap, RoundToPixel(destination), opacity);
+                            BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap!, RoundToPixel(destination), opacity);
                             break;
                         case BitmapType.Picture:
                             PictureRenderer.Draw(canvas, bitmapInfo.Picture!, RoundToPixel(destination), opacity);
