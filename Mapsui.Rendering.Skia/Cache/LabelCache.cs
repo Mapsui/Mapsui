@@ -1,13 +1,17 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using Mapsui.Styles;
+using NetTopologySuite.GeometriesGraph;
 using SkiaSharp;
 
 namespace Mapsui.Rendering.Skia.Cache
 {
     public class LabelCache : ILabelCache
     {
-        private static readonly ConcurrentDictionary<string, SKTypeface> CacheTypeface = new();
+        private static readonly Dictionary<string, SKTypeface> CacheTypeface = new();
+        
+        private readonly IDictionary<string, BitmapInfo> LabelCache = new Dictionary<string, BitmapInfo>();
         
         public object GetOrCreateTypeface(Font font)
         {
@@ -21,6 +25,20 @@ namespace Mapsui.Rendering.Skia.Cache
             }
 
             return typeface;
+        }
+
+        public IBitmapInfo GetOrCreateLabel(string? text, LabelStyle style, float layerOpacity, Func<IBitmapInfo, LabelStyle, string?, float, ILabelCache> createLabelAsBitmap)
+        {
+            var key = text + "_" + style.Font.FontFamily + "_" + style.Font.Size + "_" + (float)style.Font.Size + "_" +
+                      style.BackColor + "_" + style.ForeColor + layerOpacity;
+
+            if (!LabelCache.TryGetValue(key, out var info))
+            {
+                info = new BitmapInfo { Bitmap = createLabelAsBitmap(style, text, layerOpacity, this) };
+                LabelCache[key] = info;
+            }
+
+            return info;
         }
     }
 }

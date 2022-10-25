@@ -17,9 +17,6 @@ namespace Mapsui.Rendering.Skia
 {
     public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     {
-        private readonly IDictionary<string, BitmapInfo> LabelCache =
-            new Dictionary<string, BitmapInfo>();
-
         private readonly SKPaint Paint = new()
         {
             IsAntialias = true,
@@ -32,13 +29,7 @@ namespace Mapsui.Rendering.Skia
         {
             var text = style.GetLabelText(feature);
 
-            var key = text + "_" + style.Font.FontFamily + "_" + style.Font.Size + "_" + (float)style.Font.Size + "_" +
-                      style.BackColor + "_" + style.ForeColor;
-
-            if (!LabelCache.Keys.Contains(key))
-                LabelCache[key] = new BitmapInfo { Bitmap = CreateLabelAsBitmap(style, text, layerOpacity, labelCache) };
-
-            var info = LabelCache[key];
+            var info = (BitmapInfo)labelCache.GetOrCreateLabel(text, style, layerOpacity, CreateLabelAsBitmap);
             var offsetX = style.Offset.IsRelative ? info.Width * style.Offset.X : style.Offset.X;
             var offsetY = style.Offset.IsRelative ? info.Height * style.Offset.Y : style.Offset.Y;
 
