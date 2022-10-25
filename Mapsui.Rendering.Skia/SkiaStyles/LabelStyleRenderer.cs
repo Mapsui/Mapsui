@@ -78,11 +78,15 @@ namespace Mapsui.Rendering.Skia
             return true;
         }
 
-        private SKImage CreateLabelAsBitmap(LabelStyle style, string? text, float layerOpacity, ILabelCache labelCache)
+        private IBitmapInfo CreateLabelAsBitmap(LabelStyle style, string? text, float layerOpacity, ILabelCache labelCache)
         {
             UpdatePaint(style, layerOpacity, Paint, labelCache);
 
-            return CreateLabelAsBitmap(style, text, Paint, layerOpacity);
+            var bitmap = CreateLabelAsBitmap(style, text, Paint, layerOpacity);
+            return new BitmapInfo
+            {
+                Bitmap = bitmap,
+            };
         }
 
         private static SKImage CreateLabelAsBitmap(LabelStyle style, string? text, SKPaint paint, float layerOpacity)

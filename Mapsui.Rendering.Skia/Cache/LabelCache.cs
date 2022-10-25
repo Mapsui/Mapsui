@@ -27,14 +27,14 @@ namespace Mapsui.Rendering.Skia.Cache
             return typeface;
         }
 
-        public IBitmapInfo GetOrCreateLabel(string? text, LabelStyle style, float layerOpacity, Func<IBitmapInfo, LabelStyle, string?, float, ILabelCache> createLabelAsBitmap)
+        public IBitmapInfo GetOrCreateLabel(string? text, LabelStyle style, float opacity, Func<IBitmapInfo, LabelStyle, string?, float, ILabelCache> createLabelAsBitmap)
         {
             var key = text + "_" + style.Font.FontFamily + "_" + style.Font.Size + "_" + (float)style.Font.Size + "_" +
-                      style.BackColor + "_" + style.ForeColor + layerOpacity;
+                      style.BackColor + "_" + style.ForeColor + opacity;
 
             if (!LabelCache.TryGetValue(key, out var info))
             {
-                info = new BitmapInfo { Bitmap = createLabelAsBitmap(style, text, layerOpacity, this) };
+                info = new BitmapInfo { Bitmap = createLabelAsBitmap(style, text, opacity, this) };
                 LabelCache[key] = info;
             }
 
