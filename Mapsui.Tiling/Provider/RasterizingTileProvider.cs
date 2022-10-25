@@ -199,7 +199,7 @@ public class RasterizingTileProvider : ITileSource
         {
             if (styleRenderer is IFeatureSize featureSize)
             {
-                var tempSize = featureSize.FeatureSize(feature, style, renderer.SymbolCache);
+                var tempSize = featureSize.FeatureSize(feature, style, renderer.RenderCache);
                 size = Math.Max(tempSize, size);
             }
         }

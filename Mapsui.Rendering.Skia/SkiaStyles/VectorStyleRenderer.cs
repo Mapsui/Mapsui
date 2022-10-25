@@ -12,7 +12,7 @@ namespace Mapsui.Rendering.Skia
 {
     public class VectorStyleRenderer : ISkiaStyleRenderer
     {
-        public bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, IStyle style, ISymbolCache symbolCache, long iteration)
+        public bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, IStyle style, IRenderCache renderCache, long iteration)
         {
             try
             {
@@ -33,13 +33,13 @@ namespace Mapsui.Rendering.Skia
                         {
                             case GeometryCollection collection:
                                 for (var i = 0; i < collection.NumGeometries; i++)
-                                    Draw(canvas, viewport, layer, new GeometryFeature(collection.GetGeometryN(i)), style, symbolCache, iteration);
+                                    Draw(canvas, viewport, layer, new GeometryFeature(collection.GetGeometryN(i)), style, renderCache, iteration);
                                 break;
                             case Point point:
-                                Draw(canvas, viewport, layer, new PointFeature(point.X, point.Y), style, symbolCache, iteration);
+                                Draw(canvas, viewport, layer, new PointFeature(point.X, point.Y), style, renderCache, iteration);
                                 break;
                             case Polygon polygon:
-                                PolygonRenderer.Draw(canvas, viewport, vectorStyle, feature, polygon, opacity, symbolCache);
+                                PolygonRenderer.Draw(canvas, viewport, vectorStyle, feature, polygon, opacity, renderCache);
                                 break;
                             case LineString lineString:
                                 LineStringRenderer.Draw(canvas, viewport, vectorStyle, lineString, opacity);

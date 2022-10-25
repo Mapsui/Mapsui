@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Runtime.InteropServices;
 using Mapsui.Layers;
+using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Styles;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
@@ -29,7 +30,7 @@ namespace Mapsui.Rendering.Skia.Tests
             feature["test"] = "Mapsui";
 
             using var skPaint = new SKPaint();
-            var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint);
+            var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, new RenderCache());
 
             Assert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize, 0));
         }
@@ -48,7 +49,7 @@ namespace Mapsui.Rendering.Skia.Tests
             feature["test"] = "Mapsui";
 
             using var skPaint = new SKPaint();
-            var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint);
+            var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, new RenderCache());
             
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
@@ -74,7 +75,7 @@ namespace Mapsui.Rendering.Skia.Tests
             feature["test"] = "Mapsui";
 
             using var skPaint = new SKPaint();
-            var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint);
+            var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, new RenderCache());
 
             Assert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize + 2 * 2, 0) );
         }
@@ -92,7 +93,7 @@ namespace Mapsui.Rendering.Skia.Tests
             feature["test"] = "Mapsui";
 
             using var skPaint = new SKPaint();
-            var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint);
+            var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, new RenderCache());
             
             Assert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize + 2 * 2, 0));
         }
@@ -110,7 +111,7 @@ namespace Mapsui.Rendering.Skia.Tests
             feature["test"] = "Mapsui";
 
             using var skPaint = new SKPaint();
-            var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint);
+            var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, new RenderCache());
             
             Assert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize + Math.Sqrt(2*2 + 2*2) * 2, 0));
         }
