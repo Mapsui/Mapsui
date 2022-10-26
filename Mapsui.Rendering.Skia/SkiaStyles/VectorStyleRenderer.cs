@@ -42,7 +42,7 @@ namespace Mapsui.Rendering.Skia
                                 PolygonRenderer.Draw(canvas, viewport, vectorStyle, feature, polygon, opacity, renderCache);
                                 break;
                             case LineString lineString:
-                                LineStringRenderer.Draw(canvas, viewport, vectorStyle, lineString, opacity);
+                                LineStringRenderer.Draw(canvas, viewport, vectorStyle, lineString, opacity, renderCache);
                                 break;
                             case null:
                                 throw new ArgumentException($"Geometry is null, Layer: {layer.Name}");

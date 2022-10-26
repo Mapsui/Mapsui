@@ -28,5 +28,10 @@ namespace Mapsui.Rendering.Skia.Cache
         {
             return _labelCache.GetOrCreateLabel(text, style, opacity, createLabelAsBitmap);
         }
+
+        public T GetOrCreatePaint<T>(Pen? pen, float opacity, Func<Pen?, float, T> createSkPaint) where T : class
+        {
+            return _vectorCache.GetOrCreatePaint(pen, opacity, createSkPaint);
+        }
     }
 }
