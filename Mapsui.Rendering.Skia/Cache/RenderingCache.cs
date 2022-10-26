@@ -19,12 +19,12 @@ namespace Mapsui.Rendering.Skia.Cache
             return _symbolCache.GetOrCreate(bitmapID);
         }
 
-        public object GetOrCreateTypeface(Font font)
+        public T GetOrCreateTypeface<T>(Font font, Func<Font, T> createTypeFace) where T : class
         {
-            return _labelCache.GetOrCreateTypeface(font);
+            return _labelCache.GetOrCreateTypeface(font, createTypeFace);
         }
 
-        public IBitmapInfo GetOrCreateLabel(string? text, LabelStyle style, float opacity, Func<LabelStyle, string?, float, ILabelCache, object> createLabelAsBitmap)
+        public T GetOrCreateLabel<T>(string? text, LabelStyle style, float opacity, Func<LabelStyle, string?, float, ILabelCache, T> createLabelAsBitmap) where T : IBitmapInfo
         {
             return _labelCache.GetOrCreateLabel(text, style, opacity, createLabelAsBitmap);
         }
