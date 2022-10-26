@@ -11,34 +11,31 @@ namespace Mapsui.Rendering.Skia.Cache
     {
         private readonly Dictionary<Font, object> _cacheTypeface = new();
         
-        private readonly IDictionary<string, IBitmapInfo> _labelCache = new Dictionary<string, IBitmapInfo>();
+        private readonly Dictionary<(string? Text, Font Font, Brush? BackColor, Color ForeColor, float Opacity), IBitmapInfo> _labelCache = new();
         
-        public object GetOrCreateTypeface(Font font)
+        public T GetOrCreateTypeface<T>(Font font, Func<Font, T> createTypeFace)
+            where T : class
         {
             if (!_cacheTypeface.TryGetValue(font, out var typeface))
             {
-                typeface = SKTypeface.FromFamilyName(font.FontFamily,
-                    font.Bold ? SKFontStyleWeight.Bold : SKFontStyleWeight.Normal,
-                    SKFontStyleWidth.Normal,
-                    font.Italic ? SKFontStyleSlant.Italic : SKFontStyleSlant.Upright);
+                typeface = createTypeFace(font);
                 _cacheTypeface[font] = typeface;
             }
 
-            return typeface;
+            return (T)typeface;
         }
 
-        public IBitmapInfo GetOrCreateLabel(string? text, LabelStyle style, float layerOpacity, Func<LabelStyle, string?, float, ILabelCache, object> createLabelAsBitmap)
+        public T GetOrCreateLabel<T>(string? text, LabelStyle style, float layerOpacity, Func<LabelStyle, string?, float, ILabelCache, T> createLabelAsBitmap)
+            where T : IBitmapInfo
         {
-            var key = text + "_" + style.Font.FontFamily + "_" + style.Font.Size + "_" + (float)style.Font.Size + "_" +
-                      style.BackColor + "_" + style.ForeColor + layerOpacity;
-
+            var key =  (text, style.Font, style.BackColor, style.ForeColor, layerOpacity);
             if (!_labelCache.TryGetValue(key, out var info))
             {
-                info = new BitmapInfo { Bitmap = (SKImage?)createLabelAsBitmap(style, text, layerOpacity, this) };
+                info = createLabelAsBitmap(style, text, layerOpacity, this);
                 _labelCache[key] = info;
             }
 
-            return info;
+            return (T)info;
         }
     }
 }

@@ -29,13 +29,21 @@ namespace Mapsui.Rendering.Skia
         {
             var text = style.GetLabelText(feature);
 
-            var info = (BitmapInfo)labelCache.GetOrCreateLabel(text, style, layerOpacity, CreateLabelAsBitmap);
+            var info = labelCache.GetOrCreateLabel(text, style, layerOpacity, CreateLabelAsBitmap);
             var offsetX = style.Offset.IsRelative ? info.Width * style.Offset.X : style.Offset.X;
             var offsetY = style.Offset.IsRelative ? info.Height * style.Offset.Y : style.Offset.Y;
 
             BitmapRenderer.Draw(canvas, info.Bitmap, (int)Math.Round(x), (int)Math.Round(y),
                 offsetX: (float)offsetX, offsetY: (float)-offsetY,
                 horizontalAlignment: style.HorizontalAlignment, verticalAlignment: style.VerticalAlignment);
+        }
+        
+        public static SKTypeface CreateTypeFace(Font font)
+        {
+            return SKTypeface.FromFamilyName(font.FontFamily,
+                font.Bold ? SKFontStyleWeight.Bold : SKFontStyleWeight.Normal,
+                SKFontStyleWidth.Normal,
+                font.Italic ? SKFontStyleSlant.Italic : SKFontStyleSlant.Upright);
         }
 
 
@@ -78,7 +86,7 @@ namespace Mapsui.Rendering.Skia
             return true;
         }
 
-        private IBitmapInfo CreateLabelAsBitmap(LabelStyle style, string? text, float layerOpacity, ILabelCache labelCache)
+        private BitmapInfo CreateLabelAsBitmap(LabelStyle style, string? text, float layerOpacity, ILabelCache labelCache)
         {
             UpdatePaint(style, layerOpacity, Paint, labelCache);
 
@@ -307,7 +315,7 @@ namespace Mapsui.Rendering.Skia
 
         private static void UpdatePaint(LabelStyle style, float layerOpacity, SKPaint paint, ILabelCache labelCache)
         {
-            var typeface = (SKTypeface)labelCache.GetOrCreateTypeface(style.Font);
+            var typeface = labelCache.GetOrCreateTypeface(style.Font, CreateTypeFace);
 
             paint.Style = SKPaintStyle.Fill;
             paint.TextSize = (float)style.Font.Size;

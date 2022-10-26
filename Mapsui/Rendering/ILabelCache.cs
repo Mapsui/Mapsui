@@ -5,7 +5,9 @@ namespace Mapsui.Rendering
 {
     public interface ILabelCache
     {
-        object GetOrCreateTypeface(Font font);
-        IBitmapInfo GetOrCreateLabel(string? text, LabelStyle style, float opacity, Func<LabelStyle, string?, float, ILabelCache, object> createLabelAsBitmap);
+        T GetOrCreateTypeface<T>(Font font, Func<Font, T> createTypeFace)
+            where T : class;
+        T GetOrCreateLabel<T>(string? text, LabelStyle style, float opacity, Func<LabelStyle, string?, float, ILabelCache, T> createLabelAsBitmap)
+            where T : IBitmapInfo;
     }
 }
