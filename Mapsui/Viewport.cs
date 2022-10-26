@@ -209,8 +209,15 @@ namespace Mapsui
             return (newX, newY);
         }
 
-        /// <inheritdoc />
-        public (double screenX, double screenY) WorldToScreenUnrotated(double worldX, double worldY)
+        /// <summary>
+        /// Converts X/Y in map units to a point in device independent units (or DIP or DP),
+        /// respecting rotation
+        /// </summary>
+        /// <param name="worldX">X coordinate in map units</param>
+        /// <param name="worldY">Y coordinate in map units</param>
+        /// <returns>The x and y in screen pixels</returns>
+
+        private (double screenX, double screenY) WorldToScreenUnrotated(double worldX, double worldY)
         {
             var screenCenterX = Width / 2.0;
             var screenCenterY = Height / 2.0;
@@ -250,7 +257,7 @@ namespace Mapsui
 
             if (deltaResolution != 1)
             {
-                Resolution = Resolution / deltaResolution;
+                _resolution = Resolution / deltaResolution;
 
                 // Calculate current position again with adjusted resolution
                 // Zooming should be centered on the place where the map is touched.
@@ -262,17 +269,17 @@ namespace Mapsui
                 newY -= scaleCorrectionY;
             }
 
-            CenterX = newX;
-            CenterY = newY;
+            _centerX = newX;
+            _centerY = newY;
 
             if (deltaRotation != 0)
             {
                 current = ScreenToWorld(positionScreen.X, positionScreen.Y); // calculate current position again with adjusted resolution
-                Rotation += deltaRotation;
+                _rotation += deltaRotation;
                 var postRotation = ScreenToWorld(positionScreen.X, positionScreen.Y); // calculate current position again with adjusted resolution
 
-                CenterX = _centerX - (postRotation.X - current.X);
-                CenterY = _centerY - (postRotation.Y - current.Y);
+                _centerX = _centerX - (postRotation.X - current.X);
+                _centerY = _centerY - (postRotation.Y - current.Y);
             }
         }
 
@@ -387,7 +394,7 @@ namespace Mapsui
                 return;
 
             if (duration == 0)
-                Resolution = resolution;
+                _resolution = resolution;
             else
             {
                 _animations = ZoomAnimation.Create(this, resolution, duration, easing);
@@ -404,7 +411,7 @@ namespace Mapsui
             if (Rotation == rotation) return;
 
             if (duration == 0)
-                Rotation = rotation;
+                _rotation = rotation;
             else
             {
                 _animations = RotateAnimation.Create(this, rotation, duration, easing);
