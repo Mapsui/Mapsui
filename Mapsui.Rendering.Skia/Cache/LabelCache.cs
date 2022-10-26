@@ -9,19 +9,19 @@ namespace Mapsui.Rendering.Skia.Cache
 {
     public class LabelCache : ILabelCache
     {
-        private readonly Dictionary<string, SKTypeface> _cacheTypeface = new();
+        private readonly Dictionary<Font, object> _cacheTypeface = new();
         
-        private readonly IDictionary<string, BitmapInfo> _labelCache = new Dictionary<string, BitmapInfo>();
+        private readonly IDictionary<string, IBitmapInfo> _labelCache = new Dictionary<string, IBitmapInfo>();
         
         public object GetOrCreateTypeface(Font font)
         {
-            if (!_cacheTypeface.TryGetValue(font.ToString(), out var typeface))
+            if (!_cacheTypeface.TryGetValue(font, out var typeface))
             {
                 typeface = SKTypeface.FromFamilyName(font.FontFamily,
                     font.Bold ? SKFontStyleWeight.Bold : SKFontStyleWeight.Normal,
                     SKFontStyleWidth.Normal,
                     font.Italic ? SKFontStyleSlant.Italic : SKFontStyleSlant.Upright);
-                _cacheTypeface[font.ToString()] = typeface;
+                _cacheTypeface[font] = typeface;
             }
 
             return typeface;
