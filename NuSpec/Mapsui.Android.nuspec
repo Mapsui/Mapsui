@@ -7,7 +7,7 @@
 		<authors>Paul den Dulk</authors>
 		<owners>Paul den Dulk</owners>
 		<projectUrl>https://github.com/Mapsui/Mapsui</projectUrl>
-		<licenseUrl>https://github.com/Mapsui/Mapsui/blob/master/LICENSE</licenseUrl>
+		<license type="expression">MIT</license>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>
 			Xamarin Android map components based on the Mapsui library
