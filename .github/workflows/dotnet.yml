@@ -37,14 +37,14 @@ jobs:
     #     echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV
     #     sudo xcode-select -s $XCODE_ROOT
     - name: Setup Xcode version
-      uses: maxim-lobanov/setup-xcode@v1.4.1
+      uses: maxim-lobanov/setup-xcode@v1.5.1
       with:
-        xcode-version: latest-stable
+        xcode-version: '14.0'
     - name: Setup .NET Core SDK
       uses: actions/setup-dotnet@v2
       with:
          dotnet-version: |
-           6.0.401
+           6.0.402
          include-prerelease: false    
     - name: install maui macos android ios maccatalyst wasm-tools
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools
@@ -131,7 +131,7 @@ jobs:
       uses: actions/setup-dotnet@v2
       with:
          dotnet-version: |
-           6.0.401
+           6.0.402
          include-prerelease: false
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.0.6

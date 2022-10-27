@@ -5,6 +5,6 @@
     "rollForward": "latestPatch"
   },
   "tools": {
-    "dotnet": "6.0.401"
+    "dotnet": "6.0.402"
   }
 }

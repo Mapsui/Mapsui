@@ -8,7 +8,7 @@
     <title>Resolution </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Resolution ">
-    <meta name="generator" content="docfx 2.58.9.0">
+    <meta name="generator" content="docfx 2.59.4.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -83,18 +83,18 @@
 <h3 id="the-resolution-of-the-mapsui-viewport">The resolution of the Mapsui viewport</h3>
 <p>The Viewport is an important class in Mapsui. It has a Resolution field. Its value can be directly derived from the coordinate extent and the size in pixels. So Viewport.Resolution will always be equal to Viewport.Extent.Width / Viewport.Width. The Viewport.Extent is in the units of the coordinate system (different apps can use different coordinate systems) and the Viewport.Width/Height is in pixels.</p>
 <h3 id="the-resolution-in-openstreetmap">The resolution in openstreetmap</h3>
-<p>Mapsui&#39;s resolution concept is derived from the value for zoom levels used in openstreetmap <a href="https://wiki.openstreetmap.org/wiki/Zoom_levels">tile schema</a>. Openstreetmap uses the EPSG:3857 coordinate system (called SphericMercator within Mapsui). The full width of that coordinate system is 40075017 units. The top level tile in openstreetmap is 256x256 pixels. So the top level tile has a resolution of 40075017 / 256 = 156543 if is shown unscaled.</p>
+<p>Mapsui's resolution concept is derived from the value for zoom levels used in openstreetmap <a href="https://wiki.openstreetmap.org/wiki/Zoom_levels">tile schema</a>. Openstreetmap uses the EPSG:3857 coordinate system (called SphericMercator within Mapsui). The full width of that coordinate system is 40075017 units. The top level tile in openstreetmap is 256x256 pixels. So the top level tile has a resolution of 40075017 / 256 = 156543 if is shown unscaled.</p>
 <h3 id="scale-in-meters--pixel-in-openstreetmap">Scale in meters / pixel in openstreetmap</h3>
 <p>The coordinates of EPSG:3857 happen to be based on the circumference of the earth in meters at the equator which is <a href="https://en.wikipedia.org/wiki/Earth%27s_circumference">40075017 meters</a>. This means that near the equator the units of EPSG:3875 are equal to meters. It starts to deviate when moving away from the equator. Also note that other coordinate systems can have completely different unit sizes. So the relation between the coordinate system used and meters is complicated.</p>
-<h3 id="i-am-just-interested-in-meters--pixel-and-dont-care-about-the-coordinate-system">I am just interested in meters / pixel and don&#39;t care about the coordinate system</h3>
+<h3 id="i-am-just-interested-in-meters--pixel-and-dont-care-about-the-coordinate-system">I am just interested in meters / pixel and don't care about the coordinate system</h3>
 <p>That makes sense but at the moment there is no good solution for that in Mapsui. What makes this complicated:</p>
 <ul>
 <li>The meters / pixel can be different in the x and y direction because of distortion of the map projection.</li>
 <li>The meters / pixel can be different for different locations within a single map view.</li>
-<li>To implement this for a coordinate system we need projection support for that coordinate system, which we may not have. </li>
+<li>To implement this for a coordinate system we need projection support for that coordinate system, which we may not have.</li>
 </ul>
 <h3 id="what-is-a-pixel">What is a pixel?</h3>
-<p>When we talk about pixels on this page we mean device independent pixels or <a href="device-independent-units.html">device independent units</a> </p>
+<p>When we talk about pixels on this page we mean device independent pixels or <a href="device-independent-units.html">device independent units</a></p>
 </article>
           </div>
           
