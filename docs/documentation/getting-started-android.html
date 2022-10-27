@@ -80,11 +80,12 @@
 <h1 id="mapsui-android-getting-started">Mapsui Android getting started</h1>
 
 <h3 id="step-1">Step 1</h3>
-<p>Create &#39;Blank App (Android)&#39; in Visual Studio</p>
+<p>Create 'Blank App (Android)' in Visual Studio</p>
 <h3 id="step-2">Step 2</h3>
 <p>In the package manager console type:</p>
 <pre><code>PM&gt; Install-Package Mapsui.Android -pre
-</code></pre><h3 id="step-3">Step 3</h3>
+</code></pre>
+<h3 id="step-3">Step 3</h3>
 <p>In Resources/layout/Main.axml add Mapsui.UI.Android.MapControl:</p>
 <pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
@@ -96,7 +97,8 @@
            android:layout_width=&quot;match_parent&quot;
            android:layout_height=&quot;match_parent&quot; /&gt;
 &lt;/LinearLayout&gt;
-</code></pre><h3 id="step-4">Step 4</h3>
+</code></pre>
+<h3 id="step-4">Step 4</h3>
 <p>In MainActivity.cs add MapControl after SetContentView(Resource.Layout.Main):</p>
 <pre><code>protected override void OnCreate(Bundle savedInstanceState)
 {
@@ -111,11 +113,13 @@
     map.Layers.Add(OpenStreetMap.CreateTileLayer());
     mapControl.Map = map;
 }
-</code></pre><p>Add the following using statements:</p>
+</code></pre>
+<p>Add the following using statements:</p>
 <pre><code>using Mapsui;
 using Mapsui.Utilities;
 using Mapsui.UI.Android;
-</code></pre><h3 id="step-5">Step 5:</h3>
+</code></pre>
+<h3 id="step-5">Step 5:</h3>
 <p>Run it and you should see a map of the world.</p>
 </article>
           </div>

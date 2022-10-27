@@ -79,28 +79,29 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="v20-upgrade-guide">v2.0 upgrade guide</h1>
 
-<p>This is the incomplete upgrade guide from v1.4 to v2.0. 
-The most apparent changes will be mentioned here. If you notice 
+<p>This is the incomplete upgrade guide from v1.4 to v2.0.
+The most apparent changes will be mentioned here. If you notice
 important things missing then please post an issue.</p>
 <h4 id="moved-from-pcl-to-net-standard-20">Moved from PCL to .NET Standard 2.0</h4>
 <p>Look up compatible frameworks in <a href="https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support">this table</a>.</p>
 <h4 id="viewport-moved-from-map-to-mapcontrol-and-is-readonly">Viewport moved from Map to MapControl and is readonly</h4>
 <p>Use MapControl.Navigator instead.</p>
 <h4 id="moved-mapcontrolnavigateto-methods-to-mapcontrolnavigator">Moved MapControl.NavigateTo methods to MapControl.Navigator</h4>
-<p>All user map manipulation should go the the Navigator. </p>
+<p>All user map manipulation should go the the Navigator.</p>
 <h4 id="introduced-maphome-to-initialze-the-map-viewport">Introduced Map.Home to initialze the map viewport</h4>
 <p>There is now a Home delegate on the Map object that should be used to set
-the initial state of the map. </p>
+the initial state of the map.</p>
 <pre><code class="lang-c#">MapControl.Map.Home = n =&gt; n.NavigateTo(myCenter, myResolution);
-</code></pre><p><strong>Reason:</strong> This is because in some cases the Navigate
+</code></pre>
+<p><strong>Reason:</strong> This is because in some cases the Navigate
 methods depend on the envelope and resolutions of the layers and in some
 cases it takes time for these layers to load their data.</p>
 <h4 id="added-mappanlock-mapzoomlock-and-maprotationlock">Added Map.PanLock, Map.ZoomLock and Map.RotationLock</h4>
-<p>The lock fields can be used on all platforms to lock the user from 
+<p>The lock fields can be used on all platforms to lock the user from
 a certain kind of map manipulation.</p>
 <h4 id="added-maplimiter-to-limit-the-extent-to-which-the-user-can-navigate">Added Map.Limiter to limit the extent to which the user can navigate</h4>
 <p>The Limter is an implementation of IViewportLimiter. There are currently
-three limiters part of Mapsui: </p>
+three limiters part of Mapsui:</p>
 <ul>
 <li>ViewportLimiter (default)</li>
 <li>ViewportLimiterKeepWithin</li>
@@ -119,13 +120,13 @@ These methods should only be needed if you manipulate data somehow in your own c
 <h4 id="the-info-event-was-moved-from-map-to-mapcontrol">The Info event was moved from Map to MapControl</h4>
 <p>The MapControl contains most other events as well</p>
 <h4 id="removed-the-infolayer-list-and-add-an-infolayer-boolean-on-ilayer">Removed the InfoLayer list and add an InfoLayer boolean on ILayer</h4>
-<p>To indicate that a layer is a info layer you now need to set it&#39;s 
+<p>To indicate that a layer is a info layer you now need to set it's
 InfoLayer property. In v1.4 it had to be added to the list of InfoLayers.</p>
 <h4 id="removed-the-hoverlayer-method">Removed the HoverLayer method.</h4>
 <p>This is because hover could not be implemented crossplatform and could harm performance.
 It it is still possible to implement hover yourself using a direct call to MapControl.GetMapInfo.</p>
 <h4 id="invert-label-alignment-bottomtop">Invert label alignment bottom/top.</h4>
-<p>This was incorrect in v1.4. This will not cause a compile error so don&#39;t forget
+<p>This was incorrect in v1.4. This will not cause a compile error so don't forget
 to do a search-replace to fix it.</p>
 <h4 id="removed-zoominzoomout-from-wpf-mapcontrol">Removed ZoomIn/ZoomOut from WPF MapControl</h4>
 <p>Use the ZoomIn/ZoomOut methode on the navigator.</p>
@@ -136,10 +137,10 @@ to do a search-replace to fix it.</p>
 <li>Remove WPFs MapControl.ErrorMessage</li>
 <li>Rename PanMode.None and ZoomMode.None.</li>
 <li>Remove the InfoLayer list and add an InfoLayer boolean on ILayer</li>
-<li>Remove the HoverLayer method. It is not crossplatform and can affect performance. </li>
+<li>Remove the HoverLayer method. It is not crossplatform and can affect performance.</li>
 <li>Wrap Viewport in LimitingViewport which limits it to user settings, or access through Navigator.</li>
-<li>PanLock and ZoomLock working on all platforms. </li>
-<li>Rework ViewportLimiter </li>
+<li>PanLock and ZoomLock working on all platforms.</li>
+<li>Rework ViewportLimiter</li>
 </ul>
 </article>
           </div>

@@ -84,14 +84,16 @@
 <h3 id="step-2">Step 2</h3>
 <p>In the package manager console type:</p>
 <pre><code class="lang-console">PM&gt; Install-Package Mapsui.Avalonia -pre
-</code></pre><h3 id="step-3">Step 3</h3>
+</code></pre>
+<h3 id="step-3">Step 3</h3>
 <p>In MainWindow.axaml.cs add this to the constructor <strong>after</strong> InitializeComponent()::</p>
 <pre><code class="lang-csharp">   var mapControl = new Mapsui.UI.Avalonia.MapControl();
 
    mapControl.Map?.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
 
    Content = mapControl;
-</code></pre><h3 id="step-4">Step 4</h3>
+</code></pre>
+<h3 id="step-4">Step 4</h3>
 <p>Run it and you should see a map of the world.</p>
 </article>
           </div>

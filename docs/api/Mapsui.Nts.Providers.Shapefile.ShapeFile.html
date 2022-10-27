@@ -94,37 +94,13 @@
   <div class="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Mapsui.Providers.IProvider.html">IProvider</a></div>
-    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
-  </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">Object.Equals(Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">Object.Equals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode#system-object-gethashcode">Object.GetHashCode()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype">Object.GetType()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone">Object.MemberwiseClone()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals#system-object-referenceequals(system-object-system-object)">Object.ReferenceEquals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring#system-object-tostring">Object.ToString()</a>
-    </div>
+    <div><span class="xref">IDisposable</span></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.Nts.Providers.Shapefile.html">Mapsui.Nts.Providers.Shapefile</a></h6>
   <h6><strong>Assembly</strong>: Mapsui.Nts.dll</h6>
   <h5 id="Mapsui_Nts_Providers_Shapefile_ShapeFile_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class ShapeFile : IProvider, IDisposable</code></pre>
+    <pre><code class="lang-csharp hljs">public class ShapeFile : object, IProvider</code></pre>
   </div>
   <h5 id="Mapsui_Nts_Providers_Shapefile_ShapeFile_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>The ShapeFile provider is used for accessing ESRI ShapeFiles. The ShapeFile should at least contain the
@@ -215,7 +191,7 @@ start-up time when the cache has been emptied.
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string CRS { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string? CRS { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -227,7 +203,7 @@ start-up time when the cache has been emptied.
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullable-1">Nullable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -246,7 +222,7 @@ start-up time when the cache has been emptied.
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Encoding Encoding { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public Encoding? Encoding { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -258,7 +234,7 @@ start-up time when the cache has been emptied.
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.text.encoding">Encoding</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullable-1">Nullable</a>&lt;<span class="xref">Encoding</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -363,10 +339,10 @@ start-up time when the cache has been emptied.
     </tbody>
   </table>
   <h5 id="Mapsui_Nts_Providers_Shapefile_ShapeFile_ShapeType_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>The property isn&apos;t set until the first time the data source has been opened,
-and will throw an exception if this property has been called since initialization. 
+  <div class="markdown level1 remarks"><p>The property isn't set until the first time the data source has been opened,
+and will throw an exception if this property has been called since initialization.</p>
 <p>All the non-Null shapes in a shapefile are required to be of the same shape
-type.</p></p>
+type.</p>
 </div>
   <h3 id="methods">Methods
   </h3>
@@ -435,19 +411,19 @@ type.</p></p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Nts_Providers_Shapefile_ShapeFile_GetFeature_System_UInt32_System_Collections_Generic_List_Mapsui_Nts_GeometryFeature__.md&amp;value=---%0Auid%3A%20Mapsui.Nts.Providers.Shapefile.ShapeFile.GetFeature(System.UInt32%2CSystem.Collections.Generic.List%7BMapsui.Nts.GeometryFeature%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Nts_Providers_Shapefile_ShapeFile_GetFeature_System_UInt32_System_Nullable_List_Mapsui_Nts_GeometryFeature___.md&amp;value=---%0Auid%3A%20Mapsui.Nts.Providers.Shapefile.ShapeFile.GetFeature(System.UInt32%2CSystem.Nullable%7BList%7BMapsui.Nts.GeometryFeature%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Nts/Providers/Shapefile/ShapeFile.cs/#L859">View Source</a>
   </span>
   <a id="Mapsui_Nts_Providers_Shapefile_ShapeFile_GetFeature_" data-uid="Mapsui.Nts.Providers.Shapefile.ShapeFile.GetFeature*"></a>
-  <h4 id="Mapsui_Nts_Providers_Shapefile_ShapeFile_GetFeature_System_UInt32_System_Collections_Generic_List_Mapsui_Nts_GeometryFeature__" data-uid="Mapsui.Nts.Providers.Shapefile.ShapeFile.GetFeature(System.UInt32,System.Collections.Generic.List{Mapsui.Nts.GeometryFeature})">GetFeature(UInt32, List&lt;GeometryFeature&gt;)</h4>
+  <h4 id="Mapsui_Nts_Providers_Shapefile_ShapeFile_GetFeature_System_UInt32_System_Nullable_List_Mapsui_Nts_GeometryFeature___" data-uid="Mapsui.Nts.Providers.Shapefile.ShapeFile.GetFeature(System.UInt32,System.Nullable{List{Mapsui.Nts.GeometryFeature}})">GetFeature(UInt32, Nullable&lt;List&lt;GeometryFeature&gt;&gt;)</h4>
   <div class="markdown level1 summary"><p>Gets a data row from the data source at the specified index belonging to the specified datatable</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public GeometryFeature GetFeature(uint rowId, List&lt;GeometryFeature&gt; features = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public GeometryFeature GetFeature(uint rowId, List&lt;GeometryFeature&gt;? features = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -465,7 +441,7 @@ type.</p></p>
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Mapsui.Nts.GeometryFeature.html">GeometryFeature</a>&gt;</td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullable-1">Nullable</a>&lt;<span class="xref">List</span>&lt;<a class="xref" href="Mapsui.Nts.GeometryFeature.html">GeometryFeature</a>&gt;&gt;</td>
         <td><span class="parametername">features</span></td>
         <td><p>Data table to feature should belong to.</p>
 </td>
@@ -560,7 +536,7 @@ type.</p></p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Mapsui.IFeature.html">IFeature</a>&gt;&gt;</td>
+        <td><span class="xref">Task</span>&lt;<span class="xref">IEnumerable</span>&lt;<a class="xref" href="Mapsui.IFeature.html">IFeature</a>&gt;&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -574,7 +550,7 @@ type.</p></p>
   </span>
   <a id="Mapsui_Nts_Providers_Shapefile_ShapeFile_GetGeometriesInView_" data-uid="Mapsui.Nts.Providers.Shapefile.ShapeFile.GetGeometriesInView*"></a>
   <h4 id="Mapsui_Nts_Providers_Shapefile_ShapeFile_GetGeometriesInView_Mapsui_MRect_" data-uid="Mapsui.Nts.Providers.Shapefile.ShapeFile.GetGeometriesInView(Mapsui.MRect)">GetGeometriesInView(MRect)</h4>
-  <div class="markdown level1 summary"><p>Returns geometries whose bounding box intersects &apos;bbox&apos;</p>
+  <div class="markdown level1 summary"><p>Returns geometries whose bounding box intersects 'bbox'</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -608,7 +584,7 @@ type.</p></p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1">Collection</a>&lt;<span class="xref">NetTopologySuite.Geometries.Geometry</span>&gt;</td>
+        <td><span class="xref">Collection</span>&lt;<span class="xref">Geometry</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -633,7 +609,7 @@ are performed on objects simplified by their BoundingBox, and using the Spatial 
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Geometry GetGeometry(uint oid)</code></pre>
+    <pre><code class="lang-csharp hljs">public Geometry? GetGeometry(uint oid)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -663,7 +639,7 @@ are performed on objects simplified by their BoundingBox, and using the Spatial 
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">NetTopologySuite.Geometries.Geometry</span></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullable-1">Nullable</a>&lt;<span class="xref">Geometry</span>&gt;</td>
         <td><p>geometry</p>
 </td>
       </tr>
@@ -678,7 +654,7 @@ are performed on objects simplified by their BoundingBox, and using the Spatial 
   </span>
   <a id="Mapsui_Nts_Providers_Shapefile_ShapeFile_GetObjectIDsInView_" data-uid="Mapsui.Nts.Providers.Shapefile.ShapeFile.GetObjectIDsInView*"></a>
   <h4 id="Mapsui_Nts_Providers_Shapefile_ShapeFile_GetObjectIDsInView_Mapsui_MRect_" data-uid="Mapsui.Nts.Providers.Shapefile.ShapeFile.GetObjectIDsInView(Mapsui.MRect)">GetObjectIDsInView(MRect)</h4>
-  <div class="markdown level1 summary"><p>Returns geometry Object IDs whose bounding box intersects &apos;bbox&apos;</p>
+  <div class="markdown level1 summary"><p>Returns geometry Object IDs whose bounding box intersects 'bbox'</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -712,7 +688,7 @@ are performed on objects simplified by their BoundingBox, and using the Spatial 
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.objectmodel.collection-1">Collection</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">UInt32</a>&gt;</td>
+        <td><span class="xref">Collection</span>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.uint32">UInt32</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -739,7 +715,7 @@ uses a file-based index the file is rewritten to disk.</p>
       <a class="xref" href="Mapsui.Providers.IProvider.html">IProvider</a>
   </div>
   <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.idisposable">System.IDisposable</a>
+      <span class="xref">IDisposable</span>
   </div>
 </article>
           </div>

@@ -97,35 +97,11 @@
     <div><a class="xref" href="Mapsui.IReadOnlyViewport.html">IReadOnlyViewport</a></div>
     <div><a class="xref" href="Mapsui.Animations.IAnimatable.html">IAnimatable</a></div>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">Object.Equals(Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">Object.Equals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode#system-object-gethashcode">Object.GetHashCode()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype">Object.GetType()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone">Object.MemberwiseClone()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals#system-object-referenceequals(system-object-system-object)">Object.ReferenceEquals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring#system-object-tostring">Object.ToString()</a>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.html">Mapsui</a></h6>
   <h6><strong>Assembly</strong>: Mapsui.dll</h6>
   <h5 id="Mapsui_Viewport_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class Viewport : IViewport, IReadOnlyViewport, IAnimatable</code></pre>
+    <pre><code class="lang-csharp hljs">public class Viewport : object, IViewport, IReadOnlyViewport, IAnimatable</code></pre>
   </div>
   <h5 id="Mapsui_Viewport_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>Viewport is the connection between Map and MapControl. It tells MapControl,
@@ -435,8 +411,8 @@ is rotated. So this MRect perhaps contain parts, that are not visible.</p>
     </tbody>
   </table>
   <h5 id="Mapsui_Viewport_Resolution_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>The Resolution in Mapsui is what is often called zoom level. Because Mapsui is projection independent, there 
-aren&apos;t any zoom levels as other map libraries have. If your map has EPSG:3857 as projection
+  <div class="markdown level1 remarks"><p>The Resolution in Mapsui is what is often called zoom level. Because Mapsui is projection independent, there
+aren't any zoom levels as other map libraries have. If your map has EPSG:3857 as projection
 and you want to calculate the zoom, you should use the following equation</p>
 <p>var zoom = (float)Math.Log(78271.51696401953125 / resolution, 2);</p>
 </div>
@@ -618,7 +594,7 @@ and you want to calculate the zoom, you should use the following equation</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple-2">(T1, T2)</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a>&gt;</td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple-2">(, )</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -775,7 +751,7 @@ and you want to calculate the zoom, you should use the following equation</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple-2">(T1, T2)</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a>&gt;</td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple-2">(, )</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a>&gt;</td>
         <td><p>Tuple of x and y in world coordintes</p>
 </td>
       </tr>
@@ -783,13 +759,13 @@ and you want to calculate the zoom, you should use the following equation</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport_SetAnimations_System_Collections_Generic_List_Mapsui_Utilities_AnimationEntry_Mapsui_Viewport___.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.SetAnimations(System.Collections.Generic.List%7BMapsui.Utilities.AnimationEntry%7BMapsui.Viewport%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Viewport_SetAnimations_List_Mapsui_Utilities_AnimationEntry_Mapsui_Viewport___.md&amp;value=---%0Auid%3A%20Mapsui.Viewport.SetAnimations(List%7BMapsui.Utilities.AnimationEntry%7BMapsui.Viewport%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Viewport.cs/#L447">View Source</a>
   </span>
   <a id="Mapsui_Viewport_SetAnimations_" data-uid="Mapsui.Viewport.SetAnimations*"></a>
-  <h4 id="Mapsui_Viewport_SetAnimations_System_Collections_Generic_List_Mapsui_Utilities_AnimationEntry_Mapsui_Viewport___" data-uid="Mapsui.Viewport.SetAnimations(System.Collections.Generic.List{Mapsui.Utilities.AnimationEntry{Mapsui.Viewport}})">SetAnimations(List&lt;AnimationEntry&lt;Viewport&gt;&gt;)</h4>
+  <h4 id="Mapsui_Viewport_SetAnimations_List_Mapsui_Utilities_AnimationEntry_Mapsui_Viewport___" data-uid="Mapsui.Viewport.SetAnimations(List{Mapsui.Utilities.AnimationEntry{Mapsui.Viewport}})">SetAnimations(List&lt;AnimationEntry&lt;Viewport&gt;&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -807,7 +783,7 @@ and you want to calculate the zoom, you should use the following equation</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="Mapsui.Utilities.AnimationEntry-1.html">AnimationEntry</a>&lt;<a class="xref" href="Mapsui.Viewport.html">Viewport</a>&gt;&gt;</td>
+        <td><span class="xref">List</span>&lt;<a class="xref" href="Mapsui.Utilities.AnimationEntry-1.html">AnimationEntry</a>&lt;<a class="xref" href="Mapsui.Viewport.html">Viewport</a>&gt;&gt;</td>
         <td><span class="parametername">animations</span></td>
         <td></td>
       </tr>
@@ -826,7 +802,7 @@ and you want to calculate the zoom, you should use the following equation</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void SetCenter(MReadOnlyPoint center, long duration = 0L, Easing easing = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public void SetCenter(MReadOnlyPoint center, long duration = null, Easing easing = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -868,7 +844,7 @@ and you want to calculate the zoom, you should use the following equation</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void SetCenter(double x, double y, long duration = 0L, Easing easing = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public void SetCenter(double x, double y, long duration = null, Easing easing = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -915,7 +891,7 @@ and you want to calculate the zoom, you should use the following equation</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void SetCenterAndResolution(double x, double y, double resolution, long duration = 0L, Easing easing = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public void SetCenterAndResolution(double x, double y, double resolution, long duration = null, Easing easing = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -967,7 +943,7 @@ and you want to calculate the zoom, you should use the following equation</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void SetResolution(double resolution, long duration = 0L, Easing easing = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public void SetResolution(double resolution, long duration = null, Easing easing = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1009,7 +985,7 @@ and you want to calculate the zoom, you should use the following equation</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void SetRotation(double rotation, long duration = 0L, Easing easing = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public void SetRotation(double rotation, long duration = null, Easing easing = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1089,7 +1065,7 @@ and you want to calculate the zoom, you should use the following equation</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Transform(MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution = 1, double deltaRotation = 0)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Transform(MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution = null, double deltaRotation = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1314,7 +1290,7 @@ respecting rotation</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple-2">(T1, T2)</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a>&gt;</td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple-2">(, )</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a>&gt;</td>
         <td><p>The x and y in screen pixels</p>
 </td>
       </tr>
@@ -1371,7 +1347,7 @@ respecting rotation</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple-2">(T1, T2)</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a>&gt;</td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple-2">(, )</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a>&gt;</td>
         <td><p>Tuple of x and y in screen coordinates</p>
 </td>
       </tr>
@@ -1391,7 +1367,7 @@ respecting rotation</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public event PropertyChangedEventHandler ViewportChanged</code></pre>
+    <pre><code class="lang-csharp hljs">public event PropertyChangedEventHandler? ViewportChanged</code></pre>
   </div>
   <h5 class="eventType">Event Type</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1403,7 +1379,7 @@ respecting rotation</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.propertychangedeventhandler">PropertyChangedEventHandler</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullable-1">Nullable</a>&lt;<span class="xref">PropertyChangedEventHandler</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -1417,10 +1393,6 @@ respecting rotation</p>
   </div>
   <div>
       <a class="xref" href="Mapsui.Animations.IAnimatable.html">IAnimatable</a>
-  </div>
-  <h3 id="extensionmethods">Extension Methods</h3>
-  <div>
-      <a class="xref" href="Mapsui.Rendering.Skia.Extensions.ViewportExtensions.html#Mapsui_Rendering_Skia_Extensions_ViewportExtensions_ToSKMatrix_Mapsui_IViewport_">ViewportExtensions.ToSKMatrix(IViewport)</a>
   </div>
 </article>
           </div>

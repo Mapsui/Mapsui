@@ -95,18 +95,70 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Projections_IProjection_IsProjectionSupported_System_String_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.Projections.IProjection.IsProjectionSupported(System.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Projections_IProjection_IsProjectionSupported_System_Nullable_System_String__System_Nullable_System_String__.md&amp;value=---%0Auid%3A%20Mapsui.Projections.IProjection.IsProjectionSupported(System.Nullable%7BSystem.String%7D%2CSystem.Nullable%7BSystem.String%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Projections/IProjection.cs/#L11">View Source</a>
   </span>
   <a id="Mapsui_Projections_IProjection_IsProjectionSupported_" data-uid="Mapsui.Projections.IProjection.IsProjectionSupported*"></a>
-  <h4 id="Mapsui_Projections_IProjection_IsProjectionSupported_System_String_System_String_" data-uid="Mapsui.Projections.IProjection.IsProjectionSupported(System.String,System.String)">IsProjectionSupported(String, String)</h4>
+  <h4 id="Mapsui_Projections_IProjection_IsProjectionSupported_System_Nullable_System_String__System_Nullable_System_String__" data-uid="Mapsui.Projections.IProjection.IsProjectionSupported(System.Nullable{System.String},System.Nullable{System.String})">IsProjectionSupported(Nullable&lt;String&gt;, Nullable&lt;String&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool IsProjectionSupported(string fromCRS, string toCRS)</code></pre>
+    <pre><code class="lang-csharp hljs">bool IsProjectionSupported(string? fromCRS, string? toCRS)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullable-1">Nullable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a>&gt;</td>
+        <td><span class="parametername">fromCRS</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullable-1">Nullable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a>&gt;</td>
+        <td><span class="parametername">toCRS</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Projections_IProjection_Project_System_String_System_String_IEnumerable_Mapsui_IFeature__.md&amp;value=---%0Auid%3A%20Mapsui.Projections.IProjection.Project(System.String%2CSystem.String%2CIEnumerable%7BMapsui.IFeature%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Projections/IProjection.cs/#L13">View Source</a>
+  </span>
+  <a id="Mapsui_Projections_IProjection_Project_" data-uid="Mapsui.Projections.IProjection.Project*"></a>
+  <h4 id="Mapsui_Projections_IProjection_Project_System_String_System_String_IEnumerable_Mapsui_IFeature__" data-uid="Mapsui.Projections.IProjection.Project(System.String,System.String,IEnumerable{Mapsui.IFeature})">Project(String, String, IEnumerable&lt;IFeature&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void Project(string fromCRS, string toCRS, IEnumerable&lt;IFeature&gt; features)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -128,19 +180,9 @@
         <td><span class="parametername">toCRS</span></td>
         <td></td>
       </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
       <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Mapsui.IFeature.html">IFeature</a>&gt;</td>
+        <td><span class="parametername">features</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -273,48 +315,6 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Projections_IProjection_Project_System_String_System_String_System_Collections_Generic_IEnumerable_Mapsui_IFeature__.md&amp;value=---%0Auid%3A%20Mapsui.Projections.IProjection.Project(System.String%2CSystem.String%2CSystem.Collections.Generic.IEnumerable%7BMapsui.IFeature%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Projections/IProjection.cs/#L13">View Source</a>
-  </span>
-  <a id="Mapsui_Projections_IProjection_Project_" data-uid="Mapsui.Projections.IProjection.Project*"></a>
-  <h4 id="Mapsui_Projections_IProjection_Project_System_String_System_String_System_Collections_Generic_IEnumerable_Mapsui_IFeature__" data-uid="Mapsui.Projections.IProjection.Project(System.String,System.String,System.Collections.Generic.IEnumerable{Mapsui.IFeature})">Project(String, String, IEnumerable&lt;IFeature&gt;)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void Project(string fromCRS, string toCRS, IEnumerable&lt;IFeature&gt; features)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">fromCRS</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">toCRS</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Mapsui.IFeature.html">IFeature</a>&gt;</td>
-        <td><span class="parametername">features</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Projections_IProjection_Project_System_String_System_String_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Projections.IProjection.Project(System.String%2CSystem.String%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
@@ -370,7 +370,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple-2">(T1, T2)</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a>&gt;</td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple-2">(, )</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>

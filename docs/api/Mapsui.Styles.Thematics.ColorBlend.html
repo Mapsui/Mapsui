@@ -91,35 +91,11 @@
     <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></div>
     <div class="level1"><span class="xref">ColorBlend</span></div>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">Object.Equals(Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">Object.Equals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode#system-object-gethashcode">Object.GetHashCode()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype">Object.GetType()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone">Object.MemberwiseClone()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals#system-object-referenceequals(system-object-system-object)">Object.ReferenceEquals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring#system-object-tostring">Object.ToString()</a>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.Styles.Thematics.html">Mapsui.Styles.Thematics</a></h6>
   <h6><strong>Assembly</strong>: Mapsui.dll</h6>
   <h5 id="Mapsui_Styles_Thematics_ColorBlend_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class ColorBlend</code></pre>
+    <pre><code class="lang-csharp hljs">public class ColorBlend : object</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -384,11 +360,11 @@
     </tbody>
   </table>
   <h5 id="Mapsui_Styles_Thematics_ColorBlend_Positions_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p><p>The elements of this array specify percentages of distance along the gradient line.
+  <div class="markdown level1 remarks"><p>The elements of this array specify percentages of distance along the gradient line.
 For example, an element value of 0.2f specifies that this point is 20 percent of the total
 distance from the starting point. The elements in this array are represented by float
 values between 0.0f and 1.0f, and the first element of the array must be 0.0f and the
-last element must be 1.0f.</p></p>
+last element must be 1.0f.</p>
 <pre>Along with the Colors property, this property defines a multicolor gradient.</pre>
 </div>
   <span class="small pull-right mobile-hide">
@@ -565,7 +541,7 @@ last element must be 1.0f.</p></p>
   </span>
   <a id="Mapsui_Styles_Thematics_ColorBlend_GetColor_" data-uid="Mapsui.Styles.Thematics.ColorBlend.GetColor*"></a>
   <h4 id="Mapsui_Styles_Thematics_ColorBlend_GetColor_System_Double_" data-uid="Mapsui.Styles.Thematics.ColorBlend.GetColor(System.Double)">GetColor(Double)</h4>
-  <div class="markdown level1 summary"><p>Gets the color from the scale at position &apos;pos&apos;.</p>
+  <div class="markdown level1 summary"><p>Gets the color from the scale at position 'pos'.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>

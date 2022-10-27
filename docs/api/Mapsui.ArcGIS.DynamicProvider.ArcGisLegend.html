@@ -92,35 +92,11 @@ ArcGISserver 10.0 and up</p>
     <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></div>
     <div class="level1"><span class="xref">ArcGisLegend</span></div>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">Object.Equals(Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">Object.Equals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode#system-object-gethashcode">Object.GetHashCode()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype">Object.GetType()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone">Object.MemberwiseClone()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals#system-object-referenceequals(system-object-system-object)">Object.ReferenceEquals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring#system-object-tostring">Object.ToString()</a>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.ArcGIS.DynamicProvider.html">Mapsui.ArcGIS.DynamicProvider</a></h6>
   <h6><strong>Assembly</strong>: Mapsui.ArcGIS.dll</h6>
   <h5 id="Mapsui_ArcGIS_DynamicProvider_ArcGisLegend_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class ArcGisLegend</code></pre>
+    <pre><code class="lang-csharp hljs">public class ArcGisLegend : object</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -176,18 +152,18 @@ ArcGISserver 10.0 and up</p>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_ArcGIS_DynamicProvider_ArcGisLegend_GetLegendInfo_System_String_System_Net_ICredentials_.md&amp;value=---%0Auid%3A%20Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.GetLegendInfo(System.String%2CSystem.Net.ICredentials)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_ArcGIS_DynamicProvider_ArcGisLegend_GetLegendInfo_System_String_System_Nullable_ICredentials__.md&amp;value=---%0Auid%3A%20Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.GetLegendInfo(System.String%2CSystem.Nullable%7BICredentials%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.ArcGIS/DynamicProvider/ArcGISLegend.cs/#L51">View Source</a>
   </span>
   <a id="Mapsui_ArcGIS_DynamicProvider_ArcGisLegend_GetLegendInfo_" data-uid="Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.GetLegendInfo*"></a>
-  <h4 id="Mapsui_ArcGIS_DynamicProvider_ArcGisLegend_GetLegendInfo_System_String_System_Net_ICredentials_" data-uid="Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.GetLegendInfo(System.String,System.Net.ICredentials)">GetLegendInfo(String, ICredentials)</h4>
+  <h4 id="Mapsui_ArcGIS_DynamicProvider_ArcGisLegend_GetLegendInfo_System_String_System_Nullable_ICredentials__" data-uid="Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.GetLegendInfo(System.String,System.Nullable{ICredentials})">GetLegendInfo(String, Nullable&lt;ICredentials&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ArcGISLegendResponse GetLegendInfo(string serviceUrl, ICredentials credentials = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public ArcGISLegendResponse GetLegendInfo(string serviceUrl, ICredentials? credentials = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -205,7 +181,7 @@ ArcGISserver 10.0 and up</p>
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.icredentials">ICredentials</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullable-1">Nullable</a>&lt;<span class="xref">ICredentials</span>&gt;</td>
         <td><span class="parametername">credentials</span></td>
         <td></td>
       </tr>
@@ -228,19 +204,19 @@ ArcGISserver 10.0 and up</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_ArcGIS_DynamicProvider_ArcGisLegend_GetLegendInfoRequest_System_String_System_Net_ICredentials_.md&amp;value=---%0Auid%3A%20Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.GetLegendInfoRequest(System.String%2CSystem.Net.ICredentials)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_ArcGIS_DynamicProvider_ArcGisLegend_GetLegendInfoRequest_System_String_System_Nullable_ICredentials__.md&amp;value=---%0Auid%3A%20Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.GetLegendInfoRequest(System.String%2CSystem.Nullable%7BICredentials%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.ArcGIS/DynamicProvider/ArcGISLegend.cs/#L45">View Source</a>
   </span>
   <a id="Mapsui_ArcGIS_DynamicProvider_ArcGisLegend_GetLegendInfoRequest_" data-uid="Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.GetLegendInfoRequest*"></a>
-  <h4 id="Mapsui_ArcGIS_DynamicProvider_ArcGisLegend_GetLegendInfoRequest_System_String_System_Net_ICredentials_" data-uid="Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.GetLegendInfoRequest(System.String,System.Net.ICredentials)">GetLegendInfoRequest(String, ICredentials)</h4>
+  <h4 id="Mapsui_ArcGIS_DynamicProvider_ArcGisLegend_GetLegendInfoRequest_System_String_System_Nullable_ICredentials__" data-uid="Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.GetLegendInfoRequest(System.String,System.Nullable{ICredentials})">GetLegendInfoRequest(String, Nullable&lt;ICredentials&gt;)</h4>
   <div class="markdown level1 summary"><p>Get the legend for the given mapserver</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void GetLegendInfoRequest(string serviceUrl, ICredentials credentials = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public void GetLegendInfoRequest(string serviceUrl, ICredentials? credentials = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -259,7 +235,7 @@ ArcGISserver 10.0 and up</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.icredentials">ICredentials</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullable-1">Nullable</a>&lt;<span class="xref">ICredentials</span>&gt;</td>
         <td><span class="parametername">credentials</span></td>
         <td><p>Credentials</p>
 </td>

@@ -90,35 +90,11 @@
     <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></div>
     <div class="level1"><span class="xref">CapabilitiesHelper</span></div>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">Object.Equals(Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">Object.Equals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode#system-object-gethashcode">Object.GetHashCode()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype">Object.GetType()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone">Object.MemberwiseClone()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals#system-object-referenceequals(system-object-system-object)">Object.ReferenceEquals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring#system-object-tostring">Object.ToString()</a>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.ArcGIS.html">Mapsui.ArcGIS</a></h6>
   <h6><strong>Assembly</strong>: Mapsui.ArcGIS.dll</h6>
   <h5 id="Mapsui_ArcGIS_CapabilitiesHelper_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class CapabilitiesHelper</code></pre>
+    <pre><code class="lang-csharp hljs">public class CapabilitiesHelper : object</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -202,7 +178,7 @@
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><span class="parametername">url</span></td>
-        <td><p>Url of map service example: <a href="http://url/arcgis/rest/services/test/MapServer">http://url/arcgis/rest/services/test/MapServer</a> </p>
+        <td><p>Url of map service example: http://url/arcgis/rest/services/test/MapServer</p>
 </td>
       </tr>
       <tr>
@@ -214,13 +190,13 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_ArcGIS_CapabilitiesHelper_GetCapabilities_System_String_Mapsui_ArcGIS_CapabilitiesType_System_Net_ICredentials_.md&amp;value=---%0Auid%3A%20Mapsui.ArcGIS.CapabilitiesHelper.GetCapabilities(System.String%2CMapsui.ArcGIS.CapabilitiesType%2CSystem.Net.ICredentials)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_ArcGIS_CapabilitiesHelper_GetCapabilities_System_String_Mapsui_ArcGIS_CapabilitiesType_ICredentials_.md&amp;value=---%0Auid%3A%20Mapsui.ArcGIS.CapabilitiesHelper.GetCapabilities(System.String%2CMapsui.ArcGIS.CapabilitiesType%2CICredentials)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.ArcGIS/CapabilitiesHelper.cs/#L85">View Source</a>
   </span>
   <a id="Mapsui_ArcGIS_CapabilitiesHelper_GetCapabilities_" data-uid="Mapsui.ArcGIS.CapabilitiesHelper.GetCapabilities*"></a>
-  <h4 id="Mapsui_ArcGIS_CapabilitiesHelper_GetCapabilities_System_String_Mapsui_ArcGIS_CapabilitiesType_System_Net_ICredentials_" data-uid="Mapsui.ArcGIS.CapabilitiesHelper.GetCapabilities(System.String,Mapsui.ArcGIS.CapabilitiesType,System.Net.ICredentials)">GetCapabilities(String, CapabilitiesType, ICredentials)</h4>
+  <h4 id="Mapsui_ArcGIS_CapabilitiesHelper_GetCapabilities_System_String_Mapsui_ArcGIS_CapabilitiesType_ICredentials_" data-uid="Mapsui.ArcGIS.CapabilitiesHelper.GetCapabilities(System.String,Mapsui.ArcGIS.CapabilitiesType,ICredentials)">GetCapabilities(String, CapabilitiesType, ICredentials)</h4>
   <div class="markdown level1 summary"><p>Get the capabilities of an ArcGIS Map Service</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -241,7 +217,7 @@
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><span class="parametername">url</span></td>
-        <td><p>Url of map service example: <a href="http://url/arcgis/rest/services/test/MapServer">http://url/arcgis/rest/services/test/MapServer</a> </p>
+        <td><p>Url of map service example: http://url/arcgis/rest/services/test/MapServer</p>
 </td>
       </tr>
       <tr>
@@ -250,28 +226,28 @@
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.icredentials">ICredentials</a></td>
+        <td><span class="xref">ICredentials</span></td>
         <td><span class="parametername">credentials</span></td>
-        <td><p>Credentials to access the service </p>
+        <td><p>Credentials to access the service</p>
 </td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_ArcGIS_CapabilitiesHelper_GetCapabilities_System_String_Mapsui_ArcGIS_CapabilitiesType_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.ArcGIS.CapabilitiesHelper.GetCapabilities(System.String%2CMapsui.ArcGIS.CapabilitiesType%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_ArcGIS_CapabilitiesHelper_GetCapabilities_System_String_Mapsui_ArcGIS_CapabilitiesType_System_Nullable_System_String__.md&amp;value=---%0Auid%3A%20Mapsui.ArcGIS.CapabilitiesHelper.GetCapabilities(System.String%2CMapsui.ArcGIS.CapabilitiesType%2CSystem.Nullable%7BSystem.String%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.ArcGIS/CapabilitiesHelper.cs/#L74">View Source</a>
   </span>
   <a id="Mapsui_ArcGIS_CapabilitiesHelper_GetCapabilities_" data-uid="Mapsui.ArcGIS.CapabilitiesHelper.GetCapabilities*"></a>
-  <h4 id="Mapsui_ArcGIS_CapabilitiesHelper_GetCapabilities_System_String_Mapsui_ArcGIS_CapabilitiesType_System_String_" data-uid="Mapsui.ArcGIS.CapabilitiesHelper.GetCapabilities(System.String,Mapsui.ArcGIS.CapabilitiesType,System.String)">GetCapabilities(String, CapabilitiesType, String)</h4>
+  <h4 id="Mapsui_ArcGIS_CapabilitiesHelper_GetCapabilities_System_String_Mapsui_ArcGIS_CapabilitiesType_System_Nullable_System_String__" data-uid="Mapsui.ArcGIS.CapabilitiesHelper.GetCapabilities(System.String,Mapsui.ArcGIS.CapabilitiesType,System.Nullable{System.String})">GetCapabilities(String, CapabilitiesType, Nullable&lt;String&gt;)</h4>
   <div class="markdown level1 summary"><p>Get the capabilities of an ArcGIS Map Service</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void GetCapabilities(string url, CapabilitiesType capabilitiesType, string token)</code></pre>
+    <pre><code class="lang-csharp hljs">public void GetCapabilities(string url, CapabilitiesType capabilitiesType, string? token)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -286,7 +262,7 @@
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><span class="parametername">url</span></td>
-        <td><p>Url of map service example: <a href="http://url/arcgis/rest/services/test/MapServer">http://url/arcgis/rest/services/test/MapServer</a> </p>
+        <td><p>Url of map service example: http://url/arcgis/rest/services/test/MapServer</p>
 </td>
       </tr>
       <tr>
@@ -295,9 +271,9 @@
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullable-1">Nullable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a>&gt;</td>
         <td><span class="parametername">token</span></td>
-        <td><p>Token string to access the service </p>
+        <td><p>Token string to access the service</p>
 </td>
       </tr>
     </tbody>
@@ -316,7 +292,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static ITileSchema GetTileSchema(ArcGISDynamicCapabilities arcGisDynamicCapabilities)</code></pre>
+    <pre><code class="lang-csharp hljs">public static ITileSchema? GetTileSchema(ArcGISDynamicCapabilities arcGisDynamicCapabilities)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -345,7 +321,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">BruTile.ITileSchema</span></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullable-1">Nullable</a>&lt;<span class="xref">ITileSchema</span>&gt;</td>
         <td><p>TileSchema, returns null if service is not tiled</p>
 </td>
       </tr>
@@ -353,13 +329,13 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_ArcGIS_CapabilitiesHelper_OnCapabilitiesFailed_System_EventArgs_.md&amp;value=---%0Auid%3A%20Mapsui.ArcGIS.CapabilitiesHelper.OnCapabilitiesFailed(System.EventArgs)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_ArcGIS_CapabilitiesHelper_OnCapabilitiesFailed_EventArgs_.md&amp;value=---%0Auid%3A%20Mapsui.ArcGIS.CapabilitiesHelper.OnCapabilitiesFailed(EventArgs)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.ArcGIS/CapabilitiesHelper.cs/#L175">View Source</a>
   </span>
   <a id="Mapsui_ArcGIS_CapabilitiesHelper_OnCapabilitiesFailed_" data-uid="Mapsui.ArcGIS.CapabilitiesHelper.OnCapabilitiesFailed*"></a>
-  <h4 id="Mapsui_ArcGIS_CapabilitiesHelper_OnCapabilitiesFailed_System_EventArgs_" data-uid="Mapsui.ArcGIS.CapabilitiesHelper.OnCapabilitiesFailed(System.EventArgs)">OnCapabilitiesFailed(EventArgs)</h4>
+  <h4 id="Mapsui_ArcGIS_CapabilitiesHelper_OnCapabilitiesFailed_EventArgs_" data-uid="Mapsui.ArcGIS.CapabilitiesHelper.OnCapabilitiesFailed(EventArgs)">OnCapabilitiesFailed(EventArgs)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -377,7 +353,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs">EventArgs</a></td>
+        <td><span class="xref">EventArgs</span></td>
         <td><span class="parametername">e</span></td>
         <td></td>
       </tr>
@@ -385,13 +361,13 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_ArcGIS_CapabilitiesHelper_OnFinished_System_EventArgs_.md&amp;value=---%0Auid%3A%20Mapsui.ArcGIS.CapabilitiesHelper.OnFinished(System.EventArgs)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_ArcGIS_CapabilitiesHelper_OnFinished_EventArgs_.md&amp;value=---%0Auid%3A%20Mapsui.ArcGIS.CapabilitiesHelper.OnFinished(EventArgs)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.ArcGIS/CapabilitiesHelper.cs/#L170">View Source</a>
   </span>
   <a id="Mapsui_ArcGIS_CapabilitiesHelper_OnFinished_" data-uid="Mapsui.ArcGIS.CapabilitiesHelper.OnFinished*"></a>
-  <h4 id="Mapsui_ArcGIS_CapabilitiesHelper_OnFinished_System_EventArgs_" data-uid="Mapsui.ArcGIS.CapabilitiesHelper.OnFinished(System.EventArgs)">OnFinished(EventArgs)</h4>
+  <h4 id="Mapsui_ArcGIS_CapabilitiesHelper_OnFinished_EventArgs_" data-uid="Mapsui.ArcGIS.CapabilitiesHelper.OnFinished(EventArgs)">OnFinished(EventArgs)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -409,7 +385,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventargs">EventArgs</a></td>
+        <td><span class="xref">EventArgs</span></td>
         <td><span class="parametername">e</span></td>
         <td></td>
       </tr>

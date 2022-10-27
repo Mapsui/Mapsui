@@ -90,7 +90,7 @@
   <h6><strong>Assembly</strong>: Mapsui.Nts.dll</h6>
   <h5 id="Mapsui_Nts_Providers_Shapefile_ShapeType_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public enum ShapeType</code></pre>
+    <pre><code class="lang-csharp hljs">public enum ShapeType : int</code></pre>
   </div>
   <h3 id="fields">Fields
   </h3>
@@ -107,25 +107,25 @@
         <td><p>A MultiPatch consists of a number of surface patches. Each surface patch describes a
 surface. The surface patches of a MultiPatch are referred to as its parts, and the type of
 part controls how the order of coordinates of an MultiPatch part is interpreted.
-Mapsui doesn&apos;t support this feature type.</p>
+Mapsui doesn't support this feature type.</p>
 </td>
       </tr>
       <tr>
         <td id="Mapsui_Nts_Providers_Shapefile_ShapeType_Multipoint">Multipoint</td>
         <td><p>A MultiPoint represents a set of points.
-Mapsui interprets this as <span class="xref">NetTopologySuite.Geometries.MultiPoint</span></p>
+Mapsui interprets this as <see cref="!:MultiPoint"></see></p>
 </td>
       </tr>
       <tr>
         <td id="Mapsui_Nts_Providers_Shapefile_ShapeType_MultiPointM">MultiPointM</td>
         <td><p>A MultiPointM represents a set of <a class="xref" href="Mapsui.Nts.Providers.Shapefile.ShapeType.html#Mapsui_Nts_Providers_Shapefile_ShapeType_PointM">PointM</a>s.
-Mapsui interprets this as <span class="xref">NetTopologySuite.Geometries.MultiPoint</span></p>
+Mapsui interprets this as <see cref="!:MultiPoint"></see></p>
 </td>
       </tr>
       <tr>
         <td id="Mapsui_Nts_Providers_Shapefile_ShapeType_MultiPointZ">MultiPointZ</td>
         <td><p>A MultiPointZ represents a set of <a class="xref" href="Mapsui.Nts.Providers.Shapefile.ShapeType.html#Mapsui_Nts_Providers_Shapefile_ShapeType_PointZ">PointZ</a>s.
-Mapsui interprets this as <span class="xref">NetTopologySuite.Geometries.MultiPoint</span></p>
+Mapsui interprets this as <see cref="!:MultiPoint"></see></p>
 </td>
       </tr>
       <tr>
@@ -161,13 +161,13 @@ the ring in vertex order is the neighborhood inside the polygon. Coordinates of 
 holes in polygons are in a counterclockwise direction. Vertices for a single, ringed
 polygon are, therefore, always in clockwise order. The rings of a polygon are referred to
 as its parts.
-Mapsui interprets this as either <a class="xref" href="Mapsui.Nts.Providers.Shapefile.ShapeType.html#Mapsui_Nts_Providers_Shapefile_ShapeType_Polygon">Polygon</a> or <span class="xref">NetTopologySuite.Geometries.MultiPolygon</span></p>
+Mapsui interprets this as either <a class="xref" href="Mapsui.Nts.Providers.Shapefile.ShapeType.html#Mapsui_Nts_Providers_Shapefile_ShapeType_Polygon">Polygon</a> or <see cref="!:MultiPolygon"></see></p>
 </td>
       </tr>
       <tr>
         <td id="Mapsui_Nts_Providers_Shapefile_ShapeType_PolygonM">PolygonM</td>
         <td><p>A PolygonM consists of a number of rings. A ring is a closed, non-self-intersecting loop.
-Mapsui interprets this as either <a class="xref" href="Mapsui.Nts.Providers.Shapefile.ShapeType.html#Mapsui_Nts_Providers_Shapefile_ShapeType_Polygon">Polygon</a> or <span class="xref">NetTopologySuite.Geometries.MultiPolygon</span></p>
+Mapsui interprets this as either <a class="xref" href="Mapsui.Nts.Providers.Shapefile.ShapeType.html#Mapsui_Nts_Providers_Shapefile_ShapeType_Polygon">Polygon</a> or <see cref="!:MultiPolygon"></see></p>
 </td>
       </tr>
       <tr>
@@ -175,7 +175,7 @@ Mapsui interprets this as either <a class="xref" href="Mapsui.Nts.Providers.Shap
         <td><p>A PolygonZ consists of a number of rings. A ring is a closed, non-self-intersecting loop.
 A PolygonZ may contain multiple outer rings. The rings of a PolygonZ are referred to as
 its parts.
-Mapsui interprets this as either <a class="xref" href="Mapsui.Nts.Providers.Shapefile.ShapeType.html#Mapsui_Nts_Providers_Shapefile_ShapeType_Polygon">Polygon</a> or <span class="xref">NetTopologySuite.Geometries.MultiPolygon</span></p>
+Mapsui interprets this as either <a class="xref" href="Mapsui.Nts.Providers.Shapefile.ShapeType.html#Mapsui_Nts_Providers_Shapefile_ShapeType_Polygon">Polygon</a> or <see cref="!:MultiPolygon"></see></p>
 </td>
       </tr>
       <tr>
@@ -183,7 +183,7 @@ Mapsui interprets this as either <a class="xref" href="Mapsui.Nts.Providers.Shap
         <td><p>PolyLine is an ordered set of coordinates that consists of one or more parts. A part is a
 connected sequence of two or more points. Parts may or may not be connected to one
 another. Parts may or may not intersect one another.
-Mapsui interprets this as either <span class="xref">NetTopologySuite.Geometries.LineString</span> or <span class="xref">NetTopologySuite.Geometries.MultiLineString</span></p>
+Mapsui interprets this as either <see cref="!:LineString"></see> or <see cref="!:MultiLineString"></see></p>
 </td>
       </tr>
       <tr>
@@ -191,7 +191,7 @@ Mapsui interprets this as either <span class="xref">NetTopologySuite.Geometries.
         <td><p>A shapefile PolyLineM consists of one or more parts. A part is a connected sequence of
 two or more points. Parts may or may not be connected to one another. Parts may or may
 not intersect one another.
-Mapsui interprets this as <span class="xref">NetTopologySuite.Geometries.LineString</span> or <span class="xref">NetTopologySuite.Geometries.MultiLineString</span></p>
+Mapsui interprets this as <see cref="!:LineString"></see> or <see cref="!:MultiLineString"></see></p>
 </td>
       </tr>
       <tr>
@@ -199,7 +199,7 @@ Mapsui interprets this as <span class="xref">NetTopologySuite.Geometries.LineStr
         <td><p>A PolyLineZ consists of one or more parts. A part is a connected sequence of two or
 more points. Parts may or may not be connected to one another. Parts may or may not
 intersect one another.
-Mapsui interprets this as <span class="xref">NetTopologySuite.Geometries.LineString</span> or <span class="xref">NetTopologySuite.Geometries.MultiLineString</span></p>
+Mapsui interprets this as <see cref="!:LineString"></see> or <see cref="!:MultiLineString"></see></p>
 </td>
       </tr>
     </tbody>
