@@ -9,7 +9,7 @@ namespace Mapsui.Rendering.Skia.Extensions
         /// <summary>
         /// Converts a LineString in world coordinates to a Skia path
         /// </summary>
-        /// <param name="coordinates">List of points in Mapsui world coordinates</param>
+        /// <param name="lineString">List of points in Mapsui world coordinates</param>
         /// <param name="viewport">Viewport implementation</param>
         /// <param name="clipRect">Rectangle to clip to. All lines outside aren't drawn.</param>
         /// <returns></returns>
@@ -41,6 +41,31 @@ namespace Mapsui.Rendering.Skia.Extensions
                     lastPoint = intersectionPoint2;
                 }
             }
+            return path;
+        }
+
+        /// <summary>
+        /// Converts a LineString in world coordinates to a Skia path
+        /// </summary>
+        /// <param name="lineString">List of points in Mapsui world coordinates</param>
+        /// <returns>SkPath</returns>
+        public static SKPath ToSkiaPath(this LineString lineString)
+        {
+            var path = new SKPath();
+            var coordinates = lineString.Coordinates;
+
+            if (coordinates.Length == 0)
+            {
+                return path;
+            }
+
+            path.MoveTo(coordinates[0].ToSkiaPoint());
+
+            for (var i = 1; i < coordinates.Length; i++)
+            {
+                path.LineTo(coordinates[i].ToSkiaPoint());
+            }
+
             return path;
         }
     }

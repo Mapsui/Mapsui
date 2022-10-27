@@ -7,7 +7,7 @@ namespace Mapsui.Rendering.Skia
 {
     public static class LineStringRenderer
     {
-        public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, VectorStyle vectorStyle,
+        public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, VectorStyle? vectorStyle,
             LineString lineString, float opacity, IVectorCache vectorCache)
         {
             if (vectorStyle == null)
