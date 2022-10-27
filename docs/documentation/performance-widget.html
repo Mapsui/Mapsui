@@ -8,7 +8,7 @@
     <title>PerformanceWidget </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="PerformanceWidget ">
-    <meta name="generator" content="docfx 2.58.9.0">
+    <meta name="generator" content="docfx 2.59.4.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -82,12 +82,20 @@
 <h2 id="summary">Summary</h2>
 <p>Mapsui 3.0 supports a widget, that could show the main performance values for drawing the map.</p>
 <h2 id="how-it-works">How it works</h2>
-<p>1) Create a new Performance object for the MapControl, where the values could be stored</p>
+<ol>
+<li>Create a new Performance object for the MapControl, where the values could be stored</li>
+</ol>
 <pre><code class="lang-csharp">if (mapControl.Performance == null)
     mapControl.Performance = new Utilities.Performance(10);
-</code></pre><p>2) Create the PerformanceWidget. As parameter you have to provide the Performance object, that the widget should be use</p>
+</code></pre>
+<ol start="2">
+<li>Create the PerformanceWidget. As parameter you have to provide the Performance object, that the widget should be use</li>
+</ol>
 <pre><code class="lang-csharp">var widget = new Widgets.Performance.PerformanceWidget(mapControl.Performance);
-</code></pre><p>3) If you want to clear all values of the Performance object, then add the following event handler for the touch event of the widget</p>
+</code></pre>
+<ol start="3">
+<li>If you want to clear all values of the Performance object, then add the following event handler for the touch event of the widget</li>
+</ol>
 <pre><code class="lang-csharp">widget.WidgetTouched += (sender, args) =&gt;
 {
     mapControl?.Performance.Clear();
@@ -95,11 +103,18 @@
 
     args.Handled = true;
 };
-</code></pre><p>4) Add the widget to the list of known widgets</p>
+</code></pre>
+<ol start="4">
+<li>Add the widget to the list of known widgets</li>
+</ol>
 <pre><code class="lang-csharp">mapControl.Map.Widgets.Add(widget);
-</code></pre><p>5) To draw the widget on the screen, we need a widget renderer. To use the default widget renderer, use the following lines</p>
+</code></pre>
+<ol start="5">
+<li>To draw the widget on the screen, we need a widget renderer. To use the default widget renderer, use the following lines</li>
+</ol>
 <pre><code class="lang-csharp">mapControl.Renderer.WidgetRenders[typeof(Widgets.Performance.PerformanceWidget)] = new Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer(10, 10, 12, SkiaSharp.SKColors.Black, SkiaSharp.SKColors.White);
-</code></pre><p>The first two parameters are the X and Y coordiantes for the widget. Third parameter is the text size. Fourth is the text color and fifth is the background color.</p>
+</code></pre>
+<p>The first two parameters are the X and Y coordiantes for the widget. Third parameter is the text size. Fourth is the text color and fifth is the background color.</p>
 <h2 id="code-copy">Code copy</h2>
 <pre><code class="lang-csharp">if (mapControl.Performance == null)
     mapControl. Performance = new Utilities.Performance();
@@ -116,7 +131,8 @@ widget.WidgetTouched += (sender, args) =&gt;
 
 mapControl.Map.Widgets.Add(widget);
 mapControl.Renderer.WidgetRenders[typeof(Widgets.Performance.PerformanceWidget)] = new Rendering.Skia.SkiaWidgets.PerformanceWidgetRenderer(10, 10, 12, SkiaSharp.SKColors.Black, SkiaSharp.SKColors.White);
-</code></pre><h2 id="values">Values</h2>
+</code></pre>
+<h2 id="values">Values</h2>
 <h3 id="last">Last</h3>
 <p>Time for drawing of the last screen. Be careful: because the widget is drawn together with the screen, this time is the time for the screen drawn before the screen you see.</p>
 <h3 id="mean">Mean</h3>
@@ -130,7 +146,7 @@ mapControl.Renderer.WidgetRenders[typeof(Widgets.Performance.PerformanceWidget)]
 <h3 id="count">Count</h3>
 <p>How often the screen is drawn.</p>
 <h3 id="dropped">Dropped</h3>
-<p>How often the screen isn&#39;t invalidated, because a drawing is still in progress.</p>
+<p>How often the screen isn't invalidated, because a drawing is still in progress.</p>
 <h2 id="remarks">Remarks</h2>
 <p>The Performance object contains the times between start and end of a drawing process. This must not be the real drawing time. It could be, that other tasks running in between the drawing process.</p>
 </article>
