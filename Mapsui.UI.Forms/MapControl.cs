@@ -117,7 +117,7 @@ namespace Mapsui.UI.Forms
 
         private float ViewportHeight => ScreenHeight;
 
-        public ISymbolCache SymbolCache => _renderer.SymbolCache;
+        public IRenderCache RenderCache => _renderer.RenderCache;
 
         public bool UseDoubleTap = true;
         public bool UseFling = true;
