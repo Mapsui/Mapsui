@@ -95,53 +95,29 @@
     <div><a class="xref" href="Mapsui.Providers.IProjectingProvider.html">IProjectingProvider</a></div>
     <div><a class="xref" href="Mapsui.Providers.IProvider.html">IProvider</a></div>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">Object.Equals(Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">Object.Equals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode#system-object-gethashcode">Object.GetHashCode()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype">Object.GetType()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone">Object.MemberwiseClone()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals#system-object-referenceequals(system-object-system-object)">Object.ReferenceEquals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring#system-object-tostring">Object.ToString()</a>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.ArcGIS.DynamicProvider.html">Mapsui.ArcGIS.DynamicProvider</a></h6>
   <h6><strong>Assembly</strong>: Mapsui.ArcGIS.dll</h6>
   <h5 id="Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicProvider_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class ArcGISDynamicProvider : IProjectingProvider, IProvider</code></pre>
+    <pre><code class="lang-csharp hljs">public class ArcGISDynamicProvider : object, IProjectingProvider, IProvider</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicProvider__ctor_System_String_Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicCapabilities_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.%23ctor(System.String%2CMapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicProvider__ctor_System_String_Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicCapabilities_System_Nullable_System_String__.md&amp;value=---%0Auid%3A%20Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.%23ctor(System.String%2CMapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities%2CSystem.Nullable%7BSystem.String%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.ArcGIS/DynamicProvider/ArcGISDynamicProvider.cs/#L33">View Source</a>
   </span>
   <a id="Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicProvider__ctor_" data-uid="Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.#ctor*"></a>
-  <h4 id="Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicProvider__ctor_System_String_Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicCapabilities_System_String_" data-uid="Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.#ctor(System.String,Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities,System.String)">ArcGISDynamicProvider(String, ArcGISDynamicCapabilities, String)</h4>
+  <h4 id="Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicProvider__ctor_System_String_Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicCapabilities_System_Nullable_System_String__" data-uid="Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.#ctor(System.String,Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities,System.Nullable{System.String})">ArcGISDynamicProvider(String, ArcGISDynamicCapabilities, Nullable&lt;String&gt;)</h4>
   <div class="markdown level1 summary"><p>Create ArcGisDynamicProvider based on a given capabilities file</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ArcGISDynamicProvider(string url, ArcGISDynamicCapabilities arcGisDynamicCapabilities, string token = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public ArcGISDynamicProvider(string url, ArcGISDynamicCapabilities arcGisDynamicCapabilities, string? token = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -156,7 +132,7 @@
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><span class="parametername">url</span></td>
-        <td><p>url to map service example: <a href="http://url/arcgis/rest/services/test/MapServer">http://url/arcgis/rest/services/test/MapServer</a></p>
+        <td><p>url to map service example: http://url/arcgis/rest/services/test/MapServer</p>
 </td>
       </tr>
       <tr>
@@ -165,7 +141,7 @@
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullable-1">Nullable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a>&gt;</td>
         <td><span class="parametername">token</span></td>
         <td><p>token to request service</p>
 </td>
@@ -174,19 +150,19 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicProvider__ctor_System_String_System_String_.md&amp;value=---%0Auid%3A%20Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.%23ctor(System.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicProvider__ctor_System_String_System_Nullable_System_String__.md&amp;value=---%0Auid%3A%20Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.%23ctor(System.String%2CSystem.Nullable%7BSystem.String%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.ArcGIS/DynamicProvider/ArcGISDynamicProvider.cs/#L47">View Source</a>
   </span>
   <a id="Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicProvider__ctor_" data-uid="Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.#ctor*"></a>
-  <h4 id="Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicProvider__ctor_System_String_System_String_" data-uid="Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.#ctor(System.String,System.String)">ArcGISDynamicProvider(String, String)</h4>
+  <h4 id="Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicProvider__ctor_System_String_System_Nullable_System_String__" data-uid="Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.#ctor(System.String,System.Nullable{System.String})">ArcGISDynamicProvider(String, Nullable&lt;String&gt;)</h4>
   <div class="markdown level1 summary"><p>Create ArcGisDynamicProvider, capabilities will be parsed automatically</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ArcGISDynamicProvider(string url, string token = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public ArcGISDynamicProvider(string url, string? token = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -201,11 +177,11 @@
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><span class="parametername">url</span></td>
-        <td><p>url to map service example: <a href="http://url/arcgis/rest/services/test/MapServer">http://url/arcgis/rest/services/test/MapServer</a></p>
+        <td><p>url to map service example: http://url/arcgis/rest/services/test/MapServer</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullable-1">Nullable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a>&gt;</td>
         <td><span class="parametername">token</span></td>
         <td><p>token to request service</p>
 </td>
@@ -257,7 +233,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ICredentials Credentials { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public ICredentials? Credentials { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -269,7 +245,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.net.icredentials">ICredentials</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullable-1">Nullable</a>&lt;<span class="xref">ICredentials</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -287,7 +263,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string CRS { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string? CRS { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -299,7 +275,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullable-1">Nullable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -348,7 +324,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string Token { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string? Token { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -360,7 +336,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullable-1">Nullable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -469,7 +445,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Mapsui.IFeature.html">IFeature</a>&gt;&gt;</td>
+        <td><span class="xref">Task</span>&lt;<span class="xref">IEnumerable</span>&lt;<a class="xref" href="Mapsui.IFeature.html">IFeature</a>&gt;&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -624,7 +600,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple-2">(T1, T2)</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a>, <a class="xref" href="Mapsui.MRaster.html">MRaster</a>&gt;&gt;</td>
+        <td><span class="xref">Task</span>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.valuetuple-2">(, )</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a>, <a class="xref" href="Mapsui.MRaster.html">MRaster</a>&gt;&gt;</td>
         <td></td>
       </tr>
     </tbody>

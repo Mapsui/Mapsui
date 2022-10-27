@@ -90,40 +90,11 @@
     <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></div>
     <div class="level1"><span class="xref">LayerCollection</span></div>
   </div>
-  <div class="implements">
-    <h5>Implements</h5>
-    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</div>
-    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerable">IEnumerable</a></div>
-  </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">Object.Equals(Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">Object.Equals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode#system-object-gethashcode">Object.GetHashCode()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype">Object.GetType()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone">Object.MemberwiseClone()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals#system-object-referenceequals(system-object-system-object)">Object.ReferenceEquals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring#system-object-tostring">Object.ToString()</a>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.Layers.html">Mapsui.Layers</a></h6>
   <h6><strong>Assembly</strong>: Mapsui.dll</h6>
   <h5 id="Mapsui_Layers_LayerCollection_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class LayerCollection : IEnumerable&lt;ILayer&gt;, IEnumerable</code></pre>
+    <pre><code class="lang-csharp hljs">public class LayerCollection : IEnumerable&lt;ILayer&gt;</code></pre>
   </div>
   <h3 id="properties">Properties
   </h3>
@@ -409,7 +380,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
+        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -439,7 +410,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerator-1">IEnumerator</a>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
+        <td><span class="xref">IEnumerator</span>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -483,50 +454,13 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_LayerCollection_Modify_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__.md&amp;value=---%0Auid%3A%20Mapsui.Layers.LayerCollection.Modify(System.Collections.Generic.IEnumerable%7BMapsui.Layers.ILayer%7D%2CSystem.Collections.Generic.IEnumerable%7BMapsui.Layers.ILayer%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/LayerCollection.cs/#L131">View Source</a>
-  </span>
-  <a id="Mapsui_Layers_LayerCollection_Modify_" data-uid="Mapsui.Layers.LayerCollection.Modify*"></a>
-  <h4 id="Mapsui_Layers_LayerCollection_Modify_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__" data-uid="Mapsui.Layers.LayerCollection.Modify(System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer},System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})">Modify(IEnumerable&lt;ILayer&gt;, IEnumerable&lt;ILayer&gt;)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Modify(IEnumerable&lt;ILayer&gt; layersToRemove, IEnumerable&lt;ILayer&gt; layersToAdd)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
-        <td><span class="parametername">layersToRemove</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
-        <td><span class="parametername">layersToAdd</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_LayerCollection_Modify_System_Func_Mapsui_Layers_ILayer_System_Boolean__System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__.md&amp;value=---%0Auid%3A%20Mapsui.Layers.LayerCollection.Modify(System.Func%7BMapsui.Layers.ILayer%2CSystem.Boolean%7D%2CSystem.Collections.Generic.IEnumerable%7BMapsui.Layers.ILayer%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_LayerCollection_Modify_Func_Mapsui_Layers_ILayer_System_Boolean__IEnumerable_Mapsui_Layers_ILayer__.md&amp;value=---%0Auid%3A%20Mapsui.Layers.LayerCollection.Modify(Func%7BMapsui.Layers.ILayer%2CSystem.Boolean%7D%2CIEnumerable%7BMapsui.Layers.ILayer%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/LayerCollection.cs/#L142">View Source</a>
   </span>
   <a id="Mapsui_Layers_LayerCollection_Modify_" data-uid="Mapsui.Layers.LayerCollection.Modify*"></a>
-  <h4 id="Mapsui_Layers_LayerCollection_Modify_System_Func_Mapsui_Layers_ILayer_System_Boolean__System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__" data-uid="Mapsui.Layers.LayerCollection.Modify(System.Func{Mapsui.Layers.ILayer,System.Boolean},System.Collections.Generic.IEnumerable{Mapsui.Layers.ILayer})">Modify(Func&lt;ILayer, Boolean&gt;, IEnumerable&lt;ILayer&gt;)</h4>
+  <h4 id="Mapsui_Layers_LayerCollection_Modify_Func_Mapsui_Layers_ILayer_System_Boolean__IEnumerable_Mapsui_Layers_ILayer__" data-uid="Mapsui.Layers.LayerCollection.Modify(Func{Mapsui.Layers.ILayer,System.Boolean},IEnumerable{Mapsui.Layers.ILayer})">Modify(Func&lt;ILayer, Boolean&gt;, IEnumerable&lt;ILayer&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -544,12 +478,49 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a>&gt;</td>
+        <td><span class="xref">Func</span>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a>&gt;</td>
         <td><span class="parametername">removePredicate</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
+        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
+        <td><span class="parametername">layersToAdd</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_LayerCollection_Modify_IEnumerable_Mapsui_Layers_ILayer__IEnumerable_Mapsui_Layers_ILayer__.md&amp;value=---%0Auid%3A%20Mapsui.Layers.LayerCollection.Modify(IEnumerable%7BMapsui.Layers.ILayer%7D%2CIEnumerable%7BMapsui.Layers.ILayer%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/LayerCollection.cs/#L131">View Source</a>
+  </span>
+  <a id="Mapsui_Layers_LayerCollection_Modify_" data-uid="Mapsui.Layers.LayerCollection.Modify*"></a>
+  <h4 id="Mapsui_Layers_LayerCollection_Modify_IEnumerable_Mapsui_Layers_ILayer__IEnumerable_Mapsui_Layers_ILayer__" data-uid="Mapsui.Layers.LayerCollection.Modify(IEnumerable{Mapsui.Layers.ILayer},IEnumerable{Mapsui.Layers.ILayer})">Modify(IEnumerable&lt;ILayer&gt;, IEnumerable&lt;ILayer&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Modify(IEnumerable&lt;ILayer&gt; layersToRemove, IEnumerable&lt;ILayer&gt; layersToAdd)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
+        <td><span class="parametername">layersToRemove</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>&gt;</td>
         <td><span class="parametername">layersToAdd</span></td>
         <td></td>
       </tr>
@@ -594,6 +565,53 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_LayerCollection_Remove_Func_Mapsui_Layers_ILayer_System_Boolean__.md&amp;value=---%0Auid%3A%20Mapsui.Layers.LayerCollection.Remove(Func%7BMapsui.Layers.ILayer%2CSystem.Boolean%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/LayerCollection.cs/#L122">View Source</a>
+  </span>
+  <a id="Mapsui_Layers_LayerCollection_Remove_" data-uid="Mapsui.Layers.LayerCollection.Remove*"></a>
+  <h4 id="Mapsui_Layers_LayerCollection_Remove_Func_Mapsui_Layers_ILayer_System_Boolean__" data-uid="Mapsui.Layers.LayerCollection.Remove(Func{Mapsui.Layers.ILayer,System.Boolean})">Remove(Func&lt;ILayer, Boolean&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Remove(Func&lt;ILayer, bool&gt; predicate)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Func</span>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a>&gt;</td>
+        <td><span class="parametername">predicate</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_LayerCollection_Remove_Mapsui_Layers_ILayer___.md&amp;value=---%0Auid%3A%20Mapsui.Layers.LayerCollection.Remove(Mapsui.Layers.ILayer%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
@@ -620,53 +638,6 @@
       <tr>
         <td><a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>[]</td>
         <td><span class="parametername">layers</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_LayerCollection_Remove_System_Func_Mapsui_Layers_ILayer_System_Boolean__.md&amp;value=---%0Auid%3A%20Mapsui.Layers.LayerCollection.Remove(System.Func%7BMapsui.Layers.ILayer%2CSystem.Boolean%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/LayerCollection.cs/#L122">View Source</a>
-  </span>
-  <a id="Mapsui_Layers_LayerCollection_Remove_" data-uid="Mapsui.Layers.LayerCollection.Remove*"></a>
-  <h4 id="Mapsui_Layers_LayerCollection_Remove_System_Func_Mapsui_Layers_ILayer_System_Boolean__" data-uid="Mapsui.Layers.LayerCollection.Remove(System.Func{Mapsui.Layers.ILayer,System.Boolean})">Remove(Func&lt;ILayer, Boolean&gt;)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool Remove(Func&lt;ILayer, bool&gt; predicate)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Mapsui.Layers.ILayer.html">ILayer</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a>&gt;</td>
-        <td><span class="parametername">predicate</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -804,49 +775,6 @@
       </tr>
     </tbody>
   </table>
-  <h3 id="eii">Explicit Interface Implementations
-  </h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_LayerCollection_System_Collections_IEnumerable_GetEnumerator.md&amp;value=---%0Auid%3A%20Mapsui.Layers.LayerCollection.System%23Collections%23IEnumerable%23GetEnumerator%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/LayerCollection.cs/#L35">View Source</a>
-  </span>
-  <a id="Mapsui_Layers_LayerCollection_System_Collections_IEnumerable_GetEnumerator_" data-uid="Mapsui.Layers.LayerCollection.System#Collections#IEnumerable#GetEnumerator*"></a>
-  <h4 id="Mapsui_Layers_LayerCollection_System_Collections_IEnumerable_GetEnumerator" data-uid="Mapsui.Layers.LayerCollection.System#Collections#IEnumerable#GetEnumerator">IEnumerable.GetEnumerator()</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">IEnumerator IEnumerable.GetEnumerator()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerator">IEnumerator</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="implements">Implements</h3>
-  <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">System.Collections.Generic.IEnumerable&lt;T&gt;</a>
-  </div>
-  <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.ienumerable">System.Collections.IEnumerable</a>
-  </div>
-  <h3 id="extensionmethods">Extension Methods</h3>
-  <div>
-      <a class="xref" href="Mapsui.Extensions.EnumerableLayerExtensions.html#Mapsui_Extensions_EnumerableLayerExtensions_WaitForLoadingAsync_System_Collections_Generic_IEnumerable_Mapsui_Layers_ILayer__">EnumerableLayerExtensions.WaitForLoadingAsync(IEnumerable&lt;ILayer&gt;)</a>
-  </div>
 </article>
           </div>
           

@@ -90,38 +90,72 @@
     <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></div>
     <div class="level1"><span class="xref">Animation</span></div>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">Object.Equals(Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">Object.Equals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode#system-object-gethashcode">Object.GetHashCode()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype">Object.GetType()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone">Object.MemberwiseClone()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals#system-object-referenceequals(system-object-system-object)">Object.ReferenceEquals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring#system-object-tostring">Object.ToString()</a>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.Utilities.html">Mapsui.Utilities</a></h6>
   <h6><strong>Assembly</strong>: Mapsui.dll</h6>
   <h5 id="Mapsui_Utilities_Animation_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static class Animation</code></pre>
+    <pre><code class="lang-csharp hljs">public static class Animation : object</code></pre>
   </div>
   <h3 id="methods">Methods
   </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Utilities_Animation_Start__1_IEnumerable_Mapsui_Utilities_AnimationEntry___0___System_Int64_.md&amp;value=---%0Auid%3A%20Mapsui.Utilities.Animation.Start%60%601(IEnumerable%7BMapsui.Utilities.AnimationEntry%7B%60%600%7D%7D%2CSystem.Int64)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Animations/Animation.cs/#L32">View Source</a>
+  </span>
+  <a id="Mapsui_Utilities_Animation_Start_" data-uid="Mapsui.Utilities.Animation.Start*"></a>
+  <h4 id="Mapsui_Utilities_Animation_Start__1_IEnumerable_Mapsui_Utilities_AnimationEntry___0___System_Int64_" data-uid="Mapsui.Utilities.Animation.Start``1(IEnumerable{Mapsui.Utilities.AnimationEntry{``0}},System.Int64)">Start&lt;T&gt;(IEnumerable&lt;AnimationEntry&lt;T&gt;&gt;, Int64)</h4>
+  <div class="markdown level1 summary"><p>Start a list of AnimationEntrys</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void Start&lt;T&gt;(IEnumerable&lt;AnimationEntry&lt;T&gt;&gt; entries, long duration)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Mapsui.Utilities.AnimationEntry-1.html">AnimationEntry</a>&lt;T&gt;&gt;</td>
+        <td><span class="parametername">entries</span></td>
+        <td><p>List of AnimationEntry to start</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">Int64</a></td>
+        <td><span class="parametername">duration</span></td>
+        <td><p>Duration im ms for the given AnimationEntry</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Mapsui_Utilities_Animation_Start__1_IEnumerable_Mapsui_Utilities_AnimationEntry___0___System_Int64__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>All AnimationEntries are started at the same time.</p>
+</div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Utilities_Animation_Start__1_Mapsui_Utilities_AnimationEntry___0__System_Int64_.md&amp;value=---%0Auid%3A%20Mapsui.Utilities.Animation.Start%60%601(Mapsui.Utilities.AnimationEntry%7B%60%600%7D%2CSystem.Int64)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -179,19 +213,19 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Utilities_Animation_Start__1_System_Collections_Generic_IEnumerable_Mapsui_Utilities_AnimationEntry___0___System_Int64_.md&amp;value=---%0Auid%3A%20Mapsui.Utilities.Animation.Start%60%601(System.Collections.Generic.IEnumerable%7BMapsui.Utilities.AnimationEntry%7B%60%600%7D%7D%2CSystem.Int64)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Utilities_Animation_Stop__1___0_IEnumerable_Mapsui_Utilities_AnimationEntry___0___System_Boolean_.md&amp;value=---%0Auid%3A%20Mapsui.Utilities.Animation.Stop%60%601(%60%600%2CIEnumerable%7BMapsui.Utilities.AnimationEntry%7B%60%600%7D%7D%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Animations/Animation.cs/#L32">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Animations/Animation.cs/#L80">View Source</a>
   </span>
-  <a id="Mapsui_Utilities_Animation_Start_" data-uid="Mapsui.Utilities.Animation.Start*"></a>
-  <h4 id="Mapsui_Utilities_Animation_Start__1_System_Collections_Generic_IEnumerable_Mapsui_Utilities_AnimationEntry___0___System_Int64_" data-uid="Mapsui.Utilities.Animation.Start``1(System.Collections.Generic.IEnumerable{Mapsui.Utilities.AnimationEntry{``0}},System.Int64)">Start&lt;T&gt;(IEnumerable&lt;AnimationEntry&lt;T&gt;&gt;, Int64)</h4>
-  <div class="markdown level1 summary"><p>Start a list of AnimationEntrys</p>
+  <a id="Mapsui_Utilities_Animation_Stop_" data-uid="Mapsui.Utilities.Animation.Stop*"></a>
+  <h4 id="Mapsui_Utilities_Animation_Stop__1___0_IEnumerable_Mapsui_Utilities_AnimationEntry___0___System_Boolean_" data-uid="Mapsui.Utilities.Animation.Stop``1(``0,IEnumerable{Mapsui.Utilities.AnimationEntry{``0}},System.Boolean)">Stop&lt;T&gt;(T, IEnumerable&lt;AnimationEntry&lt;T&gt;&gt;, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Stop all AnimationEntrys in a given list</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static void Start&lt;T&gt;(IEnumerable&lt;AnimationEntry&lt;T&gt;&gt; entries, long duration)</code></pre>
+    <pre><code class="lang-csharp hljs">public static void Stop&lt;T&gt;(T target, IEnumerable&lt;AnimationEntry&lt;T&gt;&gt; entries, bool callFinal = true)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -204,15 +238,19 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Mapsui.Utilities.AnimationEntry-1.html">AnimationEntry</a>&lt;T&gt;&gt;</td>
-        <td><span class="parametername">entries</span></td>
-        <td><p>List of AnimationEntry to start</p>
-</td>
+        <td><span class="xref">T</span></td>
+        <td><span class="parametername">target</span></td>
+        <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.int64">Int64</a></td>
-        <td><span class="parametername">duration</span></td>
-        <td><p>Duration im ms for the given AnimationEntry</p>
+        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Mapsui.Utilities.AnimationEntry-1.html">AnimationEntry</a>&lt;T&gt;&gt;</td>
+        <td><span class="parametername">entries</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><span class="parametername">callFinal</span></td>
+        <td><p>Final function is called, if callFinal is true</p>
 </td>
       </tr>
     </tbody>
@@ -232,9 +270,6 @@
       </tr>
     </tbody>
   </table>
-  <h5 id="Mapsui_Utilities_Animation_Start__1_System_Collections_Generic_IEnumerable_Mapsui_Utilities_AnimationEntry___0___System_Int64__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>All AnimationEntries are started at the same time.</p>
-</div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Utilities_Animation_Stop__1___0_Mapsui_Utilities_AnimationEntry___0__System_Boolean_.md&amp;value=---%0Auid%3A%20Mapsui.Utilities.Animation.Stop%60%601(%60%600%2CMapsui.Utilities.AnimationEntry%7B%60%600%7D%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -297,72 +332,13 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Utilities_Animation_Stop__1___0_System_Collections_Generic_IEnumerable_Mapsui_Utilities_AnimationEntry___0___System_Boolean_.md&amp;value=---%0Auid%3A%20Mapsui.Utilities.Animation.Stop%60%601(%60%600%2CSystem.Collections.Generic.IEnumerable%7BMapsui.Utilities.AnimationEntry%7B%60%600%7D%7D%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Animations/Animation.cs/#L80">View Source</a>
-  </span>
-  <a id="Mapsui_Utilities_Animation_Stop_" data-uid="Mapsui.Utilities.Animation.Stop*"></a>
-  <h4 id="Mapsui_Utilities_Animation_Stop__1___0_System_Collections_Generic_IEnumerable_Mapsui_Utilities_AnimationEntry___0___System_Boolean_" data-uid="Mapsui.Utilities.Animation.Stop``1(``0,System.Collections.Generic.IEnumerable{Mapsui.Utilities.AnimationEntry{``0}},System.Boolean)">Stop&lt;T&gt;(T, IEnumerable&lt;AnimationEntry&lt;T&gt;&gt;, Boolean)</h4>
-  <div class="markdown level1 summary"><p>Stop all AnimationEntrys in a given list</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static void Stop&lt;T&gt;(T target, IEnumerable&lt;AnimationEntry&lt;T&gt;&gt; entries, bool callFinal = true)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">T</span></td>
-        <td><span class="parametername">target</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Mapsui.Utilities.AnimationEntry-1.html">AnimationEntry</a>&lt;T&gt;&gt;</td>
-        <td><span class="parametername">entries</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td><span class="parametername">callFinal</span></td>
-        <td><p>Final function is called, if callFinal is true</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">T</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Utilities_Animation_UpdateAnimations__1___0_System_Collections_Generic_IEnumerable_Mapsui_Utilities_AnimationEntry___0___.md&amp;value=---%0Auid%3A%20Mapsui.Utilities.Animation.UpdateAnimations%60%601(%60%600%2CSystem.Collections.Generic.IEnumerable%7BMapsui.Utilities.AnimationEntry%7B%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Utilities_Animation_UpdateAnimations__1___0_IEnumerable_Mapsui_Utilities_AnimationEntry___0___.md&amp;value=---%0Auid%3A%20Mapsui.Utilities.Animation.UpdateAnimations%60%601(%60%600%2CIEnumerable%7BMapsui.Utilities.AnimationEntry%7B%60%600%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Animations/Animation.cs/#L90">View Source</a>
   </span>
   <a id="Mapsui_Utilities_Animation_UpdateAnimations_" data-uid="Mapsui.Utilities.Animation.UpdateAnimations*"></a>
-  <h4 id="Mapsui_Utilities_Animation_UpdateAnimations__1___0_System_Collections_Generic_IEnumerable_Mapsui_Utilities_AnimationEntry___0___" data-uid="Mapsui.Utilities.Animation.UpdateAnimations``1(``0,System.Collections.Generic.IEnumerable{Mapsui.Utilities.AnimationEntry{``0}})">UpdateAnimations&lt;T&gt;(T, IEnumerable&lt;AnimationEntry&lt;T&gt;&gt;)</h4>
+  <h4 id="Mapsui_Utilities_Animation_UpdateAnimations__1___0_IEnumerable_Mapsui_Utilities_AnimationEntry___0___" data-uid="Mapsui.Utilities.Animation.UpdateAnimations``1(``0,IEnumerable{Mapsui.Utilities.AnimationEntry{``0}})">UpdateAnimations&lt;T&gt;(T, IEnumerable&lt;AnimationEntry&lt;T&gt;&gt;)</h4>
   <div class="markdown level1 summary"><p>Update all AnimationEntrys and check, if a redraw is needed</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -386,7 +362,7 @@
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Mapsui.Utilities.AnimationEntry-1.html">AnimationEntry</a>&lt;T&gt;&gt;</td>
+        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Mapsui.Utilities.AnimationEntry-1.html">AnimationEntry</a>&lt;T&gt;&gt;</td>
         <td><span class="parametername">entries</span></td>
         <td></td>
       </tr>

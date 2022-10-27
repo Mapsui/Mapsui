@@ -94,47 +94,23 @@
     <h5>Implements</h5>
     <div><a class="xref" href="Mapsui.Providers.IProvider.html">IProvider</a></div>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">Object.Equals(Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">Object.Equals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode#system-object-gethashcode">Object.GetHashCode()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype">Object.GetType()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone">Object.MemberwiseClone()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals#system-object-referenceequals(system-object-system-object)">Object.ReferenceEquals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring#system-object-tostring">Object.ToString()</a>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.Providers.html">Mapsui.Providers</a></h6>
   <h6><strong>Assembly</strong>: Mapsui.dll</h6>
   <h5 id="Mapsui_Providers_FilteringProvider_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class FilteringProvider : IProvider</code></pre>
+    <pre><code class="lang-csharp hljs">public class FilteringProvider : object, IProvider</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_FilteringProvider__ctor_Mapsui_Providers_IProvider_System_Func_Mapsui_IFeature_System_Boolean__.md&amp;value=---%0Auid%3A%20Mapsui.Providers.FilteringProvider.%23ctor(Mapsui.Providers.IProvider%2CSystem.Func%7BMapsui.IFeature%2CSystem.Boolean%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Providers_FilteringProvider__ctor_Mapsui_Providers_IProvider_Func_Mapsui_IFeature_System_Boolean__.md&amp;value=---%0Auid%3A%20Mapsui.Providers.FilteringProvider.%23ctor(Mapsui.Providers.IProvider%2CFunc%7BMapsui.IFeature%2CSystem.Boolean%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Providers/FilteringProvider.cs/#L14">View Source</a>
   </span>
   <a id="Mapsui_Providers_FilteringProvider__ctor_" data-uid="Mapsui.Providers.FilteringProvider.#ctor*"></a>
-  <h4 id="Mapsui_Providers_FilteringProvider__ctor_Mapsui_Providers_IProvider_System_Func_Mapsui_IFeature_System_Boolean__" data-uid="Mapsui.Providers.FilteringProvider.#ctor(Mapsui.Providers.IProvider,System.Func{Mapsui.IFeature,System.Boolean})">FilteringProvider(IProvider, Func&lt;IFeature, Boolean&gt;)</h4>
+  <h4 id="Mapsui_Providers_FilteringProvider__ctor_Mapsui_Providers_IProvider_Func_Mapsui_IFeature_System_Boolean__" data-uid="Mapsui.Providers.FilteringProvider.#ctor(Mapsui.Providers.IProvider,Func{Mapsui.IFeature,System.Boolean})">FilteringProvider(IProvider, Func&lt;IFeature, Boolean&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -157,7 +133,7 @@
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.func-2">Func</a>&lt;<a class="xref" href="Mapsui.IFeature.html">IFeature</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a>&gt;</td>
+        <td><span class="xref">Func</span>&lt;<a class="xref" href="Mapsui.IFeature.html">IFeature</a>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a>&gt;</td>
         <td><span class="parametername">filter</span></td>
         <td></td>
       </tr>
@@ -178,7 +154,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string CRS { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string? CRS { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -190,7 +166,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullable-1">Nullable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -269,7 +245,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1">IEnumerable</a>&lt;<a class="xref" href="Mapsui.IFeature.html">IFeature</a>&gt;&gt;</td>
+        <td><span class="xref">Task</span>&lt;<span class="xref">IEnumerable</span>&lt;<a class="xref" href="Mapsui.IFeature.html">IFeature</a>&gt;&gt;</td>
         <td></td>
       </tr>
     </tbody>

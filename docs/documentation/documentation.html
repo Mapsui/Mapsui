@@ -81,9 +81,9 @@
 
 <h2 id="documentation-setup">Documentation setup</h2>
 <ul>
-<li>We use docfx to generate the documentation. </li>
-<li>There is a /docfx folder with a docfx project called Mapsui. </li>
-<li>This projects documenation folder contains all the md files used to generate the &#39;documentation&#39; tab in the site. This is the source of those files, they should be edited there.</li>
+<li>We use docfx to generate the documentation.</li>
+<li>There is a /docfx folder with a docfx project called Mapsui.</li>
+<li>This projects documenation folder contains all the md files used to generate the 'documentation' tab in the site. This is the source of those files, they should be edited there.</li>
 <li>In the docfx folder there is a script (build-site.cmd) that generates the documentation site (in /docfx/mapsui/_site) and copies it to the /docs folder.</li>
 <li>The Mapsui project on github is configured to automatically publish this docs folder to <a href="https://mapsui.github.io/mapsui">https://mapsui.github.io/mapsui</a></li>
 <li>A commit of an md file should trigger the build server. This should run the build-site.cmd. This should commit the generated site to the repo. It will when then show up on the website. We should have two separate build configurations one for the docs which ignores the project and one for the project which ignores the docs.</li>

@@ -95,7 +95,7 @@
   <div class="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Mapsui.Widgets.IWidget.html">IWidget</a></div>
-    <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged">INotifyPropertyChanged</a></div>
+    <div><span class="xref">INotifyPropertyChanged</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -123,33 +123,12 @@
     <div>
       <a class="xref" href="Mapsui.Widgets.Widget.html#Mapsui_Widgets_Widget_CalculatePositionY_System_Single_System_Single_System_Single_">Widget.CalculatePositionY(Single, Single, Single)</a>
     </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">Object.Equals(Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">Object.Equals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode#system-object-gethashcode">Object.GetHashCode()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype">Object.GetType()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone">Object.MemberwiseClone()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals#system-object-referenceequals(system-object-system-object)">Object.ReferenceEquals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring#system-object-tostring">Object.ToString()</a>
-    </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.Widgets.ButtonWidget.html">Mapsui.Widgets.ButtonWidget</a></h6>
   <h6><strong>Assembly</strong>: Mapsui.dll</h6>
   <h5 id="Mapsui_Widgets_ButtonWidget_ButtonWidget_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class ButtonWidget : Widget, IWidget, INotifyPropertyChanged</code></pre>
+    <pre><code class="lang-csharp hljs">public class ButtonWidget : Widget, IWidget</code></pre>
   </div>
   <h5 id="Mapsui_Widgets_ButtonWidget_ButtonWidget_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>With this, the user could add buttons with SVG icons to the map.</p>
@@ -208,7 +187,7 @@ Opacity: Opacity of button</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public object Picture { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public object? Picture { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -220,7 +199,7 @@ Opacity: Opacity of button</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullable-1">Nullable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -270,7 +249,7 @@ Opacity: Opacity of button</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string SvgImage { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string? SvgImage { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -282,7 +261,7 @@ Opacity: Opacity of button</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullable-1">Nullable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -358,7 +337,7 @@ Opacity: Opacity of button</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public event PropertyChangedEventHandler PropertyChanged</code></pre>
+    <pre><code class="lang-csharp hljs">public event PropertyChangedEventHandler? PropertyChanged</code></pre>
   </div>
   <h5 class="eventType">Event Type</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -370,7 +349,7 @@ Opacity: Opacity of button</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.propertychangedeventhandler">PropertyChangedEventHandler</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullable-1">Nullable</a>&lt;<span class="xref">PropertyChangedEventHandler</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -388,7 +367,7 @@ Opacity: Opacity of button</p>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public event EventHandler&lt;WidgetTouchedEventArgs&gt; WidgetTouched</code></pre>
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;WidgetTouchedEventArgs&gt;? WidgetTouched</code></pre>
   </div>
   <h5 class="eventType">Event Type</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -400,7 +379,7 @@ Opacity: Opacity of button</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Mapsui.Widgets.WidgetTouchedEventArgs.html">WidgetTouchedEventArgs</a>&gt;</td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullable-1">Nullable</a>&lt;<span class="xref">EventHandler</span>&lt;<a class="xref" href="Mapsui.Widgets.WidgetTouchedEventArgs.html">WidgetTouchedEventArgs</a>&gt;&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -410,7 +389,7 @@ Opacity: Opacity of button</p>
       <a class="xref" href="Mapsui.Widgets.IWidget.html">IWidget</a>
   </div>
   <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged">System.ComponentModel.INotifyPropertyChanged</a>
+      <span class="xref">INotifyPropertyChanged</span>
   </div>
 </article>
           </div>

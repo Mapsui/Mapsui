@@ -92,56 +92,30 @@
   </div>
   <div class="implements">
     <h5>Implements</h5>
-    <div><span class="xref">BruTile.Cache.IPersistentCache</span>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">Byte</a>[]&gt;</div>
-    <div><span class="xref">BruTile.Cache.ITileCache</span>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">Byte</a>[]&gt;</div>
     <div><a class="xref" href="Mapsui.Cache.IUrlPersistentCache.html">IUrlPersistentCache</a></div>
-  </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">Object.Equals(Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">Object.Equals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode#system-object-gethashcode">Object.GetHashCode()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype">Object.GetType()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone">Object.MemberwiseClone()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals#system-object-referenceequals(system-object-system-object)">Object.ReferenceEquals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring#system-object-tostring">Object.ToString()</a>
-    </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.Extensions.Cache.html">Mapsui.Extensions.Cache</a></h6>
   <h6><strong>Assembly</strong>: Mapsui.Extensions.dll</h6>
   <h5 id="Mapsui_Extensions_Cache_SqlitePersistentCache_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class SqlitePersistentCache : IPersistentCache&lt;byte[]&gt;, ITileCache&lt;byte[]&gt;, IUrlPersistentCache</code></pre>
+    <pre><code class="lang-csharp hljs">public class SqlitePersistentCache : IPersistentCache&lt;byte[]&gt;, IUrlPersistentCache</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Extensions_Cache_SqlitePersistentCache__ctor_System_String_System_Nullable_System_TimeSpan__System_String_.md&amp;value=---%0Auid%3A%20Mapsui.Extensions.Cache.SqlitePersistentCache.%23ctor(System.String%2CSystem.Nullable%7BSystem.TimeSpan%7D%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Extensions_Cache_SqlitePersistentCache__ctor_System_String_System_Nullable_TimeSpan__System_Nullable_System_String__.md&amp;value=---%0Auid%3A%20Mapsui.Extensions.Cache.SqlitePersistentCache.%23ctor(System.String%2CSystem.Nullable%7BTimeSpan%7D%2CSystem.Nullable%7BSystem.String%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Extensions/Cache/SqlitePersistentCache.cs/#L24">View Source</a>
   </span>
   <a id="Mapsui_Extensions_Cache_SqlitePersistentCache__ctor_" data-uid="Mapsui.Extensions.Cache.SqlitePersistentCache.#ctor*"></a>
-  <h4 id="Mapsui_Extensions_Cache_SqlitePersistentCache__ctor_System_String_System_Nullable_System_TimeSpan__System_String_" data-uid="Mapsui.Extensions.Cache.SqlitePersistentCache.#ctor(System.String,System.Nullable{System.TimeSpan},System.String)">SqlitePersistentCache(String, Nullable&lt;TimeSpan&gt;, String)</h4>
+  <h4 id="Mapsui_Extensions_Cache_SqlitePersistentCache__ctor_System_String_System_Nullable_TimeSpan__System_Nullable_System_String__" data-uid="Mapsui.Extensions.Cache.SqlitePersistentCache.#ctor(System.String,System.Nullable{TimeSpan},System.Nullable{System.String})">SqlitePersistentCache(String, Nullable&lt;TimeSpan&gt;, Nullable&lt;String&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public SqlitePersistentCache(string name, TimeSpan? cacheExpireTime = null, string folder = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public SqlitePersistentCache(string name, TimeSpan? cacheExpireTime = null, string? folder = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -159,12 +133,12 @@
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullable-1">Nullable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.timespan">TimeSpan</a>&gt;</td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullable-1">Nullable</a>&lt;<span class="xref">TimeSpan</span>&gt;</td>
         <td><span class="parametername">cacheExpireTime</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullable-1">Nullable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">String</a>&gt;</td>
         <td><span class="parametername">folder</span></td>
         <td></td>
       </tr>
@@ -172,43 +146,6 @@
   </table>
   <h3 id="methods">Methods
   </h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Extensions_Cache_SqlitePersistentCache_Add_BruTile_TileIndex_System_Byte___.md&amp;value=---%0Auid%3A%20Mapsui.Extensions.Cache.SqlitePersistentCache.Add(BruTile.TileIndex%2CSystem.Byte%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Extensions/Cache/SqlitePersistentCache.cs/#L99">View Source</a>
-  </span>
-  <a id="Mapsui_Extensions_Cache_SqlitePersistentCache_Add_" data-uid="Mapsui.Extensions.Cache.SqlitePersistentCache.Add*"></a>
-  <h4 id="Mapsui_Extensions_Cache_SqlitePersistentCache_Add_BruTile_TileIndex_System_Byte___" data-uid="Mapsui.Extensions.Cache.SqlitePersistentCache.Add(BruTile.TileIndex,System.Byte[])">Add(TileIndex, Byte[])</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Add(TileIndex index, byte[] tile)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">BruTile.TileIndex</span></td>
-        <td><span class="parametername">index</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">Byte</a>[]</td>
-        <td><span class="parametername">tile</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Extensions_Cache_SqlitePersistentCache_Add_System_String_System_Byte___.md&amp;value=---%0Auid%3A%20Mapsui.Extensions.Cache.SqlitePersistentCache.Add(System.String%2CSystem.Byte%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -248,18 +185,18 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Extensions_Cache_SqlitePersistentCache_Find_BruTile_TileIndex_.md&amp;value=---%0Auid%3A%20Mapsui.Extensions.Cache.SqlitePersistentCache.Find(BruTile.TileIndex)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Extensions_Cache_SqlitePersistentCache_Add_TileIndex_System_Byte___.md&amp;value=---%0Auid%3A%20Mapsui.Extensions.Cache.SqlitePersistentCache.Add(TileIndex%2CSystem.Byte%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Extensions/Cache/SqlitePersistentCache.cs/#L125">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Extensions/Cache/SqlitePersistentCache.cs/#L99">View Source</a>
   </span>
-  <a id="Mapsui_Extensions_Cache_SqlitePersistentCache_Find_" data-uid="Mapsui.Extensions.Cache.SqlitePersistentCache.Find*"></a>
-  <h4 id="Mapsui_Extensions_Cache_SqlitePersistentCache_Find_BruTile_TileIndex_" data-uid="Mapsui.Extensions.Cache.SqlitePersistentCache.Find(BruTile.TileIndex)">Find(TileIndex)</h4>
+  <a id="Mapsui_Extensions_Cache_SqlitePersistentCache_Add_" data-uid="Mapsui.Extensions.Cache.SqlitePersistentCache.Add*"></a>
+  <h4 id="Mapsui_Extensions_Cache_SqlitePersistentCache_Add_TileIndex_System_Byte___" data-uid="Mapsui.Extensions.Cache.SqlitePersistentCache.Add(TileIndex,System.Byte[])">Add(TileIndex, Byte[])</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public byte[] Find(TileIndex index)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Add(TileIndex index, byte[] tile)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -272,23 +209,13 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">BruTile.TileIndex</span></td>
+        <td><span class="xref">TileIndex</span></td>
         <td><span class="parametername">index</span></td>
         <td></td>
       </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
       <tr>
         <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">Byte</a>[]</td>
+        <td><span class="parametername">tile</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -342,18 +269,18 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Extensions_Cache_SqlitePersistentCache_Remove_BruTile_TileIndex_.md&amp;value=---%0Auid%3A%20Mapsui.Extensions.Cache.SqlitePersistentCache.Remove(BruTile.TileIndex)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Extensions_Cache_SqlitePersistentCache_Find_TileIndex_.md&amp;value=---%0Auid%3A%20Mapsui.Extensions.Cache.SqlitePersistentCache.Find(TileIndex)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Extensions/Cache/SqlitePersistentCache.cs/#L117">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Extensions/Cache/SqlitePersistentCache.cs/#L125">View Source</a>
   </span>
-  <a id="Mapsui_Extensions_Cache_SqlitePersistentCache_Remove_" data-uid="Mapsui.Extensions.Cache.SqlitePersistentCache.Remove*"></a>
-  <h4 id="Mapsui_Extensions_Cache_SqlitePersistentCache_Remove_BruTile_TileIndex_" data-uid="Mapsui.Extensions.Cache.SqlitePersistentCache.Remove(BruTile.TileIndex)">Remove(TileIndex)</h4>
+  <a id="Mapsui_Extensions_Cache_SqlitePersistentCache_Find_" data-uid="Mapsui.Extensions.Cache.SqlitePersistentCache.Find*"></a>
+  <h4 id="Mapsui_Extensions_Cache_SqlitePersistentCache_Find_TileIndex_" data-uid="Mapsui.Extensions.Cache.SqlitePersistentCache.Find(TileIndex)">Find(TileIndex)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Remove(TileIndex index)</code></pre>
+    <pre><code class="lang-csharp hljs">public byte[] Find(TileIndex index)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -366,8 +293,23 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">BruTile.TileIndex</span></td>
+        <td><span class="xref">TileIndex</span></td>
         <td><span class="parametername">index</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">Byte</a>[]</td>
         <td></td>
       </tr>
     </tbody>
@@ -404,13 +346,39 @@
       </tr>
     </tbody>
   </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Extensions_Cache_SqlitePersistentCache_Remove_TileIndex_.md&amp;value=---%0Auid%3A%20Mapsui.Extensions.Cache.SqlitePersistentCache.Remove(TileIndex)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Extensions/Cache/SqlitePersistentCache.cs/#L117">View Source</a>
+  </span>
+  <a id="Mapsui_Extensions_Cache_SqlitePersistentCache_Remove_" data-uid="Mapsui.Extensions.Cache.SqlitePersistentCache.Remove*"></a>
+  <h4 id="Mapsui_Extensions_Cache_SqlitePersistentCache_Remove_TileIndex_" data-uid="Mapsui.Extensions.Cache.SqlitePersistentCache.Remove(TileIndex)">Remove(TileIndex)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Remove(TileIndex index)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TileIndex</span></td>
+        <td><span class="parametername">index</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="implements">Implements</h3>
-  <div>
-      <span class="xref">BruTile.Cache.IPersistentCache&lt;T&gt;</span>
-  </div>
-  <div>
-      <span class="xref">BruTile.Cache.ITileCache&lt;T&gt;</span>
-  </div>
   <div>
       <a class="xref" href="Mapsui.Cache.IUrlPersistentCache.html">IUrlPersistentCache</a>
   </div>

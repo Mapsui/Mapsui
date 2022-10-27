@@ -90,52 +90,28 @@
     <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></div>
     <div class="level1"><span class="xref">TmsTileSourceBuilder</span></div>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">Object.Equals(Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">Object.Equals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode#system-object-gethashcode">Object.GetHashCode()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype">Object.GetType()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone">Object.MemberwiseClone()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals#system-object-referenceequals(system-object-system-object)">Object.ReferenceEquals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring#system-object-tostring">Object.ToString()</a>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.Tiling.Layers.html">Mapsui.Tiling.Layers</a></h6>
   <h6><strong>Assembly</strong>: Mapsui.Tiling.dll</h6>
   <h5 id="Mapsui_Tiling_Layers_TmsTileSourceBuilder_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static class TmsTileSourceBuilder</code></pre>
+    <pre><code class="lang-csharp hljs">public static class TmsTileSourceBuilder : object</code></pre>
   </div>
   <h3 id="methods">Methods
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Tiling_Layers_TmsTileSourceBuilder_Build_System_String_System_Boolean_BruTile_Cache_IPersistentCache_System_Byte____.md&amp;value=---%0Auid%3A%20Mapsui.Tiling.Layers.TmsTileSourceBuilder.Build(System.String%2CSystem.Boolean%2CBruTile.Cache.IPersistentCache%7BSystem.Byte%5B%5D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Tiling_Layers_TmsTileSourceBuilder_Build_System_String_System_Boolean_System_Nullable_IPersistentCache_System_Byte_____.md&amp;value=---%0Auid%3A%20Mapsui.Tiling.Layers.TmsTileSourceBuilder.Build(System.String%2CSystem.Boolean%2CSystem.Nullable%7BIPersistentCache%7BSystem.Byte%5B%5D%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Tiling/Layers/TmsTileSourceBuilder.cs/#L20">View Source</a>
   </span>
   <a id="Mapsui_Tiling_Layers_TmsTileSourceBuilder_Build_" data-uid="Mapsui.Tiling.Layers.TmsTileSourceBuilder.Build*"></a>
-  <h4 id="Mapsui_Tiling_Layers_TmsTileSourceBuilder_Build_System_String_System_Boolean_BruTile_Cache_IPersistentCache_System_Byte____" data-uid="Mapsui.Tiling.Layers.TmsTileSourceBuilder.Build(System.String,System.Boolean,BruTile.Cache.IPersistentCache{System.Byte[]})">Build(String, Boolean, IPersistentCache&lt;Byte[]&gt;)</h4>
+  <h4 id="Mapsui_Tiling_Layers_TmsTileSourceBuilder_Build_System_String_System_Boolean_System_Nullable_IPersistentCache_System_Byte_____" data-uid="Mapsui.Tiling.Layers.TmsTileSourceBuilder.Build(System.String,System.Boolean,System.Nullable{IPersistentCache{System.Byte[]}})">Build(String, Boolean, Nullable&lt;IPersistentCache&lt;Byte[]&gt;&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static ITileSource Build(string urlToTileMapXml, bool overrideTmsUrlWithUrlToTileMapXml, IPersistentCache&lt;byte[]&gt; persistentCache = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public static ITileSource Build(string urlToTileMapXml, bool overrideTmsUrlWithUrlToTileMapXml, IPersistentCache&lt;byte[]&gt;? persistentCache = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -158,7 +134,7 @@
         <td></td>
       </tr>
       <tr>
-        <td><span class="xref">BruTile.Cache.IPersistentCache</span>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">Byte</a>[]&gt;</td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullable-1">Nullable</a>&lt;<span class="xref">IPersistentCache</span>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.byte">Byte</a>[]&gt;&gt;</td>
         <td><span class="parametername">persistentCache</span></td>
         <td></td>
       </tr>
@@ -174,7 +150,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">BruTile.ITileSource</span></td>
+        <td><span class="xref">ITileSource</span></td>
         <td></td>
       </tr>
     </tbody>

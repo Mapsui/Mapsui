@@ -112,28 +112,13 @@
       <a class="xref" href="Mapsui.Styles.Style.html#Mapsui_Styles_Style_Opacity">Style.Opacity</a>
     </div>
     <div>
-      <a class="xref" href="Mapsui.Styles.Style.html#Mapsui_Styles_Style_Equals_System_Object_">Style.Equals(Object)</a>
+      <a class="xref" href="Mapsui.Styles.Style.html#Mapsui_Styles_Style_Equals_System_Nullable_System_Object__">Style.Equals(Nullable&lt;Object&gt;)</a>
     </div>
     <div>
       <a class="xref" href="Mapsui.Styles.Style.html#Mapsui_Styles_Style_Equals_Mapsui_Styles_Style_">Style.Equals(Style)</a>
     </div>
     <div>
       <a class="xref" href="Mapsui.Styles.Style.html#Mapsui_Styles_Style_GetHashCode">Style.GetHashCode()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">Object.Equals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype#system-object-gettype">Object.GetType()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone#system-object-memberwiseclone">Object.MemberwiseClone()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals#system-object-referenceequals(system-object-system-object)">Object.ReferenceEquals(Object, Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring#system-object-tostring">Object.ToString()</a>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.Styles.Thematics.html">Mapsui.Styles.Thematics</a></h6>
@@ -203,7 +188,7 @@
     </tbody>
   </table>
   <h5 id="Mapsui_Styles_Thematics_GradientTheme__ctor_System_String_System_Double_System_Double_Mapsui_Styles_IStyle_Mapsui_Styles_IStyle__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p><p>The gradient theme interpolates linearly between two styles based on a numerical attribute in the data source.
+  <div class="markdown level1 remarks"><p>The gradient theme interpolates linearly between two styles based on a numerical attribute in the data source.
 This is useful for scaling symbols, line widths, line and fill colors from numerical attributes.</p>
 <p>Colors are interpolated between two colors, but if you want to interpolate through more colors (fx. a rainbow),
 set the <a class="xref" href="Mapsui.Styles.Thematics.GradientTheme.html#Mapsui_Styles_Thematics_GradientTheme_TextColorBlend">TextColorBlend</a>, <a class="xref" href="Mapsui.Styles.Thematics.GradientTheme.html#Mapsui_Styles_Thematics_GradientTheme_LineColorBlend">LineColorBlend</a> and <a class="xref" href="Mapsui.Styles.Thematics.GradientTheme.html#Mapsui_Styles_Thematics_GradientTheme_FillColorBlend">FillColorBlend</a> properties
@@ -214,7 +199,7 @@ to a custom <a class="xref" href="Mapsui.Styles.Thematics.ColorBlend.html">Color
 </p>
 <example>
 Creating a rainbow color blend showing colors from red, through yellow, green and blue depicting 
-the population density of a country.<p>
+the population density of a country.
 <pre><code>//Create two vector styles to interpolate between
 Mapsui.Styles.VectorStyle min = new Mapsui.Styles.VectorStyle();
 Mapsui.Styles.VectorStyle max = new Mapsui.Styles.VectorStyle();
@@ -225,7 +210,7 @@ Mapsui.Rendering.Thematics.GradientTheme popdens = new Mapsui.Rendering.Thematic
 //Set the fill-style colors to be a rainbow blend from red to blue.
 popdens.FillColorBlend = Mapsui.Rendering.Thematics.ColorBlend.Rainbow5;
 myVectorLayer.Styles.Add(popdens);</code></pre>
-<p></example></p>
+</example>
 </div>
   <h3 id="properties">Properties
   </h3>
