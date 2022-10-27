@@ -8,7 +8,7 @@
     <title>Mapsui WinUI Getting Started </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Mapsui WinUI Getting Started ">
-    <meta name="generator" content="docfx 2.58.9.0">
+    <meta name="generator" content="docfx 2.59.4.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -80,27 +80,33 @@
 <h1 id="mapsui-winui-getting-started">Mapsui WinUI Getting Started</h1>
 
 <h3 id="step-1">Step 1</h3>
-<p>Create new &#39;Blank App. Packaged (WinUI 3 in Desktop)&#39; in Visual Studio</p>
+<p>Create new 'Blank App. Packaged (WinUI 3 in Desktop)' in Visual Studio</p>
 <h3 id="step-2">Step 2</h3>
 <p>In the package manager console type:</p>
 <pre><code class="lang-console">PM&gt; Install-Package Mapsui.WinUI -pre
-</code></pre><h3 id="step-3">Step 3</h3>
+</code></pre>
+<h3 id="step-3">Step 3</h3>
 <p>Open MainPage.xaml and add namespace:</p>
 <pre><code class="lang-xml">xmlns:winui=&quot;using:Mapsui.UI.WinUI&quot;
-</code></pre><p>Add MapControl to the Grid:</p>
+</code></pre>
+<p>Add MapControl to the Grid:</p>
 <pre><code class="lang-xml">&lt;Grid&gt;
   &lt;winui:MapControl x:Name=&quot;MyMap&quot; VerticalAlignment=&quot;Stretch&quot; HorizontalAlignment=&quot;Stretch&quot; /&gt;
 &lt;/Grid&gt;
-</code></pre><p>In MainPage.xaml.cs, add namespace:</p>
+</code></pre>
+<p>In MainPage.xaml.cs, add namespace:</p>
 <pre><code class="lang-csharp">using Mapsui.Utilities;
-</code></pre><p>Add code to the constructor:</p>
+</code></pre>
+<p>Add code to the constructor:</p>
 <pre><code class="lang-csharp">        public MainPage()
         {
             this.InitializeComponent();
 
             MyMap.Map.Layers.Add(OpenStreetMap.CreateTileLayer());
         }
-</code></pre><h3 id="step-4">Step 4</h3>
+
+</code></pre>
+<h3 id="step-4">Step 4</h3>
 <p>Run it and you should see a map of the world.</p>
 </article>
           </div>

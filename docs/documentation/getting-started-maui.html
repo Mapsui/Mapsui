@@ -8,7 +8,7 @@
     <title>Mapsui MAUI getting started </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Mapsui MAUI getting started ">
-    <meta name="generator" content="docfx 2.58.9.0">
+    <meta name="generator" content="docfx 2.59.4.0">
     
     <link rel="shortcut icon" href="../images/favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -84,26 +84,30 @@
 <h3 id="step-2">Step 2</h3>
 <p>In the package manager console type:</p>
 <pre><code class="lang-console">PM&gt; Install-Package Mapsui.Maui -pre
-</code></pre><h3 id="step-3">Step 3</h3>
+</code></pre>
+<h3 id="step-3">Step 3</h3>
 <p>In MauiProgram.cs add .UseSkiaSharp() to the builder like this:</p>
 <pre><code class="lang-csharp">builder
   .UseMauiApp&lt;App&gt;()
   .UseSkiaSharp()
   .ConfigureFonts(fonts =&gt;  
-</code></pre><p>and add namespace &#39;SkiaSharp.Views.Maui.Controls.Hosting&#39;:</p>
+</code></pre>
+<p>and add namespace 'SkiaSharp.Views.Maui.Controls.Hosting':</p>
 <pre><code class="lang-csharp">using SkiaSharp.Views.Maui.Controls.Hosting;
-</code></pre><p>This is because Mapsui depends on SkiaSharp which needs this call. We hope that this will not be necessary in a future version of Mapsui.Maui. Without this line the app will crash with this exception: &quot;Catastrophic failure (0x8000FFFF (E_UNEXPECTED))&quot;.</p>
+</code></pre>
+<p>This is because Mapsui depends on SkiaSharp which needs this call. We hope that this will not be necessary in a future version of Mapsui.Maui. Without this line the app will crash with this exception: &quot;Catastrophic failure (0x8000FFFF (E_UNEXPECTED))&quot;.</p>
 <h3 id="step-4">Step 4</h3>
 <p>In MainPage.xaml.cs replace the constuctor with this code:</p>
 <pre><code class="lang-csharp">public MainPage()
 {
   InitializeComponent();
-
+  
   var mapControl = new Mapsui.UI.Maui.MapControl();
   mapControl.Map?.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
   Content = mapControl;
 }
-</code></pre><h3 id="step-5">Step 5</h3>
+</code></pre>
+<h3 id="step-5">Step 5</h3>
 <p>Run it and you should see a map of the world.</p>
 </article>
           </div>
