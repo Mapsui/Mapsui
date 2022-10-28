@@ -6,11 +6,6 @@ namespace Mapsui
     {
         event PropertyChangedEventHandler ViewportChanged;
 
-        /// <summary>
-        /// Coordinate of center of viewport in map coordinates
-        /// </summary>
-        MReadOnlyPoint Center { get; }
-
         double CenterX { get; }
         double CenterY { get; }
 
