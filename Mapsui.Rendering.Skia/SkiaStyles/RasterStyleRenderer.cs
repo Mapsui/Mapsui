@@ -107,8 +107,8 @@ namespace Mapsui.Rendering.Skia
 
             var userRotation = SKMatrix.CreateRotationDegrees((float)viewport.Rotation);
             var focalPointOffset = SKMatrix.CreateTranslation(
-                (float)(rect.Left - viewport.Center.X),
-                (float)(viewport.Center.Y - rect.Top));
+                (float)(rect.Left - viewport.CenterX),
+                (float)(viewport.CenterY - rect.Top));
             var zoomScale = SKMatrix.CreateScale((float)(1.0 / viewport.Resolution), (float)(1.0 / viewport.Resolution));
             var centerInScreen = SKMatrix.CreateTranslation((float)(viewport.Width / 2.0), (float)(viewport.Height / 2.0));
 

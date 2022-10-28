@@ -17,7 +17,6 @@ namespace Mapsui
         public Map? Map { get; set; }
 
         public event PropertyChangedEventHandler? ViewportChanged;
-        public MReadOnlyPoint Center => _viewport.Center;
         public double CenterX => _viewport.CenterX;
         public double CenterY => _viewport.CenterY;
         public double Resolution => _viewport.Resolution;
@@ -59,7 +58,7 @@ namespace Mapsui
             Limiter?.LimitExtent(_viewport, Map?.Extent);
         }
 
-        public void SetCenter(MReadOnlyPoint center, long duration = 0, Easing? easing = default)
+        public void SetCenter(MPoint center, long duration = 0, Easing? easing = default)
         {
             if (Map?.PanLock ?? false) return;
             _viewport.SetCenter(center, duration, easing);

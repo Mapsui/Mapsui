@@ -52,8 +52,8 @@ namespace Mapsui
         /// <param name="viewport">Viewport from which to copy all values</param>
         public Viewport(IReadOnlyViewport viewport) : this()
         {
-            _centerX = viewport.Center.X;
-            _centerY = viewport.Center.Y;
+            _centerX = viewport.CenterX;
+            _centerY = viewport.CenterY;
             _resolution = viewport.Resolution;
             _width = viewport.Width;
             _height = viewport.Height;
@@ -66,9 +66,6 @@ namespace Mapsui
         }
 
         public bool HasSize => !_width.IsNanOrInfOrZero() && !_height.IsNanOrInfOrZero();
-
-        /// <inheritdoc />
-        public MReadOnlyPoint Center => new MReadOnlyPoint(_centerX, _centerY);
 
         /// <inheritdoc />
         public double CenterX
@@ -217,8 +214,8 @@ namespace Mapsui
         {
             var screenCenterX = Width / 2.0;
             var screenCenterY = Height / 2.0;
-            var screenX = (worldX - Center.X) / _resolution + screenCenterX;
-            var screenY = (Center.Y - worldY) / _resolution + screenCenterY;
+            var screenX = (worldX - CenterX) / _resolution + screenCenterX;
+            var screenY = (CenterY - worldY) / _resolution + screenCenterY;
             return (screenX, screenY);
         }
 
@@ -235,8 +232,8 @@ namespace Mapsui
                 screenY = screen.Y;
             }
 
-            var worldX = Center.X + (screenX - screenCenterX) * _resolution;
-            var worldY = Center.Y - (screenY - screenCenterY) * _resolution;
+            var worldX = CenterX + (screenX - screenCenterX) * _resolution;
+            var worldY = CenterY - (screenY - screenCenterY) * _resolution;
             return (worldX, worldY);
         }
 
@@ -258,8 +255,8 @@ namespace Mapsui
                 // Calculate current position again with adjusted resolution
                 // Zooming should be centered on the place where the map is touched.
                 // This is done with the scale correction.
-                var scaleCorrectionX = (1 - deltaResolution) * (current.X - Center.X);
-                var scaleCorrectionY = (1 - deltaResolution) * (current.Y - Center.Y);
+                var scaleCorrectionX = (1 - deltaResolution) * (current.X - CenterX);
+                var scaleCorrectionY = (1 - deltaResolution) * (current.Y - CenterY);
 
                 newX -= scaleCorrectionX;
                 newY -= scaleCorrectionY;
@@ -288,10 +285,10 @@ namespace Mapsui
             // calculate the window extent which is not rotate
             var halfSpanX = _width * _resolution * 0.5;
             var halfSpanY = _height * _resolution * 0.5;
-            var left = Center.X - halfSpanX;
-            var bottom = Center.Y - halfSpanY;
-            var right = Center.X + halfSpanX;
-            var top = Center.Y + halfSpanY;
+            var left = CenterX - halfSpanX;
+            var bottom = CenterY - halfSpanY;
+            var right = CenterX + halfSpanX;
+            var top = CenterY + halfSpanY;
             var windowExtent = new MQuad
             {
                 BottomLeft = new MPoint(left, bottom),
@@ -311,7 +308,7 @@ namespace Mapsui
             {
                 // Calculate the extent that will encompass a rotated viewport (slightly larger - used for tiles).
                 // Perform rotations on corner offsets and then add them to the Center point.
-                windowExtent = windowExtent.Rotate(-_rotation, Center.X, Center.Y);
+                windowExtent = windowExtent.Rotate(-_rotation, CenterX, CenterY);
                 var rotatedBoundingBox = windowExtent.ToBoundingBox();
                 _extent.Min.X = rotatedBoundingBox.MinX;
                 _extent.Min.Y = rotatedBoundingBox.MinY;
@@ -361,11 +358,11 @@ namespace Mapsui
             OnViewportChanged();
         }
 
-        public void SetCenter(MReadOnlyPoint center, long duration = 0, Easing? easing = default)
+        public void SetCenter(MPoint center, long duration = 0, Easing? easing = default)
         {
             _animations = new();
 
-            if (center.Equals(Center))
+            if (center.X == _centerX && center.Y == _centerY)
                 return;
 
             if (duration == 0)
