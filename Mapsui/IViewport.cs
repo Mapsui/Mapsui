@@ -14,7 +14,7 @@ namespace Mapsui
     {
         void SetCenter(double x, double y, long duration = 0, Easing? easing = default);
         void SetCenterAndResolution(double x, double y, double resolution, long duration = 0, Easing? easing = default);
-        void SetCenter(MReadOnlyPoint center, long duration = 0, Easing? easing = default);
+        void SetCenter(MPoint center, long duration = 0, Easing? easing = default);
         void SetResolution(double resolution, long duration = 0, Easing? easing = default);
         void SetRotation(double rotation, long duration = 0, Easing? easing = default);
         void SetSize(double width, double height);
