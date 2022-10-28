@@ -90,8 +90,8 @@ namespace Mapsui.Rendering.Skia.Functions
 
             var screenCenterX = viewport.Width * 0.5;
             var screenCenterY = viewport.Height * 0.5;
-            var centerX = viewport.Center.X;
-            var centerY = viewport.Center.Y;
+            var centerX = viewport.CenterX;
+            var centerY = viewport.CenterY;
             var resolution = 1.0 / viewport.Resolution;
             var rotation = viewport.Rotation / 180f * Math.PI;
             var sin = Math.Sin(rotation);
