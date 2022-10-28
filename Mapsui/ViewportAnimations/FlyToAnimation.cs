@@ -11,11 +11,13 @@ namespace Mapsui.ViewportAnimations
             var animations = new List<AnimationEntry<Viewport>>();
             AnimationEntry<Viewport> entry;
 
-            if (!center.Equals(viewport.Center))
+            var viewportCenter = new MPoint(viewport.CenterX, viewport.CenterY);
+
+            if (!center.Equals(viewportCenter))
             {
                 entry = new AnimationEntry<Viewport>(
-                    start: viewport.Center,
-                    end: (MReadOnlyPoint)center,
+                    start: viewportCenter,
+                    end: center,
                     animationStart: 0,
                     animationEnd: 1,
                     easing: Easing.SinInOut,
@@ -53,14 +55,14 @@ namespace Mapsui.ViewportAnimations
 
         private static void CenterTick(Viewport viewport, AnimationEntry<Viewport> entry, double value)
         {
-            viewport.CenterX = ((MReadOnlyPoint)entry.Start).X + (((MReadOnlyPoint)entry.End).X - ((MReadOnlyPoint)entry.Start).X) * entry.Easing.Ease(value);
-            viewport.CenterY = ((MReadOnlyPoint)entry.Start).Y + (((MReadOnlyPoint)entry.End).Y - ((MReadOnlyPoint)entry.Start).Y) * entry.Easing.Ease(value);
+            viewport.CenterX = ((MPoint)entry.Start).X + (((MPoint)entry.End).X - ((MPoint)entry.Start).X) * entry.Easing.Ease(value);
+            viewport.CenterY = ((MPoint)entry.Start).Y + (((MPoint)entry.End).Y - ((MPoint)entry.Start).Y) * entry.Easing.Ease(value);
         }
 
         private static void CenterFinal(Viewport viewport, AnimationEntry<Viewport> entry)
         {
-            viewport.CenterX = ((MReadOnlyPoint)entry.End).X;
-            viewport.CenterY = ((MReadOnlyPoint)entry.End).Y;
+            viewport.CenterX = ((MPoint)entry.End).X;
+            viewport.CenterY = ((MPoint)entry.End).Y;
         }
 
         private static void ResolutionTick(Viewport viewport, AnimationEntry<Viewport> entry, double value)

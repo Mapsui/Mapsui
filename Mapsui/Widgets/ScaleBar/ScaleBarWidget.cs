@@ -519,7 +519,7 @@ namespace Mapsui.Widgets.ScaleBar
             // because EPSG:3857 is only there 1 m. At other angles, we
             // should calculate the correct length.
 
-            var (_, y) = projection.Project(CRS, "EPSG:4326", viewport.Center.X, viewport.Center.Y); // clone or else you will project the original viewport center
+            var (_, y) = projection.Project(CRS, "EPSG:4326", viewport.CenterX, viewport.CenterY); // clone or else you will project the original viewport center
 
             // Calc ground resolution in meters per pixel of viewport for this latitude
             var groundResolution = viewport.Resolution * Math.Cos(y / 180.0 * Math.PI);

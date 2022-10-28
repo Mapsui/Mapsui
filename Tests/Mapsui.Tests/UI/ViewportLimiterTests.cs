@@ -21,8 +21,8 @@ namespace Mapsui.Tests.UI
             limiter.LimitExtent(viewport, viewport.Extent);
 
             // assert
-            Assert.AreEqual(viewport.Center.X, 20);
-            Assert.AreEqual(viewport.Center.Y, 40);
+            Assert.AreEqual(viewport.CenterX, 20);
+            Assert.AreEqual(viewport.CenterY, 40);
         }
     }
 }
