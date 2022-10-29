@@ -24,7 +24,7 @@
 <div class="container">
     <div class="row">
         <div class="col border rounded p-2 canvas-container">
-            <MapControl />
+            <MapControl Map=@CurrentMap />
         </div>
     </div>
     <div class="row">
@@ -41,12 +41,14 @@
     public List<string> Categories { get; set; } = new();
 
     public string CategoryId { get; set; }
-    
+
     public string SampleId { get; set; }
 
     public string Title { get; set; }
 
-    private IMapControl? mapControl;
+    public MapControl LoadMapControl { get; set; } = new MapControl();
+
+    public Map CurrentMap { get; set; }
 
     protected override void OnInitialized()
     {
@@ -78,24 +80,14 @@
         FillMap();
     }
 
-    private void FillMap()
+    private async void FillMap()
     {
-        if (Sample != null && mapControl != null)
+        if (Sample != null && LoadMapControl != null)
         {
             var sample = Sample;
-            Title = sample.Name;
-
-            Catch.TaskRun(async () =>
-            {
-                try
-                {
-                    await sample.SetupAsync(mapControl);
-                }
-                catch (Exception e)
-                {
-                    Logger.Log(LogLevel.Error, e.Message, e);
-                }
-            });
+            Title = sample.Name;            
+            await sample.SetupAsync(LoadMapControl);
+            this.CurrentMap = LoadMapControl!.Map;                        
         }
     }
 

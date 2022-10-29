@@ -479,6 +479,9 @@ namespace Mapsui.UI.Wpf
         /// <summary>
         /// Map holding data for which is shown in this MapControl
         /// </summary>
+#if __BLAZOR__
+        [Parameter]
+#endif
         public Map? Map
         {
             get => _map;
@@ -670,5 +673,5 @@ namespace Mapsui.UI.Wpf
             }
             _invalidateTimer = null;
         }
-    }
+    }  
 }
