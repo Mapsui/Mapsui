@@ -1,13 +1,13 @@
 ﻿@inherits MapControlBase
 @inject IJSRuntime JsRuntime
-<div class="MapControl" onmouseup=@OnMouseUp onmousedown=@OnMouseDown onmousewheel=@OnMouseWheel onmousemove=@OnMouseMove onkeydown=@OnKeyDown onkeyup=@OnKeyUp>
+<div class="MapControl" @onmouseup=@OnMouseUp @onmousedown=@OnMouseDown @onmousewheel=@OnMouseWheel @onmousemove=@OnMouseMove @onkeydown=@OnKeyDown @onkeyup=@OnKeyUp>
 @if (UseGPU)
 {
-    <SkiaSharp.Views.Blazor.SKGLView OnPaintSurface=@OnPaintSurface IgnorePixelScaling="true" EnableRenderLoop="true"/>
+        <SkiaSharp.Views.Blazor.SKGLView OnPaintSurface="OnPaintSurfaceGPU" IgnorePixelScaling="true" EnableRenderLoop="true" />
 }
 else
 {
-    <SkiaSharp.Views.Blazor.SKCanvasView OnPaintSurface=@OnPaintSurface IgnorePixelScaling="true" EnableRenderLoop="true"/>
+        <SkiaSharp.Views.Blazor.SKCanvasView OnPaintSurface="OnPaintSurfaceCPU" IgnorePixelScaling="true" EnableRenderLoop="true" />
 }
 </div>
 
@@ -50,7 +50,7 @@ else
         _pressedKeys.Remove(e.Code);
     }
 
-    void OnPaintSurface(SKPaintSurfaceEventArgs e)
+    void OnPaintSurfaceCPU(SKPaintSurfaceEventArgs e)
     {
         // the the canvas and properties
         var canvas = e.Surface.Canvas;
@@ -59,7 +59,7 @@ else
         OnPaintSurface(canvas, info);
     }
 
-    void OnPaintSurface(SKPaintGLSurfaceEventArgs e)
+    void OnPaintSurfaceGPU(SKPaintGLSurfaceEventArgs e)
     {
         // the the canvas and properties
         var canvas = e.Surface.Canvas;
