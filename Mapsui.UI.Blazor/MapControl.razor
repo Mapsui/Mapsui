@@ -61,35 +61,11 @@ else
         _pressedKeys.Remove(e.Code);
     }
 
-    void DrawText(SKCanvas canvas, SKImageInfo info, string text)
-    {
-        // make sure the canvas is blank
-        canvas.Clear(SKColors.White);
-
-        // decide what the text looks like
-        using var paint = new SKPaint
-            {
-                Color = SKColors.Black,
-                IsAntialias = true,
-                Style = SKPaintStyle.Fill,
-                TextAlign = SKTextAlign.Center,
-                TextSize = 24
-            };
-
-        // adjust the location based on the pointer
-        var coord = new SKPoint(info.Width / 2, (info.Height + paint.TextSize) / 2);
-
-        // draw some text
-        canvas.DrawText(text, coord, paint);
-    }
-
     void OnPaintSurfaceCPU(SKPaintSurfaceEventArgs e)    
     {
         // the the canvas and properties
         var canvas = e.Surface.Canvas;
         var info = e.Info;
-
-        DrawText(canvas, info, "CPU");
 
         OnPaintSurface(canvas, info);
     }
@@ -99,8 +75,6 @@ else
         // the the canvas and properties
         var canvas = e.Surface.Canvas;
         var info = e.Info;
-
-        DrawText(canvas, info, "GPU");
 
         OnPaintSurface(canvas, info);
     }

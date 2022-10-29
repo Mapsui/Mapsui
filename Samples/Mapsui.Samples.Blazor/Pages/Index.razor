@@ -46,13 +46,18 @@
 
     public string Title { get; set; }
 
-    MapControl Map = null!;  
+    MapControl Map = null!;
 
-    protected override void OnInitialized()
+
+    protected override void OnAfterRender(bool firstRender)
     {
-        FillComboBoxWithCategories();
+        base.OnAfterRender(firstRender);
+        if (firstRender)
+        {
+            FillComboBoxWithCategories();
+        }
     }
-    
+
     private void FillComboBoxWithCategories()
     {
         var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c);
