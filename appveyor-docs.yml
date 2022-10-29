@@ -12,7 +12,7 @@ only_commits:
 build_script:  
 - cmd: git checkout master
 - ps: Invoke-WebRequest 'https://dot.net/v1/dotnet-install.ps1' -OutFile 'dotnet-install.ps1';
-- ps: ./dotnet-install.ps1 -Version 7.0.100-rc.2 -InstallDir "dotnetcli"
+- ps: ./dotnet-install.ps1 -Version 7.0.100-rc.2.22477.23 -InstallDir "dotnetcli"
 - cmd: docfx\build-site.cmd
 
 environment:
