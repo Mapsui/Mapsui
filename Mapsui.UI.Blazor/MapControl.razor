@@ -1,7 +1,4 @@
-﻿@namespace Mapsui.UI.Blazor;
-@using SkiaSharp
-@using Mapsui.Rendering
-@inherits MapControlBase
+﻿@inherits MapControlBase
 @inject IJSRuntime JsRuntime
 <div class="MapControl" onmouseup=@OnMouseUp onmousedown=@OnMouseDown onmousewheel=@OnMouseWheel onmousemove=@OnMouseMove onkeydown=@OnKeyDown onkeyup=@OnKeyUp>
 @if (UseGPU)
@@ -53,12 +50,26 @@ else
         _pressedKeys.Remove(e.Code);
     }
 
+    void OnPaintSurface(SKPaintSurfaceEventArgs e)
+    {
+        // the the canvas and properties
+        var canvas = e.Surface.Canvas;
+        var info = e.Info;
+
+        OnPaintSurface(canvas, info);
+    }
+
     void OnPaintSurface(SKPaintGLSurfaceEventArgs e)
     {
         // the the canvas and properties
         var canvas = e.Surface.Canvas;
-        _canvasSize = e.Info;
+        var info = e.Info;
 
+        OnPaintSurface(canvas, info);
+    }
+
+    void OnPaintSurface(SKCanvas canvas, SKImageInfo info)
+    {
         // On Loaded Workaround
         if (!_onLoaded)
         {
@@ -67,9 +78,9 @@ else
         }
 
         // Size changed Workaround
-        if (_canvasSize?.Width != e.Info.Width || _canvasSize?.Height != e.Info.Height)
+        if (_canvasSize?.Width != info.Width || _canvasSize?.Height != info.Height)
         {
-            _canvasSize = e.Info;
+            _canvasSize = info;
             OnSizeChanged();
         }
 
