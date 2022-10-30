@@ -48,10 +48,6 @@ namespace Mapsui
         /// is rotated. So this MRect perhaps contain parts, that are not visible.
         /// </remarks>
         public MRect Extent { get; private init; }
-        /// <summary>
-        /// IsRotated is true, when viewport displays map rotated
-        /// </summary>
-        public bool IsRotated { get; private init; }
 
         public ViewportState(double centerX, double centerY, double resolution, double rotation, double width, double height)
         {
@@ -62,9 +58,7 @@ namespace Mapsui
             Width = width;
             Height = height;
 
-            // Secondary fields
-            IsRotated = !double.IsNaN(Rotation) && Rotation > Constants.Epsilon && Rotation < 360 - Constants.Epsilon;
-            if (!IsRotated) Rotation = 0; // If not rotated set _rotation explicitly to exactly 0
+            // Extent is calculated from the other fields
             Extent = this.GetExtent();
         }
     }

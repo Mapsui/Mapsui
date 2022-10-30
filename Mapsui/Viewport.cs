@@ -59,7 +59,6 @@ namespace Mapsui
             _height = viewport.Height;
             _rotation = viewport.Rotation;
 
-            IsRotated = viewport.IsRotated;
             if (viewport.Extent != null) _extent = new MRect(viewport.Extent);
 
             UpdateExtent();
@@ -137,15 +136,10 @@ namespace Mapsui
                 if (_rotation < 0)
                     _rotation += 360.0;
 
-                IsRotated = !double.IsNaN(_rotation) && _rotation > Constants.Epsilon && _rotation < 360 - Constants.Epsilon;
-                if (!IsRotated) _rotation = 0; // If not rotated set _rotation explicitly to exactly 0
                 UpdateExtent();
                 OnViewportChanged();
             }
         }
-
-        /// <inheritdoc />
-        public bool IsRotated { get; private set; }
 
         /// <inheritdoc />
         public MRect Extent => _extent;
@@ -181,7 +175,7 @@ namespace Mapsui
         {
             var (screenX, screenY) = WorldToScreenUnrotated(worldX, worldY);
 
-            if (IsRotated)
+            if (this.IsRotated())
             {
                 var screenCenterX = Width / 2.0;
                 var screenCenterY = Height / 2.0;
@@ -230,7 +224,7 @@ namespace Mapsui
             var screenCenterX = Width / 2.0;
             var screenCenterY = Height / 2.0;
 
-            if (IsRotated)
+            if (this.IsRotated())
             {
                 var screen = new MPoint(screenX, screenY).Rotate(_rotation, screenCenterX, screenCenterY);
                 screenX = screen.X;
@@ -302,7 +296,7 @@ namespace Mapsui
                 BottomRight = new MPoint(right, bottom)
             };
 
-            if (!IsRotated)
+            if (!this.IsRotated())
             {
                 _extent.Min.X = left;
                 _extent.Min.Y = bottom;

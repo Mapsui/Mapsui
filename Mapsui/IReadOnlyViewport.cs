@@ -46,11 +46,6 @@ namespace Mapsui
         double Rotation { get; }
 
         /// <summary>
-        /// IsRotated is true, when viewport displays map rotated
-        /// </summary>
-        bool IsRotated { get; }
-
-        /// <summary>
         /// Converts a point in screen pixels to one in screen units, respecting rotation
         /// </summary>
         /// <param name="position">Coordinate in screen units</param>

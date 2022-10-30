@@ -25,7 +25,6 @@ namespace Mapsui
         public double Width => _viewport.Width;
         public double Height => _viewport.Height;
         public double Rotation => _viewport.Rotation;
-        public bool IsRotated => _viewport.IsRotated;
 
         public void Transform(MPoint position, MPoint previousPosition, double deltaResolution = 1, double deltaRotation = 0)
         {
