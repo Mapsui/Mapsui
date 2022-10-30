@@ -24,14 +24,9 @@
 <div class="container">
     <div class="row">
         <div class="col border rounded p-2 canvas-container">
-            <MapControl @ref="Map" />
+            <MapControl @ref="_mapControl" />
         </div>
-    </div>
-    <div class="row">
-         <div class="col border rounded p-2 canvas-container">
-            <TestControl />
-        </div>
-    </div>
+    </div>   
 </div>
 
 @code
@@ -40,14 +35,13 @@
 
     public List<string> Categories { get; set; } = new();
 
-    public string CategoryId { get; set; }
+    public string? CategoryId { get; set; }
 
-    public string SampleId { get; set; }
+    public string? SampleId { get; set; }
 
-    public string Title { get; set; }
+    public string? Title { get; set; }
 
-    MapControl Map = null!;
-
+    private MapControl? _mapControl;
 
     protected override void OnAfterRender(bool firstRender)
     {
@@ -85,11 +79,11 @@
 
     private async void FillMap()
     {
-        if (Sample != null && Map != null)
+        if (Sample != null && _mapControl != null)
         {
             var sample = Sample;
             Title = sample.Name;            
-            await sample.SetupAsync(Map);            
+            await sample.SetupAsync(_mapControl);            
         }
     }
 

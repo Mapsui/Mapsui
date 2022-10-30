@@ -14,8 +14,8 @@ namespace Mapsui.UI.Blazor
     /// </summary>
     public abstract partial class MapControlBase : ComponentBase, IMapControl, IDisposable
     {       
-        // ReSharper disable once InconsistentNaming
-        public static bool UseGPU { get; set; } = true;
+        // ReSharper disable once InconsistentNamingr
+        public static bool UseGPU { get; set; } = false;
 
         public abstract float ViewportWidth { get; }
         public abstract float ViewportHeight { get; }
