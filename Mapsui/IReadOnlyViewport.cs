@@ -100,14 +100,5 @@ namespace Mapsui
         /// <param name="worldY">Y coordinate in map units</param>
         /// <returns>Tuple of x and y in screen coordinates</returns>
         (double screenX, double screenY) WorldToScreenXY(double worldX, double worldY);
-
-        /// <summary>
-        /// Converts X/Y in map units to a point in device independent units (or DIP or DP),
-        /// respecting rotation
-        /// </summary>
-        /// <param name="worldX">X coordinate in map units</param>
-        /// <param name="worldY">Y coordinate in map units</param>
-        /// <returns>The x and y in screen pixels</returns>
-        (double screenX, double screenY) WorldToScreenUnrotated(double worldX, double worldY); // todo: Get rid of this method
     }
 }
