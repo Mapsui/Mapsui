@@ -15,8 +15,12 @@ namespace Mapsui.Extensions
             && viewport.Rotation < 360 - Constants.Epsilon;
 
         /// <summary>
-        /// Calculates extent from the viewport
+        /// Calculates extent from the viewport.
         /// </summary>
+        /// <remarks>
+        /// This MRect is horizontally and vertically aligned, even if the viewport
+        /// is rotated. So this MRect perhaps contain parts, that are not visible.
+        /// </remarks>
         public static MRect GetExtent(this ViewportState viewportState)
         {
             // calculate the window extent 

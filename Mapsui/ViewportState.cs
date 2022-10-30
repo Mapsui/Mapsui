@@ -2,9 +2,6 @@
 // The Mapsui authors licensed this file under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
-using Mapsui.Extensions;
-using Mapsui.Utilities;
-
 namespace Mapsui
 {
     public record class ViewportState
@@ -40,14 +37,6 @@ namespace Mapsui
         /// Height of viewport in screen pixels
         /// </summary>
         public double Height { get; init; }
-        /// <summary>
-        /// MRect of viewport in map coordinates respecting Rotation
-        /// </summary>
-        /// <remarks>
-        /// This MRect is horizontally and vertically aligned, even if the viewport
-        /// is rotated. So this MRect perhaps contain parts, that are not visible.
-        /// </remarks>
-        public MRect Extent { get; private init; }
 
         public ViewportState(double centerX, double centerY, double resolution, double rotation, double width, double height)
         {
@@ -57,9 +46,6 @@ namespace Mapsui
             Rotation = rotation;
             Width = width;
             Height = height;
-
-            // Extent is calculated from the other fields
-            Extent = this.GetExtent();
         }
     }
 }
