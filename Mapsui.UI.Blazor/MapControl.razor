@@ -26,7 +26,7 @@ else
     private MRect? _selectRectangle;
     private MPoint? _downMousePosition;
     private double? _lastY;
-    private string _defaultCursor = Cursors.Default;
+    private string? _defaultCursor = Cursors.Default;
     private readonly HashSet<string> _pressedKeys = new();
     private bool _isInBoxZoomMode;
     public string MoveCursor { get; set; } = Cursors.Move;
