@@ -25,10 +25,10 @@ install:
 - cmd: dotnet workload install maui macos android ios maccatalyst  wasm-tools
 - cmd: '"C:/Program Files (x86)/Android/android-sdk/tools/bin/sdkmanager.bat" "platforms;android-31"'
 before_build:
-- cmd: .nuget\nuget restore Mapsui.Mac.Legacy.sln   
+- cmd: .nuget\nuget restore Mapsui.Legacy.sln   
 - cmd: dotnet restore mapsui.sln -Verbosity quiet
 build_script:
-- cmd: dotnet build --no-restore --configuration Debug Mapsui.sln
+- cmd: dotnet build --no-restore --configuration Release Mapsui.sln
 before_package:
 - cmd: ''
 after_build:
