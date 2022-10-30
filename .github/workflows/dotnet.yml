@@ -169,7 +169,7 @@ jobs:
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Wpf.Editing/Mapsui.Samples.Wpf.Editing.csproj
     # Samples Forms
     - name: Mapsui.Samples.Forms.Android
-      run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Android/Mapsui.Samples.Forms.Android.csproj    
+      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Android/Mapsui.Samples.Forms.Android.csproj    
     - name: Mapsui.Samples.Forms.iOS
       run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.iOS/Mapsui.Samples.Forms.iOS.csproj
     - name: Mapsui.Samples.Forms.Mac
