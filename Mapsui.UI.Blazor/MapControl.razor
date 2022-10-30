@@ -221,8 +221,9 @@ else
             {
                 var x = e.Location();
                 var y = _downMousePosition;
-                _selectRectangle = new MRect(Math.Min(x.X, y.X), Math.Min(x.Y, y.Y), Math.Max(x.X, y.X), Math.Max(x.Y, y.Y));                
-                _invalidate();
+                _selectRectangle = new MRect(Math.Min(x.X, y.X), Math.Min(x.Y, y.Y), Math.Max(x.X, y.X), Math.Max(x.Y, y.Y));                                
+                if (_invalidate != null)
+                    _invalidate();
             }
             else // drag/pan - mode
             {
