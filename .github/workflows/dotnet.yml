@@ -143,6 +143,9 @@ jobs:
         vs-prerelease: true
     - name: install maui macos android ios maccatalyst wasm-tools
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools
+    # because dotnet restore does not restore all projects I have to first restore the Legacy Projects
+    - name: Restore dependencies Legacy
+      run: .nuget\nuget restore Mapsui.Mac.Legacy.sln   
     - name: Restore dependencies
       run: dotnet restore Mapsui.sln
     # Samples Build    
