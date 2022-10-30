@@ -65,8 +65,6 @@ namespace Mapsui
             UpdateExtent();
         }
 
-        public bool HasSize => !_width.IsNanOrInfOrZero() && !_height.IsNanOrInfOrZero();
-
         /// <inheritdoc />
         public double CenterX
         {

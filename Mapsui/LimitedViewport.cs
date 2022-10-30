@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using Mapsui.Extensions;
 using Mapsui.UI;
 using Mapsui.Utilities;
 
@@ -24,7 +25,6 @@ namespace Mapsui
         public double Width => _viewport.Width;
         public double Height => _viewport.Height;
         public double Rotation => _viewport.Rotation;
-        public bool HasSize => _viewport.HasSize;
         public bool IsRotated => _viewport.IsRotated;
 
         public void Transform(MPoint position, MPoint previousPosition, double deltaResolution = 1, double deltaRotation = 0)
@@ -41,7 +41,7 @@ namespace Mapsui
         public void SetSize(double width, double height)
         {
             _viewport.SetSize(width, height);
-            if (_viewport.HasSize) Limiter?.LimitExtent(_viewport, Map?.Extent);
+            if (_viewport.HasSize()) Limiter?.LimitExtent(_viewport, Map?.Extent);
         }
 
         public virtual void SetCenter(double x, double y, long duration = 0, Easing? easing = default)

@@ -45,8 +45,6 @@ namespace Mapsui
         /// </summary>
         double Rotation { get; }
 
-        bool HasSize { get; }
-
         /// <summary>
         /// IsRotated is true, when viewport displays map rotated
         /// </summary>
