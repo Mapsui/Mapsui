@@ -33,9 +33,9 @@ jobs:
       with:
         vs-prerelease: true
     - name: install maui macos android ios maccatalyst wasm-tools
-      run: dotnet workload install maui macos android ios maccatalyst wasm-tools
-    - name: Restore dependencies
-      run: .nuget\nuget restore Mapsui.sln
+      run: dotnet workload install maui macos android ios maccatalyst wasm-tools  
+    - name: Run DocFx
+      run: docfx\build-site.cmd
 
     - name: Deploy 🚀
       uses: JamesIves/github-pages-deploy-action@v4
