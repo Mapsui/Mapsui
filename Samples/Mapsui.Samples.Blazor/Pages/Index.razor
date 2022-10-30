@@ -46,6 +46,7 @@
 {
     private MapControl? _mapControl;
     private string? _categoryId;
+    private string? _sampleId;
 
     public List<string> Samples { get; set; } = new();
 
@@ -70,7 +71,21 @@
     }
 
     [Parameter]
-    public string? SampleId { get; set; }
+    public string? SampleId 
+    {
+        get => _sampleId;
+        set
+        {
+            if (_sampleId == value)
+            {
+                return;
+            }
+
+            _sampleId = value;
+            Sample = MapSamples.FirstOrDefault(f => f.Name == SampleId);
+            FillMap();
+        } 
+    }
 
     [Parameter]
     public string? Title { get; set; }
@@ -110,8 +125,7 @@
         MapSamples.Clear();
         Samples.AddRange(list.Select(f => f.Name));
         MapSamples.AddRange(list);        
-        SampleId = MapSamples.FirstOrDefault()?.Name;
-        Sample = MapSamples.FirstOrDefault(f => f.Name == SampleId);                
+        SampleId = MapSamples.FirstOrDefault()?.Name;                 
     }
 
     private async void FillMap()
