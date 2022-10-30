@@ -1,6 +1,6 @@
 ﻿@inherits MapControlBase
 @inject IJSRuntime JsRuntime
-<div class="MapControl" @onmouseup=@OnMouseUp @onmousedown=@OnMouseDown @onmousewheel=@OnMouseWheel @onmousemove=@OnMouseMove @onkeydown=@OnKeyDown @onkeyup=@OnKeyUp>
+<div @onmouseup=@OnMouseUp @onmousedown=@OnMouseDown @onmousewheel=@OnMouseWheel @onmousemove=@OnMouseMove @onkeydown=@OnKeyDown @onkeyup=@OnKeyUp>
 @if (MapControlBase.UseGPU)
 {
         <SkiaSharp.Views.Blazor.SKGLView
