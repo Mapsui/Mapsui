@@ -2,7 +2,6 @@
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <ItemGroup>
-    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" />
     <PackageReference Include="Microsoft.UI.Xaml" />
     <PackageReference Include="Uno.Core" />
     <PackageReference Include="Uno.UI" />
