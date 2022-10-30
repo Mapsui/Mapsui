@@ -20,6 +20,19 @@
             </InputSelect>
         </div>
     </div>
+    <div class="form-group row">
+        <label for="category" class="col-sm-2 col-form-label">
+            Sample
+        </label>
+        <div class="col-sm-10">
+            <InputSelect id="sample" @bind-Value="SampleId" class="form-control">
+                @foreach (var sample in Samples)
+                {
+                    <option value="@sample">@sample</option>
+                }
+            </InputSelect>
+        </div>
+    </div>
 
 <div class="container">
     <div class="row">
@@ -31,7 +44,9 @@
 
 @code
 {
-    public List<ISampleBase> Samples { get; set; } = new();
+    public List<string> Samples { get; set; } = new();
+
+    public List<ISampleBase> MapSamples { get; set; } = new();
 
     public List<string> Categories { get; set; } = new();
 
@@ -75,10 +90,11 @@
     {
         var list = AllSamples.GetSamples().Where(s => s.Category == CategoryId).OrderBy(c => c.Name);
         Samples.Clear();
-        Samples.AddRange(list);
-        SampleId = Samples[0].Name;
-
-        Sample = Samples.FirstOrDefault(f => f.Name == SampleId);        
+        MapSamples.Clear();
+        Samples.AddRange(list.Select(f => f.Name));
+        MapSamples.AddRange(list);        
+        SampleId = MapSamples.FirstOrDefault()?.Name;
+        Sample = MapSamples.FirstOrDefault(f => f.Name == SampleId);                
     }
 
     private async void FillMap()
