@@ -1,6 +1,7 @@
 ECHO CHOCO INSTALL
 choco install docfx --version 2.59.4 --allow-downgrade  -y || exit /b 
 ECHO NUGET RESTORE
+.nuget\nuget restore Mapsui.Mac.Legacy.sln   
 dotnet restore Mapsui.sln 
 ECHO DOCFX
 docfx docfx\docfx.json || exit /b 
