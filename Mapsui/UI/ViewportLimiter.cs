@@ -105,8 +105,7 @@ namespace Mapsui.UI
             if (viewport.CenterY > maxExtent.Top) y = maxExtent.Top;
             if (viewport.CenterY < maxExtent.Bottom) y = maxExtent.Bottom;
 
-            viewport.CenterX = x;
-            viewport.CenterY = y;
+            viewport.SetCenter(x, y);
         }
     }
 }
