@@ -1,0 +1,44 @@
+name: Build Docs
+
+on:
+  push:
+    branches: 
+      - master
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+  concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
+  runs-on: windows-latest
+  steps:
+    - name: Checkout 🛎️
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Setup .NET Core SDK
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: |
+          6.0.402
+        include-prerelease: false
+    - name: Setup NuGet.exe for use with actions
+      uses: NuGet/setup-nuget@v1.0.6
+      with:
+        nuget-version: latest
+    - name: setup-msbuild
+      uses: microsoft/setup-msbuild@v1.1
+      with:
+        vs-prerelease: true
+    - name: install maui macos android ios maccatalyst wasm-tools
+      run: dotnet workload install maui macos android ios maccatalyst wasm-tools
+    - name: Restore dependencies
+      run: .nuget\nuget restore Mapsui.sln
+
+    - name: Deploy 🚀
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: docs # The folder the action should deploy.
