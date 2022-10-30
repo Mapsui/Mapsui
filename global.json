@@ -5,6 +5,8 @@
     "rollForward": "latestPatch"
   },
   "tools": {
-    "dotnet": "6.0.402"
+    "allowPrerelease": true,
+    "version": "7.0.100-rc.2",
+    "rollForward": "latestPatch"
   }
 }
