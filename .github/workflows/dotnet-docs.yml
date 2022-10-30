@@ -31,3 +31,16 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         folder: docs # The folder the action should deploy.
+        
+    # Don't know if this is needed when github deploy does this then this can be removed    
+    - name: Set User Email
+      run: git config --global user.email "pauldendulk@gmail.com"
+    - name: Set User Name
+      run: git config --global user.name "pauldendulk"
+    - name: Add Doc Files            
+      run: git add -A
+    - name: Git Commit
+      run: commit -a -m "Generating site"
+    - name: Git Push      
+      run: git push  
+        
