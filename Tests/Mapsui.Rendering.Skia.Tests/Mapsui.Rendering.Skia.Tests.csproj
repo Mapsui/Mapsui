@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks Condition="'$(SolutionName)' == 'Mapsui.Mac.Legacy'">net48</TargetFrameworks>
-    <TargetFrameworks Condition="'$(SolutionName)' != 'Mapsui.Mac.Legacy'">net6.0</TargetFrameworks>
+    <TargetFrameworks Condition="!$(SolutionName.Contains('Legacy'))">net6.0</TargetFrameworks>
     <OutputType>Library</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
