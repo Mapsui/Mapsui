@@ -23,17 +23,7 @@ jobs:
       with:
         dotnet-version: |
           6.0.402
-        include-prerelease: false
-    - name: Setup NuGet.exe for use with actions
-      uses: NuGet/setup-nuget@v1.0.6
-      with:
-        nuget-version: latest
-    - name: setup-msbuild
-      uses: microsoft/setup-msbuild@v1.1
-      with:
-        vs-prerelease: true
-    - name: install maui macos android ios maccatalyst wasm-tools
-      run: dotnet workload install maui macos android ios maccatalyst wasm-tools  
+        include-prerelease: false            
     - name: Run DocFx
       run: docfx\build-site.cmd
 
