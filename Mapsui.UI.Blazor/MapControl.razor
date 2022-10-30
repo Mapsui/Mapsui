@@ -6,17 +6,14 @@
         <SkiaSharp.Views.Blazor.SKGLView
         @ref="_viewGpu"
         OnPaintSurface="OnPaintSurfaceGPU" 
-        IgnorePixelScaling="true" 
-        EnableRenderLoop="true" />
+        IgnorePixelScaling="true" />
 }
 else
 {
         <SkiaSharp.Views.Blazor.SKCanvasView 
         @ref="_viewCpu"
         OnPaintSurface="OnPaintSurfaceCPU" 
-        IgnorePixelScaling="true" 
-        EnableRenderLoop="true" />
-}
+        IgnorePixelScaling="true" />}
 </div>
 
 @code
@@ -37,11 +34,11 @@ else
     public int MoveModifier { get; set; } = Keys.None;
     public int ZoomButton { get; set; } = MouseButtons.Primary;
     public int ZoomModifier { get; set; } = Keys.Control;
-    public MouseWheelAnimation MouseWheelAnimation { get; } = new();
+    public MouseWheelAnimation MouseWheelAnimation { get; } = new();    
 
     // Alternative: protected override void OnInitialized()    
     public MapControl()
-    {
+    {        
         CommonInitialize();
         ControlInitialize();
     }
@@ -100,7 +97,13 @@ else
 
     private void ControlInitialize()
     {
-        _invalidate = StateHasChanged;
+        _invalidate = () =>
+        {
+            if (_viewCpu != null)            
+                _viewCpu?.Invalidate();            
+            else            
+                _viewGpu?.Invalidate();            
+        };
 
         // Mapsui.Rendering.Skia use Mapsui.Nts where GetDbaseLanguageDriver need encoding providers
         System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
@@ -218,8 +221,8 @@ else
             {
                 var x = e.Location();
                 var y = _downMousePosition;
-                _selectRectangle = new MRect(Math.Min(x.X, y.X), Math.Min(x.Y, y.Y), Math.Max(x.X, y.X), Math.Max(x.Y, y.Y));
-                StateHasChanged();
+                _selectRectangle = new MRect(Math.Min(x.X, y.X), Math.Min(x.Y, y.Y), Math.Max(x.X, y.X), Math.Max(x.Y, y.Y));                
+                _invalidate();
             }
             else // drag/pan - mode
             {
