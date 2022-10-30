@@ -122,10 +122,5 @@ namespace Mapsui
         {
             return _viewport.WorldToScreenXY(worldX, worldY);
         }
-
-        public (double screenX, double screenY) WorldToScreenUnrotated(double worldX, double worldY)
-        {
-            return _viewport.WorldToScreenUnrotated(worldX, worldY);
-        }
     }
 }
