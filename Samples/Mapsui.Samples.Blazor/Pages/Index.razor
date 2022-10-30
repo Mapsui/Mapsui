@@ -7,7 +7,7 @@
 
 <PageTitle>Mapsui</PageTitle>
 <h1>Hello, Mapsui!</h1>
-@*    <div class="form-group row">
+   <div class="form-group row">
         <label for="category" class="col-sm-2 col-form-label">
             Category
         </label>
@@ -19,7 +19,7 @@
                 }
             </InputSelect>
         </div>
-    </div>*@
+    </div>
 
 <div class="container">
     <div class="row">
@@ -43,12 +43,18 @@
 
     private MapControl? _mapControl;
 
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        FillComboBoxWithCategories();
+    }
+
     protected override void OnAfterRender(bool firstRender)
     {
         base.OnAfterRender(firstRender);
         if (firstRender)
         {
-            FillComboBoxWithCategories();
+            FillMap();
         }
     }
 
@@ -72,9 +78,7 @@
         Samples.AddRange(list);
         SampleId = Samples[0].Name;
 
-        Sample = Samples.FirstOrDefault(f => f.Name == SampleId);
-
-        FillMap();
+        Sample = Samples.FirstOrDefault(f => f.Name == SampleId);        
     }
 
     private async void FillMap()
