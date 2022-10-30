@@ -106,8 +106,7 @@ namespace Mapsui.Utilities
                 out var centerX, out var centerY, out var resolution, scaleMethod);
 
             viewport.SetCenter(centerX, centerY);
-
-            viewport.Resolution = resolution;
+            viewport.SetResolution(resolution);
         }
 
         private static void Swap(ref double xMin, ref double xMax)
