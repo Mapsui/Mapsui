@@ -44,19 +44,36 @@
 
 @code
 {
+    private MapControl? _mapControl;
+    private string? _categoryId;
+
     public List<string> Samples { get; set; } = new();
 
     public List<ISampleBase> MapSamples { get; set; } = new();
 
     public List<string> Categories { get; set; } = new();
 
-    public string? CategoryId { get; set; }
+    [Parameter]
+    public string? CategoryId 
+    {
+        get => _categoryId;
+        set
+        {
+            if (_categoryId == value)
+            {
+                return;
+            }
 
+            _categoryId = value;
+            FillSamples();
+        }
+    }
+
+    [Parameter]
     public string? SampleId { get; set; }
 
+    [Parameter]
     public string? Title { get; set; }
-
-    private MapControl? _mapControl;
 
     protected override void OnInitialized()
     {
