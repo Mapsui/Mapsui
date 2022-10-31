@@ -27,8 +27,11 @@ install:
 before_build:
 - cmd: .nuget\nuget restore Mapsui.Legacy.sln   
 - cmd: dotnet restore mapsui.sln --verbosity quiet
-build_script:
-- cmd: dotnet build --no-restore --configuration Release Mapsui.sln --verbosity quiet
+# build_script:
+# - cmd: dotnet build --no-restore --configuration Release Mapsui.sln --verbosity quiet
+build:
+  project: Mapsui.sln
+  verbosity: quiet
 before_package:
 - cmd: ''
 after_build:
