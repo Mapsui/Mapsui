@@ -234,10 +234,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.Uno.WinUI.Sk
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.UI.Blazor", "Mapsui.UI.Blazor\Mapsui.UI.Blazor.csproj", "{62BB8195-9189-4BE9-AF15-A3375DC5BE69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Samples.Blazor", "Samples\Mapsui.Samples.Blazor\Mapsui.Samples.Blazor.csproj", "{0E70CE24-6B9A-48CE-8329-CC96274FD16E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.Blazor", "Samples\Mapsui.Samples.Blazor\Mapsui.Samples.Blazor.csproj", "{0E70CE24-6B9A-48CE-8329-CC96274FD16E}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Benchmarks", "Benchmarks", "{671AF0DE-73BD-46C9-81F0-087703E010AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mapsui.Rendering.Benchmarks", "Benchmarks\Mapsui.Rendering.Benchmarks\Mapsui.Rendering.Benchmarks.csproj", "{10B6CC78-FA95-4E28-8F74-FD278714B9AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Rendering.Benchmarks", "Benchmarks\Mapsui.Rendering.Benchmarks\Mapsui.Rendering.Benchmarks.csproj", "{10B6CC78-FA95-4E28-8F74-FD278714B9AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1062,7 +1063,6 @@ Global
 		{3BC0AC7E-3B3B-4D3F-9CC0-B2BDECC460A6}.Debug|x86.Build.0 = Debug|Any CPU
 		{3BC0AC7E-3B3B-4D3F-9CC0-B2BDECC460A6}.Debug|x86.Deploy.0 = Debug|Any CPU
 		{3BC0AC7E-3B3B-4D3F-9CC0-B2BDECC460A6}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{3BC0AC7E-3B3B-4D3F-9CC0-B2BDECC460A6}.Release|AnyCPU.Build.0 = Release|Any CPU
 		{3BC0AC7E-3B3B-4D3F-9CC0-B2BDECC460A6}.Release|ARM.ActiveCfg = Release|Any CPU
 		{3BC0AC7E-3B3B-4D3F-9CC0-B2BDECC460A6}.Release|ARM.Build.0 = Release|Any CPU
 		{3BC0AC7E-3B3B-4D3F-9CC0-B2BDECC460A6}.Release|ARM.Deploy.0 = Release|Any CPU
@@ -2714,7 +2714,6 @@ Global
 		{D410C36D-6F9D-4C0C-AEA3-40BC436C4894}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{D410C36D-6F9D-4C0C-AEA3-40BC436C4894}.Debug|x86.Build.0 = Debug|Any CPU
 		{D410C36D-6F9D-4C0C-AEA3-40BC436C4894}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{D410C36D-6F9D-4C0C-AEA3-40BC436C4894}.Release|AnyCPU.Build.0 = Release|Any CPU
 		{D410C36D-6F9D-4C0C-AEA3-40BC436C4894}.Release|ARM.ActiveCfg = Release|Any CPU
 		{D410C36D-6F9D-4C0C-AEA3-40BC436C4894}.Release|ARM.Build.0 = Release|Any CPU
 		{D410C36D-6F9D-4C0C-AEA3-40BC436C4894}.Release|ARM64.ActiveCfg = Release|Any CPU
@@ -2903,7 +2902,6 @@ Global
 		{960103E0-39E0-4EB0-A8FC-67F9A103866F}.Debug|x86.Build.0 = Debug|Any CPU
 		{960103E0-39E0-4EB0-A8FC-67F9A103866F}.Debug|x86.Deploy.0 = Debug|Any CPU
 		{960103E0-39E0-4EB0-A8FC-67F9A103866F}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{960103E0-39E0-4EB0-A8FC-67F9A103866F}.Release|AnyCPU.Build.0 = Release|Any CPU
 		{960103E0-39E0-4EB0-A8FC-67F9A103866F}.Release|ARM.ActiveCfg = Release|Any CPU
 		{960103E0-39E0-4EB0-A8FC-67F9A103866F}.Release|ARM.Build.0 = Release|Any CPU
 		{960103E0-39E0-4EB0-A8FC-67F9A103866F}.Release|ARM.Deploy.0 = Release|Any CPU
@@ -3461,7 +3459,6 @@ Global
 		{0E70CE24-6B9A-48CE-8329-CC96274FD16E}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{0E70CE24-6B9A-48CE-8329-CC96274FD16E}.Debug|x86.Build.0 = Debug|Any CPU
 		{0E70CE24-6B9A-48CE-8329-CC96274FD16E}.Release|AnyCPU.ActiveCfg = Release|Any CPU
-		{0E70CE24-6B9A-48CE-8329-CC96274FD16E}.Release|AnyCPU.Build.0 = Release|Any CPU
 		{0E70CE24-6B9A-48CE-8329-CC96274FD16E}.Release|ARM.ActiveCfg = Release|Any CPU
 		{0E70CE24-6B9A-48CE-8329-CC96274FD16E}.Release|ARM.Build.0 = Release|Any CPU
 		{0E70CE24-6B9A-48CE-8329-CC96274FD16E}.Release|ARM64.ActiveCfg = Release|Any CPU

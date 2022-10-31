@@ -26,9 +26,9 @@ install:
 - cmd: '"C:/Program Files (x86)/Android/android-sdk/tools/bin/sdkmanager.bat" "platforms;android-31"'
 before_build:
 - cmd: .nuget\nuget restore Mapsui.Legacy.sln   
-- cmd: dotnet restore mapsui.sln -Verbosity quiet
+- cmd: dotnet restore mapsui.sln --verbosity quiet
 build_script:
-- cmd: dotnet build --no-restore --configuration Release Mapsui.sln
+- cmd: dotnet build --no-restore --configuration Release Mapsui.sln --verbosity quiet
 before_package:
 - cmd: ''
 after_build:
