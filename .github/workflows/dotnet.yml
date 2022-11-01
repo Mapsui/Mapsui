@@ -148,6 +148,8 @@ jobs:
     # Samples Build    
     - name: Mapsui.Samples.Avalonia
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Avalonia/Mapsui.Samples.Avalonia.csproj
+    - name: Mapsui.Samples.Blazor
+      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Blazor/Mapsui.Samples.Blazor.csproj
     - name: Mapsui.Samples.Droid
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Droid/Mapsui.Samples.Droid.csproj
     - name: Mapsui.Samples.Eto
@@ -262,6 +264,8 @@ jobs:
       run: dotnet build --no-restore --configuration Release Mapsui.UI.Maui/Mapsui.UI.Maui.csproj 
     - name: Build Mapsui.UI.Eto
       run: dotnet build --no-restore --configuration Release Mapsui.UI.Eto/Mapsui.UI.Eto.csproj        
+    - name: Build Mapsui.UI.Blazor
+      run: dotnet build --no-restore --configuration Release Mapsui.UI.Blazor/Mapsui.UI.Blazor.csproj
     - name: Generate nuget package (Mapsui)
       run: nuget pack NuSpec/Mapsui.nuspec -Version $(git describe --tags) -outputdirectory Artifacts
     - name: Generate nuget package (Mapsui.ArcGis)
