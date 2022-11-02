@@ -1,7 +1,9 @@
 ﻿<Project>
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    <!--<CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>-->
+    <!--This should be enabled because this reduces the number of nuget packages that get donwloded without 
+    this the several versions of a nuget package are downloaded causing the builds to be slower-->
+    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Appveyor.TestLogger" Version="2.0.0" />
@@ -71,6 +73,7 @@
     <PackageVersion Include="SkiaSharp.Views.Forms.WPF" Version="2.88.3" />
     <PackageVersion Include="SkiaSharp.Views.WindowsForms" Version="2.88.3" />
     <PackageVersion Include="sqlite-net-pcl" Version="1.8.116" />
+    <PackageVersion Include="SQLitePCLRaw.bundle_green" Version="2.1.2" />
     <PackageVersion Include="Svg.Skia" Version="0.5.16" />
     <PackageVersion Include="System.AppContext" Version="4.3.0" />
     <PackageVersion Include="System.Collections" Version="4.3.0" />
