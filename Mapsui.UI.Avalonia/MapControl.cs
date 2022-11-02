@@ -78,7 +78,7 @@ namespace Mapsui.UI.Avalonia
         private void MapControlMouseWheel(object? sender, PointerWheelEventArgs e)
         {
             if (_map?.ZoomLock ?? true) return;
-            if (!Viewport.HasSize) return;
+            if (!Viewport.HasSize()) return;
 
             _currentMousePosition = e.GetPosition(this).ToMapsui();
             //Needed for both MouseMove and MouseWheel event for mousewheel event

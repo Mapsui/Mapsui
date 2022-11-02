@@ -57,7 +57,7 @@ namespace Mapsui.Rendering.Benchmarks
         {
             var map = new Map();
 
-            var countrySource = new ShapeFile(GetAppDir() + "\\Data\\countries.shp", true);
+            var countrySource = new ShapeFile(GetAppDir() + $"{Path.DirectorySeparatorChar}Data{Path.DirectorySeparatorChar}countries.shp", true);
             countrySource.CRS = "EPSG:4326";
             var projectedCountrySource = new ProjectingProvider(countrySource)
             {
@@ -75,7 +75,9 @@ namespace Mapsui.Rendering.Benchmarks
             ILayer layer = CreateCountryLayer(source);
             if (renderFormat != null)
             {
-                layer = new RasterizingTileLayer(layer, persistentCache: new SqlitePersistentCache("Performance" + renderFormat), renderFormat: renderFormat.Value);
+                var sqlitePersistentCache = new SqlitePersistentCache("Performance" + renderFormat);
+                sqlitePersistentCache.Clear();
+                layer = new RasterizingTileLayer(layer, persistentCache: sqlitePersistentCache, renderFormat: renderFormat.Value);
             }
 
             map.Layers.Add(layer);
