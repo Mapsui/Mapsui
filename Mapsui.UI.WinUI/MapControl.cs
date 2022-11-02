@@ -153,7 +153,7 @@ namespace Mapsui.UI.Uwp
         private void MapControl_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
         {
             if (_map?.ZoomLock ?? true) return;
-            if (!Viewport.HasSize) return;
+            if (!Viewport.HasSize()) return;
 
             var currentPoint = e.GetCurrentPoint(this);
 #if __WINUI__

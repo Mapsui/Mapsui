@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Net;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Mapsui.Extensions;
 using Mapsui.Fetcher;
 using Mapsui.Layers;
 using Mapsui.Logging;
@@ -77,7 +78,7 @@ namespace Mapsui.UI.Wpf
                 return;
             if (Map == null)
                 return;
-            if (!Viewport.HasSize)
+            if (!Viewport.HasSize())
                 return;
 
             // Start drawing
@@ -438,7 +439,7 @@ namespace Mapsui.UI.Wpf
 
         public void CallHomeIfNeeded()
         {
-            if (Map != null && !Map.Initialized && _viewport.HasSize && Map?.Extent != null && Navigator != null)
+            if (Map != null && !Map.Initialized && _viewport.HasSize() && Map?.Extent != null && Navigator != null)
             {
                 Map.Home?.Invoke(Navigator);
                 Map.Initialized = true;
@@ -656,9 +657,9 @@ namespace Mapsui.UI.Wpf
 
         private protected void SetViewportSize()
         {
-            var hadSize = Viewport.HasSize;
+            var hadSize = Viewport.HasSize();
             _viewport.SetSize(ViewportWidth, ViewportHeight);
-            if (!hadSize && Viewport.HasSize) OnViewportSizeInitialized();
+            if (!hadSize && Viewport.HasSize()) OnViewportSizeInitialized();
             CallHomeIfNeeded();
             Refresh();
         }

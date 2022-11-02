@@ -26,6 +26,7 @@ namespace Mapsui.Layers
         private FetchInfo? _fetchInfo;
         public Delayer Delayer { get; } = new();
         private readonly Delayer _rasterizeDelayer = new();
+        private readonly RenderFormat _renderFormat;
 
         /// <summary>
         ///     Creates a RasterizingLayer which rasterizes a layer for performance
@@ -41,6 +42,7 @@ namespace Mapsui.Layers
         ///     rasterization.
         /// </param>
         /// <param name="pixelDensity"></param>
+        /// <param name="renderFormat">render Format png is default and skp is skia picture</param>
         public RasterizingLayer(
             ILayer layer,
             int delayBeforeRasterize = 1000,
@@ -48,11 +50,13 @@ namespace Mapsui.Layers
             IRenderer? rasterizer = null,
             double overscanRatio = 1,
             bool onlyRerasterizeIfOutsideOverscan = false,
-            float pixelDensity = 1)
+            float pixelDensity = 1,
+            RenderFormat renderFormat = RenderFormat.Png)
         {
             if (overscanRatio < 1)
                 throw new ArgumentException($"{nameof(overscanRatio)} must be >= 1", nameof(overscanRatio));
 
+            _renderFormat = renderFormat;
             _layer = layer;
             Name = layer.Name;
             _renderResolutionMultiplier = renderResolutionMultiplier;
@@ -103,7 +107,7 @@ namespace Mapsui.Layers
 
                     _currentViewport = viewport;
 
-                    using var bitmapStream = _rasterizer.RenderToBitmapStream(viewport, new[] { _layer }, pixelDensity: _pixelDensity);
+                    using var bitmapStream = _rasterizer.RenderToBitmapStream(viewport, new[] { _layer }, pixelDensity: _pixelDensity, renderFormat: _renderFormat);
                     RemoveExistingFeatures();
 
                     if (bitmapStream != null)
