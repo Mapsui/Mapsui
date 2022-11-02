@@ -5,33 +5,39 @@ using System.Text;
 
 namespace Mapsui.Extensions
 {
-    public static class ViewportStateExtensions
+    public static class ViewportExtensions
     {
+        /// <summary>
+        /// True if Width and Height are not zero
+        /// </summary>
+        public static bool HasSize(this IReadOnlyViewport viewport) => 
+            !viewport.Width.IsNanOrInfOrZero() && !viewport.Height.IsNanOrInfOrZero();
+
         /// <summary>
         /// IsRotated is true, when viewport displays map rotated
         /// </summary>
-        public static bool IsRotated(this ViewportState viewport) =>
-            !double.IsNaN(viewport.Rotation) && viewport.Rotation > Constants.Epsilon
+        public static bool IsRotated(this IReadOnlyViewport viewport) => 
+            !double.IsNaN(viewport.Rotation) && viewport.Rotation > Constants.Epsilon 
             && viewport.Rotation < 360 - Constants.Epsilon;
 
         /// <summary>
-        /// Calculates extent from the viewport.
+        /// Calculates extent from the viewport
         /// </summary>
         /// <remarks>
         /// This MRect is horizontally and vertically aligned, even if the viewport
         /// is rotated. So this MRect perhaps contain parts, that are not visible.
         /// </remarks>
-        public static MRect GetExtent(this ViewportState viewportState)
+        public static MRect GetExtent(this IReadOnlyViewport viewport)
         {
             // calculate the window extent 
-            var halfSpanX = viewportState.Width * viewportState.Resolution * 0.5;
-            var halfSpanY = viewportState.Height * viewportState.Resolution * 0.5;
-            var minX = viewportState.CenterX - halfSpanX;
-            var minY = viewportState.CenterY - halfSpanY;
-            var maxX = viewportState.CenterX + halfSpanX;
-            var maxY = viewportState.CenterY + halfSpanY;
+            var halfSpanX = viewport.Width * viewport.Resolution * 0.5;
+            var halfSpanY = viewport.Height * viewport.Resolution * 0.5;
+            var minX = viewport.CenterX - halfSpanX;
+            var minY = viewport.CenterY - halfSpanY;
+            var maxX = viewport.CenterX + halfSpanX;
+            var maxY = viewport.CenterY + halfSpanY;
 
-            if (!viewportState.IsRotated())
+            if (!viewport.IsRotated())
             {
                 return new MRect(minX, minY, maxX, maxY);
             }
@@ -47,7 +53,7 @@ namespace Mapsui.Extensions
 
                 // Calculate the extent that will encompass a rotated viewport (slightly larger - used for tiles).
                 // Perform rotations on corner offsets and then add them to the Center point.
-                return windowExtent.Rotate(-viewportState.Rotation, viewportState.CenterX, viewportState.CenterY).ToBoundingBox();
+                return windowExtent.Rotate(-viewport.Rotation, viewport.CenterX, viewport.CenterY).ToBoundingBox();
             }
         }
     }

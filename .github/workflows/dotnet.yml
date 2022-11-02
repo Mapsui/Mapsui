@@ -20,10 +20,10 @@ jobs:
     # Cache Nugets
     - uses: actions/cache@v3
       with:
-        path: ~/.nuget/packages
-        key: ${{ runner.os }}-nuget10-${{ hashFiles('**/*.csproj') }}
+        path: ~/.nuget/packages     
+        key: ${{ runner.os }}-nuget11-${{ hashFiles('**/*.csproj') }}
         restore-keys: |
-            ${{ runner.os }}-nuget10-
+            ${{ runner.os }}-nuget11-
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.0.6      
       with:
@@ -119,7 +119,7 @@ jobs:
       with:
         name: nupkg.mac
         path: Artifacts/*.nupkg
-
+  
   winBuild:
     runs-on: windows-latest
     steps:
@@ -129,7 +129,11 @@ jobs:
     # Cache Nugets
     - uses: actions/cache@v3
       with:
-        path: ~/.nuget/packages
+        path: |
+          ~/.nuget/packages/Microsoft*
+          ~/.nuget/packages/SkiaSharp* 
+          ~/.nuget/packages/System*
+          ~/.nuget/packages/Xamarin*
         key: ${{ runner.os }}-nuget10-${{ hashFiles('**/*.csproj') }}
         restore-keys: |
             ${{ runner.os }}-nuget10-
