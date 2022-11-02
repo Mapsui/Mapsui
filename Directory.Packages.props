@@ -1,4 +1,4 @@
-Project>
+<Project>
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
     <!--This should be enabled because this reduces the number of nuget packages that get donwloded without 
