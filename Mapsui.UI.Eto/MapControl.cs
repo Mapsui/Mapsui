@@ -9,6 +9,7 @@ namespace Mapsui.UI.Eto
     using global::Eto.Drawing;
     using global::Eto.Forms;
     using System.Diagnostics;
+    using Mapsui.Extensions;
 
     public partial class MapControl : SkiaDrawable, IMapControl
     {
@@ -66,7 +67,7 @@ namespace Mapsui.UI.Eto
             base.OnMouseWheel(e);
 
             if (_map?.ZoomLock ?? true) return;
-            if (!Viewport.HasSize) return;
+            if (!Viewport.HasSize()) return;
 
             var resolution = MouseWheelAnimation.GetResolution((int)e.Delta.Height, _viewport, _map);
             // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
