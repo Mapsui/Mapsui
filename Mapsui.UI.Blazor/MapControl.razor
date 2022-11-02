@@ -1,4 +1,5 @@
-﻿@inherits MapControlBase
+﻿@using Mapsui.Extensions
+@inherits MapControlBase
 @inject IJSRuntime JsRuntime
 <div @onmouseup=@OnMouseUp @onmousedown=@OnMouseDown @onmousewheel=@OnMouseWheel @onmousemove=@OnMouseMove @onkeydown=@OnKeyDown @onkeyup=@OnKeyUp>
 @if (MapControlBase.UseGPU)
@@ -120,7 +121,7 @@ else
     private void OnMouseWheel(WheelEventArgs e)
     {
         if (Map?.ZoomLock ?? true) return;
-        if (!Viewport.HasSize) return;
+        if (!Viewport.HasSize()) return;
         
         var delta = e.DeltaY;
         var resolution = MouseWheelAnimation.GetResolution((int)delta, _viewport, Map);
