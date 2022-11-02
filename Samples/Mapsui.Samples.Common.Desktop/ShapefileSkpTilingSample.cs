@@ -40,7 +40,9 @@ namespace Mapsui.Samples.Common.Desktop
             var geometrySimplify = new GeometrySimplifyProvider(projectedCountrySource);
             var geometryIntersection = new GeometryIntersectionProvider(geometrySimplify);
 
-            map.Layers.Add(new RasterizingTileLayer(CreateCountryLayer(geometryIntersection), persistentCache: new SqlitePersistentCache("countriesSkp"), renderFormat: RenderFormat.Skp));
+            var sqlitePersistentCache = new SqlitePersistentCache("countriesSkp");
+            sqlitePersistentCache.Clear();
+            map.Layers.Add(new RasterizingTileLayer(CreateCountryLayer(geometryIntersection), persistentCache: sqlitePersistentCache, renderFormat: RenderFormat.Skp));
 
             return map;
         }

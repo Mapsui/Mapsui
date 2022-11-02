@@ -1,3 +1,4 @@
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Rendering.Skia.SkiaStyles;
@@ -51,7 +52,7 @@ namespace Mapsui.Rendering.Skia
 
                 canvas.Save();
 
-                if (viewport.IsRotated)
+                if (viewport.IsRotated())
                 {
                     var priorMatrix = canvas.TotalMatrix;
 

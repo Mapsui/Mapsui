@@ -66,7 +66,7 @@ namespace Mapsui.Rendering.Skia
         private void RenderTypeSave(SKCanvas canvas, IReadOnlyViewport viewport, IEnumerable<ILayer> layers,
             IEnumerable<IWidget> widgets, Color? background = null)
         {
-            if (!viewport.HasSize) return;
+            if (!viewport.HasSize()) return;
 
             if (background is not null) canvas.Clear(background.ToSkia());
             Render(canvas, viewport, layers);
