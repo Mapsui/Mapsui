@@ -16,6 +16,7 @@ using SkiaSharp;
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Toolchains.InProcess.Emit;
+using Mapsui.Utilities;
 
 #pragma warning disable IDISP001
 #pragma warning disable IDISP003
@@ -27,10 +28,13 @@ namespace Mapsui.Rendering.Benchmarks
     [MinColumn, MaxColumn, MeanColumn, MedianColumn]
     public class RenderToCpuPerformance
     {
-        private static readonly RegressionMapControl skpMap;
-        private static readonly RegressionMapControl pngMap;
-        private static readonly RegressionMapControl webpMap;
+        private static readonly RegressionMapControl tilingSkpMap;
+        private static readonly RegressionMapControl tilingPngMap;
+        private static readonly RegressionMapControl tilingWebpMap;
         private static readonly RegressionMapControl map;
+        private static readonly RegressionMapControl rasterizingPngMap;
+        private static readonly RegressionMapControl rasterizingSkpMap;
+        private static readonly RegressionMapControl rasterizingTilingSkpMap;
         private static readonly MapRenderer mapRenderer;
         private readonly SKCanvas skCanvas;
         private readonly SKImageInfo imageInfo;
@@ -39,9 +43,12 @@ namespace Mapsui.Rendering.Benchmarks
         static RenderToCpuPerformance()
         {
             mapRenderer = new MapRenderer();
-            skpMap = CreateMapControl(RenderFormat.Skp);            
-            pngMap = CreateMapControl(RenderFormat.Png);
-            webpMap = CreateMapControl(RenderFormat.WebP);
+            tilingSkpMap = CreateMapControl(RenderFormat.Skp);            
+            tilingPngMap = CreateMapControl(RenderFormat.Png);
+            tilingWebpMap = CreateMapControl(RenderFormat.WebP);
+            rasterizingPngMap = CreateMapControl(RenderFormat.Png, false, true);
+            rasterizingSkpMap = CreateMapControl(RenderFormat.Skp, false, true);
+            rasterizingTilingSkpMap = CreateMapControl(RenderFormat.Skp, true, true);
             map = CreateMapControl();
         }
 
@@ -54,26 +61,30 @@ namespace Mapsui.Rendering.Benchmarks
             skCanvas = surface.Canvas;
         }
         
-        public static RegressionMapControl CreateMapControl(RenderFormat? renderFormat = null)
+        public static RegressionMapControl CreateMapControl(RenderFormat? renderFormat = null, bool tiling = true, bool rasterizing = false)
         {
             var mapControl = new RegressionMapControl();
             mapControl.SetSize(800, 600);
             
-            mapControl.Map = CreateMap(renderFormat);
+            mapControl.Map = CreateMap(renderFormat, tiling, rasterizing);
+
+            // zoom to correct Zoom level
+            var resolution = ZoomHelper.ZoomOut(mapControl.Map.Resolutions, mapControl.Viewport.Resolution);
+            mapControl.Navigator?.ZoomTo(resolution);
 
             // fetch data first time
             var fetchInfo = new FetchInfo(mapControl.Viewport.Extent!, mapControl.Viewport.Resolution, mapControl.Map?.CRS);
             mapControl.Map?.RefreshData(fetchInfo);
             mapControl.Map?.Layers.WaitForLoadingAsync().Wait();
-            
+
             return mapControl;
         }
 
-        private static Map CreateMap(RenderFormat? renderFormat = null)
+        private static Map CreateMap(RenderFormat? renderFormat = null, bool tiling = true, bool rasterizing = false)
         {
             var map = new Map();
 
-            var countrySource = new ShapeFile(GetAppDir() + "\\Data\\countries.shp", true);
+            var countrySource = new ShapeFile(GetAppDir() + $"{Path.DirectorySeparatorChar}Data{Path.DirectorySeparatorChar}countries.shp", true);
             countrySource.CRS = "EPSG:4326";
             var projectedCountrySource = new ProjectingProvider(countrySource)
             {
@@ -91,7 +102,17 @@ namespace Mapsui.Rendering.Benchmarks
             ILayer layer = CreateCountryLayer(source);
             if (renderFormat != null)
             {
-                layer = new RasterizingTileLayer(layer, persistentCache: new SqlitePersistentCache("Performance" + renderFormat), renderFormat: renderFormat.Value);
+                if (tiling)
+                {
+                    var sqliteCache = new SqlitePersistentCache("Performance" + renderFormat);
+                    sqliteCache.Clear();
+                    layer = new RasterizingTileLayer(layer, persistentCache: sqliteCache, renderFormat: renderFormat.Value);
+                }
+                
+                if (rasterizing)
+                {
+                    layer = new RasterizingLayer(layer, renderFormat: renderFormat.Value);
+                }
             }
 
             map.Layers.Add(layer);
@@ -140,24 +161,45 @@ namespace Mapsui.Rendering.Benchmarks
         }
 
         [Benchmark]
-        public async Task RenderRasterizingTilingPngAsync()
-        { 
-            await pngMap.WaitForLoadingAsync();
-            mapRenderer.Render(skCanvas, pngMap.Viewport, pngMap.Map!.Layers, pngMap.Map!.Widgets, Color.White);
-        }
-
-        [Benchmark]
-        public async Task RenderRasterizingTilingWebPAsync()
+        public async Task RenderRasterizingPngAsync()
         {
-            await webpMap.WaitForLoadingAsync();
-            mapRenderer.Render(skCanvas, webpMap.Viewport, webpMap.Map!.Layers, webpMap.Map!.Widgets, Color.White);
+            await rasterizingPngMap.WaitForLoadingAsync();
+            mapRenderer.Render(skCanvas, rasterizingPngMap.Viewport, rasterizingPngMap.Map!.Layers, rasterizingPngMap.Map!.Widgets, Color.White);
+        }
+        
+        [Benchmark]
+        public async Task RenderRasterizingSkpAsync()
+        {
+            await rasterizingSkpMap.WaitForLoadingAsync();
+            mapRenderer.Render(skCanvas, rasterizingSkpMap.Viewport, rasterizingSkpMap.Map!.Layers, rasterizingSkpMap.Map!.Widgets, Color.White);
         }
         
         [Benchmark]
         public async Task RenderRasterizingTilingSkpAsync()
         {
-            await skpMap.WaitForLoadingAsync();
-            mapRenderer.Render(skCanvas, skpMap.Viewport, skpMap.Map!.Layers, skpMap.Map!.Widgets, Color.White);
+            await rasterizingTilingSkpMap.WaitForLoadingAsync();
+            mapRenderer.Render(skCanvas, rasterizingTilingSkpMap.Viewport, rasterizingTilingSkpMap.Map!.Layers, rasterizingTilingSkpMap.Map!.Widgets, Color.White);
+        }
+
+        [Benchmark]
+        public async Task RenderTilingPngAsync()
+        { 
+            await tilingPngMap.WaitForLoadingAsync();
+            mapRenderer.Render(skCanvas, tilingPngMap.Viewport, tilingPngMap.Map!.Layers, tilingPngMap.Map!.Widgets, Color.White);
+        }
+
+        [Benchmark]
+        public async Task RenderTilingWebPAsync()
+        {
+            await tilingWebpMap.WaitForLoadingAsync();
+            mapRenderer.Render(skCanvas, tilingWebpMap.Viewport, tilingWebpMap.Map!.Layers, tilingWebpMap.Map!.Widgets, Color.White);
+        }
+        
+        [Benchmark]
+        public async Task RenderTilingSkpAsync()
+        {
+            await tilingSkpMap.WaitForLoadingAsync();
+            mapRenderer.Render(skCanvas, tilingSkpMap.Viewport, tilingSkpMap.Map!.Layers, tilingSkpMap.Map!.Widgets, Color.White);
         }
     }
 }
