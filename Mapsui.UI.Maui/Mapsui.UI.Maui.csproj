@@ -9,6 +9,8 @@
     <DefineConstants>__MAUI__</DefineConstants>
     <NoWarn>NU1703</NoWarn>
     <PackageId>Mapsui.Maui</PackageId>
+    <Description>Mapsui.Maui - Library for mapping for Maui</Description>
+    <PackageTags>$(PackageTags) maui</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

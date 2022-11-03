@@ -6,6 +6,7 @@
     <Configurations>Release;Debug</Configurations>
     <!--Revert TreatWarningsAsErrors to false because of vague build error on server -->
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <Description>Mapsui - Library for mapping</Description>
   </PropertyGroup>
 
   <ItemGroup>

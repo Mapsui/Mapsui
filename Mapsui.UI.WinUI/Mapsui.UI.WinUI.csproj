@@ -8,6 +8,10 @@
     <UseWinUI>true</UseWinUI>
     <DefineConstants>__WINUI__</DefineConstants>
     <PackageId>Mapsui.WinUI</PackageId>
+    <Description>
+      WinUI map components based on the Mapsui library
+    </Description>
+    <PackageTags>$(PackageTags) winui</PackageTags>
   </PropertyGroup>
 
 	<!-- Workaround for https://github.com/microsoft/WindowsAppSDK/issues/1217 -->
