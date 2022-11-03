@@ -19,5 +19,4 @@ This is the documentation of the Mapsui open source map component.
 
 ## Support
 
-If you are interested in more support for Mapsui please mail [pauldendulk@gmail.com](mailto:pauldendulk@gmail.com).
-
+If you are looking for paid support in the form of contract work or consoluting please mail [info.mapsui@gmail.com](mailto:info.mapsui@gmail.com).
