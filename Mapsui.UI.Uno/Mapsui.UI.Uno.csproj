@@ -12,12 +12,13 @@
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
     <RootNamespace>Mapsui.UI.Uwp</RootNamespace>
     <DefineConstants>__UWP__</DefineConstants>
-	<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-ios'">14.2</SupportedOSPlatformVersion>
-	<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-maccatalyst'">14.0</SupportedOSPlatformVersion>
-	<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-android31.0'">21.0</SupportedOSPlatformVersion>
-	<!-- Workaround for https://github.com/unoplatform/uno/issues/9723 -->
+	  <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-ios'">14.2</SupportedOSPlatformVersion>
+	  <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-maccatalyst'">14.0</SupportedOSPlatformVersion>
+	  <SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-android31.0'">21.0</SupportedOSPlatformVersion>
+	  <!-- Workaround for https://github.com/unoplatform/uno/issues/9723 -->
     <_AndroidApiLevel Condition="'$(TargetFramework)' == 'net6.0-android31.0'">31</_AndroidApiLevel>
-	<SupportedOSPlatformVersion Condition="'$(TargetFramework)'=='net6.0-macos'">10.14</SupportedOSPlatformVersion>		
+	  <SupportedOSPlatformVersion Condition="'$(TargetFramework)'=='net6.0-macos'">10.14</SupportedOSPlatformVersion>
+    <PackageId>Mapsui.Uno</PackageId>
   </PropertyGroup>
 
   <ItemGroup>

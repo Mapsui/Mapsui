@@ -4,6 +4,7 @@
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <TargetFramework>net6.0-ios15.4</TargetFramework>
     <ImplicitUsings>true</ImplicitUsings>
+    <PackageId>Mapsui.iOS</PackageId>
     <!--<RuntimeIdentifiers>iossimulator-x64</RuntimeIdentifiers>-->
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

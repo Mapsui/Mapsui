@@ -7,6 +7,9 @@ rmdir Release /s /q
 dotnet build tools\versionupdater\versionupdater.csproj /p:Configuration=Release /p:OutputPath=..\bin || exit /B 1
 tools\bin\versionupdater -v %VERSION% || exit /B 1
 
+REM create Artifacts if not exists
+if not exist "Artifacts" mkdir Artifacts
+
 dotnet build /p:RestorePackages=true /p:Configuration=Release Mapsui/Mapsui.csproj
 .\.nuget\nuget pack .\NuSpec\Mapsui.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1
 
