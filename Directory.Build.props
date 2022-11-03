@@ -20,7 +20,9 @@
   <!--Package Icon Include -->
   <ItemGroup>
     <None Include="..\logo\png\icon.png" Pack="true" PackagePath="\"/>
+    <None Include="..\LICENSE" Pack="true" PackagePath="\" />
   </ItemGroup>
+  
 
   <!-- Common Project Properties -->
   <PropertyGroup>
