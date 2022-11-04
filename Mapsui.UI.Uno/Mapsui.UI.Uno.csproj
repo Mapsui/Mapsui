@@ -23,6 +23,7 @@
       Uno map components based on the Mapsui library
     </Description>
     <PackageTags>$(PackageTags) uno</PackageTags>    
+    <!--Uno has some differences between targets-->
     <EnablePackageValidation>false</EnablePackageValidation>
   </PropertyGroup>
 

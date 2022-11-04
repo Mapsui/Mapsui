@@ -23,6 +23,8 @@
       Uno map components based on the Mapsui library
     </Description>
     <PackageTags>$(PackageTags) uno.winui</PackageTags>
+    <!--Uno has some differences between targets-->
+    <EnablePackageValidation>false</EnablePackageValidation>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)'=='net6.0-windows10.0.19041.0'">    
