@@ -91,9 +91,6 @@
       <a class="xref" href="Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_ViewportChanged">IReadOnlyViewport.ViewportChanged</a>
     </div>
     <div>
-      <a class="xref" href="Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_Center">IReadOnlyViewport.Center</a>
-    </div>
-    <div>
       <a class="xref" href="Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_CenterX">IReadOnlyViewport.CenterX</a>
     </div>
     <div>
@@ -115,12 +112,6 @@
       <a class="xref" href="Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_Rotation">IReadOnlyViewport.Rotation</a>
     </div>
     <div>
-      <a class="xref" href="Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_HasSize">IReadOnlyViewport.HasSize</a>
-    </div>
-    <div>
-      <a class="xref" href="Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_IsRotated">IReadOnlyViewport.IsRotated</a>
-    </div>
-    <div>
       <a class="xref" href="Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_ScreenToWorld_Mapsui_MPoint_">IReadOnlyViewport.ScreenToWorld(MPoint)</a>
     </div>
     <div>
@@ -137,9 +128,6 @@
     </div>
     <div>
       <a class="xref" href="Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_WorldToScreenXY_System_Double_System_Double_">IReadOnlyViewport.WorldToScreenXY(Double, Double)</a>
-    </div>
-    <div>
-      <a class="xref" href="Mapsui.IReadOnlyViewport.html#Mapsui_IReadOnlyViewport_WorldToScreenUnrotated_System_Double_System_Double_">IReadOnlyViewport.WorldToScreenUnrotated(Double, Double)</a>
     </div>
     <div>
       <a class="xref" href="Mapsui.Animations.IAnimatable.html#Mapsui_Animations_IAnimatable_UpdateAnimations">IAnimatable.UpdateAnimations()</a>
@@ -187,18 +175,18 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_IViewport_SetCenter_Mapsui_MReadOnlyPoint_System_Int64_Mapsui_Utilities_Easing_.md&amp;value=---%0Auid%3A%20Mapsui.IViewport.SetCenter(Mapsui.MReadOnlyPoint%2CSystem.Int64%2CMapsui.Utilities.Easing)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_IViewport_SetCenter_Mapsui_MPoint_System_Int64_Mapsui_Utilities_Easing_.md&amp;value=---%0Auid%3A%20Mapsui.IViewport.SetCenter(Mapsui.MPoint%2CSystem.Int64%2CMapsui.Utilities.Easing)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/IViewport.cs/#L17">View Source</a>
   </span>
   <a id="Mapsui_IViewport_SetCenter_" data-uid="Mapsui.IViewport.SetCenter*"></a>
-  <h4 id="Mapsui_IViewport_SetCenter_Mapsui_MReadOnlyPoint_System_Int64_Mapsui_Utilities_Easing_" data-uid="Mapsui.IViewport.SetCenter(Mapsui.MReadOnlyPoint,System.Int64,Mapsui.Utilities.Easing)">SetCenter(MReadOnlyPoint, Int64, Easing)</h4>
+  <h4 id="Mapsui_IViewport_SetCenter_Mapsui_MPoint_System_Int64_Mapsui_Utilities_Easing_" data-uid="Mapsui.IViewport.SetCenter(Mapsui.MPoint,System.Int64,Mapsui.Utilities.Easing)">SetCenter(MPoint, Int64, Easing)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void SetCenter(MReadOnlyPoint center, long duration = null, Easing easing = null)</code></pre>
+    <pre><code class="lang-csharp hljs">void SetCenter(MPoint center, long duration = null, Easing easing = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -211,7 +199,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Mapsui.MReadOnlyPoint.html">MReadOnlyPoint</a></td>
+        <td><a class="xref" href="Mapsui.MPoint.html">MPoint</a></td>
         <td><span class="parametername">center</span></td>
         <td></td>
       </tr>
@@ -502,6 +490,15 @@
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="Mapsui.Rendering.Skia.Extensions.ViewportExtensions.html#Mapsui_Rendering_Skia_Extensions_ViewportExtensions_ToSKMatrix_Mapsui_IViewport_">ViewportExtensions.ToSKMatrix(IViewport)</a>
+  </div>
+  <div>
+      <a class="xref" href="Mapsui.Extensions.ViewportExtensions.html#Mapsui_Extensions_ViewportExtensions_HasSize_Mapsui_IReadOnlyViewport_">ViewportExtensions.HasSize(IReadOnlyViewport)</a>
+  </div>
+  <div>
+      <a class="xref" href="Mapsui.Extensions.ViewportExtensions.html#Mapsui_Extensions_ViewportExtensions_IsRotated_Mapsui_IReadOnlyViewport_">ViewportExtensions.IsRotated(IReadOnlyViewport)</a>
+  </div>
+  <div>
+      <a class="xref" href="Mapsui.Extensions.ViewportExtensions.html#Mapsui_Extensions_ViewportExtensions_GetExtent_Mapsui_IReadOnlyViewport_">ViewportExtensions.GetExtent(IReadOnlyViewport)</a>
   </div>
 </article>
           </div>
