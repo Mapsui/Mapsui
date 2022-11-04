@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using Mapsui.Extensions;
 using Mapsui.UI;
 using Mapsui.Utilities;
 
@@ -17,7 +18,6 @@ namespace Mapsui
         public Map? Map { get; set; }
 
         public event PropertyChangedEventHandler? ViewportChanged;
-        public MReadOnlyPoint Center => _viewport.Center;
         public double CenterX => _viewport.CenterX;
         public double CenterY => _viewport.CenterY;
         public double Resolution => _viewport.Resolution;
@@ -25,8 +25,6 @@ namespace Mapsui
         public double Width => _viewport.Width;
         public double Height => _viewport.Height;
         public double Rotation => _viewport.Rotation;
-        public bool HasSize => _viewport.HasSize;
-        public bool IsRotated => _viewport.IsRotated;
 
         public void Transform(MPoint position, MPoint previousPosition, double deltaResolution = 1, double deltaRotation = 0)
         {
@@ -42,7 +40,7 @@ namespace Mapsui
         public void SetSize(double width, double height)
         {
             _viewport.SetSize(width, height);
-            if (_viewport.HasSize) Limiter?.LimitExtent(_viewport, Map?.Extent);
+            if (_viewport.HasSize()) Limiter?.LimitExtent(_viewport, Map?.Extent);
         }
 
         public virtual void SetCenter(double x, double y, long duration = 0, Easing? easing = default)
@@ -59,7 +57,7 @@ namespace Mapsui
             Limiter?.LimitExtent(_viewport, Map?.Extent);
         }
 
-        public void SetCenter(MReadOnlyPoint center, long duration = 0, Easing? easing = default)
+        public void SetCenter(MPoint center, long duration = 0, Easing? easing = default)
         {
             if (Map?.PanLock ?? false) return;
             _viewport.SetCenter(center, duration, easing);
@@ -122,11 +120,6 @@ namespace Mapsui
         public (double screenX, double screenY) WorldToScreenXY(double worldX, double worldY)
         {
             return _viewport.WorldToScreenXY(worldX, worldY);
-        }
-
-        public (double screenX, double screenY) WorldToScreenUnrotated(double worldX, double worldY)
-        {
-            return _viewport.WorldToScreenUnrotated(worldX, worldY);
         }
     }
 }

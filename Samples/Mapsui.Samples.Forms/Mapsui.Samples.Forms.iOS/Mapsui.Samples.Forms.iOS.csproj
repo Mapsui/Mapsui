@@ -133,16 +133,16 @@
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="BruTile" />     
-    <PackageReference Include="SkiaSharp" />     
-    <PackageReference Include="SkiaSharp.Views" />     
-    <PackageReference Include="SkiaSharp.Views.Forms" />     
-    <PackageReference Include="Topten.RichTextKit" />     
-    <PackageReference Include="Xam.Plugin.Geolocator" />     
-    <PackageReference Include="Xamarin.Forms" />     
-    <PackageReference Include="sqlite-net-pcl" />     
+    <PackageReference Include="BruTile" />
+    <PackageReference Include="SkiaSharp" />
+    <PackageReference Include="SkiaSharp.Views" />
+    <PackageReference Include="SkiaSharp.Views.Forms" />
+    <PackageReference Include="Topten.RichTextKit" />
+    <PackageReference Include="Xam.Plugin.Geolocator" />
+    <PackageReference Include="Xamarin.Forms" />
+    <PackageReference Include="sqlite-net-pcl" />
     <PackageReference Include="BruTile.MbTiles" />
-    <PackageReference Include="System.Memory" IncludeAssets="None" />     
+    <PackageReference Include="System.Memory" IncludeAssets="None" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj">

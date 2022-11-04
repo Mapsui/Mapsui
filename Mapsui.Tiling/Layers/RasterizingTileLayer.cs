@@ -29,6 +29,7 @@ namespace Mapsui.Tiling.Layers
         /// <param name="maxExtraTiles">Number of maximum extra tiles for memory cache</param>
         /// <param name="persistentCache">Persistent Cache</param>
         /// <param name="projection">Projection</param>
+        /// <param name="renderFormat">Format to Render To</param>
         public RasterizingTileLayer(
             ILayer layer,
             double renderResolutionMultiplier = 1,
@@ -41,8 +42,9 @@ namespace Mapsui.Tiling.Layers
             int minExtraTiles = -1,
             int maxExtraTiles = -1,
             IPersistentCache<byte[]>? persistentCache = null,
-            IProjection? projection = null) : base(
-            new RasterizingTileProvider(layer, renderResolutionMultiplier, rasterizer, pixelDensity, persistentCache, projection),
+            IProjection? projection = null,
+            RenderFormat renderFormat = RenderFormat.Png) : base(
+            new RasterizingTileProvider(layer, renderResolutionMultiplier, rasterizer, pixelDensity, persistentCache, projection, renderFormat),
             minTiles,
             maxTiles,
             dataFetchStrategy,

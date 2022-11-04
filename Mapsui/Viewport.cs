@@ -52,23 +52,17 @@ namespace Mapsui
         /// <param name="viewport">Viewport from which to copy all values</param>
         public Viewport(IReadOnlyViewport viewport) : this()
         {
-            _centerX = viewport.Center.X;
-            _centerY = viewport.Center.Y;
+            _centerX = viewport.CenterX;
+            _centerY = viewport.CenterY;
             _resolution = viewport.Resolution;
             _width = viewport.Width;
             _height = viewport.Height;
             _rotation = viewport.Rotation;
 
-            IsRotated = viewport.IsRotated;
             if (viewport.Extent != null) _extent = new MRect(viewport.Extent);
 
             UpdateExtent();
         }
-
-        public bool HasSize => !_width.IsNanOrInfOrZero() && !_height.IsNanOrInfOrZero();
-
-        /// <inheritdoc />
-        public MReadOnlyPoint Center => new MReadOnlyPoint(_centerX, _centerY);
 
         /// <inheritdoc />
         public double CenterX
@@ -142,15 +136,10 @@ namespace Mapsui
                 if (_rotation < 0)
                     _rotation += 360.0;
 
-                IsRotated = !double.IsNaN(_rotation) && _rotation > Constants.Epsilon && _rotation < 360 - Constants.Epsilon;
-                if (!IsRotated) _rotation = 0; // If not rotated set _rotation explicitly to exactly 0
                 UpdateExtent();
                 OnViewportChanged();
             }
         }
-
-        /// <inheritdoc />
-        public bool IsRotated { get; private set; }
 
         /// <inheritdoc />
         public MRect Extent => _extent;
@@ -186,7 +175,7 @@ namespace Mapsui
         {
             var (screenX, screenY) = WorldToScreenUnrotated(worldX, worldY);
 
-            if (IsRotated)
+            if (this.IsRotated())
             {
                 var screenCenterX = Width / 2.0;
                 var screenCenterY = Height / 2.0;
@@ -212,13 +201,20 @@ namespace Mapsui
             return (newX, newY);
         }
 
-        /// <inheritdoc />
-        public (double screenX, double screenY) WorldToScreenUnrotated(double worldX, double worldY)
+        /// <summary>
+        /// Converts X/Y in map units to a point in device independent units (or DIP or DP),
+        /// respecting rotation
+        /// </summary>
+        /// <param name="worldX">X coordinate in map units</param>
+        /// <param name="worldY">Y coordinate in map units</param>
+        /// <returns>The x and y in screen pixels</returns>
+
+        private (double screenX, double screenY) WorldToScreenUnrotated(double worldX, double worldY)
         {
             var screenCenterX = Width / 2.0;
             var screenCenterY = Height / 2.0;
-            var screenX = (worldX - Center.X) / _resolution + screenCenterX;
-            var screenY = (Center.Y - worldY) / _resolution + screenCenterY;
+            var screenX = (worldX - CenterX) / _resolution + screenCenterX;
+            var screenY = (CenterY - worldY) / _resolution + screenCenterY;
             return (screenX, screenY);
         }
 
@@ -228,15 +224,15 @@ namespace Mapsui
             var screenCenterX = Width / 2.0;
             var screenCenterY = Height / 2.0;
 
-            if (IsRotated)
+            if (this.IsRotated())
             {
                 var screen = new MPoint(screenX, screenY).Rotate(_rotation, screenCenterX, screenCenterY);
                 screenX = screen.X;
                 screenY = screen.Y;
             }
 
-            var worldX = Center.X + (screenX - screenCenterX) * _resolution;
-            var worldY = Center.Y - (screenY - screenCenterY) * _resolution;
+            var worldX = CenterX + (screenX - screenCenterX) * _resolution;
+            var worldY = CenterY - (screenY - screenCenterY) * _resolution;
             return (worldX, worldY);
         }
 
@@ -253,29 +249,29 @@ namespace Mapsui
 
             if (deltaResolution != 1)
             {
-                Resolution = Resolution / deltaResolution;
+                _resolution = Resolution / deltaResolution;
 
                 // Calculate current position again with adjusted resolution
                 // Zooming should be centered on the place where the map is touched.
                 // This is done with the scale correction.
-                var scaleCorrectionX = (1 - deltaResolution) * (current.X - Center.X);
-                var scaleCorrectionY = (1 - deltaResolution) * (current.Y - Center.Y);
+                var scaleCorrectionX = (1 - deltaResolution) * (current.X - CenterX);
+                var scaleCorrectionY = (1 - deltaResolution) * (current.Y - CenterY);
 
                 newX -= scaleCorrectionX;
                 newY -= scaleCorrectionY;
             }
 
-            CenterX = newX;
-            CenterY = newY;
+            _centerX = newX;
+            _centerY = newY;
 
             if (deltaRotation != 0)
             {
                 current = ScreenToWorld(positionScreen.X, positionScreen.Y); // calculate current position again with adjusted resolution
-                Rotation += deltaRotation;
+                _rotation += deltaRotation;
                 var postRotation = ScreenToWorld(positionScreen.X, positionScreen.Y); // calculate current position again with adjusted resolution
 
-                CenterX = _centerX - (postRotation.X - current.X);
-                CenterY = _centerY - (postRotation.Y - current.Y);
+                _centerX = _centerX - (postRotation.X - current.X);
+                _centerY = _centerY - (postRotation.Y - current.Y);
             }
         }
 
@@ -288,10 +284,10 @@ namespace Mapsui
             // calculate the window extent which is not rotate
             var halfSpanX = _width * _resolution * 0.5;
             var halfSpanY = _height * _resolution * 0.5;
-            var left = Center.X - halfSpanX;
-            var bottom = Center.Y - halfSpanY;
-            var right = Center.X + halfSpanX;
-            var top = Center.Y + halfSpanY;
+            var left = CenterX - halfSpanX;
+            var bottom = CenterY - halfSpanY;
+            var right = CenterX + halfSpanX;
+            var top = CenterY + halfSpanY;
             var windowExtent = new MQuad
             {
                 BottomLeft = new MPoint(left, bottom),
@@ -300,7 +296,7 @@ namespace Mapsui
                 BottomRight = new MPoint(right, bottom)
             };
 
-            if (!IsRotated)
+            if (!this.IsRotated())
             {
                 _extent.Min.X = left;
                 _extent.Min.Y = bottom;
@@ -311,7 +307,7 @@ namespace Mapsui
             {
                 // Calculate the extent that will encompass a rotated viewport (slightly larger - used for tiles).
                 // Perform rotations on corner offsets and then add them to the Center point.
-                windowExtent = windowExtent.Rotate(-_rotation, Center.X, Center.Y);
+                windowExtent = windowExtent.Rotate(-_rotation, CenterX, CenterY);
                 var rotatedBoundingBox = windowExtent.ToBoundingBox();
                 _extent.Min.X = rotatedBoundingBox.MinX;
                 _extent.Min.Y = rotatedBoundingBox.MinY;
@@ -361,11 +357,11 @@ namespace Mapsui
             OnViewportChanged();
         }
 
-        public void SetCenter(MReadOnlyPoint center, long duration = 0, Easing? easing = default)
+        public void SetCenter(MPoint center, long duration = 0, Easing? easing = default)
         {
             _animations = new();
 
-            if (center.Equals(Center))
+            if (center.X == _centerX && center.Y == _centerY)
                 return;
 
             if (duration == 0)
@@ -390,7 +386,7 @@ namespace Mapsui
                 return;
 
             if (duration == 0)
-                Resolution = resolution;
+                _resolution = resolution;
             else
             {
                 _animations = ZoomAnimation.Create(this, resolution, duration, easing);
@@ -407,7 +403,7 @@ namespace Mapsui
             if (Rotation == rotation) return;
 
             if (duration == 0)
-                Rotation = rotation;
+                _rotation = rotation;
             else
             {
                 _animations = RotateAnimation.Create(this, rotation, duration, easing);

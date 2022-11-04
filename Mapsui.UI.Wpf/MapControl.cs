@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Rendering.Skia;
 using Mapsui.UI.Utils;
@@ -138,7 +139,7 @@ namespace Mapsui.UI.Wpf
         private void MapControlMouseWheel(object sender, MouseWheelEventArgs e)
         {
             if (_map?.ZoomLock ?? true) return;
-            if (!Viewport.HasSize) return;
+            if (!Viewport.HasSize()) return;
 
             _currentMousePosition = e.GetPosition(this).ToMapsui();
 

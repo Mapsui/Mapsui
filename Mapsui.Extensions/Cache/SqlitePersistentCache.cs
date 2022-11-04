@@ -1,10 +1,17 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.IO.Compression;
+using System.Security.AccessControl;
 using BruTile;
 using BruTile.Cache;
 using Mapsui.Cache;
 using Mapsui.Logging;
 using SQLite;
+
+#if NETSTANDARD2_0
+using BrotliSharpLib;
+#endif
 
 namespace Mapsui.Extensions.Cache;
 
@@ -12,6 +19,8 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
 {
     private readonly string _file;
     private readonly TimeSpan _cacheExpireTime;
+    private const string NoCompression = "no";
+    private const string BrotliCompression = "br";
 
     public SqlitePersistentCache(string name, TimeSpan? cacheExpireTime = null, string? folder = null)
     {
@@ -39,6 +48,13 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
                 Add Created DateTime NOT NULL Default ('{today.Year}{today.Month:00}{today.Date:00}');");
                 command.ExecuteNonQuery();
             }
+
+            if (test != null && string.IsNullOrEmpty(test.Compression))
+            {
+                var command = connection.CreateCommand(@$"Alter TABLE Tile 
+                Add Compression VARCHAR(2) NOT NULL Default ('{NoCompression}');");
+                command.ExecuteNonQuery();
+            }
         }
         catch (SQLiteException ex)
         {
@@ -48,6 +64,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
                 Col INTEGER NOT NULL,
                 Row INTEGER NOT NULL,
                 Created DateTime NOT NULL,
+                Compression VARCHAR(2) NOT NULL,
                 Data BLOB,
                 PRIMARY KEY (Level, Col, Row)
                 );");
@@ -58,6 +75,12 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
         try
         {
             var test = connection.Table<UrlCache>().FirstOrDefault();
+            if (test != null && string.IsNullOrEmpty(test.Compression))
+            {
+                var command = connection.CreateCommand(@$"Alter TABLE UrlCache 
+                Add Compression VARCHAR(2) NOT NULL Default ('{NoCompression}');");
+                command.ExecuteNonQuery();
+            }
         }
         catch (SQLiteException ex)
         {
@@ -65,6 +88,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
             var command = connection.CreateCommand(@"CREATE TABLE UrlCache (
                 Url TEXT NOT NULL,                
                 Created DateTime NOT NULL,
+                Compression VARCHAR(2) NOT NULL,
                 Data BLOB,
                 PRIMARY KEY (Url)
                 );");
@@ -75,6 +99,8 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
 
     public void Add(TileIndex index, byte[] tile)
     {
+        var compress = Compress(tile);
+
         using var connection = CreateConnection();
         var data = new Tile
         {
@@ -82,8 +108,10 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
             Col = index.Col,
             Row = index.Row,
             Created = DateTime.Now,
-            Data = tile,
+            Data = compress.data,
+            Compression = compress.Compression,
         };
+
         connection.Insert(data);
     }
 
@@ -110,16 +138,21 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
             }
         }
 
-        return tile?.Data!;
+        var result = Decompress(tile?.Data, tile?.Compression);
+        
+        return result;
     }
 
     public void Add(string url, byte[] tile)
     {
+        var compress = Compress(tile);
+
         using var connection = CreateConnection();
         var data = new UrlCache() {
             Url = url,
             Created = DateTime.Now,
-            Data = tile,
+            Data = compress.data,
+            Compression = compress.Compression,
         };
         connection.Insert(data);
     }
@@ -143,11 +176,73 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
                 return null;
             }
         }
-        return tile?.Data;
+
+        return Decompress(tile?.Data, tile?.Compression);
+    }
+
+    [return: NotNullIfNotNull("bytes")]
+    private static (byte[]? data, string Compression) Compress(byte[]? bytes)
+    {
+        if (bytes == null)
+            return (null, NoCompression);
+
+        using var outputStream = new MemoryStream();
+#if NETSTANDARD2_0
+        using (var compressStream = new BrotliStream(outputStream, CompressionMode.Compress))
+#else
+        using (var compressStream = new BrotliStream(outputStream, CompressionLevel.Optimal))
+#endif
+        {
+            compressStream.Write(bytes, 0, bytes.Length);
+        }
+
+        var result = outputStream.ToArray();
+
+        if (result.Length < bytes.Length)
+        {
+            return (result, BrotliCompression);
+        }
+
+        return (bytes, NoCompression);
+    }
+
+    [return: NotNullIfNotNull("bytes")]
+    private static byte[]? Decompress(byte[]? bytes, string? compression)
+    {
+        if (bytes == null || string.IsNullOrEmpty(compression) || string.Equals(compression, NoCompression, StringComparison.InvariantCultureIgnoreCase))
+            return bytes;
+
+        switch (compression!.ToLower())
+        {
+            case BrotliCompression:
+            {
+                using var inputStream = new MemoryStream(bytes);
+                using var outputStream = new MemoryStream();
+                using (var decompressStream = new BrotliStream(inputStream, CompressionMode.Decompress))
+                {
+                    decompressStream.CopyTo(outputStream);
+                }
+
+                return outputStream.ToArray();
+            }
+            default:
+                throw new NotImplementedException(compression);
+
+        }
     }
 
     private SQLiteConnection CreateConnection()
     {
         return new SQLiteConnection(_file);
+    }
+
+    public void Clear()
+    {
+        File.Exists(_file);
+        {
+            File.Delete(_file);    
+            // initialize the database again
+            InitDb();
+        }
     }
 }

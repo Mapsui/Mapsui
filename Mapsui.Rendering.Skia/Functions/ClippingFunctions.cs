@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Mapsui.Extensions;
 using NetTopologySuite.Geometries;
 using SkiaSharp;
 
@@ -90,8 +91,8 @@ namespace Mapsui.Rendering.Skia.Functions
 
             var screenCenterX = viewport.Width * 0.5;
             var screenCenterY = viewport.Height * 0.5;
-            var centerX = viewport.Center.X;
-            var centerY = viewport.Center.Y;
+            var centerX = viewport.CenterX;
+            var centerY = viewport.CenterY;
             var resolution = 1.0 / viewport.Resolution;
             var rotation = viewport.Rotation / 180f * Math.PI;
             var sin = Math.Sin(rotation);
@@ -102,7 +103,7 @@ namespace Mapsui.Rendering.Skia.Functions
                 var screenX = (point.X - centerX) * resolution;
                 var screenY = (centerY - point.Y) * resolution;
 
-                if (viewport.IsRotated)
+                if (viewport.IsRotated())
                 {
                     var newX = screenX * cos - screenY * sin;
                     var newY = screenX * sin + screenY * cos;

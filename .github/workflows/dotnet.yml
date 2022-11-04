@@ -20,10 +20,10 @@ jobs:
     # Cache Nugets
     - uses: actions/cache@v3
       with:
-        path: ~/.nuget/packages
-        key: ${{ runner.os }}-nuget9-${{ hashFiles('**/*.csproj') }}
+        path: ~/.nuget/packages     
+        key: ${{ runner.os }}-nuget11-${{ hashFiles('**/*.csproj') }}
         restore-keys: |
-            ${{ runner.os }}-nuget9-
+            ${{ runner.os }}-nuget11-
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.0.6      
       with:
@@ -37,26 +37,27 @@ jobs:
     #     echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV
     #     sudo xcode-select -s $XCODE_ROOT
     - name: Setup Xcode version
-      uses: maxim-lobanov/setup-xcode@v1.4.1
+      uses: maxim-lobanov/setup-xcode@v1.5.1
       with:
-        xcode-version: latest-stable
+        xcode-version: '14.0'
     - name: Setup .NET Core SDK
       uses: actions/setup-dotnet@v2
       with:
          dotnet-version: |
-           6.0.400
-         include-prerelease: true    
+           6.0.402
+         include-prerelease: false    
     - name: install maui macos android ios maccatalyst wasm-tools
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools
     - name: Restore dependencies Legacy
       run: nuget restore Mapsui.Mac.Legacy.sln   
     - name: Restore dependencies Mapsui
       run: dotnet restore Mapsui.Mac.slnf   
-    # Samples Build    
+    # Samples Build           
     - name: Build Mapsui.Samples.Droid
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Droid/Mapsui.Samples.Droid.csproj    
-    - name: Build Mapsui.Samples.iOS
-      run: dotnet build --no-restore --configuration Debug -r iossimulator-x64 --self-contained Samples/Mapsui.Samples.iOS/Mapsui.Samples.iOS.csproj
+      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Droid/Mapsui.Samples.Droid.csproj                   
+    # This works on Real Mac Devices but not on Github Actions, disable it for now (this is run on the Windows build)
+    # - name: Build Mapsui.Samples.iOS
+    #  run: dotnet build --no-restore --configuration Debug -r iossimulator-x64 --self-contained Samples/Mapsui.Samples.iOS/Mapsui.Samples.iOS.csproj
     # Samples Forms    
     - name: Build Mapsui.Samples.Forms.Shared
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Shared/Mapsui.Samples.Forms.Shared.csproj    
@@ -112,7 +113,7 @@ jobs:
       with:
         name: nupkg.mac
         path: Artifacts/*.nupkg
-
+  
   winBuild:
     runs-on: windows-latest
     steps:
@@ -122,16 +123,20 @@ jobs:
     # Cache Nugets
     - uses: actions/cache@v3
       with:
-        path: ~/.nuget/packages
-        key: ${{ runner.os }}-nuget9-${{ hashFiles('**/*.csproj') }}
+        path: |
+          ~/.nuget/packages/Microsoft*
+          ~/.nuget/packages/SkiaSharp* 
+          ~/.nuget/packages/System*
+          ~/.nuget/packages/Xamarin*
+        key: ${{ runner.os }}-nuget10-${{ hashFiles('**/*.csproj') }}
         restore-keys: |
-            ${{ runner.os }}-nuget9-
+            ${{ runner.os }}-nuget10-
     - name: Setup .NET Core SDK
       uses: actions/setup-dotnet@v2
       with:
          dotnet-version: |
-           6.0.400
-         include-prerelease: true
+           6.0.402
+         include-prerelease: false
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.0.6
       with:

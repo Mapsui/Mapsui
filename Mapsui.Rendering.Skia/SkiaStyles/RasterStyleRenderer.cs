@@ -1,3 +1,4 @@
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Rendering.Skia.SkiaStyles;
@@ -26,20 +27,20 @@ namespace Mapsui.Rendering.Skia
 
                 rasterStyle.UpdateCache(currentIteration);
 
-                BitmapInfo? bitmapInfo;
-
-                if (!rasterStyle.TileCache.Keys.Contains(raster))
+                rasterStyle.TileCache.TryGetValue(raster, out var cachedBitmapInfo);
+                BitmapInfo? bitmapInfo = cachedBitmapInfo as BitmapInfo;
+                if (BitmapHelper.InvalidBitmapInfo(bitmapInfo))
                 {
                     bitmapInfo = BitmapHelper.LoadBitmap(raster.Data);
                     rasterStyle.TileCache[raster] = bitmapInfo;
                 }
-                else
-                {
-                    bitmapInfo = (BitmapInfo?)rasterStyle.TileCache[raster];
-                }
 
-                if (bitmapInfo == null || bitmapInfo.Bitmap == null)
+                if (BitmapHelper.InvalidBitmapInfo(bitmapInfo))
+                {
+                    // remove invalid image from cache
+                    rasterStyle.TileCache.Remove(raster);
                     return false;
+                }
 
                 bitmapInfo.IterationUsed = currentIteration;
                 rasterStyle.TileCache[raster] = bitmapInfo;
@@ -51,7 +52,7 @@ namespace Mapsui.Rendering.Skia
 
                 canvas.Save();
 
-                if (viewport.IsRotated)
+                if (viewport.IsRotated())
                 {
                     var priorMatrix = canvas.TotalMatrix;
 
@@ -61,14 +62,30 @@ namespace Mapsui.Rendering.Skia
 
                     var destination = new SKRect(0.0f, 0.0f, (float)extent.Width, (float)extent.Height);
 
-                    BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap, destination, opacity);
+                    switch (bitmapInfo.Type)
+                    {
+                        case BitmapType.Bitmap:
+                            BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap, RoundToPixel(destination), opacity);
+                            break;
+                        case BitmapType.Picture:
+                            PictureRenderer.Draw(canvas, bitmapInfo.Picture!, RoundToPixel(destination), opacity);
+                            break;
+                    }
 
                     canvas.SetMatrix(priorMatrix);
                 }
                 else
                 {
                     var destination = WorldToScreen(viewport, extent);
-                    BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap, RoundToPixel(destination), opacity);
+                    switch (bitmapInfo.Type)
+                    {
+                        case BitmapType.Bitmap:
+                            BitmapRenderer.Draw(canvas, bitmapInfo.Bitmap, RoundToPixel(destination), opacity);
+                            break;
+                        case BitmapType.Picture:
+                            PictureRenderer.Draw(canvas, bitmapInfo.Picture!, RoundToPixel(destination), opacity);
+                            break;
+                    }
                 }
 
                 canvas.Restore();
@@ -91,8 +108,8 @@ namespace Mapsui.Rendering.Skia
 
             var userRotation = SKMatrix.CreateRotationDegrees((float)viewport.Rotation);
             var focalPointOffset = SKMatrix.CreateTranslation(
-                (float)(rect.Left - viewport.Center.X),
-                (float)(viewport.Center.Y - rect.Top));
+                (float)(rect.Left - viewport.CenterX),
+                (float)(viewport.CenterY - rect.Top));
             var zoomScale = SKMatrix.CreateScale((float)(1.0 / viewport.Resolution), (float)(1.0 / viewport.Resolution));
             var centerInScreen = SKMatrix.CreateTranslation((float)(viewport.Width / 2.0), (float)(viewport.Height / 2.0));
 

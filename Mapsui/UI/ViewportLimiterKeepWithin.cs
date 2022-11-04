@@ -40,7 +40,7 @@ namespace Mapsui.UI
 
         public void Limit(Viewport viewport, IReadOnlyList<double> mapResolutions, MRect? mapEnvelope)
         {
-            viewport.Resolution = LimitResolution(viewport.Resolution, viewport.Width, viewport.Height, mapResolutions, mapEnvelope);
+            viewport.SetResolution(LimitResolution(viewport.Resolution, viewport.Width, viewport.Height, mapResolutions, mapEnvelope));
             LimitExtent(viewport, mapEnvelope);
         }
 
@@ -78,22 +78,21 @@ namespace Mapsui.UI
                 return;
             }
 
-            var x = viewport.Center.X;
+            var x = viewport.CenterX;
 
             if (viewport.Extent?.Left < maxExtent.Left)
                 x += maxExtent.Left - viewport.Extent.Left;
             else if (viewport.Extent?.Right > maxExtent.Right)
                 x += maxExtent.Right - viewport.Extent.Right;
 
-            var y = viewport.Center.Y;
+            var y = viewport.CenterY;
 
             if (viewport.Extent?.Top > maxExtent.Top)
                 y += maxExtent.Top - viewport.Extent.Top;
             else if (viewport.Extent?.Bottom < maxExtent.Bottom)
                 y += maxExtent.Bottom - viewport.Extent.Bottom;
 
-            viewport.CenterX = x;
-            viewport.CenterY = y;
+            viewport.SetCenter(x, y);
         }
     }
 }

@@ -483,14 +483,6 @@ namespace Mapsui.UI.Forms
                 // Update rotationButton
                 _mapNorthingButton!.Rotation = (float)Viewport.Rotation;
             }
-
-            if (e.PropertyName?.Equals(nameof(Viewport.Center)) ?? false)
-            {
-                if (MyLocationFollow && !Viewport.Center.Equals(MyLocationLayer.MyLocation.ToMapsui()))
-                {
-                    //_mapControl.Map.NavigateTo(_mapMyLocationLayer.MyLocation.ToMapsui());
-                }
-            }
         }
 
         private void HandleLayersChanged(object? sender, LayerCollectionChangedEventArgs args)
