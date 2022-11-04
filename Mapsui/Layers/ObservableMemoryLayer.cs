@@ -33,7 +33,7 @@ namespace Mapsui.Layers
                 _observableCollection = value;
                 if (_observableCollection != null)
                 {
-                    _observableCollection.CollectionChanged -= DataSource_CollectionChanged;
+                    _observableCollection.CollectionChanged += DataSource_CollectionChanged;
                     _shadowCollection.Clear();
                     foreach (var it in _observableCollection)
                     {
