@@ -49,15 +49,13 @@ REM .\.nuget\nuget pack NuSpec\Mapsui.Eto.nuspec -Version %VERSION% -outputdirec
 dotnet pack /p:RestorePackages=true /p:Configuration=Release Mapsui.UI.Maui/Mapsui.UI.Maui.csproj --output Artifacts
 REM .\.nuget\nuget pack NuSpec\Mapsui.Maui.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1
 
-msbuild /p:RestorePackages=true /p:Configuration=Release Mapsui.UI.Uno/Mapsui.UI.Uno.csproj REM /t:Pack /p:OutputPath="..\Artifacts"
-.\.nuget\nuget pack Mapsui.UI.Uno/Mapsui.UI.Uno.csproj -Version %VERSION% -outputdirectory Artifacts  || exit /B 1
+msbuild /p:RestorePackages=true /p:Configuration=Release Mapsui.UI.Uno/Mapsui.UI.Uno.csproj /t:Pack 
+xcopy Mapsui.UI.Uno\bin\Release\*.nupkg Artifacts
+REM .\.nuget\nuget pack NuSpec\Mapsui.Uno.nuspec -Prop Configuration=Release -Version %VERSION% -outputdirectory Artifacts  || exit /B 1
 
 dotnet pack /p:RestorePackages=true /p:Configuration=Release Mapsui.UI.Uno.WinUI/Mapsui.UI.Uno.WinUI.csproj --output Artifacts
 REM .\.nuget\nuget pack NuSpec\Mapsui.Uno.WinUI.nuspec -Version %VERSION% -outputdirectory Artifacts  || exit /B 1
 
-msbuild /p:RestorePackages=true /p:Configuration=Release Mapsui.UI.WinUI/Mapsui.UI.WinUI.csproj /t:Pack /p:OutputPath="..\Artifacts"
-del Artifacts\*.dll
-del Artifacts\*.pdb
-del Artifacts\*.json
-del Artifacts\*.pri
+msbuild /p:RestorePackages=true /p:Configuration=Release Mapsui.UI.WinUI/Mapsui.UI.WinUI.csproj /t:Pack
+xcopy Mapsui.UI.WinUI\bin\Release\*.nupkg Artifacts
 REM .\.nuget\nuget pack Mapsui.UI.WinUI/Mapsui.UI.WinUI.csproj -Version %VERSION% -outputdirectory Artifacts || exit /B 1

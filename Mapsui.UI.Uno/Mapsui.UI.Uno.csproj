@@ -22,7 +22,8 @@
     <Description>
       Uno map components based on the Mapsui library
     </Description>
-    <PackageTags>$(PackageTags) uno</PackageTags>
+    <PackageTags>$(PackageTags) uno</PackageTags>    
+    <EnablePackageValidation>false</EnablePackageValidation>
   </PropertyGroup>
 
   <ItemGroup>
