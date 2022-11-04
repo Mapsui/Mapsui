@@ -179,19 +179,19 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_RasterizingLayer__ctor_Mapsui_Layers_ILayer_System_Int32_System_Double_Mapsui_Rendering_IRenderer_System_Double_System_Boolean_System_Single_.md&amp;value=---%0Auid%3A%20Mapsui.Layers.RasterizingLayer.%23ctor(Mapsui.Layers.ILayer%2CSystem.Int32%2CSystem.Double%2CMapsui.Rendering.IRenderer%2CSystem.Double%2CSystem.Boolean%2CSystem.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_RasterizingLayer__ctor_Mapsui_Layers_ILayer_System_Int32_System_Double_Mapsui_Rendering_IRenderer_System_Double_System_Boolean_System_Single_Mapsui_Rendering_RenderFormat_.md&amp;value=---%0Auid%3A%20Mapsui.Layers.RasterizingLayer.%23ctor(Mapsui.Layers.ILayer%2CSystem.Int32%2CSystem.Double%2CMapsui.Rendering.IRenderer%2CSystem.Double%2CSystem.Boolean%2CSystem.Single%2CMapsui.Rendering.RenderFormat)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/RasterizingLayer.cs/#L44">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/RasterizingLayer.cs/#L46">View Source</a>
   </span>
   <a id="Mapsui_Layers_RasterizingLayer__ctor_" data-uid="Mapsui.Layers.RasterizingLayer.#ctor*"></a>
-  <h4 id="Mapsui_Layers_RasterizingLayer__ctor_Mapsui_Layers_ILayer_System_Int32_System_Double_Mapsui_Rendering_IRenderer_System_Double_System_Boolean_System_Single_" data-uid="Mapsui.Layers.RasterizingLayer.#ctor(Mapsui.Layers.ILayer,System.Int32,System.Double,Mapsui.Rendering.IRenderer,System.Double,System.Boolean,System.Single)">RasterizingLayer(ILayer, Int32, Double, IRenderer, Double, Boolean, Single)</h4>
+  <h4 id="Mapsui_Layers_RasterizingLayer__ctor_Mapsui_Layers_ILayer_System_Int32_System_Double_Mapsui_Rendering_IRenderer_System_Double_System_Boolean_System_Single_Mapsui_Rendering_RenderFormat_" data-uid="Mapsui.Layers.RasterizingLayer.#ctor(Mapsui.Layers.ILayer,System.Int32,System.Double,Mapsui.Rendering.IRenderer,System.Double,System.Boolean,System.Single,Mapsui.Rendering.RenderFormat)">RasterizingLayer(ILayer, Int32, Double, IRenderer, Double, Boolean, Single, RenderFormat)</h4>
   <div class="markdown level1 summary"><p>Creates a RasterizingLayer which rasterizes a layer for performance</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public RasterizingLayer(ILayer layer, int delayBeforeRasterize = 1000, double renderResolutionMultiplier = null, IRenderer rasterizer = null, double overscanRatio = null, bool onlyRerasterizeIfOutsideOverscan = false, float pixelDensity = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public RasterizingLayer(ILayer layer, int delayBeforeRasterize = 1000, double renderResolutionMultiplier = null, IRenderer rasterizer = null, double overscanRatio = null, bool onlyRerasterizeIfOutsideOverscan = false, float pixelDensity = null, RenderFormat renderFormat = RenderFormat.Png)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -245,6 +245,12 @@ rasterization.</p>
         <td><span class="parametername">pixelDensity</span></td>
         <td></td>
       </tr>
+      <tr>
+        <td><a class="xref" href="Mapsui.Rendering.RenderFormat.html">RenderFormat</a></td>
+        <td><span class="parametername">renderFormat</span></td>
+        <td><p>render Format png is default and skp is skia picture</p>
+</td>
+      </tr>
     </tbody>
   </table>
   <h3 id="properties">Properties
@@ -284,7 +290,7 @@ rasterization.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_RasterizingLayer_Extent.md&amp;value=---%0Auid%3A%20Mapsui.Layers.RasterizingLayer.Extent%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/RasterizingLayer.cs/#L70">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/RasterizingLayer.cs/#L74">View Source</a>
   </span>
   <a id="Mapsui_Layers_RasterizingLayer_Extent_" data-uid="Mapsui.Layers.RasterizingLayer.Extent*"></a>
   <h4 id="Mapsui_Layers_RasterizingLayer_Extent" data-uid="Mapsui.Layers.RasterizingLayer.Extent">Extent</h4>
@@ -316,7 +322,7 @@ rasterization.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_RasterizingLayer_SourceLayer.md&amp;value=---%0Auid%3A%20Mapsui.Layers.RasterizingLayer.SourceLayer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/RasterizingLayer.cs/#L72">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/RasterizingLayer.cs/#L76">View Source</a>
   </span>
   <a id="Mapsui_Layers_RasterizingLayer_SourceLayer_" data-uid="Mapsui.Layers.RasterizingLayer.SourceLayer*"></a>
   <h4 id="Mapsui_Layers_RasterizingLayer_SourceLayer" data-uid="Mapsui.Layers.RasterizingLayer.SourceLayer">SourceLayer</h4>
@@ -346,7 +352,7 @@ rasterization.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_RasterizingLayer_SymbolSize.md&amp;value=---%0Auid%3A%20Mapsui.Layers.RasterizingLayer.SymbolSize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/RasterizingLayer.cs/#L154">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/RasterizingLayer.cs/#L158">View Source</a>
   </span>
   <a id="Mapsui_Layers_RasterizingLayer_SymbolSize_" data-uid="Mapsui.Layers.RasterizingLayer.SymbolSize*"></a>
   <h4 id="Mapsui_Layers_RasterizingLayer_SymbolSize" data-uid="Mapsui.Layers.RasterizingLayer.SymbolSize">SymbolSize</h4>
@@ -378,7 +384,7 @@ rasterization.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_RasterizingLayer_AbortFetch.md&amp;value=---%0Auid%3A%20Mapsui.Layers.RasterizingLayer.AbortFetch%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/RasterizingLayer.cs/#L168">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/RasterizingLayer.cs/#L172">View Source</a>
   </span>
   <a id="Mapsui_Layers_RasterizingLayer_AbortFetch_" data-uid="Mapsui.Layers.RasterizingLayer.AbortFetch*"></a>
   <h4 id="Mapsui_Layers_RasterizingLayer_AbortFetch" data-uid="Mapsui.Layers.RasterizingLayer.AbortFetch">AbortFetch()</h4>
@@ -393,7 +399,7 @@ rasterization.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_RasterizingLayer_ClearCache.md&amp;value=---%0Auid%3A%20Mapsui.Layers.RasterizingLayer.ClearCache%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/RasterizingLayer.cs/#L197">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/RasterizingLayer.cs/#L201">View Source</a>
   </span>
   <a id="Mapsui_Layers_RasterizingLayer_ClearCache_" data-uid="Mapsui.Layers.RasterizingLayer.ClearCache*"></a>
   <h4 id="Mapsui_Layers_RasterizingLayer_ClearCache" data-uid="Mapsui.Layers.RasterizingLayer.ClearCache">ClearCache()</h4>
@@ -408,7 +414,7 @@ rasterization.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_RasterizingLayer_CreateViewport_Mapsui_MRect_System_Double_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Layers.RasterizingLayer.CreateViewport(Mapsui.MRect%2CSystem.Double%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/RasterizingLayer.cs/#L202">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/RasterizingLayer.cs/#L206">View Source</a>
   </span>
   <a id="Mapsui_Layers_RasterizingLayer_CreateViewport_" data-uid="Mapsui.Layers.RasterizingLayer.CreateViewport*"></a>
   <h4 id="Mapsui_Layers_RasterizingLayer_CreateViewport_Mapsui_MRect_System_Double_System_Double_System_Double_" data-uid="Mapsui.Layers.RasterizingLayer.CreateViewport(Mapsui.MRect,System.Double,System.Double,System.Double)">CreateViewport(MRect, Double, Double, Double)</h4>
@@ -470,7 +476,7 @@ rasterization.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_RasterizingLayer_GetFeatures_Mapsui_MRect_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Layers.RasterizingLayer.GetFeatures(Mapsui.MRect%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/RasterizingLayer.cs/#L156">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/RasterizingLayer.cs/#L160">View Source</a>
   </span>
   <a id="Mapsui_Layers_RasterizingLayer_GetFeatures_" data-uid="Mapsui.Layers.RasterizingLayer.GetFeatures*"></a>
   <h4 id="Mapsui_Layers_RasterizingLayer_GetFeatures_Mapsui_MRect_System_Double_" data-uid="Mapsui.Layers.RasterizingLayer.GetFeatures(Mapsui.MRect,System.Double)">GetFeatures(MRect, Double)</h4>
@@ -524,7 +530,7 @@ rasterization.</p>
     <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Layers_RasterizingLayer_RefreshData_Mapsui_Layers_FetchInfo_.md&amp;value=---%0Auid%3A%20Mapsui.Layers.RasterizingLayer.RefreshData(Mapsui.Layers.FetchInfo)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/RasterizingLayer.cs/#L173">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Layers/RasterizingLayer.cs/#L177">View Source</a>
   </span>
   <a id="Mapsui_Layers_RasterizingLayer_RefreshData_" data-uid="Mapsui.Layers.RasterizingLayer.RefreshData*"></a>
   <h4 id="Mapsui_Layers_RasterizingLayer_RefreshData_Mapsui_Layers_FetchInfo_" data-uid="Mapsui.Layers.RasterizingLayer.RefreshData(Mapsui.Layers.FetchInfo)">RefreshData(FetchInfo)</h4>
