@@ -167,7 +167,11 @@ jobs:
     - name: nuget ProjectReferences to PackageReferences
       shell: pwsh
       run: |
-        ./Scripts/SamplesMapsuiNugetReferences.ps1    
+        ./Scripts/SamplesMapsuiNugetReferences.ps1
+    - name: Cleanup Debug
+      run: rmdir Debug /s /q
+    - name: Cleanup obj  
+      run: rmdir obj /s /q      
     - name: Restore dependencies
       run: .nuget\nuget restore Mapsui.sln      
     # Samples Build 
