@@ -46,9 +46,9 @@ namespace Mapsui.UI.Forms
         private const string CalloutLayerName = "Callouts";
         private const string PinLayerName = "Pins";
         private const string DrawableLayerName = "Drawables";
-        private readonly Layer _mapCalloutLayer;
-        private readonly Layer _mapPinLayer;
-        private readonly Layer _mapDrawableLayer;
+        private readonly ObservableMemoryLayer<Callout> _mapCalloutLayer;
+        private readonly ObservableMemoryLayer<Pin> _mapPinLayer;
+        private readonly ObservableMemoryLayer<Drawable> _mapDrawableLayer;
         private ButtonWidget? _mapZoomInButton;
         private ButtonWidget? _mapZoomOutButton;
         private ButtonWidget? _mapMyLocationButton;
@@ -73,9 +73,9 @@ namespace Mapsui.UI.Forms
             UseDoubleTap = false;
 
             MyLocationLayer = new MyLocationLayer(this) { Enabled = true };
-            _mapCalloutLayer = new Layer() { Name = CalloutLayerName, IsMapInfoLayer = true };
-            _mapPinLayer = new Layer() { Name = PinLayerName, IsMapInfoLayer = true };
-            _mapDrawableLayer = new Layer() { Name = DrawableLayerName, IsMapInfoLayer = true };
+            _mapCalloutLayer = new ObservableMemoryLayer<Callout>(f => f.Feature) { Name = CalloutLayerName, IsMapInfoLayer = true };
+            _mapPinLayer = new ObservableMemoryLayer<Pin>(f => f.Feature) { Name = PinLayerName, IsMapInfoLayer = true };
+            _mapDrawableLayer = new ObservableMemoryLayer<Drawable>(f => f.Feature) { Name = DrawableLayerName, IsMapInfoLayer = true };
 
             // Get defaults from MapControl
             RotationLock = Map?.RotationLock ?? false;
@@ -113,13 +113,13 @@ namespace Mapsui.UI.Forms
             _pins.CollectionChanged += HandlerPinsOnCollectionChanged;
             _drawable.CollectionChanged += HandlerDrawablesOnCollectionChanged;
 
-            _mapCalloutLayer.DataSource = new ObservableCollectionProvider<Callout>(_callouts);
+            _mapCalloutLayer.ObservableCollection = _callouts;
             _mapCalloutLayer.Style = null;  // We don't want a global style for this layer
 
-            _mapPinLayer.DataSource = new ObservableCollectionProvider<Pin>(_pins);
+            _mapPinLayer.ObservableCollection = _pins;
             _mapPinLayer.Style = null;  // We don't want a global style for this layer
 
-            _mapDrawableLayer.DataSource = new ObservableCollectionProvider<Drawable>(_drawable);
+            _mapDrawableLayer.ObservableCollection = _drawable;
             _mapDrawableLayer.Style = null;  // We don't want a global style for this layer
         }
 
