@@ -169,9 +169,11 @@ jobs:
       run: |
         ./Scripts/SamplesMapsuiNugetReferences.ps1
     - name: Cleanup Debug
-      run: & cmd /c rmdir Debug /s /q
-    - name: Cleanup obj  
-      run: & cmd /c rmdir obj /s /q
+      shell: cmd
+      run: rmdir Debug /s /q
+    - name: Cleanup obj
+      shell: cmd
+      run: rmdir obj /s /q
     - name: Restore dependencies
       run: .nuget\nuget restore Mapsui.sln      
     # Samples Build 
