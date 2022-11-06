@@ -169,7 +169,7 @@ jobs:
       run: |
         ./Scripts/SamplesMapsuiNugetReferences.ps1
     - name: Cleanup    
-      run: git clean -fx -d -e .vs    
+      run: git clean -fx -d -e Artifacts    
     - name: Restore dependencies
       run: .nuget\nuget restore Mapsui.sln      
     # Samples Build 
