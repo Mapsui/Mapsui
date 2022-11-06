@@ -168,12 +168,8 @@ jobs:
       shell: pwsh
       run: |
         ./Scripts/SamplesMapsuiNugetReferences.ps1
-    - name: Cleanup Debug
-      shell: cmd
-      run: FOR /F "tokens=*" %%G IN ('DIR /B /AD /S Debug') DO RMDIR /S /Q "%%G"
-    - name: Cleanup obj
-      shell: cmd
-      run: FOR /F "tokens=*" %%G IN ('DIR /B /AD /S obj') DO RMDIR /S /Q "%%G"
+    - name: Cleanup    
+      run: git clean -fx -d -e .vs    
     - name: Restore dependencies
       run: .nuget\nuget restore Mapsui.sln      
     # Samples Build 
