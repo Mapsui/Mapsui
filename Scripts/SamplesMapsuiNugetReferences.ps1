@@ -4,7 +4,7 @@ $fileNames = Get-ChildItem -Path $PSScriptRoot\..\Samples, $PSScriptRoot\..\Test
 foreach ($file in $fileNames) {
     $fileContent = (Get-Content -raw -path $file -Encoding UTF8)
     # Set Version in files
-    $Packages | Select-Xml -XPath "//PackageVersion" | foreach {  
+    $Packages | Select-Xml -XPath "//PackageVersion" | ForEach-Object {  
         if ($_.node.Include.StartsWith("Mapsui")) {                    
             $include=$_.node.Include
             $project = $include + ".csproj"
