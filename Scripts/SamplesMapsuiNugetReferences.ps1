@@ -1,5 +1,5 @@
 $Packages = (Get-Content -raw -path $PSScriptRoot\..\Directory.Packages.props -Encoding UTF8)
-$fileNames = Get-ChildItem -Path $PSScriptRoot\..\Samples, $PSScriptRoot\..\Tests -Recurse -Include *.csproj
+$fileNames = Get-ChildItem -Path $PSScriptRoot\..\Samples -Recurse -Include *.csproj
 
 foreach ($file in $fileNames) {
     $fileContent = (Get-Content -raw -path $file -Encoding UTF8)
@@ -10,7 +10,6 @@ foreach ($file in $fileNames) {
             $project = $include + ".csproj"
             $includeui = $include -replace "Mapsui.", "Mapsui.UI."
             $projectui = $includeui + ".csproj"
-            $version=$_.node.Version
         
             # <ProjectReference .... />     
             $fileContent = $fileContent -replace "<ProjectReference Include=`"`[\.\\a-zA-Z]*$project`"` />", "<PackageReference Include=""$include"" />"
