@@ -170,10 +170,10 @@ jobs:
         ./Scripts/SamplesMapsuiNugetReferences.ps1
     - name: Cleanup Debug
       shell: cmd
-      run: rmdir Debug /s /q
+      run: FOR /F "tokens=*" %%G IN ('DIR /B /AD /S Debug') DO RMDIR /S /Q "%%G"
     - name: Cleanup obj
       shell: cmd
-      run: rmdir obj /s /q
+      run: FOR /F "tokens=*" %%G IN ('DIR /B /AD /S obj') DO RMDIR /S /Q "%%G"
     - name: Restore dependencies
       run: .nuget\nuget restore Mapsui.sln      
     # Samples Build 
