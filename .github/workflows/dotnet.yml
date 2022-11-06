@@ -162,14 +162,13 @@ jobs:
     # Release Build
     - name: Build nuget packages
       run: Scripts\buildpack $(git describe --tags)
-    # Change Project References to nuget package references in samples
-    # script dos not work on Github actions yet
+    - name: Cleanup
+      run: git clean -fx -d -e Artifacts
+    # Change Project References to nuget package references in samples    
     - name: nuget ProjectReferences to PackageReferences
       shell: pwsh
       run: |
-        ./Scripts/SamplesMapsuiNugetReferences.ps1
-    - name: Cleanup    
-      run: git clean -fx -d -e Artifacts    
+        ./Scripts/SamplesMapsuiNugetReferences.ps1        
     - name: Restore dependencies
       run: .nuget\nuget restore Mapsui.sln      
     # Samples Build 
