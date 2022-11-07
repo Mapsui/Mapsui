@@ -14,7 +14,13 @@
 		When building in Release, see https://platform.uno/docs/articles/features/using-il-linker-webassembly.html
 		-->
     <WasmShellILLinkerEnabled>false</WasmShellILLinkerEnabled>
+    <WasmShellMonoRuntimeExecutionMode>Interpreter</WasmShellMonoRuntimeExecutionMode>
+    
+    <!-- In debug, make builds faster by reducing optimizations -->
+    <WasmNativeStrip>false</WasmNativeStrip>
+    <EmccCompileOptimizationFlag>-O1</EmccCompileOptimizationFlag>
   </PropertyGroup>
+
   <ItemGroup>
     <Content Include="Assets\SplashScreen.png" />
   </ItemGroup>

@@ -18,7 +18,12 @@
 		-->
     <WasmShellILLinkerEnabled>false</WasmShellILLinkerEnabled>    
     <WasmShellMonoRuntimeExecutionMode>Interpreter</WasmShellMonoRuntimeExecutionMode>
+    
+    <!-- In debug, make builds faster by reducing optimizations -->
+    <WasmNativeStrip>false</WasmNativeStrip>
+    <EmccCompileOptimizationFlag>-O1</EmccCompileOptimizationFlag>
   </PropertyGroup>
+  
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
     <WasmShellMonoRuntimeExecutionMode>FullAOT</WasmShellMonoRuntimeExecutionMode>
   </PropertyGroup>
