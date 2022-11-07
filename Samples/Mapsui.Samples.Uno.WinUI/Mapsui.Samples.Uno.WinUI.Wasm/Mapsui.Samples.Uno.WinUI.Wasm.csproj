@@ -17,6 +17,7 @@
     <WasmShellMonoRuntimeExecutionMode>Interpreter</WasmShellMonoRuntimeExecutionMode>
     
     <!-- In debug, make builds faster by reducing optimizations -->
+    <!--https://github.com/dotnet/AspNetCore.Docs/issues/24026-->
     <WasmNativeStrip>false</WasmNativeStrip>
     <EmccCompileOptimizationFlag>-O1</EmccCompileOptimizationFlag>
   </PropertyGroup>
