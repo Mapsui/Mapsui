@@ -21,7 +21,7 @@ jobs:
     - uses: actions/cache@v3
       with:
         path: ~/.nuget/packages     
-        key: ${{ runner.os }}-nuget11-${{ hashFiles('**/*.csproj') }}
+        key: ${{ runner.os }}-nuget11-${{ hashFiles('Directory.Packages.props') }}
         restore-keys: |
             ${{ runner.os }}-nuget11-
     - name: Setup NuGet.exe for use with actions
@@ -116,7 +116,7 @@ jobs:
           ~/.nuget/packages/SkiaSharp* 
           ~/.nuget/packages/System*
           ~/.nuget/packages/Xamarin*
-        key: ${{ runner.os }}-nuget10-${{ hashFiles('**/*.csproj') }}
+        key: ${{ runner.os }}-nuget10-${{ hashFiles('Directory.Packages.props') }}
         restore-keys: |
             ${{ runner.os }}-nuget10-
     - name: Setup .NET Core SDK
