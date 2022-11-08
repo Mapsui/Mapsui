@@ -146,7 +146,7 @@ jobs:
       with:
         vs-prerelease: true
     - name: install maui macos android ios maccatalyst wasm-tools
-      run: dotnet workload install maui macos android ios maccatalyst wasm-tools
+      run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
     - name: Restore dependencies
       run: .nuget\nuget restore Mapsui.sln
     # Samples Build    
