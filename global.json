@@ -5,6 +5,7 @@
     "rollForward": "latestMajor"
   },
   "tools": {
-    "dotnet": "6.0.402"
+    "dotnet": "6.0.402",
+    "rollForward": "latestMajor"
   }
 }
