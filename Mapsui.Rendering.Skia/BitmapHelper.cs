@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using Mapsui.Extensions;
 using Mapsui.Rendering.Skia.Extensions;
@@ -73,7 +74,7 @@ namespace Mapsui.Rendering.Skia
             return null;
         }
 
-        public static bool InvalidBitmapInfo(BitmapInfo? bitmapInfo)
+        public static bool InvalidBitmapInfo([NotNullWhen(false)] BitmapInfo? bitmapInfo)
         {
             return bitmapInfo == null || (bitmapInfo.Bitmap == null && (bitmapInfo.Picture == null || bitmapInfo.Picture.IsDisposed()));
         }
