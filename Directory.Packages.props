@@ -32,7 +32,7 @@
     <PackageVersion Include="HarfBuzzSharp.NativeAssets.WebAssembly" Version="2.8.2.3" />
     <PackageVersion Include="IDisposableAnalyzers" Version="4.0.2" />
     <PackageVersion Include="Itinero" Version="1.5.0" />
-    <PackageVersion Include="Microsoft.Bcl.AsyncInterfaces" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.Bcl.AsyncInterfaces" Version="7.0.0" />
     <PackageVersion Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageVersion Include="Microsoft.CodeCoverage" Version="16.11.0" />
     <PackageVersion Include="Microsoft.Extensions.Logging" Version="7.0.0" />
