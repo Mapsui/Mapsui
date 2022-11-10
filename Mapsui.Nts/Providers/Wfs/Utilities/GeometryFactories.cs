@@ -84,7 +84,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             }
             catch (Exception ex)
             {
-                Logger.Log(LogLevel.Error, "An exception occured while initializing the label path node! " + ex.Message, ex);
+                Logger.Log(LogLevel.Error, "An exception occurred while initializing the label path node! " + ex.Message, ex);
                 throw;
             }
 
