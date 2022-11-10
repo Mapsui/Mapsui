@@ -525,8 +525,7 @@ namespace Mapsui.Providers.Wfs
                                                                                    _multiGeometries, _quickGeometries);
                         break;
                 }
-
-                await geomFactory.InitAsync();
+                
                 geomFactory.AxisOrder = AxisOrder;
                 await geomFactory.CreateGeometriesAsync(features);
                 return features;
