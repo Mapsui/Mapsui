@@ -6,6 +6,7 @@
 
 using System.Collections;
 using System.IO;
+using System.Threading.Tasks;
 using System.Xml.XPath;
 using Mapsui.Providers.Wfs.Utilities;
 
@@ -119,9 +120,10 @@ namespace Mapsui.Providers.Wfs.Xml
         /// This method invokes the corresponding method of the inherent <see cref="IXPathQueryManager"/> instance.
         /// </summary>
         /// <param name="httpClientUtil">A configured <see cref="HttpClientUtil"/> instance for performing web requests</param>
-        public virtual void SetDocumentToParse(HttpClientUtil httpClientUtil)
+        /// <returns>Task</returns>
+        public virtual async Task SetDocumentToParseAsync(HttpClientUtil httpClientUtil)
         {
-            XPathQueryManager.SetDocumentToParse(httpClientUtil);
+            await XPathQueryManager.SetDocumentToParseAsync(httpClientUtil);
         }
 
     }

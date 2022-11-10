@@ -72,6 +72,7 @@ namespace Mapsui.Providers.Wfs
         private IFilter? _ogcFilter;
         private bool _quickGeometries;
         private int[]? _axisOrder;
+        private bool _intialized = true; // by default initialized only special cases I initialize
         private readonly IUrlPersistentCache? _persistentCache;
 
         // The type of geometry can be specified in case of unprecise information (e.g. 'GeometryAssociationType').
@@ -232,8 +233,19 @@ namespace Mapsui.Providers.Wfs
                 _featureType = featureType;
             }
 
-            _geometryType = geometryType;
-            GetFeatureTypeInfo();
+            _geometryType = geometryType;   
+            _intialized = false;
+        }
+
+        /// <summary>Init Async</summary>
+        /// <returns></returns>
+        public async Task InitAsync()
+        {
+            if (_intialized)
+                return;
+
+            _intialized =true;
+            await GetFeatureTypeInfoAsync();
         }
 
         /// <summary>
@@ -373,7 +385,7 @@ namespace Mapsui.Providers.Wfs
             }
 
             _geometryType = geometryType;
-            GetFeatureTypeInfo();
+            _intialized = false;
         }
 
         /// <summary>
@@ -403,6 +415,7 @@ namespace Mapsui.Providers.Wfs
         /// <returns>Features within the specified <see cref="WfsFeatureTypeInfo.BoundingBox"/></returns>
         public async Task<IEnumerable<IFeature>> ExecuteIntersectionQueryAsync(MRect bbox)
         {
+            await InitAsync();
             if (_featureTypeInfo == null) return new List<IFeature>();
 
             var features = new List<IFeature>();
@@ -512,8 +525,7 @@ namespace Mapsui.Providers.Wfs
                                                                                    _multiGeometries, _quickGeometries);
                         break;
                 }
-
-                await geomFactory.InitAsync();
+                
                 geomFactory.AxisOrder = AxisOrder;
                 await geomFactory.CreateGeometriesAsync(features);
                 return features;
@@ -565,7 +577,7 @@ namespace Mapsui.Providers.Wfs
         /// <summary>
         /// This method gets metadata about the featuretype to query from 'GetCapabilities' and 'DescribeFeatureType'.
         /// </summary>
-        private void GetFeatureTypeInfo()
+        private async Task GetFeatureTypeInfoAsync()
         {
             try
             {
@@ -588,7 +600,7 @@ namespace Mapsui.Providers.Wfs
                     /* Initialize IXPathQueryManager with configured HttpClientUtil */
                     _featureTypeInfoQueryManager =
                         new XPathQueryManagerCompiledExpressionsDecorator(new XPathQueryManager());
-                    _featureTypeInfoQueryManager.SetDocumentToParse(
+                    await _featureTypeInfoQueryManager.SetDocumentToParseAsync(
                         config.ConfigureForWfsGetCapabilitiesRequest(_httpClientUtil, _getCapabilitiesUri!)); // is set in constructor
                     /* Namespaces for XPath queries */
                     _featureTypeInfoQueryManager.AddNamespace(_textResources.NSWFSPREFIX, _textResources.NSWFS);
@@ -712,7 +724,7 @@ namespace Mapsui.Providers.Wfs
 
                 /* Initialize IXPathQueryManager with configured HttpClientUtil */
                 describeFeatureTypeQueryManager.ResetNamespaces();
-                describeFeatureTypeQueryManager.SetDocumentToParse(config.ConfigureForWfsDescribeFeatureTypeRequest
+                await describeFeatureTypeQueryManager.SetDocumentToParseAsync(config.ConfigureForWfsDescribeFeatureTypeRequest
                                                                        (_httpClientUtil, describeFeatureTypeUri!, // is set in constructor
                                                                         featureQueryName));
 

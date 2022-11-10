@@ -9,6 +9,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.XPath;
 using System.Xml.Xsl;
@@ -27,6 +28,8 @@ namespace Mapsui.Providers.Wfs.Xml
         private XPathNodeIterator? _xIter;
         private XPathNavigator? _xNav;
         private XPathDocument? _xPathDoc;
+        private bool _initialized;
+        private HttpClientUtil _httpClientUtil;
 
 
 
@@ -70,8 +73,20 @@ namespace Mapsui.Providers.Wfs.Xml
         /// </summary>
         /// <param name="httpClientUtil">A configured <see cref="HttpClientUtil"/> instance for performing web requests</param>
         public XPathQueryManager(HttpClientUtil httpClientUtil)
+        {            
+            _httpClientUtil = httpClientUtil;
+        }
+
+        /// <summary>Init Async</summary>
+        /// <returns>Task</returns>
+        public async Task InitAsync()
         {
-            SetDocumentToParse(httpClientUtil);
+            if (_initialized)
+                return;
+
+            _initialized = true;
+            if (_httpClientUtil != null)
+                await SetDocumentToParseAsync(_httpClientUtil);
         }
 
         /// <summary>
@@ -253,7 +268,7 @@ namespace Mapsui.Providers.Wfs.Xml
         /// Sets a new XML document. 
         /// </summary>
         /// <param name="httpClientUtil">A configured <see cref="HttpClientUtil"/> instance for performing web requests</param>
-        public async void SetDocumentToParse(HttpClientUtil httpClientUtil)
+        public async Task SetDocumentToParseAsync(HttpClientUtil httpClientUtil)
         {
             try
             {
