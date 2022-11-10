@@ -533,7 +533,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             }
             catch (Exception ex)
             {
-                Logger.Log(LogLevel.Error, "An exception occured while parsing a polygon geometry: " + ex.Message, ex);
+                Logger.Log(LogLevel.Error, "An exception occurred while parsing a polygon geometry: " + ex.Message, ex);
                 throw;
             }
 
@@ -553,7 +553,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// Initializes a new instance of the <see cref="MultiPointFactory"/> class.
         /// </summary>
         /// <param name="httpClientUtil">A configured <see cref="HttpClientUtil"/> instance for performing web requests</param>
-        /// <param name="featureTypeInfo">A <see cref="WfsFeatureTypeInfo"/> instance providing metadata of the featuretype to query</param>
+        /// <param name="featureTypeInfo">A <see cref="WfsFeatureTypeInfo"/> instance providing metadata of the feature type to query</param>
         internal MultiPointFactory(HttpClientUtil httpClientUtil, WfsFeatureTypeInfo featureTypeInfo)
             : base(httpClientUtil, featureTypeInfo)
         {
@@ -563,7 +563,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// Initializes a new instance of the <see cref="MultiPointFactory"/> class.
         /// </summary>
         /// <param name="xmlReader">An XmlReader instance</param>
-        /// <param name="featureTypeInfo">A <see cref="WfsFeatureTypeInfo"/> instance providing metadata of the featuretype to query</param>
+        /// <param name="featureTypeInfo">A <see cref="WfsFeatureTypeInfo"/> instance providing metadata of the feature type to query</param>
         internal MultiPointFactory(XmlReader xmlReader, WfsFeatureTypeInfo featureTypeInfo)
             : base(xmlReader, featureTypeInfo)
         {
