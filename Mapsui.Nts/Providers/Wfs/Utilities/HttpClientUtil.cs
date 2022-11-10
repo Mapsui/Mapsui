@@ -5,11 +5,15 @@
 // WFS provider by Peter Robineau (www.geoimpact.ch)
 
 using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Security;
+using System.Threading.Tasks;
 using Mapsui.Cache;
 using Mapsui.Logging;
 using Mapsui.Utilities;
@@ -22,12 +26,10 @@ namespace Mapsui.Providers.Wfs.Utilities
     public class HttpClientUtil : IDisposable
     {
 
-        private readonly NameValueCollection _requestHeaders;
+        private readonly Dictionary<string, string?> _requestHeaders;
         private byte[]? _postData;
         private string? _proxyUrl;
-        private string? _url;
-        private HttpWebRequest? _webRequest;
-        private HttpWebResponse? _webResponse;
+        private string? _url;             
         private ICredentials? _credentials;
         private readonly IUrlPersistentCache? _persistentCache;
 
@@ -72,7 +74,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         public HttpClientUtil(IUrlPersistentCache? persistentCache = null)
         {
             _persistentCache = persistentCache;
-            _requestHeaders = new NameValueCollection();
+            _requestHeaders = new Dictionary<string, string>();
         }
 
 
@@ -90,7 +92,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <summary>
         /// Performs a HTTP-GET or HTTP-POST request and returns a datastream for reading.
         /// </summary>
-        public Stream? GetDataStream()
+        public async Task<Stream?> GetDataStreamAsync()
         {
             if (string.IsNullOrEmpty(_url))
                 throw new Exception($"Property {nameof(Url)} was not set");
@@ -104,9 +106,33 @@ namespace Mapsui.Providers.Wfs.Utilities
             // Free all resources of the previous request, if it hasn't been done yet...
             Close();
 
+            // Now create a client handler which uses that proxy
+            var httpClientHandler = new HttpClientHandler();
+
+            if (!string.IsNullOrEmpty(_proxyUrl))
+            {
+                var proxy = new WebProxy(_proxyUrl);
+                if (Credentials != null)
+                {
+                    proxy.UseDefaultCredentials = false;
+                    proxy.Credentials = Credentials;
+                }
+
+                httpClientHandler.Proxy = proxy;
+            }
+                
+
+            if (Credentials != null)
+            {
+                httpClientHandler.UseDefaultCredentials = false;
+                httpClientHandler.Credentials = Credentials;
+            }
+            
+            HttpClient httpClient;
+
             try
             {
-                _webRequest = (HttpWebRequest)WebRequest.Create(_url);
+                httpClient = new HttpClient(httpClientHandler);
             }
             catch (SecurityException ex)
             {
@@ -120,40 +146,30 @@ namespace Mapsui.Providers.Wfs.Utilities
                 throw;
             }
 
-            _webRequest.Timeout = 90000;
-
-            if (!string.IsNullOrEmpty(_proxyUrl))
-                _webRequest.Proxy = new WebProxy(_proxyUrl);
+            httpClient.Timeout = new TimeSpan(0,0,1,30);
 
             try
             {
-                _webRequest.Headers.Add(_requestHeaders);
-
-                if (Credentials != null)
+                foreach (var header in _requestHeaders)
                 {
-                    _webRequest.UseDefaultCredentials = false;
-                    _webRequest.Credentials = Credentials;
+                    httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);    
                 }
 
+                HttpResponseMessage webResponse;
+                
                 /* HTTP POST */
                 if (_postData != null)
                 {
-                    _webRequest.ContentLength = _postData.Length;
-                    _webRequest.Method = WebRequestMethods.Http.Post;
-                    using (var requestStream = _webRequest.GetRequestStream())
-                    {
-                        requestStream.Write(_postData, 0, _postData.Length);
-                    }
+                    var httpContent = new ByteArrayContent(_postData);
+                    webResponse = await httpClient.PostAsync(_url, httpContent);
                 }
                 /* HTTP GET */
                 else
-                    _webRequest.Method = WebRequestMethods.Http.Get;
-
-                _webResponse?.Dispose();
-                _webResponse = (HttpWebResponse)_webRequest.GetResponse();
+                    webResponse = await httpClient.GetAsync(_url);
+                
                 if (_persistentCache != null)
                 {
-                    using var stream = _webResponse.GetResponseStream();
+                    using var stream = await webResponse.Content.ReadAsStreamAsync();
                     if (stream != null && _url != null)
                     {
                         bytes = StreamHelper.ReadFully(stream);
@@ -164,7 +180,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                     return null;
                 }
 
-                return _webResponse.GetResponseStream();
+                return await webResponse.Content.ReadAsStreamAsync();
 
             }
             catch (Exception ex)
@@ -189,22 +205,11 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// This method closes the WebResponse object.
         /// </summary>
         public void Close() //This class should implement dispose instead.
-        {
-            if (_webResponse != null)
-            {
-                // ATTENTION: Dispose first the Response Stream
-                // or else a disposed exception occurs.
-                var responseStream = _webResponse?.GetResponseStream();
-                responseStream?.Dispose();
-                _webResponse?.Close();
-                _webResponse?.Dispose();
-                _webResponse = null;
-            }
+        {                        
         }
 
         public virtual void Dispose()
-        {
-            _webResponse?.Dispose();
+        {                        
         }
     }
 }

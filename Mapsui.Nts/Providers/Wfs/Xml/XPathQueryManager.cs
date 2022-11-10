@@ -253,11 +253,15 @@ namespace Mapsui.Providers.Wfs.Xml
         /// Sets a new XML document. 
         /// </summary>
         /// <param name="httpClientUtil">A configured <see cref="HttpClientUtil"/> instance for performing web requests</param>
-        public void SetDocumentToParse(HttpClientUtil httpClientUtil)
+        public async void SetDocumentToParse(HttpClientUtil httpClientUtil)
         {
             try
             {
-                InitializeXPathObjects(httpClientUtil.GetDataStream());
+                InitializeXPathObjects(await httpClientUtil.GetDataStreamAsync());
+            }
+            catch (Exception e)
+            {
+                Logger.Log(LogLevel.Error, e.Message, e);
             }
             finally
             {

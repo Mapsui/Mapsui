@@ -401,7 +401,7 @@ namespace Mapsui.Providers.Wfs
         /// </summary>
         /// <param name="bbox"></param>
         /// <returns>Features within the specified <see cref="WfsFeatureTypeInfo.BoundingBox"/></returns>
-        public IEnumerable<IFeature> ExecuteIntersectionQuery(MRect bbox)
+        public async Task<IEnumerable<IFeature>> ExecuteIntersectionQueryAsync(MRect bbox)
         {
             if (_featureTypeInfo == null) return new List<IFeature>();
 
@@ -513,8 +513,9 @@ namespace Mapsui.Providers.Wfs
                         break;
                 }
 
+                await geomFactory.InitAsync();
                 geomFactory.AxisOrder = AxisOrder;
-                geomFactory.CreateGeometries(features);
+                await geomFactory.CreateGeometriesAsync(features);
                 return features;
             }
             // Free resources (net connection of geometry factory)
@@ -980,9 +981,9 @@ namespace Mapsui.Providers.Wfs
         /// <summary>
         /// Gets the features within the specified <see cref="FetchInfo"/>."/>
         /// </summary>
-        public Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
+        public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
         {
-            return Task.FromResult(ExecuteIntersectionQuery(fetchInfo.Extent));
+            return await ExecuteIntersectionQueryAsync(fetchInfo.Extent);
         }
     }
 }
