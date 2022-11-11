@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Mapsui.Cache;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
@@ -21,12 +22,14 @@ namespace Mapsui.ArcGIS.ImageServiceProvider
     {
         private int _timeOut;
         private string _url = string.Empty;
+        private readonly IUrlPersistentCache? _persistentCache;
 
         public string? Token { get; set; }
         public ArcGISImageCapabilities ArcGisImageCapabilities { get; private set; }
 
-        public ArcGISImageServiceProvider(ArcGISImageCapabilities capabilities, bool continueOnError = true, string? token = null)
+        public ArcGISImageServiceProvider(ArcGISImageCapabilities capabilities, bool continueOnError = true, string? token = null, IUrlPersistentCache? persistentCache = null)
         {
+            _persistentCache = persistentCache;
             Token = token;
             CRS = "";
             TimeOut = 10000;
@@ -35,8 +38,9 @@ namespace Mapsui.ArcGIS.ImageServiceProvider
             Url = ArcGisImageCapabilities.ServiceUrl;
         }
 
-        public ArcGISImageServiceProvider(string url, bool continueOnError = false, string format = "jpgpng", InterpolationType interpolation = InterpolationType.RSP_NearestNeighbor, long startTime = -1, long endTime = -1, string? token = null)
+        public ArcGISImageServiceProvider(string url, bool continueOnError = false, string format = "jpgpng", InterpolationType interpolation = InterpolationType.RSP_NearestNeighbor, long startTime = -1, long endTime = -1, string? token = null, IUrlPersistentCache? persistentCache = null)
         {
+            _persistentCache = persistentCache;
             Token = token;
             Url = url;
             CRS = "";
@@ -49,7 +53,7 @@ namespace Mapsui.ArcGIS.ImageServiceProvider
                 initialExtent = new Extent { xmin = 0, xmax = 0, ymin = 0, ymax = 0 }
             };
 
-            var capabilitiesHelper = new CapabilitiesHelper();
+            var capabilitiesHelper = new CapabilitiesHelper(persistentCache);
             capabilitiesHelper.CapabilitiesReceived += CapabilitiesHelperCapabilitiesReceived;
             capabilitiesHelper.CapabilitiesFailed += CapabilitiesHelperCapabilitiesFailed;
             capabilitiesHelper.GetCapabilities(url, CapabilitiesType.DynamicServiceCapabilities, token);

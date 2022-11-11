@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Mapsui.Cache;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
@@ -23,6 +24,7 @@ namespace Mapsui.ArcGIS.DynamicProvider
 
         public string? Token { get; set; }
         private string? _crs;
+        private readonly IUrlPersistentCache? _persistentCache;
 
         /// <summary>
         /// Create ArcGisDynamicProvider based on a given capabilities file
@@ -30,8 +32,9 @@ namespace Mapsui.ArcGIS.DynamicProvider
         /// <param name="url">url to map service example: http://url/arcgis/rest/services/test/MapServer</param>
         /// <param name="arcGisDynamicCapabilities"></param>
         /// <param name="token">token to request service</param>        
-        public ArcGISDynamicProvider(string url, ArcGISDynamicCapabilities arcGisDynamicCapabilities, string? token = null)
+        public ArcGISDynamicProvider(string url, ArcGISDynamicCapabilities arcGisDynamicCapabilities, string? token = null, IUrlPersistentCache? persistentCache = null)
         {
+            _persistentCache = persistentCache;
             _timeOut = 10000;
             Token = token;
 
@@ -43,20 +46,22 @@ namespace Mapsui.ArcGIS.DynamicProvider
         /// Create ArcGisDynamicProvider, capabilities will be parsed automatically
         /// </summary>
         /// <param name="url">url to map service example: http://url/arcgis/rest/services/test/MapServer</param>
-        /// <param name="token">token to request service</param>        
-        public ArcGISDynamicProvider(string url, string? token = null)
+        /// <param name="token">token to request service</param>
+        /// <param name="persistentCache">persistent cache</param>
+        public ArcGISDynamicProvider(string url, string? token = null, IUrlPersistentCache? persistentCache = null)
         {
+            _persistentCache = persistentCache;
             _timeOut = 10000;
             Token = token;
             Url = url;
 
-            ArcGisDynamicCapabilities = new ArcGISDynamicCapabilities
+            ArcGisDynamicCapabilities = new ArcGISDynamicCapabilities()
             {
                 fullExtent = new Extent { xmin = 0, xmax = 0, ymin = 0, ymax = 0 },
                 initialExtent = new Extent { xmin = 0, xmax = 0, ymin = 0, ymax = 0 }
             };
 
-            var capabilitiesHelper = new CapabilitiesHelper();
+            var capabilitiesHelper = new CapabilitiesHelper(persistentCache);
             capabilitiesHelper.CapabilitiesReceived += CapabilitiesHelperCapabilitiesReceived;
             capabilitiesHelper.CapabilitiesFailed += CapabilitiesHelperCapabilitiesFailed;
             capabilitiesHelper.GetCapabilities(url, CapabilitiesType.DynamicServiceCapabilities, token);
