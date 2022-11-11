@@ -152,19 +152,25 @@ namespace Mapsui.ArcGIS.DynamicProvider
                 return (false, null);
             }
 
-            var uri = new Uri(GetRequestUrl(viewport.Extent, width, height));
-            var handler = new HttpClientHandler { Credentials = Credentials ?? CredentialCache.DefaultCredentials };
-            using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(_timeOut) };
-
             try
             {
-                using var response = await client.GetAsync(uri);
-                using var readAsStreamAsync = await response.Content.ReadAsStreamAsync();
-                var bytes = BruTile.Utilities.ReadFully(readAsStreamAsync);
+                var uri = new Uri(GetRequestUrl(viewport.Extent, width, height));
+                var bytes = _persistentCache?.Find(uri.ToString());
+                if (bytes == null)
+                {
+                    var handler = new HttpClientHandler
+                        { Credentials = Credentials ?? CredentialCache.DefaultCredentials };
+                    using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(_timeOut) };
+
+                    using var response = await client.GetAsync(uri);
+                    using var readAsStreamAsync = await response.Content.ReadAsStreamAsync();
+                    bytes = BruTile.Utilities.ReadFully(readAsStreamAsync);
+                    _persistentCache?.Add(uri.ToString(), bytes);
+                }
+
                 if (viewport.Extent != null)
                 {
                     var raster = new MRaster(bytes, viewport.Extent);
-                    response.Dispose();
                     return (true, raster);
                 }
                 
@@ -200,7 +206,7 @@ namespace Mapsui.ArcGIS.DynamicProvider
             if (!string.IsNullOrEmpty(Token))
                 strReq.Append($"&token={Token}");
             /* 
-             * Add all layers to the request that have defaultVisibility to true, the normal request to ArcGIS allready does this already
+             * Add all layers to the request that have defaultVisibility to true, the normal request to ArcGIS already does this already
              * without specifying "layers=show", but this adds the opportunity for the user to set the defaultVisibility of layers
              * to false in the capabilities so different views (layers) can be created for one service
              */
