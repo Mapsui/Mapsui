@@ -128,29 +128,35 @@ namespace Mapsui.ArcGIS.ImageServiceProvider
             }
 
             var uri = new Uri(GetRequestUrl(viewport.Extent, width, height));
-            var handler = new HttpClientHandler { Credentials = Credentials ?? CredentialCache.DefaultCredentials };
-            using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(_timeOut) };
-
             try
             {
-                using var response = await client.GetAsync(uri);
-                using (var dataStream = await response.Content.ReadAsStreamAsync())
-                    try
+                var handler = new HttpClientHandler { Credentials = Credentials ?? CredentialCache.DefaultCredentials };
+                try
+                {
+                    var bytes = _persistentCache?.Find(uri.ToString());
+                    if (bytes == null)
                     {
-                        var bytes = BruTile.Utilities.ReadFully(dataStream);
-                        if (viewport.Extent != null)
-                        {
-                            var raster = new MRaster(bytes, viewport.Extent);
-                            return (true, raster);
-                        }
+                        using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(_timeOut) };            
+                        using var response = await client.GetAsync(uri);
+                        using var dataStream = await response.Content.ReadAsStreamAsync();
+                
+                        bytes = BruTile.Utilities.ReadFully(dataStream);
+                        _persistentCache?.Add(uri.ToString(), bytes);
+                    }
 
-                        return (false, null);
-                    }
-                    catch (Exception ex)
+                    if (viewport.Extent != null)
                     {
-                        Logger.Log(LogLevel.Error, ex.Message, ex);
-                        return (false, null);
+                        var raster = new MRaster(bytes, viewport.Extent);
+                        return (true, raster);
                     }
+
+                    return (false, null);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Log(LogLevel.Error, ex.Message, ex);
+                    return (false, null);
+                }
             }
             catch (WebException ex)
             {
