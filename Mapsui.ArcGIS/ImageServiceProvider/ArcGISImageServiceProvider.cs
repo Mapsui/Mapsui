@@ -140,7 +140,7 @@ namespace Mapsui.ArcGIS.ImageServiceProvider
                         using var response = await client.GetAsync(uri);
                         using var dataStream = await response.Content.ReadAsStreamAsync();
                 
-                        bytes = BruTile.Utilities.ReadFully(dataStream);
+                        bytes = BruTile.Utilities.ReadFully(dataStream);                        
                         _persistentCache?.Add(uri.ToString(), bytes);
                     }
 
