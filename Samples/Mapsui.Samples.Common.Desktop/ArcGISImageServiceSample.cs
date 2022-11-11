@@ -1,44 +1,43 @@
-﻿using Mapsui.ArcGIS;
+﻿using System.Threading.Tasks;
+using Mapsui.ArcGIS;
 using Mapsui.ArcGIS.ImageServiceProvider;
+using Mapsui.Cache;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Desktop
 {
-    public class ArcGISImageServiceSample // disabled as sample because the service can not be reached : ISample
+    public class ArcGISImageServiceSample : ISample // disabled as sample because the service can not be reached : ISample
     {
         public string Name => "4 ArcGIS image";
         public string Category => "Desktop";
-
-        public void Setup(IMapControl mapControl)
-        {
-            mapControl.Map = CreateMap();
-        }
+        
+        public static IUrlPersistentCache? DefaultCache { get; set; }
 
         public static ILayer CreateLayer()
         {
-            return new ImageLayer("ArcGISImageServiceLayer") { DataSource = CreateProvider() };
+            return new ImageLayer("ArcGISImageServiceLayer") { DataSource = CreateProvider(DefaultCache) };
         }
 
-        public static Map CreateMap()
+        public static Task<Map> CreateMapAsync()
         {
             var map = new Map { Home = n => n.NavigateTo(new MPoint(0, 0), 1) };
             map.Layers.Add(CreateLayer());
-            return map;
+            return Task.FromResult(map);
         }
 
-        private static ArcGISImageServiceProvider CreateProvider()
+        private static ArcGISImageServiceProvider CreateProvider(IUrlPersistentCache persistentCache = null)
         {
             //Get Capabilities from service
-            var capabilitiesHelper = new CapabilitiesHelper();
+            var capabilitiesHelper = new CapabilitiesHelper(persistentCache);
             capabilitiesHelper.CapabilitiesReceived += CapabilitiesReceived;
             capabilitiesHelper.CapabilitiesFailed += capabilitiesHelper_CapabilitiesFailed;
-            capabilitiesHelper.GetCapabilities(@"http://imagery.arcgisonline.com/ArcGIS/rest/services/LandsatGLS/FalseColor/ImageServer", CapabilitiesType.ImageServiceCapabilities);
+            capabilitiesHelper.GetCapabilities(@"https://imagery.arcgisonline.com/ArcGIS/rest/services/LandsatGLS/FalseColor/ImageServer", CapabilitiesType.ImageServiceCapabilities);
 
             //Create own
             return new ArcGISImageServiceProvider(
-                new ArcGISImageCapabilities("http://imagery.arcgisonline.com/ArcGIS/rest/services/LandsatGLS/FalseColor/ImageServer/exportImage", 268211520000, 1262217600000))
+                new ArcGISImageCapabilities("https://imagery.arcgisonline.com/ArcGIS/rest/services/LandsatGLS/FalseColor/ImageServer/exportImage", 268211520000, 1262217600000))
             {
                 CRS = "EPSG:102100"
             };
