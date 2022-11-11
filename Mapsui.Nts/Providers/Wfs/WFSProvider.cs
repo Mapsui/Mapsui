@@ -74,6 +74,7 @@ namespace Mapsui.Providers.Wfs
         private int[]? _axisOrder;
         private bool _intialized = true; // by default initialized only special cases I initialize
         private readonly IUrlPersistentCache? _persistentCache;
+        private string? _sridOverride;
 
         // The type of geometry can be specified in case of unprecise information (e.g. 'GeometryAssociationType').
         // It helps to accelerate the rendering process significantly.
@@ -539,6 +540,8 @@ namespace Mapsui.Providers.Wfs
 
         public MRect? GetExtent()
         {
+            if (!_intialized)
+                InitAsync().Wait();
             if (_featureTypeInfo == null)
                 return null;
             return new MRect(
@@ -550,11 +553,19 @@ namespace Mapsui.Providers.Wfs
 
         public string? CRS
         {
-            get => CrsHelper.EpsgPrefix + _featureTypeInfo?.SRID;
+            get
+            {
+                if (!_intialized)
+                    InitAsync().Wait();
+                // srid overrides the srid of the _featureTypeInfo
+                return CrsHelper.EpsgPrefix +  _featureTypeInfo?.SRID;
+            }
             set
             {
                 if (_featureTypeInfo != null && value != null)
-                    _featureTypeInfo.SRID = value.Substring(CrsHelper.EpsgPrefix.Length);
+                    _sridOverride = _featureTypeInfo.SRID = value.Substring(CrsHelper.EpsgPrefix.Length);
+                else
+                    _sridOverride = value.Substring(CrsHelper.EpsgPrefix.Length);
             }
         }
 
@@ -631,7 +642,7 @@ namespace Mapsui.Providers.Wfs
                     (_featureTypeInfoQueryManager.Compile(_textResources.XPATH_SRS), new[] { new DictionaryEntry("_param1", featureQueryName) });
                 /* If no SRID could be found, try '4326' by default */
                 srid = (srid == null) ? "4326" : srid.Substring(srid.LastIndexOf(":", StringComparison.Ordinal) + 1);
-                _featureTypeInfo.SRID = srid;
+                _featureTypeInfo.SRID = _sridOverride ?? srid; // override the srid
 
                 /* Bounding Box */
                 var bboxQuery = _featureTypeInfoQueryManager.GetXPathQueryManagerInContext(
