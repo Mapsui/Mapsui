@@ -3,6 +3,7 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using BruTile;
 using Mapsui.ArcGIS.DynamicProvider;
 using Mapsui.ArcGIS.ImageServiceProvider;
@@ -92,7 +93,7 @@ namespace Mapsui.ArcGIS
 
         private void ExecuteRequest(string url, CapabilitiesType capabilitiesType, ICredentials? credentials = null, string? token = null)
         {
-            Catch.TaskRun(async () => {
+            Task.Run(async () => {
                 _capabilitiesType = capabilitiesType;
                 _url = RemoveTrailingSlash(url);
 
@@ -122,7 +123,7 @@ namespace Mapsui.ArcGIS
                         if (_persistentCache != null)
                         {
                             data = Encoding.UTF8.GetBytes(dataStream);
-                            _persistentCache.Add(url, data);
+                            _persistentCache.Add(requestUri, data);
                         }
                     }
                     else
@@ -166,24 +167,6 @@ namespace Mapsui.ArcGIS
                 url = url.Remove(url.Length - 1);
 
             return url;
-        }
-
-
-        private static Stream CopyAndClose(Stream inputStream)
-        {
-            const int readSize = 256;
-            var buffer = new byte[readSize];
-            var ms = new MemoryStream();
-
-            var count = inputStream.Read(buffer, 0, readSize);
-            while (count > 0)
-            {
-                ms.Write(buffer, 0, count);
-                count = inputStream.Read(buffer, 0, readSize);
-            }
-            ms.Position = 0;
-            inputStream.Dispose();
-            return ms;
         }
 
         protected virtual void OnFinished(EventArgs e)
