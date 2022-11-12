@@ -32,7 +32,7 @@ before_build:
 - cmd: .nuget\nuget restore mapsui.sln -Verbosity quiet
 build:
   project: Mapsui.sln
-  verbosity: minimal
+  verbosity: normal
 before_package:
 - cmd: ''
 after_build:
