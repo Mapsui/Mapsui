@@ -24,35 +24,59 @@ namespace Mapsui.Samples.Common.Desktop
 
         public async Task<Map> CreateMapAsync()
         {
-            var map = new Map { Home = n => n.NavigateTo(new MPoint(0, 0), 1) };
+            var map = new Map
+            {
+                Home = n => n.ZoomTo( 1000000, new MPoint(0, 0), 1),
+                Extent = { new MRect(-2.00375070672E78572530, -8572530.6034,2.0037507842788246E7 ,1.68764993966E7) }
+            };
             map.Layers.Add(await CreateLayerAsync());
             return map;
         }
 
         private async Task<ArcGISImageServiceProvider> CreateProviderAsync(IUrlPersistentCache? persistentCache = null)
         {
+            // https://landsat2.arcgis.com/arcgis/rest/services/LandsatGLS/MS/ImageServer/exportImage?bbox=-2.00375070672E7%2C-8572530.6034%2C2.0037507842788246E7%2C1.68764993966E7&bboxSR=&size=&imageSR=&time=&format=jpgpng&pixelType=S16&noData=&noDataInterpretation=esriNoDataMatchAny&interpolation=+RSP_BilinearInterpolation&compression=&compressionQuality=&bandIds=&sliceId=&mosaicRule=&renderingRule=&adjustAspectRatio=true&validateExtent=false&lercVersion=1&compressionTolerance=&f=image
+            // https://landsat2.arcgis.com/arcgis/rest/services/LandsatGLS/MS/ImageServer/exportImage?
+            // bbox=-2.00375070672E7%2C-8572530.6034%2C2.0037507842788246E7%2C1.68764993966E7
+            // &bboxSR=
+            // &size=
+            // &imageSR=
+            // &time=
+            // &format=jpgpng
+            // &pixelType=S16
+            // &noData=
+            // &noDataInterpretation=esriNoDataMatchAny
+            // &interpolation=+RSP_BilinearInterpolation
+            // &compression=
+            // &compressionQuality=
+            // &bandIds=
+            // &sliceId=
+            // &mosaicRule=&renderingRule=
+            // &adjustAspectRatio=true
+            // &validateExtent=false
+            // &lercVersion=1
+            // &compressionTolerance=
+            // &f=image
             //Get Capabilities from service
             var capabilitiesHelper = new CapabilitiesHelper(persistentCache);
             capabilitiesHelper.CapabilitiesReceived += CapabilitiesReceived;
             capabilitiesHelper.CapabilitiesFailed += capabilitiesHelper_CapabilitiesFailed;
-            capabilitiesHelper.GetCapabilities(@"https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/3", CapabilitiesType.ImageServiceCapabilities);
+            capabilitiesHelper.GetCapabilities(@"https://landsat2.arcgis.com/arcgis/rest/services/LandsatGLS/MS/ImageServer", CapabilitiesType.ImageServiceCapabilities);
 
             //Create own
-            ////return new ArcGISImageServiceProvider(
-            ////    new ArcGISImageCapabilities("https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/3/exportImage", 268211520000, 1262217600000))
-            ////{
-            ////    CRS = "EPSG:102100"
-            ////};
-
-            while(_capabilities == null)
-            {
-                await Task.Delay(100);
-            }
-
-            return new ArcGISImageServiceProvider(
-                _capabilities)
+            /*return new ArcGISImageServiceProvider(
+                new ArcGISImageCapabilities("https://landsat2.arcgis.com/arcgis/rest/services/LandsatGLS/MS/ImageServer/exportImage", 268211520000, 1262217600000))
             {
                 CRS = "EPSG:102100"
+            };*/
+
+            while (_capabilities == null)
+            {
+                await Task.Delay(100).ConfigureAwait(false);
+            }
+            
+            return new ArcGISImageServiceProvider(_capabilities)
+            {
             };
         }
 

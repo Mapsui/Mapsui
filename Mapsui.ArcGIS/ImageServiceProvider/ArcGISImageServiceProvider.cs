@@ -193,10 +193,11 @@ namespace Mapsui.ArcGIS.ImageServiceProvider
             url.AppendFormat("&format={0}", ArcGisImageCapabilities.Format);
             url.AppendFormat("&f={0}", "image");
 
-            if (string.IsNullOrWhiteSpace(CRS)) throw new Exception("CRS not set");
-
-            url.AppendFormat("&imageSR={0}", CRS);
-            url.AppendFormat("&bboxSR={0}", CRS);
+            if (!string.IsNullOrWhiteSpace(CRS))
+            {
+                url.AppendFormat("&imageSR={0}", CRS);
+                url.AppendFormat("&bboxSR={0}", CRS);    
+            }
 
             if (ArcGisImageCapabilities.StartTime == -1 && ArcGisImageCapabilities.EndTime == -1)
                 if (ArcGisImageCapabilities.timeInfo == null || ArcGisImageCapabilities.timeInfo.timeExtent == null || ArcGisImageCapabilities.timeInfo.timeExtent.Length == 0)
