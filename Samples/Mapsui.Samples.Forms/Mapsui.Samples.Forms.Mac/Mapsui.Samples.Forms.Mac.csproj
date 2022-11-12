@@ -62,7 +62,7 @@
   </ItemGroup>
   <!--Reference on Mac works this way -->
   <ItemGroup Condition="'$(OS)' != 'Windows_NT'">
-		<Reference Include="Xamarin.Mac"/>
+		<Reference Include="Xamarin.Mac" />
   </ItemGroup>
   <!--Reference on Windows works this way -->
   <ItemGroup Condition="'$(OS)' == 'Windows_NT'">
