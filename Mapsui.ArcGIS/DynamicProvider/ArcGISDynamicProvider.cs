@@ -1,20 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Mapsui.ArcGIS.Extensions;
 using Mapsui.Cache;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Projections;
 using Mapsui.Providers;
-using Mapsui.Samples.Common.Desktop.Extensions;
 
 namespace Mapsui.ArcGIS.DynamicProvider
 {

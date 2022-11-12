@@ -1,21 +1,18 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Mapsui.ArcGIS.Extensions;
 using Mapsui.Cache;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Providers;
 using Mapsui.Rendering;
-using Mapsui.Samples.Common.Desktop.Extensions;
 
 namespace Mapsui.ArcGIS.ImageServiceProvider
 {
@@ -39,7 +36,7 @@ namespace Mapsui.ArcGIS.ImageServiceProvider
             Url = ArcGisImageCapabilities.ServiceUrl;
         }
 
-        public ArcGISImageServiceProvider(string url, bool continueOnError = false, string format = "jpgpng", InterpolationType interpolation = InterpolationType.RSP_NearestNeighbor, long startTime = -1, long endTime = -1, string? token = null, IUrlPersistentCache? persistentCache = null)
+        public ArcGISImageServiceProvider(string url, bool continueOnError = false, string format = @"jpgpng", InterpolationType interpolation = InterpolationType.RSP_NearestNeighbor, long startTime = -1, long endTime = -1, string? token = null, IUrlPersistentCache? persistentCache = null)
         {
             _persistentCache = persistentCache;
             Token = token;
@@ -69,14 +66,14 @@ namespace Mapsui.ArcGIS.ImageServiceProvider
                 if (value[value.Length - 1].Equals('/'))
                     _url = value.Remove(value.Length - 1);
 
-                if (!_url.ToLower().Contains("exportimage"))
+                if (!_url.ToLower().Contains(@"exportimage"))
                     _url += @"/ExportImage";
             }
         }
 
         private static void CapabilitiesHelperCapabilitiesFailed(object? sender, EventArgs e)
         {
-            throw new Exception("Unable to get ArcGISImage capbilities");
+            throw new Exception("Unable to get ArcGISImage capabilities");
         }
 
         private void CapabilitiesHelperCapabilitiesReceived(object? sender, EventArgs e)
