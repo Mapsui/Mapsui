@@ -14,6 +14,7 @@ using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Projections;
 using Mapsui.Providers;
+using Mapsui.Samples.Common.Desktop.Extensions;
 
 namespace Mapsui.ArcGIS.DynamicProvider
 {
@@ -116,7 +117,7 @@ namespace Mapsui.ArcGIS.DynamicProvider
             if (ArcGisDynamicCapabilities.initialExtent == null)
                 return null;
 
-            return new MRect(ArcGisDynamicCapabilities.initialExtent.xmin, ArcGisDynamicCapabilities.initialExtent.ymin, ArcGisDynamicCapabilities.initialExtent.xmax, ArcGisDynamicCapabilities.initialExtent.ymax);
+            return ArcGisDynamicCapabilities.initialExtent.ToMRect();
         }
 
         private void CapabilitiesHelperCapabilitiesFailed(object? sender, EventArgs e)
