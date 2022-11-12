@@ -48,7 +48,6 @@ public class MapRegressionTests
         // Url Cache
         WmsSample.DefaultCache ??= File.ReadFromCacheFolder("WmsSample");
         WfsSample.DefaultCache ??= File.ReadFromCacheFolder("WfsSample");
-        ArcGISSample.DefaultCache ??= File.ReadFromCacheFolder("ArcGisSample");
         ArcGISImageServiceSample.DefaultCache ??= File.ReadFromCacheFolder("ArcGisImageServiceSample");
     }
 
