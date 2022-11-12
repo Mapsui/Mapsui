@@ -66,6 +66,9 @@ namespace Mapsui.Providers.Wfs.Utilities
         {
             if (_initialized)
                 return;
+
+            if (_httpClientUtil == null)
+                return;
             
             _initialized = true;
             XmlReader = await CreateReaderAsync(_httpClientUtil);
@@ -268,7 +271,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         private void InitializePathNodes()
         {
             IPathNode coordinatesNode = new PathNode("http://www.opengis.net/gml", "coordinates",
-                                                     (NameTable)XmlReader.NameTable);
+                                                     (NameTable)XmlReader!.NameTable);
             IPathNode posListNode = new PathNode("http://www.opengis.net/gml", "posList",
                                                  (NameTable)XmlReader.NameTable);
             IPathNode ogcServiceExceptionNode = new PathNode("http://www.opengis.net/ogc", "ServiceException",
@@ -350,7 +353,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         internal override async Task<Collection<Geometry>> CreateGeometriesAsync(List<IFeature> features)
         {
             await InitAsync();
-            IPathNode pointNode = new PathNode(Gmlns, "Point", (NameTable)XmlReader.NameTable);
+            IPathNode pointNode = new PathNode(Gmlns, "Point", (NameTable)XmlReader!.NameTable);
             var labelValues = new Dictionary<string, string>();
             var geomFound = false;
 
@@ -417,7 +420,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         internal override async Task<Collection<Geometry>> CreateGeometriesAsync(List<IFeature> features)
         {
             await InitAsync();
-            IPathNode lineStringNode = new PathNode(Gmlns, "LineString", (NameTable)XmlReader.NameTable);
+            IPathNode lineStringNode = new PathNode(Gmlns, "LineString", (NameTable)XmlReader!.NameTable);
             var labelValues = new Dictionary<string, string>();
             var geomFound = false;
 
@@ -486,7 +489,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         internal override async Task<Collection<Geometry>> CreateGeometriesAsync(List<IFeature> features)
         {
             await InitAsync();
-            IPathNode polygonNode = new PathNode(Gmlns, "Polygon", (NameTable)XmlReader.NameTable);
+            IPathNode polygonNode = new PathNode(Gmlns, "Polygon", (NameTable)XmlReader!.NameTable);
             IPathNode outerBoundaryNode = new PathNode(Gmlns, "outerBoundaryIs", (NameTable)XmlReader.NameTable);
             IPathNode exteriorNode = new PathNode(Gmlns, "exterior", (NameTable)XmlReader.NameTable);
             IPathNode outerBoundaryNodeAlt = new AlternativePathNodesCollection(outerBoundaryNode, exteriorNode);
@@ -578,7 +581,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         internal override async Task<Collection<Geometry>> CreateGeometriesAsync(List<IFeature> features)
         {
             await InitAsync();
-            IPathNode multiPointNode = new PathNode(Gmlns, "MultiPoint", (NameTable)XmlReader.NameTable);
+            IPathNode multiPointNode = new PathNode(Gmlns, "MultiPoint", (NameTable)XmlReader!.NameTable);
             IPathNode pointMemberNode = new PathNode(Gmlns, "pointMember", (NameTable)XmlReader.NameTable);
             var labelValues = new Dictionary<string, string>();
             var geomFound = false;
@@ -648,7 +651,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         internal override async Task<Collection<Geometry>> CreateGeometriesAsync(List<IFeature> features)
         {
             await InitAsync();
-            IPathNode multiLineStringNode = new PathNode(Gmlns, "MultiLineString", (NameTable)XmlReader.NameTable);
+            IPathNode multiLineStringNode = new PathNode(Gmlns, "MultiLineString", (NameTable)XmlReader!.NameTable);
             IPathNode multiCurveNode = new PathNode(Gmlns, "MultiCurve", (NameTable)XmlReader.NameTable);
             IPathNode multiLineStringNodeAlt = new AlternativePathNodesCollection(multiLineStringNode, multiCurveNode);
             IPathNode lineStringMemberNode = new PathNode(Gmlns, "lineStringMember", (NameTable)XmlReader.NameTable);
@@ -722,7 +725,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         internal override async Task<Collection<Geometry>> CreateGeometriesAsync(List<IFeature> features)
         {
             await InitAsync();
-            IPathNode multiPolygonNode = new PathNode(Gmlns, "MultiPolygon", (NameTable)XmlReader.NameTable);
+            IPathNode multiPolygonNode = new PathNode(Gmlns, "MultiPolygon", (NameTable)XmlReader!.NameTable);
             IPathNode multiSurfaceNode = new PathNode(Gmlns, "MultiSurface", (NameTable)XmlReader.NameTable);
             IPathNode multiPolygonNodeAlt = new AlternativePathNodesCollection(multiPolygonNode, multiSurfaceNode);
             IPathNode polygonMemberNode = new PathNode(Gmlns, "polygonMember", (NameTable)XmlReader.NameTable);
@@ -808,7 +811,7 @@ namespace Mapsui.Providers.Wfs.Utilities
 
             if (_quickGeometries) _multiGeometries = false;
 
-            IPathNode pointNode = new PathNode(Gmlns, "Point", (NameTable)XmlReader.NameTable);
+            IPathNode pointNode = new PathNode(Gmlns, "Point", (NameTable)XmlReader!.NameTable);
             IPathNode lineStringNode = new PathNode(Gmlns, "LineString", (NameTable)XmlReader.NameTable);
             IPathNode polygonNode = new PathNode(Gmlns, "Polygon", (NameTable)XmlReader.NameTable);
             IPathNode multiPointNode = new PathNode(Gmlns, "MultiPoint", (NameTable)XmlReader.NameTable);

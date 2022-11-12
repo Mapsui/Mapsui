@@ -79,7 +79,7 @@ public class RasterizingTileProvider : ITileSource
                 {
 #pragma warning disable IDISP001 // disposable created
                     stream = renderer.RenderToBitmapStream(viewPort, new[] { renderLayer }, pixelDensity: _pixelDensity, renderFormat: _renderFormat);
-#pragma warning enable IDISP001                    
+#pragma warning restore IDISP001                    
                 }
                 finally
                 {

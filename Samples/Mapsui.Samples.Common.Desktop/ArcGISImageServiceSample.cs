@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Mapsui.ArcGIS;
+using Mapsui.ArcGIS.DynamicProvider;
 using Mapsui.ArcGIS.ImageServiceProvider;
 using Mapsui.Cache;
 using Mapsui.Layers;
@@ -10,6 +12,7 @@ namespace Mapsui.Samples.Common.Desktop
 {
     public class ArcGISImageServiceSample : ISample
     {
+        private const string LandsatGlsImageServer = @"https://landsat2.arcgis.com/arcgis/rest/services/LandsatGLS/MS/ImageServer";
         private ArcGISImageCapabilities? _capabilities;
 
         public string Name => "9 ArcGIS image";
@@ -23,6 +26,12 @@ namespace Mapsui.Samples.Common.Desktop
             {
                 DataSource = await CreateProviderAsync(DefaultCache)
             };
+
+            var arcGisLegend = new ArcGisLegend(DefaultCache);
+            var legend = await arcGisLegend.GetLegendInfoAsync(LandsatGlsImageServer);
+#pragma warning disable CS8602
+            layer.Name = legend.layers[0].layerName ?? "ArcGisImage";
+#pragma warning restore CS8602            
 
             layer.Style = new RasterStyle();
             return layer;
@@ -41,7 +50,7 @@ namespace Mapsui.Samples.Common.Desktop
             var capabilitiesHelper = new CapabilitiesHelper(persistentCache);
             capabilitiesHelper.CapabilitiesReceived += CapabilitiesReceived;
             capabilitiesHelper.CapabilitiesFailed += capabilitiesHelper_CapabilitiesFailed;
-            capabilitiesHelper.GetCapabilities(@"https://landsat2.arcgis.com/arcgis/rest/services/LandsatGLS/MS/ImageServer", CapabilitiesType.ImageServiceCapabilities);
+            capabilitiesHelper.GetCapabilities(LandsatGlsImageServer, CapabilitiesType.ImageServiceCapabilities);
 
             while (_capabilities == null)
             {
