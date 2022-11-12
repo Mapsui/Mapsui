@@ -43,7 +43,9 @@ jobs:
     - name: Setup .NET Core SDK
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '7.0.100'
+         dotnet-version: |
+           7.0.100
+         include-prerelease: false    
     - name: install maui macos android ios maccatalyst wasm-tools
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools
     - name: Restore dependencies Legacy
@@ -132,7 +134,9 @@ jobs:
     - name: Setup .NET Core SDK
       uses: actions/setup-dotnet@v3
       with:
-         dotnet-version: '7.0.100'                    
+         dotnet-version: |
+           7.0.100
+         include-prerelease: false
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.0.6
       with:
