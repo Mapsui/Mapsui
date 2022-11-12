@@ -74,7 +74,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         public HttpClientUtil(IUrlPersistentCache? persistentCache = null)
         {
             _persistentCache = persistentCache;
-            _requestHeaders = new Dictionary<string, string>();
+            _requestHeaders = new Dictionary<string, string?>();
         }
 
 

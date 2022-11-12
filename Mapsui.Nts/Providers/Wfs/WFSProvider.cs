@@ -538,6 +538,7 @@ namespace Mapsui.Providers.Wfs
             }
         }
 
+        [SuppressMessage("Usage", "VSTHRD002:Avoid problematic synchronous waits")]
         public MRect? GetExtent()
         {
             if (!_intialized)
@@ -551,6 +552,7 @@ namespace Mapsui.Providers.Wfs
                 _featureTypeInfo.BBox.MaxLat);
         }
 
+        [SuppressMessage("Usage", "VSTHRD002:Avoid problematic synchronous waits")]
         public string? CRS
         {
             get
@@ -565,7 +567,7 @@ namespace Mapsui.Providers.Wfs
                 if (_featureTypeInfo != null && value != null)
                     _sridOverride = _featureTypeInfo.SRID = value.Substring(CrsHelper.EpsgPrefix.Length);
                 else
-                    _sridOverride = value.Substring(CrsHelper.EpsgPrefix.Length);
+                    _sridOverride = value?.Substring(CrsHelper.EpsgPrefix.Length);
             }
         }
 

@@ -29,7 +29,7 @@ namespace Mapsui.Providers.Wfs.Xml
         private XPathNavigator? _xNav;
         private XPathDocument? _xPathDoc;
         private bool _initialized;
-        private HttpClientUtil _httpClientUtil;
+        private HttpClientUtil? _httpClientUtil;
 
 
 

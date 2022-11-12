@@ -29,7 +29,7 @@ namespace Mapsui.Providers.Wfs.Utilities
 
         protected const string Gmlns = "http://www.opengis.net/gml";
         private readonly NumberFormatInfo _formatInfo = new();
-        private readonly HttpClientUtil _httpClientUtil;
+        private readonly HttpClientUtil? _httpClientUtil;
         private readonly List<IPathNode> _pathNodes = new();
         protected AlternativePathNodesCollection? CoordinatesNode;
         private string _cs = ",";
@@ -41,7 +41,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         protected IPathNode? LabelNode;
         protected AlternativePathNodesCollection? ServiceExceptionNode;
         private string _ts = " ";
-        protected XmlReader XmlReader;
+        protected XmlReader? XmlReader;
         private bool _initialized;
 
         /// <summary>

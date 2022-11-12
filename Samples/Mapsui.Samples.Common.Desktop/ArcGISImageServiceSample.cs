@@ -19,16 +19,15 @@ namespace Mapsui.Samples.Common.Desktop
 
         public async Task<ILayer> CreateLayerAsync()
         {
-            return new ImageLayer("ArcGISImageServiceLayer") { DataSource = await CreateProviderAsync(DefaultCache) };
+            return new ImageLayer("ArcGISImageServiceLayer")
+            {
+                DataSource = await CreateProviderAsync(DefaultCache)
+            };
         }
 
         public async Task<Map> CreateMapAsync()
         {
-            var map = new Map
-            {
-                Home = n => n.ZoomTo( 1000000, new MPoint(0, 0), 1),
-                Extent = { new MRect(-2.00375070672E78572530, -8572530.6034,2.0037507842788246E7 ,1.68764993966E7) }
-            };
+            var map = new Map();
             map.Layers.Add(await CreateLayerAsync());
             return map;
         }
@@ -74,10 +73,8 @@ namespace Mapsui.Samples.Common.Desktop
             {
                 await Task.Delay(100).ConfigureAwait(false);
             }
-            
-            return new ArcGISImageServiceProvider(_capabilities)
-            {
-            };
+
+            return new ArcGISImageServiceProvider(_capabilities);
         }
 
         private static void capabilitiesHelper_CapabilitiesFailed(object? sender, System.EventArgs e)

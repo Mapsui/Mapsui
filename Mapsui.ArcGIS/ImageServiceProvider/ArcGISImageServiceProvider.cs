@@ -15,6 +15,7 @@ using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Providers;
 using Mapsui.Rendering;
+using Mapsui.Samples.Common.Desktop.Extensions;
 
 namespace Mapsui.ArcGIS.ImageServiceProvider
 {
@@ -92,7 +93,7 @@ namespace Mapsui.ArcGIS.ImageServiceProvider
         public string? CRS { get; set; }
 
         /// <summary>
-        /// Timeout of webrequest in milliseconds. Default is 10 seconds
+        /// Timeout of request in milliseconds. Default is 10 seconds
         /// </summary>
         public int TimeOut
         {
@@ -130,7 +131,7 @@ namespace Mapsui.ArcGIS.ImageServiceProvider
             var uri = new Uri(GetRequestUrl(viewport.Extent, width, height));
             try
             {
-                var handler = new HttpClientHandler { Credentials = Credentials ?? CredentialCache.DefaultCredentials };
+                using var handler = new HttpClientHandler { Credentials = Credentials ?? CredentialCache.DefaultCredentials };
                 try
                 {
                     var bytes = _persistentCache?.Find(uri.ToString());
@@ -224,7 +225,7 @@ namespace Mapsui.ArcGIS.ImageServiceProvider
 
         public MRect? GetExtent()
         {
-            return null;
+            return ArcGisImageCapabilities.fullExtent.ToMRect() ?? ArcGisImageCapabilities.initialExtent.ToMRect();
         }
 
         public bool ContinueOnError { get; set; }
