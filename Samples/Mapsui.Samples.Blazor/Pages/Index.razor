@@ -3,6 +3,7 @@
 @using Mapsui.Samples.Common.Extensions
 @using Mapsui.Extensions
 @using Mapsui.Logging
+@using Mapsui.Samples.Common.Desktop
 @using Mapsui.UI
 
 <PageTitle>Mapsui</PageTitle>
@@ -106,6 +107,8 @@
 
     private void FillComboBoxWithCategories()
     {
+    // todo: find proper way to load assembly
+        DesktopSamplesUtilities.LoadAssembly();
         var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c);
         foreach (var category in categories)
         {
