@@ -8,6 +8,7 @@ using Windows.Storage;
 using Mapsui.Extensions;
 using Mapsui.Providers.Wms;
 using Mapsui.Samples.Common;
+using Mapsui.Samples.Common.Desktop;
 using Mapsui.Samples.Common.Extensions;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
@@ -27,6 +28,13 @@ namespace Mapsui.Samples.Uno.WinUI
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        static Mainpage()
+        {
+            // todo: find proper way to load assembly
+            Mapsui.Samples.Common.Desktop.DesktopSamplesUtilities.LoadAssembly();
+            Mapsui.Tests.Common.Utilities.LoadAssembly();       
+        }
+
         public MainPage()
         {
             InitializeComponent();

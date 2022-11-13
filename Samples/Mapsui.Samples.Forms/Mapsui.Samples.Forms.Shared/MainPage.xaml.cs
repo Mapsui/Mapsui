@@ -11,6 +11,13 @@ namespace Mapsui.Samples.Forms
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : ContentPage
     {
+        static MainPage()
+        {
+            // todo: find proper way to load assembly
+            DesktopSamplesUtilities.LoadAssembly();
+            Mapsui.Tests.Common.Utilities.LoadAssembly();       
+        }
+
         IEnumerable<ISampleBase>? allSamples;
         Func<object?, EventArgs, bool>? clicker;
 
