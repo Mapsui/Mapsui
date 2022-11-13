@@ -107,8 +107,10 @@
 
     private void FillComboBoxWithCategories()
     {
-    // todo: find proper way to load assembly
+        // todo: find proper way to load assembly
         DesktopSamplesUtilities.LoadAssembly();
+        Tests.Common.Utilities.LoadAssembly();                    
+                    
         var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c);
         foreach (var category in categories)
         {
