@@ -155,6 +155,7 @@
     <PackageReference Include="Xamarin.Forms" />     
     <PackageReference Include="Xamarin.AndroidX.MediaRouter" />     
     <PackageReference Include="Xamarin.AndroidX.Palette" />
+    <PackageReference Include="Xamarin.Google.Android.Material" VersionOverride="1.4.0.6" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

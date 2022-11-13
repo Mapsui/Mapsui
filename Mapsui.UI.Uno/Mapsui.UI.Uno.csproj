@@ -17,7 +17,9 @@
 	<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-android31.0'">21.0</SupportedOSPlatformVersion>
 	<!-- Workaround for https://github.com/unoplatform/uno/issues/9723 -->
     <_AndroidApiLevel Condition="'$(TargetFramework)' == 'net6.0-android31.0'">31</_AndroidApiLevel>
-	<SupportedOSPlatformVersion Condition="'$(TargetFramework)'=='net6.0-macos'">10.14</SupportedOSPlatformVersion>		
+	<SupportedOSPlatformVersion Condition="'$(TargetFramework)'=='net6.0-macos'">10.14</SupportedOSPlatformVersion>
+  <TargetPlatformVersion Condition="'$(TargetFramework)'=='uap10.0.19041'">10.0.22621.0</TargetPlatformVersion>
+  <TargetPlatformMinVersion Condition="'$(TargetFramework)'=='uap10.0.19041'">10.0.19041.0</TargetPlatformMinVersion>
   </PropertyGroup>
 
   <ItemGroup>
