@@ -41,7 +41,7 @@
 		<PackageReference Include="coverlet.collector" />
 		<PackageReference Include="Microsoft.CodeCoverage" />
 		<PackageReference Include="NUnit" />
-		<PackageReference Include="NUnit3TestAdapter" >
+		<PackageReference Include="NUnit3TestAdapter">
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 			<PrivateAssets>all</PrivateAssets>
 		</PackageReference>
