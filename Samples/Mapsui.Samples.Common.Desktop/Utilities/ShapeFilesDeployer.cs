@@ -14,11 +14,11 @@ namespace Mapsui.Samples.Common.Desktop.Utilities
         {
             shapefile = Path.GetFileNameWithoutExtension(shapefile);
             var assembly = typeof(ShapefileSample).GetTypeInfo().Assembly;
-            assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.Desktop.GeoData.World.", ShapeFilesLocation, shapefile + ".DBF");
+            assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.Desktop.GeoData.World.", ShapeFilesLocation, shapefile + ".dbf");
             assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.Desktop.GeoData.World.", ShapeFilesLocation, shapefile + ".prj");
-            assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.Desktop.GeoData.World.", ShapeFilesLocation, shapefile + ".SHP");
-            assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.Desktop.GeoData.World.", ShapeFilesLocation, shapefile + ".SHX");
-            assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.Desktop.GeoData.World.", ShapeFilesLocation, shapefile + ".shp.idx");
+            assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.Desktop.GeoData.World.", ShapeFilesLocation, shapefile + ".shp");
+            assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.Desktop.GeoData.World.", ShapeFilesLocation, shapefile + ".shx");
+            assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.Desktop.GeoData.World.", ShapeFilesLocation, shapefile + ".shp.sidx");
         }
     }
 }

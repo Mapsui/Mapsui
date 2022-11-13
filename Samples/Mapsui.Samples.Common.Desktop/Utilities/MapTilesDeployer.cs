@@ -13,16 +13,16 @@ namespace Mapsui.Samples.Common.Desktop.Utilities
         public static void CopyEmbeddedResourceToFile(string mapTile)
         {
             var assembly = typeof(ShapefileSample).GetTypeInfo().Assembly;
-            CopyTile(assembly, mapTile, @"0\0", "0");
-            CopyTile(assembly, mapTile, @"1\0", "0");
-            CopyTile(assembly, mapTile, @"1\0", "1");
-            CopyTile(assembly, mapTile, @"1\1", "0");
-            CopyTile(assembly, mapTile, @"1\1", "0");
+            CopyTile(assembly, mapTile, @"_0._0", @"0\0", "0");
+            CopyTile(assembly, mapTile, @"_1._0", @"1\0", "0");
+            CopyTile(assembly, mapTile, @"_1._0", @"1\0", "1");
+            CopyTile(assembly, mapTile, @"_1._1", @"1\1", "0");
+            CopyTile(assembly, mapTile, @"_1._1", @"1\1", "0");
         }
 
-        private static void CopyTile(Assembly assembly, string mapTile, string folder, string tile)
+        private static void CopyTile(Assembly assembly, string mapTile,string resourceFolder, string folder, string tile)
         {
-            assembly.CopyEmbeddedResourceToFile(@$"Mapsui.Samples.Common.Desktop.GeoData.World.{mapTile}.{folder.Replace('\\', '.')}.", MapTileLocation + @$"{mapTile}\{folder}\", "{tile}.png");
+            assembly.CopyEmbeddedResourceToFile(@$"Mapsui.Samples.Common.Desktop.GeoData.{mapTile}.{resourceFolder}.", MapTileLocation + @$"\{mapTile}\{folder}\", $"{tile}.png");
         }
     }
 }

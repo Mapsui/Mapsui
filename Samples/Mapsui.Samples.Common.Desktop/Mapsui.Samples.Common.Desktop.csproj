@@ -35,19 +35,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="GeoData\World\cities.DBF">
+    <EmbeddedResource Include="GeoData\World\cities.dbf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="GeoData\World\cities.prj">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="GeoData\World\cities.SHP">
+    <EmbeddedResource Include="GeoData\World\cities.shp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="GeoData\World\cities.shp.sidx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="GeoData\World\cities.SHX">
+    <EmbeddedResource Include="GeoData\World\cities.shx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="GeoData\World\countries.dbf">

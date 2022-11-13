@@ -14,8 +14,8 @@ namespace Mapsui.Samples.Common.Desktop.Utilities
         {
             geoTif = Path.GetFileNameWithoutExtension(geoTif);
             var assembly = typeof(ShapefileSample).GetTypeInfo().Assembly;
-            assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.Desktop.GeoData.World.", GeoTiffLocation, geoTif + ".tfw");
-            assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.Desktop.GeoData.World.", GeoTiffLocation, geoTif + ".tif");
+            assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.Desktop.Images.", GeoTiffLocation, geoTif + ".tfw");
+            assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.Desktop.Images.", GeoTiffLocation, geoTif + ".tif");
         }
     }
 }

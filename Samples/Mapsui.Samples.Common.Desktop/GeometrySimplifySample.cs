@@ -29,9 +29,8 @@ namespace Mapsui.Samples.Common.Desktop
         public static Map CreateMap()
         {
             var map = new Map();
-
-            var path = Path.Combine(ShapeFilesDeployer.ShapeFilesLocation, "\\countries.shp");
-            var countrySource = new ShapeFile(path, true);
+            
+            var countrySource = new ShapeFile(ShapeFilesDeployer.ShapeFilesLocation + "\\countries.shp", true);
             countrySource.CRS = "EPSG:4326";
             var projectedCountrySource = new ProjectingProvider(countrySource) {
                 CRS = "EPSG:3857",
