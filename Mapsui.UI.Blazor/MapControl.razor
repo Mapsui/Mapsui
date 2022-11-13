@@ -144,9 +144,9 @@ else
 
     private void OnMouseDown(MouseEventArgs e)
     {
-        IsInBoxZoomMode = e.Buttons == ZoomButton && (ZoomModifier == Keys.None || ModifierPressed(ZoomModifier));
+        IsInBoxZoomMode = e.Button == ZoomButton && (ZoomModifier == Keys.None || ModifierPressed(ZoomModifier));
 
-        bool moveMode = e.Buttons == MoveButton && (MoveModifier == Keys.None || ModifierPressed(MoveModifier));
+        bool moveMode = e.Button == MoveButton && (MoveModifier == Keys.None || ModifierPressed(MoveModifier));
 
         if (moveMode)
             _defaultCursor = Cursor;
