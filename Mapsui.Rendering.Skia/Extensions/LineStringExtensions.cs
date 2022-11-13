@@ -43,30 +43,5 @@ namespace Mapsui.Rendering.Skia.Extensions
             }
             return path;
         }
-
-        /// <summary>
-        /// Converts a LineString in world coordinates to a Skia path
-        /// </summary>
-        /// <param name="lineString">List of points in Mapsui world coordinates</param>
-        /// <returns>SkPath</returns>
-        public static SKPath ToSkiaPath(this LineString lineString)
-        {
-            var path = new SKPath();
-            var coordinates = lineString.Coordinates;
-
-            if (coordinates.Length == 0)
-            {
-                return path;
-            }
-
-            path.MoveTo(coordinates[0].ToSkiaPoint());
-
-            for (var i = 1; i < coordinates.Length; i++)
-            {
-                path.LineTo(coordinates[i].ToSkiaPoint());
-            }
-
-            return path;
-        }
     }
 }
