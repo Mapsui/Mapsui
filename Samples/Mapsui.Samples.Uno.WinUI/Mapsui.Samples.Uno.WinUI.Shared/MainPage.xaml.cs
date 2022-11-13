@@ -28,7 +28,7 @@ namespace Mapsui.Samples.Uno.WinUI
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        static Mainpage()
+        static MainPage()
         {
             // todo: find proper way to load assembly
             Mapsui.Samples.Common.Desktop.DesktopSamplesUtilities.LoadAssembly();
