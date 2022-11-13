@@ -14,7 +14,7 @@ namespace Mapsui.Samples.Forms
         static MainPage()
         {
             // todo: find proper way to load assembly
-            DesktopSamplesUtilities.LoadAssembly();
+            Mapsui.Samples.Common.Desktop.DesktopSamplesUtilities.LoadAssembly();
             Mapsui.Tests.Common.Utilities.LoadAssembly();       
         }
 
