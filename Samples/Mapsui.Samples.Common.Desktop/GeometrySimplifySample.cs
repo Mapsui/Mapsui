@@ -7,11 +7,17 @@ using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.UI;
 using Mapsui.Nts.Providers;
+using Mapsui.Samples.Common.Desktop.Utilities;
 
 namespace Mapsui.Samples.Common.Desktop
 {
     public class GeometrySimplifySample : IMapControlSample
     {
+        static GeometrySimplifySample()
+        {
+            ShapeFilesDeployer.CopyEmbeddedResourceToFile("countries.shp");
+        }
+        
         public string Name => "5 Geometry Simplify Sample";
         public string Category => "Desktop";
 
@@ -24,7 +30,7 @@ namespace Mapsui.Samples.Common.Desktop
         {
             var map = new Map();
 
-            var path = Path.Combine(GetAppDir(), "GeoData", "World", "countries.shp");
+            var path = Path.Combine(ShapeFilesDeployer.ShapeFilesLocation, "\\countries.shp");
             var countrySource = new ShapeFile(path, true);
             countrySource.CRS = "EPSG:4326";
             var projectedCountrySource = new ProjectingProvider(countrySource) {

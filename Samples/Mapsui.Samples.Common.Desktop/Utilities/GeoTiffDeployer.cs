@@ -1,0 +1,21 @@
+﻿using System;
+using System.IO;
+using System.Reflection;
+using Mapsui.Samples.Common.Extensions;
+using Mapsui.Samples.Common.Maps;
+
+namespace Mapsui.Samples.Common.Desktop.Utilities
+{
+    public static class GeoTiffDeployer
+    {
+        public static string GeoTiffLocation { get; set; } =  Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Mapsui.Samples");
+
+        public static void CopyEmbeddedResourceToFile(string geoTif)
+        {
+            geoTif = Path.GetFileNameWithoutExtension(geoTif);
+            var assembly = typeof(ShapefileSample).GetTypeInfo().Assembly;
+            assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.Desktop.GeoData.World.", GeoTiffLocation, geoTif + ".tfw");
+            assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.Desktop.GeoData.World.", GeoTiffLocation, geoTif + ".tif");
+        }
+    }
+}
