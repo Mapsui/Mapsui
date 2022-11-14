@@ -134,7 +134,7 @@ public class RasterizingTileProvider : ITileSource
         return features;
     }
 
-    private async Task<double> GetAdditionalSearchSizeAroundAsync(TileInfo tileInfo, IRenderer renderer, IViewport viewport)
+    private async Task<double> GetAdditionalSearchSizeAroundAsync(TileInfo tileInfo, IRenderer renderer, IReadOnlyViewport  viewport)
     {
         double additionalSearchSize = 0;
         
