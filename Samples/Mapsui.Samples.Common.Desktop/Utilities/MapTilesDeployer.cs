@@ -17,7 +17,7 @@ namespace Mapsui.Samples.Common.Desktop.Utilities
             CopyTile(assembly, mapTile, @"_1._0", @"1\0", "0");
             CopyTile(assembly, mapTile, @"_1._0", @"1\0", "1");
             CopyTile(assembly, mapTile, @"_1._1", @"1\1", "0");
-            CopyTile(assembly, mapTile, @"_1._1", @"1\1", "0");
+            CopyTile(assembly, mapTile, @"_1._1", @"1\1", "1");
         }
 
         private static void CopyTile(Assembly assembly, string mapTile,string resourceFolder, string folder, string tile)
