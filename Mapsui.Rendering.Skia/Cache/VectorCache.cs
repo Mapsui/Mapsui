@@ -27,7 +27,7 @@ namespace Mapsui.Rendering.Skia.Cache
             if (!_pathCache.TryGetValue(key, out var path))
             {
                 path = toPath(geometry, viewport);
-                _paintCache[key] = path;
+                _pathCache[key] = path;
             }
 
             return (TPath)path;

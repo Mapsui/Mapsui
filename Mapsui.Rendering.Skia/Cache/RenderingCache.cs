@@ -33,5 +33,10 @@ namespace Mapsui.Rendering.Skia.Cache
         {
             return _vectorCache.GetOrCreatePaint(pen, opacity, toPaint);
         }
+
+        public TPath GetOrCreatePath<TPath, TGeometry>(IReadOnlyViewport viewport, TGeometry geometry, Func<TGeometry, IReadOnlyViewport, TPath> toPath) where TPath : class where TGeometry : class
+        {
+            return _vectorCache.GetOrCreatePath(viewport, geometry, toPath);
+        }
     }
 }

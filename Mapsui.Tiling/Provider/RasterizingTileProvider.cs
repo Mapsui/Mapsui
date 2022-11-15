@@ -165,7 +165,7 @@ public class RasterizingTileProvider : ITileSource
         };
     }
 
-    private async Task<double> GetAdditionalSearchSizeAsync(TileInfo tileInfo, IRenderer renderer, IViewport viewport)
+    private async Task<double> GetAdditionalSearchSizeAsync(TileInfo tileInfo, IRenderer renderer, IReadOnlyViewport viewport)
     {
         if (!_searchSizeCache.TryGetValue(tileInfo.Index, out var result))
         {
@@ -191,7 +191,7 @@ public class RasterizingTileProvider : ITileSource
         return result;
     }
 
-    private double ConvertToCoordinates(double tempSize, IViewport viewport)
+    private double ConvertToCoordinates(double tempSize, IReadOnlyViewport viewport)
     {
         return tempSize * viewport.Resolution * 0.5; // I need to load half the Size more of the Features
     }

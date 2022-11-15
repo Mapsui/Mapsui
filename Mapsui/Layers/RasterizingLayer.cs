@@ -203,7 +203,7 @@ namespace Mapsui.Layers
             if (_layer is IAsyncDataFetcher asyncLayer) asyncLayer.ClearCache();
         }
 
-        public static IReadOnlyViewport CreateViewport(
+        public static Viewport CreateViewport(
             MRect extent, 
             double resolution, 
             double renderResolutionMultiplier = 1,
