@@ -47,7 +47,7 @@ namespace Mapsui.Rendering.Skia
                 dashOffset = pen.DashOffset;
             }
 
-            using var paint = new SKPaint { IsAntialias = true };
+            var paint = new SKPaint { IsAntialias = true };
             paint.IsStroke = true;
             paint.StrokeWidth = lineWidth;
             paint.Color = lineColor.ToSkia(opacity);
