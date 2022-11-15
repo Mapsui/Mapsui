@@ -14,7 +14,11 @@ namespace Mapsui.Rendering.Skia
                 return;
 
             var paint = vectorCache.GetOrCreatePaint(vectorStyle.Line, opacity, createSkPaint);
-            using var path = lineString.ToSkiaPath(viewport, canvas.LocalClipBounds);
+            var path = vectorCache.GetOrCreatePath(viewport, lineString, (geometry, viewport) =>
+            {
+                // TODO handle local clip bounds in caching and don't take it from the canvas.
+                return lineString.ToSkiaPath(viewport, canvas.LocalClipBounds);
+            });
 
             canvas.DrawPath(path, paint);
         }
