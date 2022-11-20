@@ -171,26 +171,26 @@ namespace Mapsui.Rendering.Benchmarks
             mapRenderer.Render(skCanvas, map.Viewport, map.Map!.Layers, map.Map!.Widgets, Color.White);
         }
 
-        [Benchmark]
-        public async Task RenderRasterizingPngAsync()
-        {
-            await rasterizingPngMap.WaitForLoadingAsync();
-            mapRenderer.Render(skCanvas, rasterizingPngMap.Viewport, rasterizingPngMap.Map!.Layers, rasterizingPngMap.Map!.Widgets, Color.White);
-        }
+        //[Benchmark]
+        //public async Task RenderRasterizingPngAsync()
+        //{
+        //    await rasterizingPngMap.WaitForLoadingAsync();
+        //    mapRenderer.Render(skCanvas, rasterizingPngMap.Viewport, rasterizingPngMap.Map!.Layers, rasterizingPngMap.Map!.Widgets, Color.White);
+        //}
         
-        [Benchmark]
-        public async Task RenderRasterizingSkpAsync()
-        {
-            await rasterizingSkpMap.WaitForLoadingAsync();
-            mapRenderer.Render(skCanvas, rasterizingSkpMap.Viewport, rasterizingSkpMap.Map!.Layers, rasterizingSkpMap.Map!.Widgets, Color.White);
-        }
+        //[Benchmark]
+        //public async Task RenderRasterizingSkpAsync()
+        //{
+        //    await rasterizingSkpMap.WaitForLoadingAsync();
+        //    mapRenderer.Render(skCanvas, rasterizingSkpMap.Viewport, rasterizingSkpMap.Map!.Layers, rasterizingSkpMap.Map!.Widgets, Color.White);
+        //}
         
-        [Benchmark]
-        public async Task RenderRasterizingTilingSkpAsync()
-        {
-            await rasterizingTilingSkpMap.WaitForLoadingAsync();
-            mapRenderer.Render(skCanvas, rasterizingTilingSkpMap.Viewport, rasterizingTilingSkpMap.Map!.Layers, rasterizingTilingSkpMap.Map!.Widgets, Color.White);
-        }
+        //[Benchmark]
+        //public async Task RenderRasterizingTilingSkpAsync()
+        //{
+        //    await rasterizingTilingSkpMap.WaitForLoadingAsync();
+        //    mapRenderer.Render(skCanvas, rasterizingTilingSkpMap.Viewport, rasterizingTilingSkpMap.Map!.Layers, rasterizingTilingSkpMap.Map!.Widgets, Color.White);
+        //}
 
         [Benchmark]
         public async Task RenderTilingPngAsync()
