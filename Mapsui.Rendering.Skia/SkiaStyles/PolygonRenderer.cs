@@ -16,6 +16,8 @@ namespace Mapsui.Rendering.Skia
         public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, VectorStyle vectorStyle, IFeature feature,
             Polygon polygon, float opacity, ISymbolCache? symbolCache = null, IVectorCache vectorCache = null)
         {
+            
+            
             float lineWidth = Convert.ToSingle(vectorStyle?.Outline.Width ?? 1);
             SKPaint paint;
             SKPaint paintFill;
@@ -33,33 +35,36 @@ namespace Mapsui.Rendering.Skia
                 paintFill = vectorCache.GetOrCreatePaint(vectorStyle.Fill, opacity, viewport.Rotation, CreateSkPaint);
                 path = vectorCache.GetOrCreatePath(renderViewPort, polygon, lineWidth, (geometry, viewport, lineWidth) => geometry.ToSkiaPath(viewport, viewport.ToSkRect(), lineWidth));    
             }
-            
-            // Do this, because if not, path isn't filled complete
-            using (new SKAutoCanvasRestore(canvas))
+
+            if (vectorStyle.Fill?.FillStyle == FillStyle.Solid)
             {
-                canvas.ClipPath(path);
-                var bounds = path.Bounds;
-                // Make sure, that the brush starts with the correct position
-                var inflate = ((int)path.Bounds.Width * 0.3f / Scale) * Scale;
-                bounds.Inflate(inflate, inflate);
-                // Draw rect with bigger size, which is clipped by path
-                canvas.DrawRect(bounds, paintFill);
+                canvas.DrawPath(path, paintFill);
             }
-            
-            canvas.DrawPath(path, paint);
-            
+            else
+            {
+                // Do this, because if not, path isn't filled complete
+                using (new SKAutoCanvasRestore(canvas))
+                {
+                    canvas.ClipPath(path);
+                    var bounds = path.Bounds;
+                    // Make sure, that the brush starts with the correct position
+                    var inflate = ((int)path.Bounds.Width * 0.3f / Scale) * Scale;
+                    bounds.Inflate(inflate, inflate);
+                    // Draw rect with bigger size, which is clipped by path
+                    canvas.DrawRect(bounds, paintFill);
+                }    
+            }
+
+            if (vectorStyle?.Outline != null)
+            {
+                canvas.DrawPath(path, paint);    
+            }
         }
 
         private static SKPaint CreateSkPaint(Brush? brush, float opacity, double rotation, ISymbolCache? symbolCache)
         {
             float lineWidth = 1;
             var fillColor = Color.Gray; // default
-            var strokeCap = PenStrokeCap.Butt; // default
-            var strokeJoin = StrokeJoin.Miter; // default
-            var strokeMiterLimit = 4f; // default
-            var strokeStyle = PenStyle.Solid; // default
-            float[]? dashArray = null; // default
-            float dashOffset = 0; // default
 
             var paintFill = new SKPaint { IsAntialias = true };
             
