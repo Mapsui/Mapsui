@@ -46,7 +46,7 @@ namespace Mapsui.Rendering.Benchmarks
         {
             mapRenderer = new MapRenderer();
             mapRendererWithoutCache = new MapRenderer();
-            ((RenderCache)mapRendererWithoutCache.RenderCache).VectorCache = new NonCachingVectorCache();
+            mapRendererWithoutCache.RenderCache.VectorCache = new NonCachingVectorCache(mapRendererWithoutCache.RenderCache.SymbolCache);
             tilingSkpMap = CreateMapControl(RenderFormat.Skp);            
             tilingPngMap = CreateMapControl(RenderFormat.Png);
             tilingWebpMap = CreateMapControl(RenderFormat.WebP);
