@@ -47,7 +47,7 @@ namespace Mapsui.Rendering.Skia.Cache
 
         public TPath GetOrCreatePath<TPath, TGeometry>(IReadOnlyViewport viewport, TGeometry geometry, float lineWidth, Func<TGeometry, IReadOnlyViewport, float, TPath> toPath) where TPath : class where TGeometry : class
         {
-            return _vectorCache.GetOrCreatePath(viewport, geometry, lineWidth);
+            return _vectorCache.GetOrCreatePath(viewport, geometry, lineWidth, toPath);
         }
     }
 }

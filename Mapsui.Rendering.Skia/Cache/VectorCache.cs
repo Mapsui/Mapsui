@@ -8,7 +8,7 @@ namespace Mapsui.Rendering.Skia.Cache
     public class VectorCache : IVectorCache
     {
         private readonly Dictionary<(Pen? Pen, float Opacity), object> _paintCache = new();
-        private readonly Dictionary<(Pen? Brush, float Opacity, double rotation), object> _fillCache = new();
+        private readonly Dictionary<(Brush? Brush, float Opacity, double rotation), object> _fillCache = new();
         private readonly Dictionary<(MRect Rect, double Resolution, object Geometry, float lineWidth), object> _pathCache = new();
         private readonly ISymbolCache _symbolCache;
 
