@@ -19,6 +19,13 @@ namespace Mapsui.Samples.Wpf
 {
     public partial class Window1
     {
+         static Window1()
+        {
+            // todo: find proper way to load assembly
+            Mapsui.Samples.Common.Desktop.DesktopSamplesUtilities.LoadAssembly();
+            Mapsui.Tests.Common.Utilities.LoadAssembly();       
+        }
+
         public Window1()
         {
             InitializeComponent();

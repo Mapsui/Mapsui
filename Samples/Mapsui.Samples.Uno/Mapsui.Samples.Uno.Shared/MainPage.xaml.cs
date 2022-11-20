@@ -20,6 +20,13 @@ namespace Mapsui.Samples.Uwp
     // ReSharper disable once RedundantExtendsListEntry
     public sealed partial class MainPage : Page
     {
+        static MainPage()
+        {
+            // todo: find proper way to load assembly
+            Mapsui.Samples.Common.Desktop.DesktopSamplesUtilities.LoadAssembly();
+            Mapsui.Tests.Common.Utilities.LoadAssembly();       
+        }
+
         public MainPage()
         {
             InitializeComponent();

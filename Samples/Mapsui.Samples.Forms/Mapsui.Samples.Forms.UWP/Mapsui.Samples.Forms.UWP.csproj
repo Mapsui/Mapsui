@@ -11,7 +11,7 @@
     <AssemblyName>Mapsui.Samples.Forms.UWP</AssemblyName>
     <DefaultLanguage>en</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.19041.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.22621.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
@@ -134,6 +134,10 @@
     <ProjectReference Include="..\..\..\Mapsui\Mapsui.csproj">
       <Project>{d74c052a-c07e-4b37-a898-134218aca5c9}</Project>
       <Name>Mapsui</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj">
+      <Project>{81bb36d2-4d01-44e3-9024-e7cbd10da316}</Project>
+      <Name>Mapsui.Tests.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj">
       <Project>{508ae811-a03a-4138-8ccc-abde03c67010}</Project>
