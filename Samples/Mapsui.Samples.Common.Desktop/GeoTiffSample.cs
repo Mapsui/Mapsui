@@ -4,6 +4,7 @@ using System.Reflection;
 using Mapsui.Extensions.Provider;
 using Mapsui.Layers;
 using Mapsui.Providers;
+using Mapsui.Samples.Common.Desktop.Utilities;
 using Mapsui.Styles;
 using Mapsui.UI;
 
@@ -13,6 +14,11 @@ namespace Mapsui.Samples.Common.Desktop
 {
     public class GeoTiffSample : IMapControlSample
     {
+        static GeoTiffSample()
+        {
+            GeoTiffDeployer.CopyEmbeddedResourceToFile("example.shp");
+        }
+        
         public string Name => "6 Geo Tiff";
         public string Category => "Desktop";
 
@@ -24,7 +30,7 @@ namespace Mapsui.Samples.Common.Desktop
         public static Map CreateMap()
         {
             var map = new Map();
-            var gif = new GeoTiffProvider(GetAppDir() + "\\Images\\example.tif", new List<Color> { Color.Red });
+            var gif = new GeoTiffProvider(GeoTiffDeployer.GeoTiffLocation + "\\example.tif", new List<Color> { Color.Red });
             map.Layers.Add(CreateGifLayer(gif));
 
             return map;

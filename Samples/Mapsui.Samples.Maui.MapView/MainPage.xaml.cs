@@ -10,6 +10,13 @@ namespace Mapsui.Samples.Maui
 {
     public partial class MainPage : ContentPage
     {
+        static MainPage()
+        {
+            // todo: find proper way to load assembly
+            Mapsui.Samples.Common.Desktop.DesktopSamplesUtilities.LoadAssembly();
+            Mapsui.Tests.Common.Utilities.LoadAssembly();       
+        }
+
         readonly IEnumerable<ISampleBase> allSamples;
         Func<object?, EventArgs, bool>? clicker;
 

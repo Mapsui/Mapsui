@@ -19,6 +19,13 @@ namespace Mapsui.Samples.Eto
 
     public class MainForm : Form
     {
+        static MainForm()
+        {
+            // todo: find proper way to load assembly
+            DesktopSamplesUtilities.LoadAssembly();
+            Mapsui.Tests.Common.Utilities.LoadAssembly();       
+        }
+
         DropDown CategoryComboBox = new() { Width = 200 };
         StackLayout SampleList = new();
         MapControl MapControl = new();
