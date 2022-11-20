@@ -221,6 +221,9 @@ public class MRect
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(Max, Min);
+        unchecked
+        {
+            return (Max.GetHashCode() * 397) ^ Min.GetHashCode();
+        }
     }
 }
