@@ -19,6 +19,13 @@ namespace Mapsui.Samples.Maui
 {
     public sealed partial class MainPageLarge : ContentPage, IDisposable
     {
+        static MainPageLarge()
+        {
+            // todo: find proper way to load assembly
+            Mapsui.Samples.Common.Desktop.DesktopSamplesUtilities.LoadAssembly();
+            Mapsui.Tests.Common.Utilities.LoadAssembly();       
+        }
+        
         IEnumerable<ISampleBase> allSamples;
         Func<object?, EventArgs, bool>? clicker;
         private CancellationTokenSource? gpsCancelation;

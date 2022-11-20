@@ -25,6 +25,13 @@ namespace Mapsui.Samples.Droid
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
+        static MainActivity()
+        {
+            // todo: find proper way to load assembly
+            Mapsui.Samples.Common.Desktop.DesktopSamplesUtilities.LoadAssembly();
+            Mapsui.Tests.Common.Utilities.LoadAssembly();       
+        }
+        
         private LinearLayout? _popup;
         private MapControl? _mapControl;
         private TextView? _textView;
