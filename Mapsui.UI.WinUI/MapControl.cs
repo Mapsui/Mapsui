@@ -270,7 +270,7 @@ namespace Mapsui.UI.Uwp
 
         public void OpenBrowser(string url)
         {
-            Catch.TaskRun(() => Launcher.LaunchUriAsync(new Uri(url)));
+            Catch.TaskRun(async () => await Launcher.LaunchUriAsync(new Uri(url)));
         }
 
         private float ViewportWidth => (float)ActualWidth;
