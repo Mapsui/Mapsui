@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using Mapsui.UI;
 using System.Threading.Tasks;
@@ -162,20 +163,28 @@ namespace Mapsui.Samples.Maui
         /// New informations from Geolocator arrived
         /// </summary>        
         /// <param name="e">Event arguments for new position</param>
-        private void MyLocationPositionChanged(Location e)
+        [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
+        private async void MyLocationPositionChanged(Location e)
         {
-            Application.Current?.Dispatcher.DispatchAsync(() => {
-                mapView.MyLocationLayer.UpdateMyLocation(new UI.Maui.Position(e.Latitude, e.Longitude));
-                if (e.Course != null)
-                {
-                    mapView.MyLocationLayer.UpdateMyDirection(e.Course.Value, mapView.Viewport.Rotation);
-                }
+            try
+            {
+                await Application.Current?.Dispatcher?.DispatchAsync(() => {
+                    mapView?.MyLocationLayer.UpdateMyLocation(new UI.Maui.Position(e.Latitude, e.Longitude));
+                    if (e.Course != null)
+                    {
+                        mapView?.MyLocationLayer.UpdateMyDirection(e.Course.Value, mapView.Viewport.Rotation);
+                    }
 
-                if (e.Speed != null)
-                {
-                    mapView.MyLocationLayer.UpdateMySpeed(e.Speed.Value);
-                }
-            });
+                    if (e.Speed != null)
+                    {
+                        mapView?.MyLocationLayer.UpdateMySpeed(e.Speed.Value);
+                    }
+                });   
+            }
+            catch(Exception ex)
+            {
+                Logger.Log(LogLevel.Error, ex.Message, ex);
+            }
         }
 
         private void Compass_ReadingChanged(object? sender, CompassChangedEventArgs e)
