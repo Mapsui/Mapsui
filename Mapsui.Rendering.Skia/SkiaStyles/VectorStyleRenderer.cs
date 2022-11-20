@@ -23,7 +23,7 @@ namespace Mapsui.Rendering.Skia
                 {
                     case RectFeature rectFeature:
                         if (rectFeature.Rect != null)
-                            PolygonRenderer.Draw(canvas, viewport, vectorStyle, rectFeature, rectFeature.Rect.ToPolygon(), opacity);
+                            PolygonRenderer.Draw(canvas, viewport, vectorStyle, rectFeature, rectFeature.Rect.ToPolygon(), opacity, renderCache, renderCache);
                         break;
                     case PointFeature pointFeature:
                         SymbolStyleRenderer.DrawSymbol(canvas, viewport, layer, pointFeature.Point.X, pointFeature.Point.Y, new SymbolStyle { Outline = vectorStyle.Outline, Fill = vectorStyle.Fill, Line = vectorStyle.Line });
@@ -39,7 +39,7 @@ namespace Mapsui.Rendering.Skia
                                 Draw(canvas, viewport, layer, new PointFeature(point.X, point.Y), style, renderCache, iteration);
                                 break;
                             case Polygon polygon:
-                                PolygonRenderer.Draw(canvas, viewport, vectorStyle, feature, polygon, opacity, renderCache);
+                                PolygonRenderer.Draw(canvas, viewport, vectorStyle, feature, polygon, opacity, renderCache, renderCache);
                                 break;
                             case LineString lineString:
                                 LineStringRenderer.Draw(canvas, viewport, vectorStyle, lineString, opacity, renderCache);
