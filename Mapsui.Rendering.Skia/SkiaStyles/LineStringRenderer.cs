@@ -1,3 +1,5 @@
+using Mapsui.Extensions;
+using Mapsui.Layers;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Styles;
 using NetTopologySuite.Geometries;
@@ -13,17 +15,14 @@ namespace Mapsui.Rendering.Skia
             if (vectorStyle == null)
                 return;
 
-            var paint = vectorCache.GetOrCreatePaint(vectorStyle.Line, opacity, createSkPaint);
-            var path = vectorCache.GetOrCreatePath(viewport, lineString, (geometry, viewport) =>
-            {
-                // TODO handle local clip bounds in caching and don't take it from the canvas.
-                return lineString.ToSkiaPath(viewport, canvas.LocalClipBounds);
-            });
+            var renderViewPort = viewport.ToCanvasViewport(canvas);
+            var paint = vectorCache.GetOrCreatePaint(vectorStyle.Line, opacity, CreateSkPaint);
+            var path = vectorCache.GetOrCreatePath(renderViewPort, lineString, (geometry, viewport) => geometry.ToSkiaPath(viewport, viewport.ToSkRect()));
 
             canvas.DrawPath(path, paint);
         }
 
-        private static SKPaint createSkPaint(Pen? pen, float opacity)
+        private static SKPaint CreateSkPaint(Pen? pen, float opacity)
         {
             float lineWidth = 1;
             var lineColor = new Color();
