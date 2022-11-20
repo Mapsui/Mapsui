@@ -32,15 +32,17 @@ public class MPoint
         return Algorithms.Distance(X, Y, point.X, point.Y);
     }
 
-    public bool Equals(MPoint? point)
+    protected bool Equals(MPoint? point)
     {
-        if (point is null) return false;
-        return X == point.X && Y == point.Y;
+        return X.Equals(point.X) && Y.Equals(point.Y);
     }
 
     public override int GetHashCode()
     {
-        return X.GetHashCode() ^ Y.GetHashCode();
+        unchecked
+        {
+            return (X.GetHashCode() * 397) ^ Y.GetHashCode();
+        }
     }
 
     public MPoint Offset(double offsetX, double offsetY)
@@ -129,4 +131,6 @@ public class MPoint
 
         return Equals((MPoint)obj);
     }
+
+
 }
