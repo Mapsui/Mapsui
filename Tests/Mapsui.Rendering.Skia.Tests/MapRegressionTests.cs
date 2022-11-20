@@ -27,8 +27,9 @@ public class MapRegressionTests
 {
     static MapRegressionTests()
     {
-        // Load Desktop Samples
-        Console.WriteLine(typeof(ShapefileSample));
+        // todo: find proper way to load assembly
+        DesktopSamplesUtilities.LoadAssembly();
+        Mapsui.Tests.Common.Utilities.LoadAssembly();       
     }
 
     private static ISampleBase[]? _excludedSamples;

@@ -83,10 +83,6 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Helpers\" />
-  </ItemGroup>
-
   <PropertyGroup>
     <DebugType>portable</DebugType>
   </PropertyGroup>
