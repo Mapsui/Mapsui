@@ -10,12 +10,18 @@ using Mapsui.Extensions;
 using Mapsui.Nts;
 using Mapsui.Nts.Providers.Shapefile;
 using Mapsui.Providers;
+using Mapsui.Samples.Common.Desktop.Utilities;
 using NetTopologySuite.Geometries;
 
 namespace Mapsui.Samples.Common.Desktop
 {
     public class ThemeStyleSample : IMapControlSample
     {
+        static ThemeStyleSample()
+        {
+            ShapeFilesDeployer.CopyEmbeddedResourceToFile("countries.shp");
+        }
+        
         public string Name => "1 Shapefile Theme Style";
         public string Category => "Desktop";
 
@@ -28,7 +34,7 @@ namespace Mapsui.Samples.Common.Desktop
         {
             var map = new Map();
 
-            var countrySource = new ShapeFile(GetAppDir() + "\\GeoData\\World\\countries.shp", true) { CRS = "EPSG:3785" };
+            var countrySource = new ShapeFile(ShapeFilesDeployer.ShapeFilesLocation + "\\countries.shp", true) { CRS = "EPSG:3785" };
 
             map.Layers.Add(CreateCountryLayer(countrySource));
             map.Layers.Add(CreateCityHoverPoints());

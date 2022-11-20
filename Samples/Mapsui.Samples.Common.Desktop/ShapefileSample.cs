@@ -7,11 +7,18 @@ using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.UI;
 using Mapsui.Extensions;
+using Mapsui.Samples.Common.Desktop.Utilities;
 
 namespace Mapsui.Samples.Common.Desktop
 {
     public class ShapefileSample : IMapControlSample
     {
+        static ShapefileSample()
+        {
+            ShapeFilesDeployer.CopyEmbeddedResourceToFile("countries.shp");
+            ShapeFilesDeployer.CopyEmbeddedResourceToFile("cities.shp");
+        }
+        
         public string Name => "2 Shapefile with labels";
         public string Category => "Desktop";
 
@@ -24,8 +31,8 @@ namespace Mapsui.Samples.Common.Desktop
         {
             var map = new Map();
 
-            var countrySource = new ShapeFile(GetAppDir() + "\\GeoData\\World\\countries.shp", true);
-            var citySource = new ShapeFile(GetAppDir() + "\\GeoData\\World\\cities.shp", true);
+            var countrySource = new ShapeFile(ShapeFilesDeployer.ShapeFilesLocation + "\\countries.shp", true);
+            var citySource = new ShapeFile(ShapeFilesDeployer.ShapeFilesLocation +"\\cities.shp", true);
 
             map.Layers.Add(new RasterizingLayer(CreateCountryLayer(countrySource)));
             map.Layers.Add(new RasterizingLayer(CreateCityLayer(citySource)));

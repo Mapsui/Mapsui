@@ -6,12 +6,18 @@ using Mapsui.Layers;
 using Mapsui.Tiling.Layers;
 using Mapsui.UI;
 using System.Threading.Tasks;
+using Mapsui.Samples.Common.Desktop.Utilities;
 using Attribution = BruTile.Attribution;
 
 namespace Mapsui.Samples.Common.Desktop
 {
     public class MapTilerSample : IMapControlSample
     {
+        static MapTilerSample()
+        {
+            MapTilesDeployer.CopyEmbeddedResourceToFile("TrueMarble");
+        }
+        
         public string Name => "3 Map Tiler";
         public string Category => "Desktop";
 
@@ -54,7 +60,7 @@ namespace Mapsui.Samples.Common.Desktop
 
         public static ITileProvider GetTileProvider()
         {
-            return new FileTileProvider(new FileCache(GetAppDir() + "\\GeoData\\TrueMarble", "png"));
+            return new FileTileProvider(new FileCache(MapTilesDeployer.MapTileLocation  + "\\TrueMarble", "png"));
         }
 
         public static ITileSchema GetTileSchema()

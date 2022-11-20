@@ -15,6 +15,13 @@ namespace Mapsui.Samples.Maui.ViewModel
 {
     public partial class MainViewModel : ObservableObject
     {
+        static MainViewModel()
+        {
+            // todo: find proper way to load assembly
+            Mapsui.Samples.Common.Desktop.DesktopSamplesUtilities.LoadAssembly();
+            Mapsui.Tests.Common.Utilities.LoadAssembly();       
+        }
+
         public MainViewModel()
         {
             var allSamples = AllSamples.GetSamples() ?? new List<ISampleBase>();
