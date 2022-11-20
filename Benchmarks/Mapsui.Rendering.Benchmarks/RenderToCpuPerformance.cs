@@ -24,7 +24,7 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Rendering.Benchmarks
 {
-    [SimpleJob(RunStrategy.Throughput)]
+    [SimpleJob(RunStrategy.Throughput, targetCount: 1, warmupCount: 0, invocationCount: 333, launchCount: 1)]
     [MemoryDiagnoser]
     [MinColumn, MaxColumn, MeanColumn, MedianColumn]
     public class RenderToCpuPerformance
