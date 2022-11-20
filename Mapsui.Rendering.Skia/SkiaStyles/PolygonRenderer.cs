@@ -62,6 +62,12 @@ namespace Mapsui.Rendering.Skia
             float dashOffset = 0; // default
 
             var paintFill = new SKPaint { IsAntialias = true };
+            
+            if (brush != null)
+            {
+                fillColor = brush.Color;
+            }
+            
             // Is there a FillStyle?
             if (brush?.FillStyle == FillStyle.Solid)
             {
