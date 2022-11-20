@@ -30,10 +30,9 @@ namespace Mapsui.Rendering.Skia
             }
             else
             {
-                var renderViewPort = viewport.ToCanvasViewport(canvas);
                 paint = vectorCache.GetOrCreatePaint(vectorStyle.Outline, opacity, CreateSkPaint);
                 paintFill = vectorCache.GetOrCreatePaint(vectorStyle.Fill, opacity, viewport.Rotation, CreateSkPaint);
-                path = vectorCache.GetOrCreatePath(renderViewPort, polygon, lineWidth, (geometry, viewport, lineWidth) => geometry.ToSkiaPath(viewport, viewport.ToSkRect(), lineWidth));    
+                path = vectorCache.GetOrCreatePath(viewport, polygon, lineWidth, (geometry, viewport, lineWidth) => geometry.ToSkiaPath(viewport, viewport.ToSkRect(), lineWidth));    
             }
 
             if (vectorStyle.Fill?.FillStyle == FillStyle.Solid)

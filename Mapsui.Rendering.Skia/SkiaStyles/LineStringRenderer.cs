@@ -27,9 +27,8 @@ namespace Mapsui.Rendering.Skia
             {
                 paint = vectorCache.GetOrCreatePaint(vectorStyle.Line, opacity, CreateSkPaint);
                 
-                var renderViewPort = viewport.ToCanvasViewport(canvas);
                 var lineWidth = Convert.ToSingle(vectorStyle.Line?.Width ?? 1);
-                path = vectorCache.GetOrCreatePath(renderViewPort, lineString, lineWidth, (geometry, viewport, _) => geometry.ToSkiaPath(viewport, viewport.ToSkRect()));    
+                path = vectorCache.GetOrCreatePath(viewport, lineString, lineWidth, (geometry, viewport, _) => geometry.ToSkiaPath(viewport, viewport.ToSkRect()));    
             }
 
             canvas.DrawPath(path, paint);

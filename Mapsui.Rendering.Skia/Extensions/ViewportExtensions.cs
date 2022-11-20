@@ -27,20 +27,5 @@ namespace Mapsui.Rendering.Skia.Extensions
         {
             return viewport.WorldToScreen(viewport.GetExtent()).ToSkia();
         }
-
-        /// <summary>
-       /// To Viewport that has the same scale as the canvas
-       /// </summary>
-       /// <param name="viewport"></param>
-       /// <param name="canvas"></param>
-       /// <returns></returns>
-        public static IReadOnlyViewport ToCanvasViewport(this IReadOnlyViewport viewport, SKCanvas canvas)
-        {
-            var multiplier = 1.0 / Math.Min(canvas.TotalMatrix.ScaleX, canvas.TotalMatrix.ScaleY);
-            var result = new Viewport(viewport);
-            result.SetSize(result.Width * multiplier, result.Height * multiplier);
-            result.SetCenter(viewport.CenterX - viewport.Width * viewport.Resolution / 2, viewport.CenterY - viewport.Height * viewport.Resolution / 2);
-            return result;
-        } 
     }
 }
