@@ -208,7 +208,7 @@ namespace Mapsui.Samples.Maui
                 mapView?.MyLocationLayer.UpdateMyLocation(new UI.Maui.Position(e.Latitude, e.Longitude));
                 if (e.Course != null)
                 {
-                    mapView?.MyLocationLayer.UpdateMyDirection(e.Course.Value, mapView.Viewport.Rotation);
+                    mapView?.MyLocationLayer.UpdateMyDirection(e.Course.Value, mapView?.Viewport.Rotation ?? 0);
                 }
 
                 if (e.Speed != null)
@@ -216,7 +216,7 @@ namespace Mapsui.Samples.Maui
                     mapView?.MyLocationLayer.UpdateMySpeed(e.Speed.Value);
                 }
                 
-                });
+                })!;
             }
             catch (Exception ex)
             {
