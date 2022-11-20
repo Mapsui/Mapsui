@@ -19,6 +19,13 @@ namespace Mapsui.Samples.Avalonia.Views
 {
     public partial class MainWindow : Window
     {
+        static MainWindow()
+        {
+            // todo: find proper way to load assembly
+            Mapsui.Samples.Common.Desktop.DesktopSamplesUtilities.LoadAssembly();
+            Mapsui.Tests.Common.Utilities.LoadAssembly();       
+        }
+
         public MainWindow()
         {
             InitializeComponent();

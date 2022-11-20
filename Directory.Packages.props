@@ -32,14 +32,14 @@
     <PackageVersion Include="HarfBuzzSharp.NativeAssets.WebAssembly" Version="2.8.2.3" />
     <PackageVersion Include="IDisposableAnalyzers" Version="4.0.2" />
     <PackageVersion Include="Itinero" Version="1.5.0" />
-    <PackageVersion Include="Microsoft.Bcl.AsyncInterfaces" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.Bcl.AsyncInterfaces" Version="7.0.0" />
     <PackageVersion Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageVersion Include="Microsoft.CodeCoverage" Version="16.11.0" />
-    <PackageVersion Include="Microsoft.Extensions.Logging" Version="6.0.0" />
-    <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
-    <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Logging" Version="7.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
     <PackageVersion Include="Microsoft.Graphics.Win2D" Version="1.0.3.1" />
-    <PackageVersion Include="Microsoft.Net.Compilers.Toolset" Version="4.3.0" />
+    <PackageVersion Include="Microsoft.Net.Compilers.Toolset" Version="4.4.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
     <PackageVersion Include="Microsoft.NETCore.Platforms" Version="5.0.0" />
     <PackageVersion Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.14" />
@@ -129,22 +129,22 @@
     <PackageVersion Include="Uno.Extensions.Logging.WebAssembly.Console" Version="1.4.0" />
     <PackageVersion Include="Uno.Core.Extensions.Logging.Singleton" Version="4.0.1" />
     <PackageVersion Include="Uno.UniversalImageLoader" Version="1.9.36" />
-    <PackageVersion Include="Uno.UI" Version="4.5.12" />
-    <PackageVersion Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.5.12" />
-    <PackageVersion Include="Uno.UI.RemoteControl" Version="4.5.12" />
-    <PackageVersion Include="Uno.UI.Skia.Gtk" Version="4.5.12" />
-    <PackageVersion Include="Uno.UI.Skia.Linux.FrameBuffer" Version="4.5.12" />
-    <PackageVersion Include="Uno.UI.Skia.Tizen" Version="4.5.12" />
-    <PackageVersion Include="Uno.UI.Skia.Wpf" Version="4.5.12" />
-    <PackageVersion Include="Uno.UI.WebAssembly" Version="4.5.12" />
+    <PackageVersion Include="Uno.UI" Version="4.6.19" />
+    <PackageVersion Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.6.19" />
+    <PackageVersion Include="Uno.UI.RemoteControl" Version="4.6.19" />
+    <PackageVersion Include="Uno.UI.Skia.Gtk" Version="4.6.19" />
+    <PackageVersion Include="Uno.UI.Skia.Linux.FrameBuffer" Version="4.6.19" />
+    <PackageVersion Include="Uno.UI.Skia.Tizen" Version="4.6.19" />
+    <PackageVersion Include="Uno.UI.Skia.Wpf" Version="4.6.19" />
+    <PackageVersion Include="Uno.UI.WebAssembly" Version="4.6.19" />
     <PackageVersion Include="Uno.Wasm.Bootstrap" Version="3.3.1" />
     <PackageVersion Include="Uno.Wasm.Bootstrap.DevServer" Version="3.3.1" />
-    <PackageVersion Include="Uno.WinUI" Version="4.5.12" />
-    <PackageVersion Include="Uno.WinUI.Skia.Gtk" Version="4.5.12" />
-    <PackageVersion Include="Uno.WinUI.Skia.Linux.FrameBuffer" Version="4.5.12" />
-    <PackageVersion Include="Uno.WinUI.Skia.Wpf" Version="4.5.12" />
-    <PackageVersion Include="Uno.WinUI.RemoteControl" Version="4.5.12" />
-    <PackageVersion Include="Uno.WinUI.WebAssembly" Version="4.5.12" />
+    <PackageVersion Include="Uno.WinUI" Version="4.6.19" />
+    <PackageVersion Include="Uno.WinUI.Skia.Gtk" Version="4.6.19" />
+    <PackageVersion Include="Uno.WinUI.Skia.Linux.FrameBuffer" Version="4.6.19" />
+    <PackageVersion Include="Uno.WinUI.Skia.Wpf" Version="4.6.19" />
+    <PackageVersion Include="Uno.WinUI.RemoteControl" Version="4.6.19" />
+    <PackageVersion Include="Uno.WinUI.WebAssembly" Version="4.6.19" />
     <PackageVersion Include="Microsoft.Windows.Compatibility" Version="5.0.0" />
     <PackageVersion Include="Xam.Plugin.Geolocator" Version="4.5.0.6" />
     <PackageVersion Include="Xamarin.Android.Support.v7.MediaRouter" Version="28.0.0.3" />

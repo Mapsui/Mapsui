@@ -12,7 +12,7 @@ using NetTopologySuite.IO;
 
 namespace Mapsui.Tests.Common.Maps
 {
-    public class PolygonSample : IMapControlSample
+    public class PolygonTestSample : IMapControlSample
     {
         private static int _bitmapId;
 
@@ -26,7 +26,7 @@ namespace Mapsui.Tests.Common.Maps
 
         public static Map CreateMap()
         {
-            _bitmapId = typeof(PolygonSample).LoadBitmapId("Resources.Images.avion_silhouette.png");
+            _bitmapId = typeof(PolygonTestSample).LoadBitmapId("Resources.Images.avion_silhouette.png");
 
             var layer = CreateLayer();
 

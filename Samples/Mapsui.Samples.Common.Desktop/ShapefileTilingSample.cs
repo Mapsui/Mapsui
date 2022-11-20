@@ -7,6 +7,7 @@ using Mapsui.Providers;
 using Mapsui.Nts.Providers.Shapefile;
 using Mapsui.Rendering;
 using Mapsui.Projections;
+using Mapsui.Samples.Common.Desktop.Utilities;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.UI;
@@ -19,6 +20,12 @@ namespace Mapsui.Samples.Common.Desktop
 {
     public class ShapefileTileSample : IMapControlSample
     {
+        static ShapefileTileSample()
+        {
+            ShapeFilesDeployer.CopyEmbeddedResourceToFile("countries.shp");
+            ShapeFilesDeployer.CopyEmbeddedResourceToFile("cities.shp");
+        }
+        
         public string Name => "4 Shapefile Rasterizing Tiling";
         public string Category => "Desktop";
 
@@ -31,13 +38,13 @@ namespace Mapsui.Samples.Common.Desktop
         {
             var map = new Map();
 
-            var countrySource = new ShapeFile(GetAppDir() + "\\GeoData\\World\\countries.shp", true);
+            var countrySource = new ShapeFile(ShapeFilesDeployer.ShapeFilesLocation + "\\countries.shp", true);
             countrySource.CRS = "EPSG:4326";
             var projectedCountrySource = new ProjectingProvider(countrySource)
             {
                 CRS = "EPSG:3857",
             };
-            var citySource = new ShapeFile(GetAppDir() + "\\GeoData\\World\\cities.shp", true);
+            var citySource = new ShapeFile(ShapeFilesDeployer.ShapeFilesLocation+ "\\cities.shp", true);
             citySource.CRS = "EPSG:4326";
             var projectedCitySource = new ProjectingProvider(citySource)
             {
