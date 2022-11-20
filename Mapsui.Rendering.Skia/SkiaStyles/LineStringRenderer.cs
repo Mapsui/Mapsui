@@ -1,3 +1,4 @@
+using System;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Rendering.Skia.Extensions;
@@ -10,14 +11,25 @@ namespace Mapsui.Rendering.Skia
     public static class LineStringRenderer
     {
         public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, VectorStyle? vectorStyle,
-            LineString lineString, float opacity, IVectorCache vectorCache)
+            LineString lineString, float opacity, IVectorCache? vectorCache = null)
         {
             if (vectorStyle == null)
                 return;
 
-            var renderViewPort = viewport.ToCanvasViewport(canvas);
-            var paint = vectorCache.GetOrCreatePaint(vectorStyle.Line, opacity, CreateSkPaint);
-            var path = vectorCache.GetOrCreatePath(renderViewPort, lineString, (geometry, viewport) => geometry.ToSkiaPath(viewport, viewport.ToSkRect()));
+            SKPaint paint;
+            SKPath path;
+            if (vectorCache == null)
+            {
+                paint = CreateSkPaint(vectorStyle.Line, opacity);
+                path =  lineString.ToSkiaPath(viewport, canvas.LocalClipBounds);
+            }
+            else
+            {
+                var renderViewPort = viewport.ToCanvasViewport(canvas);
+                var lineWidth = Convert.ToSingle(vectorStyle.Line?.Width ?? 1);
+                paint = vectorCache.GetOrCreatePaint(vectorStyle.Line, opacity, CreateSkPaint);
+                path = vectorCache.GetOrCreatePath(renderViewPort, lineString, lineWidth, (geometry, viewport, _) => geometry.ToSkiaPath(viewport, viewport.ToSkRect()));    
+            }
 
             canvas.DrawPath(path, paint);
         }
