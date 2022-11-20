@@ -10,7 +10,6 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" />
     <PackageReference Include="Uno.Core.Extensions.Logging.Singleton" />
     <PackageReference Include="SkiaSharp.Views.Uno" />
-    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <!--
 			If, in the same solution, you are referencing a project that uses https://github.com/onovotny/MSBuildSdkExtras,
 			you need to make sure that the version provided here matches https://github.com/novotnyllc/MSBuildSdkExtras/blob/main/Source/MSBuild.Sdk.Extras/DefaultItems/ImplicitPackages.targets#L11.
