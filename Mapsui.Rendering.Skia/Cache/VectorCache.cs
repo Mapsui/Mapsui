@@ -29,12 +29,12 @@ namespace Mapsui.Rendering.Skia.Cache
             return (T)paint;
         }
 
-        public T GetOrCreatePaint<T>(Brush? pen, float opacity, double rotation, Func<Brush?, float, double, ISymbolCache, T> toPaint) where T : class
+        public T GetOrCreatePaint<T>(Brush? brush, float opacity, double rotation, Func<Brush?, float, double, ISymbolCache, T> toPaint) where T : class
         {
-            var key = (pen, opacity, rotation);
+            var key = (pen: brush, opacity, rotation);
             if (!_fillCache.TryGetValue(key, out var paint))
             {
-                paint = toPaint(pen, opacity, rotation, _symbolCache);
+                paint = toPaint(brush, opacity, rotation, _symbolCache);
                 _fillCache[key] = paint;
             }
 

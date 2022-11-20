@@ -5,49 +5,51 @@ namespace Mapsui.Rendering.Skia.Cache
 {
     public class RenderCache : IRenderCache
     {
-        private readonly ISymbolCache _symbolCache;
-        private readonly IVectorCache _vectorCache;
-        private readonly ILabelCache _labelCache = new LabelCache();
-
         public RenderCache()
         {
-            _symbolCache = new SymbolCache();
-            _vectorCache = new VectorCache(_symbolCache);
+            SymbolCache = new SymbolCache();
+            VectorCache = new VectorCache(SymbolCache);
         }
+        
+        public ILabelCache LabelCache { get; set; } = new LabelCache();
+        
+        public ISymbolCache SymbolCache { get; set; }
+
+        public IVectorCache VectorCache { get; set; }
 
         public Size? GetSize(int bitmapId)
         {
-            return _symbolCache.GetSize(bitmapId);
+            return SymbolCache.GetSize(bitmapId);
         }
 
         public IBitmapInfo GetOrCreate(int bitmapID)
         {
-            return _symbolCache.GetOrCreate(bitmapID);
+            return SymbolCache.GetOrCreate(bitmapID);
         }
 
         public T GetOrCreateTypeface<T>(Font font, Func<Font, T> createTypeFace) where T : class
         {
-            return _labelCache.GetOrCreateTypeface(font, createTypeFace);
+            return LabelCache.GetOrCreateTypeface(font, createTypeFace);
         }
 
         public T GetOrCreateLabel<T>(string? text, LabelStyle style, float opacity, Func<LabelStyle, string?, float, ILabelCache, T> createLabelAsBitmap) where T : IBitmapInfo
         {
-            return _labelCache.GetOrCreateLabel(text, style, opacity, createLabelAsBitmap);
+            return LabelCache.GetOrCreateLabel(text, style, opacity, createLabelAsBitmap);
         }
 
         public T GetOrCreatePaint<T>(Pen? pen, float opacity, Func<Pen?, float, T> toPaint) where T : class
         {
-            return _vectorCache.GetOrCreatePaint(pen, opacity, toPaint);
+            return VectorCache.GetOrCreatePaint(pen, opacity, toPaint);
         }
 
-        public T GetOrCreatePaint<T>(Brush? pen, float opacity, double rotation, Func<Brush?, float, double, ISymbolCache, T> toPaint) where T : class
+        public T GetOrCreatePaint<T>(Brush? brush, float opacity, double rotation, Func<Brush?, float, double, ISymbolCache, T> toPaint) where T : class
         {
-            return _vectorCache.GetOrCreatePaint(pen, opacity, rotation, toPaint);
+            return VectorCache.GetOrCreatePaint(brush, opacity, rotation, toPaint);
         }
 
         public TPath GetOrCreatePath<TPath, TGeometry>(IReadOnlyViewport viewport, TGeometry geometry, float lineWidth, Func<TGeometry, IReadOnlyViewport, float, TPath> toPath) where TPath : class where TGeometry : class
         {
-            return _vectorCache.GetOrCreatePath(viewport, geometry, lineWidth, toPath);
+            return VectorCache.GetOrCreatePath(viewport, geometry, lineWidth, toPath);
         }
     }
 }

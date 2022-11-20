@@ -16,6 +16,7 @@ using SkiaSharp;
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Toolchains.InProcess.Emit;
+using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Utilities;
 
 #pragma warning disable IDISP001
@@ -36,6 +37,7 @@ namespace Mapsui.Rendering.Benchmarks
         private static readonly RegressionMapControl rasterizingSkpMap;
         private static readonly RegressionMapControl rasterizingTilingSkpMap;
         private static readonly MapRenderer mapRenderer;
+        private static readonly MapRenderer mapRendererWithoutCache;
         private readonly SKCanvas skCanvas;
         private readonly SKImageInfo imageInfo;
         private readonly SKSurface surface;
@@ -43,6 +45,8 @@ namespace Mapsui.Rendering.Benchmarks
         static RenderToCpuPerformance()
         {
             mapRenderer = new MapRenderer();
+            mapRendererWithoutCache = new MapRenderer();
+            ((RenderCache)mapRendererWithoutCache.RenderCache).VectorCache = new NonCachingVectorCache();
             tilingSkpMap = CreateMapControl(RenderFormat.Skp);            
             tilingPngMap = CreateMapControl(RenderFormat.Png);
             tilingWebpMap = CreateMapControl(RenderFormat.WebP);
@@ -151,6 +155,13 @@ namespace Mapsui.Rendering.Benchmarks
 
             // Create theme using a density from 0 (min) to 400 (max)
             return new GradientTheme("PopDens", 0, 400, min, max) { FillColorBlend = ColorBlend.Rainbow5 };
+        }
+        
+        [Benchmark]
+        public async Task RenderDefaultWithoutCacheAsync()
+        {
+            await map.WaitForLoadingAsync();
+            mapRenderer.Render(skCanvas, map.Viewport, map.Map!.Layers, map.Map!.Widgets, Color.White);
         }
         
         [Benchmark]

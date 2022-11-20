@@ -109,4 +109,24 @@ public class MPoint
     {
         return new MPoint(point1.X * multiplier, point1.Y * multiplier);
     }
+
+    public override bool Equals(object? obj)
+    {
+        if (ReferenceEquals(null, obj))
+        {
+            return false;
+        }
+
+        if (ReferenceEquals(this, obj))
+        {
+            return true;
+        }
+
+        if (obj.GetType() != this.GetType())
+        {
+            return false;
+        }
+
+        return Equals((MPoint)obj);
+    }
 }
