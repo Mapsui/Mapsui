@@ -169,7 +169,7 @@ namespace Mapsui.Rendering.Skia.Tests
         public void RenderPolygon()
         {
             // arrange
-            using var map = PolygonSample.CreateMap();
+            using var map = PolygonTestSample.CreateMap();
             var viewport = map.Extent!.Multiply(1.1).ToViewport(600);
             const string fileName = "polygon.png";
 
@@ -259,7 +259,7 @@ namespace Mapsui.Rendering.Skia.Tests
         public void RenderStackedLabelsLayer()
         {
             // arrange
-            using var map = StackedLabelsSample.CreateMap();
+            using var map = StackedLabelsTestSample.CreateMap();
             var viewport = map.Extent!.Multiply(1.2).ToViewport(600);
             const string fileName = "stacked_labels.png";
 

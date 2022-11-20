@@ -6,7 +6,7 @@
 	-->
 
   <PropertyGroup>        
-	<TargetFrameworks>netstandard2.0;net6.0;net6.0-android31.0</TargetFrameworks>
+	<TargetFrameworks>netstandard2.0;net6.0;net6.0-android31.0;net7.0;net7.0-android33.0</TargetFrameworks>
     <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);uap10.0.19041</TargetFrameworks>
     <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
@@ -25,6 +25,16 @@
     <PackageTags>$(PackageTags) uno</PackageTags>    
     <!--Uno has some differences between targets-->
     <EnablePackageValidation>false</EnablePackageValidation>
+	<SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('ios'))">14.2</SupportedOSPlatformVersion>
+	<SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('maccatalyst'))">14.0</SupportedOSPlatformVersion>
+	<SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('android'))">21.0</SupportedOSPlatformVersion>
+	<!-- Workaround for https://github.com/unoplatform/uno/issues/9723 -->
+    <_AndroidApiLevel Condition="$(TargetFramework.Contains('android'))">31</_AndroidApiLevel>
+	<SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('macos'))">10.14</SupportedOSPlatformVersion>		
+    <_AndroidApiLevel Condition="'$(TargetFramework)' == 'net6.0-android31.0'">31</_AndroidApiLevel>
+	<SupportedOSPlatformVersion Condition="'$(TargetFramework)'=='net6.0-macos'">10.14</SupportedOSPlatformVersion>
+  <TargetPlatformVersion Condition="'$(TargetFramework)'=='uap10.0.19041'">10.0.22621.0</TargetPlatformVersion>
+  <TargetPlatformMinVersion Condition="'$(TargetFramework)'=='uap10.0.19041'">10.0.19041.0</TargetPlatformMinVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -34,7 +44,7 @@
     <PackageReference Include="System.ObjectModel" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)'=='uap10.0.19041'">
+  <ItemGroup Condition="$(TargetFramework.Contains('uap'))">
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" />
   </ItemGroup>
 

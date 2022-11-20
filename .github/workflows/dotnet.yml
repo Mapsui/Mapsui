@@ -41,10 +41,10 @@ jobs:
       with:
         xcode-version: '14.0'
     - name: Setup .NET Core SDK
-      uses: actions/setup-dotnet@v2
+      uses: actions/setup-dotnet@v3
       with:
          dotnet-version: |
-           6.0.402
+           7.0.100
          include-prerelease: false    
     - name: install maui macos android ios maccatalyst wasm-tools
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools
@@ -120,10 +120,10 @@ jobs:
         restore-keys: |
             ${{ runner.os }}-nuget10-
     - name: Setup .NET Core SDK
-      uses: actions/setup-dotnet@v2
+      uses: actions/setup-dotnet@v3
       with:
          dotnet-version: |
-           6.0.402
+           7.0.100
          include-prerelease: false
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.0.6
