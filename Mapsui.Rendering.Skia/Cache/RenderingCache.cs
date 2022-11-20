@@ -5,10 +5,16 @@ namespace Mapsui.Rendering.Skia.Cache
 {
     public class RenderCache : IRenderCache
     {
-        private readonly ISymbolCache _symbolCache = new SymbolCache();
-        private readonly IVectorCache _vectorCache = new VectorCache();
+        private readonly ISymbolCache _symbolCache;
+        private readonly IVectorCache _vectorCache;
         private readonly ILabelCache _labelCache = new LabelCache();
-        
+
+        public RenderCache()
+        {
+            _symbolCache = new SymbolCache();
+            _vectorCache = new VectorCache(_symbolCache);
+        }
+
         public Size? GetSize(int bitmapId)
         {
             return _symbolCache.GetSize(bitmapId);

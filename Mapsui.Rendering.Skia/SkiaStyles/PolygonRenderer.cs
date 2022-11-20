@@ -167,8 +167,8 @@ namespace Mapsui.Rendering.Skia
                 dashArray = pen.DashArray;
                 dashOffset = pen.DashOffset;
             }
-            
-            var paintStroke = new SKPaint { IsAntialias = true })
+
+            var paintStroke = new SKPaint { IsAntialias = true };
             {
                 paintStroke.Style = SKPaintStyle.Stroke;
                 paintStroke.StrokeWidth = lineWidth;
