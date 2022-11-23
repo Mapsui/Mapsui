@@ -1,47 +1,64 @@
-﻿using Mapsui.ArcGIS;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using Mapsui.ArcGIS;
+using Mapsui.ArcGIS.DynamicProvider;
 using Mapsui.ArcGIS.ImageServiceProvider;
+using Mapsui.Cache;
 using Mapsui.Layers;
 using Mapsui.Logging;
-using Mapsui.UI;
+using Mapsui.Styles;
 
 namespace Mapsui.Samples.Common.Desktop
 {
-    public class ArcGISImageServiceSample // disabled as sample because the service can not be reached : ISample
+    public class ArcGISImageServiceSample : ISample
     {
-        public string Name => "4 ArcGIS image";
+        private const string LandsatGlsImageServer = @"https://landsat2.arcgis.com/arcgis/rest/services/LandsatGLS/MS/ImageServer";
+        private ArcGISImageCapabilities? _capabilities;
+
+        public string Name => "9 ArcGIS image";
         public string Category => "Desktop";
+        
+        public static IUrlPersistentCache? DefaultCache { get; set; }
 
-        public void Setup(IMapControl mapControl)
+        public async Task<ILayer> CreateLayerAsync()
         {
-            mapControl.Map = CreateMap();
+            var layer = new ImageLayer("ArcGISImageServiceLayer")
+            {
+                DataSource = await CreateProviderAsync()
+            };
+
+            var arcGisLegend = new ArcGisLegend(DefaultCache);
+            var legend = await arcGisLegend.GetLegendInfoAsync(LandsatGlsImageServer);
+#pragma warning disable CS8602
+            layer.Name = legend.layers[0].layerName ?? "ArcGisImage";
+#pragma warning restore CS8602            
+
+            layer.Style = new RasterStyle();
+            return layer;
         }
 
-        public static ILayer CreateLayer()
+        public async Task<Map> CreateMapAsync()
         {
-            return new ImageLayer("ArcGISImageServiceLayer") { DataSource = CreateProvider() };
-        }
-
-        public static Map CreateMap()
-        {
-            var map = new Map { Home = n => n.NavigateTo(new MPoint(0, 0), 1) };
-            map.Layers.Add(CreateLayer());
+            var map = new Map();
+            map.Home = n => n.NavigateTo(new MPoint(1270000.0, 5880000.0), 10000);
+            map.Layers.Add(await CreateLayerAsync());
             return map;
         }
 
-        private static ArcGISImageServiceProvider CreateProvider()
+        private async Task<ArcGISImageServiceProvider> CreateProviderAsync()
         {
-            //Get Capabilities from service
-            var capabilitiesHelper = new CapabilitiesHelper();
+            // https://landsat2.arcgis.com/arcgis/rest/services/LandsatGLS/MS/ImageServer/exportImage?bbox=-2.00375070672E7%2C-8572530.6034%2C2.0037507842788246E7%2C1.68764993966E7&bboxSR=&size=&imageSR=&time=&format=jpgpng&pixelType=S16&noData=&noDataInterpretation=esriNoDataMatchAny&interpolation=+RSP_BilinearInterpolation&compression=&compressionQuality=&bandIds=&sliceId=&mosaicRule=&renderingRule=&adjustAspectRatio=true&validateExtent=false&lercVersion=1&compressionTolerance=&f=image
+            var capabilitiesHelper = new CapabilitiesHelper(DefaultCache);
             capabilitiesHelper.CapabilitiesReceived += CapabilitiesReceived;
             capabilitiesHelper.CapabilitiesFailed += capabilitiesHelper_CapabilitiesFailed;
-            capabilitiesHelper.GetCapabilities(@"http://imagery.arcgisonline.com/ArcGIS/rest/services/LandsatGLS/FalseColor/ImageServer", CapabilitiesType.ImageServiceCapabilities);
+            capabilitiesHelper.GetCapabilities(LandsatGlsImageServer, CapabilitiesType.ImageServiceCapabilities);
 
-            //Create own
-            return new ArcGISImageServiceProvider(
-                new ArcGISImageCapabilities("http://imagery.arcgisonline.com/ArcGIS/rest/services/LandsatGLS/FalseColor/ImageServer/exportImage", 268211520000, 1262217600000))
+            while (_capabilities == null)
             {
-                CRS = "EPSG:102100"
-            };
+                await Task.Delay(100).ConfigureAwait(false);
+            }
+
+            return new ArcGISImageServiceProvider(_capabilities, persistentCache: DefaultCache);
         }
 
         private static void capabilitiesHelper_CapabilitiesFailed(object? sender, System.EventArgs e)
@@ -49,9 +66,9 @@ namespace Mapsui.Samples.Common.Desktop
             Logger.Log(LogLevel.Warning, "ArcGISImageService capabilities request failed");
         }
 
-        private static void CapabilitiesReceived(object? sender, System.EventArgs e)
+        private void CapabilitiesReceived(object? sender, System.EventArgs e)
         {
-            //todo: make use of: var capabilities = sender as ArcGISImageCapabilities;
+            _capabilities = sender as ArcGISImageCapabilities;
         }
     }
 }
