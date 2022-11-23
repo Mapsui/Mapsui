@@ -45,10 +45,12 @@ namespace Mapsui.UI.iOS
                 _init = true;
                 if (UseGPU)
                 {
+                    _glCanvas?.Dispose();
                     _glCanvas = new SKGLView();
                 }
                 else
                 {
+                    _canvas?.Dispose();
                     _canvas = new SKCanvasView();
                 }
             }

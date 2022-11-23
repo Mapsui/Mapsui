@@ -17,7 +17,7 @@ using Mapsui.Providers;
 
 namespace Mapsui.Layers
 {
-    public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>, IDisposable
+    public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvider>, IDisposable, ILayer
     {
         protected override void Dispose(bool disposing)
         {
@@ -123,6 +123,7 @@ namespace Mapsui.Layers
 
             _fetchInfo = fetchInfo;
 
+            Busy = true;
             if (_isFetching)
             {
                 _needsUpdate = true;
@@ -130,13 +131,14 @@ namespace Mapsui.Layers
             }
 
             _startFetchTimer.Change(FetchDelay, Timeout.Infinite);
-        }
+        }      
 
         private void StartNewFetch(FetchInfo fetchInfo)
         {
             if (_dataSource == null) return;
 
             _isFetching = true;
+            Busy = true;
             _needsUpdate = false;
 
             var fetcher = new FeatureFetcher(new FetchInfo(fetchInfo), _dataSource, DataArrived, DateTime.Now.Ticks);
@@ -181,6 +183,10 @@ namespace Mapsui.Layers
             if (_needsUpdate)
             {
                 if (_fetchInfo != null) StartNewFetch(_fetchInfo);
+            }
+            else
+            {
+                Busy = false;
             }
         }
 

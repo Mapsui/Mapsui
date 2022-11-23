@@ -10,7 +10,9 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Xml;
+using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Nts;
 using Mapsui.Nts.Extensions;
@@ -36,10 +38,11 @@ namespace Mapsui.Providers.Wfs.Utilities
         protected readonly WfsFeatureTypeInfo FeatureTypeInfo;
         protected XmlReader? GeomReader;
         protected Collection<Geometry> Geoms = new();
-        protected readonly IPathNode? LabelNode;
+        protected IPathNode? LabelNode;
         protected AlternativePathNodesCollection? ServiceExceptionNode;
         private string _ts = " ";
-        protected XmlReader XmlReader;
+        protected XmlReader? XmlReader;
+        private bool _initialized;
 
         /// <summary>
         /// Gets or sets the axis order
@@ -54,17 +57,30 @@ namespace Mapsui.Providers.Wfs.Utilities
         protected GeometryFactory(HttpClientUtil httpClientUtil, WfsFeatureTypeInfo featureTypeInfo)
         {
             FeatureTypeInfo = featureTypeInfo;
-            _httpClientUtil = httpClientUtil;
-            XmlReader = CreateReader(httpClientUtil);
+            _httpClientUtil = httpClientUtil;               
+        }
+
+        /// <summary>Init Async </summary>
+        /// <returns></returns>
+        public async Task InitAsync()
+        {
+            if (_initialized)
+                return;
+
+            if (_httpClientUtil == null)
+                return;
+            
+            _initialized = true;
+            XmlReader = await CreateReaderAsync(_httpClientUtil);
 
             try
             {
-                if (featureTypeInfo?.LabelFields != null)
+                if (FeatureTypeInfo?.LabelFields != null)
                 {
-                    var pathNodes = new IPathNode[featureTypeInfo.LabelFields.Count];
+                    var pathNodes = new IPathNode[FeatureTypeInfo.LabelFields.Count];
                     for (var i = 0; i < pathNodes.Length; i++)
                     {
-                        pathNodes[i] = new PathNode(FeatureTypeInfo.FeatureTypeNamespace, featureTypeInfo.LabelFields[i], (NameTable)XmlReader.NameTable);
+                        pathNodes[i] = new PathNode(FeatureTypeInfo.FeatureTypeNamespace, FeatureTypeInfo.LabelFields[i], (NameTable)XmlReader.NameTable);
                     }
                     LabelNode = new AlternativePathNodesCollection(pathNodes);
                 }
@@ -96,7 +112,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// Abstract method - overwritten by derived classes for producing instances
         /// derived from <see cref="Geometry"/>.
         /// </summary>
-        internal abstract Collection<Geometry> CreateGeometries(List<IFeature> features);
+        internal abstract Task<Collection<Geometry>> CreateGeometriesAsync(List<IFeature> features);
 
         /// <summary>
         /// This method parses a coordinates or posList(from 'GetFeature' response). 
@@ -234,17 +250,18 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// This method initializes the XmlReader member.
         /// </summary>
         /// <param name="httpClientUtil">A configured <see cref="HttpClientUtil"/> instance for performing web requests</param>
-        private XmlReader CreateReader(HttpClientUtil httpClientUtil)
+        private async Task<XmlReader> CreateReaderAsync(HttpClientUtil httpClientUtil)
         {
             var xmlReaderSettings = new XmlReaderSettings
             {
                 IgnoreComments = true,
                 IgnoreProcessingInstructions = true,
                 IgnoreWhitespace = true,
-                DtdProcessing = DtdProcessing.Prohibit
+                DtdProcessing = DtdProcessing.Prohibit,
+                Async = true,
             };
             return XmlReader.Create(
-                httpClientUtil.GetDataStream() ?? throw new ArgumentException(nameof(httpClientUtil)), 
+                await httpClientUtil.GetDataStreamAsync() ?? throw new ArgumentException(nameof(httpClientUtil)), 
                 xmlReaderSettings);
         }
 
@@ -254,7 +271,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         private void InitializePathNodes()
         {
             IPathNode coordinatesNode = new PathNode("http://www.opengis.net/gml", "coordinates",
-                                                     (NameTable)XmlReader.NameTable);
+                                                     (NameTable)XmlReader!.NameTable);
             IPathNode posListNode = new PathNode("http://www.opengis.net/gml", "posList",
                                                  (NameTable)XmlReader.NameTable);
             IPathNode ogcServiceExceptionNode = new PathNode("http://www.opengis.net/ogc", "ServiceException",
@@ -333,9 +350,10 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// This method produces instances of type <see cref="Point"/>.
         /// </summary>
         /// <returns>The created geometries</returns>
-        internal override Collection<Geometry> CreateGeometries(List<IFeature> features)
+        internal override async Task<Collection<Geometry>> CreateGeometriesAsync(List<IFeature> features)
         {
-            IPathNode pointNode = new PathNode(Gmlns, "Point", (NameTable)XmlReader.NameTable);
+            await InitAsync();
+            IPathNode pointNode = new PathNode(Gmlns, "Point", (NameTable)XmlReader!.NameTable);
             var labelValues = new Dictionary<string, string>();
             var geomFound = false;
 
@@ -399,9 +417,10 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// This method produces instances of type <see cref="LineString"/>.
         /// </summary>
         /// <returns>The created geometries</returns>
-        internal override Collection<Geometry> CreateGeometries(List<IFeature> features)
+        internal override async Task<Collection<Geometry>> CreateGeometriesAsync(List<IFeature> features)
         {
-            IPathNode lineStringNode = new PathNode(Gmlns, "LineString", (NameTable)XmlReader.NameTable);
+            await InitAsync();
+            IPathNode lineStringNode = new PathNode(Gmlns, "LineString", (NameTable)XmlReader!.NameTable);
             var labelValues = new Dictionary<string, string>();
             var geomFound = false;
 
@@ -467,9 +486,10 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// This method produces instances of type <see cref="Polygon"/>.
         /// </summary>
         /// <returns>The created geometries</returns>
-        internal override Collection<Geometry> CreateGeometries(List<IFeature> features)
+        internal override async Task<Collection<Geometry>> CreateGeometriesAsync(List<IFeature> features)
         {
-            IPathNode polygonNode = new PathNode(Gmlns, "Polygon", (NameTable)XmlReader.NameTable);
+            await InitAsync();
+            IPathNode polygonNode = new PathNode(Gmlns, "Polygon", (NameTable)XmlReader!.NameTable);
             IPathNode outerBoundaryNode = new PathNode(Gmlns, "outerBoundaryIs", (NameTable)XmlReader.NameTable);
             IPathNode exteriorNode = new PathNode(Gmlns, "exterior", (NameTable)XmlReader.NameTable);
             IPathNode outerBoundaryNodeAlt = new AlternativePathNodesCollection(outerBoundaryNode, exteriorNode);
@@ -516,7 +536,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             }
             catch (Exception ex)
             {
-                Logger.Log(LogLevel.Error, "An exception occured while parsing a polygon geometry: " + ex.Message, ex);
+                Logger.Log(LogLevel.Error, "An exception occurred while parsing a polygon geometry: " + ex.Message, ex);
                 throw;
             }
 
@@ -536,7 +556,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// Initializes a new instance of the <see cref="MultiPointFactory"/> class.
         /// </summary>
         /// <param name="httpClientUtil">A configured <see cref="HttpClientUtil"/> instance for performing web requests</param>
-        /// <param name="featureTypeInfo">A <see cref="WfsFeatureTypeInfo"/> instance providing metadata of the featuretype to query</param>
+        /// <param name="featureTypeInfo">A <see cref="WfsFeatureTypeInfo"/> instance providing metadata of the feature type to query</param>
         internal MultiPointFactory(HttpClientUtil httpClientUtil, WfsFeatureTypeInfo featureTypeInfo)
             : base(httpClientUtil, featureTypeInfo)
         {
@@ -546,7 +566,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// Initializes a new instance of the <see cref="MultiPointFactory"/> class.
         /// </summary>
         /// <param name="xmlReader">An XmlReader instance</param>
-        /// <param name="featureTypeInfo">A <see cref="WfsFeatureTypeInfo"/> instance providing metadata of the featuretype to query</param>
+        /// <param name="featureTypeInfo">A <see cref="WfsFeatureTypeInfo"/> instance providing metadata of the feature type to query</param>
         internal MultiPointFactory(XmlReader xmlReader, WfsFeatureTypeInfo featureTypeInfo)
             : base(xmlReader, featureTypeInfo)
         {
@@ -558,9 +578,10 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// This method produces instances of type <see cref="MultiPoint"/>.
         /// </summary>
         /// <returns>The created geometries</returns>
-        internal override Collection<Geometry> CreateGeometries(List<IFeature> features)
+        internal override async Task<Collection<Geometry>> CreateGeometriesAsync(List<IFeature> features)
         {
-            IPathNode multiPointNode = new PathNode(Gmlns, "MultiPoint", (NameTable)XmlReader.NameTable);
+            await InitAsync();
+            IPathNode multiPointNode = new PathNode(Gmlns, "MultiPoint", (NameTable)XmlReader!.NameTable);
             IPathNode pointMemberNode = new PathNode(Gmlns, "pointMember", (NameTable)XmlReader.NameTable);
             var labelValues = new Dictionary<string, string>();
             var geomFound = false;
@@ -574,8 +595,8 @@ namespace Mapsui.Providers.Wfs.Utilities
                         (GeomReader = GetSubReaderOf(FeatureReader, labelValues, multiPointNode, pointMemberNode)) !=
                         null)
                     {
-                        using GeometryFactory geomFactory = new PointFactory(GeomReader, FeatureTypeInfo) { AxisOrder = AxisOrder }; ;
-                        var points = geomFactory.CreateGeometries(features).Cast<Point>();
+                        using GeometryFactory geomFactory = new PointFactory(GeomReader, FeatureTypeInfo) { AxisOrder = AxisOrder };
+                        var points = (await geomFactory.CreateGeometriesAsync(features)).Cast<Point>();
                         Geoms.Add(new MultiPoint(points.ToArray()));
                         geomFound = true;
                     }
@@ -627,9 +648,10 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// This method produces instances of type <see cref="MultiLineString"/>.
         /// </summary>
         /// <returns>The created geometries</returns>
-        internal override Collection<Geometry> CreateGeometries(List<IFeature> features)
+        internal override async Task<Collection<Geometry>> CreateGeometriesAsync(List<IFeature> features)
         {
-            IPathNode multiLineStringNode = new PathNode(Gmlns, "MultiLineString", (NameTable)XmlReader.NameTable);
+            await InitAsync();
+            IPathNode multiLineStringNode = new PathNode(Gmlns, "MultiLineString", (NameTable)XmlReader!.NameTable);
             IPathNode multiCurveNode = new PathNode(Gmlns, "MultiCurve", (NameTable)XmlReader.NameTable);
             IPathNode multiLineStringNodeAlt = new AlternativePathNodesCollection(multiLineStringNode, multiCurveNode);
             IPathNode lineStringMemberNode = new PathNode(Gmlns, "lineStringMember", (NameTable)XmlReader.NameTable);
@@ -650,7 +672,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                     {
                         using GeometryFactory geomFactory = new LineStringFactory(GeomReader, FeatureTypeInfo) { AxisOrder = AxisOrder };
 
-                        var lineStrings = geomFactory.CreateGeometries(features).Cast<LineString>();
+                        var lineStrings = (await geomFactory.CreateGeometriesAsync(features)).Cast<LineString>();
                         Geoms.Add(new MultiLineString(lineStrings.ToArray()));
                         geomFound = true;
                     }
@@ -700,9 +722,10 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// This method produces instances of type <see cref="MultiPolygon"/>.
         /// </summary>
         /// <returns>The created geometries</returns>
-        internal override Collection<Geometry> CreateGeometries(List<IFeature> features)
+        internal override async Task<Collection<Geometry>> CreateGeometriesAsync(List<IFeature> features)
         {
-            IPathNode multiPolygonNode = new PathNode(Gmlns, "MultiPolygon", (NameTable)XmlReader.NameTable);
+            await InitAsync();
+            IPathNode multiPolygonNode = new PathNode(Gmlns, "MultiPolygon", (NameTable)XmlReader!.NameTable);
             IPathNode multiSurfaceNode = new PathNode(Gmlns, "MultiSurface", (NameTable)XmlReader.NameTable);
             IPathNode multiPolygonNodeAlt = new AlternativePathNodesCollection(multiPolygonNode, multiSurfaceNode);
             IPathNode polygonMemberNode = new PathNode(Gmlns, "polygonMember", (NameTable)XmlReader.NameTable);
@@ -722,7 +745,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                          GetSubReaderOf(FeatureReader, labelValues, multiPolygonNodeAlt, polygonMemberNodeAlt)) != null)
                     {
                         using GeometryFactory geomFactory = new PolygonFactory(GeomReader, FeatureTypeInfo) { AxisOrder = AxisOrder };
-                        var polygons = geomFactory.CreateGeometries(features).Cast<Polygon>();
+                        var polygons = (await geomFactory.CreateGeometriesAsync(features)).Cast<Polygon>();
                         Geoms.Add(new MultiPolygon(polygons.ToArray()));
                         geomFound = true;
                     }
@@ -779,15 +802,16 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// appropriate geometries.
         /// </summary>
         /// <returns></returns>
-        internal override Collection<Geometry> CreateGeometries(List<IFeature> features)
-        {
+        internal override async Task<Collection<Geometry>> CreateGeometriesAsync(List<IFeature> features)
+        {            
+            await InitAsync();
             GeometryFactory? geomFactory = null;
 
             var geometryTypeString = string.Empty;
 
             if (_quickGeometries) _multiGeometries = false;
 
-            IPathNode pointNode = new PathNode(Gmlns, "Point", (NameTable)XmlReader.NameTable);
+            IPathNode pointNode = new PathNode(Gmlns, "Point", (NameTable)XmlReader!.NameTable);
             IPathNode lineStringNode = new PathNode(Gmlns, "LineString", (NameTable)XmlReader.NameTable);
             IPathNode polygonNode = new PathNode(Gmlns, "Polygon", (NameTable)XmlReader.NameTable);
             IPathNode multiPointNode = new PathNode(Gmlns, "MultiPoint", (NameTable)XmlReader.NameTable);
@@ -798,7 +822,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             IPathNode multiSurfaceNode = new PathNode(Gmlns, "MultiSurface", (NameTable)XmlReader.NameTable);
             IPathNode multiPolygonNodeAlt = new AlternativePathNodesCollection(multiPolygonNode, multiSurfaceNode);
 
-            while (XmlReader.Read())
+            while (await XmlReader.ReadAsync())
             {
                 if (XmlReader.NodeType == XmlNodeType.Element)
                 {
@@ -850,7 +874,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                     }
                     if (ServiceExceptionNode?.Matches(XmlReader) ?? false)
                     {
-                        var serviceException = XmlReader.ReadInnerXml();
+                        var serviceException = await XmlReader.ReadInnerXmlAsync();
                         Trace.TraceError("A service exception occured: " + serviceException);
                         throw new Exception("A service exception occured: " + serviceException);
                     }
@@ -861,8 +885,9 @@ namespace Mapsui.Providers.Wfs.Utilities
 
             if (geomFactory == null) return Geoms;
 
+            await geomFactory.InitAsync();
             geomFactory.AxisOrder = AxisOrder;
-            geomFactory.CreateGeometries(features);
+            await geomFactory.CreateGeometriesAsync(features);
             return Geoms;
         }
     }
