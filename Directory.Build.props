@@ -28,6 +28,13 @@
 	  <Compile Include="$(MSBuildThisFileDirectory)/InitProperty.cs" />
   </ItemGroup>
 
+  <!-- Workaround for when setting CentralPackageTransitivePinningEnabled to true it includes in .net Standard
+  a reference to Microsoft.NETCore.Platforms 6.0.6 which is then added to the nuget dependencies which won't work
+  Because only Microsoft.NETCore.Platforms 2.0.2 is supported by netstandard2.0 this line fixes this problem.  -->
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="Microsoft.NETCore.Platforms" VersionOverride="2.0.2" PrivateAssets="All" />
+  </ItemGroup>
+
   <ItemGroup>
     <!--Specify Compiler for Mac Builds-->
     <PackageReference Include="Microsoft.Net.Compilers.Toolset">

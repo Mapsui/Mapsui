@@ -2,10 +2,12 @@ using System;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using BruTile;
 using Mapsui.ArcGIS.DynamicProvider;
 using Mapsui.ArcGIS.ImageServiceProvider;
+using Mapsui.Cache;
 using Mapsui.Extensions;
 using Mapsui.Logging;
 using Newtonsoft.Json;
@@ -24,6 +26,7 @@ namespace Mapsui.ArcGIS
         private CapabilitiesType? _capabilitiesType;
         private int _timeOut;
         private string? _url;
+        private readonly IUrlPersistentCache? _persistentCache;
 
         public delegate void StatusEventHandler(object? sender, EventArgs e);
 
@@ -37,12 +40,13 @@ namespace Mapsui.ArcGIS
         /// </summary>
         public event StatusEventHandler? CapabilitiesFailed;
 
-
         /// <summary>
         /// Helper class for getting capabilities of an ArcGIS service + extras
         /// </summary>
-        public CapabilitiesHelper()
+        /// <param name="persistentCache"></param>
+        public CapabilitiesHelper(IUrlPersistentCache? persistentCache)
         {
+            _persistentCache = persistentCache;
             TimeOut = 10000;
         }
 
@@ -89,7 +93,7 @@ namespace Mapsui.ArcGIS
 
         private void ExecuteRequest(string url, CapabilitiesType capabilitiesType, ICredentials? credentials = null, string? token = null)
         {
-            Catch.TaskRun(async () => {
+            Task.Run(async () => {
                 _capabilitiesType = capabilitiesType;
                 _url = RemoveTrailingSlash(url);
 
@@ -97,19 +101,35 @@ namespace Mapsui.ArcGIS
                 if (!string.IsNullOrEmpty(token))
                     requestUri = $"{requestUri}&token={token}";
 
-                var handler = new HttpClientHandler { Credentials = credentials ?? CredentialCache.DefaultCredentials };
-                using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
-                using var response = await client.GetAsync(requestUri);
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    OnCapabilitiesFailed(new EventArgs());
-                    return;
-                }
-
                 try
                 {
-                    var dataStream = await response.Content.ReadAsStringAsync();
+                    var data = _persistentCache?.Find(requestUri);
+                    string? dataStream;
+
+                    if (data == null)
+                    {
+                        var handler = new HttpClientHandler
+                            { Credentials = credentials ?? CredentialCache.DefaultCredentials };
+                        using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
+                        using var response = await client.GetAsync(requestUri);
+
+                        if (!response.IsSuccessStatusCode)
+                        {
+                            OnCapabilitiesFailed(new EventArgs());
+                            return;
+                        }
+
+                        dataStream = await response.Content.ReadAsStringAsync();
+                        if (_persistentCache != null)
+                        {
+                            data = Encoding.UTF8.GetBytes(dataStream);
+                            _persistentCache.Add(requestUri, data);
+                        }
+                    }
+                    else
+                    {
+                        dataStream = Encoding.UTF8.GetString(data);
+                    }
 
                     if (_capabilitiesType == CapabilitiesType.DynamicServiceCapabilities)
                         _arcGisCapabilities = JsonConvert.DeserializeObject<ArcGISDynamicCapabilities>(dataStream);
@@ -147,24 +167,6 @@ namespace Mapsui.ArcGIS
                 url = url.Remove(url.Length - 1);
 
             return url;
-        }
-
-
-        private static Stream CopyAndClose(Stream inputStream)
-        {
-            const int readSize = 256;
-            var buffer = new byte[readSize];
-            var ms = new MemoryStream();
-
-            var count = inputStream.Read(buffer, 0, readSize);
-            while (count > 0)
-            {
-                ms.Write(buffer, 0, count);
-                count = inputStream.Read(buffer, 0, readSize);
-            }
-            ms.Position = 0;
-            inputStream.Dispose();
-            return ms;
         }
 
         protected virtual void OnFinished(EventArgs e)

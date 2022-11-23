@@ -1,8 +1,12 @@
 using System;
 using System.IO;
 using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 using BruTile.Extensions;
+using Mapsui.Cache;
 using Mapsui.Logging;
+using Mapsui.Utilities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -17,14 +21,15 @@ namespace Mapsui.ArcGIS.DynamicProvider
     public class ArcGisLegend
     {
         private int _timeOut;
-        private HttpWebRequest? _webRequest;
         private ArcGISLegendResponse? _legendResponse;
+        private readonly IUrlPersistentCache? _urlPersistentCache;
 
         public event ArcGISLegendEventHandler? LegendReceived;
         public event ArcGISLegendEventHandler? LegendFailed;
 
-        public ArcGisLegend()
+        public ArcGisLegend(IUrlPersistentCache? urlPersistentCache = null)
         {
+            _urlPersistentCache = urlPersistentCache;
             TimeOut = 5000;
         }
 
@@ -44,55 +49,75 @@ namespace Mapsui.ArcGIS.DynamicProvider
         /// <param name="credentials">Credentials</param>
         public void GetLegendInfoRequest(string serviceUrl, ICredentials? credentials = null)
         {
-            _webRequest = CreateRequest(serviceUrl, credentials);
-            _webRequest.BeginGetResponse(FinishWebRequest, null);
+#pragma warning disable VSTHRD110 // observe the awaitable
+            Task.Run(async () =>
+#pragma warning restore VSTHRD110
+            {
+                try
+                {
+                    var result = await GetLegendInfoAsync(serviceUrl, credentials);
+                    if (result != null)
+                        OnLegendReceived(result);
+                    else
+                        OnLegendFailed();
+                }
+                catch (Exception e)
+                {
+                    Logger.Log(LogLevel.Error, e.Message, e);
+                    OnLegendFailed();
+                }
+            });
         }
 
-        public ArcGISLegendResponse? GetLegendInfo(string serviceUrl, ICredentials? credentials = null)
+        public async Task<ArcGISLegendResponse?> GetLegendInfoAsync(string serviceUrl, ICredentials? credentials = null)
         {
-            _webRequest = CreateRequest(serviceUrl, credentials);
-            using var response = _webRequest.GetSyncResponse(_timeOut);
-            _legendResponse = GetLegendResponseFromWebresponse(response);
+            var uri = CreateRequestUrl(serviceUrl);
+            var data = _urlPersistentCache?.Find(uri);
+            Stream stream;
+            if (data == null)
+            {
+                using var httpClient = CreateRequest(credentials);
+                using var response = await httpClient.GetAsync(uri);
+                stream = await response.Content.ReadAsStreamAsync();
+                data = StreamHelper.ReadFully(stream);
+                _urlPersistentCache?.Add(uri, data);
+#if NET6_0_OR_GREATER                    
+                await stream.DisposeAsync();
+#else
+                stream.Dispose();
+#endif
+            }
+
+            stream = new MemoryStream(data);
+            _legendResponse = GetLegendResponseFromWebResponse(stream);
             return _legendResponse;
         }
 
-        private HttpWebRequest CreateRequest(string serviceUrl, ICredentials? credentials)
+        private HttpClient CreateRequest(ICredentials? credentials)
+        {
+            HttpClientHandler httpClientHandler = new HttpClientHandler
+            {
+                UseDefaultCredentials = credentials == null,
+            };
+
+            if (credentials != null) httpClientHandler.Credentials = credentials;
+
+            var httpClient = new HttpClient(httpClientHandler)
+            {
+                Timeout = TimeSpan.FromMilliseconds(_timeOut),
+            };
+            return httpClient;
+        }
+
+        private static string CreateRequestUrl(string serviceUrl)
         {
             var trailing = serviceUrl.Contains("?") ? "&" : "?";
             var requestUrl = $"{serviceUrl}/legend{trailing}f=json";
-            _webRequest = (HttpWebRequest)WebRequest.Create(requestUrl);
-            if (credentials == null)
-                _webRequest.UseDefaultCredentials = true;
-            else
-                _webRequest.Credentials = credentials;
-
-            return _webRequest;
+            return requestUrl;
         }
 
-        private void FinishWebRequest(IAsyncResult result)
+        private static ArcGISLegendResponse? GetLegendResponseFromWebResponse(Stream? dataStream)
         {
-            try
-            {
-                using var response = _webRequest.GetSyncResponse(_timeOut);
-                _legendResponse = GetLegendResponseFromWebresponse(response);
-                using var _ = _webRequest?.EndGetResponse(result);
-
-                if (_legendResponse == null)
-                    OnLegendFailed();
-                else
-                    OnLegendReceived(_legendResponse);
-            }
-            catch (WebException ex)
-            {
-                Logger.Log(LogLevel.Warning, ex.Message, ex);
-                OnLegendFailed();
-            }
-        }
-
-        private static ArcGISLegendResponse? GetLegendResponseFromWebresponse(WebResponse? webResponse)
-        {
-            using var dataStream = webResponse?.GetResponseStream();
-
             if (dataStream != null)
             {
                 using var sReader = new StreamReader(dataStream);
@@ -103,7 +128,9 @@ namespace Mapsui.ArcGIS.DynamicProvider
                 using var jTokenReader = new JTokenReader(jToken);
                 var legendResponse = serializer.Deserialize(jTokenReader, typeof(ArcGISLegendResponse)) as ArcGISLegendResponse;
 
+#pragma warning disable IDISP007 // don't dispose injected
                 dataStream.Dispose();
+#pragma warning restore IDISP007                
 
                 return legendResponse;
             }

@@ -1,4 +1,5 @@
-﻿using Mapsui.Providers.Wfs.Utilities;
+﻿using System.Threading.Tasks;
+using Mapsui.Providers.Wfs.Utilities;
 using NUnit.Framework;
 
 namespace Mapsui.Tests.Providers.Wfs
@@ -7,7 +8,7 @@ namespace Mapsui.Tests.Providers.Wfs
     public class HttpClientUtilTests
     {
         [Test]
-        public void CloseDoesNotThrowException()
+        public async Task CloseDoesNotThrowException()
         {
             // Arrange
             using var httpClientUtil = new HttpClientUtil
@@ -16,14 +17,14 @@ namespace Mapsui.Tests.Providers.Wfs
             };
 
             // Act
-            using var stream = httpClientUtil.GetDataStream();
+            await using var stream = await httpClientUtil.GetDataStreamAsync();
 
             // Assert
             Assert.DoesNotThrow(httpClientUtil.Close);
         }
 
         [Test]
-        public void TwoCloseDoesNotThrowException()
+        public async Task TwoCloseDoesNotThrowException()
         {
             // Arrange
             using var httpClientUtil = new HttpClientUtil
@@ -32,7 +33,7 @@ namespace Mapsui.Tests.Providers.Wfs
             };
 
             // Act
-            using var stream = httpClientUtil.GetDataStream();
+            await using var stream = await httpClientUtil.GetDataStreamAsync();
             httpClientUtil.Close();
 
             // Assert
