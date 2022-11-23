@@ -49,6 +49,7 @@ public class MapRegressionTests
         // Url Cache
         WmsSample.DefaultCache ??= File.ReadFromCacheFolder("WmsSample");
         WfsSample.DefaultCache ??= File.ReadFromCacheFolder("WfsSample");
+        ArcGISImageServiceSample.DefaultCache ??= File.ReadFromCacheFolder("ArcGisImageServiceSample");
     }
 
     public static object[] RegressionSamples => _regressionSamples ??= AllSamples.GetSamples().Where(f => ExcludedSamples.All(e => e.GetType() != f.GetType())).OrderBy(f => f.GetType().FullName).ToArray();

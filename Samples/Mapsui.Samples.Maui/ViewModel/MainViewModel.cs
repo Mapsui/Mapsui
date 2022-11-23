@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Mapsui.Logging;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.UI;
 using Mapsui.UI.Maui;
+
+#pragma warning disable IDISP008 // Don't assign member with injected and created disposables.
 
 namespace Mapsui.Samples.Maui.ViewModel
 {
@@ -44,7 +48,7 @@ namespace Mapsui.Samples.Maui.ViewModel
         public ObservableCollection<string> Categories { get; } = new();
 
         // MapControl is needed in the samples. Mapsui's design should change so this is not needed anymore.
-        public MapControl MapControl { get; set; }
+        public MapControl? MapControl { get; set; }
 
         public void Picker_SelectedIndexChanged(object? sender, EventArgs e)
         {
@@ -61,15 +65,23 @@ namespace Mapsui.Samples.Maui.ViewModel
             }
         }
 
+        [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
         public async void CollectionView_SelectionChanged(object? sender, SelectionChangedEventArgs e)
         {
-            if (SelectedSample is null)
-                return;
+            try
+            {
+                if (SelectedSample is null)
+                    return;
 
-            if (SelectedSample is ISample sample)
-                Map = await sample.CreateMapAsync();
-            else if (SelectedSample is IMapControlSample mapControlSample)
-                mapControlSample.Setup(MapControl);
+                if (SelectedSample is ISample sample)
+                    Map = await sample.CreateMapAsync();
+                else if (SelectedSample is IMapControlSample mapControlSample && MapControl != null)
+                    mapControlSample.Setup(MapControl);
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(LogLevel.Error, ex.Message, ex);
+            }
         }
     }
 }

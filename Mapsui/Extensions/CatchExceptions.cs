@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Mapsui.Logging;
 
@@ -18,6 +19,7 @@ namespace Mapsui.Extensions
             }
         }
 
+        [SuppressMessage("Usage", "VSTHRD110:Observe result of async calls")]
         public static void TaskRun(Action func)
         {
             Task.Run(() =>
@@ -33,6 +35,7 @@ namespace Mapsui.Extensions
             });
         }
 
+        [SuppressMessage("Usage", "VSTHRD110:Observe result of async calls")]
         public static void TaskRun(Func<Task> func)
         {
             Task.Run(async () =>

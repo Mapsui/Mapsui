@@ -270,7 +270,7 @@ namespace Mapsui.UI.Uwp
 
         public void OpenBrowser(string url)
         {
-            Catch.TaskRun(() => Launcher.LaunchUriAsync(new Uri(url)));
+            Catch.TaskRun(async () => await Launcher.LaunchUriAsync(new Uri(url)));
         }
 
         private float ViewportWidth => (float)ActualWidth;
@@ -279,12 +279,13 @@ namespace Mapsui.UI.Uwp
         private float GetPixelDensity()
         {
 #if __WINUI__
-            return (float)XamlRoot.RasterizationScale;
+            return (float)(XamlRoot?.RasterizationScale ?? 1f);
 #else
             return (float)DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
 #endif
         }
 
+#pragma warning disable IDISP023 // Don't use reference types in finalizer context
 #if __ANDROID__ 
         protected override void Dispose(bool disposing)
 #elif __IOS__ || __MACOS__
@@ -301,7 +302,6 @@ namespace Mapsui.UI.Uwp
 #endif
                 _map?.Dispose();
             }
-
             CommonDispose(disposing);
 
 #if __ANDROID__ || __IOS__ || __MACOS__
