@@ -5,10 +5,10 @@ namespace Mapsui.Rendering.Skia.Cache
 {
     public class RenderCache : IRenderCache
     {
-        public RenderCache()
+        public RenderCache(int capacity = 10000)
         {
             SymbolCache = new SymbolCache();
-            VectorCache = new VectorCache(SymbolCache);
+            VectorCache = new VectorCache(SymbolCache, capacity);
         }
         
         public ILabelCache LabelCache { get; set; } = new LabelCache();
