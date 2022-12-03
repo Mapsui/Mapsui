@@ -186,21 +186,33 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
         if (bytes == null)
             return (null, NoCompression);
 
-        using var outputStream = new MemoryStream();
+        try
+        {
+            using var outputStream = new MemoryStream();
 #if NETSTANDARD2_0
         using (var compressStream = new BrotliStream(outputStream, CompressionMode.Compress))
 #else
-        using (var compressStream = new BrotliStream(outputStream, CompressionLevel.Optimal))
+            using (var compressStream = new BrotliStream(outputStream, CompressionLevel.Fastest))
 #endif
-        {
-            compressStream.Write(bytes, 0, bytes.Length);
+            {
+                compressStream.Write(bytes, 0, bytes.Length);
+            }
+
+            var result = outputStream.ToArray();
+
+            if (result.Length < bytes.Length)
+            {
+                return (result, BrotliCompression);
+            }
         }
-
-        var result = outputStream.ToArray();
-
-        if (result.Length < bytes.Length)
+        catch (PlatformNotSupportedException)
         {
-            return (result, BrotliCompression);
+            // Ignore error and save uncompressed
+        }
+        catch (Exception ex)
+        {
+            // in wasm this seems to throw an exception
+            Logger.Log(LogLevel.Error, ex.Message);
         }
 
         return (bytes, NoCompression);
