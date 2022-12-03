@@ -74,6 +74,9 @@ namespace Mapsui.Styles
 
         protected bool Equals(Pen? pen)
         {
+            if (pen == null)
+                return false;
+            
             return Width.Equals(pen.Width) && Color.Equals(pen.Color) && PenStyle == pen.PenStyle && Equals(DashArray, pen.DashArray) && DashOffset.Equals(pen.DashOffset) && PenStrokeCap == pen.PenStrokeCap && StrokeJoin == pen.StrokeJoin && StrokeMiterLimit.Equals(pen.StrokeMiterLimit);
         }
 

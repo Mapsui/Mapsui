@@ -34,6 +34,9 @@ public class MPoint
 
     protected bool Equals(MPoint? point)
     {
+        if (point == null)
+            return false;
+        
         return X.Equals(point.X) && Y.Equals(point.Y);
     }
 

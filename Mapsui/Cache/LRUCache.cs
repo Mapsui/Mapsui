@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Mapsui.Cache;
 
@@ -7,19 +8,19 @@ public class LruCache<TKey, TValue>
     where TKey : notnull
 {
     private readonly int _capacity;
-    private readonly Dictionary<TKey, TValue?> _valueCache;
+    private readonly Dictionary<TKey, TValue> _valueCache;
     private readonly Dictionary<TKey, LinkedListNode<TKey>> _nodeCache;
     private readonly LinkedList<TKey> _orderList;
 
     public LruCache(int capacity)
     {
         _capacity = capacity;
-        _valueCache = new Dictionary<TKey, TValue?>(capacity);
+        _valueCache = new Dictionary<TKey, TValue>(capacity);
         _nodeCache = new Dictionary<TKey, LinkedListNode<TKey>>(capacity);
         _orderList = new LinkedList<TKey>();
     }
 
-    public void Put(TKey key, TValue? value)
+    public void Put(TKey key, TValue value)
     {
         if (_valueCache.ContainsKey(key)) // Key already exists.
         {
@@ -47,7 +48,7 @@ public class LruCache<TKey, TValue>
         return _valueCache[key];
     }
     
-    public bool TryGetValue(TKey key, out TValue? value)
+    public bool TryGetValue(TKey key, [MaybeNullWhen(false)] out TValue value)
     {
         if (!_valueCache.ContainsKey(key))
         {
@@ -55,17 +56,18 @@ public class LruCache<TKey, TValue>
             return false;
         }
 
-        Promote(key);            
+        Promote(key);
         return _valueCache.TryGetValue(key, out value);
     }
-    
-    public TValue? this[TKey key]
+
+    [MaybeNull]
+    public TValue this[TKey key]
     {
         get => Get(key);
         set => Put(key, value);
     }
 
-    private void AddFirst(TKey key, TValue? value)
+    private void AddFirst(TKey key, TValue value)
     {
         var node = new LinkedListNode<TKey>(key);
         _valueCache[key] = value;
@@ -82,7 +84,10 @@ public class LruCache<TKey, TValue>
     
     private void RemoveLast()
     {
-        LinkedListNode<TKey> lastNode = _orderList.Last;
+        LinkedListNode<TKey>? lastNode = _orderList.Last;
+        if (lastNode == null)
+            return;
+        
         _valueCache.TryGetValue(lastNode.Value, out var value);
         _valueCache.Remove(lastNode.Value);
         _nodeCache.Remove(lastNode.Value);

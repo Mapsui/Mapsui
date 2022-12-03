@@ -14,23 +14,23 @@ namespace Mapsui.Rendering.Skia
         private const float Scale = 10.0f;
 
         public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, VectorStyle vectorStyle, IFeature feature,
-            Polygon polygon, float opacity, ISymbolCache? symbolCache = null, IVectorCache vectorCache = null)
+            Polygon polygon, float opacity, ISymbolCache? symbolCache = null, IVectorCache? vectorCache = null)
         {
             
             
-            float lineWidth = Convert.ToSingle(vectorStyle?.Outline.Width ?? 1);
+            float lineWidth = Convert.ToSingle(vectorStyle?.Outline?.Width ?? 1);
             SKPaint paint;
             SKPaint paintFill;
             SKPath path;
             if (vectorCache == null)
             {
-                paint = CreateSkPaint(vectorStyle.Outline, opacity);
+                paint = CreateSkPaint(vectorStyle?.Outline, opacity);
                 paintFill = CreateSkPaint(vectorStyle.Fill, opacity, viewport.Rotation, symbolCache);
                 path =  polygon.ToSkiaPath(viewport, canvas.LocalClipBounds, lineWidth);
             }
             else
             {
-                paint = vectorCache.GetOrCreatePaint(vectorStyle.Outline, opacity, CreateSkPaint);
+                paint = vectorCache.GetOrCreatePaint(vectorStyle?.Outline, opacity, CreateSkPaint);
                 paintFill = vectorCache.GetOrCreatePaint(vectorStyle.Fill, opacity, viewport.Rotation, CreateSkPaint);
                 path = vectorCache.GetOrCreatePath(viewport, polygon, lineWidth, (geometry, viewport, lineWidth) => geometry.ToSkiaPath(viewport, viewport.ToSkRect(), lineWidth));    
             }
@@ -62,7 +62,6 @@ namespace Mapsui.Rendering.Skia
 
         private static SKPaint CreateSkPaint(Brush? brush, float opacity, double rotation, ISymbolCache? symbolCache)
         {
-            float lineWidth = 1;
             var fillColor = Color.Gray; // default
 
             var paintFill = new SKPaint { IsAntialias = true };
