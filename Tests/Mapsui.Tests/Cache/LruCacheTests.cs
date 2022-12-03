@@ -1,4 +1,5 @@
-﻿using Mapsui.Cache;
+﻿using System;
+using Mapsui.Cache;
 using NUnit.Framework;
 
 namespace Mapsui.Tests.Cache;
@@ -20,5 +21,34 @@ public class LruCacheUnitTest
         Assert.IsNull(cache.Get(1));
         Assert.AreEqual("Three", cache.Get(3));
         Assert.AreEqual("Four", cache.Get(4));
+    }
+
+    [Test]
+    public void LruCacheDoesDispose()
+    {
+        var cache = new LruCache<int, TestDisposable>(2);
+        var item1 = new TestDisposable();
+        var item2 = new TestDisposable();
+        var item3 = new TestDisposable();
+        
+        // add 3 items
+        cache.Put(1, item1);
+        cache.Put(2, item2);
+        cache.Put(3, item3);
+        
+        // Item 1 should be disposed
+        Assert.IsTrue(item1.Disposed);
+    }
+}
+
+public class TestDisposable : IDisposable
+{
+    private bool _disposed;
+
+    public bool Disposed => _disposed;
+
+    public void Dispose()
+    {
+        _disposed = true;
     }
 }

@@ -10,7 +10,7 @@ namespace Mapsui.Rendering.Skia.Cache
     {
         private readonly Dictionary<(Pen? Pen, float Opacity), object> _paintCache = new();
         private readonly Dictionary<(Brush? Brush, float Opacity, double rotation), object> _fillCache = new();
-        private readonly LruCache<(MRect Rect, double Resolution, object Geometry, float lineWidth), object> _pathCache = new();
+        private readonly LruCache<(MRect Rect, double Resolution, object Geometry, float lineWidth), object> _pathCache;
         private readonly ISymbolCache _symbolCache;
 
         public VectorCache(ISymbolCache? symbolCache, int capacity)
