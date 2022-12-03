@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Rendering.Skia.Extensions;
@@ -10,6 +11,7 @@ namespace Mapsui.Rendering.Skia
 {
     public static class LineStringRenderer
     {
+        [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
         public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, VectorStyle? vectorStyle,
             LineString lineString, float opacity, IVectorCache? vectorCache = null)
         {
