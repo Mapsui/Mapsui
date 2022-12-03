@@ -26,19 +26,19 @@ namespace Mapsui.Samples.Common.Maps.Data
         private const string nsPrefix = "p_bz-AdministrativeUnits";
         private const string labelField = "NAME_DE";
 
-        public Task<Map> CreateMapAsync()
+        public async Task<Map> CreateMapAsync()
         {
             try
             {
                 var map = new Map() { CRS = crs };
-                var provider = CreateWfsProvider(wfsUri);
+                var provider = await CreateWfsProviderAsync(wfsUri);
                 map.Layers.Add(OpenStreetMap.CreateTileLayer());
                 map.Layers.Add(CreateWfsLayer(provider));
                 map.Layers.Add(CreateLabelLayer(provider));
 
                 map.Home = n => n.NavigateTo(new MPoint(1270000.0, 5880000.0), map.Resolutions[9]);
 
-                return Task.FromResult(map);
+                return map;
 
             }
             catch (WebException ex)
@@ -58,7 +58,7 @@ namespace Mapsui.Samples.Common.Maps.Data
             };
         }
 
-        private static WFSProvider CreateWfsProvider(string getCapabilitiesUri)
+        private static async Task<WFSProvider> CreateWfsProviderAsync(string getCapabilitiesUri)
         {
             var provider = new WFSProvider(
                 getCapabilitiesUri, 
@@ -72,6 +72,7 @@ namespace Mapsui.Samples.Common.Maps.Data
                 CRS = crs,
                 Labels = new List<string> { labelField }
             };
+            await provider.InitAsync();
             return provider;
         }
 

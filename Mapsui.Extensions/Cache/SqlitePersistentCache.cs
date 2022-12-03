@@ -148,13 +148,13 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
         var compress = Compress(tile);
 
         using var connection = CreateConnection();
-        var data = new UrlCache() {
+        var data = new UrlCache {
             Url = url,
             Created = DateTime.Now,
             Data = compress.data,
             Compression = compress.Compression,
         };
-        connection.Insert(data);
+        connection.InsertOrReplace(data);
     }
 
     public void Remove(string url)

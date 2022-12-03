@@ -19,13 +19,15 @@ namespace Mapsui.Samples.Common.Desktop
 {
     public class ShapefileSkpTileSample : IMapControlSample
     {
+
+        public string Name => "8 Shapefile Skia Tiling";
+
         static ShapefileSkpTileSample()
         {
             ShapeFilesDeployer.CopyEmbeddedResourceToFile("countries.shp");
             ShapeFilesDeployer.CopyEmbeddedResourceToFile("cities.shp");
         }
         
-        public string Name => "7 Shapefile Skia Tiling";
         public string Category => "Desktop";
 
         public void Setup(IMapControl mapControl)

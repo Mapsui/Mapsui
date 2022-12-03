@@ -15,8 +15,12 @@ namespace Mapsui.Rendering.Skia.Extensions
             }
 
             _disposedProperty ??= typeof(SKNativeObject).GetProperty("IsDisposed", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+            if (_disposedProperty?.GetValue(skNativeObject) is bool disposed)
+            {
+                return disposed;
+            }
 
-            return (bool)_disposedProperty!.GetValue(skNativeObject)!;
+            return false;
         }
     }
 }

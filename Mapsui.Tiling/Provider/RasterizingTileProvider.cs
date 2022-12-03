@@ -77,7 +77,9 @@ public class RasterizingTileProvider : ITileSource
                 (Viewport viewPort, ILayer renderLayer) = await CreateRenderLayerAsync(tileInfo, renderer);
                 try
                 {
+#pragma warning disable IDISP001 // disposable created
                     stream = renderer.RenderToBitmapStream(viewPort, new[] { renderLayer }, pixelDensity: _pixelDensity, renderFormat: _renderFormat);
+#pragma warning restore IDISP001                    
                 }
                 finally
                 {
@@ -93,7 +95,7 @@ public class RasterizingTileProvider : ITileSource
 #if NET6_0_OR_GREATER
                 if (stream != null)
                     await stream.DisposeAsync();
-#else                
+#else
                 stream?.Dispose();
 #endif
             }

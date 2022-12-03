@@ -237,9 +237,9 @@ namespace Mapsui.Rendering.Skia
             using (var canvas = rec.BeginRecording(new SKRect(0, 0, width, height)))
             {
                 // Draw text to canvas
-                textBlockTitle.Paint(canvas, new TextPaintOptions() { IsAntialias = true });
+                textBlockTitle.Paint(canvas, new TextPaintOptions() { Edging = SKFontEdging.Antialias });
                 if (callout.Type == CalloutType.Detail)
-                    textBlockSubtitle.Paint(canvas, new SKPoint(0, textBlockTitle.MeasuredHeight + (float)callout.Spacing), new TextPaintOptions() { IsAntialias = true });
+                    textBlockSubtitle.Paint(canvas, new SKPoint(0, textBlockTitle.MeasuredHeight + (float)callout.Spacing), new TextPaintOptions() { Edging = SKFontEdging.Antialias });
                 // Create a SKPicture from canvas
                 var picture = rec.EndRecording();
                 if (callout.InternalContent >= 0)
