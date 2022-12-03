@@ -21,8 +21,9 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
     private readonly TimeSpan _cacheExpireTime;
     private const string NoCompression = "no";
     private const string BrotliCompression = "br";
+    private bool _compress;
 
-    public SqlitePersistentCache(string name, TimeSpan? cacheExpireTime = null, string? folder = null)
+    public SqlitePersistentCache(string name, TimeSpan? cacheExpireTime = null, string? folder = null, bool compress = true)
     {
         folder ??= Path.GetTempPath();
         if (!Directory.Exists(folder))
@@ -32,6 +33,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
 
         _file = Path.Combine(folder, name + ".sqlite");
         _cacheExpireTime = cacheExpireTime ?? TimeSpan.Zero;
+        _compress = compress;
         InitDb();
     }
 
@@ -181,38 +183,43 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
     }
 
     [return: NotNullIfNotNull("bytes")]
-    private static (byte[]? data, string Compression) Compress(byte[]? bytes)
+    private (byte[]? data, string Compression) Compress(byte[]? bytes)
     {
         if (bytes == null)
             return (null, NoCompression);
 
-        try
+        if (_compress)
         {
-            using var outputStream = new MemoryStream();
+            try
+            {
+                using var outputStream = new MemoryStream();
 #if NETSTANDARD2_0
         using (var compressStream = new BrotliStream(outputStream, CompressionMode.Compress))
 #else
-            using (var compressStream = new BrotliStream(outputStream, CompressionLevel.Fastest))
+                using (var compressStream = new BrotliStream(outputStream, CompressionLevel.Fastest))
 #endif
-            {
-                compressStream.Write(bytes, 0, bytes.Length);
-            }
+                {
+                    compressStream.Write(bytes, 0, bytes.Length);
+                }
 
-            var result = outputStream.ToArray();
+                var result = outputStream.ToArray();
 
-            if (result.Length < bytes.Length)
-            {
-                return (result, BrotliCompression);
+                if (result.Length < bytes.Length)
+                {
+                    return (result, BrotliCompression);
+                }
             }
-        }
-        catch (PlatformNotSupportedException)
-        {
-            // Ignore error and save uncompressed
-        }
-        catch (Exception ex)
-        {
-            // in wasm this seems to throw an exception
-            Logger.Log(LogLevel.Error, ex.Message);
+            catch (PlatformNotSupportedException)
+            {
+                // Ignore error and save uncompressed
+                // and disable compression
+                _compress = false;
+            }
+            catch (Exception ex)
+            {
+                // in wasm this seems to throw an exception
+                Logger.Log(LogLevel.Error, ex.Message);
+            }
         }
 
         return (bytes, NoCompression);
