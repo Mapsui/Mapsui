@@ -1,4 +1,5 @@
-﻿using BruTile;
+﻿using System.IO;
+using BruTile;
 using BruTile.Cache;
 using BruTile.FileSystem;
 using BruTile.Predefined;
@@ -60,7 +61,8 @@ namespace Mapsui.Samples.Common.Desktop
 
         public static ITileProvider GetTileProvider()
         {
-            return new FileTileProvider(new FileCache(MapTilesDeployer.MapTileLocation  + "\\TrueMarble", "png"));
+            var trueMarblePath = Path.Combine(MapTilesDeployer.MapTileLocation, "TrueMarble");
+            return new FileTileProvider(new FileCache(trueMarblePath, "png"));
         }
 
         public static ITileSchema GetTileSchema()

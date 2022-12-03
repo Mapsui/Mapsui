@@ -30,9 +30,10 @@ namespace Mapsui.Samples.Common.Desktop
         public static Map CreateMap()
         {
             var map = new Map();
-
-            var countrySource = new ShapeFile(ShapeFilesDeployer.ShapeFilesLocation + "\\countries.shp", true);
-            var citySource = new ShapeFile(ShapeFilesDeployer.ShapeFilesLocation +"\\cities.shp", true);
+            var countriesPath = Path.Combine(ShapeFilesDeployer.ShapeFilesLocation, "countries.shp");
+            var countrySource = new ShapeFile(countriesPath, true);
+            var citiesPath = Path.Combine(ShapeFilesDeployer.ShapeFilesLocation, "cities.shp");
+            var citySource = new ShapeFile(citiesPath, true);
 
             map.Layers.Add(new RasterizingLayer(CreateCountryLayer(countrySource)));
             map.Layers.Add(new RasterizingLayer(CreateCityLayer(citySource)));

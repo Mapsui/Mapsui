@@ -19,7 +19,8 @@ namespace Mapsui.Samples.Common.Extensions
 
             using var image = assembly.GetManifestResourceStream(embeddedResourcesPath + resourceFile);
             if (image == null) throw new ArgumentException("EmbeddedResource not found");
-            using var dest = File.Create(Path.Combine(folder, resourceFile));
+            var destPath = Path.Combine(folder, resourceFile);
+            using var dest = File.Create(destPath);
             image.CopyTo(dest);
         }
     }

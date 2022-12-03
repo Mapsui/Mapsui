@@ -39,7 +39,8 @@ namespace Mapsui.Samples.Common.Desktop
         {
             var map = new Map();
 
-            var countrySource = new ShapeFile(ShapeFilesDeployer.ShapeFilesLocation + "\\countries.shp", true);
+            var countriesPath = Path.Combine(ShapeFilesDeployer.ShapeFilesLocation, "countries.shp");
+            var countrySource = new ShapeFile(countriesPath, true);
             countrySource.CRS = "EPSG:4326";
             var projectedCountrySource = new ProjectingProvider(countrySource)
             {

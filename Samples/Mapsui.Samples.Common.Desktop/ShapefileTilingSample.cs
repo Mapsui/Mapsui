@@ -38,13 +38,16 @@ namespace Mapsui.Samples.Common.Desktop
         {
             var map = new Map();
 
-            var countrySource = new ShapeFile(ShapeFilesDeployer.ShapeFilesLocation + "\\countries.shp", true);
+            var countriesPath = Path.Combine(ShapeFilesDeployer.ShapeFilesLocation, "countries.shp");
+            var countrySource = new ShapeFile(countriesPath, true);
             countrySource.CRS = "EPSG:4326";
             var projectedCountrySource = new ProjectingProvider(countrySource)
             {
                 CRS = "EPSG:3857",
             };
-            var citySource = new ShapeFile(ShapeFilesDeployer.ShapeFilesLocation+ "\\cities.shp", true);
+
+            var citiesPath = Path.Combine(ShapeFilesDeployer.ShapeFilesLocation, "cities.shp");
+            var citySource = new ShapeFile(citiesPath, true);
             citySource.CRS = "EPSG:4326";
             var projectedCitySource = new ProjectingProvider(citySource)
             {

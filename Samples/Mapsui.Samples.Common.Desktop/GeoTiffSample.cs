@@ -30,7 +30,8 @@ namespace Mapsui.Samples.Common.Desktop
         public static Map CreateMap()
         {
             var map = new Map();
-            var gif = new GeoTiffProvider(GeoTiffDeployer.GeoTiffLocation + "\\example.tif", new List<Color> { Color.Red });
+            var examplePath = Path.Combine(GeoTiffDeployer.GeoTiffLocation, "example.tif");
+            var gif = new GeoTiffProvider(examplePath, new List<Color> { Color.Red });
             map.Layers.Add(CreateGifLayer(gif));
 
             return map;

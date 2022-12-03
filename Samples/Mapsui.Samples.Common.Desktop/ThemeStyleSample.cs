@@ -34,7 +34,8 @@ namespace Mapsui.Samples.Common.Desktop
         {
             var map = new Map();
 
-            var countrySource = new ShapeFile(ShapeFilesDeployer.ShapeFilesLocation + "\\countries.shp", true) { CRS = "EPSG:3785" };
+            var countriesPath = Path.Combine(ShapeFilesDeployer.ShapeFilesLocation, "countries.shp");
+            var countrySource = new ShapeFile(countriesPath, true) { CRS = "EPSG:3785" };
 
             map.Layers.Add(CreateCountryLayer(countrySource));
             map.Layers.Add(CreateCityHoverPoints());
