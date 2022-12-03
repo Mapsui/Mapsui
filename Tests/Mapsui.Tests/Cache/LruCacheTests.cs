@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Mapsui.Cache;
 using NUnit.Framework;
 
@@ -24,6 +25,7 @@ public class LruCacheUnitTest
     }
 
     [Test]
+    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
     public void LruCacheDoesDispose()
     {
         var cache = new LruCache<int, TestDisposable>(2);
@@ -41,7 +43,7 @@ public class LruCacheUnitTest
     }
 }
 
-public class TestDisposable : IDisposable
+public sealed class TestDisposable : IDisposable
 {
     private bool _disposed;
 
