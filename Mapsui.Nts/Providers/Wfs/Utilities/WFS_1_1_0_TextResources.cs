@@ -50,7 +50,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <param name="boundingBox">The bounding box of the query</param>
         /// <param name="filter">An instance implementing <see cref="IFilter"/></param>
         public string GetFeatureGETRequest(WfsFeatureTypeInfo featureTypeInfo, List<string>? labelProperties,
-            MRect boundingBox, IFilter? filter)
+            MRect? boundingBox, IFilter? filter)
         {
             var qualification = string.IsNullOrEmpty(featureTypeInfo.Prefix)
                 ? string.Empty
@@ -63,7 +63,7 @@ namespace Mapsui.Providers.Wfs.Utilities
             paramBuilder.Append("&srsName=");
             paramBuilder.Append(HttpUtility.UrlEncode(CrsHelper.EpsgPrefix + featureTypeInfo.SRID));
 
-            if (filter != null)
+            if (filter != null || boundingBox != null)
             {
                 paramBuilder.Append("&FILTER=");
 
@@ -92,7 +92,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <param name="boundingBox">The bounding box of the query</param>
         /// <param name="filter">An instance implementing <see cref="IFilter"/></param>
         public byte[] GetFeaturePOSTRequest(WfsFeatureTypeInfo featureTypeInfo, List<string>? labelProperties,
-            MRect boundingBox, IFilter? filter)
+            MRect? boundingBox, IFilter? filter)
         {
             var qualification = string.IsNullOrEmpty(featureTypeInfo.Prefix)
                                        ? string.Empty
@@ -132,31 +132,33 @@ namespace Mapsui.Providers.Wfs.Utilities
             }
         }
 
-        private void AppendGml3Filter(XmlTextWriter xWriter, WfsFeatureTypeInfo featureTypeInfo, MRect boundingBox,
+        private void AppendGml3Filter(XmlTextWriter xWriter, WfsFeatureTypeInfo featureTypeInfo, MRect? boundingBox,
             IFilter? filter, string qualification)
         {
             xWriter.WriteStartElement("Filter", NSOGC);
-            if (filter != null) xWriter.WriteStartElement("And");
-
-            xWriter.WriteStartElement("BBOX");
-            if (!string.IsNullOrEmpty(featureTypeInfo.Prefix) &&
-                !string.IsNullOrEmpty(featureTypeInfo.FeatureTypeNamespace))
-                xWriter.WriteElementString("PropertyName",
-                    qualification + featureTypeInfo.Geometry.GeometryName);
-            //added qualification to get it to work for deegree default sample
-            else
-                xWriter.WriteElementString("PropertyName", featureTypeInfo.Geometry.GeometryName);
-            xWriter.WriteStartElement("gml", "Envelope", NSGML);
-            xWriter.WriteAttributeString("srsName",
-                "http://www.opengis.net/gml/srs/epsg.xml#" + featureTypeInfo.SRID);
-            xWriter.WriteElementString("lowerCorner", NSGML,
-                XmlConvert.ToString(boundingBox.Left) + " " +
-                XmlConvert.ToString(boundingBox.Bottom));
-            xWriter.WriteElementString("upperCorner", NSGML,
-                XmlConvert.ToString(boundingBox.Right) + " " +
-                XmlConvert.ToString(boundingBox.Top));
-            xWriter.WriteEndElement();
-            xWriter.WriteEndElement();
+            if (filter != null && boundingBox != null) xWriter.WriteStartElement("And");
+            if (boundingBox != null)
+            {
+                xWriter.WriteStartElement("BBOX");
+                if (!string.IsNullOrEmpty(featureTypeInfo.Prefix) &&
+                    !string.IsNullOrEmpty(featureTypeInfo.FeatureTypeNamespace))
+                    xWriter.WriteElementString("PropertyName",
+                        qualification + featureTypeInfo.Geometry.GeometryName);
+                //added qualification to get it to work for degree default sample
+                else
+                    xWriter.WriteElementString("PropertyName", featureTypeInfo.Geometry.GeometryName);
+                xWriter.WriteStartElement("gml", "Envelope", NSGML);
+                xWriter.WriteAttributeString("srsName",
+                    "http://www.opengis.net/gml/srs/epsg.xml#" + featureTypeInfo.SRID);
+                xWriter.WriteElementString("lowerCorner", NSGML,
+                    XmlConvert.ToString(boundingBox.Left) + " " +
+                    XmlConvert.ToString(boundingBox.Bottom));
+                xWriter.WriteElementString("upperCorner", NSGML,
+                    XmlConvert.ToString(boundingBox.Right) + " " +
+                    XmlConvert.ToString(boundingBox.Top));
+                xWriter.WriteEndElement();
+                xWriter.WriteEndElement();
+            }
 
             if (filter != null) xWriter.WriteRaw(filter.Encode());
             if (filter != null && boundingBox != null) xWriter.WriteEndElement();
