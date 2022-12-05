@@ -1,14 +1,13 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Mapsui.ArcGIS.Extensions;
+using Mapsui.Cache;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
@@ -21,12 +20,14 @@ namespace Mapsui.ArcGIS.ImageServiceProvider
     {
         private int _timeOut;
         private string _url = string.Empty;
+        private readonly IUrlPersistentCache? _persistentCache;
 
         public string? Token { get; set; }
         public ArcGISImageCapabilities ArcGisImageCapabilities { get; private set; }
 
-        public ArcGISImageServiceProvider(ArcGISImageCapabilities capabilities, bool continueOnError = true, string? token = null)
+        public ArcGISImageServiceProvider(ArcGISImageCapabilities capabilities, bool continueOnError = true, string? token = null, IUrlPersistentCache? persistentCache = null)
         {
+            _persistentCache = persistentCache;
             Token = token;
             CRS = "";
             TimeOut = 10000;
@@ -35,8 +36,9 @@ namespace Mapsui.ArcGIS.ImageServiceProvider
             Url = ArcGisImageCapabilities.ServiceUrl;
         }
 
-        public ArcGISImageServiceProvider(string url, bool continueOnError = false, string format = "jpgpng", InterpolationType interpolation = InterpolationType.RSP_NearestNeighbor, long startTime = -1, long endTime = -1, string? token = null)
+        public ArcGISImageServiceProvider(string url, bool continueOnError = false, string format = @"jpgpng", InterpolationType interpolation = InterpolationType.RSP_NearestNeighbor, long startTime = -1, long endTime = -1, string? token = null, IUrlPersistentCache? persistentCache = null)
         {
+            _persistentCache = persistentCache;
             Token = token;
             Url = url;
             CRS = "";
@@ -49,7 +51,7 @@ namespace Mapsui.ArcGIS.ImageServiceProvider
                 initialExtent = new Extent { xmin = 0, xmax = 0, ymin = 0, ymax = 0 }
             };
 
-            var capabilitiesHelper = new CapabilitiesHelper();
+            var capabilitiesHelper = new CapabilitiesHelper(persistentCache);
             capabilitiesHelper.CapabilitiesReceived += CapabilitiesHelperCapabilitiesReceived;
             capabilitiesHelper.CapabilitiesFailed += CapabilitiesHelperCapabilitiesFailed;
             capabilitiesHelper.GetCapabilities(url, CapabilitiesType.DynamicServiceCapabilities, token);
@@ -64,14 +66,14 @@ namespace Mapsui.ArcGIS.ImageServiceProvider
                 if (value[value.Length - 1].Equals('/'))
                     _url = value.Remove(value.Length - 1);
 
-                if (!_url.ToLower().Contains("exportimage"))
+                if (!_url.ToLower().Contains(@"exportimage"))
                     _url += @"/ExportImage";
             }
         }
 
         private static void CapabilitiesHelperCapabilitiesFailed(object? sender, EventArgs e)
         {
-            throw new Exception("Unable to get ArcGISImage capbilities");
+            throw new Exception("Unable to get ArcGISImage capabilities");
         }
 
         private void CapabilitiesHelperCapabilitiesReceived(object? sender, EventArgs e)
@@ -88,7 +90,7 @@ namespace Mapsui.ArcGIS.ImageServiceProvider
         public string? CRS { get; set; }
 
         /// <summary>
-        /// Timeout of webrequest in milliseconds. Default is 10 seconds
+        /// Timeout of request in milliseconds. Default is 10 seconds
         /// </summary>
         public int TimeOut
         {
@@ -124,29 +126,35 @@ namespace Mapsui.ArcGIS.ImageServiceProvider
             }
 
             var uri = new Uri(GetRequestUrl(viewport.Extent, width, height));
-            var handler = new HttpClientHandler { Credentials = Credentials ?? CredentialCache.DefaultCredentials };
-            using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(_timeOut) };
-
             try
             {
-                using var response = await client.GetAsync(uri);
-                using (var dataStream = await response.Content.ReadAsStreamAsync())
-                    try
+                using var handler = new HttpClientHandler { Credentials = Credentials ?? CredentialCache.DefaultCredentials };
+                try
+                {
+                    var bytes = _persistentCache?.Find(uri.ToString());
+                    if (bytes == null)
                     {
-                        var bytes = BruTile.Utilities.ReadFully(dataStream);
-                        if (viewport.Extent != null)
-                        {
-                            var raster = new MRaster(bytes, viewport.Extent);
-                            return (true, raster);
-                        }
+                        using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(_timeOut) };            
+                        using var response = await client.GetAsync(uri);
+                        using var dataStream = await response.Content.ReadAsStreamAsync();
+                
+                        bytes = BruTile.Utilities.ReadFully(dataStream);                        
+                        _persistentCache?.Add(uri.ToString(), bytes);
+                    }
 
-                        return (false, null);
-                    }
-                    catch (Exception ex)
+                    if (viewport.Extent != null)
                     {
-                        Logger.Log(LogLevel.Error, ex.Message, ex);
-                        return (false, null);
+                        var raster = new MRaster(bytes, viewport.Extent);
+                        return (true, raster);
                     }
+
+                    return (false, null);
+                }
+                catch (Exception ex)
+                {
+                    Logger.Log(LogLevel.Error, ex.Message, ex);
+                    return (false, null);
+                }
             }
             catch (WebException ex)
             {
@@ -183,10 +191,11 @@ namespace Mapsui.ArcGIS.ImageServiceProvider
             url.AppendFormat("&format={0}", ArcGisImageCapabilities.Format);
             url.AppendFormat("&f={0}", "image");
 
-            if (string.IsNullOrWhiteSpace(CRS)) throw new Exception("CRS not set");
-
-            url.AppendFormat("&imageSR={0}", CRS);
-            url.AppendFormat("&bboxSR={0}", CRS);
+            if (!string.IsNullOrWhiteSpace(CRS))
+            {
+                url.AppendFormat("&imageSR={0}", CRS);
+                url.AppendFormat("&bboxSR={0}", CRS);    
+            }
 
             if (ArcGisImageCapabilities.StartTime == -1 && ArcGisImageCapabilities.EndTime == -1)
                 if (ArcGisImageCapabilities.timeInfo == null || ArcGisImageCapabilities.timeInfo.timeExtent == null || ArcGisImageCapabilities.timeInfo.timeExtent.Length == 0)
@@ -213,7 +222,7 @@ namespace Mapsui.ArcGIS.ImageServiceProvider
 
         public MRect? GetExtent()
         {
-            return null;
+            return ArcGisImageCapabilities.fullExtent.ToMRect() ?? ArcGisImageCapabilities.initialExtent.ToMRect();
         }
 
         public bool ContinueOnError { get; set; }

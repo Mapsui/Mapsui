@@ -1,5 +1,7 @@
 namespace Mapsui.Samples.iOS;
 
+#pragma warning disable IDISP008 // Don't assign member with injected and created disposables
+
 [Register ("AppDelegate")]
 public class AppDelegate : UIApplicationDelegate {
     public override UIWindow? Window {
@@ -10,6 +12,7 @@ public class AppDelegate : UIApplicationDelegate {
     public override bool FinishedLaunching (UIApplication application, NSDictionary launchOptions)
     {
         // create a new window instance based on the screen size
+        Window?.Dispose();
         Window = new UIWindow (UIScreen.MainScreen.Bounds);
 
         // create a UIViewController with a single UILabel

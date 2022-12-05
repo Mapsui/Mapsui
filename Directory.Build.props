@@ -46,7 +46,7 @@
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <PackageReference Include="Microsoft.NETCore.Platforms" VersionOverride="2.0.2" PrivateAssets="All" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <!--Specify Compiler for Mac Builds-->
     <PackageReference Include="Microsoft.Net.Compilers.Toolset">

@@ -77,7 +77,9 @@ public class RasterizingTileProvider : ITileSource
                 (Viewport viewPort, ILayer renderLayer) = await CreateRenderLayerAsync(tileInfo, renderer);
                 try
                 {
+#pragma warning disable IDISP001 // disposable created
                     stream = renderer.RenderToBitmapStream(viewPort, new[] { renderLayer }, pixelDensity: _pixelDensity, renderFormat: _renderFormat);
+#pragma warning restore IDISP001                    
                 }
                 finally
                 {
@@ -90,7 +92,12 @@ public class RasterizingTileProvider : ITileSource
             }
             finally
             {
+#if NET6_0_OR_GREATER
+                if (stream != null)
+                    await stream.DisposeAsync();
+#else
                 stream?.Dispose();
+#endif
             }
 
             PersistentCache?.Add(index, result ?? Array.Empty<byte>());
@@ -105,7 +112,7 @@ public class RasterizingTileProvider : ITileSource
 
         var resolution = tileResolution.UnitsPerPixel;
         var viewPort = RasterizingLayer.CreateViewport(tileInfo.Extent.ToMRect(), resolution, _renderResolutionMultiplier, 1);
-        var featureSearchGrowth = await GetAdditionalSearchSizeAround(tileInfo, renderer, viewPort);
+        var featureSearchGrowth = await GetAdditionalSearchSizeAroundAsync(tileInfo, renderer, viewPort);
         var extent = viewPort.Extent;
         if (featureSearchGrowth > 0)
         {
@@ -129,7 +136,7 @@ public class RasterizingTileProvider : ITileSource
         return features;
     }
 
-    private async Task<double> GetAdditionalSearchSizeAround(TileInfo tileInfo, IRenderer renderer, IViewport viewport)
+    private async Task<double> GetAdditionalSearchSizeAroundAsync(TileInfo tileInfo, IRenderer renderer, IViewport viewport)
     {
         double additionalSearchSize = 0;
         
@@ -137,7 +144,7 @@ public class RasterizingTileProvider : ITileSource
         {
             for (int row = -1; row <= 1 ; row++)
             {
-                var size = await GetAdditionalSearchSize(CreateTileInfo(tileInfo, col, row), renderer, viewport);
+                var size = await GetAdditionalSearchSizeAsync(CreateTileInfo(tileInfo, col, row), renderer, viewport);
                 additionalSearchSize = Math.Max(additionalSearchSize, size);
             }
         }
@@ -160,7 +167,7 @@ public class RasterizingTileProvider : ITileSource
         };
     }
 
-    private async Task<double> GetAdditionalSearchSize(TileInfo tileInfo, IRenderer renderer, IViewport viewport)
+    private async Task<double> GetAdditionalSearchSizeAsync(TileInfo tileInfo, IRenderer renderer, IViewport viewport)
     {
         if (!_searchSizeCache.TryGetValue(tileInfo.Index, out var result))
         {

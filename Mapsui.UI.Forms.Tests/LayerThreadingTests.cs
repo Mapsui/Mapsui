@@ -79,7 +79,7 @@ namespace Mapsui.Tests.Layers
                 }
                 catch (Exception e)
                 {
-                    this._exceptions.Add(e);
+                    _exceptions.Add(e);
                 }
             }
         }
@@ -94,7 +94,7 @@ namespace Mapsui.Tests.Layers
                 }
                 catch (Exception e)
                 {
-                    this._exceptions.Add(e);
+                    _exceptions.Add(e);
                 }
             }
         }
@@ -109,7 +109,7 @@ namespace Mapsui.Tests.Layers
                 }
                 catch (Exception e)
                 {
-                    this._exceptions.Add(e);
+                    _exceptions.Add(e);
                 }
             }
         }

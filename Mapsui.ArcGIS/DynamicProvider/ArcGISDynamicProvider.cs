@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Mapsui.ArcGIS.Extensions;
+using Mapsui.Cache;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
@@ -23,6 +24,7 @@ namespace Mapsui.ArcGIS.DynamicProvider
 
         public string? Token { get; set; }
         private string? _crs;
+        private readonly IUrlPersistentCache? _persistentCache;
 
         /// <summary>
         /// Create ArcGisDynamicProvider based on a given capabilities file
@@ -30,8 +32,9 @@ namespace Mapsui.ArcGIS.DynamicProvider
         /// <param name="url">url to map service example: http://url/arcgis/rest/services/test/MapServer</param>
         /// <param name="arcGisDynamicCapabilities"></param>
         /// <param name="token">token to request service</param>        
-        public ArcGISDynamicProvider(string url, ArcGISDynamicCapabilities arcGisDynamicCapabilities, string? token = null)
+        public ArcGISDynamicProvider(string url, ArcGISDynamicCapabilities arcGisDynamicCapabilities, string? token = null, IUrlPersistentCache? persistentCache = null)
         {
+            _persistentCache = persistentCache;
             _timeOut = 10000;
             Token = token;
 
@@ -43,20 +46,22 @@ namespace Mapsui.ArcGIS.DynamicProvider
         /// Create ArcGisDynamicProvider, capabilities will be parsed automatically
         /// </summary>
         /// <param name="url">url to map service example: http://url/arcgis/rest/services/test/MapServer</param>
-        /// <param name="token">token to request service</param>        
-        public ArcGISDynamicProvider(string url, string? token = null)
+        /// <param name="token">token to request service</param>
+        /// <param name="persistentCache">persistent cache</param>
+        public ArcGISDynamicProvider(string url, string? token = null, IUrlPersistentCache? persistentCache = null)
         {
+            _persistentCache = persistentCache;
             _timeOut = 10000;
             Token = token;
             Url = url;
 
-            ArcGisDynamicCapabilities = new ArcGISDynamicCapabilities
+            ArcGisDynamicCapabilities = new ArcGISDynamicCapabilities()
             {
                 fullExtent = new Extent { xmin = 0, xmax = 0, ymin = 0, ymax = 0 },
                 initialExtent = new Extent { xmin = 0, xmax = 0, ymin = 0, ymax = 0 }
             };
 
-            var capabilitiesHelper = new CapabilitiesHelper();
+            var capabilitiesHelper = new CapabilitiesHelper(persistentCache);
             capabilitiesHelper.CapabilitiesReceived += CapabilitiesHelperCapabilitiesReceived;
             capabilitiesHelper.CapabilitiesFailed += CapabilitiesHelperCapabilitiesFailed;
             capabilitiesHelper.GetCapabilities(url, CapabilitiesType.DynamicServiceCapabilities, token);
@@ -111,7 +116,7 @@ namespace Mapsui.ArcGIS.DynamicProvider
             if (ArcGisDynamicCapabilities.initialExtent == null)
                 return null;
 
-            return new MRect(ArcGisDynamicCapabilities.initialExtent.xmin, ArcGisDynamicCapabilities.initialExtent.ymin, ArcGisDynamicCapabilities.initialExtent.xmax, ArcGisDynamicCapabilities.initialExtent.ymax);
+            return ArcGisDynamicCapabilities.initialExtent.ToMRect();
         }
 
         private void CapabilitiesHelperCapabilitiesFailed(object? sender, EventArgs e)
@@ -147,19 +152,25 @@ namespace Mapsui.ArcGIS.DynamicProvider
                 return (false, null);
             }
 
-            var uri = new Uri(GetRequestUrl(viewport.Extent, width, height));
-            var handler = new HttpClientHandler { Credentials = Credentials ?? CredentialCache.DefaultCredentials };
-            using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(_timeOut) };
-
             try
             {
-                using var response = await client.GetAsync(uri);
-                using var readAsStreamAsync = await response.Content.ReadAsStreamAsync();
-                var bytes = BruTile.Utilities.ReadFully(readAsStreamAsync);
+                var uri = new Uri(GetRequestUrl(viewport.Extent, width, height));
+                var bytes = _persistentCache?.Find(uri.ToString());
+                if (bytes == null)
+                {
+                    var handler = new HttpClientHandler
+                        { Credentials = Credentials ?? CredentialCache.DefaultCredentials };
+                    using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(_timeOut) };
+
+                    using var response = await client.GetAsync(uri);
+                    using var readAsStreamAsync = await response.Content.ReadAsStreamAsync();
+                    bytes = BruTile.Utilities.ReadFully(readAsStreamAsync);
+                    _persistentCache?.Add(uri.ToString(), bytes);
+                }
+
                 if (viewport.Extent != null)
                 {
                     var raster = new MRaster(bytes, viewport.Extent);
-                    response.Dispose();
                     return (true, raster);
                 }
                 
@@ -195,7 +206,7 @@ namespace Mapsui.ArcGIS.DynamicProvider
             if (!string.IsNullOrEmpty(Token))
                 strReq.Append($"&token={Token}");
             /* 
-             * Add all layers to the request that have defaultVisibility to true, the normal request to ArcGIS allready does this already
+             * Add all layers to the request that have defaultVisibility to true, the normal request to ArcGIS already does this already
              * without specifying "layers=show", but this adds the opportunity for the user to set the defaultVisibility of layers
              * to false in the capabilities so different views (layers) can be created for one service
              */
