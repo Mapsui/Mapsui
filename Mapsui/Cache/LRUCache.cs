@@ -1,63 +1,92 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Mapsui.Cache;
 
+/// <summary>/// LRU Cache with disposing of disposable values. </summary>
 public class LruCache<TKey, TValue>
     where TKey : notnull
 {
     private readonly int _capacity;
-    private readonly Dictionary<TKey, TValue> _valueCache;
-    private readonly Dictionary<TKey, LinkedListNode<TKey>> _nodeCache;
-    private readonly LinkedList<TKey> _orderList;
+    private readonly Dictionary<TKey, (LinkedListNode<TKey> Node, TValue Value)> _cache;    
+    private readonly LinkedList<TKey> _list;
 
     public LruCache(int capacity)
     {
         _capacity = capacity;
-        _valueCache = new Dictionary<TKey, TValue>(capacity);
-        _nodeCache = new Dictionary<TKey, LinkedListNode<TKey>>(capacity);
-        _orderList = new LinkedList<TKey>();
+        _cache = new(capacity);        
+        _list = new LinkedList<TKey>();
     }
 
     public void Put(TKey key, TValue value)
     {
-        if (_valueCache.ContainsKey(key)) // Key already exists.
+        if (_cache.ContainsKey(key)) // Key already exists.
         {
-            Promote(key);            
-            _valueCache[key] = value;
-            return;
-        }
+            var node = _cache[key];
+            _list.Remove(node.Node);
+            _list.AddFirst(node.Node);
+            if (!object.ReferenceEquals(node.Value, value))
+            {
+                 // dispose disposable values
+                if (node.Value is IDisposable disposable)
+                {
+                    disposable.Dispose();
+                }
+            }
 
-        if (_valueCache.Count == _capacity) // Cache full.
-        {
-            RemoveLast();
+            _cache[key] = (node.Node, value);
         }
-        
-        AddFirst(key, value);
+        else
+        {
+            if (_cache.Count >= _capacity) // Cache full.
+            {         
+                var removeKey = _list.Last!.Value;
+                _cache.TryGetValue(removeKey, out var old);
+                _cache.Remove(removeKey);
+                _list.RemoveLast();
+                
+                 // dispose disposable values
+                if (old.Value is IDisposable disposable)
+                {
+                    disposable.Dispose();
+                }            
+            }
+
+            // add cache
+            _cache.Add(key, (_list.AddFirst(key), value));
+        }                            
     }
 
     public TValue? Get(TKey key)
     {
-        if (!_valueCache.ContainsKey(key))
+        if (!_cache.ContainsKey(key))
         {
             return default;
         }
 
-        Promote(key);            
-        return _valueCache[key];
+        var node = _cache[key];
+        _list.Remove(node.Node);
+        _list.AddFirst(node.Node);
+
+        return node.Value;                  
     }
     
     public bool TryGetValue(TKey key, [MaybeNullWhen(false)] out TValue value)
     {
-        if (!_valueCache.ContainsKey(key))
+        if (!_cache.ContainsKey(key))
         {
             value = default;
             return false;
         }
 
-        Promote(key);
-        return _valueCache.TryGetValue(key, out value);
+        var node = _cache[key];
+        _list.Remove(node.Node);
+        _list.AddFirst(node.Node);
+
+        value = node.Value;
+        return true;
     }
 
     [MaybeNull]
@@ -65,38 +94,5 @@ public class LruCache<TKey, TValue>
     {
         get => Get(key);
         set => Put(key, value);
-    }
-
-    private void AddFirst(TKey key, TValue value)
-    {
-        var node = new LinkedListNode<TKey>(key);
-        _valueCache[key] = value;
-        _nodeCache[key] = node;
-        _orderList.AddFirst(node);
-    }
-    
-    private void Promote(TKey key)
-    {
-        LinkedListNode<TKey> node = _nodeCache[key];
-        _orderList.Remove(node);
-        _orderList.AddFirst(node);
-    }
-    
-    private void RemoveLast()
-    {
-        LinkedListNode<TKey>? lastNode = _orderList.Last;
-        if (lastNode == null)
-            return;
-        
-        _valueCache.TryGetValue(lastNode.Value, out var value);
-        _valueCache.Remove(lastNode.Value);
-        _nodeCache.Remove(lastNode.Value);
-        _orderList.RemoveLast();
-        
-        // dispose disposable values
-        if (value is IDisposable disposable)
-        {
-            disposable.Dispose();
-        }
-    }
+    }        
 }
