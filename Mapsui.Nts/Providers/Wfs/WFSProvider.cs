@@ -67,7 +67,7 @@ namespace Mapsui.Providers.Wfs
         private IXPathQueryManager? _featureTypeInfoQueryManager;
         private string? _nsPrefix;
         private bool _getFeatureGetRequest;
-        private List<string> _labels = new List<string>();
+        private List<string> _labels = new();
         private bool _multiGeometries = true;
         private IFilter? _ogcFilter;
         private bool _quickGeometries;
@@ -414,7 +414,7 @@ namespace Mapsui.Providers.Wfs
         /// </summary>
         /// <param name="bbox"></param>
         /// <returns>Features within the specified <see cref="WfsFeatureTypeInfo.BoundingBox"/></returns>
-        public async Task<IEnumerable<IFeature>> ExecuteIntersectionQueryAsync(MRect bbox)
+        public async Task<IEnumerable<IFeature>> ExecuteIntersectionQueryAsync(MRect? bbox)
         {
             await InitAsync();
             if (_featureTypeInfo == null) return new List<IFeature>();
@@ -425,7 +425,7 @@ namespace Mapsui.Providers.Wfs
 
             GeometryFactory? geomFactory = null;
 
-            if (_labels != null && _labels.Count > 0)
+            if (_labels.Count > 0)
             {
                 _featureTypeInfo.LabelFields = _labels;
                 _quickGeometries = false;
@@ -981,7 +981,7 @@ namespace Mapsui.Providers.Wfs
             /// The <see cref="HttpClientUtil"/> instance is returned for immediate usage. 
             /// </summary>
             internal void ConfigureForWfsGetFeatureRequest(HttpClientUtil httpClientUtil,
-                WfsFeatureTypeInfo featureTypeInfo, List<string>? labelProperties, MRect boundingBox,
+                WfsFeatureTypeInfo featureTypeInfo, List<string>? labelProperties, MRect? boundingBox,
                 IFilter? filter, bool get)
             {
                 httpClientUtil.Reset();
