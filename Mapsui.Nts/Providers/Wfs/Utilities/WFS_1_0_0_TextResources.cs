@@ -51,7 +51,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <param name="boundingBox">The bounding box of the query</param>
         /// <param name="filter">An instance implementing <see cref="IFilter"/></param>
         public string GetFeatureGETRequest(WfsFeatureTypeInfo featureTypeInfo, List<string>? labelProperties,
-            MRect boundingBox, IFilter? filter)
+            MRect? boundingBox, IFilter? filter)
         {
             var qualification = string.IsNullOrEmpty(featureTypeInfo.Prefix)
                                        ? string.Empty
@@ -87,7 +87,7 @@ namespace Mapsui.Providers.Wfs.Utilities
         /// <param name="boundingBox">The bounding box of the query</param>
         /// <param name="filter">An instance implementing <see cref="IFilter"/></param>
         public byte[] GetFeaturePOSTRequest(WfsFeatureTypeInfo featureTypeInfo, List<string>? labelProperties,
-            MRect boundingBox, IFilter? filter)
+            MRect? boundingBox, IFilter? filter)
         {
             var qualification = string.IsNullOrEmpty(featureTypeInfo.Prefix)
                                        ? string.Empty
@@ -122,7 +122,8 @@ namespace Mapsui.Providers.Wfs.Utilities
             }
         }
 
-        private void AppendGml2Filter(XmlTextWriter xWriter, WfsFeatureTypeInfo featureTypeInfo, MRect boundingBox, IFilter? filter, string qualification)
+        private void AppendGml2Filter(XmlTextWriter xWriter, WfsFeatureTypeInfo featureTypeInfo, MRect? boundingBox,
+            IFilter? filter, string qualification)
         {
             xWriter.WriteStartElement("Filter", NSOGC);
             if (filter != null && boundingBox != null) xWriter.WriteStartElement("And");
@@ -147,6 +148,7 @@ namespace Mapsui.Providers.Wfs.Utilities
                 xWriter.WriteEndElement();
                 xWriter.WriteEndElement();
             }
+
             if (filter != null) xWriter.WriteRaw(filter.Encode());
             if (filter != null && boundingBox != null) xWriter.WriteEndElement();
             xWriter.WriteEndElement();
