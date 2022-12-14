@@ -5,7 +5,6 @@ using Mapsui.Nts;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.Tiling;
-using Mapsui.UI;
 using NetTopologySuite.Geometries;
 
 namespace Mapsui.Samples.Common.Maps
