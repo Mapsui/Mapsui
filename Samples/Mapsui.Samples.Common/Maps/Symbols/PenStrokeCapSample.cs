@@ -16,7 +16,7 @@ namespace Mapsui.Samples.Common.Maps
         private const int PenWidth = 12;
 
         public string Name => "Pen Stroke Cap";
-        public string Category => "Symbols";
+        public string Category => "Styles";
 
         public Task<Map> CreateMapAsync()
         {

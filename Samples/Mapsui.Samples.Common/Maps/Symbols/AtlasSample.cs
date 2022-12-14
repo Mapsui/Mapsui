@@ -4,11 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
-using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
 using Mapsui.Tiling;
-using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -20,7 +18,7 @@ namespace Mapsui.Samples.Common.Maps
 
         public string Name => "Atlas";
 
-        public string Category => "Symbols";
+        public string Category => "Styles";
 
         public Task<Map> CreateMapAsync()
         {
