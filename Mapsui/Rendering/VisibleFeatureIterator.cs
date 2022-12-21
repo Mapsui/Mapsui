@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Styles;
@@ -29,7 +30,7 @@ namespace Mapsui.Rendering
             if (viewport.Extent == null) return;
             var features = layer.GetFeatures(viewport.Extent, viewport.Resolution).ToList();
 
-            var layerStyles = GetStylesToApply(layer.Style, viewport.Resolution);
+            var layerStyles = layer.Style.GetStylesToApply(viewport.Resolution);
             foreach (var layerStyle in layerStyles)
             {
                 var style = layerStyle; // This is the default that could be overridden by an IThemeStyle
@@ -43,13 +44,13 @@ namespace Mapsui.Rendering
                         style = styleForFeature;
                     }
 
-                    if (!ShouldBeApplied(style, viewport.Resolution)) continue;
+                    if (!style.ShouldBeApplied(viewport.Resolution)) continue;
 
                     if (style is StyleCollection styleCollection) // The ThemeStyle can again return a StyleCollection
                     {
                         foreach (var s in styleCollection.Styles)
                         {
-                            if (!ShouldBeApplied(s, viewport.Resolution)) continue;
+                            if (!s.ShouldBeApplied(viewport.Resolution)) continue;
                             callback(viewport, layer, s, feature, (float)layer.Opacity, iteration);
                         }
                     }
@@ -77,35 +78,12 @@ namespace Mapsui.Rendering
                         continue;
                     }
 
-                    if (!ShouldBeApplied(featureStyle, viewport.Resolution)) continue;
+                    if (!featureStyle.ShouldBeApplied(viewport.Resolution)) continue;
 
                     callback(viewport, layer, featureStyle, feature, (float)layer.Opacity, iteration);
                 }
             }
         }
 
-        private static bool ShouldBeApplied(IStyle? style, double resolution)
-        {
-            if (style is null) return false;
-            if (!style.Enabled) return false;
-            if (style.MinVisible > resolution) return false;
-            if (style.MaxVisible < resolution) return false;
-            return true;
-        }
-
-        private static IEnumerable<IStyle> GetStylesToApply(IStyle? style, double resolution)
-        {
-            if (style is null) return Enumerable.Empty<IStyle>();
-            
-            if (!ShouldBeApplied(style, resolution))
-                return Enumerable.Empty<IStyle>();
-
-            if (style is StyleCollection styleCollection)
-            {
-                return styleCollection.Styles.Where(s => ShouldBeApplied(s, resolution));
-            }
-
-            return new[] { style };
-        }
     }
 }
