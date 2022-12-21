@@ -28,9 +28,12 @@ namespace Mapsui.Rendering
             Action<IReadOnlyViewport, ILayer, IStyle, IFeature, float, long> callback)
         {
             if (viewport.Extent == null) return;
+
             var features = layer.GetFeatures(viewport.Extent, viewport.Resolution).ToList();
 
+            // Part 1. Styles on the layer
             var layerStyles = layer.Style.GetStylesToApply(viewport.Resolution);
+
             foreach (var layerStyle in layerStyles)
             {
                 foreach (var feature in features)
@@ -50,6 +53,7 @@ namespace Mapsui.Rendering
                 }
             }
 
+            // Part 2. Styles on the feature
             foreach (var feature in features)
             {
                 var featureStyles = feature.Styles ?? Enumerable.Empty<IStyle>();
