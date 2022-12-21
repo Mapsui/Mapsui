@@ -28,7 +28,7 @@ namespace Mapsui.Rendering
             if (viewport.Extent == null) return;
             var features = layer.GetFeatures(viewport.Extent, viewport.Resolution).ToList();
 
-            var layerStyles = ToArray(layer);
+            var layerStyles = ToEnumerable(layer.Style, viewport.Resolution);
             foreach (var layerStyle in layerStyles)
             {
                 var style = layerStyle; // This is the default that could be overridden by an IThemeStyle
@@ -42,13 +42,13 @@ namespace Mapsui.Rendering
                         style = styleForFeature;
                     }
 
-                    if (ShouldNotBeApplied(style, viewport)) continue;
+                    if (ShouldNotBeApplied(style, viewport.Resolution)) continue;
 
                     if (style is StyleCollection styles) // The ThemeStyle can again return a StyleCollection
                     {
                         foreach (var s in styles)
                         {
-                            if (ShouldNotBeApplied(s, viewport)) continue;
+                            if (ShouldNotBeApplied(s, viewport.Resolution)) continue;
                             callback(viewport, layer, s, feature, (float)layer.Opacity, iteration);
                         }
                     }
@@ -64,23 +64,31 @@ namespace Mapsui.Rendering
                 var featureStyles = feature.Styles ?? Enumerable.Empty<IStyle>(); // null check
                 foreach (var featureStyle in featureStyles)
                 {
-                    if (ShouldNotBeApplied(featureStyle, viewport)) continue;
+                    if (ShouldNotBeApplied(featureStyle, viewport.Resolution)) continue;
 
                     callback(viewport, layer, featureStyle, feature, (float)layer.Opacity, iteration);
-
                 }
             }
         }
 
-        private static bool ShouldNotBeApplied(IStyle? style, IReadOnlyViewport viewport)
+        private static bool ShouldNotBeApplied(IStyle? style, double resolution)
         {
-            return style == null || !style.Enabled || style.MinVisible > viewport.Resolution || style.MaxVisible < viewport.Resolution;
+            return style is null || !style.Enabled || style.MinVisible > resolution || style.MaxVisible < resolution;
         }
 
-        private static IEnumerable<IStyle> ToArray(ILayer layer)
+        private static IEnumerable<IStyle> ToEnumerable(IStyle? style, double resolution)
         {
-            return (layer.Style as StyleCollection)?.ToArray() ??
-                (layer.Style == null ? Array.Empty<IStyle>() : new[] { layer.Style });
+            if (style is null) return Enumerable.Empty<IStyle>();
+            
+            if (ShouldNotBeApplied(style, resolution))
+                return Enumerable.Empty<IStyle>();
+
+            if (style is StyleCollection styleCollection)
+            {
+                return styleCollection.Where(s => ShouldNotBeApplied(s, resolution));   
+            }
+
+            return new[] { style };
         }
     }
 }
