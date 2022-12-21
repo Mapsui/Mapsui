@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Layers;
+using Mapsui.Logging;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 
@@ -28,7 +29,7 @@ namespace Mapsui.Rendering
             if (viewport.Extent == null) return;
             var features = layer.GetFeatures(viewport.Extent, viewport.Resolution).ToList();
 
-            var layerStyles = ToEnumerable(layer.Style, viewport.Resolution);
+            var layerStyles = GetStylesToApply(layer.Style, viewport.Resolution);
             foreach (var layerStyle in layerStyles)
             {
                 var style = layerStyle; // This is the default that could be overridden by an IThemeStyle
@@ -44,9 +45,9 @@ namespace Mapsui.Rendering
 
                     if (ShouldNotBeApplied(style, viewport.Resolution)) continue;
 
-                    if (style is StyleCollection styles) // The ThemeStyle can again return a StyleCollection
+                    if (style is StyleCollection styleCollection) // The ThemeStyle can again return a StyleCollection
                     {
-                        foreach (var s in styles)
+                        foreach (var s in styleCollection.Styles)
                         {
                             if (ShouldNotBeApplied(s, viewport.Resolution)) continue;
                             callback(viewport, layer, s, feature, (float)layer.Opacity, iteration);
@@ -61,9 +62,21 @@ namespace Mapsui.Rendering
 
             foreach (var feature in features)
             {
-                var featureStyles = feature.Styles ?? Enumerable.Empty<IStyle>(); // null check
+                var featureStyles = feature.Styles ?? Enumerable.Empty<IStyle>();
                 foreach (var featureStyle in featureStyles)
                 {
+                    if (featureStyle is IThemeStyle themeStyle)
+                    {
+                        Logger.Log(LogLevel.Warning, $"The IFeature.Styles can not contain a {nameof(IThemeStyle)}");
+                        continue;
+                    }
+
+                    if (featureStyle is StyleCollection styleCollection)
+                    {
+                        Logger.Log(LogLevel.Warning, $"The IFeature.Styles can not contain a {nameof(StyleCollection)}");
+                        continue;
+                    }
+
                     if (ShouldNotBeApplied(featureStyle, viewport.Resolution)) continue;
 
                     callback(viewport, layer, featureStyle, feature, (float)layer.Opacity, iteration);
@@ -76,7 +89,7 @@ namespace Mapsui.Rendering
             return style is null || !style.Enabled || style.MinVisible > resolution || style.MaxVisible < resolution;
         }
 
-        private static IEnumerable<IStyle> ToEnumerable(IStyle? style, double resolution)
+        private static IEnumerable<IStyle> GetStylesToApply(IStyle? style, double resolution)
         {
             if (style is null) return Enumerable.Empty<IStyle>();
             
@@ -85,7 +98,7 @@ namespace Mapsui.Rendering
 
             if (style is StyleCollection styleCollection)
             {
-                return styleCollection.Where(s => ShouldNotBeApplied(s, resolution));   
+                return styleCollection.Styles.Where(s => !ShouldNotBeApplied(s, resolution));
             }
 
             return new[] { style };
