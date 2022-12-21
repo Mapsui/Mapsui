@@ -52,6 +52,7 @@ namespace Mapsui.Tests.Rendering
                 yield return new TestCaseData(new StyleCollection { Styles = { new VectorStyle { Enabled = false } } }, false, "A StyleCollection containing a disabled VectorStyle should not be applied");
                 yield return new TestCaseData(new StyleCollection(), false, "An empty StyleCollection not be applied");
                 yield return new TestCaseData(new StyleCollection { Styles = { new VectorStyle() } }, true, "A StyleCollection containing a VectorStyle should be applied");
+                yield return new TestCaseData(new StyleCollection { Styles = { new ThemeStyle(f => new VectorStyle()) } }, true, "A StyleCollection containing a ThemeStyle returning a VectorStyle should be applied");
                 yield return new TestCaseData(new ThemeStyle(f => new VectorStyle()), true, "A ThemeStyle returning a VectorStyle should be applied");
                 yield return new TestCaseData(new ThemeStyle(f => new StyleCollection { Styles = { new VectorStyle() } }), true, "A VectorStyle in a StyleCollection in a ThemeStyle should be applied");
                 yield return new TestCaseData(new ThemeStyle(f => new StyleCollection { Styles = { new VectorStyle { Enabled = false } } }), false, "A disabled VectorStyle in a StyleCollection in a ThemeStyle should not be applied");

@@ -33,30 +33,19 @@ namespace Mapsui.Rendering
             var layerStyles = layer.Style.GetStylesToApply(viewport.Resolution);
             foreach (var layerStyle in layerStyles)
             {
-                var style = layerStyle; // This is the default that could be overridden by an IThemeStyle
-
                 foreach (var feature in features)
                 {
                     if (layerStyle is IThemeStyle themeStyle)
                     {
-                        var styleForFeature = themeStyle.GetStyle(feature);
-                        if (styleForFeature == null) continue;
-                        style = styleForFeature;
-                    }
-
-                    if (!style.ShouldBeApplied(viewport.Resolution)) continue;
-
-                    if (style is StyleCollection styleCollection) // The ThemeStyle can again return a StyleCollection
-                    {
-                        foreach (var s in styleCollection.Styles)
+                        var stylesFromThemeStyle = themeStyle.GetStyle(feature).GetStylesToApply(viewport.Resolution);
+                        foreach (var styleFromThemeStyle in stylesFromThemeStyle)
                         {
-                            if (!s.ShouldBeApplied(viewport.Resolution)) continue;
-                            callback(viewport, layer, s, feature, (float)layer.Opacity, iteration);
+                            callback(viewport, layer, styleFromThemeStyle, feature, (float)layer.Opacity, iteration);
                         }
                     }
                     else
                     {
-                        callback(viewport, layer, style, feature, (float)layer.Opacity, iteration);
+                        callback(viewport, layer, layerStyle, feature, (float)layer.Opacity, iteration);
                     }
                 }
             }
@@ -68,13 +57,13 @@ namespace Mapsui.Rendering
                 {
                     if (featureStyle is IThemeStyle themeStyle)
                     {
-                        Logger.Log(LogLevel.Warning, $"The IFeature.Styles can not contain a {nameof(IThemeStyle)}");
+                        Logger.Log(LogLevel.Warning, $"The IFeature.Styles can not contain a {nameof(IThemeStyle)}. Use {nameof(IThemeStyle)} on the layer");
                         continue;
                     }
 
                     if (featureStyle is StyleCollection styleCollection)
                     {
-                        Logger.Log(LogLevel.Warning, $"The IFeature.Styles can not contain a {nameof(StyleCollection)}");
+                        Logger.Log(LogLevel.Warning, $"The IFeature.Styles can not contain a {nameof(StyleCollection)}. Use {nameof(StyleCollection)} on the layer");
                         continue;
                     }
 
@@ -84,6 +73,5 @@ namespace Mapsui.Rendering
                 }
             }
         }
-
     }
 }
