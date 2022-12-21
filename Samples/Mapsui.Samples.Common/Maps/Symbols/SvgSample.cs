@@ -2,11 +2,9 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Mapsui.Layers;
-using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
 using Mapsui.Tiling;
-using Mapsui.UI;
 using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps
@@ -14,7 +12,7 @@ namespace Mapsui.Samples.Common.Maps
     public class SvgSample : ISample
     {
         public string Name => "Svg";
-        public string Category => "Symbols";
+        public string Category => "Styles";
 
         public Task<Map> CreateMapAsync()
         {

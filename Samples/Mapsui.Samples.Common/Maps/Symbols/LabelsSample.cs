@@ -2,10 +2,8 @@
 using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Nts;
-using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.Tiling;
-using Mapsui.UI;
 using NetTopologySuite.IO;
 
 namespace Mapsui.Samples.Common.Maps
@@ -13,7 +11,7 @@ namespace Mapsui.Samples.Common.Maps
     public class LabelsSample : ISample
     {
         public string Name => "Labels";
-        public string Category => "Symbols";
+        public string Category => "Styles";
 
         public Task<Map> CreateMapAsync()
         {
