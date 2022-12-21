@@ -43,13 +43,13 @@ namespace Mapsui.Rendering
                         style = styleForFeature;
                     }
 
-                    if (ShouldNotBeApplied(style, viewport.Resolution)) continue;
+                    if (!ShouldBeApplied(style, viewport.Resolution)) continue;
 
                     if (style is StyleCollection styleCollection) // The ThemeStyle can again return a StyleCollection
                     {
                         foreach (var s in styleCollection.Styles)
                         {
-                            if (ShouldNotBeApplied(s, viewport.Resolution)) continue;
+                            if (!ShouldBeApplied(s, viewport.Resolution)) continue;
                             callback(viewport, layer, s, feature, (float)layer.Opacity, iteration);
                         }
                     }
@@ -77,28 +77,32 @@ namespace Mapsui.Rendering
                         continue;
                     }
 
-                    if (ShouldNotBeApplied(featureStyle, viewport.Resolution)) continue;
+                    if (!ShouldBeApplied(featureStyle, viewport.Resolution)) continue;
 
                     callback(viewport, layer, featureStyle, feature, (float)layer.Opacity, iteration);
                 }
             }
         }
 
-        private static bool ShouldNotBeApplied(IStyle? style, double resolution)
+        private static bool ShouldBeApplied(IStyle? style, double resolution)
         {
-            return style is null || !style.Enabled || style.MinVisible > resolution || style.MaxVisible < resolution;
+            if (style is null) return false;
+            if (!style.Enabled) return false;
+            if (style.MinVisible > resolution) return false;
+            if (style.MaxVisible < resolution) return false;
+            return true;
         }
 
         private static IEnumerable<IStyle> GetStylesToApply(IStyle? style, double resolution)
         {
             if (style is null) return Enumerable.Empty<IStyle>();
             
-            if (ShouldNotBeApplied(style, resolution))
+            if (!ShouldBeApplied(style, resolution))
                 return Enumerable.Empty<IStyle>();
 
             if (style is StyleCollection styleCollection)
             {
-                return styleCollection.Styles.Where(s => !ShouldNotBeApplied(s, resolution));
+                return styleCollection.Styles.Where(s => ShouldBeApplied(s, resolution));
             }
 
             return new[] { style };
