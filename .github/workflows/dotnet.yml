@@ -40,12 +40,13 @@ jobs:
       uses: maxim-lobanov/setup-xcode@v1.5.1
       with:
         xcode-version: '14.0'
-    - name: Setup .NET Core SDK
-      uses: actions/setup-dotnet@v3
-      with:
-         dotnet-version: |
-           7.0.100
-         include-prerelease: false    
+    # .Net 7 already installed on github actions        
+    #- name: Setup .NET Core SDK
+    #  uses: actions/setup-dotnet@v3
+    #  with:
+    #     dotnet-version: |
+    #       7.0.100
+    #     include-prerelease: false    
     - name: install maui macos android ios maccatalyst wasm-tools
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools
     - name: Restore dependencies Legacy
@@ -131,12 +132,13 @@ jobs:
         key: ${{ runner.os }}-nuget10-${{ hashFiles('**/*.csproj') }}
         restore-keys: |
             ${{ runner.os }}-nuget10-
-    - name: Setup .NET Core SDK
-      uses: actions/setup-dotnet@v3
-      with:
-         dotnet-version: |
-           7.0.100
-         include-prerelease: false
+    # .Net 7 already installed on Github Actions      
+    #- name: Setup .NET Core SDK
+    #  uses: actions/setup-dotnet@v3
+    #  with:
+    #     dotnet-version: |
+    #       7.0.100
+    #     include-prerelease: false
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.0.6
       with:
