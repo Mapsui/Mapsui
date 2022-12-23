@@ -42,7 +42,7 @@ namespace Mapsui.Samples.Maui
             var test1 = this.info ?? throw new InvalidOperationException();
 
             mapView!.RotationLock = false;
-            mapView.UnSnapRotationDegrees = 30;
+            mapView.UnSnapRotationDegrees = 20;
             mapView.ReSnapRotationDegrees = 5;
 
             mapView.PinClicked += OnPinClicked;
