@@ -54,7 +54,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Core" />    
+    <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
@@ -62,15 +62,14 @@
   </ItemGroup>
   <!--Reference on Mac works this way -->
   <ItemGroup Condition="'$(OS)' != 'Windows_NT'">
-		<Reference Include="Xamarin.Mac" />
+    <Reference Include="Xamarin.Mac" />
   </ItemGroup>
   <!--Reference on Windows works this way -->
   <ItemGroup Condition="'$(OS)' == 'Windows_NT'">
-		<Reference Include="Xamarin.Mac">
-			<HintPath>$(MSBuildExtensionsPath)\..\Common7\IDE\Extensions\Xamarin.VisualStudio\Xamarin.Mac.dll</HintPath>
-		</Reference>
+    <Reference Include="Xamarin.Mac">
+      <HintPath>$(MSBuildExtensionsPath)\..\Common7\IDE\Extensions\Xamarin.VisualStudio\Xamarin.Mac.dll</HintPath>
+    </Reference>
   </ItemGroup>
-
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon-128.png" />

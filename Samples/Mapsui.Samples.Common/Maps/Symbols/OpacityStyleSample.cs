@@ -3,7 +3,6 @@ using Mapsui.Nts.Extensions;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.Tiling;
-using Mapsui.UI;
 using NetTopologySuite.Geometries;
 using System.Threading.Tasks;
 
@@ -14,7 +13,7 @@ namespace Mapsui.Samples.Common.Maps
     public class OpacityStyleSample : ISample
     {
         public string Name => "OpacityStyle";
-        public string Category => "Symbols";
+        public string Category => "Styles";
 
         public Task<Map> CreateMapAsync()
         {

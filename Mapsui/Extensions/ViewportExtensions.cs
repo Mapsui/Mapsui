@@ -1,7 +1,4 @@
 ﻿using Mapsui.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Mapsui.Extensions
 {
@@ -17,8 +14,7 @@ namespace Mapsui.Extensions
         /// IsRotated is true, when viewport displays map rotated
         /// </summary>
         public static bool IsRotated(this IReadOnlyViewport viewport) => 
-            !double.IsNaN(viewport.Rotation) && viewport.Rotation > Constants.Epsilon 
-            && viewport.Rotation < 360 - Constants.Epsilon;
+            !double.IsNaN(viewport.Rotation) && RotationCalculations.RotationShortestDistance(viewport.Rotation, 0) > Constants.Epsilon;
 
         /// <summary>
         /// Calculates extent from the viewport

@@ -22,18 +22,6 @@ namespace Mapsui.Layers
         private MRect? _extent;
 
         /// <summary>
-        /// Get a layer's styles
-        /// </summary>
-        /// <param name="layer">Layer, for which styles should be returned</param>
-        /// <returns>Enumerable with styles belonging to layer</returns>
-        public static IEnumerable<IStyle?> GetLayerStyles(ILayer? layer)
-        {
-            if (layer == null) return Array.Empty<IStyle>();
-            var style = layer.Style as StyleCollection;
-            return style?.ToArray() ?? new[] { layer.Style };
-        }
-
-        /// <summary>
         /// Creates a BaseLayer without a name
         /// </summary>
         protected BaseLayer()

@@ -13,6 +13,7 @@ using Windows.Foundation;
 using Windows.System;
 using Mapsui.Extensions;
 using Mapsui.Logging;
+using Mapsui.Utilities;
 #if __WINUI__
 using System.Runtime.Versioning;
 using Mapsui.UI.WinUI.Extensions;
@@ -53,7 +54,7 @@ namespace Mapsui.UI.Uwp
     {
         private readonly Rectangle _selectRectangle = CreateSelectRectangle();
         private readonly SKXamlCanvas _canvas = CreateRenderTarget();
-        private double _innerRotation;
+        private double _virtualRotation;
 
         public MouseWheelAnimation MouseWheelAnimation { get; } = new MouseWheelAnimation { Duration = 0 };
 
@@ -108,7 +109,7 @@ namespace Mapsui.UI.Uwp
 
         private void OnManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
         {
-            _innerRotation = _viewport.Rotation;
+            _virtualRotation = _viewport.Rotation;
         }
 
         private void OnDoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
@@ -238,29 +239,15 @@ namespace Mapsui.UI.Uwp
 
             var previousCenter = e.Position.ToMapsui().Offset(-e.Delta.Translation.X, -e.Delta.Translation.Y);
             var previousRadius = 1f;
-            var previousRotation = 0f;
 
             double rotationDelta = 0;
 
-            if (!(Map?.RotationLock ?? false))
+            if (Map?.RotationLock == true)
             {
-                _innerRotation += rotation - previousRotation;
-                _innerRotation %= 360;
+                _virtualRotation += rotation; 
 
-                if (_innerRotation > 180)
-                    _innerRotation -= 360;
-                else if (_innerRotation < -180)
-                    _innerRotation += 360;
-
-                if (Viewport.Rotation == 0 && Math.Abs(_innerRotation) >= Math.Abs(UnSnapRotationDegrees))
-                    rotationDelta = _innerRotation;
-                else if (Viewport.Rotation != 0)
-                {
-                    if (Math.Abs(_innerRotation) <= Math.Abs(ReSnapRotationDegrees))
-                        rotationDelta = -Viewport.Rotation;
-                    else
-                        rotationDelta = _innerRotation - Viewport.Rotation;
-                }
+                rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
+                    _virtualRotation, _viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
             }
 
             _viewport.Transform(center, previousCenter, radius / previousRadius, rotationDelta);
