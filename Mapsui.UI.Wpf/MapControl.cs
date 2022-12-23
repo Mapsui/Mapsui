@@ -29,7 +29,7 @@ namespace Mapsui.UI.Wpf
         private bool _mouseDown;
         private MPoint? _previousMousePosition;
         private bool _hasBeenManipulated;
-        private double _innerRotation;
+        private double _virtualRotation;
         private readonly FlingTracker _flingTracker = new();
 
         public MouseWheelAnimation MouseWheelAnimation { get; } = new();
@@ -396,7 +396,7 @@ namespace Mapsui.UI.Wpf
         private void OnManipulationStarted(object? sender, ManipulationStartedEventArgs e)
         {
             _hasBeenManipulated = false;
-            _innerRotation = _viewport.Rotation;
+            _virtualRotation = _viewport.Rotation;
         }
 
         private void OnManipulationDelta(object? sender, ManipulationDeltaEventArgs e)
@@ -414,25 +414,12 @@ namespace Mapsui.UI.Wpf
 
             double rotationDelta = 0;
 
-            if (!(_map?.RotationLock ?? false))
+            if (Map?.RotationLock == true)
             {
-                _innerRotation += angle - prevAngle;
-                _innerRotation %= 360;
+                _virtualRotation += angle - prevAngle;
 
-                if (_innerRotation > 180)
-                    _innerRotation -= 360;
-                else if (_innerRotation < -180)
-                    _innerRotation += 360;
-
-                if (Viewport.Rotation == 0 && Math.Abs(_innerRotation) >= Math.Abs(UnSnapRotationDegrees))
-                    rotationDelta = _innerRotation;
-                else if (Viewport.Rotation != 0)
-                {
-                    if (Math.Abs(_innerRotation) <= Math.Abs(ReSnapRotationDegrees))
-                        rotationDelta = -Viewport.Rotation;
-                    else
-                        rotationDelta = _innerRotation - Viewport.Rotation;
-                }
+                rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
+                    _virtualRotation, _viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
             }
 
             _viewport.Transform(center, previousCenter, radius / previousRadius, rotationDelta);

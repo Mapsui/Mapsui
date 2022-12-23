@@ -5,7 +5,6 @@ using Mapsui.Nts;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.Tiling;
-using Mapsui.UI;
 using NetTopologySuite.Geometries;
 
 namespace Mapsui.Samples.Common.Maps
@@ -16,7 +15,7 @@ namespace Mapsui.Samples.Common.Maps
         private const int PenWidth = 12;
 
         public string Name => "Pen Stroke Cap";
-        public string Category => "Symbols";
+        public string Category => "Styles";
 
         public Task<Map> CreateMapAsync()
         {
