@@ -12,6 +12,7 @@ namespace Mapsui.Samples.Maui
             builder
                 .UseMauiApp<App>()
                 // Without the line below the app will crash with this exception: "Catastrophic failure (0x8000FFFF (E_UNEXPECTED))".
+                // and without the 'true' parameter Android will crash with this exception: "Microsoft.Maui.Platform.HandlerNotFoundException: 'Handler not found for view SkiaSharp.Views.Maui.Controls.SKGLView.'"
                 .UseSkiaSharp(true)
                 .ConfigureFonts(fonts =>
                 {
