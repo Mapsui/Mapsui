@@ -42,7 +42,7 @@ namespace Mapsui.UI.Android
     public partial class MapControl : ViewGroup, IMapControl
     {
         private View? _canvas;
-        private double _innerRotation;
+        private double _virtualRotation;
         private GestureDetector? _gestureDetector;
         private double _previousAngle;
         private double _previousRadius = 1f;
@@ -198,7 +198,7 @@ namespace Mapsui.UI.Android
                     {
                         (_previousTouch, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
                         _mode = TouchMode.Zooming;
-                        _innerRotation = Viewport.Rotation;
+                        _virtualRotation = Viewport.Rotation;
                     }
                     else
                     {
@@ -217,7 +217,7 @@ namespace Mapsui.UI.Android
                     {
                         (_previousTouch, _previousRadius, _previousAngle) = GetPinchValues(touchPoints);
                         _mode = TouchMode.Zooming;
-                        _innerRotation = Viewport.Rotation;
+                        _virtualRotation = Viewport.Rotation;
                     }
                     else
                     {
@@ -253,25 +253,12 @@ namespace Mapsui.UI.Android
 
                                 double rotationDelta = 0;
 
-                                if (!(Map?.RotationLock ?? true))
+                                if (Map?.RotationLock == true)
                                 {
-                                    _innerRotation += angle - previousAngle;
-                                    _innerRotation %= 360;
+                                    _virtualRotation += angle - previousAngle;
 
-                                    if (_innerRotation > 180)
-                                        _innerRotation -= 360;
-                                    else if (_innerRotation < -180)
-                                        _innerRotation += 360;
-
-                                    if (Viewport.Rotation == 0 && Math.Abs(_innerRotation) >= Math.Abs(UnSnapRotationDegrees))
-                                        rotationDelta = _innerRotation;
-                                    else if (Viewport.Rotation != 0)
-                                    {
-                                        if (Math.Abs(_innerRotation) <= Math.Abs(ReSnapRotationDegrees))
-                                            rotationDelta = -Viewport.Rotation;
-                                        else
-                                            rotationDelta = _innerRotation - Viewport.Rotation;
-                                    }
+                                    rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
+                                        _virtualRotation, _viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
                                 }
 
                                 _viewport.Transform(touch, previousTouch, radius / previousRadius, rotationDelta);

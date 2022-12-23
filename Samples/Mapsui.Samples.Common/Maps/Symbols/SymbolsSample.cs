@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Layers;
-using Mapsui.Providers;
 using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
-using Mapsui.UI;
 using Mapsui.Utilities;
 using Mapsui.Extensions;
 using Mapsui.Tiling;
@@ -15,7 +13,7 @@ namespace Mapsui.Samples.Common.Maps
     public class SymbolsSample : ISample
     {
         public string Name => "Symbols";
-        public string Category => "Symbols";
+        public string Category => "Styles";
 
         public Task<Map> CreateMapAsync()
         {
