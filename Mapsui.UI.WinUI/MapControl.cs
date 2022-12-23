@@ -242,7 +242,7 @@ namespace Mapsui.UI.Uwp
 
             double rotationDelta = 0;
 
-            if (Map?.RotationLock == true)
+            if (Map?.RotationLock == false)
             {
                 _virtualRotation += rotation; 
 

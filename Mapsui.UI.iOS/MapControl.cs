@@ -204,7 +204,7 @@ namespace Mapsui.UI.iOS
 
                 double rotationDelta = 0;
 
-                if (Map?.RotationLock == true)
+                if (Map?.RotationLock == false)
                 {
                     _virtualRotation += angle - previousAngle;
 
