@@ -12,6 +12,9 @@ namespace Mapsui.Rendering.Skia
     {
         public bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, Styles.IStyle style, ISymbolCache symbolCache, long iteration)
         {
+            if (!style.Enabled)
+                return false;
+
             var centroid = feature.Extent?.Centroid;
 
             if (centroid is null)

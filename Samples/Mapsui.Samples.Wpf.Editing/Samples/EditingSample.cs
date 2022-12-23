@@ -43,8 +43,10 @@ namespace Mapsui.Samples.Wpf.Editing.Samples
             // The second style is the way to show a feature is selected.
             return new StyleCollection
             {
-                CreateEditLayerBasicStyle(),
-                CreateSelectedStyle()
+                Styles = {
+                    CreateEditLayerBasicStyle(),
+                    CreateSelectedStyle()
+                }
             };
         }
 

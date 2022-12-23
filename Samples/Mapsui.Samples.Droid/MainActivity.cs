@@ -49,7 +49,7 @@ namespace Mapsui.Samples.Droid
             _mapControl.Map = MbTilesSample.CreateMap();
             _mapControl.Info += MapOnInfo;
             _mapControl.Map.RotationLock = true;
-            _mapControl.UnSnapRotationDegrees = 30;
+            _mapControl.UnSnapRotationDegrees = 20;
             _mapControl.ReSnapRotationDegrees = 5;
             _mapControl.Renderer.WidgetRenders[typeof(CustomWidget.CustomWidget)] = new CustomWidgetSkiaRenderer();
 
