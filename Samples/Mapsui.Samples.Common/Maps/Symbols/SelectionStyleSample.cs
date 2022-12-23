@@ -44,13 +44,15 @@ internal class SelectionStyleSample : ISample
         {
             if (f["selected"]?.ToString() == "true")
 
-            return new StyleCollection
-            { 
-                // Using the StyleCollection you can use the same symbol as when not selected but 
-                // put something in the background to indicate it is selected.
-                CreateSelectionSymbol(),
-                CreateSymbol()
-            };
+                return new StyleCollection
+                {
+                    Styles = {
+                        // With the StyleCollection you can use the same symbol as when not selected but 
+                        // put something in the background to indicate it is selected.
+                        CreateSelectionSymbol(),
+                        CreateSymbol()
+                    }
+                };
 
             return CreateSymbol();
         });

@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Logging;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 
@@ -26,61 +28,54 @@ namespace Mapsui.Rendering
             Action<IReadOnlyViewport, ILayer, IStyle, IFeature, float, long> callback)
         {
             if (viewport.Extent == null) return;
+
             var features = layer.GetFeatures(viewport.Extent, viewport.Resolution).ToList();
 
-            var layerStyles = ToArray(layer);
+            // Part 1. Styles on the layer
+            var layerStyles = layer.Style.GetStylesToApply(viewport.Resolution);
+
             foreach (var layerStyle in layerStyles)
             {
-                var style = layerStyle; // This is the default that could be overridden by an IThemeStyle
-
                 foreach (var feature in features)
                 {
                     if (layerStyle is IThemeStyle themeStyle)
                     {
-                        var styleForFeature = themeStyle.GetStyle(feature);
-                        if (styleForFeature == null) continue;
-                        style = styleForFeature;
-                    }
-
-                    if (ShouldNotBeApplied(style, viewport)) continue;
-
-                    if (style is StyleCollection styles) // The ThemeStyle can again return a StyleCollection
-                    {
-                        foreach (var s in styles)
+                        var stylesFromThemeStyle = themeStyle.GetStyle(feature).GetStylesToApply(viewport.Resolution);
+                        foreach (var styleFromThemeStyle in stylesFromThemeStyle)
                         {
-                            if (ShouldNotBeApplied(s, viewport)) continue;
-                            callback(viewport, layer, s, feature, (float)layer.Opacity, iteration);
+                            callback(viewport, layer, styleFromThemeStyle, feature, (float)layer.Opacity, iteration);
                         }
                     }
                     else
                     {
-                        callback(viewport, layer, style, feature, (float)layer.Opacity, iteration);
+                        callback(viewport, layer, layerStyle, feature, (float)layer.Opacity, iteration);
                     }
                 }
             }
 
+            // Part 2. Styles on the feature
             foreach (var feature in features)
             {
-                var featureStyles = feature.Styles ?? Enumerable.Empty<IStyle>(); // null check
+                var featureStyles = feature.Styles ?? Enumerable.Empty<IStyle>();
                 foreach (var featureStyle in featureStyles)
                 {
-                    if (ShouldNotBeApplied(featureStyle, viewport)) continue;
+                    if (featureStyle is IThemeStyle themeStyle)
+                    {
+                        Logger.Log(LogLevel.Warning, $"The IFeature.Styles can not contain a {nameof(IThemeStyle)}. Use {nameof(IThemeStyle)} on the layer");
+                        continue;
+                    }
+
+                    if (featureStyle is StyleCollection styleCollection)
+                    {
+                        Logger.Log(LogLevel.Warning, $"The IFeature.Styles can not contain a {nameof(StyleCollection)}. Use {nameof(StyleCollection)} on the layer");
+                        continue;
+                    }
+
+                    if (!featureStyle.ShouldBeApplied(viewport.Resolution)) continue;
 
                     callback(viewport, layer, featureStyle, feature, (float)layer.Opacity, iteration);
-
                 }
             }
-        }
-
-        private static bool ShouldNotBeApplied(IStyle? style, IReadOnlyViewport viewport)
-        {
-            return style == null || !style.Enabled || style.MinVisible > viewport.Resolution || style.MaxVisible < viewport.Resolution;
-        }
-
-        private static IEnumerable<IStyle> ToArray(ILayer layer)
-        {
-            return (layer.Style as StyleCollection)?.ToArray() ??
-                (layer.Style == null ? Array.Empty<IStyle>() : new[] { layer.Style });
         }
     }
 }
