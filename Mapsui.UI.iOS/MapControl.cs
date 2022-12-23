@@ -19,7 +19,7 @@ namespace Mapsui.UI.iOS
     {
         private SKGLView? _glCanvas;
         private SKCanvasView? _canvas;
-        private double _innerRotation;
+        private double _virtualRotation;
         private bool _init;
 
         public static bool UseGPU { get; set; } = true;
@@ -171,7 +171,7 @@ namespace Mapsui.UI.iOS
         {
             base.TouchesBegan(touches, evt);
 
-            _innerRotation = Viewport.Rotation;
+            _virtualRotation = Viewport.Rotation;
         }
 
         public override void TouchesMoved(NSSet touches, UIEvent? evt)
@@ -188,7 +188,7 @@ namespace Mapsui.UI.iOS
                     _viewport.Transform(position, previousPosition);
                     RefreshGraphics();
 
-                    _innerRotation = Viewport.Rotation;
+                    _virtualRotation = Viewport.Rotation;
                 }
             }
             else if (evt?.AllTouches.Count >= 2)
@@ -204,25 +204,12 @@ namespace Mapsui.UI.iOS
 
                 double rotationDelta = 0;
 
-                if (!(Map?.RotationLock ?? false))
+                if (Map?.RotationLock == true)
                 {
-                    _innerRotation += angle - previousAngle;
-                    _innerRotation %= 360;
+                    _virtualRotation += angle - previousAngle;
 
-                    if (_innerRotation > 180)
-                        _innerRotation -= 360;
-                    else if (_innerRotation < -180)
-                        _innerRotation += 360;
-
-                    if (Viewport.Rotation == 0 && Math.Abs(_innerRotation) >= Math.Abs(UnSnapRotationDegrees))
-                        rotationDelta = _innerRotation;
-                    else if (Viewport.Rotation != 0)
-                    {
-                        if (Math.Abs(_innerRotation) <= Math.Abs(ReSnapRotationDegrees))
-                            rotationDelta = -Viewport.Rotation;
-                        else
-                            rotationDelta = _innerRotation - Viewport.Rotation;
-                    }
+                    rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
+                        _virtualRotation, _viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
                 }
 
                 _viewport.Transform(center, previousCenter, radius / previousRadius, rotationDelta);
