@@ -33,10 +33,10 @@ internal class RotationCalculationTests
     [TestCase(-730, 5, 15)]
     [TestCase(5, -730, 15)]
 
-    public static void TestRotationDistance(double inputRotation1, double inputRotation2, double expectedDistance)
+    public static void TestRotationShortestDistance(double inputRotation1, double inputRotation2, double expectedDistance)
     {
         // Act
-        var distance = RotationCalculations.RotationDistance(inputRotation1, inputRotation2);
+        var distance = RotationCalculations.RotationShortestDistance(inputRotation1, inputRotation2);
 
         // Assert
         Assert.AreEqual(expectedDistance, distance);

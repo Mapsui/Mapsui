@@ -15,7 +15,7 @@ public static class RotationCalculations
         return rotation;
     }
 
-    public static double RotationDistance(double rotation1, double rotation2)
+    public static double RotationShortestDistance(double rotation1, double rotation2)
     {
         rotation1 = NormalizeRotation(rotation1);
         rotation2 = NormalizeRotation(rotation2);
@@ -42,14 +42,14 @@ public static class RotationCalculations
     {
         if (Math.Abs(actualRotation) < double.Epsilon) // There is no rotation
         {
-            if (RotationDistance(virtualRotation, 0) >= unSnapRotation)
+            if (RotationShortestDistance(virtualRotation, 0) >= unSnapRotation)
                 return virtualRotation; // Unsnap. The vitualRotation can be applied.
             else
                 return 0; // Still snapped. No delta.
         }
         else // There is rotation
         {
-            if (RotationDistance(virtualRotation, 0) <= reSnapRotation)
+            if (RotationShortestDistance(virtualRotation, 0) <= reSnapRotation)
                 return -actualRotation; // Resnap. Undo the actual rotation by returning the inverse as delta. 
             else
                 return virtualRotation - actualRotation; // Still unsnapped. Calculate delta.
