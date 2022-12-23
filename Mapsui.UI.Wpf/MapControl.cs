@@ -414,7 +414,7 @@ namespace Mapsui.UI.Wpf
 
             double rotationDelta = 0;
 
-            if (!(Map?.RotationLock ?? true))
+            if (Map?.RotationLock == true)
             {
                 _virtualRotation += angle - prevAngle;
 
