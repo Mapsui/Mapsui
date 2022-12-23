@@ -12,7 +12,7 @@ namespace Mapsui.Samples.Maui
             builder
                 .UseMauiApp<App>()
                 // Without the line below the app will crash with this exception: "Catastrophic failure (0x8000FFFF (E_UNEXPECTED))".
-                .UseSkiaSharp()
+                .UseSkiaSharp(true)
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
