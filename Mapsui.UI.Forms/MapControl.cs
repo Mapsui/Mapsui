@@ -706,7 +706,7 @@ namespace Mapsui.UI.Forms
 
                         double rotationDelta = 0;
 
-                        if (Map?.RotationLock == true)
+                        if (Map?.RotationLock == false)
                         {
                             var deltaRotation = angle - prevAngle;
                             _virtualRotation += deltaRotation;

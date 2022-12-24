@@ -253,7 +253,7 @@ namespace Mapsui.UI.Android
 
                                 double rotationDelta = 0;
 
-                                if (Map?.RotationLock == true)
+                                if (Map?.RotationLock == false)
                                 {
                                     _virtualRotation += angle - previousAngle;
 
