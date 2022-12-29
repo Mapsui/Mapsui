@@ -15,12 +15,14 @@ using Mapsui.Utilities;
 namespace Mapsui.UI.Blazor
 {
     public partial class MapControl : ComponentBase, IMapControl
-    {       
-        // ReSharper disable once InconsistentNamingr
+    {
         public static bool UseGPU { get; set; } = false;
 
         protected SKCanvasView? _viewCpu;
         protected SKGLView? _viewGpu;
+
+        [Inject]
+        private IJSRuntime JsRuntime { get; set; }
 
         private SKImageInfo? _canvasSize;
         private bool _onLoaded;
@@ -269,9 +271,9 @@ namespace Mapsui.UI.Blazor
 
         // TODO: Implement Setting of Mouse
         public string? Cursor { get; set; }
-        public void OpenBrowser(string url)
+        public async void OpenBrowser(string url)
         {
-            // await JsRuntime.InvokeAsync<object>("open", new object?[] { url, "_blank" });
+            await JsRuntime.InvokeAsync<object>("open", new object?[] { url, "_blank" });
         }
     }
 }
