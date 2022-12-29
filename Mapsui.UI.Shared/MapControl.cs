@@ -39,11 +39,7 @@ namespace Mapsui.UI.Blazor
 namespace Mapsui.UI.Wpf
 #endif
 {
-#if __BLAZOR__
-    public partial class MapControlBase : INotifyPropertyChanged, IDisposable
-#else
     public partial class MapControl : INotifyPropertyChanged, IDisposable
-#endif
     {
         private double _unSnapRotationDegrees;
         // Flag indicating if a drawing process is running
