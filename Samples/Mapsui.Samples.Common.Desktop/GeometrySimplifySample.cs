@@ -18,8 +18,8 @@ namespace Mapsui.Samples.Common.Desktop
             ShapeFilesDeployer.CopyEmbeddedResourceToFile("countries.shp");
         }
         
-        public string Name => "5 Geometry Simplify Sample";
-        public string Category => "Desktop";
+        public string Name => "Simplify Geometry";
+        public string Category => "Performance";
 
         public void Setup(IMapControl mapControl)
         {

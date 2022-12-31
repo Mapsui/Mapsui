@@ -19,8 +19,8 @@ namespace Mapsui.Samples.Common.Desktop
             GeoTiffDeployer.CopyEmbeddedResourceToFile("example.shp");
         }
         
-        public string Name => "6 Geo Tiff";
-        public string Category => "Desktop";
+        public string Name => "10 Geo Tiff";
+        public string Category => "Data";
 
         public void Setup(IMapControl mapControl)
         {

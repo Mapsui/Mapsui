@@ -4,13 +4,12 @@ using System.Threading.Tasks;
 using BruTile.Wmts;
 using Mapsui.Layers;
 using Mapsui.Tiling.Layers;
-using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps
 {
     public class WmtsMichelinSample : ISample
     {
-        public string Name => "5 WMTS Michelin";
+        public string Name => " 5 WMTS Michelin";
         public string Category => "Data";
 
        public async Task<Map> CreateMapAsync()

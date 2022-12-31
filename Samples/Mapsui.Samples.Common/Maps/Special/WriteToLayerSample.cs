@@ -6,16 +6,14 @@ using Mapsui.Nts;
 using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.Tiling;
-using Mapsui.UI;
-using Mapsui.Utilities;
 using NetTopologySuite.Geometries;
 
 namespace Mapsui.Tests.Common.Maps
 {
     public class WriteToLayerSample : ISample
     {
-        public string Name => "Write to Layer";
-        public string Category => "Special";
+        public string Name => "4 Add Pins";
+        public string Category => "Demo";
 
         [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
         [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don't ignore created IDisposable")]

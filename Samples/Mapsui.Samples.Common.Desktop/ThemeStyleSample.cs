@@ -22,8 +22,8 @@ namespace Mapsui.Samples.Common.Desktop
             ShapeFilesDeployer.CopyEmbeddedResourceToFile("countries.shp");
         }
         
-        public string Name => "1 Shapefile Theme Style";
-        public string Category => "Desktop";
+        public string Name => "ThemeStyle on shapefile";
+        public string Category => "Styles";
 
         public void Setup(IMapControl mapControl)
         {

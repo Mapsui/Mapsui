@@ -1,16 +1,13 @@
-﻿using System;
-using System.IO;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using BruTile.Cache;
 using Mapsui.Layers;
 using Mapsui.Tiling.Layers;
-using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps
 {
     public class TmsSample : ISample
     {
-        public string Name => "8 TMS openbasiskaart";
+        public string Name => " 8 TMS openbasiskaart";
         public string Category => "Data";
         public static IPersistentCache<byte[]>? DefaultCache { get; set; }
 

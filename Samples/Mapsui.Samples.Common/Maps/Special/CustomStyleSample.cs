@@ -52,7 +52,7 @@ namespace Mapsui.Samples.Common.Maps
     public class CustomStyleSample : IMapControlSample
     {
         public string Name => "Custom Style";
-        public string Category => "Special";
+        public string Category => "Styles";
 
         public void Setup(IMapControl mapControl)
         {

@@ -15,8 +15,8 @@ namespace Mapsui.Samples.Common.Desktop
         private const string LandsatGlsImageServer = @"https://landsat2.arcgis.com/arcgis/rest/services/LandsatGLS/MS/ImageServer";
         private ArcGISImageCapabilities? _capabilities;
 
-        public string Name => "9 ArcGIS image";
-        public string Category => "Desktop";
+        public string Name => "11 ArcGIS image";
+        public string Category => "Data";
         
         public static IUrlPersistentCache? DefaultCache { get; set; }
 

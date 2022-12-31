@@ -18,8 +18,8 @@ namespace Mapsui.Samples.Common.Desktop
             MapTilesDeployer.CopyEmbeddedResourceToFile("TrueMarble");
         }
         
-        public string Name => "3 Map Tiler";
-        public string Category => "Desktop";
+        public string Name => " 9 Tiles on file system";
+        public string Category => "Data";
 
         public void Setup(IMapControl mapControl)
         {

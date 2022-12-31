@@ -6,13 +6,12 @@ using Mapsui.Cache;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Tiling.Layers;
-using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps.Data
 {
     public class WmtsSample : ISample
     {
-        public string Name => "3 WMTS";
+        public string Name => " 3 WMTS";
         public string Category => "Data";
         public static IPersistentCache<byte[]>? DefaultCache { get; set; }
 

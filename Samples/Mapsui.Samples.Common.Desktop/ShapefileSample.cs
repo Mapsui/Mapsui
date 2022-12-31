@@ -19,8 +19,8 @@ namespace Mapsui.Samples.Common.Desktop
             ShapeFilesDeployer.CopyEmbeddedResourceToFile("cities.shp");
         }
         
-        public string Name => "2 Shapefile with labels";
-        public string Category => "Desktop";
+        public string Name => "12 Shapefile with labels";
+        public string Category => "Data";
 
         public void Setup(IMapControl mapControl)
         {

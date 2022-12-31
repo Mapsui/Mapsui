@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using BruTile.Web;
 using Mapsui.Layers;
-using Mapsui.Providers;
-using Mapsui.Rendering;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Tiling.Layers;
-using Mapsui.Tiling.Provider;
-using Mapsui.UI;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
@@ -18,7 +13,7 @@ namespace Mapsui.Samples.Common.Maps
     public class RasterizingTileLayerSample : ISample
     {
         public string Name => "Rasterizing Tile Layer";
-        public string Category => "Special";
+        public string Category => "Performance";
 
         public Task<Map> CreateMapAsync()
         {

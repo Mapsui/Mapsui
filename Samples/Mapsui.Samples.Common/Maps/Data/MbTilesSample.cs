@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using BruTile.MbTiles;
 using Mapsui.Samples.Common.Utilities;
 using Mapsui.Tiling.Layers;
-using Mapsui.UI;
 using SQLite;
 
 namespace Mapsui.Samples.Common.Maps
@@ -15,7 +14,7 @@ namespace Mapsui.Samples.Common.Maps
             MbTilesDeployer.CopyEmbeddedResourceToFile("world.mbtiles");
         }
 
-        public string Name => "1 MbTiles";
+        public string Name => " 1 MbTiles";
         public string Category => "Data";
 
         public static Map CreateMap()

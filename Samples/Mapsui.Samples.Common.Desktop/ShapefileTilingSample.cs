@@ -26,8 +26,8 @@ namespace Mapsui.Samples.Common.Desktop
             ShapeFilesDeployer.CopyEmbeddedResourceToFile("cities.shp");
         }
         
-        public string Name => "4 Shapefile Rasterizing Tiling";
-        public string Category => "Desktop";
+        public string Name => "Rasterizing tiling on shapefile";
+        public string Category => "Performance";
 
         public void Setup(IMapControl mapControl)
         {

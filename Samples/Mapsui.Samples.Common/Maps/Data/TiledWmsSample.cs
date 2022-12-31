@@ -8,7 +8,6 @@ using BruTile.Web;
 using BruTile.Wmsc;
 using Mapsui.Layers;
 using Mapsui.Tiling.Layers;
-using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -17,7 +16,7 @@ namespace Mapsui.Samples.Common.Maps
     /// </summary>
     public class TiledWmsSample : ISample
     {
-        public string Name => "4 WMS called tiled";
+        public string Name => " 4 WMS called tiled";
         public string Category => "Data";
         public static IPersistentCache<byte[]>? DefaultCache { get; set; }
 

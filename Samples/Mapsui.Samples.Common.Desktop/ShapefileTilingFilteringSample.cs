@@ -1,8 +1,4 @@
-﻿using System.IO;
-using System.Reflection;
-using Mapsui.Extensions;
-using Mapsui.Extensions.Cache;
-using Mapsui.Extensions.Projections;
+﻿using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Nts;
 using Mapsui.Providers;
@@ -26,8 +22,8 @@ namespace Mapsui.Samples.Common.Desktop
             ShapeFilesDeployer.CopyEmbeddedResourceToFile("cities.shp");
         }
         
-        public string Name => "7 Shapefile Filtering";
-        public string Category => "Desktop";
+        public string Name => "Filtering on shapefile";
+        public string Category => "Special";
 
         public void Setup(IMapControl mapControl)
         {
@@ -85,18 +81,6 @@ namespace Mapsui.Samples.Common.Desktop
             };
         }
 
-        private static ILayer CreateCountryLabelLayer(IProvider countryProvider)
-        {
-            return new Layer("Country labels")
-            {
-                DataSource = countryProvider,
-                Enabled = true,
-                MaxVisible = double.MaxValue,
-                MinVisible = double.MinValue,
-                Style = CreateCountryLabelTheme()
-            };
-        }
-
         private static ILayer CreateCityLabelLayer(IProvider citiesProvider)
         {
             return new Layer("City labels")
@@ -147,31 +131,6 @@ namespace Mapsui.Samples.Common.Desktop
                 LabelColumn = "NAME"
             };
         }
-
-        private static GradientTheme CreateCountryLabelTheme()
-        {
-            // Lets scale the labels so that big countries have larger texts as well
-            var backColor = new Brush { Color = new Color(255, 255, 255, 128) };
-
-            var lblMin = new LabelStyle
-            {
-                ForeColor = Color.Black,
-                BackColor = backColor,
-                Font = new Font { FontFamily = "GenericSerif", Size = 6 },
-                LabelColumn = "NAME"
-            };
-
-            var lblMax = new LabelStyle
-            {
-                ForeColor = Color.Blue,
-                BackColor = backColor,
-                Font = new Font { FontFamily = "GenericSerif", Size = 9 },
-                LabelColumn = "NAME"
-            };
-
-            return new GradientTheme("PopDens", 0, 400, lblMin, lblMax);
-        }
-
         private static ILayer CreateCountryLayer(IProvider countrySource)
         {
             return new Layer
@@ -180,11 +139,6 @@ namespace Mapsui.Samples.Common.Desktop
                 DataSource = countrySource,
                 Style = CreateCountryTheme()
             };
-        }
-
-        private static string GetAppDir()
-        {
-            return Path.GetDirectoryName(Assembly.GetEntryAssembly()!.GetModules()[0].FullyQualifiedName)!;
         }
     }
 }

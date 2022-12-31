@@ -16,7 +16,7 @@ namespace Mapsui.Samples.Common.Maps
             MbTilesDeployer.CopyEmbeddedResourceToFile("torrejon-de-ardoz.mbtiles");
         }
 
-        public string Name => "2 MbTiles Overlay";
+        public string Name => " 2 MbTiles Overlay";
         public string Category => "Data";
 
         public Task<Map> CreateMapAsync()

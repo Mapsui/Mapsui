@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Mapsui.Layers;
-using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.UI;
@@ -13,7 +12,7 @@ namespace Mapsui.Samples.Common.Maps
     public class RasterizingLayerSample : IMapControlSample
     {
         public string Name => "Rasterizing Layer";
-        public string Category => "Special";
+        public string Category => "Performance";
 
         public void Setup(IMapControl mapControl)
         {

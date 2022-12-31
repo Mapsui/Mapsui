@@ -9,14 +9,12 @@ using Mapsui.Logging;
 using Mapsui.Providers.Wfs;
 using Mapsui.Styles;
 using Mapsui.Tiling;
-using Mapsui.Tiling.Layers;
-using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps.Data
 {
     public class WfsSample : ISample
     {
-        public string Name => "7. WFS";
+        public string Name => " 7 WFS";
         public string Category => "Data";
         public static IUrlPersistentCache? DefaultCache { get; set; }
 

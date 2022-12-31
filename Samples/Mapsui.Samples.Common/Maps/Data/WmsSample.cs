@@ -1,15 +1,13 @@
 ﻿using System.Threading.Tasks;
 using Mapsui.Cache;
-using Mapsui.Extensions.Cache;
 using Mapsui.Layers;
 using Mapsui.Providers.Wms;
-using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps.Data
 {
     public class WmsSample : ISample
     {
-        public string Name => "6. WMS";
+        public string Name => " 6 WMS";
         public string Category => "Data";
         public static IUrlPersistentCache? DefaultCache { get; set; }
 

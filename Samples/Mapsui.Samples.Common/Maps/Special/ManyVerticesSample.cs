@@ -16,7 +16,7 @@ namespace Mapsui.Samples.Common.Maps
     public class ManyVerticesSample : IMapControlSample
     {
         public string Name => "Many Vertices";
-        public string Category => "Special";
+        public string Category => "Performance";
 
         public void Setup(IMapControl mapControl)
         {
