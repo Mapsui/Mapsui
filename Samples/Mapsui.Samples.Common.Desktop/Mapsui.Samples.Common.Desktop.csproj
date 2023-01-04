@@ -6,17 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images\example.tfw" />
-    <EmbeddedResource Include="Images\example.tfw">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <None Remove="Images\example.tif" />
-    <EmbeddedResource Include="Images\example.tif">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="BruTile" />
     <PackageReference Include="BruTile.MbTiles" />
   </ItemGroup>
@@ -30,6 +19,8 @@
 
   <ItemGroup>
     <Folder Include="GeoData\" />
+    <Folder Include="Images\" />
+    <Folder Include="Utilities\" />
   </ItemGroup>
 
 </Project>
