@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class BitmapHelper
+    <title>Class StyleExtensions
    </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class BitmapHelper
+    <meta name="title" content="Class StyleExtensions
    ">
     <meta name="generator" content="docfx 2.59.4.0">
     
@@ -78,40 +78,40 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Mapsui.Rendering.Skia.BitmapHelper">
+            <article class="content wrap" id="_content" data-uid="Mapsui.Extensions.StyleExtensions">
   
   
-  <h1 id="Mapsui_Rendering_Skia_BitmapHelper" data-uid="Mapsui.Rendering.Skia.BitmapHelper" class="text-break">Class BitmapHelper
+  <h1 id="Mapsui_Extensions_StyleExtensions" data-uid="Mapsui.Extensions.StyleExtensions" class="text-break">Class StyleExtensions
   </h1>
   <div class="markdown level0 summary"></div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></div>
-    <div class="level1"><span class="xref">BitmapHelper</span></div>
+    <div class="level1"><span class="xref">StyleExtensions</span></div>
   </div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.Rendering.Skia.html">Mapsui.Rendering.Skia</a></h6>
-  <h6><strong>Assembly</strong>: Mapsui.Rendering.Skia.dll</h6>
-  <h5 id="Mapsui_Rendering_Skia_BitmapHelper_syntax">Syntax</h5>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.Extensions.html">Mapsui.Extensions</a></h6>
+  <h6><strong>Assembly</strong>: Mapsui.dll</h6>
+  <h5 id="Mapsui_Extensions_StyleExtensions_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static class BitmapHelper : object</code></pre>
+    <pre><code class="lang-csharp hljs">public static class StyleExtensions : object</code></pre>
   </div>
   <h3 id="methods">Methods
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Rendering_Skia_BitmapHelper_InvalidBitmapInfo_Mapsui_Rendering_Skia_BitmapInfo_.md&amp;value=---%0Auid%3A%20Mapsui.Rendering.Skia.BitmapHelper.InvalidBitmapInfo(Mapsui.Rendering.Skia.BitmapInfo)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Extensions_StyleExtensions_GetStylesToApply_Mapsui_Styles_IStyle_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Rendering.Skia/BitmapHelper.cs/#L77">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Extensions/StyleExtensions.cs/#L18">View Source</a>
   </span>
-  <a id="Mapsui_Rendering_Skia_BitmapHelper_InvalidBitmapInfo_" data-uid="Mapsui.Rendering.Skia.BitmapHelper.InvalidBitmapInfo*"></a>
-  <h4 id="Mapsui_Rendering_Skia_BitmapHelper_InvalidBitmapInfo_Mapsui_Rendering_Skia_BitmapInfo_" data-uid="Mapsui.Rendering.Skia.BitmapHelper.InvalidBitmapInfo(Mapsui.Rendering.Skia.BitmapInfo)">InvalidBitmapInfo(BitmapInfo)</h4>
+  <a id="Mapsui_Extensions_StyleExtensions_GetStylesToApply_" data-uid="Mapsui.Extensions.StyleExtensions.GetStylesToApply*"></a>
+  <h4 id="Mapsui_Extensions_StyleExtensions_GetStylesToApply_Mapsui_Styles_IStyle_System_Double_" data-uid="Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)">GetStylesToApply(IStyle, Double)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static bool InvalidBitmapInfo(BitmapInfo bitmapInfo)</code></pre>
+    <pre><code class="lang-csharp hljs">public static IEnumerable&lt;IStyle&gt; GetStylesToApply(this IStyle style, double resolution)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -124,8 +124,65 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Mapsui.Rendering.Skia.BitmapInfo.html">BitmapInfo</a></td>
-        <td><span class="parametername">bitmapInfo</span></td>
+        <td><a class="xref" href="Mapsui.Styles.IStyle.html">IStyle</a></td>
+        <td><span class="parametername">style</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a></td>
+        <td><span class="parametername">resolution</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Mapsui.Styles.IStyle.html">IStyle</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Extensions_StyleExtensions_ShouldBeApplied_Mapsui_Styles_IStyle_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Extensions/StyleExtensions.cs/#L9">View Source</a>
+  </span>
+  <a id="Mapsui_Extensions_StyleExtensions_ShouldBeApplied_" data-uid="Mapsui.Extensions.StyleExtensions.ShouldBeApplied*"></a>
+  <h4 id="Mapsui_Extensions_StyleExtensions_ShouldBeApplied_Mapsui_Styles_IStyle_System_Double_" data-uid="Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)">ShouldBeApplied(IStyle, Double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool ShouldBeApplied(this IStyle style, double resolution)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Mapsui.Styles.IStyle.html">IStyle</a></td>
+        <td><span class="parametername">style</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a></td>
+        <td><span class="parametername">resolution</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -145,53 +202,6 @@
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Rendering_Skia_BitmapHelper_LoadBitmap_System_Nullable_System_Object__.md&amp;value=---%0Auid%3A%20Mapsui.Rendering.Skia.BitmapHelper.LoadBitmap(System.Nullable%7BSystem.Object%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Rendering.Skia/BitmapHelper.cs/#L13">View Source</a>
-  </span>
-  <a id="Mapsui_Rendering_Skia_BitmapHelper_LoadBitmap_" data-uid="Mapsui.Rendering.Skia.BitmapHelper.LoadBitmap*"></a>
-  <h4 id="Mapsui_Rendering_Skia_BitmapHelper_LoadBitmap_System_Nullable_System_Object__" data-uid="Mapsui.Rendering.Skia.BitmapHelper.LoadBitmap(System.Nullable{System.Object})">LoadBitmap(Nullable&lt;Object&gt;)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static BitmapInfo LoadBitmap(object? bitmapStream)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.nullable-1">Nullable</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a>&gt;</td>
-        <td><span class="parametername">bitmapStream</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Mapsui.Rendering.Skia.BitmapInfo.html">BitmapInfo</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
 </article>
           </div>
           
@@ -200,10 +210,10 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Rendering_Skia_BitmapHelper.md&amp;value=---%0Auid%3A%20Mapsui.Rendering.Skia.BitmapHelper%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Extensions_StyleExtensions.md&amp;value=---%0Auid%3A%20Mapsui.Extensions.StyleExtensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Rendering.Skia/BitmapHelper.cs/#L11" class="contribution-link">View Source</a>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Extensions/StyleExtensions.cs/#L7" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
