@@ -14,11 +14,27 @@
     <None Remove="EmbeddedResources\el-molar.mbtiles" />
     <None Remove="EmbeddedResources\torrejon-de-ardoz.mbtiles" />
     <None Remove="EmbeddedResources\world.mbtiles" />
+    <None Remove="GeoData\World\cities.dbf" />
+    <None Remove="GeoData\World\cities.prj" />
+    <None Remove="GeoData\World\cities.shp" />
+    <None Remove="GeoData\World\cities.shp.sidx" />
+    <None Remove="GeoData\World\cities.shx" />
+    <None Remove="GeoData\World\countries.dbf" />
+    <None Remove="GeoData\World\countries.prj" />
+    <None Remove="GeoData\World\countries.shp" />
+    <None Remove="GeoData\World\countries.shp.sidx" />
+    <None Remove="GeoData\World\countries.shx" />
+    <None Remove="GeoData\World\rivers.dbf" />
+    <None Remove="GeoData\World\rivers.prj" />
+    <None Remove="GeoData\World\rivers.shp" />
+    <None Remove="GeoData\World\rivers.shp.sidx" />
+    <None Remove="GeoData\World\rivers.shx" />
     <None Remove="Images\arrow.png" />
     <None Remove="Images\arrow.svg" />
     <None Remove="Images\Ghostscript_Tiger.png" />
     <None Remove="Images\Ghostscript_Tiger.svg" />
     <None Remove="Images\home.png" />
+    <None Remove="Images\icon.png" />
     <None Remove="Images\ic_place_black_24dp.png" />
     <None Remove="Images\loc.png" />
     <None Remove="Images\location.png" />
@@ -42,11 +58,59 @@
     <EmbeddedResource Include="EmbeddedResources\world.mbtiles">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\cities.dbf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\cities.prj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\cities.shp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\cities.shp.sidx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\cities.shx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\countries.dbf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\countries.prj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\countries.shp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\countries.shp.sidx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\countries.shx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\rivers.dbf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\rivers.prj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\rivers.shp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\rivers.shp.sidx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\rivers.shx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Images\arrow.png" />
     <EmbeddedResource Include="Images\arrow.svg" />
     <EmbeddedResource Include="Images\Ghostscript_Tiger.png" />
     <EmbeddedResource Include="Images\Ghostscript_Tiger.svg" />
     <EmbeddedResource Include="Images\home.png" />
+    <EmbeddedResource Include="Images\icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Images\ic_place_black_24dp.png" />
     <EmbeddedResource Include="Images\loc.png" />
     <EmbeddedResource Include="Images\location.png" />
