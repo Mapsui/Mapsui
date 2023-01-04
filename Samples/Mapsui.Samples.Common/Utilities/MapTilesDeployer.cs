@@ -21,7 +21,7 @@ namespace Mapsui.Samples.Common.Desktop.Utilities
 
         private static void CopyTile(Assembly assembly, string mapTile,string resourceFolder, string folder, string tile)
         {
-            assembly.CopyEmbeddedResourceToFile(@$"Mapsui.Samples.Common.Desktop.GeoData.{mapTile}.{resourceFolder}.", MapTileLocation + @$"\{mapTile}\{folder}\", $"{tile}.png");
+            assembly.CopyEmbeddedResourceToFile(@$"Mapsui.Samples.Common.GeoData.{mapTile}.{resourceFolder}.", MapTileLocation + @$"\{mapTile}\{folder}\", $"{tile}.png");
         }
     }
 }
