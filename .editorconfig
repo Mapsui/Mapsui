@@ -54,6 +54,8 @@ csharp_new_line_before_else = true
 csharp_new_line_before_members_in_object_initializers = false
 #require braces to be on a new line for control_blocks, methods, properties, object_collection_array_initializers, accessors, and types (also known as "Allman" style)
 csharp_new_line_before_open_brace = control_blocks, methods, properties, object_collection_array_initializers, accessors, types
+#end all files with a newline
+insert_final_newline = true
 
 #Formatting - organize using options
 
@@ -193,7 +195,7 @@ dotnet_naming_rule.non_field_members_should_be_pascal_case.style = pascal_case
 
 # Naming rules only to add the _ prefix to private fields
 dotnet_naming_rule.private_members_with_underscore.symbols  = private_fields
-dotnet_naming_rule.private_members_with_underscore.style    = prefix_underscore
+dotnet_naming_rule.private_members_with_underscore.style = prefix_underscore
 dotnet_naming_rule.private_members_with_underscore.severity = suggestion
 dotnet_naming_symbols.private_fields.applicable_kinds           = field
 dotnet_naming_symbols.private_fields.applicable_accessibilities = private
