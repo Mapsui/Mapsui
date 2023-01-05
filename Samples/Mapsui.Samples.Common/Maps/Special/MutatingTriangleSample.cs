@@ -38,7 +38,7 @@ public sealed class MutatingTriangleSample : ISample, ISampleTest, IDisposable
         var feature = new GeometryFeature(polygon);
         layer.Features = new List<IFeature> { feature };
 
-        PeriodicTask.RunAsync(() =>
+        _ = PeriodicTask.RunAsync(() =>
         {
             feature.Geometry = new Polygon(new LinearRing(GenerateRandomPoints(envelope, 3).ToArray()));
             // Clear cache for change to show
