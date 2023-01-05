@@ -19,7 +19,7 @@ namespace Mapsui.Samples.Common.Desktop
         }
         
         public string Name => " 9 Tiles on file system";
-        public string Category => "Data";
+        public string Category => "Data Formats";
 
         public void Setup(IMapControl mapControl)
         {

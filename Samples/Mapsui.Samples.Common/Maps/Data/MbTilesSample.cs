@@ -15,7 +15,7 @@ namespace Mapsui.Samples.Common.Maps
         }
 
         public string Name => " 1 MbTiles";
-        public string Category => "Data";
+        public string Category => "Data Formats";
 
         public static Map CreateMap()
         {

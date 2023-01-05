@@ -8,7 +8,7 @@ namespace Mapsui.Samples.Common.Maps.Data
     public class WmsSample : ISample
     {
         public string Name => " 6 WMS";
-        public string Category => "Data";
+        public string Category => "Data Formats";
         public static IUrlPersistentCache? DefaultCache { get; set; }
 
         public async Task<Map> CreateMapAsync()

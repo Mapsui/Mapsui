@@ -20,7 +20,7 @@ namespace Mapsui.Samples.Common.Desktop
         }
         
         public string Name => "10 Geo Tiff";
-        public string Category => "Data";
+        public string Category => "Data Formats";
 
         public void Setup(IMapControl mapControl)
         {

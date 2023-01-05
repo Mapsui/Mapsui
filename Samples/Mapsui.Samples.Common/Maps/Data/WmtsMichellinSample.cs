@@ -10,7 +10,7 @@ namespace Mapsui.Samples.Common.Maps
     public class WmtsMichelinSample : ISample
     {
         public string Name => " 5 WMTS Michelin";
-        public string Category => "Data";
+        public string Category => "Data Formats";
 
        public async Task<Map> CreateMapAsync()
         {

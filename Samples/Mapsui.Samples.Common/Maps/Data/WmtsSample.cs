@@ -12,7 +12,7 @@ namespace Mapsui.Samples.Common.Maps.Data
     public class WmtsSample : ISample
     {
         public string Name => " 3 WMTS";
-        public string Category => "Data";
+        public string Category => "Data Formats";
         public static IPersistentCache<byte[]>? DefaultCache { get; set; }
 
         public async Task<Map> CreateMapAsync()

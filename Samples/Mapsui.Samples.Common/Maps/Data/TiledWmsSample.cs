@@ -17,7 +17,7 @@ namespace Mapsui.Samples.Common.Maps
     public class TiledWmsSample : ISample
     {
         public string Name => " 4 WMS called tiled";
-        public string Category => "Data";
+        public string Category => "Data Formats";
         public static IPersistentCache<byte[]>? DefaultCache { get; set; }
 
         public Task<Map> CreateMapAsync()

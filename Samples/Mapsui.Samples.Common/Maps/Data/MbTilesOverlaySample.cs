@@ -17,7 +17,7 @@ namespace Mapsui.Samples.Common.Maps
         }
 
         public string Name => " 2 MbTiles Overlay";
-        public string Category => "Data";
+        public string Category => "Data Formats";
 
         public Task<Map> CreateMapAsync()
         {

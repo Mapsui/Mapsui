@@ -20,7 +20,7 @@ namespace Mapsui.Samples.Common.Desktop
         }
         
         public string Name => "12 Shapefile with labels";
-        public string Category => "Data";
+        public string Category => "Data Formats";
 
         public void Setup(IMapControl mapControl)
         {

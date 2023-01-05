@@ -16,7 +16,7 @@ namespace Mapsui.Samples.Common.Desktop
         private ArcGISImageCapabilities? _capabilities;
 
         public string Name => "11 ArcGIS image";
-        public string Category => "Data";
+        public string Category => "Data Formats";
         
         public static IUrlPersistentCache? DefaultCache { get; set; }
 

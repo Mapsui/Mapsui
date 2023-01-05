@@ -15,7 +15,7 @@ namespace Mapsui.Samples.Common.Maps.Data
     public class WfsSample : ISample
     {
         public string Name => " 7 WFS";
-        public string Category => "Data";
+        public string Category => "Data Formats";
         public static IUrlPersistentCache? DefaultCache { get; set; }
 
         private const string wfsUri = "https://geoservices1.civis.bz.it/geoserver/p_bz-AdministrativeUnits/ows";
