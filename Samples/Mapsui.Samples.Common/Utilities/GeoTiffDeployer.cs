@@ -13,8 +13,8 @@ namespace Mapsui.Samples.Common.Desktop.Utilities
         {
             geoTif = Path.GetFileNameWithoutExtension(geoTif);
             var assembly = typeof(GeoTiffSample).GetTypeInfo().Assembly;
-            assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.Images.", GeoTiffLocation, geoTif + ".tfw");
-            assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.Images.", GeoTiffLocation, geoTif + ".tif");
+            assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.GeoData.GeoTiff.", GeoTiffLocation, geoTif + ".tfw");
+            assembly.CopyEmbeddedResourceToFile("Mapsui.Samples.Common.GeoData.GeoTiff.", GeoTiffLocation, geoTif + ".tif");
         }
     }
 }

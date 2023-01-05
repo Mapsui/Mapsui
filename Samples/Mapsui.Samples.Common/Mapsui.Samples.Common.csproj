@@ -127,10 +127,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Images\arrow.png" />
     <EmbeddedResource Include="Images\arrow.svg" />
-    <EmbeddedResource Include="Images\example.tfw">
+    <EmbeddedResource Include="GeoData\GeoTiff\example.tfw">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Images\example.tif">
+    <EmbeddedResource Include="GeoData\GeoTiff\example.tif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Images\Ghostscript_Tiger.png" />
