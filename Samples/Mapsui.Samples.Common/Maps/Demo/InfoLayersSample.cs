@@ -153,7 +153,7 @@ public class InfoLayersSample : ISample, ISampleTest
 
         return new Layer(InfoLayerName)
         {
-            DataSource = RandomPointBuilder.CreateProviderWithRandomPoints(envelope, 25, random),
+            DataSource = RandomPointsBuilder.CreateProviderWithRandomPoints(envelope, 25, random),
             Style = CreateSymbolStyle(),
             IsMapInfoLayer = true
         };

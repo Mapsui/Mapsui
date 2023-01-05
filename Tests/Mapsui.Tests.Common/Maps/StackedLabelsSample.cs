@@ -24,7 +24,7 @@ namespace Mapsui.Tests.Common.Maps
         public static Map CreateMap()
         {
             var random = new Random(6);
-            var features = RandomPointBuilder.CreateRandomFeatures(new MRect(-100, -100, 100, 100), 20, random);
+            var features = RandomPointsBuilder.CreateRandomFeatures(new MRect(-100, -100, 100, 100), 20, random);
             var layer = CreateLayer(features);
             var stackedLabelLayer = CreateStackedLabelLayer(features, LabelColumn);
 

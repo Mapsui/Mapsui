@@ -41,7 +41,7 @@ public class SymbolsSample : ISample
         return new MemoryLayer
         {
             Name = "Styles Layer",
-            Features = CreateDiverseFeatures(RandomPointBuilder.GenerateRandomPoints(envelope, 25)),
+            Features = CreateDiverseFeatures(RandomPointsBuilder.GenerateRandomPoints(envelope, 25)),
             Style = null,
             IsMapInfoLayer = true
         };

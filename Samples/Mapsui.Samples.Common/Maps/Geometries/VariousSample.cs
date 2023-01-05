@@ -33,7 +33,7 @@ public class VariousSample : ISample, ISampleTest
     {
         return new Layer("Style on Layer")
         {
-            DataSource = new MemoryProvider(RandomPointBuilder.GenerateRandomPoints(envelope, count).ToFeatures()),
+            DataSource = new MemoryProvider(RandomPointsBuilder.GenerateRandomPoints(envelope, count).ToFeatures()),
             Style = CreateBitmapStyle("Images.ic_place_black_24dp.png")
         };
     }
@@ -51,7 +51,7 @@ public class VariousSample : ISample, ISampleTest
 
     private static IEnumerable<IFeature> GenerateRandomFeatures(MRect? envelope, int count, IStyle style)
     {
-        return RandomPointBuilder.GenerateRandomPoints(envelope, count, new System.Random(123))
+        return RandomPointsBuilder.GenerateRandomPoints(envelope, count, new System.Random(123))
             .Select(p => new PointFeature(p) { Styles = new List<IStyle> { style } }).ToList();
     }
 

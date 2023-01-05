@@ -36,7 +36,7 @@ public class AtlasSample : ISample
         return new MemoryLayer
         {
             Name = AtlasLayerName,
-            Features = CreateAtlasFeatures(RandomPointBuilder.GenerateRandomPoints(envelope, 1000)),
+            Features = CreateAtlasFeatures(RandomPointsBuilder.GenerateRandomPoints(envelope, 1000)),
             Style = null,
             IsMapInfoLayer = true
         };

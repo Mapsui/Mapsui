@@ -76,7 +76,7 @@ public class CustomStyleSample : IMapControlSample
         return new MemoryLayer
         {
             Name = "Custome Style Layer",
-            Features = CreateDiverseFeatures(RandomPointBuilder.GenerateRandomPoints(envelope, 25)),
+            Features = CreateDiverseFeatures(RandomPointsBuilder.GenerateRandomPoints(envelope, 25)),
             Style = null,
             IsMapInfoLayer = true
         };

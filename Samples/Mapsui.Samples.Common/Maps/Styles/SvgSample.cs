@@ -29,7 +29,7 @@ public class SvgSample : ISample
         return new MemoryLayer
         {
             Name = "Svg Layer",
-            Features = CreateSvgFeatures(RandomPointBuilder.GenerateRandomPoints(envelope, 2000)),
+            Features = CreateSvgFeatures(RandomPointsBuilder.GenerateRandomPoints(envelope, 2000)),
             Style = null,
             IsMapInfoLayer = true
         };
