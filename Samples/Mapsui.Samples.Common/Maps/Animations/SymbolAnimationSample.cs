@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Mapsui.Layers;
+﻿using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.UI;
 using Mapsui.Utilities;
-using NetTopologySuite.Operation.Valid;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -96,7 +95,8 @@ namespace Mapsui.Samples.Common.Maps
                 animationStart: 0,
                 animationEnd: 1,
                 easing: Easing.SinInOut,
-                tick: (symbolStyle, e, v) => {
+                tick: (symbolStyle, e, v) =>
+                {
                     var start = (Color)e.Start;
                     var end = (Color)e.End;
                     if (symbolStyle.Fill != null)
@@ -107,7 +107,8 @@ namespace Mapsui.Samples.Common.Maps
                             (int)(start.B * (1.0 - v) + end.B * v));
                     }
                 },
-                final: (symbolStyle, e) => {
+                final: (symbolStyle, e) =>
+                {
                     if (symbolStyle.Fill != null)
                     {
                         symbolStyle.Fill.Color = (Color)e.End;
@@ -132,7 +133,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             if (_animationLayer == null)
                 return;
-            
+
             while (_animationLayer.UpdateAnimations())
             {
                 await Task.Delay(10).ConfigureAwait(true);

@@ -1,13 +1,13 @@
-﻿using System.IO;
-using System.Reflection;
+﻿using Mapsui.Extensions;
 using Mapsui.Layers;
-using Mapsui.Providers;
 using Mapsui.Nts.Providers.Shapefile;
+using Mapsui.Providers;
+using Mapsui.Samples.Common.Desktop.Utilities;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.UI;
-using Mapsui.Extensions;
-using Mapsui.Samples.Common.Desktop.Utilities;
+using System.IO;
+using System.Reflection;
 
 namespace Mapsui.Samples.Common.Desktop
 {
@@ -18,7 +18,7 @@ namespace Mapsui.Samples.Common.Desktop
             ShapeFilesDeployer.CopyEmbeddedResourceToFile("countries.shp");
             ShapeFilesDeployer.CopyEmbeddedResourceToFile("cities.shp");
         }
-        
+
         public string Name => "12 Shapefile with labels";
         public string Category => "Data Formats";
 
@@ -32,7 +32,7 @@ namespace Mapsui.Samples.Common.Desktop
             var map = new Map();
 
             var countrySource = new ShapeFile(ShapeFilesDeployer.ShapeFilesLocation + "\\countries.shp", true);
-            var citySource = new ShapeFile(ShapeFilesDeployer.ShapeFilesLocation +"\\cities.shp", true);
+            var citySource = new ShapeFile(ShapeFilesDeployer.ShapeFilesLocation + "\\cities.shp", true);
 
             map.Layers.Add(new RasterizingLayer(CreateCountryLayer(countrySource)));
             map.Layers.Add(new RasterizingLayer(CreateCityLayer(citySource)));

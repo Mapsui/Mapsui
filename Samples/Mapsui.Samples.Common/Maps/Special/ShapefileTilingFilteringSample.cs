@@ -1,13 +1,13 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Nts;
-using Mapsui.Providers;
 using Mapsui.Nts.Providers.Shapefile;
+using Mapsui.Providers;
 using Mapsui.Samples.Common.Desktop.Utilities;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
-using Mapsui.UI;
 using Mapsui.Tiling.Layers;
+using Mapsui.UI;
 
 #pragma warning disable IDISP001 // Dispose created
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
@@ -21,7 +21,7 @@ namespace Mapsui.Samples.Common.Desktop
             ShapeFilesDeployer.CopyEmbeddedResourceToFile("countries.shp");
             ShapeFilesDeployer.CopyEmbeddedResourceToFile("cities.shp");
         }
-        
+
         public string Name => "Filtering on shapefile";
         public string Category => "Special";
 

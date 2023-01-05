@@ -1,14 +1,13 @@
-﻿using System;
+﻿using Mapsui.Samples.Common.Extensions;
+using System;
 using System.IO;
 using System.Reflection;
-using Mapsui.Samples.Common.Extensions;
-using Mapsui.Samples.Common.Maps;
 
 namespace Mapsui.Samples.Common.Desktop.Utilities
 {
     public static class ShapeFilesDeployer
     {
-        public static string ShapeFilesLocation { get; set; } =  Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Mapsui.Samples");
+        public static string ShapeFilesLocation { get; set; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Mapsui.Samples");
 
         public static void CopyEmbeddedResourceToFile(string shapefile)
         {

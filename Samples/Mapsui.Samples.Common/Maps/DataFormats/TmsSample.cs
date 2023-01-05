@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-using BruTile.Cache;
+﻿using BruTile.Cache;
 using Mapsui.Layers;
 using Mapsui.Tiling.Layers;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps
 {

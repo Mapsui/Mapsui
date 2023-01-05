@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-using Mapsui.Cache;
+﻿using Mapsui.Cache;
 using Mapsui.Layers;
 using Mapsui.Providers.Wms;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Data
 {

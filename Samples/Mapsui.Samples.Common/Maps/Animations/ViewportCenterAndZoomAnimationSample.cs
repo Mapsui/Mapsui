@@ -1,11 +1,11 @@
-﻿using System;
-using Mapsui.Extensions;
+﻿using Mapsui.Extensions;
 using Mapsui.Tiling;
 using Mapsui.UI;
 using Mapsui.Utilities;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ScaleBar;
 using Mapsui.Widgets.Zoom;
+using System;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -19,7 +19,8 @@ namespace Mapsui.Samples.Common.Maps
         {
             mapControl.Map = CreateMap();
 
-            mapControl.Map.Info += (s, a) => {
+            mapControl.Map.Info += (s, a) =>
+            {
                 if (a.MapInfo?.WorldPosition != null)
                 {
                     // Animate to the new center and new resultion

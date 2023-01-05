@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Mapsui.Layers;
-using Mapsui.Providers;
+﻿using Mapsui.Layers;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Samples.Common.DataBuilders;
@@ -9,6 +6,8 @@ using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.UI;
 using SkiaSharp;
+using System;
+using System.Collections.Generic;
 
 namespace Mapsui.Samples.Common.Maps.Styles
 {

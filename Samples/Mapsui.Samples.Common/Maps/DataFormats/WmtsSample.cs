@@ -1,12 +1,12 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using BruTile.Cache;
+﻿using BruTile.Cache;
 using BruTile.Wmts;
 using Mapsui.Cache;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Tiling.Layers;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Data
 {
@@ -38,9 +38,9 @@ namespace Mapsui.Samples.Common.Maps.Data
             {
                 nature2000TileSource.PersistentCache = DefaultCache;
             }
-            
+
             return new TileLayer(nature2000TileSource) { Name = nature2000TileSource.Name };
-            
+
         }
     }
 }

@@ -17,7 +17,8 @@ namespace Mapsui.Samples.Common.Maps
         {
             mapControl.Map = CreateMap();
 
-            mapControl.Map.Info += (s, a) => {
+            mapControl.Map.Info += (s, a) =>
+            {
                 if (a.MapInfo?.WorldPosition != null)
                 {
                     // 'FlyTo' is a specific navigation that moves to a new center while moving in and out.

@@ -1,15 +1,13 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Mapsui.Layers;
+﻿using Mapsui.Layers;
 using Mapsui.Nts;
 using Mapsui.Nts.Extensions;
 using Mapsui.Projections;
-using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.Tiling;
-using Mapsui.UI;
 using NetTopologySuite.Geometries;
 using NetTopologySuite.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 

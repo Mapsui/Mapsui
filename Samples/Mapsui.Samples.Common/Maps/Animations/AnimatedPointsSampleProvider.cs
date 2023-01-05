@@ -2,17 +2,17 @@
 // The Mapsui authors licensed this file under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
+using Mapsui.Fetcher;
+using Mapsui.Layers;
+using Mapsui.Providers;
+using Mapsui.Samples.Common.DataBuilders;
+using Mapsui.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Mapsui.Fetcher;
-using Mapsui.Layers;
-using Mapsui.Providers;
-using Mapsui.Samples.Common.DataBuilders;
-using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps.Animations;
 

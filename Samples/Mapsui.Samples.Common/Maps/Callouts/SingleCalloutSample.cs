@@ -1,9 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using Mapsui.Extensions;
+﻿using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Projections;
 using Mapsui.Providers;
@@ -11,6 +6,11 @@ using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.UI;
 using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Local
 // ReSharper disable once ClassNeverInstantiated.Local
@@ -62,7 +62,8 @@ namespace Mapsui.Samples.Common.Maps.Callouts
             using var stream = assembly.GetManifestResourceStream(path);
             var cities = DeserializeFromStream<City>(stream!);
 
-            return cities.Select(c => {
+            return cities.Select(c =>
+            {
                 var feature = new PointFeature(SphericalMercator.FromLonLat(c.Lng, c.Lat).ToMPoint());
                 feature["name"] = c.Name;
                 feature["country"] = c.Country;

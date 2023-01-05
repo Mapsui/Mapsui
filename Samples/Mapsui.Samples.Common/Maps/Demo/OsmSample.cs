@@ -1,6 +1,5 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Tiling;
-using Mapsui.UI;
 using Mapsui.Widgets;
 using Mapsui.Widgets.ScaleBar;
 using Mapsui.Widgets.Zoom;
@@ -19,7 +18,7 @@ namespace Mapsui.Samples.Common.Maps.Demo
         }
 
         public static Map CreateMap()
-        { 
+        {
             var map = new Map
             {
                 CRS = "EPSG:3857"

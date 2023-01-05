@@ -1,13 +1,13 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using BruTile;
+﻿using BruTile;
 using BruTile.Cache;
 using BruTile.Predefined;
 using BruTile.Web;
 using BruTile.Wmsc;
 using Mapsui.Layers;
 using Mapsui.Tiling.Layers;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps
 {

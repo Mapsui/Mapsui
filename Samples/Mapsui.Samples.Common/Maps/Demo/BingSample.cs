@@ -1,14 +1,10 @@
-﻿using System.IO;
-using System.Threading.Tasks;
-using BruTile.Cache;
+﻿using BruTile.Cache;
 using BruTile.Predefined;
-using Mapsui.Fetcher;
-using Mapsui.Layers;
 using Mapsui.Samples.Common.PersistentCaches;
 using Mapsui.Styles;
 using Mapsui.Tiling.Fetcher;
 using Mapsui.Tiling.Layers;
-using Mapsui.UI;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps
 {

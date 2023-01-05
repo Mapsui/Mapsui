@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Mapsui.Samples.Common.Extensions;
+using System;
 using System.IO;
 using System.Reflection;
-using Mapsui.Samples.Common.Extensions;
 
 namespace Mapsui.Samples.Common.Desktop.Utilities
 {
     public static class MapTilesDeployer
     {
-        public static string MapTileLocation { get; set; } =  Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Mapsui.Samples");
+        public static string MapTileLocation { get; set; } = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Mapsui.Samples");
 
         public static void CopyEmbeddedResourceToFile(string mapTile)
         {
@@ -19,7 +19,7 @@ namespace Mapsui.Samples.Common.Desktop.Utilities
             CopyTile(assembly, mapTile, @"_1._1", @"1\1", "1");
         }
 
-        private static void CopyTile(Assembly assembly, string mapTile,string resourceFolder, string folder, string tile)
+        private static void CopyTile(Assembly assembly, string mapTile, string resourceFolder, string folder, string tile)
         {
             assembly.CopyEmbeddedResourceToFile(@$"Mapsui.Samples.Common.GeoData.{mapTile}.{resourceFolder}.", MapTileLocation + @$"\{mapTile}\{folder}\", $"{tile}.png");
         }

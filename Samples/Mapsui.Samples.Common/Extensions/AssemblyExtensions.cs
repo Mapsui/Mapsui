@@ -6,8 +6,8 @@ namespace Mapsui.Samples.Common.Extensions;
 public static class AssemblyExtensions
 {
     public static void CopyEmbeddedResourceToFile(
-        this Assembly assembly, 
-        string embeddedResourcesPath, 
+        this Assembly assembly,
+        string embeddedResourcesPath,
         string folder,
         string resourceFile)
     {

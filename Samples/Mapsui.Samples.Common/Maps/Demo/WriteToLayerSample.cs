@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Threading.Tasks;
-using Mapsui.Layers;
+﻿using Mapsui.Layers;
 using Mapsui.Nts;
-using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using NetTopologySuite.Geometries;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Demo
 {

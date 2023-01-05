@@ -1,12 +1,11 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Mapsui.ArcGIS;
+﻿using Mapsui.ArcGIS;
 using Mapsui.ArcGIS.DynamicProvider;
 using Mapsui.ArcGIS.ImageServiceProvider;
 using Mapsui.Cache;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Styles;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Desktop
 {
@@ -17,7 +16,7 @@ namespace Mapsui.Samples.Common.Desktop
 
         public string Name => "11 ArcGIS image";
         public string Category => "Data Formats";
-        
+
         public static IUrlPersistentCache? DefaultCache { get; set; }
 
         public async Task<ILayer> CreateLayerAsync()

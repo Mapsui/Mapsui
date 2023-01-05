@@ -18,7 +18,8 @@ namespace Mapsui.Samples.Common.Maps
         {
             mapControl.Map = CreateMap();
 
-            mapControl.Map.Info += (s, a) => {
+            mapControl.Map.Info += (s, a) =>
+            {
                 if (a.MapInfo?.WorldPosition != null)
                 {
                     // Zoom in while keeping centerOfZoom at the same position. If you click somewhere to zoom in the mousepointer

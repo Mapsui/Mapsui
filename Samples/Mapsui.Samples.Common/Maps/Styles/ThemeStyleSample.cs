@@ -1,16 +1,16 @@
-﻿using System.IO;
-using System.Reflection;
+﻿using Mapsui.Extensions;
 using Mapsui.Layers;
-using Mapsui.Styles;
-using Mapsui.Styles.Thematics;
-using Mapsui.UI;
-using Mapsui.Extensions;
 using Mapsui.Nts;
 using Mapsui.Nts.Providers.Shapefile;
 using Mapsui.Providers;
-using Mapsui.Samples.Common.Desktop.Utilities;
-using NetTopologySuite.Geometries;
 using Mapsui.Samples.Common.DataBuilders;
+using Mapsui.Samples.Common.Desktop.Utilities;
+using Mapsui.Styles;
+using Mapsui.Styles.Thematics;
+using Mapsui.UI;
+using NetTopologySuite.Geometries;
+using System.IO;
+using System.Reflection;
 
 namespace Mapsui.Samples.Common.Desktop
 {
@@ -20,7 +20,7 @@ namespace Mapsui.Samples.Common.Desktop
         {
             ShapeFilesDeployer.CopyEmbeddedResourceToFile("countries.shp");
         }
-        
+
         public string Name => "ThemeStyle on shapefile";
         public string Category => "Styles";
 
@@ -54,7 +54,8 @@ namespace Mapsui.Samples.Common.Desktop
 
         private static ThemeStyle CreateThemeStyle()
         {
-            return new ThemeStyle(f => {
+            return new ThemeStyle(f =>
+            {
                 if (f is GeometryFeature geometryFeature)
                     if (geometryFeature.Geometry is Point)
                         return null;

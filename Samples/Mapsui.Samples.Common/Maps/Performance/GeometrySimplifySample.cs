@@ -1,13 +1,13 @@
-﻿using System.IO;
-using System.Reflection;
-using Mapsui.Layers;
-using Mapsui.Providers;
+﻿using Mapsui.Layers;
+using Mapsui.Nts.Providers;
 using Mapsui.Nts.Providers.Shapefile;
+using Mapsui.Providers;
+using Mapsui.Samples.Common.Desktop.Utilities;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.UI;
-using Mapsui.Nts.Providers;
-using Mapsui.Samples.Common.Desktop.Utilities;
+using System.IO;
+using System.Reflection;
 
 namespace Mapsui.Samples.Common.Desktop
 {
@@ -17,7 +17,7 @@ namespace Mapsui.Samples.Common.Desktop
         {
             ShapeFilesDeployer.CopyEmbeddedResourceToFile("countries.shp");
         }
-        
+
         public string Name => "Simplify Geometry";
         public string Category => "Performance";
 
@@ -29,10 +29,11 @@ namespace Mapsui.Samples.Common.Desktop
         public static Map CreateMap()
         {
             var map = new Map();
-            
+
             var countrySource = new ShapeFile(ShapeFilesDeployer.ShapeFilesLocation + "\\countries.shp", true);
             countrySource.CRS = "EPSG:4326";
-            var projectedCountrySource = new ProjectingProvider(countrySource) {
+            var projectedCountrySource = new ProjectingProvider(countrySource)
+            {
                 CRS = "EPSG:3857",
             };
 

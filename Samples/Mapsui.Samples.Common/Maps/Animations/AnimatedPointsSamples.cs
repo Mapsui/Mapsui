@@ -4,7 +4,6 @@ using Mapsui.Samples.Common.Maps.Styles;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.Tiling;
-using Mapsui.UI;
 using Mapsui.Utilities;
 using System.Threading.Tasks;
 
@@ -37,7 +36,8 @@ public class AnimatedPointsSamples : ISample
 
     private static IStyle CreatePointStyle()
     {
-        return new ThemeStyle(f => {
+        return new ThemeStyle(f =>
+        {
             return CreateSvgArrowStyle("Images.arrow.svg", 0.5, f);
         });
     }

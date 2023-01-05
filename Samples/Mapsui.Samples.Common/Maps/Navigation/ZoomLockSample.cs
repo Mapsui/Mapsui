@@ -1,5 +1,4 @@
 ﻿using Mapsui.Tiling;
-using Mapsui.UI;
 using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Navigation
@@ -11,7 +10,7 @@ namespace Mapsui.Samples.Common.Maps.Navigation
 
         public Task<Map> CreateMapAsync()
         {
-            var map = new Map { ZoomLock = true};
+            var map = new Map { ZoomLock = true };
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
             return Task.FromResult(map);
         }

@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Mapsui.Layers;
+using Mapsui.Providers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Mapsui.Layers;
-using Mapsui.Providers;
 
 namespace Mapsui.Samples.Common.DataBuilders;
 public static class RandomPointBuilder

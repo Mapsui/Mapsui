@@ -1,7 +1,6 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Styles;
 using Mapsui.Tiling;
-using Mapsui.UI;
 using Mapsui.Widgets.ScaleBar;
 using System.Threading.Tasks;
 

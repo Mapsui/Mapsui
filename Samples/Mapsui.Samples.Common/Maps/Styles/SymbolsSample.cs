@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles;
-using Mapsui.Utilities;
-using Mapsui.Extensions;
 using Mapsui.Tiling;
-
+using Mapsui.Utilities;
+using System.Collections.Generic;
+using System.Linq;
 /* Unmerged change from project 'Mapsui.Samples.Common (netstandard2.0)'
 Before:
 using System.Threading.Tasks;
@@ -18,7 +18,6 @@ using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.Common.Maps.Styles;
 */
 using System.Threading.Tasks;
-using Mapsui.Samples.Common.DataBuilders;
 
 namespace Mapsui.Samples.Common.Maps.Styles
 {

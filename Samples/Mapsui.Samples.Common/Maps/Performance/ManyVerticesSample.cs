@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using Mapsui.Layers;
+﻿using Mapsui.Layers;
 using Mapsui.Nts;
-using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.UI;
 using NetTopologySuite.Geometries;
+using System.Collections.Generic;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Local
 #pragma warning disable CS8670 // Object or collection initializer implicitly dereferences possibly null member.

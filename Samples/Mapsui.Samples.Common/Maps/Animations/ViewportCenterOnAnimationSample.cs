@@ -18,7 +18,8 @@ namespace Mapsui.Samples.Common.Maps
         {
             mapControl.Map = CreateMap();
 
-            mapControl.Map.Info += (s, a) => {
+            mapControl.Map.Info += (s, a) =>
+            {
                 if (a.MapInfo?.WorldPosition != null)
                 {
                     // Animate to the new center.

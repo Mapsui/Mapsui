@@ -3,10 +3,10 @@ using BruTile.Cache;
 using BruTile.FileSystem;
 using BruTile.Predefined;
 using Mapsui.Layers;
+using Mapsui.Samples.Common.Desktop.Utilities;
 using Mapsui.Tiling.Layers;
 using Mapsui.UI;
 using System.Threading.Tasks;
-using Mapsui.Samples.Common.Desktop.Utilities;
 using Attribution = BruTile.Attribution;
 
 namespace Mapsui.Samples.Common.Desktop
@@ -17,7 +17,7 @@ namespace Mapsui.Samples.Common.Desktop
         {
             MapTilesDeployer.CopyEmbeddedResourceToFile("TrueMarble");
         }
-        
+
         public string Name => " 9 Tiles on file system";
         public string Category => "Data Formats";
 
@@ -60,7 +60,7 @@ namespace Mapsui.Samples.Common.Desktop
 
         public static ITileProvider GetTileProvider()
         {
-            return new FileTileProvider(new FileCache(MapTilesDeployer.MapTileLocation  + "\\TrueMarble", "png"));
+            return new FileTileProvider(new FileCache(MapTilesDeployer.MapTileLocation + "\\TrueMarble", "png"));
         }
 
         public static ITileSchema GetTileSchema()

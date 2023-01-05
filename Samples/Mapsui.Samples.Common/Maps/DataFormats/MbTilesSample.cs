@@ -1,9 +1,9 @@
-﻿using System.IO;
-using System.Threading.Tasks;
-using BruTile.MbTiles;
+﻿using BruTile.MbTiles;
 using Mapsui.Samples.Common.Utilities;
 using Mapsui.Tiling.Layers;
 using SQLite;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -23,7 +23,7 @@ namespace Mapsui.Samples.Common.Maps
             map.Layers.Add(CreateMbTilesLayer(Path.GetFullPath(Path.Combine(MbTilesDeployer.MbTilesLocation, "world.mbtiles")), "regular"));
             return map;
         }
-    
+
         public Task<Map> CreateMapAsync()
         {
             return Task.FromResult(CreateMap());

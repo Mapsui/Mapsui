@@ -1,10 +1,10 @@
-﻿using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-using BruTile.Wmts;
+﻿using BruTile.Wmts;
 using Mapsui.Layers;
 using Mapsui.Samples.Common.PersistentCaches;
 using Mapsui.Tiling.Layers;
+using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps
 {
@@ -13,7 +13,7 @@ namespace Mapsui.Samples.Common.Maps
         public string Name => " 5 WMTS Michelin";
         public string Category => "Data Formats";
 
-       public async Task<Map> CreateMapAsync()
+        public async Task<Map> CreateMapAsync()
         {
             var map = new Map();
             map.Layers.Add(await CreateLayerAsync());
@@ -31,7 +31,7 @@ namespace Mapsui.Samples.Common.Maps
             {
                 tileSource.PersistentCache = Michelin.DefaultCache;
             }
-            
+
             return new TileLayer(tileSource) { Name = tileSource.Name };
         }
     }

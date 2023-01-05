@@ -1,17 +1,15 @@
-﻿using System;
+﻿using Mapsui.Extensions;
+using Mapsui.Layers;
+using Mapsui.Projections;
+using Mapsui.Styles;
+using Mapsui.Tiling;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using Mapsui.Extensions;
-using Mapsui.Layers;
-using Mapsui.Projections;
-using Mapsui.Providers;
-using Mapsui.Styles;
-using Mapsui.Tiling;
-using Mapsui.UI;
-using Newtonsoft.Json;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Local
 
@@ -50,7 +48,8 @@ namespace Mapsui.Samples.Common.Maps
             using var stream = assembly.GetManifestResourceStream(path) ?? throw new InvalidOperationException($"{path} not found");
             var cities = DeserializeFromStream<City>(stream);
 
-            return cities.Select(c => {
+            return cities.Select(c =>
+            {
                 var feature = new PointFeature(SphericalMercator.FromLonLat(c.Lng, c.Lat).ToMPoint());
                 feature["name"] = c.Name;
                 feature["country"] = c.Country;

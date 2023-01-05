@@ -1,14 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Net;
-using System.Threading.Tasks;
-using BruTile;
-using BruTile.Web;
-using Mapsui.Cache;
+﻿using Mapsui.Cache;
 using Mapsui.Layers;
 using Mapsui.Logging;
 using Mapsui.Providers.Wfs;
 using Mapsui.Styles;
 using Mapsui.Tiling;
+using System.Collections.Generic;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Data
 {
@@ -59,7 +57,7 @@ namespace Mapsui.Samples.Common.Maps.Data
         private static async Task<WFSProvider> CreateWfsProviderAsync(string getCapabilitiesUri)
         {
             var provider = new WFSProvider(
-                getCapabilitiesUri, 
+                getCapabilitiesUri,
                 nsPrefix,
                 layerName,
                 WFSProvider.WFSVersionEnum.WFS_1_1_0,

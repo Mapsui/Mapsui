@@ -1,5 +1,4 @@
-﻿using Mapsui.UI;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps.Navigation
 {

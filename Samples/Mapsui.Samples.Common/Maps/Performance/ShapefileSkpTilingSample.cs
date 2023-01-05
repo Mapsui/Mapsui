@@ -1,16 +1,16 @@
-﻿using System.IO;
-using System.Reflection;
-using Mapsui.Extensions.Cache;
+﻿using Mapsui.Extensions.Cache;
 using Mapsui.Layers;
 using Mapsui.Nts.Providers;
-using Mapsui.Providers;
 using Mapsui.Nts.Providers.Shapefile;
+using Mapsui.Providers;
 using Mapsui.Rendering;
 using Mapsui.Samples.Common.Desktop.Utilities;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
-using Mapsui.UI;
 using Mapsui.Tiling.Layers;
+using Mapsui.UI;
+using System.IO;
+using System.Reflection;
 
 #pragma warning disable IDISP001 // Dispose created
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
@@ -27,7 +27,7 @@ namespace Mapsui.Samples.Common.Desktop
             ShapeFilesDeployer.CopyEmbeddedResourceToFile("countries.shp");
             ShapeFilesDeployer.CopyEmbeddedResourceToFile("cities.shp");
         }
-        
+
         public string Category => "Performance";
 
         public void Setup(IMapControl mapControl)

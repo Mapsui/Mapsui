@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
-using Mapsui.Extensions.Provider;
+﻿using Mapsui.Extensions.Provider;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Desktop.Utilities;
 using Mapsui.Styles;
 using Mapsui.UI;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 
 #pragma warning disable IDISP001 // Dispose created
 
@@ -18,7 +18,7 @@ namespace Mapsui.Samples.Common.Desktop
         {
             GeoTiffDeployer.CopyEmbeddedResourceToFile("example.shp");
         }
-        
+
         public string Name => "10 Geo Tiff";
         public string Category => "Data Formats";
 

@@ -1,17 +1,16 @@
-﻿using System.IO;
-using System.Reflection;
-using Mapsui.Extensions;
+﻿using Mapsui.Extensions;
 using Mapsui.Extensions.Cache;
 using Mapsui.Layers;
-using Mapsui.Providers;
 using Mapsui.Nts.Providers.Shapefile;
-using Mapsui.Rendering;
 using Mapsui.Projections;
+using Mapsui.Providers;
 using Mapsui.Samples.Common.Desktop.Utilities;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
-using Mapsui.UI;
 using Mapsui.Tiling.Layers;
+using Mapsui.UI;
+using System.IO;
+using System.Reflection;
 
 #pragma warning disable IDISP001 // Dispose created
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
@@ -25,7 +24,7 @@ namespace Mapsui.Samples.Common.Desktop
             ShapeFilesDeployer.CopyEmbeddedResourceToFile("countries.shp");
             ShapeFilesDeployer.CopyEmbeddedResourceToFile("cities.shp");
         }
-        
+
         public string Name => "Rasterizing tiling on shapefile";
         public string Category => "Performance";
 
@@ -44,7 +43,7 @@ namespace Mapsui.Samples.Common.Desktop
             {
                 CRS = "EPSG:3857",
             };
-            var citySource = new ShapeFile(ShapeFilesDeployer.ShapeFilesLocation+ "\\cities.shp", true);
+            var citySource = new ShapeFile(ShapeFilesDeployer.ShapeFilesLocation + "\\cities.shp", true);
             citySource.CRS = "EPSG:4326";
             var projectedCitySource = new ProjectingProvider(citySource)
             {
@@ -57,7 +56,7 @@ namespace Mapsui.Samples.Common.Desktop
             map.Layers.Add(new RasterizingTileLayer(CreateCityLayer(projectedCitySource)));
             map.Layers.Add(new RasterizingTileLayer(CreateCountryLabelLayer(projectedCountrySource)));
             map.Layers.Add(new RasterizingTileLayer(CreateCityLabelLayer(projectedCitySource)));
-            var home =  Mercator.FromLonLat(15, 54);
+            var home = Mercator.FromLonLat(15, 54);
             map.Home = n => n.NavigateTo(home, map.Resolutions[5]);
 
             return map;

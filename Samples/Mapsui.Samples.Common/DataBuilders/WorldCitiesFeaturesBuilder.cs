@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Mapsui.Layers;
+using System.Collections.Generic;
 using System.Linq;
-using Mapsui.Layers;
 
 namespace Mapsui.Samples.Common.DataBuilders;
 public class WorldCitiesFeaturesBuilder

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Mapsui.Layers;
+﻿using Mapsui.Layers;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.UI;
+using System;
+using System.Collections.Generic;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 

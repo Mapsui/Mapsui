@@ -1,11 +1,11 @@
-﻿using System.IO;
-using System.Threading.Tasks;
-using BruTile.MbTiles;
+﻿using BruTile.MbTiles;
 using BruTile.Predefined;
 using Mapsui.Samples.Common.PersistentCaches;
 using Mapsui.Samples.Common.Utilities;
 using Mapsui.Tiling.Layers;
 using SQLite;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Mapsui.Samples.Common.Maps
 {
