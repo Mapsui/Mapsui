@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text;
 
 namespace Mapsui.Samples.Common;
+
 public static class AllSamples
 {
     public static IEnumerable<ISampleBase> GetSamples()

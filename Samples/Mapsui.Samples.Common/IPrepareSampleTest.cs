@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for full license information.
 
 namespace Mapsui.Samples.Common;
+
 public interface IPrepareSampleTest
 {
     void PrepareTest();

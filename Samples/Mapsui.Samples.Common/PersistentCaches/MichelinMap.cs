@@ -4,10 +4,9 @@
 
 using BruTile.Cache;
 
-namespace Mapsui.Samples.Common.PersistentCaches
+namespace Mapsui.Samples.Common.PersistentCaches;
+
+public static class BingHybrid
 {
-    public static class BingHybrid
-    {
-        public static IPersistentCache<byte[]>? DefaultCache = null;
-    }
+    public static IPersistentCache<byte[]>? DefaultCache = null;
 }

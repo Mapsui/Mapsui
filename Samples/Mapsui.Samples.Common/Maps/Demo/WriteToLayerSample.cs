@@ -7,42 +7,41 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps.Demo
+namespace Mapsui.Samples.Common.Maps.Demo;
+
+public class WriteToLayerSample : ISample
 {
-    public class WriteToLayerSample : ISample
+    public string Name => "4 Add Pins";
+    public string Category => "Demo";
+
+    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
+    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don't ignore created IDisposable")]
+    public Task<Map> CreateMapAsync()
     {
-        public string Name => "4 Add Pins";
-        public string Category => "Demo";
+        var map = new Map();
 
-        [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created")]
-        [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don't ignore created IDisposable")]
-        public Task<Map> CreateMapAsync()
+        map.Layers.Add(OpenStreetMap.CreateTileLayer());
+
+        var layer = new GenericCollectionLayer<List<IFeature>>
         {
-            var map = new Map();
+            Style = SymbolStyles.CreatePinStyle()
+        };
+        map.Layers.Add(layer);
 
-            map.Layers.Add(OpenStreetMap.CreateTileLayer());
+        map.Info += (s, e) =>
+        {
+            if (e.MapInfo?.WorldPosition == null) return;
 
-            var layer = new GenericCollectionLayer<List<IFeature>>
+            // Add a point to the layer using the Info position
+            layer?.Features.Add(new GeometryFeature
             {
-                Style = SymbolStyles.CreatePinStyle()
-            };
-            map.Layers.Add(layer);
+                Geometry = new Point(e.MapInfo.WorldPosition.X, e.MapInfo.WorldPosition.Y)
+            });
+            // To notify the map that a redraw is needed.
+            layer?.DataHasChanged();
+            return;
+        };
 
-            map.Info += (s, e) =>
-            {
-                if (e.MapInfo?.WorldPosition == null) return;
-
-                // Add a point to the layer using the Info position
-                layer?.Features.Add(new GeometryFeature
-                {
-                    Geometry = new Point(e.MapInfo.WorldPosition.X, e.MapInfo.WorldPosition.Y)
-                });
-                // To notify the map that a redraw is needed.
-                layer?.DataHasChanged();
-                return;
-            };
-
-            return Task.FromResult(map);
-        }
+        return Task.FromResult(map);
     }
 }

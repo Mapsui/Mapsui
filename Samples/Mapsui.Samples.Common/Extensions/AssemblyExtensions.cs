@@ -3,6 +3,7 @@ using System.IO;
 using System.Reflection;
 
 namespace Mapsui.Samples.Common.Extensions;
+
 public static class AssemblyExtensions
 {
     public static void CopyEmbeddedResourceToFile(

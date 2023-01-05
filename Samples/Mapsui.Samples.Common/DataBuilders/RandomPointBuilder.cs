@@ -5,20 +5,19 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Mapsui.Samples.Common.DataBuilders;
+
 public static class RandomPointBuilder
 {
     public static IEnumerable<PointFeature> CreateRandomFeatures(MRect? envelope, int count, Random? random = null)
     {
-        if (random == null)
-            random = new Random(123);
+        random ??= new Random(123);
 
         return CreateFeatures(GenerateRandomPoints(envelope, count, random));
     }
 
     public static MemoryProvider CreateProviderWithRandomPoints(MRect? envelope, int count, Random? random = null)
     {
-        if (random == null)
-            random = new Random(123);
+        random ??= new Random(123);
 
         return new MemoryProvider(CreateFeatures(GenerateRandomPoints(envelope, count, random)));
     }
@@ -31,8 +30,7 @@ public static class RandomPointBuilder
 
     public static IEnumerable<MPoint> GenerateRandomPoints(MRect? envelope, int count, Random? random = null)
     {
-        if (random == null)
-            random = new Random(192);
+        random ??= new Random(192);
 
         var result = new List<MPoint>();
         if (envelope == null)

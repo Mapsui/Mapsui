@@ -3,6 +3,7 @@ using Mapsui.Layers;
 using Mapsui.Styles;
 
 namespace Mapsui.Samples.Common.DataBuilders;
+
 public class GeodanOfficesLayerBuilder
 {
     public static MemoryLayer Create()

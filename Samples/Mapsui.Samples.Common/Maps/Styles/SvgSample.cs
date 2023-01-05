@@ -7,51 +7,50 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps.Styles
+namespace Mapsui.Samples.Common.Maps.Styles;
+
+public class SvgSample : ISample
 {
-    public class SvgSample : ISample
+    public string Name => "Svg";
+    public string Category => "Styles";
+
+    public Task<Map> CreateMapAsync()
     {
-        public string Name => "Svg";
-        public string Category => "Styles";
+        var map = new Map();
 
-        public Task<Map> CreateMapAsync()
+        map.Layers.Add(OpenStreetMap.CreateTileLayer());
+        map.Layers.Add(CreateSvgLayer(map.Extent));
+
+        return Task.FromResult(map);
+    }
+
+    private static ILayer CreateSvgLayer(MRect? envelope)
+    {
+        return new MemoryLayer
         {
-            var map = new Map();
+            Name = "Svg Layer",
+            Features = CreateSvgFeatures(RandomPointBuilder.GenerateRandomPoints(envelope, 2000)),
+            Style = null,
+            IsMapInfoLayer = true
+        };
+    }
 
-            map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            map.Layers.Add(CreateSvgLayer(map.Extent));
+    private static IEnumerable<IFeature> CreateSvgFeatures(IEnumerable<MPoint> randomPoints)
+    {
+        var counter = 0;
 
-            return Task.FromResult(map);
-        }
-
-        private static ILayer CreateSvgLayer(MRect? envelope)
+        return randomPoints.Select(p =>
         {
-            return new MemoryLayer
-            {
-                Name = "Svg Layer",
-                Features = CreateSvgFeatures(RandomPointBuilder.GenerateRandomPoints(envelope, 2000)),
-                Style = null,
-                IsMapInfoLayer = true
-            };
-        }
+            var feature = new PointFeature(p) { ["Label"] = counter.ToString() };
+            feature.Styles.Add(CreateSvgStyle(@"Images.Pin.svg", 0.5));
+            counter++;
+            return feature;
+        });
+    }
 
-        private static IEnumerable<IFeature> CreateSvgFeatures(IEnumerable<MPoint> randomPoints)
-        {
-            var counter = 0;
-
-            return randomPoints.Select(p =>
-            {
-                var feature = new PointFeature(p) { ["Label"] = counter.ToString() };
-                feature.Styles.Add(CreateSvgStyle(@"Images.Pin.svg", 0.5));
-                counter++;
-                return feature;
-            });
-        }
-
-        private static SymbolStyle CreateSvgStyle(string embeddedResourcePath, double scale)
-        {
-            var bitmapId = typeof(SvgSample).LoadSvgId(embeddedResourcePath);
-            return new SymbolStyle { BitmapId = bitmapId, SymbolScale = scale, SymbolOffset = new Offset(0.0, 0.5, true) };
-        }
+    private static SymbolStyle CreateSvgStyle(string embeddedResourcePath, double scale)
+    {
+        var bitmapId = typeof(SvgSample).LoadSvgId(embeddedResourcePath);
+        return new SymbolStyle { BitmapId = bitmapId, SymbolScale = scale, SymbolOffset = new Offset(0.0, 0.5, true) };
     }
 }

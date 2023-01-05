@@ -9,72 +9,66 @@ using Mapsui.UI;
 using System.Threading.Tasks;
 using Attribution = BruTile.Attribution;
 
-namespace Mapsui.Samples.Common.Maps.DataFormats
+namespace Mapsui.Samples.Common.Maps.DataFormats;
+
+public class MapTilerSample : IMapControlSample
 {
-    public class MapTilerSample : IMapControlSample
+    static MapTilerSample()
     {
-        static MapTilerSample()
-        {
-            MapTilesDeployer.CopyEmbeddedResourceToFile("TrueMarble");
-        }
-
-        public string Name => " 9 Tiles on file system";
-        public string Category => "Data Formats";
-
-        public void Setup(IMapControl mapControl)
-        {
-            mapControl.Map = CreateMap();
-        }
-
-        public static Map CreateMap()
-        {
-            var map = new Map();
-            map.Layers.Add(CreateLayer());
-            return map;
-        }
-
-        public static ILayer CreateLayer()
-        {
-            return new TileLayer(new MapTilerTileSource()) { Name = "True Marble in MapTiler" };
-        }
+        MapTilesDeployer.CopyEmbeddedResourceToFile("TrueMarble");
     }
 
-    public class MapTilerTileSource : ITileSource
+    public string Name => " 9 Tiles on file system";
+    public string Category => "Data Formats";
+
+    public void Setup(IMapControl mapControl)
     {
-        public MapTilerTileSource()
-        {
-            Schema = GetTileSchema();
-            Provider = GetTileProvider();
-            Name = "MapTiler";
-        }
+        mapControl.Map = CreateMap();
+    }
 
-        public ITileSchema Schema { get; }
-        public string Name { get; }
-        public Attribution Attribution { get; } = new Attribution();
-        public ITileProvider Provider { get; }
+    public static Map CreateMap()
+    {
+        var map = new Map();
+        map.Layers.Add(CreateLayer());
+        return map;
+    }
 
-        public async Task<byte[]> GetTileAsync(TileInfo tileInfo)
-        {
-            return await Provider.GetTileAsync(tileInfo);
-        }
+    public static ILayer CreateLayer()
+    {
+        return new TileLayer(new MapTilerTileSource()) { Name = "True Marble in MapTiler" };
+    }
+}
 
-        public static ITileProvider GetTileProvider()
-        {
-            return new FileTileProvider(new FileCache(MapTilesDeployer.MapTileLocation + "\\TrueMarble", "png"));
-        }
+public class MapTilerTileSource : ITileSource
+{
+    public MapTilerTileSource()
+    {
+        Schema = GetTileSchema();
+        Provider = GetTileProvider();
+        Name = "MapTiler";
+    }
 
-        public static ITileSchema GetTileSchema()
-        {
-            var schema = new GlobalSphericalMercator(YAxis.TMS);
-            schema.Resolutions.Clear();
-            schema.Resolutions[0] = new Resolution(0, 156543.033900000);
-            schema.Resolutions[1] = new Resolution(1, 78271.516950000);
-            return schema;
-        }
+    public ITileSchema Schema { get; }
+    public string Name { get; }
+    public Attribution Attribution { get; } = new Attribution();
+    public ITileProvider Provider { get; }
 
-        private static string GetAppDir()
-        {
-            return System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly()!.GetModules()[0].FullyQualifiedName)!;
-        }
+    public async Task<byte[]> GetTileAsync(TileInfo tileInfo)
+    {
+        return await Provider.GetTileAsync(tileInfo);
+    }
+
+    public static ITileProvider GetTileProvider()
+    {
+        return new FileTileProvider(new FileCache(MapTilesDeployer.MapTileLocation + "\\TrueMarble", "png"));
+    }
+
+    public static ITileSchema GetTileSchema()
+    {
+        var schema = new GlobalSphericalMercator(YAxis.TMS);
+        schema.Resolutions.Clear();
+        schema.Resolutions[0] = new Resolution(0, 156543.033900000);
+        schema.Resolutions[1] = new Resolution(1, 78271.516950000);
+        return schema;
     }
 }
