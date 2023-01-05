@@ -6,3 +6,5 @@
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don't ignore created IDisposable", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Common.Maps.Animations.AnimatedPointsSamples.CreateAnimatedPointLayer~Mapsui.Layers.ILayer")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001:Dispose created", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Common.Maps.DataFormats.ShapefileSample.CreateMap~Mapsui.Map")]
+[assembly: SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don't ignore created IDisposable", Justification = "<Pending>", Scope = "member", Target = "~M:Mapsui.Samples.Common.Maps.DataFormats.ShapefileSample.CreateMap~Mapsui.Map")]

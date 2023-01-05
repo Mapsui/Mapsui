@@ -29,8 +29,8 @@ public class ShapefileSample : IMapControlSample
     {
         var map = new Map();
 
-        using var countrySource = new ShapeFile(ShapeFilesDeployer.ShapeFilesLocation + "\\countries.shp", true);
-        using var citySource = new ShapeFile(ShapeFilesDeployer.ShapeFilesLocation + "\\cities.shp", true);
+        var countrySource = new ShapeFile(ShapeFilesDeployer.ShapeFilesLocation + "\\countries.shp", true);
+        var citySource = new ShapeFile(ShapeFilesDeployer.ShapeFilesLocation + "\\cities.shp", true);
 
         map.Layers.Add(new RasterizingLayer(CreateCountryLayer(countrySource)));
         map.Layers.Add(new RasterizingLayer(CreateCityLayer(citySource)));
