@@ -8,7 +8,7 @@ using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 
-namespace Mapsui.Samples.Common.Maps
+namespace Mapsui.Samples.Common.Maps.Styles
 {
     public class AtlasSample : ISample
     {
@@ -46,7 +46,8 @@ namespace Mapsui.Samples.Common.Maps
         {
             var counter = 0;
 
-            return randomPoints.Select(p => {
+            return randomPoints.Select(p =>
+            {
                 var feature = new PointFeature(p) { ["Label"] = counter.ToString() };
 
                 var x = 0 + Random.Next(0, 12) * 21;

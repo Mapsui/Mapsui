@@ -11,7 +11,7 @@ using NetTopologySuite.Geometries;
 #pragma warning disable CS8670 // Object or collection initializer implicitly dereferences possibly null member.
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
-namespace Mapsui.Samples.Common.Maps
+namespace Mapsui.Samples.Common.Maps.Performance
 {
     public class ManyVerticesSample : IMapControlSample
     {

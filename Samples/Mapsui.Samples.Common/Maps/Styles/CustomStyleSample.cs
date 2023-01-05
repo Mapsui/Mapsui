@@ -10,7 +10,7 @@ using Mapsui.Tiling;
 using Mapsui.UI;
 using SkiaSharp;
 
-namespace Mapsui.Samples.Common.Maps
+namespace Mapsui.Samples.Common.Maps.Styles
 {
     public class CustomStyle : IStyle
     {

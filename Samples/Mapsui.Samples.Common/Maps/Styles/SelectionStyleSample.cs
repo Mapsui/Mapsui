@@ -6,7 +6,7 @@ using Mapsui.Tiling;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps.Symbols;
+namespace Mapsui.Samples.Common.Maps.Styles;
 internal class SelectionStyleSample : ISample
 {
     public string Name => "Selection";

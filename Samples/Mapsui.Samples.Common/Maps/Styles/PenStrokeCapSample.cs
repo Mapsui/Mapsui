@@ -7,7 +7,7 @@ using Mapsui.Styles;
 using Mapsui.Tiling;
 using NetTopologySuite.Geometries;
 
-namespace Mapsui.Samples.Common.Maps
+namespace Mapsui.Samples.Common.Maps.Styles
 {
     public class PenStrokeCapSample : ISample
     {

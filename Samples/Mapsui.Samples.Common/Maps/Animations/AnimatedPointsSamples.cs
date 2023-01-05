@@ -1,5 +1,6 @@
 ﻿using Mapsui.Layers;
 using Mapsui.Layers.AnimatedLayers;
+using Mapsui.Samples.Common.Maps.Styles;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.Tiling;

@@ -6,7 +6,7 @@ using Mapsui.Styles;
 using Mapsui.Tiling;
 using NetTopologySuite.IO;
 
-namespace Mapsui.Samples.Common.Maps
+namespace Mapsui.Samples.Common.Maps.Styles
 {
     public class LabelsSample : ISample
     {

@@ -7,7 +7,7 @@ using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Utilities;
 
-namespace Mapsui.Samples.Common.Maps
+namespace Mapsui.Samples.Common.Maps.Styles
 {
     public class SvgSample : ISample
     {

@@ -8,7 +8,7 @@ using Mapsui.Styles;
 using Mapsui.Tiling;
 using NetTopologySuite.Geometries;
 
-namespace Mapsui.Tests.Common.Maps
+namespace Mapsui.Samples.Common.Maps.Demo
 {
     public class WriteToLayerSample : ISample
     {
