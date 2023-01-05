@@ -7,13 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="EmbeddedResources\cities.geojson" />
-    <None Remove="EmbeddedResources\cities.json" />
-    <None Remove="EmbeddedResources\congo.json" />
-    <None Remove="EmbeddedResources\countries-hires.json" />
-    <None Remove="EmbeddedResources\el-molar.mbtiles" />
-    <None Remove="EmbeddedResources\torrejon-de-ardoz.mbtiles" />
-    <None Remove="EmbeddedResources\world.mbtiles" />
     <None Remove="GeoData\TrueMarble\0\0\0.png" />
     <None Remove="GeoData\TrueMarble\1\0\0.png" />
     <None Remove="GeoData\TrueMarble\1\0\1.png" />
@@ -51,10 +44,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="EmbeddedResources\cities.geojson" />
-    <EmbeddedResource Include="EmbeddedResources\cities.json" />
-    <EmbeddedResource Include="EmbeddedResources\congo.json" />
-    <EmbeddedResource Include="EmbeddedResources\countries-hires.json" />
+    <EmbeddedResource Include="GeoData\GeoJson\cities.geojson" />
+    <EmbeddedResource Include="GeoData\Json\cities.json" />
+    <EmbeddedResource Include="GeoData\Json\congo.json" />
+    <EmbeddedResource Include="GeoData\Json\countries-hires.json" />
     <EmbeddedResource Include="GeoData\MbTiles\el-molar.mbtiles" />
     <EmbeddedResource Include="GeoData\MbTiles\torrejon-de-ardoz.mbtiles">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
