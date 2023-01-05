@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class ViewportExtensions
+    <title>Class RotationCalculations
    </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class ViewportExtensions
+    <meta name="title" content="Class RotationCalculations
    ">
     <meta name="generator" content="docfx 2.59.4.0">
     
@@ -78,41 +78,41 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Mapsui.Extensions.ViewportExtensions">
+            <article class="content wrap" id="_content" data-uid="Mapsui.Utilities.RotationCalculations">
   
   
-  <h1 id="Mapsui_Extensions_ViewportExtensions" data-uid="Mapsui.Extensions.ViewportExtensions" class="text-break">Class ViewportExtensions
+  <h1 id="Mapsui_Utilities_RotationCalculations" data-uid="Mapsui.Utilities.RotationCalculations" class="text-break">Class RotationCalculations
   </h1>
   <div class="markdown level0 summary"></div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">Object</a></div>
-    <div class="level1"><span class="xref">ViewportExtensions</span></div>
+    <div class="level1"><span class="xref">RotationCalculations</span></div>
   </div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.Extensions.html">Mapsui.Extensions</a></h6>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Mapsui.Utilities.html">Mapsui.Utilities</a></h6>
   <h6><strong>Assembly</strong>: Mapsui.dll</h6>
-  <h5 id="Mapsui_Extensions_ViewportExtensions_syntax">Syntax</h5>
+  <h5 id="Mapsui_Utilities_RotationCalculations_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static class ViewportExtensions : object</code></pre>
+    <pre><code class="lang-csharp hljs">public static class RotationCalculations : object</code></pre>
   </div>
   <h3 id="methods">Methods
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Extensions_ViewportExtensions_GetExtent_Mapsui_IReadOnlyViewport_.md&amp;value=---%0Auid%3A%20Mapsui.Extensions.ViewportExtensions.GetExtent(Mapsui.IReadOnlyViewport)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Utilities_RotationCalculations_CalculateRotationDeltaWithSnapping_System_Double_System_Double_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Utilities.RotationCalculations.CalculateRotationDeltaWithSnapping(System.Double%2CSystem.Double%2CSystem.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Extensions/ViewportExtensions.cs/#L26">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Utilities/RotationCalculations.cs/#L41">View Source</a>
   </span>
-  <a id="Mapsui_Extensions_ViewportExtensions_GetExtent_" data-uid="Mapsui.Extensions.ViewportExtensions.GetExtent*"></a>
-  <h4 id="Mapsui_Extensions_ViewportExtensions_GetExtent_Mapsui_IReadOnlyViewport_" data-uid="Mapsui.Extensions.ViewportExtensions.GetExtent(Mapsui.IReadOnlyViewport)">GetExtent(IReadOnlyViewport)</h4>
-  <div class="markdown level1 summary"><p>Calculates extent from the viewport</p>
+  <a id="Mapsui_Utilities_RotationCalculations_CalculateRotationDeltaWithSnapping_" data-uid="Mapsui.Utilities.RotationCalculations.CalculateRotationDeltaWithSnapping*"></a>
+  <h4 id="Mapsui_Utilities_RotationCalculations_CalculateRotationDeltaWithSnapping_System_Double_System_Double_System_Double_System_Double_" data-uid="Mapsui.Utilities.RotationCalculations.CalculateRotationDeltaWithSnapping(System.Double,System.Double,System.Double,System.Double)">CalculateRotationDeltaWithSnapping(Double, Double, Double, Double)</h4>
+  <div class="markdown level1 summary"><p>Calculates the rotation delta taking into account the snapping parameters.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static MRect GetExtent(this IReadOnlyViewport viewport)</code></pre>
+    <pre><code class="lang-csharp hljs">public static double CalculateRotationDeltaWithSnapping(double virtualRotation, double actualRotation, double unSnapRotation, double reSnapRotation)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -125,9 +125,28 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Mapsui.IReadOnlyViewport.html">IReadOnlyViewport</a></td>
-        <td><span class="parametername">viewport</span></td>
-        <td></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a></td>
+        <td><span class="parametername">virtualRotation</span></td>
+        <td><p>The virtual rotation that is determined by the users rotating pinch behavior.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a></td>
+        <td><span class="parametername">actualRotation</span></td>
+        <td><p>The rotation of the viewport of the map. This rotation is visible in the map.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a></td>
+        <td><span class="parametername">unSnapRotation</span></td>
+        <td><p>The minimal value of the virtual rotation needed to unsnap (allow rotation other than 0).</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a></td>
+        <td><span class="parametername">reSnapRotation</span></td>
+        <td><p>If the virtual rotation is below this value the map will resnap (rotation will be set to 0).</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -141,78 +160,25 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Mapsui.MRect.html">MRect</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="Mapsui_Extensions_ViewportExtensions_GetExtent_Mapsui_IReadOnlyViewport__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>This MRect is horizontally and vertically aligned, even if the viewport
-is rotated. So this MRect perhaps contain parts, that are not visible.</p>
-</div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Extensions_ViewportExtensions_HasSize_Mapsui_IReadOnlyViewport_.md&amp;value=---%0Auid%3A%20Mapsui.Extensions.ViewportExtensions.HasSize(Mapsui.IReadOnlyViewport)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Extensions/ViewportExtensions.cs/#L10">View Source</a>
-  </span>
-  <a id="Mapsui_Extensions_ViewportExtensions_HasSize_" data-uid="Mapsui.Extensions.ViewportExtensions.HasSize*"></a>
-  <h4 id="Mapsui_Extensions_ViewportExtensions_HasSize_Mapsui_IReadOnlyViewport_" data-uid="Mapsui.Extensions.ViewportExtensions.HasSize(Mapsui.IReadOnlyViewport)">HasSize(IReadOnlyViewport)</h4>
-  <div class="markdown level1 summary"><p>True if Width and Height are not zero</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static bool HasSize(this IReadOnlyViewport viewport)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="Mapsui.IReadOnlyViewport.html">IReadOnlyViewport</a></td>
-        <td><span class="parametername">viewport</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Extensions_ViewportExtensions_IsRotated_Mapsui_IReadOnlyViewport_.md&amp;value=---%0Auid%3A%20Mapsui.Extensions.ViewportExtensions.IsRotated(Mapsui.IReadOnlyViewport)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Utilities_RotationCalculations_NormalizeRotation_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Utilities.RotationCalculations.NormalizeRotation(System.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Extensions/ViewportExtensions.cs/#L16">View Source</a>
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Utilities/RotationCalculations.cs/#L7">View Source</a>
   </span>
-  <a id="Mapsui_Extensions_ViewportExtensions_IsRotated_" data-uid="Mapsui.Extensions.ViewportExtensions.IsRotated*"></a>
-  <h4 id="Mapsui_Extensions_ViewportExtensions_IsRotated_Mapsui_IReadOnlyViewport_" data-uid="Mapsui.Extensions.ViewportExtensions.IsRotated(Mapsui.IReadOnlyViewport)">IsRotated(IReadOnlyViewport)</h4>
-  <div class="markdown level1 summary"><p>IsRotated is true, when viewport displays map rotated</p>
-</div>
+  <a id="Mapsui_Utilities_RotationCalculations_NormalizeRotation_" data-uid="Mapsui.Utilities.RotationCalculations.NormalizeRotation*"></a>
+  <h4 id="Mapsui_Utilities_RotationCalculations_NormalizeRotation_System_Double_" data-uid="Mapsui.Utilities.RotationCalculations.NormalizeRotation(System.Double)">NormalizeRotation(Double)</h4>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static bool IsRotated(this IReadOnlyViewport viewport)</code></pre>
+    <pre><code class="lang-csharp hljs">public static double NormalizeRotation(double rotation)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -225,8 +191,8 @@ is rotated. So this MRect perhaps contain parts, that are not visible.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="Mapsui.IReadOnlyViewport.html">IReadOnlyViewport</a></td>
-        <td><span class="parametername">viewport</span></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a></td>
+        <td><span class="parametername">rotation</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -241,7 +207,59 @@ is rotated. So this MRect perhaps contain parts, that are not visible.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Utilities_RotationCalculations_RotationShortestDistance_System_Double_System_Double_.md&amp;value=---%0Auid%3A%20Mapsui.Utilities.RotationCalculations.RotationShortestDistance(System.Double%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Utilities/RotationCalculations.cs/#L18">View Source</a>
+  </span>
+  <a id="Mapsui_Utilities_RotationCalculations_RotationShortestDistance_" data-uid="Mapsui.Utilities.RotationCalculations.RotationShortestDistance*"></a>
+  <h4 id="Mapsui_Utilities_RotationCalculations_RotationShortestDistance_System_Double_System_Double_" data-uid="Mapsui.Utilities.RotationCalculations.RotationShortestDistance(System.Double,System.Double)">RotationShortestDistance(Double, Double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static double RotationShortestDistance(double rotation1, double rotation2)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a></td>
+        <td><span class="parametername">rotation1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a></td>
+        <td><span class="parametername">rotation2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.double">Double</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -254,10 +272,10 @@ is rotated. So this MRect perhaps contain parts, that are not visible.</p>
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Extensions_ViewportExtensions.md&amp;value=---%0Auid%3A%20Mapsui.Extensions.ViewportExtensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Utilities_RotationCalculations.md&amp;value=---%0Auid%3A%20Mapsui.Utilities.RotationCalculations%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Extensions/ViewportExtensions.cs/#L5" class="contribution-link">View Source</a>
+                    <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui/Utilities/RotationCalculations.cs/#L5" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
