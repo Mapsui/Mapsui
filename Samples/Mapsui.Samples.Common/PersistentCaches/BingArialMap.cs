@@ -4,7 +4,7 @@
 
 using BruTile.Cache;
 
-namespace Mapsui.Samples.Common.Maps
+namespace Mapsui.Samples.Common.PersistentCaches
 {
     public static class BingArial
     {

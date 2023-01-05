@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using BruTile.Wmts;
 using Mapsui.Layers;
+using Mapsui.Samples.Common.PersistentCaches;
 using Mapsui.Tiling.Layers;
 
 namespace Mapsui.Samples.Common.Maps

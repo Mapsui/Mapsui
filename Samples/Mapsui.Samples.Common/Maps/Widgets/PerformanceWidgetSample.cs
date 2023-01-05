@@ -1,5 +1,6 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Rendering.Skia.SkiaWidgets;
+using Mapsui.Samples.Common.PersistentCaches;
 using Mapsui.UI;
 using Mapsui.Widgets;
 using Mapsui.Widgets.PerformanceWidget;

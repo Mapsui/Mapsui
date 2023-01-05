@@ -5,7 +5,6 @@ using BruTile.Predefined;
 using Mapsui.Samples.Common.PersistentCaches;
 using Mapsui.Samples.Common.Utilities;
 using Mapsui.Tiling.Layers;
-using Mapsui.UI;
 using SQLite;
 
 namespace Mapsui.Samples.Common.Maps

@@ -16,6 +16,7 @@ using Mapsui.Samples.Common.Maps.Animations;
 using Mapsui.Samples.Common.Maps.Callouts;
 using Mapsui.Samples.Common.Maps.Data;
 using Mapsui.Samples.Common.Maps.Projection;
+using Mapsui.Samples.Common.PersistentCaches;
 using Mapsui.Tiling;
 using Mapsui.UI;
 using NUnit.Framework;
