@@ -23,19 +23,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\..\Samples\Mapsui.Samples.Common.Desktop\GeoData\World\countries.dbf" Link="Data\countries.dbf">
+    <None Include="..\..\Samples\Mapsui.Samples.Common\GeoData\World\countries.dbf" Link="Data\countries.dbf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\Samples\Mapsui.Samples.Common.Desktop\GeoData\World\countries.prj" Link="Data\countries.prj">
+    <None Include="..\..\Samples\Mapsui.Samples.Common\GeoData\World\countries.prj" Link="Data\countries.prj">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\Samples\Mapsui.Samples.Common.Desktop\GeoData\World\countries.shp" Link="Data\countries.shp">
+    <None Include="..\..\Samples\Mapsui.Samples.Common\GeoData\World\countries.shp" Link="Data\countries.shp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\Samples\Mapsui.Samples.Common.Desktop\GeoData\World\countries.shp.sidx" Link="Data\countries.shp.sidx">
+    <None Include="..\..\Samples\Mapsui.Samples.Common\GeoData\World\countries.shp.sidx" Link="Data\countries.shp.sidx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\Samples\Mapsui.Samples.Common.Desktop\GeoData\World\countries.shx" Link="Data\countries.shx">
+    <None Include="..\..\Samples\Mapsui.Samples.Common\GeoData\World\countries.shx" Link="Data\countries.shx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

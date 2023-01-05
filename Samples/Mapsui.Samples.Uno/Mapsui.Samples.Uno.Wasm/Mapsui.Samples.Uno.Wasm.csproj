@@ -75,7 +75,6 @@
     <ProjectReference Include="..\..\..\Mapsui.UI.Uno\Mapsui.UI.Uno.csproj" />
     <ProjectReference Include="..\..\..\Mapsui\Mapsui.csproj" />
     <ProjectReference Include="..\..\..\Tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj" />
-    <ProjectReference Include="..\..\Mapsui.Samples.Common.Desktop\Mapsui.Samples.Common.Desktop.csproj" />
     <ProjectReference Include="..\..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
     <ProjectReference Include="..\..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
   </ItemGroup>

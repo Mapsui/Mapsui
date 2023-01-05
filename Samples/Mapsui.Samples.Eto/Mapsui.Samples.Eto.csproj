@@ -15,7 +15,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.UI.Eto\Mapsui.UI.Eto.csproj" />
     <ProjectReference Include="..\..\Tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj" />
-    <ProjectReference Include="..\Mapsui.Samples.Common.Desktop\Mapsui.Samples.Common.Desktop.csproj" />
   </ItemGroup>
 
   <ItemGroup>

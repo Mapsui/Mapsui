@@ -22,7 +22,6 @@ namespace Mapsui.Samples.Eto
         static MainForm()
         {
             // todo: find proper way to load assembly
-            DesktopSamplesUtilities.LoadAssembly();
             Mapsui.Tests.Common.Utilities.LoadAssembly();       
         }
 
@@ -112,7 +111,6 @@ namespace Mapsui.Samples.Eto
         private void FillComboBoxWithCategories()
         {
             // todo: find proper way to load assembly
-            DesktopSamplesUtilities.LoadAssembly();
             Tests.Common.Utilities.LoadAssembly();
 
             var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c);

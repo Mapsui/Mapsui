@@ -31,7 +31,6 @@ namespace Mapsui.Samples.Uno.WinUI
         static MainPage()
         {
             // todo: find proper way to load assembly
-            Mapsui.Samples.Common.Desktop.DesktopSamplesUtilities.LoadAssembly();
             Mapsui.Tests.Common.Utilities.LoadAssembly();       
         }
 

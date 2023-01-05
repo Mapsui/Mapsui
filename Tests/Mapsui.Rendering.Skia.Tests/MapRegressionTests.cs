@@ -28,7 +28,6 @@ public class MapRegressionTests
     static MapRegressionTests()
     {
         // todo: find proper way to load assembly
-        DesktopSamplesUtilities.LoadAssembly();
         Mapsui.Tests.Common.Utilities.LoadAssembly();       
     }
 
