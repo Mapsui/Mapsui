@@ -57,7 +57,7 @@ namespace Mapsui.Samples.Common.Maps.Callouts
 
         private static IEnumerable<IFeature> GetCitiesFromEmbeddedResource()
         {
-            var path = "Mapsui.Samples.Common.EmbeddedResources.congo.json";
+            var path = "Mapsui.Samples.Common.GeoData.Json.congo.json";
             var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
             using var stream = assembly.GetManifestResourceStream(path);
             var cities = DeserializeFromStream<City>(stream!);

@@ -1,7 +1,6 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Rendering.Skia.SkiaWidgets;
 using Mapsui.UI;
-using Mapsui.Utilities;
 using Mapsui.Widgets;
 using Mapsui.Widgets.PerformanceWidget;
 using SkiaSharp;
@@ -11,7 +10,7 @@ namespace Mapsui.Samples.Common.Maps
     public class PerformanceWidgetSample : IMapControlSample
     {
         private IMapControl? _mapControl;
-        private readonly Performance _performance = new Performance(10);
+        private readonly Mapsui.Utilities.Performance _performance = new(10);
 
         public string Name => "4 Performance Widget";
 
