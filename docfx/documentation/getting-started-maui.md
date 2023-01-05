@@ -2,7 +2,7 @@
 # Mapsui MAUI getting started
 
 ### Step 1
-Start a new MAUI application in Visual Studio.
+Create a new .NET 7.0 MAUI application in Visual Studio.
 
 ### Step 2
 In the package manager console type:
@@ -15,7 +15,7 @@ In MauiProgram.cs add .UseSkiaSharp() to the builder like this:
 ```csharp
 builder
   .UseMauiApp<App>()
-  .UseSkiaSharp()
+  .UseSkiaSharp(true)
   .ConfigureFonts(fonts =>  
 ```
 
