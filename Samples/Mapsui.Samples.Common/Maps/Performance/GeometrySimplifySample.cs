@@ -6,8 +6,6 @@ using Mapsui.Samples.Common.Utilities;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.UI;
-using System.IO;
-using System.Reflection;
 
 namespace Mapsui.Samples.Common.Maps.Performance;
 
@@ -41,7 +39,7 @@ public class GeometrySimplifySample : IMapControlSample
 
         var simplifyCountrySource = new GeometrySimplifyProvider(projectedCountrySource, distanceTolerance: 200000);
         map.Layers.Add(new RasterizingLayer(CreateCountryLayer(simplifyCountrySource)));
-
+        
         return map;
     }
 
