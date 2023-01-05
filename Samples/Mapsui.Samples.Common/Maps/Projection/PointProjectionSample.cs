@@ -1,7 +1,7 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Providers;
-using Mapsui.Samples.Common.Desktop.GeoData;
+using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.UI;
@@ -37,7 +37,7 @@ namespace Mapsui.Samples.Common.Maps.Projection
 
         public static Layer CreateWorldCitiesLayer()
         {
-            var features = WorldCities.GenerateTop100();
+            var features = WorldCitiesFeaturesBuilder.CreateTop100Cities();
 
             var memoryProvider = new MemoryProvider(features)
             {
@@ -61,7 +61,7 @@ namespace Mapsui.Samples.Common.Maps.Projection
 
         private static SymbolStyle CreateCityStyle()
         {
-            var location = typeof(GeodanOfficesSample).LoadBitmapId("Images.location.png");
+            var location = typeof(GeodanOfficesLayerBuilder).LoadBitmapId("Images.location.png");
 
             return new SymbolStyle
             {

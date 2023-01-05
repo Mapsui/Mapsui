@@ -1,8 +1,6 @@
 ﻿using System.IO;
 using System.Reflection;
 using Mapsui.Layers;
-using Mapsui.Samples.Common.Desktop.GeoData;
-using Mapsui.Samples.Common.Maps;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.UI;
@@ -12,6 +10,7 @@ using Mapsui.Nts.Providers.Shapefile;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Desktop.Utilities;
 using NetTopologySuite.Geometries;
+using Mapsui.Samples.Common.DataBuilders;
 
 namespace Mapsui.Samples.Common.Desktop
 {
@@ -92,7 +91,7 @@ namespace Mapsui.Samples.Common.Desktop
 
         public static ILayer CreateCityHoverPoints()
         {
-            var features = WorldCities.GenerateTop100();
+            var features = WorldCitiesFeaturesBuilder.CreateTop100Cities();
 
             return new MemoryLayer
             {
@@ -105,7 +104,7 @@ namespace Mapsui.Samples.Common.Desktop
 
         private static SymbolStyle CreateCityStyle()
         {
-            var location = typeof(GeodanOfficesSample).LoadBitmapId("Images.location.png");
+            var location = typeof(GeodanOfficesLayerBuilder).LoadBitmapId("Images.location.png");
 
             return new SymbolStyle
             {

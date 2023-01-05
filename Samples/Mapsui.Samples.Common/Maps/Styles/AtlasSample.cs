@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
-using Mapsui.Samples.Common.Helpers;
+using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 
@@ -36,7 +36,7 @@ namespace Mapsui.Samples.Common.Maps.Styles
             return new MemoryLayer
             {
                 Name = AtlasLayerName,
-                Features = CreateAtlasFeatures(RandomPointGenerator.GenerateRandomPoints(envelope, 1000)),
+                Features = CreateAtlasFeatures(RandomPointBuilder.GenerateRandomPoints(envelope, 1000)),
                 Style = null,
                 IsMapInfoLayer = true
             };

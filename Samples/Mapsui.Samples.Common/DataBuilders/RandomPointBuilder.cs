@@ -4,9 +4,9 @@ using System.Linq;
 using Mapsui.Layers;
 using Mapsui.Providers;
 
-namespace Mapsui.Samples.Common.Helpers
+namespace Mapsui.Samples.Common.DataBuilders
 {
-    public static class RandomPointGenerator
+    public static class RandomPointBuilder
     {
         public static IEnumerable<PointFeature> CreateRandomFeatures(MRect? envelope, int count, Random? random = null)
         {

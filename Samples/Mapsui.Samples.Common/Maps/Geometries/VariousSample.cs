@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Providers;
-using Mapsui.Samples.Common.Helpers;
+using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.UI;
@@ -34,7 +34,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             return new Layer("Style on Layer")
             {
-                DataSource = new MemoryProvider(RandomPointGenerator.GenerateRandomPoints(envelope, count).ToFeatures()),
+                DataSource = new MemoryProvider(RandomPointBuilder.GenerateRandomPoints(envelope, count).ToFeatures()),
                 Style = CreateBitmapStyle("Images.ic_place_black_24dp.png")
             };
         }
@@ -52,7 +52,7 @@ namespace Mapsui.Samples.Common.Maps
 
         private static IEnumerable<IFeature> GenerateRandomFeatures(MRect? envelope, int count, IStyle style)
         {
-            return RandomPointGenerator.GenerateRandomPoints(envelope, count, new System.Random(123))
+            return RandomPointBuilder.GenerateRandomPoints(envelope, count, new System.Random(123))
                 .Select(p => new PointFeature(p) { Styles = new List<IStyle> { style } }).ToList();
         }
 

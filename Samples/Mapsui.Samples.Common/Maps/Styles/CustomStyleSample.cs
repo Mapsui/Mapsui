@@ -4,7 +4,7 @@ using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia.SkiaStyles;
-using Mapsui.Samples.Common.Helpers;
+using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.UI;
@@ -77,7 +77,7 @@ namespace Mapsui.Samples.Common.Maps.Styles
             return new MemoryLayer
             {
                 Name = "Custome Style Layer",
-                Features = CreateDiverseFeatures(RandomPointGenerator.GenerateRandomPoints(envelope, 25)),
+                Features = CreateDiverseFeatures(RandomPointBuilder.GenerateRandomPoints(envelope, 25)),
                 Style = null,
                 IsMapInfoLayer = true
             };

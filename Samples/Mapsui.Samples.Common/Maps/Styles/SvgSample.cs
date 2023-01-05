@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Mapsui.Layers;
-using Mapsui.Samples.Common.Helpers;
+using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.Utilities;
@@ -29,7 +29,7 @@ namespace Mapsui.Samples.Common.Maps.Styles
             return new MemoryLayer
             {
                 Name = "Svg Layer",
-                Features = CreateSvgFeatures(RandomPointGenerator.GenerateRandomPoints(envelope, 2000)),
+                Features = CreateSvgFeatures(RandomPointBuilder.GenerateRandomPoints(envelope, 2000)),
                 Style = null,
                 IsMapInfoLayer = true
             };

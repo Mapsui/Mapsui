@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Mapsui.Layers;
-using Mapsui.Samples.Common.Helpers;
 using Mapsui.Styles;
 using Mapsui.Utilities;
 using Mapsui.Extensions;
@@ -19,6 +18,7 @@ using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.Common.Maps.Styles;
 */
 using System.Threading.Tasks;
+using Mapsui.Samples.Common.DataBuilders;
 
 namespace Mapsui.Samples.Common.Maps.Styles
 {
@@ -42,7 +42,7 @@ namespace Mapsui.Samples.Common.Maps.Styles
             return new MemoryLayer
             {
                 Name = "Styles Layer",
-                Features = CreateDiverseFeatures(RandomPointGenerator.GenerateRandomPoints(envelope, 25)),
+                Features = CreateDiverseFeatures(RandomPointBuilder.GenerateRandomPoints(envelope, 25)),
                 Style = null,
                 IsMapInfoLayer = true
             };

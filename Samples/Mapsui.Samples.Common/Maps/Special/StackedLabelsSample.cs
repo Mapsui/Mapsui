@@ -1,6 +1,6 @@
 ﻿using Mapsui.Layers;
 using Mapsui.Providers;
-using Mapsui.Samples.Common.Helpers;
+using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using System.Threading.Tasks;
@@ -18,7 +18,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             var map = new Map();
             map.Layers.Add(OpenStreetMap.CreateTileLayer());
-            var provider = RandomPointGenerator.CreateProviderWithRandomPoints(map.Extent, 25);
+            var provider = RandomPointBuilder.CreateProviderWithRandomPoints(map.Extent, 25);
             map.Layers.Add(CreateStackedLabelLayer(provider, LabelColumn));
             map.Layers.Add(CreateLayer(provider));
             return Task.FromResult(map);

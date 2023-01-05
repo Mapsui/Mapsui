@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Mapsui.Layers;
 using Mapsui.Nts;
 using Mapsui.Providers;
-using Mapsui.Samples.Common.Helpers;
+using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Mapsui.UI;
@@ -155,7 +155,7 @@ namespace Mapsui.Samples.Common.Maps
 
             return new Layer(InfoLayerName)
             {
-                DataSource = RandomPointGenerator.CreateProviderWithRandomPoints(envelope, 25, random),
+                DataSource = RandomPointBuilder.CreateProviderWithRandomPoints(envelope, 25, random),
                 Style = CreateSymbolStyle(),
                 IsMapInfoLayer = true
             };

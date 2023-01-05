@@ -5,6 +5,7 @@ using BruTile.Wmts;
 using Mapsui.Cache;
 using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Samples.Common.DataBuilders;
 using Mapsui.Tiling.Layers;
 
 namespace Mapsui.Samples.Common.Maps.Data
@@ -22,7 +23,7 @@ namespace Mapsui.Samples.Common.Maps.Data
                 CRS = "EPSG:28992"
             };
             map.Layers.Add(await CreateLayerAsync());
-            map.Layers.Add(GeodanOfficesSample.CreateLayer());
+            map.Layers.Add(GeodanOfficesLayerBuilder.Create());
             return map;
         }
 
