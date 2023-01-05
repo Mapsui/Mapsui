@@ -13,7 +13,7 @@ namespace Mapsui.Samples.Common.Utilities
         public static void CopyEmbeddedResourceToFile(string fileName)
         {
             var assembly = typeof(PointsSample).GetTypeInfo().Assembly;
-            assembly.CopyEmbeddedResourceToFile(@"Mapsui.Samples.Common.EmbeddedResources.", MbTilesLocation, fileName);
+            assembly.CopyEmbeddedResourceToFile(@"Mapsui.Samples.Common.GeoData.MbTiles.", MbTilesLocation, fileName);
         }
     }
 }

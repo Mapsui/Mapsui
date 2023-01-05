@@ -48,9 +48,6 @@
     <None Remove="Images\netherlands.jpg" />
     <None Remove="Images\osm-liberty.png" />
     <None Remove="Images\Pin.svg" />
-    <None Remove="MbTiles\el-molar.mbtiles" />
-    <None Remove="MbTiles\torrejon-de-ardoz.mbtiles" />
-    <None Remove="MbTiles\world.mbtiles" />
   </ItemGroup>
 
   <ItemGroup>
@@ -58,11 +55,11 @@
     <EmbeddedResource Include="EmbeddedResources\cities.json" />
     <EmbeddedResource Include="EmbeddedResources\congo.json" />
     <EmbeddedResource Include="EmbeddedResources\countries-hires.json" />
-    <EmbeddedResource Include="EmbeddedResources\el-molar.mbtiles" />
-    <EmbeddedResource Include="EmbeddedResources\torrejon-de-ardoz.mbtiles">
+    <EmbeddedResource Include="GeoData\MbTiles\el-molar.mbtiles" />
+    <EmbeddedResource Include="GeoData\MbTiles\torrejon-de-ardoz.mbtiles">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="EmbeddedResources\world.mbtiles">
+    <EmbeddedResource Include="GeoData\MbTiles\world.mbtiles">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="GeoData\TrueMarble\0\0\0.png">
@@ -145,15 +142,6 @@
     <EmbeddedResource Include="Images\netherlands.jpg" />
     <EmbeddedResource Include="Images\osm-liberty.png" />
     <EmbeddedResource Include="Images\Pin.svg" />
-    <Content Include="MbTiles\el-molar.mbtiles">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="MbTiles\torrejon-de-ardoz.mbtiles">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="MbTiles\world.mbtiles">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -168,12 +156,6 @@
     <ProjectReference Include="..\..\Mapsui.Tiling\Mapsui.Tiling.csproj" />
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />
     <ProjectReference Include="..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="MbTiles\chinese-world.mbtiles">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
   <PropertyGroup>
