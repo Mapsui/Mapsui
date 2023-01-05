@@ -12,7 +12,6 @@ namespace Mapsui.Samples.Eto
     using Mapsui.Logging;
     using Mapsui.Extensions;
     using Mapsui.Samples.Common;
-    using Mapsui.Samples.Common.Desktop;
 
     using global::Eto.Forms;
     using global::Eto.Drawing;

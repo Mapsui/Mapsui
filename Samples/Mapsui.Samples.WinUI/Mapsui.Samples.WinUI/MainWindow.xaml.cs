@@ -7,7 +7,6 @@ using System.Linq;
 using Windows.Storage;
 using Mapsui.Extensions;
 using Mapsui.Samples.Common;
-using Mapsui.Samples.Common.Desktop;
 using Mapsui.Samples.Common.Extensions;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.CustomWidget;

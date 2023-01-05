@@ -12,7 +12,6 @@ using Mapsui.Samples.CustomWidget;
 using Mapsui.Samples.Wpf.Utilities;
 using Mapsui.UI;
 using Mapsui.Samples.Common;
-using Mapsui.Samples.Common.Desktop;
 using Mapsui.Samples.Common.Extensions;
 
 namespace Mapsui.Samples.Wpf
