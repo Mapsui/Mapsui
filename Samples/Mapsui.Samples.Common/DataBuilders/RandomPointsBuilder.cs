@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Mapsui.Samples.Common.DataBuilders;
 
-public static class RandomPointBuilder
+public static class RandomPointsBuilder
 {
     public static IEnumerable<PointFeature> CreateRandomFeatures(MRect? envelope, int count, Random? random = null)
     {
