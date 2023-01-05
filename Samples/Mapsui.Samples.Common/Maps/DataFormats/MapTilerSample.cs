@@ -3,13 +3,13 @@ using BruTile.Cache;
 using BruTile.FileSystem;
 using BruTile.Predefined;
 using Mapsui.Layers;
-using Mapsui.Samples.Common.Desktop.Utilities;
+using Mapsui.Samples.Common.Utilities;
 using Mapsui.Tiling.Layers;
 using Mapsui.UI;
 using System.Threading.Tasks;
 using Attribution = BruTile.Attribution;
 
-namespace Mapsui.Samples.Common.Desktop
+namespace Mapsui.Samples.Common.Maps.DataFormats
 {
     public class MapTilerSample : IMapControlSample
     {

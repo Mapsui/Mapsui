@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps.Data
+namespace Mapsui.Samples.Common.Maps.DataFormats
 {
     public class WfsSample : ISample
     {

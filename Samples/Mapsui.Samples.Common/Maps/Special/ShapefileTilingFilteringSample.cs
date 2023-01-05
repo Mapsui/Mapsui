@@ -3,7 +3,8 @@ using Mapsui.Layers;
 using Mapsui.Nts;
 using Mapsui.Nts.Providers.Shapefile;
 using Mapsui.Providers;
-using Mapsui.Samples.Common.Desktop.Utilities;
+using Mapsui.Samples.Common.Maps.Performance;
+using Mapsui.Samples.Common.Utilities;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.Tiling.Layers;
@@ -12,7 +13,7 @@ using Mapsui.UI;
 #pragma warning disable IDISP001 // Dispose created
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
-namespace Mapsui.Samples.Common.Desktop
+namespace Mapsui.Samples.Common.Maps.Special
 {
     public class ShapefileTilingFilteringSample : IMapControlSample
     {

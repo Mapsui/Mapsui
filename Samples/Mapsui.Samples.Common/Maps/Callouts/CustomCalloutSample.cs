@@ -2,6 +2,7 @@
 using Mapsui.Layers;
 using Mapsui.Projections;
 using Mapsui.Providers;
+using Mapsui.Samples.Common.Maps.Geometries;
 using Mapsui.Styles;
 using Mapsui.Tiling;
 using Newtonsoft.Json;

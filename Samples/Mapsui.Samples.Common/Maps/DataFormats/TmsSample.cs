@@ -3,7 +3,7 @@ using Mapsui.Layers;
 using Mapsui.Tiling.Layers;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps
+namespace Mapsui.Samples.Common.Maps.DataFormats
 {
     public class TmsSample : ISample
     {

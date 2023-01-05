@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Local
 
-namespace Mapsui.Samples.Common.Maps
+namespace Mapsui.Samples.Common.Maps.Geometries
 {
     public class PointsSample : ISample
     {
@@ -69,7 +69,7 @@ namespace Mapsui.Samples.Common.Maps
         {
             var serializer = new JsonSerializer();
 
-            using (var sr = new System.IO.StreamReader(stream))
+            using (var sr = new StreamReader(stream))
             using (var jsonTextReader = new JsonTextReader(sr))
             {
                 return serializer.Deserialize<List<T>>(jsonTextReader) ?? new List<T>();

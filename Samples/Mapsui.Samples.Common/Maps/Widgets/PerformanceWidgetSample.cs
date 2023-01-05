@@ -1,12 +1,13 @@
 ﻿using Mapsui.Extensions;
 using Mapsui.Rendering.Skia.SkiaWidgets;
+using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.Samples.Common.PersistentCaches;
 using Mapsui.UI;
 using Mapsui.Widgets;
 using Mapsui.Widgets.PerformanceWidget;
 using SkiaSharp;
 
-namespace Mapsui.Samples.Common.Maps
+namespace Mapsui.Samples.Common.Maps.Widgets
 {
     public class PerformanceWidgetSample : IMapControlSample
     {

@@ -8,7 +8,7 @@ using NetTopologySuite.IO;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps
+namespace Mapsui.Samples.Common.Maps.Geometries
 {
     public class ComplexPolygonSample : ISample
     {

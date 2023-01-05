@@ -4,7 +4,7 @@ using Mapsui.Tiling;
 using Mapsui.Widgets;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps
+namespace Mapsui.Samples.Common.Maps.Widgets
 {
     public class CustomWidgetSample : ISample
     {

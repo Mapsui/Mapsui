@@ -6,7 +6,7 @@ using Mapsui.Tiling.Fetcher;
 using Mapsui.Tiling.Layers;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps
+namespace Mapsui.Samples.Common.Maps.Demo
 {
     public class BingSample : ISample
     {

@@ -7,7 +7,7 @@ using Mapsui.Logging;
 using Mapsui.Styles;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Desktop
+namespace Mapsui.Samples.Common.Maps.DataFormats
 {
     public class ArcGISImageServiceSample : ISample
     {

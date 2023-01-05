@@ -9,7 +9,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps
+namespace Mapsui.Samples.Common.Maps.Special
 {
     public sealed class MutatingTriangleSample : ISample, ISampleTest, IDisposable
     {

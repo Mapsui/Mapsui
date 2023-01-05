@@ -8,7 +8,7 @@ using Mapsui.Tiling.Layers;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps.Data
+namespace Mapsui.Samples.Common.Maps.DataFormats
 {
     public class WmtsSample : ISample
     {

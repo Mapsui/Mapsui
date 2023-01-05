@@ -3,7 +3,7 @@ using Mapsui.Layers;
 using Mapsui.Providers.Wms;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps.Data
+namespace Mapsui.Samples.Common.Maps.DataFormats
 {
     public class WmsSample : ISample
     {
@@ -34,7 +34,7 @@ namespace Mapsui.Samples.Common.Maps.Data
             provider.CRS = "EPSG:28992";
 
             provider.AddLayer("windsnelheden100m");
-            provider.SetImageFormat((provider.OutputFormats)[0]);
+            provider.SetImageFormat(provider.OutputFormats[0]);
             return provider;
         }
     }

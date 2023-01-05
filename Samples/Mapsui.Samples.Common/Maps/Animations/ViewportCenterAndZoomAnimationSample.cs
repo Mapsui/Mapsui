@@ -7,7 +7,7 @@ using Mapsui.Widgets.ScaleBar;
 using Mapsui.Widgets.Zoom;
 using System;
 
-namespace Mapsui.Samples.Common.Maps
+namespace Mapsui.Samples.Common.Maps.Animations
 {
     public class ViewportCenterAndZoomAnimationSample : IMapControlSample
     {

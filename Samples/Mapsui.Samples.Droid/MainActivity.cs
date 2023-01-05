@@ -20,6 +20,8 @@ using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.UI;
 using Mapsui.UI.Android;
+using Mapsui.Samples.Common.Maps.DataFormats;
+
 namespace Mapsui.Samples.Droid
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]

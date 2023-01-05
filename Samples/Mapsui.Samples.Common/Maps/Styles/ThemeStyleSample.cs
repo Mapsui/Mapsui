@@ -4,7 +4,7 @@ using Mapsui.Nts;
 using Mapsui.Nts.Providers.Shapefile;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.DataBuilders;
-using Mapsui.Samples.Common.Desktop.Utilities;
+using Mapsui.Samples.Common.Utilities;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.UI;
@@ -12,7 +12,7 @@ using NetTopologySuite.Geometries;
 using System.IO;
 using System.Reflection;
 
-namespace Mapsui.Samples.Common.Desktop
+namespace Mapsui.Samples.Common.Maps.Styles
 {
     public class ThemeStyleSample : IMapControlSample
     {

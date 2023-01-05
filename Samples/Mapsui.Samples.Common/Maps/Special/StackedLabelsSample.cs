@@ -5,7 +5,7 @@ using Mapsui.Styles;
 using Mapsui.Tiling;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps
+namespace Mapsui.Samples.Common.Maps.Special
 {
     public class StackedLabelsSample : ISample
     {

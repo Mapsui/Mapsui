@@ -2,14 +2,14 @@
 using Mapsui.Nts.Providers;
 using Mapsui.Nts.Providers.Shapefile;
 using Mapsui.Providers;
-using Mapsui.Samples.Common.Desktop.Utilities;
+using Mapsui.Samples.Common.Utilities;
 using Mapsui.Styles;
 using Mapsui.Styles.Thematics;
 using Mapsui.UI;
 using System.IO;
 using System.Reflection;
 
-namespace Mapsui.Samples.Common.Desktop
+namespace Mapsui.Samples.Common.Maps.Performance
 {
     public class GeometrySimplifySample : IMapControlSample
     {

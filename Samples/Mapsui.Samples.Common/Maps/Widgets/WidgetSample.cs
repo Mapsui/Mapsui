@@ -4,7 +4,7 @@ using Mapsui.Widgets;
 using Mapsui.Widgets.Zoom;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps
+namespace Mapsui.Samples.Common.Maps.Widgets
 {
     public class WidgetSample : ISample
     {

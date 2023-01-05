@@ -1,7 +1,7 @@
 ﻿using Mapsui.Extensions.Provider;
 using Mapsui.Layers;
 using Mapsui.Providers;
-using Mapsui.Samples.Common.Desktop.Utilities;
+using Mapsui.Samples.Common.Utilities;
 using Mapsui.Styles;
 using Mapsui.UI;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Reflection;
 
 #pragma warning disable IDISP001 // Dispose created
 
-namespace Mapsui.Samples.Common.Desktop
+namespace Mapsui.Samples.Common.Maps.DataFormats
 {
     public class GeoTiffSample : IMapControlSample
     {

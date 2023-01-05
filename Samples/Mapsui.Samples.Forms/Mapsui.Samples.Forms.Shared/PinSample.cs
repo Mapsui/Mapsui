@@ -3,7 +3,7 @@ using System.IO;
 using System.Reflection;
 using Mapsui.Extensions;
 using Mapsui.Samples.Common;
-using Mapsui.Samples.Common.Maps;
+using Mapsui.Samples.Common.Maps.Demo;
 using Mapsui.Samples.Common.PersistentCaches;
 using Mapsui.Styles;
 using Mapsui.UI;

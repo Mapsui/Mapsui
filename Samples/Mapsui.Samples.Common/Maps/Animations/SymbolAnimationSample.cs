@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps
+namespace Mapsui.Samples.Common.Maps.Animations
 {
     public class SymbolAnimationSample : IMapControlSample, IPrepareSampleTest, ISampleTest
     {

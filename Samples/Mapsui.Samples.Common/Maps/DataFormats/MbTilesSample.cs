@@ -5,7 +5,7 @@ using SQLite;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace Mapsui.Samples.Common.Maps
+namespace Mapsui.Samples.Common.Maps.DataFormats
 {
     public class MbTilesSample : ISample
     {
