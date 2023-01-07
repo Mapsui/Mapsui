@@ -253,12 +253,12 @@ references:
   commentId: T:Mapsui.ArcGIS.CapabilitiesHelper
   fullName: Mapsui.ArcGIS.CapabilitiesHelper
   nameWithType: CapabilitiesHelper
-- uid: Mapsui.ArcGIS.CapabilitiesHelper.#ctor
-  name: CapabilitiesHelper()
-  href: api/Mapsui.ArcGIS.CapabilitiesHelper.html#Mapsui_ArcGIS_CapabilitiesHelper__ctor
-  commentId: M:Mapsui.ArcGIS.CapabilitiesHelper.#ctor
-  fullName: Mapsui.ArcGIS.CapabilitiesHelper.CapabilitiesHelper()
-  nameWithType: CapabilitiesHelper.CapabilitiesHelper()
+- uid: Mapsui.ArcGIS.CapabilitiesHelper.#ctor(Mapsui.Cache.IUrlPersistentCache)
+  name: CapabilitiesHelper(IUrlPersistentCache)
+  href: api/Mapsui.ArcGIS.CapabilitiesHelper.html#Mapsui_ArcGIS_CapabilitiesHelper__ctor_Mapsui_Cache_IUrlPersistentCache_
+  commentId: M:Mapsui.ArcGIS.CapabilitiesHelper.#ctor(Mapsui.Cache.IUrlPersistentCache)
+  fullName: Mapsui.ArcGIS.CapabilitiesHelper.CapabilitiesHelper(Mapsui.Cache.IUrlPersistentCache)
+  nameWithType: CapabilitiesHelper.CapabilitiesHelper(IUrlPersistentCache)
 - uid: Mapsui.ArcGIS.CapabilitiesHelper.#ctor*
   name: CapabilitiesHelper
   href: api/Mapsui.ArcGIS.CapabilitiesHelper.html#Mapsui_ArcGIS_CapabilitiesHelper__ctor_
@@ -627,24 +627,24 @@ references:
   commentId: T:Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider
   fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider
   nameWithType: ArcGISDynamicProvider
-- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.#ctor(System.String,Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities,System.Nullable{System.String})
-  name: ArcGISDynamicProvider(String, ArcGISDynamicCapabilities, Nullable<String>)
-  href: api/Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.html#Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicProvider__ctor_System_String_Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicCapabilities_System_Nullable_System_String__
-  commentId: M:Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.#ctor(System.String,Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities,System.Nullable{System.String})
-  name.vb: ArcGISDynamicProvider(String, ArcGISDynamicCapabilities, Nullable(Of String))
-  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.ArcGISDynamicProvider(System.String, Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities, System.Nullable<System.String>)
-  fullName.vb: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.ArcGISDynamicProvider(System.String, Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities, System.Nullable(Of System.String))
-  nameWithType: ArcGISDynamicProvider.ArcGISDynamicProvider(String, ArcGISDynamicCapabilities, Nullable<String>)
-  nameWithType.vb: ArcGISDynamicProvider.ArcGISDynamicProvider(String, ArcGISDynamicCapabilities, Nullable(Of String))
-- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.#ctor(System.String,System.Nullable{System.String})
-  name: ArcGISDynamicProvider(String, Nullable<String>)
-  href: api/Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.html#Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicProvider__ctor_System_String_System_Nullable_System_String__
-  commentId: M:Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.#ctor(System.String,System.Nullable{System.String})
-  name.vb: ArcGISDynamicProvider(String, Nullable(Of String))
-  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.ArcGISDynamicProvider(System.String, System.Nullable<System.String>)
-  fullName.vb: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.ArcGISDynamicProvider(System.String, System.Nullable(Of System.String))
-  nameWithType: ArcGISDynamicProvider.ArcGISDynamicProvider(String, Nullable<String>)
-  nameWithType.vb: ArcGISDynamicProvider.ArcGISDynamicProvider(String, Nullable(Of String))
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.#ctor(System.String,Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities,System.Nullable{System.String},Mapsui.Cache.IUrlPersistentCache)
+  name: ArcGISDynamicProvider(String, ArcGISDynamicCapabilities, Nullable<String>, IUrlPersistentCache)
+  href: api/Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.html#Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicProvider__ctor_System_String_Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicCapabilities_System_Nullable_System_String__Mapsui_Cache_IUrlPersistentCache_
+  commentId: M:Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.#ctor(System.String,Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities,System.Nullable{System.String},Mapsui.Cache.IUrlPersistentCache)
+  name.vb: ArcGISDynamicProvider(String, ArcGISDynamicCapabilities, Nullable(Of String), IUrlPersistentCache)
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.ArcGISDynamicProvider(System.String, Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities, System.Nullable<System.String>, Mapsui.Cache.IUrlPersistentCache)
+  fullName.vb: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.ArcGISDynamicProvider(System.String, Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicCapabilities, System.Nullable(Of System.String), Mapsui.Cache.IUrlPersistentCache)
+  nameWithType: ArcGISDynamicProvider.ArcGISDynamicProvider(String, ArcGISDynamicCapabilities, Nullable<String>, IUrlPersistentCache)
+  nameWithType.vb: ArcGISDynamicProvider.ArcGISDynamicProvider(String, ArcGISDynamicCapabilities, Nullable(Of String), IUrlPersistentCache)
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.#ctor(System.String,System.Nullable{System.String},Mapsui.Cache.IUrlPersistentCache)
+  name: ArcGISDynamicProvider(String, Nullable<String>, IUrlPersistentCache)
+  href: api/Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.html#Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicProvider__ctor_System_String_System_Nullable_System_String__Mapsui_Cache_IUrlPersistentCache_
+  commentId: M:Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.#ctor(System.String,System.Nullable{System.String},Mapsui.Cache.IUrlPersistentCache)
+  name.vb: ArcGISDynamicProvider(String, Nullable(Of String), IUrlPersistentCache)
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.ArcGISDynamicProvider(System.String, System.Nullable<System.String>, Mapsui.Cache.IUrlPersistentCache)
+  fullName.vb: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.ArcGISDynamicProvider(System.String, System.Nullable(Of System.String), Mapsui.Cache.IUrlPersistentCache)
+  nameWithType: ArcGISDynamicProvider.ArcGISDynamicProvider(String, Nullable<String>, IUrlPersistentCache)
+  nameWithType.vb: ArcGISDynamicProvider.ArcGISDynamicProvider(String, Nullable(Of String), IUrlPersistentCache)
 - uid: Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.#ctor*
   name: ArcGISDynamicProvider
   href: api/Mapsui.ArcGIS.DynamicProvider.ArcGISDynamicProvider.html#Mapsui_ArcGIS_DynamicProvider_ArcGISDynamicProvider__ctor_
@@ -977,12 +977,12 @@ references:
   commentId: T:Mapsui.ArcGIS.DynamicProvider.ArcGisLegend
   fullName: Mapsui.ArcGIS.DynamicProvider.ArcGisLegend
   nameWithType: ArcGisLegend
-- uid: Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.#ctor
-  name: ArcGisLegend()
-  href: api/Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.html#Mapsui_ArcGIS_DynamicProvider_ArcGisLegend__ctor
-  commentId: M:Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.#ctor
-  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.ArcGisLegend()
-  nameWithType: ArcGisLegend.ArcGisLegend()
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.#ctor(Mapsui.Cache.IUrlPersistentCache)
+  name: ArcGisLegend(IUrlPersistentCache)
+  href: api/Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.html#Mapsui_ArcGIS_DynamicProvider_ArcGisLegend__ctor_Mapsui_Cache_IUrlPersistentCache_
+  commentId: M:Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.#ctor(Mapsui.Cache.IUrlPersistentCache)
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.ArcGisLegend(Mapsui.Cache.IUrlPersistentCache)
+  nameWithType: ArcGisLegend.ArcGisLegend(IUrlPersistentCache)
 - uid: Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.#ctor*
   name: ArcGisLegend
   href: api/Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.html#Mapsui_ArcGIS_DynamicProvider_ArcGisLegend__ctor_
@@ -990,22 +990,22 @@ references:
   isSpec: "True"
   fullName: Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.ArcGisLegend
   nameWithType: ArcGisLegend.ArcGisLegend
-- uid: Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.GetLegendInfo(System.String,System.Nullable{ICredentials})
-  name: GetLegendInfo(String, Nullable<ICredentials>)
-  href: api/Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.html#Mapsui_ArcGIS_DynamicProvider_ArcGisLegend_GetLegendInfo_System_String_System_Nullable_ICredentials__
-  commentId: M:Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.GetLegendInfo(System.String,System.Nullable{ICredentials})
-  name.vb: GetLegendInfo(String, Nullable(Of ICredentials))
-  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.GetLegendInfo(System.String, System.Nullable<ICredentials>)
-  fullName.vb: Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.GetLegendInfo(System.String, System.Nullable(Of ICredentials))
-  nameWithType: ArcGisLegend.GetLegendInfo(String, Nullable<ICredentials>)
-  nameWithType.vb: ArcGisLegend.GetLegendInfo(String, Nullable(Of ICredentials))
-- uid: Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.GetLegendInfo*
-  name: GetLegendInfo
-  href: api/Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.html#Mapsui_ArcGIS_DynamicProvider_ArcGisLegend_GetLegendInfo_
-  commentId: Overload:Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.GetLegendInfo
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.GetLegendInfoAsync(System.String,System.Nullable{ICredentials})
+  name: GetLegendInfoAsync(String, Nullable<ICredentials>)
+  href: api/Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.html#Mapsui_ArcGIS_DynamicProvider_ArcGisLegend_GetLegendInfoAsync_System_String_System_Nullable_ICredentials__
+  commentId: M:Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.GetLegendInfoAsync(System.String,System.Nullable{ICredentials})
+  name.vb: GetLegendInfoAsync(String, Nullable(Of ICredentials))
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.GetLegendInfoAsync(System.String, System.Nullable<ICredentials>)
+  fullName.vb: Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.GetLegendInfoAsync(System.String, System.Nullable(Of ICredentials))
+  nameWithType: ArcGisLegend.GetLegendInfoAsync(String, Nullable<ICredentials>)
+  nameWithType.vb: ArcGisLegend.GetLegendInfoAsync(String, Nullable(Of ICredentials))
+- uid: Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.GetLegendInfoAsync*
+  name: GetLegendInfoAsync
+  href: api/Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.html#Mapsui_ArcGIS_DynamicProvider_ArcGisLegend_GetLegendInfoAsync_
+  commentId: Overload:Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.GetLegendInfoAsync
   isSpec: "True"
-  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.GetLegendInfo
-  nameWithType: ArcGisLegend.GetLegendInfo
+  fullName: Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.GetLegendInfoAsync
+  nameWithType: ArcGisLegend.GetLegendInfoAsync
 - uid: Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.GetLegendInfoRequest(System.String,System.Nullable{ICredentials})
   name: GetLegendInfoRequest(String, Nullable<ICredentials>)
   href: api/Mapsui.ArcGIS.DynamicProvider.ArcGisLegend.html#Mapsui_ArcGIS_DynamicProvider_ArcGisLegend_GetLegendInfoRequest_System_String_System_Nullable_ICredentials__
@@ -1304,6 +1304,31 @@ references:
   commentId: T:Mapsui.ArcGIS.DynamicProvider.StatusEventHandler
   fullName: Mapsui.ArcGIS.DynamicProvider.StatusEventHandler
   nameWithType: StatusEventHandler
+- uid: Mapsui.ArcGIS.Extensions
+  name: Mapsui.ArcGIS.Extensions
+  href: api/Mapsui.ArcGIS.Extensions.html
+  commentId: N:Mapsui.ArcGIS.Extensions
+  fullName: Mapsui.ArcGIS.Extensions
+  nameWithType: Mapsui.ArcGIS.Extensions
+- uid: Mapsui.ArcGIS.Extensions.ExtentExtensions
+  name: ExtentExtensions
+  href: api/Mapsui.ArcGIS.Extensions.ExtentExtensions.html
+  commentId: T:Mapsui.ArcGIS.Extensions.ExtentExtensions
+  fullName: Mapsui.ArcGIS.Extensions.ExtentExtensions
+  nameWithType: ExtentExtensions
+- uid: Mapsui.ArcGIS.Extensions.ExtentExtensions.ToMRect(Mapsui.ArcGIS.Extent)
+  name: ToMRect(Extent)
+  href: api/Mapsui.ArcGIS.Extensions.ExtentExtensions.html#Mapsui_ArcGIS_Extensions_ExtentExtensions_ToMRect_Mapsui_ArcGIS_Extent_
+  commentId: M:Mapsui.ArcGIS.Extensions.ExtentExtensions.ToMRect(Mapsui.ArcGIS.Extent)
+  fullName: Mapsui.ArcGIS.Extensions.ExtentExtensions.ToMRect(Mapsui.ArcGIS.Extent)
+  nameWithType: ExtentExtensions.ToMRect(Extent)
+- uid: Mapsui.ArcGIS.Extensions.ExtentExtensions.ToMRect*
+  name: ToMRect
+  href: api/Mapsui.ArcGIS.Extensions.ExtentExtensions.html#Mapsui_ArcGIS_Extensions_ExtentExtensions_ToMRect_
+  commentId: Overload:Mapsui.ArcGIS.Extensions.ExtentExtensions.ToMRect
+  isSpec: "True"
+  fullName: Mapsui.ArcGIS.Extensions.ExtentExtensions.ToMRect
+  nameWithType: ExtentExtensions.ToMRect
 - uid: Mapsui.ArcGIS.Extent
   name: Extent
   href: api/Mapsui.ArcGIS.Extent.html
@@ -2302,24 +2327,24 @@ references:
   commentId: T:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider
   fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider
   nameWithType: ArcGISImageServiceProvider
-- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.#ctor(Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities,System.Boolean,System.Nullable{System.String})
-  name: ArcGISImageServiceProvider(ArcGISImageCapabilities, Boolean, Nullable<String>)
-  href: api/Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageServiceProvider__ctor_Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_System_Boolean_System_Nullable_System_String__
-  commentId: M:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.#ctor(Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities,System.Boolean,System.Nullable{System.String})
-  name.vb: ArcGISImageServiceProvider(ArcGISImageCapabilities, Boolean, Nullable(Of String))
-  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.ArcGISImageServiceProvider(Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities, System.Boolean, System.Nullable<System.String>)
-  fullName.vb: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.ArcGISImageServiceProvider(Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities, System.Boolean, System.Nullable(Of System.String))
-  nameWithType: ArcGISImageServiceProvider.ArcGISImageServiceProvider(ArcGISImageCapabilities, Boolean, Nullable<String>)
-  nameWithType.vb: ArcGISImageServiceProvider.ArcGISImageServiceProvider(ArcGISImageCapabilities, Boolean, Nullable(Of String))
-- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.#ctor(System.String,System.Boolean,System.String,Mapsui.ArcGIS.ImageServiceProvider.InterpolationType,System.Int64,System.Int64,System.Nullable{System.String})
-  name: ArcGISImageServiceProvider(String, Boolean, String, InterpolationType, Int64, Int64, Nullable<String>)
-  href: api/Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageServiceProvider__ctor_System_String_System_Boolean_System_String_Mapsui_ArcGIS_ImageServiceProvider_InterpolationType_System_Int64_System_Int64_System_Nullable_System_String__
-  commentId: M:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.#ctor(System.String,System.Boolean,System.String,Mapsui.ArcGIS.ImageServiceProvider.InterpolationType,System.Int64,System.Int64,System.Nullable{System.String})
-  name.vb: ArcGISImageServiceProvider(String, Boolean, String, InterpolationType, Int64, Int64, Nullable(Of String))
-  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.ArcGISImageServiceProvider(System.String, System.Boolean, System.String, Mapsui.ArcGIS.ImageServiceProvider.InterpolationType, System.Int64, System.Int64, System.Nullable<System.String>)
-  fullName.vb: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.ArcGISImageServiceProvider(System.String, System.Boolean, System.String, Mapsui.ArcGIS.ImageServiceProvider.InterpolationType, System.Int64, System.Int64, System.Nullable(Of System.String))
-  nameWithType: ArcGISImageServiceProvider.ArcGISImageServiceProvider(String, Boolean, String, InterpolationType, Int64, Int64, Nullable<String>)
-  nameWithType.vb: ArcGISImageServiceProvider.ArcGISImageServiceProvider(String, Boolean, String, InterpolationType, Int64, Int64, Nullable(Of String))
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.#ctor(Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities,System.Boolean,System.Nullable{System.String},Mapsui.Cache.IUrlPersistentCache)
+  name: ArcGISImageServiceProvider(ArcGISImageCapabilities, Boolean, Nullable<String>, IUrlPersistentCache)
+  href: api/Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageServiceProvider__ctor_Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageCapabilities_System_Boolean_System_Nullable_System_String__Mapsui_Cache_IUrlPersistentCache_
+  commentId: M:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.#ctor(Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities,System.Boolean,System.Nullable{System.String},Mapsui.Cache.IUrlPersistentCache)
+  name.vb: ArcGISImageServiceProvider(ArcGISImageCapabilities, Boolean, Nullable(Of String), IUrlPersistentCache)
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.ArcGISImageServiceProvider(Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities, System.Boolean, System.Nullable<System.String>, Mapsui.Cache.IUrlPersistentCache)
+  fullName.vb: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.ArcGISImageServiceProvider(Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageCapabilities, System.Boolean, System.Nullable(Of System.String), Mapsui.Cache.IUrlPersistentCache)
+  nameWithType: ArcGISImageServiceProvider.ArcGISImageServiceProvider(ArcGISImageCapabilities, Boolean, Nullable<String>, IUrlPersistentCache)
+  nameWithType.vb: ArcGISImageServiceProvider.ArcGISImageServiceProvider(ArcGISImageCapabilities, Boolean, Nullable(Of String), IUrlPersistentCache)
+- uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.#ctor(System.String,System.Boolean,System.String,Mapsui.ArcGIS.ImageServiceProvider.InterpolationType,System.Int64,System.Int64,System.Nullable{System.String},Mapsui.Cache.IUrlPersistentCache)
+  name: ArcGISImageServiceProvider(String, Boolean, String, InterpolationType, Int64, Int64, Nullable<String>, IUrlPersistentCache)
+  href: api/Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageServiceProvider__ctor_System_String_System_Boolean_System_String_Mapsui_ArcGIS_ImageServiceProvider_InterpolationType_System_Int64_System_Int64_System_Nullable_System_String__Mapsui_Cache_IUrlPersistentCache_
+  commentId: M:Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.#ctor(System.String,System.Boolean,System.String,Mapsui.ArcGIS.ImageServiceProvider.InterpolationType,System.Int64,System.Int64,System.Nullable{System.String},Mapsui.Cache.IUrlPersistentCache)
+  name.vb: ArcGISImageServiceProvider(String, Boolean, String, InterpolationType, Int64, Int64, Nullable(Of String), IUrlPersistentCache)
+  fullName: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.ArcGISImageServiceProvider(System.String, System.Boolean, System.String, Mapsui.ArcGIS.ImageServiceProvider.InterpolationType, System.Int64, System.Int64, System.Nullable<System.String>, Mapsui.Cache.IUrlPersistentCache)
+  fullName.vb: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.ArcGISImageServiceProvider(System.String, System.Boolean, System.String, Mapsui.ArcGIS.ImageServiceProvider.InterpolationType, System.Int64, System.Int64, System.Nullable(Of System.String), Mapsui.Cache.IUrlPersistentCache)
+  nameWithType: ArcGISImageServiceProvider.ArcGISImageServiceProvider(String, Boolean, String, InterpolationType, Int64, Int64, Nullable<String>, IUrlPersistentCache)
+  nameWithType.vb: ArcGISImageServiceProvider.ArcGISImageServiceProvider(String, Boolean, String, InterpolationType, Int64, Int64, Nullable(Of String), IUrlPersistentCache)
 - uid: Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.#ctor*
   name: ArcGISImageServiceProvider
   href: api/Mapsui.ArcGIS.ImageServiceProvider.ArcGISImageServiceProvider.html#Mapsui_ArcGIS_ImageServiceProvider_ArcGISImageServiceProvider__ctor_
@@ -4206,6 +4231,38 @@ references:
   isSpec: "True"
   fullName: Mapsui.Extensions.StreamExtensions.ToBytes
   nameWithType: StreamExtensions.ToBytes
+- uid: Mapsui.Extensions.StyleExtensions
+  name: StyleExtensions
+  href: api/Mapsui.Extensions.StyleExtensions.html
+  commentId: T:Mapsui.Extensions.StyleExtensions
+  fullName: Mapsui.Extensions.StyleExtensions
+  nameWithType: StyleExtensions
+- uid: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)
+  name: GetStylesToApply(IStyle, Double)
+  href: api/Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_GetStylesToApply_Mapsui_Styles_IStyle_System_Double_
+  commentId: M:Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle,System.Double)
+  fullName: Mapsui.Extensions.StyleExtensions.GetStylesToApply(Mapsui.Styles.IStyle, System.Double)
+  nameWithType: StyleExtensions.GetStylesToApply(IStyle, Double)
+- uid: Mapsui.Extensions.StyleExtensions.GetStylesToApply*
+  name: GetStylesToApply
+  href: api/Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_GetStylesToApply_
+  commentId: Overload:Mapsui.Extensions.StyleExtensions.GetStylesToApply
+  isSpec: "True"
+  fullName: Mapsui.Extensions.StyleExtensions.GetStylesToApply
+  nameWithType: StyleExtensions.GetStylesToApply
+- uid: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)
+  name: ShouldBeApplied(IStyle, Double)
+  href: api/Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_ShouldBeApplied_Mapsui_Styles_IStyle_System_Double_
+  commentId: M:Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle,System.Double)
+  fullName: Mapsui.Extensions.StyleExtensions.ShouldBeApplied(Mapsui.Styles.IStyle, System.Double)
+  nameWithType: StyleExtensions.ShouldBeApplied(IStyle, Double)
+- uid: Mapsui.Extensions.StyleExtensions.ShouldBeApplied*
+  name: ShouldBeApplied
+  href: api/Mapsui.Extensions.StyleExtensions.html#Mapsui_Extensions_StyleExtensions_ShouldBeApplied_
+  commentId: Overload:Mapsui.Extensions.StyleExtensions.ShouldBeApplied
+  isSpec: "True"
+  fullName: Mapsui.Extensions.StyleExtensions.ShouldBeApplied
+  nameWithType: StyleExtensions.ShouldBeApplied
 - uid: Mapsui.Extensions.TupleExtensions
   name: TupleExtensions
   href: api/Mapsui.Extensions.TupleExtensions.html
@@ -5854,19 +5911,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.BaseLayer.GetFeatures
   nameWithType: BaseLayer.GetFeatures
-- uid: Mapsui.Layers.BaseLayer.GetLayerStyles(Mapsui.Layers.ILayer)
-  name: GetLayerStyles(ILayer)
-  href: api/Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_GetLayerStyles_Mapsui_Layers_ILayer_
-  commentId: M:Mapsui.Layers.BaseLayer.GetLayerStyles(Mapsui.Layers.ILayer)
-  fullName: Mapsui.Layers.BaseLayer.GetLayerStyles(Mapsui.Layers.ILayer)
-  nameWithType: BaseLayer.GetLayerStyles(ILayer)
-- uid: Mapsui.Layers.BaseLayer.GetLayerStyles*
-  name: GetLayerStyles
-  href: api/Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_GetLayerStyles_
-  commentId: Overload:Mapsui.Layers.BaseLayer.GetLayerStyles
-  isSpec: "True"
-  fullName: Mapsui.Layers.BaseLayer.GetLayerStyles
-  nameWithType: BaseLayer.GetLayerStyles
 - uid: Mapsui.Layers.BaseLayer.Id
   name: Id
   href: api/Mapsui.Layers.BaseLayer.html#Mapsui_Layers_BaseLayer_Id
@@ -7160,6 +7204,50 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.MemoryLayer.GetFeatures
   nameWithType: MemoryLayer.GetFeatures
+- uid: Mapsui.Layers.ObservableMemoryLayer`1
+  name: ObservableMemoryLayer<T>
+  href: api/Mapsui.Layers.ObservableMemoryLayer-1.html
+  commentId: T:Mapsui.Layers.ObservableMemoryLayer`1
+  name.vb: ObservableMemoryLayer(Of T)
+  fullName: Mapsui.Layers.ObservableMemoryLayer<T>
+  fullName.vb: Mapsui.Layers.ObservableMemoryLayer(Of T)
+  nameWithType: ObservableMemoryLayer<T>
+  nameWithType.vb: ObservableMemoryLayer(Of T)
+- uid: Mapsui.Layers.ObservableMemoryLayer`1.#ctor(Func{`0,Mapsui.IFeature},System.Nullable{System.String})
+  name: ObservableMemoryLayer(Func<T, IFeature>, Nullable<String>)
+  href: api/Mapsui.Layers.ObservableMemoryLayer-1.html#Mapsui_Layers_ObservableMemoryLayer_1__ctor_Func__0_Mapsui_IFeature__System_Nullable_System_String__
+  commentId: M:Mapsui.Layers.ObservableMemoryLayer`1.#ctor(Func{`0,Mapsui.IFeature},System.Nullable{System.String})
+  name.vb: ObservableMemoryLayer(Func(Of T, IFeature), Nullable(Of String))
+  fullName: Mapsui.Layers.ObservableMemoryLayer<T>.ObservableMemoryLayer(Func<T, Mapsui.IFeature>, System.Nullable<System.String>)
+  fullName.vb: Mapsui.Layers.ObservableMemoryLayer(Of T).ObservableMemoryLayer(Func(Of T, Mapsui.IFeature), System.Nullable(Of System.String))
+  nameWithType: ObservableMemoryLayer<T>.ObservableMemoryLayer(Func<T, IFeature>, Nullable<String>)
+  nameWithType.vb: ObservableMemoryLayer(Of T).ObservableMemoryLayer(Func(Of T, IFeature), Nullable(Of String))
+- uid: Mapsui.Layers.ObservableMemoryLayer`1.#ctor*
+  name: ObservableMemoryLayer
+  href: api/Mapsui.Layers.ObservableMemoryLayer-1.html#Mapsui_Layers_ObservableMemoryLayer_1__ctor_
+  commentId: Overload:Mapsui.Layers.ObservableMemoryLayer`1.#ctor
+  isSpec: "True"
+  fullName: Mapsui.Layers.ObservableMemoryLayer<T>.ObservableMemoryLayer
+  fullName.vb: Mapsui.Layers.ObservableMemoryLayer(Of T).ObservableMemoryLayer
+  nameWithType: ObservableMemoryLayer<T>.ObservableMemoryLayer
+  nameWithType.vb: ObservableMemoryLayer(Of T).ObservableMemoryLayer
+- uid: Mapsui.Layers.ObservableMemoryLayer`1.ObservableCollection
+  name: ObservableCollection
+  href: api/Mapsui.Layers.ObservableMemoryLayer-1.html#Mapsui_Layers_ObservableMemoryLayer_1_ObservableCollection
+  commentId: P:Mapsui.Layers.ObservableMemoryLayer`1.ObservableCollection
+  fullName: Mapsui.Layers.ObservableMemoryLayer<T>.ObservableCollection
+  fullName.vb: Mapsui.Layers.ObservableMemoryLayer(Of T).ObservableCollection
+  nameWithType: ObservableMemoryLayer<T>.ObservableCollection
+  nameWithType.vb: ObservableMemoryLayer(Of T).ObservableCollection
+- uid: Mapsui.Layers.ObservableMemoryLayer`1.ObservableCollection*
+  name: ObservableCollection
+  href: api/Mapsui.Layers.ObservableMemoryLayer-1.html#Mapsui_Layers_ObservableMemoryLayer_1_ObservableCollection_
+  commentId: Overload:Mapsui.Layers.ObservableMemoryLayer`1.ObservableCollection
+  isSpec: "True"
+  fullName: Mapsui.Layers.ObservableMemoryLayer<T>.ObservableCollection
+  fullName.vb: Mapsui.Layers.ObservableMemoryLayer(Of T).ObservableCollection
+  nameWithType: ObservableMemoryLayer<T>.ObservableCollection
+  nameWithType.vb: ObservableMemoryLayer(Of T).ObservableCollection
 - uid: Mapsui.Layers.PointFeature
   name: PointFeature
   href: api/Mapsui.Layers.PointFeature.html
@@ -11555,19 +11643,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Providers.Wfs.Utilities.HttpClientUtil.Dispose
   nameWithType: HttpClientUtil.Dispose
-- uid: Mapsui.Providers.Wfs.Utilities.HttpClientUtil.GetDataStream
-  name: GetDataStream()
-  href: api/Mapsui.Providers.Wfs.Utilities.HttpClientUtil.html#Mapsui_Providers_Wfs_Utilities_HttpClientUtil_GetDataStream
-  commentId: M:Mapsui.Providers.Wfs.Utilities.HttpClientUtil.GetDataStream
-  fullName: Mapsui.Providers.Wfs.Utilities.HttpClientUtil.GetDataStream()
-  nameWithType: HttpClientUtil.GetDataStream()
-- uid: Mapsui.Providers.Wfs.Utilities.HttpClientUtil.GetDataStream*
-  name: GetDataStream
-  href: api/Mapsui.Providers.Wfs.Utilities.HttpClientUtil.html#Mapsui_Providers_Wfs_Utilities_HttpClientUtil_GetDataStream_
-  commentId: Overload:Mapsui.Providers.Wfs.Utilities.HttpClientUtil.GetDataStream
+- uid: Mapsui.Providers.Wfs.Utilities.HttpClientUtil.GetDataStreamAsync
+  name: GetDataStreamAsync()
+  href: api/Mapsui.Providers.Wfs.Utilities.HttpClientUtil.html#Mapsui_Providers_Wfs_Utilities_HttpClientUtil_GetDataStreamAsync
+  commentId: M:Mapsui.Providers.Wfs.Utilities.HttpClientUtil.GetDataStreamAsync
+  fullName: Mapsui.Providers.Wfs.Utilities.HttpClientUtil.GetDataStreamAsync()
+  nameWithType: HttpClientUtil.GetDataStreamAsync()
+- uid: Mapsui.Providers.Wfs.Utilities.HttpClientUtil.GetDataStreamAsync*
+  name: GetDataStreamAsync
+  href: api/Mapsui.Providers.Wfs.Utilities.HttpClientUtil.html#Mapsui_Providers_Wfs_Utilities_HttpClientUtil_GetDataStreamAsync_
+  commentId: Overload:Mapsui.Providers.Wfs.Utilities.HttpClientUtil.GetDataStreamAsync
   isSpec: "True"
-  fullName: Mapsui.Providers.Wfs.Utilities.HttpClientUtil.GetDataStream
-  nameWithType: HttpClientUtil.GetDataStream
+  fullName: Mapsui.Providers.Wfs.Utilities.HttpClientUtil.GetDataStreamAsync
+  nameWithType: HttpClientUtil.GetDataStreamAsync
 - uid: Mapsui.Providers.Wfs.Utilities.HttpClientUtil.PostData
   name: PostData
   href: api/Mapsui.Providers.Wfs.Utilities.HttpClientUtil.html#Mapsui_Providers_Wfs_Utilities_HttpClientUtil_PostData
@@ -13499,19 +13587,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Providers.Wfs.WFSProvider.Dispose
   nameWithType: WFSProvider.Dispose
-- uid: Mapsui.Providers.Wfs.WFSProvider.ExecuteIntersectionQuery(Mapsui.MRect)
-  name: ExecuteIntersectionQuery(MRect)
-  href: api/Mapsui.Providers.Wfs.WFSProvider.html#Mapsui_Providers_Wfs_WFSProvider_ExecuteIntersectionQuery_Mapsui_MRect_
-  commentId: M:Mapsui.Providers.Wfs.WFSProvider.ExecuteIntersectionQuery(Mapsui.MRect)
-  fullName: Mapsui.Providers.Wfs.WFSProvider.ExecuteIntersectionQuery(Mapsui.MRect)
-  nameWithType: WFSProvider.ExecuteIntersectionQuery(MRect)
-- uid: Mapsui.Providers.Wfs.WFSProvider.ExecuteIntersectionQuery*
-  name: ExecuteIntersectionQuery
-  href: api/Mapsui.Providers.Wfs.WFSProvider.html#Mapsui_Providers_Wfs_WFSProvider_ExecuteIntersectionQuery_
-  commentId: Overload:Mapsui.Providers.Wfs.WFSProvider.ExecuteIntersectionQuery
+- uid: Mapsui.Providers.Wfs.WFSProvider.ExecuteIntersectionQueryAsync(Mapsui.MRect)
+  name: ExecuteIntersectionQueryAsync(MRect)
+  href: api/Mapsui.Providers.Wfs.WFSProvider.html#Mapsui_Providers_Wfs_WFSProvider_ExecuteIntersectionQueryAsync_Mapsui_MRect_
+  commentId: M:Mapsui.Providers.Wfs.WFSProvider.ExecuteIntersectionQueryAsync(Mapsui.MRect)
+  fullName: Mapsui.Providers.Wfs.WFSProvider.ExecuteIntersectionQueryAsync(Mapsui.MRect)
+  nameWithType: WFSProvider.ExecuteIntersectionQueryAsync(MRect)
+- uid: Mapsui.Providers.Wfs.WFSProvider.ExecuteIntersectionQueryAsync*
+  name: ExecuteIntersectionQueryAsync
+  href: api/Mapsui.Providers.Wfs.WFSProvider.html#Mapsui_Providers_Wfs_WFSProvider_ExecuteIntersectionQueryAsync_
+  commentId: Overload:Mapsui.Providers.Wfs.WFSProvider.ExecuteIntersectionQueryAsync
   isSpec: "True"
-  fullName: Mapsui.Providers.Wfs.WFSProvider.ExecuteIntersectionQuery
-  nameWithType: WFSProvider.ExecuteIntersectionQuery
+  fullName: Mapsui.Providers.Wfs.WFSProvider.ExecuteIntersectionQueryAsync
+  nameWithType: WFSProvider.ExecuteIntersectionQueryAsync
 - uid: Mapsui.Providers.Wfs.WFSProvider.FeatureTypeInfo
   name: FeatureTypeInfo
   href: api/Mapsui.Providers.Wfs.WFSProvider.html#Mapsui_Providers_Wfs_WFSProvider_FeatureTypeInfo
@@ -13577,6 +13665,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Providers.Wfs.WFSProvider.GetFeaturesAsync
   nameWithType: WFSProvider.GetFeaturesAsync
+- uid: Mapsui.Providers.Wfs.WFSProvider.InitAsync
+  name: InitAsync()
+  href: api/Mapsui.Providers.Wfs.WFSProvider.html#Mapsui_Providers_Wfs_WFSProvider_InitAsync
+  commentId: M:Mapsui.Providers.Wfs.WFSProvider.InitAsync
+  fullName: Mapsui.Providers.Wfs.WFSProvider.InitAsync()
+  nameWithType: WFSProvider.InitAsync()
+- uid: Mapsui.Providers.Wfs.WFSProvider.InitAsync*
+  name: InitAsync
+  href: api/Mapsui.Providers.Wfs.WFSProvider.html#Mapsui_Providers_Wfs_WFSProvider_InitAsync_
+  commentId: Overload:Mapsui.Providers.Wfs.WFSProvider.InitAsync
+  isSpec: "True"
+  fullName: Mapsui.Providers.Wfs.WFSProvider.InitAsync
+  nameWithType: WFSProvider.InitAsync
 - uid: Mapsui.Providers.Wfs.WFSProvider.Labels
   name: Labels
   href: api/Mapsui.Providers.Wfs.WFSProvider.html#Mapsui_Providers_Wfs_WFSProvider_Labels
@@ -13781,12 +13882,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.ResetNamespaces
   nameWithType: IXPathQueryManager.ResetNamespaces
-- uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.SetDocumentToParse(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)
-  name: SetDocumentToParse(HttpClientUtil)
-  href: api/Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html#Mapsui_Providers_Wfs_Xml_IXPathQueryManager_SetDocumentToParse_Mapsui_Providers_Wfs_Utilities_HttpClientUtil_
-  commentId: M:Mapsui.Providers.Wfs.Xml.IXPathQueryManager.SetDocumentToParse(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)
-  fullName: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.SetDocumentToParse(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)
-  nameWithType: IXPathQueryManager.SetDocumentToParse(HttpClientUtil)
 - uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.SetDocumentToParse(Stream)
   name: SetDocumentToParse(Stream)
   href: api/Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html#Mapsui_Providers_Wfs_Xml_IXPathQueryManager_SetDocumentToParse_Stream_
@@ -13800,6 +13895,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.SetDocumentToParse
   nameWithType: IXPathQueryManager.SetDocumentToParse
+- uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.SetDocumentToParseAsync(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)
+  name: SetDocumentToParseAsync(HttpClientUtil)
+  href: api/Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html#Mapsui_Providers_Wfs_Xml_IXPathQueryManager_SetDocumentToParseAsync_Mapsui_Providers_Wfs_Utilities_HttpClientUtil_
+  commentId: M:Mapsui.Providers.Wfs.Xml.IXPathQueryManager.SetDocumentToParseAsync(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)
+  fullName: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.SetDocumentToParseAsync(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)
+  nameWithType: IXPathQueryManager.SetDocumentToParseAsync(HttpClientUtil)
+- uid: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.SetDocumentToParseAsync*
+  name: SetDocumentToParseAsync
+  href: api/Mapsui.Providers.Wfs.Xml.IXPathQueryManager.html#Mapsui_Providers_Wfs_Xml_IXPathQueryManager_SetDocumentToParseAsync_
+  commentId: Overload:Mapsui.Providers.Wfs.Xml.IXPathQueryManager.SetDocumentToParseAsync
+  isSpec: "True"
+  fullName: Mapsui.Providers.Wfs.Xml.IXPathQueryManager.SetDocumentToParseAsync
+  nameWithType: IXPathQueryManager.SetDocumentToParseAsync
 - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager
   name: XPathQueryManager
   href: api/Mapsui.Providers.Wfs.Xml.XPathQueryManager.html
@@ -14143,6 +14251,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.GetXPathQueryManagerInContext
   nameWithType: XPathQueryManager.GetXPathQueryManagerInContext
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.InitAsync
+  name: InitAsync()
+  href: api/Mapsui.Providers.Wfs.Xml.XPathQueryManager.html#Mapsui_Providers_Wfs_Xml_XPathQueryManager_InitAsync
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.InitAsync
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.InitAsync()
+  nameWithType: XPathQueryManager.InitAsync()
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.InitAsync*
+  name: InitAsync
+  href: api/Mapsui.Providers.Wfs.Xml.XPathQueryManager.html#Mapsui_Providers_Wfs_Xml_XPathQueryManager_InitAsync_
+  commentId: Overload:Mapsui.Providers.Wfs.Xml.XPathQueryManager.InitAsync
+  isSpec: "True"
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.InitAsync
+  nameWithType: XPathQueryManager.InitAsync
 - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase
   name: XPathQueryManager.ParamBase
   href: api/Mapsui.Providers.Wfs.Xml.XPathQueryManager.ParamBase.html
@@ -14402,12 +14523,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.ResetNamespaces
   nameWithType: XPathQueryManager.ResetNamespaces
-- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParse(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)
-  name: SetDocumentToParse(HttpClientUtil)
-  href: api/Mapsui.Providers.Wfs.Xml.XPathQueryManager.html#Mapsui_Providers_Wfs_Xml_XPathQueryManager_SetDocumentToParse_Mapsui_Providers_Wfs_Utilities_HttpClientUtil_
-  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParse(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)
-  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParse(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)
-  nameWithType: XPathQueryManager.SetDocumentToParse(HttpClientUtil)
 - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParse(Stream)
   name: SetDocumentToParse(Stream)
   href: api/Mapsui.Providers.Wfs.Xml.XPathQueryManager.html#Mapsui_Providers_Wfs_Xml_XPathQueryManager_SetDocumentToParse_Stream_
@@ -14436,6 +14551,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParse
   nameWithType: XPathQueryManager.SetDocumentToParse
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParseAsync(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)
+  name: SetDocumentToParseAsync(HttpClientUtil)
+  href: api/Mapsui.Providers.Wfs.Xml.XPathQueryManager.html#Mapsui_Providers_Wfs_Xml_XPathQueryManager_SetDocumentToParseAsync_Mapsui_Providers_Wfs_Utilities_HttpClientUtil_
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParseAsync(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParseAsync(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)
+  nameWithType: XPathQueryManager.SetDocumentToParseAsync(HttpClientUtil)
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParseAsync*
+  name: SetDocumentToParseAsync
+  href: api/Mapsui.Providers.Wfs.Xml.XPathQueryManager.html#Mapsui_Providers_Wfs_Xml_XPathQueryManager_SetDocumentToParseAsync_
+  commentId: Overload:Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParseAsync
+  isSpec: "True"
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManager.SetDocumentToParseAsync
+  nameWithType: XPathQueryManager.SetDocumentToParseAsync
 - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManagerCompiledExpressionsDecorator
   name: XPathQueryManagerCompiledExpressionsDecorator
   href: api/Mapsui.Providers.Wfs.Xml.XPathQueryManagerCompiledExpressionsDecorator.html
@@ -14625,12 +14753,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManagerDecoratorBase.ResetNamespaces
   nameWithType: XPathQueryManagerDecoratorBase.ResetNamespaces
-- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManagerDecoratorBase.SetDocumentToParse(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)
-  name: SetDocumentToParse(HttpClientUtil)
-  href: api/Mapsui.Providers.Wfs.Xml.XPathQueryManagerDecoratorBase.html#Mapsui_Providers_Wfs_Xml_XPathQueryManagerDecoratorBase_SetDocumentToParse_Mapsui_Providers_Wfs_Utilities_HttpClientUtil_
-  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManagerDecoratorBase.SetDocumentToParse(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)
-  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManagerDecoratorBase.SetDocumentToParse(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)
-  nameWithType: XPathQueryManagerDecoratorBase.SetDocumentToParse(HttpClientUtil)
 - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManagerDecoratorBase.SetDocumentToParse(Stream)
   name: SetDocumentToParse(Stream)
   href: api/Mapsui.Providers.Wfs.Xml.XPathQueryManagerDecoratorBase.html#Mapsui_Providers_Wfs_Xml_XPathQueryManagerDecoratorBase_SetDocumentToParse_Stream_
@@ -14644,6 +14766,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManagerDecoratorBase.SetDocumentToParse
   nameWithType: XPathQueryManagerDecoratorBase.SetDocumentToParse
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManagerDecoratorBase.SetDocumentToParseAsync(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)
+  name: SetDocumentToParseAsync(HttpClientUtil)
+  href: api/Mapsui.Providers.Wfs.Xml.XPathQueryManagerDecoratorBase.html#Mapsui_Providers_Wfs_Xml_XPathQueryManagerDecoratorBase_SetDocumentToParseAsync_Mapsui_Providers_Wfs_Utilities_HttpClientUtil_
+  commentId: M:Mapsui.Providers.Wfs.Xml.XPathQueryManagerDecoratorBase.SetDocumentToParseAsync(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManagerDecoratorBase.SetDocumentToParseAsync(Mapsui.Providers.Wfs.Utilities.HttpClientUtil)
+  nameWithType: XPathQueryManagerDecoratorBase.SetDocumentToParseAsync(HttpClientUtil)
+- uid: Mapsui.Providers.Wfs.Xml.XPathQueryManagerDecoratorBase.SetDocumentToParseAsync*
+  name: SetDocumentToParseAsync
+  href: api/Mapsui.Providers.Wfs.Xml.XPathQueryManagerDecoratorBase.html#Mapsui_Providers_Wfs_Xml_XPathQueryManagerDecoratorBase_SetDocumentToParseAsync_
+  commentId: Overload:Mapsui.Providers.Wfs.Xml.XPathQueryManagerDecoratorBase.SetDocumentToParseAsync
+  isSpec: "True"
+  fullName: Mapsui.Providers.Wfs.Xml.XPathQueryManagerDecoratorBase.SetDocumentToParseAsync
+  nameWithType: XPathQueryManagerDecoratorBase.SetDocumentToParseAsync
 - uid: Mapsui.Providers.Wfs.Xml.XPathQueryManagerDecoratorBase.XPathQueryManager
   name: XPathQueryManager
   href: api/Mapsui.Providers.Wfs.Xml.XPathQueryManagerDecoratorBase.html#Mapsui_Providers_Wfs_Xml_XPathQueryManagerDecoratorBase_XPathQueryManager
@@ -19682,6 +19817,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Styles.StyleCollection.Opacity
   nameWithType: StyleCollection.Opacity
+- uid: Mapsui.Styles.StyleCollection.Styles
+  name: Styles
+  href: api/Mapsui.Styles.StyleCollection.html#Mapsui_Styles_StyleCollection_Styles
+  commentId: P:Mapsui.Styles.StyleCollection.Styles
+  fullName: Mapsui.Styles.StyleCollection.Styles
+  nameWithType: StyleCollection.Styles
+- uid: Mapsui.Styles.StyleCollection.Styles*
+  name: Styles
+  href: api/Mapsui.Styles.StyleCollection.html#Mapsui_Styles_StyleCollection_Styles_
+  commentId: Overload:Mapsui.Styles.StyleCollection.Styles
+  isSpec: "True"
+  fullName: Mapsui.Styles.StyleCollection.Styles
+  nameWithType: StyleCollection.Styles
 - uid: Mapsui.Styles.SymbolStyle
   name: SymbolStyle
   href: api/Mapsui.Styles.SymbolStyle.html
@@ -20164,70 +20312,6 @@ references:
   isSpec: "True"
   fullName: Mapsui.Styles.Thematics.ColorBlend.WhiteToBlack
   nameWithType: ColorBlend.WhiteToBlack
-- uid: Mapsui.Styles.Thematics.CustomTheme
-  name: CustomTheme
-  href: api/Mapsui.Styles.Thematics.CustomTheme.html
-  commentId: T:Mapsui.Styles.Thematics.CustomTheme
-  fullName: Mapsui.Styles.Thematics.CustomTheme
-  nameWithType: CustomTheme
-- uid: Mapsui.Styles.Thematics.CustomTheme.#ctor(Mapsui.Styles.Thematics.CustomTheme.GetStyleMethod)
-  name: CustomTheme(CustomTheme.GetStyleMethod)
-  href: api/Mapsui.Styles.Thematics.CustomTheme.html#Mapsui_Styles_Thematics_CustomTheme__ctor_Mapsui_Styles_Thematics_CustomTheme_GetStyleMethod_
-  commentId: M:Mapsui.Styles.Thematics.CustomTheme.#ctor(Mapsui.Styles.Thematics.CustomTheme.GetStyleMethod)
-  fullName: Mapsui.Styles.Thematics.CustomTheme.CustomTheme(Mapsui.Styles.Thematics.CustomTheme.GetStyleMethod)
-  nameWithType: CustomTheme.CustomTheme(CustomTheme.GetStyleMethod)
-- uid: Mapsui.Styles.Thematics.CustomTheme.#ctor*
-  name: CustomTheme
-  href: api/Mapsui.Styles.Thematics.CustomTheme.html#Mapsui_Styles_Thematics_CustomTheme__ctor_
-  commentId: Overload:Mapsui.Styles.Thematics.CustomTheme.#ctor
-  isSpec: "True"
-  fullName: Mapsui.Styles.Thematics.CustomTheme.CustomTheme
-  nameWithType: CustomTheme.CustomTheme
-- uid: Mapsui.Styles.Thematics.CustomTheme.DefaultStyle
-  name: DefaultStyle
-  href: api/Mapsui.Styles.Thematics.CustomTheme.html#Mapsui_Styles_Thematics_CustomTheme_DefaultStyle
-  commentId: P:Mapsui.Styles.Thematics.CustomTheme.DefaultStyle
-  fullName: Mapsui.Styles.Thematics.CustomTheme.DefaultStyle
-  nameWithType: CustomTheme.DefaultStyle
-- uid: Mapsui.Styles.Thematics.CustomTheme.DefaultStyle*
-  name: DefaultStyle
-  href: api/Mapsui.Styles.Thematics.CustomTheme.html#Mapsui_Styles_Thematics_CustomTheme_DefaultStyle_
-  commentId: Overload:Mapsui.Styles.Thematics.CustomTheme.DefaultStyle
-  isSpec: "True"
-  fullName: Mapsui.Styles.Thematics.CustomTheme.DefaultStyle
-  nameWithType: CustomTheme.DefaultStyle
-- uid: Mapsui.Styles.Thematics.CustomTheme.GetStyle(Mapsui.IFeature)
-  name: GetStyle(IFeature)
-  href: api/Mapsui.Styles.Thematics.CustomTheme.html#Mapsui_Styles_Thematics_CustomTheme_GetStyle_Mapsui_IFeature_
-  commentId: M:Mapsui.Styles.Thematics.CustomTheme.GetStyle(Mapsui.IFeature)
-  fullName: Mapsui.Styles.Thematics.CustomTheme.GetStyle(Mapsui.IFeature)
-  nameWithType: CustomTheme.GetStyle(IFeature)
-- uid: Mapsui.Styles.Thematics.CustomTheme.GetStyle*
-  name: GetStyle
-  href: api/Mapsui.Styles.Thematics.CustomTheme.html#Mapsui_Styles_Thematics_CustomTheme_GetStyle_
-  commentId: Overload:Mapsui.Styles.Thematics.CustomTheme.GetStyle
-  isSpec: "True"
-  fullName: Mapsui.Styles.Thematics.CustomTheme.GetStyle
-  nameWithType: CustomTheme.GetStyle
-- uid: Mapsui.Styles.Thematics.CustomTheme.GetStyleMethod
-  name: CustomTheme.GetStyleMethod
-  href: api/Mapsui.Styles.Thematics.CustomTheme.GetStyleMethod.html
-  commentId: T:Mapsui.Styles.Thematics.CustomTheme.GetStyleMethod
-  fullName: Mapsui.Styles.Thematics.CustomTheme.GetStyleMethod
-  nameWithType: CustomTheme.GetStyleMethod
-- uid: Mapsui.Styles.Thematics.CustomTheme.StyleDelegate
-  name: StyleDelegate
-  href: api/Mapsui.Styles.Thematics.CustomTheme.html#Mapsui_Styles_Thematics_CustomTheme_StyleDelegate
-  commentId: P:Mapsui.Styles.Thematics.CustomTheme.StyleDelegate
-  fullName: Mapsui.Styles.Thematics.CustomTheme.StyleDelegate
-  nameWithType: CustomTheme.StyleDelegate
-- uid: Mapsui.Styles.Thematics.CustomTheme.StyleDelegate*
-  name: StyleDelegate
-  href: api/Mapsui.Styles.Thematics.CustomTheme.html#Mapsui_Styles_Thematics_CustomTheme_StyleDelegate_
-  commentId: Overload:Mapsui.Styles.Thematics.CustomTheme.StyleDelegate
-  isSpec: "True"
-  fullName: Mapsui.Styles.Thematics.CustomTheme.StyleDelegate
-  nameWithType: CustomTheme.StyleDelegate
 - uid: Mapsui.Styles.Thematics.GradientTheme
   name: GradientTheme
   href: api/Mapsui.Styles.Thematics.GradientTheme.html
@@ -33283,6 +33367,51 @@ references:
   isSpec: "True"
   fullName: Mapsui.Utilities.Performance.Min
   nameWithType: Performance.Min
+- uid: Mapsui.Utilities.RotationCalculations
+  name: RotationCalculations
+  href: api/Mapsui.Utilities.RotationCalculations.html
+  commentId: T:Mapsui.Utilities.RotationCalculations
+  fullName: Mapsui.Utilities.RotationCalculations
+  nameWithType: RotationCalculations
+- uid: Mapsui.Utilities.RotationCalculations.CalculateRotationDeltaWithSnapping(System.Double,System.Double,System.Double,System.Double)
+  name: CalculateRotationDeltaWithSnapping(Double, Double, Double, Double)
+  href: api/Mapsui.Utilities.RotationCalculations.html#Mapsui_Utilities_RotationCalculations_CalculateRotationDeltaWithSnapping_System_Double_System_Double_System_Double_System_Double_
+  commentId: M:Mapsui.Utilities.RotationCalculations.CalculateRotationDeltaWithSnapping(System.Double,System.Double,System.Double,System.Double)
+  fullName: Mapsui.Utilities.RotationCalculations.CalculateRotationDeltaWithSnapping(System.Double, System.Double, System.Double, System.Double)
+  nameWithType: RotationCalculations.CalculateRotationDeltaWithSnapping(Double, Double, Double, Double)
+- uid: Mapsui.Utilities.RotationCalculations.CalculateRotationDeltaWithSnapping*
+  name: CalculateRotationDeltaWithSnapping
+  href: api/Mapsui.Utilities.RotationCalculations.html#Mapsui_Utilities_RotationCalculations_CalculateRotationDeltaWithSnapping_
+  commentId: Overload:Mapsui.Utilities.RotationCalculations.CalculateRotationDeltaWithSnapping
+  isSpec: "True"
+  fullName: Mapsui.Utilities.RotationCalculations.CalculateRotationDeltaWithSnapping
+  nameWithType: RotationCalculations.CalculateRotationDeltaWithSnapping
+- uid: Mapsui.Utilities.RotationCalculations.NormalizeRotation(System.Double)
+  name: NormalizeRotation(Double)
+  href: api/Mapsui.Utilities.RotationCalculations.html#Mapsui_Utilities_RotationCalculations_NormalizeRotation_System_Double_
+  commentId: M:Mapsui.Utilities.RotationCalculations.NormalizeRotation(System.Double)
+  fullName: Mapsui.Utilities.RotationCalculations.NormalizeRotation(System.Double)
+  nameWithType: RotationCalculations.NormalizeRotation(Double)
+- uid: Mapsui.Utilities.RotationCalculations.NormalizeRotation*
+  name: NormalizeRotation
+  href: api/Mapsui.Utilities.RotationCalculations.html#Mapsui_Utilities_RotationCalculations_NormalizeRotation_
+  commentId: Overload:Mapsui.Utilities.RotationCalculations.NormalizeRotation
+  isSpec: "True"
+  fullName: Mapsui.Utilities.RotationCalculations.NormalizeRotation
+  nameWithType: RotationCalculations.NormalizeRotation
+- uid: Mapsui.Utilities.RotationCalculations.RotationShortestDistance(System.Double,System.Double)
+  name: RotationShortestDistance(Double, Double)
+  href: api/Mapsui.Utilities.RotationCalculations.html#Mapsui_Utilities_RotationCalculations_RotationShortestDistance_System_Double_System_Double_
+  commentId: M:Mapsui.Utilities.RotationCalculations.RotationShortestDistance(System.Double,System.Double)
+  fullName: Mapsui.Utilities.RotationCalculations.RotationShortestDistance(System.Double, System.Double)
+  nameWithType: RotationCalculations.RotationShortestDistance(Double, Double)
+- uid: Mapsui.Utilities.RotationCalculations.RotationShortestDistance*
+  name: RotationShortestDistance
+  href: api/Mapsui.Utilities.RotationCalculations.html#Mapsui_Utilities_RotationCalculations_RotationShortestDistance_
+  commentId: Overload:Mapsui.Utilities.RotationCalculations.RotationShortestDistance
+  isSpec: "True"
+  fullName: Mapsui.Utilities.RotationCalculations.RotationShortestDistance
+  nameWithType: RotationCalculations.RotationShortestDistance
 - uid: Mapsui.Utilities.ScaleMethod
   name: ScaleMethod
   href: api/Mapsui.Utilities.ScaleMethod.html
