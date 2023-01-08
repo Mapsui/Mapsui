@@ -2,6 +2,9 @@ SETLOCAL
 SET VERSION=%1
 CALL Scripts\buildpack %VERSION% || exit /B 1
 nuget push .\Artifacts\Mapsui.%VERSION%.nupkg -source nuget.org || exit /B 1
+nuget push .\Artifacts\Mapsui.Mapsui.Rendering.Skia.%VERSION%.nupkg -source nuget.org || exit /B 1
+nuget push .\Artifacts\Mapsui.Mapsui.Tiling.%VERSION%.nupkg -source nuget.org || exit /B 1
+nuget push .\Artifacts\Mapsui.Mapsui.Nts.%VERSION%.nupkg -source nuget.org || exit /B 1
 nuget push .\Artifacts\Mapsui.ArcGIS.%VERSION%.nupkg -source nuget.org || exit /B 1
 nuget push .\Artifacts\Mapsui.Extensions.%VERSION%.nupkg -source nuget.org || exit /B 1
 nuget push .\Artifacts\Mapsui.Wpf.%VERSION%.nupkg -source nuget.org || exit /B 1

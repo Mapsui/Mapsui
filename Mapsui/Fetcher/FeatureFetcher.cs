@@ -6,7 +6,7 @@ using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Styles;
-using NeoSmart.AsyncLock;
+using Mapsui.Utilities;
 
 namespace Mapsui.Fetcher
 {

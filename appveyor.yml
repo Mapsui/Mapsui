@@ -18,10 +18,10 @@ environment:
 nuget:
   disable_publish_on_pr: true
 cache:
-- '%USERPROFILE%\.nuget\packages\Microsoft** -> **.sln, **.csproj'  # preserve nuget folder (packages) unless the solution or projects change
-- '%USERPROFILE%\.nuget\packages\SkiaSharp** -> **.sln, **.csproj'  # preserve nuget folder (packages) unless the solution or projects change 
-- '%USERPROFILE%\.nuget\packages\System** -> **.sln, **.csproj'  # preserve nuget folder (packages) unless the solution or projects change
-- '%USERPROFILE%\.nuget\packages\Xamarin** -> **.sln, **.csproj'  # preserve nuget folder (packages) unless the solution or projects change 
+- '%USERPROFILE%\.nuget\packages\Microsoft** -> Directory.Packages.props'  # preserve nuget folder (packages) unless the solution or projects change
+- '%USERPROFILE%\.nuget\packages\SkiaSharp** -> Directory.Packages.props'  # preserve nuget folder (packages) unless the solution or projects change 
+- '%USERPROFILE%\.nuget\packages\System** -> Directory.Packages.props'  # preserve nuget folder (packages) unless the solution or projects change
+- '%USERPROFILE%\.nuget\packages\Xamarin** -> Directory.Packages.props'  # preserve nuget folder (packages) unless the solution or projects change 
 install:
 # already installed sdk 7.0.100  
 # - ps: Invoke-WebRequest 'https://dot.net/v1/dotnet-install.ps1' -OutFile 'dotnet-install.ps1';

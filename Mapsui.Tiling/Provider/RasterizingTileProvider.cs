@@ -12,7 +12,7 @@ using Mapsui.Providers;
 using Mapsui.Rendering;
 using Mapsui.Styles;
 using Mapsui.Tiling.Extensions;
-using NeoSmart.AsyncLock;
+using Mapsui.Utilities;
 using Attribution = BruTile.Attribution;
 
 namespace Mapsui.Tiling.Provider;
