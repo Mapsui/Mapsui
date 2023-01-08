@@ -22,6 +22,6 @@ public static class MapTilesDeployer
 
     private static void CopyTile(Assembly assembly, string mapTile, string resourceFolder, string folder, string tile)
     {
-        assembly.CopyEmbeddedResourceToFile(@$"Mapsui.Samples.Common.Desktop.GeoData.{mapTile}.{resourceFolder}.", MapTileLocation + @$"{Path.DirectorySeparatorChar}{mapTile}{Path.DirectorySeparatorChar}{folder}{Path.DirectorySeparatorChar}", $"{tile}.png");
+        assembly.CopyEmbeddedResourceToFile(@$"Mapsui.Samples.Common.GeoData.{mapTile}.{resourceFolder}.", MapTileLocation + @$"{Path.DirectorySeparatorChar}{mapTile}{Path.DirectorySeparatorChar}{folder}{Path.DirectorySeparatorChar}", $"{tile}.png");
     }
 }
