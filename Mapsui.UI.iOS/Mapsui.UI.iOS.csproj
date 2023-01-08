@@ -2,9 +2,14 @@
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <TargetFramework>net60-ios13.6</TargetFramework>
+    <TargetFramework>net6.0-ios15.4</TargetFramework>
     <ImplicitUsings>true</ImplicitUsings>
+    <PackageId>Mapsui.iOS</PackageId>
     <!--<RuntimeIdentifiers>iossimulator-x64</RuntimeIdentifiers>-->
+    <Description>
+      Xamarin iOS map components based on the Mapsui library
+    </Description>
+    <PackageTags>$(PackageTags) ios</PackageTags>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <ConsolePause>false</ConsolePause>

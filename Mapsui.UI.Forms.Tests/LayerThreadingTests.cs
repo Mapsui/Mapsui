@@ -105,7 +105,9 @@ namespace Mapsui.Tests.Layers
             {
                 try
                 {
+#pragma warning disable IDISP004
                     observableCollection.Add(new Callout(new Pin()));
+#pragma warning restore IDISP004
                 }
                 catch (Exception e)
                 {

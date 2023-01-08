@@ -117,7 +117,7 @@ namespace Mapsui.UI.Forms
 
         private float ViewportHeight => ScreenHeight;
 
-        public ISymbolCache SymbolCache => _renderer.SymbolCache;
+        public IRenderCache RenderCache => _renderer.RenderCache;
 
         public bool UseDoubleTap = true;
         public bool UseFling = true;
@@ -140,7 +140,10 @@ namespace Mapsui.UI.Forms
                 // Events
                 _glView.Touch += OnTouch;
                 _glView.PaintSurface += OnGLPaintSurface;
-                _invalidate = () => { RunOnUIThread(() => _glView.InvalidateSurface()); };
+                _invalidate = () => { 
+                    // The line below sometimes has a null reference exception on application close.
+                    RunOnUIThread(() => _glView.InvalidateSurface()); 
+                };
                 view = _glView;
             }
             else

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Logging;
+using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Rendering.Skia.Extensions;
 using Mapsui.Rendering.Skia.SkiaStyles;
 using Mapsui.Rendering.Skia.SkiaWidgets;
@@ -21,10 +22,10 @@ namespace Mapsui.Rendering.Skia
 {
     public class MapRenderer : IRenderer
     {
-        private readonly SymbolCache _symbolCache = new SymbolCache();
+        private readonly IRenderCache _renderCache = new RenderCache();
         private long _currentIteration;
 
-        public ISymbolCache SymbolCache => _symbolCache;
+        public IRenderCache RenderCache => _renderCache;
 
         public IDictionary<Type, IWidgetRenderer> WidgetRenders { get; } = new Dictionary<Type, IWidgetRenderer>();
 
@@ -179,7 +180,7 @@ namespace Mapsui.Rendering.Skia
                 canvas.Save();
                 // We have a special renderer, so try, if it could draw this
                 var styleRenderer = (ISkiaStyleRenderer)StyleRenderers[style.GetType()];
-                var result = styleRenderer.Draw(canvas, viewport, layer, feature, style, _symbolCache, iteration);
+                var result = styleRenderer.Draw(canvas, viewport, layer, feature, style, _renderCache, iteration);
                 // Restore old canvas
                 canvas.Restore();
                 // Was it drawn?

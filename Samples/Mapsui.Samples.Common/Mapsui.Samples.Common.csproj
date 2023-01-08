@@ -4,64 +4,138 @@
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <TargetFrameworks Condition="'$(SolutionName)' != 'Mapsui.Mac.Legacy'">$(TargetFrameworks);net6.0</TargetFrameworks>
     <Authors>Mapsui Contributers</Authors>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="EmbeddedResources\cities.geojson" />
-    <None Remove="EmbeddedResources\cities.json" />
-    <None Remove="EmbeddedResources\congo.json" />
-    <None Remove="EmbeddedResources\countries-hires.json" />
-    <None Remove="EmbeddedResources\el-molar.mbtiles" />
-    <None Remove="EmbeddedResources\torrejon-de-ardoz.mbtiles" />
-    <None Remove="EmbeddedResources\world.mbtiles" />
+    <None Remove="GeoData\TrueMarble\0\0\0.png" />
+    <None Remove="GeoData\TrueMarble\1\0\0.png" />
+    <None Remove="GeoData\TrueMarble\1\0\1.png" />
+    <None Remove="GeoData\TrueMarble\1\1\0.png" />
+    <None Remove="GeoData\TrueMarble\1\1\1.png" />
+    <None Remove="GeoData\World\cities.dbf" />
+    <None Remove="GeoData\World\cities.prj" />
+    <None Remove="GeoData\World\cities.shp" />
+    <None Remove="GeoData\World\cities.shp.sidx" />
+    <None Remove="GeoData\World\cities.shx" />
+    <None Remove="GeoData\World\countries.dbf" />
+    <None Remove="GeoData\World\countries.prj" />
+    <None Remove="GeoData\World\countries.shp" />
+    <None Remove="GeoData\World\countries.shp.sidx" />
+    <None Remove="GeoData\World\countries.shx" />
+    <None Remove="GeoData\World\rivers.dbf" />
+    <None Remove="GeoData\World\rivers.prj" />
+    <None Remove="GeoData\World\rivers.shp" />
+    <None Remove="GeoData\World\rivers.shp.sidx" />
+    <None Remove="GeoData\World\rivers.shx" />
     <None Remove="Images\arrow.png" />
     <None Remove="Images\arrow.svg" />
+    <None Remove="Images\example.tfw" />
+    <None Remove="Images\example.tif" />
     <None Remove="Images\Ghostscript_Tiger.png" />
     <None Remove="Images\Ghostscript_Tiger.svg" />
     <None Remove="Images\home.png" />
+    <None Remove="Images\icon.png" />
     <None Remove="Images\ic_place_black_24dp.png" />
     <None Remove="Images\loc.png" />
     <None Remove="Images\location.png" />
     <None Remove="Images\netherlands.jpg" />
     <None Remove="Images\osm-liberty.png" />
     <None Remove="Images\Pin.svg" />
-    <None Remove="MbTiles\el-molar.mbtiles" />
-    <None Remove="MbTiles\torrejon-de-ardoz.mbtiles" />
-    <None Remove="MbTiles\world.mbtiles" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="EmbeddedResources\cities.geojson" />
-    <EmbeddedResource Include="EmbeddedResources\cities.json" />
-    <EmbeddedResource Include="EmbeddedResources\congo.json" />
-    <EmbeddedResource Include="EmbeddedResources\countries-hires.json" />
-    <EmbeddedResource Include="EmbeddedResources\el-molar.mbtiles" />
-    <EmbeddedResource Include="EmbeddedResources\torrejon-de-ardoz.mbtiles">
+    <EmbeddedResource Include="GeoData\GeoJson\cities.geojson" />
+    <EmbeddedResource Include="GeoData\Json\cities.json" />
+    <EmbeddedResource Include="GeoData\Json\congo.json" />
+    <EmbeddedResource Include="GeoData\Json\countries-hires.json" />
+    <EmbeddedResource Include="GeoData\MbTiles\el-molar.mbtiles" />
+    <EmbeddedResource Include="GeoData\MbTiles\torrejon-de-ardoz.mbtiles">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="EmbeddedResources\world.mbtiles">
+    <EmbeddedResource Include="GeoData\MbTiles\world.mbtiles">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\TrueMarble\0\0\0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\TrueMarble\1\0\0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\TrueMarble\1\0\1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\TrueMarble\1\1\0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\TrueMarble\1\1\1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\cities.dbf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\cities.prj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\cities.shp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\cities.shp.sidx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\cities.shx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\countries.dbf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\countries.prj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\countries.shp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\countries.shp.sidx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\countries.shx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\rivers.dbf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\rivers.prj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\rivers.shp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\rivers.shp.sidx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\World\rivers.shx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Images\arrow.png" />
     <EmbeddedResource Include="Images\arrow.svg" />
+    <EmbeddedResource Include="GeoData\GeoTiff\example.tfw">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GeoData\GeoTiff\example.tif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Images\Ghostscript_Tiger.png" />
     <EmbeddedResource Include="Images\Ghostscript_Tiger.svg" />
     <EmbeddedResource Include="Images\home.png" />
+    <EmbeddedResource Include="Images\icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Images\ic_place_black_24dp.png" />
     <EmbeddedResource Include="Images\loc.png" />
     <EmbeddedResource Include="Images\location.png" />
     <EmbeddedResource Include="Images\netherlands.jpg" />
     <EmbeddedResource Include="Images\osm-liberty.png" />
     <EmbeddedResource Include="Images\Pin.svg" />
-    <Content Include="MbTiles\el-molar.mbtiles">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="MbTiles\torrejon-de-ardoz.mbtiles">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="MbTiles\world.mbtiles">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -76,12 +150,6 @@
     <ProjectReference Include="..\..\Mapsui.Tiling\Mapsui.Tiling.csproj" />
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />
     <ProjectReference Include="..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="MbTiles\chinese-world.mbtiles">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
   <PropertyGroup>

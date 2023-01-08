@@ -14,7 +14,14 @@
 		When building in Release, see https://platform.uno/docs/articles/features/using-il-linker-webassembly.html
 		-->
     <WasmShellILLinkerEnabled>false</WasmShellILLinkerEnabled>
+    <WasmShellMonoRuntimeExecutionMode>Interpreter</WasmShellMonoRuntimeExecutionMode>
+    
+    <!-- In debug, make builds faster by reducing optimizations -->
+    <!--https://github.com/dotnet/AspNetCore.Docs/issues/24026-->
+    <WasmNativeStrip>false</WasmNativeStrip>
+    <EmccCompileOptimizationFlag>-O1</EmccCompileOptimizationFlag>
   </PropertyGroup>
+
   <ItemGroup>
     <Content Include="Assets\SplashScreen.png" />
   </ItemGroup>
@@ -37,7 +44,6 @@
     <ProjectReference Include="..\..\..\Mapsui\Mapsui.csproj" />
     <ProjectReference Include="..\..\..\Mapsui.UI.Uno.WinUI\Mapsui.UI.Uno.WinUI.csproj" />
     <ProjectReference Include="..\..\..\Tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj" />
-    <ProjectReference Include="..\..\Mapsui.Samples.Common.Desktop\Mapsui.Samples.Common.Desktop.csproj" />
     <ProjectReference Include="..\..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
     <ProjectReference Include="..\..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
   </ItemGroup>

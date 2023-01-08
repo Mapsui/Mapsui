@@ -90,11 +90,12 @@ public class MRect
         return Min.X <= r.Min.X && Min.Y <= r.Min.Y && Max.X >= r.Max.X && Max.Y >= r.Max.Y;
     }
 
-    public bool Equals(MRect? other)
+    protected bool Equals(MRect? other)
     {
-        if (other is null) return false;
-
-        return Min.Equals(other.Min) && Max.Equals(other.Max);
+        if (other == null)
+            return false;
+        
+        return Max.Equals(other.Max) && Min.Equals(other.Min);
     }
 
     public double GetArea()
@@ -198,4 +199,34 @@ public class MRect
     {
         return $"BL: {BottomLeft}  TR: {TopRight}";
     }
+
+    public override bool Equals(object? obj)
+    {
+        if (ReferenceEquals(null, obj))
+        {
+            return false;
+        }
+
+        if (ReferenceEquals(this, obj))
+        {
+            return true;
+        }
+
+        if (obj.GetType() != this.GetType())
+        {
+            return false;
+        }
+
+        return Equals((MRect)obj);
+    }
+
+    public override int GetHashCode()
+    {
+        unchecked
+        {
+            return (Max.GetHashCode() * 397) ^ Min.GetHashCode();
+        }
+    }
+
+
 }

@@ -80,7 +80,7 @@
 <h1 id="mapsui-maui-getting-started">Mapsui MAUI getting started</h1>
 
 <h3 id="step-1">Step 1</h3>
-<p>Start a new MAUI application in Visual Studio.</p>
+<p>Create a new .NET 7.0 MAUI application in Visual Studio.</p>
 <h3 id="step-2">Step 2</h3>
 <p>In the package manager console type:</p>
 <pre><code class="lang-console">PM&gt; Install-Package Mapsui.Maui -pre
@@ -89,7 +89,7 @@
 <p>In MauiProgram.cs add .UseSkiaSharp() to the builder like this:</p>
 <pre><code class="lang-csharp">builder
   .UseMauiApp&lt;App&gt;()
-  .UseSkiaSharp()
+  .UseSkiaSharp(true)
   .ConfigureFonts(fonts =&gt;  
 </code></pre>
 <p>and add namespace 'SkiaSharp.Views.Maui.Controls.Hosting':</p>

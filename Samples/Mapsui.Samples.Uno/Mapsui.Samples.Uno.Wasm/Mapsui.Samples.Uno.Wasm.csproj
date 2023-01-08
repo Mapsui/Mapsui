@@ -18,7 +18,13 @@
 		-->
     <WasmShellILLinkerEnabled>false</WasmShellILLinkerEnabled>    
     <WasmShellMonoRuntimeExecutionMode>Interpreter</WasmShellMonoRuntimeExecutionMode>
+    
+    <!-- In debug, make builds faster by reducing optimizations -->
+    <!--https://github.com/dotnet/AspNetCore.Docs/issues/24026-->
+    <WasmNativeStrip>false</WasmNativeStrip>
+    <EmccCompileOptimizationFlag>-O1</EmccCompileOptimizationFlag>
   </PropertyGroup>
+  
   <PropertyGroup Condition="'$(Configuration)'=='Release'">
     <WasmShellMonoRuntimeExecutionMode>FullAOT</WasmShellMonoRuntimeExecutionMode>
   </PropertyGroup>
@@ -75,7 +81,6 @@
     <ProjectReference Include="..\..\..\Mapsui.UI.Uno\Mapsui.UI.Uno.csproj" />
     <ProjectReference Include="..\..\..\Mapsui\Mapsui.csproj" />
     <ProjectReference Include="..\..\..\Tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj" />
-    <ProjectReference Include="..\..\Mapsui.Samples.Common.Desktop\Mapsui.Samples.Common.Desktop.csproj" />
     <ProjectReference Include="..\..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
     <ProjectReference Include="..\..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
   </ItemGroup>

@@ -9,13 +9,12 @@ using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Samples.Common;
-using Mapsui.Samples.Common.Desktop;
 using Mapsui.Samples.Common.Extensions;
-using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.Common.Maps.Animations;
 using Mapsui.Samples.Common.Maps.Callouts;
-using Mapsui.Samples.Common.Maps.Data;
+using Mapsui.Samples.Common.Maps.DataFormats;
 using Mapsui.Samples.Common.Maps.Projection;
+using Mapsui.Samples.Common.PersistentCaches;
 using Mapsui.Tiling;
 using Mapsui.UI;
 using NUnit.Framework;
@@ -28,7 +27,6 @@ public class MapRegressionTests
     static MapRegressionTests()
     {
         // todo: find proper way to load assembly
-        DesktopSamplesUtilities.LoadAssembly();
         Mapsui.Tests.Common.Utilities.LoadAssembly();       
     }
 

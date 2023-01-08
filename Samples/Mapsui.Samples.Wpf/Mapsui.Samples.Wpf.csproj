@@ -10,7 +10,10 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.UI.Wpf\Mapsui.UI.Wpf.csproj" />
     <ProjectReference Include="..\..\Tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj" />
-    <ProjectReference Include="..\Mapsui.Samples.Common.Desktop\Mapsui.Samples.Common.Desktop.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="BruTile" />
   </ItemGroup>
 
 </Project>

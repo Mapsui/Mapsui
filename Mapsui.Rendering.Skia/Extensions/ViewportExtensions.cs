@@ -1,5 +1,7 @@
-﻿using Mapsui.Extensions;
+﻿using System;
+using Mapsui.Extensions;
 using SkiaSharp;
+using SKCanvas = SkiaSharp.SKCanvas;
 
 namespace Mapsui.Rendering.Skia.Extensions
 {
@@ -16,6 +18,14 @@ namespace Mapsui.Rendering.Skia.Extensions
             if (viewport.IsRotated()) matrix = SKMatrix.Concat(matrix, SKMatrix.CreateRotationDegrees((float)-viewport.Rotation));
             matrix = SKMatrix.Concat(matrix, SKMatrix.CreateTranslation((float)-viewport.CenterX, (float)-viewport.CenterY));
             return matrix;
+        }
+
+         /// <summary> Converts the Extent of the Viewport to a SKRect </summary>
+        /// <param name="viewport">viewport</param>
+        /// <returns>SkRect</returns>
+        public static SKRect ToSkiaRect(this IReadOnlyViewport viewport)
+        {
+            return viewport.WorldToScreen(viewport.GetExtent()).ToSkia();
         }
     }
 }

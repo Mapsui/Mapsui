@@ -10,7 +10,6 @@ using Mapsui.Providers.Wms;
 using Mapsui.UI;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
-using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.Tiling;
@@ -23,7 +22,6 @@ namespace Mapsui.Samples.Uwp
         static MainPage()
         {
             // todo: find proper way to load assembly
-            Mapsui.Samples.Common.Desktop.DesktopSamplesUtilities.LoadAssembly();
             Mapsui.Tests.Common.Utilities.LoadAssembly();       
         }
 

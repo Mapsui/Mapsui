@@ -54,40 +54,46 @@ namespace Mapsui.Styles
 
         public override bool Equals(object? obj)
         {
-            return obj is Pen pen && Equals(pen);
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != this.GetType())
+            {
+                return false;
+            }
+
+            return Equals((Pen)obj);
         }
 
-        public bool Equals(Pen? pen)
+        protected bool Equals(Pen? pen)
         {
             if (pen == null)
                 return false;
-
-            // ReSharper disable once CompareOfFloatsByEqualityOperator
-            if (Width != pen.Width) return false;
-
-            //if one or the other is null then they are not equal, but not when they are both null
-            if ((Color == null) ^ (pen.Color == null)) return false;
-
-            if (Color != null && !Color.Equals(pen.Color)) return false;
-
-            if (PenStyle != pen.PenStyle) return false;
-
-            if (DashArray != pen.DashArray) return false;
-
-            if (DashOffset != pen.DashOffset) return false;
-
-            if (PenStrokeCap != pen.PenStrokeCap) return false;
-
-            if (StrokeJoin != pen.StrokeJoin) return false;
-
-            if (StrokeMiterLimit != pen.StrokeMiterLimit) return false;
-
-            return true;
+            
+            return Width.Equals(pen.Width) && Color.Equals(pen.Color) && PenStyle == pen.PenStyle && Equals(DashArray, pen.DashArray) && DashOffset.Equals(pen.DashOffset) && PenStrokeCap == pen.PenStrokeCap && StrokeJoin == pen.StrokeJoin && StrokeMiterLimit.Equals(pen.StrokeMiterLimit);
         }
 
         public override int GetHashCode()
         {
-            return Width.GetHashCode() ^ (Color == null ? 0 : Color.GetHashCode());
+            unchecked
+            {
+                var hashCode = Width.GetHashCode();
+                hashCode = (hashCode * 397) ^ Color.GetHashCode();
+                hashCode = (hashCode * 397) ^ (int)PenStyle;
+                hashCode = (hashCode * 397) ^ (DashArray != null ? DashArray.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ DashOffset.GetHashCode();
+                hashCode = (hashCode * 397) ^ (int)PenStrokeCap;
+                hashCode = (hashCode * 397) ^ (int)StrokeJoin;
+                hashCode = (hashCode * 397) ^ StrokeMiterLimit.GetHashCode();
+                return hashCode;
+            }
         }
 
         public static bool operator ==(Pen? pen1, Pen? pen2)
@@ -99,5 +105,7 @@ namespace Mapsui.Styles
         {
             return !Equals(pen1, pen2);
         }
+
+
     }
 }
