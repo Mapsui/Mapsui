@@ -9,7 +9,7 @@ namespace Mapsui.Rendering.Skia.Extensions
         /// <summary>
         /// Converts a LineString in world coordinates to a Skia path
         /// </summary>
-        /// <param name="coordinates">List of points in Mapsui world coordinates</param>
+        /// <param name="lineString">List of points in Mapsui world coordinates</param>
         /// <param name="viewport">Viewport implementation</param>
         /// <param name="clipRect">Rectangle to clip to. All lines outside aren't drawn.</param>
         /// <returns></returns>

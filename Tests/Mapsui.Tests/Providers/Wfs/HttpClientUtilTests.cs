@@ -8,7 +8,7 @@ namespace Mapsui.Tests.Providers.Wfs
     public class HttpClientUtilTests
     {
         [Test]
-        public async Task CloseDoesNotThrowException()
+        public async Task CloseDoesNotThrowExceptionAsync()
         {
             // Arrange
             using var httpClientUtil = new HttpClientUtil
@@ -24,7 +24,7 @@ namespace Mapsui.Tests.Providers.Wfs
         }
 
         [Test]
-        public async Task TwoCloseDoesNotThrowException()
+        public async Task TwoCloseDoesNotThrowExceptionAsync()
         {
             // Arrange
             using var httpClientUtil = new HttpClientUtil
