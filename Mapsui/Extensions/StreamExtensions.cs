@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using Mapsui.Logging;
 
 namespace Mapsui.Extensions
 {
@@ -14,13 +15,21 @@ namespace Mapsui.Extensions
             switch (input.GetType().Name)
             {
                 case "ContentLengthReadStream":
+                case "ReadOnlyStream":
                     // not implemented
                     break;
                 default:
-                    if (input.Position != 0)
+                    try
                     {
-                        // set position to 0 so that i can copy all the data
-                        input.Position = 0;
+                        if (input.Position != 0)
+                        {
+                            // set position to 0 so that i can copy all the data
+                            input.Position = 0;
+                        }
+                    }
+                    catch (NotSupportedException e)
+                    {
+                        Logging.Logger.Log(LogLevel.Error, e.Message, e);
                     }
 
                     break;
