@@ -30,6 +30,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{B2DB
 		Scripts\NugetRestore.cmd = Scripts\NugetRestore.cmd
 		Scripts\readme.txt = Scripts\readme.txt
 		Scripts\rename.ps1 = Scripts\rename.ps1
+		Scripts\SamplesMapsuiNugetReferences.ps1 = Scripts\SamplesMapsuiNugetReferences.ps1
 		Scripts\test-image-copier.cmd = Scripts\test-image-copier.cmd
 		.github\workflows\dotnet-docs.yml = .github\workflows\dotnet-docs.yml
 	EndProjectSection
@@ -53,23 +54,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.iOS", "Samples\Mapsui.Samples.iOS\Mapsui.Samples.iOS.csproj", "{5C1F0E76-BF98-4C6E-8AAB-CDB7E3735A9C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.UI.Wpf", "Mapsui.UI.Wpf\Mapsui.UI.Wpf.csproj", "{AE693902-FEDA-4034-A7C5-9AA9872F7878}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuSpec", "NuSpec", "{D90027DD-A6D6-4C32-91DC-237B55141EB8}"
-	ProjectSection(SolutionItems) = preProject
-		NuSpec\Mapsui.Android.nuspec = NuSpec\Mapsui.Android.nuspec
-		NuSpec\Mapsui.ArcGIS.nuspec = NuSpec\Mapsui.ArcGIS.nuspec
-		NuSpec\Mapsui.Avalonia.nuspec = NuSpec\Mapsui.Avalonia.nuspec
-		NuSpec\Mapsui.Eto.nuspec = NuSpec\Mapsui.Eto.nuspec
-		NuSpec\Mapsui.Extensions.nuspec = NuSpec\Mapsui.Extensions.nuspec
-		NuSpec\Mapsui.Forms.nuspec = NuSpec\Mapsui.Forms.nuspec
-		NuSpec\Mapsui.iOS.nuspec = NuSpec\Mapsui.iOS.nuspec
-		NuSpec\Mapsui.Maui.nuspec = NuSpec\Mapsui.Maui.nuspec
-		NuSpec\Mapsui.nuspec = NuSpec\Mapsui.nuspec
-		NuSpec\Mapsui.Uno.nuspec = NuSpec\Mapsui.Uno.nuspec
-		NuSpec\Mapsui.Uno.WinUI.nuspec = NuSpec\Mapsui.Uno.WinUI.nuspec
-		NuSpec\Mapsui.WinUI.nuspec = NuSpec\Mapsui.WinUI.nuspec
-		NuSpec\Mapsui.Wpf.nuspec = NuSpec\Mapsui.Wpf.nuspec
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{CB6BE9F9-5ECF-471B-9D93-605E2BD6825D}"
 EndProject
