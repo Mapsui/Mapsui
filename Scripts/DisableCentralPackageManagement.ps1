@@ -1,5 +1,5 @@
 # Disable Central Package Management
-$Packages = (Get-Content -path $PSScriptRoot\..\Directory.Packages.props -Encoding UTF8)
+$Packages = (Get-Content -raw -path $PSScriptRoot\..\Directory.Packages.props -Encoding UTF8)
 $fileNames = Get-ChildItem -Path $PSScriptRoot\.. -Recurse -Include *.csproj,Directory.Build.props
 
 foreach ($file in $fileNames) {
@@ -25,6 +25,6 @@ foreach ($file in $fileNames) {
 
 $Packages = $Packages -replace 'true','false' 
 # Normalize to one Cariage Return at the end
-$Packages = $Packages -replace "</Project>`r`n`r`n", "</Project>`r`n"
+$Packages = $Packages -replace "</Project>`r`n", "</Project>"
 
 Set-Content -Path $PSScriptRoot\..\Directory.Packages.props $Packages -Encoding UTF8

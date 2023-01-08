@@ -10,6 +10,6 @@ namespace Mapsui.Styles
         /// <param name="style">symbol style to detect size</param>
         /// <param name="symbolCache">symbol Cache</param>
         /// <returns>size in points</returns>
-        double FeatureSize(IFeature feature, IStyle style, ISymbolCache symbolCache);
+        double FeatureSize(IFeature feature, IStyle style, IRenderCache symbolCache);
     }
 }

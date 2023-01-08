@@ -12,23 +12,23 @@ namespace Mapsui.Rendering.Skia
 {
     public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     {
-        public bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, IStyle style, ISymbolCache symbolCache, long iteration)
+        public bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, IStyle style, IRenderCache renderCache, long iteration)
         {
             var symbolStyle = (SymbolStyle)style;
             switch (feature)
             {
                 case PointFeature pointFeature:
-                    DrawXY(canvas, viewport, layer, pointFeature.Point.X, pointFeature.Point.Y, symbolStyle, symbolCache);
+                    DrawXY(canvas, viewport, layer, pointFeature.Point.X, pointFeature.Point.Y, symbolStyle, renderCache);
                     break;
                 case GeometryFeature geometryFeature:
                     switch (geometryFeature.Geometry)
                     {
                         case GeometryCollection collection:
                             foreach (var point in GetPoints(collection))
-                                DrawXY(canvas, viewport, layer, point.X, point.Y, symbolStyle, symbolCache);
+                                DrawXY(canvas, viewport, layer, point.X, point.Y, symbolStyle, renderCache);
                             break;
                         case Point point:
-                            DrawXY(canvas, viewport, layer, point.X, point.Y, symbolStyle, symbolCache);
+                            DrawXY(canvas, viewport, layer, point.X, point.Y, symbolStyle, renderCache);
                             break;
                     }
                     break;
@@ -256,11 +256,11 @@ namespace Mapsui.Rendering.Skia
             if ((lineColor != null) && lineColor.Color.Alpha != 0) canvas.DrawPath(path, lineColor);
         }
 
-        double IFeatureSize.FeatureSize(IFeature feature, IStyle style, ISymbolCache symbolCache)
+        double IFeatureSize.FeatureSize(IFeature feature, IStyle style, IRenderCache renderCache)
         {
             if (style is SymbolStyle symbolStyle)
             {
-                return FeatureSize(symbolStyle, symbolCache);
+                return FeatureSize(symbolStyle, renderCache);
             }
 
             return 0;

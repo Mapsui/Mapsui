@@ -50,33 +50,42 @@ namespace Mapsui.Styles
 
         public override bool Equals(object? obj)
         {
-            if (!(obj is Brush brush))
+            if (ReferenceEquals(null, obj))
             {
                 return false;
             }
-            return Equals(brush);
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != this.GetType())
+            {
+                return false;
+            }
+
+            return Equals((Brush)obj);
         }
 
-        public bool Equals(Brush? brush)
+        protected bool Equals(Brush? brush)
         {
-            if (brush is null)
+            if (brush == null)
                 return false;
-
-            if ((Color is null) ^ (brush.Color is null))
-            {
-                return false;
-            }
-
-            if (Color != brush.Color)
-            {
-                return false;
-            }
-            return true;
+            
+            return _bitmapId == brush._bitmapId && Equals(Color, brush.Color) && Equals(Background, brush.Background) && FillStyle == brush.FillStyle;
         }
 
         public override int GetHashCode()
         {
-            return Color is null ? 0 : Color.GetHashCode();
+            unchecked
+            {
+                var hashCode = _bitmapId;
+                hashCode = (hashCode * 397) ^ (Color != null ? Color.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Background != null ? Background.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (int)FillStyle;
+                return hashCode;
+            }
         }
 
         public static bool operator ==(Brush? brush1, Brush? brush2)
@@ -88,5 +97,7 @@ namespace Mapsui.Styles
         {
             return !Equals(brush1, brush2);
         }
+
+
     }
 }

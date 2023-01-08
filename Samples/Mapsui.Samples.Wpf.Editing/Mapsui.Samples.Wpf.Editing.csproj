@@ -13,4 +13,8 @@
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="BruTile" />
+  </ItemGroup>
+
 </Project>
