@@ -3,6 +3,7 @@
 @using Mapsui.Samples.Common.Extensions
 @using Mapsui.Extensions
 @using Mapsui.Logging
+@using Mapsui.Samples.CustomWidget
 @using Mapsui.UI
 
 <PageTitle>Mapsui</PageTitle>
@@ -101,6 +102,8 @@
         if (firstRender)
         {
             FillMap();
+            if (_mapControl != null)
+                _mapControl.Renderer.WidgetRenders[typeof(CustomWidget)] = new CustomWidgetSkiaRenderer();
         }
     }
 
