@@ -13,15 +13,15 @@ public static class MapTilesDeployer
     public static void CopyEmbeddedResourceToFile(string mapTile)
     {
         var assembly = typeof(MapTilerSample).GetTypeInfo().Assembly;
-        CopyTile(assembly, mapTile, @"_0._0", @"0\0", "0");
-        CopyTile(assembly, mapTile, @"_1._0", @"1\0", "0");
-        CopyTile(assembly, mapTile, @"_1._0", @"1\0", "1");
-        CopyTile(assembly, mapTile, @"_1._1", @"1\1", "0");
-        CopyTile(assembly, mapTile, @"_1._1", @"1\1", "1");
+        CopyTile(assembly, mapTile, @"_0._0", @$"0{Path.DirectorySeparatorChar}0", "0");
+        CopyTile(assembly, mapTile, @"_1._0", @$"1{Path.DirectorySeparatorChar}0", "0");
+        CopyTile(assembly, mapTile, @"_1._0", @$"1{Path.DirectorySeparatorChar}0", "1");
+        CopyTile(assembly, mapTile, @"_1._1", @$"1{Path.DirectorySeparatorChar}1", "0");
+        CopyTile(assembly, mapTile, @"_1._1", @$"1{Path.DirectorySeparatorChar}1", "1");
     }
 
     private static void CopyTile(Assembly assembly, string mapTile, string resourceFolder, string folder, string tile)
     {
-        assembly.CopyEmbeddedResourceToFile(@$"Mapsui.Samples.Common.GeoData.{mapTile}.{resourceFolder}.", MapTileLocation + @$"\{mapTile}\{folder}\", $"{tile}.png");
+        assembly.CopyEmbeddedResourceToFile(@$"Mapsui.Samples.Common.Desktop.GeoData.{mapTile}.{resourceFolder}.", MapTileLocation + @$"{Path.DirectorySeparatorChar}{mapTile}{Path.DirectorySeparatorChar}{folder}{Path.DirectorySeparatorChar}", $"{tile}.png");
     }
 }

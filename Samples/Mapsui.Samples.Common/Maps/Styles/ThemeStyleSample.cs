@@ -1,4 +1,5 @@
-﻿using Mapsui.Extensions;
+﻿using System.IO;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Nts;
 using Mapsui.Nts.Providers.Shapefile;
@@ -31,7 +32,8 @@ public class ThemeStyleSample : IMapControlSample
     {
         var map = new Map();
 
-        using var countrySource = new ShapeFile(ShapeFilesDeployer.ShapeFilesLocation + "\\countries.shp", true) { CRS = "EPSG:3785" };
+        var countriesPath = Path.Combine(ShapeFilesDeployer.ShapeFilesLocation, "countries.shp");
+        using var countrySource = new ShapeFile(countriesPath, true) { CRS = "EPSG:3785" };
 
         map.Layers.Add(CreateCountryLayer(countrySource));
         map.Layers.Add(CreateCityHoverPoints());

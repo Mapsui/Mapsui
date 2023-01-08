@@ -1,4 +1,5 @@
-﻿using Mapsui.Extensions;
+﻿using System.IO;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Nts;
 using Mapsui.Nts.Providers.Shapefile;
@@ -35,7 +36,8 @@ public class ShapefileTilingFilteringSample : IMapControlSample
     {
         var map = new Map();
 
-        var countrySource = new ShapeFile(ShapeFilesDeployer.ShapeFilesLocation + "\\countries.shp", true)
+        var countriesPath = Path.Combine(ShapeFilesDeployer.ShapeFilesLocation, "countries.shp");
+        var countrySource = new ShapeFile(countriesPath, true)
         {
             CRS = "EPSG:4326"
         };
@@ -43,7 +45,8 @@ public class ShapefileTilingFilteringSample : IMapControlSample
         {
             CRS = "EPSG:3857",
         };
-        var citySource = new ShapeFile(ShapeFilesDeployer.ShapeFilesLocation + "\\cities.shp", true)
+        var citiesPath = Path.Combine(ShapeFilesDeployer.ShapeFilesLocation, "cities.shp");
+        var citySource = new ShapeFile(citiesPath, true)
         {
             CRS = "EPSG:4326"
         };

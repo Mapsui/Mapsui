@@ -5,6 +5,7 @@ using Mapsui.Samples.Common.Utilities;
 using Mapsui.Styles;
 using Mapsui.UI;
 using System.Collections.Generic;
+using System.IO;
 
 #pragma warning disable IDISP001 // Dispose created
 
@@ -28,7 +29,8 @@ public class GeoTiffSample : IMapControlSample
     public static Map CreateMap()
     {
         var map = new Map();
-        var gif = new GeoTiffProvider(GeoTiffDeployer.GeoTiffLocation + "\\example.tif", new List<Color> { Color.Red });
+        var examplePath = Path.Combine(GeoTiffDeployer.GeoTiffLocation, "example.tif");
+        var gif = new GeoTiffProvider(examplePath, new List<Color> { Color.Red });
         map.Layers.Add(CreateGifLayer(gif));
 
         return map;
