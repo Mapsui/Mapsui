@@ -128,7 +128,17 @@ namespace Mapsui.ArcGIS.ImageServiceProvider
             var uri = new Uri(GetRequestUrl(viewport.Extent, width, height));
             try
             {
-                using var handler = new HttpClientHandler { Credentials = Credentials ?? CredentialCache.DefaultCredentials };
+                var handler = new HttpClientHandler();
+                try
+                {
+                    // Blazor does not support this,
+                    handler.Credentials = Credentials ?? CredentialCache.DefaultCredentials;
+                }
+                catch (PlatformNotSupportedException e)
+                {
+                    Logger.Log(LogLevel.Error, e.Message, e);
+                };
+
                 try
                 {
                     var bytes = _persistentCache?.Find(uri.ToString());

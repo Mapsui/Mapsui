@@ -158,8 +158,17 @@ namespace Mapsui.ArcGIS.DynamicProvider
                 var bytes = _persistentCache?.Find(uri.ToString());
                 if (bytes == null)
                 {
-                    var handler = new HttpClientHandler
-                        { Credentials = Credentials ?? CredentialCache.DefaultCredentials };
+                    var handler = new HttpClientHandler();
+                    try
+                    {
+                        // Blazor does not support this,
+                        handler.Credentials = Credentials ?? CredentialCache.DefaultCredentials;
+                    }
+                    catch (PlatformNotSupportedException e)
+                    {
+                        Logger.Log(LogLevel.Error, e.Message, e);
+                    };
+
                     using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(_timeOut) };
 
                     using var response = await client.GetAsync(uri);
