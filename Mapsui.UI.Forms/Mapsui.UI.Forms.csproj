@@ -3,6 +3,10 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <NeutralLanguage>en</NeutralLanguage>
+    <PackageId>Mapsui.Forms</PackageId>
+    <Description>Mapsui.Forms - Library for mapping for Xamarin.Forms</Description>
+    <Authors>Dirk Weltz</Authors>
+    <PackageTags>$(PackageTags) xamarin.forms xamarin ios android windows uwp macos cross-platform</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

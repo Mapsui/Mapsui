@@ -59,6 +59,7 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Serialization" />
+    <Reference Include="netstandard" />
   </ItemGroup>
   <!--Reference on Mac works this way -->
   <ItemGroup Condition="'$(OS)' != 'Windows_NT'">

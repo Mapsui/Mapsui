@@ -79,5 +79,42 @@ namespace Mapsui.Styles
         {
             return (string.IsNullOrEmpty(_fontFamily) ? "unknown" : _fontFamily) + ", size=" + _size + ", bold=" + _bold + ", italic=" + _italic;
         }
+
+        protected bool Equals(Font other)
+        {
+            return _fontFamily == other._fontFamily && _size.Equals(other._size) && _italic == other._italic && _bold == other._bold;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (ReferenceEquals(null, obj))
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            if (obj.GetType() != this.GetType())
+            {
+                return false;
+            }
+
+            return Equals((Font)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (_fontFamily != null ? _fontFamily.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ _size.GetHashCode();
+                hashCode = (hashCode * 397) ^ _italic.GetHashCode();
+                hashCode = (hashCode * 397) ^ _bold.GetHashCode();
+                return hashCode;
+            }
+        }
     }
 }

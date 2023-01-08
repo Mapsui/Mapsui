@@ -11,5 +11,9 @@
     <ProjectReference Include="..\..\Mapsui.UI.Wpf\Mapsui.UI.Wpf.csproj" />
     <ProjectReference Include="..\..\Tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="BruTile" />
+  </ItemGroup>
 
 </Project>
