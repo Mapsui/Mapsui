@@ -11,7 +11,6 @@
       "Mapsui.UI.Forms\\Mapsui.UI.Forms.csproj",
       "Mapsui.UI.Shared\\Mapsui.UI.Shared.shproj",
       "Mapsui\\Mapsui.csproj",
-      "Samples\\Mapsui.Samples.Common.Desktop\\Mapsui.Samples.Common.Desktop.csproj",
       "Samples\\Mapsui.Samples.Common\\Mapsui.Samples.Common.csproj",
       "Samples\\Mapsui.Samples.CustomWidget\\Mapsui.Samples.CustomWidget.csproj",
       "Samples\\Mapsui.Samples.Forms\\Mapsui.Samples.Forms.Shared\\Mapsui.Samples.Forms.Shared.csproj",

@@ -2,17 +2,17 @@
 // The Mapsui authors licensed this file under the MIT license.
 // See the LICENSE file in the project root for full license information.
 
+using Mapsui.Fetcher;
+using Mapsui.Layers;
+using Mapsui.Providers;
+using Mapsui.Samples.Common.DataBuilders;
+using Mapsui.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Mapsui.Fetcher;
-using Mapsui.Layers;
-using Mapsui.Providers;
-using Mapsui.Samples.Common.Helpers;
-using Mapsui.Utilities;
 
 namespace Mapsui.Samples.Common.Maps.Animations;
 
@@ -34,7 +34,7 @@ internal class AnimatedPointsSampleProvider : MemoryProvider, IDynamic, IDisposa
     public override Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
         var features = new List<PointFeature>();
-        var points = RandomPointGenerator.GenerateRandomPoints(fetchInfo.Extent, 10, _random).ToList();
+        var points = RandomPointsBuilder.GenerateRandomPoints(fetchInfo.Extent, 10, _random).ToList();
         var count = 0;
         var random = _random.Next(points.Count);
 

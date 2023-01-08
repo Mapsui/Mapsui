@@ -2,8 +2,8 @@
 using System.Text;
 using Mapsui.UI.iOS;
 using Mapsui.UI;
-using Mapsui.Samples.Common.Helpers;
-using Mapsui.Samples.Common.Maps;
+using Mapsui.Samples.Common.Maps.Demo;
+
 namespace Mapsui.Samples.iOS
 {
     public partial class ViewController : UIViewController

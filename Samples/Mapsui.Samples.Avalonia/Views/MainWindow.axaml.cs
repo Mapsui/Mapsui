@@ -22,7 +22,6 @@ namespace Mapsui.Samples.Avalonia.Views
         static MainWindow()
         {
             // todo: find proper way to load assembly
-            Mapsui.Samples.Common.Desktop.DesktopSamplesUtilities.LoadAssembly();
             Mapsui.Tests.Common.Utilities.LoadAssembly();       
         }
 

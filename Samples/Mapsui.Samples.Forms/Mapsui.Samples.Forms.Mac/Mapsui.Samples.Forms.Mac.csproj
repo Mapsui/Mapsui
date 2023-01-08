@@ -105,10 +105,6 @@
       <Project>{81bb36d2-4d01-44e3-9024-e7cbd10da316}</Project>
       <Name>Mapsui.Tests.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Mapsui.Samples.Common.Desktop\Mapsui.Samples.Common.Desktop.csproj">
-      <Project>{086f5a3a-7d9a-4125-8e67-0ebc72aab246}</Project>
-      <Name>Mapsui.Samples.Common.Desktop</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj">
       <Project>{508AE811-A03A-4138-8CCC-ABDE03C67010}</Project>
       <Name>Mapsui.Samples.Common</Name>

@@ -76,19 +76,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Include="..\..\Samples\Mapsui.Samples.Common.Desktop\GeoData\World\countries.dbf" Link="GeoData\World\countries.dbf">
+	  <None Include="..\..\Samples\Mapsui.Samples.Common\GeoData\World\countries.dbf" Link="GeoData\World\countries.dbf">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
-	  <None Include="..\..\Samples\Mapsui.Samples.Common.Desktop\GeoData\World\countries.prj" Link="GeoData\World\countries.prj">
+	  <None Include="..\..\Samples\Mapsui.Samples.Common\GeoData\World\countries.prj" Link="GeoData\World\countries.prj">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
-	  <None Include="..\..\Samples\Mapsui.Samples.Common.Desktop\GeoData\World\countries.shp" Link="GeoData\World\countries.shp">
+	  <None Include="..\..\Samples\Mapsui.Samples.Common\GeoData\World\countries.shp" Link="GeoData\World\countries.shp">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
-	  <None Include="..\..\Samples\Mapsui.Samples.Common.Desktop\GeoData\World\countries.shp.sidx" Link="GeoData\World\countries.shp.sidx">
+	  <None Include="..\..\Samples\Mapsui.Samples.Common\GeoData\World\countries.shp.sidx" Link="GeoData\World\countries.shp.sidx">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
-	  <None Include="..\..\Samples\Mapsui.Samples.Common.Desktop\GeoData\World\countries.shx" Link="GeoData\World\countries.shx">
+	  <None Include="..\..\Samples\Mapsui.Samples.Common\GeoData\World\countries.shx" Link="GeoData\World\countries.shx">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
 	</ItemGroup>

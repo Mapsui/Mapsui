@@ -140,7 +140,10 @@ namespace Mapsui.UI.Forms
                 // Events
                 _glView.Touch += OnTouch;
                 _glView.PaintSurface += OnGLPaintSurface;
-                _invalidate = () => { RunOnUIThread(() => _glView.InvalidateSurface()); };
+                _invalidate = () => { 
+                    // The line below sometimes has a null reference exception on application close.
+                    RunOnUIThread(() => _glView.InvalidateSurface()); 
+                };
                 view = _glView;
             }
             else
