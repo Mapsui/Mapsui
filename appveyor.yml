@@ -23,10 +23,10 @@ cache:
 - '%USERPROFILE%\.nuget\packages\System** -> Directory.Packages.props'  # preserve nuget folder (packages) unless the solution or projects change
 - '%USERPROFILE%\.nuget\packages\Xamarin** -> Directory.Packages.props'  # preserve nuget folder (packages) unless the solution or projects change 
 install:
-# already installed sdk 7.0.100  
+# already installed sdk 7.0.100
 # - ps: Invoke-WebRequest 'https://dot.net/v1/dotnet-install.ps1' -OutFile 'dotnet-install.ps1';
 # - ps: ./dotnet-install.ps1 -Version 7.0.100 -InstallDir "dotnetcli"
-- cmd: dotnet workload install maui macos android ios maccatalyst
+- cmd: dotnet workload install maui macos android ios maccatalyst wasm-tools
 - cmd: '"C:/Program Files (x86)/Android/android-sdk/tools/bin/sdkmanager.bat" "platforms;android-31"'
 before_build:
 - cmd: .nuget\nuget restore mapsui.sln -Verbosity quiet

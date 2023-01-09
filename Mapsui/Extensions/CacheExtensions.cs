@@ -12,7 +12,8 @@ namespace Mapsui.Extensions
             var bytes = persistentCache?.Find(url);
             if (bytes == null)
             {
-                using var httpClient = new HttpClient();
+                var handler = new HttpClientHandler();
+                using var httpClient = new HttpClient(handler);
                 using var response = await httpClient.GetStreamAsync(url);
                 bytes = response.ToBytes();
                 persistentCache?.Add(url, bytes);

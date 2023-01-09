@@ -21,8 +21,9 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
     private readonly TimeSpan _cacheExpireTime;
     private const string NoCompression = "no";
     private const string BrotliCompression = "br";
+    private bool _compress;
 
-    public SqlitePersistentCache(string name, TimeSpan? cacheExpireTime = null, string? folder = null)
+    public SqlitePersistentCache(string name, TimeSpan? cacheExpireTime = null, string? folder = null, bool compress = true)
     {
         folder ??= Path.GetTempPath();
         if (!Directory.Exists(folder))
@@ -32,6 +33,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
 
         _file = Path.Combine(folder, name + ".sqlite");
         _cacheExpireTime = cacheExpireTime ?? TimeSpan.Zero;
+        _compress = compress;
         InitDb();
     }
 
@@ -40,26 +42,10 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
         using var connection = CreateConnection();
         try
         {
-            var test = connection.Table<Tile>().FirstOrDefault();
-            if (test != null && test.Created == DateTime.MinValue)
+            if (!TableExists(connection, nameof(Tile)))
             {
-                var today = DateTime.Today;
-                var command = connection.CreateCommand(@$"Alter TABLE Tile 
-                Add Created DateTime NOT NULL Default ('{today.Year}{today.Month:00}{today.Date:00}');");
-                command.ExecuteNonQuery();
-            }
-
-            if (test != null && string.IsNullOrEmpty(test.Compression))
-            {
-                var command = connection.CreateCommand(@$"Alter TABLE Tile 
-                Add Compression VARCHAR(2) NOT NULL Default ('{NoCompression}');");
-                command.ExecuteNonQuery();
-            }
-        }
-        catch (SQLiteException ex)
-        {
-            // Table does not exist so i initialize it
-            var command = connection.CreateCommand(@"CREATE TABLE Tile (
+                // Table does not exist so i initialize it
+                var command = connection.CreateCommand(@"CREATE TABLE Tile (
                 Level INTEGER NOT NULL,
                 Col INTEGER NOT NULL,
                 Row INTEGER NOT NULL,
@@ -68,14 +54,37 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
                 Data BLOB,
                 PRIMARY KEY (Level, Col, Row)
                 );");
-            command.ExecuteNonQuery();
-            Logger.Log(LogLevel.Warning, ex.Message, ex);
-        }
+                command.ExecuteNonQuery();
+            }
 
-        try
-        {
-            var test = connection.Table<UrlCache>().FirstOrDefault();
-            if (test != null && string.IsNullOrEmpty(test.Compression))
+            if (!ColumnExists(connection, nameof(Tile), nameof(Tile.Created)))
+            {
+                var today = DateTime.Today;
+                var command = connection.CreateCommand(@$"Alter TABLE Tile 
+                Add Created DateTime NOT NULL Default ('{today.Year}{today.Month:00}{today.Date:00}');");
+                command.ExecuteNonQuery();
+            }
+
+            if (!ColumnExists(connection, nameof(Tile), nameof(Tile.Compression)))
+            {
+                var command = connection.CreateCommand(@$"Alter TABLE Tile 
+                Add Compression VARCHAR(2) NOT NULL Default ('{NoCompression}');");
+                command.ExecuteNonQuery();
+            }
+
+            if (!TableExists(connection, nameof(UrlCache)))
+            {
+                var command = connection.CreateCommand(@"CREATE TABLE UrlCache (
+                Url TEXT NOT NULL,                
+                Created DateTime NOT NULL,
+                Compression VARCHAR(2) NOT NULL,
+                Data BLOB,
+                PRIMARY KEY (Url)
+                );");
+                command.ExecuteNonQuery();
+            }
+
+            if (!ColumnExists(connection,nameof(UrlCache), nameof(UrlCache.Compression)))
             {
                 var command = connection.CreateCommand(@$"Alter TABLE UrlCache 
                 Add Compression VARCHAR(2) NOT NULL Default ('{NoCompression}');");
@@ -84,17 +93,41 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
         }
         catch (SQLiteException ex)
         {
-            // Table does not exist so i initialize it
-            var command = connection.CreateCommand(@"CREATE TABLE UrlCache (
-                Url TEXT NOT NULL,                
-                Created DateTime NOT NULL,
-                Compression VARCHAR(2) NOT NULL,
-                Data BLOB,
-                PRIMARY KEY (Url)
-                );");
-            command.ExecuteNonQuery();
             Logger.Log(LogLevel.Warning, ex.Message, ex);
         }
+    }
+
+    private bool TableExists(SQLiteConnection connection, string table)
+    {
+        var tableExists = @$"SELECT name FROM sqlite_master
+        WHERE type='table' AND name = '{table}'";
+        var command = connection.CreateCommand(tableExists);
+        var existingTable = command.ExecuteScalar<string>();
+        if (string.IsNullOrEmpty(existingTable))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    private bool ColumnExists(SQLiteConnection connection, string table, string column)
+    {
+        var tableExists = @$"SELECT             
+        p.name as column_name
+        FROM 
+            sqlite_master AS m
+        JOIN 
+            pragma_table_info(m.name) AS p
+        WHERE m.name = '{table}' AND p.name = '{column}'";
+        var command = connection.CreateCommand(tableExists);
+        var existigColumn = command.ExecuteScalar<string>();
+        if (string.IsNullOrEmpty(existigColumn))
+        {
+            return false;
+        }
+
+        return true;
     }
 
     public void Add(TileIndex index, byte[] tile)
@@ -181,26 +214,43 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
     }
 
     [return: NotNullIfNotNull("bytes")]
-    private static (byte[]? data, string Compression) Compress(byte[]? bytes)
+    private (byte[]? data, string Compression) Compress(byte[]? bytes)
     {
         if (bytes == null)
             return (null, NoCompression);
 
-        using var outputStream = new MemoryStream();
+        if (_compress)
+        {
+            try
+            {
+                using var outputStream = new MemoryStream();
 #if NETSTANDARD2_0
         using (var compressStream = new BrotliStream(outputStream, CompressionMode.Compress))
 #else
-        using (var compressStream = new BrotliStream(outputStream, CompressionLevel.Optimal))
+                using (var compressStream = new BrotliStream(outputStream, CompressionLevel.Fastest))
 #endif
-        {
-            compressStream.Write(bytes, 0, bytes.Length);
-        }
+                {
+                    compressStream.Write(bytes, 0, bytes.Length);
+                }
 
-        var result = outputStream.ToArray();
+                var result = outputStream.ToArray();
 
-        if (result.Length < bytes.Length)
-        {
-            return (result, BrotliCompression);
+                if (result.Length < bytes.Length)
+                {
+                    return (result, BrotliCompression);
+                }
+            }
+            catch (PlatformNotSupportedException)
+            {
+                // Ignore error and save uncompressed
+                // and disable compression
+                _compress = false;
+            }
+            catch (Exception ex)
+            {
+                // in wasm this seems to throw an exception
+                Logger.Log(LogLevel.Error, ex.Message);
+            }
         }
 
         return (bytes, NoCompression);

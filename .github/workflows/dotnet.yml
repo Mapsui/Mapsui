@@ -136,7 +136,7 @@ jobs:
       with:
         vs-prerelease: true
     - name: install maui macos android ios maccatalyst wasm-tools
-      run: dotnet workload install maui macos android ios maccatalyst wasm-tools
+      run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
     - name: Restore dependencies
       run: .nuget\nuget restore Mapsui.sln     
     # Test Build
@@ -176,6 +176,8 @@ jobs:
     # Samples Build 
     - name: Mapsui.Samples.Avalonia
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Avalonia/Mapsui.Samples.Avalonia.csproj
+    - name: Mapsui.Samples.Blazor
+      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Blazor/Mapsui.Samples.Blazor.csproj
     - name: Mapsui.Samples.Droid
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Droid/Mapsui.Samples.Droid.csproj
     - name: Mapsui.Samples.Eto
@@ -190,8 +192,8 @@ jobs:
       run: msbuild -p:RestorePackages=false -p:Configuration=Debug -p:Platform=x86 Samples\Mapsui.Samples.WinUI\Mapsui.Samples.WinUI\Mapsui.Samples.WinUI.csproj
     - name: Mapsui.Samples.Wpf
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Wpf/Mapsui.Samples.Wpf.csproj
-    - name: Mapsui.Samples.Wpf.Editing
-      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Wpf.Editing/Mapsui.Samples.Wpf.Editing.csproj
+    - name: Mapsui.Samples.Wpf.Editing    
+      run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Wpf.Editing/Mapsui.Samples.Wpf.Editing.csproj    
     # Samples Forms
     - name: Mapsui.Samples.Forms.Android
       run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Android/Mapsui.Samples.Forms.Android.csproj

@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+	<!-- In debug, make builds faster by reducing optimizations -->
+	<PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+		<WasmNativeStrip>false</WasmNativeStrip>
+		<EmccCompileOptimizationFlag>-O1</EmccCompileOptimizationFlag>
+	</PropertyGroup>
+
+  <ItemGroup>
+		<PackageReference Include="SkiaSharp.Views.Blazor" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Mapsui.UI.Blazor\Mapsui.UI.Blazor.csproj" />
+    <ProjectReference Include="..\..\Tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj" />
+    <ProjectReference Include="..\Mapsui.Samples.Common\Mapsui.Samples.Common.csproj" />
+    <ProjectReference Include="..\Mapsui.Samples.CustomWidget\Mapsui.Samples.CustomWidget.csproj" />
+  </ItemGroup>
+
+</Project>

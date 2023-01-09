@@ -11,17 +11,17 @@ public class TmsSample : ISample
     public string Category => "Data Formats";
     public static IPersistentCache<byte[]>? DefaultCache { get; set; }
 
-    public Task<Map> CreateMapAsync()
+    public async Task<Map> CreateMapAsync()
     {
         var map = new Map();
-        map.Layers.Add(CreateLayer());
-        return Task.FromResult(map);
+        map.Layers.Add(await CreateLayerAsync());
+        return map;
     }
 
-    public static ILayer CreateLayer()
+    public static async Task<ILayer> CreateLayerAsync()
     {
         var url = "https://www.openbasiskaart.nl/mapcache/tms/1.0.0/osm@rd";
-        var tileSource = TmsTileSourceBuilder.Build(url, true, DefaultCache);
+        var tileSource = await TmsTileSourceBuilder.BuildAsync(url, true, DefaultCache);
 
         var tileLayer = new TileLayer(tileSource)
         {

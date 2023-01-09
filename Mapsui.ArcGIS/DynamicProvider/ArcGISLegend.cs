@@ -95,10 +95,16 @@ namespace Mapsui.ArcGIS.DynamicProvider
 
         private HttpClient CreateRequest(ICredentials? credentials)
         {
-            HttpClientHandler httpClientHandler = new HttpClientHandler
+            HttpClientHandler httpClientHandler = new HttpClientHandler();
+            try
             {
-                UseDefaultCredentials = credentials == null,
-            };
+                // Blazor does not support this.
+                httpClientHandler.UseDefaultCredentials = credentials == null;
+            }
+            catch (PlatformNotSupportedException e)
+            {
+                Logger.Log(LogLevel.Error, e.Message, e);
+            }
 
             if (credentials != null) httpClientHandler.Credentials = credentials;
 

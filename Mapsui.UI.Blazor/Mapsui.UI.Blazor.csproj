@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFrameworks>net7.0</TargetFrameworks>
+    <Nullable>enable</Nullable>
+	  <ImplicitUsings>enable</ImplicitUsings>
+    <EnableNETAnalyzers>True</EnableNETAnalyzers>
+    <DefineConstants>__BLAZOR__</DefineConstants>
+    <PackageId>Mapsui.Blazor</PackageId>
+    <Description>
+      Blazor map components based on the Mapsui library
+    </Description>
+    <PackageTags>$(PackageTags) blazor wasm razor</PackageTags>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<SupportedPlatform Include="browser" />
+	</ItemGroup>
+
+	<ItemGroup>
+    <PackageReference Include="SkiaSharp.Views.Blazor" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
+  </ItemGroup>
+
+  <Import Project="..\Mapsui.UI.Shared\Mapsui.UI.Shared.projitems" Label="Shared" />
+
+</Project>

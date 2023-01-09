@@ -19,6 +19,8 @@
     <ProjectReference Include="..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
     <ProjectReference Include="..\..\Mapsui.UI.Forms\Mapsui.UI.Forms.csproj" />
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />
+    <ProjectReference Include="..\..\Samples\Mapsui.Samples.Common.Desktop\Mapsui.Samples.Common.Desktop.csproj" />
+    <ProjectReference Include="..\..\Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\Mapsui.Samples.Forms.Shared.csproj" />
     <ProjectReference Include="..\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj" />
   </ItemGroup>
 
@@ -388,11 +390,5 @@
     <None Remove="Resources\Images\OriginalRegression\ShapefileTilingFilteringSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\StackedLabelsTestSample.Regression.png" />
     <None Remove="Resources\Images\OriginalRegression\WriteToLayerSample.Regression.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Mapsui.Samples.Forms.Shared">
-      <HintPath>..\..\Samples\Mapsui.Samples.Forms\Mapsui.Samples.Forms.Shared\bin\Debug\netstandard2.0\Mapsui.Samples.Forms.Shared.dll</HintPath>
-    </Reference>
   </ItemGroup>
 </Project>

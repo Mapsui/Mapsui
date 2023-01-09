@@ -1,0 +1,147 @@
+﻿@page "/"
+@using Mapsui.Samples.Common
+@using Mapsui.Samples.Common.Extensions
+@using Mapsui.Extensions
+@using Mapsui.Logging
+@using Mapsui.Samples.CustomWidget
+@using Mapsui.UI
+
+<PageTitle>Mapsui</PageTitle>
+   <div class="form-group row">
+        <label for="category" class="col-sm-2 col-form-label">
+            Category
+        </label>
+        <div class="col-sm-10">
+            <InputSelect id="category" @bind-Value="CategoryId" class="form-control">
+                @foreach (var cat in Categories)
+                {
+                    <option value="@cat">@cat</option>
+                }
+            </InputSelect>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="category" class="col-sm-2 col-form-label">
+            Sample
+        </label>
+        <div class="col-sm-10">
+            <InputSelect id="sample" @bind-Value="SampleId" class="form-control">
+                @foreach (var sample in Samples)
+                {
+                    <option value="@sample">@sample</option>
+                }
+            </InputSelect>
+        </div>
+    </div>
+
+<div class="container">
+    <div class="row">
+        <div class="col border rounded p-2 canvas-container">
+            <MapControl @ref="_mapControl" />
+        </div>
+    </div>   
+</div>
+
+@code
+{
+    private MapControl? _mapControl;
+    private string? _categoryId;
+    private string? _sampleId;
+
+    public List<string> Samples { get; set; } = new();
+
+    public List<ISampleBase> MapSamples { get; set; } = new();
+
+    public List<string> Categories { get; set; } = new();
+
+    [Parameter]
+    public string? CategoryId 
+    {
+        get => _categoryId;
+        set
+        {
+            if (_categoryId == value)
+            {
+                return;
+            }
+
+            _categoryId = value;
+            FillSamples();
+        }
+    }
+
+    [Parameter]
+    public string? SampleId 
+    {
+        get => _sampleId;
+        set
+        {
+            if (_sampleId == value)
+            {
+                return;
+            }
+
+            _sampleId = value;
+            Sample = MapSamples.FirstOrDefault(f => f.Name == SampleId);
+            FillMap();
+        } 
+    }
+
+    [Parameter]
+    public string? Title { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        FillComboBoxWithCategories();
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        base.OnAfterRender(firstRender);
+        if (firstRender)
+        {
+            FillMap();
+            if (_mapControl != null)
+                _mapControl.Renderer.WidgetRenders[typeof(CustomWidget)] = new CustomWidgetSkiaRenderer();
+        }
+    }
+
+    private void FillComboBoxWithCategories()
+    {
+        // todo: find proper way to load assembly
+        Tests.Common.Utilities.LoadAssembly();                    
+                    
+        var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c);
+        foreach (var category in categories)
+        {
+            Categories.Add(category);
+        }
+
+        CategoryId = Categories[0];
+
+        FillSamples();
+    }
+
+    private void FillSamples()
+    {
+        var list = AllSamples.GetSamples().Where(s => s.Category == CategoryId).OrderBy(c => c.Name);
+        Samples.Clear();
+        MapSamples.Clear();
+        Samples.AddRange(list.Select(f => f.Name));
+        MapSamples.AddRange(list);        
+        SampleId = MapSamples.FirstOrDefault()?.Name;                 
+    }
+
+    private async void FillMap()
+    {
+        if (Sample != null && _mapControl != null)
+        {
+            var sample = Sample;
+            Title = sample.Name;            
+            await sample.SetupAsync(_mapControl);            
+        }
+    }
+
+    public ISampleBase? Sample { get; set; }
+}

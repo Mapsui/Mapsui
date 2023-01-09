@@ -1,4 +1,5 @@
-﻿using Mapsui.Layers;
+﻿using System.IO;
+using Mapsui.Layers;
 using Mapsui.Nts.Providers;
 using Mapsui.Nts.Providers.Shapefile;
 using Mapsui.Providers;
@@ -28,7 +29,8 @@ public class GeometrySimplifySample : IMapControlSample
     {
         var map = new Map();
 
-        var countrySource = new ShapeFile(ShapeFilesDeployer.ShapeFilesLocation + "\\countries.shp", true)
+        var countriesPath = Path.Combine(ShapeFilesDeployer.ShapeFilesLocation, "countries.shp");
+        var countrySource = new ShapeFile(countriesPath, true)
         {
             CRS = "EPSG:4326"
         };

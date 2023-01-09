@@ -28,6 +28,8 @@ dotnet pack /p:RestorePackages=true /p:Configuration=Release Mapsui.UI.Android/M
 
 dotnet pack /p:RestorePackages=true /p:Configuration=Release Mapsui.UI.iOS/Mapsui.UI.iOS.csproj --output Artifacts
 
+dotnet pack /p:RestorePackages=true /p:Configuration=Release Mapsui.UI.Blazor/Mapsui.UI.Blazor.csproj --output Artifacts
+
 dotnet pack /p:RestorePackages=true /p:Configuration=Release Mapsui.UI.Forms/Mapsui.UI.Forms.csproj --output Artifacts
 
 dotnet pack /p:RestorePackages=true /p:Configuration=Release Mapsui.UI.Avalonia/Mapsui.UI.Avalonia.csproj --output Artifacts

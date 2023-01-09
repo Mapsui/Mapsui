@@ -33,11 +33,17 @@ namespace Mapsui.UI.Forms
 namespace Mapsui.UI.Avalonia
 #elif __ETO_FORMS__
 namespace Mapsui.UI.Eto
+#elif __BLAZOR__
+namespace Mapsui.UI.Blazor
 #else
 namespace Mapsui.UI.Wpf
 #endif
 {
+#if __BLAZOR__
+    public partial class MapControlBase : INotifyPropertyChanged, IDisposable
+#else
     public partial class MapControl : INotifyPropertyChanged, IDisposable
+#endif
     {
         private double _unSnapRotationDegrees;
         // Flag indicating if a drawing process is running
@@ -45,7 +51,7 @@ namespace Mapsui.UI.Wpf
         // Flag indicating if a new drawing process should start
         private bool _refresh;
         // Action to call for a redraw of the control
-        private Action? _invalidate;
+        private protected Action? _invalidate;
         // Timer for loop to invalidating the control
         private System.Threading.Timer? _invalidateTimer;
         // Interval between two calls of the invalidate function in ms
@@ -53,7 +59,7 @@ namespace Mapsui.UI.Wpf
         // Stopwatch for measuring drawing times
         private readonly System.Diagnostics.Stopwatch _stopwatch = new System.Diagnostics.Stopwatch();
 
-        private void CommonInitialize()
+        private protected void CommonInitialize()
         {
             // Create map
             Map = new Map();
@@ -64,7 +70,7 @@ namespace Mapsui.UI.Wpf
             StartUpdates(false);
         }
 
-        private void CommonDrawControl(object canvas)
+        private protected void CommonDrawControl(object canvas)
         {
             if (_drawing)
                 return;
@@ -248,7 +254,7 @@ namespace Mapsui.UI.Wpf
             }
         }
 
-        private readonly LimitedViewport _viewport = new LimitedViewport();
+        private protected readonly LimitedViewport _viewport = new LimitedViewport();
         private INavigator? _navigator;
 
         /// <summary>
@@ -474,6 +480,9 @@ namespace Mapsui.UI.Wpf
         /// <summary>
         /// Map holding data for which is shown in this MapControl
         /// </summary>
+#if __BLAZOR__
+        [Parameter]
+#endif
         public Map? Map
         {
             get => _map;
@@ -539,7 +548,7 @@ namespace Mapsui.UI.Wpf
             Map?.RefreshData(fetchInfo);
         }
 
-        private void OnInfo(MapInfoEventArgs? mapInfoEventArgs)
+        private protected void OnInfo(MapInfoEventArgs? mapInfoEventArgs)
         {
             if (mapInfoEventArgs == null) return;
 
@@ -589,7 +598,7 @@ namespace Mapsui.UI.Wpf
         /// <param name="startScreenPosition">Screen position of Viewport/MapControl</param>
         /// <param name="numTaps">Number of clickes/taps</param>
         /// <returns>True, if something done </returns>
-        private MapInfoEventArgs? InvokeInfo(MPoint? screenPosition, MPoint? startScreenPosition, int numTaps)
+        private protected MapInfoEventArgs? InvokeInfo(MPoint? screenPosition, MPoint? startScreenPosition, int numTaps)
         {
             return InvokeInfo(
                 Map?.GetWidgetsOfMapAndLayers() ?? new List<IWidget>(),
@@ -646,7 +655,7 @@ namespace Mapsui.UI.Wpf
             return null;
         }
 
-        private void SetViewportSize()
+        private protected void SetViewportSize()
         {
             var hadSize = Viewport.HasSize();
             _viewport.SetSize(ViewportWidth, ViewportHeight);
@@ -655,7 +664,7 @@ namespace Mapsui.UI.Wpf
             Refresh();
         }
 
-        private void CommonDispose(bool disposing)
+        private protected void CommonDispose(bool disposing)
         {
             if (disposing)
             {
