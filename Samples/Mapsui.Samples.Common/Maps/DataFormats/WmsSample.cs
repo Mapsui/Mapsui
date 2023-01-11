@@ -2,6 +2,7 @@
 using Mapsui.Layers;
 using Mapsui.Providers.Wms;
 using System.Threading.Tasks;
+using Mapsui.Styles;
 
 namespace Mapsui.Samples.Common.Maps.DataFormats;
 
@@ -21,7 +22,11 @@ public class WmsSample : ISample
 
     public static async Task<ILayer> CreateLayerAsync()
     {
-        return new ImageLayer("Windsnelheden (PDOK)") { DataSource = await CreateWmsProviderAsync() };
+        return new ImageLayer("Windsnelheden (PDOK)") 
+        { 
+            DataSource = await CreateWmsProviderAsync(),
+            Style = new RasterStyle() 
+        };
     }
 
     private static async Task<WmsProvider> CreateWmsProviderAsync()
