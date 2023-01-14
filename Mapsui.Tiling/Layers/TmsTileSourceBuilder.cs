@@ -21,7 +21,6 @@ namespace Mapsui.Tiling.Layers
             bool overrideTmsUrlWithUrlToTileMapXml, 
             IPersistentCache<byte[]>? persistentCache = null)
         {
-            Exception? error = null;
             var urlPersitentCache = persistentCache as IUrlPersistentCache;
             var stream = await urlPersitentCache.UrlCachedStreamAsync(urlToTileMapXml);
 
