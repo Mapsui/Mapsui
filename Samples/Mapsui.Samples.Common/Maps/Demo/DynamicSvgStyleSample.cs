@@ -26,13 +26,13 @@ public class DynamicSvgStyleSample : ISample
         var infoPosition = new MPoint(); // Use closure to keep track of the info click position
 
         var map = new Map();
-        map.Layers.Add(OpenStreetMap.CreateTileLayer());;
+        map.Layers.Add(OpenStreetMap.CreateTileLayer());
         map.Layers.Add(new MemoryLayer("Dynamic Svg Style")
         {
             Features = RandomPointsBuilder.CreateRandomFeatures(map.Extent, 1000),
             Style = CreateDynamicSvgStyle(() => infoPosition)
         });
-        
+
         map.Info += (s, e) =>
         {
             if (e.MapInfo?.WorldPosition == null) return;
@@ -42,7 +42,7 @@ public class DynamicSvgStyleSample : ISample
 
         return Task.FromResult(map);
     }
-    
+
     private IStyle CreateDynamicSvgStyle(Func<MPoint> getInfoPosition) // Use Func to make it get the latest clicked position
     {
         var bitmapId = typeof(SvgSample).LoadSvgId("Images.arrow.svg");
@@ -52,18 +52,18 @@ public class DynamicSvgStyleSample : ISample
             var featurePoint = ((PointFeature)f).Point;
             var distance = Algorithms.Distance(getInfoPosition(), featurePoint);
             var distanceBetweenZeroAndOne = Math.Min(distance / circumferenceOfTheEarth, 1);
-            
+
             return new SymbolStyle
             {
                 BitmapId = bitmapId,
                 SymbolOffset = new RelativeOffset(0.0, 0.0),
                 // 1. Change scale based on the distance
-                SymbolScale = 0.25 + 0.25 * distanceBetweenZeroAndOne,
+                SymbolScale = 0.25 + (0.25 * distanceBetweenZeroAndOne),
                 // 2. Change angle pointing to the info click position
                 SymbolRotation = -CalculateAngle(getInfoPosition(), featurePoint) - 90,
                 RotateWithMap = true,
                 Opacity = 0.9f,
-                // 3. Use BlendModeColor to change the color of the SVG
+                // 3. Use BlendModeColor to change the color of the svg
                 BlendModeColor = ToColor(distanceBetweenZeroAndOne)
             };
         });
