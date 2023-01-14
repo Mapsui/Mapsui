@@ -17,7 +17,7 @@ public class DynamicSvgStyleSample : ISample
     public string Category => "Styles";
 
     private string Description => "Tab or click in the map to see the change in symbols. This sample shows you can " +
-        "change the size, rotation and color (using BlendModeColor) of a single SVG resouces if you use a ThemeStyle";
+        "change the size, rotation and color (using BlendModeColor) of a single SVG resource if you use a ThemeStyle";
 
     private const double circumferenceOfTheEarth = 40075017;
 
