@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Logging;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
 using Mapsui.Samples.Common.Maps.Animations;
@@ -60,7 +61,21 @@ public class MapRegressionTests
     [TestCaseSource(nameof(RegressionSamples))]
     public async Task TestSampleAsync(ISampleBase sample)
     {
-        await TestSampleAsync(sample, true).ConfigureAwait(false);
+        var original = Logger.LogDelegate;
+        try
+        {
+            Logger.LogDelegate = ConsoleLog;
+            await TestSampleAsync(sample, true).ConfigureAwait(false);
+        }
+        finally
+        {
+            Logger.LogDelegate = original;
+        }
+    }
+
+    private void ConsoleLog(LogLevel arg1, string arg2, Exception? arg3)
+    {
+        Console.WriteLine($@"LogLevel {arg1} Message {arg2}");
     }
 
     public async Task TestSampleAsync(ISampleBase sample, bool compareImages)
