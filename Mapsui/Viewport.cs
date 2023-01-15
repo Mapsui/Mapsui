@@ -325,6 +325,9 @@ namespace Mapsui
 
         public void SetSize(double width, double height)
         {
+            if (width == _width && height == _height)
+                return;
+            
             _animations = new();
 
             _width = width;
@@ -336,6 +339,9 @@ namespace Mapsui
 
         public void SetCenter(double x, double y, long duration = 0, Easing? easing = default)
         {
+            if (x == _centerX && y == _centerY)
+                return;
+            
             _animations = new();
 
             _centerX = x;
@@ -347,6 +353,9 @@ namespace Mapsui
 
         public void SetCenterAndResolution(double x, double y, double resolution, long duration = 0, Easing? easing = default)
         {
+            if (x == _centerX && y == _centerY && resolution == _resolution)
+                return;
+            
             _animations = new();
 
             if (duration == 0)
