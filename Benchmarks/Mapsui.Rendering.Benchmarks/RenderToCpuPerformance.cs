@@ -27,7 +27,7 @@ namespace Mapsui.Rendering.Benchmarks
     [SimpleJob(RunStrategy.Throughput, targetCount: 1, warmupCount: 0, invocationCount: 333, launchCount: 1)]
     [MemoryDiagnoser]
     [MinColumn, MaxColumn, MeanColumn, MedianColumn]
-    public class RenderToCpuPerformance
+    public class RenderToCpuPerformance : IDisposable
     {
         private static readonly RegressionMapControl tilingSkpMap;
         private static readonly RegressionMapControl tilingPngMap;
@@ -211,6 +211,12 @@ namespace Mapsui.Rendering.Benchmarks
         {
             await tilingSkpMap.WaitForLoadingAsync();
             mapRenderer.Render(skCanvas, tilingSkpMap.Viewport, tilingSkpMap.Map!.Layers, tilingSkpMap.Map!.Widgets, Color.White);
+        }
+
+        public void Dispose()
+        {
+            skCanvas.Dispose();
+            surface.Dispose();
         }
     }
 }
