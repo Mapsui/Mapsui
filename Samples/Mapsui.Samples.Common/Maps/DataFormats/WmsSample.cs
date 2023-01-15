@@ -1,4 +1,5 @@
-﻿using Mapsui.Cache;
+﻿using System;
+using Mapsui.Cache;
 using Mapsui.Layers;
 using Mapsui.Providers.Wms;
 using System.Threading.Tasks;
@@ -46,16 +47,10 @@ public class WmsSample : ISample, ISampleTest
 
     public Task InitializeTestAsync(IMapControl mapControl)
     {
-        var extent = mapControl.Map?.Extent;
-        if (extent != null)
+        if (mapControl.Viewport is IViewport viewport)
         {
-            if (mapControl.Viewport is IViewport viewport)
-            {
-                // Set Extend from Map
-                var resolution = mapControl.Viewport.Resolution;
-                viewport.SetCenter(extent.Centroid.X / resolution, extent.Centroid.Y / resolution);
-                viewport.SetSize(extent.Width / resolution, extent.Width / resolution * (600.0 / 800.0)); // keep aspect ratio
-            }
+            // Set Center to Visible Map
+            viewport.SetCenter(412, 1316);
         }
 
         return Task.CompletedTask;

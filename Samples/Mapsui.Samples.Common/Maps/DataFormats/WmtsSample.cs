@@ -29,7 +29,7 @@ public class WmtsSample : ISample
 
     public static async Task<ILayer> CreateLayerAsync()
     {
-        var url = "http://geodata.nationaalgeoregister.nl/wmts/top10nl?VERSION=1.0.0&request=GetCapabilities";
+        var url = "https://geodata.nationaalgeoregister.nl/wmts/top10nl?VERSION=1.0.0&request=GetCapabilities";
 
         using var response = await (DefaultCache as IUrlPersistentCache).UrlCachedStreamAsync(url);
         var tileSources = WmtsParser.Parse(response);
