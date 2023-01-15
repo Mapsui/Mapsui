@@ -120,8 +120,9 @@ namespace Mapsui.Layers
             if (!Enabled) return;
             // Fetching an image, that often covers the whole map, is expensive. Only do it on Discrete changes.
             if (fetchInfo.ChangeType == ChangeType.Continuous) return;
-
+            
             _fetchInfo = fetchInfo;
+            Logger.Log(LogLevel.Debug, @$"Refresh Data: Resolution: { fetchInfo.Resolution } Change Type: {fetchInfo.ChangeType} Extent: {fetchInfo.Extent} ");
 
             Busy = true;
             if (_isFetching)
