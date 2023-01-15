@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Mapsui.Extensions;
+using Mapsui.Logging;
 using Mapsui.Utilities;
 using Mapsui.ViewportAnimations;
 
@@ -70,6 +71,7 @@ namespace Mapsui
             get => _centerX;
             set
             {
+                if (_centerX == value) return;
                 _centerX = value;
                 UpdateExtent();
                 OnViewportChanged();
@@ -82,6 +84,7 @@ namespace Mapsui
             get => _centerY;
             set
             {
+                if (_centerY == value) return;
                 _centerY = value;
                 UpdateExtent();
                 OnViewportChanged();
@@ -95,6 +98,7 @@ namespace Mapsui
             get => _resolution;
             set
             {
+                if (_resolution == value) return;
                 _resolution = value;
                 UpdateExtent();
                 OnViewportChanged();
@@ -107,6 +111,7 @@ namespace Mapsui
             get => _width;
             set
             {
+                if (_width == value) return;
                 _width = value;
                 UpdateExtent();
                 OnViewportChanged();
@@ -119,6 +124,7 @@ namespace Mapsui
             get => _height;
             set
             {
+                if (_height == value) return;
                 _height = value;
                 UpdateExtent();
                 OnViewportChanged();
@@ -131,6 +137,7 @@ namespace Mapsui
             get => _rotation;
             set
             {
+                if (_rotation == value) return;
                 // normalize the value to be [0, 360)
                 _rotation = value % 360.0;
                 if (_rotation < 0)
@@ -314,6 +321,8 @@ namespace Mapsui
                 _extent.Max.X = rotatedBoundingBox.MaxX;
                 _extent.Max.Y = rotatedBoundingBox.MaxY;
             }
+            
+            Logger.Log(LogLevel.Debug, $@"Viewport Extent Updated: {_extent}");
         }
 
         public void SetSize(double width, double height)
