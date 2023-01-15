@@ -321,8 +321,6 @@ namespace Mapsui
                 _extent.Max.X = rotatedBoundingBox.MaxX;
                 _extent.Max.Y = rotatedBoundingBox.MaxY;
             }
-            
-            Logger.Log(LogLevel.Debug, $@"Viewport Extent Updated: {_extent}");
         }
 
         public void SetSize(double width, double height)
@@ -428,19 +426,24 @@ namespace Mapsui
         /// <param name="propertyName">Name of property that changed</param>
         private void OnViewportChanged([CallerMemberName] string? propertyName = null)
         {
+            Logger.Log(LogLevel.Debug, $@"Viewport Extent Changed: {_extent}");
             ViewportChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public static Viewport Create(MRect extent, double resolution)
         {
-            return new Viewport
+            // set fields directly or else an update is triggered.
+            var result = new Viewport
             {
-                Resolution = resolution,
+                _resolution = resolution,
                 _centerX = extent.Centroid.X,
                 _centerY = extent.Centroid.Y,
-                Width = extent.Width / resolution,
-                Height = extent.Height / resolution
+                _width = extent.Width / resolution,
+                _height = extent.Height / resolution
             };
+            result.UpdateExtent();
+            
+            return result;
         }
 
         public bool UpdateAnimations()
