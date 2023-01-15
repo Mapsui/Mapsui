@@ -112,6 +112,7 @@ namespace Mapsui.Layers
             set
             {
                 if (_name == value) return;
+                _name = value;
                 OnPropertyChanged(nameof(Name));
             }
         }
