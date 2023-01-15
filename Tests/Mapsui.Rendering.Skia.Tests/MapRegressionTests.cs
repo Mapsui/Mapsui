@@ -75,7 +75,13 @@ public class MapRegressionTests
 
     private void ConsoleLog(LogLevel arg1, string arg2, Exception? arg3)
     {
-        Console.WriteLine($@"LogLevel {arg1} Message {arg2}");
+        var message = $@"LogLevel: {arg1} Message: {arg2}";
+        if (arg3 != null)
+        {
+            message += $@" Exception: {arg3}";
+        }
+        
+        Console.WriteLine(message);
     }
 
     public async Task TestSampleAsync(ISampleBase sample, bool compareImages)
