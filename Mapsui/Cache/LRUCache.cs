@@ -32,7 +32,9 @@ public class LruCache<TKey, TValue>
                  // dispose disposable values
                 if (node.Value is IDisposable disposable)
                 {
+#pragma warning disable IDISP007 // Don't dispose injected                    
                     disposable.Dispose();
+#pragma warning restore IDISP007                    
                 }
             }
 
@@ -50,7 +52,9 @@ public class LruCache<TKey, TValue>
                  // dispose disposable values
                 if (old.Value is IDisposable disposable)
                 {
+#pragma warning disable IDISP007 // Don't dispose injected                    
                     disposable.Dispose();
+#pragma warning restore IDISP007
                 }            
             }
 

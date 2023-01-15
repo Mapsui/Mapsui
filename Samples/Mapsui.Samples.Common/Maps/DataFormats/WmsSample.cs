@@ -3,10 +3,11 @@ using Mapsui.Layers;
 using Mapsui.Providers.Wms;
 using System.Threading.Tasks;
 using Mapsui.Styles;
+using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps.DataFormats;
 
-public class WmsSample : ISample
+public class WmsSample : ISample, ISampleTest
 {
     public string Name => " 6 WMS";
     public string Category => "Data Formats";
@@ -41,5 +42,22 @@ public class WmsSample : ISample
         provider.AddLayer("windsnelheden100m");
         provider.SetImageFormat(provider.OutputFormats[0]);
         return provider;
+    }
+
+    public Task InitializeTestAsync(IMapControl mapControl)
+    {
+        var extent = mapControl.Map?.Extent;
+        if (extent != null)
+        {
+            if (mapControl.Viewport is IViewport viewport)
+            {
+                // Set Extend from Map
+                var resolution = mapControl.Viewport.Resolution;
+                viewport.SetCenter(extent.Centroid.X / resolution, extent.Centroid.Y / resolution);
+                viewport.SetSize(extent.Width / resolution, extent.Width / resolution * (600.0 / 800.0)); // keep aspect ratio
+            }
+        }
+
+        return Task.CompletedTask;
     }
 }

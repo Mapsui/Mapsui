@@ -42,6 +42,7 @@ namespace Mapsui.Layers
         private readonly Timer _startFetchTimer;
         private IProvider? _dataSource;
         private readonly int _numberOfFeaturesReturned;
+        private bool _busyExtent;
 
         /// <summary>
         /// Delay before fetching a new wms image from the server
@@ -54,9 +55,16 @@ namespace Mapsui.Layers
             get => _dataSource;
             set
             {
+                if (_dataSource == value) return;
                 _dataSource = value;
                 OnPropertyChanged(nameof(DataSource));
             }
+        }
+
+        public override bool Busy
+        {
+            get => base.Busy || _busyExtent;
+            set => base.Busy = value;
         }
 
         public ImageLayer(string layerName)
@@ -71,10 +79,18 @@ namespace Mapsui.Layers
         {
             if (e.PropertyName == nameof(DataSource))
             {
+                _busyExtent = true;
                 Catch.TaskRun(() => {
-                    // Run in background because it could take time because
-                    // this could involve database access or a web request
-                    Extent = DataSource?.GetExtent();
+                    try 
+                    {
+                        // Run in background because it could take time because
+                        // this could involve database access or a web request
+                        Extent = DataSource?.GetExtent();
+                    }
+                    finally
+                    {
+                        _busyExtent = false;
+                    }
                 });
             }
         }

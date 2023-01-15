@@ -18,18 +18,17 @@ namespace Mapsui.Extensions
 
         public static async Task<byte[]> UrlCachedArrayAsync(this IUrlPersistentCache? persistentCache, string url, Func<string, Task<Stream>>? loadUrl = null)
         {
-            
             var bytes = persistentCache?.Find(url);
             if (bytes == null)
             {
                 Logger.Log(LogLevel.Debug, $@"Load Url {url}");
-                Stream response = null;
+                Stream? response = null;
                 try
                 {
+#pragma warning disable IDISP001 // Dispose created                    
                     if (loadUrl != null)
                     {
                         response = await loadUrl(url);
-
                     }
                     else
                     {
@@ -37,12 +36,20 @@ namespace Mapsui.Extensions
                         using var httpClient = new HttpClient(handler);
                         response = await httpClient.GetStreamAsync(url);
                     }
+#pragma warning restore IDISP001
 
                     bytes = response.ToBytes();
                 }
                 finally
                 {
-                    response?.Dispose();
+                    if (response != null)
+                    {
+#if NETSTANDARD2_0
+                        response.Dispose();
+#else                        
+                        await response.DisposeAsync();
+#endif    
+                    }
                 }
                 
                 Logger.Log(LogLevel.Debug, $@"Caching Url {url}");

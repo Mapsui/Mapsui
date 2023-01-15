@@ -157,12 +157,14 @@ public class MapRegressionTests
         }
 
         await sample.SetupAsync(mapControl);
+        await mapControl.WaitForLoadingAsync();
 
         if (sample is ISampleTest sampleTest)
         {
-            await sampleTest.InitializeTestAsync().ConfigureAwait(true);
+            await sampleTest.InitializeTestAsync(mapControl).ConfigureAwait(true);
         }
 
+        await mapControl.WaitForLoadingAsync();
         var fetchInfo = new FetchInfo(mapControl.Viewport.Extent!, mapControl.Viewport.Resolution, mapControl.Map?.CRS);
         mapControl.Map?.RefreshData(fetchInfo);
 

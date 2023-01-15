@@ -22,7 +22,9 @@ namespace Mapsui.Tiling.Layers
             IPersistentCache<byte[]>? persistentCache = null)
         {
             var urlPersitentCache = persistentCache as IUrlPersistentCache;
+#pragma warning disable IDISP001 // Dispose created
             var stream = await urlPersitentCache.UrlCachedStreamAsync(urlToTileMapXml);
+#pragma warning restore IDISP001
 
             var tileSource = overrideTmsUrlWithUrlToTileMapXml
                 ? TileMapParser.CreateTileSource(stream, urlToTileMapXml, persistentCache: persistentCache)
