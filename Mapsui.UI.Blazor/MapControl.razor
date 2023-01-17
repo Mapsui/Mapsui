@@ -4,7 +4,7 @@
 <div @onmouseup=@OnMouseUp @onmousedown=@OnMouseDown 
     @onmousewheel=@OnMouseWheel @onmousemove=@OnMouseMove 
     @onkeydown=@OnKeyDown @onkeyup=@OnKeyUp
-     name="@elementId" id="@elementId">
+     name="@_elementId" id="@_elementId">
     @if (MapControlBase.UseGPU)
     {
         <SkiaSharp.Views.Blazor.SKGLView
@@ -39,7 +39,8 @@
     public int ZoomButton { get; set; } = MouseButtons.Primary;
     public int ZoomModifier { get; set; } = Keys.Control;
     public MouseWheelAnimation MouseWheelAnimation { get; } = new();   
-    string elementId = Guid.NewGuid().ToString("N");
+    private string _elementId = Guid.NewGuid().ToString("N");
+    private MapsuiJsInterop? _interop;
 
     // Alternative: protected override void OnInitialized()    
     public MapControl()
@@ -47,11 +48,6 @@
         CommonInitialize();
         ControlInitialize();
     }
-
-    public async Task<BoundingClientRect> BoundingClientRect()
-    {
-        return await JsRuntime.InvokeAsync<BoundingClientRect>("MapsuiGetBoundingClientRect", new object?[] { elementId });
-    }  
 
     public override async void OpenBrowser(string url)
     {
@@ -139,6 +135,13 @@
         resolution = Map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, Map.Resolutions, Map.Extent);
         Navigator?.ZoomTo(resolution, e.Location(await BoundingClientRect()).ToMapsui(), MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);               
     }
+
+    private async Task<BoundingClientRect> BoundingClientRect()
+    {
+        return await Interop.BoundingClientRect(_elementId);
+    }
+
+    private MapsuiJsInterop Interop => _interop ??= new MapsuiJsInterop(JsRuntime);
 
     private void OnSizeChanged()
     {

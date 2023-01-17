@@ -1,6 +1,7 @@
+using Mapsui.UI.Blazor.Extensions;
 using Microsoft.JSInterop;
 
-namespace BlazorComponentLibrary;
+namespace Mapsui.UI.Blazor;
 
 // This class provides an example of how JavaScript functionality can be wrapped
 // in a .NET class for easy consumption. The associated JavaScript module is
@@ -9,27 +10,27 @@ namespace BlazorComponentLibrary;
 // This class can be registered as scoped DI service and then injected into Blazor
 // components for use.
 
-public class ExampleJsInterop : IAsyncDisposable
+public class MapsuiJsInterop : IAsyncDisposable
 {
-    private readonly Lazy<Task<IJSObjectReference>> moduleTask;
+    private readonly Lazy<Task<IJSObjectReference>> _moduleTask;
 
-    public ExampleJsInterop(IJSRuntime jsRuntime)
+    public MapsuiJsInterop(IJSRuntime jsRuntime)
     {
-        moduleTask = new (() => jsRuntime.InvokeAsync<IJSObjectReference>(
-            "import", "./_content/BlazorComponentLibrary/exampleJsInterop.js").AsTask());
+        _moduleTask = new (() => jsRuntime.InvokeAsync<IJSObjectReference>(
+            "import", "./_content/Mapsui.UI.Blazor/mapsuiJsInterop.js").AsTask());
     }
 
-    public async ValueTask<string> Prompt(string message)
+    public async Task<BoundingClientRect> BoundingClientRect(string elementId)
     {
-        var module = await moduleTask.Value;
-        return await module.InvokeAsync<string>("showPrompt", message);
-    }
+        var module = await _moduleTask.Value;
+        return await module.InvokeAsync<BoundingClientRect>("GetBoundingClientRect", elementId);
+    }  
 
     public async ValueTask DisposeAsync()
     {
-        if (moduleTask.IsValueCreated)
+        if (_moduleTask.IsValueCreated)
         {
-            var module = await moduleTask.Value;
+            var module = await _moduleTask.Value;
             await module.DisposeAsync();
         }
     }
