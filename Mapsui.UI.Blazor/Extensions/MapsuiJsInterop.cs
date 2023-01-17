@@ -1,3 +1,4 @@
+using DotNext.Threading;
 using Microsoft.JSInterop;
 
 namespace Mapsui.UI.Blazor.Extensions;
@@ -9,11 +10,9 @@ namespace Mapsui.UI.Blazor.Extensions;
 // This class can be registered as scoped DI service and then injected into Blazor
 // components for use.
 
-#pragma warning disable VSTHRD011 // Lazy<Task<T>.Value can deadlock use AsyncLazy<T> instead.
-
 public class MapsuiJsInterop : IAsyncDisposable
 {
-    private readonly Lazy<Task<IJSObjectReference>> _moduleTask;
+    private readonly AsyncLazy<IJSObjectReference> _moduleTask;
 
     public MapsuiJsInterop(IJSRuntime jsRuntime)
     {
@@ -23,7 +22,7 @@ public class MapsuiJsInterop : IAsyncDisposable
 
     public async Task<BoundingClientRect> BoundingClientRectAsync(string elementId)
     {
-        var module = await _moduleTask.Value;
+        var module = await _moduleTask;
         return await module.InvokeAsync<BoundingClientRect>("getBoundingClientRect", elementId);
     }
 
@@ -31,7 +30,7 @@ public class MapsuiJsInterop : IAsyncDisposable
     {
         if (_moduleTask.IsValueCreated)
         {
-            var module = await _moduleTask.Value;
+            var module = await _moduleTask;
             await module.DisposeAsync();
         }
     }
