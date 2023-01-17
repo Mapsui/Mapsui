@@ -23,7 +23,7 @@ public class MapsuiJsInterop : IAsyncDisposable
     public async Task<BoundingClientRect> BoundingClientRect(string elementId)
     {
         var module = await _moduleTask.Value;
-        return await module.InvokeAsync<BoundingClientRect>("GetBoundingClientRect", elementId);
+        return await module.InvokeAsync<BoundingClientRect>("getBoundingClientRect", elementId);
     }  
 
     public async ValueTask DisposeAsync()
