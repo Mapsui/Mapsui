@@ -16,9 +16,9 @@ namespace Mapsui.UI.Blazor.Extensions
             return point;
         }
 
-        public static MPoint Location(this MouseEventArgs e)
+        public static MPoint Location(this MouseEventArgs e, BoundingClientRect clientRect)
         {
-            return new MPoint(e.PageX, e.PageY);
+            return new MPoint(e.ClientX - clientRect.Left, e.ClientY - clientRect.Top);
         }
 
         public static MPoint Min(MPoint x, MPoint y)
