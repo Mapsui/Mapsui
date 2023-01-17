@@ -132,12 +132,12 @@
 
         // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
         resolution = Map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, Map.Resolutions, Map.Extent);
-        Navigator?.ZoomTo(resolution, e.Location(await BoundingClientRect()).ToMapsui(), MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);               
+        Navigator?.ZoomTo(resolution, e.Location(await BoundingClientRectAsync()).ToMapsui(), MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);               
     }
 
-    private async Task<BoundingClientRect> BoundingClientRect()
+    private async Task<BoundingClientRect> BoundingClientRectAsync()
     {
-        return await Interop.BoundingClientRect(_elementId);
+        return await Interop.BoundingClientRectAsync(_elementId);
     }
 
     private MapsuiJsInterop Interop => _interop ??= new MapsuiJsInterop(JsRuntime);
@@ -164,7 +164,7 @@
 
         if (moveMode || IsInBoxZoomMode)
         {
-            var rect = await BoundingClientRect();
+            var rect = await BoundingClientRectAsync();
             _downMousePosition = e.Location(rect);
         }
     }
@@ -207,8 +207,8 @@
         }
         else if (_downMousePosition != null)
         {
-            if (IsClick(e.Location(await BoundingClientRect()), _downMousePosition))
-                OnInfo(InvokeInfo(e.Location(await BoundingClientRect()).ToMapsui(), _downMousePosition.ToMapsui(), 1));
+            if (IsClick(e.Location(await BoundingClientRectAsync()), _downMousePosition))
+                OnInfo(InvokeInfo(e.Location(await BoundingClientRectAsync()).ToMapsui(), _downMousePosition.ToMapsui(), 1));
         }
 
         _downMousePosition = null;
@@ -229,7 +229,7 @@
         {
             if (IsInBoxZoomMode)
             {
-                var x = e.Location(await BoundingClientRect());
+                var x = e.Location(await BoundingClientRectAsync());
                 var y = _downMousePosition;
                 _selectRectangle = new MRect(Math.Min(x.X, y.X), Math.Min(x.Y, y.Y), Math.Max(x.X, y.X), Math.Max(x.Y, y.Y));                                
                 if (_invalidate != null)
@@ -239,11 +239,11 @@
             {
                 Cursor = MoveCursor;
 
-                _viewport.Transform(e.Location(await BoundingClientRect()).ToMapsui(), _downMousePosition.ToMapsui());
+                _viewport.Transform(e.Location(await BoundingClientRectAsync()).ToMapsui(), _downMousePosition.ToMapsui());
 
                 RefreshGraphics();
 
-                _downMousePosition = e.Location(await BoundingClientRect());
+                _downMousePosition = e.Location(await BoundingClientRectAsync());
             }
         }
     }
