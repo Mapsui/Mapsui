@@ -21,7 +21,6 @@
     <PackageReference Include="SkiaSharp.Views.Blazor" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" />
-    <PackageReference Include="DotNext.Threading" />
   </ItemGroup>
 
   <ItemGroup>
