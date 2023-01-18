@@ -36,8 +36,8 @@ namespace Mapsui.Fetcher
         {
             using (await _providerLock.LockAsync())
             {
-                var features = _provider.GetFeaturesAsync(_fetchInfo);
-                _dataArrived.Invoke(await features, _timeOfRequest);
+                var features = await _provider.GetFeaturesAsync(_fetchInfo);
+                _dataArrived.Invoke(features, _timeOfRequest);
             }
         }
     }
