@@ -12,10 +12,10 @@ permissions:
 
 jobs:
   build-and-deploy:
-  concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
-  runs-on: windows-latest
-  steps:
-    - name: Checkout 🛎️
+    concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
+    runs-on: windows-latest
+    steps:
+    - name: Checkout
       uses: actions/checkout@v3
       with:
         fetch-depth: 0
