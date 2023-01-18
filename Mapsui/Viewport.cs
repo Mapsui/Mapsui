@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Mapsui.Extensions;
+using Mapsui.Logging;
 using Mapsui.Utilities;
 using Mapsui.ViewportAnimations;
 
@@ -70,6 +71,7 @@ namespace Mapsui
             get => _centerX;
             set
             {
+                if (_centerX == value) return;
                 _centerX = value;
                 UpdateExtent();
                 OnViewportChanged();
@@ -82,6 +84,7 @@ namespace Mapsui
             get => _centerY;
             set
             {
+                if (_centerY == value) return;
                 _centerY = value;
                 UpdateExtent();
                 OnViewportChanged();
@@ -95,6 +98,7 @@ namespace Mapsui
             get => _resolution;
             set
             {
+                if (_resolution == value) return;
                 _resolution = value;
                 UpdateExtent();
                 OnViewportChanged();
@@ -107,6 +111,7 @@ namespace Mapsui
             get => _width;
             set
             {
+                if (_width == value) return;
                 _width = value;
                 UpdateExtent();
                 OnViewportChanged();
@@ -119,6 +124,7 @@ namespace Mapsui
             get => _height;
             set
             {
+                if (_height == value) return;
                 _height = value;
                 UpdateExtent();
                 OnViewportChanged();
@@ -131,6 +137,7 @@ namespace Mapsui
             get => _rotation;
             set
             {
+                if (_rotation == value) return;
                 // normalize the value to be [0, 360)
                 _rotation = value % 360.0;
                 if (_rotation < 0)
@@ -319,6 +326,9 @@ namespace Mapsui
         public void SetSize(double width, double height)
         {
             _animations = new();
+            
+            if (width == _width && height == _height)
+                return;
 
             _width = width;
             _height = height;
@@ -330,6 +340,9 @@ namespace Mapsui
         public void SetCenter(double x, double y, long duration = 0, Easing? easing = default)
         {
             _animations = new();
+            
+            if (x == _centerX && y == _centerY)
+                return;
 
             _centerX = x;
             _centerY = y;
@@ -341,6 +354,9 @@ namespace Mapsui
         public void SetCenterAndResolution(double x, double y, double resolution, long duration = 0, Easing? easing = default)
         {
             _animations = new();
+            
+            if (x == _centerX && y == _centerY && resolution == _resolution)
+                return;
 
             if (duration == 0)
             {
@@ -419,19 +435,24 @@ namespace Mapsui
         /// <param name="propertyName">Name of property that changed</param>
         private void OnViewportChanged([CallerMemberName] string? propertyName = null)
         {
+            Logger.Log(LogLevel.Debug, $@"Viewport Extent Changed: {_extent}");
             ViewportChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public static Viewport Create(MRect extent, double resolution)
         {
-            return new Viewport
+            // set fields directly or else an update is triggered.
+            var result = new Viewport
             {
-                Resolution = resolution,
+                _resolution = resolution,
                 _centerX = extent.Centroid.X,
                 _centerY = extent.Centroid.Y,
-                Width = extent.Width / resolution,
-                Height = extent.Height / resolution
+                _width = extent.Width / resolution,
+                _height = extent.Height / resolution
             };
+            result.UpdateExtent();
+            
+            return result;
         }
 
         public bool UpdateAnimations()

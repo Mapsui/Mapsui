@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using Mapsui.Fetcher;
+using Mapsui.Logging;
 using Mapsui.Styles;
 using Mapsui.Widgets;
 
@@ -62,6 +63,7 @@ namespace Mapsui.Layers
             get => _tag;
             set
             {
+                if (_tag == value) return;
                 _tag = value;
                 OnPropertyChanged(nameof(Tag));
             }
@@ -73,6 +75,7 @@ namespace Mapsui.Layers
             get => _minVisible;
             set
             {
+                if (_minVisible == value) return;
                 _minVisible = value;
                 OnPropertyChanged(nameof(MinVisible));
             }
@@ -84,6 +87,7 @@ namespace Mapsui.Layers
             get => _maxVisible;
             set
             {
+                if (_maxVisible == value) return;
                 _maxVisible = value;
                 OnPropertyChanged(nameof(MaxVisible));
             }
@@ -107,6 +111,7 @@ namespace Mapsui.Layers
             get => _name;
             set
             {
+                if (_name == value) return;
                 _name = value;
                 OnPropertyChanged(nameof(Name));
             }
@@ -118,13 +123,14 @@ namespace Mapsui.Layers
             get => _opacity;
             set
             {
+                if (_opacity == value) return;
                 _opacity = value;
                 OnPropertyChanged(nameof(Opacity));
             }
         }
 
         /// <inheritdoc />
-        public bool Busy
+        public virtual bool Busy
         {
             get => _busy;
             set
@@ -141,6 +147,7 @@ namespace Mapsui.Layers
             get => _style;
             set
             {
+                if (_style == value) return;
                 _style = value;
                 OnPropertyChanged(nameof(Style));
             }
@@ -154,8 +161,10 @@ namespace Mapsui.Layers
             get => _extent;
             protected set
             {
+                if (_extent == value) return;
                 _extent = value;
                 OnPropertyChanged(nameof(Extent));
+                Logger.Log(LogLevel.Debug, $@"Changed Extend on Layer {_name}: {_extent}");
             }
         }
 

@@ -129,7 +129,7 @@ public class SymbolAnimationSample : IMapControlSample, IPrepareSampleTest, ISam
         return result;
     }
 
-    public async Task InitializeTestAsync()
+    public async Task InitializeTestAsync(IMapControl mapControl)
     {
         if (_animationLayer == null)
             return;

@@ -8,6 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps.Special;
 
@@ -95,7 +96,7 @@ public sealed class MutatingTriangleSample : ISample, ISampleTest, IDisposable
         }
     }
 
-    public Task InitializeTestAsync()
+    public Task InitializeTestAsync(IMapControl mapControl)
     {
         _cancelationTokenSource?.Cancel();
         return Task.CompletedTask;

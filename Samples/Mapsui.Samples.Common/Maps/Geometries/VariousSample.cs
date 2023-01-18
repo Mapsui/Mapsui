@@ -7,7 +7,7 @@ using Mapsui.Tiling;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Mapsui.UI;
 
 namespace Mapsui.Samples.Common.Maps.Geometries;
 
@@ -61,7 +61,7 @@ public class VariousSample : ISample, ISampleTest
         return new SymbolStyle { BitmapId = bitmapId, SymbolScale = 0.75 };
     }
 
-    public async Task InitializeTestAsync()
+    public async Task InitializeTestAsync(IMapControl mapControl)
     {
         await Task.Delay(1000);
     }
