@@ -128,7 +128,7 @@ namespace Mapsui.ArcGIS.ImageServiceProvider
             var uri = new Uri(GetRequestUrl(viewport.Extent, width, height));
             try
             {
-                var handler = new HttpClientHandler();
+                using var handler = new HttpClientHandler();
                 try
                 {
                     // Blazor does not support this,

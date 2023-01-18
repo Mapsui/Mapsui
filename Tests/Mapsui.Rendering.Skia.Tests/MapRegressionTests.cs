@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Mapsui.Extensions;
 using Mapsui.Layers;
+using Mapsui.Logging;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
 using Mapsui.Samples.Common.Maps.Animations;
@@ -60,7 +61,27 @@ public class MapRegressionTests
     [TestCaseSource(nameof(RegressionSamples))]
     public async Task TestSampleAsync(ISampleBase sample)
     {
-        await TestSampleAsync(sample, true).ConfigureAwait(false);
+        var original = Logger.LogDelegate;
+        try
+        {
+            Logger.LogDelegate = ConsoleLog;
+            await TestSampleAsync(sample, true).ConfigureAwait(false);
+        }
+        finally
+        {
+            Logger.LogDelegate = original;
+        }
+    }
+
+    private void ConsoleLog(LogLevel arg1, string arg2, Exception? arg3)
+    {
+        var message = $@"LogLevel: {arg1} Message: {arg2}";
+        if (arg3 != null)
+        {
+            message += $@" Exception: {arg3}";
+        }
+        
+        Console.WriteLine(message);
     }
 
     public async Task TestSampleAsync(ISampleBase sample, bool compareImages)
@@ -136,12 +157,14 @@ public class MapRegressionTests
         }
 
         await sample.SetupAsync(mapControl);
+        await mapControl.WaitForLoadingAsync();
 
         if (sample is ISampleTest sampleTest)
         {
-            await sampleTest.InitializeTestAsync().ConfigureAwait(true);
+            await sampleTest.InitializeTestAsync(mapControl).ConfigureAwait(true);
         }
 
+        await mapControl.WaitForLoadingAsync();
         var fetchInfo = new FetchInfo(mapControl.Viewport.Extent!, mapControl.Viewport.Resolution, mapControl.Map?.CRS);
         mapControl.Map?.RefreshData(fetchInfo);
 

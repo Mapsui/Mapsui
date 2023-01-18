@@ -7,6 +7,7 @@ using NetTopologySuite.Geometries;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Mapsui.UI;
 
 #pragma warning disable CS8670 // Object or collection initializer implicitly dereferences possibly null member.
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
@@ -169,7 +170,7 @@ public class InfoLayersSample : ISample, ISampleTest
         };
     }
 
-    public async Task InitializeTestAsync()
+    public async Task InitializeTestAsync(IMapControl mapControl)
     {
         await Task.Delay(1000).ConfigureAwait(true);
     }

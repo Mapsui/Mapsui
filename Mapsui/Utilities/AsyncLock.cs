@@ -6,6 +6,17 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 
+// ignore following warnings
+#pragma warning disable VSTHRD101
+#pragma warning disable VSTHRD103
+#pragma warning disable VSTHRD105
+#pragma warning disable VSTHRD110
+#pragma warning disable IDISP001
+#pragma warning disable IDISP006
+#pragma warning disable IDISP007
+#pragma warning disable IDISP008
+#pragma warning disable IDISP017
+
 namespace Mapsui.Utilities
 {
     public class AsyncLock
