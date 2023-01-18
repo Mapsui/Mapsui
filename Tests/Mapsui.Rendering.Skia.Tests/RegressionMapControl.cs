@@ -88,7 +88,7 @@ public class RegressionMapControl : IMapControl
         throw new NotImplementedException();
     }
 
-    public byte[]? GetSnapshot(IEnumerable<ILayer>? layers = null)
+    public byte[] GetSnapshot(IEnumerable<ILayer>? layers = null)
     {
         throw new NotImplementedException();
     }

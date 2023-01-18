@@ -69,37 +69,11 @@ public class RasterizingTileProvider : ITileSource
         var result = PersistentCache.Find(index);
         if (result == null)
         {
-            MemoryStream? stream = null;
-
-            try 
-            {
-                var renderer = GetRenderer();
-                (Viewport viewPort, ILayer renderLayer) = await CreateRenderLayerAsync(tileInfo, renderer);
-                try
-                {
-#pragma warning disable IDISP001 // disposable created
-                    stream = renderer.RenderToBitmapStream(viewPort, new[] { renderLayer }, pixelDensity: _pixelDensity, renderFormat: _renderFormat);
-#pragma warning restore IDISP001                    
-                }
-                finally
-                {
-                    renderLayer.Dispose();
-                }
-                
-                _rasterizingLayers.Push(renderer);
-
-                result = stream?.ToArray();
-            }
-            finally
-            {
-#if NET6_0_OR_GREATER
-                if (stream != null)
-                    await stream.DisposeAsync();
-#else
-                stream?.Dispose();
-#endif
-            }
-
+            var renderer = GetRenderer();
+            (Viewport viewPort, ILayer renderLayer) = await CreateRenderLayerAsync(tileInfo, renderer);
+            using var stream = renderer.RenderToBitmapStream(viewPort, new[] { renderLayer }, pixelDensity: _pixelDensity, renderFormat: _renderFormat);                            
+            _rasterizingLayers.Push(renderer);
+            result = stream?.ToArray();
             PersistentCache?.Add(index, result ?? Array.Empty<byte>());
         }
 
