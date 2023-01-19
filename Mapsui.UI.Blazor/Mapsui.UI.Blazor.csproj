@@ -6,6 +6,11 @@
 	  <ImplicitUsings>enable</ImplicitUsings>
     <EnableNETAnalyzers>True</EnableNETAnalyzers>
     <DefineConstants>__BLAZOR__</DefineConstants>
+    <PackageId>Mapsui.Blazor</PackageId>
+    <Description>
+      Blazor map components based on the Mapsui library
+    </Description>
+    <PackageTags>$(PackageTags) blazor wasm razor</PackageTags>
   </PropertyGroup>
 
 	<ItemGroup>
@@ -16,6 +21,7 @@
     <PackageReference Include="SkiaSharp.Views.Blazor" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" />
+    <PackageReference Include="DotNext.Threading" />
   </ItemGroup>
 
   <ItemGroup>

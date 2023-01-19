@@ -11,14 +11,12 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Mapsui.Rendering.Skia.Cache;
 
 namespace Mapsui.Rendering.Skia
 {
     public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
     {
-        private readonly IDictionary<string, BitmapInfo> LabelCache =
-            new Dictionary<string, BitmapInfo>();
-
         private readonly SKPaint Paint = new()
         {
             IsAntialias = true,
@@ -27,19 +25,11 @@ namespace Mapsui.Rendering.Skia
             IsEmbeddedBitmapText = true
         };
 
-        private static readonly ConcurrentDictionary<string, SKTypeface> CacheTypeface = new();
-
-        public void DrawAsBitmap(SKCanvas canvas, LabelStyle style, IFeature feature, float x, float y, float layerOpacity)
+        public void DrawAsBitmap(SKCanvas canvas, LabelStyle style, IFeature feature, float x, float y, float layerOpacity, ILabelCache labelCache)
         {
             var text = style.GetLabelText(feature);
 
-            var key = text + "_" + style.Font.FontFamily + "_" + style.Font.Size + "_" + (float)style.Font.Size + "_" +
-                      style.BackColor + "_" + style.ForeColor;
-
-            if (!LabelCache.Keys.Contains(key))
-                LabelCache[key] = new BitmapInfo { Bitmap = CreateLabelAsBitmap(style, text, layerOpacity) };
-
-            var info = LabelCache[key];
+            var info = labelCache.GetOrCreateLabel(text, style, layerOpacity, CreateLabelAsBitmap);
             var offsetX = style.Offset.IsRelative ? info.Width * style.Offset.X : style.Offset.X;
             var offsetY = style.Offset.IsRelative ? info.Height * style.Offset.Y : style.Offset.Y;
 
@@ -47,9 +37,17 @@ namespace Mapsui.Rendering.Skia
                 offsetX: (float)offsetX, offsetY: (float)-offsetY,
                 horizontalAlignment: style.HorizontalAlignment, verticalAlignment: style.VerticalAlignment);
         }
+        
+        public static SKTypeface CreateTypeFace(Font font)
+        {
+            return SKTypeface.FromFamilyName(font.FontFamily,
+                font.Bold ? SKFontStyleWeight.Bold : SKFontStyleWeight.Normal,
+                SKFontStyleWidth.Normal,
+                font.Italic ? SKFontStyleSlant.Italic : SKFontStyleSlant.Upright);
+        }
 
 
-        public bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, IStyle style, ISymbolCache symbolCache, long iteration)
+        public bool Draw(SKCanvas canvas, IReadOnlyViewport viewport, ILayer layer, IFeature feature, IStyle style, IRenderCache renderCache, long iteration)
         {
             try
             {
@@ -63,20 +61,20 @@ namespace Mapsui.Rendering.Skia
                 {
                     case (PointFeature pointFeature):
                         var (pointX, pointY) = viewport.WorldToScreenXY(pointFeature.Point.X, pointFeature.Point.Y);
-                        DrawLabel(canvas, (float)pointX, (float)pointY, labelStyle, text, (float)layer.Opacity);
+                        DrawLabel(canvas, (float)pointX, (float)pointY, labelStyle, text, (float)layer.Opacity, renderCache);
                         break;
                     case (LineString lineStringFeature):
                         if (feature.Extent == null)
                             return false;
                         var (lineStringCenterX, lineStringCenterY) = viewport.WorldToScreenXY(feature.Extent.Centroid.X, feature.Extent.Centroid.Y);
-                        DrawLabel(canvas, (float)lineStringCenterX, (float)lineStringCenterY, labelStyle, text, (float)layer.Opacity);
+                        DrawLabel(canvas, (float)lineStringCenterX, (float)lineStringCenterY, labelStyle, text, (float)layer.Opacity, renderCache);
                         break;
                     case (GeometryFeature polygonFeature):
                         if (polygonFeature.Extent is null)
                             return false;
                         var worldCenter = polygonFeature.Extent.Centroid;
                         var (polygonCenterX, polygonCenterY) = viewport.WorldToScreenXY(worldCenter.X, worldCenter.Y);
-                        DrawLabel(canvas, (float)polygonCenterX, (float)polygonCenterY, labelStyle, text, (float)layer.Opacity);
+                        DrawLabel(canvas, (float)polygonCenterX, (float)polygonCenterY, labelStyle, text, (float)layer.Opacity, renderCache);
                         break;
                 }
             }
@@ -88,11 +86,15 @@ namespace Mapsui.Rendering.Skia
             return true;
         }
 
-        private SKImage CreateLabelAsBitmap(LabelStyle style, string? text, float layerOpacity)
+        private BitmapInfo CreateLabelAsBitmap(LabelStyle style, string? text, float layerOpacity, ILabelCache labelCache)
         {
-            UpdatePaint(style, layerOpacity, Paint);
+            UpdatePaint(style, layerOpacity, Paint, labelCache);
 
-            return CreateLabelAsBitmap(style, text, Paint, layerOpacity);
+            var bitmap = CreateLabelAsBitmap(style, text, Paint, layerOpacity);
+            return new BitmapInfo
+            {
+                Bitmap = bitmap,
+            };
         }
 
         private static SKImage CreateLabelAsBitmap(LabelStyle style, string? text, SKPaint paint, float layerOpacity)
@@ -115,9 +117,9 @@ namespace Mapsui.Rendering.Skia
             return bitmap;
         }
 
-        private void DrawLabel(SKCanvas target, float x, float y, LabelStyle style, string? text, float layerOpacity)
+        private void DrawLabel(SKCanvas target, float x, float y, LabelStyle style, string? text, float layerOpacity, ILabelCache labelCache)
         {
-            UpdatePaint(style, layerOpacity, Paint);
+            UpdatePaint(style, layerOpacity, Paint, labelCache);
 
             var rect = new SKRect();
 
@@ -232,7 +234,7 @@ namespace Mapsui.Rendering.Skia
             // If style has a halo value, than draw halo text
             if (style.Halo != null)
             {
-                UpdatePaint(style, layerOpacity, Paint);
+                UpdatePaint(style, layerOpacity, Paint, labelCache);
                 Paint.Style = SKPaintStyle.StrokeAndFill;
                 Paint.Color = style.Halo.Color.ToSkia(layerOpacity);
                 Paint.StrokeWidth = (float)style.Halo.Width * 2;
@@ -254,7 +256,7 @@ namespace Mapsui.Rendering.Skia
                     target.DrawText(text, drawRect.Left, drawRect.Top + baseline, Paint);
             }
 
-            UpdatePaint(style, layerOpacity, Paint);
+            UpdatePaint(style, layerOpacity, Paint, labelCache);
 
             if (lines != null)
             {
@@ -311,16 +313,9 @@ namespace Mapsui.Rendering.Skia
             }
         }
 
-        private static void UpdatePaint(LabelStyle style, float layerOpacity, SKPaint paint)
+        private static void UpdatePaint(LabelStyle style, float layerOpacity, SKPaint paint, ILabelCache labelCache)
         {
-            if (!CacheTypeface.TryGetValue(style.Font.ToString(), out var typeface))
-            {
-                typeface = SKTypeface.FromFamilyName(style.Font.FontFamily,
-                    style.Font.Bold ? SKFontStyleWeight.Bold : SKFontStyleWeight.Normal,
-                    SKFontStyleWidth.Normal,
-                    style.Font.Italic ? SKFontStyleSlant.Italic : SKFontStyleSlant.Upright);
-                CacheTypeface[style.Font.ToString()] = typeface;
-            }
+            var typeface = labelCache.GetOrCreateTypeface(style.Font, CreateTypeFace);
 
             paint.Style = SKPaintStyle.Fill;
             paint.TextSize = (float)style.Font.Size;
@@ -385,24 +380,24 @@ namespace Mapsui.Rendering.Skia
             }).ToArray();
         }
 
-        double IFeatureSize.FeatureSize(IFeature feature, IStyle style, ISymbolCache symbolCache)
+        double IFeatureSize.FeatureSize(IFeature feature, IStyle style, IRenderCache renderingCache)
         {
             if (style is LabelStyle labelStyle)
             {
-                return FeatureSize(feature, labelStyle, Paint);
+                return FeatureSize(feature, labelStyle, Paint, renderingCache);
             }
 
             return 0;
         }
 
-        public static double FeatureSize(IFeature feature, LabelStyle labelStyle, SKPaint paint)
+        public static double FeatureSize(IFeature feature, LabelStyle labelStyle, SKPaint paint, ILabelCache labelCache)
         {
             var text = labelStyle.GetLabelText(feature);
 
             if (string.IsNullOrEmpty(text))
                 return 0;
 
-            UpdatePaint(labelStyle, 1, paint);
+            UpdatePaint(labelStyle, 1, paint, labelCache);
 
             var rect = new SKRect();
             paint.MeasureText(text, ref rect);

@@ -16,6 +16,7 @@ using SkiaSharp;
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Toolchains.InProcess.Emit;
+using Mapsui.Rendering.Skia.Cache;
 using Mapsui.Utilities;
 
 #pragma warning disable IDISP001
@@ -23,10 +24,10 @@ using Mapsui.Utilities;
 
 namespace Mapsui.Rendering.Benchmarks
 {
-    [SimpleJob(RunStrategy.Throughput)]
+    [SimpleJob(RunStrategy.Throughput, targetCount: 1, warmupCount: 0, invocationCount: 333, launchCount: 1)]
     [MemoryDiagnoser]
     [MinColumn, MaxColumn, MeanColumn, MedianColumn]
-    public class RenderToCpuPerformance
+    public class RenderToCpuPerformance : IDisposable
     {
         private static readonly RegressionMapControl tilingSkpMap;
         private static readonly RegressionMapControl tilingPngMap;
@@ -36,6 +37,7 @@ namespace Mapsui.Rendering.Benchmarks
         private static readonly RegressionMapControl rasterizingSkpMap;
         private static readonly RegressionMapControl rasterizingTilingSkpMap;
         private static readonly MapRenderer mapRenderer;
+        private static readonly MapRenderer mapRendererWithoutCache;
         private readonly SKCanvas skCanvas;
         private readonly SKImageInfo imageInfo;
         private readonly SKSurface surface;
@@ -43,6 +45,8 @@ namespace Mapsui.Rendering.Benchmarks
         static RenderToCpuPerformance()
         {
             mapRenderer = new MapRenderer();
+            mapRendererWithoutCache = new MapRenderer();
+            mapRendererWithoutCache.RenderCache.VectorCache = new NonCachingVectorCache(mapRendererWithoutCache.RenderCache.SymbolCache);
             tilingSkpMap = CreateMapControl(RenderFormat.Skp);            
             tilingPngMap = CreateMapControl(RenderFormat.Png);
             tilingWebpMap = CreateMapControl(RenderFormat.WebP);
@@ -154,6 +158,13 @@ namespace Mapsui.Rendering.Benchmarks
         }
         
         [Benchmark]
+        public async Task RenderDefaultWithoutCacheAsync()
+        {
+            await map.WaitForLoadingAsync();
+            mapRendererWithoutCache.Render(skCanvas, map.Viewport, map.Map!.Layers, map.Map!.Widgets, Color.White);
+        }
+        
+        [Benchmark]
         public async Task RenderDefaultAsync()
         {
             await map.WaitForLoadingAsync();
@@ -166,14 +177,14 @@ namespace Mapsui.Rendering.Benchmarks
             await rasterizingPngMap.WaitForLoadingAsync();
             mapRenderer.Render(skCanvas, rasterizingPngMap.Viewport, rasterizingPngMap.Map!.Layers, rasterizingPngMap.Map!.Widgets, Color.White);
         }
-        
+
         [Benchmark]
         public async Task RenderRasterizingSkpAsync()
         {
             await rasterizingSkpMap.WaitForLoadingAsync();
             mapRenderer.Render(skCanvas, rasterizingSkpMap.Viewport, rasterizingSkpMap.Map!.Layers, rasterizingSkpMap.Map!.Widgets, Color.White);
         }
-        
+
         [Benchmark]
         public async Task RenderRasterizingTilingSkpAsync()
         {
@@ -200,6 +211,12 @@ namespace Mapsui.Rendering.Benchmarks
         {
             await tilingSkpMap.WaitForLoadingAsync();
             mapRenderer.Render(skCanvas, tilingSkpMap.Viewport, tilingSkpMap.Map!.Layers, tilingSkpMap.Map!.Widgets, Color.White);
+        }
+
+        public void Dispose()
+        {
+            skCanvas.Dispose();
+            surface.Dispose();
         }
     }
 }

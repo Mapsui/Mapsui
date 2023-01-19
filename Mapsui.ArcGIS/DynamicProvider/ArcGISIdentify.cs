@@ -68,7 +68,16 @@ namespace Mapsui.ArcGIS.DynamicProvider
                 var requestUrl =
                     $"{url}/identify?f=pjson&geometryType=esriGeometryPoint&geometry={pointGeom}&tolerance={tolerance}{layersString}&mapExtent={mapExtend}&imageDisplay={imageDisplay}&returnGeometry={returnGeometry}{(sr != int.MinValue ? $"&sr={sr}" : "")}";
 
-                var handler = new HttpClientHandler { Credentials = credentials ?? CredentialCache.DefaultCredentials };
+                var handler = new HttpClientHandler();
+                try
+                {
+                    // Blazor does not support this,
+                    handler.Credentials = credentials ?? CredentialCache.DefaultCredentials;
+                }
+                catch (PlatformNotSupportedException e)
+                {
+                    Logger.Log(LogLevel.Error, e.Message, e);
+                };
                 using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(TimeOut) };
                 using var response = await client.GetAsync(requestUrl);
 

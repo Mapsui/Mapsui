@@ -203,8 +203,11 @@ namespace Mapsui.Layers
             if (_layer is IAsyncDataFetcher asyncLayer) asyncLayer.ClearCache();
         }
 
-        public static Viewport CreateViewport(MRect extent, double resolution, double renderResolutionMultiplier,
-            double overscan)
+        public static Viewport CreateViewport(
+            MRect extent, 
+            double resolution, 
+            double renderResolutionMultiplier = 1,
+            double overscan = 1)
         {
             var renderResolution = resolution / renderResolutionMultiplier;
             return new Viewport

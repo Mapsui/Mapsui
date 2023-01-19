@@ -311,24 +311,14 @@ namespace Mapsui.Providers.Wms
 
             try
             {
-                var bytes = _persistentCache?.Find(url);
-                if (bytes == null)
-                {
-                    if (_getStreamAsync == null)
-                    {
-                        return (false, null);
-                    }
-
-                    using var result = await _getStreamAsync(url);
-                    // PDD: This could be more efficient
-                    bytes = StreamHelper.ReadFully(result);
-                    _persistentCache?.Add(url, bytes);
-                }
+                var bytes = await _persistentCache.UrlCachedArrayAsync(url, _getStreamAsync);
 
                 if (viewport.Extent == null)
                 {
+                    Logger.Log(LogLevel.Warning, "Viewport Extent was null");
                     return (false, null);
                 }
+
                 var raster = new MRaster(bytes, viewport.Extent);	// This can throw exception
                 return (true, raster);
             }

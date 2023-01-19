@@ -15,7 +15,7 @@ csharp_indent_labels = one_less_than_current
 csharp_using_directive_placement = outside_namespace:silent
 csharp_prefer_simple_using_statement = true:suggestion
 csharp_prefer_braces = true:silent
-csharp_style_namespace_declarations = block_scoped:silent
+csharp_style_namespace_declarations = file_scoped:warning
 csharp_style_prefer_method_group_conversion = true:silent
 csharp_style_prefer_top_level_statements = true:silent
 csharp_style_expression_bodied_methods = false:silent
@@ -54,6 +54,8 @@ csharp_new_line_before_else = true
 csharp_new_line_before_members_in_object_initializers = false
 #require braces to be on a new line for control_blocks, methods, properties, object_collection_array_initializers, accessors, and types (also known as "Allman" style)
 csharp_new_line_before_open_brace = control_blocks, methods, properties, object_collection_array_initializers, accessors, types
+#end all files with a newline
+insert_final_newline = true
 
 #Formatting - organize using options
 
@@ -193,7 +195,7 @@ dotnet_naming_rule.non_field_members_should_be_pascal_case.style = pascal_case
 
 # Naming rules only to add the _ prefix to private fields
 dotnet_naming_rule.private_members_with_underscore.symbols  = private_fields
-dotnet_naming_rule.private_members_with_underscore.style    = prefix_underscore
+dotnet_naming_rule.private_members_with_underscore.style = prefix_underscore
 dotnet_naming_rule.private_members_with_underscore.severity = suggestion
 dotnet_naming_symbols.private_fields.applicable_kinds           = field
 dotnet_naming_symbols.private_fields.applicable_accessibilities = private
@@ -239,3 +241,8 @@ dotnet_style_null_propagation = true:suggestion
 dotnet_style_prefer_is_null_check_over_reference_equality_method = true:suggestion
 dotnet_style_prefer_auto_properties = true:silent
 dotnet_style_object_initializer = true:suggestion
+dotnet_style_namespace_match_folder = true:suggestion
+dotnet_style_explicit_tuple_names = true:suggestion
+dotnet_style_prefer_inferred_tuple_names = true:suggestion
+dotnet_style_prefer_inferred_anonymous_type_member_names = true:suggestion
+insert_final_newline = true

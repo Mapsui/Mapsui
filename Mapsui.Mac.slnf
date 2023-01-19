@@ -15,7 +15,6 @@
       "Mapsui.UI.Shared\\Mapsui.UI.Shared.shproj",
       "Mapsui.UI.iOS\\Mapsui.UI.iOS.csproj",
       "Mapsui\\Mapsui.csproj",
-      "Samples\\Mapsui.Samples.Common.Desktop\\Mapsui.Samples.Common.Desktop.csproj",
       "Samples\\Mapsui.Samples.Common\\Mapsui.Samples.Common.csproj",
       "Samples\\Mapsui.Samples.CustomWidget\\Mapsui.Samples.CustomWidget.csproj",
       "Samples\\Mapsui.Samples.Droid\\Mapsui.Samples.Droid.csproj",

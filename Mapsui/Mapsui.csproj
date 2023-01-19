@@ -6,6 +6,7 @@
     <Configurations>Release;Debug</Configurations>
     <!--Revert TreatWarningsAsErrors to false because of vague build error on server -->
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <Description>Mapsui - Library for mapping</Description>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,8 +14,6 @@
   </ItemGroup>
 	 
   <ItemGroup>
-    <PackageReference Include="NeoSmart.AsyncLock" />
-    <PackageReference Include="System.Linq.Async" />
   </ItemGroup>
   
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">

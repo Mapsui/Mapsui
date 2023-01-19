@@ -12,7 +12,6 @@ namespace Mapsui.Samples.Eto
     using Mapsui.Logging;
     using Mapsui.Extensions;
     using Mapsui.Samples.Common;
-    using Mapsui.Samples.Common.Desktop;
 
     using global::Eto.Forms;
     using global::Eto.Drawing;
@@ -22,7 +21,6 @@ namespace Mapsui.Samples.Eto
         static MainForm()
         {
             // todo: find proper way to load assembly
-            DesktopSamplesUtilities.LoadAssembly();
             Mapsui.Tests.Common.Utilities.LoadAssembly();       
         }
 
@@ -112,7 +110,6 @@ namespace Mapsui.Samples.Eto
         private void FillComboBoxWithCategories()
         {
             // todo: find proper way to load assembly
-            DesktopSamplesUtilities.LoadAssembly();
             Tests.Common.Utilities.LoadAssembly();
 
             var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c);

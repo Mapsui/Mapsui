@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using Mapsui.UI;
 
 namespace Mapsui.Samples.Common;
 

@@ -15,11 +15,12 @@ using Mapsui.Extensions;
 using Mapsui.Logging;
 using Mapsui.Samples.Common;
 using Mapsui.Samples.Common.Extensions;
-using Mapsui.Samples.Common.Helpers;
 using Mapsui.Samples.Common.Maps;
 using Mapsui.Samples.CustomWidget;
 using Mapsui.UI;
 using Mapsui.UI.Android;
+using Mapsui.Samples.Common.Maps.DataFormats;
+
 namespace Mapsui.Samples.Droid
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
@@ -28,7 +29,6 @@ namespace Mapsui.Samples.Droid
         static MainActivity()
         {
             // todo: find proper way to load assembly
-            Mapsui.Samples.Common.Desktop.DesktopSamplesUtilities.LoadAssembly();
             Mapsui.Tests.Common.Utilities.LoadAssembly();       
         }
         

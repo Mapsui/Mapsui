@@ -100,18 +100,18 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Tiling_Layers_TmsTileSourceBuilder_Build_System_String_System_Boolean_System_Nullable_IPersistentCache_System_Byte_____.md&amp;value=---%0Auid%3A%20Mapsui.Tiling.Layers.TmsTileSourceBuilder.Build(System.String%2CSystem.Boolean%2CSystem.Nullable%7BIPersistentCache%7BSystem.Byte%5B%5D%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/Mapsui/Mapsui/new/master/apiSpec/new?filename=Mapsui_Tiling_Layers_TmsTileSourceBuilder_BuildAsync_System_String_System_Boolean_System_Nullable_IPersistentCache_System_Byte_____.md&amp;value=---%0Auid%3A%20Mapsui.Tiling.Layers.TmsTileSourceBuilder.BuildAsync(System.String%2CSystem.Boolean%2CSystem.Nullable%7BIPersistentCache%7BSystem.Byte%5B%5D%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/Mapsui/Mapsui/blob/master/Mapsui.Tiling/Layers/TmsTileSourceBuilder.cs/#L20">View Source</a>
   </span>
-  <a id="Mapsui_Tiling_Layers_TmsTileSourceBuilder_Build_" data-uid="Mapsui.Tiling.Layers.TmsTileSourceBuilder.Build*"></a>
-  <h4 id="Mapsui_Tiling_Layers_TmsTileSourceBuilder_Build_System_String_System_Boolean_System_Nullable_IPersistentCache_System_Byte_____" data-uid="Mapsui.Tiling.Layers.TmsTileSourceBuilder.Build(System.String,System.Boolean,System.Nullable{IPersistentCache{System.Byte[]}})">Build(String, Boolean, Nullable&lt;IPersistentCache&lt;Byte[]&gt;&gt;)</h4>
+  <a id="Mapsui_Tiling_Layers_TmsTileSourceBuilder_BuildAsync_" data-uid="Mapsui.Tiling.Layers.TmsTileSourceBuilder.BuildAsync*"></a>
+  <h4 id="Mapsui_Tiling_Layers_TmsTileSourceBuilder_BuildAsync_System_String_System_Boolean_System_Nullable_IPersistentCache_System_Byte_____" data-uid="Mapsui.Tiling.Layers.TmsTileSourceBuilder.BuildAsync(System.String,System.Boolean,System.Nullable{IPersistentCache{System.Byte[]}})">BuildAsync(String, Boolean, Nullable&lt;IPersistentCache&lt;Byte[]&gt;&gt;)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static ITileSource Build(string urlToTileMapXml, bool overrideTmsUrlWithUrlToTileMapXml, IPersistentCache&lt;byte[]&gt;? persistentCache = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public static async Task&lt;ITileSource&gt; BuildAsync(string urlToTileMapXml, bool overrideTmsUrlWithUrlToTileMapXml, IPersistentCache&lt;byte[]&gt;? persistentCache = null)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -150,7 +150,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">ITileSource</span></td>
+        <td><span class="xref">Task</span>&lt;<span class="xref">ITileSource</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>

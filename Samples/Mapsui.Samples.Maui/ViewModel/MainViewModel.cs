@@ -22,7 +22,6 @@ namespace Mapsui.Samples.Maui.ViewModel
         static MainViewModel()
         {
             // todo: find proper way to load assembly
-            Mapsui.Samples.Common.Desktop.DesktopSamplesUtilities.LoadAssembly();
             Mapsui.Tests.Common.Utilities.LoadAssembly();       
         }
 

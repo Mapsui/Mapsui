@@ -15,13 +15,13 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.UI.Eto\Mapsui.UI.Eto.csproj" />
     <ProjectReference Include="..\..\Tests\Mapsui.Tests.Common\Mapsui.Tests.Common.csproj" />
-    <ProjectReference Include="..\Mapsui.Samples.Common.Desktop\Mapsui.Samples.Common.Desktop.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <!-- Explicitly reference Linux native dlls to get them included -->
     <PackageReference Include="SkiaSharp.NativeAssets.Linux" />
     <PackageReference Include="Eto.Forms" />
+    <PackageReference Include="BruTile" />
   </ItemGroup>
 
   <PropertyGroup Condition="'$(BuildPlatform)'=='' and $([MSBuild]::IsOSPlatform(Windows))">

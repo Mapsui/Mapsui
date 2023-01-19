@@ -12,7 +12,6 @@ using Mapsui.Samples.CustomWidget;
 using Mapsui.Samples.Wpf.Utilities;
 using Mapsui.UI;
 using Mapsui.Samples.Common;
-using Mapsui.Samples.Common.Desktop;
 using Mapsui.Samples.Common.Extensions;
 
 namespace Mapsui.Samples.Wpf
@@ -22,7 +21,6 @@ namespace Mapsui.Samples.Wpf
          static Window1()
         {
             // todo: find proper way to load assembly
-            Mapsui.Samples.Common.Desktop.DesktopSamplesUtilities.LoadAssembly();
             Mapsui.Tests.Common.Utilities.LoadAssembly();       
         }
 
@@ -74,7 +72,6 @@ namespace Mapsui.Samples.Wpf
         private void FillComboBoxWithCategories()
         {
             // todo: find proper way to load assembly
-            DesktopSamplesUtilities.LoadAssembly();
             Tests.Common.Utilities.LoadAssembly();
 
             var categories = AllSamples.GetSamples().Select(s => s.Category).Distinct().OrderBy(c => c);

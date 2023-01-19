@@ -1,9 +1,8 @@
 ﻿using Mapsui.UI;
 
-namespace Mapsui.Samples.Common
+namespace Mapsui.Samples.Common;
+
+public interface IMapControlSample : ISampleBase
 {
-    public interface IMapControlSample : ISampleBase
-    {
-        void Setup(IMapControl mapControl);
-    }
+    void Setup(IMapControl mapControl);
 }

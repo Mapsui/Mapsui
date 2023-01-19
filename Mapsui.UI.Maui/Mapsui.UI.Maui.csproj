@@ -3,11 +3,14 @@
   <PropertyGroup>
     <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
     <!--Windows does not work because of this https://github.com/dotnet/maui/issues/6529-->
-	<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks)</TargetFrameworks>
+	  <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks)</TargetFrameworks>
     <UseMaui>true</UseMaui>
     <SingleProject>true</SingleProject>
     <DefineConstants>__MAUI__</DefineConstants>
     <NoWarn>NU1703</NoWarn>
+    <PackageId>Mapsui.Maui</PackageId>
+    <Description>Mapsui.Maui - Library for mapping for Maui</Description>
+    <PackageTags>$(PackageTags) maui</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

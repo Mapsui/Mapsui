@@ -30,8 +30,18 @@ namespace VersionUpdater
 
                     UpdateAssemblyInfoFiles(version);
                     UpdateVersionXmlNodeInFile(version, "Directory.Build.props");
+                    UpdateMapsuiNugetVersions(version, "Directory.Packages.props");
                 })
                 .WithNotParsed(HandleParseError);
+        }
+
+        private static void UpdateMapsuiNugetVersions(Version version, string file)
+        {
+            var text = File.ReadAllText(file);
+            var assemblyVersionRegex = new Regex("<PackageVersion Include=\"(?<nuget>Mapsui.*)\" Version=\"(.*)\" />");
+            text = assemblyVersionRegex.Replace(text, $"<PackageVersion Include=\"${{nuget}}\" Version=\"{version.FullVersion}\" />");
+            Encoding utf8WithBom = new UTF8Encoding(true);
+            File.WriteAllText(file, text, utf8WithBom);
         }
 
         private static void UpdateVersionXmlNodeInFile(Version version, string file)
