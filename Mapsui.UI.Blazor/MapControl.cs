@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components;
 using SkiaSharp;
 using Microsoft.JSInterop;
 using Mapsui.Extensions;
+using Mapsui.Logging;
 using Mapsui.UI.Blazor.Extensions;
 using Microsoft.AspNetCore.Components.Web;
 using SkiaSharp.Views.Blazor;
@@ -38,6 +39,12 @@ namespace Mapsui.UI.Blazor
         public int ZoomButton { get; set; } = MouseButtons.Primary;
         public int ZoomModifier { get; set; } = Keys.Control;
         public MouseWheelAnimation MouseWheelAnimation { get; } = new();
+        protected readonly string _elementId = Guid.NewGuid().ToString("N");
+        private MapsuiJsInterop? _interop;
+
+        public string ElementId => _elementId;
+        
+        protected MapsuiJsInterop Interop => _interop ??= new MapsuiJsInterop(JsRuntime);
 
         protected override void OnInitialized()
         {
@@ -115,17 +122,31 @@ namespace Mapsui.UI.Blazor
             SetViewportSize();
         }
 
-        protected void OnMouseWheel(WheelEventArgs e)
+        protected async void OnMouseWheel(WheelEventArgs e)
         {
-            if (Map?.ZoomLock ?? true) return;
-            if (!Viewport.HasSize()) return;
+            try
+            {
+                if (Map?.ZoomLock ?? true) return;
+                if (!Viewport.HasSize()) return;
 
-            var delta = e.DeltaY;
-            var resolution = MouseWheelAnimation.GetResolution((int)delta, _viewport, Map);
+                var delta = e.DeltaY;
+                var resolution = MouseWheelAnimation.GetResolution((int)delta, _viewport, Map);
 
-            // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
-            resolution = Map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, Map.Resolutions, Map.Extent);
-            Navigator?.ZoomTo(resolution, e.Location().ToMapsui(), MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
+                // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
+                resolution = Map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, Map.Resolutions,
+                    Map.Extent);
+                Navigator?.ZoomTo(resolution, e.Location(await BoundingClientRectAsync()).ToMapsui(), MouseWheelAnimation.Duration,
+                    MouseWheelAnimation.Easing);
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(LogLevel.Error, ex.Message, ex);
+            }
+        }
+
+        private async Task<BoundingClientRect> BoundingClientRectAsync()
+        {
+            return await Interop.BoundingClientRectAsync(_elementId);
         }
 
         private void OnSizeChanged()
@@ -139,17 +160,24 @@ namespace Mapsui.UI.Blazor
             action();
         }
 
-        protected void OnMouseDown(MouseEventArgs e)
+        protected async void OnMouseDown(MouseEventArgs e)
         {
-            IsInBoxZoomMode = e.Button == ZoomButton && (ZoomModifier == Keys.None || ModifierPressed(ZoomModifier));
+            try 
+            { 
+                IsInBoxZoomMode = e.Button == ZoomButton && (ZoomModifier == Keys.None || ModifierPressed(ZoomModifier));
 
-            bool moveMode = e.Button == MoveButton && (MoveModifier == Keys.None || ModifierPressed(MoveModifier));
+                bool moveMode = e.Button == MoveButton && (MoveModifier == Keys.None || ModifierPressed(MoveModifier));
 
-            if (moveMode)
-                _defaultCursor = Cursor;
+                if (moveMode)
+                    _defaultCursor = Cursor;
 
-            if (moveMode || IsInBoxZoomMode)
-                _downMousePosition = e.Location();
+                if (moveMode || IsInBoxZoomMode)
+                    _downMousePosition = e.Location(await BoundingClientRectAsync());
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(LogLevel.Error, ex.Message, ex);   
+            }
         }
 
         private bool ModifierPressed(int modifier)
@@ -177,28 +205,36 @@ namespace Mapsui.UI.Blazor
             }
         }
 
-        protected void OnMouseUp(MouseEventArgs e)
+        protected async void OnMouseUp(MouseEventArgs e)
         {
-            if (IsInBoxZoomMode)
+            try
             {
-                if (_selectRectangle != null)
+                if (IsInBoxZoomMode)
                 {
-                    var previous = Viewport.ScreenToWorld(_selectRectangle.TopLeft.X, _selectRectangle.TopLeft.Y);
-                    var current = Viewport.ScreenToWorld(_selectRectangle.BottomRight.X, _selectRectangle.BottomRight.Y);
-                    ZoomToBox(previous, current);
+                    if (_selectRectangle != null)
+                    {
+                        var previous = Viewport.ScreenToWorld(_selectRectangle.TopLeft.X, _selectRectangle.TopLeft.Y);
+                        var current = Viewport.ScreenToWorld(_selectRectangle.BottomRight.X,
+                            _selectRectangle.BottomRight.Y);
+                        ZoomToBox(previous, current);
+                    }
                 }
+                else if (_downMousePosition != null)
+                {
+                    if (IsClick(e.Location(await BoundingClientRectAsync()), _downMousePosition))
+                        OnInfo(InvokeInfo(e.Location(await  BoundingClientRectAsync()).ToMapsui(), _downMousePosition.ToMapsui(), 1));
+                }
+
+                _downMousePosition = null;
+
+                Cursor = _defaultCursor;
+
+                RefreshData();
             }
-            else if (_downMousePosition != null)
+            catch (Exception ex)
             {
-                if (IsClick(e.Location(), _downMousePosition))
-                    OnInfo(InvokeInfo(e.Location().ToMapsui(), _downMousePosition.ToMapsui(), 1));
+                Logger.Log(LogLevel.Error, ex.Message, ex);
             }
-
-            _downMousePosition = null;
-
-            Cursor = _defaultCursor;
-
-            RefreshData();
         }
 
         private static bool IsClick(MPoint currentPosition, MPoint previousPosition)
@@ -206,28 +242,36 @@ namespace Mapsui.UI.Blazor
             return Math.Abs(currentPosition.Distance(previousPosition)) < 5;
         }
 
-        protected void OnMouseMove(MouseEventArgs e)
+        protected async void OnMouseMove(MouseEventArgs e)
         {
-            if (_downMousePosition != null)
+            try
             {
-                if (IsInBoxZoomMode)
+                if (_downMousePosition != null)
                 {
-                    var x = e.Location();
-                    var y = _downMousePosition;
-                    _selectRectangle = new MRect(Math.Min(x.X, y.X), Math.Min(x.Y, y.Y), Math.Max(x.X, y.X), Math.Max(x.Y, y.Y));
-                    if (_invalidate != null)
-                        _invalidate();
+                    if (IsInBoxZoomMode)
+                    {
+                        var x = e.Location(await BoundingClientRectAsync());
+                        var y = _downMousePosition;
+                        _selectRectangle = new MRect(Math.Min(x.X, y.X), Math.Min(x.Y, y.Y), Math.Max(x.X, y.X),
+                            Math.Max(x.Y, y.Y));
+                        if (_invalidate != null)
+                            _invalidate();
+                    }
+                    else // drag/pan - mode
+                    {
+                        Cursor = MoveCursor;
+
+                        _viewport.Transform(e.Location(await BoundingClientRectAsync()).ToMapsui(), _downMousePosition.ToMapsui());
+
+                        RefreshGraphics();
+
+                        _downMousePosition = e.Location(await BoundingClientRectAsync());
+                    }
                 }
-                else // drag/pan - mode
-                {
-                    Cursor = MoveCursor;
-
-                    _viewport.Transform(e.Location().ToMapsui(), _downMousePosition.ToMapsui());
-
-                    RefreshGraphics();
-
-                    _downMousePosition = e.Location();
-                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(LogLevel.Error, ex.Message, ex);
             }
         }
 

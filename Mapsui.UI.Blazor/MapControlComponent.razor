@@ -1,7 +1,10 @@
 ﻿@using Mapsui.Extensions
 @inherits MapControl
 
-<div @onmouseup=@OnMouseUp @onmousedown=@OnMouseDown @onmousewheel=@OnMouseWheel @onmousemove=@OnMouseMove @onkeydown=@OnKeyDown @onkeyup=@OnKeyUp>
+<div @onmouseup=@OnMouseUp @onmousedown=@OnMouseDown 
+    @onmousewheel=@OnMouseWheel @onmousemove=@OnMouseMove 
+    @onkeydown=@OnKeyDown @onkeyup=@OnKeyUp
+     name="@_elementId" id="@_elementId">
 @if (MapControl.UseGPU)
 {
         <SkiaSharp.Views.Blazor.SKGLView
