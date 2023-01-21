@@ -1,7 +1,6 @@
-namespace Mapsui.ArcGIS
+namespace Mapsui.ArcGIS;
+
+public class SpatialReference
 {
-    public class SpatialReference
-    {
-        public int wkid { get; set; }
-    }
+    public int wkid { get; set; }
 }

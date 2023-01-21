@@ -1,8 +1,7 @@
-namespace Mapsui.ArcGIS
+namespace Mapsui.ArcGIS;
+
+public class Table
 {
-    public class Table
-    {
-        public int id { get; set; }
-        public string? name { get; set; }
-    }
+    public int id { get; set; }
+    public string? name { get; set; }
 }
