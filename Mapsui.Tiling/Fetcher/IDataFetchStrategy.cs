@@ -7,14 +7,13 @@
 using System.Collections.Generic;
 using BruTile;
 
-namespace Mapsui.Tiling.Fetcher
+namespace Mapsui.Tiling.Fetcher;
+
+public interface IDataFetchStrategy
 {
-    public interface IDataFetchStrategy
-    {
-        /// <summary>
-        /// Fetches the tiles from the data source to put them into the cache. A strategy could  pre-fetch
-        /// certain tiles to anticipate future use.
-        /// </summary>
-        IList<TileInfo> Get(ITileSchema schema, Extent extent, int level);
-    }
+    /// <summary>
+    /// Fetches the tiles from the data source to put them into the cache. A strategy could  pre-fetch
+    /// certain tiles to anticipate future use.
+    /// </summary>
+    IList<TileInfo> Get(ITileSchema schema, Extent extent, int level);
 }
