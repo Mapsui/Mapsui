@@ -73,11 +73,10 @@ namespace Mapsui.Rendering.Skia
             Render(canvas, viewport, widgets, 1);
         }
 
-        public MemoryStream? RenderToBitmapStream(IReadOnlyViewport? viewport, IEnumerable<ILayer> layers, 
+        public MemoryStream RenderToBitmapStream(IReadOnlyViewport viewport, IEnumerable<ILayer> layers,
             Color? background = null, float pixelDensity = 1, IEnumerable<IWidget>? widgets = null, RenderFormat renderFormat = RenderFormat.Png)
         {
-            if (viewport == null)
-                return null;
+            if (viewport == null) throw new ArgumentNullException(nameof(viewport));
 
             try
             {
@@ -86,73 +85,64 @@ namespace Mapsui.Rendering.Skia
 
                 var imageInfo = new SKImageInfo((int)Math.Round(width * pixelDensity), (int)Math.Round(height * pixelDensity),
                     SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
-                
+
                 MemoryStream memoryStream = new MemoryStream();
 
                 switch (renderFormat)
                 {
                     case RenderFormat.Skp:
-                    {
-                        using var pictureRecorder = new SKPictureRecorder();
-                        using var skCanvas = pictureRecorder.BeginRecording(new SKRect(0, 0, Convert.ToSingle(width), Convert.ToSingle(height)));
-                        if (!RenderTo(viewport, layers, background, pixelDensity, widgets, skCanvas))
-                            return null;
-                        
-                        using var skPicture = pictureRecorder.EndRecording();
-                        skPicture?.Serialize(memoryStream);
-                        break;
-                    }
+                        {
+                            using var pictureRecorder = new SKPictureRecorder();
+                            using var skCanvas = pictureRecorder.BeginRecording(new SKRect(0, 0, Convert.ToSingle(width), Convert.ToSingle(height)));
+                            RenderTo(viewport, layers, background, pixelDensity, widgets, skCanvas);
+                            using var skPicture = pictureRecorder.EndRecording();
+                            skPicture?.Serialize(memoryStream);
+                            break;
+                        }
                     case RenderFormat.Png:
-                    {
-                        using var surface = SKSurface.Create(imageInfo);
-                        using var skCanvas = surface.Canvas;
-                        if (!RenderTo(viewport, layers, background, pixelDensity, widgets, skCanvas))
-                            return null;
-                        
-                        using var image = surface.Snapshot();
-                        using var data = image.Encode(SKEncodedImageFormat.Png, 100);
-                        data.SaveTo(memoryStream);
-                        break;
-                    }
+                        {
+                            using var surface = SKSurface.Create(imageInfo);
+                            using var skCanvas = surface.Canvas;
+                            RenderTo(viewport, layers, background, pixelDensity, widgets, skCanvas);
+                            using var image = surface.Snapshot();
+                            using var data = image.Encode(SKEncodedImageFormat.Png, 100);
+                            data.SaveTo(memoryStream);
+                            break;
+                        }
                     case RenderFormat.WebP:
-                    {
-                        using var surface = SKSurface.Create(imageInfo);
-                        using var skCanvas = surface.Canvas;
-                        if (!RenderTo(viewport, layers, background, pixelDensity, widgets, skCanvas))
-                            return null;
-                        
-                        using var image = surface.Snapshot();
-                        var options = new SKWebpEncoderOptions(SKWebpEncoderCompression.Lossless, 100);
-                        using var peekPixels = image.PeekPixels();
-                        using var data = peekPixels.Encode(options);
-                        data.SaveTo(memoryStream);
-                        break;
-                    }
+                        {
+                            using var surface = SKSurface.Create(imageInfo);
+                            using var skCanvas = surface.Canvas;
+                            RenderTo(viewport, layers, background, pixelDensity, widgets, skCanvas);
+                            using var image = surface.Snapshot();
+                            var options = new SKWebpEncoderOptions(SKWebpEncoderCompression.Lossless, 100);
+                            using var peekPixels = image.PeekPixels();
+                            using var data = peekPixels.Encode(options);
+                            data.SaveTo(memoryStream);
+                            break;
+                        }
                 }
-                
+
                 return memoryStream;
             }
             catch (Exception ex)
             {
                 Logger.Log(LogLevel.Error, ex.Message);
-                return null;
+                throw;
             }
         }
 
-        private bool RenderTo(IReadOnlyViewport viewport, IEnumerable<ILayer> layers, Color? background, float pixelDensity,
-            IEnumerable<IWidget>? widgets, SKCanvas? skCanvas)
+        private void RenderTo(IReadOnlyViewport viewport, IEnumerable<ILayer> layers, Color? background, float pixelDensity,
+            IEnumerable<IWidget>? widgets, SKCanvas skCanvas)
         {
-            if (skCanvas == null) 
-                return false; // return null;
-            
+            if (skCanvas == null) throw new ArgumentNullException(nameof(viewport));
+
             // Not sure if this is needed here:
             if (background is not null) skCanvas.Clear(background.ToSkia());
             skCanvas.Scale(pixelDensity, pixelDensity);
             Render(skCanvas, viewport, layers);
             if (widgets is not null)
                 Render(skCanvas, viewport, widgets, 1);
-
-            return true;
         }
 
         private void Render(SKCanvas canvas, IReadOnlyViewport viewport, IEnumerable<ILayer> layers)
@@ -238,7 +228,8 @@ namespace Mapsui.Rendering.Skia
                     var color = pixmap.GetPixelColor(intX, intY);
 
 
-                    VisibleFeatureIterator.IterateLayers(viewport, layers, 0, (v, layer, style, feature, opacity, iteration) => {
+                    VisibleFeatureIterator.IterateLayers(viewport, layers, 0, (v, layer, style, feature, opacity, iteration) =>
+                    {
                         // ReSharper disable AccessToDisposedClosure // There is no delayed fetch. After IterateLayers returns all is done. I do not see a problem.
                         surface.Canvas.Save();
                         // 1) Clear the entire bitmap

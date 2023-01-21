@@ -110,18 +110,14 @@ namespace Mapsui.Layers
                     using var bitmapStream = _rasterizer.RenderToBitmapStream(viewport, new[] { _layer }, pixelDensity: _pixelDensity, renderFormat: _renderFormat);
                     RemoveExistingFeatures();
 
-                    if (bitmapStream != null)
-                    {
-                        _cache.Clear();
-                        var features = new RasterFeature[1];
-                        features[0] = new RasterFeature(new MRaster(bitmapStream.ToArray(), viewport.Extent));
-                        _cache.PushRange(features);
+                    _cache.Clear();
+                    var features = new RasterFeature[1];
+                    features[0] = new RasterFeature(new MRaster(bitmapStream.ToArray(), viewport.Extent));
+                    _cache.PushRange(features);
 #if DEBUG
-                        Logger.Log(LogLevel.Debug, $"Memory after rasterizing layer {GC.GetTotalMemory(true):N0}");
+                    Logger.Log(LogLevel.Debug, $"Memory after rasterizing layer {GC.GetTotalMemory(true):N0}");
 #endif
-
-                        OnDataChanged(new DataChangedEventArgs());
-                    }
+                    OnDataChanged(new DataChangedEventArgs());
 
                     if (_modified && _layer is IAsyncDataFetcher asyncDataFetcher) 
                             Delayer.ExecuteDelayed(() => asyncDataFetcher.RefreshData(_fetchInfo));

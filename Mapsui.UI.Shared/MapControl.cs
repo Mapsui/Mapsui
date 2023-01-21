@@ -246,6 +246,7 @@ namespace Mapsui.UI.Wpf
             get => _renderer;
             set
             {
+                if (value is null) throw new NullReferenceException(nameof(Renderer));
                 if (_renderer != value)
                 {
                     _renderer = value;
@@ -578,17 +579,10 @@ namespace Mapsui.UI.Wpf
         }
 
         /// <inheritdoc />
-        public byte[]? GetSnapshot(IEnumerable<ILayer>? layers = null)
+        public byte[] GetSnapshot(IEnumerable<ILayer>? layers = null)
         {
-            byte[]? result = null;
-
-            using (var stream = Renderer?.RenderToBitmapStream(Viewport, layers ?? Map?.Layers ?? new LayerCollection(), pixelDensity: PixelDensity))
-            {
-                if (stream != null)
-                    result = stream.ToArray();
-            }
-
-            return result;
+            using var stream = Renderer.RenderToBitmapStream(Viewport, layers ?? Map?.Layers ?? new LayerCollection(), pixelDensity: PixelDensity);
+            return stream.ToArray();
         }
 
         /// <summary>

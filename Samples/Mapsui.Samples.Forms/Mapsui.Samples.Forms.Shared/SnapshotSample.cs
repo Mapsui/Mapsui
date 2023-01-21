@@ -33,11 +33,7 @@ namespace Mapsui.Samples.Forms
                 return false;
 
             var snapshot = mapView.GetSnapshot();
-
-            if (snapshot != null)
-            {
-                var test = ImageSource.FromStream(() => new MemoryStream(snapshot));
-            }
+            var test = ImageSource.FromStream(() => new MemoryStream(snapshot));
 
             return true;
         }
