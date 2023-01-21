@@ -3703,12 +3703,31 @@ references:
   commentId: T:Mapsui.Extensions.CacheExtensions
   fullName: Mapsui.Extensions.CacheExtensions
   nameWithType: CacheExtensions
-- uid: Mapsui.Extensions.CacheExtensions.UrlCachedStreamAsync(Mapsui.Cache.IUrlPersistentCache,System.String)
-  name: UrlCachedStreamAsync(IUrlPersistentCache, String)
-  href: api/Mapsui.Extensions.CacheExtensions.html#Mapsui_Extensions_CacheExtensions_UrlCachedStreamAsync_Mapsui_Cache_IUrlPersistentCache_System_String_
-  commentId: M:Mapsui.Extensions.CacheExtensions.UrlCachedStreamAsync(Mapsui.Cache.IUrlPersistentCache,System.String)
-  fullName: Mapsui.Extensions.CacheExtensions.UrlCachedStreamAsync(Mapsui.Cache.IUrlPersistentCache, System.String)
-  nameWithType: CacheExtensions.UrlCachedStreamAsync(IUrlPersistentCache, String)
+- uid: Mapsui.Extensions.CacheExtensions.UrlCachedArrayAsync(Mapsui.Cache.IUrlPersistentCache,System.String,System.Nullable{Func{System.String,Task{Stream}}})
+  name: UrlCachedArrayAsync(IUrlPersistentCache, String, Nullable<Func<String, Task<Stream>>>)
+  href: api/Mapsui.Extensions.CacheExtensions.html#Mapsui_Extensions_CacheExtensions_UrlCachedArrayAsync_Mapsui_Cache_IUrlPersistentCache_System_String_System_Nullable_Func_System_String_Task_Stream____
+  commentId: M:Mapsui.Extensions.CacheExtensions.UrlCachedArrayAsync(Mapsui.Cache.IUrlPersistentCache,System.String,System.Nullable{Func{System.String,Task{Stream}}})
+  name.vb: UrlCachedArrayAsync(IUrlPersistentCache, String, Nullable(Of Func(Of String, Task(Of Stream))))
+  fullName: Mapsui.Extensions.CacheExtensions.UrlCachedArrayAsync(Mapsui.Cache.IUrlPersistentCache, System.String, System.Nullable<Func<System.String, Task<Stream>>>)
+  fullName.vb: Mapsui.Extensions.CacheExtensions.UrlCachedArrayAsync(Mapsui.Cache.IUrlPersistentCache, System.String, System.Nullable(Of Func(Of System.String, Task(Of Stream))))
+  nameWithType: CacheExtensions.UrlCachedArrayAsync(IUrlPersistentCache, String, Nullable<Func<String, Task<Stream>>>)
+  nameWithType.vb: CacheExtensions.UrlCachedArrayAsync(IUrlPersistentCache, String, Nullable(Of Func(Of String, Task(Of Stream))))
+- uid: Mapsui.Extensions.CacheExtensions.UrlCachedArrayAsync*
+  name: UrlCachedArrayAsync
+  href: api/Mapsui.Extensions.CacheExtensions.html#Mapsui_Extensions_CacheExtensions_UrlCachedArrayAsync_
+  commentId: Overload:Mapsui.Extensions.CacheExtensions.UrlCachedArrayAsync
+  isSpec: "True"
+  fullName: Mapsui.Extensions.CacheExtensions.UrlCachedArrayAsync
+  nameWithType: CacheExtensions.UrlCachedArrayAsync
+- uid: Mapsui.Extensions.CacheExtensions.UrlCachedStreamAsync(Mapsui.Cache.IUrlPersistentCache,System.String,System.Nullable{Func{System.String,Task{Stream}}})
+  name: UrlCachedStreamAsync(IUrlPersistentCache, String, Nullable<Func<String, Task<Stream>>>)
+  href: api/Mapsui.Extensions.CacheExtensions.html#Mapsui_Extensions_CacheExtensions_UrlCachedStreamAsync_Mapsui_Cache_IUrlPersistentCache_System_String_System_Nullable_Func_System_String_Task_Stream____
+  commentId: M:Mapsui.Extensions.CacheExtensions.UrlCachedStreamAsync(Mapsui.Cache.IUrlPersistentCache,System.String,System.Nullable{Func{System.String,Task{Stream}}})
+  name.vb: UrlCachedStreamAsync(IUrlPersistentCache, String, Nullable(Of Func(Of String, Task(Of Stream))))
+  fullName: Mapsui.Extensions.CacheExtensions.UrlCachedStreamAsync(Mapsui.Cache.IUrlPersistentCache, System.String, System.Nullable<Func<System.String, Task<Stream>>>)
+  fullName.vb: Mapsui.Extensions.CacheExtensions.UrlCachedStreamAsync(Mapsui.Cache.IUrlPersistentCache, System.String, System.Nullable(Of Func(Of System.String, Task(Of Stream))))
+  nameWithType: CacheExtensions.UrlCachedStreamAsync(IUrlPersistentCache, String, Nullable<Func<String, Task<Stream>>>)
+  nameWithType.vb: CacheExtensions.UrlCachedStreamAsync(IUrlPersistentCache, String, Nullable(Of Func(Of String, Task(Of Stream))))
 - uid: Mapsui.Extensions.CacheExtensions.UrlCachedStreamAsync*
   name: UrlCachedStreamAsync
   href: api/Mapsui.Extensions.CacheExtensions.html#Mapsui_Extensions_CacheExtensions_UrlCachedStreamAsync_
@@ -6664,6 +6683,19 @@ references:
   isSpec: "True"
   fullName: Mapsui.Layers.ImageLayer.AbortFetch
   nameWithType: ImageLayer.AbortFetch
+- uid: Mapsui.Layers.ImageLayer.Busy
+  name: Busy
+  href: api/Mapsui.Layers.ImageLayer.html#Mapsui_Layers_ImageLayer_Busy
+  commentId: P:Mapsui.Layers.ImageLayer.Busy
+  fullName: Mapsui.Layers.ImageLayer.Busy
+  nameWithType: ImageLayer.Busy
+- uid: Mapsui.Layers.ImageLayer.Busy*
+  name: Busy
+  href: api/Mapsui.Layers.ImageLayer.html#Mapsui_Layers_ImageLayer_Busy_
+  commentId: Overload:Mapsui.Layers.ImageLayer.Busy
+  isSpec: "True"
+  fullName: Mapsui.Layers.ImageLayer.Busy
+  nameWithType: ImageLayer.Busy
 - uid: Mapsui.Layers.ImageLayer.ClearCache
   name: ClearCache()
   href: api/Mapsui.Layers.ImageLayer.html#Mapsui_Layers_ImageLayer_ClearCache
@@ -22686,6 +22718,116 @@ references:
   commentId: N:Mapsui.UI.Blazor.Extensions
   fullName: Mapsui.UI.Blazor.Extensions
   nameWithType: Mapsui.UI.Blazor.Extensions
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect
+  name: BoundingClientRect
+  href: api/Mapsui.UI.Blazor.Extensions.BoundingClientRect.html
+  commentId: T:Mapsui.UI.Blazor.Extensions.BoundingClientRect
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect
+  nameWithType: BoundingClientRect
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Bottom
+  name: Bottom
+  href: api/Mapsui.UI.Blazor.Extensions.BoundingClientRect.html#Mapsui_UI_Blazor_Extensions_BoundingClientRect_Bottom
+  commentId: P:Mapsui.UI.Blazor.Extensions.BoundingClientRect.Bottom
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Bottom
+  nameWithType: BoundingClientRect.Bottom
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Bottom*
+  name: Bottom
+  href: api/Mapsui.UI.Blazor.Extensions.BoundingClientRect.html#Mapsui_UI_Blazor_Extensions_BoundingClientRect_Bottom_
+  commentId: Overload:Mapsui.UI.Blazor.Extensions.BoundingClientRect.Bottom
+  isSpec: "True"
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Bottom
+  nameWithType: BoundingClientRect.Bottom
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Height
+  name: Height
+  href: api/Mapsui.UI.Blazor.Extensions.BoundingClientRect.html#Mapsui_UI_Blazor_Extensions_BoundingClientRect_Height
+  commentId: P:Mapsui.UI.Blazor.Extensions.BoundingClientRect.Height
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Height
+  nameWithType: BoundingClientRect.Height
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Height*
+  name: Height
+  href: api/Mapsui.UI.Blazor.Extensions.BoundingClientRect.html#Mapsui_UI_Blazor_Extensions_BoundingClientRect_Height_
+  commentId: Overload:Mapsui.UI.Blazor.Extensions.BoundingClientRect.Height
+  isSpec: "True"
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Height
+  nameWithType: BoundingClientRect.Height
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Left
+  name: Left
+  href: api/Mapsui.UI.Blazor.Extensions.BoundingClientRect.html#Mapsui_UI_Blazor_Extensions_BoundingClientRect_Left
+  commentId: P:Mapsui.UI.Blazor.Extensions.BoundingClientRect.Left
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Left
+  nameWithType: BoundingClientRect.Left
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Left*
+  name: Left
+  href: api/Mapsui.UI.Blazor.Extensions.BoundingClientRect.html#Mapsui_UI_Blazor_Extensions_BoundingClientRect_Left_
+  commentId: Overload:Mapsui.UI.Blazor.Extensions.BoundingClientRect.Left
+  isSpec: "True"
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Left
+  nameWithType: BoundingClientRect.Left
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Right
+  name: Right
+  href: api/Mapsui.UI.Blazor.Extensions.BoundingClientRect.html#Mapsui_UI_Blazor_Extensions_BoundingClientRect_Right
+  commentId: P:Mapsui.UI.Blazor.Extensions.BoundingClientRect.Right
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Right
+  nameWithType: BoundingClientRect.Right
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Right*
+  name: Right
+  href: api/Mapsui.UI.Blazor.Extensions.BoundingClientRect.html#Mapsui_UI_Blazor_Extensions_BoundingClientRect_Right_
+  commentId: Overload:Mapsui.UI.Blazor.Extensions.BoundingClientRect.Right
+  isSpec: "True"
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Right
+  nameWithType: BoundingClientRect.Right
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Top
+  name: Top
+  href: api/Mapsui.UI.Blazor.Extensions.BoundingClientRect.html#Mapsui_UI_Blazor_Extensions_BoundingClientRect_Top
+  commentId: P:Mapsui.UI.Blazor.Extensions.BoundingClientRect.Top
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Top
+  nameWithType: BoundingClientRect.Top
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Top*
+  name: Top
+  href: api/Mapsui.UI.Blazor.Extensions.BoundingClientRect.html#Mapsui_UI_Blazor_Extensions_BoundingClientRect_Top_
+  commentId: Overload:Mapsui.UI.Blazor.Extensions.BoundingClientRect.Top
+  isSpec: "True"
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Top
+  nameWithType: BoundingClientRect.Top
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Width
+  name: Width
+  href: api/Mapsui.UI.Blazor.Extensions.BoundingClientRect.html#Mapsui_UI_Blazor_Extensions_BoundingClientRect_Width
+  commentId: P:Mapsui.UI.Blazor.Extensions.BoundingClientRect.Width
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Width
+  nameWithType: BoundingClientRect.Width
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Width*
+  name: Width
+  href: api/Mapsui.UI.Blazor.Extensions.BoundingClientRect.html#Mapsui_UI_Blazor_Extensions_BoundingClientRect_Width_
+  commentId: Overload:Mapsui.UI.Blazor.Extensions.BoundingClientRect.Width
+  isSpec: "True"
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Width
+  nameWithType: BoundingClientRect.Width
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect.X
+  name: X
+  href: api/Mapsui.UI.Blazor.Extensions.BoundingClientRect.html#Mapsui_UI_Blazor_Extensions_BoundingClientRect_X
+  commentId: P:Mapsui.UI.Blazor.Extensions.BoundingClientRect.X
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect.X
+  nameWithType: BoundingClientRect.X
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect.X*
+  name: X
+  href: api/Mapsui.UI.Blazor.Extensions.BoundingClientRect.html#Mapsui_UI_Blazor_Extensions_BoundingClientRect_X_
+  commentId: Overload:Mapsui.UI.Blazor.Extensions.BoundingClientRect.X
+  isSpec: "True"
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect.X
+  nameWithType: BoundingClientRect.X
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Y
+  name: Y
+  href: api/Mapsui.UI.Blazor.Extensions.BoundingClientRect.html#Mapsui_UI_Blazor_Extensions_BoundingClientRect_Y
+  commentId: P:Mapsui.UI.Blazor.Extensions.BoundingClientRect.Y
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Y
+  nameWithType: BoundingClientRect.Y
+- uid: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Y*
+  name: Y
+  href: api/Mapsui.UI.Blazor.Extensions.BoundingClientRect.html#Mapsui_UI_Blazor_Extensions_BoundingClientRect_Y_
+  commentId: Overload:Mapsui.UI.Blazor.Extensions.BoundingClientRect.Y
+  isSpec: "True"
+  fullName: Mapsui.UI.Blazor.Extensions.BoundingClientRect.Y
+  nameWithType: BoundingClientRect.Y
 - uid: Mapsui.UI.Blazor.Extensions.Cursors
   name: Cursors
   href: api/Mapsui.UI.Blazor.Extensions.Cursors.html
@@ -22710,12 +22852,12 @@ references:
   commentId: T:Mapsui.UI.Blazor.Extensions.Extensions
   fullName: Mapsui.UI.Blazor.Extensions.Extensions
   nameWithType: Extensions
-- uid: Mapsui.UI.Blazor.Extensions.Extensions.Location(MouseEventArgs)
-  name: Location(MouseEventArgs)
-  href: api/Mapsui.UI.Blazor.Extensions.Extensions.html#Mapsui_UI_Blazor_Extensions_Extensions_Location_MouseEventArgs_
-  commentId: M:Mapsui.UI.Blazor.Extensions.Extensions.Location(MouseEventArgs)
-  fullName: Mapsui.UI.Blazor.Extensions.Extensions.Location(MouseEventArgs)
-  nameWithType: Extensions.Location(MouseEventArgs)
+- uid: Mapsui.UI.Blazor.Extensions.Extensions.Location(MouseEventArgs,Mapsui.UI.Blazor.Extensions.BoundingClientRect)
+  name: Location(MouseEventArgs, BoundingClientRect)
+  href: api/Mapsui.UI.Blazor.Extensions.Extensions.html#Mapsui_UI_Blazor_Extensions_Extensions_Location_MouseEventArgs_Mapsui_UI_Blazor_Extensions_BoundingClientRect_
+  commentId: M:Mapsui.UI.Blazor.Extensions.Extensions.Location(MouseEventArgs,Mapsui.UI.Blazor.Extensions.BoundingClientRect)
+  fullName: Mapsui.UI.Blazor.Extensions.Extensions.Location(MouseEventArgs, Mapsui.UI.Blazor.Extensions.BoundingClientRect)
+  nameWithType: Extensions.Location(MouseEventArgs, BoundingClientRect)
 - uid: Mapsui.UI.Blazor.Extensions.Extensions.Location*
   name: Location
   href: api/Mapsui.UI.Blazor.Extensions.Extensions.html#Mapsui_UI_Blazor_Extensions_Extensions_Location_
@@ -23446,6 +23588,51 @@ references:
   commentId: F:Mapsui.UI.Blazor.Extensions.Keys.Tab
   fullName: Mapsui.UI.Blazor.Extensions.Keys.Tab
   nameWithType: Keys.Tab
+- uid: Mapsui.UI.Blazor.Extensions.MapsuiJsInterop
+  name: MapsuiJsInterop
+  href: api/Mapsui.UI.Blazor.Extensions.MapsuiJsInterop.html
+  commentId: T:Mapsui.UI.Blazor.Extensions.MapsuiJsInterop
+  fullName: Mapsui.UI.Blazor.Extensions.MapsuiJsInterop
+  nameWithType: MapsuiJsInterop
+- uid: Mapsui.UI.Blazor.Extensions.MapsuiJsInterop.#ctor(IJSRuntime)
+  name: MapsuiJsInterop(IJSRuntime)
+  href: api/Mapsui.UI.Blazor.Extensions.MapsuiJsInterop.html#Mapsui_UI_Blazor_Extensions_MapsuiJsInterop__ctor_IJSRuntime_
+  commentId: M:Mapsui.UI.Blazor.Extensions.MapsuiJsInterop.#ctor(IJSRuntime)
+  fullName: Mapsui.UI.Blazor.Extensions.MapsuiJsInterop.MapsuiJsInterop(IJSRuntime)
+  nameWithType: MapsuiJsInterop.MapsuiJsInterop(IJSRuntime)
+- uid: Mapsui.UI.Blazor.Extensions.MapsuiJsInterop.#ctor*
+  name: MapsuiJsInterop
+  href: api/Mapsui.UI.Blazor.Extensions.MapsuiJsInterop.html#Mapsui_UI_Blazor_Extensions_MapsuiJsInterop__ctor_
+  commentId: Overload:Mapsui.UI.Blazor.Extensions.MapsuiJsInterop.#ctor
+  isSpec: "True"
+  fullName: Mapsui.UI.Blazor.Extensions.MapsuiJsInterop.MapsuiJsInterop
+  nameWithType: MapsuiJsInterop.MapsuiJsInterop
+- uid: Mapsui.UI.Blazor.Extensions.MapsuiJsInterop.BoundingClientRectAsync(System.String)
+  name: BoundingClientRectAsync(String)
+  href: api/Mapsui.UI.Blazor.Extensions.MapsuiJsInterop.html#Mapsui_UI_Blazor_Extensions_MapsuiJsInterop_BoundingClientRectAsync_System_String_
+  commentId: M:Mapsui.UI.Blazor.Extensions.MapsuiJsInterop.BoundingClientRectAsync(System.String)
+  fullName: Mapsui.UI.Blazor.Extensions.MapsuiJsInterop.BoundingClientRectAsync(System.String)
+  nameWithType: MapsuiJsInterop.BoundingClientRectAsync(String)
+- uid: Mapsui.UI.Blazor.Extensions.MapsuiJsInterop.BoundingClientRectAsync*
+  name: BoundingClientRectAsync
+  href: api/Mapsui.UI.Blazor.Extensions.MapsuiJsInterop.html#Mapsui_UI_Blazor_Extensions_MapsuiJsInterop_BoundingClientRectAsync_
+  commentId: Overload:Mapsui.UI.Blazor.Extensions.MapsuiJsInterop.BoundingClientRectAsync
+  isSpec: "True"
+  fullName: Mapsui.UI.Blazor.Extensions.MapsuiJsInterop.BoundingClientRectAsync
+  nameWithType: MapsuiJsInterop.BoundingClientRectAsync
+- uid: Mapsui.UI.Blazor.Extensions.MapsuiJsInterop.DisposeAsync
+  name: DisposeAsync()
+  href: api/Mapsui.UI.Blazor.Extensions.MapsuiJsInterop.html#Mapsui_UI_Blazor_Extensions_MapsuiJsInterop_DisposeAsync
+  commentId: M:Mapsui.UI.Blazor.Extensions.MapsuiJsInterop.DisposeAsync
+  fullName: Mapsui.UI.Blazor.Extensions.MapsuiJsInterop.DisposeAsync()
+  nameWithType: MapsuiJsInterop.DisposeAsync()
+- uid: Mapsui.UI.Blazor.Extensions.MapsuiJsInterop.DisposeAsync*
+  name: DisposeAsync
+  href: api/Mapsui.UI.Blazor.Extensions.MapsuiJsInterop.html#Mapsui_UI_Blazor_Extensions_MapsuiJsInterop_DisposeAsync_
+  commentId: Overload:Mapsui.UI.Blazor.Extensions.MapsuiJsInterop.DisposeAsync
+  isSpec: "True"
+  fullName: Mapsui.UI.Blazor.Extensions.MapsuiJsInterop.DisposeAsync
+  nameWithType: MapsuiJsInterop.DisposeAsync
 - uid: Mapsui.UI.Blazor.Extensions.MouseButtons
   name: MouseButtons
   href: api/Mapsui.UI.Blazor.Extensions.MouseButtons.html

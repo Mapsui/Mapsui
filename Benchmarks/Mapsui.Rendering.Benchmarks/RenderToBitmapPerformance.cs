@@ -124,7 +124,7 @@ namespace Mapsui.Rendering.Benchmarks
             await map.WaitForLoadingAsync();
             using var bitmap = mapRenderer.RenderToBitmapStream(map.Viewport, map.Map!.Layers, Color.White);
 #if DEBUG
-            File.WriteAllBytes(@$"{OutputFolder()}\Test.png", bitmap!.ToArray());
+            File.WriteAllBytes(@$"{OutputFolder()}\Test.png", bitmap.ToArray());
 #endif
         }
 
@@ -134,7 +134,7 @@ namespace Mapsui.Rendering.Benchmarks
             await pngMap.WaitForLoadingAsync();
             using var bitmap = mapRenderer.RenderToBitmapStream(pngMap.Viewport, pngMap.Map!.Layers, Color.White);
 #if DEBUG
-            File.WriteAllBytes(@$"{OutputFolder()}\Testpng.png", bitmap!.ToArray());
+            File.WriteAllBytes(@$"{OutputFolder()}\Testpng.png", bitmap.ToArray());
 #endif
         }
 
@@ -144,7 +144,7 @@ namespace Mapsui.Rendering.Benchmarks
             await webpMap.WaitForLoadingAsync();
             using var bitmap = mapRenderer.RenderToBitmapStream(webpMap.Viewport, webpMap.Map!.Layers, Color.White);
 #if DEBUG
-            File.WriteAllBytes(@$"{OutputFolder()}\Testwebp.png", bitmap!.ToArray());
+            File.WriteAllBytes(@$"{OutputFolder()}\Testwebp.png", bitmap.ToArray());
 #endif
         }
         
@@ -154,7 +154,7 @@ namespace Mapsui.Rendering.Benchmarks
             await skpMap.WaitForLoadingAsync();
             using var bitmap = mapRenderer.RenderToBitmapStream(skpMap.Viewport, skpMap.Map!.Layers, Color.White);
 #if DEBUG
-            File.WriteAllBytes(@$"{OutputFolder()}\Testskp.png", bitmap!.ToArray());
+            File.WriteAllBytes(@$"{OutputFolder()}\Testskp.png", bitmap.ToArray());
 #endif
         }              
 
