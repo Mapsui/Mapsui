@@ -6,26 +6,25 @@
 
 using System.Reflection;
 
-namespace Mapsui.Utilities
+namespace Mapsui.Utilities;
+
+/// <summary>
+///     Version information helper class
+/// </summary>
+public static class Version
 {
     /// <summary>
-    ///     Version information helper class
+    ///     Returns the current build version of Mapsui
     /// </summary>
-    public static class Version
+    /// <returns></returns>
+    public static System.Version? GetCurrentVersion()
     {
-        /// <summary>
-        ///     Returns the current build version of Mapsui
-        /// </summary>
-        /// <returns></returns>
-        public static System.Version? GetCurrentVersion()
-        {
-            var assembly = typeof(Version).GetTypeInfo().Assembly;
-            // In some PCL profiles the above line is: var assembly = typeof(MyType).Assembly;
-            if (assembly.FullName == null)
-                return null;
+        var assembly = typeof(Version).GetTypeInfo().Assembly;
+        // In some PCL profiles the above line is: var assembly = typeof(MyType).Assembly;
+        if (assembly.FullName == null)
+            return null;
 
-            var assemblyName = new AssemblyName(assembly.FullName);
-            return assemblyName.Version;
-        }
+        var assemblyName = new AssemblyName(assembly.FullName);
+        return assemblyName.Version;
     }
 }

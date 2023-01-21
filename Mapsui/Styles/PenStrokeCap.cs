@@ -1,9 +1,8 @@
-﻿namespace Mapsui.Styles
+﻿namespace Mapsui.Styles;
+
+public enum PenStrokeCap
 {
-    public enum PenStrokeCap
-    {
-        Butt = 0,
-        Round = 1,
-        Square = 2
-    }
+    Butt = 0,
+    Round = 1,
+    Square = 2
 }

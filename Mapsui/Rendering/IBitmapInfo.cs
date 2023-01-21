@@ -1,7 +1,6 @@
-﻿namespace Mapsui.Rendering
+﻿namespace Mapsui.Rendering;
+
+public interface IBitmapInfo
 {
-    public interface IBitmapInfo
-    {
-        long IterationUsed { get; set; }
-    }
+    long IterationUsed { get; set; }
 }

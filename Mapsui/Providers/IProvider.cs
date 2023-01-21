@@ -7,24 +7,23 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Mapsui.Layers;
 
-namespace Mapsui.Providers
+namespace Mapsui.Providers;
+
+/// <summary>
+/// Interface for data providers
+/// </summary>
+public interface IProvider
 {
     /// <summary>
-    /// Interface for data providers
+    /// The spatial reference ID (CRS)
     /// </summary>
-    public interface IProvider
-    {
-        /// <summary>
-        /// The spatial reference ID (CRS)
-        /// </summary>
-        string? CRS { get; set; }
+    string? CRS { get; set; }
 
-        /// <summary>
-        /// <see cref="MRect"/> of data set
-        /// </summary>
-        /// <returns>BoundingBox</returns>
-        MRect? GetExtent();
+    /// <summary>
+    /// <see cref="MRect"/> of data set
+    /// </summary>
+    /// <returns>BoundingBox</returns>
+    MRect? GetExtent();
 
-        Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo);
-    }
+    Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo);
 }

@@ -1,15 +1,14 @@
-﻿namespace Mapsui.Utilities
+﻿namespace Mapsui.Utilities;
+
+public class AnimationEventArgs
 {
-    public class AnimationEventArgs
+    public AnimationEventArgs(double value, ChangeType changeType)
     {
-        public AnimationEventArgs(double value, ChangeType changeType)
-        {
-            Value = value;
-            ChangeType = changeType;
-        }
-
-        public double Value { get; }
-
-        public ChangeType ChangeType { get; }
+        Value = value;
+        ChangeType = changeType;
     }
+
+    public double Value { get; }
+
+    public ChangeType ChangeType { get; }
 }

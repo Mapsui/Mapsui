@@ -4,14 +4,13 @@
 
 using System.Collections.Generic;
 
-namespace Mapsui.Widgets.ScaleBar
+namespace Mapsui.Widgets.ScaleBar;
+
+public interface IUnitConverter
 {
-    public interface IUnitConverter
-    {
-        double MeterRatio { get; }
+    double MeterRatio { get; }
 
-        IEnumerable<int> ScaleBarValues { get; }
+    IEnumerable<int> ScaleBarValues { get; }
 
-        string GetScaleText(int mapScaleValue);
-    }
+    string GetScaleText(int mapScaleValue);
 }

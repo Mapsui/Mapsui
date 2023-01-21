@@ -1,6 +1,5 @@
-﻿namespace Mapsui.Styles
+﻿namespace Mapsui.Styles;
+
+public interface IStyleRenderer
 {
-    public interface IStyleRenderer
-    {
-    }
 }

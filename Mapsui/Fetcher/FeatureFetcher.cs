@@ -8,37 +8,36 @@ using Mapsui.Providers;
 using Mapsui.Styles;
 using Mapsui.Utilities;
 
-namespace Mapsui.Fetcher
+namespace Mapsui.Fetcher;
+
+internal class FeatureFetcher
 {
-    internal class FeatureFetcher
+    private readonly FetchInfo _fetchInfo;
+    private readonly DataArrivedDelegate _dataArrived;
+    private readonly IProvider _provider;
+    private readonly AsyncLock _providerLock = new();
+    private readonly long _timeOfRequest;
+
+    public delegate void DataArrivedDelegate(IEnumerable<IFeature> features, object? state = null);
+
+    public FeatureFetcher(FetchInfo fetchInfo, IProvider provider, DataArrivedDelegate dataArrived, long timeOfRequest = default)
     {
-        private readonly FetchInfo _fetchInfo;
-        private readonly DataArrivedDelegate _dataArrived;
-        private readonly IProvider _provider;
-        private readonly AsyncLock _providerLock = new();
-        private readonly long _timeOfRequest;
+        _dataArrived = dataArrived;
+        var biggerBox = fetchInfo.Extent.Grow(
+            SymbolStyle.DefaultWidth * 2 * fetchInfo.Resolution,
+            SymbolStyle.DefaultHeight * 2 * fetchInfo.Resolution);
+        _fetchInfo = new FetchInfo(biggerBox, fetchInfo.Resolution, fetchInfo.CRS, fetchInfo.ChangeType);
 
-        public delegate void DataArrivedDelegate(IEnumerable<IFeature> features, object? state = null);
+        _provider = provider;
+        _timeOfRequest = timeOfRequest;
+    }
 
-        public FeatureFetcher(FetchInfo fetchInfo, IProvider provider, DataArrivedDelegate dataArrived, long timeOfRequest = default)
+    public async Task FetchOnThreadAsync()
+    {
+        using (await _providerLock.LockAsync())
         {
-            _dataArrived = dataArrived;
-            var biggerBox = fetchInfo.Extent.Grow(
-                SymbolStyle.DefaultWidth * 2 * fetchInfo.Resolution,
-                SymbolStyle.DefaultHeight * 2 * fetchInfo.Resolution);
-            _fetchInfo = new FetchInfo(biggerBox, fetchInfo.Resolution, fetchInfo.CRS, fetchInfo.ChangeType);
-
-            _provider = provider;
-            _timeOfRequest = timeOfRequest;
-        }
-
-        public async Task FetchOnThreadAsync()
-        {
-            using (await _providerLock.LockAsync())
-            {
-                var features = await _provider.GetFeaturesAsync(_fetchInfo);
-                _dataArrived.Invoke(features, _timeOfRequest);
-            }
+            var features = await _provider.GetFeaturesAsync(_fetchInfo);
+            _dataArrived.Invoke(features, _timeOfRequest);
         }
     }
 }

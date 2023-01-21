@@ -1,11 +1,10 @@
 using Mapsui.Styles;
 
-namespace Mapsui.Rendering
+namespace Mapsui.Rendering;
+
+public interface IRenderCache : ILabelCache, ISymbolCache, IVectorCache
 {
-    public interface IRenderCache : ILabelCache, ISymbolCache, IVectorCache
-    {
-        IVectorCache? VectorCache { get; set; }
-        ILabelCache LabelCache { get; set; }
-        ISymbolCache SymbolCache { get; set; }
-    }
+    IVectorCache? VectorCache { get; set; }
+    ILabelCache LabelCache { get; set; }
+    ISymbolCache SymbolCache { get; set; }
 }

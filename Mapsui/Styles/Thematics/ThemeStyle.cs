@@ -1,19 +1,18 @@
 using System;
 
-namespace Mapsui.Styles.Thematics
+namespace Mapsui.Styles.Thematics;
+
+public class ThemeStyle : Style, IThemeStyle
 {
-    public class ThemeStyle : Style, IThemeStyle
+    private readonly Func<IFeature, IStyle?> _method;
+
+    public ThemeStyle(Func<IFeature, IStyle?> method)
     {
-        private readonly Func<IFeature, IStyle?> _method;
+        _method = method;
+    }
 
-        public ThemeStyle(Func<IFeature, IStyle?> method)
-        {
-            _method = method;
-        }
-
-        public IStyle? GetStyle(IFeature attribute)
-        {
-            return _method(attribute);
-        }
+    public IStyle? GetStyle(IFeature attribute)
+    {
+        return _method(attribute);
     }
 }

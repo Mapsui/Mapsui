@@ -1,9 +1,8 @@
 using System.IO;
 
-namespace Mapsui.Providers.Wms
+namespace Mapsui.Providers.Wms;
+
+public interface IGetFeatureInfoParser
 {
-    public interface IGetFeatureInfoParser
-    {
-        FeatureInfo ParseWMSResult(string? layerName, Stream result);
-    }
+    FeatureInfo ParseWMSResult(string? layerName, Stream result);
 }
