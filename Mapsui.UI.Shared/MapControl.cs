@@ -18,23 +18,23 @@ using Mapsui.Widgets;
 
 #if __MAUI__
 using Microsoft.Maui.Controls;
-namespace Mapsui.UI.Maui
+namespace Mapsui.UI.Maui;
 #elif __UWP__
-namespace Mapsui.UI.Uwp
+namespace Mapsui.UI.Uwp;
 #elif __ANDROID__ && !HAS_UNO_WINUI
-namespace Mapsui.UI.Android
+namespace Mapsui.UI.Android;
 #elif __IOS__ && !HAS_UNO_WINUI
-namespace Mapsui.UI.iOS
+namespace Mapsui.UI.iOS;
 #elif __WINUI__
-namespace Mapsui.UI.WinUI
+namespace Mapsui.UI.WinUI;
 #elif __FORMS__
-namespace Mapsui.UI.Forms
+namespace Mapsui.UI.Forms;
 #elif __AVALONIA__
-namespace Mapsui.UI.Avalonia
+namespace Mapsui.UI.Avalonia;
 #elif __ETO_FORMS__
-namespace Mapsui.UI.Eto
+namespace Mapsui.UI.Eto;
 #elif __BLAZOR__
-namespace Mapsui.UI.Blazor
+namespace Mapsui.UI.Blazor;
 #else
 namespace Mapsui.UI.Wpf;
 #endif

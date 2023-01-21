@@ -17,101 +17,100 @@ using Mapsui.UI.Forms.Utils;
 #endif
 
 #if __MAUI__
-namespace Mapsui.UI.Maui
+namespace Mapsui.UI.Maui;
 #else
-namespace Mapsui.UI.Forms
+namespace Mapsui.UI.Forms;
 #endif
+
+public class Polyline : Drawable
 {
-    public class Polyline : Drawable
+    // Todo: Rename, Polyline indicates a MultiLineString but it is a single LineString.
+
+    private readonly ObservableRangeCollection<Position> _positions = new ObservableRangeCollection<Position>();
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="T:Mapsui.UI.Forms.Polyline"/> class.
+    /// </summary>
+    public Polyline()
     {
-        // Todo: Rename, Polyline indicates a MultiLineString but it is a single LineString.
+        _positions.CollectionChanged += OnCollectionChanged;
 
-        private readonly ObservableRangeCollection<Position> _positions = new ObservableRangeCollection<Position>();
+        CreateFeature();
+    }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="T:Mapsui.UI.Forms.Polyline"/> class.
-        /// </summary>
-        public Polyline()
+    /// <summary>
+    /// Initializes a new instance of the <see cref="T:Mapsui.UI.Forms.Polyline"/> class from encoded string as described here
+    /// https://developers.google.com/maps/documentation/utilities/polylinealgorithm
+    /// </summary>
+    /// <param name="encodedPolyline">Encoded polyline</param>
+    public Polyline(string encodedPolyline)
+    {
+        _positions.CollectionChanged += OnCollectionChanged;
+
+        CreateFeature();
+        DecodePolyline(encodedPolyline);
+    }
+
+    /// <summary>
+    /// Positions of line
+    /// </summary>
+    public IList<Position> Positions => _positions;
+
+    protected override void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    {
+        base.OnPropertyChanged(propertyName);
+
+        switch (propertyName)
         {
-            _positions.CollectionChanged += OnCollectionChanged;
-
-            CreateFeature();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="T:Mapsui.UI.Forms.Polyline"/> class from encoded string as described here
-        /// https://developers.google.com/maps/documentation/utilities/polylinealgorithm
-        /// </summary>
-        /// <param name="encodedPolyline">Encoded polyline</param>
-        public Polyline(string encodedPolyline)
-        {
-            _positions.CollectionChanged += OnCollectionChanged;
-
-            CreateFeature();
-            DecodePolyline(encodedPolyline);
-        }
-
-        /// <summary>
-        /// Positions of line
-        /// </summary>
-        public IList<Position> Positions => _positions;
-
-        protected override void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            base.OnPropertyChanged(propertyName);
-
-            switch (propertyName)
-            {
-                case nameof(Positions):
-                    if (Feature == null)
-                        CreateFeature();
-                    else
-                        Feature.Geometry = Positions.Select(p => p.ToCoordinate()).ToLineString();
-                    break;
-            }
-        }
-
-        private void OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
-        {
-            OnPropertyChanged(nameof(Positions));
-        }
-
-        private readonly object _sync = new();
-
-        /// <summary>
-        /// Create feature
-        /// </summary>
-        private void CreateFeature()
-        {
-            lock (_sync)
-            {
+            case nameof(Positions):
                 if (Feature == null)
-                {
-                    // Create a new one
-                    Feature = new GeometryFeature
-                    {
-                        Geometry = new LineString(Positions.Select(p => p.ToCoordinate()).ToArray()),
-                        ["Label"] = Label,
-                    };
-                    Feature.Styles.Clear();
-                    Feature.Styles.Add(new VectorStyle
-                    {
-                        Line = new Pen { Width = StrokeWidth, Color = StrokeColor.ToMapsui() },
+                    CreateFeature();
+                else
+                    Feature.Geometry = Positions.Select(p => p.ToCoordinate()).ToLineString();
+                break;
+        }
+    }
 
-                    });
-                }
+    private void OnCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    {
+        OnPropertyChanged(nameof(Positions));
+    }
+
+    private readonly object _sync = new();
+
+    /// <summary>
+    /// Create feature
+    /// </summary>
+    private void CreateFeature()
+    {
+        lock (_sync)
+        {
+            if (Feature == null)
+            {
+                // Create a new one
+                Feature = new GeometryFeature
+                {
+                    Geometry = new LineString(Positions.Select(p => p.ToCoordinate()).ToArray()),
+                    ["Label"] = Label,
+                };
+                Feature.Styles.Clear();
+                Feature.Styles.Add(new VectorStyle
+                {
+                    Line = new Pen { Width = StrokeWidth, Color = StrokeColor.ToMapsui() },
+
+                });
             }
         }
+    }
 
-        /// <summary>
-        /// Decode polyline
-        /// </summary>
-        /// <param name="encodedPolyline">Encoded polyline</param>
-        private void DecodePolyline(string encodedPolyline)
-        {
-            var positions = PolylineConverter.DecodePolyline(encodedPolyline);
-            if (positions != null)
-                positions.ForEach(o => Positions.Add(o));
-        }
+    /// <summary>
+    /// Decode polyline
+    /// </summary>
+    /// <param name="encodedPolyline">Encoded polyline</param>
+    private void DecodePolyline(string encodedPolyline)
+    {
+        var positions = PolylineConverter.DecodePolyline(encodedPolyline);
+        if (positions != null)
+            positions.ForEach(o => Positions.Add(o));
     }
 }
