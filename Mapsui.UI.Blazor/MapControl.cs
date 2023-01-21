@@ -13,311 +13,310 @@ using Mapsui.Utilities;
 
 #pragma warning disable IDISP004 // Don't ignore created IDisposable
 
-namespace Mapsui.UI.Blazor
+namespace Mapsui.UI.Blazor;
+
+public partial class MapControl : ComponentBase, IMapControl
 {
-    public partial class MapControl : ComponentBase, IMapControl
+    public static bool UseGPU { get; set; } = false;
+
+    protected SKCanvasView? _viewCpu;
+    protected SKGLView? _viewGpu;
+
+    [Inject]
+    private IJSRuntime JsRuntime { get; set; }
+
+    private SKImageInfo? _canvasSize;
+    private bool _onLoaded;
+    private MRect? _selectRectangle;
+    private MPoint? _downMousePosition;
+    private double? _lastY;
+    private string? _defaultCursor = Cursors.Default;
+    private readonly HashSet<string> _pressedKeys = new();
+    private bool _isInBoxZoomMode;
+    public string MoveCursor { get; set; } = Cursors.Move;
+    public int MoveButton { get; set; } = MouseButtons.Primary;
+    public int MoveModifier { get; set; } = Keys.None;
+    public int ZoomButton { get; set; } = MouseButtons.Primary;
+    public int ZoomModifier { get; set; } = Keys.Control;
+    public MouseWheelAnimation MouseWheelAnimation { get; } = new();
+    protected readonly string _elementId = Guid.NewGuid().ToString("N");
+    private MapsuiJsInterop? _interop;
+
+    public string ElementId => _elementId;
+    
+    protected MapsuiJsInterop Interop => _interop ??= new MapsuiJsInterop(JsRuntime);
+
+    protected override void OnInitialized()
     {
-        public static bool UseGPU { get; set; } = false;
+        CommonInitialize();
+        ControlInitialize();
+        base.OnInitialized();
+    }
 
-        protected SKCanvasView? _viewCpu;
-        protected SKGLView? _viewGpu;
+    protected void OnKeyDown(KeyboardEventArgs e)
+    {
+        _pressedKeys.Add(e.Code);
+    }
 
-        [Inject]
-        private IJSRuntime JsRuntime { get; set; }
+    protected void OnKeyUp(KeyboardEventArgs e)
+    {
+        _pressedKeys.Remove(e.Code);
+    }
 
-        private SKImageInfo? _canvasSize;
-        private bool _onLoaded;
-        private MRect? _selectRectangle;
-        private MPoint? _downMousePosition;
-        private double? _lastY;
-        private string? _defaultCursor = Cursors.Default;
-        private readonly HashSet<string> _pressedKeys = new();
-        private bool _isInBoxZoomMode;
-        public string MoveCursor { get; set; } = Cursors.Move;
-        public int MoveButton { get; set; } = MouseButtons.Primary;
-        public int MoveModifier { get; set; } = Keys.None;
-        public int ZoomButton { get; set; } = MouseButtons.Primary;
-        public int ZoomModifier { get; set; } = Keys.Control;
-        public MouseWheelAnimation MouseWheelAnimation { get; } = new();
-        protected readonly string _elementId = Guid.NewGuid().ToString("N");
-        private MapsuiJsInterop? _interop;
+    protected void OnPaintSurfaceCPU(SKPaintSurfaceEventArgs e)
+    {
+        // the the canvas and properties
+        var canvas = e.Surface.Canvas;
+        var info = e.Info;
 
-        public string ElementId => _elementId;
-        
-        protected MapsuiJsInterop Interop => _interop ??= new MapsuiJsInterop(JsRuntime);
+        OnPaintSurface(canvas, info);
+    }
 
-        protected override void OnInitialized()
+    protected void OnPaintSurfaceGPU(SKPaintGLSurfaceEventArgs e)
+    {
+        // the the canvas and properties
+        var canvas = e.Surface.Canvas;
+        var info = e.Info;
+
+        OnPaintSurface(canvas, info);
+    }
+
+    protected void OnPaintSurface(SKCanvas canvas, SKImageInfo info)
+    {
+        // On Loaded Workaround
+        if (!_onLoaded)
         {
-            CommonInitialize();
-            ControlInitialize();
-            base.OnInitialized();
+            _onLoaded = true;
+            OnLoadComplete();
         }
 
-        protected void OnKeyDown(KeyboardEventArgs e)
+        // Size changed Workaround
+        if (_canvasSize?.Width != info.Width || _canvasSize?.Height != info.Height)
         {
-            _pressedKeys.Add(e.Code);
+            _canvasSize = info;
+            OnSizeChanged();
         }
 
-        protected void OnKeyUp(KeyboardEventArgs e)
+        CommonDrawControl(canvas);
+    }
+
+    protected void ControlInitialize()
+    {
+        _invalidate = () =>
         {
-            _pressedKeys.Remove(e.Code);
+            if (_viewCpu != null)
+                _viewCpu?.Invalidate();
+            else
+                _viewGpu?.Invalidate();
+        };
+
+        // Mapsui.Rendering.Skia use Mapsui.Nts where GetDbaseLanguageDriver need encoding providers
+        System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+
+        Renderer = new MapRenderer();
+        RefreshGraphics();
+    }
+
+    private void OnLoadComplete()
+    {
+        SetViewportSize();
+    }
+
+    protected async void OnMouseWheel(WheelEventArgs e)
+    {
+        try
+        {
+            if (Map?.ZoomLock ?? true) return;
+            if (!Viewport.HasSize()) return;
+
+            var delta = e.DeltaY;
+            var resolution = MouseWheelAnimation.GetResolution((int)delta, _viewport, Map);
+
+            // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
+            resolution = Map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, Map.Resolutions,
+                Map.Extent);
+            Navigator?.ZoomTo(resolution, e.Location(await BoundingClientRectAsync()).ToMapsui(), MouseWheelAnimation.Duration,
+                MouseWheelAnimation.Easing);
+        }
+        catch (Exception ex)
+        {
+            Logger.Log(LogLevel.Error, ex.Message, ex);
+        }
+    }
+
+    private async Task<BoundingClientRect> BoundingClientRectAsync()
+    {
+        return await Interop.BoundingClientRectAsync(_elementId);
+    }
+
+    private void OnSizeChanged()
+    {
+        SetViewportSize();
+    }
+
+    private protected void RunOnUIThread(Action action)
+    {
+        // Only one thread is active in WebAssembly.
+        action();
+    }
+
+    protected async void OnMouseDown(MouseEventArgs e)
+    {
+        try 
+        { 
+            IsInBoxZoomMode = e.Button == ZoomButton && (ZoomModifier == Keys.None || ModifierPressed(ZoomModifier));
+
+            bool moveMode = e.Button == MoveButton && (MoveModifier == Keys.None || ModifierPressed(MoveModifier));
+
+            if (moveMode)
+                _defaultCursor = Cursor;
+
+            if (moveMode || IsInBoxZoomMode)
+                _downMousePosition = e.Location(await BoundingClientRectAsync());
+        }
+        catch (Exception ex)
+        {
+            Logger.Log(LogLevel.Error, ex.Message, ex);   
+        }
+    }
+
+    private bool ModifierPressed(int modifier)
+    {
+        switch (modifier)
+        {
+            case Keys.Alt:
+                return _pressedKeys.Contains("Alt");
+            case Keys.Control:
+                return _pressedKeys.Contains("Control");
+            case Keys.ShiftLeft:
+                return _pressedKeys.Contains("ShiftLeft") || _pressedKeys.Contains("ShiftRight") || _pressedKeys.Contains("Shift");
         }
 
-        protected void OnPaintSurfaceCPU(SKPaintSurfaceEventArgs e)
-        {
-            // the the canvas and properties
-            var canvas = e.Surface.Canvas;
-            var info = e.Info;
+        return false;
+    }
 
-            OnPaintSurface(canvas, info);
+    private bool IsInBoxZoomMode
+    {
+        get => _isInBoxZoomMode;
+        set
+        {
+            _selectRectangle = null;
+            _isInBoxZoomMode = value;
         }
+    }
 
-        protected void OnPaintSurfaceGPU(SKPaintGLSurfaceEventArgs e)
+    protected async void OnMouseUp(MouseEventArgs e)
+    {
+        try
         {
-            // the the canvas and properties
-            var canvas = e.Surface.Canvas;
-            var info = e.Info;
-
-            OnPaintSurface(canvas, info);
-        }
-
-        protected void OnPaintSurface(SKCanvas canvas, SKImageInfo info)
-        {
-            // On Loaded Workaround
-            if (!_onLoaded)
+            if (IsInBoxZoomMode)
             {
-                _onLoaded = true;
-                OnLoadComplete();
+                if (_selectRectangle != null)
+                {
+                    var previous = Viewport.ScreenToWorld(_selectRectangle.TopLeft.X, _selectRectangle.TopLeft.Y);
+                    var current = Viewport.ScreenToWorld(_selectRectangle.BottomRight.X,
+                        _selectRectangle.BottomRight.Y);
+                    ZoomToBox(previous, current);
+                }
+            }
+            else if (_downMousePosition != null)
+            {
+                if (IsClick(e.Location(await BoundingClientRectAsync()), _downMousePosition))
+                    OnInfo(InvokeInfo(e.Location(await  BoundingClientRectAsync()).ToMapsui(), _downMousePosition.ToMapsui(), 1));
             }
 
-            // Size changed Workaround
-            if (_canvasSize?.Width != info.Width || _canvasSize?.Height != info.Height)
-            {
-                _canvasSize = info;
-                OnSizeChanged();
-            }
+            _downMousePosition = null;
 
-            CommonDrawControl(canvas);
+            Cursor = _defaultCursor;
+
+            RefreshData();
         }
-
-        protected void ControlInitialize()
+        catch (Exception ex)
         {
-            _invalidate = () =>
-            {
-                if (_viewCpu != null)
-                    _viewCpu?.Invalidate();
-                else
-                    _viewGpu?.Invalidate();
-            };
-
-            // Mapsui.Rendering.Skia use Mapsui.Nts where GetDbaseLanguageDriver need encoding providers
-            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-
-            Renderer = new MapRenderer();
-            RefreshGraphics();
+            Logger.Log(LogLevel.Error, ex.Message, ex);
         }
+    }
 
-        private void OnLoadComplete()
+    private static bool IsClick(MPoint currentPosition, MPoint previousPosition)
+    {
+        return Math.Abs(currentPosition.Distance(previousPosition)) < 5;
+    }
+
+    protected async void OnMouseMove(MouseEventArgs e)
+    {
+        try
         {
-            SetViewportSize();
-        }
-
-        protected async void OnMouseWheel(WheelEventArgs e)
-        {
-            try
-            {
-                if (Map?.ZoomLock ?? true) return;
-                if (!Viewport.HasSize()) return;
-
-                var delta = e.DeltaY;
-                var resolution = MouseWheelAnimation.GetResolution((int)delta, _viewport, Map);
-
-                // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
-                resolution = Map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, Map.Resolutions,
-                    Map.Extent);
-                Navigator?.ZoomTo(resolution, e.Location(await BoundingClientRectAsync()).ToMapsui(), MouseWheelAnimation.Duration,
-                    MouseWheelAnimation.Easing);
-            }
-            catch (Exception ex)
-            {
-                Logger.Log(LogLevel.Error, ex.Message, ex);
-            }
-        }
-
-        private async Task<BoundingClientRect> BoundingClientRectAsync()
-        {
-            return await Interop.BoundingClientRectAsync(_elementId);
-        }
-
-        private void OnSizeChanged()
-        {
-            SetViewportSize();
-        }
-
-        private protected void RunOnUIThread(Action action)
-        {
-            // Only one thread is active in WebAssembly.
-            action();
-        }
-
-        protected async void OnMouseDown(MouseEventArgs e)
-        {
-            try 
-            { 
-                IsInBoxZoomMode = e.Button == ZoomButton && (ZoomModifier == Keys.None || ModifierPressed(ZoomModifier));
-
-                bool moveMode = e.Button == MoveButton && (MoveModifier == Keys.None || ModifierPressed(MoveModifier));
-
-                if (moveMode)
-                    _defaultCursor = Cursor;
-
-                if (moveMode || IsInBoxZoomMode)
-                    _downMousePosition = e.Location(await BoundingClientRectAsync());
-            }
-            catch (Exception ex)
-            {
-                Logger.Log(LogLevel.Error, ex.Message, ex);   
-            }
-        }
-
-        private bool ModifierPressed(int modifier)
-        {
-            switch (modifier)
-            {
-                case Keys.Alt:
-                    return _pressedKeys.Contains("Alt");
-                case Keys.Control:
-                    return _pressedKeys.Contains("Control");
-                case Keys.ShiftLeft:
-                    return _pressedKeys.Contains("ShiftLeft") || _pressedKeys.Contains("ShiftRight") || _pressedKeys.Contains("Shift");
-            }
-
-            return false;
-        }
-
-        private bool IsInBoxZoomMode
-        {
-            get => _isInBoxZoomMode;
-            set
-            {
-                _selectRectangle = null;
-                _isInBoxZoomMode = value;
-            }
-        }
-
-        protected async void OnMouseUp(MouseEventArgs e)
-        {
-            try
+            if (_downMousePosition != null)
             {
                 if (IsInBoxZoomMode)
                 {
-                    if (_selectRectangle != null)
-                    {
-                        var previous = Viewport.ScreenToWorld(_selectRectangle.TopLeft.X, _selectRectangle.TopLeft.Y);
-                        var current = Viewport.ScreenToWorld(_selectRectangle.BottomRight.X,
-                            _selectRectangle.BottomRight.Y);
-                        ZoomToBox(previous, current);
-                    }
+                    var x = e.Location(await BoundingClientRectAsync());
+                    var y = _downMousePosition;
+                    _selectRectangle = new MRect(Math.Min(x.X, y.X), Math.Min(x.Y, y.Y), Math.Max(x.X, y.X),
+                        Math.Max(x.Y, y.Y));
+                    if (_invalidate != null)
+                        _invalidate();
                 }
-                else if (_downMousePosition != null)
+                else // drag/pan - mode
                 {
-                    if (IsClick(e.Location(await BoundingClientRectAsync()), _downMousePosition))
-                        OnInfo(InvokeInfo(e.Location(await  BoundingClientRectAsync()).ToMapsui(), _downMousePosition.ToMapsui(), 1));
-                }
+                    Cursor = MoveCursor;
 
-                _downMousePosition = null;
+                    _viewport.Transform(e.Location(await BoundingClientRectAsync()).ToMapsui(), _downMousePosition.ToMapsui());
 
-                Cursor = _defaultCursor;
+                    RefreshGraphics();
 
-                RefreshData();
-            }
-            catch (Exception ex)
-            {
-                Logger.Log(LogLevel.Error, ex.Message, ex);
-            }
-        }
-
-        private static bool IsClick(MPoint currentPosition, MPoint previousPosition)
-        {
-            return Math.Abs(currentPosition.Distance(previousPosition)) < 5;
-        }
-
-        protected async void OnMouseMove(MouseEventArgs e)
-        {
-            try
-            {
-                if (_downMousePosition != null)
-                {
-                    if (IsInBoxZoomMode)
-                    {
-                        var x = e.Location(await BoundingClientRectAsync());
-                        var y = _downMousePosition;
-                        _selectRectangle = new MRect(Math.Min(x.X, y.X), Math.Min(x.Y, y.Y), Math.Max(x.X, y.X),
-                            Math.Max(x.Y, y.Y));
-                        if (_invalidate != null)
-                            _invalidate();
-                    }
-                    else // drag/pan - mode
-                    {
-                        Cursor = MoveCursor;
-
-                        _viewport.Transform(e.Location(await BoundingClientRectAsync()).ToMapsui(), _downMousePosition.ToMapsui());
-
-                        RefreshGraphics();
-
-                        _downMousePosition = e.Location(await BoundingClientRectAsync());
-                    }
+                    _downMousePosition = e.Location(await BoundingClientRectAsync());
                 }
             }
-            catch (Exception ex)
-            {
-                Logger.Log(LogLevel.Error, ex.Message, ex);
-            }
         }
-
-        public void ZoomToBox(MPoint beginPoint, MPoint endPoint)
+        catch (Exception ex)
         {
-            var width = Math.Abs(endPoint.X - beginPoint.X);
-            var height = Math.Abs(endPoint.Y - beginPoint.Y);
-            if (width <= 0) return;
-            if (height <= 0) return;
-
-            ZoomHelper.ZoomToBoudingbox(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y,
-                ViewportWidth, ViewportHeight, out var x, out var y, out var resolution);
-
-            Navigator?.NavigateTo(new MPoint(x, y), resolution, 384);
-
-            RefreshData();
-            RefreshGraphics();
-            ClearBBoxDrawing();
+            Logger.Log(LogLevel.Error, ex.Message, ex);
         }
+    }
 
-        private void ClearBBoxDrawing()
-        {
-            RunOnUIThread(() => IsInBoxZoomMode = false);
-        }
+    public void ZoomToBox(MPoint beginPoint, MPoint endPoint)
+    {
+        var width = Math.Abs(endPoint.X - beginPoint.X);
+        var height = Math.Abs(endPoint.Y - beginPoint.Y);
+        if (width <= 0) return;
+        if (height <= 0) return;
 
-        private protected float GetPixelDensity()
-        {
-            return 1;
-            // TODO: Ask for the Real Pixel size.
-            // var center = PointToScreen(Location + Size / 2);
-            // return Screen.FromPoint(center).LogicalPixelSize;
-        }
+        ZoomHelper.ZoomToBoudingbox(beginPoint.X, beginPoint.Y, endPoint.X, endPoint.Y,
+            ViewportWidth, ViewportHeight, out var x, out var y, out var resolution);
 
-        public void Dispose()
-        {
-            CommonDispose(true);
-        }
+        Navigator?.NavigateTo(new MPoint(x, y), resolution, 384);
 
-        public  float ViewportWidth => _canvasSize?.Width ?? 0;
-        public  float ViewportHeight => _canvasSize?.Height ?? 0;
+        RefreshData();
+        RefreshGraphics();
+        ClearBBoxDrawing();
+    }
 
-        // TODO: Implement Setting of Mouse
-        public string? Cursor { get; set; }
-        public async void OpenBrowser(string url)
-        {
-            await JsRuntime.InvokeAsync<object>("open", new object?[] { url, "_blank" });
-        }
+    private void ClearBBoxDrawing()
+    {
+        RunOnUIThread(() => IsInBoxZoomMode = false);
+    }
+
+    private protected float GetPixelDensity()
+    {
+        return 1;
+        // TODO: Ask for the Real Pixel size.
+        // var center = PointToScreen(Location + Size / 2);
+        // return Screen.FromPoint(center).LogicalPixelSize;
+    }
+
+    public void Dispose()
+    {
+        CommonDispose(true);
+    }
+
+    public  float ViewportWidth => _canvasSize?.Width ?? 0;
+    public  float ViewportHeight => _canvasSize?.Height ?? 0;
+
+    // TODO: Implement Setting of Mouse
+    public string? Cursor { get; set; }
+    public async void OpenBrowser(string url)
+    {
+        await JsRuntime.InvokeAsync<object>("open", new object?[] { url, "_blank" });
     }
 }
