@@ -1,23 +1,22 @@
 ﻿
-namespace Mapsui.Samples.Eto
+namespace Mapsui.Samples.Eto;
+
+using System.Collections.Concurrent;
+public class LimitedQueue<T> : ConcurrentQueue<T>
 {
-    using System.Collections.Concurrent;
-    public class LimitedQueue<T> : ConcurrentQueue<T>
+    public int Limit { get; set; }
+
+    public LimitedQueue(int limit)
     {
-        public int Limit { get; set; }
+        Limit = limit;
+    }
 
-        public LimitedQueue(int limit)
+    public new void Enqueue(T item)
+    {
+        while (Count >= Limit)
         {
-            Limit = limit;
+            TryDequeue(out _);
         }
-
-        public new void Enqueue(T item)
-        {
-            while (Count >= Limit)
-            {
-                TryDequeue(out _);
-            }
-            base.Enqueue(item);
-        }
+        base.Enqueue(item);
     }
 }
