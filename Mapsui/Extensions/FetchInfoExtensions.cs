@@ -1,12 +1,11 @@
 ﻿using Mapsui.Layers;
 
-namespace Mapsui.Extensions
+namespace Mapsui.Extensions;
+
+public static class FetchInfoExtensions
 {
-    public static class FetchInfoExtensions
+    public static Viewport ToViewport(this FetchInfo fetchInfo)
     {
-        public static Viewport ToViewport(this FetchInfo fetchInfo)
-        {
-            return Viewport.Create(fetchInfo.Extent, fetchInfo.Resolution);
-        }
+        return Viewport.Create(fetchInfo.Extent, fetchInfo.Resolution);
     }
 }

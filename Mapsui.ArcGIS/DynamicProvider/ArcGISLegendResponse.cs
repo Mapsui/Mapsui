@@ -1,7 +1,6 @@
-namespace Mapsui.ArcGIS.DynamicProvider
+namespace Mapsui.ArcGIS.DynamicProvider;
+
+public class ArcGISLegendResponse
 {
-    public class ArcGISLegendResponse
-    {
-        public ArcGISLegendResponseLayer[]? layers { get; set; }
-    }
+    public ArcGISLegendResponseLayer[]? layers { get; set; }
 }

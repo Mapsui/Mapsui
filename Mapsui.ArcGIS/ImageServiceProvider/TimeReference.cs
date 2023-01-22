@@ -1,8 +1,7 @@
-namespace Mapsui.ArcGIS.ImageServiceProvider
+namespace Mapsui.ArcGIS.ImageServiceProvider;
+
+public class TimeReference
 {
-    public class TimeReference
-    {
-        public bool respectsDaylightSaving { get; set; }
-        public string? timeZone { get; set; }
-    }
+    public bool respectsDaylightSaving { get; set; }
+    public string? timeZone { get; set; }
 }

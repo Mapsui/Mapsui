@@ -1,9 +1,8 @@
-﻿namespace Mapsui.Samples.Wpf.Editing
+﻿namespace Mapsui.Samples.Wpf.Editing;
+
+/// <summary>
+/// Interaction logic for App.xaml
+/// </summary>
+public partial class App
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
-    public partial class App
-    {
-    }
 }

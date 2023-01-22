@@ -1,29 +1,28 @@
 ﻿using Mapsui.Layers;
 
-namespace Mapsui.Samples.Wpf
+namespace Mapsui.Samples.Wpf;
+
+/// <summary>
+/// Interaction logic for LayerList.xaml
+/// </summary>
+public partial class LayerList
 {
-    /// <summary>
-    /// Interaction logic for LayerList.xaml
-    /// </summary>
-    public partial class LayerList
+    public LayerList()
     {
-        public LayerList()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+    }
 
-        public void Initialize(LayerCollection layers)
-        {
-            Items.Children.Clear();
+    public void Initialize(LayerCollection layers)
+    {
+        Items.Children.Clear();
 
-            foreach (var layer in layers)
-            {
-                var item = new LayerListItem { LayerName = layer.Name };
-                item.Enabled = layer.Enabled;
-                item.LayerOpacity = layer.Opacity;
-                item.Layer = layer;
-                Items.Children.Add(item);
-            }
+        foreach (var layer in layers)
+        {
+            var item = new LayerListItem { LayerName = layer.Name };
+            item.Enabled = layer.Enabled;
+            item.LayerOpacity = layer.Opacity;
+            item.Layer = layer;
+            Items.Children.Add(item);
         }
     }
 }

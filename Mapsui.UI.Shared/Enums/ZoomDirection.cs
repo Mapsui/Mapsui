@@ -1,8 +1,7 @@
-﻿namespace Mapsui.UI
+﻿namespace Mapsui.UI;
+
+public enum ZoomDirection
 {
-    public enum ZoomDirection
-    {
-        ZoomOut = -1,
-        ZoomIn = 1
-    }
+    ZoomOut = -1,
+    ZoomIn = 1
 }

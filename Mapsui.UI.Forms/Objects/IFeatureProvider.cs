@@ -1,9 +1,8 @@
 ﻿using Mapsui.Nts;
 
-namespace Mapsui.UI.Objects
+namespace Mapsui.UI.Objects;
+
+public interface IFeatureProvider
 {
-    public interface IFeatureProvider
-    {
-        GeometryFeature? Feature { get; }
-    }
+    GeometryFeature? Feature { get; }
 }

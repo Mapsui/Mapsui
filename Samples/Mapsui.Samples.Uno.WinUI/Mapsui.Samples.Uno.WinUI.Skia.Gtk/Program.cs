@@ -2,8 +2,8 @@ using System;
 using GLib;
 using Uno.UI.Runtime.Skia;
 
-namespace Mapsui.Samples.Uno.WinUI.Skia.Gtk
-{
+namespace Mapsui.Samples.Uno.WinUI.Skia.Gtk;
+
 	class Program
 	{
 		static void Main(string[] args)
@@ -19,4 +19,3 @@ namespace Mapsui.Samples.Uno.WinUI.Skia.Gtk
 			host.Run();
 		}
 	}
-}

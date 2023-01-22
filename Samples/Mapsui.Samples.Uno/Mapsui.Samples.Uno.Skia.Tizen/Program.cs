@@ -2,14 +2,13 @@
 using Uno.UI.Runtime.Skia;
 using Mapsui.Samples.Uwp;
 
-namespace Mapsui.Samples.Uno.Skia.Tizen
+namespace Mapsui.Samples.Uno.Skia.Tizen;
+
+class Program
 {
-    class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            var host = new TizenHost(() => new Mapsui.Samples.Uwp.App(), args);
-            host.Run();
-        }
+        var host = new TizenHost(() => new Mapsui.Samples.Uwp.App(), args);
+        host.Run();
     }
 }

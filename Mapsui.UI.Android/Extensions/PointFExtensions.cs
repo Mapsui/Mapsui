@@ -1,12 +1,11 @@
 using Android.Graphics;
 
-namespace Mapsui.UI.Android.Extensions
+namespace Mapsui.UI.Android.Extensions;
+
+internal static class PointFExtensions
 {
-    internal static class PointFExtensions
+    public static MPoint ToMapsui(this PointF point)
     {
-        public static MPoint ToMapsui(this PointF point)
-        {
-            return new MPoint(point.X, point.Y);
-        }
+        return new MPoint(point.X, point.Y);
     }
 }

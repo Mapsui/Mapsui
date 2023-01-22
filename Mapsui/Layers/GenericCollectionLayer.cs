@@ -5,29 +5,28 @@ using Mapsui.Extensions;
 using Mapsui.Providers;
 using Mapsui.Styles;
 
-namespace Mapsui.Layers
+namespace Mapsui.Layers;
+
+/// <summary>
+/// The GenericCollectionLayer uses a T of IEnumerable<IFeature> 
+/// </summary>
+public class GenericCollectionLayer<T> : BaseLayer where T : IEnumerable<IFeature>, new()
 {
-    /// <summary>
-    /// The GenericCollectionLayer uses a T of IEnumerable<IFeature> 
-    /// </summary>
-    public class GenericCollectionLayer<T> : BaseLayer where T : IEnumerable<IFeature>, new()
+    public GenericCollectionLayer() : base(nameof(MemoryLayer)) { }
+
+    public T Features { get; set; } = new T();
+
+    public override IEnumerable<IFeature> GetFeatures(MRect? rect, double resolution)
     {
-        public GenericCollectionLayer() : base(nameof(MemoryLayer)) { }
+        // Safeguard in case BoundingBox is null, most likely due to no features in layer
+        if (rect == null) { return new List<IFeature>(); }
 
-        public T Features { get; set; } = new T();
+        var biggerRect = rect.Grow(
+                SymbolStyle.DefaultWidth * 2 * resolution,
+                SymbolStyle.DefaultHeight * 2 * resolution);
 
-        public override IEnumerable<IFeature> GetFeatures(MRect? rect, double resolution)
-        {
-            // Safeguard in case BoundingBox is null, most likely due to no features in layer
-            if (rect == null) { return new List<IFeature>(); }
-
-            var biggerRect = rect.Grow(
-                    SymbolStyle.DefaultWidth * 2 * resolution,
-                    SymbolStyle.DefaultHeight * 2 * resolution);
-
-            return Features.Where(f => f.Extent?.Intersects(biggerRect) == true);
-        }
-
-        public override MRect? Extent => Features.GetExtent();
+        return Features.Where(f => f.Extent?.Intersects(biggerRect) == true);
     }
+
+    public override MRect? Extent => Features.GetExtent();
 }

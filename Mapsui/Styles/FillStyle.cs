@@ -1,18 +1,17 @@
-namespace Mapsui.Styles
+namespace Mapsui.Styles;
+
+public enum FillStyle
 {
-    public enum FillStyle
-    {
-        Solid,
-        BackwardDiagonal,
-        Dotted,
-        Cross,
-        DiagonalCross,
-        ForwardDiagonal,
-        Hollow,
-        Horizontal,
-        Vertical,
-        Bitmap,
-        BitmapRotated,
-        Svg
-    }
+    Solid,
+    BackwardDiagonal,
+    Dotted,
+    Cross,
+    DiagonalCross,
+    ForwardDiagonal,
+    Hollow,
+    Horizontal,
+    Vertical,
+    Bitmap,
+    BitmapRotated,
+    Svg
 }

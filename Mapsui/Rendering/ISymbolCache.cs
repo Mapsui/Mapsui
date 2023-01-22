@@ -1,11 +1,10 @@
 ﻿using Mapsui.Styles;
 
-namespace Mapsui.Rendering
-{
-    public interface ISymbolCache
-    {
-        Size? GetSize(int bitmapId); // perhaps use a tuple in C#7
+namespace Mapsui.Rendering;
 
-        IBitmapInfo GetOrCreate(int bitmapID);
-    }
+public interface ISymbolCache
+{
+    Size? GetSize(int bitmapId); // perhaps use a tuple in C#7
+
+    IBitmapInfo GetOrCreate(int bitmapID);
 }

@@ -1,10 +1,9 @@
-﻿namespace Mapsui.Samples.Maui
+﻿namespace Mapsui.Samples.Maui;
+
+public partial class AppShell : Shell
 {
-    public partial class AppShell : Shell
+    public AppShell()
     {
-        public AppShell()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

@@ -2,17 +2,16 @@
 using System.IO;
 using System.Reflection;
 
-namespace Mapsui.Tests.Utilities
+namespace Mapsui.Tests.Utilities;
+
+public static class AssemblyInfo
 {
-    public static class AssemblyInfo
+    public static string AssemblyDirectory
     {
-        public static string AssemblyDirectory
+        get
         {
-            get
-            {
-                var path = Assembly.GetExecutingAssembly().Location;
-                return Path.GetDirectoryName(path)!;
-            }
+            var path = Assembly.GetExecutingAssembly().Location;
+            return Path.GetDirectoryName(path)!;
         }
     }
 }

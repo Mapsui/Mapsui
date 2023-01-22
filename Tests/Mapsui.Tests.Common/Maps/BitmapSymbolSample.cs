@@ -8,62 +8,61 @@ using Mapsui.Styles;
 using Mapsui.UI;
 using Mapsui.Utilities;
 
-namespace Mapsui.Tests.Common.Maps
+namespace Mapsui.Tests.Common.Maps;
+
+public class BitmapSymbolSample : IMapControlSample
 {
-    public class BitmapSymbolSample : IMapControlSample
+    public string Name => "Bitmap Symbol";
+    public string Category => "Tests";
+
+    public void Setup(IMapControl mapControl)
     {
-        public string Name => "Bitmap Symbol";
-        public string Category => "Tests";
+        mapControl.Map = CreateMap();
+    }
 
-        public void Setup(IMapControl mapControl)
+    public static Map CreateMap()
+    {
+        var layer = new MemoryLayer
         {
-            mapControl.Map = CreateMap();
-        }
+            Style = null,
+            Features = CreateFeatures(),
+            Name = "Points with bitmaps"
+        };
 
-        public static Map CreateMap()
+        var map = new Map
         {
-            var layer = new MemoryLayer
-            {
-                Style = null,
-                Features = CreateFeatures(),
-                Name = "Points with bitmaps"
-            };
+            BackColor = Color.FromString("WhiteSmoke"),
+            Home = n => n.NavigateTo(layer.Extent!.Grow(layer.Extent.Width * 2))
+        };
 
-            var map = new Map
-            {
-                BackColor = Color.FromString("WhiteSmoke"),
-                Home = n => n.NavigateTo(layer.Extent!.Grow(layer.Extent.Width * 2))
-            };
+        map.Layers.Add(layer);
 
-            map.Layers.Add(layer);
+        return map;
+    }
 
-            return map;
-        }
+    public static IEnumerable<IFeature> CreateFeatures()
+    {
+        var circleIconId = typeof(BitmapSymbolSample).LoadBitmapId("Resources.Images.circle.png");
+        var checkeredIconId = typeof(BitmapSymbolSample).LoadBitmapId("Resources.Images.checkered.png");
 
-        public static IEnumerable<IFeature> CreateFeatures()
+        return new List<IFeature>
         {
-            var circleIconId = typeof(BitmapSymbolSample).LoadBitmapId("Resources.Images.circle.png");
-            var checkeredIconId = typeof(BitmapSymbolSample).LoadBitmapId("Resources.Images.checkered.png");
-
-            return new List<IFeature>
+            new PointFeature(new MPoint(50, 50))
             {
-                new PointFeature(new MPoint(50, 50))
-                {
-                    Styles = new[] {new VectorStyle {Fill = new Brush(Color.Red)}}
-                },
-                new PointFeature(new MPoint(50, 100))
-                {
-                    Styles = new[] {new SymbolStyle { BitmapId = circleIconId}}
-                },
-                new PointFeature(new MPoint(100, 50))
-                {
-                    Styles = new[] {new SymbolStyle { BitmapId = checkeredIconId}}
-                },
-                new PointFeature(new MPoint(100, 100))
-                {
-                    Styles = new[] {new VectorStyle {Fill = new Brush(Color.Green), Outline = null}}
-                }
-            };
-        }
+                Styles = new[] {new VectorStyle {Fill = new Brush(Color.Red)}}
+            },
+            new PointFeature(new MPoint(50, 100))
+            {
+                Styles = new[] {new SymbolStyle { BitmapId = circleIconId}}
+            },
+            new PointFeature(new MPoint(100, 50))
+            {
+                Styles = new[] {new SymbolStyle { BitmapId = checkeredIconId}}
+            },
+            new PointFeature(new MPoint(100, 100))
+            {
+                Styles = new[] {new VectorStyle {Fill = new Brush(Color.Green), Outline = null}}
+            }
+        };
     }
 }

@@ -1,9 +1,8 @@
-﻿namespace Mapsui.Styles
+﻿namespace Mapsui.Styles;
+
+public enum StrokeJoin
 {
-    public enum StrokeJoin
-    {
-        Miter = 0,
-        Round = 1,
-        Bevel = 2
-    }
+    Miter = 0,
+    Round = 1,
+    Bevel = 2
 }

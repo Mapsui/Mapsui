@@ -1,8 +1,8 @@
 using System;
 using Uno.UI.Runtime.Skia;
 
-namespace Mapsui.Samples.Uno.WinUI
-{
+namespace Mapsui.Samples.Uno.WinUI;
+
 	class Program
 	{
 		static void Main(string[] args)
@@ -20,4 +20,3 @@ namespace Mapsui.Samples.Uno.WinUI
 			}
 		}
 	}
-}

@@ -1,6 +1,5 @@
-﻿namespace Mapsui.Widgets
+﻿namespace Mapsui.Widgets;
+
+public interface IWidgetRenderer
 {
-    public interface IWidgetRenderer
-    {
-    }
 }

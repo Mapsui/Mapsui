@@ -9,35 +9,34 @@ using Mapsui.UI.Forms;
 #endif
 
 #if __MAUI__
-namespace Mapsui.Samples.Maui
+namespace Mapsui.Samples.Maui;
 #else
-namespace Mapsui.Samples.Forms
+namespace Mapsui.Samples.Forms;
 #endif
+
+public class MyLocationSample : IFormsSample
 {
-    public class MyLocationSample : IFormsSample
+    public string Name => "MyLocation Sample";
+
+    public string Category => "Forms";
+
+    public bool OnClick(object? sender, EventArgs args)
     {
-        public string Name => "MyLocation Sample";
+        var mapView = sender as MapView;
+        var e = args as MapClickedEventArgs;
 
-        public string Category => "Forms";
-
-        public bool OnClick(object? sender, EventArgs args)
-        {
-            var mapView = sender as MapView;
-            var e = args as MapClickedEventArgs;
-
-            if (mapView == null)
-                return false;
-
-            mapView.MyLocationLayer.IsMoving = mapView.MyLocationEnabled;
-            mapView.MyLocationEnabled = true;
-            mapView.UseDoubleTap = true;
-
+        if (mapView == null)
             return false;
-        }
 
-        public void Setup(IMapControl mapControl)
-        {
-            mapControl.Map = OsmSample.CreateMap();
-        }
+        mapView.MyLocationLayer.IsMoving = mapView.MyLocationEnabled;
+        mapView.MyLocationEnabled = true;
+        mapView.UseDoubleTap = true;
+
+        return false;
+    }
+
+    public void Setup(IMapControl mapControl)
+    {
+        mapControl.Map = OsmSample.CreateMap();
     }
 }

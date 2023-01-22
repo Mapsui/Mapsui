@@ -14,56 +14,55 @@ using KnownColor = Xamarin.Forms.Color;
 #endif
 
 #if __MAUI__
-namespace Mapsui.Samples.Maui
+namespace Mapsui.Samples.Maui;
 #else
-namespace Mapsui.Samples.Forms
+namespace Mapsui.Samples.Forms;
 #endif
+
+public class PolylineSample : IFormsSample
 {
-    public class PolylineSample : IFormsSample
+    public string Name => "Add Polyline Sample";
+
+    public string Category => "Forms";
+
+    public bool OnClick(object? sender, EventArgs args)
     {
-        public string Name => "Add Polyline Sample";
+        var mapView = sender as MapView;
+        var e = args as MapClickedEventArgs;
 
-        public string Category => "Forms";
+        if (mapView == null)
+            return false;
 
-        public bool OnClick(object? sender, EventArgs args)
+        if (e == null)
+            return false;
+
+        UI.Objects.Drawable f;
+
+        lock (mapView.Drawables)
         {
-            var mapView = sender as MapView;
-            var e = args as MapClickedEventArgs;
-
-            if (mapView == null)
-                return false;
-
-            if (e == null)
-                return false;
-
-            UI.Objects.Drawable f;
-
-            lock (mapView.Drawables)
+            if (mapView.Drawables.Count == 0)
             {
-                if (mapView.Drawables.Count == 0)
-                {
-                    f = new Polyline { StrokeWidth = 4, StrokeColor = KnownColor.Red, IsClickable = true };
-                    mapView.Drawables.Add(f);
-                }
-                else
-                {
-                    f = mapView.Drawables.First();
-                }
-
-                if (f is Polyline polyline)
-                {
-                    polyline.Positions.Add(e.Point);
-                }
+                f = new Polyline { StrokeWidth = 4, StrokeColor = KnownColor.Red, IsClickable = true };
+                mapView.Drawables.Add(f);
+            }
+            else
+            {
+                f = mapView.Drawables.First();
             }
 
-            return true;
+            if (f is Polyline polyline)
+            {
+                polyline.Positions.Add(e.Point);
+            }
         }
 
-        public void Setup(IMapControl mapControl)
-        {
-            mapControl.Map = OsmSample.CreateMap();
+        return true;
+    }
 
-            ((MapView)mapControl).UseDoubleTap = false;
-        }
+    public void Setup(IMapControl mapControl)
+    {
+        mapControl.Map = OsmSample.CreateMap();
+
+        ((MapView)mapControl).UseDoubleTap = false;
     }
 }

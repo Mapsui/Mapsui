@@ -1,8 +1,7 @@
-﻿namespace Mapsui.Widgets.ScaleBar
+﻿namespace Mapsui.Widgets.ScaleBar;
+
+public enum ScaleBarMode
 {
-    public enum ScaleBarMode
-    {
-        Single,
-        Both
-    };
-}
+    Single,
+    Both
+};

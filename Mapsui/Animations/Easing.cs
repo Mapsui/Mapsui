@@ -26,70 +26,69 @@
 
 using System;
 
-namespace Mapsui.Utilities
+namespace Mapsui.Utilities;
+
+public class Easing
 {
-    public class Easing
+    public static readonly Easing Linear = new(x => x);
+
+    public static readonly Easing SinOut = new(x => Math.Sin(x * Math.PI * 0.5f));
+    public static readonly Easing SinIn = new(x => 1.0f - Math.Cos(x * Math.PI * 0.5f));
+    public static readonly Easing SinInOut = new(x => -Math.Cos(Math.PI * x) / 2.0f + 0.5f);
+
+    public static readonly Easing CubicIn = new(x => x * x * x);
+    public static readonly Easing CubicOut = new(x => Math.Pow(x - 1.0f, 3.0f) + 1.0f);
+    public static readonly Easing CubicInOut = new(x => x < 0.5f ? Math.Pow(x * 2.0f, 3.0f) / 2.0f : (Math.Pow((x - 1) * 2.0f, 3.0f) + 2.0f) / 2.0f);
+
+    public static readonly Easing QuarticIn = new(x => x * x * x * x * x);
+    public static readonly Easing QuarticOut = new(x => 1 - (--x) * x * x * x);
+
+    public static readonly Easing BounceOut;
+    public static readonly Easing BounceIn;
+
+    public static readonly Easing SpringIn = new(x => x * x * ((1.70158f + 1) * x - 1.70158f));
+    public static readonly Easing SpringOut = new(x => (x - 1) * (x - 1) * ((1.70158f + 1) * (x - 1) + 1.70158f) + 1);
+    private readonly Func<double, double> _easingFunc;
+
+    static Easing()
     {
-        public static readonly Easing Linear = new(x => x);
+        BounceOut = new Easing(p => {
+            if (p < 1 / 2.75f)
+            {
+                return 7.5625f * p * p;
+            }
+            if (p < 2 / 2.75f)
+            {
+                p -= 1.5f / 2.75f;
 
-        public static readonly Easing SinOut = new(x => Math.Sin(x * Math.PI * 0.5f));
-        public static readonly Easing SinIn = new(x => 1.0f - Math.Cos(x * Math.PI * 0.5f));
-        public static readonly Easing SinInOut = new(x => -Math.Cos(Math.PI * x) / 2.0f + 0.5f);
+                return 7.5625f * p * p + .75f;
+            }
+            if (p < 2.5f / 2.75f)
+            {
+                p -= 2.25f / 2.75f;
 
-        public static readonly Easing CubicIn = new(x => x * x * x);
-        public static readonly Easing CubicOut = new(x => Math.Pow(x - 1.0f, 3.0f) + 1.0f);
-        public static readonly Easing CubicInOut = new(x => x < 0.5f ? Math.Pow(x * 2.0f, 3.0f) / 2.0f : (Math.Pow((x - 1) * 2.0f, 3.0f) + 2.0f) / 2.0f);
+                return 7.5625f * p * p + .9375f;
+            }
+            p -= 2.625f / 2.75f;
 
-        public static readonly Easing QuarticIn = new(x => x * x * x * x * x);
-        public static readonly Easing QuarticOut = new(x => 1 - (--x) * x * x * x);
+            return 7.5625f * p * p + .984375f;
+        });
 
-        public static readonly Easing BounceOut;
-        public static readonly Easing BounceIn;
+        BounceIn = new Easing(p => 1.0f - BounceOut.Ease(1 - p));
+    }
 
-        public static readonly Easing SpringIn = new(x => x * x * ((1.70158f + 1) * x - 1.70158f));
-        public static readonly Easing SpringOut = new(x => (x - 1) * (x - 1) * ((1.70158f + 1) * (x - 1) + 1.70158f) + 1);
-        private readonly Func<double, double> _easingFunc;
+    public Easing(Func<double, double> easingFunc)
+    {
+        _easingFunc = easingFunc ?? throw new ArgumentNullException(nameof(easingFunc));
+    }
 
-        static Easing()
-        {
-            BounceOut = new Easing(p => {
-                if (p < 1 / 2.75f)
-                {
-                    return 7.5625f * p * p;
-                }
-                if (p < 2 / 2.75f)
-                {
-                    p -= 1.5f / 2.75f;
+    public double Ease(double v)
+    {
+        return _easingFunc(v);
+    }
 
-                    return 7.5625f * p * p + .75f;
-                }
-                if (p < 2.5f / 2.75f)
-                {
-                    p -= 2.25f / 2.75f;
-
-                    return 7.5625f * p * p + .9375f;
-                }
-                p -= 2.625f / 2.75f;
-
-                return 7.5625f * p * p + .984375f;
-            });
-
-            BounceIn = new Easing(p => 1.0f - BounceOut.Ease(1 - p));
-        }
-
-        public Easing(Func<double, double> easingFunc)
-        {
-            _easingFunc = easingFunc ?? throw new ArgumentNullException(nameof(easingFunc));
-        }
-
-        public double Ease(double v)
-        {
-            return _easingFunc(v);
-        }
-
-        public static implicit operator Easing(Func<double, double> func)
-        {
-            return new Easing(func);
-        }
+    public static implicit operator Easing(Func<double, double> func)
+    {
+        return new Easing(func);
     }
 }

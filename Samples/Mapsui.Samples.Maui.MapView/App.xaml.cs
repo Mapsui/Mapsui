@@ -6,25 +6,24 @@ using Microsoft.Maui.Devices;
 using Application = Microsoft.Maui.Controls.Application;
 using LogLevel = Mapsui.Logging.LogLevel;
 
-namespace Mapsui.Samples.Maui
+namespace Mapsui.Samples.Maui;
+
+public partial class App : Application
 {
-    public partial class App : Application
+    public App()
     {
-        public App()
-        {
-            InitializeComponent();
+        InitializeComponent();
 
-            Logger.LogDelegate += LogMethod;
+        Logger.LogDelegate += LogMethod;
 
-            if (DeviceInfo.Idiom == DeviceIdiom.Phone)
-                MainPage = new NavigationPage(new MainPage());
-            else
-                MainPage = new MainPageLarge();
-        }
+        if (DeviceInfo.Idiom == DeviceIdiom.Phone)
+            MainPage = new NavigationPage(new MainPage());
+        else
+            MainPage = new MainPageLarge();
+    }
 
-        private void LogMethod(LogLevel logLevel, string message, Exception? exception)
-        {
-            Debug.WriteLine($"{logLevel}: {message}, {exception}");
-        }
+    private void LogMethod(LogLevel logLevel, string message, Exception? exception)
+    {
+        Debug.WriteLine($"{logLevel}: {message}, {exception}");
     }
 }

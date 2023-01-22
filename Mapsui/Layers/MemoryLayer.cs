@@ -6,39 +6,38 @@ using Mapsui.Extensions;
 using Mapsui.Providers;
 using Mapsui.Styles;
 
-namespace Mapsui.Layers
+namespace Mapsui.Layers;
+
+/// <summary>
+/// The MemoryLayer has all features in memory.
+/// </summary>
+public class MemoryLayer : BaseLayer
 {
     /// <summary>
-    /// The MemoryLayer has all features in memory.
+    /// Create a new layer
     /// </summary>
-    public class MemoryLayer : BaseLayer
+    public MemoryLayer() : this(nameof(MemoryLayer)) { }
+
+    /// <summary>
+    /// Create layer with name
+    /// </summary>
+    /// <param name="layerName">Name to use for layer</param>
+    public MemoryLayer(string layerName) : base(layerName) { }
+
+    public IEnumerable<IFeature> Features { get; set; } = new ConcurrentBag<IFeature>();
+
+
+    public override IEnumerable<IFeature> GetFeatures(MRect? rect, double resolution)
     {
-        /// <summary>
-        /// Create a new layer
-        /// </summary>
-        public MemoryLayer() : this(nameof(MemoryLayer)) { }
+        // Safeguard in case BoundingBox is null, most likely due to no features in layer
+        if (rect == null) { return new List<IFeature>(); }
 
-        /// <summary>
-        /// Create layer with name
-        /// </summary>
-        /// <param name="layerName">Name to use for layer</param>
-        public MemoryLayer(string layerName) : base(layerName) { }
+        var biggerRect = rect.Grow(
+                SymbolStyle.DefaultWidth * 2 * resolution,
+                SymbolStyle.DefaultHeight * 2 * resolution);
 
-        public IEnumerable<IFeature> Features { get; set; } = new ConcurrentBag<IFeature>();
-
-
-        public override IEnumerable<IFeature> GetFeatures(MRect? rect, double resolution)
-        {
-            // Safeguard in case BoundingBox is null, most likely due to no features in layer
-            if (rect == null) { return new List<IFeature>(); }
-
-            var biggerRect = rect.Grow(
-                    SymbolStyle.DefaultWidth * 2 * resolution,
-                    SymbolStyle.DefaultHeight * 2 * resolution);
-
-            return Features.Where(f => f.Extent?.Intersects(biggerRect) == true);
-        }
-
-        public override MRect? Extent => Features.GetExtent();
+        return Features.Where(f => f.Extent?.Intersects(biggerRect) == true);
     }
+
+    public override MRect? Extent => Features.GetExtent();
 }

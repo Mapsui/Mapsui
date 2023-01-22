@@ -1,9 +1,8 @@
-﻿namespace Mapsui.Widgets
+﻿namespace Mapsui.Widgets;
+
+public enum VerticalAlignment
 {
-    public enum VerticalAlignment
-    {
-        Top,
-        Center,
-        Bottom
-    }
+    Top,
+    Center,
+    Bottom
 }

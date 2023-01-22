@@ -1,12 +1,11 @@
 ﻿using Avalonia;
 
-namespace Mapsui.UI.Avalonia.Extensions
+namespace Mapsui.UI.Avalonia.Extensions;
+
+public static class PointExtensions
 {
-    public static class PointExtensions
+    public static MPoint ToMapsui(this Point point)
     {
-        public static MPoint ToMapsui(this Point point)
-        {
-            return new MPoint(point.X, point.Y);
-        }
+        return new MPoint(point.X, point.Y);
     }
 }

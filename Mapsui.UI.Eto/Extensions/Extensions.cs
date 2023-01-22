@@ -1,12 +1,11 @@
 ﻿
-namespace Mapsui.UI.Eto.Extensions
+namespace Mapsui.UI.Eto.Extensions;
+
+using global::Eto.Drawing;
+public static class Extensions
 {
-    using global::Eto.Drawing;
-    public static class Extensions
+    public static MPoint ToMapsui(this PointF point)
     {
-        public static MPoint ToMapsui(this PointF point)
-        {
-            return new MPoint(point.X, point.Y);
-        }
+        return new MPoint(point.X, point.Y);
     }
 }
