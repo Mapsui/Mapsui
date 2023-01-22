@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -479,6 +480,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
     /// </summary>
 #if __BLAZOR__
     [Parameter]
+    [SuppressMessage("Usage", "BL0007:Component parameters should be auto properties")]
 #endif
     public Map? Map
     {

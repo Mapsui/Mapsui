@@ -16,6 +16,11 @@ public class MapsuiJsInterop : IAsyncDisposable
 
     public MapsuiJsInterop(IJSRuntime jsRuntime)
     {
+        if (jsRuntime == null)
+        {
+            throw new ArgumentNullException(nameof(jsRuntime));
+        }
+        
         _moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
             "import", "./_content/Mapsui.Blazor/mapsuiJsInterop.js").AsTask());
     }
