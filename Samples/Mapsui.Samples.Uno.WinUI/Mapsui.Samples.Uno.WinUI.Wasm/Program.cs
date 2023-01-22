@@ -1,8 +1,8 @@
 using System;
 using Microsoft.UI.Xaml;
 
-namespace Mapsui.Samples.Uno.WinUI.Wasm
-{
+namespace Mapsui.Samples.Uno.WinUI.Wasm;
+
 	public class Program
 	{
 		private static App _app;
@@ -14,4 +14,3 @@ namespace Mapsui.Samples.Uno.WinUI.Wasm
 			return 0;
 		}
 	}
-}

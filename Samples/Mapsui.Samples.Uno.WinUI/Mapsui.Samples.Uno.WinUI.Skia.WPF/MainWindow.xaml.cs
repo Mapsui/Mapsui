@@ -13,8 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Mapsui.Samples.Uno.WinUI.WPF.Host
-{
+namespace Mapsui.Samples.Uno.WinUI.WPF.Host;
+
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
@@ -27,4 +27,3 @@ namespace Mapsui.Samples.Uno.WinUI.WPF.Host
 			root.Content = new global::Uno.UI.Skia.Platform.WpfHost(Dispatcher, () => new Mapsui.Samples.Uno.WinUI.App());
 		}
 	}
-}
