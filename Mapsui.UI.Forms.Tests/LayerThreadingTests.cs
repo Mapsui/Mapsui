@@ -18,7 +18,7 @@ public class LayerThreadingTests
     public async Task TestObservableCollectionProviderAsync()
     {
         _exceptions.Clear();
-        
+
         var observableCollection = new ObservableCollection<Callout>();
         var provider = new ObservableCollectionProvider<Callout>(observableCollection);
         using var layer = new Layer("test");
@@ -37,10 +37,10 @@ public class LayerThreadingTests
             }
         });
 
-        var task2 = Task.Run(async () => 
+        var task2 = Task.Run(async () =>
         {
             try
-            { 
+            {
                 await GetFeaturesAsync(provider);
             }
             catch (Exception e)
@@ -49,10 +49,10 @@ public class LayerThreadingTests
             }
         });
 
-        var task3 = Task.Run(() => 
+        var task3 = Task.Run(() =>
         {
             try
-            { 
+            {
                 GetFeatures(layer);
             }
             catch (Exception e)

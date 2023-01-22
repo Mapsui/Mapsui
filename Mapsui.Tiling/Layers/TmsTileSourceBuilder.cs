@@ -18,7 +18,7 @@ namespace Mapsui.Tiling.Layers;
 public static class TmsTileSourceBuilder
 {
     public static async Task<ITileSource> BuildAsync(string urlToTileMapXml,
-        bool overrideTmsUrlWithUrlToTileMapXml, 
+        bool overrideTmsUrlWithUrlToTileMapXml,
         IPersistentCache<byte[]>? persistentCache = null)
     {
         var urlPersitentCache = persistentCache as IUrlPersistentCache;
@@ -38,7 +38,7 @@ public static class TmsTileSourceBuilder
         var state = (object[]?)result.AsyncState;
         if (state == null)
             return;
-        
+
         var errorCallback = (Action<Exception>)state[0];
 
         try

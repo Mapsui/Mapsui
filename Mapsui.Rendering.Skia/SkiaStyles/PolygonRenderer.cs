@@ -18,8 +18,8 @@ internal static class PolygonRenderer
     public static void Draw(SKCanvas canvas, IReadOnlyViewport viewport, VectorStyle vectorStyle, IFeature feature,
         Polygon polygon, float opacity, ISymbolCache? symbolCache = null, IVectorCache? vectorCache = null)
     {
-        
-        
+
+
         float lineWidth = Convert.ToSingle(vectorStyle?.Outline?.Width ?? 1);
         SKPaint paint;
         SKPaint paintFill;
@@ -28,13 +28,13 @@ internal static class PolygonRenderer
         {
             paint = CreateSkPaint(vectorStyle?.Outline, opacity);
             paintFill = CreateSkPaint(vectorStyle?.Fill, opacity, viewport.Rotation, symbolCache);
-            path =  polygon.ToSkiaPath(viewport, canvas.LocalClipBounds, lineWidth);
+            path = polygon.ToSkiaPath(viewport, canvas.LocalClipBounds, lineWidth);
         }
         else
         {
             paint = vectorCache.GetOrCreatePaint(vectorStyle?.Outline, opacity, CreateSkPaint);
             paintFill = vectorCache.GetOrCreatePaint(vectorStyle?.Fill, opacity, viewport.Rotation, CreateSkPaint);
-            path = vectorCache.GetOrCreatePath(viewport, polygon, lineWidth, (geometry, viewport, lineWidth) => geometry.ToSkiaPath(viewport, viewport.ToSkiaRect(), lineWidth));    
+            path = vectorCache.GetOrCreatePath(viewport, polygon, lineWidth, (geometry, viewport, lineWidth) => geometry.ToSkiaPath(viewport, viewport.ToSkiaRect(), lineWidth));
         }
 
         if (vectorStyle?.Fill?.FillStyle == FillStyle.Solid)
@@ -53,12 +53,12 @@ internal static class PolygonRenderer
                 bounds.Inflate(inflate, inflate);
                 // Draw rect with bigger size, which is clipped by path
                 canvas.DrawRect(bounds, paintFill);
-            }    
+            }
         }
 
         if (vectorStyle?.Outline != null)
         {
-            canvas.DrawPath(path, paint);    
+            canvas.DrawPath(path, paint);
         }
     }
 
@@ -67,12 +67,12 @@ internal static class PolygonRenderer
         var fillColor = Color.Gray; // default
 
         var paintFill = new SKPaint { IsAntialias = true };
-        
+
         if (brush != null)
         {
             fillColor = brush.Color;
         }
-        
+
         // Is there a FillStyle?
         if (brush?.FillStyle == FillStyle.Solid)
         {

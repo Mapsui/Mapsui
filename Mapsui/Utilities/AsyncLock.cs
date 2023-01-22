@@ -32,7 +32,7 @@ public class AsyncLock
     internal SemaphoreSlim _retry = new SemaphoreSlim(0, 1);
     private const long UnlockedId = 0x00; // "owning" task id when unlocked
     internal long _owningId = UnlockedId;
-    internal int _owningThreadId = (int) UnlockedId;
+    internal int _owningThreadId = (int)UnlockedId;
     private static long AsyncStackCounter = 0;
     // An AsyncLocal<T> is not really the task-based equivalent to a ThreadLocal<T>, in that
     // it does not track the async flow (as the documentation describes) but rather it is

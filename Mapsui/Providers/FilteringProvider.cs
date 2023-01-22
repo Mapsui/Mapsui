@@ -9,14 +9,14 @@ namespace Mapsui.Providers;
 public class FilteringProvider : IProvider
 {
     private readonly IProvider _provider;
-    private readonly Func<IFeature,bool> _filter;
+    private readonly Func<IFeature, bool> _filter;
 
-    public FilteringProvider(IProvider provider, Func<IFeature,bool> filter)
+    public FilteringProvider(IProvider provider, Func<IFeature, bool> filter)
     {
         _provider = provider;
         _filter = filter;
     }
-    
+
     public string? CRS
     {
         get => _provider.CRS;

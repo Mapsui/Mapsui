@@ -85,7 +85,8 @@ public class Projection : IProjection
 
     private static void Project(IFeature feature, Func<double, double, (double, double)> transformFunc)
     {
-        feature.CoordinateVisitor((x, y, setter) => {
+        feature.CoordinateVisitor((x, y, setter) =>
+        {
             var (xOut, yOut) = transformFunc(x, y);
             setter(xOut, yOut);
         });
@@ -94,7 +95,8 @@ public class Projection : IProjection
     private static void Project(IEnumerable<IFeature> features, Func<double, double, (double, double)> transformFunc)
     {
         foreach (var feature in features)
-            feature.CoordinateVisitor((x, y, setter) => {
+            feature.CoordinateVisitor((x, y, setter) =>
+            {
                 var (xOut, yOut) = transformFunc(x, y);
                 setter(xOut, yOut);
             });

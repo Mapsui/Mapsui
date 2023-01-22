@@ -13,7 +13,7 @@ public partial class MainPage : ContentPage
     static MainPage()
     {
         // todo: find proper way to load assembly
-        Mapsui.Tests.Common.Utilities.LoadAssembly();       
+        Mapsui.Tests.Common.Utilities.LoadAssembly();
     }
 
     readonly IEnumerable<ISampleBase> allSamples;

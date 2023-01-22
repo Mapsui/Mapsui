@@ -23,9 +23,9 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
     static MainPageLarge()
     {
         // todo: find proper way to load assembly
-        Mapsui.Tests.Common.Utilities.LoadAssembly();       
+        Mapsui.Tests.Common.Utilities.LoadAssembly();
     }
-    
+
     IEnumerable<ISampleBase> allSamples;
     Func<object?, EventArgs, bool>? clicker;
     private CancellationTokenSource? gpsCancelation;
@@ -122,7 +122,7 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
             {
                 await sample.SetupAsync(mapView);
             });
-            
+
         }
 
         clicker = null;
@@ -159,7 +159,8 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
             this.gpsCancelation?.Dispose();
             this.gpsCancelation = new CancellationTokenSource();
 
-            await Task.Run(async () => {
+            await Task.Run(async () =>
+            {
                 while (!gpsCancelation.IsCancellationRequested)
                 {
                     var request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
@@ -167,7 +168,8 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
                     if (Application.Current == null)
                         return;
 
-                    await Application.Current.Dispatcher.DispatchAsync(async () => {
+                    await Application.Current.Dispatcher.DispatchAsync(async () =>
+                    {
 #else
                     await Device.InvokeOnMainThreadAsync(async () => {
 #endif
@@ -201,20 +203,21 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
     [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
     private async void MyLocationPositionChanged(Location e)
     {
-        try 
-        { 
-            await Application.Current?.Dispatcher?.DispatchAsync(() => {
-            mapView?.MyLocationLayer.UpdateMyLocation(new UI.Maui.Position(e.Latitude, e.Longitude));
-            if (e.Course != null)
+        try
+        {
+            await Application.Current?.Dispatcher?.DispatchAsync(() =>
             {
-                mapView?.MyLocationLayer.UpdateMyDirection(e.Course.Value, mapView?.Viewport.Rotation ?? 0);
-            }
+                mapView?.MyLocationLayer.UpdateMyLocation(new UI.Maui.Position(e.Latitude, e.Longitude));
+                if (e.Course != null)
+                {
+                    mapView?.MyLocationLayer.UpdateMyDirection(e.Course.Value, mapView?.Viewport.Rotation ?? 0);
+                }
 
-            if (e.Speed != null)
-            {
-                mapView?.MyLocationLayer.UpdateMySpeed(e.Speed.Value);
-            }
-            
+                if (e.Speed != null)
+                {
+                    mapView?.MyLocationLayer.UpdateMySpeed(e.Speed.Value);
+                }
+
             })!;
         }
         catch (Exception ex)

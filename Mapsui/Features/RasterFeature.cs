@@ -22,7 +22,8 @@ public class RasterFeature : BaseFeature, IFeature
     {
         if (Raster != null)
             foreach (var point in new[] { Raster.Min, Raster.Max })
-                visit(point.X, point.Y, (x, y) => {
+                visit(point.X, point.Y, (x, y) =>
+                {
                     point.X = x;
                     point.Y = y;
                 });

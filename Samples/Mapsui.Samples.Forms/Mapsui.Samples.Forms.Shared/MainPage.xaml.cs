@@ -14,7 +14,7 @@ public partial class MainPage : ContentPage
     static MainPage()
     {
         // todo: find proper way to load assembly
-        Mapsui.Tests.Common.Utilities.LoadAssembly();       
+        Mapsui.Tests.Common.Utilities.LoadAssembly();
     }
 
     IEnumerable<ISampleBase>? allSamples;
@@ -98,7 +98,7 @@ public partial class MainPage : ContentPage
         }
         catch (Exception e)
         {
-            Logger.Log(LogLevel.Error, $"Error when navigating to page={page} exception={e}", e);                
+            Logger.Log(LogLevel.Error, $"Error when navigating to page={page} exception={e}", e);
         }
     }
 }

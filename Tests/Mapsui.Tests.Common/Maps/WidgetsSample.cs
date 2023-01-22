@@ -38,7 +38,7 @@ public class WidgetsSample : IMapControlSample
         return map;
     }
 
-    private static ScaleBarWidget CreateScaleBarWidget(Map map, 
+    private static ScaleBarWidget CreateScaleBarWidget(Map map,
         HorizontalAlignment horizontalAlignment = HorizontalAlignment.Left,
         VerticalAlignment verticalAlignment = VerticalAlignment.Top,
         Alignment textAligment = Alignment.Left)

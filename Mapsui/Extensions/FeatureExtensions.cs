@@ -68,7 +68,7 @@ public static class FeatureExtensions
         foreach (var feature in features)
         {
             if (feature.Extent is null) continue;
-            result = result is null ? new MRect(feature.Extent): result.Join(feature.Extent);
+            result = result is null ? new MRect(feature.Extent) : result.Join(feature.Extent);
         }
         return result;
     }

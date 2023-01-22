@@ -60,7 +60,8 @@ public class GetFeatureInfo
         _infoFormat = infoFormat;
         var requestUrl = CreateRequestUrl(baseUrl, wmsVersion, infoFormat, srs, layer, extendXmin, extendYmin, extendXmax, extendYmax, x, y, mapWidth, mapHeight);
 
-        Catch.TaskRun(async () => {
+        Catch.TaskRun(async () =>
+        {
             using var task = await _getStreamAsync(requestUrl);
             try
             {

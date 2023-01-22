@@ -40,7 +40,7 @@ public class GmlGetFeatureInfoParser : IGetFeatureInfoParser
 
     private void LookExtractMultipleElements(XElement? layer)
     {
-        if (layer==null || !layer.HasElements) return;
+        if (layer == null || !layer.HasElements) return;
         var element = layer.Descendants().FirstOrDefault();
 
         if (element != null)
@@ -59,7 +59,7 @@ public class GmlGetFeatureInfoParser : IGetFeatureInfoParser
     {
         if (layer == null)
             return;
-        
+
         foreach (var feature in layer.Elements())
         {
             _featureInfo?.FeatureInfos?.Add(ExtractFeatureElements(feature));

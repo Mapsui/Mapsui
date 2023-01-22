@@ -72,7 +72,7 @@ public class Brush
     {
         if (brush == null)
             return false;
-        
+
         return _bitmapId == brush._bitmapId && Equals(Color, brush.Color) && Equals(Background, brush.Background) && FillStyle == brush.FillStyle;
     }
 

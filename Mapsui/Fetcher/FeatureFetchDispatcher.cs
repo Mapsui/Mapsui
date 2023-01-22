@@ -41,7 +41,7 @@ internal class FeatureFetchDispatcher<T> : IFetchDispatcher where T : IFeature
         try
         {
             var features = DataSource != null ? await DataSource.GetFeaturesAsync(fetchInfo) : new List<IFeature>();
-            
+
             FetchCompleted(features, null);
         }
         catch (Exception ex)

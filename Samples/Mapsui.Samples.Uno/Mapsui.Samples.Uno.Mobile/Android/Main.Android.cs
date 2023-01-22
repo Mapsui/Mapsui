@@ -14,31 +14,31 @@ using Mapsui.Samples.Uwp;
 
 namespace Mapsui.Samples.Uno.Droid
 {
-	[global::Android.App.ApplicationAttribute(
-		Label = "@string/ApplicationName",
-		Icon = "@mipmap/icon",
-		LargeHeap = true,
-		HardwareAccelerated = true,
-		Theme = "@style/AppTheme"
-	)]
-	public class Application : Windows.UI.Xaml.NativeApplication
-	{
-		public Application(IntPtr javaReference, JniHandleOwnership transfer)
-			: base(() => new App(), javaReference, transfer)
-		{
-			ConfigureUniversalImageLoader();
-		}
+    [global::Android.App.ApplicationAttribute(
+        Label = "@string/ApplicationName",
+        Icon = "@mipmap/icon",
+        LargeHeap = true,
+        HardwareAccelerated = true,
+        Theme = "@style/AppTheme"
+    )]
+    public class Application : Windows.UI.Xaml.NativeApplication
+    {
+        public Application(IntPtr javaReference, JniHandleOwnership transfer)
+            : base(() => new App(), javaReference, transfer)
+        {
+            ConfigureUniversalImageLoader();
+        }
 
-		private static void ConfigureUniversalImageLoader()
-		{
-			// Create global configuration and initialize ImageLoader with this config
-			ImageLoaderConfiguration config = new ImageLoaderConfiguration
-				.Builder(Context)
-				.Build();
+        private static void ConfigureUniversalImageLoader()
+        {
+            // Create global configuration and initialize ImageLoader with this config
+            ImageLoaderConfiguration config = new ImageLoaderConfiguration
+                .Builder(Context)
+                .Build();
 
-			ImageLoader.Instance.Init(config);
+            ImageLoader.Instance.Init(config);
 
-			ImageSource.DefaultImageLoader = ImageLoader.Instance.LoadImageAsync;
-		}
-	}
+            ImageSource.DefaultImageLoader = ImageLoader.Instance.LoadImageAsync;
+        }
+    }
 }

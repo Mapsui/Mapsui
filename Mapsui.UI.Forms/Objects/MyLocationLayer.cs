@@ -234,7 +234,8 @@ public class MyLocationLayer : MemoryLayer
                 _animationMyLocationStart = MyLocation;
                 _animationMyLocationEnd = newLocation;
 
-                var animation = new Animation((v) => {
+                var animation = new Animation((v) =>
+                {
                     var deltaLat = (_animationMyLocationEnd.Latitude - _animationMyLocationStart.Latitude) * v;
                     var deltaLon = (_animationMyLocationEnd.Longitude - _animationMyLocationStart.Longitude) * v;
                     var modified = InternalUpdateMyLocation(new Position(_animationMyLocationStart.Latitude + deltaLat, _animationMyLocationStart.Longitude + deltaLon));
@@ -295,7 +296,8 @@ public class MyLocationLayer : MemoryLayer
 
             if (animated)
             {
-                var animation = new Animation((v) => {
+                var animation = new Animation((v) =>
+                {
                     if ((int)v != (int)_locStyle.SymbolRotation)
                     {
                         _locStyle.SymbolRotation = (int)v % 360;
@@ -372,7 +374,8 @@ public class MyLocationLayer : MemoryLayer
 
             if (animated)
             {
-                var animation = new Animation((v) => {
+                var animation = new Animation((v) =>
+                {
                     if ((int)v != (int)_dirStyle.SymbolRotation)
                     {
                         _dirStyle.SymbolRotation = (int)v % 360;

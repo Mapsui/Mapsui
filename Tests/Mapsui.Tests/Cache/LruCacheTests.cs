@@ -32,12 +32,12 @@ public class LruCacheUnitTest
         var item1 = new TestDisposable();
         var item2 = new TestDisposable();
         var item3 = new TestDisposable();
-        
+
         // add 3 items
         cache.Put(1, item1);
         cache.Put(2, item2);
         cache.Put(3, item3);
-        
+
         // Item 1 should be disposed
         Assert.IsTrue(item1.Disposed);
     }

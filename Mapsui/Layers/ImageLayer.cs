@@ -80,8 +80,9 @@ public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvid
         if (e.PropertyName == nameof(DataSource))
         {
             _busyExtent = true;
-            Catch.TaskRun(() => {
-                try 
+            Catch.TaskRun(() =>
+            {
+                try
                 {
                     // Run in background because it could take time because
                     // this could involve database access or a web request
@@ -136,9 +137,9 @@ public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvid
         if (!Enabled) return;
         // Fetching an image, that often covers the whole map, is expensive. Only do it on Discrete changes.
         if (fetchInfo.ChangeType == ChangeType.Continuous) return;
-        
+
         _fetchInfo = fetchInfo;
-        Logger.Log(LogLevel.Debug, @$"Refresh Data: Resolution: { fetchInfo.Resolution } Change Type: {fetchInfo.ChangeType} Extent: {fetchInfo.Extent} ");
+        Logger.Log(LogLevel.Debug, @$"Refresh Data: Resolution: {fetchInfo.Resolution} Change Type: {fetchInfo.ChangeType} Extent: {fetchInfo.Extent} ");
 
         Busy = true;
         if (_isFetching)
@@ -148,7 +149,7 @@ public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvid
         }
 
         _startFetchTimer.Change(FetchDelay, Timeout.Infinite);
-    }      
+    }
 
     private void StartNewFetch(FetchInfo fetchInfo)
     {
@@ -160,7 +161,8 @@ public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvid
 
         var fetcher = new FeatureFetcher(new FetchInfo(fetchInfo), _dataSource, DataArrived, DateTime.Now.Ticks);
 
-        Catch.TaskRun(async () => {
+        Catch.TaskRun(async () =>
+        {
             try
             {
                 Logger.Log(LogLevel.Debug, $"Start image fetch at {DateTime.Now.TimeOfDay}");

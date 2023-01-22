@@ -59,9 +59,11 @@ public partial class MapControl : UIView, IMapControl
     private void Initialize()
     {
         InitCanvas();
-        
-        _invalidate = () => {
-            RunOnUIThread(() => {
+
+        _invalidate = () =>
+        {
+            RunOnUIThread(() =>
+            {
                 SetNeedsDisplay();
                 _glCanvas?.SetNeedsDisplay();
             });
@@ -154,7 +156,7 @@ public partial class MapControl : UIView, IMapControl
 
         CommonDrawControl(canvas);
     }
-    
+
     private void OnPaintSurface(object? sender, SKPaintSurfaceEventArgs args)
     {
         if (PixelDensity <= 0)
@@ -245,13 +247,13 @@ public partial class MapControl : UIView, IMapControl
             InitCanvas();
             if (UseGPU)
             {
-                _glCanvas!.Frame = value;    
+                _glCanvas!.Frame = value;
             }
             else
             {
                 _canvas!.Frame = value;
             }
-            
+
             base.Frame = value;
             SetViewportSize();
             OnPropertyChanged();
@@ -328,7 +330,7 @@ public partial class MapControl : UIView, IMapControl
             InitCanvas();
             if (UseGPU)
             {
-                return (float)_glCanvas!.Frame.Width;    
+                return (float)_glCanvas!.Frame.Width;
             }
 
             return (float)_canvas!.Frame.Width;
@@ -343,7 +345,7 @@ public partial class MapControl : UIView, IMapControl
             InitCanvas();
             if (UseGPU)
             {
-                return (float)_glCanvas!.Frame.Height;    
+                return (float)_glCanvas!.Frame.Height;
             }
 
             return (float)_canvas!.Frame.Height;

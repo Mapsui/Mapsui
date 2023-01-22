@@ -268,7 +268,7 @@ public class ConcurrentHashSet<T> : IReadOnlyCollection<T>, ICollection<T>
     {
         if (item == null)
             return false;
-        
+
         return AddInternal(item, _comparer.GetHashCode(item), true);
     }
 
@@ -302,7 +302,7 @@ public class ConcurrentHashSet<T> : IReadOnlyCollection<T>, ICollection<T>
     {
         if (item == null)
             return false;
-        
+
         var hashcode = _comparer.GetHashCode(item);
 
         // We must capture the _buckets field in a local variable. It is set to a new table on each table resize.
@@ -335,7 +335,7 @@ public class ConcurrentHashSet<T> : IReadOnlyCollection<T>, ICollection<T>
     {
         if (item == null)
             return false;
-        
+
         var hashcode = _comparer.GetHashCode(item);
         while (true)
         {
@@ -451,7 +451,7 @@ public class ConcurrentHashSet<T> : IReadOnlyCollection<T>, ICollection<T>
     {
         if (item == null)
             return false;
-        
+
         return TryRemove(item);
     }
 
@@ -461,7 +461,7 @@ public class ConcurrentHashSet<T> : IReadOnlyCollection<T>, ICollection<T>
         {
             if (item == null)
                 continue;
-            
+
             AddInternal(item, _comparer.GetHashCode(item), false);
         }
 

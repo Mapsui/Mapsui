@@ -34,7 +34,7 @@ public class LabelStyleFeatureSizeTests
 
         Assert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize, 0));
     }
-    
+
     [Test]
     public void DefaultSizeFeatureSize_Font()
     {
@@ -50,10 +50,10 @@ public class LabelStyleFeatureSizeTests
 
         using var skPaint = new SKPaint();
         var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, new RenderCache());
-        
+
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
-            Assert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize * 2, 0));    
+            Assert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize * 2, 0));
         }
         else
         {
@@ -61,7 +61,7 @@ public class LabelStyleFeatureSizeTests
             Assert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize * 2 - 3, 0));
         }
     }
-    
+
     [Test]
     public void DefaultSizeFeatureSize_Offset_x()
     {
@@ -70,16 +70,16 @@ public class LabelStyleFeatureSizeTests
             LabelColumn = "test",
             Offset = new Offset(2, 0),
         };
-        
+
         using var feature = new PointFeature(new MPoint(0, 0));
         feature["test"] = "Mapsui";
 
         using var skPaint = new SKPaint();
         var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, new RenderCache());
 
-        Assert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize + 2 * 2, 0) );
+        Assert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize + 2 * 2, 0));
     }
-    
+
     [Test]
     public void DefaultSizeFeatureSize_Offset_y()
     {
@@ -94,10 +94,10 @@ public class LabelStyleFeatureSizeTests
 
         using var skPaint = new SKPaint();
         var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, new RenderCache());
-        
+
         Assert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize + 2 * 2, 0));
     }
-    
+
     [Test]
     public void DefaultSizeFeatureSize_Offset_x_y()
     {
@@ -112,7 +112,7 @@ public class LabelStyleFeatureSizeTests
 
         using var skPaint = new SKPaint();
         var size = LabelStyleRenderer.FeatureSize(feature, labelStyle, skPaint, new RenderCache());
-        
-        Assert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize + Math.Sqrt(2*2 + 2*2) * 2, 0));
+
+        Assert.AreEqual(Math.Round(size, 0), Math.Round(LabelSize + Math.Sqrt(2 * 2 + 2 * 2) * 2, 0));
     }
 }

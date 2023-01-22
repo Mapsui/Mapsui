@@ -212,7 +212,7 @@ public class Client
     public static async Task<Client> CreateAsync(string url, string? wmsVersion = null, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
     {
         var client = new Client(getStreamAsync, persistentCache);
-        
+
         var strReq = new StringBuilder(url);
         if (!url.Contains("?"))
             strReq.Append("?");
@@ -228,7 +228,7 @@ public class Client
         client.ParseCapabilities(xml);
         return client;
     }
-    
+
     /// <summary>
     /// Initializes WMS server and parses the Capabilities request
     /// </summary>

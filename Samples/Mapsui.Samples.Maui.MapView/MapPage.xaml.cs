@@ -132,11 +132,13 @@ public sealed partial class MapPage : ContentPage, IDisposable
             this.gpsCancelation?.Dispose();
             this.gpsCancelation = new CancellationTokenSource();
 
-            await Task.Run(async () => {
+            await Task.Run(async () =>
+            {
                 while (!gpsCancelation.IsCancellationRequested)
                 {
                     var request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
-                    Application.Current?.Dispatcher.DispatchAsync(async () => {
+                    Application.Current?.Dispatcher.DispatchAsync(async () =>
+                    {
                         var location = await Geolocation.GetLocationAsync(request, this.gpsCancelation.Token).ConfigureAwait(false);
                         if (location != null)
                         {
@@ -168,7 +170,8 @@ public sealed partial class MapPage : ContentPage, IDisposable
     {
         try
         {
-            await Application.Current?.Dispatcher?.DispatchAsync(() => {
+            await Application.Current?.Dispatcher?.DispatchAsync(() =>
+            {
                 mapView?.MyLocationLayer.UpdateMyLocation(new UI.Maui.Position(e.Latitude, e.Longitude));
                 if (e.Course != null)
                 {
@@ -179,9 +182,9 @@ public sealed partial class MapPage : ContentPage, IDisposable
                 {
                     mapView?.MyLocationLayer.UpdateMySpeed(e.Speed.Value);
                 }
-            })!;   
+            })!;
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             Logger.Log(LogLevel.Error, ex.Message, ex);
         }

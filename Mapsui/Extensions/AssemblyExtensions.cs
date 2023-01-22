@@ -8,7 +8,7 @@ public static class AssemblyExtensions
     {
         if (assembly.FullName == null)
             return null;
-        
+
         return new AssemblyName(assembly.FullName).Name;
     }
 

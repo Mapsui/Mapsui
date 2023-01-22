@@ -29,7 +29,7 @@ public class HttpClientUtil : IDisposable
     private readonly Dictionary<string, string?> _requestHeaders;
     private byte[]? _postData;
     private string? _proxyUrl;
-    private string? _url;             
+    private string? _url;
     private ICredentials? _credentials;
     private readonly IUrlPersistentCache? _persistentCache;
 
@@ -120,14 +120,14 @@ public class HttpClientUtil : IDisposable
 
             httpClientHandler.Proxy = proxy;
         }
-            
+
 
         if (Credentials != null)
         {
             httpClientHandler.UseDefaultCredentials = false;
             httpClientHandler.Credentials = Credentials;
         }
-        
+
         HttpClient httpClient;
 
         try
@@ -146,17 +146,17 @@ public class HttpClientUtil : IDisposable
             throw;
         }
 
-        httpClient.Timeout = new TimeSpan(0,0,1,30);
+        httpClient.Timeout = new TimeSpan(0, 0, 1, 30);
 
         try
         {
             foreach (var header in _requestHeaders)
             {
-                httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);    
+                httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
             }
 
             HttpResponseMessage webResponse;
-            
+
             /* HTTP POST */
             if (_postData != null)
             {
@@ -166,7 +166,7 @@ public class HttpClientUtil : IDisposable
             /* HTTP GET */
             else
                 webResponse = await httpClient.GetAsync(_url);
-            
+
             if (_persistentCache != null)
             {
                 using var stream = await webResponse.Content.ReadAsStreamAsync();
@@ -174,7 +174,7 @@ public class HttpClientUtil : IDisposable
                 {
                     bytes = StreamHelper.ReadFully(stream);
                     _persistentCache?.Add(_url, bytes);
-                    return new MemoryStream(bytes);    
+                    return new MemoryStream(bytes);
                 }
 
                 return null;
@@ -205,10 +205,10 @@ public class HttpClientUtil : IDisposable
     /// This method closes the WebResponse object.
     /// </summary>
     public void Close() //This class should implement dispose instead.
-    {                        
+    {
     }
 
     public virtual void Dispose()
-    {                        
+    {
     }
 }

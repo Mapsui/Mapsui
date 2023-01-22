@@ -140,9 +140,10 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             // Events
             _glView.Touch += OnTouch;
             _glView.PaintSurface += OnGLPaintSurface;
-            _invalidate = () => { 
+            _invalidate = () =>
+            {
                 // The line below sometimes has a null reference exception on application close.
-                RunOnUIThread(() => _glView.InvalidateSurface()); 
+                RunOnUIThread(() => _glView.InvalidateSurface());
             };
             view = _glView;
         }
@@ -717,7 +718,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
                         rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
                             _virtualRotation, _viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
                     }
-                
+
                     if (prevCenter != null)
                         _viewport.Transform(center, prevCenter, (Map?.ZoomLock ?? true) ? 1 : radius / prevRadius, rotationDelta);
 

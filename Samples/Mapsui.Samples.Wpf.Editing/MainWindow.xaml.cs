@@ -87,7 +87,8 @@ public partial class MainWindow
             Margin = new Thickness(4)
         };
 
-        radioButton.Click += (_, _) => {
+        radioButton.Click += (_, _) =>
+        {
             MapControl!.Map?.Layers.Clear();
             MapControl.Map = sample.Value();
 
@@ -115,7 +116,8 @@ public partial class MainWindow
 
     private void LogMethod(LogLevel logLevel, string? message, Exception? exception)
     {
-        Dispatcher.BeginInvoke(() => {
+        Dispatcher.BeginInvoke(() =>
+        {
             _logMessage.Enqueue(new LogModel { Exception = exception, LogLevel = logLevel, Message = message });
             return LogTextBox.Text = ToMultiLineString(_logMessage);
         });
@@ -158,7 +160,8 @@ public partial class MainWindow
         _targetLayer.Clear();
 
         _editManager.EditMode = EditMode.Modify;
-        Loaded += (_, _) => {
+        Loaded += (_, _) =>
+        {
             var extent = _editManager.Layer.Extent!.Grow(_editManager.Layer.Extent.Width * 0.2);
             MapControl.Navigator?.NavigateTo(extent);
         };

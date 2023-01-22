@@ -7,7 +7,7 @@ public interface IVectorCache
 {
     T GetOrCreatePaint<T>(Pen? pen, float opacity, Func<Pen?, float, T> toPaint)
         where T : class;
-    
+
     T GetOrCreatePaint<T>(Brush? brush, float opacity, double rotation, Func<Brush?, float, double, ISymbolCache, T> toPaint)
         where T : class;
 

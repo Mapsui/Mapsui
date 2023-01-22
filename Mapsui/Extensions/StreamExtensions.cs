@@ -11,7 +11,7 @@ public static class StreamExtensions
     public static byte[] ToBytes(this Stream input)
     {
         using var ms = new MemoryStream();
-        
+
         switch (input.GetType().Name)
         {
             case "ContentLengthReadStream":

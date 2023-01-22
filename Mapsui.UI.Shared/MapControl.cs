@@ -367,7 +367,8 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
 
     private void MapDataChanged(object? sender, DataChangedEventArgs? e)
     {
-        RunOnUIThread(() => {
+        RunOnUIThread(() =>
+        {
             try
             {
                 if (e == null)
@@ -488,7 +489,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
             BeforeSetMap();
             _map = value;
             AfterSetMap(_map);
-            OnPropertyChanged();                
+            OnPropertyChanged();
         }
     }
 #endif

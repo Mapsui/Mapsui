@@ -93,7 +93,8 @@ public class CapabilitiesHelper
 
     private void ExecuteRequest(string url, CapabilitiesType capabilitiesType, ICredentials? credentials = null, string? token = null)
     {
-        Task.Run(async () => {
+        Task.Run(async () =>
+        {
             _capabilitiesType = capabilitiesType;
             _url = RemoveTrailingSlash(url);
 

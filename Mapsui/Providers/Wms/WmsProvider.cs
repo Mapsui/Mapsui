@@ -42,8 +42,8 @@ public class WmsProvider : IProvider, IProjectingProvider
     private Func<string, Task<Stream>>? _getStreamAsync;
     private readonly IUrlPersistentCache? _persistentCache;
 
-    public WmsProvider(XmlDocument capabilities, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null) 
-        :this(new Client(capabilities, getStreamAsync), persistentCache: persistentCache)
+    public WmsProvider(XmlDocument capabilities, Func<string, Task<Stream>>? getStreamAsync = null, IUrlPersistentCache? persistentCache = null)
+        : this(new Client(capabilities, getStreamAsync), persistentCache: persistentCache)
     {
         InitialiseGetStreamAsyncMethod(getStreamAsync);
     }
@@ -70,7 +70,7 @@ public class WmsProvider : IProvider, IProjectingProvider
         _wmsClient = wmsClient;
         TimeOut = 10000;
         ContinueOnError = true;
-        
+
         var outputFormats = OutputFormats;
         if (outputFormats.Contains("image/png")) _mimeType = "image/png";
         else if (outputFormats.Contains("image/gif")) _mimeType = "image/gif";
@@ -336,7 +336,7 @@ public class WmsProvider : IProvider, IProjectingProvider
                 throw new RenderException("There was a problem while attempting to request the WMS", ex);
             Logger.Log(LogLevel.Error, "There was a problem while attempting to request the WMS" + ex.Message, ex);
         }
-        
+
         return (false, null);
     }
 
@@ -428,7 +428,7 @@ public class WmsProvider : IProvider, IProjectingProvider
         {
             if (_getStreamAsync == null)
                 yield break;
-            
+
             using var task = await _getStreamAsync(url);
             var bytes = StreamHelper.ReadFully(task);
             yield return new MemoryStream(bytes);

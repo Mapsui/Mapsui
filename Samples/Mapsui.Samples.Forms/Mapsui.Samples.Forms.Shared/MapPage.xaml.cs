@@ -56,7 +56,7 @@ public partial class MapPage : ContentPage
             if (!Compass.IsMonitoring)
                 Compass.Start(SensorSpeed.Default);
         }
-        catch (Exception ex) 
+        catch (Exception ex)
         {
             Logger.Log(LogLevel.Warning, ex.Message, ex);
         }
@@ -69,7 +69,7 @@ public partial class MapPage : ContentPage
             }
             catch (Exception e)
             {
-                Logger.Log(LogLevel.Error, e.Message, e);   
+                Logger.Log(LogLevel.Error, e.Message, e);
             }
         });
 
@@ -175,7 +175,8 @@ public partial class MapPage : ContentPage
     /// <param name="e">Event arguments for new position</param>
     private void MyLocationPositionChanged(object sender, PositionEventArgs e)
     {
-        Device.BeginInvokeOnMainThread(() => {
+        Device.BeginInvokeOnMainThread(() =>
+        {
             var coords = new UI.Forms.Position(e.Position.Latitude, e.Position.Longitude);
             info.Text = $"{coords.ToString()} - D:{(int)e.Position.Heading} S:{Math.Round(e.Position.Speed, 2)}";
 

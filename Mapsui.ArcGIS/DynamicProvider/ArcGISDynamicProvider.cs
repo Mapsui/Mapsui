@@ -182,7 +182,7 @@ public class ArcGISDynamicProvider : IProvider, IProjectingProvider
                 var raster = new MRaster(bytes, viewport.Extent);
                 return (true, raster);
             }
-            
+
             return (false, null);
         }
         catch (Exception ex)
