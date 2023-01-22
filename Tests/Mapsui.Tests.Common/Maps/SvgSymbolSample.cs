@@ -8,57 +8,56 @@ using System.Collections.Generic;
 
 #pragma warning disable IDISP001 // Dispose created
 
-namespace Mapsui.Tests.Common.Maps
+namespace Mapsui.Tests.Common.Maps;
+
+public class SvgSymbolSample : IMapControlSample
 {
-    public class SvgSymbolSample : IMapControlSample
+    public string Name => "Svg Symbol";
+    public string Category => "Tests";
+
+    public void Setup(IMapControl mapControl)
     {
-        public string Name => "Svg Symbol";
-        public string Category => "Tests";
+        mapControl.Map = CreateMap();
+    }
 
-        public void Setup(IMapControl mapControl)
+    public static Map CreateMap()
+    {
+        var layer = new MemoryLayer
         {
-            mapControl.Map = CreateMap();
-        }
+            Style = null,
+            Features = CreateFeatures(),
+            Name = "Points with Svg"
+        };
 
-        public static Map CreateMap()
+        var map = new Map
         {
-            var layer = new MemoryLayer
-            {
-                Style = null,
-                Features = CreateFeatures(),
-                Name = "Points with Svg"
-            };
+            BackColor = Color.FromString("WhiteSmoke"),
+            Home = n => n.NavigateTo(layer.Extent!.Grow(layer.Extent.Width * 2))
+        };
 
-            var map = new Map
-            {
-                BackColor = Color.FromString("WhiteSmoke"),
-                Home = n => n.NavigateTo(layer.Extent!.Grow(layer.Extent.Width * 2))
-            };
+        map.Layers.Add(layer);
 
-            map.Layers.Add(layer);
+        return map;
+    }
 
-            return map;
-        }
+    public static IEnumerable<IFeature> CreateFeatures()
+    {
+        var pinId = typeof(SvgSymbolSample).LoadSvgId("Resources.Images.Pin.svg");
 
-        public static IEnumerable<IFeature> CreateFeatures()
+        return new List<IFeature>
         {
-            var pinId = typeof(SvgSymbolSample).LoadSvgId("Resources.Images.Pin.svg");
-
-            return new List<IFeature>
-            {
-                new PointFeature(new MPoint(50, 50)) {
-                    Styles = new[] {new SymbolStyle { BitmapId = pinId } }
-                },
-                new PointFeature(new MPoint(50, 100)) {
-                    Styles = new[] {new SymbolStyle { BitmapId = pinId } }
-                },
-                new PointFeature(new MPoint(100, 50)) {
-                    Styles = new[] {new SymbolStyle { BitmapId = pinId } }
-                },
-                new PointFeature(new MPoint(100, 100)) {
-                    Styles = new[] {new SymbolStyle { BitmapId = pinId } }
-                }
-            };
-        }
+            new PointFeature(new MPoint(50, 50)) {
+                Styles = new[] {new SymbolStyle { BitmapId = pinId } }
+            },
+            new PointFeature(new MPoint(50, 100)) {
+                Styles = new[] {new SymbolStyle { BitmapId = pinId } }
+            },
+            new PointFeature(new MPoint(100, 50)) {
+                Styles = new[] {new SymbolStyle { BitmapId = pinId } }
+            },
+            new PointFeature(new MPoint(100, 100)) {
+                Styles = new[] {new SymbolStyle { BitmapId = pinId } }
+            }
+        };
     }
 }

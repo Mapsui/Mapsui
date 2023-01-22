@@ -8,69 +8,68 @@ using Mapsui.Styles;
 using Mapsui.UI;
 using NetTopologySuite.Geometries;
 
-namespace Mapsui.Tests.Common.Maps
+namespace Mapsui.Tests.Common.Maps;
+
+public class BitmapSymbolInCollectionSample : IMapControlSample
 {
-    public class BitmapSymbolInCollectionSample : IMapControlSample
+    public string Name => "Collection with Bitmap Symbol";
+    public string Category => "Tests";
+
+    public void Setup(IMapControl mapControl)
     {
-        public string Name => "Collection with Bitmap Symbol";
-        public string Category => "Tests";
+        mapControl.Map = CreateMap();
+    }
 
-        public void Setup(IMapControl mapControl)
+    public static Map CreateMap()
+    {
+        var layer = new MemoryLayer
         {
-            mapControl.Map = CreateMap();
-        }
+            Style = null,
+            Features = CreateFeatures(),
+            Name = "Points with bitmaps"
+        };
 
-        public static Map CreateMap()
+        var map = new Map
         {
-            var layer = new MemoryLayer
-            {
-                Style = null,
-                Features = CreateFeatures(),
-                Name = "Points with bitmaps"
-            };
+            BackColor = Color.FromString("WhiteSmoke"),
+            Home = n => n.NavigateTo(layer.Extent!.Grow(layer.Extent.Width * 2))
+        };
 
-            var map = new Map
-            {
-                BackColor = Color.FromString("WhiteSmoke"),
-                Home = n => n.NavigateTo(layer.Extent!.Grow(layer.Extent.Width * 2))
-            };
+        map.Layers.Add(layer);
 
-            map.Layers.Add(layer);
+        return map;
+    }
 
-            return map;
-        }
+    public static IEnumerable<IFeature> CreateFeatures()
+    {
+        var circleIconId = typeof(BitmapSymbolInCollectionSample).LoadBitmapId("Resources.Images.circle.png");
+        var checkeredIconId = typeof(BitmapSymbolInCollectionSample).LoadBitmapId("Resources.Images.checkered.png");
 
-        public static IEnumerable<IFeature> CreateFeatures()
+        // This test was created the easy way, by copying BitmapSymbol and the GeometryCollection. A test 
+        // written specifically for GeometryCollection would probably look different.
+
+        return new List<IFeature>
         {
-            var circleIconId = typeof(BitmapSymbolInCollectionSample).LoadBitmapId("Resources.Images.circle.png");
-            var checkeredIconId = typeof(BitmapSymbolInCollectionSample).LoadBitmapId("Resources.Images.checkered.png");
-
-            // This test was created the easy way, by copying BitmapSymbol and the GeometryCollection. A test 
-            // written specifically for GeometryCollection would probably look different.
-
-            return new List<IFeature>
+            new GeometryFeature
             {
-                new GeometryFeature
-                {
-                    Geometry = new  GeometryCollection(new Geometry[]  { new Point(50, 50) } ),
-                    Styles = new[] {new VectorStyle {Fill = new Brush(Color.Red)}}
-                },
-                new GeometryFeature
-                {
-                    Geometry = new  GeometryCollection(new Geometry[]  {  new Point(50, 100) } ),
-                    Styles = new[] {new SymbolStyle { BitmapId = circleIconId}}
-                },
-                new GeometryFeature
-                {
-                    Geometry = new GeometryCollection(new Geometry[]  {  new Point(100, 50) } ),
-                    Styles = new[] {new SymbolStyle { BitmapId = checkeredIconId}}
-                },
-                new GeometryFeature
-                {
-                    Geometry = new GeometryCollection(new Geometry[]  {  new Point(100, 100) } ),
-                    Styles = new[] {new VectorStyle {Fill = new Brush(Color.Green), Outline = null}}
-                }
-            };
-        }
+                Geometry = new  GeometryCollection(new Geometry[]  { new Point(50, 50) } ),
+                Styles = new[] {new VectorStyle {Fill = new Brush(Color.Red)}}
+            },
+            new GeometryFeature
+            {
+                Geometry = new  GeometryCollection(new Geometry[]  {  new Point(50, 100) } ),
+                Styles = new[] {new SymbolStyle { BitmapId = circleIconId}}
+            },
+            new GeometryFeature
+            {
+                Geometry = new GeometryCollection(new Geometry[]  {  new Point(100, 50) } ),
+                Styles = new[] {new SymbolStyle { BitmapId = checkeredIconId}}
+            },
+            new GeometryFeature
+            {
+                Geometry = new GeometryCollection(new Geometry[]  {  new Point(100, 100) } ),
+                Styles = new[] {new VectorStyle {Fill = new Brush(Color.Green), Outline = null}}
+            }
+        };
     }
 }

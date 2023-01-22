@@ -6,55 +6,54 @@ using Mapsui.Samples.Common;
 using Mapsui.Styles;
 using Mapsui.UI;
 
-namespace Mapsui.Tests.Common.Maps
+namespace Mapsui.Tests.Common.Maps;
+
+public class VectorStyleSample : IMapControlSample
 {
-    public class VectorStyleSample : IMapControlSample
+    public string Name => "Vector Style";
+    public string Category => "Tests";
+
+    public void Setup(IMapControl mapControl)
     {
-        public string Name => "Vector Style";
-        public string Category => "Tests";
+        mapControl.Map = CreateMap();
+    }
 
-        public void Setup(IMapControl mapControl)
+    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001", MessageId = "Dispose created.")]
+    public static Map CreateMap()
+    {
+        var layer = new MemoryLayer
         {
-            mapControl.Map = CreateMap();
-        }
+            Style = null,
+            Features = CreateFeaturesWithMPointsWithVectorStyle(),
+            Name = "MPoints with VectorStyle"
+        };
 
-        [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP001", MessageId = "Dispose created.")]
-        public static Map CreateMap()
+        var map = new Map
         {
-            var layer = new MemoryLayer
-            {
-                Style = null,
-                Features = CreateFeaturesWithMPointsWithVectorStyle(),
-                Name = "MPoints with VectorStyle"
-            };
+            BackColor = Color.FromString("WhiteSmoke"),
+            Home = n => n.NavigateTo(layer.Extent!.Grow(layer.Extent.Width * 2))
+        };
+        map.Layers.Add(layer);
+        return map;
+    }
 
-            var map = new Map
-            {
-                BackColor = Color.FromString("WhiteSmoke"),
-                Home = n => n.NavigateTo(layer.Extent!.Grow(layer.Extent.Width * 2))
-            };
-            map.Layers.Add(layer);
-            return map;
-        }
-
-        public static IEnumerable<IFeature> CreateFeaturesWithMPointsWithVectorStyle()
+    public static IEnumerable<IFeature> CreateFeaturesWithMPointsWithVectorStyle()
+    {
+        var features = new List<IFeature>
         {
-            var features = new List<IFeature>
-            {
-                new PointFeature(new MPoint(50, 50)) {
-                    Styles = new[] {new VectorStyle {Fill = new Brush(Color.Red)}}
-                },
-                new PointFeature(new MPoint(50, 100)) {
-                    Styles = new[] {new VectorStyle {Fill = new Brush(Color.Yellow), Outline = new Pen(Color.Black, 2)}}
-                },
-                new PointFeature(new MPoint(100, 50)) {
-                    Styles = new[] {new VectorStyle {Fill = new Brush(Color.Blue), Outline = new Pen(Color.White, 2)}}
-                },
-                new PointFeature(new MPoint(100, 100)) {
-                    Styles = new[] {new VectorStyle {Fill = new Brush(Color.Green), Outline = null}}
-                }
-            };
-            return features;
-        }
+            new PointFeature(new MPoint(50, 50)) {
+                Styles = new[] {new VectorStyle {Fill = new Brush(Color.Red)}}
+            },
+            new PointFeature(new MPoint(50, 100)) {
+                Styles = new[] {new VectorStyle {Fill = new Brush(Color.Yellow), Outline = new Pen(Color.Black, 2)}}
+            },
+            new PointFeature(new MPoint(100, 50)) {
+                Styles = new[] {new VectorStyle {Fill = new Brush(Color.Blue), Outline = new Pen(Color.White, 2)}}
+            },
+            new PointFeature(new MPoint(100, 100)) {
+                Styles = new[] {new VectorStyle {Fill = new Brush(Color.Green), Outline = null}}
+            }
+        };
+        return features;
     }
 }
