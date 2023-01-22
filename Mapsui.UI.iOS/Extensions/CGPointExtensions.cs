@@ -1,12 +1,11 @@
 using CoreGraphics;
 
-namespace Mapsui.UI.iOS.Extensions
+namespace Mapsui.UI.iOS.Extensions;
+
+internal static class CGPointExtensions
 {
-    internal static class CGPointExtensions
+    public static MPoint ToMapsui(this CGPoint point)
     {
-        public static MPoint ToMapsui(this CGPoint point)
-        {
-            return new MPoint(point.X, point.Y);
-        }
+        return new MPoint(point.X, point.Y);
     }
 }
