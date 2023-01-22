@@ -1,12 +1,11 @@
 ﻿using System;
 using Mapsui.Logging;
 
-namespace Mapsui.Samples.Wpf.Utilities
+namespace Mapsui.Samples.Wpf.Utilities;
+
+class LogModel
 {
-    class LogModel
-    {
-        public Exception? Exception { get; set; }
-        public string? Message { get; set; }
-        public LogLevel LogLevel { get; set; }
-    }
+    public Exception? Exception { get; set; }
+    public string? Message { get; set; }
+    public LogLevel LogLevel { get; set; }
 }
