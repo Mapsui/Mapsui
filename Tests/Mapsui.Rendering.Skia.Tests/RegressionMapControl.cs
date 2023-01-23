@@ -72,7 +72,7 @@ public class RegressionMapControl : IMapControl
         throw new NotImplementedException();
     }
 
-    public float PixelDensity { get; }
+    public float PixelDensity => 1;
     public MPoint ToDeviceIndependentUnits(MPoint coordinateInPixels)
     {
         throw new NotImplementedException();
