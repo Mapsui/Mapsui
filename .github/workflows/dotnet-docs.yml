@@ -3,7 +3,7 @@ name: Build Docs
 on:
   push:
     branches:  
-      - master   
+      - feature/build-docs   
     paths: 
       - docfx
       
@@ -12,7 +12,6 @@ permissions:
 
 jobs:
   build-and-deploy:
-    concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
     runs-on: windows-latest
     steps:
     - name: Checkout
