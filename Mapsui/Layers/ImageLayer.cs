@@ -42,7 +42,6 @@ public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvid
     private readonly Timer _startFetchTimer;
     private IProvider? _dataSource;
     private readonly int _numberOfFeaturesReturned;
-    private bool _busyExtent;
 
     /// <summary>
     /// Delay before fetching a new wms image from the server
@@ -58,13 +57,10 @@ public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvid
             if (_dataSource == value) return;
             _dataSource = value;
             OnPropertyChanged(nameof(DataSource));
+            // This is a synchronous version so it doesn't need to be run in the Background
+            // the Extent is already created on the creation of the Provider.
+            Extent = DataSource?.GetExtent();
         }
-    }
-
-    public override bool Busy
-    {
-        get => base.Busy || _busyExtent;
-        set => base.Busy = value;
     }
 
     public ImageLayer(string layerName)
@@ -72,28 +68,6 @@ public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvid
         Name = layerName;
         _startFetchTimer = new Timer(StartFetchTimerElapsed, null, Timeout.Infinite, Timeout.Infinite);
         _numberOfFeaturesReturned = 1;
-        PropertyChanged += OnPropertyChanged;
-    }
-
-    private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e)
-    {
-        if (e.PropertyName == nameof(DataSource))
-        {
-            _busyExtent = true;
-            Catch.TaskRun(() =>
-            {
-                try
-                {
-                    // Run in background because it could take time because
-                    // this could involve database access or a web request
-                    Extent = DataSource?.GetExtent();
-                }
-                finally
-                {
-                    _busyExtent = false;
-                }
-            });
-        }
     }
 
     private void StartFetchTimerElapsed(object? state)

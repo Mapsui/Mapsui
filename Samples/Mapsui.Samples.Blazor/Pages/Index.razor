@@ -5,6 +5,7 @@
 @using Mapsui.Logging
 @using Mapsui.Samples.CustomWidget
 @using Mapsui.UI
+@using System.Diagnostics.CodeAnalysis
 
 <PageTitle>Mapsui</PageTitle>
    <div class="form-group row">
@@ -55,6 +56,7 @@
     public List<string> Categories { get; set; } = new();
 
     [Parameter]
+    [SuppressMessage("Usage", "BL0007:Component parameters should be auto properties")]
     public string? CategoryId 
     {
         get => _categoryId;
@@ -71,6 +73,7 @@
     }
 
     [Parameter]
+    [SuppressMessage("Usage", "BL0007:Component parameters should be auto properties")]
     public string? SampleId 
     {
         get => _sampleId;

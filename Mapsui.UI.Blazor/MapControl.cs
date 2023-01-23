@@ -1,6 +1,7 @@
 using Mapsui.Rendering;
 using Mapsui.Rendering.Skia;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Components;
 using SkiaSharp;
 using Microsoft.JSInterop;
@@ -23,13 +24,12 @@ public partial class MapControl : ComponentBase, IMapControl
     protected SKGLView? _viewGpu;
 
     [Inject]
-    private IJSRuntime JsRuntime { get; set; }
+    private IJSRuntime? JsRuntime { get; set; }
 
     private SKImageInfo? _canvasSize;
     private bool _onLoaded;
     private MRect? _selectRectangle;
     private MPoint? _downMousePosition;
-    private double? _lastY;
     private string? _defaultCursor = Cursors.Default;
     private readonly HashSet<string> _pressedKeys = new();
     private bool _isInBoxZoomMode;
@@ -44,7 +44,18 @@ public partial class MapControl : ComponentBase, IMapControl
 
     public string ElementId => _elementId;
 
-    protected MapsuiJsInterop Interop => _interop ??= new MapsuiJsInterop(JsRuntime);
+    protected MapsuiJsInterop? Interop
+    {
+        get
+        {
+            if (_interop == null && JsRuntime != null)
+            {
+                _interop ??= new MapsuiJsInterop(JsRuntime);
+            }
+
+            return _interop;
+        }
+    }
 
     protected override void OnInitialized()
     {
@@ -121,7 +132,8 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         SetViewportSize();
     }
-
+    
+    [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
     protected async void OnMouseWheel(WheelEventArgs e)
     {
         try
@@ -146,6 +158,11 @@ public partial class MapControl : ComponentBase, IMapControl
 
     private async Task<BoundingClientRect> BoundingClientRectAsync()
     {
+        if (Interop == null)
+        {
+            throw new ArgumentException("Interop is null");
+        }
+
         return await Interop.BoundingClientRectAsync(_elementId);
     }
 
@@ -160,6 +177,7 @@ public partial class MapControl : ComponentBase, IMapControl
         action();
     }
 
+    [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
     protected async void OnMouseDown(MouseEventArgs e)
     {
         try
@@ -205,6 +223,7 @@ public partial class MapControl : ComponentBase, IMapControl
         }
     }
 
+    [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
     protected async void OnMouseUp(MouseEventArgs e)
     {
         try
@@ -242,6 +261,7 @@ public partial class MapControl : ComponentBase, IMapControl
         return Math.Abs(currentPosition.Distance(previousPosition)) < 5;
     }
 
+    [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
     protected async void OnMouseMove(MouseEventArgs e)
     {
         try
@@ -305,7 +325,7 @@ public partial class MapControl : ComponentBase, IMapControl
         // return Screen.FromPoint(center).LogicalPixelSize;
     }
 
-    public void Dispose()
+    public virtual void Dispose()
     {
         CommonDispose(true);
     }
@@ -315,8 +335,18 @@ public partial class MapControl : ComponentBase, IMapControl
 
     // TODO: Implement Setting of Mouse
     public string? Cursor { get; set; }
+    [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
     public async void OpenBrowser(string url)
     {
-        await JsRuntime.InvokeAsync<object>("open", new object?[] { url, "_blank" });
+        try
+        {
+            if (JsRuntime != null)
+                await JsRuntime.InvokeAsync<object>("open", new object?[] { url, "_blank" });
+        }
+        catch (Exception ex)
+        {
+            Logger.Log(LogLevel.Error, ex.Message, ex);
+        }
+        
     }
 }
