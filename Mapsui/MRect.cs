@@ -94,7 +94,7 @@ public class MRect
     {
         if (other == null)
             return false;
-        
+
         return Max.Equals(other.Max) && Min.Equals(other.Min);
     }
 

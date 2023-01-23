@@ -37,7 +37,7 @@ public class LabelStyleRenderer : ISkiaStyleRenderer, IFeatureSize
             offsetX: (float)offsetX, offsetY: (float)-offsetY,
             horizontalAlignment: style.HorizontalAlignment, verticalAlignment: style.VerticalAlignment);
     }
-    
+
     public static SKTypeface CreateTypeFace(Font font)
     {
         return SKTypeface.FromFamilyName(font.FontFamily,

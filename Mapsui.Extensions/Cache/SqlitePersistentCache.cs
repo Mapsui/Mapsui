@@ -84,7 +84,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
                 command.ExecuteNonQuery();
             }
 
-            if (!ColumnExists(connection,nameof(UrlCache), nameof(UrlCache.Compression)))
+            if (!ColumnExists(connection, nameof(UrlCache), nameof(UrlCache.Compression)))
             {
                 var command = connection.CreateCommand(@$"Alter TABLE UrlCache 
                 Add Compression VARCHAR(2) NOT NULL Default ('{NoCompression}');");
@@ -154,8 +154,8 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
         connection.Table<Tile>().Delete(f => f.Level == index.Level && f.Col == index.Col && f.Row == index.Row);
     }
 
-// Interface Definition in ITileCache is wrong TODO Fix interface in Brutile
-#pragma warning disable CS8766 
+    // Interface Definition in ITileCache is wrong TODO Fix interface in Brutile
+#pragma warning disable CS8766
     public byte[]? Find(TileIndex index)
 #pragma warning restore CS8766
     {
@@ -172,7 +172,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
         }
 
         var result = Decompress(tile?.Data, tile?.Compression);
-        
+
         return result;
     }
 
@@ -181,7 +181,8 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
         var compress = Compress(tile);
 
         using var connection = CreateConnection();
-        var data = new UrlCache {
+        var data = new UrlCache
+        {
             Url = url,
             Created = DateTime.Now,
             Data = compress.data,
@@ -225,7 +226,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
             {
                 using var outputStream = new MemoryStream();
 #if NETSTANDARD2_0
-        using (var compressStream = new BrotliStream(outputStream, CompressionMode.Compress))
+                using (var compressStream = new BrotliStream(outputStream, CompressionMode.Compress))
 #else
                 using (var compressStream = new BrotliStream(outputStream, CompressionLevel.Fastest))
 #endif
@@ -265,16 +266,16 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
         switch (compression!.ToLower())
         {
             case BrotliCompression:
-            {
-                using var inputStream = new MemoryStream(bytes);
-                using var outputStream = new MemoryStream();
-                using (var decompressStream = new BrotliStream(inputStream, CompressionMode.Decompress))
                 {
-                    decompressStream.CopyTo(outputStream);
-                }
+                    using var inputStream = new MemoryStream(bytes);
+                    using var outputStream = new MemoryStream();
+                    using (var decompressStream = new BrotliStream(inputStream, CompressionMode.Decompress))
+                    {
+                        decompressStream.CopyTo(outputStream);
+                    }
 
-                return outputStream.ToArray();
-            }
+                    return outputStream.ToArray();
+                }
             default:
                 throw new NotImplementedException(compression);
 
@@ -290,7 +291,7 @@ public class SqlitePersistentCache : IPersistentCache<byte[]>, IUrlPersistentCac
     {
         File.Exists(_file);
         {
-            File.Delete(_file);    
+            File.Delete(_file);
             // initialize the database again
             InitDb();
         }

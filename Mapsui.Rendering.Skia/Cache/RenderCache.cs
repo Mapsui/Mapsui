@@ -11,9 +11,9 @@ public class RenderCache : IRenderCache
         SymbolCache = new SymbolCache();
         VectorCache = new VectorCache(SymbolCache, capacity);
     }
-    
+
     public ILabelCache LabelCache { get; set; } = new LabelCache();
-    
+
     public ISymbolCache SymbolCache { get; set; }
 
     public IVectorCache? VectorCache { get; set; }

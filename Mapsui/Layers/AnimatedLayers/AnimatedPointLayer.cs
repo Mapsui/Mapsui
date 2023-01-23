@@ -20,11 +20,12 @@ public class AnimatedPointLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource
     {
         _dataSource = dataSource ?? throw new ArgumentException(nameof(dataSource));
         if (_dataSource is IDynamic dynamic)
-            dynamic.DataChanged += (s, e) => { 
+            dynamic.DataChanged += (s, e) =>
+            {
                 Catch.Exceptions(async () =>
                 {
                     await UpdateDataAsync();
-                    DataHasChanged();    
+                    DataHasChanged();
                 });
             };
     }

@@ -22,7 +22,7 @@ public partial class MainWindow : Window
     static MainWindow()
     {
         // todo: find proper way to load assembly
-        Mapsui.Tests.Common.Utilities.LoadAssembly();       
+        Mapsui.Tests.Common.Utilities.LoadAssembly();
     }
 
     public MainWindow()

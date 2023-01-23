@@ -24,10 +24,10 @@ public class WmsSample : ISample, ISampleTest
 
     public static async Task<ILayer> CreateLayerAsync()
     {
-        return new ImageLayer("Windsnelheden (PDOK)") 
-        { 
+        return new ImageLayer("Windsnelheden (PDOK)")
+        {
             DataSource = await CreateWmsProviderAsync(),
-            Style = new RasterStyle() 
+            Style = new RasterStyle()
         };
     }
 

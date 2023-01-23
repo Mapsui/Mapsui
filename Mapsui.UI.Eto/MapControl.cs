@@ -43,7 +43,8 @@ public partial class MapControl : SkiaDrawable, IMapControl
     {
         var drawable = new Drawable { Visible = false };
 
-        drawable.Paint += (o, e) => {
+        drawable.Paint += (o, e) =>
+        {
             var fill = new Color(Colors.Yellow, 0.4f);
 
             using var border = Pens.Cached(Colors.Black, 1.4f, DashStyles.Dash);

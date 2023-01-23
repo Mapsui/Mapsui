@@ -42,7 +42,7 @@ public static class Logger
                 Trace.WriteLine(message);
                 break;
             case LogLevel.Debug:
-                default:
+            default:
                 Debug.WriteLine(message);
                 break;
         }

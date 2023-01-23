@@ -51,7 +51,7 @@ public static class CacheExtensions
 #endif    
                 }
             }
-            
+
             Logger.Log(LogLevel.Debug, $@"Caching Url {url}");
             persistentCache?.Add(url, bytes);
         }

@@ -3,14 +3,14 @@ using Microsoft.UI.Xaml;
 
 namespace Mapsui.Samples.Uno.WinUI.Wasm;
 
-	public class Program
-	{
-		private static App _app;
+public class Program
+{
+    private static App _app;
 
-		static int Main(string[] args)
-		{
-			Microsoft.UI.Xaml.Application.Start(_ => _app = new App());
+    static int Main(string[] args)
+    {
+        Microsoft.UI.Xaml.Application.Start(_ => _app = new App());
 
-			return 0;
-		}
-	}
+        return 0;
+    }
+}

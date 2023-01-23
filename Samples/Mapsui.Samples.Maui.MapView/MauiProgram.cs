@@ -12,7 +12,8 @@ public static class MauiProgram
         builder
             .UseSkiaSharp(true)
             .UseMauiApp<App>()
-            .ConfigureFonts(fonts => {
+            .ConfigureFonts(fonts =>
+            {
                 fonts.AddFont("OpenSansRegular.ttf", "OpenSansRegular");
             });
 

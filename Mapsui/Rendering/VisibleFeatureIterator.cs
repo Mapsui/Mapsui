@@ -24,7 +24,7 @@ public static class VisibleFeatureIterator
         }
     }
 
-    private static void IterateLayer(IReadOnlyViewport viewport, ILayer layer, long iteration, 
+    private static void IterateLayer(IReadOnlyViewport viewport, ILayer layer, long iteration,
         Action<IReadOnlyViewport, ILayer, IStyle, IFeature, float, long> callback)
     {
         if (viewport.Extent == null) return;

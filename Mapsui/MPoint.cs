@@ -36,7 +36,7 @@ public class MPoint
     {
         if (point == null)
             return false;
-        
+
         return X.Equals(point.X) && Y.Equals(point.Y);
     }
 

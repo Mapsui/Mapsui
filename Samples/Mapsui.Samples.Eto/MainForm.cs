@@ -21,7 +21,7 @@ public class MainForm : Form
     static MainForm()
     {
         // todo: find proper way to load assembly
-        Mapsui.Tests.Common.Utilities.LoadAssembly();       
+        Mapsui.Tests.Common.Utilities.LoadAssembly();
     }
 
     DropDown CategoryComboBox = new() { Width = 200 };
@@ -128,7 +128,8 @@ public class MainForm : Form
             Text = sample.Name,
         };
 
-        radioButton.CheckedChanged += (s, a) => {
+        radioButton.CheckedChanged += (s, a) =>
+        {
             Catch.Exceptions(async () =>
             {
                 MapControl.Map?.Layers.Clear();

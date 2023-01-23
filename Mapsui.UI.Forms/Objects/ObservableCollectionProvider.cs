@@ -13,7 +13,7 @@ namespace Mapsui.UI.Objects;
 public class ObservableCollectionProvider<T> : IProvider where T : IFeatureProvider
 {
     public ObservableCollection<T> Collection { get; }
-    private readonly ConcurrentHashSet<T> _shadowCollection = new(); 
+    private readonly ConcurrentHashSet<T> _shadowCollection = new();
 
     public string? CRS { get; set; } = "";
 

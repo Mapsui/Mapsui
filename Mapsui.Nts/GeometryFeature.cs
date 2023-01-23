@@ -48,7 +48,8 @@ public class GeometryFeature : BaseFeature, IFeature, IDisposable
         if (Geometry is null) return;
         var vertices = Geometry.Coordinates;
         foreach (var vertex in vertices)
-            visit(vertex.X, vertex.Y, (x, y) => {
+            visit(vertex.X, vertex.Y, (x, y) =>
+            {
                 vertex.X = x;
                 vertex.Y = y;
             });

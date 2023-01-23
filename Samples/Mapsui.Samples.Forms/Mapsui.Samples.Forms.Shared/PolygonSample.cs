@@ -56,7 +56,8 @@ public class PolygonSample : IFormsSample
         });
 
         polygon.IsClickable = true;
-        polygon.Clicked += (s, a) => {
+        polygon.Clicked += (s, a) =>
+        {
             if (s is Polygon p)
             {
                 p.FillColor = new Color(random.Next(0, 255) / 255.0f, random.Next(0, 255) / 255.0f, random.Next(0, 255) / 255.0f);

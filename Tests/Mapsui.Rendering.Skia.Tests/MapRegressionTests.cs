@@ -28,7 +28,7 @@ public class MapRegressionTests
     static MapRegressionTests()
     {
         // todo: find proper way to load assembly
-        Mapsui.Tests.Common.Utilities.LoadAssembly();       
+        Mapsui.Tests.Common.Utilities.LoadAssembly();
     }
 
     private static ISampleBase[]? _excludedSamples;
@@ -80,7 +80,7 @@ public class MapRegressionTests
         {
             message += $@" Exception: {arg3}";
         }
-        
+
         Console.WriteLine(message);
     }
 

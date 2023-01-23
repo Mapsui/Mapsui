@@ -180,8 +180,8 @@ public partial class MapControl : ComponentBase, IMapControl
     [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
     protected async void OnMouseDown(MouseEventArgs e)
     {
-        try 
-        { 
+        try
+        {
             IsInBoxZoomMode = e.Button == ZoomButton && (ZoomModifier == Keys.None || ModifierPressed(ZoomModifier));
 
             bool moveMode = e.Button == MoveButton && (MoveModifier == Keys.None || ModifierPressed(MoveModifier));
@@ -194,7 +194,7 @@ public partial class MapControl : ComponentBase, IMapControl
         }
         catch (Exception ex)
         {
-            Logger.Log(LogLevel.Error, ex.Message, ex);   
+            Logger.Log(LogLevel.Error, ex.Message, ex);
         }
     }
 
@@ -241,7 +241,7 @@ public partial class MapControl : ComponentBase, IMapControl
             else if (_downMousePosition != null)
             {
                 if (IsClick(e.Location(await BoundingClientRectAsync()), _downMousePosition))
-                    OnInfo(InvokeInfo(e.Location(await  BoundingClientRectAsync()).ToMapsui(), _downMousePosition.ToMapsui(), 1));
+                    OnInfo(InvokeInfo(e.Location(await BoundingClientRectAsync()).ToMapsui(), _downMousePosition.ToMapsui(), 1));
             }
 
             _downMousePosition = null;
@@ -330,8 +330,8 @@ public partial class MapControl : ComponentBase, IMapControl
         CommonDispose(true);
     }
 
-    public  float ViewportWidth => _canvasSize?.Width ?? 0;
-    public  float ViewportHeight => _canvasSize?.Height ?? 0;
+    public float ViewportWidth => _canvasSize?.Width ?? 0;
+    public float ViewportHeight => _canvasSize?.Height ?? 0;
 
     // TODO: Implement Setting of Mouse
     public string? Cursor { get; set; }

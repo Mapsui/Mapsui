@@ -105,28 +105,28 @@ public class GeoTiffProvider : IProvider, IDisposable
     {
         TiffProperties tiffFileProperties;
 
-        using var tif = Tiff.Open(location,"r4") ?? Tiff.Open(location,"r8"); // read big tiff if normal tiff fails.
+        using var tif = Tiff.Open(location, "r4") ?? Tiff.Open(location, "r8"); // read big tiff if normal tiff fails.
 
         FieldValue[] value = tif.GetField(TiffTag.IMAGEWIDTH);
         tiffFileProperties.Width = value[0].ToInt();
 
         value = tif.GetField(TiffTag.IMAGELENGTH);
         tiffFileProperties.Height = value[0].ToInt();
-        
+
         value = tif.GetField(TiffTag.XRESOLUTION);
         if (value != null)
-        {       
-           tiffFileProperties.HResolution = value[0].ToFloat();
+        {
+            tiffFileProperties.HResolution = value[0].ToFloat();
         }
         else
         {
             tiffFileProperties.HResolution = 96;
         }
-        
+
         value = tif.GetField(TiffTag.YRESOLUTION);
         if (value != null)
         {
-            tiffFileProperties.VResolution  = value[0].ToFloat();
+            tiffFileProperties.VResolution = value[0].ToFloat();
         }
         else
         {

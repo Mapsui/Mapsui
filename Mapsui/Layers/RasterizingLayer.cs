@@ -119,8 +119,8 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
 #endif
                 OnDataChanged(new DataChangedEventArgs());
 
-                if (_modified && _layer is IAsyncDataFetcher asyncDataFetcher) 
-                        Delayer.ExecuteDelayed(() => asyncDataFetcher.RefreshData(_fetchInfo));
+                if (_modified && _layer is IAsyncDataFetcher asyncDataFetcher)
+                    Delayer.ExecuteDelayed(() => asyncDataFetcher.RefreshData(_fetchInfo));
             }
             finally
             {
@@ -200,8 +200,8 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
     }
 
     public static Viewport CreateViewport(
-        MRect extent, 
-        double resolution, 
+        MRect extent,
+        double resolution,
         double renderResolutionMultiplier = 1,
         double overscan = 1)
     {

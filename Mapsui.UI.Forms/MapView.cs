@@ -90,7 +90,8 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
         LongTap += HandlerLongTap;
         SizeChanged += HandlerSizeChanged;
 
-        TouchMove += (s, e) => {
+        TouchMove += (s, e) =>
+        {
             RunOnUIThread(() => MyLocationFollow = false);
         };
 

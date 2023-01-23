@@ -73,7 +73,7 @@ public static class SvgHelper
             if (result != null)
             {
                 bitmapId = BitmapRegistry.Instance.Register(result, fullName);
-                return bitmapId;    
+                return bitmapId;
             }
         }
 

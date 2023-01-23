@@ -58,5 +58,5 @@ internal class RotationCalculationTests
 
         // Assert
         Assert.AreEqual(expectedRotationDelta, rotationDelta);
-    }   
+    }
 }

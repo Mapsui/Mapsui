@@ -24,7 +24,8 @@ public class RectFeature : BaseFeature, IFeature
     {
         if (Rect != null)
             foreach (var point in new[] { Rect.Min, Rect.Max })
-                visit(point.X, point.Y, (x, y) => {
+                visit(point.X, point.Y, (x, y) =>
+                {
                     point.X = x;
                     point.Y = y;
                 });

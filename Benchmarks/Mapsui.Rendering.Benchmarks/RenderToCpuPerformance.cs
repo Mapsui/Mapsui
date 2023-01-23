@@ -47,7 +47,7 @@ public class RenderToCpuPerformance : IDisposable
         mapRenderer = new MapRenderer();
         mapRendererWithoutCache = new MapRenderer();
         mapRendererWithoutCache.RenderCache.VectorCache = new NonCachingVectorCache(mapRendererWithoutCache.RenderCache.SymbolCache);
-        tilingSkpMap = CreateMapControl(RenderFormat.Skp);            
+        tilingSkpMap = CreateMapControl(RenderFormat.Skp);
         tilingPngMap = CreateMapControl(RenderFormat.Png);
         tilingWebpMap = CreateMapControl(RenderFormat.WebP);
         rasterizingPngMap = CreateMapControl(RenderFormat.Png, false, true);
@@ -64,12 +64,12 @@ public class RenderToCpuPerformance : IDisposable
         surface = SKSurface.Create(imageInfo);
         skCanvas = surface.Canvas;
     }
-    
+
     public static RegressionMapControl CreateMapControl(RenderFormat? renderFormat = null, bool tiling = true, bool rasterizing = false)
     {
         var mapControl = new RegressionMapControl();
         mapControl.SetSize(800, 600);
-        
+
         mapControl.Map = CreateMap(renderFormat, tiling, rasterizing);
 
         // zoom to correct Zoom level
@@ -112,7 +112,7 @@ public class RenderToCpuPerformance : IDisposable
                 sqliteCache.Clear();
                 layer = new RasterizingTileLayer(layer, persistentCache: sqliteCache, renderFormat: renderFormat.Value);
             }
-            
+
             if (rasterizing)
             {
                 layer = new RasterizingLayer(layer, renderFormat: renderFormat.Value);
@@ -156,14 +156,14 @@ public class RenderToCpuPerformance : IDisposable
         // Create theme using a density from 0 (min) to 400 (max)
         return new GradientTheme("PopDens", 0, 400, min, max) { FillColorBlend = ColorBlend.Rainbow5 };
     }
-    
+
     [Benchmark]
     public async Task RenderDefaultWithoutCacheAsync()
     {
         await map.WaitForLoadingAsync();
         mapRendererWithoutCache.Render(skCanvas, map.Viewport, map.Map!.Layers, map.Map!.Widgets, Color.White);
     }
-    
+
     [Benchmark]
     public async Task RenderDefaultAsync()
     {
@@ -194,7 +194,7 @@ public class RenderToCpuPerformance : IDisposable
 
     [Benchmark]
     public async Task RenderTilingPngAsync()
-    { 
+    {
         await tilingPngMap.WaitForLoadingAsync();
         mapRenderer.Render(skCanvas, tilingPngMap.Viewport, tilingPngMap.Map!.Layers, tilingPngMap.Map!.Widgets, Color.White);
     }
@@ -205,7 +205,7 @@ public class RenderToCpuPerformance : IDisposable
         await tilingWebpMap.WaitForLoadingAsync();
         mapRenderer.Render(skCanvas, tilingWebpMap.Viewport, tilingWebpMap.Map!.Layers, tilingWebpMap.Map!.Widgets, Color.White);
     }
-    
+
     [Benchmark]
     public async Task RenderTilingSkpAsync()
     {

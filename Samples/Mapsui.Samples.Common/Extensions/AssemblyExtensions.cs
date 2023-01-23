@@ -18,9 +18,9 @@ public static class AssemblyExtensions
         }
 
         using var image = assembly.GetManifestResourceStream(embeddedResourcesPath + resourceFile);
-		if (image == null) throw new ArgumentException("EmbeddedResource not found");
-		var destPath = Path.Combine(folder, resourceFile);
-		using var dest = File.Create(destPath);
-		image.CopyTo(dest);
+        if (image == null) throw new ArgumentException("EmbeddedResource not found");
+        var destPath = Path.Combine(folder, resourceFile);
+        using var dest = File.Create(destPath);
+        image.CopyTo(dest);
     }
 }

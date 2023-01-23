@@ -8,9 +8,9 @@ using System.Windows;
 
 namespace Mapsui.Samples.Uno.WinUI.WPF.Host;
 
-	/// <summary>
-	/// Interaction logic for App.xaml
-	/// </summary>
-	public partial class App : Application
-	{
-	}
+/// <summary>
+/// Interaction logic for App.xaml
+/// </summary>
+public partial class App : Application
+{
+}

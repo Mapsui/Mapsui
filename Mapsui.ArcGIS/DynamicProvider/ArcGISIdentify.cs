@@ -56,7 +56,8 @@ public class ArcGISIdentify
     /// <param name="sr">sr code of input geometry</param>
     public void Request(string url, double x, double y, int tolerance, string[] layers, double extendXmin, double extendYmin, double extendXmax, double extendYmax, double mapWidth, double mapHeight, double mapDpi, bool returnGeometry, ICredentials? credentials = null, int sr = int.MinValue)
     {
-        Catch.TaskRun(async () => {
+        Catch.TaskRun(async () =>
+        {
             //remove trailing slash from url
             if (url.Length > 0 && url[url.Length - 1].Equals('/'))
                 url = url.Remove(url.Length - 1, 1);

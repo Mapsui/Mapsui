@@ -23,7 +23,7 @@ public static class ByteArrayExtensions
 
         return false;
     }
-    
+
     /// <summary> true if is Skp (Skia Serialized SkPicture)</summary>
     /// <param name="buffer">buffer</param>
     /// <returns>true if is xml</returns>

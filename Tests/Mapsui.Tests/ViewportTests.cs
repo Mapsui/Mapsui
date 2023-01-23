@@ -18,7 +18,7 @@ public class ViewportTests
         Assert.AreEqual(10, viewport.CenterX);
         Assert.AreEqual(20, viewport.CenterY);
     }
-    
+
     [Test]
     public void SetTransformDeltaResolution1()
     {
@@ -27,13 +27,13 @@ public class ViewportTests
 
         // Act
         viewport.SetCenter(10, 20);
-        viewport.Transform(new MPoint(10,10), new MPoint(20, 20), 1);
+        viewport.Transform(new MPoint(10, 10), new MPoint(20, 20), 1);
 
         // Assert
         Assert.AreEqual(20, viewport.CenterX);
         Assert.AreEqual(10, viewport.CenterY);
     }
-    
+
     [Test]
     public void SetTransformDeltaResolution2()
     {
@@ -42,7 +42,7 @@ public class ViewportTests
 
         // Act
         viewport.SetCenter(10, 20);
-        viewport.Transform(new MPoint(10,10), new MPoint(20, 20), 2);
+        viewport.Transform(new MPoint(10, 10), new MPoint(20, 20), 2);
 
         // Assert
         Assert.AreEqual(30, viewport.CenterX);

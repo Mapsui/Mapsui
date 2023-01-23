@@ -20,10 +20,10 @@ public sealed class MainPage : ContentPage, IDisposable
     {
         categoryPicker = CreatePicker(mainViewModel);
         collectionView = CreateCollectionView(mainViewModel);
-        
+
         BindingContext = mainViewModel;
         mapControl.SetBinding(MapControl.MapProperty, new Binding(nameof(MainViewModel.Map)));
-        
+
         // Workaround. Samples need the MapControl in the current setup.
         mainViewModel.MapControl = mapControl;
 

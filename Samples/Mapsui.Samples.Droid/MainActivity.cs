@@ -29,9 +29,9 @@ public class MainActivity : AppCompatActivity
     static MainActivity()
     {
         // todo: find proper way to load assembly
-        Mapsui.Tests.Common.Utilities.LoadAssembly();       
+        Mapsui.Tests.Common.Utilities.LoadAssembly();
     }
-    
+
     private LinearLayout? _popup;
     private MapControl? _mapControl;
     private TextView? _textView;
@@ -58,8 +58,8 @@ public class MainActivity : AppCompatActivity
         relativeLayout.AddView(_popup = CreatePopup());
         _mapControl.Map.Layers.Clear();
         var sample = new MbTilesOverlaySample();
-        
-        Catch.Exceptions(async () => 
+
+        Catch.Exceptions(async () =>
         {
             await sample.SetupAsync(_mapControl);
         });

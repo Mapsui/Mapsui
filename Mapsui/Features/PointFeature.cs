@@ -24,7 +24,8 @@ public class PointFeature : BaseFeature, IFeature
 
     public void CoordinateVisitor(Action<double, double, CoordinateSetter> visit)
     {
-        visit(Point.X, Point.Y, (x, y) => {
+        visit(Point.X, Point.Y, (x, y) =>
+        {
             Point.X = x;
             Point.Y = y;
         });

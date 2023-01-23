@@ -234,7 +234,7 @@ public class WFSProvider : IProvider, IDisposable
             _featureType = featureType;
         }
 
-        _geometryType = geometryType;   
+        _geometryType = geometryType;
         _intialized = false;
     }
 
@@ -245,7 +245,7 @@ public class WFSProvider : IProvider, IDisposable
         if (_intialized)
             return;
 
-        _intialized =true;
+        _intialized = true;
         await GetFeatureTypeInfoAsync();
     }
 
@@ -404,7 +404,7 @@ public class WFSProvider : IProvider, IDisposable
     /// <param name="wfsVersion">The desired WFS Server version.</param>
     /// <param name="persistentCache">persistent Cache</param>
     public WFSProvider(IXPathQueryManager getCapabilitiesCache, string nsPrefix, string featureType,
-               WFSVersionEnum wfsVersion,IUrlPersistentCache? persistentCache = null)
+               WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
         : this(getCapabilitiesCache, nsPrefix, featureType, GeometryTypeEnum.Unknown, wfsVersion, persistentCache: persistentCache)
     {
     }
@@ -526,7 +526,7 @@ public class WFSProvider : IProvider, IDisposable
                                                                                _multiGeometries, _quickGeometries);
                     break;
             }
-            
+
             geomFactory.AxisOrder = AxisOrder;
             await geomFactory.CreateGeometriesAsync(features);
             return features;
@@ -560,7 +560,7 @@ public class WFSProvider : IProvider, IDisposable
             if (!_intialized)
                 InitAsync().Wait();
             // srid overrides the srid of the _featureTypeInfo
-            return CrsHelper.EpsgPrefix +  _featureTypeInfo?.SRID;
+            return CrsHelper.EpsgPrefix + _featureTypeInfo?.SRID;
         }
         set
         {

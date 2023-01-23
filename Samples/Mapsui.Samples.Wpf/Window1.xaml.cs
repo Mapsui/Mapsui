@@ -18,10 +18,10 @@ namespace Mapsui.Samples.Wpf;
 
 public partial class Window1
 {
-     static Window1()
+    static Window1()
     {
         // todo: find proper way to load assembly
-        Mapsui.Tests.Common.Utilities.LoadAssembly();       
+        Mapsui.Tests.Common.Utilities.LoadAssembly();
     }
 
     public Window1()
@@ -92,7 +92,8 @@ public partial class Window1
             Margin = new Thickness(4)
         };
 
-        radioButton.Click += (s, a) => {
+        radioButton.Click += (s, a) =>
+        {
             Catch.Exceptions(async () =>
             {
                 MapControl.Map?.Layers.Clear();

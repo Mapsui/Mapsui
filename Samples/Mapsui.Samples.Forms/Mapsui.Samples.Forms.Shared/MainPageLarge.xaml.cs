@@ -86,7 +86,7 @@ public partial class MainPageLarge : ContentPage
             Catch.Exceptions(async () =>
             {
                 await sample.SetupAsync(mapView);
-            });            
+            });
         }
 
         clicker = null;
@@ -182,7 +182,8 @@ public partial class MainPageLarge : ContentPage
     /// <param name="e">Event arguments for new position</param>
     private void MyLocationPositionChanged(object sender, PositionEventArgs e)
     {
-        Device.BeginInvokeOnMainThread(() => {
+        Device.BeginInvokeOnMainThread(() =>
+        {
             mapView.MyLocationLayer.UpdateMyLocation(new UI.Forms.Position(e.Position.Latitude, e.Position.Longitude));
             mapView.MyLocationLayer.UpdateMyDirection(e.Position.Heading, mapView.Viewport.Rotation);
             mapView.MyLocationLayer.UpdateMySpeed(e.Position.Speed);

@@ -326,7 +326,7 @@ public class Viewport : IViewport
     public void SetSize(double width, double height)
     {
         _animations = new();
-        
+
         if (width == _width && height == _height)
             return;
 
@@ -340,7 +340,7 @@ public class Viewport : IViewport
     public void SetCenter(double x, double y, long duration = 0, Easing? easing = default)
     {
         _animations = new();
-        
+
         if (x == _centerX && y == _centerY)
             return;
 
@@ -354,7 +354,7 @@ public class Viewport : IViewport
     public void SetCenterAndResolution(double x, double y, double resolution, long duration = 0, Easing? easing = default)
     {
         _animations = new();
-        
+
         if (x == _centerX && y == _centerY && resolution == _resolution)
             return;
 
@@ -451,7 +451,7 @@ public class Viewport : IViewport
             _height = extent.Height / resolution
         };
         result.UpdateExtent();
-        
+
         return result;
     }
 

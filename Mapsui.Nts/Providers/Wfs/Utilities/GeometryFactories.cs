@@ -57,7 +57,7 @@ internal abstract class GeometryFactory : IDisposable
     protected GeometryFactory(HttpClientUtil httpClientUtil, WfsFeatureTypeInfo featureTypeInfo)
     {
         FeatureTypeInfo = featureTypeInfo;
-        _httpClientUtil = httpClientUtil;               
+        _httpClientUtil = httpClientUtil;
     }
 
     /// <summary>Init Async </summary>
@@ -69,7 +69,7 @@ internal abstract class GeometryFactory : IDisposable
 
         if (_httpClientUtil == null)
             return;
-        
+
         _initialized = true;
         XmlReader = await CreateReaderAsync(_httpClientUtil);
 
@@ -261,7 +261,7 @@ internal abstract class GeometryFactory : IDisposable
             Async = true,
         };
         return XmlReader.Create(
-            await httpClientUtil.GetDataStreamAsync() ?? throw new ArgumentException(nameof(httpClientUtil)), 
+            await httpClientUtil.GetDataStreamAsync() ?? throw new ArgumentException(nameof(httpClientUtil)),
             xmlReaderSettings);
     }
 
@@ -803,7 +803,7 @@ internal class UnspecifiedGeometryFactoryWfs100Gml2 : GeometryFactory
     /// </summary>
     /// <returns></returns>
     internal override async Task<Collection<Geometry>> CreateGeometriesAsync(List<IFeature> features)
-    {            
+    {
         await InitAsync();
         GeometryFactory? geomFactory = null;
 

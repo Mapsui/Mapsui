@@ -104,7 +104,7 @@ public class ArcGISImageServiceProvider : IProvider, IProjectingProvider
         var (success, raster) = await TryGetMapAsync(viewport);
         if (success)
         {
-            return new [] { new RasterFeature(raster) };
+            return new[] { new RasterFeature(raster) };
         }
         return Enumerable.Empty<IFeature>();
     }
@@ -144,11 +144,11 @@ public class ArcGISImageServiceProvider : IProvider, IProjectingProvider
                 var bytes = _persistentCache?.Find(uri.ToString());
                 if (bytes == null)
                 {
-                    using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(_timeOut) };            
+                    using var client = new HttpClient(handler) { Timeout = TimeSpan.FromMilliseconds(_timeOut) };
                     using var response = await client.GetAsync(uri);
                     using var dataStream = await response.Content.ReadAsStreamAsync();
-            
-                    bytes = BruTile.Utilities.ReadFully(dataStream);                        
+
+                    bytes = BruTile.Utilities.ReadFully(dataStream);
                     _persistentCache?.Add(uri.ToString(), bytes);
                 }
 
@@ -181,7 +181,7 @@ public class ArcGISImageServiceProvider : IProvider, IProjectingProvider
                 throw new RenderException("There was a problem while attempting to request the WMS", ex);
             Logger.Log(LogLevel.Error, "There was a problem while attempting to request the WMS" + ex.Message, ex);
         }
-        
+
         return (false, null);
     }
 
@@ -204,7 +204,7 @@ public class ArcGISImageServiceProvider : IProvider, IProjectingProvider
         if (!string.IsNullOrWhiteSpace(CRS))
         {
             url.AppendFormat("&imageSR={0}", CRS);
-            url.AppendFormat("&bboxSR={0}", CRS);    
+            url.AppendFormat("&bboxSR={0}", CRS);
         }
 
         if (ArcGisImageCapabilities.StartTime == -1 && ArcGisImageCapabilities.EndTime == -1)

@@ -47,7 +47,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void Initialize()
     {
-        _invalidate = () => {
+        _invalidate = () =>
+        {
             if (Dispatcher.CheckAccess()) InvalidateCanvas();
             else RunOnUIThread(InvalidateCanvas);
         };

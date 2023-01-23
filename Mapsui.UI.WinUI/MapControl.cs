@@ -66,7 +66,8 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
     private void Initialize()
     {
-        _invalidate = () => {
+        _invalidate = () =>
+        {
             // The commented out code crashes the app when MouseWheelAnimation.Duration > 0. Could be a bug in SKXamlCanvas
             //if (Dispatcher.HasThreadAccess) _canvas?.Invalidate();
             //else RunOnUIThread(() => _canvas?.Invalidate());
@@ -244,7 +245,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         if (Map?.RotationLock == false)
         {
-            _virtualRotation += rotation; 
+            _virtualRotation += rotation;
 
             rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
                 _virtualRotation, _viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);

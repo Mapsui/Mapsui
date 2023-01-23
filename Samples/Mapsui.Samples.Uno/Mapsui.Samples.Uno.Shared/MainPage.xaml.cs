@@ -22,7 +22,7 @@ public sealed partial class MainPage : Page
     static MainPage()
     {
         // todo: find proper way to load assembly
-        Mapsui.Tests.Common.Utilities.LoadAssembly();       
+        Mapsui.Tests.Common.Utilities.LoadAssembly();
     }
 
     public MainPage()
@@ -88,7 +88,8 @@ public sealed partial class MainPage : Page
             Margin = new Thickness(4)
         };
 
-        radioButton.Click += (_, _) => {
+        radioButton.Click += (_, _) =>
+        {
             Catch.Exceptions(async () =>
             {
                 MapControl.Map?.Layers.Clear();

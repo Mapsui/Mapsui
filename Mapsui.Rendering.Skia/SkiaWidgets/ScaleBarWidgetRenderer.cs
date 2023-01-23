@@ -141,7 +141,9 @@ public class ScaleBarWidgetRenderer : ISkiaWidgetRenderer, IDisposable
     {
         return new SKPaint
         {
-            LcdRenderText = true, Style = style, StrokeCap = SKStrokeCap.Square
+            LcdRenderText = true,
+            Style = style,
+            StrokeCap = SKStrokeCap.Square
         };
     }
 

@@ -73,7 +73,7 @@ public class XPathQueryManager : IXPathQueryManager
     /// </summary>
     /// <param name="httpClientUtil">A configured <see cref="HttpClientUtil"/> instance for performing web requests</param>
     public XPathQueryManager(HttpClientUtil httpClientUtil)
-    {            
+    {
         _httpClientUtil = httpClientUtil;
     }
 

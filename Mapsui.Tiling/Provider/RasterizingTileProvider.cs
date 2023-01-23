@@ -28,7 +28,7 @@ public class RasterizingTileProvider : ITileSource
     private ITileSchema? _tileSchema;
     private Attribution? _attribution;
     private readonly IProvider? _dataSource;
-    private readonly RenderFormat _renderFormat;   
+    private readonly RenderFormat _renderFormat;
     private readonly AsyncLock _renderLock = new();
     private IDictionary<TileIndex, double> _searchSizeCache = new ConcurrentDictionary<TileIndex, double>();
 
@@ -71,7 +71,7 @@ public class RasterizingTileProvider : ITileSource
         {
             var renderer = GetRenderer();
             (Viewport viewPort, ILayer renderLayer) = await CreateRenderLayerAsync(tileInfo, renderer);
-            using var stream = renderer.RenderToBitmapStream(viewPort, new[] { renderLayer }, pixelDensity: _pixelDensity, renderFormat: _renderFormat);                            
+            using var stream = renderer.RenderToBitmapStream(viewPort, new[] { renderLayer }, pixelDensity: _pixelDensity, renderFormat: _renderFormat);
             _rasterizingLayers.Push(renderer);
             result = stream?.ToArray();
             PersistentCache?.Add(index, result ?? Array.Empty<byte>());
@@ -92,8 +92,8 @@ public class RasterizingTileProvider : ITileSource
         {
             extent = extent.Grow(featureSearchGrowth);
         }
-        
-        var fetchInfo = new FetchInfo(extent, resolution); 
+
+        var fetchInfo = new FetchInfo(extent, resolution);
         var features = await GetFeaturesAsync(fetchInfo);
         var renderLayer = new RenderLayer(_layer, features);
         return (viewPort, renderLayer);
@@ -105,18 +105,18 @@ public class RasterizingTileProvider : ITileSource
 
         var resolution = tileResolution.UnitsPerPixel;
         var viewPort = RasterizingLayer.CreateViewport(tileInfo.Extent.ToMRect(), resolution, _renderResolutionMultiplier, 1);
-        var fetchInfo = new FetchInfo(viewPort.Extent, resolution); 
+        var fetchInfo = new FetchInfo(viewPort.Extent, resolution);
         var features = await GetFeaturesAsync(fetchInfo);
         return features;
     }
 
-    private async Task<double> GetAdditionalSearchSizeAroundAsync(TileInfo tileInfo, IRenderer renderer, IReadOnlyViewport  viewport)
+    private async Task<double> GetAdditionalSearchSizeAroundAsync(TileInfo tileInfo, IRenderer renderer, IReadOnlyViewport viewport)
     {
         double additionalSearchSize = 0;
-        
-        for (int col = -1; col <= 1 ; col++)
+
+        for (int col = -1; col <= 1; col++)
         {
-            for (int row = -1; row <= 1 ; row++)
+            for (int row = -1; row <= 1; row++)
             {
                 var size = await GetAdditionalSearchSizeAsync(CreateTileInfo(tileInfo, col, row), renderer, viewport);
                 additionalSearchSize = Math.Max(additionalSearchSize, size);

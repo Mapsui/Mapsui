@@ -32,24 +32,24 @@ public class RenderToBitmapPerformance
     static RenderToBitmapPerformance()
     {
         mapRenderer = new MapRenderer();
-        skpMap = CreateMapControl(RenderFormat.Skp);            
+        skpMap = CreateMapControl(RenderFormat.Skp);
         pngMap = CreateMapControl(RenderFormat.Png);
         webpMap = CreateMapControl(RenderFormat.WebP);
         map = CreateMapControl();
     }
-    
+
     public static RegressionMapControl CreateMapControl(RenderFormat? renderFormat = null)
     {
         var mapControl = new RegressionMapControl();
         mapControl.SetSize(800, 600);
-        
+
         mapControl.Map = CreateMap(renderFormat);
 
         // fetch data first time
         var fetchInfo = new FetchInfo(mapControl.Viewport.Extent!, mapControl.Viewport.Resolution, mapControl.Map?.CRS);
         mapControl.Map?.RefreshData(fetchInfo);
         mapControl.Map?.Layers.WaitForLoadingAsync().Wait();
-        
+
         return mapControl;
     }
 
@@ -117,7 +117,7 @@ public class RenderToBitmapPerformance
         // Create theme using a density from 0 (min) to 400 (max)
         return new GradientTheme("PopDens", 0, 400, min, max) { FillColorBlend = ColorBlend.Rainbow5 };
     }
-    
+
     [Benchmark]
     public async Task RenderDefaultAsync()
     {
@@ -130,7 +130,7 @@ public class RenderToBitmapPerformance
 
     [Benchmark]
     public async Task RenderRasterizingTilingPngAsync()
-    { 
+    {
         await pngMap.WaitForLoadingAsync();
         using var bitmap = mapRenderer.RenderToBitmapStream(pngMap.Viewport, pngMap.Map!.Layers, Color.White);
 #if DEBUG
@@ -147,7 +147,7 @@ public class RenderToBitmapPerformance
         File.WriteAllBytes(@$"{OutputFolder()}\Testwebp.png", bitmap.ToArray());
 #endif
     }
-    
+
     [Benchmark]
     public async Task RenderRasterizingTilingSkpAsync()
     {
@@ -156,7 +156,7 @@ public class RenderToBitmapPerformance
 #if DEBUG
         File.WriteAllBytes(@$"{OutputFolder()}\Testskp.png", bitmap.ToArray());
 #endif
-    }              
+    }
 
 #if DEBUG
     private string OutputFolder()

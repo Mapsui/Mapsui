@@ -10,13 +10,13 @@ public class LruCache<TKey, TValue>
     where TKey : notnull
 {
     private readonly int _capacity;
-    private readonly Dictionary<TKey, (LinkedListNode<TKey> Node, TValue Value)> _cache;    
+    private readonly Dictionary<TKey, (LinkedListNode<TKey> Node, TValue Value)> _cache;
     private readonly LinkedList<TKey> _list;
 
     public LruCache(int capacity)
     {
         _capacity = capacity;
-        _cache = new(capacity);        
+        _cache = new(capacity);
         _list = new LinkedList<TKey>();
     }
 
@@ -29,7 +29,7 @@ public class LruCache<TKey, TValue>
             _list.AddFirst(node.Node);
             if (!object.ReferenceEquals(node.Value, value))
             {
-                 // dispose disposable values
+                // dispose disposable values
                 if (node.Value is IDisposable disposable)
                 {
 #pragma warning disable IDISP007 // Don't dispose injected                    
@@ -43,24 +43,24 @@ public class LruCache<TKey, TValue>
         else
         {
             if (_cache.Count >= _capacity) // Cache full.
-            {         
+            {
                 var removeKey = _list.Last!.Value;
                 _cache.TryGetValue(removeKey, out var old);
                 _cache.Remove(removeKey);
                 _list.RemoveLast();
-                
-                 // dispose disposable values
+
+                // dispose disposable values
                 if (old.Value is IDisposable disposable)
                 {
 #pragma warning disable IDISP007 // Don't dispose injected                    
                     disposable.Dispose();
 #pragma warning restore IDISP007
-                }            
+                }
             }
 
             // add cache
             _cache.Add(key, (_list.AddFirst(key), value));
-        }                            
+        }
     }
 
     public TValue? Get(TKey key)
@@ -74,9 +74,9 @@ public class LruCache<TKey, TValue>
         _list.Remove(node.Node);
         _list.AddFirst(node.Node);
 
-        return node.Value;                  
+        return node.Value;
     }
-    
+
     public bool TryGetValue(TKey key, [MaybeNullWhen(false)] out TValue value)
     {
         if (!_cache.ContainsKey(key))
@@ -98,5 +98,5 @@ public class LruCache<TKey, TValue>
     {
         get => Get(key);
         set => Put(key, value);
-    }        
+    }
 }

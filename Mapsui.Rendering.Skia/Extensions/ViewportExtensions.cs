@@ -20,7 +20,7 @@ public static class ViewportExtensions
         return matrix;
     }
 
-     /// <summary> Converts the Extent of the Viewport to a SKRect </summary>
+    /// <summary> Converts the Extent of the Viewport to a SKRect </summary>
     /// <param name="viewport">viewport</param>
     /// <returns>SkRect</returns>
     public static SKRect ToSkiaRect(this IReadOnlyViewport viewport)
