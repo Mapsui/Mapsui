@@ -48,7 +48,7 @@ jobs:
     - name: Test
       run: dotnet test $SOLUTION --configuration Release --no-restore --verbosity normal -p:Version=${{ env.VERSION_OF_RELEASE }}
     
-    - name: Release
+    - name: Release NuGets
       if: ${{ inputs.release_nugets }} 
       run: |
         nuget push "${GITHUB_WORKSPACE}\nugets\**\*.nupkg" -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_APIKEY}}
