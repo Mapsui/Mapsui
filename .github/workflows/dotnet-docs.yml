@@ -16,14 +16,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
       with:
-        fetch-depth: 0
-# .Net 7 already installed on Github actions          
-#   - name: Setup .NET Core SDK
-#     uses: actions/setup-dotnet@v2
-#       with:
-#         dotnet-version: |
-#           7.0.100
-#         include-prerelease: false            
+        fetch-depth: 0      
     - name: Run DocFx
       run: docfx\build-site.cmd
 
