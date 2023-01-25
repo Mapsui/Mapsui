@@ -3,7 +3,7 @@
 This is the documentation of the Mapsui open source map component.
 - [General documentation](http://mapsui.com/documentation/home.html)
 - [API documentation](http://mapsui.com/api/index.html)
-- [GitHub where you can find the samples](https://github.com/mapsui/mapsui)
+- [Mapsui on GitHub](https://github.com/mapsui/mapsui)
 
 ## Projects that use Mapsui
 
