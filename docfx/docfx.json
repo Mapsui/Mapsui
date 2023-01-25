@@ -5,13 +5,13 @@
         {
           "cwd": "../",
           "files": [
-            "Mapsui/*.csproj",            
-			"Mapsui.ArcGis/*.csproj",
-			"Mapsui.Extensions/*.csproj",
-			"Mapsui.Nts/*.csproj",
+            "Mapsui/*.csproj",
+            "Mapsui.ArcGis/*.csproj",
+            "Mapsui.Extensions/*.csproj",
+            "Mapsui.Nts/*.csproj",
             "Mapsui.Rendering.Skia/*.csproj",
-			"Mapsui.Tiling/*.csproj",            
-            "Mapsui.UI.*/*.csproj",            			
+            "Mapsui.Tiling/*.csproj",
+            "Mapsui.UI.*/*.csproj"
           ],
           "exclude": [
             "**/obj/**",
@@ -68,13 +68,13 @@
         ]
       }
     ],
-	"xrefService": [
+    "xrefService": [
       "https://xref.docs.microsoft.com/query?uid={uid}"
     ],
     "dest": "_site",
     "globalMetadataFiles": [ "metadata.json" ],
     "fileMetadataFiles": [],
-	"markdownEngineName": "markdig",
+    "markdownEngineName": "markdig",
     "template": [
       "default"
     ],
