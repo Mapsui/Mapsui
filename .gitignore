@@ -81,4 +81,4 @@ AppPackages/
 *.binlog
 /dotnet-install.ps1
 /dotnetcli
-/docs
+/website

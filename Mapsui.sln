@@ -84,6 +84,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docfx", "docfx", "{97458DE1-C297-4DED-AECB-5FEFED2B5610}"
 	ProjectSection(SolutionItems) = preProject
 		docfx\build-site.cmd = docfx\build-site.cmd
+		docfx\CNAME = docfx\CNAME
 		docfx\docfx.json = docfx\docfx.json
 		docfx\index.md = docfx\index.md
 		docfx\metadata.json = docfx\metadata.json

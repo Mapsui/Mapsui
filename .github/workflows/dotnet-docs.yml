@@ -1,4 +1,4 @@
-name: Build Docs
+name: Build Website
 
 on:
   push:
@@ -26,8 +26,8 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v1
       with:
-      # Upload docs folder
-        path: 'docs'
+      # Upload the 'website' folder as artifact
+        path: 'website'
     - name: Deploy to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@v1
