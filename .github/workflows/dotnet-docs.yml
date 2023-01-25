@@ -4,8 +4,7 @@ on:
   push:
     branches:  
       - feature/build-docs   
-    paths: 
-      - docfx
+  workflow_dispatch:
       
 permissions:
   contents: write
