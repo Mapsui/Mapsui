@@ -1,13 +1,15 @@
-name: Build Docs
+name: Build Website
 
 on:
   push:
     branches:  
-      - feature/build-docs   
-  workflow_dispatch:
+      - master   
       
 permissions:
   contents: write
+  # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+  pages: write      # to deploy to Pages
+  id-token: write   # to verify the deployment originates from an appropriate source
 
 jobs:
   build-and-deploy:
@@ -16,30 +18,15 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
       with:
-        fetch-depth: 0
-# .Net 7 already installed on Github actions          
-#   - name: Setup .NET Core SDK
-#     uses: actions/setup-dotnet@v2
-#       with:
-#         dotnet-version: |
-#           7.0.100
-#         include-prerelease: false            
+        fetch-depth: 0      
     - name: Run DocFx
-      run: docfx\build-site.cmd
-
-# Don't think this is necessary
-#   - name: Deploy 🚀
-#     uses: JamesIves/github-pages-deploy-action@v4
-#     with:
-#       folder: docs # The folder the action should deploy.                
-    - name: Set User Email
-      run: git config --global user.email "pauldendulk@gmail.com"
-    - name: Set User Name
-      run: git config --global user.name "pauldendulk"
-    - name: Add Doc Files            
-      run: git add -A
-    - name: Git Commit
-      run: commit -a -m "Generating site"
-    - name: Git Push      
-      run: git push  
-        
+      # Use a .cmd so this script can be run locally for testing
+      run: docfx\build-site.cmd      
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v1
+      with:
+      # Upload the 'website' folder as artifact
+        path: 'website'
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v1
