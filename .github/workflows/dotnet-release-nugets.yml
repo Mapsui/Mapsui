@@ -35,7 +35,7 @@ jobs:
 
     - name: Pack
       # The dlls and nupkgs will be built 'inputs.release_version' as version, overriding the version number in the Directory.Build.props.
-      run: dotnet pack ${{ env.SOLUTION }} --configuration Release -p:Version=${{ env.VERSION_OF_RELEASE }} --no-restore /p:PackageOutputPath="${GITHUB_WORKSPACE}/nugets"
+      run: dotnet pack ${{ env.SOLUTION }} --configuration Release -p:Version=${{ env.VERSION_OF_RELEASE }} /p:PackageOutputPath="${GITHUB_WORKSPACE}/nugets"
  
     - name: Test
       run: dotnet test ${{ env.SOLUTION }} --configuration Release --no-restore --verbosity normal -p:Version=${{ env.VERSION_OF_RELEASE }}
