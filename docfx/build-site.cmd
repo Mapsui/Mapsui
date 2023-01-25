@@ -1,7 +1,8 @@
-ECHO CHOCO INSTALL
-choco install docfx --version 2.59.4 --allow-downgrade  -y || exit /b 
-ECHO NUGET RESTORE
-.nuget\nuget restore mapsui.sln 
+
+REM ECHO INSTALL .NET 6 SDK (was necessary on my machine where I develop all kinds of .NET apps)
+REM Perhaps we need: winget install Microsoft.DotNet.SDK.6 --silent
+ECHO INSTALL docfx
+dotnet tool update -g docfx --version 2.60.2  || exit /b 
 ECHO DOCFX
 docfx docfx\docfx.json || exit /b 
 ECHO DELETE docs 
