@@ -1,6 +1,6 @@
 # NuGet of Latest Build
 
-The 'Build' GitHub action creates nugets for that build and stores them as artifacts. Go to [actions](https://github.com/Mapsui/Mapsui/actions), select the build you are interested in. You can download the artifacts shown at the bottom of the page.
+Mapsui's 'Build' GitHub action creates nugets and stores them as artifacts. Go to [actions](https://github.com/Mapsui/Mapsui/actions), select the build you are interested in and download them at the bottom of the page.
 
 
 ## Build your own nuget package
