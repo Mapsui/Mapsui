@@ -18,4 +18,13 @@ jobs:
       with:
         fetch-depth: 0      
     - name: Run DocFx
+      # Use a .cmd so this script can be run locally for testing
       run: docfx\build-site.cmd      
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v1
+      with:
+      # Upload docs folder
+        path: 'docs'
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v1
