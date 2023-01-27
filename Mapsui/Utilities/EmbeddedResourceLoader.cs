@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using Mapsui.Extensions;
 namespace Mapsui.Utilities;
 
@@ -28,26 +28,27 @@ public static class EmbeddedResourceLoader
 
     private static string ConstructExceptionMessage(string path, Assembly assembly)
     {
-        const string format = "The resource name '{0}' was not found in assembly '{1}'.";
-        var message = string.Format(format, path, assembly.GetAssemblyName());
+        var stringBuilder = new StringBuilder();
+        stringBuilder.Append($"The resource name '{path}' was not found in assembly '{assembly.GetAssemblyName()}'.");
 
+        // Get all resources from the assembly
         var resourceNames = assembly.GetManifestResourceNames();
+
+        // Give feedback if there are no resources
         if (resourceNames.Length == 0)
         {
-            message += " There are no resources in this assembly.";
-            Debug.WriteLine(message);
-            return message;
+            stringBuilder.Append(" There are no resources in this assembly.");
+            return stringBuilder.ToString();
         }
 
+        // Give feedback if there are resources with similar names
         var similarNames = resourceNames.Where(name => path.ToLower().Split('.')
-            .Any(name.ToLower().Contains)).ToArray();
-
-        if (similarNames.Length <= 0) return message;
-
+            .Any(s => name.ToLower().Contains(s.ToLower()))).ToArray();
+        if (similarNames.Length <= 0) return stringBuilder.ToString();
         var nameLength = assembly.GetAssemblyName()?.Length ?? 0;
         similarNames = similarNames.Select(fullName => fullName.Remove(0, nameLength + 1)).ToArray();
-        message += " Did you mean: " + string.Join("\n ", similarNames.ToArray()) + ".";
-        Debug.WriteLine(message);
-        return message;
+        stringBuilder.Append(" Did you try to get any of these embedded resources: " + string.Join("\n ", similarNames.ToArray()) + ".");
+
+        return stringBuilder.ToString();
     }
 }
