@@ -29,12 +29,25 @@ public class GeoJsonSample : IMapControlSample
 
     public static Map CreateMap()
     {
-        var map = new Map();
+        var map = new Map
+        {
+            CRS = "EPSG:3857", // The Map CRS needs to be set   
+        };
+            
         var examplePath = Path.Combine(GeoJsonDeployer.GeoJsonLocation, "cities.geojson");
-        var geoJson = new GeoJsonProvider(examplePath);
+        var geoJson = new GeoJsonProvider(examplePath)
+        {
+            CRS = "EPSG:4326" // The DataSource CRS needs to be set
+        };
+
+        var dataSource = new ProjectingProvider(geoJson)
+        {
+            CRS = "EPSG:3857",
+        };
+        
         map.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
-        map.Layers.Add(CreateCityLayer(geoJson));
-        map.Layers.Add(CreateCityLabelLayer(geoJson));
+        map.Layers.Add(CreateCityLayer(dataSource));
+        map.Layers.Add(CreateCityLabelLayer(dataSource));
 
         return map;
     }
