@@ -9,6 +9,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="NetTopologySuite" />
+		<PackageReference Include="NetTopologySuite.IO.GeoJSON4STJ" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
