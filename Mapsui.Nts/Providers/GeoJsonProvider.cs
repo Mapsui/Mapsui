@@ -16,8 +16,10 @@ namespace Mapsui.Nts.Providers;
 
 public class GeoJsonProvider : IProvider
 {
+    private static ReadOnlySpan<byte> Utf8Bom => new byte[] { 0xEF, 0xBB, 0xBF };
     private string _geoJson;
     private FeatureCollection _featureCollection;
+    private MRect? _extent;
 
     public GeoJsonProvider(string geojson)
     {
@@ -37,15 +39,26 @@ public class GeoJsonProvider : IProvider
         }
     }
 
-    private FeatureCollection Deserialize(string geoJson, JsonSerializerOptions options)
+    private FeatureCollection DeserializContent(string geoJson, JsonSerializerOptions options)
     {
-        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(geoJson));
-        return Deserialize(ms, options);
+        var b= new ReadOnlySpan<byte>(Encoding.UTF8.GetBytes(geoJson));
+        return Deserialize(b, options);
     }
 
-    private FeatureCollection Deserialize(Stream stream, JsonSerializerOptions options)
+    private FeatureCollection DeserializeFile(string path, JsonSerializerOptions options)
     {
-        var b = new ReadOnlySpan<byte>(stream.ToBytes());
+        var b = new ReadOnlySpan<byte>(File.ReadAllBytes(path));
+        return Deserialize(b, options);
+    }
+
+    private FeatureCollection Deserialize(ReadOnlySpan<byte> b, JsonSerializerOptions options)
+    {
+        // Read past the UTF-8 BOM bytes if a BOM exists.
+        if (b.StartsWith(Utf8Bom))
+        {
+            b = b.Slice(Utf8Bom.Length);
+        }
+
         var r = new Utf8JsonReader(b);
 
         // we are at None
@@ -73,7 +86,7 @@ public class GeoJsonProvider : IProvider
             if (_featureCollection == null)
             {
                 // maybe it has GeoJson Content.
-                _featureCollection = IsGeoJsonContent() ? Deserialize(_geoJson, DefaultOptions) : Deserialize(File.OpenRead(_geoJson), DefaultOptions);
+                _featureCollection = IsGeoJsonContent() ? DeserializContent(_geoJson, DefaultOptions) : DeserializeFile(_geoJson, DefaultOptions);
             }
     
             return _featureCollection;    
@@ -86,7 +99,29 @@ public class GeoJsonProvider : IProvider
     /// <inheritdoc/>
     public MRect? GetExtent()
     {
-        return FeatureCollection.BoundingBox.ToMRect();
+        if (_extent == null)
+        {
+            if (FeatureCollection.BoundingBox != null)
+            {
+                _extent = FeatureCollection.BoundingBox.ToMRect();
+            }
+            else
+            {
+                foreach (var geometry in FeatureCollection)
+                {
+                    if (geometry.BoundingBox != null)
+                    {
+                        var mRect = geometry.BoundingBox.ToMRect();
+                        if (_extent == null)
+                            _extent = mRect;
+                        else
+                            _extent.Join(mRect);
+                    }
+                }
+            }
+        }
+
+        return _extent;
     }
 
     /// <inheritdoc/>
