@@ -132,13 +132,11 @@ public class GeoJsonProvider : IProvider
         
         foreach (NetTopologySuite.Features.IFeature? feature in FeatureCollection)
         {
-            if (feature is Geometry geometry)
+            var boundingBox = feature.BoundingBox ?? feature.Geometry.EnvelopeInternal;
+            if (boundingBox.Intersects(fetchExtent))
             {
-                if (feature.BoundingBox.Intersects(fetchExtent))
-                {
-                    var geometryFeature = new GeometryFeature();
-                    geometryFeature.Geometry = geometry;
-                }
+                var geometryFeature = new GeometryFeature();
+                geometryFeature.Geometry = feature.Geometry;
             }
         }
 
