@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ public class GeoJsonProvider : IProvider
 {
     private static ReadOnlySpan<byte> Utf8Bom => new byte[] { 0xEF, 0xBB, 0xBF };
     private string _geoJson;
-    private FeatureCollection _featureCollection;
+    private FeatureCollection? _featureCollection;
     private MRect? _extent;
 
     public GeoJsonProvider(string geojson)
@@ -64,7 +65,7 @@ public class GeoJsonProvider : IProvider
         r.Read();
         var res = JsonSerializer.Deserialize<FeatureCollection>(ref r, options);
 
-        return res;
+        return res ?? new FeatureCollection();
     }
 
     /// <summary> Is Geo Json Content </summary>
@@ -149,8 +150,21 @@ public class GeoJsonProvider : IProvider
     {
         foreach (var attribute in featureAttributes.GetNames())
         {
-            geometryFeature[attribute] = featureAttributes[attribute];
+            var value = featureAttributes[attribute];
+            value = Decode(value);
+            geometryFeature[attribute] = value;
         }
+    }
+
+    private object? Decode(object? value)
+    {
+        // somehow there exist geojson documents with %C3%A9 characters (url encoded utf8 symbols)
+        if (value is string str)
+        {
+            return WebUtility.UrlDecode(str);    
+        }
+
+        return value;
     }
 
     private static Envelope BoundingBox(NetTopologySuite.Features.IFeature feature)

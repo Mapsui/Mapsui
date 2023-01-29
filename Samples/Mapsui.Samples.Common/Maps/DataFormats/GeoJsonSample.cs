@@ -49,20 +49,9 @@ public class GeoJsonSample : IMapControlSample
         };
         
         map.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
-        map.Layers.Add( new RasterizingTileLayer(CreateCityLayer(dataSource)));
         map.Layers.Add( new RasterizingTileLayer(CreateCityLabelLayer(dataSource)));
 
         return map;
-    }
-
-    private static ILayer CreateCityLayer(IProvider citySource)
-    {
-        return new Layer
-        {
-            Name = "Cities",
-            DataSource = citySource,
-            Style = CreateCityTheme()
-        };
     }
 
     private static ILayer CreateCityLabelLayer(IProvider citiesProvider)
@@ -75,26 +64,13 @@ public class GeoJsonSample : IMapControlSample
         };
     }
 
-    private static IThemeStyle CreateCityTheme()
-    {
-        var bitmapId = typeof(ShapefileSample).LoadBitmapId(@"Images.icon.png");
-        var cityMin = new SymbolStyle { BitmapId = bitmapId, SymbolScale = 0.5f };
-        return new ThemeStyle(f => cityMin);
-    }
-
     private static LabelStyle CreateCityLabelStyle()
     {
         return new LabelStyle
         {
             ForeColor = Color.Black,
-            BackColor = new Brush { Color = Color.Orange },
-            Font = new Font { FontFamily = "GenericSerif", Size = 11 },
-            HorizontalAlignment = LabelStyle.HorizontalAlignmentEnum.Center,
-            VerticalAlignment = LabelStyle.VerticalAlignmentEnum.Center,
-            Offset = new Offset { X = 0, Y = 0 },
-            Halo = new Pen { Color = Color.Yellow, Width = 2 },
-            CollisionDetection = true,
-            LabelColumn = "city"
+            BackColor = new Brush(Color.White),
+            LabelColumn = "city",
         };
     }
 }
