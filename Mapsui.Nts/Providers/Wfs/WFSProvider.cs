@@ -224,7 +224,7 @@ public class WFSProvider : IProvider, IDisposable
     /// <param name="persistentCache">persistent Cache Interface</param>
     public static async Task<WFSProvider> CreateAsync(string getCapabilitiesUri, string nsPrefix, string featureType, WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
     {
-        await CreateAsync(getCapabilitiesUri, nsPrefix, featureType, GeometryTypeEnum.Unknown, wfsVersion,
+        return await CreateAsync(getCapabilitiesUri, nsPrefix, featureType, GeometryTypeEnum.Unknown, wfsVersion,
             persistentCache: persistentCache);
     }
     
