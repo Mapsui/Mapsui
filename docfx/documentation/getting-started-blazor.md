@@ -16,7 +16,7 @@ In Index.razor add this to the to Page.
 
 ```csharp
 @code {
-    private ElementReference _mapControl;
+    private ElementReference? _mapControl;
 }
 ```
 
