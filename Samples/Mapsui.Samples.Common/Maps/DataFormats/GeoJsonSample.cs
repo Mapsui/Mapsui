@@ -1,4 +1,5 @@
-﻿using Mapsui.Layers;
+﻿using System.Diagnostics.CodeAnalysis;
+using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Samples.Common.Utilities;
 using Mapsui.Styles;
@@ -7,6 +8,7 @@ using System.IO;
 using Mapsui.Extensions;
 using Mapsui.Nts.Providers;
 using Mapsui.Styles.Thematics;
+using Mapsui.Tiling.Layers;
 
 #pragma warning disable IDISP001 // Dispose created
 
@@ -27,6 +29,7 @@ public class GeoJsonSample : IMapControlSample
         mapControl.Map = CreateMap();
     }
 
+    [SuppressMessage("IDisposableAnalyzers.Correctness", "IDISP004:Don\'t ignore created IDisposable")]
     public static Map CreateMap()
     {
         var map = new Map
@@ -46,8 +49,8 @@ public class GeoJsonSample : IMapControlSample
         };
         
         map.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
-        map.Layers.Add(CreateCityLayer(dataSource));
-        map.Layers.Add(CreateCityLabelLayer(dataSource));
+        map.Layers.Add( new RasterizingTileLayer(CreateCityLayer(dataSource)));
+        map.Layers.Add( new RasterizingTileLayer(CreateCityLabelLayer(dataSource)));
 
         return map;
     }
