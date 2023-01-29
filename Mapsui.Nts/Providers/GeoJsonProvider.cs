@@ -8,6 +8,7 @@ using Mapsui.Layers;
 using Mapsui.Nts.Extensions;
 using Mapsui.Providers;
 using NetTopologySuite.Features;
+using NetTopologySuite.Geometries;
 using NetTopologySuite.IO.Converters;
 
 namespace Mapsui.Nts.Providers;
@@ -107,9 +108,10 @@ public class GeoJsonProvider : IProvider
             {
                 foreach (var geometry in FeatureCollection)
                 {
-                    if (geometry.BoundingBox != null)
+                    var boundingBox = BoundingBox(geometry);
+                    if (boundingBox != null)
                     {
-                        var mRect = geometry.BoundingBox.ToMRect();
+                        var mRect = boundingBox.ToMRect();
                         if (_extent == null)
                             _extent = mRect;
                         else
@@ -130,14 +132,20 @@ public class GeoJsonProvider : IProvider
         
         foreach (NetTopologySuite.Features.IFeature? feature in FeatureCollection)
         {
-            var boundingBox = feature.BoundingBox ?? feature.Geometry.EnvelopeInternal;
+            var boundingBox = BoundingBox(feature);
             if (boundingBox.Intersects(fetchExtent))
             {
                 var geometryFeature = new GeometryFeature();
                 geometryFeature.Geometry = feature.Geometry;
+                list.Add(geometryFeature);
             }
         }
 
         return Task.FromResult((IEnumerable<IFeature>)list);
+    }
+
+    private static Envelope BoundingBox(NetTopologySuite.Features.IFeature feature)
+    {
+        return feature.BoundingBox ?? feature.Geometry.EnvelopeInternal;
     }
 }
