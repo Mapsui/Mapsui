@@ -137,11 +137,20 @@ public class GeoJsonProvider : IProvider
             {
                 var geometryFeature = new GeometryFeature();
                 geometryFeature.Geometry = feature.Geometry;
+                FillFields(geometryFeature, feature.Attributes);
                 list.Add(geometryFeature);
             }
         }
 
         return Task.FromResult((IEnumerable<IFeature>)list);
+    }
+
+    private void FillFields(GeometryFeature geometryFeature, IAttributesTable featureAttributes)
+    {
+        foreach (var attribute in featureAttributes.GetNames())
+        {
+            geometryFeature[attribute] = featureAttributes[attribute];
+        }
     }
 
     private static Envelope BoundingBox(NetTopologySuite.Features.IFeature feature)
