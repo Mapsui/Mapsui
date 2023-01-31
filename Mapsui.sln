@@ -122,6 +122,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "documentation", "documentat
 		docfx\documentation\samples.md = docfx\documentation\samples.md
 		docfx\documentation\skia-scale.md = docfx\documentation\skia-scale.md
 		docfx\documentation\toc.md = docfx\documentation\toc.md
+		docfx\documentation\getting-started-blazor.md = docfx\documentation\getting-started-blazor.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{52C84C7C-1D60-454E-804A-1F9691BD61A3}"
