@@ -19,10 +19,9 @@
 	  <_AndroidApiLevel Condition="'$(TargetFramework)' == 'net6.0-android31.0'">31</_AndroidApiLevel>
 	  <SupportedOSPlatformVersion Condition="'$(TargetFramework)'=='net6.0-macos'">10.14</SupportedOSPlatformVersion>
     <PackageId>Mapsui.Uno.WinUI</PackageId>
-    <Description>
-      Uno map components based on the Mapsui library
-    </Description>
+    <Description>Uno map components based on the Mapsui library</Description>
     <PackageTags>$(PackageTags) uno.winui</PackageTags>
+		<IsPackable>true</IsPackable>
     <!--Uno has some differences between targets-->
     <EnablePackageValidation>false</EnablePackageValidation>
     <SupportedOSPlatformVersion Condition="$(TargetFramework.Contains('ios'))">14.2</SupportedOSPlatformVersion>

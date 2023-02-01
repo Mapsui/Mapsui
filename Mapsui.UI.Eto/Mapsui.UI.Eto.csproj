@@ -6,10 +6,9 @@
     <EnableNETAnalyzers>True</EnableNETAnalyzers>
     <DefineConstants>__ETO_FORMS__</DefineConstants>
     <PackageId>Mapsui.Eto</PackageId>
-    <Description>
-      Eto.Forms map components based on the Mapsui library
-    </Description>
+    <Description>Eto.Forms map components based on the Mapsui library</Description>
     <PackageTags>$(PackageTags) eto.forms</PackageTags>
+		<IsPackable>true</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>

@@ -7,6 +7,7 @@
     <!--Revert TreatWarningsAsErrors to false because of vague build error on server -->
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <Description>Mapsui - Library for mapping</Description>
+		<IsPackable>true</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>

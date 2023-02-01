@@ -4,10 +4,9 @@
     <TargetFrameworks>netcoreapp3.1;net48</TargetFrameworks>
     <UseWpf>true</UseWpf>
     <PackageId>Mapsui.Wpf</PackageId>
-    <Description>
-      WPF map components based on the Mapsui library
-    </Description>
-    <PackageTags>$(PackageTags) wpf</PackageTags>
+    <Description>WPF map components based on the Mapsui library</Description>
+    <PackageTags>$(PackageTags) WPF</PackageTags>
+		<IsPackable>true</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>

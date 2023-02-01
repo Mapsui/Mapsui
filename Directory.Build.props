@@ -13,16 +13,15 @@
     <EnablePackageValidation>true</EnablePackageValidation>
     <PackageReleaseNotes>Release notes are at https://github.com/Mapsui/Mapsui/releases</PackageReleaseNotes>
     <PackageTags>map maps mapping geo gis osm</PackageTags>
-    <PackageIconUrl>https://github.com/Mapsui/Mapsui/blob/master/logo/png/icon.png</PackageIconUrl>
     <PackageIcon>icon.png</PackageIcon>
+    <IsPackable>false</IsPackable> <!--Default to not packable and override in projects that do need to be packed.-->
   </PropertyGroup>
 
-  <!--Package Icon Include -->
-  <ItemGroup>
-    <None Include="..\logo\png\icon.png" Pack="true" PackagePath="\"/>
-    <None Include="..\LICENSE" Pack="true" PackagePath="\" />
-  </ItemGroup>
-  
+	<!--Package Icon Include -->
+	<ItemGroup>
+		<None Include="..\logo\png\icon.png" Pack="true" PackagePath="\"/>
+		<None Include="..\LICENSE" Pack="true" PackagePath="\" />
+	</ItemGroup>
 
   <!-- Common Project Properties -->
   <PropertyGroup>

@@ -7,10 +7,9 @@
     <EnableNETAnalyzers>True</EnableNETAnalyzers>
     <DefineConstants>__BLAZOR__</DefineConstants>
     <PackageId>Mapsui.Blazor</PackageId>
-    <Description>
-      Blazor map components based on the Mapsui library
-    </Description>
+    <Description>Blazor map components based on the Mapsui library</Description>
     <PackageTags>$(PackageTags) blazor wasm razor</PackageTags>
+		<IsPackable>true</IsPackable>
   </PropertyGroup>
 
 	<ItemGroup>

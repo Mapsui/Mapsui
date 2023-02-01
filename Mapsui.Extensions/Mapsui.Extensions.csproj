@@ -5,6 +5,7 @@
     <TargetFrameworks Condition="'$(SolutionName)' != 'Mapsui.Mac.Legacy'">$(TargetFrameworks);net6.0</TargetFrameworks>
     <description>Mapsui - Library for mapping Extensions</description>
     <PackageTags>$(PackageTags) arcgis geotiff cache projection</PackageTags>
+		<IsPackable>true</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>

@@ -6,6 +6,7 @@
     <Configurations>Release;Debug</Configurations>
     <Description>Mapsui - Library for mapping</Description>
     <PackageTags>$(PackageTags) rendering skia</PackageTags>
+		<IsPackable>true</IsPackable>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
