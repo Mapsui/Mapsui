@@ -56,18 +56,18 @@ public class WfsSample : ISample
 
     private static async Task<WFSProvider> CreateWfsProviderAsync(string getCapabilitiesUri)
     {
-        var provider = new WFSProvider(
+        var provider = await WFSProvider.CreateAsync(
             getCapabilitiesUri,
             nsPrefix,
             layerName,
             WFSProvider.WFSVersionEnum.WFS_1_1_0,
-            persistentCache: DefaultCache)
-        {
-            QuickGeometries = false,
-            GetFeatureGetRequest = true,
-            CRS = crs,
-            Labels = new List<string> { labelField }
-        };
+            persistentCache: DefaultCache);
+
+        provider.QuickGeometries = false;
+        provider.GetFeatureGetRequest = true;
+        provider.CRS = crs;
+        provider.Labels = new List<string> { labelField };
+        
         await provider.InitAsync();
         return provider;
     }
