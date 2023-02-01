@@ -72,7 +72,6 @@ public class WFSProvider : IProvider, IDisposable
     private IFilter? _ogcFilter;
     private bool _quickGeometries;
     private int[]? _axisOrder;
-    private bool _intialized = true; // by default initialized only special cases I initialize
     private readonly IUrlPersistentCache? _persistentCache;
     private string? _sridOverride;
 
@@ -196,6 +195,39 @@ public class WFSProvider : IProvider, IDisposable
         get => _httpClientUtil.ProxyUrl;
         set => _httpClientUtil.ProxyUrl = value;
     }
+    
+    /// <summary>
+    /// Initializes a new layer, and downloads and parses the service description
+    /// </summary>
+    /// <param name="url">Url of WMS server</param>
+    /// <param name="persistentCache"></param>
+    /// <param name="wmsVersion">Version number of wms leave null to get the default service version</param>
+    /// <param name="getStreamAsync">Download method, leave null for default</param>
+    public static async Task<WFSProvider> CreateAsync(string getCapabilitiesUri, string nsPrefix, string featureType, GeometryTypeEnum geometryType,
+        WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
+    {
+        var provider = new WFSProvider(getCapabilitiesUri, nsPrefix, featureType, geometryType, wfsVersion, persistentCache);
+        await provider.InitAsync();
+        return provider;
+    }
+    
+    /// <summary>
+    /// Use this Method for initializing this dataprovider with all necessary
+    /// parameters to gather metadata from 'GetCapabilities' contract.
+    /// </summary>
+    /// <param name="getCapabilitiesUri">The URL for the 'GetCapabilities' request.</param>
+    /// <param name="nsPrefix">
+    /// Use an empty string or 'null', if there is no prefix for the featuretype.
+    /// </param>
+    /// <param name="featureType">The name of the feature type</param>
+    /// <param name="wfsVersion">The desired WFS Server version.</param>
+    /// <param name="persistentCache">persistent Cache Interface</param>
+    public static async Task<WFSProvider> CreateAsync(string getCapabilitiesUri, string nsPrefix, string featureType, WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
+    {
+        return await CreateAsync(getCapabilitiesUri, nsPrefix, featureType, GeometryTypeEnum.Unknown, wfsVersion,
+            persistentCache: persistentCache);
+    }
+    
 
     /// <summary>
     /// Use this constructor for initializing this dataprovider with all necessary
@@ -212,7 +244,7 @@ public class WFSProvider : IProvider, IDisposable
     /// </param>
     /// <param name="wfsVersion">The desired WFS Server version.</param>
     /// <param name="persistentCache">persistent Cache</param>
-    public WFSProvider(string getCapabilitiesUri, string nsPrefix, string featureType, GeometryTypeEnum geometryType,
+    private WFSProvider(string getCapabilitiesUri, string nsPrefix, string featureType, GeometryTypeEnum geometryType,
                WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
     {
         _httpClientUtil = new HttpClientUtil(persistentCache);
@@ -235,17 +267,12 @@ public class WFSProvider : IProvider, IDisposable
         }
 
         _geometryType = geometryType;
-        _intialized = false;
     }
 
     /// <summary>Init Async</summary>
     /// <returns></returns>
     public async Task InitAsync()
     {
-        if (_intialized)
-            return;
-
-        _intialized = true;
         await GetFeatureTypeInfoAsync();
     }
 
@@ -260,7 +287,7 @@ public class WFSProvider : IProvider, IDisposable
     /// <param name="featureType">The name of the feature type</param>
     /// <param name="wfsVersion">The desired WFS Server version.</param>
     /// <param name="persistentCache">persistent Cache Interface</param>
-    public WFSProvider(string getCapabilitiesUri, string nsPrefix, string featureType, WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
+    private WFSProvider(string getCapabilitiesUri, string nsPrefix, string featureType, WFSVersionEnum wfsVersion, IUrlPersistentCache? persistentCache = null)
         : this(getCapabilitiesUri, nsPrefix, featureType, GeometryTypeEnum.Unknown, wfsVersion, persistentCache: persistentCache)
     {
     }
@@ -386,7 +413,6 @@ public class WFSProvider : IProvider, IDisposable
         }
 
         _geometryType = geometryType;
-        _intialized = false;
     }
 
     /// <summary>
@@ -541,8 +567,6 @@ public class WFSProvider : IProvider, IDisposable
     [SuppressMessage("Usage", "VSTHRD002:Avoid problematic synchronous waits")]
     public MRect? GetExtent()
     {
-        if (!_intialized)
-            InitAsync().Wait();
         if (_featureTypeInfo == null)
             return null;
         return new MRect(
@@ -557,8 +581,6 @@ public class WFSProvider : IProvider, IDisposable
     {
         get
         {
-            if (!_intialized)
-                InitAsync().Wait();
             // srid overrides the srid of the _featureTypeInfo
             return CrsHelper.EpsgPrefix + _featureTypeInfo?.SRID;
         }
