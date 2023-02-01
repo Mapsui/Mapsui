@@ -53,7 +53,7 @@ jobs:
       with:
       # Upload the 'nugets' folder as artifact
         name: nugets
-        path: nugets\**\*.nupkg  
+        path: nugets/*.nupkg
 
     - name: Release NuGets
       if: ${{ inputs.release_nugets }} 
