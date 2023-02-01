@@ -40,7 +40,7 @@ jobs:
       run: dotnet test ${{ env.SOLUTION }} --configuration Release --verbosity normal -p:Version=${{ env.VERSION_OF_RELEASE }}
 
     - name: Pack Uno UWP
-      run: msbuild /t:Pack Mapsui.UI.Uno/Mapsui.UI.Uno.csproj  /p:RestorePackages=true /p:Configuration=Release /p:Version=${{ env.VERSION_OF_RELEASE }} /p:PackageOutputPath="${GITHUB_WORKSPACE}/nugets"
+      run: msbuild Mapsui.UI.Uno/Mapsui.UI.Uno.csproj /t:Pack /t:restore /p:Configuration=Release /p:Version=${{ env.VERSION_OF_RELEASE }} /p:PackageOutputPath="${GITHUB_WORKSPACE}/nugets"
     
     - name: Pack
       # The dlls and nupkgs will be built 'inputs.release_version' as version, overriding the version number in the Directory.Build.props.
