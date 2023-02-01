@@ -52,7 +52,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
       # Upload the 'nugets' folder as artifact
-        name: nugets
+        name: packages
         path: nugets/*.nupkg
 
     - name: Release NuGets
