@@ -10,12 +10,6 @@
     <PublishTrimmed>true</PublishTrimmed>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="..\logo\png\icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\logo\png\icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\Mapsui.Rendering.Skia\Mapsui.Rendering.Skia.csproj" />
     <ProjectReference Include="..\..\Mapsui.UI.iOS\Mapsui.UI.iOS.csproj" />
     <ProjectReference Include="..\..\Mapsui\Mapsui.csproj" />
