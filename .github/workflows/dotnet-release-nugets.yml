@@ -37,7 +37,7 @@ jobs:
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
 
     - name: Test
-      run: dotnet test ${{ env.SOLUTION }} --configuration Release --no-restore --verbosity normal -p:Version=${{ env.VERSION_OF_RELEASE }}
+      run: dotnet test ${{ env.SOLUTION }} --configuration Release --verbosity normal -p:Version=${{ env.VERSION_OF_RELEASE }}
 
     - name: Pack Uno UWP
       run: msbuild /t:Pack Mapsui.UI.Uno/Mapsui.UI.Uno.csproj  /p:RestorePackages=true /p:Configuration=Release /p:Version=${{ env.VERSION_OF_RELEASE }} /p:PackageOutputPath="${GITHUB_WORKSPACE}/nugets"
