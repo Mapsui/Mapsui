@@ -11,6 +11,8 @@
     <Description>WinUI map components based on the Mapsui library</Description>
     <PackageTags>$(PackageTags) winui</PackageTags>
 		<IsPackable>true</IsPackable>
+		<EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
+		<GenerateLibraryLayout>true</GenerateLibraryLayout>
   </PropertyGroup>	
 
 	<!-- Workaround for https://github.com/microsoft/WindowsAppSDK/issues/1217 -->
