@@ -33,6 +33,9 @@ jobs:
     - name: install workloads
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
 
+    - name: Test
+      run: dotnet test ${{ env.SOLUTION }} --configuration Release --no-restore --verbosity normal -p:Version=${{ env.VERSION_OF_RELEASE }}
+
     - name: Pack
       # The dlls and nupkgs will be built 'inputs.release_version' as version, overriding the version number in the Directory.Build.props.
       run: dotnet pack ${{ env.SOLUTION }} --configuration Release /p:Version=${{ env.VERSION_OF_RELEASE }} /p:PackageOutputPath="${GITHUB_WORKSPACE}/nugets"
@@ -40,10 +43,14 @@ jobs:
     - name: Pack Uno UWP
       run: |
         msbuild /t:Pack Mapsui.UI.Uno/Mapsui.UI.Uno.csproj  /p:RestorePackages=true /p:Configuration=Release /p:Version=${{ env.VERSION_OF_RELEASE }} /p:PackageOutputPath="${GITHUB_WORKSPACE}/nugets"
-
-    - name: Test
-      run: dotnet test ${{ env.SOLUTION }} --configuration Release --no-restore --verbosity normal -p:Version=${{ env.VERSION_OF_RELEASE }}
     
+    - name: Upload nugets
+      uses: actions/upload-artifact@v2
+      with:
+      # Upload the 'nugets' folder as artifact
+        name: nugets
+        path: "${GITHUB_WORKSPACE}/nugets"
+
     - name: Release NuGets
       if: ${{ inputs.release_nugets }} 
       run: |
