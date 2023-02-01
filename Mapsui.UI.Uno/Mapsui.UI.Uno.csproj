@@ -37,10 +37,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Remove="..\logo\png\icon.png" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Uno.UI" />
 		<PackageReference Include="SkiaSharp.Views.Uno" />
 		<PackageReference Include="System.Runtime" />

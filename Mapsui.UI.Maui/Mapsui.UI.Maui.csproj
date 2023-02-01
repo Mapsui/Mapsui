@@ -13,10 +13,6 @@
     <PackageTags>$(PackageTags) maui</PackageTags>
 		<IsPackable>true</IsPackable>
   </PropertyGroup>
-
-	<ItemGroup>
-		<None Remove="..\logo\png\icon.png" />
-	</ItemGroup>
 	
   <ItemGroup>
     <Compile Include="..\Mapsui.UI.Forms\EventArgs\CalloutClickedEventArgs.cs" Link="EventArgs\CalloutClickedEventArgs.cs" />
