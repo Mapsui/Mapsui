@@ -3,10 +3,9 @@
   <PropertyGroup>
     <TargetFrameworks>netcoreapp3.1;netstandard2.0</TargetFrameworks>
     <PackageId>Mapsui.Avalonia</PackageId>
-    <Description>
-      Avalonia map components based on the Mapsui library
-    </Description>
+    <Description>Avalonia map components based on the Mapsui library</Description>
     <PackageTags>$(PackageTags) avalonia</PackageTags>
+		<IsPackable>true</IsPackable>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

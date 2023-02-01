@@ -8,11 +8,12 @@
     <UseWinUI>true</UseWinUI>
     <DefineConstants>__WINUI__</DefineConstants>
     <PackageId>Mapsui.WinUI</PackageId>
-    <Description>
-      WinUI map components based on the Mapsui library
-    </Description>
+    <Description>WinUI map components based on the Mapsui library</Description>
     <PackageTags>$(PackageTags) winui</PackageTags>
-  </PropertyGroup>
+		<IsPackable>true</IsPackable>
+		<EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
+		<GenerateLibraryLayout>true</GenerateLibraryLayout>
+  </PropertyGroup>	
 
 	<!-- Workaround for https://github.com/microsoft/WindowsAppSDK/issues/1217 -->
 	<Target Name="FixBinPlaceBootstrapDll" BeforeTargets="BinPlaceBootstrapDll">

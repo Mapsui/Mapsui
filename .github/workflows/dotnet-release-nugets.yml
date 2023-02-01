@@ -12,7 +12,7 @@ jobs:
   build:
 
     env:
-      SOLUTION: 'Mapsui.sln'
+      SOLUTION: 'Mapsui.NoUnoUwp.slnf'
 
     runs-on: windows-latest
 
@@ -23,6 +23,9 @@ jobs:
 
     - name: Setup NuGet
       uses: NuGet/setup-nuget@v1.0.5
+      
+    - name: Setup msbuild
+      uses: microsoft/setup-msbuild@v1.1
 
       # The version tag needs to be set before the release. If not if will fail on nuget publish.
     - name: Set VERSION_OF_RELEASE to last tag
@@ -33,14 +36,26 @@ jobs:
     - name: install workloads
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
 
+    - name: Test
+      run: dotnet test ${{ env.SOLUTION }} --configuration Release --verbosity normal -p:Version=${{ env.VERSION_OF_RELEASE }}
+
+    - name: Pack Uno UWP
+      run: |
+        msbuild Mapsui.UI.Uno/Mapsui.UI.Uno.csproj /t:restore /p:Configuration=Release 
+        msbuild Mapsui.UI.Uno/Mapsui.UI.Uno.csproj /t:pack /p:Configuration=Release /p:Version=${{ env.VERSION_OF_RELEASE }} /p:PackageOutputPath="${GITHUB_WORKSPACE}/nugets"
+    
     - name: Pack
       # The dlls and nupkgs will be built 'inputs.release_version' as version, overriding the version number in the Directory.Build.props.
-      run: dotnet pack ${{ env.SOLUTION }} --configuration Release -p:Version=${{ env.VERSION_OF_RELEASE }} /p:PackageOutputPath="${GITHUB_WORKSPACE}/nugets"
- 
-    - name: Test
-      run: dotnet test ${{ env.SOLUTION }} --configuration Release --no-restore --verbosity normal -p:Version=${{ env.VERSION_OF_RELEASE }}
-    
+      run: dotnet pack ${{ env.SOLUTION }} --configuration Release /p:Version=${{ env.VERSION_OF_RELEASE }} /p:PackageOutputPath="${GITHUB_WORKSPACE}/nugets"
+
+    - name: Upload nugets
+      uses: actions/upload-artifact@v2
+      with:
+      # Upload the 'nugets' folder as artifact
+        name: nugets
+        path: nugets/*.nupkg
+
     - name: Release NuGets
       if: ${{ inputs.release_nugets }} 
       run: |
-        nuget push "${GITHUB_WORKSPACE}\nugets\**\*.nupkg" -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_APIKEY}}
+        nuget push nugets\**\*.nupkg" -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_APIKEY}}

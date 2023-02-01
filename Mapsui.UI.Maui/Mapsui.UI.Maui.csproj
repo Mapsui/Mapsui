@@ -11,8 +11,9 @@
     <PackageId>Mapsui.Maui</PackageId>
     <Description>Mapsui.Maui - Library for mapping for Maui</Description>
     <PackageTags>$(PackageTags) maui</PackageTags>
+		<IsPackable>true</IsPackable>
   </PropertyGroup>
-
+	
   <ItemGroup>
     <Compile Include="..\Mapsui.UI.Forms\EventArgs\CalloutClickedEventArgs.cs" Link="EventArgs\CalloutClickedEventArgs.cs" />
     <Compile Include="..\Mapsui.UI.Forms\EventArgs\DrawableClickedEventArgs.cs" Link="EventArgs\DrawableClickedEventArgs.cs" />

@@ -5,6 +5,7 @@
     <TargetFrameworks Condition="'$(SolutionName)' != 'Mapsui.Mac.Legacy'">$(TargetFrameworks);net6.0</TargetFrameworks>
     <Description>Mapsui - Library for mapping</Description>
     <PackageTags>$(PackageTags) brutile tiling</PackageTags>
+		<IsPackable>true</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
