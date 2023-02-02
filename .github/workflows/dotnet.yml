@@ -67,9 +67,9 @@ jobs:
     - name: Build Mapsui.Samples.Forms.Android
       run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Android/Mapsui.Samples.Forms.Android.csproj     
     - name: Build Mapsui.Samples.Forms.iOS
-      run: msbuild -p:RestorePackages=false-p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.iOS/Mapsui.Samples.Forms.iOS.csproj     
+      run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.iOS/Mapsui.Samples.Forms.iOS.csproj     
     - name: Build Mapsui.Samples.Forms.Mac
-      run: msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Mac/Mapsui.Samples.Forms.Mac.csproj
+      run: dotnet msbuild -p:RestorePackages=false -p:Configuration=Debug Samples/Mapsui.Samples.Forms/Mapsui.Samples.Forms.Mac/Mapsui.Samples.Forms.Mac.csproj
     # Samples Uno
     - name: Mapsui.Samples.Uno.Mobile
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Uno/Mapsui.Samples.Uno.Mobile/Mapsui.Samples.Uno.Mobile.csproj
