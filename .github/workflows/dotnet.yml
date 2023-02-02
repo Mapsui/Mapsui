@@ -51,7 +51,7 @@ jobs:
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
     - name: Restore dependencies Legacy
       run: nuget restore Mapsui.Mac.Legacy.sln   
-    - name: Restore dependencies Mapsui
+    - name: Restore dependencies Mapsui.Mac
       run: dotnet restore Mapsui.Mac.slnf   
     - name: Restore dependencies Mapsui.Uno
       run: dotnet restore Mapsui.Uno.slnf
