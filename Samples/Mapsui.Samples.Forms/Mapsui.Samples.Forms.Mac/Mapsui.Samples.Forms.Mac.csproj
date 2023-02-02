@@ -129,6 +129,7 @@
     <PackageReference Include="SkiaSharp" />    
     <PackageReference Include="SkiaSharp.HarfBuzz" />
     <PackageReference Include="SkiaSharp.Views.Forms" />
+    <PackageReference Include="HarfBuzzSharp" />
     <PackageReference Include="sqlite-net-pcl" />
     <PackageReference Include="Svg.Skia" />
     <PackageReference Include="System.AppContext" />
