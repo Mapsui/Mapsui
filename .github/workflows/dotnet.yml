@@ -52,9 +52,7 @@ jobs:
     - name: Restore dependencies Legacy
       run: nuget restore Mapsui.Mac.Legacy.sln   
     - name: Restore dependencies Mapsui.Mac
-      run: dotnet restore Mapsui.Mac.slnf   
-    - name: Restore dependencies Mapsui.Uno
-      run: dotnet restore Mapsui.Uno.slnf
+      run: dotnet restore Mapsui.Mac.slnf       
     # Samples Build           
     - name: Build Mapsui.Samples.Droid
       run: dotnet build --no-restore --configuration Debug Samples/Mapsui.Samples.Droid/Mapsui.Samples.Droid.csproj                       
