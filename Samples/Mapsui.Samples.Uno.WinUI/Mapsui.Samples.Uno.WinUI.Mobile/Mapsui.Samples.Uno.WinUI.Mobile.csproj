@@ -44,7 +44,6 @@
     <When Condition="'$(TargetFramework)'=='net6.0-android'">
       <ItemGroup>
         <PackageReference Include="Xamarin.Google.Android.Material" />
-        <PackageReference Include="Uno.UniversalImageLoader" />
       </ItemGroup>
       <ItemGroup>
         <AndroidEnvironment Include="Android/environment.conf" />
