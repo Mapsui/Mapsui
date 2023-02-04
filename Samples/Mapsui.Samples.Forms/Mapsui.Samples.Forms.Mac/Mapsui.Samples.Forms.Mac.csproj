@@ -126,7 +126,10 @@
     <PackageReference Include="Itinero" />
     <PackageReference Include="Microsoft.NETCore.Platforms" />
     <PackageReference Include="Microsoft.Win32.Primitives" />
+    <PackageReference Include="SkiaSharp" />    
+    <PackageReference Include="SkiaSharp.HarfBuzz" />
     <PackageReference Include="SkiaSharp.Views.Forms" />
+    <PackageReference Include="HarfBuzzSharp" />
     <PackageReference Include="sqlite-net-pcl" />
     <PackageReference Include="Svg.Skia" />
     <PackageReference Include="System.AppContext" />
