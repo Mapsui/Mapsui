@@ -1,16 +1,14 @@
 using AppKit;
 using Mapsui.Samples.Uwp;
 
-namespace Mapsui.Samples.Uno.macOS
+namespace Mapsui.Samples.Uno.macOS;
+
+static class MainClass
 {
-    static class MainClass
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            NSApplication.Init();
-            NSApplication.SharedApplication.Delegate = new App();
-            NSApplication.Main(args);
-        }
+        NSApplication.Init();
+        NSApplication.SharedApplication.Delegate = new App();
+        NSApplication.Main(args);
     }
 }
-
