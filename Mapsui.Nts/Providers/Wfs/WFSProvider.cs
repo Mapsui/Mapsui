@@ -195,7 +195,7 @@ public class WFSProvider : IProvider, IDisposable
         get => _httpClientUtil.ProxyUrl;
         set => _httpClientUtil.ProxyUrl = value;
     }
-    
+
     /// <summary>
     /// Initializes a new layer, and downloads and parses the service description
     /// </summary>
@@ -210,7 +210,7 @@ public class WFSProvider : IProvider, IDisposable
         await provider.InitAsync();
         return provider;
     }
-    
+
     /// <summary>
     /// Use this Method for initializing this dataprovider with all necessary
     /// parameters to gather metadata from 'GetCapabilities' contract.
@@ -227,7 +227,7 @@ public class WFSProvider : IProvider, IDisposable
         return await CreateAsync(getCapabilitiesUri, nsPrefix, featureType, GeometryTypeEnum.Unknown, wfsVersion,
             persistentCache: persistentCache);
     }
-    
+
 
     /// <summary>
     /// Use this constructor for initializing this dataprovider with all necessary
