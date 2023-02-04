@@ -74,11 +74,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Nts", "Mapsui.Nts\Ma
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Extensions", "Mapsui.Extensions\Mapsui.Extensions.csproj", "{768659BB-204B-46F0-A6A9-252428B31CB5}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuSpec", "NuSpec", "{22A42393-977F-4A74-BC19-88E744B35BF0}"
-	ProjectSection(SolutionItems) = preProject
-		NuSpec\Mapsui.Forms.nuspec = NuSpec\Mapsui.Forms.nuspec
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Addins debug|Any CPU = Addins debug|Any CPU
