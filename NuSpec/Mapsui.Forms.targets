@@ -1,5 +1,0 @@
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <ItemGroup>
-	<PackageReference Include="System.Memory" Version="4.5.4" IncludeAssets="None" />
-  </ItemGroup>
-</Project>
