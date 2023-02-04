@@ -36,7 +36,7 @@ public class GeoJsonSample : IMapControlSample
         {
             CRS = "EPSG:3857", // The Map CRS needs to be set   
         };
-            
+
         var examplePath = Path.Combine(GeoJsonDeployer.GeoJsonLocation, "cities.geojson");
         var geoJson = new GeoJsonProvider(examplePath)
         {
@@ -47,9 +47,9 @@ public class GeoJsonSample : IMapControlSample
         {
             CRS = "EPSG:3857",
         };
-        
+
         map.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
-        map.Layers.Add( new RasterizingTileLayer(CreateCityLabelLayer(dataSource)));
+        map.Layers.Add(new RasterizingTileLayer(CreateCityLabelLayer(dataSource)));
 
         return map;
     }

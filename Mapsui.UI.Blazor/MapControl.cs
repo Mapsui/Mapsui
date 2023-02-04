@@ -132,7 +132,7 @@ public partial class MapControl : ComponentBase, IMapControl
     {
         SetViewportSize();
     }
-    
+
     [SuppressMessage("Usage", "VSTHRD100:Avoid async void methods")]
     protected async void OnMouseWheel(WheelEventArgs e)
     {
@@ -347,6 +347,6 @@ public partial class MapControl : ComponentBase, IMapControl
         {
             Logger.Log(LogLevel.Error, ex.Message, ex);
         }
-        
+
     }
 }
