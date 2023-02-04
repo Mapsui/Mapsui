@@ -25,15 +25,15 @@ public class GeoJsonProvider : IProvider
     {
         _geoJson = geojson;
     }
-    
+
     private GeoJsonConverterFactory GeoJsonConverterFactory { get; } = new();
-    
+
     private JsonSerializerOptions DefaultOptions
     {
         get
         {
             var res = new JsonSerializerOptions
-                {ReadCommentHandling = JsonCommentHandling.Skip};
+            { ReadCommentHandling = JsonCommentHandling.Skip };
             res.Converters.Add(GeoJsonConverterFactory);
             return res;
         }
@@ -41,7 +41,7 @@ public class GeoJsonProvider : IProvider
 
     private FeatureCollection DeserializContent(string geoJson, JsonSerializerOptions options)
     {
-        var b= new ReadOnlySpan<byte>(Encoding.UTF8.GetBytes(geoJson));
+        var b = new ReadOnlySpan<byte>(Encoding.UTF8.GetBytes(geoJson));
         return Deserialize(b, options);
     }
 
@@ -72,12 +72,12 @@ public class GeoJsonProvider : IProvider
     /// <returns>true if it contains geojson {} or []</returns>
     private bool IsGeoJsonContent()
     {
-        if (string.IsNullOrWhiteSpace(_geoJson)) 
+        if (string.IsNullOrWhiteSpace(_geoJson))
             return false;
-        
+
         return (_geoJson.IndexOf("{") >= 0 && _geoJson.IndexOf("}") >= 0) || (_geoJson.IndexOf("[") >= 0 && _geoJson.IndexOf("]") >= 0);
     }
-    
+
 
     private FeatureCollection FeatureCollection
     {
@@ -88,14 +88,14 @@ public class GeoJsonProvider : IProvider
                 // maybe it has GeoJson Content.
                 _featureCollection = IsGeoJsonContent() ? DeserializContent(_geoJson, DefaultOptions) : DeserializeFile(_geoJson, DefaultOptions);
             }
-    
-            return _featureCollection;    
+
+            return _featureCollection;
         }
     }
-    
+
     /// <inheritdoc/>
     public string? CRS { get; set; }
-    
+
     /// <inheritdoc/>
     public MRect? GetExtent()
     {
@@ -130,7 +130,7 @@ public class GeoJsonProvider : IProvider
     {
         var fetchExtent = fetchInfo.Extent.ToEnvelope();
         var list = new List<IFeature>();
-        
+
         foreach (NetTopologySuite.Features.IFeature? feature in FeatureCollection)
         {
             var boundingBox = BoundingBox(feature);
@@ -161,7 +161,7 @@ public class GeoJsonProvider : IProvider
         // somehow there exist geojson documents with %C3%A9 characters (url encoded utf8 symbols)
         if (value is string str)
         {
-            return WebUtility.UrlDecode(str);    
+            return WebUtility.UrlDecode(str);
         }
 
         return value;

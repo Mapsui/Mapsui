@@ -67,7 +67,7 @@ public class WfsSample : ISample
         provider.GetFeatureGetRequest = true;
         provider.CRS = crs;
         provider.Labels = new List<string> { labelField };
-        
+
         await provider.InitAsync();
         return provider;
     }

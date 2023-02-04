@@ -4,15 +4,14 @@ using Android.OS;
 using Android.Content.PM;
 using Android.Views;
 
-namespace Mapsui.Samples.Uno
+namespace Mapsui.Samples.Uno;
+
+[Activity(
+        MainLauncher = true,
+        ConfigurationChanges = global::Uno.UI.ActivityHelper.AllConfigChanges,
+        WindowSoftInputMode = SoftInput.AdjustPan | SoftInput.StateHidden
+    )]
+public class MainActivity : Windows.UI.Xaml.ApplicationActivity
 {
-    [Activity(
-            MainLauncher = true,
-            ConfigurationChanges = global::Uno.UI.ActivityHelper.AllConfigChanges,
-            WindowSoftInputMode = SoftInput.AdjustPan | SoftInput.StateHidden
-        )]
-    public class MainActivity : Windows.UI.Xaml.ApplicationActivity
-    {
-    }
 }
 
