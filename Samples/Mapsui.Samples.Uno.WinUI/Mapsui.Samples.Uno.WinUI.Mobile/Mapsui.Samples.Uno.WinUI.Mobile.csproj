@@ -44,7 +44,6 @@
     <When Condition="'$(TargetFramework)'=='net6.0-android'">
       <ItemGroup>
         <PackageReference Include="Xamarin.Google.Android.Material" />
-        <PackageReference Include="Uno.UniversalImageLoader" />
       </ItemGroup>
       <ItemGroup>
         <AndroidEnvironment Include="Android/environment.conf" />
@@ -84,6 +83,6 @@
   <Import Project="..\Mapsui.Samples.Uno.WinUI.Shared\Mapsui.Samples.Uno.WinUI.Shared.projitems" Label="Shared" />
   <PropertyGroup>
     <!-- Workaround for Error NU1008 Projects that use central package version management should not define the version on the PackageReference ..-->
-    <PreBuildEvent>"$(MSBuildProjectDirectory)\..\..\..\.nuget\nuget" restore $(MSBuildProjectDirectory)\Mapsui.Samples.Uno.WinUI.Mobile.csproj</PreBuildEvent>
+    <!--<PreBuildEvent>"$(MSBuildProjectDirectory)\..\..\..\.nuget\nuget" restore $(MSBuildProjectDirectory)\Mapsui.Samples.Uno.WinUI.Mobile.csproj</PreBuildEvent>-->
   </PropertyGroup>
 </Project>
