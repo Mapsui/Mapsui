@@ -13,3 +13,4 @@
 - Improve performance
 - World wrap
 - Add vector tiles
+- Everything to .NET 6
