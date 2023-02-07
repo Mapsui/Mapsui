@@ -20,7 +20,7 @@ dotnet add MyApp package Mapsui.Avalonia
 ```
 
 ### Step 3
-In MainWindow.axaml.cs add this to the constructor **after** InitializeComponent()::
+In MainWindow.axaml.cs add this to the constructor **after** InitializeComponent():
 ```csharp
 var mapControl = new Mapsui.UI.Avalonia.MapControl();
 mapControl.Map?.Layers.Add(Mapsui.Tiling.OpenStreetMap.CreateTileLayer());
