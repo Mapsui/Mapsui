@@ -4,8 +4,6 @@ SET VERSION=%1
 
 rmdir obj /s /q
 rmdir Release /s /q
-dotnet build tools\versionupdater\versionupdater.csproj /p:Configuration=Release /p:OutputPath=..\bin || exit /B 1
-tools\bin\versionupdater -v %VERSION% || exit /B 1
 
 REM create Artifacts if not exists
 if not exist "Artifacts" mkdir Artifacts

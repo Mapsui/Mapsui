@@ -13,14 +13,12 @@
       "Mapsui.UI.Shared\\Mapsui.UI.Shared.shproj",
       "Mapsui\\Mapsui.csproj",
       "Samples\\Mapsui.Samples.Avalonia\\Mapsui.Samples.Avalonia.csproj",
-      "Samples\\Mapsui.Samples.Common.Desktop\\Mapsui.Samples.Common.Desktop.csproj",
       "Samples\\Mapsui.Samples.Common\\Mapsui.Samples.Common.csproj",
       "Samples\\Mapsui.Samples.CustomWidget\\Mapsui.Samples.CustomWidget.csproj",
       "Tests\\Mapsui.Nts.Tests\\Mapsui.Nts.Tests.csproj",
       "Tests\\Mapsui.Rendering.Skia.Tests\\Mapsui.Rendering.Skia.Tests.csproj",
       "Tests\\Mapsui.Tests.Common\\Mapsui.Tests.Common.csproj",
-      "Tests\\Mapsui.Tests\\Mapsui.Tests.csproj",
-      "Tools\\VersionUpdater\\VersionUpdater.csproj"
+      "Tests\\Mapsui.Tests\\Mapsui.Tests.csproj"
     ]
   }
 }
