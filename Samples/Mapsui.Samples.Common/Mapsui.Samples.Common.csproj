@@ -45,6 +45,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="GeoData\Images\a123330.jpeg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Include="GeoData\GeoJson\cities.geojson" />
     <EmbeddedResource Include="GeoData\Json\cities.json" />
     <EmbeddedResource Include="GeoData\Json\congo.json" />
