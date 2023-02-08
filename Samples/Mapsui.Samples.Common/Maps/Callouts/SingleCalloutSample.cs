@@ -52,7 +52,7 @@ public class SingleCalloutSample : ISample
             Name = "Cities with callouts",
             IsMapInfoLayer = true,
             Features = new MemoryProvider(GetCitiesFromEmbeddedResource()).Features,
-            Style = new VectorStyle()
+            Style = SymbolStyles.CreatePinStyle(symbolScale: 0.7),
         };
     }
 
@@ -66,28 +66,30 @@ public class SingleCalloutSample : ISample
         return cities.Select(c =>
         {
             var feature = new PointFeature(SphericalMercator.FromLonLat(c.Lng, c.Lat).ToMPoint());
-            feature["name"] = c.Name;
-            feature["country"] = c.Country;
-            var calloutStyle = CreateCalloutStyle(c.Name);
-            feature.Styles.Add(calloutStyle);
+            feature[nameof(City.Name)] = c.Name;
+            feature[nameof(City.Country)] = c.Country;
+            feature[nameof(City.Lat)] = c.Lat;
+            feature[nameof(City.Lng)] = c.Lng;
+            feature.Styles.Add(CreateCalloutStyle(feature.ToStringOfKeyValuePairs()));
             return feature;
         });
     }
 
-    private static CalloutStyle CreateCalloutStyle(string? name)
+    private static CalloutStyle CreateCalloutStyle(string content)
     {
         return new CalloutStyle
         {
-            Title = name,
+            Title = content,
             TitleFont = { FontFamily = null, Size = 12, Italic = false, Bold = true },
             TitleFontColor = Color.Gray,
             MaxWidth = 120,
             RectRadius = 10,
             ShadowWidth = 4,
             Enabled = false,
-            SymbolOffset = new Offset(0, SymbolStyle.DefaultHeight * 0.3f)
+            SymbolOffset = new Offset(0, SymbolStyle.DefaultHeight * 1f)
         };
     }
+
     private class City
     {
         public string? Country { get; set; }
@@ -99,9 +101,8 @@ public class SingleCalloutSample : ISample
     public static IEnumerable<T> DeserializeFromStream<T>(Stream stream)
     {
         var serializer = new JsonSerializer();
-
-        using var sr = new System.IO.StreamReader(stream);
-        using var jsonTextReader = new JsonTextReader(sr);
+        using var streamReader = new StreamReader(stream);
+        using var jsonTextReader = new JsonTextReader(streamReader);
         return serializer.Deserialize<List<T>>(jsonTextReader) ?? new List<T>();
     }
 }
