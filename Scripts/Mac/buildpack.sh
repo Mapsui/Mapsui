@@ -1,11 +1,12 @@
+# REM We have a new way of releasing therefor I remove the nuspec and VersionUpdater references. 
+# REM Not sure if there is a need for this script in the current situation. Mac developers should tell me (pauldendulk).
+
 #!/bin/zsh
 VERSION=$1
 
 # clean up
 find . -type d \( -name 'bin' -o -name 'obj' \) -prune -exec rm -rf {} \;
 nuget restore Mapsui.Mac.sln
-# update version
-msbuild Tools/VersionUpdater/VersionUpdater.csproj /p:Configuration=Release
-dotnet Tools/VersionUpdater/bin/Release/netcoreapp3.1/VersionUpdater.dll -v $VERSION
+
 # build
 msbuild Mapsui.Mac.sln /p:Configuration=Release

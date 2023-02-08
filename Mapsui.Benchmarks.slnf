@@ -8,8 +8,7 @@
       "Mapsui.Nts\\Mapsui.Nts.csproj",
       "Mapsui.Rendering.Skia\\Mapsui.Rendering.Skia.csproj",
       "Mapsui.Tiling\\Mapsui.Tiling.csproj",
-      "Mapsui\\Mapsui.csproj",
-      "Tools\\VersionUpdater\\VersionUpdater.csproj"
+      "Mapsui\\Mapsui.csproj"
     ]
   }
 }

@@ -60,8 +60,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Samples.Common.Deskt
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{12D153CE-AE3E-47B5-AB39-6DF8F2E6893E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VersionUpdater", "Tools\VersionUpdater\VersionUpdater.csproj", "{8AF9DD38-ADC0-471F-A14C-D9C3A68AF972}"
-EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mapsui.UI.Shared", "Mapsui.UI.Shared\Mapsui.UI.Shared.shproj", "{239F2B0D-13CB-4BCF-83BF-F52D696A47B7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.Tiling", "Mapsui.Tiling\Mapsui.Tiling.csproj", "{B3A6822E-1EBE-4E2D-9381-9302817DF252}"
