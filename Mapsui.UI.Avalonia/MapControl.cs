@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -10,7 +10,6 @@ using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.Platform;
 using Avalonia.Rendering.SceneGraph;
-using Avalonia.Skia;
 using Avalonia.Threading;
 using Mapsui.Extensions;
 using Mapsui.Layers;
@@ -49,15 +48,23 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         PointerPressed += MapControl_PointerPressed;
         PointerReleased += MapControl_PointerReleased;
         PointerMoved += MapControlMouseMove;
-        PointerLeave += MapControlMouseLeave;
+        PointerExited += MapControlMouseLeave;
+        PointerCaptureLost += MapControlPointerCaptureLost;
 
         PointerWheelChanged += MapControlMouseWheel;
 
         DoubleTapped += OnDoubleTapped;
     }
 
-    protected override void OnPropertyChanged<T>(AvaloniaPropertyChangedEventArgs<T> change)
+    private void MapControlPointerCaptureLost(object? sender, PointerCaptureLostEventArgs e)
     {
+        _previousMousePosition = null;
+    }
+
+    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
+    {
+        base.OnPropertyChanged(change);
+
         switch (change.Property.Name)
         {
             case nameof(Bounds):
@@ -256,11 +263,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         private readonly MapControl _mapControl;
 
-        private readonly FormattedText _noSkia = new()
-        {
-            Text = "Current rendering API is not Skia"
-        };
-
+        private readonly FormattedText _noSkia = new("Current rendering API is not Skia", CultureInfo.InvariantCulture, FlowDirection.LeftToRight, Typeface.Default, 12d, null);
         public MapsuiCustomDrawOp(Rect bounds, MapControl mapControl)
         {
             Bounds = bounds;
@@ -284,17 +287,19 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             return false;
         }
 
+
         public void Render(IDrawingContextImpl context)
         {
-            var canvas = (context as ISkiaDrawingContextImpl)?.SkCanvas;
-            if (canvas == null)
-                context.DrawText(Brushes.Black, new Point(), _noSkia.PlatformImpl);
-            else
-            {
-                canvas.Save();
-                _mapControl.CommonDrawControl(canvas);
-                canvas.Restore();
-            }
+            //!!!
+            //var canvas = (context as ISkiaDrawingContextImpl)?.SkCanvas;
+            //if (canvas == null)
+            //    context.DrawText(Brushes.Black, new Point(), _noSkia.PlatformImpl);
+            //else
+            //{
+            //    canvas.Save();
+            //    _mapControl.CommonDrawControl(canvas);
+            //    canvas.Restore();
+            //}
         }
     }
 

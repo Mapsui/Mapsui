@@ -88,7 +88,7 @@ public partial class MainWindow : Window
         FillListWithSamples();
     }
 
-    private IControl CreateRadioButton(ISampleBase sample)
+    private RadioButton CreateRadioButton(ISampleBase sample)
     {
         var radioButton = new RadioButton
         {

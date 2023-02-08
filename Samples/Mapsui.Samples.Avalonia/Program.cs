@@ -21,7 +21,7 @@ internal class Program
                        .UsePlatformDetect()
                        .With(new Win32PlatformOptions
                        {
-                           EnableMultitouch = true,
+                           // Not in v11. Is there an alternative?: EnableMultitouch = true,
                            AllowEglInitialization = true
                        })
                        .LogToTrace()
