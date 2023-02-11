@@ -51,11 +51,11 @@ public partial class MainWindow : Window
         FillListWithSamples();
     }
 
-    private MapControl MapControl => this.FindControl<MapControl>("MapControl");
-    private ComboBox CategoryComboBox => this.FindControl<ComboBox>("CategoryComboBox");
-    private TextBlock FeatureInfo => this.FindControl<TextBlock>("FeatureInfo");
-    private StackPanel SampleList => this.FindControl<StackPanel>("SampleList");
-    private Slider RotationSlider => this.FindControl<Slider>("RotationSlider");
+    private MapControl MapControl => this.FindControl<MapControl>("MapControl") ?? throw new InvalidOperationException();
+    private ComboBox CategoryComboBox => this.FindControl<ComboBox>("CategoryComboBox") ?? throw new InvalidOperationException();
+    private TextBlock FeatureInfo => this.FindControl<TextBlock>("FeatureInfo") ?? throw new InvalidOperationException();
+    private StackPanel SampleList => this.FindControl<StackPanel>("SampleList") ?? throw new InvalidOperationException();
+    private Slider RotationSlider => this.FindControl<Slider>("RotationSlider") ?? throw new InvalidOperationException();
 
 
     private void FillComboBoxWithCategories()

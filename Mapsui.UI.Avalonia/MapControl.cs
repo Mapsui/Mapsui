@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using Avalonia;
 using Avalonia.Controls;
@@ -10,11 +11,13 @@ using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.Platform;
 using Avalonia.Rendering.SceneGraph;
+using Avalonia.Skia;
 using Avalonia.Threading;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.UI.Avalonia.Extensions;
 using Mapsui.Utilities;
+using SkiaSharp;
 
 namespace Mapsui.UI.Avalonia;
 
@@ -71,7 +74,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
                 // size changed
                 MapControlSizeChanged();
                 break;
-        }
+        } 
     }
 
     private void MapControl_PointerPressed(object? sender, PointerPressedEventArgs e)
@@ -263,7 +266,6 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     {
         private readonly MapControl _mapControl;
 
-        private readonly FormattedText _noSkia = new("Current rendering API is not Skia", CultureInfo.InvariantCulture, FlowDirection.LeftToRight, Typeface.Default, 12d, null);
         public MapsuiCustomDrawOp(Rect bounds, MapControl mapControl)
         {
             Bounds = bounds;
@@ -290,16 +292,14 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         public void Render(IDrawingContextImpl context)
         {
-            //!!!
-            //var canvas = (context as ISkiaDrawingContextImpl)?.SkCanvas;
-            //if (canvas == null)
-            //    context.DrawText(Brushes.Black, new Point(), _noSkia.PlatformImpl);
-            //else
-            //{
-            //    canvas.Save();
-            //    _mapControl.CommonDrawControl(canvas);
-            //    canvas.Restore();
-            //}
+            var leaseFeature = context.GetFeature<ISkiaSharpApiLeaseFeature>();
+            if (leaseFeature == null)
+                return;
+            using var lease = leaseFeature.Lease();
+            var canvas = lease.SkCanvas;
+            canvas.Save();
+            _mapControl.CommonDrawControl(canvas);
+            canvas.Restore();
         }
     }
 
