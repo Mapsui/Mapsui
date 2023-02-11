@@ -21,7 +21,7 @@ using SkiaSharp;
 
 namespace Mapsui.UI.Avalonia;
 
-public partial class MapControl : Grid, IMapControl, IDisposable
+public partial class MapControl : UserControl, IMapControl, IDisposable
 {
     private MPoint? _mousePosition;
     private MapsuiCustomDrawOp? _drawOp;
