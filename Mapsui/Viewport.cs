@@ -277,9 +277,12 @@ public class Viewport : IViewport
             _rotation += deltaRotation;
             var postRotation = ScreenToWorld(positionScreen.X, positionScreen.Y); // calculate current position again with adjusted resolution
 
-            _centerX = _centerX - (postRotation.X - current.X);
-            _centerY = _centerY - (postRotation.Y - current.Y);
+            _centerX -= (postRotation.X - current.X);
+            _centerY -= (postRotation.Y - current.Y);
         }
+        
+        UpdateExtent();
+        OnViewportChanged();
     }
 
 
