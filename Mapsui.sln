@@ -20,6 +20,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapsui.UI.Android", "Mapsui
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{B2DB6CAC-1C30-42C9-B628-BACEBF790AB9}"
 	ProjectSection(SolutionItems) = preProject
+		Scripts\buildpack.bat = Scripts\buildpack.bat
 		.github\workflows\dotnet-docs.yml = .github\workflows\dotnet-docs.yml
 		.github\workflows\dotnet-release-nugets.yml = .github\workflows\dotnet-release-nugets.yml
 		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
