@@ -33,23 +33,23 @@
     <PackageVersion Include="HarfBuzzSharp.NativeAssets.WebAssembly" Version="[2.8.2.3,3.0.0.0)" />
     <PackageVersion Include="IDisposableAnalyzers" Version="[4.0.2,5.0.0)" />
     <PackageVersion Include="Itinero" Version="[1.5.0,2.0.0)" />
-    <PackageVersion Include="Mapsui.Android" Version="4.0.0-beta.7" />
-    <PackageVersion Include="Mapsui.ArcGIS" Version="4.0.0-beta.7" />
-    <PackageVersion Include="Mapsui.Avalonia" Version="4.0.0-beta.7" />
-    <PackageVersion Include="Mapsui.Blazor" Version="4.0.0-beta.7" />
-    <PackageVersion Include="Mapsui.Eto" Version="4.0.0-beta.7" />
-    <PackageVersion Include="Mapsui.Extensions" Version="4.0.0-beta.7" />
-    <PackageVersion Include="Mapsui.Forms" Version="4.0.0-beta.7" />
-    <PackageVersion Include="Mapsui.iOS" Version="4.0.0-beta.7" />
-    <PackageVersion Include="Mapsui.Maui" Version="4.0.0-beta.7" />
-    <PackageVersion Include="Mapsui.Nts" Version="4.0.0-beta.7" />
-    <PackageVersion Include="Mapsui" Version="4.0.0-beta.7" />
-    <PackageVersion Include="Mapsui.Rendering.Skia" Version="4.0.0-beta.7" />
-    <PackageVersion Include="Mapsui.Tiling" Version="4.0.0-beta.7" />
-    <PackageVersion Include="Mapsui.Uno" Version="4.0.0-beta.7" />
-    <PackageVersion Include="Mapsui.Uno.WinUI" Version="4.0.0-beta.7" />
-    <PackageVersion Include="Mapsui.WinUI" Version="4.0.0-beta.7" />
-    <PackageVersion Include="Mapsui.Wpf" Version="4.0.0-beta.7" />
+    <PackageVersion Include="Mapsui.Android" Version="4.0.0-beta.8" />
+    <PackageVersion Include="Mapsui.ArcGIS" Version="4.0.0-beta.8" />
+    <PackageVersion Include="Mapsui.Avalonia" Version="4.0.0-beta.8" />
+    <PackageVersion Include="Mapsui.Blazor" Version="4.0.0-beta.8" />
+    <PackageVersion Include="Mapsui.Eto" Version="4.0.0-beta.8" />
+    <PackageVersion Include="Mapsui.Extensions" Version="4.0.0-beta.8" />
+    <PackageVersion Include="Mapsui.Forms" Version="4.0.0-beta.8" />
+    <PackageVersion Include="Mapsui.iOS" Version="4.0.0-beta.8" />
+    <PackageVersion Include="Mapsui.Maui" Version="4.0.0-beta.8" />
+    <PackageVersion Include="Mapsui.Nts" Version="4.0.0-beta.8" />
+    <PackageVersion Include="Mapsui" Version="4.0.0-beta.8" />
+    <PackageVersion Include="Mapsui.Rendering.Skia" Version="4.0.0-beta.8" />
+    <PackageVersion Include="Mapsui.Tiling" Version="4.0.0-beta.8" />
+    <PackageVersion Include="Mapsui.Uno" Version="4.0.0-beta.8" />
+    <PackageVersion Include="Mapsui.Uno.WinUI" Version="4.0.0-beta.8" />
+    <PackageVersion Include="Mapsui.WinUI" Version="4.0.0-beta.8" />
+    <PackageVersion Include="Mapsui.Wpf" Version="4.0.0-beta.8" />
     <PackageVersion Include="Microsoft.AspNetCore.Components.Web" Version="[7.0.0,8.0.0)" />
     <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="[7.0.0,8.0.0)" />
     <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="[7.0.0,8.0.0)" />
