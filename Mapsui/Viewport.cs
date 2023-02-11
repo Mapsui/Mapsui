@@ -247,7 +247,6 @@ public class Viewport : IViewport
     public void Transform(MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution = 1, double deltaRotation = 0)
     {
         _animations = new();
-        bool changes = false;
         var previous = ScreenToWorld(previousPositionScreen.X, previousPositionScreen.Y);
         var current = ScreenToWorld(positionScreen.X, positionScreen.Y);
 
