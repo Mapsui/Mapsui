@@ -203,7 +203,7 @@ jobs:
     - name: nuget ProjectReferences to PackageReferences
       shell: pwsh
       run: |
-        ./Scripts/SamplesMapsuiNugetReferences.ps1        
+        ./Scripts/SamplesMapsuiNugetReferences.ps1 $(git describe --tags)       
     - name: Restore dependencies
       run: .nuget\nuget restore Mapsui.sln      
     # Samples Build 
