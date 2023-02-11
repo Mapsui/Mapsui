@@ -1,4 +1,32 @@
+Param (
+    [string]$Version
+)
+
 $Packages = (Get-Content -raw -path $PSScriptRoot\..\Directory.Packages.props -Encoding UTF8)
+
+# for debubbing Version setting in Directory.Packages.props
+# $Version = "4.0.0-beta.9"
+
+if (-Not [string]::IsNullOrWhiteSpace($Version))
+{
+    [string] $currentVersion;
+    $Packages | Select-Xml -XPath "//PackageVersion" | ForEach-Object {  
+        if ($_.node.Include -eq "Mapsui") {                    
+            $currentVersion = $_.node.Version
+        }
+    }
+
+    $currentVersionString = "Version=`"$currentVersion`""
+    $versionString = "Version=`"$Version`""
+
+    $Packages = $Packages -replace $currentVersionString, $versionString
+
+    # Normalize to no Cariage Return at the End
+    $fileContent = $fileContent -replace "</Project>`r`n", "</Project>"
+
+    Set-Content -Path $PSScriptRoot\..\Directory.Packages.props $Packages -Encoding UTF8
+}
+
 $fileNames = Get-ChildItem -Path $PSScriptRoot\..\Samples, $PSScriptRoot\..\Tests -Recurse -Include *.csproj
 
 foreach ($file in $fileNames) {
