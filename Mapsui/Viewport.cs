@@ -28,12 +28,7 @@ public class Viewport : IViewport
     public event PropertyChangedEventHandler? ViewportChanged;
 
     // State
-    private double _centerX;
-    private double _centerY;
-    private double _resolution = Constants.DefaultResolution;
-    private double _rotation;
-    private double _width;
-    private double _height;
+    private ViewportState _state = new(0, 0, 1, 0, 0, 0);
     Postponer _delayer = new(1000);
     long _counter;
     // Derived from state
@@ -56,12 +51,7 @@ public class Viewport : IViewport
     /// <param name="viewport">Viewport from which to copy all values</param>
     public Viewport(IReadOnlyViewport viewport) : this()
     {
-        _centerX = viewport.CenterX;
-        _centerY = viewport.CenterY;
-        _resolution = viewport.Resolution;
-        _width = viewport.Width;
-        _height = viewport.Height;
-        _rotation = viewport.Rotation;
+        _state = new ViewportState(viewport.CenterX, viewport.CenterY, viewport.Resolution, viewport.Rotation, viewport.Width, viewport.Height);
 
         if (viewport.Extent != null) _extent = new MRect(viewport.Extent);
 
@@ -71,11 +61,11 @@ public class Viewport : IViewport
     /// <inheritdoc />
     public double CenterX
     {
-        get => _centerX;
+        get => _state.CenterX;
         set
         {
-            if (_centerX == value) return;
-            _centerX = value;
+            if (_state.CenterX == value) return;
+            _state = _state with { CenterX = value };
             UpdateExtent();
             OnViewportChanged();
         }
@@ -84,11 +74,11 @@ public class Viewport : IViewport
     /// <inheritdoc />
     public double CenterY
     {
-        get => _centerY;
+        get => _state.CenterY;
         set
         {
-            if (_centerY == value) return;
-            _centerY = value;
+            if (_state.CenterY == value) return;
+            _state = _state with { CenterY = value };
             UpdateExtent();
             OnViewportChanged();
         }
@@ -98,11 +88,11 @@ public class Viewport : IViewport
     /// <inheritdoc />
     public double Resolution
     {
-        get => _resolution;
+        get => _state.Resolution;
         set
         {
-            if (_resolution == value) return;
-            _resolution = value;
+            if (_state.Resolution == value) return;
+            _state = _state with { Resolution = value };
             UpdateExtent();
             OnViewportChanged();
         }
@@ -111,11 +101,11 @@ public class Viewport : IViewport
     /// <inheritdoc />
     public double Width
     {
-        get => _width;
+        get => _state.Width;
         set
         {
-            if (_width == value) return;
-            _width = value;
+            if (_state.Width == value) return;
+            _state = _state with { Width = value };
             UpdateExtent();
             OnViewportChanged();
         }
@@ -124,11 +114,11 @@ public class Viewport : IViewport
     /// <inheritdoc />
     public double Height
     {
-        get => _height;
+        get => _state.Height;
         set
         {
-            if (_height == value) return;
-            _height = value;
+            if (_state.Height == value) return;
+            _state = _state with { Height = value };
             UpdateExtent();
             OnViewportChanged();
         }
@@ -137,15 +127,12 @@ public class Viewport : IViewport
     /// <inheritdoc />
     public double Rotation
     {
-        get => _rotation;
+        get => _state.Rotation;
         set
         {
-            if (_rotation == value) return;
+            if (_state.Rotation == value) return;
             // normalize the value to be [0, 360)
-            _rotation = value % 360.0;
-            if (_rotation < 0)
-                _rotation += 360.0;
-
+            _state = _state with { Rotation = RotationCalculations.NormalizeRotation(value) };
             UpdateExtent();
             OnViewportChanged();
         }
@@ -189,7 +176,7 @@ public class Viewport : IViewport
         {
             var screenCenterX = Width / 2.0;
             var screenCenterY = Height / 2.0;
-            return Rotate(-_rotation, screenX, screenY, screenCenterX, screenCenterY);
+            return Rotate(-_state.Rotation, screenX, screenY, screenCenterX, screenCenterY);
         }
 
         return (screenX, screenY);
@@ -223,8 +210,8 @@ public class Viewport : IViewport
     {
         var screenCenterX = Width / 2.0;
         var screenCenterY = Height / 2.0;
-        var screenX = (worldX - CenterX) / _resolution + screenCenterX;
-        var screenY = (CenterY - worldY) / _resolution + screenCenterY;
+        var screenX = (worldX - CenterX) / _state.Resolution + screenCenterX;
+        var screenY = (CenterY - worldY) / _state.Resolution + screenCenterY;
         return (screenX, screenY);
     }
 
@@ -236,13 +223,13 @@ public class Viewport : IViewport
 
         if (this.IsRotated())
         {
-            var screen = new MPoint(screenX, screenY).Rotate(_rotation, screenCenterX, screenCenterY);
+            var screen = new MPoint(screenX, screenY).Rotate(_state.Rotation, screenCenterX, screenCenterY);
             screenX = screen.X;
             screenY = screen.Y;
         }
 
-        var worldX = CenterX + (screenX - screenCenterX) * _resolution;
-        var worldY = CenterY - (screenY - screenCenterY) * _resolution;
+        var worldX = CenterX + (screenX - screenCenterX) * _state.Resolution;
+        var worldY = CenterY - (screenY - screenCenterY) * _state.Resolution;
         return (worldX, worldY);
     }
 
@@ -253,15 +240,15 @@ public class Viewport : IViewport
         var previous = ScreenToWorld(previousPositionScreen.X, previousPositionScreen.Y);
         var current = ScreenToWorld(positionScreen.X, positionScreen.Y);
 
-        var newX = _centerX + previous.X - current.X;
-        var newY = _centerY + previous.Y - current.Y;
+        var newX = _state.CenterX + previous.X - current.X;
+        var newY = _state.CenterY + previous.Y - current.Y;
 
-        if (deltaResolution == 1 && deltaRotation == 0 && _centerX == newX && _centerY == newY)
+        if (deltaResolution == 1 && deltaRotation == 0 && _state.CenterX == newX && _state.CenterY == newY)
             return;
-        
+
         if (deltaResolution != 1)
         {
-            _resolution = Resolution / deltaResolution;
+            _state = _state with { Resolution = Resolution / deltaResolution };
 
             // Calculate current position again with adjusted resolution
             // Zooming should be centered on the place where the map is touched.
@@ -273,19 +260,16 @@ public class Viewport : IViewport
             newY -= scaleCorrectionY;
         }
 
-        _centerX = newX;
-        _centerY = newY;
+        _state = _state with { CenterX = newX, CenterY = newY };
 
         if (deltaRotation != 0)
         {
             current = ScreenToWorld(positionScreen.X, positionScreen.Y); // calculate current position again with adjusted resolution
-            _rotation += deltaRotation;
+            _state = _state with { Rotation = Rotation + deltaRotation };
             var postRotation = ScreenToWorld(positionScreen.X, positionScreen.Y); // calculate current position again with adjusted resolution
-
-            _centerX -= (postRotation.X - current.X);
-            _centerY -= (postRotation.Y - current.Y);
+            _state = _state with { CenterX = CenterX - (postRotation.X - current.X), CenterY = CenterY - (postRotation.Y - current.Y) };
         }
-        
+
         UpdateExtent();
         OnViewportChanged();
     }
@@ -297,8 +281,8 @@ public class Viewport : IViewport
     private void UpdateExtent()
     {
         // calculate the window extent which is not rotate
-        var halfSpanX = _width * _resolution * 0.5;
-        var halfSpanY = _height * _resolution * 0.5;
+        var halfSpanX = _state.Width * _state.Resolution * 0.5;
+        var halfSpanY = _state.Height * _state.Resolution * 0.5;
         var left = CenterX - halfSpanX;
         var bottom = CenterY - halfSpanY;
         var right = CenterX + halfSpanX;
@@ -322,7 +306,7 @@ public class Viewport : IViewport
         {
             // Calculate the extent that will encompass a rotated viewport (slightly larger - used for tiles).
             // Perform rotations on corner offsets and then add them to the Center point.
-            windowExtent = windowExtent.Rotate(-_rotation, CenterX, CenterY);
+            windowExtent = windowExtent.Rotate(-_state.Rotation, CenterX, CenterY);
             var rotatedBoundingBox = windowExtent.ToBoundingBox();
             _extent.Min.X = rotatedBoundingBox.MinX;
             _extent.Min.Y = rotatedBoundingBox.MinY;
@@ -335,11 +319,10 @@ public class Viewport : IViewport
     {
         _animations = new();
 
-        if (width == _width && height == _height)
+        if (width == _state.Width && height == _state.Height)
             return;
 
-        _width = width;
-        _height = height;
+        _state = _state with { Width = width, Height = height };
 
         UpdateExtent();
         OnViewportChanged();
@@ -349,11 +332,10 @@ public class Viewport : IViewport
     {
         _animations = new();
 
-        if (x == _centerX && y == _centerY)
+        if (x == _state.CenterX && y == _state.CenterY)
             return;
 
-        _centerX = x;
-        _centerY = y;
+        _state = _state with { CenterX = x, CenterY = y };
 
         UpdateExtent();
         OnViewportChanged();
@@ -363,14 +345,12 @@ public class Viewport : IViewport
     {
         _animations = new();
 
-        if (x == _centerX && y == _centerY && resolution == _resolution)
+        if (x == _state.CenterX && y == _state.CenterY && resolution == _state.Resolution)
             return;
 
         if (duration == 0)
         {
-            _centerX = x;
-            _centerY = y;
-            _resolution = resolution;
+            _state = _state with {  CenterX = x, CenterY = y, Resolution= resolution };
         }
         else
         {
@@ -385,13 +365,12 @@ public class Viewport : IViewport
     {
         _animations = new();
 
-        if (center.X == _centerX && center.Y == _centerY)
+        if (center.X == _state.CenterX && center.Y == _state.CenterY)
             return;
 
         if (duration == 0)
         {
-            _centerX = center.X;
-            _centerY = center.Y;
+            _state = _state with { CenterX = center.X, CenterY = center.Y };
         }
         else
         {
@@ -410,7 +389,7 @@ public class Viewport : IViewport
             return;
 
         if (duration == 0)
-            _resolution = resolution;
+            _state = _state with { Resolution = resolution };
         else
         {
             _animations = ZoomAnimation.Create(this, resolution, duration, easing);
@@ -427,7 +406,7 @@ public class Viewport : IViewport
         if (Rotation == rotation) return;
 
         if (duration == 0)
-            _rotation = rotation;
+            _state = _state with { Rotation = rotation };
         else
         {
             _animations = RotateAnimation.Create(this, rotation, duration, easing);
@@ -452,13 +431,13 @@ public class Viewport : IViewport
     public static Viewport Create(MRect extent, double resolution)
     {
         // set fields directly or else an update is triggered.
-        var result = new Viewport
+        var result = new Viewport()
         {
-            _resolution = resolution,
-            _centerX = extent.Centroid.X,
-            _centerY = extent.Centroid.Y,
-            _width = extent.Width / resolution,
-            _height = extent.Height / resolution
+            Resolution = resolution,
+            CenterX = extent.Centroid.X,
+            CenterY = extent.Centroid.Y,
+            Width = extent.Width / resolution,
+            Height = extent.Height / resolution
         };
         result.UpdateExtent();
 
