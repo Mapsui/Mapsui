@@ -20,7 +20,7 @@ public interface IViewport : IReadOnlyViewport, IAnimatable
     void SetSize(double width, double height);
     void SetAnimations(List<AnimationEntry<Viewport>> animations);
 
-    public ViewportState State { get; set; }
+    public new ViewportState State { get; set; }
 
     /// <summary>
     /// Moving the position of viewport to a new one

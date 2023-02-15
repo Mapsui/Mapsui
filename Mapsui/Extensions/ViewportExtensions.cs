@@ -1,6 +1,4 @@
-﻿using Mapsui.Utilities;
-
-namespace Mapsui.Extensions;
+﻿namespace Mapsui.Extensions;
 
 public static class ViewportExtensions
 {
@@ -9,12 +7,6 @@ public static class ViewportExtensions
     /// </summary>
     public static bool HasSize(this IReadOnlyViewport viewport) =>
         !viewport.Width.IsNanOrInfOrZero() && !viewport.Height.IsNanOrInfOrZero();
-
-    /// <summary>
-    /// IsRotated is true, when viewport displays map rotated
-    /// </summary>
-    public static bool IsRotated(this IReadOnlyViewport viewport) =>
-        !double.IsNaN(viewport.Rotation) && RotationCalculations.RotationShortestDistance(viewport.Rotation, 0) > Constants.Epsilon;
 
     /// <summary>
     /// Calculates extent from the viewport
@@ -33,7 +25,7 @@ public static class ViewportExtensions
         var maxX = viewport.CenterX + halfSpanX;
         var maxY = viewport.CenterY + halfSpanY;
 
-        if (!viewport.IsRotated())
+        if (!viewport.State.IsRotated())
         {
             return new MRect(minX, minY, maxX, maxY);
         }
