@@ -23,6 +23,6 @@ public static class ViewportExtensions
     /// <returns>SkRect</returns>
     public static SKRect ToSkiaRect(this IReadOnlyViewport viewport)
     {
-        return viewport.WorldToScreen(viewport.GetExtent()).ToSkia();
+        return viewport.WorldToScreen(viewport.State.GetExtent()).ToSkia();
     }
 }

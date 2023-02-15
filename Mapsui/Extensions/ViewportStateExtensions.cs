@@ -23,6 +23,8 @@ public static class ViewportStateExtensions
     /// </remarks>
     public static MRect GetExtent(this ViewportState viewportState)
     {
+        // todo: Find out how this method related to Viewport.UpdateExtent 
+
         // calculate the window extent 
         var halfSpanX = viewportState.Width * viewportState.Resolution * 0.5;
         var halfSpanY = viewportState.Height * viewportState.Resolution * 0.5;
