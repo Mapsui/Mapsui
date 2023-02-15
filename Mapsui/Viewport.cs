@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using Mapsui.Extensions;
+using Mapsui.Fetcher;
 using Mapsui.Logging;
 using Mapsui.Utilities;
 using Mapsui.ViewportAnimations;
@@ -33,7 +34,8 @@ public class Viewport : IViewport
     private double _rotation;
     private double _width;
     private double _height;
-
+    Postponer _delayer = new(1000);
+    long _counter;
     // Derived from state
     private readonly MRect _extent;
 
@@ -45,6 +47,7 @@ public class Viewport : IViewport
     public Viewport()
     {
         _extent = new MRect(0, 0, 0, 0);
+        _delayer.ExecuteDelayed(() => _counter = 0);
     }
 
     /// <summary>
@@ -440,7 +443,9 @@ public class Viewport : IViewport
     /// <param name="propertyName">Name of property that changed</param>
     private void OnViewportChanged([CallerMemberName] string? propertyName = null)
     {
-        Logger.Log(LogLevel.Debug, $@"Viewport Extent Changed: {_extent}");
+        _counter++;
+        _delayer.Restart(); // Restart to postpone _counter = 0
+        Logger.Log(LogLevel.Debug, $@"OnViewportChanged called {_counter} times");
         ViewportChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
