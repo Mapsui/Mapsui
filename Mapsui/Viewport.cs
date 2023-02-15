@@ -29,7 +29,8 @@ public class Viewport : IViewport
 
     // State
     private ViewportState _state = new(0, 0, 1, 0, 0, 0);
-    Postponer _delayer = new(1000);
+    // Add postponer only for debugging.
+    Postponer _postponer = new(1000);
     long _counter;
     // Derived from state
     private readonly MRect _extent;
@@ -42,7 +43,7 @@ public class Viewport : IViewport
     public Viewport()
     {
         _extent = new MRect(0, 0, 0, 0);
-        _delayer.ExecuteDelayed(() => _counter = 0);
+        _postponer.ExecuteDelayed(() => _counter = 0);
     }
 
     /// <summary>
@@ -434,7 +435,7 @@ public class Viewport : IViewport
     private void OnViewportChanged([CallerMemberName] string? propertyName = null)
     {
         _counter++;
-        _delayer.Restart(); // Restart to postpone _counter = 0
+        _postponer.Restart(); // Restart to postpone _counter = 0
         Logger.Log(LogLevel.Debug, $@"OnViewportChanged called {_counter} times");
         ViewportChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
