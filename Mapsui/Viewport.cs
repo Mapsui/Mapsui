@@ -66,13 +66,6 @@ public class Viewport : IViewport
     public double CenterX
     {
         get => _state.CenterX;
-        set
-        {
-            if (_state.CenterX == value) return;
-            _state = _state with { CenterX = value };
-            UpdateExtent();
-            OnViewportChanged();
-        }
     }
 
     /// <inheritdoc />
@@ -125,14 +118,6 @@ public class Viewport : IViewport
     public double Rotation
     {
         get => _state.Rotation;
-        set
-        {
-            if (_state.Rotation == value) return;
-            // normalize the value to be [0, 360)
-            _state = _state with { Rotation = RotationCalculations.NormalizeRotation(value) };
-            UpdateExtent();
-            OnViewportChanged();
-        }
     }
     public ViewportState State
     {
