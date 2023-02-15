@@ -137,6 +137,17 @@ public class Viewport : IViewport
             OnViewportChanged();
         }
     }
+    public ViewportState State
+    {
+        get => _state;
+        set
+        {
+            if (_state == value) return;
+            _state = value;
+            UpdateExtent();
+            OnViewportChanged();
+        }
+    }
 
     /// <inheritdoc />
     public MRect Extent => _extent;
