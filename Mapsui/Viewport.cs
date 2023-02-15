@@ -366,7 +366,7 @@ public class Viewport : IViewport
         }
         else
         {
-            _animations = ZoomOnCenterAnimation.Create(this, x, y, resolution, duration);
+            _animations = ViewportStateAnimation.Create(this, State with { CenterX = x, CenterY = y, Resolution = resolution }, duration, easing);
         }
 
         UpdateExtent();
@@ -386,7 +386,7 @@ public class Viewport : IViewport
         }
         else
         {
-            _animations = CenterAnimation.Create(this, center.X, center.Y, duration, easing);
+            _animations = ViewportStateAnimation.Create(this, State with { CenterX = center.X, CenterY = center.Y}, duration, easing);
         }
 
         UpdateExtent();
@@ -404,7 +404,7 @@ public class Viewport : IViewport
             _state = _state with { Resolution = resolution };
         else
         {
-            _animations = ZoomAnimation.Create(this, resolution, duration, easing);
+            _animations = ViewportStateAnimation.Create(this, State with { Resolution = resolution }, duration, easing);
         }
 
         UpdateExtent();
@@ -421,7 +421,7 @@ public class Viewport : IViewport
             _state = _state with { Rotation = rotation };
         else
         {
-            _animations = RotateAnimation.Create(this, rotation, duration, easing);
+            _animations = ViewportStateAnimation.Create(this, State with { Rotation = rotation }, duration, easing);
         }
 
         UpdateExtent();
