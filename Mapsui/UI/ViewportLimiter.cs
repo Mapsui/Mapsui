@@ -105,7 +105,6 @@ public class ViewportLimiter : IViewportLimiter
         if (viewport.CenterY > maxExtent.Top) y = maxExtent.Top;
         if (viewport.CenterY < maxExtent.Bottom) y = maxExtent.Bottom;
 
-        viewport.CenterX = x;
-        viewport.CenterY = y;
+        viewport.State = viewport.State with { CenterX = x, CenterY = y };
     }
 }

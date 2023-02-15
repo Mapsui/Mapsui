@@ -53,12 +53,15 @@ public class Viewport : IViewport
     public Viewport(IReadOnlyViewport viewport) : this()
     {
         _state = new ViewportState(viewport.CenterX, viewport.CenterY, viewport.Resolution, viewport.Rotation, viewport.Width, viewport.Height);
-
-        if (viewport.Extent != null) _extent = new MRect(viewport.Extent);
-
         UpdateExtent();
     }
 
+
+    public Viewport(double centerX, double centerY, double resolution, double rotation, double width, double height) : this()
+    {
+        _state = new ViewportState(centerX, centerX, resolution, rotation, width, height);
+        UpdateExtent();
+    }
     /// <inheritdoc />
     public double CenterX
     {
@@ -76,13 +79,6 @@ public class Viewport : IViewport
     public double CenterY
     {
         get => _state.CenterY;
-        set
-        {
-            if (_state.CenterY == value) return;
-            _state = _state with { CenterY = value };
-            UpdateExtent();
-            OnViewportChanged();
-        }
     }
 
 
@@ -443,14 +439,14 @@ public class Viewport : IViewport
     public static Viewport Create(MRect extent, double resolution)
     {
         // set fields directly or else an update is triggered.
-        var result = new Viewport()
-        {
-            Resolution = resolution,
-            CenterX = extent.Centroid.X,
-            CenterY = extent.Centroid.Y,
-            Width = extent.Width / resolution,
-            Height = extent.Height / resolution
-        };
+        var result = new Viewport(
+            extent.Centroid.X,
+            extent.Centroid.Y,
+            resolution,
+            0,
+            extent.Width / resolution,
+            extent.Height / resolution
+        );
         result.UpdateExtent();
 
         return result;

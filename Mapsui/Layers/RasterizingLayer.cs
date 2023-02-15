@@ -206,13 +206,13 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
         double overscan = 1)
     {
         var renderResolution = resolution / renderResolutionMultiplier;
-        return new Viewport
-        {
-            Resolution = renderResolution,
-            CenterX = extent.Centroid.X,
-            CenterY = extent.Centroid.Y,
-            Width = extent.Width * overscan / renderResolution,
-            Height = extent.Height * overscan / renderResolution
-        };
+        return new Viewport(
+            extent.Centroid.X,
+            extent.Centroid.Y,
+            renderResolution,
+            0,
+            extent.Width * overscan / renderResolution,
+            extent.Height * overscan / renderResolution
+        );
     }
 }

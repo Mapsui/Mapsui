@@ -10,7 +10,7 @@ public class ViewportLimiterTests
     public void TestRestrictZoom()
     {
         // arrange
-        var viewport = new Viewport { CenterX = 0, CenterY = 0, Width = 100, Height = 100, Resolution = 1 };
+        var viewport = new Viewport (0, 0, 1, 0, 100, 100);
         // viewport.Center is (0, 0) at this point
         var limiter = new ViewportLimiter
         {
