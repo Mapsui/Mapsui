@@ -62,8 +62,7 @@ public class FlyToAnimation
 
     private static void CenterFinal(Viewport viewport, AnimationEntry<Viewport> entry)
     {
-        viewport.CenterX = ((MPoint)entry.End).X;
-        viewport.CenterY = ((MPoint)entry.End).Y;
+        viewport.State = viewport.State with { CenterX = ((MPoint)entry.End).X, CenterY = ((MPoint)entry.End).Y };
     }
 
     private static void ResolutionTick(Viewport viewport, AnimationEntry<Viewport> entry, double value)
