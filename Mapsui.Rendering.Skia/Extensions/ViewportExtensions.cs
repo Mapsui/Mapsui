@@ -1,7 +1,5 @@
-﻿using System;
-using Mapsui.Extensions;
+﻿using Mapsui.Extensions;
 using SkiaSharp;
-using SKCanvas = SkiaSharp.SKCanvas;
 
 namespace Mapsui.Rendering.Skia.Extensions;
 
@@ -15,7 +13,7 @@ public static class ViewportExtensions
 
         var matrix = SKMatrix.CreateScale(invertedResolution, invertedResolution, mapCenterX, mapCenterY);
         matrix = SKMatrix.Concat(matrix, SKMatrix.CreateScale(1, -1, 0, -mapCenterY)); // As a consequence images will be up side down :(
-        if (viewport.IsRotated()) matrix = SKMatrix.Concat(matrix, SKMatrix.CreateRotationDegrees((float)-viewport.Rotation));
+        if (viewport.State.IsRotated()) matrix = SKMatrix.Concat(matrix, SKMatrix.CreateRotationDegrees((float)-viewport.Rotation));
         matrix = SKMatrix.Concat(matrix, SKMatrix.CreateTranslation((float)-viewport.CenterX, (float)-viewport.CenterY));
         return matrix;
     }
@@ -25,6 +23,6 @@ public static class ViewportExtensions
     /// <returns>SkRect</returns>
     public static SKRect ToSkiaRect(this IReadOnlyViewport viewport)
     {
-        return viewport.WorldToScreen(viewport.GetExtent()).ToSkia();
+        return viewport.WorldToScreen(viewport.State.GetExtent()).ToSkia();
     }
 }
