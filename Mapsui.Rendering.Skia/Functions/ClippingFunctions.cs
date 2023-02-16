@@ -89,12 +89,12 @@ public static class ClippingFunctions
         if (points == null)
             return result;
 
-        var screenCenterX = viewport.Width * 0.5;
-        var screenCenterY = viewport.Height * 0.5;
-        var centerX = viewport.CenterX;
-        var centerY = viewport.CenterY;
-        var resolution = 1.0 / viewport.Resolution;
-        var rotation = viewport.Rotation / 180f * Math.PI;
+        var screenCenterX = viewport.State.Width * 0.5;
+        var screenCenterY = viewport.State.Height * 0.5;
+        var centerX = viewport.State.CenterX;
+        var centerY = viewport.State.CenterY;
+        var resolution = 1.0 / viewport.State.Resolution;
+        var rotation = viewport.State.Rotation / 180f * Math.PI;
         var sin = Math.Sin(rotation);
         var cos = Math.Cos(rotation);
 

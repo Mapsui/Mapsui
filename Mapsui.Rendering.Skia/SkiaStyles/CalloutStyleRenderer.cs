@@ -56,12 +56,12 @@ public class CalloutStyleRenderer : ISkiaStyleRenderer
 
         var rotation = (float)calloutStyle.SymbolRotation;
 
-        if (viewport.Rotation != 0)
+        if (viewport.State.Rotation != 0)
         {
             if (calloutStyle.RotateWithMap)
-                rotation += (float)viewport.Rotation;
+                rotation += (float)viewport.State.Rotation;
             if (calloutStyle.SymbolOffsetRotatesWithMap)
-                symbolOffset = symbolOffset.Rotate(-viewport.Rotation);
+                symbolOffset = symbolOffset.Rotate(-viewport.State.Rotation);
         }
 
         // Save state of the canvas, so we could move and rotate the canvas

@@ -210,7 +210,7 @@ public sealed partial class MainPageLarge : ContentPage, IDisposable
                 mapView?.MyLocationLayer.UpdateMyLocation(new UI.Maui.Position(e.Latitude, e.Longitude));
                 if (e.Course != null)
                 {
-                    mapView?.MyLocationLayer.UpdateMyDirection(e.Course.Value, mapView?.Viewport.Rotation ?? 0);
+                    mapView?.MyLocationLayer.UpdateMyDirection(e.Course.Value, mapView?.Viewport.State.Rotation ?? 0);
                 }
 
                 if (e.Speed != null)

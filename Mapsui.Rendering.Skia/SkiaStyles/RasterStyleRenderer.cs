@@ -106,12 +106,12 @@ public class RasterStyleRenderer : ISkiaStyleRenderer
         // We'll create four matrices in addition to the incoming matrix. They perform the
         // zoom scale, focal point offset, user rotation and finally, centering in the screen.
 
-        var userRotation = SKMatrix.CreateRotationDegrees((float)viewport.Rotation);
+        var userRotation = SKMatrix.CreateRotationDegrees((float)viewport.State.Rotation);
         var focalPointOffset = SKMatrix.CreateTranslation(
-            (float)(rect.Left - viewport.CenterX),
-            (float)(viewport.CenterY - rect.Top));
-        var zoomScale = SKMatrix.CreateScale((float)(1.0 / viewport.Resolution), (float)(1.0 / viewport.Resolution));
-        var centerInScreen = SKMatrix.CreateTranslation((float)(viewport.Width / 2.0), (float)(viewport.Height / 2.0));
+            (float)(rect.Left - viewport.State.CenterX),
+            (float)(viewport.State.CenterY - rect.Top));
+        var zoomScale = SKMatrix.CreateScale((float)(1.0 / viewport.State.Resolution), (float)(1.0 / viewport.State.Resolution));
+        var centerInScreen = SKMatrix.CreateTranslation((float)(viewport.State.Width / 2.0), (float)(viewport.State.Height / 2.0));
 
         // We'll concatenate them like so: incomingMatrix * centerInScreen * userRotation * zoomScale * focalPointOffset
 

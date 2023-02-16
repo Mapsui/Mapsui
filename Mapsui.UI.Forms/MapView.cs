@@ -477,12 +477,12 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     /// <param name="e">Event arguments containing what changed</param>
     private void HandlerViewportChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName?.Equals(nameof(Viewport.Rotation)) ?? false)
+        if (e.PropertyName?.Equals(nameof(Viewport.State.Rotation)) ?? false)
         {
-            MyLocationLayer.UpdateMyDirection(MyLocationLayer.Direction, Viewport.Rotation);
+            MyLocationLayer.UpdateMyDirection(MyLocationLayer.Direction, Viewport.State.Rotation);
 
             // Update rotationButton
-            _mapNorthingButton!.Rotation = (float)Viewport.Rotation;
+            _mapNorthingButton!.Rotation = (float)Viewport.State.Rotation;
         }
     }
 
@@ -747,7 +747,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     {
         if (Viewport.Extent != null)
         {
-            var fetchInfo = new FetchInfo(Viewport.Extent, Viewport.Resolution, Map?.CRS, ChangeType.Continuous);
+            var fetchInfo = new FetchInfo(Viewport.Extent, Viewport.State.Resolution, Map?.CRS, ChangeType.Continuous);
             Map?.RefreshData(fetchInfo);
         }
 
@@ -759,7 +759,7 @@ public class MapView : MapControl, INotifyPropertyChanged, IEnumerable<Pin>
     {
         if (Viewport.Extent != null)
         {
-            var fetchInfo = new FetchInfo(Viewport.Extent, Viewport.Resolution, Map?.CRS, ChangeType.Continuous);
+            var fetchInfo = new FetchInfo(Viewport.Extent, Viewport.State.Resolution, Map?.CRS, ChangeType.Continuous);
             Map?.RefreshData(fetchInfo);
         }
 

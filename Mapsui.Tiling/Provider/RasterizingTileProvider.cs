@@ -169,7 +169,7 @@ public class RasterizingTileProvider : ITileSource
 
     private double ConvertToCoordinates(double tempSize, IReadOnlyViewport viewport)
     {
-        return tempSize * viewport.Resolution * 0.5; // I need to load half the Size more of the Features
+        return tempSize * viewport.State.Resolution * 0.5; // I need to load half the Size more of the Features
     }
 
     private double GetFeatureSize(IFeature feature, IStyle style, IRenderer renderer)

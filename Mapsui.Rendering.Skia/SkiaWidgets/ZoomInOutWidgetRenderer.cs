@@ -39,8 +39,8 @@ public class ZoomInOutWidgetRenderer : ISkiaWidgetRenderer
             _paintText.Color = zoomInOut.TextColor.ToSkia(zoomInOut.Opacity);
         }
 
-        var posX = zoomInOut.CalculatePositionX(0, (float)viewport.Width, zoomInOut.Orientation == Orientation.Vertical ? zoomInOut.Size : zoomInOut.Size * 2 - Stroke);
-        var posY = zoomInOut.CalculatePositionY(0, (float)viewport.Height, zoomInOut.Orientation == Orientation.Vertical ? zoomInOut.Size * 2 - Stroke : zoomInOut.Size);
+        var posX = zoomInOut.CalculatePositionX(0, (float)viewport.State.Width, zoomInOut.Orientation == Orientation.Vertical ? zoomInOut.Size : zoomInOut.Size * 2 - Stroke);
+        var posY = zoomInOut.CalculatePositionY(0, (float)viewport.State.Height, zoomInOut.Orientation == Orientation.Vertical ? zoomInOut.Size * 2 - Stroke : zoomInOut.Size);
 
         // Draw a rect for zoom in button
         SKRect rect;

@@ -40,7 +40,7 @@ public class ViewportLimiterKeepWithin : IViewportLimiter
 
     public void Limit(Viewport viewport, IReadOnlyList<double> mapResolutions, MRect? mapEnvelope)
     {
-        viewport.SetResolution(LimitResolution(viewport.Resolution, viewport.Width, viewport.Height, mapResolutions, mapEnvelope));
+        viewport.SetResolution(LimitResolution(viewport.State.Resolution, viewport.State.Width, viewport.State.Height, mapResolutions, mapEnvelope));
         LimitExtent(viewport, mapEnvelope);
     }
 
@@ -78,14 +78,14 @@ public class ViewportLimiterKeepWithin : IViewportLimiter
             return;
         }
 
-        var x = viewport.CenterX;
+        var x = viewport.State.CenterX;
 
         if (viewport.Extent?.Left < maxExtent.Left)
             x += maxExtent.Left - viewport.Extent.Left;
         else if (viewport.Extent?.Right > maxExtent.Right)
             x += maxExtent.Right - viewport.Extent.Right;
 
-        var y = viewport.CenterY;
+        var y = viewport.State.CenterY;
 
         if (viewport.Extent?.Top > maxExtent.Top)
             y += maxExtent.Top - viewport.Extent.Top;

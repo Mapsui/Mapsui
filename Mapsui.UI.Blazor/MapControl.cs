@@ -145,7 +145,7 @@ public partial class MapControl : ComponentBase, IMapControl
             var resolution = MouseWheelAnimation.GetResolution((int)delta, _viewport, Map);
 
             // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
-            resolution = Map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, Map.Resolutions,
+            resolution = Map.Limiter.LimitResolution(resolution, Viewport.State.Width, Viewport.State.Height, Map.Resolutions,
                 Map.Extent);
             Navigator?.ZoomTo(resolution, e.Location(await BoundingClientRectAsync()).ToMapsui(), MouseWheelAnimation.Duration,
                 MouseWheelAnimation.Easing);

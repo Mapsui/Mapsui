@@ -182,7 +182,7 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
 
         if (!_onlyRerasterizeIfOutsideOverscan ||
             (_currentViewport == null) ||
-            (_currentViewport.Resolution != newViewport.Resolution) ||
+            (_currentViewport.State.Resolution != newViewport.State.Resolution) ||
             !_currentViewport.Extent.Contains(newViewport.Extent))
         {
             // Explicitly set the change type to discrete for rasterization

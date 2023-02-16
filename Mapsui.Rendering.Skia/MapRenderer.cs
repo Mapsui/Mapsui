@@ -80,8 +80,8 @@ public class MapRenderer : IRenderer
 
         try
         {
-            var width = viewport.Width;
-            var height = viewport.Height;
+            var width = viewport.State.Width;
+            var height = viewport.State.Height;
 
             var imageInfo = new SKImageInfo((int)Math.Round(width * pixelDensity), (int)Math.Round(height * pixelDensity),
                 SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
@@ -199,15 +199,15 @@ public class MapRenderer : IRenderer
         {
             ScreenPosition = new MPoint(x, y),
             WorldPosition = viewport.ScreenToWorld(x, y),
-            Resolution = viewport.Resolution
+            Resolution = viewport.State.Resolution
         };
 
         if (!viewport.Extent?.Contains(viewport.ScreenToWorld(result.ScreenPosition)) ?? false) return result;
 
         try
         {
-            var width = (int)viewport.Width;
-            var height = (int)viewport.Height;
+            var width = (int)viewport.State.Width;
+            var height = (int)viewport.State.Height;
 
             var imageInfo = new SKImageInfo(width, height, SKImageInfo.PlatformColorType, SKAlphaType.Unpremul);
 

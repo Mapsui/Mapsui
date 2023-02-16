@@ -249,7 +249,7 @@ public class MyLocationLayer : MemoryLayer
 
                 if (_mapView.Viewport.Extent != null)
                 {
-                    var fetchInfo = new FetchInfo(_mapView.Viewport.Extent, _mapView.Viewport.Resolution, _mapView.Map?.CRS, ChangeType.Discrete);
+                    var fetchInfo = new FetchInfo(_mapView.Viewport.Extent, _mapView.Viewport.State.Resolution, _mapView.Map?.CRS, ChangeType.Discrete);
                     // At the end, update viewport
                     animation.Commit(_mapView, AnimationMyLocationName, 100, 3000, finished: (s, v) => _mapView.Map?.RefreshData(fetchInfo));
                 }

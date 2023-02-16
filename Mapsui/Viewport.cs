@@ -52,7 +52,8 @@ public class Viewport : IViewport
     /// <param name="viewport">Viewport from which to copy all values</param>
     public Viewport(IReadOnlyViewport viewport) : this()
     {
-        _state = new ViewportState(viewport.CenterX, viewport.CenterY, viewport.Resolution, viewport.Rotation, viewport.Width, viewport.Height);
+        _state = new ViewportState(viewport.State.CenterX, viewport.State.CenterY, viewport.State.Resolution, 
+            viewport.State.Rotation, viewport.State.Width, viewport.State.Height);
         UpdateExtent();
     }
 
@@ -61,42 +62,7 @@ public class Viewport : IViewport
         _state = new ViewportState(centerX, centerY, resolution, rotation, width, height);
         UpdateExtent();
     }
-
-    /// <inheritdoc />
-    public double CenterX
-    {
-        get => _state.CenterX;
-    }
-
-    /// <inheritdoc />
-    public double CenterY
-    {
-        get => _state.CenterY;
-    }
-
-    /// <inheritdoc />
-    public double Resolution
-    {
-        get => _state.Resolution;
-    }
-
-    /// <inheritdoc />
-    public double Width
-    {
-        get => _state.Width;
-    }
-
-    /// <inheritdoc />
-    public double Height
-    {
-        get => _state.Height;
-    }
-
-    /// <inheritdoc />
-    public double Rotation
-    {
-        get => _state.Rotation;
-    }
+       
     public ViewportState State
     {
         get => _state;
@@ -145,8 +111,8 @@ public class Viewport : IViewport
 
         if (State.IsRotated())
         {
-            var screenCenterX = Width / 2.0;
-            var screenCenterY = Height / 2.0;
+            var screenCenterX = _state.Width / 2.0;
+            var screenCenterY = _state.Height / 2.0;
             return Rotate(-_state.Rotation, screenX, screenY, screenCenterX, screenCenterY);
         }
 
@@ -179,18 +145,18 @@ public class Viewport : IViewport
 
     private (double screenX, double screenY) WorldToScreenUnrotated(double worldX, double worldY)
     {
-        var screenCenterX = Width / 2.0;
-        var screenCenterY = Height / 2.0;
-        var screenX = (worldX - CenterX) / _state.Resolution + screenCenterX;
-        var screenY = (CenterY - worldY) / _state.Resolution + screenCenterY;
+        var screenCenterX = _state.Width / 2.0;
+        var screenCenterY = _state.Height / 2.0;
+        var screenX = (worldX - _state.CenterX) / _state.Resolution + screenCenterX;
+        var screenY = (_state.CenterY - worldY) / _state.Resolution + screenCenterY;
         return (screenX, screenY);
     }
 
     /// <inheritdoc />
     public (double worldX, double worldY) ScreenToWorldXY(double screenX, double screenY)
     {
-        var screenCenterX = Width / 2.0;
-        var screenCenterY = Height / 2.0;
+        var screenCenterX = _state.Width / 2.0;
+        var screenCenterY = _state.Height / 2.0;
 
         if (State.IsRotated())
         {
@@ -199,8 +165,8 @@ public class Viewport : IViewport
             screenY = screen.Y;
         }
 
-        var worldX = CenterX + (screenX - screenCenterX) * _state.Resolution;
-        var worldY = CenterY - (screenY - screenCenterY) * _state.Resolution;
+        var worldX = _state.CenterX + (screenX - screenCenterX) * _state.Resolution;
+        var worldY = _state.CenterY - (screenY - screenCenterY) * _state.Resolution;
         return (worldX, worldY);
     }
 
@@ -219,13 +185,13 @@ public class Viewport : IViewport
 
         if (deltaResolution != 1)
         {
-            _state = _state with { Resolution = Resolution / deltaResolution };
+            _state = _state with { Resolution = _state.Resolution / deltaResolution };
 
             // Calculate current position again with adjusted resolution
             // Zooming should be centered on the place where the map is touched.
             // This is done with the scale correction.
-            var scaleCorrectionX = (1 - deltaResolution) * (current.X - CenterX);
-            var scaleCorrectionY = (1 - deltaResolution) * (current.Y - CenterY);
+            var scaleCorrectionX = (1 - deltaResolution) * (current.X - _state.CenterX);
+            var scaleCorrectionY = (1 - deltaResolution) * (current.Y - _state.CenterY);
 
             newX -= scaleCorrectionX;
             newY -= scaleCorrectionY;
@@ -236,9 +202,9 @@ public class Viewport : IViewport
         if (deltaRotation != 0)
         {
             current = ScreenToWorld(positionScreen.X, positionScreen.Y); // calculate current position again with adjusted resolution
-            _state = _state with { Rotation = Rotation + deltaRotation };
+            _state = _state with { Rotation = _state.Rotation + deltaRotation };
             var postRotation = ScreenToWorld(positionScreen.X, positionScreen.Y); // calculate current position again with adjusted resolution
-            _state = _state with { CenterX = CenterX - (postRotation.X - current.X), CenterY = CenterY - (postRotation.Y - current.Y) };
+            _state = _state with { CenterX = _state.CenterX - (postRotation.X - current.X), CenterY = _state.CenterY - (postRotation.Y - current.Y) };
         }
 
         UpdateExtent();
@@ -254,10 +220,10 @@ public class Viewport : IViewport
         // calculate the window extent which is not rotate
         var halfSpanX = _state.Width * _state.Resolution * 0.5;
         var halfSpanY = _state.Height * _state.Resolution * 0.5;
-        var left = CenterX - halfSpanX;
-        var bottom = CenterY - halfSpanY;
-        var right = CenterX + halfSpanX;
-        var top = CenterY + halfSpanY;
+        var left = _state.CenterX - halfSpanX;
+        var bottom = _state.CenterY - halfSpanY;
+        var right = _state.CenterX + halfSpanX;
+        var top = _state.CenterY + halfSpanY;
         var windowExtent = new MQuad
         {
             BottomLeft = new MPoint(left, bottom),
@@ -277,7 +243,7 @@ public class Viewport : IViewport
         {
             // Calculate the extent that will encompass a rotated viewport (slightly larger - used for tiles).
             // Perform rotations on corner offsets and then add them to the Center point.
-            windowExtent = windowExtent.Rotate(-_state.Rotation, CenterX, CenterY);
+            windowExtent = windowExtent.Rotate(-_state.Rotation, _state.CenterX, _state.CenterY);
             var rotatedBoundingBox = windowExtent.ToBoundingBox();
             _extent.Min.X = rotatedBoundingBox.MinX;
             _extent.Min.Y = rotatedBoundingBox.MinY;
@@ -325,7 +291,7 @@ public class Viewport : IViewport
         }
         else
         {
-            _animations = ViewportStateAnimation.Create(this, State with { CenterX = x, CenterY = y, Resolution = resolution }, duration, easing);
+            _animations = ViewportStateAnimation.Create(this, _state with { CenterX = x, CenterY = y, Resolution = resolution }, duration, easing);
         }
 
         UpdateExtent();
@@ -356,7 +322,7 @@ public class Viewport : IViewport
     {
         _animations = new();
 
-        if (Resolution == resolution)
+        if (_state.Resolution == resolution)
             return;
 
         if (duration == 0)
@@ -374,7 +340,7 @@ public class Viewport : IViewport
     {
         _animations = new();
 
-        if (Rotation == rotation) return;
+        if (_state.Rotation == rotation) return;
 
         if (duration == 0)
             _state = _state with { Rotation = rotation };

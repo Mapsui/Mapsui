@@ -544,7 +544,7 @@ public partial class MapControl : INotifyPropertyChanged, IDisposable
         if (Viewport.Extent.GetArea() <= 0)
             return;
 
-        var fetchInfo = new FetchInfo(Viewport.Extent, Viewport.Resolution, Map?.CRS, changeType);
+        var fetchInfo = new FetchInfo(Viewport.Extent, Viewport.State.Resolution, Map?.CRS, changeType);
         Map?.RefreshData(fetchInfo);
     }
 

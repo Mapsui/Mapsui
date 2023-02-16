@@ -146,7 +146,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         var resolution = MouseWheelAnimation.GetResolution(e.Delta, _viewport, _map);
         // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
-        resolution = _map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, _map.Resolutions, _map.Extent);
+        resolution = _map.Limiter.LimitResolution(resolution, Viewport.State.Width, Viewport.State.Height, _map.Resolutions, _map.Extent);
         Navigator?.ZoomTo(resolution, _currentMousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
     }
 
@@ -397,7 +397,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
     private void OnManipulationStarted(object? sender, ManipulationStartedEventArgs e)
     {
         _hasBeenManipulated = false;
-        _virtualRotation = _viewport.Rotation;
+        _virtualRotation = _viewport.State.Rotation;
     }
 
     private void OnManipulationDelta(object? sender, ManipulationDeltaEventArgs e)
@@ -420,7 +420,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
             _virtualRotation += angle - prevAngle;
 
             rotationDelta = RotationCalculations.CalculateRotationDeltaWithSnapping(
-                _virtualRotation, _viewport.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
+                _virtualRotation, _viewport.State.Rotation, _unSnapRotationDegrees, _reSnapRotationDegrees);
         }
 
         _viewport.Transform(center, previousCenter, radius / previousRadius, rotationDelta);

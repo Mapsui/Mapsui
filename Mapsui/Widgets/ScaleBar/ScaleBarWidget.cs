@@ -316,8 +316,8 @@ public class ScaleBarWidget : Widget, INotifyPropertyChanged
 
         var maxScaleBarLength = Math.Max(scaleBarLength1, scaleBarLength2);
 
-        var posX = CalculatePositionX(0, (int)viewport.Width, _maxWidth);
-        var posY = CalculatePositionY(0, (int)viewport.Height, _height);
+        var posX = CalculatePositionX(0, (int)viewport.State.Width, _maxWidth);
+        var posY = CalculatePositionY(0, (int)viewport.State.Height, _height);
 
         var left = posX + stroke * 0.5f * Scale;
         var right = posX + _maxWidth - stroke * 0.5f * Scale;
@@ -423,8 +423,8 @@ public class ScaleBarWidget : Widget, INotifyPropertyChanged
     {
         var drawNoSecondScaleBar = ScaleBarMode == ScaleBarMode.Single || (ScaleBarMode == ScaleBarMode.Both && SecondaryUnitConverter == null);
 
-        var posX = CalculatePositionX(0, (int)viewport.Width, _maxWidth);
-        var posY = CalculatePositionY(0, (int)viewport.Height, _height);
+        var posX = CalculatePositionX(0, (int)viewport.State.Width, _maxWidth);
+        var posY = CalculatePositionY(0, (int)viewport.State.Height, _height);
 
         var left = posX + (stroke + TextMargin) * Scale;
         var right1 = posX + _maxWidth - (stroke + TextMargin) * Scale - (float)textSize1.Width;
@@ -519,10 +519,10 @@ public class ScaleBarWidget : Widget, INotifyPropertyChanged
         // because EPSG:3857 is only there 1 m. At other angles, we
         // should calculate the correct length.
 
-        var (_, y) = projection.Project(CRS, "EPSG:4326", viewport.CenterX, viewport.CenterY); // clone or else you will project the original viewport center
+        var (_, y) = projection.Project(CRS, "EPSG:4326", viewport.State.CenterX, viewport.State.CenterY); // clone or else you will project the original viewport center
 
         // Calc ground resolution in meters per pixel of viewport for this latitude
-        var groundResolution = viewport.Resolution * Math.Cos(y / 180.0 * Math.PI);
+        var groundResolution = viewport.State.Resolution * Math.Cos(y / 180.0 * Math.PI);
 
         // Convert in units of UnitConverter
         groundResolution = groundResolution / unitConverter.MeterRatio;

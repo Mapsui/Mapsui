@@ -82,7 +82,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         var offsetY = symbolStyle.SymbolOffset.IsRelative ? bitmap.Height * symbolStyle.SymbolOffset.Y : symbolStyle.SymbolOffset.Y;
 
         var rotation = (float)symbolStyle.SymbolRotation;
-        if (symbolStyle.RotateWithMap) rotation += (float)viewport.Rotation;
+        if (symbolStyle.RotateWithMap) rotation += (float)viewport.State.Rotation;
 
         switch (bitmap.Type)
         {
@@ -158,7 +158,7 @@ public class SymbolStyleRenderer : ISkiaStyleRenderer, IFeatureSize
         if (symbolStyle.SymbolRotation != 0)
         {
             var rotation = symbolStyle.SymbolRotation;
-            if (symbolStyle.RotateWithMap) rotation += viewport.Rotation;
+            if (symbolStyle.RotateWithMap) rotation += viewport.State.Rotation;
             canvas.RotateDegrees((float)rotation);
         }
 

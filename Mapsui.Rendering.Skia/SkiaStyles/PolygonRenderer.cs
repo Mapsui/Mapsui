@@ -27,13 +27,13 @@ internal static class PolygonRenderer
         if (vectorCache == null)
         {
             paint = CreateSkPaint(vectorStyle?.Outline, opacity);
-            paintFill = CreateSkPaint(vectorStyle?.Fill, opacity, viewport.Rotation, symbolCache);
+            paintFill = CreateSkPaint(vectorStyle?.Fill, opacity, viewport.State.Rotation, symbolCache);
             path = polygon.ToSkiaPath(viewport, canvas.LocalClipBounds, lineWidth);
         }
         else
         {
             paint = vectorCache.GetOrCreatePaint(vectorStyle?.Outline, opacity, CreateSkPaint);
-            paintFill = vectorCache.GetOrCreatePaint(vectorStyle?.Fill, opacity, viewport.Rotation, CreateSkPaint);
+            paintFill = vectorCache.GetOrCreatePaint(vectorStyle?.Fill, opacity, viewport.State.Rotation, CreateSkPaint);
             path = vectorCache.GetOrCreatePath(viewport, polygon, lineWidth, (geometry, viewport, lineWidth) => geometry.ToSkiaPath(viewport, viewport.ToSkiaRect(), lineWidth));
         }
 

@@ -17,8 +17,8 @@ public static class VisibleFeatureIterator
         foreach (var layer in layers)
         {
             if (layer.Enabled == false) continue;
-            if (layer.MinVisible > viewport.Resolution) continue;
-            if (layer.MaxVisible < viewport.Resolution) continue;
+            if (layer.MinVisible > viewport.State.Resolution) continue;
+            if (layer.MaxVisible < viewport.State.Resolution) continue;
 
             IterateLayer(viewport, layer, iteration, callback);
         }
@@ -29,10 +29,10 @@ public static class VisibleFeatureIterator
     {
         if (viewport.Extent == null) return;
 
-        var features = layer.GetFeatures(viewport.Extent, viewport.Resolution).ToList();
+        var features = layer.GetFeatures(viewport.Extent, viewport.State.Resolution).ToList();
 
         // Part 1. Styles on the layer
-        var layerStyles = layer.Style.GetStylesToApply(viewport.Resolution);
+        var layerStyles = layer.Style.GetStylesToApply(viewport.State.Resolution);
 
         foreach (var layerStyle in layerStyles)
         {
@@ -40,7 +40,7 @@ public static class VisibleFeatureIterator
             {
                 if (layerStyle is IThemeStyle themeStyle)
                 {
-                    var stylesFromThemeStyle = themeStyle.GetStyle(feature).GetStylesToApply(viewport.Resolution);
+                    var stylesFromThemeStyle = themeStyle.GetStyle(feature).GetStylesToApply(viewport.State.Resolution);
                     foreach (var styleFromThemeStyle in stylesFromThemeStyle)
                     {
                         callback(viewport, layer, styleFromThemeStyle, feature, (float)layer.Opacity, iteration);
@@ -71,7 +71,7 @@ public static class VisibleFeatureIterator
                     continue;
                 }
 
-                if (!featureStyle.ShouldBeApplied(viewport.Resolution)) continue;
+                if (!featureStyle.ShouldBeApplied(viewport.State.Resolution)) continue;
 
                 callback(viewport, layer, featureStyle, feature, (float)layer.Opacity, iteration);
             }

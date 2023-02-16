@@ -6,7 +6,7 @@ public static class ViewportExtensions
     /// True if Width and Height are not zero
     /// </summary>
     public static bool HasSize(this IReadOnlyViewport viewport) =>
-        !viewport.Width.IsNanOrInfOrZero() && !viewport.Height.IsNanOrInfOrZero();
+        !viewport.State.Width.IsNanOrInfOrZero() && !viewport.State.Height.IsNanOrInfOrZero();
 
     /// <summary> World To Screen Translation of a Rect </summary>
     /// <param name="viewport">view Port</param>

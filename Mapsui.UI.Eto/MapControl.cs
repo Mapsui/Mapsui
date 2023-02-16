@@ -72,7 +72,7 @@ public partial class MapControl : SkiaDrawable, IMapControl
 
         var resolution = MouseWheelAnimation.GetResolution((int)e.Delta.Height, _viewport, _map);
         // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
-        resolution = _map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, _map.Resolutions, _map.Extent);
+        resolution = _map.Limiter.LimitResolution(resolution, Viewport.State.Width, Viewport.State.Height, _map.Resolutions, _map.Extent);
         Navigator?.ZoomTo(resolution, e.Location.ToMapsui(), MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
     }
     protected override void OnSizeChanged(EventArgs e)

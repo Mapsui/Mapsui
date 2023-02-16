@@ -84,7 +84,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
         //Needed for both MouseMove and MouseWheel event for mousewheel event
 
         if (double.IsNaN(_toResolution))
-            _toResolution = Viewport.Resolution;
+            _toResolution = Viewport.State.Resolution;
 
         _mouseWheelPos += e.Delta.Y;
         int delta = (int)_mouseWheelPos;
@@ -105,7 +105,7 @@ public partial class MapControl : Grid, IMapControl, IDisposable
 
         var resolution = MouseWheelAnimation.GetResolution(delta, _viewport, _map);
         // Limit target resolution before animation to avoid an animation that is stuck on the max resolution, which would cause a needless delay
-        resolution = _map.Limiter.LimitResolution(resolution, Viewport.Width, Viewport.Height, _map.Resolutions, _map.Extent);
+        resolution = _map.Limiter.LimitResolution(resolution, Viewport.State.Width, Viewport.State.Height, _map.Resolutions, _map.Extent);
         Navigator?.ZoomTo(resolution, _currentMousePosition, MouseWheelAnimation.Duration, MouseWheelAnimation.Easing);
     }
 

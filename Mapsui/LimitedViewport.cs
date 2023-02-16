@@ -18,14 +18,8 @@ public class LimitedViewport : IViewport
     public Map? Map { get; set; }
 
     public event PropertyChangedEventHandler? ViewportChanged;
-    public double CenterX => _viewport.CenterX;
-    public double CenterY => _viewport.CenterY;
-    public double Resolution => _viewport.Resolution;
     public MRect? Extent => _viewport.Extent;
-    public double Width => _viewport.Width;
-    public double Height => _viewport.Height;
-    public double Rotation => _viewport.Rotation;
-    public ViewportState State { get => ((IViewport)_viewport).State; set => ((IViewport)_viewport).State = value; }
+    public ViewportState State { get => _viewport.State; set => _viewport.State = value; }
 
     public void Transform(MPoint position, MPoint previousPosition, double deltaResolution = 1, double deltaRotation = 0)
     {
@@ -70,7 +64,7 @@ public class LimitedViewport : IViewport
         if (Map?.ZoomLock ?? true) return;
         if (Limiter != null)
         {
-            resolution = Limiter.LimitResolution(resolution, _viewport.Width, _viewport.Height, Map.Resolutions, Map.Extent);
+            resolution = Limiter.LimitResolution(resolution, _viewport.State.Width, _viewport.State.Height, Map.Resolutions, Map.Extent);
         }
 
         _viewport.SetResolution(resolution, duration, easing);

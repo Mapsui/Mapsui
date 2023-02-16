@@ -22,8 +22,8 @@ public class HyperlinkWidgetRenderer : ISkiaWidgetRenderer
         var backRect = new SKRect(0, 0,
             textRect.Width + hyperlink.PaddingX * 2,
             textPaint.TextSize + hyperlink.PaddingY * 2); // Use the font's TextSize for consistency
-        var offsetX = GetOffsetX(backRect.Width, hyperlink.MarginX, hyperlink.HorizontalAlignment, viewport.Width);
-        var offsetY = GetOffsetY(backRect.Height, hyperlink.MarginY, hyperlink.VerticalAlignment, viewport.Height);
+        var offsetX = GetOffsetX(backRect.Width, hyperlink.MarginX, hyperlink.HorizontalAlignment, viewport.State.Width);
+        var offsetY = GetOffsetY(backRect.Height, hyperlink.MarginY, hyperlink.VerticalAlignment, viewport.State.Height);
         backRect.Offset(offsetX, offsetY);
         canvas.DrawRoundRect(backRect, hyperlink.CornerRadius, hyperlink.CornerRadius, backPaint);
         hyperlink.Envelope = backRect.ToMRect();

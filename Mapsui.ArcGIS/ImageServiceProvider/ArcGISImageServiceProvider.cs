@@ -116,8 +116,8 @@ public class ArcGISImageServiceProvider : IProvider, IProjectingProvider
 
         try
         {
-            width = Convert.ToInt32(viewport.Width);
-            height = Convert.ToInt32(viewport.Height);
+            width = Convert.ToInt32(viewport.State.Width);
+            height = Convert.ToInt32(viewport.State.Height);
         }
         catch (OverflowException ex)
         {

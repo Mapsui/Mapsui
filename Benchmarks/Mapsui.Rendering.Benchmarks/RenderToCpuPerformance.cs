@@ -73,11 +73,11 @@ public class RenderToCpuPerformance : IDisposable
         mapControl.Map = CreateMap(renderFormat, tiling, rasterizing);
 
         // zoom to correct Zoom level
-        var resolution = ZoomHelper.ZoomOut(mapControl.Map.Resolutions, mapControl.Viewport.Resolution);
+        var resolution = ZoomHelper.ZoomOut(mapControl.Map.Resolutions, mapControl.Viewport.State.Resolution);
         mapControl.Navigator?.ZoomTo(resolution);
 
         // fetch data first time
-        var fetchInfo = new FetchInfo(mapControl.Viewport.Extent!, mapControl.Viewport.Resolution, mapControl.Map?.CRS);
+        var fetchInfo = new FetchInfo(mapControl.Viewport.Extent!, mapControl.Viewport.State.Resolution, mapControl.Map?.CRS);
         mapControl.Map?.RefreshData(fetchInfo);
         mapControl.Map?.Layers.WaitForLoadingAsync().Wait();
 
