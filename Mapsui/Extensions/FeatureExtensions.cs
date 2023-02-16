@@ -48,6 +48,15 @@ public static class FeatureExtensions
         return result.ToString();
     }
 
+    public static string ToStringOfKeyValuePairs(this IFeature feature)
+    {
+        var stringBuilder = new StringBuilder();
+        foreach (var field in feature.Fields)
+            stringBuilder.Append($"{field}: {feature[field]}\n");
+        return stringBuilder.ToString();
+    }
+
+
     public static IEnumerable<IFeature> Project(this IEnumerable<IFeature> features, string? fromCRS,
         string? toCRS, IProjection? projection = null)
     {

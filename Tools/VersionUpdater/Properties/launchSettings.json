@@ -1,9 +1,0 @@
-{
-  "profiles": {
-    "VersionUpdater": {
-      "commandName": "Project",
-      "commandLineArgs": "-v 3.0.0-rc.1",
-      "workingDirectory": "C:\\code\\github\\mapsui4"
-    }
-  }
-}

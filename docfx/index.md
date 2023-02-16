@@ -1,8 +1,8 @@
 # **Mapsui** documentation.
 
 This is the documentation of the Mapsui open source map component.
-- [General documentation](http://mapsui.com/documentation/home.html)
-- [API documentation](http://mapsui.com/api/index.html)
+- [General documentation](https://mapsui.com/documentation/home.html)
+- [API documentation](https://mapsui.com/api/index.html)
 - [Mapsui on GitHub](https://github.com/mapsui/mapsui)
 
 ## Projects that use Mapsui

@@ -247,13 +247,15 @@ public class Viewport : IViewport
     public void Transform(MPoint positionScreen, MPoint previousPositionScreen, double deltaResolution = 1, double deltaRotation = 0)
     {
         _animations = new();
-
         var previous = ScreenToWorld(previousPositionScreen.X, previousPositionScreen.Y);
         var current = ScreenToWorld(positionScreen.X, positionScreen.Y);
 
         var newX = _centerX + previous.X - current.X;
         var newY = _centerY + previous.Y - current.Y;
 
+        if (deltaResolution == 1 && deltaRotation == 0 && _centerX == newX && _centerY == newY)
+            return;
+        
         if (deltaResolution != 1)
         {
             _resolution = Resolution / deltaResolution;
@@ -277,9 +279,12 @@ public class Viewport : IViewport
             _rotation += deltaRotation;
             var postRotation = ScreenToWorld(positionScreen.X, positionScreen.Y); // calculate current position again with adjusted resolution
 
-            _centerX = _centerX - (postRotation.X - current.X);
-            _centerY = _centerY - (postRotation.Y - current.Y);
+            _centerX -= (postRotation.X - current.X);
+            _centerY -= (postRotation.Y - current.Y);
         }
+        
+        UpdateExtent();
+        OnViewportChanged();
     }
 
 
