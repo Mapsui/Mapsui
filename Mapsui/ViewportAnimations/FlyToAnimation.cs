@@ -67,11 +67,11 @@ public class FlyToAnimation
 
     private static void ResolutionTick(Viewport viewport, AnimationEntry<Viewport> entry, double value)
     {
-        viewport.Resolution = (double)entry.Start + ((double)entry.End - (double)entry.Start) * entry.Easing.Ease(value);
+        viewport.State = viewport.State with { Resolution = (double)entry.Start + ((double)entry.End - (double)entry.Start) * entry.Easing.Ease(value) };
     }
 
     private static void ResolutionFinal(Viewport viewport, AnimationEntry<Viewport> entry)
     {
-        viewport.Resolution = (double)entry.End;
+        viewport.State = viewport.State with { Resolution = (double)entry.End };
     }
 }

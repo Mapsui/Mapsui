@@ -56,12 +56,12 @@ public class Viewport : IViewport
         UpdateExtent();
     }
 
-
     public Viewport(double centerX, double centerY, double resolution, double rotation, double width, double height) : this()
     {
-        _state = new ViewportState(centerX, centerX, resolution, rotation, width, height);
+        _state = new ViewportState(centerX, centerY, resolution, rotation, width, height);
         UpdateExtent();
     }
+
     /// <inheritdoc />
     public double CenterX
     {
@@ -74,44 +74,22 @@ public class Viewport : IViewport
         get => _state.CenterY;
     }
 
-
     /// <inheritdoc />
     public double Resolution
     {
         get => _state.Resolution;
-        set
-        {
-            if (_state.Resolution == value) return;
-            _state = _state with { Resolution = value };
-            UpdateExtent();
-            OnViewportChanged();
-        }
     }
 
     /// <inheritdoc />
     public double Width
     {
         get => _state.Width;
-        set
-        {
-            if (_state.Width == value) return;
-            _state = _state with { Width = value };
-            UpdateExtent();
-            OnViewportChanged();
-        }
     }
 
     /// <inheritdoc />
     public double Height
     {
         get => _state.Height;
-        set
-        {
-            if (_state.Height == value) return;
-            _state = _state with { Height = value };
-            UpdateExtent();
-            OnViewportChanged();
-        }
     }
 
     /// <inheritdoc />
@@ -343,7 +321,7 @@ public class Viewport : IViewport
 
         if (duration == 0)
         {
-            _state = _state with {  CenterX = x, CenterY = y, Resolution= resolution };
+            _state = _state with { CenterX = x, CenterY = y, Resolution = resolution };
         }
         else
         {
@@ -367,7 +345,7 @@ public class Viewport : IViewport
         }
         else
         {
-            _animations = ViewportStateAnimation.Create(this, State with { CenterX = center.X, CenterY = center.Y}, duration, easing);
+            _animations = ViewportStateAnimation.Create(this, State with { CenterX = center.X, CenterY = center.Y }, duration, easing);
         }
 
         UpdateExtent();
