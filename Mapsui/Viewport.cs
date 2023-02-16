@@ -30,8 +30,6 @@ public class Viewport : IViewport
     // State
     private ViewportState _state = new(0, 0, 1, 0, 0, 0);
     // Add postponer only for debugging.
-    Postponer _postponer = new(1000);
-    long _counter;
     // Derived from state
     private readonly MRect _extent;
 
@@ -43,7 +41,6 @@ public class Viewport : IViewport
     public Viewport()
     {
         _extent = new MRect(0, 0, 0, 0);
-        _postponer.ExecuteDelayed(() => _counter = 0);
     }
 
     /// <summary>
@@ -109,7 +106,7 @@ public class Viewport : IViewport
     {
         var (screenX, screenY) = WorldToScreenUnrotated(worldX, worldY);
 
-        if (State.IsRotated())
+        if (_state.IsRotated())
         {
             var screenCenterX = _state.Width / 2.0;
             var screenCenterY = _state.Height / 2.0;
@@ -158,7 +155,7 @@ public class Viewport : IViewport
         var screenCenterX = _state.Width / 2.0;
         var screenCenterY = _state.Height / 2.0;
 
-        if (State.IsRotated())
+        if (_state.IsRotated())
         {
             var screen = new MPoint(screenX, screenY).Rotate(_state.Rotation, screenCenterX, screenCenterY);
             screenX = screen.X;
@@ -232,7 +229,7 @@ public class Viewport : IViewport
             BottomRight = new MPoint(right, bottom)
         };
 
-        if (!State.IsRotated())
+        if (!_state.IsRotated())
         {
             _extent.Min.X = left;
             _extent.Min.Y = bottom;
@@ -359,9 +356,6 @@ public class Viewport : IViewport
     /// <param name="propertyName">Name of property that changed</param>
     private void OnViewportChanged([CallerMemberName] string? propertyName = null)
     {
-        _counter++;
-        _postponer.Restart(); // Restart to postpone _counter = 0
-        Logger.Log(LogLevel.Debug, $@"OnViewportChanged called {_counter} times");
         ViewportChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 

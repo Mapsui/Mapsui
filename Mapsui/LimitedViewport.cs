@@ -19,7 +19,7 @@ public class LimitedViewport : IViewport
 
     public event PropertyChangedEventHandler? ViewportChanged;
     public MRect? Extent => _viewport.Extent;
-    public ViewportState State { get => _viewport.State; set => _viewport.State = value; }
+    public ViewportState State { get => _viewport.State; }
 
     public void Transform(MPoint position, MPoint previousPosition, double deltaResolution = 1, double deltaRotation = 0)
     {
