@@ -52,7 +52,7 @@ public class RasterStyleRenderer : ISkiaStyleRenderer
 
             canvas.Save();
 
-            if (viewport.IsRotated())
+            if (viewport.State.IsRotated())
             {
                 var priorMatrix = canvas.TotalMatrix;
 

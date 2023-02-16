@@ -81,18 +81,19 @@ public class Navigator : INavigator
     /// Zoom to a given resolution with a given point as center
     /// </summary>
     /// <param name="resolution">Resolution to zoom</param>
-    /// <param name="centerOfZoom">Center of zoom in screen coordinates. This is the one point in the map that 
-    /// stays on the same location while zooming in. /// For instance, in mouse wheel zoom animation the position 
+    /// <param name="centerOfZoomInScreenCoordinates">Center of zoom in screen coordinates. This is the one point in the map that 
+    /// stays on the same location while zooming in. 
+    /// For instance, in mouse wheel zoom animation the position 
     /// of the mouse pointer can be the center of zoom. Note, that the centerOfZoom is in screen coordinates not 
     /// world coordinates, this is because this is most convenient for the main use case, zoom with the mouse 
     /// position as center.</param>
     /// <param name="duration">Duration for animation in milliseconds.</param>
     /// <param name="easing">The easing of the animation when duration is > 0</param>
-    public void ZoomTo(double resolution, MPoint centerOfZoom, long duration = 0, Easing? easing = default)
+    public void ZoomTo(double resolution, MPoint centerOfZoomInScreenCoordinates, long duration = 0, Easing? easing = default)
     {
-        var (worldCenterOfZoomX, worldCenterOfZoomY) = _viewport.ScreenToWorldXY(centerOfZoom.X, centerOfZoom.Y);
-        var animationEntries = ZoomAroundLocationAnimation.Create(_viewport, worldCenterOfZoomX, worldCenterOfZoomY, resolution,
-            _viewport.CenterX, _viewport.CenterY, _viewport.Resolution, duration);
+        var (centerOfZoomX, centerOfZoomY) = _viewport.ScreenToWorldXY(centerOfZoomInScreenCoordinates.X, centerOfZoomInScreenCoordinates.Y);
+        var animationEntries = ZoomAroundLocationAnimation.Create(_viewport, centerOfZoomX, centerOfZoomY, resolution,
+            _viewport.CenterX, _viewport.CenterY, _viewport.Resolution, duration, easing ?? Easing.SinInOut);
         AddFinalAction(animationEntries, () => OnNavigated(ChangeType.Discrete));
         _viewport.SetAnimations(animationEntries);
 

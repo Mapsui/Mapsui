@@ -89,16 +89,7 @@ internal class MapRendererTests
     {
         // arrange
         using var map = BitmapAtlasSample.CreateMap();
-
-        var viewport = new Viewport
-        {
-            CenterX = 256,
-            CenterY = 200,
-            Width = 512,
-            Height = 400,
-            Resolution = 1
-        };
-
+        var viewport = new Viewport(256, 200, 1, 0, 512, 400);
         const string fileName = "bitmap_atlas.png";
 
         // act
@@ -278,7 +269,7 @@ internal class MapRendererTests
     {
         // arrange
         using var map = WidgetsSample.CreateMap();
-        var viewport = new Viewport { Resolution = 1, Width = 600, Height = 600 };
+        var viewport = new Viewport (0, 0, 1, 0, 600, 600);
         const string fileName = "widgets.png";
 
         // act
