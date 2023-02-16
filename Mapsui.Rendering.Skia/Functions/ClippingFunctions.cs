@@ -103,7 +103,7 @@ public static class ClippingFunctions
             var screenX = (point.X - centerX) * resolution;
             var screenY = (centerY - point.Y) * resolution;
 
-            if (viewport.IsRotated())
+            if (viewport.State.IsRotated())
             {
                 var newX = screenX * cos - screenY * sin;
                 var newY = screenX * sin + screenY * cos;

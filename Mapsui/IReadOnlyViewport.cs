@@ -45,6 +45,8 @@ public interface IReadOnlyViewport
     /// </summary>
     double Rotation { get; }
 
+    ViewportState State { get; }
+
     /// <summary>
     /// Converts a point in screen pixels to one in screen units, respecting rotation
     /// </summary>

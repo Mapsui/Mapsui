@@ -65,7 +65,8 @@ public static class FlingAnimation
         var xDiff = current.X - previous.X;
         var yDiff = current.Y - previous.Y;
 
-        viewport.CenterX = viewport.CenterX + xDiff;
-        viewport.CenterY = viewport.CenterY + yDiff;
+        var newX = viewport.State.CenterX + xDiff;
+        var newY = viewport.State.CenterY + yDiff;
+        viewport.State = viewport.State with { CenterX = newX, CenterY = newY };
     }
 }
