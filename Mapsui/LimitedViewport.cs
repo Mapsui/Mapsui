@@ -25,7 +25,7 @@ public class LimitedViewport : IViewport
     public double Width => _viewport.Width;
     public double Height => _viewport.Height;
     public double Rotation => _viewport.Rotation;
-    public ViewportState State { get => ((IViewport)_viewport).State; set => ((IViewport)_viewport).State = value; }
+    public ViewportState State { get => _viewport.State; }
 
     public void Transform(MPoint position, MPoint previousPosition, double deltaResolution = 1, double deltaRotation = 0)
     {
