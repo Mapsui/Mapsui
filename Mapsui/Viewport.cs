@@ -140,7 +140,7 @@ public class Viewport : IViewport
     {
         var (screenX, screenY) = WorldToScreenUnrotated(worldX, worldY);
 
-        if (State.IsRotated())
+        if (_state.IsRotated())
         {
             var screenCenterX = Width / 2.0;
             var screenCenterY = Height / 2.0;
@@ -189,7 +189,7 @@ public class Viewport : IViewport
         var screenCenterX = Width / 2.0;
         var screenCenterY = Height / 2.0;
 
-        if (State.IsRotated())
+        if (_state.IsRotated())
         {
             var screen = new MPoint(screenX, screenY).Rotate(_state.Rotation, screenCenterX, screenCenterY);
             screenX = screen.X;
@@ -263,7 +263,7 @@ public class Viewport : IViewport
             BottomRight = new MPoint(right, bottom)
         };
 
-        if (!State.IsRotated())
+        if (!_state.IsRotated())
         {
             _extent.Min.X = left;
             _extent.Min.Y = bottom;
