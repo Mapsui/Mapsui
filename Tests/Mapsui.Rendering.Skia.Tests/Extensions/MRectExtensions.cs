@@ -4,13 +4,13 @@ public static class MRectExtensions
 {
     public static Viewport ToViewport(this MRect rect, double width)
     {
-        return new Viewport
-        {
-            Resolution = rect.Width / width,
-            CenterX = rect.Centroid.X,
-            CenterY = rect.Centroid.Y,
-            Width = width,
-            Height = width * (rect.Height / rect.Width)
-        };
+        return new Viewport(
+            rect.Centroid.X,
+            rect.Centroid.Y,
+            rect.Width / width,
+            0,
+            width,
+            width * (rect.Height / rect.Width)
+        );
     }
 }

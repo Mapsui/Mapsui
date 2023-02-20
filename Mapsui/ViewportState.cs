@@ -47,4 +47,56 @@ public record class ViewportState
         Width = width;
         Height = height;
     }
+
+    public static ViewportState operator +(ViewportState a, ViewportState b)
+    {
+        return a with
+        {
+            CenterX = a.CenterX + b.CenterX,
+            CenterY = a.CenterY + b.CenterY,
+            Resolution = a.Resolution + b.Resolution,
+            Rotation = a.Rotation + b.Rotation,
+            Width = a.Width + b.Width,
+            Height = a.Height + b.Height
+        };
+    }
+
+    public static ViewportState operator -(ViewportState a, ViewportState b)
+    {
+        return a with
+        {
+            CenterX = a.CenterX - b.CenterX,
+            CenterY = a.CenterY - b.CenterY,
+            Resolution = a.Resolution - b.Resolution,
+            Rotation = a.Rotation - b.Rotation,
+            Width = a.Width - b.Width,
+            Height = a.Height - b.Height
+        };
+    }
+
+    public static ViewportState operator *(ViewportState v, double m)
+    {
+        return v with
+        {
+            CenterX = v.CenterX * m,
+            CenterY = v.CenterY * m,
+            Resolution = v.Resolution * m,
+            Rotation = v.Rotation * m,
+            Width = v.Width * m,
+            Height = v.Height * m
+        };
+    }
+
+    public static ViewportState operator /(ViewportState v, double d)
+    {
+        return v with
+        {
+            CenterX = v.CenterX / d,
+            CenterY = v.CenterY / d,
+            Resolution = v.Resolution / d,
+            Rotation = v.Rotation / d,
+            Width = v.Width / d,
+            Height = v.Height / d
+        };
+    }
 }
