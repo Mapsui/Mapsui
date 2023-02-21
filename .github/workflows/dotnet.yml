@@ -25,7 +25,7 @@ jobs:
         restore-keys: |
             ${{ runner.os }}-nuget12-
     - name: Setup NuGet.exe for use with actions
-      uses: NuGet/setup-nuget@v1.0.6      
+      uses: NuGet/setup-nuget@v1.1.1      
       with:
         nuget-version: latest
     # - name: Set default Xamarin SDK versions
@@ -49,8 +49,8 @@ jobs:
     #     include-prerelease: false    
     - name: install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
       run: dotnet workload install maui macos android ios maccatalyst wasm-tools wasm-tools-net6
-    - name: Restore dependencies Legacy
-      run: nuget restore Mapsui.Mac.Legacy.sln   
+    #- name: Restore dependencies Legacy
+    #  run: nuget restore Mapsui.Mac.Legacy.sln   
     - name: Restore dependencies Mapsui.Mac
       run: dotnet restore Mapsui.Mac.slnf       
     # Samples Build           
@@ -161,7 +161,7 @@ jobs:
     #       7.0.100
     #     include-prerelease: false
     - name: Setup NuGet.exe for use with actions
-      uses: NuGet/setup-nuget@v1.0.6
+      uses: NuGet/setup-nuget@v1.1.1
       with:
         nuget-version: latest
     - name: setup-msbuild
