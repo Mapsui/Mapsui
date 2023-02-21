@@ -141,7 +141,6 @@
     <PackageReference Include="System.Runtime.InteropServices" />
     <PackageReference Include="System.Runtime.InteropServices.RuntimeInformation" />
     <PackageReference Include="System.Runtime.Numerics" />
-    <PackageReference Include="System.Security.Cryptography.Algorithms" />
     <PackageReference Include="System.Security.Cryptography.Encoding" />
     <PackageReference Include="System.Security.Cryptography.Primitives" />
     <PackageReference Include="System.Security.Cryptography.X509Certificates" />
