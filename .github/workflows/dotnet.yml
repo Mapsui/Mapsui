@@ -21,9 +21,9 @@ jobs:
     - uses: actions/cache@v3
       with:
         path: ~/.nuget/packages     
-        key: ${{ runner.os }}-nuget11-${{ hashFiles('Directory.Packages.props') }}
+        key: ${{ runner.os }}-nuget12-${{ hashFiles('Directory.Packages.props') }}
         restore-keys: |
-            ${{ runner.os }}-nuget11-
+            ${{ runner.os }}-nuget12-
     - name: Setup NuGet.exe for use with actions
       uses: NuGet/setup-nuget@v1.0.6      
       with:
@@ -150,9 +150,9 @@ jobs:
           ~/.nuget/packages/SkiaSharp* 
           ~/.nuget/packages/System*
           ~/.nuget/packages/Xamarin*
-        key: ${{ runner.os }}-nuget10-${{ hashFiles('Directory.Packages.props') }}
+        key: ${{ runner.os }}-nuget12-${{ hashFiles('Directory.Packages.props') }}
         restore-keys: |
-            ${{ runner.os }}-nuget10-
+            ${{ runner.os }}-nuget12-
     # .Net 7 already installed on Github Actions      
     #- name: Setup .NET Core SDK
     #  uses: actions/setup-dotnet@v3
