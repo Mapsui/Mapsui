@@ -11,7 +11,7 @@ PM> Install-Package Mapsui.Maui -pre
 ```
 
 ### Step 3
-In MauiProgram.cs add .UseSkiaSharp() to the builder like this:
+IMPORTANT: In MauiProgram.cs add **.UseSkiaSharp()** to the builder like this:
 ```csharp
 builder
   .UseMauiApp<App>()
@@ -25,7 +25,7 @@ and add namespace 'SkiaSharp.Views.Maui.Controls.Hosting':
 using SkiaSharp.Views.Maui.Controls.Hosting;
 ```
 
-This is because Mapsui depends on SkiaSharp which needs this call. We hope that this will not be necessary in a future version of Mapsui.Maui. Without this line the app will crash with this exception: "Catastrophic failure (0x8000FFFF (E_UNEXPECTED))".
+This is because Mapsui depends on SkiaSharp which needs this call. We hope that this will not be necessary in a future version of Mapsui.Maui. Without this line the app will crash with this exception: `Catastrophic failure (0x8000FFFF (E_UNEXPECTED))` on Windows and with `Microsoft.Mapsui.Platform.HandlerNotFoundException has been thrown` on Mac.
 
 ### Step 4
 In MainPage.xaml.cs replace the constuctor with this code:
