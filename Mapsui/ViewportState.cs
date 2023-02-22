@@ -8,8 +8,6 @@ namespace Mapsui;
 
 public record class ViewportState : IViewportState
 {
-    MRect? _extent;
-
     public ViewportState(double centerX, double centerY, double resolution, double rotation, double width, double height)
     {
         CenterX = centerX;
@@ -65,7 +63,7 @@ public record class ViewportState : IViewportState
     /// </summary>
     public double Height { get; init; }
 
-    public MRect Extent => _extent ??= this.GetExtent();
+    public MRect Extent => this.GetExtent();
 
     public static ViewportState operator -(ViewportState a, ViewportState b)
     {
