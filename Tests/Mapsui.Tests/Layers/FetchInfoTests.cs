@@ -6,16 +6,18 @@ namespace Mapsui.Tests.Layers;
 [TestFixture]
 internal class FetchInfoTests
 {
-    [Test]
-    public void GrowFetchInfo()
+    [TestCase(10, 0.5, 120)]
+    [TestCase(10, 1, 140)]
+    [TestCase(10, 2, 180)]
+    public void GrowFetchInfo(double amount, double resolution, double expectedWidth)
     {
         // Arrange
-        var fetchInfo = new FetchInfo(new MRect(-50, -50, 50, 50), 1);
+        var fetchInfo = new FetchInfo(new MRect(-50, -50, 50, 50), resolution);
 
         // Act
-        var grownFetchInfo = fetchInfo.Grow(10);
+        var grownFetchInfo = fetchInfo.Grow(amount);
 
         // Assert
-        Assert.AreEqual(120, grownFetchInfo.Extent.Width);
+        Assert.AreEqual(expectedWidth, grownFetchInfo.Extent.Width);
     }
 }
