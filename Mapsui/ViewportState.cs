@@ -6,7 +6,7 @@ using Mapsui.Extensions;
 
 namespace Mapsui;
 
-public record class ViewportState : IViewportState
+public record class ViewportState
 {
     public ViewportState(double centerX, double centerY, double resolution, double rotation, double width, double height)
     {
