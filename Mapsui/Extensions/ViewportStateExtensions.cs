@@ -1,9 +1,19 @@
 ﻿using Mapsui.Utilities;
+using System;
 
 namespace Mapsui.Extensions;
 
 public static class ViewportStateExtensions
 {
+    /// <summary>
+    /// IsRotated is true, when viewport displays map rotated
+    /// </summary>
+    public static MSection GetSection(this IViewportState viewport)
+    {
+        if (viewport.Extent is null) throw new ArgumentNullException(nameof(viewport.Extent));
+        return new MSection(viewport.Extent!, viewport.Resolution);
+    }
+
     /// <summary>
     /// IsRotated is true, when viewport displays map rotated
     /// </summary>

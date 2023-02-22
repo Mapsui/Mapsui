@@ -72,9 +72,11 @@ public class ImageLayer : BaseLayer, IAsyncDataFetcher, ILayerDataSource<IProvid
 
     private void StartFetchTimerElapsed(object? state)
     {
-        if (_fetchInfo?.Extent == null) return;
-        if (double.IsNaN(_fetchInfo.Resolution)) return;
-        StartNewFetch(_fetchInfo);
+        var fetchInfo = _fetchInfo;
+
+        if (fetchInfo?.Section.Extent == null) return;
+        if (double.IsNaN(fetchInfo.Section.Resolution)) return;
+        StartNewFetch(fetchInfo);
     }
 
     public override IEnumerable<IFeature> GetFeatures(MRect box, double resolution)

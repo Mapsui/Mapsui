@@ -186,7 +186,7 @@ public class RasterizingLayer : BaseLayer, IAsyncDataFetcher, ISourceLayer
             !_currentViewport.Extent.Contains(newViewport.Extent))
         {
             // Explicitly set the change type to discrete for rasterization
-            _fetchInfo = new FetchInfo(fetchInfo.Extent, fetchInfo.Resolution, fetchInfo.CRS);
+            _fetchInfo = new FetchInfo(fetchInfo.Section, fetchInfo.CRS);
             if (_layer is IAsyncDataFetcher asyncDataFetcher)
                 Delayer.ExecuteDelayed(() => asyncDataFetcher.RefreshData(_fetchInfo));
             else

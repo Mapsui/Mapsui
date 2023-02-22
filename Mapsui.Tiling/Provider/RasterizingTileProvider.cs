@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BruTile;
 using BruTile.Cache;
 using BruTile.Predefined;
+using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Projections;
 using Mapsui.Providers;
@@ -85,18 +86,18 @@ public class RasterizingTileProvider : ITileSource
         Schema.Resolutions.TryGetValue(tileInfo.Index.Level, out var tileResolution);
 
         var resolution = tileResolution.UnitsPerPixel;
-        var viewPort = RasterizingLayer.CreateViewport(tileInfo.Extent.ToMRect(), resolution, _renderResolutionMultiplier, 1);
-        var featureSearchGrowth = await GetAdditionalSearchSizeAroundAsync(tileInfo, renderer, viewPort);
-        var extent = viewPort.Extent;
+        var viewport = RasterizingLayer.CreateViewport(tileInfo.Extent.ToMRect(), resolution, _renderResolutionMultiplier, 1);
+        var featureSearchGrowth = await GetAdditionalSearchSizeAroundAsync(tileInfo, renderer, viewport);
+        var extent = viewport.Extent;
         if (featureSearchGrowth > 0)
         {
             extent = extent.Grow(featureSearchGrowth);
         }
 
-        var fetchInfo = new FetchInfo(extent, resolution);
+        var fetchInfo = new FetchInfo(new MSection(extent, resolution));
         var features = await GetFeaturesAsync(fetchInfo);
         var renderLayer = new RenderLayer(_layer, features);
-        return (viewPort, renderLayer);
+        return (viewport, renderLayer);
     }
 
     private async Task<IEnumerable<IFeature>> GetFeaturesAsync(TileInfo tileInfo)
@@ -104,8 +105,8 @@ public class RasterizingTileProvider : ITileSource
         Schema.Resolutions.TryGetValue(tileInfo.Index.Level, out var tileResolution);
 
         var resolution = tileResolution.UnitsPerPixel;
-        var viewPort = RasterizingLayer.CreateViewport(tileInfo.Extent.ToMRect(), resolution, _renderResolutionMultiplier, 1);
-        var fetchInfo = new FetchInfo(viewPort.Extent, resolution);
+        var viewport = RasterizingLayer.CreateViewport(tileInfo.Extent.ToMRect(), resolution, _renderResolutionMultiplier, 1);
+        var fetchInfo = new FetchInfo(new MSection(viewport.Extent, resolution));
         var features = await GetFeaturesAsync(fetchInfo);
         return features;
     }

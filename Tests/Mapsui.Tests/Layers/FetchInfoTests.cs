@@ -12,7 +12,7 @@ internal class FetchInfoTests
     public void GrowFetchInfo(double amount, double resolution, double expectedWidth)
     {
         // Arrange
-        var fetchInfo = new FetchInfo(new MRect(-50, -50, 50, 50), resolution);
+        var fetchInfo = new FetchInfo(new MSection(new MRect(-50, -50, 50, 50), resolution));
 
         // Act
         var grownFetchInfo = fetchInfo.Grow(amount);

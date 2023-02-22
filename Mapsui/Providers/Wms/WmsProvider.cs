@@ -290,7 +290,7 @@ public class WmsProvider : IProvider, IProjectingProvider
         _mimeType = mimeType;
     }
 
-    public async Task<(bool Success, MRaster?)> TryGetMapAsync(IViewport viewport)
+    public async Task<(bool Success, MRaster?)> TryGetMapAsync(MSection section)
     {
 
         int width;
@@ -298,8 +298,8 @@ public class WmsProvider : IProvider, IProjectingProvider
 
         try
         {
-            width = Convert.ToInt32(viewport.Width);
-            height = Convert.ToInt32(viewport.Height);
+            width = Convert.ToInt32(section.ScreenWidth);
+            height = Convert.ToInt32(section.ScreenHeight);
         }
         catch (OverflowException ex)
         {
@@ -307,19 +307,19 @@ public class WmsProvider : IProvider, IProjectingProvider
             return (false, null);
         }
 
-        var url = GetRequestUrl(viewport.Extent, width, height);
+        var url = GetRequestUrl(section.Extent, width, height);
 
         try
         {
             var bytes = await _persistentCache.UrlCachedArrayAsync(url, _getStreamAsync);
 
-            if (viewport.Extent == null)
+            if (section.Extent == null)
             {
                 Logger.Log(LogLevel.Warning, "Viewport Extent was null");
                 return (false, null);
             }
 
-            var raster = new MRaster(bytes, viewport.Extent);	// This can throw exception
+            var raster = new MRaster(bytes, section.Extent);	// This can throw exception
             return (true, raster);
         }
         catch (WebException webEx)
@@ -467,7 +467,7 @@ public class WmsProvider : IProvider, IProjectingProvider
 
     public async Task<IEnumerable<IFeature>> GetFeaturesAsync(FetchInfo fetchInfo)
     {
-        var (success, raster) = await TryGetMapAsync(fetchInfo.ToViewport());
+        var (success, raster) = await TryGetMapAsync(fetchInfo.Section);
         if (success)
             return new[] { new RasterFeature(raster) };
         return Enumerable.Empty<IFeature>();

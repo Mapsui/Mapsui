@@ -41,11 +41,11 @@ public class ProjectingProvider : IProvider
         // sense if GetExtent would also get a CRS argument. Room for improvement.
         if (fetchInfo.Extent == null) return true;
 
-        var copiedExtent = new MRect(fetchInfo.Extent);
+        var extentToProject = new MRect(fetchInfo.Extent);
 
         // throws exception when CRS or _provider.CRS is null (so I don't have to check it here)
-        _projection.Project(CRS!, _provider.CRS!, copiedExtent);
-        fetchInfo = new FetchInfo(copiedExtent, fetchInfo.Resolution, CRS, fetchInfo.ChangeType);
+        _projection.Project(CRS!, _provider.CRS!, extentToProject);
+        fetchInfo = new FetchInfo(new MSection(extentToProject, fetchInfo.Resolution), CRS, fetchInfo.ChangeType);
         return false;
     }
 

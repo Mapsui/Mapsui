@@ -616,7 +616,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             _mode = TouchMode.None;
             if (_viewport.Extent != null)
             {
-                var fetchInfo = new FetchInfo(_viewport.Extent, _viewport.Resolution, Map?.CRS, ChangeType.Discrete);
+                var fetchInfo = new FetchInfo(_viewport.State.GetSection(), Map?.CRS, ChangeType.Discrete);
                 Map?.RefreshData(fetchInfo);
             }
         }
@@ -661,7 +661,7 @@ public partial class MapControl : ContentView, IMapControl, IDisposable
             _mode = TouchMode.None;
             if (_viewport.Extent != null)
             {
-                var fetchInfo = new FetchInfo(_viewport.Extent, _viewport.Resolution, Map?.CRS, ChangeType.Discrete);
+                var fetchInfo = new FetchInfo(_viewport.State.GetSection(), Map?.CRS, ChangeType.Discrete);
                 Map?.RefreshData(fetchInfo);
             }
         }

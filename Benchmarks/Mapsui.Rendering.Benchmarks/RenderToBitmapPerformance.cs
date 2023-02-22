@@ -1,5 +1,4 @@
-﻿using System.IO;
-using BenchmarkDotNet.Attributes;
+﻿using BenchmarkDotNet.Attributes;
 using Mapsui.Nts.Providers.Shapefile;
 using Mapsui.Providers;
 using Mapsui.Rendering.Skia;
@@ -46,7 +45,7 @@ public class RenderToBitmapPerformance
         mapControl.Map = CreateMap(renderFormat);
 
         // fetch data first time
-        var fetchInfo = new FetchInfo(mapControl.Viewport.Extent!, mapControl.Viewport.Resolution, mapControl.Map?.CRS);
+        var fetchInfo = new FetchInfo(mapControl.Viewport.State.GetSection(), mapControl.Map?.CRS);
         mapControl.Map?.RefreshData(fetchInfo);
         mapControl.Map?.Layers.WaitForLoadingAsync().Wait();
 
