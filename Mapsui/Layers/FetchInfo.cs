@@ -22,4 +22,9 @@ public class FetchInfo
     public double Resolution { get; }
     public string? CRS { get; }
     public ChangeType ChangeType { get; }
+
+    public FetchInfo Grow(double amountInScreenUnits)
+    {
+        return new FetchInfo(Extent.Grow(amountInScreenUnits * 2 * Resolution), Resolution, CRS, ChangeType);
+    }
 }
