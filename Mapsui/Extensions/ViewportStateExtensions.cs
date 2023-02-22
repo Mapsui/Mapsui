@@ -1,7 +1,4 @@
 ﻿using Mapsui.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Mapsui.Extensions;
 
@@ -10,7 +7,7 @@ public static class ViewportStateExtensions
     /// <summary>
     /// IsRotated is true, when viewport displays map rotated
     /// </summary>
-    public static bool IsRotated(this ViewportState viewport) =>
+    public static bool IsRotated(this IViewportState viewport) =>
         !double.IsNaN(viewport.Rotation) && viewport.Rotation > Constants.Epsilon
         && viewport.Rotation < 360 - Constants.Epsilon;
 
@@ -21,7 +18,7 @@ public static class ViewportStateExtensions
     /// This MRect is horizontally and vertically aligned, even if the viewport
     /// is rotated. So this MRect perhaps contain parts, that are not visible.
     /// </remarks>
-    public static MRect GetExtent(this ViewportState viewportState)
+    public static MRect GetExtent(this IViewportState viewportState)
     {
         // todo: Find out how this method related to Viewport.UpdateExtent 
 
