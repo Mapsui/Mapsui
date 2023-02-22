@@ -11,7 +11,7 @@ public static class ViewportStateExtensions
     public static MSection GetSection(this IViewportState viewport)
     {
         if (viewport.Extent is null) throw new ArgumentNullException(nameof(viewport.Extent));
-        return new MSection(viewport.Extent!, viewport.Resolution);
+        return new MSection(viewport.Extent, viewport.Resolution);
     }
 
     /// <summary>
